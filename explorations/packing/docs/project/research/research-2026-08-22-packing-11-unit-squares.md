@@ -1646,12 +1646,14 @@ covers two values of `n`. Any program should be weighted accordingly.
 
 ### The verifier, and why it comes before the searcher
 
-3. **Ship the exact verifier as a real tool.** The reference implementation in
-   [`explorations/packing/`](../../../README.md) certifies `s(11)` exactly in 0.35 s of
-   pure Python; the production version is a filtered exact-predicate kernel over `ℚ(α)`
-   on top of FLINT or CGAL. Its value is not the checking — it is that a search program
-   with an exact oracle can *publish claims that mean something*, which no current
-   record-setting program can do.
+3. **Ship the exact verifier as a real tool.** The layered design, the language boundary
+   and the measured budgets are in
+   [Infrastructure for Square-Packing Exploration](research-2026-08-22-infrastructure-for-packing-exploration.md).
+   The reference implementation in [`explorations/packing/`](../../../README.md)
+   certifies `s(11)` exactly in 0.35 s of pure Python; the production version is a
+   filtered exact-predicate kernel over `ℚ(α)` on top of FLINT or CGAL. Its value is not
+   the checking — it is that a search program with an exact oracle can *publish claims
+   that mean something*, which no current record-setting program can do.
 
 ### Search: an open baseline where none exists
 

@@ -843,6 +843,12 @@ Tooling by task, with the honest verdict for this specific problem.
 
 ## Recommendations
 
+**These are superseded in build order, not in content, by**
+[Infrastructure for Square-Packing Exploration](research-2026-08-22-infrastructure-for-packing-exploration.md),
+which turns them into a layered design with measured performance budgets and decides the
+language boundary. Read that document for *what to build first*; read this section for
+*why each piece matters*.
+
 For anyone wanting to work on this computationally, in rough order of value per unit of
 effort:
 
