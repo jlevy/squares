@@ -642,6 +642,38 @@ already uses, under a name that connects it to a literature it has never drawn o
 That is the honest state of the field: one technique does nearly all the work, and it has
 not moved on `n = 11` since 2003.
 
+**Why elimination succeeds on the construction but cannot attack the problem.** This is
+the sharpest structural point in the catalogue, and it explains an apparent paradox: the
+exact value of Trump's packing falls out of *two* equations, yet the problem is
+intractable.
+
+The resolution is that elimination operates **after** the combinatorial structure is
+fixed. Trump's configuration has a known contact graph; imposing it collapses the
+configuration space to two free parameters (`s` and `a`), and eliminating one gives a
+degree-8 univariate polynomial. Cheap.
+
+A *proof* must instead quantify over **every** contact structure — including ones nobody
+has drawn. Attacking that directly means deciding a semialgebraic formula over the full
+configuration space: for eleven squares that is `11 × 3 = 33` variables (a centre and an
+angle each) plus the container side, so **34 variables**, under a disjunctive non-overlap
+condition for each of the 55 pairs.
+Cylindrical algebraic decomposition, the general decision procedure for such formulas, is
+**doubly exponential in the number of variables** in the worst case. At 34 variables that
+is not a large computation; it is an impossible one.
+
+This is the same wall from a different direction as the `n = 3` ceiling on rigorous
+interval methods. Fixing the combinatorics makes the algebra trivial; quantifying over the
+combinatorics makes it astronomical. Every viable proof strategy in this subject is
+therefore a way of **partitioning the combinatorial possibilities cheaply** — which is
+exactly what unavoidable point sets do, and exactly why the field has one technique.
+
+**Rigidity theory offers the closest structural handle.** In the disk-packing literature,
+the space of packings with a *fixed* contact graph is known to be a smooth manifold (via
+the Cauchy–Alexandrov stress lemma), and generic-radius packings of `n` disks admit at
+most `2n − 3` contacts. Analogous counting for tilted unit squares would bound how many
+contact structures are even candidates for rigidity, which is the natural way to make the
+combinatorial enumeration finite and small. No such enumeration for squares was found.
+
 **Strategy 18 is newly credible.** Formal verification of major packing theorems has gone
 from heroic to routine within a decade:
 
