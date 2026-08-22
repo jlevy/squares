@@ -447,9 +447,10 @@ Then:
    points.
 3. Because `S` is a *square*, the rotated configuration is also unavoidable.
    The red lattice is therefore the **dual** of the green one.
-4. The two lattices share the centre, so their union has **13 distinct points**,
-   classified into three types: the centre (the “C-point”), the 8 points furthest from
-   it, and the remainder.
+4. The two lattices share the centre, so their union has **13 distinct points**, in
+   three classes: the centre (the **C-point**, which is both green and red), the **8
+   A-points** furthest from it, and the **4 B-points** at distance `1/2` from it.
+   Each lattice is thus four A-points, two B-points and the C-point.
 5. Any unit square covering the C-point must also cover a point of the other colour; the
    case analysis closes from there.
 

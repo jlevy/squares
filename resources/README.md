@@ -28,6 +28,30 @@ formula in a `.md` looks suspicious.
 Passages that could not be confidently reconstructed are marked inline as
 `<!-- GARBLED: unable to reconstruct -->` rather than guessed at.
 
+## Reconstructed passages — read this before quoting a formula
+
+Cleanup was model-assisted, and on badly-extracted PDFs the models sometimes
+**reconstructed** damaged mathematics rather than only reformatting it.
+Every such passage is annotated inline with `GARBLED` or `NOTE`, and any file containing
+them opens with a ⚠️ banner giving the count.
+
+| File stem | Annotated | Notes |
+| --- | --- | --- |
+| `erdos-graham-1975-…` | 12 | **Heavily damaged** 1975 typescript scan. The paper’s central theorem was *not extracted at all* — the raw shows only `Theorem.` then `(1)` — and the transcription supplies the known result `w(α) = Θ(α^{7/11})` as a flagged reconstruction. A reading aid, not a source. |
+| `bentz-2016-…` | 3 | Includes a probable “Stromberg” → “Stromquist” correction and a reconstructed distance bound in Lemma 7. |
+| `bentz-2010-…` | 1 | Corollary 7: segments reconstructed, **and an inequality direction changed** (`2√2−2 > b` in the raw vs `b > 2√2−2` here). Direction is UNVERIFIED. The leading claim — common intersection length ≥ `2√2−2 ≈ 0.828` — is unambiguous in the raw and unaffected. |
+| `kearney-shiu-2002-…` | 1 | One chain of inequalities not reconstructed; conclusion stated. |
+| `arslanov-…` | 1 | One orientation constraint formula unrecoverable. |
+
+Files not listed carry no annotations.
+Note that resolving `(cid:NN)` ligature artifacts, running headers and page numbers is
+ordinary cleanup, not reconstruction, and is not flagged.
+
+**The rule:** if a formula sits near an annotation, check it against the `.raw.md`
+before relying on it.
+That is what the raw files are for.
+The research document cites only claims that are unambiguous in the raw extractions.
+
 ## Searching
 
 ```bash
