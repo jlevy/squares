@@ -9,6 +9,13 @@
 
 ---
 
+> ⚠️ **Contains reconstructed passages.**
+> This transcription contains **3** annotated passage(s) where the PDF extraction was
+> damaged and text or mathematics was reconstructed or marked unrecoverable. Search this
+> file for `GARBLED` and `NOTE` to find them.
+> **Any formula near an annotation must be checked against `friedman-ds7-packing-unit-squares-in-squares.raw.md`**, which is the
+> unedited extraction and the ground truth for this document.
+
 ## Abstract
 
 Let $s(n)$ be the side of the smallest square into which we can pack $n$ unit squares. We present a history of this problem, and give the best known upper and lower bounds for $s(n)$ for $n \leq 100$, including the best known packings. We also give relatively simple proofs for the values of $s(n)$ when $n = 2, 3, 5, 8, 15, 24$, and $35$, and more complicated proofs for $n = 7$ and $14$. We also prove many other lower bounds for various $s(n)$.
@@ -300,6 +307,16 @@ Unavoidable sets illustrating some of the lower bounds on $s(n)$ are shown in Fi
 ## Appendix
 
 Table 1 contains the best known upper bounds on $s(n)$ for $n \leq 100$. For each primitive packing, the Figure and the Author are given.
+
+<!-- NOTE (important): the "Optimal?" column below was NOT read from the extraction. The
+     column header exists in the original, but pdfminer interleaved the table columns and
+     the per-row values were lost. The transcriber INFERRED each entry from the theorems
+     proved in the body of this survey plus Nagamochi's s(n^2-1)=s(n^2-2)=n and the trivial
+     s(n^2)=n. Treat this column as a reconstruction, not as the survey's own data.
+     The same applies to both appendix tables (53 and 29 rows), which were reassembled by
+     cross-referencing interleaved column extractions against the prose.
+     Note also that this survey predates later results (e.g. Bentz proved s(13)=4 in 2010),
+     so blanks here mean "not proved as of this revision", not "still open today". -->
 
 | $n$ | $s(n)$ | Optimal? | Figure | Author |
 |-----|--------|----------|--------|--------|
