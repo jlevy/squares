@@ -1371,7 +1371,8 @@ faithful `.raw.md` extraction.
   [Online](http://i.stanford.edu/pub/cstr/reports/cs/tr/75/483/CS-TR-75-483.pdf) ·
   local `papers/erdos-graham-1975-on-packing-squares-with-equal-squares`.
 - **[Roth–Vaughan 1978]** — K. F. Roth and R. C. Vaughan, "Inefficiency in packing squares
-  with unit squares," *JCTA*.
+  with unit squares," *J. Combin. Theory Ser. A* **24** (1978), 170–186. (Volume and pages
+  verified against the reference list of **[McClenagan 2026]** in the local archive.)
   [Online](https://www.sciencedirect.com/science/article/pii/0097316578900055) ·
   **[not retrieved]** — ScienceDirect blocks automated clients.
 - **[McClenagan 2026]** — Rory McClenagan, "Optimally Packing a Large Square by Unit
