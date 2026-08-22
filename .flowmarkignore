@@ -1,0 +1,39 @@
+# Flowmark exclusions.
+#
+# POLICY: format the whole repository. Exclude only files we have a specific,
+# tested reason to leave raw. Each exclusion below states that reason.
+
+# ---------------------------------------------------------------------------
+# The literature archive: verbatim source and archival transcription.
+# ---------------------------------------------------------------------------
+#
+# Two independent reasons, both verified rather than assumed:
+#
+# 1. The *.raw.md files are unedited pdfminer output and serve as byte-level
+#    ground truth for checking the model-assisted *.md transcriptions against.
+#    Reflowing them voids that guarantee entirely.
+#
+# 2. The cleaned *.md transcriptions carry heavy inline LaTeX, and flowmark
+#    inserts line breaks INSIDE $...$ spans when it rewraps. Measured on
+#    2026-08-22: 31 of 339 math spans broken in the Stromquist transcription,
+#    101 of 1236 in Caoduro-Sebo, 5 of 433 in the Kingbird capture. A newline
+#    mid-formula defeats grep, and searching this archive locally is the entire
+#    point of it. Some Markdown math renderers also require inline math to stay
+#    on one line.
+#
+# So the whole archive stays raw. resources/README.md is NOT excluded -- it is
+# our own prose and is formatted like everything else.
+resources/papers/
+resources/web/
+
+# ---------------------------------------------------------------------------
+# Generated agent skill files.
+# ---------------------------------------------------------------------------
+#
+# All six SKILL.md files carry explicit DO-NOT-EDIT markers and are regenerated
+# byte-deterministically by their own tools (`tbd setup --auto`,
+# `softschema skill --install`, `flowmark --install-skill`). Formatting them
+# would both diverge them from their generators and be silently overwritten on
+# the next regeneration.
+.agents/skills/
+.claude/skills/
