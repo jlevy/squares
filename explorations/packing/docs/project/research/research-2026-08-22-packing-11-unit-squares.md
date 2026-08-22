@@ -19,7 +19,7 @@ Claims in this document carry an inline key in bold brackets, e.g.
 So every cited source can be read and grepped locally without re-fetching:
 
 ```bash
-grep -rn "unavoidable" resources/papers/*.md
+grep -rn "unavoidable" explorations/packing/resources/papers/*.md
 ```
 
 Where a claim rests on a source that could **not** be retrieved, it is marked
@@ -189,7 +189,7 @@ problem.
 The full defining data of Trump’s packing is recoverable, and was reconstructed and
 independently re-verified during this research from **[Ellsworth SVG]** — the annotated
 source of the `n = 11` diagram in David Ellsworth’s catalogue, archived locally at
-`resources/papers/kingbird-square-11-provenance.svg`.
+`explorations/packing/resources/papers/kingbird-square-11-provenance.svg`.
 
 **Composition.** The eleven squares split as **six axis-aligned and five tilted**. The
 axis-aligned six are: one in a corner, one mirrored against the opposite side, one

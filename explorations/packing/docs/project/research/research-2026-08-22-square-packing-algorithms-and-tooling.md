@@ -174,7 +174,7 @@ Interval arithmetic can prove `>`, never `=`.
 
 The correct procedure is to work in the number field the packing actually lives in.
 A reusable implementation of everything in this section, with the negative controls and
-benchmarks, is in [`explorations/packing/`](../../../explorations/packing/README.md).
+benchmarks, is in [`explorations/packing/`](../../../README.md).
 
 1. **Recover the field.** The coordinates of a rigid packing are algebraic.
    Put the whole configuration in `Q(α)` for a single primitive element `α`, with a
@@ -817,9 +817,9 @@ effort:
    This is a few hundred lines on top of CGAL or FLINT, it makes every record
    independently auditable for the first time, and it would clear the 32-packing
    analytic backlog’s verification half.
-   [`explorations/packing/`](../../../explorations/packing/README.md) is a working
-   single-packing version; the missing pieces are a parser for the SVG corpus and a
-   filtered kernel in place of pure-Python rationals.
+   [`explorations/packing/`](../../../README.md) is a working single-packing version;
+   the missing pieces are a parser for the SVG corpus and a filtered kernel in place of
+   pure-Python rationals.
 2. **Build an open GPU annealer on `jagua-rs`.** The collision-detection engineering —
    the part that is genuinely hard to get both fast and correct — is already solved
    there, under MPL-2.0, with continuous rotation support.
@@ -921,8 +921,8 @@ tuned C would achieve.
 
 **Reproducibility.** The verifier, the reference packing, the field derivation, the
 negative controls, and the benchmarks are packaged in
-[`explorations/packing/`](../../../explorations/packing/README.md); `./test.sh` there
-re-runs everything and asserts the results quoted above.
+[`explorations/packing/`](../../../README.md); `./test.sh` there re-runs everything and
+asserts the results quoted above.
 The verifier is standard library only; only the derivation script needs SymPy.
 
 **Record-page statistics** (184 pictured packings, 47 mentioning simulated annealing, 32

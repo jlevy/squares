@@ -1,7 +1,7 @@
 {
   "name": "thinking-scratchpad",
   "private": true,
-  "description": "Tooling-only root package for git hooks (lefthook). This repository ships no code; see docs/ for its research documents and resources/ for the literature archive.",
+  "description": "Tooling-only root package for git hooks (lefthook). See docs/ for research reports and explorations/ for self-contained project directories with their own sources, code, and literature archives.",
   "version": "0.0.0",
   "devDependencies": {
     "lefthook": "2.1.10"

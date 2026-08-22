@@ -21,10 +21,10 @@
 #    point of it. Some Markdown math renderers also require inline math to stay
 #    on one line.
 #
-# So the whole archive stays raw. resources/README.md is NOT excluded -- it is
-# our own prose and is formatted like everything else.
-resources/papers/
-resources/web/
+# So the whole archive stays raw. Its README.md is NOT excluded -- it is our own
+# prose and is formatted like everything else.
+explorations/packing/resources/papers/
+explorations/packing/resources/web/
 
 # ---------------------------------------------------------------------------
 # Generated agent skill files.

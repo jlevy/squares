@@ -9,7 +9,7 @@ re-fetching, re-extracting, or fighting paywalls and bot-blocks.
 ## Layout
 
 ```
-resources/
+explorations/packing/resources/
 ├── papers/   Academic papers: original .pdf + cleaned .md + faithful .raw.md
 └── web/      Web sources (catalogues, surveys, encyclopedic): original .html + .md
 ```
@@ -69,19 +69,22 @@ in Caoduro–Sebő, 5 of 433 in the Kingbird capture.
 A newline in the middle of a formula defeats `grep`, which is what this archive exists
 for.
 
-`resources/README.md` — this file — is *not* excluded, and is formatted normally.
+`explorations/packing/resources/README.md` — this file — is *not* excluded, and is
+formatted normally.
 
 ## Searching
 
+Paths below are written from the repository root.
+
 ```bash
 # Find every mention of a bound across the whole archive
-grep -rn "unavoidable" resources/ --include=*.md
+grep -rn "unavoidable" explorations/packing/resources/ --include=*.md
 
 # Search only cleaned papers, not raw extractions or HTML
-grep -rn "3.877" resources/papers/*.md
+grep -rn "3.877" explorations/packing/resources/papers/*.md
 
 # Check a formula in a cleaned paper against the raw extraction
-grep -n "sqrt" resources/papers/stromquist-2003-*.raw.md
+grep -n "sqrt" explorations/packing/resources/papers/stromquist-2003-*.raw.md
 ```
 
 ## Papers

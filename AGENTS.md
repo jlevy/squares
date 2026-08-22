@@ -20,8 +20,8 @@ actions rather than telling them to run commands.
 
 ## Build & Test
 
-This repository ships no code.
-The only tooling is Markdown formatting.
+The repository is mostly prose.
+The only repo-wide tooling is Markdown formatting.
 
 ```bash
 make hooks-install   # once after cloning: installs the lefthook pre-commit hook
@@ -47,8 +47,8 @@ Two rules worth knowing before changing any of this:
 
 - **Exclusions are evidence-based, not precautionary.** The policy is to format the
   whole repository and exclude only what we have a tested reason to leave raw.
-  Two exclusions qualify: the literature archive under `resources/papers/` and
-  `resources/web/`, and the generated `SKILL.md` files.
+  Two exclusions qualify: the literature archive under
+  `explorations/packing/resources/`, and the generated `SKILL.md` files.
   The archive is excluded for a measured reason — flowmark inserts line breaks *inside*
   `$...$` spans when it rewraps, which on 2026-08-22 broke 31 of 339 math spans in one
   transcription and 101 of 1236 in another.
@@ -57,9 +57,9 @@ Two rules worth knowing before changing any of this:
 - **The hook formats the whole repository, not the staged files.** Flowmark reads
   `.flowmarkignore` relative to its target argument, so passing explicit paths silently
   bypasses the exclusion list.
-  That matters here: `.flowmarkignore` protects `resources/papers/` and
-  `resources/web/`, where the `.raw.md` extractions are byte-level ground truth used to
-  check the model-assisted transcriptions against.
+  That matters here: `.flowmarkignore` protects `explorations/packing/resources/`, where
+  the `.raw.md` extractions are byte-level ground truth used to check the model-assisted
+  transcriptions against.
   Reflowing them would void that guarantee.
   Do not “optimise” the hook to `{staged_files}`.
 - **The flowmark version is pinned** in the `Makefile` (currently the latest Rust build,
@@ -72,11 +72,32 @@ Emergency bypass: `git commit --no-verify` (avoid in PRs).
 
 ## Architecture Overview
 
-*Add a brief overview of your project architecture*
+Two top-level trees hold the content.
+
+- **`docs/project/research/`** — standalone research reports that need nothing but
+  themselves. [Its README](docs/project/research/README.md) is the index.
+- **`explorations/`** — self-contained project directories.
+  Each one owns *everything* for its topic: its own reports under
+  `docs/project/research/`, its own literature archive under `resources/`, and its own
+  code and tests. [`explorations/packing/`](explorations/packing/README.md) is the worked
+  example and the pattern to follow.
+
+The split is by self-containment, not by subject.
+A report that stands alone lives in `docs/`; a report that comes with sources and code
+moves into an `explorations/` directory alongside them, so the whole line of work can be
+read, run, and moved as one unit.
 
 ## Conventions & Patterns
 
-*Add your project-specific conventions here*
+- **An exploration directory is self-contained.** Its reports, sources, and code live
+  under it and link to each other with relative paths that stay valid if the directory
+  is moved or copied out.
+  Do not scatter one project’s material across top-level trees.
+- **Reports separate claims by evidential status** — proved, computationally verified,
+  best known, or asserted-but-unverified — and cite primary sources near the claims they
+  support.
+- **Archived source material is never edited to look tidy.** Where a transcription
+  reconstructs damaged text, it is flagged inline and counted in the archive README.
 
 <!-- BEGIN FLOWMARK INTEGRATION format=f03 surface=agents-md -->
 ## flowmark

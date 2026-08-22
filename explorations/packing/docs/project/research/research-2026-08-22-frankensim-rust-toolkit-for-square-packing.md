@@ -431,7 +431,7 @@ Performance is instead an evidence problem handled by `fs-roofline`:
   GFLOP/s single-thread) are treated as evidence the probe ran in a crushed environment
   rather than as data.
 
-The standing rule in `AGENTS.md`: “Do not write 'fast' unless there is a benchmark,
+The standing rule in `AGENTS.md`: “Do not write ‘fast’ unless there is a benchmark,
 target, machine fingerprint, and acceptance band,” and “treat performance regressions as
 test failures once baselines exist.”
 
@@ -694,8 +694,8 @@ at the wrong head). `cargo build` and `cargo test` for `fs-math`, `fs-ivl`, `fs-
 passing in 77 s. Both experiments below.
 
 **Two experiments, written for this study.** Sources and a self-cleaning runner are in
-[`explorations/packing/frankensim-probe/`](../../../explorations/packing/frankensim-probe/README.md);
-nothing from FrankenSim is vendored there.
+[`explorations/packing/frankensim-probe/`](../../../frankensim-probe/README.md); nothing
+from FrankenSim is vendored there.
 
 - `packing_sat.rs` runs the separating-axis test on Trump’s 11-square packing through
   `fs_ivl::Interval` and through `fs_ivl::orient2d`. The f64 coordinates were emitted
@@ -776,8 +776,8 @@ Companion documents in this repository:
 - `research-2026-08-22-packing-11-unit-squares.md` — the mathematics of `s(11)`.
 - `research-2026-08-22-square-packing-algorithms-and-tooling.md` — search and
   verification tooling; the exact verifier whose output is cross-checked here.
-- [`explorations/packing/`](../../../explorations/packing/README.md) — the exact
-  verifier and the FrankenSim probes.
+- [`explorations/packing/`](../../../README.md) — the exact verifier and the FrankenSim
+  probes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
