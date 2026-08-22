@@ -5,8 +5,7 @@ Tooling written while researching
 
 `s(n)` is the side of the smallest square holding `n` non-overlapping unit squares.
 Record packings are published as high-precision decimals, and there is no public tool
-that checks one **exactly**.
-This is that check.
+that checks one **exactly**. This is that check.
 
 ## Why exactness needs more than precision
 
@@ -105,5 +104,5 @@ quadratic — at `n = 1000` that is 15,936 candidate pairs instead of 499,500.
 This checks that a *proposed* packing is valid, which is a different and far easier
 question than whether it is optimal.
 The only rigorous computer-assisted optimality proof for rotatable unit squares in any
-container covers three squares in a circle (Montanher et al. 2018); nothing comparable
-exists for squares in a square.
+container covers three squares in a circle (Montanher et al.
+2018); nothing comparable exists for squares in a square.
