@@ -6,6 +6,26 @@
 
 **Status:** Complete
 
+## How to read the citations
+
+Claims in this document carry an inline key in bold brackets, e.g. **[Stromquist 2003]**.
+Every key resolves in two places:
+
+1. The [References](#references) section below, with full bibliographic detail and a URL.
+2. **A local copy** in [`resources/`](../../../resources/README.md) — the original PDF,
+   a cleaned Markdown transcription, and the unedited extraction it was cleaned from.
+
+So every cited source can be read and grepped locally without re-fetching:
+
+```bash
+grep -rn "unavoidable" resources/papers/*.md
+```
+
+Where a claim rests on a source that could **not** be retrieved, it is marked
+**[secondary]** and the obstacle is recorded in the resources README. Those claims are
+the weakest in this document and are flagged again in
+[Open Questions](#open-questions).
+
 ## Overview
 
 This document records everything that could be established about the problem of packing
@@ -98,9 +118,9 @@ The entire difficulty of the problem lies between them.
 | Quantity | Value | Status | Source |
 | --- | --- | --- | --- |
 | Area lower bound | `√11 ≈ 3.316625` | Trivial | — |
-| **Best proved lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Proved** | Stromquist 2003, Thm 2 |
-| **Best known packing (upper bound)** | `≈ 3.877084` | **Construction only** | Trump 1979 |
-| Lower bound for 0°/45°-only packings | `2 + (4/3)√2 ≈ 3.885618` | **Proved** | Stromquist 2003, Thm 3 |
+| **Best proved lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Proved** | **[Stromquist 2003]**, Thm 2 |
+| **Best known packing (upper bound)** | `≈ 3.877084` | **Construction only** | Trump 1979, via **[Friedman DS7]**, **[Kingbird]** |
+| Lower bound for 0°/45°-only packings | `2 + (4/3)√2 ≈ 3.885618` | **Proved** | **[Stromquist 2003]**, Thm 3 |
 | Grid upper bound | `4` | Trivial | — |
 
 The open interval is `[3.788854…, 3.877084…]`, of width `≈ 0.088230`.
@@ -124,7 +144,7 @@ so priority is shared in practice even though 1979/Trump is the standard attribu
 **Geometry.** The configuration places most squares axis-aligned, with a group of middle
 squares tilted at approximately **40.182°** — an angle that is neither 0° nor 45°, and
 which has no simple closed form.
-Friedman's survey describes it as: "The middle squares are tilted about 40.182°, and
+**[Friedman DS7]** describes it as: "The middle squares are tilted about 40.182°, and
 there is a small gap between these squares."
 The reported high-precision value of the tilt is
 
@@ -156,7 +176,7 @@ s⁸ − 20s⁷ + 178s⁶ − 842s⁵ + 1923s⁴ − 496s³ − 6754s² + 12420s
 - Substituting the published 15-digit value gives `P(s) ≈ −6.4 × 10⁻¹³`, consistent with
   it being the root to available precision.
 
-**Rigidity.** Both Friedman's survey and the Kingbird catalogue mark this packing as
+**Rigidity.** Both **[Friedman DS7]** and **[Kingbird]** mark this packing as
 **rigid**: the squares admit no continuous deformation, and the configuration is pinned
 by vertices of unit squares lying on edges of other unit squares or of the container.
 Rigidity is what makes the exact algebraic value computable at all — the contact
@@ -167,8 +187,9 @@ problem.
 #### The exact construction: contact equations, coordinates, and closed form
 
 The full defining data of Trump's packing is recoverable, and was reconstructed and
-independently re-verified during this research from the annotated SVG source in David
-Ellsworth's catalogue.
+independently re-verified during this research from **[Ellsworth SVG]** — the annotated
+source of the `n = 11` diagram in David Ellsworth's catalogue, archived locally at
+`resources/papers/kingbird-square-11-provenance.svg`.
 
 **Composition.** The eleven squares split as **six axis-aligned and five tilted**.
 The axis-aligned six are: one in a corner, one mirrored against the opposite side, one
@@ -245,8 +266,8 @@ separating, because conflating the two is the source of the "Gensane–Ryckelync
 
 ### What Stromquist actually proved (2003)
 
-Walter Stromquist, "Packing 10 or 11 Unit Squares in a Square," *The Electronic Journal
-of Combinatorics* **10** (2003), #R8.
+**[Stromquist 2003]** — Walter Stromquist, "Packing 10 or 11 Unit Squares in a Square,"
+*The Electronic Journal of Combinatorics* **10** (2003), #R8.
 Submitted 26 Nov 2002; accepted 26 Feb 2003; published 18 Mar 2003.
 MR subject classifications 05B40, 52C15.
 
@@ -310,8 +331,8 @@ For contrast, the two smaller cases with tilted squares — `n = 5` and `n = 10`
 
 ### The lower-bound method: boxes, nonavoidance lemmas, unavoidable points
 
-Stromquist's technique, inherited from his own 1984 memoranda and from Friedman's
-survey, is the standard machinery for square-packing lower bounds.
+The technique of **[Stromquist 2003]**, inherited from his own 1984 memoranda and from
+**[Friedman DS7]**, is the standard machinery for square-packing lower bounds.
 
 **The box device.** A **box** is defined as the interior of any square of side *strictly
 greater than 1*.
@@ -376,18 +397,19 @@ Exact values of `s(n)` known as of this research:
 | perfect squares `m²` | `m` | Trivial |
 | 1 | 1 | Trivial |
 | 2, 3, 4 | 2 | Classical |
-| **5** | `2 + ½√2 ≈ 2.707107` | Göbel |
-| 6, 7, 8, 9 | 3 | first published proof of `s(6)=3` by Kearney & Shiu (2002), who also treat `s(7)` |
-| **10** | `3 + ½√2 ≈ 3.707107` | Stromquist 2003 |
+| **5** | `2 + ½√2 ≈ 2.707107` | Göbel, via **[Friedman DS7]** |
+| 6, 7, 8, 9 | 3 | first published proof of `s(6)=3` by **[Kearney–Shiu 2002]**, who also treat `s(7)` |
+| **10** | `3 + ½√2 ≈ 3.707107` | **[Stromquist 2003]**, Thm 1 |
 | **11** | **OPEN** — in `[3.788854, 3.877084]` | — |
-| 13 | 4 | Bentz 2010 |
-| 22 | 5 | Bentz 2016 |
-| 33 | 6 | Bentz 2016 |
-| 46 | 7 | Bentz 2010 |
+| 13 | 4 | **[Bentz 2010]** |
+| 22 | 5 | **[Bentz 2016]** |
+| 33 | 6 | **[Bentz 2016]** |
+| 46 | 7 | **[Bentz 2010]** |
 
 General families:
 
-- **Nagamochi:** `s(m² − 1) = s(m² − 2) = m` for `m ≥ 2`.
+- **Nagamochi (2005):** `s(m² − 1) = s(m² − 2) = m` for `m ≥ 2`. **[secondary]** — the
+  primary paper was not located as open access.
 - **`s(m² − 3) = m`** established for `m = 3, 4, 7`, extended by Bentz to `m = 5, 6`
   (via `s(22) = 5` and `s(33) = 6`), supporting the conjecture that it holds for all
   `m ≥ 3`.
@@ -500,13 +522,26 @@ successive papers refining rather than replacing it.
 | 18 | Machine-checked formal proof | Verify a case analysis in Lean/Coq | No — but precedented by Flyspeck for Kepler |
 | 19 | Electrical-network / Kirchhoff methods | Linear circuit laws on a dissection graph | **Not applicable — see below** |
 | 20 | Graph encodings of dissections (c-nets) | Enumerate planar graphs of a tiling | Not applicable — dissection-only |
+| 21 | **Transversal / hitting-set theory** | `τ ≥ ν`; bound the piercing number | **Implicitly — this *is* the unavoidable-points method**, but the transversal literature has never been applied |
+| 22 | Fractional transversals and LP duality | Relax piercing to an LP; use the dual fractional packing | No known application to `s(n)` |
+| 23 | Integrality-gap bounds (Wegner-type) | Bound `τ/ν` for families of squares | Bounds exist for squares [Caoduro–Sebő]; not connected to `s(n)` |
+| 24 | Gallai- and Helly-type theorems | Structural results forcing small transversals | Not applied here |
+| 25 | Delsarte/Cohn–Elkies LP bounds | Auxiliary functions certifying density bounds | **No** — the triumph of *lattice* sphere packing, no container analogue |
+| 26 | SDP hierarchies (Lasserre/de Laat et al.) | Strengthen LP bounds via moment relaxations | No known application to container square packing |
+| 27 | Compactness / limit arguments | Guarantee the optimum is attained; justify the box device | Yes — foundationally [Martin 2000] |
+| 28 | Discharging | Assign and redistribute local charges | Used in combinatorial geometry; not for `s(n)` |
+| 29 | Probabilistic method | Random constructions or averaging | Not for exact small-`n` values |
+| 30 | Chromatic / clique-ratio arguments | Bound `χ/ω` for square intersection graphs | Adjacent [Caoduro–Sebő]; not a bound on `s(n)` |
 
 **The shape of the inventory.** Strategies 2–11 are one family: place points, prove they
 are unavoidable, count.
 Strategies 12–14 are a separate family that only speaks asymptotically.
-Strategies 15–18 are general-purpose modern machinery that, as far as this research
-found, **nobody has aimed at `s(11)`**.
+Strategies 15–18 are general-purpose modern machinery, of which only 15 has been aimed at
+rotating unit squares at all (reaching `n = 3`).
 Strategies 19–20 belong to a different problem entirely.
+Strategies 21–30 are the wider packing-and-covering toolkit; 21 is the same idea the field
+already uses, under a name that connects it to a literature it has never drawn on — see
+[The transversal reformulation](#the-transversal-reformulation-what-the-unavoidable-points-method-really-is).
 
 That is the honest state of the field: one technique does nearly all the work, and it has
 not moved on `n = 11` since 2003.
@@ -549,10 +584,95 @@ falls short of `n = 11` by a very large margin.
 That makes it a benchmark for how hard rigorous certification of `s(11)` would be, rather
 than a promising shortcut.
 
+### The transversal reformulation: what the unavoidable-points method really is
+
+One observation reframes the entire lower-bound literature, and it does not appear to be
+made explicitly in the packing sources surveyed here.
+
+**An unavoidable point set is a transversal.**
+In geometric combinatorics, given a family `F` of sets, a *transversal* (equivalently a
+*piercing set* or *hitting set*) is a set of points meeting every member of `F`.
+Its minimum size is the **piercing number** `τ(F)`.
+The maximum number of pairwise disjoint members is the **packing number** `ν(F)`.
+Trivially `τ ≥ ν` [Caoduro–Sebő 2024].
+
+Now take `F` to be the family of *all* unit squares (at all positions and all angles)
+contained in a container square `S` of side `a`.
+Then:
+
+- A set of points that every unit square in `S` must contain is precisely a **transversal
+  of `F`**.
+- Friedman's and Stromquist's "unavoidable set of `n−1` points" is exactly a transversal
+  of size `n−1`, witnessing `τ(F) ≤ n−1`.
+- The pigeonhole step — `n` disjoint squares would force two to share a point — is
+  precisely the inequality `ν(F) ≤ τ(F) ≤ n−1`, hence `ν(F) < n`, hence `s(n) > a`.
+
+So every lower-bound proof in this subject is a **`τ`-upper-bound certificate**, and
+`s(n) > a` is the statement `ν < n` for the container of side `a`.
+The method is not merely *like* a hitting-set argument; it is one.
+
+**Why the reframing is worth making.** Geometric transversal theory is a substantial
+field with its own machinery and its own open problems, and it has apparently never been
+pointed at computing `s(n)`:
+
+- **Gallai's theorem**: for intervals on the line, `τ = ν` exactly. The plane is where
+  the gap opens.
+- **Wegner's conjecture (1965)**: for finite families of axis-parallel rectangles,
+  `τ ≤ 2ν − 1`. The best general upper bound is `τ = O(ν·(log log ν)²)`
+  [Correa–Feuilloley–Pérez-Lantero–Soto].
+- **Wegner's conjecture is false** [Counterexamples 2026]: an explicit triangle-free
+  family of 64 rectangles has `ν = 16` and `τ ≥ 32`, and the constant 2 itself fails —
+  the LP integrality gap can approach `5/2`, giving `τ ≥ (5/2 − ε)ν`. **Crucially, the
+  counterexamples are rectangles; the paper says nothing about squares**, so the square
+  case remains open.
+- **For squares specifically**, Caoduro and Sebő prove `τ/ν ≤ 6` for unit squares under
+  *arbitrary rotation* — the first non-trivial bound for unconstrained orientations — and
+  `≤ 10` for varying sizes, with constructions attaining 3 and 4. For axis-parallel unit
+  squares the supremum of `τ/ν` is known only to lie in `[3/2, 2]`.
+
+**The catch, stated honestly.** These `τ/ν` results concern *finite* families of squares
+given in advance, whereas the packing problem needs the *infinite* family of all unit
+squares placeable in `S`. The quantities are not interchangeable, and a `τ/ν` ratio bound
+does not directly yield an `s(n)` bound.
+What the reframing supplies is not an immediate theorem but a **vocabulary and a body of
+technique** — LP relaxations of hitting set, integrality gaps, Helly- and Gallai-type
+results, fractional transversals — that the `s(n)` literature has developed
+independently and in isolation, one unavoidable point set at a time.
+The fractional relaxation in particular is suggestive: `τ*` (fractional piercing) is an
+LP whose dual is a fractional packing, and LP duality is exactly the kind of certificate
+the field currently lacks.
+
+Whether anything crosses over is untested.
+We flag it as the most interesting *conceptual* gap found in this research, distinct from
+the most promising *computational* one.
+
+### A foundational point usually skipped: is `s(n)` attained?
+
+Nearly every source writes `s(n)` as "the side of the smallest square into which `n` unit
+squares can be packed", presupposing a minimum rather than an infimum.
+The presupposition is correct but not quite free.
+
+The configuration space is compact — `n` centres range over a closed bounded region and
+`n` angles over a circle — and the non-overlap condition is closed, so a limit of valid
+packings is a valid packing and the infimum is attained.
+Compactness results of exactly this type are established in general form by
+[Martin 2000], who shows that "for every `ε`" packing statements are equivalent to their
+exact counterparts: if a collection packs into every `(1+ε)`-expansion of a compact set,
+it packs into the set itself.
+
+This is also the technical reason Stromquist's **box** device is legitimate.
+Defining a box as the interior of a square of side *strictly* greater than 1, and proving
+that `n` boxes cannot fit in a container of side exactly `a`, yields `s(n) ≥ a` precisely
+because of the limiting argument: were `s(n) < a`, one could inflate a witnessing packing
+slightly and obtain `n` boxes in the container.
+The device converts closed conditions into open ones, which is what makes the
+nonavoidance lemmas usable, and compactness is what makes the conversion sound.
+
 ### Computational attacks
 
-**Gensane & Ryckelynck (2005).** "Improved Dense Packings of Congruent Squares in a
-Square," *Discrete & Computational Geometry*.
+**[Gensane–Ryckelynck 2005]** — "Improved Dense Packings of Congruent Squares in a
+Square," *Discrete & Computational Geometry*. **[secondary]** — paywalled; its `n = 11`
+content is known through **[Ellsworth SVG]**, which cites it by page.
 They introduce a **maximal inflation function** and an algorithm analogous to the
 *billiard* methods used for packing congruent disks or spheres in a bounded domain:
 configurations are perturbed and "inflated" until they jam.
@@ -628,7 +748,7 @@ Their 1940 paper, "The dissection of rectangles into squares" (*Duke Math. J.* *
 312–340), reformulated the geometry as an electrical network, via what is now called a
 **Smith diagram**.
 
-The correspondence, verified against squaring.net's exposition, is exact:
+The correspondence, verified against **[squaring.net BSST]**, is exact:
 
 | Circuit object | Geometric object |
 | --- | --- |
@@ -653,7 +773,7 @@ So the account given to you is accurate on the mechanism.
 Two historical refinements are worth recording:
 
 - **Priority for the first perfect squared *square* belongs to Roland Sprague, not the
-  Trinity Four.** Sprague, in Berlin, assembled perfect rectangles (including Moroń's
+  Trinity Four** **[squaring.net Sprague]**. Sprague, in Berlin, assembled perfect rectangles (including Moroń's
   33×32 and 65×47) into an order-55 compound squared square of side 4205, published in
   1939 — before Brooks, Smith, Stone and Tutte published theirs. The Cambridge group
   built the *theory*; Sprague got the first square into print.
@@ -987,52 +1107,152 @@ they mean nothing was found, not that nothing exists.
 
 ## References
 
-Primary literature:
+Every key below resolves to a local copy under [`resources/`](../../../resources/README.md)
+unless marked **[not retrieved]**. Local stems are given as `papers/<stem>` or
+`web/<stem>`; each stem has a `.pdf`/`.html` original, a cleaned `.md`, and for papers a
+faithful `.raw.md` extraction.
 
-- [Walter Stromquist, "Packing 10 or 11 Unit Squares in a Square," *Electron. J. Combin.* 10 (2003), #R8](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v10i1r8) — the central paper; read in full.
-- [Erich Friedman, "Packing Unit Squares in Squares: A Survey and New Results," *Electron. J. Combin.*, Dynamic Survey DS7](https://www.combinatorics.org/files/Surveys/ds7/ds7v5-2009/ds7-2009.html) — the standard survey and record table.
-- [Wolfram Bentz, "Optimal Packings of 13 and 46 Unit Squares in a Square," *Electron. J. Combin.* 17 (2010), #R126](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v17i1r126/pdf/)
-- [Wolfram Bentz, "Optimal Packings of 22 and 33 Unit Squares in a Square," arXiv:1606.03746](https://arxiv.org/abs/1606.03746)
-- [Michael J. Kearney and Peter Shiu, "Efficient packing of unit squares in a square," *Electron. J. Combin.* 9 (2002), #R14](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v9i1r14) — introduces a duality method, giving the first published proof that `s(6) = 3`, and also treats `s(7) = 3`.
-- [Thierry Gensane and Philippe Ryckelynck, "Improved Dense Packings of Congruent Squares in a Square," *Discrete Comput. Geom.* (2005)](https://link.springer.com/article/10.1007/s00454-004-1129-z) — paywalled; not read directly.
-- Martin Gardner, "Mathematical Games," *Scientific American*, October 1979 (also November 1979, March 1980, November 1980) — origin of the conjecture.
-- Pertti Hämäläinen, correspondence, 20 April 1980 — the optimal 45° packing of 11 squares.
-- Stromquist, "Packing unit squares inside squares," I–III, Daniel H. Wagner Associates Memoranda, 1984 — unpublished precursors; memorandum III covers `n ≤ 65` and Gardner's conjecture for `n = 11`.
+### Core literature on `s(n)`
 
-Asymptotic wasted-space literature:
+- **[Stromquist 2003]** — Walter Stromquist, "Packing 10 or 11 Unit Squares in a Square,"
+  *Electron. J. Combin.* **10** (2003), #R8.
+  [Online](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v10i1r8) ·
+  local `papers/stromquist-2003-packing-10-or-11-unit-squares`.
+  *The central paper; read in full during this research.*
+- **[Friedman DS7]** — Erich Friedman, "Packing Unit Squares in Squares: A Survey and New
+  Results," *Electron. J. Combin.*, Dynamic Survey DS7.
+  [Online](https://www.combinatorics.org/files/Surveys/ds7/ds7v5-2009/ds7-2009.html) ·
+  local `papers/friedman-ds7-packing-unit-squares-in-squares`, `web/friedman-ds7-survey-2009-html`.
+- **[Kearney–Shiu 2002]** — M. J. Kearney and P. Shiu, "Efficient packing of unit squares
+  in a square," *Electron. J. Combin.* **9** (2002), #R14.
+  [Online](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v9i1r14) ·
+  local `papers/kearney-shiu-2002-efficient-packing-unit-squares`.
+  *Duality method; first published proof that `s(6) = 3`, and treats `s(7)`.*
+- **[Bentz 2010]** — Wolfram Bentz, "Optimal Packings of 13 and 46 Unit Squares in a
+  Square," *Electron. J. Combin.* **17** (2010), #R126.
+  [Online](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v17i1r126/pdf/) ·
+  local `papers/bentz-2010-optimal-packings-13-and-46`.
+- **[Bentz 2016]** — Wolfram Bentz, "Optimal Packings of 22 and 33 Unit Squares in a
+  Square," arXiv:1606.03746.
+  [Online](https://arxiv.org/abs/1606.03746) ·
+  local `papers/bentz-2016-optimal-packings-22-and-33`.
+  *Continuously varying families of unavoidable sets.*
+- **[Arslanov et al.]** — M. Z. Arslanov, S. A. Mustafin, Z. K. Shangitbayev, "Improved
+  packings of n(n−1) unit squares in a square," *Electron. J. Combin.* **28**(4).
+  [Online](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v28i4p22/pdf/) ·
+  local `papers/arslanov-improved-packings-n-n-1`.
+- **[Gensane–Ryckelynck 2005]** — T. Gensane and P. Ryckelynck, "Improved Dense Packings
+  of Congruent Squares in a Square," *Discrete Comput. Geom.* (2005).
+  [Online](https://link.springer.com/article/10.1007/s00454-004-1129-z) ·
+  **[not retrieved]** — paywalled. Its `n = 11` content is known via **[Ellsworth SVG]**.
+- **Nagamochi (2005)** — `s(m²−1) = s(m²−2) = m`. **[not retrieved]** — no open-access
+  copy located; known through **[Friedman DS7]** and secondary summaries.
+- **[Gardner 1979]** — Martin Gardner, "Mathematical Games," *Scientific American*,
+  October 1979 (also Nov 1979, Mar 1980, Nov 1980). Origin of the conjecture.
+  **[not retrieved]** — print.
+- **Pertti Hämäläinen**, correspondence, 20 April 1980 — the optimal 45° packing of 11
+  squares. **[not retrieved]** — cited by **[Stromquist 2003]**.
+- **Stromquist**, "Packing unit squares inside squares," I–III, Daniel H. Wagner
+  Associates Memoranda, 1984. **[not retrieved]** — unpublished; memorandum III covers
+  `n ≤ 65` and Gardner's conjecture for `n = 11`.
 
-- [K. F. Roth and R. C. Vaughan, "Inefficiency in packing squares with unit squares," *JCTA* (1978)](https://www.sciencedirect.com/science/article/pii/0097316578900055)
-- [P. Erdős and R. L. Graham, "On packing squares with equal squares," *J. Combin. Theory Ser. A* **19** (1975), 119–123 — Stanford tech report CS-TR-75-483](http://i.stanford.edu/pub/cstr/reports/cs/tr/75/483/CS-TR-75-483.pdf)
-- [M. Z. Arslanov, S. A. Mustafin, Z. K. Shangitbayev, "Improved packings of n(n−1) unit squares in a square," *Electron. J. Combin.* 28(4)](https://www.combinatorics.org/ojs/index.php/eljc/article/download/v28i4p22/pdf/)
-- [Rory McClenagan, "Optimally Packing a Large Square by Unit Squares," arXiv:2602.01484](https://arxiv.org/abs/2602.01484)
-- [Square Packing with Asymptotically Smallest Waste Only Needs Good Squares, arXiv:2504.09489](https://arxiv.org/pdf/2504.09489)
-- [Square packing with O(x^0.6) wasted area, arXiv:2508.04603](https://arxiv.org/pdf/2508.04603)
+### Rigorous computational methods (the certification frontier)
 
-The squared-square dissection tradition (for contrast — a different problem):
+- **[Montanher et al. 2018]** — T. Montanher, A. Neumaier, M. C. Markót, F. Domes,
+  H. Schichl, "Rigorous packing of unit squares into a circle," *J. Global Optim.*
+  [Online](https://pmc.ncbi.nlm.nih.gov/articles/PMC6394747/) ·
+  local `web/montanher-2018-rigorous-packing-unit-squares-circle`.
+  *Interval branch-and-bound with sentinels; the rigorous frontier for rotating unit
+  squares, at `n = 3`.*
+- **[Markót 2004]** — M. C. Markót, "Optimal Packing of 28 Equal Circles in a Unit Square
+  — The First Reliable Solution," *Numerical Algorithms*.
+  [Online](https://link.springer.com/article/10.1023/B:NUMA.0000049472.75023.0a) ·
+  **[not retrieved]**.
+- **Improved interval methods for circle packing in the unit square.**
+  [Online](https://pmc.ncbi.nlm.nih.gov/articles/PMC8550790/) · **[not retrieved]**.
 
-- [R. L. Brooks, C. A. B. Smith, A. H. Stone, W. T. Tutte, "The dissection of rectangles into squares," *Duke Math. J.* 7 (1940), 312–340](https://projecteuclid.org/euclid.dmj/1077492259)
-- [squaring.net — Brooks, Smith, Stone and Tutte, II](http://www.squaring.net/history_theory/brooks_smith_stone_tutte_II.html) — the precise Smith-diagram correspondence, verified against this source.
-- [squaring.net — Roland Percival Sprague (1894–1967)](http://www.squaring.net/history_theory/sprague.html) — priority for the first published perfect squared square.
+### Transversal / hitting-set theory
+
+- **[Caoduro–Sebő]** — Marco Caoduro and András Sebő, "Packing, Hitting, and Colouring
+  Squares," arXiv:2206.02185.
+  [Online](https://arxiv.org/abs/2206.02185) ·
+  local `papers/caoduro-sebo-packing-hitting-colouring-squares`.
+  *`τ/ν ≤ 6` for unit squares under arbitrary rotation.*
+- **[Wegner-CE 2026]** — "Counterexamples to Wegner's Conjecture for Rectangles,"
+  arXiv:2606.17854.
+  [Online](https://arxiv.org/abs/2606.17854) ·
+  local `papers/wegner-counterexamples-rectangles`.
+  *Refutes `τ ≤ 2ν − 1` for rectangles; squares untouched.*
+- **[Martin 2000]** — Greg Martin, "Compactness Theorems for Geometric Packings,"
+  arXiv:math/0005054.
+  [Online](https://arxiv.org/abs/math/0005054) ·
+  local `papers/martin-2000-compactness-theorems-geometric-packings`.
+
+### Asymptotic wasted-space literature
+
+- **[Erdős–Graham 1975]** — P. Erdős and R. L. Graham, "On packing squares with equal
+  squares," *J. Combin. Theory Ser. A* **19** (1975), 119–123; this copy is Stanford tech
+  report CS-TR-75-483.
+  [Online](http://i.stanford.edu/pub/cstr/reports/cs/tr/75/483/CS-TR-75-483.pdf) ·
+  local `papers/erdos-graham-1975-on-packing-squares-with-equal-squares`.
+- **[Roth–Vaughan 1978]** — K. F. Roth and R. C. Vaughan, "Inefficiency in packing squares
+  with unit squares," *JCTA*.
+  [Online](https://www.sciencedirect.com/science/article/pii/0097316578900055) ·
+  **[not retrieved]** — ScienceDirect blocks automated clients.
+- **[McClenagan 2026]** — Rory McClenagan, "Optimally Packing a Large Square by Unit
+  Squares," arXiv:2602.01484.
+  [Online](https://arxiv.org/abs/2602.01484) ·
+  local `papers/mcclenagan-2026-optimally-packing-large-square`.
+- **[Good-Squares 2025]** — "Square Packing with Asymptotically Smallest Waste Only Needs
+  Good Squares," arXiv:2504.09489.
+  [Online](https://arxiv.org/pdf/2504.09489) ·
+  local `papers/square-packing-good-squares-2504.09489`.
+- **[Waste-0.6 2025]** — "Square packing with O(x^0.6) wasted area," arXiv:2508.04603.
+  [Online](https://arxiv.org/pdf/2508.04603) ·
+  local `papers/square-packing-x06-wasted-area-2508.04603`.
+
+### Record catalogues (where the numbers actually live)
+
+- **[Kingbird]** — "Squares in Squares," exact minimal polynomials, rigidity flags, SVG
+  layouts.
+  [Online](https://kingbird.myphotos.cc/packing/squares_in_squares.html) ·
+  local `web/kingbird-squares-in-squares`.
+- **[Kingbird-compared]** — "Older / Alternative Packings": which record fell to which
+  method, and when.
+  [Online](https://kingbird.myphotos.cc/packing/squares_in_squares__compared.html) ·
+  local `web/kingbird-squares-in-squares-compared`.
+- **[Ellsworth SVG]** — `square-11.svg`. Its XML comments carry David Ellsworth's
+  provenance notes, the two contact equations, the derived constants, and the
+  exact-solution history. **The single most information-dense source found on this case.**
+  [Online](https://kingbird.myphotos.cc/packing/square-11.svg) ·
+  local `papers/kingbird-square-11-provenance.svg`.
+- **[Friedman Center]** — Erich Friedman's Packing Center, squares page.
+  [Online](https://erich-friedman.github.io/papers/squares/squares.html) ·
+  local `web/friedman-packing-center-squares`.
+- **[Wikipedia]** — "Square packing."
+  [Online](https://en.wikipedia.org/wiki/Square_packing) ·
+  local `web/wikipedia-square-packing`.
+
+### The squared-square dissection tradition (a different problem, for contrast)
+
+- **[BSST 1940]** — R. L. Brooks, C. A. B. Smith, A. H. Stone, W. T. Tutte, "The
+  dissection of rectangles into squares," *Duke Math. J.* **7** (1940), 312–340.
+  [Online](https://projecteuclid.org/euclid.dmj/1077492259) · **[not retrieved]**.
+- **[squaring.net BSST]** — the precise Smith-diagram correspondence.
+  [Online](http://www.squaring.net/history_theory/brooks_smith_stone_tutte_II.html) ·
+  local `web/squaring-net-brooks-smith-stone-tutte-II`.
+- **[squaring.net Sprague]** — priority for the first published perfect squared square.
+  [Online](http://www.squaring.net/history_theory/sprague.html) ·
+  local `web/squaring-net-sprague`.
+- **[CPSS 2013]** — "Compound Perfect Squared Squares of the Order Twenties,"
+  arXiv:1303.0599.
+  [Online](https://arxiv.org/abs/1303.0599) ·
+  local `papers/compound-perfect-squared-squares-1303.0599`.
 - [squaring.net — Simple Perfect Squared Squares, Order 21](http://www.squaring.net/sq/ss/spss/o21/spsso21.html) — Duijvestijn's unique lowest-order example.
 - [Trinity Mathematical Society — The Squared Square](https://tms.soc.srcf.net/about-the-tms/the-squared-square/)
 - [Wolfram MathWorld — Perfect Square Dissection](https://mathworld.wolfram.com/PerfectSquareDissection.html)
-- [Compound Perfect Squared Squares of the Order Twenties, arXiv:1303.0599](https://arxiv.org/abs/1303.0599)
 
-Rigorous computational methods (the certification frontier):
-
-- [T. Montanher, A. Neumaier, M. C. Markót, F. Domes, H. Schichl, "Rigorous packing of unit squares into a circle," *J. Global Optim.* (2018)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6394747/) — interval branch-and-bound with sentinels; the rigorous frontier for *rotating* unit squares, at `n = 3`.
-- [M. C. Markót, "Optimal Packing of 28 Equal Circles in a Unit Square — The First Reliable Solution," *Numerical Algorithms*](https://link.springer.com/article/10.1023/B:NUMA.0000049472.75023.0a)
-- [Improved interval methods for solving circle packing problems in the unit square](https://pmc.ncbi.nlm.nih.gov/articles/PMC8550790/)
-
-Record catalogues and reference works:
-
-- [Erich Friedman's Packing Center — Packing Unit Squares in Squares](https://erich-friedman.github.io/papers/squares/squares.html)
-- [Kingbird, "Squares in Squares"](https://kingbird.myphotos.cc/packing/squares_in_squares.html) — exact minimal polynomials, rigidity flags, SVG layouts.
-- [Kingbird, "Squares in Squares: Older / Alternative Packings"](https://kingbird.myphotos.cc/packing/squares_in_squares__compared.html) — supersession history, showing which records fell to which method and when.
-- [Kingbird, `square-11.svg`](https://kingbird.myphotos.cc/packing/square-11.svg) — the `n = 11` layout. Its XML comments carry David Ellsworth's provenance notes, the two contact equations, the derived constants, and the exact-solution history; the single most information-dense source found on this case.
-- [Wikipedia, "Square packing"](https://en.wikipedia.org/wiki/Square_packing)
-
-Expository:
+### Expository
 
 - [xkcd 2740, "Square Packing"](https://www.explainxkcd.com/wiki/index.php/2740:_Square_Packing)
 - [Stand-up Maths, "The Insane World of Polygon Packings"](https://www.youtube.com/watch?v=jWT08JVb-fk)
