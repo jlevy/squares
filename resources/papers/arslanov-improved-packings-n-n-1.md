@@ -9,6 +9,13 @@ archived: 2026-08-22
 extraction_note: "Converted from PDF via pdfminer.six text extraction; math reconstructed to LaTeX, tables reformatted, (cid:XX) codes resolved, running footers and page numbers removed."
 ---
 
+> ⚠️ **Contains reconstructed passages.**
+> This transcription contains **1** annotated passage(s) where the PDF extraction was
+> damaged and text or mathematics was reconstructed or marked unrecoverable. Search this
+> file for `GARBLED` and `NOTE` to find them.
+> **Any formula near an annotation must be checked against `arslanov-improved-packings-n-n-1.raw.md`**, which is the
+> unedited extraction and the ground truth for this document.
+
 # Improved packings of $n(n-1)$ unit squares in a square
 
 **M.Z. Arslanov**\*

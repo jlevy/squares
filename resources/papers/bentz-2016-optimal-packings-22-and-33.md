@@ -9,6 +9,13 @@
 
 ---
 
+> ⚠️ **Contains reconstructed passages.**
+> This transcription contains **3** annotated passage(s) where the PDF extraction was
+> damaged and text or mathematics was reconstructed or marked unrecoverable. Search this
+> file for `GARBLED` and `NOTE` to find them.
+> **Any formula near an annotation must be checked against `bentz-2016-optimal-packings-22-and-33.raw.md`**, which is the
+> unedited extraction and the ground truth for this document.
+
 Department of Physics and Mathematics
 University of Hull
 United Kingdom

@@ -9,6 +9,13 @@
 
 ---
 
+> ⚠️ **Contains reconstructed passages.**
+> This transcription contains **1** annotated passage(s) where the PDF extraction was
+> damaged and text or mathematics was reconstructed or marked unrecoverable. Search this
+> file for `GARBLED` and `NOTE` to find them.
+> **Any formula near an annotation must be checked against `bentz-2010-optimal-packings-13-and-46.raw.md`**, which is the
+> unedited extraction and the ground truth for this document.
+
 Department of Mathematics, Statistics, and Computer Science
 St. Francis Xavier University
 Antigonish, Nova Scotia, Canada
@@ -66,7 +73,15 @@ We will be using Lemma 5 in the cases $a = \frac{\sqrt{3}}{2}$, $b = 0.5$; $a \l
 We will use the Lemma in the situation of the following corollary, which will be a major technical tool for this article.
 
 **Corollary 7** Let $0 < b \leq 1$, and $R$ be the rectangle with vertices $(0, 0)$, $(0, 1)$, $(b, 0)$, $(b, 1)$. Then any box whose centre lies inside $R$ without containing any of its vertices intersects the line segments $\{0\} \times [0, 1]$ and $\{b\} \times [0, 1]$ with a common length of intersection of at least $2\sqrt{2} - 2 \approx 0.828$. In addition, if $b > 2\sqrt{2} - 2$ then the box intersects each segment with a length of at least $b - 2\sqrt{2} + 2$.
-<!-- NOTE: The raw extraction rendered the line segments as {0} x [0, b] and {1} x [0, b], which is inconsistent with the rectangle geometry. The segments have been reconstructed as the left and right edges of R. -->
+<!-- NOTE (two reconstructions here, verify against the .raw.md before relying on this corollary):
+     1. Segments: the raw extraction reads "{0} x [0, b] and {1} x [0, b]". Rendered here as the
+        left and right edges of R, i.e. {0} x [0,1] and {b} x [0,1].
+     2. INEQUALITY DIRECTION CHANGED: the raw extraction reads "if 2 sqrt(2) - 2 > b", and this
+        transcription states "if b > 2 sqrt(2) - 2". The raw text is column-interleaved so its
+        ordering is unreliable, but this is a change to the mathematics and was NOT disclosed in
+        the original annotation. Treat the direction as UNVERIFIED.
+     The leading claim -- common intersection length at least 2 sqrt(2) - 2 ~ 0.828 -- is
+     unambiguous in the raw extraction and is not affected. -->
 
 In the situation of Corollary 7, we will simply refer to the (length of the) intersection of the box with one of the edges of $R$ as being the left, right, up, or down intersection.
 
