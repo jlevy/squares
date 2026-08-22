@@ -1,0 +1,191 @@
+# Every source the research documents cite that is NOT in the local archive,
+# with the specific obstacle and what depends on it.
+#
+# Homogeneous rows, no per-row narrative, so this is plain YAML rather than one
+# artifact per source -- see README.md on format choice. The Markdown table in
+# the research document is generated from this file by ../tools/render_tables.py.
+#
+# RE-TEST RATHER THAN INHERIT. A "not retrievable" verdict is a negative search
+# result. This list has now been wrong five times: Gensane-Ryckelynck, Nagamochi
+# and Wang-Dong-Li were all freely available when re-tested on 2026-08-22, and
+# Markot 2021 was open access at PMC the whole time. Roth-Vaughan was supplied
+# by the requester on the same day. Every entry below carries the date it was
+# last checked and the exact evidence.
+softschema:
+  contract: packing.squares:SourceAvailability/v1
+  status: soft
+
+last_checked: '2026-08-22'
+archive: explorations/packing/resources/
+
+# Cleared since the first pass. Kept so the correction is visible, and as
+# evidence for the re-test rule above.
+recovered:
+  - key: "[Roth–Vaughan 1978]"
+    title: Inefficiency in Packing Squares with Unit Squares
+    how: Supplied by the requester after ScienceDirect refused automated clients.
+    impact: >
+      Settled the single most consequential open question in the corpus. The
+      theorem is w(a) >> (||a|| a)^{1/2} under a(a - [a]) > 1/6, where ||a|| is
+      the distance from a to the nearest integer. Both secondary renderings were
+      wrong: DS7 and McClenagan each report a 10^{-100} constant that appears
+      nowhere in the paper, and the relation is Vinogradov >>, not >.
+  - key: "[Markót 2021]"
+    title: Improved interval methods for solving circle packing problems in the unit square
+    how: Open access at PMC; the earlier pass recorded it unretrieved without testing.
+  - key: "[Gensane–Ryckelynck 2005]"
+    title: Improved Dense Packings of Congruent Squares in a Square
+    how: Springer serves the PDF openly at its /content/pdf/ URL; the earlier attempt fetched the article landing page.
+  - key: "[Nagamochi 2005]"
+    title: Packing Unit Squares in a Rectangle
+    how: Open access in Electron. J. Combin.; cited by exact title in the archived DS7 reference list all along.
+  - key: "[Wang–Dong–Li 2016]"
+    title: A New Result on Packing Unit Squares into a Large Square
+    how: On arXiv.
+
+# Still missing. `blocker` is the mechanism, not a guess.
+unretrieved:
+  - key: "[Stromquist 1984]"
+    title: Packing unit squares inside squares, I-III
+    authors: [Walter Stromquist]
+    year: 1984
+    venue: Daniel H. Wagner Associates Memoranda
+    blocker: unpublished
+    detail: >
+      Never published. Memorandum III covers n <= 65 and Gardner's conjecture
+      for n = 11.
+    depends_on_it: >
+      A large share of the claim column in the priority ledger. The single most
+      valuable unretrieved document in this subject.
+    priority: 1
+    route: author or institutional contact
+
+  - key: "[El Moumni 1999]"
+    title: Optimal Packings of Unit Squares in a Square
+    authors: [Said El Moumni]
+    year: 1999
+    venue: Studia Sci. Math. Hungar. 35, 281-290
+    blocker: print_only
+    detail: No digital copy located.
+    depends_on_it: >
+      Published priority for s(7) = s(8) = 3 and s(15) = 4. No summary of this
+      field describes its method.
+    priority: 2
+    route: library access
+
+  - key: "[Arslanov–Bui 2025]"
+    title: Note on "efficient packings of unit squares in a large square"
+    authors: [M. Z. Arslanov, Hong Duc Bui]
+    year: 2025
+    venue: Discrete Comput. Geom.
+    url: https://doi.org/10.1007/s00454-025-00767-w
+    blocker: paywall
+    detail: >
+      Springer. The /content/pdf/ URL returns HTTP 200 but serves a paywall
+      landing page, not the PDF -- re-tested 2026-08-22.
+    depends_on_it: Current continuation of the Kearney-Shiu delta_n / n_r line.
+    priority: 2
+    route: institutional subscription
+
+  - key: "[Trump 2023]"
+    title: Packing of 11 unit squares in a square with minimum size
+    authors: [Walter Trump]
+    year: 2023
+    venue: ResearchGate
+    blocker: bot_blocked
+    detail: ResearchGate returns 403 to automated clients.
+    depends_on_it: >
+      Accessible excerpts confirm rigidity and state the packing "cannot be
+      improved by computer programs as long as the same geometrical arrangement
+      is used" -- a statement about local, not global, optimality.
+    priority: 2
+    route: author request, or a browser session
+
+  - key: "[Markót 2004]"
+    title: Optimal Packing of 28 Equal Circles in a Unit Square - The First Reliable Solution
+    authors: [Mihály Csaba Markót]
+    year: 2004
+    venue: Numerical Algorithms
+    url: https://link.springer.com/article/10.1023/B:NUMA.0000049472.75023.0a
+    blocker: paywall
+    detail: Springer paywall landing page; re-tested 2026-08-22.
+    depends_on_it: >
+      Calibration only. Its successor, Markót 2021, is archived and carries the
+      same method at n = 31, 32, 33.
+    priority: 4
+    route: institutional subscription
+
+  - key: "[Chung–Graham 2009]"
+    title: Packing equal squares into a large square
+    authors: [Fan Chung, Ronald Graham]
+    year: 2009
+    venue: J. Combin. Theory Ser. A 116, 1167-1175
+    blocker: paywall
+    detail: ScienceDirect; an author-hosted copy was not reachable from this environment.
+    depends_on_it: The O(x^{(3+sqrt(2))/7} log x) step in the asymptotic chain.
+    priority: 3
+    route: author's homepage from a browser, or institutional access
+
+  - key: "[Chung–Graham 2020]"
+    title: Efficient packings of unit squares in a large square
+    authors: [Fan Chung, Ronald Graham]
+    year: 2020
+    venue: Discrete Comput. Geom.
+    blocker: paywall
+    detail: Springer.
+    depends_on_it: >
+      The claimed O(x^{3/5}) bound that McClenagan states "has an error in it".
+      Reading it would let us describe the error rather than relay the claim.
+    priority: 3
+    route: institutional subscription
+
+  - key: "[BSST 1940]"
+    title: The dissection of rectangles into squares
+    authors: [R. L. Brooks, C. A. B. Smith, A. H. Stone, W. T. Tutte]
+    year: 1940
+    venue: Duke Math. J. 7, 312-340
+    blocker: paywall
+    detail: Project Euclid; the PDF URL returns a stub page. Re-tested 2026-08-22.
+    depends_on_it: >
+      The Smith-diagram correspondence, currently sourced to squaring.net -- an
+      excellent specialist source but a secondary one. The rationality argument
+      that makes the non-transferability section decisive does not depend on it.
+    priority: 4
+    route: institutional subscription
+
+  - key: "[Gardner 1979]"
+    title: Mathematical Games
+    authors: [Martin Gardner]
+    year: 1979
+    venue: Scientific American, Oct 1979 (also Nov 1979, Mar 1980, Nov 1980)
+    blocker: print_only
+    detail: Print magazine; archives exist but were not reachable here.
+    depends_on_it: Origin of the conjecture Stromquist settled.
+    priority: 3
+    route: Scientific American archive subscription
+
+  - key: "[Hämäläinen 1980]"
+    title: Correspondence, 20 April 1980
+    authors: [Pertti Hämäläinen]
+    year: 1980
+    venue: private correspondence
+    blocker: private_correspondence
+    detail: Cited by Stromquist 2003; not a published document.
+    depends_on_it: The optimal 45-degree packing of 11 squares realising the Theorem 3 bound.
+    priority: 5
+    route: likely unobtainable
+
+  - key: "[Gustafsson–Thulin 1980]"
+    title: Problem Ronden
+    authors: [Mats Gustafsson, Magnus Thulin]
+    year: 1980
+    venue: Ronden (Swedish periodical), Apr/Sep/Dec 1980
+    blocker: obscure_periodical
+    detail: >
+      Swedish company periodical. Ellsworth notes he has not read it directly
+      either.
+    depends_on_it: >
+      The independent 1980 rediscovery of Trump's packing. Priority is Trump's
+      regardless; this would only settle the rediscovery's details.
+    priority: 5
+    route: Swedish library holdings

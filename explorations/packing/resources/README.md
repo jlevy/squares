@@ -26,18 +26,27 @@ The `.raw.md` files are deliberately retained.
 Cleanup was done by language models, so the raw extraction is the fallback whenever a
 formula in a `.md` looks suspicious.
 
-**Three papers are currently raw-only**, with a `.pdf` and a `.raw.md` but no cleaned
-`.md`: `gensane-ryckelynck-2005-improved-dense-packings`,
-`nagamochi-2005-packing-unit-squares-in-a-rectangle`, and
-`wang-dong-li-2016-new-result-packing-unit-squares`. They were added on 2026-08-22 after
-being found retrievable (see below), and were read directly from the PDF and the raw
-extraction. Ground truth is present and the archive is greppable; only the reading
-convenience is missing.
-Writing cleaned transcriptions for them is deliberately deferred rather than done
-hastily — model-assisted cleanup is exactly what produced the reconstruction hazards
-tabulated in the next section.
-Passages that could not be confidently reconstructed are marked inline as
-`<!-- GARBLED: unable to reconstruct -->` rather than guessed at.
+**Transcription status, stated exactly.** The archive’s discipline is original + cleaned
+`.md` + faithful `.raw.md`, and four entries currently fall short of it in ways worth
+naming rather than hiding:
+
+- `gensane-ryckelynck-2005-improved-dense-packings`,
+  `nagamochi-2005-packing-unit-squares-in-a-rectangle` and
+  `wang-dong-li-2016-new-result-packing-unit-squares` are **raw-only**: PDF and faithful
+  extraction, no cleaned transcription yet.
+  All three were read directly from the PDF, and the claims resting on them were checked
+  there.
+- `roth-vaughan-1978-inefficiency-packing-squares` carries a **partial** cleaned
+  transcription: abstract, introduction and Theorem, read from the rendered page image
+  and reproduced verbatim; Sections 2–7 are not transcribed.
+  The 1978 scan’s OCR loses subscripts, superscripts and interval notation, and
+  transcribing it would mean reconstructing mathematics rather than reformatting it.
+  The file opens with a banner saying so.
+
+Writing the missing transcriptions is deferred deliberately rather than done hastily —
+model-assisted cleanup is exactly what produced the reconstruction hazards tabulated in
+the next section, and Roth–Vaughan is the argument for that caution: two independent
+secondary sources reported a constant the paper does not contain.
 
 ## Reconstructed passages — read this before quoting a formula
 
@@ -121,6 +130,7 @@ Citation keys match those used in the research document.
 | **[Gensane–Ryckelynck 2005]** | Improved Dense Packings of Congruent Squares in a Square | T. Gensane, P. Ryckelynck | 2005 | Discrete Comput. Geom. 34, 97–109 | `gensane-ryckelynck-2005-improved-dense-packings` |
 | **[Nagamochi 2005]** | Packing Unit Squares in a Rectangle | H. Nagamochi | 2005 | Electron. J. Combin. 12, #R37 | `nagamochi-2005-packing-unit-squares-in-a-rectangle` |
 | **[Wang–Dong–Li 2016]** | A New Result on Packing Unit Squares into a Large Square | S. Wang, T. Dong, J. Li | 2016 | arXiv:1603.02368 | `wang-dong-li-2016-new-result-packing-unit-squares` |
+| **[Roth–Vaughan 1978]** | Inefficiency in Packing Squares with Unit Squares | K. F. Roth, R. C. Vaughan | 1978 | JCTA 24, 170–186 | `roth-vaughan-1978-inefficiency-packing-squares` |
 
 ## Web sources
 
@@ -131,6 +141,7 @@ Citation keys match those used in the research document.
 | **[Kingbird]** | Squares-in-Squares catalogue: exact minimal polynomials, rigidity flags | kingbird.myphotos.cc | `kingbird-squares-in-squares` |
 | **[Kingbird-compared]** | Supersession history: which record fell to which method, when | kingbird.myphotos.cc | `kingbird-squares-in-squares-compared` |
 | **[Montanher et al. 2018]** | Rigorous packing of unit squares into a circle (full text via PMC) | pmc.ncbi.nlm.nih.gov | `montanher-2018-rigorous-packing-unit-squares-circle` |
+| **[Markót 2021]** | Improved interval methods for circle packing in the unit square (full text via PMC) | pmc.ncbi.nlm.nih.gov | `markot-2021-improved-interval-methods-circle-packing` |
 | **[squaring.net BSST]** | The Smith-diagram / Kirchhoff correspondence, in detail | squaring.net | `squaring-net-brooks-smith-stone-tutte-II` |
 | **[squaring.net Sprague]** | Priority for the first published perfect squared square | squaring.net | `squaring-net-sprague` |
 | **[Wikipedia]** | Square packing overview | en.wikipedia.org | `wikipedia-square-packing` |
@@ -153,12 +164,20 @@ article landing page), Nagamochi (open access in the *Electronic Journal of
 Combinatorics*, and cited by its exact title in the archived DS7 reference list all
 along), and Wang–Dong–Li (arXiv).
 A “not retrievable” verdict is a negative search result, and this archive has now been
-wrong about it three times.
+wrong about it **five** times: Markót 2021 was open access at PMC the whole time, and
+Roth & Vaughan (1978) — recorded here as the highest-priority acquisition — was supplied
+on request and is now archived.
+Reading it produced two corrections to the published secondary literature.
+
+**The canonical list now lives in
+[`../frontier/source-availability.yaml`](../frontier/source-availability.yaml)**, with
+the obstacle, what depends on each source, and a route to obtaining it; the research
+document renders it as a table.
+The short version below is kept for readers of this archive.
 
 | Source | Obstacle |
 | --- | --- |
 | Trump, *Packing of 11 unit squares in a square with minimum size* (Mar 2023) | ResearchGate 403 |
-| Roth & Vaughan, *Inefficiency in packing squares with unit squares*, JCTA (1978) | ScienceDirect 403 to automated clients. **Highest-priority acquisition**: it is the only asymptotic source whose theorem could not be pinned down, and the available secondary renderings of it contradict each other. |
 | El Moumni, *Optimal Packings of Unit Squares in a Square*, Studia Sci. Math. Hungar. 35 (1999) | Print-only; no digital copy located. Holds published priority for `s(7) = s(8) = 3` and `s(15) = 4`. |
 | Stromquist, *Packing unit squares inside squares* I–III, Wagner Associates memoranda (1984) | Unpublished; memorandum III covers `n ≤ 65` and Gardner’s conjecture for `n = 11`. |
 | Arslanov & Bui, *Note on “efficient packings of unit squares in a large square”*, DCG (2025) | Springer; not open access. |

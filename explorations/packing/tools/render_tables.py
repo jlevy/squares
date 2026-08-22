@@ -107,10 +107,47 @@ def table_strategies(kind: str) -> list[str]:
     return rows
 
 
+BLOCKER = {
+    "unpublished": "unpublished",
+    "print_only": "print only",
+    "paywall": "paywall",
+    "bot_blocked": "bot-blocked",
+    "private_correspondence": "private correspondence",
+    "obscure_periodical": "obscure periodical",
+}
+
+
+def table_unretrieved() -> list[str]:
+    d = yaml.safe_load((FRONTIER / "source-availability.yaml").read_text(encoding="utf-8"))
+    rows = ["| Source | Year | Where | Obstacle | What rests on it |",
+            "| --- | --- | --- | --- | --- |"]
+    for s in sorted(d["unretrieved"], key=lambda x: (x["priority"], x["key"])):
+        dep = " ".join(s["depends_on_it"].split())
+        rows.append(f"| **{s['key']}** {s['title']} | {s['year']} | {s['venue']} | "
+                    f"{BLOCKER[s['blocker']]} | {dep} |")
+    return rows
+
+
+def table_recovered() -> list[str]:
+    d = yaml.safe_load((FRONTIER / "source-availability.yaml").read_text(encoding="utf-8"))
+    rows = ["| Source | How it was recovered |", "| --- | --- |"]
+    for s in d["recovered"]:
+        rows.append(f"| **{s['key']}** {s['title']} | {' '.join(s['how'].split())} |")
+    return rows
+
+
 def splice(text: str, name: str, rows: list[str]) -> str:
     b, e = BEGIN % name, END % name
     i, j = text.index(b), text.index(e)
     return text[:i] + b + "\n\n" + "\n".join(rows) + "\n\n" + text[j:]
+
+
+# The Markdown formatter normalizes typography in place (straight quotes to
+# curly, -- to en dash, ... to an ellipsis). That rewrites generated cells, so
+# --check compares *content*: both sides are folded back to ASCII punctuation
+# first. Anything that actually changes what a cell says still fails.
+_FOLD = str.maketrans({"\u201c": '"', "\u201d": '"', "\u2018": "'", "\u2019": "'",
+                       "\u2013": "-", "\u2014": "-", "\u2026": "..."})
 
 
 def cells(block: str) -> list[list[str]]:
@@ -118,7 +155,7 @@ def cells(block: str) -> list[list[str]]:
     for line in block.splitlines():
         if not line.startswith("|"):
             continue
-        c = [x.strip() for x in line.strip().strip("|").split("|")]
+        c = [" ".join(x.translate(_FOLD).split()) for x in line.strip().strip("|").split("|")]
         if set("".join(c)) <= set("- "):
             continue
         out.append(c)
@@ -135,6 +172,8 @@ TABLES = lambda cases: {
     "frontier-solved": table_solved(cases),
     "search-strategies": table_strategies("search"),
     "proof-strategies": table_strategies("proof"),
+    "sources-unretrieved": table_unretrieved(),
+    "sources-recovered": table_recovered(),
 }
 
 

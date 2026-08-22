@@ -1374,7 +1374,7 @@ packing unit squares into a large square of side `x`.
 | **Wang–Dong–Li (2016)**, upper | `O(x^{5/8})` | 0.6250 |
 | Chung–Graham (2020), upper — **claim withdrawn in effect** | `O(x^{3/5})` | 0.6000 |
 | Bui (2025), McClenagan (2026), upper | `O(x^{3/5})` | 0.6000 |
-| **Roth–Vaughan (1978), lower** | `W(x) = Ω((x·‖x‖)^{1/2})`, `‖x‖` = distance to the nearest integer | ≥ 0.5 at half-integers |
+| **Roth–Vaughan (1978), lower** | `w(α) ≫ (‖α‖·α)^{1/2}` when `α(α−[α]) > 1/6`; `‖α‖` = distance to the nearest integer | ≥ 0.5 at half-integers |
 
 The Erdős–Graham result is the historical origin of the insight that **tilted** unit
 squares beat axis-aligned ones — the same phenomenon that makes `n = 11` interesting,
@@ -1396,26 +1396,48 @@ back” — and the point of both 2025–26 papers is to *establish* `O(x^{3/5})
 route, not to re-derive an already-sound one **[McClenagan 2026]**,
 **[Waste-0.6 2025]**. Treat `O(x^{3/5})` as dating from 2025, not 2020.
 
-**The Roth–Vaughan lower bound, and a caution about it.** The correct shape of the bound
-is governed by the distance from `x` to the **nearest integer**, not by its fractional
-part: `W(x) = Ω((x·‖x‖)^{1/2})`, whose headline corollary is that at half-integer side
-lengths the wasted area is at least proportional to `√x` **[Wikipedia]**. This implies
-`W(x)` is **not** `O(x^α)` for any `α < 1/2`, which is the form the rest of this
-literature quotes (**[Good-Squares 2025]** writes it `W(x) ∉ o(x^{1/2})`).
+**The Roth–Vaughan lower bound, stated from the paper.** The 1978 paper was retrieved
+after earlier passes failed, and its theorem settles a question three secondary sources
+disagreed about. In full:
 
-The caution is that **the primary paper is the one source in this document’s asymptotic
-section that could not be retrieved**, and the available secondary renderings of its
-theorem disagree with each other.
-The archived **[Friedman DS7]** transcription loses the floor-function notation entirely
-and is flagged `GARBLED` at exactly this sentence; **[McClenagan 2026]** renders it
-`W(x) > 10⁻¹⁰⁰√(x − ⌊x⌋)`, using the fractional part.
-A fractional-part reading cannot be right as stated: it would force `Ω(√x)` waste for
-`x` just *below* an integer, where a near-perfect grid packing exists.
-So the nearest-integer form above is adopted on the strength of the Wikipedia rendering
-plus internal consistency, and the exact constant and side condition — Roth and
-Vaughan’s explicit `10⁻¹⁰⁰`, and a hypothesis of the shape `x‖x‖ > c` — are **not**
-stated here precisely, because no retrieved source states them reliably.
-Resolving this needs the 1978 paper; see [Open Questions](#open-questions).
+> **THEOREM.** Suppose that `α(α − [α]) > 1/6`. Then
+> 
+> ```
+> w(α) ≫ (‖α‖ α)^{1/2}
+> ```
+> 
+> where `‖α‖` denotes the distance of `α` from the nearest integer.
+
+with `w(α) = α² − sup_𝒜 |𝒜|` over packings `𝒜` of unit squares into a square of side
+`α`. Three points, each correcting something previously written here or in the secondary
+literature:
+
+1. **The side condition uses the fractional part; the bound uses the distance to the
+   nearest integer.** They are different quantities and the theorem uses both, which is
+   how renderings that pick one and apply it to the other go wrong.
+2. **There is no `10⁻¹⁰⁰` constant.** The relation is Vinogradov `≫` — an implied
+   absolute constant, never given a numerical value anywhere in the paper.
+   Both **[Friedman DS7]** and **[McClenagan 2026]** report an explicit `10⁻¹⁰⁰`; that
+   constant appears nowhere in Roth and Vaughan.
+   An earlier draft of this document repeated it and called it “emblematic” of how weak
+   these constants are — a rhetorical point resting on a number the source does not
+   contain.
+3. **The complementary case is covered by a remark, not left open.** If
+   `α(α − [α]) ≤ 1/6` then `sup_𝒜 |𝒜| = [α]²`, so `w(α) ≫ α(α − [α])`, and Roth and
+   Vaughan note this is essentially best possible.
+
+The headline corollary, which is how the abstract states it: *in packing a square of
+side `n + ½` with unit squares, the wasted space always has area `≫ n^{1/2}`.* This is
+what rules out `W(x) = O(x^α)` for any `α < 1/2`, the form the rest of the literature
+quotes (**[Good-Squares 2025]** writes it `W(x) ∉ o(x^{1/2})`).
+
+Two further things the paper settles in passing.
+It records **Montgomery’s** unpublished improvement as `(3 − √3)/2 + ε = 0.633974… + ε`,
+confirming the corrigendum **[Friedman DS7]** issued in March 2023 and contradicting
+**[McClenagan 2026]**, which attributes `(3+√2)/7` to Montgomery.
+And it records that Erdős and Graham *speculated* the truth is `O(α^{1/2})`; Roth and
+Vaughan say they are “dubious as to the validity of such a small bound” but prove that
+if it is true, it is essentially best possible.
 
 Roth and Vaughan also introduced the notion of a **good square** — one whose inclination
 is at most `10⁻¹⁰` — and it has since been shown that for computing the asymptotic
@@ -1423,7 +1445,8 @@ growth of wasted space it suffices to consider packings with only good squares
 **[Good-Squares 2025]**.
 
 **Why this is irrelevant to `n = 11`.** These are asymptotic statements with unspecified
-or astronomically weak constants — Roth and Vaughan’s explicit `10⁻¹⁰⁰` is emblematic.
+constants — Roth and Vaughan’s bound is stated with Vinogradov `≫` and never evaluates
+its implied constant at all.
 They describe behaviour as `x → ∞` and carry no information at `x ≈ 3.88`. The
 small-case and asymptotic branches of this subject share an origin and a moral (tilting
 helps) but are methodologically disjoint.
@@ -1444,7 +1467,9 @@ worth recording so they are not propagated.
 | Kirchhoff’s-law / Smith-diagram methods are a promising route to new bounds here | **False** | The method requires a gapless tiling by distinct axis-aligned squares and yields rational answers by construction. All four conditions fail for `s(11)`. See the dedicated section. |
 | Gensane and Ryckelynck (2004/05) improved the `n = 11` packing | **False** | They computed its first *exact algebraic solution*, not a denser packing. The 1979 configuration is unchanged. |
 | *Our own earlier draft:* rigorous interval branch-and-bound is “the most plausible untried line of attack” | **Wrong — corrected** | It is not untried. It has been applied to rotating unit squares (Montanher et al. 2018) and rigorously reaches `n = 3`. It is the most *developed* modern approach and falls far short of `n = 11`. |
-| *Our own earlier draft:* the Roth–Vaughan bound is `W(x) ≥ 10⁻¹⁰⁰√(x·\|x − ⌊x⌋ + 1/2\|)`, “stated precisely in [Friedman DS7]” | **Wrong — corrected** | The bound is governed by distance to the **nearest integer**, not the fractional part; the DS7 transcription is flagged `GARBLED` at that exact sentence and states nothing precisely. See [the asymptotic section](#asymptotic-theory-and-why-it-does-not-help). |
+| *Our own earlier draft:* the Roth–Vaughan bound is `W(x) ≥ 10⁻¹⁰⁰√(x·\|x − ⌊x⌋ + 1/2\|)`, “stated precisely in [Friedman DS7]” | **Wrong — corrected against the primary** | The theorem is `w(α) ≫ (‖α‖ α)^{1/2}` under `α(α − [α]) > 1/6`. The bound uses distance to the **nearest integer**; the side condition uses the **fractional part**; and there is **no explicit constant at all**. |
+| **[Friedman DS7]** and **[McClenagan 2026]**: the Roth–Vaughan bound carries an explicit `10⁻¹⁰⁰` | **False** | No such constant appears anywhere in Roth and Vaughan. The relation is Vinogradov `≫`, whose implied constant is never evaluated. Two independent secondary sources carry the same phantom number. |
+| **[McClenagan 2026]**: Montgomery’s improvement is `O(x^{(3+√2)/7})` | **False** | Roth and Vaughan record it as `(3 − √3)/2 + ε = 0.633974… + ε`, matching the corrigendum **[Friedman DS7]** issued 1 March 2023. `(3+√2)/7` is Chung–Graham’s 2009 exponent. |
 | *Our own earlier draft:* Kearney–Shiu prove `n_r ≤ 27r^{3/2} + O(r²)` | **Wrong — corrected** | The bound is `27r³/2 + O(r²)` — cubic in `r`, from `p(⌈3r/2⌉)` with `p(t) = 4t³ + 4t² + 3t + 1`. A misread fraction. |
 | *Our own earlier draft:* Stromquist’s Theorem 2 is “ten unavoidable points, eleven boxes, pigeonhole” | **Wrong — corrected** | The ten points are *not* unavoidable; the proof is two-stage and finishes with twelve points of which one box must contain **three**. Same for Theorem 3. See [What Stromquist actually proved](#what-stromquist-actually-proved-2003). |
 | *Our own earlier draft:* Gensane–Ryckelynck and Nagamochi could not be retrieved | **Wrong — corrected** | Both are freely available: Springer serves the Gensane–Ryckelynck PDF openly, and Nagamochi is open access in *Electron. J. Combin.* 12 #R37. Both are now in the local archive and read. |
@@ -1719,11 +1744,13 @@ Every item in the proof lane above exists because of this.
   in a Rectangle*, *Electron.
   J. Combin.* **12** #R37. Archived; its general lower bound is now recorded and used
   throughout the [open-frontier table](#the-open-frontier-what-is-actually-unknown).
-- [ ] **Obtain Roth & Vaughan (1978)** and settle the exact form of the lower bound —
-  the constant, the side condition, and whether the kernel is `‖x‖` or something
-  subtler. This is now the single most consequential unretrieved item in the document,
-  because every available rendering of it disagrees with the others.
-  ScienceDirect 403s automated clients; a library copy is the realistic route.
+- [x] ~~Obtain Roth & Vaughan (1978) and settle the exact form of the lower bound~~ —
+  **resolved**: the paper was supplied and is archived.
+  The theorem is `w(α) ≫ (‖α‖ α)^{1/2}` under `α(α − [α]) > 1/6`, with `‖α‖` the
+  distance to the nearest integer, and **there is no `10⁻¹⁰⁰` constant** — the relation
+  is Vinogradov `≫`, and both **[Friedman DS7]** and **[McClenagan 2026]** report a
+  constant the paper does not contain.
+  See [the asymptotic section](#asymptotic-theory-and-why-it-does-not-help).
 - [ ] Obtain El Moumni (1999), *Studia Sci.
   Math. Hungar.* **35** 281–290, and confirm what it proves and how; it holds published
   priority for three values and no summary of this field describes its method.
@@ -1756,6 +1783,70 @@ Every item in the proof lane above exists because of this.
   `n = 11` other than Trump’s, and is that enumeration recorded anywhere?
 - [ ] Confirm whether Packomania covers squares-in-squares records or is circle-focused;
   it was listed in the source briefing but not verified here.
+
+## Source Availability
+
+Every source this document cites is either in the local archive under
+[`resources/`](../../../resources/README.md) or listed here.
+The structured form is
+[`frontier/source-availability.yaml`](../../../frontier/source-availability.yaml); the
+tables below are generated from it.
+
+**Re-test this list rather than inheriting it.** A “not retrievable” verdict is a
+negative search result, and this document has now been wrong about one five times.
+Three sources recorded as unavailable turned out to be freely downloadable when
+re-tested; a fourth was open access at PMC the whole time; and the fifth — the most
+consequential of all — was supplied on request.
+
+<!-- BEGIN GENERATED: sources-recovered (tools/render_tables.py) -->
+
+| Source | How it was recovered |
+| --- | --- |
+| **[Roth–Vaughan 1978]** Inefficiency in Packing Squares with Unit Squares | Supplied by the requester after ScienceDirect refused automated clients. |
+| **[Markót 2021]** Improved interval methods for solving circle packing problems in the unit square | Open access at PMC; the earlier pass recorded it unretrieved without testing. |
+| **[Gensane–Ryckelynck 2005]** Improved Dense Packings of Congruent Squares in a Square | Springer serves the PDF openly at its /content/pdf/ URL; the earlier attempt fetched the article landing page. |
+| **[Nagamochi 2005]** Packing Unit Squares in a Rectangle | Open access in Electron. J. Combin.; cited by exact title in the archived DS7 reference list all along. |
+| **[Wang–Dong–Li 2016]** A New Result on Packing Unit Squares into a Large Square | On arXiv. |
+
+<!-- END GENERATED: sources-recovered -->
+
+### Still unretrieved
+
+Ordered by how much rests on them.
+`Obstacle` records the mechanism, not a guess: `paywall` means a landing page was served
+in place of the PDF on a re-test, not that access was assumed to be blocked.
+
+<!-- BEGIN GENERATED: sources-unretrieved (tools/render_tables.py) -->
+
+| Source | Year | Where | Obstacle | What rests on it |
+| --- | --- | --- | --- | --- |
+| **[Stromquist 1984]** Packing unit squares inside squares, I-III | 1984 | Daniel H. Wagner Associates Memoranda | unpublished | A large share of the claim column in the priority ledger. The single most valuable unretrieved document in this subject. |
+| **[Arslanov–Bui 2025]** Note on “efficient packings of unit squares in a large square” | 2025 | Discrete Comput. Geom. | paywall | Current continuation of the Kearney-Shiu delta_n / n_r line. |
+| **[El Moumni 1999]** Optimal Packings of Unit Squares in a Square | 1999 | Studia Sci. Math. Hungar. 35, 281-290 | print only | Published priority for s(7) = s(8) = 3 and s(15) = 4. No summary of this field describes its method. |
+| **[Trump 2023]** Packing of 11 unit squares in a square with minimum size | 2023 | ResearchGate | bot-blocked | Accessible excerpts confirm rigidity and state the packing “cannot be improved by computer programs as long as the same geometrical arrangement is used” -- a statement about local, not global, optimality. |
+| **[Chung–Graham 2009]** Packing equal squares into a large square | 2009 | J. Combin. Theory Ser. A 116, 1167-1175 | paywall | The O(x^{(3+sqrt(2))/7} log x) step in the asymptotic chain. |
+| **[Chung–Graham 2020]** Efficient packings of unit squares in a large square | 2020 | Discrete Comput. Geom. | paywall | The claimed O(x^{3/5}) bound that McClenagan states “has an error in it”. Reading it would let us describe the error rather than relay the claim. |
+| **[Gardner 1979]** Mathematical Games | 1979 | Scientific American, Oct 1979 (also Nov 1979, Mar 1980, Nov 1980) | print only | Origin of the conjecture Stromquist settled. |
+| **[BSST 1940]** The dissection of rectangles into squares | 1940 | Duke Math. J. 7, 312-340 | paywall | The Smith-diagram correspondence, currently sourced to squaring.net -- an excellent specialist source but a secondary one. The rationality argument that makes the non-transferability section decisive does not depend on it. |
+| **[Markót 2004]** Optimal Packing of 28 Equal Circles in a Unit Square - The First Reliable Solution | 2004 | Numerical Algorithms | paywall | Calibration only. Its successor, Markót 2021, is archived and carries the same method at n = 31, 32, 33. |
+| **[Gustafsson–Thulin 1980]** Problem Ronden | 1980 | Ronden (Swedish periodical), Apr/Sep/Dec 1980 | obscure periodical | The independent 1980 rediscovery of Trump’s packing. Priority is Trump’s regardless; this would only settle the rediscovery’s details. |
+| **[Hämäläinen 1980]** Correspondence, 20 April 1980 | 1980 | private correspondence | private correspondence | The optimal 45-degree packing of 11 squares realising the Theorem 3 bound. |
+
+<!-- END GENERATED: sources-unretrieved -->
+
+**What this list is for.** It is the fact-checking boundary of this research.
+Every claim in this document either traces to a file in `resources/` — where the
+original PDF, a cleaned transcription and a faithful raw extraction sit side by side, so
+a formula can be checked against the extraction it came from — or traces to something in
+the table above, and is marked **[secondary]** where it does.
+A reader auditing a claim should be able to tell which case they are in without leaving
+the repository.
+
+The two highest-priority acquisitions are both about **provenance rather than
+mathematics**: Stromquist’s 1984 memoranda sit behind a large share of the claim column
+in the [priority ledger](#priority-claims-and-what-was-actually-published), and El
+Moumni (1999) holds published priority for three values of `s(n)` that most summaries of
+this field credit to someone else.
 
 ## Methodology
 
@@ -1962,8 +2053,12 @@ original, a cleaned `.md`, and for papers a faithful `.raw.md` extraction.
   Square — The First Reliable Solution,” *Numerical Algorithms*.
   [Online](https://link.springer.com/article/10.1023/B:NUMA.0000049472.75023.0a) ·
   **[not retrieved]**.
-- **Improved interval methods for circle packing in the unit square.**
-  [Online](https://pmc.ncbi.nlm.nih.gov/articles/PMC8550790/) · **[not retrieved]**.
+- **[Markót 2021]** — M. C. Markót, “Improved interval methods for solving circle
+  packing problems in the unit square,” *J. Global Optim.* **81** (2021).
+  [Online](https://pmc.ncbi.nlm.nih.gov/articles/PMC8550790/) · local
+  `web/markot-2021-improved-interval-methods-circle-packing`. *Optimality proofs for 31,
+  32 and 33 circles.* **Open access** — an earlier pass recorded it unretrieved without
+  testing.
 
 ### Transversal / hitting-set theory
 
@@ -1988,10 +2083,14 @@ original, a cleaned `.md`, and for papers a faithful `.raw.md` extraction.
   `papers/erdos-graham-1975-on-packing-squares-with-equal-squares`.
 - **[Roth–Vaughan 1978]** — K. F. Roth and R. C. Vaughan, “Inefficiency in packing
   squares with unit squares,” *J. Combin.
-  Theory Ser. A* **24** (1978), 170–186. (Volume and pages verified against the reference
-  list of **[McClenagan 2026]** in the local archive.)
-  [Online](https://www.sciencedirect.com/science/article/pii/0097316578900055) ·
-  **[not retrieved]** — ScienceDirect blocks automated clients.
+  Theory Ser. A* **24** (1978), 170–186 (received 1 Nov 1976; Imperial College London).
+  [Online](https://www.sciencedirect.com/science/article/pii/0097316578900055) · local
+  `papers/roth-vaughan-1978-inefficiency-packing-squares`. *The only lower bound in the
+  asymptotic literature.* **Retrieved 2026-08-22**; ScienceDirect still refuses
+  automated clients, so the copy was supplied directly.
+  The archived transcription is deliberately **partial** — abstract, introduction and
+  Theorem read from the page image; the 1978 scan’s OCR is too degraded to transcribe
+  Sections 2–7 without reconstructing mathematics.
 - **[McClenagan 2026]** — Rory McClenagan, “Optimally Packing a Large Square by Unit
   Squares,” arXiv:2602.01484. [Online](https://arxiv.org/abs/2602.01484) · local
   `papers/mcclenagan-2026-optimally-packing-large-square`.

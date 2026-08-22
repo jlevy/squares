@@ -33,8 +33,10 @@ upper_bounds:
     source_key: "[Friedman DS7]"
     local: papers/friedman-ds7-packing-unit-squares-in-squares
     note: >
-      Unpublished; known through DS7, whose 2023 corrigendum corrects the typeset
-      exponent to (3-sqrt(3))/2.
+      Unpublished. The exponent is confirmed by Roth and Vaughan themselves, who
+      record it as (3 - sqrt(3))/2 + eps = 0.633974... + eps; this matches DS7's
+      2023 corrigendum and contradicts McClenagan 2026, which attributes
+      (3+sqrt(2))/7 to Montgomery -- that is Chung and Graham's 2009 exponent.
   - bound: O(x^{(3+sqrt(2))/7} log x)
     exponent: 0.63060
     authors: [Fan Chung, Ronald Graham]
@@ -77,27 +79,31 @@ upper_bounds:
     local: papers/mcclenagan-2026-optimally-packing-large-square
 
 lower_bounds:
-  - bound: Omega((x * dist(x, Z))^{1/2})
+  - bound: w(a) >> (||a|| * a)^{1/2}
+    side_condition: a * (a - [a]) > 1/6
     authors: [Klaus Roth, Bob Vaughan]
     year: 1978
     source_key: "[Roth–Vaughan 1978]"
-    local: null
-    retrieved: false
-    kernel: distance from x to the nearest integer
+    local: papers/roth-vaughan-1978-inefficiency-packing-squares
+    retrieved: true
+    confidence: verified_against_primary
+    kernel: distance from a to the nearest integer (||a||)
+    constant: >
+      NONE. The relation is Vinogradov >>; the implied absolute constant is never
+      evaluated anywhere in the paper.
     corollary: >
-      At half-integer side lengths the wasted area is at least proportional to
-      sqrt(x); hence W(x) is not O(x^alpha) for any alpha < 1/2.
-    confidence: reconstructed
+      In packing a square of side n + 1/2 with unit squares the wasted space always
+      has area >> n^{1/2}; hence W(x) is not O(x^alpha) for any alpha < 1/2.
+    complementary_case: >
+      If a(a - [a]) <= 1/6 then sup|A| = [a]^2, so w(a) >> a(a - [a]), which Roth and
+      Vaughan note is essentially best possible.
     note: >
-      CAUTION. The primary is unretrieved (ScienceDirect 403) and the available
-      secondary renderings contradict each other: the archived DS7 transcription is
-      flagged GARBLED at this exact sentence, and McClenagan renders it with the
-      fractional part rather than distance-to-nearest-integer. The fractional-part
-      reading cannot be right -- it would force Omega(sqrt(x)) waste just below an
-      integer, where a near-perfect grid packing exists. The form here follows the
-      Wikipedia rendering plus internal consistency. The explicit constant
-      (10^{-100}) and the side condition are deliberately NOT stated, because no
-      retrieved source states them reliably. Highest-priority acquisition.
+      RESOLVED 2026-08-22 against the primary, which was retrieved after three
+      secondary renderings were found to disagree. Two corrections came out of it:
+      the bound uses distance-to-nearest-integer while the SIDE CONDITION uses the
+      fractional part (they are different quantities, and renderings that conflate
+      them go wrong); and the 10^{-100} constant reported by both Friedman DS7 and
+      McClenagan 2026 appears nowhere in the paper.
 
 related_results:
   - result: >
