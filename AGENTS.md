@@ -45,6 +45,15 @@ so style never blocks a build.
 
 Two rules worth knowing before changing any of this:
 
+- **Exclusions are evidence-based, not precautionary.** The policy is to format the
+  whole repository and exclude only what we have a tested reason to leave raw.
+  Two exclusions qualify: the literature archive under `resources/papers/` and
+  `resources/web/`, and the generated `SKILL.md` files.
+  The archive is excluded for a measured reason — flowmark inserts line breaks *inside*
+  `$...$` spans when it rewraps, which on 2026-08-22 broke 31 of 339 math spans in one
+  transcription and 101 of 1236 in another.
+  A newline mid-formula defeats `grep`, and local searchability is the entire point of
+  that archive. Do not drop these exclusions without re-measuring.
 - **The hook formats the whole repository, not the staged files.** Flowmark reads
   `.flowmarkignore` relative to its target argument, so passing explicit paths silently
   bypasses the exclusion list.

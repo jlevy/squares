@@ -55,6 +55,21 @@ before relying on it.
 That is what the raw files are for.
 The research document cites only claims that are unambiguous in the raw extractions.
 
+## Why this archive is not auto-formatted
+
+The repository auto-formats all Markdown with flowmark on commit.
+This directory is excluded, deliberately and for a measured reason.
+
+The `.raw.md` files must stay byte-exact to serve as ground truth.
+But the cleaned `.md` transcriptions are excluded too, because flowmark inserts line
+breaks **inside** `$...$` math spans when it rewraps.
+Measured 2026-08-22: 31 of 339 spans broken in the Stromquist transcription, 101 of 1236
+in Caoduro–Sebő, 5 of 433 in the Kingbird capture.
+A newline in the middle of a formula defeats `grep`, which is what this archive exists
+for.
+
+`resources/README.md` — this file — is *not* excluded, and is formatted normally.
+
 ## Searching
 
 ```bash
