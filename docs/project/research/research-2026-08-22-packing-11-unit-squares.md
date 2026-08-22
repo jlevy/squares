@@ -251,8 +251,10 @@ separating, because conflating the two is the source of the "Gensane–Ryckelync
 - **1979 — Walter Trump** finds the packing. Published in Gardner's collection *Fractal
   Music, Hypercards and More* (1991).
 - **1980 — independent rediscovery** by Mats Gustafsson and Magnus Thulin, in the Swedish
-  periodical *Ronden*; also reported by Gardner in November 1980. Friedman's survey notes
-  many independent rediscoveries.
+  periodical *Ronden*; also reported by Gardner in November 1980 **[Ellsworth SVG]**.
+  Note the nuance: **[Friedman DS7]** records that the *original discovery* "has been
+  incorrectly attributed to Gustafson and Thule," i.e. priority is Trump's and theirs was
+  a rediscovery. Friedman also notes many independent rediscoveries generally.
 - **Before 19 May 2004 — Gensane and Ryckelynck** compute the first *exact algebraic*
   solution, in the DCG paper (p. 10 of 13). They eliminate using a system of **14
   equations**. They do not publish `s` in reduced root form: only the cosine of one angle
@@ -388,6 +390,79 @@ coordinates to certify a degree-8 threshold.
 This is, in our assessment, the structural reason the method stalls well short of
 `3.877084`, and it is the single most useful insight in this document.
 
+#### The unifying abstraction: resource starvation
+
+Reading the primary papers rather than their summaries reveals that the field already has
+a general name for what all its lower-bound proofs are doing.
+**[Bentz 2016]** states it plainly:
+
+> Optimality proofs for square packing utilize arguments based on *resource starvation*.
+> Subsets of a containing square are associated with numerical resources in such a way
+> that each packed box uses up a certain amount of resources (by intersecting the subset
+> corresponding with the resource). The overall amount of resource available limits the
+> number of boxes that can be packed.
+
+This is the correct level of generality, and it organises the whole inventory.
+A lower-bound proof chooses a **resource measure** on the container and shows each box
+must consume a fixed quantum of it:
+
+| Resource | Quantum per box | Where used |
+| --- | --- | --- |
+| A finite point set, each point worth 1 | 1 point | The classical unavoidable-points method: **[Friedman DS7]**, **[Stromquist 2003]** |
+| A point set with one **sliding point** on a segment | 1 point, for every placement of the slider | **[Bentz 2010]** |
+| **Line segments, measured by length of intersection** | A minimum intersection length | **[Bentz 2010]**, Corollary 7 |
+| A **continuously varying family** of point sets | 1 point, uniformly along the family | **[Bentz 2016]**, Theorem 8 |
+
+The progression is a steady weakening of the discreteness assumption, and it matters for
+the transversal reading below: the field has *already* moved from counting points to
+measuring lengths.
+**[Bentz 2010]**'s Corollary 7 is a genuinely fractional statement — a box whose centre
+lies in a certain rectangle without containing its vertices must intersect two specified
+segments with total intersection length at least `2√2 − 2 ≈ 0.828`.
+That is a measure-valued transversal condition, not a hitting-set condition.
+
+**The ε-shrinking step.** **[Friedman DS7]** gives the precise mechanism by which an
+unavoidable set yields a bound, and it is worth quoting because it is where compactness
+enters:
+
+> To show that `s(n) ≥ k`, we will find a set `P` of `(n−1)` points in a square `S` of
+> side `k` so that any unit square in `S` contains an element of `P` (possibly on its
+> boundary). Shrinking these by a factor of `(1 − ε/k)` gives a set `P'` of `(n−1)` points
+> in a square `S'` of side `(k − ε)` …
+
+The rescaling converts a statement about the closed container into one about every
+slightly smaller container, which is exactly what forces `s(n) ≥ k` rather than
+`s(n) > k − ε` for each `ε` separately.
+
+#### Kearney–Shiu's duality, precisely
+
+**[Kearney–Shiu 2002]** is the one genuinely different idea in the lower-bound literature,
+and the mechanism is elegant enough to record exactly.
+
+Their proof of `s(6) = 3` and `s(7) = 3` starts from a 7-point unavoidable set in the
+square of side 3 — essentially Friedman's, whose own `s(7) = 3` proof needed a more
+complicated "almost unavoidable set" of 5 points. Then:
+
+1. Colour those 7 points **green**; call it the green lattice in `S`.
+2. Rotate the lattice a **right angle** about the centre `(3/2, 3/2)`, giving 7 **red**
+   points.
+3. Because `S` is a *square*, the rotated configuration is also unavoidable. The red
+   lattice is therefore the **dual** of the green one.
+4. The two lattices share the centre, so their union has **13 distinct points**,
+   classified into three types: the centre (the "C-point"), the 8 points furthest from it,
+   and the remainder.
+5. Any unit square covering the C-point must also cover a point of the other colour; the
+   case analysis closes from there.
+
+The move is to exploit the container's own symmetry group to manufacture a second
+certificate for free, then reason about the *interaction* of the two. It is a genuinely
+different lever from placing better points, and it is the only place in this literature
+where symmetry is used as a proof engine rather than merely to reduce cases.
+
+Kearney and Shiu also prove constructive results in the other direction: with `n_r` the
+smallest `n` such that `s(n² + 1) ≤ n + 1/r`, they show `n_r ≤ 27r^{3/2} + O(r²)` and
+`n₂ ≤ 43`.
+
 ### The landscape of solved cases
 
 Exact values of `s(n)` known as of this research:
@@ -424,6 +499,14 @@ integer or a degree-2 algebraic number of the form `k + ½√2`.
 No case with a higher-degree answer has ever been resolved.
 `n = 11` would be the first, and this is likely not a coincidence but a reflection of the
 proof technology's reach.
+
+**A cautionary counterexample.** It was conjectured that `s(n² − n) = n` for small `n`.
+**[Friedman DS7]** records the smallest known counterexample, due to **Lars Cleemann**:
+`s(17² − 17) < 17`, i.e. 272 unit squares fit in a square of side 17 with room to spare.
+Three of its squares are tilted at 45° and the rest at `arctan(8/15)`.
+The lesson generalises well beyond that family: plausible patterns in this subject fail at
+sizes far beyond where intuition or small-case data would suggest, which is a standing
+argument against believing `s(11) = 3.877084…` merely because nothing has beaten it.
 
 *Note on source discrepancies:* enumerations differ between sources.
 Wikipedia lists `n = 2, 3, 5, 6, 7, 8, 10, 13, 14, 15, 24, 34, 35, 46, 47, 48`, omitting
@@ -638,9 +721,18 @@ What the reframing supplies is not an immediate theorem but a **vocabulary and a
 technique** — LP relaxations of hitting set, integrality gaps, Helly- and Gallai-type
 results, fractional transversals — that the `s(n)` literature has developed
 independently and in isolation, one unavoidable point set at a time.
-The fractional relaxation in particular is suggestive: `τ*` (fractional piercing) is an
-LP whose dual is a fractional packing, and LP duality is exactly the kind of certificate
-the field currently lacks.
+
+**And the field is already halfway there without saying so.** The resource-starvation
+progression above — points worth 1, then sliding points, then *line segments measured by
+intersection length* **[Bentz 2010]**, then continuously varying families
+**[Bentz 2016]** — is precisely a drift from integral transversals toward **fractional,
+measure-valued** ones. Bentz's Corollary 7, requiring a minimum total intersection
+*length* of `2√2 − 2` rather than a point hit, is a fractional certificate in all but
+name.
+That the field arrived there independently, without the transversal vocabulary, is
+suggestive: `τ*` (fractional piercing) is an LP whose dual is a fractional packing, and LP
+duality is exactly the kind of certificate this literature currently lacks and keeps
+re-deriving by hand.
 
 Whether anything crosses over is untested.
 We flag it as the most interesting *conceptual* gap found in this research, distinct from
@@ -849,7 +941,7 @@ packing unit squares into a large square of side `x`.
 | Result | Bound on `W(x)` | Approx. exponent |
 | --- | --- | --- |
 | Erdős & Graham (1975) | `O(x^{7/11})` | 0.636 |
-| Roth & Vaughan (1978), lower bound | `W(x) > 10⁻¹⁰⁰ √(x − ⌊x⌋)` | — |
+| Roth & Vaughan (1978), lower bound | if `x(x−⌊x⌋) > 1/6` then `W(x) ≥ 10⁻¹⁰⁰√(x·|x − ⌊x⌋ + 1/2|)` | — |
 | Montgomery | `O(x^{(3−√3)/2})` | 0.634 |
 | Chung & Graham (2009) | `O(x^{(3+√2)/7} log x)` | 0.631 |
 | Chung & Graham (2020, claimed) | `O(x^{3/5})` | 0.600 |
@@ -858,8 +950,9 @@ packing unit squares into a large square of side `x`.
 The Erdős–Graham result is the historical origin of the insight that **tilted** unit
 squares beat axis-aligned ones — the same phenomenon that makes `n = 11` interesting,
 appearing asymptotically.
-Roth and Vaughan's lower bound shows waste is unavoidable and is proportional to at least
-the square root of the distance from `x` to the nearest integer; they also introduced the
+Roth and Vaughan's lower bound, stated precisely in **[Friedman DS7]**, is that if
+`x(x − ⌊x⌋) > 1/6` then `W(x) ≥ 10⁻¹⁰⁰√(x·|x − ⌊x⌋ + 1/2|)`, which implies `W(x)` is
+**not** `O(x^α)` for any `α < 1/2`; they also introduced the
 notion of a **good square** (inclination at most `10⁻¹⁰`), and it has since been shown
 that for computing the asymptotic growth of wasted space it suffices to consider packings
 with only good squares (arXiv:2504.09489).
@@ -991,7 +1084,27 @@ These are frequently conflated with the present problem in casual sources:
     past it. Positivstellensatz/SOS certificates remain, as far as this research found,
     genuinely unattempted.
 
-11. **The packing is fully explicit, and the algebra is small.** The whole configuration
+11. **The lower-bound literature has one abstraction and four instantiations.**
+    **[Bentz 2016]** names it: *resource starvation*. Associate a numerical resource with
+    subsets of the container, show each packed box must consume a quantum of it, and count.
+    The instantiations are points worth 1, points with a slider, line segments measured by
+    intersection length, and continuously varying families. Seen this way the field's
+    apparent single technique is really one idea being progressively de-discretised — and
+    the natural next step, an explicitly fractional LP certificate, is the one nobody has
+    taken.
+
+12. **Kearney–Shiu is the only place symmetry is used as a proof engine.** Their duality
+    rotates an unavoidable lattice a quarter-turn about the container's centre; because
+    the container is a *square*, the rotated set is unavoidable too, giving a second
+    certificate for free, and the proof reasons about the interaction of the two. Every
+    other proof in the literature uses symmetry only to reduce case counts.
+
+13. **Plausible patterns here fail late.** The conjecture `s(n² − n) = n` survives small
+    cases and then dies at `n = 17`, where Cleemann packed 272 unit squares into a side-17
+    square with room to spare. That is a direct argument against inferring `s(11)` from the
+    fact that fifty years of search has not beaten Trump.
+
+14. **The packing is fully explicit, and the algebra is small.** The whole configuration
     — six axis-aligned squares and five tilted at a common angle — is pinned by just
     **two** contact equations, from which the degree-8 polynomial follows by elimination.
     One of them reduces to the compact `s = 2 + (2 + sin a)/(cos a + sin a)`. Gensane and
