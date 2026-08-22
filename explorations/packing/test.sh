@@ -33,4 +33,33 @@ else
 fi
 
 echo
+echo "== frontier corpus =="
+# Structural checks that need no network. Schema validation needs softschema:
+#   for f in frontier/n-*.md; do uvx softschema@latest validate "$f"; done
+python3 - <<'PY'
+import pathlib, yaml, sys
+files = sorted(pathlib.Path("frontier").glob("n-*.md"))
+assert len(files) == 100, f"expected 100 frontier artifacts, found {len(files)}"
+ns, open_n, nag = set(), 0, 0
+for f in files:
+    fm = yaml.safe_load(f.read_text().split("---\n")[1])
+    ss, d = fm["softschema"], fm["packing"]
+    assert ss["contract"] == "packing.squares:SquarePackingCase/v1", f
+    assert ss["envelope"] == "packing" and ss["status"] == "enforced", f
+    assert int(f.stem.split("-")[1]) == d["n"], f
+    assert d["status"] in ("proved", "open"), f
+    assert d["upper_bound"]["value"] >= d["lower_bound"]["value"] - 1e-9, f
+    if d["status"] == "proved":
+        assert abs(d["gap"]) < 1e-9, f"proved case with a gap: {f}"
+    else:
+        open_n += 1
+        nag += d["lower_bound"]["kind"] == "nagamochi"
+    ns.add(d["n"])
+assert ns == set(range(1, 101)), "n = 1..100 not covered exactly once"
+print(f"  100 artifacts, n = 1..100, {100-open_n} proved, {open_n} open")
+print(f"  {nag} of {open_n} open cases bounded below by Nagamochi's general theorem")
+assert open_n == 65 and nag == 63, "corpus counts drifted from the documented figures"
+PY
+
+echo
 echo "ALL CHECKS PASSED"

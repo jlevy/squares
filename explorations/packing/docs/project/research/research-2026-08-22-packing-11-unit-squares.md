@@ -642,93 +642,46 @@ This table is the complement — **every open `n ≤ 100`** — and it is the sp
 systematic attack on this problem, because it shows at a glance where the proof
 machinery stops and how far short it falls.
 
-Upper bounds are the best known packings from **[Kingbird]**; `(grid)` marks an `n` the
-catalogue does not picture, where the trivial `⌈√n⌉` packing is still the best known.
-`deg` is the algebraic degree of the conjectured optimum where the catalogue records a
-minimal polynomial, and `—` where it records none — either because the record is the
-grid, or because the packing has not been analytically optimized.
-Lower bounds are the strongest of four sources: the area bound `√n`; Nagamochi’s general
-closed form; monotonicity `s(n) ≥ s(m)` from the largest proved `m ≤ n`; and, for every
-`n ≥ 11`, Stromquist’s Theorem 2 through the same monotonicity.
-All values were computed in this research by parsing the record catalogue and evaluating
-the bounds; see [Methodology](#methodology).
+**The full table lives as structured data, not here.** One artifact per `n` — with the
+best known packing, its algebraic degree and minimal polynomial, the best proved lower
+bound *and which argument supplies it*, provenance, links into the local archive, and an
+editorial note on each case — is in
+[`explorations/packing/frontier/`](../../../frontier/README.md).
+It is schema-validated, so it can be queried rather than re-read, and it does not drift
+from this prose because this prose no longer restates it.
 
-| `n` | best known `s(n)` (upper) | deg | best proved lower bound | from | gap |
-| --- | --- | --- | --- | --- | --- |
-| 11 | 3.87708359 | 8 | 3.788854 | Stromquist Thm 2 via `s(11)` | 0.0882 |
-| 12 | 4 (grid) | — | 3.788854 | Stromquist Thm 2 via `s(11)` | 0.2111 |
-| 17 | 4.67553009 | 18 | 4.162278 | Nagamochi | 0.5133 |
-| 18 | `7/2 + 1/2√7` = 4.82287566 | — | 4.316625 | Nagamochi | 0.5063 |
-| 19 | `3 + 4/3√2` = 4.88561808 | — | 4.464102 | Nagamochi | 0.4215 |
-| 20 | 5 (grid) | — | 4.605551 | Nagamochi | 0.3944 |
-| 21 | 5 (grid) | — | 4.741657 | Nagamochi | 0.2583 |
-| 26 | `7/2 + 3/2√2` = 5.62132034 | — | 5.123106 | Nagamochi | 0.4982 |
-| 27 | `5 + 1/2√2` = 5.70710678 | — | 5.242641 | Nagamochi | 0.4645 |
-| 28 | 5.82444462 | 6 | 5.358899 | Nagamochi | 0.4655 |
-| 29 | 5.93383346 | — | 5.472136 | Nagamochi | 0.4617 |
-| 30 | 6 (grid) | — | 5.582576 | Nagamochi | 0.4174 |
-| 31 | 6 (grid) | — | 5.690416 | Nagamochi | 0.3096 |
-| 32 | 6 (grid) | — | 5.795832 | Nagamochi | 0.2042 |
-| 37 | 6.59861961 | 8 | 6.099020 | Nagamochi | 0.4996 |
-| 38 | `6 + 1/2√2` = 6.70710678 | — | 6.196152 | Nagamochi | 0.5110 |
-| 39 | 6.81072208 | 5 | 6.291503 | Nagamochi | 0.5192 |
-| 40 | `4 + 2 √2` = 6.82842712 | — | 6.385165 | Nagamochi | 0.4433 |
-| 41 | 6.92669309 | 42 | 6.477226 | Nagamochi | 0.4495 |
-| 42 | 7 (grid) | — | 6.567764 | Nagamochi | 0.4322 |
-| 43 | 7 (grid) | — | 6.656854 | Nagamochi | 0.3431 |
-| 44 | 7 (grid) | — | 6.744563 | Nagamochi | 0.2554 |
-| 45 | 7 (grid) | — | 6.830952 | Nagamochi | 0.1690 |
-| 50 | `7 + 4/7` = 7.57142857 | — | 7.082763 | Nagamochi | 0.4887 |
-| 51 | 7.70079924 | 12 | 7.164414 | Nagamochi | 0.5364 |
-| 52 | `7 + 1/2√2` = 7.70710678 | — | 7.244998 | Nagamochi | 0.4621 |
-| 53 | `13/2 + 1/2√7` = 7.82287566 | — | 7.324555 | Nagamochi | 0.4983 |
-| 54 | 7.84666719 | — | 7.403124 | Nagamochi | 0.4435 |
-| 55 | 7.94577101 | — | 7.480741 | Nagamochi | 0.4650 |
-| 56 | 8 (grid) | — | 7.557439 | Nagamochi | 0.4426 |
-| 57 | 8 (grid) | — | 7.633250 | Nagamochi | 0.3668 |
-| 58 | 8 (grid) | — | 7.708204 | Nagamochi | 0.2918 |
-| 59 | 8 (grid) | — | 7.782330 | Nagamochi | 0.2177 |
-| 60 | 8 (grid) | — | 7.855655 | Nagamochi | 0.1443 |
-| 61 | 8 (grid) | — | 7.928203 | Nagamochi | 0.0718 |
-| 65 | `5 + 5/2√2` = 8.53553391 | — | 8.071068 | Nagamochi | 0.4645 |
-| 66 | `3 + 4 √2` = 8.65685425 | — | 8.141428 | Nagamochi | 0.5154 |
-| 67 | `8 + 1/2√2` = 8.70710678 | — | 8.211103 | Nagamochi | 0.4960 |
-| 68 | 8.80345994 | — | 8.280110 | Nagamochi | 0.5234 |
-| 69 | 8.82721206 | 82 | 8.348469 | Nagamochi | 0.4787 |
-| 70 | 8.88166676 | 4 | 8.416198 | Nagamochi | 0.4655 |
-| 71 | 8.94407156 | — | 8.483315 | Nagamochi | 0.4608 |
-| 72 | 9 (grid) | — | 8.549834 | Nagamochi | 0.4502 |
-| 73 | 9 (grid) | — | 8.615773 | Nagamochi | 0.3842 |
-| 74 | 9 (grid) | — | 8.681146 | Nagamochi | 0.3189 |
-| 75 | 9 (grid) | — | 8.745967 | Nagamochi | 0.2540 |
-| 76 | 9 (grid) | — | 8.810250 | Nagamochi | 0.1898 |
-| 77 | 9 (grid) | — | 8.874008 | Nagamochi | 0.1260 |
-| 78 | 9 (grid) | — | 8.937254 | Nagamochi | 0.0627 |
-| 82 | `6 + 5/2√2` = 9.53553391 | — | 9.062258 | Nagamochi | 0.4733 |
-| 83 | 9.63482562 | 24 | 9.124038 | Nagamochi | 0.5108 |
-| 84 | `9 + 1/2√2` = 9.70710678 | — | 9.185353 | Nagamochi | 0.5218 |
-| 85 | `11/2 + 3 √2` = 9.74264069 | — | 9.246211 | Nagamochi | 0.4964 |
-| 86 | `17/2 + 1/2√7` = 9.82287566 | — | 9.306624 | Nagamochi | 0.5163 |
-| 87 | 9.83881744 | 44 | 9.366600 | Nagamochi | 0.4722 |
-| 88 | 9.88815305 | 20 | 9.426150 | Nagamochi | 0.4620 |
-| 89 | `5 + 7/2√2` = 9.94974747 | — | 9.485281 | Nagamochi | 0.4645 |
-| 90 | 10 (grid) | — | 9.544004 | Nagamochi | 0.4560 |
-| 91 | 10 (grid) | — | 9.602325 | Nagamochi | 0.3977 |
-| 92 | 10 (grid) | — | 9.660254 | Nagamochi | 0.3397 |
-| 93 | 10 (grid) | — | 9.717798 | Nagamochi | 0.2822 |
-| 94 | 10 (grid) | — | 9.774964 | Nagamochi | 0.2250 |
-| 95 | 10 (grid) | — | 9.831761 | Nagamochi | 0.1682 |
-| 96 | 10 (grid) | — | 9.888194 | Nagamochi | 0.1118 |
-| 97 | 10 (grid) | — | 9.944272 | Nagamochi | 0.0557 |
+That folder was built by parsing the archived record catalogue and computing each lower
+bound from four sources (the area bound `√n`, Nagamochi’s general closed form,
+monotonicity from the largest proved `m ≤ n`, and Stromquist’s Theorem 2 for `n ≥ 11`).
+A hand-written version of the same table previously appeared in this section and
+contained an error that building it as data caught immediately — see point 1 below.
+
+|  | `n ≤ 100` |
+| --- | --- |
+| Proved | 35 |
+| **Open** | **65** |
+| Open cases whose lower bound is Nagamochi’s general theorem | 63 |
+| Open cases whose lower bound is bespoke | 2 (`n = 11`, `n = 12`) |
+| Open cases where the trivial grid is still the record | 31 |
+| Open cases with a real construction | 34 |
+| Algebraic degrees occurring | 4, 5, 6, 8, 12, 18, 20, 24, 42, 44, 82 |
 
 **What the table says.** Five things, none of them visible from the list of solved cases
 alone.
 
-1. **The gap at `n = 11` is the *smallest* open gap in the table, at `0.0882`.** Every
-   other open case is further from resolution, most by a factor of three or more.
-   `n = 11` is not merely the first open case; it is the one where the two bounds are
-   closest, and it is still unresolved after two decades.
-   That is the sharpest available statement of how hard the lower-bound problem is.
+1. **`n = 11` has the smallest gap of any case with a non-trivial record — but not the
+   smallest gap outright.** At `0.0882` it is far ahead of the next such case, `n = 19`
+   at `0.4215`, nearly five times wider.
+   Three cases *do* have smaller gaps: `n = 97` (`0.0557`), `n = 78` (`0.0627`) and
+   `n = 61` (`0.0718`), all still held by the trivial grid with Nagamochi’s bound nearly
+   tight. An earlier hand-written version of this table claimed `n = 11` was the smallest
+   outright; generating the data corrected it.
+   Those three are `10² − 3`, `9² − 3` and `8² − 3` — **consecutive unproved members of
+   the family `s(m² − 3) = m`**, which is proved exactly for `m = 3, 4, 5, 6, 7`. Their
+   conjectured optima are integers, their gaps are the narrowest in the table, and they
+   are essentially undiscussed.
+   On this evidence they, not `n = 11`, are the most tractable unproved cases at
+   `n ≤ 100`.
 2. **Nagamochi’s bound is doing nearly all the work.** For 63 of the 65 open cases it is
    the best lower bound in print.
    Only `n = 11` and `n = 12` are governed by a bespoke argument — Stromquist’s — and
@@ -1539,13 +1492,15 @@ covers two values of `n`. Any program should be weighted accordingly.
    Then El Moumni (1999), Stromquist’s 1984 memoranda, Chung–Graham (2009), and
    Arslanov–Bui (2025). Each per the three-format archive discipline in
    [`resources/`](../../../resources/README.md).
-2. **Machine-readable record corpus.** Parse the catalogue SVGs into `(x, y, θ)` triples
-   with their algebraic definitions and minimal polynomials.
-   The [open-frontier table](#the-open-frontier-what-is-actually-unknown) above was
-   built by parsing the catalogue’s *prose*; a real schema would make it derived data
-   rather than a one-off, and would let every record be independently audited for the
-   first time. This is the cheapest high-value artifact in the whole program and
-   everything downstream consumes it.
+2. **Machine-readable record corpus.** A first version now exists:
+   [`frontier/`](../../../frontier/README.md) carries one schema-validated artifact per
+   `n ≤ 100`, built by parsing the catalogue’s *prose* for upper bounds and computing
+   lower bounds from four sources.
+   What it does not yet carry is geometry — the next step is parsing the catalogue SVGs
+   into `(x, y, θ)` triples with their algebraic definitions, which is what would let
+   every record be independently audited by the exact verifier.
+   Extending the corpus past `n = 100` is mechanical for the structured fields; the
+   editorial is the part that does not automate.
 
 ### The verifier, and why it comes before the searcher
 

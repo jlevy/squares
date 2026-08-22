@@ -13,6 +13,9 @@ and a gap of roughly 0.088 in the side length separates them.
 ```
 explorations/packing/
 ├── docs/project/research/  The three research reports (see below)
+├── frontier/               What is known about s(n) for every n <= 100: one
+│                           schema-validated artifact per case, plus editorial.
+│                           See frontier/README.md.
 ├── resources/              Local archive of the primary literature: papers + web
 │                           sources, each kept as original, cleaned .md, and raw
 │                           extraction. See resources/README.md.
@@ -44,6 +47,11 @@ third what to build with.
 | [Packing 11 Unit Squares in a Square](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | The mathematics of `s(11)`: what is proved, what is only conjectured, and why the available proof technique cannot close the gap |
 | [Algorithms and Tooling for Square Packing](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | How packings are searched for, refined from numerical to exact algebraic form, and verified; who holds the records and with what |
 | [FrankenSim as a Rust Toolkit for Square Packing](docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md) | First-hand study of a large Rust simulation framework as a source of certified-arithmetic and determinism building blocks |
+
+The structured record of the problem’s frontier — best known packing and best proved
+lower bound for every `n ≤ 100`, with provenance and per-case editorial — lives in
+[`frontier/`](frontier/README.md) as soft-schema artifacts rather than as a table inside
+a report, so it can be validated and queried.
 
 Claims in the reports are separated by evidential status — proved, computationally
 verified, best known, or asserted-but-unverified — and every citation resolves both to a
