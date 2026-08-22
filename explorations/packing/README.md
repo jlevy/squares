@@ -49,6 +49,12 @@ Claims in the reports are separated by evidential status — proved, computation
 verified, best known, or asserted-but-unverified — and every citation resolves both to a
 full reference and to a local copy in [`resources/`](resources/README.md).
 
+A technical review of the corpus —
+[review-2026-08-22-square-packing-research.md](docs/project/reviews/review-2026-08-22-square-packing-research.md)
+— re-verifies the central mathematics, records the errors and gaps found, and lays out
+the prioritized path from these reports to a complete survey and a computational
+research program.
+
 ## Exact verification
 
 Record packings are published as high-precision decimals, and there is no public tool
