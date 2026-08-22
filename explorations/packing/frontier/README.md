@@ -6,15 +6,31 @@ per case, carrying the best known packing, the best proved lower bound, the prov
 of both, and links into the local literature archive — plus an editorial section on each
 that says what the numbers do not.
 
-## Why this is a folder and not a table
+## Structure here, tables there, generated in between
 
-The research documents carry the narrative.
-This folder carries the **facts**, in a form a tool can read, because a 65-row table
-with seven columns per row is at the edge of what prose can hold accurately — and in
-fact the first version of that table, written by hand into the research document, got a
-headline claim wrong.
-Building it as data caught the error immediately (see
-[The next family to fall](#the-next-family-to-fall) below).
+The research documents keep their tables — a reader should get the whole picture of the
+problem from the report alone, without opening this folder.
+This folder holds the same facts in a form a tool can read, so they can be queried,
+plotted, and checked.
+
+**The duplication is deliberate and it cannot drift**, because the Markdown tables in
+the reports are *generated* from these files by
+[`../tools/render_tables.py`](../tools/render_tables.py), between
+`<!-- BEGIN GENERATED: … -->` markers, and `../test.sh` fails if any is stale:
+
+```bash
+python3 ../tools/render_tables.py           # rewrite the tables in the report
+python3 ../tools/render_tables.py --check   # fail if any is stale
+```
+
+Four tables are generated this way: the open frontier (65 rows), the solved cases (35),
+and the search and proof strategy catalogues (20 and 30). Editing a fact means editing
+the data here and re-rendering; editing a generated table by hand will be caught.
+
+That the structure earns its keep is not a hypothesis.
+The first version of the frontier table was written by hand into the research document
+and got a headline claim wrong; generating it from data caught the error immediately
+(see [The next family to fall](#the-next-family-to-fall) below).
 
 Each `n-NNN.md` is a [softschema](https://github.com/jlevy/softschema) artifact: YAML
 frontmatter carrying the structured payload, validated against
@@ -40,11 +56,12 @@ Not everything belongs in this shape, and the folder deliberately mixes two:
 | --- | --- | --- |
 | One soft-schema artifact per record (`n-NNN.md`) | The per-`n` cases | Heterogeneous, and each carries real editorial content that no schema can hold |
 | A single plain YAML file ([`asymptotic-waste-bounds.yaml`](asymptotic-waste-bounds.yaml)) | The `W(x)` exponent chain | Homogeneous rows, no per-row story; splitting eight bounds into eight files would add ceremony and subtract legibility |
+| A single plain YAML file ([`search-strategies.yaml`](search-strategies.yaml), [`proof-strategies.yaml`](proof-strategies.yaml)) | The 20 search and 30 proof strategies | Homogeneous rows whose meaning is comparative — the point of a catalogue is the shape of the whole list, which one file shows and fifty would hide |
 
 The rule of thumb: **split into artifacts when each row has its own narrative**; keep
-one file when the rows are a sequence and the narrative belongs to the sequence.
-A Markdown table in a research document remains right when the table is small and its
-job is to be read rather than queried.
+one file when the rows are a set and the narrative belongs to the set.
+And keep the Markdown table in the report either way — the structured form is for
+querying and plotting, not for reading.
 
 ## What is in a case
 
@@ -63,6 +80,33 @@ The ones that carry the most weight:
 - `verified_here` — claims independently re-derived in this repository, not taken on
   authority.
 
+## The strategy catalogues
+
+[`search-strategies.yaml`](search-strategies.yaml) and
+[`proof-strategies.yaml`](proof-strategies.yaml) carry the two inventories that define
+the field’s reach: 20 ways anyone has ever *found* a packing, and 30 ways anyone has
+ever *proved* a bound.
+Each entry has an `id`, `name`, `mechanism`, `family`, a status (`outcome` for search,
+`status` for proof), a `note`, and any citation `refs`.
+
+The `family` field is what makes them worth plotting.
+Grouped, the asymmetry that explains why this problem is stuck becomes a picture rather
+than a paragraph:
+
+|  | search | proof |
+| --- | --- | --- |
+| entries | 20 | 30 |
+| families | 4 | 6 |
+| entries that have produced results here | 11 | 16 |
+| largest working family | constructive (9 of 20) | **unavoidable points (10 of 30)** |
+
+Ten of the sixteen working proof strategies are the *same idea* refined — place points,
+prove they are unavoidable, count — while on the search side four genuinely different
+families have each produced records.
+The other ten-entry proof family, the transversal and wider packing-and-covering
+toolkit, is almost entirely **unapplied** to `s(n)`. That contrast is the clearest
+single argument that the lower-bound side has room its practitioners have not used.
+
 ## What the corpus shows
 
 Counts below are computed from the artifacts, not asserted.
@@ -74,7 +118,7 @@ to Stromquist’s single 2003 argument.
 Nothing in this table has been improved since 2005.
 
 **The search frontier is much healthier.** Of the 65 open cases, 31 are still held by
-the trivial grid, but the remaining 34 carry real constructions: 14 hand-built, 11 from
+the trivial grid, but the remaining 34 carry real constructions: 15 hand-built, 11 from
 simulated annealing (all dated 2024–2026), 5 diagonal strips, 3 extensions of smaller
 records. Records move monthly; bounds do not.
 

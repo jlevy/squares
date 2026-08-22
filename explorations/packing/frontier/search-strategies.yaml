@@ -1,0 +1,156 @@
+softschema:
+  contract: packing.squares:StrategyCatalogue/v1
+  status: soft
+kind: search
+description: 'Strategies used to FIND packings, i.e. to establish upper bounds on s(n). Ordered roughly
+  from human to machine. Every upper bound in this subject is a construction: no non-constructive
+  upper bound has ever been obtained.'
+count: 20
+strategies:
+- id: 1
+  name: Axis-aligned grid
+  family: constructive
+  mechanism: The `⌈√n⌉` trivial packing
+  outcome: produced_records
+  note: Yes — optimal for perfect squares and `m²−1`, `m²−2`, `m²−3`
+  refs: []
+- id: 2
+  name: Hand geometric insight
+  family: constructive
+  mechanism: Human construction, often on paper
+  outcome: produced_records
+  note: Yes — Trump `n=11`, Göbel, Hämäläinen, Bidwell `n=17`
+  refs: []
+- id: 3
+  name: 45° tilted families
+  family: constructive
+  mechanism: A block of squares rotated a half-turn diagonal
+  outcome: produced_records
+  note: Yes — `n=5`, `n=10`
+  refs: []
+- id: 4
+  name: Diagonal strips of width `k`
+  family: constructive
+  mechanism: A tilted band crossing the container, corners filled
+  outcome: produced_records
+  note: Yes — Stenlund `n=66` (width-3 strip)
+  refs: []
+- id: 5
+  name: Strip + “L” augmentation
+  family: constructive
+  mechanism: Extend a strip packing with an L-shaped border block
+  outcome: produced_records
+  note: Yes — best known `n=83` from the `n=66` strip
+  refs: []
+- id: 6
+  name: Rational-slope tilts
+  family: constructive
+  mechanism: Tilts at `arctan(p/q)` making contacts commensurate
+  outcome: produced_records
+  note: Yes — e.g. `arctan(8/15)`, `arcsin((√7−1)/4)` for `n=18`
+  refs: []
+- id: 7
+  name: Composition / self-similarity
+  family: constructive
+  mechanism: Combine copies of a smaller good packing
+  outcome: produced_records
+  note: Yes — Ellsworth Dec 2025 joined two `s(50)` copies for `s = 13 + 4/7`
+  refs: []
+- id: 8
+  name: Parametric families for structured `n`
+  family: constructive
+  mechanism: Formulas for `n = m²−k`, `n = m²−m`, `n(n−1)`
+  outcome: produced_records
+  note: Yes — Arslanov et al. on `n(n−1)`
+  refs: []
+- id: 9
+  name: Asymptotic border constructions
+  family: constructive
+  mechanism: Tilt squares near the boundary to absorb fractional waste
+  outcome: produced_records
+  note: Yes — Erdős–Graham and successors, asymptotic only
+  refs: []
+- id: 10
+  name: Simulated annealing
+  family: stochastic_search
+  mechanism: Stochastic perturbation with a cooling schedule
+  outcome: untried_here
+  note: Yes — the current workhorse. Schadt’s program; Ellsworth’s modified version
+  refs: []
+- id: 11
+  name: Billiard / inflation
+  family: stochastic_search
+  mechanism: Grow squares to a jammed state, perturb, repeat
+  outcome: produced_records
+  note: Yes — Gensane–Ryckelynck (`n = 29, 37`; alternative `n = 18`)
+  refs: []
+- id: 12
+  name: Basin hopping / multistart
+  family: stochastic_search
+  mechanism: Many random starts into local optimisation
+  outcome: used_in_field
+  note: Standard in packing generally
+  refs: []
+- id: 13
+  name: Nonlinear programming
+  family: stochastic_search
+  mechanism: Continuous variables with pairwise non-overlap constraints
+  outcome: used_in_field
+  note: Standard; scales poorly with `n`
+  refs: []
+- id: 14
+  name: SAT / constraint programming
+  family: stochastic_search
+  mechanism: Reduce feasibility at a fixed side to a Boolean or CP instance
+  outcome: used_elsewhere
+  note: Used for 2D orthogonal packing; awkward under free rotation
+  refs: []
+- id: 15
+  name: Branch and bound over contact classes
+  family: stochastic_search
+  mechanism: Enumerate combinatorial structures, optimise within each
+  outcome: used_elsewhere
+  note: Used in exact cutting-and-packing
+  refs: []
+- id: 16
+  name: Genetic / evolutionary search
+  family: stochastic_search
+  mechanism: Population methods over configurations
+  outcome: used_elsewhere
+  note: Used in the wider packing literature
+  refs: []
+- id: 17
+  name: Exact algebraic refinement
+  family: exact_refinement
+  mechanism: Fix the contact graph, solve the polynomial system
+  outcome: untried_here
+  note: How exact values are obtained — see below
+  refs: []
+- id: 18
+  name: Rigidity-guided enumeration
+  family: exact_refinement
+  mechanism: Enumerate rigid contact graphs, then solve each
+  outcome: used_in_field
+  note: Standard in sphere/disk packing; the natural analogue here
+  refs: []
+- id: 19
+  name: Interval-verified local optima
+  family: exact_refinement
+  mechanism: Certify a local optimum with interval arithmetic
+  outcome: used_elsewhere
+  note: Used for circle packing; not seen applied to `s(11)`
+  refs: []
+- id: 20
+  name: Catalogue-driven record chasing
+  family: workflow
+  mechanism: Human-computer loop against a public record table
+  outcome: produced_records
+  note: Yes — how the tables actually advance
+  refs: []
+families:
+  constructive: Human or closed-form constructions; every record before 2000 came from here.
+  stochastic_search: Numerical search over the continuous configuration space; the current record
+    engine.
+  exact_refinement: Turning a numerical packing into an exact algebraic one, once the contact graph
+    is fixed.
+  workflow: The human-computer loop around a public record table.

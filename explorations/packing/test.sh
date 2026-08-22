@@ -62,4 +62,24 @@ assert open_n == 65 and nag == 63, "corpus counts drifted from the documented fi
 PY
 
 echo
+echo "== generated tables in sync with frontier/ =="
+python3 tools/render_tables.py --check
+
+echo
+echo "== strategy catalogues =="
+python3 - <<'PY'
+import yaml, pathlib
+for kind, field, n in (("search", "outcome", 20), ("proof", "status", 30)):
+    d = yaml.safe_load(pathlib.Path(f"frontier/{kind}-strategies.yaml").read_text())
+    ss = d["strategies"]
+    assert d["kind"] == kind and d["count"] == len(ss) == n, f"{kind}: expected {n}"
+    assert [s["id"] for s in ss] == list(range(1, n + 1)), f"{kind}: ids not 1..{n}"
+    fams = set(d["families"])
+    for s in ss:
+        assert s["family"] in fams, f"{kind} #{s['id']}: unknown family {s['family']}"
+        assert s[field] and s["name"] and s["mechanism"] and s["note"], f"{kind} #{s['id']}: empty field"
+    print(f"  {kind}: {n} strategies, {len(fams)} families, all fields populated")
+PY
+
+echo
 echo "ALL CHECKS PASSED"

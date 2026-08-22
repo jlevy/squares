@@ -642,29 +642,138 @@ This table is the complement — **every open `n ≤ 100`** — and it is the sp
 systematic attack on this problem, because it shows at a glance where the proof
 machinery stops and how far short it falls.
 
-**The full table lives as structured data, not here.** One artifact per `n` — with the
-best known packing, its algebraic degree and minimal polynomial, the best proved lower
-bound *and which argument supplies it*, provenance, links into the local archive, and an
-editorial note on each case — is in
-[`explorations/packing/frontier/`](../../../frontier/README.md).
-It is schema-validated, so it can be queried rather than re-read, and it does not drift
-from this prose because this prose no longer restates it.
+Upper bounds are the best known packings from **[Kingbird]**; `grid` in the *how* column
+marks an `n` the catalogue does not picture, where the trivial `⌈√n⌉` packing is still
+the best known. `deg` is the algebraic degree of the conjectured optimum where the
+catalogue records a minimal polynomial.
+Lower bounds are the strongest of four sources: the area bound `√n`, Nagamochi’s general
+closed form, monotonicity from the largest proved `m ≤ n`, and Stromquist’s Theorem 2
+for `n ≥ 11`.
 
-That folder was built by parsing the archived record catalogue and computing each lower
-bound from four sources (the area bound `√n`, Nagamochi’s general closed form,
-monotonicity from the largest proved `m ≤ n`, and Stromquist’s Theorem 2 for `n ≥ 11`).
-A hand-written version of the same table previously appeared in this section and
-contained an error that building it as data caught immediately — see point 1 below.
+This table and the solved-case table below are **generated** from
+[`explorations/packing/frontier/`](../../../frontier/README.md), where the same facts
+live as one schema-validated artifact per `n` with provenance, links into the local
+archive, and an editorial note on each case.
+The duplication is deliberate — this report should be readable end to end without
+opening the data — and it is safe because the tables are rendered by
+`tools/render_tables.py`, which `test.sh` re-checks.
+Use the structured form to query or plot; use these tables to read.
 
-|  | `n ≤ 100` |
-| --- | --- |
-| Proved | 35 |
-| **Open** | **65** |
-| Open cases whose lower bound is Nagamochi’s general theorem | 63 |
-| Open cases whose lower bound is bespoke | 2 (`n = 11`, `n = 12`) |
-| Open cases where the trivial grid is still the record | 31 |
-| Open cases with a real construction | 34 |
-| Algebraic degrees occurring | 4, 5, 6, 8, 12, 18, 20, 24, 42, 44, 82 |
+<!-- BEGIN GENERATED: frontier-open (tools/render_tables.py) -->
+
+| `n` | best known `s(n)` | how | deg | best proved lower bound | from | gap |
+| --- | --- | --- | --- | --- | --- | --- |
+| 11 | 3.87708359 | hand | 8 | 3.788854 | unavoidable points | 0.0882 |
+| 12 | 4 | grid | — | 3.788854 | monotone from `s(11)` | 0.2111 |
+| 17 | 4.67553009 | hand | 18 | 4.162278 | Nagamochi | 0.5133 |
+| 18 | `(7/2) + (1/2)√7` = 4.82287566 | hand | — | 4.316625 | Nagamochi | 0.5063 |
+| 19 | `3 + (4/3)√2` = 4.88561808 | hand | — | 4.464102 | Nagamochi | 0.4215 |
+| 20 | 5 | grid | — | 4.605551 | Nagamochi | 0.3944 |
+| 21 | 5 | grid | — | 4.741657 | Nagamochi | 0.2583 |
+| 26 | `(7/2) + (3/2)√2` = 5.62132034 | extension | — | 5.123106 | Nagamochi | 0.4982 |
+| 27 | `5 + (1/2)√2` = 5.70710678 | strip | — | 5.242641 | Nagamochi | 0.4645 |
+| 28 | 5.82444462 | annealing | 6 | 5.358899 | Nagamochi | 0.4655 |
+| 29 | 5.93383346 | annealing | — | 5.472136 | Nagamochi | 0.4617 |
+| 30 | 6 | grid | — | 5.582576 | Nagamochi | 0.4174 |
+| 31 | 6 | grid | — | 5.690416 | Nagamochi | 0.3096 |
+| 32 | 6 | grid | — | 5.795832 | Nagamochi | 0.2042 |
+| 37 | 6.59861961 | hand | 8 | 6.09902 | Nagamochi | 0.4996 |
+| 38 | `6 + (1/2)√2` = 6.70710678 | strip | — | 6.196152 | Nagamochi | 0.511 |
+| 39 | 6.81072208 | annealing | 5 | 6.291503 | Nagamochi | 0.5192 |
+| 40 | `4 + 2 √2` = 6.82842712 | hand | — | 6.385165 | Nagamochi | 0.4433 |
+| 41 | 6.92669309 | annealing | 42 | 6.477226 | Nagamochi | 0.4495 |
+| 42 | 7 | grid | — | 6.567764 | Nagamochi | 0.4322 |
+| 43 | 7 | grid | — | 6.656854 | Nagamochi | 0.3431 |
+| 44 | 7 | grid | — | 6.744563 | Nagamochi | 0.2554 |
+| 45 | 7 | grid | — | 6.830952 | Nagamochi | 0.169 |
+| 50 | `7 + (4/7)` = 7.57142857 | annealing | — | 7.082763 | Nagamochi | 0.4887 |
+| 51 | 7.70079924 | annealing | 12 | 7.164414 | Nagamochi | 0.5364 |
+| 52 | `7 + (1/2)√2` = 7.70710678 | strip | — | 7.244998 | Nagamochi | 0.4621 |
+| 53 | `(13/2) + (1/2)√7` = 7.82287566 | annealing | — | 7.324555 | Nagamochi | 0.4983 |
+| 54 | 7.84666719 | hand | — | 7.403124 | Nagamochi | 0.4435 |
+| 55 | 7.94577101 | annealing | — | 7.480741 | Nagamochi | 0.465 |
+| 56 | 8 | grid | — | 7.557439 | Nagamochi | 0.4426 |
+| 57 | 8 | grid | — | 7.63325 | Nagamochi | 0.3668 |
+| 58 | 8 | grid | — | 7.708204 | Nagamochi | 0.2918 |
+| 59 | 8 | grid | — | 7.78233 | Nagamochi | 0.2177 |
+| 60 | 8 | grid | — | 7.855655 | Nagamochi | 0.1443 |
+| 61 | 8 | grid | — | 7.928203 | Nagamochi | 0.0718 |
+| 65 | `5 + (5/2)√2` = 8.53553391 | hand | — | 8.071068 | Nagamochi | 0.4645 |
+| 66 | `3 + 4 √2` = 8.65685425 | hand | — | 8.141428 | Nagamochi | 0.5154 |
+| 67 | `8 + (1/2)√2` = 8.70710678 | strip | — | 8.211103 | Nagamochi | 0.496 |
+| 68 | 8.80345994 | annealing | — | 8.28011 | Nagamochi | 0.5234 |
+| 69 | 8.82721206 | hand | 82 | 8.348469 | Nagamochi | 0.4787 |
+| 70 | 8.88166676 | hand | 4 | 8.416198 | Nagamochi | 0.4655 |
+| 71 | 8.94407156 | annealing | — | 8.483315 | Nagamochi | 0.4608 |
+| 72 | 9 | grid | — | 8.549834 | Nagamochi | 0.4502 |
+| 73 | 9 | grid | — | 8.615773 | Nagamochi | 0.3842 |
+| 74 | 9 | grid | — | 8.681146 | Nagamochi | 0.3189 |
+| 75 | 9 | grid | — | 8.745967 | Nagamochi | 0.254 |
+| 76 | 9 | grid | — | 8.81025 | Nagamochi | 0.1898 |
+| 77 | 9 | grid | — | 8.874008 | Nagamochi | 0.126 |
+| 78 | 9 | grid | — | 8.937254 | Nagamochi | 0.0627 |
+| 82 | `6 + (5/2)√2` = 9.53553391 | hand | — | 9.062258 | Nagamochi | 0.4733 |
+| 83 | 9.63482562 | extension | 24 | 9.124038 | Nagamochi | 0.5108 |
+| 84 | `9 + (1/2)√2` = 9.70710678 | strip | — | 9.185353 | Nagamochi | 0.5218 |
+| 85 | `(11/2) + 3 √2` = 9.74264069 | hand | — | 9.246211 | Nagamochi | 0.4964 |
+| 86 | `(17/2) + (1/2)√7` = 9.82287566 | extension | — | 9.306624 | Nagamochi | 0.5163 |
+| 87 | 9.83881744 | annealing | 44 | 9.3666 | Nagamochi | 0.4722 |
+| 88 | 9.88815305 | hand | 20 | 9.42615 | Nagamochi | 0.462 |
+| 89 | `5 + (7/2)√2` = 9.94974747 | hand | — | 9.485281 | Nagamochi | 0.4645 |
+| 90 | 10 | grid | — | 9.544004 | Nagamochi | 0.456 |
+| 91 | 10 | grid | — | 9.602325 | Nagamochi | 0.3977 |
+| 92 | 10 | grid | — | 9.660254 | Nagamochi | 0.3397 |
+| 93 | 10 | grid | — | 9.717798 | Nagamochi | 0.2822 |
+| 94 | 10 | grid | — | 9.774964 | Nagamochi | 0.225 |
+| 95 | 10 | grid | — | 9.831761 | Nagamochi | 0.1682 |
+| 96 | 10 | grid | — | 9.888194 | Nagamochi | 0.1118 |
+| 97 | 10 | grid | — | 9.944272 | Nagamochi | 0.0557 |
+
+<!-- END GENERATED: frontier-open -->
+
+**The solved cases, for contrast.**
+
+<!-- BEGIN GENERATED: frontier-solved (tools/render_tables.py) -->
+
+| `n` | `s(n)` | established by | source |
+| --- | --- | --- | --- |
+| 1 | `1` | perfect square | classical |
+| 2 | `2` | elementary | classical |
+| 3 | `2` | elementary | classical |
+| 4 | `2` | perfect square | classical |
+| 5 | `2 + (1/2)√2` | unavoidable points | Frits Göbel (1979) |
+| 6 | `3` | unavoidable points | Michael Kearney, Peter Shiu (2002) |
+| 7 | `3` | unavoidable points | Said El Moumni (1999) |
+| 8 | `3` | unavoidable points | Said El Moumni (1999) |
+| 9 | `3` | perfect square | classical |
+| 10 | `3 + (1/2)√2` | unavoidable points | Walter Stromquist (2003) |
+| 13 | `4` | unavoidable points | Wolfram Bentz (2010) |
+| 14 | `4` | unavoidable points | Erich Friedman (2009) |
+| 15 | `4` | unavoidable points | Said El Moumni (1999) |
+| 16 | `4` | perfect square | classical |
+| 22 | `5` | unavoidable points | Wolfram Bentz (2016) |
+| 23 | `5` | Nagamochi | Hiroshi Nagamochi (2005) |
+| 24 | `5` | unavoidable points | Erich Friedman (1999) |
+| 25 | `5` | perfect square | classical |
+| 33 | `6` | unavoidable points | Wolfram Bentz (2016) |
+| 34 | `6` | Nagamochi | Hiroshi Nagamochi (2005) |
+| 35 | `6` | unavoidable points | Erich Friedman (1999) |
+| 36 | `6` | perfect square | classical |
+| 46 | `7` | unavoidable points | Wolfram Bentz (2010) |
+| 47 | `7` | Nagamochi | Hiroshi Nagamochi (2005) |
+| 48 | `7` | Nagamochi | Hiroshi Nagamochi (2005) |
+| 49 | `7` | perfect square | classical |
+| 62 | `8` | Nagamochi | Hiroshi Nagamochi (2005) |
+| 63 | `8` | Nagamochi | Hiroshi Nagamochi (2005) |
+| 64 | `8` | perfect square | classical |
+| 79 | `9` | Nagamochi | Hiroshi Nagamochi (2005) |
+| 80 | `9` | Nagamochi | Hiroshi Nagamochi (2005) |
+| 81 | `9` | perfect square | classical |
+| 98 | `10` | Nagamochi | Hiroshi Nagamochi (2005) |
+| 99 | `10` | Nagamochi | Hiroshi Nagamochi (2005) |
+| 100 | `10` | perfect square | classical |
+
+<!-- END GENERATED: frontier-solved -->
 
 **What the table says.** Five things, none of them visible from the list of solved cases
 alone.
@@ -743,28 +852,32 @@ has ever been obtained non-constructively: to show `s(n) ≤ a` somebody must ex
 packing. The strategies below are ordered roughly from human to machine, and the table
 records which are known to have produced records.
 
-| # | Strategy | Mechanism | Produced records? |
-| --- | --- | --- | --- |
-| 1 | Axis-aligned grid | The `⌈√n⌉` trivial packing | Yes — optimal for perfect squares and `m²−1`, `m²−2`, `m²−3` |
-| 2 | Hand geometric insight | Human construction, often on paper | Yes — Trump `n=11`, Göbel, Hämäläinen, Bidwell `n=17` |
-| 3 | 45° tilted families | A block of squares rotated a half-turn diagonal | Yes — `n=5`, `n=10` |
-| 4 | Diagonal strips of width `k` | A tilted band crossing the container, corners filled | Yes — Stenlund `n=66` (width-3 strip) |
-| 5 | Strip + “L” augmentation | Extend a strip packing with an L-shaped border block | Yes — best known `n=83` from the `n=66` strip |
-| 6 | Rational-slope tilts | Tilts at `arctan(p/q)` making contacts commensurate | Yes — e.g. `arctan(8/15)`, `arcsin((√7−1)/4)` for `n=18` |
-| 7 | Composition / self-similarity | Combine copies of a smaller good packing | Yes — Ellsworth Dec 2025 joined two `s(50)` copies for `s = 13 + 4/7` |
-| 8 | Parametric families for structured `n` | Formulas for `n = m²−k`, `n = m²−m`, `n(n−1)` | Yes — Arslanov et al. on `n(n−1)` |
-| 9 | Asymptotic border constructions | Tilt squares near the boundary to absorb fractional waste | Yes — Erdős–Graham and successors, asymptotic only |
-| 10 | Simulated annealing | Stochastic perturbation with a cooling schedule | **Yes — the current workhorse.** Schadt’s program; Ellsworth’s modified version |
-| 11 | Billiard / inflation | Grow squares to a jammed state, perturb, repeat | Yes — Gensane–Ryckelynck (`n = 29, 37`; alternative `n = 18`) |
-| 12 | Basin hopping / multistart | Many random starts into local optimisation | Standard in packing generally |
-| 13 | Nonlinear programming | Continuous variables with pairwise non-overlap constraints | Standard; scales poorly with `n` |
-| 14 | SAT / constraint programming | Reduce feasibility at a fixed side to a Boolean or CP instance | Used for 2D orthogonal packing; awkward under free rotation |
-| 15 | Branch and bound over contact classes | Enumerate combinatorial structures, optimise within each | Used in exact cutting-and-packing |
-| 16 | Genetic / evolutionary search | Population methods over configurations | Used in the wider packing literature |
-| 17 | Exact algebraic refinement | Fix the contact graph, solve the polynomial system | **How exact values are obtained** — see below |
-| 18 | Rigidity-guided enumeration | Enumerate rigid contact graphs, then solve each | Standard in sphere/disk packing; the natural analogue here |
-| 19 | Interval-verified local optima | Certify a local optimum with interval arithmetic | Used for circle packing; not seen applied to `s(11)` |
-| 20 | Catalogue-driven record chasing | Human-computer loop against a public record table | Yes — how the tables actually advance |
+<!-- BEGIN GENERATED: search-strategies (tools/render_tables.py) -->
+
+| # | Strategy | Family | Mechanism | Produced records? |
+| --- | --- | --- | --- | --- |
+| 1 | Axis-aligned grid | constructive | The `⌈√n⌉` trivial packing | Yes — optimal for perfect squares and `m²−1`, `m²−2`, `m²−3` |
+| 2 | Hand geometric insight | constructive | Human construction, often on paper | Yes — Trump `n=11`, Göbel, Hämäläinen, Bidwell `n=17` |
+| 3 | 45° tilted families | constructive | A block of squares rotated a half-turn diagonal | Yes — `n=5`, `n=10` |
+| 4 | Diagonal strips of width `k` | constructive | A tilted band crossing the container, corners filled | Yes — Stenlund `n=66` (width-3 strip) |
+| 5 | Strip + “L” augmentation | constructive | Extend a strip packing with an L-shaped border block | Yes — best known `n=83` from the `n=66` strip |
+| 6 | Rational-slope tilts | constructive | Tilts at `arctan(p/q)` making contacts commensurate | Yes — e.g. `arctan(8/15)`, `arcsin((√7−1)/4)` for `n=18` |
+| 7 | Composition / self-similarity | constructive | Combine copies of a smaller good packing | Yes — Ellsworth Dec 2025 joined two `s(50)` copies for `s = 13 + 4/7` |
+| 8 | Parametric families for structured `n` | constructive | Formulas for `n = m²−k`, `n = m²−m`, `n(n−1)` | Yes — Arslanov et al. on `n(n−1)` |
+| 9 | Asymptotic border constructions | constructive | Tilt squares near the boundary to absorb fractional waste | Yes — Erdős–Graham and successors, asymptotic only |
+| 10 | Simulated annealing | stochastic search | Stochastic perturbation with a cooling schedule | Yes — the current workhorse. Schadt’s program; Ellsworth’s modified version |
+| 11 | Billiard / inflation | stochastic search | Grow squares to a jammed state, perturb, repeat | Yes — Gensane–Ryckelynck (`n = 29, 37`; alternative `n = 18`) |
+| 12 | Basin hopping / multistart | stochastic search | Many random starts into local optimisation | Standard in packing generally |
+| 13 | Nonlinear programming | stochastic search | Continuous variables with pairwise non-overlap constraints | Standard; scales poorly with `n` |
+| 14 | SAT / constraint programming | stochastic search | Reduce feasibility at a fixed side to a Boolean or CP instance | Used for 2D orthogonal packing; awkward under free rotation |
+| 15 | Branch and bound over contact classes | stochastic search | Enumerate combinatorial structures, optimise within each | Used in exact cutting-and-packing |
+| 16 | Genetic / evolutionary search | stochastic search | Population methods over configurations | Used in the wider packing literature |
+| 17 | Exact algebraic refinement | exact refinement | Fix the contact graph, solve the polynomial system | How exact values are obtained — see below |
+| 18 | Rigidity-guided enumeration | exact refinement | Enumerate rigid contact graphs, then solve each | Standard in sphere/disk packing; the natural analogue here |
+| 19 | Interval-verified local optima | exact refinement | Certify a local optimum with interval arithmetic | Used for circle packing; not seen applied to `s(11)` |
+| 20 | Catalogue-driven record chasing | workflow | Human-computer loop against a public record table | Yes — how the tables actually advance |
+
+<!-- END GENERATED: search-strategies -->
 
 **On strategy 17, exact algebraic refinement.** This is the step that turns a numerical
 packing into a theorem-shaped object, and it is how the degree-8 polynomial for `n = 11`
@@ -798,38 +911,42 @@ Lower bounds are where the mathematics lives, and the inventory is strikingly sh
 Almost every proved value of `s(n)` rests on one idea — unavoidable point sets — with
 successive papers refining rather than replacing it.
 
-| # | Strategy | Mechanism | Used on this problem? |
-| --- | --- | --- | --- |
-| 1 | Area counting | `s(n) ≥ √n` | Yes — trivially, never tight for non-squares |
-| 2 | **Unavoidable point sets** | Place `n−1` points every unit square must hit; pigeonhole | **Yes — the workhorse for nearly every proved case** |
-| 3 | Nonavoidance lemmas | Geometric sublemmas certifying a set is unavoidable | Yes — Friedman’s Lemmas 1–3; Stromquist’s 1–6 |
-| 4 | The “box” relaxation | Use squares of side strictly `>1` so conditions are open | Yes — Stromquist’s framing device |
-| 5 | Duality / lattice rotation | Rotate the unavoidable lattice a quarter turn; colour argument | Yes — Kearney–Shiu, for `s(6) = s(7) = 3` |
-| 6 | “Almost unavoidable” sets + forcing | Force squares into positions, then derive further points | Yes — Friedman, for the harder `n = 7, 14` |
-| 7 | **Continuously varying families** | Replace a fixed point set by a parametrised family | Yes — Bentz 2016, for `s(22)=5`, `s(33)=6` |
-| 8 | Generalised unavoidable points | Nagamochi’s extension of the method | Yes — `s(m²−1) = s(m²−2) = m` |
-| 9 | Restricted-orientation analysis | Prove a bound for a *subclass* of packings | Yes — Stromquist Thm 3 (0°/45°), settling Gardner |
-| 10 | Exhaustive case analysis | Enumerate combinatorial configurations | Yes — inside most of the above |
-| 11 | Symmetry reduction | Quotient the search by the container’s symmetry group | Yes — standard within case analyses |
-| 12 | Area-charging / measure arguments | Assign waste to regions and integrate | Yes — but asymptotically (Roth–Vaughan) |
-| 13 | Analytic number theory | Bound waste via `√(x − ⌊x⌋)` behaviour | Yes — Roth–Vaughan, asymptotic only |
-| 14 | “Good square” reduction | Show near-axis-aligned squares suffice asymptotically | Yes — asymptotic only (arXiv:2504.09489) |
-| 15 | Interval arithmetic + branch and bound | Rigorously exclude all configurations numerically | **Yes for circles (n≤33); yes for unit squares with rotation but only n=3** |
-| 16 | SOS / Positivstellensatz certificates | Certify semialgebraic infeasibility via SDP | **No known application to this problem** |
-| 17 | LP/SDP relaxation with dual certificates | Bound via a relaxation’s dual solution | No known application |
-| 18 | Machine-checked formal proof | Verify a case analysis in Lean/HOL Light/Isabelle | No for `s(n)` — but the packing precedents are now strong: Flyspeck (2014) and sphere packing in dimension 8 (Feb 2026) |
-| 19 | Electrical-network / Kirchhoff methods | Linear circuit laws on a dissection graph | **Not applicable — see below** |
-| 20 | Graph encodings of dissections (c-nets) | Enumerate planar graphs of a tiling | Not applicable — dissection-only |
-| 21 | **Transversal / hitting-set theory** | `τ ≥ ν`; bound the piercing number | **Implicitly — this *is* the unavoidable-points method**, but the transversal literature has never been applied |
-| 22 | Fractional transversals and LP duality | Relax piercing to an LP; use the dual fractional packing | No known application to `s(n)` |
-| 23 | Integrality-gap bounds (Wegner-type) | Bound `τ/ν` for families of squares | Bounds exist for squares [Caoduro–Sebő]; not connected to `s(n)` |
-| 24 | Gallai- and Helly-type theorems | Structural results forcing small transversals | Not applied here |
-| 25 | Delsarte/Cohn–Elkies LP bounds | Auxiliary functions certifying density bounds | **No** — the triumph of *lattice* sphere packing, no container analogue |
-| 26 | SDP hierarchies (Lasserre/de Laat et al.) | Strengthen LP bounds via moment relaxations | Applied to packing **density** (arXiv:2001.00256, arXiv:1308.4893); no container analogue for `s(n)` |
-| 27 | Compactness / limit arguments | Guarantee the optimum is attained; justify the box device | Yes — foundationally [Martin 2000] |
-| 28 | Discharging | Assign and redistribute local charges | Used in combinatorial geometry; not for `s(n)` |
-| 29 | Probabilistic method | Random constructions or averaging | Not for exact small-`n` values |
-| 30 | Chromatic / clique-ratio arguments | Bound `χ/ω` for square intersection graphs | Adjacent [Caoduro–Sebő]; not a bound on `s(n)` |
+<!-- BEGIN GENERATED: proof-strategies (tools/render_tables.py) -->
+
+| # | Strategy | Family | Mechanism | Used on this problem? |
+| --- | --- | --- | --- | --- |
+| 1 | Area counting | elementary | `s(n) ≥ √n` | Yes — trivially, never tight for non-squares |
+| 2 | Unavoidable point sets | unavoidable points | Place `n−1` points every unit square must hit; pigeonhole | Yes — the workhorse for nearly every proved case |
+| 3 | Nonavoidance lemmas | unavoidable points | Geometric sublemmas certifying a set is unavoidable | Yes — Friedman’s Lemmas 1–3; Stromquist’s 1–6 |
+| 4 | The “box” relaxation | unavoidable points | Use squares of side strictly `>1` so conditions are open | Yes — Stromquist’s framing device |
+| 5 | Duality / lattice rotation | unavoidable points | Rotate the unavoidable lattice a quarter turn; colour argument | Yes — Kearney–Shiu, for `s(6) = s(7) = 3` |
+| 6 | “Almost unavoidable” sets + forcing | unavoidable points | Force squares into positions, then derive further points | Yes — Friedman, for the harder `n = 7, 14` |
+| 7 | Continuously varying families | unavoidable points | Replace a fixed point set by a parametrised family | Yes — Bentz 2016, for `s(22)=5`, `s(33)=6` |
+| 8 | Generalised unavoidable points | unavoidable points | Nagamochi’s extension of the method | Yes — `s(m²−1) = s(m²−2) = m` |
+| 9 | Restricted-orientation analysis | unavoidable points | Prove a bound for a *subclass* of packings | Yes — Stromquist Thm 3 (0°/45°), settling Gardner |
+| 10 | Exhaustive case analysis | unavoidable points | Enumerate combinatorial configurations | Yes — inside most of the above |
+| 11 | Symmetry reduction | unavoidable points | Quotient the search by the container’s symmetry group | Yes — standard within case analyses |
+| 12 | Area-charging / measure arguments | asymptotic | Assign waste to regions and integrate | Yes — but asymptotically (Roth–Vaughan) |
+| 13 | Analytic number theory | asymptotic | Bound waste via `√(x − ⌊x⌋)` behaviour | Yes — Roth–Vaughan, asymptotic only |
+| 14 | “Good square” reduction | asymptotic | Show near-axis-aligned squares suffice asymptotically | Yes — asymptotic only (arXiv:2504.09489) |
+| 15 | Interval arithmetic + branch and bound | modern machinery | Rigorously exclude all configurations numerically | Yes for circles (n≤33); yes for unit squares with rotation but only n=3 |
+| 16 | SOS / Positivstellensatz certificates | modern machinery | Certify semialgebraic infeasibility via SDP | No known application to this problem |
+| 17 | LP/SDP relaxation with dual certificates | modern machinery | Bound via a relaxation’s dual solution | No known application |
+| 18 | Machine-checked formal proof | modern machinery | Verify a case analysis in Lean/HOL Light/Isabelle | No for `s(n)` — but the packing precedents are now strong: Flyspeck (2014) and sphere packing in dimension 8 (Feb 2026) |
+| 19 | Electrical-network / Kirchhoff methods | dissection tradition | Linear circuit laws on a dissection graph | Not applicable — see below |
+| 20 | Graph encodings of dissections (c-nets) | dissection tradition | Enumerate planar graphs of a tiling | Not applicable — dissection-only |
+| 21 | Transversal / hitting-set theory | transversal and wider | `τ ≥ ν`; bound the piercing number | Implicitly — this *is* the unavoidable-points method, but the transversal literature has never been applied |
+| 22 | Fractional transversals and LP duality | transversal and wider | Relax piercing to an LP; use the dual fractional packing | No known application to `s(n)` |
+| 23 | Integrality-gap bounds (Wegner-type) | transversal and wider | Bound `τ/ν` for families of squares | Bounds exist for squares [Caoduro–Sebő]; not connected to `s(n)` |
+| 24 | Gallai- and Helly-type theorems | transversal and wider | Structural results forcing small transversals | Not applied here |
+| 25 | Delsarte/Cohn–Elkies LP bounds | transversal and wider | Auxiliary functions certifying density bounds | No — the triumph of *lattice* sphere packing, no container analogue |
+| 26 | SDP hierarchies (Lasserre/de Laat et al.) | transversal and wider | Strengthen LP bounds via moment relaxations | Applied to packing density (arXiv:2001.00256, arXiv:1308.4893); no container analogue for `s(n)` |
+| 27 | Compactness / limit arguments | transversal and wider | Guarantee the optimum is attained; justify the box device | Yes — foundationally [Martin 2000] |
+| 28 | Discharging | transversal and wider | Assign and redistribute local charges | Used in combinatorial geometry; not for `s(n)` |
+| 29 | Probabilistic method | transversal and wider | Random constructions or averaging | Not for exact small-`n` values |
+| 30 | Chromatic / clique-ratio arguments | transversal and wider | Bound `χ/ω` for square intersection graphs | Adjacent [Caoduro–Sebő]; not a bound on `s(n)` |
+
+<!-- END GENERATED: proof-strategies -->
 
 **The shape of the inventory.** Strategies 2–11 are one family: place points, prove they
 are unavoidable, count.
