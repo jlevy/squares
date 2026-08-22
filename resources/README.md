@@ -38,13 +38,14 @@ them opens with a ⚠️ banner giving the count.
 | File stem | Annotated | Notes |
 | --- | --- | --- |
 | `erdos-graham-1975-on-packing-squares-with-equal-squares` | 17 | **Heavily damaged** 1975 typescript scan. The central theorem was *not extracted at all* — raw shows only `Theorem.` then `(1)` — and the transcription supplies the known `w(α) = Θ(α^{7/11})` as a flagged reconstruction. A reading aid, not a source. |
-| `compound-perfect-squared-squares-1303.0599` | 10 | Seven passages, nearly all **tables and matrices** scrambled by multi-column extraction: the known-perfect-squares counts, two results tables, a plantri graph-count grid, and the incidence/currents/reduction matrices for the 33×32 p-net. Best-effort reconstructions are marked. Do not cite its tables. |
-| `bentz-2016-optimal-packings-22-and-33` | 3 | Includes a probable “Stromberg” → “Stromquist” correction and a reconstructed distance bound in Lemma 7. |
-| `square-packing-x06-wasted-area-2508.04603` | 3 | Three cells of the Section 5 comparison table; one wholly unreconstructable, another may have lost a `log` factor. Do not cite that table. |
+| `compound-perfect-squared-squares-1303.0599` | 10 | Ten passages, nearly all **tables and matrices** scrambled by multi-column extraction. Do not cite its tables. |
+| `bentz-2016-optimal-packings-22-and-33` | 3 | Probable “Stromberg” → “Stromquist” correction and a reconstructed distance bound in Lemma 7. |
+| `friedman-ds7-packing-unit-squares-in-squares` | 3 | **The “Optimal?” column of Table 1 was INFERRED, not read** — the column exists in the original but its per-row values were lost, and the transcriber deduced them from the survey’s own theorems. Both appendix tables (53 and 29 rows) were likewise reassembled from interleaved extractions. The survey predates later results, so a blank means “not proved as of that revision”. **The research doc’s proof-status claims do not rest on this file** — they use Kingbird’s explicit “Proved by” attributions and the individual papers. |
+| `square-packing-x06-wasted-area-2508.04603` | 3 | Three cells of the Section 5 comparison table; one wholly unreconstructable. Do not cite that table. |
 | `arslanov-improved-packings-n-n-1` | 1 | One orientation-constraint formula unrecoverable; its numeric value is preserved. |
 | `bentz-2010-optimal-packings-13-and-46` | 1 | Corollary 7: segments reconstructed **and an inequality direction changed** (`2√2−2 > b` in raw vs `b > 2√2−2` here). Direction UNVERIFIED. The leading claim — intersection length ≥ `2√2−2 ≈ 0.828` — is unambiguous in the raw and unaffected. |
-| `kearney-shiu-2002-efficient-packing-unit-squares` | 1 | One chain of inequalities not reconstructed; the conclusion is stated. |
-| `mcclenagan-2026-optimally-packing-large-square` | 1 | One exponent, `(3−√3)/2`, reconstructed from fragments and flagged as possibly wrong. Independently corroborated elsewhere, so the research doc does not rely on this file for it. |
+| `kearney-shiu-2002-efficient-packing-unit-squares` | 1 | One chain of inequalities in Theorem 2’s proof not reconstructed; the conclusion is stated. |
+| `mcclenagan-2026-optimally-packing-large-square` | 1 | One exponent `(3−√3)/2` reconstructed from fragments, flagged as possibly wrong. Independently corroborated elsewhere, so the research doc does not rely on this file for it. |
 
 Files not listed carry no annotations.
 Note that resolving `(cid:NN)` ligature artifacts, running headers and page numbers is
