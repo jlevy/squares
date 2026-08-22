@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m0n6nyzx5pnark7xve1dy52x
-title: Fully explore the s(11) unit-square packing research line
+title: "Square packing research: s(11), the frontier, and the tooling around it"
 kind: epic
 status: open
 priority: 1
-version: 11
+version: 15
 spec_path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
 labels: []
 dependencies: []
@@ -19,7 +19,18 @@ child_order_hints:
   - is-01m0n7kcep0mgx5jnr6qz39e2h
   - is-01m0n8jv4yts3mwdptj15b4gar
   - is-01m0na001wtn9wb0fkwndgwwrq
+  - is-01m0nrh9mwfjndkzejq34js78c
+  - is-01m0nrh9z5aa3gc9fp6j0vgh05
+  - is-01m0nrjz7jn0q1ktm5n7bhxbwm
 created_at: 2026-08-22T17:00:49.532Z
-updated_at: 2026-08-22T17:58:44.027Z
+updated_at: 2026-08-22T22:13:45.842Z
 ---
-Umbrella for all research on packing 11 unit squares in a smallest square. Covers the open problem itself, its literature, primary-source retrieval, verification of numeric and algebraic claims, and continuous maintenance of the research doc at docs/project/research/research-2026-08-22-packing-11-unit-squares.md.
+Top-level epic for the square-packing line of work. Scope: the mathematics of s(n) with s(11) as the motivating open case; a local archive of the primary literature; a structured frontier corpus covering every n <= 100; and the exact-verification tooling.
+
+State as of 2026-08-22:
+- Three research reports under explorations/packing/docs/project/research/.
+- Literature archive at explorations/packing/resources/ (17 papers, 9 web sources).
+- Frontier corpus at explorations/packing/frontier/: 100 schema-validated per-n artifacts plus four pure-YAML datasets, all at status enforced.
+- Exact verifier at explorations/packing/; test.sh green.
+
+The forward plan is the main report's 'A Research Program' section, which is the authoritative statement of priorities. The child beads here track the pieces of it.
