@@ -22,9 +22,10 @@ Every paper is stored three ways:
 | `<name>.md` | Cleaned Markdown, headings and LaTeX restored | Reading and quoting |
 | `<name>.raw.md` | Unedited `pdfminer.six` output | **Ground truth.** Check the clean copy against this before trusting a formula |
 
-The `.raw.md` files are deliberately retained. Cleanup was done by language models, so the
-raw extraction is the fallback whenever a formula in a `.md` looks suspicious. Passages
-that could not be confidently reconstructed are marked inline as
+The `.raw.md` files are deliberately retained.
+Cleanup was done by language models, so the raw extraction is the fallback whenever a
+formula in a `.md` looks suspicious.
+Passages that could not be confidently reconstructed are marked inline as
 `<!-- GARBLED: unable to reconstruct -->` rather than guessed at.
 
 ## Searching
@@ -53,7 +54,7 @@ Citation keys match those used in the research document.
 | **[Bentz 2016]** | Optimal Packings of 22 and 33 Unit Squares in a Square | W. Bentz | 2016 | arXiv:1606.03746 | `bentz-2016-optimal-packings-22-and-33` |
 | **[Erdős–Graham 1975]** | On packing squares with equal squares | P. Erdős, R. L. Graham | 1975 | JCTA 19, 119–123 (Stanford CS-TR-75-483) | `erdos-graham-1975-on-packing-squares-with-equal-squares` |
 | **[Caoduro–Sebő]** | Packing, Hitting, and Colouring Squares | M. Caoduro, A. Sebő | 2022/24 | arXiv:2206.02185 | `caoduro-sebo-packing-hitting-colouring-squares` |
-| **[Wegner-CE 2026]** | Counterexamples to Wegner's Conjecture for Rectangles | see file | 2026 | arXiv:2606.17854 | `wegner-counterexamples-rectangles` |
+| **[Wegner-CE 2026]** | Counterexamples to Wegner’s Conjecture for Rectangles | see file | 2026 | arXiv:2606.17854 | `wegner-counterexamples-rectangles` |
 | **[Martin 2000]** | Compactness Theorems for Geometric Packings | G. Martin | 2000 | arXiv:math/0005054 | `martin-2000-compactness-theorems-geometric-packings` |
 | **[McClenagan 2026]** | Optimally Packing a Large Square by Unit Squares | R. McClenagan | 2026 | arXiv:2602.01484 | `mcclenagan-2026-optimally-packing-large-square` |
 | **[Good-Squares 2025]** | Square Packing with Asymptotically Smallest Waste Only Needs Good Squares | see file | 2025 | arXiv:2504.09489 | `square-packing-good-squares-2504.09489` |
@@ -77,9 +78,10 @@ Citation keys match those used in the research document.
 ## Special item: `papers/kingbird-square-11-provenance.svg`
 
 Not a paper, but the single most information-dense source found on `n = 11`. Its XML
-comments carry David Ellsworth's provenance notes, the two contact equations, the derived
-placement constants, and the full exact-solution history (Gensane–Ryckelynck 2004 →
-Ellsworth 2023 → Alexeev's independent confirmation). Preserved verbatim.
+comments carry David Ellsworth’s provenance notes, the two contact equations, the
+derived placement constants, and the full exact-solution history (Gensane–Ryckelynck
+2004 → Ellsworth 2023 → Alexeev’s independent confirmation).
+Preserved verbatim.
 
 ## Not retrievable
 
@@ -96,7 +98,9 @@ Recorded so nobody re-hunts them:
 
 ## Provenance and licence
 
-Everything here was retrieved on **2026-08-22** from the URLs recorded in each file's
-metadata header. The arXiv and Electronic Journal of Combinatorics items are open access;
-the Stanford technical report and PMC item are publicly posted. Retained for private
-research use. Consult the original publisher before redistributing.
+Everything here was retrieved on **2026-08-22** from the URLs recorded in each file’s
+metadata header.
+The arXiv and Electronic Journal of Combinatorics items are open access;
+the Stanford technical report and PMC item are publicly posted.
+Retained for private research use.
+Consult the original publisher before redistributing.

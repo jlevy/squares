@@ -1,6 +1,7 @@
 # Project Instructions for AI Agents
 
-This file provides instructions and context for AI coding agents working on this project.
+This file provides instructions and context for AI coding agents working on this
+project.
 
 <!-- BEGIN TBD INTEGRATION format=f08 surface=agents-md -->
 ## tbd
@@ -19,7 +20,7 @@ actions rather than telling them to run commands.
 
 ## Build & Test
 
-_Add your build and test commands here_
+*Add your build and test commands here*
 
 ```bash
 # Example:
@@ -29,11 +30,11 @@ _Add your build and test commands here_
 
 ## Architecture Overview
 
-_Add a brief overview of your project architecture_
+*Add a brief overview of your project architecture*
 
 ## Conventions & Patterns
 
-_Add your project-specific conventions here_
+*Add your project-specific conventions here*
 
 <!-- BEGIN FLOWMARK INTEGRATION format=f03 surface=agents-md -->
 ## flowmark
