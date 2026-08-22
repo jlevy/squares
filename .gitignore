@@ -1,0 +1,5 @@
+# Node tooling: this repo carries a tooling-only package.json for lefthook.
+node_modules/
+
+# Local scratch area, by repo convention.
+/attic/

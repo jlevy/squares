@@ -37,11 +37,13 @@ them opens with a ⚠️ banner giving the count.
 
 | File stem | Annotated | Notes |
 | --- | --- | --- |
-| `erdos-graham-1975-…` | 12 | **Heavily damaged** 1975 typescript scan. The paper’s central theorem was *not extracted at all* — the raw shows only `Theorem.` then `(1)` — and the transcription supplies the known result `w(α) = Θ(α^{7/11})` as a flagged reconstruction. A reading aid, not a source. |
-| `bentz-2016-…` | 3 | Includes a probable “Stromberg” → “Stromquist” correction and a reconstructed distance bound in Lemma 7. |
-| `bentz-2010-…` | 1 | Corollary 7: segments reconstructed, **and an inequality direction changed** (`2√2−2 > b` in the raw vs `b > 2√2−2` here). Direction is UNVERIFIED. The leading claim — common intersection length ≥ `2√2−2 ≈ 0.828` — is unambiguous in the raw and unaffected. |
-| `kearney-shiu-2002-…` | 1 | One chain of inequalities not reconstructed; conclusion stated. |
-| `arslanov-…` | 1 | One orientation constraint formula unrecoverable. |
+| `erdos-graham-1975-on-packing-squares-with-equal-squares` | 17 | **Heavily damaged** 1975 typescript scan. The central theorem was *not extracted at all* — the raw shows only `Theorem.` then `(1)` — and the transcription supplies the known result `w(α) = Θ(α^{7/11})` as a flagged reconstruction. A reading aid, not a source. |
+| `bentz-2016-optimal-packings-22-and-33` | 3 | Includes a probable “Stromberg” → “Stromquist” correction and a reconstructed distance bound in Lemma 7. |
+| `square-packing-x06-wasted-area-2508.04603` | 3 | Three cells of the Section 5 comparison table. One is wholly unreconstructable; the transcriber suspects a `log` factor was lost from another. Do not cite that table. |
+| `arslanov-improved-packings-n-n-1` | 1 | One orientation-constraint formula unrecoverable. |
+| `bentz-2010-optimal-packings-13-and-46` | 1 | Corollary 7: segments reconstructed, **and an inequality direction changed** (`2√2−2 > b` in the raw vs `b > 2√2−2` here). Direction UNVERIFIED. The leading claim — common intersection length ≥ `2√2−2 ≈ 0.828` — is unambiguous in the raw and unaffected. |
+| `kearney-shiu-2002-efficient-packing-unit-squares` | 1 | One chain of inequalities not reconstructed; the conclusion is stated. |
+| `mcclenagan-2026-optimally-packing-large-square` | 1 | One exponent, transcribed as `(3−√3)/2`, reconstructed from fragments and flagged as possibly wrong. That value is independently corroborated by other sources, so the research doc does not depend on this file for it. |
 
 Files not listed carry no annotations.
 Note that resolving `(cid:NN)` ligature artifacts, running headers and page numbers is

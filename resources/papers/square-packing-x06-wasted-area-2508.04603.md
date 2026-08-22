@@ -9,6 +9,13 @@
 
 ---
 
+> ⚠️ **Contains reconstructed passages.**
+> This transcription contains **3** annotated passage(s) where the PDF extraction was
+> damaged and text or mathematics was reconstructed or marked unrecoverable. Search this
+> file for `GARBLED` and `NOTE` to find them.
+> **Any formula near an annotation must be checked against `square-packing-x06-wasted-area-2508.04603.raw.md`**, which is the
+> unedited extraction and the ground truth for this document.
+
 ## Abstract
 
 We show a new construction for square packing, and prove that it is more efficient than previous results.
@@ -388,9 +395,9 @@ We see this being applied in previous results as follows. Note that $\frac{4 - \
 
 | Article | $m^\beta \log^\epsilon m$ | Choice of $m$ | $W_{\beta,\epsilon}(x)$ |
 |---------|--------------------------|----------------|--------------------------|
-| [1] | $\sqrt{m}$ | $x^{8/11}$ | $x^{7/11}$ |
-| [2] | $m^{7/8}$ | $x^{3/4}$ | $x^{5/8}$ |
-| [3] | $m^{5/6} \log^{\frac{2+\sqrt{2}}{4}} m$ | $x^{2-2\alpha}$, with $\alpha = \frac{3+\sqrt{2}}{7}$ | $x^{\frac{4-\sqrt{2}}{7}} \log^{\frac{2+\sqrt{2}}{4}} x$ |
+| [1] | $m$ <!-- GARBLED: raw extraction shows just "m"; expected $m^{7/8}$ based on mathematical framework --> | $x^{8/11}$ | $x^{7/11}$ |
+| [2] | $m^{7/8}$ | $x^{3/4}$ | $x^{5/8}$ <!-- GARBLED: raw extraction shows a "log" fragment before this entry; there may be an additional log factor --> |
+| [3] | $m^{5/6} \log^{\frac{2+\sqrt{2}}{4}} m$ | $x^{2-2\alpha}$, with $\alpha = \frac{3+\sqrt{2}}{7}$ | <!-- GARBLED: unable to reconstruct W column entry for row [3] from raw extraction; fragments suggest an expression involving $(3+\sqrt{2})/7$ or $(4-\sqrt{2})/7$ with a $\log^{(2+\sqrt{2})/4}$ factor --> |
 
 In this article, when $\beta = \frac{3}{4}$, we get:
 

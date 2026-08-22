@@ -9,6 +9,13 @@
 
 ---
 
+> ⚠️ **Contains reconstructed passages.**
+> This transcription contains **1** annotated passage(s) where the PDF extraction was
+> damaged and text or mathematics was reconstructed or marked unrecoverable. Search this
+> file for `GARBLED` and `NOTE` to find them.
+> **Any formula near an annotation must be checked against `mcclenagan-2026-optimally-packing-large-square.raw.md`**, which is the
+> unedited extraction and the ground truth for this document.
+
 **Abstract.** We show that a large square of sidelength $x$ can be packed by unit squares in a manner so that the wasted space $W(x) = O(x^{3/5})$.
 
 Let $S(x)$ denote a square of sidelength $x$ for some large $x$. Pack $S(x)$ as efficiently as possible by squares of unit sidelength with disjoint interiors. Let $W(x)$ denote the minimum amount of area left uncovered in $S(x)$ by any such packing. Of course, if $x$ is an integer, then $W(x) = 0$. In general, when $x$ is not an integer, orienting the unit squares so that they are parallel to the sides of $S(x)$ in a naive manner will generate a wasted space $W(x) = O(x\{x\})$. Here, $\{x\}$ is the fractional part of $x$, and if it is bounded away from 0, the wasted space $W(x)$ simply becomes $O(x)$.
@@ -19,7 +26,7 @@ However, if one packs the squares at slight angles, the wasted space can be decr
 
 $$W(x) > 10^{-100}\sqrt{x - \lfloor x \rfloor}.$$
 
-On the other end, Montgomery improved the upper bound to $W(x) = O(x^{(3+\sqrt{2})/7})$, according to personal communication (see, for example, [1]). In 2009, Fan Chung and Ronald Graham improved it further to $W(x) = O(x^{(3+\sqrt{2})/7}\sqrt{\log x})$. Now, recently in 2020, Chung and Graham claimed that this could be improved to $W(x) = O(x^{3/5})$ (see [1]). Unfortunately, this result has an error in it, which brings the best known bound back to $W(x) = O(x^{(3-\sqrt{3})/2}\sqrt{\log x})$. In this paper, we show that the bound claimed by Chung and Graham in [1] is, in fact, correct, using a new algorithm:
+On the other end, Montgomery improved the upper bound to $W(x) = O(x^{(3+\sqrt{2})/7})$, according to personal communication (see, for example, [1]). In 2009, Fan Chung and Ronald Graham improved it further to $W(x) = O(x^{(3+\sqrt{2})/7}\sqrt{\log x})$. Now, recently in 2020, Chung and Graham claimed that this could be improved to $W(x) = O(x^{3/5})$ (see [1]). Unfortunately, this result has an error in it, which brings the best known bound back to $W(x) = O(x^{(3-\sqrt{3})/2}\sqrt{\log x})$ <!-- GARBLED: the exponent $(3-\sqrt{3})/2$ is reconstructed from fragments "√", "3", "3−", "2" in the raw extraction and may be incorrect -->. In this paper, we show that the bound claimed by Chung and Graham in [1] is, in fact, correct, using a new algorithm:
 
 > *[Figure 2: We begin by packing $S(x)$ trivially except for two rectangles of width $h$. -- not extractable from PDF]*
 
