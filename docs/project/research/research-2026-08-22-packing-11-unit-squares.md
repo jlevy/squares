@@ -164,6 +164,85 @@ conditions form a determined polynomial system — and it is evidence of local o
 It is *not* evidence of global optimality, and this distinction is the crux of the open
 problem.
 
+#### The exact construction: contact equations, coordinates, and closed form
+
+The full defining data of Trump's packing is recoverable, and was reconstructed and
+independently re-verified during this research from the annotated SVG source in David
+Ellsworth's catalogue.
+
+**Composition.** The eleven squares split as **six axis-aligned and five tilted**.
+The axis-aligned six are: one in a corner, one mirrored against the opposite side, one
+offset along the top at `x₀`, and an L-shaped block of three.
+The five tilted squares form a single rigid group, all at the same angle `a`, rotated
+about the point `(1,1)` and offset by `r₁`.
+
+**The tilt angle.** `a = 40.1819372903297164652303423680606…°`, and `sec a` is a root of
+
+```
+x⁸ − 2x⁷ − x⁴ + 2x³ + 8x² − 12x + 5 = 0
+```
+
+so the angle is itself algebraic of degree 8 — the same degree as `s`, as one expects
+since each is a rational function of the other.
+
+**The two contact equations.** The entire configuration is pinned by just two equations
+in `s` and `a`:
+
+```
+(s − 2)·cos a + (s − 3)·sin a = 2
+
+cos a + (s − 1 + (s − 2)·cot a)·csc a − cot a·(3 + 2·cot a) − sin a − (2 − (s − 2)·sin a)·tan a = 1
+```
+
+Eliminating `a` between them yields the degree-8 minimal polynomial for `s`.
+
+**A closed form for `s` in terms of `a`.** Solving the first equation alone gives a
+strikingly compact relation:
+
+```
+s = 2 + (2 + sin a) / (cos a + sin a)
+```
+
+This is the cleanest available characterisation of the packing: one elegant identity
+plus one messy transcendental constraint, whose joint elimination is degree 8.
+
+**Derived constants** (the offsets that place the tilted block):
+
+| Constant | Closed form | Value |
+| --- | --- | --- |
+| `s` | root of the degree-8 polynomial | `3.87708359002281417730789706010096` |
+| `a` | `arcsec` of the degree-8 root | `40.1819372903297164652303423680606°` |
+| `x₀` | `1 + 2·sec a − (s−2)·tan a` | `2.03255831434961478706261630031475` |
+| `r₁` | `1 − (s−3)·cos a` | `0.329908598887370278746514124701845` |
+| `u₁` | `((1+r₁)·cos a − 1)·csc a` | `0.024874535025596953980475509175010` |
+| `v₁` | `cos a − sin a` | `0.118782607549453467521102077399075` |
+| `v₂` | `(s−1)·csc a − r₁ − (3+u₁)·cot a` | `0.547441432087314221163298461396782` |
+
+*Verified independently in this research at 40-digit precision:* both contact equations
+hold with residuals below `10⁻³²`; the closed form for `s` reproduces the published value
+to the same precision; all five derived constants match their closed forms; and `sec a`
+satisfies the degree-8 polynomial above with residual `≈ 3 × 10⁻³³`.
+
+**History of the exact solution — distinct from the packing itself.** This deserves
+separating, because conflating the two is the source of the "Gensane–Ryckelynck improved
+`n = 11`" confusion:
+
+- **1979 — Walter Trump** finds the packing. Published in Gardner's collection *Fractal
+  Music, Hypercards and More* (1991).
+- **1980 — independent rediscovery** by Mats Gustafsson and Magnus Thulin, in the Swedish
+  periodical *Ronden*; also reported by Gardner in November 1980. Friedman's survey notes
+  many independent rediscoveries.
+- **Before 19 May 2004 — Gensane and Ryckelynck** compute the first *exact algebraic*
+  solution, in the DCG paper (p. 10 of 13). They eliminate using a system of **14
+  equations**. They do not publish `s` in reduced root form: only the cosine of one angle
+  (offset by 45°), with a formula in terms of that root given for `2/s` rather than `s`,
+  though presented as a formula for `s`.
+- **4 June 2023 — David Ellsworth** obtains the reduced root form — the degree-8 minimal
+  polynomial recorded throughout this document — and shows the elimination needs only
+  **two** equations rather than fourteen.
+- **4 June 2023, some 13 hours later — Boris Alexeev** independently confirms it by a
+  substantially different method.
+
 ### What Stromquist actually proved (2003)
 
 Walter Stromquist, "Packing 10 or 11 Unit Squares in a Square," *The Electronic Journal
@@ -415,7 +494,7 @@ successive papers refining rather than replacing it.
 | 12 | Area-charging / measure arguments | Assign waste to regions and integrate | Yes — but asymptotically (Roth–Vaughan) |
 | 13 | Analytic number theory | Bound waste via `√(x − ⌊x⌋)` behaviour | Yes — Roth–Vaughan, asymptotic only |
 | 14 | "Good square" reduction | Show near-axis-aligned squares suffice asymptotically | Yes — asymptotic only (arXiv:2504.09489) |
-| 15 | Interval arithmetic + branch and bound | Rigorously exclude all configurations numerically | **No — but proven feasible for circles in a square** |
+| 15 | Interval arithmetic + branch and bound | Rigorously exclude all configurations numerically | **Yes for circles (n≤33); yes for unit squares with rotation but only n=3** |
 | 16 | SOS / Positivstellensatz certificates | Certify semialgebraic infeasibility via SDP | **No known application to this problem** |
 | 17 | LP/SDP relaxation with dual certificates | Bound via a relaxation's dual solution | No known application |
 | 18 | Machine-checked formal proof | Verify a case analysis in Lean/Coq | No — but precedented by Flyspeck for Kepler |
@@ -432,16 +511,43 @@ Strategies 19–20 belong to a different problem entirely.
 That is the honest state of the field: one technique does nearly all the work, and it has
 not moved on `n = 11` since 2003.
 
-**Strategy 15 deserves particular attention.** Computer-assisted optimality proofs by
-interval arithmetic with branch and bound have already succeeded for the densest packings
-of equal *circles* in a square — a problem of comparable flavour, also with irrational
-optima and continuous degrees of freedom.
-The obstruction for squares is that a square has a rotational degree of freedom that
-enters the non-overlap conditions non-smoothly (the separating-axis condition is a
-disjunction), which makes interval branch-and-bound branch far more heavily than in the
-circle case, where non-overlap is a single smooth inequality per pair.
-No attempt on `s(11)` by this route was found.
-It is, in our assessment, the most plausible untried line of attack.
+**Strategy 15, revised.** An earlier draft of this document called rigorous interval
+branch-and-bound "the most plausible untried line of attack."
+That assessment was wrong, and the correction is the most useful calibration in this
+research.
+
+The technique is not untried — it is *developed*, and its ceiling for rotating squares is
+brutally low.
+
+- **For circles**, it is mature. Markót and collaborators produced computer-assisted
+  optimality proofs for the densest packings of equal circles in a square at
+  `n = 28, 29, 30` (roughly 53, 50 and 21 CPU hours respectively) and later `n = 31, 32,
+  33`, using interval branch-and-bound with dedicated acceleration.
+- **For unit squares with free rotation**, the state of the art is Montanher, Neumaier,
+  Markót, Domes and Schichl, "Rigorous packing of unit squares into a circle" (*J. Global
+  Optim.*, 2018). They use an interval branch-and-bound framework with forward-backward
+  constraint propagation, implemented in C++ over the Filib++ and Moore interval
+  libraries. Rotation is handled by giving each square an angle `θ ∈ [0, π/2)` and fixing
+  `θ₁ = 0` without loss of generality. Non-overlap is handled by a **sentinels** method:
+  nine designated points per square are checked for penetration into other squares,
+  reducing the pairwise condition to nine non-smooth function evaluations.
+- **They rigorously solved `n = 3`.** The result is
+  `r₃ ∈ [1.288470508005₄₇, 1.288470508005₅₃]`, obtained on an ordinary laptop.
+  They state the method generalises to any number of squares, but the published rigorous
+  frontier for *rotating* unit squares is three.
+
+The gap between `n = 3` and `n = 11` is the entire point.
+Rotation costs an extra continuous dimension per square *and* turns non-overlap from one
+smooth inequality (circles) into a disjunctive condition, and the configuration space
+grows accordingly.
+Eleven squares is not a modest extrapolation from three; it is eight additional rotational
+degrees of freedom on top of sixteen positional ones.
+
+So the honest assessment is the reverse of the earlier one: this is the most *developed*
+of the modern approaches, it has been aimed at rotating unit squares, and it currently
+falls short of `n = 11` by a very large margin.
+That makes it a benchmark for how hard rigorous certification of `s(11)` would be, rather
+than a promising shortcut.
 
 ### Computational attacks
 
@@ -453,10 +559,27 @@ configurations are perturbed and "inflated" until they jam.
 Secondary sources report that they improved the best known packings for `n = 11, 29, 37`
 and gave an alternative optimal packing of 18 squares.
 
-**The n = 11 claim, and its resolution.** The status of their `n = 11` result requires
-care, and we were unable to obtain the primary text (Springer paywall; ResearchGate and
-Academia.edu returned HTTP 403).
-What the accessible secondary record shows:
+**The n = 11 claim — RESOLVED.** Earlier drafts of this document flagged the
+Gensane–Ryckelynck `n = 11` entry as needing primary-source confirmation.
+It is now settled, from the provenance notes in Ellsworth's catalogue source, which cite
+the DCG paper directly (p. 10 of 13):
+
+> **They did not improve the packing. They computed its exact algebraic solution.**
+
+The `n = 11` entry in secondary summaries of their paper refers to the first exact
+polynomial-root characterisation of Trump's 1979 configuration, not to a denser
+arrangement.
+Their elimination used a system of 14 equations, and they published a formula for `2/s`
+rather than `s` (while presenting it as a formula for `s`) and gave only the cosine of a
+45°-offset angle — which is very plausibly how the secondary literature came to describe
+the result as an improvement in `s`.
+This is consistent with every record catalogue continuing to attribute `n = 11` to Trump,
+1979, and with Gensane's February 2023 confirmation that the program could not improve on
+the 1979 packing.
+See [The exact construction](#the-exact-construction-contact-equations-coordinates-and-closed-form)
+for the corrected timeline.
+
+The remaining secondary record, retained for context:
 
 - Gensane and Ryckelynck "thought in 2004 that their program could slightly improve the
   packing from 1979."
@@ -468,10 +591,10 @@ What the accessible secondary record shows:
   and refined by Gensane et al. in 2004," which is consistent with a *numerical
   refinement of the same configuration* rather than a better configuration.
 
-The best reading of the evidence is that the 2004/2005 `n = 11` entry was a refinement or
-a marginal numerical artifact of the same geometric arrangement, later clarified as not
-constituting an improvement.
-**This should be confirmed against the primary DCG text before being relied upon.**
+The reading above is now confirmed rather than conjectural.
+The one detail still resting on a secondary source is the internal content of the DCG
+paper itself, which remains paywalled; Ellsworth's annotation cites it by page and
+reproduces its formula, which we treat as reliable.
 
 **A 2023 note.** A document titled "Packing of 11 unit squares in a square with minimum
 size" was posted (ResearchGate, March 2023; author almost certainly Walter Trump, whose
@@ -644,6 +767,8 @@ worth recording so they are not propagated.
 | `n = 11` is "the smallest example where the best known packing contains squares at three different angles" | **False** | That is `n = 17` (Bidwell, 1998). `n = 11` uses two orientation classes: axis-aligned and `≈ 40.182°`. |
 | The Trinity Four "discovered the first Perfect Squared Squares" | **Misattributed** | Roland Sprague published the first perfect squared square (order 55, side 4205) in 1939, ahead of Brooks–Smith–Stone–Tutte. The Cambridge group built the theory. |
 | Kirchhoff's-law / Smith-diagram methods are a promising route to new bounds here | **False** | The method requires a gapless tiling by distinct axis-aligned squares and yields rational answers by construction. All four conditions fail for `s(11)`. See the dedicated section. |
+| Gensane and Ryckelynck (2004/05) improved the `n = 11` packing | **False** | They computed its first *exact algebraic solution*, not a denser packing. The 1979 configuration is unchanged. |
+| *Our own earlier draft:* rigorous interval branch-and-bound is "the most plausible untried line of attack" | **Wrong — corrected** | It is not untried. It has been applied to rotating unit squares (Montanher et al. 2018) and rigorously reaches `n = 3`. It is the most *developed* modern approach and falls far short of `n = 11`. |
 
 The third row is a useful caution: at least one automated summarizer produced
 self-contradictory arithmetic while citing a correct source.
@@ -735,13 +860,24 @@ These are frequently conflated with the present problem in casual sources:
    algebraically — which is exactly how the degree-8 polynomial is derived. The algebra
    just stops being linear, and that is the whole difficulty.
 
-10. **Two modern general-purpose techniques appear genuinely untried here.** Rigorous
-    interval branch-and-bound has already produced computer-assisted optimality proofs
-    for equal *circles* in a square, and Positivstellensatz/SOS certificates are the
-    standard machinery for certifying semialgebraic infeasibility. Neither appears in the
-    `s(11)` literature. The square's rotational degree of freedom makes non-overlap a
-    disjunctive rather than smooth condition, which is a real obstacle for the first —
-    but "harder than circles" is not "impossible", and nobody seems to have tried.
+10. **Rigorous certification is developed, and its ceiling for rotating squares is
+    `n = 3`.** This corrects an earlier assessment in this document. Interval
+    branch-and-bound is mature for circles (optimality proofs to `n = 33`) and has been
+    applied to unit squares *with free rotation* by Montanher et al. (2018), who
+    rigorously settled three squares in a circle using a sentinels formulation of
+    non-overlap. Eleven squares means eight more rotational degrees of freedom on top of
+    sixteen positional ones, against a disjunctive non-overlap condition. The technique
+    is therefore a **measure of the difficulty** of certifying `s(11)`, not a shortcut
+    past it. Positivstellensatz/SOS certificates remain, as far as this research found,
+    genuinely unattempted.
+
+11. **The packing is fully explicit, and the algebra is small.** The whole configuration
+    — six axis-aligned squares and five tilted at a common angle — is pinned by just
+    **two** contact equations, from which the degree-8 polynomial follows by elimination.
+    One of them reduces to the compact `s = 2 + (2 + sin a)/(cos a + sin a)`. Gensane and
+    Ryckelynck needed fourteen equations in 2004; Ellsworth showed two suffice in 2023.
+    The obstruction to proving optimality is emphatically *not* that the candidate is
+    complicated — it is that nothing rules out the configurations nobody has thought of.
 
 ## Open Questions
 
@@ -755,11 +891,19 @@ These are frequently conflated with the present problem in casual sources:
       over contact classes, as used for rigorous circle packing in a circle) close the
       gap? This has been done for related packing problems but no attempt on `s(11)` was
       found.
-- [ ] Verify the Gensane–Ryckelynck `n = 11` entry against the primary DCG text and
-      determine exactly what was claimed in 2004/2005 versus retracted in 2023.
+- [x] ~~Verify the Gensane–Ryckelynck `n = 11` entry~~ — **resolved**: they produced the
+      first exact algebraic solution of Trump's packing (14-equation elimination,
+      publishing a formula for `2/s`), not an improved packing. Nothing was retracted;
+      the secondary literature mis-described an exact-solution result as a record improvement.
+- [x] ~~Obtain the exact coordinates of all 11 squares~~ — **resolved**: extracted from
+      the catalogue SVG source and re-verified at 40-digit precision. See
+      [The exact construction](#the-exact-construction-contact-equations-coordinates-and-closed-form).
 - [ ] Obtain the full text of the March 2023 "Packing of 11 unit squares in a square with
-      minimum size" note and the exact coordinates of all 11 squares (extractable from the
-      Kingbird SVG source).
+      minimum size" note (ResearchGate 403).
+- [ ] Locate Boris Alexeev's independent June 2023 derivation and record the
+      "substantially different method" it used.
+- [ ] Trace the 1980 Gustafsson–Thulin rediscovery to the primary Swedish source
+      (*Ronden*); Ellsworth notes he has not read it directly either.
 - [x] ~~Resolve the `n = 23` discrepancy~~ — **resolved**: `n = 23` is covered by
       Nagamochi's `s(m²−1) = s(m²−2) = m` at `m = 5`, and other enumerations list it
       explicitly. Wikipedia's list is simply incomplete.
@@ -803,8 +947,8 @@ Gensane–Ryckelynck primary text and the March 2023 note.
 Claims resting on those are marked as secondary and flagged in
 [Open Questions](#open-questions).
 
-**Link validation.** All 26 cited URLs were re-checked with `curl` after the second pass.
-Twenty-four return HTTP 200.
+**Link validation.** All 30 cited URLs were re-checked with `curl` after the third pass.
+Twenty-eight return HTTP 200.
 Two return bot-blocking codes to automated checkers but are valid in a browser:
 ScienceDirect (403) and YouTube (429).
 Two defects found in the first pass were fixed: a citation pointing at the wrong
@@ -822,6 +966,14 @@ The non-transferability argument rests on four independent conditions, of which 
 rationality objection is self-contained and decisive: it follows from the linearity of
 Kirchhoff's laws together with the degree-8 irreducibility established in the first pass.
 The `n = 23` question left open after the first pass was resolved.
+
+**Third research pass (bead-tracked).** Work was decomposed into a tbd epic hierarchy so
+that no strand is lost, and this pass executed the highest-priority beads. It produced
+the exact construction data, resolved the Gensane–Ryckelynck question from the catalogue's
+own cited provenance, and overturned this document's earlier claim that rigorous interval
+branch-and-bound was untried.
+All contact equations and derived constants were re-verified at 40-digit precision with
+mpmath; residuals are below `10⁻³²` throughout.
 
 **Confidence.** High for everything sourced to the Stromquist paper (read directly),
 Friedman's survey, and the numeric verifications.
@@ -866,11 +1018,18 @@ The squared-square dissection tradition (for contrast — a different problem):
 - [Wolfram MathWorld — Perfect Square Dissection](https://mathworld.wolfram.com/PerfectSquareDissection.html)
 - [Compound Perfect Squared Squares of the Order Twenties, arXiv:1303.0599](https://arxiv.org/abs/1303.0599)
 
+Rigorous computational methods (the certification frontier):
+
+- [T. Montanher, A. Neumaier, M. C. Markót, F. Domes, H. Schichl, "Rigorous packing of unit squares into a circle," *J. Global Optim.* (2018)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6394747/) — interval branch-and-bound with sentinels; the rigorous frontier for *rotating* unit squares, at `n = 3`.
+- [M. C. Markót, "Optimal Packing of 28 Equal Circles in a Unit Square — The First Reliable Solution," *Numerical Algorithms*](https://link.springer.com/article/10.1023/B:NUMA.0000049472.75023.0a)
+- [Improved interval methods for solving circle packing problems in the unit square](https://pmc.ncbi.nlm.nih.gov/articles/PMC8550790/)
+
 Record catalogues and reference works:
 
 - [Erich Friedman's Packing Center — Packing Unit Squares in Squares](https://erich-friedman.github.io/papers/squares/squares.html)
 - [Kingbird, "Squares in Squares"](https://kingbird.myphotos.cc/packing/squares_in_squares.html) — exact minimal polynomials, rigidity flags, SVG layouts.
 - [Kingbird, "Squares in Squares: Older / Alternative Packings"](https://kingbird.myphotos.cc/packing/squares_in_squares__compared.html) — supersession history, showing which records fell to which method and when.
+- [Kingbird, `square-11.svg`](https://kingbird.myphotos.cc/packing/square-11.svg) — the `n = 11` layout. Its XML comments carry David Ellsworth's provenance notes, the two contact equations, the derived constants, and the exact-solution history; the single most information-dense source found on this case.
 - [Wikipedia, "Square packing"](https://en.wikipedia.org/wiki/Square_packing)
 
 Expository:
