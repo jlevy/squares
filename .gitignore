@@ -3,3 +3,7 @@ node_modules/
 
 # Local scratch area, by repo convention.
 /attic/
+
+# Python bytecode from the packing explorations.
+__pycache__/
+*.py[cod]
