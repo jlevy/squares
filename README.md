@@ -1,7 +1,7 @@
 # Thinking Scratchpad
 
-This repository contains evidence-ranked research reports on computation,
-mathematical foundations, physics, and biology.
+This repository contains evidence-ranked research reports on computation, mathematical
+foundations, physics, and biology.
 
 ## Research
 
