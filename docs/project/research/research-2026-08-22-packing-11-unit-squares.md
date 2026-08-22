@@ -349,10 +349,12 @@ degenerate boundary cases.
 
 For Theorem 2, Stromquist exhibits **ten** unavoidable points in a square of side
 `2 + 2√(4/5)`, which rules out eleven boxes.
-Four of the points sit at coordinates including `(1, 1)` and points at `s/2`; the rest
+Four of the points sit at `(1, 1)`, `(s/2, s/2)`, `(1, s/2)` and `(3/2, 1)`; the rest
 are placed symmetrically.
-The vertical distance between the rows of points is `√(4/5) ≈ 0.894`, and the triangles
-in the construction are congruent with sloping sides of length exactly 1.
+The vertical distance between the rows of points is `s/2 − 1 = √(4/5) ≈ 0.894`, and the
+triangles in the construction are congruent with sloping sides of length exactly 1.
+(These exact coordinates come from the archived transcription of **[Stromquist 2003]**,
+which resolves detail the raw PDF extraction had mangled.)
 
 **Nonavoidance lemmas.** Proving that a candidate set is genuinely unavoidable requires
 geometric lemmas of the form “if the *center* of a box lies in region `R`, the box must
