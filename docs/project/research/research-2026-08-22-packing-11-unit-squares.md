@@ -500,6 +500,19 @@ No case with a higher-degree answer has ever been resolved.
 `n = 11` would be the first, and this is likely not a coincidence but a reflection of the
 proof technology's reach.
 
+**`n = 11` is the smallest open case, but not the only small one — `n = 12` is open too.**
+This is worth stating because at least one secondary summary asserts `s(12) = 4` on the
+bogus ground that "12 squares fit in a 4×4 arrangement", which establishes only
+`s(12) ≤ 4`.
+The catalogue **[Kingbird]** is unambiguous about proof status: its `n = 10` entry reads
+"Proved by Walter Stromquist in 2003", its `n = 13` entry "Proved by Wolfram Bentz", and
+its **`n = 11` entry carries no proof attribution at all** — only "Found by Walter Trump
+in 1979" and "Rigid."
+For `n = 12`, note the direction of implication: since 12 squares are easier to pack than
+13, proving `s(12) = 4` is **strictly stronger** than proving `s(13) = 4`. `s(13) = 4` is
+proved; `s(12) = 4` is not, and 12 appears in no published list of settled cases.
+So the open region begins at 11 and continues at 12.
+
 **A cautionary counterexample.** It was conjectured that `s(n² − n) = n` for small `n`.
 **[Friedman DS7]** records the smallest known counterexample, due to **Lars Cleemann**:
 `s(17² − 17) < 17`, i.e. 272 unit squares fit in a square of side 17 with room to spare.
@@ -610,7 +623,7 @@ successive papers refining rather than replacing it.
 | 23 | Integrality-gap bounds (Wegner-type) | Bound `τ/ν` for families of squares | Bounds exist for squares [Caoduro–Sebő]; not connected to `s(n)` |
 | 24 | Gallai- and Helly-type theorems | Structural results forcing small transversals | Not applied here |
 | 25 | Delsarte/Cohn–Elkies LP bounds | Auxiliary functions certifying density bounds | **No** — the triumph of *lattice* sphere packing, no container analogue |
-| 26 | SDP hierarchies (Lasserre/de Laat et al.) | Strengthen LP bounds via moment relaxations | No known application to container square packing |
+| 26 | SDP hierarchies (Lasserre/de Laat et al.) | Strengthen LP bounds via moment relaxations | Applied to packing **density** (arXiv:2001.00256, arXiv:1308.4893); no container analogue for `s(n)` |
 | 27 | Compactness / limit arguments | Guarantee the optimum is attained; justify the box device | Yes — foundationally [Martin 2000] |
 | 28 | Discharging | Assign and redistribute local charges | Used in combinatorial geometry; not for `s(n)` |
 | 29 | Probabilistic method | Random constructions or averaging | Not for exact small-`n` values |
@@ -1359,6 +1372,9 @@ faithful `.raw.md` extraction.
 - **[Friedman Center]** — Erich Friedman's Packing Center, squares page.
   [Online](https://erich-friedman.github.io/papers/squares/squares.html) ·
   local `web/friedman-packing-center-squares`.
+- **[Kingbird]** is also the clearest source on *proof status*: entries carry an explicit
+  "Proved by …" line where one exists, and `n = 11` carries none. Its records are live —
+  several were improved by David Ellsworth as recently as February 2026.
 - **[Wikipedia]** — "Square packing."
   [Online](https://en.wikipedia.org/wiki/Square_packing) ·
   local `web/wikipedia-square-packing`.
