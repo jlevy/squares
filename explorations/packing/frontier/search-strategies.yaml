@@ -1,6 +1,7 @@
 softschema:
   contract: packing.squares:StrategyCatalogue/v1
-  status: soft
+  schema: strategy-catalogue.schema.yaml
+  status: enforced
 kind: search
 description: 'Strategies used to FIND packings, i.e. to establish upper bounds on s(n). Ordered roughly
   from human to machine. Every upper bound in this subject is a construction: no non-constructive

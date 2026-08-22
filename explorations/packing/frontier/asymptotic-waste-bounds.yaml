@@ -4,7 +4,8 @@
 # choice. Narrative lives in the research document's asymptotic section.
 softschema:
   contract: packing.squares:AsymptoticWasteBounds/v1
-  status: soft
+  schema: asymptotic-waste-bounds.schema.yaml
+  status: enforced
 
 quantity: W(x)
 definition: >

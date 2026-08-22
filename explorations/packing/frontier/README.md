@@ -48,20 +48,52 @@ uvx softschema@latest validate n-011.md
 for f in n-*.md; do uvx softschema@latest validate "$f" >/dev/null || echo "FAIL $f"; done
 ```
 
-## Choosing a format per dataset
+## Every file here is a soft-schema artifact
 
-Not everything belongs in this shape, and the folder deliberately mixes two:
+All six data files declare a contract, point at a compiled JSON Schema, and validate at
+`status: enforced`. Nothing in this folder is structured-looking YAML that nothing
+checks.
 
-| Shape | Used for | Why |
+| File(s) | Profile | Schema |
 | --- | --- | --- |
-| One soft-schema artifact per record (`n-NNN.md`) | The per-`n` cases | Heterogeneous, and each carries real editorial content that no schema can hold |
-| A single plain YAML file ([`asymptotic-waste-bounds.yaml`](asymptotic-waste-bounds.yaml)) | The `W(x)` exponent chain | Homogeneous rows, no per-row story; splitting eight bounds into eight files would add ceremony and subtract legibility |
-| A single plain YAML file ([`search-strategies.yaml`](search-strategies.yaml), [`proof-strategies.yaml`](proof-strategies.yaml)) | The 20 search and 30 proof strategies | Homogeneous rows whose meaning is comparative — the point of a catalogue is the shape of the whole list, which one file shows and fifty would hide |
+| `n-001.md` … `n-100.md` | `frontmatter-md` | `square-packing-case.schema.yaml` |
+| `search-strategies.yaml`, `proof-strategies.yaml` | `pure-yaml` | `strategy-catalogue.schema.yaml` |
+| `asymptotic-waste-bounds.yaml` | `pure-yaml` | `asymptotic-waste-bounds.schema.yaml` |
+| `source-availability.yaml` | `pure-yaml` | `source-availability.schema.yaml` |
 
-The rule of thumb: **split into artifacts when each row has its own narrative**; keep
-one file when the rows are a set and the narrative belongs to the set.
-And keep the Markdown table in the report either way — the structured form is for
-querying and plotting, not for reading.
+```bash
+python3 ../tools/validate_schemas.py    # all of it, no network
+```
+
+`../test.sh` runs that, so an artifact cannot drift from its schema unnoticed.
+
+**A caveat about how the pure-YAML files are validated.** softschema’s spec defines the
+`pure-yaml` profile, and its library implements it correctly — but as of 0.6.1 the CLI
+reads every artifact with the frontmatter reader and builds its contract without a
+profile, so `softschema validate` rejects a conforming pure-YAML file with
+`no_frontmatter`. Filed upstream as
+[jlevy/softschema#38](https://github.com/jlevy/softschema/issues/38), with a reduction
+showing the library returns `valid` for the same file when the profile is set
+explicitly.
+
+Until that lands, `tools/validate_schemas.py` validates the pure-YAML datasets against
+the *same compiled schema the CLI would use*, so `status: enforced` on those files is a
+fact rather than an aspiration.
+The Markdown artifacts are additionally checkable with the CLI directly:
+
+```bash
+uvx softschema@latest validate n-011.md
+```
+
+Leaving them declared-but-unchecked was the alternative, and it is the exact failure
+this project keeps finding in its own sources: a claim of rigour that nothing tests.
+
+The schemas are written to catch real mistakes, not to decorate.
+Verified by negative control — each of these is rejected: a search entry carrying a
+proof `status` field (or vice versa, enforced by a JSON Schema conditional on `kind`),
+an invented `blocker` value, an upper-bound `exponent` below the `0.5` floor that
+Roth–Vaughan establish, a catalogue `count` disagreeing with its entry list, and a case
+`status` outside `{proved, open}`.
 
 ## What is in a case
 

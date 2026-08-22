@@ -13,7 +13,8 @@
 # last checked and the exact evidence.
 softschema:
   contract: packing.squares:SourceAvailability/v1
-  status: soft
+  schema: source-availability.schema.yaml
+  status: enforced
 
 last_checked: '2026-08-22'
 archive: explorations/packing/resources/

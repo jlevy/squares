@@ -62,6 +62,10 @@ assert open_n == 65 and nag == 63, "corpus counts drifted from the documented fi
 PY
 
 echo
+echo "== soft-schema validation =="
+python3 tools/validate_schemas.py
+
+echo
 echo "== generated tables in sync with frontier/ =="
 python3 tools/render_tables.py --check
 

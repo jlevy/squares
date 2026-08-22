@@ -1,6 +1,7 @@
 softschema:
   contract: packing.squares:StrategyCatalogue/v1
-  status: soft
+  schema: strategy-catalogue.schema.yaml
+  status: enforced
 kind: proof
 description: 'Strategies for PROVING bounds, overwhelmingly lower bounds. The inventory is strikingly
   short: essentially one idea, unavoidable point sets, underlies nearly every proved value, with
