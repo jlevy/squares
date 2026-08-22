@@ -3,9 +3,9 @@ type: is
 id: is-01m0nkcmesgdw5aa55mgaq4mh7
 title: Apply the 2026-08-22 technical review to the research docs
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 17
+version: 18
 labels: []
 dependencies: []
 child_order_hints:
@@ -26,5 +26,7 @@ child_order_hints:
   - is-01m0nkdhkvxkzs6szz9ngwc523
   - is-01m0nkdhxxf0vx0xk9dk821hak
 created_at: 2026-08-22T20:42:55.321Z
-updated_at: 2026-08-22T20:43:25.501Z
+updated_at: 2026-08-22T20:59:43.199Z
+closed_at: 2026-08-22T20:59:43.199Z
+close_reason: All children applied and committed in cde267a; Nagamochi's general bound and m^2-k families now recorded in the main doc
 ---
