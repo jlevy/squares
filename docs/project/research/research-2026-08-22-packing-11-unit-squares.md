@@ -407,6 +407,7 @@ must consume a fixed quantum of it:
 | A finite point set, each point worth 1 | 1 point | The classical unavoidable-points method: **[Friedman DS7]**, **[Stromquist 2003]** |
 | A point set with one **sliding point** on a segment | 1 point, for every placement of the slider | **[Bentz 2010]** |
 | **Line segments, measured by length of intersection** | A minimum intersection length | **[Bentz 2010]**, Corollary 7 |
+| **Weighted points, segments, and a rectangular area combined** | A weighted quantum | A “more complex configuration” cited by **[Bentz 2016]** |
 | A **continuously varying family** of point sets | 1 point, uniformly along the family | **[Bentz 2016]**, Theorem 8 |
 
 The progression is a steady weakening of the discreteness assumption, and it matters for
@@ -785,11 +786,14 @@ independently and in isolation, one unavoidable point set at a time.
 
 **And the field is already halfway there without saying so.** The resource-starvation
 progression above — points worth 1, then sliding points, then *line segments measured by
-intersection length* **[Bentz 2010]**, then continuously varying families
-**[Bentz 2016]** — is precisely a drift from integral transversals toward **fractional,
-measure-valued** ones.
-Bentz’s Corollary 7, requiring a minimum total intersection *length* of `2√2 − 2` rather
-than a point hit, is a fractional certificate in all but name.
+intersection length* **[Bentz 2010]**, then a combined system of **weighted** points,
+segments and a rectangular *area*, then continuously varying families **[Bentz 2016]** —
+is precisely a drift from integral transversals toward **fractional, measure-valued**
+ones. A system of *weighted* points is a fractional transversal in the most literal
+sense: it assigns each point a value in `[0,1]` and requires the total collected by any
+box to reach a threshold, which is exactly the LP relaxation `τ*` of the hitting-set
+problem. Bentz’s Corollary 7, requiring a minimum total intersection *length* of
+`2√2 − 2` rather than a point hit, is a fractional certificate in all but name.
 That the field arrived there independently, without the transversal vocabulary, is
 suggestive: `τ*` (fractional piercing) is an LP whose dual is a fractional packing, and
 LP duality is exactly the kind of certificate this literature currently lacks and keeps
