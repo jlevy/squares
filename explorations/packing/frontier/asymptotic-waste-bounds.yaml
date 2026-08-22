@@ -1,0 +1,132 @@
+# Bounds on W(x), the wasted area when a square of side x is packed with unit
+# squares. Homogeneous rows with no per-row narrative, so this is plain YAML
+# rather than one soft-schema artifact per result -- see README.md on format
+# choice. Narrative lives in the research document's asymptotic section.
+softschema:
+  contract: packing.squares:AsymptoticWasteBounds/v1
+  schema: asymptotic-waste-bounds.schema.yaml
+  status: enforced
+
+quantity: W(x)
+definition: >
+  The minimum wasted area when a large square of side length x is packed with
+  non-overlapping unit squares; equivalently x^2 minus the maximum number of unit
+  squares that fit.
+open_problem: >
+  The precise asymptotic growth rate is unknown, even for half-integer side
+  lengths. Upper bounds stand at O(x^{3/5}); the only lower bound is Omega(sqrt(x))
+  at worst-case x.
+
+upper_bounds:
+  - bound: O(x^{7/11})
+    exponent: 0.63636
+    authors: [Paul Erdős, Ronald Graham]
+    year: 1975
+    source_key: "[Erdős–Graham 1975]"
+    local: papers/erdos-graham-1975-on-packing-squares-with-equal-squares
+    note: >
+      The origin of the insight that tilted unit squares beat axis-aligned ones --
+      the same phenomenon that makes s(11) interesting, appearing asymptotically.
+  - bound: O(x^{(3-sqrt(3))/2 + eps})
+    exponent: 0.63397
+    authors: [Hugh Montgomery]
+    year: null
+    source_key: "[Friedman DS7]"
+    local: papers/friedman-ds7-packing-unit-squares-in-squares
+    note: >
+      Unpublished. The exponent is confirmed by Roth and Vaughan themselves, who
+      record it as (3 - sqrt(3))/2 + eps = 0.633974... + eps; this matches DS7's
+      2023 corrigendum and contradicts McClenagan 2026, which attributes
+      (3+sqrt(2))/7 to Montgomery -- that is Chung and Graham's 2009 exponent.
+  - bound: O(x^{(3+sqrt(2))/7} log x)
+    exponent: 0.63060
+    authors: [Fan Chung, Ronald Graham]
+    year: 2009
+    source_key: "[Chung–Graham 2009]"
+    local: null
+    retrieved: false
+  - bound: O(x^{5/8})
+    exponent: 0.62500
+    authors: [Shuang Wang, Tian Dong, Jiamin Li]
+    year: 2016
+    source_key: "[Wang–Dong–Li 2016]"
+    local: papers/wang-dong-li-2016-new-result-packing-unit-squares
+    note: >
+      Improves the covering-waste problem by the same exponent, from
+      x^2 + O(x^{(3+sqrt(2))/7} log x) to x^2 + O(x^{5/8}).
+  - bound: O(x^{3/5})
+    exponent: 0.60000
+    authors: [Fan Chung, Ronald Graham]
+    year: 2020
+    source_key: "[Chung–Graham 2020]"
+    local: null
+    retrieved: false
+    status: erroneous
+    note: >
+      McClenagan states the proof "has an error in it, which brings the best known
+      bound back". Treat O(x^{3/5}) as dating from 2025, not 2020.
+  - bound: O(x^{3/5})
+    exponent: 0.60000
+    authors: [Hong Duc Bui]
+    year: 2025
+    source_key: "[Waste-0.6 2025]"
+    local: papers/square-packing-x06-wasted-area-2508.04603
+    note: Establishes the 2020 claim by a new construction.
+  - bound: O(x^{3/5})
+    exponent: 0.60000
+    authors: [Rory McClenagan]
+    year: 2026
+    source_key: "[McClenagan 2026]"
+    local: papers/mcclenagan-2026-optimally-packing-large-square
+
+lower_bounds:
+  - bound: w(a) >> (||a|| * a)^{1/2}
+    side_condition: a * (a - [a]) > 1/6
+    authors: [Klaus Roth, Bob Vaughan]
+    year: 1978
+    source_key: "[Roth–Vaughan 1978]"
+    local: papers/roth-vaughan-1978-inefficiency-packing-squares
+    retrieved: true
+    confidence: verified_against_primary
+    kernel: distance from a to the nearest integer (||a||)
+    constant: >
+      NONE. The relation is Vinogradov >>; the implied absolute constant is never
+      evaluated anywhere in the paper.
+    corollary: >
+      In packing a square of side n + 1/2 with unit squares the wasted space always
+      has area >> n^{1/2}; hence W(x) is not O(x^alpha) for any alpha < 1/2.
+    complementary_case: >
+      If a(a - [a]) <= 1/6 then sup|A| = [a]^2, so w(a) >> a(a - [a]), which Roth and
+      Vaughan note is essentially best possible.
+    note: >
+      RESOLVED 2026-08-22 against the primary, which was retrieved after three
+      secondary renderings were found to disagree. Two corrections came out of it:
+      the bound uses distance-to-nearest-integer while the SIDE CONDITION uses the
+      fractional part (they are different quantities, and renderings that conflate
+      them go wrong); and the 10^{-100} constant reported by both Friedman DS7 and
+      McClenagan 2026 appears nowhere in the paper.
+
+related_results:
+  - result: >
+      In computing the asymptotic growth of wasted space it suffices to consider
+      packings with only "good" squares (inclination at most 10^{-10}), the notion
+      Roth and Vaughan introduced.
+    authors: [Hong Duc Bui]
+    year: 2025
+    source_key: "[Good-Squares 2025]"
+    local: papers/square-packing-good-squares-2504.09489
+  - result: >
+      Open conjecture from the founding paper: with f(a) the maximal total
+      circumference of a non-overlapping squares packed in a unit square,
+      f(k^2 + 1) = 4k.
+    authors: [Paul Erdős, Ronald Graham]
+    year: 1975
+    source_key: "[Erdős–Graham 1975]"
+    local: papers/erdos-graham-1975-on-packing-squares-with-equal-squares
+
+relevance_to_small_n: >
+  None. These are asymptotic statements with unspecified or astronomically weak
+  constants -- Roth and Vaughan's explicit 10^{-100} is emblematic -- describing
+  behaviour as x -> infinity. They carry no information at x ~ 3.88. The small-case
+  and asymptotic branches share an origin and a moral (tilting helps) but are
+  methodologically disjoint.

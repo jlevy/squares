@@ -14,6 +14,16 @@ consolidated reference list.
 | 2026-07-14 | [Chaitin, the Ruliad, and the Foundations of Physics](research-2026-07-14-chaitin-ruliad-foundations-physics.md) | Their exact mathematical intersection and its qualified connections to quantum observation, black holes, thermodynamics, and physical undecidability |
 | 2026-07-14 | [Michael Levin, Platonic Forms, and the Mathematics of Living Systems](research-2026-07-14-michael-levin-platonic-forms-biology.md) | Developmental bioelectricity, synthetic organisms, diverse intelligence, Platonic Space, and mainstream mathematical and evolutionary biology |
 
+## Elsewhere in this repository
+
+Research that ships with its own primary sources and code lives under
+[`explorations/`](../../../explorations/) instead, so that each line of work stays
+self-contained. Currently:
+
+| Exploration | Reports |
+| --- | --- |
+| [`packing/`](../../../explorations/packing/README.md) | Three reports on square packing: the mathematics of `s(11)`, the algorithms and tooling behind search and exact verification, and a study of FrankenSim as a Rust toolkit for both |
+
 ## Suggested Reading Order
 
 Read the Chaitin and Ruliad reports first for the two programs’ definitions and

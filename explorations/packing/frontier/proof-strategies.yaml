@@ -1,0 +1,234 @@
+softschema:
+  contract: packing.squares:StrategyCatalogue/v1
+  schema: strategy-catalogue.schema.yaml
+  status: enforced
+kind: proof
+description: 'Strategies for PROVING bounds, overwhelmingly lower bounds. The inventory is strikingly
+  short: essentially one idea, unavoidable point sets, underlies nearly every proved value, with
+  later papers refining rather than replacing it.'
+count: 30
+strategies:
+- id: 1
+  name: Area counting
+  family: elementary
+  mechanism: '`s(n) ≥ √n`'
+  status: used
+  note: Yes — trivially, never tight for non-squares
+  refs: []
+- id: 2
+  name: Unavoidable point sets
+  family: unavoidable_points
+  mechanism: Place `n−1` points every unit square must hit; pigeonhole
+  status: used
+  note: Yes — the workhorse for nearly every proved case
+  refs: []
+- id: 3
+  name: Nonavoidance lemmas
+  family: unavoidable_points
+  mechanism: Geometric sublemmas certifying a set is unavoidable
+  status: used
+  note: Yes — Friedman’s Lemmas 1–3; Stromquist’s 1–6
+  refs: []
+- id: 4
+  name: The “box” relaxation
+  family: unavoidable_points
+  mechanism: Use squares of side strictly `>1` so conditions are open
+  status: used
+  note: Yes — Stromquist’s framing device
+  refs: []
+- id: 5
+  name: Duality / lattice rotation
+  family: unavoidable_points
+  mechanism: Rotate the unavoidable lattice a quarter turn; colour argument
+  status: used
+  note: Yes — Kearney–Shiu, for `s(6) = s(7) = 3`
+  refs: []
+- id: 6
+  name: “Almost unavoidable” sets + forcing
+  family: unavoidable_points
+  mechanism: Force squares into positions, then derive further points
+  status: used
+  note: Yes — Friedman, for the harder `n = 7, 14`
+  refs: []
+- id: 7
+  name: Continuously varying families
+  family: unavoidable_points
+  mechanism: Replace a fixed point set by a parametrised family
+  status: used
+  note: Yes — Bentz 2016, for `s(22)=5`, `s(33)=6`
+  refs: []
+- id: 8
+  name: Generalised unavoidable points
+  family: unavoidable_points
+  mechanism: Nagamochi’s extension of the method
+  status: used
+  note: Yes — `s(m²−1) = s(m²−2) = m`
+  refs: []
+- id: 9
+  name: Restricted-orientation analysis
+  family: unavoidable_points
+  mechanism: Prove a bound for a *subclass* of packings
+  status: used
+  note: Yes — Stromquist Thm 3 (0°/45°), settling Gardner
+  refs: []
+- id: 10
+  name: Exhaustive case analysis
+  family: unavoidable_points
+  mechanism: Enumerate combinatorial configurations
+  status: used
+  note: Yes — inside most of the above
+  refs: []
+- id: 11
+  name: Symmetry reduction
+  family: unavoidable_points
+  mechanism: Quotient the search by the container’s symmetry group
+  status: used
+  note: Yes — standard within case analyses
+  refs: []
+- id: 12
+  name: Area-charging / measure arguments
+  family: asymptotic
+  mechanism: Assign waste to regions and integrate
+  status: used
+  note: Yes — but asymptotically (Roth–Vaughan)
+  refs: []
+- id: 13
+  name: Analytic number theory
+  family: asymptotic
+  mechanism: Bound waste via `√(x − ⌊x⌋)` behaviour
+  status: used
+  note: Yes — Roth–Vaughan, asymptotic only
+  refs: []
+- id: 14
+  name: “Good square” reduction
+  family: asymptotic
+  mechanism: Show near-axis-aligned squares suffice asymptotically
+  status: used
+  note: Yes — asymptotic only (arXiv:2504.09489)
+  refs: []
+- id: 15
+  name: Interval arithmetic + branch and bound
+  family: modern_machinery
+  mechanism: Rigorously exclude all configurations numerically
+  status: used
+  note: Yes for circles (n≤33); yes for unit squares with rotation but only n=3
+  refs: []
+- id: 16
+  name: SOS / Positivstellensatz certificates
+  family: modern_machinery
+  mechanism: Certify semialgebraic infeasibility via SDP
+  status: not_applied
+  note: No known application to this problem
+  refs: []
+- id: 17
+  name: LP/SDP relaxation with dual certificates
+  family: modern_machinery
+  mechanism: Bound via a relaxation’s dual solution
+  status: not_applied
+  note: No known application
+  refs: []
+- id: 18
+  name: Machine-checked formal proof
+  family: modern_machinery
+  mechanism: Verify a case analysis in Lean/HOL Light/Isabelle
+  status: not_applied
+  note: 'No for `s(n)` — but the packing precedents are now strong: Flyspeck (2014) and sphere packing
+    in dimension 8 (Feb 2026)'
+  refs: []
+- id: 19
+  name: Electrical-network / Kirchhoff methods
+  family: dissection_tradition
+  mechanism: Linear circuit laws on a dissection graph
+  status: not_applied
+  note: Not applicable — see below
+  refs: []
+- id: 20
+  name: Graph encodings of dissections (c-nets)
+  family: dissection_tradition
+  mechanism: Enumerate planar graphs of a tiling
+  status: not_applicable
+  note: Not applicable — dissection-only
+  refs: []
+- id: 21
+  name: Transversal / hitting-set theory
+  family: transversal_and_wider
+  mechanism: '`τ ≥ ν`; bound the piercing number'
+  status: not_applied
+  note: Implicitly — this *is* the unavoidable-points method, but the transversal literature has
+    never been applied
+  refs: []
+- id: 22
+  name: Fractional transversals and LP duality
+  family: transversal_and_wider
+  mechanism: Relax piercing to an LP; use the dual fractional packing
+  status: not_applied
+  note: No known application to `s(n)`
+  refs: []
+- id: 23
+  name: Integrality-gap bounds (Wegner-type)
+  family: transversal_and_wider
+  mechanism: Bound `τ/ν` for families of squares
+  status: not_applied
+  note: Bounds exist for squares [Caoduro–Sebő]; not connected to `s(n)`
+  refs:
+  - Caoduro–Sebő
+- id: 24
+  name: Gallai- and Helly-type theorems
+  family: transversal_and_wider
+  mechanism: Structural results forcing small transversals
+  status: not_applied
+  note: Not applied here
+  refs: []
+- id: 25
+  name: Delsarte/Cohn–Elkies LP bounds
+  family: transversal_and_wider
+  mechanism: Auxiliary functions certifying density bounds
+  status: not_applied
+  note: No — the triumph of *lattice* sphere packing, no container analogue
+  refs: []
+- id: 26
+  name: SDP hierarchies (Lasserre/de Laat et al.)
+  family: transversal_and_wider
+  mechanism: Strengthen LP bounds via moment relaxations
+  status: not_applied
+  note: Applied to packing density (arXiv:2001.00256, arXiv:1308.4893); no container analogue for
+    `s(n)`
+  refs: []
+- id: 27
+  name: Compactness / limit arguments
+  family: transversal_and_wider
+  mechanism: Guarantee the optimum is attained; justify the box device
+  status: used
+  note: Yes — foundationally [Martin 2000]
+  refs:
+  - Martin 2000
+- id: 28
+  name: Discharging
+  family: transversal_and_wider
+  mechanism: Assign and redistribute local charges
+  status: not_applied
+  note: Used in combinatorial geometry; not for `s(n)`
+  refs: []
+- id: 29
+  name: Probabilistic method
+  family: transversal_and_wider
+  mechanism: Random constructions or averaging
+  status: not_applied
+  note: Not for exact small-`n` values
+  refs: []
+- id: 30
+  name: Chromatic / clique-ratio arguments
+  family: transversal_and_wider
+  mechanism: Bound `χ/ω` for square intersection graphs
+  status: adjacent
+  note: Adjacent [Caoduro–Sebő]; not a bound on `s(n)`
+  refs:
+  - Caoduro–Sebő
+families:
+  elementary: Trivial bounds that hold for all n.
+  unavoidable_points: One idea and its refinements; nearly every proved value of s(n) rests here.
+  asymptotic: Speaks only as x tends to infinity; carries no information at small n.
+  modern_machinery: General-purpose rigorous methods; only interval branch-and-bound has been aimed
+    at rotating squares.
+  dissection_tradition: Belongs to the squared-square problem, not this one; provably does not transfer.
+  transversal_and_wider: The wider packing-and-covering toolkit, largely unapplied to s(n).

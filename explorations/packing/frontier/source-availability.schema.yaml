@@ -1,0 +1,60 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/jlevy/thinking-scratchpad/explorations/packing/frontier/source-availability.schema.yaml
+title: SourceAvailability
+description: >
+  Every source the research documents cite that is not in the local archive,
+  plus the ones previously listed as unavailable that turned out not to be.
+  This is the fact-checking boundary of the research: a claim either traces to
+  a file in resources/, or to a row here.
+type: object
+additionalProperties: false
+required: [last_checked, archive, recovered, unretrieved]
+properties:
+  last_checked:
+    type: string
+    pattern: '^\d{4}-\d{2}-\d{2}$'
+    description: Date the unretrieved list was last re-tested, not merely inherited.
+  archive:
+    type: string
+    description: Repo-relative path to the local archive.
+  recovered:
+    type: array
+    description: Previously listed as unavailable, since obtained. Kept so the correction stays visible.
+    items:
+      type: object
+      additionalProperties: false
+      required: [key, title, how]
+      properties:
+        key: {type: string, minLength: 1}
+        title: {type: string, minLength: 1}
+        how:
+          type: string
+          minLength: 1
+          description: What made it available, stated specifically enough to prevent the same mistake.
+        impact: {type: string, description: What changed in the research as a result.}
+  unretrieved:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required: [key, title, authors, year, venue, blocker, detail, depends_on_it, priority, route]
+      properties:
+        key: {type: string, minLength: 1}
+        title: {type: string, minLength: 1}
+        authors: {type: array, minItems: 1, items: {type: string}}
+        year: {type: integer}
+        venue: {type: string, minLength: 1}
+        url: {type: [string, "null"]}
+        blocker:
+          enum: [paywall, print_only, unpublished, bot_blocked, private_correspondence, obscure_periodical]
+          description: The mechanism, established by a test, not assumed.
+        detail:
+          type: string
+          minLength: 1
+          description: The evidence for the blocker, including the date of the last re-test where relevant.
+        depends_on_it:
+          type: string
+          minLength: 1
+          description: What in the research rests on this source. Required, so nothing sits on the list without a reason.
+        priority: {type: integer, minimum: 1, maximum: 5}
+        route: {type: string, minLength: 1, description: The realistic way to obtain it.}

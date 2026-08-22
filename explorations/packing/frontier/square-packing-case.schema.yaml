@@ -1,0 +1,159 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://github.com/jlevy/thinking-scratchpad/explorations/packing/frontier/square-packing-case.schema.yaml
+title: SquarePackingCase
+description: >
+  Everything known about s(n), the side of the smallest square holding n
+  non-overlapping unit squares, for one value of n. Structured facts only;
+  narrative belongs in the Markdown body.
+type: object
+additionalProperties: false
+required: [n, status, upper_bound, lower_bound]
+properties:
+  n:
+    type: integer
+    minimum: 1
+    description: Number of unit squares to pack.
+  status:
+    enum: [proved, open]
+    description: >
+      "proved" iff a published proof determines s(n) exactly, i.e. the lower
+      bound matches the best known packing.
+  gap:
+    type: [number, "null"]
+    description: upper_bound.value minus lower_bound.value; 0 when proved.
+  upper_bound:
+    type: object
+    additionalProperties: false
+    required: [value, method]
+    properties:
+      value:
+        type: number
+        description: Best known s(n) as a decimal, from the record catalogue.
+      value_str:
+        type: [string, "null"]
+        description: >
+          Full published decimal as a string, when more digits are recorded
+          than a float can carry.
+      exact_form:
+        type: [string, "null"]
+        description: Closed form when one exists, e.g. "3 + (1/2)*sqrt(2)".
+      algebraic_degree:
+        type: [integer, "null"]
+        minimum: 1
+        description: Degree of s(n) over Q, when the catalogue records a minimal polynomial.
+      minimal_polynomial:
+        type: [string, "null"]
+        description: Minimal polynomial of s(n) over Q, as published.
+      analytically_optimized:
+        type: [boolean, "null"]
+        description: >
+          Whether the record has an exact algebraic description. False means
+          the record is a refined numerical configuration only.
+      rigid:
+        type: [boolean, "null"]
+        description: Whether the catalogue flags the packing as rigid.
+      method:
+        enum:
+          - trivial_grid
+          - hand_construction
+          - diagonal_strip
+          - pattern_family
+          - extension
+          - composition
+          - simulated_annealing
+          - inflation_billiard
+          - unknown
+        description: How the best known packing was produced.
+      tilt_angles_deg:
+        type: [array, "null"]
+        items: {type: number}
+        description: Distinct square orientations in degrees; [0] for an axis-aligned grid.
+      found_by:
+        type: array
+        items: {type: string}
+        default: []
+      found_year:
+        type: [integer, "null"]
+      improved_by:
+        type: array
+        items: {type: string}
+        default: []
+      catalogue_pictured:
+        type: boolean
+        description: >
+          Whether the record catalogue pictures this n. False means the trivial
+          grid packing is still the best known.
+  lower_bound:
+    type: object
+    additionalProperties: false
+    required: [value, kind]
+    properties:
+      value:
+        type: number
+        description: Best proved lower bound on s(n).
+      exact_form:
+        type: [string, "null"]
+      kind:
+        enum:
+          - area
+          - perfect_square
+          - nagamochi
+          - monotonicity
+          - unavoidable_points
+          - counting
+        description: Which argument supplies this bound.
+      proved_by:
+        type: array
+        items: {type: string}
+        default: []
+      proved_year:
+        type: [integer, "null"]
+      source_key:
+        type: [string, "null"]
+        description: Citation key used in the research documents.
+      note:
+        type: [string, "null"]
+        description: One line on provenance, e.g. which n it is inherited from.
+  conjectured_optimum:
+    type: [string, "null"]
+    description: >
+      For open cases, the value the best known packing is conjectured to attain,
+      as "integer" or the decimal; null when there is no standing conjecture.
+  priority_notes:
+    type: array
+    default: []
+    items:
+      type: object
+      additionalProperties: false
+      required: [claim]
+      properties:
+        claim: {type: string}
+        claimed_by: {type: array, items: {type: string}, default: []}
+        published: {type: [string, "null"]}
+        year: {type: [integer, "null"]}
+  resources:
+    type: array
+    default: []
+    items:
+      type: object
+      additionalProperties: false
+      required: [key, role]
+      properties:
+        key:
+          type: string
+          description: Citation key as used in the research documents.
+        role:
+          enum: [upper_bound, lower_bound, record_catalogue, survey, exact_solution, context]
+        local:
+          type: [string, "null"]
+          description: Path under resources/, without extension.
+        url:
+          type: [string, "null"]
+        retrieved:
+          type: [boolean, "null"]
+          description: Whether a local copy exists in the archive.
+  verified_here:
+    type: array
+    default: []
+    items: {type: string}
+    description: Claims independently re-derived in this repository.
