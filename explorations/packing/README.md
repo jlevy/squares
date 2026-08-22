@@ -37,6 +37,9 @@ verify_trump11.py        verify the packing and report what it took
 negative_control.py      show the verifier rejects bad packings, and where float64 fails
 bench.py                 exact vs approximate cost, and scaling with algebraic degree
 test.sh                  run everything and check the expected results
+frankensim-probe/        two experiments run against Jeffrey Emanuel's FrankenSim,
+                         asking whether its certified-arithmetic and RNG layers help
+                         here (see that directory's README)
 ```
 
 Only `derive_field.py` needs a third-party package (SymPy).
