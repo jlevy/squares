@@ -737,7 +737,7 @@ The state of proofs, stated completely (which the commonly cited summaries are n
    fast. All the difficulty migrates into recovering that field.
 
 2. **Verification is cheap; certification of *optimality* is astronomically expensive.**
-   Confirming that a proposed packing is valid took 0.34 s of unoptimised Python for
+   Confirming that a proposed packing is valid took 0.35 s of unoptimised Python for
    `n = 11`. Proving that *no better packing exists* is the problem that has consumed 47
    years and, in its only rigorous computational form, manages three squares in a circle in
    ten minutes.
@@ -779,7 +779,7 @@ Tooling by task, with the honest verdict for this specific problem.
 
 | Task | Best open-source option | Best option overall | Gap |
 | --- | --- | --- | --- |
-| Approximate validity check | SAT written directly, or `jagua-rs` | same | none; it is ~1 µs per pair |
+| Approximate validity check | SAT written directly, or `jagua-rs` | same | none; microseconds per pair, and linear in `n` once bucketed |
 | Exact validity check | CGAL exact kernels + `msolve`/FLINT, assembled by hand | same | **no purpose-built tool exists** |
 | Record search | none | Schadt/Ellsworth GPU annealer (closed) | **no open equivalent** |
 | General search | SCIP 10 + Farkas non-overlap | FICO Xpress, Gurobi | competitive only to `n ≈ 16` |
