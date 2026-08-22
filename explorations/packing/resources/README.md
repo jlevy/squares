@@ -25,6 +25,17 @@ Every paper is stored three ways:
 The `.raw.md` files are deliberately retained.
 Cleanup was done by language models, so the raw extraction is the fallback whenever a
 formula in a `.md` looks suspicious.
+
+**Three papers are currently raw-only**, with a `.pdf` and a `.raw.md` but no cleaned
+`.md`: `gensane-ryckelynck-2005-improved-dense-packings`,
+`nagamochi-2005-packing-unit-squares-in-a-rectangle`, and
+`wang-dong-li-2016-new-result-packing-unit-squares`. They were added on 2026-08-22 after
+being found retrievable (see below), and were read directly from the PDF and the raw
+extraction. Ground truth is present and the archive is greppable; only the reading
+convenience is missing.
+Writing cleaned transcriptions for them is deliberately deferred rather than done
+hastily — model-assisted cleanup is exactly what produced the reconstruction hazards
+tabulated in the next section.
 Passages that could not be confidently reconstructed are marked inline as
 `<!-- GARBLED: unable to reconstruct -->` rather than guessed at.
 
@@ -107,6 +118,9 @@ Citation keys match those used in the research document.
 | **[Waste-0.6 2025]** | Square packing with O(x^0.6) wasted area | see file | 2025 | arXiv:2508.04603 | `square-packing-x06-wasted-area-2508.04603` |
 | **[Arslanov et al.]** | Improved packings of n(n−1) unit squares in a square | M. Z. Arslanov et al. | 2021 | Electron. J. Combin. 28(4) | `arslanov-improved-packings-n-n-1` |
 | **[CPSS 2013]** | Compound Perfect Squared Squares of the Order Twenties | see file | 2013 | arXiv:1303.0599 | `compound-perfect-squared-squares-1303.0599` |
+| **[Gensane–Ryckelynck 2005]** | Improved Dense Packings of Congruent Squares in a Square | T. Gensane, P. Ryckelynck | 2005 | Discrete Comput. Geom. 34, 97–109 | `gensane-ryckelynck-2005-improved-dense-packings` |
+| **[Nagamochi 2005]** | Packing Unit Squares in a Rectangle | H. Nagamochi | 2005 | Electron. J. Combin. 12, #R37 | `nagamochi-2005-packing-unit-squares-in-a-rectangle` |
+| **[Wang–Dong–Li 2016]** | A New Result on Packing Unit Squares into a Large Square | S. Wang, T. Dong, J. Li | 2016 | arXiv:1603.02368 | `wang-dong-li-2016-new-result-packing-unit-squares` |
 
 ## Web sources
 
@@ -131,14 +145,23 @@ Preserved verbatim.
 
 ## Not retrievable
 
-Recorded so nobody re-hunts them:
+Recorded so nobody re-hunts them.
+**Re-test this list rather than inheriting it.** On 2026-08-22 three entries were
+removed because they turned out to be freely available: Gensane–Ryckelynck (Springer
+serves the PDF openly at its `/content/pdf/` URL — the earlier attempt had fetched the
+article landing page), Nagamochi (open access in the *Electronic Journal of
+Combinatorics*, and cited by its exact title in the archived DS7 reference list all
+along), and Wang–Dong–Li (arXiv).
+A “not retrievable” verdict is a negative search result, and this archive has now been
+wrong about it three times.
 
 | Source | Obstacle |
 | --- | --- |
-| Gensane & Ryckelynck, *Improved Dense Packings of Congruent Squares in a Square*, DCG (2005) | Springer paywall; ResearchGate, Academia.edu and ACM DL all return 403. Its `n = 11` content is known second-hand via the Kingbird SVG notes, which cite it by page. |
 | Trump, *Packing of 11 unit squares in a square with minimum size* (Mar 2023) | ResearchGate 403 |
-| Roth & Vaughan, *Inefficiency in packing squares with unit squares*, JCTA (1978) | ScienceDirect 403 to automated clients |
-| Nagamochi (2005), `s(m²−1) = s(m²−2) = m` | Not located as open access |
+| Roth & Vaughan, *Inefficiency in packing squares with unit squares*, JCTA (1978) | ScienceDirect 403 to automated clients. **Highest-priority acquisition**: it is the only asymptotic source whose theorem could not be pinned down, and the available secondary renderings of it contradict each other. |
+| El Moumni, *Optimal Packings of Unit Squares in a Square*, Studia Sci. Math. Hungar. 35 (1999) | Print-only; no digital copy located. Holds published priority for `s(7) = s(8) = 3` and `s(15) = 4`. |
+| Stromquist, *Packing unit squares inside squares* I–III, Wagner Associates memoranda (1984) | Unpublished; memorandum III covers `n ≤ 65` and Gardner’s conjecture for `n = 11`. |
+| Arslanov & Bui, *Note on “efficient packings of unit squares in a large square”*, DCG (2025) | Springer; not open access. |
 | Brooks, Smith, Stone & Tutte, *The dissection of rectangles into squares*, Duke Math. J. 7 (1940) | Project Euclid; not open access |
 | Gustafsson & Thulin (1980), *Ronden* | Swedish company periodical; Ellsworth notes he has not read it directly either |
 

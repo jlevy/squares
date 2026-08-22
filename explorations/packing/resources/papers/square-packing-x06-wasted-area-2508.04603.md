@@ -2,7 +2,7 @@
 
 **Authors:** Hong Duc Bui
 **Venue:** arXiv preprint, arXiv:2508.04603
-**Year:** 2026
+**Year:** 2025 (v1 Aug 2025; v2 Mar 2026)
 **Source:** https://arxiv.org/abs/2508.04603
 **Archived:** 2026-08-22
 **Extraction:** pdfminer.six from the original PDF, cleaned for readability. Raw extraction preserved alongside as `square-packing-x06-wasted-area-2508.04603.raw.md`.

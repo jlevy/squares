@@ -49,11 +49,15 @@ Claims in the reports are separated by evidential status — proved, computation
 verified, best known, or asserted-but-unverified — and every citation resolves both to a
 full reference and to a local copy in [`resources/`](resources/README.md).
 
-A technical review of the corpus —
-[review-2026-08-22-square-packing-research.md](docs/project/reviews/review-2026-08-22-square-packing-research.md)
-— re-verifies the central mathematics, records the errors and gaps found, and lays out
-the prioritized path from these reports to a complete survey and a computational
-research program.
+The reports have been through a full technical review (2026-08-22): every substantive
+claim re-checked against the archived primary sources, the central algebra re-derived
+independently at 50-digit precision, and the findings applied to the documents
+themselves. Corrections this produced are recorded in the `n = 11` report’s
+[Corrections to Common Summaries](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#corrections-to-common-summaries),
+its remaining gaps in
+[Open Questions](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#open-questions),
+and the prioritized path forward in
+[A Research Program](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#a-research-program).
 
 ## Exact verification
 

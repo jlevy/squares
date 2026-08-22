@@ -438,16 +438,52 @@ fix. Their solution database is open (`DominikKamp/Packing`).
 
 #### LLM-driven and evolutionary search
 
-Google DeepMind’s **AlphaEvolve** applied LLM-generated-code evolutionary search to a
-benchmark of geometry problems including circle and hexagon packing, and improved the
-packing of 11 unit regular hexagons in a hexagon to side 3.931. It is a genuinely
-relevant data point: the mechanism it found — tilting inner pieces at varying angles
-rather than aligning them — is the same mechanism that makes square packing hard.
-Open replications exist (`OpenEvolve`, `ShinkaEvolve`, `CodeEvolve`). Notably, in the
-OpenEvolve study the LLM converged on writing an *optimization* program — SciPy SLSQP
-from multiple starts — rather than a bespoke heuristic, and the Berthold et al.
-papers then matched or beat the AlphaEvolve results with plain SCIP and Xpress models.
-No AlphaEvolve-class result for squares-in-squares has been reported.
+Google DeepMind’s **AlphaEvolve** (May 2025) applied LLM-generated-code evolutionary
+search to a benchmark of 67 mathematical problems spanning analysis, combinatorics,
+geometry and number theory, rediscovering the best known solution in most cases and
+improving it in several.
+Among them were circle and hexagon packing: it improved the packing of 11 unit regular
+hexagons in a hexagon to side `3.931`, against a human record of `3.943` (2019). It is a
+genuinely relevant data point, because the mechanism it found — tilting inner pieces at
+varying angles rather than aligning them — is the same mechanism that makes square
+packing hard.
+
+**What has happened since, as of August 2026.** The benchmark AlphaEvolve published has
+become a small competitive ecosystem, and its trajectory is worth tracking closely
+because it is the closest thing to a live experiment in whether this class of method can
+move a geometric packing record.
+
+- **Open replications** appeared quickly (`OpenEvolve`, `ShinkaEvolve`, `CodeEvolve`),
+  and were followed by a steady run of successor systems: ThetaEvolve
+  (arXiv:2511.23473), the FM Agent (arXiv:2510.26144), ImprovEvolve (arXiv:2602.10233),
+  Helix (arXiv:2603.07642), SeaEvo (arXiv:2604.24372), and a flow-based generative
+  approach to extremal structure discovery (arXiv:2601.18005).
+- **Classical solvers answered, and largely won.** Berthold, Kamp, Mexi, Pokutta and
+  Pólik revisited the AlphaEvolve benchmark with off-the-shelf global optimization
+  (arXiv:2601.05943, January 2026) and report that FICO Xpress and SCIP “reproduce, and
+  in several cases improve upon, the best solutions previously reported in the
+  literature, including the recent LLM-driven discoveries.”
+  Their follow-up (arXiv:2605.04850, May 2026) adds an S-lemma containment formulation
+  for ellipses and Farkas-lemma non-overlap for polygons and Platonic solids, and
+  reports new incumbents across those families.
+  In the OpenEvolve replication the LLM had itself converged on writing an
+  *optimization* program — SciPy SLSQP from multiple starts — rather than a bespoke
+  heuristic, which is the same conclusion arrived at from the other direction.
+- **Individual humans remain competitive at the margin.** On the `n = 26`
+  circles-in-a-square sum-of-radii benchmark, an independent worker beat AlphaEvolve’s
+  `2.63586275` with `2.63592717` after roughly six weeks, using a genuinely different
+  configuration rather than a refinement; the flow-based system later pushed the same
+  benchmark to `2.63598308`.
+
+**The conclusion for this problem is unchanged, and is the interesting part: none of
+this activity has touched squares-in-squares.** No AlphaEvolve-class result for `s(n)`
+has been reported by any system in the ecosystem, and the benchmark suite does not
+include it. Meanwhile the actual `s(n)` records continue to be set by one closed-source
+simulated annealer run by one person.
+The adjacent benchmarks are crowded and contested to the fifth decimal place; this
+problem is uncontested and has no open baseline at all.
+That asymmetry is an opportunity rather than a verdict — see
+[Recommendations](#recommendations).
 
 #### Industrial nesting engines
 
@@ -594,8 +630,8 @@ The harder cases `s(7) = 3` and `s(14) = 4` add *almost* unavoidable sets, forci
 squares into identified regions, then enumerate the placements up to symmetry — 2 cases
 for `n = 7`, 5 for `n = 14`, with sub-cases — and supply a fresh unavoidable set for
 each. Wolfram Bentz’s proofs of `s(13) = 4`, `s(46) = 7` (2010) and `s(22) = 5`,
-`s(33) = 6` (2018) strengthen the method by replacing fixed point sets with
-“continuously varying families of such sets.”
+`s(33) = 6` (arXiv 2016; proof dated Oct 2018 by the catalogue) strengthen the method by
+replacing fixed point sets with “continuously varying families of such sets.”
 Nagamochi’s `s(n² − 1) = s(n² − 2) = n` for all `n ≥ 2` is a counting argument about how
 many unit squares fit in an `a × b` rectangle.
 
@@ -737,7 +773,7 @@ The state of proofs, stated completely (which the commonly cited summaries are n
   family, which subsumes 2, 3, 7, 8, 14, 15, 23, 24, 34, 35, 47, 48, 62, 63, …, 322,
   323;
 - `n = k² − 3` for `k = 3, 4, 5, 6, 7` only: 6 (Kearney–Shiu 2002), 13 and 46 (Bentz
-  2010), 22 and 33 (Bentz 2018);
+  2010), 22 and 33 (Bentz, arXiv 2016);
 - `n = 5` (Göbel 1979) and `n = 10` (Stromquist 2003).
 
 `n = 11` is the smallest unresolved case.

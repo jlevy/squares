@@ -347,14 +347,49 @@ degenerate boundary cases.
 > If `|P| = n − 1`, then `n` non-overlapping boxes are impossible: by pigeonhole two
 > boxes would have to contain the same point, contradicting non-overlap.
 
-For Theorem 2, Stromquist exhibits **ten** unavoidable points in a square of side
-`2 + 2√(4/5)`, which rules out eleven boxes.
-Four of the points sit at `(1, 1)`, `(s/2, s/2)`, `(1, s/2)` and `(3/2, 1)`; the rest
-are placed symmetrically.
-The vertical distance between the rows of points is `s/2 − 1 = √(4/5) ≈ 0.894`, and the
-triangles in the construction are congruent with sloping sides of length exactly 1.
-(These exact coordinates come from the archived transcription of **[Stromquist 2003]**,
-which resolves detail the raw PDF extraction had mangled.)
+**Theorem 2 is a two-stage argument, not a single pigeonhole.** This is worth setting
+out exactly, because the simplified version — “ten unavoidable points, eleven boxes,
+done” — misses the device that carries the proof.
+
+*Stage one.* Stromquist places **ten** points in the square of side `2 + 2√(4/5)`. Four
+sit at `(1, 1)`, `(s/2, s/2)`, `(1, s/2)` and `(3/2, 1)`; the rest are placed
+symmetrically. The vertical distance between the rows is `s/2 − 1 = √(4/5) ≈ 0.894`, and
+the triangles in the construction are congruent with sloping sides of length exactly 1.
+These ten points are **not** an unavoidable set, and the paper says so: “Nonavoidance
+lemmas apply to all of the regions shown *except for the rectangles at the top and
+bottom*.” A box can evade all ten, but only by sitting in one of those two rectangles.
+
+*Stage two.* A second configuration of **twelve** points is introduced, chosen so that
+the escaping box — pinned to the top or bottom rectangle up to symmetry, by Lemmas 4 and
+6 — must contain **all three** of the points marked `A`:
+
+```
+A = { (1, .9),  (s/2, .9) ≈ (1.894, .9),  (1 + √(1/5), 1.12) ≈ (1.447, 1.12) }
+```
+
+Nonavoidance lemmas cover every region of that second figure, so the twelve points *are*
+unavoidable. One box swallowing three of them leaves nine points for the remaining ten
+boxes, and the pigeonhole closes: “Since three of the twelve points are in one box,
+there cannot be eleven nonintersecting boxes.”
+
+**Theorem 3 has exactly the same shape** — ten points as in the first figure but at the
+new `s`, the 45°-strengthened Lemma 7 forcing an escaping box into a known position, and
+then twelve points of which one box must contain three ("Again these 12 points form an
+unavoidable set in the context of 45° packings, and since three of them are in one
+box…"). The `A`-points move to `(1, s−3)`, `(s/2, s−3)`, `(1.5, 1.3)`.
+
+**Why the correction matters.** The three-points-in-one-box step is a *threshold*
+certificate: a box is charged **three** units of resource rather than one.
+That is already a departure from plain hitting-set counting, and it means the
+resource-starvation generalisation catalogued below — weighted points, sliding points,
+measured segments, continuously varying families — does not begin with **[Bentz 2010]**.
+It is present, in a discrete form, in the 2003 proof that defines the field’s frontier
+for `n = 11`. Stromquist also notes the second figure is *robust*: “any point in the
+figure could be moved by a small amount in almost any direction without causing the
+argument to fail. The critical distances are all in [the first figure]” — i.e. the
+binding constraints are the stage-one geometry, and stage two has slack.
+(All quotations and coordinates here are from the archived transcription of
+**[Stromquist 2003]**, checked against its raw extraction.)
 
 **Nonavoidance lemmas.** Proving that a candidate set is genuinely unavoidable requires
 geometric lemmas of the form “if the *center* of a box lies in region `R`, the box must
@@ -370,9 +405,10 @@ Representative statements:
 - **Lemma 5.** A specialized statement about the pentagon with vertices `(1,0)`,
   `(1,1)`, `(2,1)`, `(2.12,0.9)`, `(2.12,0)`, needed for the `n = 10` argument.
 
-The 45°-restricted case (Theorem 3) uses a **twelve**-point unavoidable set, exploiting
-the fact that the projections of a 45° unit vector are at most 1, which brings the
-triangle lemmas into play in a stronger form.
+The 45°-restricted case (Theorem 3) exploits the fact that the projections of a 45° unit
+vector are at most 1, which brings the triangle lemmas into play in a stronger form
+(Lemmas 7 and 8); its counting stage is the same twelve-point, three-points-in-one-box
+argument described above.
 
 **Why this method has a ceiling.** The unavoidable points are placed at coordinates
 built from the container side `s` and from unit distances — that is, from rational
@@ -460,9 +496,20 @@ It is a genuinely different lever from placing better points, and it is the only
 in this literature where symmetry is used as a proof engine rather than merely to reduce
 cases.
 
-Kearney and Shiu also prove constructive results in the other direction: with `n_r` the
-smallest `n` such that `s(n² + 1) ≤ n + 1/r`, they show `n_r ≤ 27r^{3/2} + O(r²)` and
-`n₂ ≤ 43`.
+Kearney and Shiu also prove constructive results in the other direction, by applying
+simultaneous Diophantine approximation to their construction.
+With `δ_n` defined by `s(n² + 1) ≤ n + δ_n` and `n_r` the smallest `n` such that
+`δ_n ≤ 1/r`, they prove
+
+```
+n_r ≤ p(⌈τ⌉) ≤ p(⌈3r/2⌉) = 27r³/2 + O(r²),   where p(t) = 4t³ + 4t² + 3t + 1
+```
+
+— *cubic* in `r`, not `r^{3/2}` (an earlier draft of this document misread the displayed
+fraction). They give `4 ≤ n₂ ≤ 43`, and by the same ideas `n₃ ≤ 239`, `n₄ ≤ 625`,
+`n₅ ≤ 1320`, `n₆ ≤ 2493`, `n₇ ≤ 4072`; for large `r` Erdős–Graham gives the stronger
+`n_r ≪ r^{11/4}`. They also show `δ₈ < 0.536`, `δ₄₂ < 0.507` and `δ₄₃ < 1/2`, and remark
+that improving either bound “represents an interesting challenge”.
 
 ### The landscape of solved cases
 
@@ -474,7 +521,9 @@ Exact values of `s(n)` known as of this research:
 | 1 | 1 | Trivial |
 | 2, 3, 4 | 2 | Classical |
 | **5** | `2 + ½√2 ≈ 2.707107` | Göbel, via **[Friedman DS7]** |
-| 6, 7, 8, 9 | 3 | first published proof of `s(6)=3` by **[Kearney–Shiu 2002]**, who also treat `s(7)` |
+| 6 | 3 | **[Kearney–Shiu 2002]** — first *published* proof (see the priority ledger below) |
+| 7, 8 | 3 | **[El Moumni 1999]** — earliest published proof; also **[Friedman DS7]**, **[Kearney–Shiu 2002]** |
+| 9 | 3 | Trivial (`3²`) |
 | **10** | `3 + ½√2 ≈ 3.707107` | **[Stromquist 2003]**, Thm 1 |
 | **11** | **OPEN** — in `[3.788854, 3.877084]` | — |
 | 13 | 4 | **[Bentz 2010]** |
@@ -484,11 +533,66 @@ Exact values of `s(n)` known as of this research:
 
 General families:
 
-- **Nagamochi (2005):** `s(m² − 1) = s(m² − 2) = m` for `m ≥ 2`. **[secondary]** — the
-  primary paper was not located as open access.
+- **Nagamochi (2005):** `s(m² − 1) = s(m² − 2) = m` for `m ≥ 2`. **Retrieved and read**;
+  the paper is open access in the *Electronic Journal of Combinatorics* (an earlier pass
+  of this research recorded it as unlocated, which was wrong).
+  It is titled *Packing Unit Squares in a Rectangle*, and the square-container result is
+  a corollary of a rectangle theorem — see the general bound immediately below.
 - **`s(m² − 3) = m`** established for `m = 3, 4, 7`, extended by Bentz to `m = 5, 6`
   (via `s(22) = 5` and `s(33) = 6`), supporting the conjecture that it holds for all
   `m ≥ 3`.
+
+#### Nagamochi’s general lower bound — the only closed-form bound beyond area
+
+Nagamochi’s theorem is stated for rectangles, and it is the one general-purpose lower
+bound in this literature that applies to every `N` without a bespoke construction.
+For real `a, b ≥ 2`, no more than
+
+```
+ab − (a + 1 − ⌈a⌉) − (b + 1 − ⌈b⌉)
+```
+
+unit squares can be packed in any `a′ × b′` rectangle with `a′ < a` and `b′ < b`. From
+this he deduces that for any integer `N ≥ 4`,
+
+```
+s(N) ≥ min{ ⌈√N⌉,  √(N − 2⌊√N⌋ + 1) + 1 }
+```
+
+and in particular `s(n²) = s(n² − 1) = s(n² − 2) = n` for every `n ≥ 2`.
+
+For `n = 11` this gives `min{4, √6 + 1} ≈ 3.449`, which is **weaker than Stromquist’s
+`3.7889`** and so changes nothing for the headline case.
+Its value is elsewhere: for most open `n` it is the best lower bound in print that does
+*not* require someone to construct an unavoidable point set by hand, which makes it the
+default entry in the [open-frontier table](#the-open-frontier-what-is-actually-unknown)
+below. The same paper records a conjecture of Friedman’s worth tracking: once
+`s(n² − k) = n` holds for some `n` and `k`, then `s((n+1)² − k) = n + 1`.
+
+#### Priority, claims, and what was actually published
+
+This subject’s history is unusually full of unpublished, lost, and late-surfacing work,
+and attributions in secondary sources are correspondingly unreliable.
+**[Friedman DS7]** puts it plainly: “The number of claims far outweighs the number of
+published results in this area.”
+The ledger, as best it can be reconstructed:
+
+| Result | Claimed by | Published proof |
+| --- | --- | --- |
+| `s(7) = s(8) = 3` | Bajmóczy, per Schrijver, per Göbel (unpublished) | **El Moumni (1999)**, *Studia Sci. Math. Hungar.* 35, 281–290 — unnoticed for years |
+| `s(6) = 3` | Stromquist 1984 memoranda; also Trevor Green (2000, private) — neither published | **[Kearney–Shiu 2002]** |
+| `s(10) = 3 + ½√2` | Stromquist 1984 memoranda | **[Stromquist 2003]** |
+| `s(14) = s(15) = 4`, `s(24) = 5` | Stromquist “claimed to know how to prove” (1984) | **[Friedman DS7]**; `s(15)` also El Moumni (1999) |
+| `s(11) = 3.877084…` | conjectured since 1979; never claimed as proved | **none — open** |
+| `n = 11` packing | Trump 1979; independently rediscovered many times, incl. Gustafsson–Thulin 1980 | construction only |
+
+Two consequences. First, **El Moumni holds published priority for `s(7) = s(8) = 3` and
+`s(15) = 4`**, three years before Kearney–Shiu, and is absent from most summaries of
+this field including earlier drafts of this document; Kearney–Shiu’s genuine first is
+`s(6) = 3`. Second, Stromquist’s 1984 Daniel H. Wagner Associates memoranda I–III sit
+behind a remarkable share of the claim column and have never been published; memorandum
+III covers `n ≤ 65` and Gardner’s conjecture for `n = 11`, and remains the single most
+valuable unretrieved document in this subject.
 
 Friedman’s survey supplies relatively simple proofs for `n = 2, 3, 5, 8, 15, 24, 35` and
 more complicated ones for `n = 7, 14`. Stromquist’s 2003 abstract notes that at that
@@ -516,10 +620,12 @@ settled cases. So the open region begins at 11 and continues at 12.
 **A cautionary counterexample.** It was conjectured that `s(n² − n) = n` for small `n`.
 **[Friedman DS7]** records the smallest known counterexample, due to **Lars Cleemann**:
 `s(17² − 17) < 17`, i.e. 272 unit squares fit in a square of side 17 with room to spare.
-Three of its squares are tilted at 45° and the rest at `arctan(8/15)`. The lesson
-generalises well beyond that family: plausible patterns in this subject fail at sizes
-far beyond where intuition or small-case data would suggest, which is a standing
-argument against believing `s(11) = 3.877084…` merely because nothing has beaten it.
+Three of its squares are tilted at 45°, and *the other tilted squares* at `arctan(8/15)`
+— most of the 272 remain axis-aligned.
+The lesson generalises well beyond that family: plausible patterns in this subject fail
+at sizes far beyond where intuition or small-case data would suggest, which is a
+standing argument against believing `s(11) = 3.877084…` merely because nothing has
+beaten it.
 
 *Note on source discrepancies:* enumerations differ between sources.
 Wikipedia lists `n = 2, 3, 5, 6, 7, 8, 10, 13, 14, 15, 24, 34, 35, 46, 47, 48`, omitting
@@ -528,6 +634,154 @@ it: `2, 3, 5, 6, 7, 8, 10, 13, 14, 15, 22, 23, 24, 33, 34, 35`. The union across
 sources, plus Nagamochi’s family stated in general form, is the safe reading; `n = 23`
 **is** covered by the theorem, and Wikipedia’s omission appears to be an incomplete
 enumeration rather than a mathematical subtlety.
+
+### The open frontier: what is actually unknown
+
+The solved cases above are the exceptions.
+This table is the complement — **every open `n ≤ 100`** — and it is the spine of any
+systematic attack on this problem, because it shows at a glance where the proof
+machinery stops and how far short it falls.
+
+Upper bounds are the best known packings from **[Kingbird]**; `(grid)` marks an `n` the
+catalogue does not picture, where the trivial `⌈√n⌉` packing is still the best known.
+`deg` is the algebraic degree of the conjectured optimum where the catalogue records a
+minimal polynomial, and `—` where it records none — either because the record is the
+grid, or because the packing has not been analytically optimized.
+Lower bounds are the strongest of four sources: the area bound `√n`; Nagamochi’s general
+closed form; monotonicity `s(n) ≥ s(m)` from the largest proved `m ≤ n`; and, for every
+`n ≥ 11`, Stromquist’s Theorem 2 through the same monotonicity.
+All values were computed in this research by parsing the record catalogue and evaluating
+the bounds; see [Methodology](#methodology).
+
+| `n` | best known `s(n)` (upper) | deg | best proved lower bound | from | gap |
+| --- | --- | --- | --- | --- | --- |
+| 11 | 3.87708359 | 8 | 3.788854 | Stromquist Thm 2 via `s(11)` | 0.0882 |
+| 12 | 4 (grid) | — | 3.788854 | Stromquist Thm 2 via `s(11)` | 0.2111 |
+| 17 | 4.67553009 | 18 | 4.162278 | Nagamochi | 0.5133 |
+| 18 | `7/2 + 1/2√7` = 4.82287566 | — | 4.316625 | Nagamochi | 0.5063 |
+| 19 | `3 + 4/3√2` = 4.88561808 | — | 4.464102 | Nagamochi | 0.4215 |
+| 20 | 5 (grid) | — | 4.605551 | Nagamochi | 0.3944 |
+| 21 | 5 (grid) | — | 4.741657 | Nagamochi | 0.2583 |
+| 26 | `7/2 + 3/2√2` = 5.62132034 | — | 5.123106 | Nagamochi | 0.4982 |
+| 27 | `5 + 1/2√2` = 5.70710678 | — | 5.242641 | Nagamochi | 0.4645 |
+| 28 | 5.82444462 | 6 | 5.358899 | Nagamochi | 0.4655 |
+| 29 | 5.93383346 | — | 5.472136 | Nagamochi | 0.4617 |
+| 30 | 6 (grid) | — | 5.582576 | Nagamochi | 0.4174 |
+| 31 | 6 (grid) | — | 5.690416 | Nagamochi | 0.3096 |
+| 32 | 6 (grid) | — | 5.795832 | Nagamochi | 0.2042 |
+| 37 | 6.59861961 | 8 | 6.099020 | Nagamochi | 0.4996 |
+| 38 | `6 + 1/2√2` = 6.70710678 | — | 6.196152 | Nagamochi | 0.5110 |
+| 39 | 6.81072208 | 5 | 6.291503 | Nagamochi | 0.5192 |
+| 40 | `4 + 2 √2` = 6.82842712 | — | 6.385165 | Nagamochi | 0.4433 |
+| 41 | 6.92669309 | 42 | 6.477226 | Nagamochi | 0.4495 |
+| 42 | 7 (grid) | — | 6.567764 | Nagamochi | 0.4322 |
+| 43 | 7 (grid) | — | 6.656854 | Nagamochi | 0.3431 |
+| 44 | 7 (grid) | — | 6.744563 | Nagamochi | 0.2554 |
+| 45 | 7 (grid) | — | 6.830952 | Nagamochi | 0.1690 |
+| 50 | `7 + 4/7` = 7.57142857 | — | 7.082763 | Nagamochi | 0.4887 |
+| 51 | 7.70079924 | 12 | 7.164414 | Nagamochi | 0.5364 |
+| 52 | `7 + 1/2√2` = 7.70710678 | — | 7.244998 | Nagamochi | 0.4621 |
+| 53 | `13/2 + 1/2√7` = 7.82287566 | — | 7.324555 | Nagamochi | 0.4983 |
+| 54 | 7.84666719 | — | 7.403124 | Nagamochi | 0.4435 |
+| 55 | 7.94577101 | — | 7.480741 | Nagamochi | 0.4650 |
+| 56 | 8 (grid) | — | 7.557439 | Nagamochi | 0.4426 |
+| 57 | 8 (grid) | — | 7.633250 | Nagamochi | 0.3668 |
+| 58 | 8 (grid) | — | 7.708204 | Nagamochi | 0.2918 |
+| 59 | 8 (grid) | — | 7.782330 | Nagamochi | 0.2177 |
+| 60 | 8 (grid) | — | 7.855655 | Nagamochi | 0.1443 |
+| 61 | 8 (grid) | — | 7.928203 | Nagamochi | 0.0718 |
+| 65 | `5 + 5/2√2` = 8.53553391 | — | 8.071068 | Nagamochi | 0.4645 |
+| 66 | `3 + 4 √2` = 8.65685425 | — | 8.141428 | Nagamochi | 0.5154 |
+| 67 | `8 + 1/2√2` = 8.70710678 | — | 8.211103 | Nagamochi | 0.4960 |
+| 68 | 8.80345994 | — | 8.280110 | Nagamochi | 0.5234 |
+| 69 | 8.82721206 | 82 | 8.348469 | Nagamochi | 0.4787 |
+| 70 | 8.88166676 | 4 | 8.416198 | Nagamochi | 0.4655 |
+| 71 | 8.94407156 | — | 8.483315 | Nagamochi | 0.4608 |
+| 72 | 9 (grid) | — | 8.549834 | Nagamochi | 0.4502 |
+| 73 | 9 (grid) | — | 8.615773 | Nagamochi | 0.3842 |
+| 74 | 9 (grid) | — | 8.681146 | Nagamochi | 0.3189 |
+| 75 | 9 (grid) | — | 8.745967 | Nagamochi | 0.2540 |
+| 76 | 9 (grid) | — | 8.810250 | Nagamochi | 0.1898 |
+| 77 | 9 (grid) | — | 8.874008 | Nagamochi | 0.1260 |
+| 78 | 9 (grid) | — | 8.937254 | Nagamochi | 0.0627 |
+| 82 | `6 + 5/2√2` = 9.53553391 | — | 9.062258 | Nagamochi | 0.4733 |
+| 83 | 9.63482562 | 24 | 9.124038 | Nagamochi | 0.5108 |
+| 84 | `9 + 1/2√2` = 9.70710678 | — | 9.185353 | Nagamochi | 0.5218 |
+| 85 | `11/2 + 3 √2` = 9.74264069 | — | 9.246211 | Nagamochi | 0.4964 |
+| 86 | `17/2 + 1/2√7` = 9.82287566 | — | 9.306624 | Nagamochi | 0.5163 |
+| 87 | 9.83881744 | 44 | 9.366600 | Nagamochi | 0.4722 |
+| 88 | 9.88815305 | 20 | 9.426150 | Nagamochi | 0.4620 |
+| 89 | `5 + 7/2√2` = 9.94974747 | — | 9.485281 | Nagamochi | 0.4645 |
+| 90 | 10 (grid) | — | 9.544004 | Nagamochi | 0.4560 |
+| 91 | 10 (grid) | — | 9.602325 | Nagamochi | 0.3977 |
+| 92 | 10 (grid) | — | 9.660254 | Nagamochi | 0.3397 |
+| 93 | 10 (grid) | — | 9.717798 | Nagamochi | 0.2822 |
+| 94 | 10 (grid) | — | 9.774964 | Nagamochi | 0.2250 |
+| 95 | 10 (grid) | — | 9.831761 | Nagamochi | 0.1682 |
+| 96 | 10 (grid) | — | 9.888194 | Nagamochi | 0.1118 |
+| 97 | 10 (grid) | — | 9.944272 | Nagamochi | 0.0557 |
+
+**What the table says.** Five things, none of them visible from the list of solved cases
+alone.
+
+1. **The gap at `n = 11` is the *smallest* open gap in the table, at `0.0882`.** Every
+   other open case is further from resolution, most by a factor of three or more.
+   `n = 11` is not merely the first open case; it is the one where the two bounds are
+   closest, and it is still unresolved after two decades.
+   That is the sharpest available statement of how hard the lower-bound problem is.
+2. **Nagamochi’s bound is doing nearly all the work.** For 63 of the 65 open cases it is
+   the best lower bound in print.
+   Only `n = 11` and `n = 12` are governed by a bespoke argument — Stromquist’s — and
+   that argument has never been extended.
+   The lower-bound frontier is, almost everywhere, a *general* theorem that nobody has
+   improved on in twenty years.
+3. **`n = 12` is the worst-served small case.** Its best proved lower bound is
+   Stromquist’s `s(11)` bound inherited by monotonicity; nothing specific to 12 has ever
+   been proved, leaving a gap of `0.2111` against the trivial grid packing.
+   Note the direction of implication: since 12 squares are easier to pack than 13, and
+   `s(13) = 4` *is* proved, proving `s(12) = 4` is **strictly stronger** than the
+   published Bentz result.
+4. **Algebraic degree explodes immediately past 11.** `s(11)` is degree 8; `s(17)` is
+   degree 18. Every *solved* case is degree ≤ 2. Whatever certifies these values will
+   not be an unavoidable point set with coordinates built from unit distances.
+5. **The grid is still the record for 31 of the 65 open cases**, in ranges where no
+   tilted construction has ever been found to beat it.
+   These are where a modern search program has the most obvious room to contribute — and
+   also where a *proof* is most plausibly within reach of the existing technique,
+   because the conjectured optimum is an **integer**.
+
+Point 5 is the practical one: if the object is to prove something new rather than to
+find something new, the targets are the open cases with integer conjectured optima, not
+`n = 11`.
+
+#### `n = 12` to `n = 16`: the next targets after 11
+
+The five cases immediately above `n = 11` deserve separate treatment, because they are
+where a realistic proof attempt would start and they are consistently skipped in
+summaries that stop at “11 is the first open case.”
+
+| `n` | best known | conjectured optimum | proved? | why it is interesting |
+| --- | --- | --- | --- | --- |
+| 12 | `4` (grid) | integer `4` | **open** | Strictly stronger than the proved `s(13) = 4`; no bespoke bound exists |
+| 13 | `4` | integer `4` | **proved** — **[Bentz 2010]** | The template: an integer optimum reached by continuously varying families |
+| 14 | `4` | integer `4` | **proved** — **[Friedman DS7]** | Almost-unavoidable sets plus a 5-case enumeration |
+| 15 | `4` | integer `4` | **proved** — **[El Moumni 1999]**, **[Friedman DS7]** | Also covered by Nagamochi (`4² − 1`) |
+| 16 | `4` | integer `4` | **proved** (perfect square) | Trivial |
+
+The striking feature is that **`n = 12` is the only open case in this range**, it is
+surrounded on both sides by proved values of exactly `4`, and its own optimum is
+near-certainly `4` as well.
+It is the closest thing this subject has to low-hanging fruit, and the reason it is
+unpicked is instructive: 13 is *easier* to prove than 12, because a lower-bound argument
+must exclude packings of `n` squares, and excluding 12 squares from a side-4 container
+is a strictly stronger statement than excluding 13. The unavoidable-point method’s
+difficulty scales with how *few* squares must be excluded, which inverts the usual
+intuition that small `n` is easy.
+
+For a computational proof effort, `n = 12` is therefore the recommended first target: an
+integer optimum (so no high-degree algebraic threshold is needed, which is the specific
+obstruction at `n = 11`), a container of modest size, and a result that would be the
+first new proved value of `s(n)` since 2018.
 
 ### Catalogue of search strategies for finding packings (upper bounds)
 
@@ -804,6 +1058,20 @@ Whether anything crosses over is untested.
 We flag it as the most interesting *conceptual* gap found in this research, distinct
 from the most promising *computational* one.
 
+**Where to start, concretely.** The entry points into that literature, for anyone who
+wants to test the crossover rather than admire it, are: the **fractional Helly**
+theorems and their `(p, q)` consequences; the **Alon–Kleitman** bounded-`τ*/ν`
+machinery, which is the canonical route from a fractional transversal bound to an
+integral one for families with Helly-type structure; and the LP-duality pairing of `τ*`
+with fractional packing, which is the exact certificate shape **[Bentz 2010]**'s
+Corollary 7 and **[Bentz 2016]**'s continuously varying families keep re-deriving by
+hand.
+The obstacle to a direct import is stated above and is real — those results concern
+finite families given in advance, and `s(n)` needs the infinite family of all placeable
+unit squares — but the infinite family here is *parametrised by a compact
+three-manifold* `(x, y, θ)`, which is exactly the setting in which fractional Helly
+arguments are usually made to work.
+
 ### A foundational point usually skipped: is `s(n)` attained?
 
 Nearly every source writes `s(n)` as “the side of the smallest square into which `n`
@@ -829,51 +1097,76 @@ nonavoidance lemmas usable, and compactness is what makes the conversion sound.
 ### Computational attacks
 
 **[Gensane–Ryckelynck 2005]** — “Improved Dense Packings of Congruent Squares in a
-Square,” *Discrete & Computational Geometry*. **[secondary]** — paywalled; its `n = 11`
-content is known through **[Ellsworth SVG]**, which cites it by page.
-They introduce a **maximal inflation function** and an algorithm analogous to the
-*billiard* methods used for packing congruent disks or spheres in a bounded domain:
-configurations are perturbed and “inflated” until they jam.
-Secondary sources report that they improved the best known packings for `n = 11, 29, 37`
-and gave an alternative optimal packing of 18 squares.
+Square,” *Discrete & Computational Geometry* **34** (2005) 97–109. **Retrieved and read
+in full** (Springer serves the PDF openly; an earlier pass of this research recorded it
+as paywalled, which was wrong — see [Methodology](#methodology)). They link `sₙ` to the
+supremum of the maximal **inflation** `ω(C)` over admissible configurations `C`, and
+derive from its properties an algorithm analogous to the *billiard* methods used for
+packing congruent disks or spheres in a bounded domain: configurations are perturbed and
+inflated until they jam.
 
-**The n = 11 claim — RESOLVED.** Earlier drafts of this document flagged the
-Gensane–Ryckelynck `n = 11` entry as needing primary-source confirmation.
-It is now settled, from the provenance notes in Ellsworth’s catalogue source, which cite
-the DCG paper directly (p. 10 of 13):
+**What they actually did at `n = 11`, from the paper itself.** This is the origin of the
+persistent “Gensane–Ryckelynck improved `n = 11`” confusion, and with the primary in
+hand it can be stated exactly.
+Their abstract does claim an improvement — “We improve the best known packings of `n`
+equal squares for `n = 11, 29` and `37`” — and §7 explains what that means for 11:
 
-> **They did not improve the packing.
-> They computed its exact algebraic solution.**
+> The best known packing is due to Trump and apparently to many other people.
+> In [3] we find that `s₁₁ ≤ 3.8772` for a packing given in Fig.
+> 3. We have obtained **this packing** several times with `s₁₁ = 3.87708359…`, a result
+> which is slightly better.
 
-The `n = 11` entry in secondary summaries of their paper refers to the first exact
-polynomial-root characterisation of Trump’s 1979 configuration, not to a denser
-arrangement. Their elimination used a system of 14 equations, and they published a
-formula for `2/s` rather than `s` (while presenting it as a formula for `s`) and gave
-only the cosine of a 45°-offset angle — which is very plausibly how the secondary
-literature came to describe the result as an improvement in `s`. This is consistent with
-every record catalogue continuing to attribute `n = 11` to Trump, 1979, and with
-Gensane’s February 2023 confirmation that the program could not improve on the 1979
-packing. See
-[The exact construction](#the-exact-construction-contact-equations-coordinates-and-closed-form)
-for the corrected timeline.
+So the improvement is to the **recorded numerical bound** — Friedman’s rounded `3.8772`
+sharpened to `3.87708359…` — for the **same configuration**, Trump’s, which their figure
+reproduces. No denser arrangement was found.
+Both readings in circulation are therefore half-right, and the resolution is that
+“improved the packing” and “improved the published number for the packing” were
+conflated somewhere downstream.
 
-The remaining secondary record, retained for context:
+**Their exact solution.** They also computed the algebraic characterization, by
+“eliminating with Maple a system of **14 polynomial equations**” whose unknowns are the
+square side, `z = cos θ`, `z' = sin θ`, the coordinates `(aᵢ, bᵢ)` of the five tilted
+squares, and `α > 0`, the distance between the two upper detached squares.
+The result they publish is the cosine of the angle `θ` of the five central squares, as a
+real root `z₀` of a polynomial *irreducible over* `ℚ(√2)`:
 
-- Gensane and Ryckelynck “thought in 2004 that their program could slightly improve the
-  packing from 1979.”
-- In **February 2023**, Thierry Gensane confirmed by correspondence that their program
-  **could not** improve the 1979 packing.
-- Every current record catalogue — Friedman’s survey, the Kingbird catalogue, Wikipedia
-  — still credits `n = 11` to **Trump, 1979**, at `≈ 3.877084`.
-- The `explainxkcd` annotation describes the case as “discovered by Walter Trump in 1979
-  and refined by Gensane et al.
-  in 2004,” which is consistent with a *numerical refinement of the same configuration*
-  rather than a better configuration.
+```
+80z⁸ − 128√2·z⁷ − 32z⁶ + 144√2·z⁵ + 72z⁴ − 112√2·z³ + 40z² − 12√2·z − 7
+```
 
-The reading above is now confirmed rather than conjectural.
-The one detail still resting on a secondary source is the internal content of the DCG
-paper itself, which remains paywalled; Ellsworth’s annotation cites it by page and
-reproduces its formula, which we treat as reliable.
+*Verified in this research:* this polynomial has exactly two real roots, and the
+relevant one is
+
+```
+z₀ = 0.99646642997738577107…,   arccos z₀ = 4.81806270967028353…°
+```
+
+which is exactly `45° − 40.1819372903297164652…°`. **Their `θ` is the complement of the
+standard tilt angle against the diagonal**, so the paper reports `cos(45° − a)` where
+the catalogues report `a ≈ 40.182°`. That offset, plus a normalization in which their
+`s` is the *side of the small squares* inside a container `[−L, L]²` (with `s = c√2` for
+`c` the half-diagonal) rather than the container side for unit squares, is why the
+published formula does not look like a formula for `s(11)` and cannot be read off as
+one. It is the same packing and the same algebraic number, in a different frame.
+
+Two further details worth recording.
+Their “crucial relation”, obtained from the distance between two dashed sides of their
+figure, is a compact expression of the form `s = √2·4z/(2 + 5z − z')` as printed; the
+displayed fraction does not survive PDF extraction unambiguously and the reconstruction
+above does not reproduce `s(11)` under any normalization tried here, so **it should be
+read from the PDF before being relied on** — the polynomial and the angle, which are
+verified above, are the load-bearing results.
+And at `n = 17` they report `s₁₇ = 4.6755300960455` from a four-equation degree-7 system
+in `cos θ₁, cos θ₂, sin θ₁, sin θ₂`, remarking that Friedman’s rounded `4.6755` “seems
+to be false”; the current catalogue value is `4.67553009360455…`, so the two agree only
+to nine decimals and one of the two transcriptions carries a slip.
+
+**Consistency with the record.** Nothing was retracted, every catalogue continues to
+attribute `n = 11` to Trump 1979, and in **February 2023** Thierry Gensane confirmed by
+correspondence that their program **could not** improve the 1979 packing — consistent
+with §7, which describes recovering it rather than beating it.
+The `explainxkcd` annotation’s “discovered by Walter Trump in 1979 and refined by
+Gensane et al. in 2004” is, read carefully, correct: *refined*, not replaced.
 
 **A 2023 note.** A document titled “Packing of 11 unit squares in a square with minimum
 size” was posted (ResearchGate, March 2023; author almost certainly Walter Trump, whose
@@ -1005,24 +1298,59 @@ packing unit squares into a large square of side `x`.
 
 | Result | Bound on `W(x)` | Approx. exponent |
 | --- | --- | --- |
-| Erdős & Graham (1975) | `O(x^{7/11})` | 0.636 |
-| Roth & Vaughan (1978), lower bound | if `x(x−⌊x⌋) > 1/6` then `W(x) ≥ 10⁻¹⁰⁰√(x· | x − ⌊x⌋ + 1/2 |
-| Montgomery | `O(x^{(3−√3)/2})` | 0.634 |
-| Chung & Graham (2009) | `O(x^{(3+√2)/7} log x)` | 0.631 |
-| Chung & Graham (2020, claimed) | `O(x^{3/5})` | 0.600 |
-| McClenagan (2026), Bui (2025) | `O(x^{3/5})` | 0.600 |
+| Erdős–Graham (1975), upper | `O(x^{7/11})` | 0.6364 |
+| Montgomery (unpublished), upper | `O(x^{(3−√3)/2 + ε})` | 0.6340 |
+| Chung–Graham (2009), upper | `O(x^{(3+√2)/7} log x)` | 0.6306 |
+| **Wang–Dong–Li (2016)**, upper | `O(x^{5/8})` | 0.6250 |
+| Chung–Graham (2020), upper — **claim withdrawn in effect** | `O(x^{3/5})` | 0.6000 |
+| Bui (2025), McClenagan (2026), upper | `O(x^{3/5})` | 0.6000 |
+| **Roth–Vaughan (1978), lower** | `W(x) = Ω((x·‖x‖)^{1/2})`, `‖x‖` = distance to the nearest integer | ≥ 0.5 at half-integers |
 
 The Erdős–Graham result is the historical origin of the insight that **tilted** unit
 squares beat axis-aligned ones — the same phenomenon that makes `n = 11` interesting,
 appearing asymptotically.
-Roth and Vaughan’s lower bound, stated precisely in **[Friedman DS7]**, is that if
-`x(x − ⌊x⌋) > 1/6` then `W(x) ≥ 10⁻¹⁰⁰√(x·|x − ⌊x⌋ + 1/2|)`, which implies `W(x)` is
-**not** `O(x^α)` for any `α < 1/2`; they also introduced the notion of a **good square**
-(inclination at most `10⁻¹⁰`), and it has since been shown that for computing the
-asymptotic growth of wasted space it suffices to consider packings with only good
-squares (arXiv:2504.09489). Recent activity is brisk: arXiv:2508.04603 ("Square packing
-with `O(x^{0.6})` wasted area") and arXiv:2602.01484 (McClenagan, “Optimally Packing a
-Large Square by Unit Squares,” 1 Feb 2026, from a 2024 thesis).
+Their paper also poses a conjecture that remains open in its own right: with `f(a)` the
+maximal total circumference of `a` non-overlapping squares packed in a unit square,
+`f(k² + 1) = 4k`.
+
+**The upper-bound chain, stated carefully.** Two corrections to the version of this
+history that circulates in secondary summaries.
+The step from `0.631` to `0.600` was not a single move: **Wang, Dong and Li**
+(arXiv:1603.02368, 2016) improved Chung–Graham’s `O(x^{(3+√2)/7} log x)` to
+`O(x^{5/8})`, and did the same for the dual *covering* problem, taking the minimum
+number of unit squares needed to cover the large square from
+`x² + O(x^{(3+√2)/7} log x)` to `x² + O(x^{5/8})` **[Wang–Dong–Li 2016]**. And the
+`O(x^{3/5})` bound claimed by Chung and Graham in 2020 **contains an error**: McClenagan
+states it flatly — “this result has an error in it, which brings the best known bound
+back” — and the point of both 2025–26 papers is to *establish* `O(x^{3/5})` by a new
+route, not to re-derive an already-sound one **[McClenagan 2026]**,
+**[Waste-0.6 2025]**. Treat `O(x^{3/5})` as dating from 2025, not 2020.
+
+**The Roth–Vaughan lower bound, and a caution about it.** The correct shape of the bound
+is governed by the distance from `x` to the **nearest integer**, not by its fractional
+part: `W(x) = Ω((x·‖x‖)^{1/2})`, whose headline corollary is that at half-integer side
+lengths the wasted area is at least proportional to `√x` **[Wikipedia]**. This implies
+`W(x)` is **not** `O(x^α)` for any `α < 1/2`, which is the form the rest of this
+literature quotes (**[Good-Squares 2025]** writes it `W(x) ∉ o(x^{1/2})`).
+
+The caution is that **the primary paper is the one source in this document’s asymptotic
+section that could not be retrieved**, and the available secondary renderings of its
+theorem disagree with each other.
+The archived **[Friedman DS7]** transcription loses the floor-function notation entirely
+and is flagged `GARBLED` at exactly this sentence; **[McClenagan 2026]** renders it
+`W(x) > 10⁻¹⁰⁰√(x − ⌊x⌋)`, using the fractional part.
+A fractional-part reading cannot be right as stated: it would force `Ω(√x)` waste for
+`x` just *below* an integer, where a near-perfect grid packing exists.
+So the nearest-integer form above is adopted on the strength of the Wikipedia rendering
+plus internal consistency, and the exact constant and side condition — Roth and
+Vaughan’s explicit `10⁻¹⁰⁰`, and a hypothesis of the shape `x‖x‖ > c` — are **not**
+stated here precisely, because no retrieved source states them reliably.
+Resolving this needs the 1978 paper; see [Open Questions](#open-questions).
+
+Roth and Vaughan also introduced the notion of a **good square** — one whose inclination
+is at most `10⁻¹⁰` — and it has since been shown that for computing the asymptotic
+growth of wasted space it suffices to consider packings with only good squares
+**[Good-Squares 2025]**.
 
 **Why this is irrelevant to `n = 11`.** These are asymptotic statements with unspecified
 or astronomically weak constants — Roth and Vaughan’s explicit `10⁻¹⁰⁰` is emblematic.
@@ -1046,6 +1374,11 @@ worth recording so they are not propagated.
 | Kirchhoff’s-law / Smith-diagram methods are a promising route to new bounds here | **False** | The method requires a gapless tiling by distinct axis-aligned squares and yields rational answers by construction. All four conditions fail for `s(11)`. See the dedicated section. |
 | Gensane and Ryckelynck (2004/05) improved the `n = 11` packing | **False** | They computed its first *exact algebraic solution*, not a denser packing. The 1979 configuration is unchanged. |
 | *Our own earlier draft:* rigorous interval branch-and-bound is “the most plausible untried line of attack” | **Wrong — corrected** | It is not untried. It has been applied to rotating unit squares (Montanher et al. 2018) and rigorously reaches `n = 3`. It is the most *developed* modern approach and falls far short of `n = 11`. |
+| *Our own earlier draft:* the Roth–Vaughan bound is `W(x) ≥ 10⁻¹⁰⁰√(x·\|x − ⌊x⌋ + 1/2\|)`, “stated precisely in [Friedman DS7]” | **Wrong — corrected** | The bound is governed by distance to the **nearest integer**, not the fractional part; the DS7 transcription is flagged `GARBLED` at that exact sentence and states nothing precisely. See [the asymptotic section](#asymptotic-theory-and-why-it-does-not-help). |
+| *Our own earlier draft:* Kearney–Shiu prove `n_r ≤ 27r^{3/2} + O(r²)` | **Wrong — corrected** | The bound is `27r³/2 + O(r²)` — cubic in `r`, from `p(⌈3r/2⌉)` with `p(t) = 4t³ + 4t² + 3t + 1`. A misread fraction. |
+| *Our own earlier draft:* Stromquist’s Theorem 2 is “ten unavoidable points, eleven boxes, pigeonhole” | **Wrong — corrected** | The ten points are *not* unavoidable; the proof is two-stage and finishes with twelve points of which one box must contain **three**. Same for Theorem 3. See [What Stromquist actually proved](#what-stromquist-actually-proved-2003). |
+| *Our own earlier draft:* Gensane–Ryckelynck and Nagamochi could not be retrieved | **Wrong — corrected** | Both are freely available: Springer serves the Gensane–Ryckelynck PDF openly, and Nagamochi is open access in *Electron. J. Combin.* 12 #R37. Both are now in the local archive and read. |
+| *Our own earlier draft:* Kearney–Shiu gave the first published proof for `n = 6, 7, 8, 9` | **Partly wrong — corrected** | Their first is `s(6) = 3`. **El Moumni (1999)** holds published priority for `s(7) = s(8) = 3` and `s(15) = 4`. See the [priority ledger](#priority-claims-and-what-was-actually-published). |
 
 The third row is a useful caution: at least one automated summarizer produced
 self-contradictory arithmetic while citing a correct source.
@@ -1185,6 +1518,105 @@ These are frequently conflated with the present problem in casual sources:
     optimality is emphatically *not* that the candidate is complicated — it is that
     nothing rules out the configurations nobody has thought of.
 
+## A Research Program
+
+The preceding sections describe what is known.
+This one describes what to do about it, ordered by value per unit of effort, and it is
+written on the assumption that the work will be done with modern computational tooling
+and coding agents rather than by hand.
+
+It rests on one observation that the
+[open-frontier table](#the-open-frontier-what-is-actually-unknown) makes unavoidable:
+**the search side of this problem is healthy and the proof side is not.** Records move
+monthly; the lower-bound frontier is a 2005 general theorem plus one 2003 argument that
+covers two values of `n`. Any program should be weighted accordingly.
+
+### Foundations: finish the archive and the survey
+
+1. **Retrieve the remaining primaries.** Roth–Vaughan (1978) first — it is the only
+   source in this document whose statement could not be pinned down, and three secondary
+   renderings of it disagree.
+   Then El Moumni (1999), Stromquist’s 1984 memoranda, Chung–Graham (2009), and
+   Arslanov–Bui (2025). Each per the three-format archive discipline in
+   [`resources/`](../../../resources/README.md).
+2. **Machine-readable record corpus.** Parse the catalogue SVGs into `(x, y, θ)` triples
+   with their algebraic definitions and minimal polynomials.
+   The [open-frontier table](#the-open-frontier-what-is-actually-unknown) above was
+   built by parsing the catalogue’s *prose*; a real schema would make it derived data
+   rather than a one-off, and would let every record be independently audited for the
+   first time. This is the cheapest high-value artifact in the whole program and
+   everything downstream consumes it.
+
+### The verifier, and why it comes before the searcher
+
+3. **Ship the exact verifier as a real tool.** The reference implementation in
+   [`explorations/packing/`](../../../README.md) certifies `s(11)` exactly in 0.35 s of
+   pure Python; the production version is a filtered exact-predicate kernel over `ℚ(α)`
+   on top of FLINT or CGAL. Its value is not the checking — it is that a search program
+   with an exact oracle can *publish claims that mean something*, which no current
+   record-setting program can do.
+
+### Search: an open baseline where none exists
+
+4. **Build an open GPU/many-core annealer.** The collision-detection engineering is
+   already solved by `jagua-rs` under MPL-2.0 with continuous rotation; the annealing
+   layer on top is comparatively simple.
+   Copy the determinism discipline recorded in the FrankenSim study — counter-based RNG
+   keyed by `(seed, kernel, tile, index)`, fixed-slot reductions in tile order — so that
+   basin statistics are reproducible and citable.
+5. **Point the modern evolutionary-search stack at `s(n)`.** As the companion tooling
+   document records, the AlphaEvolve benchmark ecosystem is active, open, contested to
+   the fifth decimal on adjacent problems, and **has never been aimed at
+   squares-in-squares**. Seeded with the record corpus and scored by the exact verifier,
+   it would test directly whether that class of method can rediscover Trump’s basin and
+   the low-`n` records — a question nobody has asked.
+   Success would be informative; failure would be more informative.
+
+### Proof: the lane where nothing automated has ever run
+
+This is the part of the program with no incumbents at all.
+
+6. **Machine-verify the existing unavoidable sets.** “Does every unit square in `[0,k]²`
+   contain a point of `P`?” is a decision problem in three parameters `(x, y, θ)` — well
+   inside the reach of interval branch-and-bound or an SMT solver with nonlinear
+   arithmetic. Every published lower bound in this subject rests on such sets, checked
+   only by referees with pencils.
+   Nobody has ever machine-checked one.
+7. **Search for new unavoidable configurations, targeting `n = 12`.** Per
+   [the `n = 12`–`16` analysis](#n-12-to-n-16-the-next-targets-after-11), `n = 12` is
+   the only open case in its range, its optimum is near-certainly the integer `4`, and
+   an integer target sidesteps the degree-8 obstruction that blocks `n = 11`. The search
+   is discrete-continuous — place points, verify unavoidability, minimise count — which
+   is the same shape as item 5 but aimed at proofs rather than packings.
+   Two lessons from this document constrain the design usefully: threshold certificates
+   (a box charged three points, as in Stromquist’s Theorem 2) are admissible and already
+   classical, and weighted or measure-valued resources (Bentz) are the direction the
+   field was already drifting.
+8. **Test the transversal crossover.** The fractional-transversal literature has
+   machinery — fractional Helly, Alon–Kleitman, LP duality — that this field has been
+   hand-deriving for forty years without naming.
+   Even a negative result would be worth writing down.
+9. **Formalise one small existing proof.** Friedman’s Lemmas 1–3 plus `s(2) = s(3) = 2`,
+   then Stromquist’s Theorem 1, in Lean.
+   Small, self-contained, and it would surface any informal gaps in the lemma layer that
+   every other result stands on.
+   The precedent is now strong: dimension-8 sphere packing went sorry-free in February
+   2026, with an autoformalisation agent closing the remaining goals in five days.
+
+### Two calibrations to keep the program honest
+
+**Do not target `s(11)` with a rigorous solver.** The only computer-assisted optimality
+proof for rotatable unit squares in any container covers **three** squares in a circle,
+and took ten minutes to do it.
+Eleven squares is eight more rotational degrees of freedom on top of sixteen positional
+ones, against a disjunctive non-overlap condition and a degree-8 irrational target.
+That ceiling is a measurement of the difficulty, not an invitation.
+
+**Search cannot settle this problem.** Fifty years of it has not beaten a 1979 hand
+construction, which raises confidence in the conjecture and provides no leverage on the
+proof. A search that fails to find something better has certified nothing.
+Every item in the proof lane above exists because of this.
+
 ## Open Questions
 
 - [ ] Can the unavoidable-point method, or Bentz’s continuously-varying refinement,
@@ -1206,8 +1638,36 @@ These are frequently conflated with the present problem in casual sources:
   the catalogue SVG source and re-verified at 40-digit precision.
   See
   [The exact construction](#the-exact-construction-contact-equations-coordinates-and-closed-form).
+- [x] ~~Retrieve the Gensane–Ryckelynck primary text~~ — **resolved**: Springer serves
+  the PDF openly; retrieved, read, archived, and its `n = 11` section is now quoted
+  directly above rather than through Ellsworth’s annotations.
+  Their published polynomial and its `45°`-offset angle were independently verified
+  here.
+- [x] ~~Locate Nagamochi (2005)~~ — **resolved**: open access as *Packing Unit Squares
+  in a Rectangle*, *Electron.
+  J. Combin.* **12** #R37. Archived; its general lower bound is now recorded and used
+  throughout the [open-frontier table](#the-open-frontier-what-is-actually-unknown).
+- [ ] **Obtain Roth & Vaughan (1978)** and settle the exact form of the lower bound —
+  the constant, the side condition, and whether the kernel is `‖x‖` or something
+  subtler. This is now the single most consequential unretrieved item in the document,
+  because every available rendering of it disagrees with the others.
+  ScienceDirect 403s automated clients; a library copy is the realistic route.
+- [ ] Obtain El Moumni (1999), *Studia Sci.
+  Math. Hungar.* **35** 281–290, and confirm what it proves and how; it holds published
+  priority for three values and no summary of this field describes its method.
+- [ ] Obtain Stromquist’s 1984 Wagner Associates memoranda I–III. Memorandum III covers
+  `n ≤ 65` and Gardner’s conjecture for `n = 11`, and sits behind a large share of the
+  claim column in the
+  [priority ledger](#priority-claims-and-what-was-actually-published).
 - [ ] Obtain the full text of the March 2023 “Packing of 11 unit squares in a square
   with minimum size” note (ResearchGate 403).
+- [ ] Read the “crucial relation” of **[Gensane–Ryckelynck 2005]** off the PDF directly:
+  its displayed fraction does not survive text extraction unambiguously, and the
+  reconstruction attempted here does not reproduce `s(11)` under any normalization
+  tried.
+- [ ] Reconcile the two published values for `s(17)`: **[Gensane–Ryckelynck 2005]**
+  report `4.6755300960455`, **[Kingbird]** `4.67553009360455…`. They agree to nine
+  decimals; one transcription carries a slip.
 - [ ] Locate Boris Alexeev’s independent June 2023 derivation and record the
   “substantially different method” it used.
 - [ ] Trace the 1980 Gustafsson–Thulin rediscovery to the primary Swedish source
@@ -1241,14 +1701,15 @@ impossible constants.
 **Independent verification performed.**
 
 - Confirmed `3 + √(1/2) = 3.7071067811865475`,
-  `2 + 2√(4/5) = 2 + 4/√5 = 3.7888543819998315`, and
+  `2 + 2√(4/5) = 2 + 4/√5 = 3.78885438199983176…`, and
   `2 + 4√2/3 = 2 + 2√(8/9) = 3.885618083164127`, establishing that the abstract’s two
   forms of the Theorem 3 constant agree.
 - Evaluated the degree-8 polynomial at the published side length:
   `P(3.87708359002281) ≈ −6.4 × 10⁻¹³`, consistent to available precision.
 - Factored the polynomial symbolically (SymPy): **irreducible over ℚ**, with exactly two
   real roots, the positive one being `3.877083590022814`.
-- Computed the open interval width: `0.08822920802297851`.
+- Computed the open interval width: `0.088229208022982…` (re-derived at 50-digit
+  precision; an earlier draft quoted a float64 value correct only to ~12 digits).
 
 **Sources that could not be retrieved.** ResearchGate (HTTP 403), Academia.edu (403),
 ACM Digital Library (403), and Springer (authentication redirect) blocked access to the
@@ -1282,15 +1743,66 @@ rigorous interval branch-and-bound was untried.
 All contact equations and derived constants were re-verified at 40-digit precision with
 mpmath; residuals are below `10⁻³²` throughout.
 
+**Fourth pass — technical review and remediation (same day).** The document was reviewed
+end to end against its own archive, every substantive claim class was re-verified, and
+the findings were applied here rather than kept in a separate review document.
+What that pass changed:
+
+- **Re-verified independently** (SymPy and mpmath, 50 digits): the degree-8 polynomial’s
+  irreducibility and real roots; mutual consistency of the three degree-8 polynomials
+  for `s`, `sec a` and `tan(a/2)` by resultant elimination; both contact equations; the
+  closed form; the tilt angle; all five derived constants (residuals below `10⁻⁴⁷`); and
+  the Stromquist constants.
+  All held. The packaged verifier’s `test.sh` was re-run and passed.
+- **Retrieved two sources previously recorded as unavailable.** Springer serves the
+  **[Gensane–Ryckelynck 2005]** PDF openly at its `/content/pdf/` URL — the earlier pass
+  had fetched the article landing page and concluded paywalled.
+  **[Nagamochi 2005]** is open access in the *Electronic Journal of Combinatorics*; its
+  citation was in the archived **[Friedman DS7]** reference list the whole time.
+  **[Wang–Dong–Li 2016]** was also retrieved.
+  All three are archived with their PDF and a faithful `pdfminer.six` extraction;
+  cleaned transcriptions are still to be written, and the archive README records that.
+  (The extraction again required repairing a broken `cffi` installation.)
+- **Read the Gensane–Ryckelynck `n = 11` section directly** and rewrote it from the
+  paper: the 14-equation Maple elimination, the polynomial over `ℚ(√2)`, and the fact
+  that their claimed “improvement” at `n = 11` is a sharpening of the recorded *number*
+  for Trump’s configuration, not a better packing.
+  Their published root was verified here to be `cos(45° − a)`, which explains why the
+  formula does not look like one for `s(11)`.
+- **Corrected five substantive errors**, each recorded in
+  [Corrections to Common Summaries](#corrections-to-common-summaries): the Roth–Vaughan
+  formula and its attribution, the Kearney–Shiu exponent, the two-stage structure of
+  Stromquist’s Theorems 2 and 3, the retrievability conclusions, and the El Moumni
+  priority omission.
+- **Built the [open-frontier table](#the-open-frontier-what-is-actually-unknown)** by
+  parsing the archived record catalogue programmatically for upper bounds, degrees and
+  analytic status, and evaluating four lower-bound sources per `n`. Counts quoted in the
+  surrounding analysis (65 open cases, 63 governed by Nagamochi, 31 where the grid is
+  still the record) were recomputed from the parse rather than estimated.
+  The same caveat as the other parsed statistics applies: these are counts of annotation
+  text and may miscount entries phrased unusually.
+- **Re-checked currency** by search: no change to either `s(11)` bound was found, the
+  catalogue’s `n = 11` entry still carries no proof attribution, and no result for
+  squares-in-squares has come out of the AlphaEvolve benchmark ecosystem.
+  Negative results from search remain weak evidence, per the standard below.
+
 **Confidence.** High for everything sourced to the Stromquist paper (read directly),
 Friedman’s survey, and the numeric verifications.
 Medium for the Gensane–Ryckelynck history and the 2023 correspondence, which rest on
 secondary reporting.
-High for the Smith-diagram correspondence and the squared-square history (checked
-against a specialist primary-facing source).
-The claims that interval branch-and-bound and SOS certificates have *never* been applied
-to `s(11)` are negative results from search, and negative results from search are weak:
-they mean nothing was found, not that nothing exists.
+High for the Smith-diagram correspondence and the squared-square history — with the
+caveat that these were checked against squaring.net, an excellent specialist source but
+still a secondary one; the BSST 1940 primary remains unretrieved (Project Euclid, not
+open access), and the rationality objection that makes the section decisive does not
+depend on it.
+The claims that interval branch-and-bound and SOS certificates have *never*
+been applied to `s(11)` are negative results from search, and negative results from
+search are weak: they mean nothing was found, not that nothing exists.
+The fourth pass supplies a concrete cautionary instance of exactly this: two sources
+this document had recorded as *unavailable* turned out to be freely downloadable, one of
+them open access in the same journal as much of the rest of the bibliography.
+A “not retrievable” conclusion is itself a negative search result and should be
+re-tested rather than inherited.
 
 ## References
 
@@ -1308,7 +1820,9 @@ original, a cleaned `.md`, and for papers a faithful `.raw.md` extraction.
   in full during this research.*
 - **[Friedman DS7]** — Erich Friedman, “Packing Unit Squares in Squares: A Survey and
   New Results,” *Electron.
-  J. Combin.*, Dynamic Survey DS7.
+  J. Combin.*, Dynamic Survey DS7. Last substantive revision 14 Aug 2009; the archived
+  HTML also carries a **corrigendum dated 1 March 2023** correcting the typeset
+  Montgomery exponent to `(3−√3)/2`, which is the form used above.
   [Online](https://www.combinatorics.org/files/Surveys/ds7/ds7v5-2009/ds7-2009.html) ·
   local `papers/friedman-ds7-packing-unit-squares-in-squares`,
   `web/friedman-ds7-survey-2009-html`.
@@ -1325,7 +1839,10 @@ original, a cleaned `.md`, and for papers a faithful `.raw.md` extraction.
 - **[Bentz 2016]** — Wolfram Bentz, “Optimal Packings of 22 and 33 Unit Squares in a
   Square,” arXiv:1606.03746. [Online](https://arxiv.org/abs/1606.03746) · local
   `papers/bentz-2016-optimal-packings-22-and-33`. *Continuously varying families of
-  unavoidable sets.*
+  unavoidable sets.* **On the date:** cited throughout this document by its arXiv year,
+  2016; **[Kingbird]** dates the proof October 2018 and the companion tooling document
+  once wrote “Bentz 2018”. Same result, three defensible dates — arXiv 2016 is the
+  convention here.
 - **[Arslanov et al.]** — M. Z. Arslanov, S. A. Mustafin, Z. K. Shangitbayev, “Improved
   packings of n(n−1) unit squares in a square,” *Electron.
   J. Combin.* **28**(4).
@@ -1333,11 +1850,26 @@ original, a cleaned `.md`, and for papers a faithful `.raw.md` extraction.
   · local `papers/arslanov-improved-packings-n-n-1`.
 - **[Gensane–Ryckelynck 2005]** — T. Gensane and P. Ryckelynck, “Improved Dense Packings
   of Congruent Squares in a Square,” *Discrete Comput.
-  Geom.* (2005). [Online](https://link.springer.com/article/10.1007/s00454-004-1129-z) ·
-  **[not retrieved]** — paywalled.
-  Its `n = 11` content is known via **[Ellsworth SVG]**.
-- **Nagamochi (2005)** — `s(m²−1) = s(m²−2) = m`. **[not retrieved]** — no open-access
-  copy located; known through **[Friedman DS7]** and secondary summaries.
+  Geom.* **34** (2005) 97–109.
+  [Article](https://link.springer.com/article/10.1007/s00454-004-1129-z) ·
+  [open PDF](https://link.springer.com/content/pdf/10.1007/s00454-004-1129-z.pdf) ·
+  local `papers/gensane-ryckelynck-2005-improved-dense-packings`. *The inflation /
+  stochastic-billiard algorithm; the 14-equation elimination and the `ℚ(√2)` polynomial
+  for `cos(45° − a)`.* **Retrieved and read in full** — earlier passes recorded it as
+  paywalled after fetching the article landing page rather than the `/content/pdf/` URL.
+- **[Nagamochi 2005]** — Hiroshi Nagamochi, “Packing Unit Squares in a Rectangle,”
+  *Electron. J. Combin.* **12** (2005), #R37 (submitted 29 Sep 2004, published 30 Jul
+  2005).
+  [Online](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v12i1r37) ·
+  local `papers/nagamochi-2005-packing-unit-squares-in-a-rectangle`. *The general
+  rectangle theorem, the closed-form lower bound for every `N ≥ 4`, and the
+  `s(n²) = s(n²−1) = s(n²−2) = n` corollary.* **Open access** — an earlier pass of this
+  research recorded it as unlocated, which was wrong.
+- **[El Moumni 1999]** — Said El Moumni, “Optimal Packings of Unit Squares in a Square,”
+  *Studia Sci. Math. Hungar.* **35** (1999), no.
+  3–4, 281–290. **[not retrieved]** — print-only; known through **[Friedman DS7]** ref
+  [12], which credits it with `s(7) = s(8) = 3` and `s(15) = 4`. Holds published
+  priority for those three values.
 - **[Gardner 1979]** — Martin Gardner, “Mathematical Games,” *Scientific American*,
   October 1979 (also Nov 1979, Mar 1980, Nov 1980). Origin of the conjecture.
   **[not retrieved]** — print.
@@ -1391,6 +1923,17 @@ original, a cleaned `.md`, and for papers a faithful `.raw.md` extraction.
 - **[McClenagan 2026]** — Rory McClenagan, “Optimally Packing a Large Square by Unit
   Squares,” arXiv:2602.01484. [Online](https://arxiv.org/abs/2602.01484) · local
   `papers/mcclenagan-2026-optimally-packing-large-square`.
+- **[Wang–Dong–Li 2016]** — Shuang Wang, Tian Dong, Jiamin Li, “A New Result on Packing
+  Unit Squares into a Large Square,” arXiv:1603.02368 (Jilin University).
+  [Online](https://arxiv.org/abs/1603.02368) · local
+  `papers/wang-dong-li-2016-new-result-packing-unit-squares`. *The `O(x^{5/8})` step,
+  for both the packing-waste and covering-waste problems.*
+- **[Arslanov–Bui 2025]** — M. Z. Arslanov, H. D. Bui, “Note on ‘efficient packings of
+  unit squares in a large square’,” *Discrete Comput.
+  Geom.* (2025),
+  [doi:10.1007/s00454-025-00767-w](https://doi.org/10.1007/s00454-025-00767-w).
+  **[not retrieved]** — Springer; cited by **[Waste-0.6 2025]**. *Current continuation
+  of the Kearney–Shiu `δₙ`/`n_r` line.*
 - **[Good-Squares 2025]** — “Square Packing with Asymptotically Smallest Waste Only
   Needs Good Squares,” arXiv:2504.09489. [Online](https://arxiv.org/pdf/2504.09489) ·
   local `papers/square-packing-good-squares-2504.09489`.
