@@ -1010,12 +1010,24 @@ gone from heroic to routine within a decade:
 
 Both are packing optimality results with heavy case analysis and interval arithmetic —
 structurally the same kind of object an `s(11)` proof would be.
-The decisive caveat: **formalisation verifies a proof that already exists.** Neither
-project discovered its theorem.
-For `s(11)` there is no candidate proof to formalise, so this strategy is currently
+The caveat as first written here was that **formalisation only verifies a proof that
+already exists** — neither project discovered its theorem.
+That remains true of *those* projects and is **no longer true in general**: AlphaProof
+Nexus (arXiv:2605.22763, May 2026) resolved 9 of 353 open Erdős problems and 44 of 492
+open OEIS conjectures autonomously, at a few hundred dollars each, by pairing a frontier
+model with the Lean compiler in a loop.
+The correction matters less than it sounds for `s(11)` specifically — those problems had
+short proofs once found — but formal proof search is now a *search* method with a
+correctness guarantee attached, not only a transcription method.
+
+For `s(11)` there is still no candidate proof to formalise, so this strategy remains
 downstream of a gap nobody has closed.
-It matters as evidence that *if* a case-analysis proof of `s(11)` were produced,
-checking it is now tractable.
+What *is* available today is the other direction: the **upper bound** is a finite
+algebraic statement and could be formalised now, which would be the first formal theorem
+about `s(n)` for any non-trivial `n`. See
+[Lean for Square-Packing Proofs and Validation](research-2026-08-22-lean-for-packing-proofs-and-validation.md)
+for what is reachable when, and for the certificate pattern that makes a result
+verifiable by a third party who does not trust our code.
 
 **Strategy 15, revised.** An earlier draft of this document called rigorous interval
 branch-and-bound “the most plausible untried line of attack.”
