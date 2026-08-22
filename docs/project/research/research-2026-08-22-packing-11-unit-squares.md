@@ -118,7 +118,7 @@ The entire difficulty of the problem lies between them.
 | Quantity | Value | Status | Source |
 | --- | --- | --- | --- |
 | Area lower bound | `√11 ≈ 3.316625` | Trivial | — |
-| **Best proved lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Proved** | **[Stromquist 2003]**, Thm 2 |
+| **Best proved lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Proved** | **[Stromquist 2003]**, Thm 2; still the recorded bound in **[Friedman DS7]** |
 | **Best known packing (upper bound)** | `≈ 3.877084` | **Construction only** | Trump 1979, via **[Friedman DS7]**, **[Kingbird]** |
 | Lower bound for 0°/45°-only packings | `2 + (4/3)√2 ≈ 3.885618` | **Proved** | **[Stromquist 2003]**, Thm 3 |
 | Grid upper bound | `4` | Trivial | — |
@@ -602,7 +602,7 @@ successive papers refining rather than replacing it.
 | 15 | Interval arithmetic + branch and bound | Rigorously exclude all configurations numerically | **Yes for circles (n≤33); yes for unit squares with rotation but only n=3** |
 | 16 | SOS / Positivstellensatz certificates | Certify semialgebraic infeasibility via SDP | **No known application to this problem** |
 | 17 | LP/SDP relaxation with dual certificates | Bound via a relaxation's dual solution | No known application |
-| 18 | Machine-checked formal proof | Verify a case analysis in Lean/Coq | No — but precedented by Flyspeck for Kepler |
+| 18 | Machine-checked formal proof | Verify a case analysis in Lean/HOL Light/Isabelle | No for `s(n)` — but the packing precedents are now strong: Flyspeck (2014) and sphere packing in dimension 8 (Feb 2026) |
 | 19 | Electrical-network / Kirchhoff methods | Linear circuit laws on a dissection graph | **Not applicable — see below** |
 | 20 | Graph encodings of dissections (c-nets) | Enumerate planar graphs of a tiling | Not applicable — dissection-only |
 | 21 | **Transversal / hitting-set theory** | `τ ≥ ν`; bound the piercing number | **Implicitly — this *is* the unavoidable-points method**, but the transversal literature has never been applied |
@@ -628,6 +628,23 @@ already uses, under a name that connects it to a literature it has never drawn o
 
 That is the honest state of the field: one technique does nearly all the work, and it has
 not moved on `n = 11` since 2003.
+
+**Strategy 18 is newly credible.** Formal verification of major packing theorems has gone
+from heroic to routine within a decade:
+
+- **Flyspeck (2014)** — Hales and collaborators completed a computer-verified formal proof
+  of the **Kepler conjecture** on densest sphere packing in three dimensions, using
+  HOL Light and Isabelle, after roughly a decade of effort.
+- **Dimension 8 (February 2026)** — a project launched in March 2024 by Hariharan and
+  Viazovska formally verified in **Lean** that the `E₈` lattice packing is optimal, with
+  the final stages completed by an autoformalization model (arXiv:2604.23468).
+
+Both are packing optimality results with heavy case analysis and interval arithmetic —
+structurally the same kind of object an `s(11)` proof would be.
+The decisive caveat: **formalisation verifies a proof that already exists.** Neither
+project discovered its theorem. For `s(11)` there is no candidate proof to formalise, so
+this strategy is currently downstream of a gap nobody has closed. It matters as evidence
+that *if* a case-analysis proof of `s(11)` were produced, checking it is now tractable.
 
 **Strategy 15, revised.** An earlier draft of this document called rigorous interval
 branch-and-bound "the most plausible untried line of attack."
