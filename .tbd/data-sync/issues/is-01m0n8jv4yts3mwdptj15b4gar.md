@@ -3,9 +3,9 @@ type: is
 id: is-01m0n8jv4yts3mwdptj15b4gar
 title: Install flowmark (latest Rust version) as a skill and format all Markdown
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 8
+version: 9
 spec_path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
 labels: []
 dependencies: []
@@ -19,6 +19,8 @@ child_order_hints:
   - is-01m0n8jxapks45t06ynt78zemr
   - is-01m0n8jxp4mses5qqax2phyvye
 created_at: 2026-08-22T17:34:04.445Z
-updated_at: 2026-08-22T17:34:07.044Z
+updated_at: 2026-08-22T20:42:42.340Z
+closed_at: 2026-08-22T20:42:42.340Z
+close_reason: "Done: flowmark-rs 0.3.2 pinned in Makefile, skill installed, lefthook pre-commit hook formats and re-stages"
 ---
 Install jlevy/flowmark, Rust implementation, latest version, as an agent skill in this repo; then bring all authored Markdown into flowmark's canonical format. Must respect the supply-chain cool-off policy: verify publisher, provenance and publish date before installing, and do not self-approve an in-window exception.

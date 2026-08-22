@@ -3,9 +3,9 @@ type: is
 id: is-01m0n7kcep0mgx5jnr6qz39e2h
 title: Build a local archive of primary papers as clean Markdown plus original PDFs
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 15
+version: 16
 spec_path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
 labels: []
 dependencies: []
@@ -26,6 +26,8 @@ child_order_hints:
   - is-01m0n7kh4585mqzkpyqk3hxp56
   - is-01m0n7khfvx0h74hjbc93b4mp8
 created_at: 2026-08-22T17:16:53.590Z
-updated_at: 2026-08-22T17:16:58.747Z
+updated_at: 2026-08-22T20:42:40.102Z
+closed_at: 2026-08-22T20:42:40.102Z
+close_reason: Archived; verified present in explorations/packing/resources/ (14 papers + 8 web sources, three-format discipline)
 ---
 Fetch every retrievable primary source for the s(11) research into resources/papers/ as a high-quality Markdown extraction with the original PDF alongside. Extraction via pdfminer.six, then cleanup and accuracy checking by subagents. Track per-paper so nothing is silently missing or garbled.
