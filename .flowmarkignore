@@ -30,10 +30,19 @@ explorations/packing/resources/web/
 # Generated agent skill files.
 # ---------------------------------------------------------------------------
 #
-# All six SKILL.md files carry explicit DO-NOT-EDIT markers and are regenerated
+# These six SKILL.md files carry explicit DO-NOT-EDIT markers and are regenerated
 # byte-deterministically by their own tools (`tbd setup --auto`,
 # `softschema skill --install`, `flowmark --install-skill`). Formatting them
 # would both diverge them from their generators and be silently overwritten on
 # the next regeneration.
-.agents/skills/
-.claude/skills/
+#
+# Exclusion is per generated skill, NOT per skill directory: hand-written skills
+# live alongside these and are formatted like all our other prose. Adding a
+# generated skill means adding two lines here; adding a hand-written one means
+# adding none.
+.agents/skills/flowmark/
+.agents/skills/softschema/
+.agents/skills/tbd/
+.claude/skills/flowmark/
+.claude/skills/softschema/
+.claude/skills/tbd/
