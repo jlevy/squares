@@ -15,8 +15,7 @@ what it is doing next.
 
 `s(n)` is the side of the smallest square that contains `n` non-overlapping unit
 squares, which may be rotated freely.
-The motivating case is `n = 11`: the smallest instance nobody has solved, and the
-smallest open gap at `n ≤ 100`.
+The motivating case is `n = 11`, the smallest instance nobody has solved.
 
 This project has four lanes, in the order they were built:
 
@@ -290,7 +289,7 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
 | Best proved lower bound | `2 + 4/√5 = 3.788854382…` | Stromquist 2003, Theorem 2 |
-| Gap | `0.088229208023` | the smallest open gap at `n ≤ 100` |
+| Gap | `0.088229208023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
 
 Trump’s packing is six axis-aligned squares plus a block of five tilted at
 `a* ≈ 40.181937290329714°`. The container side is an algebraic number of degree 8, the

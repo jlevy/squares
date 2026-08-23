@@ -206,7 +206,7 @@ def _certificate(colours: list[int], adjacency: list[set[int]]) -> str:
     )
 
 
-def contact_certificate(
+def _contact_certificate_one(
     x: list[float],
     y: list[float],
     theta: list[float],
@@ -214,7 +214,7 @@ def contact_certificate(
     *,
     tol: float = 1e-9,
 ) -> str:
-    """The contact graph, canonical up to isomorphism, with geometric node attributes.
+    """One image's contact graph, canonical under square relabelling.
 
     Nodes carry their angle class and their count of container-wall contacts. Those
     attributes are not decoration: without them two structurally different packings that
@@ -238,6 +238,27 @@ def contact_certificate(
     ranks = {a: i for i, a in enumerate(sorted(set(initial)))}
     digest = _certificate([ranks[a] for a in initial], adjacency).encode()
     return hashlib.blake2b(digest, digest_size=16).hexdigest()
+
+
+def contact_certificate(
+    x: list[float],
+    y: list[float],
+    theta: list[float],
+    side: float,
+    *,
+    tol: float = 1e-9,
+) -> str:
+    """Contact graph canonical under relabelling and all container symmetries.
+
+    Reflection reverses the cyclic order of angle classes. Canonical graph labelling
+    alone therefore does not make the angle-class attributes D4-invariant. Compute the
+    certificate on every container image and retain the lexicographically least form,
+    just as the geometric key does.
+    """
+    return min(
+        _contact_certificate_one(ix, iy, it, side, tol=tol)
+        for ix, iy, it in d4_images(x, y, theta, side)
+    )
 
 
 @dataclass(frozen=True)

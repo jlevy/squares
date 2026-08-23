@@ -50,12 +50,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import shlex
 import socket
 import statistics
 import subprocess
 import sys
+import tempfile
 import time
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
@@ -304,6 +306,43 @@ def archive_of(path: Path) -> Path:
 # --- STEP: execute, and the contract it enforces --------------------------------------
 
 
+def validated_record(line: str) -> dict[str, Any]:
+    """Parse one JSONL record and enforce the result-line trust boundary.
+
+    This function is shared by ingestion and replay. Otherwise a line can pass the live
+    guard, be changed on disk, and later reach the decision code under a weaker contract.
+    Non-result JSON records are retained as provenance but do not affect the score.
+    """
+    try:
+        rec = json.loads(line)
+    except json.JSONDecodeError as e:
+        raise GuardError(f"non-JSON line from the command: {line[:100]!r}") from e
+    if not isinstance(rec, dict):
+        raise GuardError("a JSONL line must be an object")
+    if "best_side" not in rec:
+        return rec
+    if "overlap" not in rec and "best_overlap" not in rec:
+        raise GuardError("a result line carries best_side but no overlap")
+    if "n" not in rec or "seed" not in rec:
+        raise GuardError("a result line carries best_side but no n and seed")
+    overlap_value = rec["overlap"] if "overlap" in rec else rec["best_overlap"]
+    values = (rec["best_side"], overlap_value, rec["n"], rec["seed"])
+    if any(isinstance(value, bool) or not isinstance(value, (int, float)) for value in values):
+        raise GuardError("a result line carries a non-numeric contract field")
+    side = float(rec["best_side"])
+    overlap = float(overlap_value)
+    n, seed = float(rec["n"]), float(rec["seed"])
+    if not math.isfinite(side) or side <= 0:
+        raise GuardError("a result line carries an invalid best_side")
+    if not math.isfinite(overlap) or overlap != 0.0:
+        raise GuardError("a result line carries a non-zero overlap: the run is invalid")
+    if not math.isfinite(n) or n <= 0 or not n.is_integer():
+        raise GuardError("a result line carries an invalid n")
+    if not math.isfinite(seed) or not seed.is_integer():
+        raise GuardError("a result line carries an invalid seed")
+    return rec
+
+
 def read_lines(stdout: str, fh: Any) -> float | None:
     """Archive every line, enforce the contract, return this invocation's best side.
 
@@ -315,19 +354,12 @@ def read_lines(stdout: str, fh: Any) -> float | None:
     for line in stdout.splitlines():
         if not line.strip():
             continue
+        rec = validated_record(line)
+        # Validate before writing: a guard refusal must not create an archive that a
+        # later `record` step could mistake for admissible evidence.
         fh.write(line + "\n")
-        try:
-            rec = json.loads(line)
-        except json.JSONDecodeError as e:
-            raise GuardError(f"non-JSON line from the command: {line[:100]!r}") from e
         if "best_side" not in rec:
             continue
-        if "overlap" not in rec and "best_overlap" not in rec:
-            raise GuardError("a result line carries best_side but no overlap")
-        if "n" not in rec or "seed" not in rec:
-            raise GuardError("a result line carries best_side but no n and seed")
-        if float(rec.get("overlap", rec.get("best_overlap"))) != 0.0:
-            raise GuardError("a result line carries a non-zero overlap: the run is invalid")
         side = float(rec["best_side"])
         best = side if best is None else min(best, side)
     return best
@@ -399,13 +431,17 @@ def cells_from(archive: Path, recipe: dict[str, Any]) -> list[Cell]:
     many actually finished, which `decide` then checks against the declared count.
     """
     by_cell: dict[int, dict[int, float]] = {}
+    allowed_cells = {int(n) for n in recipe["cells"]}
+    allowed_seeds = {int(seed) for seed in recipe["seeds"]}
     for line in archive.read_text().splitlines():
         if not line.strip():
             continue
-        rec = json.loads(line)
+        rec = validated_record(line)
         if "best_side" not in rec:
             continue
         n, seed, side = int(rec["n"]), int(rec["seed"]), float(rec["best_side"])
+        if n not in allowed_cells or seed not in allowed_seeds:
+            raise GuardError(f"archive result n={n} seed={seed} is outside the declared recipe")
         seen = by_cell.setdefault(n, {})
         seen[seed] = min(seen.get(seed, side), side)
 
@@ -694,17 +730,27 @@ def preflight() -> int:
     """Every guard, fired on purpose. A guard nobody has watched fail is not evidence."""
 
     class Sink:
-        def write(self, _: str) -> None:
-            return
+        def __init__(self) -> None:
+            self.lines: list[str] = []
+
+        def write(self, line: str) -> None:
+            self.lines.append(line)
 
     checks: list[tuple[str, bool, str]] = []
 
     def guard_refuses(label: str, payload: str) -> None:
+        sink = Sink()
         try:
-            read_lines(payload, Sink())
+            read_lines(payload, sink)
             checks.append((label, False, "it was accepted"))
         except GuardError as e:
-            checks.append((label, True, str(e)))
+            checks.append(
+                (
+                    label,
+                    not sink.lines,
+                    f"{e}; {len(sink.lines)} invalid line(s) reached the archive",
+                )
+            )
 
     guard_refuses(
         "a non-zero overlap is refused",
@@ -726,6 +772,30 @@ def preflight() -> int:
         Sink(),
     )
     checks.append(("a seed's result is the min over its lines", best == 3.7, f"got {best}"))
+
+    with tempfile.TemporaryDirectory() as tmp:
+        bad_archive = Path(tmp) / "bad.jsonl"
+        bad_archive.write_text('{"n": 11, "seed": 1, "best_side": 3.7, "overlap": 0.001}\n')
+        try:
+            cells_from(bad_archive, {"cells": [11], "seeds": [1]})
+            replay_refused, replay_detail = False, "the tampered archive was accepted"
+        except GuardError as e:
+            replay_refused, replay_detail = True, str(e)
+    checks.append(
+        ("record replay revalidates every result line", replay_refused, replay_detail)
+    )
+
+    with tempfile.TemporaryDirectory() as tmp:
+        wrong_cell = Path(tmp) / "wrong-cell.jsonl"
+        wrong_cell.write_text('{"n": 12, "seed": 1, "best_side": 4.0, "overlap": 0}\n')
+        try:
+            cells_from(wrong_cell, {"cells": [11], "seeds": [1]})
+            recipe_refused, recipe_detail = False, "the undeclared cell was accepted"
+        except GuardError as e:
+            recipe_refused, recipe_detail = True, str(e)
+    checks.append(
+        ("record replay enforces the declared cells and seeds", recipe_refused, recipe_detail)
+    )
 
     breach = control_breaches([Cell(12, [3.9])])
     checks.append(
@@ -778,11 +848,13 @@ def run(operator: str, hours: float) -> int:
         print(f"\n== {eid}: {hid} ==")
         try:
             execute(eid)
+            decision = record(eid, operator=operator)
             failures = 0
         except GuardError as e:
             failures += 1
             print(f"   GUARD REFUSED: {e}")
-        decision = record(eid, operator=operator)
+            release(eid, f"guard refused the measurement: {e}")
+            decision = "unresolved"
         done.append((eid, hid, decision))
         print(f"   -> {decision}")
         if failures >= MAX_CONSECUTIVE_FAILURES:

@@ -35,7 +35,7 @@ critical path.
 | `sqsearch` f64 annealer (Rust) | works; selftest of 13 checks gates every run |
 | `sqpack.quench` — LP-in-cell + cell fixed point + class bracketing | **built this session**; reaches the analytic optimum to `1e-15` at `n = 5, 10` |
 | Soundness perimeter | every component that emits a packing is checked by `sqpack` through code it does not share |
-| Campaign record | 10 rounds, 8 hypotheses, generated ledger, negative controls, effort tracking |
+| Campaign record | 11 rounds, 9 hypotheses, generated ledger, negative controls, effort tracking |
 | Lint floor | ruff + basedpyright clean; clippy pedantic + rustfmt clean; enforced in `test.sh` |
 
 `./explorations/packing/test.sh` runs all of it and passes.

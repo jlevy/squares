@@ -41,8 +41,7 @@ explorations/packing/
 ├── golden/                 Golden basin maps for the small PROVED cases, checked
 │                           against the proved values and against closed forms rather
 │                           than against a previous run. Rebuilt by tools/golden_basins.py
-├── atlas/                  The basin atlas: one deduplicated store per n, keyed by
-│                           canonical basin identity, plus its schema. Append-only.
+├── atlas/                  Schema for persistent basin observations and summaries
 ├── resources/              Local archive of the primary literature: papers and web
 │                           sources, each kept as original, cleaned .md, and raw
 │                           extraction. See resources/README.md.

@@ -129,13 +129,13 @@ controls:
 - name: canonical - container symmetry not quotiented out
   file: sqpack/canonical.py
   replace: ["    for flip in (False, True):\n", "    for flip in (False,):\n"]
-  run: uv run --quiet python tools/canonical_check.py
+  run: uv run --frozen --quiet python tools/canonical_check.py
   expect: "FAIL  invariant under all 8 container symmetries"
 
 - name: canonical - square relabelling changes the key
   file: sqpack/canonical.py
   replace: ["        squares = sorted(\n", "        squares = list(\n"]
-  run: uv run --quiet python tools/canonical_check.py
+  run: uv run --frozen --quiet python tools/canonical_check.py
   expect: "FAIL  invariant under square relabelling"
 
 # The SEAM is the property only one thing guards: an angle one ULP below pi/2 must key
@@ -151,7 +151,7 @@ controls:
   file: sqpack/canonical.py
   replace: ["    return round(theta / QUARTER * steps) % steps",
             "    return round(theta / QUARTER * steps)"]
-  run: uv run --quiet python tools/canonical_check.py
+  run: uv run --frozen --quiet python tools/canonical_check.py
   expect: "FAIL  an angle one ULP below pi/2 keys as one at zero"
 
 # There is deliberately NO control for "invariant under a quarter turn of one square",
@@ -167,5 +167,5 @@ controls:
   file: sqpack/canonical.py
   replace: ["    digest = _certificate([ranks[a] for a in initial], adjacency).encode()",
             "    digest = b'constant'"]
-  run: uv run --quiet python tools/canonical_check.py
+  run: uv run --frozen --quiet python tools/canonical_check.py
   expect: "FAIL  a different arrangement keys differently"

@@ -115,11 +115,15 @@ def main() -> int:
         images.append(cur)
         images.append(reflect(*cur))
         cur = rot90(*cur)
-    keys = {canonical_key(ix, iy, it, side).geometric for ix, iy, it in images}
+    keys = set()
+    for ix, iy, it in images:
+        key = canonical_key(ix, iy, it, side)
+        keys.add((key.geometric, key.contact))
+    symmetry_detail = f"{len(keys)} key pair(s); {len(images)} independent images"
     passed &= check(
         "invariant under all 8 container symmetries",
-        ok=keys == {base.geometric},
-        detail=f"{len(keys)} distinct key(s) over {len(images)} independently built images",
+        ok=keys == {(base.geometric, base.contact)},
+        detail=symmetry_detail,
     )
 
     rng = random.Random(20260823)
@@ -139,9 +143,10 @@ def main() -> int:
     # than a geometry.
     turned = list(theta)
     turned[0] += math.pi / 2
+    turned_key = canonical_key(x, y, turned, side)
     passed &= check(
         "invariant under a quarter turn of one square",
-        ok=canonical_key(x, y, turned, side).geometric == base.geometric,
+        ok=(turned_key.geometric, turned_key.contact) == (base.geometric, base.contact),
     )
 
     # The seam. An angle is periodic with period pi/2, and quantizing a periodic

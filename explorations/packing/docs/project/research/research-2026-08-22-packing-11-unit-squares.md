@@ -203,8 +203,11 @@ about the point `(1,1)` and offset by `r₁`.
 x⁸ − 2x⁷ − x⁴ + 2x³ + 8x² − 12x + 5 = 0
 ```
 
-so the angle is itself algebraic of degree 8 — the same degree as `s`, as one expects
-since each is a rational function of the other.
+The algebraic quantities `sec a`, `cos a`, `sin a`, `tan(a/2)`, and `s` lie in the
+degree-8 number field used by the exact verifier.
+The angle `a` itself, measured in radians, is transcendental: if a non-zero `a` were
+algebraic, Lindemann–Weierstrass would make `exp(i a)` transcendental, whereas algebraic
+`cos a` would make it a root of `z² - 2 cos(a)z + 1` and therefore algebraic.
 
 **The two contact equations.** The entire configuration is pinned by just two equations
 in `s` and `a`:
@@ -856,7 +859,7 @@ records which are known to have produced records.
 
 | # | Strategy | Family | Mechanism | Produced records? |
 | --- | --- | --- | --- | --- |
-| 1 | Axis-aligned grid | constructive | The `⌈√n⌉` trivial packing | Yes — optimal for perfect squares and `m²−1`, `m²−2`, `m²−3` |
+| 1 | Axis-aligned grid | constructive | The `⌈√n⌉` trivial packing | Yes — optimal for perfect squares and the general `m²−1`, `m²−2` families; `m²−3` is proved only for `m = 3, 4, 5, 6, 7` |
 | 2 | Hand geometric insight | constructive | Human construction, often on paper | Yes — Trump `n=11`, Göbel, Hämäläinen, Bidwell `n=17` |
 | 3 | 45° tilted families | constructive | A block of squares rotated a half-turn diagonal | Yes — `n=5`, `n=10` |
 | 4 | Diagonal strips of width `k` | constructive | A tilted band crossing the container, corners filled | Yes — Stenlund `n=66` (width-3 strip) |

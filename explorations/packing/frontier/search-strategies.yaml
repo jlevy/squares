@@ -13,7 +13,8 @@ strategies:
   family: constructive
   mechanism: The `⌈√n⌉` trivial packing
   outcome: produced_records
-  note: Yes — optimal for perfect squares and `m²−1`, `m²−2`, `m²−3`
+  note: Yes — optimal for perfect squares and the general `m²−1`, `m²−2` families;
+    `m²−3` is proved only for `m = 3, 4, 5, 6, 7`
   refs: []
 - id: 2
   name: Hand geometric insight
