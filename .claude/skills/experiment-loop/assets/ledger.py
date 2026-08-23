@@ -164,7 +164,9 @@ def status_of(hypothesis: dict, rounds: list[dict]) -> str:
     if hypothesis.get("kind") == "open_question":
         return "open question"
     if not rounds:
-        return "blocked" if not hypothesis.get("instrument") else "open"
+        if not hypothesis.get("instrument_ready", True) or not hypothesis.get("instrument"):
+            return "blocked"
+        return "open"
     decisions = {r.get("verdict", {}).get("decision") for r in rounds}
     for decision in ("accepted", "rejected", "abandoned", "blocked", "unresolved"):
         if decision in decisions:

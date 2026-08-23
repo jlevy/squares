@@ -133,8 +133,9 @@ criterion:
   shape: record                # paired | conditions | record | determination
   metric: best_side            # the metric or question that would show it
   direction: lower             # predicted direction or outcome
-instrument: >-                 # no instrument means status is blocked, not measured badly
+instrument: >-                 # what would measure this
   explorations/packing/search/basinhop.py, scored by sqpack.verify at exact precision.
+instrument_ready: false        # not built yet -> the ledger reads this as blocked
 regime: single host, deterministic seed, exact validity oracle
 instance: {axis: n, point: 11} # where this claim is being made
 sweep:                         # optional: the cells this claim should eventually cover

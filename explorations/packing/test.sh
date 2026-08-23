@@ -3,6 +3,21 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
+# Some checks need PyYAML and jsonschema, which a bare system python3 usually lacks
+# -- on the machine this was written on, `import yaml` failed and every frontier
+# check below was silently unreachable. Prefer an interpreter that already has both;
+# otherwise use a pinned zero-install runner, never a floating one (see
+# `tbd guidelines supply-chain-hardening` rule 6).
+if python3 -c "import yaml, jsonschema" 2>/dev/null; then
+  PY=python3
+elif command -v uv >/dev/null 2>&1; then
+  PY="uv run --quiet --with pyyaml==6.0.3 --with jsonschema==4.26.0 python3"
+else
+  echo "need PyYAML + jsonschema, or uv; install one and re-run" >&2
+  exit 1
+fi
+echo "python runner: $PY"
+
 echo "== exact verification =="
 out=$(python3 verify_trump11.py)
 echo "$out"
@@ -36,7 +51,7 @@ echo
 echo "== frontier corpus =="
 # Structural checks that need no network. Schema validation needs softschema:
 #   for f in frontier/n-*.md; do uvx softschema@latest validate "$f"; done
-python3 - <<'PY'
+$PY - <<'PY'
 import pathlib, yaml, sys
 files = sorted(pathlib.Path("frontier").glob("n-*.md"))
 assert len(files) == 100, f"expected 100 frontier artifacts, found {len(files)}"
@@ -63,15 +78,15 @@ PY
 
 echo
 echo "== soft-schema validation =="
-python3 tools/validate_schemas.py
+$PY tools/validate_schemas.py
 
 echo
 echo "== generated tables in sync with frontier/ =="
-python3 tools/render_tables.py --check
+$PY tools/render_tables.py --check
 
 echo
 echo "== strategy catalogues =="
-python3 - <<'PY'
+$PY - <<'PY'
 import yaml, pathlib
 for kind, field, n in (("search", "outcome", 20), ("proof", "status", 30)):
     d = yaml.safe_load(pathlib.Path(f"frontier/{kind}-strategies.yaml").read_text())
@@ -84,6 +99,30 @@ for kind, field, n in (("search", "outcome", 20), ("proof", "status", 30)):
         assert s[field] and s["name"] and s["mechanism"] and s["note"], f"{kind} #{s['id']}: empty field"
     print(f"  {kind}: {n} strategies, {len(fams)} families, all fields populated")
 PY
+
+echo
+echo "== search engine (sqsearch) =="
+# The engine gate: geometry against a naive reference, determinism, and a positive
+# control that recovers s(5) = 2 + 1/sqrt(2). A run that has not passed this may not
+# be recorded. Skipped, not failed, where cargo is absent -- the rest of this repo
+# is Python and prose and should stay checkable without a Rust toolchain.
+if command -v cargo >/dev/null 2>&1; then
+  ( cd sqsearch && cargo build --release --quiet )
+  out=$(sqsearch/target/release/sqsearch --selftest)
+  echo "$out" | sed 's/^/  /'
+  grep -q "SELFTEST PASSED" <<<"$out"
+  ! grep -q "FAIL" <<<"$out"
+else
+  echo "  cargo not installed, skipping"
+fi
+
+echo
+echo "== campaign record =="
+# Whole-set invariants no per-artifact validation can see: duplicate ids, dangling
+# hypothesis references, rounds naming an unknown series, more than one open series,
+# stale claims, the cross-field verdict rules, the two-way reconciliation between
+# ideas.md and the registry, and whether ledger.md is stale.
+$PY campaign/ledger.py --check
 
 echo
 echo "ALL CHECKS PASSED"

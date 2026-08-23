@@ -62,6 +62,13 @@ properties:
     description: >-
       What would measure this, by path or command. A hypothesis whose instrument does
       not exist yet is blocked, not measured badly.
+  instrument_ready:
+    type: boolean
+    default: true
+    description: >-
+      False when the instrument named above does not exist yet. Drives the blocked
+      status in the ledger, which is then a recorded fact rather than an inference
+      from an empty field.
   regime:
     type: string
     description: Where the claim applies (platform, cache state, scale, precision).

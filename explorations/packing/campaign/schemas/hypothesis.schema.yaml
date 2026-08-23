@@ -1,14 +1,14 @@
-# Contract for one registry entry of the <campaign> loop.
+# Contract for one registry entry of the squares search loop.
 #
 # One artifact per claim. STATUS IS NOT A FIELD: it is generated from the experiments
 # that reference this id, the same way the ledger is. A referenced id with no registry
 # artifact fails the reference check.
 #
-# Copy into the campaign, replace <project>.<campaign>, set the `lane` and
+# Copy into the campaign, replace packing.squares, set the `lane` and
 # `criterion.shape` enums to the ones the campaign declared, and delete what it does
 # not use.
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: <project>.<campaign>:Hypothesis/v1
+$id: packing.squares:Hypothesis/v1
 title: Hypothesis
 type: object
 additionalProperties: false
@@ -29,10 +29,12 @@ properties:
     minLength: 1
     description: Stated so it can be wrong.
   lane:
-    type: string
+    enum: [search, proof]
     description: >-
-      Campaign-declared partition of approach, e.g. search | proof. REPLACE with an
-      enum once the campaign knows its lanes.
+      Which side of the problem the claim is about: finding a packing (an upper
+      bound on s(n)) or proving a bound. This campaign runs the search lane; proof
+      hypotheses may be registered and will read as blocked until an instrument
+      for them exists.
   derived_from:
     type: array
     default: []
@@ -41,10 +43,13 @@ properties:
   strategy_refs:
     type: array
     default: []
-    items: {type: string}
+    items: {type: string, pattern: "^(search|proof):[0-9]+$"}
     description: >-
-      Ids in the campaign's existing strategy taxonomy, e.g. "search:12". What lets
-      the ledger report coverage by family rather than by individual idea.
+      Ids into the existing strategy catalogues, as "search:12" or "proof:7",
+      indexing ../../frontier/search-strategies.yaml and proof-strategies.yaml.
+      This is what lets the ledger report coverage by family -- which whole classes
+      of approach have never been aimed at s(n) is a more useful question than
+      which individual ideas are open.
   criterion:
     type: object
     additionalProperties: false
@@ -67,8 +72,8 @@ properties:
     default: true
     description: >-
       False when the instrument named above does not exist yet. Drives the blocked
-      status in the ledger, which is then a recorded fact rather than an inference
-      from an empty field.
+      status in the ledger, which is a fact rather than an inference from an empty
+      field: a hypothesis whose instrument does not exist is blocked, not measured badly.
   regime:
     type: string
     description: Where the claim applies (platform, cache state, scale, precision).

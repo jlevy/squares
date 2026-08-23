@@ -46,3 +46,14 @@ explorations/packing/resources/web/
 .claude/skills/flowmark/
 .claude/skills/softschema/
 .claude/skills/tbd/
+
+# ---------------------------------------------------------------------------
+# Generated experiment-loop views.
+# ---------------------------------------------------------------------------
+#
+# ledger.md is rebuilt byte-for-byte by campaign/ledger.py and drift-checked by
+# `ledger.py --check` in explorations/packing/test.sh. Formatting it makes the
+# check fail forever: flowmark rewraps the generated text, ledger.py regenerates
+# the unwrapped form, and the two never agree. Measured on 2026-08-22 -- the gate
+# failed on the first run after the file was formatted.
+explorations/packing/campaign/ledger.md
