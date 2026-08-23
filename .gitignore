@@ -9,7 +9,9 @@ __pycache__/
 *.py[cod]
 explorations/packing/.venv/
 
-# The unattended runner's id-allocation lock (campaign/runner.py). Local coordination
-# state, never shared: two runners on one filesystem share it, two on separate branches
-# use disjoint id blocks instead.
-explorations/packing/campaign/series/.idlock
+# The unattended runner's id reservations (campaign/runner.py): one empty marker
+# directory per allocated exp id, created with an atomic mkdir. Local coordination
+# state for runners sharing a filesystem; runners on separate branches use disjoint id
+# blocks instead. Not shared, because the artifacts themselves are the durable record
+# of which ids exist.
+explorations/packing/campaign/series/.ids/

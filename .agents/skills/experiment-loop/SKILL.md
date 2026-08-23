@@ -117,6 +117,12 @@ Keep them in every domain:
 12. **The instrument must prove it was measuring something.** Six metabrowser runs were
     taken in a 0×0 browser pane and produced plausible timings measured against nothing.
     Guard the instrument, and refuse runs the guard rejects.
+13. **A check that did not run is not a check that passed.** Gates degrade to skips — a
+    missing optional dependency, an absent toolchain, an unreachable store — and a
+    summary line that says everything passed while its strongest check was skipped is
+    worse than no gate, because it is trusted.
+    Count the skips, name them in the summary, print the unqualified pass only at zero,
+    and give the gate a strict mode that unattended runs use.
 
 ## Three roles, and why they are separate
 
@@ -360,6 +366,15 @@ A number nobody can trace is a number nobody can defend.
 | Coordination | one agent, one session | leases, budgets, morning report | whether rounds run unwatched |
 
 Start light. Move a knob rightward when a claim needs defending, not before.
+
+**Before building unattended operation, check that it buys anything.** Divide the effort
+fields you have already recorded: agent-minutes against machine-minutes.
+One campaign’s first ten rounds came to 275 agent-minutes against 16.4 cpu-minutes —
+seventeen to one — and a runner removes only the second number.
+An agent-bound loop gains close to nothing from a night of unattended execution and can
+lose a week building it.
+Where the ratio runs the other way, unattended operation is the whole game.
+This is a measurement you already have; make it before writing the runner, not after.
 
 ## Tooling
 

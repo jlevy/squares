@@ -398,6 +398,27 @@ def render(series, explorations, hypotheses, experiments) -> str:
             f"| {spent(rounds)} |"
         )
 
+    # First, always: what the runner would not decide. The schema has carried
+    # `needs_review` since the record was designed and nothing read it, so an unattended
+    # runner could set the flag and no view would show it -- the morning human would
+    # never learn what was declined. It leads the ledger for the same reason it leads
+    # the session report: a queue is trusted because its refusals are visible.
+    review = [e for e in experiments if (e.get("verdict") or {}).get("needs_review")]
+    if review:
+        lines += ["", "## Needs review — held for a human, not decided", ""]
+        lines += [
+            "| id | hypotheses | decision | why it was not decided |",
+            "| --- | --- | --- | --- |",
+        ]
+        for experiment in sorted(review, key=lambda e: e["id"]):
+            verdict = experiment["verdict"]
+            lines.append(
+                f"| {experiment['id']} "
+                f"| {', '.join(experiment.get('hypotheses') or [])} "
+                f"| {verdict.get('decision', '')} "
+                f"| {verdict['reason'].replace(chr(10), ' ').strip()} |"
+            )
+
     lines += ["", "## Rounds", ""]
     for decision in DECISION_ORDER:
         matching = [e for e in experiments if e.get("verdict", {}).get("decision") == decision]

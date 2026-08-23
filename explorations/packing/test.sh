@@ -222,6 +222,20 @@ grep -q "^SKIP" <<<"$out" \
   && skip "no bead store reachable: the bead-tree invariants did not run"
 
 echo
+echo "== hand-written skills mirrored between .agents and .claude =="
+# Codex reads .agents/skills/, Claude Code reads .claude/skills/, and experiment-loop is
+# hand-written into both. The runbook links into the .agents copy while an agent working
+# here loads the .claude one, so a drift makes the contract this campaign runs under
+# depend on which tool opened it. `make skills-check` has existed for this and nothing
+# ran it -- a check outside the gate is a check that gets remembered, which is D-027
+# exactly. Skipped, not failed, where make is absent.
+if command -v make >/dev/null 2>&1; then
+  ( cd ../.. && make --no-print-directory skills-check ) | sed 's/^/  /'
+else
+  skip "make not installed: the .agents/.claude skill mirrors were not compared"
+fi
+
+echo
 echo "== synopsis agrees with the artifacts =="
 # SYNOPSIS.md is the root document and a living one: it restates numbers that live
 # authoritatively elsewhere, which is the exact shape of thing that drifted in D-010,
