@@ -181,54 +181,73 @@ The committed golden says `n=10` annealer gap `0.021003996488` and
 `after_quench (6 + √2)/2`. **It reproduces.** Three consecutive runs gave byte-identical
 `3.728110777674047`.
 
-### So there are now three values for one nominally fixed input
+### Correction, 2026-08-23 22:40: one of my four data points was invalid
 
-| Source | `n=10`, seed 7, annealer gap |
-| --- | ---: |
-| committed golden on `main` (mine) | `+0.021003996488` |
-| this environment, clean build (mine, 3/3 stable) | `+0.021003996487` |
-| PR #15 review text | `+0.077126752369` |
-| PR #15 **committed golden** | `+0.000493446` |
+The first version of this section tabulated four values for “one nominally fixed input,”
+including PR #15’s committed golden at `+0.000493446`. **That comparison was wrong.**
+That branch changed `LADDER` to carry `(n, seed)` pairs and moved `n = 10` to **seed
+14**, so its row is a different experiment from my seed-7 row, not a conflicting result
+for the same one. I used it as evidence and should not have.
 
-PR #15 does not touch `sqsearch/` or `perimeter_test.py`, so the annealer source is
-identical on both branches.
-`run_chain` is budget-driven with no wall-clock term, chains are keyed by
-`(seed, chain)`, and the reduction is a deterministic loop over a collected `Vec` — so
-nothing here is core-count or scheduler dependent, and both of us observed run-to-run
-stability.
+Retracting it does not weaken the finding, because a like-for-like comparison is
+available and was run.
+
+### The like-for-like comparison
+
+Both seeds, `n = 10`, this environment, engine built from source:
+
+| seed | here | PR #15’s environment |
+| ---: | --- | --- |
+| 7 | `+0.021003996487`, and the quench reaches the proved optimum | their `LADDER` comment says seed 7 *“does not do that with the checked-in engine”* — which is why they moved off it |
+| 14 | `+0.032867764695` | committed as `+0.000493446`, reaching the proved optimum |
+
+The two environments disagree at **both** seeds, in opposite directions: seed 7 works
+here and not there; seed 14 is near-optimal there and poor here.
+Two orders of magnitude apart at the same seed, same `n`, same engine source, both built
+from source.
+
+### The decisive test: their own repair, run here
+
+PR #15 marks the source-build repair as done and selects control seeds to stabilise the
+ladder. That is a falsifiable prediction — their committed golden should reproduce
+anywhere after a source build.
+So I checked out their branch, built their engine with `cargo build --release`, and ran
+their own `tools/golden_basins.py --deep`:
+
+```
+ORACLE FAILURES:
+  the rebuilt map differs from the committed golden
+GOLDEN BASIN CHECKS FAILED
+```
+
+**Their fix, their code, their fixture, a different machine — it fails.** And selecting
+control seeds makes the problem *worse*, not better: it tunes the fixture to the machine
+that chose the seeds, which is the same defect with more confidence behind it.
 
 ### The actual defect
 
-**A simulated annealer is chaotic.** A one-ULP difference in a single accept/reject
-comparison sends the trajectory somewhere else entirely.
+**A simulated annealer is chaotic.** One ULP in a single accept/reject comparison sends
+the trajectory somewhere else entirely.
 With `lto = "fat"`, `codegen-units = 1`, `opt-level = 3`, a different Rust version or
 target microarchitecture changes floating-point contraction, and the output changes
-completely while remaining perfectly deterministic *within* each environment.
+completely while remaining perfectly deterministic *within* each environment — which is
+exactly what both parties observed when they each re-ran and got stable results.
 
 So the committed `annealer_gap` is **not a stale fixture — it is a non-portable one**,
-and that is the worse diagnosis:
-
-- the review’s prescribed repair, *“build the source-locked engine before every
-  standalone rebuild,”* **does not fix it.** I did exactly that and still differ from PR
-  #15;
-- **PR #15’s own committed golden carries the identical defect.** Its `0.000493446` will
-  not reproduce here either.
-  The branch shipped a new instance of the bug it diagnosed;
-- anyone who implements the stated repair will believe the problem is solved and it will
-  not be.
+and no amount of build hermeticity or seed selection fixes that.
 
 ### What actually survives, and the cheap fix
 
-The ladder’s **oracle** is robust: every environment quenched to the proved optimum
-`(6 + √2)/2` and recognised the right closed form.
-It is only the *recorded incidental value* that moves.
+The ladder’s **oracle** is robust: in every environment tested, the quench reached the
+proved optimum and the recogniser returned the right closed form.
+It is only the *recorded incidental trajectory* that moves.
 
 That is the same distinction F-16 draws elsewhere and should be applied here: **assert
 the oracle, do not commit the trajectory.** Drop `annealer_gap` from the byte-compared
-surface (keep it as a printed diagnostic), or record it with an explicit tolerance and a
-recorded toolchain/CPU fingerprint.
-Chasing build hermeticity for a chaotic search is unwinnable and would burn the next
-agent’s time.
+surface (keep it as printed diagnostic output), or record it with an explicit tolerance
+plus a toolchain and CPU fingerprint.
+Chasing reproducibility of a chaotic search across machines is unwinnable and will burn
+the next agent’s time.
 
 ## Part 3 — Omissions neither review caught
 

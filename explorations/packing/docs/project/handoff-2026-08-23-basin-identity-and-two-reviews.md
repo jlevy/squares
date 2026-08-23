@@ -57,10 +57,16 @@ It reproduces. On merged `main`, after `cargo build --release`, `n = 10` seed 7 
 annealer gap `+0.021003996487` against the committed `0.021003996488`, quenching to the
 proved optimum, byte-identical over three runs.
 
-There are now four values for one nominally fixed input — the committed golden, that
-clean build, #15’s review text (`+0.077126752369`), and **#15’s own committed golden**
-(`+0.000493446`) — across branches that touch neither `sqsearch/` nor
-`perimeter_test.py`.
+The two environments disagree at **both** control seeds, in opposite directions.
+At `n = 10` seed 7 the quench reaches the proved optimum here and, per #15’s own
+`LADDER` comment, does not there — which is why they moved that rung to seed 14. At seed
+14 they record `+0.000493446` and this machine gives `+0.032867764695`. Same seed, same
+`n`, same engine source, both built from source, two orders of magnitude apart.
+
+**The decisive test.** Check out #15’s branch, build its engine, and run **its own**
+`tools/golden_basins.py --deep` here: `GOLDEN BASIN CHECKS FAILED`. Their repair does
+not travel, and selecting control seeds makes it worse rather than better — it tunes the
+fixture to the machine that chose the seeds.
 
 A simulated annealer is chaotic.
 One ULP in an accept/reject diverges the trajectory, and `lto = "fat"` with
