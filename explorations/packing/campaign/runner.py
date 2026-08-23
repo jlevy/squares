@@ -116,6 +116,14 @@ def front(path: Path) -> dict[str, Any]:
     return yaml.safe_load(text.split("---\n")[1]) if text.startswith("---\n") else {}
 
 
+def regenerate() -> subprocess.CompletedProcess[str]:
+    """Rebuild the generated views. Callers decide what a failure means."""
+    return subprocess.run(
+        [sys.executable, str(CAMPAIGN / "ledger.py")],
+        cwd=ROOT, capture_output=True, text=True, check=False,
+    )  # fmt: skip
+
+
 def git(*args: str) -> str:
     return subprocess.run(
         ["git", *args], cwd=ROOT, capture_output=True, text=True, check=False
@@ -224,7 +232,11 @@ experiment:
   date: '{date}'
   hypotheses: [{hid}]
   tier: exploratory
-  subject: {{label: unattended runner, precision: f64_screen, selftest_passed: true}}
+  subject:
+    label: unattended runner
+    engine: {engine}
+    precision: f64_screen
+    selftest_passed: true
   instance: {{axis: n, point: {cell}}}
   method: {{operator: {operator}}}
   lease: {{expires: '{expires}'}}
@@ -270,6 +282,7 @@ def claim(hid: str, operator: str, hours: float) -> str:
         STUB.format(
             eid=eid,
             hid=hid,
+            engine=Path(shlex.split(recipe["command"])[0]).name,
             series=series_id,
             date=now().date().isoformat(),
             cell=recipe["cells"][0],
@@ -277,6 +290,10 @@ def claim(hid: str, operator: str, hours: float) -> str:
             expires=expires,
         )
     )
+    # Regenerate immediately: the in-progress round is part of the record the moment it
+    # exists, and a round runs for hours. Without this the gate fails on a stale
+    # ledger.md for the whole session -- i.e. exactly while you most want to run it.
+    regenerate()
     return eid
 
 
@@ -599,21 +616,52 @@ by the harness contract rather than by the experiment that produced it (D-009).
 
 
 def release(eid: str, why: str) -> None:
-    """Give up a stuck round. Recovery, not routine: it records rather than deletes."""
+    """Give up a stuck round. Recovery, not routine: it records rather than deletes.
+
+    Parses and re-serialises rather than editing the YAML as text. The text version
+    looked simpler and silently produced an artifact the whole-set checker rejected --
+    a recovery path that breaks the record is worst exactly when it is needed.
+
+    A released round is terminal, so it carries the `effort` block the gate requires,
+    with `stopped_by: error`: the round died, and nothing may be concluded from it.
+    """
     path, stub = find_round(eid)
     if stub["verdict"]["decision"] != "in-progress":
         raise RefusalError(f"{eid} is {stub['verdict']['decision']}, not in-progress")
     hid = stub["hypotheses"][0]
-    text = path.read_text()
-    text = text.replace("  lease: {expires: '" + stub["lease"]["expires"] + "'}\n", "")
-    text = text.replace(
-        "    decision: in-progress",
-        "    decision: unresolved\n    needs_review: true",
-    ).replace(
-        "    reason: Claimed; the round is running.",
-        f"    reason: Released by an operator without a measurement. {why}",
+    recipe = hypothesis(hid)["runner"]
+
+    stub.pop("lease", None)
+    stub["effort"] = {"timebox": recipe["timebox"], "agent_minutes": 0, "stopped_by": "error"}
+    stub["verdict"] = {
+        "decision": "unresolved",
+        "primary_criterion": stub["verdict"]["primary_criterion"],
+        "reason": f"Released by an operator without a measurement. {why}",
+        "needs_review": True,
+    }
+    fm = {
+        "title": f"{eid} — {hid} (released)",
+        "softschema": {
+            "contract": "packing.squares:Experiment/v1",
+            "schema": "../../../schemas/experiment.schema.yaml",
+            "envelope": "experiment",
+            "status": "enforced",
+        },
+        "experiment": stub,
+    }
+    path.write_text(
+        "---\n"
+        + yaml.safe_dump(fm, sort_keys=False, width=100, allow_unicode=True)
+        + f"""---
+# {eid} — released
+
+Claimed and then given up without a measurement: {why}
+
+Nothing may be concluded from this round. `{hid}` returns to the queue, and a successor
+starts from nothing — no budget was spent that a later round can resume from.
+"""
     )
-    path.write_text(text.replace("(in progress)", "(released)"))
+    regenerate()
     print(f"{eid} released; {hid} returns to the queue")
 
 

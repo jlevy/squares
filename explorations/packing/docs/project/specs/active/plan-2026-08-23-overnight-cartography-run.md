@@ -1,0 +1,273 @@
+# Feature: The Overnight Cartography Run
+
+**Date:** 2026-08-23
+
+**Author:** Claude (agent)
+
+**Status:** Draft — the plan for the first long unattended session.
+
+## Overview
+
+The harness exists and the record is clean; what is missing is **work the harness can
+do**. This spec plans one night: what gets built in the first hours, what runs in the
+remaining ones, and what has to be true at each handover for the night to be worth
+having.
+
+It is deliberately narrow.
+It does not re-plan the toolkit — that is
+[the minimal-packing-toolkit spec](plan-2026-08-22-minimal-packing-toolkit.md), whose
+Phases 1–4 already enumerate every remaining piece and already carry a bead each.
+This spec is the *scheduling* layer over that one: which of those pieces this night
+takes, in what order, and where the unattended half begins.
+
+### The fact that shapes the whole plan
+
+**Almost nothing that remains is overnight-shaped work.** `canonicalize`, `atlas`,
+`descriptors`, `meter`, the multistart proposer — all of it is code an agent writes, not
+compute a runner drains.
+The campaign’s own effort record says the same thing from the other side: **275
+agent-minutes against 16.4 cpu-minutes** over its first ten rounds.
+
+So a night that is purely unattended is a night that runs `H-017` and stops.
+The plan below instead treats the night as **build, then run**, with a single explicit
+handover — and it names what must hold at that handover, because that is the point where
+nobody is watching any more.
+
+## Goals
+
+- **A queue with more work in it than the night can consume**, so the session ends on a
+  budget rather than on `queue empty`.
+- **One strategy carried to completion**, not five started.
+- **A morning artifact that leads with what needs a human**, and a record that is
+  gate-clean at every point in between.
+- **Every step of the plan is a bead**, so the night is resumable by a different agent
+  and the plan cannot drift from the work.
+
+## Non-Goals
+
+- **Beating a record.** Unchanged from the toolkit spec: this is calibration and
+  measurement.
+- **Finishing Phase 1.** The night takes the minimum of it that unblocks a census, and
+  leaves `descriptors`, `meter` and the exact re-verification pass for later.
+- **A fleet.** One runner, per the harness’s own refusal.
+  Parallelism is not this night’s constraint; queue depth is.
+- **Retiring `H-017`.** It stays registered and runnable, as the fallback if the build
+  half overruns — see [Fallbacks](#fallbacks).
+
+## The queue, and why it is one deep
+
+`runner.py status` today:
+
+```
+queue: 1 runnable, 8 not
+  -  H-001, H-011, H-012: instrument_ready is false
+  -  H-002, H-016, H-018, H-020: already resolved
+  -  H-019: already confirmed
+  +  H-017 (priority 4) cells [11], 5 seeds, timebox 8h
+```
+
+Those three `instrument_ready: false` entries are the whole problem, and they are honest
+rather than stale — each names an instrument that genuinely does not exist:
+
+| Hypothesis | What it waits on | Bead |
+| --- | --- | --- |
+| [H-011](../../../../campaign/hypotheses/H-011-small-n-census.md) — the small-`n` landscape is censusable | canonical basin identity, then the atlas | `think-ogv7` |
+| [H-012](../../../../campaign/hypotheses/H-012-record-basins-are-rare.md) — record basins are rare in quench measure | H-011’s census to query | `think-axbi` |
+| [H-001](../../../../campaign/hypotheses/H-001-angle-class-reduction.md) — angle-class reduction beats free annealing | an angle-class proposer | `think-opzu` |
+
+The dependency graph already encodes this, and `canonicalize` is the single unblocked
+root:
+
+```
+think-t1s9  canonicalize  ──▶  think-eq6l  atlas  ──┬─▶  think-ogv7  H-011 census  ──▶  think-axbi  H-012
+                                                     └─▶  think-2zmb  port sqsearch
+think-jxx8  multistart (the null)  ─────────────────────▶  think-ogv7
+```
+
+**One bead unblocks the entire research queue.** That is what this night should buy.
+
+## Design
+
+### The night in two halves
+
+|  | Hours | Who | Output |
+| --- | ---: | --- | --- |
+| **A. Build** | ~0–3 | agent, watched | `canonicalize`, a minimal `atlas`, the multistart proposer, each with a gate check |
+| **Handover** | — | — | the [handover gate](#the-handover-gate) below |
+| **B. Run** | ~3–9 | harness, unattended | the `n ≤ 10` census sweep drains; `H-011` and then `H-012` get verdicts |
+
+The handover is the only interesting moment in the plan, because it is where the
+project’s dominant defect detector switches off.
+The defect log is explicit about this: **24 of 29 defects were caught by a person or
+agent reading with intent, and 1 by the automated gate.** Half B has no reader.
+So the handover gate below is not ceremony — it is the substitute.
+
+### Half A: the minimum spine that unblocks a census
+
+Three beads, taken in this order, each landing with its own check in `test.sh`.
+
+1. **`canonicalize` (`think-t1s9`)** — two-level basin identity: a quantized geometric
+   key under `D₄` and square relabelling as the fast path, contact graph up to
+   isomorphism as ground truth.
+   This is the piece that makes “basin” mean something.
+   Until it exists, basin counts are artifacts of a tolerance
+   ([D-020](../../../../defects.md)).
+
+   *Check:* Trump’s packing and a perturbed-then-quenched copy of it produce the same
+   canonical key; two genuinely distinct `n = 5` optima do not; the key is invariant
+   under all eight `D₄` images and under relabelling.
+
+2. **`atlas` (`think-eq6l`)** — append-only, deduplicated by canonical identity, one
+   soft-schema artifact.
+   Minimum viable fields only: canonical key, exact-or-polished side, quench frequency,
+   angle signature. `descriptors` and neighbour links are explicitly *not* in scope
+   tonight (`think-hhon` stays open).
+
+   *Check:* the atlas validates against its schema; re-running the same seeds adds no
+   new entries; the whole-set checker sees no duplicate keys.
+
+3. **`multistart` (`think-jxx8`)** — the uniform-sampling null proposer, which is what
+   the census is actually made of and what every later proposer is measured against.
+   It must obey the harness’s experiment contract: JSON Lines carrying `best_side`, `n`,
+   `seed` and a zero `overlap`, exit 0.
+
+   *Check:* `runner.py preflight` passes with it in the queue, and one supervised round
+   completes end to end at `n = 5`.
+
+**Deliberately deferred:** `meter` (`think-b4jc`). Pair-tests are the campaign’s
+declared budget currency and `sqsearch` still does not emit them, so tonight’s budgets
+are in **wall-clock and restarts**, declared as such in the recipe.
+That is a known, recorded compromise, not an oversight — and it is why tonight’s rounds
+must not be used for cross-proposer budget comparisons.
+`think-owm0` tracks retiring the move-based budget.
+
+### The handover gate
+
+Half B does not start until every one of these holds.
+Each is mechanical; none is a judgment call.
+
+```
+[ ] ./test.sh --strict                     exits 0, zero skips
+[ ] runner.py preflight                    all checks pass, including a non-empty queue
+[ ] runner.py status                       shows >= 6 runnable cells, i.e. more than the night can drain
+[ ] one supervised round, end to end       claim -> execute -> record, gate-clean after
+[ ] git status                             clean; everything committed
+[ ] the recipe's timebox is sized          against THIS machine's measured throughput
+```
+
+The third line is the one that would have caught tonight’s actual problem a day ago, and
+it is now
+[step 7 of the skill’s pre-flight](../../../../../../.agents/skills/experiment-loop/references/unattended.md).
+A working runner in front of an empty queue is an idle night.
+
+### Half B: the initial strategy, and running it to completion
+
+**The strategy: uniform multistart + LP quench + canonical dedup, swept over `n = 5…10`,
+run to saturation.** That is `H-011` exactly as registered.
+
+Why this and not the alternatives:
+
+- **Not `H-017` (100× budget at `n = 11`).**
+  [exp-011](../../../../campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md)
+  just showed the annealer returns *exactly* the trivial grid at `n = 17` on all five
+  seeds — it does not reach oblique records as a class, at any `n`. Budget is not the
+  binding constraint, so a night spent multiplying it re-asks a question that was
+  answered this morning from a better angle.
+- **Not `H-001` (angle-class).** Its proposer does not exist, and building it is a
+  bigger job than the three beads above.
+- **`H-011` is load-bearing.** It is the only remaining item that *unblocks another
+  hypothesis on completion* — `H-012`, the direct test of the cartography premise, is a
+  query over its census.
+  One night can therefore close two claims.
+
+Its declared sweep is `n = 5, 6, 7, 8, 9, 10`, and `n = 8` is the **kill line**: the
+registered criterion is that the discovery curve plateaus, and if it has not by `n = 8`
+enumeration is abandoned.
+That is a pre-registered stopping rule, which means the night can end early with a real
+answer rather than an exhausted budget.
+
+**Running to completion** means, concretely: the harness claims one round per cell,
+drains the sweep in `n` order, and stops on whichever comes first — the sweep
+completing, the session budget expiring, the saturation criterion firing, or three
+consecutive guard refusals.
+Every one of those writes the session report; only the last exits non-zero.
+
+### What the morning gets
+
+`campaign/session-report.md`, generated, leading with **Needs review** — which will hold
+any cell that met its criterion, because
+[the harness cannot write the accepting verdict](../../../../campaign/runner.py).
+Then the ledger, regenerated after every round, and one commit per round.
+
+The first thing to read is the discovery curve per `n`, and the first question to ask of
+it is whether `n = 8` plateaued.
+
+## Fallbacks
+
+Named in advance, because a decision made at 2am is a decision made badly.
+
+| If | Then |
+| --- | --- |
+| Half A overruns past ~4h | Do **not** start a half-built census. Fall back to `H-017`, which is registered, recipe’d and needs nothing new — a predicted-negative night is still a recorded night |
+| `canonicalize` lands but `atlas` does not | Same fallback. A census without dedup is not a census |
+| The multistart proposer fails `preflight` | Fall back to `H-017`; file what failed as a bead |
+| Half B hits three guard refusals | The harness stops itself and exits non-zero. Do not restart it — the instrument is suspect, and that is the morning’s first item |
+| A round dies mid-flight | `runner.py release <exp-id>` records it `unresolved` and returns its hypothesis to the queue. Recovery is one step, not a restart |
+
+## Implementation Plan
+
+Every item is a bead against this spec:
+
+```bash
+tbd list --spec explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+```
+
+### Half A — build (watched)
+
+- [ ] `canonicalize`: two-level basin identity (`think-t1s9`, already open against the
+  toolkit spec)
+- [ ] `atlas`: minimum viable deduplicated store (`think-eq6l`)
+- [ ] `multistart`: the uniform null proposer, obeying the experiment contract
+  (`think-jxx8`)
+- [ ] Give `H-011` a `runner.command` recipe, sized against measured throughput
+- [ ] Flip `H-011.instrument_ready` to true in the same change that makes it true
+
+### The handover
+
+- [ ] Run the handover gate above; do not proceed on a partial pass
+
+### Half B — run (unattended)
+
+- [ ] `runner.py run --session-hours 8`
+- [ ] Morning: read the session report, resolve the review queue, re-screen the registry
+
+## Testing Strategy
+
+Each Half A bead lands with its check wired into `test.sh` in the **same change**, not
+after. That is rule **R1** from the
+[soundness postmortem](../../postmortems/postmortem-2026-08-23-soundness-class.md), and
+the reason it is not optional here is that Half B has no reader: a check that lands
+tomorrow protects nothing tonight.
+
+Each check must also be watched failing, via `tools/negctl.py`, before it is trusted —
+the same standard the existing fifteen negative controls meet.
+A guard nobody has seen fire is not yet evidence.
+
+## Open Questions
+
+- **How many distinct basins should `n = 5` have?** Nobody here knows, and that is
+  precisely what makes it a good first cell: the answer is checkable by hand against a
+  drawing, so the census’s first output is falsifiable by inspection rather than only by
+  its own machinery.
+- **Does the quench’s `1e-11` noise floor ([D-021](../../../../defects.md)) merge basins
+  that are genuinely distinct?** Two basins closer than the floor are currently
+  indistinguishable. At small `n` this is probably harmless; the census is the thing that
+  would show it is not, and the atlas should record the closest pair it saw.
+- **Is uniform multistart the right null?** It is the standard one, and it is what makes
+  the discovery curve interpretable.
+  But the container-side distribution it samples from is a choice, and the census
+  inherits it.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

@@ -556,6 +556,31 @@ consume; version it from the start.
 
 ## Revision history
 
+**2026-08-23 (later) — the harness exists, and it changes what a phase item must ship.**
+
+`campaign/runner.py` now executes rounds unattended, and it reads a machine-readable
+`runner.command` recipe from each hypothesis rather than the prose `instrument` field.
+So a Phase item is not finished when its code works: it is finished when the hypothesis
+it unblocks carries a recipe and has `instrument_ready: true` flipped **in the same
+change**. Anything less leaves a queue entry that reads runnable to a human and is
+invisible to the harness.
+
+Two consequences worth stating here rather than rediscovering:
+
+- **The harness holds no experiment code.** A new proposer is a command obeying the
+  contract in `campaign/README.md`, not a branch inside the runner.
+  If a Phase item would edit `runner.py`, the contract is wrong and that is what to fix.
+- **`meter` (`think-b4jc`) gates cross-proposer comparison, not execution.** Rounds run
+  fine on wall-clock budgets; what they may not do until pair-tests exist is claim two
+  proposers were compared at equal budget.
+  Phase 4 depends on it; Phase 3 does not.
+
+Scheduling of the first long unattended session — which pieces it takes, in what order,
+and where the watched half ends — is
+[the overnight cartography run](plan-2026-08-23-overnight-cartography-run.md).
+This spec stays the enumeration of the pieces; that one is the plan for one night of
+them.
+
 **2026-08-23 — what building the quench changed.**
 
 Three claims in this spec and the documents behind it did not survive contact with an
