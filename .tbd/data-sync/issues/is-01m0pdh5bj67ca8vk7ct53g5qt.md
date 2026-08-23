@@ -5,7 +5,7 @@ title: "Defect remediation: classify, postmortem, and close the soundness gaps"
 kind: epic
 status: open
 priority: 0
-version: 10
+version: 11
 spec_path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
 labels: []
 dependencies: []
@@ -20,7 +20,8 @@ child_order_hints:
   - is-01m0pdhwhbs1d2zsnk6z04w99m
   - is-01m0pdhx0dbsk8x90r58ge6pbx
   - is-01m0pdhxdvjmyttts8e3c42sd0
+  - is-01m0pe76rbag3ztncnt22vvx9v
 created_at: 2026-08-23T04:19:46.674Z
-updated_at: 2026-08-23T04:20:11.322Z
+updated_at: 2026-08-23T04:31:49.003Z
 ---
 Pause the experiment loops until the defect log's open items are closed and the pipeline that let a soundness bug through is fixed. Four strands: (1) postmortem on the soundness class, with prevention rules that generalise beyond the one bug; (2) close the four open defects D-018..D-021; (3) make the bookkeeping differentiate defect classes everywhere, not just in defects.yaml; (4) correct any research doc or plan whose claims the soundness and validity findings contradict. Resume the loops only when defects.md shows no open soundness item.
