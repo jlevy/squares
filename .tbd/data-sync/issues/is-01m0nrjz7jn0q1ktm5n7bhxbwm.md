@@ -5,7 +5,7 @@ title: Execute the research program
 kind: epic
 status: open
 priority: 2
-version: 8
+version: 9
 spec_path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
 labels: []
 dependencies: []
@@ -18,7 +18,8 @@ child_order_hints:
   - is-01m0nrk0srrfpvhypemb6wzh66
   - is-01m0p189dq5v176gbbv36t10ab
   - is-01m0p189sxrb9s8d0nsdw0g94k
+  - is-01m0p3297p2mf7vgqprzp9rpjs
 created_at: 2026-08-22T22:13:45.842Z
-updated_at: 2026-08-23T00:45:13.405Z
+updated_at: 2026-08-23T01:16:53.364Z
 ---
 The forward plan from the main report's 'A Research Program' section, as trackable work. Four lanes: foundations, the verifier, search, and proof. The report is authoritative on rationale; these beads track execution.
