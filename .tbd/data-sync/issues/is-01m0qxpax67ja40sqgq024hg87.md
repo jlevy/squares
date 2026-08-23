@@ -5,7 +5,7 @@ title: Repair the campaign trust boundary and run lifecycle
 kind: bug
 status: open
 priority: 0
-version: 5
+version: 6
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -21,7 +21,7 @@ dependencies:
     target: is-01m0qxpe517zsenj91xmydctg5
 parent_id: is-01m0qxka8ebkztq7erex50vvr2
 created_at: 2026-08-23T18:21:27.845Z
-updated_at: 2026-08-23T18:52:22.929Z
+updated_at: 2026-08-23T20:20:49.138Z
 ---
 Category: technical errors. The PR runner writes JSONL before validating overlap, records guard-invalid archives through the normal success path, trusts proposer-reported overlap, hardcodes selftest_passed, permits terminal rounds to be rewritten, ignores git failures, and does not enforce prerequisites or remaining deadlines. Build one checked state machine and one validation boundary shared by execute and record. Invalid output must be quarantined atomically and must never enter result cells.
 
@@ -29,4 +29,4 @@ Acceptance: adversarial overlapping or truncated JSONL, false overlap zero, cras
 
 ## Notes
 
-2026-08-23 stacked-review progress: result records are now validated before archival and revalidated on replay; undeclared cells and seeds are refused; guard failures are released instead of recorded; adversarial preflight checks pass. Remaining acceptance work includes stored full poses, independent validity recomputation, real selftest provenance, immutable state transitions, deadline and lease handling, narrow staging, and persistence-failure tests.
+2026-08-23 stacked-review progress: result records are validated before archival and on replay; undeclared cells and seeds are refused; guard failures are released instead of recorded; adversarial preflight passes. At c412b8c, D-032 and D-033 are finally logged but remain unguarded. The timezone crash is fixed for runner-produced UTC leases, while dropping tzinfo still mishandles non-UTC offsets. Remaining work includes stored poses, independent validity recomputation, immutable lifecycle states, prerequisite/deadline/lease enforcement, narrow checked persistence, and recovery-path tests.

@@ -5,7 +5,7 @@ title: Make canonical basin identity invariant, stable, and scalable
 kind: bug
 status: open
 priority: 0
-version: 7
+version: 9
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -23,7 +23,7 @@ dependencies:
     target: is-01m0qxpefk4ge1r6mrab9rhbad
 parent_id: is-01m0qxka8ebkztq7erex50vvr2
 created_at: 2026-08-23T18:21:28.165Z
-updated_at: 2026-08-23T20:22:28.299Z
+updated_at: 2026-08-23T20:26:03.341Z
 ---
 Category: technical errors. The contact certificate is not invariant under container reflection because folded-angle classes are ranked by angle value; tolerance grouping is order-dependent; exact tuple identity splits geometrically equivalent packings at quantization boundaries; and exhaustive individualization becomes factorial on sparse symmetric graphs.
 
