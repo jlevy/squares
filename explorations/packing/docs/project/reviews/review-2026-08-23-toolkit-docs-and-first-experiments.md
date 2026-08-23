@@ -83,7 +83,7 @@ define theirs.
 Report both; treat geometric-key collisions as the fast path and structural identity as
 the ground truth.
 
-### R-2 (blocking E4, weakening E2/E3): the refinement stage is presumed but never built — and it is a *linear program*
+### <a id="r-2"></a>R-2 (blocking E4, weakening E2/E3): the refinement stage is presumed but never built — and it is a *linear program*
 
 The spec’s basin record includes “its refined side length” and its open questions say
 “float-plus-refine plus a final exact check”, but no Phase-1 or Phase-2 task builds a

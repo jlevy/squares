@@ -48,6 +48,24 @@ else
 fi
 
 echo
+echo "== fixed-angle cell is an LP (needs scipy) =="
+# The refiner's load-bearing claim: fix the angles and each pair's separating
+# axis and what remains is a linear program. Checked by rebuilding the LP from
+# the cell alone and asking it to reconstruct Trump's packing.
+if python3 -c "import scipy" 2>/dev/null; then
+  out=$(python3 lp_cell.py)
+elif command -v uv >/dev/null 2>&1; then
+  out=$(uv run --quiet --with scipy==1.16.2 python3 lp_cell.py)
+else
+  out="scipy not installed; skipping"
+fi
+echo "$out" | sed 's/^/  /'
+if ! grep -q "skipping" <<<"$out"; then
+  grep -q "23 variables, 1056 constraints" <<<"$out"
+  grep -q "ALL CHECKS PASSED" <<<"$out"
+fi
+
+echo
 echo "== frontier corpus =="
 # Structural checks that need no network. Schema validation needs softschema:
 #   for f in frontier/n-*.md; do uvx softschema@latest validate "$f"; done

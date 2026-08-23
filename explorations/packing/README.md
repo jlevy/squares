@@ -8,11 +8,22 @@ The motivating case is `n = 11` — the smallest instance of this problem that i
 open. Its best known packing dates from 1979 and its best proved lower bound from 2003,
 and a gap of roughly 0.088 in the side length separates them.
 
+**Start with [`SYNOPSIS.md`](SYNOPSIS.md).** It is the single technical account of what
+this project knows, how it knows it, and what it is doing next: the problem, the results
+established here and their evidential status, the per-`n` lay of the land, the
+hypothesis registry, and a roll-up of every experiment run so far.
+It is kept current and points at the artifact behind each claim rather than restating
+it.
+
 ## Layout
 
 ```
 explorations/packing/
-├── docs/project/research/  The three research reports (see below)
+├── SYNOPSIS.md             The technical root: results, status, and the experiment
+│                           roll-up. Read this first.
+├── docs/project/research/  The six research reports (see below)
+├── campaign/               The experiment record: hypothesis registry, series, rounds,
+│                           and a generated ledger. See campaign/README.md.
 ├── frontier/               What is known about s(n) for every n <= 100: one
 │                           schema-validated artifact per case, plus editorial.
 │                           See frontier/README.md.
@@ -30,6 +41,9 @@ explorations/packing/
 ├── negative_control.py     show the verifier rejects bad packings, and where float64
 │                           fails
 ├── bench.py                exact vs approximate cost, and scaling with algebraic degree
+├── lp_cell.py              rebuild the fixed-angle cell as a linear program and solve
+│                           it; the angle sweep and the shape of its minimum
+├── sqsearch/               tier-1 screening annealer (Rust)
 ├── test.sh                 run everything and check the expected results
 └── frankensim-probe/       two experiments run against Jeffrey Emanuel's FrankenSim,
                             asking whether its certified-arithmetic and RNG layers help

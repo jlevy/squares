@@ -212,13 +212,15 @@ Markdown link. This project has needed that twice.
 
 1. Exact verification of Trump’s packing, and the negative control showing why float
    cannot do it
-2. Frontier corpus structure, and its soft-schema validation
-3. Generated tables in sync with the frontier data
-4. Strategy catalogue integrity
-5. `sqsearch --selftest` — geometry against a naive reference, determinism, the `s(5)`
+2. The fixed-angle cell rebuilt as a linear program, solved back to Trump’s packing, and
+   swept over its free angle
+3. Frontier corpus structure, and its soft-schema validation
+4. Generated tables in sync with the frontier data
+5. Strategy catalogue integrity
+6. `sqsearch --selftest` — geometry against a naive reference, determinism, the `s(5)`
    positive control, and the recomputed-overlap guard
-6. The differential test between search energy and the validity oracle
-7. The campaign record: schema validation, id uniqueness, dangling references, unknown
+7. The differential test between search energy and the validity oracle
+8. The campaign record: schema validation, id uniqueness, dangling references, unknown
    series, more than one open series, stale claims, cross-field verdict rules,
    idea-board reconciliation, reserved-id rules, dead links, and ledger freshness
 
