@@ -142,7 +142,12 @@ reportUnknownVariableType = "none"
 reportUnknownParameterType = "none"
 reportUnannotatedClassAttribute = "none"
 
-[tool.pytest.ini_options]
-testpaths = ["sqpack", "tools", "tests"]
-python_files = ["test_*.py", "*_test.py"]
-addopts = "-q"
+# No pytest configuration, deliberately. `test.sh` is the gate and nothing here wants
+# a second test runner. The config that used to sit here declared testpaths including a
+# `tests/` that does not exist and matched `*_test.py`, which collected
+# perimeter_test.py and regression_test.py by name -- both `main()` scripts with no
+# `def test_*` in them. The result was `pytest` printing "no tests ran" and exiting 0:
+# a configured, green test runner that checked nothing, which is the exact failure this
+# directory's defect log is about (D-004). Removing the config makes an empty
+# collection exit non-zero again. Renaming the three gate scripts off the `_test.py`
+# suffix is tracked separately (T-2 in the tooling-layout review).

@@ -1,7 +1,26 @@
 #!/usr/bin/env bash
 # Run everything and check the results that matter.
+#
+# Usage: ./test.sh [--strict]
+#
+# A check this gate could not run is not a check that passed, and the difference has
+# to survive a tired reader at 3am. Every skip is recorded and re-listed at the end,
+# and the final line says how many there were -- so "ALL CHECKS PASSED" is printed
+# only when that is literally true. `--strict` (or GATE_STRICT=1) turns any skip into
+# a non-zero exit, which is what an unattended runner uses: a night that silently
+# stopped checking the soundness perimeter must not read as a quiet one.
 set -euo pipefail
 cd "$(dirname "$0")"
+
+STRICT="${GATE_STRICT:-0}"
+[ "${1:-}" = "--strict" ] && STRICT=1
+SKIPPED=()
+
+# Record a skip and say so in the same breath. Never called for a check that ran.
+skip() {
+  SKIPPED+=("$1")
+  echo "  SKIP: $1"
+}
 
 # Some checks need PyYAML and jsonschema, which a bare system python3 usually lacks
 # -- on the machine this was written on, `import yaml` failed and every frontier
@@ -18,6 +37,26 @@ else
 fi
 echo "python runner: $PY"
 
+# Build the engine FIRST, before anything that reads the binary.
+#
+# It used to be built at its own step, two thirds of the way down -- which meant that
+# on a fresh checkout the soundness perimeter ran with no binary and reported
+# "sqsearch binary absent, skipping engine cells", and the gate still finished with
+# "ALL CHECKS PASSED". The perimeter is the check whose absence let D-014 through, so
+# the one check that most needed to run was the one a clean clone skipped. That is
+# D-004's shape ("half the test suite was silently unreachable") inside the D-014
+# guard. Ordering is the fix: build once, up front, and every later step that needs
+# the binary finds it.
+if command -v cargo >/dev/null 2>&1; then
+  echo "== building sqsearch =="
+  ( cd sqsearch && cargo build --release --quiet )
+  echo "  built sqsearch/target/release/sqsearch"
+else
+  echo "== building sqsearch =="
+  skip "cargo not installed: the engine, perimeter engine cells, differential test and selftest cannot run"
+fi
+
+echo
 echo "== exact verification =="
 out=$(python3 verify_trump11.py)
 echo "$out"
@@ -39,12 +78,20 @@ grep -q "tol=1e-09 .*1e-12: accept" <<<"$out"
 
 echo
 echo "== derivation (needs sympy) =="
+# sympy is a dev dependency, so `uv run` has it even where the system python3 does
+# not. Asking python3 alone was why this step skipped on a clean checkout.
 if python3 -c "import sympy" 2>/dev/null; then
   out=$(python3 derive_field.py)
+elif command -v uv >/dev/null 2>&1 && uv run --quiet python -c "import sympy" 2>/dev/null; then
+  out=$(uv run --quiet python derive_field.py)
+else
+  out=""
+fi
+if [ -n "$out" ]; then
   echo "$out"
   grep -q "matches sqpack.packings.trump11.U_MIN_POLY: True" <<<"$out"
 else
-  echo "sympy not installed, skipping"
+  skip "sympy not available to python3 or uv: the degree-8 field derivation is unchecked"
 fi
 
 echo
@@ -123,13 +170,13 @@ if command -v uv >/dev/null 2>&1; then
   ( cd "$(dirname "$0")" && uv run --quiet ruff check . && uv run --quiet ruff format --check . \
     && uv run --quiet basedpyright ) | tail -3
 else
-  echo "  uv not installed, skipping Python lint"
+  skip "uv not installed: ruff, ruff-format and basedpyright did not run"
 fi
 if command -v cargo >/dev/null 2>&1; then
   ( cd sqsearch && cargo clippy --release --all-targets --quiet -- -D warnings 2>&1 | tail -2 \
     && cargo fmt --check && echo "  clippy clean at pedantic; rustfmt clean" )
 else
-  echo "  cargo not installed, skipping Rust lint"
+  skip "cargo not installed: clippy and rustfmt did not run"
 fi
 
 echo
@@ -144,7 +191,9 @@ echo "== soundness perimeter =="
 # share. This is the check whose absence let D-014 through: the quench was validated
 # only against its own constraint rows, which is no check when the rows are what the
 # solver got wrong. Replaying that defect against this gate rejects it on sight.
-$PY tools/perimeter_test.py
+out=$($PY tools/perimeter_test.py 2>&1); echo "$out"
+grep -q "skipping engine cells" <<<"$out" \
+  && skip "soundness perimeter ran without the engine: its sqsearch cells did not run"
 
 echo
 echo "== defect log =="
@@ -168,7 +217,9 @@ echo "== bead tree =="
 # catch that class: no open bead under a closed parent, no two open siblings with one
 # title. Reads the beads out of git, so it needs no tbd binary, and skips loudly in a
 # checkout that has no tbd-sync branch.
-$PY tools/check_beads.py
+out=$($PY tools/check_beads.py 2>&1); echo "$out"
+grep -q "^SKIP" <<<"$out" \
+  && skip "no bead store reachable: the bead-tree invariants did not run"
 
 echo
 echo "== synopsis agrees with the artifacts =="
@@ -193,14 +244,13 @@ echo "== search engine (sqsearch) =="
 # control that recovers s(5) = 2 + 1/sqrt(2). A run that has not passed this may not
 # be recorded. Skipped, not failed, where cargo is absent -- the rest of this repo
 # is Python and prose and should stay checkable without a Rust toolchain.
-if command -v cargo >/dev/null 2>&1; then
-  ( cd sqsearch && cargo build --release --quiet )
+if [ -x sqsearch/target/release/sqsearch ]; then
   out=$(sqsearch/target/release/sqsearch --selftest)
   echo "$out" | sed 's/^/  /'
   grep -q "SELFTEST PASSED" <<<"$out"
   ! grep -q "FAIL" <<<"$out"
 else
-  echo "  cargo not installed, skipping"
+  skip "sqsearch binary absent: the engine selftest did not run"
 fi
 
 echo
@@ -209,10 +259,10 @@ echo "== differential: search energy vs validity oracle =="
 # operation, so nothing would notice if they drifted -- and a search optimising
 # against a different notion of overlap than the record is checked with is the
 # quietest possible failure. Near-contact pairs only: that is where it could hide.
-if command -v cargo >/dev/null 2>&1; then
+if [ -x sqsearch/target/release/sqsearch ]; then
   $PY differential_test.py 20000
 else
-  echo "  cargo not installed, skipping"
+  skip "sqsearch binary absent: search energy was not checked against the validity oracle"
 fi
 
 echo
@@ -242,4 +292,14 @@ echo "== campaign record =="
 $PY campaign/ledger.py --check
 
 echo
-echo "ALL CHECKS PASSED"
+if [ ${#SKIPPED[@]} -eq 0 ]; then
+  echo "ALL CHECKS PASSED"
+else
+  echo "CHECKS PASSED, BUT ${#SKIPPED[@]} WERE SKIPPED:"
+  for s in "${SKIPPED[@]}"; do echo "  - $s"; done
+  if [ "$STRICT" = "1" ]; then
+    echo "strict mode: a skipped check is not a passed check" >&2
+    exit 1
+  fi
+  echo "(re-run with --strict to make this an error; the unattended runner does)"
+fi

@@ -8,3 +8,8 @@ node_modules/
 __pycache__/
 *.py[cod]
 explorations/packing/.venv/
+
+# The unattended runner's id-allocation lock (campaign/runner.py). Local coordination
+# state, never shared: two runners on one filesystem share it, two on separate branches
+# use disjoint id blocks instead.
+explorations/packing/campaign/series/.idlock
