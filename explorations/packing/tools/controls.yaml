@@ -33,11 +33,15 @@ controls:
   run: python3 tools/validate_schemas.py
   expect: "recurrence_of unknown"
 
+# The only control whose anchor tracks a live number, because the thing under test IS
+# a number. It needs updating whenever a defect is added -- and that is fine: negctl
+# requires the anchor to appear exactly once, so a stale one fails the suite by name
+# rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 27", "count: 20"]
+  replace: ["count: 29", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 27"
+  expect: "count 20 != 29"
 
 - name: defect log - generated view left stale
   file: defects.yaml

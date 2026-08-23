@@ -134,14 +134,75 @@ def check_angle_search_converges() -> str | None:
     return None
 
 
+def check_cell_solve_is_not_a_quench() -> str | None:
+    """D-029: freezing the angles measures the cell, not the basin.
+
+    An agent checking exp-001's polish/exploration split built a probe that did one LP
+    solve at fixed angles, called it "the quench", saw it fail to reach the analytic
+    optimum at `n = 10`, and retracted a correct finding. On exp-002's seed 2 the
+    fixed-angle solve improves the annealer's output by *nothing at all* -- the centres
+    are already optimal at those angles, and every remaining unit of gap is angular.
+    That is what the RIGHT basin looks like when the residual is in the angles, and it
+    was read as evidence of the wrong one.
+
+    The check pins the discrimination rather than the story: the cell solve must stay
+    put, and the quench with its angle half must reach the optimum.
+    """
+    archive = (
+        ROOT
+        / "campaign/series/series-000-smoke-and-calibration/results"
+        / "exp-002-baseline-n10-positive-control.jsonl"
+    )
+    if not archive.exists():
+        return None
+    analytic = 3 + 0.5 * math.sqrt(2)  # s(10), Stromquist 2003 Theorem 1
+    rows = [json.loads(line) for line in archive.read_text().splitlines() if line.strip()]
+    chains = [
+        r for r in rows if r.get("kind") == "chain" and r.get("n") == 10 and r.get("seed") == 2
+    ]
+    if not chains:
+        return None
+    best = min(chains, key=lambda r: r["best_side"])
+
+    quarter = math.pi / 2
+    frozen = [t % quarter for t in best["t"]]
+    solved = solve_to_fixed_point(frozen, best["x"], best["y"], 10)
+    if solved is None:
+        return (
+            "D-029: the fixed-angle solve on exp-002 seed 2 returned no solution at all; "
+            "it is supposed to succeed and merely fall short, so the LP or the cell "
+            "read has regressed"
+        )
+    cell_side = solved[0]
+    if cell_side - analytic < 1e-6:
+        return (
+            f"D-029: the fixed-angle cell solve reached {cell_side - analytic:+.2e} of the "
+            "analytic optimum. It is supposed to be unable to -- if it now can, the "
+            "measurement that separates a cell from a basin has stopped separating them"
+        )
+
+    r = quench_bracket(best["x"], best["y"], best["t"], time_budget=60)
+    if r.side - analytic > 1e-12:
+        return (
+            f"D-029: quench_bracket on exp-002 seed 2 reached only {r.side - analytic:+.2e}; "
+            "the angle half has regressed, and n = 10 would read as an exploration failure"
+        )
+    return None
+
+
 def main() -> int:
-    checks = [check_budget_binds, check_quench_deterministic, check_angle_search_converges]
+    checks = [
+        check_budget_binds,
+        check_quench_deterministic,
+        check_angle_search_converges,
+        check_cell_solve_is_not_a_quench,
+    ]
     failures = [msg for msg in (c() for c in checks) if msg]
     for msg in failures:
         print(f"  REGRESSION  {msg}", file=sys.stderr)
     if failures:
         return 1
-    print(f"  {len(checks)} regression checks pass (D-002, D-015, D-016, D-019)")
+    print(f"  {len(checks)} regression checks pass (D-002, D-015, D-016, D-019, D-029)")
     return 0
 
 

@@ -48,6 +48,19 @@ else
 fi
 
 echo
+echo "== fixed-angle cell is an LP, rebuilt independently =="
+# The claim the quench rests on: fix the angles and each pair's separating axis and
+# what remains is a linear program. This is the SECOND implementation of it, and that
+# is the point -- sqpack.quench writes one row per pair from half-extents, this writes
+# sixteen from corner pairs, and neither shares constraint-assembly code with the
+# other. D-014 is what happens when a solver is checked only against its own rows.
+# It also reproduces H-019's one-sided slopes through those unrelated rows.
+out=$(uv run --quiet python lp_cell.py 2>/dev/null || python3 lp_cell.py)
+echo "$out" | sed 's/^/  /'
+grep -q "23 variables, 1056 constraints" <<<"$out"
+grep -q "ALL CHECKS PASSED" <<<"$out"
+
+echo
 echo "== frontier corpus =="
 # Structural checks that need no network. Schema validation needs softschema:
 #   for f in frontier/n-*.md; do uvx softschema@latest validate "$f"; done
@@ -146,6 +159,33 @@ $PY tools/render_defects.py --check
 # defects.md, which sat reflowable for a day (D-027). Trusting the list is what
 # failed, so the gate checks it.
 $PY tools/check_generated_exempt.py
+
+echo
+echo "== bead tree =="
+# The work list lives on the tbd-sync branch, outside this directory, so nothing here
+# could see it -- and the one time it went inconsistent (D-025) a person found it by
+# reading `tbd list --spec` and noticing two epics with the same title. Two invariants
+# catch that class: no open bead under a closed parent, no two open siblings with one
+# title. Reads the beads out of git, so it needs no tbd binary, and skips loudly in a
+# checkout that has no tbd-sync branch.
+$PY tools/check_beads.py
+
+echo
+echo "== synopsis agrees with the artifacts =="
+# SYNOPSIS.md is the root document and a living one: it restates numbers that live
+# authoritatively elsewhere, which is the exact shape of thing that drifted in D-010,
+# D-017 and D-022. It cannot be generated -- most of it is judgement -- so it is
+# reconciled instead, the way ideas.md is.
+$PY tools/check_synopsis.py
+
+echo
+echo "== README agrees with the directory =="
+# The other high-level document, and the one that was NOT reconciled -- which is why it
+# restated defect counts and went stale behind them twice in a day (D-028). The counts
+# now live only in the generated view. What is left is checkable: the layout tree
+# against the directory, the report index against docs/project/research/, and every
+# link and anchor, including the ones into SYNOPSIS.md.
+$PY tools/check_readme.py
 
 echo
 echo "== search engine (sqsearch) =="

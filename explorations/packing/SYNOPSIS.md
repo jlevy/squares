@@ -1,0 +1,1051 @@
+# Synopsis: The `s(n)` Program
+
+**Date:** 2026-08-23 (last updated 2026-08-23, after `series-000` rounds 5–10)
+
+**Status:** Living document, revised whenever a result lands.
+
+**Owns:** The single technical account of what this project knows, how it knows it, and
+what it is doing next.
+
+> Every number here also appears in a schema-validated artifact in this directory, or is
+> reproducible by a command given in the text, and the artifact is authoritative where
+> the two differ. `tools/check_synopsis.py` enforces that in the gate.
+
+## Overview
+
+`s(n)` is the side of the smallest square that contains `n` non-overlapping unit
+squares, which may be rotated freely.
+The motivating case is `n = 11`: the smallest instance nobody has solved, and the
+smallest open gap at `n ≤ 100`.
+
+This project has four lanes, in the order they were built:
+
+1. **Know the frontier.** A schema-validated record of the best known packing and the
+   best proved lower bound for every `n ≤ 100`, with provenance, plus a local archive of
+   the primary literature.
+2. **Verify exactly.** A separating-axis verifier that decides validity over the
+   packing’s own algebraic number field, so a configuration with contacts at *exactly*
+   zero separation can be certified rather than guessed at.
+3. **Search, under an experiment contract.** A hypothesis registry with kill criteria
+   written before the run, a metric vector, an accept rule, a declared timebox, and a
+   ledger generated from the artifacts rather than typed.
+4. **Account for what goes wrong.** A defect log with the same discipline as the
+   experiment record, because four of the six soundness failures found so far pointed in
+   the *flattering* direction and none was caught by the automated gate.
+
+The strategy that organises lanes 3 and 4 is stated in
+[A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md):
+**the map of the local optima is the deliverable, and records are corollaries.** The
+argument for it, and the measurement registered to kill it if it is wrong, are in
+[Theoretical Results](#theoretical-results) and
+[The Hypothesis Registry](#the-hypothesis-registry) below.
+
+[Terminology](#terminology) below fixes the sense of every word this project uses
+narrowly—quench, basin, polish, exploration, gap, tier—and disambiguates the one word
+used for two different things.
+Those definitions apply in the campaign artifacts and the beads too, not only here.
+
+### Document map
+
+Each document owns one thing.
+Nothing here duplicates what another owns.
+
+| Document | Owns |
+| --- | --- |
+| **This synopsis** | The state of the program: results, their status, the roll-up of rounds |
+| [Current handoff](docs/project/handoff-2026-08-23-quench-spine.md) | Where the work stands *today*: the critical path, the beads it maps to, and what to pick up next. Dated and disposable; this synopsis is the durable account |
+| [`README.md`](README.md) | What is in the directory, how to run it, and the index of the six research reports |
+| [`conventions.md`](conventions.md) | Every rule the directory runs on, and which are machine-checked |
+| [`defects.md`](defects.md) | Every bug and record defect, what caught it, and what now stops it recurring |
+| [Soundness postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | Why D-014 was possible, and rules R1–R4 that apply to code not yet written |
+| [`frontier/`](frontier/README.md) | What is known about `s(n)` for every `n ≤ 100`, one artifact per case |
+| [`resources/`](resources/README.md) | The primary literature, local and greppable |
+| [Packing 11 Unit Squares](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | The mathematics of `s(11)`: what is proved, what is conjectured, why the proof technique stalls |
+| [Algorithms and Tooling](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | How packings are found, refined to exact form, and verified |
+| [FrankenSim as a Rust Toolkit](docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md) | First-hand study of one Rust framework as a source of parts |
+| [Infrastructure for Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | The build order, the language boundary, what not to build |
+| [Lean for Packing Proofs](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where a proof assistant fits, and what it would be pointed at first |
+| [A Search Philosophy](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | The strategy layer: why pointing should beat scaling |
+| [Standing review](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | The experimental method, and the register `H-001`–`H-015` in prose |
+| [Plan spec](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | The seven build phases, and a revision note recording what building the quench corrected |
+| [Campaign runbook](campaign/README.md) | The contract every round runs under, frozen while rounds run |
+| [Idea board](campaign/ideas.md) | The whole idea space on one page, including dead ends |
+| [Ledger](campaign/ledger.md) | Generated roll-up of series, registry, rounds and effort |
+
+The code that produces the numbers: [`sqpack/verify.py`](sqpack/verify.py) decides
+validity exactly, [`sqpack/quench.py`](sqpack/quench.py) is the LP-in-cell quench,
+[`lp_cell.py`](lp_cell.py) is a second, independent implementation of the quench’s
+linear program, and [`sqsearch/`](sqsearch/) is the screening annealer.
+
+## Terminology
+
+These words are used in a narrow sense throughout this directory, the campaign
+artifacts, and the beads.
+Two of them carry more than one sense—**cell** and **quench**—and for each, the rule for
+which to write is stated with the definition.
+Nothing below is a synonym for anything else below.
+
+### The objects
+
+**Configuration.** A placement of all `n` squares: a centre `(xᵢ, yᵢ)` and an angle
+`θᵢ ∈ [0, π/2)` for each, together with a container side `s`. That is `3n + 1` real
+coordinates, 34 at `n = 11`. A configuration is *valid* when the interiors are pairwise
+disjoint and all squares lie in `[0, s]²`; touching is valid.
+
+**Cell**—always a *cell of configuration space*: a choice, for each of the `C(n,2)`
+pairs, of one candidate separating axis together with an order (which square is on the
+low side). A configuration *lies in* a cell when those choices genuinely separate those
+pairs in that order.
+Fixing the angles and a cell turns the problem into a linear program; that is
+[T-2](#the-cell-decomposition).
+
+**Instance cell**—an `n` carrying a declared role in the sweep: `n = 10` positive
+control, `n = 11` target, `n = 12` negative control, `n = 17` mechanism-matched
+calibration.
+A **control cell** is an instance cell whose answer is known before the run,
+and a breach of one rejects the round regardless of outcome.
+
+> The two senses collide, and both appear in this document.
+> **Write “cell” for the configuration-space object and “instance cell”—never bare
+> “cell”—for a sweep position.** In running prose about a round, prefer naming the `n`.
+
+**Basin.** The preimage of one quench endpoint under the quench map: the set of
+configurations the refiner carries to the same local optimum.
+A basin is therefore defined *relative to a specific quench*, which is why basin
+identity may not inherit the search’s tuning parameters—a quench that merged nearby
+angles would make the word depend on the merge tolerance ([D-020](defects.md)). What
+makes a basin a discrete, nameable object rather than a tolerance-dependent blob is that
+the LP gives its endpoint a *value*, reproducibly, to solver precision—about `1e-11` in
+the side, and no better ([D-021](defects.md), open).
+Two basins closer than that floor are not currently distinguishable.
+
+**The ladder.** The proved instances used as controls—`n = 5` and `n = 10`, both `45°`
+mechanisms with closed-form optima.
+The ladder validates *machinery*: no proved case exercises an irrational oblique angle,
+so passing it says nothing about strategy at `n = 11`.
+
+### The operations
+
+**Quench.** Two senses, both in use, and they do not conflict.
+As a *map*, in Stillinger and Weber’s sense: the function sending a configuration to the
+local optimum a deterministic refinement carries it to.
+As a *component*, [`sqpack/quench.py`](sqpack/quench.py): this project’s implementation
+of that map—solve the LP in the current cell, move the angles, re-solve, until fixed.
+Say “the quench map” where the distinction matters.
+
+**Polish.** Refinement *within* the basin a configuration is already in—driving the side
+down to the local optimum without changing which local optimum that is.
+This is what the quench does, and all it does.
+
+**Exploration.** Reaching a different basin.
+No amount of polish performs it, and nothing currently in the toolkit does it reliably
+at `n = 11`.
+
+**Proposer** and **refiner**. The two halves of the loop, named separately because the
+measurement that matters is which one is failing.
+The proposer emits candidate configurations (today: the `sqsearch` annealer); the
+refiner is the quench.
+Building a better refiner cannot fix a proposer failure.
+
+**Angle class.** A set of squares constrained to share one angle.
+Trump’s packing has two classes at `n = 11`: six squares at `0°`, five at `a*`. **Class
+bracketing** is the angle search that optimises over merged classes by bracketing rather
+than by gradient, which is what a corner requires; `class_tol` is the tolerance that
+decides which angles merge into one class.
+
+**Corner** (equivalently *kink*). A point where the LP optimum as a function of the
+angles has distinct one-sided derivatives, so no method assuming a smooth local model
+converges to it. Measured at `n = 11`: `0.1747` and `0.384` per radian, through two
+independent implementations ([T-3](#the-corner-and-the-method-it-forced)). Not a synonym
+for “sharp minimum”—the derivative does not become large, it fails to exist.
+
+**Rigidity.** A packing having no slack: every square is pinned by contacts, so no
+square can move without increasing the side.
+Trump’s packing is rigid, which is simultaneously why it is hard to find, why a float
+verifier cannot decide it, and why its angle optimum is a corner.
+
+### The measurements
+
+**Gap.** Always `best_side − standing_best`, in units of the container side, and always
+signed. A *negative* gap below the `exact` tier is solver noise, never a discovery.
+
+**Standing best.** The best side ever published for that `n`, read from
+[`frontier/`](frontier/README.md)—an upper bound, and for the open cases not known to be
+optimal. Distinct from the **analytic optimum**, which exists only where the case is
+proved. At `n = 5` and `n = 10` they coincide; at `n = 11` the standing best is Trump’s
+construction and the optimum is unknown.
+
+**Polish failure** and **exploration failure.** The decomposition of a gap, and the
+campaign’s central diagnostic.
+A **polish failure** is a gap left while already in the right basin—closable by a better
+refiner, as `n = 10` was, from `4.19e-04` to `1.33e-15`. An **exploration failure** is a
+gap because the search is in the wrong basin—untouched by refinement, as `n = 11` is,
+`8.85e-02` to `6.29e-02` and no further.
+Which one a number represents is not readable off the number; it is established by
+running the refiner and seeing whether the gap moves.
+
+**`reached_basin`.** A recorded outcome meaning `best_side − standing_best < 1e-4`. It
+is a **numerical proxy** for “found the right combinatorial class”, not evidence of
+it—establishing the class means comparing contact graphs.
+A round claiming `reached_basin` must say which it means.
+
+**Pair-test.** The budget currency: one evaluation of one pair of squares for overlap.
+Machine-independent, unlike wall clock or moves, which is why proposer comparisons are
+denominated in it. Tiers S/M/L are `1e9`/`1e11`/`1e13`.
+
+**Evidence tier.** What a number is permitted to claim, fixed by how it was produced:
+`f64_screen` (a candidate was proposed), `polished` (this is the basin, valued to solver
+precision—a floor of about `1e-11`, [D-021](defects.md)), `exact` (validity decided over
+the packing’s own number field).
+**`beat_record: true` may be written only at `exact`.** Never extrapolate across a tier
+boundary. The tiers are set out in full under
+[Theoretical Results](#theoretical-results).
+
+### Not used here
+
+Two coinages appear in side work and are deliberately **not** adopted, because the
+project already has clearer words for both.
+
+- **“polish gap” / “exploration gap.”** Write **polish failure** and **exploration
+  failure** for the diagnosis, and *right basin* / *wrong basin* for the state.
+  A gap is a number; whether it is polish or exploration is a *conclusion about* that
+  number, and the two-word compound hides the inference.
+  Neither compound occurs anywhere in this directory and neither should start.
+- **“the quench” for a fixed-angle solve.** A quench includes its angle half.
+  See
+  [A cell is not a basin](#a-cell-is-not-a-basin-and-this-trap-has-been-walked-into)—the
+  conflation cost a correct finding ([D-029](defects.md)).
+
+### The deliverables, none of them built
+
+**Atlas.** The deduplicated store of known basins for an `n`, keyed by canonical basin
+identity. The stated deliverable of the cartography strategy.
+**Census.** An enumeration of the basins at one `n`, run to saturation.
+**Descriptors.** Structural coordinates of a packing—contact counts, angle classes,
+symmetry—used to steer search toward diversity rather than toward loss.
+**Meter.** The instrument that counts pair-tests, so two proposers can be compared at
+equal budget.
+
+### The record
+
+**Round.** One executed experiment against one registered hypothesis, with a declared
+timebox and a pre-registered accept rule, recorded as a schema-validated artifact plus
+its JSONL archive.
+**Series.** An ordered group of rounds sharing a runbook; only one may
+be open at a time.
+
+**Soundness perimeter.** The rule that every component emitting a configuration is
+checked by `sqpack` through code it does not share, enforced by
+`tools/perimeter_test.py`. A component joins it in the same change that introduces
+it—not doing so is how [D-014](defects.md) was possible.
+
+## The Problem
+
+A **packing** of `n` unit squares in a container square of side `s` is a placement of
+the `n` squares, each free to translate and rotate, whose interiors are pairwise
+disjoint and which all lie inside the container.
+`s(n)` is the infimum of the `s` for which one exists.
+Touching is allowed, and in good packings it is pervasive.
+
+For most `n` the answer is uninteresting: `s(m²) = m` by the grid.
+It becomes interesting just above a perfect square, where the leftovers must be tilted
+in.
+
+At `n = 11` the two ends of the interval have barely moved in a generation:
+
+|  | value | source |
+| --- | --- | --- |
+| Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
+| Best proved lower bound | `2 + 4/√5 = 3.788854382…` | Stromquist 2003, Theorem 2 |
+| Gap | `0.088229208023` | the smallest open gap at `n ≤ 100` |
+
+Trump’s packing is six axis-aligned squares plus a block of five tilted at
+`a* ≈ 40.181937290329714°`. The container side is an algebraic number of degree 8, the
+root of
+
+```
+s⁸ − 20s⁷ + 178s⁶ − 842s⁵ + 1923s⁴ − 496s³ − 6754s² + 12420s − 6865 = 0
+```
+
+lying in `[3.87, 3.88]`. The packing is **rigid**: it has no slack anywhere, which is
+what makes it hard to find, hard to check, and—as the angle results below show—hard to
+converge to.
+
+### Why exactness is not optional
+
+Disjoint *interiors* means touching is legal, and record packings touch a great deal.
+In Trump’s packing 14 of the 55 pairs are separated by exactly zero, and 20 corner
+coordinates lie exactly on the container boundary.
+
+Floating point can certify a strict inequality.
+It cannot certify an equality.
+A float verifier therefore needs a tolerance to accept the true contacts, and that
+tolerance is a blind spot that also accepts overlaps smaller than itself; setting it to
+zero rejects the true packing instead.
+Both failure modes are demonstrated by `negative_control.py`.
+
+The fix is representational rather than numerical: express the configuration in the real
+algebraic number field it actually lives in, where equality is decidable.
+That is what `sqpack` does, and it is why the evidence tiers below make `exact` the only
+tier permitted to say **record**.
+
+This is not an abstract concern.
+The same failure reappeared *inside the refiner* eight rounds later: an LP solver at its
+default tolerance returned a packing violating its own separation constraint, and so a
+side below Trump’s ([D-014](defects.md), critical, caught by the pre-registered rule
+that beating the record means you have a bug).
+
+## The Lay of the Land, by `n`
+
+Where the program has spent effort, and what came of it.
+
+| `n` | Status | Standing best | Role here | What has been done |
+| --- | --- | --- | --- | --- |
+| 5 | proved, `2 + ½√2` | `2.70710678…` | positive control | `sqsearch --selftest` recovers it on every run. [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md): the bracketing quench refines annealer output to `2.22e-15`—the analytic value to machine precision |
+| 8 | proved, `3` | `3` | census kill line | The `n` at which [H-011](campaign/hypotheses/H-011-small-n-census.md)’s discovery curve must plateau, or enumeration is abandoned. No rounds |
+| **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Four rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); angle descent barely helps; [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`—**twelve orders** |
+| **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); six rounds. Every method tried lands `≈ 6e-02` short: the failure is **exploration**, not polish |
+| **12** | open; `4` believed optimal | `4` | **negative control** | Two rounds. Returns exactly `4.0` on all five seeds and never below. Also where the search and proof lanes are planned to meet |
+| 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | Registered in the standing sweep; **still no rounds**. The nearest case whose record uses genuinely oblique structure—tilts of `0°` and `±40°` |
+| 61, 78, 97 | open, `m² − 3` | `8`, `9`, `10` (grids) | opportunistic slot | The narrowest gaps in the table. An analytic Cleemann-style attempt at `arctan(3/4)` is registered and **not yet made** |
+| 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](frontier/README.md); 63 of the 65 open cases are bounded below by Nagamochi’s general theorem |
+
+Three facts about this table drive the strategy.
+
+**Every proved case in the ladder is a 45° mechanism.** `n = 5` and `n = 10` are
+symmetric arrangements that blind search reaches without help.
+`n = 11` needs an oblique core at an irrational angle, which **no proved case
+exercises**, so the ladder validates *machinery*, not *strategy*.
+
+**The ladder now discriminates sharply, and the target does not move.** The bracketing
+quench takes `n = 5` and `n = 10` to machine precision and leaves `n = 11` essentially
+where the annealer put it.
+That is the cleanest statement of where the difficulty lives: the refiner is not the
+problem.
+
+**`n = 17` remains the largest unforced gap in coverage.** It is cheap to carry, it is
+the only registered instance cell that tests record-*finding*, and it has never been
+run.
+
+## Theoretical Results
+
+Status is recorded on the same tiers the campaign uses for measurements, so a claim’s
+evidential standing is never ambiguous.
+
+| Tier | Meaning |
+| --- | --- |
+| **proved** | A mathematical argument, checkable by reading |
+| **exact** | Decided by exact arithmetic over the relevant number field; a proof, mechanised |
+| **polished** | An LP cell optimum at *solver* precision—about `1e-11` in the side, and no better ([D-021](defects.md), open) |
+| **verified (f64)** | Computed in floating point; strong evidence, not a proof |
+
+### Results relied on from the literature
+
+Cited near the claims they support in the
+[`n = 11` report](docs/project/research/research-2026-08-22-packing-11-unit-squares.md);
+listed here so the dependencies of this program are explicit.
+
+- **`s(10) = 3 + ½√2`**, Stromquist 2003, Theorem 1. Ten unavoidable points, then case
+  analysis. Not pigeonhole alone.
+- **`s(11) ≥ 2 + 4/√5`**, Stromquist 2003, Theorem 2, proved directly for `n = 11`.
+- **`s(11) ≤ 3.877083590022814…`**, Trump 1979, by construction.
+  Every upper bound in this subject is a construction; no non-constructive upper bound
+  has ever been obtained.
+- **The `0°`/`45°` class cannot achieve it.** Stromquist bounds that orientation class
+  below at `2 + (4/3)√2 ≈ 3.885618`, which Trump’s oblique packing beats.
+  This is what makes `n = 11` the first case where tilt matters, and the sharpest
+  available statement of why the target differs structurally from the ladder.
+
+### Results established here
+
+| Id | Statement | Tier | Where it lives | Reproduce with |
+| --- | --- | --- | --- | --- |
+| **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **exact** | `sqpack` | `python3 verify_trump11.py` |
+| **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated at **polished** | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack/quench.py`](sqpack/quench.py) | `uv run python lp_cell.py` |
+| **T-3** | The LP optimum as a function of the angles has a **corner** at the optimal angles—distinct one-sided derivatives—so no method assuming a smooth local model converges to it | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run python lp_cell.py` |
+
+**T-1** is also an independent check of the published record: the 33 digits on the
+*Squares in Squares* record page agree with the value computed here from the field.
+No other public tool is known to check a record packing exactly, and the 14 zero-gap
+pairs are precisely the ones no floating-point verifier can decide.
+
+**T-2** originated in the standing review as observation R-2 and has now been
+implemented twice, independently—see below for why that matters.
+**T-3** was found while building the quench, registered as `H-019` *before* the round
+that observed it was recorded, and confirmed as its own round.
+Under the directory’s ownership rule the registry artifact decides both; the `T-` ids
+here are this document’s shorthand.
+
+## The Cell Decomposition
+
+The result the refiner rests on, stated so it can be checked.
+
+### Setup
+
+Fix `n` unit squares.
+A configuration is
+
+- a **centre** `(xᵢ, yᵢ) ∈ ℝ²` and an **angle** `θᵢ ∈ [0, π/2)` for each square `i`, and
+- the container side `s`,
+
+so `3n + 1` real coordinates in all, which is 34 at `n = 11`.
+
+The four corners of square `i` are `(xᵢ, yᵢ) + Rᵢ·(±½, ±½)` where `Rᵢ` is rotation by
+`θᵢ`. Write `oᵢₖ ∈ ℝ²` for the four corner offsets, `k = 1…4`. **Once `θᵢ` is fixed the
+`oᵢₖ` are constants**, and every corner is an affine function of the centre alone.
+
+Two squares have disjoint interiors exactly when some line separates them, and for
+convex polygons it suffices to test lines parallel to their edges.
+A square has two distinct edge normals (opposite edges are parallel), so a pair has four
+candidate axes; these too are functions of the angles alone.
+
+Define a **cell** of the configuration space to be a choice, for each of the `C(n,2)`
+pairs, of one candidate axis together with an order (which square lies on the low side).
+A configuration lies in a cell when that axis genuinely separates that pair in that
+order.
+
+### Statement
+
+> **T-2.** Fix the angle vector `θ` and fix a cell `C`. Then
+> 
+> ```
+> minimise   s
+> subject to  the configuration lies in cell C and inside [0, s]²
+> ```
+> 
+> is a linear program in the `2n + 1` variables `(x₁,…,xₙ, y₁,…,yₙ, s)`.
+
+### Why
+
+Four observations, each immediate once the angles are fixed.
+
+1. **Corners are affine in the centres.** Corner `k` of square `i` is `(xᵢ, yᵢ) + oᵢₖ`
+   with `oᵢₖ` constant.
+2. **Containment is linear.** Each corner must satisfy `0 ≤ xᵢ + oᵢₖ,ₓ ≤ s` and
+   `0 ≤ yᵢ + oᵢₖ,ᵧ ≤ s`. Note that `s` appears here, and only here, as a variable.
+3. **Separation along a *fixed* axis is linear.** For axis `ν` and order `(i before j)`,
+   separation says every corner of `i` projects at or before every corner of `j`:
+   `⟨ν, (xᵢ,yᵢ) + oᵢₖ⟩ ≤ ⟨ν, (xⱼ,yⱼ) + oⱼₗ⟩` for all `k, l`. Since `ν` is a constant
+   vector, each is a linear inequality in four of the variables.
+4. **The objective is linear**, being `s` itself.
+
+The nonlinearity of the original problem is entirely in two places: the trigonometric
+dependence of `oᵢₖ` and `ν` on the angles, and the *discrete* choice of cell.
+Neither is present once both are fixed.
+
+Note what the statement does **not** claim.
+The LP optimises within one cell.
+A different cell may have a lower optimum, and finding the best cell is the
+combinatorial part of the problem, which none of this makes easy.
+
+### A cell is not a basin, and this trap has been walked into
+
+The statement above fixes the angles.
+A **basin** does not: it is the preimage of a quench endpoint, and the quench moves the
+angles. So a configuration can sit at *exactly* its cell’s optimum and still be far from
+its basin’s, with every remaining unit of gap in the angles and none of it in the
+centres.
+
+The consequence is a reading that looks safe and is not: **a fixed-angle solve that
+stops improving has not converged to a local optimum of the problem—it has run out of
+things it is allowed to move.** Watching it flatten and concluding “wrong basin” is
+exactly backwards, and it is what the right basin looks like when the residual is
+angular.
+
+That is not hypothetical.
+Checking exp-001’s polish/exploration split, an agent built a probe doing one LP solve
+at fixed angles, called it “the quench”, and retracted a correct finding when it stalled
+([D-029](defects.md)). On exp-002’s seed 2:
+
+|  | gap to `s(10) = 3 + ½√2` |
+| --- | ---: |
+| annealer output, as found | `+5.6440e-04` |
+| fixed-angle solve, carried to its cell fixed point | `+5.6440e-04`—*no improvement at all* |
+| `quench_bracket`, with the angle half | `+4.4409e-16` |
+
+**“Quench” names all three stages**—solve the cell, re-read the cell to a fixed point,
+refine the angles. The cell solve alone is one third of it and answers a different
+question. `tools/regression_test.py` pins this discrimination under D-029.
+
+### Two implementations, on purpose
+
+The row count depends on how separation is written, and this directory now has both
+forms:
+
+| Implementation | Separation rows per pair | Total rows at `n = 11` |
+| --- | --- | --- |
+| [`sqpack/quench.py`](sqpack/quench.py) | 1, from projected half-extents | small |
+| [`lp_cell.py`](lp_cell.py) | 16, one per ordered corner pair | 1,056 = 16 × (11 + 55) |
+
+Both are correct formulations of the same feasible set, and neither shares
+constraint-assembly code with the other.
+That redundancy is deliberate, and it is the postmortem’s rule **R1**: *a component
+checked against its own model of correctness is checked against the thing most likely to
+be wrong.* [D-014](defects.md) happened precisely because the quench was validated only
+against its own constraint rows.
+
+### The instance: Trump’s cell
+
+`lp_cell.py` reads the cell off `sqpack`’s exact certificate—eleven angles and
+fifty-five axis choices, and nothing else—rebuilds the LP from scratch, and solves it.
+**The centres are never given to the solver.** They are what it must reconstruct.
+
+```
+The cell, read off the exact certificate
+  distinct angles:  [0.0, 40.18193729] deg
+  tilted squares:   [6, 7, 8, 9, 10]
+  axis choices:     55 pairs
+  LP shape:         23 variables, 1056 constraints  (= 16 x (11 + 55))
+
+Solving it, without telling the solver where the squares go
+  LP optimum        s = 3.8770835900228136
+  exact value       s = 3.8770835900228140
+  |difference|        = 4.441e-16
+  worst centre error  = 1.332e-15
+```
+
+`sqpack.quench`’s single-cell solve at the same angles agrees to the digit—`4.441e-16`,
+recorded as a mechanism result of
+[exp-006](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md).
+**The cell containing Trump’s packing, solved as a linear program, is Trump’s packing**,
+through two unrelated constraint sets.
+
+### What “exact” does and does not mean here
+
+The formulation is exact; the *build* is not, and conflating the two caused a critical
+defect. Three corrections, recorded in the
+[plan spec’s revision note](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md):
+
+- **A float LP solver does not deliver the cell optimum.** At its default primal
+  feasibility tolerance of `1e-7` HiGHS returned a packing violating its own separation
+  constraint by `9.876e-08`, and so a side below Trump’s ([D-014](defects.md)). Pinned
+  at the solver’s floor of `1e-10`, and with every returned solution post-checked
+  against the constraints imposed on it, the residual in the side is about `1e-11`. That
+  floor is [D-021](defects.md), still open, and eight rounds sit on it.
+- **The polish step does not produce rational output.** R-2 said it does; HiGHS returns
+  floats. Rational output needs an exact rational LP, which is unbuilt and tracked.
+- **The `polished` tier means exact within a cell to solver precision.** Algebraic
+  exactness stays with `sqpack`, and every promotion routes through it.
+
+### Thirty-four dimensions become one
+
+Trump’s packing uses two distinct angles: `0°` on six squares and `a*` on five.
+Holding the cell fixed and varying the single free angle gives a function
+
+```
+φ(a) = the LP optimum of Trump's cell with the five tilted squares at angle a
+```
+
+which is the entire problem, restricted to this cell, in **one** variable.
+
+| `a` (deg) | `φ(a)` | `φ(a) − s*` |
+| --- | --- | --- |
+| 39.000000 | 3.880706142326 | `+3.623e-03` |
+| 39.500000 | 3.879169268857 | `+2.086e-03` |
+| 40.000000 | 3.877638844995 | `+5.553e-04` |
+| 40.100000 | 3.877333546175 | `+2.500e-04` |
+| **40.181937** | **3.877083590023** | `−4.441e-16` ← Trump |
+| 40.300000 | 3.877877577363 | `+7.940e-04` |
+| 40.500000 | 3.879235737993 | `+2.152e-03` |
+| 41.000000 | 3.882703521786 | `+5.620e-03` |
+| 42.000000 | 3.889950463054 | `+1.287e-02` |
+
+A 2,001-point scan of `[38°, 42°]` puts the minimum at `40.182°`, one grid step
+(`0.002°`) from `a*`.
+
+Trump’s angle is not an input to this computation.
+It is **the argument that minimises a one-dimensional function anyone can plot.** The
+34-dimensional search problem, once the cell is known, is a scalar minimisation—which is
+the concrete content of the claim that the honest continuous dimension is the number of
+*distinct angles*, empirically one or two at small `n`, rather than `3n + 1`.
+
+## The Corner, and the Method It Forced
+
+The most useful result the campaign has produced, because it is a full loop: a
+measurement, a mechanism, a prediction, and a method built on the prediction that works.
+
+### The measurement
+
+`φ` is not smooth at its minimum.
+Measuring one-sided slopes and refining the step:
+
+| `h` (deg) | left, per deg | right, per deg | left, per rad | right, per rad |
+| --- | --- | --- | --- | --- |
+| `1e-02` | `3.049623e-03` | `6.702833e-03` | `0.1747` | `0.3840` |
+| `1e-03` | `3.049503e-03` | `6.700977e-03` | `0.1747` | `0.3839` |
+| `1e-04` | `3.049491e-03` | `6.700791e-03` | `0.1747` | `0.3839` |
+| `1e-05` | `3.049490e-03` | `6.700772e-03` | `0.1747` | `0.3839` |
+
+Both converge, and they converge to **different** values, ratio `2.1973`. The derivative
+does not vanish at `a*`; it jumps.
+
+[exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md)
+measured the same quantity through `sqpack.quench`—a different LP formulation, a
+different code path—and recorded `0.1747` and `0.3841`, ratio `2.198`, stable over five
+decades on each side.
+Two implementations, one number.
+
+### The mechanism
+
+Where the LP’s optimal basis is locally constant, `φ` is smooth and its derivative is
+read off the active constraints.
+A corner is a **change of optimal basis**: the set of contacts that bind switches as `a`
+crosses `a*`. That the switch happens exactly at the minimum is what rigidity means,
+expressed in the coordinates the refiner works in—at `a*` the packing is maximally
+constrained, and moving the angle either way relaxes one contact set and tightens
+another.
+
+### The prediction, and what it cost to ignore
+
+A gradient, a quasi-Newton model, and a simplex-of-points method all assume a locally
+smooth objective, and none can converge to a corner.
+Measured in
+[exp-006](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md):
+finite-difference descent stalled five orders short, and **Powell and Nelder-Mead both
+did worse than descent** (`+1.06e-02` and `+3.34e-06` against descent’s `+2.78e-07`).
+
+### The method, and what it bought
+
+Replace the smooth descent with a **bracketing search over merged angle classes**—a
+method that tolerates non-smoothness—and hold everything else fixed.
+On the same annealer output:
+
+| `n` | annealer | + angle descent | + class bracketing |
+| ---: | ---: | ---: | ---: |
+| 5 | `3.4274e-08` | `3.1875e-08` | **`2.2204e-15`** |
+| 10 | `5.318e-03` | `4.507e-03` | **`1.3323e-15`** |
+| 11 | `8.846e-02` | `6.999e-02` | `6.2894e-02` |
+
+Seven orders at `n = 5` and twelve at `n = 10`, from changing only *how the angle half
+searches*. At `n = 5` both quenches find the same contact structure and the same two
+angle classes, so the difference is entirely in whether the search can land on the
+corner.
+
+This is not an optimisation preference.
+It is a correctness requirement, and it is why
+[H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) matters more than its size
+suggests.
+
+### And what it did not buy
+
+Nothing at `n = 11`. The bracketing quench moves the target from `8.85e-02` to
+`6.29e-02`
+([exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md)),
+against machine precision on both proved instance cells.
+The quench is not failing there—**it is being handed the wrong basin.** An LP-in-cell
+solve is a local operation: it returns the best packing in the cell it is given, and if
+the proposer is in the wrong basin, that is what gets polished.
+
+### Other consequences
+
+- **The refiner is an LP solve per cell**, at solver precision, and it is built.
+  That is the campaign’s middle tier, and it is real.
+- **Basins become nameable.** A local minimum stops being tolerance-dependent and
+  becomes a discrete object with a side length good to `≈1e-11`, which is what makes a
+  census, an atlas, and basin statistics well defined.
+  Basin identity must not inherit the search’s knobs—a quench that merges nearby angles
+  would make “basin” depend on the merge tolerance ([D-020](defects.md)), fixed by a
+  free-angle pass that certifies the landing point.
+- **The search space factorises** into a small continuous part (the angles) and a
+  combinatorial part (the cell), which is the premise of
+  [H-001](campaign/hypotheses/H-001-angle-class-reduction.md)—now with a concrete prior,
+  since the class-constrained search reached the solver floor in **70 LP solves** where
+  free descent needed **1,024** and landed five orders worse.
+- **Rational-slope tilts would need no number field.** At a Pythagorean angle such as
+  `arctan(3/4)` every coordinate and the cell optimum are rational, so exact
+  verification would be `ℚ`-arithmetic at degree 1. Realising that needs the exact
+  rational LP, which is unbuilt.
+
+### Reproducing all of it
+
+```bash
+cd explorations/packing
+python3 verify_trump11.py       # T-1: exact verification over Q(u)
+uv run python lp_cell.py        # T-2 and T-3, through independent constraint rows
+uv run python run_quench.py     # the campaign's own quench, both angle methods
+./test.sh                       # all of the above, plus every other gate
+```
+
+`lp_cell.py` asserts every figure quoted above, including agreement with `H-019`’s
+registered slopes, so a change that breaks one fails the gate rather than silently
+editing the record.
+
+## The Program So Far
+
+Deliberately historical: it records the order in which things were done and why, because
+several decisions were made by measurement and the measurements are why later work is
+shaped as it is.
+
+**Establish the frontier, then the mathematics.** The `n ≤ 100` corpus was built first,
+one validated artifact per case, so that “the standing best” is a fact read from a file
+rather than a number retyped into a paragraph.
+Retrieving the primary sources corrected the record in ways secondary summaries had not:
+one widely-repeated explicit constant appears in no primary paper at all.
+That episode is why the grounding rule for every later lane is that nothing enters a
+prompt or an artifact unverified.
+
+**Build the exact verifier before the search.** Rigidity means a float check cannot
+decide record packings, and the tolerance blind spot is a correctness concern rather
+than a rounding one.
+`sqpack` was written, validated against Trump’s packing (**T-1**), and given a negative
+control demonstrating both float failure modes.
+
+**Price the stack rather than argue it.** The pipeline spans seven orders of magnitude,
+from a `0.025 µs` annealer move to a `129 ms` exact verification, and its middle—the LP
+quench at `1.28 ms`—is where nearly every planned strategy spends its time, at the same
+rate in any language.
+So the spine is Python, and compiled code is deferred to a phase scoped by a profile of
+a campaign that has actually run.
+
+**Write the search engine; two formulations failed first.** Fixing a container side and
+asking whether the squares fit needs an outer loop that decides when an anneal has
+failed, and it starts from the trivial grid, which is exactly jammed.
+Two versions were built and measured: the first crawled, the second never left the grid
+basin ([D-001](defects.md)). The replacement removes the container from the variables,
+minimising `required_side + λ·total_overlap` with a linear penalty.
+
+**Run the baseline, and discover the instrument was lying.** A restart cap stopped every
+chain before the declared move budget did, so `--budget-moves` was inert and two
+strategies compared “at equal budget” would have had unequal work ([D-002](defects.md)).
+The tell was that results got *worse* at a larger declared budget.
+
+**Add the method, and find the missing stage.** A standing review audited the toolkit
+documents and found that all of them presumed a refinement stage none of them built.
+In looking for it, the review found **T-2** and supplied the experimental method the
+project lacked: a hypothesis register with kill criteria written before the run, a run
+protocol, and a seven-series plan.
+
+**Adopt a strategy, and register the premise so it can fail.** Records are rigid, rigid
+optima live in rare basins, so scaling a volume-weighted sampler multiplies effort
+against a probability the problem drives toward zero.
+Because the whole strategy rests on that argument, the measurement that would refute it
+([H-012](campaign/hypotheses/H-012-record-basins-are-rare.md)) is registered in the
+cheapest tier and scheduled early.
+
+**Ask whether the basin has a wall, and get a better question back.**
+[exp-005](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md)
+started *inside* Trump’s packing and walked outward.
+There is no wall to find: the return distance is linear in the perturbation over four
+decades with no threshold, and halves when effort is multiplied by ten.
+What was measured is the refiner’s convergence rate, not a basin radius.
+The sharper result was incidental—started `1e-5` from a configuration that has stood
+since 1979, the campaign’s **default annealing schedule wanders off and lands with a
+median side gap of `0.27`**, worse than it reaches from cold starts.
+
+**Build the quench, and have it beat the record.** The first working version reported a
+side *below* Trump’s. The runbook’s pre-registered rule held—a run that beats the record
+has found a bug—and it had ([D-014](defects.md)). The fix pinned the solver tolerance
+and post-checks every solution against its own constraints; the postmortem generalised
+it into four rules and a soundness perimeter that every configuration- emitting
+component now joins.
+
+**Follow the corner.** The quench’s angle half stalled, the reason turned out to be
+geometric rather than numerical, and acting on it took the two proved instance cells to
+machine precision. That chain runs
+[exp-006](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md)
+to [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) to
+[exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md)–[exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md),
+and is the campaign working as designed.
+
+### How rounds are run
+
+The full contract is the [runbook](campaign/README.md); the parts that matter for
+reading the results below:
+
+- **Evidence tiers**, and a number’s tier decides what it may claim: `f64_screen` (a
+  candidate was proposed), `polished` (this is the basin, named and valued to solver
+  precision), `exact` (validity, and only here a record).
+  **`beat_record: true` may only be written at `exact`.**
+- **Four instance cells with different jobs**: `n = 10` positive control, `n = 11`
+  target, `n = 12` negative control, `n = 17` mechanism-matched calibration.
+  A guard breach rejects a round regardless of outcome, because it means the instrument
+  is wrong rather than the strategy good.
+- **Five seeds minimum per cell**, median and min–max range both reported.
+  Overlapping ranges mean *no detectable effect*, never “a small win”.
+- **Every round declares a timebox before it starts** and records an `effort`
+  block—`wall_seconds`, `agent_minutes`, and `stopped_by`. A round that stopped on its
+  `criterion` answered its question; one that stopped on its `timebox` did not, and must
+  name where a successor resumes.
+- **Three terminal states are distinct**: `rejected` (measured and missed), `abandoned`
+  (budget gone, no determination, resumable), `exhausted` (re-running under this regime
+  would add nothing).
+- **Negative results are kept**, and a defective artifact is corrected by dated
+  annotation rather than rewriting.
+
+## The Hypothesis Registry
+
+Eight claims are codified as artifacts; eleven more exist as prose in the standing
+review’s register with their ids reserved.
+The [ledger](campaign/ledger.md) is generated from the artifacts and is the current
+view; this section is the reading of it.
+
+| Id | Status | Claim, in short | Rounds | Effort |
+| --- | --- | --- | --- | --- |
+| [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) | **confirmed** | The angle objective has a corner at the optimum | 1 | 10m agent |
+| [H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 4 | 190m agent, 4.9m cpu |
+| [H-016](campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md) | **refuted** | The stock annealer reaches the standing best on every instance cell | 4 | 10.2m cpu |
+| [H-018](campaign/hypotheses/H-018-basin-entry.md) | **refuted** as stated | Perturbed starts return to Trump’s packing at least half the time | 1 | 75m agent, 1.3m cpu |
+| [H-001](campaign/hypotheses/H-001-angle-class-reduction.md) | blocked | Angle-class reduction beats free `3n`-dimensional annealing | 0 | — |
+| [H-011](campaign/hypotheses/H-011-small-n-census.md) | blocked | The small-`n` landscape is censusable | 0 | — |
+| [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) | blocked | Record basins are rare in quench measure | 0 | — |
+| [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
+
+### Confirmed
+
+**[H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md)—the angle objective is
+non-smooth at the optimum.** Registered by the runner of `exp-006` *before* recording
+that round, because the round measured something `H-002` did not predict; confirmed by
+[exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md).
+Elaborated in [The Corner](#the-corner-and-the-method-it-forced) above.
+It is the campaign’s first confirmed claim, and the one that changed a method.
+
+### Refuted, and what each refutation bought
+
+**[H-016](campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md).** The
+null: a serious budget on a general-purpose annealer finds the best known packing.
+Within `1e-4` only at `n = 12`. The refutation is not the interesting part—the two
+failures were different in kind.
+At `n = 10` the search found the right basin and stopped `4.19e-04` short (**polish**);
+at `n = 11` it never reached the right region (**exploration**). That distinction set
+the next four rounds.
+
+**[H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md).** Claimed that alternating LP
+solves with local angle moves refines *any* annealer output to the analytic value.
+Refuted as stated, and the cell-level split is the result:
+
+| Cell | Round | Outcome |
+| --- | --- | --- |
+| `n = 5` | [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | **accepted**—`2.22e-15`, machine precision |
+| `n = 10` | [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) | **accepted**—`1.33e-15`, twelve orders of improvement |
+| `n = 11` | [exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | **rejected**—`6.29e-02`; the quench is handed the wrong basin |
+| all three | [exp-006](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | **rejected**—the original free-angle descent, 1.1–1.3× everywhere |
+
+The word that failed is *any*. The quench is a **polisher, not a rescue**: it makes the
+landing point exact and nameable, which is what the census and the atlas need, and it
+does not lift the burden of finding the right basin off the proposer.
+
+**[H-018](campaign/hypotheses/H-018-basin-entry.md).** Predicted an `ε` at which the
+return rate collapses, which would be the basin’s radius.
+Observed rate: 0 of 40 in every arm, at every `ε`. But the shape of the failure is the
+finding—the return distance is linear in `ε` with no threshold, so the hypothesis’s two
+worlds (“small basin” versus “isolated point”) were both wrong and a third applies: the
+basin is attracting out to `ε = 1e-1`, and what limits the return is the refiner’s
+convergence rate.
+
+### Blocked, and on what
+
+All three priority-1 strategic claims are blocked, but **no longer on the quench**—it
+exists, and on the proved instance cells it reaches machine precision.
+They are blocked on the pieces around it: canonical basin identity, the atlas artifact,
+and a proposer that can reach basins the annealer does not.
+
+- **[H-011](campaign/hypotheses/H-011-small-n-census.md)** (census at `n ≤ 10`) needs
+  canonical dedup keys and the atlas format.
+- **[H-012](campaign/hypotheses/H-012-record-basins-are-rare.md)** (the premise the
+  cartography programme rests on) is a query over H-011’s data.
+  Kill: record-basin probability within ~10× of the modal basin’s, in which case the
+  cartography program stands down and the campaign reverts to throughput.
+  **Still untested**, which is the largest open question about the strategy.
+- **[H-001](campaign/hypotheses/H-001-angle-class-reduction.md)** (angle classes) now
+  has a strong prior from `exp-006` but remains unmeasured as a *search* claim: the
+  class-constrained arm assumed the answer’s own structure, so it shows the angle search
+  method decides the outcome, not that an unguided method would find that structure.
+
+**[H-017](campaign/hypotheses/H-017-budget-scaling.md)** (100× budget) stays open and
+demoted, with its failure predicted in writing.
+
+### Reserved but not codified
+
+`H-003`–`H-010` and `H-013`–`H-015` exist as prose in the
+[standing review’s register](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register)
+with ids reserved and enforced: basin frequency versus contact count, neighbour-transfer
+seeding, the `m² − 3` analytic attempt, LP duals for the proof lane, saturation-curve
+fitting, the false-basin rate, symmetry dedup ratios, δ-continuation, superdisk
+continuation, and MAP-Elites illumination.
+The [idea board](campaign/ideas.md) carries all of them alongside the untried strategy
+families and the dead ends.
+
+## Experiments Conducted
+
+Ten rounds, all in `series-000`, **275 agent-minutes and 16.4 cpu-minutes** in total.
+Two instruments: `sqsearch` 0.1.0 (the `f64` screening annealer) and `sqpack.quench`
+(0.1.0 with angle descent, 0.2.0 with class bracketing).
+
+No round has been run at the `exact` tier, so **no result below claims anything about a
+record**, and none may.
+
+### Roll-up
+
+Every figure is lifted from the round’s frontmatter, which is lifted from the JSONL
+archive beside it.
+
+| Round | `n` | Role | H | Instrument | Headline number | Verdict |
+| --- | --- | --- | --- | --- | --- | --- |
+| [exp-001](campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md) | 10, 11, 12 | sweep | H-016 | annealer | gaps `+4.19e-04`, `+3.73e-02`, `0` | rejected |
+| [exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md) | 10 | positive control | H-016 | annealer | `3.7075262001`, gap `+4.194e-04` | rejected |
+| [exp-003](campaign/series/series-000-smoke-and-calibration/experiments/exp-003-baseline-n11-target.md) | 11 | target | H-016 | annealer | `3.9144165418`, gap `+3.733e-02` | rejected |
+| [exp-004](campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md) | 12 | negative control | H-016 | annealer | exactly `4.0`, all five seeds | accepted |
+| [exp-005](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 11 | target | H-018 | annealer | 0/40 returns; `max_dev ≈ 11·ε`, no threshold | rejected |
+| [exp-006](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 5, 10, 11 | sweep | H-002 | quench 0.1.0 | 1.1–1.3× only; single cell `4.441e-16` | rejected |
+| [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | 5 | positive control | H-002 | quench 0.2.0 | `3.19e-08 → 2.2204e-15` | **accepted** |
+| [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) | 10 | positive control | H-002 | quench 0.2.0 | `4.507e-03 → 1.3323e-15` | **accepted** |
+| [exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 11 | target | H-002 | quench 0.2.0 | `6.999e-02 → 6.2894e-02` | rejected |
+| [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 11 | target | H-019 | quench 0.2.0 | slopes `0.1747` / `0.3841`, ratio `2.198` | **accepted** |
+
+### Cost and provenance
+
+| Round | Budget | Wall | Agent | Stopped by | Engine commit |
+| --- | --- | --- | --- | --- | --- |
+| exp-001 | 12e9 moves | 302.4 s | — | criterion | `d6a1057` (**orphaned**) |
+| exp-002 | 4e9 moves | 93.5 s | — | criterion | `1e70bc8` |
+| exp-003 | 4e9 moves | 107.2 s | — | criterion | `1e70bc8` |
+| exp-004 | 4e9 moves | 108.8 s | — | criterion | `1e70bc8` |
+| exp-005 | 720 trials | 77.1 s | 75 m | criterion | `8b450a1` |
+| exp-006 | 20,135 LP solves | 72.8 s | 115 m | criterion | `8b450a1` |
+| exp-007 | 5 seeds, 30 s each | 3.4 s | 25 m | criterion | `8b450a1` |
+| exp-008 | 5 seeds, 30 s each | 67.0 s | 20 m | criterion | `8b450a1` |
+| exp-009 | 5 seeds, 30 s each | 150.0 s | 30 m | criterion | `8b450a1` |
+| exp-010 | 11 probes | 1.0 s | 10 m | criterion | `8b450a1` |
+
+### What the ten rounds jointly establish
+
+**The instrument works, and the controls discriminate.** The positive controls now
+resolve to machine precision under the bracketing quench; the negative control returns
+exactly `4.0` and never below.
+Every configuration that leaves any component is checked by `sqpack` through code it
+does not share.
+
+**The refiner is not the problem, and the proposer is.** The single strongest pattern in
+the record: the same refiner takes `n = 5` and `n = 10` to `1e-15` and leaves `n = 11`
+at `6e-02`. Polish is solved on the ladder; basin-finding is not solved anywhere.
+
+**The `n = 11` failure is exploration, confirmed three ways.** Five annealer seeds land
+in a band five times narrower than the remaining gap; the quench improves that band by
+1.3× and no more; and starting *inside* Trump’s packing, the default schedule leaves and
+does worse than a cold start.
+
+**Two rounds have been re-read by later ones.** `exp-005`’s linear return profile is
+what a corner minimum produces—it and `exp-010` measure the same geometric fact from
+opposite sides. And `exp-003`’s `n = 11` result reads partly as a polish failure once
+`exp-005` showed the stock schedule cannot hold the basin from `1e-5`.
+
+### Known defects in the record
+
+The full log is [`defects.md`](defects.md); these are the ones that bear on reading the
+table above.
+
+- **`exp-001`’s archive carries no configurations** and its engine commit was orphaned
+  by a rebase ([D-006](defects.md), [D-010](defects.md)). Cite `exp-002`–`exp-004` for
+  anything configuration-level.
+- **`exp-001` and `exp-006` each record a three-cell sweep as one cell**
+  ([D-010](defects.md), [D-017](defects.md)—the second a verbatim repeat of the first,
+  because the first fix left no regression check).
+  Their numbers stand; the ledger’s sweep coverage misreported them until the successor
+  rounds split the cells.
+- **[D-021](defects.md) is open.** The `polished` tier has a noise floor of about
+  `1e-11` in the side, and eight rounds sit on it.
+  Nothing at that tier may claim a difference smaller than the floor.
+
+## The Defect Record
+
+Kept with the same discipline as the experiment record, because the aggregate says
+things no individual bug report can.
+Twenty-nine defects, [one line each](defects.md), generated from `defects.yaml` and
+checked in the gate.
+
+| Class | Count | The system … |
+| --- | ---: | --- |
+| soundness | 6 | asserted something false about the mathematics |
+| validity | 6 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 14 | recorded something its own evidence contradicts |
+| robustness | 2 | did not finish, or finished only by luck |
+| performance | 1 | worked, but cost far more than it should |
+
+Two observations the log exists to make.
+
+**Four of the six soundness defects pointed in the *flattering* direction**, where the
+error looks like a success.
+That is the dangerous class, and it is the majority of it.
+
+**The automated gate has caught one defect in twenty-nine, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
+Gates confirm what you already thought to check; these were found by devices built to be
+*surprised*. The one the gate did catch ([D-024](defects.md)) is a bookkeeping defect,
+found by a contiguity check—which is the pattern, not an exception: gates are good at
+the mechanical classes and have never once caught the mathematics being wrong.
+
+Both claims are computed from `defects.yaml` rather than written down, so neither can
+drift from the log it describes ([D-028](defects.md)).
+
+Six fixes left no regression check behind, and that list has already predicted a
+recurrence once. The
+[postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
+turns this into four rules—oracle coverage through unshared code, tolerances stated
+relative to what they govern, a discovery treated as a defect until an independent layer
+agrees, and new components inheriting the perimeter—that apply to code not yet written.
+
+## Where This Stands
+
+The middle tier is built and works.
+Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s
+slopes to three decimals.
+Polish is solved on both proved instance cells to machine precision.
+One hypothesis is confirmed, three are refuted informatively, and the campaign has a
+defect log good enough to predict its own regressions.
+
+**The bottleneck has moved from polish to proposal.** Nothing in the current toolkit
+reaches Trump’s basin, and the refiner cannot help with that by construction.
+The named candidates are δ-continuation, angle-class search as a *search* rather than an
+assumption, neighbour-transfer seeding, and quality-diversity retention—none built.
+
+**The premise is still untested.** Everything the strategy layer recommends rests on
+record basins being rare in quench measure, and
+[H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is the measurement that
+would refute it. It is now unblocked at the quench level and blocked only on canonical
+basin identity and the census.
+Until it runs, the cartography program is a well-argued bet rather than a finding.
+
+**Three things are cheap and undone.** `n = 17`, the only registered instance cell that
+tests record-*finding*; the `m² − 3` analytic attempt, which needs no engine; and
+re-running `exp-005`’s basin-entry sweep against the quench rather than the annealer,
+which was that round’s own stated successor.
+
+**One open defect constrains every polished number.** [D-021](defects.md): the solver
+floor is about `1e-11` in the side, so the `polished` tier cannot resolve finer, and an
+exact rational LP is the fix.
+
+## References
+
+Primary sources are archived locally under [`resources/`](resources/README.md); the
+citation keys below resolve there and in the per-case [`frontier/`](frontier/README.md)
+artifacts. Each entry names what this project relies on it for.
+
+- Stromquist, W. (2003). *Packing 10 or 11 unit squares in a square.* Electronic Journal
+  of Combinatorics 10(1), R8. Supplies `s(10)`, the `s(11)` lower bound, and the
+  `0°`/`45°` class bound.
+- Trump, W. (1979). The `n = 11` packing, as published on the *Squares in Squares*
+  record page with Ellsworth’s exact solution in the SVG source.
+  The standing upper bound.
+- Friedman, E. (2009). *Packing Unit Squares in Squares: A Survey and New Results.*
+  Electronic Journal of Combinatorics, DS7. The survey the corpus is checked against.
+- Erdős, P. and Graham, R. L. (1975). *On packing squares with equal squares.* The
+  asymptotic waste line of work.
+- Nagamochi, H. (2005). *Packing unit squares in a rectangle.* The general lower bound
+  covering 63 of the 65 open cases in the corpus.
+- Montanher, T. et al.
+  (2018). *Rigorous packing of unit squares into a circle.* The only rigorous
+  computer-assisted optimality proof for rotatable unit squares in any container, and
+  the scope limit on what `sqpack` claims.
+- Doye, J. P. K., Miller, M. A. and Wales, D. J. (1999). The double funnel energy
+  landscape of the 38-atom Lennard-Jones cluster.
+  The precedent behind the rarity premise.
+- Stillinger, F. H. and Weber, T. A. (1982). Inherent structures and the quench map.
+  The decomposition T-2 supplies a cell-exact version of.
+- Mouret, J.-B. and Clune, J. (2015). *Illuminating search spaces by mapping elites.*
+  The precedent behind H-015.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

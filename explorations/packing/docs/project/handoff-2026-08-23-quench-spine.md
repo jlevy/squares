@@ -6,9 +6,15 @@
 
 **Status:** Current
 
-Read this first, then [`conventions.md`](../../conventions.md), then the one or two
-things you are about to work on.
-It is written to be thrown away when it stops being true.
+This is the short, dated view: where the work stands and what to pick up.
+It is written to be thrown away when it stops being true, so it states positions rather
+than results — [`SYNOPSIS.md`](../../SYNOPSIS.md) is the durable technical account, and
+where the two ever disagree the synopsis is right, because it is reconciled against the
+artifacts in the gate and this is not.
+
+Read this, then [`SYNOPSIS.md`](../../SYNOPSIS.md) for what the numbers actually are,
+then [`conventions.md`](../../conventions.md), then the one or two things you are about
+to work on.
 
 ## The one-paragraph state
 
@@ -74,10 +80,16 @@ whole cartography programme rests on, deliberately made cheap to kill.
   [`plan-2026-08-22-minimal-packing-toolkit.md`](specs/active/plan-2026-08-22-minimal-packing-toolkit.md),
   Phases 1–7, each with a bead epic.
   `tbd list --spec <that path>` is the work list; `tbd ready` is the unblocked subset.
+  The tree is now checked by the gate — `tools/check_beads.py` refuses an open bead
+  under a closed parent and two open siblings with one title, which are the two shapes
+  D-025 left behind. It reads the beads out of the `tbd-sync` branch, so it needs no
+  `tbd` binary.
 - **The science**: `campaign/` — the runbook, the idea board, the hypothesis registry,
   one artifact per round, and a generated `ledger.md`. Never hand-edit the ledger.
 - **What has gone wrong**: [`defects.md`](../../defects.md), generated from
-  `defects.yaml`. 27 defects with what caught each and what stops it recurring.
+  `defects.yaml` — every defect with what caught it and what stops it recurring.
+  The counts live there and in [the synopsis](../../SYNOPSIS.md#the-defect-record),
+  which is reconciled against the same source; do not retype them here.
 - **Known tooling debt**:
   [the tooling-layout review](reviews/review-2026-08-23-tooling-layout.md) maps what is
   scattered or misnamed under `explorations/packing/` — including a `pytest` config that

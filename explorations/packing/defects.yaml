@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 27
+count: 29
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -539,10 +539,18 @@ defects:
     a build order the spec had replaced. Partly flagged as review finding F-3, where the
     fix closed two beads and left the rest.
   fix: >-
-    The old verification-core epic is closed as superseded and its seven children
-    re-parented to the revised Phase 5 epic; the old experiments epic is retitled to name
-    the phases it now belongs to; the finished differential-test task is closed.
-  regression: none
+    The old verification-core epic is closed as superseded and its children re-parented
+    to the revised Phase 5 epic; the old experiments epic is retitled to name the phases
+    it now belongs to; the finished differential-test task is closed. The first pass
+    said "seven children" and moved seven of eight: `think-gudv` (PyO3 bindings) was
+    left open under the closed epic, and re-parenting the rest onto a Phase 5 that
+    already carried the rebuilt spec's copies produced a duplicate pair of E1 beads.
+    Both were found by the check below and fixed - `think-gudv` re-parented,
+    `think-0y0g` closed as a duplicate of `think-kmwb`.
+  regression: >-
+    tools/check_beads.py, run from test.sh: no open bead may sit under a closed parent,
+    and no two open beads under one parent may share a title. Skipped, loudly, where
+    tbd is unavailable.
   recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 - id: D-026
   title: The plan spec's checklist contradicted the state the spec was cited as authority for
@@ -600,3 +608,73 @@ defects:
     repeat this.
   regression: 'tools/check_generated_exempt.py in test.sh, with a negative control in tools/controls.yaml'
   recorded_in: tools/check_generated_exempt.py
+- id: D-028
+  title: A defect-log headline stayed asserted after it stopped being true
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: drift_check
+  latent_for: 'one defect, from D-024 until the branches were merged'
+  severity: low
+  status: fixed
+  what: >-
+    "The automated gate caught none of them" was hardcoded in the prose
+    tools/render_defects.py emits, and copied by hand into README.md, SYNOPSIS.md and
+    the soundness postmortem. D-024 was then logged with `detected_by: gate`, so the
+    generated view carried a detector table reading `gate | 1` directly above a
+    sentence saying the gate had caught nothing.
+  consequence: >-
+    The log's single most-quoted line contradicted the table beside it, in the one
+    document whose whole purpose is that the aggregate be readable. The claim that
+    matters - that no soundness defect has ever been caught by the gate - is still
+    true, and was obscured by defending a wider claim that no longer was.
+  fix: >-
+    The sentence is now computed from the data: the gate count, the soundness count,
+    and how many soundness defects the gate caught. README.md and SYNOPSIS.md state the
+    narrower true claim and point at the generated view for the numbers. The postmortem
+    is left as written, being a dated artifact, and carries a correction note.
+  regression: >-
+    the claim is derived in tools/render_defects.py rather than written, so it cannot
+    disagree with defects.yaml; check_synopsis.py already reconciles the synopsis's
+    per-class counts against the same source
+  recorded_in: tools/render_defects.py
+- id: D-029
+  title: A single fixed-angle LP solve was called "the quench", and retracted a correct finding
+  date: '2026-08-23'
+  layer: quench
+  class: validity
+  direction: conservative
+  detected_by: review
+  recurrence_of: D-023
+  latent_for: 'one round of analysis, on a side branch'
+  severity: medium
+  status: fixed
+  what: >-
+    Checking exp-001's claim that `n = 10` was a polish failure and `n = 11` an
+    exploration failure, an agent built a probe that did one LP solve at fixed angles
+    and called it "the quench". A quench is three things - solve the cell, re-read the
+    cell to a fixed point, and refine the angles - and the probe was the first only. It
+    did not reach the analytic optimum at `n = 10`, which was read as "wrong basin", and
+    exp-001's reading was reported refuted.
+  consequence: >-
+    A correct finding was retracted. The most persuasive evidence was the most
+    misleading: seeds whose value barely moved under the partial quench were read as
+    "converged, therefore stuck", when a configuration already at its cell's optimum and
+    still far from its basin's is exactly what the RIGHT basin looks like when the
+    residual is angular. exp-001's reading stands, and agrees with exp-008 and exp-009,
+    which had established it from the other direction.
+  fix: >-
+    Re-run on the identical archived configurations from exp-002, seed 2: as-found
+    +5.6440e-04; a fixed-angle solve carried to its cell fixed point +5.6440e-04, an
+    improvement of exactly nothing; `quench_bracket`, which includes the angle half,
+    +4.4409e-16. SYNOPSIS.md now states next to T-2 that a cell is a slice at frozen
+    angles and a basin is not, and that the cell solve alone is not a quench.
+
+    Reproduction note: seeds 1-3 and 5 reproduce the side-branch figures to the digit;
+    seed 4 landed at +6.5983e-05 against its +6.5775e-05, a difference well above the
+    tier floor and dependent on the wall budget the angle search is given.
+  regression: >-
+    tools/regression_test.py, labelled D-029: a fixed-angle solve on exp-002 seed 2 must
+    NOT approach the analytic optimum, and quench_bracket on the same input must reach
+    1e-12. A probe that froze the angles and claimed to be a quench would fail it.
+  recorded_in: docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md

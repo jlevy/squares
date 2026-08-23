@@ -1,22 +1,44 @@
 # Square Packing
 
 A self-contained project directory: the research reports, the local archive of the
-literature they cite, and the exact verifier written alongside them.
+literature they cite, the exact verifier and search engine, and the experiment record of
+running them.
 
 `s(n)` is the side of the smallest square holding `n` non-overlapping unit squares.
-The motivating case is `n = 11` — the smallest instance of this problem that is still
+The motivating case is `n = 11`, the smallest instance of this problem that is still
 open. Its best known packing dates from 1979 and its best proved lower bound from 2003,
 and a gap of roughly 0.088 in the side length separates them.
+
+Two documents get you oriented, and they have different jobs.
+
+**[`SYNOPSIS.md`](SYNOPSIS.md) is the technical root:** the single account of what this
+project knows, how it knows it, and what it is doing next.
+The problem, the results established here and their evidential status, the per-`n` lay
+of the land, the terminology this directory uses narrowly, the hypothesis registry, and
+a roll-up of every experiment run so far.
+Its numbers are reconciled against the artifacts in the gate.
+
+**[The current handoff](docs/project/handoff-2026-08-23-quench-spine.md) is where the
+work stands today:** what is built, what is missing, which few things are the critical
+path, and the half-dozen facts that would otherwise cost an arriving agent a day.
+It is dated and written to be thrown away when it stops being true.
 
 ## Layout
 
 ```
 explorations/packing/
-├── docs/project/research/  The three research reports (see below)
+├── SYNOPSIS.md             The technical root: results, status, and the experiment
+│                           roll-up. Read this first.
+├── conventions.md          Every rule this directory runs on, and which are checked
+├── docs/project/           Reports, reviews, specs, postmortems, and the dated
+│                           handoff that says where the work stands today
+├── docs/project/research/  The six research reports (see below)
+├── campaign/               The experiment record: hypothesis registry, series, rounds,
+│                           and a generated ledger. See campaign/README.md.
 ├── frontier/               What is known about s(n) for every n <= 100: one
 │                           schema-validated artifact per case, plus editorial.
 │                           See frontier/README.md.
-├── resources/              Local archive of the primary literature: papers + web
+├── resources/              Local archive of the primary literature: papers and web
 │                           sources, each kept as original, cleaned .md, and raw
 │                           extraction. See resources/README.md.
 ├── sqpack/
@@ -24,46 +46,59 @@ explorations/packing/
 │   │                       exact sign by rational interval arithmetic with bisection
 │   ├── verify.py           separating-axis validity check, generic over the scalar
 │   │                       type; exact or float backend, optional grid bucketing
+│   ├── quench.py           LP-in-cell quench: solve the cell, search the angles,
+│   │                       land on a named basin at solver precision
 │   └── packings/trump11.py Walter Trump's 1979 packing of 11 unit squares, exactly
 ├── derive_field.py         derives the number field from the published polynomial
 ├── verify_trump11.py       verify the packing and report what it took
 ├── negative_control.py     show the verifier rejects bad packings, and where float64
 │                           fails
 ├── bench.py                exact vs approximate cost, and scaling with algebraic degree
+├── lp_cell.py              rebuild the fixed-angle cell as a linear program, through
+│                           constraint rows sqpack/quench.py does not share
+├── run_quench.py           quench annealer output, both angle methods
+├── run_basin_entry.sh      perturb a known packing and measure the return
+├── defects.yaml            the defect logbook: every bug and record defect found here
+├── defects.schema.yaml     its contract, enforced in the gate
+├── defects.md              generated from defects.yaml; never edited by hand
+├── differential_test.py    search energy against the validity oracle, on near contacts
+├── run_baseline.sh         the baseline annealer sweep a round is run from
+├── tools/                  checkers and generators: the soundness perimeter, the
+│                           negative controls, the generated views and their drift gates
+├── sqsearch/               tier-1 screening annealer (Rust)
 ├── test.sh                 run everything and check the expected results
 └── frankensim-probe/       two experiments run against Jeffrey Emanuel's FrankenSim,
                             asking whether its certified-arithmetic and RNG layers help
                             here (see that directory's README)
 ```
 
-## What has gone wrong here
+## What Has Gone Wrong Here
 
 [`defects.md`](defects.md) is the logbook: every bug, inefficiency and record defect
 found in this toolchain, what caught it, and what now stops it recurring.
 It is generated from [`defects.yaml`](defects.yaml) and checked in the gate.
 
-It is kept because the aggregate says things no individual bug report can.
-Of 27 defects, 6 were **soundness** failures — the system asserting something false
-about the mathematics — and 4 of those pointed in the *flattering* direction, where the
-error looks like a success.
-The automated gate caught **none** of them: every one was found by a control cell whose
-answer was known in advance, a rule written down before the measurement, a generated
-view contradicting its source, or someone reading carefully.
-And 8 fixes left no regression check behind, which is why one of them
-([D-017](defects.md)) is a verbatim repeat of an earlier one.
-(Counts as of 2026-08-23; [`defects.md`](defects.md) is the live tally.)
+It is kept because the aggregate says things no individual bug report can, and two of
+those things shape how this directory works:
 
-## Start here
+- **The dangerous defects flatter.** Most soundness failures found here pointed in the
+  direction that looks like success, which is why a run that beats the record is treated
+  as a bug until proved otherwise.
+- **The automated gate is not what finds them.** It has caught one defect and no
+  soundness defect at all.
+  The rest came from control cells whose answers were known in advance, rules written
+  down before the measurement, generated views contradicting their sources, and careful
+  reading. Gates confirm what someone already thought to check.
 
-[`docs/project/handoff-2026-08-23-quench-spine.md`](docs/project/handoff-2026-08-23-quench-spine.md)
-is the current state of play: what works, what is missing, what the critical path is,
-and the half-dozen facts that will save an arriving agent a day.
-Read it before anything else.
+The counts live in [`defects.md`](defects.md), which is generated, and in
+[the synopsis](SYNOPSIS.md#the-defect-record), which is reconciled against the same
+source in the gate. They are deliberately not repeated here: this paragraph carried them
+once and went stale twice.
 
 ## Conventions
 
-[`conventions.md`](conventions.md) consolidates every convention this directory runs on
-— the id scheme across all layers, file naming, artifact discipline, the evidence tiers
+[`conventions.md`](conventions.md) consolidates every convention this directory runs on:
+the id scheme across all layers, file naming, artifact discipline, the evidence tiers
 and what each may claim, provenance, corrections, and which rules are machine-checked
 versus which rest on care.
 Read it before adding an artifact, a round, or a tool.
@@ -72,7 +107,7 @@ Read it before adding an artifact, a round, or a tool.
 
 Written to be read in this order.
 They move from what is known, to how it is computed and checked, to what to build, to
-where a proof assistant fits, and finally to how to search — the strategy the tooling
+where a proof assistant fits, and finally to how to search: the strategy the tooling
 exists to serve.
 
 | Report | Scope |
@@ -84,13 +119,17 @@ exists to serve.
 | [Lean for Square-Packing Proofs and Validation](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where a proof assistant fits: the upper bound is formalisable today and unclaimed, the lemma layer is the diagnostic first target, and certificates make a result checkable by someone who does not trust our code |
 | [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | The strategy layer: why volume-weighted search fails precisely at records, the basin atlas over the LP-quench map as the deliverable, diversity over structural descriptors instead of loss-shaping, the LLM at the structural layer, and relaxation ladders into the hard instances |
 
-The structured record of the problem’s frontier — best known packing and best proved
-lower bound for every `n ≤ 100`, with provenance and per-case editorial — lives in
+These six are the research reports.
+For the full document set, including the reviews, the postmortem, the campaign runbook
+and what each one owns, see the synopsis’s [document map](SYNOPSIS.md#document-map).
+
+The structured record of the problem’s frontier, meaning the best known packing and best
+proved lower bound for every `n ≤ 100` with provenance and per-case editorial, lives in
 [`frontier/`](frontier/README.md) as soft-schema artifacts rather than as a table inside
 a report, so it can be validated and queried.
 
-Claims in the reports are separated by evidential status — proved, computationally
-verified, best known, or asserted-but-unverified — and every citation resolves both to a
+Claims in the reports are separated by evidential status (proved, computationally
+verified, best known, or asserted-but-unverified) and every citation resolves both to a
 full reference and to a local copy in [`resources/`](resources/README.md).
 
 The reports have been through a full technical review (2026-08-22): every substantive
@@ -105,41 +144,35 @@ and the prioritized path forward in
 
 ## Plan
 
-The implementation plan for the first experiments — search, verify, iterate on `n = 11`
-and `n = 12` — is
+The implementation plan for the first experiments, meaning search, verify and iterate on
+`n = 11` and `n = 12`, is
 [plan-2026-08-22-minimal-packing-toolkit.md](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md).
 It turns the six reports into seven phases and a bead tree, one epic per phase;
 `tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md`
 shows the work items and `tbd ready` the unblocked subset.
 
-The current standing review —
-[review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md)
-— audits the toolkit documents, supplies the experiment method they lacked (a hypothesis
+The current standing review,
+[review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md),
+audits the toolkit documents, supplies the experiment method they lacked (a hypothesis
 register with kill criteria, a run protocol, a series plan starting from an `n = 11`
-smoke), and contributes one verified theoretical result: for fixed angles the whole
-problem is a linear program, checked numerically against Trump’s packing.
-Its register carries the search-philosophy report’s boil-down as hypotheses H-11–H-15
-and series S6 (landscape cartography).
+smoke), and contributes the result the refiner rests on: for fixed angles and a fixed
+cell the whole problem is a linear program.
+That is **proved**, and the synopsis records it as
+[T-2](SYNOPSIS.md#the-cell-decomposition) with two independent implementations.
+The review’s register carries the search-philosophy report’s boil-down as hypotheses
+`H-011`–`H-015` and series S6, landscape cartography.
 
-## Exact verification
+## Exact Verification
 
 Record packings are published as high-precision decimals, and there is no public tool
 that checks one **exactly**. `sqpack` is that check.
 
-### Why exactness needs more than precision
-
-A valid packing has squares with disjoint *interiors*, so touching is allowed — and in a
-record packing many squares touch exactly.
-The separation on those pairs is exactly zero.
-
-Floating point and interval arithmetic can prove a strict inequality; neither can prove
-an equality. So a float check needs a slack tolerance to accept the true contacts, and
-that tolerance is then a blind spot that accepts small overlaps.
-Setting the tolerance to zero rejects the true packing instead.
+Why precision is not enough: a record packing has squares touching at exactly zero
+separation, floating point can certify a strict inequality but not an equality, and
+every tolerance that accepts the true contacts also accepts overlaps smaller than
+itself. The argument in full, with what it cost when ignored, is
+[Why Exactness Is Not Optional](SYNOPSIS.md#why-exactness-is-not-optional).
 `negative_control.py` demonstrates both failure modes.
-
-The fix is representational, not numerical: put the configuration in the real algebraic
-number field it actually lives in, where equality is decidable.
 
 ### Use
 
@@ -148,7 +181,8 @@ python3 verify_trump11.py     # exact verification of s(11) <= 3.877083590022814
 python3 negative_control.py   # exact rejects any overlap; float64 has a blind spot
 python3 bench.py              # timings
 python3 derive_field.py       # re-derive the field (needs sympy)
-./test.sh                     # all of the above, with assertions
+./test.sh                     # the whole gate: the above plus the corpus, the
+                              # lint floor, the controls, and every drift check
 ```
 
 Only `derive_field.py` needs a third-party package (SymPy).
@@ -198,7 +232,7 @@ verify_packing(squares, side, sign=float_sign(1e-9), bucket=True)
 ```
 
 `bucket=True` grid-buckets the squares so pair enumeration is linear rather than
-quadratic — at `n = 1000` that is 15,936 candidate pairs instead of 499,500.
+quadratic: at `n = 1000` that is 15,936 candidate pairs instead of 499,500.
 
 ### Scope
 
