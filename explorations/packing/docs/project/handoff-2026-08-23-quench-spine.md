@@ -78,6 +78,10 @@ whole cartography programme rests on, deliberately made cheap to kill.
   one artifact per round, and a generated `ledger.md`. Never hand-edit the ledger.
 - **What has gone wrong**: [`defects.md`](../../defects.md), generated from
   `defects.yaml`. 27 defects with what caught each and what stops it recurring.
+- **Known tooling debt**:
+  [the tooling-layout review](reviews/review-2026-08-23-tooling-layout.md) maps what is
+  scattered or misnamed under `explorations/packing/` — including a `pytest` config that
+  collects nothing and exits 0. Nothing there blocks research; it is a map, not a plan.
 - **The strategy**:
   [the search-philosophy report](research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
   says where search effort should point and why; the
