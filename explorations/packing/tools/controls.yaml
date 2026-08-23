@@ -33,11 +33,15 @@ controls:
   run: python3 tools/validate_schemas.py
   expect: "recurrence_of unknown"
 
+# NOTE: this control names the current defect count, because the mutation mechanism is
+# a literal replace. Adding a defect therefore breaks it -- loudly, with "anchor appears
+# 0 times", never silently. That is the intended trade: one line of maintenance per
+# defect, in exchange for the control being unable to rot into a no-op.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 23", "count: 20"]
+  replace: ["count: 24", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 23"
+  expect: "count 20 != 24"
 
 - name: defect log - generated view left stale
   file: defects.yaml

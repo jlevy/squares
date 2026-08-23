@@ -52,13 +52,17 @@ view contradicting its source, or someone reading carefully.
 And six fixes left no regression check behind, which is why one of them
 ([D-017](defects.md)) is a verbatim repeat of an earlier one.
 
-## Conventions
+## Conventions and vocabulary
 
 [`conventions.md`](conventions.md) consolidates every convention this directory runs on
 — the id scheme across all layers, file naming, artifact discipline, the evidence tiers
 and what each may claim, provenance, corrections, and which rules are machine-checked
 versus which rest on care.
 Read it before adding an artifact, a round, or a tool.
+
+[`glossary.md`](glossary.md) defines the terms that carry a specific sense here — cell
+versus basin, what “quench” names, polish gap versus exploration gap — each of which has
+already caused a wrong conclusion when left loose.
 
 ## Reports
 

@@ -9,6 +9,11 @@ The distinction is the point: a rule nothing enforces is a rule that will drift,
 standing goal is to move rules from the second column to the first.
 `./test.sh` is what does the checking.
 
+Vocabulary lives in [`glossary.md`](glossary.md): terms used in a specific sense, and
+the pairs that are easy to confuse.
+A convention tells you what to do; the glossary tells you what the words mean, which is
+the other half of following it.
+
 ## 1. Identity
 
 One id per thing, three digits, never reused.

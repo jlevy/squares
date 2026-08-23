@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 23
+count: 24
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -495,3 +495,41 @@ defects:
     own control definitions.
   regression: 'the controls run in test.sh; a control whose anchor is ambiguous or absent fails loudly rather than mutating the wrong text'
   recorded_in: tools/negctl.py
+- id: D-024
+  title: A partial quench was called "the quench", and refuted a correct finding
+  date: '2026-08-23'
+  layer: quench
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: 'one turn -- reported to the user, never written to an artifact'
+  severity: medium
+  status: fixed
+  recurrence_of: D-023
+  what: >-
+    A throwaway probe implemented one third of the quench -- a single LP solve at fixed
+    angles, with no cell re-read and no angle refinement -- and was called "the quench".
+    Its failure to reach the analytic optimum at n = 10 was read as "the annealer was in
+    the wrong basin", when all it showed was that the optimum needs different angles.
+    The evidence cited as decisive was the most misleading: two seeds improving by
+    4e-09 meant their centres were already optimal AT THOSE ANGLES, which is exactly
+    what a run in the RIGHT basin looks like when the remaining error is angular.
+  consequence: >-
+    exp-001's finding -- n = 10 a polish failure, n = 11 an exploration failure -- was
+    reported to the user as refuted. It was not refuted; exp-008 and exp-009 had already
+    settled it the other way. Had the retraction been recorded it would have
+    contradicted two rounds and redirected effort away from the angle half of the
+    quench, which is the half that works.
+  fix: >-
+    Retracted. sqpack.quench_bracket, run on the identical archived configurations,
+    reaches +4.4e-16 on the two seeds cited as decisive and +6.5e-10 on two more,
+    restoring exp-001's reading and agreeing with exp-008. The confusable terms are now
+    defined in glossary.md: a CELL is at fixed angles, a BASIN is not, and "quench"
+    names the whole operation rather than its first step.
+  regression: >-
+    none mechanical -- glossary.md defines the terms, and that is a convention. The
+    transferable lesson is that the postmortem's R1 (a component that accepts a
+    configuration is checked against code it does not share) applies to analysis code
+    and not only to pipeline components: sqpack.quench already existed and would have
+    disagreed on the first call.
+  recorded_in: glossary.md
