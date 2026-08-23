@@ -86,7 +86,7 @@ The ladder’s *oracle* is robust in every environment tested.
 Assert the oracle; drop `annealer_gap` from the byte-compared surface, or store it with
 a tolerance plus a toolchain and CPU fingerprint.
 
-### 2. `git status` before `git add -A`, every time, until D-035 is fixed (`think-97pp`)
+### 2. `git status` before `git add -A`, until D-035’s fix is actually pushed (`think-97pp`)
 
 `tools/negctl.py` corrupts a tracked source file in place and restores it in a
 `finally:` block, which a `SIGKILL` does not run.
@@ -95,20 +95,56 @@ the tree — it has already happened once, and what it left behind was the D-031
 basin-splitting bug.
 A cadence-committing session would commit it behind green history.
 
+**The bead is closed and the fix is not in any pushed branch.** `think-97pp`’s close
+reason describes a real and better fix than the one it was filed with — snapshot-based
+controls, a shared activity lease, `SIGTERM`/`SIGKILL` rehearsals — and cites 74
+reconciled defect records against the 65 on the newest pushed commit.
+So the work exists and is ahead of what is published, but as of this commit:
+
+| branch | D-035 | `negctl` |
+| --- | --- | --- |
+| `origin/main` | outstanding | unchanged |
+| `origin/codex/pr14-square-packing-review` | outstanding | unchanged |
+| this branch | outstanding | unchanged |
+
+Two consequences.
+**Push that work** — a closed bead over a live defect means `tbd ready`
+shows nothing while every existing branch carries it.
+And until it lands, the `git status` habit above is not paranoia, it is the only thing
+standing between an interrupted gate and a committed sabotage.
+
 ## The queue, in the order it should be worked
 
-Everything below is a bead; `tbd ready` is authoritative if this drifts.
+`tbd ready` is authoritative if this drifts.
+Four beads closed while this document was being written, all fixed on #15 — that churn
+is why the table below is short.
 
 | Order | Bead | Why here |
 | ---: | --- | --- |
-| 1 | `think-ivr1` | A guard that cannot fail is worse than no guard, and it is cheap |
-| 2 | `think-lqp6` | `--strict` does not imply `--deep`, so the handover gate does not run the check its own comment promises |
-| 3 | `think-o48b` | Reconcile #15 and #16 into `main`; **regenerate the golden and diff it**, because #15’s convergence fix changes what `converged` means |
-| 4 | `think-1s0h` | Measure terminal flatness — the LP degeneracy route. This is what unblocks the census |
-| 5 | `think-97pp` | D-035, before anything unattended |
-| 6 | `think-yebk`, `think-lcfd` | Write-before-check, pose/side mismatch, two overstated docstrings |
-| 7 | `think-jxx8` | The uniform multistart null — blocked on 4, not before it |
-| 8 | `think-ouf0`, `think-5zwm`, `think-l3ds`, `think-7z7y` | Engine anchors, recovery rehearsal, the gate’s unexamined 101s, deferred atlas fields |
+| 1 | `think-1s0h` | Measure terminal flatness — the Jacobian-rank / LP-degeneracy route. **This is what unblocks the census**, and nothing below it matters until it lands |
+| 2 | `think-osyp` | The non-portable golden fixture. Cheap, and the fix is subtractive: stop byte-comparing a chaotic trajectory |
+| 3 | `think-lcfd` | Rename `closest_pair` → `closest_side_gap` and correct `canonical.py`’s quantum justification. Their D-039 tracks the same thing |
+| 4 | `think-siui` | Basin identity invariance and scalability — do it *after* `think-1s0h`, because a quantization-boundary fix validated against a terminal family will look like it works |
+| 5 | `think-jxx8` | The named multistart baseline. Blocked on 1, not before it |
+| 6 | `think-ouf0`, `think-5zwm`, `think-l3ds`, `think-7z7y` | Engine anchors and budget monotonicity, recovery rehearsal, the gate’s unexamined 101s, deferred atlas fields |
+
+**Closed since PR #14 merged**, all verified rather than assumed: `think-ivr1` (vacuous
+convergence guard), `think-lqp6` (`--strict` ⇒ `--deep`), `think-yebk`
+(write-before-check and pose/side pairing) — each already fixed on #15 — and
+`think-o48b` (the D-number collision, resolved by their renumber; the golden
+regeneration showed convergence counts unchanged, so the D-030 ablation still stands).
+
+`think-97pp` is closed but its fix is unpushed; see above.
+
+### One observation from closing `think-o48b` that belongs with `think-1s0h`
+
+Regenerating the golden under #15’s convergence fix left every convergence count
+identical — but moved `n = 5` from **five rows to six**, from the same six proposals.
+Every `n = 5` quench now produces a distinct row, with 6/6 converged.
+
+A census whose every draw finds a new basin is the shape a discovery curve takes when
+*identity is too fine*, not when the landscape is rich.
+At the campaign’s first cell, that is the whole of `think-1s0h` stated as a measurement.
 
 ## Six things that will save you a day
 
