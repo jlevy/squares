@@ -24,7 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from sqpack.quench import quench_bracket, solve_to_fixed_point  # noqa: E402
+from sqpack.quench import quench_bracket, solve_to_fixed_point
 
 BIN = ROOT / "sqsearch/target/release/sqsearch"
 TRUMP = 3.877083590022814
@@ -32,8 +32,12 @@ TRUMP = 3.877083590022814
 
 def seed_config() -> dict:
     return json.loads(
-        subprocess.run([sys.executable, str(ROOT / "tools/export_trump11.py")],
-                       capture_output=True, text=True, check=True).stdout
+        subprocess.run(
+            [sys.executable, str(ROOT / "tools/export_trump11.py")],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
     )
 
 
@@ -47,16 +51,29 @@ def check_budget_binds() -> str | None:
     moves = []
     for budget in (2_000_000, 4_000_000):
         out = subprocess.run(
-            [str(BIN), "--n", "5", "--seed", "3", "--chains", "1",
-             "--budget-moves", str(budget)],
-            capture_output=True, text=True, check=True,
+            [
+                str(BIN),
+                "--n",
+                "5",
+                "--seed",
+                "3",
+                "--chains",
+                "1",
+                "--budget-moves",
+                str(budget),
+            ],
+            capture_output=True,
+            text=True,
+            check=True,
         ).stdout
-        summary = [json.loads(l) for l in out.splitlines() if '"summary"' in l][0]
+        summary = next(json.loads(line) for line in out.splitlines() if '"summary"' in line)
         moves.append(summary["moves"])
     ratio = moves[1] / max(moves[0], 1)
     if not 1.7 < ratio < 2.3:
-        return (f"D-002: doubling the budget changed work by {ratio:.2f}x "
-                f"({moves[0]} -> {moves[1]}); the budget is not binding")
+        return (
+            f"D-002: doubling the budget changed work by {ratio:.2f}x "
+            f"({moves[0]} -> {moves[1]}); the budget is not binding"
+        )
     return None
 
 
@@ -73,14 +90,18 @@ def check_quench_deterministic() -> str | None:
     a = quench_bracket(x, y, t)
     b = quench_bracket(x, y, t)
     if a.side != b.side or a.theta != b.theta:
-        return (f"D-015: two quenches of one input disagree "
-                f"({a.side!r} vs {b.side!r}); the objective is path-dependent again")
+        return (
+            f"D-015: two quenches of one input disagree "
+            f"({a.side!r} vs {b.side!r}); the objective is path-dependent again"
+        )
     # And the underlying evaluation must not depend on the centres it is handed.
     first = solve_to_fixed_point(t, x, y, len(x))
     shifted = solve_to_fixed_point(t, [v + 3.0 for v in x], [v - 2.0 for v in y], len(x))
     if first and shifted and abs(first[0] - shifted[0]) > 1e-9:
-        return (f"D-015: s(theta) moved by {abs(first[0]-shifted[0]):.2e} under a pure "
-                f"translation of the centres it was handed")
+        return (
+            f"D-015: s(theta) moved by {abs(first[0] - shifted[0]):.2e} under a pure "
+            f"translation of the centres it was handed"
+        )
     return None
 
 
@@ -96,16 +117,20 @@ def check_angle_search_converges() -> str | None:
     t = [v + 1e-3 * rnd.uniform(-1, 1) for v in d["t"]]
     r = quench_bracket(x, y, t, time_budget=60)
     if abs(r.side - TRUMP) > 1e-9:
-        return (f"D-016: quench from a 1e-3 perturbation reached {r.side - TRUMP:+.2e}, "
-                f"outside 1e-9; the angle search has stalled early again")
+        return (
+            f"D-016: quench from a 1e-3 perturbation reached {r.side - TRUMP:+.2e}, "
+            f"outside 1e-9; the angle search has stalled early again"
+        )
     if "time budget" in r.reason:
         return "D-019: the angle search hit its wall budget on a cell that should converge"
     # D-019 specifically: angles far from zero must not defeat the line search.
     far = [v + 4 * math.pi for v in t]
     r2 = quench_bracket(x, y, far, time_budget=60)
     if "time budget" in r2.reason:
-        return ("D-019: angles offset by four full turns defeat the line search; "
-                "the folding or the tolerance scaling has regressed")
+        return (
+            "D-019: angles offset by four full turns defeat the line search; "
+            "the folding or the tolerance scaling has regressed"
+        )
     return None
 
 

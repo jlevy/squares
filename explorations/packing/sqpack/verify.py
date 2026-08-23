@@ -21,8 +21,9 @@ function for the scalar type in use:
 from __future__ import annotations
 
 import math
-from dataclasses import dataclass, field as _dc_field
-from typing import Callable, Sequence
+from collections.abc import Callable, Sequence
+from dataclasses import dataclass
+from dataclasses import field as _dc_field
 
 Point = tuple  # (x, y) of some scalar type
 Square = Sequence[Point]  # four corners in order
@@ -62,9 +63,14 @@ class Report:
         head = "VALID" if self.valid else "INVALID"
         lines = [
             f"{head}: {self.n} squares, {self.pairs_tested} pairs tested",
-            f"  container: {self.container_contacts} corner coordinates exactly on the boundary",
-            f"  pairs:     {self.touching_pairs} separated with zero gap, "
-            f"{self.strict_pairs} strictly",
+            (
+                f"  container: {self.container_contacts} corner coordinates "
+                "exactly on the boundary"
+            ),
+            (
+                f"  pairs:     {self.touching_pairs} separated with zero gap, "
+                f"{self.strict_pairs} strictly"
+            ),
         ]
         for kind, detail in self.failures:
             lines.append(f"  FAILURE [{kind}]: {detail}")
@@ -125,7 +131,7 @@ def _buckets(squares: Sequence[Square], sign, cell: float = 2.0) -> dict:
     return grid
 
 
-def candidate_pairs(squares: Sequence[Square], sign, bucket: bool = False):
+def candidate_pairs(squares: Sequence[Square], sign, *, bucket: bool = False):
     """Yield index pairs that must be tested."""
     n = len(squares)
     if not bucket:
@@ -168,6 +174,7 @@ def verify_packing(
     squares: Sequence[Square],
     side,
     sign=exact_sign,
+    *,
     check_shapes: bool = True,
     bucket: bool = False,
 ) -> Report:
@@ -186,8 +193,12 @@ def verify_packing(
 
     for i, sq in enumerate(squares):
         for px, py in sq:
-            for value, edge in ((px, "x>=0"), (py, "y>=0"),
-                                (side - px, "x<=s"), (side - py, "y<=s")):
+            for value, edge in (
+                (px, "x>=0"),
+                (py, "y>=0"),
+                (side - px, "x<=s"),
+                (side - py, "y<=s"),
+            ):
                 s = sign(value)
                 if s < 0:
                     report.failures.append(("container", f"square {i} violates {edge}"))
@@ -207,6 +218,7 @@ def verify_packing(
     report.valid = not report.failures
     return report
 
+
 def corners_from_poses(x, y, theta):
     """Turn centre-and-angle poses into the corner form this module verifies.
 
@@ -216,19 +228,18 @@ def corners_from_poses(x, y, theta):
     point of an independent oracle, and precisely what was missing when the quench
     returned a packing that violated its own constraints (defect D-014).
     """
-    import math as _math
-
     squares = []
-    for cx, cy, t in zip(x, y, theta):
-        c, s = _math.cos(t), _math.sin(t)
+    for cx, cy, t in zip(x, y, theta, strict=True):
+        c, s = math.cos(t), math.sin(t)
         # Half-edge vectors of a unit square at this angle.
         ux, uy = 0.5 * c, 0.5 * s
         vx, vy = -0.5 * s, 0.5 * c
-        squares.append([
-            (cx - ux - vx, cy - uy - vy),
-            (cx + ux - vx, cy + uy - vy),
-            (cx + ux + vx, cy + uy + vy),
-            (cx - ux + vx, cy - uy + vy),
-        ])
+        squares.append(
+            [
+                (cx - ux - vx, cy - uy - vy),
+                (cx + ux - vx, cy + uy - vy),
+                (cx + ux + vx, cy + uy + vy),
+                (cx - ux + vx, cy - uy + vy),
+            ]
+        )
     return squares
-

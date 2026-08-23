@@ -271,20 +271,20 @@ New, and additive — nothing existing is removed:
 ```python
 import sqpack
 
-pk = sqpack.load("trump11")            # or sqpack.Packing(squares, side)
-cert = sqpack.verify(pk)               # exact by default
-cert.valid                             # True
-cert.contacts                          # 14 pairs, with exact-zero witnesses
-cert.separations                       # 41 pairs, each with its axis and sign
-cert.to_json()                         # the third-party-checkable object
+pk = sqpack.load("trump11")  # or sqpack.Packing(squares, side)
+cert = sqpack.verify(pk)  # exact by default
+cert.valid  # True
+cert.contacts  # 14 pairs, with exact-zero witnesses
+cert.separations  # 41 pairs, each with its axis and sign
+cert.to_json()  # the third-party-checkable object
 
-sqpack.verify(pk, scalar="f64", tol=1e-9)   # fast and explicitly unsound
+sqpack.verify(pk, scalar="f64", tol=1e-9)  # fast and explicitly unsound
 ```
 
 ```python
-run = sqpack.search(n=12, seed=42, budget=...)   # deterministic in seed
-run.basins                                        # each with key, side, verdict
-sqpack.search(n=12, seed=42, workers=32).digest == run.digest   # must hold
+run = sqpack.search(n=12, seed=42, budget=...)  # deterministic in seed
+run.basins  # each with key, side, verdict
+sqpack.search(n=12, seed=42, workers=32).digest == run.digest  # must hold
 ```
 
 The Python `sqpack.verify_packing(..., sign=...)` signature stays as-is so `test.sh`

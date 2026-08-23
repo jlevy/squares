@@ -139,13 +139,10 @@ def naming(series, explorations, hypotheses, experiments) -> list[str]:
             # A series is named by its directory; everything else by its own filename.
             stem = path.parent.name if path.name == "README.md" else path.stem
             claimed = item["id"]
-            expected = claimed if not stem.startswith("series-") else claimed
-            if not stem.startswith(expected + "-"):
-                problems.append(
-                    f"{stem}: name does not start with its id {claimed!r}"
-                )
+            if not stem.startswith(claimed + "-"):
+                problems.append(f"{stem}: name does not start with its id {claimed!r}")
                 continue
-            slug = stem[len(expected) + 1:]
+            slug = stem[len(claimed) + 1 :]
             if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug):
                 problems.append(f"{stem}: slug {slug!r} is not kebab-case")
     return problems
@@ -213,9 +210,7 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
     for hypothesis in hypotheses:
         for report_id in hypothesis.get("derived_from") or []:
             if report_id not in reports:
-                problems.append(
-                    f"{hypothesis['_path'].name}: derived_from unknown {report_id}"
-                )
+                problems.append(f"{hypothesis['_path'].name}: derived_from unknown {report_id}")
 
     # The board is hand-written, so it is reconciled rather than regenerated. Both
     # directions matter: a board ahead of the registry points at nothing, and a
@@ -266,7 +261,7 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         # was checked (defects D-010, D-017).
         point = str((experiment.get("instance") or {}).get("point", ""))
         declared = set(experiment.get("known_defects") or [])
-        for result in ([] if declared & {"D-010", "D-017"} else experiment.get("results") or []):
+        for result in [] if declared & {"D-010", "D-017"} else experiment.get("results") or []:
             source = result.get("standing_best_source") or ""
             for cited in re.findall(r"\bn-0*(\d+)", source):
                 if cited.lstrip("0") != point:
@@ -284,15 +279,11 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
             else:
                 stopped = effort.get("stopped_by")
                 if stopped == "timebox" and not effort.get("timebox"):
-                    problems.append(
-                        f"{name}: stopped_by timebox but no timebox was declared"
-                    )
+                    problems.append(f"{name}: stopped_by timebox but no timebox was declared")
                 # Stopping on the clock leaves the question open, so the round must say
                 # where a successor picks it up, or the spent budget is lost.
                 if stopped == "timebox" and not verdict.get("resume_from"):
-                    problems.append(
-                        f"{name}: stopped on the clock without verdict.resume_from"
-                    )
+                    problems.append(f"{name}: stopped on the clock without verdict.resume_from")
                 if stopped == "criterion" and decision == "abandoned":
                     problems.append(
                         f"{name}: abandoned, but stopped_by says the criterion decided it"
@@ -377,14 +368,26 @@ def render(series, explorations, hypotheses, experiments) -> str:
 
     lines = [BANNER, "", "# Experiment ledger", ""]
 
-    lines += ["## Series", "", "| id | status | title | rounds | opened because |", "| --- | --- | --- | --- | --- |"]
+    lines += [
+        "## Series",
+        "",
+        "| id | status | title | rounds | opened because |",
+        "| --- | --- | --- | --- | --- |",
+    ]
     for s in sorted(series, key=lambda s: s["id"]):
         rounds = sum(1 for e in experiments if e.get("series") == s["id"])
         because = s.get("opened_because", "").replace("\n", " ").strip()
-        lines.append(f"| {s['id']} | {s['status']} | {s['title']} | {rounds} | {because[:50]} |")
+        lines.append(
+            f"| {s['id']} | {s['status']} | {s['title']} | {rounds} | {because[:50]} |"
+        )
     lines.append("")
 
-    lines += ["## Registry", "", "| id | status | lane | claim | sweep | rounds | spent |", "| --- | --- | --- | --- | --- | --- | --- |"]
+    lines += [
+        "## Registry",
+        "",
+        "| id | status | lane | claim | sweep | rounds | spent |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
+    ]
     for hypothesis in sorted(hypotheses, key=lambda h: h["id"]):
         rounds = by_hypothesis.get(hypothesis["id"], [])
         claim = hypothesis["claim"].replace("\n", " ").strip()
@@ -397,18 +400,20 @@ def render(series, explorations, hypotheses, experiments) -> str:
 
     lines += ["", "## Rounds", ""]
     for decision in DECISION_ORDER:
-        matching = [
-            e for e in experiments if e.get("verdict", {}).get("decision") == decision
-        ]
+        matching = [e for e in experiments if e.get("verdict", {}).get("decision") == decision]
         if not matching:
             continue
         lines += [f"### {decision} ({len(matching)})", ""]
-        lines += ["| id | series | instance | operator | hypotheses | reason |", "| --- | --- | --- | --- | --- | --- |"]
+        lines += [
+            "| id | series | instance | operator | hypotheses | reason |",
+            "| --- | --- | --- | --- | --- | --- |",
+        ]
         for experiment in sorted(matching, key=lambda e: e["id"]):
             verdict = experiment["verdict"]
             instance = experiment.get("instance") or {}
             lines.append(
-                f"| {experiment['id']} | {experiment.get('series', '')} | {instance.get('point', '')} "
+                f"| {experiment['id']} | {experiment.get('series', '')} "
+                f"| {instance.get('point', '')} "
                 f"| {experiment.get('method', {}).get('operator', '')} "
                 f"| {', '.join(experiment.get('hypotheses') or [])} "
                 f"| {verdict['reason'].replace(chr(10), ' ').strip()} |"
@@ -419,14 +424,17 @@ def render(series, explorations, hypotheses, experiments) -> str:
     # returning agent reads first: every row is a question still open, with the budget
     # already spent on it and the state needed to continue.
     resumable = [
-        e for e in experiments
+        e
+        for e in experiments
         if (e.get("effort") or {}).get("stopped_by") in ("timebox", "dependency")
         or e.get("verdict", {}).get("decision") == "abandoned"
     ]
     if resumable:
         lines += ["## Resumable — stopped on the clock, not on an answer", ""]
-        lines += ["| id | hypotheses | spent | stopped by | resume from | reopen when |",
-                  "| --- | --- | --- | --- | --- | --- |"]
+        lines += [
+            "| id | hypotheses | spent | stopped by | resume from | reopen when |",
+            "| --- | --- | --- | --- | --- | --- |",
+        ]
         for experiment in sorted(resumable, key=lambda e: e["id"]):
             verdict = experiment.get("verdict") or {}
             effort = experiment.get("effort") or {}
@@ -444,8 +452,10 @@ def render(series, explorations, hypotheses, experiments) -> str:
         lines += [
             "## Effort",
             "",
-            f"{len(experiments)} rounds, {total_minutes:g} agent-minutes, "
-            f"{total_seconds / 60:.1f} cpu-minutes.",
+            (
+                f"{len(experiments)} rounds, {total_minutes:g} agent-minutes, "
+                f"{total_seconds / 60:.1f} cpu-minutes."
+            ),
             "",
         ]
 
@@ -459,7 +469,7 @@ def render(series, explorations, hypotheses, experiments) -> str:
 
 
 def main() -> int:
-    now = dt.datetime.now(dt.timezone.utc).replace(tzinfo=None)
+    now = dt.datetime.now(dt.UTC).replace(tzinfo=None)
     series = load(ROOT / "series", "series", "*/README.md")
     explorations = load(ROOT / "explorations", "exploration")
     hypotheses = load(ROOT / "hypotheses", "hypothesis")

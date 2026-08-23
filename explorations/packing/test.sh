@@ -78,7 +78,7 @@ PY
 
 echo
 echo "== soft-schema validation =="
-$PY tools/validate_schemas.py
+uv run --quiet python tools/validate_schemas.py 2>/dev/null || $PY tools/validate_schemas.py
 
 echo
 echo "== generated tables in sync with frontier/ =="
@@ -99,6 +99,25 @@ for kind, field, n in (("search", "outcome", 20), ("proof", "status", 30)):
         assert s[field] and s["name"] and s["mechanism"] and s["note"], f"{kind} #{s['id']}: empty field"
     print(f"  {kind}: {n} strategies, {len(fams)} families, all fields populated")
 PY
+
+echo
+echo "== lint floor =="
+# The floor is enforced, not aspirational. It has already earned its place: ruff's
+# strict-zip rule found silent truncation in field arithmetic, its closure rule found a
+# capture one edit from a bug, and clippy found an approximation of TAU written as a
+# literal. Skipped, not failed, where the toolchain is absent.
+if command -v uv >/dev/null 2>&1; then
+  ( cd "$(dirname "$0")" && uv run --quiet ruff check . && uv run --quiet ruff format --check . \
+    && uv run --quiet basedpyright ) | tail -3
+else
+  echo "  uv not installed, skipping Python lint"
+fi
+if command -v cargo >/dev/null 2>&1; then
+  ( cd sqsearch && cargo clippy --release --all-targets --quiet -- -D warnings 2>&1 | tail -2 \
+    && cargo fmt --check && echo "  clippy clean at pedantic; rustfmt clean" )
+else
+  echo "  cargo not installed, skipping Rust lint"
+fi
 
 echo
 echo "== negative controls =="

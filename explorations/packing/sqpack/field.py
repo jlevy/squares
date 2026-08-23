@@ -19,8 +19,9 @@ never do.
 
 from __future__ import annotations
 
+import decimal
+from collections.abc import Iterable, Sequence
 from fractions import Fraction
-from typing import Iterable, Sequence
 
 Rat = Fraction
 
@@ -64,26 +65,26 @@ class NumberField:
 
     # -- construction ------------------------------------------------------
 
-    def element(self, coeffs) -> "FieldElement":
+    def element(self, coeffs) -> FieldElement:
         """Element from coefficients of a polynomial in alpha, low degree first."""
         if isinstance(coeffs, (int, Fraction)):
             coeffs = [coeffs]
         c = [Rat(x) for x in coeffs]
         return FieldElement(self, self._reduce(c))
 
-    def rational(self, value) -> "FieldElement":
+    def rational(self, value) -> FieldElement:
         return self.element([Rat(value)])
 
     @property
-    def alpha(self) -> "FieldElement":
+    def alpha(self) -> FieldElement:
         return self.element([0, 1])
 
     @property
-    def zero(self) -> "FieldElement":
+    def zero(self) -> FieldElement:
         return self.rational(0)
 
     @property
-    def one(self) -> "FieldElement":
+    def one(self) -> FieldElement:
         return self.rational(1)
 
     # -- internals ---------------------------------------------------------
@@ -126,7 +127,7 @@ class NumberField:
             a, b = min(products) + c, max(products) + c
         return a, b
 
-    def sign(self, e: "FieldElement") -> int:
+    def sign(self, e: FieldElement) -> int:
         """Exact sign of `e`: -1, 0 or +1."""
         if e.is_zero():
             return 0
@@ -140,21 +141,42 @@ class NumberField:
 
     def refine_to(self, digits: int) -> None:
         """Narrow the isolating interval below 10**-digits."""
-        target = Rat(1, 10 ** digits)
+        target = Rat(1, 10**digits)
         while self._hi - self._lo > target:
             self._bisect()
 
-    def decimal(self, e: "FieldElement", digits: int = 30) -> str:
-        """Decimal digits of `e` that are certain, from a rigorous enclosure."""
-        import decimal
+    def root_bounds(self) -> tuple[Rat, Rat]:
+        """
+        The current rigorous enclosure `(lo, hi)` of the field's root.
 
+        Public because callers legitimately need the numeric value -- exporting a
+        packing to `f64`, for instance -- and reaching into the enclosure directly
+        couples them to how refinement is stored.
+        """
+        return self._lo, self._hi
+
+    def root_approx(self) -> float:
+        """
+        Midpoint of the current enclosure, as a float.
+
+        A ONE-WAY DOOR out of exact arithmetic: nothing computed from this may claim
+        exactness, and `refine_to` should be called first if the caller needs more
+        digits than the current enclosure carries.
+        """
+        return float((self._lo + self._hi) / 2)
+
+    def decimal(self, e: FieldElement, digits: int = 30) -> str:
+        """Decimal digits of `e` that are certain, from a rigorous enclosure."""
         self.refine_to(digits + 8)
         decimal.getcontext().prec = digits + 20
         lo, hi = self._enclose(e.coeffs)
-        as_dec = lambda q: decimal.Decimal(q.numerator) / decimal.Decimal(q.denominator)
+
+        def as_dec(q: Rat) -> decimal.Decimal:
+            return decimal.Decimal(q.numerator) / decimal.Decimal(q.denominator)
+
         slo, shi = str(+as_dec(lo)), str(+as_dec(hi))
         shared = 0
-        for x, y in zip(slo, shi):
+        for x, y in zip(slo, shi, strict=False):
             if x != y:
                 break
             shared += 1
@@ -164,30 +186,36 @@ class NumberField:
 class FieldElement:
     """An element of a :class:`NumberField`.  Immutable."""
 
-    __slots__ = ("field", "coeffs")
+    __slots__ = ("coeffs", "field")
 
     def __init__(self, field: NumberField, coeffs: list[Rat]):
         self.field = field
         self.coeffs = coeffs
 
-    def _check(self, other: "FieldElement") -> None:
+    def _check(self, other: FieldElement) -> None:
         if other.field is not self.field:
             raise ValueError("elements come from different number fields")
 
     def __add__(self, other):
         other = self._coerce(other)
-        return FieldElement(self.field, [a + b for a, b in zip(self.coeffs, other.coeffs)])
+        return FieldElement(
+            self.field, [a + b for a, b in zip(self.coeffs, other.coeffs, strict=True)]
+        )
 
     def __sub__(self, other):
         other = self._coerce(other)
-        return FieldElement(self.field, [a - b for a, b in zip(self.coeffs, other.coeffs)])
+        return FieldElement(
+            self.field, [a - b for a, b in zip(self.coeffs, other.coeffs, strict=True)]
+        )
 
     def __neg__(self):
         return FieldElement(self.field, [-a for a in self.coeffs])
 
     def __mul__(self, other):
         other = self._coerce(other)
-        return FieldElement(self.field, self.field._reduce(_poly_mul(self.coeffs, other.coeffs)))
+        return FieldElement(
+            self.field, self.field._reduce(_poly_mul(self.coeffs, other.coeffs))
+        )
 
     __radd__ = __add__
     __rmul__ = __mul__
@@ -216,7 +244,7 @@ class FieldElement:
     def __hash__(self):
         return hash(tuple(self.coeffs))
 
-    def inverse(self) -> "FieldElement":
+    def inverse(self) -> FieldElement:
         """Multiplicative inverse, by exact Gaussian elimination.
 
         Solves ``x * self == 1`` using the matrix of "multiplication by self"
@@ -230,10 +258,9 @@ class FieldElement:
         for k in range(d):
             basis = [Rat(0)] * d
             basis[k] = Rat(1)
-            columns.append(f._reduce(_poly_mul(self.coeffs, basis)))
+            columns.append(f._reduce(_poly_mul(self.coeffs, basis)))  # noqa: SLF001
         rows = [
-            [columns[k][r] for k in range(d)] + [Rat(1) if r == 0 else Rat(0)]
-            for r in range(d)
+            [columns[k][r] for k in range(d)] + [Rat(1) if r == 0 else Rat(0)] for r in range(d)
         ]
         for col in range(d):
             pivot = next((r for r in range(col, d) if rows[r][col] != 0), None)
@@ -245,7 +272,7 @@ class FieldElement:
             for r in range(d):
                 if r != col and rows[r][col] != 0:
                     factor = rows[r][col]
-                    rows[r] = [x - factor * y for x, y in zip(rows[r], rows[col])]
+                    rows[r] = [x - factor * y for x, y in zip(rows[r], rows[col], strict=True)]
         return FieldElement(f, [rows[r][d] for r in range(d)])
 
     def sign(self) -> int:
@@ -254,7 +281,7 @@ class FieldElement:
     def __float__(self) -> float:
         """Midpoint of a rigorous enclosure. For display and bucketing only."""
         self.field.refine_to(30)
-        lo, hi = self.field._enclose(self.coeffs)
+        lo, hi = self.field._enclose(self.coeffs)  # noqa: SLF001
         return float((lo + hi) / 2)
 
     def __repr__(self) -> str:

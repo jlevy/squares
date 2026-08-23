@@ -3,8 +3,8 @@
 
 import time
 
-from sqpack.verify import verify_packing, exact_sign
 from sqpack.packings import trump11
+from sqpack.verify import exact_sign, verify_packing
 
 
 def main() -> int:

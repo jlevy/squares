@@ -169,8 +169,8 @@ Supply the corners in an exact field and call `verify_packing`:
 from sqpack.field import NumberField
 from sqpack.verify import verify_packing, exact_sign
 
-field = NumberField(min_poly, isolating_interval)   # coefficients high degree first
-squares = [...]                                     # 11 x 4 corners of FieldElements
+field = NumberField(min_poly, isolating_interval)  # coefficients high degree first
+squares = [...]  # 11 x 4 corners of FieldElements
 print(verify_packing(squares, side, sign=exact_sign))
 ```
 
@@ -184,6 +184,7 @@ For a quick, non-certifying check, swap in the float backend:
 
 ```python
 from sqpack.verify import float_sign
+
 verify_packing(squares, side, sign=float_sign(1e-9), bucket=True)
 ```
 

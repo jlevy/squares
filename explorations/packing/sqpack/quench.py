@@ -28,12 +28,13 @@ import math
 import time
 from dataclasses import dataclass, field
 
-
-class _OutOfTime(Exception):
-    """Raised inside a line search when the quench's wall budget expires."""
-
 import numpy as np
 from scipy.optimize import linprog
+
+
+class _OutOfTimeError(Exception):
+    """Raised inside a line search when the quench's wall budget expires."""
+
 
 # How much constraint violation a returned LP solution may carry. Two orders below the
 # tightened solver tolerance, and far below any quantity the campaign reports.
@@ -80,12 +81,15 @@ def choose_cell(x, y, theta) -> list[tuple[int, int, float, float, float, float]
     for i in range(n):
         for j in range(i + 1, n):
             dx, dy = x[i] - x[j], y[i] - y[j]
-            best = None
+            # Four candidate axes, always: two edge normals from each square. Seeded
+            # with the worst possible gap rather than None so the result is a value
+            # rather than an optional the caller has to reason about.
+            best = (-math.inf, 1.0, 0.0, 0.0, 1.0)
             for ax, ay in _axes(theta[i]) + _axes(theta[j]):
                 h = _half_extent(theta[i], ax, ay) + _half_extent(theta[j], ax, ay)
                 d = dx * ax + dy * ay
                 gap = abs(d) - h
-                if best is None or gap > best[0]:
+                if gap > best[0]:
                     best = (gap, ax, ay, h, 1.0 if d >= 0 else -1.0)
             gap, ax, ay, h, sign = best
             cell.append((i, j, ax, ay, h, sign))
@@ -226,8 +230,17 @@ def quench(
 
     solved = solve_to_fixed_point(theta, x, y, n)
     if solved is None:
-        return QuenchResult(float("inf"), x, y, theta, lp_solves, 0, False, 0,
-                            reason="initial cell infeasible")
+        return QuenchResult(
+            side=float("inf"),
+            x=x,
+            y=y,
+            theta=theta,
+            lp_solves=lp_solves,
+            angle_steps=0,
+            converged=False,
+            cell_changes=0,
+            reason="initial cell infeasible",
+        )
     side, x, y, used, changed = solved
     lp_solves += used
     cell_changes += changed
@@ -261,8 +274,17 @@ def quench(
 
         norm = math.sqrt(sum(g * g for g in grad))
         if norm < tol:
-            return QuenchResult(side, x, y, theta, lp_solves, angle_steps, True,
-                                cell_changes, reason="angle gradient vanished")
+            return QuenchResult(
+                side=side,
+                x=x,
+                y=y,
+                theta=theta,
+                lp_solves=lp_solves,
+                angle_steps=angle_steps,
+                converged=True,
+                cell_changes=cell_changes,
+                reason="angle gradient vanished",
+            )
 
         # Reset the line search each round: a step that failed against one cell says
         # nothing about the next, and carrying the shrunken step forward is what turns
@@ -270,7 +292,7 @@ def quench(
         step = angle_step
         moved = False
         while step > 1e-13:
-            probe = [t - step * g / norm for t, g in zip(theta, grad)]
+            probe = [t - step * g / norm for t, g in zip(theta, grad, strict=True)]
             trial = solve_to_fixed_point(probe, x, y, n)
             lp_solves += trial[3] if trial else 1
             if trial and trial[0] < side - tol:
@@ -282,11 +304,29 @@ def quench(
                 break
             step *= 0.5
         if not moved:
-            return QuenchResult(side, x, y, theta, lp_solves, angle_steps, True,
-                                cell_changes, reason="no improving angle step")
+            return QuenchResult(
+                side=side,
+                x=x,
+                y=y,
+                theta=theta,
+                lp_solves=lp_solves,
+                angle_steps=angle_steps,
+                converged=True,
+                cell_changes=cell_changes,
+                reason="no improving angle step",
+            )
 
-    return QuenchResult(side, x, y, theta, lp_solves, angle_steps, False, cell_changes,
-                        reason="round limit")
+    return QuenchResult(
+        side=side,
+        x=x,
+        y=y,
+        theta=theta,
+        lp_solves=lp_solves,
+        angle_steps=angle_steps,
+        converged=False,
+        cell_changes=cell_changes,
+        reason="round limit",
+    )
 
 
 def contacts(x, y, theta, tol: float = 1e-9) -> list[tuple[int, int]]:
@@ -297,12 +337,14 @@ def contacts(x, y, theta, tol: float = 1e-9) -> list[tuple[int, int]]:
         for j in range(i + 1, n):
             dx, dy = x[i] - x[j], y[i] - y[j]
             gap = max(
-                abs(dx * ax + dy * ay) - (_half_extent(theta[i], ax, ay) + _half_extent(theta[j], ax, ay))
+                abs(dx * ax + dy * ay)
+                - (_half_extent(theta[i], ax, ay) + _half_extent(theta[j], ax, ay))
                 for ax, ay in _axes(theta[i]) + _axes(theta[j])
             )
             if abs(gap) <= tol:
                 out.append((i, j))
     return out
+
 
 def angle_classes(theta, tol: float = 1e-6) -> list[list[int]]:
     """Group squares by shared tilt, modulo the quarter turn a square is invariant under.
@@ -360,26 +402,24 @@ def _bracket_min(f, x0: float, span: float, tol: float = 1e-15, max_iters: int =
     return (lo + hi) / 2
 
 
-def _free_sweep(side, x, y, theta, n, deadline, span: float = 1e-3):
+def _free_sweep(side, x, y, theta, n, *, deadline, span: float = 1e-3):
     """One bracketing pass over every angle individually, no classes.
 
     Returns (side, x, y, theta, lp_solves). Used to certify that a class-converged
     point is a genuine coordinate-wise local optimum rather than an artifact of the
     merge tolerance.
     """
-    import time as _time
-
     lp_solves = 0
     best = (side, list(x), list(y), list(theta))
     for k in range(n):
-        if _time.monotonic() > deadline:
+        if time.monotonic() > deadline:
             break
         ref_x, ref_y = list(best[1]), list(best[2])
         base = best[3][k]
 
-        def probe(value, k=k, ref_x=ref_x, ref_y=ref_y):
+        def probe(value, k=k, ref_x=ref_x, ref_y=ref_y, angles=tuple(best[3])):
             nonlocal lp_solves
-            trial_theta = list(best[3])
+            trial_theta = list(angles)
             trial_theta[k] = value
             got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
             lp_solves += got[3] if got else 1
@@ -387,7 +427,7 @@ def _free_sweep(side, x, y, theta, n, deadline, span: float = 1e-3):
 
         try:
             angle = _bracket_min(probe, base, span)
-        except _OutOfTime:
+        except _OutOfTimeError:
             break
         trial_theta = list(best[3])
         trial_theta[k] = angle
@@ -399,8 +439,16 @@ def _free_sweep(side, x, y, theta, n, deadline, span: float = 1e-3):
 
 
 def quench_bracket(
-    x, y, theta, *, max_sweeps: int = 12, span: float = 0.05, tol: float = 1e-12,
-    class_tol: float = 1e-2, time_budget: float = 30.0, free_pass: bool = True,
+    x,
+    y,
+    theta,
+    *,
+    max_sweeps: int = 12,
+    span: float = 0.05,
+    tol: float = 1e-12,
+    class_tol: float = 1e-2,
+    time_budget: float = 30.0,
+    free_pass: bool = True,
 ) -> QuenchResult:
     """Quench whose angle half brackets rather than descends.
 
@@ -428,8 +476,17 @@ def quench_bracket(
 
     solved = solve_to_fixed_point(theta, x, y, n)
     if solved is None:
-        return QuenchResult(float("inf"), x, y, theta, 1, 0, False, 0,
-                            reason="initial cell infeasible")
+        return QuenchResult(
+            side=float("inf"),
+            x=x,
+            y=y,
+            theta=theta,
+            lp_solves=1,
+            angle_steps=0,
+            converged=False,
+            cell_changes=0,
+            reason="initial cell infeasible",
+        )
     side, x, y, used, changes = solved
     lp_solves += used
 
@@ -446,16 +503,25 @@ def quench_bracket(
         improved = False
         for group in groups:
             if time.monotonic() > deadline:
-                return QuenchResult(side, x, y, theta, lp_solves, angle_steps, False,
-                                    changes, reason="time budget")
+                return QuenchResult(
+                    side=side,
+                    x=x,
+                    y=y,
+                    theta=theta,
+                    lp_solves=lp_solves,
+                    angle_steps=angle_steps,
+                    converged=False,
+                    cell_changes=changes,
+                    reason="time budget",
+                )
             ref_x, ref_y = list(x), list(y)
             base = theta[group[0]]
 
-            def probe(value, group=group, ref_x=ref_x, ref_y=ref_y):
+            def probe(value, group=group, ref_x=ref_x, ref_y=ref_y, angles=tuple(theta)):
                 nonlocal lp_solves
                 if time.monotonic() > deadline:
-                    raise _OutOfTime
-                trial_theta = list(theta)
+                    raise _OutOfTimeError
+                trial_theta = list(angles)
                 for k in group:
                     trial_theta[k] = value
                 got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
@@ -464,9 +530,18 @@ def quench_bracket(
 
             try:
                 best_angle = _bracket_min(probe, base, span)
-            except _OutOfTime:
-                return QuenchResult(side, x, y, theta, lp_solves, angle_steps, False,
-                                    changes, reason="time budget")
+            except _OutOfTimeError:
+                return QuenchResult(
+                    side=side,
+                    x=x,
+                    y=y,
+                    theta=theta,
+                    lp_solves=lp_solves,
+                    angle_steps=angle_steps,
+                    converged=False,
+                    cell_changes=changes,
+                    reason="time budget",
+                )
             trial_theta = list(theta)
             for k in group:
                 trial_theta[k] = best_angle
@@ -479,9 +554,17 @@ def quench_bracket(
                 improved = True
         if not improved:
             if not free_pass:
-                return QuenchResult(side, x, y, theta, lp_solves, angle_steps, True,
-                                    changes,
-                                    reason=f"bracket converged, {len(groups)} classes")
+                return QuenchResult(
+                    side=side,
+                    x=x,
+                    y=y,
+                    theta=theta,
+                    lp_solves=lp_solves,
+                    angle_steps=angle_steps,
+                    converged=True,
+                    cell_changes=changes,
+                    reason=f"bracket converged, {len(groups)} classes",
+                )
             # The class constraint is a search device, not a property of the answer.
             # Merging angles searches one coordinate where the packing has one degree of
             # freedom -- but it also FORCES angles equal that the true optimum may want
@@ -495,7 +578,7 @@ def quench_bracket(
             # tolerance did not decide the answer. If something improves, the search
             # continues from there with the classes re-read.
             free_side, free_x, free_y, free_theta, used = _free_sweep(
-                side, x, y, theta, n, deadline
+                side, x, y, theta, n, deadline=deadline
             )
             lp_solves += used
             if free_side < side - tol:
@@ -503,11 +586,27 @@ def quench_bracket(
                 angle_steps += 1
                 groups = angle_classes(theta, class_tol)
                 continue
-            return QuenchResult(side, x, y, theta, lp_solves, angle_steps, True,
-                                changes,
-                                reason=f"converged, {len(groups)} classes, free pass clean")
+            return QuenchResult(
+                side=side,
+                x=x,
+                y=y,
+                theta=theta,
+                lp_solves=lp_solves,
+                angle_steps=angle_steps,
+                converged=True,
+                cell_changes=changes,
+                reason=f"converged, {len(groups)} classes, free pass clean",
+            )
         groups = angle_classes(theta, class_tol)
         span = max(span * 0.5, 1e-9)
-    return QuenchResult(side, x, y, theta, lp_solves, angle_steps, False, changes,
-                        reason="sweep limit")
-
+    return QuenchResult(
+        side=side,
+        x=x,
+        y=y,
+        theta=theta,
+        lp_solves=lp_solves,
+        angle_steps=angle_steps,
+        converged=False,
+        cell_changes=changes,
+        reason="sweep limit",
+    )

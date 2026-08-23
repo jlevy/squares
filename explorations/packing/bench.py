@@ -17,9 +17,9 @@ import random
 import time
 from fractions import Fraction
 
-from sqpack.field import NumberField
-from sqpack.verify import verify_packing, exact_sign, float_sign
+from sqpack.field import NumberField, _poly_mul
 from sqpack.packings import trump11
+from sqpack.verify import exact_sign, float_sign, verify_packing
 
 
 def grid_packing(n: int):
@@ -38,9 +38,14 @@ def bench_exact() -> None:
     report = verify_packing(squares, side, sign=exact_sign)
     elapsed = time.time() - start
     print("1. exact verification, Trump's n=11 packing")
-    print(f"   valid={report.valid}  degree={field.degree}  "
-          f"pairs={report.pairs_tested}  zero-gap pairs={report.touching_pairs}")
-    print(f"   {elapsed*1e3:.0f} ms  ({elapsed*1e6/max(1, report.pairs_tested):.0f} us/pair)")
+    print(
+        f"   valid={report.valid}  degree={field.degree}  "
+        f"pairs={report.pairs_tested}  zero-gap pairs={report.touching_pairs}"
+    )
+    print(
+        f"   {elapsed * 1e3:.0f} ms  "
+        f"({elapsed * 1e6 / max(1, report.pairs_tested):.0f} us/pair)"
+    )
 
 
 def bench_float() -> None:
@@ -56,8 +61,10 @@ def bench_float() -> None:
         r_bkt = verify_packing(squares, side, sign=sign, check_shapes=False, bucket=True)
         t_bkt = time.time() - t0
         assert r_all.valid and r_bkt.valid
-        print(f"   {n:>5}   {r_all.pairs_tested:>10}  {t_all*1e3:>8.1f} ms"
-              f"      {r_bkt.pairs_tested:>10}  {t_bkt*1e3:>8.1f} ms")
+        print(
+            f"   {n:>5}   {r_all.pairs_tested:>10}  {t_all * 1e3:>8.1f} ms"
+            f"      {r_bkt.pairs_tested:>10}  {t_bkt * 1e3:>8.1f} ms"
+        )
 
 
 def bench_degrees() -> None:
@@ -74,14 +81,13 @@ def bench_degrees() -> None:
         field._low_to_high = field._high_to_low[::-1]
         a = [Fraction(rnd.randint(-9999, 9999), rnd.randint(1, 9999)) for _ in range(degree)]
         b = [Fraction(rnd.randint(-9999, 9999), rnd.randint(1, 9999)) for _ in range(degree)]
-        from sqpack.field import _poly_mul
         trials = 200 if degree <= 18 else 40
         t0 = time.time()
-        for _ in range(trials):     # fixed operands: no coefficient blow-up
+        for _ in range(trials):  # fixed operands: no coefficient blow-up
             field._reduce(_poly_mul(a, b))
         dt = (time.time() - t0) / trials
         baseline = baseline or dt
-        print(f"      {degree:>3}   {dt*1e3:>10.2f}   {dt/baseline:>6.1f}x")
+        print(f"      {degree:>3}   {dt * 1e3:>10.2f}   {dt / baseline:>6.1f}x")
 
 
 if __name__ == "__main__":

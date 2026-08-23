@@ -38,15 +38,29 @@ ANALYTIC = {
 def anneal(n: int, seed: int, chains: int = 8, budget: int = 20_000_000):
     """One engine run; returns the best chain's configuration."""
     out = subprocess.run(
-        [str(BIN), "--n", str(n), "--seed", str(seed), "--chains", str(chains),
-         "--budget-moves", str(budget)],
-        capture_output=True, text=True, check=True,
+        [
+            str(BIN),
+            "--n",
+            str(n),
+            "--seed",
+            str(seed),
+            "--chains",
+            str(chains),
+            "--budget-moves",
+            str(budget),
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
     ).stdout
     best = None
     for line in out.splitlines():
         d = json.loads(line)
         if d.get("kind") == "chain" and (best is None or d["best_side"] < best["best_side"]):
             best = d
+    if best is None:
+        msg = f"sqsearch produced no chain records for n={n}, seed={seed}"
+        raise RuntimeError(msg)
     return best
 
 
@@ -61,49 +75,74 @@ def main() -> int:
             a = anneal(n, seed)
             t0 = time.time()
             b = quench_bracket(a["x"], a["y"], a["t"])
-            emit({
-                "kind": "quench", "arm": "annealer->bracket", "n": n, "seed": seed,
-                "analytic": ANALYTIC[n],
-                "annealer_side": a["best_side"], "annealer_gap": a["best_side"] - ANALYTIC[n],
-                "quenched_side": b.side, "quenched_gap": b.side - ANALYTIC[n],
-                "lp_solves": b.lp_solves, "angle_steps": b.angle_steps,
-                "cell_changes": b.cell_changes, "converged": b.converged,
-                "reason": b.reason, "contacts": len(contacts(b.x, b.y, b.theta)),
-                "classes": len(angle_classes(b.theta, 1e-2)),
-                "seconds": time.time() - t0,
-            })
+            emit(
+                {
+                    "kind": "quench",
+                    "arm": "annealer->bracket",
+                    "n": n,
+                    "seed": seed,
+                    "analytic": ANALYTIC[n],
+                    "annealer_side": a["best_side"],
+                    "annealer_gap": a["best_side"] - ANALYTIC[n],
+                    "quenched_side": b.side,
+                    "quenched_gap": b.side - ANALYTIC[n],
+                    "lp_solves": b.lp_solves,
+                    "angle_steps": b.angle_steps,
+                    "cell_changes": b.cell_changes,
+                    "converged": b.converged,
+                    "reason": b.reason,
+                    "contacts": len(contacts(b.x, b.y, b.theta)),
+                    "classes": len(angle_classes(b.theta, 1e-2)),
+                    "seconds": time.time() - t0,
+                }
+            )
             t0 = time.time()
             r = quench(a["x"], a["y"], a["t"], max_rounds=200)
             elapsed = time.time() - t0
-            emit({
-                "kind": "quench", "arm": "annealer->quench", "n": n, "seed": seed,
-                "analytic": ANALYTIC[n],
-                "annealer_side": a["best_side"], "annealer_gap": a["best_side"] - ANALYTIC[n],
-                "quenched_side": r.side, "quenched_gap": r.side - ANALYTIC[n],
-                "lp_solves": r.lp_solves, "angle_steps": r.angle_steps,
-                "cell_changes": r.cell_changes, "converged": r.converged,
-                "reason": r.reason, "contacts": len(contacts(r.x, r.y, r.theta)),
-                "seconds": elapsed,
-            })
+            emit(
+                {
+                    "kind": "quench",
+                    "arm": "annealer->quench",
+                    "n": n,
+                    "seed": seed,
+                    "analytic": ANALYTIC[n],
+                    "annealer_side": a["best_side"],
+                    "annealer_gap": a["best_side"] - ANALYTIC[n],
+                    "quenched_side": r.side,
+                    "quenched_gap": r.side - ANALYTIC[n],
+                    "lp_solves": r.lp_solves,
+                    "angle_steps": r.angle_steps,
+                    "cell_changes": r.cell_changes,
+                    "converged": r.converged,
+                    "reason": r.reason,
+                    "contacts": len(contacts(r.x, r.y, r.theta)),
+                    "seconds": elapsed,
+                }
+            )
 
     # n = 11 only: the same quench with the angles constrained to two classes, and the
     # shared tilt found by golden section rather than by descent. Golden section needs a
     # deterministic objective, so every evaluation re-solves from the SAME centres.
-    seed_cfg = json.loads(subprocess.run(
-        [sys.executable, str(ROOT / "tools/export_trump11.py")],
-        capture_output=True, text=True, check=True).stdout)
+    seed_cfg = json.loads(
+        subprocess.run(
+            [sys.executable, str(ROOT / "tools/export_trump11.py")],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+    )
     tilt = max(round(t, 9) for t in seed_cfg["t"])
     for eps in (1e-5, 1e-3, 1e-2, 1e-1):
         rnd = random.Random(2)
-        X = [v + eps * rnd.uniform(-1, 1) for v in seed_cfg["x"]]
-        Y = [v + eps * rnd.uniform(-1, 1) for v in seed_cfg["y"]]
+        ref_x = [v + eps * rnd.uniform(-1, 1) for v in seed_cfg["x"]]
+        ref_y = [v + eps * rnd.uniform(-1, 1) for v in seed_cfg["y"]]
         start = tilt + eps * rnd.uniform(-1, 1)
         calls = 0
 
-        def s_of(tt):
+        def s_of(tt, ref_x=tuple(ref_x), ref_y=tuple(ref_y)):
             nonlocal calls
             calls += 1
-            got = solve_to_fixed_point([0.0] * 6 + [tt] * 5, X, Y, 11)
+            got = solve_to_fixed_point([0.0] * 6 + [tt] * 5, list(ref_x), list(ref_y), 11)
             return got[0] if got else 1e3
 
         t0 = time.time()
@@ -122,13 +161,21 @@ def main() -> int:
                 fb = s_of(b)
         theta_hat = (lo + hi) / 2
         side = s_of(theta_hat)
-        emit({
-            "kind": "quench", "arm": "angle-class-1d", "n": 11, "eps": eps,
-            "analytic": ANALYTIC[11], "quenched_side": side,
-            "quenched_gap": side - ANALYTIC[11], "theta": theta_hat,
-            "theta_error": theta_hat - tilt, "lp_solves": calls,
-            "seconds": time.time() - t0,
-        })
+        emit(
+            {
+                "kind": "quench",
+                "arm": "angle-class-1d",
+                "n": 11,
+                "eps": eps,
+                "analytic": ANALYTIC[11],
+                "quenched_side": side,
+                "quenched_gap": side - ANALYTIC[11],
+                "theta": theta_hat,
+                "theta_error": theta_hat - tilt,
+                "lp_solves": calls,
+                "seconds": time.time() - t0,
+            }
+        )
     return 0
 
 

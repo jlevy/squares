@@ -12,3 +12,34 @@ opt-level = 3
 lto = "fat"
 codegen-units = 1
 panic = "abort"
+
+# The lint floor. Pedantic is on because this crate's output feeds a record that claims
+# things about mathematics: the same argument as the Python side, where a high floor
+# turned up a silent-truncation risk in field arithmetic and a closure capture one edit
+# away from a bug.
+#
+# Exceptions are listed with a reason rather than blanket-allowed.
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+# Geometry code is full of deliberate float comparisons against exact zero -- that is
+# the whole point of a separating-axis test, and `sqpack` is what decides validity.
+float_cmp = "allow"
+# `n`, `x`, `y`, `t` are the problem's own names; renaming them would obscure the maths.
+many_single_char_names = "allow"
+similar_names = "allow"
+# Casts between usize and f64 are pervasive in indexing geometry and are checked by the
+# selftest's known-answer cases rather than by the type system.
+cast_precision_loss = "allow"
+cast_possible_truncation = "allow"
+cast_sign_loss = "allow"
+# `inline(always)` on the pair kernel and RNG is measured, not habitual: the crate
+# documents the caching of cos/sin as worth ~40% of the kernel, and these are the
+# functions that run 1e9 times per campaign round.
+inline_always = "allow"
+# The geometry functions take eight scalars because they take two poses; bundling them
+# into structs costs a copy in the hottest loop in the project.
+too_many_arguments = "allow"

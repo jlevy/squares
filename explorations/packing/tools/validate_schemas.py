@@ -17,8 +17,13 @@ That makes the enforcement real for both profiles with no network access, which
 is what `test.sh` needs. Run the CLI separately for an independent check of the
 Markdown artifacts.
 """
+
 from __future__ import annotations
-import json, pathlib, sys, yaml
+
+import pathlib
+import sys
+
+import yaml
 from jsonschema import Draft202012Validator
 
 FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
@@ -48,9 +53,11 @@ def payload_and_meta(path: pathlib.Path) -> tuple[dict, dict]:
 def check(path: pathlib.Path) -> list[str]:
     errs: list[str] = []
     payload, meta = payload_and_meta(path)
-    for key in ("contract", "schema", "status"):
-        if not meta.get(key):
-            errs.append(f"softschema.{key} missing")
+    errs.extend(
+        f"softschema.{key} missing"
+        for key in ("contract", "schema", "status")
+        if not meta.get(key)
+    )
     if errs:
         return errs
     if meta["status"] != "enforced":
@@ -60,7 +67,7 @@ def check(path: pathlib.Path) -> list[str]:
     # live outside frontier/, which the defect log does.
     schema_path = (path.parent / meta["schema"]).resolve()
     if not schema_path.exists():
-        return errs + [f"declared schema not found: {meta['schema']}"]
+        return [*errs, f"declared schema not found: {meta['schema']}"]
     v = Draft202012Validator(yaml.safe_load(schema_path.read_text(encoding="utf-8")))
     for e in sorted(v.iter_errors(payload), key=lambda e: list(e.path)):
         loc = "/".join(str(x) for x in e.path) or "<root>"
@@ -78,13 +85,29 @@ def cross_checks() -> list[str]:
             errs.append(f"{kind}-strategies: count {d['count']} != {len(ss)} entries")
         if [s["id"] for s in ss] != list(range(1, len(ss) + 1)):
             errs.append(f"{kind}-strategies: ids are not 1..{len(ss)}")
+        # `outcome` is the machine-readable verdict; `note` is the prose the tables
+        # actually render. Nothing compared them, so a strategy could be tagged
+        # `produced_records` while its rendered cell says "No" -- the same silent
+        # disagreement between a value and its display twin as defect D-022.
+        # The two catalogues name this field differently: search records an `outcome`,
+        # proof a `status`. Only the search side has a yes/no prose twin to compare.
+        if kind == "search":
+            for entry in ss:
+                says_yes = entry["note"].lstrip().lower().startswith("yes")
+                if says_yes != (entry["outcome"] == "produced_records"):
+                    errs.append(
+                        f"{kind}-strategies: entry {entry['id']} has outcome "
+                        f"{entry['outcome']!r} but its note reads {entry['note'][:30]!r}"
+                    )
         unknown = {s["family"] for s in ss} - set(d["families"])
         if unknown:
             errs.append(f"{kind}-strategies: families not declared: {sorted(unknown)}")
     a = yaml.safe_load((FRONTIER / "asymptotic-waste-bounds.yaml").read_text(encoding="utf-8"))
-    for b in a["lower_bounds"]:
-        if b["confidence"] == "reconstructed" and not b.get("note"):
-            errs.append(f"asymptotic: reconstructed bound {b['source_key']} carries no note")
+    errs.extend(
+        f"asymptotic: reconstructed bound {b['source_key']} carries no note"
+        for b in a["lower_bounds"]
+        if b["confidence"] == "reconstructed" and not b.get("note")
+    )
     # `value` is what the tables render; `value_str` is the display duplicate beside it.
     # Nothing compared them until a negative control tried to make the drift check fire
     # by editing `value_str` and it did not (defect D-022): the two could disagree in
@@ -158,9 +181,14 @@ def main() -> int:
         print(f"FAIL cross-check: {e}", file=sys.stderr)
     if failures:
         return 1
-    print(f"  {len(md)} frontmatter-md artifacts + {len(datasets)} pure-yaml datasets "
-          f"validate against their declared schemas")
-    print(f"  schemas in use: {sorted({yaml.safe_load(p.read_text())['softschema']['schema'] for p in datasets} | {'square-packing-case.schema.yaml'})}")
+    print(
+        f"  {len(md)} frontmatter-md artifacts + {len(datasets)} pure-yaml datasets "
+        f"validate against their declared schemas"
+    )
+    declared = {
+        yaml.safe_load(d.read_text(encoding="utf-8"))["softschema"]["schema"] for d in datasets
+    }
+    print(f"  schemas in use: {sorted(declared | {'square-packing-case.schema.yaml'})}")
     return 0
 
 

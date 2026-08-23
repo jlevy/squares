@@ -46,8 +46,10 @@ def run_one(c: dict) -> tuple[bool, str]:
         if text.count(old) != 1:
             return False, f"anchor appears {text.count(old)} times, expected exactly 1"
         target.write_text(text.replace(old, new, 1), encoding="utf-8")
+        # check=False deliberately: a non-zero exit is the EXPECTED outcome here, and
+        # inspecting it is this function's whole job.
         proc = subprocess.run(
-            c["run"], shell=True, cwd=ROOT, capture_output=True, text=True
+            c["run"], shell=True, cwd=ROOT, capture_output=True, text=True, check=False
         )
         output = proc.stdout + proc.stderr
         if proc.returncode == 0:
@@ -75,8 +77,7 @@ def main() -> int:
             failures += 1
             print(f"  CONTROL FAILED  {c['name']}: {detail}", file=sys.stderr)
     if failures:
-        print(f"{failures} of {len(controls)} negative controls did not fire",
-              file=sys.stderr)
+        print(f"{failures} of {len(controls)} negative controls did not fire", file=sys.stderr)
         return 1
     print(f"  {len(controls)} negative controls fire as expected")
     return 0

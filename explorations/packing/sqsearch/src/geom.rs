@@ -92,10 +92,7 @@ pub fn contain_penalty(x: f64, y: f64, cos: f64, sin: f64, s: f64) -> f64 {
 /// once instead of per axis is worth ~40% of the pair cost, and this crate's
 /// tests check the simplification against the naive four-axis form.
 #[inline(always)]
-pub fn pair_penalty(
-    xi: f64, yi: f64, ci: f64, si: f64,
-    xj: f64, yj: f64, cj: f64, sj: f64,
-) -> f64 {
+pub fn pair_penalty(xi: f64, yi: f64, ci: f64, si: f64, xj: f64, yj: f64, cj: f64, sj: f64) -> f64 {
     let dx = xi - xj;
     let dy = yi - yj;
     let h = HALF + HALF * ((ci * cj + si * sj).abs() + (si * cj - ci * sj).abs());
@@ -124,21 +121,28 @@ pub fn pair_penalty(
 /// finite-lambda constrained optimum, while a squared one has vanishing gradient
 /// as the overlap closes and never quite reaches zero.
 #[inline(always)]
-pub fn pair_depth(
-    xi: f64, yi: f64, ci: f64, si: f64,
-    xj: f64, yj: f64, cj: f64, sj: f64,
-) -> f64 {
+pub fn pair_depth(xi: f64, yi: f64, ci: f64, si: f64, xj: f64, yj: f64, cj: f64, sj: f64) -> f64 {
     let dx = xi - xj;
     let dy = yi - yj;
     let h = HALF + HALF * ((ci * cj + si * sj).abs() + (si * cj - ci * sj).abs());
     let mut g = (dx * ci + dy * si).abs() - h;
     let g2 = (dy * ci - dx * si).abs() - h;
-    if g2 > g { g = g2; }
+    if g2 > g {
+        g = g2;
+    }
     let g2 = (dx * cj + dy * sj).abs() - h;
-    if g2 > g { g = g2; }
+    if g2 > g {
+        g = g2;
+    }
     let g2 = (dy * cj - dx * sj).abs() - h;
-    if g2 > g { g = g2; }
-    if g < 0.0 { -g } else { 0.0 }
+    if g2 > g {
+        g = g2;
+    }
+    if g < 0.0 {
+        -g
+    } else {
+        0.0
+    }
 }
 
 /// Side of the smallest axis-aligned square containing every square of `c`.
@@ -165,8 +169,7 @@ pub fn total_overlap(c: &Config) -> f64 {
     for i in 0..c.n {
         for j in (i + 1)..c.n {
             total += pair_depth(
-                c.x[i], c.y[i], c.cos[i], c.sin[i],
-                c.x[j], c.y[j], c.cos[j], c.sin[j],
+                c.x[i], c.y[i], c.cos[i], c.sin[i], c.x[j], c.y[j], c.cos[j], c.sin[j],
             );
         }
     }
@@ -192,8 +195,7 @@ pub fn penalty(c: &Config, s: f64) -> f64 {
         total += contain_penalty(c.x[i], c.y[i], c.cos[i], c.sin[i], s);
         for j in (i + 1)..c.n {
             total += pair_penalty(
-                c.x[i], c.y[i], c.cos[i], c.sin[i],
-                c.x[j], c.y[j], c.cos[j], c.sin[j],
+                c.x[i], c.y[i], c.cos[i], c.sin[i], c.x[j], c.y[j], c.cos[j], c.sin[j],
             );
         }
     }

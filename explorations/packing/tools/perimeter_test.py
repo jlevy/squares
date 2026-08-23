@@ -32,8 +32,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from sqpack.quench import quench, quench_bracket, solve_to_fixed_point  # noqa: E402
-from sqpack.verify import corners_from_poses, float_sign, verify_packing  # noqa: E402
+from sqpack.quench import quench, quench_bracket, solve_to_fixed_point
+from sqpack.verify import corners_from_poses, float_sign, verify_packing
 
 # The tightest bound the solver's own guarantee permits. Anything looser would let a
 # D-014 through; anything tighter would reject solves that are correct by construction.
@@ -51,17 +51,15 @@ def normalize(x, y, theta):
     fault was here.
     """
     half = [0.5 * (abs(math.cos(t)) + abs(math.sin(t))) for t in theta]
-    lox = min(a - h for a, h in zip(x, half))
-    loy = min(b - h for b, h in zip(y, half))
+    lox = min(a - h for a, h in zip(x, half, strict=True))
+    loy = min(b - h for b, h in zip(y, half, strict=True))
     return [a - lox for a in x], [b - loy for b in y]
 
 
 def oracle(x, y, theta, side, label: str) -> list[str]:
     """Check one configuration against sqpack. Returns failure descriptions."""
     x, y = normalize(x, y, theta)
-    report = verify_packing(
-        corners_from_poses(x, y, theta), side, sign=float_sign(ORACLE_TOL)
-    )
+    report = verify_packing(corners_from_poses(x, y, theta), side, sign=float_sign(ORACLE_TOL))
     if report.valid:
         return []
     return [f"{label}: {kind} — {msg}" for kind, msg in report.failures[:4]]
@@ -70,22 +68,38 @@ def oracle(x, y, theta, side, label: str) -> list[str]:
 def enclosing_side(x, y, theta) -> float:
     half = [0.5 * (abs(math.cos(t)) + abs(math.sin(t))) for t in theta]
     return max(
-        max(a + h for a, h in zip(x, half)) - min(a - h for a, h in zip(x, half)),
-        max(b + h for b, h in zip(y, half)) - min(b - h for b, h in zip(y, half)),
+        max(a + h for a, h in zip(x, half, strict=True))
+        - min(a - h for a, h in zip(x, half, strict=True)),
+        max(b + h for b, h in zip(y, half, strict=True))
+        - min(b - h for b, h in zip(y, half, strict=True)),
     )
 
 
 def anneal(n: int, seed: int) -> dict:
     out = subprocess.run(
-        [str(BIN), "--n", str(n), "--seed", str(seed), "--chains", "4",
-         "--budget-moves", "4000000"],
-        capture_output=True, text=True, check=True,
+        [
+            str(BIN),
+            "--n",
+            str(n),
+            "--seed",
+            str(seed),
+            "--chains",
+            "4",
+            "--budget-moves",
+            "4000000",
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
     ).stdout
     best = None
     for line in out.splitlines():
         d = json.loads(line)
         if d.get("kind") == "chain" and (best is None or d["best_side"] < best["best_side"]):
             best = d
+    if best is None:
+        msg = f"sqsearch produced no chain records for n={n}, seed={seed}"
+        raise RuntimeError(msg)
     return best
 
 
@@ -93,14 +107,19 @@ def main() -> int:
     failures: list[str] = []
     checked = 0
     seed_cfg = json.loads(
-        subprocess.run([sys.executable, str(ROOT / "tools/export_trump11.py")],
-                       capture_output=True, text=True, check=True).stdout
+        subprocess.run(
+            [sys.executable, str(ROOT / "tools/export_trump11.py")],
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
     )
 
     # 1. The reference packing itself. If the oracle rejects this, the oracle is wrong
     #    and nothing below it means anything.
-    errs = oracle(seed_cfg["x"], seed_cfg["y"], seed_cfg["t"], seed_cfg["side"],
-                  "reference trump11")
+    errs = oracle(
+        seed_cfg["x"], seed_cfg["y"], seed_cfg["t"], seed_cfg["side"], "reference trump11"
+    )
     failures += errs
     checked += 1
 
@@ -108,8 +127,13 @@ def main() -> int:
     if BIN.exists():
         for n in (5, 10, 11):
             best = anneal(n, 1)
-            failures += oracle(best["x"], best["y"], best["t"],
-                               best["best_side"] + ORACLE_TOL, f"sqsearch n={n}")
+            failures += oracle(
+                best["x"],
+                best["y"],
+                best["t"],
+                best["best_side"] + ORACLE_TOL,
+                f"sqsearch n={n}",
+            )
             checked += 1
     else:
         print("  sqsearch binary absent, skipping engine cells", file=sys.stderr)
@@ -124,14 +148,20 @@ def main() -> int:
             t = [v + eps * rnd.uniform(-1, 1) for v in seed_cfg["t"]]
             got = solve_to_fixed_point(t, x, y, len(x))
             if got:
-                failures += oracle(got[1], got[2], t, got[0] + ORACLE_TOL,
-                                   f"solve_to_fixed_point eps={eps:g} #{trial}")
+                failures += oracle(
+                    got[1],
+                    got[2],
+                    t,
+                    got[0] + ORACLE_TOL,
+                    f"solve_to_fixed_point eps={eps:g} #{trial}",
+                )
                 checked += 1
             for name, fn in (("quench", quench), ("quench_bracket", quench_bracket)):
                 r = fn(x, y, t)
                 if math.isfinite(r.side):
-                    failures += oracle(r.x, r.y, r.theta, r.side + ORACLE_TOL,
-                                       f"{name} eps={eps:g} #{trial}")
+                    failures += oracle(
+                        r.x, r.y, r.theta, r.side + ORACLE_TOL, f"{name} eps={eps:g} #{trial}"
+                    )
                     # The side a component reports must also be a side the packing fits
                     # in: a claim about `s` is as much a claim as a claim about validity.
                     actual = enclosing_side(r.x, r.y, r.theta)
@@ -143,13 +173,17 @@ def main() -> int:
                     checked += 1
 
     if failures:
-        print(f"PERIMETER BREACH: {len(failures)} of {checked} configurations rejected",
-              file=sys.stderr)
+        print(
+            f"PERIMETER BREACH: {len(failures)} of {checked} configurations rejected",
+            file=sys.stderr,
+        )
         for f in failures[:10]:
             print(f"  {f}", file=sys.stderr)
         return 1
-    print(f"  {checked} configurations from every emitting component pass sqpack "
-          f"at tol {ORACLE_TOL:g}")
+    print(
+        f"  {checked} configurations from every emitting component pass sqpack "
+        f"at tol {ORACLE_TOL:g}"
+    )
     return 0
 
 

@@ -12,6 +12,7 @@ Usage:
     python3 tools/render_defects.py            # regenerate defects.md
     python3 tools/render_defects.py --check     # fail if it is stale
 """
+
 from __future__ import annotations
 
 import pathlib
@@ -49,22 +50,40 @@ def render(d: dict) -> str:
     unprotected = [x for x in ds if x["regression"] == "none" and x["status"] != "outstanding"]
     recurrences = [x for x in ds if x.get("recurrence_of")]
 
+    repeats = ", ".join(f"{d['id']} repeats {d['recurrence_of']}" for d in recurrences)
+    plural = "is" if len(open_) == 1 else "are"
     out += [
         "## The short version",
         "",
-        f"- **{len(sound)} soundness defects** — the system asserting something false about the"
-        f" mathematics. {len(flat)} of them pointed in the *flattering* direction, which is the"
-        " dangerous one: the error looks like success.",
-        f"- **{len(unprotected)} fixes left no regression check behind.** That list is the best"
-        " predictor of what comes back — and it already has, once"
-        f" ({', '.join(f'{x[chr(105)+chr(100)]} repeats {x[chr(114)+chr(101)+chr(99)+chr(117)+chr(114)+chr(114)+chr(101)+chr(110)+chr(99)+chr(101)+chr(95)+chr(111)+chr(102)]}' for x in recurrences) or 'none yet'}).",
-        f"- **{len(open_)} {chr(105)+chr(115) if len(open_)==1 else chr(97)+chr(114)+chr(101)} still open** (outstanding or contained), every one carrying a bead.",
+        (
+            f"- **{len(sound)} soundness defects** — the system asserting something "
+            f"false about the mathematics. {len(flat)} of them pointed in the "
+            "*flattering* direction, which is the dangerous one: the error looks like "
+            "success."
+        ),
+        (
+            f"- **{len(unprotected)} fixes left no regression check behind.** That "
+            "list is the best predictor of what comes back — and it already has, once "
+            f"({repeats or 'none yet'})."
+        ),
+        (
+            f"- **{len(open_)} {plural} still open** (outstanding or contained), every "
+            "one carrying a bead."
+        ),
         "",
     ]
 
-    out += ["## What caught them", "", "| Detector | Count | What it is |", "| --- | ---: | --- |"]
+    out += [
+        "## What caught them",
+        "",
+        "| Detector | Count | What it is |",
+        "| --- | ---: | --- |",
+    ]
     meaning = {
-        "pre_registered_rule": "a rule written down before the measurement, e.g. “beating the record means you have a bug”",
+        "pre_registered_rule": (
+            "a rule written down before the measurement, e.g. “beating the record "
+            "means you have a bug”"
+        ),
         "control_cell": "a cell of the sweep whose answer is known in advance",
         "review": "a human or agent reading the work against a checklist",
         "anomaly": "a result that made no sense, chased down",
@@ -73,22 +92,29 @@ def render(d: dict) -> str:
         "design": "caught while designing, before it reached data",
         "gate": "the automated test suite",
     }
-    for k, v in tally(ds, "detected_by", list(meaning)):
-        out.append(f"| `{k}` | {v} | {meaning.get(k, '')} |")
+    for name, count in tally(ds, "detected_by", list(meaning)):
+        out.append(f"| `{name}` | {count} | {meaning.get(name, '')} |")
     out += [
         "",
-        "The line worth reading twice: **the automated gate caught none of them.** Gates confirm"
-        " what you already thought to check. Every defect here was found by a device built to be"
-        " *surprised* — a control cell, a pre-registered rule, a generated view contradicting"
-        " itself — or by someone reading carefully.",
+        (
+            "The line worth reading twice: **the automated gate caught none of them.** "
+            "Gates confirm what you already thought to check. Every defect here was "
+            "found by a device built to be *surprised* — a control cell, a "
+            "pre-registered rule, a generated view contradicting itself — or by "
+            "someone reading carefully."
+        ),
         "",
     ]
 
     out += ["## Where they arise", "", "| Layer | Count |", "| --- | ---: |"]
-    for k, v in tally(ds, "layer", ["engine", "quench", "verifier", "record", "tooling", "docs"]):
+    for k, v in tally(
+        ds, "layer", ["engine", "quench", "verifier", "record", "tooling", "docs"]
+    ):
         out.append(f"| {k} | {v} |")
     out += ["", "## By kind", "", "| Class | Count |", "| --- | ---: |"]
-    for k, v in tally(ds, "class", ["soundness", "validity", "bookkeeping", "robustness", "performance"]):
+    for k, v in tally(
+        ds, "class", ["soundness", "validity", "bookkeeping", "robustness", "performance"]
+    ):
         out.append(f"| {k} | {v} |")
     out.append("")
 
@@ -107,10 +133,16 @@ def render(d: dict) -> str:
         out.append("")
 
     if open_:
-        out += ["## Still open", "", "| id | status | severity | title | bead |", "| --- | --- | --- | --- | --- |"]
+        out += [
+            "## Still open",
+            "",
+            "| id | status | severity | title | bead |",
+            "| --- | --- | --- | --- | --- |",
+        ]
         for x in open_:
             out.append(
-                f"| {x['id']} | {x['status']} | {x['severity']} | {x['title']} | `{x.get('bead', '')}` |"
+                f"| {x['id']} | {x['status']} | {x['severity']} "
+                f"| {x['title']} | `{x.get('bead', '')}` |"
             )
         out.append("")
 
@@ -123,7 +155,8 @@ def render(d: dict) -> str:
     for x in ds:
         out.append(
             f"| [{x['id']}]({x['recorded_in']}) | {x['date']} | {x['layer']} | {x['class']} "
-            f"| {x.get('direction', '')} | `{x['detected_by']}` | {x['severity']} | {x['status']} "
+            f"| {x.get('direction', '')} | `{x['detected_by']}` "
+            f"| {x['severity']} | {x['status']} "
             f"| {x['title']} |"
         )
     out.append("")
@@ -135,12 +168,17 @@ def main() -> int:
     if "--check" in sys.argv:
         current = OUT.read_text(encoding="utf-8") if OUT.exists() else ""
         # Compare content, not typography: the formatter owns wrapping and quotes.
-        fold = str.maketrans({"’": "'", "“": '"', "”": '"', "—": "-"})
-        norm = lambda t: " ".join(t.translate(fold).split())
+        # Compare content, not typography: the formatter owns wrapping and quote style.
+        fold = str.maketrans({"\u2019": "'", "\u201c": '"', "\u201d": '"', "\u2014": "-"})
+
+        def norm(text: str) -> str:
+            return " ".join(text.translate(fold).split())
+
         if norm(current) != norm(rendered):
             print("FAIL defects.md is stale; run tools/render_defects.py", file=sys.stderr)
             return 1
-        print(f"  defects.md matches defects.yaml ({len(yaml.safe_load(SRC.read_text())['defects'])} defects)")
+        count = len(yaml.safe_load(SRC.read_text(encoding="utf-8"))["defects"])
+        print(f"  defects.md matches defects.yaml ({count} defects)")
         return 0
     OUT.write_text(rendered, encoding="utf-8")
     print(f"wrote {OUT.name}")

@@ -95,9 +95,14 @@ fn scatter(c: &mut Config, s0: f64, rng: &mut Rng) {
 /// One anneal. Returns the best valid side seen, or `f64::INFINITY` if the run
 /// never reached a valid configuration.
 fn anneal(
-    c: &mut Config, p: &Params, rng: &mut Rng,
-    best: &mut Config, best_side: &mut f64, best_overlap: &mut f64,
-    moves: &mut u64, accepted: &mut u64,
+    c: &mut Config,
+    p: &Params,
+    rng: &mut Rng,
+    best: &mut Config,
+    best_side: &mut f64,
+    best_overlap: &mut f64,
+    moves: &mut u64,
+    accepted: &mut u64,
 ) {
     let cooling = (p.t_cold / p.t_hot).powf(1.0 / p.steps.max(1) as f64);
     let ramp = (p.lambda1 / p.lambda0).powf(1.0 / p.steps.max(1) as f64);
@@ -149,7 +154,11 @@ fn anneal(
         // pair tests, so this is cheaper than tracking extremes incrementally.
         let old_local = local_overlap(c, k, ox, oy, ocos, osin);
         let new_local = local_overlap(c, k, nx, ny, ncos, nsin);
-        c.x[k] = nx; c.y[k] = ny; c.t[k] = nt; c.cos[k] = ncos; c.sin[k] = nsin;
+        c.x[k] = nx;
+        c.y[k] = ny;
+        c.t[k] = nt;
+        c.cos[k] = ncos;
+        c.sin[k] = nsin;
         let new_side = required_side(c);
         let new_overlap = overlap - old_local + new_local;
         let new_energy = new_side + lambda * new_overlap;
@@ -171,7 +180,11 @@ fn anneal(
                 best.sin.copy_from_slice(&c.sin);
             }
         } else {
-            c.x[k] = ox; c.y[k] = oy; c.t[k] = ot; c.cos[k] = ocos; c.sin[k] = osin;
+            c.x[k] = ox;
+            c.y[k] = oy;
+            c.t[k] = ot;
+            c.cos[k] = ocos;
+            c.sin[k] = osin;
         }
 
         temperature *= cooling;
@@ -198,8 +211,16 @@ pub fn run_chain(n: usize, seed: u64, chain: u64, p: &Params, budget_moves: u64)
             scatter(&mut c, s0, &mut rng);
         }
         restarts += 1;
-        anneal(&mut c, p, &mut rng, &mut best, &mut best_side, &mut best_overlap,
-               &mut moves, &mut accepted);
+        anneal(
+            &mut c,
+            p,
+            &mut rng,
+            &mut best,
+            &mut best_side,
+            &mut best_overlap,
+            &mut moves,
+            &mut accepted,
+        );
     }
 
     // Recompute from the stored configuration rather than reporting the incremental
@@ -209,7 +230,14 @@ pub fn run_chain(n: usize, seed: u64, chain: u64, p: &Params, budget_moves: u64)
     // silently refusing a genuine one. The guard has to be a measurement, not a memory.
     let best_overlap = total_overlap(&best);
 
-    Outcome { best_side, best, best_overlap, restarts, moves, accepted }
+    Outcome {
+        best_side,
+        best,
+        best_overlap,
+        restarts,
+        moves,
+        accepted,
+    }
 }
 
 /// Perturb every pose by uniform noise of size `eps`: positions in length units,
@@ -276,7 +304,12 @@ pub fn max_deviation(a: &Config, b: &Config) -> f64 {
 /// landed. Every restart re-perturbs the *seed*, never the chain's best, so each
 /// restart is an independent trial of the same question.
 pub fn run_entry_chain(
-    seed_cfg: &Config, seed: u64, chain: u64, p: &Params, budget_moves: u64, eps: f64,
+    seed_cfg: &Config,
+    seed: u64,
+    chain: u64,
+    p: &Params,
+    budget_moves: u64,
+    eps: f64,
 ) -> Outcome {
     let mut rng = Rng::keyed(seed, chain);
     let n = seed_cfg.n;
@@ -290,10 +323,25 @@ pub fn run_entry_chain(
     while moves < budget_moves && restarts < p.max_restarts {
         perturb(&mut c, seed_cfg, eps, &mut rng);
         restarts += 1;
-        anneal(&mut c, p, &mut rng, &mut best, &mut best_side, &mut best_overlap,
-               &mut moves, &mut accepted);
+        anneal(
+            &mut c,
+            p,
+            &mut rng,
+            &mut best,
+            &mut best_side,
+            &mut best_overlap,
+            &mut moves,
+            &mut accepted,
+        );
     }
 
     let best_overlap = total_overlap(&best);
-    Outcome { best_side, best, best_overlap, restarts, moves, accepted }
+    Outcome {
+        best_side,
+        best,
+        best_overlap,
+        restarts,
+        moves,
+        accepted,
+    }
 }

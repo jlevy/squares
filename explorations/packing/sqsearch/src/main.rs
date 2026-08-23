@@ -32,16 +32,31 @@ fn json_params(p: &Params) -> String {
     format!(
         "{{\"steps\":{},\"t_hot\":{},\"t_cold\":{},\"lambda0\":{},\"lambda1\":{},\
 \"move_rotate\":{},\"p_rotate\":{},\"p_reseed\":{},\"max_restarts\":{}}}",
-        p.steps, p.t_hot, p.t_cold, p.lambda0, p.lambda1,
-        p.move_rotate, p.p_rotate, p.p_reseed, p.max_restarts
+        p.steps,
+        p.t_hot,
+        p.t_cold,
+        p.lambda0,
+        p.lambda1,
+        p.move_rotate,
+        p.p_rotate,
+        p.p_reseed,
+        p.max_restarts
     )
 }
 
 fn json_config(c: &geom::Config) -> String {
     let f = |v: &Vec<f64>| {
-        v.iter().map(|z| format!("{z:.17e}")).collect::<Vec<_>>().join(",")
+        v.iter()
+            .map(|z| format!("{z:.17e}"))
+            .collect::<Vec<_>>()
+            .join(",")
     };
-    format!("\"x\":[{}],\"y\":[{}],\"t\":[{}]", f(&c.x), f(&c.y), f(&c.t))
+    format!(
+        "\"x\":[{}],\"y\":[{}],\"t\":[{}]",
+        f(&c.x),
+        f(&c.y),
+        f(&c.t)
+    )
 }
 
 fn main() {
@@ -54,7 +69,10 @@ fn main() {
         // Emit this crate's pair verdict on deterministic near-contact pairs, so the
         // Python oracle can check the two codebases against each other. sqsearch owns
         // move-loop *energy*, sqpack owns *validity*; this is where they must agree.
-        pairdump(arg(&args, "--pairs", 20000u64), arg(&args, "--seed", 0x5EEDu64));
+        pairdump(
+            arg(&args, "--pairs", 20000u64),
+            arg(&args, "--seed", 0x5EEDu64),
+        );
         return;
     }
 
@@ -82,7 +100,10 @@ fn main() {
     };
 
     if threads > 0 {
-        rayon::ThreadPoolBuilder::new().num_threads(threads).build_global().unwrap();
+        rayon::ThreadPoolBuilder::new()
+            .num_threads(threads)
+            .build_global()
+            .unwrap();
     }
 
     let started = std::time::Instant::now();
@@ -103,7 +124,14 @@ fn main() {
         println!(
             "{{\"kind\":\"chain\",\"n\":{},\"seed\":{},\"chain\":{},\"best_side\":{:.17e},\
              \"overlap\":{:.3e},\"moves\":{},\"restarts\":{},\"accepted\":{},{}}}",
-            n, seed, chain, o.best_side, o.best_overlap, o.moves, o.restarts, o.accepted,
+            n,
+            seed,
+            chain,
+            o.best_side,
+            o.best_overlap,
+            o.moves,
+            o.restarts,
+            o.accepted,
             json_config(&o.best)
         );
         if o.best_side < best_side {
@@ -161,7 +189,9 @@ fn read_config(path: &str) -> geom::Config {
         .unwrap_or_else(|e| panic!("cannot read seed config {path}: {e}"));
     let field = |name: &str| -> Vec<f64> {
         let key = format!("\"{name}\"");
-        let at = text.find(&key).unwrap_or_else(|| panic!("seed config has no {name}"));
+        let at = text
+            .find(&key)
+            .unwrap_or_else(|| panic!("seed config has no {name}"));
         let open = text[at..].find('[').expect("array") + at;
         let close = text[open..].find(']').expect("array end") + open;
         text[open + 1..close]
@@ -170,7 +200,10 @@ fn read_config(path: &str) -> geom::Config {
             .collect()
     };
     let (x, y, t) = (field("x"), field("y"), field("t"));
-    assert!(x.len() == y.len() && y.len() == t.len(), "seed config arrays differ in length");
+    assert!(
+        x.len() == y.len() && y.len() == t.len(),
+        "seed config arrays differ in length"
+    );
     let mut c = geom::Config::new(x.len());
     for k in 0..x.len() {
         c.x[k] = x[k];
@@ -187,12 +220,12 @@ fn read_config(path: &str) -> geom::Config {
 /// *rate* -- what fraction of independent trials return -- and a summary that has
 /// already averaged cannot be re-analysed against a different return threshold.
 fn basin_entry(args: &[String]) {
-    let path: String = arg(&args, "--seed-config", String::from("seed.json"));
+    let path: String = arg(args, "--seed-config", String::from("seed.json"));
     let seed_cfg = read_config(&path);
-    let seed: u64 = arg(&args, "--seed", 0x5EED);
-    let trials: u64 = arg(&args, "--trials", 40);
-    let budget: u64 = arg(&args, "--budget-moves", 2_000_000);
-    let eps_list: String = arg(&args, "--eps", String::from("1e-5,1e-4,1e-3,1e-2,1e-1"));
+    let seed: u64 = arg(args, "--seed", 0x5EED);
+    let trials: u64 = arg(args, "--trials", 40);
+    let budget: u64 = arg(args, "--budget-moves", 2_000_000);
+    let eps_list: String = arg(args, "--eps", String::from("1e-5,1e-4,1e-3,1e-2,1e-1"));
 
     // `--t-hot-scale s` sets t_hot = s * eps per cell, which is what makes this a
     // *local quench* rather than a fresh search: a chain started 1e-3 away from a
@@ -201,19 +234,19 @@ fn basin_entry(args: &[String]) {
     // Passing --t-hot instead pins one temperature across the sweep, which is the
     // right instrument for the different question of whether the campaign's own
     // annealer holds the basin when started inside it.
-    let t_hot_scale: f64 = arg(&args, "--t-hot-scale", 1.0);
-    let t_hot_fixed: f64 = arg(&args, "--t-hot", f64::NAN);
+    let t_hot_scale: f64 = arg(args, "--t-hot-scale", 1.0);
+    let t_hot_fixed: f64 = arg(args, "--t-hot", f64::NAN);
 
     let mut p = Params {
-        steps: arg(&args, "--steps", 400_000),
+        steps: arg(args, "--steps", 400_000),
         t_hot: f64::NAN,
-        t_cold: arg(&args, "--t-cold", 1e-12),
-        lambda0: arg(&args, "--lambda0", 2.0),
-        lambda1: arg(&args, "--lambda1", 1e6),
-        move_rotate: arg(&args, "--move-rotate", 2.0),
-        p_rotate: arg(&args, "--p-rotate", 0.35),
-        p_reseed: arg(&args, "--p-reseed", 0.5),
-        max_restarts: arg(&args, "--max-restarts", 1),
+        t_cold: arg(args, "--t-cold", 1e-12),
+        lambda0: arg(args, "--lambda0", 2.0),
+        lambda1: arg(args, "--lambda1", 1e6),
+        move_rotate: arg(args, "--move-rotate", 2.0),
+        p_rotate: arg(args, "--p-rotate", 0.35),
+        p_reseed: arg(args, "--p-reseed", 0.5),
+        max_restarts: arg(args, "--max-restarts", 1),
     };
 
     let seed_side = geom::required_side(&seed_cfg);
@@ -260,8 +293,19 @@ fn basin_entry(args: &[String]) {
                 "{{\"kind\":\"entry\",\"n\":{},\"eps\":{:.3e},\"trial\":{},\"seed\":{},\
 \"t_hot\":{:.3e},\"feasible\":{},\"best_side\":{},\"seed_side\":{:.17e},\"side_gap\":{},\
 \"max_dev\":{},\"overlap\":{:.3e},\"moves\":{},\"restarts\":{}}}",
-                seed_cfg.n, eps, trial, seed, p.t_hot, o.best_side.is_finite(),
-                side, seed_side, gap, dev_s, o.best_overlap, o.moves, o.restarts
+                seed_cfg.n,
+                eps,
+                trial,
+                seed,
+                p.t_hot,
+                o.best_side.is_finite(),
+                side,
+                seed_side,
+                gap,
+                dev_s,
+                o.best_overlap,
+                o.moves,
+                o.restarts
             );
         }
     }
@@ -273,6 +317,10 @@ fn basin_entry(args: &[String]) {
 }
 
 /// Checks that must hold before any number this binary prints means anything.
+// One long function on purpose: the selftest is a checklist, and reading it top to
+// bottom is how you audit what the engine claims before any of its numbers are recorded.
+// Splitting it into helpers would hide the list.
+#[allow(clippy::too_many_lines)]
 fn selftest() {
     let mut failures = 0;
 
@@ -280,19 +328,42 @@ fn selftest() {
     let mut r = rng::Rng::keyed(1, 1);
     let mut worst: f64 = 0.0;
     for _ in 0..200_000 {
-        let (xi, yi, ti) = (r.signed() * 3.0, r.signed() * 3.0, r.f64() * 6.283);
-        let (xj, yj, tj) = (r.signed() * 3.0, r.signed() * 3.0, r.f64() * 6.283);
+        let (xi, yi, ti) = (
+            r.signed() * 3.0,
+            r.signed() * 3.0,
+            r.f64() * std::f64::consts::TAU,
+        );
+        let (xj, yj, tj) = (
+            r.signed() * 3.0,
+            r.signed() * 3.0,
+            r.f64() * std::f64::consts::TAU,
+        );
         let (ci, si, cj, sj) = (ti.cos(), ti.sin(), tj.cos(), tj.sin());
         let fast = geom::pair_penalty(xi, yi, ci, si, xj, yj, cj, sj);
         let naive = naive_pair_penalty(xi, yi, ci, si, xj, yj, cj, sj);
         worst = worst.max((fast - naive).abs());
     }
-    report("simplified SAT == naive SAT", worst < 1e-12, format!("max diff {worst:.3e}"), &mut failures);
+    report(
+        "simplified SAT == naive SAT",
+        worst < 1e-12,
+        &format!("max diff {worst:.3e}"),
+        &mut failures,
+    );
 
     // 2. The n=4 grid is valid at s=2 and invalid just below it.
     let (c, s) = geom::Config::grid(4);
-    report("grid(4) valid at s=2", geom::penalty(&c, s) == 0.0, format!("s={s}"), &mut failures);
-    report("grid(4) invalid at s=2-1e-9", geom::penalty(&c, s - 1e-9) > 0.0, String::new(), &mut failures);
+    report(
+        "grid(4) valid at s=2",
+        geom::penalty(&c, s) == 0.0,
+        &format!("s={s}"),
+        &mut failures,
+    );
+    report(
+        "grid(4) invalid at s=2-1e-9",
+        geom::penalty(&c, s - 1e-9) > 0.0,
+        "",
+        &mut failures,
+    );
 
     // 3. A 45-degree square fits a container of side sqrt(2) and not less.
     let mut c = geom::Config::new(1);
@@ -300,58 +371,126 @@ fn selftest() {
     c.x[0] = d / 2.0;
     c.y[0] = d / 2.0;
     c.set_angle(0, std::f64::consts::FRAC_PI_4);
-    report("tilted unit square fits sqrt(2)", geom::penalty(&c, d) < 1e-30, format!("{:.3e}", geom::penalty(&c, d)), &mut failures);
-    report("and not sqrt(2)-1e-9", geom::penalty(&c, d - 1e-9) > 0.0, String::new(), &mut failures);
+    report(
+        "tilted unit square fits sqrt(2)",
+        geom::penalty(&c, d) < 1e-30,
+        &format!("{:.3e}", geom::penalty(&c, d)),
+        &mut failures,
+    );
+    report(
+        "and not sqrt(2)-1e-9",
+        geom::penalty(&c, d - 1e-9) > 0.0,
+        "",
+        &mut failures,
+    );
 
     // 4. Overlapping squares are detected with the right depth.
     let mut c = geom::Config::new(2);
-    c.x[0] = 1.0; c.y[0] = 1.0; c.set_angle(0, 0.0);
-    c.x[1] = 1.5; c.y[1] = 1.0; c.set_angle(1, 0.0);
+    c.x[0] = 1.0;
+    c.y[0] = 1.0;
+    c.set_angle(0, 0.0);
+    c.x[1] = 1.5;
+    c.y[1] = 1.0;
+    c.set_angle(1, 0.0);
     let expected = 0.25; // penetration 0.5, squared
-    report("overlap depth 0.5 -> penalty 0.25", (geom::penalty(&c, 10.0) - expected).abs() < 1e-15,
-           format!("{:.6}", geom::penalty(&c, 10.0)), &mut failures);
+    report(
+        "overlap depth 0.5 -> penalty 0.25",
+        (geom::penalty(&c, 10.0) - expected).abs() < 1e-15,
+        &format!("{:.6}", geom::penalty(&c, 10.0)),
+        &mut failures,
+    );
 
     // 5. Chains are reproducible from (seed, chain) alone.
-    let p = Params { steps: 60_000, ..Default::default() };
+    let p = Params {
+        steps: 60_000,
+        ..Default::default()
+    };
     let a = search::run_chain(5, 42, 3, &p, 400_000);
     let b = search::run_chain(5, 42, 3, &p, 400_000);
-    report("chain reproducible from (seed, chain)", a.best_side == b.best_side,
-           format!("{:.17e}", a.best_side), &mut failures);
+    report(
+        "chain reproducible from (seed, chain)",
+        a.best_side == b.best_side,
+        &format!("{:.17e}", a.best_side),
+        &mut failures,
+    );
 
     // 6. Different chains of one seed explore differently.
     let d2 = search::run_chain(5, 42, 4, &p, 400_000);
-    report("distinct chains explore differently", a.best_side != d2.best_side,
-           format!("{:.9} vs {:.9}", a.best_side, d2.best_side), &mut failures);
+    report(
+        "distinct chains explore differently",
+        a.best_side != d2.best_side,
+        &format!("{:.9} vs {:.9}", a.best_side, d2.best_side),
+        &mut failures,
+    );
 
     // 7. POSITIVE CONTROL. s(5) and s(10) are both proved to be m + 1/sqrt(2),
     //    attained by a non-trivial tilted family rather than by the grid. A
     //    searcher that cannot recover a case whose answer is known has not
     //    earned an opinion about one that is open, so this gates every run.
-    let p = Params { steps: 300_000, ..Default::default() };
+    let p = Params {
+        steps: 300_000,
+        ..Default::default()
+    };
     let target5 = 2.0 + 1.0 / std::f64::consts::SQRT_2;
     let o5 = search::run_chain(5, 0x5EED, 0, &p, 20_000_000);
-    report("positive control: recovers s(5)", o5.best_side - target5 < 1e-3,
-           format!("{:.9} vs {:.9}, gap {:+.2e}", o5.best_side, target5, o5.best_side - target5),
-           &mut failures);
-    report("and never beats it", o5.best_side >= target5 - 1e-12,
-           String::new(), &mut failures);
+    report(
+        "positive control: recovers s(5)",
+        o5.best_side - target5 < 1e-3,
+        &format!(
+            "{:.9} vs {:.9}, gap {:+.2e}",
+            o5.best_side,
+            target5,
+            o5.best_side - target5
+        ),
+        &mut failures,
+    );
+    report(
+        "and never beats it",
+        o5.best_side >= target5 - 1e-12,
+        "",
+        &mut failures,
+    );
 
     // s(10) is the campaign's other positive control, but one chain needs a
     // real budget to land it reliably. It is measured as a recorded baseline
     // round rather than here, so this pre-flight check stays fast.
 
     // 8. Reported configurations are actually valid at the reported side.
-    report("reported packing is overlap-free", o5.best_overlap <= search::FEASIBLE_EPS,
-           format!("overlap {:.2e}", o5.best_overlap), &mut failures);
-    report("reported overlap is recomputed, not accumulated",
-           (geom::total_overlap(&o5.best) - o5.best_overlap).abs() < 1e-18,
-           format!("{:.2e} vs stored {:.2e}", geom::total_overlap(&o5.best), o5.best_overlap),
-           &mut failures);
-    report("reported packing fits its reported side",
-           geom::required_side(&o5.best) <= o5.best_side + 1e-12,
-           format!("{:.12} <= {:.12}", geom::required_side(&o5.best), o5.best_side), &mut failures);
+    report(
+        "reported packing is overlap-free",
+        o5.best_overlap <= search::FEASIBLE_EPS,
+        &format!("overlap {:.2e}", o5.best_overlap),
+        &mut failures,
+    );
+    report(
+        "reported overlap is recomputed, not accumulated",
+        (geom::total_overlap(&o5.best) - o5.best_overlap).abs() < 1e-18,
+        &format!(
+            "{:.2e} vs stored {:.2e}",
+            geom::total_overlap(&o5.best),
+            o5.best_overlap
+        ),
+        &mut failures,
+    );
+    report(
+        "reported packing fits its reported side",
+        geom::required_side(&o5.best) <= o5.best_side + 1e-12,
+        &format!(
+            "{:.12} <= {:.12}",
+            geom::required_side(&o5.best),
+            o5.best_side
+        ),
+        &mut failures,
+    );
 
-    println!("{}", if failures == 0 { "SELFTEST PASSED" } else { "SELFTEST FAILED" });
+    println!(
+        "{}",
+        if failures == 0 {
+            "SELFTEST PASSED"
+        } else {
+            "SELFTEST FAILED"
+        }
+    );
     if failures > 0 {
         std::process::exit(1);
     }
@@ -359,7 +498,16 @@ fn selftest() {
 
 /// The four-axis separating-axis test written out longhand, used only by the
 /// selftest to check the simplification the fast path relies on.
-fn naive_pair_penalty(xi: f64, yi: f64, ci: f64, si: f64, xj: f64, yj: f64, cj: f64, sj: f64) -> f64 {
+fn naive_pair_penalty(
+    xi: f64,
+    yi: f64,
+    ci: f64,
+    si: f64,
+    xj: f64,
+    yj: f64,
+    cj: f64,
+    sj: f64,
+) -> f64 {
     let (dx, dy) = (xi - xj, yi - yj);
     let axes = [(ci, si), (-si, ci), (cj, sj), (-sj, cj)];
     let mut g = f64::NEG_INFINITY;
@@ -368,12 +516,23 @@ fn naive_pair_penalty(xi: f64, yi: f64, ci: f64, si: f64, xj: f64, yj: f64, cj: 
         let hj = 0.5 * ((ax * cj + ay * sj).abs() + (-ax * sj + ay * cj).abs());
         g = g.max((dx * ax + dy * ay).abs() - hi - hj);
     }
-    if g < 0.0 { g * g } else { 0.0 }
+    if g < 0.0 {
+        g * g
+    } else {
+        0.0
+    }
 }
 
-fn report(name: &str, ok: bool, detail: String, failures: &mut u32) {
-    println!("  {} {name}{}", if ok { "ok  " } else { "FAIL" },
-             if detail.is_empty() { String::new() } else { format!("  ({detail})") });
+fn report(name: &str, ok: bool, detail: &str, failures: &mut u32) {
+    println!(
+        "  {} {name}{}",
+        if ok { "ok  " } else { "FAIL" },
+        if detail.is_empty() {
+            String::new()
+        } else {
+            format!("  ({detail})")
+        }
+    );
     if !ok {
         *failures += 1;
     }

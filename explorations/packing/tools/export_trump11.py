@@ -32,7 +32,7 @@ def approx(element, u: float) -> float:
 def main() -> int:
     squares, side, field = build()
     field.refine_to(DIGITS)
-    u = float((field._lo + field._hi) / 2)
+    u = field.root_approx()
 
     xs, ys, ts = [], [], []
     for corners in squares:
@@ -52,11 +52,15 @@ def main() -> int:
         ts.append(angle)
 
     side_f = approx(side, u)
-    span_x = max(x + 0.5 * (abs(math.cos(t)) + abs(math.sin(t))) for x, t in zip(xs, ts)) - min(
-        x - 0.5 * (abs(math.cos(t)) + abs(math.sin(t))) for x, t in zip(xs, ts)
+    span_x = max(
+        x + 0.5 * (abs(math.cos(t)) + abs(math.sin(t))) for x, t in zip(xs, ts, strict=True)
+    ) - min(
+        x - 0.5 * (abs(math.cos(t)) + abs(math.sin(t))) for x, t in zip(xs, ts, strict=True)
     )
-    span_y = max(y + 0.5 * (abs(math.cos(t)) + abs(math.sin(t))) for y, t in zip(ys, ts)) - min(
-        y - 0.5 * (abs(math.cos(t)) + abs(math.sin(t))) for y, t in zip(ys, ts)
+    span_y = max(
+        y + 0.5 * (abs(math.cos(t)) + abs(math.sin(t))) for y, t in zip(ys, ts, strict=True)
+    ) - min(
+        y - 0.5 * (abs(math.cos(t)) + abs(math.sin(t))) for y, t in zip(ys, ts, strict=True)
     )
     required = max(span_x, span_y)
     assert abs(required - side_f) < 1e-12, f"bounding box {required} != published side {side_f}"
