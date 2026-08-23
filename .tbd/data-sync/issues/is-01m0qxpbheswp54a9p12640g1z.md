@@ -5,7 +5,7 @@ title: Separate atlas observations from certified basins
 kind: bug
 status: open
 priority: 0
-version: 7
+version: 8
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -23,7 +23,7 @@ dependencies:
     target: is-01m0qxpefk4ge1r6mrab9rhbad
 parent_id: is-01m0qxka8ebkztq7erex50vvr2
 created_at: 2026-08-23T18:21:28.493Z
-updated_at: 2026-08-23T19:50:07.198Z
+updated_at: 2026-08-23T20:20:49.614Z
 ---
 Category: technical errors. Atlas.add currently counts non-converged quench endpoints as basins and local optima; accepts keys for the wrong n; merges incompatible quantization regimes; can double count the same shard; lacks schema-validated provenance; and discards first-seen order, so it cannot produce the discovery curve H-011 requires.
 
@@ -31,4 +31,4 @@ Acceptance: the append-only unit is a provenance-complete observation with run, 
 
 ## Notes
 
-2026-08-23 PR14-head reassessment: D-030 repairs the cold n=5 fixture, now six of six converged, but the new n=3 golden stores one non-converged stopping point among four proposals as a basin and the guard permits up to half the sample to be censored. D-032 showed the same missing boundary in the checker output: it originally printed four synthetic deduplication re-offers as census proposals. The line is fixed, but wrong-n adds, incompatible-regime merges, missing event order, shard double counting, and pose-free validity remain. The stack records per-basin converged frequency and verifies the pose matching the stored minimum side; the observation-versus-basin model is still open.
+2026-08-23 final PR14 reassessment: D-030 repairs the cold n=5 fixture, but the deep n=3 map still stores one non-converged endpoint as a basin and permits half-censored samples. D-035 records the historical checker output mixing census proposals with synthetic re-offers. At c412b8c the atlas check became one real smoke quench plus synthetic store keys; the stack now supplies an explicit false convergence offer, while strict/deep retains the real census regression. Wrong-n adds, regime merges, event order, shard identity, pose-free validity, and observation-to-basin promotion remain open.

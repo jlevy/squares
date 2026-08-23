@@ -5,7 +5,7 @@ title: Make canonical basin identity invariant, stable, and scalable
 kind: bug
 status: open
 priority: 0
-version: 7
+version: 8
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -23,7 +23,7 @@ dependencies:
     target: is-01m0qxpefk4ge1r6mrab9rhbad
 parent_id: is-01m0qxka8ebkztq7erex50vvr2
 created_at: 2026-08-23T18:21:28.165Z
-updated_at: 2026-08-23T19:41:49.220Z
+updated_at: 2026-08-23T20:20:49.378Z
 ---
 Category: technical errors. The contact certificate is not invariant under container reflection because folded-angle classes are ranked by angle value; tolerance grouping is order-dependent; exact tuple identity splits geometrically equivalent packings at quantization boundaries; and exhaustive individualization becomes factorial on sparse symmetric graphs.
 
@@ -31,4 +31,4 @@ Acceptance: property tests cover all D4 images, every square permutation, bounda
 
 ## Notes
 
-2026-08-23 stacked-review progress: the contact certificate is minimized across all eight D4 images, the independent checker asserts both keys across D4 and quarter-turns, and upstream closes the circular angle seam. The corrected D4 identity changes the committed n=5 golden map, confirming that golden artifacts must be regenerated after identity changes. Remaining work is order-independent circular angle clustering, ambiguity-aware identity, quantization-boundary handling, and replacing or bounding factorial graph canonicalization.
+2026-08-23 final PR14 reassessment: the contact certificate is minimized across all eight D4 images, the checker asserts both keys across D4 and quarter-turns, and PR #14 records the circular seam repair as D-031. Identity changes alter the golden map, so deep regeneration remains mandatory. Remaining work is order-independent circular angle clustering, ambiguity-aware identity, quantization-boundary handling, and replacing or bounding factorial graph canonicalization.
