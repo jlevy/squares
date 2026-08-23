@@ -45,6 +45,96 @@ Automating an agent-bound loop buys very little and can cost a night of debuggin
 measure the ratio from your own effort fields before deciding this is worth building.
 Where the ratio is the other way round, unattended operation is the whole game.
 
+## Build the harness as steps, not as a session
+
+The tempting shape is one program that runs the night: pick, run, judge, record, repeat.
+It is the wrong shape, for a reason that only shows up at 3am — when it fails, you have
+no move except to restart it, and you do not know what it had already done.
+
+Build **one subcommand per step of the loop**, each doing one thing the same way every
+time, and let something else sequence them:
+
+```
+harness status              where things stand
+harness preflight           fire every guard and report
+harness claim <hypothesis>  allocate the id, write the in-progress stub  -> exp-041
+harness execute exp-041     run the round's declared command, archive the output
+harness record  exp-041     read the archive, decide, write the round, commit
+harness release exp-041     give up a stuck round; recovery, not routine
+harness run                 the middle three, over the queue, unattended
+```
+
+Two properties make this worth the small extra structure:
+
+- **State lives on disk, never between steps.** `claim` writes the stub, `execute`
+  appends to the archive beside it, `record` reads that archive back.
+  A step that dies loses nothing a re-run cannot rebuild, and `status` can always answer
+  where you are. Make `execute` truncate its archive first, so re-running it never
+  double-counts.
+- **Failure recovery is re-running one step**, not restarting a session.
+  When `record` refuses because the whole-set checker rejected the artifact, the fix is
+  to correct what the checker named and run `record` again — the hours of compute in the
+  archive are untouched.
+  A session-shaped harness makes that same failure cost the night.
+
+An agent is perfectly capable of sequencing these and recovering when one fails.
+What it cannot do is recover from a monolith that died halfway with its state in memory.
+`run` is then a thin loop over the same three steps, for a night with nobody watching,
+and anything it can do you can do by hand.
+
+## The harness holds no experiment code
+
+**An experiment is a declared command, not a branch in the harness.** Put the command in
+the registry artifact, have the harness substitute the instance and the seed, run it,
+archive what it prints, and enforce one fixed contract on that output.
+
+```yaml
+runner:
+  command: './engine --n {n} --seed {seed} --budget 100000000'
+  cells: [17]
+  seeds: [1, 2, 3, 4, 5]
+  timebox: 1h
+```
+
+The contract is the whole interface.
+A useful one, adapt the field names:
+
+> Print JSON Lines to stdout.
+> Carry the outcome metric, the instance, and the seed on every result line.
+> Carry whatever the validity guard reads on those same lines.
+> Exit 0.
+
+Two consequences, and they are the point:
+
+- **Adding an experiment never edits the harness.** If it would, the contract is wrong
+  and the contract is the thing to fix.
+  Per-round parsing written into the harness is code that runs once, at 3am, having
+  never been exercised — which is the most reliable way to lose a night.
+- **The guard is one piece of code every round exercises**, rather than one per
+  experiment. That matters more than it sounds: a validity check reimplemented per
+  experiment is a validity check that is wrong in one of them.
+
+Writing new *experiment* code is expected and fine — a new probe is a script obeying the
+contract. Writing new *harness* code per round is the thing to refuse.
+
+Carry the instance and seed on every result line even when it feels redundant.
+It is what lets the harness group results exactly, instead of inferring which line was a
+summary or assuming every seed printed the same number of lines.
+Both inferences are wrong eventually and neither fails loudly.
+
+## Do not build coordination you do not need
+
+Most campaigns run one session at a time.
+For those, the entire claim protocol below — locks, id reservation, lease reclamation,
+the duplication key — is machinery that can only introduce bugs, and the honest
+implementation is one line:
+
+> Refuse to start when a round is already in progress.
+
+That enforces the assumption instead of trusting it, and it costs nothing.
+Read the rest of this section when a fleet is actually the plan, and lift the allocator
+from it then.
+
 ## The claim is the artifact
 
 Do not build a separate lock file for each round.

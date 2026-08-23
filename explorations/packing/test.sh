@@ -16,6 +16,14 @@ STRICT="${GATE_STRICT:-0}"
 [ "${1:-}" = "--strict" ] && STRICT=1
 SKIPPED=()
 
+# tools/negctl.py corrupts tracked files IN PLACE to watch each guard fire, restoring
+# them after. Anything reading those files meanwhile sees the corruption -- seen once as
+# campaign/runner.py failing on a dead link to a hypothesis that never existed. A
+# spurious failure is the good outcome; a spurious pass is the other one. So the gate
+# announces itself, and the harness refuses to run a step while this marker is present.
+touch .gate-running
+trap 'rm -f .gate-running' EXIT
+
 # Record a skip and say so in the same breath. Never called for a check that ran.
 skip() {
   SKIPPED+=("$1")

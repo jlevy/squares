@@ -240,6 +240,25 @@ check it between rounds, not only at the start.*
 loses them, and the loss is silent.
 *Guard: commit artifacts, raw runs, and regenerated views after every round.*
 
+**The gate and the runner, running at once.** A negative-control harness proves each
+guard works by *corrupting a tracked file in place*, running the check, and restoring
+it. Anything else reading those files during that window sees the corruption.
+Observed here: a harness step failed on a dead link to a hypothesis that never existed,
+because the gate was mid-mutation two directories away.
+The spurious failure is the good outcome; a spurious pass is the other one, and nothing
+would have flagged it.
+*Guard: make the mutating process announce itself — a marker file created on entry and
+removed on exit — and have every other process refuse to read the record while it is
+there.
+Do not solve this by making the controls work on copies: a control that corrupts a
+copy is not testing the check that reads the original.*
+
+**The session-shaped harness.** One program that runs the whole night, holding its state
+in memory. When it dies at hour six you cannot resume it, cannot see what it finished,
+and cannot re-do the one step that failed — you restart, and the compute is gone.
+*Guard: one subcommand per step, state on disk between them, and a thin loop on top.
+The recovery for any failure is then re-running that step.*
+
 **The explorer that reproposed an abandoned idea.** An explorer given only the campaign
 question rediscovers what was already refuted last week.
 *Guard: brief explorers with the current ledger and registry, not just the question —

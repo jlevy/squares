@@ -15,3 +15,7 @@ explorations/packing/.venv/
 # blocks instead. Not shared, because the artifacts themselves are the durable record
 # of which ids exist.
 explorations/packing/campaign/series/.ids/
+
+# Present only while ./test.sh is running. The gate mutates tracked files in place
+# (tools/negctl.py) and campaign/runner.py refuses to read the record while it does.
+explorations/packing/.gate-running
