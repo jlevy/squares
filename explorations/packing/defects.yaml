@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 23
+count: 25
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -495,3 +495,27 @@ defects:
     own control definitions.
   regression: 'the controls run in test.sh; a control whose anchor is ambiguous or absent fails loudly rather than mutating the wrong text'
   recorded_in: tools/negctl.py
+- id: D-025
+  title: Two bead trees claimed the same spec phase after the plan was rebuilt
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'two branches, partly reported at the time'
+  severity: medium
+  status: fixed
+  what: >-
+    When the plan was rebuilt around the quench spine, new phase epics were created but
+    the pre-revision tree was left in place. `tbd list --spec` then returned two epics
+    both titled "Phase 1" and two both meaning Phase 5, and one child task was complete
+    but still open.
+  consequence: >-
+    An arriving agent could not tell which tree was live, and the stale labels described
+    a build order the spec had replaced. Partly flagged as review finding F-3, where the
+    fix closed two beads and left the rest.
+  fix: >-
+    The old verification-core epic is closed as superseded and its seven children
+    re-parented to the revised Phase 5 epic; the old experiments epic is retitled to name
+    the phases it now belongs to; the finished differential-test task is closed.
+  regression: none
+  recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md

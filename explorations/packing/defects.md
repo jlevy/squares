@@ -2,14 +2,14 @@
 
 # Defect log
 
-23 defects recorded across the packing toolchain.
+24 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **6 soundness defects** — the system asserting something false about the mathematics. 4 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **6 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010).
+- **7 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010).
 - **1 is still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -18,7 +18,7 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 1 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 4 | a cell of the sweep whose answer is known in advance |
-| `review` | 8 | a human or agent reading the work against a checklist |
+| `review` | 9 | a human or agent reading the work against a checklist |
 | `anomaly` | 3 | a result that made no sense, chased down |
 | `inspection` | 5 | reading the code or the design with intent |
 | `drift_check` | 1 | a generated view disagreeing with its source |
@@ -32,7 +32,7 @@ The line worth reading twice: **the automated gate caught none of them.** Gates 
 | --- | ---: |
 | engine | 7 |
 | quench | 6 |
-| record | 8 |
+| record | 9 |
 | tooling | 2 |
 
 ## By kind
@@ -41,7 +41,7 @@ The line worth reading twice: **the automated gate caught none of them.** Gates 
 | --- | ---: |
 | soundness | 6 |
 | validity | 5 |
-| bookkeeping | 9 |
+| bookkeeping | 10 |
 | robustness | 2 |
 | performance | 1 |
 
@@ -58,6 +58,7 @@ This is the actionable list.
 | D-015 | The angle objective was not a function of the angles | quench |
 | D-016 | One variable served as both the finite-difference probe and the line-search step | quench |
 | D-017 | A three-cell sweep recorded as a one-cell round, again | record |
+| D-025 | Two bead trees claimed the same spec phase after the plan was rebuilt | record |
 
 ## Still open
 
@@ -92,3 +93,4 @@ This is the actionable list.
 | [D-021](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | 2026-08-23 | quench | soundness | flattering | `inspection` | medium | contained | The polished tier has a noise floor, and eight rounds sit on it |
 | [D-022](tools/controls.yaml) | 2026-08-23 | record | bookkeeping |  | `control_cell` | low | fixed | A numeric field and its display duplicate could disagree in silence |
 | [D-023](tools/negctl.py) | 2026-08-23 | tooling | bookkeeping |  | `review` | medium | fixed | Verification was done in throwaway snippets and left nothing behind |
+| [D-025](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | Two bead trees claimed the same spec phase after the plan was rebuilt |
