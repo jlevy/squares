@@ -5,13 +5,13 @@ title: The golden's annealer_gap is a non-portable fixture, and the review's rep
 kind: bug
 status: open
 priority: 0
-version: 1
+version: 2
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T21:26:54.818Z
-updated_at: 2026-08-23T21:26:54.818Z
+updated_at: 2026-08-23T22:47:03.137Z
 ---
 Recorded 2026-08-23 after verifying the PR #15 review's F-16 reproduction claim and finding it does not hold. Read this BEFORE implementing F-16's stated repair.
 
@@ -35,3 +35,27 @@ WHY THIS MATTERS MORE THAN THE DIAGNOSIS IT REPLACES:
 - an agent who implements the stated repair will believe the problem is solved.
 
 FIX: the ladder's ORACLE is robust -- every environment quenched to the proved optimum and recognised the right closed form. Only the recorded trajectory scalar moves. So assert the oracle and stop committing the trajectory: drop annealer_gap from the byte-compared surface (keep it as printed diagnostic output), or store it with an explicit tolerance plus a recorded toolchain and CPU fingerprint. Do not chase build hermeticity for a chaotic search.
+
+## Notes
+
+2026-08-23 22:40. CORRECTION plus a decisive test.
+
+CORRECTION TO MY OWN EVIDENCE: the original write-up tabulated PR #15's committed golden (+0.000493446 at n=10) as a fourth conflicting value for one fixed input. That was WRONG. Their branch changed LADDER to (n, seed) pairs and moved n=10 to seed 14, so their row is a different experiment from the seed-7 row. Retracted.
+
+LIKE-FOR-LIKE, n=10, this environment, engine built from source:
+    seed 7   here +0.021003996487, and the quench reaches the proved optimum.
+             There: their LADDER comment says seed 7 "does not do that with the checked-in engine", which is why they moved off it.
+    seed 14  here +0.032867764695.
+             There: committed +0.000493446, reaching the proved optimum.
+
+The environments disagree at BOTH seeds, in opposite directions, two orders of magnitude apart at the same seed. Stronger evidence than the retracted comparison, not weaker.
+
+DECISIVE TEST. PR #15 marks the source-build repair done and selects control seeds to stabilise the ladder. That is a falsifiable prediction: their golden should then reproduce anywhere after a source build. Checked out their branch, built their engine with cargo build --release, ran THEIR tools/golden_basins.py --deep:
+
+    ORACLE FAILURES:
+      the rebuilt map differs from the committed golden
+    GOLDEN BASIN CHECKS FAILED
+
+Their fix, their code, their fixture, a different machine: it fails. Selecting control seeds makes it worse rather than better, because it tunes the fixture to the machine that chose the seeds.
+
+The oracle survives everywhere tested -- every environment reached the proved optimum and the right closed form. Only the recorded trajectory moves. Assert the oracle; drop annealer_gap from the byte-compared surface, or store it with a tolerance plus a toolchain and CPU fingerprint.
