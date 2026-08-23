@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 30
+count: 33
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -722,4 +722,113 @@ defects:
     mostly failed to converge is refused, measured on the census only rather than after
     the deduplication step. The six structural invariants around it all passed while this
     was live, so the guard is the one that had to exist. Also negative-controlled.
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-031
+  title: Basin identity split an angle at the pi/2 seam, inflating counts near axis-aligned optima
+  date: '2026-08-23'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: >-
+    the life of one branch -- introduced with sqpack/canonical.py and found by the first
+    golden run against it, before any recorded round consumed a basin count
+  severity: high
+  status: fixed
+  what: >-
+    The geometric key quantized an angle with plain `round(theta / quantum)`, which
+    treats the angle as a point on a line. It is a point on a circle: a unit square is
+    invariant under a quarter turn, so theta is periodic with period pi/2 and the
+    quantizer had a seam at the wrap-around. An axis-aligned square whose angle floated
+    one ULP BELOW pi/2 keyed as step 1570796; its identical twin at 0.0 keyed as 0, and
+    the two configurations -- the same packing, square for square -- were stored as two
+    distinct basins.
+  consequence: >-
+    Every basin count near an axis-aligned optimum was inflated, and the annealer makes
+    that the common case rather than a corner one, because it accumulates rotations
+    without wrapping them. The direction is flattering twice over: a split landscape
+    reads as richer than it is, and splitting the basin a record lives in makes that
+    basin look rarer -- which is the direction that CONFIRMS the cartography strategy's
+    rarity premise. H-011's saturation criterion and H-012's rarity ranking would both
+    have inherited it, and the contact certificate could not have caught it, because two
+    images of one packing have identical contact graphs.
+  fix: >-
+    `_quantize_angle` now quantizes on the circle: `steps = round(QUARTER / quantum)`,
+    then `round(theta / QUARTER * steps) % steps`, so the step index wraps where the
+    angle does. Measured at n = 3: four proposals had produced four basins, two of them
+    the same three-in-a-2x2 packing at 0 and at 90 degrees, with identical side, closed
+    form, contact count and angle classes; after the fix, three basins, and the repeated
+    one carries quench_frequency 2. Deliberately no `theta % QUARTER` in front of the
+    arithmetic -- an earlier one was dead code, and a negative control mutating it went
+    on reporting a guard that no longer guarded anything.
+  regression: >-
+    tools/canonical_check.py, "an angle one ULP below pi/2 keys as one at zero": the
+    defect's own witness, `math.nextafter(math.pi / 2, 0)` against `0.0`, asserted to
+    give one geometric key. Wired into the gate. The n = 3 row of golden/basin-maps.yaml
+    is the second guard, and the one that found it: a trivial case whose basin count can
+    be checked by hand.
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-032
+  title: The in-progress stub was not schema-valid, so the recovery path corrupted the record
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: >-
+    one merged PR -- #13 shipped with `release` and `run` never once executed, and the
+    bug was found by deciding to run the paths that had never run
+  severity: high
+  status: fixed
+  what: >-
+    `runner.py claim` wrote an in-progress stub carrying no `subject.engine`, which the
+    round contract requires. `release` then did string surgery on that YAML to mark the
+    round unresolved, so it produced an artifact the whole-set checker rejected.
+  consequence: >-
+    `release` is the recovery path: the step that runs when a round dies at 3am. A
+    recovery path that corrupts the record is worst exactly when it is needed, and the
+    night it is needed is the night nobody is reading. The failure was also silent until
+    the next full check, so a session could have released several rounds before anything
+    complained.
+  fix: >-
+    The stub carries `subject.engine`. `release` parses and re-serialises rather than
+    editing YAML as text, and adds the `effort` block every terminal round must carry,
+    with `stopped_by: error` -- the round died, so nothing may be concluded from it.
+    `claim` now regenerates the generated views too, because an in-progress round is part
+    of the record the moment it exists and a round runs for hours; without that the gate
+    failed on a stale ledger.md for the whole session.
+    The fix is real but UNGUARDED, and the regression field says so. ledger.py validating
+    every artifact at load time (the D-005 guard) does reject an invalid stub -- but only
+    during a gate run that happens to coincide with a round in flight, which is luck. The
+    honest reading is that nothing exercises claim -> ledger -> release -> ledger, so this
+    path can rot again between nights exactly as it rotted through PR #13.
+  regression: none
+  bead: think-5zwm
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-033
+  title: The ledger crashed on any in-progress round, so the gate could not run during a session
+  date: '2026-08-23'
+  layer: record
+  class: robustness
+  detected_by: review
+  latent_for: >-
+    one merged PR, alongside D-032 and in the same stub -- both found by running the
+    unrun paths rather than by any check
+  severity: high
+  status: fixed
+  what: >-
+    The in-progress stub writes a timezone-aware lease timestamp; ledger.py compared it
+    against a naive UTC now(). Python refuses to order aware against naive, so the
+    comparison raised TypeError and ledger.py died on any record containing an
+    in-progress round.
+  consequence: >-
+    The gate runs ledger.py, so the gate could not be run at all while a round was in
+    flight -- which during an unattended night is most of the night. The one window where
+    an operator most wants to ask "is the record still sound" is precisely the window the
+    question could not be asked in, and the crash gives no hint that a lease is the cause.
+  fix: >-
+    Both sides normalised to aware UTC at the comparison. Same unguarded status as D-032
+    and for the same reason: the only thing that exercises it is a gate run that happens
+    to coincide with an in-progress round.
+  regression: none
+  bead: think-5zwm
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md

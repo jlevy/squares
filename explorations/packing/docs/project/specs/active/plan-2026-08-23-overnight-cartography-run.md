@@ -122,9 +122,10 @@ So the sequence is now:
 1. ~~`canonicalize`~~ — done
 2. ~~`atlas`~~ — done
 3. ~~D-030~~ — found and fixed
-4. **The validation suite** — see
+4. ~~**The validation suite**~~ — done, and it earned its place immediately: it found
+   [D-031](../../../../defects.md) at `n = 3` on its first run. See
    [Validating the tools](#validating-the-tools-before-trusting-them)
-5. `multistart`, the uniform null proposer
+5. **`multistart`, the uniform null proposer** — next
 6. The recipe, the handover gate, the night
 
 ## Validating the tools before trusting them
@@ -165,6 +166,37 @@ research.
 
 This is the calibration ladder (**R-3**) taken one rung lower than the campaign has been
 using it.
+
+#### It paid on the first run: [D-031](../../../../defects.md)
+
+`n = 3` — three unit squares in a `2 x 2` box, the most trivial case in the suite —
+reported **four** basins from four proposals. Two of them had identical side, identical
+closed form, identical contact count and identical angle classes. They were the same
+packing: the same squares in the same places, one set at `0` and one at `90` degrees.
+
+The geometric key quantized an angle with `round(theta / quantum)`, which treats it as a
+point on a line. It is a point on a *circle*: a unit square is invariant under a quarter
+turn, so `theta` is periodic with period `pi/2`, and the quantizer had a seam at the
+wrap-around. An angle one ULP below `pi/2` keyed as step `1570796`; its twin at `0.0`
+keyed as `0`.
+
+Three things about this are worth carrying forward.
+
+1. **It was flattering in both directions that matter.** A split landscape reads as
+   richer than it is, and splitting the basin a record lives in makes that basin look
+   *rarer* — which is the direction that confirms this campaign's own rarity premise.
+2. **The other key could not have caught it.** Two images of one packing have identical
+   contact graphs, so the contact certificate agrees with itself while the geometric key
+   is wrong. Two keys that fail in opposite directions is the design; this is a case
+   where only one of them was load-bearing.
+3. **It needed a case small enough to read by hand.** Nothing was inconsistent — the
+   store was internally coherent, every structural invariant passed, and at `n = 5` or
+   above "four basins" would have looked like a finding. At `n = 3` it looked like an
+   arithmetic mistake, because the right answer was already on the page.
+
+The fix quantizes on the circle; the witness — `nextafter(pi/2, 0)` against `0.0` — is
+now a check in `tools/canonical_check.py`, and the `n = 3` row of the golden map is the
+second guard.
 
 ## Design
 
@@ -308,14 +340,38 @@ tbd list --spec explorations/packing/docs/project/specs/active/plan-2026-08-23-o
 - [x] `atlas`: minimum viable deduplicated store (`think-eq6l`)
 - [x] **D-030**, found while building the above: the quench could not converge from a
   cold start, and the atlas recorded the interrupted descents as basins
-- [ ] **Golden basin maps for the small proved cases** (`think-u0i6`) — `n = 1…5`, each
+- [x] **Golden basin maps for the small proved cases** (`think-u0i6`) — built as
+  `tools/golden_basins.py` over `n = 1…5, 9, 10`, wider than this spec asked for, each
   with its proved optimum, closed-form recognition, and independent validity
+- [x] **D-031**, found by the above on its first run at `n = 3`: basin identity split an
+  angle at the `pi/2` seam, so identical packings a quarter turn apart were two basins
 - [ ] **Engine anchors at the trivial cases** (`think-ouf0`) — `sqsearch` must recover
-  `s(n)` at `n = 1…4, 9, 16`, and more budget must never return a worse best
-- [ ] `multistart`: the uniform null proposer, obeying the experiment contract
-  (`think-jxx8`)
+  `s(n)` at `n = 1…4, 9, 16`, and more budget must never return a worse best.
+  *Partly standing already:* the engine selftest's check 7 is a positive control on
+  `s(5)`, both that it is reached and that it is never beaten. The gaps are the rest of
+  the ladder and the budget-monotonicity half, which nothing checks today.
+  **No longer blocks `multistart`** — it blocks the handover gate instead. The census
+  runs the quench, which the golden suite now validates; `sqsearch` is not in that loop,
+  so gating the proposer on an engine anchor idles the queue for a reason that does not
+  bear on it. It still has to be true before the night starts, which is what the handover
+  gate is for
+- [ ] **`multistart`: the uniform null proposer**, obeying the experiment contract
+  (`think-jxx8`) — the next piece of work, and now unblocked
 - [ ] Give `H-011` a `runner.command` recipe, sized against measured throughput
 - [ ] Flip `H-011.instrument_ready` to true in the same change that makes it true
+
+### Found while building Half A, tracked but not blocking the night
+
+- `think-5zwm` — rehearse the recovery path (`claim → ledger → release → ledger`) against
+  a scratch record. [D-032](../../../../defects.md) and
+  [D-033](../../../../defects.md) both shipped in a merged PR because nothing had ever
+  run `release`, and neither fix left an unconditional check behind
+- `think-l3ds` — the gate is 152s, down from 480s. The perimeter (59s) and the negative
+  controls (42s) are 101s of what remains and nobody has looked at either
+- `think-7z7y` — the atlas fields deferred from the minimum viable store: algebraic
+  degree, symmetry group, neighbour links with merge-delta. Degree is the one that bears
+  on an open question here, since it would separate a legitimately unrecognised
+  higher-degree optimum from an unconverged one
 
 ### The handover
 

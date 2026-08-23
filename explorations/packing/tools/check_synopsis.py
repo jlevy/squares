@@ -211,6 +211,20 @@ def check_defects(text: str) -> list[str]:
                 f"SYNOPSIS.md: class table says wrong count for {name} (is {count})"
             )
 
+    # The unprotected-fix count. This is the log's most actionable claim -- the list
+    # that predicts what comes back -- and it is the one that drifted: the synopsis said
+    # "Six" while the generated view said seven, which is D-028 recurring in the document
+    # D-028 was about. The same rule as the flattering-direction claim applies: derive it,
+    # do not assert it.
+    unprotected = sum(
+        1 for d in defects if d["regression"] == "none" and d["status"] != "outstanding"
+    )
+    if not re.search(rf"\b({unprotected}|{spell(unprotected)}) fixes left no", text, re.I):
+        problems.append(
+            f"SYNOPSIS.md: does not state the unprotected-fix count ({unprotected}) "
+            'in the form "<n> fixes left no regression check behind"'
+        )
+
     problems.extend(
         f"SYNOPSIS.md: open defect {d['id']} is not mentioned"
         for d in defects

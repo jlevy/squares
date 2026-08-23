@@ -962,24 +962,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Thirty defects, [one line each](defects.md), generated from `defects.yaml` and checked
-in the gate.
+Thirty-three defects, [one line each](defects.md), generated from `defects.yaml` and
+checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 6 | asserted something false about the mathematics |
+| soundness | 7 | asserted something false about the mathematics |
 | validity | 7 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 14 | recorded something its own evidence contradicts |
-| robustness | 2 | did not finish, or finished only by luck |
+| bookkeeping | 15 | recorded something its own evidence contradicts |
+| robustness | 3 | did not finish, or finished only by luck |
 | performance | 1 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Four of the six soundness defects pointed in the *flattering* direction**, where the
+**Five of the seven soundness defects pointed in the *flattering* direction**, where the
 error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught one defect in thirty, and no soundness defect ever.**
+**The automated gate has caught one defect in thirty-three, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -988,17 +988,20 @@ Gates confirm what you already thought to check; these were found by devices bui
 found by a contiguity check—which is the pattern, not an exception: gates are good at
 the mechanical classes and have never once caught the mathematics being wrong.
 
-The newest entry sharpens the point rather than softening it.
-[D-030](defects.md) — the quench’s angle window narrowing on a schedule, so a cold start
-could never arrive — was caught by a **control cell**: `n = 5`, whose answer is proved,
-where the census kept landing at `3.078` against `2.707107`. Six structural invariants
-around the store all passed green while it was live, because they check the store and
-not what it is fed.
+The two newest entries sharpen the point rather than softening it, and both were caught
+by a **control cell** — a case whose answer was known before the code existed.
+[D-030](defects.md), the quench’s angle window narrowing on a schedule so a cold start
+could never arrive, showed up at `n = 5`: the census kept landing at `3.078` against a
+proved `2.707107`. [D-031](defects.md), basin identity splitting an angle at the `π/2`
+seam, showed up at `n = 3`, where the whole census is small enough to read by hand and
+two rows were visibly the same packing a quarter turn apart.
+In both cases the structural invariants around the store passed green throughout,
+because they check the store and not what it is fed.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Six fixes left no regression check behind, and that list has already predicted a
+Nine fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
