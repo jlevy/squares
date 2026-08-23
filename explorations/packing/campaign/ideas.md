@@ -108,7 +108,7 @@ the ledger can report which whole families remain untried.
 | --- | --- | --- | --- | --- | --- |
 | 5 | Census the `n ≤ 10` landscape to saturation | registered | [H-011](hypotheses/H-011-small-n-census.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | Runs on existing Python plus the validated LP — no Rust. Gates the atlas |
 | 6 | Locate the record basin in the quench-frequency ranking | registered | [H-012](hypotheses/H-012-record-basins-are-rare.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | The load-bearing premise, killable in the cheapest tier |
-| 7 | Basin-entry: perturb Trump’s exact packing, measure the return rate | registered | [H-018](hypotheses/H-018-basin-entry.md) | this campaign | Runnable today; separates “cannot find the region” from “cannot hold it” |
+| 7 | Basin-entry: perturb Trump’s exact packing, measure the return rate | registered | [H-018](hypotheses/H-018-basin-entry.md) | this campaign | **Measured ([exp-005](series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md)):** refuted as stated, but there is no basin wall — return distance is linear in `eps` and halves with 10× effort, so the limit is the refiner |
 | 8 | Saturation curves are lawful, so coverage is estimable | raw | `H-007` | review H-7 | Turns negative results into estimates. Reserved id, not yet codified |
 | 9 | False-basin rate `r(n)` — float basins the exact verifier rejects | raw | `H-008` | review H-8 | Free: a counter on existing work. Any value is a result |
 | 10 | Symmetry dedup ratio, raw versus canonical counts | raw | `H-009` | review H-9 | Free; and required before any comparison with Ellsworth’s counts |
@@ -142,10 +142,16 @@ the ledger can report which whole families remain untried.
 Not claims, so they cannot be hypotheses.
 Registered as `kind: open_question` when worth carrying formally.
 
-- <a id="the-shape-of-the-search-space"></a>**How wide is Trump’s basin?** It is rigid,
-  so possibly a measure-zero attractor.
-  Registered as [H-018](hypotheses/H-018-basin-entry.md) — measurable by starting *at*
-  the known configuration, perturbing by `ε`, and seeing what fraction of runs return.
+- <a id="the-shape-of-the-search-space"></a>**How wide is Trump’s basin?** **Answered,
+  and the question was wrong.**
+  [exp-005](series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md)
+  found no width to measure: under a local quench the return distance is linear in the
+  perturbation over four decades with no threshold, and halves when effort is multiplied
+  by ten. What that measures is the refiner’s convergence rate, not a basin radius — so
+  the width question is only answerable once the LP quench
+  ([H-002](hypotheses/H-002-lp-in-cell-polish.md)) lands and converges in one solve.
+  The stock schedule, meanwhile, cannot hold the basin from `eps = 1e-5`, which reframes
+  `exp-003` as partly a polish failure.
 - **What does the searcher actually find at `n = 11`?** The baseline’s `3.9144` is some
   configuration. How many distinct local optima does it have, and how many tilt angles do
   they use? A histogram over restarts would say whether the search is finding one wrong

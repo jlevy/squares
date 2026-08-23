@@ -58,6 +58,11 @@ fn main() {
         return;
     }
 
+    if args.iter().any(|a| a == "--basin-entry") {
+        basin_entry(&args);
+        return;
+    }
+
     let n: usize = arg(&args, "--n", 11);
     let seed: u64 = arg(&args, "--seed", 0x5EED);
     let chains: u64 = arg(&args, "--chains", 16);
@@ -144,6 +149,127 @@ fn pairdump(count: u64, seed: u64) {
 \"xj\":{xj:.17e},\"yj\":{yj:.17e},\"tj\":{tj:.17e},\"depth\":{depth:.17e}}}"
         );
     }
+}
+
+/// Read a seed configuration: one JSON object with equal-length x, y, t arrays.
+///
+/// Hand-rolled rather than pulled from a crate: the format is three number arrays,
+/// and a dependency here would have to be justified to every future reader of the
+/// lockfile.
+fn read_config(path: &str) -> geom::Config {
+    let text = std::fs::read_to_string(path)
+        .unwrap_or_else(|e| panic!("cannot read seed config {path}: {e}"));
+    let field = |name: &str| -> Vec<f64> {
+        let key = format!("\"{name}\"");
+        let at = text.find(&key).unwrap_or_else(|| panic!("seed config has no {name}"));
+        let open = text[at..].find('[').expect("array") + at;
+        let close = text[open..].find(']').expect("array end") + open;
+        text[open + 1..close]
+            .split(',')
+            .map(|v| v.trim().parse::<f64>().expect("number"))
+            .collect()
+    };
+    let (x, y, t) = (field("x"), field("y"), field("t"));
+    assert!(x.len() == y.len() && y.len() == t.len(), "seed config arrays differ in length");
+    let mut c = geom::Config::new(x.len());
+    for k in 0..x.len() {
+        c.x[k] = x[k];
+        c.y[k] = y[k];
+        c.set_angle(k, t[k]);
+    }
+    c
+}
+
+/// Basin-entry sweep: start inside a known configuration, perturb outward, and
+/// measure whether the search comes back.
+///
+/// Reports per trial rather than per sweep, because the quantity of interest is a
+/// *rate* -- what fraction of independent trials return -- and a summary that has
+/// already averaged cannot be re-analysed against a different return threshold.
+fn basin_entry(args: &[String]) {
+    let path: String = arg(&args, "--seed-config", String::from("seed.json"));
+    let seed_cfg = read_config(&path);
+    let seed: u64 = arg(&args, "--seed", 0x5EED);
+    let trials: u64 = arg(&args, "--trials", 40);
+    let budget: u64 = arg(&args, "--budget-moves", 2_000_000);
+    let eps_list: String = arg(&args, "--eps", String::from("1e-5,1e-4,1e-3,1e-2,1e-1"));
+
+    // `--t-hot-scale s` sets t_hot = s * eps per cell, which is what makes this a
+    // *local quench* rather than a fresh search: a chain started 1e-3 away from a
+    // configuration and then heated to the stock 0.25 has left the neighbourhood
+    // before its first accepted move, and would measure nothing about the basin.
+    // Passing --t-hot instead pins one temperature across the sweep, which is the
+    // right instrument for the different question of whether the campaign's own
+    // annealer holds the basin when started inside it.
+    let t_hot_scale: f64 = arg(&args, "--t-hot-scale", 1.0);
+    let t_hot_fixed: f64 = arg(&args, "--t-hot", f64::NAN);
+
+    let mut p = Params {
+        steps: arg(&args, "--steps", 400_000),
+        t_hot: f64::NAN,
+        t_cold: arg(&args, "--t-cold", 1e-12),
+        lambda0: arg(&args, "--lambda0", 2.0),
+        lambda1: arg(&args, "--lambda1", 1e6),
+        move_rotate: arg(&args, "--move-rotate", 2.0),
+        p_rotate: arg(&args, "--p-rotate", 0.35),
+        p_reseed: arg(&args, "--p-reseed", 0.5),
+        max_restarts: arg(&args, "--max-restarts", 1),
+    };
+
+    let seed_side = geom::required_side(&seed_cfg);
+    let seed_overlap = geom::total_overlap(&seed_cfg);
+    println!(
+        "{{\"kind\":\"seed\",\"n\":{},\"path\":\"{}\",\"side\":{:.17e},\"overlap\":{:.3e},\"trials_per_eps\":{},\"budget_moves\":{}}}",
+        seed_cfg.n, path, seed_side, seed_overlap, trials, budget
+    );
+
+    let started = std::time::Instant::now();
+    for token in eps_list.split(',') {
+        let eps: f64 = token.trim().parse().expect("bad --eps value");
+        // Floored at t_cold: eps = 0 is a legitimate cell (the instrument check that
+        // the seed returns unchanged), and a zero temperature makes the geometric
+        // cooling ratio infinite and every subsequent move NaN.
+        p.t_hot = if t_hot_fixed.is_nan() {
+            (t_hot_scale * eps).max(p.t_cold)
+        } else {
+            t_hot_fixed
+        };
+        let outcomes: Vec<_> = (0..trials)
+            .into_par_iter()
+            .map(|trial| {
+                let o = search::run_entry_chain(&seed_cfg, seed, trial, &p, budget, eps);
+                let dev = search::max_deviation(&o.best, &seed_cfg);
+                (trial, o, dev)
+            })
+            .collect();
+        for (trial, o, dev) in &outcomes {
+            // A chain that never reached a feasible configuration has no landing
+            // point. Its stored `best` is still the seed, so reporting a deviation
+            // would record a perfect return for a trial that in fact failed -- the
+            // exact shape of false positive an entry test exists to avoid.
+            let (side, gap, dev_s) = if o.best_side.is_finite() {
+                (
+                    format!("{:.17e}", o.best_side),
+                    format!("{:.6e}", o.best_side - seed_side),
+                    format!("{dev:.6e}"),
+                )
+            } else {
+                ("null".into(), "null".into(), "null".into())
+            };
+            println!(
+                "{{\"kind\":\"entry\",\"n\":{},\"eps\":{:.3e},\"trial\":{},\"seed\":{},\
+\"t_hot\":{:.3e},\"feasible\":{},\"best_side\":{},\"seed_side\":{:.17e},\"side_gap\":{},\
+\"max_dev\":{},\"overlap\":{:.3e},\"moves\":{},\"restarts\":{}}}",
+                seed_cfg.n, eps, trial, seed, p.t_hot, o.best_side.is_finite(),
+                side, seed_side, gap, dev_s, o.best_overlap, o.moves, o.restarts
+            );
+        }
+    }
+    println!(
+        "{{\"kind\":\"summary\",\"mode\":\"basin-entry\",\"n\":{},\"seed\":{},\"trials_per_eps\":{},\
+\"eps\":\"{}\",\"seconds\":{:.3},\"params\":{}}}",
+        seed_cfg.n, seed, trials, eps_list, started.elapsed().as_secs_f64(), json_params(&p)
+    );
 }
 
 /// Checks that must hold before any number this binary prints means anything.

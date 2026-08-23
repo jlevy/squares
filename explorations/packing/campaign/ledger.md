@@ -6,7 +6,7 @@
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 4 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 5 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -18,17 +18,18 @@
 | H-012 | blocked | search | The proved-optimal basin's quench probability at n = 10, and Trump's a | n: 10 11 | 0 |  |
 | H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 | 10.2m cpu |
 | H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |  |
-| H-018 | open | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 0 |  |
+| H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m cpu |
 
 ## Rounds
 
-### rejected (3)
+### rejected (4)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-001 | series-000 | 11 | claude-opus-5 | H-016 | Refutes H-016: the annealer is within 1e-4 of the standing best only at n = 12, missing by 4.19e-04 at n = 10 and by 3.73e-02 at n = 11. Also serves as the series baseline, since method.control is the trivial grid every chain starts from. |
 | exp-002 | series-000 | 10 | claude-opus-5 | H-016 | On this cell the annealer misses the standing best by +4.194e-04, outside the 1e-4 H-016 declared, so the claim is refuted here. |
 | exp-003 | series-000 | 11 | claude-opus-5 | H-016 | On this cell the annealer misses the standing best by +3.733e-02, outside the 1e-4 H-016 declared, so the claim is refuted here. |
+| exp-005 | series-000 | 11 | claude-opus-5 | H-018 | Refutes H-018 as stated - 0 of 40 trials return within 1e-6 at eps = 1e-3 in any arm - but the shape of the failure is the result: the return distance scales linearly with eps with no threshold, and halves when the effort is multiplied by ten, so what was measured is the refiner's convergence rate, not a basin wall. |
 
 ### accepted (1)
 
@@ -38,5 +39,5 @@
 
 ## Effort
 
-4 rounds, 0 agent-minutes, 10.2 cpu-minutes.
+5 rounds, 75 agent-minutes, 11.5 cpu-minutes.
 
