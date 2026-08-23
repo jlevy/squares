@@ -67,11 +67,23 @@ def load(directory: Path, envelope: str, pattern: str = "*.md") -> list[dict]:
     return out
 
 
-def board_ids() -> set[str] | None:
-    """H-ids named on the idea board, or None when there is no board yet."""
+def board_ids() -> tuple[set[str], set[str]] | None:
+    """(H-ids named on the board, H-ids the board declares reserved).
+
+    A reserved id is one held for a claim that exists somewhere upstream -- another
+    campaign's register, a paper, a review -- but has not been codified here yet.
+    Naming it on the board is how the two numberings stay aligned and how nobody
+    reuses it; it is not a dangling reference. Declare them with a line like:
+
+        <!-- reserved-ids: H-003 H-004 H-013 -->
+    """
     if not IDEAS.exists():
         return None
-    return set(re.findall(r"\bH-[0-9]{3}\b", IDEAS.read_text()))
+    text = IDEAS.read_text()
+    reserved = set()
+    for line in re.findall(r"<!--\s*reserved-ids:([^>]*?)-->", text):
+        reserved |= set(re.findall(r"\bH-[0-9]{3}\b", line))
+    return set(re.findall(r"\bH-[0-9]{3}\b", text)), reserved
 
 
 def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> list[str]:
@@ -124,14 +136,21 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
     # The board is hand-written, so it is reconciled rather than regenerated. Both
     # directions matter: a board ahead of the registry points at nothing, and a
     # hypothesis missing from the board is invisible to the next agent that arrives.
-    on_board = board_ids()
-    if on_board is None:
+    board = board_ids()
+    if board is None:
         problems.append("no ideas.md: the campaign has no orientation page")
     else:
-        for hypothesis_id in sorted(on_board - known):
+        on_board, reserved = board
+        for hypothesis_id in sorted(on_board - known - reserved):
             problems.append(f"ideas.md: names {hypothesis_id}, which is not in the registry")
         for hypothesis_id in sorted(known - on_board):
             problems.append(f"ideas.md: does not mention {hypothesis_id}")
+        # A reservation that has been fulfilled is stale and must be retired, or the
+        # board keeps claiming an id is unwritten after it has been written.
+        for hypothesis_id in sorted(reserved & known):
+            problems.append(
+                f"ideas.md: {hypothesis_id} is declared reserved but is now in the registry"
+            )
 
     # Cross-field verdict rules. These would be `allOf` conditionals in the schema,
     # except that softschema 0.6.2 refuses any allOf object composition under

@@ -7,10 +7,10 @@ softschema:
   status: enforced
 experiment:
   id: exp-001
-  series: series-001
+  series: series-000
   title: Baseline sweep of the stock annealer at n = 10, 11, 12
   date: '2026-08-22'
-  hypotheses: [H-001]
+  hypotheses: [H-016]
   tier: exploratory
   subject:
     label: stock sqsearch annealer, default parameters
@@ -91,7 +91,7 @@ experiment:
     decision: rejected
     primary_criterion: best_side
     reason: >-
-      Refutes H-001: the annealer is within 1e-4 of the standing best only at n = 12,
+      Refutes H-016: the annealer is within 1e-4 of the standing best only at n = 12,
       missing by 4.19e-04 at n = 10 and by 3.73e-02 at n = 11. Also serves as the
       series baseline, since method.control is the trivial grid every chain starts from.
     commit: 'd6a1057'
@@ -105,7 +105,7 @@ sweep, five deterministic seeds per cell, eight chains per seed, an equal budget
 moves per chain. 12 billion moves in 302 seconds.
 
 The round tests
-[H-001](../../../hypotheses/H-001-stock-annealer-reaches-standing-best.md) — the null
+[H-016](../../../hypotheses/H-016-stock-annealer-reaches-standing-best.md) — the null
 hypothesis that a serious budget on a general-purpose annealer reaches the best known
 packing — and establishes the numbers every later round is measured against.
 
@@ -150,7 +150,7 @@ After the fix the `s(5)` control improved 18-fold, from a gap of `2.97e-04` to
 
 ## Result
 
-**H-001 is refuted.** Its claim was `1e-4` on *every* cell, and only `n = 12` meets
+**H-016 is refuted.** Its claim was `1e-4` on *every* cell, and only `n = 12` meets
 that: `n = 10` misses by `4.19e-04` and `n = 11` by `3.73e-02`. The two failures are
 nothing alike, and separating them is the round’s real output.
 
@@ -174,7 +174,7 @@ The surprise was `n = 10`, and it was surprising enough to be written down wrong
 the draft of this artifact called `n = 10` a confirmation, because the search plainly
 found the right basin.
 It did not meet the criterion.
-`4.19e-04` is outside the `1e-4` H-001 declared, and the generated frontmatter said so
+`4.19e-04` is outside the `1e-4` H-016 declared, and the generated frontmatter said so
 while the prose did not.
 Measuring, missing, and calling it a pass is exactly what pre-registration exists to
 stop, and it took the generated table sitting next to the prose to catch it.
@@ -185,6 +185,16 @@ could not tell them apart.
 The tier-2 numerical refinement step is more urgent than it looked when the tiers were
 laid out, and a future criterion should probably score basin-finding and basin-polishing
 separately.
+
+## Annotation, 2026-08-23: renumbered on merge
+
+This round was recorded against `H-001`. When the campaign merged with the standing
+review’s hypothesis register — which owns `H-001` through `H-015` — the claim was
+renumbered to `H-016`, and the references above follow.
+Nothing about the measurement changed; the ids did.
+The registry conflict is exactly the one
+[`traps.md`](../../../../../.agents/skills/experiment-loop/references/traps.md) predicts
+for parallel campaigns, and it is recorded here rather than erased.
 
 ## Limits
 

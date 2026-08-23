@@ -1,14 +1,14 @@
 ---
-title: series-001 — smoke pass at n = 10, 11, 12
+title: series-000 (S0) — smoke and calibration
 softschema:
   contract: packing.squares:Series/v1
   schema: ../../schemas/series.schema.yaml
   envelope: series
   status: enforced
 series:
-  id: series-001
-  slug: smoke-n11
-  title: Smoke pass — reproduce what is known, then try the obvious hypotheses
+  id: series-000
+  slug: smoke-and-calibration
+  title: 'S0: smoke and calibration — prove the machinery, establish every baseline metric'
   status: open
   opened: '2026-08-22'
   closed: null
@@ -19,7 +19,9 @@ series:
     anything subtle is attempted.
   opened_because: >-
     First series. There is no prior instrument, so nothing is carried forward and
-    every number here starts from zero.
+    every number here starts from zero. Renumbered from series-001 when this campaign
+    merged with the standing review's series plan, so that S0-S6 map onto
+    series-000..series-006 exactly; no artifact had been published under the old id.
   instrument:
     name: sqsearch
     version: 0.1.0
@@ -33,7 +35,12 @@ series:
   carries_forward: []
   budget: one overnight session, 40 rounds
 ---
-# series-001 — the smoke pass
+# series-000 (S0) — smoke and calibration
+
+This is **S0** of the
+[standing review’s series plan](../../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#series-and-priorities):
+prove all the machinery works end to end and establish every baseline metric, before any
+strategy is tested.
 
 The first pass exists to test the loop, not the mathematics.
 Its hypotheses are deliberately the obvious ones, its cells are mostly cases whose
@@ -61,6 +68,22 @@ A search harness that has never been asked to fail has not been tested.
 every chain before the move budget did, so `--budget-moves` was inert and two strategies
 compared “at equal budget” would have had unequal work.
 The tell was that results got *worse* when the declared budget was raised.
+
+## What S0 cannot tell us, and the correction that revealed it
+
+The review’s calibration ladder and this series’ controls both use `n = 5` and `n = 10`.
+The
+[search-philosophy report](../../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md#calibration-must-match-mechanism-not-just-difficulty)
+makes the sharp point that **both proved optima are 45°-tilt mechanisms** — symmetric,
+and sitting in basins blind search reaches without help.
+An engine can pass this ladder and remain structurally blind to what `n = 11` actually
+demands: an oblique core locked at `≈ 40.182°`, a mechanism **no proved case
+exercises**.
+
+So this series validates *machinery*, not *strategy*, and its passing controls must not
+be read as evidence that the search can find records.
+Mechanism-matched calibration — `s(17)`, `n = 11` at inflated `δ`, basin-entry tests —
+belongs to the later series and is registered separately.
 
 ## What this series will not do
 

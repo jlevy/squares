@@ -3,8 +3,14 @@ Its referential integrity with the registry is checked by ledger.py, not its con
 
 # Idea board — the `s(n)` search campaign
 
-**Campaign question.** Which search strategies reach the standing best for `s(n)` within
-a declared move budget, and what do the ones that fail find instead?
+**Campaign question.** What is the structure of the `s(n)` landscape — how many basins,
+how rare is the record’s, and which proposers reach which — with records as corollaries
+rather than the objective.
+
+That framing is adopted from the
+[search-philosophy report](../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md):
+**the map is the deliverable.** The campaign’s earlier question ("which strategies reach
+the standing best") is the special case that asks only about one basin.
 
 This page is the whole idea space on one screen.
 Read it before the registry, the exploration reports, or the ledger — those are deep and
@@ -25,6 +31,17 @@ whether or not it has been formalized, tried, or killed.
 
 Both directions are checked by `ledger.py`: every `H-NNN` named here exists, and every
 registered hypothesis appears here.
+
+**Ids `H-001`–`H-015` belong to the
+[standing review’s register](../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register)**,
+and are reserved even where not yet codified as artifacts, so the two numberings stay
+aligned.
+This campaign’s own claims start at `H-016`. Reserved ids are declared below and
+checked: a reservation that has been fulfilled is flagged as stale rather than left
+claiming the id is unwritten.
+
+<!-- reserved-ids: H-003 H-004 H-005 H-006 H-007 H-008 H-009 H-010 H-013 H-014 H-015 -->
+Budgets are in **pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`.
 
 ## Status vocabulary
 
@@ -49,48 +66,75 @@ a gap of `3.7e-02` to Trump.
 So the instrument works and the target is genuinely hard.
 Everything below is a theory about why, or a way around it.
 
-Two facts constrain most of these ideas.
+**The strategy premise, which reorganises everything below.** Records are rigid; rigid
+optima live in rare basins; so scaling a volume-weighted sampler multiplies effort
+against a probability the problem drives toward zero.
+The baseline is consistent with that — five independent seeds landing in a narrow band
+five times narrower than the remaining gap is what repeatedly finding the same wrong
+funnel looks like — but consistent is not evidence, and
+[H-012](hypotheses/H-012-record-basins-are-rare.md) is registered to kill the premise
+cheaply if it is wrong.
+
+**The building block everything waits on** is
+[H-002](hypotheses/H-002-lp-in-cell-polish.md): for fixed angles, minimising `s` is a
+linear program, already verified against Trump’s packing to `9e-16`. It turns “where the
+annealer stopped” into “which cell this is”, which is what makes basins nameable,
+countable, and exactly valued — and it is this campaign’s missing tier 2.
+
+Two further facts constrain most of these ideas.
 **Trump’s packing is rigid**, so it is an isolated point in configuration space rather
 than a basin with width — which is a reason to expect random restarts to miss it, and
-the reason [H-004](#the-shape-of-the-search-space) is the most informative cheap thing
-to measure.
-And **it uses exactly two distinct tilts**, `0°` and one free angle, which is
-a strong structural prior an unconstrained search does not exploit.
+the reason [H-018](hypotheses/H-018-basin-entry.md) is the most informative cheap thing
+runnable today. And **it uses exactly two distinct tilts**, `0°` and one free angle,
+which is a strong structural prior an unconstrained search does not exploit.
 
 The [search-strategy catalogue](../frontier/search-strategies.yaml) enumerates 20 ways
 anyone has ever found a packing; `strategy_refs` on each hypothesis cites into it, so
 the ledger can report which whole families remain untried.
 
-## Budget and schedule — how the engine is driven
+## The quench spine — what every other strategy runs on
 
 | # | Idea | Status | H | From | Why it might work, or not |
 | --- | --- | --- | --- | --- | --- |
-| 1 | Stock annealer, all cells, fixed budget | registered | [H-001](hypotheses/H-001-stock-annealer-reaches-standing-best.md) | baseline | The null hypothesis. Refuted at `n = 11`, confirmed at 10 and 12 |
-| 2 | Same annealer, 100× the budget | registered | [H-002](hypotheses/H-002-budget-scaling.md) | baseline | Separates “needs more compute” from “needs a different method” — the cheapest fork in the whole campaign |
-| 3 | Reseed probability sweep | raw |  |  | Currently 0.5 and unmeasured; controls exploration against polish |
-| 4 | Temperature schedule variants (linear, adaptive, reheat) | raw |  |  | Geometric is a default, not a finding |
-| 5 | Lambda ramp variants | raw |  |  | The overlap weight ramp is unmeasured; too fast may freeze overlaps in |
+| 1 | LP-in-cell polish, alternating with angle moves | registered | [H-002](hypotheses/H-002-lp-in-cell-polish.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | Single-cell half already verified to `9e-16`; the loop is what is untested. Everything else waits on it |
+| 2 | Canonical basin identity: `D₄` + relabel geometric key, contact graph up to isomorphism | shaped |  | review R-1 | Without it “basin” is undefined and basin statistics are not statistics |
+| 3 | Basin atlas as a soft-schema artifact, descriptors versioned alongside | shaped |  | strategy doc | The deliverable, on the strategy report’s framing |
+| 4 | Pair-test counter as the budget currency | shaped |  | review R-10 | Machine-independent; replaces this campaign’s move counter |
 
-## Structural priors — exploit what is known about the answer
-
-| # | Idea | Status | H | From | Why it might work, or not |
-| --- | --- | --- | --- | --- | --- |
-| 6 | Restrict to two distinct tilt angles | registered | [H-003](hypotheses/H-003-two-tilt-restriction.md) | orientation above | Trump’s packing has exactly two; collapses 11 angles to 2 free parameters. Risk: bakes in the answer’s shape, so a win says less than it appears |
-| 7 | Seed from the `6 + 5` block structure | shaped |  |  | Strong prior, but assumes the conjecture; only honest as a basin-width probe |
-| 8 | Rational-slope tilts `arctan(p/q)` only | raw |  | `search:6` | Produced records elsewhere. Trump’s angle is *not* rational-slope, so this would likely miss `n = 11` — informative as a negative |
-| 9 | Seed `n = 11` from the `s(10)` optimum plus one square | raw |  | `search:4` | Cheap; extension has produced records (`search:3`) |
-| 10 | Symmetry-restricted search | raw |  |  | Reduces dimension if the optimum has symmetry. Trump’s does not obviously |
-
-## Different search families — the untried columns of the catalogue
+## The premise, and the census that tests it
 
 | # | Idea | Status | H | From | Why it might work, or not |
 | --- | --- | --- | --- | --- | --- |
-| 11 | Billiard / inflation | raw |  | `search:11` | The method that actually produced records at `n = 29, 37`. The most conspicuous gap in what this campaign has tried |
-| 12 | Basin hopping with NLP polish per restart | raw |  | `search:12` | Polish is tier 2 and does not exist yet; blocked until it does |
-| 13 | Population / evolutionary | raw |  | `search:16` | Never aimed at squares-in-squares. The research program’s item 5 |
-| 14 | Contact-graph enumeration then algebraic solve | raw |  | `search:17`, `search:18` | How exact values are actually obtained; the natural bridge to tier 3 |
-| 15 | SAT / CP at fixed side | raw |  | `search:14` | Awkward under free rotation, per the catalogue’s own note |
-| 16 | Richer move set: swap two squares, move a block | raw |  |  | Current moves are single-square translate and rotate only |
+| 5 | Census the `n ≤ 10` landscape to saturation | registered | [H-011](hypotheses/H-011-small-n-census.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | Runs on existing Python plus the validated LP — no Rust. Gates the atlas |
+| 6 | Locate the record basin in the quench-frequency ranking | registered | [H-012](hypotheses/H-012-record-basins-are-rare.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | The load-bearing premise, killable in the cheapest tier |
+| 7 | Basin-entry: perturb Trump’s exact packing, measure the return rate | registered | [H-018](hypotheses/H-018-basin-entry.md) | this campaign | Runnable today; separates “cannot find the region” from “cannot hold it” |
+| 8 | Saturation curves are lawful, so coverage is estimable | raw | `H-007` | review H-7 | Turns negative results into estimates. Reserved id, not yet codified |
+| 9 | False-basin rate `r(n)` — float basins the exact verifier rejects | raw | `H-008` | review H-8 | Free: a counter on existing work. Any value is a result |
+| 10 | Symmetry dedup ratio, raw versus canonical counts | raw | `H-009` | review H-9 | Free; and required before any comparison with Ellsworth’s counts |
+
+## Proposers — the strategies the spine makes cheap
+
+| # | Idea | Status | H | From | Why it might work, or not |
+| --- | --- | --- | --- | --- | --- |
+| 11 | Angle-class two-level search | registered | [H-001](hypotheses/H-001-angle-class-reduction.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | The honest continuous dimension is `n`, not `3n+1`; records use 1–2 angles |
+| 12 | δ-continuation: inflate the container, walk `δ` down with re-polish | raw | `H-013` | review H-13 | Rare-event search becomes path-following; merge-`δ` doubles as the atlas’s barrier scale |
+| 13 | MAP-Elites over mechanism descriptors | raw | `H-015` | review H-15 | Keeps the loss, changes what is retained. Descriptors must separate the grid funnel from the rigid-rare family |
+| 14 | Neighbor-transfer seeding from `n ± 1` records | raw | `H-004` | review H-4 | How the human record table actually advances |
+| 15 | Superdisk continuation from circles to squares | raw | `H-014` | review H-14 | Last in line: the only item needing new geometry |
+| 16 | Stock annealer, all cells, fixed budget | registered | [H-016](hypotheses/H-016-stock-annealer-reaches-standing-best.md) | this campaign | Refuted by exp-001. The null |
+| 17 | Same annealer, 100× the budget | registered | [H-017](hypotheses/H-017-budget-scaling.md) | this campaign | Demoted: H-012 answers it better and cheaper |
+| 18 | Billiard / inflation | raw |  | `search:11` | Produced records at `n = 29, 37`; δ-continuation is its principled cousin |
+| 19 | Constructor DSL proposed by an LLM, evaluated by LP + exact check | raw |  | strategy doc | Sequenced behind the first atlas artifact — there must be something verified to read |
+
+## Targets and calibration
+
+| # | Idea | Status | H | From | Why it might work, or not |
+| --- | --- | --- | --- | --- | --- |
+| 20 | `s(17)` as the mechanism-matched calibration target | shaped |  | strategy doc | The nearest case whose record uses genuinely oblique structure. `n = 5, 10` do not exercise it |
+| 21 | `n = 11` at inflated `δ` as a continuous progress metric | shaped |  | strategy doc | The largest `δ` at which the engine still finds Trump’s cell moves continuously, unlike found/not-found |
+| 22 | `m² − 3` at `n = 61, 78, 97`, Cleemann-style `arctan(3/4)` | raw | `H-005` | review H-5 | Honest prior low, cost near zero, analytic attempt needs no engine |
+| 23 | LP duals as unavoidable-set generators (proof lane) | raw | `H-006` | review H-6 | First mechanized step anyone would have taken on the proof side |
+| 24 | Stromquist falsifier triple | raw | `H-010` | review H-10 | Known-answer test; a failure is a machinery bug by definition |
 
 ## Open questions
 

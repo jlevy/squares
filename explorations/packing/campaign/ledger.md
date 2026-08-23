@@ -6,16 +6,19 @@
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-001 | open | Smoke pass — reproduce what is known, then try the obvious hypotheses | 1 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 1 | First series. There is no prior instrument, so not |
 
 ## Registry
 
 | id | status | lane | claim | sweep | rounds |
 | --- | --- | --- | --- | --- | --- |
-| H-001 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10 11* 12 | 1 |
-| H-002 | open | search | The same stock annealer at 100x the baseline budget (10^10 moves per c | n: 11 | 0 |
-| H-003 | blocked | search | A search restricted to two distinct tilt angles - one fixed at 0, one  | n: 10 11 12 | 0 |
-| H-004 | open | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 0 |
+| H-001 | blocked | search | Optimal packings at n <= ~30 use at most 3 distinct tilt angles, so a  | n: 5 10 11 | 0 |
+| H-002 | blocked | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5 10 11 | 0 |
+| H-011 | blocked | search | LP-quenching multistarts at n <= 10 yields a basin count that saturate | n: 5 6 7 8 9 10 | 0 |
+| H-012 | blocked | search | The proved-optimal basin's quench probability at n = 10, and Trump's a | n: 10 11 | 0 |
+| H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10 11* 12 | 1 |
+| H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |
+| H-018 | open | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 0 |
 
 ## Rounds
 
@@ -23,5 +26,5 @@
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-001 | series-001 | 11 | claude-opus-5 | H-001 | Refutes H-001: the annealer is within 1e-4 of the standing best only at n = 12, missing by 4.19e-04 at n = 10 and by 3.73e-02 at n = 11. Also serves as the series baseline, since method.control is the trivial grid every chain starts from. |
+| exp-001 | series-000 | 11 | claude-opus-5 | H-016 | Refutes H-016: the annealer is within 1e-4 of the standing best only at n = 12, missing by 4.19e-04 at n = 10 and by 3.73e-02 at n = 11. Also serves as the series baseline, since method.control is the trivial grid every chain starts from. |
 

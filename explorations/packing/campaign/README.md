@@ -34,9 +34,15 @@ The **instance axis is `n`**, and the first three cells each have a different jo
 
 | `n` | role | standing best | why this cell |
 | --- | --- | --- | --- |
-| 10 | **positive control** | `3 + 1/√2 = 3.70710678…`, proved | Known answer, and *not* the grid — it needs a genuine 45° tilted family. A searcher that cannot recover it has not earned an opinion about an open case. |
+| 10 | **positive control** (machinery only) | `3 + 1/√2 = 3.70710678…`, proved | Known answer, and *not* the grid. But its mechanism is a 45° tilt, so passing it proves the machinery and says nothing about finding an oblique record — see the caveat below. |
 | 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case, smallest open gap with a non-trivial record, degree-8 and rigid. |
 | 12 | **negative control** | `4`, the trivial grid | The 4×4 grid is almost certainly optimal. A run that “beats” it has found a bug, not a packing. |
+
+**These three cells calibrate machinery, not strategy.** Both proved cases in the ladder
+are 45°-tilt mechanisms, symmetric and reachable by blind search; `n = 11` needs an
+oblique core at `≈ 40.182°`, a mechanism **no proved case exercises**. Mechanism-matched
+targets — `s(17)`, `n = 11` at inflated `δ`, and basin-entry tests — are registered
+separately and are what would demonstrate record-finding ability.
 
 Standing bests are read from [`../frontier/`](../frontier/README.md) — `n-010.md`,
 `n-011.md`, `n-012.md` — never retyped into a round.
@@ -50,9 +56,18 @@ claim.
 
 | Tier | What it is | May claim |
 | --- | --- | --- |
-| `f64_screen` | [`sqsearch`](../sqsearch/) — annealing that minimises the enclosing side, ~40M moves/s | a basin was found; a strategy comparison |
-| `polished` | numerical refinement of one basin to ~1e-12 | a candidate worth certifying |
+| `f64_screen` | [`sqsearch`](../sqsearch/) — annealing that minimises the enclosing side, ~40M moves/s | a candidate was proposed |
+| `polished` | **LP-in-cell quench** ([H-002](hypotheses/H-002-lp-in-cell-polish.md)) — fix angles and axis assignment, solve the cell’s linear program | *this* is the basin, named and exactly valued; a candidate worth certifying |
 | `exact` | [`sqpack`](../README.md#exact-verification) — separating-axis over the packing’s own algebraic number field | **validity, and only here: a record** |
+
+The middle tier is not merely “polish”.
+For fixed angles and a fixed separating-axis assignment, minimising `s` is a **linear
+program**, so the quench endpoint is exact within its cell.
+That is what turns “where the annealer stopped” into “which cell this is” — the
+difference between a tolerance-dependent artifact of the cooling schedule and a
+discrete, nameable, exactly-valued object.
+Basin identity, the census, the atlas and every descriptor depend on it, which is why it
+is the registry’s top priority and not yet built.
 
 The tier boundary is not bureaucracy.
 A record packing has pairs touching at *exactly* zero separation — 14 of the 55 pairs in
@@ -70,7 +85,8 @@ Recorded on every round; the role says what each may conclude.
 | --- | --- | --- |
 | `best_side` | **outcome** | smallest valid side found, `record` shape against the frontier’s standing best |
 | `outcome` | **outcome** | `determination`: `beat_record`, `reached_basin`, `near_miss`, `no_progress`, `invalid` |
-| `moves`, `seconds` | cost | engine summary |
+| `pair_tests` | cost | **the budget currency**; tiers S/M/L = `1e9`/`1e11`/`1e13`. Machine-independent, unlike wall clock |
+| `moves`, `seconds` | cost | engine summary; reported alongside as a courtesy |
 | `overlap` | **guard** | total penetration depth of the reported packing; a non-zero value at screen tier invalidates the run |
 | `selftest_passed` | **guard** | `sqsearch --selftest` before any run is recorded |
 | control cells | **guard** | `n=10` must land within `1e-2`; `n=12` must not go below `4` |
@@ -105,15 +121,18 @@ Clauses 1–4 are arithmetic.
 Clause 5 is not, and an unattended runner may apply it only in the conservative
 direction: it may decline a marginal win and must not accept one.
 
-**Equal budget or no comparison.** Two strategies compared at different `--budget-moves`
-have not been compared.
-The budget is moves, not wall time, so results are portable across machines.
+**Equal budget or no comparison.** Two proposers compared at different budgets have not
+been compared. The currency is **pair-tests**, not wall clock and not moves: it is
+machine-independent and comparable across proposers whose move semantics differ, which
+matters as soon as δ-continuation and archive-based search sit beside annealing.
+`sqsearch` currently reports moves only; emitting a pair-test counter is a tracked work
+item.
 
 ## Budget and stop conditions
 
 | Budget | Value |
 | --- | --- |
-| Per round | 5 seeds × 8 chains × 100M moves per cell (~40 s per cell on 8 cores) |
+| Per round | tier S = `1e9` pair-tests; tier M = `1e11`; tier L = `1e13` |
 | Per session | 8 hours, or 40 rounds |
 | Per hypothesis | 3 rounds, then it must be `abandoned` with `reopen_when` |
 
@@ -154,6 +173,37 @@ The ones specific to this campaign:
 - Do not delete a run that came out badly.
   Negative results are the point.
 
+## Series
+
+The series map 1:1 onto the
+[standing review’s plan](../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#series-and-priorities):
+`series-000` is S0, `series-001` is S1, and so on through S6.
+
+| Series | Purpose | State |
+| --- | --- | --- |
+| `series-000` (S0) | smoke and calibration; every baseline metric’s first point | **open** |
+| `series-001` (S1) | `n = 11` baseline campaign with canonical basins in place | not opened |
+| `series-002` (S2) | `n = 12`, seeding and the LP-dual probe | not opened |
+| `series-003` (S3) | opportunistic `m² − 3` slot | not opened |
+| `series-004` (S4) | proof lane, after PoseBox | not opened |
+| `series-005` (S5) | structured search: angle-class engine | not opened |
+| `series-006` (S6) | landscape cartography — the atlas, the premise, the ladders | not opened |
+
+S6 *interleaves* with S1 rather than following it: S1’s basin byproducts are the
+census’s inputs.
+
+## Where this sits
+
+The campaign is the *experiment record*; the toolkit that produces the numbers is
+specified in
+[plan-2026-08-22-minimal-packing-toolkit.md](../docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md),
+whose Phase 2 (the quench spine) is what makes basins nameable and this record’s
+`polished` tier real.
+The hypothesis registry here is the codified form of the
+[standing review’s register](../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register);
+`H-001`–`H-015` are its ids, reserved even where not yet codified, and this campaign’s
+own claims start at `H-016`.
+
 ## Layout
 
 ```
@@ -163,7 +213,7 @@ campaign/
   schemas/               the four contracts, specialised from the skill's assets
   explorations/          X-NNN idea reports, free-form
   hypotheses/            H-NNN registry, spans every series
-  series/001-smoke-n11/  the first pass: reproductions and obvious hypotheses
+  series/000-smoke-and-calibration/   S0: reproductions and machinery gates
     README.md            the series artifact: goal, instrument, why it exists
     experiments/         exp-NNN, one per round
     results/             raw JSONL from the engine
