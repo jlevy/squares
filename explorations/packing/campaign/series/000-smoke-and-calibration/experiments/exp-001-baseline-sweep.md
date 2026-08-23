@@ -30,7 +30,7 @@ experiment:
     entry_point: explorations/packing/run_baseline.sh
     command: 'sqsearch --n N --seed S --chains 8 --budget-moves 100000000, for N in 10 11 12 and S in 1..5'
     budget: '12,000,000,000 moves total, 302.4 s wall'
-    record: campaign/series/001-smoke-n11/results/exp-001-baseline.jsonl
+    record: campaign/series/000-smoke-and-calibration/results/exp-001-baseline.jsonl
   results:
   - shape: record
     metric: best_side
@@ -193,8 +193,8 @@ review’s hypothesis register — which owns `H-001` through `H-015` — the cl
 renumbered to `H-016`, and the references above follow.
 Nothing about the measurement changed; the ids did.
 The registry conflict is exactly the one
-[`traps.md`](../../../../../.agents/skills/experiment-loop/references/traps.md) predicts
-for parallel campaigns, and it is recorded here rather than erased.
+[`traps.md`](../../../../../../.agents/skills/experiment-loop/references/traps.md)
+predicts for parallel campaigns, and it is recorded here rather than erased.
 
 ## Limits
 

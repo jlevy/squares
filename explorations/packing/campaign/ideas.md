@@ -59,7 +59,8 @@ root of an irreducible degree-8 polynomial.
 Both endpoints have stood for over two decades, and this is still the *smallest* open
 gap at `n ≤ 100`.
 
-What the [baseline](series/001-smoke-n11/experiments/exp-001-baseline-sweep.md)
+What the
+[baseline](series/000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md)
 established: the stock annealer at 100M moves per chain recovers `s(10)` to `4.2e-04`
 and correctly refuses to beat the `n = 12` grid, but reaches only `3.9144` at `n = 11` —
 a gap of `3.7e-02` to Trump.
@@ -143,9 +144,8 @@ Registered as `kind: open_question` when worth carrying formally.
 
 - <a id="the-shape-of-the-search-space"></a>**How wide is Trump’s basin?** It is rigid,
   so possibly a measure-zero attractor.
-  Registered as [H-004](hypotheses/H-004-basin-width.md) — measurable by starting *at*
+  Registered as [H-018](hypotheses/H-018-basin-entry.md) — measurable by starting *at*
   the known configuration, perturbing by `ε`, and seeing what fraction of runs return.
-  The single cheapest thing that would explain the baseline.
 - **What does the searcher actually find at `n = 11`?** The baseline’s `3.9144` is some
   configuration. How many distinct local optima does it have, and how many tilt angles do
   they use? A histogram over restarts would say whether the search is finding one wrong

@@ -9,8 +9,15 @@ It is frozen while rounds are running — see
 
 ## The campaign question
 
-**Which search strategies reach the standing best for `s(n)` within a declared move
-budget, and what do the ones that fail find instead?**
+**What is the structure of the `s(n)` landscape — how many basins, how rare is the
+record’s, and which proposers reach which — with records as corollaries rather than the
+objective?**
+
+This is the
+[search-philosophy report’s](../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
+framing, adopted here: **the map is the deliverable.** The campaign’s original question
+— which strategies reach the standing best — is the special case that asks about one
+basin only, and it remains a sub-question rather than the goal.
 
 Note what this does *not* say.
 It does not say “beat Trump’s 1979 packing”.

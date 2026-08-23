@@ -9,8 +9,8 @@ What it does:
     experiments inside each series
   * runs the whole-set invariants that per-artifact schema validation cannot see:
     duplicate ids, dangling hypothesis references, orphan experiments, stale claims,
-    the cross-field verdict rules a soft schema cannot carry, and the two-way
-    reconciliation between ideas.md and the registry
+    the cross-field verdict rules a soft schema cannot carry, the two-way
+    reconciliation between ideas.md and the registry, and dead relative links
   * derives each hypothesis's status from the experiments referencing it -- status is
     never a stored field
   * renders ledger.md, which is a generated view and must never be hand-edited
@@ -84,6 +84,25 @@ def board_ids() -> tuple[set[str], set[str]] | None:
     for line in re.findall(r"<!--\s*reserved-ids:([^>]*?)-->", text):
         reserved |= set(re.findall(r"\bH-[0-9]{3}\b", line))
     return set(re.findall(r"\bH-[0-9]{3}\b", text)), reserved
+
+
+def dead_links() -> list[str]:
+    """Relative Markdown links in the campaign that point at nothing.
+
+    Renaming an artifact leaves prose pointing at the old path, and neither schema
+    validation nor the id checks can see it -- a link is not an id. Found the
+    expensive way: a series rename left four dead links in a commit that passed
+    every other check.
+    """
+    problems = []
+    for path in sorted(ROOT.rglob("*.md")):
+        for target in re.findall(r"\]\(([^)#][^)]*)\)", path.read_text()):
+            if target.startswith(("http://", "https://", "mailto:")):
+                continue
+            resolved = (path.parent / target.split("#")[0]).resolve()
+            if not resolved.exists():
+                problems.append(f"{path.relative_to(ROOT)}: dead link -> {target}")
+    return problems
 
 
 def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> list[str]:
@@ -174,6 +193,8 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
             problems.append(f"{name}: in-progress without a lease")
         elif dt.datetime.fromisoformat(expires) < now:
             problems.append(f"{name}: STALE CLAIM, lease expired {expires}")
+
+    problems += dead_links()
 
     return problems
 

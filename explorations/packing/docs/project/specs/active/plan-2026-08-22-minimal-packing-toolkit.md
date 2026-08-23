@@ -183,6 +183,63 @@ Everything here may be “slow” — this is the agent tier, where the budget i
 differential-test reference.
 Every Rust predicate result must match it.
 
+### Stack and boundaries — decided by measurement
+
+Measured on this machine, `n = 11`, before choosing anything:
+
+| Stage | Cost |  |
+| --- | ---: | --- |
+| Annealer move (Rust or Numba) | 0.025 µs | 40 M/s/core |
+| `ctypes` call, 33 f64 into numpy | 0.52 µs |  |
+| JSONL round-trip, one candidate | 18.3 µs | 688 B/line |
+| Annealer move (pure Python) | 43 µs |  |
+| **LP quench (`scipy`/HiGHS)** | **1,283 µs** | 23 variables, 99 constraints |
+| **Exact verify (Python `sqpack`)** | **129,000 µs** |  |
+
+Seven orders of magnitude, and three conclusions fall straight out.
+
+**The boundary cannot sit inside a move loop**, where even a bare FFI call costs four
+moves. **Everywhere else it is free**: at candidate granularity `ctypes` is 0.04% of a
+quench and even JSONL is 1.4%. So transport speed decides nothing here, and the seam
+belongs between the proposer and the quench — which is where it already is.
+
+**Most of the programme is quench-dominated, not move-dominated.** The census, the
+premise test, δ-continuation, MAP-Elites and angle-class search all spend their time in
+the LP, at ~780 candidates/s/core *in any language*. Only an annealing proposer is
+move-dominated, and one already exists.
+
+**The slowest stage is the exact verifier**, at 100× the LP and 5,000× the annealer.
+That, not the search, is where compiled code earns its place.
+
+The rule this yields, and the reason the phases below are ordered as they are:
+
+> **Write it in Python.
+> Accelerate what a profile says is slow, not what looks slow.**
+
+Concretely: the spine is `scipy` and standard library, with no build step and no FFI.
+[`sqsearch`](../../../../sqsearch/) stays a native binary behind a JSONL seam, because
+it already exists and process isolation is worth having overnight.
+If a strategy later needs the quench *inside* its loop, add a `cdylib` crate-type to the
+same crate and call it with `ctypes` — 0.52 µs makes that viable, and it costs neither
+`maturin` nor wheels.
+
+**PyO3 is deferred, and may never be needed.** Its advantage is passing rich typed
+objects, and the certificate — the one genuinely rich interface here — must serialize to
+JSON regardless, for Lean and for third-party checking.
+Once the durable interface is JSON, a binary or a `cdylib` serves it.
+Revisit only if JSON round-trip is measured to bottleneck the exact layer.
+
+**Numba is not used.** It measures equal to Rust, but it would pin `numpy<2.5`, add JIT
+warmup, and produce opaque typing errors — the worst failure mode for an unattended run.
+Its one real advantage was letting agents prototype a new strategy without a build step,
+and that advantage evaporates once the spine is Python: a new quench-dominated strategy
+prototypes in plain Python at full speed.
+
+**What this does not change.** The “one predicate, many scalars” bet stays.
+It is a claim about the *code*, not about the transport, and the proof lane’s `PoseBox`
+still depends on it.
+Deferring the Rust core defers when that lands, not whether.
+
 **The spine, block by block.** Each is used by every proposer, so each is built once.
 
 | Block | What it does | Unblocks |
@@ -246,36 +303,14 @@ Phases 2 and 3 are the load-bearing ones.
 Phase 2 is runnable in the existing Python plus `scipy`, so it does not wait on Phase
 1’s Rust.
 
-### Phase 1: The verification core
+### Phase 1: The quench spine
 
-The spine. Everything else depends on it, and it is independently useful the moment it
-lands — it delivers the first exact re-verification of the record corpus.
-
-- [ ] `sqpack-core` crate: `Scalar` trait; corners, separating-axis test, containment,
-  grid bucketing. Generic, no allocation on the hot path.
-- [ ] `f64` and `Filtered` scalars; the staged ladder with per-stage filter-rate
-  counters.
-- [ ] `Algebraic` scalar over `ℚ(α)` backed by FLINT, with exact zero test and exact
-  sign.
-- [ ] Certificate type replacing the boolean return; JSON serialization.
-- [ ] Retain the separating axis and sign in `separated()` in the Python oracle too, so
-  both sides emit the same certificate shape.
-- [ ] PyO3 bindings: `load`, `verify`, `Packing`, `Certificate`.
-- [ ] Differential test: Rust versus the Python oracle on Trump’s packing, on every
-  negative control already in `negative_control.py`, and on every corpus entry with
-  exact algebraic data.
-- [ ] Extend `test.sh` with the differential test and the certificate round-trip.
-
-**Done when:** `sqpack.verify(pk)` returns a certificate in **under 10 ms** for `n = 11`
-(against 0.35 s today), the Rust and Python verdicts agree everywhere, and every
-analytically-optimized record in the corpus verifies exactly.
-
-### Phase 2: The quench spine
-
-**The highest-leverage phase, and the one the original plan was missing.** Until a float
-configuration can be turned into a named basin with an exact side length, “basin” is
-undefined, basin statistics are artifacts of the cooling schedule, and no two proposers
-can be compared. The review’s H-2 is its own register’s top priority for this reason.
+**First, because it is both the highest-leverage phase and the cheapest.** It is `scipy`
+and standard library: no Rust, no FFI, no build step.
+Until a float configuration can be turned into a named basin with an exact side length,
+“basin” is undefined, basin statistics are artifacts of the cooling schedule, and no two
+proposers can be compared.
+The review’s H-2 is its own register’s top priority for this reason.
 
 - [ ] **`quench`: LP-in-cell.** Fix angles and each pair’s separating axis; solve the
   cell’s linear program.
@@ -300,10 +335,10 @@ proposer; a perturbed Trump packing quenches back to Trump’s cell with the exa
 (H-2 resolved); the atlas validates against its schema; and `sqsearch` reports
 pair-tests.
 
-*This phase is runnable in the existing Python plus `scipy` — no Rust required — which
-is why it need not wait on Phase 1.*
+Everything here is quench-dominated at ~780 candidates/s/core, which is the same in any
+language, so there is nothing for compiled code to buy yet.
 
-### Phase 3: The proposer interface
+### Phase 2: The proposer interface
 
 Thin by design. The work here is the boundary, not the strategies.
 
@@ -320,10 +355,33 @@ Thin by design. The work here is the boundary, not the strategies.
 **Done when:** multistart and annealing run through one pipeline at equal pair-tests and
 their basin sets are directly comparable; adding a proposer touches no spine code.
 
+### Phase 3: The census, the premise, and the atlas
+
+The phase that produces the deliverable.
+It is mostly *running* the previous phases.
+
+- [ ] **H-11 — census `n ≤ 10`** to saturation; ship the atlas as a soft-schema artifact
+  with its discovery curves.
+- [ ] **H-12 — the premise**: locate the record basin in the quench-frequency ranking.
+  If record basins are *not* rare, most of the cartography programme stands down and the
+  campaign reverts to throughput.
+  This is the cheapest available test of it.
+- [ ] **E2 — `n = 11`** basin statistics with canonical identity in place.
+- [ ] **E3 — `n = 12`**, with a saturation-based standard for what a negative result
+  means.
+- [ ] Mechanism-matched calibration: `s(17)`, `n = 11` at inflated `δ`, basin-entry
+  (H-18). The `n = 5`/`n = 10` ladder validates machinery only — both are 45° mechanisms
+  and neither exercises an oblique core.
+- [ ] Write results back into the frontier corpus and the research documents.
+
+**Done when:** the atlas exists for `n ≤ 10` with discovery curves attached, H-12 has a
+verdict, and the same seed reproduces the same basin digest on 1 worker and on 32.
+
 ### Phase 4: Strategy proposers
 
-Each of these is now small, and each corresponds to a registered hypothesis with a kill
-criterion already written.
+Each of these is now small, each corresponds to a registered hypothesis with a kill
+criterion already written, and — because they are all quench-dominated — each is written
+in Python at full speed.
 
 - [ ] **δ-continuation** (H-13): inflate the container, walk `δ` down with a re-quench
   at every step. Its merge-`δ` data is the atlas’s barrier scale, so the same runs pay
@@ -338,28 +396,51 @@ criterion already written.
 **Done when:** each lands as a proposer with no spine changes, and each is measured
 against multistart at equal pair-tests on the ladder plus `n = 11`.
 
-### Phase 5: The census, the premise, and the experiments
+### Phase 5: Compiled acceleration, where the profile says
 
-The phase that produces the deliverable.
-It is mostly *running* the previous phases.
+**Deliberately late, and scoped by measurement rather than by ambition.** By this point
+the profile of a real campaign exists, and it says what to accelerate.
 
-- [ ] **H-11 — census `n ≤ 10`** to saturation; ship the atlas as a soft-schema artifact
-  with its discovery curves.
-- [ ] **H-12 — the premise**: locate the record basin in the quench-frequency ranking.
-  If record basins are *not* rare, most of the cartography programme stands down and the
-  campaign reverts to throughput.
-  This is the cheapest available test of it.
-- [ ] **E1 — corpus re-verification.** Every analytically-optimized record, exactly.
-- [ ] **E2 — `n = 11`** basin statistics with canonical identity in place.
-- [ ] **E3 — `n = 12`**, with a saturation-based standard for what a negative result
-  means.
-- [ ] Mechanism-matched calibration: `s(17)`, `n = 11` at inflated `δ`, basin-entry
-  (H-18). The `n = 5`/`n = 10` ladder validates machinery only — both are 45° mechanisms
-  and neither exercises an oblique core.
-- [ ] Write results back into the frontier corpus and the research documents.
+On the numbers taken before any of this was written, the exact verifier is the
+candidate: 129 ms per `n = 11` verification, 100× the LP quench and 5,000× an annealer
+move. Verifying every basin in a `10⁵`-basin census would take hours.
+Nothing else in the pipeline is close, and the annealer — the thing that looks slowest —
+already has a compiled implementation.
 
-**Done when:** the atlas exists for `n ≤ 10` with discovery curves attached, H-12 has a
-verdict, and the same seed reproduces the same basin digest on 1 worker and on 32.
+So this phase begins by re-measuring, and builds only what the measurement names.
+
+- [ ] `sqpack-core` crate: `Scalar` trait; corners, separating-axis test, containment,
+  grid bucketing. Generic, no allocation on the hot path.
+
+- [ ] `f64` and `Filtered` scalars; the staged ladder with per-stage filter-rate
+  counters.
+
+- [ ] `Algebraic` scalar over `ℚ(α)` backed by FLINT, with exact zero test and exact
+  sign.
+
+- [ ] Certificate type replacing the boolean return; JSON serialization.
+
+- [ ] Retain the separating axis and sign in `separated()` in the Python oracle too, so
+  both sides emit the same certificate shape.
+
+- [ ] PyO3 bindings: `load`, `verify`, `Packing`, `Certificate`.
+
+- [ ] Differential test: Rust versus the Python oracle on Trump’s packing, on every
+  negative control already in `negative_control.py`, and on every corpus entry with
+  exact algebraic data.
+
+- [ ] Extend `test.sh` with the differential test and the certificate round-trip.
+
+- [ ] **E1 — corpus re-verification.** Every analytically-optimized record, exactly,
+  with filter rates per `n`. This is what the speed is *for*.
+
+**Done when:** a certificate returns in **under 10 ms** for `n = 11` (against 129 ms
+today), the Rust and Python verdicts agree everywhere, and every analytically-optimized
+record in the corpus verifies exactly.
+
+**Boundary:** a native binary or a `cdylib` called with `ctypes`, not PyO3 — see
+[Stack and boundaries](#stack-and-boundaries--decided-by-measurement).
+The certificate’s durable interface is JSON either way.
 
 ### Phase 6: The proof lane
 
@@ -475,8 +556,28 @@ consume; version it from the start.
 
 ## Revision history
 
-**2026-08-23 — revised to flow from the strategy layer, and to absorb a parallel
-implementation.**
+**2026-08-23 (second revision) — Python first, compiled code where a profile says.**
+
+The stack was priced rather than argued.
+The pipeline spans seven orders of magnitude, from a 0.025 µs annealer move to a 129 ms
+exact verification, and the middle of it — the LP quench at 1.28 ms — is where nearly
+every planned strategy spends its time, at the same rate in any language.
+So Phases 1–4 are pure Python with no build step, and the Rust verification core that
+used to open this spec moved to Phase 5, scoped by a profile of a campaign that has
+actually run. `PyO3` is deferred and may never be needed, because the certificate must
+serialize to JSON regardless.
+See [Stack and boundaries](#stack-and-boundaries--decided-by-measurement).
+
+The risk this accepts, stated plainly: a Python spine is slower per candidate than a
+compiled one, so if the census needs far more basins than expected, Phase 5 arrives
+sooner and larger than planned.
+That is the better failure.
+The alternative is building a `Scalar`-generic Rust core plus bindings before knowing
+which stage is hot — and the measurement says it was the verifier all along, not the
+search everyone assumed.
+
+**2026-08-23 (first revision) — revised to flow from the strategy layer, and to absorb a
+parallel implementation.**
 
 Two things happened after this spec was written.
 The
@@ -492,12 +593,12 @@ What changed here:
   shared downstream pipeline.
   Building the spine once is what makes the register cheap; building per-strategy makes
   each entry a project and the results incomparable.
-- **Phase 2 became the quench spine** (LP-in-cell, canonical identity, descriptors,
-  atlas, pair-test meter) rather than “search and experiments”.
+- **The quench spine became a phase of its own** (LP-in-cell, canonical identity,
+  descriptors, atlas, pair-test meter) rather than “search and experiments”.
   The original Phase 2 presumed a refiner it never built — the review’s R-2 — which left
   basin identity undefined.
-- **Phases 3–7 are new**: the proposer interface, the strategy proposers, the census and
-  premise test, the proof lane, and the LLM lanes, in dependency order.
+- **The proposer interface, the census and premise test, the strategy proposers, the
+  proof lane and the LLM lanes are new**, in dependency order.
 - **Budgets are pair-tests** (R-10), and the `n = 5`/`n = 10` ladder is explicitly
   demoted to machinery validation: both are 45° mechanisms and neither exercises the
   oblique core `n = 11` demands.
@@ -505,10 +606,11 @@ What changed here:
 What the parallel branch contributed, now folded in: the experiment-loop harness
 ([`campaign/`](../../../../campaign/README.md)) implementing the review’s run protocol
 as validated artifacts rather than prose; a working f64 annealer
-([`sqsearch`](../../../../sqsearch/)), which becomes proposer #1 in Phase 3; a measured
-backend decision (Rust and Numba are equivalent, the GPU loses by 8× at this size); and
-a baseline round whose controls caught two instrument defects before any strategy was
-tested. Its hypotheses were renumbered above this register’s `H-001`–`H-015` block.
+([`sqsearch`](../../../../sqsearch/)), which becomes a proposer behind the Phase 2
+contract; a measured backend decision (Rust and Numba are equivalent, the GPU loses by
+8× at this size); and a baseline round whose controls caught two instrument defects
+before any strategy was tested.
+Its hypotheses were renumbered above this register’s `H-001`–`H-015` block.
 
 ## References
 
