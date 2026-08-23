@@ -495,6 +495,31 @@ defects:
     own control definitions.
   regression: 'the controls run in test.sh; a control whose anchor is ambiguous or absent fails loudly rather than mutating the wrong text'
   recorded_in: tools/negctl.py
+- id: D-024
+  title: A strategy's enum and its prose said opposite things
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: gate
+  latent_for: 'since the catalogue was written'
+  severity: low
+  status: fixed
+  what: >-
+    Simulated annealing carried `outcome: untried_here` beside a note reading "Yes - the
+    current workhorse. Schadt's program; Ellsworth's modified version". The enum is the
+    machine-readable verdict and the note is the prose the reports render, and nothing
+    compared them.
+  consequence: >-
+    A generated table saying a method had produced records while the structured data
+    said it had never been tried here - and any query over the catalogue would have
+    believed the data. Wrong on both readings of the field: annealing produced
+    Ellsworth's records, and this campaign has used it for every round so far.
+  fix: >-
+    Corrected to `produced_records`, and the enum's four values are now defined in the
+    schema rather than left to inference, with the rule that a note beginning "Yes"
+    means and only means `produced_records`.
+  regression: 'a cross-check in validate_schemas.py comparing every entry''s outcome against its note'
+  recorded_in: frontier/strategy-catalogue.schema.yaml
 - id: D-025
   title: Two bead trees claimed the same spec phase after the plan was rebuilt
   date: '2026-08-23'

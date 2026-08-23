@@ -21,6 +21,7 @@ Markdown artifacts.
 from __future__ import annotations
 
 import pathlib
+import re
 import sys
 
 import yaml
@@ -158,6 +159,23 @@ def defect_checks() -> list[str]:
         target = FRONTIER.parent / x["recorded_in"]
         if not target.exists():
             errs.append(f"{x['id']}: recorded_in does not exist: {x['recorded_in']}")
+
+    # Every defect id cited anywhere in the directory must exist in the log. D-024 was
+    # cited in a schema comment and a commit message before its record was ever written,
+    # and only the contiguity check noticed -- a reference to a defect nobody can look up
+    # is the same dangling pointer the campaign's reserved-id rule exists to prevent.
+    root = FRONTIER.parent
+    # controls.yaml is a file of deliberate corruptions -- it cites a defect that does
+    # not exist precisely to prove the recurrence check fires on one.
+    skip = {"defects.yaml", "defects.md", "controls.yaml"}
+    for path in sorted(root.rglob("*.yaml")) + sorted(root.rglob("*.md")):
+        if path.name in skip or "resources" in path.parts or ".venv" in path.parts:
+            continue
+        cited = set(re.findall(r"\bD-[0-9]{3}\b", path.read_text(encoding="utf-8")))
+        errs.extend(
+            f"{path.relative_to(root)}: cites {missing}, not in defects.yaml"
+            for missing in sorted(cited - known)
+        )
     return errs
 
 
