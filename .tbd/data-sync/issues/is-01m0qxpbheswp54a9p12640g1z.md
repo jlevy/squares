@@ -5,7 +5,7 @@ title: Separate atlas observations from certified basins
 kind: bug
 status: open
 priority: 0
-version: 8
+version: 10
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -21,9 +21,13 @@ dependencies:
     target: is-01m0qxpe517zsenj91xmydctg5
   - type: blocks
     target: is-01m0qxpefk4ge1r6mrab9rhbad
+  - type: blocks
+    target: is-01m0r51fbqgm0y4tb2d09fcb82
 parent_id: is-01m0qxka8ebkztq7erex50vvr2
+child_order_hints:
+  - is-01m0r50x1ms53tfamwwmc5qw2z
 created_at: 2026-08-23T18:21:28.493Z
-updated_at: 2026-08-23T20:20:49.614Z
+updated_at: 2026-08-23T20:29:52.886Z
 ---
 Category: technical errors. Atlas.add currently counts non-converged quench endpoints as basins and local optima; accepts keys for the wrong n; merges incompatible quantization regimes; can double count the same shard; lacks schema-validated provenance; and discards first-seen order, so it cannot produce the discovery curve H-011 requires.
 

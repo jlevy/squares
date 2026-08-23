@@ -5,7 +5,7 @@ title: Correct fixed-angle quench and exact-verifier contracts
 kind: bug
 status: open
 priority: 0
-version: 10
+version: 12
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -27,9 +27,13 @@ dependencies:
     target: is-01m0qxpdr07tjzxjbxffaadrjg
   - type: blocks
     target: is-01m0qxpeyc4qjhasyge91h4m06
+  - type: blocks
+    target: is-01m0r50mrppgcvsp2ewrac0x6z
+  - type: blocks
+    target: is-01m0r50x1ms53tfamwwmc5qw2z
 parent_id: is-01m0qxka8ebkztq7erex50vvr2
 created_at: 2026-08-23T18:21:28.817Z
-updated_at: 2026-08-23T20:20:49.852Z
+updated_at: 2026-08-23T20:29:34.131Z
 ---
 Category: technical errors. Fixed angles do not define one LP objective unless a separating cell is fixed: solve_to_fixed_point reaches several sides from the same theta and different centers. Coordinatewise angle sweeps do not certify a local optimum. Golden search assumes unproved unimodality. NumberField accepts reducible polynomials and intervals that do not establish a unique algebraic root, invalidating complete equality and sign claims.
 
