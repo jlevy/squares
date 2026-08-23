@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m0nym0701fv1qq9fbqq9qz0w
-title: "Phase 2: search and the n=11/n=12 experiments"
+title: Experiments E2-E4 and proof-lane hooks (spec Phases 3 and 6)
 kind: epic
 status: open
 priority: 2
-version: 11
+version: 12
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
@@ -22,6 +22,6 @@ child_order_hints:
   - is-01m0p1884qkefdqm2sdk46mjtk
   - is-01m0p188jzhnz00j60evcr04dq
 created_at: 2026-08-22T23:59:11.072Z
-updated_at: 2026-08-23T00:45:12.158Z
+updated_at: 2026-08-23T05:26:17.934Z
 ---
 Done when the same seed produces the same basin digest on 1 worker and on 32, E2 reaches Trump's basin, and E3/E4 produce numbers worth publishing.

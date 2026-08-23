@@ -1,11 +1,11 @@
 ---
 type: is
 id: is-01m0nykzwb0b8kwndbvf27aefk
-title: "Phase 1: verification core"
+title: "Phase 5: compiled verification core (Rust), where the profile says"
 kind: epic
 status: open
 priority: 1
-version: 8
+version: 9
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
@@ -19,6 +19,6 @@ child_order_hints:
   - is-01m0nym25asfyw6cwc3msk6e2c
   - is-01m0nym2fzzr8g8vr5j8sh9xzz
 created_at: 2026-08-22T23:59:10.731Z
-updated_at: 2026-08-22T23:59:13.407Z
+updated_at: 2026-08-23T05:26:17.579Z
 ---
 The spine; everything depends on it and it is independently useful on landing -- it delivers the first exact re-verification of the record corpus. Done when verify() returns a certificate in under 10 ms for n=11 (vs 0.35 s today), Rust and the Python oracle agree everywhere, and every analytically-optimized record verifies exactly.
