@@ -141,8 +141,18 @@ tbd guidelines general-coding-rules general-comment-rules error-handling-rules g
 
 Run `tbd guidelines --list` to see all available guidelines.
 
-**Note:** Never gitignore `.tbd/workspaces/`; the outbox must be committed to your
-working branch. See `tbd guidelines tbd-sync-troubleshooting` for details.
+**Where beads live:** on the dedicated `tbd-sync` branch, not your working branch.
+Bead changes never appear in your feature branch’s commits or its PR diff.
+That is the design, not lost work: don’t hunt for them there, and don’t claim
+“everything is on this PR” about bead state.
+
+**Let tbd own that branch.** `tbd sync` maintains it and `tbd doctor --fix` repairs it.
+Use tbd commands rather than raw git for anything touching `tbd-sync`; hand checkouts,
+merges, and pushes are how bead state gets tangled.
+
+**Note:** `.tbd/workspaces/` is the exception: never gitignore it; the outbox must be
+committed to your working branch.
+See `tbd guidelines tbd-sync-troubleshooting` for details.
 
 ## CRITICAL: Session Closing Protocol
 
@@ -160,8 +170,20 @@ working branch. See `tbd guidelines tbd-sync-troubleshooting` for details.
 **Work is not done until pushed, CI passes, and tbd is synced.**
 
 **Remote/proxied session where GitHub seems blocked?** If the environment has egress,
-`gh` works through a scoped `NO_PROXY` bypass — run `tbd shortcut setup-github-cli` and
-follow “Proxied Remote Sessions” before concluding gh is unavailable.
+`gh` works through a scoped `NO_PROXY` bypass.
+Three facts decide most of these:
+
+- The git remote may sit behind a **ref-scoped credential broker**: pushes to
+  `refs/heads/*` succeed, pushes to `refs/tags/*` fail with HTTP 403. Create the tag on
+  the direct channel instead:
+  `gh api repos/OWNER/REPO/git/refs -f ref=refs/tags/vX.Y.Z -f sha=SHA`.
+- `git push --dry-run` **passes** for tags the broker then refuses at receive-pack, so a
+  clean dry run proves nothing.
+- A GitHub-host 403 carrying no `x-github-request-id` header is proxy-manufactured, not
+  an organization egress denial.
+
+Run `tbd shortcut setup-github-cli` and follow “Proxied Remote Sessions” before
+concluding gh is unavailable.
 
 ## Bead Tracking Rules
 
@@ -401,6 +423,7 @@ Load the **General engineering** group first, then the language or framework gro
 
 | Name | Description |
 | --- | --- |
+| agent-session-bootstrap | When and how to make a repository install its own pinned toolchain at agent session start, for repos whose agents run in containers they do not control. Covers the fit test, the alternatives that are usually better, the install rules a bootstrap must follow, and the PATH and pin-drift traps that make one fail silently. Use when an agent session starts without the tools the repo requires, when writing or reviewing a SessionStart hook, or when deciding between a session hook and a provisioned image. |
 | cli-agent-skill-patterns | A concise decision guide for portable skills, CLI-backed skills, safe bundle installation, and agent integration |
 | common-doc-guidelines | Common cross-project standards for writing and organizing docs, code comments, and text files—how to organize, structure, write, and format documents, plus the guideline footer convention. Downstream of github.com/jlevy/practical-prose. Use whenever writing or editing any documentation, README, guideline, or design doc. |
 | electrobun-app-development-patterns | Building desktop apps with Electrobun—runtime and process model, typed RPC, project layout, packaging and the delta updater, plus an evidence-based maturity and security assessment |
