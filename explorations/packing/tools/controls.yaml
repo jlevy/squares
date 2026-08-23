@@ -109,3 +109,33 @@ controls:
   replace: ["explorations/packing/defects.md\n", ""]
   run: python3 tools/check_generated_exempt.py
   expect: "generated views not exempt from the Markdown formatter"
+
+# --- basin identity (the census cannot count what it cannot tell apart) ---
+#
+# Each of these breaks one invariance the key claims, and each is a way a census would
+# fail silently rather than loudly: an inflated basin count, a curve that never
+# saturates, a key that agrees with everything. Watched failing, not assumed.
+- name: canonical - container symmetry not quotiented out
+  file: sqpack/canonical.py
+  replace: ["    for flip in (False, True):\n", "    for flip in (False,):\n"]
+  run: uv run --quiet python tools/canonical_check.py
+  expect: "FAIL  invariant under all 8 container symmetries"
+
+- name: canonical - square relabelling changes the key
+  file: sqpack/canonical.py
+  replace: ["        squares = sorted(\n", "        squares = list(\n"]
+  run: uv run --quiet python tools/canonical_check.py
+  expect: "FAIL  invariant under square relabelling"
+
+- name: canonical - quarter-turn invariance dropped
+  file: sqpack/canonical.py
+  replace: ["    return theta % QUARTER", "    return theta"]
+  run: uv run --quiet python tools/canonical_check.py
+  expect: "FAIL  invariant under a quarter turn of one square"
+
+- name: canonical - the contact certificate agrees with everything
+  file: sqpack/canonical.py
+  replace: ["    digest = _certificate([ranks[a] for a in initial], adjacency).encode()",
+            "    digest = b'constant'"]
+  run: uv run --quiet python tools/canonical_check.py
+  expect: "FAIL  a different arrangement keys differently"

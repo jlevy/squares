@@ -188,6 +188,15 @@ else
 fi
 
 echo
+echo "== basin identity =="
+# The piece that makes "basin" a noun. Until a float configuration can be turned into a
+# name, every basin count is a count of floating-point strings and every discovery curve
+# is an artifact of the tolerance used to compare them (D-020). Checked against Trump's
+# packing and against the wrong-basin n=11 configuration the annealer actually produced,
+# not against fixtures invented to pass.
+$PY tools/canonical_check.py
+
+echo
 echo "== negative controls =="
 # Every guard in this directory, watched failing. A check nobody has seen fail is not a
 # check, and until now each of these was run once by hand and thrown away.
