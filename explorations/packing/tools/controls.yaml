@@ -39,9 +39,20 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 29", "count: 20"]
+  replace: ["count: 35", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 29"
+  expect: "count 20 != 35"
+
+# The unprotected-fix count in SYNOPSIS.md. This claim -- the list that predicts what
+# comes back -- was hand-written, and it drifted: the prose said six while the generated
+# view said seven. That is D-028 recurring inside the document D-028 is about, which is
+# why the count is now derived and why it gets a control.
+- name: synopsis - unprotected-fix count drifting from the log
+  file: defects.yaml
+  replace: ["    to coincide with an in-progress round.\n  regression: none\n",
+            "    to coincide with an in-progress round.\n  regression: 'a check that does not exist'\n"]
+  run: uv run --quiet python tools/check_synopsis.py
+  expect: "does not state the unprotected-fix count"
 
 - name: defect log - generated view left stale
   file: defects.yaml
@@ -109,3 +120,52 @@ controls:
   replace: ["explorations/packing/defects.md\n", ""]
   run: python3 tools/check_generated_exempt.py
   expect: "generated views not exempt from the Markdown formatter"
+
+# --- basin identity (the census cannot count what it cannot tell apart) ---
+#
+# Each of these breaks one invariance the key claims, and each is a way a census would
+# fail silently rather than loudly: an inflated basin count, a curve that never
+# saturates, a key that agrees with everything. Watched failing, not assumed.
+- name: canonical - container symmetry not quotiented out
+  file: sqpack/canonical.py
+  replace: ["    for flip in (False, True):\n", "    for flip in (False,):\n"]
+  run: uv run --quiet python tools/canonical_check.py
+  expect: "FAIL  invariant under all 8 container symmetries"
+
+- name: canonical - square relabelling changes the key
+  file: sqpack/canonical.py
+  replace: ["        squares = sorted(\n", "        squares = list(\n"]
+  run: uv run --quiet python tools/canonical_check.py
+  expect: "FAIL  invariant under square relabelling"
+
+# The SEAM is the property only one thing guards: an angle one ULP below pi/2 must key
+# as one at zero. The quantizer's trailing `% steps` is the whole of it, so this control
+# reaches it and nothing else does.
+#
+# Three dead ends here, all worth not repeating: a `theta % QUARTER` inside the quantizer
+# (redundant with the upstream fold, so mutating it changed nothing and the control
+# silently stopped firing); perturbing the step COUNT (harmless -- scaling and modulo use
+# the same number, so the seam closes for any integer); and trying to break quarter-turn
+# invariance, which has two independent guards -- see below.
+- name: canonical - the angle seam at pi/2 splits identical squares
+  file: sqpack/canonical.py
+  replace: ["    return round(theta / QUARTER * steps) % steps",
+            "    return round(theta / QUARTER * steps)"]
+  run: uv run --quiet python tools/canonical_check.py
+  expect: "FAIL  an angle one ULP below pi/2 keys as one at zero"
+
+# There is deliberately NO control for "invariant under a quarter turn of one square",
+# and the reason is worth recording rather than leaving as a hole. That property has two
+# independent guards -- `canonical_key` folds angles into [0, pi/2) on the way in, and
+# the quantizer's `% steps` folds them again -- so breaking either one leaves the check
+# passing. Measured both ways. A control needs a single mutation that reaches the
+# property, and here none exists; the honest options are to record that or to weaken the
+# code so a control can fire, and weakening working code to make a test look better is
+# not a trade this directory makes.
+
+- name: canonical - the contact certificate agrees with everything
+  file: sqpack/canonical.py
+  replace: ["    digest = _certificate([ranks[a] for a in initial], adjacency).encode()",
+            "    digest = b'constant'"]
+  run: uv run --quiet python tools/canonical_check.py
+  expect: "FAIL  a different arrangement keys differently"

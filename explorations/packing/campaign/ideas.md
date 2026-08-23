@@ -70,6 +70,14 @@ Everything below is a theory about why, or a way around it.
 **The strategy premise, which reorganises everything below.** Records are rigid; rigid
 optima live in rare basins; so scaling a volume-weighted sampler multiplies effort
 against a probability the problem drives toward zero.
+
+*The premise's own contrapositive is the part that bites.* If records are rigid, then
+non-records need not be — and a non-rigid optimum is a **flat basin**, a positive-
+dimensional family rather than a point. Measured at `n = 5`: 11 contact constraints
+against 16 degrees of freedom, so a five-dimensional family, stored as two basins
+([D-034](../defects.md)). Until the census can tell a flat optimum from a rigid one, the
+denominator of "rare" is not a number, and the premise is untestable rather than merely
+untested.
 The baseline is consistent with that — five independent seeds landing in a narrow band
 five times narrower than the remaining gap is what repeatedly finding the same wrong
 funnel looks like — but consistent is not evidence, and

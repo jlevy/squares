@@ -119,6 +119,14 @@ the LP gives its endpoint a *value*, reproducibly, to solver precision—about `
 the side, and no better ([D-021](defects.md), open).
 Two basins closer than that floor are not currently distinguishable.
 
+**The definition has a precondition, and it is not always met.**
+“The preimage of one quench *endpoint*” presupposes the endpoint is a **point**.
+Where the local optimum is a *flat basin*—see below—it is not, the quench lands wherever
+in the flat region it happened to enter, and the word “basin” does not denote anything
+the census can count.
+This precondition went unstated for the campaign’s first three weeks and cost
+[D-034](defects.md); it is stated here now because every downstream count inherits it.
+
 **The ladder.** The proved instances used as controls—`n = 5` and `n = 10`, both `45°`
 mechanisms with closed-form optima.
 The ladder validates *machinery*: no proved case exercises an irrational oblique angle,
@@ -163,6 +171,31 @@ for “sharp minimum”—the derivative does not become large, it fails to exis
 square can move without increasing the side.
 Trump’s packing is rigid, which is simultaneously why it is hard to find, why a float
 verifier cannot decide it, and why its angle optimum is a corner.
+
+**Flat basin** (equivalently *non-rigid optimum*, *optimal family*). A local optimum that
+is **not** a point but a positive-dimensional set: the contacts pin fewer degrees of
+freedom than the configuration has, so a whole continuum of packings achieves the same
+side, with the same contact graph, and none of them is more “the” optimum than another.
+Count it: `n` squares have `3n` degrees of freedom, plus one for the side; each pair
+contact and each wall touch removes one. Where that leaves a surplus, the optimum is
+flat, and its **dimension** is the size of the surplus.
+
+Flat basins are not exotic and not confined to toy `n`. Measured at `n = 5`, the
+campaign’s first census cell: an optimum at `(4 + 5√2)/4` has 11 constraints against 16
+degrees of freedom, so it is a five-dimensional family ([D-034](defects.md)). At `n = 3`
+it is starker still—three unit squares in a `2 × 2` box can be slid around freely, so
+the entire optimal set is a continuum.
+
+**This term should have existed from the first day, and its absence is the lesson.**
+Everything needed to write it was already in this document. “Rigidity” was defined, but
+only ever *attributed to Trump’s packing*, as if it were a property records happen to
+have rather than a property an arbitrary optimum may lack. And the strategy premise
+below is literally *“records are rigid, rigid optima live in rare basins”*—a sentence
+whose own construction presupposes that non-record optima may be **non**-rigid, and which
+never asks what those do to a census that counts basins.
+Two definitions and a premise, each holding a third of the answer, none of them joined
+up. That is a documentation failure before it is a code one, and it is why
+[D-034](defects.md) was found by reading a census output rather than by reading the plan.
 
 ### The measurements
 
@@ -455,6 +488,20 @@ angles. So a configuration can sit at *exactly* its cell’s optimum and still b
 its basin’s, with every remaining unit of gap in the angles and none of it in the
 centres.
 
+### Nor is a flat optimum a basin, which is the same trap one level up
+
+The section above separates a *cell* from a *basin* because a cell fixes the angles and a
+basin does not. There is a second separation, discovered later and the harder of the two:
+a basin presumes its optimum is a **point**, and [not every optimum is](#terminology).
+
+Where the optimum is flat, “the configurations the refiner carries to the same local
+optimum” describes a map onto a *set*, and two quenches of the same optimum legitimately
+stop at different places in it. Every symptom then mimics a real discovery—distinct
+coordinates, distinct geometric keys, two rows in the atlas—while the contact graph and
+the side, the two things that actually characterise the optimum, agree exactly.
+That is [D-034](defects.md), and the shape of the error is the same as the cell/basin
+trap: an object that fixes more than the mathematics does, mistaken for the mathematics.
+
 The consequence is a reading that looks safe and is not: **a fixed-angle solve that
 stops improving has not converged to a local optimum of the problem—it has run out of
 things it is allowed to move.** Watching it flatten and concluding “wrong basin” is
@@ -731,6 +778,14 @@ Because the whole strategy rests on that argument, the measurement that would re
 ([H-012](campaign/hypotheses/H-012-record-basins-are-rare.md)) is registered in the
 cheapest tier and scheduled early.
 
+*Read the premise’s own contrapositive, which went unread for three weeks.* If **records**
+are rigid, then whatever is **not** a record need not be—and a non-rigid optimum is a
+[flat basin](#terminology), which is a family rather than a point. So the census that
+is supposed to establish rarity is counting two different kinds of object at once, and
+the denominator of “rare” is not yet a number ([D-034](defects.md)).
+The premise may well be true. It is not yet *measurable*, and that is a stronger
+objection than doubting it.
+
 **Ask whether the basin has a wall, and get a better question back.**
 [exp-005](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md)
 started *inside* Trump’s packing and walked outward.
@@ -962,36 +1017,46 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Twenty-nine defects, [one line each](defects.md), generated from `defects.yaml` and
+Thirty-five defects, [one line each](defects.md), generated from `defects.yaml` and
 checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 6 | asserted something false about the mathematics |
-| validity | 6 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 14 | recorded something its own evidence contradicts |
-| robustness | 2 | did not finish, or finished only by luck |
+| soundness | 8 | asserted something false about the mathematics |
+| validity | 7 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 15 | recorded something its own evidence contradicts |
+| robustness | 4 | did not finish, or finished only by luck |
 | performance | 1 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Four of the six soundness defects pointed in the *flattering* direction**, where the
+**Six of the eight soundness defects pointed in the *flattering* direction**, where the
 error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught one defect in twenty-nine, and no soundness defect
-ever.** Every soundness failure was found by a control cell whose answer was known in
-advance, a rule written down before the measurement, a generated view contradicting its
-source, or someone reading carefully.
+**The automated gate has caught one defect in thirty-five, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. The one the gate did catch ([D-024](defects.md)) is a bookkeeping defect,
 found by a contiguity check—which is the pattern, not an exception: gates are good at
 the mechanical classes and have never once caught the mathematics being wrong.
 
+The two newest entries sharpen the point rather than softening it, and both were caught
+by a **control cell** — a case whose answer was known before the code existed.
+[D-030](defects.md), the quench’s angle window narrowing on a schedule so a cold start
+could never arrive, showed up at `n = 5`: the census kept landing at `3.078` against a
+proved `2.707107`. [D-031](defects.md), basin identity splitting an angle at the `π/2`
+seam, showed up at `n = 3`, where the whole census is small enough to read by hand and
+two rows were visibly the same packing a quarter turn apart.
+In both cases the structural invariants around the store passed green throughout,
+because they check the store and not what it is fed.
+
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Six fixes left no regression check behind, and that list has already predicted a
+Nine fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
@@ -1012,21 +1077,42 @@ reaches Trump’s basin, and the refiner cannot help with that by construction.
 The named candidates are δ-continuation, angle-class search as a *search* rather than an
 assumption, neighbour-transfer seeding, and quality-diversity retention—none built.
 
-**The premise is still untested.** Everything the strategy layer recommends rests on
-record basins being rare in quench measure, and
-[H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is the measurement that
-would refute it. It is now unblocked at the quench level and blocked only on canonical
-basin identity and the census.
-Until it runs, the cartography program is a well-argued bet rather than a finding.
+**The premise is still untested, and now blocked on a harder question than expected.**
+Everything the strategy layer recommends rests on record basins being rare in quench
+measure, and [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is the
+measurement that would refute it. The quench is now sound enough to run it. What is not
+settled is what a basin *is*.
+
+[D-034](defects.md) is the open defect that says so. Two rows of the `n = 5` census are
+the same packing — same side to twelve decimals, same closed form `(4 + 5√2)/4`, same
+contact certificate byte for byte — stored as two basins. They are not split by float
+noise: the configuration is **not rigid**, with 11 contact constraints against 16 degrees
+of freedom, so the optimum at that side is a positive-dimensional *family* and different
+quenches land on different members. The geometric key encodes coordinates the optimum
+never determined.
+
+So `distinct_basins` currently counts family members, the discovery curve cannot
+plateau, and H-011's saturation criterion is unreachable until the definition is fixed.
+The three candidate definitions are written up on `think-1s0h`; none is a code tweak,
+because this is the deliverable's own shape.
+Until that is settled and the census runs, the cartography program is a well-argued bet
+rather than a finding.
 
 **Three things are cheap and undone.** `n = 17`, the only registered instance cell that
 tests record-*finding*; the `m² − 3` analytic attempt, which needs no engine; and
 re-running `exp-005`’s basin-entry sweep against the quench rather than the annealer,
 which was that round’s own stated successor.
 
-**One open defect constrains every polished number.** [D-021](defects.md): the solver
-floor is about `1e-11` in the side, so the `polished` tier cannot resolve finer, and an
-exact rational LP is the fix.
+**One contained defect constrains every polished number.** [D-021](defects.md): the
+solver floor is about `1e-11` in the side, so the `polished` tier cannot resolve finer,
+and an exact rational LP is the fix.
+
+**One open defect makes the toolchain unsafe to leave alone overnight.**
+[D-035](defects.md): `negctl` corrupts a tracked source file in place to prove a guard
+fires, and restores it in a `finally:` block that a SIGKILL does not run. An interrupted
+gate leaves a *deliberately subtle, deliberately flattering* mutation in the tree — on
+2026-08-23 it left the D-031 basin-splitting bug — where the next `git add -A` would
+commit it. Fix this before any unattended session that commits on a cadence.
 
 ## References
 

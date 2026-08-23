@@ -443,8 +443,10 @@ def quench_bracket(
     y,
     theta,
     *,
-    max_sweeps: int = 12,
+    max_sweeps: int = 200,
     span: float = 0.05,
+    span_min: float = 1e-9,
+    span_shrink: float = 0.1,
     tol: float = 1e-12,
     class_tol: float = 1e-2,
     time_budget: float = 30.0,
@@ -456,6 +458,29 @@ def quench_bracket(
     exp-006 -- so a smooth local model cannot converge to it, whatever its order. This
     variant does cyclic coordinate search over the angle CLASSES, each coordinate solved
     by golden section, which needs no derivative and lands on a kink exactly.
+
+    ## The angle window, and why its schedule is adaptive
+
+    `span` bounds how far one sweep may move an angle, and it narrows **only when a
+    sweep fails to improve** -- the standard pattern-search rule, which gives the
+    schedule a reason rather than a cadence. Narrowing it every sweep regardless was
+    D-030: from annealer output that is right, because the angles arrive nearly correct,
+    but from a cold start they must move O(0.1) rad and the window was down to 2.4e-05
+    by sweep 12. The search then crawled instead of arriving, never converging and never
+    saying so.
+
+    So this works from both ends now, which it did not before:
+
+    * **polishing** annealer output, unchanged in behaviour and accuracy -- exp-008's
+      five archived `n = 10` seeds still reach the analytic value, median gap 8.9e-16
+      against the 1.3e-15 recorded, both far below the tier's own 1e-11 floor (D-021);
+    * **exploring** from a uniform random start, which previously converged on 0 of 8
+      cold `n = 5` starts and now converges on 12 of 12, reaching the proved
+      `s(5) = 2.707106781187` exactly.
+
+    `max_sweeps` is a backstop rather than a budget -- the wall clock and the narrowing
+    schedule bound the work -- which is why its default is 200 rather than the 12 that
+    used to double as the termination condition.
     """
     # Fold every angle into [0, pi/2) first. A unit square is invariant under a quarter
     # turn, so an angle of 14.14 rad names the same square as 0.09 rad -- but at a
@@ -498,6 +523,9 @@ def quench_bracket(
     # eighth of the LP solves. The cost is that two genuinely distinct angles closer
     # than the tolerance are forced equal -- so a packing whose record needs that is
     # out of reach until this is swept rather than fixed.
+    # The angle window the class search may move within, and the schedule for narrowing
+    # it. It narrows only when a sweep FAILS to improve -- see the tail of the loop.
+    span0 = span
     groups = angle_classes(theta, class_tol)
     for _ in range(max_sweeps):
         improved = False
@@ -552,40 +580,38 @@ def quench_bracket(
                 theta = trial_theta
                 angle_steps += 1
                 improved = True
-        if not improved:
-            if not free_pass:
-                return QuenchResult(
-                    side=side,
-                    x=x,
-                    y=y,
-                    theta=theta,
-                    lp_solves=lp_solves,
-                    angle_steps=angle_steps,
-                    converged=True,
-                    cell_changes=changes,
-                    reason=f"bracket converged, {len(groups)} classes",
-                )
-            # The class constraint is a search device, not a property of the answer.
-            # Merging angles searches one coordinate where the packing has one degree of
-            # freedom -- but it also FORCES angles equal that the true optimum may want
-            # apart, so a class-converged point need not be a local optimum at all. Its
-            # value would then depend on class_tol, and since the cartography plan
-            # defines a basin as where the quench lands, basin identity would inherit a
-            # tuning parameter (defect D-020).
+        if improved:
+            # The window is still paying for itself, so keep it. Narrowing it here --
+            # unconditionally, every sweep -- is what stopped this quench arriving from
+            # a cold start (D-030): `_bracket_min` may only move an angle within +-span,
+            # and by sweep 12 the old schedule had span at 2.4e-05 while a random start
+            # needs O(0.1) rad. It descended until the window ran out and then crawled,
+            # improving by ~1e-09 a sweep, forever above `tol` and so never converged.
+            groups = angle_classes(theta, class_tol)
+            continue
+
+        if span > span_min:
+            # Nothing improved at this window. That is not convergence, it is evidence
+            # the window is too WIDE: golden section needs a unimodal bracket, and a
+            # narrower one is likelier to be. Narrow and re-sweep.
             #
-            # One free sweep, every angle on its own, settles it: if nothing improves
-            # the class-converged point IS a coordinate-wise local optimum and the
-            # tolerance did not decide the answer. If something improves, the search
-            # continues from there with the classes re-read.
-            free_side, free_x, free_y, free_theta, used = _free_sweep(
-                side, x, y, theta, n, deadline=deadline
-            )
-            lp_solves += used
-            if free_side < side - tol:
-                side, x, y, theta = free_side, free_x, free_y, free_theta
-                angle_steps += 1
-                groups = angle_classes(theta, class_tol)
-                continue
+            # An order of magnitude a step, not a halving. Measured 2026-08-23 on the
+            # polish case (a 1e-3 perturbation of Trump's packing) and the cold case
+            # (six uniform n = 5 starts), all reaching the same answer:
+            #
+            #   shrink   polish gap   polish wall   cold converged
+            #     0.5     -2.22e-11        11.3 s        5 of 6
+            #     0.1     -2.22e-11         6.6 s        6 of 6
+            #    0.02     -2.22e-11         4.9 s        6 of 6
+            #
+            # Halving is worse on every axis, and worse at CONVERGING: from 0.05 it
+            # needs 26 narrowing sweeps to reach the floor, which can exhaust the sweep
+            # or wall budget before the free-sweep certificate is ever reached.
+            span = max(span * span_shrink, span_min)
+            continue
+
+        # Nothing improved at the narrowest window either. This is the real test.
+        if not free_pass:
             return QuenchResult(
                 side=side,
                 x=x,
@@ -595,10 +621,45 @@ def quench_bracket(
                 angle_steps=angle_steps,
                 converged=True,
                 cell_changes=changes,
-                reason=f"converged, {len(groups)} classes, free pass clean",
+                reason=f"bracket converged, {len(groups)} classes",
             )
-        groups = angle_classes(theta, class_tol)
-        span = max(span * 0.5, 1e-9)
+        # The class constraint is a search device, not a property of the answer.
+        # Merging angles searches one coordinate where the packing has one degree of
+        # freedom -- but it also FORCES angles equal that the true optimum may want
+        # apart, so a class-converged point need not be a local optimum at all. Its
+        # value would then depend on class_tol, and since the cartography plan
+        # defines a basin as where the quench lands, basin identity would inherit a
+        # tuning parameter (defect D-020).
+        #
+        # One free sweep, every angle on its own, settles it: if nothing improves
+        # the class-converged point IS a coordinate-wise local optimum and the
+        # tolerance did not decide the answer. If something improves, the search
+        # continues from there with the classes re-read.
+        free_side, free_x, free_y, free_theta, used = _free_sweep(
+            side, x, y, theta, n, deadline=deadline
+        )
+        lp_solves += used
+        if free_side < side - tol:
+            # The free sweep found what the class search could not at any window, so
+            # the point moved: reopen the window and let the class search work from
+            # here. `side` strictly decreases on every pass through this branch, so
+            # the restart cannot cycle.
+            side, x, y, theta = free_side, free_x, free_y, free_theta
+            angle_steps += 1
+            groups = angle_classes(theta, class_tol)
+            span = span0
+            continue
+        return QuenchResult(
+            side=side,
+            x=x,
+            y=y,
+            theta=theta,
+            lp_solves=lp_solves,
+            angle_steps=angle_steps,
+            converged=True,
+            cell_changes=changes,
+            reason=f"converged, {len(groups)} classes, free pass clean",
+        )
     return QuenchResult(
         side=side,
         x=x,

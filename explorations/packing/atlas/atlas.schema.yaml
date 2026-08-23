@@ -1,0 +1,116 @@
+# Contract for one basin atlas: every distinct local optimum found at one `n`.
+#
+# Written by sqpack.atlas, never by hand. The file is APPEND-ONLY -- a basin once seen
+# is a fact about the landscape, and a later run that fails to rediscover it has not
+# unfound it. That is what makes the discovery curve monotone, and therefore what makes
+# its plateau mean saturation.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:BasinAtlas/v1
+title: BasinAtlas
+type: object
+additionalProperties: false
+required: [n, quantum, contact_tol, proposals, non_converged, distinct_basins, basins]
+properties:
+  n:
+    type: integer
+    minimum: 1
+    description: The instance this atlas covers. One file per n.
+  quantum:
+    type: number
+    exclusiveMinimum: 0
+    description: >-
+      The geometric key's quantization step. Recorded because it decides what counts as
+      one basin: a store built at one quantum may not be merged with a store built at
+      another, and nothing downstream can tell without this field.
+  contact_tol:
+    type: number
+    exclusiveMinimum: 0
+    description: >-
+      The separation below which a pair counts as touching, and so the tolerance the
+      contact certificate was computed at. Same merge caveat as `quantum`.
+  proposals:
+    type: integer
+    minimum: 0
+    description: >-
+      Configurations offered to the store, including rediscoveries. The denominator of
+      the discovery curve; without it a basin count is a number with no exposure behind
+      it and saturation cannot be claimed.
+  non_converged:
+    type: integer
+    minimum: 0
+    description: >-
+      Proposals whose quench never proved convergence. They ARE stored -- a quench
+      endpoint is a basin by this project's definition, whatever the terminator managed
+      to prove -- but a census where this is most of `proposals` is measuring the sweep
+      limit rather than the landscape. Measured 2026-08-23 at n = 5: 11 of 12 uniform
+      multistarts hit the cap, and every structural check still passed green. Required,
+      so no atlas can exist without answering the question.
+  distinct_basins:
+    type: integer
+    minimum: 0
+    description: Length of `basins`, carried so a reader need not count and a drift check can.
+  closest_pair:
+    type: ["number", "null"]
+    description: >-
+      Smallest gap in side between two distinct basins, or null below two basins. The
+      number that says whether this census is near the quench's ~1e-11 noise floor
+      (D-021). If it is, two rows may be one basin the solver could not resolve, and
+      `distinct_basins` is an upper bound rather than a count.
+  basins:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        [geometric, contact, side, angle_signature, contact_count, quench_frequency,
+         converged_frequency]
+      properties:
+        geometric:
+          type: string
+          pattern: "^[0-9a-f]{32}$"
+          description: Quantized key, invariant under the container's symmetries and relabelling.
+        contact:
+          type: string
+          pattern: "^[0-9a-f]{32}$"
+          description: >-
+            Contact graph canonical up to isomorphism. Ground truth for "the same
+            arrangement", where the geometric key is ground truth for "the same metric".
+            A row is one basin because BOTH agree; see sqpack/canonical.py for what each
+            gets wrong on its own.
+        side:
+          type: number
+          exclusiveMinimum: 0
+          description: >-
+            Best side seen for this basin, at the `polished` tier -- exact within a cell
+            to solver precision, floor about 1e-11. NEVER `exact`: promotion routes
+            through sqpack.verify, and only that may claim a record.
+        angle_signature:
+          type: array
+          items: {type: integer, minimum: 1}
+          description: >-
+            Sorted sizes of the angle classes. The cheapest structural descriptor there
+            is, and the one that separates a grid (all one class) from an oblique record.
+        contact_count:
+          type: integer
+          minimum: 0
+          description: >-
+            Contacts in the packing. A rigid optimum is highly contacted; a
+            barely-jammed one is not, and the difference is visible here before any
+            geometry is read.
+        quench_frequency:
+          type: integer
+          minimum: 1
+          description: >-
+            Times the proposer landed here. Divided by `proposals`, the basin's measure
+            under this proposer -- which is exactly what H-012 asks about the record's.
+        converged_frequency:
+          type: integer
+          minimum: 0
+          description: >-
+            Of `quench_frequency`, how many proved convergence. Zero means nothing that
+            landed here ever finished descending, so the row is a stopping point rather
+            than an established optimum -- a different kind of object, and the census
+            must be able to say which without re-running anything.
+        first_seen_seed:
+          type: ["integer", "null"]
+          description: Seed that first produced it, so a single basin can be re-derived alone.

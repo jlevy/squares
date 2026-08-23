@@ -295,7 +295,11 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         expires = (experiment.get("lease") or {}).get("expires")
         if not expires:
             problems.append(f"{name}: in-progress without a lease")
-        elif dt.datetime.fromisoformat(expires) < now:
+        # Leases may be written with or without a timezone; `now` here is naive UTC.
+        # Compare on a common footing rather than crashing, which is what an
+        # offset-aware lease used to do -- and it did it while a round was in progress,
+        # i.e. exactly when the gate most needs to still run.
+        elif dt.datetime.fromisoformat(expires).replace(tzinfo=None) < now:
             problems.append(f"{name}: STALE CLAIM, lease expired {expires}")
 
     problems += naming(series, explorations, hypotheses, experiments)

@@ -119,7 +119,13 @@ it first and cheaply: H-12 measures the record basin’s quench probability dire
 rates comparable to the modal basin — this document’s program contracts sharply, and
 that outcome is deliberately made cheap to reach.
 
-### The quench map exists and is exact: minima are discrete, nameable objects
+### The quench map exists and is exact: minima are exactly *valued*, not always discrete
+
+> **Corrected 2026-08-23 ([D-034](../../../defects.md)).** This section originally
+> claimed minima are *discrete* objects. That is true of rigid optima and false in
+> general, and the correction is at the end of the section rather than woven in, so the
+> original argument stays readable and the error stays visible.
+
 
 The review’s verified result (R-2) supplies the tool this whole approach stands on.
 Fix each square’s angle and, for each pair, which candidate axis separates it, and
@@ -157,6 +163,46 @@ Two consequences frame everything downstream:
    which cells are adjacent to which.
    These are census questions, and a census is something a program can be *finished*
    with — see H-11.
+
+#### The correction: exactly valued does not mean discrete
+
+Consequence 2 does not follow from consequence 1, and the gap between them is
+[D-034](../../../defects.md).
+
+An optimum is a **point** only when the contacts pin every degree of freedom. Count them:
+`n` squares carry `3n` degrees of freedom plus one for the side, and each pair contact
+and each wall touch removes one. Where a surplus remains, the optimal set is a
+positive-dimensional **family** — a *flat basin* — every member of which has the same
+side, the same contact graph, and equal claim to being the optimum.
+This is not a small-`n` curiosity. At `n = 5`, the first cell the census was to run, an
+optimum at `(4 + 5√2)/4` has 11 constraints against 16 degrees of freedom: a
+five-dimensional family, which the atlas duly recorded as two basins because two quenches
+stopped at two members of it.
+
+So the quench endpoint is exactly *valued* — the LP still returns the true optimum of its
+cell to solver precision, and that claim is untouched — but it is not always exactly
+*located*. "How many basins exist at `n`" is therefore not yet a well-posed question, and
+a census that answers it anyway is counting quantizer cells.
+
+**In LP terms the diagnosis is sharp, and so is the fix.** A flat optimum is a cell whose
+linear program has a **non-unique optimal face** rather than an optimal vertex: the
+objective is constant along a face of the feasible polytope. That is ordinary LP
+degeneracy, it is a property the solver can be *asked about* at the moment the quench
+already runs, and it does not need a new instrument — which makes "is this optimum flat,
+and of what dimension" a field the atlas can carry rather than a question the census has
+to leave open.
+
+That reframing is what turns D-034 from a blocker into a piece of work. It is written up
+on `think-1s0h`; the three candidate definitions of basin identity all become cheaper
+once flatness is a measured quantity rather than an inference from a coordinate diff.
+
+**The lesson, restated one level up.** This section already said *"whatever defines a
+basin must be independent of the search's own knobs, and that has to be checked rather
+than assumed"* — the D-020 lesson. D-034 is the same sentence with a wider referent: a
+basin must also be independent of the **representation's** knobs, and must not presume a
+structure — discreteness — that the mathematics does not supply. The first version of
+that lesson was learned and written down; the second was available from the same
+argument and was not.
 
 ### The map itself: a basin atlas, and what it buys both lanes
 
@@ -358,8 +404,13 @@ the strategy that turns the residue into the asset.
   against a probability the problem drives toward zero.
   (Premise deliberately made falsifiable first: H-12.)
 - **LP-in-cell is the bridge from continuous search to discrete cartography.** It turns
-  “where the annealer stopped” into “which cell this is,” making minima nameable,
-  countable, and exactly valued — Stillinger–Weber quenching with an exact endpoint.
+  “where the annealer stopped” into “which cell this is,” making minima nameable and
+  exactly valued — Stillinger–Weber quenching with an exact endpoint.
+  *Amended ([D-034](../../../defects.md)): not always countable.* An optimum is a point
+  only where the contacts pin every degree of freedom; where they do not, the LP has a
+  non-unique optimal face and the optimum is a positive-dimensional **flat basin**.
+  Exactly valued, yes; discrete, only conditionally — and the census inherits the
+  condition.
 - **The map is the deliverable; records are corollaries.** A validated basin atlas of
   `n ≤ 11` is publishable, steers search, gives negative results meaning, and is the
   empirical shadow of a future proof’s case analysis.
