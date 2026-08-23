@@ -5,7 +5,7 @@ title: "Square packing research: s(11), the frontier, and the tooling around it"
 kind: epic
 status: open
 priority: 1
-version: 20
+version: 25
 spec_path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
 labels: []
 dependencies: []
@@ -27,8 +27,13 @@ child_order_hints:
   - is-01m0nykzjp79rawg3g2x0hx2rf
   - is-01m0pdh5bj67ca8vk7ct53g5qt
   - is-01m0pezhd7gzbz4hfwf1vfpwg1
+  - is-01m0pnhtxskzbpvh73z96s06a5
+  - is-01m0pnjppsajkthg7jgchw6awx
+  - is-01m0pnjq24x1x9nnch6xn1s3yk
+  - is-01m0pnjqdee9v5tfkrg0pnpye8
+  - is-01m0pnk0y4mh6tax6y71br6xb1
 created_at: 2026-08-22T17:00:49.532Z
-updated_at: 2026-08-23T05:44:20.551Z
+updated_at: 2026-08-23T06:40:36.292Z
 ---
 Top-level epic for the square-packing line of work. Scope: the mathematics of s(n) with s(11) as the motivating open case; a local archive of the primary literature; a structured frontier corpus covering every n <= 100; and the exact-verification tooling.
 
