@@ -5,13 +5,16 @@ title: negctl leaves the repo holding a deliberate sabotage if it is interrupted
 kind: bug
 status: open
 priority: 0
-version: 2
+version: 4
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
-labels: []
-dependencies: []
+labels:
+  - focus-efficiency
+dependencies:
+  - type: blocks
+    target: is-01m0r7r9k8dcz960yqpx69vwnm
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T20:21:37.206Z
-updated_at: 2026-08-23T20:33:15.432Z
+updated_at: 2026-08-23T21:32:08.508Z
 ---
 D-035. Hit for real on 2026-08-23, mid-session.
 

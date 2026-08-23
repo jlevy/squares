@@ -5,13 +5,14 @@ title: "Gate wall time: 480s -> 152s done, the remaining 101s unexamined"
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
-labels: []
+labels:
+  - focus-efficiency
 dependencies: []
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T19:46:15.411Z
-updated_at: 2026-08-23T19:46:15.411Z
+updated_at: 2026-08-23T21:32:08.523Z
 ---
 A gate slow enough that people stop running it is not a gate. This one reached 480s, and 70% of that was the two checks added for basin work.
 

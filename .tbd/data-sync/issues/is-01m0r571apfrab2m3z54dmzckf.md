@@ -3,15 +3,18 @@ type: is
 id: is-01m0r571apfrab2m3z54dmzckf
 title: "Reconcile PR #14 with the codex review branch: colliding D-numbers, and regenerate the golden"
 kind: task
-status: open
+status: closed
 priority: 0
-version: 2
+version: 4
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
-labels: []
+labels:
+  - focus-process
 dependencies: []
 parent_id: is-01m0pw7redm194km37gpb3cvmf
 created_at: 2026-08-23T20:32:55.125Z
-updated_at: 2026-08-23T20:38:14.504Z
+updated_at: 2026-08-23T21:32:17.426Z
+closed_at: 2026-08-23T21:32:17.425Z
+close_reason: "Resolved on the merged-main review stack: PR #14 source is an ancestor of this branch; colliding review defects were renumbered D-036/D-037; the source-built golden was regenerated and reviewed under corrected convergence semantics; strict/deep and later post-merge gates passed. Continuing golden-policy work is tracked separately as D-059 on think-zt29."
 ---
 Recorded 2026-08-23 20:35 from the PR #14 check-in, so it survives whether or not anyone reads the PR body.
 

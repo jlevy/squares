@@ -5,13 +5,14 @@ title: "Rehearse the recovery path: claim -> ledger -> release -> ledger, agains
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
-labels: []
+labels:
+  - focus-process
 dependencies: []
 parent_id: is-01m0pw7redm194km37gpb3cvmf
 created_at: 2026-08-23T19:42:33.854Z
-updated_at: 2026-08-23T19:42:33.854Z
+updated_at: 2026-08-23T21:32:08.874Z
 ---
 D-032 and D-033 are one lesson: PR #13 merged with `release` and `run` never once executed, and both were broken. `release` is the step that runs when a round dies at 3am, so it is the step least likely to be exercised by hand and worst to have broken.
 
