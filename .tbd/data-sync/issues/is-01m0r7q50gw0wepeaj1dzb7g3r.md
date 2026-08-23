@@ -5,7 +5,7 @@ title: "Efficiency (Infrastructure): trustworthy experimental throughput"
 kind: epic
 status: in_progress
 priority: 1
-version: 15
+version: 16
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -26,7 +26,7 @@ child_order_hints:
   - is-01m0rbwvahqzsexrv6kwgv35g0
   - is-01m0rbwvp7wvc8ewvtjpkpc9qb
 created_at: 2026-08-23T21:16:40.335Z
-updated_at: 2026-08-23T22:44:25.812Z
+updated_at: 2026-08-23T22:51:36.377Z
 ---
 Owns stable executors, profiling, batching, parallelism, caching, reproducible environments, observability, and measured agent-loop latency. This lane accelerates already specified work without weakening correctness or process controls. It hands versioned artifacts and benchmark evidence to Soundness and Process.
 
@@ -34,4 +34,4 @@ Acceptance: latency and throughput have reproducible baselines; the slowest loop
 
 ## Notes
 
-2026-08-23 active focus. D-035 now uses an isolated snapshot of current tracked and non-ignored bytes; no negative control mutates live source. D-066 through D-073 cover the atomic gate/runner lease, complete CLI critical sections, descendant-token refusal, and real crash/concurrency rehearsals. Focused code, schema, three activity, three crash, and 27-control checks pass. Full gate remains the closure boundary; profile only after it.
+2026-08-23 stability checkpoint. D-035 and D-068 through D-073 are closed by isolated current-worktree snapshots, the shared atomic gate/runner activity lease, descendant-capability stripping, and end-to-end concurrency/death rehearsals. The full normal gate passed in 129 seconds with 27 isolated controls and 74 reconciled defects. First stage attribution: soundness perimeter 38s, negative controls 30s, historical regressions 21s, LP 9s, lint 8s, atlas 6s, bead tree 4s, basin identity 4s. The broader throughput/profile lane remains active.

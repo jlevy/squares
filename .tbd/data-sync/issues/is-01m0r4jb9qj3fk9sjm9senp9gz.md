@@ -3,9 +3,9 @@ type: is
 id: is-01m0r4jb9qj3fk9sjm9senp9gz
 title: negctl leaves the repo holding a deliberate sabotage if it is interrupted
 kind: bug
-status: in_progress
+status: closed
 priority: 0
-version: 6
+version: 7
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels:
   - focus-efficiency
@@ -14,7 +14,9 @@ dependencies:
     target: is-01m0r7r9k8dcz960yqpx69vwnm
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T20:21:37.206Z
-updated_at: 2026-08-23T22:44:34.320Z
+updated_at: 2026-08-23T22:51:36.085Z
+closed_at: 2026-08-23T22:51:36.084Z
+close_reason: "Resolved by eliminating live-worktree sabotage entirely: negctl now runs controls in a stable snapshot of current tracked and non-ignored bytes, checker children are stopped and reaped before sandbox cleanup, every gate/runner critical section uses the shared atomic activity lease, writer capabilities are stripped from descendants, and real simultaneous-acquisition plus SIGTERM/SIGKILL rehearsals cover the lifecycle. The full normal ./test.sh gate passed in 129 seconds with all 27 isolated controls, 74 reconciled defect records, three activity checks, and three isolation/crash checks."
 ---
 D-035. Hit for real on 2026-08-23, mid-session.
 
