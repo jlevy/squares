@@ -144,6 +144,20 @@ def main() -> int:
         ok=canonical_key(x, y, turned, side).geometric == base.geometric,
     )
 
+    # The seam. An angle is periodic with period pi/2, and quantizing a periodic
+    # quantity naively splits it at the wrap-around: an axis-aligned square one ULP
+    # below pi/2 keyed differently from its identical twin at 0.0, so every basin count
+    # near an axis-aligned optimum was inflated. Found by the n = 3 golden, where two
+    # quenches of the trivial three-in-a-2x2 packing were stored as two basins.
+    seam = [math.nextafter(math.pi / 2, 0)] * len(theta)
+    zero = [0.0] * len(theta)
+    passed &= check(
+        "an angle one ULP below pi/2 keys as one at zero",
+        ok=canonical_key(x, y, seam, side).geometric
+        == canonical_key(x, y, zero, side).geometric,
+        detail="the quantizer must treat the angle as periodic, not as a line",
+    )
+
     # 2. Stability: perturb, quench back, key must match.
     nudged_x = [v + rng.uniform(-1e-4, 1e-4) for v in x]
     nudged_y = [v + rng.uniform(-1e-4, 1e-4) for v in y]

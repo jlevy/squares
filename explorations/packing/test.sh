@@ -197,6 +197,14 @@ echo "== basin identity =="
 $PY tools/canonical_check.py
 
 echo
+echo "== golden basin maps (proved cases, checked against mathematics) =="
+# The end-to-end pipeline on answers that existed before this code: anneal near a proved
+# optimum, quench onto it, recognise the closed form, and have sqpack accept the packing
+# through code the quench does not share. A golden captured from a previous RUN would
+# only freeze whatever the code did that morning -- D-030 is what that would have frozen.
+$PY tools/golden_basins.py
+
+echo
 echo "== basin atlas =="
 # The census's output, and the guard that says whether the census measured the landscape
 # or its own budget. Six structural invariants -- dedup, append-only, round trip, merge,

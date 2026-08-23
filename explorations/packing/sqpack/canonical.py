@@ -79,6 +79,35 @@ def d4_images(
     return out
 
 
+def _quantize_angle(theta: float, quantum: float) -> int:
+    """Quantize an angle ON A CIRCLE, so the seam at pi/2 is not a discontinuity.
+
+    An angle is periodic with period pi/2 -- a unit square is invariant under a quarter
+    turn -- and quantizing a periodic quantity with plain `round(t / quantum)` splits it
+    at the wrap-around. An axis-aligned square whose angle floats one ULP BELOW pi/2
+    then keys as 1570796 while its identical twin at 0.0 keys as 0, and the two are
+    recorded as different basins.
+
+    That is not hypothetical: it was live, and the n = 3 golden caught it. Two quenches
+    of the trivial three-in-a-2x2 packing produced squares at identical positions, one
+    set at 0 degrees and one at 90, and the atlas stored them as two distinct basins.
+    Every basin count anywhere near an axis-aligned optimum was inflated by it, and the
+    annealer makes it common by accumulating rotations without wrapping.
+
+    Working in integer steps of the period makes the modulo exact: `STEPS` steps span
+    exactly one quarter turn, so step `STEPS` and step `0` are the same angle by
+    construction rather than by a tolerance.
+
+    The trailing `% steps` does all the folding on its own, negative angles included
+    (Python's modulo is floored), so there is deliberately no `theta % QUARTER` in front
+    of it. There was one; it was dead code, and it cost a negative control the day it
+    stopped being reachable -- the control mutated it, nothing changed, and the suite
+    reported a guard that no longer guarded anything.
+    """
+    steps = max(1, round(QUARTER / quantum))
+    return round(theta / QUARTER * steps) % steps
+
+
 def geometric_key(
     x: list[float],
     y: list[float],
@@ -92,12 +121,12 @@ def geometric_key(
     Relabelling is handled by sorting the squares rather than by trying permutations:
     the sorted tuple of (quantized x, y, angle) is the same list whatever order the
     squares arrived in. Container symmetry is handled by taking the smallest digest over
-    all eight images.
+    all eight images. Angles are quantized on the circle -- see `_quantize_angle`.
     """
     best = None
     for ix, iy, it in d4_images(x, y, theta, side):
         squares = sorted(
-            (round(a / quantum), round(b / quantum), round(t / quantum))
+            (round(a / quantum), round(b / quantum), _quantize_angle(t, quantum))
             for a, b, t in zip(ix, iy, it, strict=True)
         )
         payload = repr((round(side / quantum), squares)).encode()

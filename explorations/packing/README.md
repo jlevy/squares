@@ -38,6 +38,9 @@ explorations/packing/
 ├── frontier/               What is known about s(n) for every n <= 100: one
 │                           schema-validated artifact per case, plus editorial.
 │                           See frontier/README.md.
+├── golden/                 Golden basin maps for the small PROVED cases, checked
+│                           against the proved values and against closed forms rather
+│                           than against a previous run. Rebuilt by tools/golden_basins.py
 ├── atlas/                  The basin atlas: one deduplicated store per n, keyed by
 │                           canonical basin identity, plus its schema. Append-only.
 ├── resources/              Local archive of the primary literature: papers and web
@@ -53,6 +56,8 @@ explorations/packing/
 │   ├── canonical.py        basin identity: a D4- and relabel-invariant geometric key,
 │   │                       and a contact graph canonical up to isomorphism
 │   ├── atlas.py            the deduplicated basin store, append-only and mergeable
+│   ├── closed_form.py      recognise a side as (p + q*sqrt(d))/r, or decline: a real
+│   │                       optimum has a short algebraic form, a stopping point does not
 │   └── packings/trump11.py Walter Trump's 1979 packing of 11 unit squares, exactly
 ├── derive_field.py         derives the number field from the published polynomial
 ├── verify_trump11.py       verify the packing and report what it took

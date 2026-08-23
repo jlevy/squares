@@ -1,0 +1,175 @@
+golden:
+  note: Rebuilt by tools/golden_basins.py. Sides to 12 decimals, which is above the polished tier's 1e-11
+    floor (D-021).
+  side_decimals: 12
+  convergence_ladder:
+  - n: 1
+    proved: '1'
+    annealer_gap: 0.0
+    after_quench: '1'
+    gap: 0.0
+    converged: true
+    valid: true
+  - n: 2
+    proved: '2'
+    annealer_gap: 0.0
+    after_quench: '2'
+    gap: 0.0
+    converged: true
+    valid: true
+  - n: 3
+    proved: '2'
+    annealer_gap: 0.0
+    after_quench: '2'
+    gap: 0.0
+    converged: true
+    valid: true
+  - n: 4
+    proved: '2'
+    annealer_gap: 0.0
+    after_quench: '2'
+    gap: 0.0
+    converged: true
+    valid: true
+  - n: 5
+    proved: 2 + (1/2)sqrt(2)
+    annealer_gap: 2.355319e-06
+    after_quench: "(4 + \u221A2)/2"
+    gap: 8.882e-15
+    converged: true
+    valid: true
+  - n: 9
+    proved: '3'
+    annealer_gap: 0.0
+    after_quench: '3'
+    gap: 0.0
+    converged: true
+    valid: true
+  - n: 10
+    proved: 3 + (1/2)sqrt(2)
+    annealer_gap: 0.021003996488
+    after_quench: "(6 + \u221A2)/2"
+    gap: 7.994e-15
+    converged: true
+    valid: true
+  cases:
+  - n: 1
+    proposals: 3
+    converged: 3
+    distinct_basins: 1
+    proved_optimum: '1'
+    found_optimum: true
+    basins:
+    - side: 1.0
+      closed_form: '1'
+      contacts: 0
+      angle_classes:
+      - 1
+      quench_frequency: 3
+      valid: true
+  - n: 2
+    proposals: 3
+    converged: 3
+    distinct_basins: 1
+    proved_optimum: '2'
+    found_optimum: true
+    basins:
+    - side: 2.0
+      closed_form: '2'
+      contacts: 1
+      angle_classes:
+      - 2
+      quench_frequency: 3
+      valid: true
+  - n: 3
+    proposals: 4
+    converged: 3
+    distinct_basins: 3
+    proved_optimum: '2'
+    found_optimum: true
+    basins:
+    - side: 2.0
+      closed_form: '2'
+      contacts: 3
+      angle_classes:
+      - 3
+      quench_frequency: 2
+      valid: true
+    - side: 2.016015246308
+      closed_form: null
+      contacts: 2
+      angle_classes:
+      - 1
+      - 2
+      quench_frequency: 1
+      valid: true
+    - side: 2.276678741181
+      closed_form: null
+      contacts: 3
+      angle_classes:
+      - 1
+      - 1
+      - 1
+      quench_frequency: 1
+      valid: true
+  - n: 4
+    proposals: 4
+    converged: 4
+    distinct_basins: 1
+    proved_optimum: '2'
+    found_optimum: true
+    basins:
+    - side: 2.0
+      closed_form: '2'
+      contacts: 6
+      angle_classes:
+      - 4
+      quench_frequency: 4
+      valid: true
+  - n: 5
+    proposals: 6
+    converged: 6
+    distinct_basins: 5
+    proved_optimum: 2 + (1/2)sqrt(2)
+    found_optimum: false
+    basins:
+    - side: 2.767766952966
+      closed_form: "(4 + 5\u221A2)/4"
+      contacts: 4
+      angle_classes:
+      - 2
+      - 3
+      quench_frequency: 1
+      valid: true
+    - side: 2.767766952966
+      closed_form: "(4 + 5\u221A2)/4"
+      contacts: 4
+      angle_classes:
+      - 2
+      - 3
+      quench_frequency: 1
+      valid: true
+    - side: 2.768117534061
+      closed_form: null
+      contacts: 5
+      angle_classes:
+      - 2
+      - 3
+      quench_frequency: 1
+      valid: true
+    - side: 2.914213562373
+      closed_form: "(3 + 2\u221A2)/2"
+      contacts: 6
+      angle_classes:
+      - 2
+      - 3
+      quench_frequency: 2
+      valid: true
+    - side: 2.942809041582
+      closed_form: "(6 + 2\u221A2)/3"
+      contacts: 6
+      angle_classes:
+      - 1
+      - 4
+      quench_frequency: 1
+      valid: true

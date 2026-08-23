@@ -86,6 +86,86 @@ think-jxx8  multistart (the null)  ───────────────
 
 **One bead unblocks the entire research queue.** That is what this night should buy.
 
+## Revision, 2026-08-23: what building Half A found
+
+Two of Half A’s three pieces landed — [`canonicalize`](../../../../sqpack/canonical.py)
+and [`atlas`](../../../../sqpack/atlas.py) — and building them turned up a defect that
+would have made the whole night worthless.
+
+**[D-030](../../../../defects.md).** `quench_bracket` narrowed its angle search window
+on a fixed schedule rather than on evidence, so a quench starting from a uniform random
+configuration could never arrive: it descended until the window ran out, then crawled.
+At `n = 5`, 11 of 12 cold starts stopped on the sweep limit at `≈ 3.078` against the
+proved `2.707107`, and **the atlas recorded all twelve interrupted descents as twelve
+distinct basins while every one of its structural invariants passed green.**
+
+That is the shape this plan is most exposed to, so it is worth naming precisely: the
+store was correct, the keys were correct, the schema was correct, and the census was
+nonsense — because none of those check *what the store is fed*. A discovery curve built
+on it would never plateau, which presents as “the landscape is enormous” rather than
+“the instrument stopped early”, and `H-011`’s saturation criterion and `H-012`’s basin
+ranking would both have inherited it silently.
+
+Fixed, measured and regression-guarded.
+The census now converges 12 of 12 from cold and finds `s(5) = 2.707106781187` exactly.
+
+### What that changes about the plan
+
+**Half A gains a validation step, and it comes before the multistart proposer rather
+than after.** The night’s whole premise is that the harness can be left alone with these
+tools, and D-030 is direct evidence that the tools can be confidently wrong in the
+flattering direction while every check around them passes.
+One defect found by luck at `n = 5` is not a basis for running `n ≤ 10` unattended.
+
+So the sequence is now:
+
+1. ~~`canonicalize`~~ — done
+2. ~~`atlas`~~ — done
+3. ~~D-030~~ — found and fixed
+4. **The validation suite** — see
+   [Validating the tools](#validating-the-tools-before-trusting-them)
+5. `multistart`, the uniform null proposer
+6. The recipe, the handover gate, the night
+
+## Validating the tools before trusting them
+
+The goal is not test coverage.
+It is **being able to point a research loop at these tools in ways nobody anticipated
+and still believe the output** — which is a stronger requirement than “the tests pass”,
+and D-030 is why.
+
+### Why an ordinary golden test is not enough here
+
+A golden test whose expected values are *whatever the code produced last time* is a
+characterization test.
+It catches regressions, and it cannot tell you the code was ever right.
+Against this project’s actual failure history — where four of six soundness defects
+pointed in the flattering direction — a golden captured from a wrong run is a wrong
+answer with a checksum on it.
+
+So the goldens here are **grounded in mathematics rather than in a previous run**, at
+three levels of strength:
+
+| Level | Oracle | Where it bites |
+| --- | --- | --- |
+| **Proved** | `s(n)` is known exactly for `n = 1…4, 5, 9, 10, 16` | The best basin must equal it. A basin *below* it is a bug, unconditionally |
+| **Closed form** | A real optimum lands on a recognisable algebraic number | An arbitrary stopping point does not land on `2 + 2√2⁄3`. Matching a closed form to `1e-12` is evidence the point is real, not merely stable |
+| **Independent** | `sqpack.verify` decides validity through code the quench does not share | Every basin in the map is a *valid packing*, checked by the soundness perimeter’s oracle rather than by the thing that produced it |
+
+The first two are what a characterization golden cannot do.
+The third is the perimeter rule (**R1**) applied to the map rather than to a component.
+
+### The trivial cases are the ones worth testing
+
+`n = 1, 2, 3, 4` have answers anyone can check by drawing them, and `n = 9, 16` are
+grids. They are cheap, they are exact, and an engine that cannot recover `s(4) = 2` has
+no business being pointed at `n = 11`. They are also where a bug is *legible*: a wrong
+answer at `n = 4` is obviously wrong, where a wrong answer at `n = 11` looks like
+research.
+
+This is the calibration ladder (**R-3**) taken one rung lower than the campaign has been
+using it.
+
 ## Design
 
 ### The night in two halves
@@ -224,9 +304,14 @@ tbd list --spec explorations/packing/docs/project/specs/active/plan-2026-08-23-o
 
 ### Half A — build (watched)
 
-- [ ] `canonicalize`: two-level basin identity (`think-t1s9`, already open against the
-  toolkit spec)
-- [ ] `atlas`: minimum viable deduplicated store (`think-eq6l`)
+- [x] `canonicalize`: two-level basin identity (`think-t1s9`)
+- [x] `atlas`: minimum viable deduplicated store (`think-eq6l`)
+- [x] **D-030**, found while building the above: the quench could not converge from a
+  cold start, and the atlas recorded the interrupted descents as basins
+- [ ] **Golden basin maps for the small proved cases** (`think-u0i6`) — `n = 1…5`, each
+  with its proved optimum, closed-form recognition, and independent validity
+- [ ] **Engine anchors at the trivial cases** (`think-ouf0`) — `sqsearch` must recover
+  `s(n)` at `n = 1…4, 9, 16`, and more budget must never return a worse best
 - [ ] `multistart`: the uniform null proposer, obeying the experiment contract
   (`think-jxx8`)
 - [ ] Give `H-011` a `runner.command` recipe, sized against measured throughput

@@ -127,11 +127,30 @@ controls:
   run: uv run --quiet python tools/canonical_check.py
   expect: "FAIL  invariant under square relabelling"
 
-- name: canonical - quarter-turn invariance dropped
+# The SEAM is the property only one thing guards: an angle one ULP below pi/2 must key
+# as one at zero. The quantizer's trailing `% steps` is the whole of it, so this control
+# reaches it and nothing else does.
+#
+# Three dead ends here, all worth not repeating: a `theta % QUARTER` inside the quantizer
+# (redundant with the upstream fold, so mutating it changed nothing and the control
+# silently stopped firing); perturbing the step COUNT (harmless -- scaling and modulo use
+# the same number, so the seam closes for any integer); and trying to break quarter-turn
+# invariance, which has two independent guards -- see below.
+- name: canonical - the angle seam at pi/2 splits identical squares
   file: sqpack/canonical.py
-  replace: ["    return theta % QUARTER", "    return theta"]
+  replace: ["    return round(theta / QUARTER * steps) % steps",
+            "    return round(theta / QUARTER * steps)"]
   run: uv run --quiet python tools/canonical_check.py
-  expect: "FAIL  invariant under a quarter turn of one square"
+  expect: "FAIL  an angle one ULP below pi/2 keys as one at zero"
+
+# There is deliberately NO control for "invariant under a quarter turn of one square",
+# and the reason is worth recording rather than leaving as a hole. That property has two
+# independent guards -- `canonical_key` folds angles into [0, pi/2) on the way in, and
+# the quantizer's `% steps` folds them again -- so breaking either one leaves the check
+# passing. Measured both ways. A control needs a single mutation that reaches the
+# property, and here none exists; the honest options are to record that or to weaken the
+# code so a control can fire, and weakening working code to make a test look better is
+# not a trade this directory makes.
 
 - name: canonical - the contact certificate agrees with everything
   file: sqpack/canonical.py
