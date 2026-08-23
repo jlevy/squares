@@ -129,6 +129,24 @@ else
 fi
 
 echo
+echo "== provenance: recorded commits are reachable =="
+# A round records the commit that produced its numbers. If a rebase orphans that
+# commit the binary can no longer be rebuilt and determinism stops being a safety
+# net -- which happened once here, to exp-001, and is annotated there. Orphans are
+# reported rather than fatal: history that has already been published cannot be
+# fixed by failing a test, and the annotation is the honest record.
+for f in campaign/series/*/experiments/*.md; do
+  c=$(sed -n "s/.*engine_commit: '\(.*\)'.*/\1/p" "$f" | head -1)
+  [ -n "$c" ] || continue
+  if git merge-base --is-ancestor "$c" HEAD 2>/dev/null; then
+    echo "  ok       $(basename "$f") -> $c"
+  else
+    echo "  ORPHANED $(basename "$f") -> $c (must carry an annotation)"
+    grep -q "^## Annotation" "$f" || { echo "    and it has none"; exit 1; }
+  fi
+done
+
+echo
 echo "== campaign record =="
 # Whole-set invariants no per-artifact validation can see: duplicate ids, dangling
 # hypothesis references, rounds naming an unknown series, more than one open series,
