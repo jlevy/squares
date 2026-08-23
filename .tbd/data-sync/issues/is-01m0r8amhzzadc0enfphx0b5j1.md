@@ -3,15 +3,19 @@ type: is
 id: is-01m0r8amhzzadc0enfphx0b5j1
 title: "Golden: --update writes before checking oracles, and the verified pose may not be the reported side"
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 1
+version: 2
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T21:27:18.847Z
-updated_at: 2026-08-23T21:27:18.847Z
+updated_at: 2026-08-23T22:51:22.790Z
+closed_at: 2026-08-23T22:51:22.790Z
+close_reason: "Fixed on codex/pr14-square-packing-review (PR #15) before this bead was filed; verified against that branch after stacking PR #16 on top of it. atlas_check.py now offers one genuinely non-converged observation and asserts offered_non_converged == 1, so the D-030 guard has a failure mode again. test.sh sets DEEP=1 under --strict with a guard that fails if it did not take. golden_basins.py assigns configs[identity] directly rather than via setdefault, so the verified pose matches the retained side, and it evaluates oracles before writing, atomically through a temporary. Independent convergence on the same fixes from two directions is the useful part of the result."
+resolution: null
+duplicate_of: null
 ---
 Two confirmed defects in tools/golden_basins.py, both raised by the PR #15 review under F-16 and both re-derived from merged main.
 
