@@ -101,7 +101,8 @@ ledger, the checker.
 
 **Cross-field rules live in the checker, not the schema.** [checked] softschema 0.6.2
 rejects `allOf` object composition under `status: enforced`, so a conditional would
-invalidate every artifact rather than the offending one.
+invalidate every artifact rather than the offending one
+([jlevy/softschema#41](https://github.com/jlevy/softschema/issues/41)).
 
 ## 4. Evidence
 
