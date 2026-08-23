@@ -1,0 +1,101 @@
+# Negative controls: each one corrupts something and asserts the guard complains.
+#
+# Every entry here was run by hand at least once and then thrown away. Checked in, they
+# become the answer to "how do you know that check works?" -- and they are the
+# regression layer the defect log kept recording as absent.
+#
+# Run:  python3 tools/negctl.py tools/controls.yaml
+controls:
+
+# --- the defect log's own invariants (D-018's class of bookkeeping failure) ---
+- name: defect log - open defect with no bead
+  file: defects.yaml
+  replace: ["  bead: think-hg3u\n", ""]
+  run: python3 tools/validate_schemas.py
+  expect: "without a bead"
+
+- name: defect log - soundness defect with no direction
+  file: defects.yaml
+  replace: ["  class: soundness\n  direction: flattering\n  detected_by: pre_registered_rule",
+            "  class: soundness\n  detected_by: pre_registered_rule"]
+  run: python3 tools/validate_schemas.py
+  expect: "soundness without a direction"
+
+- name: defect log - narrative link pointing nowhere
+  file: defects.yaml
+  replace: ["  recorded_in: test.sh", "  recorded_in: no/such/file.md"]
+  run: python3 tools/validate_schemas.py
+  expect: "recorded_in does not exist"
+
+- name: defect log - recurrence naming a defect that does not exist
+  file: defects.yaml
+  replace: ["  recurrence_of: D-010", "  recurrence_of: D-999"]
+  run: python3 tools/validate_schemas.py
+  expect: "recurrence_of unknown"
+
+- name: defect log - count disagreeing with the list
+  file: defects.yaml
+  replace: ["count: 23", "count: 20"]
+  run: python3 tools/validate_schemas.py
+  expect: "count 20 != 23"
+
+- name: defect log - generated view left stale
+  file: defects.yaml
+  replace: ["  title: A restart cap made the declared move budget inert",
+            "  title: A restart cap made the declared move budget inert, edited"]
+  run: python3 tools/render_defects.py --check
+  expect: "defects.md is stale"
+
+# --- the experiment record (D-005, D-018) ---
+- name: campaign - artifact violating its declared schema
+  file: campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md
+  replace: ["  priority: 3", "  priority: 0"]
+  run: python3 campaign/ledger.py --check
+  expect: "schema violation"
+
+- name: campaign - one round naming two hypotheses
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md
+  replace: ["  hypotheses: [H-019]", "  hypotheses: [H-019, H-002]"]
+  run: python3 campaign/ledger.py --check
+  expect: "is too long"
+
+- name: campaign - terminal round with no effort block
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["  effort:\n    wall_seconds: 108.8\n    stopped_by: criterion\n", ""]
+  run: python3 campaign/ledger.py --check
+  expect: "terminal round without an effort block"
+
+- name: campaign - stopped on the clock without saying where to resume
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["    stopped_by: criterion", "    stopped_by: timebox"]
+  run: python3 campaign/ledger.py --check
+  expect: "without verdict.resume_from"
+
+- name: campaign - exhausted verdict with no reopen condition
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["    decision: accepted", "    decision: exhausted"]
+  run: python3 campaign/ledger.py --check
+  expect: "exhausted without reopen_when"
+
+- name: campaign - hypothesis on the board but not in the registry
+  file: campaign/ideas.md
+  replace: ["the reason [H-018](hypotheses/H-018-basin-entry.md) is the most informative",
+            "the reason [H-777](hypotheses/H-777-nonexistent.md) is the most informative"]
+  run: python3 campaign/ledger.py --check
+  expect: "which is not in the registry"
+
+# --- the frontier corpus ---
+- name: frontier - generated table drifting from its source
+  file: frontier/n-011.md
+  # Mutate a digit the table actually SHOWS. The rendered cell carries 8 significant
+  # digits, so a change at the 14th is invisible to it and the check is right not to
+  # fire -- which this control asserted the wrong way round on its first attempt.
+  replace: ["    value: 3.87708359002281", "    value: 3.88708359002281"]
+  run: python3 tools/render_tables.py --check
+  expect: "STALE (re-run tools/render_tables.py)"
+
+- name: frontier - numeric value and its display string disagreeing
+  file: frontier/n-011.md
+  replace: ["    value_str: '3.87708359002281'", "    value_str: '3.87708359002282'"]
+  run: python3 tools/validate_schemas.py
+  expect: "value_str disagrees with value"

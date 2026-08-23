@@ -1,0 +1,69 @@
+# Contract for the defect logbook. One record per defect found in this toolchain.
+#
+# The point is not to list bugs; it is to make the PATTERN legible -- which layer
+# produces defects, which device caught them, which direction the error pointed, and
+# which fixes were left without a check to stop them recurring. A defect fixed with no
+# regression check comes back, and this file has the evidence: D-010 and D-017 are the
+# same mistake, six days and two authors apart, because the first fix had none.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:DefectLog/v1
+title: Defect log
+type: object
+additionalProperties: false
+required: [count, defects]
+properties:
+  count: {type: integer, minimum: 0, description: Must equal len(defects); a cheap guard against a truncated edit.}
+  defects:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      additionalProperties: false
+      required: [id, title, date, layer, class, detected_by, severity, status, what, fix, regression, recorded_in]
+      properties:
+        id: {type: string, pattern: "^D-[0-9]{3}$"}
+        title: {type: string, minLength: 1}
+        date: {type: string, description: ISO date the defect was found.}
+        layer:
+          enum: [engine, quench, verifier, record, tooling, docs]
+          description: Which part of the pipeline carried the defect.
+        class:
+          enum: [soundness, validity, bookkeeping, robustness, performance]
+          description: >-
+            soundness - the system asserted something false about the mathematics.
+            validity - correct code, but the measurement did not bear on the question.
+            bookkeeping - the record disagreed with the evidence.
+            robustness - it did not finish, or finished only by luck.
+            performance - it worked but cost far more than it should.
+        direction:
+          enum: [flattering, conservative, neutral]
+          description: >-
+            Required for soundness and validity. `flattering` errors overstate the
+            result and are the dangerous class -- they look like success. `conservative`
+            errors understate it and cost only effort.
+        detected_by:
+          enum: [pre_registered_rule, control_cell, gate, review, drift_check, anomaly, inspection, design]
+          description: >-
+            What actually caught it, not what should have. This column is the one that
+            says where to invest: a pipeline improves by adding detectors of the kinds
+            that are earning their keep.
+        latent_for: {type: string, description: 'How long it went unnoticed: "minutes", "one round", "two branches".'}
+        severity: {enum: [critical, high, medium, low]}
+        status:
+          enum: [fixed, contained, avoided, outstanding]
+          description: >-
+            fixed - cause removed. contained - bounded by a guard, cause still there.
+            avoided - caught in design, never reached data. outstanding - still open.
+        what: {type: string, minLength: 1, description: What went wrong, in one or two sentences.}
+        consequence: {type: string, description: What it would have cost had it survived.}
+        fix: {type: string, minLength: 1, description: What was done. "none yet" is legitimate for outstanding.}
+        regression:
+          type: string
+          minLength: 1
+          description: >-
+            The check that now prevents recurrence, or the literal "none". "none" is not
+            a failure to be hidden - it is the actionable signal this log exists to
+            surface, so it is a required field with an honest value.
+        recurrence_of: {type: string, pattern: "^D-[0-9]{3}$", description: This defect is the same mistake as an earlier one.}
+        recorded_in: {type: string, description: Path to the artifact or document carrying the narrative.}
+        bead: {type: string, description: Required when status is outstanding or contained.}

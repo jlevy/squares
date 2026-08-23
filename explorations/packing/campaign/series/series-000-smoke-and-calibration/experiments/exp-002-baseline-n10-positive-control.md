@@ -31,6 +31,9 @@ experiment:
     command: 'sqsearch --n 10 --seed S --chains 8 --budget-moves 100000000, for S in 1..5'
     budget: '4,000,000,000 moves, 93.5 s wall'
     record: campaign/series/series-000-smoke-and-calibration/results/exp-002-baseline-n10-positive-control.jsonl
+  effort:
+    wall_seconds: 93.5
+    stopped_by: criterion
   results:
   - shape: record
     metric: best_side

@@ -78,7 +78,7 @@ PY
 
 echo
 echo "== soft-schema validation =="
-$PY tools/validate_schemas.py
+uv run --quiet python tools/validate_schemas.py 2>/dev/null || $PY tools/validate_schemas.py
 
 echo
 echo "== generated tables in sync with frontier/ =="
@@ -99,6 +99,46 @@ for kind, field, n in (("search", "outcome", 20), ("proof", "status", 30)):
         assert s[field] and s["name"] and s["mechanism"] and s["note"], f"{kind} #{s['id']}: empty field"
     print(f"  {kind}: {n} strategies, {len(fams)} families, all fields populated")
 PY
+
+echo
+echo "== lint floor =="
+# The floor is enforced, not aspirational. It has already earned its place: ruff's
+# strict-zip rule found silent truncation in field arithmetic, its closure rule found a
+# capture one edit from a bug, and clippy found an approximation of TAU written as a
+# literal. Skipped, not failed, where the toolchain is absent.
+if command -v uv >/dev/null 2>&1; then
+  ( cd "$(dirname "$0")" && uv run --quiet ruff check . && uv run --quiet ruff format --check . \
+    && uv run --quiet basedpyright ) | tail -3
+else
+  echo "  uv not installed, skipping Python lint"
+fi
+if command -v cargo >/dev/null 2>&1; then
+  ( cd sqsearch && cargo clippy --release --all-targets --quiet -- -D warnings 2>&1 | tail -2 \
+    && cargo fmt --check && echo "  clippy clean at pedantic; rustfmt clean" )
+else
+  echo "  cargo not installed, skipping Rust lint"
+fi
+
+echo
+echo "== negative controls =="
+# Every guard in this directory, watched failing. A check nobody has seen fail is not a
+# check, and until now each of these was run once by hand and thrown away.
+$PY tools/negctl.py tools/controls.yaml
+
+echo
+echo "== soundness perimeter =="
+# Every component that can emit a packing, checked by sqpack through code it does not
+# share. This is the check whose absence let D-014 through: the quench was validated
+# only against its own constraint rows, which is no check when the rows are what the
+# solver got wrong. Replaying that defect against this gate rejects it on sight.
+$PY tools/perimeter_test.py
+
+echo
+echo "== defect log =="
+# The logbook of what has gone wrong here, and what now stops each thing recurring.
+# Checked like any other dataset: schema, contiguous ids, every open defect tracked by
+# a bead, every narrative link resolving, and the generated view in sync.
+$PY tools/render_defects.py --check
 
 echo
 echo "== search engine (sqsearch) =="

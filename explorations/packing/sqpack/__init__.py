@@ -1,4 +1,13 @@
 """Exact and approximate tooling for unit-square packings."""
 
-from .field import NumberField, FieldElement  # noqa: F401
-from .verify import verify_packing, Report, exact_sign, float_sign  # noqa: F401
+from sqpack.field import FieldElement, NumberField
+from sqpack.verify import Report, exact_sign, float_sign, verify_packing
+
+__all__ = [
+    "FieldElement",
+    "NumberField",
+    "Report",
+    "exact_sign",
+    "float_sign",
+    "verify_packing",
+]

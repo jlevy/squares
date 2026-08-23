@@ -95,9 +95,14 @@ fn scatter(c: &mut Config, s0: f64, rng: &mut Rng) {
 /// One anneal. Returns the best valid side seen, or `f64::INFINITY` if the run
 /// never reached a valid configuration.
 fn anneal(
-    c: &mut Config, p: &Params, rng: &mut Rng,
-    best: &mut Config, best_side: &mut f64, best_overlap: &mut f64,
-    moves: &mut u64, accepted: &mut u64,
+    c: &mut Config,
+    p: &Params,
+    rng: &mut Rng,
+    best: &mut Config,
+    best_side: &mut f64,
+    best_overlap: &mut f64,
+    moves: &mut u64,
+    accepted: &mut u64,
 ) {
     let cooling = (p.t_cold / p.t_hot).powf(1.0 / p.steps.max(1) as f64);
     let ramp = (p.lambda1 / p.lambda0).powf(1.0 / p.steps.max(1) as f64);
@@ -107,6 +112,21 @@ fn anneal(
     let mut side = required_side(c);
     let mut overlap = total_overlap(c);
     let mut energy = side + lambda * overlap;
+
+    // The starting configuration is itself a candidate. Without this the best is only
+    // ever updated on an *accepted move*, so a chain that starts feasible and never
+    // improves reports no feasible configuration at all -- which is how a basin-entry
+    // trial that returned perfectly would be recorded as a failure. Found by the
+    // eps = 0 instrument check, where the answer has to be "returned, unchanged".
+    if overlap <= FEASIBLE_EPS && side < *best_side {
+        *best_side = side;
+        *best_overlap = overlap;
+        best.x.copy_from_slice(&c.x);
+        best.y.copy_from_slice(&c.y);
+        best.t.copy_from_slice(&c.t);
+        best.cos.copy_from_slice(&c.cos);
+        best.sin.copy_from_slice(&c.sin);
+    }
 
     for _ in 0..p.steps {
         let k = rng.below(c.n);
@@ -134,7 +154,11 @@ fn anneal(
         // pair tests, so this is cheaper than tracking extremes incrementally.
         let old_local = local_overlap(c, k, ox, oy, ocos, osin);
         let new_local = local_overlap(c, k, nx, ny, ncos, nsin);
-        c.x[k] = nx; c.y[k] = ny; c.t[k] = nt; c.cos[k] = ncos; c.sin[k] = nsin;
+        c.x[k] = nx;
+        c.y[k] = ny;
+        c.t[k] = nt;
+        c.cos[k] = ncos;
+        c.sin[k] = nsin;
         let new_side = required_side(c);
         let new_overlap = overlap - old_local + new_local;
         let new_energy = new_side + lambda * new_overlap;
@@ -156,7 +180,11 @@ fn anneal(
                 best.sin.copy_from_slice(&c.sin);
             }
         } else {
-            c.x[k] = ox; c.y[k] = oy; c.t[k] = ot; c.cos[k] = ocos; c.sin[k] = osin;
+            c.x[k] = ox;
+            c.y[k] = oy;
+            c.t[k] = ot;
+            c.cos[k] = ocos;
+            c.sin[k] = osin;
         }
 
         temperature *= cooling;
@@ -183,8 +211,16 @@ pub fn run_chain(n: usize, seed: u64, chain: u64, p: &Params, budget_moves: u64)
             scatter(&mut c, s0, &mut rng);
         }
         restarts += 1;
-        anneal(&mut c, p, &mut rng, &mut best, &mut best_side, &mut best_overlap,
-               &mut moves, &mut accepted);
+        anneal(
+            &mut c,
+            p,
+            &mut rng,
+            &mut best,
+            &mut best_side,
+            &mut best_overlap,
+            &mut moves,
+            &mut accepted,
+        );
     }
 
     // Recompute from the stored configuration rather than reporting the incremental
@@ -194,5 +230,118 @@ pub fn run_chain(n: usize, seed: u64, chain: u64, p: &Params, budget_moves: u64)
     // silently refusing a genuine one. The guard has to be a measurement, not a memory.
     let best_overlap = total_overlap(&best);
 
-    Outcome { best_side, best, best_overlap, restarts, moves, accepted }
+    Outcome {
+        best_side,
+        best,
+        best_overlap,
+        restarts,
+        moves,
+        accepted,
+    }
+}
+
+/// Perturb every pose by uniform noise of size `eps`: positions in length units,
+/// angles in radians scaled the same way the move set scales them.
+///
+/// This is the entry point for a *basin-entry* test. Undirected restarting asks
+/// whether search can find a configuration; starting inside it and walking outward
+/// asks the different question of whether the configuration has an attracting
+/// neighbourhood at all -- and the eps at which the return rate collapses is the
+/// basin's radius in the units the search actually moves in.
+pub fn perturb(c: &mut Config, seed_cfg: &Config, eps: f64, rng: &mut Rng) {
+    for k in 0..c.n {
+        c.x[k] = seed_cfg.x[k] + eps * rng.signed();
+        c.y[k] = seed_cfg.y[k] + eps * rng.signed();
+        c.set_angle(k, seed_cfg.t[k] + eps * rng.signed());
+    }
+}
+
+/// Translate a configuration so its bounding box starts at the origin.
+///
+/// `required_side` is translation-invariant, so the energy is too, and a chain may
+/// drift arbitrarily far while staying in the same basin. Comparing coordinates
+/// without normalising would measure the drift rather than the basin.
+pub fn normalize(c: &mut Config) {
+    let (mut lox, mut loy) = (f64::MAX, f64::MAX);
+    for k in 0..c.n {
+        let e = 0.5 * (c.cos[k].abs() + c.sin[k].abs());
+        lox = lox.min(c.x[k] - e);
+        loy = loy.min(c.y[k] - e);
+    }
+    for k in 0..c.n {
+        c.x[k] -= lox;
+        c.y[k] -= loy;
+    }
+}
+
+/// Largest per-coordinate deviation between two configurations, after normalising
+/// both. Angles are compared modulo pi/2, since a unit square is invariant under a
+/// quarter turn about its own centre.
+///
+/// Deliberately NOT invariant under relabelling or the container's symmetries: at the
+/// small eps a basin-entry test cares about, a returning chain returns to the same
+/// labelled configuration, and a permuted match at large eps is a different finding
+/// that should not be silently folded into the return rate.
+pub fn max_deviation(a: &Config, b: &Config) -> f64 {
+    let (mut ca, mut cb) = (a.clone(), b.clone());
+    normalize(&mut ca);
+    normalize(&mut cb);
+    let quarter = std::f64::consts::FRAC_PI_2;
+    let mut worst: f64 = 0.0;
+    for k in 0..ca.n {
+        worst = worst.max((ca.x[k] - cb.x[k]).abs());
+        worst = worst.max((ca.y[k] - cb.y[k]).abs());
+        let mut dt = (ca.t[k] - cb.t[k]).rem_euclid(quarter);
+        if dt > quarter / 2.0 {
+            dt = quarter - dt;
+        }
+        worst = worst.max(dt);
+    }
+    worst
+}
+
+/// One chain of a basin-entry test: perturb the seed, anneal, and report where it
+/// landed. Every restart re-perturbs the *seed*, never the chain's best, so each
+/// restart is an independent trial of the same question.
+pub fn run_entry_chain(
+    seed_cfg: &Config,
+    seed: u64,
+    chain: u64,
+    p: &Params,
+    budget_moves: u64,
+    eps: f64,
+) -> Outcome {
+    let mut rng = Rng::keyed(seed, chain);
+    let n = seed_cfg.n;
+
+    let mut best = seed_cfg.clone();
+    let mut best_side = f64::INFINITY;
+    let mut best_overlap = 0.0;
+    let (mut moves, mut accepted, mut restarts) = (0u64, 0u64, 0u64);
+
+    let mut c = Config::new(n);
+    while moves < budget_moves && restarts < p.max_restarts {
+        perturb(&mut c, seed_cfg, eps, &mut rng);
+        restarts += 1;
+        anneal(
+            &mut c,
+            p,
+            &mut rng,
+            &mut best,
+            &mut best_side,
+            &mut best_overlap,
+            &mut moves,
+            &mut accepted,
+        );
+    }
+
+    let best_overlap = total_overlap(&best);
+    Outcome {
+        best_side,
+        best,
+        best_overlap,
+        restarts,
+        moves,
+        accepted,
+    }
 }

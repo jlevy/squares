@@ -162,10 +162,49 @@ item.
 | Per round | tier S = `1e9` pair-tests; tier M = `1e11`; tier L = `1e13` |
 | Per session | 8 hours, or 40 rounds |
 | Per hypothesis | 3 rounds, then it must be `abandoned` with `reopen_when` |
+| Per round, wall clock | declare a `timebox` before starting; stopping when it expires is an outcome, not a failure |
 
 Stop, do not adapt, on: budget exhausted; queue empty; three consecutive guard refusals
 or crashes; a control cell breaching; any invariant check failing; or a decision that
 needs a human. Exit non-zero on an abnormal stop.
+
+### Effort, and how a round ends
+
+Every terminal round carries an `effort` block, and the gate refuses one without it.
+It exists so the record can answer two questions months later that no verdict can: *what
+did this cost*, and *is the question still open?*
+
+| Field | What it carries |
+| --- | --- |
+| `timebox` | the give-up bound, declared **before** the round starts |
+| `wall_seconds` | compute time, lifted from the run data |
+| `agent_minutes` | operator time — building, analysing, writing up |
+| `pair_tests` | the machine-independent budget currency |
+| `stopped_by` | why the round ended: `criterion`, `timebox`, `saturation`, `guard`, `error`, `dependency` |
+
+`stopped_by` is the field that matters.
+A round that stopped on its `criterion` answered its question, whichever way it fell.
+A round that stopped on its `timebox` did not — the question is still open, the budget
+is already spent, and the round must say in `verdict.resume_from` where a successor
+picks it up.
+The gate enforces exactly that, so a timeboxed round cannot quietly become a
+dead end.
+
+Three terminal states are distinct on purpose, and the difference is what a future agent
+should do:
+
+- **`rejected`** — the criterion was measured and missed.
+  The claim is refuted *for this cell and regime*; a different regime may still say
+  otherwise.
+- **`abandoned`** — the budget ran out with no determination.
+  Not refuted, out of promise for now: `budget_spent`, `best_reached`, `reopen_when`.
+  Resumable, and listed in the ledger’s **Resumable** section.
+- **`exhausted`** — the stronger claim: re-running under this regime would add nothing.
+  Requires `reopen_when` naming a *change of instrument or regime*, not merely more
+  budget. This is how a line of work is closed without pretending it was refuted.
+
+The ledger derives cumulative effort per hypothesis and totals it, so “how much has gone
+into this claim” is a generated number rather than an impression.
 
 ## Running one round
 

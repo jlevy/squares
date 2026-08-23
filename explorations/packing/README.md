@@ -36,6 +36,22 @@ explorations/packing/
                             here (see that directory's README)
 ```
 
+## What has gone wrong here
+
+[`defects.md`](defects.md) is the logbook: every bug, inefficiency and record defect
+found in this toolchain, what caught it, and what now stops it recurring.
+It is generated from [`defects.yaml`](defects.yaml) and checked in the gate.
+
+It is kept because the aggregate says things no individual bug report can.
+Of 21 defects, six were **soundness** failures — the system asserting something false
+about the mathematics — and four of those pointed in the *flattering* direction, where
+the error looks like a success.
+The automated gate caught **none** of them: every one was found by a control cell whose
+answer was known in advance, a rule written down before the measurement, a generated
+view contradicting its source, or someone reading carefully.
+And six fixes left no regression check behind, which is why one of them
+([D-017](defects.md)) is a verbatim repeat of an earlier one.
+
 ## Conventions
 
 [`conventions.md`](conventions.md) consolidates every convention this directory runs on
@@ -153,8 +169,8 @@ Supply the corners in an exact field and call `verify_packing`:
 from sqpack.field import NumberField
 from sqpack.verify import verify_packing, exact_sign
 
-field = NumberField(min_poly, isolating_interval)   # coefficients high degree first
-squares = [...]                                     # 11 x 4 corners of FieldElements
+field = NumberField(min_poly, isolating_interval)  # coefficients high degree first
+squares = [...]  # 11 x 4 corners of FieldElements
 print(verify_packing(squares, side, sign=exact_sign))
 ```
 
@@ -168,6 +184,7 @@ For a quick, non-certifying check, swap in the float backend:
 
 ```python
 from sqpack.verify import float_sign
+
 verify_packing(squares, side, sign=float_sign(1e-9), bucket=True)
 ```
 

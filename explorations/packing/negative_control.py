@@ -12,8 +12,8 @@ zero makes it reject the *valid* packing -- so no tolerance is safe.
 
 from fractions import Fraction
 
-from sqpack.verify import verify_packing, exact_sign, float_sign
 from sqpack.packings import trump11
+from sqpack.verify import exact_sign, float_sign, verify_packing
 
 # Squares 3 and 5 in the reconstruction are stacked: [0,1]x[s-1,s] sits
 # directly on [0,1]x[s-2,s-1].  Sliding 5 up by any delta > 0 is an overlap.
@@ -36,7 +36,7 @@ def main() -> int:
     print(f"exact verifier, unperturbed packing: {'accept' if baseline.valid else 'REJECT'}")
     failures = 0
     for k in EXACT_DELTAS:
-        moved = slide(squares, SLIDING_SQUARE, K(Fraction(1, 10 ** k)), lambda y, d: y + d)
+        moved = slide(squares, SLIDING_SQUARE, K(Fraction(1, 10**k)), lambda y, d: y + d)
         report = verify_packing(moved, side, sign=exact_sign, check_shapes=False)
         verdict = "accept" if report.valid else "REJECT"
         print(f"  delta = 1e-{k:<4} {verdict}")
@@ -51,11 +51,13 @@ def main() -> int:
         base = verify_packing(as_float, side_f, sign=sign, check_shapes=False)
         row = []
         for k in FLOAT_DELTAS:
-            moved = slide(as_float, SLIDING_SQUARE, 10.0 ** -k, lambda y, d: y + d)
+            moved = slide(as_float, SLIDING_SQUARE, 10.0**-k, lambda y, d: y + d)
             r = verify_packing(moved, side_f, sign=sign, check_shapes=False)
             row.append(f"1e-{k}: {'accept' if r.valid else 'REJECT'}")
-        print(f"  tol={tol:<8g} valid packing: {'accept' if base.valid else 'REJECT'}"
-              f"   {'  '.join(row)}")
+        print(
+            f"  tol={tol:<8g} valid packing: {'accept' if base.valid else 'REJECT'}"
+            f"   {'  '.join(row)}"
+        )
 
     print("\nA float verifier that accepts the true packing also accepts overlaps")
     print("below its tolerance; one that rejects those overlaps also rejects the")

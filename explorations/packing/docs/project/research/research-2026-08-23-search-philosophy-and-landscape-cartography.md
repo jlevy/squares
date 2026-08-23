@@ -133,6 +133,14 @@ landscape = a discrete set of minima plus their basins, with a *quench map* send
 every configuration to its minimum — with one upgrade the physical version never had:
 our quench endpoint is **exact**. Within a cell the LP optimum is rational in the cell
 data; across cells it is algebraic.
+One further caveat the same build produced: a quench whose angle search merges nearby
+angles returns the optimum of a *constrained* problem, so its landing point — and hence
+basin identity, which the atlas defines as where the quench lands — would inherit a
+tuning parameter ([D-020](../../../defects.md), now fixed by a free-angle pass that
+certifies the endpoint is a genuine local optimum).
+The lesson generalises: **whatever defines a basin must be independent of the search’s
+own knobs**, and that has to be checked rather than assumed.
+
 Combined with the review’s canonical identity keys (R-1: contact graph up to
 isomorphism, `D₄`-canonicalized geometry), a local minimum stops being a
 tolerance-dependent place where an annealer got tired and becomes a **discrete,

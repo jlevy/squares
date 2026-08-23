@@ -75,7 +75,7 @@ strategies:
   name: Simulated annealing
   family: stochastic_search
   mechanism: Stochastic perturbation with a cooling schedule
-  outcome: untried_here
+  outcome: produced_records
   note: Yes — the current workhorse. Schadt’s program; Ellsworth’s modified version
   refs: []
 - id: 11

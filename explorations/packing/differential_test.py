@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from sqpack.verify import float_sign, separated  # noqa: E402
+from sqpack.verify import float_sign, separated
 
 BIN = Path(__file__).resolve().parent / "sqsearch/target/release/sqsearch"
 TOL = 1e-12
@@ -46,7 +46,9 @@ def main() -> int:
     pairs = int(sys.argv[1]) if len(sys.argv) > 1 else 20000
     out = subprocess.run(
         [str(BIN), "--pairdump", "--pairs", str(pairs)],
-        capture_output=True, text=True, check=True,
+        capture_output=True,
+        text=True,
+        check=True,
     ).stdout
 
     sign = float_sign(TOL)
@@ -55,7 +57,7 @@ def main() -> int:
     for row in rows:
         a = corners(row["xi"], row["yi"], row["ti"])
         b = corners(row["xj"], row["yj"], row["tj"])
-        verdict = separated(a, b, sign)          # 1 strict, 0 exact contact, None overlap
+        verdict = separated(a, b, sign)  # 1 strict, 0 exact contact, None overlap
         search_says_clear = row["depth"] <= TOL
         oracle_says_clear = verdict is not None
         if search_says_clear != oracle_says_clear:
