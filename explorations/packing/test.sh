@@ -30,6 +30,24 @@ skip() {
   echo "  SKIP: $1"
 }
 
+# Per-step timing. A gate nobody wants to run is a gate that stops being run, so where
+# its minutes go is not a curiosity -- it is the thing that decides whether the inner
+# loop is usable. Reported slowest-first at the end.
+TIMINGS=()
+STEP_NAME=""
+STEP_START=0
+step() {
+  [ -n "$STEP_NAME" ] && TIMINGS+=("$(( $(date +%s) - STEP_START ))|$STEP_NAME")
+  STEP_NAME="$1"
+  STEP_START=$(date +%s)
+  echo
+  echo "== $1 =="
+}
+end_steps() {
+  [ -n "$STEP_NAME" ] && TIMINGS+=("$(( $(date +%s) - STEP_START ))|$STEP_NAME")
+  STEP_NAME=""
+}
+
 # Some checks need PyYAML and jsonschema, which a bare system python3 usually lacks
 # -- on the machine this was written on, `import yaml` failed and every frontier
 # check below was silently unreachable. Prefer an interpreter that already has both;
@@ -64,8 +82,7 @@ else
   skip "cargo not installed: the engine, perimeter engine cells, differential test and selftest cannot run"
 fi
 
-echo
-echo "== exact verification =="
+step "exact verification"
 out=$(python3 verify_trump11.py)
 echo "$out"
 grep -q "^VALID: 11 squares, 55 pairs tested" <<<"$out"
@@ -74,8 +91,7 @@ grep -q "20 corner coordinates exactly on the boundary" <<<"$out"
 grep -q "P(s) == 0 for the published degree-8 polynomial: True" <<<"$out"
 grep -q "s = 3.87708359002281417730789706010096" <<<"$out"
 
-echo
-echo "== negative control =="
+step "negative control"
 out=$(python3 negative_control.py)
 echo "$out"
 # every perturbation must be rejected by the exact verifier
@@ -84,8 +100,7 @@ grep -q "delta = 1e-100  REJECT" <<<"$out"
 # and float64 with a tolerance must have a blind spot
 grep -q "tol=1e-09 .*1e-12: accept" <<<"$out"
 
-echo
-echo "== derivation (needs sympy) =="
+step "derivation (needs sympy)"
 # sympy is a dev dependency, so `uv run` has it even where the system python3 does
 # not. Asking python3 alone was why this step skipped on a clean checkout.
 if python3 -c "import sympy" 2>/dev/null; then
@@ -102,8 +117,7 @@ else
   skip "sympy not available to python3 or uv: the degree-8 field derivation is unchecked"
 fi
 
-echo
-echo "== fixed-angle cell is an LP, rebuilt independently =="
+step "fixed-angle cell is an LP, rebuilt independently"
 # The claim the quench rests on: fix the angles and each pair's separating axis and
 # what remains is a linear program. This is the SECOND implementation of it, and that
 # is the point -- sqpack.quench writes one row per pair from half-extents, this writes
@@ -115,8 +129,7 @@ echo "$out" | sed 's/^/  /'
 grep -q "23 variables, 1056 constraints" <<<"$out"
 grep -q "ALL CHECKS PASSED" <<<"$out"
 
-echo
-echo "== frontier corpus =="
+step "frontier corpus"
 # Structural checks that need no network. Schema validation needs softschema:
 #   for f in frontier/n-*.md; do uvx softschema@latest validate "$f"; done
 $PY - <<'PY'
@@ -144,16 +157,13 @@ print(f"  {nag} of {open_n} open cases bounded below by Nagamochi's general theo
 assert open_n == 65 and nag == 63, "corpus counts drifted from the documented figures"
 PY
 
-echo
-echo "== soft-schema validation =="
+step "soft-schema validation"
 uv run --quiet python tools/validate_schemas.py 2>/dev/null || $PY tools/validate_schemas.py
 
-echo
-echo "== generated tables in sync with frontier/ =="
+step "generated tables in sync with frontier/"
 $PY tools/render_tables.py --check
 
-echo
-echo "== strategy catalogues =="
+step "strategy catalogues"
 $PY - <<'PY'
 import yaml, pathlib
 for kind, field, n in (("search", "outcome", 20), ("proof", "status", 30)):
@@ -168,8 +178,7 @@ for kind, field, n in (("search", "outcome", 20), ("proof", "status", 30)):
     print(f"  {kind}: {n} strategies, {len(fams)} families, all fields populated")
 PY
 
-echo
-echo "== lint floor =="
+step "lint floor"
 # The floor is enforced, not aspirational. It has already earned its place: ruff's
 # strict-zip rule found silent truncation in field arithmetic, its closure rule found a
 # capture one edit from a bug, and clippy found an approximation of TAU written as a
@@ -187,8 +196,7 @@ else
   skip "cargo not installed: clippy and rustfmt did not run"
 fi
 
-echo
-echo "== basin identity =="
+step "basin identity"
 # The piece that makes "basin" a noun. Until a float configuration can be turned into a
 # name, every basin count is a count of floating-point strings and every discovery curve
 # is an artifact of the tolerance used to compare them (D-020). Checked against Trump's
@@ -196,16 +204,14 @@ echo "== basin identity =="
 # not against fixtures invented to pass.
 $PY tools/canonical_check.py
 
-echo
-echo "== golden basin maps (proved cases, checked against mathematics) =="
+step "golden basin maps (proved cases, checked against mathematics)"
 # The end-to-end pipeline on answers that existed before this code: anneal near a proved
 # optimum, quench onto it, recognise the closed form, and have sqpack accept the packing
 # through code the quench does not share. A golden captured from a previous RUN would
 # only freeze whatever the code did that morning -- D-030 is what that would have frozen.
 $PY tools/golden_basins.py
 
-echo
-echo "== basin atlas =="
+step "basin atlas"
 # The census's output, and the guard that says whether the census measured the landscape
 # or its own budget. Six structural invariants -- dedup, append-only, round trip, merge,
 # schema -- all passed while 11 of 12 quenches were silently hitting a sweep limit and
@@ -213,14 +219,12 @@ echo "== basin atlas =="
 # that had to exist: a store can only be as honest as what it is fed.
 $PY tools/atlas_check.py
 
-echo
-echo "== negative controls =="
+step "negative controls"
 # Every guard in this directory, watched failing. A check nobody has seen fail is not a
 # check, and until now each of these was run once by hand and thrown away.
 $PY tools/negctl.py tools/controls.yaml
 
-echo
-echo "== soundness perimeter =="
+step "soundness perimeter"
 # Every component that can emit a packing, checked by sqpack through code it does not
 # share. This is the check whose absence let D-014 through: the quench was validated
 # only against its own constraint rows, which is no check when the rows are what the
@@ -229,8 +233,7 @@ out=$($PY tools/perimeter_test.py 2>&1); echo "$out"
 grep -q "skipping engine cells" <<<"$out" \
   && skip "soundness perimeter ran without the engine: its sqsearch cells did not run"
 
-echo
-echo "== defect log =="
+step "defect log"
 # The logbook of what has gone wrong here, and what now stops each thing recurring.
 # Checked like any other dataset: schema, contiguous ids, every open defect tracked by
 # a bead, every narrative link resolving, and the generated view in sync.
@@ -243,8 +246,7 @@ $PY tools/render_defects.py --check
 # failed, so the gate checks it.
 $PY tools/check_generated_exempt.py
 
-echo
-echo "== bead tree =="
+step "bead tree"
 # The work list lives on the tbd-sync branch, outside this directory, so nothing here
 # could see it -- and the one time it went inconsistent (D-025) a person found it by
 # reading `tbd list --spec` and noticing two epics with the same title. Two invariants
@@ -255,8 +257,7 @@ out=$($PY tools/check_beads.py 2>&1); echo "$out"
 grep -q "^SKIP" <<<"$out" \
   && skip "no bead store reachable: the bead-tree invariants did not run"
 
-echo
-echo "== hand-written skills mirrored between .agents and .claude =="
+step "hand-written skills mirrored between .agents and .claude"
 # Codex reads .agents/skills/, Claude Code reads .claude/skills/, and experiment-loop is
 # hand-written into both. The runbook links into the .agents copy while an agent working
 # here loads the .claude one, so a drift makes the contract this campaign runs under
@@ -269,16 +270,14 @@ else
   skip "make not installed: the .agents/.claude skill mirrors were not compared"
 fi
 
-echo
-echo "== synopsis agrees with the artifacts =="
+step "synopsis agrees with the artifacts"
 # SYNOPSIS.md is the root document and a living one: it restates numbers that live
 # authoritatively elsewhere, which is the exact shape of thing that drifted in D-010,
 # D-017 and D-022. It cannot be generated -- most of it is judgement -- so it is
 # reconciled instead, the way ideas.md is.
 $PY tools/check_synopsis.py
 
-echo
-echo "== README agrees with the directory =="
+step "README agrees with the directory"
 # The other high-level document, and the one that was NOT reconciled -- which is why it
 # restated defect counts and went stale behind them twice in a day (D-028). The counts
 # now live only in the generated view. What is left is checkable: the layout tree
@@ -286,8 +285,7 @@ echo "== README agrees with the directory =="
 # link and anchor, including the ones into SYNOPSIS.md.
 $PY tools/check_readme.py
 
-echo
-echo "== search engine (sqsearch) =="
+step "search engine (sqsearch)"
 # The engine gate: geometry against a naive reference, determinism, and a positive
 # control that recovers s(5) = 2 + 1/sqrt(2). A run that has not passed this may not
 # be recorded. Skipped, not failed, where cargo is absent -- the rest of this repo
@@ -301,8 +299,7 @@ else
   skip "sqsearch binary absent: the engine selftest did not run"
 fi
 
-echo
-echo "== differential: search energy vs validity oracle =="
+step "differential: search energy vs validity oracle"
 # sqsearch owns move-loop energy, sqpack owns validity. They never meet in normal
 # operation, so nothing would notice if they drifted -- and a search optimising
 # against a different notion of overlap than the record is checked with is the
@@ -313,8 +310,7 @@ else
   skip "sqsearch binary absent: search energy was not checked against the validity oracle"
 fi
 
-echo
-echo "== provenance: recorded commits are reachable =="
+step "provenance: recorded commits are reachable"
 # A round records the commit that produced its numbers. If a rebase orphans that
 # commit the binary can no longer be rebuilt and determinism stops being a safety
 # net -- which happened once here, to exp-001, and is annotated there. Orphans are
@@ -331,13 +327,20 @@ for f in campaign/series/*/experiments/*.md; do
   fi
 done
 
-echo
-echo "== campaign record =="
+step "campaign record"
 # Whole-set invariants no per-artifact validation can see: duplicate ids, dangling
 # hypothesis references, rounds naming an unknown series, more than one open series,
 # stale claims, the cross-field verdict rules, the two-way reconciliation between
 # ideas.md and the registry, and whether ledger.md is stale.
 $PY campaign/ledger.py --check
+
+end_steps
+echo
+echo "== where the time went =="
+printf '%s\n' "${TIMINGS[@]}" | sort -rn | head -8 | while IFS='|' read -r secs name; do
+  printf '  %5ss  %s\n' "$secs" "$name"
+done
+printf '  %5ss  TOTAL\n' "$SECONDS"
 
 echo
 if [ ${#SKIPPED[@]} -eq 0 ]; then
