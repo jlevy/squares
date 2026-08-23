@@ -1010,12 +1010,24 @@ gone from heroic to routine within a decade:
 
 Both are packing optimality results with heavy case analysis and interval arithmetic —
 structurally the same kind of object an `s(11)` proof would be.
-The decisive caveat: **formalisation verifies a proof that already exists.** Neither
-project discovered its theorem.
-For `s(11)` there is no candidate proof to formalise, so this strategy is currently
+The caveat as first written here was that **formalisation only verifies a proof that
+already exists** — neither project discovered its theorem.
+That remains true of *those* projects and is **no longer true in general**: AlphaProof
+Nexus (arXiv:2605.22763, May 2026) resolved 9 of 353 open Erdős problems and 44 of 492
+open OEIS conjectures autonomously, at a few hundred dollars each, by pairing a frontier
+model with the Lean compiler in a loop.
+The correction matters less than it sounds for `s(11)` specifically — those problems had
+short proofs once found — but formal proof search is now a *search* method with a
+correctness guarantee attached, not only a transcription method.
+
+For `s(11)` there is still no candidate proof to formalise, so this strategy remains
 downstream of a gap nobody has closed.
-It matters as evidence that *if* a case-analysis proof of `s(11)` were produced,
-checking it is now tractable.
+What *is* available today is the other direction: the **upper bound** is a finite
+algebraic statement and could be formalised now, which would be the first formal theorem
+about `s(n)` for any non-trivial `n`. See
+[Lean for Square-Packing Proofs and Validation](research-2026-08-22-lean-for-packing-proofs-and-validation.md)
+for what is reachable when, and for the certificate pattern that makes a result
+verifiable by a third party who does not trust our code.
 
 **Strategy 15, revised.** An earlier draft of this document called rigorous interval
 branch-and-bound “the most plausible untried line of attack.”
@@ -1646,12 +1658,14 @@ covers two values of `n`. Any program should be weighted accordingly.
 
 ### The verifier, and why it comes before the searcher
 
-3. **Ship the exact verifier as a real tool.** The reference implementation in
-   [`explorations/packing/`](../../../README.md) certifies `s(11)` exactly in 0.35 s of
-   pure Python; the production version is a filtered exact-predicate kernel over `ℚ(α)`
-   on top of FLINT or CGAL. Its value is not the checking — it is that a search program
-   with an exact oracle can *publish claims that mean something*, which no current
-   record-setting program can do.
+3. **Ship the exact verifier as a real tool.** The layered design, the language boundary
+   and the measured budgets are in
+   [Infrastructure for Square-Packing Exploration](research-2026-08-22-infrastructure-for-packing-exploration.md).
+   The reference implementation in [`explorations/packing/`](../../../README.md)
+   certifies `s(11)` exactly in 0.35 s of pure Python; the production version is a
+   filtered exact-predicate kernel over `ℚ(α)` on top of FLINT or CGAL. Its value is not
+   the checking — it is that a search program with an exact oracle can *publish claims
+   that mean something*, which no current record-setting program can do.
 
 ### Search: an open baseline where none exists
 
@@ -1668,6 +1682,13 @@ covers two values of `n`. Any program should be weighted accordingly.
    it would test directly whether that class of method can rediscover Trump’s basin and
    the low-`n` records — a question nobody has asked.
    Success would be informative; failure would be more informative.
+
+Where to *point* this machinery is its own question, taken up in
+[A Search Philosophy for Square Packing](research-2026-08-23-search-philosophy-and-landscape-cartography.md):
+record basins are rare because records are rigid, so the first search artifact should be
+a basin atlas over the LP-quench map, steered by structural diversity rather than by
+reshaping the loss — boiled down to testable form in the standing review’s register
+(H-11–H-15, series S6).
 
 ### Proof: the lane where nothing automated has ever run
 

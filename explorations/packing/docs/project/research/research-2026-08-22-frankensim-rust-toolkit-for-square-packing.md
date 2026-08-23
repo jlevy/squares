@@ -581,6 +581,13 @@ assuming the surrounding ceremony carries its own weight.
 
 ### The architecture to build
 
+**Superseded by**
+[Infrastructure for Square-Packing Exploration](research-2026-08-22-infrastructure-for-packing-exploration.md),
+which folds this list together with the tooling study’s and settles the parts left open
+here — the language boundary, which symbolic layer to use where, and what the
+performance budget of each layer actually is (measured, not assumed).
+What follows is still the right list of *ideas to import from FrankenSim*.
+
 Nothing here changes the conclusion of the previous document — grid-bucket, then run SAT
 with predicates evaluated in the packing’s number field — but it fills in every layer
 around it. A concrete Rust toolkit, in priority order:

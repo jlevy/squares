@@ -39,14 +39,18 @@ explorations/packing/
 ## Reports
 
 Written to be read in this order.
-The first establishes what is known, the second how it is computed and checked, the
-third what to build with.
+They move from what is known, to how it is computed and checked, to what to build, to
+where a proof assistant fits, and finally to how to search — the strategy the tooling
+exists to serve.
 
 | Report | Scope |
 | --- | --- |
 | [Packing 11 Unit Squares in a Square](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | The mathematics of `s(11)`: what is proved, what is only conjectured, and why the available proof technique cannot close the gap |
 | [Algorithms and Tooling for Square Packing](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | How packings are searched for, refined from numerical to exact algebraic form, and verified; who holds the records and with what |
 | [FrankenSim as a Rust Toolkit for Square Packing](docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md) | First-hand study of a large Rust simulation framework as a source of certified-arithmetic and determinism building blocks |
+| [Infrastructure for Square-Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | Synthesis of the two above into a build order: three latency tiers, the language boundary, which symbolic layer to use where, and what to deliberately not build |
+| [Lean for Square-Packing Proofs and Validation](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where a proof assistant fits: the upper bound is formalisable today and unclaimed, the lemma layer is the diagnostic first target, and certificates make a result checkable by someone who does not trust our code |
+| [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | The strategy layer: why volume-weighted search fails precisely at records, the basin atlas over the LP-quench map as the deliverable, diversity over structural descriptors instead of loss-shaping, the LLM at the structural layer, and relaxation ladders into the hard instances |
 
 The structured record of the problem’s frontier — best known packing and best proved
 lower bound for every `n ≤ 100`, with provenance and per-case editorial — lives in
@@ -66,6 +70,23 @@ its remaining gaps in
 [Open Questions](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#open-questions),
 and the prioritized path forward in
 [A Research Program](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#a-research-program).
+
+## Plan
+
+The implementation plan for the first experiments — search, verify, iterate on `n = 11`
+and `n = 12` — is
+[plan-2026-08-22-minimal-packing-toolkit.md](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md).
+It turns the five reports into two phases and a bead tree;
+`tbd list --spec plan-2026-08-22-minimal-packing-toolkit.md` shows the work items.
+
+The current standing review —
+[review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md)
+— audits the toolkit documents, supplies the experiment method they lacked (a hypothesis
+register with kill criteria, a run protocol, a series plan starting from an `n = 11`
+smoke), and contributes one verified theoretical result: for fixed angles the whole
+problem is a linear program, checked numerically against Trump’s packing.
+Its register carries the search-philosophy report’s boil-down as hypotheses H-11–H-15
+and series S6 (landscape cartography).
 
 ## Exact verification
 

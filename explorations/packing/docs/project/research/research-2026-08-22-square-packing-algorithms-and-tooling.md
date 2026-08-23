@@ -725,7 +725,10 @@ The relevant precedents, in increasing order of ambition:
   These are what a formal version of the Montanher-style proof would run on.
 
 The gap for square packing is not the proof assistant.
-It is that there is no informal computer-assisted proof to formalise.
+For *lower* bounds it is that there is no informal computer-assisted proof to formalise.
+For *upper* bounds there is no gap at all: a packing is a finite algebraic witness, and
+formalising `s(11) ≤ 3.877084…` is available today and unclaimed — see
+[Lean for Square-Packing Proofs and Validation](research-2026-08-22-lean-for-packing-proofs-and-validation.md).
 
 ### Who holds the records, and with what
 
@@ -839,9 +842,15 @@ Tooling by task, with the honest verdict for this specific problem.
 | Nesting-style search | `jagua-rs` + `sparrow`, `packingsolver` | same | wrong objective and tolerance regime |
 | Symbolic refinement | SymPy + `msolve` (+ PARI `algdep`) | Mathematica (`FindRoot`, `RootApproximant`, `RootReduce`) | SymPy is far slower at high-degree `RootApproximant`-style recovery |
 | Rigorous optimality proof | `filib++`/C-XSC/Ibex branch and bound | same | scales to 3 squares (in a circle) |
-| Formal proof | Lean 4 + mathlib, Coq + `Coq.Interval`, Isabelle | same | nothing to formalise yet |
+| Formal proof | Lean 4 + mathlib, Coq + `Coq.Interval`, Isabelle | same | no *lower-bound* proof to formalise yet; the **upper bound is formalisable today** — see [the Lean study](research-2026-08-22-lean-for-packing-proofs-and-validation.md) |
 
 ## Recommendations
+
+**These are superseded in build order, not in content, by**
+[Infrastructure for Square-Packing Exploration](research-2026-08-22-infrastructure-for-packing-exploration.md),
+which turns them into a layered design with measured performance budgets and decides the
+language boundary. Read that document for *what to build first*; read this section for
+*why each piece matters*.
 
 For anyone wanting to work on this computationally, in rough order of value per unit of
 effort:
