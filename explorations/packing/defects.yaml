@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 23
+count: 27
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -495,3 +495,108 @@ defects:
     own control definitions.
   regression: 'the controls run in test.sh; a control whose anchor is ambiguous or absent fails loudly rather than mutating the wrong text'
   recorded_in: tools/negctl.py
+- id: D-024
+  title: A strategy's enum and its prose said opposite things
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: gate
+  latent_for: 'since the catalogue was written'
+  severity: low
+  status: fixed
+  what: >-
+    Simulated annealing carried `outcome: untried_here` beside a note reading "Yes - the
+    current workhorse. Schadt's program; Ellsworth's modified version". The enum is the
+    machine-readable verdict and the note is the prose the reports render, and nothing
+    compared them.
+  consequence: >-
+    A generated table saying a method had produced records while the structured data
+    said it had never been tried here - and any query over the catalogue would have
+    believed the data. Wrong on both readings of the field: annealing produced
+    Ellsworth's records, and this campaign has used it for every round so far.
+  fix: >-
+    Corrected to `produced_records`, and the enum's four values are now defined in the
+    schema rather than left to inference, with the rule that a note beginning "Yes"
+    means and only means `produced_records`.
+  regression: 'a cross-check in validate_schemas.py comparing every entry''s outcome against its note'
+  recorded_in: frontier/strategy-catalogue.schema.yaml
+- id: D-025
+  title: Two bead trees claimed the same spec phase after the plan was rebuilt
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'two branches, partly reported at the time'
+  severity: medium
+  status: fixed
+  what: >-
+    When the plan was rebuilt around the quench spine, new phase epics were created but
+    the pre-revision tree was left in place. `tbd list --spec` then returned two epics
+    both titled "Phase 1" and two both meaning Phase 5, and one child task was complete
+    but still open.
+  consequence: >-
+    An arriving agent could not tell which tree was live, and the stale labels described
+    a build order the spec had replaced. Partly flagged as review finding F-3, where the
+    fix closed two beads and left the rest.
+  fix: >-
+    The old verification-core epic is closed as superseded and its seven children
+    re-parented to the revised Phase 5 epic; the old experiments epic is retitled to name
+    the phases it now belongs to; the finished differential-test task is closed.
+  regression: none
+  recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+- id: D-026
+  title: The plan spec's checklist contradicted the state the spec was cited as authority for
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'since the plan was rebuilt around the quench spine'
+  severity: medium
+  status: fixed
+  what: >-
+    The handoff document, the bead tree, and this PR's own summary all record the
+    `quench` block as done, and all three send an arriving agent to the plan spec as the
+    work list. Every one of the spec's 36 checkboxes was still unticked, `quench`
+    included.
+  consequence: >-
+    The same failure D-025 had just fixed one layer up: two records of what is finished,
+    disagreeing, with no way to tell from the repo which was live. An agent reading the
+    spec first would have rebuilt a block that was already built.
+  fix: >-
+    The `quench` block is ticked. The rest are genuinely open and stay unticked -- in
+    particular `verify`, which the handoff table calls done for `sqpack` while the spec's
+    item asks for something larger (exact-verify every recorded basin, for H-8's
+    false-basin rate).
+
+    No check is left behind: reconciling a checkbox against bead state needs the bead
+    database, which lives on `tbd-sync` and not in the tree.
+  regression: none
+  recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+- id: D-027
+  title: A generated view was left reflowable by the Markdown auto-formatter
+  date: '2026-08-23'
+  layer: tooling
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'one day, on every machine with the pre-commit hook installed'
+  severity: medium
+  status: fixed
+  what: >-
+    `defects.md` is rebuilt byte-for-byte by `render_defects.py` and drift-checked by
+    `render_defects.py --check`, exactly like `campaign/ledger.md` -- but only
+    `ledger.md` was named in `.flowmarkignore`. `flowmark --check` reports that it would
+    reflow `defects.md` today.
+  consequence: >-
+    The lefthook pre-commit hook runs `make format` whenever any Markdown is staged. On
+    a machine with hooks installed, committing anything would have reformatted
+    `defects.md` and left the gate failing until someone regenerated it by hand. The
+    reasoning was already written down beside the `ledger.md` entry -- "formatting it
+    makes the check fail forever" -- and simply was not carried across to the second
+    generated view.
+  fix: >-
+    `defects.md` is exempted. More to the point, the list is no longer trusted: any file
+    carrying the generated-by banner must appear in `.flowmarkignore`, checked by
+    `tools/check_generated_exempt.py` in the gate, so a third generated view cannot
+    repeat this.
+  regression: 'tools/check_generated_exempt.py in test.sh, with a negative control in tools/controls.yaml'
+  recorded_in: tools/check_generated_exempt.py

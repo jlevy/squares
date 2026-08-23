@@ -35,9 +35,9 @@ controls:
 
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 23", "count: 20"]
+  replace: ["count: 27", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 23"
+  expect: "count 20 != 27"
 
 - name: defect log - generated view left stale
   file: defects.yaml
@@ -99,3 +99,9 @@ controls:
   replace: ["    value_str: '3.87708359002281'", "    value_str: '3.87708359002282'"]
   run: python3 tools/validate_schemas.py
   expect: "value_str disagrees with value"
+
+- name: generated view left un-exempt from the Markdown formatter
+  file: ../../.flowmarkignore
+  replace: ["explorations/packing/defects.md\n", ""]
+  run: python3 tools/check_generated_exempt.py
+  expect: "generated views not exempt from the Markdown formatter"

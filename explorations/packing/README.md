@@ -43,14 +43,22 @@ found in this toolchain, what caught it, and what now stops it recurring.
 It is generated from [`defects.yaml`](defects.yaml) and checked in the gate.
 
 It is kept because the aggregate says things no individual bug report can.
-Of 21 defects, six were **soundness** failures — the system asserting something false
-about the mathematics — and four of those pointed in the *flattering* direction, where
-the error looks like a success.
+Of 27 defects, 6 were **soundness** failures — the system asserting something false
+about the mathematics — and 4 of those pointed in the *flattering* direction, where the
+error looks like a success.
 The automated gate caught **none** of them: every one was found by a control cell whose
 answer was known in advance, a rule written down before the measurement, a generated
 view contradicting its source, or someone reading carefully.
-And six fixes left no regression check behind, which is why one of them
+And 8 fixes left no regression check behind, which is why one of them
 ([D-017](defects.md)) is a verbatim repeat of an earlier one.
+(Counts as of 2026-08-23; [`defects.md`](defects.md) is the live tally.)
+
+## Start here
+
+[`docs/project/handoff-2026-08-23-quench-spine.md`](docs/project/handoff-2026-08-23-quench-spine.md)
+is the current state of play: what works, what is missing, what the critical path is,
+and the half-dozen facts that will save an arriving agent a day.
+Read it before anything else.
 
 ## Conventions
 
@@ -100,8 +108,9 @@ and the prioritized path forward in
 The implementation plan for the first experiments — search, verify, iterate on `n = 11`
 and `n = 12` — is
 [plan-2026-08-22-minimal-packing-toolkit.md](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md).
-It turns the five reports into two phases and a bead tree;
-`tbd list --spec plan-2026-08-22-minimal-packing-toolkit.md` shows the work items.
+It turns the six reports into seven phases and a bead tree, one epic per phase;
+`tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md`
+shows the work items and `tbd ready` the unblocked subset.
 
 The current standing review —
 [review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md)
