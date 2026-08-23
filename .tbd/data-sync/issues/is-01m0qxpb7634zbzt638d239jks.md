@@ -5,7 +5,7 @@ title: Make canonical basin identity invariant, stable, and scalable
 kind: bug
 status: open
 priority: 0
-version: 10
+version: 11
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -26,7 +26,7 @@ child_order_hints:
   - is-01m0r50mrppgcvsp2ewrac0x6z
   - is-01m0r516kvkaaa5bbf9nm948qa
 created_at: 2026-08-23T18:21:28.165Z
-updated_at: 2026-08-23T20:29:43.930Z
+updated_at: 2026-08-23T20:44:44.747Z
 ---
 Category: technical errors. The contact certificate is not invariant under container reflection because folded-angle classes are ranked by angle value; tolerance grouping is order-dependent; exact tuple identity splits geometrically equivalent packings at quantization boundaries; and exhaustive individualization becomes factorial on sparse symmetric graphs.
 
@@ -34,4 +34,10 @@ Acceptance: property tests cover all D4 images, every square permutation, bounda
 
 ## Notes
 
-2026-08-23 final PR14 reassessment: the contact certificate is minimized across all eight D4 images, the checker asserts both keys across D4 and quarter-turns, and PR #14 records the circular seam repair as D-031. Identity changes alter the golden map, so deep regeneration remains mandatory. Remaining work is order-independent circular angle clustering, ambiguity-aware identity, quantization-boundary handling, and replacing or bounding factorial graph canonicalization.
+2026-08-23, from PR #14 branch claude/packing-overnight-strategy-queue: a distinct root cause was measured that this bead's framing would send someone past.
+
+This bead attributes basin splitting to quantization boundaries and to identity being exact equality of two hashes. Both are real. But the splitting measured at n = 5 is NEITHER: the angle steps of the two split rows are identical ([0, 0, 0, 785398, 785398]) and the positions differ by 0.06 in x and 0.21 in y -- real distance, not a straddled cell. The configuration is NOT RIGID: 11 contact constraints against 16 degrees of freedom, so the optimum is a five-dimensional family and the two rows are two genuine members of it.
+
+So tightening or loosening the quantum cannot fix that case, and an ambiguity-aware identity relation only helps if it knows the optimum is flat. Track that as think-1s0h and D-034; do these two together, because a quantization-boundary fix validated against a flat optimum will look like it works and will not.
+
+Also relevant to this bead's own acceptance list: the contact-certificate reflection-invariance fix on origin/codex/pr14-square-packing-review (commit c170743) is a real defect fix in code this branch also touched, and the two branches conflict. The n = 5 split rows have IDENTICAL contact certificates, so reflection invariance is not what splits them -- the two findings are independent and both need to land.
