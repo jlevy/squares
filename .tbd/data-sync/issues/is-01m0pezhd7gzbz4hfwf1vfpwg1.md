@@ -5,12 +5,12 @@ title: Track this session's own working process as beads, not only the loop's ro
 kind: chore
 status: open
 priority: 3
-version: 1
+version: 2
 spec_path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
 labels: []
 dependencies: []
-parent_id: is-01m0pdh5bj67ca8vk7ct53g5qt
+parent_id: is-01m0n6nyzx5pnark7xve1dy52x
 created_at: 2026-08-23T04:45:06.343Z
-updated_at: 2026-08-23T04:45:06.343Z
+updated_at: 2026-08-23T05:44:20.534Z
 ---
 Work outside the experiment loop (tooling, remediation, doc corrections, reviews) should be beaded as it happens rather than reconstructed at the end. The loop's own rounds keep their record in campaign/; everything else belongs in the tracker. This session created beads retroactively in places -- close the gap by opening a bead before starting a strand.
