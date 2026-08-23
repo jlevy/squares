@@ -205,6 +205,20 @@ over the packing’s own number field).
 boundary. The tiers are set out in full under
 [Theoretical Results](#theoretical-results).
 
+### Not used here
+
+Two coinages appear in side work and are deliberately **not** adopted, because the
+project already has clearer words for both.
+
+- **“polish gap” / “exploration gap.”** Write **polish failure** and **exploration
+  failure** for the diagnosis, and *right basin* / *wrong basin* for the state.
+  A gap is a number; whether it is polish or exploration is a *conclusion about* that
+  number, and the two-word compound hides the inference.
+  Neither compound occurs anywhere in this directory and neither should start.
+- **“the quench” for a fixed-angle solve.** A quench includes its angle half.
+  See [A cell is not a basin](#a-cell-is-not-a-basin-and-this-trap-has-been-walked-into)
+  — the conflation cost a correct finding ([D-029](defects.md)).
+
 ### The deliverables, none of them built
 
 **Atlas.** The deduplicated store of known basins for an `n`, keyed by canonical basin
@@ -426,6 +440,35 @@ Note what the statement does **not** claim.
 The LP optimises within one cell.
 A different cell may have a lower optimum, and finding the best cell is the
 combinatorial part of the problem, which none of this makes easy.
+
+### A cell is not a basin, and this trap has been walked into
+
+The statement above fixes the angles.
+A **basin** does not: it is the preimage of a quench endpoint, and the quench moves the
+angles. So a configuration can sit at *exactly* its cell’s optimum and still be far from
+its basin’s, with every remaining unit of gap in the angles and none of it in the
+centres.
+
+The consequence is a reading that looks safe and is not: **a fixed-angle solve that
+stops improving has not converged to a local optimum of the problem — it has run out of
+things it is allowed to move.** Watching it flatten and concluding “wrong basin” is
+exactly backwards, and it is what the right basin looks like when the residual is
+angular.
+
+That is not hypothetical.
+Checking exp-001’s polish/exploration split, an agent built a probe doing one LP solve
+at fixed angles, called it “the quench”, and retracted a correct finding when it stalled
+([D-029](defects.md)). On exp-002’s seed 2:
+
+|  | gap to `s(10) = 3 + ½√2` |
+| --- | ---: |
+| annealer output, as found | `+5.6440e-04` |
+| fixed-angle solve, carried to its cell fixed point | `+5.6440e-04` — *no improvement at all* |
+| `quench_bracket`, with the angle half | `+4.4409e-16` |
+
+**“Quench” names all three stages** — solve the cell, re-read the cell to a fixed point,
+refine the angles. The cell solve alone is one third of it and answers a different
+question. `tools/regression_test.py` pins this discrimination under D-029.
 
 ### Two implementations, on purpose
 
@@ -910,13 +953,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Twenty-eight defects, [one line each](defects.md), generated from `defects.yaml` and
+Twenty-nine defects, [one line each](defects.md), generated from `defects.yaml` and
 checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 6 | asserted something false about the mathematics |
-| validity | 5 | was correct, but the measurement did not bear on the question |
+| validity | 6 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 14 | recorded something its own evidence contradicts |
 | robustness | 2 | did not finish, or finished only by luck |
 | performance | 1 | worked, but cost far more than it should |
@@ -927,7 +970,7 @@ Two observations the log exists to make.
 error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught one defect in twenty-eight, and no soundness defect
+**The automated gate has caught one defect in twenty-nine, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

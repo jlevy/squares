@@ -2,14 +2,14 @@
 
 # Defect log
 
-28 defects recorded across the packing toolchain.
+29 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **6 soundness defects** — the system asserting something false about the mathematics. 4 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **7 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010).
+- **7 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023).
 - **1 is still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -18,21 +18,21 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 1 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 4 | a cell of the sweep whose answer is known in advance |
-| `review` | 11 | a human or agent reading the work against a checklist |
+| `review` | 12 | a human or agent reading the work against a checklist |
 | `anomaly` | 3 | a result that made no sense, chased down |
 | `inspection` | 5 | reading the code or the design with intent |
 | `drift_check` | 2 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 1 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 1 of 28, and none of the 6 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 1 of 29, and none of the 6 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
 | Layer | Count |
 | --- | ---: |
 | engine | 7 |
-| quench | 6 |
+| quench | 7 |
 | record | 12 |
 | tooling | 3 |
 
@@ -41,7 +41,7 @@ The line worth reading twice: **the automated gate caught 1 of 28, and none of t
 | Class | Count |
 | --- | ---: |
 | soundness | 6 |
-| validity | 5 |
+| validity | 6 |
 | bookkeeping | 14 |
 | robustness | 2 |
 | performance | 1 |
@@ -99,3 +99,4 @@ This is the actionable list.
 | [D-026](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | The plan spec's checklist contradicted the state the spec was cited as authority for |
 | [D-027](tools/check_generated_exempt.py) | 2026-08-23 | tooling | bookkeeping |  | `review` | medium | fixed | A generated view was left reflowable by the Markdown auto-formatter |
 | [D-028](tools/render_defects.py) | 2026-08-23 | record | bookkeeping |  | `drift_check` | low | fixed | A defect-log headline stayed asserted after it stopped being true |
+| [D-029](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | 2026-08-23 | quench | validity | conservative | `review` | medium | fixed | A single fixed-angle LP solve was called "the quench", and retracted a correct finding |
