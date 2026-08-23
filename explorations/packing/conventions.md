@@ -225,6 +225,27 @@ Markdown link. This project has needed that twice.
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.
 
+## Defects
+
+Every defect found in this toolchain is recorded in [`defects.yaml`](defects.yaml) and
+rendered to [`defects.md`](defects.md).
+A defect is a bug, an inefficiency, or a record that disagreed with its evidence — not
+an approach tried and rejected on its merits, which belongs in `campaign/ideas.md` under
+Dead ends.
+
+Two fields carry most of the value and are worth filling in honestly rather than
+generously. `detected_by` says what *actually* caught it, which is how we learn which
+detectors to build more of.
+`regression` names the check that now prevents recurrence, and the literal `none` is a
+legitimate and useful answer — the generated view collects those into the list that
+predicts what will come back.
+[checked]
+
+Open defects must carry a bead, soundness and validity defects must state whether the
+error flattered or understated the result, and every row must point at the artifact
+carrying its narrative.
+[checked]
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

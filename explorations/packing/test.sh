@@ -101,6 +101,13 @@ for kind, field, n in (("search", "outcome", 20), ("proof", "status", 30)):
 PY
 
 echo
+echo "== defect log =="
+# The logbook of what has gone wrong here, and what now stops each thing recurring.
+# Checked like any other dataset: schema, contiguous ids, every open defect tracked by
+# a bead, every narrative link resolving, and the generated view in sync.
+$PY tools/render_defects.py --check
+
+echo
 echo "== search engine (sqsearch) =="
 # The engine gate: geometry against a naive reference, determinism, and a positive
 # control that recovers s(5) = 2 + 1/sqrt(2). A run that has not passed this may not

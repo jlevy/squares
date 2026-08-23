@@ -55,10 +55,13 @@ def check(path: pathlib.Path) -> list[str]:
         return errs
     if meta["status"] != "enforced":
         errs.append(f"status is {meta['status']!r}, expected 'enforced'")
-    schema_path = FRONTIER / meta["schema"]
+    # A soft-schema document's `schema` is relative to the document, so resolve it
+    # that way rather than against one fixed directory -- otherwise no artifact can
+    # live outside frontier/, which the defect log does.
+    schema_path = (path.parent / meta["schema"]).resolve()
     if not schema_path.exists():
         return errs + [f"declared schema not found: {meta['schema']}"]
-    v = Draft202012Validator(load_schema(meta["schema"]))
+    v = Draft202012Validator(yaml.safe_load(schema_path.read_text(encoding="utf-8")))
     for e in sorted(v.iter_errors(payload), key=lambda e: list(e.path)):
         loc = "/".join(str(x) for x in e.path) or "<root>"
         errs.append(f"{loc}: {e.message}")
@@ -90,9 +93,39 @@ def cross_checks() -> list[str]:
     return errs
 
 
+def defect_checks() -> list[str]:
+    """Whole-set invariants for the defect log that a JSON Schema cannot express."""
+    errs = []
+    path = FRONTIER.parent / "defects.yaml"
+    if not path.exists():
+        return ["defects.yaml is missing"]
+    d = yaml.safe_load(path.read_text(encoding="utf-8"))
+    ds = d["defects"]
+    if d["count"] != len(ds):
+        errs.append(f"defects: count {d['count']} != {len(ds)} entries")
+    ids = [x["id"] for x in ds]
+    if ids != [f"D-{i:03d}" for i in range(1, len(ids) + 1)]:
+        errs.append("defects: ids are not contiguous from D-001")
+    known = set(ids)
+    for x in ds:
+        # An open defect that nobody is tracking is a note, not a defect.
+        if x["status"] in ("outstanding", "contained") and not x.get("bead"):
+            errs.append(f"{x['id']}: {x['status']} without a bead")
+        # The two classes where the direction of the error decides how bad it is.
+        if x["class"] in ("soundness", "validity") and not x.get("direction"):
+            errs.append(f"{x['id']}: {x['class']} without a direction")
+        if x.get("recurrence_of") and x["recurrence_of"] not in known:
+            errs.append(f"{x['id']}: recurrence_of unknown {x['recurrence_of']}")
+        target = FRONTIER.parent / x["recorded_in"]
+        if not target.exists():
+            errs.append(f"{x['id']}: recorded_in does not exist: {x['recorded_in']}")
+    return errs
+
+
 def main() -> int:
     md = sorted(FRONTIER.glob("n-*.md"))
     datasets = sorted(p for p in FRONTIER.glob("*.yaml") if not p.name.endswith(".schema.yaml"))
+    datasets += [FRONTIER.parent / "defects.yaml"]
     if not md or not datasets:
         print("frontier/ artifacts not found", file=sys.stderr)
         return 2
@@ -104,7 +137,7 @@ def main() -> int:
             print(f"FAIL {p.name}", file=sys.stderr)
             for e in errs[:6]:
                 print(f"     {e}", file=sys.stderr)
-    for e in cross_checks():
+    for e in cross_checks() + defect_checks():
         failures += 1
         print(f"FAIL cross-check: {e}", file=sys.stderr)
     if failures:

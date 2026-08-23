@@ -1,0 +1,432 @@
+# The defect logbook. Generated view: defects.md (run tools/render_defects.py).
+#
+# Scope: defects in the packing toolchain -- the engine, the quench, the verifier, the
+# experiment record, and the tooling around them. Approaches tried and rejected on
+# their merits are not defects; those live in campaign/ideas.md under Dead ends.
+#
+# Every entry names what caught it. That column is the deliverable: it is how we learn
+# which detectors are worth building more of.
+softschema:
+  contract: packing.squares:DefectLog/v1
+  schema: defects.schema.yaml
+  envelope: null
+  status: enforced
+count: 21
+defects:
+- id: D-001
+  title: Fixed-side search never left the grid basin
+  date: '2026-08-22'
+  layer: engine
+  class: validity
+  direction: conservative
+  detected_by: control_cell
+  latent_for: caught during construction, before any recorded round
+  severity: high
+  status: fixed
+  what: >-
+    The first formulation fixed a container side and asked whether the squares fit,
+    needing an outer loop to decide when an anneal had failed. It started from the
+    trivial grid, which is exactly jammed, so no local move escaped it.
+  consequence: >-
+    A whole night of confident, meaningless numbers at n = 11 -- the search would have
+    reported the grid for every n.
+  fix: >-
+    Removed the container from the variables: minimise required_side + lambda * overlap
+    directly, so every compacting move is rewarded and no feasibility oracle is needed.
+  regression: 'n = 10 positive control, which is not the grid and so cannot be passed by returning it'
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md
+- id: D-002
+  title: A restart cap made the declared move budget inert
+  date: '2026-08-22'
+  layer: engine
+  class: validity
+  direction: neutral
+  detected_by: anomaly
+  latent_for: two engine versions
+  severity: high
+  status: fixed
+  what: >-
+    A hard cap of 24 restarts stopped every chain before --budget-moves did, so the
+    declared budget did nothing and two strategies compared "at equal budget" would
+    have done unequal work.
+  consequence: >-
+    Every strategy comparison in the campaign would have been invalid, and silently so.
+  fix: 'Cap raised to u64::MAX; the move budget is what binds.'
+  regression: none
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md
+- id: D-003
+  title: Squared overlap penalty has a vanishing gradient
+  date: '2026-08-22'
+  layer: engine
+  class: performance
+  detected_by: inspection
+  latent_for: caught during construction
+  severity: medium
+  status: fixed
+  what: >-
+    A squared penalty's gradient dies as the overlap closes, so the search never quite
+    reaches zero overlap and hovers just inside infeasibility.
+  consequence: 'Screening would reject valid packings, or accept configurations that never became valid.'
+  fix: 'Linear penalty, which has an exact finite-lambda constrained optimum.'
+  regression: 'selftest asserts the reported packing is overlap-free'
+  recorded_in: campaign/ideas.md
+- id: D-004
+  title: Half the test suite was silently unreachable
+  date: '2026-08-22'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: inspection
+  latent_for: one branch
+  severity: high
+  status: fixed
+  what: >-
+    test.sh ran its frontier and schema checks under a bare python3 that lacked PyYAML,
+    so `import yaml` failed and every check below it was skipped -- while the suite
+    still reported success.
+  consequence: >-
+    A green gate that checked almost nothing. The most dangerous shape a test suite can
+    take, because it actively buys false confidence.
+  fix: >-
+    Interpreter selection at the top of test.sh, preferring one that already has the
+    dependencies and falling back to a pinned zero-install runner; the chosen runner is
+    echoed.
+  regression: 'the runner is printed on every run, and a missing dependency now exits non-zero'
+  recorded_in: test.sh
+- id: D-005
+  title: Campaign schemas declared enforced, and nothing enforced them
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one branch
+  severity: high
+  status: fixed
+  what: >-
+    All ten campaign artifacts declared `status: enforced`, but validate_schemas.py
+    covered frontier/ only and ledger.py never loaded a schema. A hypothesis with
+    priority 0, violating its schema's minimum of 1, passed the entire gate.
+  consequence: >-
+    The record of scientific claims was unvalidated at exactly the moment it began
+    carrying them -- the same claim-integrity defect this project keeps finding in its
+    own sources.
+  fix: 'ledger.py validates every artifact against its declared schema at load time; an unloadable schema is a hard error.'
+  regression: 'the schema check runs on every ledger invocation, negative-controlled'
+  recorded_in: docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md
+- id: D-006
+  title: The archived run could not regenerate its own configurations
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one branch
+  severity: high
+  status: fixed
+  what: >-
+    run_baseline.sh filtered the engine's output to summary lines, discarding the
+    per-chain records that carry the actual packings and overlaps; and the recorded
+    engine commit was orphaned by a rebase, so the binary could not be rebuilt.
+  consequence: >-
+    Determinism was the safety net for every recorded number, and both ends of it were
+    cut: no configuration to re-verify, no commit to rebuild.
+  fix: 'Every record archived; the summary carries the best configuration and a recomputed overlap; exp-001 annotated.'
+  regression: 'provenance check in test.sh -- recorded commits must be reachable from HEAD, or carry an annotation'
+  recorded_in: docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md
+- id: D-007
+  title: The bead tree never reached the shared store
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one branch
+  severity: medium
+  status: fixed
+  what: >-
+    A revised plan instructed readers to list its work items by spec, but the 32 beads
+    existed only in the authoring environment; the listing returned the superseded tree
+    describing the phases the revision had replaced.
+  consequence: 'The plan was un-executable by anyone else, and its own pointer contradicted it.'
+  fix: 'tbd sync landed them; the superseded beads were closed or cross-referenced rather than left as parallel truths.'
+  regression: none
+  recorded_in: docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md
+- id: D-008
+  title: Renumbering left dead links and a script writing to a deleted path
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one branch
+  severity: medium
+  status: fixed
+  what: >-
+    A series and hypothesis renumber left three broken links, a runner script still
+    writing results to the old directory, and an idea-board row claiming a reserved id
+    was registered.
+  consequence: >-
+    The next round would have archived its results into a resurrected dead directory,
+    and the board asserted a hypothesis existed that did not.
+  fix: 'All references corrected, plus one the review missed.'
+  regression: 'relative-link checker in the gate, and a rule that a reserved id may be named but not linked'
+  recorded_in: docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md
+- id: D-009
+  title: The overlap guard was asserted against a drifting accumulator
+  date: '2026-08-23'
+  layer: engine
+  class: soundness
+  direction: neutral
+  detected_by: review
+  latent_for: one branch
+  severity: high
+  status: fixed
+  what: >-
+    Overlap was tracked incrementally across roughly 4e5 moves per anneal and thousands
+    of anneals per chain, and the reported guard value was that accumulator rather than
+    a recomputation from the stored configuration.
+  consequence: >-
+    Accumulated cancellation error sits at the scale of the feasibility threshold
+    itself, and drifts either way: silently recording a real overlap, or silently
+    refusing a genuine record.
+  fix: 'Recomputed from the stored configuration at record time.'
+  regression: 'selftest asserts the recomputed value matches the stored one'
+  recorded_in: docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md
+- id: D-010
+  title: A three-cell sweep recorded as a one-cell round
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one branch
+  severity: medium
+  status: fixed
+  what: >-
+    A round measured n = 10, 11 and 12 but declared a single instance, so the ledger
+    showed two of three swept cells as unfilled.
+  consequence: >-
+    An unattended runner reads unfilled cells as queue items and re-runs work already
+    done.
+  fix: 'Split into one round per cell.'
+  regression: none
+  recorded_in: docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md
+- id: D-011
+  title: The annealer never scored its own starting configuration
+  date: '2026-08-23'
+  layer: engine
+  class: soundness
+  direction: conservative
+  detected_by: control_cell
+  latent_for: caught before the first recorded round of the experiment
+  severity: high
+  status: fixed
+  what: >-
+    The incumbent best was only updated on an accepted move, so a chain that started
+    feasible and never improved reported that no feasible configuration was found.
+  consequence: >-
+    In a basin-entry test, which starts at the answer by design, a perfect return scores
+    as total failure. The whole measurement would have been an artifact -- a zero return
+    rate that was really total.
+  fix: 'The starting configuration is scored on entry to the anneal.'
+  regression: 'the eps = 0 cell of the basin-entry sweep, whose answer is known in advance'
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
+- id: D-012
+  title: A zero perturbation made the cooling schedule degenerate
+  date: '2026-08-23'
+  layer: engine
+  class: robustness
+  detected_by: control_cell
+  latent_for: caught before the first recorded round of the experiment
+  severity: medium
+  status: fixed
+  what: >-
+    Tying the starting temperature to the perturbation size made it zero at eps = 0,
+    which gives an infinite geometric cooling ratio and NaN for every subsequent move.
+  consequence: 'The one cell whose answer is known in advance could not be run.'
+  fix: 'Starting temperature floored at the final temperature.'
+  regression: 'the eps = 0 cell is part of the standing sweep'
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
+- id: D-013
+  title: An infeasible chain would have reported a perfect return
+  date: '2026-08-23'
+  layer: engine
+  class: soundness
+  direction: flattering
+  detected_by: design
+  latent_for: never reached data
+  severity: high
+  status: avoided
+  what: >-
+    A chain that never reaches feasibility keeps the seed as its stored best, so
+    comparing that best to the seed shows zero deviation.
+  consequence: >-
+    A complete failure recorded as a perfect success, in the flattering direction, in
+    the measurement the round existed to make.
+  fix: 'Infeasible trials report null and are counted as non-returns.'
+  regression: 'a feasible flag is carried on every trial record and checked at analysis'
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
+- id: D-014
+  title: The LP solver returned a packing that violated its own constraints
+  date: '2026-08-23'
+  layer: quench
+  class: soundness
+  direction: flattering
+  detected_by: pre_registered_rule
+  latent_for: minutes
+  severity: critical
+  status: fixed
+  what: >-
+    HiGHS defaults to a primal feasibility tolerance of 1e-7, which is larger than the
+    quantity being measured, so a solution could violate a separation constraint by up
+    to that much and still be reported optimal. One did, by 9.876e-08 on pair (4,8).
+  consequence: >-
+    A claimed side of 3.877083568 against Trump's 3.877083590 -- a false claim of
+    beating a 47-year-old record. Overlapping squares fit in a smaller box, so this
+    class of error always flatters.
+  fix: >-
+    Tolerance pinned at the solver's floor of 1e-10, and every returned solution is
+    post-checked against the constraints that were imposed on it.
+  regression: 'the post-check runs on every solve; a violation rejects the solve rather than being reported'
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+- id: D-015
+  title: The angle objective was not a function of the angles
+  date: '2026-08-23'
+  layer: quench
+  class: validity
+  direction: neutral
+  detected_by: anomaly
+  latent_for: one round
+  severity: high
+  status: fixed
+  what: >-
+    Evaluating s(theta) required choosing which axis separates each pair, and that was
+    read from whichever centres the caller happened to hold. The LP then moved the
+    centres, so the value depended on the path taken to reach it.
+  consequence: >-
+    Every optimiser assumes its objective is a function of its argument. Golden section
+    converged to the wrong tilt by 1.2e-02, and Powell and Nelder-Mead both did worse
+    than plain descent -- the tell that the objective, not the optimiser, was at fault.
+  fix: 'Cell fixed-point iteration, and every evaluation re-solves from the same reference centres.'
+  regression: none
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+- id: D-016
+  title: One variable served as both the finite-difference probe and the line-search step
+  date: '2026-08-23'
+  layer: quench
+  class: validity
+  direction: conservative
+  detected_by: inspection
+  latent_for: one round
+  severity: medium
+  status: fixed
+  what: >-
+    Every failed step halved both quantities, so once the probe fell below the LP's own
+    precision the estimated gradient was noise and the search stopped on a spurious
+    "no improving step".
+  consequence: 'Answers 10-20x further from optimal than the method could actually reach.'
+  fix: 'Separate fixed probe size; the line search resets each round.'
+  regression: none
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+- id: D-017
+  title: A three-cell sweep recorded as a one-cell round, again
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one round
+  severity: medium
+  status: fixed
+  recurrence_of: D-010
+  what: >-
+    The same defect as D-010, made by the reviewer who had raised it against someone
+    else's work hours earlier, one round later.
+  consequence: >-
+    The same one: swept cells reported as unfilled, inviting a re-run. The recurrence is
+    the more useful datum than the defect -- D-010 was fixed with no regression check,
+    and this is what that costs.
+  fix: 'exp-006 annotated rather than rewritten; the successor sweep split one round per cell.'
+  regression: none
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md
+- id: D-018
+  title: One round, two hypotheses, one verdict
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: drift_check
+  latent_for: four rounds
+  severity: high
+  status: outstanding
+  what: >-
+    A round may name several hypotheses but carries a single verdict, which is applied
+    to all of them. Four rounds naming [H-002, H-019] made the generated ledger report
+    H-019 as refuted by the very rounds whose data confirmed it.
+  consequence: >-
+    The record asserting the opposite of its own evidence, which for an archive meant to
+    outlive the session is as serious as a wrong number.
+  fix: >-
+    Instances fixed by splitting the measurement into its own round. The schema still
+    permits the shape, so the next runner reproduces it.
+  regression: none
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md
+  bead: think-lksm
+- id: D-019
+  title: The bracketing quench does not always terminate
+  date: '2026-08-23'
+  layer: quench
+  class: robustness
+  detected_by: anomaly
+  latent_for: one round
+  severity: medium
+  status: contained
+  what: >-
+    A cell whose LP solves in 5 ms consumed 8,020 solves without converging, taking a
+    sweep past 145 s where its neighbours took 1 s. Root cause not established.
+  consequence: >-
+    A quench that does not return takes the whole round with it. Now bounded, but 2-3 of
+    5 seeds hit the budget in every cell, so the recorded data is censored -- and
+    censored exactly on the non-converged runs, which biases any median quoted from it.
+  fix: 'A per-call wall budget that returns early and reports reason "time budget", never silently.'
+  regression: 'the budget itself, and the reason is carried on every record'
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md
+  bead: think-x40t
+- id: D-020
+  title: The quench's answer depends on a tuning parameter, and basin identity would inherit it
+  date: '2026-08-23'
+  layer: quench
+  class: soundness
+  direction: flattering
+  detected_by: inspection
+  latent_for: 'not yet consequential -- found before the atlas was built'
+  severity: high
+  status: outstanding
+  what: >-
+    quench_bracket merges angles within class_tol and forces them equal, so it returns
+    the optimum of a constrained problem rather than a true local optimum.
+  consequence: >-
+    A packing whose optimum needs two angles closer than the tolerance is unreachable;
+    and the cartography plan defines a basin as where the quench lands, so basin
+    identity would inherit the parameter and the atlas would be partly an artifact of it.
+  fix: 'none yet'
+  regression: none
+  recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+  bead: think-0zs9
+- id: D-021
+  title: The polished tier has a noise floor, and eight rounds sit on it
+  date: '2026-08-23'
+  layer: quench
+  class: soundness
+  direction: flattering
+  detected_by: inspection
+  latent_for: 'found while fixing D-014'
+  severity: medium
+  status: contained
+  what: >-
+    The post-check accepts constraint violations up to 1e-9 and HiGHS will not go
+    tighter than 1e-10, so a polished side can be wrong by roughly 1e-11. Eight recorded
+    rounds carry small negative gaps to the analytic value at exactly that scale.
+  consequence: >-
+    Any improvement claimed below about 1e-11 at this tier is meaningless, and a
+    negative gap reads as beating the record if the tier is dropped from the sentence.
+  fix: >-
+    Contained rather than removed: the tier system forbids a record claim below `exact`,
+    and the floor is stated wherever polished numbers are quoted.
+  regression: 'the precision tier is a required field on every round, and beat_record is writable only at exact'
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
+  bead: think-hg3u
