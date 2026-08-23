@@ -100,10 +100,11 @@ Rotating one way loads one set of them; rotating the other way loads a different
 The two one-sided slopes are the marginal cost of the two different active contact
 structures, and they have no reason to agree — so the optimum sits exactly at the angle
 where the active set changes.
-That is what rigidity means expressed in angle space, and it is the same fact that
-[exp-005](exp-005-basin-entry-n11.md) met from the other side: a corner produces a
-*linear* response to perturbation, which is why that round’s return distance scaled like
-`eps` rather than `eps²` and never revealed a basin radius.
+That establishes a kink on this one-dimensional angle slice, not rigidity of the full
+packing. It is the same local response that [exp-005](exp-005-basin-entry-n11.md) met
+from the other side: a corner produces a *linear* response to perturbation, which is why
+that round’s return distance scaled like `eps` rather than `eps²` and never revealed a
+basin radius.
 
 ## What it decides
 

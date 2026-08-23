@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
-"""Gate check for the basin atlas: the invariants a census depends on.
+"""Gate check for the endpoint atlas: the store invariants a census depends on.
 
     uv run python tools/atlas_check.py
 
 The atlas is the census's output, so every way it can be quietly wrong is a way the
 census can report a number nobody should believe:
 
-1. **Deduplication.** Offering the same configuration twice must raise a frequency, not
-   add a row. If it does not, `distinct_basins` counts proposals and the discovery curve
-   never plateaus — which reads as "the landscape is huge" rather than "the store is
-   broken".
+1. **Deduplication.** Offering the same endpoint key twice must raise a frequency, not
+   add a row. If it does not, `distinct_basins` counts proposals and the key-discovery
+   curve never plateaus — which reads as "the landscape is huge" rather than "the store
+   is broken".
 2. **Append-only.** Adding must never remove or reorder existing rows, or the discovery
    curve stops being monotone and its plateau stops meaning saturation.
 3. **Round trip.** Save then load must be the identity, or frequencies accumulated over
    a night are lost at the first reload.
 4. **Merge.** Two stores of one `n` must combine by summing frequencies and unioning
-   basins, which is what lets a census run on more than one machine.
+   endpoint keys, which is what lets a census run on more than one machine.
 5. **Schema.** Every file written validates against the declared contract.
 6. **Convergence.** Most quenches in the census must actually have converged. This is
    the one that is not structural, and it is the one the first version of this file
@@ -70,10 +70,11 @@ def main() -> int:
     # synthetic keys for everything structural.
     #
     # The six invariants below -- dedup, append-only, round trip, merge, schema -- are
-    # properties of the STORE. They need basin keys, not real ones, and building a census
-    # to test them cost 115 s of an 8-minute gate for no extra assurance. The evidence
-    # that real fixed-seed censuses converge lives in the golden's deep path. The ladder
-    # separately checks one selected start in the optimum basin at seven proved values.
+    # properties of the STORE. They need endpoint keys, not real ones, and building a
+    # census to test them cost 115 s of an 8-minute gate for no extra assurance. Evidence
+    # that real fixed-seed quenches terminate lives in the golden's deep path. The ladder
+    # separately checks one selected start in the optimum endpoint class at seven proved
+    # values.
     #
     # n = 4 is the cheap real case: the optimum is the grid, and it converges at once.
     rng = random.Random(20260823)
@@ -84,10 +85,10 @@ def main() -> int:
 
     # Note what this does NOT assert. A cold start at n = 4 does not reliably reach the
     # grid: this seed converges at 2.145, a genuinely different local optimum. Which
-    # basin a random draw lands in is DISCOVERY, a property of the landscape, and
-    # asserting it here would be the third time in this branch that a test failed on
-    # luck. What must hold is that the quench converged, that it did not return
-    # something better than the proved s(4) = 2, and that the store took it.
+    # endpoint a random draw reaches is DISCOVERY under this proposer/quench regime, and
+    # asserting a particular one here would be the third time in this branch that a test
+    # failed on luck. What must hold is that the quench converged, did not return
+    # something better than proved s(4) = 2, and fed the store.
     passed &= check(
         "a real quench converges and feeds the store",
         ok=r.converged and r.side >= 2.0 - 1e-11 and len(atlas.basins) == 1,
@@ -122,7 +123,7 @@ def main() -> int:
     for basin in list(atlas.basins):
         atlas.add(_key_of(basin), converged=True)
     passed &= check(
-        "re-offering a known basin raises its frequency, never adds a row",
+        "re-offering a known endpoint key raises its frequency, never adds a row",
         ok=len(atlas.basins) == before_rows
         and atlas.proposals == before_proposals + before_rows,
         detail=f"{len(atlas.basins)} rows, {atlas.proposals} proposals",
@@ -182,7 +183,7 @@ def main() -> int:
     )
 
     print(
-        f"\n  store: {len(atlas.basins)} basins from {offered} offered; the one real "
+        f"\n  store: {len(atlas.basins)} endpoint rows from {offered} offered; the one real "
         f"quench converged at {r.side:.12f}. "
         "Deep golden regeneration carries the real census-scale check."
     )

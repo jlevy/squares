@@ -14,8 +14,8 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | H-001 | blocked | search | Optimal packings at n <= ~30 use at most 3 distinct tilt angles, so a  | n: 5 10 11 | 0 |  |
 | H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 4 | 190m agent + 4.9m cpu |
-| H-011 | blocked | search | LP-quenching multistarts at n <= 10 yields a basin count that saturate | n: 5 6 7 8 9 10 | 0 |  |
-| H-012 | blocked | search | The proved-optimal basin's quench probability at n = 10, and Trump's a | n: 10 11 | 0 |  |
+| H-011 | blocked | search | Under a versioned proposer P, deterministic quench Q, and terminal-com | n: 5 6 7 8 9 10 | 0 |  |
+| H-012 | blocked | search | Under one versioned raw-coordinate multistart proposal P, deterministi | n: 10 11 | 0 |  |
 | H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 | 10.2m cpu |
 | H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |  |
 | H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m cpu |

@@ -71,20 +71,23 @@ rather than stale — each names an instrument that genuinely does not exist:
 
 | Hypothesis | What it waits on | Bead |
 | --- | --- | --- |
-| [H-011](../../../../campaign/hypotheses/H-011-small-n-census.md) — the small-`n` landscape is censusable | canonical basin identity, then the atlas | `think-ogv7` |
-| [H-012](../../../../campaign/hypotheses/H-012-record-basins-are-rare.md) — record basins are rare in quench measure | H-011’s census to query | `think-axbi` |
+| [H-011](../../../../campaign/hypotheses/H-011-small-n-census.md) — a declared small-`n` landscape view is censusable | terminal-component identity, event archive, uncertainty estimator | `think-ogv7`, `think-0yo9`, `think-3szr` |
+| [H-012](../../../../campaign/hypotheses/H-012-record-basins-are-rare.md) — record components are rare under a named regime | H-011’s machinery plus an explicit `n=11` cell and proposer comparison | `think-axbi`, `think-apwt` |
 | [H-001](../../../../campaign/hypotheses/H-001-angle-class-reduction.md) — angle-class reduction beats free annealing | an angle-class proposer | `think-opzu` |
 
 The dependency graph already encodes this, and `canonicalize` is the single unblocked
 root:
 
 ```
-think-t1s9  canonicalize  ──▶  think-eq6l  atlas  ──┬─▶  think-ogv7  H-011 census  ──▶  think-axbi  H-012
-                                                     └─▶  think-2zmb  port sqsearch
-think-jxx8  multistart (the null)  ─────────────────────▶  think-ogv7
+think-zcx4  quench contract ─▶ think-0yo9  terminal components ─┐
+think-3szr  identity calibration ───────────────────────────────┼─▶ think-ogv7  H-011
+think-jxx8  named multistart baseline ──────────────────────────┘
+think-apwt  proposer-conditioned measures ─────────────────────────▶ think-axbi  H-012
 ```
 
-**One bead unblocks the entire research queue.** That is what this night should buy.
+The queue is no longer one implementation bead deep.
+The PR-description ambiguities are handover blockers because they determine what H-011
+counts and what probability H-012 estimates.
 
 ## Revision, 2026-08-23: what building Half A found
 
@@ -122,20 +125,22 @@ So the sequence is now:
 1. ~~`canonicalize`~~ — done
 2. ~~`atlas`~~ — done
 3. ~~D-030~~ — found and fixed
-4. ~~**The validation suite**~~ — done, and it earned its place immediately: it found
-   [D-031](../../../../defects.md) at `n = 3` on its first run. See
-   [Validating the tools](#validating-the-tools-before-trusting-them)
-5. **[D-034](../../../../defects.md), found by the validation suite at `n = 5`** — basin
-   identity is ill-posed for **flat basins**: optima the contacts do not fully pin, which
-   are families rather than points. A census counts their members. **This blocks Half B**
-   (`think-1s0h`). The route is to *measure* flatness before choosing a definition — in
-   LP terms a flat optimum is a cell whose program has a non-unique optimal face, which
-   the solver can be asked about where the quench already runs
-6. **[D-035](../../../../defects.md)** — an interrupted `negctl` leaves its deliberate
-   sabotage in the tree, and a cadence-committing session would commit it. Must be fixed
-   before any unattended night (`think-97pp`)
-7. `multistart`, the uniform null proposer
-8. The recipe, the handover gate, the night
+4. **The validation suite** — implemented and already useful: it found
+   [D-031](../../../../defects.md) at `n = 3` on its first run.
+   F-16 in the stacked review keeps this step open until oracle and characterization
+   policies are separated.
+   See [Validating the tools](#validating-the-tools-before-trusting-them)
+5. **Resolve [D-034](../../../../defects.md): define terminal components and identity
+   uncertainty** (`think-1s0h`, `think-0yo9`, `think-3szr`). The exact `n=3` family is
+   the control; the `n=5` duplicate is unresolved until rank and continuation establish
+   its relation
+6. **Classify unrecognised endpoints from retained poses** (`think-aans`)
+7. **Fix [D-035](../../../../defects.md)** — an interrupted negative control can leave
+   deliberate sabotage in the tree and must not coexist with cadence commits
+   (`think-97pp`)
+8. **`multistart`, one named baseline proposer** — supervised development only until its
+   full `P/Q/E` regime and comparison arms exist (`think-apwt`)
+9. The recipe, the handover gate, the night
 
 ## Validating the tools before trusting them
 
@@ -179,9 +184,11 @@ using it.
 #### It paid on the first run: [D-031](../../../../defects.md)
 
 `n = 3` — three unit squares in a `2 x 2` box, the most trivial case in the suite —
-reported **four** basins from four proposals. Two of them had identical side, identical
-closed form, identical contact count and identical angle classes. They were the same
-packing: the same squares in the same places, one set at `0` and one at `90` degrees.
+reported **four** basins from four proposals.
+Two of them had identical side, identical closed form, identical contact count and
+identical angle classes.
+They were the same packing: the same squares in the same places, one set at `0` and one
+at `90` degrees.
 
 The geometric key quantized an angle with `round(theta / quantum)`, which treats it as a
 point on a line. It is a point on a *circle*: a unit square is invariant under a quarter
@@ -193,15 +200,16 @@ Three things about this are worth carrying forward.
 
 1. **It was flattering in both directions that matter.** A split landscape reads as
    richer than it is, and splitting the basin a record lives in makes that basin look
-   *rarer* — which is the direction that confirms this campaign's own rarity premise.
+   *rarer* — which is the direction that confirms this campaign’s own rarity premise.
 2. **The other key could not have caught it.** Two images of one packing have identical
    contact graphs, so the contact certificate agrees with itself while the geometric key
    is wrong. Two keys that fail in opposite directions is the design; this is a case
    where only one of them was load-bearing.
 3. **It needed a case small enough to read by hand.** Nothing was inconsistent — the
    store was internally coherent, every structural invariant passed, and at `n = 5` or
-   above "four basins" would have looked like a finding. At `n = 3` it looked like an
-   arithmetic mistake, because the right answer was already on the page.
+   above “four basins” would have looked like a finding.
+   At `n = 3` it looked like an arithmetic mistake, because the right answer was already
+   on the page.
 
 The fix quantizes on the circle; the witness — `nextafter(pi/2, 0)` against `0.0` — is
 now a check in `tools/canonical_check.py`, and the `n = 3` row of the golden map is the
@@ -283,29 +291,27 @@ A working runner in front of an empty queue is an idle night.
 
 ### Half B: the initial strategy, and running it to completion
 
-**The strategy: uniform multistart + LP quench + canonical dedup, swept over `n = 5…10`,
-run to saturation.** That is `H-011` exactly as registered.
+**The strategy: a versioned raw-coordinate multistart baseline + LP quench + certified
+terminal-component classification, swept over `n = 5…10`, with event-level coverage
+estimation.** That is the corrected H-011.
 
 Why this and not the alternatives:
 
 - **Not `H-017` (100× budget at `n = 11`).**
   [exp-011](../../../../campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md)
-  just showed the annealer returns *exactly* the trivial grid at `n = 17` on all five
-  seeds — it does not reach oblique records as a class, at any `n`. Budget is not the
-  binding constraint, so a night spent multiplying it re-asks a question that was
-  answered this morning from a better angle.
+  showed the annealer returns the trivial grid at `n = 17` on all five tested seeds.
+  That scopes a failure of this method and budget at `n=17`; it does not establish
+  blindness to oblique records at every `n`.
 - **Not `H-001` (angle-class).** Its proposer does not exist, and building it is a
   bigger job than the three beads above.
-- **`H-011` is load-bearing.** It is the only remaining item that *unblocks another
-  hypothesis on completion* — `H-012`, the direct test of the cartography premise, is a
-  query over its census.
-  One night can therefore close two claims.
+- **`H-011` is load-bearing.** Its event, component, and uncertainty machinery is reused
+  by H-012. H-012 is not merely a query over the declared H-011 sweep, because it also
+  requires an explicitly budgeted `n=11` cell and a named proposer regime.
 
 Its declared sweep is `n = 5, 6, 7, 8, 9, 10`, and `n = 8` is the **kill line**: the
-registered criterion is that the discovery curve plateaus, and if it has not by `n = 8`
-enumeration is abandoned.
-That is a pre-registered stopping rule, which means the night can end early with a real
-answer rather than an exhausted budget.
+corrected registered criterion requires the 95% upper confidence bound on unseen
+terminal-component mass to fall below `0.05` within tier S. A visual plateau is
+diagnostic only.
 
 **Running to completion** means, concretely: the harness claims one round per cell,
 drains the sweep in `n` order, and stops on whichever comes first — the sweep
@@ -320,8 +326,9 @@ any cell that met its criterion, because
 [the harness cannot write the accepting verdict](../../../../campaign/runner.py).
 Then the ledger, regenerated after every round, and one commit per round.
 
-The first thing to read is the discovery curve per `n`, and the first question to ask of
-it is whether `n = 8` plateaued.
+The first things to read are censoring, identity ambiguities, and the unseen-mass
+interval per `n`; the `n=8` question is whether the preregistered bound passed, not
+whether a plot looked flat.
 
 ## Fallbacks
 
@@ -356,63 +363,76 @@ tbd list --spec explorations/packing/docs/project/specs/active/plan-2026-08-23-o
   angle at the `pi/2` seam, so identical packings a quarter turn apart were two basins
 - [ ] **Engine anchors at the trivial cases** (`think-ouf0`) — `sqsearch` must recover
   `s(n)` at `n = 1…4, 9, 16`, and more budget must never return a worse best.
-  *Partly standing already:* the engine selftest's check 7 is a positive control on
-  `s(5)`, both that it is reached and that it is never beaten. The gaps are the rest of
-  the ladder and the budget-monotonicity half, which nothing checks today.
-  **No longer blocks `multistart`** — it blocks the handover gate instead. The census
-  runs the quench, which the golden suite now validates; `sqsearch` is not in that loop,
-  so gating the proposer on an engine anchor idles the queue for a reason that does not
-  bear on it. It still has to be true before the night starts, which is what the handover
-  gate is for
+  *Partly standing already:* the engine selftest’s check 7 is a positive control on
+  `s(5)`, both that it is reached and that it is never beaten.
+  The gaps are the rest of the ladder and the budget-monotonicity half, which nothing
+  checks today. **No longer blocks `multistart`** — it blocks the handover gate instead.
+  The census runs the quench, which the golden suite now validates; `sqsearch` is not in
+  that loop, so gating the proposer on an engine anchor idles the queue for a reason
+  that does not bear on it.
+  It still has to be true before the night starts, which is what the handover gate is
+  for
 - [ ] **`multistart`: the uniform null proposer**, obeying the experiment contract
-  (`think-jxx8`) — the next piece of work, and now unblocked
+  (`think-jxx8`) — retain it as a named raw-coordinate baseline, not a canonical null
+- [ ] **Terminal-component identity** (`think-0yo9`) — the exact `n=3` sliding family
+  must remain one connected component at every tested geometric quantum
+- [ ] **Identity calibration** (`think-3szr`) — D-021’s side floor must not decide pose
+  equality; unresolved pairs produce count bounds
+- [ ] **Unrecognised endpoint classification** (`think-aans`) — retain poses and emit
+  evidence-based terminal/promotion classes
+- [ ] **Proposer-conditioned comparison** (`think-apwt`) — version `P/Q/E` and compare
+  proposal measures at equal pair tests
 - [ ] Give `H-011` a `runner.command` recipe, sized against measured throughput
 - [ ] Flip `H-011.instrument_ready` to true in the same change that makes it true
 
 ### Found while building Half A, tracked but not blocking the night
 
-- `think-5zwm` — rehearse the recovery path (`claim → ledger → release → ledger`) against
-  a scratch record. [D-032](../../../../defects.md) and
-  [D-033](../../../../defects.md) both shipped in a merged PR because nothing had ever
-  run `release`, and neither fix left an unconditional check behind
+- `think-5zwm` — rehearse the recovery path (`claim → ledger → release → ledger`)
+  against a scratch record.
+  [D-032](../../../../defects.md) and [D-033](../../../../defects.md) both shipped in a
+  merged PR because nothing had ever run `release`, and neither fix left an
+  unconditional check behind
 - `think-l3ds` — the gate is 152s, down from 480s. The perimeter (59s) and the negative
   controls (42s) are 101s of what remains and nobody has looked at either
 - `think-7z7y` — the atlas fields deferred from the minimum viable store: algebraic
-  degree, symmetry group, neighbour links with merge-delta. Degree is the one that bears
-  on an open question here, since it would separate a legitimately unrecognised
-  higher-degree optimum from an unconverged one
-- `think-97pp` — [D-035](../../../../defects.md), the `negctl` residue. Blocking for the
-  night, listed here as well because it is infrastructure rather than cartography
+  degree, symmetry group, neighbour links with merge-delta.
+  Degree bears on reconstruction, but it cannot by itself separate a legitimate optimum
+  from an unconverged or non-isolated endpoint
+- `think-97pp` — [D-035](../../../../defects.md), the `negctl` residue.
+  Blocking for the night, listed here as well because it is infrastructure rather than
+  cartography
 
 ### Why the flat-basin problem surfaced this late
 
-Worth recording, because the answer is about documents rather than about code. Every
-piece of it was already written down, in three places that never met:
+Worth recording, because the answer is about documents rather than about code.
+Every piece of it was already written down, in three places that never met:
 
-- the **glossary** defined rigidity, but only ever attributed it to Trump's packing — a
+- the **glossary** defined rigidity, but only ever attributed it to Trump’s packing — a
   property records happen to have, rather than one an arbitrary optimum may lack;
-- the **basin** definition said "the preimage of one quench *endpoint*", which silently
+- the **basin** definition said “the preimage of one quench *endpoint*”, which silently
   presumes the endpoint is a point, and never stated that as a precondition;
-- the **strategy premise** is literally *"records are rigid; rigid optima live in rare
-  basins"* — a sentence whose own construction presupposes that non-records may be
+- the **strategy premise** is literally *“records are rigid; rigid optima live in rare
+  basins”* — a sentence whose own construction presupposes that non-records may be
   non-rigid, and which never asked what those do to a census that counts basins.
 
-Nobody had to discover anything to join those up. The fix is therefore also documentary:
-the precondition now lives on the definition, "flat basin" is a defined term beside
-rigidity, the premise states its own contrapositive, and the research doc's claim that
-minima are *discrete* is corrected in place rather than quietly reworded. See the
-[terminology section](../../../../SYNOPSIS.md#terminology).
+Joining those statements exposes the missing precondition, but does not choose the
+component definition.
+The research doc now preserves the correction and distinguishes the exact `n=3` family
+from the still-unresolved `n=5` pair.
+See the [terminology section](../../../../SYNOPSIS.md#terminology).
 
 ### The handover
 
-- [ ] **[D-034](../../../../defects.md) resolved** — the census cannot start before basin
-  identity means something. This is not a checklist item that can be waived on the night:
-  a census run against the current definition produces a number that is wrong in the
-  flattering direction and looks fine
+- [ ] **[D-034](../../../../defects.md) resolved** — the census cannot start before
+  basin identity means something.
+  This is not a checklist item that can be waived on the night: a census run against the
+  current definition produces a number that is wrong in the flattering direction and
+  looks fine
 - [ ] **[D-035](../../../../defects.md) fixed** — an interrupted gate currently leaves a
-  deliberately-subtle sabotage in the working tree. A session that commits on a cadence
-  will commit it. This is the one item on this list that can corrupt the *repository*
-  rather than a measurement
+  deliberately-subtle sabotage in the working tree.
+  A session that commits on a cadence will commit it.
+  This is the one item on this list that can corrupt the *repository* rather than a
+  measurement
 - [ ] Run the handover gate above; do not proceed on a partial pass
 
 ### Half B — run (unattended)
@@ -434,26 +454,19 @@ A guard nobody has seen fire is not yet evidence.
 
 ## Open Questions
 
-- **How many distinct basins should `n = 5` have?** Nobody here knows, and that is
-  precisely what makes it a good first cell: the answer is checkable by hand against a
-  drawing, so the census’s first output is falsifiable by inspection rather than only by
-  its own machinery.
-- **Does the quench’s `1e-11` noise floor ([D-021](../../../../defects.md)) merge basins
-  that are genuinely distinct?** Two basins closer than the floor are currently
-  indistinguishable. At small `n` this is probably harmless; the census is the thing that
-  would show it is not, and the atlas should record the closest pair it saw.
-- **Is "basin" even well-posed where the optimum is not rigid?** No longer an open
-  question in the abstract — it is [D-034](../../../../defects.md), measured at `n = 5`.
-  An optimum pinned by fewer constraints than it has degrees of freedom is a
-  positive-dimensional family, and every member of it is a different point with the same
-  side and the same contact graph. At `n = 3` the same thing is starker: three unit
-  squares in a `2 × 2` box have slack, so the optimal set is a continuum and the reported
-  basins are samples of it. Whatever the census ends up counting has to be a thing that
-  exists, and right now the count is of quantizer cells rather than of optima.
-- **Is uniform multistart the right null?** It is the standard one, and it is what makes
-  the discovery curve interpretable.
-  But the container-side distribution it samples from is a choice, and the census
-  inherits it.
+- **What is the counted object?** A terminal component under declared `P/Q/E`, not a
+  hash. At `n=3`, the exact side-2 sliding family proves endpoint equality is
+  positive-dimensional; `think-0yo9` owns the component contract.
+- **What are the unrecognised singletons?** The current artifacts cannot decide.
+  They remain unresolved endpoints until `think-aans` replays retained poses through
+  stationarity, isolation, and promotion checks.
+- **What does D-021 resolve?** Only scalar side differences at the polished tier.
+  `closest_pair` is a side-gap diagnostic, not an identity test; `think-3szr` owns the
+  tolerance sweep and ambiguity bounds.
+- **Is uniform multistart the right null?** There is no distribution-free null.
+  Raw coordinate-uniform sampling is one interpretable baseline once its box,
+  feasibility rule, quench, and identity relation are versioned; `think-apwt` compares
+  it with other named measures.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

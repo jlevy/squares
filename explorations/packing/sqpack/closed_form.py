@@ -1,34 +1,23 @@
-"""Recognise a packing side as a simple algebraic number, or decline to.
+"""Recognise a packing side as a simple algebraic expression, or decline to.
 
-A local optimum of this problem is where contact constraints meet, so its side is an
-algebraic number of modest height — `2 + ½√2`, `1½ + √2`, `2 + ⅔√2`. A configuration
-that merely *stopped* is not: it lands wherever the budget ran out, and that is a
-number with no short description.
+Several known packing optima have short forms such as `2 + 1/2 sqrt(2)`,
+`1 1/2 + sqrt(2)`, and `2 + 2/3 sqrt(2)`. Matching one is useful for recognizing a
+known control value and for proposing an exact-reconstruction hypothesis.
+It is not a convergence or local-optimality oracle.
 
-That asymmetry is an **oracle**, and it is the one this project most needs. Every other
-check available here — schema, dedup, determinism, round trip — verifies that a value
-was handled consistently. None of them can tell a converged optimum from an interrupted
-descent, which is exactly the confusion that produced [D-030](../defects.md): twelve
-sweep-limit stopping points recorded as twelve basins with every structural invariant
-green.
-
-## Why a match is evidence rather than numerology
-
-The search is bounded: `r·v = p + q√d` for `d ∈ {2, 3, 5, 6}`, `r ≤ 12`, `|p|, |q| ≤ 40`.
-That is about `4 * 12 * 81 * 81 ≈ 3.1e5` candidate expressions. A value unrelated to any
-of them matches within `1e-11` with probability of order `3.1e5 * 1e-11 ≈ 3e-6`.
-
-So a match at that residual is roughly a one-in-300,000 coincidence, and a *table* of
-matches — several basins in one census each landing on a short form — is not a
-coincidence at all. The residual is always reported alongside, so a reader can apply
-their own bar rather than inheriting this one.
+The search is bounded: `r*v = p + q*sqrt(d)` for `d in {2, 3, 5, 6}`, `r <= 12`, and
+`|p|, |q| <= 40`. That finite family makes the result interpretable, but it does not
+make a distribution-free coincidence probability available. Optimizer outputs are
+structured, a censored endpoint can lie near a short form, and a positive-dimensional
+stationary component may have an exactly recognized side.
 
 ## What it does not claim
 
-A match is **not a proof** that the side equals the form. It is evidence that the
-configuration is a genuine optimum rather than a stopping point. Promotion of any value
-to `exact` routes through [`sqpack.verify`](verify.py) over the packing's own number
-field, and nothing here is entitled to that word.
+A match is **not a proof** that the side equals the form and is not evidence by itself
+that the configuration is a genuine optimum rather than a stopping point. Promotion of
+any value to `exact` routes through [`sqpack.verify`](verify.py) over the packing's own
+number field, and local-optimum claims require separate stationarity and isolation
+evidence.
 
 Declining is the common case and is not a failure: `s(11)` is a degree-8 algebraic
 number and will never be recognised by this. `None` means "no short form in this family",

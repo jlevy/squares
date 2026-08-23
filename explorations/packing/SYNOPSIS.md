@@ -99,7 +99,7 @@ Fixing the angles and a cell turns the problem into a linear program; that is
 [T-2](#the-cell-decomposition).
 
 **Instance cell**—an `n` carrying a declared role in the sweep: `n = 10` positive
-control, `n = 11` target, `n = 12` negative control, `n = 17` mechanism-matched
+control, `n = 11` target, `n = 12` open-case calibration, `n = 17` mechanism-matched
 calibration.
 A **control cell** is an instance cell whose answer is known before the run,
 and a breach of one rejects the round regardless of outcome.
@@ -112,17 +112,17 @@ and a breach of one rejects the round regardless of outcome.
 configurations the refiner carries to the same local optimum.
 A basin is therefore defined *relative to a specific quench*, which is why basin
 identity may not inherit the search’s tuning parameters—a quench that merged nearby
-angles would make the word depend on the merge tolerance ([D-020](defects.md)). What
-makes a basin a discrete, nameable object rather than a tolerance-dependent blob is that
-the LP gives its endpoint a *value*, reproducibly, to solver precision—about `1e-11` in
-the side, and no better ([D-021](defects.md), open).
-Two basins closer than that floor are not currently distinguishable.
+angles would make the word depend on the merge tolerance ([D-020](defects.md)). The
+current quench gives each terminal pose a reproducible numerical candidate, but that
+does not make the terminal set discrete or decide whether two candidates belong to one
+connected component.
+D-021 bounds error in the scalar side only; it is not a pose- or component-resolution
+theorem ([D-039](defects.md)).
 
-**The definition has a precondition, and it is not always met.**
-“The preimage of one quench *endpoint*” presupposes the endpoint is a **point**.
-Where the local optimum is a *flat basin*—see below—it is not, the quench lands wherever
-in the flat region it happened to enter, and the word “basin” does not denote anything
-the census can count.
+**The definition has a precondition, and it is not always met.** “The preimage of one
+quench *endpoint*” presupposes the endpoint is a **point**. Where the local optimum is a
+*flat basin*—see below—it is not, the quench lands wherever in the flat region it
+happened to enter, and the word “basin” does not denote anything the census can count.
 This precondition went unstated for the campaign’s first three weeks and cost
 [D-034](defects.md); it is stated here now because every downstream count inherits it.
 
@@ -166,35 +166,35 @@ converges to it. Measured at `n = 11`: `0.1747` and `0.384` per radian, through 
 independent implementations ([T-3](#the-corner-and-the-method-it-forced)). Not a synonym
 for “sharp minimum”—the derivative does not become large, it fails to exist.
 
-**Rigidity.** A packing having no slack: every square is pinned by contacts, so no
-square can move without increasing the side.
-Trump’s packing is rigid, which is simultaneously why it is hard to find, why a float
-verifier cannot decide it, and why its angle optimum is a corner.
+**Rigidity.** A packing that has no non-trivial feasible infinitesimal or local motion
+under the declared quotient and container condition.
+Contact counts and visual pinning are candidates for this property, not proofs; they
+require an active-constraint rank or stronger local certificate.
+Trump’s packing appears highly constrained, but this repository has not yet supplied
+that certificate ([D-041](defects.md)).
 
-**Flat basin** (equivalently *non-rigid optimum*, *optimal family*). A local optimum that
-is **not** a point but a positive-dimensional set: the contacts pin fewer degrees of
-freedom than the configuration has, so a whole continuum of packings achieves the same
-side, with the same contact graph, and none of them is more “the” optimum than another.
-Count it: `n` squares have `3n` degrees of freedom, plus one for the side; each pair
-contact and each wall touch removes one. Where that leaves a surplus, the optimum is
-flat, and its **dimension** is the size of the surplus.
+**Terminal family** (called a *flat basin* in older campaign prose).
+A local-optimal terminal set that is not an isolated point.
+Its local dimension is the nullity of the appropriate independent active-constraint
+Jacobian after quotienting symmetries and accounting for inequalities and stratum
+changes. Raw contact counts cannot supply that rank: contacts may be dependent, one
+contact description may encode several scalar conditions, and angles and separating
+cells may change along a motion.
 
-Flat basins are not exotic and not confined to toy `n`. Measured at `n = 5`, the
-campaign’s first census cell: an optimum at `(4 + 5√2)/4` has 11 constraints against 16
-degrees of freedom, so it is a five-dimensional family ([D-034](defects.md)). At `n = 3`
-it is starker still—three unit squares in a `2 × 2` box can be slid around freely, so
-the entire optimal set is a continuum.
+At `n = 3`, the exact family with centres `(1/2,1/2)`, `(3/2,1/2)`, and `(t,3/2)` for
+`t ∈ [1/2,3/2]` proves that terminal continua occur and that the current endpoint key
+splits one connected optimum component.
+At `n = 5`, two rows share side and contact summaries but differ geometrically.
+That is an unresolved identity signal, not a proof of a five-dimensional connected
+family ([D-034](defects.md), [D-041](defects.md)).
 
-**This term should have existed from the first day, and its absence is the lesson.**
-Everything needed to write it was already in this document. “Rigidity” was defined, but
-only ever *attributed to Trump’s packing*, as if it were a property records happen to
-have rather than a property an arbitrary optimum may lack. And the strategy premise
-below is literally *“records are rigid, rigid optima live in rare basins”*—a sentence
-whose own construction presupposes that non-record optima may be **non**-rigid, and which
-never asks what those do to a census that counts basins.
-Two definitions and a premise, each holding a third of the answer, none of them joined
-up. That is a documentation failure before it is a code one, and it is why
-[D-034](defects.md) was found by reading a census output rather than by reading the plan.
+**This distinction should have existed from the first day.** “Rigidity” was treated as
+an informal visual property of the target while the census silently assumed every
+terminal was isolated.
+The exact `n = 3` control falsifies that assumption directly.
+That is a documentation failure before it is a code one, and it is why
+[D-034](defects.md) was found by reading a census output rather than by reading the
+plan.
 
 ### The measurements
 
@@ -226,9 +226,9 @@ Machine-independent, unlike wall clock or moves, which is why proposer compariso
 denominated in it. Tiers S/M/L are `1e9`/`1e11`/`1e13`.
 
 **Evidence tier.** What a number is permitted to claim, fixed by how it was produced:
-`f64_screen` (a candidate was proposed), `polished` (this is the basin, valued to solver
-precision—a floor of about `1e-11`, [D-021](defects.md)), `exact` (validity decided over
-the packing’s own number field).
+`f64_screen` (a candidate was proposed), `polished` (a quench endpoint candidate was
+valued to solver precision—a floor of about `1e-11` in the side, [D-021](defects.md)),
+`exact` (validity decided over the packing’s own number field).
 **`beat_record: true` may be written only at `exact`.** Never extrapolate across a tier
 boundary. The tiers are set out in full under
 [Theoretical Results](#theoretical-results).
@@ -299,9 +299,11 @@ root of
 s⁸ − 20s⁷ + 178s⁶ − 842s⁵ + 1923s⁴ − 496s³ − 6754s² + 12420s − 6865 = 0
 ```
 
-lying in `[3.87, 3.88]`. The packing is **rigid**: it has no slack anywhere, which is
-what makes it hard to find, hard to check, and—as the angle results below show—hard to
-converge to.
+lying in `[3.87, 3.88]`. The packing is visually and numerically highly constrained and
+is a strong rigidity candidate.
+This repository has not yet supplied an active-constraint rank or interval-local proof
+of isolation, so rigidity is not used as an established explanation for search
+difficulty ([D-041](defects.md)).
 
 ### Why exactness is not optional
 
@@ -489,15 +491,17 @@ centres.
 
 ### Nor is a flat optimum a basin, which is the same trap one level up
 
-The section above separates a *cell* from a *basin* because a cell fixes the angles and a
-basin does not. There is a second separation, discovered later and the harder of the two:
-a basin presumes its optimum is a **point**, and [not every optimum is](#terminology).
+The section above separates a *cell* from a *basin* because a cell fixes the angles and
+a basin does not. There is a second separation, discovered later and the harder of the
+two: a basin presumes its optimum is a **point**, and
+[not every optimum is](#terminology).
 
 Where the optimum is flat, “the configurations the refiner carries to the same local
 optimum” describes a map onto a *set*, and two quenches of the same optimum legitimately
-stop at different places in it. Every symptom then mimics a real discovery—distinct
-coordinates, distinct geometric keys, two rows in the atlas—while the contact graph and
-the side, the two things that actually characterise the optimum, agree exactly.
+stop at different places in it.
+Every symptom then mimics a real discovery—distinct coordinates, distinct geometric
+keys, two rows in the atlas—while the contact graph and the side, the two things that
+actually characterise the optimum, agree exactly.
 That is [D-034](defects.md), and the shape of the error is the same as the cell/basin
 trap: an object that fixes more than the mathematics does, mistaken for the mathematics.
 
@@ -645,10 +649,10 @@ Two implementations, one number.
 Where the LP’s optimal basis is locally constant, `φ` is smooth and its derivative is
 read off the active constraints.
 A corner is a **change of optimal basis**: the set of contacts that bind switches as `a`
-crosses `a*`. That the switch happens exactly at the minimum is what rigidity means,
-expressed in the coordinates the refiner works in—at `a*` the packing is maximally
-constrained, and moving the angle either way relaxes one contact set and tightens
-another.
+crosses `a*`. The switch at the minimum establishes a kink in this one-dimensional
+class-angle objective.
+It does not by itself prove rigidity of the full packing; that requires ruling out every
+other feasible motion, not just motion along this slice.
 
 ### The prediction, and what it cost to ignore
 
@@ -770,20 +774,20 @@ In looking for it, the review found **T-2** and supplied the experimental method
 project lacked: a hypothesis register with kill criteria written before the run, a run
 protocol, and a seven-series plan.
 
-**Adopt a strategy, and register the premise so it can fail.** Records are rigid, rigid
-optima live in rare basins, so scaling a volume-weighted sampler multiplies effort
-against a probability the problem drives toward zero.
-Because the whole strategy rests on that argument, the measurement that would refute it
-([H-012](campaign/hypotheses/H-012-record-basins-are-rare.md)) is registered in the
-cheapest tier and scheduled early.
+**Adopt a strategy, and register the premise so it can fail.** Record packings may be
+unusually constrained and may have low hit probability under specified baseline
+proposers. If so, scaling the same proposer multiplies effort against the measured
+probability. Because the whole strategy rests on that argument, the measurement that
+would refute it ([H-012](campaign/hypotheses/H-012-record-basins-are-rare.md)) is
+registered in the cheapest tier and scheduled early.
 
-*Read the premise’s own contrapositive, which went unread for three weeks.* If **records**
-are rigid, then whatever is **not** a record need not be—and a non-rigid optimum is a
-[flat basin](#terminology), which is a family rather than a point. So the census that
-is supposed to establish rarity is counting two different kinds of object at once, and
-the denominator of “rare” is not yet a number ([D-034](defects.md)).
-The premise may well be true. It is not yet *measurable*, and that is a stronger
-objection than doubting it.
+*Ask what the premise silently assumes about its denominator.* Optima need not be
+isolated: the exact `n = 3` terminal family proves that one connected optimal component
+can produce many endpoint keys.
+So the census that is supposed to establish rarity is counting representation-dependent
+objects, and the denominator of “rare” is not yet a number ([D-034](defects.md)). The
+premise may well be true.
+It is not yet *measurable*, which is a stronger objection than doubting it.
 
 **Ask whether the basin has a wall, and get a better question back.**
 [exp-005](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md)
@@ -816,11 +820,12 @@ The full contract is the [runbook](campaign/README.md); the parts that matter fo
 reading the results below:
 
 - **Evidence tiers**, and a number’s tier decides what it may claim: `f64_screen` (a
-  candidate was proposed), `polished` (this is the basin, named and valued to solver
+  candidate was proposed), `polished` (a quench endpoint candidate was valued to solver
   precision), `exact` (validity, and only here a record).
-  **`beat_record: true` may only be written at `exact`.**
+  Basin or terminal-component identity requires additional evidence beyond the tier
+  label. **`beat_record: true` may only be written at `exact`.**
 - **Four instance cells with different jobs**: `n = 10` positive control, `n = 11`
-  target, `n = 12` negative control, `n = 17` mechanism-matched calibration.
+  target, `n = 12` open-case calibration, `n = 17` mechanism-matched calibration.
   A guard breach rejects a round regardless of outcome, because it means the instrument
   is wrong rather than the strategy good.
 - **Five seeds minimum per cell**, median and min–max range both reported.
@@ -1016,24 +1021,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Thirty-seven defects, [one line each](defects.md), generated from `defects.yaml` and
+Forty-two defects, [one line each](defects.md), generated from `defects.yaml` and
 checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 8 | asserted something false about the mathematics |
-| validity | 8 | was correct, but the measurement did not bear on the question |
+| soundness | 11 | asserted something false about the mathematics |
+| validity | 10 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 16 | recorded something its own evidence contradicts |
 | robustness | 4 | did not finish, or finished only by luck |
 | performance | 1 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Six of the eight soundness defects pointed in the *flattering* direction**, where the
-error looks like a success.
+**Nine of the eleven soundness defects pointed in the *flattering* direction**, where
+the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught one defect in thirty-seven, and no soundness defect ever.**
+**The automated gate has caught one defect in forty-two, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1042,17 +1047,21 @@ Gates confirm what you already thought to check; these were found by devices bui
 found by a contiguity check—which is the pattern, not an exception: gates are good at
 the mechanical classes and have never once caught the mathematics being wrong.
 
-The eight newest entries sharpen the point rather than softening it.
+The thirteen newest entries sharpen the point rather than softening it.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed
-green; D-032 and D-033 came from rehearsing recovery paths that had shipped unrun;
-D-034 found the endpoint-isolation assumption; D-035 found destructive negative-control
+green; D-032 and D-033 came from rehearsing recovery paths that had shipped unrun; D-034
+found the endpoint-isolation assumption; D-035 found destructive negative-control
 residue; D-036 found a timeout reported as convergence; and D-037 separated real census
 counts from a checker’s synthetic re-offers.
+D-038 separated scalar recognition from an oracle; D-039 separated side precision from
+component resolution; D-040 made rarity conditional on a durable `P/Q/E` regime; D-041
+rejected rank-free rigidity and dimension claims; and D-042 exposed `n = 12` as an open
+target masquerading as a negative control.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Nine fixes left no regression check behind, and that list has already predicted a
+Ten fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
@@ -1076,23 +1085,24 @@ assumption, neighbour-transfer seeding, and quality-diversity retention—none b
 **The premise is still untested, and now blocked on a harder question than expected.**
 Everything the strategy layer recommends rests on record basins being rare in quench
 measure, and [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is the
-measurement that would refute it. The quench is now sound enough to run it. What is not
-settled is what a basin *is*.
+measurement that would refute it.
+The quench is now sound enough to run it.
+What is not settled is what a basin *is*.
 
 [D-034](defects.md) is the open defect that says so.
-The exact `n=3` side-2 sliding family proves that one connected optimal set produces many
-geometric keys while retaining one contact certificate.
-At `n=5`, two rows also share side, short form, contact certificate, angle signature, and
-contact count while differing geometrically.
+The exact `n=3` side-2 sliding family proves that one connected optimal set produces
+many geometric keys while retaining one contact certificate.
+At `n=5`, two rows also share side, short form, contact certificate, angle signature,
+and contact count while differing geometrically.
 That is strong evidence of unresolved terminal identity, but raw contact counts do not
 prove an exact family dimension and matching side/contact data do not prove the two rows
 are path-connected; a rigidity-matrix rank and continuation test must decide those
 claims.
 
 So `distinct_basins` currently counts family members, the discovery curve cannot
-plateau, and H-011's saturation criterion is unreachable until the definition is fixed.
+plateau, and H-011’s saturation criterion is unreachable until the definition is fixed.
 The three candidate definitions are written up on `think-1s0h`; none is a code tweak,
-because this is the deliverable's own shape.
+because this is the deliverable’s own shape.
 Until that is settled and the census runs, the cartography program is a well-argued bet
 rather than a finding.
 
@@ -1107,10 +1117,11 @@ and an exact rational LP is the fix.
 
 **One open defect makes the toolchain unsafe to leave alone overnight.**
 [D-035](defects.md): `negctl` corrupts a tracked source file in place to prove a guard
-fires, and restores it in a `finally:` block that a SIGKILL does not run. An interrupted
-gate leaves a *deliberately subtle, deliberately flattering* mutation in the tree — on
-2026-08-23 it left the D-031 basin-splitting bug — where the next `git add -A` would
-commit it. Fix this before any unattended session that commits on a cadence.
+fires, and restores it in a `finally:` block that a SIGKILL does not run.
+An interrupted gate leaves a *deliberately subtle, deliberately flattering* mutation in
+the tree — on 2026-08-23 it left the D-031 basin-splitting bug — where the next
+`git add -A` would commit it.
+Fix this before any unattended session that commits on a cadence.
 
 ## References
 

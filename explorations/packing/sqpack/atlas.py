@@ -1,17 +1,19 @@
-"""The basin atlas: the deduplicated store of what a census has actually found.
+"""The provisional atlas: a deduplicated store of numerical quench endpoints.
 
 One file per `n`, append-only, keyed by
 [canonical basin identity](canonical.py). It answers the two questions a census exists to
-answer — *how many distinct basins are there* and *how often does each one turn up* —
-and it is the artifact the cartography strategy calls the deliverable.
+answer — *how many endpoint clusters were observed* and *how often did each key turn
+up* — and it is the current artifact behind the cartography strategy.
+It does not yet identify connected terminal components, so its row count is not an
+authoritative basin count; see F-18 in the PR #14 review.
 
 ## Append-only, and why that is not merely tidiness
 
-A basin, once seen, is a fact about the landscape; a later run that fails to rediscover
-it has not unfound it. So `add` only ever raises a frequency or introduces a row, and
-nothing here deletes. That makes the discovery curve — new basins against proposals —
-monotone by construction, which is what makes its plateau mean saturation rather than
-mean the store was rewritten.
+An observation, once seen, remains part of the record; a later run that fails to
+rediscover it does not erase it. So `add` only ever raises a frequency or introduces a
+row, and nothing here deletes. That makes the endpoint-cluster discovery curve monotone
+by construction. A plateau suggests saturation only for this key, proposer, quench,
+and numerical regime.
 
 It also makes the file mergeable: two runs of the same census on different machines
 produce stores that combine by summing frequencies, with no reconciliation.
@@ -19,10 +21,11 @@ produce stores that combine by summing frequencies, with no reconciliation.
 ## What a row does and does not claim
 
 `side` is at the tier the quench produced, which is `polished` — exact within a cell to
-solver precision, with a floor of about `1e-11` ([D-021](../defects.md)). Two basins
-closer than that floor are **not currently distinguishable**, and the atlas records
-`closest_pair` so a census can say whether it ever came near it. Nothing here is
-entitled to the word `exact`; promotion routes through `sqpack.verify`.
+solver precision, with a scalar side-error floor of about `1e-11`
+([D-021](../defects.md)). `closest_pair` records only the smallest side gap. It cannot
+decide endpoint or basin identity: distinct configurations may have equal sides, and a
+connected terminal component may contain many geometric keys. Nothing here is entitled
+to the word `exact`; promotion routes through `sqpack.verify`.
 """
 
 from __future__ import annotations
@@ -41,7 +44,7 @@ CONTRACT = "packing.squares:BasinAtlas/v1"
 
 @dataclass
 class Basin:
-    """One distinct local optimum, and how often the proposer landed in it."""
+    """One endpoint-key cluster, and how often the proposer produced that key."""
 
     geometric: str
     contact: str
@@ -63,27 +66,27 @@ class Basin:
 
 @dataclass
 class Atlas:
-    """Every basin found at one `n`."""
+    """Every endpoint-key cluster observed at one `n`."""
 
     n: int
     quantum: float = DEFAULT_QUANTUM
     contact_tol: float = 1e-9
     proposals: int = 0
-    # Proposals whose quench never proved convergence. NOT excluded from the store --
-    # a quench endpoint is a basin by this project's own definition, whatever the
-    # terminator managed to prove -- but counted, because a census where most quenches
-    # stopped on a sweep limit is measuring the limit rather than the landscape, and
-    # that has to be impossible to overlook rather than merely discoverable.
+    # Proposals whose quench never proved convergence. Retained as observations, but not
+    # entitled to promotion as stationary components or local optima. A census where
+    # most quenches stopped on a sweep limit is measuring the limit rather than the
+    # landscape, and that has to be impossible to overlook.
     non_converged: int = 0
     basins: list[Basin] = field(default_factory=list)
 
     # --- building ---------------------------------------------------------------
 
     def add(self, key: BasinKey, *, seed: int | None = None, converged: bool) -> bool:
-        """Record one quench endpoint. Returns True when it was new.
+        """Record one quench endpoint key. Returns True when that key was new.
 
-        The return value is the discovery curve: counting Trues against `proposals` is
-        exactly the saturation measurement the census is registered to make.
+        Counting Trues against `proposals` gives a key-discovery curve. It becomes a
+        basin/component discovery curve only after the component and promotion
+        contracts described in F-18/F-19 are implemented.
 
         `converged` is required rather than defaulted, because defaulting it is how a
         census records a sweep limit as a discovery. Measured 2026-08-23 at `n = 5`: 11
@@ -117,11 +120,11 @@ class Atlas:
 
     @property
     def closest_pair(self) -> float | None:
-        """The smallest gap in side between two distinct basins.
+        """The smallest side gap between two rows; never an identity decision.
 
-        The number that says whether this census is anywhere near the quench's `1e-11`
-        noise floor. If it is, two rows may be one basin the solver could not resolve,
-        and the count is an upper bound rather than a count.
+        D-021 bounds error in this scalar objective only. Pose distance, active/contact
+        structure, repeatability, and interval separation are required to resolve two
+        endpoint candidates. The legacy field name is retained for schema compatibility.
         """
         sides = sorted(b.side for b in self.basins)
         if len(sides) < 2:

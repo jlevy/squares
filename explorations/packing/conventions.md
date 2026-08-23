@@ -112,7 +112,7 @@ invalidate every artifact rather than the offending one
 | Tier | Instrument | May claim |
 | --- | --- | --- |
 | `f64_screen` | `sqsearch` | a candidate was proposed |
-| `polished` | LP-in-cell quench | this is the basin, named and exactly valued |
+| `polished` | LP-in-cell quench | a numerical endpoint candidate, valued to solver precision |
 | `exact` | `sqpack` over ℚ(α) | validity—and only here, a record |
 
 **`beat_record: true` may only be written at `precision: exact`.** [convention] A record

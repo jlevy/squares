@@ -84,12 +84,13 @@ claim.
 | Tier | What it is | May claim |
 | --- | --- | --- |
 | `f64_screen` | [`sqsearch`](../sqsearch/) — annealing that minimises the enclosing side, ~40M moves/s | a candidate was proposed |
-| `polished` | **LP-in-cell quench** ([H-002](hypotheses/H-002-lp-in-cell-polish.md)) — fix angles and axis assignment, solve the cell’s linear program | *this* is the basin, named and exactly valued; a candidate worth certifying |
+| `polished` | **LP-in-cell quench** ([H-002](hypotheses/H-002-lp-in-cell-polish.md)) — fix angles and axis assignment, solve the cell’s linear program | a numerical endpoint candidate valued to solver precision; a candidate worth classifying and certifying |
 | `exact` | [`sqpack`](../README.md#exact-verification) — separating-axis over the packing’s own algebraic number field | **validity, and only here: a record** |
 
-The middle tier is not merely “polish”.
+The middle tier is numerical polish, not exact certification.
 For fixed angles and a fixed separating-axis assignment, minimising `s` is a **linear
-program**, so the quench endpoint is exact within its cell.
+program**, so the quench can reproduce the cell optimum to the floating-point solver’s
+precision. Exact value and terminal-component identity require separate evidence.
 That is what turns “where the annealer stopped” into “which cell this is” — the
 difference between a tolerance-dependent artifact of the cooling schedule and a
 discrete, nameable, exactly-valued object.
@@ -137,10 +138,11 @@ A candidate strategy is **accepted** when all of:
    Overlapping ranges mean *no detectable effect*, never “a small win”.
 3. **Validity.** Every reported configuration has `overlap == 0` at screen tier, and the
    engine selftest passed in the same invocation.
-4. **Guards.** The `n=10` positive control lands within `1e-2` and the `n=12` negative
-   control does not go below `4`, in the same round.
-   A breach rejects regardless of the outcome, and means the instrument is wrong rather
-   than the strategy good.
+4. **Guards.** The `n=10` positive control lands within `1e-2`; every stored pose passes
+   an independent geometry check; and deliberately invalid fixtures are rejected in the
+   same instrument build.
+   `n=12` is an open research case, not a negative control: a valid side below `4` would
+   require exact promotion, not automatic rejection.
 5. **And the complexity is worth carrying** — a judgment, written as one sentence in
    `verdict.reason`.
 

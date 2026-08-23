@@ -2,15 +2,15 @@
 
 # Defect log
 
-37 defects recorded across the packing toolchain.
+42 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **8 soundness defects** — the system asserting something false about the mathematics. 6 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **9 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023).
-- **3 are still open** (outstanding or contained), every one carrying a bead.
+- **11 soundness defects** — the system asserting something false about the mathematics. 9 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **10 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023).
+- **7 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 1 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 7 | a cell of the sweep whose answer is known in advance |
-| `review` | 16 | a human or agent reading the work against a checklist |
+| `review` | 21 | a human or agent reading the work against a checklist |
 | `anomaly` | 4 | a result that made no sense, chased down |
 | `inspection` | 5 | reading the code or the design with intent |
 | `drift_check` | 2 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 1 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 1 of 37, and none of the 8 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 1 of 42, and none of the 11 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -33,15 +33,16 @@ The line worth reading twice: **the automated gate caught 1 of 37, and none of t
 | --- | ---: |
 | engine | 7 |
 | quench | 9 |
-| record | 14 |
-| tooling | 7 |
+| record | 16 |
+| tooling | 9 |
+| docs | 1 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 8 |
-| validity | 8 |
+| soundness | 11 |
+| validity | 10 |
 | bookkeeping | 16 |
 | robustness | 4 |
 | performance | 1 |
@@ -62,6 +63,7 @@ This is the actionable list.
 | D-026 | The plan spec's checklist contradicted the state the spec was cited as authority for | record |
 | D-032 | The in-progress stub was not schema-valid, so the recovery path corrupted the record | record |
 | D-033 | The ledger crashed on any in-progress round, so the gate could not run during a session | record |
+| D-038 | Closed-form recognition was documented as a local-optimum oracle | tooling |
 
 ## Still open
 
@@ -70,6 +72,10 @@ This is the actionable list.
 | D-021 | contained | medium | The polished tier has a noise floor, and eight rounds sit on it | `think-hg3u` |
 | D-034 | outstanding | high | Endpoint identity assumes isolated terminals and splits a connected optimum family | `think-1s0h` |
 | D-035 | outstanding | high | An interrupted negative-control run leaves its deliberate sabotage in the working tree | `think-97pp` |
+| D-039 | outstanding | high | A scalar side-error floor was treated as a basin-resolution theorem | `think-3szr` |
+| D-040 | outstanding | high | Basin rarity was reported without a proposer-conditioned estimand or durable sample | `think-apwt` |
+| D-041 | outstanding | high | Raw contact counts and a one-dimensional kink were used as rigidity and dimension proofs | `think-1s0h` |
+| D-042 | outstanding | high | An open n = 12 case was used as a known-answer negative control | `think-zt29` |
 
 ## Every defect
 
@@ -112,3 +118,8 @@ This is the actionable list.
 | [D-035](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | tooling | robustness |  | `anomaly` | high | outstanding | An interrupted negative-control run leaves its deliberate sabotage in the working tree |
 | [D-036](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | quench | validity | flattering | `review` | high | fixed | A timed-out free sweep was reported as a convergence certificate |
 | [D-037](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | bookkeeping |  | `review` | low | fixed | The atlas checker reported its own synthetic re-offers as census proposals |
+| [D-038](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | soundness | flattering | `review` | high | fixed | Closed-form recognition was documented as a local-optimum oracle |
+| [D-039](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | soundness | flattering | `review` | high | outstanding | A scalar side-error floor was treated as a basin-resolution theorem |
+| [D-040](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | validity | flattering | `review` | high | outstanding | Basin rarity was reported without a proposer-conditioned estimand or durable sample |
+| [D-041](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | docs | soundness | flattering | `review` | high | outstanding | Raw contact counts and a one-dimensional kink were used as rigidity and dimension proofs |
+| [D-042](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | validity | flattering | `review` | high | outstanding | An open n = 12 case was used as a known-answer negative control |

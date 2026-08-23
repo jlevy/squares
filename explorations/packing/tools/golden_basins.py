@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Golden basin maps for the small proved cases, checked against mathematics.
+"""Golden endpoint-key maps for the small proved cases, checked against mathematics.
 
     uv run python tools/golden_basins.py            # fast stored-oracle check
     uv run python tools/golden_basins.py --deep     # rebuild and compare
@@ -20,14 +20,16 @@ grounded in things that were true before this code existed:
 
 * **Proved optimum.** `s(n)` is known for these `n`. Anneal-then-quench must land on
   it, and **no basin may lie below it** — that is a bug unconditionally, never a record.
-* **Closed form.** A real optimum is an algebraic number of modest height; a stopping
-  point is not. See [`sqpack.closed_form`](../sqpack/closed_form.py).
-* **Independent validity.** Every basin is re-checked by `sqpack.verify`, through code
-  the quench does not share (rule **R1**).
+* **Closed form.** A short match recognizes a known control value or proposes an exact
+  reconstruction; it is not a convergence oracle. See
+  [`sqpack.closed_form`](../sqpack/closed_form.py).
+* **Independent validity.** Every endpoint is re-checked by `sqpack.verify`, through
+  code the quench does not share (rule **R1**).
 * **Reproducibility.** Fixed seeds, so the same map twice. The committed file is the
   assertion.
 
-The first three are what a characterization golden cannot do.
+The proved bound and independent validity checks are what a characterization golden
+cannot do. Closed-form matching is supporting metadata.
 
 ## Two questions, deliberately not mixed
 
@@ -37,11 +39,11 @@ The first version of this file conflated them and produced a test that failed on
   optimum exactly?* That is a property of the tools, it is deterministic, and it MUST
   hold. Tested end to end: anneal to get near, quench to land, recognise the closed
   form, verify validity independently. A failure here is a bug.
-* **Discovery** — *does uniform multistart find the optimum in N draws?* That is a
-  property of the **landscape**, it is probabilistic, and it is exactly what `H-012` is
-  registered to measure. The golden does not require the optimum to be drawn. Its exact
-  fixed-seed map is a characterization guard: drift fails the gate for review, but the
-  particular discovery outcome is not a statistical accept rule.
+* **Discovery** — *does this versioned proposer and quench find the target component in
+  N draws?* That is a probabilistic property of the declared measurement regime, not an
+  intrinsic landscape probability. The golden does not require the optimum to be drawn.
+  Its exact fixed-seed endpoint map is a characterization guard: drift fails the gate
+  for review, but the particular outcome is not a statistical accept rule.
 
 Asserting the second is how a gate starts failing for reasons nobody can act on.
 
@@ -132,7 +134,7 @@ def form_key(form: ClosedForm | None) -> tuple[int, int, int, int] | None:
 
 
 def start(n: int, side: float, rng: random.Random):
-    """A uniform multistart draw, in a box comfortably larger than the answer."""
+    """One raw-coordinate baseline draw; overlap and wall violation are permitted."""
     return (
         [rng.uniform(0.5, side - 0.5) for _ in range(n)],
         [rng.uniform(0.5, side - 0.5) for _ in range(n)],
@@ -269,9 +271,9 @@ def build() -> tuple[dict, list[str]]:
                 }
             )
 
-        # NOT an oracle: whether uniform multistart HAPPENED to find the optimum is a
-        # property of the landscape, not of the tools. Recorded below as
-        # `found_optimum` and measured by the ladder instead.
+        # NOT an oracle: whether this fixed proposer/quench regime HAPPENED to find the
+        # optimum is a probabilistic observation. Recorded below as `found_optimum`;
+        # the selected-start ladder tests deterministic convergence separately.
 
         # ORACLE 4: a census whose quenches did not converge measured its own budget.
         converged = atlas.proposals - atlas.non_converged
@@ -288,8 +290,9 @@ def build() -> tuple[dict, list[str]]:
                 "converged": converged,
                 "distinct_basins": len(atlas.basins),
                 "proved_optimum": proved[1] if proved else None,
-                # DATA, not an assertion: whether these draws happened to land in the
-                # optimum's basin. A property of the landscape (H-012), not of the tools.
+                # DATA, not an assertion: whether these draws happened to land at a key
+                # whose side recognizes as the optimum. H-012 requires a declared P/Q/E,
+                # component identity, an n=11 cell, and uncertainty before inference.
                 "found_optimum": bool(
                     proved and form_key(recognise(proved[0])) == form_key(recognise(best))
                 ),
@@ -428,7 +431,7 @@ def report_stored() -> int:
     rungs = doc["golden"]["convergence_ladder"]
     basins = sum(len(c["basins"]) for c in doc["golden"]["cases"])
     print(
-        f"  {len(rungs)} ladder rungs and {basins} stored basins agree with the proved "
+        f"  {len(rungs)} ladder rungs and {basins} stored endpoint rows agree with the proved "
         f"values, their closed forms and their recorded validity"
     )
     return 0
@@ -478,18 +481,18 @@ def main() -> int:
             f"{rung['after_quench']}  gap {rung['gap']:+.1e}  "
             f"{'converged' if rung['converged'] else 'NOT CONVERGED'}"
         )
-    print("\n  multistart census (no assertion that these draws find the optimum):")
+    print("\n  multistart endpoint map (no statistical assertion from these draws):")
     for case in doc["golden"]["cases"]:
         n = case["n"]
         marks = "".join("." if b["valid"] else "X" for b in case["basins"])
         print(
-            f"  n={n:>2}  {case['distinct_basins']:>2} basins from "
+            f"  n={n:>2}  {case['distinct_basins']:>2} endpoint rows from "
             f"{case['proposals']:>2} proposals ({case['converged']} converged), "
             f"best {case['basins'][0]['closed_form'] or case['basins'][0]['side']}"
             f"  {'found optimum' if case['found_optimum'] else 'optimum not drawn'}  [{marks}]"
         )
         recognised = sum(1 for b in case["basins"] if b["closed_form"])
-        print(f"        {recognised}/{len(case['basins'])} basins match a closed form")
+        print(f"        {recognised}/{len(case['basins'])} rows match a closed form")
 
     if args.update:
         if problems:

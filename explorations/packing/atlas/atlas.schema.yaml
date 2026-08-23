@@ -1,9 +1,9 @@
-# Contract for one basin atlas: every distinct local optimum found at one `n`.
+# Contract for one provisional atlas: every distinct endpoint key observed at one `n`.
 #
 # Written by sqpack.atlas, never by hand. The file is APPEND-ONLY -- a basin once seen
-# is a fact about the landscape, and a later run that fails to rediscover it has not
-# unfound it. That is what makes the discovery curve monotone, and therefore what makes
-# its plateau mean saturation.
+# remains an observation, and a later run that fails to rediscover it does not erase it.
+# This makes the key-discovery curve monotone. A plateau is regime-specific and does not
+# prove that connected terminal components or local optima are saturated.
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: packing.squares:BasinAtlas/v1
 title: BasinAtlas
@@ -20,8 +20,8 @@ properties:
     exclusiveMinimum: 0
     description: >-
       The geometric key's quantization step. Recorded because it decides what counts as
-      one basin: a store built at one quantum may not be merged with a store built at
-      another, and nothing downstream can tell without this field.
+      one endpoint key, not because it defines a mathematical basin. A store built at
+      one quantum may not be merged with a store built at another.
   contact_tol:
     type: number
     exclusiveMinimum: 0
@@ -39,23 +39,25 @@ properties:
     type: integer
     minimum: 0
     description: >-
-      Proposals whose quench never proved convergence. They ARE stored -- a quench
-      endpoint is a basin by this project's definition, whatever the terminator managed
-      to prove -- but a census where this is most of `proposals` is measuring the sweep
-      limit rather than the landscape. Measured 2026-08-23 at n = 5: 11 of 12 uniform
-      multistarts hit the cap, and every structural check still passed green. Required,
-      so no atlas can exist without answering the question.
+      Proposals whose quench never proved convergence. They are retained as observations
+      but are not stationary components or local optima. A census where this is most of
+      `proposals` is measuring the sweep limit rather than the landscape. Measured
+      2026-08-23 at n = 5: 11 of 12 uniform multistarts hit the cap, and every structural
+      check still passed green. Required, so no atlas can hide the question.
   distinct_basins:
     type: integer
     minimum: 0
-    description: Length of `basins`, carried so a reader need not count and a drift check can.
+    description: >-
+      Legacy name for the length of `basins`, carried so a reader need not count and a
+      drift check can. It is currently an endpoint-key count, not a certified count of
+      connected terminal components.
   closest_pair:
     type: ["number", "null"]
     description: >-
-      Smallest gap in side between two distinct basins, or null below two basins. The
-      number that says whether this census is near the quench's ~1e-11 noise floor
-      (D-021). If it is, two rows may be one basin the solver could not resolve, and
-      `distinct_basins` is an upper bound rather than a count.
+      Legacy name for the smallest scalar side gap between two rows, or null below two
+      rows. D-021 bounds error in the side objective only. This field cannot establish
+      whether endpoint candidates or connected terminal components are equal or
+      distinct; pose, topology, repeatability, and interval evidence are required.
   basins:
     type: array
     items:
@@ -73,10 +75,10 @@ properties:
           type: string
           pattern: "^[0-9a-f]{32}$"
           description: >-
-            Contact graph canonical up to isomorphism. Ground truth for "the same
-            arrangement", where the geometric key is ground truth for "the same metric".
-            A row is one basin because BOTH agree; see sqpack/canonical.py for what each
-            gets wrong on its own.
+            Contact graph canonical up to isomorphism. One comparison signal, not ground
+            truth for a terminal component: one component may cross contact strata and
+            distinct metric realizations may share a graph. A row currently requires
+            both this and the geometric key to agree; see sqpack/canonical.py.
         side:
           type: number
           exclusiveMinimum: 0
@@ -101,8 +103,9 @@ properties:
           type: integer
           minimum: 1
           description: >-
-            Times the proposer landed here. Divided by `proposals`, the basin's measure
-            under this proposer -- which is exactly what H-012 asks about the record's.
+            Times this endpoint key was observed. Divided by `proposals`, it estimates a
+            probability only for the exact proposer, quench and identity regime that
+            produced the shard; it is not an intrinsic basin volume.
         converged_frequency:
           type: integer
           minimum: 0

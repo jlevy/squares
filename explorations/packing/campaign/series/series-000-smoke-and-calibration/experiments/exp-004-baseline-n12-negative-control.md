@@ -1,5 +1,5 @@
 ---
-title: exp-004 — reproducible baseline at n = 12 (negative control)
+title: exp-004 — reproducible baseline at n = 12 (open-case calibration)
 softschema:
   contract: packing.squares:Experiment/v1
   schema: ../../../schemas/experiment.schema.yaml
@@ -19,7 +19,7 @@ experiment:
     precision: f64_screen
     host_system: Apple M1 Pro, 8 performance + 2 efficiency cores, 32 GB
     selftest_passed: true
-  instance: {axis: n, point: 12, role: negative_control}
+  instance: {axis: n, point: 12, role: calibration}
   method:
     control: 'the trivial ceil(sqrt(n)) grid, which every chain starts from'
     candidate: 'sqsearch defaults: steps 400000, t_hot 0.25, t_cold 1e-9, lambda 2 -> 1e6, p_rotate 0.35, p_reseed 0.5'
@@ -85,6 +85,11 @@ engine and archive: five deterministic seeds, eight chains each, 100M moves per 
 | gap | `+0.000e+00` |
 
 ## Why this round exists
+
+**Correction (D-042).** This round was originally labeled a negative control.
+That role was invalid because `s(12) = 4` is not proved.
+The measurements remain a reproducible baseline at the standing best; they provide no
+known-answer evidence that a value below `4` must be a bug.
 
 [The standing review of PR #5](../../../../docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md)
 found that exp-001’s archive kept only summary lines, discarding the configurations, and

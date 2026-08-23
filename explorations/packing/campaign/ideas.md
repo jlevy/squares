@@ -54,48 +54,54 @@ Budgets are in **pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`.
 ## Orientation
 
 `s(11)` is pinned to `[3.788854, 3.877084]`. The upper end is Walter Trump’s 1979
-packing — six axis-aligned squares plus a rigid block of five tilted at `≈40.1819°`, a
-root of an irreducible degree-8 polynomial.
+packing — six axis-aligned squares plus a tightly constrained block of five tilted at
+`≈40.1819°`; the tilt is numerically characterized through a trigonometric equation, not
+established here as an algebraic number.
 Both endpoints have stood for over two decades, and this is still the *smallest* open
 gap at `n ≤ 100`.
 
 What the
 [baseline](series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md)
 established: the stock annealer at 100M moves per chain recovers `s(10)` to `4.2e-04`
-and correctly refuses to beat the `n = 12` grid, but reaches only `3.9144` at `n = 11` —
-a gap of `3.7e-02` to Trump.
-So the instrument works and the target is genuinely hard.
+and does not beat the `n = 12` grid, but reaches only `3.9144` at `n = 11` — a gap of
+`3.7e-02` to Trump. The `n = 12` result is not a negative control because the relevant
+optimum is not proved; only the proved positive controls validate this machinery.
 Everything below is a theory about why, or a way around it.
 
-**The strategy premise, which reorganises everything below.** Records are rigid; rigid
-optima live in rare basins; so scaling a volume-weighted sampler multiplies effort
-against a probability the problem drives toward zero.
+**The strategy premise, which reorganises everything below.** Record constructions may
+be unusually constrained and may have low hit probability under specified baseline
+proposers. If H-012 confirms that conditional claim, scaling the same proposer merely
+multiplies effort against the measured probability.
 
-*The premise's own contrapositive is the part that bites.* If records are rigid, then
-non-records need not be — and a non-rigid optimum is a **flat basin**, a positive-
-dimensional family rather than a point. Measured at `n = 5`: 11 contact constraints
-against 16 degrees of freedom, so a five-dimensional family, stored as two basins
-([D-034](../defects.md)). Until the census can tell a flat optimum from a rigid one, the
-denominator of "rare" is not a number, and the premise is untestable rather than merely
-untested.
-The baseline is consistent with that — five independent seeds landing in a narrow band
-five times narrower than the remaining gap is what repeatedly finding the same wrong
-funnel looks like — but consistent is not evidence, and
+*The premise’s own contrapositive is the part that bites.* If records are rigid, then
+non-records need not be — and an optimum can be a positive-dimensional terminal family
+rather than a point.
+The exact `n = 3` side-2 sliding family proves that the current key splits one connected
+component. At `n = 5`, two matching side/contact summaries are an unresolved identity
+signal: raw contact counts establish neither rank deficiency, dimension, nor
+connectivity ([D-034](../defects.md)). Until the census defines what it counts, the
+denominator of “rare” is not a number, and the premise is untestable rather than merely
+untested. The baseline is consistent with that — five independent seeds landing in a
+narrow band five times narrower than the remaining gap is what repeatedly finding the
+same wrong funnel looks like — but consistent is not evidence, and
 [H-012](hypotheses/H-012-record-basins-are-rare.md) is registered to kill the premise
 cheaply if it is wrong.
 
 **The building block everything waits on** is
 [H-002](hypotheses/H-002-lp-in-cell-polish.md): for fixed angles, minimising `s` is a
 linear program, already verified against Trump’s packing to `9e-16`. It turns “where the
-annealer stopped” into “which cell this is”, which is what makes basins nameable,
-countable, and exactly valued — and it is this campaign’s missing tier 2.
+annealer stopped” into “which cell this is”, which makes endpoint candidates
+reproducible and numerically polishable.
+Component identity, countability, and exact value require separate evidence.
 
-Two further facts constrain most of these ideas.
-**Trump’s packing is rigid**, so it is an isolated point in configuration space rather
-than a basin with width — which is a reason to expect random restarts to miss it, and
-the reason [H-018](hypotheses/H-018-basin-entry.md) is the most informative cheap thing
-runnable today. And **it uses exactly two distinct tilts**, `0°` and one free angle,
-which is a strong structural prior an unconstrained search does not exploit.
+Two further observations constrain most of these ideas.
+**Trump’s packing is a strong rigidity candidate**, but this repository has not yet
+supplied the active-constraint rank or interval proof needed to call it isolated.
+Its apparent local jamming is a reason to test whether named random-start proposers miss
+it, and [H-018](hypotheses/H-018-basin-entry.md) is the most informative cheap
+experiment runnable today.
+It uses exactly two observed tilt classes, `0°` and one non-trivial angle, a structural
+prior an unconstrained search does not exploit.
 
 The [search-strategy catalogue](../frontier/search-strategies.yaml) enumerates 20 ways
 anyone has ever found a packing; `strategy_refs` on each hypothesis cites into it, so

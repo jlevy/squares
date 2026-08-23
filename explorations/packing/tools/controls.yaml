@@ -39,9 +39,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 37", "count: 20"]
+  replace: ["count: 42", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 37"
+  expect: "count 20 != 42"
 
 # The unprotected-fix count in SYNOPSIS.md. This claim -- the list that predicts what
 # comes back -- was hand-written, and it drifted: the prose said six while the generated
@@ -49,8 +49,8 @@ controls:
 # why the count is now derived and why it gets a control.
 - name: synopsis - unprotected-fix count drifting from the log
   file: defects.yaml
-  replace: ["    in-progress round.\n  regression: none\n  bead: think-5zwm\n",
-            "    in-progress round.\n  regression: 'a check that does not exist'\n  bead: think-5zwm\n"]
+  replace: ["    to coincide with an in-progress round.\n  regression: none\n  bead: think-5zwm\n",
+            "    to coincide with an in-progress round.\n  regression: 'a check that does not exist'\n  bead: think-5zwm\n"]
   run: uv run --frozen --quiet python tools/check_synopsis.py
   expect: "does not state the unprotected-fix count"
 
@@ -100,8 +100,8 @@ controls:
 
 - name: campaign - hypothesis on the board but not in the registry
   file: campaign/ideas.md
-  replace: ["the reason [H-018](hypotheses/H-018-basin-entry.md) is the most informative",
-            "the reason [H-777](hypotheses/H-777-nonexistent.md) is the most informative"]
+  replace: ["[H-018](hypotheses/H-018-basin-entry.md) is the most informative cheap\nexperiment runnable today",
+            "[H-777](hypotheses/H-777-nonexistent.md) is the most informative cheap\nexperiment runnable today"]
   run: python3 campaign/ledger.py --check
   expect: "which is not in the registry"
 

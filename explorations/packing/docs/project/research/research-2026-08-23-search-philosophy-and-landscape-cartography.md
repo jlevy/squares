@@ -25,11 +25,13 @@ Each direction ends at a pointer into the review’s hypothesis register, where 
 boiled down to a test with a budget tier and a kill criterion (H-11 through H-15, series
 S6). Nothing here spends budget; everything here says what budget would be for.
 
-The thesis, in one paragraph.
-The instances worth winning are precisely the ones volume-weighted search is worst at,
-because record packings are **rigid**, and rigid optima live in **rare basins**. The
-response is not a faster random walk.
-It is, in order: treat the set of local optima as the object of study — a **basin
+The working thesis, in one paragraph.
+The instances worth winning may be ones a named volume-weighted search reaches rarely.
+Record packings often appear highly constrained, but neither rigidity nor rare
+attraction under the current proposer has been established as a general implication;
+H-012 exists to measure the latter under a declared regime.
+If that measurement supports the thesis, the response is not merely a faster random
+walk. It is, in order: treat the set of local optima as the object of study — a **basin
 atlas** built over the exact LP-quench map the review already validated; steer search by
 **structural diversity under the true objective** rather than by reshaping the loss; put
 the LLM at the **structural layer**, where it reads verified maps and writes constructor
@@ -79,15 +81,14 @@ for.
 
 ## Findings
 
-### The failure mode: records are rigid, and rigidity makes basins rare
+### The hypothesis: the baseline proposer may rarely enter record components
 
 Start from what the exact verifier measured.
 In Trump’s `n = 11` packing, 14 of the 55 square pairs touch with *exactly zero* gap,
-and 20 corner coordinates lie exactly on the container boundary.
-Each exact contact is an equality constraint; enough independent ones hold
-simultaneously that the configuration has no slack anywhere — the packing is rigid, and
-its optimum sits on a low-dimensional stratum of the 34-dimensional configuration space
-(`3n` pose coordinates plus the side).
+and 20 corner coordinates lie on the container boundary in the exact witness.
+Those contacts make the packing a strong rigidity candidate, but raw contact counts do
+not establish independence or infinitesimal rigidity; that requires a rank or interval
+certificate that the repository does not yet have.
 
 What matters for search is not the stratum (measure zero) but its **basin of
 attraction** (positive measure, but how much?). Here the energy-landscape literature has
@@ -101,17 +102,16 @@ landscape of Doye, Miller and Wales.
 Glassy systems generalize the lesson: when low-energy states are rare and structured,
 volume-weighted dynamics is systematically worst exactly where the prize is.
 
-Square packing shows the same signature in the one measurement the field has published:
-Ellsworth’s basin statistics for `s(51)` — 3,004 distinct basins from his search, **4**
-of them the record. And the structure of our problem says why: loosely-constrained,
-grid-like arrangements form wide flat basins (many nearby configurations quench into
-them), while an oblique core like Trump’s — several squares locked at an irrational tilt
-against a grid frame — is exactly the over-constrained, small-volume kind.
+Square packing has one suggestive proposer-specific observation: Ellsworth reports 3,004
+basins from his `s(51)` search and four refinements to the record.
+That frequency belongs to his proposal and refinement regime; it is not an intrinsic
+volume of the packing landscape.
+The idea that loosely constrained grid-like arrangements have larger attraction sets
+than oblique cores is a hypothesis to measure, not a consequence of contact count.
 
-The implication is not that throughput is worthless — the plan spec’s performance floors
-stay — but that **throughput scales the wrong term**: it multiplies samples against a
-hitting probability that the problem’s structure drives toward zero.
-“Anneal harder” is a plan for finding the grid family ever more often.
+If H-012 confirms a small hitting probability for a named baseline, throughput merely
+multiplies samples against that measured probability.
+If it does not, this strategic argument contracts and throughput remains competitive.
 
 This is the strategy layer’s load-bearing premise, so the register is arranged to test
 it first and cheaply: H-12 measures the record basin’s quench probability directly at
@@ -119,38 +119,35 @@ it first and cheaply: H-12 measures the record basin’s quench probability dire
 rates comparable to the modal basin — this document’s program contracts sharply, and
 that outcome is deliberately made cheap to reach.
 
-### The quench map exists and is exact: minima are exactly *valued*, not always discrete
-
-> **Corrected 2026-08-23 ([D-034](../../../defects.md)).** This section originally
-> claimed minima are *discrete* objects. That is true of rigid optima and false in
-> general, and the correction is at the end of the section rather than woven in, so the
-> original argument stays readable and the error stays visible.
-
+### The provisional quench map: endpoint keys are not yet terminal components
 
 The review’s verified result (R-2) supplies the tool this whole approach stands on.
 Fix each square’s angle and, for each pair, which candidate axis separates it, and
 minimizing `s` becomes a **linear program**; the configuration space partitions into
-combinatorial *cells*, and solving the cell’s LP takes any float configuration to the
-exact optimum of its cell.
+combinatorial *cells*, and solving the cell’s LP takes any float configuration to a
+floating-point optimum of its cell at the solver’s precision.
 At Trump’s angles this reproduced `s(11)` and every centre to machine precision.
 
-That is precisely the **inherent-structure decomposition** of Stillinger and Weber —
-landscape = a discrete set of minima plus their basins, with a *quench map* sending
-every configuration to its minimum — with one upgrade the physical version never had:
-our quench endpoint is **exact**. Within a cell the LP optimum is rational in the cell
-data; across cells it is algebraic.
-One further caveat the same build produced: a quench whose angle search merges nearby
-angles returns the optimum of a *constrained* problem, so its landing point — and hence
-basin identity, which the atlas defines as where the quench lands — would inherit a
-tuning parameter ([D-020](../../../defects.md), now fixed by a free-angle pass that
-certifies the endpoint is a genuine local optimum).
+That resembles the **inherent-structure decomposition** of Stillinger and Weber — a
+quench map sending configurations toward terminal structures — but two qualifications
+are load-bearing here.
+The current LP solve is floating-point at the polished tier, not an exact certificate,
+and terminal structures need not be discrete.
+At `n=3`, the side-2 optimum contains a connected sliding family: centres `(1/2,1/2)`,
+`(3/2,1/2)`, and `(t,3/2)` for `t in [1/2,3/2]`. One further caveat the same build
+produced: a quench whose angle search merges nearby angles returns the optimum of a
+*constrained* problem, so its landing point — and hence basin identity, which the atlas
+defines as where the quench lands — would inherit a tuning parameter
+([D-020](../../../defects.md), now fixed by a free-angle pass that checks
+coordinate-wise stationarity under the declared schedule and tolerances).
 The lesson generalises: **whatever defines a basin must be independent of the search’s
 own knobs**, and that has to be checked rather than assumed.
 
 Combined with the review’s canonical identity keys (R-1: contact graph up to
-isomorphism, `D₄`-canonicalized geometry), a local minimum stops being a
-tolerance-dependent place where an annealer got tired and becomes a **discrete,
-nameable, exactly-valued object**.
+isomorphism, `D4`-canonicalized geometry), a numerical endpoint becomes a reproducible
+comparison candidate.
+It becomes a basin/component only after convergence, local stationarity, isolation or
+connected-component identity, validity, and numerical ambiguity are resolved.
 
 Two consequences frame everything downstream:
 
@@ -158,51 +155,51 @@ Two consequences frame everything downstream:
    tiny — Trump’s packing uses a single non-trivial tilt; the `s(17)` record uses two),
    and everything else is the combinatorial choice of cell.
    That is the review’s H-1, restated as geometry.
-2. **Landscape questions become countable questions.** How many basins exist at a given
-   `n`; their exact side lengths; their quench frequencies (basin volumes, empirically);
-   which cells are adjacent to which.
-   These are census questions, and a census is something a program can be *finished*
-   with — see H-11.
+2. **Declared landscape views can become statistical questions.** Under a versioned
+   proposer, quench, and terminal-component relation: how much component support was
+   observed; what unseen mass remains; what polished or exact side evidence each
+   component carries; and which cells are adjacent.
+   These are conditional census questions with uncertainty — see H-11.
 
 #### The correction: exactly valued does not mean discrete
 
 Consequence 2 does not follow from consequence 1, and the gap between them is
 [D-034](../../../defects.md).
 
-An optimum is a **point** only when the contacts pin every degree of freedom. Count them:
-`n` squares carry `3n` degrees of freedom plus one for the side, and each pair contact
-and each wall touch removes one. Where a surplus remains, the optimal set is a
-positive-dimensional **family** — a *flat basin* — every member of which has the same
-side, the same contact graph, and equal claim to being the optimum.
-This is not a small-`n` curiosity. At `n = 5`, the first cell the census was to run, an
-optimum at `(4 + 5√2)/4` has 11 constraints against 16 degrees of freedom: a
-five-dimensional family, which the atlas duly recorded as two basins because two quenches
-stopped at two members of it.
+The exact `n=3` optimum supplies the counterexample directly: centres `(1/2,1/2)`,
+`(3/2,1/2)`, and `(t,3/2)` for `t in [1/2,3/2]` form one connected side-2 family.
+The current contact certificate is constant on sampled members while the geometric key
+changes, so the atlas count depends on its quantum.
 
-So the quench endpoint is exactly *valued* — the LP still returns the true optimum of its
-cell to solver precision, and that claim is untouched — but it is not always exactly
-*located*. "How many basins exist at `n`" is therefore not yet a well-posed question, and
-a census that answers it anyway is counting quantizer cells.
+The `n=5` golden gives a second, unresolved signal: two rows share side, short form,
+contact certificate, angle signature, and contact count while differing geometrically.
+The merged branch originally called this a five-dimensional family by subtracting 11 raw
+contacts from 16 variables.
+That subtraction is not a rigidity-rank calculation, and matching side/contact data do
+not prove path-connectedness.
+They establish an identity ambiguity that must be measured, not its answer.
 
-**In LP terms the diagnosis is sharp, and so is the fix.** A flat optimum is a cell whose
-linear program has a **non-unique optimal face** rather than an optimal vertex: the
-objective is constant along a face of the feasible polytope. That is ordinary LP
-degeneracy, it is a property the solver can be *asked about* at the moment the quench
-already runs, and it does not need a new instrument — which makes "is this optimum flat,
-and of what dimension" a field the atlas can carry rather than a question the census has
-to leave open.
+**The LP supplies one useful test, not the whole definition.** Within one fixed-angle,
+fixed-separating-cell LP, the optimal-face dimension can be computed from the rank of
+the active constraint matrix and objective row.
+The full quench also moves angles and crosses cell/contact strata, so component identity
+requires the full active-constraint Jacobian, null-direction continuation, and a rule
+for joining boundary strata.
+Until those checks run, the `n=5` pair remains unresolved and the safe artifact is an
+endpoint-key map with lower/upper component-count bounds.
 
-That reframing is what turns D-034 from a blocker into a piece of work. It is written up
-on `think-1s0h`; the three candidate definitions of basin identity all become cheaper
-once flatness is a measured quantity rather than an inference from a coordinate diff.
+That reframing keeps D-034 as a blocker with executable work.
+`think-1s0h` and `think-0yo9` must be reconciled around the exact `n=3` control,
+rank/nullity evidence, and continuation rather than contact counting.
 
-**The lesson, restated one level up.** This section already said *"whatever defines a
-basin must be independent of the search's own knobs, and that has to be checked rather
-than assumed"* — the D-020 lesson. D-034 is the same sentence with a wider referent: a
-basin must also be independent of the **representation's** knobs, and must not presume a
-structure — discreteness — that the mathematics does not supply. The first version of
-that lesson was learned and written down; the second was available from the same
-argument and was not.
+**The lesson, restated one level up.** This section already said *“whatever defines a
+basin must be independent of the search’s own knobs, and that has to be checked rather
+than assumed”* — the D-020 lesson.
+D-034 is the same sentence with a wider referent: a basin must also be independent of
+the **representation’s** knobs, and must not presume a structure — discreteness — that
+the mathematics does not supply.
+The first version of that lesson was learned and written down; the second was available
+from the same argument and was not.
 
 ### The map itself: a basin atlas, and what it buys both lanes
 
@@ -211,11 +208,14 @@ graph** of Becker and Karplus, popularized by Wales — minima as leaves, joined
 lowest barrier connecting them, giving the landscape’s tree structure at a glance
 (funnels are visible as long unbranched spines).
 
-Our version, concretely: an **atlas** with one record per canonical basin —
+Our target, concretely: an **atlas** with one record per resolved terminal component —
 
-- both identity keys (geometric and structural), per the review’s R-1;
-- the exact side length and its algebraic degree;
-- quench frequency under a stated start distribution (the empirical basin volume);
+- both endpoint keys (geometric and structural), together with component-identity
+  evidence, per the review’s R-1 and D-034;
+- the polished side and, where separately certified, the exact side and algebraic
+  degree;
+- hit frequency under a versioned proposer `P`, quench `Q`, and terminal equivalence `E`
+  (an empirical probability conditional on `P/Q/E`, not an intrinsic volume);
 - the contact graph and angle signature;
 - symmetry group of the packing;
 - neighbor links: which basins it merges with, and at what container inflation `δ` — the
@@ -399,17 +399,18 @@ the strategy that turns the residue into the asset.
 
 ## Key Insights
 
-- **The bottleneck is sampling measure, not optimization power.** Records are rigid;
-  rigid optima live in rare basins; scaling a volume-weighted sampler multiplies effort
-  against a probability the problem drives toward zero.
-  (Premise deliberately made falsifiable first: H-12.)
+- **The candidate bottleneck is the proposer’s sampling measure.** The working premise
+  is that record packings are unusually constrained and have low hit probability under
+  named baseline proposers; H-012 is designed to measure or reject that premise before
+  it is used to deprioritize raw throughput.
 - **LP-in-cell is the bridge from continuous search to discrete cartography.** It turns
   “where the annealer stopped” into “which cell this is,” making minima nameable and
-  exactly valued — Stillinger–Weber quenching with an exact endpoint.
-  *Amended ([D-034](../../../defects.md)): not always countable.* An optimum is a point
-  only where the contacts pin every degree of freedom; where they do not, the LP has a
-  non-unique optimal face and the optimum is a positive-dimensional **flat basin**.
-  Exactly valued, yes; discrete, only conditionally — and the census inherits the
+  numerically polishable — Stillinger–Weber quenching with a reproducible endpoint
+  candidate. *Amended ([D-034](../../../defects.md)): not always countable.* An optimum
+  is a point only where an appropriate active-constraint rank and local analysis
+  establish isolation; otherwise the LP may have a non-unique optimal face or the full
+  problem may have a positive-dimensional terminal family.
+  Numerically valued, yes; discrete only conditionally — and the census inherits the
   condition.
 - **The map is the deliverable; records are corollaries.** A validated basin atlas of
   `n ≤ 11` is publishable, steers search, gives negative results meaning, and is the

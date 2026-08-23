@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 37
+count: 42
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -962,4 +962,142 @@ defects:
   regression: >-
     tools/atlas_check.py keeps real-quench output separate from synthetic offer counts;
     the strict gate runs the checker.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-038
+  title: Closed-form recognition was documented as a local-optimum oracle
+  date: '2026-08-23'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    `sqpack.closed_form` described matching a polished side to one of a short list of
+    known constants as an oracle that said whether a quench had converged to a known
+    optimum. It also justified a 1e-12 match by multiplying an optimizer's tolerance by
+    an assumed uniform random-coincidence probability. Optimizer outputs are correlated,
+    concentrated near known values, and selected after optimization; equality of one
+    scalar says nothing about validity, stationarity, pose identity, or optimality.
+  consequence: >-
+    A censored, invalid, or distinct endpoint near a known side could acquire an
+    oracle-shaped label and be promoted as a known local optimum. The false probability
+    calculation made that promotion look statistically protected when it was not.
+  fix: >-
+    The module and atlas documentation now call the result a closed-form recognition
+    heuristic for a scalar side. Convergence, validity, endpoint/component identity, and
+    exact certification remain independent fields and checks.
+  regression: none
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-039
+  title: A scalar side-error floor was treated as a basin-resolution theorem
+  date: '2026-08-23'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    D-021 measures roughly 1e-11 variation in the optimized container side. The basin
+    prose generalized that one-dimensional error bound into the claim that terminal
+    objects farther apart were distinguishable and closer ones were not. The atlas key
+    actually uses pose coordinates at a 1e-6 quantum, contacts at a 1e-9 tolerance, and
+    no calibrated component-distance statistic. Equal sides may describe distinct
+    components, while one connected component may contain poses arbitrarily far apart.
+  consequence: >-
+    Basin merges and splits could be justified by a tolerance that governs neither pose
+    identity nor connectivity. Counts, discovery curves, and rarity ratios could then
+    appear resolved to eleven decimal places without any corresponding identity result.
+  fix: >-
+    none yet. Calibrate pose, contact, active-set, and continuation stability separately;
+    report lower and upper component-count bounds until an equivalence or ambiguity
+    relation is validated. D-021 remains only a side-value floor.
+  regression: none
+  bead: think-3szr
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-040
+  title: Basin rarity was reported without a proposer-conditioned estimand or durable sample
+  date: '2026-08-23'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    The PR description interpreted a 12-start n = 5 multistart tally as evidence about
+    record-basin rarity, but the result is not preserved as a replayable round at the
+    merged head and the counted object is unresolved. More fundamentally, a basin hit
+    probability is conditional on a proposer distribution P, deterministic quench Q,
+    and terminal equivalence E. The raw-coordinate proposer also samples infeasible
+    starts from an arbitrary initial-side box, so it is one named baseline rather than a
+    canonical uniform null.
+  consequence: >-
+    A small, method-specific tally could be generalized into an intrinsic landscape
+    property and used to abandon throughput or rank strategies. Even the quoted 1/12
+    versus 4/12 split has wide binomial uncertainty and does not satisfy H-012's stated
+    ratio threshold.
+  fix: >-
+    none yet. Preserve every observation with P/Q/E, seed, budget, pose, censoring, and
+    regime digest; compare several named proposers at equal pair-test budgets; and report
+    confidence intervals or predeclared sequential bounds rather than point ratios.
+  regression: none
+  bead: think-apwt
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-041
+  title: Raw contact counts and a one-dimensional kink were used as rigidity and dimension proofs
+  date: '2026-08-23'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    The merged documentation subtracted 11 reported contacts from 16 coordinates and
+    declared the n = 5 optimum a connected five-dimensional family. Elsewhere it called
+    Trump's n = 11 packing rigid because a class-angle slice has a kink and the contact
+    picture looks pinned. Raw constraints may be dependent or encode different numbers
+    of scalar equations; a one-dimensional slice does not rule out motions in the other
+    coordinates; and matching side/contact summaries do not prove path connectivity.
+  consequence: >-
+    Unproved isolation and dimension claims were used to explain search difficulty and
+    to choose the object an atlas should count. This makes the cartography premise look
+    settled and can send implementation toward the wrong quotient or continuation
+    model.
+  fix: >-
+    The rank-free claims are removed from the living docs. The underlying questions stay
+    open: compute fixed-cell active-matrix rank, the full pose-and-angle Jacobian after
+    quotienting symmetries, feasible null directions, and validated continuation across
+    active-set changes before asserting rigidity, dimension, or connectivity.
+  regression: none
+  bead: think-1s0h
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-042
+  title: An open n = 12 case was used as a known-answer negative control
+  date: '2026-08-23'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    Campaign schemas, runbooks, and rounds label n = 12 as a negative control whose
+    correct outcome is failure to beat the 4 by 4 grid. But s(12) = 4 is not proved and
+    the project's own frontier treats improving either bound at n = 12 as an open
+    research target. Failure to improve an unproved incumbent is not a known-answer
+    outcome.
+  consequence: >-
+    A weak proposer can pass the alleged guard precisely by finding nothing, so the
+    control flatters the instrument and rejects a genuine improvement as a supposed
+    breach. Any round accepted because n = 12 behaved this way lacks the claimed
+    negative-control evidence.
+  fix: >-
+    none yet. Reclassify n = 12 as an open target/calibration, invalidate the associated
+    control verdicts, and use proved optima plus deliberately invalid or dominated
+    fixtures for known-answer negative behavior.
+  regression: none
+  bead: think-zt29
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md

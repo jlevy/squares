@@ -1,17 +1,20 @@
-"""Basin identity: the thing that makes "basin" a noun rather than an impression.
+"""Provisional identity for numerical quench endpoints.
 
-A **basin** is the preimage of one quench endpoint. Two quench runs land in the same
-basin when they land on the *same packing*, and until something decides that question,
-every basin count is a count of floating-point strings and every discovery curve is an
-artifact of the tolerance used to compare them ([D-020](../defects.md)).
+A basin is an attraction class of a fully specified quench, not necessarily the
+preimage of one endpoint *point*. A quench may terminate on a positive-dimensional set.
+For example, at `n = 3` the side-2 family with centres `(1/2,1/2)`, `(3/2,1/2)`, and
+`(t,3/2)` for `t in [1/2,3/2]` is connected. Its contact certificate is constant while
+its geometric key changes with `t`. The keys below therefore identify numerical
+endpoint candidates; they do not yet identify connected terminal components.
 
-Deciding it needs two things this module supplies, at two different prices:
+Comparing endpoint candidates uses two signals, at two different prices:
 
 1. **A geometric key** — quantize, canonicalise over the container's symmetries and over
    square relabelling, hash. Cheap, and the fast path for deduplication.
 2. **A contact-graph certificate** — the combinatorial structure, canonical up to
-   isomorphism. Expensive, and the ground truth: it is what "the same *arrangement*"
-   actually means, and it survives the continuous wobble the geometric key does not.
+   isomorphism. Expensive and stable under some continuous motion, but not a ground
+   truth: one component may cross contact strata and distinct metric realizations may
+   share a graph.
 
 ## Which is authoritative, and how each fails
 
@@ -24,14 +27,17 @@ They fail in opposite directions, which is the reason to carry both.
   packings can share a contact graph — the graph forgets the metric entirely. The
   geometric key separates those.
 
-So: **two configurations are the same basin when both keys agree.** Disagreement is not
-an error, it is information, and `BasinKey.agrees_with` reports which kind.
+So: **agreement is strong evidence for the same isolated endpoint candidate.** It is
+not a proof that two results are in the same basin, and disagreement is not proof that
+they are different basins. `BasinKey.agrees_with` reports the comparison outcome so a
+later ambiguity or component layer can act on it.
 
 ## What this does not do
 
-It does not decide whether a configuration is a local optimum, and it does not verify
-validity. Feed it quench output; route anything that will claim a record through
-`sqpack.verify`, which is the only thing here entitled to the word `exact`.
+It does not decide whether a configuration is a local optimum, whether a stationary set
+is isolated or connected, or whether the configuration is valid. Feed it quench output;
+route anything that will claim a record through `sqpack.verify`, which is the only thing
+here entitled to the word `exact`.
 """
 
 from __future__ import annotations
@@ -44,8 +50,9 @@ from sqpack.quench import angle_classes, contacts
 
 QUARTER = math.pi / 2
 
-# Well above the quench's ~1e-11 noise floor (D-021) and far below any distinction
-# between real basins, which differ in the side by 1e-3 and up at the n this is aimed at.
+# A storage resolution, not a basin-separation theorem. D-021 bounds error in the side
+# objective; it does not calibrate coordinate/angle identity. F-20 and think-3szr track
+# the required sensitivity and ambiguity layer.
 DEFAULT_QUANTUM = 1e-6
 
 
@@ -263,8 +270,7 @@ def contact_certificate(
 
 @dataclass(frozen=True)
 class BasinKey:
-    """What identifies a basin, at both prices. See the module docstring for which
-    is authoritative when they disagree."""
+    """Two comparison signals for an endpoint candidate; neither is authoritative."""
 
     n: int
     geometric: str
@@ -277,8 +283,8 @@ class BasinKey:
         """`same`, or the direction of the disagreement, named so a caller can act.
 
         `same-arrangement-different-metric` and `same-metric-different-arrangement` are
-        both real answers rather than errors: the first is usually one basin the
-        quantizer split, the second is two basins the contact graph merged.
+        both real answers rather than errors. Either may need component continuation or
+        certified geometric separation before it can be resolved.
         """
         if self.geometric == other.geometric and self.contact == other.contact:
             return "same"
@@ -298,7 +304,7 @@ def canonical_key(
     quantum: float = DEFAULT_QUANTUM,
     tol: float = 1e-9,
 ) -> BasinKey:
-    """Both keys for one configuration, plus the descriptors that come free with them."""
+    """Both endpoint-comparison keys, plus the descriptors that come free with them."""
     folded = [_fold(t) for t in theta]
     sizes = tuple(sorted(len(g) for g in angle_classes(folded)))
     return BasinKey(

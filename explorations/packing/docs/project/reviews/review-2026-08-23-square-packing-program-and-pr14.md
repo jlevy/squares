@@ -4,11 +4,13 @@
 
 **Author:** Codex (agent)
 
-**Status:** Complete
+**Status:** In progress; first post-merge checkpoint
 
 **Reviewed:** [PR #14](https://github.com/jlevy/thinking-scratchpad/pull/14), initially
-at `fa538931b20fef0f51dffedb9e4d7071603b7790` and reassessed twice as it advanced,
-finally at `c412b8c507bc0b4a5d3d3b676196d73575c77a1b`, together with the full
+at `fa538931b20fef0f51dffedb9e4d7071603b7790`, reassessed as its branch and description
+advanced, and delta-reviewed through final source head
+`f9f119a2a67e682607faf9d9f1623ea4ae1c83d6` and merge commit
+`8926a7c04ba9e59cf988b6d00a28d3ad756a5d0f`, together with the full
 `explorations/packing/` research, tooling, campaign, corpus, and source archive.
 
 The initial findings and reproduction results below describe the first exact PR head.
@@ -21,7 +23,8 @@ reviewed evidence.
 
 ## Verdict
 
-**Request changes. Do not run the proposed unattended census yet.**
+**PR #14 is merged as a useful prototype.
+Do not run the proposed unattended census yet.**
 
 The project has unusually strong raw material: a serious primary-source archive, an
 honest distinction between upper bounds and proofs, a useful `n = 1…100` scalar corpus,
@@ -235,6 +238,54 @@ Our two initial review-found defects are D-036 and D-037 so the defect ledger re
 merged PR #14’s D-031 through D-035 without collision.
 The same 17 epic children own the new work; F-17 belongs to the existing enforcement,
 quench, and atlas beads.
+
+## Third reassessment: the four ambiguities and final merged delta
+
+The four questions added under “What is ambiguous” are not peripheral unknowns.
+They expose missing definitions in the counted object, the numerical identity relation,
+the endpoint-promotion policy, and the statistical estimand.
+The earlier review covered pieces of all four in F-05, F-07, F-10, F-13, F-14, F-16,
+O-03, A-02, and Q-04, but it did not give each ambiguity a complete disposition.
+F-18 through F-21 below now do so.
+
+| PR ambiguity | Answer | Consequence now | Executable resolution | Bead |
+| --- | --- | --- | --- | --- |
+| Is a basin well-defined at small `n`? | Not under the current two-hash endpoint definition. `n=3` gives an exact positive-dimensional counterexample. | Small-`n` “distinct basin” counts are quantization-dependent endpoint-cluster counts. | Detect rank deficiency, continue terminal stationary sets, and count connected components under a declared quench and quotient. | `think-0yo9` |
+| What are the unrecognised singletons? | The stored evidence cannot decide. “Higher degree” and “not converged” are only two of at least six live classes. | They are unresolved endpoints, not established local optima or basins. | Preserve poses and active sets; run a precision/budget ladder, directional/KKT tests, component detection, and exact promotion. | `think-aans` |
+| Does D-021’s `1e-11` floor merge basins? | D-021 bounds error in the scalar side, not distance between configurations or terminal components. | `closest_pair` cannot validate identity; equal-side rows may differ and one component may contain many keys. | Calibrate pose, topology, and interval separation across tolerance sweeps; carry an explicit ambiguity graph and count interval. | `think-3szr` |
+| Is uniform multistart the right null? | It is one useful baseline, not a canonical or distribution-free null. | Every frequency and rarity statement is conditional on an incompletely recorded proposer/quench regime. | Benchmark several named proposal measures at equal pair tests and report each conditional probability with uncertainty. | `think-apwt` |
+
+The description’s twelve-start `n=5` result is also not a durable result at the current
+head.
+No checked-in event or atlas artifact preserves those twelve poses, proposal order,
+or regime. The current raw-head golden instead contains six `n=5` proposals, five rows,
+and `found_optimum: false`; the source-built stacked golden contains six proposals, six
+rows, and also misses the optimum.
+Even if the historical `1/12` versus `4/12` counts are accepted, the point ratio is
+`0.25`, not H-012’s registered “below `0.1`” threshold, and exact 95% binomial intervals
+for the two marginal probabilities are approximately `[0.0021, 0.3848]` and
+`[0.0992, 0.6511]`. That sample is a useful smoke observation, not evidence for the
+rarity premise, and it does not test H-012’s registered `n=10,11` sweep.
+
+The final `f9f119a` source delta correctly elevated terminal isolation into D-034 and
+added the exact `n=3` sliding-family witness.
+It also made one new rank-free claim: the two `n=5` rows were called one connected
+five-dimensional family solely from 11 raw contacts versus 16 coordinates.
+Fixed-cell LP degeneracy is measurable, but it does not alone determine the full
+angle-moving terminal manifold.
+The living docs now retain the exact `n=3` proof and mark `n=5` unresolved pending
+active-matrix rank, full Jacobian, feasible-null-direction, and continuation evidence.
+
+The ambiguity delta and its adjacent documentation errors are now durable logbook
+entries:
+
+| Defect | Review finding | State |
+| --- | --- | --- |
+| D-038 | F-10/F-16: scalar closed-form recognition was described as a convergence/local-optimum oracle | Documentation fixed; no regression yet |
+| D-039 | F-20: D-021’s side floor was generalized into component resolution | Outstanding on `think-3szr` |
+| D-040 | F-21: rarity lacked a durable, proposer-conditioned `P/Q/E` estimand | Outstanding on `think-apwt` |
+| D-041 | F-13/F-18: contact counts and a one-angle kink were used as rank, rigidity, dimension, and connectivity proofs | Rank-free prose fixed; certification outstanding on `think-1s0h` |
+| D-042 | F-14: the open `n=12` case was treated as a known-answer negative control | Active docs corrected; historical verdict and control replacement remain on `think-zt29` |
 
 ## What is sound and should be retained
 
@@ -833,6 +884,161 @@ marker disappear.
 
 **Beads:** `think-zt29`, `think-zcx4`, and `think-31k1`.
 
+### F-18 (P0): endpoint hashes do not define basins on non-isolated terminal sets
+
+The PR description is right that the `n=3` optimum has slack, but the failure is already
+constructive rather than merely possible.
+For every `t` in `[1/2,3/2]`, the three axis-aligned squares with centres
+
+```
+(1/2, 1/2), (3/2, 1/2), (t, 3/2)
+```
+
+form a valid packing in a side-2 container.
+The top square slides continuously while the optimum side remains fixed.
+Running the current canonicalizer at `t = 0.50, 0.75, 1.00, 1.25, 1.50` produced one
+contact certificate, `af4ca4659c8fc659a37907833f922899`, but three geometric keys; D4
+identifies `t` with `2-t` and does not identify the remaining continuum.
+Because [`Atlas.add`](../../../sqpack/atlas.py) merges only when both hashes agree, a
+finer geometric quantum creates more rows from the same connected optimal family.
+
+This is not repaired by choosing the contact key instead.
+The family’s active contact graph is constant through its interior, but contact graphs
+can also stay constant across genuinely different metric realizations and can change at
+the boundary of one connected family.
+Neither hash defines connectedness.
+The module-level statement that a basin is “the preimage of one quench endpoint” assumes
+the very discreteness that fails here.
+
+The mathematical object has to be declared before it can be counted.
+Let `P` be a proposal measure, `Q` a fully specified deterministic quench including
+tie-breaking and termination, and `E` an equivalence on terminal states after
+quotienting square relabelling, each square’s quarter-turn symmetry, and container D4.
+An attraction probability is then the `P`-measure of the preimage under `Q` of one
+`E`-class. For isolated minima, `E` may reduce to certified geometric equality.
+For a non-isolated stationary set, it should identify a connected terminal component or
+stratum, not each sampled point.
+
+**Required repair:** compute the active-constraint Jacobian or rigidity matrix at every
+candidate, report rank and nullity after removing the side and any modeled gauge
+directions, and continue each certified null direction.
+Use active-set continuation or a semialgebraic component method to join boundary strata
+whose contact graphs change without leaving the terminal set.
+Until that exists, label the output `endpoint clusters`; exclude non-isolated cases from
+basin-count and saturation claims.
+The exact `n=3` family above is the minimum regression: changing the geometric quantum
+must not change the reported number of terminal components.
+
+**Beads:** `think-0yo9`, under `think-siui`, and `think-31k1`.
+
+### F-19 (P1): the unrecognised singleton question is not identifiable from the stored artifact
+
+The PR offers two explanations for the unrecognised `n=5` singletons: legitimate
+higher-degree optima or incomplete convergence.
+Both are possible, but the dichotomy is incomplete.
+An unrecognised row may also be:
+
+- a coordinatewise stationary saddle or non-minimizing kink;
+- one sampled point on a positive-dimensional terminal component;
+- a quantization split or tolerance-induced duplicate of a recognised component;
+- a valid isolated local minimum whose side lies outside the recognizer’s bounded
+  quadratic-surd family; or
+- a numerical artifact that changes active cell, pose, or side under tighter solving.
+
+The checked-in golden stores a rounded side, contact count, angle-class sizes,
+frequencies, and booleans.
+The atlas stores hashes and the same coarse descriptors.
+Neither artifact retains the pose, active constraints, termination reason, residuals, or
+a content-addressed observation from which the alternatives can be tested.
+Rediscovery is evidence about proposal mass, not a convergence certificate.
+Conversely, [`closed_form.py`](../../../sqpack/closed_form.py) searches only a finite
+family `(p + q sqrt(d))/r`; a match is a heuristic clue, and a miss says only that this
+family did not match.
+
+**Required repair:** preserve every pose and active set, then replay each singleton
+through a preregistered precision and budget ladder.
+Require independent validity, complete free sweeps, active-set stability, identity
+stability, and a coupled directional or KKT residual before calling it stationary.
+Detect nullity as in F-18. For isolated candidates, solve the active equations at high
+precision, reconstruct the candidate field, and use interval Newton or a Krawczyk-style
+test plus second-order or feasible-direction checks where available.
+Emit one of `censored`, `unresolved duplicate`, `nonisolated stationary component`,
+`isolated stationary candidate`, `certified local minimum`, or `exactly promoted`. Do
+not promote “unrecognised singleton” itself to a scientific class.
+
+**Beads:** `think-aans`, under `think-31k1`, plus `think-zcx4` and `think-n4f6`.
+
+### F-20 (P0): D-021’s side-error floor is being used as a basin-resolution theorem
+
+D-021 says the floating LP can perturb the reported **side** by roughly `1e-11`. It does
+not say that two terminal configurations whose sides differ by more than that are
+different, or that two configurations whose sides differ by less are the same.
+The current system nevertheless makes that inference in three places:
+
+- [`canonical.py`](../../../sqpack/canonical.py) says its `1e-6` pose quantum is far
+  below every real basin distinction because real basins differ in side by `1e-3` or
+  more;
+- [`atlas.py`](../../../sqpack/atlas.py) calls the minimum scalar side gap the number
+  that determines whether two rows are resolvable; and
+- [`atlas.schema.yaml`](../../../atlas/atlas.schema.yaml) gives `closest_pair` the same
+  interpretation.
+
+The project’s own data refutes the premise.
+The stacked `n=5` golden contains two distinct rows at the identical serialized side
+`2.767766953`, while the `n=3` family in F-18 contains continuously many configurations
+with side exactly `2`. Independently, the identity pipeline uses a `1e-6`
+coordinate/angle quantum and a `1e-9` contact tolerance, neither derived from D-021. A
+scalar objective gap therefore cannot calibrate a high-dimensional equivalence relation.
+
+**Required repair:** keep the minimum side gap only as `closest_side_gap`, a descriptive
+statistic with no identity authority.
+Add quotient-space pose distance, active/contact-set comparison, repeat-run variation,
+and interval enclosures for side and pose.
+Sweep solver tolerances, quench budgets, contact tolerances, and geometric quantums;
+look for a stable component partition rather than choosing one magic epsilon.
+Represent unresolved pairwise equality as an ambiguity graph and publish lower and upper
+component counts until interval separation or continuation resolves it.
+
+**Bead:** `think-3szr`, under `think-siui`.
+
+### F-21 (P0): “record-basin rarity” has no distribution-free estimand
+
+A basin frequency is conditional on an entire measurement regime.
+For proposal measure `P`, deterministic quench `Q`, and terminal equivalence `E`, the
+frequency estimates the probability that `Q` maps a `P`-draw into one `E`-class.
+Change the coordinate parameterization, initial container size, feasibility
+conditioning, repair operator, annealing schedule, quench tie-break, or equivalence
+relation and the probability changes.
+There is no intrinsic “uniform over configurations” measure that makes these choices
+disappear.
+
+The current proposer samples centres uniformly from `[0.5, side-0.5]`, angles uniformly
+from one quarter turn, and uses an initial side selected from the proved value plus
+`0.6` or from `ceil(sqrt(n)) + 0.6`. It permits overlap and can place rotated squares
+through the wall. That is a legitimate raw-coordinate baseline once versioned, but it is
+not invariant to parameterization and is not the landscape’s unique null.
+The atlas does not store its definition or digest, and H-012’s `regime` says only “same
+multistart distribution and polish backend.”
+Merging frequencies across a changed box or quench would silently change the estimand.
+
+The PR description’s `n=5` sample cannot carry the stronger inference.
+Its `1/12` record-to-`4/12` modal ratio is `0.25`, above H-012’s registered `0.1` accept
+threshold; twelve draws give broad uncertainty; and H-012 is registered at `n=10,11`,
+not `n=5`. More importantly, those twelve events are not preserved at the current head.
+
+**Required repair:** retain raw uniform multistart as a named baseline arm, not “the
+null.” Version the proposal density, initial-side rule, feasibility/repair rule,
+random-number generator, `Q`, and `E` in every event and atlas shard.
+At equal exact pair-test budgets, compare raw uniform, feasible-conditioned or repaired,
+space-filling, record-neighbour, continuation/surgery, and annealer-endpoint measures.
+Report per-regime frequencies, exact or weighted confidence intervals, censoring, and
+effective sample size; use importance weights only when the proposal densities are
+known. H-012 must be rewritten as a proposer-specific claim, and rigidity/contact
+correlations must be a separate held-out model rather than inferred from the same
+frequency ratio.
+
+**Beads:** `think-apwt`, under `think-rrht`, plus `think-843f` and `think-3b3s`.
+
 ## Key omissions
 
 ### O-01: there is no executable geometry corpus for the common values of n
@@ -1295,15 +1501,26 @@ Where an older bead already owns implementation—canonicalization, atlas, pair-
 meter, source acquisition, promotion, proposer work—the child explicitly requires
 reconciliation rather than creating a second authoritative plan.
 
+The four questions added to the PR description are tracked as narrower children of the
+relevant remediation beads, not as a second epic:
+
+| PR-description ambiguity | Bead | Parent | Acceptance boundary |
+| --- | --- | --- | --- |
+| Non-isolated basin definition | `think-0yo9` | `think-siui` | Component count is invariant to quantum on the exact `n=3` sliding family |
+| Unrecognised singleton classification | `think-aans` | `think-31k1` | Every endpoint receives an evidence-based promotion class from a retained pose |
+| Numerical identity versus D-021 | `think-3szr` | `think-siui` | Counts carry calibrated ambiguity bounds; scalar side gap has no identity authority |
+| Proposer-conditioned null | `think-apwt` | `think-rrht` | H-012 names `P`, `Q`, and `E`; multiple proposal measures are compared at equal budget |
+
 ## Changes applied on the stacked review branch
 
 The review branch fixes issues whose correct resolution does not depend on a research
 choice:
 
-- The branch is rebased onto PR #14’s current head, `c412b8c`. Two rounds of conflicts
-  across the README, timed gate, defect ledger, synopsis, handoff plan, atlas, golden,
-  and negative-control catalogue were resolved semantically.
-  Merged PR #14’s D-031 through D-035 remain intact; review findings use D-036 and D-037.
+- The branch is rebased onto merged `main` at `8926a7c`, including final PR #14 source
+  head `f9f119a`. Conflicts across the README, timed gate, defect ledger, synopsis,
+  handoff plan, atlas, golden, and negative-control catalogue were resolved
+  semantically. Merged PR #14’s D-031 through D-035 remain intact; the review’s earlier
+  fixes are D-036/D-037 and the final ambiguity delta is D-038 through D-042.
 - `campaign/runner.py` now applies one result-line validator both before archival and
   during replay, rejects non-finite or malformed fields and undeclared cells or seeds,
   and releases a round instead of recording it after a guard refusal.
@@ -1335,6 +1552,16 @@ choice:
   theorem to `m=3…7`; the `n=17` note reports the polynomial evaluation that favours the
   catalogue decimal; and the synopsis and handoff carry the correct gap rank, round
   count, and hypothesis count.
+- The final description-only delta now has four explicit dispositions, four executable
+  ambiguity beads, and exact `n=3` evidence that the current endpoint hashes split a
+  connected optimal family.
+- Canonicalizer, atlas, schema, closed-form-recognition, census, and H-012 prose now
+  distinguish endpoint clusters from terminal components, scalar side precision from
+  identity resolution, recognition from convergence, and proposer-specific frequency
+  from an intrinsic landscape probability.
+- Living tier, rigidity, and campaign docs no longer call a floating-point LP endpoint
+  exact, infer terminal dimension from raw contact counts, equate a one-angle kink with
+  full rigidity, or use the open `n=12` instance as a known-answer negative control.
 
 Before the second upstream advance, the source-locked golden passed its atomic update
 path and a subsequent read-only rebuild.
@@ -1348,6 +1575,16 @@ convergence in twelve to six in six; strict mode now runs it.
 `campaign/runner.py preflight` and the focused canonical and regression checks also
 pass.
 
+After PR #14 merged and this branch was rebased onto `8926a7c`, the first post-merge
+checkpoint passed the full normal gate in 162 seconds: exact verification, the
+independent LP reconstruction, source build and lint, canonical and atlas checks, all 21
+negative controls, historical regressions, the soundness perimeter, all 42 defect
+entries and generated views, bead-tree consistency, synopsis/README reconciliation,
+search self-tests, differential validity, provenance, and campaign-ledger validation.
+The two negative-control anchors initially drifted after the documentation corrections;
+the gate failed by name, their stable anchors were repaired, and both were observed to
+fire before the successful run.
+
 No remediation bead is closed by these partial fixes.
 In particular, the runner still trusts a producer-reported scalar overlap rather than a
 stored pose checked independently; contact canonicalization still has order-dependent
@@ -1355,20 +1592,24 @@ angle clustering and factorial worst-case search; and the atlas, fixed-angle sem
 criterion evaluators, exact-promotion path, event record, and statistical contract
 remain open.
 
-## Recommended disposition of PR #14
+## Post-merge operating disposition
 
-Keep the PR open as a prototype branch, but do not merge it as an unattended-run
-capability. The minimum merge gate is:
+PR #14 has merged and is now the stable prototype base.
+Treat its unattended census as blocked until this operational gate is satisfied:
 
 1. F-01/F-02 fixed with an adversarial archive and fake-overlap control;
 2. both canonical keys invariant under D4 and relabelling, with bounded runtime;
 3. non-converged observations excluded from basin counts;
-4. event order and regime provenance persisted;
-5. H-011/H-012 evaluators implemented or the overnight claims removed;
-6. fixed-angle semantics corrected;
-7. `n=12` removed as a negative control;
-8. atlas, golden, and regression checks hermetic, wired, and green under strict CI; and
-9. the README, synopsis, handoff, and plan regenerated or corrected.
+4. isolated endpoints distinguished from connected terminal components, with the exact
+   `n=3` sliding family passing a quantum-invariance regression;
+5. event order and full proposer/quench/equivalence regime provenance persisted;
+6. unrecognised endpoints classified from retained poses rather than side strings;
+7. numerical identity calibrated independently of D-021’s scalar side floor;
+8. H-011/H-012 evaluators implemented with uncertainty, or the overnight claims removed;
+9. fixed-angle semantics corrected;
+10. `n=12` removed as a negative control;
+11. atlas, golden, and regression checks hermetic, wired, and green under strict CI; and
+12. the README, synopsis, handoff, and plan regenerated or corrected.
 
 Until then, supervised exploratory runs are acceptable only if their raw stdout and full
 poses are retained and their results are labelled untrusted screen data.
