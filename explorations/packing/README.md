@@ -82,8 +82,7 @@ error looks like a success.
 The automated gate has caught **one** of the 26 and **none** of the 6: every soundness
 failure was found by a control cell whose answer was known in advance, a rule written
 down before the measurement, a generated view contradicting its source, or someone
-reading carefully.
-And 6 fixes left no regression check behind, which is why one of them
+reading carefully. And 6 fixes left no regression check behind, which is why one of them
 ([D-017](defects.md)) is a verbatim repeat of an earlier one.
 (Counts as of 2026-08-23; [`defects.md`](defects.md) is the live tally, and
 [the synopsis](SYNOPSIS.md#the-defect-record) carries the per-class breakdown,

@@ -187,6 +187,16 @@ fine — as long as it never gets to say what is valid.
 canonicalizes, decides validity, or writes the atlas, so a new strategy cannot change
 what a basin means.
 
+**The vocabulary is fixed, and one word is overloaded.** [convention]
+[`SYNOPSIS.md`](SYNOPSIS.md#terminology) defines every term this directory uses in a
+narrow sense — quench, basin, polish, exploration, gap, tier, pair-test and the rest —
+and those definitions are the ones that apply in artifacts, beads and reviews.
+The one collision worth memorising: **“cell” alone always means a cell of configuration
+space** — a choice of separating axis and order for each pair — and a position in the
+sweep is an **“instance cell”**, never a bare “cell”.
+The two are unrelated objects and the confusion is expensive: one is where the LP is
+solved, the other is what a round is run on.
+
 ## 9. Code and docs
 
 **Python first; accelerate what a profile says is slow, not what looks slow.**
@@ -228,7 +238,8 @@ Markdown link. This project has needed that twice.
     narrative link resolving, every cited defect id existing, and the generated view in
     sync with `defects.yaml`
 11. The bead tree: no open bead under a closed parent, and no two open beads under one
-    parent sharing a title. Skipped, loudly, where no `tbd-sync` store is reachable
+    parent sharing a title.
+    Skipped, loudly, where no `tbd-sync` store is reachable
 12. `SYNOPSIS.md` reconciled against the artifacts: round verdicts, hypothesis statuses,
     round and effort totals, defect counts per class, nothing silently missing, and
     every relative link and heading anchor resolving

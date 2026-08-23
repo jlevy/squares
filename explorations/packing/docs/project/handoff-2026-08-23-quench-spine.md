@@ -78,9 +78,8 @@ whole cartography programme rests on, deliberately made cheap to kill.
   one artifact per round, and a generated `ledger.md`. Never hand-edit the ledger.
 - **What has gone wrong**: [`defects.md`](../../defects.md), generated from
   `defects.yaml` — every defect with what caught it and what stops it recurring.
-  The counts live there and in
-  [the synopsis](../../SYNOPSIS.md#the-defect-record), which is reconciled against the
-  same source; do not retype them here.
+  The counts live there and in [the synopsis](../../SYNOPSIS.md#the-defect-record),
+  which is reconciled against the same source; do not retype them here.
 - **The strategy**:
   [the search-philosophy report](research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
   says where search effort should point and why; the
