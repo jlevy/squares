@@ -24,12 +24,14 @@ An experiment is a COMMAND declared in its hypothesis artifact; the harness subs
 `{n}` and `{seed}`, runs it, archives what it prints, and enforces one contract:
 
   1. print JSON Lines to stdout;
-  2. carry `best_side` on every result line;
+  2. carry `best_side`, `n` and `seed` on every result line;
   3. carry `overlap` (or `best_overlap`) on those lines, and it must be exactly 0;
   4. exit 0.
 
-The seed's result is the **minimum** `best_side` over its lines -- so nothing has to
-agree about which line is the summary.
+A seed's result is the **minimum** `best_side` over its own lines. Carrying `n` and
+`seed` is what makes that grouping exact: nothing has to agree about which line is the
+summary, and a seed printing a different number of lines than its neighbour changes
+nothing.
 
 Adding an experiment never edits this file. Writing new experiment code is expected;
 writing new harness code per round is the error-prone thing this design removes, because
@@ -87,8 +89,26 @@ class RefusalError(Exception):
     """Something the harness may not decide. Ends the step for a human."""
 
 
+GATE_MARKER = ROOT / ".gate-running"
+
+
 def now() -> datetime:
     return datetime.now(UTC)
+
+
+def refuse_if_gate_running() -> None:
+    """The gate and the harness must never overlap.
+
+    `tools/negctl.py` corrupts tracked files IN PLACE to watch each guard fire, and
+    restores them afterwards. Anything reading those files meanwhile sees the corruption
+    -- observed here as a step failing on a dead link to a hypothesis that never existed.
+    A spurious failure is the good outcome; a spurious pass is the other one.
+    """
+    if GATE_MARKER.exists():
+        raise RefusalError(
+            "test.sh is running, and it mutates tracked files in place while it does. "
+            f"Wait for it, or delete {GATE_MARKER.name} if a crash left it behind."
+        )
 
 
 def front(path: Path) -> dict[str, Any]:
@@ -156,6 +176,7 @@ def queue() -> tuple[list[tuple[str, dict[str, Any]]], list[tuple[str, str]]]:
     Nothing is dropped silently: a queue that shrinks without saying why is how a night
     ends with two rounds and no explanation.
     """
+    refuse_if_gate_running()
     recorded = [e for _, e in all_rounds()]
     runnable: list[tuple[str, dict[str, Any]]] = []
     skipped: list[tuple[str, str]] = []
@@ -226,6 +247,7 @@ def claim(hid: str, operator: str, hours: float) -> str:
     The stub is the crash evidence. Killed outright, this leaves a claimed round with a
     lease rather than silence, and the ledger surfaces that as a stale claim.
     """
+    refuse_if_gate_running()
     if stuck := [e["id"] for _, e in all_rounds() if e["verdict"]["decision"] == "in-progress"]:
         raise RefusalError(
             f"{stuck} already in progress: another session is live, or one died. "
@@ -285,6 +307,8 @@ def read_lines(stdout: str, fh: Any) -> float | None:
             continue
         if "overlap" not in rec and "best_overlap" not in rec:
             raise GuardError("a result line carries best_side but no overlap")
+        if "n" not in rec or "seed" not in rec:
+            raise GuardError("a result line carries best_side but no n and seed")
         if float(rec.get("overlap", rec.get("best_overlap"))) != 0.0:
             raise GuardError("a result line carries a non-zero overlap: the run is invalid")
         side = float(rec["best_side"])
@@ -352,41 +376,23 @@ class Cell:
 def cells_from(archive: Path, recipe: dict[str, Any]) -> list[Cell]:
     """Rebuild the per-cell results from the archive alone.
 
-    The archive carries no cell label, so the seeds are attributed in the order they were
-    run: recipe cells x recipe seeds. That is the same order `execute` writes them in, and
-    a short archive simply yields short cells, which `decide` then refuses on the evidence
-    clause rather than papering over.
+    Every result line carries its own `n` and `seed`, so the grouping is exact: no
+    guessing which line is a summary, no assuming each seed printed the same number of
+    lines. A seed's result is the minimum over its own lines; a cell's seeds are however
+    many actually finished, which `decide` then checks against the declared count.
     """
-    sides: list[float] = []
+    by_cell: dict[int, dict[int, float]] = {}
     for line in archive.read_text().splitlines():
         if not line.strip():
             continue
         rec = json.loads(line)
-        if "best_side" in rec:
-            sides.append(float(rec["best_side"]))
+        if "best_side" not in rec:
+            continue
+        n, seed, side = int(rec["n"]), int(rec["seed"]), float(rec["best_side"])
+        seen = by_cell.setdefault(n, {})
+        seen[seed] = min(seen.get(seed, side), side)
 
-    per_seed: list[float] = []
-    seeds = recipe["seeds"]
-    # Every invocation's lines are contiguous; the seed's result is the min over them.
-    # Group by the n each record reports, which every engine here already emits.
-    by_n: dict[int, list[float]] = {}
-    for line in archive.read_text().splitlines():
-        if not line.strip():
-            continue
-        rec = json.loads(line)
-        if "best_side" in rec and "n" in rec:
-            by_n.setdefault(int(rec["n"]), []).append(float(rec["best_side"]))
-    if by_n:
-        out = []
-        for n in recipe["cells"]:
-            vals = by_n.get(n, [])
-            chunk = max(1, len(vals) // max(1, len(seeds)))
-            out.append(
-                Cell(n, [min(vals[i : i + chunk]) for i in range(0, len(vals), chunk)] or [])
-            )
-        return [c for c in out if c.sides]
-    per_seed = sides
-    return [Cell(recipe["cells"][0], per_seed)] if per_seed else []
+    return [Cell(n, sorted(by_cell[n].values())) for n in recipe["cells"] if by_cell.get(n)]
 
 
 def control_breaches(cells: list[Cell]) -> list[str]:
@@ -450,6 +456,7 @@ def decide(h: dict[str, Any], cells: list[Cell]) -> dict[str, Any]:
 
 def record(eid: str, *, operator: str) -> str:
     """Read the archive, decide, write the round, regenerate the views, commit."""
+    refuse_if_gate_running()
     path, stub = find_round(eid)
     hid = stub["hypotheses"][0]
     h = hypothesis(hid)
@@ -651,12 +658,24 @@ def preflight() -> int:
         except GuardError as e:
             checks.append((label, True, str(e)))
 
-    guard_refuses("a non-zero overlap is refused", '{"best_side": 3.9, "overlap": 1e-9}')
-    guard_refuses("a result line with no overlap is refused", '{"best_side": 3.9}')
+    guard_refuses(
+        "a non-zero overlap is refused",
+        '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 1e-9}',
+    )
+    guard_refuses(
+        "a result line with no overlap is refused",
+        '{"n": 11, "seed": 1, "best_side": 3.9}',
+    )
+    guard_refuses(
+        "a result line with no n and seed is refused",
+        '{"best_side": 3.9, "overlap": 0}',
+    )
     guard_refuses("a non-JSON line is refused", "not json at all")
 
     best = read_lines(
-        '{"best_side": 3.9, "overlap": 0}\n{"best_side": 3.7, "overlap": 0}', Sink()
+        '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 0}\n'
+        '{"n": 11, "seed": 1, "best_side": 3.7, "overlap": 0}',
+        Sink(),
     )
     checks.append(("a seed's result is the min over its lines", best == 3.7, f"got {best}"))
 

@@ -210,56 +210,67 @@ into this claim” is a generated number rather than an impression.
 
 Two ways, and the difference is who is watching.
 
-### Unattended — [`runner.py`](runner.py)
+### With the harness — [`runner.py`](runner.py)
+
+Each step does one thing, the same way, always.
+An agent drives them; nothing here needs a human awake.
 
 ```bash
 cd explorations/packing
-./test.sh --strict                       # must be clean before the night starts
-uv run python campaign/runner.py --dry-run                    # what would run, and what would not
-uv run python campaign/runner.py --session-hours 8 --operator <name>
+./test.sh --strict                                   # must be clean before a night starts
+uv run python campaign/runner.py status              # queue, in-progress, last session
+uv run python campaign/runner.py preflight           # fire every guard and report
+
+uv run python campaign/runner.py claim H-020         # -> exp-011
+uv run python campaign/runner.py execute exp-011     # run the declared command, archive it
+uv run python campaign/runner.py record  exp-011     # decide, write the round, commit
+
+uv run python campaign/runner.py run --session-hours 8   # the middle three, over the queue
 ```
 
-The runner claims an id under a lock, writes the in-progress artifact with a lease, runs
-the recipe, applies the guards, decides under the accept rule, records the round
-whatever happened, regenerates the views and commits — then repeats until a stop
-condition fires. It exits non-zero on an abnormal stop and always writes
-`session-report.md`, which leads with what needs a human.
+**State lives on disk, never between steps.** `claim` writes the stub, `execute` appends
+to the archive beside it, `record` reads that archive back.
+So a step that fails loses nothing: fix what it named and re-run *that step*, not the
+session. `execute` truncates its archive first, so re-running it never double-counts.
 
-Two things it will not do, by design:
+`runner.py release exp-011 --why "..."` gives up a round that died, recording it as
+`unresolved` rather than deleting it, and returns its hypothesis to the queue.
 
-- **It never writes `accepted`.** Clause 5 is a judgment, and an unwatched runner may
-  apply it only in the conservative direction.
-  A round that passes clauses 1–4 is recorded `unresolved` with `needs_review: true` and
-  waits for you.
-- **It never runs a hypothesis without a `runner` recipe.** `instrument` is prose for a
-  human; `runner` is the machine-readable form.
-  A hypothesis carrying only the former is reported in the session report as needing an
-  operator, never improvised into a command.
+Two refusals worth knowing, because they are structural rather than advisory:
 
-Before the first unattended night on a new machine, run the pre-flight — it executes the
-eight steps from
-[`unattended.md`](../../../.agents/skills/experiment-loop/references/unattended.md),
-including racing the id allocator with 32 concurrent processes:
+- **The harness cannot write the accepting verdict.** Clause 5 is a judgment, and an
+  unwatched runner may apply it only in the conservative direction.
+  A round passing clauses 1–4 is recorded `unresolved` with `needs_review: true` and
+  waits for you. There is no code path that does otherwise, and `preflight` checks that
+  there is not.
+- **A hypothesis without a `runner` recipe is never run.** `instrument` is prose for a
+  human; `runner.command` is the machine-readable form.
+  A hypothesis carrying only the former is reported as needing an operator, never
+  improvised into a command.
+
+#### The experiment contract
+
+The harness holds no experiment code and an experiment holds no harness code.
+An experiment is a **command** declared in its hypothesis, run once per `{n}` and
+`{seed}`, which must print JSON Lines carrying `best_side` and an `overlap` of exactly
+zero on every result line, and exit 0. The seed’s result is the *minimum* `best_side`
+over its lines, so nothing has to agree about which line is the summary.
+
+Adding an experiment therefore never edits `runner.py`. Writing new experiment code is
+expected; writing new harness code per round is the error-prone step this removes,
+because it is code that runs once, at 3am, having never been exercised.
+
+#### Before the first night on a new machine
 
 ```bash
-uv run python campaign/runner.py --rehearse
+uv run python campaign/runner.py preflight
 ```
-
-Run it **on the filesystem the campaign will actually live on**, not only on a local
-disk.
-Step 1 races the real id allocator with 32 concurrent processes, and it is there to
-catch exactly the case where a shared or synced volume does not give the allocator what
-it assumes. The reservation is an atomic `mkdir` rather than an advisory lock for that
-reason — `flock` is local-only over NFS on older kernels and unreliable over SMB and
-VM-shared mounts, and it fails by letting two runners both believe they hold it — but a
-filesystem is still the kind of thing to check rather than trust.
 
 **The regime is part of the result.** `moves` is the budget unit and the engine is
 deterministic in its seed, so `best_side` reproduces across machines; wall clock does
 not. Measured 2026-08-23: ~40M moves/s on the M1 Pro of the recorded regime, ~14.9M on a
-4-core cloud container.
-Size a timebox against the machine you are actually on, and let the artifact record the
-host it ran on rather than the host the hypothesis was registered against.
+4-core cloud container at `n = 11` and ~9.9M at `n = 17`. Size a timebox against the
+machine you are actually on.
 
 ### Watched — by hand
 
@@ -346,7 +357,7 @@ campaign/
     README.md            the series artifact: goal, instrument, why it exists
     experiments/         exp-NNN, one per round
     results/             raw JSONL from the engine
-  runner.py              the unattended runner: claims, runs, guards, records, reports
+  runner.py              harness steps: status, preflight, claim, execute, record, run
   ledger.py              regenerates ledger.md and runs the whole-set checks
   ledger.md              generated; never hand-edited
   session-report.md      generated by runner.py, one per unattended session

@@ -45,7 +45,7 @@ hypothesis:
 
 ## Why this cell and not another
 
-The campaign's ladder is `n = 5` and `n = 10`, and both are **45° mechanisms**:
+The campaign’s ladder is `n = 5` and `n = 10`, and both are **45° mechanisms**:
 symmetric arrangements that blind search reaches without help.
 `n = 12` is the trivial grid.
 So every control the campaign runs validates *machinery* — that the engine can descend,
@@ -54,12 +54,12 @@ thing `n = 11` actually demands**, which is an oblique core at an irrational ang
 no proved case uses.
 
 `n = 17` is the nearest case whose record does.
-Bidwell's 1998 packing uses tilts of `0°` and `±40°`: two non-trivial orientations
-against a grid frame, structurally the same *kind* of object as Trump's, at a case that
+Bidwell’s 1998 packing uses tilts of `0°` and `±40°`: two non-trivial orientations
+against a grid frame, structurally the same *kind* of object as Trump’s, at a case that
 is cheap to run.
 
 The [synopsis](../../SYNOPSIS.md#the-lay-of-the-land-by-n) calls it the largest unforced
-gap in the campaign's coverage, and the
+gap in the campaign’s coverage, and the
 [runbook](../README.md#subject-and-the-instance-axis) has carried it in the declared
 instance axis since the campaign opened.
 It has never been run.
@@ -71,29 +71,32 @@ worth saying explicitly.
 
 - **If the annealer reaches `s(17)`** — the engine can find an oblique record when one
   exists. Then the `n = 11` failure is about `n = 11` specifically: its basin is rarer,
-  or narrower, or its angle is less forgiving. That localises the problem and makes
-  [H-012](H-012-record-basins-are-rare.md)'s rarity measurement the right next question.
+  or narrower, or its angle is less forgiving.
+  That localises the problem and makes [H-012](H-012-record-basins-are-rare.md)’s rarity
+  measurement the right next question.
 - **If it does not** — the engine is *structurally* blind to oblique records, and the
-  `n = 11` result was never about `n = 11`. That is a much stronger statement, it applies
-  to every open case in the corpus whose record is oblique, and it is direct support for
-  the cartography premise: no amount of budget on this proposer reaches this class of
-  optimum, so the proposer has to change.
+  `n = 11` result was never about `n = 11`. That is a much stronger statement, it
+  applies to every open case in the corpus whose record is oblique, and it is direct
+  support for the cartography premise: no amount of budget on this proposer reaches this
+  class of optimum, so the proposer has to change.
 
 The second is the prediction.
-A single seed at 40% of the round's budget already returned **exactly `5.000000000`** —
-the trivial `5×5` grid, `+0.324` from Bidwell — meaning the search did not leave the grid
-basin at all. Recorded here, before the round, so that if the full sweep agrees it counts
-as a confirmed prediction rather than a story told afterwards.
+A single seed at 40% of the round’s budget already returned **exactly `5.000000000`** —
+the trivial `5×5` grid, `+0.324` from Bidwell — meaning the search did not leave the
+grid basin at all. Recorded here, before the round, so that if the full sweep agrees it
+counts as a confirmed prediction rather than a story told afterwards.
 
 ## What this does not claim
 
 Not that `s(17) = 4.67553…`. That case is **open**, and the standing best is an upper
-bound like any other. The criterion is reaching the standing best, not proving it optimal.
+bound like any other.
+The criterion is reaching the standing best, not proving it optimal.
 
-Nor does a failure here identify *which* part of the proposer is blind — the move set, the
-cooling schedule, or the absence of any angle-class structure. It says the composite does
-not find this class of optimum. Separating those is
-[H-001](H-001-angle-class-reduction.md)'s job and needs an instrument that does not exist.
+Nor does a failure here identify *which* part of the proposer is blind — the move set,
+the cooling schedule, or the absence of any angle-class structure.
+It says the composite does not find this class of optimum.
+Separating those is [H-001](H-001-angle-class-reduction.md)’s job and needs an
+instrument that does not exist.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
