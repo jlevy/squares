@@ -50,6 +50,12 @@ Records are rigid; rigid optima live in rare basins; so scaling a volume-weighte
 sampler multiplies effort against a probability the problem drives toward zero.
 The response is cartography: **the map is the deliverable and records are corollaries.**
 
+**Amended 2026-08-23.** The premise says records are rigid, which means it has always
+implied that other optima may not be. Non-rigid optima are **flat basins** — families,
+not points — and a map that counts them as basins is counting its own quantizer. See
+[D-034](../../defects.md); this is a precondition on the deliverable, not a detail of
+its implementation.
+
 ## What has been codified so far
 
 | Registry entry | Source |

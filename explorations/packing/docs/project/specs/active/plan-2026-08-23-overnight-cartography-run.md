@@ -125,8 +125,17 @@ So the sequence is now:
 4. ~~**The validation suite**~~ — done, and it earned its place immediately: it found
    [D-031](../../../../defects.md) at `n = 3` on its first run. See
    [Validating the tools](#validating-the-tools-before-trusting-them)
-5. **`multistart`, the uniform null proposer** — next
-6. The recipe, the handover gate, the night
+5. **[D-034](../../../../defects.md), found by the validation suite at `n = 5`** — basin
+   identity is ill-posed for **flat basins**: optima the contacts do not fully pin, which
+   are families rather than points. A census counts their members. **This blocks Half B**
+   (`think-1s0h`). The route is to *measure* flatness before choosing a definition — in
+   LP terms a flat optimum is a cell whose program has a non-unique optimal face, which
+   the solver can be asked about where the quench already runs
+6. **[D-035](../../../../defects.md)** — an interrupted `negctl` leaves its deliberate
+   sabotage in the tree, and a cadence-committing session would commit it. Must be fixed
+   before any unattended night (`think-97pp`)
+7. `multistart`, the uniform null proposer
+8. The recipe, the handover gate, the night
 
 ## Validating the tools before trusting them
 
@@ -372,9 +381,38 @@ tbd list --spec explorations/packing/docs/project/specs/active/plan-2026-08-23-o
   degree, symmetry group, neighbour links with merge-delta. Degree is the one that bears
   on an open question here, since it would separate a legitimately unrecognised
   higher-degree optimum from an unconverged one
+- `think-97pp` — [D-035](../../../../defects.md), the `negctl` residue. Blocking for the
+  night, listed here as well because it is infrastructure rather than cartography
+
+### Why the flat-basin problem surfaced this late
+
+Worth recording, because the answer is about documents rather than about code. Every
+piece of it was already written down, in three places that never met:
+
+- the **glossary** defined rigidity, but only ever attributed it to Trump's packing — a
+  property records happen to have, rather than one an arbitrary optimum may lack;
+- the **basin** definition said "the preimage of one quench *endpoint*", which silently
+  presumes the endpoint is a point, and never stated that as a precondition;
+- the **strategy premise** is literally *"records are rigid; rigid optima live in rare
+  basins"* — a sentence whose own construction presupposes that non-records may be
+  non-rigid, and which never asked what those do to a census that counts basins.
+
+Nobody had to discover anything to join those up. The fix is therefore also documentary:
+the precondition now lives on the definition, "flat basin" is a defined term beside
+rigidity, the premise states its own contrapositive, and the research doc's claim that
+minima are *discrete* is corrected in place rather than quietly reworded. See the
+[terminology section](../../../../SYNOPSIS.md#terminology).
 
 ### The handover
 
+- [ ] **[D-034](../../../../defects.md) resolved** — the census cannot start before basin
+  identity means something. This is not a checklist item that can be waived on the night:
+  a census run against the current definition produces a number that is wrong in the
+  flattering direction and looks fine
+- [ ] **[D-035](../../../../defects.md) fixed** — an interrupted gate currently leaves a
+  deliberately-subtle sabotage in the working tree. A session that commits on a cadence
+  will commit it. This is the one item on this list that can corrupt the *repository*
+  rather than a measurement
 - [ ] Run the handover gate above; do not proceed on a partial pass
 
 ### Half B — run (unattended)
@@ -404,6 +442,14 @@ A guard nobody has seen fire is not yet evidence.
   that are genuinely distinct?** Two basins closer than the floor are currently
   indistinguishable. At small `n` this is probably harmless; the census is the thing that
   would show it is not, and the atlas should record the closest pair it saw.
+- **Is "basin" even well-posed where the optimum is not rigid?** No longer an open
+  question in the abstract — it is [D-034](../../../../defects.md), measured at `n = 5`.
+  An optimum pinned by fewer constraints than it has degrees of freedom is a
+  positive-dimensional family, and every member of it is a different point with the same
+  side and the same contact graph. At `n = 3` the same thing is starker: three unit
+  squares in a `2 × 2` box have slack, so the optimal set is a continuum and the reported
+  basins are samples of it. Whatever the census ends up counting has to be a thing that
+  exists, and right now the count is of quantizer cells rather than of optima.
 - **Is uniform multistart the right null?** It is the standard one, and it is what makes
   the discovery curve interpretable.
   But the container-side distribution it samples from is a choice, and the census

@@ -235,6 +235,12 @@ def build() -> tuple[dict, list[str]]:
                     "contacts": basin.contact_count,
                     "angle_classes": list(basin.angle_signature),
                     "quench_frequency": basin.quench_frequency,
+                    # Of those, how many proved convergence. THE field that separates an
+                    # established optimum from an interrupted descent, and the one whose
+                    # absence let D-030 record twelve stopping points as twelve basins.
+                    # A row with 0 here is a stopping point; the map must say so itself,
+                    # because the header's census-wide total cannot say WHICH row.
+                    "converged_frequency": basin.converged_frequency,
                     "valid": report.valid,
                 }
             )
@@ -271,6 +277,17 @@ def build() -> tuple[dict, list[str]]:
         "golden": {
             "note": "Rebuilt by tools/golden_basins.py. Sides to 12 decimals, which is "
             "above the polished tier's 1e-11 floor (D-021).",
+            "how_to_read_a_basin_row": (
+                "A row is an ESTABLISHED optimum when converged_frequency > 0 and "
+                "closed_form is non-null. A row with converged_frequency 0, or with no "
+                "closed form and a low contact count, is more likely an interrupted "
+                "descent than a local optimum -- see D-030, where exactly that confusion "
+                "passed every structural check. distinct_basins counts ROWS, so it is an "
+                "upper bound on the number of real basins, never a measurement of it. "
+                "At small n the count is not even well-posed: at n = 3 the optimum has "
+                "slack, so the optimal set is a continuum rather than isolated points, "
+                "and what the quantizer reports there is a sample of that continuum."
+            ),
             "side_decimals": SIDE_DECIMALS,
             "convergence_ladder": rungs,
             "cases": cases,

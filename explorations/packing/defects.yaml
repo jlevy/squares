@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 33
+count: 35
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -831,4 +831,87 @@ defects:
     to coincide with an in-progress round.
   regression: none
   bead: think-5zwm
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-034
+  title: Basin identity is ill-posed for non-rigid optima, so the census counts family members
+  date: '2026-08-23'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: >-
+    since sqpack/canonical.py was written -- found by reading the n = 5 golden census,
+    which is the campaign's first census cell, and before any census was recorded
+  severity: high
+  status: outstanding
+  what: >-
+    Two rows of the n = 5 census are the same packing: side 2.767766952966 in both, the
+    same closed form `(4 + 5√2)/4`, the same contact certificate byte for byte, the same
+    angle signature and contact count. `Atlas.add` dedups on the tuple
+    `(geometric, contact)` and needs both to match, so it stores them separately. They
+    differ only in the geometric key, and not from float noise -- the angle steps are
+    identical, and the positions differ by 0.06 in x and 0.21 in y. The configuration is
+    NOT RIGID: four pair contacts and seven wall touches is 11 constraints against 5
+    squares × 3 DOF plus the side = 16, leaving five degrees of freedom. The optimum at
+    that side is a positive-dimensional FAMILY, not a point; different quenches land on
+    different members, and the geometric key encodes coordinates the optimum never
+    determined.
+  consequence: >-
+    `distinct_basins` counts family members. The discovery curve then cannot plateau, so
+    H-011's saturation criterion is unreachable and H-012's rarity ranking inherits the
+    inflation -- the same failure shape as D-030 from a different cause, and flattering
+    in the same two directions: the landscape reads as richer, and a record's basin reads
+    as rarer than it is. n = 3 shows the same thing more starkly: three unit squares in a
+    2 × 2 box have slack, so the optimal set is a continuum and the reported basins there
+    are samples of it rather than distinct optima.
+  fix: >-
+    none yet, and deliberately not rushed: this is the definition of the campaign's
+    central deliverable, not a code tweak. Three options are written up on the bead --
+    dedup on (contact certificate, side within the 1e-11 floor); canonicalize within the
+    family; or report families with their dimension as a field. Note that
+    `BasinKey.agrees_with` ALREADY names this case `same-arrangement-different-metric`
+    and its docstring already says it "is usually one basin the quantizer split" -- the
+    analysis existed and the store simply never consulted it.
+  regression: none
+  bead: think-1s0h
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-035
+  title: An interrupted negative-control run leaves its deliberate sabotage in the working tree
+  date: '2026-08-23'
+  layer: tooling
+  class: robustness
+  detected_by: anomaly
+  latent_for: >-
+    since negctl was built (D-023) -- hit for the first time on 2026-08-23, when a gate
+    run was interrupted mid-suite
+  severity: high
+  status: outstanding
+  what: >-
+    tools/negctl.py tests a guard by corrupting a tracked source file in place, running
+    the check, asserting it fails, and restoring the bytes in a `finally:` block.
+    `finally` covers exceptions; it does not cover SIGKILL, a killed process group, an
+    OOM, or a harness cancelling the tool call. A `./test.sh` interrupted during the
+    negative-controls step left the D-031 seam mutation in place -- `% steps` stripped
+    from `_quantize_angle` -- and the next gate run reported
+    `FAIL an angle one ULP below pi/2 keys as one at zero`, which reads exactly like a
+    regression in the code under test rather than like a dirty tree.
+  consequence: >-
+    The residue is the most dangerous possible thing to leave behind, because negative
+    controls are DESIGNED to be subtle and to point in the flattering direction: what
+    was sitting in the tree was precisely the basin-splitting bug the project had just
+    spent a day finding. `git add -A && git commit` would have committed it. An
+    unattended session that commits on a cadence therefore has a live path to shipping a
+    deliberate sabotage of basin identity behind a green-looking history, and the
+    misleading failure message costs an investigation on top.
+  fix: >-
+    none yet. Written up on think-97pp: a marker file recording the target, its checksum
+    and the control before mutating, restored-from and refused-on at startup (the
+    `.gate-running` pattern already in this repo); SIGINT and SIGTERM handlers as a
+    courtesy on top of it; the gate refusing to start while the marker exists; and
+    runner.py refusing to stage a file the marker names. The stronger fix is to mutate a
+    COPY and point the check at it, which removes the hazard rather than detecting it --
+    constrained by the rule that a check must import the real module rather than a
+    pasted copy.
+  regression: none
+  bead: think-97pp
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md

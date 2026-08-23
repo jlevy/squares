@@ -2,30 +2,30 @@
 
 # Defect log
 
-33 defects recorded across the packing toolchain.
+35 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **7 soundness defects** — the system asserting something false about the mathematics. 5 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **8 soundness defects** — the system asserting something false about the mathematics. 6 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
 - **9 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023).
-- **1 is still open** (outstanding or contained), every one carrying a bead.
+- **3 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
 | Detector | Count | What it is |
 | --- | ---: | --- |
 | `pre_registered_rule` | 1 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
-| `control_cell` | 6 | a cell of the sweep whose answer is known in advance |
+| `control_cell` | 7 | a cell of the sweep whose answer is known in advance |
 | `review` | 14 | a human or agent reading the work against a checklist |
-| `anomaly` | 3 | a result that made no sense, chased down |
+| `anomaly` | 4 | a result that made no sense, chased down |
 | `inspection` | 5 | reading the code or the design with intent |
 | `drift_check` | 2 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 1 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 1 of 33, and none of the 7 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 1 of 35, and none of the 8 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,16 +34,16 @@ The line worth reading twice: **the automated gate caught 1 of 33, and none of t
 | engine | 7 |
 | quench | 8 |
 | record | 14 |
-| tooling | 4 |
+| tooling | 6 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 7 |
+| soundness | 8 |
 | validity | 7 |
 | bookkeeping | 15 |
-| robustness | 3 |
+| robustness | 4 |
 | performance | 1 |
 
 ## Fixed, but nothing stops it coming back
@@ -68,6 +68,8 @@ This is the actionable list.
 | id | status | severity | title | bead |
 | --- | --- | --- | --- | --- |
 | D-021 | contained | medium | The polished tier has a noise floor, and eight rounds sit on it | `think-hg3u` |
+| D-034 | outstanding | high | Basin identity is ill-posed for non-rigid optima, so the census counts family members | `think-1s0h` |
+| D-035 | outstanding | high | An interrupted negative-control run leaves its deliberate sabotage in the working tree | `think-97pp` |
 
 ## Every defect
 
@@ -106,3 +108,5 @@ This is the actionable list.
 | [D-031](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | tooling | soundness | flattering | `control_cell` | high | fixed | Basin identity split an angle at the pi/2 seam, inflating counts near axis-aligned optima |
 | [D-032](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | record | bookkeeping |  | `review` | high | fixed | The in-progress stub was not schema-valid, so the recovery path corrupted the record |
 | [D-033](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | record | robustness |  | `review` | high | fixed | The ledger crashed on any in-progress round, so the gate could not run during a session |
+| [D-034](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | tooling | soundness | flattering | `control_cell` | high | outstanding | Basin identity is ill-posed for non-rigid optima, so the census counts family members |
+| [D-035](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | tooling | robustness |  | `anomaly` | high | outstanding | An interrupted negative-control run leaves its deliberate sabotage in the working tree |
