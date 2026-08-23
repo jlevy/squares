@@ -13,7 +13,11 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 STRICT="${GATE_STRICT:-0}"
-[ "${1:-}" = "--strict" ] && STRICT=1
+DEEP="${GATE_DEEP:-0}"
+for arg in "$@"; do
+  [ "$arg" = "--strict" ] && STRICT=1
+  [ "$arg" = "--deep" ] && DEEP=1
+done
 SKIPPED=()
 
 # tools/negctl.py corrupts tracked files IN PLACE to watch each guard fire, restoring
@@ -209,7 +213,19 @@ step "golden basin maps (proved cases, checked against mathematics)"
 # optimum, quench onto it, recognise the closed form, and have sqpack accept the packing
 # through code the quench does not share. A golden captured from a previous RUN would
 # only freeze whatever the code did that morning -- D-030 is what that would have frozen.
-$PY tools/golden_basins.py
+# Fast by default: the committed map already holds the sides, so re-deriving every
+# closed form and re-checking it against the proved s(n) costs milliseconds and still
+# refuses a golden edited to make a test pass -- the oracles are mathematics, so the
+# file cannot be adjusted into agreement with them. Regenerating by re-quenching is
+# 221 s and is what `--deep` is for; the runbook's handover gate requires it before an
+# unattended night. Verified against three tampering modes: a ladder value that does not
+# match the proved one, a gap below it, and a stored basin below it.
+if [ "$DEEP" = "1" ]; then
+  $PY tools/golden_basins.py --deep
+else
+  $PY tools/golden_basins.py
+  echo "  (fast path; ./test.sh --deep re-quenches and diffs the whole map)"
+fi
 
 step "basin atlas"
 # The census's output, and the guard that says whether the census measured the landscape

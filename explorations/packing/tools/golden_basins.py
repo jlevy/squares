@@ -287,10 +287,103 @@ def _normalised(cfg):
     return [a - lox for a in x], [b - loy for b in y], theta
 
 
+def verify_stored() -> tuple[dict, list[str]]:
+    """Re-check every mathematical oracle against the COMMITTED file, without re-running.
+
+    The expensive part of a golden is regenerating it; the assertions are cheap, because
+    the file already holds the sides. So the fast path re-derives the closed form of every
+    stored side, compares it against the proved `s(n)` read from `frontier/`, and checks
+    that no stored basin lies below a proved optimum -- in milliseconds, every run.
+
+    What this DOES catch, and it is the thing worth catching every time: a golden edited
+    to make a test pass. The oracles are mathematics, so the file cannot be adjusted into
+    agreement with them.
+
+    What it does NOT catch is a change in the tools that would produce a different map.
+    Only regeneration reaches that, which is why `--deep` exists and why the runbook's
+    handover gate requires it before an unattended night.
+    """
+    if not GOLDEN.exists():
+        return {}, [f"no golden at {GOLDEN.relative_to(ROOT)}; run with --update"]
+    doc = yaml.safe_load(GOLDEN.read_text())
+    problems: list[str] = []
+
+    for rung in doc["golden"]["convergence_ladder"]:
+        n = rung["n"]
+        proved = proved_side(n)
+        if proved is None:
+            problems.append(f"n={n}: on the ladder but not proved in frontier/")
+            continue
+        # The stored `after_quench` is either a closed form or a bare number; either way
+        # it must name the proved value.
+        want = recognise(proved[0])
+        stored = str(rung["after_quench"])
+        if want is not None and stored != str(want):
+            problems.append(
+                f"n={n}: the golden records the pipeline reaching {stored}, but the "
+                f"proved s({n}) is {want}"
+            )
+        if rung["gap"] < -TIER_FLOOR:
+            problems.append(
+                f"n={n}: the golden records a side BELOW the proved optimum "
+                f"(gap {rung['gap']:+.2e}). That is a bug, not a record."
+            )
+        if not rung["valid"]:
+            problems.append(f"n={n}: the golden records an INVALID packing on the ladder")
+
+    for case in doc["golden"]["cases"]:
+        n = case["n"]
+        proved = proved_side(n)
+        for basin in case["basins"]:
+            if proved and basin["side"] < proved[0] - TIER_FLOOR:
+                problems.append(
+                    f"n={n}: a stored basin at {basin['side']} lies BELOW the proved "
+                    f"s({n}) = {proved[0]!r}"
+                )
+            if not basin["valid"]:
+                problems.append(f"n={n}: a stored basin is recorded as an invalid packing")
+            # The recorded closed form must still be the one the recogniser derives.
+            derived = recognise(basin["side"])
+            recorded = basin["closed_form"]
+            if (str(derived) if derived else None) != recorded:
+                problems.append(
+                    f"n={n}: basin {basin['side']} is recorded as {recorded} but "
+                    f"recognises as {derived}"
+                )
+    return doc, problems
+
+
+def report_stored() -> int:
+    """The fast path: oracles against the committed file, no re-running."""
+    doc, problems = verify_stored()
+    if problems:
+        print("ORACLE FAILURES against the committed golden:")
+        for problem in problems:
+            print(f"  {problem}")
+        print("GOLDEN BASIN CHECKS FAILED")
+        return 1
+    rungs = doc["golden"]["convergence_ladder"]
+    basins = sum(len(c["basins"]) for c in doc["golden"]["cases"])
+    print(
+        f"  {len(rungs)} ladder rungs and {basins} stored basins agree with the proved "
+        f"values, their closed forms and their recorded validity"
+    )
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--update", action="store_true", help="accept the rebuilt map")
+    ap.add_argument(
+        "--deep",
+        action="store_true",
+        help="regenerate by re-quenching and diff (slow); without it, the committed "
+        "map's oracles are re-checked from stored values",
+    )
     args = ap.parse_args()
+
+    if not args.update and not args.deep:
+        return report_stored()
 
     doc, problems = build()
     rendered = yaml.safe_dump(doc, sort_keys=False, width=100)
