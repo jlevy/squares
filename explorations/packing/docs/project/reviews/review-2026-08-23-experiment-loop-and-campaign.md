@@ -362,3 +362,35 @@ workflow, findings are recorded here and on the PR, not fixed.
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->
+
+## Status Addendum — 2026-08-23, addressed in `060b99d`
+
+Added by the PR author after acting on this review.
+The findings above are unchanged; this records what happened to each.
+Every P1 was reproduced before being fixed.
+
+| Finding | Disposition |
+| --- | --- |
+| **F-1** schemas enforced by nothing | **fixed** — `ledger.py` validates every artifact against its declared schema at load time; an unloadable schema is a hard error, not a silent skip. Reproduced first (`priority: 0` passed the whole gate), then negative-controlled. |
+| **F-2** archive cannot regenerate configurations | **fixed** — `run_baseline.sh` archives every record; the summary line carries the best configuration and a recomputed overlap. `exp-002`–`exp-004` re-run the sweep on the corrected instrument; all 135 archived records re-derive their own reported side. `exp-001` annotated, not rewritten. |
+| **F-3** beads never reached the shared store | **fixed** — `tbd sync` landed them. The old tree is reconciled: `think-q3hl` and `think-pmhe` closed as superseded, `think-lpse` and `think-19gf` updated with cross-references rather than closed, since they are related but distinct. |
+| **F-4** renumber residue | **fixed** — all five stale references corrected, plus a sixth the review did not catch (a miscounted `../` depth). Two compensating controls added: a relative-link checker, and a rule that a reserved id may be named but not linked. |
+| **F-5** overlap guard on a drifting accumulator | **fixed** — recomputed from the stored configuration at record time; the selftest asserts the recomputed value. The two adjacent nits are recorded in the bead and left: both are sub-1% and neither affects a verdict today. |
+| **F-6** three-cell sweep as a one-cell round | **fixed** — split one round per cell; `H-016` now shows `n: 10* 11* 12*`. Exposed a latent bug: `status_of` ranked `accepted` above `rejected`, so `n = 12` passing would have reported a refuted swept claim as confirmed. Corrected. |
+| **D-1** name the layers | **adopted, and made a test** — `differential_test.py` checks `sqsearch`’s `pair_depth == 0` against `sqpack`’s `separated()` on 20,000 near-contact pairs, in `test.sh`, mutation-checked. The boundary is enforced rather than described. |
+| **D-2** hypothesis ownership | **adopted** — one rule in the runbook: once codified the registry artifact is canonical, the register entry is historical, beads track build work and never scientific claims. |
+| **D-3** `s(17)` into the standing sweep | **adopted** — added as the mechanism-matched cell, with value and attribution read from `frontier/n-017.md` (Bidwell 1998) rather than memory; the first draft credited Göbel/Bidwell, which the corpus does not support. |
+| **D-4** file the softschema limitation upstream | **deferred** — filing an issue on another repository is an outward action awaiting a go-ahead. Tracked as `think-rk66`. |
+
+Three things this review prompted that it did not ask for:
+
+- **`conventions.md`** consolidates every rule the directory runs on and marks each
+  `[checked]` or `[convention]`. Writing it forced three naming rules to become real —
+  filenames must carry their own id, slugs must be kebab-case, series directories read
+  `series-NNN-slug` — all negative-controlled.
+- **A provenance check** in `test.sh`: recorded commits must be reachable from `HEAD`,
+  and an orphaned one must carry an annotation.
+  It reports `exp-001` exactly as F-2 describes.
+- **The re-run reproduces `exp-001`’s numbers to every digit**, which was not guaranteed
+  and is the strongest evidence the corrections touched the record rather than the
+  search.

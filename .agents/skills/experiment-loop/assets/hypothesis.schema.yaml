@@ -1,0 +1,117 @@
+# Contract for one registry entry of the <campaign> loop.
+#
+# One artifact per claim. STATUS IS NOT A FIELD: it is generated from the experiments
+# that reference this id, the same way the ledger is. A referenced id with no registry
+# artifact fails the reference check.
+#
+# Copy into the campaign, replace <project>.<campaign>, set the `lane` and
+# `criterion.shape` enums to the ones the campaign declared, and delete what it does
+# not use.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: <project>.<campaign>:Hypothesis/v1
+title: Hypothesis
+type: object
+additionalProperties: false
+required: [id, kind, claim, registered]
+properties:
+  id:
+    type: string
+    pattern: "^H-[0-9]{3}$"
+    description: Never reused; next free number.
+  kind:
+    enum: [hypothesis, open_question]
+    description: >-
+      An idea that cannot be stated so it could be wrong is an open_question, not a
+      badly written hypothesis. Open questions stay visible in the ledger and are not
+      counted as measurable queue items.
+  claim:
+    type: string
+    minLength: 1
+    description: Stated so it can be wrong.
+  lane:
+    type: string
+    description: >-
+      Campaign-declared partition of approach, e.g. search | proof. REPLACE with an
+      enum once the campaign knows its lanes.
+  derived_from:
+    type: array
+    default: []
+    items: {type: string, pattern: "^X-[0-9]{3}$"}
+    description: Exploration report(s) this claim was compressed out of.
+  strategy_refs:
+    type: array
+    default: []
+    items: {type: string}
+    description: >-
+      Ids in the campaign's existing strategy taxonomy, e.g. "search:12". What lets
+      the ledger report coverage by family rather than by individual idea.
+  criterion:
+    type: object
+    additionalProperties: false
+    required: [shape, metric, direction]
+    description: Required for kind=hypothesis; omitted for kind=open_question.
+    properties:
+      shape: {enum: [paired, conditions, record, determination]}
+      metric: {type: string, description: The metric or question that would show it.}
+      direction: {type: string, description: Predicted direction or outcome.}
+      threshold:
+        type: [number, string, "null"]
+        description: Pre-registered magnitude, when the claim makes one.
+  instrument:
+    type: string
+    description: >-
+      What would measure this, by path or command. A hypothesis whose instrument does
+      not exist yet is blocked, not measured badly.
+  instrument_ready:
+    type: boolean
+    default: true
+    description: >-
+      False when the instrument named above does not exist yet. Drives the blocked
+      status in the ledger, which is then a recorded fact rather than an inference
+      from an empty field.
+  regime:
+    type: string
+    description: Where the claim applies (platform, cache state, scale, precision).
+  instance:
+    type: object
+    additionalProperties: false
+    required: [axis, point]
+    description: The point on the campaign's instance axis where this claim is made.
+    properties:
+      axis: {type: string}
+      point: {type: [string, number]}
+  sweep:
+    type: object
+    additionalProperties: false
+    required: [axis, points]
+    description: >-
+      Cells this claim should eventually cover. Declaring them up front is what turns
+      scattered runs into a sweep with visible holes; a claim confirmed on one cell is
+      confirmed on that cell only.
+    properties:
+      axis: {type: string}
+      points: {type: array, minItems: 1, items: {type: [string, number]}}
+  priority:
+    type: integer
+    minimum: 1
+    description: 1 = do next. The codifier's ranking, revisable at any re-screen.
+  cost_estimate:
+    type: string
+    description: What one round is expected to consume (time, attempts, tokens).
+  prereqs:
+    type: array
+    default: []
+    items: {type: string}
+    description: Hypotheses or instruments that must land before this is runnable.
+  replication:
+    type: boolean
+    default: false
+    description: >-
+      May a second operator re-run the same cell? Default false, or an overnight fleet
+      spends the night agreeing with itself.
+  registered:
+    type: string
+    description: >-
+      ISO date, or "retroactive" for rows converted from a pre-existing hand-maintained
+      table. Retroactive rows may not be used to justify a non-default criterion.
+  notes: {type: string}

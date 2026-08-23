@@ -1,0 +1,43 @@
+# Contract for one exploration report of the <campaign> loop.
+#
+# Deliberately the thinnest of the three schemas. The body is unstructured prose of
+# any length; this frontmatter exists only so the codifier can find reports and cite
+# them, and so an unmined report is visibly unmined.
+#
+# Copy into the campaign, replace <project>.<campaign>, and resist adding fields.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: <project>.<campaign>:Exploration/v1
+title: Exploration
+type: object
+additionalProperties: false
+required: [id, title, date, author, brief]
+properties:
+  id:
+    type: string
+    pattern: "^X-[0-9]{3}$"
+    description: Stable, never reused; next free number.
+  title: {type: string, minLength: 1}
+  date: {type: string, description: ISO date the report was written.}
+  author:
+    type: string
+    description: Person, agent, or model that wrote it.
+  campaign:
+    type: string
+    description: Which campaign commissioned this report.
+  brief:
+    type: string
+    minLength: 1
+    description: What the explorer was asked to look into.
+  sources:
+    type: array
+    default: []
+    items: {type: string}
+    description: Paths or URLs actually read, so a reader can retrace the thinking.
+  proposes:
+    type: array
+    default: []
+    items: {type: string, pattern: "^H-[0-9]{3}$"}
+    description: >-
+      Hypotheses codified out of this report. Written back by the codifier, not by
+      the explorer. An empty list on a codified report is a result: read, nothing
+      testable found.

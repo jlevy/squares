@@ -1,0 +1,14 @@
+[package]
+name = "sqsearch"
+version = "0.1.0"
+edition = "2021"
+description = "Tier-1 search engine for packing n unit squares in the smallest square."
+
+[dependencies]
+rayon = "1.10"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
