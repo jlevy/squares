@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-23
 
-**Author:** Claude (agent), for samanthadrakova@gmail.com
+**Author:** Claude (agent)
 
 **Status:** Current
 
@@ -49,6 +49,16 @@ Two are done, four are not:
 | `atlas` | `think-eq6l` | open | **H-011, H-012** — the deliverable itself |
 | `descriptors` | `think-hhon` | open | H-015 steering, H-003 retention |
 | `meter` | `think-b4jc` | open | any comparison between proposers, in machine-independent units |
+
+**Resolving the bead ids.** The `think-*` ids above are *local* `tbd` ids. They are not
+stored in the repository and not in the synced bead data either, which keys every issue
+by a ULID (`is-01...`) — so `think-eq6l` cannot be looked up from a fresh clone. Restore
+the database from the [`tbd-sync`](../../../../.tbd/config.yml) branch first (`tbd sync`),
+after which `tbd show think-eq6l` and `tbd list --spec <the plan>` resolve. Until then,
+the durable handle for each row is the **block name in the first column**: every one is a
+checklist item under *Phase 1: The quench spine* in
+[the plan spec](specs/active/plan-2026-08-22-minimal-packing-toolkit.md), which needs no
+tooling to read.
 
 Three hypotheses are `blocked` in the registry — `H-001` (angle-class reduction),
 `H-011` (small-`n` census), `H-012` (the rarity premise) — and all three wait on

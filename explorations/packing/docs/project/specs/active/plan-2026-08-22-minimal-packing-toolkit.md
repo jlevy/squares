@@ -312,7 +312,7 @@ Until a float configuration can be turned into a named basin with an exact side 
 proposers can be compared.
 The review’s H-2 is its own register’s top priority for this reason.
 
-- [ ] **`quench`: LP-in-cell.** Fix angles and each pair’s separating axis; solve the
+- [x] **`quench`: LP-in-cell.** Fix angles and each pair’s separating axis; solve the
   cell’s linear program.
   The single-cell half is already verified — a 1,056-constraint LP at Trump’s angles
   reproduced `s(11)` to solver precision and every centre to `9e-16`. What remains is

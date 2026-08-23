@@ -35,9 +35,9 @@ controls:
 
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 25", "count: 20"]
+  replace: ["count: 26", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 25"
+  expect: "count 20 != 26"
 
 - name: defect log - generated view left stale
   file: defects.yaml

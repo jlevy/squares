@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 25
+count: 26
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -542,5 +542,33 @@ defects:
     The old verification-core epic is closed as superseded and its seven children
     re-parented to the revised Phase 5 epic; the old experiments epic is retitled to name
     the phases it now belongs to; the finished differential-test task is closed.
+  regression: none
+  recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+- id: D-026
+  title: The plan spec's checklist contradicted the state the spec was cited as authority for
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'since the plan was rebuilt around the quench spine'
+  severity: medium
+  status: fixed
+  what: >-
+    The handoff document, the bead tree, and this PR's own summary all record the
+    `quench` block as done, and all three send an arriving agent to the plan spec as the
+    work list. Every one of the spec's 36 checkboxes was still unticked, `quench`
+    included.
+  consequence: >-
+    The same failure D-025 had just fixed one layer up: two records of what is finished,
+    disagreeing, with no way to tell from the repo which was live. An agent reading the
+    spec first would have rebuilt a block that was already built.
+  fix: >-
+    The `quench` block is ticked. The rest are genuinely open and stay unticked -- in
+    particular `verify`, which the handoff table calls done for `sqpack` while the spec's
+    item asks for something larger (exact-verify every recorded basin, for H-8's
+    false-basin rate).
+
+    No check is left behind: reconciling a checkbox against bead state needs the bead
+    database, which lives on `tbd-sync` and not in the tree.
   regression: none
   recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
