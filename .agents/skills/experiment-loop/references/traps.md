@@ -189,6 +189,14 @@ and treat (hypothesis, instance, operator) as the duplication key.*
 *Guard: leases with an expiry; the view surfaces expired claims as stale, and any runner
 may reclaim one after recording that it did.*
 
+**The budget that did not bind.** A run declared a move budget and a restart cap, and
+the restart cap always stopped the chain first — so the declared budget was inert, and
+two strategies compared “at equal budget” got unequal work.
+Found here on the first baseline round, by the numbers being *worse* at a larger
+declared budget. *Guard: assert that the binding limit is the one you named — log which
+stop condition ended each run, and check that varying the declared budget actually
+changes the work done.*
+
 **A budget denominated in rounds.** Forty rounds of a search that gets slower each round
 is not a bounded night.
 *Guard: budget the resource that actually runs out — wall time, CPU-hours, tokens — and

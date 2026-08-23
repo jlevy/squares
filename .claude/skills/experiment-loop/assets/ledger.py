@@ -5,7 +5,8 @@ Copy into the campaign directory and adapt. It is deliberately small and depende
 light (PyYAML only) so it can be read in full before being trusted.
 
 What it does:
-  * loads the three artifact types from explorations/, hypotheses/, experiments/
+  * loads the artifact types: series/, explorations/, hypotheses/, and the
+    experiments inside each series
   * runs the whole-set invariants that per-artifact schema validation cannot see:
     duplicate ids, dangling hypothesis references, orphan experiments, stale claims,
     the cross-field verdict rules a soft schema cannot carry, and the two-way
@@ -48,10 +49,12 @@ DECISION_ORDER = [
 ]
 
 
-def load(directory: Path, envelope: str) -> list[dict]:
-    """Read every softschema artifact in a directory, newest id last."""
+def load(directory: Path, envelope: str, pattern: str = "*.md") -> list[dict]:
+    """Read every softschema artifact matching a glob, newest id last."""
     out = []
-    for path in sorted(directory.glob("*.md")):
+    if not directory.exists():
+        return out
+    for path in sorted(directory.glob(pattern)):
         text = path.read_text()
         if not text.startswith("---\n"):
             raise SystemExit(f"{path}: no frontmatter")
@@ -71,11 +74,12 @@ def board_ids() -> set[str] | None:
     return set(re.findall(r"\bH-[0-9]{3}\b", IDEAS.read_text()))
 
 
-def check(explorations, hypotheses, experiments, now: dt.datetime) -> list[str]:
+def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> list[str]:
     """Whole-set invariants. Per-artifact validation cannot see any of these."""
     problems = []
 
     for label, items in (
+        ("series", series),
         ("exploration", explorations),
         ("hypothesis", hypotheses),
         ("experiment", experiments),
@@ -86,6 +90,17 @@ def check(explorations, hypotheses, experiments, now: dt.datetime) -> list[str]:
         for artifact_id, paths in seen.items():
             if len(paths) > 1:
                 problems.append(f"duplicate {label} id {artifact_id}: {', '.join(paths)}")
+
+    # Every round names a series that exists, and only one series is open.
+    series_ids = {s["id"] for s in series}
+    for experiment in experiments:
+        if experiment.get("series") not in series_ids:
+            problems.append(
+                f"{experiment['_path'].name}: unknown series {experiment.get('series')}"
+            )
+    open_series = [s["id"] for s in series if s.get("status") == "open"]
+    if len(open_series) > 1:
+        problems.append(f"more than one open series: {', '.join(open_series)}")
 
     known = {h["id"] for h in hypotheses}
     for experiment in experiments:
@@ -173,13 +188,20 @@ def sweep_coverage(hypothesis: dict, rounds: list[dict]) -> str:
     return f"{sweep['axis']}: {' '.join(cells)}"
 
 
-def render(explorations, hypotheses, experiments) -> str:
+def render(series, explorations, hypotheses, experiments) -> str:
     by_hypothesis = defaultdict(list)
     for experiment in experiments:
         for hypothesis_id in experiment.get("hypotheses") or []:
             by_hypothesis[hypothesis_id].append(experiment)
 
     lines = [BANNER, "", "# Experiment ledger", ""]
+
+    lines += ["## Series", "", "| id | status | title | rounds | opened because |", "| --- | --- | --- | --- | --- |"]
+    for s in sorted(series, key=lambda s: s["id"]):
+        rounds = sum(1 for e in experiments if e.get("series") == s["id"])
+        because = s.get("opened_because", "").replace("\n", " ").strip()
+        lines.append(f"| {s['id']} | {s['status']} | {s['title']} | {rounds} | {because[:50]} |")
+    lines.append("")
 
     lines += ["## Registry", "", "| id | status | lane | claim | sweep | rounds |", "| --- | --- | --- | --- | --- | --- |"]
     for hypothesis in sorted(hypotheses, key=lambda h: h["id"]):
@@ -199,12 +221,12 @@ def render(explorations, hypotheses, experiments) -> str:
         if not matching:
             continue
         lines += [f"### {decision} ({len(matching)})", ""]
-        lines += ["| id | instance | operator | hypotheses | reason |", "| --- | --- | --- | --- | --- |"]
+        lines += ["| id | series | instance | operator | hypotheses | reason |", "| --- | --- | --- | --- | --- | --- |"]
         for experiment in sorted(matching, key=lambda e: e["id"]):
             verdict = experiment["verdict"]
             instance = experiment.get("instance") or {}
             lines.append(
-                f"| {experiment['id']} | {instance.get('point', '')} "
+                f"| {experiment['id']} | {experiment.get('series', '')} | {instance.get('point', '')} "
                 f"| {experiment.get('method', {}).get('operator', '')} "
                 f"| {', '.join(experiment.get('hypotheses') or [])} "
                 f"| {verdict['reason'].replace(chr(10), ' ').strip()} |"
@@ -222,15 +244,16 @@ def render(explorations, hypotheses, experiments) -> str:
 
 def main() -> int:
     now = dt.datetime.now(dt.timezone.utc).replace(tzinfo=None)
+    series = load(ROOT / "series", "series", "*/README.md")
     explorations = load(ROOT / "explorations", "exploration")
     hypotheses = load(ROOT / "hypotheses", "hypothesis")
-    experiments = load(ROOT / "experiments", "experiment")
+    experiments = load(ROOT / "series", "experiment", "*/experiments/*.md")
 
-    problems = check(explorations, hypotheses, experiments, now)
+    problems = check(series, explorations, hypotheses, experiments, now)
     for problem in problems:
         print(f"FAIL {problem}", file=sys.stderr)
 
-    rendered = render(explorations, hypotheses, experiments)
+    rendered = render(series, explorations, hypotheses, experiments)
     if "--check" in sys.argv:
         current = LEDGER.read_text() if LEDGER.exists() else ""
         if current != rendered:
@@ -243,8 +266,8 @@ def main() -> int:
     if problems:
         return 1
     print(
-        f"OK {len(explorations)} reports, {len(hypotheses)} hypotheses, "
-        f"{len(experiments)} rounds"
+        f"OK {len(series)} series, {len(explorations)} reports, "
+        f"{len(hypotheses)} hypotheses, {len(experiments)} rounds"
     )
     return 0
 

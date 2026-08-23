@@ -12,9 +12,16 @@ $id: <project>.<campaign>:Experiment/v1
 title: Experiment
 type: object
 additionalProperties: false
-required: [id, title, date, hypotheses, tier, subject, method, results, verdict]
+required: [id, series, title, date, hypotheses, tier, subject, method, results, verdict]
 properties:
   id: {type: string, pattern: "^exp-[0-9]{3}$"}
+  series:
+    type: string
+    pattern: "^series-[0-9]{3}$"
+    description: >-
+      Which pass of the loop this round belongs to. Ids stay globally monotonic
+      across the campaign, so the series organises rounds without namespacing
+      them.
   title: {type: string, minLength: 1}
   date: {type: string, description: ISO date the measurements were taken.}
   hypotheses:

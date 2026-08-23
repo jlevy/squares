@@ -15,6 +15,7 @@ lie waiting.
 | Artifact | Schema | Written by |
 | --- | --- | --- |
 | `ideas.md` | none — checked, not validated | codifier |
+| `series/NNN-slug/README.md` | `assets/series.schema.yaml` | whoever opens the pass |
 | `explorations/X-NNN-*.md` | `assets/exploration.schema.yaml` | explorer |
 | `hypotheses/H-NNN-*.md` | `assets/hypothesis.schema.yaml` | codifier |
 | `experiments/exp-NNN-*.md` | `assets/experiment.schema.yaml` | runner |
@@ -42,6 +43,42 @@ hypothesis registered without ever being visible to the next agent that arrives.
 The board tracks an idea only until it is registered.
 After that the row is a pointer and the ledger owns the outcome, which is what keeps the
 board from becoming a second record that disagrees with the first.
+
+## The series
+
+One pass of the loop under one generation of tooling, carrying the experiments taken on
+that instrument. The registry and the idea board span the campaign; only the rounds
+belong to a series.
+
+```yaml
+id: series-001
+slug: smoke-n11
+title: Smoke pass — reproduce what is known, try the obvious hypotheses
+status: open                   # open | closed | superseded; one open at a time
+opened: 2026-08-22
+goal: >-
+  Prove the loop works end to end on cheap, checkable claims before anything
+  subtle is attempted.
+opened_because: first series   # the field that earns a series its existence
+instrument:
+  name: sqsearch
+  version: 0.1.0
+  commit: <sha>
+  selftest: "sqsearch --selftest — geometry, determinism, and the s(5) control"
+supersedes: null
+carries_forward: []            # nothing yet; a later series lists what survives
+budget: one overnight session
+```
+
+`opened_because` is the load-bearing field.
+Opening a series says *the numbers before this point were taken on a different
+instrument*, so if nothing changed, the work belongs in the series already open.
+`carries_forward` is the opposite claim — that a specific earlier round’s conclusion
+survives the change — and listing one is an assertion, where omitting it merely costs a
+re-run.
+
+Experiment ids stay globally monotonic across the campaign; the series is a directory
+and a field, never a namespace.
 
 ## The exploration report
 
@@ -146,6 +183,7 @@ real registration.
 | `id` | `exp-NNN`, stable, never reused | filename starts with it; created by exclusive create |
 | `title` | one line, declarative | “Memoize the parent resolved for the previous upsert” |
 | `date` | ISO date measurements were taken |  |
+| `series` | which pass this round belongs to | `series-001`; ids stay globally monotonic |
 | `hypotheses` | registry ids this tested (`H-007`) | ≥1; free-riding results register a new H first |
 | `tier` | `exploratory` or `confirmatory` | what kind of evidence this claims to be |
 | `subject` | what was measured, on what | campaign-specific; the reproducibility record |

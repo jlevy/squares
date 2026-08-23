@@ -53,7 +53,7 @@ Load a reference when its action arrives, not before.
 | `references/traps.md` | at setup (skim), and whenever a result surprises you |
 | `references/worked-examples.md` | choosing which of four domain templates is nearest |
 
-Copyable starting points live in `assets/`: the three schemas, the idea-board template,
+Copyable starting points live in `assets/`: the four schemas, the idea-board template,
 and a starter ledger generator that also runs the whole-set invariant checks.
 Copy them into the campaign directory and cut them down; do not import them.
 
@@ -233,10 +233,64 @@ A layout that has worked (adapt freely):
   schemas/                     # the contracts, copied from assets/ and cut down
   explorations/X-001-....md    # the idea trail, free-form
   hypotheses/H-001-....md      # the registry, one artifact per claim
-  experiments/exp-001-....md   # the record, one artifact per round
-  results/                     # raw runs (jsonl or per-run files)
+  series/001-smoke-.../
+    README.md                  # the series artifact: goal, instrument, why it exists
+    experiments/exp-001-....md # the record, one artifact per round
+    results/                   # raw runs (jsonl or per-run files)
   ledger.md                    # generated view — never hand-edited
 ```
+
+## Series: running the loop more than once
+
+A campaign that lives long enough will want to run its loop again — with a rewritten
+engine, a different solver, a better instrument — and the old numbers will not be
+comparable to the new ones.
+A **series** is one full pass of the loop under one generation of tooling.
+
+The split that makes this work:
+
+| Spans the campaign | Belongs to a series |
+| --- | --- |
+| the idea board | the experiments |
+| the hypothesis registry (`H-NNN`) | the raw run data |
+| the schemas and the checker | the series’ own ledger view |
+
+Hypotheses span series because a claim about the world does not become a different claim
+when the engine improves — and because the most valuable question a long campaign can
+answer is *what did series 001 and series 003 each conclude about H-007?* Experiments
+belong to a series because their numbers were taken on one instrument, and invariant 7
+says never to extrapolate across regimes.
+A series is that invariant applied at campaign scale.
+
+**Experiment ids stay globally monotonic across the whole campaign.** The series is a
+directory and a field, not a namespace: `exp-042` means one round, forever, wherever it
+lives. Numbering per series would make `exp-001` mean several things and break invariant
+8 on the first merge.
+
+```
+<campaign>/
+  ideas.md, hypotheses/, schemas/, ledger.py     # span every series
+  series/
+    001-smoke-<slice>/
+      README.md            # the series artifact: goal, instrument, why it exists
+      experiments/         # exp-001 .. exp-037
+      results/
+    002-<next>/
+      README.md            # supersedes: series-001, carries_forward: [exp-012]
+      experiments/         # exp-038 ..
+```
+
+The field that earns a series its existence is `opened_because`: what changed since the
+last one. If nothing changed, the work belongs in the series already open.
+The natural first series is a **smoke pass** — the obvious hypotheses, the reproductions
+of known results, the cheap sweeps — run precisely to prove the loop itself works end to
+end before anything subtle is attempted.
+Its `carries_forward` is empty, and that is correct.
+
+A later series may declare `carries_forward: [exp-012]` for rounds whose conclusions
+survive the tooling change.
+Listing one is a claim that its numbers still hold; leaving it out costs a re-run and is
+the safer default. Start from `assets/series.schema.yaml`.
 
 ## Running one round
 

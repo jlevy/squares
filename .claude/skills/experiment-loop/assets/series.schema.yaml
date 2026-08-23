@@ -1,0 +1,69 @@
+# Contract for one series of the <campaign> loop.
+#
+# A series is one full pass of the loop under one generation of tooling. The
+# registry and the idea board span the whole campaign; experiments belong to a
+# series. Open a new one when something changes that makes old numbers
+# incomparable -- a rewritten engine, a different solver, a new instrument -- so
+# that "record the regime with the number" holds at campaign scale and not only
+# per round.
+#
+# Copy into the campaign and replace <project>.<campaign>.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: <project>.<campaign>:Series/v1
+title: Series
+type: object
+additionalProperties: false
+required: [id, slug, title, status, opened, goal, opened_because]
+properties:
+  id:
+    type: string
+    pattern: "^series-[0-9]{3}$"
+    description: Never reused; series run in sequence.
+  slug:
+    type: string
+    pattern: "^[a-z0-9-]+$"
+    description: Short kebab-case name; the directory is <NNN>-<slug>.
+  title: {type: string, minLength: 1}
+  status:
+    enum: [open, closed, superseded]
+    description: >-
+      Only one series should be open at a time. Closing one is what says its
+      numbers are final; superseded means a later series re-ran the same ground
+      on better tooling.
+  opened: {type: string, description: ISO date.}
+  closed: {type: [string, "null"]}
+  goal:
+    type: string
+    minLength: 1
+    description: One sentence. What this pass is for, and what would end it.
+  opened_because:
+    type: string
+    minLength: 1
+    description: >-
+      What changed since the previous series. This is the field that earns the
+      series its existence: if nothing changed, the work belongs in the series
+      already open.
+  instrument:
+    type: object
+    additionalProperties: false
+    description: The tooling generation whose numbers this series carries.
+    properties:
+      name: {type: string}
+      version: {type: string}
+      commit: {type: string}
+      selftest: {type: string, description: Command that gates a run, and what it checks.}
+  supersedes:
+    type: [string, "null"]
+    pattern: "^series-[0-9]{3}$"
+  carries_forward:
+    type: array
+    default: []
+    items: {type: string, pattern: "^exp-[0-9]{3}$"}
+    description: >-
+      Rounds from an earlier series whose conclusions still stand under this
+      series' instrument, so they need not be re-run. Listing one is a claim
+      that its numbers survive the tooling change; leaving it out is cheaper
+      and safer.
+  budget:
+    type: string
+    description: What this series is allotted in total.
