@@ -77,6 +77,13 @@ and `n = 12` — is
 It turns the five reports into two phases and a bead tree;
 `tbd list --spec plan-2026-08-22-minimal-packing-toolkit.md` shows the work items.
 
+The current standing review —
+[review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md)
+— audits the toolkit documents, supplies the experiment method they lacked (a hypothesis
+register with kill criteria, a run protocol, a series plan starting from an `n = 11`
+smoke), and contributes one verified theoretical result: for fixed angles the whole
+problem is a linear program, checked numerically against Trump’s packing.
+
 ## Exact verification
 
 Record packings are published as high-precision decimals, and there is no public tool
