@@ -12,6 +12,7 @@ experiment:
   date: '2026-08-23'
   hypotheses: [H-002]
   tier: exploratory
+  known_defects: [D-017]
   subject:
     label: sqpack.quench (scipy HiGHS) over sqsearch output
     engine: 'sqpack.quench 0.1.0 over sqsearch 0.1.0'

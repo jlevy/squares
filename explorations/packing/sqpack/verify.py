@@ -206,3 +206,29 @@ def verify_packing(
 
     report.valid = not report.failures
     return report
+
+def corners_from_poses(x, y, theta):
+    """Turn centre-and-angle poses into the corner form this module verifies.
+
+    The one door between the pose representation every search and quench works in and
+    the corner representation the validity oracle checks. It exists so that a component
+    which emits poses can be checked by code it does not share -- which is the whole
+    point of an independent oracle, and precisely what was missing when the quench
+    returned a packing that violated its own constraints (defect D-014).
+    """
+    import math as _math
+
+    squares = []
+    for cx, cy, t in zip(x, y, theta):
+        c, s = _math.cos(t), _math.sin(t)
+        # Half-edge vectors of a unit square at this angle.
+        ux, uy = 0.5 * c, 0.5 * s
+        vx, vy = -0.5 * s, 0.5 * c
+        squares.append([
+            (cx - ux - vx, cy - uy - vy),
+            (cx + ux - vx, cy + uy - vy),
+            (cx + ux + vx, cy + uy + vy),
+            (cx - ux + vx, cy - uy + vy),
+        ])
+    return squares
+

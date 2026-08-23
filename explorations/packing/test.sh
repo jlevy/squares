@@ -101,6 +101,20 @@ for kind, field, n in (("search", "outcome", 20), ("proof", "status", 30)):
 PY
 
 echo
+echo "== negative controls =="
+# Every guard in this directory, watched failing. A check nobody has seen fail is not a
+# check, and until now each of these was run once by hand and thrown away.
+$PY tools/negctl.py tools/controls.yaml
+
+echo
+echo "== soundness perimeter =="
+# Every component that can emit a packing, checked by sqpack through code it does not
+# share. This is the check whose absence let D-014 through: the quench was validated
+# only against its own constraint rows, which is no check when the rows are what the
+# solver got wrong. Replaying that defect against this gate rejects it on sight.
+$PY tools/perimeter_test.py
+
+echo
 echo "== defect log =="
 # The logbook of what has gone wrong here, and what now stops each thing recurring.
 # Checked like any other dataset: schema, contiguous ids, every open defect tracked by

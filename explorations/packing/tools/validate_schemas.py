@@ -85,6 +85,22 @@ def cross_checks() -> list[str]:
     for b in a["lower_bounds"]:
         if b["confidence"] == "reconstructed" and not b.get("note"):
             errs.append(f"asymptotic: reconstructed bound {b['source_key']} carries no note")
+    # `value` is what the tables render; `value_str` is the display duplicate beside it.
+    # Nothing compared them until a negative control tried to make the drift check fire
+    # by editing `value_str` and it did not (defect D-022): the two could disagree in
+    # silence, and the artifact would carry a number the report never shows.
+    for case in sorted(FRONTIER.glob("n-*.md")):
+        doc = yaml.safe_load(case.read_text(encoding="utf-8").split("---\n")[1])
+        for key in ("upper_bound", "lower_bound"):
+            bound = doc["packing"].get(key) or {}
+            if bound.get("value_str") is None or bound.get("value") is None:
+                continue
+            if float(bound["value_str"]) != float(bound["value"]):
+                errs.append(
+                    f"{case.name}: {key}.value_str disagrees with value "
+                    f"({bound['value_str']} vs {bound['value']})"
+                )
+
     sa = yaml.safe_load((FRONTIER / "source-availability.yaml").read_text(encoding="utf-8"))
     keys = [s["key"] for s in sa["recovered"]] + [s["key"] for s in sa["unretrieved"]]
     dupes = {k for k in keys if keys.count(k) > 1}

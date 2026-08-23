@@ -27,9 +27,26 @@ properties:
   hypotheses:
     type: array
     minItems: 1
+    maxItems: 1
     items: {type: string, pattern: "^H-[0-9]{3}$"}
-    description: Registry ids this round tested. Every id must exist in hypotheses/.
+    description: >-
+      The single registry id this round tested. It stays an array for compatibility with
+      the four rounds recorded before the limit, and because a future per-hypothesis
+      verdict would restore the plural.
+
+      One, because a round carries ONE verdict and applying it to several claims records
+      a decision nobody made: four rounds naming [H-002, H-019] made the ledger report
+      H-019 as refuted by the very rounds whose data confirmed it (defect D-018). A round
+      that bears on a second claim cites it in prose, or is split.
   tier: {type: string, enum: [exploratory, confirmatory]}
+  known_defects:
+    type: array
+    items: {type: string, pattern: "^D-[0-9]{3}$"}
+    description: >-
+      Defects from ../../defects.yaml that this round is known to carry. The record is
+      corrected, not rewritten, so a round recorded before a rule existed keeps its
+      numbers and declares the rule it breaks -- which exempts it from that check by
+      name rather than by weakening the check for everyone.
   subject:
     type: object
     additionalProperties: false

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 21
+count: 23
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -352,7 +352,7 @@ defects:
   detected_by: drift_check
   latent_for: four rounds
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     A round may name several hypotheses but carries a single verdict, which is applied
     to all of them. Four rounds naming [H-002, H-019] made the generated ledger report
@@ -361,9 +361,10 @@ defects:
     The record asserting the opposite of its own evidence, which for an archive meant to
     outlive the session is as serious as a wrong number.
   fix: >-
-    Instances fixed by splitting the measurement into its own round. The schema still
-    permits the shape, so the next runner reproduces it.
-  regression: none
+    Instances split into one round each, and the schema now caps `hypotheses` at one
+    entry, so the shape cannot recur. A round bearing on a second claim cites it in
+    prose or is split.
+  regression: 'schema maxItems, plus a negative control that gives a round two hypotheses and asserts the gate refuses it'
   recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md
   bead: think-lksm
 - id: D-019
@@ -374,16 +375,27 @@ defects:
   detected_by: anomaly
   latent_for: one round
   severity: medium
-  status: contained
+  status: fixed
+  direction: conservative
   what: >-
     A cell whose LP solves in 5 ms consumed 8,020 solves without converging, taking a
-    sweep past 145 s where its neighbours took 1 s. Root cause not established.
+    sweep past 145 s where its neighbours took 1 s. The root cause is a tolerance
+    compared against the wrong scale: the line search tested `hi - lo > 1e-15` on angles
+    the annealer had drifted to 14.14 rad, where one ULP is 1.78e-15. The interval could
+    never shrink below the bound, so the loop could not terminate.
   consequence: >-
     A quench that does not return takes the whole round with it. Now bounded, but 2-3 of
     5 seeds hit the budget in every cell, so the recorded data is censored -- and
     censored exactly on the non-converged runs, which biases any median quoted from it.
-  fix: 'A per-call wall budget that returns early and reports reason "time budget", never silently.'
-  regression: 'the budget itself, and the reason is carried on every record'
+  fix: >-
+    Three layers. Angles are folded into [0, pi/2) on entry, since a unit square is
+    invariant under a quarter turn and the drifted representation only costs precision;
+    the line search tolerance is scaled to the value it brackets; and the iteration count
+    is capped, because golden section reaches machine precision in about seventy steps
+    and anything beyond that is stuck rather than converging. The wall budget stays as a
+    backstop. The pathological cell now finishes in 1.6 s against 145 s, and lands at
+    4.4e-16 rather than timing out.
+  regression: 'the iteration cap makes non-termination impossible; the wall budget catches slowness that is not non-termination'
   recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md
   bead: think-x40t
 - id: D-020
@@ -395,16 +407,22 @@ defects:
   detected_by: inspection
   latent_for: 'not yet consequential -- found before the atlas was built'
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
-    quench_bracket merges angles within class_tol and forces them equal, so it returns
+    quench_bracket merges angles within class_tol and forces them equal, so it returned
     the optimum of a constrained problem rather than a true local optimum.
   consequence: >-
     A packing whose optimum needs two angles closer than the tolerance is unreachable;
     and the cartography plan defines a basin as where the quench lands, so basin
     identity would inherit the parameter and the atlas would be partly an artifact of it.
-  fix: 'none yet'
-  regression: none
+  fix: >-
+    A free sweep over every angle individually runs once the class search converges. If
+    nothing improves, the point is a coordinate-wise local optimum and the merge
+    tolerance did not decide it; if something improves, the search continues from there.
+    The terminal condition is now independent of class_tol, which becomes a device that
+    affects speed rather than the answer. Measured over nine cells at n = 5, 10 and 11:
+    the free pass never improved on the class-converged point.
+  regression: 'the free pass runs by default and its verdict is carried in the result reason'
   recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
   bead: think-0zs9
 - id: D-021
@@ -425,8 +443,55 @@ defects:
     Any improvement claimed below about 1e-11 at this tier is meaningless, and a
     negative gap reads as beating the record if the tier is dropped from the sentence.
   fix: >-
-    Contained rather than removed: the tier system forbids a record claim below `exact`,
-    and the floor is stated wherever polished numbers are quoted.
-  regression: 'the precision tier is a required field on every round, and beat_record is writable only at exact'
+    The post-check bound is now exactly the solver's own guarantee (1e-10) rather than
+    an arbitrary 1e-9, which is the tightest defensible value and a tenfold improvement.
+    Below that the floor is irreducible with a floating-point LP, so it is contained
+    rather than removed: the tier system forbids a record claim below `exact`, and
+    tools/perimeter_test.py holds every emitting component to the same bound so the two
+    cannot drift apart.
+  regression: 'the perimeter test, at the same bound; the precision tier is required on every round and beat_record is writable only at exact'
   recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
   bead: think-hg3u
+- id: D-022
+  title: A numeric field and its display duplicate could disagree in silence
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: control_cell
+  latent_for: 'since the corpus was built; never consequential'
+  severity: low
+  status: fixed
+  what: >-
+    Every frontier case carries `value` and `value_str` for each bound. The generated
+    tables render `value`; nothing compared the two, so an edit to one would not be
+    caught by the drift check or by validation.
+  consequence: 'An artifact carrying a number the report never shows, with no signal that they had parted.'
+  fix: 'A cross-check that value_str parses to value, on every bound of every case.'
+  regression: 'the cross-check, plus a negative control that mutates value_str and asserts it fires'
+  recorded_in: tools/controls.yaml
+- id: D-023
+  title: Verification was done in throwaway snippets and left nothing behind
+  date: '2026-08-23'
+  layer: tooling
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'the whole first experiment session'
+  severity: medium
+  status: fixed
+  what: >-
+    Diagnosis, negative controls and result analysis were written as one-off heredocs,
+    with the same five operations rewritten each time and none of them checked in. One
+    was written wrong: a control that restored its mutation with `git checkout` reverted
+    the file to HEAD and silently discarded an uncommitted backfill in the same file,
+    invalidating two probes before it was noticed.
+  consequence: >-
+    Every guard's evidence was a claim that someone had once watched it fail. The defect
+    log's own lesson -- a fix without a check comes back -- applied to the checking
+    apparatus itself.
+  fix: >-
+    tools/negctl.py runs controls from tools/controls.yaml, mutating, asserting and
+    restoring the exact bytes it saved; the 14 controls run by hand are now checked in
+    and run in the gate. On its first full run it found D-022 and corrected two of its
+    own control definitions.
+  regression: 'the controls run in test.sh; a control whose anchor is ambiguous or absent fails loudly rather than mutating the wrong text'
+  recorded_in: tools/negctl.py

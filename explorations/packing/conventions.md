@@ -225,6 +225,32 @@ Markdown link. This project has needed that twice.
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.
 
+## Defect classes
+
+One taxonomy, used by [`defects.yaml`](defects.yaml), by the beads (as a `defect-class:`
+label), and by any review that reports a problem.
+They are separated because they cost completely different things, and treating them
+alike is how a critical bug gets the same attention as a stale link.
+
+| Class | The system … | Costs |
+| --- | --- | --- |
+| **soundness** | asserted something false about the mathematics | a wrong published result; the only class that can |
+| **validity** | was correct, but the measurement did not bear on the question | an empty experiment, and the budget spent on it |
+| **bookkeeping** | recorded something its own evidence contradicts | misdirected future work; an archive nobody can trust |
+| **robustness** | did not finish, or finished only by luck | time, and silently censored data if papered over |
+| **performance** | worked, but cost far more than it should | throughput, and the experiments not run because of it |
+
+Soundness and validity defects additionally record a **direction**: `flattering` errors
+overstate the result and are the dangerous kind, because they look like success;
+`conservative` errors understate it and cost only effort.
+Four of the six soundness defects found so far flattered.
+[checked]
+
+A soundness defect gets a postmortem, not just a fix — see
+[the first one](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md),
+whose rules R1–R4 apply to code that does not exist yet.
+[convention]
+
 ## Defects
 
 Every defect found in this toolchain is recorded in [`defects.yaml`](defects.yaml) and

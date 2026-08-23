@@ -260,6 +260,21 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         if decision == "superseded" and not verdict.get("superseded_by"):
             problems.append(f"{name}: superseded without superseded_by")
 
+        # A round declares one instance. If its results cite a standing best from a
+        # DIFFERENT cell, it measured a sweep and recorded a cell, so the ledger reports
+        # swept cells as unfilled and the next runner re-runs them. Made twice before it
+        # was checked (defects D-010, D-017).
+        point = str((experiment.get("instance") or {}).get("point", ""))
+        declared = set(experiment.get("known_defects") or [])
+        for result in ([] if declared & {"D-010", "D-017"} else experiment.get("results") or []):
+            source = result.get("standing_best_source") or ""
+            for cited in re.findall(r"\bn-0*(\d+)", source):
+                if cited.lstrip("0") != point:
+                    problems.append(
+                        f"{name}: declares instance n={point} but a result cites "
+                        f"n={cited.lstrip('0')}; a sweep must be one round per cell"
+                    )
+
         # Effort is required on every terminal round. A record that cannot say what a
         # round cost, or why it stopped, can neither price the next one nor be resumed.
         if decision != "in-progress":

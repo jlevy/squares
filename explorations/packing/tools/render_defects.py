@@ -58,7 +58,7 @@ def render(d: dict) -> str:
         f"- **{len(unprotected)} fixes left no regression check behind.** That list is the best"
         " predictor of what comes back — and it already has, once"
         f" ({', '.join(f'{x[chr(105)+chr(100)]} repeats {x[chr(114)+chr(101)+chr(99)+chr(117)+chr(114)+chr(114)+chr(101)+chr(110)+chr(99)+chr(101)+chr(95)+chr(111)+chr(102)]}' for x in recurrences) or 'none yet'}).",
-        f"- **{len(open_)} are still open** (outstanding or contained), every one carrying a bead.",
+        f"- **{len(open_)} {chr(105)+chr(115) if len(open_)==1 else chr(97)+chr(114)+chr(101)} still open** (outstanding or contained), every one carrying a bead.",
         "",
     ]
 

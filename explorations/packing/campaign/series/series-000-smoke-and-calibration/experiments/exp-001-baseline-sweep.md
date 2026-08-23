@@ -12,6 +12,7 @@ experiment:
   date: '2026-08-22'
   hypotheses: [H-016]
   tier: exploratory
+  known_defects: [D-010]
   subject:
     label: stock sqsearch annealer, default parameters
     engine: sqsearch 0.1.0

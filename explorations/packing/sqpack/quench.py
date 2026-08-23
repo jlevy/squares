@@ -37,7 +37,7 @@ from scipy.optimize import linprog
 
 # How much constraint violation a returned LP solution may carry. Two orders below the
 # tightened solver tolerance, and far below any quantity the campaign reports.
-LP_FEASIBLE_EPS = 1e-9
+LP_FEASIBLE_EPS = 1e-10
 
 
 @dataclass
@@ -326,7 +326,7 @@ def angle_classes(theta, tol: float = 1e-6) -> list[list[int]]:
     return groups
 
 
-def _bracket_min(f, x0: float, span: float, tol: float = 1e-15):
+def _bracket_min(f, x0: float, span: float, tol: float = 1e-15, max_iters: int = 120):
     """Golden section on one coordinate. Converges on a KINK, where descent cannot.
 
     The objective must be deterministic in its argument, which is why every evaluation
@@ -338,7 +338,17 @@ def _bracket_min(f, x0: float, span: float, tol: float = 1e-15):
     lo, hi = x0 - span, x0 + span
     a, b = hi - gr * (hi - lo), lo + gr * (hi - lo)
     fa, fb = f(a), f(b)
-    while hi - lo > tol:
+    # The tolerance is scaled to the value being bracketed, and the iteration count is
+    # capped. An ABSOLUTE tolerance is unreachable once the argument is large enough
+    # that one ULP exceeds it -- measured at theta = 14.14 rad, where ULP is 1.78e-15
+    # against an absolute 1e-15, so the interval could never shrink past the bound and
+    # the search spun until its wall budget (defect D-019). Golden section reaches
+    # machine precision in about 70 steps from any sane bracket; beyond that it is not
+    # converging, it is stuck.
+    bound = tol * (1.0 + abs(x0))
+    iters = 0
+    while hi - lo > bound and iters < max_iters:
+        iters += 1
         if fa < fb:
             hi, b, fb = b, a, fa
             a = hi - gr * (hi - lo)
@@ -350,9 +360,47 @@ def _bracket_min(f, x0: float, span: float, tol: float = 1e-15):
     return (lo + hi) / 2
 
 
+def _free_sweep(side, x, y, theta, n, deadline, span: float = 1e-3):
+    """One bracketing pass over every angle individually, no classes.
+
+    Returns (side, x, y, theta, lp_solves). Used to certify that a class-converged
+    point is a genuine coordinate-wise local optimum rather than an artifact of the
+    merge tolerance.
+    """
+    import time as _time
+
+    lp_solves = 0
+    best = (side, list(x), list(y), list(theta))
+    for k in range(n):
+        if _time.monotonic() > deadline:
+            break
+        ref_x, ref_y = list(best[1]), list(best[2])
+        base = best[3][k]
+
+        def probe(value, k=k, ref_x=ref_x, ref_y=ref_y):
+            nonlocal lp_solves
+            trial_theta = list(best[3])
+            trial_theta[k] = value
+            got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
+            lp_solves += got[3] if got else 1
+            return got[0] if got else 1e3
+
+        try:
+            angle = _bracket_min(probe, base, span)
+        except _OutOfTime:
+            break
+        trial_theta = list(best[3])
+        trial_theta[k] = angle
+        got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
+        lp_solves += got[3] if got else 1
+        if got and got[0] < best[0] - 1e-13:
+            best = (got[0], got[1], got[2], trial_theta)
+    return best[0], best[1], best[2], best[3], lp_solves
+
+
 def quench_bracket(
     x, y, theta, *, max_sweeps: int = 12, span: float = 0.05, tol: float = 1e-12,
-    class_tol: float = 1e-2, time_budget: float = 30.0,
+    class_tol: float = 1e-2, time_budget: float = 30.0, free_pass: bool = True,
 ) -> QuenchResult:
     """Quench whose angle half brackets rather than descends.
 
@@ -361,7 +409,15 @@ def quench_bracket(
     variant does cyclic coordinate search over the angle CLASSES, each coordinate solved
     by golden section, which needs no derivative and lands on a kink exactly.
     """
-    x, y, theta = list(x), list(y), list(theta)
+    # Fold every angle into [0, pi/2) first. A unit square is invariant under a quarter
+    # turn, so an angle of 14.14 rad names the same square as 0.09 rad -- but at a
+    # floating-point scale where one ULP is 8x coarser, which is what made the line
+    # search unable to converge at all (D-019). Folding is free and removes the whole
+    # regime: the annealer accumulates rotations without wrapping, so its output
+    # routinely arrives many turns from zero.
+    quarter = math.pi / 2
+    theta = [t % quarter for t in theta]
+    x, y = list(x), list(y)
     n = len(x)
     lp_solves = angle_steps = 0
     # A per-call wall budget, because a quench that does not return is worse than one
@@ -422,8 +478,34 @@ def quench_bracket(
                 angle_steps += 1
                 improved = True
         if not improved:
+            if not free_pass:
+                return QuenchResult(side, x, y, theta, lp_solves, angle_steps, True,
+                                    changes,
+                                    reason=f"bracket converged, {len(groups)} classes")
+            # The class constraint is a search device, not a property of the answer.
+            # Merging angles searches one coordinate where the packing has one degree of
+            # freedom -- but it also FORCES angles equal that the true optimum may want
+            # apart, so a class-converged point need not be a local optimum at all. Its
+            # value would then depend on class_tol, and since the cartography plan
+            # defines a basin as where the quench lands, basin identity would inherit a
+            # tuning parameter (defect D-020).
+            #
+            # One free sweep, every angle on its own, settles it: if nothing improves
+            # the class-converged point IS a coordinate-wise local optimum and the
+            # tolerance did not decide the answer. If something improves, the search
+            # continues from there with the classes re-read.
+            free_side, free_x, free_y, free_theta, used = _free_sweep(
+                side, x, y, theta, n, deadline
+            )
+            lp_solves += used
+            if free_side < side - tol:
+                side, x, y, theta = free_side, free_x, free_y, free_theta
+                angle_steps += 1
+                groups = angle_classes(theta, class_tol)
+                continue
             return QuenchResult(side, x, y, theta, lp_solves, angle_steps, True,
-                                changes, reason=f"bracket converged, {len(groups)} classes")
+                                changes,
+                                reason=f"converged, {len(groups)} classes, free pass clean")
         groups = angle_classes(theta, class_tol)
         span = max(span * 0.5, 1e-9)
     return QuenchResult(side, x, y, theta, lp_solves, angle_steps, False, changes,
