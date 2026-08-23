@@ -111,6 +111,29 @@ waited out most of the scan being studied.
 *Guard: the harness readiness check must not consume the phenomenon under study (wait
 for the socket, not the page).*
 
+**The green gate that skipped the check that mattered.** A gate reported
+`ALL CHECKS PASSED` while its strongest check quietly did not run: the check needed a
+compiled binary, and the gate built that binary at a later step than the one that read
+it.
+On a clean checkout, the one check whose absence had previously let a critical defect
+through was the one check a fresh clone always skipped — and the summary line said
+everything passed. The same shape appears wherever a step degrades to a skip: a missing
+optional dependency, an absent toolchain, an unreachable store.
+*Guard: a check the gate could not run is not a check that passed.
+Record every skip, name them all in the final summary with a count, and print the
+unqualified pass line only when the count is zero.
+Give the gate a strict mode that turns any skip into a non-zero exit, and have
+unattended runs use it — a night that silently stopped checking must not read as a quiet
+night. Then order the gate so its prerequisites are built before its checks, and confirm
+by reading the skip list on a clean clone rather than on your own warm machine, which
+has everything installed and will never show you the problem.*
+
+**A check that exists and nothing runs.** The check was written, committed, and correct;
+it simply was not wired into the gate, so it ran when somebody remembered.
+That is the same failure as not having it, deferred.
+*Guard: a check outside the gate is documentation.
+Wire it, or delete it.*
+
 ## The record
 
 **One boolean where four facts live.** A single `significant` flag cannot separate
@@ -175,9 +198,20 @@ two runners choosing different slugs both succeed and both own id `NNN`. Measure
 rounds — and every artifact was individually valid, so nothing complained.
 Reserving an id-only name and renaming it to the slugged one fails differently: the
 rename frees the reservation and a later claimer re-allocates the id.
-*Guard: put the scan and the create in one critical section (`flock` on a single
-allocation lock, or `mkdir` of a per-round directory), and test it with concurrent
-processes rather than reasoning about it.*
+*Guard: make the reservation an atomic `mkdir` of a marker directory named for the id,
+and test it with concurrent processes rather than reasoning about it.*
+
+**The lock that was not a lock.** The fix for the above is often an advisory lock, and
+advisory locking is the one primitive that silently does not work where fleets live.
+`flock` over NFS was local-only before Linux 2.6.37 and is emulated through POSIX
+byte-range locks after it, needing a lock daemon; over SMB or a VM-shared mount on macOS
+it may return `ENOTSUP` or fail to exclude other hosts.
+Both runners believe they hold it.
+Worse, the code is correct on the developer’s local SSD and wrong on the shared volume
+the campaign actually runs on.
+*Guard: prefer `mkdir`, which is atomic everywhere and needs no daemon — see the
+allocator in `unattended.md`. If you must use an advisory lock, run the concurrency
+rehearsal on the real target filesystem, not on your laptop’s local disk.*
 
 **The fleet that agreed with itself.** N runners all pick the top-priority hypothesis at
 the same instant and spend the night replicating one result.
@@ -206,6 +240,25 @@ check it between rounds, not only at the start.*
 loses them, and the loss is silent.
 *Guard: commit artifacts, raw runs, and regenerated views after every round.*
 
+**The gate and the runner, running at once.** A negative-control harness proves each
+guard works by *corrupting a tracked file in place*, running the check, and restoring
+it. Anything else reading those files during that window sees the corruption.
+Observed here: a harness step failed on a dead link to a hypothesis that never existed,
+because the gate was mid-mutation two directories away.
+The spurious failure is the good outcome; a spurious pass is the other one, and nothing
+would have flagged it.
+*Guard: make the mutating process announce itself — a marker file created on entry and
+removed on exit — and have every other process refuse to read the record while it is
+there.
+Do not solve this by making the controls work on copies: a control that corrupts a
+copy is not testing the check that reads the original.*
+
+**The session-shaped harness.** One program that runs the whole night, holding its state
+in memory. When it dies at hour six you cannot resume it, cannot see what it finished,
+and cannot re-do the one step that failed — you restart, and the compute is gone.
+*Guard: one subcommand per step, state on disk between them, and a thin loop on top.
+The recovery for any failure is then re-running that step.*
+
 **The explorer that reproposed an abandoned idea.** An explorer given only the campaign
 question rediscovers what was already refuted last week.
 *Guard: brief explorers with the current ledger and registry, not just the question —
@@ -215,3 +268,32 @@ question rediscovers what was already refuted last week.
 two runners disagree about what the top item was.
 *Guard: one single-threaded codifier, and freeze the registry while runners are working;
 new hypotheses raised mid-round are appended, never reordered.*
+
+**The protocol that was specified and never built.** The runbook described the claim
+protocol, the record’s schema carried `lease` and `needs_review`, and the whole-set
+checker already refused a stale claim and an expired lease.
+Every one of those is the *validating* half.
+Nothing implemented the *producing* half — no allocator, no runner, no session report —
+so the campaign could validate an unattended night that nothing could execute, and read
+as ready right up until someone tried to start one.
+Validation is the easier half and the one that accretes naturally, because every round
+you write by hand exercises it.
+*Guard: the pre-flight below is the test.
+If you cannot run its six steps, you do not have a runner, however complete the schema
+looks. Ask specifically which component writes each field the schema declares, and treat
+a field nothing writes as a spec, not a feature.*
+
+**The flag nothing reads.** `needs_review` was in the schema from the first design,
+documented as driving the morning report’s first section.
+No view read it. A runner could set it correctly on every declined round and the human
+would never see one.
+*Guard: for each field a runner writes, name the view that surfaces it, and check that
+the view is reachable from what the human actually opens.
+A dangling producer is worse than a missing field, because it looks handled.*
+
+**The night with nothing to run.** The runner worked, the guards worked, the queue held
+one item — every other hypothesis was already resolved or waiting on an instrument that
+did not exist. Eight hours of capacity met one round of work.
+*Guard: queue depth is a pre-flight check, not an assumption.
+Count the runnable items and estimate their wall time against the machine you will
+actually use, before the night rather than during it.*

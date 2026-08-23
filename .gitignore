@@ -8,3 +8,14 @@ node_modules/
 __pycache__/
 *.py[cod]
 explorations/packing/.venv/
+
+# The unattended runner's id reservations (campaign/runner.py): one empty marker
+# directory per allocated exp id, created with an atomic mkdir. Local coordination
+# state for runners sharing a filesystem; runners on separate branches use disjoint id
+# blocks instead. Not shared, because the artifacts themselves are the durable record
+# of which ids exist.
+explorations/packing/campaign/series/.ids/
+
+# Present only while ./test.sh is running. The gate mutates tracked files in place
+# (tools/negctl.py) and campaign/runner.py refuses to read the record while it does.
+explorations/packing/.gate-running

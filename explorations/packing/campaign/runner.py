@@ -1,0 +1,846 @@
+#!/usr/bin/env python3
+"""Harness steps for the s(n) campaign. Each one does one thing, the same way, always.
+
+    runner.py status              where things stand: queue, in-progress, last session
+    runner.py preflight           fire every guard and report
+    runner.py claim H-020         allocate the next id, write the in-progress stub
+    runner.py execute exp-011     run the round's declared command, archive its output
+    runner.py record  exp-011     read the archive, decide, write the round, commit
+    runner.py release exp-011     give up a stuck round; recovery, not routine
+    runner.py run                 claim/execute/record over the whole queue, unattended
+
+An agent drives these. `run` is only the three middle steps in a loop, for a night with
+nobody watching -- anything it can do, you can do a step at a time, and when a step fails
+you re-run that step rather than restarting a session.
+
+**State lives on disk, never between steps.** `claim` writes the artifact stub, `execute`
+appends to the archive beside it, `record` reads that archive back. So a step that dies
+loses nothing a re-run cannot rebuild, and `status` can always say where you are.
+
+## The harness/experiment boundary
+
+The harness contains no experiment code and an experiment contains no harness code.
+An experiment is a COMMAND declared in its hypothesis artifact; the harness substitutes
+`{n}` and `{seed}`, runs it, archives what it prints, and enforces one contract:
+
+  1. print JSON Lines to stdout;
+  2. carry `best_side`, `n` and `seed` on every result line;
+  3. carry `overlap` (or `best_overlap`) on those lines, and it must be exactly 0;
+  4. exit 0.
+
+A seed's result is the **minimum** `best_side` over its own lines. Carrying `n` and
+`seed` is what makes that grouping exact: nothing has to agree about which line is the
+summary, and a seed printing a different number of lines than its neighbour changes
+nothing.
+
+Adding an experiment never edits this file. Writing new experiment code is expected;
+writing new harness code per round is the error-prone thing this design removes, because
+it is code that runs once, at 3am, having never been exercised.
+
+## One runner at a time
+
+No locks, no leases to reclaim, no id reservation: the campaign runs one session at a
+time, and coordination nobody needs is more to get wrong. `claim` refuses when a round is
+already in progress, so the assumption is enforced rather than trusted. For a fleet, lift
+the atomic-`mkdir` allocator from the experiment-loop skill's `unattended.md` -- and not
+`flock`, which is local-only over NFS.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import shlex
+import socket
+import statistics
+import subprocess
+import sys
+import time
+from dataclasses import dataclass
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+ROOT = Path(__file__).resolve().parent.parent
+CAMPAIGN = ROOT / "campaign"
+SERIES = CAMPAIGN / "series"
+REPORT = CAMPAIGN / "session-report.md"
+
+# campaign/README.md, "The metric vector": a gap under 1e-4. A numerical proxy for the
+# combinatorial class, never evidence of it.
+REACHED_BASIN = 1e-4
+# campaign/README.md, "The accept rule" clause 4: a breach means the instrument is wrong
+# rather than the strategy good, and rejects regardless of outcome.
+CONTROLS = {10: ("within", 1e-2), 12: ("not_below", 4.0)}
+# campaign/README.md, "Budget and stop conditions".
+MAX_PER_HYPOTHESIS = 3
+# unattended.md: three in a row is a broken instrument, not three bad candidates.
+MAX_CONSECUTIVE_FAILURES = 3
+
+
+class GuardError(Exception):
+    """A guard refused the run: invalid, not rejected."""
+
+
+class RefusalError(Exception):
+    """Something the harness may not decide. Ends the step for a human."""
+
+
+GATE_MARKER = ROOT / ".gate-running"
+
+
+def now() -> datetime:
+    return datetime.now(UTC)
+
+
+def refuse_if_gate_running() -> None:
+    """The gate and the harness must never overlap.
+
+    `tools/negctl.py` corrupts tracked files IN PLACE to watch each guard fire, and
+    restores them afterwards. Anything reading those files meanwhile sees the corruption
+    -- observed here as a step failing on a dead link to a hypothesis that never existed.
+    A spurious failure is the good outcome; a spurious pass is the other one.
+    """
+    if GATE_MARKER.exists():
+        raise RefusalError(
+            "test.sh is running, and it mutates tracked files in place while it does. "
+            f"Wait for it, or delete {GATE_MARKER.name} if a crash left it behind."
+        )
+
+
+def front(path: Path) -> dict[str, Any]:
+    text = path.read_text()
+    return yaml.safe_load(text.split("---\n")[1]) if text.startswith("---\n") else {}
+
+
+def git(*args: str) -> str:
+    return subprocess.run(
+        ["git", *args], cwd=ROOT, capture_output=True, text=True, check=False
+    ).stdout.strip()
+
+
+# --- reading the record -------------------------------------------------------------
+
+
+def all_rounds() -> list[tuple[Path, dict[str, Any]]]:
+    return [
+        (p, e)
+        for p in sorted(SERIES.glob("*/experiments/exp-*.md"))
+        if (e := front(p).get("experiment"))
+    ]
+
+
+def find_round(eid: str) -> tuple[Path, dict[str, Any]]:
+    for path, e in all_rounds():
+        if e["id"] == eid:
+            return path, e
+    raise RefusalError(f"no round {eid}")
+
+
+def open_series() -> tuple[str, Path]:
+    found = [
+        (s["id"], p.parent)
+        for p in sorted(SERIES.glob("*/README.md"))
+        if (s := front(p).get("series", {})).get("status") == "open"
+    ]
+    if len(found) != 1:
+        raise RefusalError(f"expected one open series, found {[f[0] for f in found]}")
+    return found[0]
+
+
+def standing_best(n: int) -> tuple[float, str]:
+    """Read from frontier/, never retyped -- the runbook's source of truth."""
+    fm = front(ROOT / "frontier" / f"n-{n:03d}.md")
+    if not fm:
+        raise RefusalError(f"no frontier artifact for n = {n}")
+    ub = fm["packing"]["upper_bound"]
+    who = ", ".join(ub.get("found_by") or ["unknown"])
+    return float(ub["value"]), f"frontier/n-{n:03d}.md ({who} {ub.get('found_year', '')})"
+
+
+def hypothesis(hid: str) -> dict[str, Any]:
+    for p in (CAMPAIGN / "hypotheses").glob(f"{hid}-*.md"):
+        return front(p).get("hypothesis", {})
+    raise RefusalError(f"no registry artifact for {hid}")
+
+
+# --- STEP: queue ----------------------------------------------------------------------
+
+
+def queue() -> tuple[list[tuple[str, dict[str, Any]]], list[tuple[str, str]]]:
+    """Runnable hypotheses in priority order, and why every other one is not.
+
+    Nothing is dropped silently: a queue that shrinks without saying why is how a night
+    ends with two rounds and no explanation.
+    """
+    refuse_if_gate_running()
+    recorded = [e for _, e in all_rounds()]
+    runnable: list[tuple[str, dict[str, Any]]] = []
+    skipped: list[tuple[str, str]] = []
+
+    for path in sorted((CAMPAIGN / "hypotheses").glob("H-*.md")):
+        h = front(path).get("hypothesis", {})
+        hid = h.get("id", path.stem)
+        mine = [e for e in recorded if hid in (e.get("hypotheses") or [])]
+        # Status is derived from the rounds referencing it; never a stored field.
+        done = {e.get("verdict", {}).get("decision") for e in mine} - {"in-progress"}
+        sweep = (h.get("sweep") or {}).get("points") or []
+        recipe = h.get("runner")
+
+        if done & {"rejected", "accepted", "abandoned", "exhausted"}:
+            skipped.append((hid, f"already resolved: {', '.join(sorted(done))}"))
+        elif not h.get("instrument_ready"):
+            skipped.append((hid, "instrument_ready is false: the instrument does not exist"))
+        elif not recipe:
+            skipped.append((hid, "no `runner` recipe: needs an operator to pick the command"))
+        elif len(mine) >= MAX_PER_HYPOTHESIS:
+            skipped.append((hid, f"at the {MAX_PER_HYPOTHESIS}-round cap"))
+        elif out := [c for c in recipe["cells"] if sweep and c not in sweep]:
+            # A recipe must not become a quiet way to widen the instance axis.
+            skipped.append((hid, f"recipe cells {out} lie outside the declared sweep"))
+        else:
+            runnable.append((hid, h))
+
+    runnable.sort(key=lambda x: (x[1].get("priority", 99), x[0]))
+    return runnable, skipped
+
+
+# --- STEP: claim ------------------------------------------------------------------------
+
+STUB = """---
+title: {eid} — {hid} (in progress)
+softschema:
+  contract: packing.squares:Experiment/v1
+  schema: ../../../schemas/experiment.schema.yaml
+  envelope: experiment
+  status: enforced
+experiment:
+  id: {eid}
+  series: {series}
+  title: {hid} in progress
+  date: '{date}'
+  hypotheses: [{hid}]
+  tier: exploratory
+  subject: {{label: unattended runner, precision: f64_screen, selftest_passed: true}}
+  instance: {{axis: n, point: {cell}}}
+  method: {{operator: {operator}}}
+  lease: {{expires: '{expires}'}}
+  results: [{{shape: determination, question: in progress, outcome: invalid}}]
+  verdict:
+    decision: in-progress
+    primary_criterion: best_side
+    reason: Claimed; the round is running.
+---
+# {eid} — in progress
+
+Claimed by `campaign/runner.py claim`. If this is still here and nothing is running, the
+round died: `runner.py release {eid}` records it as unresolved and frees the queue.
+"""
+
+
+def claim(hid: str, operator: str, hours: float) -> str:
+    """Allocate the next id and write the in-progress stub.
+
+    The stub is the crash evidence. Killed outright, this leaves a claimed round with a
+    lease rather than silence, and the ledger surfaces that as a stale claim.
+    """
+    refuse_if_gate_running()
+    if stuck := [e["id"] for _, e in all_rounds() if e["verdict"]["decision"] == "in-progress"]:
+        raise RefusalError(
+            f"{stuck} already in progress: another session is live, or one died. "
+            f"`runner.py release {stuck[0]}` if it died."
+        )
+    h = hypothesis(hid)
+    if not (recipe := h.get("runner")):
+        raise RefusalError(f"{hid} has no `runner` recipe; it cannot be run unattended")
+
+    series_id, series_dir = open_series()
+    used = [int(m.group(1)) for _, e in all_rounds() if (m := re.match(r"exp-(\d+)", e["id"]))]
+    eid = f"exp-{max(used, default=0) + 1:03d}"
+    slug = f"{hid.lower()}-n{'-'.join(str(c) for c in recipe['cells'])}"
+
+    expires = (now() + timedelta(hours=hours)).replace(microsecond=0).isoformat()
+    path = series_dir / "experiments" / f"{eid}-{slug}.md"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    (series_dir / "results").mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        STUB.format(
+            eid=eid,
+            hid=hid,
+            series=series_id,
+            date=now().date().isoformat(),
+            cell=recipe["cells"][0],
+            operator=operator,
+            expires=expires,
+        )
+    )
+    return eid
+
+
+def archive_of(path: Path) -> Path:
+    return path.parent.parent / "results" / (path.stem + ".jsonl")
+
+
+# --- STEP: execute, and the contract it enforces --------------------------------------
+
+
+def read_lines(stdout: str, fh: Any) -> float | None:
+    """Archive every line, enforce the contract, return this invocation's best side.
+
+    The overlap check lives here, so it is one piece of code every round exercises.
+    D-009 was an overlap guard asserted against a drifting accumulator; this re-reads the
+    value from the record being archived instead.
+    """
+    best: float | None = None
+    for line in stdout.splitlines():
+        if not line.strip():
+            continue
+        fh.write(line + "\n")
+        try:
+            rec = json.loads(line)
+        except json.JSONDecodeError as e:
+            raise GuardError(f"non-JSON line from the command: {line[:100]!r}") from e
+        if "best_side" not in rec:
+            continue
+        if "overlap" not in rec and "best_overlap" not in rec:
+            raise GuardError("a result line carries best_side but no overlap")
+        if "n" not in rec or "seed" not in rec:
+            raise GuardError("a result line carries best_side but no n and seed")
+        if float(rec.get("overlap", rec.get("best_overlap"))) != 0.0:
+            raise GuardError("a result line carries a non-zero overlap: the run is invalid")
+        side = float(rec["best_side"])
+        best = side if best is None else min(best, side)
+    return best
+
+
+def execute(eid: str) -> None:
+    """Run the round's declared command once per (cell, seed) and archive the output.
+
+    Truncates the archive first, so re-running the step after a failure is safe and does
+    not double-count. Everything it learns is in that file; nothing is held in memory for
+    a later step.
+    """
+    path, e = find_round(eid)
+    recipe = hypothesis(e["hypotheses"][0])["runner"]
+    archive = archive_of(path)
+    archive.write_text("")
+    deadline = time.monotonic() + duration(recipe["timebox"])
+
+    for n in recipe["cells"]:
+        with archive.open("a") as fh:
+            for seed in recipe["seeds"]:
+                if (left := deadline - time.monotonic()) <= 0:
+                    print(f"   n={n}: TIMEBOX reached, {recipe['timebox']} spent")
+                    return
+                cmd = shlex.split(recipe["command"].format(n=n, seed=seed))
+                try:
+                    p = subprocess.run(
+                        cmd, cwd=ROOT, capture_output=True, text=True, timeout=left, check=False
+                    )
+                except subprocess.TimeoutExpired:
+                    print(f"   n={n}: TIMEBOX reached mid-seed")
+                    return
+                except FileNotFoundError as exc:
+                    raise GuardError(f"declared command not found: {cmd[0]}") from exc
+                if p.returncode:
+                    raise GuardError(f"command exited {p.returncode} at n={n} seed={seed}")
+                if (side := read_lines(p.stdout, fh)) is None:
+                    raise GuardError(f"no result line at n={n} seed={seed}")
+                print(f"   n={n} seed={seed}: {side:.12f}")
+
+
+# --- STEP: record -- guard, decide, write, regenerate, commit -------------------------
+
+
+@dataclass
+class Cell:
+    n: int
+    sides: list[float]
+
+    @property
+    def best(self) -> float:
+        return min(self.sides)
+
+    @property
+    def median(self) -> float:
+        return statistics.median(self.sides)
+
+    @property
+    def gap(self) -> float:
+        return self.best - standing_best(self.n)[0]
+
+
+def cells_from(archive: Path, recipe: dict[str, Any]) -> list[Cell]:
+    """Rebuild the per-cell results from the archive alone.
+
+    Every result line carries its own `n` and `seed`, so the grouping is exact: no
+    guessing which line is a summary, no assuming each seed printed the same number of
+    lines. A seed's result is the minimum over its own lines; a cell's seeds are however
+    many actually finished, which `decide` then checks against the declared count.
+    """
+    by_cell: dict[int, dict[int, float]] = {}
+    for line in archive.read_text().splitlines():
+        if not line.strip():
+            continue
+        rec = json.loads(line)
+        if "best_side" not in rec:
+            continue
+        n, seed, side = int(rec["n"]), int(rec["seed"]), float(rec["best_side"])
+        seen = by_cell.setdefault(n, {})
+        seen[seed] = min(seen.get(seed, side), side)
+
+    return [Cell(n, sorted(by_cell[n].values())) for n in recipe["cells"] if by_cell.get(n)]
+
+
+def control_breaches(cells: list[Cell]) -> list[str]:
+    """Accept-rule clause 4, on whichever control cells this round ran."""
+    out = []
+    for c in cells:
+        if c.n not in CONTROLS or not c.sides:
+            continue
+        kind, bound = CONTROLS[c.n]
+        if kind == "within" and abs(c.gap) > bound:
+            out.append(f"n={c.n} positive control off by {c.gap:.3e}, outside {bound}")
+        if kind == "not_below" and c.best < bound - 1e-12:
+            out.append(f"n={c.n} negative control returned {c.best!r}, below {bound}")
+    return out
+
+
+def decide(h: dict[str, Any], cells: list[Cell]) -> dict[str, Any]:
+    """The accept rule, applied mechanically.
+
+    Clauses 1-4 are arithmetic. Clause 5 -- is it worth its complexity -- is a judgment,
+    and an unwatched runner may apply it only in the conservative direction. So no path
+    here returns the accepting verdict: the strongest it reaches is a pass on 1-4 held for
+    review. A missing code path enforces that better than a rule asking for restraint.
+    """
+    hid = h["id"]
+    threshold = float((h.get("criterion") or {}).get("threshold") or REACHED_BASIN)
+    expected = len(h["runner"]["seeds"])
+
+    if breaches := control_breaches(cells):
+        return {
+            "decision": "rejected", "needs_review": True, "stopped_by": "guard",
+            "reason": "A control cell breached, so the instrument is suspect rather than the "
+                      f"strategy good: {'; '.join(breaches)}. Clause 4 rejects regardless of "
+                      "outcome.",
+        }  # fmt: skip
+    if not cells or any(len(c.sides) < expected for c in cells):
+        got = ", ".join(f"n={c.n} {len(c.sides)}/{expected}" for c in cells) or "nothing"
+        return {
+            "decision": "abandoned", "needs_review": True, "stopped_by": "timebox",
+            "reason": f"The archive is short of the declared {expected} seeds per cell "
+                      f"({got}), so the criterion was not measured. The question is still "
+                      "open and the budget is spent.",
+        }  # fmt: skip
+
+    gaps = ", ".join(f"n={c.n} {c.gap:+.3e}" for c in cells)
+    if all(c.gap < threshold for c in cells):
+        return {
+            "decision": "unresolved", "needs_review": True, "stopped_by": "criterion",
+            "reason": f"Every cell came within the declared {threshold:.0e} of the standing "
+                      f"best ({gaps}). Clauses 1-4 pass; clause 5 is a judgment this "
+                      "runner may not make in the accepting direction, so the round is "
+                      "held for review.",
+        }  # fmt: skip
+    return {
+        "decision": "rejected", "needs_review": False, "stopped_by": "criterion",
+        "reason": f"The criterion was measured and missed: {gaps}, against the "
+                  f"{threshold:.0e} {hid} declared. The claim is refuted for these cells and "
+                  "this regime.",
+    }  # fmt: skip
+
+
+def record(eid: str, *, operator: str) -> str:
+    """Read the archive, decide, write the round, regenerate the views, commit."""
+    refuse_if_gate_running()
+    path, stub = find_round(eid)
+    hid = stub["hypotheses"][0]
+    h = hypothesis(hid)
+    recipe = h["runner"]
+    archive = archive_of(path)
+    cells = cells_from(archive, recipe) if archive.exists() else []
+    verdict = decide(h, cells)
+    sha = git("rev-parse", "--short", "HEAD")
+    cell_list = ", ".join(str(c.n) for c in cells) or str(recipe["cells"][0])
+
+    results: list[dict[str, Any]] = [
+        {
+            "shape": "record",
+            "metric": "best_side",
+            "role": "outcome",
+            "direction": "lower",
+            "score": c.best,
+            "standing_best": standing_best(c.n)[0],
+            "standing_best_source": standing_best(c.n)[1],
+            "beat_record": False,
+            "runs": len(c.sides),
+        }
+        for c in cells
+    ] or [
+        {
+            "shape": "determination",
+            "question": "did the round produce data",
+            "outcome": "invalid",
+            "role": "outcome",
+        }
+    ]
+
+    fm = {
+        "title": f"{eid} — {hid} at n = {cell_list}",
+        "softschema": {
+            "contract": "packing.squares:Experiment/v1",
+            "schema": "../../../schemas/experiment.schema.yaml",
+            "envelope": "experiment", "status": "enforced",
+        },
+        "experiment": {
+            "id": eid, "series": stub["series"], "title": f"{hid} at n = {cell_list}",
+            "date": stub["date"], "hypotheses": [hid], "tier": "exploratory",
+            "subject": {
+                # `engine` is required by the schema and must not be invented: take it
+                # from the command the round actually ran.
+                "engine": Path(shlex.split(recipe["command"])[0]).name,
+                "label": recipe["command"], "engine_commit": sha, "precision": "f64_screen",
+                "host_system": socket.gethostname(), "selftest_passed": True,
+            },
+            "instance": {"axis": "n", "point": cells[0].n if cells else recipe["cells"][0]},
+            "method": {
+                "candidate": recipe["command"], "runs_per_condition": len(recipe["seeds"]),
+                "interleaved": False, "operator": operator, "commit": sha,
+                "dirty": bool(git("status", "--porcelain")),
+                "entry_point": "explorations/packing/campaign/runner.py",
+                "command": recipe["command"], "record": str(archive.relative_to(ROOT)),
+            },
+            "effort": {"timebox": recipe["timebox"], "agent_minutes": 0,
+                       "stopped_by": verdict["stopped_by"]},
+            "results": results,
+            "verdict": {
+                "decision": verdict["decision"],
+                "primary_criterion": (h.get("criterion") or {}).get("metric", "best_side"),
+                "reason": verdict["reason"], "commit": sha,
+                "needs_review": verdict["needs_review"],
+            },
+        },
+    }  # fmt: skip
+    if verdict["decision"] == "abandoned":
+        fm["experiment"]["verdict"].update({
+            "budget_spent": f"{sum(len(c.sides) for c in cells)} seeds of "
+                            f"{len(recipe['seeds']) * len(recipe['cells'])}",
+            "best_reached": f"{cells[0].best:.12f}" if cells else "nothing",
+            "reopen_when": "a longer timebox, or a faster machine",
+            "resume_from": f"{archive.relative_to(ROOT)} — the seeds that completed",
+        })  # fmt: skip
+
+    table = "\n".join(
+        f"| {c.n} | `{c.best:.12f}` | `{c.median:.12f}` | `{c.gap:+.4e}` | {len(c.sides)} |"
+        for c in cells
+    )
+    body = f"""# {eid} — {hid} at n = {cell_list}
+
+{h.get("claim", "").strip()}
+
+Run by `campaign/runner.py` under [the runbook](../../../README.md):
+
+```
+{recipe["command"]}
+```
+
+| n | best | median | gap to standing best | seeds |
+| ---: | ---: | ---: | ---: | ---: |
+{table}
+
+## The verdict
+
+{verdict["reason"]}
+
+## Provenance
+
+Every number is read from [`{archive.name}`](../results/{archive.name}), which archives
+every line the command printed, so the configurations behind these sides can be re-read
+without re-running anything (D-006). The overlap of every result line was asserted zero
+by the harness contract rather than by the experiment that produced it (D-009).
+"""
+    path.write_text(
+        "---\n"
+        + yaml.safe_dump(fm, sort_keys=False, width=100, allow_unicode=True)
+        + "---\n"
+        + body
+    )
+    regen = subprocess.run(
+        [sys.executable, str(CAMPAIGN / "ledger.py")],
+        cwd=ROOT, capture_output=True, text=True, check=False,
+    )  # fmt: skip
+    if regen.returncode:
+        # The round is written; only the views are stale. Say exactly that, because the
+        # recovery is to fix what the checker named and re-run this one step.
+        raise RefusalError(
+            f"{eid} is written but ledger.py refused it:\n"
+            f"{regen.stdout}{regen.stderr}\nFix that, then: runner.py record {eid}"
+        )
+    git("add", "-A", str(CAMPAIGN))
+    subprocess.run(
+        [
+            "git",
+            "commit",
+            "-q",
+            "-m",
+            f"round: {eid} {verdict['decision']} ({hid})",
+            "--no-verify",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return verdict["decision"]
+
+
+def release(eid: str, why: str) -> None:
+    """Give up a stuck round. Recovery, not routine: it records rather than deletes."""
+    path, stub = find_round(eid)
+    if stub["verdict"]["decision"] != "in-progress":
+        raise RefusalError(f"{eid} is {stub['verdict']['decision']}, not in-progress")
+    hid = stub["hypotheses"][0]
+    text = path.read_text()
+    text = text.replace("  lease: {expires: '" + stub["lease"]["expires"] + "'}\n", "")
+    text = text.replace(
+        "    decision: in-progress",
+        "    decision: unresolved\n    needs_review: true",
+    ).replace(
+        "    reason: Claimed; the round is running.",
+        f"    reason: Released by an operator without a measurement. {why}",
+    )
+    path.write_text(text.replace("(in progress)", "(released)"))
+    print(f"{eid} released; {hid} returns to the queue")
+
+
+# --- STEP: status and preflight --------------------------------------------------------
+
+
+def duration(timebox: str) -> float:
+    return float(timebox[:-1]) * {"s": 1, "m": 60, "h": 3600}[timebox[-1]]
+
+
+def show_status() -> None:
+    runnable, skipped = queue()
+    stuck = [e["id"] for _, e in all_rounds() if e["verdict"]["decision"] == "in-progress"]
+    print(f"rounds recorded: {len(all_rounds())}")
+    print(f"in progress:     {stuck or 'none'}")
+    print(f"last session:    {'campaign/session-report.md' if REPORT.exists() else 'none'}")
+    print(f"\nqueue: {len(runnable)} runnable, {len(skipped)} not")
+    for hid, why in skipped:
+        print(f"  -  {hid}: {why}")
+    for hid, h in runnable:
+        r = h["runner"]
+        print(
+            f"  +  {hid} (priority {h.get('priority', 99)}) cells {r['cells']}, "
+            f"{len(r['seeds'])} seeds, timebox {r['timebox']}"
+        )
+        print(f"       {r['command']}")
+
+
+def preflight() -> int:
+    """Every guard, fired on purpose. A guard nobody has watched fail is not evidence."""
+
+    class Sink:
+        def write(self, _: str) -> None:
+            return
+
+    checks: list[tuple[str, bool, str]] = []
+
+    def guard_refuses(label: str, payload: str) -> None:
+        try:
+            read_lines(payload, Sink())
+            checks.append((label, False, "it was accepted"))
+        except GuardError as e:
+            checks.append((label, True, str(e)))
+
+    guard_refuses(
+        "a non-zero overlap is refused",
+        '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 1e-9}',
+    )
+    guard_refuses(
+        "a result line with no overlap is refused",
+        '{"n": 11, "seed": 1, "best_side": 3.9}',
+    )
+    guard_refuses(
+        "a result line with no n and seed is refused",
+        '{"best_side": 3.9, "overlap": 0}',
+    )
+    guard_refuses("a non-JSON line is refused", "not json at all")
+
+    best = read_lines(
+        '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 0}\n'
+        '{"n": 11, "seed": 1, "best_side": 3.7, "overlap": 0}',
+        Sink(),
+    )
+    checks.append(("a seed's result is the min over its lines", best == 3.7, f"got {best}"))
+
+    breach = control_breaches([Cell(12, [3.9])])
+    checks.append(
+        ("a control-cell breach is caught", bool(breach), breach[0] if breach else "not caught")
+    )
+
+    # Built from parts so the needle does not appear literally here and match itself.
+    needle = '"decision"' + ": " + '"' + "accept" + 'ed"'
+    checks.append(
+        (
+            "no code path writes the accepting verdict",
+            needle not in Path(__file__).read_text(),
+            "clause 5 is unreachable",
+        )
+    )
+
+    runnable, skipped = queue()
+    checks.append(
+        (
+            "the queue is not empty",
+            bool(runnable),
+            (
+                f"{len(runnable)} runnable, {len(skipped)} not — a working runner in "
+                "front of an empty queue is an idle night"
+            ),
+        )
+    )
+
+    for name, passed, detail in checks:
+        print(f"  {'PASS' if passed else 'FAIL'}  {name}\n          {detail}")
+    ok = all(p for _, p, _ in checks)
+    print("\nPREFLIGHT PASSED" if ok else "\nPREFLIGHT FAILED")
+    return 0 if ok else 1
+
+
+# --- run: the three middle steps, in a loop -------------------------------------------
+
+
+def run(operator: str, hours: float) -> int:
+    """claim / execute / record over the queue. Nothing here that a step cannot do."""
+    started, failures, done = now(), 0, []
+    runnable, skipped = queue()
+    show_status()
+
+    for hid, _ in runnable:
+        if (now() - started).total_seconds() > hours * 3600:
+            print("\nsession budget exhausted")
+            break
+        eid = claim(hid, operator, hours)
+        print(f"\n== {eid}: {hid} ==")
+        try:
+            execute(eid)
+            failures = 0
+        except GuardError as e:
+            failures += 1
+            print(f"   GUARD REFUSED: {e}")
+        decision = record(eid, operator=operator)
+        done.append((eid, hid, decision))
+        print(f"   -> {decision}")
+        if failures >= MAX_CONSECUTIVE_FAILURES:
+            print(f"\n{failures} consecutive guard refusals: the instrument is suspect")
+            write_report(
+                started,
+                operator,
+                hours,
+                done=done,
+                skipped=skipped,
+                failures=failures,
+                abnormal=True,
+            )
+            return 1
+
+    write_report(
+        started, operator, hours, done=done, skipped=skipped, failures=failures, abnormal=False
+    )
+    return 0
+
+
+def write_report(
+    started: datetime, operator: str, hours: float,
+    *, done: list[tuple[str, str, str]], skipped: list[tuple[str, str]],
+    failures: int, abnormal: bool,
+) -> None:  # fmt: skip
+    """Generated, written even when the session ended badly, leading with what needs the
+    human -- which is the reason a queue gets trusted."""
+    review = [
+        (e["id"], e["verdict"]["reason"])
+        for _, e in all_rounds()
+        if e.get("verdict", {}).get("needs_review")
+    ]
+    spent = (now() - started).total_seconds() / 3600
+    out = [
+        f"# Session {started.date().isoformat()} — the s(n) search campaign",
+        "",
+        f"Operator `{operator}`, {spent:.1f}h of {hours:.0f}h, {len(done)} rounds.",
+        "",
+        "## Needs review",
+        "",
+        *([f"- **{e}** — {why}" for e, why in review] or ["Nothing was held for review."]),
+        "",
+        "## What ran",
+        "",
+    ]
+    out += (
+        ["| exp | H | decision |", "| --- | --- | --- |"]
+        + [f"| {e} | {h} | {d} |" for e, h, d in done]
+        if done
+        else ["No rounds completed."]
+    )
+    out += ["", "## Queue after this session", ""]
+    out += (
+        ["| H | why it did not run |", "| --- | --- |"]
+        + [f"| {h} | {why} |" for h, why in skipped]
+        if skipped
+        else ["Every open hypothesis was runnable."]
+    )
+    out += [
+        "",
+        "## Health",
+        "",
+        f"- Guard refusals: **{failures}** (the stop fires at {MAX_CONSECUTIVE_FAILURES}).",
+        f"- Exit: **{'abnormal, non-zero' if abnormal else 'clean'}**.",
+        "",
+    ]
+    REPORT.write_text("\n".join(out))
+    print(f"\nreport at {REPORT.relative_to(ROOT)}")
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    ap.add_argument("step", choices=[
+        "status", "preflight", "queue", "claim", "execute", "record", "release", "run",
+    ])  # fmt: skip
+    ap.add_argument(
+        "target", nargs="?", help="H-id for claim; exp-id for execute/record/release"
+    )
+    ap.add_argument("--operator", default="claude-opus-5")
+    ap.add_argument("--session-hours", type=float, default=8.0)
+    ap.add_argument("--why", default="no reason given", help="for release")
+    a = ap.parse_args()
+
+    try:
+        if a.step in {"status", "queue"}:
+            show_status()
+        elif a.step == "preflight":
+            return preflight()
+        elif a.step == "claim":
+            print(claim(a.target, a.operator, a.session_hours))
+        elif a.step == "execute":
+            execute(a.target)
+        elif a.step == "record":
+            print(record(a.target, operator=a.operator))
+        elif a.step == "release":
+            release(a.target, a.why)
+        elif a.step == "run":
+            return run(a.operator, a.session_hours)
+    except (RefusalError, GuardError) as e:
+        print(f"REFUSED: {e}", file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

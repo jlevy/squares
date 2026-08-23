@@ -9,6 +9,132 @@ The premise: **an unwatched loop is only as trustworthy as its refusals.** Every
 below is about making the failure modes loud and the boundaries mechanical, so a
 campaign that ran for eight hours alone produces a record its author can still believe.
 
+## What running unattended actually costs you
+
+Before building any of this, price the thing you are giving up.
+
+Campaigns that keep a defect log can read their own answer off it: tabulate what caught
+each defect. One campaign’s 29 entries came out as **12 review, 5 inspection, 4 control
+cell, 3 anomaly, 2 drift check, 1 pre-registered rule, 1 design — and 1 automated
+gate.** Twenty-four of twenty-nine were found by a person or agent *reading with
+intent*. The gate found one, and none of the six soundness defects.
+
+That distribution is not a criticism of the gate; it is what gates are.
+A gate confirms what someone already thought to check.
+The things that catch the rest are devices built to be *surprised* — a control cell
+whose answer is known in advance, a rule written down before the measurement, a
+generated view contradicting its own source — and a reader who notices that a number is
+strange.
+
+**Running unattended removes the dominant detector.** So the question is not “can the
+runner execute rounds” but “what is watching, now that nobody is”.
+Three answers, and you want all three:
+
+- **Move detectors from review into the gate** where you can.
+  Every guard listed below is a review-detector mechanised.
+- **Prefer the surprise-shaped devices.** Control cells and pre-registered rules keep
+  working when nobody is awake; a checklist does not.
+- **Make the morning read cheap.** The session report exists so the human’s first hour
+  recovers as much of the lost attention as possible, which is why it leads with what
+  the runner would not decide.
+
+And price the other axis: **how much of a round is machine time?** One campaign recorded
+275 agent-minutes against 16.4 cpu-minutes across ten rounds — seventeen to one.
+A runner only removes the waiting; it does nothing for the seventeen.
+Automating an agent-bound loop buys very little and can cost a night of debugging, so
+measure the ratio from your own effort fields before deciding this is worth building.
+Where the ratio is the other way round, unattended operation is the whole game.
+
+## Build the harness as steps, not as a session
+
+The tempting shape is one program that runs the night: pick, run, judge, record, repeat.
+It is the wrong shape, for a reason that only shows up at 3am — when it fails, you have
+no move except to restart it, and you do not know what it had already done.
+
+Build **one subcommand per step of the loop**, each doing one thing the same way every
+time, and let something else sequence them:
+
+```
+harness status              where things stand
+harness preflight           fire every guard and report
+harness claim <hypothesis>  allocate the id, write the in-progress stub  -> exp-041
+harness execute exp-041     run the round's declared command, archive the output
+harness record  exp-041     read the archive, decide, write the round, commit
+harness release exp-041     give up a stuck round; recovery, not routine
+harness run                 the middle three, over the queue, unattended
+```
+
+Two properties make this worth the small extra structure:
+
+- **State lives on disk, never between steps.** `claim` writes the stub, `execute`
+  appends to the archive beside it, `record` reads that archive back.
+  A step that dies loses nothing a re-run cannot rebuild, and `status` can always answer
+  where you are. Make `execute` truncate its archive first, so re-running it never
+  double-counts.
+- **Failure recovery is re-running one step**, not restarting a session.
+  When `record` refuses because the whole-set checker rejected the artifact, the fix is
+  to correct what the checker named and run `record` again — the hours of compute in the
+  archive are untouched.
+  A session-shaped harness makes that same failure cost the night.
+
+An agent is perfectly capable of sequencing these and recovering when one fails.
+What it cannot do is recover from a monolith that died halfway with its state in memory.
+`run` is then a thin loop over the same three steps, for a night with nobody watching,
+and anything it can do you can do by hand.
+
+## The harness holds no experiment code
+
+**An experiment is a declared command, not a branch in the harness.** Put the command in
+the registry artifact, have the harness substitute the instance and the seed, run it,
+archive what it prints, and enforce one fixed contract on that output.
+
+```yaml
+runner:
+  command: './engine --n {n} --seed {seed} --budget 100000000'
+  cells: [17]
+  seeds: [1, 2, 3, 4, 5]
+  timebox: 1h
+```
+
+The contract is the whole interface.
+A useful one, adapt the field names:
+
+> Print JSON Lines to stdout.
+> Carry the outcome metric, the instance, and the seed on every result line.
+> Carry whatever the validity guard reads on those same lines.
+> Exit 0.
+
+Two consequences, and they are the point:
+
+- **Adding an experiment never edits the harness.** If it would, the contract is wrong
+  and the contract is the thing to fix.
+  Per-round parsing written into the harness is code that runs once, at 3am, having
+  never been exercised — which is the most reliable way to lose a night.
+- **The guard is one piece of code every round exercises**, rather than one per
+  experiment. That matters more than it sounds: a validity check reimplemented per
+  experiment is a validity check that is wrong in one of them.
+
+Writing new *experiment* code is expected and fine — a new probe is a script obeying the
+contract. Writing new *harness* code per round is the thing to refuse.
+
+Carry the instance and seed on every result line even when it feels redundant.
+It is what lets the harness group results exactly, instead of inferring which line was a
+summary or assuming every seed printed the same number of lines.
+Both inferences are wrong eventually and neither fails loudly.
+
+## Do not build coordination you do not need
+
+Most campaigns run one session at a time.
+For those, the entire claim protocol below — locks, id reservation, lease reclamation,
+the duplication key — is machinery that can only introduce bugs, and the honest
+implementation is one line:
+
+> Refuse to start when a round is already in progress.
+
+That enforces the assumption instead of trusting it, and it costs nothing.
+Read the rest of this section when a fleet is actually the plan, and lift the allocator
+from it then.
+
 ## The claim is the artifact
 
 Do not build a separate lock file for each round.
@@ -34,25 +160,64 @@ Measured on 2026-08-22: 64 concurrent claimers under that scheme produced 49 dis
 ids for 64 rounds. Reserving an id-only name and renaming it to the slugged one is also
 wrong — the rename frees the reservation, so a later claimer re-allocates the id.
 
+**Reserve with `mkdir`, not with a lock.** The obvious implementation takes an advisory
+lock — `flock` on a lock file — and it is the wrong default, because advisory locking is
+the one filesystem primitive that quietly does not work where a fleet is most likely to
+live.
+Over NFS `flock` was purely local before Linux 2.6.37 and is emulated through POSIX
+byte-range locks after it, needing a working lock daemon; on macOS over SMB or a
+VM-shared mount it may return `ENOTSUP` or simply fail to exclude other hosts.
+Two runners then both believe they hold the lock, which is the duplicate id the lock
+existed to prevent.
+
+`mkdir` needs no daemon and no advisory-lock support: creating a directory that already
+exists fails, atomically, on every filesystem worth running on, NFS included.
+So make the reservation a marker directory named for the id.
+
 ```python
-import fcntl
+import re
 from pathlib import Path
 
-def claim(directory: Path, slug: str, body: str) -> Path:
-    """Allocate the next free experiment id and write the claim, atomically."""
-    directory.mkdir(parents=True, exist_ok=True)
-    with open(directory / ".idlock", "a") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)          # released when the block exits
-        taken = [int(p.name[4:7]) for p in directory.glob("exp-[0-9][0-9][0-9]-*.md")]
-        path = directory / f"exp-{max(taken, default=0) + 1:03d}-{slug}.md"
-        path.write_text(body)
-        return path
+def claim(experiments: Path, markers: Path, slug: str, body: str) -> Path:
+    """Allocate the next free experiment id and write the claim."""
+    experiments.mkdir(parents=True, exist_ok=True)
+    markers.mkdir(parents=True, exist_ok=True)
+
+    seen = [int(m.group(1)) for p in experiments.glob("exp-*.md")
+            if (m := re.match(r"exp-(\d{3})-", p.name))]
+    seen += [int(m.group(1)) for d in markers.iterdir()
+             if (m := re.match(r"exp-(\d{3})$", d.name))]
+    nid = max(seen, default=0) + 1
+
+    while True:
+        try:
+            (markers / f"exp-{nid:03d}").mkdir()   # atomic; exactly one racer wins
+        except FileExistsError:
+            nid += 1
+            continue
+        break
+
+    path = experiments / f"exp-{nid:03d}-{slug}.md"
+    path.write_text(body)
+    return path
 ```
 
-Verified with 64 concurrent OS processes: 64 distinct ids, no gaps, no strays.
-`flock` is POSIX; on Windows use `msvcrt.locking`, or give each round its own directory
-(`experiments/exp-NNN/`) and let `mkdir` be the atomic reservation, which is worth doing
-anyway when a round produces raw run files that want somewhere to live.
+Three properties worth naming, because each removes a failure the lock version has:
+
+- **Nothing is held while the round runs.** The marker is a fact, not a lease, so there
+  is no stale lock to time out and no crashed runner blocking the allocator.
+  (The lease on the *artifact* is a separate mechanism covering a different failure —
+  see above.)
+- **The reservation is never freed.** That is what kills the rename trap: reserving an
+  id-only filename and renaming it to the slugged one frees the reservation, and a later
+  claimer re-allocates the id.
+- **The scan does not have to be exact.** It only seeds the search; correctness rests on
+  the `mkdir`. A scan that races and reads a stale directory listing costs one extra
+  loop iteration, not a duplicate id.
+
+Verified with 32 and 64 concurrent OS processes: distinct ids, no gaps, no strays.
+Test the function you ship, not a copy of it pasted into the test — a rehearsal of a
+reimplementation proves the reimplementation works.
 
 **All of this assumes the runners share a filesystem.** On separate branches or
 worktrees they do not, so assign **disjoint id blocks** up front instead — runner A
@@ -142,6 +307,41 @@ the boundary case. An unwatched runner may apply it only in the conservative dir
 it may decline a marginal win, recording why, and it may not accept one.
 Anything it declined on judgment goes in the morning report’s review section.
 
+**Build that as a structural refusal, not a behavioural one.** The strong form is a
+runner that *cannot express* the accepting verdict — the code path does not exist, so
+the strongest thing it can write is a pass on the arithmetic clauses flagged for review.
+A rule saying “the runner should be careful here” is one prompt, one refactor, or one
+plausible special case away from being violated at 4am with nobody reading.
+A missing code path is not.
+Wherever a refusal in this list can be made unrepresentable rather than merely
+forbidden, make it unrepresentable; the rest is what the review section is for.
+
+## The queue needs a machine-readable half
+
+A registry written for humans describes its instrument in prose — *“the stock annealer
+at 100x budget, five seeds, gated by the selftest”*. That is the right thing to write
+and an unwatched runner cannot execute it.
+The gap gets closed one of two ways, and only one of them is safe: either the runner
+parses prose and improvises a command, or the registry carries a second, explicitly
+machine-readable field alongside the prose.
+
+Carry both. Keep the prose field as the human’s account of what the round is, and add a
+recipe field naming an executor and its parameters.
+Then:
+
+- **A hypothesis with no recipe is never run unattended.** It is reported as needing an
+  operator, which is the escalate-instead-of-guess rule applied at the queue rather than
+  mid-round.
+- **The recipe cannot widen the subject.** Its instance points must lie inside the
+  declared sweep, and the runner refuses one that does not — otherwise a recipe becomes
+  a quiet way to edit the campaign’s scope.
+- **Adding an executor is a deliberate change with its own rehearsal.** Never something
+  a runner does at 3am.
+
+This also keeps the registry honest about readiness: the set of hypotheses carrying a
+recipe *is* the overnight queue, so its depth is countable before the night rather than
+discovered during it.
+
 ## Escalating instead of guessing
 
 When a runner hits something the runbook does not cover, the correct move is to record a
@@ -222,6 +422,19 @@ Each step has killed a campaign that skipped it.
    exits non-zero.
 6. **Check the budget accounting** against a short run, so the per-session ceiling means
    what it says.
+7. **Count the queue, and price it against the machine you will actually use.** How many
+   hypotheses carry a recipe, are not already resolved, and are not waiting on an
+   instrument that does not exist?
+   Multiply by their timeboxes.
+   A perfect runner in front of a one-item queue is an idle night, and this is the step
+   that tells you *before* rather than at breakfast.
+   Price it on the target hardware, not the one you developed on: a measured 40M ops/s
+   workstation and a 15M ops/s cloud container differ by enough to turn a comfortable
+   night into an overrun, and a timebox sized on the wrong one is how a round comes back
+   `abandoned` with nothing learned.
+8. **Read the gate’s skip list on a clean clone.** Your development machine has every
+   optional dependency installed and will never show you the checks a fresh environment
+   silently drops. See the green-gate trap in `traps.md`.
 
 ## The session report
 

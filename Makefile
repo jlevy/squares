@@ -44,9 +44,15 @@ HANDWRITTEN_SKILLS := experiment-loop
 .PHONY: skills-sync skills-check check
 
 ## Mirror hand-written skills from .agents/skills to .claude/skills.
+##
+## Plain rm + cp rather than rsync: rsync is not installed in every container this
+## repo is worked in (it is absent from the cloud agent image), and a sync target
+## that fails on the machine doing the syncing is how the two trees drift. cp -R
+## after a clean rm gives the same --delete semantics with only coreutils.
 skills-sync:
 	@for s in $(HANDWRITTEN_SKILLS); do \
-	  rsync -a --delete ".agents/skills/$$s/" ".claude/skills/$$s/" && echo "synced $$s"; \
+	  rm -rf ".claude/skills/$$s" && mkdir -p ".claude/skills" \
+	    && cp -R ".agents/skills/$$s" ".claude/skills/$$s" && echo "synced $$s"; \
 	done
 
 ## Fail if a hand-written skill differs between the two trees.

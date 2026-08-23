@@ -306,7 +306,7 @@ Where the program has spent effort, and what came of it.
 | **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Four rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); angle descent barely helps; [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`—**twelve orders** |
 | **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); six rounds. Every method tried lands `≈ 6e-02` short: the failure is **exploration**, not polish |
 | **12** | open; `4` believed optimal | `4` | **negative control** | Two rounds. Returns exactly `4.0` on all five seeds and never below. Also where the search and proof lanes are planned to meet |
-| 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | Registered in the standing sweep; **still no rounds**. The nearest case whose record uses genuinely oblique structure—tilts of `0°` and `±40°` |
+| 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°` and `±40°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) returns **exactly `5.0`**, the trivial `5×5` grid, on all five seeds |
 | 61, 78, 97 | open, `m² − 3` | `8`, `9`, `10` (grids) | opportunistic slot | The narrowest gaps in the table. An analytic Cleemann-style attempt at `arctan(3/4)` is registered and **not yet made** |
 | 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](frontier/README.md); 63 of the 65 open cases are bounded below by Nagamochi’s general theorem |
 
@@ -323,9 +323,18 @@ where the annealer put it.
 That is the cleanest statement of where the difficulty lives: the refiner is not the
 problem.
 
-**`n = 17` remains the largest unforced gap in coverage.** It is cheap to carry, it is
-the only registered instance cell that tests record-*finding*, and it has never been
-run.
+**`n = 17` says the failure is not about `n = 11`.** It was the only registered instance
+cell testing record-*finding* rather than machinery, and it was the last one never run.
+[exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md)
+ran it: the annealer returns **exactly `5.0`** on all five seeds—the trivial `5×5`
+grid—against Bidwell’s `4.67553`, a gap of `+0.324`. It does not leave the grid basin at
+all.
+
+That is a sharper statement than the `n = 11` result, because it is not about `n = 11`.
+The proposer does not reach oblique records *as a class*, so no budget spent on this
+proposer is going to reach one—which is the cartography premise’s central claim, now
+measured at a second cell and predicted before the run
+([H-020](campaign/hypotheses/H-020-oblique-record-finding-n17.md)).
 
 ## Theoretical Results
 
@@ -774,7 +783,7 @@ reading the results below:
 
 ## The Hypothesis Registry
 
-Eight claims are codified as artifacts; eleven more exist as prose in the standing
+Nine claims are codified as artifacts; eleven more exist as prose in the standing
 review’s register with their ids reserved.
 The [ledger](campaign/ledger.md) is generated from the artifacts and is the current
 view; this section is the reading of it.
@@ -785,6 +794,7 @@ view; this section is the reading of it.
 | [H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 4 | 190m agent, 4.9m cpu |
 | [H-016](campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md) | **refuted** | The stock annealer reaches the standing best on every instance cell | 4 | 10.2m cpu |
 | [H-018](campaign/hypotheses/H-018-basin-entry.md) | **refuted** as stated | Perturbed starts return to Trump’s packing at least half the time | 1 | 75m agent, 1.3m cpu |
+| [H-020](campaign/hypotheses/H-020-oblique-record-finding-n17.md) | **refuted** | The annealer reaches the standing best at `n = 17`, the nearest oblique record | 1 | 6.8m cpu |
 | [H-001](campaign/hypotheses/H-001-angle-class-reduction.md) | blocked | Angle-class reduction beats free `3n`-dimensional annealing | 0 | — |
 | [H-011](campaign/hypotheses/H-011-small-n-census.md) | blocked | The small-`n` landscape is censusable | 0 | — |
 | [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) | blocked | Record basins are rare in quench measure | 0 | — |
@@ -891,6 +901,7 @@ archive beside it.
 | [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) | 10 | positive control | H-002 | quench 0.2.0 | `4.507e-03 → 1.3323e-15` | **accepted** |
 | [exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 11 | target | H-002 | quench 0.2.0 | `6.999e-02 → 6.2894e-02` | rejected |
 | [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 11 | target | H-019 | quench 0.2.0 | slopes `0.1747` / `0.3841`, ratio `2.198` | **accepted** |
+| [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | exactly `5.0` on all five seeds, gap `+3.245e-01` | rejected |
 
 ### Cost and provenance
 
@@ -906,8 +917,9 @@ archive beside it.
 | exp-008 | 5 seeds, 30 s each | 67.0 s | 20 m | criterion | `8b450a1` |
 | exp-009 | 5 seeds, 30 s each | 150.0 s | 30 m | criterion | `8b450a1` |
 | exp-010 | 11 probes | 1.0 s | 10 m | criterion | `8b450a1` |
+| exp-011 | 4e9 moves | 408.0 s | 0 m | criterion | `60a50cc` |
 
-### What the ten rounds jointly establish
+### What the eleven rounds jointly establish
 
 **The instrument works, and the controls discriminate.** The positive controls now
 resolve to machine precision under the bracketing quench; the negative control returns

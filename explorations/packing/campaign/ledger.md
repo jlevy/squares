@@ -6,7 +6,7 @@
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 10 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 11 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -20,10 +20,11 @@
 | H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |  |
 | H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m cpu |
 | H-019 | confirmed | search | s(theta), the LP-in-cell optimum as a function of the angles, has a ki | n: 5 10 11* | 1 | 10m agent + 1s cpu |
+| H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 |  |
 
 ## Rounds
 
-### rejected (6)
+### rejected (7)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -33,6 +34,7 @@
 | exp-005 | series-000 | 11 | claude-opus-5 | H-018 | Refutes H-018 as stated - 0 of 40 trials return within 1e-6 at eps = 1e-3 in any arm - but the shape of the failure is the result: the return distance scales linearly with eps with no threshold, and halves when the effort is multiplied by ten, so what was measured is the refiner's convergence rate, not a basin wall. |
 | exp-006 | series-000 | 11 | claude-opus-5 | H-002 | Refutes H-002 as stated: the quench does not refine annealer output to the analytic value, improving the gap by only 1.1-1.3x because it is a LOCAL cell optimiser and the annealer hands it the wrong basin. The single-cell half stands (4.4e-16 at exact angles) and a class-constrained 1-D angle search reaches 2e-11, so what fails is the free-angle descent - and H-019 says why. |
 | exp-009 | series-000 | 11 | claude-opus-5 | H-002 | Refutes H-002 on this cell: the median gap improves only from 8.85e-02 to 6.29e-02, against machine precision at n = 5 and n = 10. The quench is not failing - it is being handed the wrong basin, which is what exp-006 concluded and this cell confirms at the target. |
+| exp-011 | series-000 | 17 | claude-opus-5 | H-020 | The criterion was measured and missed: n=17 +3.245e-01, against the 1e-04 H-020 declared. The claim is refuted for these cells and this regime. |
 
 ### accepted (4)
 
@@ -45,5 +47,5 @@
 
 ## Effort
 
-10 rounds, 275 agent-minutes, 16.4 cpu-minutes.
+11 rounds, 275 agent-minutes, 16.4 cpu-minutes.
 
