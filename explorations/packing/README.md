@@ -35,14 +35,22 @@ explorations/packing/
 │   │                       exact sign by rational interval arithmetic with bisection
 │   ├── verify.py           separating-axis validity check, generic over the scalar
 │   │                       type; exact or float backend, optional grid bucketing
+│   ├── quench.py           LP-in-cell quench: solve the cell, search the angles,
+│   │                       land on a named basin at solver precision
 │   └── packings/trump11.py Walter Trump's 1979 packing of 11 unit squares, exactly
 ├── derive_field.py         derives the number field from the published polynomial
 ├── verify_trump11.py       verify the packing and report what it took
 ├── negative_control.py     show the verifier rejects bad packings, and where float64
 │                           fails
 ├── bench.py                exact vs approximate cost, and scaling with algebraic degree
-├── lp_cell.py              rebuild the fixed-angle cell as a linear program and solve
-│                           it; the angle sweep and the shape of its minimum
+├── lp_cell.py              rebuild the fixed-angle cell as a linear program, through
+│                           constraint rows sqpack/quench.py does not share
+├── run_quench.py           quench annealer output, both angle methods
+├── run_basin_entry.sh      perturb a known packing and measure the return
+├── defects.md              generated logbook of everything that has gone wrong here,
+│                           from defects.yaml
+├── tools/                  checkers and generators: the soundness perimeter, the
+│                           negative controls, the generated views and their drift gates
 ├── sqsearch/               tier-1 screening annealer (Rust)
 ├── test.sh                 run everything and check the expected results
 └── frankensim-probe/       two experiments run against Jeffrey Emanuel's FrankenSim,
@@ -57,9 +65,11 @@ found in this toolchain, what caught it, and what now stops it recurring.
 It is generated from [`defects.yaml`](defects.yaml) and checked in the gate.
 
 It is kept because the aggregate says things no individual bug report can.
-Of 21 defects, six were **soundness** failures — the system asserting something false
-about the mathematics — and four of those pointed in the *flattering* direction, where
-the error looks like a success.
+Most of them were **soundness** failures — the system asserting something false about
+the mathematics — and most of those pointed in the *flattering* direction, where the
+error looks like a success.
+The counts live in the generated view, and in
+[the synopsis](SYNOPSIS.md#the-defect-record), which is checked against it.
 The automated gate caught **none** of them: every one was found by a control cell whose
 answer was known in advance, a rule written down before the measurement, a generated
 view contradicting its source, or someone reading carefully.
@@ -114,7 +124,7 @@ and the prioritized path forward in
 The implementation plan for the first experiments — search, verify, iterate on `n = 11`
 and `n = 12` — is
 [plan-2026-08-22-minimal-packing-toolkit.md](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md).
-It turns the five reports into two phases and a bead tree;
+It turns the six reports into seven phases and a bead tree;
 `tbd list --spec plan-2026-08-22-minimal-packing-toolkit.md` shows the work items.
 
 The current standing review —

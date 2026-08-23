@@ -17,7 +17,7 @@ It then holds the cell fixed and sweeps the one free angle, which turns the
 34-dimensional problem into a one-dimensional one and shows where its minimum
 sits and what shape it has.
 
-    python3 lp_cell.py            # needs scipy
+    uv run python lp_cell.py
 
 Everything printed is asserted, so this doubles as a gate.
 """
@@ -26,6 +26,8 @@ from __future__ import annotations
 
 import math
 import sys
+
+from scipy.optimize import linprog
 
 from sqpack.packings.trump11 import build
 from sqpack.verify import edge_axes, exact_sign, project
@@ -45,8 +47,10 @@ def unit_square_offsets(theta: float) -> list[tuple[float, float]]:
     are fixed these are constants, and the corners become affine in the centre.
     """
     c, s = math.cos(theta), math.sin(theta)
-    return [(c * dx - s * dy, s * dx + c * dy)
-            for dx, dy in ((-0.5, -0.5), (0.5, -0.5), (0.5, 0.5), (-0.5, 0.5))]
+    return [
+        (c * dx - s * dy, s * dx + c * dy)
+        for dx, dy in ((-0.5, -0.5), (0.5, -0.5), (0.5, 0.5), (-0.5, 0.5))
+    ]
 
 
 def edge_normals(theta: float) -> list[tuple[float, float]]:
@@ -66,8 +70,7 @@ def read_cell(squares, to_float):
     angles = []
     for sq in squares:
         (px, py), (qx, qy) = sq[0], sq[1]
-        angles.append(math.atan2(to_float(qy) - to_float(py),
-                                 to_float(qx) - to_float(px)))
+        angles.append(math.atan2(to_float(qy) - to_float(py), to_float(qx) - to_float(px)))
 
     axis_of = {}
     for i in range(len(squares)):
@@ -76,10 +79,10 @@ def read_cell(squares, to_float):
             for k, axis in enumerate(edge_axes(a) + edge_axes(b)):
                 alo, ahi = project(a, axis, exact_sign)
                 blo, bhi = project(b, axis, exact_sign)
-                if exact_sign(blo - ahi) >= 0:      # i at or before j
+                if exact_sign(blo - ahi) >= 0:  # i at or before j
                     axis_of[(i, j)] = (k, +1)
                     break
-                if exact_sign(alo - bhi) >= 0:      # j at or before i
+                if exact_sign(alo - bhi) >= 0:  # j at or before i
                     axis_of[(i, j)] = (k, -1)
                     break
             else:
@@ -103,59 +106,52 @@ def cell_lp(angles: list[float], axis_of: dict):
     n = len(angles)
     offs = [unit_square_offsets(t) for t in angles]
     nv, s_col = 2 * n + 1, 2 * n
-    a_ub, b_ub = [], []
+    a_ub: list[list[float]] = []
+    b_ub: list[float] = []
 
-    def row():
-        return [0.0] * nv
+    def add(rhs: float) -> list[float]:
+        """Append a fresh all-zero row with right-hand side `rhs`, and return it."""
+        r = [0.0] * nv
+        a_ub.append(r)
+        b_ub.append(rhs)
+        return r
 
     for i in range(n):
         for ox, oy in offs[i]:
-            r = row(); r[i] = -1.0
-            a_ub.append(r); b_ub.append(ox)                       # 0 <= x_i + ox
-            r = row(); r[n + i] = -1.0
-            a_ub.append(r); b_ub.append(oy)                       # 0 <= y_i + oy
-            r = row(); r[i] = 1.0; r[s_col] = -1.0
-            a_ub.append(r); b_ub.append(-ox)                      # x_i + ox <= s
-            r = row(); r[n + i] = 1.0; r[s_col] = -1.0
-            a_ub.append(r); b_ub.append(-oy)                      # y_i + oy <= s
+            add(ox)[i] = -1.0  # 0 <= x_i + ox
+            add(oy)[n + i] = -1.0  # 0 <= y_i + oy
+            r = add(-ox)  # x_i + ox <= s
+            r[i], r[s_col] = 1.0, -1.0
+            r = add(-oy)  # y_i + oy <= s
+            r[n + i], r[s_col] = 1.0, -1.0
 
     for (i, j), (k, orient) in axis_of.items():
-        axis = (edge_normals(angles[i]) + edge_normals(angles[j]))[k]
+        nx, ny = (edge_normals(angles[i]) + edge_normals(angles[j]))[k]
         lo, hi = (i, j) if orient > 0 else (j, i)
-        nx, ny = axis
         for ox, oy in offs[lo]:
             for px, py in offs[hi]:
-                r = row()
-                r[lo] += nx; r[n + lo] += ny
-                r[hi] -= nx; r[n + hi] -= ny
-                a_ub.append(r)
-                b_ub.append((nx * px + ny * py) - (nx * ox + ny * oy))
+                r = add((nx * px + ny * py) - (nx * ox + ny * oy))
+                r[lo] += nx
+                r[n + lo] += ny
+                r[hi] -= nx
+                r[n + hi] -= ny
 
     c = [0.0] * nv
     c[s_col] = 1.0
     return c, a_ub, b_ub
 
 
-def solve(angles, axis_of):
+def solve(angles, axis_of) -> tuple[float, list[tuple[float, float]]] | None:
     """Return `(s, centres)` at the cell's optimum, or `None` if infeasible."""
-    from scipy.optimize import linprog
-
     n = len(angles)
     c, a_ub, b_ub = cell_lp(angles, axis_of)
-    res = linprog(c, A_ub=a_ub, b_ub=b_ub, bounds=[(None, None)] * len(c),
-                  method="highs")
+    res = linprog(c, A_ub=a_ub, b_ub=b_ub, bounds=[(None, None)] * len(c), method="highs")
     if res.status != 0:
         return None
     return res.x[2 * n], [(res.x[i], res.x[n + i]) for i in range(n)]
 
 
 def main() -> int:
-    try:
-        import scipy  # noqa: F401
-    except ImportError:
-        print("scipy not installed; skipping")
-        return 0
-
     squares, side, field = build()
     n = len(squares)
     field.refine_to(60)
@@ -164,8 +160,10 @@ def main() -> int:
         return float(field.decimal(e, FIELD_DIGITS))
 
     s_exact = to_float(side)
-    centres_exact = [(sum(to_float(p[0]) for p in sq) / 4.0,
-                      sum(to_float(p[1]) for p in sq) / 4.0) for sq in squares]
+    centres_exact = [
+        (sum(to_float(p[0]) for p in sq) / 4.0, sum(to_float(p[1]) for p in sq) / 4.0)
+        for sq in squares
+    ]
 
     angles, axis_of = read_cell(squares, to_float)
     distinct = sorted({round(math.degrees(a), 9) for a in angles})
@@ -176,15 +174,24 @@ def main() -> int:
     print(f"  tilted squares:   {tilted}")
     print(f"  axis choices:     {len(axis_of)} pairs")
 
-    c, a_ub, b_ub = cell_lp(angles, axis_of)
-    print(f"  LP shape:         {len(c)} variables, {len(a_ub)} constraints"
-          f"  (= 16 x ({n} + {n * (n - 1) // 2}))")
+    c, a_ub, _ = cell_lp(angles, axis_of)
+    print(
+        f"  LP shape:         {len(c)} variables, {len(a_ub)} constraints"
+        f"  (= 16 x ({n} + {n * (n - 1) // 2}))"
+    )
     assert len(c) == 2 * n + 1
     assert len(a_ub) == 16 * (n + n * (n - 1) // 2) == 1056
 
-    s_lp, centres_lp = solve(angles, axis_of)
-    worst = max(max(abs(centres_lp[i][0] - centres_exact[i][0]),
-                    abs(centres_lp[i][1] - centres_exact[i][1])) for i in range(n))
+    solved = solve(angles, axis_of)
+    assert solved is not None, "the certificate's own cell must be feasible"
+    s_lp, centres_lp = solved
+    worst = max(
+        max(
+            abs(centres_lp[i][0] - centres_exact[i][0]),
+            abs(centres_lp[i][1] - centres_exact[i][1]),
+        )
+        for i in range(n)
+    )
 
     print("\nSolving it, without telling the solver where the squares go")
     print(f"  LP optimum        s = {s_lp:.16f}")
@@ -215,20 +222,35 @@ def main() -> int:
     assert abs(best_a - A_STAR_DEG) <= 4.0 / 2000, best_a
     assert best_v >= s_exact - 1e-12, best_v
 
-    # The minimum is a kink, not a smooth stationary point: the one-sided slopes
-    # are stable under refinement and differ by a factor of about 2.2.
-    print("\nShape of the minimum: one-sided slopes, per degree")
-    print("        h (deg)      left slope     right slope")
+    # The minimum is a corner, not a smooth stationary point: the one-sided slopes
+    # are stable under refinement and differ by a factor of about 2.2.  Reported in
+    # radians as well, because that is the unit H-019 and exp-010 are recorded in and
+    # this script exists to reproduce them through unrelated constraint rows.
+    print("\nShape of the minimum: one-sided slopes")
+    print("        h (deg)       left /deg      right /deg     left /rad    right /rad")
     slopes = []
+    per_rad = 180.0 / math.pi
     for h in (1e-2, 1e-3, 1e-4, 1e-5):
         left = (phi(A_STAR_DEG - h) - s_exact) / h
         right = (phi(A_STAR_DEG + h) - s_exact) / h
         slopes.append((left, right))
-        print(f"  {h:>13.0e}   {left:.6e}   {right:.6e}")
+        print(
+            f"  {h:>13.0e}   {left:.6e}   {right:.6e}"
+            f"      {left * per_rad:.4f}       {right * per_rad:.4f}"
+        )
     for left, right in slopes:
         assert 0.0 < left < right, (left, right)
     assert abs(slopes[-1][0] / slopes[0][0] - 1.0) < 1e-3, "left slope not stable"
     assert abs(slopes[-1][1] / slopes[0][1] - 1.0) < 1e-3, "right slope not stable"
+
+    # H-019's registered values, measured by sqpack.quench through a different
+    # formulation (one row per pair, not sixteen). Agreement to three decimals is the
+    # cross-check; divergence would mean one of the two constraint sets is wrong.
+    left_rad, right_rad = slopes[-1][0] * per_rad, slopes[-1][1] * per_rad
+    print(f"\n  ratio right/left = {right_rad / left_rad:.4f}")
+    print("  H-019 / exp-010, via sqpack.quench: 0.1747, 0.3841, ratio 2.198")
+    assert abs(left_rad - 0.1747) < 5e-4, left_rad
+    assert abs(right_rad - 0.3841) < 5e-4, right_rad
 
     print("\nALL CHECKS PASSED")
     return 0

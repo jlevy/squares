@@ -48,22 +48,17 @@ else
 fi
 
 echo
-echo "== fixed-angle cell is an LP (needs scipy) =="
-# The refiner's load-bearing claim: fix the angles and each pair's separating
-# axis and what remains is a linear program. Checked by rebuilding the LP from
-# the cell alone and asking it to reconstruct Trump's packing.
-if python3 -c "import scipy" 2>/dev/null; then
-  out=$(python3 lp_cell.py)
-elif command -v uv >/dev/null 2>&1; then
-  out=$(uv run --quiet --with scipy==1.16.2 python3 lp_cell.py)
-else
-  out="scipy not installed; skipping"
-fi
+echo "== fixed-angle cell is an LP, rebuilt independently =="
+# The claim the quench rests on: fix the angles and each pair's separating axis and
+# what remains is a linear program. This is the SECOND implementation of it, and that
+# is the point -- sqpack.quench writes one row per pair from half-extents, this writes
+# sixteen from corner pairs, and neither shares constraint-assembly code with the
+# other. D-014 is what happens when a solver is checked only against its own rows.
+# It also reproduces H-019's one-sided slopes through those unrelated rows.
+out=$(uv run --quiet python lp_cell.py 2>/dev/null || python3 lp_cell.py)
 echo "$out" | sed 's/^/  /'
-if ! grep -q "skipping" <<<"$out"; then
-  grep -q "23 variables, 1056 constraints" <<<"$out"
-  grep -q "ALL CHECKS PASSED" <<<"$out"
-fi
+grep -q "23 variables, 1056 constraints" <<<"$out"
+grep -q "ALL CHECKS PASSED" <<<"$out"
 
 echo
 echo "== frontier corpus =="
@@ -157,6 +152,14 @@ echo "== defect log =="
 # Checked like any other dataset: schema, contiguous ids, every open defect tracked by
 # a bead, every narrative link resolving, and the generated view in sync.
 $PY tools/render_defects.py --check
+
+echo
+echo "== synopsis agrees with the artifacts =="
+# SYNOPSIS.md is the root document and a living one: it restates numbers that live
+# authoritatively elsewhere, which is the exact shape of thing that drifted in D-010,
+# D-017 and D-022. It cannot be generated -- most of it is judgement -- so it is
+# reconciled instead, the way ideas.md is.
+$PY tools/check_synopsis.py
 
 echo
 echo "== search engine (sqsearch) =="
