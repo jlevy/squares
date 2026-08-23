@@ -3,9 +3,9 @@ type: is
 id: is-01m0r4jb9qj3fk9sjm9senp9gz
 title: negctl leaves the repo holding a deliberate sabotage if it is interrupted
 kind: bug
-status: open
+status: in_progress
 priority: 0
-version: 4
+version: 6
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels:
   - focus-efficiency
@@ -14,7 +14,7 @@ dependencies:
     target: is-01m0r7r9k8dcz960yqpx69vwnm
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T20:21:37.206Z
-updated_at: 2026-08-23T21:32:08.508Z
+updated_at: 2026-08-23T22:44:34.320Z
 ---
 D-035. Hit for real on 2026-08-23, mid-session.
 
@@ -37,6 +37,4 @@ WHAT TO BUILD
 
 ## Notes
 
-2026-08-23 20:35, MERGE HAZARD. The codex review branch independently allocated D-035 to a different defect ("the atlas checker counted its own synthetic re-offers as census proposals"). Ours is the negctl-residue one. One of the two renumbers on merge; see think-o48b.
-
-Also worth noting for whoever fixes this: their D-035 and ours are both about a checker contaminating what it measures, from opposite ends. Theirs let synthetic data into a census count; ours lets a sabotaged file out into the working tree. A single principle covers both -- a check must leave no trace in the thing it checks -- and it is worth stating once in the negative-control guidance rather than twice as separate lessons.
+2026-08-23 second-pass design after adversarial review: eliminated live-source mutation and recovery entirely. negctl snapshots all current tracked/non-ignored bytes twice into a temporary Git repo; controls mutate only that copy, reset between cases, and discard evidence if live source changes. Real SIGTERM test kills/reaps a TERM-ignoring checker; real SIGKILL test proves live bytes untouched. Gate and every runner CLI use the atomic activity lease; full gate still required before closure. Related findings: D-068 through D-074 and beads think-5zzb, think-xe5l, think-tg66, think-1pyr, think-6wgw, think-06vo, think-v8ve.
