@@ -46,45 +46,47 @@ in the reviewed work.
 It disputes exactly one claim, and that one matters because its prescribed repair would
 be implemented, would appear to work, and would not fix anything.
 
-## The three things that will actually cost you if you get them wrong
+## Stacked on #15, and what that changed
 
-### 1. Do not implement F-16’s build-hermeticity repair as written (`think-osyp`)
+PR #16 is now stacked on `codex/pr14-square-packing-review`, not on `main`. Re-verifying
+every finding against that branch: **four of five were already fixed there**, several
+exactly as specified — the vacuous convergence assertion, `--strict` implying `--deep`,
+the pose/side pairing, and the write-before-check.
+Independent convergence on the same fixes from two directions is the useful result, and
+those beads are closed.
 
-#15 finds that the committed golden does not reproduce from the checked-in engine, and
-prescribes building the source-locked engine before every standalone rebuild.
+So the list of things that will actually cost you is now short.
 
-It reproduces. On merged `main`, after `cargo build --release`, `n = 10` seed 7 gives
-annealer gap `+0.021003996487` against the committed `0.021003996488`, quenching to the
-proved optimum, byte-identical over three runs.
+### 1. Do not implement F-16’s build repair as written — it has been tested and it fails (`think-osyp`)
 
-The two environments disagree at **both** control seeds, in opposite directions.
-At `n = 10` seed 7 the quench reaches the proved optimum here and, per #15’s own
-`LADDER` comment, does not there — which is why they moved that rung to seed 14. At seed
-14 they record `+0.000493446` and this machine gives `+0.032867764695`. Same seed, same
-`n`, same engine source, both built from source, two orders of magnitude apart.
+#15 marks the source-build repair done and selects control seeds to stabilise the
+ladder.
+That is a falsifiable prediction: the golden should then reproduce anywhere after
+a source build. Checking out that branch, building its engine, and running **its own**
+`tools/golden_basins.py --deep` on a different machine gives:
 
-**The decisive test.** Check out #15’s branch, build its engine, and run **its own**
-`tools/golden_basins.py --deep` here: `GOLDEN BASIN CHECKS FAILED`. Their repair does
-not travel, and selecting control seeds makes it worse rather than better — it tunes the
-fixture to the machine that chose the seeds.
+```
+ORACLE FAILURES:
+  the rebuilt map differs from the committed golden
+GOLDEN BASIN CHECKS FAILED
+```
 
-A simulated annealer is chaotic.
-One ULP in an accept/reject diverges the trajectory, and `lto = "fat"` with
-`codegen-units = 1` under a different toolchain or microarchitecture changes float
-contraction. **The fixture is non-portable, not stale.** Building the engine first is
-exactly what was done and it still differs.
-The ladder’s *oracle* is robust everywhere — every environment reached the proved closed
-form — so assert the oracle and stop committing the trajectory.
+The two environments disagree at both control seeds, in opposite directions: at `n = 10`
+seed 7 the quench reaches the proved optimum here and (per their own `LADDER` comment)
+does not there; at seed 14 they record `+0.000493446` and this machine gives
+`+0.032867764695`. Same seed, same `n`, same engine source, both built from source.
 
-### 2. The D-030 guard cannot fail (`think-ivr1`)
+A simulated annealer is chaotic — one ULP in an accept/reject diverges the trajectory,
+and `lto = "fat"` with `codegen-units = 1` under a different toolchain or
+microarchitecture changes float contraction.
+**The fixture is non-portable, and selecting control seeds makes it worse**, because it
+tunes the fixture to the machine that chose the seeds.
 
-`tools/atlas_check.py` offers every observation with `converged=True` and then asserts
-the non-converged counter is zero.
-Nothing in the check can produce the failing case.
-Its own comment cites D-030, so the guard for the campaign’s most serious defect has no
-failure mode. Fix this before trusting any green gate about convergence.
+The ladder’s *oracle* is robust in every environment tested.
+Assert the oracle; drop `annealer_gap` from the byte-compared surface, or store it with
+a tolerance plus a toolchain and CPU fingerprint.
 
-### 3. `git status` before `git add -A`, every time, until D-035 is fixed (`think-97pp`)
+### 2. `git status` before `git add -A`, every time, until D-035 is fixed (`think-97pp`)
 
 `tools/negctl.py` corrupts a tracked source file in place and restores it in a
 `finally:` block, which a `SIGKILL` does not run.

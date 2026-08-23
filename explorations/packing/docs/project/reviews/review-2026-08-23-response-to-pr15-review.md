@@ -13,6 +13,28 @@ name rather than linked.
 
 **Subject:** PR #14, merged as `8926a7c`.
 
+## Status on top of PR #15 (2026-08-23, re-verified after stacking)
+
+This branch is now stacked on `codex/pr14-square-packing-review` rather than on `main`,
+and every finding below was re-checked against that branch’s code.
+**Four of the five were already fixed there**, in several cases exactly as specified —
+which is the useful outcome, and means the document below should be read as a record of
+agreement rather than a list of open work.
+
+| Finding | State on top of #15 |
+| --- | --- |
+| §1.1 vacuous convergence assertion | **fixed** — `atlas_check.py` now offers one genuinely non-converged observation and asserts `offered_non_converged == 1` |
+| §1.2 `--strict` does not imply `--deep` | **fixed** — `test.sh` sets `DEEP=1` under strict, with a guard that fails if it did not take |
+| §1.3 verified pose vs reported side | **fixed** — `configs[identity] = …` replaces `setdefault`, so the pose matches the retained side |
+| §1.4 `--update` writes before checking | **fixed** — oracles are evaluated first and the write is atomic through a temporary |
+| §1.5 closed-form recognition called an oracle | **fixed** — the overstated framing is gone from the module docstring |
+| §1.8 `closest_pair` identity authority | **prose fixed**, field not yet renamed; tracked as their D-039, outstanding |
+| §1.9 the rank-free `n = 5` claim | **fixed and improved** — their terminology defines a *terminal family* by Jacobian nullity and gives the exact `n = 3` witness in coordinates |
+| **Part 2, the non-portable fixture** | **NOT fixed, and the attempted repair was tested and fails** — see below |
+
+The one that remains is the one where the two reviews still disagree, and it is now
+settled by experiment rather than by argument.
+
 ## Why this document exists
 
 The PR #15 review is the most useful document produced in this campaign so far.
