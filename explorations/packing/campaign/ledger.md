@@ -10,15 +10,15 @@
 
 ## Registry
 
-| id | status | lane | claim | sweep | rounds |
-| --- | --- | --- | --- | --- | --- |
-| H-001 | blocked | search | Optimal packings at n <= ~30 use at most 3 distinct tilt angles, so a  | n: 5 10 11 | 0 |
-| H-002 | blocked | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5 10 11 | 0 |
-| H-011 | blocked | search | LP-quenching multistarts at n <= 10 yields a basin count that saturate | n: 5 6 7 8 9 10 | 0 |
-| H-012 | blocked | search | The proved-optimal basin's quench probability at n = 10, and Trump's a | n: 10 11 | 0 |
-| H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 |
-| H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |
-| H-018 | open | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 0 |
+| id | status | lane | claim | sweep | rounds | spent |
+| --- | --- | --- | --- | --- | --- | --- |
+| H-001 | blocked | search | Optimal packings at n <= ~30 use at most 3 distinct tilt angles, so a  | n: 5 10 11 | 0 |  |
+| H-002 | blocked | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5 10 11 | 0 |  |
+| H-011 | blocked | search | LP-quenching multistarts at n <= 10 yields a basin count that saturate | n: 5 6 7 8 9 10 | 0 |  |
+| H-012 | blocked | search | The proved-optimal basin's quench probability at n = 10, and Trump's a | n: 10 11 | 0 |  |
+| H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 | 10.2m cpu |
+| H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |  |
+| H-018 | open | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 0 |  |
 
 ## Rounds
 
@@ -35,4 +35,8 @@
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-004 | series-000 | 12 | claude-opus-5 | H-016 | On this cell the annealer is within 1e-4 of the standing best (gap +0.000e+00), so H-016 holds here; the claim is universally quantified over the sweep and is refuted elsewhere. |
+
+## Effort
+
+4 rounds, 0 agent-minutes, 10.2 cpu-minutes.
 
