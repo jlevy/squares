@@ -5,17 +5,18 @@ title: Correct false research claims and wire every enforcement gate
 kind: bug
 status: open
 priority: 0
-version: 8
+version: 9
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
   - pr-14
   - technical-error
+  - focus-process
 dependencies: []
-parent_id: is-01m0qxka8ebkztq7erex50vvr2
+parent_id: is-01m0r7q3zk8x6cg4e30d149698
 created_at: 2026-08-23T18:21:29.137Z
-updated_at: 2026-08-23T20:57:19.294Z
+updated_at: 2026-08-23T21:17:52.687Z
 ---
 Category: technical errors. Correct the false claim that the n = 11 angle itself is algebraic; qualify m^2-3 grid optimality to the proved range; stop deriving small basin volume from rigidity; scope H-020 to the tested n, budget and implementation; replace n = 12 as a negative control; repair stale paths and counts; and distinguish wall time from CPU time and derivative sign from magnitude. Wire atlas_check.py and tools/regression_test.py into test.sh and CI, and fix the README layout drift.
 

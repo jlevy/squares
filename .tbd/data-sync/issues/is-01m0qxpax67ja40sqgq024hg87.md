@@ -5,13 +5,14 @@ title: Repair the campaign trust boundary and run lifecycle
 kind: bug
 status: open
 priority: 0
-version: 6
+version: 8
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
   - pr-14
   - technical-error
+  - focus-process
 dependencies:
   - type: blocks
     target: is-01m0qxpc5jrdzfn205qfxfvg44
@@ -19,9 +20,11 @@ dependencies:
     target: is-01m0qxpd3pnhvjh5s55b2w5gq8
   - type: blocks
     target: is-01m0qxpe517zsenj91xmydctg5
-parent_id: is-01m0qxka8ebkztq7erex50vvr2
+  - type: blocks
+    target: is-01m0r7rab2j8krgraey9a810x9
+parent_id: is-01m0r7q3zk8x6cg4e30d149698
 created_at: 2026-08-23T18:21:27.845Z
-updated_at: 2026-08-23T20:20:49.138Z
+updated_at: 2026-08-23T21:19:00.042Z
 ---
 Category: technical errors. The PR runner writes JSONL before validating overlap, records guard-invalid archives through the normal success path, trusts proposer-reported overlap, hardcodes selftest_passed, permits terminal rounds to be rewritten, ignores git failures, and does not enforce prerequisites or remaining deadlines. Build one checked state machine and one validation boundary shared by execute and record. Invalid output must be quarantined atomically and must never enter result cells.
 
