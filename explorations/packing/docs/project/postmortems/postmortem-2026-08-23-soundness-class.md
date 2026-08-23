@@ -155,7 +155,7 @@ generated view contradicting its source, by chased anomalies, and by reading.
 > [D-024](../../../defects.md), a bookkeeping defect found by a contiguity check — and
 > still no soundness defect, which is the claim this section rests on and is unchanged.
 > Repeating the wider sentence verbatim in three living documents is itself logged, as
-> [D-026](../../../defects.md); the generated view now computes it instead.
+> [D-028](../../../defects.md); the generated view now computes it instead.
 
 That is not an argument against the gate — a gate stops regressions, and this session
 added several.

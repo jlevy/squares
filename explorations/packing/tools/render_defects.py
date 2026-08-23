@@ -95,7 +95,7 @@ def render(d: dict) -> str:
     for name, count in tally(ds, "detected_by", list(meaning)):
         out.append(f"| `{name}` | {count} | {meaning.get(name, '')} |")
     # Derived, not asserted: this claim was true at 23 defects and false at 25, and
-    # the same sentence was repeated in three hand-written documents (D-026).
+    # the same sentence was repeated in three hand-written documents (D-028).
     gate_n = sum(1 for x in ds if x["detected_by"] == "gate")
     sound = [x for x in ds if x["class"] == "soundness"]
     gate_sound = sum(1 for x in sound if x["detected_by"] == "gate")

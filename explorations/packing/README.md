@@ -76,13 +76,13 @@ found in this toolchain, what caught it, and what now stops it recurring.
 It is generated from [`defects.yaml`](defects.yaml) and checked in the gate.
 
 It is kept because the aggregate says things no individual bug report can.
-Of 26 defects, 6 were **soundness** failures — the system asserting something false
+Of 28 defects, 6 were **soundness** failures — the system asserting something false
 about the mathematics — and 4 of those pointed in the *flattering* direction, where the
 error looks like a success.
-The automated gate has caught **one** of the 26 and **none** of the 6: every soundness
+The automated gate has caught **one** of the 28 and **none** of the 6: every soundness
 failure was found by a control cell whose answer was known in advance, a rule written
 down before the measurement, a generated view contradicting its source, or someone
-reading carefully. And 6 fixes left no regression check behind, which is why one of them
+reading carefully. And 8 fixes left no regression check behind, which is why one of them
 ([D-017](defects.md)) is a verbatim repeat of an earlier one.
 (Counts as of 2026-08-23; [`defects.md`](defects.md) is the live tally, and
 [the synopsis](SYNOPSIS.md#the-defect-record) carries the per-class breakdown,

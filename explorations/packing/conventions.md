@@ -237,17 +237,19 @@ Markdown link. This project has needed that twice.
 10. The defect log: schema, contiguous ids, every open defect carrying a bead, every
     narrative link resolving, every cited defect id existing, and the generated view in
     sync with `defects.yaml`
-11. The bead tree: no open bead under a closed parent, and no two open beads under one
+11. Every generated Markdown view is exempt from the auto-formatter, so a commit hook
+    cannot reflow a file that is drift-checked byte-for-byte
+12. The bead tree: no open bead under a closed parent, and no two open beads under one
     parent sharing a title.
     Skipped, loudly, where no `tbd-sync` store is reachable
-12. `SYNOPSIS.md` reconciled against the artifacts: round verdicts, hypothesis statuses,
+13. `SYNOPSIS.md` reconciled against the artifacts: round verdicts, hypothesis statuses,
     round and effort totals, defect counts per class, nothing silently missing, and
     every relative link and heading anchor resolving
-13. `sqsearch --selftest` — geometry against a naive reference, determinism, the `s(5)`
+14. `sqsearch --selftest` — geometry against a naive reference, determinism, the `s(5)`
     positive control, and the recomputed-overlap guard
-14. The differential test between search energy and the validity oracle
-15. Provenance: every round’s recorded engine commit still reachable, or annotated
-16. The campaign record: schema validation, id uniqueness, dangling references, unknown
+15. The differential test between search energy and the validity oracle
+16. Provenance: every round’s recorded engine commit still reachable, or annotated
+17. The campaign record: schema validation, id uniqueness, dangling references, unknown
     series, more than one open series, stale claims, cross-field verdict rules,
     idea-board reconciliation, reserved-id rules, dead links, and ledger freshness
 
