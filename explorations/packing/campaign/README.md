@@ -44,17 +44,37 @@ The **instance axis is `n`**, and the first three cells each have a different jo
 | 10 | **positive control** (machinery only) | `3 + 1/√2 = 3.70710678…`, proved | Known answer, and *not* the grid. But its mechanism is a 45° tilt, so passing it proves the machinery and says nothing about finding an oblique record — see the caveat below. |
 | 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case, smallest open gap with a non-trivial record, degree-8 and rigid. |
 | 12 | **negative control** | `4`, the trivial grid | The 4×4 grid is almost certainly optimal. A run that “beats” it has found a bug, not a packing. |
+| 17 | **mechanism-matched calibration** | `4.67553009360455`, Bidwell 1998, still open | The nearest case whose record uses genuinely *oblique* structure — the corpus records tilts of `0°` and `±40°`, so two non-trivial orientations against a grid frame. The only cell here that speaks to record-*finding* rather than machinery. |
 
-**These three cells calibrate machinery, not strategy.** Both proved cases in the ladder
-are 45°-tilt mechanisms, symmetric and reachable by blind search; `n = 11` needs an
-oblique core at `≈ 40.182°`, a mechanism **no proved case exercises**. Mechanism-matched
-targets — `s(17)`, `n = 11` at inflated `δ`, and basin-entry tests — are registered
-separately and are what would demonstrate record-finding ability.
+**The first three cells calibrate machinery, not strategy.** Both proved cases in the
+ladder are 45°-tilt mechanisms, symmetric and reachable by blind search; `n = 11` needs
+an oblique core at `≈ 40.182°`, a mechanism **no proved case exercises**. An engine can
+ace `n = 5` and `n = 10` and remain structurally blind to what the target demands.
+
+That is why `n = 17` joins the standing sweep rather than waiting: it is cheap to carry,
+and rediscovering an oblique record is the only calibration that speaks to
+record-finding. The other two mechanism-matched targets — `n = 11` at inflated `δ`, and
+basin-entry tests — are registered separately.
 
 Standing bests are read from [`../frontier/`](../frontier/README.md) — `n-010.md`,
 `n-011.md`, `n-012.md` — never retyped into a round.
 The frontier artifacts are the campaign’s source of truth for what is already known, and
 a round that moved the frontier would edit one file.
+
+## Who owns a hypothesis
+
+A hypothesis can exist in three forms — prose in the
+[standing review’s register](../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register),
+a codified artifact under `hypotheses/`, and a bead.
+One rule settles which is true:
+
+> **Once codified, the registry artifact is canonical.** The review’s register entry
+> becomes historical. Beads track build work, never scientific claims.
+
+So a claim’s criterion, tier, kill condition and status are read from the artifact and
+nowhere else; a bead may say “build the instrument for H-002” but never “H-002 is
+confirmed”. The eleven uncodified entries (`H-003`–`H-010`, `H-013`–`H-015`) are still
+prose, their ids reserved and enforced, until someone codifies them.
 
 ## The three tiers
 
@@ -220,7 +240,7 @@ campaign/
   schemas/               the four contracts, specialised from the skill's assets
   explorations/          X-NNN idea reports, free-form
   hypotheses/            H-NNN registry, spans every series
-  series/000-smoke-and-calibration/   S0: reproductions and machinery gates
+  series/series-000-smoke-and-calibration/   S0: reproductions and machinery gates
     README.md            the series artifact: goal, instrument, why it exists
     experiments/         exp-NNN, one per round
     results/             raw JSONL from the engine

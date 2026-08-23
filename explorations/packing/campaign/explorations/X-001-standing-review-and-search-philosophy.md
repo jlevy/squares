@@ -77,5 +77,5 @@ and `n = 10`, which this campaign adopted as its positive control — and the
 search-philosophy report then pointed out that **both are 45° mechanisms**, so passing
 them proves the machinery and says nothing about finding an oblique record.
 That correction is recorded in
-[series-000](../series/000-smoke-and-calibration/README.md), whose controls are now
-explicitly labelled machinery-validation.
+[series-000](../series/series-000-smoke-and-calibration/README.md), whose controls are
+now explicitly labelled machinery-validation.

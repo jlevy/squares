@@ -50,6 +50,13 @@ fn main() {
         selftest();
         return;
     }
+    if args.iter().any(|a| a == "--pairdump") {
+        // Emit this crate's pair verdict on deterministic near-contact pairs, so the
+        // Python oracle can check the two codebases against each other. sqsearch owns
+        // move-loop *energy*, sqpack owns *validity*; this is where they must agree.
+        pairdump(arg(&args, "--pairs", 20000u64), arg(&args, "--seed", 0x5EEDu64));
+        return;
+    }
 
     let n: usize = arg(&args, "--n", 11);
     let seed: u64 = arg(&args, "--seed", 0x5EED);
@@ -82,6 +89,8 @@ fn main() {
 
     let mut best_side = f64::INFINITY;
     let mut best_chain = 0u64;
+    let mut best_config = &outcomes[0].1.best;
+    let mut best_overlap = f64::NAN;
     let (mut moves, mut anneals) = (0u64, 0u64);
     for (chain, o) in &outcomes {
         moves += o.moves;
@@ -95,16 +104,46 @@ fn main() {
         if o.best_side < best_side {
             best_side = o.best_side;
             best_chain = *chain;
+            best_config = &o.best;
+            best_overlap = o.best_overlap;
         }
     }
 
     println!(
         "{{\"kind\":\"summary\",\"n\":{n},\"seed\":{seed},\"chains\":{chains},\
 \"best_side\":{best_side:.17e},\"best_chain\":{best_chain},\"moves\":{moves},\
-\"anneals\":{anneals},\"seconds\":{elapsed:.3},\"moves_per_sec\":{rate:.0},\"params\":{params}}}",
+\"anneals\":{anneals},\"seconds\":{elapsed:.3},\"moves_per_sec\":{rate:.0},\
+\"best_overlap\":{overlap:.3e},{config},\"params\":{params}}}",
         rate = moves as f64 / elapsed,
+        overlap = best_overlap,
+        config = json_config(best_config),
         params = json_params(&p),
     );
+}
+
+/// Deterministic near-contact pairs and this crate's verdict on each, as JSONL.
+///
+/// Pairs are generated close to touching on purpose: that is the only regime where a
+/// disagreement between the search energy and the validity predicate could hide.
+fn pairdump(count: u64, seed: u64) {
+    let mut r = rng::Rng::keyed(seed, 0);
+    for _ in 0..count {
+        let ti = r.f64() * std::f64::consts::TAU;
+        let tj = r.f64() * std::f64::consts::TAU;
+        let (ci, si, cj, sj) = (ti.cos(), ti.sin(), tj.cos(), tj.sin());
+        // Place j near contact along a random direction: the sum of half-extents plus
+        // a small signed jitter, so roughly half the pairs are just-overlapping.
+        let dir = r.f64() * std::f64::consts::TAU;
+        let h = 0.5 + 0.5 * ((ci * cj + si * sj).abs() + (si * cj - ci * sj).abs());
+        let d = h * (1.0 + 0.02 * r.signed());
+        let (xi, yi) = (0.0, 0.0);
+        let (xj, yj) = (d * dir.cos(), d * dir.sin());
+        let depth = geom::pair_depth(xi, yi, ci, si, xj, yj, cj, sj);
+        println!(
+            "{{\"xi\":{xi:.17e},\"yi\":{yi:.17e},\"ti\":{ti:.17e},\
+\"xj\":{xj:.17e},\"yj\":{yj:.17e},\"tj\":{tj:.17e},\"depth\":{depth:.17e}}}"
+        );
+    }
 }
 
 /// Checks that must hold before any number this binary prints means anything.
@@ -178,6 +217,10 @@ fn selftest() {
     // 8. Reported configurations are actually valid at the reported side.
     report("reported packing is overlap-free", o5.best_overlap <= search::FEASIBLE_EPS,
            format!("overlap {:.2e}", o5.best_overlap), &mut failures);
+    report("reported overlap is recomputed, not accumulated",
+           (geom::total_overlap(&o5.best) - o5.best_overlap).abs() < 1e-18,
+           format!("{:.2e} vs stored {:.2e}", geom::total_overlap(&o5.best), o5.best_overlap),
+           &mut failures);
     report("reported packing fits its reported side",
            geom::required_side(&o5.best) <= o5.best_side + 1e-12,
            format!("{:.12} <= {:.12}", geom::required_side(&o5.best), o5.best_side), &mut failures);

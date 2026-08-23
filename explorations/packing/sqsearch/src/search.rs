@@ -187,5 +187,12 @@ pub fn run_chain(n: usize, seed: u64, chain: u64, p: &Params, budget_moves: u64)
                &mut moves, &mut accepted);
     }
 
+    // Recompute from the stored configuration rather than reporting the incremental
+    // accumulator. The accumulator is updated ~4e5 times per anneal and thousands of
+    // times per chain, so cancellation error is at the plausible scale of FEASIBLE_EPS
+    // itself -- and it can drift either way, silently recording a real overlap or
+    // silently refusing a genuine one. The guard has to be a measurement, not a memory.
+    let best_overlap = total_overlap(&best);
+
     Outcome { best_side, best, best_overlap, restarts, moves, accepted }
 }

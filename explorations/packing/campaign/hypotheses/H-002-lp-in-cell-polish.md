@@ -62,7 +62,7 @@ cell containing Trump’s packing, solved as an LP, *is* Trump’s packing.
 
 ## Why this campaign needs it specifically
 
-[exp-001](../series/000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md)
+[exp-001](../series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md)
 found the right basin at `n = 10` and stopped `4.19e-04` short of the proved optimum — a
 polish failure, not an exploration failure, and the exact defect this hypothesis fixes.
 It is also the campaign’s missing tier 2: without it, no screening result can be

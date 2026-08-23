@@ -36,6 +36,14 @@ explorations/packing/
                             here (see that directory's README)
 ```
 
+## Conventions
+
+[`conventions.md`](conventions.md) consolidates every convention this directory runs on
+— the id scheme across all layers, file naming, artifact discipline, the evidence tiers
+and what each may claim, provenance, corrections, and which rules are machine-checked
+versus which rest on care.
+Read it before adding an artifact, a round, or a tool.
+
 ## Reports
 
 Written to be read in this order.

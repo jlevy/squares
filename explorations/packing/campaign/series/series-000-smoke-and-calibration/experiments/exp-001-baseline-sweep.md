@@ -30,7 +30,7 @@ experiment:
     entry_point: explorations/packing/run_baseline.sh
     command: 'sqsearch --n N --seed S --chains 8 --budget-moves 100000000, for N in 10 11 12 and S in 1..5'
     budget: '12,000,000,000 moves total, 302.4 s wall'
-    record: campaign/series/000-smoke-and-calibration/results/exp-001-baseline.jsonl
+    record: campaign/series/series-000-smoke-and-calibration/results/exp-001-baseline.jsonl
   results:
   - shape: record
     metric: best_side
@@ -185,6 +185,53 @@ could not tell them apart.
 The tier-2 numerical refinement step is more urgent than it looked when the tiers were
 laid out, and a future criterion should probably score basin-finding and basin-polishing
 separately.
+
+## Annotation, 2026-08-23: this round’s archive is not reproducible
+
+Three defects found by
+[the standing review of PR #5](../../../../docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md),
+recorded here rather than fixed in place, because the numbers above are what was
+actually measured and they stand.
+
+**The archive carries no configurations.** `run_baseline.sh` filtered the engine’s
+output to `"kind":"summary"` lines, discarding the per-chain records that carry the
+packings (`x`, `y`, `t`) and their overlap.
+So the table above can be recomputed from the archive — the review re-derived every
+number and they matched — but the *packings* cannot.
+The guard this artifact claims in `checked_by` is therefore not auditable from the
+archive.
+
+**`engine_commit: d6a1057` is unreachable.** The branch was rebased after this round
+ran, so the exact binary that produced these numbers can no longer be rebuilt from the
+recorded provenance.
+Determinism was meant to be the safety net and the dangling commit cuts it.
+Going forward the provenance rule requires a commit that is an ancestor of the branch
+being merged.
+
+**What stands and what does not.** The per-cell figures, the controls’ behaviour, and
+the refutation of H-016 all stand — they were re-derived from the archive independently.
+What does not stand is any claim that a specific configuration from this round can be
+recovered or re-verified.
+[exp-002](exp-002-baseline-n10-positive-control.md),
+[exp-003](exp-003-baseline-n11-target.md) and
+[exp-004](exp-004-baseline-n12-negative-control.md) re-run the same three cells under
+the corrected engine and archive — one round per cell, as the contract intends — and are
+the rounds to cite for anything configuration-level.
+Their numbers are identical to this one’s.
+
+## Annotation, 2026-08-23: recorded as one cell, measured across three
+
+The contract says a sweep is ordinary rounds viewed together — one instance per round,
+with `sweep.points` declared on the hypothesis so the ledger can show which cells are
+filled. This round measured `n = 10, 11, 12` in a single artifact carrying
+`instance: {point: 11}`, so the generated ledger shows H-016’s coverage as
+`n: 10 11* 12` with two measured cells reading as unfilled.
+
+Since an unfilled cell is a queue item, an unattended runner following the ledger would
+re-run `n = 10` and `n = 12`. Nothing here is wrong about the measurement; the *shape*
+of the record misreports it.
+
+Later sweep rounds are split one-per-cell, which is what the contract intended.
 
 ## Annotation, 2026-08-23: renumbered on merge
 

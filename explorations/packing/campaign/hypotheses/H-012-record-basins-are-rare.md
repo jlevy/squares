@@ -58,9 +58,9 @@ A strategy that names the observation that would kill it is the kind worth havin
 
 ## What this campaign has already seen that bears on it
 
-[exp-001](../series/000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md) is
-weak evidence for the premise: five independent seeds at `n = 11` all landed in a narrow
-band `[3.9144, 3.9361]`, well short of Trump’s `3.8771`, with the band five times
+[exp-001](../series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md)
+is weak evidence for the premise: five independent seeds at `n = 11` all landed in a
+narrow band `[3.9144, 3.9361]`, well short of Trump’s `3.8771`, with the band five times
 narrower than the remaining gap.
 That is what a sampler repeatedly finding the same wrong funnel looks like — but it is a
 single configuration of a single method, and it measures nothing about basin volumes

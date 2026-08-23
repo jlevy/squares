@@ -117,6 +117,18 @@ else
 fi
 
 echo
+echo "== differential: search energy vs validity oracle =="
+# sqsearch owns move-loop energy, sqpack owns validity. They never meet in normal
+# operation, so nothing would notice if they drifted -- and a search optimising
+# against a different notion of overlap than the record is checked with is the
+# quietest possible failure. Near-contact pairs only: that is where it could hide.
+if command -v cargo >/dev/null 2>&1; then
+  $PY differential_test.py 20000
+else
+  echo "  cargo not installed, skipping"
+fi
+
+echo
 echo "== campaign record =="
 # Whole-set invariants no per-artifact validation can see: duplicate ids, dangling
 # hypothesis references, rounds naming an unknown series, more than one open series,

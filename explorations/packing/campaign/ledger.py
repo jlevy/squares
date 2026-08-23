@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Starter view generator and invariant checker for an experiment-loop campaign.
 
-Copy into the campaign directory and adapt. It is deliberately small and dependency-
-light (PyYAML only) so it can be read in full before being trusted.
+Copy into the campaign directory and adapt. It is deliberately small (PyYAML and
+jsonschema only) so it can be read in full before being trusted.
 
 What it does:
   * loads the artifact types: series/, explorations/, hypotheses/, and the
     experiments inside each series
+  * validates every artifact against the schema it declares -- a `status: enforced`
+    artifact that nothing validates is the exact failure this method exists to prevent
   * runs the whole-set invariants that per-artifact schema validation cannot see:
     duplicate ids, dangling hypothesis references, orphan experiments, stale claims,
     the cross-field verdict rules a soft schema cannot carry, the two-way
@@ -29,6 +31,7 @@ from collections import defaultdict
 from pathlib import Path
 
 import yaml
+from jsonschema import Draft202012Validator
 
 ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "ledger.md"
@@ -49,8 +52,32 @@ DECISION_ORDER = [
 ]
 
 
+_SCHEMAS: dict[Path, Draft202012Validator] = {}
+
+
+def validator_for(path: Path, front: dict) -> Draft202012Validator | None:
+    """The validator an artifact declares for itself, compiled once and cached.
+
+    An artifact saying `status: enforced` while nothing loads its schema is the
+    tacit-validation failure this whole method exists to prevent, so this does not
+    degrade gracefully: a declared schema that cannot be loaded is a hard error.
+    """
+    meta = front.get("softschema") or {}
+    if meta.get("status") != "enforced":
+        return None
+    rel = meta.get("schema")
+    if not rel:
+        raise SystemExit(f"{path}: status is enforced but no schema is declared")
+    schema_path = (path.parent / rel).resolve()
+    if schema_path not in _SCHEMAS:
+        if not schema_path.exists():
+            raise SystemExit(f"{path}: declared schema not found: {rel}")
+        _SCHEMAS[schema_path] = Draft202012Validator(yaml.safe_load(schema_path.read_text()))
+    return _SCHEMAS[schema_path]
+
+
 def load(directory: Path, envelope: str, pattern: str = "*.md") -> list[dict]:
-    """Read every softschema artifact matching a glob, newest id last."""
+    """Read every softschema artifact matching a glob, validating as it goes."""
     out = []
     if not directory.exists():
         return out
@@ -62,6 +89,11 @@ def load(directory: Path, envelope: str, pattern: str = "*.md") -> list[dict]:
         payload = front.get(envelope)
         if payload is None:
             raise SystemExit(f"{path}: no '{envelope}' envelope in frontmatter")
+        validator = validator_for(path, front)
+        if validator is not None:
+            for err in sorted(validator.iter_errors(payload), key=lambda e: list(e.path)):
+                where = "/".join(str(x) for x in err.path) or "(root)"
+                raise SystemExit(f"{path.name}: schema violation at {where}: {err.message}")
         payload["_path"] = path
         out.append(payload)
     return out
@@ -84,6 +116,38 @@ def board_ids() -> tuple[set[str], set[str]] | None:
     for line in re.findall(r"<!--\s*reserved-ids:([^>]*?)-->", text):
         reserved |= set(re.findall(r"\bH-[0-9]{3}\b", line))
     return set(re.findall(r"\bH-[0-9]{3}\b", text)), reserved
+
+
+# Filename must equal the id it claims, followed by a kebab-case slug. Checked rather
+# than trusted, because a renumber that misses a filename leaves two names for one thing
+# and nothing else in the record would notice.
+NAME_RULES = [
+    ("series/*/README.md", "series", r"^series-([0-9]{3})-[a-z0-9-]+$", "directory"),
+    ("series/*/experiments/*.md", "experiment", r"^(exp-[0-9]{3})-[a-z0-9-]+$", "file"),
+    ("hypotheses/*.md", "hypothesis", r"^(H-[0-9]{3})-[a-z0-9-]+$", "file"),
+    ("explorations/*.md", "exploration", r"^(X-[0-9]{3})-[a-z0-9-]+$", "file"),
+]
+
+
+def naming(series, explorations, hypotheses, experiments) -> list[str]:
+    """Ids in filenames agree with ids in frontmatter, and slugs are kebab-case."""
+    problems = []
+    for items in (series, explorations, hypotheses, experiments):
+        for item in items:
+            path = item["_path"]
+            # A series is named by its directory; everything else by its own filename.
+            stem = path.parent.name if path.name == "README.md" else path.stem
+            claimed = item["id"]
+            expected = claimed if not stem.startswith("series-") else claimed
+            if not stem.startswith(expected + "-"):
+                problems.append(
+                    f"{stem}: name does not start with its id {claimed!r}"
+                )
+                continue
+            slug = stem[len(expected) + 1:]
+            if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug):
+                problems.append(f"{stem}: slug {slug!r} is not kebab-case")
+    return problems
 
 
 def dead_links() -> list[str]:
@@ -170,6 +234,14 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
             problems.append(
                 f"ideas.md: {hypothesis_id} is declared reserved but is now in the registry"
             )
+        # Reserved ids are exempt from the dangling-reference check, which means a
+        # LINK to one would otherwise pass silently -- the board would assert a
+        # reserved id is registered. Exempt from existence, not from being linked.
+        linked = set(re.findall(r"\[(H-[0-9]{3})\]\(", IDEAS.read_text()))
+        for hypothesis_id in sorted(linked & reserved):
+            problems.append(
+                f"ideas.md: {hypothesis_id} is reserved, so it must not be a link target"
+            )
 
     # Cross-field verdict rules. These would be `allOf` conditionals in the schema,
     # except that softschema 0.6.2 refuses any allOf object composition under
@@ -194,6 +266,7 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         elif dt.datetime.fromisoformat(expires) < now:
             problems.append(f"{name}: STALE CLAIM, lease expired {expires}")
 
+    problems += naming(series, explorations, hypotheses, experiments)
     problems += dead_links()
 
     return problems
@@ -208,7 +281,12 @@ def status_of(hypothesis: dict, rounds: list[dict]) -> str:
             return "blocked"
         return "open"
     decisions = {r.get("verdict", {}).get("decision") for r in rounds}
-    for decision in ("accepted", "rejected", "abandoned", "blocked", "unresolved"):
+    # `rejected` outranks `accepted` on purpose. A claim stated over a sweep is
+    # universally quantified, so one failing cell refutes it however many cells pass --
+    # and taking the optimistic reading would let a registry report a refuted claim as
+    # confirmed. A claim that is genuinely per-cell belongs in the registry as separate
+    # hypotheses, which is the honest way to say so.
+    for decision in ("rejected", "accepted", "abandoned", "blocked", "unresolved"):
         if decision in decisions:
             return {"accepted": "confirmed", "rejected": "refuted"}.get(decision, decision)
     if decisions == {"in-progress"}:

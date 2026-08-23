@@ -60,7 +60,7 @@ Both endpoints have stood for over two decades, and this is still the *smallest*
 gap at `n ≤ 100`.
 
 What the
-[baseline](series/000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md)
+[baseline](series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md)
 established: the stock annealer at 100M moves per chain recovers `s(10)` to `4.2e-04`
 and correctly refuses to beat the `n = 12` grid, but reaches only `3.9144` at `n = 11` —
 a gap of `3.7e-02` to Trump.
