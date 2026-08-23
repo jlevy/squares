@@ -7,3 +7,4 @@ node_modules/
 # Python bytecode from the packing explorations.
 __pycache__/
 *.py[cod]
+explorations/packing/.venv/

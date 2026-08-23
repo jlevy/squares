@@ -1,0 +1,148 @@
+[project]
+name = "sqpack"
+version = "0.2.0"
+description = "Exact verification and LP-in-cell quenching for square packings"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "jsonschema>=4.26.0",
+    "numpy>=2.0",
+    "pyyaml>=6.0.3",
+    "scipy>=1.14",
+    "strif>=3.0.0",
+]
+
+[project.optional-dependencies]
+symbolic = ["sympy>=1.13"]
+
+[dependency-groups]
+dev = [
+    "basedpyright>=1.31",
+    "pytest>=8.3",
+    "ruff>=0.14",
+    # Only derive_field.py uses SymPy, and only to re-derive a constant the verifier
+    # already carries. It stays out of the runtime dependencies for that reason, and
+    # sits here so the script still type-checks.
+    "sympy>=1.13",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["sqpack"]
+
+# --- Lint -------------------------------------------------------------------
+#
+# The floor is deliberately high. This directory's whole argument is that a
+# tolerance nobody checks becomes a blind spot, and the same is true of a lint
+# rule nobody enables: defect D-014 was a soundness failure that passed every
+# check we had, because the checks were the ones we had thought to write.
+#
+# Rules are enabled by family rather than individually, and exceptions are
+# listed with a reason. See defects.md for what this codebase has actually got
+# wrong; several of the families below map directly onto entries there.
+
+[tool.ruff]
+line-length = 96
+target-version = "py311"
+extend-exclude = ["resources", "frankensim-probe"]
+
+[tool.ruff.lint]
+select = [
+    "F",     # pyflakes: undefined names, unused imports and variables
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "I",     # import sorting
+    "UP",    # pyupgrade: modern syntax for the target version
+    "B",     # bugbear: real bug patterns, including B008 and loop-variable capture
+    "A",     # builtin shadowing
+    "C4",    # comprehension clarity
+    "DTZ",   # naive datetimes, which silently mean the wrong instant
+    "EM",    # exception messages assembled outside the raise
+    "FBT",   # boolean positional arguments, which read as noise at the call site
+    "ICN",   # conventional import aliases
+    "ISC",   # implicit string concatenation
+    "LOG",   # logging misuse
+    "N",     # pep8 naming
+    "PERF",  # obvious performance mistakes
+    "PIE",   # miscellaneous lints
+    "PL",    # pylint subset
+    "PTH",   # pathlib over os.path, per python-rules
+    "RET",   # return-statement structure
+    "RSE",   # raise syntax
+    "RUF",   # ruff's own rules, including mutable class defaults
+    "SIM",   # simplifiable constructs
+    "SLF",   # private member access across objects
+    "T20",   # stray print in library code
+    "TID",   # banned and relative imports
+    "TRY",   # exception antipatterns
+]
+ignore = [
+    # This is a scientific codebase and a CLI toolkit: printing IS the interface
+    # for the tools, and magic numbers in geometry are the geometry.
+    "T201",     # print, which is how every tool here reports
+    "PLR2004",  # magic value comparison: 0.5 is a half-edge, not a magic number
+    "PLR0912",  # branch count: the SAT and LP builders are inherently branchy
+    "PLR0913",  # argument count: quench takes its knobs explicitly, by design
+    "PLR0915",  # statement count, same reason
+    "TRY003",   # long messages inside raise, which are the useful ones here
+    "EM101",    # string literal in raise; paired with TRY003 above
+    "EM102",
+    "ISC001",   # conflicts with the formatter
+]
+
+[tool.ruff.lint.per-file-ignores]
+# `K` is the published symbol in the source these modules transcribe; renaming it to
+# `k` would make the code harder to check against the paper, which is the point.
+"sqpack/packings/trump11.py" = ["N806"]
+"negative_control.py" = ["N806"]
+# The benchmark deliberately times the field's internals; that is what it measures.
+"bench.py" = ["SLF001"]
+# The ledger and renderers build markdown a line at a time, which reads better than
+# the comprehension PERF401 would prefer.
+"campaign/ledger.py" = ["PERF401"]
+"tools/render_defects.py" = ["PERF401"]
+"tools/render_tables.py" = ["PERF401"]
+# Tools are scripts with a main(); they legitimately sys.path.insert before
+# importing the package they are testing, which is E402 by construction.
+"tools/*.py" = ["E402"]
+"differential_test.py" = ["E402"]
+"run_quench.py" = ["E402"]
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.isort]
+known-first-party = ["sqpack"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+# --- Types ------------------------------------------------------------------
+
+[tool.basedpyright]
+include = ["sqpack", "tools", "*.py"]
+exclude = ["**/__pycache__", "resources", "frankensim-probe", ".venv"]
+pythonVersion = "3.11"
+typeCheckingMode = "standard"
+reportMissingImports = "error"
+reportUnusedImport = "error"
+reportUnusedVariable = "error"
+reportDuplicateImport = "error"
+reportPrivateUsage = "warning"
+reportImplicitStringConcatenation = "none"
+reportMissingTypeStubs = "none"
+reportAny = "none"
+reportExplicitAny = "none"
+reportUnknownMemberType = "none"
+reportUnknownArgumentType = "none"
+reportUnknownVariableType = "none"
+reportUnknownParameterType = "none"
+reportUnannotatedClassAttribute = "none"
+
+[tool.pytest.ini_options]
+testpaths = ["sqpack", "tools", "tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-q"

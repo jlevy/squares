@@ -1,12 +1,12 @@
 //! Counter-based seeding, so a chain's stream depends on `(seed, chain)` and not
 //! on how rayon happened to schedule it.
 //!
-//! The determinism discipline is the one recorded in this project's FrankenSim
+//! The determinism discipline is the one recorded in this project's `FrankenSim`
 //! study: key the stream by identity, never by arrival order, so that basin
 //! statistics are reproducible and a reported configuration can be regenerated
 //! from the numbers in its artifact.
 
-/// SplitMix64, used only to turn `(seed, chain)` into a well-mixed state.
+/// `SplitMix64`, used only to turn `(seed, chain)` into a well-mixed state.
 #[inline]
 fn splitmix64(x: &mut u64) -> u64 {
     *x = x.wrapping_add(0x9E37_79B9_7F4A_7C15);
@@ -25,12 +25,22 @@ impl Rng {
     /// Derive a chain's stream from the campaign seed and the chain index alone.
     pub fn keyed(seed: u64, chain: u64) -> Self {
         let mut z = seed ^ chain.wrapping_mul(0x9E37_79B9_7F4A_7C15);
-        Rng { s: [splitmix64(&mut z), splitmix64(&mut z), splitmix64(&mut z), splitmix64(&mut z)] }
+        Rng {
+            s: [
+                splitmix64(&mut z),
+                splitmix64(&mut z),
+                splitmix64(&mut z),
+                splitmix64(&mut z),
+            ],
+        }
     }
 
     #[inline(always)]
     pub fn next_u64(&mut self) -> u64 {
-        let result = self.s[0].wrapping_add(self.s[3]).rotate_left(23).wrapping_add(self.s[0]);
+        let result = self.s[0]
+            .wrapping_add(self.s[3])
+            .rotate_left(23)
+            .wrapping_add(self.s[0]);
         let t = self.s[1] << 17;
         self.s[2] ^= self.s[0];
         self.s[3] ^= self.s[1];

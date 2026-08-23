@@ -97,10 +97,12 @@ the ledger can report which whole families remain untried.
 
 | # | Idea | Status | H | From | Why it might work, or not |
 | --- | --- | --- | --- | --- | --- |
-| 1 | LP-in-cell polish, alternating with angle moves | registered | [H-002](hypotheses/H-002-lp-in-cell-polish.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | Single-cell half already verified to `9e-16`; the loop is what is untested. Everything else waits on it |
+| 1 | LP-in-cell polish, alternating with angle moves | registered | [H-002](hypotheses/H-002-lp-in-cell-polish.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | **Measured ([exp-006](series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md)):** the cell solve is exact (`4.4e-16`), but the quench is a *polisher, not a rescue* — 1.1–1.3× on annealer output, because it optimises whichever basin it is handed |
 | 2 | Canonical basin identity: `D₄` + relabel geometric key, contact graph up to isomorphism | shaped |  | review R-1 | Without it “basin” is undefined and basin statistics are not statistics |
 | 3 | Basin atlas as a soft-schema artifact, descriptors versioned alongside | shaped |  | strategy doc | The deliverable, on the strategy report’s framing |
 | 4 | Pair-test counter as the budget currency | shaped |  | review R-10 | Machine-independent; replaces this campaign’s move counter |
+| 4a | The angle optimum is a kink, so smooth methods cannot converge to it | registered | [H-019](hypotheses/H-019-angle-optimum-is-a-kink.md) | [exp-006](series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | **Confirmed ([exp-010](series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md)):** one-sided slopes `0.175` vs `0.384` at the optimal tilt. Descent stalls five orders short; Powell and Nelder-Mead do *worse* |
+| 4b | Non-smooth angle search: bracket over merged angle classes | **works** |  | [exp-007](series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md)–[exp-009](series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | Reaches the analytic optimum to machine precision at `n = 5` and `n = 10` (`2e-15`, `1e-15`), where descent reaches `3e-08` and `5e-03`. No effect at `n = 11`: wrong basin |
 
 ## The premise, and the census that tests it
 
@@ -108,7 +110,7 @@ the ledger can report which whole families remain untried.
 | --- | --- | --- | --- | --- | --- |
 | 5 | Census the `n ≤ 10` landscape to saturation | registered | [H-011](hypotheses/H-011-small-n-census.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | Runs on existing Python plus the validated LP — no Rust. Gates the atlas |
 | 6 | Locate the record basin in the quench-frequency ranking | registered | [H-012](hypotheses/H-012-record-basins-are-rare.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | The load-bearing premise, killable in the cheapest tier |
-| 7 | Basin-entry: perturb Trump’s exact packing, measure the return rate | registered | [H-018](hypotheses/H-018-basin-entry.md) | this campaign | Runnable today; separates “cannot find the region” from “cannot hold it” |
+| 7 | Basin-entry: perturb Trump’s exact packing, measure the return rate | registered | [H-018](hypotheses/H-018-basin-entry.md) | this campaign | **Measured ([exp-005](series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md)):** refuted as stated, but there is no basin wall — return distance is linear in `eps` and halves with 10× effort, so the limit is the refiner |
 | 8 | Saturation curves are lawful, so coverage is estimable | raw | `H-007` | review H-7 | Turns negative results into estimates. Reserved id, not yet codified |
 | 9 | False-basin rate `r(n)` — float basins the exact verifier rejects | raw | `H-008` | review H-8 | Free: a counter on existing work. Any value is a result |
 | 10 | Symmetry dedup ratio, raw versus canonical counts | raw | `H-009` | review H-9 | Free; and required before any comparison with Ellsworth’s counts |
@@ -142,10 +144,16 @@ the ledger can report which whole families remain untried.
 Not claims, so they cannot be hypotheses.
 Registered as `kind: open_question` when worth carrying formally.
 
-- <a id="the-shape-of-the-search-space"></a>**How wide is Trump’s basin?** It is rigid,
-  so possibly a measure-zero attractor.
-  Registered as [H-018](hypotheses/H-018-basin-entry.md) — measurable by starting *at*
-  the known configuration, perturbing by `ε`, and seeing what fraction of runs return.
+- <a id="the-shape-of-the-search-space"></a>**How wide is Trump’s basin?** **Answered,
+  and the question was wrong.**
+  [exp-005](series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md)
+  found no width to measure: under a local quench the return distance is linear in the
+  perturbation over four decades with no threshold, and halves when effort is multiplied
+  by ten. What that measures is the refiner’s convergence rate, not a basin radius — so
+  the width question is only answerable once the LP quench
+  ([H-002](hypotheses/H-002-lp-in-cell-polish.md)) lands and converges in one solve.
+  The stock schedule, meanwhile, cannot hold the basin from `eps = 1e-5`, which reframes
+  `exp-003` as partly a polish failure.
 - **What does the searcher actually find at `n = 11`?** The baseline’s `3.9144` is some
   configuration. How many distinct local optima does it have, and how many tilt angles do
   they use? A histogram over restarts would say whether the search is finding one wrong

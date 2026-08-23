@@ -101,7 +101,8 @@ ledger, the checker.
 
 **Cross-field rules live in the checker, not the schema.** [checked] softschema 0.6.2
 rejects `allOf` object composition under `status: enforced`, so a conditional would
-invalidate every artifact rather than the offending one.
+invalidate every artifact rather than the offending one
+([jlevy/softschema#41](https://github.com/jlevy/softschema/issues/41)).
 
 ## 4. Evidence
 
@@ -226,6 +227,53 @@ Markdown link. This project has needed that twice.
 
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.
+
+## Defect classes
+
+One taxonomy, used by [`defects.yaml`](defects.yaml), by the beads (as a `defect-class:`
+label), and by any review that reports a problem.
+They are separated because they cost completely different things, and treating them
+alike is how a critical bug gets the same attention as a stale link.
+
+| Class | The system … | Costs |
+| --- | --- | --- |
+| **soundness** | asserted something false about the mathematics | a wrong published result; the only class that can |
+| **validity** | was correct, but the measurement did not bear on the question | an empty experiment, and the budget spent on it |
+| **bookkeeping** | recorded something its own evidence contradicts | misdirected future work; an archive nobody can trust |
+| **robustness** | did not finish, or finished only by luck | time, and silently censored data if papered over |
+| **performance** | worked, but cost far more than it should | throughput, and the experiments not run because of it |
+
+Soundness and validity defects additionally record a **direction**: `flattering` errors
+overstate the result and are the dangerous kind, because they look like success;
+`conservative` errors understate it and cost only effort.
+Four of the six soundness defects found so far flattered.
+[checked]
+
+A soundness defect gets a postmortem, not just a fix — see
+[the first one](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md),
+whose rules R1–R4 apply to code that does not exist yet.
+[convention]
+
+## Defects
+
+Every defect found in this toolchain is recorded in [`defects.yaml`](defects.yaml) and
+rendered to [`defects.md`](defects.md).
+A defect is a bug, an inefficiency, or a record that disagreed with its evidence — not
+an approach tried and rejected on its merits, which belongs in `campaign/ideas.md` under
+Dead ends.
+
+Two fields carry most of the value and are worth filling in honestly rather than
+generously. `detected_by` says what *actually* caught it, which is how we learn which
+detectors to build more of.
+`regression` names the check that now prevents recurrence, and the literal `none` is a
+legitimate and useful answer — the generated view collects those into the list that
+predicts what will come back.
+[checked]
+
+Open defects must carry a bead, soundness and validity defects must state whether the
+error flattered or understated the result, and every row must point at the artifact
+carrying its narrative.
+[checked]
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

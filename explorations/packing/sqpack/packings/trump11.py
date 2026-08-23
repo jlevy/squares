@@ -20,7 +20,7 @@ published degree-8
 
 from __future__ import annotations
 
-from ..field import NumberField
+from sqpack.field import NumberField
 
 # Minimal polynomial of u = tan(a/2), highest degree first, and an isolating
 # interval containing the intended root (a is about 40.18 degrees).
@@ -63,8 +63,7 @@ def build():
         corners = []
         for dx, dy in ((K(0), K(0)), (K(1), K(0)), (K(1), K(1)), (K(0), K(1))):
             px, py = ox + dx, oy + dy - r1
-            corners.append((K(1) + cos_a * px - sin_a * py,
-                            K(1) + sin_a * px + cos_a * py))
+            corners.append((K(1) + cos_a * px - sin_a * py, K(1) + sin_a * px + cos_a * py))
         return corners
 
     squares = [

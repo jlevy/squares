@@ -244,7 +244,7 @@ Deferring the Rust core defers when that lands, not whether.
 
 | Block | What it does | Unblocks |
 | --- | --- | --- |
-| `quench` | LP-in-cell: fix angles and axis assignment, solve for the exact cell optimum | H-2; and every basin claim anyone makes |
+| `quench` | LP-in-cell: fix angles and axis assignment, solve the cell (exact in formulation; to solver precision in practice — see the revision note) | H-2; and every basin claim anyone makes |
 | `canonicalize` | geometric key (`D₄` + relabel + quantize) and structural key (contact graph up to isomorphism) | R-1, H-9; comparability across move sets |
 | `descriptors` | tilt-class count, contact class, oblique-core size, boundary/interior split — computed from canonical data, versioned with the atlas | H-15 steering, H-3 retention, atlas records |
 | `verify` | the exact certificate (Phase 1) | H-8’s false-basin rate; any record claim |
@@ -271,20 +271,20 @@ New, and additive — nothing existing is removed:
 ```python
 import sqpack
 
-pk = sqpack.load("trump11")            # or sqpack.Packing(squares, side)
-cert = sqpack.verify(pk)               # exact by default
-cert.valid                             # True
-cert.contacts                          # 14 pairs, with exact-zero witnesses
-cert.separations                       # 41 pairs, each with its axis and sign
-cert.to_json()                         # the third-party-checkable object
+pk = sqpack.load("trump11")  # or sqpack.Packing(squares, side)
+cert = sqpack.verify(pk)  # exact by default
+cert.valid  # True
+cert.contacts  # 14 pairs, with exact-zero witnesses
+cert.separations  # 41 pairs, each with its axis and sign
+cert.to_json()  # the third-party-checkable object
 
-sqpack.verify(pk, scalar="f64", tol=1e-9)   # fast and explicitly unsound
+sqpack.verify(pk, scalar="f64", tol=1e-9)  # fast and explicitly unsound
 ```
 
 ```python
-run = sqpack.search(n=12, seed=42, budget=...)   # deterministic in seed
-run.basins                                        # each with key, side, verdict
-sqpack.search(n=12, seed=42, workers=32).digest == run.digest   # must hold
+run = sqpack.search(n=12, seed=42, budget=...)  # deterministic in seed
+run.basins  # each with key, side, verdict
+sqpack.search(n=12, seed=42, workers=32).digest == run.digest  # must hold
 ```
 
 The Python `sqpack.verify_packing(..., sign=...)` signature stays as-is so `test.sh`
@@ -555,6 +555,34 @@ consume; version it from the start.
   found nothing” needs a stated budget to mean anything.
 
 ## Revision history
+
+**2026-08-23 — what building the quench changed.**
+
+Three claims in this spec and the documents behind it did not survive contact with an
+implementation, and are corrected here rather than left to be discovered again:
+
+- **“Exact” belongs to the formulation, not to the build.** For fixed angles and a fixed
+  axis assignment the cell optimum *is* the solution of a linear program, and that is
+  still true. A floating-point LP solver does not deliver it: at its default tolerance it
+  returned a packing violating its own separation constraint, and so a side below the
+  standing record ([D-014](../../../defects.md)). Pinned at the solver’s floor the
+  residual is about `1e-11` in the side ([D-021](../../../defects.md), open).
+  The `polished` tier means *exact within a cell to solver precision*; algebraic
+  exactness stays with `sqpack`, and every promotion must route through it.
+- **The polish step does not produce rational output.** The review’s R-2 says it does;
+  `scipy`/HiGHS returns floats.
+  Rational output needs an exact rational LP, which is unbuilt and tracked
+  (`think-hg3u`).
+- **Basin identity must not inherit the search’s knobs.** A quench whose angle search
+  merges nearby angles returns a constrained optimum, so what counts as a basin would
+  depend on the merge tolerance ([D-020](../../../defects.md)). Fixed by a free-angle
+  pass that certifies the landing point is a genuine local optimum; the general rule is
+  in the [postmortem](../../postmortems/postmortem-2026-08-23-soundness-class.md).
+
+And one addition to Phase 1’s definition of done: a new component joins the **soundness
+perimeter** ([`tools/perimeter_test.py`](../../../../tools/perimeter_test.py)) in the
+same change that introduces it.
+The quench did not, which is why D-014 was possible.
 
 **2026-08-23 (second revision) — Python first, compiled code where a profile says.**
 

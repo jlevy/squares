@@ -12,6 +12,7 @@ experiment:
   date: '2026-08-22'
   hypotheses: [H-016]
   tier: exploratory
+  known_defects: [D-010]
   subject:
     label: stock sqsearch annealer, default parameters
     engine: sqsearch 0.1.0
@@ -31,6 +32,9 @@ experiment:
     command: 'sqsearch --n N --seed S --chains 8 --budget-moves 100000000, for N in 10 11 12 and S in 1..5'
     budget: '12,000,000,000 moves total, 302.4 s wall'
     record: campaign/series/series-000-smoke-and-calibration/results/exp-001-baseline.jsonl
+  effort:
+    wall_seconds: 302.4
+    stopped_by: criterion
   results:
   - shape: record
     metric: best_side

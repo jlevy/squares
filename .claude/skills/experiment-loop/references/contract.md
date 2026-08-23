@@ -310,7 +310,10 @@ Cross-field rules — *abandoned requires `budget_spent`, `best_reached` and
 like `if`/`then` conditionals under `allOf`, and they do not work there.
 Measured on 2026-08-22 against softschema 0.6.2: any `allOf` object composition makes an
 artifact declaring `status: enforced` fail with
-`enforcement_unsupported: enforced closure is unsupported for allOf object composition`.
+`enforcement_unsupported: enforced closure is unsupported for allOf object composition`,
+and the same message is reported for a conforming document and a violating one, so the
+conditional masks what it was meant to catch.
+Filed upstream as [jlevy/softschema#41](https://github.com/jlevy/softschema/issues/41).
 The conditional does not catch the offending artifacts; it invalidates every artifact
 including the correct ones.
 
