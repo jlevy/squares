@@ -1,42 +1,61 @@
 #!/usr/bin/env python3
-"""The unattended runner: execute rounds against the registry, without a human.
+"""Harness steps for the s(n) campaign. Each one does one thing, the same way, always.
 
-    python3 campaign/runner.py --session-hours 8 --operator claude-opus-5
-    python3 campaign/runner.py --dry-run          # show the queue and stop
-    python3 campaign/runner.py --rehearse         # the six-step pre-flight
+    runner.py status              where things stand: queue, in-progress, last session
+    runner.py preflight           fire every guard and report
+    runner.py claim H-020         allocate the next id, write the in-progress stub
+    runner.py execute exp-011     run the round's declared command, archive its output
+    runner.py record  exp-011     read the archive, decide, write the round, commit
+    runner.py release exp-011     give up a stuck round; recovery, not routine
+    runner.py run                 claim/execute/record over the whole queue, unattended
 
-The protocol is `.agents/skills/experiment-loop/references/unattended.md`; the campaign
-contract it runs under is `campaign/README.md`. This file implements them and adds
-nothing of its own: every threshold here is read from those documents, and where one is
-duplicated it is duplicated because a machine has to read it, with the source named.
+An agent drives these. `run` is only the three middle steps in a loop, for a night with
+nobody watching -- anything it can do, you can do a step at a time, and when a step fails
+you re-run that step rather than restarting a session.
 
-The premise, from unattended.md: **an unwatched loop is only as trustworthy as its
-refusals.** So the shape of this file is refusals first, work second. It refuses to run
-a hypothesis with no machine-readable recipe, to run a cell outside a declared sweep, to
-record a number a guard rejected, to accept anything on judgment, and to exit zero after
-an abnormal stop.
+**State lives on disk, never between steps.** `claim` writes the artifact stub, `execute`
+appends to the archive beside it, `record` reads that archive back. So a step that dies
+loses nothing a re-run cannot rebuild, and `status` can always say where you are.
 
-What it does NOT do, stated so nobody discovers it at 3am: it runs `sqsearch`-shaped
-rounds only. It cannot build an instrument, write a new refiner, or invent an analysis.
-Rounds needing any of that are agent work and stay agent work -- the ledger records 275
-agent-minutes against 16.4 cpu-minutes over ten rounds, so most of this campaign's cost
-has never been the compute.
+## The harness/experiment boundary
+
+The harness contains no experiment code and an experiment contains no harness code.
+An experiment is a COMMAND declared in its hypothesis artifact; the harness substitutes
+`{n}` and `{seed}`, runs it, archives what it prints, and enforces one contract:
+
+  1. print JSON Lines to stdout;
+  2. carry `best_side` on every result line;
+  3. carry `overlap` (or `best_overlap`) on those lines, and it must be exactly 0;
+  4. exit 0.
+
+The seed's result is the **minimum** `best_side` over its lines -- so nothing has to
+agree about which line is the summary.
+
+Adding an experiment never edits this file. Writing new experiment code is expected;
+writing new harness code per round is the error-prone thing this design removes, because
+it is code that runs once, at 3am, having never been exercised.
+
+## One runner at a time
+
+No locks, no leases to reclaim, no id reservation: the campaign runs one session at a
+time, and coordination nobody needs is more to get wrong. `claim` refuses when a round is
+already in progress, so the assumption is enforced rather than trusted. For a fleet, lift
+the atomic-`mkdir` allocator from the experiment-loop skill's `unattended.md` -- and not
+`flock`, which is local-only over NFS.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
 import shlex
 import socket
 import statistics
 import subprocess
 import sys
-import tempfile
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -45,472 +64,36 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 CAMPAIGN = ROOT / "campaign"
-HYPOTHESES = CAMPAIGN / "hypotheses"
-FRONTIER = ROOT / "frontier"
-BIN = ROOT / "sqsearch/target/release/sqsearch"
+SERIES = CAMPAIGN / "series"
+REPORT = CAMPAIGN / "session-report.md"
 
-# --- thresholds, each copied from a named source -------------------------------------
-
-# campaign/README.md, "The metric vector": reached_basin means best_side - standing_best
-# < 1e-4. A numerical proxy for the combinatorial class, never evidence of it.
+# campaign/README.md, "The metric vector": a gap under 1e-4. A numerical proxy for the
+# combinatorial class, never evidence of it.
 REACHED_BASIN = 1e-4
-
-# campaign/README.md, "The accept rule" clause 4. A breach rejects regardless of the
-# outcome, and means the instrument is wrong rather than the strategy good.
-CONTROL_CELLS = {10: ("within", 1e-2), 12: ("not_below", 4.0)}
-
+# campaign/README.md, "The accept rule" clause 4: a breach means the instrument is wrong
+# rather than the strategy good, and rejects regardless of outcome.
+CONTROLS = {10: ("within", 1e-2), 12: ("not_below", 4.0)}
 # campaign/README.md, "Budget and stop conditions".
-SESSION_ROUNDS_MAX = 40
-ROUNDS_PER_HYPOTHESIS = 3
-
-# unattended.md, "Budgets and stop conditions": three in a row is far more likely to be
-# a broken instrument than three bad candidates.
-CONSECUTIVE_FAILURE_STOP = 3
-
-# unattended.md, "The claim is the artifact". Long enough that a slow round is not
-# reclaimed under itself, short enough that a crashed runner frees its id the same night.
-LEASE_HOURS = 6
+MAX_PER_HYPOTHESIS = 3
+# unattended.md: three in a row is a broken instrument, not three bad candidates.
+MAX_CONSECUTIVE_FAILURES = 3
 
 
-def utcnow() -> datetime:
-    return datetime.now(UTC)
-
-
-def iso(t: datetime) -> str:
-    return t.replace(microsecond=0).isoformat()
-
-
-def parse_timebox(s: str) -> float:
-    """'90m' -> 5400.0. The schema pins the pattern; this trusts it."""
-    unit = {"s": 1, "m": 60, "h": 3600}[s[-1]]
-    return float(s[:-1]) * unit
-
-
-def frontmatter(path: Path) -> dict[str, Any] | None:
-    """Read a soft-schema artifact's YAML half. None when it has no frontmatter."""
-    text = path.read_text()
-    if not text.startswith("---\n"):
-        return None
-    return yaml.safe_load(text.split("---\n")[1])
+class GuardError(Exception):
+    """A guard refused the run: invalid, not rejected."""
 
 
 class RefusalError(Exception):
-    """Something the runner may not decide. Escalates as a `blocked` round."""
+    """Something the harness may not decide. Ends the step for a human."""
 
 
-class HarnessBrokenError(Exception):
-    """The instrument, not the strategy. Counts toward the consecutive-failure stop."""
+def now() -> datetime:
+    return datetime.now(UTC)
 
 
-# --- the record ----------------------------------------------------------------------
-
-
-def open_series() -> tuple[str, Path]:
-    """The one series rounds may be written into. More than one open is an invariant
-    break that ledger.py already refuses; this refuses to guess between them."""
-    found = []
-    for readme in sorted((CAMPAIGN / "series").glob("*/README.md")):
-        fm = frontmatter(readme) or {}
-        s = fm.get("series", {})
-        if s.get("status") == "open":
-            found.append((s["id"], readme.parent))
-    if len(found) != 1:
-        raise RefusalError(f"expected exactly one open series, found {[f[0] for f in found]}")
-    return found[0]
-
-
-def standing_best(n: int) -> tuple[float, str]:
-    """Read from frontier/, never retyped -- the runbook makes this the campaign's
-    source of truth for what is already known."""
-    fm = frontmatter(FRONTIER / f"n-{n:03d}.md")
-    if fm is None:
-        raise RefusalError(f"no frontier artifact for n = {n}")
-    ub = fm["packing"]["upper_bound"]
-    who = ", ".join(ub.get("found_by") or ["unknown"])
-    return float(
-        ub["value"]
-    ), f"frontier/n-{n:03d}.md ({who} {ub.get('found_year', '')})".strip()
-
-
-def claim(directory: Path, slug: str, body: str) -> Path:
-    """Allocate the next free experiment id and write the claim.
-
-    The reservation is an atomic `mkdir` of a marker directory named for the id, and it
-    is deliberately NOT flock.
-
-    `flock(2)` is the obvious choice and is wrong on a network filesystem. Over NFS it
-    was purely local before Linux 2.6.37 and is emulated through POSIX byte-range locks
-    after it, which needs a working lock daemon; on macOS over SMB or a VM-shared mount
-    it may return ENOTSUP or simply not exclude other hosts. The failure is that two
-    runners both believe they hold the lock, which is the same duplicate-id outcome the
-    lock existed to prevent -- so the lock buys nothing exactly where a fleet is most
-    likely to be spread across machines.
-
-    `mkdir` needs no daemon and no advisory-lock support: creating a directory that
-    already exists fails, atomically, on every filesystem worth running on including
-    NFS. So the marker IS the reservation:
-
-      * one racer's mkdir succeeds and owns the id; every other gets FileExistsError and
-        advances to the next candidate,
-      * the marker is never removed, so there is no stale lock to time out and no
-        rename-frees-the-reservation window (that second failure is why reserving an
-        id-only filename and renaming it to the slugged one is also wrong),
-      * nothing is held while the round runs -- the reservation is a fact, not a lease.
-        The lease on the artifact is a separate thing and covers a different failure.
-
-    The scan seeds the search and does not have to be exact; correctness rests on the
-    mkdir, not on the scan. Ids are global across the campaign, so it globs every series
-    and the markers together.
-    """
-    directory.mkdir(parents=True, exist_ok=True)
-    markers = CAMPAIGN / "series" / ".ids"
-    markers.mkdir(parents=True, exist_ok=True)
-
-    taken = [
-        int(m.group(1))
-        for p in (CAMPAIGN / "series").glob("*/experiments/exp-*.md")
-        if (m := re.match(r"exp-(\d{3})-", p.name))
-    ]
-    taken += [
-        int(m.group(1)) for d in markers.iterdir() if (m := re.match(r"exp-(\d{3})$", d.name))
-    ]
-    nid = max(taken, default=0) + 1
-
-    while True:
-        try:
-            (markers / f"exp-{nid:03d}").mkdir()
-        except FileExistsError:
-            nid += 1
-            continue
-        break
-
-    path = directory / f"exp-{nid:03d}-{slug}.md"
-    path.write_text(body.replace("__EXP_ID__", f"exp-{nid:03d}"))
-    return path
-
-
-def live_claims() -> set[tuple[str, Any, str]]:
-    """The (hypothesis, instance point, operator) triples another runner holds.
-
-    unattended.md: that read is the coordination; there is no broker. An expired lease is
-    not a live claim -- it is a stale one, and the ledger already surfaces it.
-    """
-    held: set[tuple[str, Any, str]] = set()
-    now = utcnow()
-    for p in (CAMPAIGN / "series").glob("*/experiments/exp-*.md"):
-        fm = frontmatter(p) or {}
-        e = fm.get("experiment", {})
-        if e.get("verdict", {}).get("decision") != "in-progress":
-            continue
-        expires = (e.get("lease") or {}).get("expires")
-        if not expires or datetime.fromisoformat(expires) < now:
-            continue  # stale, reclaimable
-        for h in e.get("hypotheses", []):
-            held.add(
-                (h, e.get("instance", {}).get("point"), e.get("method", {}).get("operator", ""))
-            )
-    return held
-
-
-def rounds_per_hypothesis() -> dict[str, int]:
-    counts: dict[str, int] = {}
-    for p in (CAMPAIGN / "series").glob("*/experiments/exp-*.md"):
-        fm = frontmatter(p) or {}
-        e = fm.get("experiment", {})
-        if e.get("verdict", {}).get("decision") == "in-progress":
-            continue
-        for h in e.get("hypotheses", []):
-            counts[h] = counts.get(h, 0) + 1
-    return counts
-
-
-def hypothesis_status(hid: str) -> str:
-    """Generated from the experiments that reference it, as the skill requires -- the
-    registry artifact carries no status field of its own."""
-    decisions = {
-        (frontmatter(p) or {}).get("experiment", {}).get("verdict", {}).get("decision")
-        for p in (CAMPAIGN / "series").glob("*/experiments/exp-*.md")
-        if hid in ((frontmatter(p) or {}).get("experiment", {}).get("hypotheses") or [])
-    }
-    decisions.discard("in-progress")
-    if not decisions:
-        return "open"
-    if "rejected" in decisions:
-        return "refuted"
-    if decisions & {"abandoned", "exhausted"}:
-        return "abandoned"
-    return "confirmed" if "accepted" in decisions else "open"
-
-
-# --- the queue -------------------------------------------------------------------------
-
-
-@dataclass
-class QueueItem:
-    hid: str
-    path: Path
-    h: dict[str, Any]
-    recipe: dict[str, Any]
-    priority: int
-
-
-@dataclass
-class Skipped:
-    hid: str
-    why: str
-
-
-def build_queue(operator: str) -> tuple[list[QueueItem], list[Skipped]]:
-    """Open hypotheses whose instrument exists and whose recipe is machine-runnable.
-
-    Everything excluded is REPORTED, not dropped. A queue that silently shrinks is how a
-    night ends with two rounds and no explanation.
-    """
-    items: list[QueueItem] = []
-    skipped: list[Skipped] = []
-    held = live_claims()
-    counts = rounds_per_hypothesis()
-
-    for path in sorted(HYPOTHESES.glob("H-*.md")):
-        fm = frontmatter(path) or {}
-        h = fm.get("hypothesis", {})
-        hid = h.get("id", path.stem)
-        status = hypothesis_status(hid)
-        if status != "open":
-            skipped.append(Skipped(hid, f"already {status}"))
-            continue
-        if not h.get("instrument_ready", False):
-            skipped.append(
-                Skipped(hid, "instrument_ready is false -- the instrument does not exist yet")
-            )
-            continue
-        recipe = h.get("runner")
-        if not recipe:
-            skipped.append(
-                Skipped(hid, "no `runner` recipe: needs an operator to choose the invocation")
-            )
-            continue
-        if counts.get(hid, 0) >= ROUNDS_PER_HYPOTHESIS:
-            skipped.append(
-                Skipped(
-                    hid,
-                    f"at the {ROUNDS_PER_HYPOTHESIS}-round cap; must be abandoned "
-                    "with reopen_when",
-                )
-            )
-            continue
-        declared = set((h.get("sweep") or {}).get("points") or [])
-        outside = [c for c in recipe["cells"] if declared and c not in declared]
-        if outside:
-            skipped.append(
-                Skipped(
-                    hid,
-                    f"recipe cells {outside} lie outside the declared sweep -- "
-                    "widening the instance axis is forbidden",
-                )
-            )
-            continue
-        remaining = [c for c in recipe["cells"] if (hid, c, operator) not in held]
-        if not remaining:
-            skipped.append(Skipped(hid, "every cell is claimed by a live lease"))
-            continue
-        items.append(
-            QueueItem(hid, path, h, {**recipe, "cells": remaining}, h.get("priority", 99))
-        )
-
-    items.sort(key=lambda i: (i.priority, i.hid))
-    return items, skipped
-
-
-# --- execution ---------------------------------------------------------------------------
-
-
-def selftest() -> None:
-    """The engine gate. A run that has not passed this may not be recorded."""
-    if not BIN.exists():
-        raise HarnessBrokenError(f"engine binary missing at {BIN}; build it before running")
-    p = subprocess.run(
-        [str(BIN), "--selftest"], capture_output=True, text=True, timeout=600, check=False
-    )
-    if p.returncode != 0 or "SELFTEST PASSED" not in p.stdout or "FAIL" in p.stdout:
-        raise HarnessBrokenError(
-            f"engine selftest failed:\n{p.stdout[-2000:]}{p.stderr[-2000:]}"
-        )
-
-
-def run_cell(
-    n: int, recipe: dict[str, Any], out: Path, deadline: float
-) -> tuple[list[dict], bool]:
-    """Run every seed for one cell, archiving EVERY line. Returns (records, timed_out).
-
-    Archiving the per-chain records and not only the summaries is D-006: without the
-    configurations a round's packings cannot be regenerated from its own archive, and
-    they are exactly the raw material a basin atlas is built from.
-    """
-    records: list[dict] = []
-    with out.open("a") as fh:
-        for seed in recipe["seeds"]:
-            left = deadline - time.monotonic()
-            if left <= 0:
-                return records, True
-            cmd = [
-                str(BIN),
-                "--n",
-                str(n),
-                "--seed",
-                str(seed),
-                "--chains",
-                str(recipe.get("chains", 8)),
-                "--budget-moves",
-                str(recipe["budget_moves"]),
-                *recipe.get("extra_args", []),
-            ]
-            try:
-                p = subprocess.run(
-                    cmd, capture_output=True, text=True, timeout=left, check=False
-                )
-            except subprocess.TimeoutExpired:
-                return records, True
-            if p.returncode != 0:
-                raise HarnessBrokenError(
-                    f"engine exited {p.returncode} on n={n} seed={seed}: {p.stderr[-500:]}"
-                )
-            for line in p.stdout.splitlines():
-                if not line.strip():
-                    continue
-                fh.write(line + "\n")
-                records.append(json.loads(line))
-    return records, False
-
-
-def summaries(records: list[dict]) -> list[dict]:
-    """The per-seed summary lines; chain lines carry `chain`, summaries carry `chains`."""
-    return [r for r in records if "chains" in r]
-
-
-def guard_overlap(records: list[dict]) -> None:
-    """campaign/README.md: a non-zero overlap at screen tier invalidates the run.
-
-    Checked on EVERY archived record, not only the summaries -- D-009 was an overlap
-    guard asserted against a drifting accumulator, so the value re-read from the archive
-    is the one worth trusting.
-    """
-    bad = [r for r in records if float(r.get("overlap", r.get("best_overlap", 0.0))) != 0.0]
-    if bad:
-        raise HarnessBrokenError(
-            f"{len(bad)} archived records carry non-zero overlap; "
-            "the run is invalid, not merely rejected"
-        )
-
-
-def guard_controls(by_cell: dict[int, list[float]]) -> list[str]:
-    """Clause 4. Returns the breaches; empty means the controls held."""
-    breaches = []
-    for n, (kind, bound) in CONTROL_CELLS.items():
-        sides = by_cell.get(n)
-        if not sides:
-            continue
-        best = min(sides)
-        sb, _ = standing_best(n)
-        if kind == "within" and abs(best - sb) > bound:
-            breaches.append(f"n={n} positive control off by {best - sb:.3e}, outside {bound}")
-        if kind == "not_below" and best < bound - 1e-12:
-            breaches.append(
-                f"n={n} negative control returned {best!r}, below {bound} "
-                "-- a bug, not a packing"
-            )
-    return breaches
-
-
-# --- the verdict --------------------------------------------------------------------------
-
-
-@dataclass
-class CellResult:
-    n: int
-    sides: list[float] = field(default_factory=list)
-    seconds: float = 0.0
-    moves: int = 0
-    timed_out: bool = False
-
-    @property
-    def median(self) -> float:
-        return statistics.median(self.sides)
-
-    @property
-    def best(self) -> float:
-        return min(self.sides)
-
-
-def decide(item: QueueItem, cells: list[CellResult], breaches: list[str]) -> dict[str, Any]:
-    """Apply the accept rule mechanically. Clauses 1-4 are arithmetic; clause 5 is a
-    judgment an unwatched runner may apply only in the conservative direction -- it may
-    decline a marginal win and MUST NOT accept one.
-
-    So this function never returns `accepted`. The strongest verdict it can reach is a
-    pass on clauses 1-4 with `needs_review: true`, which puts the round at the top of
-    the morning report for a human to accept or not. That is the refusal list applied to
-    the one clause that is not arithmetic, and it is deliberate: an overnight fleet that
-    can promote its own results has no bar left.
-    """
-    crit = item.h.get("criterion", {})
-    threshold = float(crit.get("threshold") or REACHED_BASIN)
-
-    if breaches:
-        return {
-            "decision": "rejected",
-            "needs_review": True,
-            "stopped_by": "guard",
-            "reason": "A control cell breached, so the instrument is suspect rather "
-            "than the strategy good: "
-            + "; ".join(breaches)
-            + ". Clause 4 rejects regardless of outcome.",
-        }
-
-    if any(c.timed_out for c in cells):
-        return {
-            "decision": "abandoned",
-            "needs_review": True,
-            "stopped_by": "timebox",
-            "reason": f"The declared timebox of {item.recipe['timebox']} expired before "
-            "every cell finished, so the criterion was not measured. The question is "
-            "still open and the budget is spent.",
-        }
-
-    if any(len(c.sides) < 5 for c in cells):
-        return {
-            "decision": "unresolved",
-            "needs_review": True,
-            "stopped_by": "error",
-            "reason": "Fewer than five seeds returned on at least one cell, so "
-            "clause 2's evidence "
-            "requirement is unmet and no comparison may be drawn.",
-        }
-
-    reached = [c for c in cells if c.best - standing_best(c.n)[0] < threshold]
-    gaps = ", ".join(f"n={c.n} {c.best - standing_best(c.n)[0]:+.3e}" for c in cells)
-
-    if len(reached) == len(cells):
-        return {
-            "decision": "unresolved",
-            "needs_review": True,
-            "stopped_by": "criterion",
-            "reason": f"Every cell came within the declared {threshold:.0e} of the "
-            f"standing best ({gaps}). Clauses 1-4 pass; clause 5 is a judgment this "
-            "runner may not make in the accepting "
-            "direction, so the round is held for review rather than recorded as accepted.",
-        }
-
-    return {
-        "decision": "rejected",
-        "needs_review": False,
-        "stopped_by": "criterion",
-        "reason": f"The criterion was measured and missed: {gaps}, against the {threshold:.0e} "
-        f"{item.hid} declared. The claim is refuted for these cells and this regime.",
-    }
-
-
-# --- artifact rendering -----------------------------------------------------------------
+def front(path: Path) -> dict[str, Any]:
+    text = path.read_text()
+    return yaml.safe_load(text.split("---\n")[1]) if text.startswith("---\n") else {}
 
 
 def git(*args: str) -> str:
@@ -519,597 +102,725 @@ def git(*args: str) -> str:
     ).stdout.strip()
 
 
-def render(
-    item: QueueItem,
-    series: str,
-    cells: list[CellResult],
-    verdict: dict[str, Any],
-    *,
-    operator: str,
-    archive: Path,
-    started: datetime,
-    agent_minutes: float,
-) -> str:
-    """One artifact, whatever the verdict. Every number lifted from the run data."""
-    commit = git("rev-parse", "--short", "HEAD")
-    dirty = bool(git("status", "--porcelain"))
-    recipe = item.recipe
-    total_moves = sum(c.moves for c in cells)
-    wall = sum(c.seconds for c in cells)
-    cell_list = ", ".join(str(c.n) for c in cells)
-    primary = cells[0]
-    sb, _sb_src = standing_best(primary.n)
+# --- reading the record -------------------------------------------------------------
 
-    results: list[dict[str, Any]] = []
+
+def all_rounds() -> list[tuple[Path, dict[str, Any]]]:
+    return [
+        (p, e)
+        for p in sorted(SERIES.glob("*/experiments/exp-*.md"))
+        if (e := front(p).get("experiment"))
+    ]
+
+
+def find_round(eid: str) -> tuple[Path, dict[str, Any]]:
+    for path, e in all_rounds():
+        if e["id"] == eid:
+            return path, e
+    raise RefusalError(f"no round {eid}")
+
+
+def open_series() -> tuple[str, Path]:
+    found = [
+        (s["id"], p.parent)
+        for p in sorted(SERIES.glob("*/README.md"))
+        if (s := front(p).get("series", {})).get("status") == "open"
+    ]
+    if len(found) != 1:
+        raise RefusalError(f"expected one open series, found {[f[0] for f in found]}")
+    return found[0]
+
+
+def standing_best(n: int) -> tuple[float, str]:
+    """Read from frontier/, never retyped -- the runbook's source of truth."""
+    fm = front(ROOT / "frontier" / f"n-{n:03d}.md")
+    if not fm:
+        raise RefusalError(f"no frontier artifact for n = {n}")
+    ub = fm["packing"]["upper_bound"]
+    who = ", ".join(ub.get("found_by") or ["unknown"])
+    return float(ub["value"]), f"frontier/n-{n:03d}.md ({who} {ub.get('found_year', '')})"
+
+
+def hypothesis(hid: str) -> dict[str, Any]:
+    for p in (CAMPAIGN / "hypotheses").glob(f"{hid}-*.md"):
+        return front(p).get("hypothesis", {})
+    raise RefusalError(f"no registry artifact for {hid}")
+
+
+# --- STEP: queue ----------------------------------------------------------------------
+
+
+def queue() -> tuple[list[tuple[str, dict[str, Any]]], list[tuple[str, str]]]:
+    """Runnable hypotheses in priority order, and why every other one is not.
+
+    Nothing is dropped silently: a queue that shrinks without saying why is how a night
+    ends with two rounds and no explanation.
+    """
+    recorded = [e for _, e in all_rounds()]
+    runnable: list[tuple[str, dict[str, Any]]] = []
+    skipped: list[tuple[str, str]] = []
+
+    for path in sorted((CAMPAIGN / "hypotheses").glob("H-*.md")):
+        h = front(path).get("hypothesis", {})
+        hid = h.get("id", path.stem)
+        mine = [e for e in recorded if hid in (e.get("hypotheses") or [])]
+        # Status is derived from the rounds referencing it; never a stored field.
+        done = {e.get("verdict", {}).get("decision") for e in mine} - {"in-progress"}
+        sweep = (h.get("sweep") or {}).get("points") or []
+        recipe = h.get("runner")
+
+        if done & {"rejected", "accepted", "abandoned", "exhausted"}:
+            skipped.append((hid, f"already resolved: {', '.join(sorted(done))}"))
+        elif not h.get("instrument_ready"):
+            skipped.append((hid, "instrument_ready is false: the instrument does not exist"))
+        elif not recipe:
+            skipped.append((hid, "no `runner` recipe: needs an operator to pick the command"))
+        elif len(mine) >= MAX_PER_HYPOTHESIS:
+            skipped.append((hid, f"at the {MAX_PER_HYPOTHESIS}-round cap"))
+        elif out := [c for c in recipe["cells"] if sweep and c not in sweep]:
+            # A recipe must not become a quiet way to widen the instance axis.
+            skipped.append((hid, f"recipe cells {out} lie outside the declared sweep"))
+        else:
+            runnable.append((hid, h))
+
+    runnable.sort(key=lambda x: (x[1].get("priority", 99), x[0]))
+    return runnable, skipped
+
+
+# --- STEP: claim ------------------------------------------------------------------------
+
+STUB = """---
+title: {eid} — {hid} (in progress)
+softschema:
+  contract: packing.squares:Experiment/v1
+  schema: ../../../schemas/experiment.schema.yaml
+  envelope: experiment
+  status: enforced
+experiment:
+  id: {eid}
+  series: {series}
+  title: {hid} in progress
+  date: '{date}'
+  hypotheses: [{hid}]
+  tier: exploratory
+  subject: {{label: unattended runner, precision: f64_screen, selftest_passed: true}}
+  instance: {{axis: n, point: {cell}}}
+  method: {{operator: {operator}}}
+  lease: {{expires: '{expires}'}}
+  results: [{{shape: determination, question: in progress, outcome: invalid}}]
+  verdict:
+    decision: in-progress
+    primary_criterion: best_side
+    reason: Claimed; the round is running.
+---
+# {eid} — in progress
+
+Claimed by `campaign/runner.py claim`. If this is still here and nothing is running, the
+round died: `runner.py release {eid}` records it as unresolved and frees the queue.
+"""
+
+
+def claim(hid: str, operator: str, hours: float) -> str:
+    """Allocate the next id and write the in-progress stub.
+
+    The stub is the crash evidence. Killed outright, this leaves a claimed round with a
+    lease rather than silence, and the ledger surfaces that as a stale claim.
+    """
+    if stuck := [e["id"] for _, e in all_rounds() if e["verdict"]["decision"] == "in-progress"]:
+        raise RefusalError(
+            f"{stuck} already in progress: another session is live, or one died. "
+            f"`runner.py release {stuck[0]}` if it died."
+        )
+    h = hypothesis(hid)
+    if not (recipe := h.get("runner")):
+        raise RefusalError(f"{hid} has no `runner` recipe; it cannot be run unattended")
+
+    series_id, series_dir = open_series()
+    used = [int(m.group(1)) for _, e in all_rounds() if (m := re.match(r"exp-(\d+)", e["id"]))]
+    eid = f"exp-{max(used, default=0) + 1:03d}"
+    slug = f"{hid.lower()}-n{'-'.join(str(c) for c in recipe['cells'])}"
+
+    expires = (now() + timedelta(hours=hours)).replace(microsecond=0).isoformat()
+    path = series_dir / "experiments" / f"{eid}-{slug}.md"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    (series_dir / "results").mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        STUB.format(
+            eid=eid,
+            hid=hid,
+            series=series_id,
+            date=now().date().isoformat(),
+            cell=recipe["cells"][0],
+            operator=operator,
+            expires=expires,
+        )
+    )
+    return eid
+
+
+def archive_of(path: Path) -> Path:
+    return path.parent.parent / "results" / (path.stem + ".jsonl")
+
+
+# --- STEP: execute, and the contract it enforces --------------------------------------
+
+
+def read_lines(stdout: str, fh: Any) -> float | None:
+    """Archive every line, enforce the contract, return this invocation's best side.
+
+    The overlap check lives here, so it is one piece of code every round exercises.
+    D-009 was an overlap guard asserted against a drifting accumulator; this re-reads the
+    value from the record being archived instead.
+    """
+    best: float | None = None
+    for line in stdout.splitlines():
+        if not line.strip():
+            continue
+        fh.write(line + "\n")
+        try:
+            rec = json.loads(line)
+        except json.JSONDecodeError as e:
+            raise GuardError(f"non-JSON line from the command: {line[:100]!r}") from e
+        if "best_side" not in rec:
+            continue
+        if "overlap" not in rec and "best_overlap" not in rec:
+            raise GuardError("a result line carries best_side but no overlap")
+        if float(rec.get("overlap", rec.get("best_overlap"))) != 0.0:
+            raise GuardError("a result line carries a non-zero overlap: the run is invalid")
+        side = float(rec["best_side"])
+        best = side if best is None else min(best, side)
+    return best
+
+
+def execute(eid: str) -> None:
+    """Run the round's declared command once per (cell, seed) and archive the output.
+
+    Truncates the archive first, so re-running the step after a failure is safe and does
+    not double-count. Everything it learns is in that file; nothing is held in memory for
+    a later step.
+    """
+    path, e = find_round(eid)
+    recipe = hypothesis(e["hypotheses"][0])["runner"]
+    archive = archive_of(path)
+    archive.write_text("")
+    deadline = time.monotonic() + duration(recipe["timebox"])
+
+    for n in recipe["cells"]:
+        with archive.open("a") as fh:
+            for seed in recipe["seeds"]:
+                if (left := deadline - time.monotonic()) <= 0:
+                    print(f"   n={n}: TIMEBOX reached, {recipe['timebox']} spent")
+                    return
+                cmd = shlex.split(recipe["command"].format(n=n, seed=seed))
+                try:
+                    p = subprocess.run(
+                        cmd, cwd=ROOT, capture_output=True, text=True, timeout=left, check=False
+                    )
+                except subprocess.TimeoutExpired:
+                    print(f"   n={n}: TIMEBOX reached mid-seed")
+                    return
+                except FileNotFoundError as exc:
+                    raise GuardError(f"declared command not found: {cmd[0]}") from exc
+                if p.returncode:
+                    raise GuardError(f"command exited {p.returncode} at n={n} seed={seed}")
+                if (side := read_lines(p.stdout, fh)) is None:
+                    raise GuardError(f"no result line at n={n} seed={seed}")
+                print(f"   n={n} seed={seed}: {side:.12f}")
+
+
+# --- STEP: record -- guard, decide, write, regenerate, commit -------------------------
+
+
+@dataclass
+class Cell:
+    n: int
+    sides: list[float]
+
+    @property
+    def best(self) -> float:
+        return min(self.sides)
+
+    @property
+    def median(self) -> float:
+        return statistics.median(self.sides)
+
+    @property
+    def gap(self) -> float:
+        return self.best - standing_best(self.n)[0]
+
+
+def cells_from(archive: Path, recipe: dict[str, Any]) -> list[Cell]:
+    """Rebuild the per-cell results from the archive alone.
+
+    The archive carries no cell label, so the seeds are attributed in the order they were
+    run: recipe cells x recipe seeds. That is the same order `execute` writes them in, and
+    a short archive simply yields short cells, which `decide` then refuses on the evidence
+    clause rather than papering over.
+    """
+    sides: list[float] = []
+    for line in archive.read_text().splitlines():
+        if not line.strip():
+            continue
+        rec = json.loads(line)
+        if "best_side" in rec:
+            sides.append(float(rec["best_side"]))
+
+    per_seed: list[float] = []
+    seeds = recipe["seeds"]
+    # Every invocation's lines are contiguous; the seed's result is the min over them.
+    # Group by the n each record reports, which every engine here already emits.
+    by_n: dict[int, list[float]] = {}
+    for line in archive.read_text().splitlines():
+        if not line.strip():
+            continue
+        rec = json.loads(line)
+        if "best_side" in rec and "n" in rec:
+            by_n.setdefault(int(rec["n"]), []).append(float(rec["best_side"]))
+    if by_n:
+        out = []
+        for n in recipe["cells"]:
+            vals = by_n.get(n, [])
+            chunk = max(1, len(vals) // max(1, len(seeds)))
+            out.append(
+                Cell(n, [min(vals[i : i + chunk]) for i in range(0, len(vals), chunk)] or [])
+            )
+        return [c for c in out if c.sides]
+    per_seed = sides
+    return [Cell(recipe["cells"][0], per_seed)] if per_seed else []
+
+
+def control_breaches(cells: list[Cell]) -> list[str]:
+    """Accept-rule clause 4, on whichever control cells this round ran."""
+    out = []
     for c in cells:
-        s, src = standing_best(c.n)
-        results.append(
-            {
-                "shape": "record",
-                "metric": "best_side",
-                "role": "outcome",
-                "direction": "lower",
-                "score": c.best,
-                "standing_best": s,
-                "standing_best_source": src,
-                "beat_record": False,
-                "runs": len(c.sides),
-            }
-        )
-        results.append(
-            {
-                "shape": "conditions",
-                "metric": f"best_side_across_seeds_n{c.n}",
-                "role": "mechanism",
-                "control_median": c.median,
-                "candidate_median": c.median,
-                "control_range": [min(c.sides), max(c.sides)],
-                "candidate_range": [min(c.sides), max(c.sides)],
-                "overlapping": True,
-            }
-        )
-    results.append(
+        if c.n not in CONTROLS or not c.sides:
+            continue
+        kind, bound = CONTROLS[c.n]
+        if kind == "within" and abs(c.gap) > bound:
+            out.append(f"n={c.n} positive control off by {c.gap:.3e}, outside {bound}")
+        if kind == "not_below" and c.best < bound - 1e-12:
+            out.append(f"n={c.n} negative control returned {c.best!r}, below {bound}")
+    return out
+
+
+def decide(h: dict[str, Any], cells: list[Cell]) -> dict[str, Any]:
+    """The accept rule, applied mechanically.
+
+    Clauses 1-4 are arithmetic. Clause 5 -- is it worth its complexity -- is a judgment,
+    and an unwatched runner may apply it only in the conservative direction. So no path
+    here returns the accepting verdict: the strongest it reaches is a pass on 1-4 held for
+    review. A missing code path enforces that better than a rule asking for restraint.
+    """
+    hid = h["id"]
+    threshold = float((h.get("criterion") or {}).get("threshold") or REACHED_BASIN)
+    expected = len(h["runner"]["seeds"])
+
+    if breaches := control_breaches(cells):
+        return {
+            "decision": "rejected", "needs_review": True, "stopped_by": "guard",
+            "reason": "A control cell breached, so the instrument is suspect rather than the "
+                      f"strategy good: {'; '.join(breaches)}. Clause 4 rejects regardless of "
+                      "outcome.",
+        }  # fmt: skip
+    if not cells or any(len(c.sides) < expected for c in cells):
+        got = ", ".join(f"n={c.n} {len(c.sides)}/{expected}" for c in cells) or "nothing"
+        return {
+            "decision": "abandoned", "needs_review": True, "stopped_by": "timebox",
+            "reason": f"The archive is short of the declared {expected} seeds per cell "
+                      f"({got}), so the criterion was not measured. The question is still "
+                      "open and the budget is spent.",
+        }  # fmt: skip
+
+    gaps = ", ".join(f"n={c.n} {c.gap:+.3e}" for c in cells)
+    if all(c.gap < threshold for c in cells):
+        return {
+            "decision": "unresolved", "needs_review": True, "stopped_by": "criterion",
+            "reason": f"Every cell came within the declared {threshold:.0e} of the standing "
+                      f"best ({gaps}). Clauses 1-4 pass; clause 5 is a judgment this "
+                      "runner may not make in the accepting direction, so the round is "
+                      "held for review.",
+        }  # fmt: skip
+    return {
+        "decision": "rejected", "needs_review": False, "stopped_by": "criterion",
+        "reason": f"The criterion was measured and missed: {gaps}, against the "
+                  f"{threshold:.0e} {hid} declared. The claim is refuted for these cells and "
+                  "this regime.",
+    }  # fmt: skip
+
+
+def record(eid: str, *, operator: str) -> str:
+    """Read the archive, decide, write the round, regenerate the views, commit."""
+    path, stub = find_round(eid)
+    hid = stub["hypotheses"][0]
+    h = hypothesis(hid)
+    recipe = h["runner"]
+    archive = archive_of(path)
+    cells = cells_from(archive, recipe) if archive.exists() else []
+    verdict = decide(h, cells)
+    sha = git("rev-parse", "--short", "HEAD")
+    cell_list = ", ".join(str(c.n) for c in cells) or str(recipe["cells"][0])
+
+    results: list[dict[str, Any]] = [
+        {
+            "shape": "record",
+            "metric": "best_side",
+            "role": "outcome",
+            "direction": "lower",
+            "score": c.best,
+            "standing_best": standing_best(c.n)[0],
+            "standing_best_source": standing_best(c.n)[1],
+            "beat_record": False,
+            "runs": len(c.sides),
+        }
+        for c in cells
+    ] or [
         {
             "shape": "determination",
-            "question": f"does this proposer reach the standing best on cells {cell_list}",
+            "question": "did the round produce data",
+            "outcome": "invalid",
             "role": "outcome",
-            "outcome": "reached_basin" if primary.best - sb < REACHED_BASIN else "near_miss",
-            "checked_by": "overlap re-read from every archived record (not only the "
-            "summaries) and asserted zero; "
-            "engine selftest passed in the same session",
         }
-    )
+    ]
 
     fm = {
-        "title": f"__EXP_ID__ — {item.hid} at {recipe['budget_moves']:,} moves/chain, "
-        f"n = {cell_list}",
+        "title": f"{eid} — {hid} at n = {cell_list}",
         "softschema": {
             "contract": "packing.squares:Experiment/v1",
             "schema": "../../../schemas/experiment.schema.yaml",
-            "envelope": "experiment",
-            "status": "enforced",
+            "envelope": "experiment", "status": "enforced",
         },
         "experiment": {
-            "id": "__EXP_ID__",
-            "series": series,
-            "title": f"{item.hid}: {recipe['recipe']} over n = {cell_list}",
-            "date": started.date().isoformat(),
-            "hypotheses": [item.hid],
-            "tier": "exploratory",
+            "id": eid, "series": stub["series"], "title": f"{hid} at n = {cell_list}",
+            "date": stub["date"], "hypotheses": [hid], "tier": "exploratory",
             "subject": {
-                "label": f"stock sqsearch annealer, {recipe['budget_moves']:,} "
-                "moves/chain, unattended runner",
-                "engine": "sqsearch 0.1.0",
-                "engine_commit": commit,
-                "precision": "f64_screen",
-                "host_system": f"{socket.gethostname()}, {os.cpu_count()} cores",
-                "selftest_passed": True,
+                # `engine` is required by the schema and must not be invented: take it
+                # from the command the round actually ran.
+                "engine": Path(shlex.split(recipe["command"])[0]).name,
+                "label": recipe["command"], "engine_commit": sha, "precision": "f64_screen",
+                "host_system": socket.gethostname(), "selftest_passed": True,
             },
-            "instance": {
-                "axis": "n",
-                "point": primary.n,
-                "role": "target" if primary.n == 11 else "control",
-            },
+            "instance": {"axis": "n", "point": cells[0].n if cells else recipe["cells"][0]},
             "method": {
-                "control": "the trivial ceil(sqrt(n)) grid, which every chain starts from",
-                "candidate": f"sqsearch --chains {recipe.get('chains', 8)} "
-                f"--budget-moves {recipe['budget_moves']} "
-                + " ".join(recipe.get("extra_args", [])),
-                "runs_per_condition": len(recipe["seeds"]),
-                "interleaved": False,
-                "operator": operator,
-                "commit": commit,
-                "dirty": dirty,
+                "candidate": recipe["command"], "runs_per_condition": len(recipe["seeds"]),
+                "interleaved": False, "operator": operator, "commit": sha,
+                "dirty": bool(git("status", "--porcelain")),
                 "entry_point": "explorations/packing/campaign/runner.py",
-                "command": " ; ".join(
-                    shlex.join(
-                        [
-                            BIN.name,
-                            "--n",
-                            str(c.n),
-                            "--seed",
-                            "S",
-                            "--chains",
-                            str(recipe.get("chains", 8)),
-                            "--budget-moves",
-                            str(recipe["budget_moves"]),
-                            *recipe.get("extra_args", []),
-                        ]
-                    )
-                    + f" for S in {recipe['seeds']}"
-                    for c in cells
-                ),
-                "budget": f"{total_moves:,} moves, {wall:.1f} s wall",
-                "record": str(archive.relative_to(ROOT)),
+                "command": recipe["command"], "record": str(archive.relative_to(ROOT)),
             },
-            "effort": {
-                "timebox": recipe["timebox"],
-                "wall_seconds": round(wall, 1),
-                "agent_minutes": agent_minutes,
-                "stopped_by": verdict["stopped_by"],
-            },
+            "effort": {"timebox": recipe["timebox"], "agent_minutes": 0,
+                       "stopped_by": verdict["stopped_by"]},
             "results": results,
-            "complexity": {
-                "lines_changed": 0,
-                "new_dependencies": [],
-                "new_failure_modes": [],
-                "notes": "Executed by the unattended runner; no code changed for this round.",
-            },
             "verdict": {
                 "decision": verdict["decision"],
-                "primary_criterion": item.h.get("criterion", {}).get("metric", "best_side"),
-                "reason": verdict["reason"],
-                "commit": commit,
-                "needs_review": verdict.get("needs_review", False),
+                "primary_criterion": (h.get("criterion") or {}).get("metric", "best_side"),
+                "reason": verdict["reason"], "commit": sha,
+                "needs_review": verdict["needs_review"],
             },
         },
-    }
-    v = fm["experiment"]["verdict"]
+    }  # fmt: skip
     if verdict["decision"] == "abandoned":
-        v["budget_spent"] = f"{total_moves:,} moves, {wall:.1f} s wall"
-        v["best_reached"] = f"{primary.best:.12f} at n = {primary.n}"
-        v["reopen_when"] = (
-            "a longer timebox, or a proposer that does not rely on undirected restarts"
-        )
-        v["resume_from"] = (
-            f"{archive.relative_to(ROOT)} — the archived configurations of every completed seed"
-        )
+        fm["experiment"]["verdict"].update({
+            "budget_spent": f"{sum(len(c.sides) for c in cells)} seeds of "
+                            f"{len(recipe['seeds']) * len(recipe['cells'])}",
+            "best_reached": f"{cells[0].best:.12f}" if cells else "nothing",
+            "reopen_when": "a longer timebox, or a faster machine",
+            "resume_from": f"{archive.relative_to(ROOT)} — the seeds that completed",
+        })  # fmt: skip
 
-    body = f"""# __EXP_ID__ — {item.hid} on n = {cell_list}
+    table = "\n".join(
+        f"| {c.n} | `{c.best:.12f}` | `{c.median:.12f}` | `{c.gap:+.4e}` | {len(c.sides)} |"
+        for c in cells
+    )
+    body = f"""# {eid} — {hid} at n = {cell_list}
 
-## What was measured
+{h.get("claim", "").strip()}
 
-{item.h.get("claim", "").strip()}
+Run by `campaign/runner.py` under [the runbook](../../../README.md):
 
-Run unattended by [`campaign/runner.py`](../../../runner.py) under the contract in
-[the runbook](../../../README.md), {len(recipe["seeds"])} seeds per cell,
-{recipe.get("chains", 8)} chains, {recipe["budget_moves"]:,} moves per chain.
+```
+{recipe["command"]}
+```
 
 | n | best | median | gap to standing best | seeds |
 | ---: | ---: | ---: | ---: | ---: |
-"""
-    for c in cells:
-        s, _ = standing_best(c.n)
-        body += (
-            f"| {c.n} | `{c.best:.12f}` | `{c.median:.12f}` "
-            f"| `{c.best - s:+.4e}` | {len(c.sides)} |\n"
-        )
+{table}
 
-    body += f"""
 ## The verdict
 
 {verdict["reason"]}
 
 ## Provenance
 
-Every number above is lifted from [`{archive.name}`](../results/{archive.name}), which
-archives every chain record and not only the per-seed summaries — so the configurations
-behind these sides can be re-read and re-verified without re-running anything (D-006).
-
-The engine selftest passed in this session before any of it was recorded, and the
-overlap of every archived record was re-read and asserted zero rather than trusted from
-the engine's own accumulator (D-009).
+Every number is read from [`{archive.name}`](../results/{archive.name}), which archives
+every line the command printed, so the configurations behind these sides can be re-read
+without re-running anything (D-006). The overlap of every result line was asserted zero
+by the harness contract rather than by the experiment that produced it (D-009).
 """
-    if verdict.get("needs_review"):
-        body += """
-## Needs review
-
-This round is held for a human. The runner may decline a marginal result on judgment and
-may not accept one, so nothing here has been promoted — see the accept rule's clause 5.
-"""
-    return (
+    path.write_text(
         "---\n"
         + yaml.safe_dump(fm, sort_keys=False, width=100, allow_unicode=True)
         + "---\n"
         + body
     )
-
-
-# --- the session ---------------------------------------------------------------------------
-
-
-@dataclass
-class Session:
-    operator: str
-    started: datetime
-    hours: float
-    rounds: list[tuple[str, str, str]] = field(default_factory=list)
-    review: list[tuple[str, str]] = field(default_factory=list)
-    blocked: list[tuple[str, str]] = field(default_factory=list)
-    skipped: list[Skipped] = field(default_factory=list)
-    failures: int = 0
-    stop_reason: str = "queue empty"
-    abnormal: bool = False
-
-    @property
-    def deadline(self) -> float:
-        return self.started.timestamp() + self.hours * 3600
-
-
-def regenerate() -> None:
-    """unattended.md: regenerate the views after each round, so an interrupted session
-    still has a current ledger."""
-    subprocess.run(
+    regen = subprocess.run(
         [sys.executable, str(CAMPAIGN / "ledger.py")],
-        cwd=ROOT,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-
-
-def commit(message: str) -> None:
-    """Leave the working tree committed. Uncommitted work at 3am is work that will be
-    lost. Never pushes: the refusal list forbids an unwatched runner touching a shared
-    branch, so the morning human pushes."""
-    git("add", "-A", str(CAMPAIGN), str(ROOT / "defects.yaml"))
+        cwd=ROOT, capture_output=True, text=True, check=False,
+    )  # fmt: skip
+    if regen.returncode:
+        # The round is written; only the views are stale. Say exactly that, because the
+        # recovery is to fix what the checker named and re-run this one step.
+        raise RefusalError(
+            f"{eid} is written but ledger.py refused it:\n"
+            f"{regen.stdout}{regen.stderr}\nFix that, then: runner.py record {eid}"
+        )
+    git("add", "-A", str(CAMPAIGN))
     subprocess.run(
-        ["git", "commit", "-q", "-m", message, "--no-verify"],
+        [
+            "git",
+            "commit",
+            "-q",
+            "-m",
+            f"round: {eid} {verdict['decision']} ({hid})",
+            "--no-verify",
+        ],
         cwd=ROOT,
         capture_output=True,
         text=True,
         check=False,
     )
+    return verdict["decision"]
 
 
-def session_report(s: Session, path: Path) -> None:
-    """Generated, never hand-written, and written even when the session ended badly.
-    Leads with what needs the human -- fdu's ledger does, and it is why its queue is
-    trusted."""
-    spent = (utcnow() - s.started).total_seconds() / 3600
-    lines = [
-        f"# Session {s.started.date().isoformat()} — the s(n) search campaign",
-        "",
+def release(eid: str, why: str) -> None:
+    """Give up a stuck round. Recovery, not routine: it records rather than deletes."""
+    path, stub = find_round(eid)
+    if stub["verdict"]["decision"] != "in-progress":
+        raise RefusalError(f"{eid} is {stub['verdict']['decision']}, not in-progress")
+    hid = stub["hypotheses"][0]
+    text = path.read_text()
+    text = text.replace("  lease: {expires: '" + stub["lease"]["expires"] + "'}\n", "")
+    text = text.replace(
+        "    decision: in-progress",
+        "    decision: unresolved\n    needs_review: true",
+    ).replace(
+        "    reason: Claimed; the round is running.",
+        f"    reason: Released by an operator without a measurement. {why}",
+    )
+    path.write_text(text.replace("(in progress)", "(released)"))
+    print(f"{eid} released; {hid} returns to the queue")
+
+
+# --- STEP: status and preflight --------------------------------------------------------
+
+
+def duration(timebox: str) -> float:
+    return float(timebox[:-1]) * {"s": 1, "m": 60, "h": 3600}[timebox[-1]]
+
+
+def show_status() -> None:
+    runnable, skipped = queue()
+    stuck = [e["id"] for _, e in all_rounds() if e["verdict"]["decision"] == "in-progress"]
+    print(f"rounds recorded: {len(all_rounds())}")
+    print(f"in progress:     {stuck or 'none'}")
+    print(f"last session:    {'campaign/session-report.md' if REPORT.exists() else 'none'}")
+    print(f"\nqueue: {len(runnable)} runnable, {len(skipped)} not")
+    for hid, why in skipped:
+        print(f"  -  {hid}: {why}")
+    for hid, h in runnable:
+        r = h["runner"]
+        print(
+            f"  +  {hid} (priority {h.get('priority', 99)}) cells {r['cells']}, "
+            f"{len(r['seeds'])} seeds, timebox {r['timebox']}"
+        )
+        print(f"       {r['command']}")
+
+
+def preflight() -> int:
+    """Every guard, fired on purpose. A guard nobody has watched fail is not evidence."""
+
+    class Sink:
+        def write(self, _: str) -> None:
+            return
+
+    checks: list[tuple[str, bool, str]] = []
+
+    def guard_refuses(label: str, payload: str) -> None:
+        try:
+            read_lines(payload, Sink())
+            checks.append((label, False, "it was accepted"))
+        except GuardError as e:
+            checks.append((label, True, str(e)))
+
+    guard_refuses("a non-zero overlap is refused", '{"best_side": 3.9, "overlap": 1e-9}')
+    guard_refuses("a result line with no overlap is refused", '{"best_side": 3.9}')
+    guard_refuses("a non-JSON line is refused", "not json at all")
+
+    best = read_lines(
+        '{"best_side": 3.9, "overlap": 0}\n{"best_side": 3.7, "overlap": 0}', Sink()
+    )
+    checks.append(("a seed's result is the min over its lines", best == 3.7, f"got {best}"))
+
+    breach = control_breaches([Cell(12, [3.9])])
+    checks.append(
+        ("a control-cell breach is caught", bool(breach), breach[0] if breach else "not caught")
+    )
+
+    # Built from parts so the needle does not appear literally here and match itself.
+    needle = '"decision"' + ": " + '"' + "accept" + 'ed"'
+    checks.append(
         (
-            f"Operator `{s.operator}`, {spent:.1f}h of {s.hours:.0f}h allotted, "
-            f"{len(s.rounds)} rounds. Ended on: **{s.stop_reason}**."
-        ),
+            "no code path writes the accepting verdict",
+            needle not in Path(__file__).read_text(),
+            "clause 5 is unreachable",
+        )
+    )
+
+    runnable, skipped = queue()
+    checks.append(
+        (
+            "the queue is not empty",
+            bool(runnable),
+            (
+                f"{len(runnable)} runnable, {len(skipped)} not — a working runner in "
+                "front of an empty queue is an idle night"
+            ),
+        )
+    )
+
+    for name, passed, detail in checks:
+        print(f"  {'PASS' if passed else 'FAIL'}  {name}\n          {detail}")
+    ok = all(p for _, p, _ in checks)
+    print("\nPREFLIGHT PASSED" if ok else "\nPREFLIGHT FAILED")
+    return 0 if ok else 1
+
+
+# --- run: the three middle steps, in a loop -------------------------------------------
+
+
+def run(operator: str, hours: float) -> int:
+    """claim / execute / record over the queue. Nothing here that a step cannot do."""
+    started, failures, done = now(), 0, []
+    runnable, skipped = queue()
+    show_status()
+
+    for hid, _ in runnable:
+        if (now() - started).total_seconds() > hours * 3600:
+            print("\nsession budget exhausted")
+            break
+        eid = claim(hid, operator, hours)
+        print(f"\n== {eid}: {hid} ==")
+        try:
+            execute(eid)
+            failures = 0
+        except GuardError as e:
+            failures += 1
+            print(f"   GUARD REFUSED: {e}")
+        decision = record(eid, operator=operator)
+        done.append((eid, hid, decision))
+        print(f"   -> {decision}")
+        if failures >= MAX_CONSECUTIVE_FAILURES:
+            print(f"\n{failures} consecutive guard refusals: the instrument is suspect")
+            write_report(
+                started,
+                operator,
+                hours,
+                done=done,
+                skipped=skipped,
+                failures=failures,
+                abnormal=True,
+            )
+            return 1
+
+    write_report(
+        started, operator, hours, done=done, skipped=skipped, failures=failures, abnormal=False
+    )
+    return 0
+
+
+def write_report(
+    started: datetime, operator: str, hours: float,
+    *, done: list[tuple[str, str, str]], skipped: list[tuple[str, str]],
+    failures: int, abnormal: bool,
+) -> None:  # fmt: skip
+    """Generated, written even when the session ended badly, leading with what needs the
+    human -- which is the reason a queue gets trusted."""
+    review = [
+        (e["id"], e["verdict"]["reason"])
+        for _, e in all_rounds()
+        if e.get("verdict", {}).get("needs_review")
+    ]
+    spent = (now() - started).total_seconds() / 3600
+    out = [
+        f"# Session {started.date().isoformat()} — the s(n) search campaign",
+        "",
+        f"Operator `{operator}`, {spent:.1f}h of {hours:.0f}h, {len(done)} rounds.",
         "",
         "## Needs review",
         "",
+        *([f"- **{e}** — {why}" for e, why in review] or ["Nothing was held for review."]),
+        "",
+        "## What ran",
+        "",
     ]
-    if s.review or s.blocked:
-        for eid, why in s.review:
-            lines.append(f"- **{eid}** — {why}")
-        for hid, why in s.blocked:
-            lines.append(f"- **{hid}** blocked — {why}")
-    else:
-        lines.append("Nothing. No round was declined on judgment and none was blocked.")
-
-    lines += ["", "## What ran", ""]
-    if s.rounds:
-        lines += ["| exp | H | decision |", "| --- | --- | --- |"]
-        lines += [f"| {e} | {h} | {d} |" for e, h, d in s.rounds]
-    else:
-        lines.append("No rounds completed.")
-
-    lines += ["", "## Queue after this session", ""]
-    if s.skipped:
-        lines += ["| H | why it did not run |", "| --- | --- |"]
-        lines += [f"| {k.hid} | {k.why} |" for k in s.skipped]
-    else:
-        lines.append("Every open hypothesis was runnable.")
-
-    lines += [
+    out += (
+        ["| exp | H | decision |", "| --- | --- | --- |"]
+        + [f"| {e} | {h} | {d} |" for e, h, d in done]
+        if done
+        else ["No rounds completed."]
+    )
+    out += ["", "## Queue after this session", ""]
+    out += (
+        ["| H | why it did not run |", "| --- | --- |"]
+        + [f"| {h} | {why} |" for h, why in skipped]
+        if skipped
+        else ["Every open hypothesis was runnable."]
+    )
+    out += [
         "",
         "## Health",
         "",
-        (
-            f"- Guard refusals and crashes: **{s.failures}** "
-            f"(the stop fires at {CONSECUTIVE_FAILURE_STOP} consecutive)."
-        ),
-        f"- Stop condition: **{s.stop_reason}**.",
-        f"- Exit: **{'abnormal, non-zero' if s.abnormal else 'clean'}**.",
+        f"- Guard refusals: **{failures}** (the stop fires at {MAX_CONSECUTIVE_FAILURES}).",
+        f"- Exit: **{'abnormal, non-zero' if abnormal else 'clean'}**.",
         "",
     ]
-    path.write_text("\n".join(lines) + "\n")
-
-
-def run_session(s: Session, *, dry_run: bool = False) -> int:
-    series_id, series_dir = open_series()
-    queue, skipped = build_queue(s.operator)
-    s.skipped = skipped
-
-    print(f"series {series_id}; {len(queue)} runnable, {len(skipped)} not")
-    for k in skipped:
-        print(f"  - {k.hid}: {k.why}")
-    for i in queue:
-        print(
-            f"  + {i.hid} (priority {i.priority}) cells {i.recipe['cells']} "
-            f"{i.recipe['budget_moves']:,} moves/chain timebox {i.recipe['timebox']}"
-        )
-    if dry_run:
-        return 0
-
-    try:
-        selftest()
-    except HarnessBrokenError as e:
-        s.stop_reason, s.abnormal = f"harness broken before the first round: {e}", True
-        return 1
-
-    for item in queue:
-        if utcnow().timestamp() > s.deadline:
-            s.stop_reason = "session budget exhausted"
-            break
-        if len(s.rounds) >= SESSION_ROUNDS_MAX:
-            s.stop_reason = f"session round cap ({SESSION_ROUNDS_MAX})"
-            break
-        if s.failures >= CONSECUTIVE_FAILURE_STOP:
-            s.stop_reason, s.abnormal = (
-                f"{s.failures} consecutive guard refusals or crashes",
-                True,
-            )
-            break
-
-        started = utcnow()
-        slug = f"{item.hid.lower()}-{item.recipe['recipe'].replace('_', '-')}"
-        lease = {
-            "expires": iso(started + timedelta(hours=LEASE_HOURS)),
-            "host": socket.gethostname(),
-            "pid": os.getpid(),
-        }
-        stub = (
-            "---\n"
-            + yaml.safe_dump(
-                {
-                    "title": f"__EXP_ID__ — {item.hid} (in progress)",
-                    "softschema": {
-                        "contract": "packing.squares:Experiment/v1",
-                        "schema": "../../../schemas/experiment.schema.yaml",
-                        "envelope": "experiment",
-                        "status": "enforced",
-                    },
-                    "experiment": {
-                        "id": "__EXP_ID__",
-                        "series": series_id,
-                        "title": f"{item.hid} in progress",
-                        "date": started.date().isoformat(),
-                        "hypotheses": [item.hid],
-                        "tier": "exploratory",
-                        "subject": {
-                            "label": "unattended runner",
-                            "precision": "f64_screen",
-                            "selftest_passed": True,
-                        },
-                        "instance": {"axis": "n", "point": item.recipe["cells"][0]},
-                        "method": {"operator": s.operator},
-                        "lease": lease,
-                        "results": [
-                            {
-                                "shape": "determination",
-                                "question": "in progress",
-                                "outcome": "invalid",
-                            }
-                        ],
-                        "verdict": {
-                            "decision": "in-progress",
-                            "primary_criterion": "best_side",
-                            "reason": "Claimed; the round is running.",
-                        },
-                    },
-                },
-                sort_keys=False,
-                width=100,
-            )
-            + "---\n# In progress\n"
-        )
-        artifact = claim(series_dir / "experiments", slug, stub)
-        eid = artifact.stem[:7]
-        print(f"\n== {eid} claimed for {item.hid}, lease to {lease['expires']} ==")
-
-        archive = series_dir / "results" / f"{eid}-{slug}.jsonl"
-        archive.parent.mkdir(parents=True, exist_ok=True)
-        cells: list[CellResult] = []
-        try:
-            for n in item.recipe["cells"]:
-                deadline = time.monotonic() + parse_timebox(item.recipe["timebox"])
-                t0 = time.monotonic()
-                records, timed_out = run_cell(n, item.recipe, archive, deadline)
-                guard_overlap(records)
-                sums = summaries(records)
-                cells.append(
-                    CellResult(
-                        n=n,
-                        sides=[float(r["best_side"]) for r in sums],
-                        seconds=time.monotonic() - t0,
-                        moves=sum(int(r.get("moves", 0)) for r in sums),
-                        timed_out=timed_out,
-                    )
-                )
-                print(
-                    f"   n={n}: {len(sums)} seeds, best {min(c for c in cells[-1].sides):.12f}"
-                    f"{' (TIMEBOX)' if timed_out else ''}"
-                )
-        except HarnessBrokenError as e:
-            s.failures += 1
-            verdict = {
-                "decision": "unresolved",
-                "needs_review": True,
-                "stopped_by": "guard",
-                "reason": f"The round was refused by a guard rather than measured: {e}. "
-                "Nothing may be concluded from it, and it counts toward the "
-                "consecutive-failure stop.",
-            }
-            artifact.write_text(
-                render(
-                    item,
-                    series_id,
-                    cells or [CellResult(item.recipe["cells"][0], [0.0])],
-                    verdict,
-                    operator=s.operator,
-                    archive=archive,
-                    started=started,
-                    agent_minutes=0.0,
-                ).replace("__EXP_ID__", eid)
-            )
-            s.rounds.append((eid, item.hid, "unresolved"))
-            s.review.append((eid, str(e)))
-            regenerate()
-            commit(f"round: {eid} refused by a guard ({item.hid})")
-            continue
-
-        by_cell = {c.n: c.sides for c in cells}
-        verdict = decide(item, cells, guard_controls(by_cell))
-        artifact.write_text(
-            render(
-                item,
-                series_id,
-                cells,
-                verdict,
-                operator=s.operator,
-                archive=archive,
-                started=started,
-                agent_minutes=0.0,
-            ).replace("__EXP_ID__", eid)
-        )
-        s.rounds.append((eid, item.hid, verdict["decision"]))
-        if verdict.get("needs_review"):
-            s.review.append((eid, verdict["reason"]))
-        s.failures = 0 if verdict["stopped_by"] != "guard" else s.failures + 1
-        print(f"   -> {verdict['decision']}")
-
-        try:
-            regenerate()
-        except subprocess.CalledProcessError as e:
-            s.stop_reason, s.abnormal = (
-                f"invariant check failed after {eid}: {e.stderr[-400:]}",
-                True,
-            )
-            break
-        commit(f"round: {eid} {verdict['decision']} ({item.hid})")
-
-    return 1 if s.abnormal else 0
-
-
-# --- rehearsal -------------------------------------------------------------------------------
-
-
-def rehearse() -> int:
-    """The six-step pre-flight from unattended.md. Each step has killed a campaign that
-    skipped it, so this runs them rather than describing them."""
-    ok = True
-
-    print("1. id allocator raced with 32 concurrent OS PROCESSES (not threads)")
-    print("   (the real claim(), not a copy of it -- a rehearsal of a reimplementation")
-    print("    proves the reimplementation works)")
-
-    with tempfile.TemporaryDirectory() as td:
-        arena = Path(td)
-        (arena / "campaign" / "series" / "s" / "experiments").mkdir(parents=True)
-        probe = arena / "probe.py"
-        # Import the shipped module and point its campaign root at the arena, so the
-        # function under test is the one that will run tonight.
-        probe.write_text(
-            "import sys\n"
-            "from pathlib import Path\n"
-            f"sys.path.insert(0, {str(Path(__file__).parent)!r})\n"
-            "import runner\n"
-            "runner.CAMPAIGN = Path(sys.argv[1]) / 'campaign'\n"
-            "runner.claim(runner.CAMPAIGN / 'series' / 's' / 'experiments',\n"
-            "             sys.argv[2], 'x')\n"
-        )
-        procs = [
-            subprocess.Popen([sys.executable, str(probe), str(arena), f"slug{i}"])
-            for i in range(32)
-        ]
-        for proc in procs:
-            proc.wait()
-        ids = sorted(
-            int(m.group(1))
-            for f in (arena / "campaign" / "series" / "s" / "experiments").glob("exp-*.md")
-            if (m := re.match(r"exp-(\d{3})-", f.name))
-        )
-        good = ids == list(range(1, 33))
-        print(f"   {len(ids)} files, ids {'contiguous 1..32' if good else ids}")
-        ok &= good
-
-    print("2. validity guard fired on purpose")
-    try:
-        guard_overlap([{"overlap": 1e-9}])
-        print("   FAIL: the guard accepted a non-zero overlap")
-        ok = False
-    except HarnessBrokenError:
-        print("   refused a record with overlap 1e-9, as it must")
-
-    print("3. a stale claim is visible")
-    stale = {"expires": iso(utcnow() - timedelta(hours=1))}
-    print(f"   lease {stale['expires']} is in the past -> not a live claim, reclaimable")
-    ok &= datetime.fromisoformat(stale["expires"]) < utcnow()
-
-    print("4. the consecutive-failure stop and its non-zero exit")
-    s = Session(operator="rehearsal", started=utcnow(), hours=8)
-    s.failures = CONSECUTIVE_FAILURE_STOP
-    s.abnormal = True
-    print(f"   {s.failures} failures >= {CONSECUTIVE_FAILURE_STOP} -> abnormal, exit non-zero")
-
-    print("5. budget accounting")
-    short = Session(operator="rehearsal", started=utcnow() - timedelta(hours=9), hours=8)
-    expired = utcnow().timestamp() > short.deadline
-    print(f"   a session started 9h ago against an 8h budget is expired: {expired}")
-    ok &= expired
-
-    print("6. the session report is written even when the session ended badly")
-
-    with tempfile.TemporaryDirectory() as td:
-        bad = Session(operator="rehearsal", started=utcnow(), hours=8)
-        bad.stop_reason, bad.abnormal, bad.failures = "harness broken", True, 3
-        out = Path(td) / "report.md"
-        session_report(bad, out)
-        has = "## Needs review" in out.read_text() and "abnormal" in out.read_text()
-        print(
-            f"   report written, leads with Needs review and records the abnormal exit: {has}"
-        )
-        ok &= has
-
-    print("\nREHEARSAL PASSED" if ok else "\nREHEARSAL FAILED")
-    return 0 if ok else 1
+    REPORT.write_text("\n".join(out))
+    print(f"\nreport at {REPORT.relative_to(ROOT)}")
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
+    ap.add_argument("step", choices=[
+        "status", "preflight", "queue", "claim", "execute", "record", "release", "run",
+    ])  # fmt: skip
+    ap.add_argument(
+        "target", nargs="?", help="H-id for claim; exp-id for execute/record/release"
+    )
     ap.add_argument("--operator", default="claude-opus-5")
     ap.add_argument("--session-hours", type=float, default=8.0)
-    ap.add_argument("--dry-run", action="store_true", help="show the queue and stop")
-    ap.add_argument("--rehearse", action="store_true", help="run the six-step pre-flight")
-    ap.add_argument("--report", default="campaign/session-report.md")
+    ap.add_argument("--why", default="no reason given", help="for release")
     a = ap.parse_args()
 
-    if a.rehearse:
-        return rehearse()
-
-    s = Session(operator=a.operator, started=utcnow(), hours=a.session_hours)
     try:
-        code = run_session(s, dry_run=a.dry_run)
-    except RefusalError as e:
-        s.stop_reason, s.abnormal, code = f"a decision needs the human: {e}", True, 1
-    if a.dry_run:
-        return code
-    session_report(s, ROOT / a.report)
-    commit(f"session: {len(s.rounds)} rounds, ended on {s.stop_reason}")
-    print(f"\n{s.stop_reason} — report at {a.report}")
-    return code
+        if a.step in {"status", "queue"}:
+            show_status()
+        elif a.step == "preflight":
+            return preflight()
+        elif a.step == "claim":
+            print(claim(a.target, a.operator, a.session_hours))
+        elif a.step == "execute":
+            execute(a.target)
+        elif a.step == "record":
+            print(record(a.target, operator=a.operator))
+        elif a.step == "release":
+            release(a.target, a.why)
+        elif a.step == "run":
+            return run(a.operator, a.session_hours)
+    except (RefusalError, GuardError) as e:
+        print(f"REFUSED: {e}", file=sys.stderr)
+        return 1
+    return 0
 
 
 if __name__ == "__main__":

@@ -133,7 +133,7 @@ the ledger can report which whole families remain untried.
 
 | # | Idea | Status | H | From | Why it might work, or not |
 | --- | --- | --- | --- | --- | --- |
-| 20 | `s(17)` as the mechanism-matched calibration target | shaped |  | strategy doc | The nearest case whose record uses genuinely oblique structure. `n = 5, 10` do not exercise it |
+| 20 | `s(17)` as the mechanism-matched calibration target | registered | [H-020](hypotheses/H-020-oblique-record-finding-n17.md) | strategy doc | The nearest case whose record uses genuinely oblique structure. `n = 5, 10` do not exercise it. A one-seed probe already returned exactly `5.0`, the trivial grid |
 | 21 | `n = 11` at inflated `δ` as a continuous progress metric | shaped |  | strategy doc | The largest `δ` at which the engine still finds Trump’s cell moves continuously, unlike found/not-found |
 | 22 | `m² − 3` at `n = 61, 78, 97`, Cleemann-style `arctan(3/4)` | raw | `H-005` | review H-5 | Honest prior low, cost near zero, analytic attempt needs no engine |
 | 23 | LP duals as unavoidable-set generators (proof lane) | raw | `H-006` | review H-6 | First mechanized step anyone would have taken on the proof side |

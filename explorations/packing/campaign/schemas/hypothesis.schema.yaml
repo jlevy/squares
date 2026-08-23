@@ -122,52 +122,50 @@ properties:
   runner:
     type: object
     additionalProperties: false
-    required: [recipe, cells, seeds, timebox]
+    required: [command, cells, seeds, timebox]
     description: >-
       The machine-runnable form of `instrument`, and the field that makes a hypothesis
       eligible for unattended execution. `instrument` is prose for a human; this is what
-      campaign/runner.py reads. A hypothesis WITHOUT this block is never run unattended
-      - the runner reports it as needing an operator rather than guessing an invocation,
-      which is the escalate-instead-of-guess rule applied at the queue.
+      campaign/runner.py reads. A hypothesis WITHOUT this block is never run unattended -
+      the runner reports it as needing an operator rather than guessing an invocation.
     properties:
-      recipe:
-        enum: [sqsearch_sweep]
+      command:
+        type: string
+        minLength: 1
         description: >-
-          Which executor runs it. Only `sqsearch_sweep` exists today: the stock annealer
-          over cells x seeds, one JSONL archive, guards from the runbook. Adding a
-          recipe is a deliberate change with its own rehearsal - never something a
-          runner does at 3am.
+          The experiment, as a command run once per (cell, seed) from the exploration
+          root, with `{n}` and `{seed}` substituted. This is the harness/experiment
+          boundary: the harness runs this and reads a fixed contract out of what it
+          prints, and it contains no knowledge of any particular experiment. Adding an
+          experiment therefore never edits the runner - if it would, the contract is
+          wrong and the contract is what to fix.
+
+          The contract, enforced by the harness on every round: print JSON Lines to
+          stdout; carry `best_side` on every result line; carry `overlap` (or
+          `best_overlap`) on those same lines and have it be exactly 0; exit 0. The
+          seed's result is the minimum `best_side` over its lines, which needs no
+          agreement about which line is the summary.
       cells:
         type: array
         minItems: 1
         items: {type: integer}
         description: >-
-          Instance points to run, each of which must appear in `sweep.points`. The
-          runner refuses a cell outside the declared sweep rather than widening the
-          instance axis, which the refusal list forbids.
+          Instance points to run, each of which must appear in `sweep.points`. The runner
+          refuses a cell outside the declared sweep rather than widening the instance
+          axis, which the refusal list forbids.
       seeds:
         type: array
         minItems: 5
         items: {type: integer}
         description: >-
-          At least five, because the accept rule's evidence clause requires five per
-          cell and a recipe that cannot satisfy it should fail at read time, not after
+          At least five, because the accept rule's evidence clause requires five per cell
+          and a recipe that cannot satisfy it should fail at read time rather than after
           three hours of compute.
-      chains: {type: integer, minimum: 1, default: 8}
-      budget_moves:
-        type: integer
-        minimum: 1
-        description: Moves per chain. The comparison budget; equal across arms or there is no comparison.
-      extra_args:
-        type: array
-        default: []
-        items: {type: string}
-        description: Further engine flags, recorded verbatim into method.command.
       timebox:
         type: string
         pattern: '^[0-9]+(s|m|h)$'
         description: >-
-          The give-up bound for ONE cell, declared before the round starts. Expiry is an
-          outcome (`stopped_by: timebox`), not a failure - and the runner writes
+          The give-up bound for one cell, declared before the round starts. Expiry is an
+          outcome (`stopped_by: timebox`), not a failure, and the runner writes
           `resume_from` so the spent budget is not lost.
   notes: {type: string}
