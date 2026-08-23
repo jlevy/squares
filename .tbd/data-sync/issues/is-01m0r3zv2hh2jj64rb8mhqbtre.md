@@ -5,7 +5,7 @@ title: Define basin identity for non-rigid optima, or the census counts family m
 kind: bug
 status: open
 priority: 0
-version: 7
+version: 8
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies:
@@ -19,7 +19,7 @@ dependencies:
     target: is-01m0qxpb7634zbzt638d239jks
 parent_id: is-01m0p49s01h862tq6wp0dd085c
 created_at: 2026-08-23T20:11:30.757Z
-updated_at: 2026-08-23T20:33:15.131Z
+updated_at: 2026-08-23T21:27:32.567Z
 ---
 BLOCKS THE CENSUS. D-034. Found by reading the n = 5 golden, which is the campaign's first census cell.
 
@@ -54,18 +54,12 @@ Do not pick one without measuring how often non-rigid optima occur. The related 
 
 ## Notes
 
-2026-08-23, after writing the correction into the research doc: there is a much better route to the fix than the three options in the description, and it should be tried first.
+2026-08-23, CONCEDED after the PR #15 review (F-18). The n=5 "five-dimensional family" claim was rank-free and should not stand as written.
 
-A flat optimum is, in LP terms, a cell whose linear program has a NON-UNIQUE OPTIMAL FACE rather than an optimal vertex -- the objective is constant along a face of the feasible polytope. That is ordinary LP degeneracy. It is a property the solver can be asked about at the exact moment the quench already runs, so measuring flatness needs no new instrument and no new pass over the configuration.
+Counting 11 contact constraints against 16 degrees of freedom only bounds the dimension if the 11 constraint gradients are linearly independent, which was never established; and a first-order flex need not extend to a finite motion. Constraint counting is a heuristic for SUSPECTING under-constraint, not a proof of it.
 
-That changes the shape of the work. Instead of choosing a basin definition and hoping it survives, MEASURE flatness first and let the data pick:
+What survives: two quenches landed on two configurations with the same side, the same closed form and the same contact certificate. That is real evidence the endpoint is not unique. What does not survive: the dimension, and the word "family".
 
-1. Have the quench report the dimension of the optimal face (equivalently: the surplus of degrees of freedom over active constraints, cross-checked against the LP's own degeneracy).
-2. Carry it as a per-basin field in the atlas. A row then says whether it is a point or a family, and of what dimension.
-3. Only then choose. If flat optima turn out to be rare at the n the campaign cares about, option 1 (dedup on contact certificate + side within the tier floor) is enough. If they are common, option 3 (report families with their dimension) is the honest deliverable and the census's headline number becomes "rigid optima, plus families" rather than a single count.
+So: n = 3 is the airtight witness (three unit squares in a 2x2 box slide freely -- a demonstrable continuous motion). n = 5 is an UNRESOLVED OBSERVATION pending active-matrix rank, full Jacobian, feasible-null-direction, or continuation evidence. PR #15's living docs already say this; main's do not yet and should be brought into line when the branches reconcile.
 
-The cross-check is cheap and worth keeping even after the LP path works: n squares carry 3n degrees of freedom plus one for the side, and each pair contact and wall touch removes one. At n = 5 that gave 11 against 16 -- a five-dimensional family -- with no solver involvement at all.
-
-Sequencing: this is the measurement that unblocks the decision, so it comes before multistart, not after. It is also the thing that makes think-siui's quantization-boundary work well-posed, because until flatness is measured there is no way to tell a boundary artifact from a genuine family member.
-
-2026-08-23 20:35, MERGE HAZARD. The codex review branch independently allocated D-034 to a different defect ("a timed-out free sweep was reported as a convergence certificate"). Ours is the flat-basin one. One of the two renumbers on merge -- see think-o48b, which also records that their fix invalidates the convergence counts this branch committed, including the converged_frequency field added for exactly this kind of question. Regenerate the golden under their fix before quoting any convergence number from this branch.
+This does not weaken D-034 as a blocker. It sharpens what has to be measured: the LP-degeneracy route in the note above is exactly the rank evidence the claim was missing, so the planned work is unchanged -- only the confidence of the prose was wrong.
