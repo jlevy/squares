@@ -5,13 +5,13 @@ title: negctl leaves the repo holding a deliberate sabotage if it is interrupted
 kind: bug
 status: open
 priority: 0
-version: 1
+version: 2
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T20:21:37.206Z
-updated_at: 2026-08-23T20:21:37.206Z
+updated_at: 2026-08-23T20:33:15.432Z
 ---
 D-035. Hit for real on 2026-08-23, mid-session.
 
@@ -31,3 +31,9 @@ WHAT TO BUILD
 - Have the gate refuse to start when the marker is present, with a message that says what to do.
 - Consider mutating a COPY in a temp dir and pointing the check at it via an env var, which removes the hazard rather than detecting it. Note the constraint that killed the last attempt at this: the check must import the real module under test, not a pasted copy, so the copy has to be import-path-visible.
 - Have runner.py's commit step refuse to stage a file the negctl marker names.
+
+## Notes
+
+2026-08-23 20:35, MERGE HAZARD. The codex review branch independently allocated D-035 to a different defect ("the atlas checker counted its own synthetic re-offers as census proposals"). Ours is the negctl-residue one. One of the two renumbers on merge; see think-o48b.
+
+Also worth noting for whoever fixes this: their D-035 and ours are both about a checker contaminating what it measures, from opposite ends. Theirs let synthetic data into a census count; ours lets a sabotaged file out into the working tree. A single principle covers both -- a check must leave no trace in the thing it checks -- and it is worth stating once in the negative-control guidance rather than twice as separate lessons.

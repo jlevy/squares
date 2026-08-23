@@ -5,7 +5,7 @@ title: Define basin identity for non-rigid optima, or the census counts family m
 kind: bug
 status: open
 priority: 0
-version: 6
+version: 7
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies:
@@ -19,7 +19,7 @@ dependencies:
     target: is-01m0qxpb7634zbzt638d239jks
 parent_id: is-01m0p49s01h862tq6wp0dd085c
 created_at: 2026-08-23T20:11:30.757Z
-updated_at: 2026-08-23T20:22:34.434Z
+updated_at: 2026-08-23T20:33:15.131Z
 ---
 BLOCKS THE CENSUS. D-034. Found by reading the n = 5 golden, which is the campaign's first census cell.
 
@@ -67,3 +67,5 @@ That changes the shape of the work. Instead of choosing a basin definition and h
 The cross-check is cheap and worth keeping even after the LP path works: n squares carry 3n degrees of freedom plus one for the side, and each pair contact and wall touch removes one. At n = 5 that gave 11 against 16 -- a five-dimensional family -- with no solver involvement at all.
 
 Sequencing: this is the measurement that unblocks the decision, so it comes before multistart, not after. It is also the thing that makes think-siui's quantization-boundary work well-posed, because until flatness is measured there is no way to tell a boundary artifact from a genuine family member.
+
+2026-08-23 20:35, MERGE HAZARD. The codex review branch independently allocated D-034 to a different defect ("a timed-out free sweep was reported as a convergence certificate"). Ours is the flat-basin one. One of the two renumbers on merge -- see think-o48b, which also records that their fix invalidates the convergence counts this branch committed, including the converged_frequency field added for exactly this kind of question. Regenerate the golden under their fix before quoting any convergence number from this branch.
