@@ -5,7 +5,7 @@ title: "Overnight cartography run: build the spine, then drain the census"
 kind: epic
 status: open
 priority: 0
-version: 7
+version: 8
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies: []
@@ -16,6 +16,7 @@ child_order_hints:
   - is-01m0pw875cy2xbh4ferkj5m7yf
   - is-01m0qwzssmdpwmywmpszsaaxhb
   - is-01m0qwzt4b1y2zmqh3frpphvne
+  - is-01m0r2atvyphxm28s5819fn3rg
 created_at: 2026-08-23T08:36:47.181Z
-updated_at: 2026-08-23T18:09:09.771Z
+updated_at: 2026-08-23T19:42:33.854Z
 ---
