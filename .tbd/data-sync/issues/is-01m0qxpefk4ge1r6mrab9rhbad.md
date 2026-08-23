@@ -5,21 +5,22 @@ title: Build continuation, quality-diversity, and packing-surgery emitters
 kind: feature
 status: open
 priority: 2
-version: 3
+version: 4
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
   - pr-14
   - creative-alternative
+  - focus-insight
 dependencies:
   - type: blocks
     target: is-01m0qxpfkjybnxbyx67zy0vyta
   - type: blocks
     target: is-01m0qxpgm5e4gx92d9f1r4bqgj
-parent_id: is-01m0qxka8ebkztq7erex50vvr2
+parent_id: is-01m0r7q4h688g8gx54wk0vmrhp
 created_at: 2026-08-23T18:21:31.506Z
-updated_at: 2026-08-23T18:21:57.947Z
+updated_at: 2026-08-23T21:17:56.139Z
 ---
 Category: creative alternatives. Combine delta-inflation, container aspect-ratio and superdisk continuations with MAP-Elites or novelty search and explicit packing-surgery emitters that add, remove, straighten, duplicate or splice motifs from neighboring n. Archive descriptors such as angle classes, contact topology, wall contacts and LP basis.
 

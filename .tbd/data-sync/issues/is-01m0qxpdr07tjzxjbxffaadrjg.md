@@ -5,21 +5,22 @@ title: Prototype active-set and contact-graph branch-and-bound search
 kind: feature
 status: open
 priority: 1
-version: 3
+version: 4
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
   - pr-14
   - creative-alternative
+  - focus-insight
 dependencies:
   - type: blocks
     target: is-01m0qxpfkjybnxbyx67zy0vyta
   - type: blocks
     target: is-01m0qxpg0nryz3nwhedeqgwm1g
-parent_id: is-01m0qxka8ebkztq7erex50vvr2
+parent_id: is-01m0r7q4h688g8gx54wk0vmrhp
 created_at: 2026-08-23T18:21:30.751Z
-updated_at: 2026-08-23T18:21:57.607Z
+updated_at: 2026-08-23T21:17:54.960Z
 ---
 Category: creative alternatives. Search the actual decomposition: angle variables plus a discrete separating-cell or contact topology, with LP solves for each fixed cell. Enumerate or mutate active sets with symmetry and rigidity pruning, traverse adjacent LP bases, and use interval branch-and-bound or SAT disjunctions on remaining angle boxes.
 

@@ -5,13 +5,14 @@ title: Build a provenance-complete record-packing corpus through n = 100
 kind: feature
 status: open
 priority: 1
-version: 7
+version: 8
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
   - review
   - pr-14
   - omission
+  - focus-process
 dependencies:
   - type: blocks
     target: is-01m0qxpcrzkr5870j8q692t5c7
@@ -25,9 +26,9 @@ dependencies:
     target: is-01m0qxpg0nryz3nwhedeqgwm1g
   - type: blocks
     target: is-01m0qxpgm5e4gx92d9f1r4bqgj
-parent_id: is-01m0qxka8ebkztq7erex50vvr2
+parent_id: is-01m0r7q3zk8x6cg4e30d149698
 created_at: 2026-08-23T18:21:29.458Z
-updated_at: 2026-08-23T18:21:57.927Z
+updated_at: 2026-08-23T21:17:53.426Z
 ---
 Category: key omissions. The frontier is mostly scalar metadata, so it cannot seed neighboring n, reproduce catalogue pictures, extract contact graphs, or independently verify common-n upper bounds. Import the primary catalogue SVG geometry and published analytic packings into a versioned corpus.
 
