@@ -5,7 +5,7 @@ title: "Review remediation: executable square-packing research program (PR #14)"
 kind: epic
 status: open
 priority: 0
-version: 19
+version: 20
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -32,8 +32,12 @@ child_order_hints:
   - is-01m0qxpg0nryz3nwhedeqgwm1g
   - is-01m0qxpgm5e4gx92d9f1r4bqgj
 created_at: 2026-08-23T18:19:48.864Z
-updated_at: 2026-08-23T18:21:53.229Z
+updated_at: 2026-08-23T19:41:48.928Z
 ---
 Systematic technical review of PR #14 and the square-packing research program. This epic is the implementation map for four required lanes: technical correctness, missing research and infrastructure, creative executable alternatives, and tractable open questions. The linked review is the evidence record and priority order.
 
 Acceptance: every direct child is completed, superseded with an explicit rationale, or rejected with recorded evidence; all blocker findings have regression tests; every retained search strategy has a runnable command, independent validity contract, budget meter, artifact and provenance contract, and predeclared accept rule; and results for common n can be reconstructed and independently checked.
+
+## Notes
+
+2026-08-23 restack audit: PR 14 advanced from fa538931 to 5b1ae653. The review now includes F-16 for the non-hermetic golden and D-031 for false convergence on a timed-out free sweep. The epic remains open with the same 17 direct children because F-16 is owned jointly by the existing atlas, quench, and enforcement beads.

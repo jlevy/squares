@@ -5,7 +5,7 @@ title: Correct fixed-angle quench and exact-verifier contracts
 kind: bug
 status: open
 priority: 0
-version: 8
+version: 9
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -29,8 +29,12 @@ dependencies:
     target: is-01m0qxpeyc4qjhasyge91h4m06
 parent_id: is-01m0qxka8ebkztq7erex50vvr2
 created_at: 2026-08-23T18:21:28.817Z
-updated_at: 2026-08-23T18:21:56.613Z
+updated_at: 2026-08-23T19:41:49.797Z
 ---
 Category: technical errors. Fixed angles do not define one LP objective unless a separating cell is fixed: solve_to_fixed_point reaches several sides from the same theta and different centers. Coordinatewise angle sweeps do not certify a local optimum. Golden search assumes unproved unimodality. NumberField accepts reducible polynomials and intervals that do not establish a unique algebraic root, invalidating complete equality and sign claims.
 
 Acceptance: the quench contract includes cell or trajectory identity and never calls coordinatewise stationarity a local optimum without an active-set or directional certificate. Deadlines are checked inside probes. Multiple-start same-theta tests expose all reachable cells. Exact field construction verifies squarefree irreducibility and unique root isolation, or carries equivalent proof data; reducible and multi-root negative controls terminate safely. Production artifacts contain full poses and pass an independent float-plus-exact verifier. Reconcile with think-imot, think-86gm, think-25i6, and think-ty3d.
+
+## Notes
+
+2026-08-23 PR14-head reassessment: review found D-031. The free sweep could break on its deadline and return the same tuple as a complete pass, allowing converged true and free pass clean on a censored endpoint; probes also lacked deadline checks. The stack now propagates timeout, returns non-converged, and adds a named regression. Finite coordinate stationarity, multi-cell fixed-angle semantics, coupled directions, and exact-field preconditions remain open.
