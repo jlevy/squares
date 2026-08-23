@@ -36,10 +36,11 @@ nowhere in the five reports, and it reshapes both the refinement stage and the s
 design.
 
 The second half of this document therefore does three things the plan spec does not: it
-states a **hypothesis register** (H1–H10, each with grounding, a test, and a kill
-criterion), a **run protocol** that keeps freeform exploration disciplined and makes
-every run leave a residue, and a **prioritized series plan** whose first item is the
-smoke-and-calibration series the machinery needs before any result can be trusted.
+states a **hypothesis register** (H-1–H-15, each with grounding, a test, and a kill
+criterion; H-11 onward were added by the same-day strategy capture, below), a **run
+protocol** that keeps freeform exploration disciplined and makes every run leave a
+residue, and a **prioritized series plan** whose first item is the smoke-and-calibration
+series the machinery needs before any result can be trusted.
 
 Findings are numbered `R-*`; hypotheses `H-*`; series `S-*`.
 
@@ -312,6 +313,78 @@ unavoidable.* (R-5.) This is a known-answer test, so its “kill criterion” is
 failure is a machinery bug by definition.
 Tier S.
 
+H-11 through H-15 were added later the same day as the boil-down of
+[A Search Philosophy for Square Packing](../research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
+— the strategy layer captured after this review was first committed.
+They share one premise (record basins are rare because records are rigid, so the basin
+*atlas* is the deliverable and records are corollaries), and they are ordered so that
+the premise itself is tested first and in the cheapest tier.
+
+**H-11 · The small-`n` landscape is censusable.** *LP-quenching multistarts at `n ≤ 10`
+yields a basin count that saturates: the discovery curve plateaus within tier-S budget,
+giving a near-complete atlas with canonical identities and exact side lengths.*
+Grounding: R-2’s verified LP is the quench map; R-1’s keys are the identity; the
+landscape at the proved cases is believed simple.
+Test: multistart + LP polish + canonical dedup at `n = 5…10`; deliverables are the
+discovery curves (R-4’s own standard) and the atlas as a soft-schema artifact.
+Kill: no plateau by `n = 8` within tier S — enumeration will not scale to 11; fall back
+to coverage estimation (H-7) over descriptor space.
+Tier S. **Gates the atlas, and runs on the existing Python plus the validated LP — no
+Rust required.**
+
+**H-12 · Record basins are rare in quench measure.** *The proved-optimal basin’s quench
+probability at `n = 10` — and Trump’s at `n = 11` — sits orders of magnitude below the
+modal basin’s, and rarity tracks rigidity (contact count, algebraic degree).* This is
+the strategy layer’s load-bearing premise, registered so it can fail.
+Grounding: Ellsworth’s 4-in-3,004 at `s(51)`; the 14 zero-gap pairs of Trump’s packing;
+extends H-3 from a correlation to the record-specific measurement.
+Test: read directly off H-11’s census — rank basins by quench frequency and locate the
+record basin in the ranking.
+Kill: record-basin probability within ~10× of the modal basin’s — then blind multistart
+plus polish is already an adequate strategy, cartography loses its main justification,
+and the program reverts to raw throughput.
+Tier S (a query over H-11’s data).
+
+**H-13 · δ-continuation reaches basins that direct sampling misses.** *Tracking packings
+from an inflated container (side `s* + δ`) down to `δ = 0` with an LP re-polish at every
+step arrives in canonical basins — including record basins — at materially higher rate
+than equal-budget direct multistart, and the bifurcation tree (basin splits and
+vanishings along `δ`) is stable across seeds.* Grounding: continuation is the standard
+rare-solution device, and the merge-`δ` between basins doubles as the atlas’s barrier
+scale, so the same runs pay twice.
+Test: `n = 10` first (does continuation reach the proved optimum from generic inflated
+starts?), then `n = 11` (arrival rate in Trump’s cell versus direct sampling at equal
+pair-test budget). Kill: at `n = 10`, continuation’s record-arrival rate is no better
+than direct sampling’s — the ladder is retired as a discovery tool and kept only as a
+landscape probe. Tier S for the `n = 10` leg, M for `n = 11`.
+
+**H-14 · The superdisk ladder imports circle structure.** *Continuing packings along the
+superdisk exponent from circles (`p = 1`) toward squares (`p → ∞`) preserves usable
+structure: endpoints at `n ≤ 10` land in known square-packing basins, and the `p` at
+which orientation symmetry breaks marks where square-specific mechanisms emerge.*
+Grounding: the Jiao–Stillinger–Torquato superdisk results; the mature circle-packing
+record literature at small `n`. Test: a small-`n` `p`-sweep with a float engine plus LP
+polish at the square end; compare endpoint basins against the atlas.
+Kill: endpoints are dominated by the same grid/45° basins direct search already finds —
+no enrichment of oblique mechanisms, ladder retired.
+Tier M, and last in line: it is the only hypothesis here needing new (non-square)
+geometry machinery.
+
+**H-15 · Illumination beats optimization for atlas-building.** *A MAP-Elites archive
+keyed by mechanism descriptors (distinct-tilt-class count × contact-graph class, at
+minimum) discovers more distinct canonical basins per pair-test than temperature-matched
+restart annealing at `n = 10` and `11`, including rarer high-contact basins.* Grounding:
+quality-diversity’s illumination results on deceptive landscapes — with the descriptor
+caution from the strategy doc built in: single scalars are hackable (the grid maximizes
+contact count), so the archive keys must separate the grid funnel from the rigid-rare
+family, hence tilt-class × contact-class.
+Test: equal budget, same move set and polish backend, archive versus restarts; the
+deliverables are basins-per-`10⁹`-pair-tests (already a tracked series) and the filled
+descriptor grid. Kill: distinct-basin rate under 1.5× restarts at equal budget — the
+archive machinery is not paying for itself; descriptors are retained for dedup and the
+atlas only, not for steering.
+Tier M.
+
 ## The run protocol: freeform, with discipline
 
 The register above only works if runs are cheap to start, uniform to compare, and
@@ -378,10 +451,28 @@ candidates into falsify-or-verify loops at `n = 12`.
 alternative move set, compared on the ladder and S1 baselines; contact-graph enumeration
 for small `n` as its natural extension.
 
+**S6 · Landscape cartography.** The strategy layer’s series (see
+[A Search Philosophy for Square Packing](../research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)):
+build the basin atlas and test the premise behind it.
+In order: H-11’s census at `n ≤ 10`, with the atlas shipped as a soft-schema artifact
+and the descriptor definitions versioned alongside it; H-12’s rarity measurement read
+off the census (the premise test — if it fails, S6 contracts to a dedup library and the
+program reverts to throughput); H-13’s δ-continuation at `n = 10` then `11`, whose
+merge-`δ` data doubles as the atlas’s barrier estimates; H-15’s archive-versus-restarts
+comparison on the same machinery; H-14’s superdisk probe last, as the only item needing
+new geometry. S6 *interleaves* with S1 rather than following it: S1’s E4 byproducts are
+H-11’s inputs, and the atlas is where S1’s “zoo of near-optimal basins” outcome becomes
+a publishable artifact.
+The LLM lanes the strategy doc describes (atlas reading, constructor DSL) hang
+downstream of S6’s first artifact and are deliberately not scheduled until it exists.
+
 Ordering rationale: S0 gates everything (no trusted metric without it); S1 and S2 are
 the flagship and its cheaper sibling and can interleave on the same machinery; S3 costs
 almost nothing and carries the tail risk of an actual discovery; S4 and S5 are
 hypothesis-driven and should wait for stable baselines rather than compete with them.
+S6 rides S1’s machinery and byproducts, and its first two items (H-11, H-12) are the
+cheapest available test of the strategy premise — worth running early for that reason
+alone.
 
 ## Changes recommended to the plan spec
 
@@ -411,9 +502,17 @@ changes at degeneracies) is still untested; the single-cell solve no longer is.
 Confidence: high on R-1 through R-10 as gaps (each is checkable against the documents in
 a minute); the hypotheses are deliberately stated with priors and kill criteria instead
 of confidence claims — that is what the register is for.
+Extended later the same day: H-11–H-15 and S6 register the directions of the
+search-philosophy capture; their content traces to
+[that document](../research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
+and through it to the same grounding set (the verified LP result, the corpus statistics,
+the archived primaries), with its external strategy precedents kept out of the packing
+evidence base per that document’s methodology note.
 
 ## References
 
+- [A Search Philosophy for Square Packing](../research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
+  — the strategy layer behind H-11–H-15 and S6.
 - [Infrastructure for Square-Packing Exploration](../research/research-2026-08-22-infrastructure-for-packing-exploration.md)
 - [Lean for Square-Packing Proofs and Validation](../research/research-2026-08-22-lean-for-packing-proofs-and-validation.md)
 - [Minimal packing toolkit plan spec](../specs/active/plan-2026-08-22-minimal-packing-toolkit.md)

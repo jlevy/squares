@@ -1683,6 +1683,13 @@ covers two values of `n`. Any program should be weighted accordingly.
    the low-`n` records — a question nobody has asked.
    Success would be informative; failure would be more informative.
 
+Where to *point* this machinery is its own question, taken up in
+[A Search Philosophy for Square Packing](research-2026-08-23-search-philosophy-and-landscape-cartography.md):
+record basins are rare because records are rigid, so the first search artifact should be
+a basin atlas over the LP-quench map, steered by structural diversity rather than by
+reshaping the loss — boiled down to testable form in the standing review’s register
+(H-11–H-15, series S6).
+
 ### Proof: the lane where nothing automated has ever run
 
 This is the part of the program with no incumbents at all.
