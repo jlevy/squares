@@ -1008,7 +1008,7 @@ table above.
   because the first fix left no regression check).
   Their numbers stand; the ledger’s sweep coverage misreported them until the successor
   rounds split the cells.
-- **[D-021](defects.md) is open.** The `polished` tier has a noise floor of about
+- **[D-021](defects.md) is contained.** The `polished` tier has a noise floor of about
   `1e-11` in the side, and eight rounds sit on it.
   Nothing at that tier may claim a difference smaller than the floor.
 
@@ -1016,14 +1016,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Thirty-five defects, [one line each](defects.md), generated from `defects.yaml` and
+Thirty-seven defects, [one line each](defects.md), generated from `defects.yaml` and
 checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 8 | asserted something false about the mathematics |
-| validity | 7 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 15 | recorded something its own evidence contradicts |
+| validity | 8 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 16 | recorded something its own evidence contradicts |
 | robustness | 4 | did not finish, or finished only by luck |
 | performance | 1 | worked, but cost far more than it should |
 
@@ -1033,7 +1033,7 @@ Two observations the log exists to make.
 error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught one defect in thirty-five, and no soundness defect ever.**
+**The automated gate has caught one defect in thirty-seven, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1042,15 +1042,12 @@ Gates confirm what you already thought to check; these were found by devices bui
 found by a contiguity check—which is the pattern, not an exception: gates are good at
 the mechanical classes and have never once caught the mathematics being wrong.
 
-The two newest entries sharpen the point rather than softening it, and both were caught
-by a **control cell** — a case whose answer was known before the code existed.
-[D-030](defects.md), the quench’s angle window narrowing on a schedule so a cold start
-could never arrive, showed up at `n = 5`: the census kept landing at `3.078` against a
-proved `2.707107`. [D-031](defects.md), basin identity splitting an angle at the `π/2`
-seam, showed up at `n = 3`, where the whole census is small enough to read by hand and
-two rows were visibly the same packing a quarter turn apart.
-In both cases the structural invariants around the store passed green throughout,
-because they check the store and not what it is fed.
+The eight newest entries sharpen the point rather than softening it.
+D-030 and D-031 were caught by proved control cells while structural store checks stayed
+green; D-032 and D-033 came from rehearsing recovery paths that had shipped unrun;
+D-034 found the endpoint-isolation assumption; D-035 found destructive negative-control
+residue; D-036 found a timeout reported as convergence; and D-037 separated real census
+counts from a checker’s synthetic re-offers.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
@@ -1082,13 +1079,15 @@ measure, and [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is the
 measurement that would refute it. The quench is now sound enough to run it. What is not
 settled is what a basin *is*.
 
-[D-034](defects.md) is the open defect that says so. Two rows of the `n = 5` census are
-the same packing — same side to twelve decimals, same closed form `(4 + 5√2)/4`, same
-contact certificate byte for byte — stored as two basins. They are not split by float
-noise: the configuration is **not rigid**, with 11 contact constraints against 16 degrees
-of freedom, so the optimum at that side is a positive-dimensional *family* and different
-quenches land on different members. The geometric key encodes coordinates the optimum
-never determined.
+[D-034](defects.md) is the open defect that says so.
+The exact `n=3` side-2 sliding family proves that one connected optimal set produces many
+geometric keys while retaining one contact certificate.
+At `n=5`, two rows also share side, short form, contact certificate, angle signature, and
+contact count while differing geometrically.
+That is strong evidence of unresolved terminal identity, but raw contact counts do not
+prove an exact family dimension and matching side/contact data do not prove the two rows
+are path-connected; a rigidity-matrix rank and continuation test must decide those
+claims.
 
 So `distinct_basins` currently counts family members, the discovery curve cannot
 plateau, and H-011's saturation criterion is unreachable until the definition is fixed.

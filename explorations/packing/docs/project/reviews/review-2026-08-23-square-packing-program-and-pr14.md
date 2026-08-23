@@ -6,11 +6,14 @@
 
 **Status:** Complete
 
-**Reviewed:** [PR #14](https://github.com/jlevy/thinking-scratchpad/pull/14),
-`fa538931b20fef0f51dffedb9e4d7071603b7790`, together with the full
+**Reviewed:** [PR #14](https://github.com/jlevy/thinking-scratchpad/pull/14), initially
+at `fa538931b20fef0f51dffedb9e4d7071603b7790` and reassessed twice as it advanced,
+finally at `c412b8c507bc0b4a5d3d3b676196d73575c77a1b`, together with the full
 `explorations/packing/` research, tooling, campaign, corpus, and source archive.
 
-The findings and reproduction results below describe that exact PR head.
+The initial findings and reproduction results below describe the first exact PR head.
+The dated reassessments record the five later commits and give every affected finding an
+explicit disposition.
 The later section
 [Changes applied on the stacked review branch](#changes-applied-on-the-stacked-review-branch)
 records narrow repairs made after the review; it does not retroactively change the
@@ -124,6 +127,114 @@ A prose answer, a scalar side length, or a visual plateau is not enough.
 
 The Java-runtime warning printed by this machine’s environment was unrelated to the
 Python checks and did not affect their results.
+
+## Reassessment after PR #14 advanced
+
+PR #14 added three commits after the initial review:
+
+- `4310096` changes the bracket quench to narrow its angle window only after a failed
+  sweep, raises the default sweep cap, and gives the atlas check a realistic wall
+  budget;
+- `f4d3031` adds the circular angle quantizer, closed-form recognizer, fixed-seed golden
+  basin map, and a proved-case convergence ladder; and
+- `5b1ae65` wires per-step timing into the gate.
+
+The D-030 change is a substantive repair.
+The same `n=5` atlas fixture that initially reported one convergence in twelve now
+converges on all six current proposals at its declared budget.
+The circular quantizer also closes the `0`/`π/2` seam.
+Neither change repairs the atlas contract itself: the new golden contains one
+non-converged `n=3` endpoint among four proposals, stores it as a basin, and passes
+because the guard accepts any census with at least half its quenches marked converged.
+The checker also printed ten proposals after a six-proposal census because its final
+summary included four synthetic deduplication re-offers; that bookkeeping error is fixed
+and recorded as D-037 on the stack.
+
+The new golden exposed a second trust problem.
+After rebuilding the checked-in Rust engine, its committed seed-7 `n=10` ladder did not
+reproduce: annealing started `0.077126752369` above the proved value and the quench
+ended at `(8 + 5√2)/4`, still `0.06066` high, rather than at `s(10)`. The `n=3` and
+`n=5` map also drifted.
+The tool nevertheless describes its fixed seeds as reproducible and, when run
+standalone, consumed whichever pre-existing release binary happened to be present.
+This is F-16, not evidence against the known `n=10` optimum.
+
+Reviewing the new terminator found D-036: `_free_sweep` returned the same tuple after a
+deadline break as after examining every coordinate, so `quench_bracket` could report
+`converged=True` and `free pass clean` for an incomplete pass.
+The stacked branch now propagates the timeout and has a named regression.
+That repair makes the status honest; it does not upgrade coordinatewise stationarity
+into local optimality.
+
+The updated dispositions are therefore:
+
+| Finding | Disposition at `5b1ae65` plus the stacked fixes |
+| --- | --- |
+| F-05 | Partially repaired: both keys are D4- and seam-invariant on the fixtures. Order-dependent angle clustering, exact two-hash equality, quantization splits, and factorial canonical labeling remain. |
+| F-07 | The D-030 cause is fixed for the `n=5` fixture, but non-converged endpoints are still counted and event order is still absent. Remains P0. |
+| F-10 | Deadline propagation is fixed as D-036. The result still certifies only finite coordinate probes, not a coupled local optimum. |
+| F-15 | Atlas, golden, regression, and timing steps are now wired. The raw updated branch’s golden is red against its own source-built engine, the gate costs about eight minutes, and no PR CI exists. |
+| F-16 | New P0: the golden mixes oracle checks with exact characterization data and was not hermetic or reproducible as committed. Partially repaired on the stack; the atlas promotion policy remains open. |
+
+No research-remediation bead is closed by these changes.
+The fix narrows the blocker from “the cold quench demonstrably cannot arrive at `n=5`”
+to “the project still lacks a sound definition and provenance-complete record of what
+may be counted as a basin.”
+
+## Second reassessment at PR #14 head `c412b8c`
+
+PR #14 advanced again during final validation:
+
+- `64ade69` splits the golden into a millisecond stored-file audit and an explicit deep
+  regeneration, and replaces the expensive atlas census with one real `n=4` smoke quench
+  plus synthetic store keys; and
+- `c412b8c` records the seam defect as D-031 and the previously fixed but unguarded
+  claim/release defects as D-032 and D-033, then derives another synopsis count from the
+  ledger.
+
+The fast/deep split is useful, and recording D-031 through D-033 is the right correction
+to the research history.
+It also exposes a new enforcement error.
+On the raw PR head, `./test.sh --strict` does **not** imply `--deep`, even though that
+exact strict command is the handover checklist.
+The fast golden reads stored side lengths and trusts stored `valid` and `converged`
+booleans; it has no poses from which to re-run the independent verifier and does not
+execute the quench. The shortened atlas check offered six entries all marked converged
+and then called `non_converged == 0` proof that the counter works.
+Consequently the default strict gate no longer carries an executable recurrence test for
+D-030, the bug that motivated the validation suite.
+
+The accompanying explanation also calls the seven single-seed convergence ladder
+“census-scale evidence.”
+It is not: those starts are deliberately selected to lie in the target basins.
+The fixed-seed case maps are the census-shaped experiment, and they still admit and
+count a non-converged `n=3` endpoint.
+The stacked branch makes strict imply deep, source-builds the engine for every
+deep/update run, checks stored count identities on the fast path, and feeds the atlas
+one explicit `converged=False` offer so the counter’s false branch is exercised.
+Those repairs restore the regression without pretending the open promotion policy is
+solved.
+
+Finally, D-033’s new ledger entry says timezone-aware leases are normalized to aware
+UTC, but the implementation at `ledger.py:298–303` uses `.replace(tzinfo=None)`. That
+drops an offset rather than converting it.
+The runner currently emits UTC, so its own fixtures are safe; the generic contract and
+the “fixed” claim are still too broad.
+Both D-032 and D-033 remain explicitly without regressions, which confirms F-04 rather
+than closing it.
+
+| Finding | Disposition at `c412b8c` plus the stacked fixes |
+| --- | --- |
+| F-04 | D-032/D-033 are now recorded, but recovery is unguarded and non-UTC offsets are still mishandled. Remains P1. |
+| F-07 | The structural atlas check is faster and clearer, but only the strict/deep golden runs a real multistart map; non-converged observations are still promoted. Remains P0. |
+| F-15 | The routine gate is faster. The stacked strict handover remains deep and hermetic; GitHub still has no configured PR checks. |
+| F-16 | Fast scalar-oracle audit and deep characterization are now distinct code paths. The fixture still has no stored poses and the policy still byte-compares discovery data. Remains P0. |
+| F-17 | New P0: raw strict mode skipped the only producer-level golden regeneration and the atlas’s claimed non-convergence test never supplied a false value. Repaired on the stack; retain a negative control for the strict/deep implication. |
+
+Our two initial review-found defects are D-036 and D-037 so the defect ledger retains
+merged PR #14’s D-031 through D-035 without collision.
+The same 17 epic children own the new work; F-17 belongs to the existing enforcement,
+quench, and atlas beads.
 
 ## What is sound and should be retained
 
@@ -334,11 +445,25 @@ The observed result at `n = 5`—11 sweep-limit stops, one convergence, 12 rows,
 known optimum—is the consequence.
 The result counts termination artifacts rather than basins.
 
+At the updated PR head, D-030 repairs that particular cold-start failure: the revised
+`n=5` fixture converges on all six proposals.
+The contract still admits the same error.
+The new golden’s `n=3` case has only three convergences in four proposals, stores the
+fourth stopping point among its three reported basins, and passes a majority threshold.
+A detector that permits up to half its sample to be the object it was introduced to
+exclude does not make basin counts authoritative.
+
 The append-only claim is also incomplete.
 The file stores aggregate `proposals` and frequencies, not an event order or
 `first_seen_proposal`. The transient Boolean returned by `add` is lost.
 No saved atlas can reconstruct new-basins-versus-proposals, even though the overnight
 plan makes that curve the kill criterion.
+
+The updated checker demonstrated the same boundary problem in miniature.
+It correctly snapshotted six census proposals for its convergence assertion, then
+printed ten in its final summary after re-offering four basins to test deduplication.
+D-037 records the historical line, but an actual atlas still lacks the immutable event
+boundary needed to make this class of mix-up impossible.
 
 Convergence itself is currently too weak for promotion (F-10), but the data model must
 separate the states regardless.
@@ -427,6 +552,12 @@ There are two further gaps:
 - `_free_sweep` checks its deadline only before each coordinate.
   A single probe can run many LP/cell iterations and overrun the wall budget; the
   apparent out-of-time path cannot interrupt work inside the probe.
+
+The updated head made this worse than an overrun: a deadline break returned the normal
+five-field tuple, and the caller interpreted “no improvement in the partial pass” as
+`converged=True`. D-036 on the stacked branch changes the helper to raise on timeout,
+checks inside every probe, and returns a non-converged result.
+That fixes the status bug, not the mathematical scope of the status.
 
 The research reports also describe Powell and Nelder–Mead as smooth methods that cannot
 converge to a corner.
@@ -603,6 +734,14 @@ Other concrete drift found in the same pass:
 - `frontier/n-017.md` calls the catalogue/paper decimal discrepancy unresolved even
   though the stored polynomial decisively supports the catalogue value.
 
+The updated PR head wires the atlas and golden checks and prints step timings; the
+stacked branch wires the historical regressions and freezes dependency resolution.
+That resolves the missing-command portion of this finding.
+It also makes the next failure visible: the source-built golden is red against its
+committed `n=10` row, the full gate is reported at roughly 480 seconds, and GitHub still
+reports no PR checks.
+Wiring a red or impractically slow check is evidence, not completion.
+
 **Required repair:** wire every named checker into the strict gate and CI only after it
 passes adversarial controls; freeze dependency resolution during verification; make
 doc/artifact reconciliation cover round counts, atlas existence, gap ordering, control
@@ -610,6 +749,89 @@ roles, derivative signs, and timing labels; and treat a red promised check as a 
 blocker.
 
 **Bead:** `think-zt29`.
+
+### F-16 (P0): the mathematical golden is not hermetic and asserts what it says it only records
+
+[`tools/golden_basins.py`](../../../tools/golden_basins.py) combines two different
+artifacts: an oracle-driven convergence ladder and an exact characterization snapshot of
+a few multistart draws.
+The prose says discovery is “measured, never asserted,” but the whole rebuilt
+YAML—including which basins those draws found, their frequencies, and `found_optimum`—is
+compared byte for byte.
+A legitimate proposer or quench improvement therefore fails the gate in exactly the same
+way as a mathematical regression.
+
+The committed file did not reproduce from the checked-in engine.
+After an explicit release build, fixed seed 7 at `n=10` annealed to gap
+`+0.077126752369` and quenched to `(8 + 5√2)/4`, gap `+0.06066`; the committed row says
+gap `+0.021003996488` followed by the proved optimum.
+The standalone command did not build the engine, so an untracked stale binary could
+supply its supposedly fixed inputs.
+The current source is itself deterministic: two direct runs produced byte-identical
+scientific rows, isolating the problem to the committed fixture/provenance rather than
+scheduler randomness.
+
+Four more details matter:
+
+- the ladder records `converged` but did not add `converged=False` to its oracle
+  failures, so `--update` could bless an incomplete result;
+- `--update` wrote the replacement before inspecting its oracle failures, so a command
+  that exited non-zero still left an invalid golden in the worktree;
+- the census accepts 50% non-convergence and includes those endpoints in the exact map;
+- the atlas keeps the lowest side for a repeated identity while `configs.setdefault`
+  kept the first pose, so the independent verifier could check a different pose/side
+  pair from the one reported; and
+- 12 decimal places are finer than the declared `1e-11` numerical floor, while sub-floor
+  gaps are serialized verbatim.
+  Exact text comparison can therefore fail on differences the evidence tier says are
+  meaningless.
+
+Closed-form recognition is useful supporting evidence, but its coincidence heuristic
+does not turn it into an oracle: optimizer outputs are not uniform random reals, and a
+short quadratic surd neither proves local optimality nor excludes a censored point.
+
+**Required repair:** build the source-locked engine before every standalone rebuild;
+record the selected seed and full regime; use a preselected start known to lie in each
+control basin; make validity and completed convergence non-waivable oracle conditions;
+verify the pose that supplies the reported side; compare numeric fields at the tier
+tolerance; and separate the deterministic characterization map from mathematical pass/
+fail assertions. Refuse oracle-invalid updates before an atomic write.
+Non-converged endpoints remain observations, never certified basins.
+
+**Beads:** `think-zt29`, `think-zcx4`, and `think-31k1`.
+
+### F-17 (P0): the fast gate removed the producer-level regression it claimed to preserve
+
+At PR head `c412b8c`, [`test.sh`](../../../test.sh) makes `--deep` and `--strict`
+independent flags. The handover specification invokes only `./test.sh --strict`, so its
+golden step calls `verify_stored()` rather than annealing, quenching, rebuilding the
+map, or independently checking a pose.
+That function can derive mathematical constraints on stored scalars, but a YAML row
+saying `valid: true` is not independent validation.
+The file contains no pose with which the fast path could establish that claim.
+
+At the same time, [`tools/atlas_check.py`](../../../tools/atlas_check.py) replaced its
+real six-start `n=5` census with one cheap real `n=4` quench and five synthetic keys.
+All six offers were passed with `converged=True`; the check then asserted that the
+non-convergence counter was zero and described this as testing that the store did not
+hide non-convergence.
+A branch that deletes or ignores the false path can pass that fixture.
+The text then points to the single-start ladder as census-scale coverage, although those
+seeds are deliberately selected for membership in target basins.
+
+The three changes together remove the executable recurrence test for D-030 from the raw
+strict handover gate.
+The faster default is reasonable for ordinary edits; the scientific handover cannot
+substitute assertions about a committed file for executing its producer.
+
+**Required repair:** strict must imply deep; deep/update must build the checked-in
+engine; the cheap atlas check must offer at least one explicit non-converged observation
+and assert its count; the real fixed-seed maps must remain the D-030 regression; and
+comments must distinguish a selected convergence start from a census.
+Add a negative control that mutates the strict/deep implication and observes the deep
+marker disappear.
+
+**Beads:** `think-zt29`, `think-zcx4`, and `think-31k1`.
 
 ## Key omissions
 
@@ -973,8 +1195,8 @@ Keep its canonical/atlas code as a prototype, quarantine any guard-invalid outpu
 require full poses on every new run.
 Correct the factual claims and use `n=16` as the true grid control.
 
-**Exit:** F-01 through F-05 and F-09 have failing regression fixtures before their
-repairs, and no invalid or non-converged endpoint can appear as a basin.
+**Exit:** F-01 through F-05, F-09, F-16, and F-17 have failing regression fixtures
+before their repairs, and no invalid or non-converged endpoint can appear as a basin.
 
 ### Stage 1 — build the reproducibility spine
 
@@ -1078,6 +1300,10 @@ reconciliation rather than creating a second authoritative plan.
 The review branch fixes issues whose correct resolution does not depend on a research
 choice:
 
+- The branch is rebased onto PR #14’s current head, `c412b8c`. Two rounds of conflicts
+  across the README, timed gate, defect ledger, synopsis, handoff plan, atlas, golden,
+  and negative-control catalogue were resolved semantically.
+  Merged PR #14’s D-031 through D-035 remain intact; review findings use D-036 and D-037.
 - `campaign/runner.py` now applies one result-line validator both before archival and
   during replay, rejects non-finite or malformed fields and undeclared cells or seeds,
   and releases a round instead of recording it after a guard refusal.
@@ -1090,6 +1316,18 @@ choice:
   and canonical modules, removing the strict-gate drift.
 - `tools/regression_test.py` now runs in the main gate instead of remaining a passing
   but optional command.
+  D-036 adds deadline checks inside the free-angle pass and refuses to report a
+  timed-out partial pass as convergence.
+- The golden tool builds the source-locked Rust engine, records the selected ladder
+  seed, uses a reproducible `n=10` control start, rejects non-converged ladder results,
+  verifies the pose that supplied each stored minimum side, serializes no precision
+  below the declared floor, and refuses oracle-invalid updates before an atomic write.
+  Its fast path checks stored count/frequency consistency; strict mode implies deep
+  regeneration rather than trusting the committed fixture.
+- The golden map now records each basin’s converged frequency.
+  The shortened atlas checker feeds an explicit false convergence status through the
+  store and keeps its one real quench separate from synthetic offers.
+  This also supersedes the mixed census/re-offer summary recorded as D-037.
 - Every project `uv run` reached by `test.sh`, including negative-control commands, is
   frozen so a verification run no longer rewrites the dependency lock.
 - The research report now distinguishes the transcendental angle from its algebraic
@@ -1098,10 +1336,17 @@ choice:
   catalogue decimal; and the synopsis and handoff carry the correct gap rank, round
   count, and hypothesis count.
 
-After those changes, `./test.sh --strict`—including `tools/regression_test.py`—plus
-`campaign/runner.py preflight`, the canonical checker, and the table drift check pass.
-The separately invoked `tools/atlas_check.py` still fails because only 1 of 12 quenches
-converges; it is still not wired into the main gate.
+Before the second upstream advance, the source-locked golden passed its atomic update
+path and a subsequent read-only rebuild.
+Two full `./test.sh --strict` runs passed all exact, schema, generated-artifact, lint,
+type, Rust, canonical, golden, atlas, negative-control, regression, soundness-perimeter,
+bead, provenance, and campaign checks; the last took 298 seconds.
+After the `c412b8c` rebase and second conflict resolution, the final strict/deep run
+passed the same perimeter plus 21 negative controls and the 35-entry defect ledger in
+291 seconds. The upstream D-030 repair changes the deep `n=5` fixture from one
+convergence in twelve to six in six; strict mode now runs it.
+`campaign/runner.py preflight` and the focused canonical and regression checks also
+pass.
 
 No remediation bead is closed by these partial fixes.
 In particular, the runner still trusts a producer-reported scalar overlap rather than a
@@ -1122,7 +1367,7 @@ capability. The minimum merge gate is:
 5. H-011/H-012 evaluators implemented or the overnight claims removed;
 6. fixed-angle semantics corrected;
 7. `n=12` removed as a negative control;
-8. atlas and regression checks wired and green under strict CI; and
+8. atlas, golden, and regression checks hermetic, wired, and green under strict CI; and
 9. the README, synopsis, handoff, and plan regenerated or corrected.
 
 Until then, supervised exploratory runs are acceptable only if their raw stdout and full

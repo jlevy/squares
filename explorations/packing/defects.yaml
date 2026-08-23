@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 35
+count: 37
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -833,7 +833,7 @@ defects:
   bead: think-5zwm
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 - id: D-034
-  title: Basin identity is ill-posed for non-rigid optima, so the census counts family members
+  title: Endpoint identity assumes isolated terminals and splits a connected optimum family
   date: '2026-08-23'
   layer: tooling
   class: soundness
@@ -845,33 +845,25 @@ defects:
   severity: high
   status: outstanding
   what: >-
-    Two rows of the n = 5 census are the same packing: side 2.767766952966 in both, the
-    same closed form `(4 + 5√2)/4`, the same contact certificate byte for byte, the same
-    angle signature and contact count. `Atlas.add` dedups on the tuple
-    `(geometric, contact)` and needs both to match, so it stores them separately. They
-    differ only in the geometric key, and not from float noise -- the angle steps are
-    identical, and the positions differ by 0.06 in x and 0.21 in y. The configuration is
-    NOT RIGID: four pair contacts and seven wall touches is 11 constraints against 5
-    squares × 3 DOF plus the side = 16, leaving five degrees of freedom. The optimum at
-    that side is a positive-dimensional FAMILY, not a point; different quenches land on
-    different members, and the geometric key encodes coordinates the optimum never
-    determined.
+    The exact n = 3 side-2 family with centres `(1/2,1/2)`, `(3/2,1/2)`, and
+    `(t,3/2)` for `t in [1/2,3/2]` has one contact certificate but many geometric keys;
+    `Atlas.add` requires both hashes to agree and therefore splits one connected optimum
+    family into quantization-dependent rows. At n = 5, two rows also share side
+    2.767766952966, short form, contact certificate, angle signature, and contact count
+    while differing geometrically. That makes their identity unresolved, but does not by
+    itself prove they lie in the same connected component or establish its dimension.
   consequence: >-
-    `distinct_basins` counts family members. The discovery curve then cannot plateau, so
-    H-011's saturation criterion is unreachable and H-012's rarity ranking inherits the
-    inflation -- the same failure shape as D-030 from a different cause, and flattering
-    in the same two directions: the landscape reads as richer, and a record's basin reads
-    as rarer than it is. n = 3 shows the same thing more starkly: three unit squares in a
-    2 × 2 box have slack, so the optimal set is a continuum and the reported basins there
-    are samples of it rather than distinct optima.
+    `distinct_basins` is an endpoint-key count whose value changes with geometric
+    quantum on a proved control. A discovery curve can therefore fail to plateau because
+    it samples a terminal family, and H-012's rarity ratio inherits an arbitrary split.
+    The error is flattering in both directions: the landscape reads as richer and an
+    isolated record component can look rarer against an inflated denominator.
   fix: >-
-    none yet, and deliberately not rushed: this is the definition of the campaign's
-    central deliverable, not a code tweak. Three options are written up on the bead --
-    dedup on (contact certificate, side within the 1e-11 floor); canonicalize within the
-    family; or report families with their dimension as a field. Note that
-    `BasinKey.agrees_with` ALREADY names this case `same-arrangement-different-metric`
-    and its docstring already says it "is usually one basin the quantizer split" -- the
-    analysis existed and the store simply never consulted it.
+    none yet. Detect active-constraint rank deficiency, continue every null direction,
+    and define the counted object as an isolated endpoint or connected terminal
+    component under a fully specified quench and quotient. Contact/side agreement alone
+    may merge distinct components, while exact two-hash agreement splits the n = 3
+    family. Reconcile think-1s0h with the more explicit acceptance test on think-0yo9.
   regression: none
   bead: think-1s0h
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
@@ -915,3 +907,59 @@ defects:
   regression: none
   bead: think-97pp
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-036
+  title: A timed-out free sweep was reported as a convergence certificate
+  date: '2026-08-23'
+  layer: quench
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    `_free_sweep` stopped iterating when its deadline expired and returned the same
+    five-field tuple it returned after checking every angle. `quench_bracket` therefore
+    had no completion bit to inspect and could label an incomplete pass `converged=True`
+    with reason `free pass clean`. The probes inside `_free_sweep` did not check the
+    deadline at all, so one line search could also overrun the declared wall budget.
+  consequence: >-
+    A budget-censored endpoint could enter the atlas as a coordinate-wise stationary
+    basin. This points in the flattering direction: the stopping condition reads as a
+    mathematical property of the endpoint when it is only a property of the clock.
+    Any basin frequency, golden map, or local-optimum claim downstream could inherit the
+    false status.
+  fix: >-
+    `_free_sweep` now raises `_OutOfTimeError` before every coordinate and inside every
+    line-search probe, and checks the deadline again after the final LP solve. The caller
+    converts that signal to `converged=False` with an explicit time-budget reason; only a
+    pass that examined every coordinate can reach `free pass clean`.
+  regression: >-
+    tools/regression_test.py, labelled D-036: a free sweep handed an already-expired
+    deadline must raise the timeout signal rather than return a completion-shaped tuple.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-037
+  title: The atlas checker reported its own synthetic re-offers as census proposals
+  date: '2026-08-23'
+  layer: tooling
+  class: bookkeeping
+  detected_by: review
+  severity: low
+  status: fixed
+  what: >-
+    At PR #14 head 5b1ae65, `tools/atlas_check.py` correctly captured the six-proposal
+    census before exercising deduplication, but its final human-readable summary used
+    `atlas.proposals` after the checker had re-offered every known basin. A six-proposal
+    census was therefore printed as ten proposals even though the convergence guard used
+    the right denominator.
+  consequence: >-
+    The assertions were sound, but the line a reader would copy into a report mixed
+    scientific observations with test bookkeeping. Basin frequencies and proposal counts
+    are meaningful only for the actual proposer run.
+  fix: >-
+    The stacked review first made the summary use the captured census counts. PR #14
+    subsequently replaced the expensive census in this structural checker with one real
+    smoke quench plus synthetic offers, removing the misleading summary entirely.
+  regression: >-
+    tools/atlas_check.py keeps real-quench output separate from synthetic offer counts;
+    the strict gate runs the checker.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md

@@ -405,33 +405,34 @@ def _bracket_min(f, x0: float, span: float, tol: float = 1e-15, max_iters: int =
 def _free_sweep(side, x, y, theta, n, *, deadline, span: float = 1e-3):
     """One bracketing pass over every angle individually, no classes.
 
-    Returns (side, x, y, theta, lp_solves). Used to certify that a class-converged
-    point is a genuine coordinate-wise local optimum rather than an artifact of the
-    merge tolerance.
+    Returns (side, x, y, theta, lp_solves). Used to test whether a class-converged
+    point is coordinate-wise stationary rather than an artifact of the merge
+    tolerance. Raises `_OutOfTimeError` unless every coordinate was checked.
     """
     lp_solves = 0
     best = (side, list(x), list(y), list(theta))
     for k in range(n):
         if time.monotonic() > deadline:
-            break
+            raise _OutOfTimeError
         ref_x, ref_y = list(best[1]), list(best[2])
         base = best[3][k]
 
         def probe(value, k=k, ref_x=ref_x, ref_y=ref_y, angles=tuple(best[3])):
             nonlocal lp_solves
+            if time.monotonic() > deadline:
+                raise _OutOfTimeError
             trial_theta = list(angles)
             trial_theta[k] = value
             got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
             lp_solves += got[3] if got else 1
             return got[0] if got else 1e3
 
-        try:
-            angle = _bracket_min(probe, base, span)
-        except _OutOfTimeError:
-            break
+        angle = _bracket_min(probe, base, span)
         trial_theta = list(best[3])
         trial_theta[k] = angle
         got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
+        if time.monotonic() > deadline:
+            raise _OutOfTimeError
         lp_solves += got[3] if got else 1
         if got and got[0] < best[0] - 1e-13:
             best = (got[0], got[1], got[2], trial_theta)
@@ -527,6 +528,7 @@ def quench_bracket(
     # it. It narrows only when a sweep FAILS to improve -- see the tail of the loop.
     span0 = span
     groups = angle_classes(theta, class_tol)
+    stop_reason = "sweep limit"
     for _ in range(max_sweeps):
         improved = False
         for group in groups:
@@ -635,9 +637,13 @@ def quench_bracket(
         # the class-converged point IS a coordinate-wise local optimum and the
         # tolerance did not decide the answer. If something improves, the search
         # continues from there with the classes re-read.
-        free_side, free_x, free_y, free_theta, used = _free_sweep(
-            side, x, y, theta, n, deadline=deadline
-        )
+        try:
+            free_side, free_x, free_y, free_theta, used = _free_sweep(
+                side, x, y, theta, n, deadline=deadline
+            )
+        except _OutOfTimeError:
+            stop_reason = "time budget during free sweep"
+            break
         lp_solves += used
         if free_side < side - tol:
             # The free sweep found what the class search could not at any window, so
@@ -669,5 +675,5 @@ def quench_bracket(
         angle_steps=angle_steps,
         converged=False,
         cell_changes=changes,
-        reason="sweep limit",
+        reason=stop_reason,
     )

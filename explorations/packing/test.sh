@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run everything and check the results that matter.
 #
-# Usage: ./test.sh [--strict]
+# Usage: ./test.sh [--strict] [--deep]
 #
 # A check this gate could not run is not a check that passed, and the difference has
 # to survive a tired reader at 3am. Every skip is recorded and re-listed at the end,
@@ -18,6 +18,13 @@ for arg in "$@"; do
   [ "$arg" = "--strict" ] && STRICT=1
   [ "$arg" = "--deep" ] && DEEP=1
 done
+# The handover gate is `--strict`; it must exercise the producer, not only audit the
+# committed fixture. A caller can still request `--deep` without making skips fatal.
+[ "$STRICT" = "1" ] && DEEP=1
+if [ "$STRICT" = "1" ] && [ "$DEEP" != "1" ]; then
+  echo "strict mode did not enable deep regeneration" >&2
+  exit 1
+fi
 SKIPPED=()
 
 # tools/negctl.py corrupts tracked files IN PLACE to watch each guard fire, restoring
@@ -79,7 +86,7 @@ echo "python runner: $PY"
 # the binary finds it.
 if command -v cargo >/dev/null 2>&1; then
   echo "== building sqsearch =="
-  ( cd sqsearch && cargo build --release --quiet )
+  ( cd sqsearch && cargo build --locked --release --quiet )
   echo "  built sqsearch/target/release/sqsearch"
 else
   echo "== building sqsearch =="
@@ -218,9 +225,10 @@ step "golden basin maps (proved cases, checked against mathematics)"
 # closed form and re-checking it against the proved s(n) costs milliseconds and still
 # refuses a golden edited to make a test pass -- the oracles are mathematics, so the
 # file cannot be adjusted into agreement with them. Regenerating by re-quenching is
-# 221 s and is what `--deep` is for; the runbook's handover gate requires it before an
-# unattended night. Verified against three tampering modes: a ladder value that does not
-# match the proved one, a gap below it, and a stored basin below it.
+# costly and is what `--deep` is for. `--strict` implies `--deep`, because the runbook's
+# handover gate must exercise the producer before an unattended night. Verified against
+# three tampering modes: a ladder value that does not match the proved one, a gap below
+# it, and a stored basin below it.
 if [ "$DEEP" = "1" ]; then
   $PY tools/golden_basins.py --deep
 else
@@ -229,11 +237,9 @@ else
 fi
 
 step "basin atlas"
-# The census's output, and the guard that says whether the census measured the landscape
-# or its own budget. Six structural invariants -- dedup, append-only, round trip, merge,
-# schema -- all passed while 11 of 12 quenches were silently hitting a sweep limit and
-# being recorded as distinct basins (D-030). So the seventh, convergence, is the one
-# that had to exist: a store can only be as honest as what it is fed.
+# One real pipeline smoke test plus synthetic store invariants. The synthetic
+# non-converged offer proves the store preserves that status; the strict/deep golden run
+# is the instrument-level regression for D-030's budget-censored census.
 $PY tools/atlas_check.py
 
 step "negative controls"
