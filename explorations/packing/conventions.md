@@ -27,7 +27,7 @@ The prefix says what kind of thing it is.
 **Rounds do not restart at `exp-001` in each series, and this is deliberate.** A series
 is a directory and a field, not a namespace.
 `exp-003` names one round forever, wherever it lives, which is what makes cross-series
-references work — and they are common: a series’ `carries_forward` names rounds from an
+references work—and they are common: a series’ `carries_forward` names rounds from an
 earlier one, a hypothesis aggregates rounds across all of them, and the atlas will cite
 the round that discovered a basin.
 Per-series numbering would make every one of those a compound key, and a bare `exp-001`
@@ -41,8 +41,8 @@ that series’ directory.
 | Relation | Cardinality |
 | --- | --- |
 | round → series | exactly one |
-| round → hypotheses | **one or more** — a round may test several |
-| hypothesis → rounds | zero or more — sweep cells and replications |
+| round → hypotheses | **one or more**—a round may test several |
+| hypothesis → rounds | zero or more—sweep cells and replications |
 | hypothesis → exploration reports | zero or more (`derived_from`) |
 | hypothesis → strategies | zero or more (`strategy_refs`) |
 
@@ -80,14 +80,14 @@ The id in the filename must equal the id in the frontmatter.
 Research documents and reviews keep the repository’s dated form:
 `research-YYYY-MM-DD-topic.md`, `review-YYYY-MM-DD-topic.md`.
 
-Use [`repren`](https://github.com/jlevy/repren) for renames — it moves files and
-rewrites references in one pass, which is what keeps the two in step.
+Use [`repren`](https://github.com/jlevy/repren) for renames—it moves files and rewrites
+references in one pass, which is what keeps the two in step.
 
 ## 3. Artifacts
 
 **Frontmatter is authoritative; the body is for people.** [checked: schema] A consumer
 reads the YAML and must not parse prose for structured values.
-The body carries the judgement, the history and the caveats — the things that would be
+The body carries the judgement, the history and the caveats—the things that would be
 lies if forced into a field.
 
 **Every artifact declares its schema and is validated against it.** [checked]
@@ -95,7 +95,7 @@ lies if forced into a field.
 An artifact that declares a schema nothing loads is the exact failure this project keeps
 finding in its own sources.
 
-**Promote a value into YAML only when something consumes it** — the accept rule, the
+**Promote a value into YAML only when something consumes it**—the accept rule, the
 ledger, the checker.
 [convention] Everything else is prose.
 
@@ -113,14 +113,14 @@ invalidate every artifact rather than the offending one
 | --- | --- | --- |
 | `f64_screen` | `sqsearch` | a candidate was proposed |
 | `polished` | LP-in-cell quench | this is the basin, named and exactly valued |
-| `exact` | `sqpack` over ℚ(α) | validity — and only here, a record |
+| `exact` | `sqpack` over ℚ(α) | validity—and only here, a record |
 
 **`beat_record: true` may only be written at `precision: exact`.** [convention] A record
 packing has pairs touching at exactly zero separation; no floating-point check can
 decide those.
 
-**Claims are separated by evidential status** — proved, computationally verified, best
-known, or asserted-but-unverified — and citations sit near the claims they support.
+**Claims are separated by evidential status**—proved, computationally verified, best
+known, or asserted-but-unverified—and citations sit near the claims they support.
 [convention]
 
 **Budgets are in pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`. [convention]
@@ -139,8 +139,8 @@ archive.
 Every archived record re-derives its own reported side from its own coordinates.
 
 **A recorded commit must be an ancestor of the branch being merged.** [convention]
-`exp-001` violates this — its commit was orphaned by a rebase — and carries an
-annotation saying so.
+`exp-001` violates this—its commit was orphaned by a rebase—and carries an annotation
+saying so.
 
 **Guards are recomputed, not remembered.** [checked: selftest] The overlap reported for
 a configuration is recomputed from that configuration, never read off an accumulator
@@ -167,20 +167,20 @@ registered hypothesis appears on it.
 
 **Once codified, the registry artifact is canonical.** [convention] The standing
 review’s register entry becomes historical.
-Beads track build work, never scientific claims — a bead may say “build the instrument
-for H-002”, never “H-002 is confirmed”.
+Beads track build work, never scientific claims—a bead may say “build the instrument for
+H-002”, never “H-002 is confirmed”.
 
 **One series is open at a time.** [checked]
 
 **The runbook is frozen while rounds are running.** [convention] The accept rule, the
 tolerances, the metric vector and the control cells do not change mid-series.
 
-## 8. Layers that must not blur
+## 8. Layers That Must Not Blur
 
 **`sqpack` owns validity.
 `sqsearch` owns move-loop energy.** [checked: differential test] `pair_depth` is a
 metric shaped for annealing, not a verdict, and a second implementation at that layer is
-fine — as long as it never gets to say what is valid.
+fine—as long as it never gets to say what is valid.
 20,000 near-contact pairs are checked against the oracle on every run of `test.sh`.
 
 **Proposers propose and nothing else.** [convention] A proposer never quenches,
@@ -189,15 +189,15 @@ what a basin means.
 
 **The vocabulary is fixed, and one word is overloaded.** [convention]
 [`SYNOPSIS.md`](SYNOPSIS.md#terminology) defines every term this directory uses in a
-narrow sense — quench, basin, polish, exploration, gap, tier, pair-test and the rest —
-and those definitions are the ones that apply in artifacts, beads and reviews.
+narrow sense—quench, basin, polish, exploration, gap, tier, pair-test and the rest—and
+those definitions are the ones that apply in artifacts, beads and reviews.
 The one collision worth memorising: **“cell” alone always means a cell of configuration
-space** — a choice of separating axis and order for each pair — and a position in the
-sweep is an **“instance cell”**, never a bare “cell”.
+space**—a choice of separating axis and order for each pair—and a position in the sweep
+is an **“instance cell”**, never a bare “cell”.
 The two are unrelated objects and the confusion is expensive: one is where the LP is
 solved, the other is what a round is run on.
 
-## 9. Code and docs
+## 9. Code and Docs
 
 **Python first; accelerate what a profile says is slow, not what looks slow.**
 [convention] The measurements behind this are in the
@@ -217,7 +217,7 @@ Markdown link. This project has needed that twice.
 **Docs follow the common documentation guidelines** and carry the footer.
 [convention]
 
-## 10. What the gate actually enforces
+## 10. What the Gate Actually Enforces
 
 `./test.sh`, in order:
 
@@ -245,18 +245,20 @@ Markdown link. This project has needed that twice.
 13. `SYNOPSIS.md` reconciled against the artifacts: round verdicts, hypothesis statuses,
     round and effort totals, defect counts per class, nothing silently missing, and
     every relative link and heading anchor resolving
-14. `sqsearch --selftest` — geometry against a naive reference, determinism, the `s(5)`
+14. `README.md` reconciled against the directory: the layout tree against what is on
+    disk, the report index against `docs/project/research/`, and every link and anchor
+15. `sqsearch --selftest`—geometry against a naive reference, determinism, the `s(5)`
     positive control, and the recomputed-overlap guard
-15. The differential test between search energy and the validity oracle
-16. Provenance: every round’s recorded engine commit still reachable, or annotated
-17. The campaign record: schema validation, id uniqueness, dangling references, unknown
+16. The differential test between search energy and the validity oracle
+17. Provenance: every round’s recorded engine commit still reachable, or annotated
+18. The campaign record: schema validation, id uniqueness, dangling references, unknown
     series, more than one open series, stale claims, cross-field verdict rules,
     idea-board reconciliation, reserved-id rules, dead links, and ledger freshness
 
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.
 
-## Defect classes
+## Defect Classes
 
 One taxonomy, used by [`defects.yaml`](defects.yaml), by the beads (as a `defect-class:`
 label), and by any review that reports a problem.
@@ -277,7 +279,7 @@ overstate the result and are the dangerous kind, because they look like success;
 Four of the six soundness defects found so far flattered.
 [checked]
 
-A soundness defect gets a postmortem, not just a fix — see
+A soundness defect gets a postmortem, not just a fix—see
 [the first one](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md),
 whose rules R1–R4 apply to code that does not exist yet.
 [convention]
@@ -286,15 +288,15 @@ whose rules R1–R4 apply to code that does not exist yet.
 
 Every defect found in this toolchain is recorded in [`defects.yaml`](defects.yaml) and
 rendered to [`defects.md`](defects.md).
-A defect is a bug, an inefficiency, or a record that disagreed with its evidence — not
-an approach tried and rejected on its merits, which belongs in `campaign/ideas.md` under
+A defect is a bug, an inefficiency, or a record that disagreed with its evidence—not an
+approach tried and rejected on its merits, which belongs in `campaign/ideas.md` under
 Dead ends.
 
 Two fields carry most of the value and are worth filling in honestly rather than
 generously. `detected_by` says what *actually* caught it, which is how we learn which
 detectors to build more of.
 `regression` names the check that now prevents recurrence, and the literal `none` is a
-legitimate and useful answer — the generated view collects those into the list that
+legitimate and useful answer—the generated view collects those into the list that
 predicts what will come back.
 [checked]
 

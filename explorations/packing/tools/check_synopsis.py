@@ -52,8 +52,13 @@ def slugs(text: str) -> set[str]:
     return out | set(re.findall(r'id="([^"]+)"', text))
 
 
-def check_links(text: str) -> list[str]:
-    """Relative links resolve, and fragments name a real heading."""
+def check_links(text: str, doc: Path = SYNOPSIS) -> list[str]:
+    """Relative links resolve, and fragments name a real heading.
+
+    Takes the document so `check_readme.py` can reuse it: the two high-level documents
+    cross-reference each other constantly, and a dead link in either is the same defect.
+    """
+    label = doc.name
     problems = []
     for target in re.findall(r"\[[^\]]*\]\(([^)]+)\)", text):
         if target.startswith(("http://", "https://", "mailto:")):
@@ -61,13 +66,13 @@ def check_links(text: str) -> list[str]:
         path, _, frag = target.partition("#")
         if not path:  # in-document anchor
             if frag not in slugs(text):
-                problems.append(f"SYNOPSIS.md: no such section '#{frag}'")
+                problems.append(f"{label}: no such section '#{frag}'")
             continue
-        resolved = (SYNOPSIS.parent / path).resolve()
+        resolved = (doc.parent / path).resolve()
         if not resolved.exists():
-            problems.append(f"SYNOPSIS.md: dead link -> {target}")
+            problems.append(f"{label}: dead link -> {target}")
         elif frag and resolved.suffix == ".md" and frag not in slugs(resolved.read_text()):
-            problems.append(f"SYNOPSIS.md: dead anchor -> {target}")
+            problems.append(f"{label}: dead anchor -> {target}")
     return problems
 
 

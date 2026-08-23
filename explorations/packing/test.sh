@@ -179,6 +179,15 @@ echo "== synopsis agrees with the artifacts =="
 $PY tools/check_synopsis.py
 
 echo
+echo "== README agrees with the directory =="
+# The other high-level document, and the one that was NOT reconciled -- which is why it
+# restated defect counts and went stale behind them twice in a day (D-028). The counts
+# now live only in the generated view. What is left is checkable: the layout tree
+# against the directory, the report index against docs/project/research/, and every
+# link and anchor, including the ones into SYNOPSIS.md.
+$PY tools/check_readme.py
+
+echo
 echo "== search engine (sqsearch) =="
 # The engine gate: geometry against a naive reference, determinism, and a positive
 # control that recovers s(5) = 2 + 1/sqrt(2). A run that has not passed this may not
