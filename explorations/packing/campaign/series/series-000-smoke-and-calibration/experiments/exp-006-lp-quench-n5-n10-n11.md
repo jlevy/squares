@@ -10,7 +10,7 @@ experiment:
   series: series-000
   title: The LP-in-cell quench applied to annealer output, and why its angle half stalls
   date: '2026-08-23'
-  hypotheses: [H-002, H-019]
+  hypotheses: [H-002]
   tier: exploratory
   subject:
     label: sqpack.quench (scipy HiGHS) over sqsearch output
@@ -203,6 +203,21 @@ Two fixes, both in `sqpack/quench.py`: the tolerance is pinned at HiGHS’s floo
 imposed on it, with a violation rejecting the solve rather than being reported.
 After the fix the same configuration scores `+4.8e-08`, and no gap anywhere in the
 recorded sweep is negative beyond the `2.2e-11` solver floor.
+
+## Annotation, 2026-08-23: this round is a sweep recorded as one cell
+
+`exp-006` declares `instance: {point: 11}` but measures `n = 5`, `10` and `11`, which is
+the defect the standing review raised as F-6 against `exp-001` — recorded here rather
+than erased, because the same runner made the same mistake one round later.
+Its numbers stand; what is wrong is that the ledger reads its sweep coverage from one
+cell, so `H-002` showed two of three cells open when all three had been measured.
+
+The successor sweep is split correctly, one round per cell:
+[exp-007](exp-007-quench-bracket-n5.md), [exp-008](exp-008-quench-bracket-n10.md),
+[exp-009](exp-009-quench-bracket-n11.md).
+Those rounds also supersede this one’s central finding: the quench’s failure to reach
+the analytic value was a property of the *angle search method*, not of the quench, and
+the bracketing variant reaches machine precision on both proved cells.
 
 ## Limits
 

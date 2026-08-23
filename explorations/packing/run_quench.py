@@ -24,7 +24,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from sqpack.quench import contacts, quench, solve_to_fixed_point
+from sqpack.quench import angle_classes, contacts, quench, quench_bracket, solve_to_fixed_point
 
 ROOT = Path(__file__).resolve().parent
 BIN = ROOT / "sqsearch/target/release/sqsearch"
@@ -59,6 +59,19 @@ def main() -> int:
     for n in (5, 10, 11):
         for seed in seeds:
             a = anneal(n, seed)
+            t0 = time.time()
+            b = quench_bracket(a["x"], a["y"], a["t"])
+            emit({
+                "kind": "quench", "arm": "annealer->bracket", "n": n, "seed": seed,
+                "analytic": ANALYTIC[n],
+                "annealer_side": a["best_side"], "annealer_gap": a["best_side"] - ANALYTIC[n],
+                "quenched_side": b.side, "quenched_gap": b.side - ANALYTIC[n],
+                "lp_solves": b.lp_solves, "angle_steps": b.angle_steps,
+                "cell_changes": b.cell_changes, "converged": b.converged,
+                "reason": b.reason, "contacts": len(contacts(b.x, b.y, b.theta)),
+                "classes": len(angle_classes(b.theta, 1e-2)),
+                "seconds": time.time() - t0,
+            })
             t0 = time.time()
             r = quench(a["x"], a["y"], a["t"], max_rounds=200)
             elapsed = time.time() - t0

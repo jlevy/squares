@@ -25,7 +25,12 @@ to solver precision, not exact in the algebraic sense. Certification remains
 from __future__ import annotations
 
 import math
+import time
 from dataclasses import dataclass, field
+
+
+class _OutOfTime(Exception):
+    """Raised inside a line search when the quench's wall budget expires."""
 
 import numpy as np
 from scipy.optimize import linprog
@@ -298,3 +303,129 @@ def contacts(x, y, theta, tol: float = 1e-9) -> list[tuple[int, int]]:
             if abs(gap) <= tol:
                 out.append((i, j))
     return out
+
+def angle_classes(theta, tol: float = 1e-6) -> list[list[int]]:
+    """Group squares by shared tilt, modulo the quarter turn a square is invariant under.
+
+    Records use very few distinct angles -- Trump's `n = 11` uses two, `s(17)` two -- so
+    the honest dimension of the angle search is the number of CLASSES, not `n`.
+    """
+    quarter = math.pi / 2
+    groups: list[list[int]] = []
+    reps: list[float] = []
+    for k, t in enumerate(theta):
+        folded = t % quarter
+        for gi, rep in enumerate(reps):
+            d = abs(folded - rep)
+            if min(d, quarter - d) <= tol:
+                groups[gi].append(k)
+                break
+        else:
+            groups.append([k])
+            reps.append(folded)
+    return groups
+
+
+def _bracket_min(f, x0: float, span: float, tol: float = 1e-15):
+    """Golden section on one coordinate. Converges on a KINK, where descent cannot.
+
+    The objective must be deterministic in its argument, which is why every evaluation
+    re-solves from the same reference centres rather than threading updated ones: a
+    bracketing method on a path-dependent objective loses the unimodality it needs, and
+    measured here that converged to the wrong tilt by 1.2e-02.
+    """
+    gr = (math.sqrt(5) - 1) / 2
+    lo, hi = x0 - span, x0 + span
+    a, b = hi - gr * (hi - lo), lo + gr * (hi - lo)
+    fa, fb = f(a), f(b)
+    while hi - lo > tol:
+        if fa < fb:
+            hi, b, fb = b, a, fa
+            a = hi - gr * (hi - lo)
+            fa = f(a)
+        else:
+            lo, a, fa = a, b, fb
+            b = lo + gr * (hi - lo)
+            fb = f(b)
+    return (lo + hi) / 2
+
+
+def quench_bracket(
+    x, y, theta, *, max_sweeps: int = 12, span: float = 0.05, tol: float = 1e-12,
+    class_tol: float = 1e-2, time_budget: float = 30.0,
+) -> QuenchResult:
+    """Quench whose angle half brackets rather than descends.
+
+    The optimum of `s(theta)` is a corner -- distinct one-sided derivatives, measured in
+    exp-006 -- so a smooth local model cannot converge to it, whatever its order. This
+    variant does cyclic coordinate search over the angle CLASSES, each coordinate solved
+    by golden section, which needs no derivative and lands on a kink exactly.
+    """
+    x, y, theta = list(x), list(y), list(theta)
+    n = len(x)
+    lp_solves = angle_steps = 0
+    # A per-call wall budget, because a quench that does not return is worse than one
+    # that returns a worse answer: it takes the whole round with it. Measured on n = 5
+    # seed 4, where a cell that solves in 5 ms sent the sweep past 145 s. Hitting the
+    # budget is a RESULT and is reported as one, never silently.
+    deadline = time.monotonic() + time_budget
+
+    solved = solve_to_fixed_point(theta, x, y, n)
+    if solved is None:
+        return QuenchResult(float("inf"), x, y, theta, 1, 0, False, 0,
+                            reason="initial cell infeasible")
+    side, x, y, used, changes = solved
+    lp_solves += used
+
+    # `class_tol` is the one real knob, and it is doing more than grouping. A search
+    # arrives with every angle slightly different, so a tight tolerance sees eleven
+    # classes where the packing has two, and searches eleven non-smooth coordinates
+    # instead of one. Merging at 1e-2 rad recovers the structure and, measured, moves
+    # the result four orders: 1.5e-08 at eleven classes against 1.5e-11 at two, in an
+    # eighth of the LP solves. The cost is that two genuinely distinct angles closer
+    # than the tolerance are forced equal -- so a packing whose record needs that is
+    # out of reach until this is swept rather than fixed.
+    groups = angle_classes(theta, class_tol)
+    for _ in range(max_sweeps):
+        improved = False
+        for group in groups:
+            if time.monotonic() > deadline:
+                return QuenchResult(side, x, y, theta, lp_solves, angle_steps, False,
+                                    changes, reason="time budget")
+            ref_x, ref_y = list(x), list(y)
+            base = theta[group[0]]
+
+            def probe(value, group=group, ref_x=ref_x, ref_y=ref_y):
+                nonlocal lp_solves
+                if time.monotonic() > deadline:
+                    raise _OutOfTime
+                trial_theta = list(theta)
+                for k in group:
+                    trial_theta[k] = value
+                got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
+                lp_solves += got[3] if got else 1
+                return got[0] if got else 1e3
+
+            try:
+                best_angle = _bracket_min(probe, base, span)
+            except _OutOfTime:
+                return QuenchResult(side, x, y, theta, lp_solves, angle_steps, False,
+                                    changes, reason="time budget")
+            trial_theta = list(theta)
+            for k in group:
+                trial_theta[k] = best_angle
+            got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
+            lp_solves += got[3] if got else 1
+            if got and got[0] < side - tol:
+                side, x, y = got[0], got[1], got[2]
+                theta = trial_theta
+                angle_steps += 1
+                improved = True
+        if not improved:
+            return QuenchResult(side, x, y, theta, lp_solves, angle_steps, True,
+                                changes, reason=f"bracket converged, {len(groups)} classes")
+        groups = angle_classes(theta, class_tol)
+        span = max(span * 0.5, 1e-9)
+    return QuenchResult(side, x, y, theta, lp_solves, angle_steps, False, changes,
+                        reason="sweep limit")
+

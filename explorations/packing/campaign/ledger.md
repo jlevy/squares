@@ -6,24 +6,24 @@
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 6 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 10 | First series. There is no prior instrument, so not |
 
 ## Registry
 
 | id | status | lane | claim | sweep | rounds | spent |
 | --- | --- | --- | --- | --- | --- | --- |
 | H-001 | blocked | search | Optimal packings at n <= ~30 use at most 3 distinct tilt angles, so a  | n: 5 10 11 | 0 |  |
-| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5 10 11* | 1 | 115m agent + 1.2m cpu |
+| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 4 | 190m agent + 4.9m cpu |
 | H-011 | blocked | search | LP-quenching multistarts at n <= 10 yields a basin count that saturate | n: 5 6 7 8 9 10 | 0 |  |
 | H-012 | blocked | search | The proved-optimal basin's quench probability at n = 10, and Trump's a | n: 10 11 | 0 |  |
 | H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 | 10.2m cpu |
 | H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |  |
 | H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m cpu |
-| H-019 | refuted | search | s(theta), the LP-in-cell optimum as a function of the angles, has a ki | n: 5 10 11* | 1 | 115m agent + 1.2m cpu |
+| H-019 | confirmed | search | s(theta), the LP-in-cell optimum as a function of the angles, has a ki | n: 5 10 11* | 1 | 10m agent + 1s cpu |
 
 ## Rounds
 
-### rejected (5)
+### rejected (6)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -31,15 +31,19 @@
 | exp-002 | series-000 | 10 | claude-opus-5 | H-016 | On this cell the annealer misses the standing best by +4.194e-04, outside the 1e-4 H-016 declared, so the claim is refuted here. |
 | exp-003 | series-000 | 11 | claude-opus-5 | H-016 | On this cell the annealer misses the standing best by +3.733e-02, outside the 1e-4 H-016 declared, so the claim is refuted here. |
 | exp-005 | series-000 | 11 | claude-opus-5 | H-018 | Refutes H-018 as stated - 0 of 40 trials return within 1e-6 at eps = 1e-3 in any arm - but the shape of the failure is the result: the return distance scales linearly with eps with no threshold, and halves when the effort is multiplied by ten, so what was measured is the refiner's convergence rate, not a basin wall. |
-| exp-006 | series-000 | 11 | claude-opus-5 | H-002, H-019 | Refutes H-002 as stated: the quench does not refine annealer output to the analytic value, improving the gap by only 1.1-1.3x because it is a LOCAL cell optimiser and the annealer hands it the wrong basin. The single-cell half stands (4.4e-16 at exact angles) and a class-constrained 1-D angle search reaches 2e-11, so what fails is the free-angle descent - and H-019 says why. |
+| exp-006 | series-000 | 11 | claude-opus-5 | H-002 | Refutes H-002 as stated: the quench does not refine annealer output to the analytic value, improving the gap by only 1.1-1.3x because it is a LOCAL cell optimiser and the annealer hands it the wrong basin. The single-cell half stands (4.4e-16 at exact angles) and a class-constrained 1-D angle search reaches 2e-11, so what fails is the free-angle descent - and H-019 says why. |
+| exp-009 | series-000 | 11 | claude-opus-5 | H-002 | Refutes H-002 on this cell: the median gap improves only from 8.85e-02 to 6.29e-02, against machine precision at n = 5 and n = 10. The quench is not failing - it is being handed the wrong basin, which is what exp-006 concluded and this cell confirms at the target. |
 
-### accepted (1)
+### accepted (4)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-004 | series-000 | 12 | claude-opus-5 | H-016 | On this cell the annealer is within 1e-4 of the standing best (gap +0.000e+00), so H-016 holds here; the claim is universally quantified over the sweep and is refuted elsewhere. |
+| exp-007 | series-000 | 5 | claude-opus-5 | H-002 | Confirms H-002 on this cell: the bracketing quench refines annealer output from 3.43e-08 to a median 2.22e-15 - the analytic value to machine precision - where the same output under angle descent moves only to 3.19e-08. Two of five seeds hit the 30 s wall budget and are reported as such. |
+| exp-008 | series-000 | 10 | claude-opus-5 | H-002 | Confirms H-002 on this cell, and by twelve orders of magnitude: median gap falls from the annealer's 5.32e-03 to 1.33e-15, where angle descent reaches only 4.51e-03. The two seeds that hit the wall budget are the two that did not converge. |
+| exp-010 | series-000 | 11 | claude-opus-5 | H-019 | Confirms H-019: the one-sided slopes are 0.1747 and 0.3841, a ratio of 2.198 that is stable over five decades on each side, so the optimum of s(theta) is a corner rather than a smooth minimum - which is why no smooth local model converges to it. |
 
 ## Effort
 
-6 rounds, 190 agent-minutes, 12.7 cpu-minutes.
+10 rounds, 275 agent-minutes, 16.4 cpu-minutes.
 
