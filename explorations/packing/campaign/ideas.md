@@ -97,10 +97,12 @@ the ledger can report which whole families remain untried.
 
 | # | Idea | Status | H | From | Why it might work, or not |
 | --- | --- | --- | --- | --- | --- |
-| 1 | LP-in-cell polish, alternating with angle moves | registered | [H-002](hypotheses/H-002-lp-in-cell-polish.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | Single-cell half already verified to `9e-16`; the loop is what is untested. Everything else waits on it |
+| 1 | LP-in-cell polish, alternating with angle moves | registered | [H-002](hypotheses/H-002-lp-in-cell-polish.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | **Measured ([exp-006](series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md)):** the cell solve is exact (`4.4e-16`), but the quench is a *polisher, not a rescue* — 1.1–1.3× on annealer output, because it optimises whichever basin it is handed |
 | 2 | Canonical basin identity: `D₄` + relabel geometric key, contact graph up to isomorphism | shaped |  | review R-1 | Without it “basin” is undefined and basin statistics are not statistics |
 | 3 | Basin atlas as a soft-schema artifact, descriptors versioned alongside | shaped |  | strategy doc | The deliverable, on the strategy report’s framing |
 | 4 | Pair-test counter as the budget currency | shaped |  | review R-10 | Machine-independent; replaces this campaign’s move counter |
+| 4a | The angle optimum is a kink, so smooth methods cannot converge to it | registered | [H-019](hypotheses/H-019-angle-optimum-is-a-kink.md) | [exp-006](series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | One-sided slopes `0.175` vs `0.384` at the optimal tilt. Descent stalls five orders short; Powell and Nelder-Mead do *worse* |
+| 4b | Non-smooth angle search: bisect the one-sided derivative sign | raw |  | [exp-006](series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | The spine’s real angle half. A class-constrained 1-D bracket already reaches the solver floor in 70 LP solves |
 
 ## The premise, and the census that tests it
 
