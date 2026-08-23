@@ -143,8 +143,10 @@ properties:
 # softschema 0.6.2: any `allOf` object composition makes a `status: enforced`
 # artifact fail with `enforcement_unsupported: enforced closure is unsupported for
 # allOf object composition`, i.e. the conditional would invalidate every artifact
-# rather than the offending ones. They are enforced in ledger.py instead, which is
-# where whole-set rules already live. Re-test before adding one back.
+# rather than the offending ones -- and it masks the real violation, reporting the
+# same generic message for a conforming document and a violating one. Filed upstream
+# as jlevy/softschema#41. They are enforced in ledger.py instead, which is where
+# whole-set rules already live. Re-test and remove the workaround when #41 lands.
 $defs:
   paired:
     type: object
