@@ -29,6 +29,13 @@ hypothesis:
   prereqs: []
   replication: false
   registered: '2026-08-22'
+  runner:
+    recipe: sqsearch_sweep
+    cells: [11]
+    seeds: [1, 2, 3, 4, 5]
+    chains: 8
+    budget_moves: 10000000000
+    timebox: 8h
   notes: >-
     Demoted to priority 4 on merging with the standing review's register: H-012 answers
     the same question far better. This tests budget scaling as a proxy for basin rarity;
