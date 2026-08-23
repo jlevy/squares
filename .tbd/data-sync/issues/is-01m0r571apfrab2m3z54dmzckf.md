@@ -5,13 +5,13 @@ title: "Reconcile PR #14 with the codex review branch: colliding D-numbers, and 
 kind: task
 status: open
 priority: 0
-version: 1
+version: 2
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies: []
 parent_id: is-01m0pw7redm194km37gpb3cvmf
 created_at: 2026-08-23T20:32:55.125Z
-updated_at: 2026-08-23T20:32:55.125Z
+updated_at: 2026-08-23T20:38:14.504Z
 ---
 Recorded 2026-08-23 20:35 from the PR #14 check-in, so it survives whether or not anyone reads the PR body.
 
@@ -40,3 +40,16 @@ origin/codex/pr14-square-packing-review has REBASED onto c412b8c, so it now carr
    ACTION after the merge: regenerate the golden with `uv run python tools/golden_basins.py --update` under their fix and diff. If convergence counts drop, the D-030 ablation should be re-run too before its numbers are quoted again. Do NOT simply accept the regenerated file -- the point of the diff is to learn how much the old numbers were inflated.
 
 3. Their D-034 does NOT explain our D-034. Ours is a five-dimensional optimal family at n = 5 whose two members have identical contact certificates and identical sides; a convergence-reporting bug cannot produce that. Both are real and both need to land.
+
+## Notes
+
+2026-08-23 20:38. PR #14 MERGED as 8926a7c. main now carries D-001..D-035 with count: 35, so the collision described above is live from this moment: the codex branch's own D-034 and D-035 now sit against main's different D-034 and D-035.
+
+CORRECTION to the risk assessment, in the reassuring direction. The collision cannot land silently. tools/validate_schemas.py does not merely check that count == len(defects); it requires the ids to be EXACTLY contiguous from D-001:
+
+    if ids != [f"D-{i:03d}" for i in range(1, len(ids) + 1)]:
+        errs.append("defects: ids are not contiguous from D-001")
+
+A merge that leaves two entries claiming D-034 breaks contiguity and fails by name in the gate. So this is a loud failure, not a quiet one, and no duplicate-id guard needs building. Renumbering theirs to D-036/D-037 is bookkeeping the gate will insist on rather than a trap.
+
+What is still quiet, and remains the item to actually worry about, is point 2 above: their convergence fix changes what `converged` means, and NOTHING fails if the golden is left un-regenerated. The stale numbers stay green because they are internally consistent. That asymmetry is worth noticing on its own -- the id collision is trivial and loudly guarded, while the measurement invalidation is significant and has no guard at all, which is the same pattern the defect log keeps recording.
