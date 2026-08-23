@@ -69,6 +69,14 @@ its remaining gaps in
 and the prioritized path forward in
 [A Research Program](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#a-research-program).
 
+## Plan
+
+The implementation plan for the first experiments — search, verify, iterate on `n = 11`
+and `n = 12` — is
+[plan-2026-08-22-minimal-packing-toolkit.md](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md).
+It turns the five reports into two phases and a bead tree;
+`tbd list --spec plan-2026-08-22-minimal-packing-toolkit.md` shows the work items.
+
 ## Exact verification
 
 Record packings are published as high-precision decimals, and there is no public tool
