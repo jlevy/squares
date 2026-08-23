@@ -5,7 +5,7 @@ title: "Review remediation: executable square-packing research program (PR #14)"
 kind: epic
 status: open
 priority: 0
-version: 21
+version: 22
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -32,7 +32,7 @@ child_order_hints:
   - is-01m0qxpg0nryz3nwhedeqgwm1g
   - is-01m0qxpgm5e4gx92d9f1r4bqgj
 created_at: 2026-08-23T18:19:48.864Z
-updated_at: 2026-08-23T20:20:48.889Z
+updated_at: 2026-08-23T20:45:33.363Z
 ---
 Systematic technical review of PR #14 and the square-packing research program. This epic is the implementation map for four required lanes: technical correctness, missing research and infrastructure, creative executable alternatives, and tractable open questions. The linked review is the evidence record and priority order.
 
@@ -40,4 +40,4 @@ Acceptance: every direct child is completed, superseded with an explicit rationa
 
 ## Notes
 
-2026-08-23 final restack audit: PR #14 advanced from fa538931 through 5b1ae653 to c412b8c. The review now includes F-16 for the non-hermetic golden and F-17 for raw strict mode skipping producer-level regeneration. PR #14 owns D-031 through D-033; review findings are D-034 and D-035. The epic remains open with the same 17 direct children because the new findings are owned by existing campaign, atlas, quench, and enforcement beads.
+2026-08-23 merged-main delta audit: PR #14 merged through f9f119a. Its D-034 terminal-isolation diagnosis and D-035 negctl-residue defect remain; the review's timeout and checker-summary defects are renumbered D-036/D-037. Four ambiguity children now track the exact n=3 component definition (think-0yo9), unrecognised endpoint classification (think-aans), numerical identity calibration (think-3szr), and proposer-conditioned measures (think-apwt). think-1s0h is reconciled as the narrower rank/connectivity measurement. The review branch is rebased on main and the review remains the epic spec.
