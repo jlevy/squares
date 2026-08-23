@@ -64,9 +64,10 @@ quality-diversity and packing surgery, and a proof-producing unavoidable-set
 cutting-plane loop.
 
 This review maps that repair and research program into epic
-[`think-6sst`](#the-epic-and-its-bead-map), with **17 direct children**: five technical
-repairs and four each for omissions, creative alternatives, and tractable open
-questions. Existing beads are referenced rather than silently duplicated.
+[`think-6sst`](#the-epic-and-its-bead-map), with four direct focus epics and 26 primary
+work beads: five for Correctness, seven for Process, nine for Insight, and five for
+Efficiency. Four narrower ambiguity beads remain nested under their owning work items.
+Existing beads are referenced rather than silently duplicated.
 
 Findings use the following severities:
 
@@ -109,6 +110,32 @@ machine-checkable answers:
    retained as evidence?
 
 A prose answer, a scalar side length, or a visual plateau is not enough.
+
+## Operating model: correctness, process, insight, and efficiency
+
+The review and remediation program uses four independent dimensions.
+The plain-language principle is the durable name; the parenthetical name is the
+specialist role an agent takes while working in that lane.
+
+| Principle | Specialist role | Owns | Authority boundary |
+| --- | --- | --- | --- |
+| **Correctness** | Soundness | Mathematical claims, primary-source coverage, rigorous proof and certification, numerical-to-exact promotion, independent validation | May veto claims and promotions that exceed the evidence |
+| **Process** | Discipline | Preregistration, schemas, lifecycle, provenance, event and defect logbooks, reconciliation, and handoffs | May veto runs and records that cannot be reconstructed or whose acceptance rule moved |
+| **Insight** | Creativity | Structural explanations, conjectures, diverse search and proof mechanisms, cross-`n` grammar, and selection of tractable questions | Proposes and prioritizes; cannot certify its own proposal |
+| **Efficiency** | Infrastructure | Stable executors, profiling, batching, parallelism, caching, visualization systems, and measured agent-loop latency | May block unstable scale-up; cannot relax Correctness or Process controls |
+
+An agent normally focuses on one dimension at a time.
+The standard handoff is **Insight proposes → Process preregisters → Efficiency executes
+→ Correctness validates → Process records**. This is not a claim that every small change
+needs five owners; it is a prohibition on self-promoting an idea because the same agent
+also wrote the code, produced the plot, or documented the run.
+
+Basin visualization deliberately spans Insight and Efficiency.
+`think-vcnx` owns the mathematical questions and honest encodings; `think-djvs` owns the
+scalable explorer, deterministic snapshots, and traceability to source observations.
+The views must distinguish certified facts, observed samples, and inferred relations.
+In particular, graph layout, proximity in an embedding, and a sampled cluster do not
+prove adjacency, metric distance, or connectedness in configuration space.
 
 ## What was verified by running it
 
@@ -285,7 +312,7 @@ entries:
 | D-039 | F-20: D-021’s side floor was generalized into component resolution | Outstanding on `think-3szr` |
 | D-040 | F-21: rarity lacked a durable, proposer-conditioned `P/Q/E` estimand | Outstanding on `think-apwt` |
 | D-041 | F-13/F-18: contact counts and a one-angle kink were used as rank, rigidity, dimension, and connectivity proofs | Rank-free prose fixed; certification outstanding on `think-1s0h` |
-| D-042 | F-14: the open `n=12` case was treated as a known-answer negative control | Active docs corrected; historical verdict and control replacement remain on `think-zt29` |
+| D-042, D-062 | F-14: the open `n=12` case was treated as a known-answer negative control, and the first correction missed the executable runner | Active docs and artifacts corrected; the not-below guard now uses proved `n=16`, with a mutation control for recurrence |
 
 ## What is sound and should be retained
 
@@ -1039,6 +1066,36 @@ frequency ratio.
 
 **Beads:** `think-apwt`, under `think-rrht`, plus `think-843f` and `think-3b3s`.
 
+### Technical-finding to defect-logbook crosswalk
+
+Every technical error in F-01 through F-21 now has a durable defect entry.
+A finding can map to more than one entry when it combined independent failure modes;
+prior entries are reused where the review reproduced an already known cause.
+
+| Finding | Defect entries | Disposition |
+| --- | --- | --- |
+| F-01 | D-043 | Fixed with live-ingest and replay validation |
+| F-02 | D-044 | Open: independent pose validity and executed self-test provenance |
+| F-03 | D-045 | Open: typed criterion evaluators |
+| F-04 | D-032, D-033, D-046 | Recovery subpaths fixed; full runner state machine open |
+| F-05 | D-031, D-034, D-047, D-048 | Angle seam and reflection fixed; component/equivalence semantics open |
+| F-06 | D-049 | Open: bounded canonical-label implementation |
+| F-07 | D-030, D-037, D-050 | Cold convergence and checker summary fixed; promotion/event model open |
+| F-08 | D-051 | Open: regime-safe, idempotent observation merge |
+| F-09 | D-015, D-029 | Existing defects cover path-dependent fixed-angle semantics and the one-solve misdiagnosis |
+| F-10 | D-036, D-052 | Timeout status fixed; local-certification scope open |
+| F-11 | D-053 | Open: generic field-certificate preconditions |
+| F-12 | D-002, D-009, D-054 | Earlier budget/overlap defects retained; exact work and event semantics open |
+| F-13 | D-040, D-041, D-055, D-056, D-063 | False theorem and logic prose fixed; empirical rarity and rigidity certification open |
+| F-14 | D-034, D-038–D-042, D-057, D-062 | Hypothesis/control errors separately recorded and scoped |
+| F-15 | D-027, D-028, D-058, D-065 | Local handover and derived README claim reconciled; configured PR CI remains on the remediation bead |
+| F-16 | D-038, D-050, D-059 | Hermetic safety fixes landed; oracle/characterization separation remains open |
+| F-17 | D-060, D-064 | Fixed with strict-implies-deep, a firing mutation control, and a read-only preflight path that remains testable inside the gate |
+| F-18 | D-034 | Open: terminal-component definition on the exact `n=3` control |
+| F-19 | D-061 | Open: evidence-complete endpoint classification |
+| F-20 | D-039 | Open: identity calibration independent of side precision |
+| F-21 | D-040 | Open: durable proposer-conditioned `P/Q/E` estimand |
+
 ## Key omissions
 
 ### O-01: there is no executable geometry corpus for the common values of n
@@ -1473,33 +1530,64 @@ candidate is reproducible; every claimed bound has a replayable certificate.
 Epic **`think-6sst` — “Review remediation: executable square-packing research program
 (PR #14)”** is a child of the standing square-packing epic `think-xkqu` and links to
 this review as its spec.
-All 17 items below are direct children, so category coverage is visible in the issue
-tree.
+Its direct children are the four focus epics below.
+Their 26 primary work beads preserve the original technical-error, omission, creative-
+alternative, and open-question labels while assigning exactly one primary owner.
 
-| Category | Bead | Work item | Depends on in this review epic |
+| Focus epic | Primary authority | Direct work beads |
+| --- | --- | ---: |
+| `think-6awy` — Correctness (Soundness) | Mathematical truth and certification | 5 |
+| `think-p76j` — Process (Discipline) | Reproducible research operations | 7 |
+| `think-z3g5` — Insight (Creativity) | Mathematical strategy and discovery portfolio | 9 |
+| `think-r1yl` — Efficiency (Infrastructure) | Trustworthy experimental throughput | 5 |
+
+| Focus | Bead | Work item | Depends on in this review epic |
 | --- | --- | --- | --- |
-| Technical error | `think-ldq2` | Repair the campaign trust boundary and run lifecycle | — |
-| Technical error | `think-siui` | Make canonical basin identity invariant, stable, and scalable | — |
-| Technical error | `think-31k1` | Separate atlas observations from certified basins | `think-siui`, `think-zcx4` |
-| Technical error | `think-zcx4` | Correct fixed-angle quench and exact-verifier contracts | — |
-| Technical error | `think-zt29` | Correct false research claims and wire every enforcement gate | the four technical beads above |
-| Omission | `think-2o5w` | Build a provenance-complete record-packing corpus through `n=100` | `think-zcx4` |
-| Omission | `think-n4f6` | Implement float-candidate to exact-certificate promotion | `think-zcx4`, `think-2o5w` |
-| Omission | `think-rrht` | Add event-level measurement and a statistical census contract | the four foundational technical beads |
-| Omission | `think-thhk` | Close source, test-oracle, and independent-implementation gaps | — |
-| Creative alternative | `think-9vh7` | Prototype active-set and contact-graph branch-and-bound search | `think-zcx4`, `think-2o5w`, `think-n4f6` |
-| Creative alternative | `think-843f` | Benchmark a rare-event proposer ensemble | `think-ldq2`, `think-31k1`, `think-rrht` |
-| Creative alternative | `think-g2ko` | Build continuation, quality-diversity, and packing-surgery emitters | `think-siui`, `think-31k1`, `think-2o5w`, `think-rrht` |
-| Creative alternative | `think-6yni` | Synthesize unavoidable-set lower bounds by cutting planes | `think-zcx4`, `think-n4f6`, `think-thhk` |
-| Open question | `think-iwlr` | Attack `n=12` from certified upper- and lower-bound lanes | `think-n4f6`, `think-rrht`, `think-843f`, `think-6yni` |
-| Open question | `think-9m9x` | Extend the `m²-3` frontier at `n=61,78,97` | `think-2o5w`, `think-9vh7`, `think-g2ko` |
-| Open question | `think-qv90` | Certify and structurally constrain the `n=11` optimum | `think-2o5w`, `think-n4f6`, `think-9vh7` |
-| Open question | `think-3b3s` | Determine cross-`n` packing grammar and proposer-specific basin laws | `think-2o5w`, `think-rrht`, `think-g2ko` |
+| Correctness | `think-siui` | Make canonical basin identity invariant, stable, and scalable | — |
+| Correctness | `think-zcx4` | Correct fixed-angle quench and exact-verifier contracts | — |
+| Correctness | `think-n4f6` | Implement float-candidate to exact-certificate promotion | `think-zcx4`, `think-2o5w` |
+| Correctness | `think-thhk` | Close source, test-oracle, and independent-implementation gaps | — |
+| Correctness | `think-zt29` | Correct false research claims and wire every enforcement gate | `think-ldq2`, `think-siui`, `think-31k1`, `think-zcx4` |
+| Process | `think-jmjn` | Publish the four-principle packing research charter | — |
+| Process | `think-2w1a` | Maintain the review, defect logbook, and bead reconciliation map | — |
+| Process | `think-m79h` | Define lane-specific agent handoffs and evidence contracts | `think-jmjn` |
+| Process | `think-ldq2` | Repair the campaign trust boundary and run lifecycle | — |
+| Process | `think-31k1` | Separate atlas observations from certified basins | `think-siui`, `think-zcx4` |
+| Process | `think-2o5w` | Build a provenance-complete record-packing corpus through `n=100` | `think-zcx4` |
+| Process | `think-rrht` | Add event-level measurement and a statistical census contract | `think-ldq2`, `think-siui`, `think-31k1`, `think-zcx4` |
+| Insight | `think-vcnx` | Design basin-atlas views that expose mathematical structure | — |
+| Insight | `think-9vh7` | Prototype active-set and contact-graph branch-and-bound search | `think-zcx4`, `think-2o5w`, `think-n4f6` |
+| Insight | `think-843f` | Benchmark a rare-event proposer ensemble | `think-ldq2`, `think-31k1`, `think-rrht` |
+| Insight | `think-g2ko` | Build continuation, quality-diversity, and packing-surgery emitters | `think-siui`, `think-31k1`, `think-2o5w`, `think-rrht` |
+| Insight | `think-6yni` | Synthesize unavoidable-set lower bounds by cutting planes | `think-zcx4`, `think-n4f6`, `think-thhk` |
+| Insight | `think-iwlr` | Attack `n=12` from certified upper- and lower-bound lanes | `think-n4f6`, `think-rrht`, `think-843f`, `think-6yni` |
+| Insight | `think-9m9x` | Extend the `m²-3` frontier at `n=61,78,97` | `think-2o5w`, `think-9vh7`, `think-g2ko` |
+| Insight | `think-qv90` | Certify and structurally constrain the `n=11` optimum | `think-2o5w`, `think-n4f6`, `think-9vh7` |
+| Insight | `think-3b3s` | Determine cross-`n` packing grammar and proposer-specific basin laws | `think-2o5w`, `think-rrht`, `think-g2ko` |
+| Efficiency | `think-xzew` | Baseline and profile the end-to-end research loop | — |
+| Efficiency | `think-rthe` | Parallelize isolated mutation controls and prove serial equivalence | `think-xzew`, `think-97pp` |
+| Efficiency | `think-ba88` | Build a resumable sharded executor for packing campaigns | `think-xzew`, `think-ldq2` |
+| Efficiency | `think-qk9w` | Cache reusable validation and build work with sound invalidation | `think-xzew` |
+| Efficiency | `think-djvs` | Build a scalable interactive basin-atlas explorer | `think-vcnx`, `think-31k1`, `think-rrht`, `think-7z7y` |
 
 Each bead contains evidence, scope, and an acceptance test.
 Where an older bead already owns implementation—canonicalization, atlas, pair-test
 meter, source acquisition, promotion, proposer work—the child explicitly requires
 reconciliation rather than creating a second authoritative plan.
+
+The prior agent’s open work remains in its original phase hierarchy and is assigned a
+focus label rather than duplicated:
+
+| Focus | Existing bead | Reconciliation |
+| --- | --- | --- |
+| Correctness | `think-1s0h` | Owns D-034 terminal flatness/rank/connectivity and blocks canonical identity |
+| Correctness | `think-ouf0` | Owns proved engine anchors and prefix-valid budget checks |
+| Process | `think-jxx8` | Defines a named proposal baseline, corrected from “the null” under D-040 |
+| Process | `think-5zwm` | Owns an isolated claim→ledger→release recovery rehearsal |
+| Process | `think-o48b` | Closed after defect-id reconciliation and source-built golden regeneration |
+| Efficiency | `think-97pp` | Owns D-035 safe mutation isolation; `think-rthe` adds parallel throughput only after it |
+| Efficiency | `think-l3ds` | Carries the earlier 480→152 second gate profile; `think-xzew` extends rather than repeats it |
+| Efficiency | `think-7z7y` | Owns deferred atlas fields consumed by the visualization explorer |
 
 The four questions added to the PR description are tracked as narrower children of the
 relevant remediation beads, not as a second epic:
@@ -1562,6 +1650,15 @@ choice:
 - Living tier, rigidity, and campaign docs no longer call a floating-point LP endpoint
   exact, infer terminal dimension from raw contact counts, equate a one-angle kink with
   full rigidity, or use the open `n=12` instance as a known-answer negative control.
+- The merged-head delta now has a line-by-line defect crosswalk through D-065. It
+  corrects the executable `n=12` control in the runner, narrows angle-kink and
+  oblique-record claims to what their experiments measured, removes a false
+  contrapositive from the rigidity premise, and keeps the README’s qualitative defect
+  summary reconciled to the defect source.
+- The README and bead hierarchy now publish the four independent operating focuses:
+  Correctness, Process, Insight, and Efficiency.
+  Basin visualization is split between Insight’s view design and Efficiency’s
+  reproducible implementation, with explicit Process and Correctness handoffs.
 
 Before the second upstream advance, the source-locked golden passed its atomic update
 path and a subsequent read-only rebuild.
@@ -1584,6 +1681,16 @@ search self-tests, differential validity, provenance, and campaign-ledger valida
 The two negative-control anchors initially drifted after the documentation corrections;
 the gate failed by name, their stable anchors were repaired, and both were observed to
 fire before the successful run.
+
+The current process-lane checkpoint passes the full normal gate in 108 seconds with 24
+negative controls, 65 defect entries, and all generated-view, schema, lint, type,
+canonical, atlas, soundness-perimeter, bead-tree, README/synopsis, provenance, search,
+and campaign checks enabled.
+An earlier integration run caught D-064 when runner preflight could not reach its
+assertion from inside the gate.
+The repaired read-only path then fired under mutation.
+A post-gate read caught the D-065 README aggregate recurrence; its new reconciliation
+check was also observed failing under mutation before this successful run.
 
 No remediation bead is closed by these partial fixes.
 In particular, the runner still trusts a producer-reported scalar overlap rather than a

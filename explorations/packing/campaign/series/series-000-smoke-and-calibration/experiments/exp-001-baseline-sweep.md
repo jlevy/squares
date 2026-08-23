@@ -117,7 +117,7 @@ packing — and establishes the numbers every later round is measured against.
 | --- | --- | --- | --- | --- | --- | --- |
 | 10 | positive control | `3.7075262001` | `3.7076711818` | `[3.7075262, 3.7091188]` | `3.7071067812` | `+4.19e-04` |
 | 11 | target | `3.9144165418` | `3.9279396177` | `[3.9144165, 3.9361125]` | `3.8770835900` | `+3.73e-02` |
-| 12 | negative control | `4.0000000000` | `4.0000000000` | `[4.0000000, 4.0000000]` | `4.0000000000` | `0` |
+| 12 | open-case calibration | `4.0000000000` | `4.0000000000` | `[4.0000000, 4.0000000]` | `4.0000000000` | `0` |
 
 ## What was tried
 
@@ -158,11 +158,11 @@ After the fix the `s(5)` control improved 18-fold, from a gap of `2.97e-04` to
 that: `n = 10` misses by `4.19e-04` and `n = 11` by `3.73e-02`. The two failures are
 nothing alike, and separating them is the round’s real output.
 
-Both guard cells behave.
-The positive control lands `4.19e-04` from a proved optimum that is *not* the grid — it
-needs a genuine 45° tilted family, so recovering it exercises the part of the search
-that matters. The negative control returns exactly `4.0` on all five seeds and never
-below, so the geometry is not manufacturing packings that do not exist.
+The positive-control cell behaves.
+It lands `4.19e-04` from a proved optimum that is *not* the grid — it needs a genuine
+45° tilted family, so recovering it exercises the part of the search that matters.
+The `n=12` calibration returns exactly `4.0` on all five seeds, but D-042 records why
+that observation cannot certify the geometry or serve as a known-answer guard.
 
 At `n = 11` the seed range is `[3.9144, 3.9361]`, a spread of `2.2e-02` — five times
 narrower than the `3.73e-02` distance still to Trump.

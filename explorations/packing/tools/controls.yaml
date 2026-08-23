@@ -39,9 +39,17 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 42", "count: 20"]
+  replace: ["count: 65", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 42"
+  expect: "count 20 != 65"
+
+- name: README - repeated numeric gate-defect aggregate
+  file: README.md
+  replace:
+    - "No soundness\n  defect in the log was caught by it."
+    - "No soundness\n  defect in the log was caught by it. The gate caught two defects."
+  run: python3 tools/check_readme.py
+  expect: "repeats a numeric gate-defect aggregate"
 
 # The unprotected-fix count in SYNOPSIS.md. This claim -- the list that predicts what
 # comes back -- was hand-written, and it drifted: the prose said six while the generated
@@ -85,6 +93,20 @@ controls:
   replace: ["  effort:\n    wall_seconds: 108.8\n    stopped_by: criterion\n", ""]
   run: python3 campaign/ledger.py --check
   expect: "terminal round without an effort block"
+
+- name: campaign - open instance mislabeled as a known-answer control
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["instance: {axis: n, point: 12, role: calibration}",
+            "instance: {axis: n, point: 12, role: negative_control}"]
+  run: python3 campaign/ledger.py --check
+  expect: "control role negative_control requires a proved instance"
+
+- name: campaign runner - n12 improvement rejected as a control breach
+  file: campaign/runner.py
+  replace: ['CONTROLS = {10: ("within", 1e-2), 16: ("not_below", 4.0)}',
+            'CONTROLS = {10: ("within", 1e-2), 12: ("not_below", 4.0)}']
+  run: python3 campaign/runner.py preflight
+  expect: "FAIL  an n=12 improvement is not rejected as a control breach"
 
 - name: campaign - stopped on the clock without saying where to resume
   file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md

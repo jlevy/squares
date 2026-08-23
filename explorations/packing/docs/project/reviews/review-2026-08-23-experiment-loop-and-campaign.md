@@ -75,10 +75,11 @@ failing at review time.
   `beat_record: true` writable only at `exact` and the frontier editable only by a
   deliberate human-reviewed change, encodes the repository’s central lesson (14 zero-gap
   pairs; no float check can certify) as *process*, not just prose.
-- **The controls earned their keep, and the writeup says so honestly.** The `n = 10`
-  positive control killed two broken search formulations; the inert `--budget-moves`
-  defect was caught by its own tell (results worsening at larger declared budget); the
-  `n = 12` negative control behaves.
+- **The controls mostly earned their keep.** The `n = 10` positive control killed two
+  broken search formulations; the inert `--budget-moves` defect was caught by its own
+  tell (results worsening at larger declared budget).
+  The original review incorrectly praised `n = 12` as a negative control; `s(12)=4` is
+  open, so it is now an open-case calibration (D-042), not known-answer evidence.
   Dead ends are recorded with reasons (GPU loss measured, not asserted; the jammed-grid
   failure mode explained).
   exp-001’s “what the prediction got wrong” section is the best experimental prose in

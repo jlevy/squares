@@ -1,5 +1,5 @@
 ---
-title: H-020 — the annealer cannot find an oblique record, at any n
+title: H-020 — stock annealer reaches the n=17 oblique standing best in one baseline seed
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
@@ -69,22 +69,25 @@ It has never been run.
 This is registered because **both branches are informative**, which is rare enough to be
 worth saying explicitly.
 
-- **If the annealer reaches `s(17)`** — the engine can find an oblique record when one
-  exists. Then the `n = 11` failure is about `n = 11` specifically: its basin is rarer,
-  or narrower, or its angle is less forgiving.
+- **If the annealer reaches the published `n=17` standing best** — the engine can find
+  this oblique record under the registered regime.
+  Then the `n = 11` failure is more plausibly instance-specific: its basin may be rarer,
+  narrower, or less forgiving.
   That localises the problem and makes [H-012](H-012-record-basins-are-rare.md)’s rarity
   measurement the right next question.
-- **If it does not** — the engine is *structurally* blind to oblique records, and the
-  `n = 11` result was never about `n = 11`. That is a much stronger statement, it
-  applies to every open case in the corpus whose record is oblique, and it is direct
-  support for the cartography premise: no amount of budget on this proposer reaches this
-  class of optimum, so the proposer has to change.
+- **If it does not** — this version of the engine did not reach this oblique standing
+  best in five seeds at the registered budget.
+  That supports testing changed move sets, schedules, and structured proposers; it does
+  not establish blindness at other `n`, larger budgets, or even along trajectories whose
+  final retained best is the grid.
 
-The second is the prediction.
+Failure under this registered regime is the prediction.
 A single seed at 40% of the round’s budget already returned **exactly `5.000000000`** —
-the trivial `5×5` grid, `+0.324` from Bidwell — meaning the search did not leave the
-grid basin at all. Recorded here, before the round, so that if the full sweep agrees it
-counts as a confirmed prediction rather than a story told afterwards.
+the trivial `5×5` grid, `+0.324` from Bidwell.
+Because only the retained best is stored, that result does not say whether the
+trajectory left the grid neighbourhood.
+Recorded here, before the round, so the scoped outcome is evidence rather than
+hindsight.
 
 ## What this does not claim
 
@@ -92,9 +95,9 @@ Not that `s(17) = 4.67553…`. That case is **open**, and the standing best is a
 bound like any other.
 The criterion is reaching the standing best, not proving it optimal.
 
-Nor does a failure here identify *which* part of the proposer is blind — the move set,
-the cooling schedule, or the absence of any angle-class structure.
-It says the composite does not find this class of optimum.
+Nor does a failure here identify *which* part of the proposer underperformed — the move
+set, cooling schedule, absent angle-class structure, budget, or retention rule.
+It says only that the registered composite did not meet the declared `n=17` criterion.
 Separating those is [H-001](H-001-angle-class-reduction.md)’s job and needs an
 instrument that does not exist.
 

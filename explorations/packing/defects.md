@@ -2,15 +2,15 @@
 
 # Defect log
 
-42 defects recorded across the packing toolchain.
+65 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **11 soundness defects** — the system asserting something false about the mathematics. 9 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **10 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023).
-- **7 are still open** (outstanding or contained), every one carrying a bead.
+- **23 soundness defects** — the system asserting something false about the mathematics. 18 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **14 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028).
+- **18 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -18,34 +18,35 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 1 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 7 | a cell of the sweep whose answer is known in advance |
-| `review` | 21 | a human or agent reading the work against a checklist |
+| `review` | 40 | a human or agent reading the work against a checklist |
 | `anomaly` | 4 | a result that made no sense, chased down |
-| `inspection` | 5 | reading the code or the design with intent |
+| `inspection` | 8 | reading the code or the design with intent |
 | `drift_check` | 2 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 1 | the automated test suite |
+| `gate` | 2 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 1 of 42, and none of the 11 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 2 of 65, and none of the 23 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
 | Layer | Count |
 | --- | ---: |
-| engine | 7 |
-| quench | 9 |
-| record | 16 |
-| tooling | 9 |
-| docs | 1 |
+| engine | 8 |
+| quench | 10 |
+| verifier | 1 |
+| record | 24 |
+| tooling | 17 |
+| docs | 5 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 11 |
-| validity | 10 |
-| bookkeeping | 16 |
-| robustness | 4 |
-| performance | 1 |
+| soundness | 23 |
+| validity | 15 |
+| bookkeeping | 19 |
+| robustness | 6 |
+| performance | 2 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -64,6 +65,10 @@ This is the actionable list.
 | D-032 | The in-progress stub was not schema-valid, so the recovery path corrupted the record | record |
 | D-033 | The ledger crashed on any in-progress round, so the gate could not run during a session | record |
 | D-038 | Closed-form recognition was documented as a local-optimum oracle | tooling |
+| D-055 | An algebraic trigonometric coordinate was used to call the angle algebraic | docs |
+| D-056 | Grid optimality for m squared minus 3 was generalized beyond the proved cases | docs |
+| D-057 | One n=17 regime was generalized to oblique-search blindness at every n | docs |
+| D-063 | A non-converse was called the contrapositive of the rigidity premise | docs |
 
 ## Still open
 
@@ -75,7 +80,18 @@ This is the actionable list.
 | D-039 | outstanding | high | A scalar side-error floor was treated as a basin-resolution theorem | `think-3szr` |
 | D-040 | outstanding | high | Basin rarity was reported without a proposer-conditioned estimand or durable sample | `think-apwt` |
 | D-041 | outstanding | high | Raw contact counts and a one-dimensional kink were used as rigidity and dimension proofs | `think-1s0h` |
-| D-042 | outstanding | high | An open n = 12 case was used as a known-answer negative control | `think-zt29` |
+| D-044 | outstanding | critical | Result validity and self-test status are assertions from the proposer itself | `think-ldq2` |
+| D-045 | outstanding | high | The generic criterion evaluator silently reduces unlike hypotheses to side gap | `think-rrht` |
+| D-046 | outstanding | critical | The unattended runner is not a closed, checked state machine | `think-ldq2` |
+| D-048 | outstanding | high | Tolerance grouping and exact hash pairs do not form a stable basin equivalence relation | `think-siui` |
+| D-049 | outstanding | high | Contact-graph canonicalization is factorial on sparse symmetric endpoints | `think-siui` |
+| D-050 | outstanding | critical | The atlas promotes non-converged stopping points and cannot reconstruct discovery order | `think-31k1` |
+| D-051 | outstanding | high | Atlas frequencies merge without regime, shard, schema, or identity provenance | `think-31k1` |
+| D-052 | outstanding | high | Coordinatewise quench stopping was reported as a certified local optimum | `think-zcx4` |
+| D-053 | outstanding | critical | The generic number-field API accepts reducible or multi-root certificates | `think-zcx4` |
+| D-054 | outstanding | high | Move budgets overshoot and final-best records cannot support trajectory claims | `think-rrht` |
+| D-059 | outstanding | critical | The golden map mixed unhermetic discovery snapshots with mathematical pass-fail assertions | `think-zt29` |
+| D-061 | outstanding | high | Unrecognised endpoint rows discard the evidence needed to classify them | `think-aans` |
 
 ## Every defect
 
@@ -122,4 +138,27 @@ This is the actionable list.
 | [D-039](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | soundness | flattering | `review` | high | outstanding | A scalar side-error floor was treated as a basin-resolution theorem |
 | [D-040](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | validity | flattering | `review` | high | outstanding | Basin rarity was reported without a proposer-conditioned estimand or durable sample |
 | [D-041](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | docs | soundness | flattering | `review` | high | outstanding | Raw contact counts and a one-dimensional kink were used as rigidity and dimension proofs |
-| [D-042](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | validity | flattering | `review` | high | outstanding | An open n = 12 case was used as a known-answer negative control |
+| [D-042](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | validity | flattering | `review` | high | fixed | An open n = 12 case was used as a known-answer negative control |
+| [D-043](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | soundness | flattering | `review` | high | fixed | Runner validation happened after archival and could be bypassed during record |
+| [D-044](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | soundness | flattering | `review` | critical | outstanding | Result validity and self-test status are assertions from the proposer itself |
+| [D-045](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | validity | flattering | `review` | high | outstanding | The generic criterion evaluator silently reduces unlike hypotheses to side gap |
+| [D-046](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | robustness |  | `review` | critical | outstanding | The unattended runner is not a closed, checked state machine |
+| [D-047](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | soundness | flattering | `review` | high | fixed | Contact certificates changed under container reflection while the D4 test checked only geometry |
+| [D-048](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | soundness | flattering | `review` | high | outstanding | Tolerance grouping and exact hash pairs do not form a stable basin equivalence relation |
+| [D-049](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | performance |  | `review` | high | outstanding | Contact-graph canonicalization is factorial on sparse symmetric endpoints |
+| [D-050](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | soundness | flattering | `review` | critical | outstanding | The atlas promotes non-converged stopping points and cannot reconstruct discovery order |
+| [D-051](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | validity | flattering | `review` | high | outstanding | Atlas frequencies merge without regime, shard, schema, or identity provenance |
+| [D-052](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | quench | soundness | flattering | `review` | high | outstanding | Coordinatewise quench stopping was reported as a certified local optimum |
+| [D-053](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | verifier | soundness | neutral | `review` | critical | outstanding | The generic number-field API accepts reducible or multi-root certificates |
+| [D-054](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | engine | validity | flattering | `review` | high | outstanding | Move budgets overshoot and final-best records cannot support trajectory claims |
+| [D-055](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | docs | soundness | flattering | `review` | high | fixed | An algebraic trigonometric coordinate was used to call the angle algebraic |
+| [D-056](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | docs | soundness | flattering | `review` | high | fixed | Grid optimality for m squared minus 3 was generalized beyond the proved cases |
+| [D-057](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | docs | validity | conservative | `review` | high | fixed | One n=17 regime was generalized to oblique-search blindness at every n |
+| [D-058](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | bookkeeping |  | `review` | high | fixed | The claimed handover gate omitted promised checks and contradicted living artifacts |
+| [D-059](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | soundness | flattering | `review` | critical | outstanding | The golden map mixed unhermetic discovery snapshots with mathematical pass-fail assertions |
+| [D-060](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | bookkeeping |  | `review` | high | fixed | Strict mode skipped deep regeneration and the atlas negative path was never exercised |
+| [D-061](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | validity | flattering | `review` | high | outstanding | Unrecognised endpoint rows discard the evidence needed to classify them |
+| [D-062](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | soundness | conservative | `inspection` | high | fixed | The D-042 correction left an executable n=12 rejection in the unattended runner |
+| [D-063](campaign/ideas.md) | 2026-08-23 | docs | soundness | neutral | `inspection` | medium | fixed | A non-converse was called the contrapositive of the rigidity premise |
+| [D-064](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | robustness |  | `gate` | medium | fixed | Runner preflight was unable to run inside the gate that mutation-tested it |
+| [D-065](README.md) | 2026-08-23 | record | bookkeeping |  | `inspection` | low | fixed | The README repeated a numeric gate claim after declaring those counts removed |

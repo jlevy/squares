@@ -455,10 +455,11 @@ def quench_bracket(
 ) -> QuenchResult:
     """Quench whose angle half brackets rather than descends.
 
-    The optimum of `s(theta)` is a corner -- distinct one-sided derivatives, measured in
-    exp-006 -- so a smooth local model cannot converge to it, whatever its order. This
-    variant does cyclic coordinate search over the angle CLASSES, each coordinate solved
-    by golden section, which needs no derivative and lands on a kink exactly.
+    Trump's tested shared-tilt slice has a corner -- distinct one-sided slopes measured
+    in exp-006 -- so a smooth local model is misspecified at that point. This variant
+    does cyclic coordinate search over the angle CLASSES, each coordinate solved by
+    golden section. It needs no derivative and reached the solver floor on the proved
+    controls; that evidence is empirical, not a general convergence theorem.
 
     ## The angle window, and why its schedule is adaptive
 

@@ -17,7 +17,16 @@ what it is doing next.
 squares, which may be rotated freely.
 The motivating case is `n = 11`, the smallest instance nobody has solved.
 
-This project has four lanes, in the order they were built:
+This project works under four independent principles, defined at the top level in
+[`README.md`](README.md#operating-principles): **Correctness** (Soundness) owns
+mathematical truth and may veto promotion; **Process** (Discipline) owns reproducible
+research operations and may veto an unreconstructable run; **Insight** (Creativity) owns
+hypotheses and strategy but cannot certify them; and **Efficiency** (Infrastructure)
+owns stable, measured throughput without relaxing Correctness or Process controls.
+An agent normally focuses on one dimension at a time and hands explicit artifacts to the
+next.
+
+Those principles govern four capabilities built so far:
 
 1. **Know the frontier.** A schema-validated record of the best known packing and the
    best proved lower bound for every `n ≤ 100`, with provenance, plus a local archive of
@@ -29,13 +38,15 @@ This project has four lanes, in the order they were built:
    written before the run, a metric vector, an accept rule, a declared timebox, and a
    ledger generated from the artifacts rather than typed.
 4. **Account for what goes wrong.** A defect log with the same discipline as the
-   experiment record, because four of the six soundness failures found so far pointed in
+   experiment record, because 18 of the 23 soundness failures found so far pointed in
    the *flattering* direction and none was caught by the automated gate.
 
 The strategy that organises lanes 3 and 4 is stated in
 [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md):
-**the map of the local optima is the deliverable, and records are corollaries.** The
-argument for it, and the measurement registered to kill it if it is wrong, are in
+**a validated map of terminal components is the intended deliverable, and records are
+corollaries.** The current endpoint map remains provisional while identity and local
+certification are unresolved.
+The argument for it, and the measurement registered to kill it if it is wrong, are in
 [Theoretical Results](#theoretical-results) and
 [The Hypothesis Registry](#the-hypothesis-registry) below.
 
@@ -53,7 +64,7 @@ Nothing here duplicates what another owns.
 | --- | --- |
 | **This synopsis** | The state of the program: results, their status, the roll-up of rounds |
 | [Current handoff](docs/project/handoff-2026-08-23-quench-spine.md) | Where the work stands *today*: the critical path, the beads it maps to, and what to pick up next. Dated and disposable; this synopsis is the durable account |
-| [`README.md`](README.md) | What is in the directory, how to run it, and the index of the six research reports |
+| [`README.md`](README.md) | The four-principle operating charter, what is in the directory, how to run it, and the index of the six research reports |
 | [`conventions.md`](conventions.md) | Every rule the directory runs on, and which are machine-checked |
 | [`defects.md`](defects.md) | Every bug and record defect, what caught it, and what now stops it recurring |
 | [Soundness postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | Why D-014 was possible, and rules R1–R4 that apply to code not yet written |
@@ -339,7 +350,8 @@ Where the program has spent effort, and what came of it.
 | 8 | proved, `3` | `3` | census kill line | The `n` at which [H-011](campaign/hypotheses/H-011-small-n-census.md)’s discovery curve must plateau, or enumeration is abandoned. No rounds |
 | **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Four rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); angle descent barely helps; [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`—**twelve orders** |
 | **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); six rounds. Every method tried lands `≈ 6e-02` short: the failure is **exploration**, not polish |
-| **12** | open; `4` believed optimal | `4` | **negative control** | Two rounds. Returns exactly `4.0` on all five seeds and never below. Also where the search and proof lanes are planned to meet |
+| **12** | open; `4` believed optimal | `4` | **open-case calibration** | Two rounds. Returns exactly `4.0` on all five seeds, which is baseline evidence rather than a known-answer guard. Also where the search and proof lanes are planned to meet |
+| 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
 | 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°` and `±40°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) returns **exactly `5.0`**, the trivial `5×5` grid, on all five seeds |
 | 61, 78, 97 | open, `m² − 3` | `8`, `9`, `10` (grids) | opportunistic slot | The narrowest gaps in the table. An analytic Cleemann-style attempt at `arctan(3/4)` is registered and **not yet made** |
 | 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](frontier/README.md); 63 of the 65 open cases are bounded below by Nagamochi’s general theorem |
@@ -405,7 +417,7 @@ listed here so the dependencies of this program are explicit.
 | --- | --- | --- | --- | --- |
 | **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **exact** | `sqpack` | `python3 verify_trump11.py` |
 | **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated at **polished** | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack/quench.py`](sqpack/quench.py) | `uv run python lp_cell.py` |
-| **T-3** | The LP optimum as a function of the angles has a **corner** at the optimal angles—distinct one-sided derivatives—so no method assuming a smooth local model converges to it | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run python lp_cell.py` |
+| **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run python lp_cell.py` |
 
 **T-1** is also an independent check of the published record: the 33 digits on the
 *Squares in Squares* record page agree with the value computed here from the field.
@@ -656,9 +668,9 @@ other feasible motion, not just motion along this slice.
 
 ### The prediction, and what it cost to ignore
 
-A gradient, a quasi-Newton model, and a simplex-of-points method all assume a locally
-smooth objective, and none can converge to a corner.
-Measured in
+A kink invalidates derivative-based smooth local models, but does not imply that every
+derivative-free method must fail.
+In this implementation and from these starts,
 [exp-006](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md):
 finite-difference descent stalled five orders short, and **Powell and Nelder-Mead both
 did worse than descent** (`+1.06e-02` and `+3.34e-06` against descent’s `+2.78e-07`).
@@ -680,10 +692,10 @@ searches*. At `n = 5` both quenches find the same contact structure and the same
 angle classes, so the difference is entirely in whether the search can land on the
 corner.
 
-This is not an optimisation preference.
-It is a correctness requirement, and it is why
-[H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) matters more than its size
-suggests.
+This is strong method-selection evidence, not a convergence theorem.
+The successful bracketing run and the failed tested alternatives justify the current
+implementation choice; [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md)
+does not prove that every derivative-free method fails or that bracketing is necessary.
 
 ### And what it did not buy
 
@@ -849,7 +861,7 @@ view; this section is the reading of it.
 
 | Id | Status | Claim, in short | Rounds | Effort |
 | --- | --- | --- | --- | --- |
-| [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) | **confirmed** | The angle objective has a corner at the optimum | 1 | 10m agent |
+| [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) | **confirmed** | Trump’s tested shared-tilt slice has a corner at the published optimum | 1 | 10m agent |
 | [H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 4 | 190m agent, 4.9m cpu |
 | [H-016](campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md) | **refuted** | The stock annealer reaches the standing best on every instance cell | 4 | 10.2m cpu |
 | [H-018](campaign/hypotheses/H-018-basin-entry.md) | **refuted** as stated | Perturbed starts return to Trump’s packing at least half the time | 1 | 75m agent, 1.3m cpu |
@@ -861,9 +873,10 @@ view; this section is the reading of it.
 
 ### Confirmed
 
-**[H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md)—the angle objective is
-non-smooth at the optimum.** Registered by the runner of `exp-006` *before* recording
-that round, because the round measured something `H-002` did not predict; confirmed by
+**[H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md)—Trump’s tested shared-
+tilt slice is non-smooth at the published optimum.** Registered by the runner of
+`exp-006` *before* recording that round, because the round measured something `H-002`
+did not predict; confirmed by
 [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md).
 Elaborated in [The Corner](#the-corner-and-the-method-it-forced) above.
 It is the campaign’s first confirmed claim, and the one that changed a method.
@@ -953,7 +966,7 @@ archive beside it.
 | [exp-001](campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md) | 10, 11, 12 | sweep | H-016 | annealer | gaps `+4.19e-04`, `+3.73e-02`, `0` | rejected |
 | [exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md) | 10 | positive control | H-016 | annealer | `3.7075262001`, gap `+4.194e-04` | rejected |
 | [exp-003](campaign/series/series-000-smoke-and-calibration/experiments/exp-003-baseline-n11-target.md) | 11 | target | H-016 | annealer | `3.9144165418`, gap `+3.733e-02` | rejected |
-| [exp-004](campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md) | 12 | negative control | H-016 | annealer | exactly `4.0`, all five seeds | accepted |
+| [exp-004](campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md) | 12 | open-case calibration | H-016 | annealer | exactly `4.0`, all five seeds | accepted |
 | [exp-005](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 11 | target | H-018 | annealer | 0/40 returns; `max_dev ≈ 11·ε`, no threshold | rejected |
 | [exp-006](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 5, 10, 11 | sweep | H-002 | quench 0.1.0 | 1.1–1.3× only; single cell `4.441e-16` | rejected |
 | [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | 5 | positive control | H-002 | quench 0.2.0 | `3.19e-08 → 2.2204e-15` | **accepted** |
@@ -980,11 +993,11 @@ archive beside it.
 
 ### What the eleven rounds jointly establish
 
-**The instrument works, and the controls discriminate.** The positive controls now
-resolve to machine precision under the bracketing quench; the negative control returns
-exactly `4.0` and never below.
-Every configuration that leaves any component is checked by `sqpack` through code it
-does not share.
+**The instrument works on the proved positive controls.** They now resolve to machine
+precision under the bracketing quench.
+The `n=12` calibration returns exactly `4.0`, but that is not a known-answer guard.
+The runner’s full-pose independent verification boundary remains open under
+[D-044](defects.md); a producer-reported overlap scalar does not close it.
 
 **The refiner is not the problem, and the proposer is.** The single strongest pattern in
 the record: the same refiner takes `n = 5` and `n = 10` to `1e-15` and leaves `n = 11`
@@ -1021,33 +1034,34 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Forty-two defects, [one line each](defects.md), generated from `defects.yaml` and
+Sixty-five defects, [one line each](defects.md), generated from `defects.yaml` and
 checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 11 | asserted something false about the mathematics |
-| validity | 10 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 16 | recorded something its own evidence contradicts |
-| robustness | 4 | did not finish, or finished only by luck |
-| performance | 1 | worked, but cost far more than it should |
+| soundness | 23 | asserted something false about the mathematics |
+| validity | 15 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 19 | recorded something its own evidence contradicts |
+| robustness | 6 | did not finish, or finished only by luck |
+| performance | 2 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Nine of the eleven soundness defects pointed in the *flattering* direction**, where
-the error looks like a success.
+**Eighteen of the twenty-three soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught one defect in forty-two, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught two defects in sixty-five, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. The one the gate did catch ([D-024](defects.md)) is a bookkeeping defect,
-found by a contiguity check—which is the pattern, not an exception: gates are good at
-the mechanical classes and have never once caught the mathematics being wrong.
+*surprised*. The two the gate did catch ([D-024](defects.md) and [D-064](defects.md))
+are bookkeeping and robustness defects, found by a contiguity check and an integration
+run—which is the pattern, not an exception: gates are good at the mechanical classes and
+have never once caught the mathematics being wrong.
 
-The thirteen newest entries sharpen the point rather than softening it.
+The thirty-six newest entries sharpen the point rather than softening it.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed
 green; D-032 and D-033 came from rehearsing recovery paths that had shipped unrun; D-034
 found the endpoint-isolation assumption; D-035 found destructive negative-control
@@ -1058,10 +1072,28 @@ component resolution; D-040 made rarity conditional on a durable `P/Q/E` regime;
 rejected rank-free rigidity and dimension claims; and D-042 exposed `n = 12` as an open
 target masquerading as a negative control.
 
+The systematic crosswalk then records every remaining technical finding from the PR #14
+review. D-043 closes the archive-before-validation path; D-044 leaves independent pose
+validity open; D-045 tracks criterion-specific evaluators; D-046 tracks the incomplete
+runner state machine; D-047 closes contact-key reflection; D-048 retains unstable
+tolerance/equality semantics; D-049 tracks factorial canonicalization; D-050 and D-051
+separate observation promotion from regime-safe merging; D-052 narrows quench
+stationarity; D-053 protects the generic exact-field boundary; D-054 separates budgets
+and final-best records from trajectory claims; D-055 and D-056 correct the angle and
+`m²-3` theorems; D-057 scopes H-020; D-058 reconciles the local handover; D-059 keeps
+the golden oracle/characterization split open; D-060 restores producer-level strict
+checks; and D-061 preserves evidence for unrecognised endpoints.
+D-062 catches the executable `n=12` rejection that survived the first D-042 correction;
+D-063 removes a false contrapositive from the rigidity premise; and D-064 keeps a
+read-only runner preflight executable inside the gate that mutation-tests it without
+opening the gate to live campaign execution.
+D-065 removes the last repeated numeric gate claim from the README and reconciles its
+remaining qualitative claim to the defect source.
+
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Ten fixes left no regression check behind, and that list has already predicted a
+Fourteen fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated

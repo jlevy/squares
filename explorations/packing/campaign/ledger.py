@@ -246,6 +246,22 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         name = experiment["_path"].name
         verdict = experiment.get("verdict") or {}
         decision = verdict.get("decision")
+        instance = experiment.get("instance") or {}
+        role = instance.get("role")
+        point = instance.get("point")
+        if role in {"positive_control", "negative_control"}:
+            frontier_path = ROOT.parent / "frontier" / f"n-{int(point):03d}.md"
+            proved = False
+            if frontier_path.exists():
+                text = frontier_path.read_text()
+                if text.startswith("---\n"):
+                    packing = yaml.safe_load(text.split("---\n", 2)[1]).get("packing") or {}
+                    proved = packing.get("status") == "proved"
+            if not proved:
+                problems.append(
+                    f"{name}: control role {role} requires a proved instance; "
+                    f"frontier n={point} is open or missing"
+                )
         if decision == "abandoned":
             for field in ("budget_spent", "best_reached", "reopen_when"):
                 if not verdict.get(field):
@@ -259,7 +275,7 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         # DIFFERENT cell, it measured a sweep and recorded a cell, so the ledger reports
         # swept cells as unfilled and the next runner re-runs them. Made twice before it
         # was checked (defects D-010, D-017).
-        point = str((experiment.get("instance") or {}).get("point", ""))
+        point = str(point or "")
         declared = set(experiment.get("known_defects") or [])
         for result in [] if declared & {"D-010", "D-017"} else experiment.get("results") or []:
             source = result.get("standing_best_source") or ""

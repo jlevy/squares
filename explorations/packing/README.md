@@ -9,6 +9,38 @@ The motivating case is `n = 11`, the smallest instance of this problem that is s
 open. Its best known packing dates from 1979 and its best proved lower bound from 2003,
 and a gap of roughly 0.088 in the side length separates them.
 
+## Operating principles
+
+This program separates four dimensions of excellent research because none can stand in
+for another:
+
+| Principle | Agent focus | Owns | Boundary |
+| --- | --- | --- | --- |
+| **Correctness** | Soundness | Mathematical claims, primary-source research, rigorous proof and certification, independent validation | May veto any claim or promotion that exceeds its evidence |
+| **Process** | Discipline | Preregistration, run lifecycle, schemas, provenance, logbooks, reconciliation, and handoffs | May veto any run or record that cannot be reconstructed or whose rule changed after observation |
+| **Insight** | Creativity | Structural explanations, conjectures, search and proof ideas, cross-`n` grammar, and tractable questions | Proposes and prioritizes; it does not certify its own ideas |
+| **Efficiency** | Infrastructure | Stable executors, profiling, parallelism, caching, visualization systems, and measured agent-loop throughput | Accelerates specified work; it may not weaken mathematical or process controls |
+
+At a given time, an agent normally works in one focus.
+A task may cross focuses, but its handoffs are explicit: **Insight proposes → Process
+preregisters → Efficiency executes → Correctness validates → Process records.**
+Rejection and negative results return to Insight as evidence for the next strategy, not
+as discarded runs.
+
+The basin atlas is the flagship cross-focus instrument.
+Insight specifies views that could expose mathematical structure—symmetry orbits,
+terminal components, contact types, observed transitions, continuation across `n`, and
+proposer-conditioned frequency with uncertainty.
+Efficiency makes those views responsive, traceable, and reproducible as both an
+interactive explorer and deterministic review snapshots.
+Process owns the underlying event and provenance contract; Correctness decides which
+relations are observed, inferred, or certified.
+A visual embedding is never evidence by itself that two basins are adjacent or that a
+sampled cluster is a connected component.
+
+The implementation map is the four-focus epic in the
+[current program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map).
+
 Two documents get you oriented, and they have different jobs.
 
 **[`SYNOPSIS.md`](SYNOPSIS.md) is the technical root:** the single account of what this
@@ -38,10 +70,10 @@ explorations/packing/
 ├── frontier/               What is known about s(n) for every n <= 100: one
 │                           schema-validated artifact per case, plus editorial.
 │                           See frontier/README.md.
-├── golden/                 Golden basin maps for the small PROVED cases, checked
-│                           against the proved values and against closed forms rather
-│                           than against a previous run. Rebuilt by tools/golden_basins.py
-├── atlas/                  Schema for persistent basin observations and summaries
+├── golden/                 Stored calibration endpoint snapshots for small PROVED
+│                           cases. Mathematical oracle checks are distinct from the
+│                           provisional discovery rows. Rebuilt by tools/golden_basins.py
+├── atlas/                  Schema for endpoint observations and provisional summaries
 ├── resources/              Local archive of the primary literature: papers and web
 │                           sources, each kept as original, cleaned .md, and raw
 │                           extraction. See resources/README.md.
@@ -51,12 +83,12 @@ explorations/packing/
 │   ├── verify.py           separating-axis validity check, generic over the scalar
 │   │                       type; exact or float backend, optional grid bucketing
 │   ├── quench.py           LP-in-cell quench: solve the cell, search the angles,
-│   │                       land on a named basin at solver precision
-│   ├── canonical.py        basin identity: a D4- and relabel-invariant geometric key,
-│   │                       and a contact graph canonical up to isomorphism
-│   ├── atlas.py            the deduplicated basin store, append-only and mergeable
-│   ├── closed_form.py      recognise a side as (p + q*sqrt(d))/r, or decline: a real
-│   │                       optimum has a short algebraic form, a stopping point does not
+│   │                       produce a coordinatewise-stationary endpoint candidate
+│   ├── canonical.py        provisional endpoint keys: D4- and relabel-invariant
+│   │                       geometry plus a contact graph canonical up to isomorphism
+│   ├── atlas.py            provisional endpoint-observation store and merge logic
+│   ├── closed_form.py      recognise a side as (p + q*sqrt(d))/r, or decline;
+│   │                       recognition alone proves neither convergence nor optimality
 │   └── packings/trump11.py Walter Trump's 1979 packing of 11 unit squares, exactly
 ├── derive_field.py         derives the number field from the published polynomial
 ├── verify_trump11.py       verify the packing and report what it took
@@ -93,8 +125,8 @@ those things shape how this directory works:
 - **The dangerous defects flatter.** Most soundness failures found here pointed in the
   direction that looks like success, which is why a run that beats the record is treated
   as a bug until proved otherwise.
-- **The automated gate is not what finds them.** It has caught one defect and no
-  soundness defect at all.
+- **The automated gate is not where soundness failures have been found.** No soundness
+  defect in the log was caught by it.
   The rest came from control cells whose answers were known in advance, rules written
   down before the measurement, generated views contradicting their sources, and careful
   reading. Gates confirm what someone already thought to check.
@@ -102,7 +134,7 @@ those things shape how this directory works:
 The counts live in [`defects.md`](defects.md), which is generated, and in
 [the synopsis](SYNOPSIS.md#the-defect-record), which is reconciled against the same
 source in the gate. They are deliberately not repeated here: this paragraph carried them
-once and went stale twice.
+before, and copied aggregates repeatedly went stale.
 
 ## Conventions
 
@@ -250,3 +282,7 @@ question than whether it is optimal.
 The only rigorous computer-assisted optimality proof for rotatable unit squares in any
 container covers three squares in a circle (Montanher et al.
 2018); nothing comparable exists for squares in a square.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

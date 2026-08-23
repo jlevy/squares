@@ -96,9 +96,9 @@ properties:
           type: integer
           minimum: 0
           description: >-
-            Contacts in the packing. A rigid optimum is highly contacted; a
-            barely-jammed one is not, and the difference is visible here before any
-            geometry is read.
+            Contacts reported for the packing. This is a structural descriptor, not a
+            rigidity certificate: raw counts do not establish independence, rank,
+            jamming, terminal dimension, or connectivity.
         quench_frequency:
           type: integer
           minimum: 1

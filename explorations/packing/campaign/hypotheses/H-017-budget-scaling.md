@@ -46,14 +46,23 @@ hypothesis:
 This separates the two explanations for exp-001’s `n = 11` result — needs more compute
 versus needs a different method — by the blunt instrument of multiplying the budget.
 
-[H-012](H-012-record-basins-are-rare.md) asks the same question properly, by measuring
-the record basin’s quench probability against the modal basin’s, and it does so as a
-query over a census the campaign wants regardless.
-That is strictly better evidence, so this is now the fallback rather than the plan.
+[H-012](H-012-record-basins-are-rare.md) tests the proposed explanation more directly,
+by measuring the record component’s quench probability against the modal component’s
+under a named regime, and it does so as a query over a census the campaign wants
+regardless.
+That is more discriminating evidence, so this is now the fallback rather than
+the plan.
 
-**The prediction is that it fails**, for the reason H-012 states: rigidity suggests
-Trump’s configuration has little or no attracting neighbourhood, and undirected restarts
-cannot find a point of measure zero.
+**The prediction is that it fails**, because the baseline proposer may assign very low
+hit probability to the terminal component containing Trump’s construction.
+Rigidity alone would not establish that: an isolated endpoint can have a positive-
+measure preimage under a named quench, and the repository has not supplied its own
+rigidity certificate for Trump’s packing.
+H-012 is the direct proposer-conditioned measurement.
 Recorded before the run, so the failure is evidence rather than a shrug.
 A partial improvement — say `3.89` — resolves neither branch and should be recorded
 `unresolved`, not argued into whichever story is preferred.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

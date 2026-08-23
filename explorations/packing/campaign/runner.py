@@ -76,7 +76,7 @@ REPORT = CAMPAIGN / "session-report.md"
 REACHED_BASIN = 1e-4
 # campaign/README.md, "The accept rule" clause 4: a breach means the instrument is wrong
 # rather than the strategy good, and rejects regardless of outcome.
-CONTROLS = {10: ("within", 1e-2), 12: ("not_below", 4.0)}
+CONTROLS = {10: ("within", 1e-2), 16: ("not_below", 4.0)}
 # campaign/README.md, "Budget and stop conditions".
 MAX_PER_HYPOTHESIS = 3
 # unattended.md: three in a row is a broken instrument, not three bad candidates.
@@ -180,13 +180,17 @@ def hypothesis(hid: str) -> dict[str, Any]:
 # --- STEP: queue ----------------------------------------------------------------------
 
 
-def queue() -> tuple[list[tuple[str, dict[str, Any]]], list[tuple[str, str]]]:
+def queue(
+    *, allow_during_gate: bool = False
+) -> tuple[list[tuple[str, dict[str, Any]]], list[tuple[str, str]]]:
     """Runnable hypotheses in priority order, and why every other one is not.
 
     Nothing is dropped silently: a queue that shrinks without saying why is how a night
-    ends with two rounds and no explanation.
+    ends with two rounds and no explanation. Preflight may inspect it while the gate is
+    active; ordinary status and execution paths remain mutually exclusive with the gate.
     """
-    refuse_if_gate_running()
+    if not allow_during_gate:
+        refuse_if_gate_running()
     recorded = [e for _, e in all_rounds()]
     runnable: list[tuple[str, dict[str, Any]]] = []
     skipped: list[tuple[str, str]] = []
@@ -458,7 +462,7 @@ def control_breaches(cells: list[Cell]) -> list[str]:
         if kind == "within" and abs(c.gap) > bound:
             out.append(f"n={c.n} positive control off by {c.gap:.3e}, outside {bound}")
         if kind == "not_below" and c.best < bound - 1e-12:
-            out.append(f"n={c.n} negative control returned {c.best!r}, below {bound}")
+            out.append(f"n={c.n} proved not-below control returned {c.best!r}, below {bound}")
     return out
 
 
@@ -797,9 +801,17 @@ def preflight() -> int:
         ("record replay enforces the declared cells and seeds", recipe_refused, recipe_detail)
     )
 
-    breach = control_breaches([Cell(12, [3.9])])
+    breach = control_breaches([Cell(16, [3.9])])
     checks.append(
         ("a control-cell breach is caught", bool(breach), breach[0] if breach else "not caught")
+    )
+    open_case_breach = control_breaches([Cell(12, [3.9])])
+    checks.append(
+        (
+            "an n=12 improvement is not rejected as a control breach",
+            not open_case_breach,
+            open_case_breach[0] if open_case_breach else "not a control",
+        )
     )
 
     # Built from parts so the needle does not appear literally here and match itself.
@@ -812,7 +824,7 @@ def preflight() -> int:
         )
     )
 
-    runnable, skipped = queue()
+    runnable, skipped = queue(allow_during_gate=True)
     checks.append(
         (
             "the queue is not empty",

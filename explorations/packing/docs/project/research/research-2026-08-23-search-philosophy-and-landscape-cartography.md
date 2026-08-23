@@ -277,8 +277,9 @@ The intelligence, and the risk, concentrate in **descriptor design**. Descriptor
 be computed from verified canonical data (not from raw float state), must be axes of
 *mechanism* — distinct-tilt-class count, oblique-core size, boundary versus interior
 contact split, gap topology — and must be used in combinations that separate the grid
-funnel from the rigid-rare family (tilt-class count × contact class, at minimum; the
-grid has maximal contacts but zero non-trivial tilt classes).
+funnel from oblique and record-like structures (tilt-class count × contact class, at
+minimum; the grid has maximal contacts but zero non-trivial tilt classes).
+The descriptors are discovery coordinates, not a claim that rigidity predicts rarity.
 This is the honest version of the “different loss functions” instinct: same loss,
 different retention rule, measurable either way (H-15).
 

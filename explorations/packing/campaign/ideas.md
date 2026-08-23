@@ -73,9 +73,9 @@ be unusually constrained and may have low hit probability under specified baseli
 proposers. If H-012 confirms that conditional claim, scaling the same proposer merely
 multiplies effort against the measured probability.
 
-*The premise’s own contrapositive is the part that bites.* If records are rigid, then
-non-records need not be — and an optimum can be a positive-dimensional terminal family
-rather than a point.
+*The premise omitted the non-isolated case.* Even if some record constructions are
+rigid, no converse follows: a non-record optimum can be a positive-dimensional terminal
+family rather than a point.
 The exact `n = 3` side-2 sliding family proves that the current key splits one connected
 component. At `n = 5`, two matching side/contact summaries are an unresolved identity
 signal: raw contact counts establish neither rank deficiency, dimension, nor
@@ -115,7 +115,7 @@ the ledger can report which whole families remain untried.
 | 2 | Canonical basin identity: `D₄` + relabel geometric key, contact graph up to isomorphism | shaped |  | review R-1 | Without it “basin” is undefined and basin statistics are not statistics |
 | 3 | Basin atlas as a soft-schema artifact, descriptors versioned alongside | shaped |  | strategy doc | The deliverable, on the strategy report’s framing |
 | 4 | Pair-test counter as the budget currency | shaped |  | review R-10 | Machine-independent; replaces this campaign’s move counter |
-| 4a | The angle optimum is a kink, so smooth methods cannot converge to it | registered | [H-019](hypotheses/H-019-angle-optimum-is-a-kink.md) | [exp-006](series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | **Confirmed ([exp-010](series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md)):** one-sided slopes `0.175` vs `0.384` at the optimal tilt. Descent stalls five orders short; Powell and Nelder-Mead do *worse* |
+| 4a | The angle optimum is a kink, so derivative-based smooth local models are misspecified there | registered | [H-019](hypotheses/H-019-angle-optimum-is-a-kink.md) | [exp-006](series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | **Confirmed ([exp-010](series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md)):** one-sided slopes `0.175` vs `0.384` at the optimal tilt. On the tested starts, descent stalls five orders short and the tested Powell/Nelder–Mead runs do worse; that is not a general impossibility result for derivative-free methods. |
 | 4b | Non-smooth angle search: bracket over merged angle classes | **works** |  | [exp-007](series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md)–[exp-009](series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | Reaches the analytic optimum to machine precision at `n = 5` and `n = 10` (`2e-15`, `1e-15`), where descent reaches `3e-08` and `5e-03`. No effect at `n = 11`: wrong basin |
 
 ## The premise, and the census that tests it
@@ -135,7 +135,7 @@ the ledger can report which whole families remain untried.
 | --- | --- | --- | --- | --- | --- |
 | 11 | Angle-class two-level search | registered | [H-001](hypotheses/H-001-angle-class-reduction.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | The honest continuous dimension is `n`, not `3n+1`; records use 1–2 angles |
 | 12 | δ-continuation: inflate the container, walk `δ` down with re-polish | raw | `H-013` | review H-13 | Rare-event search becomes path-following; merge-`δ` doubles as the atlas’s barrier scale |
-| 13 | MAP-Elites over mechanism descriptors | raw | `H-015` | review H-15 | Keeps the loss, changes what is retained. Descriptors must separate the grid funnel from the rigid-rare family |
+| 13 | MAP-Elites over mechanism descriptors | raw | `H-015` | review H-15 | Keeps the loss, changes what is retained. Descriptors must separate the grid funnel from oblique and record-like structures without assuming rigidity predicts rarity |
 | 14 | Neighbor-transfer seeding from `n ± 1` records | raw | `H-004` | review H-4 | How the human record table actually advances |
 | 15 | Superdisk continuation from circles to squares | raw | `H-014` | review H-14 | Last in line: the only item needing new geometry |
 | 16 | Stock annealer, all cells, fixed budget | registered | [H-016](hypotheses/H-016-stock-annealer-reaches-standing-best.md) | this campaign | Refuted by exp-001. The null |

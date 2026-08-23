@@ -37,19 +37,20 @@ The **subject** is the instrument and the precision the numbers were taken at.
 Never extrapolate across it: an `f64_screen` number and an `exact` number are different
 kinds of fact.
 
-The **instance axis is `n`**, and the first three cells each have a different job:
+The **instance axis is `n`**, and the standing cells have different jobs:
 
 | `n` | role | standing best | why this cell |
 | --- | --- | --- | --- |
 | 10 | **positive control** (machinery only) | `3 + 1/√2 = 3.70710678…`, proved | Known answer, and *not* the grid. But its mechanism is a 45° tilt, so passing it proves the machinery and says nothing about finding an oblique record — see the caveat below. |
-| 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case, smallest open gap with a non-trivial record, degree-8 and rigid. |
-| 12 | **negative control** | `4`, the trivial grid | The 4×4 grid is almost certainly optimal. A run that “beats” it has found a bug, not a packing. |
+| 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case and a degree-8 side construction; a strong rigidity candidate, not yet rank-certified here. |
+| 12 | **open-case calibration** | `4`, the trivial grid | The 4×4 grid is the standing best, not a proved optimum. A valid lower side would be a discovery and must enter exact promotion. |
+| 16 | **proved not-below control** | `4`, proved | A reported side below `4` is known to be invalid. This is the valid replacement for the old `n=12` guard. |
 | 17 | **mechanism-matched calibration** | `4.67553009360455`, Bidwell 1998, still open | The nearest case whose record uses genuinely *oblique* structure — the corpus records tilts of `0°` and `±40°`, so two non-trivial orientations against a grid frame. The only cell here that speaks to record-*finding* rather than machinery. |
 
-**The first three cells calibrate machinery, not strategy.** Both proved cases in the
-ladder are 45°-tilt mechanisms, symmetric and reachable by blind search; `n = 11` needs
-an oblique core at `≈ 40.182°`, a mechanism **no proved case exercises**. An engine can
-ace `n = 5` and `n = 10` and remain structurally blind to what the target demands.
+**The proved ladder cells calibrate machinery, not strategy.** Both proved cases are
+45°-tilt mechanisms, symmetric and reachable by blind search; `n = 11` needs an oblique
+core at `≈ 40.182°`, a mechanism **no proved case exercises**. An engine can ace `n = 5`
+and `n = 10` and remain structurally blind to what the target demands.
 
 That is why `n = 17` joins the standing sweep rather than waiting: it is cheap to carry,
 and rediscovering an oblique record is the only calibration that speaks to
@@ -117,7 +118,7 @@ Recorded on every round; the role says what each may conclude.
 | `moves`, `seconds` | cost | engine summary; reported alongside as a courtesy |
 | `overlap` | **guard** | total penetration depth of the reported packing; a non-zero value at screen tier invalidates the run |
 | `selftest_passed` | **guard** | `sqsearch --selftest` before any run is recorded |
-| control cells | **guard** | `n=10` must land within `1e-2`; `n=12` must not go below `4` |
+| control cells | **guard** | `n=10` must land within `1e-2`; proved `n=16` must not go below `4` |
 | `restarts`, `accepted`, `moves_per_sec` | mechanism | engine summary |
 | spread of `best_side` across seeds | mechanism | five seeds per cell, always |
 
@@ -138,8 +139,9 @@ A candidate strategy is **accepted** when all of:
    Overlapping ranges mean *no detectable effect*, never “a small win”.
 3. **Validity.** Every reported configuration has `overlap == 0` at screen tier, and the
    engine selftest passed in the same invocation.
-4. **Guards.** The `n=10` positive control lands within `1e-2`; every stored pose passes
-   an independent geometry check; and deliberately invalid fixtures are rejected in the
+4. **Guards.** The `n=10` positive control lands within `1e-2`; the proved `n=16`
+   not-below control never reports a side under `4`; every stored pose passes an
+   independent geometry check; and deliberately invalid fixtures are rejected in the
    same instrument build.
    `n=12` is an open research case, not a negative control: a valid side below `4` would
    require exact promotion, not automatic rejection.

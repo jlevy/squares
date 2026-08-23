@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 42
+count: 65
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -1082,7 +1082,7 @@ defects:
   direction: flattering
   detected_by: review
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     Campaign schemas, runbooks, and rounds label n = 12 as a negative control whose
     correct outcome is failure to beat the 4 by 4 grid. But s(12) = 4 is not proved and
@@ -1095,9 +1095,582 @@ defects:
     breach. Any round accepted because n = 12 behaved this way lacks the claimed
     negative-control evidence.
   fix: >-
-    none yet. Reclassify n = 12 as an open target/calibration, invalidate the associated
-    control verdicts, and use proved optima plus deliberately invalid or dominated
-    fixtures for known-answer negative behavior.
+    n = 12 is now an open-case calibration in the schema, round, runbook, synopsis and
+    series docs. campaign/ledger.py resolves every positive- or negative-control n
+    against the frontier corpus and refuses the role unless that instance is proved.
+    Deliberately invalid geometry fixtures remain the negative behavior check.
+  regression: >-
+    tools/controls.yaml mutates exp-004 back to role negative_control and requires the
+    campaign ledger to reject it because frontier/n-012.md is open.
+  bead: think-zt29
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-043
+  title: Runner validation happened after archival and could be bypassed during record
+  date: '2026-08-23'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    runner.py appended command output before parsing or guard checks, then rebuilt cells
+    during `record` from only n, seed, and best_side. A row with nonzero reported overlap
+    could therefore be present in the authoritative archive, and direct or recovery-path
+    record invocation could turn it into a scientific verdict without replaying the
+    guards.
+  consequence: >-
+    Guard-invalid data could survive the very failure that detected it and later acquire
+    a complete-looking verdict. Unattended operation could report an invalid packing or
+    criterion result as accepted.
+  fix: >-
+    One result-line validator now guards live ingestion and record-time replay. Invalid
+    rows are refused before they become scientific cells, and a guard failure releases
+    rather than records the round.
+  regression: >-
+    campaign/runner.py preflight watches a bad-overlap row fail before accepted archival
+    and watches a tampered archive fail again at record time.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-044
+  title: Result validity and self-test status are assertions from the proposer itself
+  date: '2026-08-23'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: critical
+  status: outstanding
+  what: >-
+    The runner contract requires only a scalar overlap field emitted by the same command
+    that proposes the result; quench output stores no complete pose. It also hardcodes
+    selftest_passed true without executing and recording a test. The trust boundary has
+    no independent geometry from which to recompute containment or separation.
+  consequence: >-
+    A fabricated side and overlap zero, a stale producer accumulator, or an untested
+    binary can pass the archive boundary. Later exact promotion is impossible when the
+    pose that must be checked was discarded.
+  fix: >-
+    none yet. Require a full pose or content-addressed pose artifact, independently
+    verify it in a separate sqpack process, bind the verifier result to the row digest,
+    and derive self-test status from an executed binary hash and exit status.
+  regression: none
+  bead: think-ldq2
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-045
+  title: The generic criterion evaluator silently reduces unlike hypotheses to side gap
+  date: '2026-08-23'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    runner.py ignores criterion.shape and evaluates every runnable hypothesis through
+    best_side minus standing_best. That applies to record-gap hypotheses but not pair
+    tests to optimum, discovery coverage, record-to-modal hit ratios, return fractions,
+    or one-sided derivative ratios. Some prose thresholds cannot even be converted to
+    the float the generic path expects.
+  consequence: >-
+    Declaring a hypothesis instrument-ready can make the runner crash or, worse, produce
+    a verdict about a different metric while presenting it as the registered claim.
+  fix: >-
+    none yet. Register typed evaluator implementations by criterion shape, validate
+    their result schemas, and make preflight exercise positive and negative fixtures for
+    every instrument-ready hypothesis.
+  regression: none
+  bead: think-rrht
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-046
+  title: The unattended runner is not a closed, checked state machine
+  date: '2026-08-23'
+  layer: record
+  class: robustness
+  detected_by: review
+  severity: critical
+  status: outstanding
+  what: >-
+    Queueing ignores prerequisites; execute and record do not require an in-progress
+    state; one deadline is shared across cells and may exceed the lease or session;
+    process and persistence failures escape the failure policy; git return codes are
+    discarded; broad campaign staging and --no-verify can still return success after a
+    failed commit; release is not durably persisted; and lease offsets are stripped
+    rather than converted to UTC.
+  consequence: >-
+    Work can run out of order, terminal rounds can be rewritten, leases can be judged
+    against the wrong time, and a scientific success can be reported without durable
+    persistence. These failures are worst during unattended operation.
+  fix: >-
+    none yet. Encode and enforce every transition, prerequisite, lease and deadline;
+    check narrow git operations; recompute the queue after transitions; and make any
+    execution, validation, or persistence failure a durable non-scientific terminal
+    state.
+  regression: none
+  bead: think-ldq2
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-047
+  title: Contact certificates changed under container reflection while the D4 test checked only geometry
+  date: '2026-08-23'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The contact key ranked folded angle classes by representative value. Reflection maps
+    a to pi/2-a and can reverse those ranks, changing an attributed contact graph for the
+    same packing. The existing D4 test asserted invariance only for the geometric key.
+  consequence: >-
+    One physical endpoint could be split by orientation, inflating component counts and
+    making its observed frequency look smaller. The named symmetry test stayed green
+    because it omitted the failing half of the identity.
+  fix: >-
+    Contact certificates are minimized across all eight container images and the
+    independent canonical checker compares both key fields for every image.
+  regression: >-
+    tools/canonical_check.py exercises all eight D4 transforms and square relabelling for
+    the full key pair.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-048
+  title: Tolerance grouping and exact hash pairs do not form a stable basin equivalence relation
+  date: '2026-08-23'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    Greedy angle-class grouping is order-dependent near its tolerance and is not a
+    transitive circular equivalence. The key API reports contact-only agreement as a
+    quantization ambiguity, but Atlas.add merges only exact geometric/contact tuples and
+    has no disagreement graph or later union operation.
+  consequence: >-
+    Relabelling or a sub-quantum perturbation can change row count. Forced equality and
+    forced inequality are both unsupported, so frequency and saturation depend on
+    input order and representational thresholds.
+  fix: >-
+    none yet. Define deterministic circular clustering and an explicit equivalence or
+    ambiguity relation with stable union semantics, then sweep boundary perturbations
+    and quantums under permutation controls.
+  regression: none
+  bead: think-siui
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-049
+  title: Contact-graph canonicalization is factorial on sparse symmetric endpoints
+  date: '2026-08-23'
+  layer: tooling
+  class: performance
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    The canonicalizer exhaustively individualizes ambiguous colour classes without
+    memoization or automorphism pruning. An empty-graph benchmark grew from 0.098 seconds
+    at n=7 to 7.91 seconds at n=9 even though sparse, repeated-attribute graphs are normal
+    early and non-converged endpoints.
+  consequence: >-
+    Canonicalization can dominate quenching, stall the intended n=10 census, and make a
+    tooling blow-up look like evidence that the mathematical landscape is enormous.
+  fix: >-
+    none yet. Adopt maintained canonical labeling or automorphism-aware memoization,
+    special-case regular empty classes, and publish adversarial latency and memory
+    envelopes through n=100.
+  regression: none
+  bead: think-siui
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-050
+  title: The atlas promotes non-converged stopping points and cannot reconstruct discovery order
+  date: '2026-08-23'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: critical
+  status: outstanding
+  what: >-
+    Atlas.add stores every offered endpoint as a basin row even when converged is false.
+    The artifact retains aggregate proposal and frequency counts but not immutable event
+    order, first-seen proposal, failures, censoring, or promotion history.
+  consequence: >-
+    Budget-censored termination artifacts become local optima, while the discovery curve
+    used to claim saturation cannot be reconstructed from the saved data. Both inflate
+    apparent landscape richness and can make records look rarer.
+  fix: >-
+    none yet. Store provenance-complete observations first, derive promoted component
+    representatives only from independently valid and sufficiently certified states,
+    and regenerate all curves from immutable ordered events.
+  regression: none
+  bead: think-31k1
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-051
+  title: Atlas frequencies merge without regime, shard, schema, or identity provenance
+  date: '2026-08-23'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    Atlas headers omit proposer/quench versions, seed blocks, budgets, validity tiers,
+    run ids and shard identity. Merge checks only n, so incompatible quantization regimes
+    combine, self-merge doubles counts, duplicate shards can be re-added, wrong-n keys
+    enter a store, and load trusts unvalidated counts. The saved schema reference is not
+    location-stable.
+  consequence: >-
+    A frequency can combine incomparable experiments or count one sample twice and still
+    look like a reproducible probability. There is no audit path back to observations.
+  fix: >-
+    none yet. Give observations regime digests and stable ids; enforce schema, n,
+    identity, count and regime invariants; make merge an idempotent union; and derive
+    conditional tables by regime.
+  regression: none
+  bead: think-31k1
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-052
+  title: Coordinatewise quench stopping was reported as a certified local optimum
+  date: '2026-08-23'
+  layer: quench
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    A clean cyclic one-angle sweep establishes only no detected coordinate improvement
+    under finite brackets and tolerances. Coupled directions may improve; golden-section
+    assumes an unverified unimodal bracket over a nonsmooth multi-cell objective. The
+    atlas and docs nevertheless promoted converged true as a local optimum. Related
+    prose turned two tested derivative-free failures into a theorem that Powell and
+    Nelder-Mead cannot converge to a corner.
+  consequence: >-
+    A coordinatewise saddle, missed bracket minimum, or tolerance-limited point can be
+    counted as a basin. Method choices can also be ruled out by an invalid generalization
+    from one implementation and start.
+  fix: >-
+    The registered claim and living summaries now scope the evidence to Trump's tested
+    one-dimensional shared-tilt slice and treat Powell/Nelder-Mead failures as empirical.
+    Certification remains open: use honest states such as coordinatewise_stationary;
+    test coupled feasible directions, multiple brackets and nonsmooth active-set/KKT
+    conditions; reserve locally_certified for an independently checked neighborhood
+    claim.
+  regression: none
+  bead: think-zcx4
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-053
+  title: The generic number-field API accepts reducible or multi-root certificates
+  date: '2026-08-23'
+  layer: verifier
+  class: soundness
+  direction: neutral
+  detected_by: review
+  severity: critical
+  status: outstanding
+  what: >-
+    NumberField documents an irreducible minimal polynomial and an interval containing
+    exactly one real root but checks only an endpoint sign change. For
+    (x-1)(x-2) on (0,7/5), the selected root is 1 while the quotient representation says
+    alpha-1 is nonzero. Equality can be wrong and sign refinement can fail to terminate.
+  consequence: >-
+    The advertised API for a new packing can accept malformed field metadata and return
+    unsound exact comparisons. The built-in Trump witness remains independently checked;
+    the generic trust boundary does not.
+  fix: >-
+    none yet. Verify primitive squarefree irreducibility and exactly one interval root
+    with a Sturm sequence, or require independently checked proof-carrying field
+    metadata; resource-bound every sign decision.
+  regression: none
+  bead: think-zcx4
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-054
+  title: Move budgets overshoot and final-best records cannot support trajectory claims
+  date: '2026-08-23'
+  layer: engine
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    run_chain checks its move budget only between full anneals, so it can overshoot by
+    nearly one anneal and has no exact pair-test meter. It initializes the retained best
+    to the grid and records only an improving valid best, yet grid-valued output was read
+    as proof the trajectory never left that basin or explored oblique structure.
+  consequence: >-
+    Equal-budget comparisons can spend unequal work, and a lossy final summary is used to
+    infer mechanism and exploration behavior it never observed.
+  fix: >-
+    none yet. Cap inner work to the remaining budget, count pair tests exactly, and retain
+    event summaries and a near-miss reservoir sufficient to distinguish visits,
+    feasibility transitions, orientation classes and censoring from the final fallback.
+  regression: none
+  bead: think-rrht
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-055
+  title: An algebraic trigonometric coordinate was used to call the angle algebraic
+  date: '2026-08-23'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The research report inferred that Trump's nonzero tilt angle in radians was an
+    algebraic number of degree 8 because sec(a), tan(a/2), and the side are algebraic.
+    Lindemann-Weierstrass implies the opposite: a nonzero algebraic angle would make
+    exp(ia) transcendental, while algebraic cos(a) would force it algebraic.
+  consequence: >-
+    The program made the exact reconstruction problem look like ordinary algebraic-angle
+    recovery and misstated the nature of its central construction.
+  fix: >-
+    Living reports now distinguish the transcendental angle from algebraic cos, sec,
+    tan(a/2), and side coordinates.
+  regression: none
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-056
+  title: Grid optimality for m squared minus 3 was generalized beyond the proved cases
+  date: '2026-08-23'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The search-strategy corpus said the m by m grid is optimal for every n=m^2-3.
+    Available proofs cover the finite cases m=3 through 7; n=61, 78 and 97 remain open
+    in the repository. Nagamochi's general theorem covers m^2, m^2-1 and m^2-2, not this
+    next family.
+  consequence: >-
+    Three live open questions were classified as solved and removed from the search and
+    proof frontier.
+  fix: >-
+    The catalogue and generated views now scope the result to m=3 through 7 and identify
+    61, 78 and 97 as the next open cases.
+  regression: none
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-057
+  title: One n=17 regime was generalized to oblique-search blindness at every n
+  date: '2026-08-23'
+  layer: docs
+  class: validity
+  direction: conservative
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-020's title and interpretation claimed the annealer cannot find an oblique record
+    at any n, while its registered criterion measures one implementation, n=17, five
+    seeds and 1e8 moves per chain. A retained grid best also does not reveal whether the
+    trajectory visited oblique configurations.
+  consequence: >-
+    A scoped negative result was used to rule out a method family and explain failures at
+    other instances and budgets without supporting observations.
+  fix: >-
+    H-020 and the idea board now state the exact positive criterion and scope its
+    refutation to the registered n, seeds, budget, implementation and lossy retention
+    record.
+  regression: none
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-058
+  title: The claimed handover gate omitted promised checks and contradicted living artifacts
+  date: '2026-08-23'
+  layer: tooling
+  class: bookkeeping
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The handover claimed a green enforced perimeter while atlas and historical regression
+    checks were not invoked, strict failed on an unlisted atlas, project uv commands were
+    unfrozen, and living docs carried stale round, hypothesis, gap-order, timing and
+    frontier statements.
+  consequence: >-
+    A handoff could be called ready while its promised checks were absent or red, and a
+    verification run could modify dependency state. Readers saw summaries inconsistent
+    with the artifacts they purported to govern.
+  fix: >-
+    The local gate now wires the named checks, freezes project uv resolution, reconciles
+    README/synopsis/generated views, and records per-step timings. GitHub PR CI remains a
+    separate open infrastructure task on think-zt29.
+  regression: >-
+    test.sh, README/synopsis reconciliation, generated-view checks, and mutation controls
+    for strict/deep and layout drift.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-059
+  title: The golden map mixed unhermetic discovery snapshots with mathematical pass-fail assertions
+  date: '2026-08-23'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: critical
+  status: outstanding
+  what: >-
+    The golden command originally used an unbuilt stale binary, could write before
+    rejecting oracle failures, allowed incomplete convergence, paired the best side with
+    the first pose for an identity, serialized below its evidence floor, and byte-compared
+    stochastic discovery rows as though any change were a mathematical regression. The
+    committed n=10 row did not reproduce from source.
+  consequence: >-
+    Stale or internally mismatched data could be blessed, while a legitimate proposer or
+    quench improvement failed exactly like a mathematical error. The fixture could both
+    miss regressions and reject progress.
+  fix: >-
+    Source build, selected control seeds, convergence/validity refusal, matching pose-side
+    verification, tier-aligned serialization, atomic update and strict/deep execution are
+    fixed. Still open: separate immutable mathematical oracles from characterization
+    snapshots and store the poses needed for independent fast-path validation.
   regression: none
   bead: think-zt29
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-060
+  title: Strict mode skipped deep regeneration and the atlas negative path was never exercised
+  date: '2026-08-23'
+  layer: tooling
+  class: bookkeeping
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    Strict and deep were independent flags even though the scientific handover invoked
+    only strict, so it trusted a pose-free committed golden instead of executing its
+    producer. The cheap atlas check offered only converged true values while claiming to
+    test non-convergence accounting.
+  consequence: >-
+    Removing or ignoring the producer-level D-030 recurrence path could leave the named
+    strict gate green, and the purported false-path assertion could not fail.
+  fix: >-
+    Strict implies deep, deep builds and executes the source producer, and the atlas
+    checker offers an explicit false convergence field and asserts the counter.
+  regression: >-
+    tools/controls.yaml mutates the strict-to-deep implication and requires the gate to
+    report the missing marker; the atlas check carries the explicit false value.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-061
+  title: Unrecognised endpoint rows discard the evidence needed to classify them
+  date: '2026-08-23'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    Golden and atlas rows retain side strings, hashes, convergence counts and a short-form
+    label but not the pose, active separating cell, active constraints, residuals,
+    stopping reason or precision ladder. An unrecognised singleton can therefore be an
+    unfinished quench, coordinatewise saddle, terminal-family sample, quantization
+    duplicate, genuine higher-degree endpoint, or numerical instability with the same
+    stored appearance.
+  consequence: >-
+    Unknown is read as novel local optimum or higher algebraic degree without enough data
+    to distinguish those explanations. The raw run cannot be replayed or promoted.
+  fix: >-
+    none yet. Retain full evidence and classify through budget/precision ladders,
+    directional and KKT checks, component analysis and exact promotion before any basin
+    or novelty label.
+  regression: none
+  bead: think-aans
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-062
+  title: The D-042 correction left an executable n=12 rejection in the unattended runner
+  date: '2026-08-23'
+  layer: record
+  class: soundness
+  direction: conservative
+  detected_by: inspection
+  severity: high
+  status: fixed
+  what: >-
+    The schema and several living documents reclassified n=12 as open, but runner.py
+    still treated any side below 4 as a known-answer control breach. Its preflight
+    reinforced that stale rule with a synthetic n=12 result at 3.9.
+  consequence: >-
+    The unattended system would reject and release a valid candidate improving the open
+    n=12 upper bound, precisely the discovery this program is meant to find.
+  fix: >-
+    The executable not-below control now uses proved s(16)=4. Runner preflight separately
+    asserts that an n=12 improvement is not a control breach, and active summaries call
+    n=12 an open-case calibration.
+  regression: >-
+    runner.py preflight checks both directions, and tools/controls.yaml restores the
+    stale n=12 mapping and requires that check to fail.
+  recurrence_of: D-042
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-063
+  title: A non-converse was called the contrapositive of the rigidity premise
+  date: '2026-08-23'
+  layer: docs
+  class: soundness
+  direction: neutral
+  detected_by: inspection
+  severity: medium
+  status: fixed
+  what: >-
+    The strategy board called the possibility that non-record optima are non-rigid the
+    contrapositive of the claim that records are rigid. It is not: record implies rigid
+    would contrapose to not rigid implies not record, while no statement about every
+    non-record follows.
+  consequence: >-
+    A basic logical error obscured the real issue, which is that the strategy simply
+    failed to model positive-dimensional terminal sets and had no evidence connecting
+    rigidity to proposer-conditioned hit probability.
+  fix: >-
+    The strategy now states the missing non-isolated case directly. Related hypothesis,
+    atlas, quench and descriptor prose no longer derives rarity, dimension or method
+    impossibility from rigidity, contact count or a one-dimensional kink.
+  regression: none
+  recorded_in: campaign/ideas.md
+- id: D-064
+  title: Runner preflight was unable to run inside the gate that mutation-tested it
+  date: '2026-08-23'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  severity: medium
+  status: fixed
+  what: >-
+    The D-062 mutation control invoked runner.py preflight while test.sh's gate marker
+    was active. Preflight called the ordinary queue path, which correctly excludes live
+    campaign activity during a gate, so it refused before reaching the mutated n=12
+    assertion.
+  consequence: >-
+    The full gate was red even though the scientific rule was correct, and the new
+    regression control supplied no evidence that the n=12 discovery path was protected.
+  fix: >-
+    Queue inspection has an explicit read-only gate allowance used only by preflight;
+    status and all mutating or executing paths retain the exclusion.
+  regression: >-
+    The n=12 mutation control runs runner preflight from inside the normal full gate and
+    requires the named assertion to fail.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-065
+  title: The README repeated a numeric gate claim after declaring those counts removed
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: 'one defect, from D-064 until the next post-gate read'
+  severity: low
+  status: fixed
+  what: >-
+    README.md said that numeric defect counts were deliberately kept only in generated
+    or reconciled views, but the preceding paragraph still claimed that the automated
+    gate had caught one defect. D-064 was detected by the gate, making the claim false
+    while every check passed.
+  consequence: >-
+    The high-level operating guide contradicted both the defect source and its own
+    anti-duplication policy in the exact class of recurrence D-028 documented.
+  fix: >-
+    The README now states only the decision-relevant qualitative fact: no soundness
+    defect has been caught by the gate. The checker derives that fact from defects.yaml
+    and forbids a hand-written numeric gate-defect aggregate in README.md.
+  regression: >-
+    tools/check_readme.py reconciles the qualitative gate-soundness claim against
+    defects.yaml and rejects repeated numeric gate-defect aggregates
+  recurrence_of: D-028
+  recorded_in: README.md

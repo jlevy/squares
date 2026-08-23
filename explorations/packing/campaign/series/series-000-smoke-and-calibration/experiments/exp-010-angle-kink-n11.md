@@ -70,7 +70,9 @@ experiment:
     reason: >-
       Confirms H-019: the one-sided slopes are 0.1747 and 0.3841, a ratio of 2.198 that
       is stable over five decades on each side, so the optimum of s(theta) is a corner
-      rather than a smooth minimum - which is why no smooth local model converges to it.
+      rather than a smooth minimum on this shared-tilt slice. A smooth local model is
+      misspecified at that point; this round does not establish a general convergence
+      impossibility.
     commit: '8b450a1'
 ---
 # exp-010 — the corner
@@ -110,9 +112,11 @@ basin radius.
 
 Method choice for the quench spine’s angle half, and not as a preference:
 
-- **Measured to fail:** finite-difference descent stalls five orders short
-  ([exp-006](exp-006-lp-quench-n5-n10-n11.md)); Powell and Nelder-Mead do *worse* than
-  descent, because a smooth local model is exactly the wrong model at a corner.
+- **Measured to fail in the tested implementations and starts:** finite-difference
+  descent stalls five orders short ([exp-006](exp-006-lp-quench-n5-n10-n11.md)); the
+  tested Powell and Nelder–Mead runs do *worse* than descent.
+  The kink explains the derivative-based model failure; it does not prove that
+  derivative-free Powell or Nelder–Mead methods can never converge.
 - **Measured to work:** golden-section bracketing over merged angle classes reaches the
   analytic optimum to machine precision on both proved cells
   ([exp-007](exp-007-quench-bracket-n5.md), [exp-008](exp-008-quench-bracket-n10.md)).
