@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 29
+count: 30
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -678,3 +678,48 @@ defects:
     NOT approach the analytic optimum, and quench_bracket on the same input must reach
     1e-12. A probe that froze the angles and claimed to be a quench would fail it.
   recorded_in: docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md
+
+- id: D-030
+  title: The angle window narrowed on a schedule, so a cold quench could never arrive
+  date: '2026-08-23'
+  layer: quench
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  severity: high
+  status: fixed
+  what: >-
+    `quench_bracket` narrowed its angle search window unconditionally at the end of every
+    sweep (`span = max(span * 0.5, 1e-9)`), and `_bracket_min` may only move an angle
+    within `+-span`. From annealer output that is right: the angles arrive nearly correct
+    and want small corrections. From a cold start they must move O(0.1) rad, and by sweep
+    12 the window was already 2.4e-05. The search descended until the window ran out and
+    then crawled - improving by about 1e-09 a sweep, forever above the 1e-12 improvement
+    threshold, so `converged` never became true and `max_sweeps: 12` was reached every
+    time. More budget did not help: 12, 40, 120 and 400 sweeps gave 3.078187, 3.078175,
+    3.078175 and 3.078174, still descending, against the proved s(5) = 2.707107.
+  consequence: >-
+    The direction is flattering, which is the dangerous one. A census built on this reads
+    every interrupted descent as a distinct basin: measured at n = 5, 11 of 12 uniform
+    multistarts hit the sweep limit and the atlas recorded twelve stopping points as
+    twelve distinct basins, every structural invariant passing green. The resulting
+    discovery curve never plateaus, which presents as "the landscape is enormous" rather
+    than "the instrument stopped early" - and H-011's saturation criterion, H-012's
+    basin-rarity ranking and every basin statistic downstream would have inherited it.
+  fix: >-
+    The window now narrows only when a sweep FAILS to improve, which is the standard
+    pattern-search rule and gives the schedule a reason rather than a cadence. Measured
+    over six cold n = 5 starts and the polish case: unconditional halving converged 0 of
+    8 and reached 3.048; adaptive narrowing at the same starting window converged 8 of 8
+    and reached 2.707106781187, the proved optimum exactly. A LARGER starting window was
+    tried and is worse (2.768), so the schedule was the whole defect and the default
+    window is unchanged. The narrowing factor is 0.1 rather than 0.5, also measured:
+    halving needs 26 narrowing sweeps to reach the floor and can exhaust the wall budget
+    before the free-sweep certificate is reached, converging 5 of 6 where 0.1 converges
+    6 of 6, at half the wall time and identical accuracy.
+  regression: >-
+    tools/atlas_check.py, labelled as the convergence guard: a census whose quenches
+    mostly failed to converge is refused, measured on the census only rather than after
+    the deduplication step. The six structural invariants around it all passed while this
+    was live, so the guard is the one that had to exist. Also negative-controlled.
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md

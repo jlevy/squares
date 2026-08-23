@@ -197,6 +197,15 @@ echo "== basin identity =="
 $PY tools/canonical_check.py
 
 echo
+echo "== basin atlas =="
+# The census's output, and the guard that says whether the census measured the landscape
+# or its own budget. Six structural invariants -- dedup, append-only, round trip, merge,
+# schema -- all passed while 11 of 12 quenches were silently hitting a sweep limit and
+# being recorded as distinct basins (D-030). So the seventh, convergence, is the one
+# that had to exist: a store can only be as honest as what it is fed.
+$PY tools/atlas_check.py
+
+echo
 echo "== negative controls =="
 # Every guard in this directory, watched failing. A check nobody has seen fail is not a
 # check, and until now each of these was run once by hand and thrown away.

@@ -38,6 +38,8 @@ explorations/packing/
 ├── frontier/               What is known about s(n) for every n <= 100: one
 │                           schema-validated artifact per case, plus editorial.
 │                           See frontier/README.md.
+├── atlas/                  The basin atlas: one deduplicated store per n, keyed by
+│                           canonical basin identity, plus its schema. Append-only.
 ├── resources/              Local archive of the primary literature: papers and web
 │                           sources, each kept as original, cleaned .md, and raw
 │                           extraction. See resources/README.md.
@@ -48,6 +50,9 @@ explorations/packing/
 │   │                       type; exact or float backend, optional grid bucketing
 │   ├── quench.py           LP-in-cell quench: solve the cell, search the angles,
 │   │                       land on a named basin at solver precision
+│   ├── canonical.py        basin identity: a D4- and relabel-invariant geometric key,
+│   │                       and a contact graph canonical up to isomorphism
+│   ├── atlas.py            the deduplicated basin store, append-only and mergeable
 │   └── packings/trump11.py Walter Trump's 1979 packing of 11 unit squares, exactly
 ├── derive_field.py         derives the number field from the published polynomial
 ├── verify_trump11.py       verify the packing and report what it took

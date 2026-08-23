@@ -962,13 +962,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Twenty-nine defects, [one line each](defects.md), generated from `defects.yaml` and
-checked in the gate.
+Thirty defects, [one line each](defects.md), generated from `defects.yaml` and checked
+in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 6 | asserted something false about the mathematics |
-| validity | 6 | was correct, but the measurement did not bear on the question |
+| validity | 7 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 14 | recorded something its own evidence contradicts |
 | robustness | 2 | did not finish, or finished only by luck |
 | performance | 1 | worked, but cost far more than it should |
@@ -979,14 +979,21 @@ Two observations the log exists to make.
 error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught one defect in twenty-nine, and no soundness defect
-ever.** Every soundness failure was found by a control cell whose answer was known in
-advance, a rule written down before the measurement, a generated view contradicting its
-source, or someone reading carefully.
+**The automated gate has caught one defect in thirty, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. The one the gate did catch ([D-024](defects.md)) is a bookkeeping defect,
 found by a contiguity check—which is the pattern, not an exception: gates are good at
 the mechanical classes and have never once caught the mathematics being wrong.
+
+The newest entry sharpens the point rather than softening it.
+[D-030](defects.md) — the quench’s angle window narrowing on a schedule, so a cold start
+could never arrive — was caught by a **control cell**: `n = 5`, whose answer is proved,
+where the census kept landing at `3.078` against `2.707107`. Six structural invariants
+around the store all passed green while it was live, because they check the store and
+not what it is fed.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).

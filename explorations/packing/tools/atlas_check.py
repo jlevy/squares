@@ -67,11 +67,17 @@ def main() -> int:
 
     # Build a small real census at n = 5, where s(5) = 2 + 1/sqrt(2) is proved and the
     # landscape is small enough to sanity-check by eye.
+    # Six seeds at a realistic budget, not twelve at a token one. Measured 2026-08-23:
+    # a cold n = 5 quench takes 6.5-45 s (median ~12 s) to reach its free-pass
+    # certificate. The first version of this check allowed 10 s, so eight of twelve runs
+    # were cut off mid-descent -- and the store then recorded eight interrupted
+    # descents as eight distinct basins. A budget that truncates the instrument
+    # measures the budget.
     rng = random.Random(20260823)
     atlas = Atlas(n=5)
-    for seed in range(12):
+    for seed in range(6):
         x, y, theta = random_start(5, 3.2, rng)
-        r = quench_bracket(x, y, theta, time_budget=10.0)
+        r = quench_bracket(x, y, theta, time_budget=90.0)
         atlas.add(canonical_key(r.x, r.y, r.theta, r.side), seed=seed, converged=r.converged)
 
     # Census-only figures, captured BEFORE the deduplication step below re-adds rows
