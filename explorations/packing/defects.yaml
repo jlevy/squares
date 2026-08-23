@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 26
+count: 27
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -572,3 +572,31 @@ defects:
     database, which lives on `tbd-sync` and not in the tree.
   regression: none
   recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+- id: D-027
+  title: A generated view was left reflowable by the Markdown auto-formatter
+  date: '2026-08-23'
+  layer: tooling
+  class: bookkeeping
+  detected_by: review
+  latent_for: 'one day, on every machine with the pre-commit hook installed'
+  severity: medium
+  status: fixed
+  what: >-
+    `defects.md` is rebuilt byte-for-byte by `render_defects.py` and drift-checked by
+    `render_defects.py --check`, exactly like `campaign/ledger.md` -- but only
+    `ledger.md` was named in `.flowmarkignore`. `flowmark --check` reports that it would
+    reflow `defects.md` today.
+  consequence: >-
+    The lefthook pre-commit hook runs `make format` whenever any Markdown is staged. On
+    a machine with hooks installed, committing anything would have reformatted
+    `defects.md` and left the gate failing until someone regenerated it by hand. The
+    reasoning was already written down beside the `ledger.md` entry -- "formatting it
+    makes the check fail forever" -- and simply was not carried across to the second
+    generated view.
+  fix: >-
+    `defects.md` is exempted. More to the point, the list is no longer trusted: any file
+    carrying the generated-by banner must appear in `.flowmarkignore`, checked by
+    `tools/check_generated_exempt.py` in the gate, so a third generated view cannot
+    repeat this.
+  regression: 'tools/check_generated_exempt.py in test.sh, with a negative control in tools/controls.yaml'
+  recorded_in: tools/check_generated_exempt.py

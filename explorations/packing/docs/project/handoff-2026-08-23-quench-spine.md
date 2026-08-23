@@ -50,13 +50,13 @@ Two are done, four are not:
 | `descriptors` | `think-hhon` | open | H-015 steering, H-003 retention |
 | `meter` | `think-b4jc` | open | any comparison between proposers, in machine-independent units |
 
-**Resolving the bead ids.** The `think-*` ids above are *local* `tbd` ids. They are not
-stored in the repository and not in the synced bead data either, which keys every issue
-by a ULID (`is-01...`) — so `think-eq6l` cannot be looked up from a fresh clone. Restore
-the database from the [`tbd-sync`](../../../../.tbd/config.yml) branch first (`tbd sync`),
-after which `tbd show think-eq6l` and `tbd list --spec <the plan>` resolve. Until then,
-the durable handle for each row is the **block name in the first column**: every one is a
-checklist item under *Phase 1: The quench spine* in
+**Resolving the bead ids.** The `think-*` ids above are *local* `tbd` ids.
+They are not stored in the repository and not in the synced bead data either, which keys
+every issue by a ULID (`is-01...`) — so `think-eq6l` cannot be looked up from a fresh
+clone. Restore the database from the [`tbd-sync`](../../../../.tbd/config.yml) branch
+first (`tbd sync`), after which `tbd show think-eq6l` and `tbd list --spec <the plan>`
+resolve. Until then, the durable handle for each row is the **block name in the first
+column**: every one is a checklist item under *Phase 1: The quench spine* in
 [the plan spec](specs/active/plan-2026-08-22-minimal-packing-toolkit.md), which needs no
 tooling to read.
 
@@ -77,7 +77,7 @@ whole cartography programme rests on, deliberately made cheap to kill.
 - **The science**: `campaign/` — the runbook, the idea board, the hypothesis registry,
   one artifact per round, and a generated `ledger.md`. Never hand-edit the ledger.
 - **What has gone wrong**: [`defects.md`](../../defects.md), generated from
-  `defects.yaml`. 25 defects with what caught each and what stops it recurring.
+  `defects.yaml`. 27 defects with what caught each and what stops it recurring.
 - **The strategy**:
   [the search-philosophy report](research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
   says where search effort should point and why; the

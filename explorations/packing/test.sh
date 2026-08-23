@@ -140,6 +140,13 @@ echo "== defect log =="
 # a bead, every narrative link resolving, and the generated view in sync.
 $PY tools/render_defects.py --check
 
+# A generated view must also be exempt from the Markdown auto-formatter, or the
+# pre-commit hook reformats it and the drift check above fails until someone
+# regenerates it. That reasoning was written down for ledger.md and not applied to
+# defects.md, which sat reflowable for a day (D-027). Trusting the list is what
+# failed, so the gate checks it.
+$PY tools/check_generated_exempt.py
+
 echo
 echo "== search engine (sqsearch) =="
 # The engine gate: geometry against a naive reference, determinism, and a positive

@@ -2,7 +2,7 @@
 
 # Defect log
 
-26 defects recorded across the packing toolchain.
+27 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -18,7 +18,7 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 1 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 4 | a cell of the sweep whose answer is known in advance |
-| `review` | 10 | a human or agent reading the work against a checklist |
+| `review` | 11 | a human or agent reading the work against a checklist |
 | `anomaly` | 3 | a result that made no sense, chased down |
 | `inspection` | 5 | reading the code or the design with intent |
 | `drift_check` | 1 | a generated view disagreeing with its source |
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught none of them.** Gates 
 | engine | 7 |
 | quench | 6 |
 | record | 11 |
-| tooling | 2 |
+| tooling | 3 |
 
 ## By kind
 
@@ -42,7 +42,7 @@ The line worth reading twice: **the automated gate caught none of them.** Gates 
 | --- | ---: |
 | soundness | 6 |
 | validity | 5 |
-| bookkeeping | 12 |
+| bookkeeping | 13 |
 | robustness | 2 |
 | performance | 1 |
 
@@ -98,3 +98,4 @@ This is the actionable list.
 | [D-024](frontier/strategy-catalogue.schema.yaml) | 2026-08-23 | record | bookkeeping |  | `gate` | low | fixed | A strategy's enum and its prose said opposite things |
 | [D-025](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | Two bead trees claimed the same spec phase after the plan was rebuilt |
 | [D-026](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | The plan spec's checklist contradicted the state the spec was cited as authority for |
+| [D-027](tools/check_generated_exempt.py) | 2026-08-23 | tooling | bookkeeping |  | `review` | medium | fixed | A generated view was left reflowable by the Markdown auto-formatter |

@@ -57,3 +57,14 @@ explorations/packing/resources/web/
 # the unwrapped form, and the two never agree. Measured on 2026-08-22 -- the gate
 # failed on the first run after the file was formatted.
 explorations/packing/campaign/ledger.md
+
+# defects.md is the same case, and was missed when the rule above was written: it is
+# rebuilt by tools/render_defects.py and drift-checked by `render_defects.py --check`
+# in the same test.sh. flowmark reflows it today -- verified on 2026-08-23 against
+# main, where `flowmark --check` reports it would reformat. Any commit touching
+# Markdown on a machine with the lefthook pre-commit hook installed would have
+# reformatted it and left the gate failing until someone regenerated it.
+#
+# The gate now enforces this list rather than trusting it: test.sh fails if a file
+# carrying the generated-by banner is not named here.
+explorations/packing/defects.md
