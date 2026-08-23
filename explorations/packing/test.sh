@@ -154,6 +154,16 @@ echo "== defect log =="
 $PY tools/render_defects.py --check
 
 echo
+echo "== bead tree =="
+# The work list lives on the tbd-sync branch, outside this directory, so nothing here
+# could see it -- and the one time it went inconsistent (D-025) a person found it by
+# reading `tbd list --spec` and noticing two epics with the same title. Two invariants
+# catch that class: no open bead under a closed parent, no two open siblings with one
+# title. Reads the beads out of git, so it needs no tbd binary, and skips loudly in a
+# checkout that has no tbd-sync branch.
+$PY tools/check_beads.py
+
+echo
 echo "== synopsis agrees with the artifacts =="
 # SYNOPSIS.md is the root document and a living one: it restates numbers that live
 # authoritatively elsewhere, which is the exact shape of thing that drifted in D-010,

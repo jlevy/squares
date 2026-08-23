@@ -213,17 +213,32 @@ Markdown link. This project has needed that twice.
 
 1. Exact verification of Trump’s packing, and the negative control showing why float
    cannot do it
-2. The fixed-angle cell rebuilt as a linear program, solved back to Trump’s packing, and
+2. The degree-8 field polynomial re-derived independently, where sympy is installed
+3. The fixed-angle cell rebuilt as a linear program, solved back to Trump’s packing, and
    swept over its free angle
-3. Frontier corpus structure, and its soft-schema validation
-4. Generated tables in sync with the frontier data
-5. Strategy catalogue integrity
-6. `sqsearch --selftest` — geometry against a naive reference, determinism, the `s(5)`
-   positive control, and the recomputed-overlap guard
-7. The differential test between search energy and the validity oracle
-8. The campaign record: schema validation, id uniqueness, dangling references, unknown
-   series, more than one open series, stale claims, cross-field verdict rules,
-   idea-board reconciliation, reserved-id rules, dead links, and ledger freshness
+4. Frontier corpus structure, and its soft-schema validation
+5. Generated tables in sync with the frontier data
+6. Strategy catalogue integrity
+7. The lint floor: ruff, ruff-format and basedpyright on the Python; clippy pedantic and
+   rustfmt on the Rust
+8. The negative controls in `tools/controls.yaml`, each a mutation that must be caught
+9. The soundness perimeter: every component that emits a configuration is checked by
+   `sqpack` through code it does not share
+10. The defect log: schema, contiguous ids, every open defect carrying a bead, every
+    narrative link resolving, every cited defect id existing, and the generated view in
+    sync with `defects.yaml`
+11. The bead tree: no open bead under a closed parent, and no two open beads under one
+    parent sharing a title. Skipped, loudly, where no `tbd-sync` store is reachable
+12. `SYNOPSIS.md` reconciled against the artifacts: round verdicts, hypothesis statuses,
+    round and effort totals, defect counts per class, nothing silently missing, and
+    every relative link and heading anchor resolving
+13. `sqsearch --selftest` — geometry against a naive reference, determinism, the `s(5)`
+    positive control, and the recomputed-overlap guard
+14. The differential test between search energy and the validity oracle
+15. Provenance: every round’s recorded engine commit still reachable, or annotated
+16. The campaign record: schema validation, id uniqueness, dangling references, unknown
+    series, more than one open series, stale claims, cross-field verdict rules,
+    idea-board reconciliation, reserved-id rules, dead links, and ledger freshness
 
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.

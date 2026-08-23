@@ -8,12 +8,21 @@ The motivating case is `n = 11` — the smallest instance of this problem that i
 open. Its best known packing dates from 1979 and its best proved lower bound from 2003,
 and a gap of roughly 0.088 in the side length separates them.
 
-**Start with [`SYNOPSIS.md`](SYNOPSIS.md).** It is the single technical account of what
-this project knows, how it knows it, and what it is doing next: the problem, the results
+Two documents get you oriented, and they have different jobs.
+
+**[`SYNOPSIS.md`](SYNOPSIS.md) is the technical root** — the single account of what this
+project knows, how it knows it, and what it is doing next: the problem, the results
 established here and their evidential status, the per-`n` lay of the land, the
 hypothesis registry, and a roll-up of every experiment run so far.
-It is kept current and points at the artifact behind each claim rather than restating
-it.
+It is kept current, reconciled against the artifacts in the gate, and points at the
+artifact behind each claim rather than restating it.
+Read it to understand the project.
+
+**[The current handoff](docs/project/handoff-2026-08-23-quench-spine.md) is where the
+work stands today** — what is built, what is missing, which few things are the critical
+path, and the half-dozen facts that would otherwise cost an arriving agent a day.
+It is dated and written to be thrown away when it stops being true.
+Read it to know what to do next.
 
 ## Layout
 
@@ -21,6 +30,8 @@ it.
 explorations/packing/
 ├── SYNOPSIS.md             The technical root: results, status, and the experiment
 │                           roll-up. Read this first.
+├── docs/project/           Reports, reviews, specs, postmortems, and the dated
+│                           handoff that says where the work stands today
 ├── docs/project/research/  The six research reports (see below)
 ├── campaign/               The experiment record: hypothesis registry, series, rounds,
 │                           and a generated ledger. See campaign/README.md.
@@ -65,16 +76,18 @@ found in this toolchain, what caught it, and what now stops it recurring.
 It is generated from [`defects.yaml`](defects.yaml) and checked in the gate.
 
 It is kept because the aggregate says things no individual bug report can.
-Most of them were **soundness** failures — the system asserting something false about
-the mathematics — and most of those pointed in the *flattering* direction, where the
+Of 26 defects, 6 were **soundness** failures — the system asserting something false
+about the mathematics — and 4 of those pointed in the *flattering* direction, where the
 error looks like a success.
-The counts live in the generated view, and in
-[the synopsis](SYNOPSIS.md#the-defect-record), which is checked against it.
-The automated gate caught **none** of them: every one was found by a control cell whose
-answer was known in advance, a rule written down before the measurement, a generated
-view contradicting its source, or someone reading carefully.
-And six fixes left no regression check behind, which is why one of them
+The automated gate has caught **one** of the 26 and **none** of the 6: every soundness
+failure was found by a control cell whose answer was known in advance, a rule written
+down before the measurement, a generated view contradicting its source, or someone
+reading carefully.
+And 6 fixes left no regression check behind, which is why one of them
 ([D-017](defects.md)) is a verbatim repeat of an earlier one.
+(Counts as of 2026-08-23; [`defects.md`](defects.md) is the live tally, and
+[the synopsis](SYNOPSIS.md#the-defect-record) carries the per-class breakdown,
+reconciled against `defects.yaml` in the gate.)
 
 ## Conventions
 
@@ -124,8 +137,9 @@ and the prioritized path forward in
 The implementation plan for the first experiments — search, verify, iterate on `n = 11`
 and `n = 12` — is
 [plan-2026-08-22-minimal-packing-toolkit.md](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md).
-It turns the six reports into seven phases and a bead tree;
-`tbd list --spec plan-2026-08-22-minimal-packing-toolkit.md` shows the work items.
+It turns the six reports into seven phases and a bead tree, one epic per phase;
+`tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md`
+shows the work items and `tbd ready` the unblocked subset.
 
 The current standing review —
 [review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md)

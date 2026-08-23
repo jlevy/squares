@@ -94,14 +94,30 @@ def render(d: dict) -> str:
     }
     for name, count in tally(ds, "detected_by", list(meaning)):
         out.append(f"| `{name}` | {count} | {meaning.get(name, '')} |")
+    # Derived, not asserted: this claim was true at 23 defects and false at 25, and
+    # the same sentence was repeated in three hand-written documents (D-026).
+    gate_n = sum(1 for x in ds if x["detected_by"] == "gate")
+    sound = [x for x in ds if x["class"] == "soundness"]
+    gate_sound = sum(1 for x in sound if x["detected_by"] == "gate")
+    if gate_n == 0:
+        headline = "**the automated gate caught none of them.**"
+    elif gate_sound == 0:
+        headline = (
+            f"**the automated gate caught {gate_n} of {len(ds)}, and none of the "
+            f"{len(sound)} soundness defects.**"
+        )
+    else:
+        headline = (
+            f"**the automated gate caught {gate_n} of {len(ds)}, {gate_sound} of them "
+            f"soundness.**"
+        )
     out += [
         "",
         (
-            "The line worth reading twice: **the automated gate caught none of them.** "
-            "Gates confirm what you already thought to check. Every defect here was "
-            "found by a device built to be *surprised* — a control cell, a "
-            "pre-registered rule, a generated view contradicting itself — or by "
-            "someone reading carefully."
+            f"The line worth reading twice: {headline} Gates confirm what you already "
+            "thought to check. The rest were found by a device built to be *surprised* "
+            "— a control cell, a pre-registered rule, a generated view contradicting "
+            "itself — or by someone reading carefully."
         ),
         "",
     ]
@@ -167,7 +183,6 @@ def main() -> int:
     rendered = render(yaml.safe_load(SRC.read_text(encoding="utf-8")))
     if "--check" in sys.argv:
         current = OUT.read_text(encoding="utf-8") if OUT.exists() else ""
-        # Compare content, not typography: the formatter owns wrapping and quotes.
         # Compare content, not typography: the formatter owns wrapping and quote style.
         fold = str.maketrans({"\u2019": "'", "\u201c": '"', "\u201d": '"', "\u2014": "-"})
 

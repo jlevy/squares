@@ -151,6 +151,12 @@ Of 23 defects now logged, **the automated gate caught none of them.** They were 
 by control cells whose answers were known in advance, by pre-registered rules, by a
 generated view contradicting its source, by chased anomalies, and by reading.
 
+> **Correction, 2026-08-23.** True as written, at 23. At 26 the gate has caught one —
+> [D-024](../../../defects.md), a bookkeeping defect found by a contiguity check — and
+> still no soundness defect, which is the claim this section rests on and is unchanged.
+> Repeating the wider sentence verbatim in three living documents is itself logged, as
+> [D-026](../../../defects.md); the generated view now computes it instead.
+
 That is not an argument against the gate — a gate stops regressions, and this session
 added several.
 It is an argument about what a gate *is*: it confirms what someone already

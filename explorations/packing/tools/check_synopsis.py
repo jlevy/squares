@@ -159,15 +159,42 @@ def check_totals(text: str) -> list[str]:
     return problems
 
 
+# fmt: off
+_ONES = [
+    "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+    "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
+    "seventeen", "eighteen", "nineteen",
+]
+_TENS = [
+    "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
+    "ninety",
+]
+# fmt: on
+
+
+def spell(n: int) -> str:
+    """Spell a count the way prose does, so the check accepts either form.
+
+    The synopsis writes "Twenty-six defects", not "26". This was a four-entry lookup
+    table covering 21-24, which would have stopped matching at 25 without failing --
+    the check would just have demanded the digits. Prose here never exceeds two digits.
+    """
+    if n < 0 or n > 99:
+        return str(n)
+    if n < 20:
+        return _ONES[n]
+    tens, ones = divmod(n, 10)
+    return _TENS[tens] if ones == 0 else f"{_TENS[tens]}-{_ONES[ones]}"
+
+
 def check_defects(text: str) -> list[str]:
     """The defect count and per-class counts match the dataset."""
     data = yaml.safe_load((ROOT / "defects.yaml").read_text())
     defects = data["defects"]
 
     problems = []
-    words = {23: "twenty-three", 22: "twenty-two", 24: "twenty-four", 21: "twenty-one"}
     total = len(defects)
-    if not re.search(rf"\b({total}|{words.get(total, total)})\b", text, re.I):
+    if not re.search(rf"\b({total}|{spell(total)})\b", text, re.I):
         problems.append(f"SYNOPSIS.md: does not state the defect count ({total})")
 
     counts: dict[str, int] = {}

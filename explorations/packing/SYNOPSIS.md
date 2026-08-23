@@ -51,6 +51,7 @@ Nothing here duplicates what another owns.
 | Document | Owns |
 | --- | --- |
 | **This synopsis** | The state of the program: results, their status, the roll-up of rounds |
+| [Current handoff](docs/project/handoff-2026-08-23-quench-spine.md) | Where the work stands *today*: the critical path, the beads it maps to, and what to pick up next. Dated and disposable; this synopsis is the durable account |
 | [`README.md`](README.md) | What is in the directory, and how to run it |
 | [`conventions.md`](conventions.md) | Every rule the directory runs on, and which are machine-checked |
 | [`defects.md`](defects.md) | Every bug and record defect, what caught it, and what now stops it recurring |
@@ -755,14 +756,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Twenty-three defects, [one line each](defects.md), generated from `defects.yaml` and
+Twenty-six defects, [one line each](defects.md), generated from `defects.yaml` and
 checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 6 | asserted something false about the mathematics |
 | validity | 5 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 9 | recorded something its own evidence contradicts |
+| bookkeeping | 12 | recorded something its own evidence contradicts |
 | robustness | 2 | did not finish, or finished only by luck |
 | performance | 1 | worked, but cost far more than it should |
 
@@ -772,11 +773,20 @@ Two observations the log exists to make.
 error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate caught none of them.** Every one was found by a control cell whose
-answer was known in advance, a rule written down before the measurement, a generated
-view contradicting its source, or someone reading carefully.
+**The automated gate has caught one defect in twenty-six, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*.
+The one the gate did catch ([D-024](defects.md)) is a bookkeeping defect, found by a
+contiguity check — which is the pattern, not an exception: gates are good at the
+mechanical classes and have never once caught the mathematics being wrong.
+
+That sentence read “the gate caught none of them” until D-024 made it false, in three
+hand-written documents at once ([D-026](defects.md)). It is now computed from
+`defects.yaml` by the generator rather than asserted, and the numbers above are
+reconciled against the same source by `tools/check_synopsis.py`.
 
 Six fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
