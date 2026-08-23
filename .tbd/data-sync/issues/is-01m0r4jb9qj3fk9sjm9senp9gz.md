@@ -5,7 +5,7 @@ title: negctl leaves the repo holding a deliberate sabotage if it is interrupted
 kind: bug
 status: closed
 priority: 0
-version: 7
+version: 8
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels:
   - focus-efficiency
@@ -14,7 +14,7 @@ dependencies:
     target: is-01m0r7r9k8dcz960yqpx69vwnm
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T20:21:37.206Z
-updated_at: 2026-08-23T22:51:36.085Z
+updated_at: 2026-08-23T22:58:40.299Z
 closed_at: 2026-08-23T22:51:36.084Z
 close_reason: "Resolved by eliminating live-worktree sabotage entirely: negctl now runs controls in a stable snapshot of current tracked and non-ignored bytes, checker children are stopped and reaped before sandbox cleanup, every gate/runner critical section uses the shared atomic activity lease, writer capabilities are stripped from descendants, and real simultaneous-acquisition plus SIGTERM/SIGKILL rehearsals cover the lifecycle. The full normal ./test.sh gate passed in 129 seconds with all 27 isolated controls, 74 reconciled defect records, three activity checks, and three isolation/crash checks."
 ---
@@ -39,4 +39,14 @@ WHAT TO BUILD
 
 ## Notes
 
-2026-08-23 second-pass design after adversarial review: eliminated live-source mutation and recovery entirely. negctl snapshots all current tracked/non-ignored bytes twice into a temporary Git repo; controls mutate only that copy, reset between cases, and discard evidence if live source changes. Real SIGTERM test kills/reaps a TERM-ignoring checker; real SIGKILL test proves live bytes untouched. Gate and every runner CLI use the atomic activity lease; full gate still required before closure. Related findings: D-068 through D-074 and beads think-5zzb, think-xe5l, think-tg66, think-1pyr, think-6wgw, think-06vo, think-v8ve.
+2026-08-23 23:0x, from the PR #16 closeout. NOT A DISPUTE OF THE FIX -- a note that it is not visible anywhere yet, so it cannot be lost silently.
+
+This bead is closed with a detailed close reason (snapshot-based controls, reaped checker children, shared atomic activity lease, SIGTERM/SIGKILL rehearsals, 27 isolated controls, 74 reconciled defect records). None of that is in any pushed branch as of now:
+
+  origin/main                              8926a7c  -- D-035 outstanding, negctl unchanged
+  origin/codex/pr14-square-packing-review  a7e7adc  -- D-035 outstanding, negctl unchanged, 65 defects
+  origin/claude/thinking-scratchpad-...    2ce0209  -- stacked on a7e7adc, same
+
+The "74 defect records" in the close reason against 65 on the newest pushed commit says the work is real and ahead of what is published. So: push it. Until it lands, `tbd ready` shows no D-035 work while D-035 is live in every branch that exists, which is the one failure mode a closed bead can cause.
+
+Practical consequence for anyone working from a pushed branch right now: negctl still mutates tracked files in place and restores in a `finally:` that SIGKILL does not run. Run `git status` before `git add -A`. That advice retires the moment the fix is pushed.
