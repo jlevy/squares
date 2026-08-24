@@ -159,6 +159,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-024-h-021-n4-basin-event-v3-repair.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
@@ -252,8 +253,8 @@ session:
     D-183 records the flattering retention failure and stops the size ladder.
   stop_reason: null
   next_action: >-
-    Close D-183's retention regression, commit it, and preregister a new n=6 four-seed
-    replication. Do not resume exp-026 under changed code and do not begin n=7.
+    Execute preregistered exp-027 only. Require four retained n=6 outcomes, with seed 3
+    visibly non-admissible if independent validation still fails; do not begin n=7.
 ---
 # Session 009 — Bounded Progress Before Scale
 

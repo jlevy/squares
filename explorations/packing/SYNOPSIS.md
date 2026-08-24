@@ -1197,14 +1197,14 @@ The mutable size-by-size run order lives in the
 not in this status document.
 It labels every cell as tool validation, measurement validation, or genuine research.
 The exact and event controls through `n = 5` are complete.
-BC-004 exposed D-183 at `n = 6` and blocks larger event slices until a clean replication
-retains every outcome.
+BC-004 exposed D-183 at `n = 6`; exp-027 is the active repair replication, and larger
+slices remain blocked.
 Component and census claims remain blocked on the later identity and coverage rows.
 
 ## Experiments Conducted
 
-There are 26 rounds registered in `series-000`; all are terminal.
-They record 768 agent-minutes and 25.8 wall-minutes.
+There are 27 rounds registered in `series-000`; 26 are terminal and exp-027 is in
+progress. The terminal rounds record 768 agent-minutes and 25.8 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1248,6 +1248,7 @@ archive beside it.
 | [exp-024](campaign/series/series-000-smoke-and-calibration/experiments/exp-024-h-021-n4-basin-event-v3-repair.md) | 4 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,301/14,301 evaluations settled; 4 admissible at side 2 | **baseline** |
 | [exp-025](campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md) | 5 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,219/14,219 evaluations settled; 4 admissible | **baseline** |
 | [exp-026](campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 3 valid/admissible retained; seed 3 crashes before retention | **blocked** |
+| [exp-027](campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | preregistered D-183 retention replication; measurement pending | **in-progress** |
 
 ### Cost and provenance
 

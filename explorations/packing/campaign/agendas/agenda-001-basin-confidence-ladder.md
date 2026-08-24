@@ -99,11 +99,12 @@ agenda:
     exit: four replayable events or one retained blocker; no component-count claim
     bead: think-wbra
     depends_on: [BC-003]
-    next_evidence: D-183 regression followed by a separately preregistered four-seed replication
+    next_evidence: exp-027 plus its complete four-event archive and semantic replay
     parallel_group: event-calibration
     note: >-
       Exp-026 retains three admissible events, then crashes before retaining seed 3's
-      independent-validity failure. Larger event slices stop at D-183.
+      independent-validity failure. The committed D-183 repair is claimed as exp-027;
+      larger event slices remain stopped until that replication closes.
     artifacts:
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
