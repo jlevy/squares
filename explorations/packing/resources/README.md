@@ -27,14 +27,15 @@ Cleanup was done by language models, so the raw extraction is the fallback whene
 formula in a `.md` looks suspicious.
 
 **Transcription status, stated exactly.** The archive’s discipline is original + cleaned
-`.md` + faithful `.raw.md`, and four entries currently fall short of it in ways worth
+`.md` + faithful `.raw.md`, and five entries currently fall short of it in ways worth
 naming rather than hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
-  `nagamochi-2005-packing-unit-squares-in-a-rectangle` and
-  `wang-dong-li-2016-new-result-packing-unit-squares` are **raw-only**: PDF and faithful
+  `nagamochi-2005-packing-unit-squares-in-a-rectangle`,
+  `wang-dong-li-2016-new-result-packing-unit-squares` and
+  `basic-slivkova-2018-optimal-piercing-square` are **raw-only**: PDF and faithful
   extraction, no cleaned transcription yet.
-  All three were read directly from the PDF, and the claims resting on them were checked
+  All four were read directly from the PDF, and the claims resting on them were checked
   there.
 - `roth-vaughan-1978-inefficiency-packing-squares` carries a **partial** cleaned
   transcription: abstract, introduction and Theorem, read from the rendered page image
@@ -130,6 +131,7 @@ Citation keys match those used in the research document.
 | **[Gensane–Ryckelynck 2005]** | Improved Dense Packings of Congruent Squares in a Square | T. Gensane, P. Ryckelynck | 2005 | Discrete Comput. Geom. 34, 97–109 | `gensane-ryckelynck-2005-improved-dense-packings` |
 | **[Nagamochi 2005]** | Packing Unit Squares in a Rectangle | H. Nagamochi | 2005 | Electron. J. Combin. 12, #R37 | `nagamochi-2005-packing-unit-squares-in-a-rectangle` |
 | **[Wang–Dong–Li 2016]** | A New Result on Packing Unit Squares into a Large Square | S. Wang, T. Dong, J. Li | 2016 | arXiv:1603.02368 | `wang-dong-li-2016-new-result-packing-unit-squares` |
+| **[Basic-Slivkova 2018]** | On optimal piercing of a square | B. Bašić, A. Slivková | 2018 | Discrete Applied Mathematics 247 | `basic-slivkova-2018-optimal-piercing-square` |
 | **[Roth–Vaughan 1978]** | Inefficiency in Packing Squares with Unit Squares | K. F. Roth, R. C. Vaughan | 1978 | JCTA 24, 170–186 | `roth-vaughan-1978-inefficiency-packing-squares` |
 
 ## Web sources

@@ -32,8 +32,8 @@ hypothesis:
   instance: {axis: n, point: 11}
   sweep: {axis: n, points: [10, 11]}
   priority: 1
-  cost_estimate: tier S (a query over H-011's data)
-  prereqs: [H-011]
+  cost_estimate: tier M because H-011 stops at n = 10 and the n = 11 cell needs new identified events
+  prereqs: [H-011, H-021, H-023, n = 11 terminal-component identity]
   replication: true
   registered: retroactive
   notes: >-
@@ -71,6 +71,11 @@ A strategy that names the observation that would kill it is the kind worth havin
 is weak evidence for the premise: five independent seeds at `n = 11` all landed in a
 narrow band `[3.9144, 3.9361]`, well short of Trump’s `3.8771`, with the band five times
 narrower than the remaining gap.
-That is what a sampler repeatedly finding the same wrong funnel looks like — but it is a
-single configuration of a single method, and it measures nothing about basin volumes
-directly. H-012 is the measurement.
+That is consistent with a sampler repeatedly finding one score region, but it is one
+budget and one versioned method, and it measures nothing about terminal-component
+probabilities directly.
+H-012 is the separate `P/Q/E` measurement.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

@@ -27,6 +27,7 @@ import math
 import random
 import subprocess
 import sys
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -34,6 +35,7 @@ sys.path.insert(0, str(ROOT))
 
 from sqpack.quench import quench, quench_bracket, solve_to_fixed_point
 from sqpack.verify import corners_from_poses, float_sign, verify_packing
+from sqpack.workers import worker_count
 
 # The tightest bound the solver's own guarantee permits. Anything looser would let a
 # D-014 through; anything tighter would reject solves that are correct by construction.
@@ -103,6 +105,38 @@ def anneal(n: int, seed: int) -> dict:
     return best
 
 
+def _quench_unit(
+    unit: tuple[str, float, int, list[float], list[float], list[float]],
+) -> tuple[list[str], int]:
+    """Run one quench variant on one perturbed configuration and check it with sqpack.
+
+    A module-level function taking a plain tuple, because that is what a process pool
+    can pickle. Returns (failures, checked) so the parent does the accounting.
+    """
+    kind, eps, trial, x, y, t = unit
+    label = f"{kind} eps={eps:g} #{trial}"
+
+    if kind == "solve_to_fixed_point":
+        got = solve_to_fixed_point(t, x, y, len(x))
+        if not got:
+            return [], 0
+        return oracle(got[1], got[2], t, got[0] + ORACLE_TOL, label), 1
+
+    fn = quench if kind == "quench" else quench_bracket
+    r = fn(x, y, t)
+    if not math.isfinite(r.side):
+        return [], 0
+    failures = oracle(r.x, r.y, r.theta, r.side + ORACLE_TOL, label)
+    # The side a component reports must also be a side the packing fits in: a claim
+    # about `s` is as much a claim as a claim about validity.
+    actual = enclosing_side(r.x, r.y, r.theta)
+    if actual > r.side + ORACLE_TOL:
+        failures.append(
+            f"{label}: reports side {r.side:.15f} but its packing needs {actual:.15f}"
+        )
+    return failures, 1
+
+
 def main() -> int:
     failures: list[str] = []
     checked = 0
@@ -140,37 +174,36 @@ def main() -> int:
 
     # 3. The quench, from perturbed starts -- the component that produced D-014, and
     #    the one that had no independent check at all.
+    #
+    # The eighteen units below are independent by construction, and each is ~1.5s of
+    # LP solving, which made this file the gate's critical path at ~35s. They now run
+    # in a process pool.
+    #
+    # The perturbations are drawn HERE, serially, in the original order, and only the
+    # finished configurations are handed to the workers. Drawing them inside the
+    # workers would make the inputs depend on scheduling, which is the one thing a
+    # soundness check must never do -- the whole point of `random.Random(11)` is that
+    # this file checks the same eighteen configurations on every run, so a breach is
+    # reproducible from the seed alone. Verified: the unit labels and the `checked`
+    # count are identical to the serial version.
     rnd = random.Random(11)
+    units: list[tuple[str, float, int, list[float], list[float], list[float]]] = []
     for eps in (1e-5, 1e-3, 1e-2):
         for trial in range(2):
             x = [v + eps * rnd.uniform(-1, 1) for v in seed_cfg["x"]]
             y = [v + eps * rnd.uniform(-1, 1) for v in seed_cfg["y"]]
             t = [v + eps * rnd.uniform(-1, 1) for v in seed_cfg["t"]]
-            got = solve_to_fixed_point(t, x, y, len(x))
-            if got:
-                failures += oracle(
-                    got[1],
-                    got[2],
-                    t,
-                    got[0] + ORACLE_TOL,
-                    f"solve_to_fixed_point eps={eps:g} #{trial}",
-                )
-                checked += 1
-            for name, fn in (("quench", quench), ("quench_bracket", quench_bracket)):
-                r = fn(x, y, t)
-                if math.isfinite(r.side):
-                    failures += oracle(
-                        r.x, r.y, r.theta, r.side + ORACLE_TOL, f"{name} eps={eps:g} #{trial}"
-                    )
-                    # The side a component reports must also be a side the packing fits
-                    # in: a claim about `s` is as much a claim as a claim about validity.
-                    actual = enclosing_side(r.x, r.y, r.theta)
-                    if actual > r.side + ORACLE_TOL:
-                        failures.append(
-                            f"{name} eps={eps:g} #{trial}: reports side {r.side:.15f} "
-                            f"but its packing needs {actual:.15f}"
-                        )
-                    checked += 1
+            units.extend(
+                (kind, eps, trial, x, y, t)
+                for kind in ("solve_to_fixed_point", "quench", "quench_bracket")
+            )
+
+    # Results are collected by submission index, so the order of `failures` does not
+    # depend on which worker finished first.
+    with ProcessPoolExecutor(max_workers=worker_count(len(units))) as pool:
+        for got_failures, got_checked in pool.map(_quench_unit, units):
+            failures += got_failures
+            checked += got_checked
 
     if failures:
         print(

@@ -40,6 +40,11 @@ sampled cluster is a connected component.
 
 The implementation map is the four-focus epic in the
 [current program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map).
+The single current launch agenda is
+[Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md):
+it distinguishes the persistent autonomous agent loop, which can work now, from the
+numerical runner, which remains a no-go until its scientific and operational gate
+passes.
 
 ## The Autonomous Work Loop
 

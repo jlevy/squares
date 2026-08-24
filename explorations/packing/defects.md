@@ -4,21 +4,23 @@ Do not edit by hand.
 
 # Defect log
 
-79 defects recorded across the packing toolchain.
+131 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **28 soundness defects** — the system asserting something false about the mathematics.
-  21 of them pointed in the *flattering* direction, which is the dangerous one: the
+- **45 soundness defects** — the system asserting something false about the mathematics.
+  35 of them pointed in the *flattering* direction, which is the dangerous one: the
   error looks like success.
-- **21 fixes left no regression check behind.** That list is the best predictor of what
+- **55 fixes left no regression check behind.** That list is the best predictor of what
   comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062
   repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075
   repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079
-  repeats D-063).
-- **19 are still open** (outstanding or contained), every one carrying a bead.
+  repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098
+  repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117
+  repeats D-104).
+- **22 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -26,14 +28,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 1 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 7 | a cell of the sweep whose answer is known in advance |
-| `review` | 50 | a human or agent reading the work against a checklist |
+| `review` | 95 | a human or agent reading the work against a checklist |
 | `anomaly` | 4 | a result that made no sense, chased down |
-| `inspection` | 12 | reading the code or the design with intent |
-| `drift_check` | 2 | a generated view disagreeing with its source |
+| `inspection` | 13 | reading the code or the design with intent |
+| `drift_check` | 4 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 2 | the automated test suite |
+| `gate` | 6 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 2 of 79, and none of the 28
+The line worth reading twice: **the automated gate caught 6 of 131, and none of the 45
 soundness defects.** Gates confirm what you already thought to check.
 The rest were found by a device built to be *surprised* — a control cell, a
 pre-registered rule, a generated view contradicting itself — or by someone reading
@@ -43,22 +45,22 @@ carefully.
 
 | Layer | Count |
 | --- | ---: |
-| engine | 8 |
-| quench | 10 |
+| engine | 9 |
+| quench | 12 |
 | verifier | 1 |
-| record | 31 |
-| tooling | 19 |
-| docs | 10 |
+| record | 36 |
+| tooling | 31 |
+| docs | 42 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 28 |
-| validity | 16 |
-| bookkeeping | 26 |
-| robustness | 7 |
-| performance | 2 |
+| soundness | 45 |
+| validity | 35 |
+| bookkeeping | 37 |
+| robustness | 10 |
+| performance | 4 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -88,6 +90,40 @@ This is the actionable list.
 | D-077 | The PR 16 handoff presented stale state and priorities as a current dependency queue | record |
 | D-078 | The n=5 rank correction still named equality independence as the sufficient condition | docs |
 | D-079 | The handoff retained an invalid implication from record rigidity to non-record behavior | docs |
+| D-080 | The original neighbor-transfer criterion was satisfied by the cold-start grid | docs |
+| D-082 | The synopsis again generalized one n=17 regime to oblique-search blindness | docs |
+| D-083 | A finite-quench residual was called evidence of attraction through epsilon 0.1 | docs |
+| D-084 | The n=11 frontier artifact asserted rigidity and the wrong gap rank | docs |
+| D-085 | Living run commands could rewrite the locked dependency state | tooling |
+| D-086 | The overnight agenda and current handoff retained obsolete work and effort state | record |
+| D-087 | Angle-class evidence and an untested kink sweep combined distinct claims | docs |
+| D-088 | The finite-n frontier missed newer certified n=68 and n=69 constructions | docs |
+| D-089 | The n=17 record was given symmetric plus-or-minus 40-degree orientations | docs |
+| D-090 | Two low-angle examples were generalized into a universal tiny-angle prior | docs |
+| D-091 | H-010 did not reproduce Stromquist’s conditional proof mechanism | docs |
+| D-092 | Structured asymptotic data repeated the phantom Roth-Vaughan constant | docs |
+| D-094 | The idea board repeated the wrong n=11 gap rank | docs |
+| D-095 | The idea board called a refuted hypothesis the best runnable experiment | record |
+| D-096 | Algebraic degree was promoted into a proof-method ceiling and obstruction | docs |
+| D-097 | Strategy catalogues were described as exhaustive histories of the field | docs |
+| D-098 | Source code still called a finite stochastic return threshold a basin radius | engine |
+| D-099 | H-023 placed six non-optimal endpoints in one optimum-side family question | docs |
+| D-100 | Delta continuation had no preserved parameter and reversed its progress metric | docs |
+| D-102 | H-006 treated dual pose support as candidate piercing-point loci | docs |
+| D-103 | H-011 omitted its declared component-identifiability prerequisites | record |
+| D-104 | Living artifacts still promoted local refinement failure into a wrong-basin claim | docs |
+| D-105 | Superdisk continuation lacked a shape normalization and branch rules | docs |
+| D-108 | A direct piercing-number application was missing from the method history | docs |
+| D-109 | Boundary corner coordinates were double-counted as independent wall equations | docs |
+| D-110 | A fixed-cell LP dual was mislabeled a free-framework self-stress | docs |
+| D-111 | A fixed-budget extreme-value fit was generalized to unlimited search support | docs |
+| D-112 | One fixed-cell angle sheet was presented as the global two-class landscape | docs |
+| D-113 | Numerical branch coalescence was called a feasible-component merge and barrier | docs |
+| D-114 | Fractional piercing was given an integral and symmetric conclusion | docs |
+| D-115 | Negative novelty claims exceeded the searched literature surface | docs |
+| D-117 | The idea board again said a basin-width question had been answered | docs |
+| D-119 | A continuous angle sheet was required to have only one nearby grid point | record |
+| D-127 | The engineering review called its branch complete before its delta blockers were resolved | docs |
 
 ## Still open
 
@@ -95,7 +131,6 @@ This is the actionable list.
 | --- | --- | --- | --- | --- |
 | D-021 | contained | medium | The polished tier has a noise floor, and eight rounds sit on it | `think-hg3u` |
 | D-034 | outstanding | high | Endpoint identity assumes isolated terminals and splits a connected optimum family | `think-1s0h` |
-| D-035 | outstanding | high | An interrupted negative-control run leaves its deliberate sabotage in the working tree | `think-97pp` |
 | D-039 | outstanding | high | A scalar side-error floor was treated as a basin-resolution theorem | `think-3szr` |
 | D-040 | outstanding | high | Basin rarity was reported without a proposer-conditioned estimand or durable sample | `think-apwt` |
 | D-041 | outstanding | high | Raw contact counts and a one-dimensional kink were used as rigidity and dimension proofs | `think-1s0h` |
@@ -112,6 +147,10 @@ This is the actionable list.
 | D-059 | outstanding | critical | The golden map mixed unhermetic discovery snapshots with mathematical pass-fail assertions | `think-zt29` |
 | D-061 | outstanding | high | Unrecognised endpoint rows discard the evidence needed to classify them | `think-aans` |
 | D-071 | outstanding | medium | Generated session reports overwrite history and are not durable | `think-y37w` |
+| D-081 | outstanding | high | Runner preflight treats any nonempty queue as enough unattended work | `think-kmn2` |
+| D-101 | outstanding | high | Historical quench round wall times disagree with retained per-call durations | `think-xzew` |
+| D-126 | outstanding | high | Quench convergence work was budgeted by machine time rather than reproducible work | `think-u97a` |
+| D-129 | outstanding | medium | Negative-control checker processes have no bounded timeout or child cleanup | `think-cns0` |
 
 ## Every defect
 
@@ -151,7 +190,7 @@ This is the actionable list.
 | [D-032](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | record | bookkeeping |  | `review` | high | fixed | The in-progress stub was not schema-valid, so the recovery path corrupted the record |
 | [D-033](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | record | robustness |  | `review` | high | fixed | The ledger crashed on any in-progress round, so the gate could not run during a session |
 | [D-034](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | tooling | soundness | flattering | `control_cell` | high | outstanding | Endpoint identity assumes isolated terminals and splits a connected optimum family |
-| [D-035](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | tooling | robustness |  | `anomaly` | high | outstanding | An interrupted negative-control run leaves its deliberate sabotage in the working tree |
+| [D-035](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | tooling | robustness |  | `anomaly` | high | fixed | An interrupted negative-control run leaves its deliberate sabotage in the working tree |
 | [D-036](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | quench | validity | flattering | `review` | high | fixed | A timed-out free sweep was reported as a convergence certificate |
 | [D-037](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | bookkeeping |  | `review` | low | fixed | The atlas checker reported its own synthetic re-offers as census proposals |
 | [D-038](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | soundness | flattering | `review` | high | fixed | Closed-form recognition was documented as a local-optimum oracle |
@@ -196,3 +235,55 @@ This is the actionable list.
 | [D-077](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | record | bookkeeping |  | `review` | high | fixed | The PR 16 handoff presented stale state and priorities as a current dependency queue |
 | [D-078](docs/project/reviews/review-2026-08-23-response-to-pr15-review.md) | 2026-08-23 | docs | soundness | flattering | `review` | medium | fixed | The n=5 rank correction still named equality independence as the sufficient condition |
 | [D-079](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | docs | soundness | flattering | `review` | medium | fixed | The handoff retained an invalid implication from record rigidity to non-record behavior |
+| [D-080](campaign/hypotheses/H-004-neighbor-transfer-seeding.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The original neighbor-transfer criterion was satisfied by the cold-start grid |
+| [D-081](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | tooling | validity | flattering | `review` | high | outstanding | Runner preflight treats any nonempty queue as enough unattended work |
+| [D-082](SYNOPSIS.md) | 2026-08-24 | docs | validity | conservative | `review` | high | fixed | The synopsis again generalized one n=17 regime to oblique-search blindness |
+| [D-083](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | A finite-quench residual was called evidence of attraction through epsilon 0.1 |
+| [D-084](frontier/n-011.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The n=11 frontier artifact asserted rigidity and the wrong gap rank |
+| [D-085](campaign/README.md) | 2026-08-24 | tooling | bookkeeping |  | `inspection` | medium | fixed | Living run commands could rewrite the locked dependency state |
+| [D-086](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | record | bookkeeping |  | `review` | high | fixed | The overnight agenda and current handoff retained obsolete work and effort state |
+| [D-087](campaign/hypotheses/H-001-angle-class-reduction.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Angle-class evidence and an untested kink sweep combined distinct claims |
+| [D-088](frontier/n-068.md) | 2026-08-24 | docs | soundness | conservative | `review` | high | fixed | The finite-n frontier missed newer certified n=68 and n=69 constructions |
+| [D-089](frontier/n-017.md) | 2026-08-24 | docs | soundness | neutral | `review` | high | fixed | The n=17 record was given symmetric plus-or-minus 40-degree orientations |
+| [D-090](campaign/hypotheses/H-024-record-angle-class-count.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | Two low-angle examples were generalized into a universal tiny-angle prior |
+| [D-091](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-010 did not reproduce Stromquist’s conditional proof mechanism |
+| [D-092](frontier/asymptotic-waste-bounds.yaml) | 2026-08-24 | docs | soundness | flattering | `review` | medium | fixed | Structured asymptotic data repeated the phantom Roth-Vaughan constant |
+| [D-093](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | tooling | soundness | flattering | `review` | critical | fixed | Contact canonicalization discarded every advertised node attribute |
+| [D-094](campaign/ideas.md) | 2026-08-24 | docs | soundness | flattering | `drift_check` | medium | fixed | The idea board repeated the wrong n=11 gap rank |
+| [D-095](campaign/ideas.md) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | The idea board called a refuted hypothesis the best runnable experiment |
+| [D-096](frontier/n-005.md) | 2026-08-24 | docs | soundness | conservative | `review` | high | fixed | Algebraic degree was promoted into a proof-method ceiling and obstruction |
+| [D-097](frontier/README.md) | 2026-08-24 | docs | soundness | flattering | `review` | medium | fixed | Strategy catalogues were described as exhaustive histories of the field |
+| [D-098](sqsearch/src/search.rs) | 2026-08-24 | engine | soundness | flattering | `review` | medium | fixed | Source code still called a finite stochastic return threshold a basin radius |
+| [D-099](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-023 placed six non-optimal endpoints in one optimum-side family question |
+| [D-100](campaign/hypotheses/H-013-delta-continuation.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Delta continuation had no preserved parameter and reversed its progress metric |
+| [D-101](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | 2026-08-24 | record | bookkeeping |  | `review` | high | outstanding | Historical quench round wall times disagree with retained per-call durations |
+| [D-102](campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-006 treated dual pose support as candidate piercing-point loci |
+| [D-103](campaign/hypotheses/H-011-small-n-census.md) | 2026-08-24 | record | validity | flattering | `review` | high | fixed | H-011 omitted its declared component-identifiability prerequisites |
+| [D-104](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | Living artifacts still promoted local refinement failure into a wrong-basin claim |
+| [D-105](campaign/hypotheses/H-014-superdisk-continuation.md) | 2026-08-24 | docs | validity | flattering | `review` | medium | fixed | Superdisk continuation lacked a shape normalization and branch rules |
+| [D-106](tools/controls.yaml) | 2026-08-24 | tooling | bookkeeping |  | `gate` | medium | fixed | A living negative-control anchor still targeted corrected hypothesis prose |
+| [D-107](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping |  | `gate` | high | fixed | Generated campaign views and next-work state lagged their corrected sources |
+| [D-108](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | A direct piercing-number application was missing from the method history |
+| [D-109](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | soundness | flattering | `review` | critical | fixed | Boundary corner coordinates were double-counted as independent wall equations |
+| [D-110](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | A fixed-cell LP dual was mislabeled a free-framework self-stress |
+| [D-111](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | A fixed-budget extreme-value fit was generalized to unlimited search support |
+| [D-112](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | One fixed-cell angle sheet was presented as the global two-class landscape |
+| [D-113](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | Numerical branch coalescence was called a feasible-component merge and barrier |
+| [D-114](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Fractional piercing was given an integral and symmetric conclusion |
+| [D-115](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | soundness | flattering | `review` | medium | fixed | Negative novelty claims exceeded the searched literature surface |
+| [D-116](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | bookkeeping |  | `review` | medium | fixed | The incoming strategy review mixed stale corpus state with current proposals |
+| [D-117](campaign/ideas.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The idea board again said a basin-width question had been answered |
+| [D-118](campaign/hypotheses/H-012-record-basins-are-rare.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Budget scaling and attraction rarity were treated as the same cheap question |
+| [D-119](campaign/hypotheses/H-028-reference-cell-angle-sheets.md) | 2026-08-24 | record | validity | conservative | `review` | high | fixed | A continuous angle sheet was required to have only one nearby grid point |
+| [D-120](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | 2026-08-24 | quench | validity | neutral | `review` | high | fixed | Pair half-extent was recomputed four ways and injected ulp noise into cell selection |
+| [D-121](test.sh) | 2026-08-24 | tooling | robustness |  | `review` | high | fixed | Invalid gate worker counts were accepted and a negative count could hang the throttle |
+| [D-122](test.sh) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | A targeted gate built unrelated Rust code and could hide its build skip |
+| [D-123](test.sh) | 2026-08-24 | docs | bookkeeping |  | `review` | medium | fixed | A per-step process cap was documented as a shared global worker budget |
+| [D-124](tools/negctl.py) | 2026-08-24 | tooling | performance |  | `review` | medium | fixed | The portable negative-control fallback copied a needlessly broad repository surface |
+| [D-125](tools/negctl.py) | 2026-08-24 | tooling | robustness |  | `gate` | high | fixed | Parallel negative controls could share one worker tree and erase each other’s mutation |
+| [D-126](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | 2026-08-24 | quench | validity | neutral | `review` | high | outstanding | Quench convergence work was budgeted by machine time rather than reproducible work |
+| [D-127](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | 2026-08-24 | docs | bookkeeping |  | `review` | medium | fixed | The engineering review called its branch complete before its delta blockers were resolved |
+| [D-128](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | 2026-08-24 | tooling | performance |  | `review` | high | fixed | The packing gate serialized independent checks and offered no targeted edit loop |
+| [D-129](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | tooling | robustness |  | `review` | medium | outstanding | Negative-control checker processes have no bounded timeout or child cleanup |
+| [D-130](tools/controls.yaml) | 2026-08-24 | tooling | bookkeeping |  | `gate` | medium | fixed | A defect-link mutation control reused an anchor that became nonunique |
+| [D-131](test.sh) | 2026-08-24 | tooling | bookkeeping |  | `review` | medium | fixed | The Python lint floor passed while reporting eight type-checker warnings |

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 79
+count: 131
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -877,7 +877,7 @@ defects:
     since negctl was built (D-023) -- hit for the first time on 2026-08-23, when a gate
     run was interrupted mid-suite
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     tools/negctl.py tests a guard by corrupting a tracked source file in place, running
     the check, asserting it fails, and restoring the bytes in a `finally:` block.
@@ -896,15 +896,14 @@ defects:
     deliberate sabotage of basin identity behind a green-looking history, and the
     misleading failure message costs an investigation on top.
   fix: >-
-    none yet. Written up on think-97pp: a marker file recording the target, its checksum
-    and the control before mutating, restored-from and refused-on at startup (the
-    `.gate-running` pattern already in this repo); SIGINT and SIGTERM handlers as a
-    courtesy on top of it; the gate refusing to start while the marker exists; and
-    runner.py refusing to stage a file the marker names. The stronger fix is to mutate a
-    COPY and point the check at it, which removes the hazard rather than detecting it --
-    constrained by the rule that a check must import the real module rather than a
-    pasted copy.
-  regression: none
+    Negative controls now mutate private source snapshots and never write the checkout.
+    The copied surface is 2.9 MiB and capped at 32 MiB; build products are linked and
+    the literature archive is omitted. Five local trials measured median setup at
+    0.0779 seconds with APFS cloning and 0.1944 seconds through the forced plain-copy
+    fallback.
+  regression: >-
+    Every negative control runs through the snapshot harness in the main gate, and the
+    harness refuses if its portable-copy source exceeds the declared cap.
   bead: think-97pp
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 - id: D-036
@@ -2001,3 +2000,1215 @@ defects:
   recurrence_of: D-063
   bead: think-djru
   recorded_in: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+- id: D-080
+  title: The original neighbor-transfer criterion was satisfied by the cold-start grid
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    Review H-4 proposed comparing neighbor-transfer seeds with cold starts at n = 12 by
+    budget to side 4 plus epsilon. The ordinary n = 12 grid already has side exactly 4,
+    so the control satisfies the target before search and the experiment cannot measure
+    transfer quality.
+  consequence: >-
+    A vacuous success could be presented as evidence that cross-n transfer improves a
+    proposer while no search or comparison occurred.
+  fix: >-
+    H-004 now tests an equal-budget n = 11 comparison: add from the proved n = 10
+    packing or remove from the n = 12 grid, and require a preregistered median best-side
+    improvement over paired cold starts.
+  regression: none
+  recorded_in: campaign/hypotheses/H-004-neighbor-transfer-seeding.md
+- id: D-081
+  title: Runner preflight treats any nonempty queue as enough unattended work
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    runner.py preflight passes when one hypothesis is runnable but neither materializes
+    unresolved cells nor prices them on the target host. The only current recipe has an
+    eight-hour timebox yet projects to about 2.8 hours on the recorded local throughput;
+    preflight is green for both an eight-hour and a full-day intention.
+  consequence: >-
+    A nominally ready unattended session can drain its queue early, spend most of its
+    horizon idle, or substitute an unregistered task after launch.
+  fix: >-
+    none yet. Generate a per-cell queue with calibrated p50/p95 costs and scientific-
+    admissibility state. Require at least 1.25 times the requested horizon while keeping
+    ordinary status usable when the queue is underfilled.
+  regression: none
+  bead: think-kmn2
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-082
+  title: The synopsis again generalized one n=17 regime to oblique-search blindness
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: conservative
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    After D-057 narrowed H-020, SYNOPSIS.md still said the proposer cannot reach oblique
+    records as a class and that no budget spent on it can succeed. The evidence is five
+    seeds at n = 17, one implementation and one 1e8-move-per-chain budget, with only the
+    final retained best describing the trajectory.
+  consequence: >-
+    A scoped negative result again ruled out larger budgets, other instances and related
+    proposers, shrinking the research portfolio without supporting observations.
+  fix: >-
+    The synopsis now states the exact tested regime, retains the n = 17 negative result,
+    and explicitly leaves trajectory orientations and larger-budget behavior open.
+  regression: none
+  recurrence_of: D-057
+  recorded_in: SYNOPSIS.md
+- id: D-083
+  title: A finite-quench residual was called evidence of attraction through epsilon 0.1
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    exp-005 refuted H-018 with zero of forty registered-threshold returns in every arm,
+    then inferred from an approximately linear residual that Trump's basin attracts
+    perturbations through epsilon 0.1. The refiner had not converged and terminal-
+    component identity is unresolved, so that observation establishes neither
+    attraction nor component membership.
+  consequence: >-
+    A convergence-rate diagnostic was promoted into a landscape property and could be
+    used to calibrate rarity, continuation or basin width on an undefined object.
+  fix: >-
+    The hypothesis artifact, idea board and synopsis now scope the result to the tested
+    refiner's residual. The experiment retains a dated correction beside its original
+    interpretation, and H-021 through H-023 own the missing component evidence.
+  regression: none
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
+- id: D-084
+  title: The n=11 frontier artifact asserted rigidity and the wrong gap rank
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    frontier/n-011.md set rigid true while its own narrative admitted that no active-
+    constraint rank or interval-local isolation certificate exists. The same narrative
+    called 0.0882 the smallest open gap at n <= 100 although the generated frontier
+    ordering places it fourth.
+  consequence: >-
+    A conjectural local property became structured fact, and the motivating case's
+    numerical priority was overstated in the corpus artifact agents query.
+  fix: >-
+    The rigidity field is now null; the text calls n = 11 the smallest open instance,
+    identifies its gap as fourth-smallest, and separates contact equations from a
+    missing local certificate.
+  regression: none
+  recorded_in: frontier/n-011.md
+- id: D-085
+  title: Living run commands could rewrite the locked dependency state
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  severity: medium
+  status: fixed
+  what: >-
+    Campaign and synopsis commands used unfrozen uv run even though D-058 had recorded
+    frozen project resolution as part of the handover repair. A read-only runner help
+    invocation on the merged baseline rewrote tracked uv.lock.
+  consequence: >-
+    Orientation or preflight can dirty the tree and silently resolve a different
+    dependency set before a research run.
+  fix: >-
+    Living project commands now pass --frozen, including the fallback invocation named
+    in the runbook.
+  regression: none
+  recurrence_of: D-058
+  recorded_in: campaign/README.md
+- id: D-086
+  title: The overnight agenda and current handoff retained obsolete work and effort state
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The active overnight plan still totaled ten rounds and 16.4 wall-minutes, scheduled
+    already-landed canonicalization and atlas work, and proposed an H-011 census before
+    its identity and validity blockers. The handoff remained marked Current with the
+    same obsolete critical path and stronger runner-validation claims than D-044 allows.
+  consequence: >-
+    A new agent could rebuild finished components, skip live correctness blockers, or
+    launch a scientifically inadmissible census from a green but insufficient preflight.
+  fix: >-
+    One rebuilt readiness agenda now records eleven rounds and 23.0 wall-minutes,
+    separates the autonomous agent loop from numeric execution, gives exact launch
+    criteria, and maps the dependency lanes. The dated handoff is marked superseded and
+    links to that agenda.
+  regression: none
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-087
+  title: Angle-class evidence and an untested kink sweep combined distinct claims
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-001 combined a descriptive statement that optimal packings through roughly n = 30
+    use at most three angle classes with an algorithmic statement that a class-restricted
+    proposer beats annealing. H-019 declared a sweep over n = 5, 10 and 11 even though
+    its claim and only completed measurement concern Trump's one-dimensional n = 11
+    shared-tilt slice.
+  consequence: >-
+    A corpus regularity could be treated as evidence for search performance, search
+    performance as evidence for a universal corpus law, and one measured kink as a
+    completed multi-instance sweep.
+  fix: >-
+    H-001 now owns only the paired algorithmic comparison; new H-024 owns the corpus
+    angle-count claim with geometry-provenance requirements; and H-019's declared sweep
+    is n = 11 only. Generalizations require separate registered hypotheses.
+  regression: none
+  recorded_in: campaign/hypotheses/H-001-angle-class-reduction.md
+- id: D-088
+  title: The finite-n frontier missed newer certified n=68 and n=69 constructions
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: conservative
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The corpus still called the December 2025 Kingbird values the best known upper
+    bounds at n = 68 and n = 69. The UnitSquare Project's primary 29 July 2026 release
+    publishes strictly smaller interval-validated constructions at both cases.
+  consequence: >-
+    Frontier gaps, parent comparisons and any held-out record-improvement campaign used
+    stale targets. At n = 69 the old parent's degree-82 polynomial was also attached to
+    a value that is no longer the current upper bound.
+  fix: >-
+    Updated both cases to the released decimals and provenance, removed obsolete exact
+    metadata from the new n = 69 numerical construction, and stated that the repository
+    has not independently re-run the release validation.
+  regression: none
+  bead: think-f82b
+  recorded_in: frontier/n-068.md
+- id: D-089
+  title: The n=17 record was given symmetric plus-or-minus 40-degree orientations
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: neutral
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    Frontier, campaign and experiment artifacts described Bidwell's record with angle
+    classes 0 and +/-40 degrees. The primary SVG defines unequal nonzero orientations
+    +39.8049589798 and -36.6237863834 degrees.
+  consequence: >-
+    A false symmetry entered the geometry corpus and the calibration story, potentially
+    biasing angle-class proposers and contact-system reconstructions.
+  fix: >-
+    Corrected every living geometry summary and added a dated correction to exp-011;
+    the qualitative three-class oblique calibration claim remains.
+  regression: none
+  bead: think-f82b
+  recorded_in: frontier/n-017.md
+- id: D-090
+  title: Two low-angle examples were generalized into a universal tiny-angle prior
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The strategy report treated Trump and n = 17 as evidence that continuous angle
+    dimension is empirically tiny, and H-024 proposed at most three raw classes through
+    n = 30. The primary n = 29 SVG declares five distinct nonzero orientations plus the
+    axis-aligned class.
+  consequence: >-
+    Search could be narrowed around a false universal prior and a full corpus sweep
+    could be funded after its cheapest apparent counterexample was already public.
+  fix: >-
+    Reframed the structural question as effective angular rank or compressibility,
+    marked n = 29 as H-024's first counterexample check, and stopped short of a formal
+    refutation until the full pose is independently reconstructed and verified.
+  regression: none
+  bead: think-w5rb
+  recorded_in: campaign/hypotheses/H-024-record-angle-class-count.md
+- id: D-091
+  title: H-010 did not reproduce Stromquist's conditional proof mechanism
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-010 compressed Stromquist's argument into a ten-point escape followed by a
+    standalone twelve-point unavoidability claim. The theorem instead localizes an
+    avoiding square, forces that same square to contain three A-points, then uses nine
+    further points in a counting contradiction for eleven packed squares.
+  consequence: >-
+    A tool could pass the registered known-answer control without reproducing the
+    implication that makes the published lower bound work.
+  fix: >-
+    Rewrote H-010 around independently checked localization, forced cohabitation and
+    counting implications; numerical saturation remains censored rather than proof.
+  regression: none
+  bead: think-bvy9
+  recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
+- id: D-092
+  title: Structured asymptotic data repeated the phantom Roth-Vaughan constant
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    asymptotic-waste-bounds.yaml correctly said Roth and Vaughan leave an implicit
+    Vinogradov constant, then called 10^-100 their explicit constant in its own summary.
+  consequence: >-
+    The authoritative structured record contradicted its primary-source correction and
+    made the asymptotic lower bound look more explicit than it is.
+  fix: >-
+    Replaced the contradiction with the actual implicit-constant status.
+  regression: none
+  bead: think-f82b
+  recorded_in: frontier/asymptotic-waste-bounds.yaml
+- id: D-093
+  title: Contact canonicalization discarded every advertised node attribute
+  date: '2026-08-24'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: critical
+  status: fixed
+  what: >-
+    Individualization made refined colors unique, and the leaf certificate serialized
+    only those replacement colors. On K3, uniform, singly marked and fully distinct
+    initial colors produced the same certificate, so angle class, wall-contact count
+    and degree disappeared on symmetric contact graphs.
+  consequence: >-
+    Structurally distinct endpoints could collide, making discovery curves appear to
+    saturate and corrupting H-003, H-009, H-021 and H-023.
+  fix: >-
+    Carry immutable original colors through refinement and serialize them in canonical
+    node order. The focused K3 regression checks both attribute discrimination and
+    relabeling invariance.
+  regression: tools/canonical_check.py compares uniform, marked and relabeled marked K3 certificates
+  bead: think-siui
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-094
+  title: The idea board repeated the wrong n=11 gap rank
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: drift_check
+  severity: medium
+  status: fixed
+  what: >-
+    After D-084 corrected the frontier and synopsis, campaign/ideas.md still called the
+    n = 11 gap the smallest open gap through n = 100.
+  consequence: >-
+    The target's scalar priority was overstated when n = 61, 78 and 97 have smaller open
+    gaps.
+  fix: >-
+    The board now calls it fourth-smallest overall and smallest among open cases with a
+    nontrivial standing record.
+  regression: none
+  recurrence_of: D-084
+  bead: think-f82b
+  recorded_in: campaign/ideas.md
+- id: D-095
+  title: The idea board called a refuted hypothesis the best runnable experiment
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: drift_check
+  severity: medium
+  status: fixed
+  what: >-
+    H-018 had a terminal rejected experiment and its attraction interpretation had been
+    retracted, but the living idea board still called it the most informative cheap
+    experiment runnable today.
+  consequence: >-
+    A new agent could rerun a resolved claim instead of advancing its component-identity
+    successors.
+  fix: >-
+    The board now points from the finite-refiner residual to H-021 through H-023 and
+    states that H-018 is not a runnable basin-width experiment.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/ideas.md
+- id: D-096
+  title: Algebraic degree was promoted into a proof-method ceiling and obstruction
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: conservative
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The n = 5 case called degree two exactly the ceiling of unavoidable-point proofs,
+    while n = 11 called degree eight the obstruction. No theorem in the corpus bounds
+    the algebraic degree such a proof can certify.
+  consequence: >-
+    A promising lower-bound language could be abandoned because an empirical pattern
+    among solved values was narrated as an impossibility theorem.
+  fix: >-
+    Both cases now present degree as a warning and research question, not a method
+    ceiling.
+  regression: none
+  bead: think-f82b
+  recorded_in: frontier/n-005.md
+- id: D-097
+  title: Strategy catalogues were described as exhaustive histories of the field
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    Frontier and campaign docs called the catalogues every method anyone had ever used,
+    even though several entries are adjacent methods explicitly not applied to this
+    problem and no exhaustive-history search supports the claim.
+  consequence: >-
+    Research-gap analysis could mistake a useful working map for complete literature
+    coverage.
+  fix: >-
+    The docs now call them broad working inventories of methods from this problem and
+    adjacent practice.
+  regression: none
+  bead: think-f82b
+  recorded_in: frontier/README.md
+- id: D-098
+  title: Source code still called a finite stochastic return threshold a basin radius
+  date: '2026-08-24'
+  layer: engine
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    After H-018 and exp-005 retracted the basin-width interpretation, search.rs still
+    said the epsilon where finite return rate collapses is the basin's radius.
+  consequence: >-
+    Future instruments could revive an intrinsic landscape claim from an
+    algorithm-conditioned convergence diagnostic.
+  fix: >-
+    The source comment now names the procedure and says it establishes neither an
+    intrinsic radius nor terminal-component identity.
+  regression: none
+  recurrence_of: D-083
+  bead: think-f82b
+  recorded_in: sqsearch/src/search.rs
+- id: D-099
+  title: H-023 placed six non-optimal endpoints in one optimum-side family question
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-023 asked which six n = 5 endpoints connect at the proved optimum side, but the
+    retained atlas says found_optimum false; all six sides exceed the proved optimum and
+    only the first two share a side.
+  consequence: >-
+    Feasible connectivity across unequal objective levels could be mislabeled one
+    terminal family, and an absent optimum observation could be treated as measured.
+  fix: >-
+    H-023 now asks same-level stationary-set connectivity only for the equal-side pair
+    and minimax side-clearance bounds for unequal-side candidates.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/hypotheses/H-023-n5-terminal-connectivity.md
+- id: D-100
+  title: Delta continuation had no preserved parameter and reversed its progress metric
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-013 proposed inflating the container then applying the existing side-minimizing
+    quench after each decrement, which erases delta on its first call. Living prose also
+    called the largest successful inflation progress although less required slack is the
+    stronger result.
+  consequence: >-
+    An undefined algorithm could emit a smoothly moving but scientifically meaningless
+    metric and its branch coalescence could be mistaken for feasible-set topology.
+  fix: >-
+    The hypothesis now requires a fixed-side feasibility/projection family, uses minimum
+    required inflation, and treats valid paths only as upper bounds on clearance
+    barriers.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/hypotheses/H-013-delta-continuation.md
+- id: D-101
+  title: Historical quench round wall times disagree with retained per-call durations
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    exp-007 records 3.4 wall seconds although its sequential raw archive contains two
+    approximately 30-second candidate quenches plus other calls. exp-008's 67-second
+    aggregate is likewise below the sum of retained per-call durations.
+  consequence: >-
+    Sub-minute atlas forecasts and speedup priorities cannot use those round-level
+    effort fields as measured baselines.
+  fix: >-
+    none yet. Reconstruct the intended timing boundary from raw events or rerun the
+    cells under the current execution receipt, then annotate rather than silently
+    replace historical values.
+  regression: none
+  bead: think-xzew
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
+- id: D-102
+  title: H-006 treated dual pose support as candidate piercing-point loci
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    In the natural fractional hitting-set LP, primal variables weight candidate points
+    and dual variables weight hard-to-hit square poses. H-006 instead interpreted dual
+    mass as spatial point support.
+  consequence: >-
+    A stable discretization could generate proof candidates on the wrong mathematical
+    objects and pass a well-formed but irrelevant metric.
+  fix: >-
+    Recast H-006 as primal-dual column generation: dual poses drive point-column
+    generation, while primal support proposes unavoidable points for continuous
+    falsification and later certification.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md
+- id: D-103
+  title: H-011 omitted its declared component-identifiability prerequisites
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-011's prose said terminal-component identity gates an unseen-mass census, while its
+    machine-readable prerequisites named only H-002 and omitted H-021 and H-023.
+  consequence: >-
+    Queue construction could launch species-count inference while positive-dimensional
+    families and unresolved endpoint support still make the species undefined.
+  fix: >-
+    Added H-021 and H-023 to H-011's declared prerequisites.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/hypotheses/H-011-small-n-census.md
+- id: D-104
+  title: Living artifacts still promoted local refinement failure into a wrong-basin claim
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    Exp-006, exp-009, the idea board, synopsis and generated ledger called the n = 11
+    starts the wrong basin even though several runs were censored and no terminal-
+    component relation had been measured.
+  consequence: >-
+    A local procedure's failure could be turned into a topological classification and
+    used to calibrate rarity or transition claims.
+  fix: >-
+    Historical artifacts carry visible corrections and living summaries now say only
+    that the tested starts remained far from Trump after the declared local procedure.
+  regression: none
+  recurrence_of: D-052
+  bead: think-f82b
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md
+- id: D-105
+  title: Superdisk continuation lacked a shape normalization and branch rules
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    H-014 varied superdisk exponent without declaring whether area, inradius,
+    circumradius or side stayed fixed, and did not say how circle orientation symmetry
+    breaks or branches terminate.
+  consequence: >-
+    Apparent square-end improvement could be a scale artifact, while arbitrary branch
+    selection could make the proposer comparison irreproducible.
+  fix: >-
+    H-014 now fixes unit area and requires pseudo-arclength continuation with explicit
+    symmetry-breaking, bifurcation and termination events.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/hypotheses/H-014-superdisk-continuation.md
+- id: D-106
+  title: A living negative-control anchor still targeted corrected hypothesis prose
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  detected_by: gate
+  severity: medium
+  status: fixed
+  what: >-
+    Correcting the idea board's stale H-018 recommendation removed the exact text used
+    by the unknown-hypothesis mutation control, so the control could no longer perform
+    its mutation.
+  consequence: >-
+    The normal gate stopped at the missing anchor; without the one-match guard, the
+    referential-integrity regression could have disappeared silently.
+  fix: >-
+    Re-anchored the mutation to the corrected H-018 registry link while preserving the
+    same nonexistent-H-777 failure.
+  regression: negctl requires every replacement anchor to appear exactly once
+  bead: think-f82b
+  recorded_in: tools/controls.yaml
+- id: D-107
+  title: Generated campaign views and next-work state lagged their corrected sources
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: gate
+  severity: high
+  status: fixed
+  what: >-
+    The synopsis still reported 87 defects, old class and unprotected-fix totals, three
+    refuted hypotheses, and n = 17 plus an H-018 rerun as undone. Its H-024 status cell
+    also made the registry-table parser treat the artifact as absent. A later formatting
+    pass left the generated campaign ledger stale after its source hypotheses changed.
+  consequence: >-
+    The main orientation document contradicted the generated defect log and campaign
+    ledger and pointed an agent toward completed or superseded work.
+  fix: >-
+    Reconciled all aggregates with defects.yaml, kept the H-024 status machine-readable,
+    mentioned open D-101, replaced the obsolete next-work list, and regenerated the
+    ledger after source formatting was complete.
+  regression: tools/check_synopsis.py derives registry, defect, class, open and unprotected counts from source artifacts
+  bead: think-f82b
+  recorded_in: SYNOPSIS.md
+- id: D-108
+  title: A direct piercing-number application was missing from the method history
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The proof catalogue and strategy review said transversal theory had never been
+    applied to s(n). Bašić and Slivková (2018) explicitly study the piercing number of
+    all unit-square poses in a square, connect it to packing, and derive a specialized
+    n=61 lower bound.
+  consequence: >-
+    The proof program could claim novelty for an existing method and misread a genuine
+    precedent as an open research gap.
+  fix: >-
+    Archived the primary PDF and raw extraction, marked transversal theory used, and
+    recorded that the specialized n=61 bound is real but weaker than Nagamochi's
+    standing bound.
+  regression: none
+  bead: think-vw06
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-109
+  title: Boundary corner coordinates were double-counted as independent wall equations
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: critical
+  status: fixed
+  what: >-
+    The incoming frontier review added the verifier's 14 contacting pairs to 20
+    boundary corner coordinates and declared Trump's 34-variable pose exactly
+    isostatic. A square edge flush with a wall contributes two reported corners but one
+    wall incidence; the witness has 11 square-wall incidences, and the feasibility
+    system is nonsmooth and disjunctive.
+  consequence: >-
+    A duplicate-coordinate count could be promoted into a false rigidity theorem and
+    used to prune valid contact structures.
+  fix: >-
+    Removed the isostatic claim and registered a union-of-branchwise one-sided tangent
+    test with no expected rank. Counts are now described only as feature incidences.
+  regression: none
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-110
+  title: A fixed-cell LP dual was mislabeled a free-framework self-stress
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The incoming review treated dual multipliers for minimizing container side in one
+    fixed-angle cell as a mechanical self-stress and local-optimality certificate. They
+    balance a nonzero container objective and certify only that LP cell.
+  consequence: >-
+    A valid primal-dual receipt could be used as evidence for angle rigidity, cell
+    switching, or nonlinear local optimality that it does not test.
+  fix: >-
+    Renamed the object an equilibrium-load certificate, bounded its proof scope to the
+    declared cell, and made load-guided moves a held-out empirical hypothesis.
+  regression: none
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-111
+  title: A fixed-budget extreme-value fit was generalized to unlimited search support
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The incoming review proposed fitting a terminal endpoint to a small archive and
+    using it to show that the proposer would miss the record at any budget. The fitted
+    distribution changes with the move kernel, schedule, censoring, retention, and
+    budget.
+  consequence: >-
+    A cheap sensitivity analysis could be narrated as a support theorem and terminate
+    a search family without testing larger-budget behavior.
+  fix: >-
+    Restricted the proposal to calibrated, held-out-stable diagnostics on one declared
+    fixed-budget distribution and gave it no support or impossibility interpretation.
+  regression: none
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-112
+  title: One fixed-cell angle sheet was presented as the global two-class landscape
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The incoming review priced a two-angle LP grid as a global map. One imported
+    separating cell and class assignment gives only one value sheet; the global object
+    is the lower envelope over assignments, cells, and possibly disconnected center
+    solutions.
+  consequence: >-
+    A local picture could be used to claim there is no competing mechanism elsewhere
+    in the same angle-class restriction.
+  fix: >-
+    Registered H-028 as a reference-cell sheet, required every pixel to identify its
+    cell and precision tier, and reserved global language for a separately enumerated
+    or searched lower envelope.
+  regression: none
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-113
+  title: Numerical branch coalescence was called a feasible-component merge and barrier
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    Several living strategy documents said the delta where continuation branches
+    coalesce is the atlas's component-merge level and barrier. Algorithmic branches can
+    meet, disappear, or fail without deciding the topology of the valid configuration
+    set.
+  consequence: >-
+    A continuation artifact could be promoted into false connectedness, nonconnection,
+    or minimax-clearance evidence.
+  fix: >-
+    Defined the intrinsic minimax required-side level. Verified paths now provide only
+    upper bounds; lower bounds require certified nonconnection, and branch transitions
+    remain algorithmic observations.
+  regression: none
+  recurrence_of: D-100
+  bead: think-0vt5
+  recorded_in: docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md
+- id: D-114
+  title: Fractional piercing was given an integral and symmetric conclusion
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The incoming proof idea blurred a fractional hitting-set optimum with an integral
+    ten-point set and did not track that restricting poses lowers the optimum while
+    restricting candidate points raises it.
+  consequence: >-
+    A discretized LP could appear to prove either existence or impossibility with the
+    inequality pointing the wrong way.
+  fix: >-
+    Registered the one-sided H-034 decision: tau-star greater than 10 rules out ten
+    points, while tau-star at most 10 does not produce them. Promotion requires separate
+    certified point and pose discretization bounds.
+  regression: none
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-115
+  title: Negative novelty claims exceeded the searched literature surface
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    The incoming review called several ideas first, unpublished, or never attempted
+    without a recorded exhaustive search. The newly found Bašić-Slivková paper directly
+    falsified one such claim during the same delta review.
+  consequence: >-
+    A rediscovery could be advertised as a novel result, and strategy ranking could be
+    based on a false picture of prior work.
+  fix: >-
+    Scoped negative claims to the retrieved corpus, made novelty a source-search
+    obligation rather than an accept criterion, and added recurring frontier refresh to
+    the recommendations.
+  regression: none
+  recurrence_of: D-097
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-116
+  title: The incoming strategy review mixed stale corpus state with current proposals
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    The review still described a 24-artifact registry after adding sixteen artifacts,
+    said it registered nothing, and inherited a superseded n=69 algebraic-degree claim.
+  consequence: >-
+    Readers could not tell which proposals were contractual, and a field-pattern
+    program could analyze a polynomial that belongs to an older parent rather than the
+    standing witness.
+  fix: >-
+    Reconciled the review with the 40-artifact registry and current UnitSquare frontier;
+    algebraic metadata now follows independently verified witnesses rather than side
+    rows.
+  regression: campaign ledger and synopsis checks reconcile generated registry state
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-117
+  title: The idea board again said a basin-width question had been answered
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    Despite the H-018 retraction, the open-question heading still said Trump's basin
+    width had been answered. The attached prose correctly admitted that the finite
+    refiner measured convergence behavior and that terminal-component identity was
+    unavailable.
+  consequence: >-
+    A heading could revive the same intrinsic-radius claim that the experiment body and
+    source comments had already withdrawn.
+  fix: >-
+    The heading now says the measurement is not yet defined and routes it through the
+    proposer, quench, event, and component-identity contract.
+  regression: none
+  recurrence_of: D-104
+  bead: think-0vt5
+  recorded_in: campaign/ideas.md
+- id: D-118
+  title: Budget scaling and attraction rarity were treated as the same cheap question
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-017's fixed 100x-budget reachability event and H-012's record-to-modal attraction
+    ratio under one P/Q/E were described as the same question, with H-012 supposedly a
+    free tier-S query. H-011 stops at n=10, while H-012 requires new identified n=11
+    events.
+  consequence: >-
+    The campaign could skip a response curve, underprice a major measurement, or treat
+    failure at one budget as evidence about unlimited support.
+  fix: >-
+    Separated the estimands, priced H-012 as a new n=11 measurement behind component
+    identity, and parked H-017 behind a short budget-response ladder and its scientific
+    validation blockers.
+  regression: campaign ledger exposes each artifact's distinct metric, cost and prerequisites
+  bead: think-0vt5
+  recorded_in: campaign/hypotheses/H-012-record-basins-are-rare.md
+- id: D-119
+  title: A continuous angle sheet was required to have only one nearby grid point
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: conservative
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-028 required the published angle point to be the only adaptively refined grid
+    point within 1e-5 of the objective minimum. On a continuous value sheet,
+    arbitrarily close angle points have arbitrarily close values, so sufficient
+    refinement makes that condition impossible even at a unique strict minimum.
+  consequence: >-
+    The experiment would inevitably refute a correct local-uniqueness picture and could
+    park a useful visualization instrument for a mathematical reason unrelated to its
+    intended question.
+  fix: >-
+    The criterion now asks for one refined local minimizer recovered within 0.01
+    degrees and a 1e-5 boundary gap, with every candidate minimum checked under two
+    grid offsets. Nearby non-minimizing points are expected rather than failures.
+  regression: none
+  bead: think-uyf4
+  recorded_in: campaign/hypotheses/H-028-reference-cell-angle-sheets.md
+- id: D-120
+  title: Pair half-extent was recomputed four ways and injected ulp noise into cell selection
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: since the first fixed-cell quench
+  severity: high
+  status: fixed
+  what: >-
+    `choose_cell` separately evaluated the pair support radius on four candidate axes
+    even though congruent squares give the same closed form on each. In 20,000 sampled
+    pairs, 9.7 percent disagreed across axes by up to 4.4e-16, and that numerical noise
+    entered the separating-axis argmax.
+  consequence: >-
+    A mathematically irrelevant evaluation-order difference could change the selected
+    LP cell, stall or unstall a quench, and move a published basin count.
+  fix: >-
+    Compute the shared half-extent once from the relative angle and choose the axis from
+    centre separation alone, matching the independently tested Rust identity.
+  regression: >-
+    The sqsearch selftest compares the shared identity with the naive four-axis
+    construction, and the strict gate regenerates the full golden producer.
+  bead: think-9qz0
+  recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+- id: D-121
+  title: Invalid gate worker counts were accepted and a negative count could hang the throttle
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: one stacked PR
+  severity: high
+  status: fixed
+  what: >-
+    `test.sh` accepted nonpositive `--jobs`, `GATE_JOBS`, and `GATE_INNER_JOBS` values.
+    With `--jobs -1`, the launch throttle repeatedly waited for a nonexistent child and
+    never advanced.
+  consequence: >-
+    A typo in an unattended or delegated gate command could consume the entire session
+    without producing a result or a useful refusal.
+  fix: >-
+    Resolve the automatic default first, then reject every noninteger or nonpositive
+    outer and inner worker count with exit status 2.
+  regression: >-
+    The historical-regression step invokes the gate boundary with negative and
+    nonnumeric values and checks the exact refusal.
+  bead: think-wo4p
+  recorded_in: test.sh
+- id: D-122
+  title: A targeted gate built unrelated Rust code and could hide its build skip
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one stacked PR
+  severity: high
+  status: fixed
+  what: >-
+    `test.sh --only` built sqsearch before every selected check, even when the check did
+    not consume the engine. Its partial-success branch also exited before reporting a
+    recorded build skip.
+  consequence: >-
+    The advertised subsecond edit loop paid unrelated build cost, while a targeted
+    engine check on a host without Cargo could be labelled passed despite not running.
+  fix: >-
+    Derive the engine-build requirement from the selected step functions and report
+    skips before any targeted-success line; an incomplete targeted run is never called
+    passed.
+  regression: >-
+    Focused command checks verify a README-only selection contains no build step and
+    that skip accounting precedes the partial-run disposition.
+  bead: think-bdv1
+  recorded_in: test.sh
+- id: D-123
+  title: A per-step process cap was documented as a shared global worker budget
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  latent_for: one stacked PR
+  severity: medium
+  status: fixed
+  what: >-
+    The gate and worker helper called `PACK_JOBS` a shared budget, but each concurrent
+    child read the same value independently. Several pool-backed steps could therefore
+    exceed it in aggregate, and `--jobs 1` still assigned two inner workers.
+  consequence: >-
+    Operators could infer a resource ceiling the implementation did not enforce, and a
+    supposedly serial transcript could still contain multiprocessing behavior.
+  fix: >-
+    Document `PACK_JOBS` as a measured per-step cap, state that aggregate fanout can be
+    larger, and make `--jobs 1` export an inner cap of one.
+  regression: >-
+    The historical-regression step traces a `--jobs 1 --list` invocation and requires
+    `PACK_JOBS=1`.
+  bead: think-mmw8
+  recorded_in: test.sh
+- id: D-124
+  title: The portable negative-control fallback copied a needlessly broad repository surface
+  date: '2026-08-24'
+  layer: tooling
+  class: performance
+  detected_by: review
+  latent_for: one stacked PR
+  severity: medium
+  status: fixed
+  what: >-
+    Private negative-control trees used cheap copy-on-write clones on APFS but fell back
+    to unrestricted `cp -R` over the repository elsewhere. The fallback cost and disk
+    multiplier were neither bounded nor measured.
+  consequence: >-
+    A fast local gate could become slow and disk-heavy in CI or on Linux, recreating the
+    loop-cost problem the snapshot design was intended to remove.
+  fix: >-
+    Copy only the packing source needed by controls, omit the literature archive and
+    build products, link the existing environment, and refuse above a 32 MiB source
+    cap. The current 2.9 MiB surface measured 0.0779 seconds median with APFS cloning
+    and 0.1944 seconds with a forced plain copy over five trials each.
+  regression: >-
+    The harness prints the source size on every run and refuses before materialization
+    if the portable-copy surface crosses its cap.
+  bead: think-lyzi
+  recorded_in: tools/negctl.py
+- id: D-125
+  title: Parallel negative controls could share one worker tree and erase each other's mutation
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: caught during the first concurrency sweep
+  severity: high
+  status: fixed
+  what: >-
+    The first parallel harness assigned control i to tree i modulo the worker count, but
+    a thread pool does not bind queued item indices to worker indices. A slow control
+    let two live tasks share one tree, and one restored `defects.yaml` while the other
+    expected its mutation to remain.
+  consequence: >-
+    A negative control stopped firing because another control erased its evidence,
+    making the guard suite flattering under exactly the concurrent mode meant to speed
+    it up.
+  fix: >-
+    Treat trees as checked-out resources in an explicit queue and return each only after
+    its control has restored the private mutation.
+  regression: >-
+    The full control catalogue is run through the queue in the main gate; the original
+    failing width sweep was repeated at 1, 2, 3, 5, and 10 workers.
+  bead: think-oxwd
+  recorded_in: tools/negctl.py
+- id: D-126
+  title: Quench convergence work was budgeted by machine time rather than reproducible work
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: since quench_bracket was introduced
+  severity: high
+  status: outstanding
+  what: >-
+    `quench_bracket` and its free sweep stop on wall-clock deadlines. Host speed, load,
+    pool width, and contention therefore change how many LP solves and angle probes a
+    nominally identical quench performs.
+  consequence: >-
+    Convergence and basin-frequency results can depend on the machine regime rather
+    than only the retained input, even when seed and code provenance agree.
+  fix: >-
+    none yet. Make LP solves or bracket iterations the scientific budget, retain wall
+    time only as a recorded outer safety deadline, and mark any deadline hit censored.
+  regression: none
+  bead: think-u97a
+  recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+- id: D-127
+  title: The engineering review called its branch complete before its delta blockers were resolved
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  latent_for: one review cycle
+  severity: medium
+  status: fixed
+  what: >-
+    The engineering review's header said Complete while the stacked branch was behind
+    its base and a later formal review had identified gate-contract, fallback-cost, and
+    logbook blockers.
+  consequence: >-
+    A reader could treat the 22-second gate and the stacked implementation as accepted
+    baseline behavior before its known corrections landed.
+  fix: >-
+    Added a dated status addendum with the exact corrections, retained deferrals, local
+    measurements, validation evidence, and absorption commit.
+  regression: none
+  bead: think-z8wf
+  recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+- id: D-128
+  title: The packing gate serialized independent checks and offered no targeted edit loop
+  date: '2026-08-24'
+  layer: tooling
+  class: performance
+  detected_by: review
+  latent_for: several research rounds
+  severity: high
+  status: fixed
+  what: >-
+    Twenty-five largely independent checks ran serially, and the harness had no way to
+    select one named check. A normal run measured 170 seconds while delivering only 133
+    CPU-seconds on a ten-core host.
+  consequence: >-
+    Agents batched unrelated edits between checks, lengthening fault localization and
+    making disciplined iteration several times slower than the underlying work.
+  fix: >-
+    Run read-only steps concurrently with deterministic transcript replay, pool the
+    internal quench lists, and provide explicit `--only`, `--list`, and `--jobs` entry
+    points without weakening the full or strict gates.
+  regression: >-
+    The same twenty-five step table drives full and targeted runs; strict refuses
+    `--only`, and the full gate continues to exercise every listed step.
+  bead: think-l3ds
+  recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+- id: D-129
+  title: Negative-control checker processes have no bounded timeout or child cleanup
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: since the negative-control harness was introduced
+  severity: medium
+  status: outstanding
+  what: >-
+    Source snapshots prevent a killed negative control from corrupting the checkout,
+    but each checker still runs without a deadline and a shell child can outlive the
+    harness. One stuck check can therefore stall the gate indefinitely.
+  consequence: >-
+    An unattended or delegated verification loop can lose its whole timebox and leave
+    temporary descendants consuming resources even though the scientific tree remains
+    safe.
+  fix: >-
+    none yet. Give each control a declared or documented default timeout, launch it in
+    a process group, terminate and reap the group on timeout or interruption, and
+    rehearse a child that ignores the first termination signal.
+  regression: none
+  bead: think-cns0
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-130
+  title: A defect-link mutation control reused an anchor that became nonunique
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  detected_by: gate
+  latent_for: caught on the first integrated gate
+  severity: medium
+  status: fixed
+  what: >-
+    The narrative-link negative control replaced the literal `recorded_in: test.sh`.
+    New engineering defects legitimately added three more copies, so the anchor appeared
+    four times and the control could no longer identify which record to corrupt.
+  consequence: >-
+    The normal gate stopped at the control catalogue. Without the one-match invariant,
+    it could instead have mutated an arbitrary defect and supplied ambiguous evidence
+    about link validation.
+  fix: >-
+    Anchor the mutation on the unique bead-and-recorded-path pair for D-121 rather than
+    on the reused path alone.
+  regression: >-
+    negctl refuses every replacement whose anchor does not appear exactly once, and the
+    focused narrative-link control runs in the gate.
+  bead: think-f7km
+  recorded_in: tools/controls.yaml
+- id: D-131
+  title: The Python lint floor passed while reporting eight type-checker warnings
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  detected_by: review
+  latent_for: several full-gate runs
+  severity: medium
+  status: fixed
+  what: >-
+    BasedPyright returned success with eight `reportPrivateUsage` warnings, and the gate
+    treated that exit code as a clean lint floor. Its transcript ended with zero errors
+    and eight warnings immediately before `ALL CHECKS PASSED`.
+  consequence: >-
+    The enforced Python hygiene claim disagreed with its own output, and future warnings
+    could accumulate without making either supervised or unattended validation red.
+  fix: >-
+    Keep the field helpers private, mark the intentional same-module and benchmark
+    accesses locally for Ruff and BasedPyright, and require the exact zero-error,
+    zero-warning summary in the gate.
+  regression: >-
+    `step_lint_floor_python` now greps for `0 errors, 0 warnings, 0 notes` after Ruff,
+    format, and BasedPyright all return success.
+  bead: think-6cbn
+  recorded_in: test.sh

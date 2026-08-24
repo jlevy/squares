@@ -115,9 +115,10 @@ The ones that carry the most weight:
 ## The strategy catalogues
 
 [`search-strategies.yaml`](search-strategies.yaml) and
-[`proof-strategies.yaml`](proof-strategies.yaml) carry the two inventories that define
-the field’s reach: 20 ways anyone has ever *found* a packing, and 30 ways anyone has
-ever *proved* a bound.
+[`proof-strategies.yaml`](proof-strategies.yaml) carry two working inventories of the
+field and adjacent methods: 20 search strategies and 30 proof strategies or candidates.
+They are broad research maps, not claims of an exhaustive history; several entries are
+explicitly unused on this problem.
 Each entry has an `id`, `name`, `mechanism`, `family`, a status (`outcome` for search,
 `status` for proof), a `note`, and any citation `refs`.
 
@@ -129,12 +130,12 @@ than a paragraph:
 | --- | --- | --- |
 | entries | 20 | 30 |
 | families | 4 | 6 |
-| entries that have produced results here | 11 | 16 |
+| entries that have produced results here | 11 | 17 |
 | largest working family | constructive (9 of 20) | **unavoidable points (10 of 30)** |
 
-Ten of the sixteen working proof strategies are the *same idea* refined — place points,
-prove they are unavoidable, count — while on the search side four genuinely different
-families have each produced records.
+Ten of the seventeen working proof strategies are the *same idea* refined — place
+points, prove they are unavoidable, count — while on the search side four genuinely
+different families have each produced records.
 The other ten-entry proof family, the transversal and wider packing-and-covering
 toolkit, is almost entirely **unapplied** to `s(n)`. That contrast is the clearest
 single argument that the lower-bound side has room its practitioners have not used.
@@ -155,7 +156,7 @@ simulated annealing (all dated 2024–2026), 5 diagonal strips, 3 extensions of 
 records. Records move monthly; bounds do not.
 
 **Algebraic degree explodes past `n = 11`.** Degrees recorded in the catalogue for
-`n ≤ 100` run 4, 5, 6, 8, 12, 18, 20, 24, 42, 44, 82. Every *proved* case is degree ≤ 2.
+`n ≤ 100` run 4, 5, 6, 8, 12, 18, 20, 24, 42, 44. Every *proved* case is degree ≤ 2.
 That gap between what is certifiable and what is conjectured is the subject’s central
 obstruction.
 

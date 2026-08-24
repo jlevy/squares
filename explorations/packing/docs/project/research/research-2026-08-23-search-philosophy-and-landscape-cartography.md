@@ -151,10 +151,13 @@ connected-component identity, validity, and numerical ambiguity are resolved.
 
 Two consequences frame everything downstream:
 
-1. **The search space factorizes.** Continuous search lives in angle space (empirically
-   tiny — Trump’s packing uses a single non-trivial tilt; the `s(17)` record uses two),
-   and everything else is the combinatorial choice of cell.
-   That is the review’s H-1, restated as geometry.
+1. **Each fixed separating-axis cell exposes a lower-dimensional continuous problem.**
+   Trump’s packing uses one non-trivial tilt and the `s(17)` record uses two, but those
+   two cases do not establish that record packings generally have few raw orientation
+   classes. The primary `n = 29` SVG is already a counterexample candidate to the
+   registered three-class bound.
+   The useful question is effective angular dimension— rank, algebraic dependence, or
+   compressibility—rather than a universal class count.
 2. **Declared landscape views can become statistical questions.** Under a versioned
    proposer, quench, and terminal-component relation: how much component support was
    observed; what unseen mass remains; what polished or exact side evidence each
@@ -203,10 +206,13 @@ from the same argument and was not.
 
 ### The map itself: a basin atlas, and what it buys both lanes
 
-“A map of the structure of the minima” has an established form: the **disconnectivity
-graph** of Becker and Karplus, popularized by Wales — minima as leaves, joined at the
-lowest barrier connecting them, giving the landscape’s tree structure at a glance
-(funnels are visible as long unbranched spines).
+“A map of the structure of the minima” has an established analogue: the
+**disconnectivity graph** of Becker and Karplus, popularized by Wales — minima as
+leaves, joined at the lowest energy barrier connecting them.
+A true square-packing counterpart would require certified components of a fixed-side
+filtration and their minimax required-side levels.
+A dendrogram of sampled endpoints or continuation branches is an algorithmic view, not
+that object.
 
 Our target, concretely: an **atlas** with one record per resolved terminal component —
 
@@ -218,9 +224,9 @@ Our target, concretely: an **atlas** with one record per resolved terminal compo
   (an empirical probability conditional on `P/Q/E`, not an intrinsic volume);
 - the contact graph and angle signature;
 - symmetry group of the packing;
-- neighbor links: which basins it merges with, and at what container inflation `δ` — the
-  natural barrier scale here, and (deliberately) the same quantity the δ-ladder below
-  computes anyway.
+- typed neighbor evidence: verified continuous paths with their maximum required side,
+  giving upper bounds on minimax clearance; certified nonconnection below a side level,
+  when available; and separately labelled algorithmic transitions under named kernels.
 
 The atlas pays four ways.
 It is **steering data** — the review’s H-3 (rarity versus contact count) becomes a
@@ -331,20 +337,22 @@ Three ladders fit this problem, each watching for different events on the way.
 
 | Ladder | Parameter | Easy end | Hard end | What to watch |
 | --- | --- | --- | --- | --- |
-| Container inflation | slack `δ` in side `s* + δ` | large `δ`: few, broad basins | `δ → 0`: the true instance | basin splits and vanishings (a bifurcation tree); merge-`δ` between basins = the atlas’s barrier scale; the `δ` at which the record basin appears |
+| Container inflation | slack `δ` in side `s* + δ` | large `δ`: an empirically easier feasibility problem | `δ → 0`: the true instance | branch and attractor transitions under the declared continuation; valid paths and their maximum required side; topology only with separate certification |
 | Superdisk shape | exponent `p` in `\|x\|^{2p} + \|y\|^{2p} ≤ 1` | `p = 1`: circles — orientation-free, mature literature | `p → ∞`: squares | where orientation symmetry breaks; which circle structures survive to the square end |
 | Boundary-layer reduction | frozen grid bulk | the pure grid | grid plus a sheared band (the Cleemann mechanism) | whether any band re-synchronizes with the bulk at `m² − 3` |
 
 **Container inflation** (equivalently, by scaling: shrink the squares slightly in a
 fixed container) is the primary ladder.
-At generous `δ` the landscape is simple and search is trivial; walking `δ` down with an
-LP re-polish at every step is cheap path-following; and the recorded events are the
-intuition, made durable: which basins die, which split, and at what `δ` the record’s
-basin first exists as a distinct attractor.
-Three payoffs from one computation: a search method that can *walk into* basins direct
-sampling never hits (H-13); the merge-`δ` barrier estimates the atlas wants anyway; and
-a scalar hardness measure per instance — “how much slack makes `n = 11` easy” is a
-well-posed, reportable number.
+Generous `δ` may make projection and search easier; H-013 tests that rather than
+assuming it. Walking `δ` down with fixed-side feasibility projection records numerical
+branch events and, when every intermediate pose is valid, explicit paths through the
+side-clearance filtration.
+Such a path supplies an upper bound on a minimax connection level.
+Branch coalescence, loss, or rediscovery does not prove a component merge, split, or
+disappearance. The computation still has three payoffs: a search method that may walk
+into endpoints direct sampling misses; replayable valid-path clearance bounds; and a
+kernel-conditional hardness curve — how much slack the declared proposer/projector needs
+to reach a declared target event.
 
 **Superdisk continuation** makes “a square is a circle with orientation” quantitative.
 Circle packing in a square is far better understood — proved optima into the dozens,
@@ -374,18 +382,21 @@ The review’s calibration ladder (R-3: `n = 5` and `n = 10`, both proved) is ne
 and stays — but it validates *machinery*, not *strategy*. Both proved optima are
 45°-tilt mechanisms: symmetric, easily found, sitting in basins blind search reaches
 without help. An engine can ace that ladder and remain structurally blind to what
-`n = 11` actually demands — an oblique core locked at the irrational tilt `≈ 40.182°`, a
-mechanism **no proved case exercises**.
+`n = 11` actually demands — an oblique core locked at `≈ 40.182°`; its trigonometric
+coordinates are algebraic while its nonzero radian angle is transcendental, a mechanism
+**no proved case exercises**.
 
 So record-finding ability needs its own targets, chosen by mechanism:
 
 - **`s(17)`** — the nearest case whose (unproved) record uses genuinely oblique
   structure, with two distinct non-trivial angles; rediscovering *it* exercises the
   muscle that `n = 5, 10` cannot.
-- **`n = 11` at small inflation `δ`** — the same basin, made easier to hit; success
-  isolates the mechanism from the difficulty, and the largest `δ` at which the engine
-  still finds Trump’s cell is a progress metric that moves continuously (unlike the
-  binary “found it at δ = 0 or not”).
+- **`n = 11` at controlled inflation `δ`** — a fixed-side feasibility/projection family,
+  not the existing side-minimizing quench, makes slack an actual continuation parameter.
+  The minimum inflation needed to reach and then track Trump’s component is a progress
+  metric; a smaller threshold is better.
+  Branch events and retained valid paths remain useful even when the discovery
+  comparison fails.
 - **Basin-entry tests** — start inside or near the Trump cell’s neighborhood and ask
   whether the polish loop falls in and stays; this separates “search cannot find the
   region” from “the refiner cannot hold it,” two failures with identical symptoms and
@@ -423,9 +434,10 @@ the strategy that turns the residue into the asset.
   and cross-`n` transfer put the LLM where it is strong, and exact verification makes
   its error rate affordable.
   Nothing unverified enters a prompt; nothing unverified leaves one into the corpus.
-- **Continuation turns rare-event search into path-following**, and its events —
-  bifurcations, symmetry breaking — are “a feel for the space” in recordable form, with
-  the δ-ladder’s barrier data feeding the atlas for free.
+- **Continuation can turn rare-event search into path-following.** Its numerical branch
+  events are recordable algorithmic observations; its verified paths feed clearance
+  upper bounds to the atlas.
+  Neither becomes topology for free.
 - **Calibrate on mechanism, not difficulty.** Passing `n = 5, 10` proves the machinery;
   only oblique targets — `s(17)`, inflated `n = 11`, basin-entry tests — prove the
   strategy.

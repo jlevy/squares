@@ -68,7 +68,10 @@ experiment:
     decision: rejected
     primary_criterion: gap_to_analytic
     reason: >-
-      Refutes H-002 on this cell: the median gap improves only from 8.85e-02 to 6.29e-02, against machine precision at n = 5 and n = 10. The quench is not failing - it is being handed the wrong basin, which is what exp-006 concluded and this cell confirms at the target.
+      Refutes H-002 on this cell: the median gap improves only from 8.85e-02 to
+      6.29e-02, against machine precision at n = 5 and n = 10. The tested starts remain
+      far from the target after this local procedure; no terminal-component relation was
+      measured.
     commit: '8b450a1'
 ---
 # exp-009 — the bracketing quench at `n = 11`, the target
@@ -87,7 +90,7 @@ annealer, and the ranges overlap.
 
 ## Why this cell fails while the other two succeed, and why that is the useful part
 
-The quench is not broken here — it is being handed the wrong basin.
+The tested local procedure does not take these starts to Trump’s construction.
 
 At `n = 5` and `n = 10` the annealer reaches the neighbourhood of the proved optimum and
 stops short; the quench then finishes the job exactly.
@@ -95,6 +98,13 @@ At `n = 11` the annealer is `8.8e-02` away, and no amount of local refinement cr
 that: an LP-in-cell solve optimises the cell it is given, and cyclic bracketing moves
 angles within the structure it is given.
 Both are *local* operations by construction.
+This separates a successful polishing regime from a failed target-regime refinement, but
+it does not establish that every retained endpoint lies in a different terminal
+component.
+
+**Interpretation correction, 2026-08-24.** The original report called this the “wrong
+basin.” Terminal-component identity was not measured, so the durable conclusion is the
+scoped local-procedure failure above.
 
 So the sweep separates the two failures that
 [exp-002](exp-002-baseline-n10-positive-control.md) and

@@ -246,8 +246,9 @@ pub fn run_chain(n: usize, seed: u64, chain: u64, p: &Params, budget_moves: u64)
 /// This is the entry point for a *basin-entry* test. Undirected restarting asks
 /// whether search can find a configuration; starting inside it and walking outward
 /// asks the different question of whether the configuration has an attracting
-/// neighbourhood at all -- and the eps at which the return rate collapses is the
-/// basin's radius in the units the search actually moves in.
+/// neighbourhood under this finite stochastic procedure. The eps at which its return
+/// rate collapses is an algorithm-conditioned diagnostic, not an intrinsic basin radius
+/// or evidence that the returned pose lies in the same terminal component.
 pub fn perturb(c: &mut Config, seed_cfg: &Config, eps: f64, rng: &mut Rng) {
     for k in 0..c.n {
         c.x[k] = seed_cfg.x[k] + eps * rng.signed();

@@ -180,7 +180,9 @@ def _refine(colours: list[int], adjacency: list[set[int]]) -> list[int]:
         colours = new
 
 
-def _certificate(colours: list[int], adjacency: list[set[int]]) -> str:
+def _certificate(
+    colours: list[int], adjacency: list[set[int]], original_colours: list[int] | None = None
+) -> str:
     """Canonical form by individualization-refinement.
 
     Refinement alone leaves ties wherever the graph has symmetry. The standard fix, and
@@ -189,6 +191,12 @@ def _certificate(colours: list[int], adjacency: list[set[int]]) -> str:
     result. Exhaustive, so the answer is a genuine canonical form rather than a hash
     that usually works -- and at the `n <= 12` this campaign runs, cheap.
     """
+    # Individualization deliberately overwrites `colours` on the way down the search
+    # tree.  Keep the input attributes separately: they are part of the coloured graph
+    # being canonically labelled, not merely a device for choosing a relabelling.
+    if original_colours is None:
+        original_colours = list(colours)
+
     colours = _refine(colours, adjacency)
     classes: dict[int, list[int]] = {}
     for v, c in enumerate(colours):
@@ -204,11 +212,15 @@ def _certificate(colours: list[int], adjacency: list[set[int]]) -> str:
             for v in adjacency[u]
             if u < v
         )
-        return repr((sorted(colours), edges))
+        return repr((tuple(original_colours[v] for v in order), edges))
 
     smallest = min(ambiguous, key=len)
     return min(
-        _certificate([c * 2 + (v == pick) for v, c in enumerate(colours)], adjacency)
+        _certificate(
+            [c * 2 + (v == pick) for v, c in enumerate(colours)],
+            adjacency,
+            original_colours,
+        )
         for pick in smallest
     )
 

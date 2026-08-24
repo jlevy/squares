@@ -118,22 +118,21 @@ strategies:
   family: modern_machinery
   mechanism: Certify semialgebraic infeasibility via SDP
   status: not_applied
-  note: No known application to this problem
+  note: No application to `s(n)` was found in the retrieved corpus
   refs: []
 - id: 17
   name: LP/SDP relaxation with dual certificates
   family: modern_machinery
   mechanism: Bound via a relaxation’s dual solution
   status: not_applied
-  note: No known application
+  note: No application to `s(n)` was found in the retrieved corpus
   refs: []
 - id: 18
   name: Machine-checked formal proof
   family: modern_machinery
   mechanism: Verify a case analysis in Lean/HOL Light/Isabelle
   status: not_applied
-  note: 'No for `s(n)` — but the packing precedents are now strong: Flyspeck (2014) and sphere packing
-    in dimension 8 (Feb 2026)'
+  note: 'No machine-checked `s(n)` proof was found in the retrieved corpus; adjacent precedents include Flyspeck (2014) and sphere packing in dimension 8 (Feb 2026)'
   refs: []
 - id: 19
   name: Electrical-network / Kirchhoff methods
@@ -153,23 +152,26 @@ strategies:
   name: Transversal / hitting-set theory
   family: transversal_and_wider
   mechanism: '`τ ≥ ν`; bound the piercing number'
-  status: not_applied
-  note: Implicitly — this *is* the unavoidable-points method, but the transversal literature has
-    never been applied
-  refs: []
+  status: used
+  note: >-
+    Applied explicitly by Bašić–Slivková (2018), who study the piercing number of all
+    unit-square poses in a square, connect it to s(n), and derive a specialized n=61
+    lower bound. Classical unavoidable-point proofs are the integral special case.
+  refs:
+  - Basic-Slivkova 2018
 - id: 22
   name: Fractional transversals and LP duality
   family: transversal_and_wider
   mechanism: Relax piercing to an LP; use the dual fractional packing
   status: not_applied
-  note: No known application to `s(n)`
+  note: No application to `s(n)` was found in the retrieved corpus; this is not an exhaustive negative claim
   refs: []
 - id: 23
   name: Integrality-gap bounds (Wegner-type)
   family: transversal_and_wider
   mechanism: Bound `τ/ν` for families of squares
   status: not_applied
-  note: Bounds exist for squares [Caoduro–Sebő]; not connected to `s(n)`
+  note: Bounds exist for squares [Caoduro–Sebő]; no connection to `s(n)` was found in the retrieved corpus
   refs:
   - Caoduro–Sebő
 - id: 24
@@ -177,22 +179,21 @@ strategies:
   family: transversal_and_wider
   mechanism: Structural results forcing small transversals
   status: not_applied
-  note: Not applied here
+  note: No application to `s(n)` was found in the retrieved corpus
   refs: []
 - id: 25
   name: Delsarte/Cohn–Elkies LP bounds
   family: transversal_and_wider
   mechanism: Auxiliary functions certifying density bounds
   status: not_applied
-  note: No — the triumph of *lattice* sphere packing, no container analogue
+  note: Powerful for lattice sphere packing; no bounded-container `s(n)` analogue was found in the retrieved corpus
   refs: []
 - id: 26
   name: SDP hierarchies (Lasserre/de Laat et al.)
   family: transversal_and_wider
   mechanism: Strengthen LP bounds via moment relaxations
   status: not_applied
-  note: Applied to packing density (arXiv:2001.00256, arXiv:1308.4893); no container analogue for
-    `s(n)`
+  note: Applied to packing density (arXiv:2001.00256, arXiv:1308.4893); no bounded-container `s(n)` analogue was found in the retrieved corpus
   refs: []
 - id: 27
   name: Compactness / limit arguments
@@ -207,28 +208,27 @@ strategies:
   family: transversal_and_wider
   mechanism: Assign and redistribute local charges
   status: not_applied
-  note: Used in combinatorial geometry; not for `s(n)`
+  note: Used in combinatorial geometry; no `s(n)` application was found in the retrieved corpus
   refs: []
 - id: 29
   name: Probabilistic method
   family: transversal_and_wider
   mechanism: Random constructions or averaging
   status: not_applied
-  note: Not for exact small-`n` values
+  note: No exact small-`n` application was found in the retrieved corpus
   refs: []
 - id: 30
   name: Chromatic / clique-ratio arguments
   family: transversal_and_wider
   mechanism: Bound `χ/ω` for square intersection graphs
   status: adjacent
-  note: Adjacent [Caoduro–Sebő]; not a bound on `s(n)`
+  note: Adjacent [Caoduro–Sebő]; the retrieved result is not a bound on `s(n)`
   refs:
   - Caoduro–Sebő
 families:
   elementary: Trivial bounds that hold for all n.
   unavoidable_points: One idea and its refinements; nearly every proved value of s(n) rests here.
   asymptotic: Speaks only as x tends to infinity; carries no information at small n.
-  modern_machinery: General-purpose rigorous methods; only interval branch-and-bound has been aimed
-    at rotating squares.
-  dissection_tradition: Belongs to the squared-square problem, not this one; provably does not transfer.
+  modern_machinery: General-purpose rigorous methods; among the retrieved sources, only interval branch-and-bound has been aimed at rotating squares.
+  dissection_tradition: Formulated for exact dissections; no transfer to non-tiling rotatable-square packing has been established here.
   transversal_and_wider: The wider packing-and-covering toolkit, largely unapplied to s(n).

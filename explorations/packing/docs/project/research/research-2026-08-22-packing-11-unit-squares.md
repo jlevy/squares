@@ -704,8 +704,8 @@ Use the structured form to query or plot; use these tables to read.
 | 65 | `5 + (5/2)√2` = 8.53553391 | hand | — | 8.071068 | Nagamochi | 0.4645 |
 | 66 | `3 + 4 √2` = 8.65685425 | hand | — | 8.141428 | Nagamochi | 0.5154 |
 | 67 | `8 + (1/2)√2` = 8.70710678 | strip | — | 8.211103 | Nagamochi | 0.496 |
-| 68 | 8.80345994 | annealing | — | 8.28011 | Nagamochi | 0.5234 |
-| 69 | 8.82721206 | hand | 82 | 8.348469 | Nagamochi | 0.4787 |
+| 68 | 8.80338307 | — | — | 8.28011 | Nagamochi | 0.5233 |
+| 69 | 8.82720551 | — | — | 8.348469 | Nagamochi | 0.4787 |
 | 70 | 8.88166676 | hand | 4 | 8.416198 | Nagamochi | 0.4655 |
 | 71 | 8.94407156 | annealing | — | 8.483315 | Nagamochi | 0.4608 |
 | 72 | 9 | grid | — | 8.549834 | Nagamochi | 0.4502 |
@@ -933,21 +933,21 @@ successive papers refining rather than replacing it.
 | 13 | Analytic number theory | asymptotic | Bound waste via `√(x − ⌊x⌋)` behaviour | Yes — Roth–Vaughan, asymptotic only |
 | 14 | “Good square” reduction | asymptotic | Show near-axis-aligned squares suffice asymptotically | Yes — asymptotic only (arXiv:2504.09489) |
 | 15 | Interval arithmetic + branch and bound | modern machinery | Rigorously exclude all configurations numerically | Yes for circles (n≤33); yes for unit squares with rotation but only n=3 |
-| 16 | SOS / Positivstellensatz certificates | modern machinery | Certify semialgebraic infeasibility via SDP | No known application to this problem |
-| 17 | LP/SDP relaxation with dual certificates | modern machinery | Bound via a relaxation’s dual solution | No known application |
-| 18 | Machine-checked formal proof | modern machinery | Verify a case analysis in Lean/HOL Light/Isabelle | No for `s(n)` — but the packing precedents are now strong: Flyspeck (2014) and sphere packing in dimension 8 (Feb 2026) |
+| 16 | SOS / Positivstellensatz certificates | modern machinery | Certify semialgebraic infeasibility via SDP | No application to `s(n)` was found in the retrieved corpus |
+| 17 | LP/SDP relaxation with dual certificates | modern machinery | Bound via a relaxation’s dual solution | No application to `s(n)` was found in the retrieved corpus |
+| 18 | Machine-checked formal proof | modern machinery | Verify a case analysis in Lean/HOL Light/Isabelle | No machine-checked `s(n)` proof was found in the retrieved corpus; adjacent precedents include Flyspeck (2014) and sphere packing in dimension 8 (Feb 2026) |
 | 19 | Electrical-network / Kirchhoff methods | dissection tradition | Linear circuit laws on a dissection graph | Not applicable — see below |
 | 20 | Graph encodings of dissections (c-nets) | dissection tradition | Enumerate planar graphs of a tiling | Not applicable — dissection-only |
-| 21 | Transversal / hitting-set theory | transversal and wider | `τ ≥ ν`; bound the piercing number | Implicitly — this *is* the unavoidable-points method, but the transversal literature has never been applied |
-| 22 | Fractional transversals and LP duality | transversal and wider | Relax piercing to an LP; use the dual fractional packing | No known application to `s(n)` |
-| 23 | Integrality-gap bounds (Wegner-type) | transversal and wider | Bound `τ/ν` for families of squares | Bounds exist for squares [Caoduro–Sebő]; not connected to `s(n)` |
-| 24 | Gallai- and Helly-type theorems | transversal and wider | Structural results forcing small transversals | Not applied here |
-| 25 | Delsarte/Cohn–Elkies LP bounds | transversal and wider | Auxiliary functions certifying density bounds | No — the triumph of *lattice* sphere packing, no container analogue |
-| 26 | SDP hierarchies (Lasserre/de Laat et al.) | transversal and wider | Strengthen LP bounds via moment relaxations | Applied to packing density (arXiv:2001.00256, arXiv:1308.4893); no container analogue for `s(n)` |
+| 21 | Transversal / hitting-set theory | transversal and wider | `τ ≥ ν`; bound the piercing number | Applied explicitly by Bašić–Slivková (2018), who study the piercing number of all unit-square poses in a square, connect it to s(n), and derive a specialized n=61 lower bound. Classical unavoidable-point proofs are the integral special case. |
+| 22 | Fractional transversals and LP duality | transversal and wider | Relax piercing to an LP; use the dual fractional packing | No application to `s(n)` was found in the retrieved corpus; this is not an exhaustive negative claim |
+| 23 | Integrality-gap bounds (Wegner-type) | transversal and wider | Bound `τ/ν` for families of squares | Bounds exist for squares [Caoduro–Sebő]; no connection to `s(n)` was found in the retrieved corpus |
+| 24 | Gallai- and Helly-type theorems | transversal and wider | Structural results forcing small transversals | No application to `s(n)` was found in the retrieved corpus |
+| 25 | Delsarte/Cohn–Elkies LP bounds | transversal and wider | Auxiliary functions certifying density bounds | Powerful for lattice sphere packing; no bounded-container `s(n)` analogue was found in the retrieved corpus |
+| 26 | SDP hierarchies (Lasserre/de Laat et al.) | transversal and wider | Strengthen LP bounds via moment relaxations | Applied to packing density (arXiv:2001.00256, arXiv:1308.4893); no bounded-container `s(n)` analogue was found in the retrieved corpus |
 | 27 | Compactness / limit arguments | transversal and wider | Guarantee the optimum is attained; justify the box device | Yes — foundationally [Martin 2000] |
-| 28 | Discharging | transversal and wider | Assign and redistribute local charges | Used in combinatorial geometry; not for `s(n)` |
-| 29 | Probabilistic method | transversal and wider | Random constructions or averaging | Not for exact small-`n` values |
-| 30 | Chromatic / clique-ratio arguments | transversal and wider | Bound `χ/ω` for square intersection graphs | Adjacent [Caoduro–Sebő]; not a bound on `s(n)` |
+| 28 | Discharging | transversal and wider | Assign and redistribute local charges | Used in combinatorial geometry; no `s(n)` application was found in the retrieved corpus |
+| 29 | Probabilistic method | transversal and wider | Random constructions or averaging | No exact small-`n` application was found in the retrieved corpus |
+| 30 | Chromatic / clique-ratio arguments | transversal and wider | Bound `χ/ω` for square intersection graphs | Adjacent [Caoduro–Sebő]; the retrieved result is not a bound on `s(n)` |
 
 <!-- END GENERATED: proof-strategies -->
 
@@ -1707,7 +1707,7 @@ This is the part of the program with no incumbents at all.
    only by referees with pencils.
    Nobody has ever machine-checked one.
 7. **Search for new unavoidable configurations, targeting `n = 12`.** Per
-   [the `n = 12`–`16` analysis](#n-12-to-n-16-the-next-targets-after-11), `n = 12` is
+   [the `n = 12`–`16` analysis](#n--12-to-n--16-the-next-targets-after-11), `n = 12` is
    the only open case in its range, its optimum is near-certainly the integer `4`, and
    an integer target sidesteps the degree-8 obstruction that blocks `n = 11`. The search
    is discrete-continuous — place points, verify unavoidability, minimise count — which
@@ -2089,6 +2089,12 @@ original, a cleaned `.md`, and for papers a faithful `.raw.md` extraction.
 
 ### Transversal / hitting-set theory
 
+- **[Basic-Slivkova 2018]** — Bojan Bašić and Anna Slivková, “On optimal piercing of a
+  square,” *Discrete Applied Mathematics* **247** (2018), 242–251.
+  [Online](https://doi.org/10.1016/j.dam.2018.03.048) · local
+  `papers/basic-slivkova-2018-optimal-piercing-square`. *Defines the piercing number of
+  all unit-square poses in a square, applies it directly to `s(n)`, and derives a
+  case-specific `n=61` bound that is weaker than Nagamochi’s 2005 general bound.*
 - **[Caoduro–Sebő]** — Marco Caoduro and András Sebő, “Packing, Hitting, and Colouring
   Squares,” arXiv:2206.02185. [Online](https://arxiv.org/abs/2206.02185) · local
   `papers/caoduro-sebo-packing-hitting-colouring-squares`. *`τ/ν ≤ 6` for unit squares

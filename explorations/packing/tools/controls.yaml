@@ -23,7 +23,8 @@ controls:
 
 - name: defect log - narrative link pointing nowhere
   file: defects.yaml
-  replace: ["  recorded_in: test.sh", "  recorded_in: no/such/file.md"]
+  replace: ["  bead: think-wo4p\n  recorded_in: test.sh",
+            "  bead: think-wo4p\n  recorded_in: no/such/file.md"]
   run: python3 tools/validate_schemas.py
   expect: "recorded_in does not exist"
 
@@ -39,9 +40,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 79", "count: 20"]
+  replace: ["count: 131", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 79"
+  expect: "count 20 != 131"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -165,8 +166,8 @@ controls:
 
 - name: campaign - hypothesis on the board but not in the registry
   file: campaign/ideas.md
-  replace: ["[H-018](hypotheses/H-018-basin-entry.md) is the most informative cheap\nexperiment runnable today",
-            "[H-777](hypotheses/H-777-nonexistent.md) is the most informative cheap\nexperiment runnable today"]
+  replace: ["[H-018](hypotheses/H-018-basin-entry.md) has already been refuted as registered",
+            "[H-777](hypotheses/H-777-nonexistent.md) has already been refuted as registered"]
   run: python3 campaign/ledger.py --check
   expect: "which is not in the registry"
 

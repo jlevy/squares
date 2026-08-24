@@ -263,6 +263,15 @@ human record table actually advances.
 Test: `n = 12` seeded from 11 and 13 versus cold starts, same budget.
 Kill: no improvement in budget-to-side-4+ε. Tier S.
 
+**Correction, 2026-08-24.** That test is vacuous: the cold `n = 12` grid already has
+side 4 before search.
+The canonical
+[H-004 artifact](../../../campaign/hypotheses/H-004-neighbor-transfer-seeding.md) now
+tests add-from-10 and remove-from-12 seeds against paired cold starts at `n = 11`, with
+a preregistered median best-side improvement.
+The original wording remains above so the validity error is visible rather than silently
+rewritten ([D-080](../../../defects.md)).
+
 **H-5 · The `m² − 3` family fails at `m = 10`.** *A Cleemann-style construction with
 squares tilted at `arctan(3/4)` (the 6–8–10 Pythagorean angle, mirroring Cleemann’s
 8–15–17 `arctan(8/15)` at side 17) packs 97 unit squares in side `< 10`.* Honest prior:
@@ -351,8 +360,10 @@ from an inflated container (side `s* + δ`) down to `δ = 0` with an LP re-polis
 step arrives in canonical basins — including record basins — at materially higher rate
 than equal-budget direct multistart, and the bifurcation tree (basin splits and
 vanishings along `δ`) is stable across seeds.* Grounding: continuation is the standard
-rare-solution device, and the merge-`δ` between basins doubles as the atlas’s barrier
-scale, so the same runs pay twice.
+rare-solution device.
+**Correction after D-100:** verified continuation paths also give upper bounds on
+minimax required-side clearance, but branch coalescence alone is neither a component
+merge nor a barrier certificate.
 Test: `n = 10` first (does continuation reach the proved optimum from generic inflated
 starts?), then `n = 11` (arrival rate in Trump’s cell versus direct sampling at equal
 pair-test budget). Kill: at `n = 10`, continuation’s record-arrival rate is no better
@@ -459,12 +470,12 @@ In order: H-11’s census at `n ≤ 10`, with the atlas shipped as a soft-schema
 and the descriptor definitions versioned alongside it; H-12’s rarity measurement read
 off the census (the premise test — if it fails, S6 contracts to a dedup library and the
 program reverts to throughput); H-13’s δ-continuation at `n = 10` then `11`, whose
-merge-`δ` data doubles as the atlas’s barrier estimates; H-15’s archive-versus-restarts
-comparison on the same machinery; H-14’s superdisk probe last, as the only item needing
-new geometry. S6 *interleaves* with S1 rather than following it: S1’s E4 byproducts are
-H-11’s inputs, and the atlas is where S1’s “zoo of near-optimal basins” outcome becomes
-a publishable artifact.
-The LLM lanes the strategy doc describes (atlas reading, constructor DSL) hang
+verified paths give clearance upper bounds while branch events stay algorithmic; H-15’s
+archive-versus-restarts comparison on the same machinery; H-14’s superdisk probe last,
+as the only item needing new geometry.
+S6 *interleaves* with S1 rather than following it: S1’s E4 byproducts are H-11’s inputs,
+and the atlas is where S1’s “zoo of near-optimal basins” outcome becomes a publishable
+artifact. The LLM lanes the strategy doc describes (atlas reading, constructor DSL) hang
 downstream of S6’s first artifact and are deliberately not scheduled until it exists.
 
 Ordering rationale: S0 gates everything (no trusted metric without it); S1 and S2 are

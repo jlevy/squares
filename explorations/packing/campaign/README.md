@@ -45,7 +45,7 @@ The **instance axis is `n`**, and the standing cells have different jobs:
 | 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case and a degree-8 side construction; a strong rigidity candidate, not yet rank-certified here. |
 | 12 | **open-case calibration** | `4`, the trivial grid | The 4×4 grid is the standing best, not a proved optimum. A valid lower side would be a discovery and must enter exact promotion. |
 | 16 | **proved not-below control** | `4`, proved | A reported side below `4` is known to be invalid. This is the valid replacement for the old `n=12` guard. |
-| 17 | **mechanism-matched calibration** | `4.67553009360455`, Bidwell 1998, still open | The nearest case whose record uses genuinely *oblique* structure — the corpus records tilts of `0°` and `±40°`, so two non-trivial orientations against a grid frame. The only cell here that speaks to record-*finding* rather than machinery. |
+| 17 | **mechanism-matched calibration** | `4.67553009360455`, Bidwell 1998, still open | The nearest case whose record uses genuinely *oblique* structure — the primary SVG records `0°`, `+39.80496°`, and `−36.62379°`, so two unequal non-trivial orientations against a grid frame. The only cell here that speaks to record-*finding* rather than machinery. |
 
 **The proved ladder cells calibrate machinery, not strategy.** Both proved cases are
 45°-tilt mechanisms, symmetric and reachable by blind search; `n = 11` needs an oblique
@@ -74,8 +74,8 @@ One rule settles which is true:
 
 So a claim’s criterion, tier, kill condition and status are read from the artifact and
 nowhere else; a bead may say “build the instrument for H-002” but never “H-002 is
-confirmed”. The eleven uncodified entries (`H-003`–`H-010`, `H-013`–`H-015`) are still
-prose, their ids reserved and enforced, until someone codifies them.
+confirmed”. All fifteen entries from the standing review are now codified.
+Later ids carry campaign-native claims and explicit open questions.
 
 ## The three tiers
 
@@ -219,17 +219,25 @@ Two ways, and the difference is who is watching.
 Each step does one thing, the same way, always.
 An agent drives them; nothing here needs a human awake.
 
+**Current launch status: NO-GO for unattended numeric work.** The commands below are the
+interface, not evidence that the queue is ready.
+The only operational recipe projects to about 2.8 hours locally, and independent pose
+validity, lifecycle recovery, durable reports, and per-cell queue pricing remain open.
+Use the
+[current readiness agenda](../docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md)
+for the exact 8-hour and 24-hour gate.
+
 ```bash
 cd explorations/packing
 ./test.sh --strict                                   # must be clean before a night starts
-uv run python campaign/runner.py status              # queue, in-progress, last session
-uv run python campaign/runner.py preflight           # fire every guard and report
+uv run --frozen python campaign/runner.py status              # queue, in-progress, last session
+uv run --frozen python campaign/runner.py preflight           # fire every guard and report
 
-uv run python campaign/runner.py claim H-020         # -> exp-011
-uv run python campaign/runner.py execute exp-011     # run the declared command, archive it
-uv run python campaign/runner.py record  exp-011     # decide, write the round, commit
+uv run --frozen python campaign/runner.py claim H-020         # -> exp-011
+uv run --frozen python campaign/runner.py execute exp-011     # run the declared command, archive it
+uv run --frozen python campaign/runner.py record  exp-011     # decide, write the round, commit
 
-uv run python campaign/runner.py run --session-hours 8   # the middle three, over the queue
+uv run --frozen python campaign/runner.py run --session-hours 8   # the middle three, over the queue
 ```
 
 **State lives on disk, never between steps.** `claim` writes the stub, `execute` appends
@@ -267,7 +275,7 @@ because it is code that runs once, at 3am, having never been exercised.
 #### Before the first night on a new machine
 
 ```bash
-uv run python campaign/runner.py preflight
+uv run --frozen python campaign/runner.py preflight
 ```
 
 **The regime is part of the result.** `moves` is the budget unit and the engine is
@@ -298,8 +306,8 @@ claim than it sounds and still the difference between one round a night and a qu
 draining while nobody is up.
 
 `ledger.py` needs PyYAML. `test.sh` picks an interpreter that has it, falling back to a
-pinned `uv run --with pyyaml==6.0.3 --with jsonschema==4.26.0 python3`; run it the same
-way if invoking `ledger.py` directly.
+pinned `uv run --frozen --with pyyaml==6.0.3 --with jsonschema==4.26.0 python3`; run it
+the same way if invoking `ledger.py` directly.
 
 ## What a runner may not do
 
@@ -345,8 +353,8 @@ whose Phase 2 (the quench spine) is what makes basins nameable and this record�
 `polished` tier real.
 The hypothesis registry here is the codified form of the
 [standing review’s register](../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register);
-`H-001`–`H-015` are its ids, reserved even where not yet codified, and this campaign’s
-own claims start at `H-016`.
+`H-001`–`H-015` are its now-codified ids, and this campaign’s own claims start at
+`H-016`.
 
 ## Layout
 
