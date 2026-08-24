@@ -5,7 +5,7 @@ title: Certify and structurally constrain the n = 11 optimum
 kind: task
 status: open
 priority: 1
-version: 3
+version: 4
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -15,8 +15,10 @@ labels:
   - focus-insight
 dependencies: []
 parent_id: is-01m0r7q4h688g8gx54wk0vmrhp
+child_order_hints:
+  - is-01m0sd9662q9t69eyaxcxgx2j3
 created_at: 2026-08-23T18:21:33.076Z
-updated_at: 2026-08-24T03:05:22.990Z
+updated_at: 2026-08-24T08:13:08.674Z
 ---
 Category: tractable open questions. Separate three questions currently blurred together: exact verification of Trump’s construction, local optimality or rigidity of its active set, and global optimality among all packings. Build interval KKT or nonsmooth directional certification for the known cell, then prove or computationally certify structural necessities for any packing below selected side thresholds.
 
