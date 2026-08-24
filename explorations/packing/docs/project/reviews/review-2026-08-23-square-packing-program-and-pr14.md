@@ -2515,6 +2515,34 @@ After D-187 reconciled two stale mutation anchors, the normal gate passes all 30
 in 35 wall-seconds, including all 37 negative controls and all five exact small-`n`
 replays. The campaign now contains 34 terminal rounds and 187 defect records.
 
+## PR #21 documentation-stack disposition
+
+PR #21 contributed a useful high-level account of the four operating principles, a short
+research-loop map, a typed-id glossary, and a more navigable division of ownership among
+the README, synopsis, campaign, agenda, and conventions.
+Its configured base was twelve commits behind the current PR #19 checkpoint, however, so
+merging it directly would have replaced the living synopsis with the state before
+exp-033 and exp-034.
+
+The integration therefore reapplies only its three substantive documentation commits
+onto the current branch and omits its stale base-merge commit.
+The review retains the orientation improvements while correcting five source defects and
+one classification error found in the integration draft:
+
+| Defect | Correction |
+| --- | --- |
+| D-188 | One new round decides exactly one hypothesis under the enforced schema; one hypothesis may aggregate many rounds |
+| D-189 | The valid short point-basin definition now states its missing boundary: one connected terminal component can contain many returned poses |
+| D-190 | An experiment retains the result or archive it declares; exact rounds use deterministic JSON as well as streamed JSONL |
+| D-191 | Mechanical controls do not certify mathematics, and conventions own ids and naming rather than overriding schemas, evidence, or current status |
+| D-192 | A stacked documentation PR is compared with the current head, not only its configured base, before living status is incorporated |
+| D-193 | D-189 is recorded as a validity/scope omission rather than falsely inflating the soundness class |
+
+The paused exp-035 orientation remains separate and explicit: its candidate checker is
+committed at `8aa0cbb`, but it has not been preregistered or scientifically executed and
+supports no result. `think-1582` owns that continuation; `think-4rk3` and its three
+children own only this documentation-stack review, correction, and validation.
+
 ## Post-merge operating disposition
 
 PR #14 has merged and is now the stable prototype base.

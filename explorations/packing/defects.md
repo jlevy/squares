@@ -2,14 +2,14 @@
 
 # Defect log
 
-187 defects recorded across the packing toolchain.
+193 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **62 soundness defects** — the system asserting something false about the mathematics. 51 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **68 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185).
+- **71 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181).
 - **24 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 15 | a cell of the sweep whose answer is known in advance |
-| `review` | 122 | a human or agent reading the work against a checklist |
+| `review` | 128 | a human or agent reading the work against a checklist |
 | `anomaly` | 6 | a result that made no sense, chased down |
 | `inspection` | 21 | reading the code or the design with intent |
 | `drift_check` | 12 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 8 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 8 of 187, and none of the 62 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 8 of 193, and none of the 62 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,15 +36,15 @@ The line worth reading twice: **the automated gate caught 8 of 187, and none of 
 | verifier | 4 |
 | record | 48 |
 | tooling | 42 |
-| docs | 66 |
+| docs | 72 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
 | soundness | 62 |
-| validity | 54 |
-| bookkeeping | 51 |
+| validity | 57 |
+| bookkeeping | 54 |
 | robustness | 15 |
 | performance | 5 |
 
@@ -123,6 +123,9 @@ This is the actionable list.
 | D-179 | The orientation tutorial treated undefined hardness and s(11) tractability as settled | docs |
 | D-181 | The basin definition called a deterministic quench endpoint a non-point | docs |
 | D-182 | The strategy tutorial excluded safe loss shaping and all repeated endpoint hits | docs |
+| D-189 | The newcomer glossary omitted the point-basin and component boundary | docs |
+| D-191 | Orientation prose overstated both control automation and conventions ownership | docs |
+| D-193 | The draft PR 21 review misclassified a valid but incomplete definition as soundness | docs |
 
 ## Still open
 
@@ -344,3 +347,9 @@ This is the actionable list.
 | [D-185](tools/check_synopsis.py) | 2026-08-24 | docs | bookkeeping |  | `inspection` | medium | fixed | The synopsis carried stale defect-direction and gate-detector aggregates |
 | [D-186](tools/check_n5_angle_sheet.py) | 2026-08-24 | tooling | soundness | flattering | `review` | high | fixed | The first angle-sheet bound omitted slide motion from one projection |
 | [D-187](tools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Two synopsis mutation controls retained the pre-D-186 aggregates |
+| [D-188](conventions.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The conventions authorized multi-hypothesis rounds after the schema prohibited them |
+| [D-189](README.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The newcomer glossary omitted the point-basin and component boundary |
+| [D-190](README.md) | 2026-08-24 | docs | bookkeeping | conservative | `review` | medium | fixed | The id glossary said every experiment retains a JSONL archive |
+| [D-191](README.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Orientation prose overstated both control automation and conventions ownership |
+| [D-192](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | docs | bookkeeping | conservative | `review` | high | fixed | The stacked documentation PR was twelve commits behind the living synopsis |
+| [D-193](defects.yaml) | 2026-08-24 | docs | bookkeeping | flattering | `review` | medium | fixed | The draft PR 21 review misclassified a valid but incomplete definition as soundness |

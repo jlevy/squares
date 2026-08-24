@@ -66,9 +66,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 187", "count: 20"]
+  replace: ["count: 193", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 187"
+  expect: "count 20 != 193"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -107,9 +107,9 @@ controls:
 
 - name: synopsis - gate detector aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["gate has caught eight defects in 187", "gate has caught seven defects in 187"]
+  replace: ["gate has caught eight defects in 193", "gate has caught seven defects in 193"]
   run: uv run --frozen --quiet python tools/check_synopsis.py
-  expect: "gate-detector aggregate is not 8 of 187"
+  expect: "gate-detector aggregate is not 8 of 193"
 
 - name: synopsis - unprotected-fix count drifting from the log
   file: defects.yaml

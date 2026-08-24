@@ -1,8 +1,9 @@
 # Conventions for `explorations/packing/`
 
 **The definitive registry of every convention and naming this project uses.** Where
-another document names an id class or restates a rule, it summarizes this one, and this
-one wins on any difference.
+another document restates an id or naming convention, this one wins.
+Changing program status remains owned by `SYNOPSIS.md`, and schemas and source artifacts
+remain authoritative for their own fields and evidence.
 Read this before adding an artifact, a round, a series, or a tool.
 
 Each rule is marked **[checked]** when something fails on a violation, or
@@ -51,13 +52,15 @@ that series’ directory.
 | Relation | Cardinality |
 | --- | --- |
 | round → series | exactly one |
-| round → hypotheses | **one or more**—a round may test several |
+| round → hypotheses | **exactly one** under the current contract; the field remains an array for format compatibility |
 | hypothesis → rounds | zero or more—sweep cells and replications |
 | hypothesis → exploration reports | zero or more (`derived_from`) |
 | hypothesis → strategies | zero or more (`strategy_refs`) |
 
-So `exp-` does **not** map one-to-one onto `H-`. Four rounds currently reference
-`H-016`: one three-cell round and its three per-cell replacements.
+So `exp-` does **not** map one-to-one onto `H-`: one hypothesis may aggregate many
+rounds. Four rounds currently reference `H-016`: one historical three-cell round and its
+three per-cell replacements.
+A round does not apply its one verdict to several hypotheses.
 
 **Ids are never reused, and never renumbered except on merge collision.**
 [checked: whole-set uniqueness] When two branches collide, the newer campaign renumbers

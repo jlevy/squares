@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 187
+count: 193
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4797,3 +4797,160 @@ defects:
   recurrence_of: D-185
   bead: think-7pn0
   recorded_in: tools/controls.yaml
+- id: D-188
+  title: The conventions authorized multi-hypothesis rounds after the schema prohibited them
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: since the one-verdict contract replaced multi-hypothesis rounds
+  severity: high
+  status: fixed
+  what: >-
+    conventions.md still said one round may test one or more hypotheses, and PR 21
+    propagated that rule into the synopsis. The enforced experiment schema permits
+    exactly one hypothesis because a round carries one verdict; applying it to several
+    claims previously produced the false ledger decisions recorded as D-018.
+  consequence: >-
+    Agents following the definitive conventions could design an artifact the schema
+    rejects or, after weakening the schema, revive the exact verdict-contamination bug
+    the one-hypothesis rule was introduced to prevent.
+  fix: >-
+    State exactly one hypothesis per new round in conventions and synopsis. Keep the
+    array only for format compatibility, and explain that one hypothesis may aggregate
+    many rounds rather than one round deciding many hypotheses.
+  regression: >-
+    experiment.schema.yaml enforces maxItems one; the campaign ledger preserves the
+    historical array shape without applying one verdict across claims.
+  recurrence_of: D-018
+  bead: think-tbmj
+  recorded_in: conventions.md
+- id: D-189
+  title: The newcomer glossary omitted the point-basin and component boundary
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: PR 21 draft review
+  severity: high
+  status: fixed
+  what: >-
+    README correctly defined a quench-relative point-basin as the configurations carried
+    to one endpoint, but its unqualified glossary omitted the central n=3 distinction:
+    many returned poses and keys can lie in one connected terminal component.
+  consequence: >-
+    A new agent could treat endpoint equality as the atlas identity relation, declare a
+    component census from point-preimages, and bypass the exact ambiguity boundary that
+    still blocks H-011.
+  fix: >-
+    Define the short glossary term explicitly as a point-basin for one deterministic
+    quench and state that it can split one connected terminal component. Defer the full
+    distinction to the synopsis.
+  regression: none
+  recurrence_of: D-181
+  bead: think-tbmj
+  recorded_in: README.md
+- id: D-190
+  title: The id glossary said every experiment retains a JSONL archive
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: PR 21 draft review
+  severity: medium
+  status: fixed
+  what: >-
+    README and SYNOPSIS described every exp-NNN round as an artifact plus a raw JSONL
+    archive. Search/event rounds use JSONL, but the exact proof and configuration-space
+    rounds retain deterministic JSON records.
+  consequence: >-
+    Sound exact rounds appear nonconforming or missing their promised raw evidence, and
+    an agent may rewrite a deterministic record into an inappropriate stream format.
+  fix: >-
+    Define a round as its schema-validated artifact plus the declared result or archive,
+    commonly JSON or JSONL, without making one serialization universal.
+  regression: >-
+    Every terminal experiment declares method.record, and provenance/replay checks read
+    the format named by that round.
+  bead: think-tbmj
+  recorded_in: README.md
+- id: D-191
+  title: Orientation prose overstated both control automation and conventions ownership
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: PR 21 draft review
+  severity: high
+  status: fixed
+  what: >-
+    README said schemas, the gate, preregistration, and provenance now largely enforce
+    themselves, while conventions.md said it wins on any difference with another
+    document. The defect history shows continuing mathematical and cross-document
+    review is essential, and conventions cannot override schemas, source evidence, or
+    the synopsis's changing program status.
+  consequence: >-
+    Agents could treat a green mechanical gate as scientific admissibility or resolve a
+    status/evidence conflict in favor of generic convention prose rather than the owning
+    artifact.
+  fix: >-
+    Say the machinery provides enforceable controls but does not certify mathematics or
+    maintain every claim automatically. Narrow conventions precedence to id and naming
+    conventions; schemas, source artifacts, and synopsis status keep their own authority.
+  regression: none
+  bead: think-tbmj
+  recorded_in: README.md
+- id: D-192
+  title: The stacked documentation PR was twelve commits behind the living synopsis
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: until PR 21 integration review
+  severity: high
+  status: fixed
+  what: >-
+    PR 21 was clean relative to its old stacked base but diverged from the current PR 19
+    by twelve commits. Its living synopsis stopped at exp-032, 32 rounds, and 185
+    defects, omitting exp-033, exp-034, BC-010 progress, and D-186 through D-187.
+  consequence: >-
+    A direct merge could replace the authoritative current-status document with an
+    older snapshot while GitHub still reported the stack as mergeable relative to its
+    configured base.
+  fix: >-
+    Reapply only PR 21's three substantive documentation commits onto the current PR 19
+    head, omit its stale base-merge commit, and preserve all current generated and
+    hand-authored status before running a fresh gate.
+  regression: >-
+    Synopsis, ledger, defect, README, and provenance checks run on the rebased integrated
+    tree; review compares every stacked PR against the current head, not only its stored base.
+  bead: think-2pld
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-193
+  title: The draft PR 21 review misclassified a valid but incomplete definition as soundness
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted integration pass
+  severity: medium
+  status: fixed
+  what: >-
+    The first draft of D-189 called PR 21's short point-basin definition mathematically
+    false and classified it as soundness. The definition was valid; it omitted the
+    separate terminal-component relation and therefore had a validity/scope defect.
+  consequence: >-
+    Committing that classification would have overstated the source error and inflated
+    both the soundness and flattering-soundness aggregates by one.
+  fix: >-
+    Retitle D-189 around the omitted boundary, classify it as validity, and derive all
+    affected synopsis aggregates again before committing the review.
+  regression: none
+  bead: think-tbmj
+  recorded_in: defects.yaml

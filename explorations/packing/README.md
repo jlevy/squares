@@ -43,11 +43,12 @@ efficiency may never relax either control to go faster.
 Deep work on a single principle is one mode, not the only one, and the four are staffed
 differently:
 
-- **Correctness and process are structural first.** The schemas, the gate,
-  preregistration, and provenance were set up early and now largely enforce themselves.
-  The ongoing mathematical flow is survey work—reviewing, fact-checking, and assembling
-  everything known on a topic soundly—and finding and validating the right mechanisms
-  for formal verification of key claims and new results.
+- **Correctness and process are structural first.** The schemas, gate, preregistration,
+  and provenance provide enforceable controls, but do not certify the mathematics or
+  keep every cross-document claim current by themselves.
+  The ongoing flow is survey work—reviewing, fact-checking, and assembling everything
+  known on a topic soundly—and finding and validating the right formal-verification
+  mechanisms.
 - **Efficiency runs as performance loops**: dedicated agentic loops measured purely by
   declared performance metrics—gate wall time, solver throughput, pair-tests—so an
   improvement is a number moving, never an impression.
@@ -93,9 +94,10 @@ full definitions:
 | --- | --- |
 | `H-NNN` | A registered hypothesis or open question, with its kill criterion and budget written before any run |
 | `X-NNN` | An exploration report: the recorded idea source hypotheses are mined from |
-| `exp-NNN` | One experiment round: a schema-validated artifact plus its raw JSONL archive |
+| `exp-NNN` | One experiment round: a schema-validated artifact plus its declared result or archive, commonly JSON or JSONL |
 | `series-NNN` | An ordered group of rounds sharing a runbook; only one open at a time |
 | `session-NNN` | One agent session: objective, budget, delegation evidence, stop reason, and handoff |
+| `agenda-NNN` | One mutable coordination queue ordering bounded cells by dependency and readiness |
 | `BC-NNN` | One cell in an agenda’s priority queue, currently the basin-map confidence ladder |
 | `D-NNN` | One defect: what went wrong, what caught it, and what now stops it recurring |
 | `T-N` | The synopsis’s shorthand for a theoretical result established in this repository |
@@ -111,7 +113,7 @@ The eight words a reader meets everywhere here, in one line each;
 | **configuration** | A placement of all `n` squares plus the container side: `3n + 1` coordinates |
 | **cell** | A choice of separating axis and order for every pair of squares; at fixed angles, one cell is one linear program |
 | **quench** | The deterministic refinement carrying a configuration to a local optimum |
-| **basin** | The set of configurations the quench carries to the same endpoint |
+| **basin** | For a fixed deterministic quench, the preimage of one returned pose; this point-basin can split one connected terminal component |
 | **polish** vs **exploration** | Refining within the basin you are in, versus reaching a different one |
 | **standing best** | The best side ever published for that `n`—an upper bound, not known optimal in open cases |
 | **gap** | `best_side − standing_best`, always signed |

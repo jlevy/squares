@@ -466,9 +466,11 @@ equal budget. *Unbuilt, so no two proposers have been compared at equal budget.*
 
 ### The record
 
-**Round.** One executed experiment against one or more registered hypotheses, with a
-declared timebox and a pre-registered accept rule, recorded as a schema-validated
-artifact plus its JSONL archive.
+**Round.** One executed experiment against exactly one registered hypothesis under the
+current contract, with a declared timebox and a pre-registered accept rule, recorded as
+a schema-validated artifact plus its declared result or archive.
+The hypothesis field remains an array for format compatibility; one verdict is never
+applied to several claims.
 **Series.** An ordered group of rounds sharing a runbook; only one may be open at a
 time. **Agenda.** A mutable priority queue of cells (`BC-001`, …) ordering upcoming work
 by dependency and readiness, rendered into the ledger.
@@ -1459,14 +1461,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 187 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 193 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 62 | asserted something false about the mathematics |
-| validity | 54 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 51 | recorded something its own evidence contradicts |
+| validity | 57 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 54 | recorded something its own evidence contradicts |
 | robustness | 15 | did not finish, or finished only by luck |
 | performance | 5 | worked, but cost far more than it should |
 
@@ -1476,7 +1478,7 @@ Two observations the log exists to make.
 where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught eight defects in 187, and no soundness defect ever.**
+**The automated gate has caught eight defects in 193, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1617,7 +1619,7 @@ n=4 v3 block at 4/4 admissible without weakening the screen.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Sixty-eight fixes left no regression check behind, and that list has already predicted a
+Seventy-one fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated

@@ -42,8 +42,9 @@ session:
       perturbations at the proved side with complete receipts. The number of
       exact component controls now classify the n=3 quotient interval and n=4 quotient
       point. Exp-033 proves one exact fixed-angle face relation between the equal-side
-      n=5 source poses, while sampled full-component classifications remain zero. No
-      complete-map claim follows.
+      n=5 source poses, and exp-034 embeds it in one exact angle-and-slide sheet, while
+      sampled full-component classifications remain zero. The next cone checker is
+      committed but paused before scientific execution. No complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -199,6 +200,20 @@ session:
     elapsed_seconds: null
     elapsed_quality: unavailable
     next_action: Retain all accepted findings as D-172 through D-182 and merge only the corrected docs.
+  - task: Review PR 21 against the current PR 19 checkpoint and every feedback surface
+    operator: pr19_comment_checkpoint_2
+    status: completed
+    outcome: >-
+      Found no GitHub feedback or checks. PR 21 was twelve commits behind the living
+      checkpoint; its three substantive documentation commits were suitable to reapply,
+      but its stale base merge and status roll-up were not.
+    evidence: [GitHub REST and GraphQL surfaces, exact head and merge-base comparison, claim-level diff audit]
+    files: []
+    checks: [remote head and base, comments, reviews, threads, checks, current-status comparison]
+    uncertainty: The delegate performed a read-only review and did not integrate or validate the corrected tree.
+    elapsed_seconds: 240
+    elapsed_quality: platform_measured
+    next_action: Reapply the three documentation commits, correct D-188 through D-192, and run a fresh normal gate.
   outputs:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-018-h-021-n3-basin-event-calibration.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-019-h-021-n4-basin-event-calibration.md
