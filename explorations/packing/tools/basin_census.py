@@ -24,6 +24,7 @@ import math
 import random
 import sys
 import tempfile
+import time
 from pathlib import Path
 from typing import Any
 
@@ -139,12 +140,14 @@ def make_event(
     time_budget: float,
 ) -> dict[str, Any]:
     start_x, start_y, start_theta = deterministic_start(n, seed, start_side)
+    started = time.monotonic()
     result = quench_bracket(
         start_x,
         start_y,
         start_theta,
         time_budget=time_budget,
     )
+    wall_seconds = time.monotonic() - started
     pose = result_fields(result)
     verification = screen_pose(pose)
     key = canonical_key(result.x, result.y, result.theta, result.side)
@@ -169,6 +172,7 @@ def make_event(
             "lp_solves": result.lp_solves,
             "angle_steps": result.angle_steps,
             "cell_changes": result.cell_changes,
+            "wall_seconds": wall_seconds,
             # D-165: the current producer still converts an initial cell-solve failure
             # into a dummy angle objective. Preserve its report, but never promote it.
             "all_probe_evaluations_accounted_for": False,
@@ -221,6 +225,7 @@ def validate_event(event: dict[str, Any]) -> None:
         "lp_solves",
         "angle_steps",
         "cell_changes",
+        "wall_seconds",
         "all_probe_evaluations_accounted_for",
         "scientifically_admissible_terminal_event",
         "promotion_blockers",
@@ -233,6 +238,13 @@ def validate_event(event: dict[str, Any]) -> None:
         or termination["promotion_blockers"] != ["D-165"]
     ):
         raise EventError("current quench events must remain blocked by D-165")
+    if (
+        isinstance(termination["wall_seconds"], bool)
+        or not isinstance(termination["wall_seconds"], (int, float))
+        or not math.isfinite(termination["wall_seconds"])
+        or termination["wall_seconds"] < 0
+    ):
+        raise EventError("termination wall_seconds must be finite and non-negative")
 
     expected_start = deterministic_start(n, seed, float(event["regime"]["start_side"]))
     retained_start = event["start"]
@@ -373,6 +385,7 @@ def selftest() -> None:
                 "lp_solves": 0,
                 "angle_steps": 0,
                 "cell_changes": 0,
+                "wall_seconds": 0.0,
                 "all_probe_evaluations_accounted_for": False,
                 "scientifically_admissible_terminal_event": False,
                 "promotion_blockers": ["D-165"],
@@ -406,6 +419,15 @@ def selftest() -> None:
             pass
         else:
             raise EventError("D-165-blocked event was promoted")
+        event["termination"]["scientifically_admissible_terminal_event"] = False
+        event["termination"]["wall_seconds"] = -1.0
+        write_events(path, [event])
+        try:
+            read_events(path)
+        except EventError:
+            pass
+        else:
+            raise EventError("negative event wall time replayed successfully")
     print("BASIN EVENT SELFTEST PASSED")
 
 

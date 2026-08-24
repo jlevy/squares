@@ -2,7 +2,7 @@
 
 # Defect log
 
-166 defects recorded across the packing toolchain.
+167 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -21,11 +21,11 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `review` | 111 | a human or agent reading the work against a checklist |
 | `anomaly` | 6 | a result that made no sense, chased down |
 | `inspection` | 19 | reading the code or the design with intent |
-| `drift_check` | 9 | a generated view disagreeing with its source |
+| `drift_check` | 10 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 7 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 7 of 166, and none of the 56 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 7 of 167, and none of the 56 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 7 of 166, and none of 
 | engine | 9 |
 | quench | 15 |
 | verifier | 4 |
-| record | 45 |
+| record | 46 |
 | tooling | 39 |
 | docs | 54 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 7 of 166, and none of 
 | --- | ---: |
 | soundness | 56 |
 | validity | 49 |
-| bookkeeping | 44 |
+| bookkeeping | 45 |
 | robustness | 13 |
 | performance | 4 |
 
@@ -317,3 +317,4 @@ This is the actionable list.
 | [D-164](golden/basin-maps.yaml) | 2026-08-24 | quench | validity | conservative | `control_cell` | high | outstanding | The fixed-cell solver mislabeled a numerical rejection as mathematical infeasibility |
 | [D-165](tools/regression_test.py) | 2026-08-24 | quench | validity | flattering | `control_cell` | critical | outstanding | Initial cell-solve failures bypassed the fixed-point termination guard |
 | [D-166](tools/basin_census.py) | 2026-08-24 | record | soundness | flattering | `drift_check` | critical | fixed | Basin events called producer convergence a fixed-cell certificate |
+| [D-167](tools/basin_census.py) | 2026-08-24 | record | bookkeeping |  | `drift_check` | high | fixed | Basin events omitted the wall time needed to price the loop |

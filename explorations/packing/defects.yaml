@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 166
+count: 167
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4193,4 +4193,29 @@ defects:
     reject the forged promotion while D-165 is the declared blocker.
   recurrence_of: D-044
   bead: think-f2t0
+  recorded_in: tools/basin_census.py
+- id: D-167
+  title: Basin events omitted the wall time needed to price the loop
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: drift_check
+  latent_for: one four-seed calibration block
+  severity: high
+  status: fixed
+  what: >-
+    BasinEvent/v2 retained LP solves and angle steps but no per-event wall time. The
+    first n=3 block completed quickly, yet its archive could not say which seeds were
+    expensive or price a larger block from its own evidence.
+  consequence: >-
+    An autonomous scheduler would have to guess from command-level timing, obscuring
+    stragglers and preventing measured decisions about which n values fit the next
+    checkpoint or the remaining eight-hour budget.
+  fix: >-
+    Measure monotonic wall time around each quench, retain it with the termination
+    evidence, and require a finite non-negative value during replay.
+  regression: >-
+    Basin-event selftest and replay require the wall_seconds field and reject malformed
+    termination records.
+  bead: think-4g3f
   recorded_in: tools/basin_census.py
