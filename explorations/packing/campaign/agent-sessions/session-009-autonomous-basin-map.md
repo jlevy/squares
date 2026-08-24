@@ -173,6 +173,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-027-h-021-n6-basin-event-v3-retention.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-028-h-021-n7-basin-event-v3.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - campaign/schemas/agenda.schema.yaml
   - tools/basin_census.py
@@ -263,10 +264,17 @@ session:
     Exp-028 retains and replays four valid n=7 outcomes with 18,286 settled evaluations.
     One converges at side 3.2; three hit the time budget and remain non-admissible. This
     validates retention, not basin frequency or component completeness.
+  - >-
+    Exp-029 retains and replays four independently valid n=8 outcomes in 38.00 seconds.
+    One converges at side 3, one retains a typed unsettled cell-cycle evaluation, and
+    two hit the time budget. Four-event median screen and key batches cost 0.000684s and
+    0.004956s; quench work, not canonicalization, dominates this cell.
+  - The post-exp-029 full normal gate passes all thirty steps in 61 wall-seconds.
   stop_reason: null
   next_action: >-
-    Execute preregistered exp-029 only: four fixed n=8 seeds at 10 seconds each under a
-    120-second command cap, followed by its bounded stage timing audit.
+    After exp-029 and the full gate are committed and pushed, execute only BC-007: one
+    fixed n=9 seed under a 20-second quench and 60-second command cap, then stop or
+    profile if the full cell exceeds 30 seconds.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -288,7 +296,7 @@ completes the n=4 v3 block.
 The historical v2 block remains promotion-blocked as recorded, and no endpoint
 descriptor has been promoted to a connected component.
 
-The event stack now retains complete blocks through n=7. D-126 still prevents a fixed
+The event stack now retains complete blocks through n=8. D-126 still prevents a fixed
 wall-clock budget from defining reproducible scientific work, so these cells validate
 retention and replay only; they do not estimate basin frequencies.
 The separate n=5 connectivity question remains blocked until its component-identity

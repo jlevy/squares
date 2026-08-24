@@ -137,7 +137,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [8]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Does the basic event stack still close at the upper edge of H-021's intended
@@ -150,12 +150,18 @@ agenda:
     depends_on: [BC-005]
     next_evidence: exp-029 plus event replay and a bounded quench/screen/key/replay timing audit
     parallel_group: event-calibration
-    note: Claimed as exp-029 with D-126 carried explicitly.
+    note: >-
+      Exp-029 retains four independently valid events: one admissible side-3 endpoint,
+      one typed unsettled cell-cycle stop, and two typed time-budget stops. Median
+      four-event screen and key batches cost 0.000684s and 0.004956s; D-126 remains.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
   - id: BC-007
     purpose: tool_validation
     owner_focus: efficiency
     instances: [9]
-    state: tentative
+    state: ready
     priority: 2
     question: >-
       Can one proved perfect-grid cell traverse the full event and key path before the

@@ -35,33 +35,56 @@ experiment:
       campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
     budget: four seeds; 10 seconds per quench; 120-second process cap; retain every stop
     record: campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
-  lease: {expires: '2026-08-24T18:55:00Z', host: local-m1-pro}
+  effort:
+    timebox: 30m result slice; 120s measurement cap
+    wall_seconds: 38.004218124900945
+    agent_minutes: 5
+    stopped_by: criterion
   results:
   - shape: determination
     question: >-
       At the upper edge of H-021's intended small-n range, do all four starts retain
       independently replayable events or typed stops without censoring evidence?
     role: outcome
-    outcome: invalid
-    checked_by: pending BasinEvent/v3 semantic replay
+    outcome: criterion_met
+    checked_by: >-
+      BasinEvent/v3 replay: 4/4 independently valid events retained; 1/4
+      producer-converged and admissible; two typed time-budget stops and one typed
+      unsettled cell-cycle stop; 16,341/16,342 fixed-point evaluations settled
   verdict:
-    decision: in-progress
+    decision: baseline
     primary_criterion: complete independently replayable event outcome for every fixed seed
     reason: >-
-      Preregistered before measurement. This validates event retention and cost only;
-      D-126 prevents deterministic-work or frequency claims, and keys are not components.
+      The complete block retains and replays without a launch-path failure. Three typed
+      stops make the cell unsuitable for basin-frequency or completeness claims under
+      D-126, and endpoint keys remain observations rather than components.
+    commit: 69c6008
 ---
-# exp-029 — preregistered `n = 8` event validation
+# exp-029 — the `n = 8` event-validation cell is complete
 
 BC-006 tests the upper edge of H-021’s declared small-n classifier range without
 changing the instrument, seeds, per-seed budget, validity screen, blockers, or replay
-contract. Every attempted seed must become one replayable event, admissible or blocked.
+contract. Every attempted seed became one replayable event, admissible or blocked.
 
-After the event block, a bounded timing audit will separately measure retained quench
-wall time, one full semantic replay, and five repeated batches each of independent pose
-screening and canonical-key computation.
+All four endpoints independently validate.
+Seed 0 converges at side `3.000000000000004` and is admissible.
+Seed 1 stops at side `3.001495814083` after one of 16,342 fixed-point evaluations
+reports an adjacent-objective cell cycle; the event retains both
+`producer_not_converged` and `unsettled_fixed_point_evaluation`. Seeds 2 and 3 hit the
+time budget at sides `3.493924749807` and `3.248875584058`.
+
+The four quenches retain 38.004 seconds of wall time.
+Across five repeated four-event batches, the median independent screen costs 0.000684
+seconds and the median canonical key computation costs 0.004956 seconds.
+Full semantic replay costs 0.007029 seconds in the already-started process; the separate
+frozen CLI replay costs 0.713 seconds including startup.
+Canonicalization is about 0.013% of retained quench wall at n=8, so it is not yet the
+loop bottleneck.
+
 These timings diagnose the loop; they do not change the event verdict.
-D-126 continues to prohibit basin-frequency inference from wall-clock-censored starts.
+The three typed stops make this cell too censored for landscape statistics.
+D-126 continues to prohibit basin-frequency inference from wall-clock-censored starts,
+and endpoint descriptors are not connected components.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
