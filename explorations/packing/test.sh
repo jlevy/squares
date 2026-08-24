@@ -334,6 +334,13 @@ step_basin_atlas() {
   $PY tools/atlas_check.py
 }
 
+step_basin_events() {
+  # The durable observation boundary for a census: full poses, deterministic starts,
+  # independent validity replay, tamper detection, and idempotent event ids. This does
+  # not call an endpoint key a connected basin; classification is a later instrument.
+  $PY tools/basin_census.py --selftest
+}
+
 step_small_n_moduli() {
   # Rebuild the exact n = 3 record and SVG, then the separate rigid n = 4 record.
   # These replay checks do not write artifacts.
@@ -529,6 +536,7 @@ STEPS=(
   "soundness perimeter|step_soundness_perimeter"
   "lint floor (python)|step_lint_floor_python"
   "basin atlas|step_basin_atlas"
+  "basin event record and replay|step_basin_events"
   "historical regressions|step_historical_regressions"
   "small-n optimal moduli|step_small_n_moduli"
   "negative controls|step_negative_controls"
