@@ -1153,13 +1153,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 168 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 169 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 56 | asserted something false about the mathematics |
-| validity | 50 | was correct, but the measurement did not bear on the question |
+| validity | 51 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 45 | recorded something its own evidence contradicts |
 | robustness | 13 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
@@ -1253,7 +1253,7 @@ vocabulary that could not record the H-024 result, the omitted `n=29` source pro
 that the falsifier exposed, the roll-up’s obsolete blanket claim about exploratory
 record evidence, the distinction between a branch linearization and a true Bouligand
 motion, and a certificate replay that did not require one-to-one branch coverage.
-The next tranche, D-139 through D-168, records the missing hard-square topology
+The next tranche, D-139 through D-169, records the missing hard-square topology
 literature, a stale closed-family contact claim, exact-moduli integration errors,
 Stromquist source transcription and proof-chain mistakes, stale campaign effort, the
 paper’s extraneous Lemma 4 root, and the escaping Figure 14 box.
@@ -1279,13 +1279,14 @@ probe. The step now propagates the checker failure immediately.
 D-164 separates one source of the newly visible nonconvergence: a successful HiGHS solve
 missed the fixed-cell post-check by about `2e-11` beyond its cutoff and was labeled
 mathematically infeasible.
-A two-point sensitivity check reaches the proved `n=3` side, but the cause-erasing
-solver outcome must be fixed before any tolerance policy changes.
+Typed outcomes now retain the cause, row, residual, retry margin, and actual solver-call
+count. A single one-row retry leaves the `1e-10` acceptance screen unchanged, restores
+the proved n=3 and n=10 controls, and is replayed against the original LP rows.
 D-165 records the bounded implementation’s stop condition: initial cell-solve failures
 still bypass D-132’s typed result and become dummy objectives inside the angle search.
-Propagating them makes two known-answer controls stop; a conservative retry restores
-their side values but leaves an explicit `n=10` cell cycle, so the prototype was stashed
-instead of weakening the convergence contract.
+That code path is now typed and D-168 closes the n=10 cell degeneracy, but the defect
+remains open until a newly generated basin-event block proves every probe accounted for;
+the older exp-018 through exp-020 artifacts remain correctly blocked.
 D-166 removes the resulting false certificate from BasinEvent/v1. Version 2 retains the
 full stopping event and independent validity screen but marks every current event
 promotion-blocked by D-165, and replay refuses a forged admissible flag.
@@ -1293,8 +1294,10 @@ D-167 adds the missing per-event wall time, so subsequent seed blocks and larger
 values can be selected from measured throughput rather than command-level guesses.
 D-168 separates an equal-objective finite cell closure from a genuinely unresolved
 cycle. The n=10 control closes after enumerating at most eight adjacent cells, but D-165
-still blocks promotion because sixteen other angle evaluations fail before receiving a
-typed outcome; the closure result does not erase that independent failure.
+still blocks the retained event block until its replacement records the new typed path.
+D-169 fixes a second post-check hole found while typing those failures: containment rows
+were never replayed.
+Every accepted cell now passes the full original LP residual vector.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).

@@ -28,6 +28,7 @@ import math
 import time
 from dataclasses import dataclass, field
 from itertools import product
+from typing import Literal
 
 import numpy as np
 from scipy.optimize import linprog
@@ -77,13 +78,30 @@ class FixedPointResult:
 
 
 @dataclass
+class CellSolveResult:
+    """One LP outcome, retaining numerical failure separately from infeasibility."""
+
+    outcome: Literal["optimal", "infeasible", "solver_failure", "postcheck_rejection"]
+    side: float | None = None
+    x: list[float] = field(default_factory=list)
+    y: list[float] = field(default_factory=list)
+    solver_status: int | None = None
+    detail: str = ""
+    max_violation: float | None = None
+    max_violation_row: int | None = None
+    max_violation_kind: Literal["containment", "pair"] | None = None
+    solver_calls: int = 1
+    repair_row: int | None = None
+    repair_margin: float | None = None
+
+
+@dataclass
 class _AdjacentClosureResult:
     """A bounded, equal-objective closure of adjacent fixed-angle LP cells."""
 
     side: float
     x: list[float]
     y: list[float]
-    solves: int
     cell_count: int
 
 
@@ -166,8 +184,8 @@ def choose_cell(
     return cell
 
 
-def solve_cell(theta, cell, n: int):
-    """Minimise the enclosing side over one cell. Returns (side, x, y) or None.
+def solve_cell(theta, cell, n: int) -> CellSolveResult:
+    """Minimise one cell while preserving why a solve did not yield usable evidence.
 
     Variables are `[s, x_0..x_{n-1}, y_0..y_{n-1}]`. Containment is four inequalities
     per square against the variable side; separation is one per pair, because the axis
@@ -209,29 +227,132 @@ def solve_cell(theta, cell, n: int):
     # s = 3.877083568 against Trump's 3.877083590, with pair (4,8) overlapping by
     # 9.876e-08. This is the same tolerance-is-a-blind-spot failure the exact verifier
     # exists to close, appearing one layer up in the refiner.
-    res = linprog(
-        obj,
-        A_ub=np.array(rows),
-        b_ub=np.array(rhs),
-        bounds=[(0, None)] + [(None, None)] * (2 * n),
-        method="highs",
-        options={
-            "primal_feasibility_tolerance": 1e-10,
-            "dual_feasibility_tolerance": 1e-10,
-        },
-    )
-    if not res.success:
-        return None
-    v = res.x
-    x, y = list(v[1 : 1 + n]), list(v[1 + n :])
+    a_ub = np.array(rows)
+    b_ub = np.array(rhs)
 
-    # Trust nothing: check the solution against the constraints that were imposed.
-    # A violation here is a solver artifact, and returning it would let a tolerance
-    # masquerade as a discovery.
-    for i, j, ax, ay, h, sign in cell:
-        if sign * ((x[i] - x[j]) * ax + (y[i] - y[j]) * ay) - h < -LP_FEASIBLE_EPS:
-            return None
-    return float(v[0]), x, y
+    def run_lp(active_rhs):
+        return linprog(
+            obj,
+            A_ub=a_ub,
+            b_ub=active_rhs,
+            bounds=[(0, None)] + [(None, None)] * (2 * n),
+            method="highs",
+            options={
+                "primal_feasibility_tolerance": 1e-10,
+                "dual_feasibility_tolerance": 1e-10,
+            },
+        )
+
+    res = run_lp(b_ub)
+    if not res.success:
+        return CellSolveResult(
+            outcome="infeasible" if res.status == 2 else "solver_failure",
+            solver_status=int(res.status),
+            detail=str(res.message),
+        )
+    v = res.x
+    violations = a_ub @ v - b_ub
+    max_row = int(np.argmax(violations))
+    max_violation = max(float(violations[max_row]), 0.0)
+    max_kind: Literal["containment", "pair"] = "containment" if max_row < 4 * n else "pair"
+    solver_calls = 1
+    repair_row = None
+    repair_margin = None
+
+    # HiGHS can report an optimum just beyond its own requested feasibility screen.
+    # Retry exactly once, tightening only the offending RHS by the measured violation
+    # plus the original screen. The second result is still replayed against ORIGINAL
+    # rows. This changes neither the acceptance tolerance nor an infeasible/failure
+    # outcome, and the one-retry bound prevents a numerical repair loop.
+    if max_violation > LP_FEASIBLE_EPS:
+        repair_row = max_row
+        repair_margin = max_violation + LP_FEASIBLE_EPS
+        repair_rhs = np.array(b_ub, copy=True)
+        repair_rhs[repair_row] -= repair_margin
+        repaired = run_lp(repair_rhs)
+        solver_calls = 2
+        if repaired.success:
+            res = repaired
+            v = repaired.x
+            violations = a_ub @ v - b_ub
+            max_row = int(np.argmax(violations))
+            max_violation = max(float(violations[max_row]), 0.0)
+            max_kind = "containment" if max_row < 4 * n else "pair"
+        else:
+            return CellSolveResult(
+                outcome="postcheck_rejection",
+                side=float(v[0]),
+                x=list(v[1 : 1 + n]),
+                y=list(v[1 + n :]),
+                solver_status=int(repaired.status),
+                detail=f"bounded residual retry failed: {repaired.message}",
+                max_violation=max_violation,
+                max_violation_row=max_row,
+                max_violation_kind=max_kind,
+                solver_calls=solver_calls,
+                repair_row=repair_row,
+                repair_margin=repair_margin,
+            )
+    x, y = list(v[1 : 1 + n]), list(v[1 + n :])
+    if max_violation > LP_FEASIBLE_EPS:
+        return CellSolveResult(
+            outcome="postcheck_rejection",
+            side=float(v[0]),
+            x=x,
+            y=y,
+            solver_status=int(res.status),
+            detail="optimal LP solution exceeded the declared residual screen",
+            max_violation=max_violation,
+            max_violation_row=max_row,
+            max_violation_kind=max_kind,
+            solver_calls=solver_calls,
+            repair_row=repair_row,
+            repair_margin=repair_margin,
+        )
+    return CellSolveResult(
+        outcome="optimal",
+        side=float(v[0]),
+        x=x,
+        y=y,
+        solver_status=int(res.status),
+        detail=str(res.message),
+        max_violation=max_violation,
+        max_violation_row=max_row,
+        max_violation_kind=max_kind,
+        solver_calls=solver_calls,
+        repair_row=repair_row,
+        repair_margin=repair_margin,
+    )
+
+
+def _cell_failure_reason(result: CellSolveResult) -> str:
+    """Stable evidence label for a non-optimal cell solve."""
+    if result.outcome == "postcheck_rejection":
+        assert result.max_violation is not None
+        return (
+            f"post-check rejection ({result.max_violation_kind} row "
+            f"{result.max_violation_row}, max violation {result.max_violation:.3e})"
+        )
+    if result.outcome == "infeasible":
+        return "mathematically infeasible cell"
+    return f"solver failure (status {result.solver_status}: {result.detail})"
+
+
+def _incoming_side(theta, x, y) -> float:
+    """Enclosing side of an input whose first LP did not yield an accepted point."""
+    extents = [
+        (
+            _half_extent(angle, 1.0, 0.0),
+            _half_extent(angle, 0.0, 1.0),
+        )
+        for angle in theta
+    ]
+    return max(
+        max(a + e[0] for a, e in zip(x, extents, strict=True))
+        - min(a - e[0] for a, e in zip(x, extents, strict=True)),
+        max(b + e[1] for b, e in zip(y, extents, strict=True))
+        - min(b - e[1] for b, e in zip(y, extents, strict=True)),
+    )
 
 
 def _solve_adjacent_cell_closure(  # noqa: PLR0911 - each failed obligation refuses closure
@@ -240,7 +361,7 @@ def _solve_adjacent_cell_closure(  # noqa: PLR0911 - each failed obligation refu
     n: int,
     *,
     max_cells: int = MAX_ADJACENT_CELL_CLOSURE,
-) -> tuple[_AdjacentClosureResult | None, int]:
+) -> tuple[_AdjacentClosureResult | None, int, str]:
     """Close a finite cell cycle without claiming a global fixed-angle optimum.
 
     A tie locus can make the cell reread alternate even though every adjacent LP has
@@ -255,11 +376,11 @@ def _solve_adjacent_cell_closure(  # noqa: PLR0911 - each failed obligation refu
     at these angles and therefore does not certify a global fixed-angle optimum.
     """
     if not cycle_cells:
-        return None, 0
+        return None, 0, "empty cycle"
     options = [[row] for row in cycle_cells[0]]
     for cell in cycle_cells[1:]:
         if len(cell) != len(options):
-            return None, 0
+            return None, 0, "cell row-count mismatch"
         for index, row in enumerate(cell):
             if row not in options[index]:
                 options[index].append(row)
@@ -268,19 +389,20 @@ def _solve_adjacent_cell_closure(  # noqa: PLR0911 - each failed obligation refu
     while True:
         cell_count = math.prod(len(rows) for rows in options)
         if cell_count > max_cells:
-            return None, solves
+            return None, solves, f"closure exceeded {max_cells}-cell cap"
         outcomes = []
         expanded = False
         for selection in product(*options):
             cell = list(selection)
             solved = solve_cell(theta, cell, n)
-            solves += 1
-            if solved is None:
-                return None, solves
-            side, x, y = solved
+            solves += solved.solver_calls
+            if solved.outcome != "optimal":
+                return None, solves, _cell_failure_reason(solved)
+            assert solved.side is not None
+            side, x, y = solved.side, solved.x, solved.y
             reread = choose_cell(x, y, theta, preferred=cell)
             if len(reread) != len(options):
-                return None, solves
+                return None, solves, "reread row-count mismatch"
             for index, row in enumerate(reread):
                 if row not in options[index]:
                     options[index].append(row)
@@ -290,11 +412,11 @@ def _solve_adjacent_cell_closure(  # noqa: PLR0911 - each failed obligation refu
             continue
         sides = [outcome[0] for outcome in outcomes]
         if max(sides) - min(sides) > LP_FEASIBLE_EPS:
-            return None, solves
+            return None, solves, "adjacent objectives disagree"
         # Keep the conservative (largest-side) representative.  Differences within
         # this closure are solver-scale, but choosing the smallest would flatter it.
         side, x, y = max(outcomes, key=lambda outcome: outcome[0])
-        return _AdjacentClosureResult(side, x, y, solves, cell_count), solves
+        return _AdjacentClosureResult(side, x, y, cell_count), solves, ""
 
 
 def solve_to_fixed_point(  # noqa: PLR0911 - each termination reason is retained evidence
@@ -318,10 +440,20 @@ def solve_to_fixed_point(  # noqa: PLR0911 - each termination reason is retained
     cell = choose_cell(x, y, theta)
     history = [cell]
     seen = {tuple(cell): 0}
-    best = solve_cell(theta, cell, n)
-    solves += 1
-    if best is None:
-        return None
+    first = solve_cell(theta, cell, n)
+    solves += first.solver_calls
+    if first.outcome != "optimal":
+        return FixedPointResult(
+            side=first.side if first.side is not None else _incoming_side(theta, x, y),
+            x=first.x or list(x),
+            y=first.y or list(y),
+            solves=solves,
+            changes=changes,
+            settled=False,
+            reason=f"initial cell {_cell_failure_reason(first)}",
+        )
+    assert first.side is not None
+    best = (first.side, first.x, first.y)
     for _ in range(max_iters):
         side, x, y = best
         nxt = choose_cell(x, y, theta, preferred=cell)
@@ -337,7 +469,7 @@ def solve_to_fixed_point(  # noqa: PLR0911 - each termination reason is retained
             )
         nxt_key = tuple(nxt)
         if nxt_key in seen:
-            closure, closure_solves = _solve_adjacent_cell_closure(
+            closure, closure_solves, closure_reason = _solve_adjacent_cell_closure(
                 theta, history[seen[nxt_key] :], n
             )
             solves += closure_solves
@@ -358,17 +490,17 @@ def solve_to_fixed_point(  # noqa: PLR0911 - each termination reason is retained
                 solves=solves,
                 changes=changes,
                 settled=False,
-                reason="cell cycle",
+                reason=f"cell cycle ({closure_reason})",
             )
         seen[nxt_key] = len(history)
         history.append(nxt)
         cell = nxt
         changes += 1
-        trial = solve_cell(theta, cell, n)
-        solves += 1
-        if trial is None:
-            # The re-read cell is worse or infeasible: keep the incumbent rather than
-            # letting the loop oscillate between two cells forever.
+        solved_trial = solve_cell(theta, cell, n)
+        solves += solved_trial.solver_calls
+        if solved_trial.outcome != "optimal":
+            # Keep the incumbent, but preserve the cause rather than turning every LP
+            # refusal into mathematical infeasibility.
             return FixedPointResult(
                 side=side,
                 x=x,
@@ -376,8 +508,10 @@ def solve_to_fixed_point(  # noqa: PLR0911 - each termination reason is retained
                 solves=solves,
                 changes=changes,
                 settled=False,
-                reason="re-read cell infeasible",
+                reason=f"re-read cell {_cell_failure_reason(solved_trial)}",
             )
+        assert solved_trial.side is not None
+        trial = (solved_trial.side, solved_trial.x, solved_trial.y)
         # HiGHS is asked for 1e-10 primal/dual feasibility. Comparing two LP
         # objectives at 1e-15 treated solver-scale roundoff as a genuinely worse cell
         # and is exactly what D-132 exposed on the n=10 positive control.

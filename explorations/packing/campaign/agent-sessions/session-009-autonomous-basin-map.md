@@ -106,6 +106,17 @@ session:
     elapsed_seconds: 7
     elapsed_quality: platform_measured
     next_action: Retain the n=10 closure trace and run the scientific controls separately.
+  - task: Run static checks on typed LP outcomes and bounded repair
+    operator: d168_mechanical_check
+    status: completed
+    outcome: Ruff, BasedPyright, byte compilation, and whitespace checks pass.
+    evidence: [frozen Ruff output, BasedPyright output, py_compile output]
+    files: [sqpack/quench.py, tools/regression_test.py]
+    checks: [Ruff, BasedPyright, py_compile, git diff check]
+    uncertainty: The delegate did not run the mathematical controls or choose the retry policy.
+    elapsed_seconds: 6
+    elapsed_quality: platform_measured
+    next_action: Run retained n=3, n=10, n=11, and adversarial failure controls.
   outputs:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-018-h-021-n3-basin-event-calibration.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-019-h-021-n4-basin-event-calibration.md
@@ -121,25 +132,46 @@ session:
   - campaign/schemas/agent-session.schema.yaml
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
   - sqpack/quench.py
+  - tools/regression_test.py
   checks:
   - Basin-event generation and replay pass for n=3, n=4, and n=5.
   - Every retained pose passes the independent floating-point geometry screen.
   - Every event states that D-165 blocks scientific promotion.
   - The portable runbook and session clocks pass Flowmark, schema, campaign-record, README, and synopsis checks.
   - >-
-    The n=10 control exposes finite equal-objective closures of two, four, and eight
-    cells; closure and unequal-objective mutations pass, but sixteen other probe solves
-    still return no typed outcome, so D-165 continues to block scientific promotion.
+    A diagnostic replay classified all sixteen formerly censored n=10 probes as
+    post-check rejections on pair rows 66 or 77, with residuals from 1.00000008e-10 to
+    9.999996e-10; none was mathematical infeasibility or a solver failure.
+  - >-
+    The bounded one-row retry keeps the original 1e-10 screen, uses 25 retries on n=10,
+    accepts every result against the original rows with worst residual 1.55e-15, and
+    reaches the proved side within 1.33e-15. The retained n=3 seed-1 and n=11 controls
+    also pass; synthetic infeasible, solver-failure, pair, and containment cases retain
+    their distinct causes.
+  - >-
+    An independent `sqpack.verify` screen accepts the repaired n=10 terminal pose,
+    checks all 45 pairs, reports no failures, and recomputes the identical side
+    3.707106781186549. The quench used 4,157 actual LP calls and converged in 6.6 seconds
+    on this host.
+  - >-
+    Replacing a nine-second full n=3 gate replay with its exact retained failing cell
+    preserves the row, residual, retry, and side evidence; the historical-regression
+    lane now passes in 12 seconds instead of the prior 18-second D-168 checkpoint.
   - >-
     The 36-second normal gate passes all thirty steps after D-168: the real n=4 quench
     converges and the store reports five of six converged proposals. D-165 still blocks
     scientific promotion because failed angle probes remain untyped and unaccounted.
+  - >-
+    With typed outcomes and the bounded retry in production, the full normal gate again
+    passed all thirty steps in 57 seconds. Replacing only the slow n=3 regression with
+    its retained failing cell then reduced the affected historical-regression lane to
+    12 seconds; that lane and all static checks passed after the test-only change.
   stop_reason: null
   next_action: >-
-    In one thirty-minute slice, land the typed D-164 outcomes from the preserved
-    prototype and measure the sixteen n=10 failed probes by cause. Preregister a bounded
-    repair only if those causes are homogeneous and independently screenable; otherwise
-    retain D-165 and switch lanes.
+    In one thirty-minute slice, produce and independently replay one supervised n=3
+    BasinEvent/v3 whose all-probes-accounted claim is derived from the producer rather
+    than hard-coded. Promote no endpoint identity, then decide whether D-165 can close
+    before regenerating any larger event block.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -151,8 +183,10 @@ objective.
 
 The session therefore stopped the size sweep after n=5. The finite n=10 tie-cell test
 has now closed every observed two-, four-, and eight-cell degeneracy without claiming a
-global optimum. Sixteen different probe evaluations still lack typed outcomes, so the
-next bounded slice classifies those failures rather than widening the quench redesign.
+global optimum. The next slice typed all sixteen missing outcomes, added one bounded
+one-row retry, and replayed every accepted result against every original LP row.
+The old event block remains promotion-blocked until a new supervised event derives that
+evidence from the producer instead of inheriting a hard-coded flag.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
