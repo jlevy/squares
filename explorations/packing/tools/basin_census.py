@@ -37,7 +37,7 @@ from sqpack.canonical import canonical_key
 from sqpack.quench import QuenchResult, quench_bracket
 from sqpack.verify import corners_from_poses, float_sign, verify_packing
 
-CONTRACT = "packing.squares:BasinEvent/v1"
+CONTRACT = "packing.squares:BasinEvent/v2"
 REGIME = "uniform-independent-v1+quench-bracket-v1"
 ORACLE_TOL = 1e-10
 
@@ -169,9 +169,11 @@ def make_event(
             "lp_solves": result.lp_solves,
             "angle_steps": result.angle_steps,
             "cell_changes": result.cell_changes,
-            # ``converged`` is now unreachable unless every fixed-cell evaluation used
-            # by the quench settled; D-132's typed result is the enforcement boundary.
-            "fixed_cell_settlement_certified": result.converged,
+            # D-165: the current producer still converts an initial cell-solve failure
+            # into a dummy angle objective. Preserve its report, but never promote it.
+            "all_probe_evaluations_accounted_for": False,
+            "scientifically_admissible_terminal_event": False,
+            "promotion_blockers": ["D-165"],
         },
         "verification": verification,
         "endpoint_key": {
@@ -211,6 +213,26 @@ def validate_event(event: dict[str, Any]) -> None:
     )
     if event["event_id"] != expected_id:
         raise EventError("event id does not bind its regime, n, and seed")
+
+    termination = event["termination"]
+    expected_termination_fields = {
+        "producer_converged",
+        "reason",
+        "lp_solves",
+        "angle_steps",
+        "cell_changes",
+        "all_probe_evaluations_accounted_for",
+        "scientifically_admissible_terminal_event",
+        "promotion_blockers",
+    }
+    if set(termination) != expected_termination_fields:
+        raise EventError("termination evidence has the wrong fields")
+    if (
+        termination["all_probe_evaluations_accounted_for"] is not False
+        or termination["scientifically_admissible_terminal_event"] is not False
+        or termination["promotion_blockers"] != ["D-165"]
+    ):
+        raise EventError("current quench events must remain blocked by D-165")
 
     expected_start = deterministic_start(n, seed, float(event["regime"]["start_side"]))
     retained_start = event["start"]
@@ -351,7 +373,9 @@ def selftest() -> None:
                 "lp_solves": 0,
                 "angle_steps": 0,
                 "cell_changes": 0,
-                "fixed_cell_settlement_certified": False,
+                "all_probe_evaluations_accounted_for": False,
+                "scientifically_admissible_terminal_event": False,
+                "promotion_blockers": ["D-165"],
             },
             "verification": screen_pose(valid_pose),
             "endpoint_key": {
@@ -373,6 +397,15 @@ def selftest() -> None:
             pass
         else:
             raise EventError("tampered endpoint replayed successfully")
+        event["endpoint"] = valid_pose
+        event["termination"]["scientifically_admissible_terminal_event"] = True
+        write_events(path, [event])
+        try:
+            read_events(path)
+        except EventError:
+            pass
+        else:
+            raise EventError("D-165-blocked event was promoted")
     print("BASIN EVENT SELFTEST PASSED")
 
 

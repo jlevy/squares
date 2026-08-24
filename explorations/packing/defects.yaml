@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 165
+count: 166
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4164,3 +4164,33 @@ defects:
   recurrence_of: D-132
   bead: think-9qz0
   recorded_in: tools/regression_test.py
+- id: D-166
+  title: Basin events called producer convergence a fixed-cell certificate
+  date: '2026-08-24'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: drift_check
+  latent_for: one committed event-contract checkpoint
+  severity: critical
+  status: fixed
+  what: >-
+    BasinEvent/v1 set `fixed_cell_settlement_certified` directly from the quench's
+    `producer_converged` flag. D-165 proves that an initial cell-solve failure can bypass
+    the typed termination path and become a dummy angle objective, so that producer flag
+    cannot certify that every evaluation settled.
+  consequence: >-
+    A replayable, independently valid pose could be promoted as a terminal basin on the
+    strength of a certificate the instrument did not possess. The event archive would
+    make the overclaim durable and easy for an unattended consumer to trust.
+  fix: >-
+    BasinEvent/v2 removes the false certificate and explicitly records that all probe
+    evaluations are not accounted for, scientific promotion is false, and D-165 is the
+    blocker. Starts, full poses, producer outcomes, and independent validity remain
+    usable as stopping-event evidence.
+  regression: >-
+    The event selftest changes scientific admissibility to true and requires replay to
+    reject the forged promotion while D-165 is the declared blocker.
+  recurrence_of: D-044
+  bead: think-f2t0
+  recorded_in: tools/basin_census.py
