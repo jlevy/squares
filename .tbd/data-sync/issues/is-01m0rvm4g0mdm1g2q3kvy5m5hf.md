@@ -5,7 +5,7 @@ title: Classify exact small-n optimal configuration spaces
 kind: task
 status: open
 priority: 1
-version: 1
+version: 4
 spec_path: explorations/packing/campaign/hypotheses/H-032-small-n-optimal-moduli.md
 labels:
   - packing
@@ -13,7 +13,11 @@ labels:
   - research
 dependencies: []
 parent_id: is-01m0r7q4h688g8gx54wk0vmrhp
+child_order_hints:
+  - is-01m0shdh4arvmv3vyfyfpnqfpx
+  - is-01m0shsv9v0pnbvnjwz4qgq16n
+  - is-01m0shtf6wg4kdc42rrakz1r7w
 created_at: 2026-08-24T03:04:33.023Z
-updated_at: 2026-08-24T03:04:33.023Z
+updated_at: 2026-08-24T09:32:29.276Z
 ---
 Execute H-032 from the exact n=3 quotient control through the first complete higher-n case. Acceptance: analytic n=3 parameterization, D4 x S_n quotient including stabilizers, stratum-incidence view, sampled agreement, and a separately scoped certified n=5 or n=6 classification plan. Sampling keys alone never decide connectedness.
