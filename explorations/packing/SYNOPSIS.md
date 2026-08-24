@@ -38,7 +38,7 @@ Those principles govern four capabilities built so far:
    written before the run, a metric vector, an accept rule, a declared timebox, and a
    ledger generated from the artifacts rather than typed.
 4. **Account for what goes wrong.** A defect log with the same discipline as the
-   experiment record, because 23 of the 30 soundness failures found so far pointed in
+   experiment record, because 30 of the 40 soundness failures found so far pointed in
    the *flattering* direction and none was caught by the automated gate.
 
 The strategy that organises lanes 3 and 4 is stated in
@@ -220,12 +220,12 @@ construction and the optimum is unknown.
 
 **Polish failure** and **exploration failure.** The decomposition of a gap, and the
 campaign’s central diagnostic.
-A **polish failure** is a gap left while already in the right basin—closable by a better
-refiner, as `n = 10` was, from `4.19e-04` to `1.33e-15`. An **exploration failure** is a
-gap because the search is in the wrong basin—untouched by refinement, as `n = 11` is,
-`8.85e-02` to `6.29e-02` and no further.
-Which one a number represents is not readable off the number; it is established by
-running the refiner and seeing whether the gap moves.
+A **polish failure** is a gap that the declared refiner closes, as `n = 10` was, from
+`4.19e-04` to `1.33e-15`. An **exploration-or-model failure** is a gap that remains
+after that local procedure, as the tested `n = 11` starts did, from `8.85e-02` to
+`6.29e-02`. Neither numerical behavior proves a terminal-component relation.
+“Right basin” and “wrong basin” require the component evidence tracked by H-021 through
+H-023.
 
 **`reached_basin`.** A recorded outcome meaning `best_side − standing_best < 1e-4`. It
 is a **numerical proxy** for “found the right combinatorial class”, not evidence of
@@ -249,8 +249,10 @@ boundary. The tiers are set out in full under
 Two coinages appear in side work and are deliberately **not** adopted, because the
 project already has clearer words for both.
 
-- **“polish gap” / “exploration gap.”** Write **polish failure** and **exploration
-  failure** for the diagnosis, and *right basin* / *wrong basin* for the state.
+- **“polish gap” / “exploration gap.”** Write **polish failure** and **exploration-or-
+  model failure** for the scoped procedure outcome.
+  Reserve *right basin* / *wrong basin* for a state supported by a declared
+  terminal-component relation.
   A gap is a number; whether it is polish or exploration is a *conclusion about* that
   number, and the two-word compound hides the inference.
   Neither compound occurs anywhere in this directory and neither should start.
@@ -352,7 +354,7 @@ Where the program has spent effort, and what came of it.
 | **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); six rounds. Every method tried lands `≈ 6e-02` short: the failure is **exploration**, not polish |
 | **12** | open; `4` believed optimal | `4` | **open-case calibration** | Two rounds. Returns exactly `4.0` on all five seeds, which is baseline evidence rather than a known-answer guard. Also where the search and proof lanes are planned to meet |
 | 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
-| 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°` and `±40°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) returns **exactly `5.0`**, the trivial `5×5` grid, on all five seeds |
+| 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) returns **exactly `5.0`**, the trivial `5×5` grid, on all five seeds |
 | 61, 78, 97 | open, `m² − 3` | `8`, `9`, `10` (grids) | opportunistic slot | The narrowest gaps in the table. An analytic Cleemann-style attempt at `arctan(3/4)` is registered and **not yet made** |
 | 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](frontier/README.md); 63 of the 65 open cases are bounded below by Nagamochi’s general theorem |
 
@@ -705,9 +707,10 @@ Nothing at `n = 11`. The bracketing quench moves the target from `8.85e-02` to
 `6.29e-02`
 ([exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md)),
 against machine precision on both proved instance cells.
-The quench is not failing there—**it is being handed the wrong basin.** An LP-in-cell
-solve is a local operation: it returns the best packing in the cell it is given, and if
-the proposer is in the wrong basin, that is what gets polished.
+The tested starts remain far from Trump’s construction after the local procedure.
+An LP-in-cell solve is local: it returns the best packing in the cell it is given.
+That explains the lack of rescue without deciding whether the endpoints belong to a
+distinct terminal component.
 
 ### Other consequences
 
@@ -886,8 +889,8 @@ view; this section is the reading of it.
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 0 | — |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What is the certified local geometry of Trump’s packing? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | Are the observed `n=5` endpoints in one terminal family? | 0 | — |
-| [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | blocked | Verified record packings through `n=30` use at most three angle classes | 0 | — |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected? | 0 | — |
+| [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | blocked | Verified record packings through `n=30` use at most three angle classes; `n=29` is a counterexample candidate | 0 | — |
 
 ### Confirmed
 
@@ -917,7 +920,7 @@ Refuted as stated, and the cell-level split is the result:
 | --- | --- | --- |
 | `n = 5` | [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | **accepted**—`2.22e-15`, machine precision |
 | `n = 10` | [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) | **accepted**—`1.33e-15`, twelve orders of improvement |
-| `n = 11` | [exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | **rejected**—`6.29e-02`; the quench is handed the wrong basin |
+| `n = 11` | [exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | **rejected**—`6.29e-02`; tested starts remain far from Trump after the local procedure |
 | all three | [exp-006](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | **rejected**—the original free-angle descent, 1.1–1.3× everywhere |
 
 The word that failed is *any*. The quench is a **polisher, not a rescue**: it makes the
@@ -1047,32 +1050,33 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Eighty-seven defects, [one line each](defects.md), generated from `defects.yaml` and
-checked in the gate.
+One hundred seven defects, [one line each](defects.md), generated from `defects.yaml`
+and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 30 | asserted something false about the mathematics |
-| validity | 20 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 28 | recorded something its own evidence contradicts |
+| soundness | 40 | asserted something false about the mathematics |
+| validity | 26 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 32 | recorded something its own evidence contradicts |
 | robustness | 7 | did not finish, or finished only by luck |
 | performance | 2 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Twenty-three of the thirty soundness defects pointed in the *flattering* direction**,
-where the error looks like a success.
+**Thirty of the forty soundness defects pointed in the *flattering* direction**, where
+the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught two defects in eighty-seven, and no soundness defect
-ever.** Every soundness failure was found by a control cell whose answer was known in
-advance, a rule written down before the measurement, a generated view contradicting its
-source, or someone reading carefully.
+**The automated gate has caught four defects in one hundred seven, and no soundness
+defect ever.** Every soundness failure was found by a control cell whose answer was
+known in advance, a rule written down before the measurement, a generated view
+contradicting its source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. The two the gate did catch ([D-024](defects.md) and [D-064](defects.md))
-are bookkeeping and robustness defects, found by a contiguity check and an integration
-run—which is the pattern, not an exception: gates are good at the mechanical classes and
-have never once caught the mathematics being wrong.
+*surprised*. The four the gate did catch ([D-024](defects.md), [D-064](defects.md),
+[D-106](defects.md), and [D-107](defects.md)) are bookkeeping or robustness defects,
+found by contiguity, integration, mutation-anchor, and reconciliation checks—which is
+the pattern, not an exception: gates are good at the mechanical classes and have never
+once caught the mathematics being wrong.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed
@@ -1127,12 +1131,15 @@ quench residual; D-084 removes unsupported rigidity and gap-rank facts from the 
 frontier artifact; D-085 freezes living uv commands; and D-086 replaces stale overnight
 and handoff state with the current launch agenda.
 D-087 separates the angle-class algorithm, corpus law, and single-cell kink claims.
+D-088 through D-105 are the source, geometry, identity and hypothesis-design corrections
+from the final creativity pass; D-106 and D-107 are the mutation-anchor and synopsis
+reconciliation failures its first gate attempts caught.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Twenty-eight fixes left no regression check behind, and that list has already predicted
-a recurrence once. The
+Forty-four fixes left no regression check behind, and that list has already predicted a
+recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
 relative to what they govern, a discovery treated as a defect until an independent layer
@@ -1144,7 +1151,7 @@ The middle tier is built and works.
 Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s
 slopes to three decimals.
 Polish is solved on both proved instance cells to machine precision.
-One hypothesis is confirmed, three are refuted informatively, and the campaign has a
+One hypothesis is confirmed, four are refuted informatively, and the campaign has a
 defect log good enough to predict its own regressions.
 
 **The bottleneck has moved from polish to proposal.** Nothing in the current toolkit
@@ -1176,10 +1183,16 @@ because this is the deliverable’s own shape.
 Until that is settled and the census runs, the cartography program is a well-argued bet
 rather than a finding.
 
-**Three things are cheap and undone.** `n = 17`, the only registered instance cell that
-tests record-*finding*; the `m² − 3` analytic attempt, which needs no engine; and
-re-running `exp-005`’s basin-entry sweep against the quench rather than the annealer,
-which was that round’s own stated successor.
+**Three things are cheap and high-information.** Independently reconstruct the primary
+`n = 29` pose to decide H-024’s apparent counterexample; analyze Trump’s complete active
+system for H-022; and regenerate the `n = 5` equal-side pair with full poses for the
+repaired H-023. `n = 17` has already been run, while H-018’s registered basin-entry
+claim is refuted and its useful successors are H-021 through H-023.
+
+**One open measurement defect constrains timing forecasts.** [D-101](defects.md): the
+historical exp-007/008 round-level wall times disagree with retained per-call durations.
+Price the first maps from raw calls or a current receipt until those aggregates are
+reconstructed.
 
 **One contained defect constrains every polished number.** [D-021](defects.md): the
 solver floor is about `1e-11` in the side, so the `polished` tier cannot resolve finer,

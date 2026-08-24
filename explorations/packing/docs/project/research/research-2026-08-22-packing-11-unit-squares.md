@@ -704,8 +704,8 @@ Use the structured form to query or plot; use these tables to read.
 | 65 | `5 + (5/2)√2` = 8.53553391 | hand | — | 8.071068 | Nagamochi | 0.4645 |
 | 66 | `3 + 4 √2` = 8.65685425 | hand | — | 8.141428 | Nagamochi | 0.5154 |
 | 67 | `8 + (1/2)√2` = 8.70710678 | strip | — | 8.211103 | Nagamochi | 0.496 |
-| 68 | 8.80345994 | annealing | — | 8.28011 | Nagamochi | 0.5234 |
-| 69 | 8.82721206 | hand | 82 | 8.348469 | Nagamochi | 0.4787 |
+| 68 | 8.80338307 | — | — | 8.28011 | Nagamochi | 0.5233 |
+| 69 | 8.82720551 | — | — | 8.348469 | Nagamochi | 0.4787 |
 | 70 | 8.88166676 | hand | 4 | 8.416198 | Nagamochi | 0.4655 |
 | 71 | 8.94407156 | annealing | — | 8.483315 | Nagamochi | 0.4608 |
 | 72 | 9 | grid | — | 8.549834 | Nagamochi | 0.4502 |

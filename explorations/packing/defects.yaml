@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 87
+count: 107
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -2187,3 +2187,449 @@ defects:
     is n = 11 only. Generalizations require separate registered hypotheses.
   regression: none
   recorded_in: campaign/hypotheses/H-001-angle-class-reduction.md
+- id: D-088
+  title: The finite-n frontier missed newer certified n=68 and n=69 constructions
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: conservative
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The corpus still called the December 2025 Kingbird values the best known upper
+    bounds at n = 68 and n = 69. The UnitSquare Project's primary 29 July 2026 release
+    publishes strictly smaller interval-validated constructions at both cases.
+  consequence: >-
+    Frontier gaps, parent comparisons and any held-out record-improvement campaign used
+    stale targets. At n = 69 the old parent's degree-82 polynomial was also attached to
+    a value that is no longer the current upper bound.
+  fix: >-
+    Updated both cases to the released decimals and provenance, removed obsolete exact
+    metadata from the new n = 69 numerical construction, and stated that the repository
+    has not independently re-run the release validation.
+  regression: none
+  bead: think-f82b
+  recorded_in: frontier/n-068.md
+- id: D-089
+  title: The n=17 record was given symmetric plus-or-minus 40-degree orientations
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: neutral
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    Frontier, campaign and experiment artifacts described Bidwell's record with angle
+    classes 0 and +/-40 degrees. The primary SVG defines unequal nonzero orientations
+    +39.8049589798 and -36.6237863834 degrees.
+  consequence: >-
+    A false symmetry entered the geometry corpus and the calibration story, potentially
+    biasing angle-class proposers and contact-system reconstructions.
+  fix: >-
+    Corrected every living geometry summary and added a dated correction to exp-011;
+    the qualitative three-class oblique calibration claim remains.
+  regression: none
+  bead: think-f82b
+  recorded_in: frontier/n-017.md
+- id: D-090
+  title: Two low-angle examples were generalized into a universal tiny-angle prior
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The strategy report treated Trump and n = 17 as evidence that continuous angle
+    dimension is empirically tiny, and H-024 proposed at most three raw classes through
+    n = 30. The primary n = 29 SVG declares five distinct nonzero orientations plus the
+    axis-aligned class.
+  consequence: >-
+    Search could be narrowed around a false universal prior and a full corpus sweep
+    could be funded after its cheapest apparent counterexample was already public.
+  fix: >-
+    Reframed the structural question as effective angular rank or compressibility,
+    marked n = 29 as H-024's first counterexample check, and stopped short of a formal
+    refutation until the full pose is independently reconstructed and verified.
+  regression: none
+  bead: think-w5rb
+  recorded_in: campaign/hypotheses/H-024-record-angle-class-count.md
+- id: D-091
+  title: H-010 did not reproduce Stromquist's conditional proof mechanism
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-010 compressed Stromquist's argument into a ten-point escape followed by a
+    standalone twelve-point unavoidability claim. The theorem instead localizes an
+    avoiding square, forces that same square to contain three A-points, then uses nine
+    further points in a counting contradiction for eleven packed squares.
+  consequence: >-
+    A tool could pass the registered known-answer control without reproducing the
+    implication that makes the published lower bound work.
+  fix: >-
+    Rewrote H-010 around independently checked localization, forced cohabitation and
+    counting implications; numerical saturation remains censored rather than proof.
+  regression: none
+  bead: think-bvy9
+  recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
+- id: D-092
+  title: Structured asymptotic data repeated the phantom Roth-Vaughan constant
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    asymptotic-waste-bounds.yaml correctly said Roth and Vaughan leave an implicit
+    Vinogradov constant, then called 10^-100 their explicit constant in its own summary.
+  consequence: >-
+    The authoritative structured record contradicted its primary-source correction and
+    made the asymptotic lower bound look more explicit than it is.
+  fix: >-
+    Replaced the contradiction with the actual implicit-constant status.
+  regression: none
+  bead: think-f82b
+  recorded_in: frontier/asymptotic-waste-bounds.yaml
+- id: D-093
+  title: Contact canonicalization discarded every advertised node attribute
+  date: '2026-08-24'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: critical
+  status: fixed
+  what: >-
+    Individualization made refined colors unique, and the leaf certificate serialized
+    only those replacement colors. On K3, uniform, singly marked and fully distinct
+    initial colors produced the same certificate, so angle class, wall-contact count
+    and degree disappeared on symmetric contact graphs.
+  consequence: >-
+    Structurally distinct endpoints could collide, making discovery curves appear to
+    saturate and corrupting H-003, H-009, H-021 and H-023.
+  fix: >-
+    Carry immutable original colors through refinement and serialize them in canonical
+    node order. The focused K3 regression checks both attribute discrimination and
+    relabeling invariance.
+  regression: tools/canonical_check.py compares uniform, marked and relabeled marked K3 certificates
+  bead: think-siui
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-094
+  title: The idea board repeated the wrong n=11 gap rank
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: drift_check
+  severity: medium
+  status: fixed
+  what: >-
+    After D-084 corrected the frontier and synopsis, campaign/ideas.md still called the
+    n = 11 gap the smallest open gap through n = 100.
+  consequence: >-
+    The target's scalar priority was overstated when n = 61, 78 and 97 have smaller open
+    gaps.
+  fix: >-
+    The board now calls it fourth-smallest overall and smallest among open cases with a
+    nontrivial standing record.
+  regression: none
+  recurrence_of: D-084
+  bead: think-f82b
+  recorded_in: campaign/ideas.md
+- id: D-095
+  title: The idea board called a refuted hypothesis the best runnable experiment
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: drift_check
+  severity: medium
+  status: fixed
+  what: >-
+    H-018 had a terminal rejected experiment and its attraction interpretation had been
+    retracted, but the living idea board still called it the most informative cheap
+    experiment runnable today.
+  consequence: >-
+    A new agent could rerun a resolved claim instead of advancing its component-identity
+    successors.
+  fix: >-
+    The board now points from the finite-refiner residual to H-021 through H-023 and
+    states that H-018 is not a runnable basin-width experiment.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/ideas.md
+- id: D-096
+  title: Algebraic degree was promoted into a proof-method ceiling and obstruction
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: conservative
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The n = 5 case called degree two exactly the ceiling of unavoidable-point proofs,
+    while n = 11 called degree eight the obstruction. No theorem in the corpus bounds
+    the algebraic degree such a proof can certify.
+  consequence: >-
+    A promising lower-bound language could be abandoned because an empirical pattern
+    among solved values was narrated as an impossibility theorem.
+  fix: >-
+    Both cases now present degree as a warning and research question, not a method
+    ceiling.
+  regression: none
+  bead: think-f82b
+  recorded_in: frontier/n-005.md
+- id: D-097
+  title: Strategy catalogues were described as exhaustive histories of the field
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    Frontier and campaign docs called the catalogues every method anyone had ever used,
+    even though several entries are adjacent methods explicitly not applied to this
+    problem and no exhaustive-history search supports the claim.
+  consequence: >-
+    Research-gap analysis could mistake a useful working map for complete literature
+    coverage.
+  fix: >-
+    The docs now call them broad working inventories of methods from this problem and
+    adjacent practice.
+  regression: none
+  bead: think-f82b
+  recorded_in: frontier/README.md
+- id: D-098
+  title: Source code still called a finite stochastic return threshold a basin radius
+  date: '2026-08-24'
+  layer: engine
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    After H-018 and exp-005 retracted the basin-width interpretation, search.rs still
+    said the epsilon where finite return rate collapses is the basin's radius.
+  consequence: >-
+    Future instruments could revive an intrinsic landscape claim from an
+    algorithm-conditioned convergence diagnostic.
+  fix: >-
+    The source comment now names the procedure and says it establishes neither an
+    intrinsic radius nor terminal-component identity.
+  regression: none
+  recurrence_of: D-083
+  bead: think-f82b
+  recorded_in: sqsearch/src/search.rs
+- id: D-099
+  title: H-023 placed six non-optimal endpoints in one optimum-side family question
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-023 asked which six n = 5 endpoints connect at the proved optimum side, but the
+    retained atlas says found_optimum false; all six sides exceed the proved optimum and
+    only the first two share a side.
+  consequence: >-
+    Feasible connectivity across unequal objective levels could be mislabeled one
+    terminal family, and an absent optimum observation could be treated as measured.
+  fix: >-
+    H-023 now asks same-level stationary-set connectivity only for the equal-side pair
+    and minimax side-clearance bounds for unequal-side candidates.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/hypotheses/H-023-n5-terminal-connectivity.md
+- id: D-100
+  title: Delta continuation had no preserved parameter and reversed its progress metric
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-013 proposed inflating the container then applying the existing side-minimizing
+    quench after each decrement, which erases delta on its first call. Living prose also
+    called the largest successful inflation progress although less required slack is the
+    stronger result.
+  consequence: >-
+    An undefined algorithm could emit a smoothly moving but scientifically meaningless
+    metric and its branch coalescence could be mistaken for feasible-set topology.
+  fix: >-
+    The hypothesis now requires a fixed-side feasibility/projection family, uses minimum
+    required inflation, and treats valid paths only as upper bounds on clearance
+    barriers.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/hypotheses/H-013-delta-continuation.md
+- id: D-101
+  title: Historical quench round wall times disagree with retained per-call durations
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    exp-007 records 3.4 wall seconds although its sequential raw archive contains two
+    approximately 30-second candidate quenches plus other calls. exp-008's 67-second
+    aggregate is likewise below the sum of retained per-call durations.
+  consequence: >-
+    Sub-minute atlas forecasts and speedup priorities cannot use those round-level
+    effort fields as measured baselines.
+  fix: >-
+    none yet. Reconstruct the intended timing boundary from raw events or rerun the
+    cells under the current execution receipt, then annotate rather than silently
+    replace historical values.
+  regression: none
+  bead: think-xzew
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
+- id: D-102
+  title: H-006 treated dual pose support as candidate piercing-point loci
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    In the natural fractional hitting-set LP, primal variables weight candidate points
+    and dual variables weight hard-to-hit square poses. H-006 instead interpreted dual
+    mass as spatial point support.
+  consequence: >-
+    A stable discretization could generate proof candidates on the wrong mathematical
+    objects and pass a well-formed but irrelevant metric.
+  fix: >-
+    Recast H-006 as primal-dual column generation: dual poses drive point-column
+    generation, while primal support proposes unavoidable points for continuous
+    falsification and later certification.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md
+- id: D-103
+  title: H-011 omitted its declared component-identifiability prerequisites
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-011's prose said terminal-component identity gates an unseen-mass census, while its
+    machine-readable prerequisites named only H-002 and omitted H-021 and H-023.
+  consequence: >-
+    Queue construction could launch species-count inference while positive-dimensional
+    families and unresolved endpoint support still make the species undefined.
+  fix: >-
+    Added H-021 and H-023 to H-011's declared prerequisites.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/hypotheses/H-011-small-n-census.md
+- id: D-104
+  title: Living artifacts still promoted local refinement failure into a wrong-basin claim
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    Exp-006, exp-009, the idea board, synopsis and generated ledger called the n = 11
+    starts the wrong basin even though several runs were censored and no terminal-
+    component relation had been measured.
+  consequence: >-
+    A local procedure's failure could be turned into a topological classification and
+    used to calibrate rarity or transition claims.
+  fix: >-
+    Historical artifacts carry visible corrections and living summaries now say only
+    that the tested starts remained far from Trump after the declared local procedure.
+  regression: none
+  recurrence_of: D-052
+  bead: think-f82b
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md
+- id: D-105
+  title: Superdisk continuation lacked a shape normalization and branch rules
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    H-014 varied superdisk exponent without declaring whether area, inradius,
+    circumradius or side stayed fixed, and did not say how circle orientation symmetry
+    breaks or branches terminate.
+  consequence: >-
+    Apparent square-end improvement could be a scale artifact, while arbitrary branch
+    selection could make the proposer comparison irreproducible.
+  fix: >-
+    H-014 now fixes unit area and requires pseudo-arclength continuation with explicit
+    symmetry-breaking, bifurcation and termination events.
+  regression: none
+  bead: think-f82b
+  recorded_in: campaign/hypotheses/H-014-superdisk-continuation.md
+- id: D-106
+  title: A living negative-control anchor still targeted corrected hypothesis prose
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  detected_by: gate
+  severity: medium
+  status: fixed
+  what: >-
+    Correcting the idea board's stale H-018 recommendation removed the exact text used
+    by the unknown-hypothesis mutation control, so the control could no longer perform
+    its mutation.
+  consequence: >-
+    The normal gate stopped at the missing anchor; without the one-match guard, the
+    referential-integrity regression could have disappeared silently.
+  fix: >-
+    Re-anchored the mutation to the corrected H-018 registry link while preserving the
+    same nonexistent-H-777 failure.
+  regression: negctl requires every replacement anchor to appear exactly once
+  bead: think-f82b
+  recorded_in: tools/controls.yaml
+- id: D-107
+  title: Generated campaign views and next-work state lagged their corrected sources
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: gate
+  severity: high
+  status: fixed
+  what: >-
+    The synopsis still reported 87 defects, old class and unprotected-fix totals, three
+    refuted hypotheses, and n = 17 plus an H-018 rerun as undone. Its H-024 status cell
+    also made the registry-table parser treat the artifact as absent. A later formatting
+    pass left the generated campaign ledger stale after its source hypotheses changed.
+  consequence: >-
+    The main orientation document contradicted the generated defect log and campaign
+    ledger and pointed an agent toward completed or superseded work.
+  fix: >-
+    Reconciled all aggregates with defects.yaml, kept the H-024 status machine-readable,
+    mentioned open D-101, replaced the obsolete next-work list, and regenerated the
+    ledger after source formatting was complete.
+  regression: tools/check_synopsis.py derives registry, defect, class, open and unprotected counts from source artifacts
+  bead: think-f82b
+  recorded_in: SYNOPSIS.md

@@ -119,7 +119,10 @@ not component identity or a rigidity certificate.
 
 H-024 separately tests the descriptive claim that verified record packings through
 `n=30` use at most three orientation classes.
-It neither proves nor is proved by H-001’s algorithmic performance.
+The primary `n=29` SVG is now a six-class counterexample candidate, so verify that one
+pose before funding the full corpus sweep.
+It neither proves nor is proved by H-001’s algorithmic performance; a refutation should
+produce a successor about effective angular rank or compressibility.
 
 H-017 remains a low-priority scaling fallback after the validity boundary is repaired.
 H-016, H-018, H-019, and H-020 are resolved for their registered regimes and should not

@@ -1924,6 +1924,66 @@ Ten hostile-isolation prototype beads—`think-5zzb`, `think-xe5l`, `think-tg66`
 `think-z4db` is also canceled: exact source inspection showed its alleged duplicate
 README link was a tool-output false positive.
 
+## Final creativity review: source and measurement corrections
+
+The mathematical-frontier pass began by challenging the facts used to choose research
+directions. It found 18 substantive defects before proposing new experiments.
+They are recorded as D-088 through D-105 so the creative portfolio does not inherit a
+false geometry, an irrelevant proof control, or an algorithm-conditioned landscape
+claim.
+
+| Finding | Defect | Disposition |
+| --- | --- | --- |
+| F-42 | D-088 | The 29 July 2026 UnitSquare release replaces the stored `n=68,69` upper bounds; the release validation is cited but not claimed as independently re-run here |
+| F-43 | D-089 | `n=17` uses `0°`, `+39.8049589798°`, and `−36.6237863834°`, not symmetric `±40°` |
+| F-44 | D-090 | The primary `n=29` SVG is a six-angle-class counterexample candidate to H-024; effective angular rank replaces the universal small-class prior |
+| F-45 | D-091 | H-010 now reproduces Stromquist’s localization, forced-three-point cohabitation, and counting implications rather than a nonexistent standalone 12-point theorem |
+| F-46 | D-092 | The structured asymptotic record no longer attributes an explicit `10^-100` constant to Roth and Vaughan |
+| F-47 | D-093 | Contact canonicalization now preserves angle/wall/degree attributes through individualization, with a colored-`K3` regression |
+| F-48 | D-094, D-095 | The idea board has the correct `n=11` gap rank and no longer schedules refuted H-018 as a fresh experiment |
+| F-49 | D-096, D-097 | Algebraic degree is a warning rather than a proof-method ceiling, and the strategy catalogues are working maps rather than exhaustive histories |
+| F-50 | D-098, D-104 | A finite stochastic return threshold and a local-refinement failure are no longer called an intrinsic basin radius or a proved wrong component |
+| F-51 | D-099 | H-023 asks same-level terminal connectivity only for the equal-side pair; unequal-side rows get a minimax clearance question |
+| F-52 | D-100 | H-013 now requires a fixed-side projection family, measures minimum required inflation, and separates observed branch events from certified connectivity |
+| F-53 | D-101 | Exp-007/008 round wall times conflict with retained per-call durations and are quarantined from map pricing pending reconstruction |
+| F-54 | D-102 | H-006 now uses dual hard poses to generate columns and primal support to propose piercing points |
+| F-55 | D-103 | H-011 machine-readable prerequisites now include its declared H-021/H-023 identity gates |
+| F-56 | D-105 | H-014 fixes unit area and requires explicit symmetry-breaking and branch-event rules |
+
+The first normal-gate attempt then caught D-106: correcting the stale H-018 prose had
+invalidated a mutation-control anchor.
+The one-match guard stopped rather than silently dropping coverage; the anchor now
+targets the corrected registry link and retains the same referential-integrity mutation.
+The second attempt caught D-107 when the synopsis still carried old defect totals,
+treated a prose-annotated H-024 status as an absent registry row, and scheduled
+already-resolved work.
+Its aggregates and next-work state now agree with the corrected sources.
+A later stage of the same reconciliation defect caught the generated ledger stale after
+source formatting; regeneration now follows formatting at this checkpoint.
+
+Three source checks materially changed the frontier.
+The [UnitSquare machine-readable release](https://hmbelvedere.com/data/results.json)
+gives strictly smaller construction-only bounds at `n=68` and `n=69`. The primary
+Kingbird [`n=17` SVG](https://kingbird.myphotos.cc/packing/square-17.svg) corrects the
+orientation data, while its
+[`n=29` SVG](https://kingbird.myphotos.cc/packing/square-29.svg) declares five distinct
+nonzero angle entities plus the axis-aligned class.
+The latter remains a counterexample candidate rather than a campaign verdict until the
+complete pose is independently reconstructed and verified.
+
+The canonicalization witness was exact and local: before the repair,
+`_certificate([0,0,0], K3)`, `_certificate([0,0,1], K3)`, and the fully distinguished
+variant were equal. Individualization had replaced every original node color before the
+leaf certificate was serialized.
+Preserving the original color sequence in canonical node order fixes the collision
+without weakening relabeling invariance.
+
+The recurring conceptual correction is that a numerical pipeline defines an
+**algorithm-conditioned observation**. A mathematical terminal component, feasible
+clearance barrier, or local optimum needs additional path, active-system, tangent-cone,
+or interval evidence.
+This distinction drives the basin-map design in the companion creative-frontier review.
+
 ## Changes applied on the stacked review branch
 
 The review branch fixes issues whose correct resolution does not depend on a research
@@ -2115,9 +2175,11 @@ poses are retained and their results are labelled untrusted screen data.
   The counterexample concerns cell selection at fixed angles.
 - The current live catalogue agrees with the repository on the examined common-n record
   values. The `n=17` polynomial supports the repository’s chosen decimal.
-- The latest primary-source search found active asymptotic work in 2025–2026, but no
-  newer finite-`n<=100` proof or record paper that obviously supersedes the corpus.
-  That is a dated search result, not proof that no private or uncatalogued result
+- The earlier primary-source search missed the UnitSquare Project’s 29 July 2026
+  construction release.
+  F-42 corrects the two affected `n<=100` cases and records the four additional cases
+  beyond the current corpus.
+  This remains a dated search result, not proof that no private or uncatalogued result
   exists.
 - This review did not edit archived source transcriptions or claim new global packing
   theorems. Its mathematical corrections are standard deductions or direct checks of
@@ -2138,6 +2200,9 @@ poses are retained and their results are labelled untrusted screen data.
 - David Ellsworth,
   [Squares in Squares](https://kingbird.myphotos.cc/packing/squares_in_squares.html),
   checked 2026-08-23.
+- UnitSquare Project, [Six improved upper bounds](https://hmbelvedere.com/) and its
+  [machine-readable release](https://hmbelvedere.com/data/results.json), published
+  2026-07-29 and checked 2026-08-24.
 - Hong Duc Bui,
   [Square Packing with Asymptotically Smallest Waste Only Needs Good Squares](https://arxiv.org/abs/2504.09489)
   and [Square Packing with O(x^0.6) Wasted Area](https://arxiv.org/abs/2508.04603).

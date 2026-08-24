@@ -9,9 +9,10 @@ hypothesis:
   id: H-013
   kind: hypothesis
   claim: >-
-    Tracking configurations from an inflated container toward the target side with a
-    quench after each decrement reaches the proved n = 10 record component, then Trump's
-    n = 11 component, more often than direct multistart at equal pair-test budget.
+    Tracking feasible configurations through a fixed-side projection family from an
+    inflated container toward the target side reaches the proved n = 10 record
+    component, then Trump's n = 11 component, more often than direct multistart at equal
+    pair-test budget.
   lane: search
   derived_from: [X-001]
   strategy_refs: ['search:11', 'search:12']
@@ -20,8 +21,10 @@ hypothesis:
     metric: record-component arrivals per pair-test, with bifurcation-tree agreement as a secondary metric
     direction: higher for delta-continuation than paired direct multistart
   instrument: >-
-    Not yet built. A continuation proposer with fixed delta schedule, event-level branch
-    identities, common quench and verifier, compared with the named raw-coordinate null.
+    Not yet built. A fixed-side feasibility/projection operator with a declared delta
+    schedule, predictor/corrector residuals, event-level branch identities, common
+    terminal classifier and verifier, compared with the named raw-coordinate null. The
+    existing side-minimizing quench is not this operator because it erases delta.
   instrument_ready: false
   regime: n = 10 gate before n = 11; equal pair-test budgets and seed blocks
   instance: {axis: n, point: 10}
@@ -34,7 +37,9 @@ hypothesis:
   notes: >-
     Kill the proposer as a discovery tool if it does not beat direct multistart on the
     n = 10 gate. Its paths may still be retained as landscape probes, including the
-    merge-delta at which terminal components connect.
+    smallest observed delta needed for the target hit rate and valid-path upper bounds
+    on side-clearance barriers. Branch coalescence is not by itself a certified
+    component merge.
 ---
 # H-013 — turn rare-event search into path following
 

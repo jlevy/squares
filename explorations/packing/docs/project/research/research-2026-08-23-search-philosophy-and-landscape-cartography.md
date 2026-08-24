@@ -151,10 +151,13 @@ connected-component identity, validity, and numerical ambiguity are resolved.
 
 Two consequences frame everything downstream:
 
-1. **The search space factorizes.** Continuous search lives in angle space (empirically
-   tiny — Trump’s packing uses a single non-trivial tilt; the `s(17)` record uses two),
-   and everything else is the combinatorial choice of cell.
-   That is the review’s H-1, restated as geometry.
+1. **Each fixed separating-axis cell exposes a lower-dimensional continuous problem.**
+   Trump’s packing uses one non-trivial tilt and the `s(17)` record uses two, but those
+   two cases do not establish that record packings generally have few raw orientation
+   classes. The primary `n = 29` SVG is already a counterexample candidate to the
+   registered three-class bound.
+   The useful question is effective angular dimension— rank, algebraic dependence, or
+   compressibility—rather than a universal class count.
 2. **Declared landscape views can become statistical questions.** Under a versioned
    proposer, quench, and terminal-component relation: how much component support was
    observed; what unseen mass remains; what polished or exact side evidence each
@@ -374,18 +377,21 @@ The review’s calibration ladder (R-3: `n = 5` and `n = 10`, both proved) is ne
 and stays — but it validates *machinery*, not *strategy*. Both proved optima are
 45°-tilt mechanisms: symmetric, easily found, sitting in basins blind search reaches
 without help. An engine can ace that ladder and remain structurally blind to what
-`n = 11` actually demands — an oblique core locked at the irrational tilt `≈ 40.182°`, a
-mechanism **no proved case exercises**.
+`n = 11` actually demands — an oblique core locked at `≈ 40.182°`; its trigonometric
+coordinates are algebraic while its nonzero radian angle is transcendental, a mechanism
+**no proved case exercises**.
 
 So record-finding ability needs its own targets, chosen by mechanism:
 
 - **`s(17)`** — the nearest case whose (unproved) record uses genuinely oblique
   structure, with two distinct non-trivial angles; rediscovering *it* exercises the
   muscle that `n = 5, 10` cannot.
-- **`n = 11` at small inflation `δ`** — the same basin, made easier to hit; success
-  isolates the mechanism from the difficulty, and the largest `δ` at which the engine
-  still finds Trump’s cell is a progress metric that moves continuously (unlike the
-  binary “found it at δ = 0 or not”).
+- **`n = 11` at controlled inflation `δ`** — a fixed-side feasibility/projection family,
+  not the existing side-minimizing quench, makes slack an actual continuation parameter.
+  The minimum inflation needed to reach and then track Trump’s component is a progress
+  metric; a smaller threshold is better.
+  Branch events and retained valid paths remain useful even when the discovery
+  comparison fails.
 - **Basin-entry tests** — start inside or near the Trump cell’s neighborhood and ask
   whether the polish loop falls in and stays; this separates “search cannot find the
   region” from “the refiner cannot hold it,” two failures with identical symptoms and

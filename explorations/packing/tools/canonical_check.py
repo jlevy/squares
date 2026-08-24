@@ -32,7 +32,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from sqpack.canonical import canonical_key
+from sqpack.canonical import _certificate, canonical_key  # pyright: ignore[reportPrivateUsage]
 from sqpack.quench import quench_bracket
 
 
@@ -94,6 +94,21 @@ def check(label: str, *, ok: bool, detail: str = "") -> bool:
 
 def main() -> int:
     passed = True
+
+    # A complete three-node contact graph forces individualization.  This is the
+    # smallest counterexample to a subtle failure mode: if the terminal certificate
+    # records only the individualized colours, its original node attributes disappear
+    # and an all-equal graph collides with one having a distinguished vertex.
+    triangle = [{1, 2}, {0, 2}, {0, 1}]
+    uniform = _certificate([0, 0, 0], triangle)
+    marked = _certificate([0, 0, 1], triangle)
+    relabelled_marked = _certificate([1, 0, 0], triangle)
+    passed &= check(
+        "certificate retains node attributes after individualization",
+        ok=uniform != marked and marked == relabelled_marked,
+        detail="K3: uniform differs from one marked vertex, invariant under relabelling",
+    )
+
     x, y, theta, side = trump()
     base = canonical_key(x, y, theta, side)
 

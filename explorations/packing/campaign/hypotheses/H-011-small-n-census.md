@@ -30,7 +30,7 @@ hypothesis:
   sweep: {axis: n, points: [5, 6, 7, 8, 9, 10]}
   priority: 1
   cost_estimate: tier S (1e9 pair-tests)
-  prereqs: [H-002]
+  prereqs: [H-002, H-021, H-023]
   replication: true
   registered: retroactive
   notes: >-

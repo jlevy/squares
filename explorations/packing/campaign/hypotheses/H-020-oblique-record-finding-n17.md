@@ -10,8 +10,8 @@ hypothesis:
   kind: hypothesis
   claim: >-
     The stock annealer reaches within 1e-4 of the standing best at n = 17, whose record
-    uses genuinely oblique structure (tilts of 0 and +/-40 degrees), on at least one seed
-    of five at the baseline budget of 1e8 moves per chain.
+    uses genuinely oblique structure (tilts of 0, +39.80496 and -36.62379 degrees), on
+    at least one seed of five at the baseline budget of 1e8 moves per chain.
   lane: search
   derived_from: []
   strategy_refs: ['search:10']
@@ -50,13 +50,15 @@ symmetric arrangements that blind search reaches without help.
 `n = 12` is the trivial grid.
 So every control the campaign runs validates *machinery* — that the engine can descend,
 that the refiner converges, that the verifier decides — and **none of them exercises the
-thing `n = 11` actually demands**, which is an oblique core at an irrational angle that
-no proved case uses.
+thing `n = 11` actually demands**, which is an oblique core whose trigonometric
+coordinates are algebraic but whose nonzero radian angle is transcendental, and which no
+proved case uses.
 
 `n = 17` is the nearest case whose record does.
-Bidwell’s 1998 packing uses tilts of `0°` and `±40°`: two non-trivial orientations
-against a grid frame, structurally the same *kind* of object as Trump’s, at a case that
-is cheap to run.
+Bidwell’s 1998 packing uses tilts of `0°`, `+39.8049589798°`, and `−36.6237863834°`: two
+unequal non-trivial orientations against a grid frame, structurally the same *kind* of
+object as Trump’s, at a case that is cheap to run.
+The former `±40°` shorthand was not an accurate transcription of the primary SVG.
 
 The [synopsis](../../SYNOPSIS.md#the-lay-of-the-land-by-n) calls it the largest unforced
 gap in the campaign’s coverage, and the

@@ -126,7 +126,7 @@ related_results:
 
 relevance_to_small_n: >
   None. These are asymptotic statements with unspecified or astronomically weak
-  constants -- Roth and Vaughan's explicit 10^{-100} is emblematic -- describing
-  behaviour as x -> infinity. They carry no information at x ~ 3.88. The small-case
-  and asymptotic branches share an origin and a moral (tilting helps) but are
-  methodologically disjoint.
+  constants -- Roth and Vaughan's Vinogradov relation leaves its absolute constant
+  implicit -- describing behaviour as x -> infinity. They carry no information at
+  x ~ 3.88. The small-case and asymptotic branches share an origin and a moral
+  (tilting helps) but are methodologically disjoint.

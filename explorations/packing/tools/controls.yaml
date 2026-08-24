@@ -39,9 +39,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 87", "count: 20"]
+  replace: ["count: 107", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 87"
+  expect: "count 20 != 107"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -165,8 +165,8 @@ controls:
 
 - name: campaign - hypothesis on the board but not in the registry
   file: campaign/ideas.md
-  replace: ["[H-018](hypotheses/H-018-basin-entry.md) is the most informative cheap\nexperiment runnable today",
-            "[H-777](hypotheses/H-777-nonexistent.md) is the most informative cheap\nexperiment runnable today"]
+  replace: ["[H-018](hypotheses/H-018-basin-entry.md) has already been refuted as registered",
+            "[H-777](hypotheses/H-777-nonexistent.md) has already been refuted as registered"]
   run: python3 campaign/ledger.py --check
   expect: "which is not in the registry"
 

@@ -20,10 +20,14 @@ hypothesis:
     metric: distinct square terminal components unique to each proposer per pair-test
     direction: at least one independently verified component unique to superdisk continuation
   instrument: >-
-    Not yet built. A superdisk geometry predicate and exponent-continuation proposer,
-    ending in the common square quench, terminal-component relation, and verifier.
+    Not yet built. A unit-area superdisk geometry predicate and pseudo-arclength
+    exponent-continuation proposer with explicit orientation-symmetry breaking, branch
+    bifurcation and termination events, ending in the common square quench,
+    terminal-component relation, and verifier.
   instrument_ready: false
-  regime: small-n ladder first; identical square-end budget and identity policy
+  regime: >-
+    unit-area shapes from the circle to the unit square; small-n ladder first; identical
+    square-end budget and identity policy
   instance: {axis: n, point: 10}
   sweep: {axis: n, points: [5, 6, 7, 8, 9, 10]}
   priority: 4
@@ -34,7 +38,8 @@ hypothesis:
   notes: >-
     Kill if square endpoints occupy only components already found by the direct proposer.
     This is deliberately last among search proposers because it alone requires a new
-    geometry model before it can use the shared square spine.
+    geometry model before it can use the shared square spine. Holding area fixed prevents
+    an apparent improvement caused only by changing the objects' scale.
 ---
 # H-014 — test a geometry-changing continuation ladder
 

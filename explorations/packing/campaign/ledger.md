@@ -25,14 +25,14 @@
 | H-003 | blocked | search | Under one versioned proposer, quench, and terminal-component relation, | n: 5 6 7 8 9 10 11 | 0 |  |
 | H-004 | blocked | search | At n = 11, seeds constructed by adding a square to the proved n = 10 p | n: 11 | 0 |  |
 | H-005 | blocked | search | A Cleemann-style construction using a 3-4-5 tilt packs 97 unit squares | n: 78 97 | 0 |  |
-| H-006 | blocked | proof | Fractional-transversal LP duals for pose discretizations at the n = 12 | n: 11 12 | 0 |  |
+| H-006 | blocked | proof | Fractional-transversal column generation at the n = 12 side-4 boundary | n: 11 12 | 0 |  |
 | H-007 | blocked | search | For a fixed proposer, quench, and terminal-component relation, indepen | n: 5 6 7 8 9 10 11 | 0 |  |
 | H-008 | blocked | search | Under the declared search and refinement pipeline, the rate at which e | n: 5 6 7 8 9 10 11 12 17 | 0 |  |
 | H-009 | blocked | search | D4 and square-relabel canonicalization merges at least 10 percent of r | n: 3 5 6 7 8 9 10 11 | 0 |  |
-| H-010 | blocked | proof | The continuous falsifier finds the known stage-one escape from the 10- | n: 10 12 | 0 |  |
+| H-010 | blocked | proof | A checked computational reconstruction reproduces Stromquist's complet | n: 11 | 0 |  |
 | H-011 | blocked | search | Under a versioned proposer P, deterministic quench Q, and terminal-com | n: 5 6 7 8 9 10 | 0 |  |
 | H-012 | blocked | search | Under one versioned raw-coordinate multistart proposal P, deterministi | n: 10 11 | 0 |  |
-| H-013 | blocked | search | Tracking configurations from an inflated container toward the target s | n: 10 11 | 0 |  |
+| H-013 | blocked | search | Tracking feasible configurations through a fixed-side projection famil | n: 10 11 | 0 |  |
 | H-014 | blocked | search | Continuation from circles through a preregistered superdisk-exponent l | n: 5 6 7 8 9 10 | 0 |  |
 | H-015 | blocked | search | A MAP-Elites proposer keyed by versioned tilt-class and contact-class  | n: 10 11 | 0 |  |
 | H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 | 10.2m wall |
@@ -42,7 +42,7 @@
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
 | H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3 4 5 6 7 8 | 0 |  |
 | H-022 | open question | proof | Is Trump's n = 11 packing isolated and locally optimal modulo D4 and r |  | 0 |  |
-| H-023 | open question | search | Which of the observed n = 5 polished endpoints are connected by feasib |  | 0 |  |
+| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 0 |  |
 | H-024 | blocked | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 | 0 |  |
 
 ## Rounds
@@ -55,8 +55,8 @@
 | exp-002 | series-000 | 10 | claude-opus-5 | H-016 | On this cell the annealer misses the standing best by +4.194e-04, outside the 1e-4 H-016 declared, so the claim is refuted here. |
 | exp-003 | series-000 | 11 | claude-opus-5 | H-016 | On this cell the annealer misses the standing best by +3.733e-02, outside the 1e-4 H-016 declared, so the claim is refuted here. |
 | exp-005 | series-000 | 11 | claude-opus-5 | H-018 | Refutes H-018 as stated - 0 of 40 trials return within 1e-6 at eps = 1e-3 in any arm - but the shape of the failure is the result: the return distance scales linearly with eps with no threshold, and halves when the effort is multiplied by ten, so what was measured is the refiner's convergence rate, not a basin wall. |
-| exp-006 | series-000 | 11 | claude-opus-5 | H-002 | Refutes H-002 as stated: the quench does not refine annealer output to the analytic value, improving the gap by only 1.1-1.3x because it is a LOCAL cell optimiser and the annealer hands it the wrong basin. The single-cell half stands (4.4e-16 at exact angles) and a class-constrained 1-D angle search reaches 2e-11, so what fails is the free-angle descent - and H-019 says why. |
-| exp-009 | series-000 | 11 | claude-opus-5 | H-002 | Refutes H-002 on this cell: the median gap improves only from 8.85e-02 to 6.29e-02, against machine precision at n = 5 and n = 10. The quench is not failing - it is being handed the wrong basin, which is what exp-006 concluded and this cell confirms at the target. |
+| exp-006 | series-000 | 11 | claude-opus-5 | H-002 | Refutes H-002 as stated: the quench does not refine annealer output to the analytic value, improving the gap by only 1.1-1.3x because it is a LOCAL cell optimiser and the tested starts remain far from the target construction. The single-cell half stands (4.4e-16 at exact angles) and a class-constrained 1-D angle search reaches 2e-11, so what fails is the free-angle descent - and H-019 says why. No terminal-component relation was measured. |
+| exp-009 | series-000 | 11 | claude-opus-5 | H-002 | Refutes H-002 on this cell: the median gap improves only from 8.85e-02 to 6.29e-02, against machine precision at n = 5 and n = 10. The tested starts remain far from the target after this local procedure; no terminal-component relation was measured. |
 | exp-011 | series-000 | 17 | claude-opus-5 | H-020 | The criterion was measured and missed: n=17 +3.245e-01, against the 1e-04 H-020 declared. The claim is refuted for these cells and this regime. |
 
 ### accepted (4)

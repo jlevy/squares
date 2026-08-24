@@ -53,8 +53,9 @@ Budgets are in **pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`.
 packing — six axis-aligned squares plus a tightly constrained block of five tilted at
 `≈40.1819°`; the tilt is numerically characterized through a trigonometric equation, not
 established here as an algebraic number.
-Both endpoints have stood for over two decades, and this is still the *smallest* open
-gap at `n ≤ 100`.
+Both endpoints have stood for over two decades.
+This is the fourth-smallest open gap at `n ≤ 100`, and the smallest open gap whose
+standing record is nontrivial rather than a grid.
 
 What the
 [baseline](series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md)
@@ -94,14 +95,16 @@ Two further observations constrain most of these ideas.
 **Trump’s packing is a strong rigidity candidate**, but this repository has not yet
 supplied the active-constraint rank or interval proof needed to call it isolated.
 Its apparent local jamming is a reason to test whether named random-start proposers miss
-it, and [H-018](hypotheses/H-018-basin-entry.md) is the most informative cheap
-experiment runnable today.
-It uses exactly two observed tilt classes, `0°` and one non-trivial angle, a structural
-prior an unconstrained search does not exploit.
+it. [H-018](hypotheses/H-018-basin-entry.md) has already been refuted as registered; its
+finite-refiner residual motivates H-021 through H-023 but is not a runnable basin-width
+experiment. It uses exactly two observed tilt classes, `0°` and one non-trivial angle, a
+structural prior an unconstrained search does not exploit.
 
-The [search-strategy catalogue](../frontier/search-strategies.yaml) enumerates 20 ways
-anyone has ever found a packing; `strategy_refs` on each hypothesis cites into it, so
-the ledger can report which whole families remain untried.
+The [search-strategy catalogue](../frontier/search-strategies.yaml) enumerates 20 search
+families drawn from this problem and adjacent optimization practice; it is a working
+map, not an exhaustive history.
+`strategy_refs` on each hypothesis cites into it, so the ledger can report which whole
+families remain untried.
 
 ## The quench spine — what every other strategy runs on
 
@@ -112,7 +115,7 @@ the ledger can report which whole families remain untried.
 | 3 | Basin atlas as a soft-schema artifact, descriptors versioned alongside | shaped |  | strategy doc | The deliverable, on the strategy report’s framing |
 | 4 | Pair-test counter as the budget currency | shaped |  | review R-10 | Machine-independent; replaces this campaign’s move counter |
 | 4a | The angle optimum is a kink, so derivative-based smooth local models are misspecified there | registered | [H-019](hypotheses/H-019-angle-optimum-is-a-kink.md) | [exp-006](series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | **Confirmed ([exp-010](series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md)):** one-sided slopes `0.175` vs `0.384` at the optimal tilt. On the tested starts, descent stalls five orders short and the tested Powell/Nelder–Mead runs do worse; that is not a general impossibility result for derivative-free methods. |
-| 4b | Non-smooth angle search: bracket over merged angle classes | **works** |  | [exp-007](series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md)–[exp-009](series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | Reaches the analytic optimum to machine precision at `n = 5` and `n = 10` (`2e-15`, `1e-15`), where descent reaches `3e-08` and `5e-03`. No effect at `n = 11`: wrong basin |
+| 4b | Non-smooth angle search: bracket over merged angle classes | **works** |  | [exp-007](series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md)–[exp-009](series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | Reaches the analytic optimum to machine precision at `n = 5` and `n = 10` (`2e-15`, `1e-15`), where descent reaches `3e-08` and `5e-03`. The tested `n = 11` starts remain far from Trump; component identity is unresolved |
 | 25 | Extract the LP dual as a self-stress: nonsmooth first-order certificate route for H-022, a stress descriptor for the atlas, and stress-guided proposer moves | raw |  | [depth review G-2](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | The solver already computes the dual and the code discards it; LP duality certifies centre directions, one-sided parametric-LP derivatives certify angle directions |
 | 26 | Kink-codimension corpus law: record optima are corners of codimension equal to the free angle-class count, with first-order (conical) growth | raw |  | [depth review G-4](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | Generalizes T-3; predicts a codim-2 corner at the `s(17)` record; corners at tie loci motivate active-set search along basis-exchange loci. Needs the geometry corpus to test |
 
@@ -136,7 +139,7 @@ the ledger can report which whole families remain untried.
 | # | Idea | Status | H | From | Why it might work, or not |
 | --- | --- | --- | --- | --- | --- |
 | 11 | Angle-class two-level search | registered | [H-001](hypotheses/H-001-angle-class-reduction.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | Algorithmic paired comparison; the corpus-wide angle-count claim is separate |
-| 11a | Verified records through `n=30` use at most three angle classes | registered | [H-024](hypotheses/H-024-record-angle-class-count.md) | split from review H-1 | Descriptive corpus law; neither implies nor follows from H-001’s search performance |
+| 11a | Verified records through `n=30` use at most three angle classes | registered; counterexample candidate | [H-024](hypotheses/H-024-record-angle-class-count.md) | split from review H-1 | The primary `n=29` SVG appears to have six classes; verify that pose first, then replace the brittle class bound with effective angular rank/compressibility if it survives |
 | 12 | δ-continuation: inflate the container, walk `δ` down with re-polish | registered | [H-013](hypotheses/H-013-delta-continuation.md) | review H-13 | Rare-event search becomes path-following; merge-`δ` doubles as the atlas’s barrier scale |
 | 13 | MAP-Elites over mechanism descriptors | registered | [H-015](hypotheses/H-015-map-elites-illumination.md) | review H-15 | Keeps the loss, changes what is retained. Descriptors are frozen before comparison |
 | 14 | Neighbor-transfer seeding from `n ± 1` records | registered | [H-004](hypotheses/H-004-neighbor-transfer-seeding.md) | review H-4 | Corrected to an equal-budget `n=11` comparison; the original `n=12` side-4 target was vacuous |
@@ -151,7 +154,7 @@ the ledger can report which whole families remain untried.
 | # | Idea | Status | H | From | Why it might work, or not |
 | --- | --- | --- | --- | --- | --- |
 | 20 | `s(17)` as the mechanism-matched calibration target | registered | [H-020](hypotheses/H-020-oblique-record-finding-n17.md) | strategy doc | The nearest case whose record uses genuinely oblique structure. `n = 5, 10` do not exercise it. A one-seed probe already returned exactly `5.0`, the trivial grid |
-| 21 | `n = 11` at inflated `δ` as a continuous progress metric | shaped |  | strategy doc | The largest `δ` at which the engine still finds Trump’s cell moves continuously, unlike found/not-found |
+| 21 | `n = 11` at inflated `δ` as a continuous progress metric | shaped |  | strategy doc | Define a fixed-side feasibility/projection family; the minimum inflation needed for a preregistered target-component hit rate is the scalar, and smaller is better |
 | 22 | `m² − 3` at `n = 61, 78, 97`, Cleemann-style `arctan(3/4)` | registered | [H-005](hypotheses/H-005-m2-minus-3-construction.md) | review H-5 | Honest prior low, cost near zero, analytic attempt needs no engine |
 | 23 | LP duals as unavoidable-set generators (proof lane) | registered | [H-006](hypotheses/H-006-lp-dual-unavoidable-sets.md) | review H-6 | Quantitative cross-resolution support screen; never itself a proof |
 | 24 | Stromquist falsifier triple | registered | [H-010](hypotheses/H-010-stromquist-triple.md) | review H-10 | Known-answer falsifier control followed by a separate certificate leg |

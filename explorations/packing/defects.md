@@ -4,21 +4,22 @@ Do not edit by hand.
 
 # Defect log
 
-87 defects recorded across the packing toolchain.
+107 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **30 soundness defects** — the system asserting something false about the mathematics.
-  23 of them pointed in the *flattering* direction, which is the dangerous one: the
+- **40 soundness defects** — the system asserting something false about the mathematics.
+  30 of them pointed in the *flattering* direction, which is the dangerous one: the
   error looks like success.
-- **28 fixes left no regression check behind.** That list is the best predictor of what
+- **44 fixes left no regression check behind.** That list is the best predictor of what
   comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062
   repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075
   repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079
-  repeats D-063, D-082 repeats D-057, D-085 repeats D-058).
-- **20 are still open** (outstanding or contained), every one carrying a bead.
+  repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098
+  repeats D-083, D-104 repeats D-052).
+- **21 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -26,14 +27,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 1 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 7 | a cell of the sweep whose answer is known in advance |
-| `review` | 57 | a human or agent reading the work against a checklist |
+| `review` | 73 | a human or agent reading the work against a checklist |
 | `anomaly` | 4 | a result that made no sense, chased down |
 | `inspection` | 13 | reading the code or the design with intent |
-| `drift_check` | 2 | a generated view disagreeing with its source |
+| `drift_check` | 4 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 2 | the automated test suite |
+| `gate` | 4 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 2 of 87, and none of the 30
+The line worth reading twice: **the automated gate caught 4 of 107, and none of the 40
 soundness defects.** Gates confirm what you already thought to check.
 The rest were found by a device built to be *surprised* — a control cell, a
 pre-registered rule, a generated view contradicting itself — or by someone reading
@@ -43,20 +44,20 @@ carefully.
 
 | Layer | Count |
 | --- | ---: |
-| engine | 8 |
+| engine | 9 |
 | quench | 10 |
 | verifier | 1 |
-| record | 32 |
-| tooling | 21 |
-| docs | 15 |
+| record | 35 |
+| tooling | 23 |
+| docs | 29 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 30 |
-| validity | 20 |
-| bookkeeping | 28 |
+| soundness | 40 |
+| validity | 26 |
+| bookkeeping | 32 |
 | robustness | 7 |
 | performance | 2 |
 
@@ -95,6 +96,22 @@ This is the actionable list.
 | D-085 | Living run commands could rewrite the locked dependency state | tooling |
 | D-086 | The overnight agenda and current handoff retained obsolete work and effort state | record |
 | D-087 | Angle-class evidence and an untested kink sweep combined distinct claims | docs |
+| D-088 | The finite-n frontier missed newer certified n=68 and n=69 constructions | docs |
+| D-089 | The n=17 record was given symmetric plus-or-minus 40-degree orientations | docs |
+| D-090 | Two low-angle examples were generalized into a universal tiny-angle prior | docs |
+| D-091 | H-010 did not reproduce Stromquist’s conditional proof mechanism | docs |
+| D-092 | Structured asymptotic data repeated the phantom Roth-Vaughan constant | docs |
+| D-094 | The idea board repeated the wrong n=11 gap rank | docs |
+| D-095 | The idea board called a refuted hypothesis the best runnable experiment | record |
+| D-096 | Algebraic degree was promoted into a proof-method ceiling and obstruction | docs |
+| D-097 | Strategy catalogues were described as exhaustive histories of the field | docs |
+| D-098 | Source code still called a finite stochastic return threshold a basin radius | engine |
+| D-099 | H-023 placed six non-optimal endpoints in one optimum-side family question | docs |
+| D-100 | Delta continuation had no preserved parameter and reversed its progress metric | docs |
+| D-102 | H-006 treated dual pose support as candidate piercing-point loci | docs |
+| D-103 | H-011 omitted its declared component-identifiability prerequisites | record |
+| D-104 | Living artifacts still promoted local refinement failure into a wrong-basin claim | docs |
+| D-105 | Superdisk continuation lacked a shape normalization and branch rules | docs |
 
 ## Still open
 
@@ -120,6 +137,7 @@ This is the actionable list.
 | D-061 | outstanding | high | Unrecognised endpoint rows discard the evidence needed to classify them | `think-aans` |
 | D-071 | outstanding | medium | Generated session reports overwrite history and are not durable | `think-y37w` |
 | D-081 | outstanding | high | Runner preflight treats any nonempty queue as enough unattended work | `think-kmn2` |
+| D-101 | outstanding | high | Historical quench round wall times disagree with retained per-call durations | `think-xzew` |
 
 ## Every defect
 
@@ -212,3 +230,23 @@ This is the actionable list.
 | [D-085](campaign/README.md) | 2026-08-24 | tooling | bookkeeping |  | `inspection` | medium | fixed | Living run commands could rewrite the locked dependency state |
 | [D-086](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | record | bookkeeping |  | `review` | high | fixed | The overnight agenda and current handoff retained obsolete work and effort state |
 | [D-087](campaign/hypotheses/H-001-angle-class-reduction.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Angle-class evidence and an untested kink sweep combined distinct claims |
+| [D-088](frontier/n-068.md) | 2026-08-24 | docs | soundness | conservative | `review` | high | fixed | The finite-n frontier missed newer certified n=68 and n=69 constructions |
+| [D-089](frontier/n-017.md) | 2026-08-24 | docs | soundness | neutral | `review` | high | fixed | The n=17 record was given symmetric plus-or-minus 40-degree orientations |
+| [D-090](campaign/hypotheses/H-024-record-angle-class-count.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | Two low-angle examples were generalized into a universal tiny-angle prior |
+| [D-091](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-010 did not reproduce Stromquist’s conditional proof mechanism |
+| [D-092](frontier/asymptotic-waste-bounds.yaml) | 2026-08-24 | docs | soundness | flattering | `review` | medium | fixed | Structured asymptotic data repeated the phantom Roth-Vaughan constant |
+| [D-093](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | tooling | soundness | flattering | `review` | critical | fixed | Contact canonicalization discarded every advertised node attribute |
+| [D-094](campaign/ideas.md) | 2026-08-24 | docs | soundness | flattering | `drift_check` | medium | fixed | The idea board repeated the wrong n=11 gap rank |
+| [D-095](campaign/ideas.md) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | The idea board called a refuted hypothesis the best runnable experiment |
+| [D-096](frontier/n-005.md) | 2026-08-24 | docs | soundness | conservative | `review` | high | fixed | Algebraic degree was promoted into a proof-method ceiling and obstruction |
+| [D-097](frontier/README.md) | 2026-08-24 | docs | soundness | flattering | `review` | medium | fixed | Strategy catalogues were described as exhaustive histories of the field |
+| [D-098](sqsearch/src/search.rs) | 2026-08-24 | engine | soundness | flattering | `review` | medium | fixed | Source code still called a finite stochastic return threshold a basin radius |
+| [D-099](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-023 placed six non-optimal endpoints in one optimum-side family question |
+| [D-100](campaign/hypotheses/H-013-delta-continuation.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Delta continuation had no preserved parameter and reversed its progress metric |
+| [D-101](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | 2026-08-24 | record | bookkeeping |  | `review` | high | outstanding | Historical quench round wall times disagree with retained per-call durations |
+| [D-102](campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-006 treated dual pose support as candidate piercing-point loci |
+| [D-103](campaign/hypotheses/H-011-small-n-census.md) | 2026-08-24 | record | validity | flattering | `review` | high | fixed | H-011 omitted its declared component-identifiability prerequisites |
+| [D-104](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | Living artifacts still promoted local refinement failure into a wrong-basin claim |
+| [D-105](campaign/hypotheses/H-014-superdisk-continuation.md) | 2026-08-24 | docs | validity | flattering | `review` | medium | fixed | Superdisk continuation lacked a shape normalization and branch rules |
+| [D-106](tools/controls.yaml) | 2026-08-24 | tooling | bookkeeping |  | `gate` | medium | fixed | A living negative-control anchor still targeted corrected hypothesis prose |
+| [D-107](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping |  | `gate` | high | fixed | Generated campaign views and next-work state lagged their corrected sources |

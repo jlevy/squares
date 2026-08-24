@@ -98,9 +98,10 @@ experiment:
     reason: >-
       Refutes H-002 as stated: the quench does not refine annealer output to the
       analytic value, improving the gap by only 1.1-1.3x because it is a LOCAL cell
-      optimiser and the annealer hands it the wrong basin. The single-cell half stands
-      (4.4e-16 at exact angles) and a class-constrained 1-D angle search reaches 2e-11,
-      so what fails is the free-angle descent - and H-019 says why.
+      optimiser and the tested starts remain far from the target construction. The
+      single-cell half stands (4.4e-16 at exact angles) and a class-constrained 1-D
+      angle search reaches 2e-11, so what fails is the free-angle descent - and H-019
+      says why. No terminal-component relation was measured.
     commit: '8b450a1'
 ---
 # exp-006 — the quench works, and does not do what the hypothesis said it would
@@ -155,11 +156,17 @@ Two things, one about the quench and one about the landscape.
 
 **The quench is a polisher, not a rescue.** The hypothesis said “refines *any* annealer
 output” — but an LP-in-cell solve is a *local* operation: it finds the best packing in
-the cell it is handed, and if the annealer is in the wrong basin the quench returns the
-best point of the wrong basin.
+the cell it is handed.
+At `n = 11`, the tested starts remain far from Trump’s construction after this local
+procedure. Calling them the “wrong basin” would require a terminal-component relation
+that this round did not measure.
 At `n = 11` that is a 1.3× improvement on a gap of `8.8e-02`. The spine does not lift
 the burden of finding the right basin off the proposer; it makes the landing point exact
 and nameable, which is a different and still valuable thing.
+
+**Interpretation correction, 2026-08-24.** The original text called those endpoints the
+wrong basin. The scoped result is only that this local procedure did not take the tested
+starts to the target construction; component identity remains unresolved.
 
 **The angle objective has a kink at the optimum, and that is why descent stalls.**
 Walking the shared tilt off its optimal value:
