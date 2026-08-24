@@ -22,6 +22,7 @@ import sys
 import time
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -29,9 +30,11 @@ sys.path.insert(0, str(ROOT))
 
 import sqpack.quench as quench_module
 from sqpack.quench import (
+    CellSolveResult,
     FixedPointResult,
     _free_sweep,  # pyright: ignore[reportPrivateUsage]
     _OutOfTimeError,  # pyright: ignore[reportPrivateUsage]
+    _solve_adjacent_cell_closure,  # pyright: ignore[reportPrivateUsage]
     quench_bracket,
     solve_to_fixed_point,
 )
@@ -145,7 +148,7 @@ def check_angle_search_converges() -> str | None:
     return None
 
 
-def check_cell_solve_is_not_a_quench() -> str | None:
+def check_cell_solve_is_not_a_quench() -> str | None:  # noqa: PLR0911
     """D-029: freezing the angles measures the cell, not the basin.
 
     An agent checking exp-001's polish/exploration split built a probe that did one LP
@@ -192,12 +195,28 @@ def check_cell_solve_is_not_a_quench() -> str | None:
             "measurement that separates a cell from a basin has stopped separating them"
         )
 
-    r = quench_bracket(best["x"], best["y"], best["t"], time_budget=60)
+    closures = []
+    original_fixed_point = solve_to_fixed_point
+
+    def trace_adjacent_closures(*args, **kwargs):
+        result = original_fixed_point(*args, **kwargs)
+        if result is not None and result.reason.startswith("adjacent cell closure"):
+            closures.append(result.reason)
+        return result
+
+    with patch.object(
+        quench_module,
+        "solve_to_fixed_point",
+        side_effect=trace_adjacent_closures,
+    ):
+        r = quench_bracket(best["x"], best["y"], best["t"], time_budget=60)
     if r.side - analytic > 1e-12:
         return (
             f"D-029: quench_bracket on exp-002 seed 2 reached only {r.side - analytic:+.2e}; "
             "the angle half has regressed, and n = 10 would read as an exploration failure"
         )
+    if not closures:
+        return "D-168: n=10 no longer exercises the adjacent-cell closure control"
     return None
 
 
@@ -234,7 +253,10 @@ def check_fixed_cell_termination_is_typed() -> str | None:
         patch.object(
             quench_module,
             "solve_cell",
-            side_effect=[(2.0, [0.5], [0.5]), (2.1, [0.5], [0.5])],
+            side_effect=[
+                CellSolveResult(outcome="optimal", side=2.0, x=[0.5], y=[0.5]),
+                CellSolveResult(outcome="optimal", side=2.1, x=[0.5], y=[0.5]),
+            ],
         ),
     ):
         worse = solve_to_fixed_point([0.0], [0.5], [0.5], 1)
@@ -260,6 +282,154 @@ def check_fixed_cell_termination_is_typed() -> str | None:
     return None
 
 
+def check_adjacent_cell_closure_is_bounded() -> str | None:
+    """D-168: equal adjacent cells settle, but unequal objectives remain a refusal."""
+    row_a = (0, 1, 1.0, 0.0, 1.0, 1.0)
+    row_b = (0, 1, 0.0, 1.0, 1.0, 1.0)
+    cells = [[row_a], [row_b]]
+
+    def reread(_x, _y, _theta, preferred=None):
+        return [row_b] if preferred == [row_a] else [row_a]
+
+    def equal_solve(_theta, cell, _n):
+        marker = 0.0 if cell == [row_a] else 1.0
+        return CellSolveResult(outcome="optimal", side=2.0, x=[marker, 1.0], y=[0.0, 0.0])
+
+    with (
+        patch.object(quench_module, "choose_cell", side_effect=reread),
+        patch.object(quench_module, "solve_cell", side_effect=equal_solve),
+    ):
+        closure, solves, _ = _solve_adjacent_cell_closure([0.0, 0.0], cells, 2)
+    if closure is None or closure.cell_count != 2 or solves != 2:
+        return f"D-168: finite equal-objective closure did not settle: {closure!r}, {solves=}"
+
+    def unequal_solve(_theta, cell, _n):
+        marker = 0.0 if cell == [row_a] else 1.0
+        side = 2.0 + marker * 2 * quench_module.LP_FEASIBLE_EPS
+        return CellSolveResult(outcome="optimal", side=side, x=[marker, 1.0], y=[0.0, 0.0])
+
+    with (
+        patch.object(quench_module, "choose_cell", side_effect=reread),
+        patch.object(quench_module, "solve_cell", side_effect=unequal_solve),
+    ):
+        rejected, _, _ = _solve_adjacent_cell_closure([0.0, 0.0], cells, 2)
+    if rejected is not None:
+        return "D-168: unequal adjacent objectives were flattened into a settlement"
+    return None
+
+
+def check_cell_solve_failure_is_typed() -> str | None:  # noqa: PLR0911
+    """D-164: a numerical residual rejection is not mathematical infeasibility."""
+    cell = [(0, 1, 1.0, 0.0, 1.0, 1.0)]
+    violating = SimpleNamespace(
+        success=True,
+        status=0,
+        message="synthetic optimum",
+        x=[2.0, 1.5 - 1.2e-10, 0.5, 0.5, 0.5],
+    )
+    with patch.object(quench_module, "linprog", return_value=violating):
+        rejected = quench_module.solve_cell([0.0, 0.0], cell, 2)
+    if (
+        rejected.outcome != "postcheck_rejection"
+        or rejected.max_violation is None
+        or rejected.max_violation_row != 8
+        or rejected.max_violation_kind != "pair"
+        or rejected.solver_calls != 2
+    ):
+        return f"D-164: numerical residual rejection lost its cause or row: {rejected!r}"
+
+    repaired = SimpleNamespace(
+        success=True,
+        status=0,
+        message="synthetic repaired optimum",
+        x=[2.0, 1.5, 0.5, 0.5, 0.5],
+    )
+    with patch.object(quench_module, "linprog", side_effect=[violating, repaired]):
+        accepted = quench_module.solve_cell([0.0, 0.0], cell, 2)
+    if (
+        accepted.outcome != "optimal"
+        or accepted.solver_calls != 2
+        or accepted.repair_rows != [8]
+        or len(accepted.repair_margins) != 1
+    ):
+        return f"D-164: bounded one-retry repair was not retained: {accepted!r}"
+
+    infeasible = SimpleNamespace(success=False, status=2, message="synthetic infeasible")
+    with patch.object(quench_module, "linprog", return_value=infeasible):
+        impossible = quench_module.solve_cell([0.0, 0.0], cell, 2)
+    if impossible.outcome != "infeasible":
+        return f"D-164: mathematical infeasibility lost its cause: {impossible!r}"
+    with patch.object(quench_module, "solve_cell", return_value=impossible):
+        propagated = solve_to_fixed_point([0.0, 0.0], [0.5, 1.5], [0.5, 0.5], 2)
+    if propagated.settled or "mathematically infeasible" not in propagated.reason:
+        return f"D-164: fixed-point layer erased the cell-solve cause: {propagated!r}"
+
+    failed = SimpleNamespace(success=False, status=4, message="synthetic numerical failure")
+    with patch.object(quench_module, "linprog", return_value=failed):
+        numerical = quench_module.solve_cell([0.0, 0.0], cell, 2)
+    if numerical.outcome != "solver_failure":
+        return f"D-164: solver failure lost its cause: {numerical!r}"
+
+    containment_violation = SimpleNamespace(
+        success=True,
+        status=0,
+        message="synthetic wall violation",
+        x=[1.0, 0.5 + 2e-10, 0.5],
+    )
+    with patch.object(quench_module, "linprog", return_value=containment_violation):
+        outside = quench_module.solve_cell([0.0], [], 1)
+    if (
+        outside.outcome != "postcheck_rejection"
+        or outside.max_violation_kind != "containment"
+        or outside.max_violation_row != 1
+    ):
+        return f"D-169: containment-row violation escaped the complete replay: {outside!r}"
+
+    n3_theta = [-9.35043360154506e-10, 0.30887703227181684, 0.8953194347614593]
+    n3_cell = [
+        (0, 1, 9.35043360154506e-10, 1.0, 1.128332272702862, 1.0),
+        (0, 2, 1.0, -9.35043360154506e-10, 1.2028392061250828, -1.0),
+        (1, 2, 0.6252695585800809, 0.7804088538151465, 1.1931580404947508, -1.0),
+    ]
+    retained = quench_module.solve_cell(n3_theta, n3_cell, 3)
+    if (
+        retained.outcome != "optimal"
+        or retained.solver_calls != 2
+        or retained.repair_rows != [12]
+        or len(retained.repair_margins) != 1
+        or abs(retained.repair_margins[0] - 2.1999601312595589e-10) > 1e-15
+        or retained.side is None
+        or abs(retained.side - 2.405678412790218) > 1e-12
+    ):
+        return f"D-164: retained n=3 seed-1 failing cell did not replay: {retained!r}"
+
+    n4_theta = [
+        1.5707963263740359,
+        -1.0000151967426634e-09,
+        -1.0000151967426634e-09,
+        1.5707963263740359,
+    ]
+    n4_cell = [
+        (0, 1, -1.0, 4.208607408719852e-10, 1.0000000002895773, -1.0),
+        (0, 2, 1.0000151967426634e-09, 1.0, 1.0000000002895773, 1.0),
+        (0, 3, -1.0, 4.208607408719852e-10, 1.0, -1.0),
+        (1, 2, 1.0, -1.0000151967426634e-09, 1.0, -1.0),
+        (1, 3, 1.0000151967426634e-09, 1.0, 1.0000000002895773, -1.0),
+        (2, 3, 4.208607408719852e-10, 1.0, 1.0000000002895773, -1.0),
+    ]
+    tied = quench_module.solve_cell(n4_theta, n4_cell, 4)
+    if (
+        tied.outcome != "optimal"
+        or tied.solver_calls != 2
+        or tied.repair_rows != [16, 21]
+        or len(tied.repair_margins) != 2
+        or tied.max_violation is None
+        or tied.max_violation > quench_module.LP_FEASIBLE_EPS
+    ):
+        return f"D-171: tied offending rows did not share one bounded repair: {tied!r}"
+    return None
+
+
 # Named at module level so a process pool can pickle them by reference. The five are
 # independent -- each builds its own fixture and reads nothing the others write -- and
 # each is seconds of LP solving, so running them serially made this file the gate's
@@ -272,6 +442,8 @@ CHECKS = (
     "check_cell_solve_is_not_a_quench",
     "check_free_sweep_deadline_is_not_convergence",
     "check_fixed_cell_termination_is_typed",
+    "check_adjacent_cell_closure_is_bounded",
+    "check_cell_solve_failure_is_typed",
 )
 
 
@@ -288,7 +460,7 @@ def main() -> int:
         return 1
     print(
         f"  {len(CHECKS)} regression checks pass "
-        "(D-002, D-015, D-016, D-019, D-029, D-036, D-132)"
+        "(D-002, D-015, D-016, D-019, D-029, D-036, D-132, D-164, D-168, D-169, D-171)"
     )
     return 0
 

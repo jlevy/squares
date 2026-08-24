@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 167
+count: 171
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4110,7 +4110,7 @@ defects:
   detected_by: control_cell
   latent_for: since solve_cell collapsed every failure to None
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     `solve_cell` returns the same `None` for a mathematically infeasible cell, a HiGHS
     failure, and a successful LP whose returned point fails the post-solve residual
@@ -4123,12 +4123,20 @@ defects:
     event as geometric evidence. More importantly, the loop cannot choose a principled
     retry, repair, or stop policy because the failure channel has erased its cause.
   fix: >-
-    none yet. Return typed cell-solve outcomes for mathematical infeasibility, solver
-    failure, and post-check rejection; retain the failing row and residual; then
-    preregister a bounded retry or repair whose final pose is independently screened.
+    Return typed cell-solve outcomes for infeasibility, solver failure, post-check
+    rejection, and accepted optima, retaining solver status, maximum residual, row index,
+    row kind, and actual solver-call count. On a post-check rejection only, tighten that
+    one RHS by its measured violation plus the unchanged 1e-10 screen and retry exactly
+    once; replay the second result against every original row. The n=10 control uses 25
+    bounded retries, all accepted with worst final residual 1.55e-15, and reaches the
+    proved side within 1.33e-15. An independent `sqpack.verify` screen accepts all 45
+    n=10 pairs with the identical required side. The retained n=3 seed-1 control reaches
+    side 2.
   regression: >-
-    Retain the n=3 seed-1 fixed-cell fixture and require the solver-boundary rejection
-    to remain distinct from mathematical infeasibility before regenerating the golden.
+    The exact failing cell from n=3 seed 1 must replay its row-12 repair and side;
+    synthetic post-check, infeasible, and solver-failure outcomes must remain distinct;
+    a two-call repair must retain its row and margin; and actual LP-call accounting
+    includes the retry. A separately measured full n=3 seed-1 quench reaches side 2.
   recurrence_of: D-014
   bead: think-28x5
   recorded_in: golden/basin-maps.yaml
@@ -4141,7 +4149,7 @@ defects:
   detected_by: control_cell
   latent_for: one bounded D-132 implementation slice
   severity: critical
-  status: outstanding
+  status: fixed
   what: >-
     D-132 made cycles, caps, and failed re-read transitions explicit only after the
     initial cell LP succeeded. An initial `solve_cell` failure still returns `None`;
@@ -4154,16 +4162,20 @@ defects:
     converged run may have crossed unmeasured angle probes. Basin membership and
     stationarity remain inadmissible even though the newly added field says settled.
   fix: >-
-    none yet. A bounded one-retry experiment with conservatively tightened pair rows
-    restored both positive-control side values, but n=10 still ended on an explicit
-    free-sweep cell cycle. Preserve the typed prototype and design a policy that passes
-    known-answer controls without converting an unknown objective into convergence.
+    Route every quench-bracket fixed-point evaluation, including the free sweep, through
+    one audited call path. Retain total, settled, and unsettled counts in BasinEvent/v3;
+    derive the all-probes, blocker, and scientific-admissibility fields from those
+    counts, producer convergence, and the independent pose screen. Exp-021 retains a
+    balanced 2037 = 2037 + 0 receipt and replay rejects a forged all-probes flag. The
+    older exp-018 through exp-020 events remain correctly blocked under their v2
+    contract rather than being rewritten.
   regression: >-
-    The D-016 and D-029 fixtures must remain converged under the final typed policy, and
-    a synthetic initial post-check rejection must never be converted to a dummy score.
+    The D-016 and D-029 fixtures remain converged; the BasinEvent selftest requires a
+    balanced quench receipt, replays the historical v2 archive, and rejects a forged v3
+    all-probes claim. Exp-021 must independently replay its complete receipt and pose.
   recurrence_of: D-132
-  bead: think-9qz0
-  recorded_in: tools/regression_test.py
+  bead: think-007f
+  recorded_in: tools/basin_census.py
 - id: D-166
   title: Basin events called producer convergence a fixed-cell certificate
   date: '2026-08-24'
@@ -4219,3 +4231,124 @@ defects:
     termination records.
   bead: think-4g3f
   recorded_in: tools/basin_census.py
+- id: D-168
+  title: A finite equal-objective adjacent-cell closure was labeled an unsettled cycle
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: conservative
+  detected_by: control_cell
+  latent_for: since fixed-cell cycles became typed termination evidence
+  severity: high
+  status: fixed
+  what: >-
+    The retained n=10 positive control alternated between two separating-axis cells and
+    stopped as an unsettled cycle even though the cycle varied only the rows for pairs
+    (0,2) and (0,6). Their complete Cartesian product has four cells. Every LP solve
+    passes, all four objectives agree within 4.44e-16, and every solution rereads into
+    the same four-cell set. Later angle probes expose similarly bounded closures of two,
+    four, or eight cells.
+  consequence: >-
+    A solver-scale representation change on a tie locus blocked a known-answer quench
+    and could make valid local search look nonterminating. Treating every cycle alike
+    also hid the mathematical difference between a closed equal-objective degeneracy
+    and an unresolved transition among materially different objectives.
+  fix: >-
+    On a repeated cell, enumerate the Cartesian product of every row choice observed in
+    the cycle, expand it with any choices exposed by solution rereads, and stop at a
+    hard 64-cell cap. Settle only if every LP passes, the closure stops expanding, and
+    its full objective spread is within the declared LP screen. Keep the largest-side
+    representative and label the result `adjacent cell closure`; do not claim a global
+    fixed-angle or basin optimum.
+  regression: >-
+    The actual n=10 D-029 control must exercise a finite adjacent-cell closure and retain
+    the proved side. A synthetic two-cell closure must settle, while a mutation whose
+    objectives differ by twice the LP screen must remain rejected.
+  recurrence_of: D-132
+  bead: think-8c61
+  recorded_in: sqpack/quench.py
+- id: D-169
+  title: The cell post-check ignored every containment row
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: since the cell post-check was introduced
+  severity: critical
+  status: fixed
+  what: >-
+    `solve_cell` said it checked the returned point against the constraints that were
+    imposed, but its loop visited only the pair-separation rows. The four containment
+    rows per square were absent, so a solver result outside a container wall by more
+    than the declared LP screen could still be returned as an accepted cell optimum.
+  consequence: >-
+    Fixed-cell sides, angle objectives, convergence decisions, and downstream endpoint
+    poses could be based on a point that did not fit its own reported container. An
+    independent final-pose screen might catch a terminal case, but intermediate angle
+    comparisons could already have followed the invalid objective.
+  fix: >-
+    Materialize the complete A_ub and b_ub arrays once and replay their full residual
+    vector after both the initial solve and the bounded D-164 retry. Retain the maximum
+    row index and classify it as containment or pair evidence before accepting or
+    rejecting the result.
+  regression: >-
+    A synthetic n=1 optimum that violates its upper-x containment row by 2e-10 must be
+    rejected after the single bounded retry, with row 1 and kind `containment` retained.
+  recurrence_of: D-014
+  bead: think-4hc3
+  recorded_in: sqpack/quench.py
+- id: D-170
+  title: D-165 reused the unrelated D-132 bead
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: drift_check
+  latent_for: from D-165 registration through its attempted closure
+  severity: high
+  status: fixed
+  what: >-
+    D-165's defect entry pointed to `think-9qz0`, but that bead's title, description,
+    notes, and close reason all track the older D-132 fixed-cell-cycle defect. Closing
+    D-165 through the logged reference would therefore have changed an unrelated issue.
+  consequence: >-
+    The defect log and bead graph disagreed about ownership and completion. An agent
+    following either source could report the wrong launch blocker closed, or reopen
+    already completed D-132 work while leaving D-165 without durable tracking.
+  fix: >-
+    Create dedicated D-165 bead `think-007f`, update the defect cross-reference, and
+    preserve `think-9qz0` unchanged. Track this bookkeeping correction separately in
+    `think-k2vb` so the mistaken reuse is visible rather than silently overwritten.
+  regression: >-
+    The bead-tree review must compare a defect's subject with its referenced bead before
+    closing it; D-165 must resolve through `think-007f`, never `think-9qz0`.
+  recurrence_of: D-039
+  bead: think-k2vb
+  recorded_in: defects.yaml
+- id: D-171
+  title: One n=4 positive-control evaluation remains unsettled after bounded repair
+  date: '2026-08-24'
+  layer: quench
+  class: robustness
+  direction: conservative
+  detected_by: control_cell
+  latent_for: first BasinEvent/v3 n=4 calibration
+  severity: high
+  status: outstanding
+  what: >-
+    Exp-023 seed 3 reaches a fixed-point evaluation whose successful HiGHS solution
+    still violates pair row 16 by 4.209e-10 after the single D-164 one-row retry. The
+    quench stops with one typed unsettled evaluation rather than returning convergence.
+  consequence: >-
+    The n=4 positive-control block is only 3/4 scientifically admissible. The retained
+    stop is trustworthy, but the producer cannot yet map every declared start at this
+    proved size, so scaling the same regime cannot support a complete-map claim.
+  fix: none yet
+  regression: >-
+    Retain and replay the exact seed-3 event and failing row. Diagnose whether the second
+    result reflects a cell-boundary alternative, solver tolerance, or an incorrect row;
+    preregister any bounded remedy and keep the 1e-10 screen unchanged.
+  recurrence_of: D-164
+  bead: think-pwd0
+  recorded_in: campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl

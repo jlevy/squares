@@ -14,13 +14,13 @@
 | [session-006](agent-sessions/session-006-h026-exact-tangent.md) | completed | insight | think-qd9t | 2 | Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and move the fast rotation to H-032's exact n=3 quotient-family control. |
 | [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | insight | think-n82j | 3 | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | correctness | think-ciwv | 3 | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
-| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 4 | In one thirty-minute slice, decide whether the n=10 equal-objective cell cycle has a complete finite adjacent-tie closure. Implement and retain it only if every tied option is enumerated and the known controls pass; otherwise record the blocker, preserve the trace, and switch lanes. |
+| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 6 | In one thirty-minute D-171 slice, retain the n=4 seed-3 failing fixed cell and classify whether its second result is a cell-boundary alternative, solver artifact, or row error. Preregister at most one bounded remedy if the cause is homogeneous; otherwise preserve the 3/4 cell and switch research lanes before running n=5. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 20 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 23 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -46,7 +46,7 @@
 | H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m wall |
 | H-019 | confirmed | search | On the n=11 Trump contact cell, varying the shared tilt of its five ti | n: 11* | 1 | 10m agent + 1s wall |
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
-| H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6 7 8 | 3 | 22m agent + 38s wall |
+| H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6 7 8 | 6 | 51m agent + 59s wall |
 | H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
 | H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 0 |  |
 | H-024 | refuted | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
@@ -105,6 +105,14 @@
 | exp-015 | series-000 | 4 | openai-codex | H-032 | Every physical packing is the axis-aligned 2 x 2 grid. F_4(2) consists of 24 isolated labelled states, and both declared symmetry quotients are one point. |
 | exp-017 | series-000 | 11 | openai-codex | H-041 | The one-coordinate repair closes the unique failed outer cell while preserving a complete exact cover, so eleven freely oriented unit squares require side at least 2 + 4/sqrt(5). |
 
+### baseline (3)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-021 | series-000 | 3 | openai-codex | H-021 | The retained event is producer-converged, independently valid, has all 2,037 fixed-point evaluations accounted for and settled, and rejects a forged all-probes-accounted flag. This calibrates the event trust boundary but does not decide H-021's component-classification claim. |
+| exp-022 | series-000 | 3 | openai-codex | H-021 | All three events are admissible and replayable. Combined with exp-021, the fixed four-seed n=3 block is 4/4 admissible; this still does not classify endpoint components or decide H-021. |
+| exp-023 | series-000 | 4 | openai-codex | H-021 | Three events reach the proved side and are admissible. Seed 3 fails closed on one post-check rejection after the bounded repair, so the cell is 3/4 admissible and cannot support a complete-map claim. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -115,5 +123,5 @@
 
 ## Effort
 
-20 rounds, 714 agent-minutes, 24.6 wall-minutes.
+23 rounds, 743 agent-minutes, 25.0 wall-minutes.
 
