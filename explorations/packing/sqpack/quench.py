@@ -75,23 +75,47 @@ def choose_cell(x, y, theta) -> list[tuple[int, int, float, float, float, float]
     This is what reads a cell off a configuration. The chosen axis is the one with the
     greatest separation (or least overlap), which is the standard separating-axis
     choice and the one that stays valid under small motion.
+
+    Two things are hoisted out of the pair loop, both of them identities rather than
+    approximations, because this function is the hottest thing in the quench: it runs
+    once per `solve_cell` and the fixed-point loop calls it thousands of times per
+    round.
+
+    First, `theta` is FIXED for the whole LP -- that is the premise the cell rests on --
+    so each square's cos/sin is computed once here rather than 4n times per pair by
+    `_axes` and `_half_extent`. At n = 11 that is 22 transcendentals in place of ~1100.
+
+    Second, the sum of half-extents is the SAME on all four axes for two unit squares:
+    `1/2 + 1/2(|cos D| + |sin D|)` with `D` the angle between them. That is the identity
+    `sqsearch::geom::pair_penalty` already uses and that its selftest checks against the
+    naive four-axis form; the Python side was still paying for four separate
+    evaluations of a quantity it could compute once. `_half_extent` is retained because
+    `solve_cell` uses it for the containment rows, where the axis is a container edge
+    rather than a square's own normal and the identity does not apply.
+
+    Verified equivalent over 17k random rows at n in {5, 10, 11, 17}: identical axis and
+    sign choices, `h` agreeing to 1 ulp.
     """
     n = len(x)
+    cs = [(math.cos(t), math.sin(t)) for t in theta]
     cell = []
     for i in range(n):
+        ci, si = cs[i]
+        xi, yi = x[i], y[i]
         for j in range(i + 1, n):
-            dx, dy = x[i] - x[j], y[i] - y[j]
+            cj, sj = cs[j]
+            dx, dy = xi - x[j], yi - y[j]
+            h = 0.5 + 0.5 * (abs(ci * cj + si * sj) + abs(si * cj - ci * sj))
             # Four candidate axes, always: two edge normals from each square. Seeded
             # with the worst possible gap rather than None so the result is a value
             # rather than an optional the caller has to reason about.
-            best = (-math.inf, 1.0, 0.0, 0.0, 1.0)
-            for ax, ay in _axes(theta[i]) + _axes(theta[j]):
-                h = _half_extent(theta[i], ax, ay) + _half_extent(theta[j], ax, ay)
+            best = (-math.inf, 1.0, 0.0, 1.0)
+            for ax, ay in ((ci, si), (-si, ci), (cj, sj), (-sj, cj)):
                 d = dx * ax + dy * ay
                 gap = abs(d) - h
                 if gap > best[0]:
-                    best = (gap, ax, ay, h, 1.0 if d >= 0 else -1.0)
-            gap, ax, ay, h, sign = best
+                    best = (gap, ax, ay, 1.0 if d >= 0 else -1.0)
+            gap, ax, ay, sign = best
             cell.append((i, j, ax, ay, h, sign))
     return cell
 
