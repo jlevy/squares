@@ -444,7 +444,15 @@ object the word promises.
 
 **Atlas.** The deduplicated store of known basins for an `n`, keyed by canonical basin
 identity. The stated deliverable of the cartography strategy.
-*Code exists; it stores endpoint keys, which are not certified terminal components.*
+*Code exists; it stores endpoint keys, which are not certified terminal components.* The
+atlas is also the flagship cross-focus instrument: Insight specifies views that could
+expose mathematical structure—symmetry orbits, terminal components, contact types,
+transitions, continuation across `n`, proposer-conditioned frequency with uncertainty;
+Efficiency makes those views responsive and reproducible; Process owns the event and
+provenance contract; and Correctness decides which relations are observed, inferred, or
+certified.
+A visual embedding is never evidence by itself that two basins are adjacent or
+that a sampled cluster is a connected component.
 
 **Census.** An enumeration of the basins at one `n`, run to saturation.
 *Code exists; saturation is unreachable while the thing being counted is undefined.*

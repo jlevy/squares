@@ -100,16 +100,21 @@ The one-line meanings; [`conventions.md`](conventions.md) owns the id rules and
 | `T-N` | The synopsis’s shorthand for a theoretical result established in this repository |
 | `think-xxxx` | One bead: a tracked work item in the `tbd` queue |
 
-The basin atlas is the flagship cross-focus instrument.
-Insight specifies views that could expose mathematical structure—symmetry orbits,
-terminal components, contact types, observed transitions, continuation across `n`, and
-proposer-conditioned frequency with uncertainty.
-Efficiency makes those views responsive, traceable, and reproducible as both an
-interactive explorer and deterministic review snapshots.
-Process owns the underlying event and provenance contract; Correctness decides which
-relations are observed, inferred, or certified.
-A visual embedding is never evidence by itself that two basins are adjacent or that a
-sampled cluster is a connected component.
+### Essential terms
+
+The eight words a reader meets everywhere here, in one line each;
+[`SYNOPSIS.md`](SYNOPSIS.md#terminology) owns the full definitions:
+
+| Term | Means |
+| --- | --- |
+| **configuration** | A placement of all `n` squares plus the container side: `3n + 1` coordinates |
+| **cell** | A choice of separating axis and order for every pair of squares; at fixed angles, one cell is one linear program |
+| **quench** | The deterministic refinement carrying a configuration to a local optimum |
+| **basin** | The set of configurations the quench carries to the same endpoint |
+| **polish** vs **exploration** | Refining within the basin you are in, versus reaching a different one |
+| **standing best** | The best side ever published for that `n`—an upper bound, not known optimal in open cases |
+| **gap** | `best_side − standing_best`, always signed |
+| **evidence tier** | What a number may claim: `f64_screen`, `polished`, or `exact`—and a record only at `exact` |
 
 The operating documents divide ownership rather than repeat one another:
 
@@ -123,95 +128,20 @@ The operating documents divide ownership rather than repeat one another:
 
 ## The Autonomous Work Loop
 
-The outer loop is a portable repository protocol, not a feature of one agent platform.
-The `tbd` queue owns ready work, an agent-session artifact owns the current objective
-and clocks, and commits plus research artifacts own the evidence.
-A native long-running goal, periodic watchdog, scheduler, or human may drive that
-protocol. For example, Codex can use a
-[durable goal](https://learn.chatgpt.com/use-cases/follow-goals) and a scheduled
-watchdog; Claude or another coding agent can use its corresponding continuation and
-timer facilities. No platform-only state is authoritative, so changing agents does not
-change the work.
+The outer loop is a portable repository protocol, not a feature of one agent platform:
+the `tbd` queue owns ready work, an
+[agent-session artifact](campaign/agent-sessions/README.md) owns the current objective,
+clocks, and delegation evidence, and commits plus research artifacts own the results.
+Changing agents changes the driver, not the work.
 
 Breadth lives in [`campaign/ideas.md`](campaign/ideas.md), the hypothesis registry, and
-the bead queue. Narrowness lives in the active slice: one focus, one primary bead, one
-question, one promised artifact, and one hard wall-clock bound per agent.
-A new idea found mid-slice is recorded and returned to the queue unless it invalidates
-the current measurement.
-The exact clock and checkpoint protocol is the campaign runbook’s
-[bounded research cycle](campaign/README.md#the-bounded-research-cycle).
-
-The outer loop chooses and integrates work; [`campaign/runner.py`](campaign/runner.py)
-remains the smaller tool that executes already-preregistered numerical rounds.
-Do not turn the runner into a second project manager.
-
-Each autonomous cycle names one focus, one primary bead, one measurable outcome, a
-budget, and explicit stop conditions in a versioned
-[agent-session artifact](campaign/agent-sessions/README.md).
-It then selects one bounded action, delegates independent pieces, runs the narrowest
-adequate check, integrates the evidence, updates the durable record, and repeats.
-A delegated result is not complete until the parent can see its **outcome, evidence,
-files or artifacts, checks, remaining uncertainty, recommended next action, and elapsed
-wall time**. The parent owns integration and shared files; delegates receive disjoint
-write scopes or read-only briefs.
-
-Use the cheapest loop that answers the current question:
-
-| Loop | Target latency | Use |
-| --- | ---: | --- |
-| Interactive | under about 2 seconds | Status, ledger and schema checks, exact-witness verification, engine self-test |
-| Focused | under about 60 seconds | One changed component and its named negative control |
-| Checkpoint | about 2 minutes | Normal `./test.sh` before a commit, push, or cross-component handoff |
-| Deep handoff | about 5 minutes | `./test.sh --strict` before an unattended campaign, major handoff, or merge |
-| Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
-
-These are working envelopes, not promises.
-The retained normal-gate observations are 108 seconds at the prior pushed checkpoint,
-126 seconds for the first integration, and 114 seconds for the PR #16 absorption.
-Repeated versioned benchmarks, fuller stage attribution, and warm/cold regimes remain
-tracked work.
-The research round is intentionally separate from the edit/test loop, so an
-eight-hour hypothesis never makes a documentation correction take eight hours to
-validate.
-
-Route each result once:
-
-- a structural idea becomes an exploration (`X-NNN`) and, when falsifiable, a hypothesis
-  (`H-NNN`);
-- a measurement becomes raw data plus an experiment (`exp-NNN`);
-- an implementation or process action updates its bead;
-- an actual mistake enters [`defects.yaml`](defects.yaml), categorized by what failed
-  and linked to its detector and regression; and
-- the outer-loop handoff stays in the agent-session artifact instead of being spread
-  across chat summaries.
-
-Stop when the declared budget expires, no ready work remains, three consecutive guards
-or runs fail, a decision needs the user, or two cycles fail to move the chosen progress
-metric.
-This is a cooperative mathematical workspace: optimize for rapid detection, exact
-records, and cheap recovery.
-The negative-control marker, generated-view drift checks, bounded subprocesses, and
-resumable on-disk runner state are useful; per-run worktrees, repository copies, or a
-generalized lease/capability system are not the default.
-
-Three documents get you oriented, and they have different jobs.
-
-**[`TUTORIAL.md`](TUTORIAL.md) is the conceptual on-ramp:** the objects, the main
-decompositions, the central traps, and the boundary between established and proposed
-work. It owns no changing status.
-
-**[`SYNOPSIS.md`](SYNOPSIS.md) is the technical root:** the single account of what this
-project knows, how it knows it, and what it is doing next.
-The problem, the results established here and their evidential status, the per-`n` lay
-of the land, the terminology this directory uses narrowly, the hypothesis registry, and
-a roll-up of every experiment run so far.
-Its numbers are reconciled against the artifacts in the gate.
-
-**[The basin confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md)
-is the mutable priority queue:** it separates tool validation, measurement validation,
-and research, and names the next bounded evidence for each `n`. The older
-[quench-spine handoff](docs/project/handoff-2026-08-23-quench-spine.md) is explicitly
-superseded and retained only as historical provenance.
+the bead queue; narrowness lives in one preregistered slice at a time, with hard clocks.
+The slice protocol, clocks, result routing, budgets, and stop rules are the campaign
+runbook’s [bounded research cycle](campaign/README.md#the-bounded-research-cycle); which
+validation loop to run at each step is
+[`conventions.md`](conventions.md#10-what-the-gate-actually-enforces).
+[`campaign/runner.py`](campaign/runner.py) stays the smaller tool that executes
+already-preregistered numerical rounds, never a second project manager.
 
 ## Layout
 
@@ -418,30 +348,14 @@ squares = [...]  # 11 x 4 corners of FieldElements
 print(verify_packing(squares, side, sign=exact_sign))
 ```
 
-The work is in the first line.
-Record packings are published as SVG transforms with 33-digit decimal entities and, for
-the analytically solved ones, Mathematica source in an XML comment; recovering the field
-means reading that by hand, once per packing.
-`sqpack/packings/trump11.py` is the worked example.
+The work is in the first line: recovering the field means reading the published exact
+data by hand, once per packing, and `sqpack/packings/trump11.py` is the worked example.
 
 **The result is a proof only if the field metadata is right, and the constructor does
-not yet check that** ([D-053](defects.md), open): `NumberField` requires an irreducible
-minimal polynomial and an interval isolating exactly one real root, but verifies only an
-endpoint sign change.
-A reducible polynomial or a multi-root interval yields unsound exact comparisons.
-The built-in Trump witness is independently checked; anything you supply yourself is
-not, so verify irreducibility and root isolation before trusting the verdict.
-
-For a quick, non-certifying check, swap in the float backend:
-
-```python
-from sqpack.verify import float_sign
-
-verify_packing(squares, side, sign=float_sign(1e-9), bucket=True)
-```
-
-`bucket=True` grid-buckets the squares so pair enumeration is linear rather than
-quadratic: at `n = 1000` that is 15,936 candidate pairs instead of 499,500.
+not yet check that** ([D-053](defects.md), open): verify irreducibility and single-root
+isolation yourself before trusting a verdict on a field you supplied.
+The [synopsis](SYNOPSIS.md#what-is-built) carries the full caveat; the module docstrings
+in [`sqpack/`](sqpack/) carry the API, including the fast non-certifying float backend.
 
 ### Scope
 
