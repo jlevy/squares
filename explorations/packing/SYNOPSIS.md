@@ -1010,8 +1010,8 @@ current criterion and kill rule.
 
 ## Experiments Conducted
 
-There are 20 rounds registered in `series-000`; all are terminal.
-They record 714 agent-minutes and 24.6 wall-minutes.
+There are 21 rounds registered in `series-000`; all are terminal.
+They record 729 agent-minutes and 24.7 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1049,6 +1049,7 @@ archive beside it.
 | [exp-018](campaign/series/series-000-smoke-and-calibration/experiments/exp-018-h-021-n3-basin-event-calibration.md) | 3 | positive control | H-021 | full-pose event replay | 4 valid; 3 producer-converged; 0 admissible | **blocked** |
 | [exp-019](campaign/series/series-000-smoke-and-calibration/experiments/exp-019-h-021-n4-basin-event-calibration.md) | 4 | positive control | H-021 | full-pose event replay | 4 valid; 2 producer-converged; 0 admissible | **blocked** |
 | [exp-020](campaign/series/series-000-smoke-and-calibration/experiments/exp-020-h-021-n5-basin-event-calibration.md) | 5 | positive control | H-021 | full-pose event replay | 4 valid; 4 producer-converged; 0 admissible | **blocked** |
+| [exp-021](campaign/series/series-000-smoke-and-calibration/experiments/exp-021-h-021-n3-basin-event-v3.md) | 3 | positive control | H-021 | BasinEvent/v3 semantic replay | 1 valid; 2,037/2,037 fixed-point evaluations settled; 1 admissible | **baseline** |
 
 ### Cost and provenance
 
@@ -1074,17 +1075,21 @@ archive beside it.
 | exp-018 | 4 seeds, 10 s each | 10.025 s | 12 m | dependency | `ee3acc1` |
 | exp-019 | 4 seeds, 10 s each | 13.322 s | 5 m | dependency | `ee3acc1` |
 | exp-020 | 4 seeds, 10 s each | 14.821 s | 5 m | dependency | `ee3acc1` |
+| exp-021 | 1 seed, 10 s cap | 1.897 s | 15 m | criterion | `8f20908` |
 
-### What the twenty rounds jointly establish
+### What the twenty-one rounds jointly establish
 
-**The numerical basin instrument is not yet admissible on the proved positive
-controls.** Exp-018 through exp-020 retain twelve independently valid poses at `n=3`
-through `n=5`, including four at the proved `n=3` and `n=4` optima, but D-165 leaves all
-twelve ineligible for terminal-component promotion.
+**The numerical basin event trust boundary is now admissible on one proved positive
+control; component classification is not.** Exp-018 through exp-020 retain twelve
+independently valid historical v2 poses at `n=3` through `n=5`, including four at the
+proved `n=3` and `n=4` optima, but D-165 correctly remains recorded on those artifacts.
+Exp-021 adds one v3 `n=3` event whose 2,037 fixed-point evaluations are all retained and
+settled, whose pose independently verifies, and whose admissibility claim replays.
+That event is evidence for the producer contract, not a terminal-component count.
 None of the four `n=5` starts finds its proved optimum.
-The exact small-moduli controls remain valid; the numerical quench is the blocked layer.
-The `n=12` calibration returns exactly `4.0`, but that is not a known-answer guard.
-The runner’s full-pose independent verification boundary remains open under
+The exact small-moduli controls remain valid; component identity is the next blocked
+layer. The `n=12` calibration returns exactly `4.0`, but that is not a known-answer
+guard. The runner’s full-pose independent verification boundary remains open under
 [D-044](defects.md); a producer-reported overlap scalar does not close it.
 
 **Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
@@ -1284,17 +1289,18 @@ count. A single one-row retry leaves the `1e-10` acceptance screen unchanged, re
 the proved n=3 and n=10 controls, and is replayed against the original LP rows.
 D-165 records the bounded implementation’s stop condition: initial cell-solve failures
 still bypass D-132’s typed result and become dummy objectives inside the angle search.
-That code path is now typed and D-168 closes the n=10 cell degeneracy, but the defect
-remains open until a newly generated basin-event block proves every probe accounted for;
-the older exp-018 through exp-020 artifacts remain correctly blocked.
-D-166 removes the resulting false certificate from BasinEvent/v1. Version 2 retains the
-full stopping event and independent validity screen but marks every current event
-promotion-blocked by D-165, and replay refuses a forged admissible flag.
+That code path is now typed, D-168 closes the n=10 cell degeneracy, and BasinEvent/v3
+routes every fixed-point evaluation through one audited path.
+Exp-021 retains and replays a balanced 2,037-evaluation receipt, so D-165 is fixed; the
+older exp-018 through exp-020 artifacts remain correctly blocked under their historical
+v2 contract. D-166 removes the resulting false certificate from BasinEvent/v1. Version 2
+retains the full stopping event and independent validity screen but marks every current
+event promotion-blocked by D-165, and replay refuses a forged admissible flag.
 D-167 adds the missing per-event wall time, so subsequent seed blocks and larger `n`
 values can be selected from measured throughput rather than command-level guesses.
 D-168 separates an equal-objective finite cell closure from a genuinely unresolved
-cycle. The n=10 control closes after enumerating at most eight adjacent cells, but D-165
-still blocks the retained event block until its replacement records the new typed path.
+cycle. The n=10 control closes after enumerating at most eight adjacent cells; exp-021
+then records the new typed path without rewriting the historical blocked events.
 D-169 fixes a second post-check hole found while typing those failures: containment rows
 were never replayed.
 Every accepted cell now passes the full original LP residual vector.

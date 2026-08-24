@@ -339,6 +339,10 @@ step_basin_events() {
   # independent validity replay, tamper detection, and idempotent event ids. This does
   # not call an endpoint key a connected basin; classification is a later instrument.
   $PY tools/basin_census.py --selftest
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-021-h-021-n3-basin-event-v3.jsonl
 }
 
 step_small_n_moduli() {

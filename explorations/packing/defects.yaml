@@ -4149,7 +4149,7 @@ defects:
   detected_by: control_cell
   latent_for: one bounded D-132 implementation slice
   severity: critical
-  status: outstanding
+  status: fixed
   what: >-
     D-132 made cycles, caps, and failed re-read transitions explicit only after the
     initial cell LP succeeded. An initial `solve_cell` failure still returns `None`;
@@ -4162,18 +4162,20 @@ defects:
     converged run may have crossed unmeasured angle probes. Basin membership and
     stationarity remain inadmissible even though the newly added field says settled.
   fix: >-
-    partially implemented. D-164 now returns a typed initial failure, retries only a
-    successful-but-rejected LP once, and counts the second solver call; D-168 closes the
-    finite equal-objective n=10 degeneracy. The n=3, n=10, and n=11 controls now pass
-    without a sentinel objective. Keep this defect open until a new basin-event block
-    records that every probe was accounted for and replay independently rejects a forged
-    claim; the older exp-018 through exp-020 events correctly remain blocked.
+    Route every quench-bracket fixed-point evaluation, including the free sweep, through
+    one audited call path. Retain total, settled, and unsettled counts in BasinEvent/v3;
+    derive the all-probes, blocker, and scientific-admissibility fields from those
+    counts, producer convergence, and the independent pose screen. Exp-021 retains a
+    balanced 2037 = 2037 + 0 receipt and replay rejects a forged all-probes flag. The
+    older exp-018 through exp-020 events remain correctly blocked under their v2
+    contract rather than being rewritten.
   regression: >-
-    The D-016 and D-029 fixtures must remain converged under the final typed policy, and
-    a synthetic initial post-check rejection must never be converted to a dummy score.
+    The D-016 and D-029 fixtures remain converged; the BasinEvent selftest requires a
+    balanced quench receipt, replays the historical v2 archive, and rejects a forged v3
+    all-probes claim. Exp-021 must independently replay its complete receipt and pose.
   recurrence_of: D-132
   bead: think-9qz0
-  recorded_in: tools/regression_test.py
+  recorded_in: tools/basin_census.py
 - id: D-166
   title: Basin events called producer convergence a fixed-cell certificate
   date: '2026-08-24'

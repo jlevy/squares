@@ -30,15 +30,16 @@ session:
   - A scientific decision requires changing a preregistered criterion or user judgment.
   - The admissible queue is empty; blocked samples are retained but not multiplied.
   progress:
-    metric: scientifically admissible basin-map cells with replayable event evidence
+    metric: scientifically admissible terminal events and classified basin-map cells
     before: >-
       No retained per-seed basin-event stream carried full poses, independent validity,
       typed termination evidence, resumable writes, and measured event wall time.
     after: >-
       Exp-018 through exp-020 retain replayable n=3, n=4, and n=5 event blocks with full
-      poses, independent validity, typed producer termination, and event timings. All
-      twelve events fail promotion closed on D-165, so the admissible-cell count remains
-      zero and the size sweep has stopped rather than multiplying blocked evidence.
+      poses, independent validity, typed producer termination, and event timings. Their
+      twelve historical v2 events remain blocked as recorded. Exp-021 adds one
+      scientifically admissible v3 terminal event with a complete receipt; the number
+      of component-classified map cells remains zero, so no complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -121,9 +122,11 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-018-h-021-n3-basin-event-calibration.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-019-h-021-n4-basin-event-calibration.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-020-h-021-n5-basin-event-calibration.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-021-h-021-n3-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-021-h-021-n3-basin-event-v3.jsonl
   - tools/basin_census.py
   - README.md
   - campaign/README.md
@@ -136,7 +139,7 @@ session:
   checks:
   - Basin-event generation and replay pass for n=3, n=4, and n=5.
   - Every retained pose passes the independent floating-point geometry screen.
-  - Every event states that D-165 blocks scientific promotion.
+  - Historical v2 events state that D-165 blocks promotion; the v3 event derives its empty blocker list.
   - The portable runbook and session clocks pass Flowmark, schema, campaign-record, README, and synopsis checks.
   - >-
     A diagnostic replay classified all sixteen formerly censored n=10 probes as
@@ -158,20 +161,26 @@ session:
     preserves the row, residual, retry, and side evidence; the historical-regression
     lane now passes in 12 seconds instead of the prior 18-second D-168 checkpoint.
   - >-
-    The 36-second normal gate passes all thirty steps after D-168: the real n=4 quench
-    converges and the store reports five of six converged proposals. D-165 still blocks
-    scientific promotion because failed angle probes remain untyped and unaccounted.
+    At the D-168 checkpoint, the 36-second normal gate passed all thirty steps: the real
+    n=4 quench converged and the store reported five of six converged proposals. D-165
+    still blocked promotion at that checkpoint because angle probes were unaccounted.
   - >-
     With typed outcomes and the bounded retry in production, the full normal gate again
     passed all thirty steps in 57 seconds. Replacing only the slow n=3 regression with
     its retained failing cell then reduced the affected historical-regression lane to
     12 seconds; that lane and all static checks passed after the test-only change.
+  - >-
+    Exp-021 is the first BasinEvent/v3 supervised result: n=3 seed 1 reaches side
+    2.000000000000001 in 1.90 seconds, independently validates all three pairs, and
+    retains 2,037 fixed-point evaluations, all settled. Semantic replay derives
+    scientific admissibility and rejects a forged all-probes flag.
+  - The post-exp-021 full normal gate passes all thirty steps in 21 wall-seconds.
   stop_reason: null
   next_action: >-
-    In one thirty-minute slice, produce and independently replay one supervised n=3
-    BasinEvent/v3 whose all-probes-accounted claim is derived from the producer rather
-    than hard-coded. Promote no endpoint identity, then decide whether D-165 can close
-    before regenerating any larger event block.
+    In one thirty-minute slice, regenerate the remaining n=3 seeds under BasinEvent/v3,
+    retain every stopping outcome, and reconcile the exact known moduli without calling
+    endpoint descriptors components. Stop before n=4 and price that next cell from the
+    measured n=3 block.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -185,8 +194,9 @@ The session therefore stopped the size sweep after n=5. The finite n=10 tie-cell
 has now closed every observed two-, four-, and eight-cell degeneracy without claiming a
 global optimum. The next slice typed all sixteen missing outcomes, added one bounded
 one-row retry, and replayed every accepted result against every original LP row.
-The old event block remains promotion-blocked until a new supervised event derives that
-evidence from the producer instead of inheriting a hard-coded flag.
+Exp-021 now derives that evidence from a balanced fixed-point receipt and closes D-165.
+The historical v2 block remains promotion-blocked as recorded; no endpoint descriptor
+has been promoted to a connected component.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -10,7 +10,7 @@ Source of truth is [`defects.yaml`](defects.yaml).
 
 - **56 soundness defects** — the system asserting something false about the mathematics. 46 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
 - **60 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014).
-- **25 are still open** (outstanding or contained), every one carrying a bead.
+- **24 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -144,7 +144,6 @@ This is the actionable list.
 | D-129 | outstanding | medium | Negative-control checker processes have no bounded timeout or child cleanup | `think-cns0` |
 | D-139 | contained | high | H-032 omitted directly relevant hard-square configuration-space literature | `think-izep` |
 | D-162 | outstanding | high | The small-n golden convergence labels hid unsettled fixed-cell evaluations | `think-wbra` |
-| D-165 | outstanding | critical | Initial cell-solve failures bypassed the fixed-point termination guard | `think-9qz0` |
 
 ## Every defect
 
@@ -314,7 +313,7 @@ This is the actionable list.
 | [D-162](golden/basin-maps.yaml) | 2026-08-24 | record | validity | flattering | `control_cell` | high | outstanding | The small-n golden convergence labels hid unsettled fixed-cell evaluations |
 | [D-163](test.sh) | 2026-08-24 | tooling | validity | flattering | `gate` | critical | fixed | The historical-regression gate masked a failing checker |
 | [D-164](golden/basin-maps.yaml) | 2026-08-24 | quench | validity | conservative | `control_cell` | high | fixed | The fixed-cell solver mislabeled a numerical rejection as mathematical infeasibility |
-| [D-165](tools/regression_test.py) | 2026-08-24 | quench | validity | flattering | `control_cell` | critical | outstanding | Initial cell-solve failures bypassed the fixed-point termination guard |
+| [D-165](tools/basin_census.py) | 2026-08-24 | quench | validity | flattering | `control_cell` | critical | fixed | Initial cell-solve failures bypassed the fixed-point termination guard |
 | [D-166](tools/basin_census.py) | 2026-08-24 | record | soundness | flattering | `drift_check` | critical | fixed | Basin events called producer convergence a fixed-cell certificate |
 | [D-167](tools/basin_census.py) | 2026-08-24 | record | bookkeeping |  | `drift_check` | high | fixed | Basin events omitted the wall time needed to price the loop |
 | [D-168](sqpack/quench.py) | 2026-08-24 | quench | validity | conservative | `control_cell` | high | fixed | A finite equal-objective adjacent-cell closure was labeled an unsettled cycle |
