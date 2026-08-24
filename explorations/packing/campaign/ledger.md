@@ -19,7 +19,7 @@
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 19 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 20 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -45,7 +45,7 @@
 | H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m wall |
 | H-019 | confirmed | search | On the n=11 Trump contact cell, varying the shared tilt of its five ti | n: 11* | 1 | 10m agent + 1s wall |
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
-| H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5 6 7 8 | 2 | 17m agent + 23s wall |
+| H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6 7 8 | 3 | 22m agent + 38s wall |
 | H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
 | H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 0 |  |
 | H-024 | refuted | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
@@ -83,12 +83,13 @@
 | exp-012 | series-000 | 29 | openai-codex | H-024 | The reconstructed, numerically valid n = 29 witness has six unambiguous orientation classes, exceeding H-024's preregistered upper bound of three and refuting the universal corpus claim at its first stop cell. |
 | exp-016 | series-000 | 11 | openai-codex | H-010 | The printed Figure 14 set is avoidable, so node four and therefore the five-node conjunction fail; this rejects the proof as printed, not the numerical lower bound. |
 
-### blocked (2)
+### blocked (3)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-018 | series-000 | 3 | openai-codex | H-021 | The block retains useful stopping evidence, including two exact side-2 endpoints, but D-165 forces all four events to remain ineligible for component classification. |
 | exp-019 | series-000 | 4 | openai-codex | H-021 | The block retains two exact side-2 endpoints and two explicit cell-cycle stops, but D-165 makes all four ineligible for terminal-component classification. |
+| exp-020 | series-000 | 5 | openai-codex | H-021 | The block retains two repeated side values and full poses, but it finds no proved optimum and D-165 makes all four events ineligible for component classification. |
 
 ### accepted (8)
 
@@ -109,8 +110,9 @@
 | --- | --- | --- | --- | --- | --- |
 | exp-018 | H-021 | 12m agent + 10s wall | dependency |  |  |
 | exp-019 | H-021 | 5m agent + 13s wall | dependency |  |  |
+| exp-020 | H-021 | 5m agent + 15s wall | dependency |  |  |
 
 ## Effort
 
-19 rounds, 709 agent-minutes, 24.4 wall-minutes.
+20 rounds, 714 agent-minutes, 24.6 wall-minutes.
 

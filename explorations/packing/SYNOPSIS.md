@@ -1010,8 +1010,8 @@ current criterion and kill rule.
 
 ## Experiments Conducted
 
-There are 19 rounds registered in `series-000`; all are terminal.
-They record 709 agent-minutes and 24.4 wall-minutes.
+There are 20 rounds registered in `series-000`; all are terminal.
+They record 714 agent-minutes and 24.6 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1048,6 +1048,7 @@ archive beside it.
 | [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | 11 | proof calibration | H-041 | exact repaired cover | 26-face cover; complete five-node certificate | **accepted** |
 | [exp-018](campaign/series/series-000-smoke-and-calibration/experiments/exp-018-h-021-n3-basin-event-calibration.md) | 3 | positive control | H-021 | full-pose event replay | 4 valid; 3 producer-converged; 0 admissible | **blocked** |
 | [exp-019](campaign/series/series-000-smoke-and-calibration/experiments/exp-019-h-021-n4-basin-event-calibration.md) | 4 | positive control | H-021 | full-pose event replay | 4 valid; 2 producer-converged; 0 admissible | **blocked** |
+| [exp-020](campaign/series/series-000-smoke-and-calibration/experiments/exp-020-h-021-n5-basin-event-calibration.md) | 5 | positive control | H-021 | full-pose event replay | 4 valid; 4 producer-converged; 0 admissible | **blocked** |
 
 ### Cost and provenance
 
@@ -1072,18 +1073,19 @@ archive beside it.
 | exp-017 | exact repaired cover + replay | 0.70 s | 90 m | criterion | `c6d036b` |
 | exp-018 | 4 seeds, 10 s each | 10.025 s | 12 m | dependency | `ee3acc1` |
 | exp-019 | 4 seeds, 10 s each | 13.322 s | 5 m | dependency | `ee3acc1` |
+| exp-020 | 4 seeds, 10 s each | 14.821 s | 5 m | dependency | `ee3acc1` |
 
-### What the nineteen rounds jointly establish
+### What the twenty rounds jointly establish
 
 **The numerical basin instrument is not yet admissible on the proved positive
-controls.** Exp-018 and exp-019 retain eight independently valid `n=3` and `n=4` poses,
-including four at the proved optima, but D-165 leaves all eight ineligible for
-terminal-component promotion.
-The exact `n=3` and `n=4` moduli controls remain valid; the numerical quench is the
-blocked layer. The `n=12` calibration returns exactly `4.0`, but that is not a
-known-answer guard.
-The runner’s full-pose independent verification boundary remains open
-under [D-044](defects.md); a producer-reported overlap scalar does not close it.
+controls.** Exp-018 through exp-020 retain twelve independently valid poses at `n=3`
+through `n=5`, including four at the proved `n=3` and `n=4` optima, but D-165 leaves all
+twelve ineligible for terminal-component promotion.
+None of the four `n=5` starts finds its proved optimum.
+The exact small-moduli controls remain valid; the numerical quench is the blocked layer.
+The `n=12` calibration returns exactly `4.0`, but that is not a known-answer guard.
+The runner’s full-pose independent verification boundary remains open under
+[D-044](defects.md); a producer-reported overlap scalar does not close it.
 
 **Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
 selections as 128 derivative-distinct matrices.
