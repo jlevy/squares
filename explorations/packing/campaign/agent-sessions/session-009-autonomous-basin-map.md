@@ -373,6 +373,10 @@ session:
     Exp-034 meets its frozen criterion in 0.27 seconds of generation plus replay. The
     exp-033 face lies in an exact two-parameter angle-and-slide sheet of
     orientation-indexed LP optima, and all five controls fail as required.
+  - >-
+    The first post-exp-034 normal gate stops after 31 seconds because two synopsis
+    mutation controls retained pre-D-186 numeric anchors. D-187 records the miss; the
+    defect-count, soundness-direction, and gate-detector controls then all fire.
   stop_reason: null
   next_action: >-
     Continue BC-010 with one bounded complete wall-release and SAT-branch cone slice.

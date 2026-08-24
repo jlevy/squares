@@ -1445,14 +1445,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 186 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 187 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 62 | asserted something false about the mathematics |
 | validity | 54 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 50 | recorded something its own evidence contradicts |
+| bookkeeping | 51 | recorded something its own evidence contradicts |
 | robustness | 15 | did not finish, or finished only by luck |
 | performance | 5 | worked, but cost far more than it should |
 
@@ -1462,17 +1462,17 @@ Two observations the log exists to make.
 where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seven defects in 186, and no soundness defect ever.**
+**The automated gate has caught eight defects in 187, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. The seven the gate did catch ([D-024](defects.md), [D-064](defects.md),
+*surprised*. The eight the gate did catch ([D-024](defects.md), [D-064](defects.md),
 [D-106](defects.md), [D-107](defects.md), [D-125](defects.md), [D-130](defects.md), and
-[D-163](defects.md)) are bookkeeping or robustness defects, found by contiguity,
-integration, mutation-anchor, and reconciliation checks—which is the pattern, not an
-exception: gates are good at the mechanical classes and have never once caught the
-mathematics being wrong.
+[D-163](defects.md), and [D-187](defects.md)) are bookkeeping or robustness defects,
+found by contiguity, integration, mutation-anchor, and reconciliation checks—which is
+the pattern, not an exception: gates are good at the mechanical classes and have never
+once caught the mathematics being wrong.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed

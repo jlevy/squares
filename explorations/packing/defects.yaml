@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 186
+count: 187
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4768,3 +4768,32 @@ defects:
     mathematical review obligation rather than a sampling claim.
   bead: think-7pn0
   recorded_in: tools/check_n5_angle_sheet.py
+- id: D-187
+  title: Two synopsis mutation controls retained the pre-D-186 aggregates
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one integration checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    D-186 changed the soundness-direction and total-defect aggregates in SYNOPSIS, but
+    the integration pass updated only the living prose and defect-count mutation. Two
+    separate negative controls still searched for the former 50-of-61 and 7-of-185
+    sentences, so their mutation anchors appeared zero times.
+  consequence: >-
+    The normal gate failed even though the current synopsis was correct, delaying the
+    checkpoint and showing that derived prose and its mutation anchors were not updated
+    as one unit.
+  fix: >-
+    Update both mutations to the current derived sentences and treat a defect addition
+    as an atomic refresh of generated views, synopsis aggregates, and every live-number
+    control anchor.
+  regression: >-
+    The two focused negative controls fire on the current sentences, and the subsequent
+    normal gate runs the complete negative-control catalogue.
+  recurrence_of: D-185
+  bead: think-7pn0
+  recorded_in: tools/controls.yaml
