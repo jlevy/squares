@@ -201,6 +201,12 @@ post-check rejection belong to `think-sk15`, `think-lwao`, and `think-u97a`; thi
 does not accept their rebuilt output.
 CI does not carry a separate test recipe.
 
+The first clean remote run found two CI-only configuration defects.
+Both jobs now fetch complete history because the full gate verifies 36 historical engine
+commits, and the uv cache dependency glob is correctly relative to the action’s packing
+working directory. A pytest architecture contract parses both jobs and enforces those
+settings.
+
 [`development.md`](../../../../development.md) now documents setup, E0–E3 placement,
 dependency flow, commands, CLI semantics, quality tools, red-green-refactor practice,
 goldens, compatibility, atomic output, shell policy, performance work, and links to the
@@ -240,7 +246,7 @@ The change is complete when all of the following are green on the final tree:
 - [x] README, synopsis, campaign record, generated views, and code references agree with
   the new layout.
 - [x] Final full local `packing-validate` transcript is green on the rebased
-  implementation tree: all 31 steps passed in 93.88 seconds.
+  implementation tree: all 31 steps passed in 112.21 seconds.
 - [ ] Stacked PR checks are green.
 
 The remaining box is remote integration evidence, not deferred implementation.

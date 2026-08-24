@@ -31,6 +31,9 @@ jobs:
     steps:
       - name: Check out the repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # The provenance step verifies historical engine commits, not just HEAD.
+          fetch-depth: 0
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -38,7 +41,7 @@ jobs:
           python-version: "3.14"
           working-directory: explorations/packing
           enable-cache: true
-          cache-dependency-glob: explorations/packing/uv.lock
+          cache-dependency-glob: uv.lock
 
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
@@ -54,6 +57,9 @@ jobs:
     steps:
       - name: Check out the repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # The provenance step verifies historical engine commits, not just HEAD.
+          fetch-depth: 0
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -61,7 +67,7 @@ jobs:
           python-version: "3.14"
           working-directory: explorations/packing
           enable-cache: true
-          cache-dependency-glob: explorations/packing/uv.lock
+          cache-dependency-glob: uv.lock
 
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev

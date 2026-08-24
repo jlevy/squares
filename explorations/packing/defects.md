@@ -2,7 +2,7 @@
 
 # Defect log
 
-218 defects recorded across the packing toolchain.
+221 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `control_cell` | 15 | a cell of the sweep whose answer is known in advance |
 | `review` | 143 | a human or agent reading the work against a checklist |
 | `anomaly` | 9 | a result that made no sense, chased down |
-| `inspection` | 23 | reading the code or the design with intent |
+| `inspection` | 24 | reading the code or the design with intent |
 | `drift_check` | 13 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 12 | the automated test suite |
+| `gate` | 14 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 12 of 218, and none of the 64 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 14 of 221, and none of the 64 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 12 of 218, and none of
 | quench | 20 |
 | verifier | 4 |
 | record | 56 |
-| tooling | 51 |
+| tooling | 54 |
 | docs | 78 |
 
 ## By kind
@@ -45,8 +45,8 @@ The line worth reading twice: **the automated gate caught 12 of 218, and none of
 | soundness | 64 |
 | validity | 62 |
 | bookkeeping | 67 |
-| robustness | 18 |
-| performance | 7 |
+| robustness | 20 |
+| performance | 8 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -379,12 +379,15 @@ This is the actionable list.
 | [D-207](README.md) | 2026-08-24 | docs | validity | neutral | `review` | medium | fixed | The workflow map handed repairs to an undefined implementation workflow |
 | [D-208](SYNOPSIS.md) | 2026-08-24 | docs | validity | neutral | `review` | medium | fixed | The new campaign definition excluded work already stored in the campaign |
 | [D-209](campaign/series/series-000-smoke-and-calibration/README.md) | 2026-08-24 | docs | bookkeeping | conservative | `review` | medium | fixed | The legacy-series summary stopped at 35 of 36 experiments |
-| [D-210](campaign/ledger.py) | 2026-08-24 | record | validity | flattering | `review` | high | fixed | Retrospective workflow labels were counted as contemporaneous declarations |
+| [D-210](src/sqpack/campaign/ledger.py) | 2026-08-24 | record | validity | flattering | `review` | high | fixed | Retrospective workflow labels were counted as contemporaneous declarations |
 | [D-211](SYNOPSIS.md) | 2026-08-24 | docs | performance | neutral | `review` | medium | fixed | The workflow cadence mandated review phases after routine guarded rounds |
 | [D-212](README.md) | 2026-08-24 | docs | validity | neutral | `review` | medium | fixed | The workflow prose turned a primary focus into an exclusive focus |
-| [D-213](tools/check_readme.py) | 2026-08-24 | tooling | bookkeeping | neutral | `review` | medium | fixed | Workflow vocabulary and entry state had several machine authorities |
-| [D-214](campaign/ledger.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | The v2 loader ignored its declared contract and envelope identity |
-| [D-215](tools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | flattering | `review` | medium | fixed | Workflow drift checks accepted unauthorized rows and invalid transitions |
-| [D-216](campaign/ledger.py) | 2026-08-24 | tooling | performance | neutral | `review` | low | fixed | Full phase histories made the generated orientation table unboundedly wide |
+| [D-213](devtools/check_readme.py) | 2026-08-24 | tooling | bookkeeping | neutral | `review` | medium | fixed | Workflow vocabulary and entry state had several machine authorities |
+| [D-214](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | The v2 loader ignored its declared contract and envelope identity |
+| [D-215](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | flattering | `review` | medium | fixed | Workflow drift checks accepted unauthorized rows and invalid transitions |
+| [D-216](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | performance | neutral | `review` | low | fixed | Full phase histories made the generated orientation table unboundedly wide |
 | [D-217](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `anomaly` | medium | contained | A parallel validation wrapper discarded a live command receipt |
 | [D-218](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `inspection` | medium | fixed | Session-009's output inventory stopped before exp-035 and exp-036 |
+| [D-219](../../.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | robustness | conservative | `gate` | medium | fixed | CI discarded the history required by its own provenance gate |
+| [D-220](../../.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | performance | neutral | `inspection` | low | fixed | The uv cache key prefixed its working directory twice |
+| [D-221](tests/test_module_boundaries.py) | 2026-08-24 | tooling | robustness | conservative | `gate` | low | fixed | The workflow regression assumed every YAML key was a string |

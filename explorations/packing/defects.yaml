@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 218
+count: 221
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -5603,3 +5603,74 @@ defects:
   regression: none
   bead: think-kts5
   recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+- id: D-219
+  title: CI discarded the history required by its own provenance gate
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: gate
+  latent_for: the first stacked-PR workflow run
+  severity: medium
+  status: fixed
+  what: >-
+    Both full-validation jobs used actions/checkout at its one-commit default, while the
+    provenance step verifies that 36 recorded engine commits remain reachable. The
+    local full clone passed, but both clean CI runners rejected exp-002 immediately.
+  consequence: >-
+    Linux and macOS CI could never pass the same complete gate documented for local
+    handoff, making the new remote assurance surface unusable.
+  fix: >-
+    Fetch complete history in both jobs before running the full validation command.
+  regression: >-
+    test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock parses both
+    workflow jobs and requires checkout fetch-depth zero.
+  recorded_in: ../../.github/workflows/packing-validation.yml
+- id: D-220
+  title: The uv cache key prefixed its working directory twice
+  date: '2026-08-24'
+  layer: tooling
+  class: performance
+  direction: neutral
+  detected_by: inspection
+  latent_for: the first stacked-PR workflow run
+  severity: low
+  status: fixed
+  what: >-
+    setup-uv resolves cache-dependency-glob relative to its working-directory input, but
+    both jobs repeated explorations/packing in the glob. The resulting lookup targeted
+    explorations/packing/explorations/packing/uv.lock and matched nothing.
+  consequence: >-
+    The cache key could not follow lockfile changes, producing a warning and wasting
+    dependency-cache work on every runner.
+  fix: >-
+    Keep the packing working directory and make the dependency glob relative to it.
+  regression: >-
+    test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock requires
+    the relative uv.lock glob in both workflow jobs.
+  recorded_in: ../../.github/workflows/packing-validation.yml
+- id: D-221
+  title: The workflow regression assumed every YAML key was a string
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: gate
+  latent_for: the first focused run of the new CI regression
+  severity: low
+  status: fixed
+  what: >-
+    The first workflow regression rejected the valid document before inspecting either
+    job because PyYAML 1.1 resolves GitHub Actions' top-level on key as a boolean. The
+    test had imposed a string-key assertion on the whole document even though it only
+    consumes the jobs subtree.
+  consequence: >-
+    The regression intended to protect remote validation could not run under the locked
+    development environment.
+  fix: >-
+    Validate mapping shape without inventing a global key-type contract, then assert
+    the typed values only along the two job paths the test owns.
+  regression: >-
+    The same test parses the real workflow through the corrected helper before checking
+    both checkout and cache configurations.
+  recorded_in: tests/test_module_boundaries.py
