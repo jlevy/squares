@@ -5,7 +5,7 @@ title: Reconstruct and test the record angle-class corpus through n=30
 kind: task
 status: open
 priority: 1
-version: 2
+version: 3
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -13,10 +13,10 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q4h688g8gx54wk0vmrhp
 created_at: 2026-08-24T01:08:18.063Z
-updated_at: 2026-08-24T01:49:14.257Z
+updated_at: 2026-08-24T03:05:23.564Z
 ---
 Build H-024's evidence surface without conflating a descriptive corpus law with H-001's algorithmic comparison. Import full record geometry with provenance for every available n<=30, independently verify poses, count orientation classes modulo quarter turns under a preregistered equality/ambiguity rule, and report missing cases rather than counting them as confirmations. Acceptance: H-024 receives a complete included/excluded inventory, per-case class counts and ambiguity intervals, independent validity evidence, and a verdict; any search-strategy consequence is registered separately.
 
 ## Notes
 
-2026-08-24 primary SVG triage found a likely H-024 counterexample at n=29: five distinct nonzero orientations plus the axis-aligned class. Do not spend a full n<=30 tranche before importing and independently verifying this one case; if valid, determine H-024 immediately and replace raw class-count sparsity with an effective angular-DOF/compressibility hypothesis.
+Verify n=29 to determine H-024, then measure H-025 angle compressibility rather than a universal class count. H-038 algebraic metadata must follow independently reconstructed standing witnesses, including the replaced n=69 row.
