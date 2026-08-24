@@ -114,7 +114,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [7]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Does event generation, independent validity, and canonical-key computation remain
@@ -125,14 +125,19 @@ agenda:
     exit: four replayable events or one retained blocker; exact costs recorded
     bead: think-wbra
     depends_on: [BC-004]
-    next_evidence: exp-028 plus its four-event archive, replay, and n=3 through n=7 cost comparison
+    next_evidence: permanent exp-028 replay and the n=3 through n=7 cost comparison
     parallel_group: event-calibration
-    note: Claimed as exp-028 with D-126 carried explicitly.
+    note: >-
+      Exp-028 retains four valid events with 18,286 of 18,286 evaluations settled: one
+      admissible endpoint and three typed time-budget stops. D-126 remains explicit.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-028-h-021-n7-basin-event-v3.jsonl
   - id: BC-006
     purpose: tool_validation
     owner_focus: correctness
     instances: [8]
-    state: tentative
+    state: ready
     priority: 1
     question: >-
       Does the basic event stack still close at the upper edge of H-021's intended

@@ -1196,15 +1196,15 @@ The mutable size-by-size run order lives in the
 [basin-map confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md),
 not in this status document.
 It labels every cell as tool validation, measurement validation, or genuine research.
-The event-retention controls through `n = 6` are complete; exp-028 is the active bounded
-`n = 7` tool-validation cell.
+The event-retention controls through `n = 7` are complete; BC-006 is the next bounded
+`n = 8` tool-validation cell.
 Exact configuration-space controls still stop at `n = 4`. Component and census claims
 remain blocked on the later identity and coverage rows.
 
 ## Experiments Conducted
 
-There are 28 rounds registered in `series-000`; 27 are terminal and exp-028 is in
-progress. The terminal rounds record 773 agent-minutes and 26.4 wall-minutes.
+There are 28 rounds registered in `series-000`; all are terminal.
+They record 778 agent-minutes and 27.1 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1249,7 +1249,7 @@ archive beside it.
 | [exp-025](campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md) | 5 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,219/14,219 evaluations settled; 4 admissible | **baseline** |
 | [exp-026](campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 3 valid/admissible retained; seed 3 crashes before retention | **blocked** |
 | [exp-027](campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 3 admissible; one typed time-budget stop | **baseline** |
-| [exp-028](campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md) | 7 | positive control | H-021 | BasinEvent/v3 semantic replay | preregistered four-seed tool-validation block; measurement pending | **in-progress** |
+| [exp-028](campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md) | 7 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; three typed time-budget stops | **baseline** |
 
 ### Cost and provenance
 
@@ -1282,11 +1282,12 @@ archive beside it.
 | exp-025 | 4 seeds, 10 s each | 14.473 s | 5 m | criterion | `5ab8dab` |
 | exp-026 | 4 seeds declared; 3 retained | 19.017 s | 5 m | error | `da6bac3` |
 | exp-027 | 4 seeds, 10 s each | 34.425 s | 5 m | criterion | `a3be8e4` |
+| exp-028 | 4 seeds, 10 s each | 38.628 s | 5 m | criterion | `ce84ef6` |
 
-### What the twenty-seven rounds jointly establish
+### What the twenty-eight rounds jointly establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
-`n = 6`; component classification is not.** Exp-018 through exp-020 retain twelve
+`n = 7`; component classification is not.** Exp-018 through exp-020 retain twelve
 independently valid historical v2 poses at `n=3` through `n=5`, including four at the
 proved `n=3` and `n=4` optima, but D-165 correctly remains recorded on those artifacts.
 Exp-021 adds one v3 `n=3` event whose 2,037 fixed-point evaluations are all retained and
@@ -1312,6 +1313,10 @@ Exp-027 retains all four starts: three admissible side-3 events and one independ
 valid, non-admissible time-budget stop at side 3.040392660291. The earlier invalid
 endpoint does not reproduce because open D-126 makes wall-clock-limited work
 load-dependent; neither round supports frequency or component claims.
+Exp-028 retains four independently valid `n=7` outcomes but only one converges; three
+carry typed time-budget stops.
+This validates the event path at `n=7` while showing that the ten-second cell is already
+too censored for landscape statistics.
 The exact small-moduli controls remain valid; component identity is the next blocked
 layer. The `n=12` calibration returns exactly `4.0`, but that is not a known-answer
 guard. The runner’s full-pose independent verification boundary remains open under
