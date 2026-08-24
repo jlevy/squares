@@ -38,7 +38,8 @@ from sqpack.canonical import canonical_key
 from sqpack.quench import QuenchResult, quench_bracket
 from sqpack.verify import corners_from_poses, float_sign, verify_packing
 
-CONTRACT = "packing.squares:BasinEvent/v2"
+CONTRACT_V2 = "packing.squares:BasinEvent/v2"
+CONTRACT = "packing.squares:BasinEvent/v3"
 REGIME = "uniform-independent-v1+quench-bracket-v1"
 ORACLE_TOL = 1e-10
 
@@ -158,6 +159,22 @@ def make_event(
         "oracle_tolerance": ORACLE_TOL,
     }
     event_id = digest({"contract": CONTRACT, "regime": regime, "n": n, "seed": seed})
+    all_accounted = (
+        result.fixed_point_evaluations > 0
+        and result.fixed_point_evaluations
+        == result.fixed_point_settled + result.fixed_point_unsettled
+    )
+    promotion_blockers = []
+    if not result.converged:
+        promotion_blockers.append("producer_not_converged")
+    if result.fixed_point_unsettled:
+        promotion_blockers.append("unsettled_fixed_point_evaluation")
+    scientifically_admissible = (
+        result.converged
+        and all_accounted
+        and result.fixed_point_unsettled == 0
+        and verification["valid"]
+    )
     event = {
         "contract": CONTRACT,
         "event_id": event_id,
@@ -173,11 +190,12 @@ def make_event(
             "angle_steps": result.angle_steps,
             "cell_changes": result.cell_changes,
             "wall_seconds": wall_seconds,
-            # D-165: the current producer still converts an initial cell-solve failure
-            # into a dummy angle objective. Preserve its report, but never promote it.
-            "all_probe_evaluations_accounted_for": False,
-            "scientifically_admissible_terminal_event": False,
-            "promotion_blockers": ["D-165"],
+            "fixed_point_evaluations": result.fixed_point_evaluations,
+            "fixed_point_settled": result.fixed_point_settled,
+            "fixed_point_unsettled": result.fixed_point_unsettled,
+            "all_probe_evaluations_accounted_for": all_accounted,
+            "scientifically_admissible_terminal_event": scientifically_admissible,
+            "promotion_blockers": promotion_blockers,
         },
         "verification": verification,
         "endpoint_key": {
@@ -205,7 +223,8 @@ def validate_event(event: dict[str, Any]) -> None:
         "verification",
         "endpoint_key",
     }
-    if set(event) != required or event.get("contract") != CONTRACT:
+    contract = event.get("contract")
+    if set(event) != required or contract not in {CONTRACT_V2, CONTRACT}:
         raise EventError("event has the wrong contract fields")
     n, seed = event["n"], event["seed"]
     if isinstance(n, bool) or not isinstance(n, int) or n < 1:
@@ -213,7 +232,7 @@ def validate_event(event: dict[str, Any]) -> None:
     if isinstance(seed, bool) or not isinstance(seed, int):
         raise EventError("event seed must be an integer")
     expected_id = digest(
-        {"contract": CONTRACT, "regime": event["regime"], "n": n, "seed": seed}
+        {"contract": contract, "regime": event["regime"], "n": n, "seed": seed}
     )
     if event["event_id"] != expected_id:
         raise EventError("event id does not bind its regime, n, and seed")
@@ -230,14 +249,31 @@ def validate_event(event: dict[str, Any]) -> None:
         "scientifically_admissible_terminal_event",
         "promotion_blockers",
     }
+    if contract == CONTRACT:
+        expected_termination_fields |= {
+            "fixed_point_evaluations",
+            "fixed_point_settled",
+            "fixed_point_unsettled",
+        }
     if set(termination) != expected_termination_fields:
         raise EventError("termination evidence has the wrong fields")
-    if (
+    if contract == CONTRACT_V2 and (
         termination["all_probe_evaluations_accounted_for"] is not False
         or termination["scientifically_admissible_terminal_event"] is not False
         or termination["promotion_blockers"] != ["D-165"]
     ):
         raise EventError("current quench events must remain blocked by D-165")
+    if contract == CONTRACT:
+        counts = [
+            termination["fixed_point_evaluations"],
+            termination["fixed_point_settled"],
+            termination["fixed_point_unsettled"],
+        ]
+        if any(
+            isinstance(value, bool) or not isinstance(value, int) or value < 0
+            for value in counts
+        ):
+            raise EventError("fixed-point receipt counts must be non-negative integers")
     if (
         isinstance(termination["wall_seconds"], bool)
         or not isinstance(termination["wall_seconds"], (int, float))
@@ -260,6 +296,29 @@ def validate_event(event: dict[str, Any]) -> None:
         raise EventError("retained independent verification does not replay")
     if not observed_screen["valid"]:
         raise EventError("endpoint fails the independent validity screen")
+
+    if contract == CONTRACT:
+        evaluations = termination["fixed_point_evaluations"]
+        settled = termination["fixed_point_settled"]
+        unsettled = termination["fixed_point_unsettled"]
+        expected_accounted = evaluations > 0 and evaluations == settled + unsettled
+        expected_blockers = []
+        if not termination["producer_converged"]:
+            expected_blockers.append("producer_not_converged")
+        if unsettled:
+            expected_blockers.append("unsettled_fixed_point_evaluation")
+        expected_admissible = (
+            termination["producer_converged"]
+            and expected_accounted
+            and unsettled == 0
+            and observed_screen["valid"]
+        )
+        if termination["all_probe_evaluations_accounted_for"] is not expected_accounted:
+            raise EventError("all-probes-accounted claim does not derive from the receipt")
+        if termination["scientifically_admissible_terminal_event"] is not expected_admissible:
+            raise EventError("scientific-admissibility claim does not derive from the evidence")
+        if termination["promotion_blockers"] != expected_blockers:
+            raise EventError("promotion blockers do not derive from the stopping evidence")
 
     endpoint = event["endpoint"]
     key = canonical_key(endpoint["x"], endpoint["y"], endpoint["theta"], endpoint["side"])
@@ -351,6 +410,13 @@ def selftest() -> None:
     valid_pose = {"side": 1.0, "x": [0.5], "y": [0.5], "theta": [0.0]}
     if not screen_pose(valid_pose)["valid"]:
         raise EventError("known valid one-square pose was rejected")
+    audited = quench_bracket([0.5], [0.5], [0.0], time_budget=1.0)
+    if (
+        audited.fixed_point_evaluations <= 0
+        or audited.fixed_point_evaluations
+        != audited.fixed_point_settled + audited.fixed_point_unsettled
+    ):
+        raise EventError("quench fixed-point receipt is incomplete")
     invalid_pose = {
         "side": 1.0,
         "x": [0.5, 0.5],
@@ -386,9 +452,12 @@ def selftest() -> None:
                 "angle_steps": 0,
                 "cell_changes": 0,
                 "wall_seconds": 0.0,
-                "all_probe_evaluations_accounted_for": False,
-                "scientifically_admissible_terminal_event": False,
-                "promotion_blockers": ["D-165"],
+                "fixed_point_evaluations": 1,
+                "fixed_point_settled": 1,
+                "fixed_point_unsettled": 0,
+                "all_probe_evaluations_accounted_for": True,
+                "scientifically_admissible_terminal_event": True,
+                "promotion_blockers": [],
             },
             "verification": screen_pose(valid_pose),
             "endpoint_key": {
@@ -411,15 +480,15 @@ def selftest() -> None:
         else:
             raise EventError("tampered endpoint replayed successfully")
         event["endpoint"] = valid_pose
-        event["termination"]["scientifically_admissible_terminal_event"] = True
+        event["termination"]["all_probe_evaluations_accounted_for"] = False
         write_events(path, [event])
         try:
             read_events(path)
         except EventError:
             pass
         else:
-            raise EventError("D-165-blocked event was promoted")
-        event["termination"]["scientifically_admissible_terminal_event"] = False
+            raise EventError("forged all-probes-accounted claim replayed successfully")
+        event["termination"]["all_probe_evaluations_accounted_for"] = True
         event["termination"]["wall_seconds"] = -1.0
         write_events(path, [event])
         try:

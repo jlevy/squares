@@ -62,6 +62,9 @@ class QuenchResult:
     cell_changes: int
     contacts: list[tuple[int, int]] = field(default_factory=list)
     reason: str = ""
+    fixed_point_evaluations: int = 0
+    fixed_point_settled: int = 0
+    fixed_point_unsettled: int = 0
 
 
 @dataclass
@@ -788,7 +791,17 @@ def _bracket_min(f, x0: float, span: float, tol: float = 1e-15, max_iters: int =
     return (lo + hi) / 2
 
 
-def _free_sweep(side, x, y, theta, n, *, deadline, span: float = 1e-3):
+def _free_sweep(
+    side,
+    x,
+    y,
+    theta,
+    n,
+    *,
+    deadline,
+    span: float = 1e-3,
+    solve_fixed=solve_to_fixed_point,
+):
     """One bracketing pass over every angle individually, no classes.
 
     Returns (side, x, y, theta, lp_solves). Used to test whether a class-converged
@@ -810,22 +823,22 @@ def _free_sweep(side, x, y, theta, n, *, deadline, span: float = 1e-3):
                 raise _OutOfTimeError
             trial_theta = list(angles)
             trial_theta[k] = value
-            got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
-            lp_solves += got.solves if got else 1
-            if got is not None and not got.settled:
+            got = solve_fixed(trial_theta, ref_x, ref_y, n)
+            lp_solves += got.solves
+            if not got.settled:
                 raise _FixedCellUnsettledError(got.reason)
-            return got.side if got else 1e3
+            return got.side
 
         angle = _bracket_min(probe, base, span)
         trial_theta = list(best[3])
         trial_theta[k] = angle
-        got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
+        got = solve_fixed(trial_theta, ref_x, ref_y, n)
         if time.monotonic() > deadline:
             raise _OutOfTimeError
-        lp_solves += got.solves if got else 1
-        if got is not None and not got.settled:
+        lp_solves += got.solves
+        if not got.settled:
             raise _FixedCellUnsettledError(got.reason)
-        if got and got.side < best[0] - 1e-13:
+        if got.side < best[0] - 1e-13:
             best = (got.side, got.x, got.y, trial_theta)
     return best[0], best[1], best[2], best[3], lp_solves
 
@@ -886,27 +899,36 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
     x, y = list(x), list(y)
     n = len(x)
     lp_solves = angle_steps = 0
+    fixed_point_evaluations = fixed_point_settled = fixed_point_unsettled = 0
+
+    def evaluate_fixed_point(eval_theta, eval_x, eval_y, eval_n):
+        """The only fixed-point call path, so every outcome enters the receipt."""
+        nonlocal fixed_point_evaluations, fixed_point_settled, fixed_point_unsettled
+        result = solve_to_fixed_point(eval_theta, eval_x, eval_y, eval_n)
+        fixed_point_evaluations += 1
+        if result.settled:
+            fixed_point_settled += 1
+        else:
+            fixed_point_unsettled += 1
+        return result
+
+    def audited_result(**fields):
+        return QuenchResult(
+            **fields,
+            fixed_point_evaluations=fixed_point_evaluations,
+            fixed_point_settled=fixed_point_settled,
+            fixed_point_unsettled=fixed_point_unsettled,
+        )
+
     # A per-call wall budget, because a quench that does not return is worse than one
     # that returns a worse answer: it takes the whole round with it. Measured on n = 5
     # seed 4, where a cell that solves in 5 ms sent the sweep past 145 s. Hitting the
     # budget is a RESULT and is reported as one, never silently.
     deadline = time.monotonic() + time_budget
 
-    solved = solve_to_fixed_point(theta, x, y, n)
-    if solved is None:
-        return QuenchResult(
-            side=float("inf"),
-            x=x,
-            y=y,
-            theta=theta,
-            lp_solves=1,
-            angle_steps=0,
-            converged=False,
-            cell_changes=0,
-            reason="initial cell infeasible",
-        )
+    solved = evaluate_fixed_point(theta, x, y, n)
     if not solved.settled:
-        return QuenchResult(
+        return audited_result(
             side=solved.side,
             x=solved.x,
             y=solved.y,
@@ -937,7 +959,7 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
         improved = False
         for group in groups:
             if time.monotonic() > deadline:
-                return QuenchResult(
+                return audited_result(
                     side=side,
                     x=x,
                     y=y,
@@ -958,16 +980,16 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                 trial_theta = list(angles)
                 for k in group:
                     trial_theta[k] = value
-                got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
-                lp_solves += got.solves if got else 1
-                if got is not None and not got.settled:
+                got = evaluate_fixed_point(trial_theta, ref_x, ref_y, n)
+                lp_solves += got.solves
+                if not got.settled:
                     raise _FixedCellUnsettledError(got.reason)
-                return got.side if got else 1e3
+                return got.side
 
             try:
                 best_angle = _bracket_min(probe, base, span)
             except _OutOfTimeError:
-                return QuenchResult(
+                return audited_result(
                     side=side,
                     x=x,
                     y=y,
@@ -979,7 +1001,7 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                     reason="time budget",
                 )
             except _FixedCellUnsettledError as exc:
-                return QuenchResult(
+                return audited_result(
                     side=side,
                     x=x,
                     y=y,
@@ -993,10 +1015,10 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
             trial_theta = list(theta)
             for k in group:
                 trial_theta[k] = best_angle
-            got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
-            lp_solves += got.solves if got else 1
-            if got is not None and not got.settled:
-                return QuenchResult(
+            got = evaluate_fixed_point(trial_theta, ref_x, ref_y, n)
+            lp_solves += got.solves
+            if not got.settled:
+                return audited_result(
                     side=side,
                     x=x,
                     y=y,
@@ -1007,7 +1029,7 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                     cell_changes=changes,
                     reason=f"fixed cell unsettled after bracket: {got.reason}",
                 )
-            if got and got.side < side - tol:
+            if got.side < side - tol:
                 side, x, y = got.side, got.x, got.y
                 theta = trial_theta
                 angle_steps += 1
@@ -1044,7 +1066,7 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
 
         # Nothing improved at the narrowest window either. This is the real test.
         if not free_pass:
-            return QuenchResult(
+            return audited_result(
                 side=side,
                 x=x,
                 y=y,
@@ -1069,7 +1091,13 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
         # continues from there with the classes re-read.
         try:
             free_side, free_x, free_y, free_theta, used = _free_sweep(
-                side, x, y, theta, n, deadline=deadline
+                side,
+                x,
+                y,
+                theta,
+                n,
+                deadline=deadline,
+                solve_fixed=evaluate_fixed_point,
             )
         except _OutOfTimeError:
             stop_reason = "time budget during free sweep"
@@ -1088,7 +1116,7 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
             groups = angle_classes(theta, class_tol)
             span = span0
             continue
-        return QuenchResult(
+        return audited_result(
             side=side,
             x=x,
             y=y,
@@ -1099,7 +1127,7 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
             cell_changes=changes,
             reason=f"converged, {len(groups)} classes, free pass clean",
         )
-    return QuenchResult(
+    return audited_result(
         side=side,
         x=x,
         y=y,
