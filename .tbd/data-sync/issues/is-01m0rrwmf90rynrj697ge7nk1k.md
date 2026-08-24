@@ -5,12 +5,14 @@ title: quench_bracket's budget is wall-clock, so results depend on machine load
 kind: bug
 status: open
 priority: 2
-version: 1
-labels: []
+version: 3
+spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+labels:
+  - engineering-maturity
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:16:45.800Z
-updated_at: 2026-08-24T02:16:45.800Z
+updated_at: 2026-08-24T21:22:12.166Z
 ---
 quench_bracket and _free_sweep take time_budget in seconds and stop on a wall-clock deadline. Anything that changes how fast the machine runs -- a parallel pool, a busy laptop, a slower CI box, a colder cache -- changes how much work the quench does, and therefore whether it certifies convergence.
 

@@ -5,12 +5,14 @@ title: solve_to_fixed_point decides convergence by exact float equality of the c
 kind: bug
 status: in_progress
 priority: 2
-version: 6
-labels: []
+version: 8
+spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+labels:
+  - engineering-maturity
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:11:23.594Z
-updated_at: 2026-08-24T15:42:51.064Z
+updated_at: 2026-08-24T21:22:11.264Z
 closed_at: 2026-08-24T15:12:21.943Z
 close_reason: "D-132 fixed: fixed-cell iteration returns typed settlement evidence for fixed point, cycle, infeasible or worse transition, and cap; both quench paths refuse outer convergence after unsettled evidence. Focused regression, historical gate, Ruff, BasedPyright, schema, and replay checks pass. The newly exposed golden drift is separately open as D-162 / think-wbra."
 resolution: null

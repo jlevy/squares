@@ -5,7 +5,7 @@ title: Test angle-active stationarity along the exact n=5 face
 kind: task
 status: in_progress
 priority: 0
-version: 6
+version: 7
 spec_path: explorations/packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
 delegate: unknown@spud10.local
 labels:
@@ -17,10 +17,11 @@ parent_id: is-01m0r3zv2hh2jj64rb8mhqbtre
 child_order_hints:
   - is-01m0tng6fvz7m3ee2bk048yd3e
   - is-01m0tpn9ej3z97jr6nq97fb9gt
+  - is-01m0ttgympmz814rqyms075mvf
 hold: null
 hold_until: null
 created_at: 2026-08-24T19:49:08.973Z
-updated_at: 2026-08-24T20:16:16.849Z
+updated_at: 2026-08-24T21:23:49.013Z
 started_at: 2026-08-24T19:49:21.117Z
 ---
 Bounded BC-010 second slice, capped at 30 agent-minutes. Starting from exp-033 exact Q(sqrt(2)) endpoints and interior, enumerate every locally active wall/SAT feature branch in open real angle charts; compute the full pose-angle fixed-side linearized cone exactly or retain an explicit unresolved bound. Acceptance: exact branch inventory and coefficients, one-to-one retained replay, known-rigid/flexible mutations, and an asymmetric verdict: all zero cones may certify local isolation in that stratum, while a nonzero linearized direction only triggers nonlinear continuation and never proves a feasible motion. Do not infer basin mass, global component identity, or census completeness.

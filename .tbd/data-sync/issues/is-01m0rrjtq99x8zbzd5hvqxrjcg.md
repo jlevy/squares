@@ -5,12 +5,14 @@ title: "The engine is not the bottleneck: do not micro-optimize sqsearch yet"
 kind: chore
 status: open
 priority: 3
-version: 1
-labels: []
+version: 3
+spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+labels:
+  - engineering-maturity
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:11:24.520Z
-updated_at: 2026-08-24T02:11:24.520Z
+updated_at: 2026-08-24T21:22:13.482Z
 ---
 Measured: 28.7M moves/s at n=11, 16M moves in 0.56s across 4 chains. The whole soundness perimeter's three engine cells cost ~1.7s of a step that ran for 36s.
 

@@ -5,12 +5,14 @@ title: The quench is ~95% Python/scipy overhead, and it gates the basin census
 kind: task
 status: open
 priority: 0
-version: 1
-labels: []
+version: 3
+spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+labels:
+  - engineering-maturity
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:10:53.473Z
-updated_at: 2026-08-24T02:10:53.473Z
+updated_at: 2026-08-24T21:22:10.268Z
 ---
 Measured on this branch, n=11, warm:
 - solve_cell LP is 99 rows x 23 cols.

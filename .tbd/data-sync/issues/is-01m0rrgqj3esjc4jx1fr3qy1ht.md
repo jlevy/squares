@@ -1,12 +1,14 @@
 ---
 type: is
 id: is-01m0rrgqj3esjc4jx1fr3qy1ht
-title: "Engineering: make the packing research loops fast enough to iterate"
+title: "Engineering: make packing research code clear, safe, and scalable"
 kind: epic
 status: open
 priority: 1
-version: 11
-labels: []
+version: 22
+spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+labels:
+  - engineering-maturity
 dependencies: []
 child_order_hints:
   - is-01m0rrhw3a0zqmyw095twj9bn3
@@ -19,16 +21,17 @@ child_order_hints:
   - is-01m0rrwmf90rynrj697ge7nk1k
   - is-01m0rwwt8912eq5f3507d581e1
   - is-01m0s8tvzd11dyjk9s2fw40z16
+  - is-01m0ttevapnhz0sgm9r09gweew
+  - is-01m0ttf36md7yh66m1gz6h6svn
+  - is-01m0ttfczkhxs9fqa6kwphy8rx
+  - is-01m0ttfnkek9mx0kv3rgqjth3r
+  - is-01m0ttfx53tjv841cn2v2anyf2
+  - is-01m0ttg3v5303w5k65gc8th28m
+  - is-01m0ttgbpts9xfvqz0wck4781q
+  - is-01m0ttgkhcyks8na3prg20kk8c
+  - is-01m0ttgtaj1j5rp28wxw84v4wr
+  - is-01m0tth2dgvwnagwh2975ac6k3
 created_at: 2026-08-24T02:10:15.746Z
-updated_at: 2026-08-24T06:55:25.164Z
+updated_at: 2026-08-24T21:23:52.879Z
 ---
-Engineering review of PR #17 (codex/packing-unattended-research-readiness) from a process, efficiency and software-correctness angle.
-
-Measured baseline on a 10-core M-series machine, warm caches:
-- ./test.sh: 170s wall, 133s user CPU -- i.e. ~0.8 of 10 cores, fully serial, 25 steps, no way to run a subset.
-- sqsearch engine: 28.7M moves/s. NOT the bottleneck.
-- One quench: ~2.5s and ~1,600 scipy linprog calls.
-- One LP solve (99 rows x 23 cols): 1456us via scipy.optimize.linprog; 380us driving HiGHS directly. ~95% of the time is wrapper overhead, not simplex.
-- Zero Python parallelism anywhere in the tree.
-
-The research critical path named in the PR (H-021 endpoint identifiability, H-023 terminal-component identity) is a basin census, and a basin census is quench-bound. At 2.5s/quench a 10k-endpoint census is ~7 hours single-threaded; the same census at Rust-LP speed is minutes. That ratio, not the annealer, is what decides how many hypotheses can be tested per session.
+Umbrella for the packing engineering-maturity plan: classify code by reuse and consequence, separate shared foundations from stable research-loop tools and retained case code, establish a refactor-safety harness, standardize on Python 3.14, improve CLI and documentation quality, migrate substantial shell orchestration to Python, and optimize measured research-loop bottlenecks without burdening one-off experiments.
