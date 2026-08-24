@@ -18,7 +18,7 @@ to work on.
 
 ## The one-paragraph state
 
-The experiment loop has run **ten rounds** and produced a real result: the LP-in-cell
+The experiment loop has run **eleven rounds** and produced a real result: the LP-in-cell
 quench refines annealer output to the analytic optimum **to machine precision** at
 `n = 5` and `n = 10`, and does essentially nothing at `n = 11`. That separates two
 failures the campaign could not previously tell apart — `n = 10` was a *polish* failure,
@@ -35,7 +35,7 @@ critical path.
 | `sqsearch` f64 annealer (Rust) | works; selftest of 13 checks gates every run |
 | `sqpack.quench` — LP-in-cell + cell fixed point + class bracketing | **built this session**; reaches the analytic optimum to `1e-15` at `n = 5, 10` |
 | Soundness perimeter | every component that emits a packing is checked by `sqpack` through code it does not share |
-| Campaign record | 10 rounds, 8 hypotheses, generated ledger, negative controls, effort tracking |
+| Campaign record | 11 rounds, 9 hypotheses, generated ledger, negative controls, effort tracking |
 | Lint floor | ruff + basedpyright clean; clippy pedantic + rustfmt clean; enforced in `test.sh` |
 
 `./explorations/packing/test.sh` runs all of it and passes.
@@ -106,13 +106,14 @@ whole cartography programme rests on, deliberately made cheap to kill.
    measured floor of about `1e-11`; several recorded rounds sit on it with small
    *negative* gaps to the analytic value.
    That is solver noise, not a discovery ([D-021](../../defects.md), open on purpose).
-2. **A run that beats the record has found a bug.** This rule is in the runbook, and it
-   is the only thing that caught the session’s one true soundness failure.
-   Trust it.
-3. **`s(θ)` has a corner at the optimum**, not a smooth minimum — one-sided slopes
-   `0.175` and `0.384`. No gradient or smooth-model method converges there; Powell and
-   Nelder-Mead both did *worse* than plain descent.
-   Use bracketing.
+2. **A screen-tier run below the standing best is a promotion trigger, not a record.**
+   Treat it as a defect candidate until an independent verifier agrees, but do not
+   assume it must be a bug when the standing best is unproved.
+   D-042 records why `n=12` cannot serve as a known-answer negative control.
+3. **The tested class-angle slice has a corner at the optimum**, not a smooth minimum —
+   one-sided slopes `0.175` and `0.384`. That invalidates smooth derivative models on
+   the slice. Bracketing worked here; tested Powell and Nelder–Mead runs did worse, which
+   is empirical evidence rather than a general impossibility theorem.
    ([`exp-010`](../../campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md).)
 4. **Tolerances must be compared to the scale of what they govern.** Two
    unrelated-looking defects — a false record claim and a non-terminating loop — were

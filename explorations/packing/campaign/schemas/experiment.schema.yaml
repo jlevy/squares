@@ -77,11 +77,12 @@ properties:
       axis: {const: n}
       point: {type: integer, minimum: 1}
       role:
-        enum: [target, positive_control, negative_control]
+        enum: [target, calibration, positive_control, negative_control]
         description: >-
-          What this cell is for. n=10 is a positive control (s(10) is proved, and
-          non-trivial); n=12 is a negative control (the 4x4 grid is almost
-          certainly optimal, so a run that beats it has found a bug).
+          What this cell is for. n=10 is a positive control because s(10) is proved and
+          non-trivial. An open case such as n=12 may be a calibration or target, never a
+          known-answer negative control merely because its standing best is believed
+          optimal.
   method:
     type: object
     additionalProperties: false
@@ -133,7 +134,7 @@ properties:
       wall_seconds:
         type: number
         minimum: 0
-        description: Compute time actually spent measuring, from the run data.
+        description: Wall-clock seconds actually spent measuring, from the run data.
       agent_minutes:
         type: number
         minimum: 0

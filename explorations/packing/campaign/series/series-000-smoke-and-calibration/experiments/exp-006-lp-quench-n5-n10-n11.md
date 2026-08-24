@@ -172,12 +172,13 @@ Walking the shared tilt off its optimal value:
 | `+1e-5` | `3.840e-06` |
 | `+1e-3` | `3.846e-04` |
 
-Linear on both sides, slopes `0.175` and `0.384`. The optimum is a **corner**, where the
-active contact set changes — which is what rigidity looks like from the angle side, and
-it is fatal to any method that assumes a smooth local model.
-Measured in the same round: finite-difference descent stalls five orders short; **Powell
-and Nelder-Mead both did worse than descent** (`+1.06e-02` and `+3.34e-06` against
-descent’s `+2.78e-07` at `eps = 1e-5`). Registered as
+Linear on both sides, slopes `0.175` and `0.384`. The tested shared-tilt slice has a
+**corner**, where the active contact set changes.
+That makes a smooth local model misspecified on this slice; it does not prove rigidity
+of the full packing or failure of every optimization family.
+Measured in the same round: finite-difference descent stalls five orders short; the
+tested **Powell and Nelder–Mead runs both did worse than descent** (`+1.06e-02` and
+`+3.34e-06` against descent’s `+2.78e-07` at `eps = 1e-5`). Registered as
 [H-019](../../../hypotheses/H-019-angle-optimum-is-a-kink.md) before this round was
 recorded, since it is a claim H-002 did not make.
 

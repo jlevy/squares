@@ -7,7 +7,7 @@ counts owned by `defects.yaml` and went stale behind them both times. The counts
 gone now, moved to the generated view that owns them. What is left is the part a
 checker can hold: the layout tree, the report index, and the links.
 
-Three checks:
+Four checks:
 
 1. **Every link resolves**, including anchors into other documents. README and SYNOPSIS
    cross-reference each other heavily and a dead link between them is invisible until
@@ -18,6 +18,8 @@ Three checks:
    about seven files.
 3. **The report index is complete.** The prose says "six research reports" and the table
    lists six; both must match what is in `docs/project/research/`.
+4. **The defect summary is derived.** README may state whether the gate has caught a
+   soundness defect, but may not repeat a numeric aggregate owned by `defects.yaml`.
 
 Usage:  python3 tools/check_readme.py
 """
@@ -28,6 +30,8 @@ import re
 import sys
 from pathlib import Path
 
+import yaml
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from check_synopsis import check_links  # needs the sys.path line above
@@ -35,6 +39,7 @@ from check_synopsis import check_links  # needs the sys.path line above
 ROOT = Path(__file__).resolve().parent.parent
 README = ROOT / "README.md"
 RESEARCH = ROOT / "docs/project/research"
+DEFECTS = ROOT / "defects.yaml"
 
 # Tooling that is not part of what the directory *is*: caches, lockfiles, build config.
 NOT_CONTENT = {"uv.lock", "pyproject.toml", "__pycache__", ".venv"}
@@ -118,15 +123,48 @@ def check_reports(text: str) -> list[str]:
     return problems
 
 
+def check_defect_summary(text: str) -> list[str]:
+    """Keep the README's qualitative gate claim reconciled without copying counts."""
+    data = yaml.safe_load(DEFECTS.read_text(encoding="utf-8"))
+    normalized = re.sub(r"\s+", " ", text)
+    gate_soundness = sum(
+        1
+        for defect in data["defects"]
+        if defect["detected_by"] == "gate" and defect["class"] == "soundness"
+    )
+    zero_claim = "No soundness defect in the log was caught by it."
+    problems: list[str] = []
+    if gate_soundness == 0 and zero_claim not in normalized:
+        problems.append(
+            "README.md: must state the derived fact that the gate caught no soundness defect"
+        )
+    if gate_soundness != 0 and zero_claim in normalized:
+        problems.append(
+            "README.md: says the gate caught no soundness defect, but defects.yaml disagrees"
+        )
+
+    number = r"(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten)"
+    if re.search(rf"\bgate\b[^.]*\bcaught\s+{number}\s+defects?\b", normalized, re.I):
+        problems.append(
+            "README.md: repeats a numeric gate-defect aggregate owned by defects.yaml"
+        )
+    return problems
+
+
 def main() -> int:
     text = README.read_text(encoding="utf-8")
-    problems = check_links(text, README) + check_layout(text) + check_reports(text)
+    problems = (
+        check_links(text, README)
+        + check_layout(text)
+        + check_reports(text)
+        + check_defect_summary(text)
+    )
     if problems:
         print("README.md has drifted from the directory:", file=sys.stderr)
         for problem in problems:
             print(f"  {problem}", file=sys.stderr)
         return 1
-    print("  README.md agrees with the directory, the reports and its own links")
+    print("  README.md agrees with the directory, reports, defect source and its own links")
     return 0
 
 

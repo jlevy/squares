@@ -2,6 +2,13 @@
 
 # Experiment ledger
 
+## Agent sessions
+
+| id | status | focus | primary bead | delegations | next action |
+| --- | --- | --- | --- | ---: | --- |
+| [session-001](agent-sessions/session-001-pr15-review-reset.md) | completed | process | think-m79h | 7 | Resume the broader Correctness and Insight review from the ready bead queue, beginning with the highest-priority mathematical ambiguity. |
+| [session-002](agent-sessions/session-002-pr16-integration.md) | completed | process | think-7wsz | 3 | Review PR 15, then resume the correctness lane at think-1s0h or the independent portability experiment at think-osyp. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
@@ -13,14 +20,14 @@
 | id | status | lane | claim | sweep | rounds | spent |
 | --- | --- | --- | --- | --- | --- | --- |
 | H-001 | blocked | search | Optimal packings at n <= ~30 use at most 3 distinct tilt angles, so a  | n: 5 10 11 | 0 |  |
-| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 4 | 190m agent + 4.9m cpu |
-| H-011 | blocked | search | LP-quenching multistarts at n <= 10 yields a basin count that saturate | n: 5 6 7 8 9 10 | 0 |  |
-| H-012 | blocked | search | The proved-optimal basin's quench probability at n = 10, and Trump's a | n: 10 11 | 0 |  |
-| H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 | 10.2m cpu |
+| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 4 | 190m agent + 4.9m wall |
+| H-011 | blocked | search | Under a versioned proposer P, deterministic quench Q, and terminal-com | n: 5 6 7 8 9 10 | 0 |  |
+| H-012 | blocked | search | Under one versioned raw-coordinate multistart proposal P, deterministi | n: 10 11 | 0 |  |
+| H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 | 10.2m wall |
 | H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |  |
-| H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m cpu |
-| H-019 | confirmed | search | s(theta), the LP-in-cell optimum as a function of the angles, has a ki | n: 5 10 11* | 1 | 10m agent + 1s cpu |
-| H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 |  |
+| H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m wall |
+| H-019 | confirmed | search | On the n=11 Trump contact cell, varying the shared tilt of its five ti | n: 5 10 11* | 1 | 10m agent + 1s wall |
+| H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
 
 ## Rounds
 
@@ -43,9 +50,9 @@
 | exp-004 | series-000 | 12 | claude-opus-5 | H-016 | On this cell the annealer is within 1e-4 of the standing best (gap +0.000e+00), so H-016 holds here; the claim is universally quantified over the sweep and is refuted elsewhere. |
 | exp-007 | series-000 | 5 | claude-opus-5 | H-002 | Confirms H-002 on this cell: the bracketing quench refines annealer output from 3.43e-08 to a median 2.22e-15 - the analytic value to machine precision - where the same output under angle descent moves only to 3.19e-08. Two of five seeds hit the 30 s wall budget and are reported as such. |
 | exp-008 | series-000 | 10 | claude-opus-5 | H-002 | Confirms H-002 on this cell, and by twelve orders of magnitude: median gap falls from the annealer's 5.32e-03 to 1.33e-15, where angle descent reaches only 4.51e-03. The two seeds that hit the wall budget are the two that did not converge. |
-| exp-010 | series-000 | 11 | claude-opus-5 | H-019 | Confirms H-019: the one-sided slopes are 0.1747 and 0.3841, a ratio of 2.198 that is stable over five decades on each side, so the optimum of s(theta) is a corner rather than a smooth minimum - which is why no smooth local model converges to it. |
+| exp-010 | series-000 | 11 | claude-opus-5 | H-019 | Confirms H-019: the one-sided slopes are 0.1747 and 0.3841, a ratio of 2.198 that is stable over five decades on each side, so the optimum of s(theta) is a corner rather than a smooth minimum on this shared-tilt slice. A smooth local model is misspecified at that point; this round does not establish a general convergence impossibility. |
 
 ## Effort
 
-11 rounds, 275 agent-minutes, 16.4 cpu-minutes.
+11 rounds, 275 agent-minutes, 23.0 wall-minutes.
 

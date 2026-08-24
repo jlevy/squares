@@ -39,9 +39,17 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 35", "count: 20"]
+  replace: ["count: 79", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 35"
+  expect: "count 20 != 79"
+
+- name: README - repeated numeric gate-defect aggregate
+  file: README.md
+  replace:
+    - "No soundness\n  defect in the log was caught by it."
+    - "No soundness\n  defect in the log was caught by it. The gate caught two defects."
+  run: python3 tools/check_readme.py
+  expect: "repeats a numeric gate-defect aggregate"
 
 # The unprotected-fix count in SYNOPSIS.md. This claim -- the list that predicts what
 # comes back -- was hand-written, and it drifted: the prose said six while the generated
@@ -49,10 +57,16 @@ controls:
 # why the count is now derived and why it gets a control.
 - name: synopsis - unprotected-fix count drifting from the log
   file: defects.yaml
-  replace: ["    to coincide with an in-progress round.\n  regression: none\n",
-            "    to coincide with an in-progress round.\n  regression: 'a check that does not exist'\n"]
-  run: uv run --quiet python tools/check_synopsis.py
+  replace: ["    to coincide with an in-progress round.\n  regression: none\n  bead: think-5zwm\n",
+            "    to coincide with an in-progress round.\n  regression: 'a check that does not exist'\n  bead: think-5zwm\n"]
+  run: uv run --frozen --quiet python tools/check_synopsis.py
   expect: "does not state the unprotected-fix count"
+
+- name: gate - strict handover skips deep golden regeneration
+  file: test.sh
+  replace: ['[ "$STRICT" = "1" ] && DEEP=1', '[ "$STRICT" = "1" ] && DEEP=0']
+  run: bash test.sh --strict
+  expect: "strict mode did not enable deep regeneration"
 
 - name: defect log - generated view left stale
   file: defects.yaml
@@ -80,6 +94,63 @@ controls:
   run: python3 campaign/ledger.py --check
   expect: "terminal round without an effort block"
 
+- name: campaign - terminal round with no measured wall time
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["    wall_seconds: 108.8\n", ""]
+  run: python3 campaign/ledger.py --check
+  expect: "terminal round without effort.wall_seconds"
+
+- name: campaign - open instance mislabeled as a known-answer control
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["instance: {axis: n, point: 12, role: calibration}",
+            "instance: {axis: n, point: 12, role: negative_control}"]
+  run: python3 campaign/ledger.py --check
+  expect: "control role negative_control requires a proved instance"
+
+- name: campaign runner - n12 improvement rejected as a control breach
+  file: campaign/runner.py
+  replace: ['CONTROLS = {10: ("within", 1e-2), 16: ("not_below", 4.0)}',
+            'CONTROLS = {10: ("within", 1e-2), 12: ("not_below", 4.0)}']
+  run: python3 campaign/runner.py preflight
+  expect: "FAIL  an n=12 improvement is not rejected as a control breach"
+
+- name: campaign runner - execute bypasses the active gate marker
+  file: campaign/runner.py
+  replace:
+    - "    refuse_if_gate_running()\n    path, e = find_round(eid)\n"
+    - "    path, e = find_round(eid)\n"
+  run: python3 campaign/runner.py preflight
+  expect: "FAIL  execute refuses while the gate marker exists"
+
+- name: campaign runner - release bypasses the active gate marker
+  file: campaign/runner.py
+  replace:
+    - "    with `stopped_by: error`: the round died, and nothing may be concluded from it.\n    \"\"\"\n    refuse_if_gate_running()\n    path, stub = find_round(eid)\n"
+    - "    with `stopped_by: error`: the round died, and nothing may be concluded from it.\n    \"\"\"\n    path, stub = find_round(eid)\n"
+  run: python3 campaign/runner.py preflight
+  expect: "FAIL  release refuses while the gate marker exists"
+
+- name: campaign runner - record fields drift from the execution receipt
+  file: campaign/runner.py
+  replace:
+    - "        \"method_commit\": execution[\"commit\"],\n"
+    - "        \"method_commit\": \"record-time-sha\",\n"
+  run: python3 campaign/runner.py preflight
+  expect: "FAIL  record fields are bound to the execution receipt"
+
+- name: campaign - agent session id disagrees with its filename
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["  id: session-001", "  id: session-002"]
+  run: python3 campaign/ledger.py --check
+  expect: "name does not start with its id 'session-002'"
+
+- name: campaign - approximate delegation time labeled unavailable
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["    elapsed_seconds: 900\n    elapsed_quality: operator_reported_approximate",
+            "    elapsed_seconds: 900\n    elapsed_quality: unavailable"]
+  run: python3 campaign/ledger.py --check
+  expect: "delegation elapsed value and quality disagree"
+
 - name: campaign - stopped on the clock without saying where to resume
   file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
   replace: ["    stopped_by: criterion", "    stopped_by: timebox"]
@@ -94,8 +165,8 @@ controls:
 
 - name: campaign - hypothesis on the board but not in the registry
   file: campaign/ideas.md
-  replace: ["the reason [H-018](hypotheses/H-018-basin-entry.md) is the most informative",
-            "the reason [H-777](hypotheses/H-777-nonexistent.md) is the most informative"]
+  replace: ["[H-018](hypotheses/H-018-basin-entry.md) is the most informative cheap\nexperiment runnable today",
+            "[H-777](hypotheses/H-777-nonexistent.md) is the most informative cheap\nexperiment runnable today"]
   run: python3 campaign/ledger.py --check
   expect: "which is not in the registry"
 
@@ -129,13 +200,13 @@ controls:
 - name: canonical - container symmetry not quotiented out
   file: sqpack/canonical.py
   replace: ["    for flip in (False, True):\n", "    for flip in (False,):\n"]
-  run: uv run --quiet python tools/canonical_check.py
+  run: uv run --frozen --quiet python tools/canonical_check.py
   expect: "FAIL  invariant under all 8 container symmetries"
 
 - name: canonical - square relabelling changes the key
   file: sqpack/canonical.py
   replace: ["        squares = sorted(\n", "        squares = list(\n"]
-  run: uv run --quiet python tools/canonical_check.py
+  run: uv run --frozen --quiet python tools/canonical_check.py
   expect: "FAIL  invariant under square relabelling"
 
 # The SEAM is the property only one thing guards: an angle one ULP below pi/2 must key
@@ -151,7 +222,7 @@ controls:
   file: sqpack/canonical.py
   replace: ["    return round(theta / QUARTER * steps) % steps",
             "    return round(theta / QUARTER * steps)"]
-  run: uv run --quiet python tools/canonical_check.py
+  run: uv run --frozen --quiet python tools/canonical_check.py
   expect: "FAIL  an angle one ULP below pi/2 keys as one at zero"
 
 # There is deliberately NO control for "invariant under a quarter turn of one square",
@@ -167,5 +238,5 @@ controls:
   file: sqpack/canonical.py
   replace: ["    digest = _certificate([ranks[a] for a in initial], adjacency).encode()",
             "    digest = b'constant'"]
-  run: uv run --quiet python tools/canonical_check.py
+  run: uv run --frozen --quiet python tools/canonical_check.py
   expect: "FAIL  a different arrangement keys differently"

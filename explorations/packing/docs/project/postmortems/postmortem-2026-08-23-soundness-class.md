@@ -32,21 +32,23 @@ does not produce noise, it produces apparent discoveries.
 
 ## How it was actually caught
 
-By a sentence written before any of this code existed, in the campaign runbook:
+The investigation was triggered by a sentence written before any of this code existed,
+in the campaign runbook:
 
 > The `n = 12` negative control.
 > The 4×4 grid is almost certainly optimal, so a run reporting anything below `4` has
 > found a bug in the geometry, not a packing.
 
-Generalised in the same document to: *do not record `beat_record: true` at any precision
-below `exact`*. When a number appeared below the standing best, the rule said what it
-meant, and the investigation started from “where is the bug” rather than “how do we
-announce this”.
+That sentence was a useful alarm but an invalid oracle: `s(12) = 4` is not proved, so a
+valid value below `4` could be a discovery ([D-042](../../../defects.md)). The sound
+rule is the one generalized in the same document: *do not record `beat_record: true` at
+any precision below `exact`*. The independent geometry check established the actual
+defect; the open-case incumbent did not.
 
-**Nothing else would have caught it.** Not the test suite: every check passed.
-Not the differential test, which compares `sqsearch` against `sqpack` and never sees the
-quench. Not the quench’s own consistency, which was intact — the solver’s answer was
-self-consistent with the solver’s own idea of feasible.
+**The existing perimeter did not catch it.** The test suite passed, and the differential
+test compared `sqsearch` against `sqpack` without seeing the quench.
+The quench’s own consistency was intact — the solver’s answer was self-consistent with
+the solver’s own idea of feasible.
 The only tripwire was a pre-registered expectation about the *world*.
 
 ## Why it could not have been caught sooner

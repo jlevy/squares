@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run everything and check the results that matter.
 #
-# Usage: ./test.sh [--strict]
+# Usage: ./test.sh [--strict] [--deep]
 #
 # A check this gate could not run is not a check that passed, and the difference has
 # to survive a tired reader at 3am. Every skip is recorded and re-listed at the end,
@@ -18,6 +18,13 @@ for arg in "$@"; do
   [ "$arg" = "--strict" ] && STRICT=1
   [ "$arg" = "--deep" ] && DEEP=1
 done
+# The handover gate is `--strict`; it must exercise the producer, not only audit the
+# committed fixture. A caller can still request `--deep` without making skips fatal.
+[ "$STRICT" = "1" ] && DEEP=1
+if [ "$STRICT" = "1" ] && [ "$DEEP" != "1" ]; then
+  echo "strict mode did not enable deep regeneration" >&2
+  exit 1
+fi
 SKIPPED=()
 
 # tools/negctl.py corrupts tracked files IN PLACE to watch each guard fire, restoring
@@ -60,7 +67,7 @@ end_steps() {
 if python3 -c "import yaml, jsonschema" 2>/dev/null; then
   PY=python3
 elif command -v uv >/dev/null 2>&1; then
-  PY="uv run --quiet --with pyyaml==6.0.3 --with jsonschema==4.26.0 python3"
+  PY="uv run --frozen --quiet --with pyyaml==6.0.3 --with jsonschema==4.26.0 python3"
 else
   echo "need PyYAML + jsonschema, or uv; install one and re-run" >&2
   exit 1
@@ -79,7 +86,7 @@ echo "python runner: $PY"
 # the binary finds it.
 if command -v cargo >/dev/null 2>&1; then
   echo "== building sqsearch =="
-  ( cd sqsearch && cargo build --release --quiet )
+  ( cd sqsearch && cargo build --locked --release --quiet )
   echo "  built sqsearch/target/release/sqsearch"
 else
   echo "== building sqsearch =="
@@ -109,8 +116,8 @@ step "derivation (needs sympy)"
 # not. Asking python3 alone was why this step skipped on a clean checkout.
 if python3 -c "import sympy" 2>/dev/null; then
   out=$(python3 derive_field.py)
-elif command -v uv >/dev/null 2>&1 && uv run --quiet python -c "import sympy" 2>/dev/null; then
-  out=$(uv run --quiet python derive_field.py)
+elif command -v uv >/dev/null 2>&1 && uv run --frozen --quiet python -c "import sympy" 2>/dev/null; then
+  out=$(uv run --frozen --quiet python derive_field.py)
 else
   out=""
 fi
@@ -128,7 +135,7 @@ step "fixed-angle cell is an LP, rebuilt independently"
 # sixteen from corner pairs, and neither shares constraint-assembly code with the
 # other. D-014 is what happens when a solver is checked only against its own rows.
 # It also reproduces H-019's one-sided slopes through those unrelated rows.
-out=$(uv run --quiet python lp_cell.py 2>/dev/null || python3 lp_cell.py)
+out=$(uv run --frozen --quiet python lp_cell.py 2>/dev/null || python3 lp_cell.py)
 echo "$out" | sed 's/^/  /'
 grep -q "23 variables, 1056 constraints" <<<"$out"
 grep -q "ALL CHECKS PASSED" <<<"$out"
@@ -162,7 +169,7 @@ assert open_n == 65 and nag == 63, "corpus counts drifted from the documented fi
 PY
 
 step "soft-schema validation"
-uv run --quiet python tools/validate_schemas.py 2>/dev/null || $PY tools/validate_schemas.py
+uv run --frozen --quiet python tools/validate_schemas.py 2>/dev/null || $PY tools/validate_schemas.py
 
 step "generated tables in sync with frontier/"
 $PY tools/render_tables.py --check
@@ -188,8 +195,9 @@ step "lint floor"
 # capture one edit from a bug, and clippy found an approximation of TAU written as a
 # literal. Skipped, not failed, where the toolchain is absent.
 if command -v uv >/dev/null 2>&1; then
-  ( cd "$(dirname "$0")" && uv run --quiet ruff check . && uv run --quiet ruff format --check . \
-    && uv run --quiet basedpyright ) | tail -3
+  ( cd "$(dirname "$0")" && uv run --frozen --quiet ruff check . \
+    && uv run --frozen --quiet ruff format --check . \
+    && uv run --frozen --quiet basedpyright ) | tail -3
 else
   skip "uv not installed: ruff, ruff-format and basedpyright did not run"
 fi
@@ -217,9 +225,10 @@ step "golden basin maps (proved cases, checked against mathematics)"
 # closed form and re-checking it against the proved s(n) costs milliseconds and still
 # refuses a golden edited to make a test pass -- the oracles are mathematics, so the
 # file cannot be adjusted into agreement with them. Regenerating by re-quenching is
-# 221 s and is what `--deep` is for; the runbook's handover gate requires it before an
-# unattended night. Verified against three tampering modes: a ladder value that does not
-# match the proved one, a gap below it, and a stored basin below it.
+# costly and is what `--deep` is for. `--strict` implies `--deep`, because the runbook's
+# handover gate must exercise the producer before an unattended night. Verified against
+# three tampering modes: a ladder value that does not match the proved one, a gap below
+# it, and a stored basin below it.
 if [ "$DEEP" = "1" ]; then
   $PY tools/golden_basins.py --deep
 else
@@ -228,17 +237,21 @@ else
 fi
 
 step "basin atlas"
-# The census's output, and the guard that says whether the census measured the landscape
-# or its own budget. Six structural invariants -- dedup, append-only, round trip, merge,
-# schema -- all passed while 11 of 12 quenches were silently hitting a sweep limit and
-# being recorded as distinct basins (D-030). So the seventh, convergence, is the one
-# that had to exist: a store can only be as honest as what it is fed.
+# One real pipeline smoke test plus synthetic store invariants. The synthetic
+# non-converged offer proves the store preserves that status; the strict/deep golden run
+# is the instrument-level regression for D-030's budget-censored census.
 $PY tools/atlas_check.py
 
 step "negative controls"
 # Every guard in this directory, watched failing. A check nobody has seen fail is not a
 # check, and until now each of these was run once by hand and thrown away.
 $PY tools/negctl.py tools/controls.yaml
+
+step "historical regressions"
+# Named reproductions for defects that span components or need a focused fixture.
+# Keeping this in the main gate prevents a passing standalone check from becoming a
+# forgotten optional command.
+$PY tools/regression_test.py
 
 step "soundness perimeter"
 # Every component that can emit a packing, checked by sqpack through code it does not

@@ -16,11 +16,11 @@ lane reachable from the same parts rather than needing a second system.
 The deliverable is the **map**, not a record.
 That framing comes from the
 [search-philosophy report](../../research/research-2026-08-23-search-philosophy-and-landscape-cartography.md):
-records are rigid, rigid optima live in rare basins, and so scaling a volume-weighted
-sampler multiplies effort against a probability the problem drives toward zero.
-A validated basin atlas of the `n ≤ 11` landscape is publishable, steers search, gives
-negative results meaning, and is the empirical shadow of the case analysis a future
-proof must walk — whatever happens at the record line.
+record constructions may have low hit probability under named proposers, so the first
+campaign measures that conditional hypothesis instead of assuming it.
+A validated map of resolved terminal components for `n ≤ 11` would steer search, give
+negative results meaning, and approximate the case analysis a future proof must walk.
+The current atlas is only a provisional endpoint map until D-034 is resolved.
 
 The design rule throughout is Kay’s: *simple should be simple, complex should be
 possible.* Concretely, `verify(packing)` is one call that returns in milliseconds, and

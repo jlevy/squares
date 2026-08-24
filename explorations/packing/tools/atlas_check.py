@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
-"""Gate check for the basin atlas: the invariants a census depends on.
+"""Gate check for the endpoint atlas: the store invariants a census depends on.
 
     uv run python tools/atlas_check.py
 
 The atlas is the census's output, so every way it can be quietly wrong is a way the
 census can report a number nobody should believe:
 
-1. **Deduplication.** Offering the same configuration twice must raise a frequency, not
-   add a row. If it does not, `distinct_basins` counts proposals and the discovery curve
-   never plateaus — which reads as "the landscape is huge" rather than "the store is
-   broken".
+1. **Deduplication.** Offering the same endpoint key twice must raise a frequency, not
+   add a row. If it does not, `distinct_basins` counts proposals and the key-discovery
+   curve never plateaus — which reads as "the landscape is huge" rather than "the store
+   is broken".
 2. **Append-only.** Adding must never remove or reorder existing rows, or the discovery
    curve stops being monotone and its plateau stops meaning saturation.
 3. **Round trip.** Save then load must be the identity, or frequencies accumulated over
    a night are lost at the first reload.
 4. **Merge.** Two stores of one `n` must combine by summing frequencies and unioning
-   basins, which is what lets a census run on more than one machine.
+   endpoint keys, which is what lets a census run on more than one machine.
 5. **Schema.** Every file written validates against the declared contract.
 6. **Convergence.** Most quenches in the census must actually have converged. This is
    the one that is not structural, and it is the one the first version of this file
@@ -65,16 +65,16 @@ def main() -> int:
     passed = True
     validator = Draft202012Validator(yaml.safe_load(SCHEMA.read_text()))
 
-    # Build a small real census at n = 5, where s(5) = 2 + 1/sqrt(2) is proved and the
-    # landscape is small enough to sanity-check by eye.
-    # ONE real quench, as a smoke test that the real pipeline feeds the store, plus
+    # Build ONE real n = 4 quench as a smoke test that the real pipeline feeds the store,
+    # plus
     # synthetic keys for everything structural.
     #
     # The six invariants below -- dedup, append-only, round trip, merge, schema -- are
-    # properties of the STORE. They need basin keys, not real ones, and building a census
-    # to test them cost 115 s of an 8-minute gate for no extra assurance. The evidence
-    # that a real census converges lives where it belongs: the golden's convergence
-    # ladder, which walks seven proved values end to end.
+    # properties of the STORE. They need endpoint keys, not real ones, and building a
+    # census to test them cost 115 s of an 8-minute gate for no extra assurance. Evidence
+    # that real fixed-seed quenches terminate lives in the golden's deep path. The ladder
+    # separately checks one selected start in the optimum endpoint class at seven proved
+    # values.
     #
     # n = 4 is the cheap real case: the optimum is the grid, and it converges at once.
     rng = random.Random(20260823)
@@ -85,10 +85,10 @@ def main() -> int:
 
     # Note what this does NOT assert. A cold start at n = 4 does not reliably reach the
     # grid: this seed converges at 2.145, a genuinely different local optimum. Which
-    # basin a random draw lands in is DISCOVERY, a property of the landscape, and
-    # asserting it here would be the third time in this branch that a test failed on
-    # luck. What must hold is that the quench converged, that it did not return
-    # something better than the proved s(4) = 2, and that the store took it.
+    # endpoint a random draw reaches is DISCOVERY under this proposer/quench regime, and
+    # asserting a particular one here would be the third time in this branch that a test
+    # failed on luck. What must hold is that the quench converged, did not return
+    # something better than proved s(4) = 2, and fed the store.
     passed &= check(
         "a real quench converges and feeds the store",
         ok=r.converged and r.side >= 2.0 - 1e-11 and len(atlas.basins) == 1,
@@ -109,7 +109,9 @@ def main() -> int:
                 contact_count=4 + i,
             ),
             seed=i,
-            converged=True,
+            # One deliberately censored observation makes the counter assertion below
+            # exercise the false branch instead of merely observing a zero default.
+            converged=i != 5,
         )
 
     # Captured before the deduplication step below re-adds rows, so the convergence
@@ -121,7 +123,7 @@ def main() -> int:
     for basin in list(atlas.basins):
         atlas.add(_key_of(basin), converged=True)
     passed &= check(
-        "re-offering a known basin raises its frequency, never adds a row",
+        "re-offering a known endpoint key raises its frequency, never adds a row",
         ok=len(atlas.basins) == before_rows
         and atlas.proposals == before_proposals + before_rows,
         detail=f"{len(atlas.basins)} rows, {atlas.proposals} proposals",
@@ -136,7 +138,7 @@ def main() -> int:
     )
 
     with tempfile.TemporaryDirectory() as td:
-        path = Path(td) / "n-005.yaml"
+        path = Path(td) / "n-004.yaml"
         atlas.save(path)
 
         # 5. Schema.
@@ -168,24 +170,22 @@ def main() -> int:
             f"{sum(b.quench_frequency for b in merged.basins)} total frequency",
         )
 
-    # 6. The guard the first version of this file did not have, and needed.
-    #
-    # Every structural invariant above passed on a census in which 11 of 12 quenches had
-    # stopped on a sweep limit: the store faithfully recorded twelve non-converged
-    # stopping points as twelve distinct basins. Structural checks cannot see that --
-    # they check the store, not what it was fed. So this one does.
+    # 6. Exercise the non-convergence counter with an explicit false observation.
+    # Structural invariants all passed on D-030's censored census because they check the
+    # store, not the instrument. This proves the store preserves the signal; the deep
+    # golden census is the separate regression that asks whether the instrument emits it.
     passed &= check(
         "the store counts non-convergence rather than hiding it",
-        ok=offered_non_converged == 0 and offered == 6,
+        ok=offered_non_converged == 1 and offered == 6,
         detail=f"{offered - offered_non_converged}/{offered} converged. "
-        "The census-scale version of this guard is the golden's convergence ladder; "
-        "what is enforced HERE is that the field exists and is counted (D-030)",
+        "The strict/deep golden path carries the real census-scale regression; what is "
+        "enforced HERE is that a false convergence field is counted (D-030)",
     )
 
     print(
-        f"\n  store: {len(atlas.basins)} basins from {offered} offered; the one real "
+        f"\n  store: {len(atlas.basins)} endpoint rows from {offered} offered; the one real "
         f"quench converged at {r.side:.12f}. "
-        "Census-scale evidence is the golden's convergence ladder."
+        "Deep golden regeneration carries the real census-scale check."
     )
     print("ATLAS CHECKS PASSED" if passed else "ATLAS CHECKS FAILED")
     return 0 if passed else 1

@@ -4,9 +4,9 @@
 # a re-run under a changed engine lands in its own round rather than overwriting an
 # earlier one -- the record is corrected by addition, never in place.
 #
-# n=10 is the positive control (s(10) is proved), n=11 the target, n=12 the
-# negative control (the 4x4 grid is almost certainly optimal, so a run that
-# "beats" it has found a bug, not a packing).
+# n=10 is the positive control (s(10) is proved), n=11 the target, and n=12 an
+# open-case calibration. A valid sub-4 candidate at n=12 is a discovery candidate
+# requiring promotion, not a control failure.
 set -euo pipefail
 cd "$(dirname "$0")"
 OUT="${1:?usage: run_baseline.sh <output.jsonl>}"

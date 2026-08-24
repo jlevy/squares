@@ -50,12 +50,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import shlex
 import socket
 import statistics
 import subprocess
 import sys
+import tempfile
 import time
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
@@ -68,13 +70,15 @@ ROOT = Path(__file__).resolve().parent.parent
 CAMPAIGN = ROOT / "campaign"
 SERIES = CAMPAIGN / "series"
 REPORT = CAMPAIGN / "session-report.md"
+EXECUTION_METADATA = "campaign_runner_execution"
+EXECUTION_TIME_DECIMAL_PLACES = 6
 
 # campaign/README.md, "The metric vector": a gap under 1e-4. A numerical proxy for the
 # combinatorial class, never evidence of it.
 REACHED_BASIN = 1e-4
 # campaign/README.md, "The accept rule" clause 4: a breach means the instrument is wrong
 # rather than the strategy good, and rejects regardless of outcome.
-CONTROLS = {10: ("within", 1e-2), 12: ("not_below", 4.0)}
+CONTROLS = {10: ("within", 1e-2), 16: ("not_below", 4.0)}
 # campaign/README.md, "Budget and stop conditions".
 MAX_PER_HYPOTHESIS = 3
 # unattended.md: three in a row is a broken instrument, not three bad candidates.
@@ -178,13 +182,17 @@ def hypothesis(hid: str) -> dict[str, Any]:
 # --- STEP: queue ----------------------------------------------------------------------
 
 
-def queue() -> tuple[list[tuple[str, dict[str, Any]]], list[tuple[str, str]]]:
+def queue(
+    *, allow_during_gate: bool = False
+) -> tuple[list[tuple[str, dict[str, Any]]], list[tuple[str, str]]]:
     """Runnable hypotheses in priority order, and why every other one is not.
 
     Nothing is dropped silently: a queue that shrinks without saying why is how a night
-    ends with two rounds and no explanation.
+    ends with two rounds and no explanation. Preflight may inspect it while the gate is
+    active; ordinary status and execution paths remain mutually exclusive with the gate.
     """
-    refuse_if_gate_running()
+    if not allow_during_gate:
+        refuse_if_gate_running()
     recorded = [e for _, e in all_rounds()]
     runnable: list[tuple[str, dict[str, Any]]] = []
     skipped: list[tuple[str, str]] = []
@@ -301,7 +309,112 @@ def archive_of(path: Path) -> Path:
     return path.parent.parent / "results" / (path.stem + ".jsonl")
 
 
+def execution_metadata(archive: Path) -> dict[str, Any] | None:
+    """Return the one execution receipt appended by `execute`, if present.
+
+    The JSONL archive is already the durable hand-off between `execute` and `record`.
+    Keep the elapsed time and run-time revision there too rather than in process memory
+    or a second coordination file. Ordinary non-result provenance lines remain allowed
+    by the harness contract; this reserved record is the only one interpreted by the
+    runner.
+    """
+    receipts: list[dict[str, Any]] = []
+    for line in archive.read_text().splitlines():
+        if not line.strip():
+            continue
+        rec = validated_record(line, allow_execution_metadata=True)
+        if EXECUTION_METADATA not in rec:
+            continue
+        if set(rec) != {EXECUTION_METADATA}:
+            raise GuardError("execution receipt has unexpected fields")
+        receipt = rec[EXECUTION_METADATA]
+        if not isinstance(receipt, dict):
+            raise GuardError("execution receipt is not an object")
+        wall_seconds = receipt.get("wall_seconds")
+        commit = receipt.get("commit")
+        dirty = receipt.get("dirty")
+        if (
+            isinstance(wall_seconds, bool)
+            or not isinstance(wall_seconds, (int, float))
+            or not math.isfinite(float(wall_seconds))
+            or wall_seconds < 0
+            or not isinstance(commit, str)
+            or not commit
+            or not isinstance(dirty, bool)
+        ):
+            raise GuardError("execution receipt has invalid wall_seconds or provenance")
+        receipts.append({"wall_seconds": float(wall_seconds), "commit": commit, "dirty": dirty})
+    if len(receipts) > 1:
+        raise GuardError("archive has more than one execution receipt")
+    return receipts[0] if receipts else None
+
+
+def append_execution_metadata(
+    archive: Path, *, started: float, commit: str, dirty: bool
+) -> None:
+    """Append the receipt even when a timebox or command failure ends ``execute``."""
+    receipt = {
+        EXECUTION_METADATA: {
+            "wall_seconds": round(time.monotonic() - started, EXECUTION_TIME_DECIMAL_PLACES),
+            "commit": commit,
+            "dirty": dirty,
+        }
+    }
+    with archive.open("a") as fh:
+        fh.write(json.dumps(receipt, sort_keys=True) + "\n")
+
+
+def artifact_fields_from_execution(execution: dict[str, Any]) -> dict[str, Any]:
+    """Bind every terminal artifact field to the same execution receipt."""
+    return {
+        "engine_commit": execution["commit"],
+        "method_commit": execution["commit"],
+        "verdict_commit": execution["commit"],
+        "dirty": execution["dirty"],
+        "wall_seconds": execution["wall_seconds"],
+    }
+
+
 # --- STEP: execute, and the contract it enforces --------------------------------------
+
+
+def validated_record(line: str, *, allow_execution_metadata: bool = False) -> dict[str, Any]:
+    """Parse one JSONL record and enforce the result-line trust boundary.
+
+    This function is shared by ingestion and replay. Otherwise a line can pass the live
+    guard, be changed on disk, and later reach the decision code under a weaker contract.
+    Non-result JSON records are retained as provenance but do not affect the score.
+    """
+    try:
+        rec = json.loads(line)
+    except json.JSONDecodeError as e:
+        raise GuardError(f"non-JSON line from the command: {line[:100]!r}") from e
+    if not isinstance(rec, dict):
+        raise GuardError("a JSONL line must be an object")
+    if EXECUTION_METADATA in rec and not allow_execution_metadata:
+        raise GuardError(f"a command may not write the reserved {EXECUTION_METADATA!r} field")
+    if "best_side" not in rec:
+        return rec
+    if "overlap" not in rec and "best_overlap" not in rec:
+        raise GuardError("a result line carries best_side but no overlap")
+    if "n" not in rec or "seed" not in rec:
+        raise GuardError("a result line carries best_side but no n and seed")
+    overlap_value = rec["overlap"] if "overlap" in rec else rec["best_overlap"]
+    values = (rec["best_side"], overlap_value, rec["n"], rec["seed"])
+    if any(isinstance(value, bool) or not isinstance(value, (int, float)) for value in values):
+        raise GuardError("a result line carries a non-numeric contract field")
+    side = float(rec["best_side"])
+    overlap = float(overlap_value)
+    n, seed = float(rec["n"]), float(rec["seed"])
+    if not math.isfinite(side) or side <= 0:
+        raise GuardError("a result line carries an invalid best_side")
+    if not math.isfinite(overlap) or overlap != 0.0:
+        raise GuardError("a result line carries a non-zero overlap: the run is invalid")
+    if not math.isfinite(n) or n <= 0 or not n.is_integer():
+        raise GuardError("a result line carries an invalid n")
+    if not math.isfinite(seed) or not seed.is_integer():
+        raise GuardError("a result line carries an invalid seed")
+    return rec
 
 
 def read_lines(stdout: str, fh: Any) -> float | None:
@@ -315,19 +428,12 @@ def read_lines(stdout: str, fh: Any) -> float | None:
     for line in stdout.splitlines():
         if not line.strip():
             continue
+        rec = validated_record(line)
+        # Validate before writing: a guard refusal must not create an archive that a
+        # later `record` step could mistake for admissible evidence.
         fh.write(line + "\n")
-        try:
-            rec = json.loads(line)
-        except json.JSONDecodeError as e:
-            raise GuardError(f"non-JSON line from the command: {line[:100]!r}") from e
         if "best_side" not in rec:
             continue
-        if "overlap" not in rec and "best_overlap" not in rec:
-            raise GuardError("a result line carries best_side but no overlap")
-        if "n" not in rec or "seed" not in rec:
-            raise GuardError("a result line carries best_side but no n and seed")
-        if float(rec.get("overlap", rec.get("best_overlap"))) != 0.0:
-            raise GuardError("a result line carries a non-zero overlap: the run is invalid")
         side = float(rec["best_side"])
         best = side if best is None else min(best, side)
     return best
@@ -340,33 +446,58 @@ def execute(eid: str) -> None:
     not double-count. Everything it learns is in that file; nothing is held in memory for
     a later step.
     """
+    refuse_if_gate_running()
     path, e = find_round(eid)
     recipe = hypothesis(e["hypotheses"][0])["runner"]
     archive = archive_of(path)
-    archive.write_text("")
-    deadline = time.monotonic() + duration(recipe["timebox"])
+    started = time.monotonic()
+    # Capture these before the command runs. `record` may be hours later on a newer
+    # HEAD, but that is not the revision that produced the measurements.
+    execution_commit = git("rev-parse", "--short", "HEAD")
+    execution_dirty = bool(git("status", "--porcelain"))
+    archive_ready = False
+    try:
+        archive.write_text("")
+        archive_ready = True
+        deadline = time.monotonic() + duration(recipe["timebox"])
 
-    for n in recipe["cells"]:
-        with archive.open("a") as fh:
-            for seed in recipe["seeds"]:
-                if (left := deadline - time.monotonic()) <= 0:
-                    print(f"   n={n}: TIMEBOX reached, {recipe['timebox']} spent")
-                    return
-                cmd = shlex.split(recipe["command"].format(n=n, seed=seed))
-                try:
-                    p = subprocess.run(
-                        cmd, cwd=ROOT, capture_output=True, text=True, timeout=left, check=False
-                    )
-                except subprocess.TimeoutExpired:
-                    print(f"   n={n}: TIMEBOX reached mid-seed")
-                    return
-                except FileNotFoundError as exc:
-                    raise GuardError(f"declared command not found: {cmd[0]}") from exc
-                if p.returncode:
-                    raise GuardError(f"command exited {p.returncode} at n={n} seed={seed}")
-                if (side := read_lines(p.stdout, fh)) is None:
-                    raise GuardError(f"no result line at n={n} seed={seed}")
-                print(f"   n={n} seed={seed}: {side:.12f}")
+        for n in recipe["cells"]:
+            with archive.open("a") as fh:
+                for seed in recipe["seeds"]:
+                    if (left := deadline - time.monotonic()) <= 0:
+                        print(f"   n={n}: TIMEBOX reached, {recipe['timebox']} spent")
+                        return
+                    cmd = shlex.split(recipe["command"].format(n=n, seed=seed))
+                    try:
+                        p = subprocess.run(
+                            cmd,
+                            cwd=ROOT,
+                            capture_output=True,
+                            text=True,
+                            timeout=left,
+                            check=False,
+                        )
+                    except subprocess.TimeoutExpired:
+                        print(f"   n={n}: TIMEBOX reached mid-seed")
+                        return
+                    except FileNotFoundError as exc:
+                        raise GuardError(f"declared command not found: {cmd[0]}") from exc
+                    if p.returncode:
+                        raise GuardError(f"command exited {p.returncode} at n={n} seed={seed}")
+                    if (side := read_lines(p.stdout, fh)) is None:
+                        raise GuardError(f"no result line at n={n} seed={seed}")
+                    print(f"   n={n} seed={seed}: {side:.12f}")
+    finally:
+        # A timeout and a command/contract exception are still measured work.  The
+        # receipt makes release/recovery honest about the cost; if we could not even
+        # create the archive there is nowhere durable to put it.
+        if archive_ready:
+            append_execution_metadata(
+                archive,
+                started=started,
+                commit=execution_commit,
+                dirty=execution_dirty,
+            )
 
 
 # --- STEP: record -- guard, decide, write, regenerate, commit -------------------------
@@ -399,13 +530,17 @@ def cells_from(archive: Path, recipe: dict[str, Any]) -> list[Cell]:
     many actually finished, which `decide` then checks against the declared count.
     """
     by_cell: dict[int, dict[int, float]] = {}
+    allowed_cells = {int(n) for n in recipe["cells"]}
+    allowed_seeds = {int(seed) for seed in recipe["seeds"]}
     for line in archive.read_text().splitlines():
         if not line.strip():
             continue
-        rec = json.loads(line)
+        rec = validated_record(line, allow_execution_metadata=True)
         if "best_side" not in rec:
             continue
         n, seed, side = int(rec["n"]), int(rec["seed"]), float(rec["best_side"])
+        if n not in allowed_cells or seed not in allowed_seeds:
+            raise GuardError(f"archive result n={n} seed={seed} is outside the declared recipe")
         seen = by_cell.setdefault(n, {})
         seen[seed] = min(seen.get(seed, side), side)
 
@@ -422,7 +557,7 @@ def control_breaches(cells: list[Cell]) -> list[str]:
         if kind == "within" and abs(c.gap) > bound:
             out.append(f"n={c.n} positive control off by {c.gap:.3e}, outside {bound}")
         if kind == "not_below" and c.best < bound - 1e-12:
-            out.append(f"n={c.n} negative control returned {c.best!r}, below {bound}")
+            out.append(f"n={c.n} proved not-below control returned {c.best!r}, below {bound}")
     return out
 
 
@@ -479,9 +614,14 @@ def record(eid: str, *, operator: str) -> str:
     h = hypothesis(hid)
     recipe = h["runner"]
     archive = archive_of(path)
+    execution = execution_metadata(archive) if archive.exists() else None
+    if execution is None:
+        raise RefusalError(
+            f"{eid} has no execution receipt; run `runner.py execute {eid}` before recording"
+        )
+    artifact_execution = artifact_fields_from_execution(execution)
     cells = cells_from(archive, recipe) if archive.exists() else []
     verdict = decide(h, cells)
-    sha = git("rev-parse", "--short", "HEAD")
     cell_list = ", ".join(str(c.n) for c in cells) or str(recipe["cells"][0])
 
     results: list[dict[str, Any]] = [
@@ -520,24 +660,33 @@ def record(eid: str, *, operator: str) -> str:
                 # `engine` is required by the schema and must not be invented: take it
                 # from the command the round actually ran.
                 "engine": Path(shlex.split(recipe["command"])[0]).name,
-                "label": recipe["command"], "engine_commit": sha, "precision": "f64_screen",
+                "label": recipe["command"],
+                "engine_commit": artifact_execution["engine_commit"],
+                "precision": "f64_screen",
                 "host_system": socket.gethostname(), "selftest_passed": True,
             },
             "instance": {"axis": "n", "point": cells[0].n if cells else recipe["cells"][0]},
             "method": {
                 "candidate": recipe["command"], "runs_per_condition": len(recipe["seeds"]),
-                "interleaved": False, "operator": operator, "commit": sha,
-                "dirty": bool(git("status", "--porcelain")),
+                "interleaved": False, "operator": operator,
+                "commit": artifact_execution["method_commit"],
+                "dirty": artifact_execution["dirty"],
                 "entry_point": "explorations/packing/campaign/runner.py",
                 "command": recipe["command"], "record": str(archive.relative_to(ROOT)),
             },
-            "effort": {"timebox": recipe["timebox"], "agent_minutes": 0,
-                       "stopped_by": verdict["stopped_by"]},
+            "effort": {"timebox": recipe["timebox"],
+                       "wall_seconds": artifact_execution["wall_seconds"],
+                       "agent_minutes": 0, "stopped_by": verdict["stopped_by"]},
             "results": results,
             "verdict": {
                 "decision": verdict["decision"],
                 "primary_criterion": (h.get("criterion") or {}).get("metric", "best_side"),
-                "reason": verdict["reason"], "commit": sha,
+                # This schema field has historically been used as evidence provenance,
+                # not as a claim about the later write-up. Keep the execution revision
+                # rather than silently replacing it with ``record``'s HEAD. Git history
+                # records the commit that wrote the artifact.
+                "reason": verdict["reason"],
+                "commit": artifact_execution["verdict_commit"],
                 "needs_review": verdict["needs_review"],
             },
         },
@@ -625,14 +774,24 @@ def release(eid: str, why: str) -> None:
     A released round is terminal, so it carries the `effort` block the gate requires,
     with `stopped_by: error`: the round died, and nothing may be concluded from it.
     """
+    refuse_if_gate_running()
     path, stub = find_round(eid)
     if stub["verdict"]["decision"] != "in-progress":
         raise RefusalError(f"{eid} is {stub['verdict']['decision']}, not in-progress")
     hid = stub["hypotheses"][0]
     recipe = hypothesis(hid)["runner"]
+    archive = archive_of(path)
+    execution = execution_metadata(archive) if archive.exists() else None
 
     stub.pop("lease", None)
-    stub["effort"] = {"timebox": recipe["timebox"], "agent_minutes": 0, "stopped_by": "error"}
+    stub["effort"] = {
+        "timebox": recipe["timebox"],
+        # A release before execute costs no measurement time. A release after a failed
+        # execute uses the receipt written in execute's finally block.
+        "wall_seconds": execution["wall_seconds"] if execution else 0,
+        "agent_minutes": 0,
+        "stopped_by": "error",
+    }
     stub["verdict"] = {
         "decision": "unresolved",
         "primary_criterion": stub["verdict"]["primary_criterion"],
@@ -694,17 +853,27 @@ def preflight() -> int:
     """Every guard, fired on purpose. A guard nobody has watched fail is not evidence."""
 
     class Sink:
-        def write(self, _: str) -> None:
-            return
+        def __init__(self) -> None:
+            self.lines: list[str] = []
+
+        def write(self, line: str) -> None:
+            self.lines.append(line)
 
     checks: list[tuple[str, bool, str]] = []
 
     def guard_refuses(label: str, payload: str) -> None:
+        sink = Sink()
         try:
-            read_lines(payload, Sink())
+            read_lines(payload, sink)
             checks.append((label, False, "it was accepted"))
         except GuardError as e:
-            checks.append((label, True, str(e)))
+            checks.append(
+                (
+                    label,
+                    not sink.lines,
+                    f"{e}; {len(sink.lines)} invalid line(s) reached the archive",
+                )
+            )
 
     guard_refuses(
         "a non-zero overlap is refused",
@@ -719,6 +888,11 @@ def preflight() -> int:
         '{"best_side": 3.9, "overlap": 0}',
     )
     guard_refuses("a non-JSON line is refused", "not json at all")
+    guard_refuses(
+        "producer output cannot spoof the execution receipt",
+        '{"campaign_runner_execution": '
+        '{"wall_seconds": 0, "commit": "spoofed", "dirty": false}}',
+    )
 
     best = read_lines(
         '{"n": 11, "seed": 1, "best_side": 3.9, "overlap": 0}\n'
@@ -727,9 +901,97 @@ def preflight() -> int:
     )
     checks.append(("a seed's result is the min over its lines", best == 3.7, f"got {best}"))
 
-    breach = control_breaches([Cell(12, [3.9])])
+    with tempfile.TemporaryDirectory() as tmp:
+        bad_archive = Path(tmp) / "bad.jsonl"
+        bad_archive.write_text('{"n": 11, "seed": 1, "best_side": 3.7, "overlap": 0.001}\n')
+        try:
+            cells_from(bad_archive, {"cells": [11], "seeds": [1]})
+            replay_refused, replay_detail = False, "the tampered archive was accepted"
+        except GuardError as e:
+            replay_refused, replay_detail = True, str(e)
+    checks.append(
+        ("record replay revalidates every result line", replay_refused, replay_detail)
+    )
+
+    with tempfile.TemporaryDirectory() as tmp:
+        timed_archive = Path(tmp) / "timed.jsonl"
+        timed_archive.write_text(
+            '{"n": 11, "seed": 1, "best_side": 3.7, "overlap": 0}\n'
+            '{"campaign_runner_execution": '
+            '{"wall_seconds": 12.5, "commit": "execution-sha", "dirty": true}}\n'
+        )
+        receipt = execution_metadata(timed_archive)
+    checks.append(
+        (
+            "execution receipt preserves elapsed time and run-time provenance",
+            receipt == {"wall_seconds": 12.5, "commit": "execution-sha", "dirty": True},
+            f"got {receipt!r}",
+        )
+    )
+    artifact_execution = artifact_fields_from_execution(receipt) if receipt is not None else {}
+    checks.append(
+        (
+            "record fields are bound to the execution receipt",
+            artifact_execution
+            == {
+                "engine_commit": "execution-sha",
+                "method_commit": "execution-sha",
+                "verdict_commit": "execution-sha",
+                "dirty": True,
+                "wall_seconds": 12.5,
+            },
+            f"got {artifact_execution!r}",
+        )
+    )
+
+    created_gate_marker = not GATE_MARKER.exists()
+    if created_gate_marker:
+        GATE_MARKER.touch()
+    try:
+        for label, action in (
+            (
+                "execute refuses while the gate marker exists",
+                lambda: execute("preflight-missing-round"),
+            ),
+            (
+                "release refuses while the gate marker exists",
+                lambda: release("preflight-missing-round", "preflight"),
+            ),
+        ):
+            try:
+                action()
+                refused, detail = False, "the command ran"
+            except RefusalError as exc:
+                refused = "test.sh is running" in str(exc)
+                detail = str(exc)
+            checks.append((label, refused, detail))
+    finally:
+        if created_gate_marker:
+            GATE_MARKER.unlink(missing_ok=True)
+
+    with tempfile.TemporaryDirectory() as tmp:
+        wrong_cell = Path(tmp) / "wrong-cell.jsonl"
+        wrong_cell.write_text('{"n": 12, "seed": 1, "best_side": 4.0, "overlap": 0}\n')
+        try:
+            cells_from(wrong_cell, {"cells": [11], "seeds": [1]})
+            recipe_refused, recipe_detail = False, "the undeclared cell was accepted"
+        except GuardError as e:
+            recipe_refused, recipe_detail = True, str(e)
+    checks.append(
+        ("record replay enforces the declared cells and seeds", recipe_refused, recipe_detail)
+    )
+
+    breach = control_breaches([Cell(16, [3.9])])
     checks.append(
         ("a control-cell breach is caught", bool(breach), breach[0] if breach else "not caught")
+    )
+    open_case_breach = control_breaches([Cell(12, [3.9])])
+    checks.append(
+        (
+            "an n=12 improvement is not rejected as a control breach",
+            not open_case_breach,
+            open_case_breach[0] if open_case_breach else "not a control",
+        )
     )
 
     # Built from parts so the needle does not appear literally here and match itself.
@@ -742,7 +1004,7 @@ def preflight() -> int:
         )
     )
 
-    runnable, skipped = queue()
+    runnable, skipped = queue(allow_during_gate=True)
     checks.append(
         (
             "the queue is not empty",
@@ -778,11 +1040,13 @@ def run(operator: str, hours: float) -> int:
         print(f"\n== {eid}: {hid} ==")
         try:
             execute(eid)
+            decision = record(eid, operator=operator)
             failures = 0
         except GuardError as e:
             failures += 1
             print(f"   GUARD REFUSED: {e}")
-        decision = record(eid, operator=operator)
+            release(eid, f"guard refused the measurement: {e}")
+            decision = "unresolved"
         done.append((eid, hid, decision))
         print(f"   -> {decision}")
         if failures >= MAX_CONSECUTIVE_FAILURES:

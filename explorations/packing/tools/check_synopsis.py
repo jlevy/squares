@@ -133,11 +133,11 @@ def check_totals(text: str) -> list[str]:
     """The round count and effort totals match the ledger's generated footer."""
     ledger = (ROOT / "campaign" / "ledger.md").read_text()
     line = re.search(
-        r"^(\d+) rounds, ([\d.]+) agent-minutes, ([\d.]+) cpu-minutes\.$", ledger, re.M
+        r"^(\d+) rounds, ([\d.]+) agent-minutes, ([\d.]+) wall-minutes\.$", ledger, re.M
     )
     if not line:
         return ["campaign/ledger.md: no effort total to check against"]
-    rounds, agent, cpu = line.groups()
+    rounds, agent, wall = line.groups()
 
     problems = []
     words = [
@@ -158,7 +158,7 @@ def check_totals(text: str) -> list[str]:
     spelled = words[int(rounds)] if int(rounds) < len(words) else rounds
     if not re.search(rf"\b({rounds}|{spelled})\b rounds", text, re.I):
         problems.append(f"SYNOPSIS.md: does not say there are {rounds} rounds")
-    for value, label in ((agent, "agent-minutes"), (cpu, "cpu-minutes")):
+    for value, label in ((agent, "agent-minutes"), (wall, "wall-minutes")):
         if f"{value} {label}" not in text:
             problems.append(f"SYNOPSIS.md: effort total '{value} {label}' not stated")
     return problems

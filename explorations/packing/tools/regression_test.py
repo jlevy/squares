@@ -19,12 +19,18 @@ import math
 import random
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from sqpack.quench import quench_bracket, solve_to_fixed_point
+from sqpack.quench import (
+    _free_sweep,  # pyright: ignore[reportPrivateUsage]
+    _OutOfTimeError,  # pyright: ignore[reportPrivateUsage]
+    quench_bracket,
+    solve_to_fixed_point,
+)
 
 BIN = ROOT / "sqsearch/target/release/sqsearch"
 TRUMP = 3.877083590022814
@@ -190,19 +196,36 @@ def check_cell_solve_is_not_a_quench() -> str | None:
     return None
 
 
+def check_free_sweep_deadline_is_not_convergence() -> str | None:
+    """D-036: an incomplete free sweep must not certify convergence."""
+    try:
+        _free_sweep(
+            1.0,
+            [0.5],
+            [0.5],
+            [0.0],
+            1,
+            deadline=time.monotonic() - 1.0,
+        )
+    except _OutOfTimeError:
+        return None
+    return "D-036: an already-expired free sweep returned as if every angle was checked"
+
+
 def main() -> int:
     checks = [
         check_budget_binds,
         check_quench_deterministic,
         check_angle_search_converges,
         check_cell_solve_is_not_a_quench,
+        check_free_sweep_deadline_is_not_convergence,
     ]
     failures = [msg for msg in (c() for c in checks) if msg]
     for msg in failures:
         print(f"  REGRESSION  {msg}", file=sys.stderr)
     if failures:
         return 1
-    print(f"  {len(checks)} regression checks pass (D-002, D-015, D-016, D-019, D-029)")
+    print(f"  {len(checks)} regression checks pass (D-002, D-015, D-016, D-019, D-029, D-036)")
     return 0
 
 

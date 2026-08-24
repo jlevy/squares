@@ -59,10 +59,12 @@ An early version of the search never left the grid basin at all, and would have 
 a whole night of confident, meaningless numbers at `n = 11`. The control caught it in
 seconds.
 
-**The engine must fail to beat a case it should not beat.** `n = 12` is the negative
-control. The 4×4 grid is almost certainly optimal, so a run reporting anything below `4`
-has found a bug in the geometry, not a packing.
-A search harness that has never been asked to fail has not been tested.
+**The engine must reject configurations known to be invalid.** The original campaign
+called `n = 12` a negative control because the 4×4 grid is believed optimal.
+That was not a known-answer test: `s(12) = 4` is open, so a valid result below `4` would
+be a discovery. The valid guard is independent geometry verification plus deliberately
+invalid fixtures; `n = 12` remains an open-case calibration
+([D-042](../../../defects.md)).
 
 **The declared budget must actually bind.** It did not, at first: a restart cap stopped
 every chain before the move budget did, so `--budget-moves` was inert and two strategies

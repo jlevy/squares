@@ -15,10 +15,18 @@ what it is doing next.
 
 `s(n)` is the side of the smallest square that contains `n` non-overlapping unit
 squares, which may be rotated freely.
-The motivating case is `n = 11`: the smallest instance nobody has solved, and the
-smallest open gap at `n ≤ 100`.
+The motivating case is `n = 11`, the smallest instance nobody has solved.
 
-This project has four lanes, in the order they were built:
+This project works under four independent principles, defined at the top level in
+[`README.md`](README.md#operating-principles): **Correctness** (Soundness) owns
+mathematical truth and may veto promotion; **Process** (Discipline) owns reproducible
+research operations and may veto an unreconstructable run; **Insight** (Creativity) owns
+hypotheses and strategy but cannot certify them; and **Efficiency** (Infrastructure)
+owns stable, measured throughput without relaxing Correctness or Process controls.
+An agent normally focuses on one dimension at a time and hands explicit artifacts to the
+next.
+
+Those principles govern four capabilities built so far:
 
 1. **Know the frontier.** A schema-validated record of the best known packing and the
    best proved lower bound for every `n ≤ 100`, with provenance, plus a local archive of
@@ -30,13 +38,15 @@ This project has four lanes, in the order they were built:
    written before the run, a metric vector, an accept rule, a declared timebox, and a
    ledger generated from the artifacts rather than typed.
 4. **Account for what goes wrong.** A defect log with the same discipline as the
-   experiment record, because four of the six soundness failures found so far pointed in
+   experiment record, because 21 of the 28 soundness failures found so far pointed in
    the *flattering* direction and none was caught by the automated gate.
 
 The strategy that organises lanes 3 and 4 is stated in
 [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md):
-**the map of the local optima is the deliverable, and records are corollaries.** The
-argument for it, and the measurement registered to kill it if it is wrong, are in
+**a validated map of terminal components is the intended deliverable, and records are
+corollaries.** The current endpoint map remains provisional while identity and local
+certification are unresolved.
+The argument for it, and the measurement registered to kill it if it is wrong, are in
 [Theoretical Results](#theoretical-results) and
 [The Hypothesis Registry](#the-hypothesis-registry) below.
 
@@ -54,7 +64,7 @@ Nothing here duplicates what another owns.
 | --- | --- |
 | **This synopsis** | The state of the program: results, their status, the roll-up of rounds |
 | [Current handoff](docs/project/handoff-2026-08-23-quench-spine.md) | Where the work stands *today*: the critical path, the beads it maps to, and what to pick up next. Dated and disposable; this synopsis is the durable account |
-| [`README.md`](README.md) | What is in the directory, how to run it, and the index of the six research reports |
+| [`README.md`](README.md) | The four-principle operating charter, what is in the directory, how to run it, and the index of the six research reports |
 | [`conventions.md`](conventions.md) | Every rule the directory runs on, and which are machine-checked |
 | [`defects.md`](defects.md) | Every bug and record defect, what caught it, and what now stops it recurring |
 | [Soundness postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | Why D-014 was possible, and rules R1–R4 that apply to code not yet written |
@@ -100,7 +110,7 @@ Fixing the angles and a cell turns the problem into a linear program; that is
 [T-2](#the-cell-decomposition).
 
 **Instance cell**—an `n` carrying a declared role in the sweep: `n = 10` positive
-control, `n = 11` target, `n = 12` negative control, `n = 17` mechanism-matched
+control, `n = 11` target, `n = 12` open-case calibration, `n = 17` mechanism-matched
 calibration.
 A **control cell** is an instance cell whose answer is known before the run,
 and a breach of one rejects the round regardless of outcome.
@@ -113,17 +123,17 @@ and a breach of one rejects the round regardless of outcome.
 configurations the refiner carries to the same local optimum.
 A basin is therefore defined *relative to a specific quench*, which is why basin
 identity may not inherit the search’s tuning parameters—a quench that merged nearby
-angles would make the word depend on the merge tolerance ([D-020](defects.md)). What
-makes a basin a discrete, nameable object rather than a tolerance-dependent blob is that
-the LP gives its endpoint a *value*, reproducibly, to solver precision—about `1e-11` in
-the side, and no better ([D-021](defects.md), open).
-Two basins closer than that floor are not currently distinguishable.
+angles would make the word depend on the merge tolerance ([D-020](defects.md)). The
+current quench gives each terminal pose a reproducible numerical candidate, but that
+does not make the terminal set discrete or decide whether two candidates belong to one
+connected component.
+D-021 bounds error in the scalar side only; it is not a pose- or component-resolution
+theorem ([D-039](defects.md)).
 
-**The definition has a precondition, and it is not always met.**
-“The preimage of one quench *endpoint*” presupposes the endpoint is a **point**.
-Where the local optimum is a *flat basin*—see below—it is not, the quench lands wherever
-in the flat region it happened to enter, and the word “basin” does not denote anything
-the census can count.
+**The definition has a precondition, and it is not always met.** “The preimage of one
+quench *endpoint*” presupposes the endpoint is a **point**. Where the local optimum is a
+*flat basin*—see below—it is not, the quench lands wherever in the flat region it
+happened to enter, and the word “basin” does not denote anything the census can count.
 This precondition went unstated for the campaign’s first three weeks and cost
 [D-034](defects.md); it is stated here now because every downstream count inherits it.
 
@@ -167,35 +177,35 @@ converges to it. Measured at `n = 11`: `0.1747` and `0.384` per radian, through 
 independent implementations ([T-3](#the-corner-and-the-method-it-forced)). Not a synonym
 for “sharp minimum”—the derivative does not become large, it fails to exist.
 
-**Rigidity.** A packing having no slack: every square is pinned by contacts, so no
-square can move without increasing the side.
-Trump’s packing is rigid, which is simultaneously why it is hard to find, why a float
-verifier cannot decide it, and why its angle optimum is a corner.
+**Rigidity.** A packing that has no non-trivial feasible infinitesimal or local motion
+under the declared quotient and container condition.
+Contact counts and visual pinning are candidates for this property, not proofs; they
+require an active-constraint rank or stronger local certificate.
+Trump’s packing appears highly constrained, but this repository has not yet supplied
+that certificate ([D-041](defects.md)).
 
-**Flat basin** (equivalently *non-rigid optimum*, *optimal family*). A local optimum that
-is **not** a point but a positive-dimensional set: the contacts pin fewer degrees of
-freedom than the configuration has, so a whole continuum of packings achieves the same
-side, with the same contact graph, and none of them is more “the” optimum than another.
-Count it: `n` squares have `3n` degrees of freedom, plus one for the side; each pair
-contact and each wall touch removes one. Where that leaves a surplus, the optimum is
-flat, and its **dimension** is the size of the surplus.
+**Terminal family** (called a *flat basin* in older campaign prose).
+A local-optimal terminal set that is not an isolated point.
+Its local dimension is the nullity of the appropriate independent active-constraint
+Jacobian after quotienting symmetries and accounting for inequalities and stratum
+changes. Raw contact counts cannot supply that rank: contacts may be dependent, one
+contact description may encode several scalar conditions, and angles and separating
+cells may change along a motion.
 
-Flat basins are not exotic and not confined to toy `n`. Measured at `n = 5`, the
-campaign’s first census cell: an optimum at `(4 + 5√2)/4` has 11 constraints against 16
-degrees of freedom, so it is a five-dimensional family ([D-034](defects.md)). At `n = 3`
-it is starker still—three unit squares in a `2 × 2` box can be slid around freely, so
-the entire optimal set is a continuum.
+At `n = 3`, the exact family with centres `(1/2,1/2)`, `(3/2,1/2)`, and `(t,3/2)` for
+`t ∈ [1/2,3/2]` proves that terminal continua occur and that the current endpoint key
+splits one connected optimum component.
+At `n = 5`, two rows share side and contact summaries but differ geometrically.
+That is an unresolved identity signal, not a proof of a five-dimensional connected
+family ([D-034](defects.md), [D-041](defects.md)).
 
-**This term should have existed from the first day, and its absence is the lesson.**
-Everything needed to write it was already in this document. “Rigidity” was defined, but
-only ever *attributed to Trump’s packing*, as if it were a property records happen to
-have rather than a property an arbitrary optimum may lack. And the strategy premise
-below is literally *“records are rigid, rigid optima live in rare basins”*—a sentence
-whose own construction presupposes that non-record optima may be **non**-rigid, and which
-never asks what those do to a census that counts basins.
-Two definitions and a premise, each holding a third of the answer, none of them joined
-up. That is a documentation failure before it is a code one, and it is why
-[D-034](defects.md) was found by reading a census output rather than by reading the plan.
+**This distinction should have existed from the first day.** “Rigidity” was treated as
+an informal visual property of the target while the census silently assumed every
+terminal was isolated.
+The exact `n = 3` control falsifies that assumption directly.
+That is a documentation failure before it is a code one, and it is why
+[D-034](defects.md) was found by reading a census output rather than by reading the
+plan.
 
 ### The measurements
 
@@ -227,9 +237,9 @@ Machine-independent, unlike wall clock or moves, which is why proposer compariso
 denominated in it. Tiers S/M/L are `1e9`/`1e11`/`1e13`.
 
 **Evidence tier.** What a number is permitted to claim, fixed by how it was produced:
-`f64_screen` (a candidate was proposed), `polished` (this is the basin, valued to solver
-precision—a floor of about `1e-11`, [D-021](defects.md)), `exact` (validity decided over
-the packing’s own number field).
+`f64_screen` (a candidate was proposed), `polished` (a quench endpoint candidate was
+valued to solver precision—a floor of about `1e-11` in the side, [D-021](defects.md)),
+`exact` (validity decided over the packing’s own number field).
 **`beat_record: true` may be written only at `exact`.** Never extrapolate across a tier
 boundary. The tiers are set out in full under
 [Theoretical Results](#theoretical-results).
@@ -290,7 +300,7 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
 | Best proved lower bound | `2 + 4/√5 = 3.788854382…` | Stromquist 2003, Theorem 2 |
-| Gap | `0.088229208023` | the smallest open gap at `n ≤ 100` |
+| Gap | `0.088229208023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
 
 Trump’s packing is six axis-aligned squares plus a block of five tilted at
 `a* ≈ 40.181937290329714°`. The container side is an algebraic number of degree 8, the
@@ -300,9 +310,11 @@ root of
 s⁸ − 20s⁷ + 178s⁶ − 842s⁵ + 1923s⁴ − 496s³ − 6754s² + 12420s − 6865 = 0
 ```
 
-lying in `[3.87, 3.88]`. The packing is **rigid**: it has no slack anywhere, which is
-what makes it hard to find, hard to check, and—as the angle results below show—hard to
-converge to.
+lying in `[3.87, 3.88]`. The packing is visually and numerically highly constrained and
+is a strong rigidity candidate.
+This repository has not yet supplied an active-constraint rank or interval-local proof
+of isolation, so rigidity is not used as an established explanation for search
+difficulty ([D-041](defects.md)).
 
 ### Why exactness is not optional
 
@@ -338,7 +350,8 @@ Where the program has spent effort, and what came of it.
 | 8 | proved, `3` | `3` | census kill line | The `n` at which [H-011](campaign/hypotheses/H-011-small-n-census.md)’s discovery curve must plateau, or enumeration is abandoned. No rounds |
 | **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Four rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); angle descent barely helps; [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`—**twelve orders** |
 | **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); six rounds. Every method tried lands `≈ 6e-02` short: the failure is **exploration**, not polish |
-| **12** | open; `4` believed optimal | `4` | **negative control** | Two rounds. Returns exactly `4.0` on all five seeds and never below. Also where the search and proof lanes are planned to meet |
+| **12** | open; `4` believed optimal | `4` | **open-case calibration** | Two rounds. Returns exactly `4.0` on all five seeds, which is baseline evidence rather than a known-answer guard. Also where the search and proof lanes are planned to meet |
+| 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
 | 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°` and `±40°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) returns **exactly `5.0`**, the trivial `5×5` grid, on all five seeds |
 | 61, 78, 97 | open, `m² − 3` | `8`, `9`, `10` (grids) | opportunistic slot | The narrowest gaps in the table. An analytic Cleemann-style attempt at `arctan(3/4)` is registered and **not yet made** |
 | 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](frontier/README.md); 63 of the 65 open cases are bounded below by Nagamochi’s general theorem |
@@ -404,7 +417,7 @@ listed here so the dependencies of this program are explicit.
 | --- | --- | --- | --- | --- |
 | **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **exact** | `sqpack` | `python3 verify_trump11.py` |
 | **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated at **polished** | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack/quench.py`](sqpack/quench.py) | `uv run python lp_cell.py` |
-| **T-3** | The LP optimum as a function of the angles has a **corner** at the optimal angles—distinct one-sided derivatives—so no method assuming a smooth local model converges to it | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run python lp_cell.py` |
+| **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run python lp_cell.py` |
 
 **T-1** is also an independent check of the published record: the 33 digits on the
 *Squares in Squares* record page agree with the value computed here from the field.
@@ -490,15 +503,17 @@ centres.
 
 ### Nor is a flat optimum a basin, which is the same trap one level up
 
-The section above separates a *cell* from a *basin* because a cell fixes the angles and a
-basin does not. There is a second separation, discovered later and the harder of the two:
-a basin presumes its optimum is a **point**, and [not every optimum is](#terminology).
+The section above separates a *cell* from a *basin* because a cell fixes the angles and
+a basin does not. There is a second separation, discovered later and the harder of the
+two: a basin presumes its optimum is a **point**, and
+[not every optimum is](#terminology).
 
 Where the optimum is flat, “the configurations the refiner carries to the same local
 optimum” describes a map onto a *set*, and two quenches of the same optimum legitimately
-stop at different places in it. Every symptom then mimics a real discovery—distinct
-coordinates, distinct geometric keys, two rows in the atlas—while the contact graph and
-the side, the two things that actually characterise the optimum, agree exactly.
+stop at different places in it.
+Every symptom then mimics a real discovery—distinct coordinates, distinct geometric
+keys, two rows in the atlas—while the contact graph and the side, the two things that
+actually characterise the optimum, agree exactly.
 That is [D-034](defects.md), and the shape of the error is the same as the cell/basin
 trap: an object that fixes more than the mathematics does, mistaken for the mathematics.
 
@@ -646,16 +661,16 @@ Two implementations, one number.
 Where the LP’s optimal basis is locally constant, `φ` is smooth and its derivative is
 read off the active constraints.
 A corner is a **change of optimal basis**: the set of contacts that bind switches as `a`
-crosses `a*`. That the switch happens exactly at the minimum is what rigidity means,
-expressed in the coordinates the refiner works in—at `a*` the packing is maximally
-constrained, and moving the angle either way relaxes one contact set and tightens
-another.
+crosses `a*`. The switch at the minimum establishes a kink in this one-dimensional
+class-angle objective.
+It does not by itself prove rigidity of the full packing; that requires ruling out every
+other feasible motion, not just motion along this slice.
 
 ### The prediction, and what it cost to ignore
 
-A gradient, a quasi-Newton model, and a simplex-of-points method all assume a locally
-smooth objective, and none can converge to a corner.
-Measured in
+A kink invalidates derivative-based smooth local models, but does not imply that every
+derivative-free method must fail.
+In this implementation and from these starts,
 [exp-006](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md):
 finite-difference descent stalled five orders short, and **Powell and Nelder-Mead both
 did worse than descent** (`+1.06e-02` and `+3.34e-06` against descent’s `+2.78e-07`).
@@ -677,10 +692,10 @@ searches*. At `n = 5` both quenches find the same contact structure and the same
 angle classes, so the difference is entirely in whether the search can land on the
 corner.
 
-This is not an optimisation preference.
-It is a correctness requirement, and it is why
-[H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) matters more than its size
-suggests.
+This is strong method-selection evidence, not a convergence theorem.
+The successful bracketing run and the failed tested alternatives justify the current
+implementation choice; [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md)
+does not prove that every derivative-free method fails or that bracketing is necessary.
 
 ### And what it did not buy
 
@@ -771,20 +786,20 @@ In looking for it, the review found **T-2** and supplied the experimental method
 project lacked: a hypothesis register with kill criteria written before the run, a run
 protocol, and a seven-series plan.
 
-**Adopt a strategy, and register the premise so it can fail.** Records are rigid, rigid
-optima live in rare basins, so scaling a volume-weighted sampler multiplies effort
-against a probability the problem drives toward zero.
-Because the whole strategy rests on that argument, the measurement that would refute it
-([H-012](campaign/hypotheses/H-012-record-basins-are-rare.md)) is registered in the
-cheapest tier and scheduled early.
+**Adopt a strategy, and register the premise so it can fail.** Record packings may be
+unusually constrained and may have low hit probability under specified baseline
+proposers. If so, scaling the same proposer multiplies effort against the measured
+probability. Because the whole strategy rests on that argument, the measurement that
+would refute it ([H-012](campaign/hypotheses/H-012-record-basins-are-rare.md)) is
+registered in the cheapest tier and scheduled early.
 
-*Read the premise’s own contrapositive, which went unread for three weeks.* If **records**
-are rigid, then whatever is **not** a record need not be—and a non-rigid optimum is a
-[flat basin](#terminology), which is a family rather than a point. So the census that
-is supposed to establish rarity is counting two different kinds of object at once, and
-the denominator of “rare” is not yet a number ([D-034](defects.md)).
-The premise may well be true. It is not yet *measurable*, and that is a stronger
-objection than doubting it.
+*Ask what the premise silently assumes about its denominator.* Optima need not be
+isolated: the exact `n = 3` terminal family proves that one connected optimal component
+can produce many endpoint keys.
+So the census that is supposed to establish rarity is counting representation-dependent
+objects, and the denominator of “rare” is not yet a number ([D-034](defects.md)). The
+premise may well be true.
+It is not yet *measurable*, which is a stronger objection than doubting it.
 
 **Ask whether the basin has a wall, and get a better question back.**
 [exp-005](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md)
@@ -817,11 +832,12 @@ The full contract is the [runbook](campaign/README.md); the parts that matter fo
 reading the results below:
 
 - **Evidence tiers**, and a number’s tier decides what it may claim: `f64_screen` (a
-  candidate was proposed), `polished` (this is the basin, named and valued to solver
+  candidate was proposed), `polished` (a quench endpoint candidate was valued to solver
   precision), `exact` (validity, and only here a record).
-  **`beat_record: true` may only be written at `exact`.**
+  Basin or terminal-component identity requires additional evidence beyond the tier
+  label. **`beat_record: true` may only be written at `exact`.**
 - **Four instance cells with different jobs**: `n = 10` positive control, `n = 11`
-  target, `n = 12` negative control, `n = 17` mechanism-matched calibration.
+  target, `n = 12` open-case calibration, `n = 17` mechanism-matched calibration.
   A guard breach rejects a round regardless of outcome, because it means the instrument
   is wrong rather than the strategy good.
 - **Five seeds minimum per cell**, median and min–max range both reported.
@@ -845,11 +861,11 @@ view; this section is the reading of it.
 
 | Id | Status | Claim, in short | Rounds | Effort |
 | --- | --- | --- | --- | --- |
-| [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) | **confirmed** | The angle objective has a corner at the optimum | 1 | 10m agent |
-| [H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 4 | 190m agent, 4.9m cpu |
-| [H-016](campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md) | **refuted** | The stock annealer reaches the standing best on every instance cell | 4 | 10.2m cpu |
-| [H-018](campaign/hypotheses/H-018-basin-entry.md) | **refuted** as stated | Perturbed starts return to Trump’s packing at least half the time | 1 | 75m agent, 1.3m cpu |
-| [H-020](campaign/hypotheses/H-020-oblique-record-finding-n17.md) | **refuted** | The annealer reaches the standing best at `n = 17`, the nearest oblique record | 1 | 6.8m cpu |
+| [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) | **confirmed** | Trump’s tested shared-tilt slice has a corner at the published optimum | 1 | 10m agent |
+| [H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 4 | 190m agent, 4.9m wall |
+| [H-016](campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md) | **refuted** | The stock annealer reaches the standing best on every instance cell | 4 | 10.2m wall |
+| [H-018](campaign/hypotheses/H-018-basin-entry.md) | **refuted** as stated | Perturbed starts return to Trump’s packing at least half the time | 1 | 75m agent, 1.3m wall |
+| [H-020](campaign/hypotheses/H-020-oblique-record-finding-n17.md) | **refuted** | The annealer reaches the standing best at `n = 17`, the nearest oblique record | 1 | 6.6m wall |
 | [H-001](campaign/hypotheses/H-001-angle-class-reduction.md) | blocked | Angle-class reduction beats free `3n`-dimensional annealing | 0 | — |
 | [H-011](campaign/hypotheses/H-011-small-n-census.md) | blocked | The small-`n` landscape is censusable | 0 | — |
 | [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) | blocked | Record basins are rare in quench measure | 0 | — |
@@ -857,9 +873,10 @@ view; this section is the reading of it.
 
 ### Confirmed
 
-**[H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md)—the angle objective is
-non-smooth at the optimum.** Registered by the runner of `exp-006` *before* recording
-that round, because the round measured something `H-002` did not predict; confirmed by
+**[H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md)—Trump’s tested shared-
+tilt slice is non-smooth at the published optimum.** Registered by the runner of
+`exp-006` *before* recording that round, because the round measured something `H-002`
+did not predict; confirmed by
 [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md).
 Elaborated in [The Corner](#the-corner-and-the-method-it-forced) above.
 It is the campaign’s first confirmed claim, and the one that changed a method.
@@ -932,9 +949,9 @@ families and the dead ends.
 
 ## Experiments Conducted
 
-Ten rounds, all in `series-000`, **275 agent-minutes and 16.4 cpu-minutes** in total.
-Two instruments: `sqsearch` 0.1.0 (the `f64` screening annealer) and `sqpack.quench`
-(0.1.0 with angle descent, 0.2.0 with class bracketing).
+Eleven rounds, all in `series-000`, **275 agent-minutes and 23.0 wall-minutes** in
+total. Two instruments: `sqsearch` 0.1.0 (the `f64` screening annealer) and
+`sqpack.quench` (0.1.0 with angle descent, 0.2.0 with class bracketing).
 
 No round has been run at the `exact` tier, so **no result below claims anything about a
 record**, and none may.
@@ -949,7 +966,7 @@ archive beside it.
 | [exp-001](campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md) | 10, 11, 12 | sweep | H-016 | annealer | gaps `+4.19e-04`, `+3.73e-02`, `0` | rejected |
 | [exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md) | 10 | positive control | H-016 | annealer | `3.7075262001`, gap `+4.194e-04` | rejected |
 | [exp-003](campaign/series/series-000-smoke-and-calibration/experiments/exp-003-baseline-n11-target.md) | 11 | target | H-016 | annealer | `3.9144165418`, gap `+3.733e-02` | rejected |
-| [exp-004](campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md) | 12 | negative control | H-016 | annealer | exactly `4.0`, all five seeds | accepted |
+| [exp-004](campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md) | 12 | open-case calibration | H-016 | annealer | exactly `4.0`, all five seeds | accepted |
 | [exp-005](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 11 | target | H-018 | annealer | 0/40 returns; `max_dev ≈ 11·ε`, no threshold | rejected |
 | [exp-006](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 5, 10, 11 | sweep | H-002 | quench 0.1.0 | 1.1–1.3× only; single cell `4.441e-16` | rejected |
 | [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | 5 | positive control | H-002 | quench 0.2.0 | `3.19e-08 → 2.2204e-15` | **accepted** |
@@ -972,15 +989,15 @@ archive beside it.
 | exp-008 | 5 seeds, 30 s each | 67.0 s | 20 m | criterion | `8b450a1` |
 | exp-009 | 5 seeds, 30 s each | 150.0 s | 30 m | criterion | `8b450a1` |
 | exp-010 | 11 probes | 1.0 s | 10 m | criterion | `8b450a1` |
-| exp-011 | 4e9 moves | 408.0 s | 0 m | criterion | `60a50cc` |
+| exp-011 | 4e9 moves | 397.474 s | 0 m | criterion | `60a50cc` |
 
 ### What the eleven rounds jointly establish
 
-**The instrument works, and the controls discriminate.** The positive controls now
-resolve to machine precision under the bracketing quench; the negative control returns
-exactly `4.0` and never below.
-Every configuration that leaves any component is checked by `sqpack` through code it
-does not share.
+**The instrument works on the proved positive controls.** They now resolve to machine
+precision under the bracketing quench.
+The `n=12` calibration returns exactly `4.0`, but that is not a known-answer guard.
+The runner’s full-pose independent verification boundary remains open under
+[D-044](defects.md); a producer-reported overlap scalar does not close it.
 
 **The refiner is not the problem, and the proposer is.** The single strongest pattern in
 the record: the same refiner takes `n = 5` and `n = 10` to `1e-15` and leaves `n = 11`
@@ -1009,7 +1026,7 @@ table above.
   because the first fix left no regression check).
   Their numbers stand; the ledger’s sweep coverage misreported them until the successor
   rounds split the cells.
-- **[D-021](defects.md) is open.** The `polished` tier has a noise floor of about
+- **[D-021](defects.md) is contained.** The `polished` tier has a noise floor of about
   `1e-11` in the side, and eight rounds sit on it.
   Nothing at that tier may claim a difference smaller than the floor.
 
@@ -1017,46 +1034,84 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Thirty-five defects, [one line each](defects.md), generated from `defects.yaml` and
+Seventy-nine defects, [one line each](defects.md), generated from `defects.yaml` and
 checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 8 | asserted something false about the mathematics |
-| validity | 7 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 15 | recorded something its own evidence contradicts |
-| robustness | 4 | did not finish, or finished only by luck |
-| performance | 1 | worked, but cost far more than it should |
+| soundness | 28 | asserted something false about the mathematics |
+| validity | 16 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 26 | recorded something its own evidence contradicts |
+| robustness | 7 | did not finish, or finished only by luck |
+| performance | 2 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Six of the eight soundness defects pointed in the *flattering* direction**, where the
-error looks like a success.
+**Twenty-one of the twenty-eight soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught one defect in thirty-five, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught two defects in seventy-nine, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. The one the gate did catch ([D-024](defects.md)) is a bookkeeping defect,
-found by a contiguity check—which is the pattern, not an exception: gates are good at
-the mechanical classes and have never once caught the mathematics being wrong.
+*surprised*. The two the gate did catch ([D-024](defects.md) and [D-064](defects.md))
+are bookkeeping and robustness defects, found by a contiguity check and an integration
+run—which is the pattern, not an exception: gates are good at the mechanical classes and
+have never once caught the mathematics being wrong.
 
-The two newest entries sharpen the point rather than softening it, and both were caught
-by a **control cell** — a case whose answer was known before the code existed.
-[D-030](defects.md), the quench’s angle window narrowing on a schedule so a cold start
-could never arrive, showed up at `n = 5`: the census kept landing at `3.078` against a
-proved `2.707107`. [D-031](defects.md), basin identity splitting an angle at the `π/2`
-seam, showed up at `n = 3`, where the whole census is small enough to read by hand and
-two rows were visibly the same packing a quarter turn apart.
-In both cases the structural invariants around the store passed green throughout,
-because they check the store and not what it is fed.
+The entries from D-030 onward sharpen the point rather than softening it.
+D-030 and D-031 were caught by proved control cells while structural store checks stayed
+green; D-032 and D-033 came from rehearsing recovery paths that had shipped unrun; D-034
+found the endpoint-isolation assumption; D-035 found destructive negative-control
+residue; D-036 found a timeout reported as convergence; and D-037 separated real census
+counts from a checker’s synthetic re-offers.
+D-038 separated scalar recognition from an oracle; D-039 separated side precision from
+component resolution; D-040 made rarity conditional on a durable `P/Q/E` regime; D-041
+rejected rank-free rigidity and dimension claims; and D-042 exposed `n = 12` as an open
+target masquerading as a negative control.
+
+The systematic crosswalk then records every remaining technical finding from the PR #14
+review. D-043 closes the archive-before-validation path; D-044 leaves independent pose
+validity open; D-045 tracks criterion-specific evaluators; D-046 tracks the incomplete
+runner state machine; D-047 closes contact-key reflection; D-048 retains unstable
+tolerance/equality semantics; D-049 tracks factorial canonicalization; D-050 and D-051
+separate observation promotion from regime-safe merging; D-052 narrows quench
+stationarity; D-053 protects the generic exact-field boundary; D-054 separates budgets
+and final-best records from trajectory claims; D-055 and D-056 correct the angle and
+`m²-3` theorems; D-057 scopes H-020; D-058 reconciles the local handover; D-059 keeps
+the golden oracle/characterization split open; D-060 restores producer-level strict
+checks; and D-061 preserves evidence for unrecognised endpoints.
+D-062 catches the executable `n=12` rejection that survived the first D-042 correction;
+D-063 removes a false contrapositive from the rigidity premise; and D-064 keeps a
+read-only runner preflight executable inside the gate that mutation-tests it without
+opening the gate to live campaign execution.
+D-065 removes the last repeated numeric gate claim from the README and reconciles its
+remaining qualitative claim to the defect source.
+
+D-066 catches the active baseline script repeating the stale `n=12` control claim.
+D-067 and D-068 restore the omitted eleventh-round wall time and stop calling elapsed
+time CPU time; D-069 reconciles H-002 with the four rounds that already measured its
+quench; and D-070 restores exp-011’s execution revision and makes future timing and
+provenance survive the execute/record boundary.
+D-071 remains open because the numerical runner’s generated session report still
+overwrites its predecessor; versioned agent-session artifacts now preserve the outer
+delegation loop separately.
+D-072 closes the two direct runner commands that bypassed the cooperative gate marker,
+and D-073 wires those new session artifacts into the filename/id invariant.
+D-074 corrects the first D-070 regression claim: receipt parsing alone did not exercise
+the terminal artifact mapping, which is now centralized and mutation-tested.
+D-075 narrows PR #16’s cross-environment mismatch to what its aggregate output actually
+establishes; D-076 keeps the `n=5` six-of-six observation from deciding among identity,
+landscape, stationarity, and numerical explanations; D-077 replaces a stale serial
+handoff with current parallel lanes; and D-078/D-079 complete the rank and implication
+corrections in that response.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Nine fixes left no regression check behind, and that list has already predicted a
+Twenty-one fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
@@ -1080,21 +1135,24 @@ assumption, neighbour-transfer seeding, and quality-diversity retention—none b
 **The premise is still untested, and now blocked on a harder question than expected.**
 Everything the strategy layer recommends rests on record basins being rare in quench
 measure, and [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is the
-measurement that would refute it. The quench is now sound enough to run it. What is not
-settled is what a basin *is*.
+measurement that would refute it.
+The quench is now sound enough to run it.
+What is not settled is what a basin *is*.
 
-[D-034](defects.md) is the open defect that says so. Two rows of the `n = 5` census are
-the same packing — same side to twelve decimals, same closed form `(4 + 5√2)/4`, same
-contact certificate byte for byte — stored as two basins. They are not split by float
-noise: the configuration is **not rigid**, with 11 contact constraints against 16 degrees
-of freedom, so the optimum at that side is a positive-dimensional *family* and different
-quenches land on different members. The geometric key encodes coordinates the optimum
-never determined.
+[D-034](defects.md) is the open defect that says so.
+The exact `n=3` side-2 sliding family proves that one connected optimal set produces
+many geometric keys while retaining one contact certificate.
+At `n=5`, two rows also share side, short form, contact certificate, angle signature,
+and contact count while differing geometrically.
+That is strong evidence of unresolved terminal identity, but raw contact counts do not
+prove an exact family dimension and matching side/contact data do not prove the two rows
+are path-connected; a rigidity-matrix rank and continuation test must decide those
+claims.
 
 So `distinct_basins` currently counts family members, the discovery curve cannot
-plateau, and H-011's saturation criterion is unreachable until the definition is fixed.
+plateau, and H-011’s saturation criterion is unreachable until the definition is fixed.
 The three candidate definitions are written up on `think-1s0h`; none is a code tweak,
-because this is the deliverable's own shape.
+because this is the deliverable’s own shape.
 Until that is settled and the census runs, the cartography program is a well-argued bet
 rather than a finding.
 
@@ -1109,10 +1167,11 @@ and an exact rational LP is the fix.
 
 **One open defect makes the toolchain unsafe to leave alone overnight.**
 [D-035](defects.md): `negctl` corrupts a tracked source file in place to prove a guard
-fires, and restores it in a `finally:` block that a SIGKILL does not run. An interrupted
-gate leaves a *deliberately subtle, deliberately flattering* mutation in the tree — on
-2026-08-23 it left the D-031 basin-splitting bug — where the next `git add -A` would
-commit it. Fix this before any unattended session that commits on a cadence.
+fires, and restores it in a `finally:` block that a SIGKILL does not run.
+An interrupted gate leaves a *deliberately subtle, deliberately flattering* mutation in
+the tree — on 2026-08-23 it left the D-031 basin-splitting bug — where the next
+`git add -A` would commit it.
+Fix this before any unattended session that commits on a cadence.
 
 ## References
 

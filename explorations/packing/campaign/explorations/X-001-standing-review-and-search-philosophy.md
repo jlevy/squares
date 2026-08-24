@@ -46,15 +46,16 @@ angles reproduced `s(11)` to solver precision and every centre to `9e-16`.
 
 **[A Search Philosophy for Square Packing](../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)**
 — the strategy layer.
-Records are rigid; rigid optima live in rare basins; so scaling a volume-weighted
-sampler multiplies effort against a probability the problem drives toward zero.
+Its registered premise is that record packings are unusually constrained and may have
+low hit probability under named baseline proposers; H-012 must measure that conditional
+claim before it is treated as a fact.
 The response is cartography: **the map is the deliverable and records are corollaries.**
 
-**Amended 2026-08-23.** The premise says records are rigid, which means it has always
-implied that other optima may not be. Non-rigid optima are **flat basins** — families,
-not points — and a map that counts them as basins is counting its own quantizer. See
-[D-034](../../defects.md); this is a precondition on the deliverable, not a detail of
-its implementation.
+**Amended 2026-08-23.** Optima need not be isolated points.
+The exact `n = 3` sliding family proves that a map keyed by terminal coordinates can
+count its own quantizer; `n = 5` supplies an unresolved warning but not a rank or
+connectivity proof. See [D-034](../../defects.md); terminal-component identity is a
+precondition on the deliverable, not a detail of its implementation.
 
 ## What has been codified so far
 

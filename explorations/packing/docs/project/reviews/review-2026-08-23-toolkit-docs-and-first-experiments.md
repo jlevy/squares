@@ -316,9 +316,10 @@ Tier S.
 H-11 through H-15 were added later the same day as the boil-down of
 [A Search Philosophy for Square Packing](../research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
 — the strategy layer captured after this review was first committed.
-They share one premise (record basins are rare because records are rigid, so the basin
-*atlas* is the deliverable and records are corollaries), and they are ordered so that
-the premise itself is tested first and in the cheapest tier.
+They share one registered premise: record components may have low hit probability under
+named proposer/quench regimes, so a terminal-component atlas may be more useful than raw
+throughput. They are ordered so that the premise itself is tested first and in the
+cheapest tier rather than inferred from rigidity.
 
 **H-11 · The small-`n` landscape is censusable.** *LP-quenching multistarts at `n ≤ 10`
 yields a basin count that saturates: the discovery curve plateaus within tier-S budget,

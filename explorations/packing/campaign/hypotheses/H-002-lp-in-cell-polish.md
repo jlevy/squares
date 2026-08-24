@@ -21,31 +21,44 @@ hypothesis:
     direction: lower
     threshold: 1e-12 against the analytic value
   instrument: >-
-    Not yet built. A scipy LP over the fixed-angle cell (the review implemented the
-    single-cell half: 1056 constraints at Trump's angles), wrapped in an angle-move loop.
-  instrument_ready: false
-  regime: perturbed starts from known optima; n = 5, 10, 11
+    Built: sqpack/quench.py and run_quench.py. A scipy HiGHS LP solves a fixed-angle,
+    fixed-axis cell; the quench re-reads the cell and uses local angle descent or
+    class-bracketing search.
+  instrument_ready: true
+  regime: annealer outputs at n = 5, 10, 11; LP values are numerical screens, not certificates
   instance: {axis: n, point: 11}
   sweep: {axis: n, points: [5, 10, 11]}
   priority: 1
-  cost_estimate: tier S (1e9 pair-tests)
+  cost_estimate: tier M (five seeds, up to 30 s per quench)
   prereqs: []
   replication: false
   registered: retroactive
   notes: >-
-    The single-cell half is already established, not hypothesised: the standing review's
-    1056-constraint LP at Trump's angles reproduced s(11) to solver precision and every
-    centre to 9e-16. What remains under test is the LOOP - angle moves between LP solves,
-    and behaviour at cell boundaries. Kill: cycling between cells, or systematic gaps to
-    the analytic optima.
+    Refuted as a universal claim by exp-006 and exp-009. The fixed-cell LP reproduces
+    the n = 11 reference at its supplied angles to 4.4e-16, and class-bracketing reaches
+    machine precision from the tested annealer outputs at n = 5 and n = 10 (exp-007 and
+    exp-008). At n = 11 the same local procedure remains 6.29e-02 above the standing
+    best (exp-009). This supports a local polishing and diagnostic role, not global
+    convergence or a unique basin identity.
 ---
-# H-002 — the highest-priority item in the registry
+# H-002 — LP-in-cell polish is exact and sufficient
 
-Nearly everything waits on this.
-Basin identity is unstable without a refiner, because “where the annealer stopped” is a
-property of the cooling schedule rather than of the landscape.
-The census, the rarity premise, the descriptors and the atlas all need a quench map with
-a well-defined endpoint.
+The original universal claim is **refuted**. The implemented quench is valuable in a
+narrower role: it gives a numerical local refinement and shows when a tested start
+remains far above the target after that refinement.
+It does not make basin identity canonical, does not cross basin boundaries, and does not
+replace certification.
+
+On the tested annealer outputs, class-bracketing reaches the analytic values to machine
+precision at `n = 5` and `n = 10`
+([exp-007](../series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md)
+and
+[exp-008](../series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md)).
+At `n = 11`, it remains `6.29e-02` above the standing best
+([exp-009](../series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md)).
+For these tested starts, the contrast distinguishes a residual the quench can remove
+from one it cannot; it does not prove that the latter start lies in a different basin or
+establish a global landscape partition.
 
 ## The result this rests on is already verified
 
@@ -55,15 +68,28 @@ linear inequalities, containment is linear, the objective is linear.
 All of this problem’s nonconvexity lives in the angles and in the combinatorial choice
 of cell.
 
-The standing review implemented it: a 1,056-constraint LP at Trump’s eleven angles, with
-the axis assignment read from the exact certificate, returned `s = 3.877083590023` —
-matching the reference below `1e-12` — and recovered all eleven centres to `9e-16`. The
-cell containing Trump’s packing, solved as an LP, *is* Trump’s packing.
+The fixed-cell solve was independently reproduced in
+[exp-006](../series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md):
+at the supplied angles of the standing `n = 11` packing it returns a side within
+`4.4e-16` of the reference.
+This is a solver-precision numerical result for that supplied cell, not an algebraic
+certificate or evidence that all starts with those angles reach that cell.
 
 ## Why this campaign needs it specifically
 
 [exp-001](../series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md)
-found the right basin at `n = 10` and stopped `4.19e-04` short of the proved optimum — a
-polish failure, not an exploration failure, and the exact defect this hypothesis fixes.
-It is also the campaign’s missing tier 2: without it, no screening result can be
-sharpened into something the exact layer can certify.
+found a near-optimal `n = 10` start.
+Class-bracketing then reached the proved analytic value on the tested outputs, whereas
+finite-difference descent did not.
+In contrast, the `n = 11` outputs tested in
+[exp-006](../series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md)
+and
+[exp-009](../series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md)
+remain far from the standing best after local polishing.
+A quench can therefore screen and sharpen a candidate before the exact layer, but only
+the exact verifier can certify it and the quench does not solve the problem of proposing
+the right basin.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
