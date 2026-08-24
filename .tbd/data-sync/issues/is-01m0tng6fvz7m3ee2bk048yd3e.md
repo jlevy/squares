@@ -1,0 +1,23 @@
+---
+type: is
+id: is-01m0tng6fvz7m3ee2bk048yd3e
+title: Certify a two-parameter exact n=5 optimal sheet
+kind: task
+status: in_progress
+priority: 0
+version: 2
+spec_path: explorations/packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
+delegate: unknown@spud10.local
+labels:
+  - packing
+  - basin-cartography
+  - research
+dependencies: []
+parent_id: is-01m0tn3kqe19evm1r40wgnpb61
+hold: null
+hold_until: null
+created_at: 2026-08-24T19:56:01.402Z
+updated_at: 2026-08-24T19:56:09.555Z
+started_at: 2026-08-24T19:56:09.554Z
+---
+Bounded child of think-1q3g. Certify an explicit two-parameter sheet through exp-033: t=tan(theta0/2), |t|<=1/100; e(t)=|t|(1-|t|)/(1+t^2); u in [e(t), 3sqrt(2)/2-2-e(t)]; square 0 has center (1/2+u,5/2-sqrt(2)/4+u) and angle 2 atan(t), while squares 1..4 remain fixed. Acceptance: prove the parameter strip nonempty; exact uniform containment and SAT margins for all pairs; exact Q(sqrt2) verification of all four t=±1/100 boundary fixtures; replay the unchanged six-row LP dual whose support avoids square 0; independent retained replay and mutations for excessive angle, unshrunk endpoints, signed-vs-absolute support, and dual drift. Scope only a fixed-cell optimal sheet, not full stationarity or component completeness.
