@@ -5,7 +5,7 @@ title: Make the square-packing frontier transparent, complete, and reusable
 kind: epic
 status: open
 priority: 1
-version: 9
+version: 14
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -22,7 +22,12 @@ child_order_hints:
   - is-01m0tyqhned2mpbrv6a2fdtfrx
   - is-01m0tyqhyhcvcvh5e9j8p2ps0y
   - is-01m0tyqj7srczg0jvc4za541dw
+  - is-01m0tyy5k7e4ags20c1fxqth7f
+  - is-01m0tz23d5r6xb901bn764en9w
+  - is-01m0tz2wgbnct1d681tejb3ccw
+  - is-01m0tz8tx11drbgs8hb2092nkt
+  - is-01m0tz8txqbfr7v3z93tffjaq0
 created_at: 2026-08-24T22:36:47.654Z
-updated_at: 2026-08-24T22:37:19.992Z
+updated_at: 2026-08-24T22:46:45.942Z
 ---
 Holistic improvement program for the square-packing reader and contributor journey. Make the current record frontier effortless to inspect; distinguish provenance and reproducibility from numerical and formal assurance; keep public-source coverage auditable and current; and provide general, validated entry points for importing, viewing, and checking new witnesses without tailoring the system to one n=29 example. Add no process or metadata without a named reader, correctness, or maintenance benefit. All implementation lands as stacked PRs. Acceptance: one obvious path answers what is known for each n and at what evidence level; the frontier remains schema- and drift-validated; terminology does not imply rigor it has not earned; source-coverage gaps are explicit and dated; and a documented toolkit path can assess supported external witnesses with honest failure modes.

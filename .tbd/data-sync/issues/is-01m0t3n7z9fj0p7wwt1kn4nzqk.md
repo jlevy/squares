@@ -5,7 +5,7 @@ title: Execute and document the 8-hour autonomous basin-map campaign
 kind: task
 status: in_progress
 priority: 0
-version: 40
+version: 41
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -29,8 +29,9 @@ child_order_hints:
   - is-01m0ty1naraaja1z2s2s6cyeqj
   - is-01m0ty5dqwk4h5rfqkx2bp3kqw
   - is-01m0tyjqtxk5dxzj3h0xdx1td8
+  - is-01m0tz8s4yps8zgqwk8cng9qnx
 created_at: 2026-08-24T14:44:12.384Z
-updated_at: 2026-08-24T22:34:41.884Z
+updated_at: 2026-08-24T22:46:44.125Z
 ---
 Own the 2026-08-24 eight-hour goal from launch audit through durable results. Acceptance: reconcile the exact n-sequence and complete-vs-sampled map definition; close only launch-path tooling gaps; supervise one end-to-end round and forced failure; price the queue on this host; run and record every scientifically admissible cell until the wall budget, queue, or a declared stop fires; commit and push bounded checkpoints; monitor PR feedback; and finish with generated session, ledger, defect, bead, and PR state in sync. Never label endpoint-key saturation a complete basin map without the component identity and uncertainty criteria.
 
