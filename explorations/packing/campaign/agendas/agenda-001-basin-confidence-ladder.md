@@ -238,20 +238,28 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [5]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Are the equal-side n=5 candidates connected in the stationary set, and what
       verified minimax clearance connects unequal-side candidates?
     hypotheses: [H-023]
     budget: one 30m local-geometry slice per declared candidate pair; retain partial bounds
-    entry: BC-003 and BC-009 complete; full poses and active cells archived
+    entry: >-
+      BC-003 and BC-009 complete; exp-033 binds the first declared pair to exact poses
+      and preregisters its common-cell test on committed instrument 26360f1
     exit: certified connection, certified separation bound, or explicit ambiguity interval
     bead: think-1s0h
     depends_on: [BC-003, BC-009]
-    next_evidence: active-system rank/nullity, tangent checks, continuation trace, and poses
+    next_evidence: exp-033 exact fixed-angle face generation and independent replay
     parallel_group: identity
-    note: This is the first genuine basin-structure experiment in the ladder.
+    note: >-
+      This is the first genuine basin-structure experiment in the ladder. Exp-033 tests
+      only the equal-side pair's fixed-angle LP face; full stationary connectivity and
+      unequal-side minimax clearance remain later bounded slices.
+    artifacts:
+    - tools/check_n5_equal_side_face.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

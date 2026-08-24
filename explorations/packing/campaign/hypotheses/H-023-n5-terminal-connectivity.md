@@ -33,7 +33,9 @@ hypothesis:
     2.70710678 optimum and only the first two share a side. A feasible path need not be
     a path in the terminal set. This question therefore separates same-level terminal
     connectivity for that pair from the weaker clearance-connectivity question for
-    unequal-side candidates.
+    unequal-side candidates. Exp-033 preregisters a narrower first test: whether the
+    equal-side pair shares one exact fixed-angle LP optimal face. Acceptance would be
+    partial evidence, not a complete answer to this hypothesis.
 ---
 # H-023 — resolve the first ambiguous census cell
 

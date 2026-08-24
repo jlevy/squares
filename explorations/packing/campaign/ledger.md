@@ -33,7 +33,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | BC-007 | tool_validation | 9 | complete | 2 | think-xzew | retained event plus canonicalization share of wall time |
 | BC-008 | tool_validation | 10 | complete | 1 | think-ouf0 | permanent exp-031 semantic replay in the focused and normal gates |
 | BC-009 | measurement_validation | 3, 4 | complete | 0 | think-a2v6 | classifier contract, positive fixtures, and negative mutations |
-| BC-010 | research | 5 | blocked | 0 | think-1s0h | active-system rank/nullity, tangent checks, continuation trace, and poses |
+| BC-010 | research | 5 | ready | 0 | think-1s0h | exp-033 exact fixed-angle face generation and independent replay |
 | BC-011 | measurement_validation | 5, 6, 7, 8 | blocked | 1 | think-0yo9 | ambiguity-preserving classified event archive through the first failed or n=8 cell |
 | BC-012 | research | 5, 6, 7, 8 | blocked | 1 | think-ogv7 | discovery curves, held-out predictions, uncertainty, and stop verdict |
 | BC-013 | measurement_validation | 9, 10 | blocked | 2 | think-xzew | component discoveries per wall-second and per pair-test with profile |
@@ -44,7 +44,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 32 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 33 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -72,7 +72,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
 | H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6* 7* 8* | 14 | 106m agent + 4.0m wall |
 | H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
-| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 0 |  |
+| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 1 |  |
 | H-024 | refuted | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
 | H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
 | H-026 | confirmed | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 | 100m agent + 57s wall |
@@ -146,6 +146,12 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-033 | series-000 | 5 | openai-codex | H-023 | The acceptance rule is frozen before generation or replay. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -156,5 +162,5 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 ## Effort
 
-32 rounds, 803 agent-minutes, 28.2 wall-minutes.
+33 rounds, 803 agent-minutes, 28.2 wall-minutes.
 

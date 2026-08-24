@@ -1206,18 +1206,19 @@ Exp-031 completes its four-perturbation known-answer experiment at 4/4 converged
 independently valid, and admissible.
 Exp-032 completes BC-009: exact `n = 3` and `n = 4` component controls pass while all 16
 retained f64 observations remain unresolved.
-The next admitted cell is one bounded BC-010 `n = 5` connectivity question, not a
-component census.
+Exp-033 preregisters the first bounded BC-010 `n = 5` connectivity slice: an exact
+fixed-angle face test for the equal-side pair, not a component census.
 
 ## Experiments Conducted
 
-There are 32 rounds registered in `series-000`; all are terminal.
-They record 803 agent-minutes and 28.2 wall-minutes.
+There are 33 rounds registered in `series-000`; 32 are terminal and exp-033 is in
+progress. They record 803 agent-minutes and 28.2 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
 checker, the exact Stromquist printed-set falsifier, and the exact repaired-cover
 certificate, and the exact terminal-component known-answer checker.
+Exp-033 adds an exact `n = 5` fixed-angle face checker once its frozen criterion runs.
 
 No search round has been run at the `exact` tier, so **no result below claims a new
 record**. Exp-012 is an exploratory reconstruction of a published record witness; its
@@ -1262,6 +1263,7 @@ archive beside it.
 | [exp-030](campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md) | 9 | positive control | H-021 | BasinEvent/v3 semantic replay | 1 retained/valid typed time-budget stop; full command 21.36 s | **baseline** |
 | [exp-031](campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md) | 10 | positive control | H-002 | source-bound BasinEvent/v3 replay | 4/4 admissible; max proved-side error `2.221e-15` | **baseline** |
 | [exp-032](campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md) | 3 | positive control | H-021 | exact component-policy replay | one n=3 interval; one n=4 point; 8/8 false policies rejected | **baseline** |
+| [exp-033](campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md) | 5 | target | H-023 | exact fixed-angle face test | criterion frozen; generation not yet run | **in-progress** |
 
 ### Cost and provenance
 
@@ -1299,8 +1301,9 @@ archive beside it.
 | exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
 | exp-031 | 4 seeds, 15 s each | 10.337 s | 5 m | criterion | `dab797c` |
 | exp-032 | exact n=3/n=4 models + 8 mutations | 0.92 s | 10 m | criterion | `d3d4ace` |
+| exp-033 | one exact common-cell face + mutations | — | — | in progress | `26360f1` |
 
-### What the thirty-two rounds jointly establish
+### What the 32 terminal rounds establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only
