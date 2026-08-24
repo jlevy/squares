@@ -206,10 +206,12 @@ agenda:
     note: >-
       A one-second run-path smoke test reached a valid endpoint at the proved side and
       replayed its source binding, but correctly remained non-admissible after a typed
-      time-budget stop. This validates the entry point, not the BC-008 exit criterion.
+      time-budget stop. Exp-031 now owns the preregistered four-perturbation measurement;
+      the smoke validates the entry point, not the BC-008 exit criterion.
     artifacts:
     - sqpack/packings/gobel10.py
     - tools/basin_census.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md
   - id: BC-009
     purpose: measurement_validation
     owner_focus: correctness

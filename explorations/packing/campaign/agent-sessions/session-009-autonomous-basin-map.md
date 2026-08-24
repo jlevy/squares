@@ -38,9 +38,9 @@ session:
       Historical v2 events remain blocked as recorded. BasinEvent/v3 now retains
       complete tool-validation blocks through n=8, one bounded n=9 performance event,
       and source-bound n=10 starts tied to the published Göbel pose. The n=10 entry point
-      passes static checks, semantic replay, and a one-second run-path smoke test; BC-008
-      remains unrun until its four perturbations are preregistered. The number of
-      component-classified map cells remains zero, so no complete-map claim follows.
+      passes static checks, semantic replay, and a one-second run-path smoke test;
+      exp-031 preregisters BC-008's four perturbations but has not run them. The number
+      of component-classified map cells remains zero, so no complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -174,6 +174,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
@@ -294,10 +295,14 @@ session:
     source URL and SHA-256, retains deterministic perturbations, and rejects changed
     source or start data. All 36 historical events still replay. A one-second real run
     reaches a valid optimal-side endpoint and retains a typed producer time stop.
+  - >-
+    Exp-031 preregisters four fixed source perturbations at scale 1e-4, a 15-second
+    per-seed budget, a 90-second process cap, and the distinction between optimal-side
+    validity and producer convergence before observing the four outcomes.
   stop_reason: null
   next_action: >-
-    Preregister BC-008's four source-bound n=10 perturbations, commit that criterion,
-    then run under the declared 90-second command cap. Do not resume blind random starts.
+    Execute preregistered exp-031 only under its declared 90-second command cap, replay
+    every retained event, and stop rather than changing its criterion or seeds.
 ---
 # Session 009 — Bounded Progress Before Scale
 

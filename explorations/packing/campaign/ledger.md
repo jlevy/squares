@@ -14,7 +14,7 @@
 | [session-006](agent-sessions/session-006-h026-exact-tangent.md) | completed | insight | think-qd9t | 2 | Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and move the fast rotation to H-032's exact n=3 quotient-family control. |
 | [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | insight | think-n82j | 3 | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | correctness | think-ciwv | 3 | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
-| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 9 | Preregister BC-008's four source-bound n=10 perturbations, commit that criterion, then run under the declared 90-second command cap. Do not resume blind random starts. |
+| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 9 | Execute preregistered exp-031 only under its declared 90-second command cap, replay every retained event, and stop rather than changing its criterion or seeds. |
 
 ## Experiment agendas
 
@@ -44,14 +44,14 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 30 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 31 | First series. There is no prior instrument, so not |
 
 ## Registry
 
 | id | status | lane | claim | sweep | rounds | spent |
 | --- | --- | --- | --- | --- | --- | --- |
 | H-001 | blocked | search | A proposer restricted to at most three learned angle classes, followed | n: 5 10 17 11 | 0 |  |
-| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 4 | 190m agent + 4.9m wall |
+| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 5 | 190m agent + 4.9m wall |
 | H-003 | blocked | search | Under one versioned proposer, quench, and terminal-component relation, | n: 5 6 7 8 9 10 11 | 0 |  |
 | H-004 | blocked | search | At n = 11, seeds constructed by adding a square to the proved n = 10 p | n: 11 | 0 |  |
 | H-005 | blocked | search | A Cleemann-style construction using a 3-4-5 tilt packs 97 unit squares | n: 78 97 | 0 |  |
@@ -144,6 +144,12 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-029 | series-000 | 8 | openai-codex | H-021 | The complete block retains and replays without a launch-path failure. Three typed stops make the cell unsuitable for basin-frequency or completeness claims under D-126, and endpoint keys remain observations rather than components. |
 | exp-030 | series-000 | 9 | openai-codex | H-021 | The complete event path stays below the 30-second profile trigger and retains its nonconverged outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional n=9 samples are authorized by this performance cell. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-031 | series-000 | 10 | openai-codex | H-002 | Preregistered before the four-event measurement. A fully retained typed stop is a criterion miss even if its endpoint reaches the proved side; an outer timeout or missing event invalidates the round rather than censoring the failed seed. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -154,5 +160,5 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 ## Effort
 
-30 rounds, 788 agent-minutes, 28.0 wall-minutes.
+31 rounds, 788 agent-minutes, 28.0 wall-minutes.
 

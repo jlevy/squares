@@ -2,7 +2,7 @@
 
 # Defect log
 
-183 defects recorded across the packing toolchain.
+185 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `control_cell` | 15 | a cell of the sweep whose answer is known in advance |
 | `review` | 121 | a human or agent reading the work against a checklist |
 | `anomaly` | 6 | a result that made no sense, chased down |
-| `inspection` | 19 | reading the code or the design with intent |
+| `inspection` | 21 | reading the code or the design with intent |
 | `drift_check` | 12 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 7 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 7 of 183, and none of the 61 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 7 of 185, and none of the 61 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,16 +35,16 @@ The line worth reading twice: **the automated gate caught 7 of 183, and none of 
 | quench | 18 |
 | verifier | 4 |
 | record | 48 |
-| tooling | 39 |
-| docs | 65 |
+| tooling | 40 |
+| docs | 66 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
 | soundness | 61 |
-| validity | 53 |
-| bookkeeping | 49 |
+| validity | 54 |
+| bookkeeping | 50 |
 | robustness | 15 |
 | performance | 5 |
 
@@ -340,3 +340,5 @@ This is the actionable list.
 | [D-181](SYNOPSIS.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The basin definition called a deterministic quench endpoint a non-point |
 | [D-182](TUTORIAL.md) | 2026-08-24 | docs | validity | conservative | `review` | medium | fixed | The strategy tutorial excluded safe loss shaping and all repeated endpoint hits |
 | [D-183](tools/basin_census.py) | 2026-08-24 | record | robustness | flattering | `control_cell` | high | fixed | The basin-event batch crashed before retaining an independently invalid endpoint |
+| [D-184](tools/check_synopsis.py) | 2026-08-24 | tooling | validity | conservative | `inspection` | low | fixed | Overlapping synopsis excerpts were mistaken for a duplicate experiment row |
+| [D-185](tools/check_synopsis.py) | 2026-08-24 | docs | bookkeeping |  | `inspection` | medium | fixed | The synopsis carried stale defect-direction and gate-detector aggregates |

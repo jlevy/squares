@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 183
+count: 185
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4685,3 +4685,54 @@ defects:
     rewriting exp-026.
   bead: think-78ws
   recorded_in: tools/basin_census.py
+- id: D-184
+  title: Overlapping synopsis excerpts were mistaken for a duplicate experiment row
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: inspection
+  latent_for: minutes; corrected before commit
+  severity: low
+  status: fixed
+  what: >-
+    A review command printed lines 1188-1285 and then 1285-1365. The shared boundary
+    printed exp-024 twice, and the reviewer initially treated that display artifact as
+    a duplicate in the source. Direct `rg`, a non-overlapping excerpt, and `git show`
+    confirmed that the file contained exactly one row.
+  consequence: >-
+    The review opened a false defect and began an unnecessary correction, which could
+    have left a durable false criticism of a sound record.
+  fix: >-
+    Retract the source claim before commit and require every registered experiment id to
+    occur exactly once in both synopsis tables, so the source—not an excerpt—is the
+    adjudicator for future duplicate suspicions.
+  regression: >-
+    tools/check_synopsis.py counts both tables independently; a negative control
+    duplicates one cost row and requires the check to fail.
+  bead: think-h1wm
+  recorded_in: tools/check_synopsis.py
+- id: D-185
+  title: The synopsis carried stale defect-direction and gate-detector aggregates
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: twenty-two defect additions
+  severity: medium
+  status: fixed
+  what: >-
+    The synopsis still said 45 of 55 soundness defects were flattering and that the
+    automated gate caught 6 defects in 161. Before this correction defects.yaml derived
+    50 of 61 and 7 of 183; after D-184 and this entry the total is 185.
+  consequence: >-
+    The program's own process summary understated both the prevalence of flattering
+    mathematical errors and the small number of defects found by ordinary gates.
+  fix: >-
+    Reconcile the prose and derive the soundness-direction and gate-detector aggregates
+    from defects.yaml in the synopsis checker.
+  regression: >-
+    Focused negative controls change each displayed aggregate and require
+    tools/check_synopsis.py to report the derived mismatch.
+  bead: think-m3io
+  recorded_in: tools/check_synopsis.py

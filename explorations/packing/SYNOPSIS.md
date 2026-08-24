@@ -1199,14 +1199,15 @@ It labels every cell as tool validation, measurement validation, or genuine rese
 The event-retention controls through `n = 8` and the bounded `n = 9` performance cell
 are complete. The random-start size ladder stops there.
 BC-008’s source-bound `n = 10` seeded-pose entry point now passes replay and a bounded
-run-path smoke test; its four-perturbation known-answer experiment is ready but not yet
-run. Exact configuration-space controls still stop at `n = 4`. Component and census
-claims remain blocked on the later identity and coverage rows.
+run-path smoke test.
+Exp-031 is the active preregistered four-perturbation known-answer experiment.
+Exact configuration-space controls still stop at `n = 4`. Component and census claims
+remain blocked on the later identity and coverage rows.
 
 ## Experiments Conducted
 
-There are 30 rounds registered in `series-000`; all are terminal.
-They record 788 agent-minutes and 28.0 wall-minutes.
+There are 31 rounds registered in `series-000`; 30 are terminal and exp-031 is in
+progress. The terminal rounds record 788 agent-minutes and 28.0 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1254,6 +1255,7 @@ archive beside it.
 | [exp-028](campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md) | 7 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; three typed time-budget stops | **baseline** |
 | [exp-029](campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md) | 8 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; one typed unsettled stop and two time-budget stops | **baseline** |
 | [exp-030](campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md) | 9 | positive control | H-021 | BasinEvent/v3 semantic replay | 1 retained/valid typed time-budget stop; full command 21.36 s | **baseline** |
+| [exp-031](campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md) | 10 | positive control | H-002 | source-bound BasinEvent/v3 replay | four preregistered perturbations; measurement pending | **in-progress** |
 
 ### Cost and provenance
 
@@ -1289,8 +1291,9 @@ archive beside it.
 | exp-028 | 4 seeds, 10 s each | 38.628 s | 5 m | criterion | `ce84ef6` |
 | exp-029 | 4 seeds, 10 s each | 38.004 s | 5 m | criterion | `69c6008` |
 | exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
+| exp-031 | 4 seeds, 15 s each | — | — | — | `dab797c` |
 
-### What the thirty rounds jointly establish
+### What the thirty terminal rounds jointly establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; component classification is not.**
@@ -1340,7 +1343,8 @@ The blind random-start size ladder stops after n=9. A source-bound n=10 entry po
 reconstructs the published Göbel pose, binds its source digest, replays deterministic
 perturbations, and retains typed failure.
 A one-second smoke run reaches a valid endpoint at the proved side but times out before
-producer convergence, so BC-008 remains a ready, unrun four-perturbation control.
+producer convergence.
+Exp-031 now preregisters BC-008’s four perturbations without yet observing them.
 The exact small-moduli controls remain valid; component identity is the next blocked
 layer. The `n=12` calibration returns exactly `4.0`, but that is not a known-answer
 guard. The runner’s full-pose independent verification boundary remains open under
@@ -1412,34 +1416,34 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 183 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 185 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 61 | asserted something false about the mathematics |
-| validity | 53 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 49 | recorded something its own evidence contradicts |
+| validity | 54 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 50 | recorded something its own evidence contradicts |
 | robustness | 15 | did not finish, or finished only by luck |
 | performance | 5 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Forty-five of the fifty-five soundness defects pointed in the *flattering*
-direction**, where the error looks like a success.
+**Fifty of the sixty-one soundness defects pointed in the *flattering* direction**,
+where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught six defects in one hundred sixty-one, and no soundness
-defect ever.** Every soundness failure was found by a control cell whose answer was
-known in advance, a rule written down before the measurement, a generated view
-contradicting its source, or someone reading carefully.
+**The automated gate has caught seven defects in 185, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. The six the gate did catch ([D-024](defects.md), [D-064](defects.md),
-[D-106](defects.md), [D-107](defects.md), [D-125](defects.md), and [D-130](defects.md))
-are bookkeeping or robustness defects, found by contiguity, integration,
-mutation-anchor, and reconciliation checks—which is the pattern, not an exception: gates
-are good at the mechanical classes and have never once caught the mathematics being
-wrong.
+*surprised*. The seven the gate did catch ([D-024](defects.md), [D-064](defects.md),
+[D-106](defects.md), [D-107](defects.md), [D-125](defects.md), [D-130](defects.md), and
+[D-163](defects.md)) are bookkeeping or robustness defects, found by contiguity,
+integration, mutation-anchor, and reconciliation checks—which is the pattern, not an
+exception: gates are good at the mechanical classes and have never once caught the
+mathematics being wrong.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed
