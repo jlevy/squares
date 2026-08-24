@@ -5,19 +5,17 @@ title: quench_bracket's budget is wall-clock, so results depend on machine load
 kind: bug
 status: open
 priority: 2
-version: 3
+version: 4
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:16:45.800Z
-updated_at: 2026-08-24T21:22:12.166Z
+updated_at: 2026-08-24T21:59:57.181Z
 ---
-quench_bracket and _free_sweep take time_budget in seconds and stop on a wall-clock deadline. Anything that changes how fast the machine runs -- a parallel pool, a busy laptop, a slower CI box, a colder cache -- changes how much work the quench does, and therefore whether it certifies convergence.
+quench_bracket and _free_sweep take time_budget in seconds and stop on a wall-clock deadline. Host speed, load, pool width, and contention therefore change how many LP solves and angle probes a nominally identical quench performs, making convergence a property of the machine as well as the mathematics.
 
-D-036 is already the defect where an incomplete free sweep returned as if every angle had been checked. A wall-clock budget is the same hazard one level up: it makes 'converged' a property of the machine as well as the mathematics.
+D-036 already covers an incomplete free sweep returned as complete. On 2026-08-24 this broader risk became observed rather than benign: a 10-wide strict deep gate and a separately isolated one-worker deep golden step both changed the n=4 convergence total and left n=10 at a typed post-check rejection. The isolated step consumed 109 seconds and reproduced the same D-162 golden drift; no tolerance was weakened and no regenerated map was accepted.
 
-Currently benign: a quench is ~2.5s against a 90s budget, ~35x of margin, and the parallel --deep regeneration still reproduces the committed map byte-for-byte. It stops being benign the moment the budget is tightened, the problem size grows, or a census runs many-wide on a shared box -- all three of which the planned campaign does.
-
-Suggested work: express the budget as work (LP solves, or bracket iterations) rather than seconds, and keep a wall-clock deadline only as an outer backstop that is recorded when it fires. A run whose numbers depend on how loaded the machine was is not reproducible from its artifact, which is the property the engine's (seed, chain) keying exists to guarantee.
+Express the scientific budget as work (LP solves or bracket iterations), retain wall time only as an outer recorded safety deadline, and mark any deadline hit censored. Also separate load sensitivity from solver-residual nondeterminism under D-162. Acceptance requires identical retained work and outcomes across declared pool widths and a stable known-answer response at n=4 and n=10.
