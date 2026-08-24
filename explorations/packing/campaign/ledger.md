@@ -11,7 +11,7 @@
 | [session-003](agent-sessions/session-003-unattended-research-readiness.md) | completed | process | think-1sxv | 4 | Publish this checkpoint, then begin H-023/H-021 terminal-component evidence while think-kmn2 designs per-cell queue pricing. |
 | [session-004](agent-sessions/session-004-creative-frontier-review.md) | completed | insight | think-7gu0 | 5 | Finish generated-view and bead reconciliation, run the normal gate, publish the checkpoint, then start H-026 and the exact n=3 quotient-map control in parallel lanes. |
 | [session-005](agent-sessions/session-005-h024-fast-falsifier.md) | completed | insight | think-w5rb | 3 | Begin H-026 from Trump's exact active-contact table, with complete one-sided branch enumeration and replayable tangent-cone certificates as the guarded deliverable. |
-| [session-006](agent-sessions/session-006-h026-exact-tangent.md) | in_progress | insight | think-qd9t | 2 | Commit and push the reviewed instrument, then execute its retained generator and separate exact replay once from a clean tree. |
+| [session-006](agent-sessions/session-006-h026-exact-tangent.md) | completed | insight | think-qd9t | 2 | Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and move the fast rotation to H-032's exact n=3 quotient-family control. |
 
 ## Series
 
@@ -44,11 +44,11 @@
 | H-019 | confirmed | search | On the n=11 Trump contact cell, varying the shared tilt of its five ti | n: 11* | 1 | 10m agent + 1s wall |
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
 | H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3 4 5 6 7 8 | 0 |  |
-| H-022 | open question | proof | Is Trump's n = 11 packing isolated and locally optimal modulo D4 and r |  | 0 |  |
+| H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
 | H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 0 |  |
 | H-024 | refuted | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
 | H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
-| H-026 | running | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 |  |
+| H-026 | confirmed | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 | 100m agent + 57s wall |
 | H-027 | blocked | search | In the imported reference contact cells at n = 11 and n = 17, the mini | n: 11 17 | 0 |  |
 | H-028 | blocked | search | On preregistered two-degree class-angle boxes in the imported n = 11 a | n: 11 17 | 0 |  |
 | H-029 | blocked | search | After passing exact synthetic rare-event controls, adaptive multilevel |  | 0 |  |
@@ -79,7 +79,7 @@
 | exp-011 | series-000 | 17 | claude-opus-5 | H-020 | The criterion was measured and missed: n=17 +3.245e-01, against the 1e-04 H-020 declared. The claim is refuted for these cells and this regime. |
 | exp-012 | series-000 | 29 | openai-codex | H-024 | The reconstructed, numerically valid n = 29 witness has six unambiguous orientation classes, exceeding H-024's preregistered upper bound of three and refuting the universal corpus claim at its first stop cell. |
 
-### accepted (4)
+### accepted (5)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -87,14 +87,9 @@
 | exp-007 | series-000 | 5 | claude-opus-5 | H-002 | Confirms H-002 on this cell: the bracketing quench refines annealer output from 3.43e-08 to a median 2.22e-15 - the analytic value to machine precision - where the same output under angle descent moves only to 3.19e-08. Two of five seeds hit the 30 s wall budget and are reported as such. |
 | exp-008 | series-000 | 10 | claude-opus-5 | H-002 | Confirms H-002 on this cell, and by twelve orders of magnitude: median gap falls from the annealer's 5.32e-03 to 1.33e-15, where angle descent reaches only 4.51e-03. The two seeds that hit the wall budget are the two that did not converge. |
 | exp-010 | series-000 | 11 | claude-opus-5 | H-019 | Confirms H-019: the one-sided slopes are 0.1747 and 0.3841, a ratio of 2.198 that is stable over five decades on each side, so the optimum of s(theta) is a corner rather than a smooth minimum on this shared-tilt slice. A smooth local model is misspecified at that point; this round does not establish a general convergence impossibility. |
-
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-013 | series-000 | 11 | openai-codex | H-026 | Claimed; the active-feature enumeration and exact certificate checker are being built. |
+| exp-013 | series-000 | 11 | openai-codex | H-026 | No nonzero linearized direction survives. All 128 derivative-distinct matrices have exact zero-cone certificates, covering all 512 raw nonlinear feature selections with zero unresolved branches. |
 
 ## Effort
 
-13 rounds, 287 agent-minutes, 23.0 wall-minutes.
+13 rounds, 387 agent-minutes, 24.0 wall-minutes.
 

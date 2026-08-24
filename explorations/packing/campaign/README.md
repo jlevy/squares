@@ -42,7 +42,7 @@ The **instance axis is `n`**, and the standing cells have different jobs:
 | `n` | role | standing best | why this cell |
 | --- | --- | --- | --- |
 | 10 | **positive control** (machinery only) | `3 + 1/√2 = 3.70710678…`, proved | Known answer, and *not* the grid. But its mechanism is a 45° tilt, so passing it proves the machinery and says nothing about finding an oblique record — see the caveat below. |
-| 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case and a degree-8 side construction; a strong rigidity candidate, not yet rank-certified here. |
+| 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case and a degree-8 side construction; exp-013 proves qualitative local isolation, while a radius and global optimality remain open. |
 | 12 | **open-case calibration** | `4`, the trivial grid | The 4×4 grid is the standing best, not a proved optimum. A valid lower side would be a discovery and must enter exact promotion. |
 | 16 | **proved not-below control** | `4`, proved | A reported side below `4` is known to be invalid. This is the valid replacement for the old `n=12` guard. |
 | 17 | **mechanism-matched calibration** | `4.67553009360455`, Bidwell 1998, still open | The nearest case whose record uses genuinely *oblique* structure — the primary SVG records `0°`, `+39.80496°`, and `−36.62379°`, so two unequal non-trivial orientations against a grid frame. The only cell here that speaks to record-*finding* rather than machinery. |

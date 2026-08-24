@@ -130,6 +130,14 @@ step_exact_verification() {
   grep -q "s = 3.87708359002281417730789706010096" <<<"$out"
 }
 
+step_trump_linearized_cones() {
+  # Exp-013 is a proof-style result, not a frozen display number. Re-derive the complete
+  # active system and replay every retained exact Q(u) certificate. The checker also
+  # exercises a known-flexible wall omission and rejects duplicate branch coverage.
+  $PY tools/check_trump_tangent.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json
+}
+
 step_negative_control() {
   out=$(python3 negative_control.py)
   echo "$out"
@@ -487,6 +495,7 @@ STEPS=(
   "derivation (needs sympy)|step_derivation"
   "search engine (sqsearch)|step_search_engine"
   "lint floor (rust)|step_lint_floor_rust"
+  "Trump exact branchwise linearized cones|step_trump_linearized_cones"
   "exact verification|step_exact_verification"
   "negative control|step_negative_control"
   "frontier corpus|step_frontier_corpus"

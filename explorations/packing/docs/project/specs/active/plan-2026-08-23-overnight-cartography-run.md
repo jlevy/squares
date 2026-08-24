@@ -141,7 +141,7 @@ be silently rerun as fresh hypotheses.
 | Priority | Artifact | Output | Boundary |
 | ---: | --- | --- | --- |
 | 1 | [H-010](../../../../campaign/hypotheses/H-010-stromquist-triple.md) | known escape, censored hard case, then independently checked PoseBox certificate | search saturation is never proof |
-| 1 | [H-026](../../../../campaign/hypotheses/H-026-trump-first-order-rigidity.md) / [H-022](../../../../campaign/hypotheses/H-022-trump-local-geometry.md) | union-of-branchwise tangent test, then continuation or interval-local exclusion | feature counts and a smooth Jacobian decide neither rigidity nor isolation |
+| 1 | [H-026](../../../../campaign/hypotheses/H-026-trump-first-order-rigidity.md) / [H-022](../../../../campaign/hypotheses/H-022-trump-local-geometry.md) | **exp-013 complete:** 128/128 exact zero-cone certificates and finite-branch local isolation; next quantify a radius | feature counts and a smooth Jacobian decided neither rigidity nor isolation |
 | 2 | [H-006](../../../../campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md) | quantitative, refinement-stable dual support for candidate loci | discretized LP generates proof objects; it proves no bound |
 | 1 | [H-039](../../../../campaign/hypotheses/H-039-s12-proof-frontier.md) | checked improvement to the `s(12)` lower bound | H-010’s complete conditional mechanism is the known-answer gate |
 | 1 | [H-033](../../../../campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | extend Bentz’s `m²−3` method to `m=8` or retain its first blocking pose | the direct 2018 piercing bound is weaker than Nagamochi and does not settle `s(61)` |
@@ -150,10 +150,10 @@ be silently rerun as fresh hypotheses.
 | 2 | [H-032](../../../../campaign/hypotheses/H-032-small-n-optimal-moduli.md) / [H-038](../../../../campaign/hypotheses/H-038-record-number-fields.md) | exact quotient spaces and exact-field taxonomy | begin at `n=3` and one reconstructed known algebraic witness |
 | 3 | [H-037](../../../../campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | narrow the `1/2` versus `3/5` exponent gap | separate paper-mathematics lane; finite diagnostics do not decide it |
 
-The first proof rotation is H-026, the exact `n=3` control in H-032, and H-010. The
-slower `s(12)`, `s(61)`, fractional-piercing, restricted-orientation, exact-field and
-asymptotic programs remain visible with explicit intermediate artifacts rather than
-being forced into the stochastic census queue.
+H-026 completed in exp-013. The next proof rotation is the exact `n=3` control in H-032
+and H-010. The slower `s(12)`, `s(61)`, fractional-piercing, restricted-orientation,
+exact-field and asymptotic programs remain visible with explicit intermediate artifacts
+rather than being forced into the stochastic census queue.
 
 ### Basin maps, in order of mathematical honesty
 

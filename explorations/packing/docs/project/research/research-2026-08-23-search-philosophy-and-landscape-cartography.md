@@ -87,8 +87,10 @@ Start from what the exact verifier measured.
 In Trump’s `n = 11` packing, 14 of the 55 square pairs touch with *exactly zero* gap,
 and 20 corner coordinates lie on the container boundary in the exact witness.
 Those contacts make the packing a strong rigidity candidate, but raw contact counts do
-not establish independence or infinitesimal rigidity; that requires a rank or interval
-certificate that the repository does not yet have.
+not establish independence or infinitesimal rigidity.
+Exp-013 later supplies the missing evidence: complete exact branchwise linearizations
+and a finite-branch argument prove qualitative local isolation.
+It does not quantify the neighborhood or identify the attraction basin.
 
 What matters for search is not the stratum (measure zero) but its **basin of
 attraction** (positive measure, but how much?). Here the energy-landscape literature has

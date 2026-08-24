@@ -92,10 +92,10 @@ reproducible and numerically polishable.
 Component identity, countability, and exact value require separate evidence.
 
 Two further observations constrain most of these ideas.
-**Trump’s packing is a strong rigidity candidate**, but this repository has not yet
-supplied the active-constraint rank or interval proof needed to call it isolated.
-Its apparent local jamming is a reason to test whether named random-start proposers miss
-it. [H-018](hypotheses/H-018-basin-entry.md) has already been refuted as registered; its
+**Trump’s packing is locally isolated.** Exp-013 proves this from the complete finite
+branch system and exact zero-cone certificates; it does not give an explicit radius or
+show why named random-start proposers miss it.
+[H-018](hypotheses/H-018-basin-entry.md) has already been refuted as registered; its
 finite-refiner residual motivates H-021 through H-023 but is not a runnable basin-width
 experiment. It uses exactly two observed tilt classes, `0°` and one non-trivial angle, a
 structural prior an unconstrained search does not exploit.
@@ -118,7 +118,7 @@ families remain untried.
 | 4b | Non-smooth angle search: bracket over merged angle classes | **works** |  | [exp-007](series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md)–[exp-009](series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | Reaches the analytic optimum to machine precision at `n = 5` and `n = 10` (`2e-15`, `1e-15`), where descent reaches `3e-08` and `5e-03`. The tested `n = 11` starts remain far from Trump; component identity is unresolved |
 | 25 | Retain the fixed-cell LP’s primal-dual equilibrium-load certificate; test normalized loads as descriptors and block-move signals | registered | [H-031](hypotheses/H-031-load-guided-block-moves.md) | [depth review G-2](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | The dual balances a nonzero container objective, so it is not automatically a free-framework self-stress or an angle certificate; its search value gets a held-out paired test |
 | 26 | Kink-codimension candidate: known record cells have strictly positive first-order growth in every independent class-angle direction | registered | [H-027](hypotheses/H-027-record-angle-cones.md) | [depth review G-4](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | T-3 supplies one one-dimensional slice, not a law; test the full local directional model at `n=11` and the two-direction prediction at `n=17` |
-| 31 | Generalized one-sided feasible-tangent screen at Trump’s packing | registered | [H-026](hypotheses/H-026-trump-first-order-rigidity.md) | [depth review G-1](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | Fourteen pair contacts plus eleven wall incidences are feature counts, not a rank theorem; enumerate nonsmooth branches and either exhibit a mechanism or certify no first-order fixed-side motion |
+| 31 | Exact branchwise linearized-cone screen at Trump’s packing | confirmed | [H-026](hypotheses/H-026-trump-first-order-rigidity.md) | [exp-013](series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | All 128 derivative-distinct cones are zero by exact positive-stress certificates, covering 512 raw branches; the finite-branch lemma locally isolates the pose |
 
 ## The premise, and the census that tests it
 
@@ -192,8 +192,10 @@ Registered as `kind: open_question` when worth carrying formally.
   they use? A histogram over restarts would say whether the search is finding one wrong
   answer repeatedly or many.
 - **Does any run ever produce a two-tilt configuration unprompted?**
-- **[What is the certified local geometry of Trump’s packing?](hypotheses/H-022-trump-local-geometry.md)**
-  The exact contacts do not by themselves establish isolation or local optimality.
+- **[What quantitative local geometry remains after exp-013?](hypotheses/H-022-trump-local-geometry.md)**
+  Exact contacts alone did not establish isolation; exp-013 now does.
+  The live question is an explicit radius, side-perturbation stability, and transferable
+  stress structure.
 - **[Are the observed `n=5` endpoints in one terminal family?](hypotheses/H-023-n5-terminal-connectivity.md)**
   Six endpoints from six proposals do not decide their connectivity.
   Six endpoints from six draws show non-saturation, not its cause.
@@ -209,7 +211,7 @@ This section is why the campaign does not rediscover its own mistakes.
   the exact pose has eleven square-wall incidences, so the proposed equality count
   double-counted. The remaining system is nonsmooth, and neither the corrected feature
   count nor a smooth Jacobian decides rigidity.
-  Replaced by H-026’s generalized one-sided tangent screen.
+  Replaced by H-026’s exact branchwise linearized-cone screen, confirmed by exp-013.
 
 - **GPU population search.** Measured at 2.5M evals/s on MPS against 18–20M on the CPU’s
   cores: the kernel is elementwise with almost no arithmetic intensity, so it is launch-

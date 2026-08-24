@@ -29,7 +29,7 @@ hypothesis:
   regime: exact Trump witness in Q(u), fixed side, all active nonsmooth branches
   instance: {axis: n, point: 11}
   priority: 1
-  cost_estimate: sub-second LPs after an agent-tier exact derivation and branch audit
+  cost_estimate: measured 47.121 s generation plus 10.187 s exact replay after derivation
   prereqs: []
   replication: true
   registered: '2026-08-24'
@@ -40,14 +40,16 @@ hypothesis:
     linearized cones overapproximate the true Bouligand tangent: a zero result proves
     the true tangent is zero, while a nonzero linearized vector needs nonlinear
     continuation before it may be called a feasible motion. Finite symmetries and
-    relabellings are discrete and remove no infinitesimal variable.
+    relabellings are discrete and remove no infinitesimal variable. Exp-013 certifies all
+    128 derivative-distinct cones, covering 512 raw feature selections.
 ---
-# H-026 — the corrected cheap leg of H-022
+# H-026 — confirmed by exp-013
 
-An explicit nonzero linearized direction would refute this hypothesis and nominate a
-continuation direction; it would not itself be a feasible-motion certificate.
-A zero union would justify a separate local-isolation argument from the finite branch
-model. No expected rank was preregistered.
+All 128 exact branch matrices have rank 33 and strictly positive exact left-kernel
+stresses, so every cone is `{0}`. A separate finite-branch subsequence argument now
+upgrades that result to local isolation and strict local side optimality of Trump’s pose
+in the anchored pose–side chart.
+It does not address global optimality or provide a quantitative neighborhood radius.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1066,11 +1066,14 @@ defects:
     settled and can send implementation toward the wrong quotient or continuation
     model.
   fix: >-
-    The rank-free claims are removed from the living docs. The underlying questions stay
-    open: compute fixed-cell active-matrix rank, the full pose-and-angle Jacobian after
-    quotienting symmetries, feasible null directions, and validated continuation across
-    active-set changes before asserting rigidity, dimension, or connectivity.
-  regression: none
+    The rank-free claims are removed from the living docs. Exp-013 now resolves the
+    Trump half with complete branchwise linearizations and exact zero-cone certificates.
+    The n = 5 question stays open: compute fixed-cell active-matrix rank, full
+    pose-and-angle linearizations, feasible null directions, and validated continuation
+    across active-set changes before asserting dimension or connectivity.
+  regression: >-
+    tools/check_trump_tangent.py replays the n = 11 result; no n = 5 regression exists
+    yet, so this combined defect remains outstanding under think-1s0h.
   bead: think-1s0h
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 - id: D-042
@@ -3381,6 +3384,7 @@ defects:
     row order, and recompute the determination and its scope from replayed witnesses.
   regression: >-
     The checker selftest presents duplicate records for one digest against a two-matrix
-    derived set and requires replay coverage indexing to reject them.
+    derived set and requires replay coverage indexing to reject them. The gate replays
+    all retained exp-013 certificates and therefore runs this control on every check.
   bead: think-vevb
   recorded_in: tools/check_trump_tangent.py

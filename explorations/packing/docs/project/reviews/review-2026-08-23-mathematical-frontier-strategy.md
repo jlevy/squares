@@ -42,8 +42,8 @@ They are kept visible because a strategy review must audit its own attractive st
    selected feature equalities, not `34 = 3n + 1`. Axis-aligned orientations and
    separating-axis choices are nonsmooth, so neither the false `34 = 34` count nor the
    corrected `25 < 34` count decides rigidity.
-   H-022 needs a generalized one-sided feasible-tangent calculation, not a predeclared
-   rank of 34.
+   Exp-013 later supplies H-022’s missing calculation: 128 complete exact one-sided
+   linearized systems, not a predeclared rank of 34.
 2. A fixed-angle cell LP dual balances the container-side objective against active
    constraints. It is an equilibrium **load certificate** for that LP, not automatically
    a self-stress of the free framework and not a certificate for angle or cell changes.
@@ -90,7 +90,7 @@ Probability labels are strategic priors, not measurements.
 
 | Rank | Frontier result | Why it is attractive | Smallest honest first move | First-loop class |
 | ---: | --- | --- | --- | --- |
-| 1 | **Trump’s generalized first-order geometry**: a feasible tangent, or a checked no-first-order-descent statement | Exact witness; a negative answer is as informative as a positive one | enumerate unique wall/contact feature branches and solve the one-sided tangent LP | seconds after derivation |
+| 1 | **Quantitative Trump local geometry after exp-013**: an explicit isolation radius, minimal stress support, or side-perturbation stability | Exact qualitative isolation is now proved; the certificates expose which inequalities carry rigidity | minimize certificate support, then interval-bound one neighborhood | minutes to hours after the exact replay |
 | 2 | **Exact quotient configuration space at `n = 3`, then one complete small-`n` case** | Gives ground truth for every atlas word: family, component, stratum, and merge | derive and render the known side-2 family before sampling `n = 5` | minutes to days |
 | 3 | **Public-parent construction surgery** | Six 2026 improvements provide held-out known answers and complete witnesses | hide the `n = 68,69` children and attempt to regenerate either from its cited parent | minutes to hours |
 | 4 | **A certified ceiling or non-ceiling for pure ten-point piercing at `n = 11`** | A method-limit result redirects the whole proof lane | coarse primal-dual pilot with separate certified lower/upper discretization bounds | hours per resolution |
@@ -103,11 +103,11 @@ Probability labels are strategic priors, not measurements.
 
 Three comments on the ranking.
 
-**Rank 1 is underweighted by the current agenda.** H-022 is registered and priority 1,
-but it is treated mainly as a prerequisite for attraction measurements.
-It is also a stand-alone local-geometry question.
-The first draft’s contact count did not answer it; the corrected linearized-cone screen
-is still unusually cheap and has a concrete witness as either outcome.
+**Rank 1 changed after exp-013.** The qualitative H-022 question was underweighted and
+is now answered: Trump’s pose is locally isolated.
+The frontier moves to a quantitative radius, side-perturbation stability, and minimal
+stress support. These remain unusually cheap relative to a global proof and may expose
+structure reusable across record cells.
 
 **Rank 2 starts at `n = 3`, not at a sampled `n = 5`.** H-011 runs through `n = 8`, but
 sampling saturation cannot produce a complete classification.
@@ -127,10 +127,11 @@ prior?
   lower envelope over assignments and cells.
 - **The `m² − 3` family fails first at `m = 8`** (prior: low, but this is the next
   unproved case and therefore the right theorem target).
-- **Trump’s packing is not isolated** (prior: low) — the generalized tangent test can
-  exhibit a first-order mechanism, while isolation itself needs nonlinear local
-  continuation or exclusion.
-  Either witness would immediately change basin semantics.
+- **Trump’s packing is not isolated** — **refuted by exp-013**. All 128 exact branchwise
+  linearized cones are zero, covering 512 raw feature selections.
+  The finite-branch subsequence lemma therefore locally isolates the pose and makes it a
+  strict local side minimum in the anchored pose–side chart.
+  A quantitative radius and global optimality remain open.
 - **Terminal families are pervasive rather than exceptional** (prior: medium, given the
   exact `n = 3` family) — already the program’s live concern (D-034); if true, the
   atlas’s objects change and the discovery is itself reportable.
@@ -165,14 +166,14 @@ non-overlap is a disjunction over separating axes.
 A smooth Jacobian of one selected branch can miss the one-sided inequalities that pin an
 orientation; a count can neither prove flexibility nor rigidity.
 
-The corrected fast result is still strong: **compute every one-sided linearized cone at
-fixed side**. Enumerate every active wall and separating-axis branch in open real angle
-charts and solve the homogeneous systems for a nonzero direction.
-These cones overapproximate the true Bouligand tangent.
-A nonzero vector nominates a continuation direction but is not yet a feasible mechanism;
-a zero union proves the true tangent is zero and supports a separately stated
-finite-branch local-isolation argument.
-This is the first leg of H-022.
+Exp-013 executes the corrected fast result.
+It enumerates every active wall and separating-axis branch in open real angle charts,
+retains the 512-to-128 map, and proves all 128 linearized cones zero with exact rank and
+positive-stress certificates.
+Since these cones overapproximate the true Bouligand tangent, the true tangent is zero.
+A separate finite-branch subsequence argument proves local isolation and strict local
+side optimality. This closes the qualitative first leg of H-022; an explicit radius and
+any global statement remain open.
 
 The jamming literature remains useful for methods — one-sided rigidity, equilibrium
 loads, prestress stability — but it does not license importing an isostatic count law to
@@ -425,12 +426,13 @@ mathematicians of different schools and ask what each would do first.
 The point is not imitation; it is to expose correlated blind spots in one strategy
 culture.
 
-**The rigidity and nonsmooth-geometry theorist.** First move: write every one-sided
-active branch at Trump’s packing and compute its linearized cone in an open angle chart.
-Then continue any surviving vector nonlinearly; do not rename it a feasible motion from
-the linearization alone.
-A zero union proves the true tangent is zero and motivates a separate local-isolation
-statement. H-022 carries the destination; H-026 supplies the corrected first screen.
+**The rigidity and nonsmooth-geometry theorist.** Exp-013 has completed the first move:
+every one-sided active branch at Trump’s packing has zero exact linearized cone.
+The next push is quantitative—extract an explicit isolation radius, test stability as
+the side is varied, and ask which subfamilies of the 42 inequalities carry a minimal
+positive stress.
+That can expose a reusable rigidity grammar across other record packings
+without confusing local isolation with global optimality.
 
 **The optimization and duality theorist.** First move: retain primal-dual cell
 certificates, then compute certified bounds on `τ*(U_s)` (G-3); second move, ask whether
@@ -671,7 +673,7 @@ Runtime estimates are provisional until D-101’s timing boundary is repaired.
 
 | Priority | Experiment family | Smallest informative cell | First cap | Kill or park signal | Escalate when |
 | ---: | --- | --- | ---: | --- | --- |
-| 1 | Generalized Trump tangent screen (H-026) | exact `n=11` witness | 10 min compute after derivation | explicit nonzero fixed-side direction, or unresolved feature branching | every branch is enumerated and the result replays |
+| 1 | Trump linearized-cone screen (H-026) | exact `n=11` witness | **completed by exp-013** | no direction; 128/128 exact zero-cone certificates | local isolation follows; next quantify the radius and minimal stress support |
 | 2 | Exact quotient-map control (H-032) | analytic `n=3`, side 2 | 1 h | renderer cannot represent the known family and singular strata | sampled poses, quotient invariants, and analytic parameter agree |
 | 3 | `n=29` angle-corpus falsifier (H-024) | one primary SVG | **completed by exp-012** | six verified classes refuted H-024 | source reconstruction, all 406 SAT pairs, and source equations replayed |
 | 4 | Trump reference-cell angle sheet (H-028) | `6+5` known cell, coarse grid | 10 min | reference not recovered or basis labels unstable | a reproducible local feature changes a decision |
@@ -731,7 +733,7 @@ existing spine.
 | H-011/H-012 | remain behind component identity; add splitting only after a known-answer calibration |
 | H-013 | fixed-side projection and valid-path upper bounds only; no topology from branch coalescence |
 | H-017 | park behind the short budget-response ladder; eight hours is low-information before a response curve |
-| H-022 | umbrella local-geometry question; H-026 is its cheap one-sided tangent test |
+| H-022 | qualitative local isolation is settled by exp-013; retain the explicit-radius, perturbation-stability, and global legs |
 | H-024 | refuted by exp-012: the checked `n=29` witness has six classes; H-025 is the non-brittle successor |
 | H-025–H-031 | angle compression, local geometry/sheets, rare events, held-out surgery, and move topology |
 | H-032–H-037 | exact quotient spaces, `n=61`, fractional piercing, asymptotic transfer, robust orientation exclusion, and the exponent question |
@@ -742,9 +744,10 @@ existing spine.
 1. **Make the next map true before making it large.** Retain full poses/events, render
    V-0, and solve the exact `n=3` quotient control.
    Do not call the current row table a basin atlas.
-2. **Run the corrected Trump screen.** Build the generalized one-sided tangent system
-   and retain the cell LP’s primal-dual load certificate.
-   Drop every `34=34` or self-stress claim unless a later derivation earns it.
+2. **Exploit the completed Trump screen.** Exp-013 replaced contact counting with 128
+   exact positive-stress certificates.
+   Minimize their support, extract a quantitative isolation radius, and test which
+   structure persists as the container side changes.
 3. **Exploit held-out records.** Reproduce one UnitSquare parent-to-child improvement
    before trusting a surgery proposer on an unseen `n`.
 4. **Diversify the proof lane.** Reproduce Stromquist’s conditional mechanism, pilot

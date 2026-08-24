@@ -9,39 +9,40 @@ hypothesis:
   id: H-022
   kind: open_question
   claim: >-
-    Is Trump's n = 11 packing isolated and locally optimal modulo D4 and relabelling,
-    under the complete active inequality system rather than contact counting alone?
+    What explicit isolation radius and side-perturbation stability can be certified for
+    Trump’s locally isolated n = 11 pose, and which parts of its exact stress structure
+    can constrain distant contact classes?
   lane: proof
   derived_from: [X-001]
   strategy_refs: ['proof:20', 'proof:21']
   instrument: >-
-    H-026's union of branchwise one-sided tangent cones, followed by nonlinear
-    continuation on any surviving direction or interval-local exclusion over every
-    active branch.
+    H-026's union of branchwise one-sided linearized cones, followed by the finite-branch
+    subsequence lemma; quantitative isolation still needs an interval neighborhood.
   instrument_ready: false
   regime: exact algebraic reference packing with all containment and non-overlap inequalities
   instance: {axis: n, point: 11}
   priority: 1
-  cost_estimate: branchwise tangent screen, then a separately budgeted continuation or interval neighborhood proof
+  cost_estimate: local isolation complete in exp-013; quantitative radius remains separately budgeted
   prereqs: []
   replication: true
   registered: '2026-08-24'
   notes: >-
     Either answer matters. Isolation would justify a point-like local model; a feasible
     optimal family would change component identity and the interpretation of attraction
-    measurements. Neither answer follows from the 14 exact contacts already verified.
+    measurements. Exp-013 answers the qualitative question: all 128 exact linearized
+    cones are zero, and the finite-branch subsequence argument proves local isolation
+    and strict local side optimality. A quantitative radius and global optimality remain
+    open; the local statement uses the repository’s anchored pose–side chart.
 ---
 # H-022 — certify the local object before using it as a landmark
 
-Trump’s construction is a strong rigidity candidate, but this repository currently has
-no generalized tangent or interval-local certificate.
-The question is registered because several strategy claims refer to its basin or
-component as though its local geometry were settled.
+Exp-013 settles the qualitative local question.
+It retains the complete 512-to-128 branch map and exact zero-cone certificates, then
+uses finiteness of the branch system to rule out any sequence of distinct feasible poses
+approaching Trump’s pose.
 
-The first deliverable is the complete disjunctive active system and its branchwise
-one-sided tangent cones.
-It is a screen, not the final certificate: nonlinear continuation, interval exclusion,
-and higher-order obstruction still have to be handled.
+What remains is quantitative and global: certify an explicit isolation radius, study
+stability under perturbing the container side, and exclude distant contact classes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

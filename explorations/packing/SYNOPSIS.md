@@ -1,6 +1,6 @@
 # Synopsis: The `s(n)` Program
 
-**Date:** 2026-08-24 (last updated after the claim for `series-000` round 13)
+**Date:** 2026-08-24 (last updated after terminal `series-000` round 13)
 
 **Status:** Living document, revised whenever a result lands.
 
@@ -181,8 +181,9 @@ for “sharp minimum”—the derivative does not become large, it fails to exis
 under the declared quotient and container condition.
 Contact counts and visual pinning are candidates for this property, not proofs; they
 require an active-constraint rank or stronger local certificate.
-Trump’s packing appears highly constrained, but this repository has not yet supplied
-that certificate ([D-041](defects.md)).
+Exp-013 supplies that stronger certificate for Trump’s packing: every complete
+branchwise fixed-side linearized cone is zero, and a finite-branch argument proves local
+isolation. It does not quantify the neighborhood or prove global optimality.
 
 **Terminal family** (called a *flat basin* in older campaign prose).
 A local-optimal terminal set that is not an isolated point.
@@ -312,11 +313,10 @@ root of
 s⁸ − 20s⁷ + 178s⁶ − 842s⁵ + 1923s⁴ − 496s³ − 6754s² + 12420s − 6865 = 0
 ```
 
-lying in `[3.87, 3.88]`. The packing is visually and numerically highly constrained and
-is a strong rigidity candidate.
-This repository has not yet supplied an active-constraint rank or interval-local proof
-of isolation, so rigidity is not used as an established explanation for search
-difficulty ([D-041](defects.md)).
+lying in `[3.87, 3.88]`. Exp-013 exactly certifies every complete branchwise fixed-side
+linearized cone and proves the pose locally isolated by a finite-branch subsequence
+argument. This qualitative local theorem does not provide an explicit radius or explain
+the global search difficulty.
 
 ### Why exactness is not optional
 
@@ -351,7 +351,7 @@ Where the program has spent effort, and what came of it.
 | 5 | proved, `2 + ½√2` | `2.70710678…` | positive control | `sqsearch --selftest` recovers it on every run. [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md): the bracketing quench refines annealer output to `2.22e-15`—the analytic value to machine precision |
 | 8 | proved, `3` | `3` | census kill line | The `n` at which [H-011](campaign/hypotheses/H-011-small-n-census.md)’s discovery curve must plateau, or enumeration is abandoned. No rounds |
 | **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Four rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); angle descent barely helps; [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`—**twelve orders** |
-| **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); seven registered rounds, one running. Every search method tried lands `≈ 6e-02` short: the failure is **exploration**, not polish |
+| **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); seven rounds. Search remains `≈ 6e-02` short, but exp-013 proves Trump’s exact pose is locally isolated and a strict local side minimum in the anchored pose–side chart |
 | **12** | open; `4` believed optimal | `4` | **open-case calibration** | Two rounds. Returns exactly `4.0` on all five seeds, which is baseline evidence rather than a known-answer guard. Also where the search and proof lanes are planned to meet |
 | 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
 | 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) returns **exactly `5.0`**, the trivial `5×5` grid, on all five seeds |
@@ -888,11 +888,11 @@ view; this section is the reading of it.
 | [H-015](campaign/hypotheses/H-015-map-elites-illumination.md) | blocked | MAP-Elites improves certified component discovery rate | 0 | — |
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 0 | — |
-| [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What is the certified local geometry of Trump’s packing? | 0 | — |
+| [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
 | [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected? | 0 | — |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | **refuted** | Verified record packings through `n=30` use at most three angle classes; exp-012 verifies six at `n=29` | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
-| [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | running | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | — |
+| [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
 | [H-027](campaign/hypotheses/H-027-record-angle-cones.md) | blocked | The imported `n=11,17` record cells have positive class-angle directional cones | 0 | — |
 | [H-028](campaign/hypotheses/H-028-reference-cell-angle-sheets.md) | blocked | Each published point is the sole refined local minimum on its declared reference-cell angle sheet, with a boundary margin | 0 | — |
 | [H-029](campaign/hypotheses/H-029-adaptive-splitting.md) | blocked | Calibrated adaptive splitting beats restarts on rare target events | 0 | — |
@@ -983,11 +983,10 @@ current criterion and kill rule.
 
 ## Experiments Conducted
 
-13 rounds are registered, all in `series-000`. Ledger effort is **287 agent-minutes**
-and **23.0 wall-minutes**; twelve rounds are terminal and exp-013 is running.
-Four instruments: `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
-(0.1.0 with angle descent, 0.2.0 with class bracketing), and the high-precision Kingbird
-SVG reconstruction and exact Trump linearized-cone checkers.
+13 rounds are terminal, all in `series-000`. Ledger effort is **387 agent-minutes** and
+**24.0 wall-minutes**. Four instruments: `sqsearch` 0.1.0 (the `f64` screening
+annealer), `sqpack.quench` (0.1.0 with angle descent, 0.2.0 with class bracketing), and
+the high-precision Kingbird SVG reconstruction and exact Trump linearized-cone checkers.
 
 No search round has been run at the `exact` tier, so **no result below claims a new
 record**. Exp-012 is an exploratory reconstruction of a published record witness; its
@@ -1012,7 +1011,7 @@ archive beside it.
 | [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 11 | target | H-019 | quench 0.2.0 | slopes `0.1747` / `0.3841`, ratio `2.198` | **accepted** |
 | [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | exactly `5.0` on all five seeds, gap `+3.245e-01` | rejected |
 | [exp-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | 29 | target | H-024 | SVG reconstruction + SAT | six classes; minimum class gap `0.296067°` | **rejected** |
-| [exp-013](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | 11 | target | H-026 | exact branchwise linearization | claimed; checker not yet executed | in-progress |
+| [exp-013](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | 11 | target | H-026 | exact branchwise linearization | 128/128 exact zero-cone certificates | **accepted** |
 
 ### Cost and provenance
 
@@ -1030,15 +1029,23 @@ archive beside it.
 | exp-010 | 11 probes | 1.0 s | 10 m | criterion | `8b450a1` |
 | exp-011 | 4e9 moves | 397.474 s | 0 m | criterion | `60a50cc` |
 | exp-012 | one SVG, 406 pairs | 0.158 s | 12 m | criterion | `5384209` |
-| exp-013 | 512 raw branches, 180 m cap | — | — | in progress | pending instrument commit |
+| exp-013 | 512 raw branches | 57.308 s | 100 m | criterion | `faba023` |
 
-### What the twelve terminal rounds jointly establish
+### What the thirteen rounds jointly establish
 
 **The instrument works on the proved positive controls.** They now resolve to machine
 precision under the bracketing quench.
 The `n=12` calibration returns exactly `4.0`, but that is not a known-answer guard.
 The runner’s full-pose independent verification boundary remains open under
 [D-044](defects.md); a producer-reported overlap scalar does not close it.
+
+**Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
+selections as 128 derivative-distinct matrices.
+Every matrix has exact rank 33 and a strictly positive exact `Q(u)` stress, so every
+branchwise fixed-side linearized cone is zero.
+A finite-branch subsequence argument upgrades that result to local isolation and strict
+local side optimality in the anchored pose–side chart, modulo finite symmetries.
+It does not prove global optimality or give an explicit isolation radius.
 
 **The tested class-bracketing refiner separates the proved controls from the target.**
 It takes the tested `n = 5` and `n = 10` starts to `1e-15` and leaves the tested
@@ -1234,11 +1241,13 @@ program: Trump’s nonsmooth local geometry, exact small-`n` quotient spaces, he
 construction surgery, pure-point piercing limits, robust restricted-angle proofs,
 `s(12)`, `s(61)`, exact record fields, and the asymptotic waste exponent.
 
-**The first fast rotation is cheap and high-information.** Exp-012 has already verified
-the primary `n = 29` counterexample and refuted H-024. Next solve H-026’s branchwise
-Trump tangent screen; render the exact `n = 3` quotient-family control; regenerate the
-`n = 5` equal-side pair with full poses; and hide the UnitSquare `n = 68,69` children
-for the first parent-surgery test.
+**The first fast rotation is cheap and high-information.** Exp-012 refuted H-024, and
+exp-013 confirmed H-026 and locally isolated Trump’s pose.
+Next render the exact `n = 3` quotient-family control; regenerate the `n = 5` equal-side
+pair with full poses; and hide the UnitSquare `n = 68,69` children for the first
+parent-surgery test.
+The quantitative Trump successor is an explicit isolation radius or minimal-support
+stress analysis, not another rank count.
 No hour-scale lane is promoted without a known-answer response, independent validity,
 and a result that changes a decision.
 

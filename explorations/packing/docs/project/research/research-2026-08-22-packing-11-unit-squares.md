@@ -1546,12 +1546,11 @@ These are frequently conflated with the present problem in casual sources:
    Closing the `n = 11` gap by that method would require certifying a degree-8 threshold
    — no such argument is known, and it is not obvious one exists.
 
-4. **Contact equations explain computability but not optimality.** Trump’s construction
-   is a strong rigidity candidate, and its contact conditions determine the displayed
-   algebraic side value.
-   This repository has not yet supplied an active-constraint rank or interval-local
-   certificate establishing rigidity or local optimality in the full configuration
-   space. Even such a local result would say nothing about whether a different contact
+4. **Contact equations explain computability but not global optimality.** Trump’s
+   contact conditions determine the displayed algebraic side value.
+   Exp-013 now certifies all complete branchwise fixed-side linearized cones and proves
+   qualitative local isolation by a finite-branch argument.
+   It supplies no explicit radius and says nothing about whether a different contact
    class does better, which is precisely what a global proof must exclude.
 
 5. **The failure of computation is informative in one direction only.** Fifty years of

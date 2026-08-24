@@ -2247,15 +2247,59 @@ The final replay took `0.157556` machine-seconds after 12 agent-minutes of instr
 and source work. The pushed result then passed the 25-step strict/deep gate in 38 wall
 seconds: 31 negative controls fired, all 135 defects reconciled, and the retained `n=29`
 source was reconstructed again inside the frontier-corpus step.
-H-024 stopped; the next fast mathematical lane is H-026’s exact first-order tangent
-screen.
+H-024 stopped; the next fast mathematical lane was H-026’s exact branchwise
+linearization screen.
 
-No primary mathematical or research-strategy remediation bead is closed by these
-checkpoint repairs. The focused D-066 through D-070 and D-072 through D-074 incident
-beads plus D-075 through D-079 are fixed; D-071 remains open for append-only numerical
-runner reports.
-In particular, the runner still trusts a producer-reported scalar overlap
-rather than a stored pose checked independently; contact canonicalization still has
+## Second post-merge research result
+
+Exp-013 confirms H-026 and settles the qualitative local-isolation leg of H-022. The
+retained exact Trump witness has 33 pose variables, 11 square-wall incidences that
+expand to 20 tied-corner rows, and 14 true pair contacts.
+Those contacts expose 24 raw zero-gap SAT features.
+Their 512 nonlinear selections reduce to 128 derivative-distinct 42-row matrices; the
+full 512-to-128 map remains in the raw record because branches that agree to first order
+may differ later.
+
+Every one of the 128 matrices has exact rank 33 and a strictly positive left-kernel
+stress over `Q(u)`. For a branch matrix `A`, the retained certificate satisfies `λ > 0`
+and `Aᵀλ = 0`. If `Av ≥ 0`, the equality `λᵀAv = 0` forces every row product to zero;
+full rank then forces `v = 0`. Floating point proposes the nine free stress weights
+only. Deterministic exact elimination chooses the row basis and replays rank, sign, and
+residual.
+A separate invocation re-derived the active system and replayed all 128 records
+with zero unresolved branches.
+
+The linearized cones are outer approximations to the true Bouligand tangent, so a
+nonzero vector would only have nominated nonlinear continuation.
+The observed zero union has a stronger consequence by a separate finite-branch argument:
+any sequence of distinct feasible poses approaching Trump’s pose has normalized
+displacements with a unit convergent subsequence; a further subsequence uses one fixed
+finite branch, placing that unit limit in its zero cone, a contradiction.
+Trump’s labeled fixed-side pose is therefore locally isolated.
+Finite D4 and relabelling actions preserve the conclusion modulo symmetry, and any
+nearby smaller-side packing would also fit the fixed Trump container, so the pose is a
+strict local side minimum in the anchored pose–side chart.
+
+This is not a global-optimality proof, an explicit isolation radius, or a novelty claim.
+It does replace the earlier contact-count heuristic with a machine-checkable qualitative
+local theorem. D-136 records the crucial linearized-versus-true-tangent distinction;
+D-137 records and fixes the first replay’s failure to require one-to-one matrix
+coverage. The duplicate-record and known-flexible wall-omission controls now run inside
+the retained replay.
+
+Generation took `47.121073` internal seconds and retained replay `10.186803`; external
+process timings were `47.85` and `11.01` seconds.
+This is the loop shape the research program wants: the proof-model audit consumed the
+judgment, while the final exact experiment and its durable recheck stayed below one
+machine-minute.
+
+Exp-013 closes the focused H-026 execution bead and the qualitative local-isolation leg,
+not the broader `n=11` global-optimality program.
+The earlier focused D-066 through D-070 and D-072 through D-074 incident beads plus
+D-075 through D-079 remain fixed; D-071 remains open for append-only numerical runner
+reports.
+In particular, the runner still trusts a producer-reported scalar overlap rather
+than a stored pose checked independently; contact canonicalization still has
 order-dependent angle clustering and factorial worst-case search; and the atlas,
 fixed-angle semantics, criterion evaluators, exact-promotion path, event record, and
 statistical contract remain open.
