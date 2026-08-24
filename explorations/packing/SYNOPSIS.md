@@ -1,6 +1,6 @@
 # Synopsis: The `s(n)` Program
 
-**Date:** 2026-08-23 (last updated 2026-08-23, after `series-000` rounds 5–10)
+**Date:** 2026-08-24 (last updated after the claim for `series-000` round 13)
 
 **Status:** Living document, revised whenever a result lands.
 
@@ -351,7 +351,7 @@ Where the program has spent effort, and what came of it.
 | 5 | proved, `2 + ½√2` | `2.70710678…` | positive control | `sqsearch --selftest` recovers it on every run. [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md): the bracketing quench refines annealer output to `2.22e-15`—the analytic value to machine precision |
 | 8 | proved, `3` | `3` | census kill line | The `n` at which [H-011](campaign/hypotheses/H-011-small-n-census.md)’s discovery curve must plateau, or enumeration is abandoned. No rounds |
 | **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Four rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); angle descent barely helps; [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`—**twelve orders** |
-| **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); six rounds. Every method tried lands `≈ 6e-02` short: the failure is **exploration**, not polish |
+| **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); seven registered rounds, one running. Every search method tried lands `≈ 6e-02` short: the failure is **exploration**, not polish |
 | **12** | open; `4` believed optimal | `4` | **open-case calibration** | Two rounds. Returns exactly `4.0` on all five seeds, which is baseline evidence rather than a known-answer guard. Also where the search and proof lanes are planned to meet |
 | 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
 | 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) returns **exactly `5.0`**, the trivial `5×5` grid, on all five seeds |
@@ -892,7 +892,7 @@ view; this section is the reading of it.
 | [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected? | 0 | — |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | **refuted** | Verified record packings through `n=30` use at most three angle classes; exp-012 verifies six at `n=29` | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
-| [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | blocked | Trump has no nonzero direction in any branchwise fixed-side tangent cone | 0 | — |
+| [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | running | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | — |
 | [H-027](campaign/hypotheses/H-027-record-angle-cones.md) | blocked | The imported `n=11,17` record cells have positive class-angle directional cones | 0 | — |
 | [H-028](campaign/hypotheses/H-028-reference-cell-angle-sheets.md) | blocked | Each published point is the sole refined local minimum on its declared reference-cell angle sheet, with a boundary margin | 0 | — |
 | [H-029](campaign/hypotheses/H-029-adaptive-splitting.md) | blocked | Calibrated adaptive splitting beats restarts on rare target events | 0 | — |
@@ -983,10 +983,11 @@ current criterion and kill rule.
 
 ## Experiments Conducted
 
-Twelve rounds, all in `series-000`, **287 agent-minutes and 23.0 wall-minutes** in
-total. Three instruments: `sqsearch` 0.1.0 (the `f64` screening annealer),
-`sqpack.quench` (0.1.0 with angle descent, 0.2.0 with class bracketing), and the
-high-precision Kingbird SVG reconstruction checker.
+13 rounds are registered, all in `series-000`. Ledger effort is **287 agent-minutes**
+and **23.0 wall-minutes**; twelve rounds are terminal and exp-013 is running.
+Four instruments: `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
+(0.1.0 with angle descent, 0.2.0 with class bracketing), and the high-precision Kingbird
+SVG reconstruction and exact Trump linearized-cone checkers.
 
 No search round has been run at the `exact` tier, so **no result below claims a new
 record**. Exp-012 is an exploratory reconstruction of a published record witness; its
@@ -1011,6 +1012,7 @@ archive beside it.
 | [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 11 | target | H-019 | quench 0.2.0 | slopes `0.1747` / `0.3841`, ratio `2.198` | **accepted** |
 | [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | exactly `5.0` on all five seeds, gap `+3.245e-01` | rejected |
 | [exp-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | 29 | target | H-024 | SVG reconstruction + SAT | six classes; minimum class gap `0.296067°` | **rejected** |
+| [exp-013](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | 11 | target | H-026 | exact branchwise linearization | claimed; checker not yet executed | in-progress |
 
 ### Cost and provenance
 
@@ -1028,8 +1030,9 @@ archive beside it.
 | exp-010 | 11 probes | 1.0 s | 10 m | criterion | `8b450a1` |
 | exp-011 | 4e9 moves | 397.474 s | 0 m | criterion | `60a50cc` |
 | exp-012 | one SVG, 406 pairs | 0.158 s | 12 m | criterion | `5384209` |
+| exp-013 | 512 raw branches, 180 m cap | — | — | in progress | pending instrument commit |
 
-### What the twelve rounds jointly establish
+### What the twelve terminal rounds jointly establish
 
 **The instrument works on the proved positive controls.** They now resolve to machine
 precision under the bracketing quench.
@@ -1073,27 +1076,27 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-One hundred thirty-five defects, [one line each](defects.md), generated from
+One hundred thirty-seven defects, [one line each](defects.md), generated from
 `defects.yaml` and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 45 | asserted something false about the mathematics |
-| validity | 37 | was correct, but the measurement did not bear on the question |
+| soundness | 46 | asserted something false about the mathematics |
+| validity | 38 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 39 | recorded something its own evidence contradicts |
 | robustness | 10 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Thirty-five of the forty-five soundness defects pointed in the *flattering*
-direction**, where the error looks like a success.
+**Thirty-six of the forty-six soundness defects pointed in the *flattering* direction**,
+where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught six defects in one hundred thirty-five, and no soundness
-defect ever.** Every soundness failure was found by a control cell whose answer was
-known in advance, a rule written down before the measurement, a generated view
-contradicting its source, or someone reading carefully.
+**The automated gate has caught six defects in one hundred thirty-seven, and no
+soundness defect ever.** Every soundness failure was found by a control cell whose
+answer was known in advance, a rule written down before the measurement, a generated
+view contradicting its source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. The six the gate did catch ([D-024](defects.md), [D-064](defects.md),
 [D-106](defects.md), [D-107](defects.md), [D-125](defects.md), and [D-130](defects.md))
@@ -1162,16 +1165,17 @@ D-108 through D-119 are the second-pass corrections: the missing piercing paper,
 isostatic and self-stress arguments, fixed-budget and fixed-cell overreach, topology and
 fractional-LP mistakes, unsupported novelty, stale registry state, the H-012/H-017
 estimand conflation, and an impossible continuity-blind angle-sheet criterion.
-D-120 through D-135 record the engineering delta and first post-merge run: ulp-sensitive
-cell selection, gate boundary and skip-contract failures, the per-step worker cap,
-bounded portable snapshots, a parallel negative-control race, wall-clock scientific
-budgeting, stale review status, the missing targeted edit loop, unbounded checker
-children, and a nonunique mutation-control anchor, followed by a lint floor that
+D-120 through D-137 record the engineering delta and first post-merge runs:
+ulp-sensitive cell selection, gate boundary and skip-contract failures, the per-step
+worker cap, bounded portable snapshots, a parallel negative-control race, wall-clock
+scientific budgeting, stale review status, the missing targeted edit loop, unbounded
+checker children, and a nonunique mutation-control anchor, followed by a lint floor that
 accepted type-checker warnings and a fixed-cell solver that does not expose whether it
 settled or hit its cap ([D-132](defects.md)), then the search-only determination
 vocabulary that could not record the H-024 result, the omitted `n=29` source provenance
-that the falsifier exposed, and the roll-up’s obsolete blanket claim about exploratory
-record evidence.
+that the falsifier exposed, the roll-up’s obsolete blanket claim about exploratory
+record evidence, the distinction between a branch linearization and a true Bouligand
+motion, and a certificate replay that did not require one-to-one branch coverage.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).

@@ -2,13 +2,13 @@
 
 # Defect log
 
-135 defects recorded across the packing toolchain.
+137 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **45 soundness defects** — the system asserting something false about the mathematics. 35 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **46 soundness defects** — the system asserting something false about the mathematics. 36 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
 - **55 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104).
 - **23 are still open** (outstanding or contained), every one carrying a bead.
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 7 | a cell of the sweep whose answer is known in advance |
-| `review` | 96 | a human or agent reading the work against a checklist |
+| `review` | 98 | a human or agent reading the work against a checklist |
 | `anomaly` | 4 | a result that made no sense, chased down |
 | `inspection` | 15 | reading the code or the design with intent |
 | `drift_check` | 4 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 6 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 6 of 135, and none of the 45 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 6 of 137, and none of the 46 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,16 +34,16 @@ The line worth reading twice: **the automated gate caught 6 of 135, and none of 
 | engine | 9 |
 | quench | 13 |
 | verifier | 1 |
-| record | 37 |
-| tooling | 31 |
+| record | 38 |
+| tooling | 32 |
 | docs | 44 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 45 |
-| validity | 37 |
+| soundness | 46 |
+| validity | 38 |
 | bookkeeping | 39 |
 | robustness | 10 |
 | performance | 4 |
@@ -278,3 +278,5 @@ This is the actionable list.
 | [D-133](campaign/schemas/experiment.schema.yaml) | 2026-08-24 | record | validity | neutral | `pre_registered_rule` | high | fixed | Determination results could encode only search-specific basin outcomes |
 | [D-134](frontier/n-029.md) | 2026-08-24 | docs | bookkeeping |  | `inspection` | medium | fixed | The n = 29 frontier row omitted its analytic improver and verified angles |
 | [D-135](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping |  | `inspection` | low | fixed | The experiment roll-up forbade the record-source evidence it displayed |
+| [D-136](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | 2026-08-24 | record | soundness | flattering | `review` | high | fixed | A branch linearization was mislabeled as the true Bouligand tangent |
+| [D-137](tools/check_trump_tangent.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | Trump certificate replay did not require one-to-one branch coverage |

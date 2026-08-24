@@ -106,8 +106,8 @@ Three comments on the ranking.
 **Rank 1 is underweighted by the current agenda.** H-022 is registered and priority 1,
 but it is treated mainly as a prerequisite for attraction measurements.
 It is also a stand-alone local-geometry question.
-The first draft’s contact count did not answer it; the corrected tangent-cone screen is
-still unusually cheap and has a concrete witness as either outcome.
+The first draft’s contact count did not answer it; the corrected linearized-cone screen
+is still unusually cheap and has a concrete witness as either outcome.
 
 **Rank 2 starts at `n = 3`, not at a sampled `n = 5`.** H-011 runs through `n = 8`, but
 sampling saturation cannot produce a complete classification.
@@ -165,12 +165,13 @@ non-overlap is a disjunction over separating axes.
 A smooth Jacobian of one selected branch can miss the one-sided inequalities that pin an
 orientation; a count can neither prove flexibility nor rigidity.
 
-The corrected fast result is still strong: **compute the generalized feasible tangent
-cone at fixed side**. Enumerate every active wall and separating-axis branch, quotient
-the finite symmetries, and solve a homogeneous feasibility LP for a nonzero direction.
-A witness is an explicit first-order mechanism.
-Infeasibility is a checked first-order-rigidity statement, but still not by itself a
-nonlinear local-optimality proof.
+The corrected fast result is still strong: **compute every one-sided linearized cone at
+fixed side**. Enumerate every active wall and separating-axis branch in open real angle
+charts and solve the homogeneous systems for a nonzero direction.
+These cones overapproximate the true Bouligand tangent.
+A nonzero vector nominates a continuation direction but is not yet a feasible mechanism;
+a zero union proves the true tangent is zero and supports a separately stated
+finite-branch local-isolation argument.
 This is the first leg of H-022.
 
 The jamming literature remains useful for methods — one-sided rigidity, equilibrium
@@ -425,11 +426,11 @@ The point is not imitation; it is to expose correlated blind spots in one strate
 culture.
 
 **The rigidity and nonsmooth-geometry theorist.** First move: write every one-sided
-active branch at Trump’s packing and compute the generalized feasible tangent cone.
-Then test prestress or second-order obstruction only on directions not excluded at first
-order. An explicit fixed-side first-order mechanism kills first-order rigidity but opens
-a continuation problem; interval-local exclusion is justified only after the tangent
-model passes. H-022 carries the destination; H-026 supplies the corrected first screen.
+active branch at Trump’s packing and compute its linearized cone in an open angle chart.
+Then continue any surviving vector nonlinearly; do not rename it a feasible motion from
+the linearization alone.
+A zero union proves the true tangent is zero and motivates a separate local-isolation
+statement. H-022 carries the destination; H-026 supplies the corrected first screen.
 
 **The optimization and duality theorist.** First move: retain primal-dual cell
 certificates, then compute certified bounds on `τ*(U_s)` (G-3); second move, ask whether

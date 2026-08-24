@@ -11,7 +11,7 @@
 | [session-003](agent-sessions/session-003-unattended-research-readiness.md) | completed | process | think-1sxv | 4 | Publish this checkpoint, then begin H-023/H-021 terminal-component evidence while think-kmn2 designs per-cell queue pricing. |
 | [session-004](agent-sessions/session-004-creative-frontier-review.md) | completed | insight | think-7gu0 | 5 | Finish generated-view and bead reconciliation, run the normal gate, publish the checkpoint, then start H-026 and the exact n=3 quotient-map control in parallel lanes. |
 | [session-005](agent-sessions/session-005-h024-fast-falsifier.md) | completed | insight | think-w5rb | 3 | Begin H-026 from Trump's exact active-contact table, with complete one-sided branch enumeration and replayable tangent-cone certificates as the guarded deliverable. |
-| [session-006](agent-sessions/session-006-h026-exact-tangent.md) | in_progress | insight | think-qd9t | 2 | Commit and push the claim, then build the active-feature and exact certificate checker without inspecting a scientific outcome first. |
+| [session-006](agent-sessions/session-006-h026-exact-tangent.md) | in_progress | insight | think-qd9t | 2 | Commit and push the reviewed instrument, then execute its retained generator and separate exact replay once from a clean tree. |
 
 ## Series
 
@@ -48,7 +48,7 @@
 | H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 0 |  |
 | H-024 | refuted | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
 | H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
-| H-026 | running | proof | After quotienting finite container symmetries and relabelling, Trump's |  | 1 |  |
+| H-026 | running | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 |  |
 | H-027 | blocked | search | In the imported reference contact cells at n = 11 and n = 17, the mini | n: 11 17 | 0 |  |
 | H-028 | blocked | search | On preregistered two-degree class-angle boxes in the imported n = 11 a | n: 11 17 | 0 |  |
 | H-029 | blocked | search | After passing exact synthetic rare-event controls, adaptive multilevel |  | 0 |  |

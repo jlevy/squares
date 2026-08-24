@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 135
+count: 137
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3327,3 +3327,60 @@ defects:
     kind is introduced.
   bead: think-uxj5
   recorded_in: SYNOPSIS.md
+- id: D-136
+  title: A branch linearization was mislabeled as the true Bouligand tangent
+  date: '2026-08-24'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one preregistration checkpoint
+  severity: high
+  status: fixed
+  what: >-
+    H-026 and the claimed exp-013 described each one-sided branch linearization as a
+    Bouligand tangent cone and said any nonzero vector would be a feasible first-order
+    motion. The linearized cone is only an outer approximation to the true tangent.
+  consequence: >-
+    A nonzero algebraic vector could have been promoted as a structural flex even when
+    no nonlinear feasible path realizes it. The opposite verdict is asymmetric: if
+    every complete branch linearization is zero, then the true tangent is necessarily
+    zero as well.
+  fix: >-
+    Recast H-026, exp-013, the session, checker, synopsis, and strategy review in terms
+    of branchwise one-sided linearized cones. A nonzero vector now routes to nonlinear
+    continuation; a zero union may support a separately stated finite-branch local-
+    isolation argument. Orientations use open real charts rather than folded angle
+    representatives.
+  regression: >-
+    The terminal artifact must retain the asymmetric interpretation beside its verdict,
+    and the checker records the linearized-versus-true-tangent scope in its raw result.
+  bead: think-4oos
+  recorded_in: campaign/hypotheses/H-026-trump-first-order-rigidity.md
+- id: D-137
+  title: Trump certificate replay did not require one-to-one branch coverage
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted instrument iteration
+  severity: high
+  status: fixed
+  what: >-
+    The first H-026 instrument draft deduplicated local derivative options without
+    retaining their raw alias multiplicities, and its separate replay checked only that
+    128 records each named some derived matrix. A record containing 128 copies of one
+    valid certificate passed while omitting the other 127 matrices.
+  consequence: >-
+    The retained result could claim complete coverage of 512 nonlinear feature
+    selections and 128 derivative-distinct cones while certifying only one cone.
+  fix: >-
+    Retain the exact alias-weighted 512-to-128 map, assert the wall, contact, feature,
+    row, and matrix inventories, reject duplicate or missing digests, bind certificate
+    row order, and recompute the determination and its scope from replayed witnesses.
+  regression: >-
+    The checker selftest presents duplicate records for one digest against a two-matrix
+    derived set and requires replay coverage indexing to reject them.
+  bead: think-vevb
+  recorded_in: tools/check_trump_tangent.py
