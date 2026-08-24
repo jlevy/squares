@@ -311,6 +311,10 @@ session:
     interval remains one component across four geometric keys, two contact signatures,
     and three strata; the exact n=4 quotient is one point; all eight false-policy
     mutations fail and all 16 f64 observations remain unresolved.
+  - >-
+    The post-exp-032 normal gate passes all 30 steps in 34 wall-seconds: 37 negative
+    controls fire, 40 BasinEvent records replay, all 32 declared engine commits are
+    checked, and the 32-round campaign, 185-defect log, and nine sessions reconcile.
   stop_reason: null
   next_action: >-
     Begin one bounded BC-010 n=5 connectivity slice. Preserve every unsupported endpoint
