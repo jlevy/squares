@@ -2172,6 +2172,42 @@ seconds, and historical regressions at 23 seconds.
 This is repository-checkpoint evidence, not authorization for an unattended numeric run;
 the new plan’s scientific and lifecycle gate remains open.
 
+## PR #17 Comment Disposition: 2026-08-24
+
+Every comment surface on PR #17 was checked directly: four top-level comments, no formal
+review submissions, no inline review threads, no linked issues, and no configured GitHub
+checks. The four comments have the following durable disposition.
+
+| Comment | Disposition | Durable record |
+| --- | --- | --- |
+| [First mathematical-frontier review](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5389861146) | Superseded by its own later correction; all retained findings fixed or explicitly deferred | F-42 through F-56, D-088 through D-107, `think-f82b`, commit `5d772c6` |
+| [Engineering and loop-efficiency review](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5390037297) | Stacked PR #18 rebased and corrected before absorption; larger research-engine work remains open | D-120 through D-131, `think-9a7v` and children, engineering-review status addendum |
+| [Deep mathematical delta checkpoint](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5390373103) | Five false claims retracted; every retained finding logged and dispositioned | F-57 through F-68, D-108 through D-119, `think-vw06`, `think-0vt5`, `think-uyf4`, commit `7d019ab` |
+| [Bead-count correction](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5390382115) | Accepted; the creativity epic and all seven listed review children are closed | `think-7gu0` and its child beads |
+
+The engineering absorption fixes the specific review-contract defects: selected checks
+avoid unrelated Rust builds; partial runs expose skips; worker counts reject invalid
+values; `--jobs 1` is serial at both layers; the documented worker limit matches the
+implemented per-step cap; private negative-control snapshots are bounded and measured;
+parallel snapshot assignment uses an explicit queue; the branch stack is current; and
+the Python lint floor now means zero errors **and** zero warnings.
+The defect-link mutation control itself failed once during integration when its anchor
+became nonunique; D-130 records that gate-caught failure and the unique replacement.
+
+The review did **not** justify closing every engineering research bead.
+D-050/D-059 keep basin-count and golden semantics open; D-126 keeps scientific work
+budgeting open; D-129 keeps per-control timeout and child reaping open; the batch
+quench, cross-host CI, and target-CPU policy remain named work under `think-9a7v`. This
+is the line between addressing every review comment and pretending every broader
+recommendation has already been implemented.
+
+The corrected, rebased stack passed the 25-step normal gate in 26 wall seconds and the
+strict/deep gate in 48 wall seconds.
+Each run fired all 30 negative controls, reconciled all 131 defects, and enforced a
+zero-error, zero-warning Python lint floor.
+GitHub had no configured check runs on either PR, so these are retained local validation
+results rather than a CI claim.
+
 No primary mathematical or research-strategy remediation bead is closed by these
 checkpoint repairs. The focused D-066 through D-070 and D-072 through D-074 incident
 beads plus D-075 through D-079 are fixed; D-071 remains open for append-only numerical

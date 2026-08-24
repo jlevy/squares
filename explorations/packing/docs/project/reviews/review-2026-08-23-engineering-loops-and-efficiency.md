@@ -310,3 +310,71 @@ failure the skip accounting exists to stop.
 * * *
 
 *Tracked under epic `think-9a7v`.*
+
+## Status Addendum: 2026-08-24
+
+The original **Complete** label was premature.
+A delta review against PR #17 head `7d019ab` accepted the central performance diagnosis
+and the shared half-extent identity, but found pre-absorption defects in the gate
+contract, portable snapshot cost, defect record, and branch stack.
+Those findings are addressed as follows.
+
+### Fixed Before Absorption
+
+- The branch was rebased onto PR #17 head `7d019ab`.
+- `--only` now builds sqsearch only when a selected step consumes the engine.
+  Skip accounting is printed before any partial-run disposition, so an engine check that
+  did not run is never called passed (D-122, `think-bdv1`).
+- `--jobs`, `GATE_JOBS`, and `GATE_INNER_JOBS` reject noninteger and nonpositive values.
+  `--jobs 1` exports one inner worker and is serial at both layers (D-121,
+  `think-wo4p`).
+- `PACK_JOBS` is now described as the measured per-step cap it implements, not a global
+  semaphore (D-123, `think-mmw8`).
+- Negative-control snapshots copy a 2.9 MiB source surface and refuse above 32 MiB. Five
+  trials measured median materialization at 0.0779 seconds through APFS cloning and
+  0.1944 seconds through a forced plain-copy fallback (D-124, `think-lyzi`).
+- The first parallel tree-assignment race is recorded as D-125. The explicit checkout
+  queue remains the fix (`think-oxwd`).
+- The shared half-extent correction is recorded as D-120. The resulting n=3 golden
+  change remains evidence of solver-stall and partition sensitivity, not evidence that a
+  mathematical basin disappeared.
+- The original 170-second serial gate and missing targeted loop are recorded as D-128.
+- The first integrated gate caught the defect-link control’s newly nonunique anchor;
+  D-130 records the failure and its bead-plus-path replacement.
+- The Python lint floor now requires BasedPyright’s exact zero-error, zero-warning
+  summary. Intentional private access in the benchmark and same-module field arithmetic
+  is suppressed at the individual call sites rather than widening the public API (D-131,
+  `think-6cbn`).
+
+Implementation corrections are in `2a2b215` and `a7c4b49`. The branch-level findings are
+tracked individually under `think-f7km`; this addendum is D-127.
+
+On the integrated rebased stack, the normal gate passed all 25 steps in 26 wall seconds
+and the strict/deep gate passed them in 48 wall seconds.
+Both runs exercised all 30 negative controls, reconciled all 131 defect records, and
+reported zero Python errors, warnings, or notes.
+These are local gate results; PRs #17 and #18 have no configured GitHub checks.
+
+### Retained Open Work
+
+The addendum does not close the mathematical or experimental questions exposed by the
+engineering work:
+
+- D-050 / `think-sk15` and `think-31k1`: keep censored or nonconverged observations
+  separate from promoted basin or terminal-component representatives.
+- D-059 / `think-lwao`: replace byte-frozen stochastic golden semantics with comparisons
+  that distinguish structural changes from harmless floating-point drift.
+- D-126 / `think-u97a`: budget scientific quench work in solves or iterations and use
+  wall time only as a recorded outer safety deadline.
+- D-129 / `think-cns0`: bound each negative-control checker and reap its process group;
+  snapshots protect source integrity but do not make a stuck child finish.
+- `think-y91x`: build the deterministic batch-census primitive after the identity and
+  stability contract is settled.
+- `think-lrsk`: add cross-host CI after the golden comparison has portable semantics.
+
+These are explicit deferrals, not claims that the stacked branch solved unattended
+research readiness.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
