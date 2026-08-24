@@ -12,6 +12,9 @@ Examples::
     uv run --frozen python tools/basin_census.py --selftest
     uv run --frozen python tools/basin_census.py run --n 5 --seeds 0 \
       --output /tmp/n5.jsonl
+    uv run --frozen python tools/basin_census.py run --n 10 --seeds 0 \
+      --start-source gobel10-svg-v1 --perturbation-scale 1e-4 \
+      --output /tmp/n10.jsonl
     uv run --frozen python tools/basin_census.py replay /tmp/n5.jsonl
 """
 
@@ -25,6 +28,7 @@ import random
 import sys
 import tempfile
 import time
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
@@ -35,12 +39,25 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from sqpack.canonical import canonical_key
+from sqpack.packings.gobel10 import (
+    SOURCE_ID as GOBEL10_SOURCE_ID,
+)
+from sqpack.packings.gobel10 import (
+    SOURCE_SHA256 as GOBEL10_SOURCE_SHA256,
+)
+from sqpack.packings.gobel10 import (
+    SOURCE_URL as GOBEL10_SOURCE_URL,
+)
+from sqpack.packings.gobel10 import (
+    pose as gobel10_pose,
+)
 from sqpack.quench import QuenchResult, quench_bracket
 from sqpack.verify import corners_from_poses, float_sign, verify_packing
 
 CONTRACT_V2 = "packing.squares:BasinEvent/v2"
 CONTRACT = "packing.squares:BasinEvent/v3"
 REGIME = "uniform-independent-v1+quench-bracket-v1"
+SOURCE_REGIME = "source-perturbation-v1+quench-bracket-v1"
 ORACLE_TOL = 1e-10
 
 
@@ -77,6 +94,144 @@ def deterministic_start(n: int, seed: int, side: float) -> tuple[list[float], ..
     )
 
 
+def deterministic_source_start(
+    n: int,
+    seed: int,
+    source_id: str,
+    perturbation_scale: float,
+) -> tuple[list[float], ...]:
+    """Replay one bounded perturbation of a named, source-bound reference pose."""
+    if source_id != GOBEL10_SOURCE_ID or n != 10:
+        raise EventError(f"source {source_id!r} does not define a pose for n={n}")
+    if (
+        not math.isfinite(perturbation_scale)
+        or perturbation_scale <= 0
+        or perturbation_scale > 1e-2
+    ):
+        raise EventError("source perturbation scale must be in (0, 1e-2]")
+    base = gobel10_pose()
+    x = [float(value) for value in base["x"]]
+    y = [float(value) for value in base["y"]]
+    theta = [float(value) for value in base["theta"]]
+    rng = random.Random(9_000_031 * n + seed)
+    return (
+        [value + rng.uniform(-perturbation_scale, perturbation_scale) for value in x],
+        [value + rng.uniform(-perturbation_scale, perturbation_scale) for value in y],
+        [value + rng.uniform(-perturbation_scale, perturbation_scale) for value in theta],
+    )
+
+
+def make_regime(
+    n: int,
+    *,
+    start_side: float | None,
+    time_budget: float,
+    start_source: str | None,
+    perturbation_scale: float | None,
+) -> dict[str, Any]:
+    """Build the complete replay recipe for one event start."""
+    if not math.isfinite(time_budget) or time_budget <= 0:
+        raise EventError("quench time budget must be finite and positive")
+    if start_source is None:
+        if perturbation_scale is not None:
+            raise EventError("--perturbation-scale requires --start-source")
+        resolved_side = start_side if start_side is not None else standing_side(n) + 0.6
+        return {
+            "id": REGIME,
+            "start_side": resolved_side,
+            "quench_time_budget_seconds": time_budget,
+            "oracle_tolerance": ORACLE_TOL,
+        }
+    if start_side is not None:
+        raise EventError("--start-side cannot be combined with --start-source")
+    scale = perturbation_scale if perturbation_scale is not None else 1e-3
+    if start_source != GOBEL10_SOURCE_ID or n != 10:
+        raise EventError(f"source {start_source!r} does not define a pose for n={n}")
+    if not math.isfinite(scale) or scale <= 0 or scale > 1e-2:
+        raise EventError("source perturbation scale must be in (0, 1e-2]")
+    base_side = float(gobel10_pose()["side"])
+    return {
+        "id": SOURCE_REGIME,
+        "start_side": base_side + 4.0 * scale,
+        "quench_time_budget_seconds": time_budget,
+        "oracle_tolerance": ORACLE_TOL,
+        "source_id": GOBEL10_SOURCE_ID,
+        "source_url": GOBEL10_SOURCE_URL,
+        "source_sha256": GOBEL10_SOURCE_SHA256,
+        "perturbation_scale": scale,
+    }
+
+
+def start_from_regime(
+    n: int,
+    seed: int,
+    regime: dict[str, Any],
+) -> tuple[list[float], ...]:
+    """Validate a retained regime and replay its start exactly."""
+    regime_id = regime.get("id")
+    common = {
+        "id",
+        "start_side",
+        "quench_time_budget_seconds",
+        "oracle_tolerance",
+    }
+    if regime_id == REGIME:
+        if set(regime) != common:
+            raise EventError("uniform-independent regime has the wrong fields")
+        start_side = regime["start_side"]
+        if (
+            isinstance(start_side, bool)
+            or not isinstance(start_side, (int, float))
+            or not math.isfinite(start_side)
+            or start_side <= 1
+        ):
+            raise EventError("uniform-independent start side must be finite and exceed 1")
+        start = deterministic_start(n, seed, float(start_side))
+    elif regime_id == SOURCE_REGIME:
+        expected_fields = common | {
+            "source_id",
+            "source_url",
+            "source_sha256",
+            "perturbation_scale",
+        }
+        if set(regime) != expected_fields:
+            raise EventError("source-perturbation regime has the wrong fields")
+        if (
+            regime["source_id"] != GOBEL10_SOURCE_ID
+            or regime["source_url"] != GOBEL10_SOURCE_URL
+            or regime["source_sha256"] != GOBEL10_SOURCE_SHA256
+        ):
+            raise EventError("source-perturbation regime is not bound to the Göbel fixture")
+        scale = regime["perturbation_scale"]
+        if (
+            isinstance(scale, bool)
+            or not isinstance(scale, (int, float))
+            or not math.isfinite(scale)
+            or scale <= 0
+            or scale > 1e-2
+        ):
+            raise EventError("source perturbation scale must be in (0, 1e-2]")
+        expected_side = float(gobel10_pose()["side"]) + 4.0 * float(scale)
+        if regime["start_side"] != expected_side:
+            raise EventError("source start side does not derive from its perturbation scale")
+        start = deterministic_source_start(n, seed, GOBEL10_SOURCE_ID, float(scale))
+        if enclosing_side(*start) > expected_side + 1e-12:
+            raise EventError("source perturbation exceeds its declared start side")
+    else:
+        raise EventError(f"unknown event regime {regime_id!r}")
+    budget = regime["quench_time_budget_seconds"]
+    if (
+        isinstance(budget, bool)
+        or not isinstance(budget, (int, float))
+        or not math.isfinite(budget)
+        or budget <= 0
+    ):
+        raise EventError("quench time budget must be finite and positive")
+    if regime["oracle_tolerance"] != ORACLE_TOL:
+        raise EventError("event regime changes the independent oracle tolerance")
+    return start
+
+
 def enclosing_side(x: list[float], y: list[float], theta: list[float]) -> float:
     half = [0.5 * (abs(math.cos(t)) + abs(math.sin(t))) for t in theta]
     return max(
@@ -94,7 +249,7 @@ def normalize(x: list[float], y: list[float], theta: list[float]) -> tuple[list[
     return [a - lo_x for a in x], [b - lo_y for b in y]
 
 
-def screen_pose(pose: dict[str, Any]) -> dict[str, Any]:
+def screen_pose(pose: Mapping[str, Any]) -> dict[str, Any]:
     x = [float(v) for v in pose["x"]]
     y = [float(v) for v in pose["y"]]
     theta = [float(v) for v in pose["theta"]]
@@ -137,10 +292,10 @@ def make_event(
     n: int,
     seed: int,
     *,
-    start_side: float,
-    time_budget: float,
+    regime: dict[str, Any],
 ) -> dict[str, Any]:
-    start_x, start_y, start_theta = deterministic_start(n, seed, start_side)
+    start_x, start_y, start_theta = start_from_regime(n, seed, regime)
+    time_budget = float(regime["quench_time_budget_seconds"])
     started = time.monotonic()
     result = quench_bracket(
         start_x,
@@ -152,12 +307,6 @@ def make_event(
     pose = result_fields(result)
     verification = screen_pose(pose)
     key = canonical_key(result.x, result.y, result.theta, result.side)
-    regime = {
-        "id": REGIME,
-        "start_side": start_side,
-        "quench_time_budget_seconds": time_budget,
-        "oracle_tolerance": ORACLE_TOL,
-    }
     event_id = digest({"contract": CONTRACT, "regime": regime, "n": n, "seed": seed})
     all_accounted = (
         result.fixed_point_evaluations > 0
@@ -233,9 +382,11 @@ def validate_event(event: dict[str, Any]) -> None:
         raise EventError("event n must be a positive integer")
     if isinstance(seed, bool) or not isinstance(seed, int):
         raise EventError("event seed must be an integer")
-    expected_id = digest(
-        {"contract": contract, "regime": event["regime"], "n": n, "seed": seed}
-    )
+    regime = event["regime"]
+    if not isinstance(regime, dict):
+        raise EventError("event regime must be an object")
+    expected_start = start_from_regime(n, seed, regime)
+    expected_id = digest({"contract": contract, "regime": regime, "n": n, "seed": seed})
     if event["event_id"] != expected_id:
         raise EventError("event id does not bind its regime, n, and seed")
 
@@ -284,7 +435,6 @@ def validate_event(event: dict[str, Any]) -> None:
     ):
         raise EventError("termination wall_seconds must be finite and non-negative")
 
-    expected_start = deterministic_start(n, seed, float(event["regime"]["start_side"]))
     retained_start = event["start"]
     if retained_start != {
         "x": expected_start[0],
@@ -396,13 +546,13 @@ def run(args: argparse.Namespace) -> int:
     path = Path(args.output)
     events = read_events(path)
     by_id = {event["event_id"]: event for event in events}
-    start_side = args.start_side or standing_side(args.n) + 0.6
-    regime = {
-        "id": REGIME,
-        "start_side": start_side,
-        "quench_time_budget_seconds": args.time_budget,
-        "oracle_tolerance": ORACLE_TOL,
-    }
+    regime = make_regime(
+        args.n,
+        start_side=args.start_side,
+        time_budget=args.time_budget,
+        start_source=args.start_source,
+        perturbation_scale=args.perturbation_scale,
+    )
     for seed in args.seeds:
         event_id = digest({"contract": CONTRACT, "regime": regime, "n": args.n, "seed": seed})
         if event_id in by_id:
@@ -411,8 +561,7 @@ def run(args: argparse.Namespace) -> int:
         event = make_event(
             args.n,
             seed,
-            start_side=start_side,
-            time_budget=args.time_budget,
+            regime=regime,
         )
         retain_event(path, events, by_id, event)
         term = event["termination"]
@@ -446,6 +595,21 @@ def selftest() -> None:
     }
     if screen_pose(invalid_pose)["valid"]:
         raise EventError("overlapping two-square pose was accepted")
+    source_pose = gobel10_pose()
+    if not screen_pose(source_pose)["valid"]:
+        raise EventError("source-bound Göbel n=10 pose was rejected")
+    source_regime = make_regime(
+        10,
+        start_side=None,
+        time_budget=1.0,
+        start_source=GOBEL10_SOURCE_ID,
+        perturbation_scale=1e-4,
+    )
+    source_start = start_from_regime(10, 0, source_regime)
+    if source_start != deterministic_source_start(10, 0, GOBEL10_SOURCE_ID, 1e-4):
+        raise EventError("source-bound start is not deterministic")
+    if source_start[0] == source_pose["x"]:
+        raise EventError("source-bound start did not perturb the reference pose")
     with tempfile.TemporaryDirectory() as tmp:
         path = Path(tmp) / "events.jsonl"
         # No quench: construct the smallest valid replay fixture around the exact n=1
@@ -518,6 +682,71 @@ def selftest() -> None:
             pass
         else:
             raise EventError("negative event wall time replayed successfully")
+
+        source_key = canonical_key(
+            source_pose["x"],
+            source_pose["y"],
+            source_pose["theta"],
+            source_pose["side"],
+        )
+        source_event = {
+            "contract": CONTRACT,
+            "event_id": digest(
+                {"contract": CONTRACT, "regime": source_regime, "n": 10, "seed": 0}
+            ),
+            "n": 10,
+            "seed": 0,
+            "regime": source_regime,
+            "start": {
+                "x": source_start[0],
+                "y": source_start[1],
+                "theta": source_start[2],
+            },
+            "endpoint": source_pose,
+            "termination": {
+                "producer_converged": True,
+                "reason": "source-bound selftest",
+                "lp_solves": 1,
+                "angle_steps": 0,
+                "cell_changes": 0,
+                "wall_seconds": 0.0,
+                "fixed_point_evaluations": 1,
+                "fixed_point_settled": 1,
+                "fixed_point_unsettled": 0,
+                "all_probe_evaluations_accounted_for": True,
+                "scientifically_admissible_terminal_event": True,
+                "promotion_blockers": [],
+            },
+            "verification": screen_pose(source_pose),
+            "endpoint_key": {
+                "geometric": source_key.geometric,
+                "contact": source_key.contact,
+                "side": source_key.side,
+                "angle_signature": list(source_key.angle_signature),
+                "contact_count": source_key.contact_count,
+            },
+        }
+        write_events(path, [source_event])
+        if read_events(path) != [source_event]:
+            raise EventError("source-bound event did not replay")
+        tampered_source = json.loads(canonical_json(source_event))
+        tampered_source["regime"]["source_sha256"] = "0" * 64
+        write_events(path, [tampered_source])
+        try:
+            read_events(path)
+        except EventError:
+            pass
+        else:
+            raise EventError("source-bound event accepted a changed source digest")
+        tampered_start = json.loads(canonical_json(source_event))
+        tampered_start["start"]["x"][0] += 1e-6
+        write_events(path, [tampered_start])
+        try:
+            read_events(path)
+        except EventError:
+            pass
+        else:
+            raise EventError("source-bound event accepted a changed retained start")
 
         invalid_start = deterministic_start(2, 1, 1.6)
         invalid_key = canonical_key(
@@ -595,6 +824,8 @@ def main() -> int:
     run_parser.add_argument("--seeds", type=parse_seeds, required=True)
     run_parser.add_argument("--output", type=Path, required=True)
     run_parser.add_argument("--start-side", type=float)
+    run_parser.add_argument("--start-source", choices=[GOBEL10_SOURCE_ID])
+    run_parser.add_argument("--perturbation-scale", type=float)
     run_parser.add_argument("--time-budget", type=float, default=30.0)
     replay_parser = sub.add_parser("replay")
     replay_parser.add_argument("path", type=Path)

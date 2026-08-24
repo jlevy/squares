@@ -114,7 +114,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [7]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Does event generation, independent validity, and canonical-key computation remain
@@ -125,14 +125,19 @@ agenda:
     exit: four replayable events or one retained blocker; exact costs recorded
     bead: think-wbra
     depends_on: [BC-004]
-    next_evidence: exp-028 plus its four-event archive, replay, and n=3 through n=7 cost comparison
+    next_evidence: permanent exp-028 replay and the n=3 through n=7 cost comparison
     parallel_group: event-calibration
-    note: Claimed as exp-028 with D-126 carried explicitly.
+    note: >-
+      Exp-028 retains four valid events with 18,286 of 18,286 evaluations settled: one
+      admissible endpoint and three typed time-budget stops. D-126 remains explicit.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-028-h-021-n7-basin-event-v3.jsonl
   - id: BC-006
     purpose: tool_validation
     owner_focus: correctness
     instances: [8]
-    state: tentative
+    state: complete
     priority: 1
     question: >-
       Does the basic event stack still close at the upper edge of H-021's intended
@@ -143,13 +148,20 @@ agenda:
     exit: four replayable events or one retained blocker; no unseen-mass inference
     bead: think-wbra
     depends_on: [BC-005]
-    next_evidence: one event block plus a measured per-stage timing breakdown
+    next_evidence: exp-029 plus event replay and a bounded quench/screen/key/replay timing audit
     parallel_group: event-calibration
+    note: >-
+      Exp-029 retains four independently valid events: one admissible side-3 endpoint,
+      one typed unsettled cell-cycle stop, and two typed time-budget stops. Median
+      four-event screen and key batches cost 0.000684s and 0.004956s; D-126 remains.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
   - id: BC-007
     purpose: tool_validation
     owner_focus: efficiency
     instances: [9]
-    state: tentative
+    state: complete
     priority: 2
     question: >-
       Can one proved perfect-grid cell traverse the full event and key path before the
@@ -162,41 +174,66 @@ agenda:
     depends_on: [BC-006]
     next_evidence: retained event plus canonicalization share of wall time
     parallel_group: performance
+    note: >-
+      Exp-030 retains one independently valid typed time-budget stop in 21.36s complete
+      command wall, below the 30s profile trigger. Median one-event keying is 0.001074s;
+      no additional n=9 sampling is authorized.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
   - id: BC-008
     purpose: tool_validation
     owner_focus: correctness
     instances: [10]
-    state: blocked
+    state: complete
     priority: 1
     question: >-
       Can the current event path start from a perturbation of the proved 45-degree
       optimum, return to it, and independently verify the full pose under v3?
     hypotheses: [H-002, H-021]
     budget: four preregistered perturbations; 15s each; 90s command cap
-    entry: add a source-bound seeded-pose entry point without changing the quench criterion
+    entry: >-
+      The source-bound `gobel10-svg-v1` entry point replays the published pose, source
+      digest, deterministic perturbation, full start, and independent validity without
+      changing the quench criterion.
     exit: proved-value return and complete receipts, or a typed retained failure
     bead: think-ouf0
     depends_on: [BC-003]
-    next_evidence: a positive-control event artifact rooted in the published exact pose
+    next_evidence: permanent exp-031 semantic replay in the focused and normal gates
     parallel_group: known-answer-controls
+    note: >-
+      Exp-031 converges on all four declared source perturbations, independently validates
+      every endpoint, settles all 6,631 evaluations, and returns within 2.221e-15 of the
+      proved side. This validates a local known-answer control, not basin frequency.
+    artifacts:
+    - sqpack/packings/gobel10.py
+    - tools/basin_census.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
   - id: BC-009
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4]
-    state: blocked
+    state: complete
     priority: 0
     question: >-
       Does a frozen terminal-component classifier recover the exact n=3 interval and
       exact n=4 point without equating endpoint keys, contact strata, or samples with
       connected components?
     hypotheses: [H-021, H-032]
-    budget: one 30m implementation slice followed by sub-second exact fixtures
-    entry: implement the declared isolation, continuation, and ambiguity policy
-    exit: exact ground truth passes; deliberate key/component conflations fail
-    bead: think-0yo9
+    budget: completed in exp-032; 10 agent-minutes and 0.92 seconds generation plus replay
+    entry: exact-model assignment and ambiguity-preserving fallback committed
+    exit: >-
+      Exact n=3 interval and n=4 point replay; eight key, stratum, sample, scope,
+      digest, and f64-assignment mutations fail; unsupported observations stay unresolved.
+    bead: think-a2v6
     depends_on: [BC-001, BC-002]
     next_evidence: classifier contract, positive fixtures, and negative mutations
     parallel_group: identity
+    artifacts:
+    - tools/check_terminal_components.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
   - id: BC-010
     purpose: research
     owner_focus: insight

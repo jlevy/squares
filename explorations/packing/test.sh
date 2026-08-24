@@ -355,10 +355,20 @@ step_basin_events() {
     campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
   $PY tools/basin_census.py replay \
     campaign/series/series-000-smoke-and-calibration/results/exp-027-h-021-n6-basin-event-v3-retention.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-028-h-021-n7-basin-event-v3.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
 }
 
 step_small_n_moduli() {
   # Rebuild the exact n = 3 record and SVG, then the separate rigid n = 4 record.
+  # Finally require the component policy to preserve the connected interval across
+  # key/contact strata while collapsing rigid labelled grids only in the quotient.
   # These replay checks do not write artifacts.
   $PY tools/check_small_n_moduli.py \
     --n 3 \
@@ -367,6 +377,8 @@ step_small_n_moduli() {
   $PY tools/check_small_n_moduli.py \
     --n 4 \
     --replay campaign/series/series-000-smoke-and-calibration/results/exp-015-h-032-n4-optimal-moduli.json
+  $PY tools/check_terminal_components.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
 }
 
 step_negative_controls() {

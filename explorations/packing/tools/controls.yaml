@@ -66,9 +66,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 183", "count: 20"]
+  replace: ["count: 185", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 183"
+  expect: "count 20 != 185"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -88,6 +88,28 @@ controls:
             "Forty claims or open questions are codified as artifacts."]
   run: uv run --frozen --quiet python tools/check_synopsis.py
   expect: "does not state the hypothesis artifact count (41)"
+
+- name: synopsis - duplicate experiment cost row
+  file: SYNOPSIS.md
+  replace:
+    - "| exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |"
+    - |-
+      | exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
+      | exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "exp-030 appears 2 times in the cost table"
+
+- name: synopsis - soundness direction aggregate drifting from the log
+  file: SYNOPSIS.md
+  replace: ["Fifty of the sixty-one soundness defects", "Forty-nine of the sixty-one soundness defects"]
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "soundness-direction aggregate is not 50 of 61"
+
+- name: synopsis - gate detector aggregate drifting from the log
+  file: SYNOPSIS.md
+  replace: ["gate has caught seven defects in 185", "gate has caught six defects in 185"]
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "gate-detector aggregate is not 7 of 185"
 
 - name: synopsis - unprotected-fix count drifting from the log
   file: defects.yaml

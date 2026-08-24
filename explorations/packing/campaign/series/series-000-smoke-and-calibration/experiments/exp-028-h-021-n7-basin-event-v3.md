@@ -35,32 +35,47 @@ experiment:
       campaign/series/series-000-smoke-and-calibration/results/exp-028-h-021-n7-basin-event-v3.jsonl
     budget: four seeds; 10 seconds per quench; 90-second process cap; retain every stop
     record: campaign/series/series-000-smoke-and-calibration/results/exp-028-h-021-n7-basin-event-v3.jsonl
-  lease: {expires: '2026-08-24T18:45:00Z', host: local-m1-pro}
+  effort:
+    timebox: 30m result slice; 90s measurement cap
+    wall_seconds: 38.627748667029664
+    agent_minutes: 5
+    stopped_by: criterion
   results:
   - shape: determination
     question: >-
       Under the unchanged v3 regime, do all four n=7 starts retain independently
       replayable events or typed stops without censoring validity or termination evidence?
     role: outcome
-    outcome: invalid
-    checked_by: pending BasinEvent/v3 semantic replay
+    outcome: criterion_met
+    checked_by: >-
+      BasinEvent/v3 replay: 4/4 independently valid balanced outcomes retained; 1/4
+      producer-converged and admissible; 3/4 are typed time-budget stops; all 18,286
+      fixed-point evaluations settled
   verdict:
-    decision: in-progress
+    decision: baseline
     primary_criterion: complete independently replayable event outcome for every fixed seed
     reason: >-
-      Preregistered before measurement. This validates event generation and replay only;
-      D-126 prevents deterministic-work or frequency claims, and keys are not components.
+      The complete block retains and replays without a launch-path failure. Three
+      time-budget stops make the cell unsuitable for basin-frequency or completeness
+      claims under D-126, and endpoint keys remain observations rather than components.
+    commit: ce84ef6
 ---
-# exp-028 — preregistered `n = 7` event validation
+# exp-028 — the `n = 7` event-validation cell is complete
 
 BC-005 advances one size after the complete n=6 retention replication.
 The instrument, seeds, per-seed budget, validity screen, typed blockers, and replay
 contract remain unchanged.
 
-Every attempted seed must become one replayable event, admissible or blocked.
-The round does not require convergence or a proved optimum, and it cannot estimate basin
-frequency under D-126’s wall-clock work budget.
-Endpoint descriptors remain observations rather than component identities.
+All four events are independently valid and replay.
+Seed 1 converges at side `3.199999999999` and is admissible.
+Seeds 0, 2, and 3 hit the time budget at valid sides `3.209153843824`, `3.148250012242`,
+and `3.167825251585`; each remains non-admissible with `producer_not_converged`. Their
+receipts account for 18,286 fixed-point evaluations, all settled and none unsettled, in
+38.63 seconds of quench wall time.
+
+This completes the n=7 event-retention cell without finding a new launch-path defect.
+The 1/4 admissible rate is not a basin-frequency estimate: D-126 makes the wall-clock
+work budget load-dependent, and endpoint descriptors are not component identities.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

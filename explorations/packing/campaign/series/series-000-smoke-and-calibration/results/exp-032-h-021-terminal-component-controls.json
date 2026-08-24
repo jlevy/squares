@@ -1,0 +1,269 @@
+{
+  "contract": "packing.squares:TerminalComponentControl/v1",
+  "determination": {
+    "claim": "the frozen policy recovers the exact n=3 quotient interval and n=4 quotient point without using keys, strata, or samples as components",
+    "outcome": "criterion_met",
+    "scope": "known-answer controls at exact side 2 only; no n=5 component or sampled-basin claim"
+  },
+  "exact_models": {
+    "n3": {
+      "component_count": 1,
+      "component_id": "F3(2)/(D4xS3):0",
+      "model_kind": "complete_exact_connected_model",
+      "n": 3,
+      "quotient_scope": "container D4 x square relabelling x per-square quarter turns",
+      "sample_assignments": [
+        {
+          "component_id": "F3(2)/(D4xS3):0",
+          "contact_key": "69b55e102efa90f5a24e62fb24be7ebe",
+          "evidence": "complete exact quotient parameter membership",
+          "geometric_key": "39cd5d5efcd0c52093be5d6d7b297cd7",
+          "member": "lambda=0",
+          "status": "assigned",
+          "stratum": "C"
+        },
+        {
+          "component_id": "F3(2)/(D4xS3):0",
+          "contact_key": "328ce368e8b4d1ae57277f26ac120f1d",
+          "evidence": "complete exact quotient parameter membership",
+          "geometric_key": "045167dbd867089bc0128af696fb5a26",
+          "member": "lambda=1/8",
+          "status": "assigned",
+          "stratum": "G"
+        },
+        {
+          "component_id": "F3(2)/(D4xS3):0",
+          "contact_key": "328ce368e8b4d1ae57277f26ac120f1d",
+          "evidence": "complete exact quotient parameter membership",
+          "geometric_key": "287ebee5c74d70e32a883611369f010a",
+          "member": "lambda=1/4",
+          "status": "assigned",
+          "stratum": "G"
+        },
+        {
+          "component_id": "F3(2)/(D4xS3):0",
+          "contact_key": "328ce368e8b4d1ae57277f26ac120f1d",
+          "evidence": "complete exact quotient parameter membership",
+          "geometric_key": "5c607354b18ad58d6035aa85248b1330",
+          "member": "lambda=1/2",
+          "status": "assigned",
+          "stratum": "M"
+        }
+      ],
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json",
+      "source_sha256": "bc126e5bb13d4788a598c5145b754687cf2d2734344a37705e6d84c4373626bf",
+      "strata": [
+        {
+          "active_sat_axes": 4,
+          "id": "C",
+          "local_dimension": 1,
+          "name": "corner/L endpoint",
+          "pair_contacts": 3,
+          "parameter": "0",
+          "stabilizer_order": 2,
+          "stratum_dimension": 0,
+          "wall_incidences": 6
+        },
+        {
+          "active_sat_axes": 3,
+          "id": "G",
+          "local_dimension": 1,
+          "name": "generic slider",
+          "pair_contacts": 3,
+          "parameter": "0<lambda<1/2",
+          "stabilizer_order": 1,
+          "stratum_dimension": 1,
+          "wall_incidences": 5
+        },
+        {
+          "active_sat_axes": 3,
+          "id": "M",
+          "local_dimension": 1,
+          "name": "centred slider endpoint",
+          "pair_contacts": 3,
+          "parameter": "1/2",
+          "stabilizer_order": 2,
+          "stratum_dimension": 0,
+          "wall_incidences": 5
+        }
+      ],
+      "topology": "closed interval [0,1/2]"
+    },
+    "n4": {
+      "all_labelled_states_assign_to": "F4(2)/(D4xS4):0",
+      "component_count": 1,
+      "component_id": "F4(2)/(D4xS4):0",
+      "labelled_state_count": 24,
+      "labelled_state_sha256": "89bf88159b30d08d244a6dd0d4a5d50fc254976fd1608d4ce8ade8eca40b66fe",
+      "model_kind": "complete_exact_isolated_model",
+      "n": 4,
+      "quotient_scope": "container D4 x square relabelling x per-square quarter turns",
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-015-h-032-n4-optimal-moduli.json",
+      "source_sha256": "6f605fc82c2f521168b7eafb9a8811557501720ee53b8e0eb9cdd93aeaf2db28",
+      "topology": "point"
+    }
+  },
+  "floating_observations": [
+    {
+      "event_id": "87ff87c0b5c1d1b89e5ace4851e01795394ee8a45ef35247bfdad9d2cb225930",
+      "n": 3,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.000000000000001,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-021-h-021-n3-basin-event-v3.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "42e8810aacefbcc88285e60508f75d2330e4e24dfe0508f0364b2c46706370b3",
+      "n": 3,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.0000000000000004,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "e495869fdf43210f7090e78cf5ba3680a68299180403ac35a99e7a3eac80376f",
+      "n": 3,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.3627357977946724,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "440b64bf1f2bfbb191485354bf1a68ce4d5fb9ebf3e0bd6d160c38dfc53efe88",
+      "n": 3,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.0000000000000004,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "54f68b9a4a1992ee94a2dc623cfb3e63a3fda4c6210b5f9c33abdccc519eaae2",
+      "n": 4,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.0000000000000004,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "c583ea0b2f96b9dfab597a12b116697baeacf7d47cb8a9103c68fde564b06460",
+      "n": 4,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.0000000000000386,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "3cfd2a6668f1c781d052f4378a8a3f4a1ba504edc3177ab1aa349f62212a1d8d",
+      "n": 4,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.0000000000000004,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "498f2aa3261488362846a2b1460223c7f97f3acc256bcf017d3c3b65b8af7e14",
+      "n": 4,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": false,
+      "side": 2.0218239546404626,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "54f68b9a4a1992ee94a2dc623cfb3e63a3fda4c6210b5f9c33abdccc519eaae2",
+      "n": 4,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.0000000000000004,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "c583ea0b2f96b9dfab597a12b116697baeacf7d47cb8a9103c68fde564b06460",
+      "n": 4,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.0000000000000386,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "3cfd2a6668f1c781d052f4378a8a3f4a1ba504edc3177ab1aa349f62212a1d8d",
+      "n": 4,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.0000000000000004,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "498f2aa3261488362846a2b1460223c7f97f3acc256bcf017d3c3b65b8af7e14",
+      "n": 4,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.0,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "e6fc1e30fd2a0a2354fece8732fb008a5775adcd61c7d498dc20eba30619a1de",
+      "n": 5,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.974873734152916,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "8a4433ae53f962f07530e3f6b88dcfb973713b1acedb96758f5a7f75c80a3eca",
+      "n": 5,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.974873734152917,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "39faa222fc41b86dce40a0b23ccf4ab5dc43302a96c0ce8e60ea8e635009923c",
+      "n": 5,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.8284271247461907,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl",
+      "status": "unresolved"
+    },
+    {
+      "event_id": "e6e68ba183f9ccd55c50abddc5984dd78c51f1a9152b8e3e5b4bb007daba9411",
+      "n": 5,
+      "reason": "f64 compatibility is not an exact component-membership certificate",
+      "scientifically_admissible": true,
+      "side": 2.82842712474619,
+      "source": "campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl",
+      "status": "unresolved"
+    }
+  ],
+  "policy": {
+    "ambiguity_rule": "otherwise preserve the observation as unresolved",
+    "assignment_rule": "assign only from a complete exact component model or an independently replayable membership certificate",
+    "endpoint_keys_are_component_evidence": false,
+    "quotient_scope": "container D4 x square relabelling x per-square quarter turns"
+  },
+  "schema_version": 1,
+  "selftests": {
+    "contact_keys_as_components": true,
+    "exact_model_digest_ignored": true,
+    "f64_event_forced_assigned": true,
+    "geometric_keys_as_components": true,
+    "labelled_scope_as_quotient": true,
+    "n4_labelled_states_as_components": true,
+    "n5_event_forced_assigned": true,
+    "samples_as_components": true
+  }
+}

@@ -35,14 +35,14 @@ session:
       No retained per-seed basin-event stream carried full poses, independent validity,
       typed termination evidence, resumable writes, and measured event wall time.
     after: >-
-      Exp-018 through exp-020 retain replayable n=3, n=4, and n=5 event blocks with full
-      poses, independent validity, typed producer termination, and event timings. Their
-      twelve historical v2 events remain blocked as recorded. Exp-021 and exp-022 add a
-      complete four-seed n=3 block of scientifically admissible v3 terminal events with
-      balanced receipts. Exp-023 preserves the n=4 solver-boundary failure that exposed
-      D-171; exp-024 then completes the repaired n=4 block at four of four admissible
-      events with 14,301 of 14,301 evaluations settled. The number of
-      component-classified map cells remains zero, so no complete-map claim follows.
+      Historical v2 events remain blocked as recorded. BasinEvent/v3 now retains
+      complete tool-validation blocks through n=8, one bounded n=9 performance event,
+      and source-bound n=10 starts tied to the published Göbel pose. The n=10 entry point
+      passes static checks and semantic replay; exp-031 converges on all four source
+      perturbations at the proved side with complete receipts. The number of
+      exact component controls now classify the n=3 quotient interval and n=4 quotient
+      point, while sampled component-classified map cells remain zero. No complete-map
+      claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -121,6 +121,19 @@ session:
     elapsed_seconds: 6
     elapsed_quality: platform_measured
     next_action: Run retained n=3, n=10, n=11, and adversarial failure controls.
+  - task: Check the source-bound n=10 BasinEvent entry point mechanically
+    operator: d168_mechanical_check
+    status: completed
+    outcome: >-
+      Ruff, BasedPyright, byte compilation, the BasinEvent selftest, shell syntax, and
+      whitespace checks pass after the parent narrowed the pose input type.
+    evidence: [frozen static-check output, source-start mutation selftests]
+    files: [sqpack/packings/gobel10.py, tools/basin_census.py]
+    checks: [Ruff, BasedPyright, py_compile, BasinEvent selftest, bash syntax, git diff check]
+    uncertainty: The delegate did not run the scientific four-perturbation BC-008 cell.
+    elapsed_seconds: 3
+    elapsed_quality: platform_measured
+    next_action: Preregister BC-008, then run its four bounded source perturbations.
   - task: Review every PR 20 surface and compare its documentation with the current branch
     operator: pr19_comment_checkpoint_2
     status: completed
@@ -161,6 +174,9 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
@@ -171,9 +187,14 @@ session:
   - campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-027-h-021-n6-basin-event-v3-retention.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-028-h-021-n7-basin-event-v3.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - campaign/schemas/agenda.schema.yaml
   - tools/basin_census.py
+  - sqpack/packings/gobel10.py
   - README.md
   - campaign/README.md
   - campaign/agent-sessions/README.md
@@ -257,10 +278,43 @@ session:
     Exp-027 retains and replays all four n=6 outcomes. Three converge at side 3; seed 3
     is independently valid but hits the wall-clock budget at side 3.040392660291 and is
     non-admissible. A deterministic run-path fixture closes D-183; D-126 remains open.
+  - >-
+    Exp-028 retains and replays four valid n=7 outcomes with 18,286 settled evaluations.
+    One converges at side 3.2; three hit the time budget and remain non-admissible. This
+    validates retention, not basin frequency or component completeness.
+  - >-
+    Exp-029 retains and replays four independently valid n=8 outcomes in 38.00 seconds.
+    One converges at side 3, one retains a typed unsettled cell-cycle evaluation, and
+    two hit the time budget. Four-event median screen and key batches cost 0.000684s and
+    0.004956s; quench work, not canonicalization, dominates this cell.
+  - The post-exp-029 full normal gate passes all thirty steps in 61 wall-seconds.
+  - >-
+    Exp-030 retains and replays one independently valid n=9 time-budget stop. The full
+    command costs 21.36 seconds; retained quench wall is 20.062 seconds, median
+    one-event screening is 0.000174 seconds, and median keying is 0.001074 seconds.
+  - The post-exp-030 full normal gate passes all thirty steps in 47 wall-seconds.
+  - >-
+    The source-bound n=10 entry point reproduces the published Göbel pose, binds its
+    source URL and SHA-256, retains deterministic perturbations, and rejects changed
+    source or start data. All 36 historical events still replay. A one-second real run
+    reaches a valid optimal-side endpoint and retains a typed producer time stop.
+  - >-
+    Exp-031 preregisters four fixed source perturbations at scale 1e-4, a 15-second
+    per-seed budget, a 90-second process cap, and the distinction between optimal-side
+    validity and producer convergence before observing the four outcomes.
+  - >-
+    Exp-031 then meets its complete criterion: 4/4 events converge, validate, replay,
+    and return within 2.221e-15 of the proved side; 6,631/6,631 fixed-point evaluations
+    settle in 10.337 seconds of retained quench wall.
+  - >-
+    Exp-032 completes BC-009 in 0.92 seconds of generation plus replay. The exact n=3
+    interval remains one component across four geometric keys, two contact signatures,
+    and three strata; the exact n=4 quotient is one point; all eight false-policy
+    mutations fail and all 16 f64 observations remain unresolved.
   stop_reason: null
   next_action: >-
-    Execute preregistered exp-028 only: four fixed n=7 seeds at 10 seconds each under a
-    90-second command cap. Retain typed stops and make no frequency or component claim.
+    Begin one bounded BC-010 n=5 connectivity slice. Preserve every unsupported endpoint
+    as unresolved and stop after one declared pair or one retained blocker.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -282,11 +336,17 @@ completes the n=4 v3 block.
 The historical v2 block remains promotion-blocked as recorded, and no endpoint
 descriptor has been promoted to a connected component.
 
-The event stack now retains complete blocks through n=6. D-126 still prevents a fixed
-wall-clock budget from defining reproducible scientific work, so these cells validate
-retention and replay only; they do not estimate basin frequencies.
-The separate n=5 connectivity question remains blocked until its component-identity
-controls are explicit.
+The event stack now retains complete blocks through n=8 plus one bounded n=9 performance
+event. D-126 still prevents a fixed wall-clock budget from defining reproducible
+scientific work, so these cells validate retention and replay only; they do not estimate
+basin frequencies. The separate n=5 connectivity question remains blocked until its
+component-identity controls are explicit.
+The source-bound n=10 entry path now passes its four-perturbation BC-008 known-answer
+control in exp-031. The exact evidence boundary now also passes BC-009: exp-032
+classifies only the complete `n = 3` and `n = 4` quotient models and refuses to infer a
+component from any current floating-point event.
+The next research cell is therefore local `n = 5` connectivity, not a sample-count
+census.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

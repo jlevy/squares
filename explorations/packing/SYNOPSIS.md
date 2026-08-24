@@ -179,8 +179,10 @@ Until [D-034](defects.md) is resolved the discovery curve cannot plateau, the ce
 cannot saturate, and the rarity premise is **untestable rather than untested**.
 
 Cheap endpoint summaries such as angle signatures and contact counts exist.
-A validated terminal-component descriptor interface is unbuilt, so steering strategies
-that depend on component identity or descriptor distances remain unbuilt too.
+Exp-032 now supplies an exact known-answer boundary: complete `n = 3` and `n = 4`
+quotient models may assign components, while unsupported numerical observations remain
+unresolved. A scalable retained-pose classifier is still unbuilt, so steering strategies
+that depend on sampled component identity or descriptor distances remain unbuilt too.
 
 ### The promotion pipeline—unbuilt, and it is the largest structural gap
 
@@ -551,7 +553,7 @@ Where the program has spent effort, and what came of it.
 | --- | --- | --- | --- | --- |
 | 5 | proved, `2 + ½√2` | `2.70710678…` | positive control | `sqsearch --selftest` recovers it on every run. [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md): the bracketing quench refines annealer output to `2.22e-15`—the analytic value to machine precision |
 | 8 | proved, `3` | `3` | census kill line | The `n` at which [H-011](campaign/hypotheses/H-011-small-n-census.md)’s discovery curve must plateau, or enumeration is abandoned. No rounds |
-| **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Four rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); angle descent barely helps; [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`—**twelve orders** |
+| **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Five rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`; exp-031 returns all four source perturbations within `2.221e-15` |
 | **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**), corner (**T-3**), and repaired lower-bound certificate (**T-4**); nine rounds. Search remains `≈ 6e-02` short, exp-013 proves Trump’s exact pose locally isolated, exp-016 rejects Stromquist’s printed proof, and exp-017 independently restores its numerical bound |
 | **12** | open; `4` believed optimal | `4` | **open-case calibration** | Two rounds. Returns exactly `4.0` on all five seeds, which is baseline evidence rather than a known-answer guard. Also where the search and proof lanes are planned to meet |
 | 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
@@ -1210,20 +1212,26 @@ The mutable size-by-size run order lives in the
 [basin-map confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md),
 not in this status document.
 It labels every cell as tool validation, measurement validation, or genuine research.
-The event-retention controls through `n = 6` are complete; exp-028 is the active bounded
-`n = 7` tool-validation cell.
-Exact configuration-space controls still stop at `n = 4`. Component and census claims
-remain blocked on the later identity and coverage rows.
+The event-retention controls through `n = 8` and the bounded `n = 9` performance cell
+are complete. The random-start size ladder stops there.
+BC-008’s source-bound `n = 10` seeded-pose entry point now passes replay and a bounded
+run-path smoke test.
+Exp-031 completes its four-perturbation known-answer experiment at 4/4 converged,
+independently valid, and admissible.
+Exp-032 completes BC-009: exact `n = 3` and `n = 4` component controls pass while all 16
+retained f64 observations remain unresolved.
+The next admitted cell is one bounded BC-010 `n = 5` connectivity question, not a
+component census.
 
 ## Experiments Conducted
 
-There are 28 rounds registered in `series-000`; 27 are terminal and exp-028 is in
-progress. The terminal rounds record 773 agent-minutes and 26.4 wall-minutes.
+There are 32 rounds registered in `series-000`; all are terminal.
+They record 803 agent-minutes and 28.2 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
 checker, the exact Stromquist printed-set falsifier, and the exact repaired-cover
-certificate.
+certificate, and the exact terminal-component known-answer checker.
 
 No search round has been run at the `exact` tier, so **no result below claims a new
 record**. Exp-012 is an exploratory reconstruction of a published record witness; its
@@ -1263,7 +1271,11 @@ archive beside it.
 | [exp-025](campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md) | 5 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,219/14,219 evaluations settled; 4 admissible | **baseline** |
 | [exp-026](campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 3 valid/admissible retained; seed 3 crashes before retention | **blocked** |
 | [exp-027](campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 3 admissible; one typed time-budget stop | **baseline** |
-| [exp-028](campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md) | 7 | positive control | H-021 | BasinEvent/v3 semantic replay | preregistered four-seed tool-validation block; measurement pending | **in-progress** |
+| [exp-028](campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md) | 7 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; three typed time-budget stops | **baseline** |
+| [exp-029](campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md) | 8 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; one typed unsettled stop and two time-budget stops | **baseline** |
+| [exp-030](campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md) | 9 | positive control | H-021 | BasinEvent/v3 semantic replay | 1 retained/valid typed time-budget stop; full command 21.36 s | **baseline** |
+| [exp-031](campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md) | 10 | positive control | H-002 | source-bound BasinEvent/v3 replay | 4/4 admissible; max proved-side error `2.221e-15` | **baseline** |
+| [exp-032](campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md) | 3 | positive control | H-021 | exact component-policy replay | one n=3 interval; one n=4 point; 8/8 false policies rejected | **baseline** |
 
 ### Cost and provenance
 
@@ -1296,18 +1308,29 @@ archive beside it.
 | exp-025 | 4 seeds, 10 s each | 14.473 s | 5 m | criterion | `5ab8dab` |
 | exp-026 | 4 seeds declared; 3 retained | 19.017 s | 5 m | error | `da6bac3` |
 | exp-027 | 4 seeds, 10 s each | 34.425 s | 5 m | criterion | `a3be8e4` |
+| exp-028 | 4 seeds, 10 s each | 38.628 s | 5 m | criterion | `ce84ef6` |
+| exp-029 | 4 seeds, 10 s each | 38.004 s | 5 m | criterion | `69c6008` |
+| exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
+| exp-031 | 4 seeds, 15 s each | 10.337 s | 5 m | criterion | `dab797c` |
+| exp-032 | exact n=3/n=4 models + 8 mutations | 0.92 s | 10 m | criterion | `d3d4ace` |
 
-### What the twenty-seven rounds jointly establish
+### What the thirty-two rounds jointly establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
-`n = 6`; component classification is not.** Exp-018 through exp-020 retain twelve
-independently valid historical v2 poses at `n=3` through `n=5`, including four at the
-proved `n=3` and `n=4` optima, but D-165 correctly remains recorded on those artifacts.
+`n = 8` plus one bounded `n = 9` performance event; exact component controls pass only
+at `n = 3` and `n = 4`.** Exp-018 through exp-020 retain twelve independently valid
+historical v2 poses at `n=3` through `n=5`, including four at the proved `n=3` and `n=4`
+optima, but D-165 correctly remains recorded on those artifacts.
 Exp-021 adds one v3 `n=3` event whose 2,037 fixed-point evaluations are all retained and
 settled, whose pose independently verifies, and whose admissibility claim replays.
 Exp-022 completes the four-seed v3 block at 4/4 admissible: three endpoints reach side 2
 and one reaches the valid nonoptimal side 2.362735797795. These events are evidence for
 the producer contract and terminal outcomes, not terminal-component counts.
+Exp-032 freezes the missing evidence rule: the complete exact `n = 3` quotient is one
+interval across four geometric keys and two contact signatures, and the complete exact
+`n = 4` quotient is one point.
+All current f64 events remain unresolved because none carries an exact
+component-membership witness.
 Exp-023 reaches proved side 2 on three of four n=4 starts and preserves the fourth
 event’s post-check rejection.
 That stop exposed D-171: two rows were already outside the screen before an argmax-only
@@ -1326,10 +1349,35 @@ Exp-027 retains all four starts: three admissible side-3 events and one independ
 valid, non-admissible time-budget stop at side 3.040392660291. The earlier invalid
 endpoint does not reproduce because open D-126 makes wall-clock-limited work
 load-dependent; neither round supports frequency or component claims.
-The exact small-moduli controls remain valid; component identity is the next blocked
-layer. The `n=12` calibration returns exactly `4.0`, but that is not a known-answer
-guard. The runner’s full-pose independent verification boundary remains open under
-[D-044](defects.md); a producer-reported overlap scalar does not close it.
+Exp-028 retains four independently valid `n=7` outcomes but only one converges; three
+carry typed time-budget stops.
+This validates the event path at `n=7` while showing that the ten-second cell is already
+too censored for landscape statistics.
+Exp-029 retains four independently valid `n=8` outcomes: one admissible side-3 event,
+one typed unsettled cell-cycle stop, and two typed time-budget stops.
+Its bounded cost audit measures median four-event independent screening at 0.000684
+seconds and canonical key computation at 0.004956 seconds, versus 38.004 seconds of
+retained quench wall.
+Canonicalization is therefore not yet the event-loop bottleneck at n=8, while the 3/4
+typed-stop rate again bars landscape statistics.
+Exp-030 retains one independently valid `n=9` time-budget stop and completes the frozen
+command in 21.36 seconds, below its 30-second profile trigger.
+Median one-event keying costs 0.001074 seconds versus 20.062 seconds of quench wall, so
+canonicalization remains negligible at n=9. This one censored event is a performance
+control, not an n=9 landscape sample.
+The blind random-start size ladder stops after n=9. A source-bound n=10 entry point now
+reconstructs the published Göbel pose, binds its source digest, replays deterministic
+perturbations, and retains typed failure.
+A one-second smoke run reaches a valid endpoint at the proved side but times out before
+producer convergence.
+Exp-031 then converges on all four preregistered perturbations: every endpoint validates
+and replays, all 6,631 fixed-point evaluations settle, and the maximum proved-side error
+is `2.221e-15`. This is a local known-answer control, not a random-search or component
+claim. The exact small-moduli controls remain valid; component identity is the next
+blocked layer. The `n=12` calibration returns exactly `4.0`, but that is not a
+known-answer guard.
+The runner’s full-pose independent verification boundary remains open
+under [D-044](defects.md); a producer-reported overlap scalar does not close it.
 
 **Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
 selections as 128 derivative-distinct matrices.
@@ -1397,34 +1445,34 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 183 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 185 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 61 | asserted something false about the mathematics |
-| validity | 53 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 49 | recorded something its own evidence contradicts |
+| validity | 54 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 50 | recorded something its own evidence contradicts |
 | robustness | 15 | did not finish, or finished only by luck |
 | performance | 5 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Forty-five of the fifty-five soundness defects pointed in the *flattering*
-direction**, where the error looks like a success.
+**Fifty of the sixty-one soundness defects pointed in the *flattering* direction**,
+where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught six defects in one hundred sixty-one, and no soundness
-defect ever.** Every soundness failure was found by a control cell whose answer was
-known in advance, a rule written down before the measurement, a generated view
-contradicting its source, or someone reading carefully.
+**The automated gate has caught seven defects in 185, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. The six the gate did catch ([D-024](defects.md), [D-064](defects.md),
-[D-106](defects.md), [D-107](defects.md), [D-125](defects.md), and [D-130](defects.md))
-are bookkeeping or robustness defects, found by contiguity, integration,
-mutation-anchor, and reconciliation checks—which is the pattern, not an exception: gates
-are good at the mechanical classes and have never once caught the mathematics being
-wrong.
+*surprised*. The seven the gate did catch ([D-024](defects.md), [D-064](defects.md),
+[D-106](defects.md), [D-107](defects.md), [D-125](defects.md), [D-130](defects.md), and
+[D-163](defects.md)) are bookkeeping or robustness defects, found by contiguity,
+integration, mutation-anchor, and reconciliation checks—which is the pattern, not an
+exception: gates are good at the mechanical classes and have never once caught the
+mathematics being wrong.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed
@@ -1573,16 +1621,16 @@ defect log good enough to predict its own regressions.
 
 **The bottleneck has moved from polish to proposal.** Nothing in the current toolkit
 reaches Trump’s standing side, and the refiner cannot rescue the tested starts by
-construction; no terminal-component relation has been measured.
+construction; no sampled `n >= 5` terminal-component relation has been measured.
 The named candidates are δ-continuation, angle-class search as a *search* rather than an
 assumption, neighbour-transfer seeding, and quality-diversity retention—none built.
 
-**The premise is still untested, and now blocked on a harder question than expected.**
-Everything the strategy layer recommends rests on record basins being rare in quench
-measure, and [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is the
-measurement that would refute it.
-The quench supplies one needed instrument, but full event retention, independent pose
-validity, and terminal identity are not ready.
+**The premise is still untested, and now blocked on the first nontrivial component
+question.** Everything the strategy layer recommends rests on record basins being rare
+in quench measure, and [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is
+the measurement that would refute it.
+The quench supplies one needed instrument, and exact `n = 3`/`n = 4` identity controls
+now pass, but sampled terminal identity at `n = 5` is not ready.
 What is not settled is what a basin *is*.
 
 [D-034](defects.md) is the open defect that says so.
