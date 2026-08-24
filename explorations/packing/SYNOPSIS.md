@@ -376,6 +376,9 @@ share one exact connected fixed-angle LP optimal face.
 Its fixed-side active nullity is one in the interior and zero at the two boundary
 strata. Exp-034 proves that face lies in a two-parameter angle-and-slide sheet of
 orientation-indexed LP optima.
+Exp-035 derives the full active first-order systems at both endpoints and one interior
+point; every owner branch admits one exact direction outside that sheet, but nonlinear
+realization is unresolved.
 This is not a proof of a five-dimensional family or of the complete nonsmooth stationary
 component ([D-034](defects.md), [D-041](defects.md)).
 
@@ -1236,17 +1239,20 @@ Exp-033 completes the first bounded BC-010 `n = 5` connectivity slice: the equal
 pair shares one exact fixed-angle optimal face.
 Exp-034 embeds that face in an exact two-parameter angle-and-slide sheet, but complete
 stationary identity and the unequal-side rows remain open.
+Exp-035 derives the complete active first-order systems at both endpoints and one
+interior point and finds an exact direction outside that sheet in every owner branch;
+nonlinear realization remains open.
 
 ## Experiments Conducted
 
-There are 34 terminal rounds registered in `series-000`. They record 828 agent-minutes
+There are 35 terminal rounds registered in `series-000`. They record 848 agent-minutes
 and 28.2 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
 checker, the exact Stromquist printed-set falsifier, and the exact repaired-cover
 certificate, the exact terminal-component known-answer checker, and the exact `n = 5`
-fixed-angle face and angle-sheet checkers.
+fixed-angle face, angle-sheet, and full-angle tangent checkers.
 
 No record-search round has been run at the `exact` tier, so **no result below claims a
 new record**. Exp-012 is an exploratory reconstruction of a published record witness;
@@ -1293,6 +1299,7 @@ archive beside it.
 | [exp-032](campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md) | 3 | positive control | H-021 | exact component-policy replay | one n=3 interval; one n=4 point; 8/8 false policies rejected | **baseline** |
 | [exp-033](campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md) | 5 | target | H-023 | exact fixed-angle face test | one segment; nullities `0/1/0`; six controls pass | **accepted** |
 | [exp-034](campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md) | 5 | target | H-023 | exact angle-and-slide sheet | dimension at least two; four fixtures and five controls pass | **accepted** |
+| [exp-035](campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md) | 5 | target | H-023 | exact full-angle active systems | non-sheet direction at A/interior/B; seven controls pass | **accepted** |
 
 ### Cost and provenance
 
@@ -1332,8 +1339,9 @@ archive beside it.
 | exp-032 | exact n=3/n=4 models + 8 mutations | 0.92 s | 10 m | criterion | `d3d4ace` |
 | exp-033 | one exact common-cell face + six controls | 0.24 s | 15 m | criterion | `26360f1` |
 | exp-034 | one exact parameter sheet + five controls | 0.27 s | 10 m | criterion | `329b848` |
+| exp-035 | six exact owner matrices + seven controls | 0.28 s | 20 m | criterion | `aa63cf4` |
 
-### What the 34 rounds jointly establish
+### What the 35 rounds jointly establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only
@@ -1353,6 +1361,10 @@ component-membership witness.
 Exp-033 adds the first exact relation between sampled `n = 5` source poses: after one D4
 action and relabelling, two different golden keys share a one-dimensional fixed-angle
 optimal face at side `1 + 5sqrt(2)/4`. It does not assign a full terminal component.
+Exp-034 embeds that face in an exact two-parameter angle-and-slide sheet.
+Exp-035 then retains six exact active-system matrices across A, the interior, and B and
+verifies a non-sheet direction against every row.
+This is first-order evidence, not a nonlinear path or component assignment.
 Exp-023 reaches proved side 2 on three of four n=4 starts and preserves the fourth
 event’s post-check rejection.
 That stop exposed D-171: two rows were already outside the screen before an argmax-only
@@ -1467,14 +1479,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 195 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 196 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 64 | asserted something false about the mathematics |
 | validity | 57 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 54 | recorded something its own evidence contradicts |
+| bookkeeping | 55 | recorded something its own evidence contradicts |
 | robustness | 15 | did not finish, or finished only by luck |
 | performance | 5 | worked, but cost far more than it should |
 
@@ -1484,7 +1496,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught eight defects in 195, and no soundness defect ever.**
+**The automated gate has caught eight defects in 196, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1621,12 +1633,12 @@ D-171 records why the former argmax-only repair left one n=4 event unsettled: ro
 and 21 already violated the screen together.
 The complete offending-set retry closes the exact regression, and exp-024 completes the
 n=4 v3 block at 4/4 admissible without weakening the screen.
-D-194 and D-195 stop the unexecuted exp-035 candidate before preregistration.
-Its pair `(0,4)` differential must be regenerated at each slide stratum, and pair
-`(3,4)` has two owner-axis branches whose tied support rows are conjunctive within each
-branch.
-Neither candidate claim is evidence until both outstanding instrument defects are
-fixed.
+D-194 and D-195 record two pre-measurement corrections to exp-035: pair `(0,4)` is
+regenerated at each slide stratum, and pair `(3,4)` has two owner-axis branches whose
+tied support rows are conjunctive within each branch.
+The frozen controls now execute and both defects are fixed.
+D-196 records the integration recurrence caught before commit when a context-poor edit
+briefly changed D-034 instead of D-194.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
@@ -1674,9 +1686,10 @@ An exact dual proves optimality within that cell, while active fixed-side nullit
 changes from zero at each endpoint to one in the interior.
 Exp-034 proves that exact face lies in a two-parameter angle-and-slide sheet of
 orientation-indexed LP optima.
-The complete wall-release and separating-axis cone plus certified continuation must
-still decide the full component; the unequal-side rows still need minimax-clearance
-bounds.
+Exp-035 derives both owner-axis first-order systems at the two endpoints and one
+interior point and verifies one exact non-sheet direction in each.
+Certified nonlinear continuation must still decide whether that direction is a true
+motion in the full component; the unequal-side rows still need minimax-clearance bounds.
 
 So `distinct_basins` currently counts family members, the discovery curve cannot
 plateau, and H-011’s saturation criterion is unreachable until the definition is fixed.
@@ -1702,7 +1715,9 @@ exp-013 confirmed H-026 and locally isolated Trump’s pose, and exp-014/015 sol
 exact `n=3,4` quotient controls in 1.28 wall seconds.
 Exp-033 then certified the `n = 5` equal-side pair’s exact fixed-angle face in 0.24 wall
 seconds of generation plus replay.
-Next test angle-varying stationarity along that face, bound clearance between the
+Exp-034 and exp-035 then certify an exact angle-and-slide sheet and a non-sheet
+first-order direction in 0.55 further wall-seconds.
+Next realize or obstruct that direction nonlinearly, bound clearance between the
 unequal-side rows, and hide the UnitSquare `n = 68,69` children for the first
 parent-surgery test.
 The quantitative Trump successor is an explicit isolation radius or minimal-support

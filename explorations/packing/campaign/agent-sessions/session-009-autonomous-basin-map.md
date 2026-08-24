@@ -44,9 +44,9 @@ session:
       point. Exp-033 proves one exact fixed-angle face relation between the equal-side
       n=5 source poses, and exp-034 embeds it in one exact angle-and-slide sheet, while
       sampled full-component classifications remain zero. The next cone checker is
-      corrected and exp-035 is preregistered, but it has not been scientifically run.
-      D-194 and D-195 remain open until the frozen controls execute. No complete-map
-      claim follows.
+      corrected, and exp-035 now retains exact non-sheet first-order directions at both
+      endpoints and one interior point. Nonlinear realization remains unresolved. No
+      complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -421,10 +421,26 @@ session:
     checks. Exp-035 now freezes the two owner-axis branches, both tied support rows per
     branch, the stratum-specific coefficient control, and separate 30-second generation
     and replay caps. No target code has run at this checkpoint.
+  - >-
+    Exp-035 meets its frozen criterion in 0.28 wall-seconds of generation plus replay.
+    Both exact owner-axis systems retain both tied support rows at A, the interior, and
+    B; one non-sheet direction makes every active derivative zero at each stratum. All
+    seven controls reject. This is first-order evidence only, so nonlinear realization
+    and stationary-component identity remain unresolved.
+  - >-
+    The exp-035 integration diff caught D-196 before commit: a context-poor status edit
+    briefly changed D-034 instead of D-194. The explicit id-scoped correction restores
+    D-034, closes D-194 and D-195, and leaves the scientific result unchanged.
+  - >-
+    The post-exp-035 normal gate passes all 30 steps in 70 wall-seconds: 37 negative
+    controls fire, 40 BasinEvents and six exact small-n records replay, all 35 declared
+    engine commits are reachable apart from the annotated exp-001 orphan, and 35 rounds,
+    nine sessions, one agenda, and 196 defects reconcile.
   stop_reason: null
   next_action: >-
-    Continue BC-010 with one bounded complete wall-release and SAT-branch cone slice.
-    Preserve every unsupported continuation as unresolved and stop after that slice.
+    Continue BC-010 on think-imav with one bounded nonlinear realization or obstruction
+    of exp-035's exact direction. Preserve every unsupported continuation as unresolved
+    and stop after that slice.
 ---
 # Session 009 — Bounded Progress Before Scale
 

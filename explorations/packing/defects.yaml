@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 195
+count: 196
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4963,7 +4963,7 @@ defects:
   detected_by: review
   latent_for: one committed but unexecuted candidate checker; caught before preregistration
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     The candidate exp-035 checker hand-wrote the active pair (0,4) differential once
     and reused it at endpoint A, the segment interior, and endpoint B. Rotating the
@@ -4975,11 +4975,12 @@ defects:
     that do not satisfy the actual active contact system, falsely advancing the
     stationary-connectivity program.
   fix: >-
-    Derive every active contact row from the exact centre and orientation data at each
-    stratum before preregistering or executing exp-035; the correction is in progress.
+    Exp-035 derives every active contact row from the exact centre and orientation data
+    separately at A, the interior, and B. Its corrected witnesses satisfy every exact
+    row before a determination can be emitted.
   regression: >-
-    Planned: an exact mutation reuses endpoint A's pair (0,4) coefficient at the
-    interior and must fail against the regenerated stratum-specific row and witness.
+    The exact selftest reuses endpoint A's pair (0,4) coefficient at the interior and
+    requires it to differ from the regenerated row and fail on the interior witness.
   bead: think-5hh9
   recorded_in: tools/check_n5_tangent_cones.py
 - id: D-195
@@ -4991,7 +4992,7 @@ defects:
   detected_by: review
   latent_for: one committed but unexecuted candidate checker; caught before preregistration
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     For pair (3,4), the candidate checker modeled each tied support-feature derivative
     as its own SAT branch. For one chosen owner axis the support function is a maximum,
@@ -5002,9 +5003,37 @@ defects:
     accept a direction that violates one of the two one-sided support derivatives.
   fix: >-
     Retain two owner-axis branches, each containing both tied support rows, derive them
-    exactly, and reject a record that drops either row before running exp-035.
+    exactly, and reject a record that drops either row. Exp-035 generation and replay
+    now enforce this structure at all three strata.
   regression: >-
-    Planned: remove one tied support row from one owner-axis branch and require semantic
-    validation and retained replay to reject the incomplete cone.
+    The selftest removes one tied support row, coherently updates the redundant count
+    and matrix digest, and requires semantic validation to reject the incomplete cone.
   bead: think-s41l
   recorded_in: tools/check_n5_tangent_cones.py
+- id: D-196
+  title: A broad exp-035 status patch updated D-034 instead of D-194
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: drift_check
+  latent_for: one uncommitted terminal-integration diff
+  severity: medium
+  status: fixed
+  what: >-
+    A context-poor patch intended to mark D-194 fixed matched the first outstanding
+    status in defects.yaml and changed D-034 instead. D-194 stayed outstanding even
+    though its fix and regression text were updated.
+  consequence: >-
+    Committing the diff would have falsely closed the foundational terminal-component
+    ambiguity while leaving the executed stratum-contact correction open, corrupting
+    both the current agenda and defect aggregates.
+  fix: >-
+    Restore D-034 under its explicit id, set D-194 under its explicit id, and inspect
+    the complete defect diff before regenerating any derived view.
+  regression: >-
+    The terminal-integration check reviews the id-scoped defect diff, regenerates the
+    defect view, and requires schema and synopsis aggregate agreement before commit.
+  recurrence_of: D-160
+  bead: think-uz8o
+  recorded_in: defects.yaml

@@ -263,10 +263,13 @@ agenda:
       rather than complete. After PR 19 merged, the campaign resumed on a fresh branch
       with a four-hour horizon. Pre-measurement review found D-194 and D-195 in the
       exp-035 candidate checker: one contact differential was reused across slide
-      strata, and tied support rows were treated as alternatives. Think-1582 remains
-      active. The corrected instrument is committed at `aa63cf4`, and exp-035 freezes
-      the two-owner, tied-row-conjunction criterion before execution; it is
-      preregistered but has not been run.
+      strata, and tied support rows were treated as alternatives. The corrected
+      instrument is committed at `aa63cf4`; exp-035 froze the
+      two-owner, tied-row-conjunction criterion before execution and then met it in
+      0.28 wall-seconds. All three declared strata admit an exact non-sheet linearized
+      direction. The post-run normal gate passes all 30 steps in 70 wall-seconds with
+      all six exact small-n records replayed. Think-1582 is closed; think-imav owns the
+      next bounded nonlinear-realization slice.
     artifacts:
     - tools/check_n5_equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
@@ -276,6 +279,7 @@ agenda:
     - campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
     - tools/check_n5_tangent_cones.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

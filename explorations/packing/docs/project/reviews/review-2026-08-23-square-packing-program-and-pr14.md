@@ -2542,23 +2542,35 @@ one classification error found in the integration draft:
 | D-193 | D-189 is recorded as a validity/scope omission rather than falsely inflating the soundness class |
 | D-194 | The exp-035 candidate must derive pair (0,4) separately at every slide stratum rather than reuse endpoint A’s differential |
 | D-195 | Pair (3,4) has two owner-axis branches, each requiring both tied support inequalities; the tied rows are not four alternatives |
+| D-196 | The exp-035 integration briefly changed D-034 instead of D-194; an id-scoped correction and complete defect diff caught the recurrence before commit |
 
 The retained commit map is `a1009cb → b3ab594`, `f9d8bae → 7353a34`,
 `62c227c → 2c4cd0e`, and `7a5787c → 1210e07`; corrections land separately in `8611e85`,
 with this late-head reconciliation following it.
 
-The exp-035 orientation remains separate and explicit: its candidate checker was
-committed at `8aa0cbb`, but it has not been preregistered or scientifically executed and
-supports no result. Review after PR 19 merged found D-194 and D-195 before measurement;
-`think-1582`, `think-5hh9`, and `think-s41l` own the correction on the new four-hour
-campaign branch. `think-4rk3` and its four children own only the completed
-documentation-stack review, correction, and validation.
+The exp-035 orientation remained separate until its criterion was frozen.
+Review after PR 19 merged found D-194 and D-195 before measurement.
+The corrected checker at `aa63cf4` derives each slide-stratum contact row and represents
+pair `(3,4)` as two owner-axis branches with both tied support rows in each.
+Exp-035 then met its frozen criterion: six exact matrices across A, the interior, and B
+admit one exact direction outside exp-034’s sheet, and all seven controls reject.
+Nonlinear realization and component identity remain open.
+`think-1582` is closed by the first-order result; `think-imav` owns nonlinear
+realization, while `think-5hh9` and `think-s41l` own the fixed pre-measurement defects.
+`think-4rk3` and its four children own only the completed documentation-stack review,
+correction, and validation.
 
 On the final integrated head, the normal gate passes all 30 steps in 38 wall-seconds:
 all 37 negative controls fire, 12 basin archives replay 40 events, all five exact
 small-`n` records replay, all 34 declared engine commits are reachable apart from the
 explicitly annotated exp-001 orphan, and the 34-round, nine-session, one-agenda campaign
 reconciles with 193 defect records.
+
+The next four-hour-campaign checkpoint adds exp-035 without broadening its claim.
+The normal gate passes all 30 steps in 70 wall-seconds: all 37 negative controls fire,
+12 basin archives replay 40 events, all six exact small-`n` records replay, all 35
+declared engine commits are reachable apart from the annotated exp-001 orphan, and the
+35-round, nine-session, one-agenda campaign reconciles with 196 defect records.
 
 ## Post-merge operating disposition
 
