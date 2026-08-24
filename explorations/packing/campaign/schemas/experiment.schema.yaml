@@ -276,8 +276,17 @@ $defs:
       question: {type: string}
       role: {type: string, enum: [outcome, cost, guard, mechanism]}
       outcome:
-        enum: [beat_record, reached_basin, near_miss, no_progress, invalid]
+        enum:
+          - criterion_met
+          - criterion_missed
+          - beat_record
+          - reached_basin
+          - near_miss
+          - no_progress
+          - invalid
         description: >-
+          criterion_met and criterion_missed are the generic categorical outcomes for
+          a preregistered determination outside the search-specific basin vocabulary.
           reached_basin means within the declared tolerance of the standing best;
           near_miss means better than the trivial grid but not in the basin;
           beat_record may only be recorded at precision `exact`.

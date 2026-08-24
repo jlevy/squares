@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 132
+count: 133
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3242,3 +3242,32 @@ defects:
   regression: none
   bead: think-9qz0
   recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+- id: D-133
+  title: Determination results could encode only search-specific basin outcomes
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: neutral
+  detected_by: pre_registered_rule
+  latent_for: since non-search hypotheses entered the registry
+  severity: high
+  status: fixed
+  what: >-
+    The experiment schema allowed only beat_record, reached_basin, near_miss,
+    no_progress, or invalid as a determination outcome. H-024's angle-corpus claim and
+    H-026's rigidity claim both declared categorical determination criteria, but a
+    valid round could not record that its criterion was met or missed without falsely
+    calling a mathematical result basin progress.
+  consequence: >-
+    Diverse proof and corpus experiments were either blocked at record time or pushed
+    toward semantically false labels, defeating the campaign's attempt to run one
+    disciplined loop across genuinely different mathematical questions.
+  fix: >-
+    Added generic criterion_met and criterion_missed outcomes while retaining the
+    search-specific vocabulary for existing rounds, and documented the distinction in
+    the runbook.
+  regression: >-
+    The H-024 result records criterion_missed, and a negative control mutates that value
+    to an unknown outcome and requires schema validation to refuse it.
+  bead: think-20fr
+  recorded_in: campaign/schemas/experiment.schema.yaml

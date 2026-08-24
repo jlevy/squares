@@ -113,7 +113,7 @@ Recorded on every round; the role says what each may conclude.
 | Metric | Role | Source |
 | --- | --- | --- |
 | `best_side` | **outcome** | smallest valid side found, `record` shape against the frontier’s standing best |
-| `outcome` | **outcome** | `determination`: `beat_record`, `reached_basin`, `near_miss`, `no_progress`, `invalid` |
+| `outcome` | **outcome** | `determination`: generic `criterion_met` / `criterion_missed`, or the search-specific `beat_record`, `reached_basin`, `near_miss`, `no_progress`, `invalid` |
 | `pair_tests` | cost | **the budget currency**; tiers S/M/L = `1e9`/`1e11`/`1e13`. Machine-independent, unlike wall clock |
 | `moves`, `seconds` | cost | engine summary; reported alongside as a courtesy |
 | `overlap` | **guard** | total penetration depth of the reported packing; a non-zero value at screen tier invalidates the run |

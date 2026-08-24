@@ -148,13 +148,22 @@ Citation keys match those used in the research document.
 | **[squaring.net Sprague]** | Priority for the first published perfect squared square | squaring.net | `squaring-net-sprague` |
 | **[Wikipedia]** | Square packing overview | en.wikipedia.org | `wikipedia-square-packing` |
 
-## Special item: `papers/kingbird-square-11-provenance.svg`
+## Special Kingbird SVG witnesses
 
-Not a paper, but the single most information-dense source found on `n = 11`. Its XML
-comments carry David Ellsworth’s provenance notes, the two contact equations, the
-derived placement constants, and the full exact-solution history (Gensane–Ryckelynck
-2004 → Ellsworth 2023 → Alexeev’s independent confirmation).
-Preserved verbatim.
+These are not papers, but they carry the source geometry rather than a rendered picture.
+
+- `papers/kingbird-square-11-provenance.svg` is the single most information-dense source
+  found on `n = 11`. Its XML comments carry David Ellsworth’s provenance notes, the two
+  contact equations, the derived placement constants, and the full exact-solution
+  history (Gensane–Ryckelynck 2004 → Ellsworth 2023 → Alexeev’s independent
+  confirmation). It is preserved verbatim.
+- `papers/kingbird-square-29-provenance.svg` carries Thomas Schadt and David Ellsworth’s
+  `n = 29` construction, 100-digit placement constants, the six defining equations, and
+  the full SVG transform tree.
+  The upstream response retrieved on 2026-08-24 had SHA-256 `30c725b…821c`; the retained
+  text differs only by CRLF-to-LF normalization and a terminal newline and has SHA-256
+  `d25d36f…3726`. The H-024 experiment records and verifies both identities rather than
+  calling the normalized copy byte-exact.
 
 ## Not retrievable
 
