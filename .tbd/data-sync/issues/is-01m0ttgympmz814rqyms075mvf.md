@@ -5,7 +5,7 @@ title: Realize or obstruct the exp-035 n=5 non-sheet direction
 kind: task
 status: closed
 priority: 0
-version: 4
+version: 5
 spec_path: explorations/packing/campaign/agendas/agenda-001-basin-confidence-ladder.md
 labels:
   - packing
@@ -15,8 +15,9 @@ dependencies: []
 parent_id: is-01m0tn3kqe19evm1r40wgnpb61
 child_order_hints:
   - is-01m0tvjc1sk6q8c675s4wgcp7p
+  - is-01m0tw8egkfk3vpwt9n6n4qaa8
 created_at: 2026-08-24T21:23:49.013Z
-updated_at: 2026-08-24T21:49:55.319Z
+updated_at: 2026-08-24T21:54:07.494Z
 closed_at: 2026-08-24T21:49:55.318Z
 close_reason: Exp-036 met its preregistered criterion. Exact owner-4 and owner-3 second-order inequalities exclude exp-035’s displayed common-angle vector from the fixed-side Bouligand tangent at A, the interior, and B; all seven controls reject and replay is identical. Scope remains one direction only.
 resolution: null
