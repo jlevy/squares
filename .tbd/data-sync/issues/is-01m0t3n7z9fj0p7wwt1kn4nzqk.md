@@ -5,7 +5,7 @@ title: Execute and document the 8-hour autonomous basin-map campaign
 kind: task
 status: in_progress
 priority: 0
-version: 21
+version: 22
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -21,10 +21,10 @@ child_order_hints:
   - is-01m0t6vhfpqs3pw4dtdjzjf7qg
   - is-01m0t7bg0wqr7y4qc5ff1cyeth
 created_at: 2026-08-24T14:44:12.384Z
-updated_at: 2026-08-24T16:13:41.319Z
+updated_at: 2026-08-24T16:34:36.635Z
 ---
 Own the 2026-08-24 eight-hour goal from launch audit through durable results. Acceptance: reconcile the exact n-sequence and complete-vs-sampled map definition; close only launch-path tooling gaps; supervise one end-to-end round and forced failure; price the queue on this host; run and record every scientifically admissible cell until the wall budget, queue, or a declared stop fires; commit and push bounded checkpoints; monitor PR feedback; and finish with generated session, ledger, defect, bead, and PR state in sync. Never label endpoint-key saturation a complete basin map without the component identity and uncertainty criteria.
 
 ## Notes
 
-Checkpoint 12, 2026-08-24 16:18Z. Pushed a6fc8e0. One bounded slice classified the n=10 cycle: two varying pair rows generate finite 2/4/8-cell closures; all cells solve, rereads stay closed, and objectives agree within the 1e-10 LP screen. D-168 is logged/fixed with real n=10 and adversarial controls. Full 30-step normal gate passes in 36s; atlas improves from 4/6 to 5/6 converged. No scientific promotion: the same n=10 run still silently censors 16 failed fixed-point probes under D-165. Next 30m slice is typed D-164 outcomes plus cause inventory; repair only if homogeneous and independently screenable.
+Checkpoint 13, 2026-08-24. Pushed f933887. One bounded slice classified all 16 formerly censored n=10 probes as successful HiGHS optima rejected on two pair rows, implemented typed cell outcomes, added a single measured one-row retry, and found/fixed the missing containment-row replay (D-169). n=10 now reaches the proved side within 1.33e-15 and independent verification accepts all 45 pairs. D-164/D-169 beads closed; D-165 intentionally remains open until new retained event evidence derives all-probes-accounted. Full gate passed all 30 steps in 57s; post-optimization focused regression is 12s. Next 30m slice: supervised BasinEvent/v3 n=3 generation/replay and one forged-claim refusal; stop before larger-n regeneration.
