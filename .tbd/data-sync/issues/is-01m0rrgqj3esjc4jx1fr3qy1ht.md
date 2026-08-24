@@ -5,7 +5,7 @@ title: "Engineering: make packing research code clear, safe, and scalable"
 kind: epic
 status: open
 priority: 1
-version: 24
+version: 25
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
@@ -32,10 +32,12 @@ child_order_hints:
   - is-01m0rrjtq99x8zbzd5hvqxrjcg
   - is-01m0rwwt8912eq5f3507d581e1
 created_at: 2026-08-24T02:10:15.746Z
-updated_at: 2026-08-24T21:26:30.730Z
+updated_at: 2026-08-24T21:41:19.631Z
 ---
 Umbrella for the packing engineering-maturity plan: classify code by reuse and consequence, separate shared foundations from stable research-loop tools and retained case code, establish a refactor-safety harness, standardize on Python 3.14, improve CLI and documentation quality, migrate substantial shell orchestration to Python, and optimize measured research-loop bottlenecks without burdening one-off experiments.
 
 ## Notes
 
 Reconciliation: keep think-xzew and think-rthe under the existing efficiency review; think-ldq2 under the process review; think-lcfd and think-ugt1 under the minimal-toolkit spec; and think-krqi under unattended-readiness. New cleanup beads must reuse those acceptance contracts rather than duplicate them.
+
+Plan published in commit f9d0d07 and stacked draft PR #23, based on PR #22 branch codex/packing-four-hour-basin-campaign. The plan-only PR passed the local 30-step packing gate; GitHub reports no configured check contexts.
