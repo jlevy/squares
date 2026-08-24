@@ -1158,14 +1158,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 169 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 170 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 56 | asserted something false about the mathematics |
 | validity | 51 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 45 | recorded something its own evidence contradicts |
+| bookkeeping | 46 | recorded something its own evidence contradicts |
 | robustness | 13 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
 
@@ -1258,7 +1258,7 @@ vocabulary that could not record the H-024 result, the omitted `n=29` source pro
 that the falsifier exposed, the roll-up’s obsolete blanket claim about exploratory
 record evidence, the distinction between a branch linearization and a true Bouligand
 motion, and a certificate replay that did not require one-to-one branch coverage.
-The next tranche, D-139 through D-169, records the missing hard-square topology
+The next tranche, D-139 through D-170, records the missing hard-square topology
 literature, a stale closed-family contact claim, exact-moduli integration errors,
 Stromquist source transcription and proof-chain mistakes, stale campaign effort, the
 paper’s extraneous Lemma 4 root, and the escaping Figure 14 box.
@@ -1304,6 +1304,8 @@ then records the new typed path without rewriting the historical blocked events.
 D-169 fixes a second post-check hole found while typing those failures: containment rows
 were never replayed.
 Every accepted cell now passes the full original LP residual vector.
+D-170 gives D-165 its own bead after the defect log was found to reference the unrelated
+D-132 tracker; the older bead remains unchanged.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).

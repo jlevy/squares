@@ -2,14 +2,14 @@
 
 # Defect log
 
-169 defects recorded across the packing toolchain.
+170 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **56 soundness defects** — the system asserting something false about the mathematics. 46 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **60 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014).
+- **60 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039).
 - **24 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -21,11 +21,11 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `review` | 111 | a human or agent reading the work against a checklist |
 | `anomaly` | 6 | a result that made no sense, chased down |
 | `inspection` | 19 | reading the code or the design with intent |
-| `drift_check` | 10 | a generated view disagreeing with its source |
+| `drift_check` | 11 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 7 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 7 of 169, and none of the 56 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 7 of 170, and none of the 56 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 7 of 169, and none of 
 | engine | 9 |
 | quench | 17 |
 | verifier | 4 |
-| record | 46 |
+| record | 47 |
 | tooling | 39 |
 | docs | 54 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 7 of 169, and none of 
 | --- | ---: |
 | soundness | 56 |
 | validity | 51 |
-| bookkeeping | 45 |
+| bookkeeping | 46 |
 | robustness | 13 |
 | performance | 4 |
 
@@ -318,3 +318,4 @@ This is the actionable list.
 | [D-167](tools/basin_census.py) | 2026-08-24 | record | bookkeeping |  | `drift_check` | high | fixed | Basin events omitted the wall time needed to price the loop |
 | [D-168](sqpack/quench.py) | 2026-08-24 | quench | validity | conservative | `control_cell` | high | fixed | A finite equal-objective adjacent-cell closure was labeled an unsettled cycle |
 | [D-169](sqpack/quench.py) | 2026-08-24 | quench | validity | flattering | `control_cell` | critical | fixed | The cell post-check ignored every containment row |
+| [D-170](defects.yaml) | 2026-08-24 | record | bookkeeping | neutral | `drift_check` | high | fixed | D-165 reused the unrelated D-132 bead |

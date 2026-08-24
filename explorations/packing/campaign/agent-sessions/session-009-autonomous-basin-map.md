@@ -175,6 +175,9 @@ session:
     retains 2,037 fixed-point evaluations, all settled. Semantic replay derives
     scientific admissibility and rejects a forged all-probes flag.
   - The post-exp-021 full normal gate passes all thirty steps in 21 wall-seconds.
+  - >-
+    D-170 corrects the closing audit: D-165 now has dedicated bead `think-007f` instead
+    of reusing the unrelated D-132 tracker; `think-9qz0` remains unchanged.
   stop_reason: null
   next_action: >-
     In one thirty-minute slice, regenerate the remaining n=3 seeds under BasinEvent/v3,

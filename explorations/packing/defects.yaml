@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 169
+count: 170
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4174,7 +4174,7 @@ defects:
     balanced quench receipt, replays the historical v2 archive, and rejects a forged v3
     all-probes claim. Exp-021 must independently replay its complete receipt and pose.
   recurrence_of: D-132
-  bead: think-9qz0
+  bead: think-007f
   recorded_in: tools/basin_census.py
 - id: D-166
   title: Basin events called producer convergence a fixed-cell certificate
@@ -4298,3 +4298,31 @@ defects:
   recurrence_of: D-014
   bead: think-4hc3
   recorded_in: sqpack/quench.py
+- id: D-170
+  title: D-165 reused the unrelated D-132 bead
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: drift_check
+  latent_for: from D-165 registration through its attempted closure
+  severity: high
+  status: fixed
+  what: >-
+    D-165's defect entry pointed to `think-9qz0`, but that bead's title, description,
+    notes, and close reason all track the older D-132 fixed-cell-cycle defect. Closing
+    D-165 through the logged reference would therefore have changed an unrelated issue.
+  consequence: >-
+    The defect log and bead graph disagreed about ownership and completion. An agent
+    following either source could report the wrong launch blocker closed, or reopen
+    already completed D-132 work while leaving D-165 without durable tracking.
+  fix: >-
+    Create dedicated D-165 bead `think-007f`, update the defect cross-reference, and
+    preserve `think-9qz0` unchanged. Track this bookkeeping correction separately in
+    `think-k2vb` so the mistaken reuse is visible rather than silently overwritten.
+  regression: >-
+    The bead-tree review must compare a defect's subject with its referenced bead before
+    closing it; D-165 must resolve through `think-007f`, never `think-9qz0`.
+  recurrence_of: D-039
+  bead: think-k2vb
+  recorded_in: defects.yaml
