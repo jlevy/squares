@@ -169,7 +169,7 @@ the layer with the fewest built parts.
 | --- | --- | --- |
 | [`sqpack/canonical.py`](sqpack/canonical.py) | yes | Tolerance grouping and exact hash pairs do not form a stable equivalence relation ([D-048](defects.md)); canonicalization is factorial on sparse symmetric endpoints ([D-049](defects.md)) |
 | [`sqpack/atlas.py`](sqpack/atlas.py) | yes | Promotes non-converged stopping points and cannot reconstruct discovery order ([D-050](defects.md)); frequencies merge without regime or identity provenance ([D-051](defects.md)) |
-| [`tools/basin_census.py`](tools/basin_census.py) | yes | A settled flag is not a complete certificate—a nominally converged run may have crossed unmeasured angle probes, so basin membership and stationarity stay inadmissible ([D-165](defects.md)) |
+| [`tools/basin_census.py`](tools/basin_census.py) | yes | An admissible `BasinEvent/v3` event certifies the producer contract and a terminal outcome, not a terminal component—identity stays blocked ([D-034](defects.md), [D-048](defects.md)). The twelve historical v2 poses remain inadmissible under the since-fixed [D-165](defects.md) |
 
 **`distinct_basins` is a count of endpoint keys, not of connected terminal components.**
 The exact `n = 3` sliding family shows one connected optimal set producing many keys, so
@@ -200,11 +200,13 @@ Two consequences bind every other lane:
   configuration here—Trump’s packing, the `n = 3` and `n = 4` optimal families—was
   authored from published data or derived analytically; none was recovered from a
   numerical search output.
-- **Most archived endpoints cannot feed the pipeline even once it exists.** The early
-  quench archives (exp-006 through exp-009) retain angles and a contact *count* but not
-  centres. The basin event records do retain full poses—twelve independently valid at
-  `n = 3` through `n = 5`—but [D-165](defects.md) leaves all twelve inadmissible for
-  promotion, and every one is at a proved `n`.
+- **No admissible endpoint exists at an open `n`, so the pipeline would have nothing new
+  to promote.** The early quench archives (exp-006 through exp-009) retain angles and a
+  contact *count* but not centres; the twelve historical v2 poses remain inadmissible
+  under the since-fixed [D-165](defects.md).
+  The admissible `BasinEvent/v3` events—four at `n = 3`, three at `n = 4` (exp-021
+  through exp-023)—are all at proved values, so they are known-answer material for the
+  pipeline, not candidates.
 
 The record corpus has the same shape of gap: [`frontier/`](frontier/README.md) records
 each case’s **side value** algebra—minimal polynomials where they are published—and **no
