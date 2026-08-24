@@ -1,6 +1,6 @@
 # Research: Algorithms and Tooling for Square Packing
 
-**Date:** 2026-08-22 (last updated 2026-08-22)
+**Date:** 2026-08-22 (last updated 2026-08-24)
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
 
@@ -543,10 +543,12 @@ Det[grad] == 0
 
 The reasoning: the matrix maps variable deltas to deltas of `s` and of the constraint
 values.
-Being able to decrease `s` while holding all constraints at zero means being able
-to hit the target vector `{1,0,0,0}`, i.e. the matrix is invertible.
-So a local extremum of `s` on the constraint manifold is exactly a rank drop, i.e.
-`Det[grad] = 0`. When the deficiency is two or more, nest the construction:
+If the matrix is invertible it can hit the target vector `{1,0,0,0}`—a delta that
+decreases `s` while holding every constraint at zero—so an extremum forces the matrix to
+be singular. A local extremum of `s` on the constraint manifold therefore satisfies
+`Det[grad] = 0`. The condition is necessary rather than sufficient: a rank drop can
+occur away from an extremum, and spurious roots are culled when the candidate is
+verified. When the deficiency is two or more, nest the construction:
 
 ```
 f2 = Det[Grad[{s, f1     }, {s, a     }]];
@@ -611,8 +613,10 @@ above.
 
 ### Proving bounds with computational aids
 
-Here the honest summary is short: **for squares in a square, essentially no proof has
-been computer-assisted.**
+Here the honest summary is short: **in the published literature, essentially no proof
+for squares in a square has been computer-assisted.** Within this repository that is no
+longer true of the lower bound: exp-017 carries an exact computer-assisted certificate
+of `s(11) ≥ 2 + 4/√5` (the synopsis’s T-4), not externally reviewed.
 
 #### Lower bounds: unavoidable points, by hand
 
@@ -725,7 +729,9 @@ The relevant precedents, in increasing order of ambition:
   These are what a formal version of the Montanher-style proof would run on.
 
 The gap for square packing is not the proof assistant.
-For *lower* bounds it is that there is no informal computer-assisted proof to formalise.
+For *lower* bounds the missing informal computer-assisted proof now has a first
+in-repository instance—exp-017’s exact certificate—so the formalisation target exists,
+though nothing has been formalised.
 For *upper* bounds there is no gap at all: a packing is a finite algebraic witness, and
 formalising `s(11) ≤ 3.877084…` is available today and unclaimed — see
 [Lean for Square-Packing Proofs and Validation](research-2026-08-22-lean-for-packing-proofs-and-validation.md).

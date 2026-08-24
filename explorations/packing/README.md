@@ -349,6 +349,14 @@ the analytically solved ones, Mathematica source in an XML comment; recovering t
 means reading that by hand, once per packing.
 `sqpack/packings/trump11.py` is the worked example.
 
+**The result is a proof only if the field metadata is right, and the constructor does
+not yet check that** ([D-053](defects.md), open): `NumberField` requires an irreducible
+minimal polynomial and an interval isolating exactly one real root, but verifies only an
+endpoint sign change.
+A reducible polynomial or a multi-root interval yields unsound exact comparisons.
+The built-in Trump witness is independently checked; anything you supply yourself is
+not, so verify irreducibility and root isolation before trusting the verdict.
+
 For a quick, non-certifying check, swap in the float backend:
 
 ```python
