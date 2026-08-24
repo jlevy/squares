@@ -85,8 +85,8 @@ or a human. The repository contract is portable across them: the session records
 objective, expected output, validation, kill condition, fallback, start, deadline,
 terminal evidence, and next action; `tbd` owns the queue; and commits own integrated
 state.
-A platform goal or watchdog should read and enforce this record rather than become a
-second, private source of truth.
+A platform goal or watchdog should read and enforce this record rather than become
+a second, private source of truth.
 These documents are records, not schedulers, and
 [`packing-campaign`](../../src/sqpack/campaign/runner.py) remains the executor for
 preregistered numerical rounds.
