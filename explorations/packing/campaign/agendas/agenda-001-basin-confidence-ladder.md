@@ -125,8 +125,9 @@ agenda:
     exit: four replayable events or one retained blocker; exact costs recorded
     bead: think-wbra
     depends_on: [BC-004]
-    next_evidence: one event block and comparison with n=3 through n=6 throughput
+    next_evidence: exp-028 plus its four-event archive, replay, and n=3 through n=7 cost comparison
     parallel_group: event-calibration
+    note: Claimed as exp-028 with D-126 carried explicitly.
   - id: BC-006
     purpose: tool_validation
     owner_focus: correctness

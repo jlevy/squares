@@ -160,6 +160,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
@@ -258,8 +259,8 @@ session:
     non-admissible. A deterministic run-path fixture closes D-183; D-126 remains open.
   stop_reason: null
   next_action: >-
-    After exp-027, D-183, and the full gate are committed and pushed, execute only
-    BC-005: four fixed n=7 seeds at 10 seconds each under a 90-second command cap.
+    Execute preregistered exp-028 only: four fixed n=7 seeds at 10 seconds each under a
+    90-second command cap. Retain typed stops and make no frequency or component claim.
 ---
 # Session 009 — Bounded Progress Before Scale
 
