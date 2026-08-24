@@ -15,7 +15,7 @@
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 11 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 12 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -44,7 +44,7 @@
 | H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3 4 5 6 7 8 | 0 |  |
 | H-022 | open question | proof | Is Trump's n = 11 packing isolated and locally optimal modulo D4 and r |  | 0 |  |
 | H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 0 |  |
-| H-024 | blocked | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 | 0 |  |
+| H-024 | running | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 | 1 |  |
 | H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
 | H-026 | blocked | proof | After quotienting finite container symmetries and relabelling, Trump's |  | 0 |  |
 | H-027 | blocked | search | In the imported reference contact cells at n = 11 and n = 17, the mini | n: 11 17 | 0 |  |
@@ -85,7 +85,13 @@
 | exp-008 | series-000 | 10 | claude-opus-5 | H-002 | Confirms H-002 on this cell, and by twelve orders of magnitude: median gap falls from the annealer's 5.32e-03 to 1.33e-15, where angle descent reaches only 4.51e-03. The two seeds that hit the wall budget are the two that did not converge. |
 | exp-010 | series-000 | 11 | claude-opus-5 | H-019 | Confirms H-019: the one-sided slopes are 0.1747 and 0.3841, a ratio of 2.198 that is stable over five decades on each side, so the optimum of s(theta) is a corner rather than a smooth minimum on this shared-tilt slice. A smooth local model is misspecified at that point; this round does not establish a general convergence impossibility. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-012 | series-000 | 29 | openai-codex | H-024 | Claimed; the source reconstruction and independent validity check are running. |
+
 ## Effort
 
-11 rounds, 275 agent-minutes, 23.0 wall-minutes.
+12 rounds, 275 agent-minutes, 23.0 wall-minutes.
 
