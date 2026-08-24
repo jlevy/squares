@@ -5,13 +5,15 @@ title: "Missing resources: acquire the 11 cited sources not in the archive"
 kind: task
 status: open
 priority: 0
-version: 5
+version: 6
 spec_path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
 labels: []
 dependencies: []
 parent_id: is-01m0nrh9mwfjndkzejq34js78c
+child_order_hints:
+  - is-01m0stacab0yqjj9hj0mz6bpmt
 created_at: 2026-08-22T17:02:23.570Z
-updated_at: 2026-08-22T22:12:58.165Z
+updated_at: 2026-08-24T12:00:59.198Z
 ---
 THE CANONICAL LIST IS explorations/packing/frontier/source-availability.yaml
 Rendered in the report as a table under 'Source Availability' in
