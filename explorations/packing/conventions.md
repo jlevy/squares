@@ -1,6 +1,8 @@
 # Conventions for `explorations/packing/`
 
-Every convention this project runs on, in one place.
+**The definitive registry of every convention and naming this project uses.** Where
+another document names an id class or restates a rule, it summarizes this one, and this
+one wins on any difference.
 Read this before adding an artifact, a round, a series, or a tool.
 
 Each rule is marked **[checked]** when something fails on a violation, or
@@ -24,7 +26,12 @@ The prefix says what kind of thing it is.
 | Agent session | `session-NNN` | campaign | `session-001` |
 | Agenda | `agenda-NNN` | campaign | `agenda-001` |
 | Agenda cell | `AA-NNN`, prefix declared per agenda | its agenda | `BC-001` |
+| Frontier case | `n-NNN` | `frontier/`, one artifact per `n ≤ 100` | `n-011` |
 | Search/proof strategy | `search:N`, `proof:N` | the frontier catalogues | `search:12` |
+| Defect | `D-NNN` | the directory, logged in `defects.yaml` | `D-014` |
+| Bead | `think-xxxx` | the repository’s `tbd` queue (prefix set in `.tbd/config.yml`) | `think-1s0h` |
+| Theoretical result | `T-N` | `SYNOPSIS.md` shorthand; the registry artifact it cites is authoritative | `T-2` |
+| Review finding | `R-N`, `F-NN` | the review document that declares them | `R-2`, `F-07` |
 | Basin (planned) | canonical key, plus a `B-NNN` alias | campaign, spans series | — |
 
 **Rounds do not restart at `exp-001` in each series, and this is deliberate.** A series
