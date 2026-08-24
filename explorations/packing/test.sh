@@ -230,9 +230,12 @@ step_lint_floor_python() {
   # capture one edit from a bug, and clippy found an approximation of TAU written as a
   # literal. Skipped, not failed, where the toolchain is absent.
   if command -v uv >/dev/null 2>&1; then
-    ( uv run --frozen --quiet ruff check . \
+    local out
+    out=$( uv run --frozen --quiet ruff check . \
       && uv run --frozen --quiet ruff format --check . \
-      && uv run --frozen --quiet basedpyright ) | tail -3
+      && uv run --frozen --quiet basedpyright )
+    echo "$out" | tail -3
+    grep -q "^0 errors, 0 warnings, 0 notes$" <<<"$out"
   else
     skip "uv not installed: ruff, ruff-format and basedpyright did not run"
   fi
@@ -602,7 +605,9 @@ if [ ${#FAILED[@]} -ne 0 ]; then
   exit 1
 fi
 if [ ${#SKIPPED[@]} -ne 0 ]; then
-  echo "GATE COMPLETED, BUT ${#SKIPPED[@]} CHECKS WERE SKIPPED:"
+  skip_noun="CHECKS"
+  [ ${#SKIPPED[@]} -eq 1 ] && skip_noun="CHECK"
+  echo "GATE COMPLETED, BUT ${#SKIPPED[@]} $skip_noun WERE SKIPPED:"
   for s in "${SKIPPED[@]}"; do echo "  - $s"; done
   if [ "$STRICT" = "1" ]; then
     echo "strict mode: a skipped check is not a passed check" >&2

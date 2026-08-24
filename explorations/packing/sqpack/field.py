@@ -214,7 +214,8 @@ class FieldElement:
     def __mul__(self, other):
         other = self._coerce(other)
         return FieldElement(
-            self.field, self.field._reduce(_poly_mul(self.coeffs, other.coeffs))
+            self.field,
+            self.field._reduce(_poly_mul(self.coeffs, other.coeffs)),  # pyright: ignore[reportPrivateUsage]
         )
 
     __radd__ = __add__
@@ -258,7 +259,9 @@ class FieldElement:
         for k in range(d):
             basis = [Rat(0)] * d
             basis[k] = Rat(1)
-            columns.append(f._reduce(_poly_mul(self.coeffs, basis)))  # noqa: SLF001
+            columns.append(
+                f._reduce(_poly_mul(self.coeffs, basis))  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
+            )
         rows = [
             [columns[k][r] for k in range(d)] + [Rat(1) if r == 0 else Rat(0)] for r in range(d)
         ]
@@ -281,7 +284,7 @@ class FieldElement:
     def __float__(self) -> float:
         """Midpoint of a rigorous enclosure. For display and bucketing only."""
         self.field.refine_to(30)
-        lo, hi = self.field._enclose(self.coeffs)  # noqa: SLF001
+        lo, hi = self.field._enclose(self.coeffs)  # noqa: SLF001  # pyright: ignore[reportPrivateUsage]
         return float((lo + hi) / 2)
 
     def __repr__(self) -> str:
