@@ -78,8 +78,11 @@ Acceptance requires all of the following:
   unreduced `t in [1/2,3/2]` display parameter.
 
 One valid genuinely rotated packing rejects the proposed classification.
-Any incomplete source recovery, cell enumeration, group action, stratum table, record
-replay, or render replay leaves the round unresolved rather than partially accepted.
+Any incomplete recovery of a source used as corroboration, cell enumeration, group
+action, stratum table, record replay, or render replay leaves the round unresolved
+rather than partially accepted.
+The unavailable Plakhta paper blocks novelty claims, not this independent
+classification, and remains tracked separately.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

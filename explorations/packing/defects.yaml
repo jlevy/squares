@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 141
+count: 144
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3501,3 +3501,84 @@ defects:
     exact extractions staged.
   bead: think-r2n2
   recorded_in: resources/README.md
+- id: D-142
+  title: The n = 3 source replay compared an unlabelled theorem with labelled homology
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: one uncommitted instrument iteration
+  severity: high
+  status: fixed
+  what: >-
+    The first H-032 checker draft passed the labelled Betti vector `[2,2]` into the
+    Alvarado-Garduño–González comparison, even though that theorem concerns the
+    unlabelled space, whose derived Betti vector is `[1,1]`.
+  consequence: >-
+    A correct exact classification would have retained a false source-mismatch flag and
+    obscured the independent agreement between the four-cycle quotient and the published
+    unlabelled homotopy type.
+  fix: >-
+    Split labelled and unlabelled invariants at the literature boundary and compare the
+    Alpert result only with the labelled complex and the Alvarado-Garduño–González result
+    only with the S3 quotient.
+  regression: >-
+    Exp-014 replay rebuilds the complete model and requires the retained unlabelled
+    source match to be true before the terminal determination can pass.
+  bead: think-w4m2
+  recorded_in: tools/check_small_n_moduli.py
+- id: D-143
+  title: The n = 4 source replay attributed an unreported f-vector to Alpert et al.
+  date: '2026-08-24'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted instrument iteration
+  severity: high
+  status: fixed
+  what: >-
+    The first H-032 checker draft recorded `[24]` as Alpert et al.'s reported n = 4
+    f-vector and cited their Table 2, but that table does not contain an n = 4 row. Their
+    Table 1 reports the Betti vector `[24,0]`.
+  consequence: >-
+    The experiment would have overstated prior-source corroboration for the independently
+    derived discrete cell count and blurred the boundary between a published invariant
+    and this repository's exhaustive enumeration.
+  fix: >-
+    Retain the derived 24-state f-vector separately, compare the source only against the
+    published Betti vector, and state explicitly that no n = 4 f-vector is tabulated.
+  regression: >-
+    Exp-015 replay rebuilds the literature record from source hashes and requires its
+    n = 4 evidence field to name Table 1 while leaving the reported f-vector null.
+  bead: think-eb3w
+  recorded_in: tools/check_small_n_moduli.py
+- id: D-144
+  title: The orientation identity check compared two identical hard-coded tuples
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted instrument iteration
+  severity: high
+  status: fixed
+  what: >-
+    The first H-032 checker draft assigned the same coefficient tuple to both sides of
+    `1/2 - w(1-w/2) = (w-1)^2/2` and then recorded the identity as checked. The
+    comparison was tautological and could not catch a transcription error in either
+    expression.
+  consequence: >-
+    A central equality in the arbitrary-rotation exclusion would have carried an
+    executable-success flag without executable evidence, weakening the exactness claim
+    at the first reduction in both rounds.
+  fix: >-
+    Derive the left coefficients from `w(1-w/2)` and the right coefficients from the
+    square of `w-1` through separate exact rational calculations, compare the resulting
+    polynomials, and state the identified endpoints of the physical angle quotient.
+  regression: >-
+    Both exp-014 and exp-015 rebuild the independently derived coefficient vectors before
+    any branch enumeration, and refuse to emit or replay a determination on mismatch.
+  bead: think-uxlg
+  recorded_in: tools/check_small_n_moduli.py

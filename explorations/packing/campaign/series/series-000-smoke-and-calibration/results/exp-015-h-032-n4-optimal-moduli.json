@@ -1,0 +1,1192 @@
+{
+  "determination": {
+    "claim": "F_4(2) is 24 isolated labelled grids and both symmetry quotients are one point",
+    "outcome": "criterion_met",
+    "scope": "complete side-2 physical configuration space; no claim for n>=5"
+  },
+  "literature": {
+    "alpert_et_al_2023": {
+      "derived_match": true,
+      "evidence": "Table 1 (page 2622); no n=4 f-vector is tabulated",
+      "pdf_sha256": "74bd2006610543d710f885908a69a65fa7e3c13657a3a22e1a63c9f202a3b6b6",
+      "raw_sha256": "9b2e4092c1ce74caf3fe89d798ec4c0c000d943d83fd087dfe9a3dd7b003be60",
+      "reported_betti": [
+        24,
+        0
+      ],
+      "reported_f_vector": null,
+      "scope": "ordered axis-parallel C(n;2,2), not arbitrary rotations or the D4 quotient"
+    },
+    "alvarado_garduno_gonzalez_2025": {
+      "derived_match": null,
+      "pdf_sha256": "f7f2845a2a7e579b65c56ac43b8e517a915f2fd89e6bcb3b0a7292e930d2f852",
+      "raw_sha256": "df9a79b00137e0fe678351a0682a237022182ce78b9882c7fbdd0c55ccf39ddd",
+      "reported_n3_type": "not used for this cell",
+      "scope": "unlabelled axis-parallel UC(pq-1,p x q) up to homotopy"
+    },
+    "novelty_scope": "none; literature comparison is incomplete while Plakhta remains unretrieved",
+    "plakhta_2021": {
+      "doi": "10.2140/agt.2021.21.1445",
+      "scope": "affine-polytope and connectivity methods; no claim imported without primary text",
+      "status": "publisher_access_blocked"
+    }
+  },
+  "orientation_forcing": {
+    "coefficient_identity_checked": true,
+    "container_chart": "[-1,1]^2",
+    "containment": "|z_x|,|z_y| <= 1-w/2",
+    "equality_case": "w=1 iff the physical square is axis-aligned",
+    "exact_identity": "1/2-w(1-w/2)=(w-1)^2/2",
+    "orientation_chart": "physical theta modulo pi/2, represented by [0,pi/2) with endpoints identified",
+    "packing_consequence": "a genuinely rotated square contains the container centre in its interior; every other contained unit square contains that point, so interiors overlap",
+    "projection_bound": "|z.u|,|z.v| <= w(1-w/2)",
+    "strict_non_axis_control": {
+      "below_half": true,
+      "projection_bound": "15/32",
+      "w": "5/4"
+    },
+    "support_width": "w=|cos(theta)|+|sin(theta)|"
+  },
+  "schema_version": 1,
+  "selftests": {
+    "branch_alias_multiplicity_is_checked": true,
+    "combined_stabilizer_is_full_D4": true,
+    "missing_grid_state_is_rejected": true,
+    "positive_dimensional_branch_is_rejected": true,
+    "shifted_grid_overlap_is_rejected": true,
+    "unreported_source_f_vector_remains_null": true
+  },
+  "separation_enumeration": {
+    "branch_multiplicity_per_state": 4,
+    "consistent_branch_count": 96,
+    "dimension_histogram": {
+      "0": 96
+    },
+    "raw_branch_count": 4096,
+    "records": [
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:left",
+          "0-3:below",
+          "1-2:below",
+          "1-3:right",
+          "2-3:right"
+        ],
+        "state": "0@00|1@10|2@11|3@01"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:left",
+          "0-3:below",
+          "1-2:below",
+          "1-3:below",
+          "2-3:right"
+        ],
+        "state": "0@00|1@10|2@11|3@01"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:left",
+          "0-3:below",
+          "1-2:above",
+          "1-3:right",
+          "2-3:right"
+        ],
+        "state": "0@00|1@11|2@10|3@01"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:left",
+          "0-3:below",
+          "1-2:above",
+          "1-3:right",
+          "2-3:below"
+        ],
+        "state": "0@00|1@11|2@10|3@01"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:left",
+          "0-3:above",
+          "1-2:below",
+          "1-3:right",
+          "2-3:right"
+        ],
+        "state": "0@01|1@10|2@11|3@00"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:left",
+          "0-3:above",
+          "1-2:below",
+          "1-3:right",
+          "2-3:above"
+        ],
+        "state": "0@01|1@10|2@11|3@00"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:left",
+          "0-3:above",
+          "1-2:above",
+          "1-3:right",
+          "2-3:right"
+        ],
+        "state": "0@01|1@11|2@10|3@00"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:left",
+          "0-3:above",
+          "1-2:above",
+          "1-3:above",
+          "2-3:right"
+        ],
+        "state": "0@01|1@11|2@10|3@00"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:below",
+          "0-3:left",
+          "1-2:right",
+          "1-3:below",
+          "2-3:left"
+        ],
+        "state": "0@00|1@10|2@01|3@11"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:below",
+          "0-3:left",
+          "1-2:right",
+          "1-3:above",
+          "2-3:left"
+        ],
+        "state": "0@00|1@11|2@01|3@10"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:below",
+          "0-3:left",
+          "1-2:right",
+          "1-3:above",
+          "2-3:above"
+        ],
+        "state": "0@00|1@11|2@01|3@10"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:below",
+          "0-3:left",
+          "1-2:below",
+          "1-3:below",
+          "2-3:left"
+        ],
+        "state": "0@00|1@10|2@01|3@11"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:below",
+          "0-3:below",
+          "1-2:right",
+          "1-3:below",
+          "2-3:left"
+        ],
+        "state": "0@00|1@10|2@01|3@11"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:below",
+          "0-3:below",
+          "1-2:below",
+          "1-3:right",
+          "2-3:right"
+        ],
+        "state": "0@00|1@10|2@11|3@01"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:below",
+          "0-3:below",
+          "1-2:below",
+          "1-3:below",
+          "2-3:left"
+        ],
+        "state": "0@00|1@10|2@01|3@11"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:below",
+          "0-3:below",
+          "1-2:below",
+          "1-3:below",
+          "2-3:right"
+        ],
+        "state": "0@00|1@10|2@11|3@01"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:above",
+          "0-3:left",
+          "1-2:right",
+          "1-3:below",
+          "2-3:left"
+        ],
+        "state": "0@01|1@10|2@00|3@11"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:above",
+          "0-3:left",
+          "1-2:right",
+          "1-3:below",
+          "2-3:below"
+        ],
+        "state": "0@01|1@10|2@00|3@11"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:above",
+          "0-3:left",
+          "1-2:right",
+          "1-3:above",
+          "2-3:left"
+        ],
+        "state": "0@01|1@11|2@00|3@10"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:above",
+          "0-3:left",
+          "1-2:above",
+          "1-3:above",
+          "2-3:left"
+        ],
+        "state": "0@01|1@11|2@00|3@10"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:above",
+          "0-3:above",
+          "1-2:right",
+          "1-3:above",
+          "2-3:left"
+        ],
+        "state": "0@01|1@11|2@00|3@10"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:above",
+          "0-3:above",
+          "1-2:above",
+          "1-3:right",
+          "2-3:right"
+        ],
+        "state": "0@01|1@11|2@10|3@00"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:above",
+          "0-3:above",
+          "1-2:above",
+          "1-3:above",
+          "2-3:left"
+        ],
+        "state": "0@01|1@11|2@00|3@10"
+      },
+      {
+        "selection": [
+          "0-1:left",
+          "0-2:above",
+          "0-3:above",
+          "1-2:above",
+          "1-3:above",
+          "2-3:right"
+        ],
+        "state": "0@01|1@11|2@10|3@00"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:right",
+          "0-3:below",
+          "1-2:below",
+          "1-3:left",
+          "2-3:left"
+        ],
+        "state": "0@10|1@00|2@01|3@11"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:right",
+          "0-3:below",
+          "1-2:below",
+          "1-3:below",
+          "2-3:left"
+        ],
+        "state": "0@10|1@00|2@01|3@11"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:right",
+          "0-3:below",
+          "1-2:above",
+          "1-3:left",
+          "2-3:left"
+        ],
+        "state": "0@10|1@01|2@00|3@11"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:right",
+          "0-3:below",
+          "1-2:above",
+          "1-3:left",
+          "2-3:below"
+        ],
+        "state": "0@10|1@01|2@00|3@11"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:right",
+          "0-3:above",
+          "1-2:below",
+          "1-3:left",
+          "2-3:left"
+        ],
+        "state": "0@11|1@00|2@01|3@10"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:right",
+          "0-3:above",
+          "1-2:below",
+          "1-3:left",
+          "2-3:above"
+        ],
+        "state": "0@11|1@00|2@01|3@10"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:right",
+          "0-3:above",
+          "1-2:above",
+          "1-3:left",
+          "2-3:left"
+        ],
+        "state": "0@11|1@01|2@00|3@10"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:right",
+          "0-3:above",
+          "1-2:above",
+          "1-3:above",
+          "2-3:left"
+        ],
+        "state": "0@11|1@01|2@00|3@10"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:below",
+          "0-3:right",
+          "1-2:left",
+          "1-3:below",
+          "2-3:right"
+        ],
+        "state": "0@10|1@00|2@11|3@01"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:below",
+          "0-3:right",
+          "1-2:left",
+          "1-3:above",
+          "2-3:right"
+        ],
+        "state": "0@10|1@01|2@11|3@00"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:below",
+          "0-3:right",
+          "1-2:left",
+          "1-3:above",
+          "2-3:above"
+        ],
+        "state": "0@10|1@01|2@11|3@00"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:below",
+          "0-3:right",
+          "1-2:below",
+          "1-3:below",
+          "2-3:right"
+        ],
+        "state": "0@10|1@00|2@11|3@01"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:below",
+          "0-3:below",
+          "1-2:left",
+          "1-3:below",
+          "2-3:right"
+        ],
+        "state": "0@10|1@00|2@11|3@01"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:below",
+          "0-3:below",
+          "1-2:below",
+          "1-3:left",
+          "2-3:left"
+        ],
+        "state": "0@10|1@00|2@01|3@11"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:below",
+          "0-3:below",
+          "1-2:below",
+          "1-3:below",
+          "2-3:left"
+        ],
+        "state": "0@10|1@00|2@01|3@11"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:below",
+          "0-3:below",
+          "1-2:below",
+          "1-3:below",
+          "2-3:right"
+        ],
+        "state": "0@10|1@00|2@11|3@01"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:above",
+          "0-3:right",
+          "1-2:left",
+          "1-3:below",
+          "2-3:right"
+        ],
+        "state": "0@11|1@00|2@10|3@01"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:above",
+          "0-3:right",
+          "1-2:left",
+          "1-3:below",
+          "2-3:below"
+        ],
+        "state": "0@11|1@00|2@10|3@01"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:above",
+          "0-3:right",
+          "1-2:left",
+          "1-3:above",
+          "2-3:right"
+        ],
+        "state": "0@11|1@01|2@10|3@00"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:above",
+          "0-3:right",
+          "1-2:above",
+          "1-3:above",
+          "2-3:right"
+        ],
+        "state": "0@11|1@01|2@10|3@00"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:above",
+          "0-3:above",
+          "1-2:left",
+          "1-3:above",
+          "2-3:right"
+        ],
+        "state": "0@11|1@01|2@10|3@00"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:above",
+          "0-3:above",
+          "1-2:above",
+          "1-3:left",
+          "2-3:left"
+        ],
+        "state": "0@11|1@01|2@00|3@10"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:above",
+          "0-3:above",
+          "1-2:above",
+          "1-3:above",
+          "2-3:left"
+        ],
+        "state": "0@11|1@01|2@00|3@10"
+      },
+      {
+        "selection": [
+          "0-1:right",
+          "0-2:above",
+          "0-3:above",
+          "1-2:above",
+          "1-3:above",
+          "2-3:right"
+        ],
+        "state": "0@11|1@01|2@10|3@00"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:left",
+          "0-3:left",
+          "1-2:left",
+          "1-3:left",
+          "2-3:below"
+        ],
+        "state": "0@00|1@01|2@10|3@11"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:left",
+          "0-3:left",
+          "1-2:left",
+          "1-3:left",
+          "2-3:above"
+        ],
+        "state": "0@00|1@01|2@11|3@10"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:left",
+          "0-3:left",
+          "1-2:left",
+          "1-3:above",
+          "2-3:above"
+        ],
+        "state": "0@00|1@01|2@11|3@10"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:left",
+          "0-3:left",
+          "1-2:above",
+          "1-3:left",
+          "2-3:below"
+        ],
+        "state": "0@00|1@01|2@10|3@11"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:left",
+          "0-3:below",
+          "1-2:left",
+          "1-3:left",
+          "2-3:below"
+        ],
+        "state": "0@00|1@01|2@10|3@11"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:left",
+          "0-3:below",
+          "1-2:above",
+          "1-3:left",
+          "2-3:below"
+        ],
+        "state": "0@00|1@01|2@10|3@11"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:left",
+          "0-3:below",
+          "1-2:above",
+          "1-3:right",
+          "2-3:right"
+        ],
+        "state": "0@00|1@11|2@10|3@01"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:left",
+          "0-3:below",
+          "1-2:above",
+          "1-3:right",
+          "2-3:below"
+        ],
+        "state": "0@00|1@11|2@10|3@01"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:right",
+          "0-3:right",
+          "1-2:right",
+          "1-3:right",
+          "2-3:below"
+        ],
+        "state": "0@10|1@11|2@00|3@01"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:right",
+          "0-3:right",
+          "1-2:right",
+          "1-3:right",
+          "2-3:above"
+        ],
+        "state": "0@10|1@11|2@01|3@00"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:right",
+          "0-3:right",
+          "1-2:right",
+          "1-3:above",
+          "2-3:above"
+        ],
+        "state": "0@10|1@11|2@01|3@00"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:right",
+          "0-3:right",
+          "1-2:above",
+          "1-3:right",
+          "2-3:below"
+        ],
+        "state": "0@10|1@11|2@00|3@01"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:right",
+          "0-3:below",
+          "1-2:right",
+          "1-3:right",
+          "2-3:below"
+        ],
+        "state": "0@10|1@11|2@00|3@01"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:right",
+          "0-3:below",
+          "1-2:above",
+          "1-3:left",
+          "2-3:left"
+        ],
+        "state": "0@10|1@01|2@00|3@11"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:right",
+          "0-3:below",
+          "1-2:above",
+          "1-3:left",
+          "2-3:below"
+        ],
+        "state": "0@10|1@01|2@00|3@11"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:right",
+          "0-3:below",
+          "1-2:above",
+          "1-3:right",
+          "2-3:below"
+        ],
+        "state": "0@10|1@11|2@00|3@01"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:below",
+          "0-3:left",
+          "1-2:left",
+          "1-3:left",
+          "2-3:above"
+        ],
+        "state": "0@00|1@01|2@11|3@10"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:below",
+          "0-3:left",
+          "1-2:left",
+          "1-3:above",
+          "2-3:above"
+        ],
+        "state": "0@00|1@01|2@11|3@10"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:below",
+          "0-3:left",
+          "1-2:right",
+          "1-3:above",
+          "2-3:left"
+        ],
+        "state": "0@00|1@11|2@01|3@10"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:below",
+          "0-3:left",
+          "1-2:right",
+          "1-3:above",
+          "2-3:above"
+        ],
+        "state": "0@00|1@11|2@01|3@10"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:below",
+          "0-3:right",
+          "1-2:left",
+          "1-3:above",
+          "2-3:right"
+        ],
+        "state": "0@10|1@01|2@11|3@00"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:below",
+          "0-3:right",
+          "1-2:left",
+          "1-3:above",
+          "2-3:above"
+        ],
+        "state": "0@10|1@01|2@11|3@00"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:below",
+          "0-3:right",
+          "1-2:right",
+          "1-3:right",
+          "2-3:above"
+        ],
+        "state": "0@10|1@11|2@01|3@00"
+      },
+      {
+        "selection": [
+          "0-1:below",
+          "0-2:below",
+          "0-3:right",
+          "1-2:right",
+          "1-3:above",
+          "2-3:above"
+        ],
+        "state": "0@10|1@11|2@01|3@00"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:left",
+          "0-3:left",
+          "1-2:left",
+          "1-3:left",
+          "2-3:below"
+        ],
+        "state": "0@01|1@00|2@10|3@11"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:left",
+          "0-3:left",
+          "1-2:left",
+          "1-3:left",
+          "2-3:above"
+        ],
+        "state": "0@01|1@00|2@11|3@10"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:left",
+          "0-3:left",
+          "1-2:left",
+          "1-3:below",
+          "2-3:below"
+        ],
+        "state": "0@01|1@00|2@10|3@11"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:left",
+          "0-3:left",
+          "1-2:below",
+          "1-3:left",
+          "2-3:above"
+        ],
+        "state": "0@01|1@00|2@11|3@10"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:left",
+          "0-3:above",
+          "1-2:left",
+          "1-3:left",
+          "2-3:above"
+        ],
+        "state": "0@01|1@00|2@11|3@10"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:left",
+          "0-3:above",
+          "1-2:below",
+          "1-3:left",
+          "2-3:above"
+        ],
+        "state": "0@01|1@00|2@11|3@10"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:left",
+          "0-3:above",
+          "1-2:below",
+          "1-3:right",
+          "2-3:right"
+        ],
+        "state": "0@01|1@10|2@11|3@00"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:left",
+          "0-3:above",
+          "1-2:below",
+          "1-3:right",
+          "2-3:above"
+        ],
+        "state": "0@01|1@10|2@11|3@00"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:right",
+          "0-3:right",
+          "1-2:right",
+          "1-3:right",
+          "2-3:below"
+        ],
+        "state": "0@11|1@10|2@00|3@01"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:right",
+          "0-3:right",
+          "1-2:right",
+          "1-3:right",
+          "2-3:above"
+        ],
+        "state": "0@11|1@10|2@01|3@00"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:right",
+          "0-3:right",
+          "1-2:right",
+          "1-3:below",
+          "2-3:below"
+        ],
+        "state": "0@11|1@10|2@00|3@01"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:right",
+          "0-3:right",
+          "1-2:below",
+          "1-3:right",
+          "2-3:above"
+        ],
+        "state": "0@11|1@10|2@01|3@00"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:right",
+          "0-3:above",
+          "1-2:right",
+          "1-3:right",
+          "2-3:above"
+        ],
+        "state": "0@11|1@10|2@01|3@00"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:right",
+          "0-3:above",
+          "1-2:below",
+          "1-3:left",
+          "2-3:left"
+        ],
+        "state": "0@11|1@00|2@01|3@10"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:right",
+          "0-3:above",
+          "1-2:below",
+          "1-3:left",
+          "2-3:above"
+        ],
+        "state": "0@11|1@00|2@01|3@10"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:right",
+          "0-3:above",
+          "1-2:below",
+          "1-3:right",
+          "2-3:above"
+        ],
+        "state": "0@11|1@10|2@01|3@00"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:above",
+          "0-3:left",
+          "1-2:left",
+          "1-3:left",
+          "2-3:below"
+        ],
+        "state": "0@01|1@00|2@10|3@11"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:above",
+          "0-3:left",
+          "1-2:left",
+          "1-3:below",
+          "2-3:below"
+        ],
+        "state": "0@01|1@00|2@10|3@11"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:above",
+          "0-3:left",
+          "1-2:right",
+          "1-3:below",
+          "2-3:left"
+        ],
+        "state": "0@01|1@10|2@00|3@11"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:above",
+          "0-3:left",
+          "1-2:right",
+          "1-3:below",
+          "2-3:below"
+        ],
+        "state": "0@01|1@10|2@00|3@11"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:above",
+          "0-3:right",
+          "1-2:left",
+          "1-3:below",
+          "2-3:right"
+        ],
+        "state": "0@11|1@00|2@10|3@01"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:above",
+          "0-3:right",
+          "1-2:left",
+          "1-3:below",
+          "2-3:below"
+        ],
+        "state": "0@11|1@00|2@10|3@01"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:above",
+          "0-3:right",
+          "1-2:right",
+          "1-3:right",
+          "2-3:below"
+        ],
+        "state": "0@11|1@10|2@00|3@01"
+      },
+      {
+        "selection": [
+          "0-1:above",
+          "0-2:above",
+          "0-3:right",
+          "1-2:right",
+          "1-3:below",
+          "2-3:below"
+        ],
+        "state": "0@11|1@10|2@00|3@01"
+      }
+    ],
+    "unique_state_count": 24
+  },
+  "spaces": {
+    "d4_s4_quotient": {
+      "betti": [
+        1,
+        0
+      ],
+      "component_count": 1,
+      "edge_count": 0,
+      "homeomorphism_type": "point",
+      "stabilizer_order": 8,
+      "stabilizer_structure": "D4 in the combined D4 x S4 action",
+      "vertex_count": 1
+    },
+    "labelled": {
+      "betti": [
+        24,
+        0
+      ],
+      "component_count": 24,
+      "edge_count": 0,
+      "homeomorphism_type": "24 isolated labelled grids",
+      "states": [
+        "0@00|1@01|2@10|3@11",
+        "0@00|1@01|2@11|3@10",
+        "0@00|1@10|2@01|3@11",
+        "0@00|1@10|2@11|3@01",
+        "0@00|1@11|2@01|3@10",
+        "0@00|1@11|2@10|3@01",
+        "0@01|1@00|2@10|3@11",
+        "0@01|1@00|2@11|3@10",
+        "0@01|1@10|2@00|3@11",
+        "0@01|1@10|2@11|3@00",
+        "0@01|1@11|2@00|3@10",
+        "0@01|1@11|2@10|3@00",
+        "0@10|1@00|2@01|3@11",
+        "0@10|1@00|2@11|3@01",
+        "0@10|1@01|2@00|3@11",
+        "0@10|1@01|2@11|3@00",
+        "0@10|1@11|2@00|3@01",
+        "0@10|1@11|2@01|3@00",
+        "0@11|1@00|2@01|3@10",
+        "0@11|1@00|2@10|3@01",
+        "0@11|1@01|2@00|3@10",
+        "0@11|1@01|2@10|3@00",
+        "0@11|1@10|2@00|3@01",
+        "0@11|1@10|2@01|3@00"
+      ],
+      "vertex_count": 24
+    },
+    "s4_quotient": {
+      "betti": [
+        1,
+        0
+      ],
+      "component_count": 1,
+      "edge_count": 0,
+      "homeomorphism_type": "point",
+      "vertex_count": 1
+    }
+  },
+  "subject": {
+    "container_side": "2",
+    "n": 4,
+    "scope": "all physical orientations, with each square angle modulo pi/2",
+    "square_side": "1"
+  }
+}
