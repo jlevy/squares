@@ -302,8 +302,14 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best proved lower bound | `2 + 4/√5 = 3.788854382…` | Stromquist 2003, Theorem 2 |
-| Gap | `0.088229208023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+| Best published lower bound | `2 + 4/√5 = 3.788854382…` | Stromquist 2003, Theorem 2; proof gap D-152 under exact audit |
+| Published gap | `0.088229208023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+
+The current audit found an explicit strict box avoiding all twelve printed Figure 14
+points, so the paper’s unavoidability subclaim is false as printed
+([D-152](defects.md)). Until the complete repair is certified, this repository treats
+`3.788854382…` as the best *published claim*, not as an independently checked theorem.
+The monotonicity fallback from proved `s(10)` is `s(11) ≥ 3 + √2/2`.
 
 Trump’s packing is six axis-aligned squares plus a block of five tilted at
 `a* ≈ 40.181937290329714°`. The container side is an algebraic number of degree 8, the
@@ -406,7 +412,11 @@ listed here so the dependencies of this program are explicit.
 
 - **`s(10) = 3 + ½√2`**, Stromquist 2003, Theorem 1. Ten unavoidable points, then case
   analysis. Not pigeonhole alone.
-- **`s(11) ≥ 2 + 4/√5`**, Stromquist 2003, Theorem 2, proved directly for `n = 11`.
+- **`s(11) ≥ 2 + 4/√5`**, Stromquist 2003, Theorem 2. D-152 identifies a strict
+  counterexample to the printed Figure 14 unavoidability claim, so the published proof
+  is not currently relied on as complete.
+  H-010 retains and tests that source-faithful chain; H-041 preregisters a nearby
+  repaired point set.
 - **`s(11) ≤ 3.877083590022814…`**, Trump 1979, by construction.
   Every upper bound in this subject is a construction; no non-constructive upper bound
   has ever been obtained.
@@ -907,6 +917,7 @@ view; this section is the reading of it.
 | [H-038](campaign/hypotheses/H-038-record-number-fields.md) | open question | Which exact fields and elimination mechanisms occur in verified records? | 0 | — |
 | [H-039](campaign/hypotheses/H-039-s12-proof-frontier.md) | open question | Can the lower bound for `s(12)` be improved and ultimately closed at four? | 0 | — |
 | [H-040](campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | blocked | Active-cell neighbor walks beat multistart in new verified cells per LP solve | 0 | — |
+| [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | blocked | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 0 | — |
 
 ### Confirmed
 
@@ -975,9 +986,12 @@ full conditional argument before it can target a new lower bound at `n=12`.
   class-constrained arm assumed the answer’s own structure, so it shows the angle search
   method decides the outcome, not that an unguided method would find that structure.
 - **[H-010](campaign/hypotheses/H-010-stromquist-triple.md)** (Stromquist calibration)
-  needs all five source implications: ten-point localization, centerline-reflection
-  reduction, same-box A-triple forcing, Figure 14 unavoidability, and the finite 3+9
-  count. A failed numerical escape search does not discharge any of those obligations.
+  now has an explicit candidate escape from the printed Figure 14 set.
+  It must certify that witness and terminally reject the source-faithful five-node claim
+  rather than editing the claim after observation.
+- **[H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md)** (proof repair)
+  moves only `G.x` from `.8` to `.79`. It remains blocked until H-010 is terminal and a
+  complete repaired face cover—not merely rejection of the known escape—is encoded.
 
 **[H-017](campaign/hypotheses/H-017-budget-scaling.md)** (100× budget) stays open and
 demoted behind a short response curve.
@@ -1105,12 +1119,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 151 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 152 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 51 | asserted something false about the mathematics |
+| soundness | 52 | asserted something false about the mathematics |
 | validity | 44 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 41 | recorded something its own evidence contradicts |
 | robustness | 11 | did not finish, or finished only by luck |

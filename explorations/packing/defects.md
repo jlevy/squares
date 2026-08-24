@@ -2,15 +2,15 @@
 
 # Defect log
 
-151 defects recorded across the packing toolchain.
+152 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **51 soundness defects** — the system asserting something false about the mathematics. 41 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **52 soundness defects** — the system asserting something false about the mathematics. 42 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
 - **60 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086).
-- **24 are still open** (outstanding or contained), every one carrying a bead.
+- **25 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `control_cell` | 8 | a cell of the sweep whose answer is known in advance |
 | `review` | 106 | a human or agent reading the work against a checklist |
 | `anomaly` | 6 | a result that made no sense, chased down |
-| `inspection` | 17 | reading the code or the design with intent |
+| `inspection` | 18 | reading the code or the design with intent |
 | `drift_check` | 5 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 6 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 6 of 151, and none of the 51 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 6 of 152, and none of the 52 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,13 +36,13 @@ The line worth reading twice: **the automated gate caught 6 of 151, and none of 
 | verifier | 1 |
 | record | 40 |
 | tooling | 37 |
-| docs | 51 |
+| docs | 52 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 51 |
+| soundness | 52 |
 | validity | 44 |
 | bookkeeping | 41 |
 | robustness | 11 |
@@ -144,6 +144,7 @@ This is the actionable list.
 | D-129 | outstanding | medium | Negative-control checker processes have no bounded timeout or child cleanup | `think-cns0` |
 | D-132 | outstanding | high | Fixed-cell iteration returns capped states without a settlement result | `think-9qz0` |
 | D-139 | contained | high | H-032 omitted directly relevant hard-square configuration-space literature | `think-izep` |
+| D-152 | outstanding | critical | Stromquist's printed Figure 14 point set admits an escaping box | `think-bv1d` |
 
 ## Every defect
 
@@ -300,3 +301,4 @@ This is the actionable list.
 | [D-149](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Search saturation was still presented as a Stromquist known-answer test |
 | [D-150](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | Active effort and priority views drifted after four exact research rounds |
 | [D-151](resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | high | fixed | Stromquist's middle Lemma 4 table selected an extraneous cubic root |
+| [D-152](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | critical | outstanding | Stromquist's printed Figure 14 point set admits an escaping box |

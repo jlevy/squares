@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 151
+count: 152
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3762,7 +3762,8 @@ defects:
   consequence: >-
     Trusting the printed threshold would certify Lemma 4 for some `b` between about
     .91454 and .926 where the stated sufficient condition has not been established.
-    Theorem 2 itself survives because its application uses `b=.9`.
+    The particular `a=sqrt(4/5), b=.9` application survives. That does not validate the
+    complete Figure 14 cover: its separate `a=.95, b=.8` gap is D-152.
   fix: >-
     Preserved the printed row as source text, annotated the algebraic error in the clean
     archive and research report, and require H-010 to select roots with the unsquared
@@ -3770,3 +3771,31 @@ defects:
   regression: none
   bead: think-7nwj
   recorded_in: resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md
+- id: D-152
+  title: Stromquist's printed Figure 14 point set admits an escaping box
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: inspection
+  latent_for: twenty-three years in the primary source and two days in the local archive
+  severity: critical
+  status: outstanding
+  what: >-
+    The paper says nonavoidance lemmas cover every Figure 14 region, but the outer
+    quadrilateral adjacent to `A1=(1,.9)` and `G=(.8,1.85)` has Lemma 4 parameters
+    `a=.95, b=.8`, while the true threshold is about `.79815344`. An explicit strict
+    box of side `10001/10000`, slope `27/10`, and center
+    `(37L/(2sqrt(829)),11/8)` fits the container and avoids all twelve printed points.
+  consequence: >-
+    The printed twelve-point set is not unavoidable, so the published five-node proof
+    chain and every local description that called it a known-answer certificate are
+    unsound. This does not by itself refute the lower-bound theorem: the paper says the
+    second figure has slack, and a nearby repaired point set may close the gap.
+  fix: >-
+    Preserve H-010 as the source-faithful claim and reject it only after exact retained
+    replay. Test the source-distinct one-coordinate repair under preregistered H-041,
+    with a complete finite cover rather than merely blocking this witness.
+  regression: none
+  bead: think-bv1d
+  recorded_in: campaign/hypotheses/H-010-stromquist-triple.md

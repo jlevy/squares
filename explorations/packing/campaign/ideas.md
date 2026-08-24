@@ -171,6 +171,7 @@ families remain untried.
 | 41 | Classify the exact number fields, elimination systems, and mechanism associations of verified record witnesses | registered | [H-038](hypotheses/H-038-record-number-fields.md) | algebraic frontier | Metadata follows the verified active cell, never a superseded decimal row; a failed degree law is retained |
 | 42 | Improve the lower bound for `s(12)` and ultimately decide whether `s(12)=4` | registered | [H-039](hypotheses/H-039-s12-proof-frontier.md) | proof frontier | H-010 first calibrates the whole Stromquist implication; CEGIS then alternates candidate resources with continuous escape witnesses |
 | 43 | Walk adjacent active LP cells instead of resampling cell volume | registered | [H-040](hypotheses/H-040-active-cell-neighbor-walk.md) | piecewise-linear geometry | Compare new verified cells per LP solve at `n=5,10`; a cell is not automatically a component or basin |
+| 44 | Repair Stromquist’s printed Figure 14 set without changing the proof architecture | registered | [H-041](hypotheses/H-041-repaired-stromquist-point-set.md) | proof falsification and repair | Move only `G.x` from `.8` to `.79`, then require a complete finite cover; merely blocking the discovered witness is insufficient |
 
 ## Open questions
 

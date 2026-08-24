@@ -41,12 +41,14 @@ hypothesis:
   replication: true
   registered: retroactive
   notes: >-
-    The twelve Figure 14 points genuinely are unavoidable, but that fact is not enough
-    to exclude eleven boxes. The proof also needs the ten-point localization and the
-    fact that one named box contains three of those twelve points. A positive escape
-    witness is useful falsifier evidence; failure to find one is never a known-answer
-    result or a certificate. D-151 corrects the source's extraneous middle Lemma 4 root;
-    this run must certify the needed b=.9 inequality rather than trust the printed .926.
+    The published proof asserts that the twelve Figure 14 points are unavoidable, but
+    that assertion alone would not exclude eleven boxes. The proof also needs the
+    ten-point localization and the fact that one named box contains three of those
+    twelve points. A positive escape witness is decisive falsifier evidence; failure to
+    find one is never a known-answer result or a certificate. D-151 corrects the
+    source's extraneous middle Lemma 4 root. The source audit has since produced an
+    explicit candidate escape from the printed twelve-point set, tracked by D-152; this
+    original claim remains unchanged so the experiment can reject it honestly.
 ---
 # H-010 — Stromquist’s full Theorem 2 mechanism
 
@@ -77,7 +79,21 @@ faithfully executed experiment on the wrong point set answers nothing.
 
 The checker must also replay the unsquared sign condition in Lemma 4. The paper’s
 `24.1°/.926` table entry at `a = √(4/5)` comes from an extraneous cubic root; the actual
-minimum is about `.9145377886`, still above the `.9` used by Theorem 2.
+minimum is about `.9145377886`, still above the `.9` used in that particular Lemma 4
+application.
+
+## Current falsifier
+
+The source audit found a candidate open square of side `10001/10000`, with
+`tan(theta) = 27/10` and center `(37L/(2 sqrt(829)), 11/8)`, that fits in the container
+and avoids every printed Figure 14 point.
+Its smallest computed avoidance margin is about `4.94e-5`, at `G`.
+
+H-010 is not rewritten around that observation.
+The retained checker must bind the printed point tuple, certify every strict inequality,
+and replay the result independently.
+If it does, H-010 is rejected.
+The proposed one-coordinate repair belongs to the separately preregistered H-041.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
