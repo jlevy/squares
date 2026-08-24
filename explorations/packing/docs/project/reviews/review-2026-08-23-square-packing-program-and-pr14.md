@@ -2592,6 +2592,11 @@ outstanding D-126/D-162 golden drift.
 D-198 is fixed; an isolated one-worker deep regeneration still reports `n=4` at 3/4
 converged and stops `n=10` on pair-row 61 at residual `1.503e-10` after 109 seconds.
 That blocker is retained without changing the `1e-10` screen or the committed golden.
+A bounded source trace shows that the observed n=10 stop is a typed post-check rejection
+after the repair LP, not a wall-deadline stop.
+Thus D-126’s deterministic work budget remains necessary but is not this correction;
+`think-yi6x` owns the narrower D-162 repair with first-versus-repaired receipts, finite
+solver caps, and unchanged all-row acceptance.
 
 ## Post-merge operating disposition
 

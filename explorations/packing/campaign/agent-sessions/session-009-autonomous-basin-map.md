@@ -462,10 +462,17 @@ session:
     n=4 3/4 convergence total and n=10 pair-row-61 post-check rejection in 109 seconds.
     The strict unattended-handoff gate therefore remains blocked by D-126/D-162; no
     threshold or committed golden was changed.
+  - >-
+    A bounded source trace separates those blockers. The observed n=10 failure is a
+    typed solver post-check rejection after the one complete-offending-set repair, not
+    a wall-deadline stop, so converting D-126 to a deterministic work budget cannot by
+    itself repair this gate. Think-yi6x owns first-versus-repaired LP receipts and a
+    finitely capped correction that must preserve the 1e-10 all-row replay screen.
   stop_reason: null
   next_action: >-
-    Push the terminal exp-036 checkpoint. The next process slice belongs to think-wbra
-    and think-u97a; the independent exact-research queue resumes at think-nm35.
+    Run the bounded think-yi6x solver-acceptance slice before another deep golden retry.
+    Keep the D-126 work-budget conversion separate; the independent exact-research queue
+    resumes at think-nm35.
 ---
 # Session 009 — Bounded Progress Before Scale
 
