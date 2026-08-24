@@ -55,7 +55,7 @@ Usage:
 
 from __future__ import annotations
 
-import os
+import queue
 import subprocess
 import sys
 import tempfile
@@ -63,6 +63,10 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import yaml
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from sqpack.workers import worker_count
 
 ROOT = Path(__file__).resolve().parent.parent
 # The REPOSITORY root, not this directory: one control targets ../../.flowmarkignore,
@@ -173,7 +177,7 @@ def main() -> int:
         return 1
 
     requested = int(sys.argv[sys.argv.index("-j") + 1]) if "-j" in sys.argv else 0
-    workers = requested or min(len(controls), os.cpu_count() or 4)
+    workers = requested or worker_count(len(controls))
 
     failures: list[tuple[str, str]] = []
     with tempfile.TemporaryDirectory(prefix="negctl-") as tmp:
@@ -181,15 +185,33 @@ def main() -> int:
         with ThreadPoolExecutor(max_workers=workers) as pool:
             list(pool.map(clone_tree, trees))
 
-            def work(indexed: tuple[int, dict]) -> tuple[dict, bool, str]:
-                i, c = indexed
-                passed, detail = run_one(c, trees[i % workers])
+            # A tree is CHECKED OUT for the duration of one control and returned
+            # afterwards, so no two running controls can ever share one.
+            #
+            # The obvious thing -- hand control i the tree at index i % workers -- is
+            # wrong, and wrong in the way that only shows up under load: a pool does
+            # not promise that item i runs on worker i % workers. It promises that
+            # some free thread takes the next item. One slow control is enough for
+            # item i and item i + workers to be in flight at the same moment, both
+            # claiming the same tree, one restoring the file the other just corrupted.
+            # Caught by running the gate at --jobs 10: the "defect log - count
+            # disagreeing with the list" control stopped firing, because a neighbour
+            # had already put defects.yaml back.
+            available: queue.Queue[Path] = queue.Queue()
+            for t in trees:
+                available.put(t)
+
+            def work(c: dict) -> tuple[dict, bool, str]:
+                tree = available.get()
+                try:
+                    passed, detail = run_one(c, tree)
+                finally:
+                    available.put(tree)
                 return c, passed, detail
 
-            # Striped, not chunked: `pool.map` preserves order, so the report reads the
-            # same however the work was split, and control i always lands in tree
-            # i % workers -- which keeps a worker's controls from colliding on a file.
-            for c, passed, detail in pool.map(work, enumerate(controls)):
+            # `pool.map` preserves order, so the report reads the same however the
+            # work happened to be split across trees.
+            for c, passed, detail in pool.map(work, controls):
                 if not passed:
                     failures.append((c["name"], detail))
 

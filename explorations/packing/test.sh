@@ -60,6 +60,18 @@ if [ "$JOBS" = "0" ]; then
   JOBS=$( { command -v sysctl >/dev/null 2>&1 && sysctl -n hw.ncpu; } \
     || { command -v nproc >/dev/null 2>&1 && nproc; } || echo 4 )
 fi
+# Several steps are themselves lists of independent multi-second quenches and open
+# their own process pool. Without a shared budget the two layers MULTIPLY -- ten steps
+# each asking for ten workers is a hundred processes on ten cores, and the strict gate
+# measured 232s of CPU delivered over 50s of wall because of it. `PACK_JOBS` is the
+# per-step share; sqpack.workers.worker_count reads it, and a tool run straight from a
+# shell sees no variable and still gets the whole machine.
+INNER="${GATE_INNER_JOBS:-0}"
+if [ "$INNER" = "0" ]; then
+  INNER=$(( JOBS / 3 ))
+  [ "$INNER" -lt 2 ] && INNER=2
+fi
+export PACK_JOBS="$INNER"
 
 # A private directory per run for each step's captured output, exit code, timing and
 # skips. Steps run in subshells and cannot append to a parent array, so they report

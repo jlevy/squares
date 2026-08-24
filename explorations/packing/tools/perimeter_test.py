@@ -24,7 +24,6 @@ from __future__ import annotations
 
 import json
 import math
-import os
 import random
 import subprocess
 import sys
@@ -36,6 +35,7 @@ sys.path.insert(0, str(ROOT))
 
 from sqpack.quench import quench, quench_bracket, solve_to_fixed_point
 from sqpack.verify import corners_from_poses, float_sign, verify_packing
+from sqpack.workers import worker_count
 
 # The tightest bound the solver's own guarantee permits. Anything looser would let a
 # D-014 through; anything tighter would reject solves that are correct by construction.
@@ -200,7 +200,7 @@ def main() -> int:
 
     # Results are collected by submission index, so the order of `failures` does not
     # depend on which worker finished first.
-    with ProcessPoolExecutor(max_workers=min(len(units), (os.cpu_count() or 4))) as pool:
+    with ProcessPoolExecutor(max_workers=worker_count(len(units))) as pool:
         for got_failures, got_checked in pool.map(_quench_unit, units):
             failures += got_failures
             checked += got_checked

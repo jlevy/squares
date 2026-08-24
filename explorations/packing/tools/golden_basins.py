@@ -62,7 +62,6 @@ from __future__ import annotations
 import argparse
 import difflib
 import math
-import os
 import random
 import shutil
 import subprocess
@@ -80,6 +79,7 @@ from sqpack.canonical import canonical_key
 from sqpack.closed_form import ClosedForm, recognise
 from sqpack.quench import quench_bracket
 from sqpack.verify import corners_from_poses, float_sign, verify_packing
+from sqpack.workers import worker_count
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -210,7 +210,7 @@ def ladder() -> tuple[list[dict], list[str]]:
     ]
     # Each rung is an independent anneal-then-quench; only the judging below needs to
     # happen in order. `pool.map` preserves it.
-    with ProcessPoolExecutor(max_workers=min(len(runnable), os.cpu_count() or 4)) as pool:
+    with ProcessPoolExecutor(max_workers=worker_count(len(runnable))) as pool:
         produced = list(pool.map(_ladder_unit, runnable))
 
     for (n, seed), (seeded, r) in zip(runnable, produced, strict=True):
@@ -269,7 +269,7 @@ def build() -> tuple[dict, list[str]]:
     # so pooling per case would leave most of the machine idle on the small ones.
     units = [u for n, seeds in CASES for u in census_starts(n, seeds)]
     endpoints: dict[int, list] = {n: [] for n, _ in CASES}
-    with ProcessPoolExecutor(max_workers=min(len(units), os.cpu_count() or 4)) as pool:
+    with ProcessPoolExecutor(max_workers=worker_count(len(units))) as pool:
         for n, seed, r in pool.map(_census_unit, units):
             endpoints[n].append((seed, r))
 

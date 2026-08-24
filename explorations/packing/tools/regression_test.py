@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import json
 import math
-import os
 import random
 import subprocess
 import sys
@@ -33,6 +32,7 @@ from sqpack.quench import (
     quench_bracket,
     solve_to_fixed_point,
 )
+from sqpack.workers import worker_count
 
 BIN = ROOT / "sqsearch/target/release/sqsearch"
 TRUMP = 3.877083590022814
@@ -233,7 +233,7 @@ def _run_check(name: str) -> str | None:
 
 
 def main() -> int:
-    with ProcessPoolExecutor(max_workers=min(len(CHECKS), os.cpu_count() or 4)) as pool:
+    with ProcessPoolExecutor(max_workers=worker_count(len(CHECKS))) as pool:
         failures = [msg for msg in pool.map(_run_check, CHECKS) if msg]
     for msg in failures:
         print(f"  REGRESSION  {msg}", file=sys.stderr)
