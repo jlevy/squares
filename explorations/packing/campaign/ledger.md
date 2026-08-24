@@ -12,12 +12,13 @@
 | [session-004](agent-sessions/session-004-creative-frontier-review.md) | completed | insight | think-7gu0 | 5 | Finish generated-view and bead reconciliation, run the normal gate, publish the checkpoint, then start H-026 and the exact n=3 quotient-map control in parallel lanes. |
 | [session-005](agent-sessions/session-005-h024-fast-falsifier.md) | completed | insight | think-w5rb | 3 | Begin H-026 from Trump's exact active-contact table, with complete one-sided branch enumeration and replayable tangent-cone certificates as the guarded deliverable. |
 | [session-006](agent-sessions/session-006-h026-exact-tangent.md) | completed | insight | think-qd9t | 2 | Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and move the fast rotation to H-032's exact n=3 quotient-family control. |
+| [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | in_progress | insight | think-n82j | 3 | Commit and push both claims, then implement the exact enumerator and deterministic renderer without changing the preregistered counts or stop rules. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 13 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 15 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -54,7 +55,7 @@
 | H-029 | blocked | search | After passing exact synthetic rare-event controls, adaptive multilevel |  | 0 |  |
 | H-030 | blocked | search | Starting only from the six cited parent geometries in UnitSquare Relea |  | 0 |  |
 | H-031 | blocked | search | Under a common temperature schedule and LP-in-cell quench, a move kern | n: 10 17 | 0 |  |
-| H-032 | open question | proof | What are the connected components, dimensions, active strata, and symm | n: 3 4 5 6 | 0 |  |
+| H-032 | open question | proof | What are the connected components, dimensions, active strata, and symm | n: 3 4 5 6 | 2 |  |
 | H-033 | open question | proof | Can Bentz's moving unavoidable-resource method or a strict generalizat |  | 0 |  |
 | H-034 | blocked | proof | For the family U_s of all open unit-square poses contained in a square |  | 0 |  |
 | H-035 | blocked | search | A finite, independently verified instantiation of the stack, strip, or |  | 0 |  |
@@ -89,7 +90,14 @@
 | exp-010 | series-000 | 11 | claude-opus-5 | H-019 | Confirms H-019: the one-sided slopes are 0.1747 and 0.3841, a ratio of 2.198 that is stable over five decades on each side, so the optimum of s(theta) is a corner rather than a smooth minimum on this shared-tilt slice. A smooth local model is misspecified at that point; this round does not establish a general convergence impossibility. |
 | exp-013 | series-000 | 11 | openai-codex | H-026 | No nonzero linearized direction survives. All 128 derivative-distinct matrices have exact zero-cone certificates, covering all 512 raw nonlinear feature selections with zero unresolved branches. |
 
+### in-progress (2)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-014 | series-000 | 3 | openai-codex | H-032 | Claimed; the exact cell enumerator, orbit audit, source comparison, and deterministic renderer are being built. |
+| exp-015 | series-000 | 4 | openai-codex | H-032 | Claimed separately from n = 3; the common orientation lemma and exact orbit audit are being implemented. |
+
 ## Effort
 
-13 rounds, 387 agent-minutes, 24.0 wall-minutes.
+15 rounds, 387 agent-minutes, 24.0 wall-minutes.
 

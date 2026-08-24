@@ -898,7 +898,7 @@ view; this section is the reading of it.
 | [H-029](campaign/hypotheses/H-029-adaptive-splitting.md) | blocked | Calibrated adaptive splitting beats restarts on rare target events | 0 | — |
 | [H-030](campaign/hypotheses/H-030-public-parent-surgery.md) | blocked | Construction surgery reproduces at least two of six hidden public record improvements | 0 | — |
 | [H-031](campaign/hypotheses/H-031-load-guided-block-moves.md) | blocked | LP-load-guided block moves beat coordinate-only moves per pair-test | 0 | — |
-| [H-032](campaign/hypotheses/H-032-small-n-optimal-moduli.md) | open question | What are the exact optimal configuration spaces for `n=3…6`? | 0 | — |
+| [H-032](campaign/hypotheses/H-032-small-n-optimal-moduli.md) | open question | What are the exact optimal configuration spaces for `n=3…6`? | 2 | — |
 | [H-033](campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | open question | Can the `m²−3` theorem be extended to `s(61)=8`? | 0 | — |
 | [H-034](campaign/hypotheses/H-034-fractional-piercing-ceiling.md) | blocked | The fractional piercing value at Trump’s side is greater than ten | 0 | — |
 | [H-035](campaign/hypotheses/H-035-asymptotic-primitive-finite-transfer.md) | blocked | Current asymptotic construction primitives improve a finite public parent | 0 | — |
@@ -983,10 +983,13 @@ current criterion and kill rule.
 
 ## Experiments Conducted
 
-13 rounds are terminal, all in `series-000`. Ledger effort is **387 agent-minutes** and
-**24.0 wall-minutes**. Four instruments: `sqsearch` 0.1.0 (the `f64` screening
-annealer), `sqpack.quench` (0.1.0 with angle descent, 0.2.0 with class bracketing), and
-the high-precision Kingbird SVG reconstruction and exact Trump linearized-cone checkers.
+There are 15 rounds registered in `series-000`: thirteen terminal and two in progress.
+The terminal rounds record **387 agent-minutes** and **24.0 wall-minutes**. They use
+four instruments: `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
+(0.1.0 with angle descent, 0.2.0 with class bracketing), and the high-precision Kingbird
+SVG reconstruction and exact Trump linearized-cone checkers.
+The claimed `n = 3,4` rounds preregister a fifth exact small-moduli checker before it is
+built.
 
 No search round has been run at the `exact` tier, so **no result below claims a new
 record**. Exp-012 is an exploratory reconstruction of a published record witness; its
@@ -1012,6 +1015,8 @@ archive beside it.
 | [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | exactly `5.0` on all five seeds, gap `+3.245e-01` | rejected |
 | [exp-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | 29 | target | H-024 | SVG reconstruction + SAT | six classes; minimum class gap `0.296067°` | **rejected** |
 | [exp-013](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | 11 | target | H-026 | exact branchwise linearization | 128/128 exact zero-cone certificates | **accepted** |
+| [exp-014](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) | 3 | positive control | H-032 | exact configuration space | checker and quotient map claimed | in-progress |
+| [exp-015](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | 4 | positive control | H-032 | exact configuration space | grid rigidity replay claimed | in-progress |
 
 ### Cost and provenance
 
@@ -1083,27 +1088,27 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-One hundred thirty-eight defects, [one line each](defects.md), generated from
-`defects.yaml` and checked in the gate.
+The log contains 141 defects, [one line each](defects.md), generated from `defects.yaml`
+and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 46 | asserted something false about the mathematics |
+| soundness | 48 | asserted something false about the mathematics |
 | validity | 39 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 39 | recorded something its own evidence contradicts |
-| robustness | 10 | did not finish, or finished only by luck |
+| robustness | 11 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Thirty-six of the forty-six soundness defects pointed in the *flattering* direction**,
-where the error looks like a success.
+**Thirty-eight of the forty-eight soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught six defects in one hundred thirty-seven, and no
-soundness defect ever.** Every soundness failure was found by a control cell whose
-answer was known in advance, a rule written down before the measurement, a generated
-view contradicting its source, or someone reading carefully.
+**The automated gate has caught six defects in one hundred forty-one, and no soundness
+defect ever.** Every soundness failure was found by a control cell whose answer was
+known in advance, a rule written down before the measurement, a generated view
+contradicting its source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. The six the gate did catch ([D-024](defects.md), [D-064](defects.md),
 [D-106](defects.md), [D-107](defects.md), [D-125](defects.md), and [D-130](defects.md))
@@ -1221,7 +1226,10 @@ What is not settled is what a basin *is*.
 
 [D-034](defects.md) is the open defect that says so.
 The exact `n=3` side-2 sliding family proves that one connected optimal set produces
-many geometric keys while retaining one contact certificate.
+many geometric keys.
+Its open stratum retains one contact certificate, but the wall endpoint has a different
+certificate after node attributes were restored; the stale closed-family claim is
+tracked explicitly as [D-140](defects.md).
 At `n=5`, two rows also share side, short form, contact certificate, angle signature,
 and contact count while differing geometrically.
 That is strong evidence of unresolved terminal identity, but raw contact counts do not
@@ -1242,6 +1250,11 @@ now keeps several independent routes alive rather than making the census spine t
 program: Trump’s nonsmooth local geometry, exact small-`n` quotient spaces, held-out
 construction surgery, pure-point piercing limits, robust restricted-angle proofs,
 `s(12)`, `s(61)`, exact record fields, and the asymptotic waste exponent.
+
+**The small-`n` lane was missing its direct prior art.** [D-139](defects.md) records the
+omission. Two primary hard-square configuration-space papers are now archived; the
+Plakhta paper remains explicitly publisher-blocked, so no novelty language is permitted
+until its scope is checked from a lawful primary copy.
 
 **The first fast rotation is cheap and high-information.** Exp-012 refuted H-024, and
 exp-013 confirmed H-026 and locally isolated Trump’s pose.

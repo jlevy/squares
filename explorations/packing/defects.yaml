@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 138
+count: 141
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3417,3 +3417,87 @@ defects:
   recurrence_of: D-006
   bead: think-t4xv
   recorded_in: test.sh
+- id: D-139
+  title: H-032 omitted directly relevant hard-square configuration-space literature
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: since H-032 was registered
+  severity: high
+  status: contained
+  what: >-
+    H-032's initial literature routing omitted Alpert–Bauer–Kahle–MacPherson–Spendlove
+    (2023), Plakhta (2021), and Alvarado-Garduño–González (2025), all directly relevant
+    to topology or unlabelled hard-square configuration spaces in rectangles.
+  consequence: >-
+    The programme could misstate the novelty or difficulty of its small-n moduli work,
+    or select an experiment without distinguishing the exact optimal-moduli question
+    from broader configuration-space topology.
+  fix: >-
+    Archived the two retrievable primary sources, routed their restricted evidential
+    role into H-032, and recorded the publisher-blocked Plakhta source with its exact
+    acquisition route.
+  regression: >-
+    The H-032 bead requires this literature boundary in its acceptance work; the source
+    availability schema and generated research tables retain the Plakhta acquisition
+    blocker until a primary PDF is archived.
+  bead: think-izep
+  recorded_in: campaign/hypotheses/H-032-small-n-optimal-moduli.md
+- id: D-140
+  title: The closed n = 3 sliding family was said to have one contact certificate
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: since D-093 restored node attributes in the canonical certificate
+  severity: high
+  status: outstanding
+  what: >-
+    Living docs and sqpack/canonical.py still say that the closed side-2 family with
+    centres `(1/2,1/2)`, `(3/2,1/2)`, and `(t,3/2)` has one constant contact
+    certificate. The current certificate includes wall-contact counts: the two outer
+    display endpoints have multiset `[2,2,2]`, while every interior member has
+    `[1,2,2]`, so the endpoint and open-stratum certificates differ.
+  consequence: >-
+    The programme erased the active wall stratum at exactly the calibration object meant
+    to define families, strata and quotient maps. The main D-034 conclusion survives:
+    infinitely many interior geometric keys share one certificate, and the endpoint
+    strata remain in the same connected family.
+  fix: >-
+    Pending exp-014. Correct every living statement to distinguish the constant open
+    stratum from the endpoint wall stratum, retain the historical claim as an explicit
+    correction, and add an exact canonical-key regression plus quotient visualization.
+  regression: none
+  recurrence_of: D-093
+  bead: think-030v
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md
+- id: D-141
+  title: Byte-exact raw literature failed the generic Git whitespace check
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  detected_by: anomaly
+  latent_for: first raw extraction containing trailing blank-line spaces
+  severity: medium
+  status: fixed
+  what: >-
+    A faithful pdfminer extraction contained spaces on otherwise blank lines. Staging
+    the new `.raw.md` made `git diff --cached --check` fail, while stripping those bytes
+    would violate the archive's byte-for-byte ground-truth contract.
+  consequence: >-
+    An agent following both repository rules had to choose between a clean precommit
+    check and faithful evidence, encouraging either an unreported bypass or a silently
+    altered raw source.
+  fix: >-
+    Added one path-scoped Git attribute that disables whitespace diagnostics only for
+    `explorations/packing/resources/**/*.raw.md`. Hand-written Markdown and every other
+    file retain the normal whitespace policy.
+  regression: >-
+    The two archived raw SHA-256 values remain unchanged, `git check-attr whitespace`
+    reports `unset` only on the raw path, and `git diff --cached --check` passes with the
+    exact extractions staged.
+  bead: think-r2n2
+  recorded_in: resources/README.md

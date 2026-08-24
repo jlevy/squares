@@ -16,7 +16,7 @@ softschema:
   schema: source-availability.schema.yaml
   status: enforced
 
-last_checked: '2026-08-22'
+last_checked: '2026-08-24'
 archive: explorations/packing/resources/
 
 # Cleared since the first pass. Kept so the correction is visible, and as
@@ -46,6 +46,26 @@ recovered:
 
 # Still missing. `blocker` is the mechanism, not a guess.
 unretrieved:
+  - key: "[Plakhta 2021]"
+    title: Configuration spaces of squares in a rectangle
+    authors: [Leonid Plakhta]
+    year: 2021
+    venue: Algebraic & Geometric Topology 21, 1445-1478
+    url: https://doi.org/10.2140/agt.2021.21.1445
+    blocker: bot_blocked
+    detail: >
+      The official MSP article page and PDF route were re-tested 2026-08-24. The PDF
+      route returned the publisher's "PDF Access Denied" HTML response, not a PDF.
+      The proposed idUS institutional-repository mirror was also checked: its byte
+      stream is instead the 23-page Bonnot–de Carvalho–González-Meneses–Hall article
+      (AGT 21, 1351-1370), not the Plakhta article or the complete issue.
+    depends_on_it: >
+      H-032's literature routing for affine Morse-Bott analysis of square configuration
+      spaces in a rectangle; it is context and method, not a classification of the
+      exact optimal-moduli spaces asked there.
+    priority: 2
+    route: author copy, institutional repository, or lawful institutional access
+
   - key: "[Stromquist 1984]"
     title: Packing unit squares inside squares, I-III
     authors: [Walter Stromquist]

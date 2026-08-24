@@ -2,30 +2,30 @@
 
 # Defect log
 
-138 defects recorded across the packing toolchain.
+141 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **46 soundness defects** — the system asserting something false about the mathematics. 36 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **55 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006).
-- **23 are still open** (outstanding or contained), every one carrying a bead.
+- **48 soundness defects** — the system asserting something false about the mathematics. 38 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **55 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093).
+- **25 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
 | Detector | Count | What it is |
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
-| `control_cell` | 7 | a cell of the sweep whose answer is known in advance |
-| `review` | 98 | a human or agent reading the work against a checklist |
-| `anomaly` | 5 | a result that made no sense, chased down |
+| `control_cell` | 8 | a cell of the sweep whose answer is known in advance |
+| `review` | 99 | a human or agent reading the work against a checklist |
+| `anomaly` | 6 | a result that made no sense, chased down |
 | `inspection` | 15 | reading the code or the design with intent |
 | `drift_check` | 4 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 6 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 6 of 138, and none of the 46 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 6 of 141, and none of the 48 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,17 +35,17 @@ The line worth reading twice: **the automated gate caught 6 of 138, and none of 
 | quench | 13 |
 | verifier | 1 |
 | record | 38 |
-| tooling | 33 |
-| docs | 44 |
+| tooling | 34 |
+| docs | 46 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 46 |
+| soundness | 48 |
 | validity | 39 |
 | bookkeeping | 39 |
-| robustness | 10 |
+| robustness | 11 |
 | performance | 4 |
 
 ## Fixed, but nothing stops it coming back
@@ -138,6 +138,8 @@ This is the actionable list.
 | D-126 | outstanding | high | Quench convergence work was budgeted by machine time rather than reproducible work | `think-u97a` |
 | D-129 | outstanding | medium | Negative-control checker processes have no bounded timeout or child cleanup | `think-cns0` |
 | D-132 | outstanding | high | Fixed-cell iteration returns capped states without a settlement result | `think-9qz0` |
+| D-139 | contained | high | H-032 omitted directly relevant hard-square configuration-space literature | `think-izep` |
+| D-140 | outstanding | high | The closed n = 3 sliding family was said to have one contact certificate | `think-030v` |
 
 ## Every defect
 
@@ -281,3 +283,6 @@ This is the actionable list.
 | [D-136](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | 2026-08-24 | record | soundness | flattering | `review` | high | fixed | A branch linearization was mislabeled as the true Bouligand tangent |
 | [D-137](tools/check_trump_tangent.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | Trump certificate replay did not require one-to-one branch coverage |
 | [D-138](test.sh) | 2026-08-24 | tooling | validity | flattering | `anomaly` | high | fixed | The provenance gate skipped schema-valid unquoted commit hashes |
+| [D-139](campaign/hypotheses/H-032-small-n-optimal-moduli.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | contained | H-032 omitted directly relevant hard-square configuration-space literature |
+| [D-140](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) | 2026-08-24 | docs | soundness | flattering | `control_cell` | high | outstanding | The closed n = 3 sliding family was said to have one contact certificate |
+| [D-141](resources/README.md) | 2026-08-24 | tooling | robustness |  | `anomaly` | medium | fixed | Byte-exact raw literature failed the generic Git whitespace check |

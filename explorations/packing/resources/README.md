@@ -27,15 +27,17 @@ Cleanup was done by language models, so the raw extraction is the fallback whene
 formula in a `.md` looks suspicious.
 
 **Transcription status, stated exactly.** The archive’s discipline is original + cleaned
-`.md` + faithful `.raw.md`, and five entries currently fall short of it in ways worth
+`.md` + faithful `.raw.md`, and seven entries currently fall short of it in ways worth
 naming rather than hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
   `nagamochi-2005-packing-unit-squares-in-a-rectangle`,
   `wang-dong-li-2016-new-result-packing-unit-squares` and
-  `basic-slivkova-2018-optimal-piercing-square` are **raw-only**: PDF and faithful
-  extraction, no cleaned transcription yet.
-  All four were read directly from the PDF, and the claims resting on them were checked
+  `basic-slivkova-2018-optimal-piercing-square`,
+  `alpert-bauer-kahle-macpherson-spendlove-2023-hard-squares-configuration-spaces` and
+  `alvarado-garduno-gonzalez-2025-square-section-braid-groups` are **raw-only**: PDF and
+  faithful extraction, no cleaned transcription yet.
+  All six were read directly from the PDF, and the claims resting on them were checked
   there.
 - `roth-vaughan-1978-inefficiency-packing-squares` carries a **partial** cleaned
   transcription: abstract, introduction and Theorem, read from the rendered page image
@@ -90,6 +92,12 @@ in Caoduro–Sebő, 5 of 433 in the Kingbird capture.
 A newline in the middle of a formula defeats `grep`, which is what this archive exists
 for.
 
+The same byte-level rule applies to whitespace.
+Some faithful `pdfminer` output contains spaces on blank lines, so the root
+`.gitattributes` disables Git whitespace diagnostics only for `resources/**/*.raw.md`.
+Hand-written Markdown keeps the normal check; raw extraction bytes are never normalized
+to satisfy a presentation rule.
+
 `explorations/packing/resources/README.md` — this file — is *not* excluded, and is
 formatted normally.
 
@@ -132,6 +140,8 @@ Citation keys match those used in the research document.
 | **[Nagamochi 2005]** | Packing Unit Squares in a Rectangle | H. Nagamochi | 2005 | Electron. J. Combin. 12, #R37 | `nagamochi-2005-packing-unit-squares-in-a-rectangle` |
 | **[Wang–Dong–Li 2016]** | A New Result on Packing Unit Squares into a Large Square | S. Wang, T. Dong, J. Li | 2016 | arXiv:1603.02368 | `wang-dong-li-2016-new-result-packing-unit-squares` |
 | **[Basic-Slivkova 2018]** | On optimal piercing of a square | B. Bašić, A. Slivková | 2018 | Discrete Applied Mathematics 247 | `basic-slivkova-2018-optimal-piercing-square` |
+| **[Alpert et al. 2023]** | Homology of configuration spaces of hard squares in a rectangle | H. Alpert, U. Bauer, M. Kahle, R. MacPherson, K. Spendlove | 2023 | Algebraic & Geometric Topology 23, 2593–2626; arXiv:2010.14480 | `alpert-bauer-kahle-macpherson-spendlove-2023-hard-squares-configuration-spaces` |
+| **[Alvarado-Garduño–González 2025]** | Square-section braid groups and Higman–Neumann–Neumann extensions | O. Alvarado-Garduño, J. González | 2025 | arXiv:2510.17707 | `alvarado-garduno-gonzalez-2025-square-section-braid-groups` |
 | **[Roth–Vaughan 1978]** | Inefficiency in Packing Squares with Unit Squares | K. F. Roth, R. C. Vaughan | 1978 | JCTA 24, 170–186 | `roth-vaughan-1978-inefficiency-packing-squares` |
 
 ## Web sources
