@@ -186,9 +186,13 @@ that depend on sampled component identity or descriptor distances remain unbuilt
 
 ### The promotion pipeline—unbuilt, and it is the largest structural gap
 
-There is **no executable path from a numerical candidate to a reconstructible exact
-result.** The repository can verify a packing whose exact algebraic description it is
-already given; it cannot produce that description from a packing it found.
+There is **no general executable path from a numerical candidate to a reconstructible
+exact result.** The repository can verify a packing whose exact algebraic description it
+is already given; it cannot, as a tool, produce that description from a packing it
+found. Exp-033 crossed the boundary once, narrowly: a dedicated checker bound two
+retained `n = 5` float poses to exact endpoints on one certified fixed-angle optimal
+face, with an exact dual proving that cell’s side minimal.
+One hand-built instance at fixed angles is a proof of concept, not the pipeline.
 
 Concretely, none of the following exists: corner–edge incidence classification from a
 polished pose (the quench records which *pairs* touch, not which corner meets which
@@ -200,10 +204,12 @@ several rational-grid controls, and records recognition failures rather than gue
 
 Two consequences bind every other lane:
 
-- **`exact` currently means “checked something already known exactly”.** Every exact
-  configuration here—Trump’s packing, the `n = 3` and `n = 4` optimal families—was
-  authored from published data or derived analytically; none was recovered from a
-  numerical search output.
+- **`exact` almost always means “checked something already known exactly”.** Trump’s
+  packing and the `n = 3` and `n = 4` optimal families were authored from published data
+  or derived analytically.
+  The one exception is exp-033’s pair of exact `n = 5` endpoints, recovered from
+  retained search poses at their shared nonoptimal side—through a dedicated
+  single-instance checker, not a general tool.
 - **No admissible endpoint exists at an open `n`, so the pipeline would have nothing new
   to promote.** The early quench archives (exp-006 through exp-009) retain angles and a
   contact *count* but not centres; the twelve historical v2 poses remain inadmissible
