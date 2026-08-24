@@ -4,7 +4,7 @@
 
 **Author:** Codex (agent)
 
-**Status:** In progress; first post-merge checkpoint
+**Status:** In progress; stabilized post-merge checkpoint
 
 **Reviewed:** [PR #14](https://github.com/jlevy/thinking-scratchpad/pull/14), initially
 at `fa538931b20fef0f51dffedb9e4d7071603b7790`, reassessed as its branch and description
@@ -313,6 +313,49 @@ entries:
 | D-040 | F-21: rarity lacked a durable, proposer-conditioned `P/Q/E` estimand | Outstanding on `think-apwt` |
 | D-041 | F-13/F-18: contact counts and a one-angle kink were used as rank, rigidity, dimension, and connectivity proofs | Rank-free prose fixed; certification outstanding on `think-1s0h` |
 | D-042, D-062 | F-14: the open `n=12` case was treated as a known-answer negative control, and the first correction missed the executable runner | Active docs and artifacts corrected; the not-below guard now uses proved `n=16`, with a mutation control for recurrence |
+
+## Fourth reassessment: reset to the tight research loop
+
+The first efficiency pass after the merge expanded D-035 into a hostile-isolation
+design: repository snapshots, per-control worktrees, capability-style tokens, and a
+general activity lease.
+That was the wrong cost model for this project.
+The workspace is cooperative, candidate mathematics can be checked after a run, and the
+evidence policy reserves promotion for independent verification.
+The useful operational objective is rapid detection, bounded loss, and cheap
+recovery—not protection from an adversarial same-user process.
+Worktrees and full repository copies would also add the disk and startup costs the
+efficiency lane is supposed to remove.
+
+All implementation from that detour was backed out of this branch and preserved only in
+the local, nonportable stash named
+`attic: overengineered D035 isolation prototype before autonomous-loop reset` for
+possible pattern recovery.
+Ten prototype beads were canceled as attic work rather than allowed to distort the
+active plan. D-035 remains open with a narrow cooperative scope: preserve exact bytes
+before an in-place mutation, bound each checker, stop its children on timeout or
+interruption, restore before continuing, and make stale transaction state visible.
+The existing gate marker, on-disk runner stubs and archives, subprocess timeboxes, and
+generated reconciliation checks remain useful because they are small and directly tied
+to observed failures.
+
+The outer autonomous loop is correspondingly simple:
+
+1. a persistent agent goal selects one focus and advances the ready `tbd` queue;
+2. bounded work is delegated with a compact return contract—outcome, evidence, files,
+   checks, uncertainty, next action, and elapsed wall time;
+3. mathematical ideas and measurements continue to use the existing exploration,
+   hypothesis, raw-result, and experiment artifacts;
+4. implementation work updates beads and actual errors update the categorized defect
+   log; and
+5. one versioned agent-session artifact preserves the integration state and measured
+   delegation loop.
+
+The numerical runner remains a small executor for preregistered rounds, not a second
+orchestrator. The README now names interactive, focused, checkpoint, deep-handoff, and
+research-round latency envelopes from the measurements available so far.
+The checkpoint timings are single-run observations; repeated warm/cold profiles and
+per-stage attribution remain open work on `think-xzew`.
 
 ## What is sound and should be retained
 
@@ -1066,9 +1109,97 @@ frequency ratio.
 
 **Beads:** `think-apwt`, under `think-rrht`, plus `think-843f` and `think-3b3s`.
 
+### F-22 (P1): living operator and hypothesis artifacts retained superseded campaign state
+
+Two active entry points contradicted the corrected record.
+`run_baseline.sh` still called open `n=12` a negative control and instructed an operator
+to treat a side below 4 as a bug.
+H-002 still said its quench instrument was unbuilt after exp-006 through exp-009 had
+built and measured it.
+Either error could make an arriving agent discard a discovery or repeat completed work.
+The script now routes a valid sub-4 candidate to promotion, and H-002 preserves both the
+refuted universal claim and the measured local success on the tested `n=5` and `n=10`
+starts.
+
+**Beads:** `think-xaa7` (D-066) and `think-lexp` (D-069).
+
+### F-23 (P1): the campaign omitted a terminal round and mislabeled wall time as CPU time
+
+The five retained exp-011 summaries total `397.474` seconds, but the terminal artifact
+had no `effort.wall_seconds`. The generated total therefore covered ten of eleven
+rounds. The ledger then called its sum of elapsed wall seconds CPU time, although no
+processor time was measured.
+Exp-011 now carries the raw-derived value, all eleven rounds total 23.0 wall-minutes,
+terminal rounds require wall time, and living summaries use the measured unit.
+
+**Beads:** `think-j9o9` (D-067) and `think-p418` (D-068).
+
+### F-24 (P1): execution provenance was replaced by the later record revision
+
+Exp-011 originally named runtime revision `60a50cc`; later cleanup changed its execution
+fields to `6f94be6`, the revision that recorded the artifact.
+Rebuilding the latter therefore would not reconstruct the code boundary that produced
+the retained measurements.
+The historical fields are restored, and `execute` now appends one elapsed-time,
+execution-revision, and dirty-state receipt to the existing raw archive for `record` or
+`release` to consume.
+Producer stdout is forbidden from writing the runner’s reserved receipt key.
+Git history continues to identify the later write-up commit.
+
+**Bead:** `think-zknq` (D-070).
+
+### F-25 (P1): unattended session reports overwrite their own history
+
+`campaign/runner.py` writes every generated handoff to `campaign/session-report.md`, so
+one unattended run replaces the previous report.
+Before this checkpoint there was also no versioned outer-loop record connecting
+delegations, evidence, elapsed time, integration status, and the exact next action.
+A small soft-schema agent-session artifact now fills the outer-loop gap without turning
+the numerical runner into a scheduler.
+The runner report path itself remains open and must become append-only before unattended
+scale-up.
+
+**Bead:** `think-y37w` (D-071), still open.
+
+### F-26 (P1): direct execute and release commands bypassed the cooperative gate marker
+
+Status, claim, and record refused to overlap the mutation gate, but direct `execute` and
+`release` calls omitted the same check despite the runner’s stated contract.
+They could therefore consume a deliberately corrupted campaign input or rewrite a
+recovery artifact during a negative control.
+Both paths now use the existing marker refusal, and preflight exercises each against a
+temporary active marker.
+This is the needed cooperative repair; it does not require a lease, worktree, capability
+token, or repository snapshot.
+
+**Bead:** `think-ep8g` (D-072).
+
+### F-27 (P2): agent sessions were omitted from the existing filename/id invariant
+
+The new session artifacts were schema-validated and duplicate-checked, but
+`ledger.naming()` still received only series, explorations, hypotheses, and experiments.
+A schema-valid session could therefore claim an id different from its path while the
+ledger stayed green.
+Sessions now use the same filename/id and kebab-case check, with a mutation control that
+changes `session-001` to `session-002`.
+
+**Bead:** `think-tsck` (D-073).
+
+### F-28 (P1): the provenance regression did not exercise artifact-field mapping
+
+The first D-070 repair parsed a timing/provenance receipt in preflight, then described
+that check as proof that `record` preserved execution provenance.
+It never exercised the five assignments into the terminal artifact, so any one could
+drift back to record-time state while the named regression stayed green.
+Those fields now come from one mapping function; preflight compares the complete mapping
+with the receipt fixture, and a mutation control changes `method_commit` away from that
+receipt and requires the named assertion to fail.
+
+**Bead:** `think-9ork` (D-074).
+
 ### Technical-finding to defect-logbook crosswalk
 
-Every technical error in F-01 through F-21 now has a durable defect entry.
+Every technical error in F-01 through F-28 now has a durable defect entry.
 A finding can map to more than one entry when it combined independent failure modes;
 prior entries are reused where the review reproduced an already known cause.
 
@@ -1095,6 +1226,13 @@ prior entries are reused where the review reproduced an already known cause.
 | F-19 | D-061 | Open: evidence-complete endpoint classification |
 | F-20 | D-039 | Open: identity calibration independent of side precision |
 | F-21 | D-040 | Open: durable proposer-conditioned `P/Q/E` estimand |
+| F-22 | D-066, D-069 | Fixed: active operator and hypothesis artifacts match the measured campaign state |
+| F-23 | D-067, D-068 | Fixed: all terminal rounds carry elapsed wall time and the generated unit is honest |
+| F-24 | D-070 | Fixed: execution timing and revision survive the separate record step |
+| F-25 | D-071 | Partially fixed: outer sessions are versioned; numerical runner reports still overwrite |
+| F-26 | D-072 | Fixed: direct execute and release paths refuse the active gate marker |
+| F-27 | D-073 | Fixed: session filenames and declared ids are reconciled |
+| F-28 | D-074 | Fixed: receipt-to-artifact provenance mapping is directly mutation-tested |
 
 ## Key omissions
 
@@ -1565,7 +1703,7 @@ alternative, and open-question labels while assigning exactly one primary owner.
 | Insight | `think-qv90` | Certify and structurally constrain the `n=11` optimum | `think-2o5w`, `think-n4f6`, `think-9vh7` |
 | Insight | `think-3b3s` | Determine cross-`n` packing grammar and proposer-specific basin laws | `think-2o5w`, `think-rrht`, `think-g2ko` |
 | Efficiency | `think-xzew` | Baseline and profile the end-to-end research loop | — |
-| Efficiency | `think-rthe` | Parallelize isolated mutation controls and prove serial equivalence | `think-xzew`, `think-97pp` |
+| Efficiency | `think-rthe` | Profile and reduce negative-control latency; parallelize only if the measured simple design preserves serial results | `think-xzew` |
 | Efficiency | `think-ba88` | Build a resumable sharded executor for packing campaigns | `think-xzew`, `think-ldq2` |
 | Efficiency | `think-qk9w` | Cache reusable validation and build work with sound invalidation | `think-xzew` |
 | Efficiency | `think-djvs` | Build a scalable interactive basin-atlas explorer | `think-vcnx`, `think-31k1`, `think-rrht`, `think-7z7y` |
@@ -1583,9 +1721,9 @@ focus label rather than duplicated:
 | Correctness | `think-1s0h` | Owns D-034 terminal flatness/rank/connectivity and blocks canonical identity |
 | Correctness | `think-ouf0` | Owns proved engine anchors and prefix-valid budget checks |
 | Process | `think-jxx8` | Defines a named proposal baseline, corrected from “the null” under D-040 |
-| Process | `think-5zwm` | Owns an isolated claim→ledger→release recovery rehearsal |
+| Process | `think-5zwm` | Owns the claim→ledger→release recovery rehearsal |
 | Process | `think-o48b` | Closed after defect-id reconciliation and source-built golden regeneration |
-| Efficiency | `think-97pp` | Owns D-035 safe mutation isolation; `think-rthe` adds parallel throughput only after it |
+| Efficiency | `think-97pp` | Owns D-035’s narrow cooperative interruption recovery and per-control timeout; worktrees and a general lease are explicitly out of scope |
 | Efficiency | `think-l3ds` | Carries the earlier 480→152 second gate profile; `think-xzew` extends rather than repeats it |
 | Efficiency | `think-7z7y` | Owns deferred atlas fields consumed by the visualization explorer |
 
@@ -1598,6 +1736,27 @@ relevant remediation beads, not as a second epic:
 | Unrecognised singleton classification | `think-aans` | `think-31k1` | Every endpoint receives an evidence-based promotion class from a retained pose |
 | Numerical identity versus D-021 | `think-3szr` | `think-siui` | Counts carry calibrated ambiguity bounds; scalar side gap has no identity authority |
 | Proposer-conditioned null | `think-apwt` | `think-rrht` | H-012 names `P`, `Q`, and `E`; multiple proposal measures are compared at equal budget |
+
+Nine checkpoint defects are tracked separately from the 26 primary research-program
+beads because they are concrete corrections, not new strategy lanes:
+
+| Defect | Bead | State at this checkpoint |
+| --- | --- | --- |
+| D-066 | `think-xaa7` | Fixed: active `n=12` baseline instruction |
+| D-067 | `think-j9o9` | Fixed: exp-011 wall time and terminal-round requirement |
+| D-068 | `think-p418` | Fixed: wall/CPU measurement labels |
+| D-069 | `think-lexp` | Fixed: H-002 reconciled with measured rounds |
+| D-070 | `think-zknq` | Fixed: execution provenance across runner steps |
+| D-071 | `think-y37w` | Open: numerical session-report archival |
+| D-072 | `think-ep8g` | Fixed: direct runner commands honor the gate marker |
+| D-073 | `think-tsck` | Fixed: session filename/id invariant |
+| D-074 | `think-9ork` | Fixed: provenance regression covers artifact-field mapping |
+
+Ten hostile-isolation prototype beads—`think-5zzb`, `think-xe5l`, `think-tg66`,
+`think-1pyr`, `think-6wgw`, `think-06vo`, `think-v8ve`, `think-zh3m`, `think-om54`, and
+`think-7gq9`—are canceled as attic work and are not part of this map.
+`think-z4db` is also canceled: exact source inspection showed its alleged duplicate
+README link was a tool-output false positive.
 
 ## Changes applied on the stacked review branch
 
@@ -1659,6 +1818,23 @@ choice:
   Correctness, Process, Insight, and Efficiency.
   Basin visualization is split between Insight’s view design and Efficiency’s
   reproducible implementation, with explicit Process and Correctness handoffs.
+- The outer-loop contract is now explicit and deliberately small: a persistent goal and
+  `tbd` select work; the existing campaign artifacts retain mathematical ideas and
+  measurements; one versioned soft-schema agent-session artifact records delegation,
+  elapsed time, integration evidence, stopping conditions, and the next action.
+  The abandoned worktree/snapshot/lease prototype is not in this branch.
+- Exp-011’s raw-derived `397.474` wall seconds and runtime revision `60a50cc` are
+  restored; the eleven-round ledger now reports 23.0 wall-minutes.
+  Future runner executions append one timing/provenance receipt to their existing raw
+  archive, and terminal rounds without wall time fail the ledger.
+  H-002 and the active `n=12` baseline instructions now agree with the measured record.
+- Direct execute and release commands now honor the existing cooperative gate marker,
+  and agent-session paths use the same filename/id invariant as the scientific
+  artifacts. These repairs have named preflight and mutation checks and remain within the
+  existing architecture.
+- The execution receipt now feeds all five execution-owned artifact fields through one
+  mapping that preflight and a mutation control exercise directly; receipt parsing alone
+  is no longer misreported as end-to-end provenance coverage.
 
 Before the second upstream advance, the source-locked golden passed its atomic update
 path and a subsequent read-only rebuild.
@@ -1682,17 +1858,35 @@ The two negative-control anchors initially drifted after the documentation corre
 the gate failed by name, their stable anchors were repaired, and both were observed to
 fire before the successful run.
 
-The current process-lane checkpoint passes the full normal gate in 108 seconds with 24
-negative controls, 65 defect entries, and all generated-view, schema, lint, type,
-canonical, atlas, soundness-perimeter, bead-tree, README/synopsis, provenance, search,
-and campaign checks enabled.
+The pushed `a7e7adc` process-lane checkpoint passed the full normal gate in 108 seconds
+with 24 negative controls, 65 defect entries, and all generated-view, schema, lint,
+type, canonical, atlas, soundness-perimeter, bead-tree, README/synopsis, provenance,
+search, and campaign checks enabled.
 An earlier integration run caught D-064 when runner preflight could not reach its
 assertion from inside the gate.
 The repaired read-only path then fired under mutation.
 A post-gate read caught the D-065 README aggregate recurrence; its new reconciliation
 check was also observed failing under mutation before this successful run.
 
-No remediation bead is closed by these partial fixes.
+The stabilized checkpoint then passed the full normal gate in 125 seconds with all 29
+mutation controls firing and all 73 defect entries reconciled.
+The exact verifier, independent fixed-cell LP, canonical and atlas checks, historical
+regressions, soundness perimeter, schemas, generated views, bead tree, provenance,
+search self-tests, differential validity, and campaign record all passed.
+The three largest measured stages were the soundness perimeter at 37 seconds, negative
+controls at 28 seconds, and historical regressions at 22 seconds.
+The first attempt stopped at the lint floor on two Ruff-format diffs; the delegated
+mechanical fix took about 1.5 seconds, and the complete rerun passed.
+A final pre-commit review then found D-074: the D-070 regression parsed the receipt but
+did not exercise its terminal artifact mapping.
+After centralizing and mutation-testing that mapping, the final normal gate passed in
+126 seconds with all 30 controls firing and all 74 defects reconciled.
+Its largest stages were the soundness perimeter at 34 seconds, negative controls at 31
+seconds, and historical regressions at 22 seconds.
+
+No primary mathematical or research-strategy remediation bead is closed by these
+checkpoint repairs. The focused D-066 through D-070 and D-072 through D-074 incident
+beads are fixed; D-071 remains open for append-only numerical runner reports.
 In particular, the runner still trusts a producer-reported scalar overlap rather than a
 stored pose checked independently; contact canonicalization still has order-dependent
 angle clustering and factorial worst-case search; and the atlas, fixed-angle semantics,

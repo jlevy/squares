@@ -21,6 +21,7 @@ The prefix says what kind of thing it is.
 | Round (experiment) | `exp-NNN` | **campaign, not series** | `exp-003` |
 | Hypothesis | `H-NNN` | campaign, spans series | `H-016` |
 | Exploration report | `X-NNN` | campaign | `X-001` |
+| Agent session | `session-NNN` | campaign | `session-001` |
 | Search/proof strategy | `search:N`, `proof:N` | the frontier catalogues | `search:12` |
 | Basin (planned) | canonical key, plus a `B-NNN` alias | campaign, spans series | — |
 
@@ -71,6 +72,7 @@ campaign/series/series-000-smoke-and-calibration/
 campaign/series/series-000-smoke-and-calibration/experiments/exp-003-baseline-n11-target.md
 campaign/hypotheses/H-002-lp-in-cell-polish.md
 campaign/explorations/X-001-standing-review-and-search-philosophy.md
+campaign/agent-sessions/session-001-pr15-review-reset.md
 campaign/series/series-000-smoke-and-calibration/results/exp-003-baseline-n11-target.jsonl
 ```
 

@@ -26,7 +26,7 @@ takes, in what order, and where the unattended half begins.
 `descriptors`, `meter`, the multistart proposer — all of it is code an agent writes, not
 compute a runner drains.
 The campaign’s own effort record says the same thing from the other side: **275
-agent-minutes against 16.4 cpu-minutes** over its first ten rounds.
+agent-minutes against 16.4 wall-minutes** over its first ten rounds.
 
 So a night that is purely unattended is a night that runs `H-017` and stops.
 The plan below instead treats the night as **build, then run**, with a single explicit
@@ -321,9 +321,10 @@ Every one of those writes the session report; only the last exits non-zero.
 
 ### What the morning gets
 
-`campaign/session-report.md`, generated, leading with **Needs review** — which will hold
-any cell that met its criterion, because
+`campaign/session-report.md`, the current generated handoff, leading with **Needs
+review** — which will hold any cell that met its criterion, because
 [the harness cannot write the accepting verdict](../../../../campaign/runner.py).
+It is not append-only until D-071 closes.
 Then the ledger, regenerated after every round, and one commit per round.
 
 The first things to read are censoring, identity ambiguities, and the unseen-mass

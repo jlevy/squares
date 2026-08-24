@@ -41,6 +41,62 @@ sampled cluster is a connected component.
 The implementation map is the four-focus epic in the
 [current program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map).
 
+## The Autonomous Work Loop
+
+The outer loop is a persistent agent goal plus the `tbd` queue.
+It chooses and integrates work; [`campaign/runner.py`](campaign/runner.py) remains the
+smaller tool that executes already-preregistered numerical rounds.
+Do not turn the runner into a second project manager.
+
+Each autonomous cycle names one focus, one primary bead, one measurable outcome, a
+budget, and explicit stop conditions in a versioned
+[agent-session artifact](campaign/agent-sessions/README.md).
+It then selects one bounded action, delegates independent pieces, runs the narrowest
+adequate check, integrates the evidence, updates the durable record, and repeats.
+A delegated result is not complete until the parent can see its **outcome, evidence,
+files or artifacts, checks, remaining uncertainty, recommended next action, and elapsed
+wall time**. The parent owns integration and shared files; delegates receive disjoint
+write scopes or read-only briefs.
+
+Use the cheapest loop that answers the current question:
+
+| Loop | Target latency | Use |
+| --- | ---: | --- |
+| Interactive | under about 2 seconds | Status, ledger and schema checks, exact-witness verification, engine self-test |
+| Focused | under about 60 seconds | One changed component and its named negative control |
+| Checkpoint | about 2 minutes | Normal `./test.sh` before a commit, push, or cross-component handoff |
+| Deep handoff | about 5 minutes | `./test.sh --strict` before an unattended campaign, major handoff, or merge |
+| Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
+
+These are working envelopes, not promises.
+The retained normal-gate observations are 108 seconds at the prior pushed checkpoint and
+126 seconds for this integration.
+Repeated versioned benchmarks, fuller stage attribution, and warm/cold regimes remain
+tracked work.
+The research round is intentionally separate from the edit/test loop, so an
+eight-hour hypothesis never makes a documentation correction take eight hours to
+validate.
+
+Route each result once:
+
+- a structural idea becomes an exploration (`X-NNN`) and, when falsifiable, a hypothesis
+  (`H-NNN`);
+- a measurement becomes raw data plus an experiment (`exp-NNN`);
+- an implementation or process action updates its bead;
+- an actual mistake enters [`defects.yaml`](defects.yaml), categorized by what failed
+  and linked to its detector and regression; and
+- the outer-loop handoff stays in the agent-session artifact instead of being spread
+  across chat summaries.
+
+Stop when the declared budget expires, no ready work remains, three consecutive guards
+or runs fail, a decision needs the user, or two cycles fail to move the chosen progress
+metric.
+This is a cooperative mathematical workspace: optimize for rapid detection, exact
+records, and cheap recovery.
+The negative-control marker, generated-view drift checks, bounded subprocesses, and
+resumable on-disk runner state are useful; per-run worktrees, repository copies, or a
+generalized lease/capability system are not the default.
+
 Two documents get you oriented, and they have different jobs.
 
 **[`SYNOPSIS.md`](SYNOPSIS.md) is the technical root:** the single account of what this

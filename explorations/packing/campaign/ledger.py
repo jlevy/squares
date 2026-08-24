@@ -119,21 +119,10 @@ def board_ids() -> tuple[set[str], set[str]] | None:
     return set(re.findall(r"\bH-[0-9]{3}\b", text)), reserved
 
 
-# Filename must equal the id it claims, followed by a kebab-case slug. Checked rather
-# than trusted, because a renumber that misses a filename leaves two names for one thing
-# and nothing else in the record would notice.
-NAME_RULES = [
-    ("series/*/README.md", "series", r"^series-([0-9]{3})-[a-z0-9-]+$", "directory"),
-    ("series/*/experiments/*.md", "experiment", r"^(exp-[0-9]{3})-[a-z0-9-]+$", "file"),
-    ("hypotheses/*.md", "hypothesis", r"^(H-[0-9]{3})-[a-z0-9-]+$", "file"),
-    ("explorations/*.md", "exploration", r"^(X-[0-9]{3})-[a-z0-9-]+$", "file"),
-]
-
-
-def naming(series, explorations, hypotheses, experiments) -> list[str]:
+def naming(series, explorations, hypotheses, experiments, sessions) -> list[str]:
     """Ids in filenames agree with ids in frontmatter, and slugs are kebab-case."""
     problems = []
-    for items in (series, explorations, hypotheses, experiments):
+    for items in (series, explorations, hypotheses, experiments, sessions):
         for item in items:
             path = item["_path"]
             # A series is named by its directory; everything else by its own filename.
@@ -167,7 +156,9 @@ def dead_links() -> list[str]:
     return problems
 
 
-def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> list[str]:
+def check(
+    series, explorations, hypotheses, experiments, sessions, *, now: dt.datetime
+) -> list[str]:
     """Whole-set invariants. Per-artifact validation cannot see any of these."""
     problems = []
 
@@ -176,6 +167,7 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         ("exploration", explorations),
         ("hypothesis", hypotheses),
         ("experiment", experiments),
+        ("session", sessions),
     ):
         seen = defaultdict(list)
         for item in items:
@@ -250,7 +242,10 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         role = instance.get("role")
         point = instance.get("point")
         if role in {"positive_control", "negative_control"}:
-            frontier_path = ROOT.parent / "frontier" / f"n-{int(point):03d}.md"
+            if isinstance(point, bool) or not isinstance(point, int):
+                problems.append(f"{name}: control role {role} has invalid instance point")
+                continue
+            frontier_path = ROOT.parent / "frontier" / f"n-{point:03d}.md"
             proved = False
             if frontier_path.exists():
                 text = frontier_path.read_text()
@@ -293,6 +288,8 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
             if not effort:
                 problems.append(f"{name}: terminal round without an effort block")
             else:
+                if "wall_seconds" not in effort:
+                    problems.append(f"{name}: terminal round without effort.wall_seconds")
                 stopped = effort.get("stopped_by")
                 if stopped == "timebox" and not effort.get("timebox"):
                     problems.append(f"{name}: stopped_by timebox but no timebox was declared")
@@ -318,7 +315,22 @@ def check(series, explorations, hypotheses, experiments, now: dt.datetime) -> li
         elif dt.datetime.fromisoformat(expires).replace(tzinfo=None) < now:
             problems.append(f"{name}: STALE CLAIM, lease expired {expires}")
 
-    problems += naming(series, explorations, hypotheses, experiments)
+    for session in sessions:
+        status = session.get("status")
+        reason = session.get("stop_reason")
+        if status == "in_progress" and reason is not None:
+            problems.append(f"{session['_path'].name}: in-progress session has stop_reason")
+        if status in {"completed", "stopped"} and not reason:
+            problems.append(f"{session['_path'].name}: terminal session has no stop_reason")
+        for delegation in session.get("delegations") or []:
+            elapsed = delegation.get("elapsed_seconds")
+            quality = delegation.get("elapsed_quality")
+            if (quality == "unavailable") != (elapsed is None):
+                problems.append(
+                    f"{session['_path'].name}: delegation elapsed value and quality disagree"
+                )
+
+    problems += naming(series, explorations, hypotheses, experiments, sessions)
     problems += dead_links()
 
     return problems
@@ -376,17 +388,34 @@ def spent(rounds: list[dict]) -> str:
     if minutes:
         parts.append(f"{minutes:g}m agent")
     if seconds:
-        parts.append(f"{seconds / 60:.1f}m cpu" if seconds >= 60 else f"{seconds:.0f}s cpu")
+        parts.append(f"{seconds / 60:.1f}m wall" if seconds >= 60 else f"{seconds:.0f}s wall")
     return " + ".join(parts)
 
 
-def render(series, explorations, hypotheses, experiments) -> str:
+def render(series, explorations, hypotheses, experiments, sessions) -> str:
     by_hypothesis = defaultdict(list)
     for experiment in experiments:
         for hypothesis_id in experiment.get("hypotheses") or []:
             by_hypothesis[hypothesis_id].append(experiment)
 
     lines = [BANNER, "", "# Experiment ledger", ""]
+
+    if sessions:
+        lines += [
+            "## Agent sessions",
+            "",
+            "| id | status | focus | primary bead | delegations | next action |",
+            "| --- | --- | --- | --- | ---: | --- |",
+        ]
+        for session in sorted(sessions, key=lambda s: s["id"]):
+            path = session["_path"].relative_to(ROOT).as_posix()
+            next_action = session["next_action"].replace("\n", " ").strip()
+            lines.append(
+                f"| [{session['id']}]({path}) | {session['status']} | {session['focus']} "
+                f"| {session['primary_bead']} | {len(session['delegations'])} "
+                f"| {next_action} |"
+            )
+        lines.append("")
 
     lines += [
         "## Series",
@@ -495,7 +524,7 @@ def render(series, explorations, hypotheses, experiments) -> str:
             "",
             (
                 f"{len(experiments)} rounds, {total_minutes:g} agent-minutes, "
-                f"{total_seconds / 60:.1f} cpu-minutes."
+                f"{total_seconds / 60:.1f} wall-minutes."
             ),
             "",
         ]
@@ -515,12 +544,13 @@ def main() -> int:
     explorations = load(ROOT / "explorations", "exploration")
     hypotheses = load(ROOT / "hypotheses", "hypothesis")
     experiments = load(ROOT / "series", "experiment", "*/experiments/*.md")
+    sessions = load(ROOT / "agent-sessions", "session", "session-*.md")
 
-    problems = check(series, explorations, hypotheses, experiments, now)
+    problems = check(series, explorations, hypotheses, experiments, sessions, now=now)
     for problem in problems:
         print(f"FAIL {problem}", file=sys.stderr)
 
-    rendered = render(series, explorations, hypotheses, experiments)
+    rendered = render(series, explorations, hypotheses, experiments, sessions)
     if "--check" in sys.argv:
         current = LEDGER.read_text() if LEDGER.exists() else ""
         if current != rendered:
@@ -532,9 +562,11 @@ def main() -> int:
 
     if problems:
         return 1
+    session_label = "session" if len(sessions) == 1 else "sessions"
     print(
         f"OK {len(series)} series, {len(explorations)} reports, "
-        f"{len(hypotheses)} hypotheses, {len(experiments)} rounds"
+        f"{len(hypotheses)} hypotheses, {len(experiments)} rounds, "
+        f"{len(sessions)} agent {session_label}"
     )
     return 0
 

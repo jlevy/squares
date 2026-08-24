@@ -185,7 +185,7 @@ def main() -> int:
     )
 
     # The discrimination that actually matters for a census: same `n`, both real, and
-    # the two basins the campaign has spent ten rounds distinguishing by hand. Taken
+    # the two basins the campaign has distinguished by hand. Taken
     # from exp-003's archive rather than synthesised, because a fixture invented to pass
     # this check would prove nothing about the packings the census will meet.
     wrong = archived_n11()

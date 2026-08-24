@@ -134,7 +134,7 @@ properties:
       wall_seconds:
         type: number
         minimum: 0
-        description: Compute time actually spent measuring, from the run data.
+        description: Wall-clock seconds actually spent measuring, from the run data.
       agent_minutes:
         type: number
         minimum: 0

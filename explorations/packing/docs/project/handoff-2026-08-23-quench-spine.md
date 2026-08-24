@@ -18,7 +18,7 @@ to work on.
 
 ## The one-paragraph state
 
-The experiment loop has run **ten rounds** and produced a real result: the LP-in-cell
+The experiment loop has run **eleven rounds** and produced a real result: the LP-in-cell
 quench refines annealer output to the analytic optimum **to machine precision** at
 `n = 5` and `n = 10`, and does essentially nothing at `n = 11`. That separates two
 failures the campaign could not previously tell apart — `n = 10` was a *polish* failure,

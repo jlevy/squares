@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 65
+count: 74
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -1674,3 +1674,206 @@ defects:
     defects.yaml and rejects repeated numeric gate-defect aggregates
   recurrence_of: D-028
   recorded_in: README.md
+- id: D-066
+  title: The active baseline script still classified open n=12 as a negative control
+  date: '2026-08-23'
+  layer: docs
+  class: soundness
+  direction: conservative
+  detected_by: inspection
+  severity: medium
+  status: fixed
+  what: >-
+    run_baseline.sh still told operators that n=12 was a negative control and that a
+    result below 4 was a bug, after the campaign artifacts and runner had been corrected
+    to treat s(12) as open.
+  consequence: >-
+    An arriving agent following the active executable entry point could discard or fail
+    to promote a valid improvement in one of the program's central open cases.
+  fix: >-
+    The script now calls n=12 an open-case calibration and routes a valid sub-4
+    candidate to promotion.
+  regression: none
+  recurrence_of: D-042
+  recorded_in: run_baseline.sh
+- id: D-067
+  title: The eleventh terminal round was omitted from campaign wall-time accounting
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    exp-011 retained five raw summary times totalling 397.474 seconds but omitted
+    effort.wall_seconds. The generated total therefore covered only the first ten
+    rounds even while the ledger listed eleven.
+  consequence: >-
+    The campaign understated measured machine wait by about 6.6 wall-minutes and could
+    not price later autonomous work from its own record.
+  fix: >-
+    The raw-derived value is restored, terminal rounds must carry wall_seconds, and the
+    runner persists actual execution elapsed time into future terminal artifacts.
+  regression: >-
+    tools/controls.yaml removes wall_seconds from a terminal artifact and requires
+    campaign/ledger.py to reject it; runner preflight checks receipt parsing.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-068
+  title: The ledger labeled elapsed wall time as CPU time
+  date: '2026-08-23'
+  layer: record
+  class: validity
+  direction: neutral
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    campaign/ledger.py summed fields named wall_seconds but rendered them as cpu and
+    cpu-minutes in the ledger and living summaries. No processor-time measurement had
+    been made.
+  consequence: >-
+    Agent-loop efficiency decisions could confuse elapsed waiting with consumed CPU,
+    especially once runs become parallel.
+  fix: >-
+    The generator, schema description, synopsis, campaign runbook and historical plan
+    now use wall seconds or wall-minutes consistently.
+  regression: >-
+    campaign/ledger.py regenerates the unit from wall_seconds and check_synopsis.py
+    reconciles the synopsis against the generated wall-minute total.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-069
+  title: H-002 still said its measured quench instrument was not built
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: inspection
+  severity: medium
+  status: fixed
+  what: >-
+    The canonical H-002 artifact retained instrument_ready false and pre-experiment
+    prose after exp-006 through exp-009 built and measured sqpack.quench.
+  consequence: >-
+    A new agent could schedule already completed instrument work or misread a refuted
+    universal claim as an experiment that had never run.
+  fix: >-
+    H-002 now names the built instrument and the measured split: machine-precision
+    polish on n=5 and n=10, but failure of the universal claim at n=11.
+  regression: none
+  recorded_in: campaign/hypotheses/H-002-lp-in-cell-polish.md
+- id: D-070
+  title: Exp-011 execution provenance was rewritten to a later record commit
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: inspection
+  severity: high
+  status: fixed
+  what: >-
+    The first exp-011 artifact recorded runtime HEAD 60a50cc. A later cleanup rewrote
+    subject.engine_commit, method.commit and verdict.commit to 6f94be6, the commit that
+    first recorded the round, while the synopsis retained the original execution
+    commit.
+  consequence: >-
+    The artifact pointed at a state that did not produce its archived measurements, so
+    rebuilding the named revision would not reproduce the actual execution boundary.
+  fix: >-
+    All three historically execution-provenance fields in exp-011 are restored to
+    60a50cc. Runner steps carry execution-time identity into record while Git history
+    identifies the later write-up commit.
+  regression: >-
+    Runner preflight checks both receipt parsing and the single mapping from that
+    receipt into every execution-owned artifact field. A mutation control changes one
+    mapping and requires the named check to fail.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-071
+  title: Generated session reports overwrite history and are not durable
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: inspection
+  severity: medium
+  status: outstanding
+  what: >-
+    runner.py writes each unattended handoff to campaign/session-report.md, replacing
+    the prior report, while the project has no versioned agent-session history linking
+    delegated work, elapsed time, evidence and the next action.
+  consequence: >-
+    A completed session can erase the previous handoff, and an arriving agent cannot
+    reconstruct delegation latency or why the outer loop chose its next task.
+  fix: >-
+    Agent work sessions now have a versioned soft-schema record. The numeric runner's
+    generated report still needs a unique archived path before unattended scale-up.
+  regression: none
+  bead: think-y37w
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-072
+  title: Direct execute and release paths bypassed the gate marker
+  date: '2026-08-23'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The runner documented mutual exclusion between the in-place negative-control gate
+    and campaign activity, but direct execute and release commands omitted the existing
+    marker refusal used by status, claim and record.
+  consequence: >-
+    A direct command could read or rewrite an experiment archive while a mutation
+    control had deliberately corrupted a tracked campaign input, producing a spurious
+    failure or contaminating a recovery record.
+  fix: >-
+    Execute and release now use the same cooperative gate-marker refusal as the other
+    runner commands. No lease, worktree, capability token or repository copy was added.
+  regression: >-
+    Runner preflight calls both direct paths against a temporary active marker, and two
+    mutation controls remove each guard in turn and require the corresponding check to
+    fail.
+  recurrence_of: D-035
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-073
+  title: Agent-session filename and id agreement was not checked
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    Agent sessions were schema-validated and duplicate-checked, but the ledger omitted
+    them from its existing filename/id invariant when the session collection was added.
+  consequence: >-
+    A schema-valid artifact could claim one session id while its durable path named
+    another, weakening links and handoffs without making the ledger red.
+  fix: >-
+    The session collection now passes through the same naming check as series,
+    explorations, hypotheses and experiments.
+  regression: >-
+    A mutation control changes session-001's declared id to session-002 and requires the
+    ledger to report the filename mismatch.
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-074
+  title: The provenance regression tested receipt parsing but not artifact-field mapping
+  date: '2026-08-23'
+  layer: tooling
+  class: bookkeeping
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    The first D-070 repair added a preflight fixture that parsed an execution receipt,
+    then claimed that preflight proved record preserved the execution revision. The
+    check never exercised the assignments into subject.engine_commit, method.commit,
+    verdict.commit, method.dirty or effort.wall_seconds.
+  consequence: >-
+    A later edit could bind any one terminal field back to record-time state while the
+    named regression remained green, recreating split provenance under a false coverage
+    claim.
+  fix: >-
+    The five execution-owned fields now come from one mapping function, and preflight
+    compares its complete output with the receipt fixture.
+  regression: >-
+    tools/controls.yaml changes method_commit away from the receipt and requires the
+    named record-field preflight check to fail.
+  bead: think-9ork
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md

@@ -2,15 +2,15 @@
 
 # Defect log
 
-65 defects recorded across the packing toolchain.
+74 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **23 soundness defects** — the system asserting something false about the mathematics. 18 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **14 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028).
-- **18 are still open** (outstanding or contained), every one carrying a bead.
+- **24 soundness defects** — the system asserting something false about the mathematics. 18 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **16 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035).
+- **19 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 1 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 7 | a cell of the sweep whose answer is known in advance |
-| `review` | 40 | a human or agent reading the work against a checklist |
+| `review` | 45 | a human or agent reading the work against a checklist |
 | `anomaly` | 4 | a result that made no sense, chased down |
-| `inspection` | 8 | reading the code or the design with intent |
+| `inspection` | 12 | reading the code or the design with intent |
 | `drift_check` | 2 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 2 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 2 of 65, and none of the 23 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 2 of 74, and none of the 24 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,18 +34,18 @@ The line worth reading twice: **the automated gate caught 2 of 65, and none of t
 | engine | 8 |
 | quench | 10 |
 | verifier | 1 |
-| record | 24 |
-| tooling | 17 |
-| docs | 5 |
+| record | 30 |
+| tooling | 19 |
+| docs | 6 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 23 |
-| validity | 15 |
-| bookkeeping | 19 |
-| robustness | 6 |
+| soundness | 24 |
+| validity | 16 |
+| bookkeeping | 25 |
+| robustness | 7 |
 | performance | 2 |
 
 ## Fixed, but nothing stops it coming back
@@ -69,6 +69,8 @@ This is the actionable list.
 | D-056 | Grid optimality for m squared minus 3 was generalized beyond the proved cases | docs |
 | D-057 | One n=17 regime was generalized to oblique-search blindness at every n | docs |
 | D-063 | A non-converse was called the contrapositive of the rigidity premise | docs |
+| D-066 | The active baseline script still classified open n=12 as a negative control | docs |
+| D-069 | H-002 still said its measured quench instrument was not built | record |
 
 ## Still open
 
@@ -92,6 +94,7 @@ This is the actionable list.
 | D-054 | outstanding | high | Move budgets overshoot and final-best records cannot support trajectory claims | `think-rrht` |
 | D-059 | outstanding | critical | The golden map mixed unhermetic discovery snapshots with mathematical pass-fail assertions | `think-zt29` |
 | D-061 | outstanding | high | Unrecognised endpoint rows discard the evidence needed to classify them | `think-aans` |
+| D-071 | outstanding | medium | Generated session reports overwrite history and are not durable | `think-y37w` |
 
 ## Every defect
 
@@ -162,3 +165,12 @@ This is the actionable list.
 | [D-063](campaign/ideas.md) | 2026-08-23 | docs | soundness | neutral | `inspection` | medium | fixed | A non-converse was called the contrapositive of the rigidity premise |
 | [D-064](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | robustness |  | `gate` | medium | fixed | Runner preflight was unable to run inside the gate that mutation-tested it |
 | [D-065](README.md) | 2026-08-23 | record | bookkeeping |  | `inspection` | low | fixed | The README repeated a numeric gate claim after declaring those counts removed |
+| [D-066](run_baseline.sh) | 2026-08-23 | docs | soundness | conservative | `inspection` | medium | fixed | The active baseline script still classified open n=12 as a negative control |
+| [D-067](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | The eleventh terminal round was omitted from campaign wall-time accounting |
+| [D-068](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | validity | neutral | `review` | medium | fixed | The ledger labeled elapsed wall time as CPU time |
+| [D-069](campaign/hypotheses/H-002-lp-in-cell-polish.md) | 2026-08-23 | record | bookkeeping |  | `inspection` | medium | fixed | H-002 still said its measured quench instrument was not built |
+| [D-070](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | bookkeeping |  | `inspection` | high | fixed | Exp-011 execution provenance was rewritten to a later record commit |
+| [D-071](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | bookkeeping |  | `inspection` | medium | outstanding | Generated session reports overwrite history and are not durable |
+| [D-072](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | robustness |  | `review` | high | fixed | Direct execute and release paths bypassed the gate marker |
+| [D-073](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | Agent-session filename and id agreement was not checked |
+| [D-074](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | bookkeeping |  | `review` | medium | fixed | The provenance regression tested receipt parsing but not artifact-field mapping |

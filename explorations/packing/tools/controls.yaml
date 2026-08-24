@@ -39,9 +39,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 65", "count: 20"]
+  replace: ["count: 74", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 65"
+  expect: "count 20 != 74"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -94,6 +94,12 @@ controls:
   run: python3 campaign/ledger.py --check
   expect: "terminal round without an effort block"
 
+- name: campaign - terminal round with no measured wall time
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["    wall_seconds: 108.8\n", ""]
+  run: python3 campaign/ledger.py --check
+  expect: "terminal round without effort.wall_seconds"
+
 - name: campaign - open instance mislabeled as a known-answer control
   file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
   replace: ["instance: {axis: n, point: 12, role: calibration}",
@@ -107,6 +113,43 @@ controls:
             'CONTROLS = {10: ("within", 1e-2), 12: ("not_below", 4.0)}']
   run: python3 campaign/runner.py preflight
   expect: "FAIL  an n=12 improvement is not rejected as a control breach"
+
+- name: campaign runner - execute bypasses the active gate marker
+  file: campaign/runner.py
+  replace:
+    - "    refuse_if_gate_running()\n    path, e = find_round(eid)\n"
+    - "    path, e = find_round(eid)\n"
+  run: python3 campaign/runner.py preflight
+  expect: "FAIL  execute refuses while the gate marker exists"
+
+- name: campaign runner - release bypasses the active gate marker
+  file: campaign/runner.py
+  replace:
+    - "    with `stopped_by: error`: the round died, and nothing may be concluded from it.\n    \"\"\"\n    refuse_if_gate_running()\n    path, stub = find_round(eid)\n"
+    - "    with `stopped_by: error`: the round died, and nothing may be concluded from it.\n    \"\"\"\n    path, stub = find_round(eid)\n"
+  run: python3 campaign/runner.py preflight
+  expect: "FAIL  release refuses while the gate marker exists"
+
+- name: campaign runner - record fields drift from the execution receipt
+  file: campaign/runner.py
+  replace:
+    - "        \"method_commit\": execution[\"commit\"],\n"
+    - "        \"method_commit\": \"record-time-sha\",\n"
+  run: python3 campaign/runner.py preflight
+  expect: "FAIL  record fields are bound to the execution receipt"
+
+- name: campaign - agent session id disagrees with its filename
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["  id: session-001", "  id: session-002"]
+  run: python3 campaign/ledger.py --check
+  expect: "name does not start with its id 'session-002'"
+
+- name: campaign - approximate delegation time labeled unavailable
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["    elapsed_seconds: 900\n    elapsed_quality: operator_reported_approximate",
+            "    elapsed_seconds: 900\n    elapsed_quality: unavailable"]
+  run: python3 campaign/ledger.py --check
+  expect: "delegation elapsed value and quality disagree"
 
 - name: campaign - stopped on the clock without saying where to resume
   file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md

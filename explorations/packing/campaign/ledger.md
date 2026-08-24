@@ -2,6 +2,12 @@
 
 # Experiment ledger
 
+## Agent sessions
+
+| id | status | focus | primary bead | delegations | next action |
+| --- | --- | --- | --- | ---: | --- |
+| [session-001](agent-sessions/session-001-pr15-review-reset.md) | completed | process | think-m79h | 7 | Resume the broader Correctness and Insight review from the ready bead queue, beginning with the highest-priority mathematical ambiguity. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
@@ -13,14 +19,14 @@
 | id | status | lane | claim | sweep | rounds | spent |
 | --- | --- | --- | --- | --- | --- | --- |
 | H-001 | blocked | search | Optimal packings at n <= ~30 use at most 3 distinct tilt angles, so a  | n: 5 10 11 | 0 |  |
-| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 4 | 190m agent + 4.9m cpu |
+| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 4 | 190m agent + 4.9m wall |
 | H-011 | blocked | search | Under a versioned proposer P, deterministic quench Q, and terminal-com | n: 5 6 7 8 9 10 | 0 |  |
 | H-012 | blocked | search | Under one versioned raw-coordinate multistart proposal P, deterministi | n: 10 11 | 0 |  |
-| H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 | 10.2m cpu |
+| H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 | 10.2m wall |
 | H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |  |
-| H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m cpu |
-| H-019 | confirmed | search | On the n=11 Trump contact cell, varying the shared tilt of its five ti | n: 5 10 11* | 1 | 10m agent + 1s cpu |
-| H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 |  |
+| H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m wall |
+| H-019 | confirmed | search | On the n=11 Trump contact cell, varying the shared tilt of its five ti | n: 5 10 11* | 1 | 10m agent + 1s wall |
+| H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
 
 ## Rounds
 
@@ -47,5 +53,5 @@
 
 ## Effort
 
-11 rounds, 275 agent-minutes, 16.4 cpu-minutes.
+11 rounds, 275 agent-minutes, 23.0 wall-minutes.
 

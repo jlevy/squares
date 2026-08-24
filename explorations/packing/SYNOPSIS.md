@@ -862,10 +862,10 @@ view; this section is the reading of it.
 | Id | Status | Claim, in short | Rounds | Effort |
 | --- | --- | --- | --- | --- |
 | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) | **confirmed** | Trump’s tested shared-tilt slice has a corner at the published optimum | 1 | 10m agent |
-| [H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 4 | 190m agent, 4.9m cpu |
-| [H-016](campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md) | **refuted** | The stock annealer reaches the standing best on every instance cell | 4 | 10.2m cpu |
-| [H-018](campaign/hypotheses/H-018-basin-entry.md) | **refuted** as stated | Perturbed starts return to Trump’s packing at least half the time | 1 | 75m agent, 1.3m cpu |
-| [H-020](campaign/hypotheses/H-020-oblique-record-finding-n17.md) | **refuted** | The annealer reaches the standing best at `n = 17`, the nearest oblique record | 1 | 6.8m cpu |
+| [H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 4 | 190m agent, 4.9m wall |
+| [H-016](campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md) | **refuted** | The stock annealer reaches the standing best on every instance cell | 4 | 10.2m wall |
+| [H-018](campaign/hypotheses/H-018-basin-entry.md) | **refuted** as stated | Perturbed starts return to Trump’s packing at least half the time | 1 | 75m agent, 1.3m wall |
+| [H-020](campaign/hypotheses/H-020-oblique-record-finding-n17.md) | **refuted** | The annealer reaches the standing best at `n = 17`, the nearest oblique record | 1 | 6.6m wall |
 | [H-001](campaign/hypotheses/H-001-angle-class-reduction.md) | blocked | Angle-class reduction beats free `3n`-dimensional annealing | 0 | — |
 | [H-011](campaign/hypotheses/H-011-small-n-census.md) | blocked | The small-`n` landscape is censusable | 0 | — |
 | [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) | blocked | Record basins are rare in quench measure | 0 | — |
@@ -949,9 +949,9 @@ families and the dead ends.
 
 ## Experiments Conducted
 
-Ten rounds, all in `series-000`, **275 agent-minutes and 16.4 cpu-minutes** in total.
-Two instruments: `sqsearch` 0.1.0 (the `f64` screening annealer) and `sqpack.quench`
-(0.1.0 with angle descent, 0.2.0 with class bracketing).
+Eleven rounds, all in `series-000`, **275 agent-minutes and 23.0 wall-minutes** in
+total. Two instruments: `sqsearch` 0.1.0 (the `f64` screening annealer) and
+`sqpack.quench` (0.1.0 with angle descent, 0.2.0 with class bracketing).
 
 No round has been run at the `exact` tier, so **no result below claims anything about a
 record**, and none may.
@@ -989,7 +989,7 @@ archive beside it.
 | exp-008 | 5 seeds, 30 s each | 67.0 s | 20 m | criterion | `8b450a1` |
 | exp-009 | 5 seeds, 30 s each | 150.0 s | 30 m | criterion | `8b450a1` |
 | exp-010 | 11 probes | 1.0 s | 10 m | criterion | `8b450a1` |
-| exp-011 | 4e9 moves | 408.0 s | 0 m | criterion | `60a50cc` |
+| exp-011 | 4e9 moves | 397.474 s | 0 m | criterion | `60a50cc` |
 
 ### What the eleven rounds jointly establish
 
@@ -1034,24 +1034,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Sixty-five defects, [one line each](defects.md), generated from `defects.yaml` and
+Seventy-four defects, [one line each](defects.md), generated from `defects.yaml` and
 checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 23 | asserted something false about the mathematics |
-| validity | 15 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 19 | recorded something its own evidence contradicts |
-| robustness | 6 | did not finish, or finished only by luck |
+| soundness | 24 | asserted something false about the mathematics |
+| validity | 16 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 25 | recorded something its own evidence contradicts |
+| robustness | 7 | did not finish, or finished only by luck |
 | performance | 2 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Eighteen of the twenty-three soundness defects pointed in the *flattering*
-direction**, where the error looks like a success.
+**Eighteen of the twenty-four soundness defects pointed in the *flattering* direction**,
+where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught two defects in sixty-five, and no soundness defect
+**The automated gate has caught two defects in seventy-four, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -1061,7 +1061,7 @@ are bookkeeping and robustness defects, found by a contiguity check and an integ
 run—which is the pattern, not an exception: gates are good at the mechanical classes and
 have never once caught the mathematics being wrong.
 
-The thirty-six newest entries sharpen the point rather than softening it.
+The entries from D-030 onward sharpen the point rather than softening it.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed
 green; D-032 and D-033 came from rehearsing recovery paths that had shipped unrun; D-034
 found the endpoint-isolation assumption; D-035 found destructive negative-control
@@ -1090,10 +1090,23 @@ opening the gate to live campaign execution.
 D-065 removes the last repeated numeric gate claim from the README and reconciles its
 remaining qualitative claim to the defect source.
 
+D-066 catches the active baseline script repeating the stale `n=12` control claim.
+D-067 and D-068 restore the omitted eleventh-round wall time and stop calling elapsed
+time CPU time; D-069 reconciles H-002 with the four rounds that already measured its
+quench; and D-070 restores exp-011’s execution revision and makes future timing and
+provenance survive the execute/record boundary.
+D-071 remains open because the numerical runner’s generated session report still
+overwrites its predecessor; versioned agent-session artifacts now preserve the outer
+delegation loop separately.
+D-072 closes the two direct runner commands that bypassed the cooperative gate marker,
+and D-073 wires those new session artifacts into the filename/id invariant.
+D-074 corrects the first D-070 regression claim: receipt parsing alone did not exercise
+the terminal artifact mapping, which is now centralized and mutation-tested.
+
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Fourteen fixes left no regression check behind, and that list has already predicted a
+Sixteen fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
