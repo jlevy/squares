@@ -377,6 +377,10 @@ session:
     The first post-exp-034 normal gate stops after 31 seconds because two synopsis
     mutation controls retained pre-D-186 numeric anchors. D-187 records the miss; the
     defect-count, soundness-direction, and gate-detector controls then all fire.
+  - >-
+    The corrected post-exp-034 normal gate passes all 30 steps in 35 wall-seconds: all
+    37 negative controls fire, 40 BasinEvents and five exact small-n records replay,
+    all 34 engine commits are reachable, and 34 rounds and 187 defects reconcile.
   stop_reason: null
   next_action: >-
     Continue BC-010 with one bounded complete wall-release and SAT-branch cone slice.

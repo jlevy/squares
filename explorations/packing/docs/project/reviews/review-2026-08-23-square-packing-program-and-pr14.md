@@ -2511,6 +2511,10 @@ the active separating axis may switch, and continuation may leave the declared s
 The next bounded child therefore enumerates the complete nonsmooth feasible cones and
 either continues every surviving branch or records an explicit ambiguity interval.
 
+After D-187 reconciled two stale mutation anchors, the normal gate passes all 30 steps
+in 35 wall-seconds, including all 37 negative controls and all five exact small-`n`
+replays. The campaign now contains 34 terminal rounds and 187 defect records.
+
 ## Post-merge operating disposition
 
 PR #14 has merged and is now the stable prototype base.
