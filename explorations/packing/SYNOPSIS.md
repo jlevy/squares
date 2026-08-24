@@ -898,7 +898,7 @@ view; this section is the reading of it.
 | [H-029](campaign/hypotheses/H-029-adaptive-splitting.md) | blocked | Calibrated adaptive splitting beats restarts on rare target events | 0 | — |
 | [H-030](campaign/hypotheses/H-030-public-parent-surgery.md) | blocked | Construction surgery reproduces at least two of six hidden public record improvements | 0 | — |
 | [H-031](campaign/hypotheses/H-031-load-guided-block-moves.md) | blocked | LP-load-guided block moves beat coordinate-only moves per pair-test | 0 | — |
-| [H-032](campaign/hypotheses/H-032-small-n-optimal-moduli.md) | open question | What are the exact optimal configuration spaces for `n=3…6`? | 2 | — |
+| [H-032](campaign/hypotheses/H-032-small-n-optimal-moduli.md) | open; `n=3,4` solved | What are the exact optimal configuration spaces for `n=3…6`? | 2 | 35m agent, 1.28s wall |
 | [H-033](campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | open question | Can the `m²−3` theorem be extended to `s(61)=8`? | 0 | — |
 | [H-034](campaign/hypotheses/H-034-fractional-piercing-ceiling.md) | blocked | The fractional piercing value at Trump’s side is greater than ten | 0 | — |
 | [H-035](campaign/hypotheses/H-035-asymptotic-primitive-finite-transfer.md) | blocked | Current asymptotic construction primitives improve a finite public parent | 0 | — |
@@ -983,13 +983,12 @@ current criterion and kill rule.
 
 ## Experiments Conducted
 
-There are 15 rounds registered in `series-000`: thirteen terminal and two in progress.
-The terminal rounds record **387 agent-minutes** and **24.0 wall-minutes**. They use
-four instruments: `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
-(0.1.0 with angle descent, 0.2.0 with class bracketing), and the high-precision Kingbird
-SVG reconstruction and exact Trump linearized-cone checkers.
-The claimed `n = 3,4` rounds preregister a fifth exact small-moduli checker before it is
-built.
+There are 15 rounds registered in `series-000`; all are terminal.
+They record 422 agent-minutes and 24.0 wall-minutes.
+Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
+(0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
+SVG reconstruction, the exact Trump linearized-cone checker, and the exact small-moduli
+checker.
 
 No search round has been run at the `exact` tier, so **no result below claims a new
 record**. Exp-012 is an exploratory reconstruction of a published record witness; its
@@ -1015,8 +1014,8 @@ archive beside it.
 | [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | exactly `5.0` on all five seeds, gap `+3.245e-01` | rejected |
 | [exp-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | 29 | target | H-024 | SVG reconstruction + SAT | six classes; minimum class gap `0.296067°` | **rejected** |
 | [exp-013](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | 11 | target | H-026 | exact branchwise linearization | 128/128 exact zero-cone certificates | **accepted** |
-| [exp-014](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) | 3 | positive control | H-032 | exact configuration space | checker and quotient map claimed | in-progress |
-| [exp-015](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | 4 | positive control | H-032 | exact configuration space | grid rigidity replay claimed | in-progress |
+| [exp-014](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) | 3 | positive control | H-032 | exact configuration space | two labelled circles → one quotient interval | **accepted** |
+| [exp-015](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | 4 | positive control | H-032 | exact configuration space | 24 labelled points → one quotient point | **accepted** |
 
 ### Cost and provenance
 
@@ -1035,8 +1034,10 @@ archive beside it.
 | exp-011 | 4e9 moves | 397.474 s | 0 m | criterion | `60a50cc` |
 | exp-012 | one SVG, 406 pairs | 0.158 s | 12 m | criterion | `5384209` |
 | exp-013 | 512 raw branches | 57.308 s | 100 m | criterion | `faba023` |
+| exp-014 | 64 raw separation branches | 0.63 s | 30 m | criterion | `257cb0d` |
+| exp-015 | 4,096 raw separation branches | 0.65 s | 5 m | criterion | `257cb0d` |
 
-### What the thirteen rounds jointly establish
+### What the fifteen rounds jointly establish
 
 **The instrument works on the proved positive controls.** They now resolve to machine
 precision under the bracketing quench.
@@ -1051,6 +1052,15 @@ branchwise fixed-side linearized cone is zero.
 A finite-branch subsequence argument upgrades that result to local isolation and strict
 local side optimality in the anchored pose–side chart, modulo finite symmetries.
 It does not prove global optimality or give an explicit isolation radius.
+
+**The optimal configuration spaces at `n = 3,4` are now exact controls.** Exp-014 proves
+that `F_3(2)` is two labelled circles, its `S3` quotient is one circle, and its
+`D4 x S3` quotient is an interval whose corner endpoint changes the active signature and
+whose midpoint only changes the stabilizer.
+Exp-015 proves that `F_4(2)` is 24 isolated labelled grids and both declared quotients
+are one point. Arbitrary rotations add no side-2 configurations in either case.
+Generation plus complete replay costs 1.28 wall seconds, so both controls belong in
+every gate. H-032 remains open at `n = 5,6`.
 
 **The tested class-bracketing refiner separates the proved controls from the target.**
 It takes the tested `n = 5` and `n = 10` starts to `1e-15` and leaves the tested
@@ -1088,14 +1098,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 144 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 145 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 49 | asserted something false about the mathematics |
 | validity | 41 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 39 | recorded something its own evidence contradicts |
+| bookkeeping | 40 | recorded something its own evidence contradicts |
 | robustness | 11 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
 
@@ -1105,7 +1115,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught six defects in one hundred forty-four, and no soundness
+**The automated gate has caught six defects in one hundred forty-five, and no soundness
 defect ever.** Every soundness failure was found by a control cell whose answer was
 known in advance, a rule written down before the measurement, a generated view
 contradicting its source, or someone reading carefully.
@@ -1228,8 +1238,8 @@ What is not settled is what a basin *is*.
 The exact `n=3` side-2 sliding family proves that one connected optimal set produces
 many geometric keys.
 Its open stratum retains one contact certificate, but the wall endpoint has a different
-certificate after node attributes were restored; the stale closed-family claim is
-tracked explicitly as [D-140](defects.md).
+certificate after node attributes were restored; exp-014 fixes the stale closed-family
+claim recorded as [D-140](defects.md).
 At `n=5`, two rows also share side, short form, contact certificate, angle signature,
 and contact count while differing geometrically.
 That is strong evidence of unresolved terminal identity, but raw contact counts do not
@@ -1256,11 +1266,12 @@ omission. Two primary hard-square configuration-space papers are now archived; t
 Plakhta paper remains explicitly publisher-blocked, so no novelty language is permitted
 until its scope is checked from a lawful primary copy.
 
-**The first fast rotation is cheap and high-information.** Exp-012 refuted H-024, and
-exp-013 confirmed H-026 and locally isolated Trump’s pose.
-Next render the exact `n = 3` quotient-family control; regenerate the `n = 5` equal-side
-pair with full poses; and hide the UnitSquare `n = 68,69` children for the first
-parent-surgery test.
+**The first fast rotation is cheap and high-information.** Exp-012 refuted H-024,
+exp-013 confirmed H-026 and locally isolated Trump’s pose, and exp-014/015 solved the
+exact `n=3,4` quotient controls in 1.28 wall seconds.
+Next regenerate the `n = 5` equal-side pair with full poses and a declared component
+relation; reproduce Stromquist’s complete mechanism; and hide the UnitSquare `n = 68,69`
+children for the first parent-surgery test.
 The quantitative Trump successor is an explicit isolation radius or minimal-support
 stress analysis, not another rank count.
 No hour-scale lane is promoted without a known-answer response, independent validity,

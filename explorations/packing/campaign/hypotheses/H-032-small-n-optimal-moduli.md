@@ -41,12 +41,17 @@ hypothesis:
     Literature routing: [Alpert et al. 2023] and [Alvarado-Garduño–González 2025] are
     archived as topology and unlabelled-space context; [Plakhta 2021] is tracked as
     publisher-access-blocked. None answers this exact optimal-moduli question.
+    Filled cells: exp-014 proves that F_3(2) is two labelled circles, with S3 quotient
+    a circle and D4 x S3 quotient an interval; exp-015 proves that F_4(2) is 24 labelled
+    points and both symmetry quotients are one point. Instrument readiness remains false
+    for the unfilled n = 5 and n = 6 cells.
 ---
 # H-032 — topology begins on a case whose answer is known
 
 The question deliberately asks for the optimal set, not every local optimum.
-Once the representation is correct, a separate classification can enlarge the side
-filtration.
+Exp-014 and exp-015 solve the first two sweep cells exactly.
+The next step is the full labelled component relation at `n = 5`, not a denser endpoint
+sample.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

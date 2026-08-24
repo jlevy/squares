@@ -3,9 +3,10 @@
 A basin is an attraction class of a fully specified quench, not necessarily the
 preimage of one endpoint *point*. A quench may terminate on a positive-dimensional set.
 For example, at `n = 3` the side-2 family with centres `(1/2,1/2)`, `(3/2,1/2)`, and
-`(t,3/2)` for `t in [1/2,3/2]` is connected. Its contact certificate is constant while
-its geometric key changes with `t`. The keys below therefore identify numerical
-endpoint candidates; they do not yet identify connected terminal components.
+`(t,3/2)` for `t in [1/2,3/2]` is connected. Interior members share one contact
+certificate while their geometric keys change; the two wall endpoints have a second
+certificate. The keys below therefore identify numerical endpoint candidates; they do
+not yet identify connected terminal components.
 
 Comparing endpoint candidates uses two signals, at two different prices:
 

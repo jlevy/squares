@@ -151,6 +151,11 @@ def defect_checks() -> list[str]:
         # An open defect that nobody is tracking is a note, not a defect.
         if x["status"] in ("outstanding", "contained") and not x.get("bead"):
             errs.append(f"{x['id']}: {x['status']} without a bead")
+        # A fixed label cannot coexist with an explicit statement that no fix exists.
+        # D-145 arose when a broad edit changed D-039's status but not its evidence.
+        fix = str(x.get("fix", "")).lstrip().lower()
+        if x["status"] == "fixed" and fix.startswith("none yet"):
+            errs.append(f"{x['id']}: fixed while fix still says none yet")
         # The two classes where the direction of the error decides how bad it is.
         if x["class"] in ("soundness", "validity") and not x.get("direction"):
             errs.append(f"{x['id']}: {x['class']} without a direction")

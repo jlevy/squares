@@ -1364,7 +1364,7 @@ prior entries are reused where the review reproduced an already known cause.
 | F-15 | D-027, D-028, D-058, D-065 | Local handover and derived README claim reconciled; configured PR CI remains on the remediation bead |
 | F-16 | D-038, D-050, D-059 | Hermetic safety fixes landed; oracle/characterization separation remains open |
 | F-17 | D-060, D-064 | Fixed with strict-implies-deep, a firing mutation control, and a read-only preflight path that remains testable inside the gate |
-| F-18 | D-034 | Open: terminal-component definition on the exact `n=3` control |
+| F-18 | D-034, D-140 | Exact `n=3` control closed by exp-014; general and `n=5` terminal-component semantics remain open |
 | F-19 | D-061 | Open: evidence-complete endpoint classification |
 | F-20 | D-039 | Open: identity calibration independent of side precision |
 | F-21 | D-040 | Open: durable proposer-conditioned `P/Q/E` estimand |
@@ -1999,7 +1999,8 @@ are Trump’s nonsmooth local geometry, exact optimal configuration spaces at sm
 held-out construction surgery, pure-point piercing limits, robust restricted-angle
 proofs, `s(12)`, the next `m²−3` case at `n=61`, exact record fields, and the asymptotic
 waste exponent. The basin program now has a typed object hierarchy and visualization
-ladder; a glyph gallery and exact `n=3` quotient precede any point-cloud atlas.
+ladder; exp-014 lands the glyph gallery and exact `n=3` quotient, which now gate any
+point-cloud atlas.
 
 Three source checks materially changed the frontier.
 The [UnitSquare machine-readable release](https://hmbelvedere.com/data/results.json)
@@ -2312,6 +2313,48 @@ than a stored pose checked independently; contact canonicalization still has
 order-dependent angle clustering and factorial worst-case search; and the atlas,
 fixed-angle semantics, criterion evaluators, exact-promotion path, event record, and
 statistical contract remain open.
+
+## Third post-merge research result
+
+Exp-014 and exp-015 fill the first two H-032 cells exactly.
+The common orientation lemma writes a contained unit square’s support width as
+`w = |cos(theta)| + |sin(theta)|`. Its center offset is bounded by `1-w/2`, so the
+container center has local-axis projection at most `w(1-w/2) = 1/2 - (w-1)^2/2`. Every
+contained square contains that point, and every genuinely rotated square contains it in
+its interior; hence no side-2 packing of at least two squares can contain a genuinely
+rotated member.
+
+The remaining axis-aligned problem is finite and exact.
+At `n=3`, 64 raw pairwise separation choices leave 24 one-cells.
+Their 24 endpoint states and 24 edges form two labelled 12-cycles.
+Relabelling gives one four-cycle, and quotienting its `D4` action gives the interval
+`[0,1/2]`. Its corner endpoint changes the active wall/contact signature, its open
+stratum is one-dimensional, and its midpoint is a pure stabilizer jump.
+At `n=4`, 4,096 raw choices leave 96 zero-cells, four aliases for each of 24 labelled
+grids; both declared symmetry quotients are one point.
+
+This resolves the exact `n=3` calibration side of D-034 and fixes D-140’s false
+closed-family certificate claim.
+Interior `n=3` members have many geometric keys and one contact certificate, while the
+wall endpoints have a second; all remain one connected family.
+The general atlas defect and the `n=5` identity problem stay open.
+
+The result compares labelled and unlabelled invariants separately against the archived
+Alpert et al. and Alvarado-Garduño–González sources.
+Plakhta remains unavailable, so no novelty claim is made.
+D-142 through D-144 record three pre-run checker corrections: conflated
+labelled/unlabelled homology, an unreported `n=4` f-vector, and a tautological
+polynomial-identity check.
+D-145 records and guards the integration pass that temporarily fixed D-039 instead of
+D-140; no generated roll-up was permitted to make that reversal durable.
+
+The retained `n=3` generation and complete semantic/SVG replay take 0.63 wall seconds;
+the `n=4` pair takes 0.65 seconds.
+All fifteen known-answer controls pass.
+The exact quotient SVG makes active-stratum and stabilizer-stratum changes visible
+without confusing either with separate components.
+H-032 remains open at `n=5,6`; the next cell requires complete poses and a certified
+component relation rather than more endpoint sampling.
 
 ## Post-merge operating disposition
 

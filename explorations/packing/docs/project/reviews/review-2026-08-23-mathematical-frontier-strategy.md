@@ -91,7 +91,7 @@ Probability labels are strategic priors, not measurements.
 | Rank | Frontier result | Why it is attractive | Smallest honest first move | First-loop class |
 | ---: | --- | --- | --- | --- |
 | 1 | **Quantitative Trump local geometry after exp-013**: an explicit isolation radius, minimal stress support, or side-perturbation stability | Exact qualitative isolation is now proved; the certificates expose which inequalities carry rigidity | minimize certificate support, then interval-bound one neighborhood | minutes to hours after the exact replay |
-| 2 | **Exact quotient configuration space at `n = 3`, then one complete small-`n` case** | Gives ground truth for every atlas word: family, component, stratum, and merge | derive and render the known side-2 family before sampling `n = 5` | minutes to days |
+| 2 | **Exact small-`n` quotient spaces after exp-014/015** | `n=3,4` now give ground truth for family, component, active stratum, stabilizer stratum, and quotient; `n=5` is the first unresolved continuous case | recover complete `n=5` poses and certify the labelled component relation before sampling frequencies | minutes for controls, agent-days for `n=5` |
 | 3 | **Public-parent construction surgery** | Six 2026 improvements provide held-out known answers and complete witnesses | hide the `n = 68,69` children and attempt to regenerate either from its cited parent | minutes to hours |
 | 4 | **A certified ceiling or non-ceiling for pure ten-point piercing at `n = 11`** | A method-limit result redirects the whole proof lane | coarse primal-dual pilot with separate certified lower/upper discretization bounds | hours per resolution |
 | 5 | **A stronger restricted-orientation theorem near `n = 11`** | Interpolates between Stromquist’s exact `0°/45°` theorem and the oblique record | interval falsifier for a small neighborhood of the two special angles | hours to days |
@@ -465,10 +465,11 @@ observable. A verified path supplies a clearance-barrier upper bound.
 Neither is an intrinsic funnel depth or merge level until matching topology evidence
 exists.
 
-**The discrete geometer and enumerative combinatorialist.** First move: solve the exact
-`n = 3` quotient as the atlas control, attack one complete small-`n` classification,
-then move to the theorem-shaped frontiers `s(12)` and `s(61)`. A broad tier-S finite
-sweep remains useful, but it is a lottery portfolio rather than an enumeration theorem.
+**The discrete geometer and enumerative combinatorialist.** Exp-014/015 have solved the
+exact `n = 3,4` quotient controls.
+The next move is a complete `n=5` component classification, then the theorem-shaped
+frontiers `s(12)` and `s(61)`. A broad tier-S finite sweep remains useful, but it is a
+lottery portfolio rather than an enumeration theorem.
 
 **The logician and formalizer.** First move: specify the certificate formats now — exact
 upper-bound witness (T-1’s shape) and no-escape/unavoidability certificates — so every
@@ -485,9 +486,9 @@ synthetic distributions and proved cases; then compare adaptive splitting with r
 at `n = 10`. Only afterward estimate a Trump-target event at `n = 11`. Extreme-value
 fits are sensitivity analyses, not support proofs.
 
-**The topologist and real algebraic geometer.** First move: define `F_n(S)/(D4 × S_n)`
-and compute the exact optimal set at `n = 3`, including its strata and singular quotient
-points.
+**The topologist and real algebraic geometer.** Exp-014/015 now define
+`F_n(S)/(D4 × S_n)` concretely and compute the exact optimal sets at `n = 3,4`,
+including active and stabilizer strata.
 Next, use certified continuation and semialgebraic cells at `n = 5`. This persona
 rejects a point-cloud embedding as topology and asks for the filtration whose connected
 components are actually being drawn.
@@ -674,7 +675,7 @@ Runtime estimates are provisional until D-101’s timing boundary is repaired.
 | Priority | Experiment family | Smallest informative cell | First cap | Kill or park signal | Escalate when |
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | Trump linearized-cone screen (H-026) | exact `n=11` witness | **completed by exp-013** | no direction; 128/128 exact zero-cone certificates | local isolation follows; next quantify the radius and minimal stress support |
-| 2 | Exact quotient-map control (H-032) | analytic `n=3`, side 2 | 1 h | renderer cannot represent the known family and singular strata | sampled poses, quotient invariants, and analytic parameter agree |
+| 2 | Exact quotient-map controls (H-032) | `n=3,4` | **completed by exp-014/015 in 1.28 s total wall** | no omitted rotated branch; exact topology and render replay | move to complete `n=5` component identity, not denser sampling |
 | 3 | `n=29` angle-corpus falsifier (H-024) | one primary SVG | **completed by exp-012** | six verified classes refuted H-024 | source reconstruction, all 406 SAT pairs, and source equations replayed |
 | 4 | Trump reference-cell angle sheet (H-028) | `6+5` known cell, coarse grid | 10 min | reference not recovered or basis labels unstable | a reproducible local feature changes a decision |
 | 5 | Equal-side `n=5` continuation (H-023) | two `2.767766953` poses | 20 min | path invalid, leaves stationarity tolerance, or lacks full poses | a valid path or certified local obstruction survives refinement |
@@ -741,9 +742,10 @@ existing spine.
 
 ## Recommendations
 
-1. **Make the next map true before making it large.** Retain full poses/events, render
-   V-0, and solve the exact `n=3` quotient control.
-   Do not call the current row table a basin atlas.
+1. **Make the next map true before making it large.** Exp-014 lands V-0 and the exact
+   `n=3` quotient control.
+   Retain full `n=5` poses/events and certify its component relation before adding a
+   point cloud. Do not call the current row table a basin atlas.
 2. **Exploit the completed Trump screen.** Exp-013 replaced contact counting with 128
    exact positive-stress certificates.
    Minimize their support, extract a quantitative isolation radius, and test which

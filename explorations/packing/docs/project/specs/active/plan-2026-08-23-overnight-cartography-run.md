@@ -147,19 +147,21 @@ be silently rerun as fresh hypotheses.
 | 1 | [H-033](../../../../campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | extend Bentz’s `m²−3` method to `m=8` or retain its first blocking pose | the direct 2018 piercing bound is weaker than Nagamochi and does not settle `s(61)` |
 | 2 | [H-034](../../../../campaign/hypotheses/H-034-fractional-piercing-ceiling.md) | certified decision whether `τ*(U_s)>10` at Trump’s side | `>10` rules out ten points; `≤10` does not construct an integral set |
 | 2 | [H-036](../../../../campaign/hypotheses/H-036-robust-restricted-orientation.md) | extend Stromquist’s exact `0°/45°` exclusion to a fixed neighborhood | reproduce the exact theorem before interval enlargement |
-| 2 | [H-032](../../../../campaign/hypotheses/H-032-small-n-optimal-moduli.md) / [H-038](../../../../campaign/hypotheses/H-038-record-number-fields.md) | exact quotient spaces and exact-field taxonomy | begin at `n=3` and one reconstructed known algebraic witness |
+| 2 | [H-032](../../../../campaign/hypotheses/H-032-small-n-optimal-moduli.md) / [H-038](../../../../campaign/hypotheses/H-038-record-number-fields.md) | exp-014/015 solve the exact `n=3,4` quotient cells; next classify `n=5`, alongside exact-field taxonomy | keep the sub-second controls permanent; sampling cannot decide the `n=5` component relation |
 | 3 | [H-037](../../../../campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | narrow the `1/2` versus `3/5` exponent gap | separate paper-mathematics lane; finite diagnostics do not decide it |
 
-H-026 completed in exp-013. The next proof rotation is the exact `n=3` control in H-032
-and H-010. The slower `s(12)`, `s(61)`, fractional-piercing, restricted-orientation,
-exact-field and asymptotic programs remain visible with explicit intermediate artifacts
-rather than being forced into the stochastic census queue.
+H-026 completed in exp-013, and exp-014/015 completed H-032’s `n=3,4` controls.
+The next proof rotation is H-010’s complete Stromquist mechanism and the first complete
+`n=5` component analysis.
+The slower `s(12)`, `s(61)`, fractional-piercing, restricted-orientation, exact-field
+and asymptotic programs remain visible with explicit intermediate artifacts rather than
+being forced into the stochastic census queue.
 
 ### Basin maps, in order of mathematical honesty
 
-The first views are generated packing glyphs and the exact `n=3` quotient family.
-Next come fixed-cell angle sheets with active-basis overlays, an `n=5` ambiguity graph
-with tangent evidence, and valid-path clearance profiles.
+The first view has landed: exp-014’s generated packing glyphs and exact `n=3` quotient
+family. Next come fixed-cell angle sheets with active-basis overlays, an `n=5` ambiguity
+graph with tangent evidence, and valid-path clearance profiles.
 Kernel-conditioned transition networks and discovery curves wait for full event
 retention and `P/Q/E`; a global merge tree waits for certified components of a
 fixed-side filtration.

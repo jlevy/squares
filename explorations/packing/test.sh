@@ -319,6 +319,18 @@ step_basin_atlas() {
   $PY tools/atlas_check.py
 }
 
+step_small_n_moduli() {
+  # Rebuild the exact n = 3 record and SVG, then the separate rigid n = 4 record.
+  # These replay checks do not write artifacts.
+  $PY tools/check_small_n_moduli.py \
+    --n 3 \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json \
+    --check-svg atlas/n-003-optimal-moduli.svg
+  $PY tools/check_small_n_moduli.py \
+    --n 4 \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-015-h-032-n4-optimal-moduli.json
+}
+
 step_negative_controls() {
   # Every guard in this directory, watched failing. A check nobody has seen fail is not a
   # check, and until now each of these was run once by hand and thrown away. Each control
@@ -503,6 +515,7 @@ STEPS=(
   "lint floor (python)|step_lint_floor_python"
   "basin atlas|step_basin_atlas"
   "historical regressions|step_historical_regressions"
+  "small-n optimal moduli|step_small_n_moduli"
   "negative controls|step_negative_controls"
   "fixed-angle cell is an LP, rebuilt independently|step_lp_cell"
   "bead tree|step_bead_tree"

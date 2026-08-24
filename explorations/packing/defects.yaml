@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 144
+count: 145
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -846,9 +846,10 @@ defects:
   status: outstanding
   what: >-
     The exact n = 3 side-2 family with centres `(1/2,1/2)`, `(3/2,1/2)`, and
-    `(t,3/2)` for `t in [1/2,3/2]` has one contact certificate but many geometric keys;
-    `Atlas.add` requires both hashes to agree and therefore splits one connected optimum
-    family into quantization-dependent rows. At n = 5, two rows also share side
+    `(t,3/2)` for `t in [1/2,3/2]` has infinitely many interior geometric keys sharing
+    one contact certificate, plus a second wall-endpoint certificate; `Atlas.add`
+    requires both hashes to agree and therefore splits one connected optimum family into
+    quantization-dependent rows. At n = 5, two rows also share side
     2.767766952966, short form, contact certificate, angle signature, and contact count
     while differing geometrically. That makes their identity unresolved, but does not by
     itself prove they lie in the same connected component or establish its dimension.
@@ -859,12 +860,14 @@ defects:
     The error is flattering in both directions: the landscape reads as richer and an
     isolated record component can look rarer against an inflated denominator.
   fix: >-
-    none yet. Detect active-constraint rank deficiency, continue every null direction,
-    and define the counted object as an isolated endpoint or connected terminal
-    component under a fully specified quench and quotient. Contact/side agreement alone
-    may merge distinct components, while exact two-hash agreement splits the n = 3
-    family. Reconcile think-1s0h with the more explicit acceptance test on think-0yo9.
-  regression: none
+    Exp-014 exactly classifies the n = 3 control as two labelled circles, one unlabelled
+    circle, and a D4 x S3 quotient interval with three orbit strata. The general atlas
+    defect remains open: define and certify connected terminal components under a fully
+    specified quench and quotient before counting n = 5 or larger landscapes.
+  regression: >-
+    The gate replays exp-014's exact topology, its interior-versus-wall certificate
+    distinction, and its deterministic quotient map. Think-1s0h retains the unresolved
+    general and n = 5 acceptance work.
   bead: think-1s0h
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 - id: D-035
@@ -3454,7 +3457,7 @@ defects:
   detected_by: control_cell
   latent_for: since D-093 restored node attributes in the canonical certificate
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     Living docs and sqpack/canonical.py still say that the closed side-2 family with
     centres `(1/2,1/2)`, `(3/2,1/2)`, and `(t,3/2)` has one constant contact
@@ -3467,10 +3470,13 @@ defects:
     infinitely many interior geometric keys share one certificate, and the endpoint
     strata remain in the same connected family.
   fix: >-
-    Pending exp-014. Correct every living statement to distinguish the constant open
-    stratum from the endpoint wall stratum, retain the historical claim as an explicit
-    correction, and add an exact canonical-key regression plus quotient visualization.
-  regression: none
+    Corrected every living statement to distinguish the constant open stratum from the
+    endpoint wall stratum, retained the historical claim as an explicit correction, and
+    added exp-014's exact canonical-key regression and quotient visualization.
+  regression: >-
+    The small-n moduli gate step rebuilds all four exact samples, requires exactly two
+    certificates with one shared by every non-corner sample, and byte-compares the
+    quotient SVG.
   recurrence_of: D-093
   bead: think-030v
   recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md
@@ -3582,3 +3588,28 @@ defects:
     any branch enumeration, and refuse to emit or replay a determination on mismatch.
   bead: think-uxlg
   recorded_in: tools/check_small_n_moduli.py
+- id: D-145
+  title: A broad integration edit fixed the wrong defect record
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one uncommitted integration pass
+  severity: medium
+  status: fixed
+  what: >-
+    While terminalizing exp-014, a broad status edit changed D-039 from outstanding to
+    fixed but left the actually resolved D-140 outstanding. D-039's own fix field still
+    began with `none yet`, so its status contradicted the evidence in the same record.
+  consequence: >-
+    The generated log and synopsis would have understated unresolved identity-calibration
+    work while overstating the remaining n = 3 correction, reversing the current agenda
+    without any mathematical change.
+  fix: >-
+    Restored D-039 to outstanding, marked D-140 fixed, and added a whole-log invariant
+    that refuses any fixed record whose fix still begins with `none yet`.
+  regression: >-
+    A negative control changes D-039 back to fixed and requires schema validation to
+    reject the contradiction before generated views or a commit can pass.
+  bead: think-csji
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md

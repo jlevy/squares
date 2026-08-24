@@ -173,8 +173,9 @@ Consequence 2 does not follow from consequence 1, and the gap between them is
 
 The exact `n=3` optimum supplies the counterexample directly: centres `(1/2,1/2)`,
 `(3/2,1/2)`, and `(t,3/2)` for `t in [1/2,3/2]` form one connected side-2 family.
-The current contact certificate is constant on sampled members while the geometric key
-changes, so the atlas count depends on its quantum.
+The current contact certificate is constant on sampled interior members while the
+geometric key changes; the wall endpoints have a second certificate, and the atlas count
+still depends on its quantum.
 
 The `n=5` golden gives a second, unresolved signal: two rows share side, short form,
 contact certificate, angle signature, and contact count while differing geometrically.
@@ -193,9 +194,11 @@ for joining boundary strata.
 Until those checks run, the `n=5` pair remains unresolved and the safe artifact is an
 endpoint-key map with lower/upper component-count bounds.
 
-That reframing keeps D-034 as a blocker with executable work.
-`think-1s0h` and `think-0yo9` must be reconciled around the exact `n=3` control,
-rank/nullity evidence, and continuation rather than contact counting.
+Exp-014 now closes the exact `n=3` control: the labelled space is two circles, the
+unlabelled space one circle, and the full symmetry quotient an interval with separate
+active and stabilizer strata.
+D-034 remains a blocker for the general atlas and the `n=5` ambiguity.
+`think-1s0h` owns rank/nullity evidence and continuation rather than contact counting.
 
 **The lesson, restated one level up.** This section already said *“whatever defines a
 basin must be independent of the search’s own knobs, and that has to be checked rather

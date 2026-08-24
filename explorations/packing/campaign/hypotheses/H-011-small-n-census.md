@@ -45,7 +45,8 @@ hypothesis:
 A numerical quench endpoint does not automatically become a discrete local minimum when
 its key is canonicalized.
 At `n=3`, an exact side-2 family contains a continuously sliding square; the current
-geometric key splits that connected family while its contact key remains constant.
+geometric key splits that connected family, interior members share one contact key, and
+the wall endpoints have a second contact key.
 The census is therefore blocked on a declared terminal-component relation, isolation
 tests, and an ambiguity policy as well as on canonical endpoint comparison.
 
