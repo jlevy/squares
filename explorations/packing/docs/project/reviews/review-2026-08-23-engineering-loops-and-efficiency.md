@@ -385,6 +385,8 @@ Its equality subclaim is narrower than the original wording: fixed `theta`
 deterministically regenerates the numeric axis fields for the same discrete cell, so the
 demonstrated defect is the missing termination contract and unexplained cap, not an
 observed float-comparison mismatch.
+The follow-up strict/deep gate passed all 25 steps and 30 negative controls with 132
+defects reconciled in 55 wall seconds.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

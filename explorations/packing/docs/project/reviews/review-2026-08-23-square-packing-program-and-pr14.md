@@ -2207,7 +2207,8 @@ iteration cap or a rejected transition.
 D-132 now records that deferred defect under `think-9qz0`. The sweep narrowed the
 review’s exact-float-equality concern because fixed `theta` regenerates the same numeric
 axis fields for the same discrete cell; no separate float-mismatch failure was
-reproduced.
+reproduced. The post-merge strict/deep gate then passed all 25 steps and 30 negative
+controls with 132 defects reconciled in 55 wall seconds.
 
 The corrected, rebased stack passed the 25-step normal gate in 26 wall seconds and the
 strict/deep gate in 48 wall seconds.
