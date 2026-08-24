@@ -5,14 +5,14 @@ title: negctl leaves the repo holding a deliberate sabotage if it is interrupted
 kind: bug
 status: open
 priority: 0
-version: 13
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 14
+spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - focus-efficiency
 dependencies: []
-parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
+parent_id: is-01m0rkz14t04yjme92gnfncfv7
 created_at: 2026-08-23T20:21:37.206Z
-updated_at: 2026-08-24T00:31:19.066Z
+updated_at: 2026-08-24T01:00:50.009Z
 closed_at: null
 close_reason: null
 resolution: null

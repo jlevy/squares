@@ -5,7 +5,7 @@ title: "Review remediation: executable square-packing research program (PR #14)"
 kind: epic
 status: open
 priority: 0
-version: 30
+version: 31
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -18,8 +18,9 @@ child_order_hints:
   - is-01m0r7q3zk8x6cg4e30d149698
   - is-01m0r7q4h688g8gx54wk0vmrhp
   - is-01m0r7q50gw0wepeaj1dzb7g3r
+  - is-01m0rkz14t04yjme92gnfncfv7
 created_at: 2026-08-23T18:19:48.864Z
-updated_at: 2026-08-23T21:48:04.332Z
+updated_at: 2026-08-24T00:50:41.433Z
 ---
 Systematic technical review and remediation program for merged PR #14 and the square-packing research program. Work is organized into four independent dimensions: Correctness (Soundness), Process (Discipline), Insight (Creativity), and Efficiency (Infrastructure). An agent normally owns one focus at a time. Cross-focus dependencies are explicit handoffs, never implicit claims that one kind of excellence substitutes for another.
 

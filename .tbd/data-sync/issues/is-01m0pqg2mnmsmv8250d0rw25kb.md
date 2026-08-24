@@ -5,11 +5,11 @@ title: sqsearch does not emit pair_tests, the campaign's declared budget currenc
 kind: bug
 status: open
 priority: 1
-version: 1
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 2
+spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies: []
-parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
+parent_id: is-01m0rkz14t04yjme92gnfncfv7
 created_at: 2026-08-23T07:13:56.885Z
-updated_at: 2026-08-23T07:13:56.885Z
+updated_at: 2026-08-24T01:00:50.862Z
 ---

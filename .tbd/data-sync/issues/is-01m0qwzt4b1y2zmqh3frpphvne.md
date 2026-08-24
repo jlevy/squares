@@ -5,16 +5,16 @@ title: "Engine anchors: sqsearch must recover s(n) at the trivial n, and budget 
 kind: task
 status: open
 priority: 0
-version: 6
+version: 7
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - focus-correctness
 dependencies:
   - type: blocks
     target: is-01m0pw8698kc2bqm7d7fy0xydy
-parent_id: is-01m0pw7redm194km37gpb3cvmf
+parent_id: is-01m0rkz14t04yjme92gnfncfv7
 created_at: 2026-08-23T18:09:09.771Z
-updated_at: 2026-08-23T21:32:08.174Z
+updated_at: 2026-08-24T01:00:52.960Z
 ---
 Anchor sqsearch against proved instances and verify budget accounting. Existing selftests cover n=4 and n=5; add the missing proved ladder cases appropriate to their mechanism, including the proved n=16 not-below-4 guard, and reconcile the recorded n=10 control.
 

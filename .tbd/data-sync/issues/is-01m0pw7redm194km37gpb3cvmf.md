@@ -3,9 +3,9 @@ type: is
 id: is-01m0pw7redm194km37gpb3cvmf
 title: "Overnight cartography run: build the spine, then drain the census"
 kind: epic
-status: open
+status: closed
 priority: 0
-version: 9
+version: 10
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies: []
@@ -19,5 +19,9 @@ child_order_hints:
   - is-01m0r2atvyphxm28s5819fn3rg
   - is-01m0r571apfrab2m3z54dmzckf
 created_at: 2026-08-23T08:36:47.181Z
-updated_at: 2026-08-23T20:32:55.125Z
+updated_at: 2026-08-24T01:00:33.822Z
+closed_at: 2026-08-24T01:00:33.821Z
+close_reason: Superseded by think-ydus and the revised single launch plan; open groundwork and handover children were reparented, and the premature run bead was closed.
+resolution: null
+duplicate_of: null
 ---

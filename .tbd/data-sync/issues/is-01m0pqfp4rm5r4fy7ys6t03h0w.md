@@ -3,9 +3,9 @@ type: is
 id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 title: "Overnight readiness: make the loop safe to run unattended for 8 hours"
 kind: epic
-status: open
+status: closed
 priority: 0
-version: 16
+version: 17
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
@@ -26,5 +26,9 @@ child_order_hints:
   - is-01m0r8am444cp9ea28wqh7894k
   - is-01m0r8amhzzadc0enfphx0b5j1
 created_at: 2026-08-23T07:13:44.088Z
-updated_at: 2026-08-23T21:27:18.847Z
+updated_at: 2026-08-24T01:00:33.524Z
+closed_at: 2026-08-24T01:00:33.523Z
+close_reason: Superseded by the cross-focus readiness epic think-ydus; all open children were reparented without losing history.
+resolution: null
+duplicate_of: null
 ---

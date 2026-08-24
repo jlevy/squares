@@ -5,13 +5,13 @@ title: Separate portable mathematical checks from stochastic golden characteriza
 kind: bug
 status: open
 priority: 0
-version: 4
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+version: 5
+spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels: []
 dependencies: []
-parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
+parent_id: is-01m0rkz14t04yjme92gnfncfv7
 created_at: 2026-08-23T21:26:54.818Z
-updated_at: 2026-08-24T00:31:18.565Z
+updated_at: 2026-08-24T01:00:50.408Z
 ---
 D-059 and D-075. PR #16 retained a useful like-for-like cross-environment discrepancy: after source builds, the rendered golden differed at fixed n=10 seeds across two environments. A fresh PR #15 integration run of tools/golden_basins.py --deep passed locally in about 91 seconds, while PR #16 records a generic rebuilt-map mismatch elsewhere.
 
