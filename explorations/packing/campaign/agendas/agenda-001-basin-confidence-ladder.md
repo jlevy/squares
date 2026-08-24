@@ -260,7 +260,8 @@ agenda:
       proves one exact fixed-angle optimal face, and exp-034 proves it lies in an exact
       two-parameter angle-and-slide sheet. Full nonsmooth stationary connectivity and
       unequal-side minimax clearance remain later bounded slices, so BC-010 stays ready
-      rather than complete.
+      rather than complete. The exp-035 candidate checker is paused on think-1582 at
+      commit 8aa0cbb; it is statically clean but neither preregistered nor run.
     artifacts:
     - tools/check_n5_equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
@@ -268,6 +269,7 @@ agenda:
     - tools/check_n5_angle_sheet.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
+    - tools/check_n5_tangent_cones.py
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

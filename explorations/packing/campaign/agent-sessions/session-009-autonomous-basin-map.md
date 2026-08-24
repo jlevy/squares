@@ -381,6 +381,10 @@ session:
     The corrected post-exp-034 normal gate passes all 30 steps in 35 wall-seconds: all
     37 negative controls fire, 40 BasinEvents and five exact small-n records replay,
     all 34 engine commits are reachable, and 34 rounds and 187 defects reconcile.
+  - >-
+    Exp-035 orientation identifies one exact non-sheet first-order direction in every
+    n=5 face stratum. Its candidate checker is committed at 8aa0cbb and paused on
+    think-1582 without preregistration or scientific execution.
   stop_reason: null
   next_action: >-
     Continue BC-010 with one bounded complete wall-release and SAT-branch cone slice.
