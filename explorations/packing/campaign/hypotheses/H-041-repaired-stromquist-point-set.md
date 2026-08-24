@@ -60,6 +60,15 @@ partitions. A fresh escape would refute the proposal, but failure to find one is
 evidence; only the complete exact cover can accept H-041. Passing the one witness that
 killed H-010 is likewise insufficient.
 
+**Confirmed, 2026-08-24.**
+[Exp-017](../series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md)
+certifies all five implications exactly.
+The repaired Figure 14 complex has 26 faces, 28 vertices, and 53 edges; all thirteen
+source, geometry, boundary, sign, capacity, and record mutations pass.
+The result proves `s(11) >= 2 + 4/sqrt(5)` with a computer-assisted, source-distinct
+certificate. It does not repair the paper *as printed*, attribute `G'` to Stromquist,
+close the gap to Trump, or claim external peer review.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

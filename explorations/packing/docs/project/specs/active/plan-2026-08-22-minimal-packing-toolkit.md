@@ -446,16 +446,20 @@ The certificate’s durable interface is JSON either way.
 
 - [ ] `PoseBox` scalar and `hits_all_poses(points, box)` — the hook, subdivision left to
   the caller. One worked example, no proof attempt.
-- [ ] **H-10 — Stromquist’s conditional-forcing reconstruction.** Bind both published
-  point sets, retain a positive Figure 13 escape witness, and independently replay all
-  five proof nodes: localization, centerline-reflection reduction, same-box A-triple
-  forcing, Figure 14 unavoidability, and the finite 3+9 count.
-  Search saturation proves nothing.
+- [x] **H-10/H-41 — Stromquist falsification and repaired reconstruction.** Exp-016
+  binds both published point sets and exactly refutes the printed Figure 14
+  unavoidability node.
+  Exp-017 independently replays all five nodes after the preregistered source-distinct
+  change `G.x=.8 → .79`: localization, centerline-reflection reduction, same-box
+  A-triple forcing, repaired Figure 14 unavoidability, and the finite `3+9` count.
+  Search saturation proves nothing; the complete finite certificates decide both rounds.
 - [ ] **H-6 — LP duals as unavoidable-set generators** at side 4 for `n = 12`.
 
-**Done when:** the source-faithful certificate reproduces Stromquist’s open-box theorem,
-the independent replay rejects a mutation of every proof node, and the dual support at
-side 4 has been characterised.
+**Done when:** the source-faithful audit terminally decides the printed proof, a
+separately preregistered repair replays every proof node if needed, and the dual support
+at side 4 has been characterised.
+The first two conditions are complete in exp-016/017; the dual-support condition remains
+open.
 
 ### Phase 7: The LLM lanes
 

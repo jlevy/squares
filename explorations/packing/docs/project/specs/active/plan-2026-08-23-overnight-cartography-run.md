@@ -141,19 +141,20 @@ be silently rerun as fresh hypotheses.
 
 | Priority | Artifact | Output | Boundary |
 | ---: | --- | --- | --- |
-| 1 | [H-010](../../../../campaign/hypotheses/H-010-stromquist-triple.md) | source-bound Figure 13 escape witness plus independently replayed localization, A-triple, Figure 14 unavoidability, and 3+9 count | open boxes have side `>1`; search saturation is never proof |
+| 1 | [H-010](../../../../campaign/hypotheses/H-010-stromquist-triple.md) / [H-041](../../../../campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **exp-016/017 complete:** exact rejection of the printed cover plus exact certification of a source-distinct one-coordinate repair | the published proof remains false as printed; only the repaired set proves the numerical inequality here |
 | 1 | [H-026](../../../../campaign/hypotheses/H-026-trump-first-order-rigidity.md) / [H-022](../../../../campaign/hypotheses/H-022-trump-local-geometry.md) | **exp-013 complete:** 128/128 exact zero-cone certificates and finite-branch local isolation; next quantify a radius | feature counts and a smooth Jacobian decided neither rigidity nor isolation |
 | 2 | [H-006](../../../../campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md) | quantitative, refinement-stable dual support for candidate loci | discretized LP generates proof objects; it proves no bound |
-| 1 | [H-039](../../../../campaign/hypotheses/H-039-s12-proof-frontier.md) | checked improvement to the `s(12)` lower bound | H-010’s complete conditional mechanism is the known-answer gate |
+| 1 | [H-039](../../../../campaign/hypotheses/H-039-s12-proof-frontier.md) | checked improvement to the `s(12)` lower bound | exp-016/017 are the calibrated failure and success gates for the forcing architecture |
 | 1 | [H-033](../../../../campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | extend Bentz’s `m²−3` method to `m=8` or retain its first blocking pose | the direct 2018 piercing bound is weaker than Nagamochi and does not settle `s(61)` |
 | 2 | [H-034](../../../../campaign/hypotheses/H-034-fractional-piercing-ceiling.md) | certified decision whether `τ*(U_s)>10` at Trump’s side | `>10` rules out ten points; `≤10` does not construct an integral set |
 | 2 | [H-036](../../../../campaign/hypotheses/H-036-robust-restricted-orientation.md) | extend Stromquist’s exact `0°/45°` exclusion to a fixed neighborhood | reproduce the exact theorem before interval enlargement |
 | 2 | [H-032](../../../../campaign/hypotheses/H-032-small-n-optimal-moduli.md) / [H-038](../../../../campaign/hypotheses/H-038-record-number-fields.md) | exp-014/015 solve the exact `n=3,4` quotient cells; next classify `n=5`, alongside exact-field taxonomy | keep the sub-second controls permanent; sampling cannot decide the `n=5` component relation |
 | 3 | [H-037](../../../../campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | narrow the `1/2` versus `3/5` exponent gap | separate paper-mathematics lane; finite diagnostics do not decide it |
 
-H-026 completed in exp-013, and exp-014/015 completed H-032’s `n=3,4` controls.
-The next proof rotation is H-010’s complete Stromquist mechanism and the first complete
-`n=5` component analysis.
+H-026 completed in exp-013, exp-014/015 completed H-032’s `n=3,4` controls, and
+exp-016/017 completed the printed-failure/repaired-success Stromquist calibration.
+The next proof rotation is H-039’s first fixed-threshold `n=12` candidate alongside the
+first complete `n=5` component analysis.
 The slower `s(12)`, `s(61)`, fractional-piercing, restricted-orientation, exact-field
 and asymptotic programs remain visible with explicit intermediate artifacts rather than
 being forced into the stochastic census queue.

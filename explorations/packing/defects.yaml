@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 160
+count: 161
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4012,3 +4012,27 @@ defects:
   recurrence_of: D-145
   bead: think-4cua
   recorded_in: defects.yaml
+- id: D-161
+  title: The synopsis did not track the live hypothesis count
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: drift_check
+  latent_for: one committed H-041 registration
+  severity: medium
+  status: fixed
+  what: >-
+    Registering H-041 raised the hypothesis catalogue from forty to forty-one artifacts,
+    but the current synopsis continued to say forty. The ledger counted the registry
+    correctly, while no synopsis check compared that count with the prose.
+  consequence: >-
+    The high-level agenda understated its own research portfolio and could drift farther
+    each time a hypothesis was added, despite the generated ledger remaining correct.
+  fix: >-
+    Updated the current synopsis count and extended its consistency checker to derive the
+    registry count from hypothesis artifacts rather than trusting another hand-maintained
+    scalar.
+  regression: The synopsis consistency check rejects a stated hypothesis count that disagrees with the registry.
+  bead: think-j8tv
+  recorded_in: SYNOPSIS.md

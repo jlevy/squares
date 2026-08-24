@@ -147,9 +147,10 @@ step_stromquist_h010_exact_rejection() {
 }
 
 step_stromquist_h041_exact_repair() {
-  # Non-record mode rebuilds the repaired finite cover and its exact selftests without
-  # creating or updating a retained experiment artifact.
-  $PY tools/check_stromquist_repair.py
+  # Rebuild every repaired finite-cover obligation and mutation control, then require
+  # the retained terminal H-041 certificate to match exactly.
+  $PY tools/check_stromquist_repair.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
 }
 
 step_negative_control() {

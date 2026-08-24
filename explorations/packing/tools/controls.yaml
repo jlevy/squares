@@ -60,15 +60,15 @@ controls:
   run: python3 tools/validate_schemas.py
   expect: "D-039: fixed while fix still says none yet"
 
-# The only control whose anchor tracks a live number, because the thing under test IS
-# a number. It needs updating whenever a defect is added -- and that is fine: negctl
+# This control's anchor tracks a live number because the thing under test IS a number.
+# It needs updating whenever a defect is added -- and that is fine: negctl
 # requires the anchor to appear exactly once, so a stale one fails the suite by name
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 160", "count: 20"]
+  replace: ["count: 161", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 160"
+  expect: "count 20 != 161"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -82,6 +82,13 @@ controls:
 # comes back -- was hand-written, and it drifted: the prose said six while the generated
 # view said seven. That is D-028 recurring inside the document D-028 is about, which is
 # why the count is now derived and why it gets a control.
+- name: synopsis - hypothesis artifact count drifting from the registry
+  file: SYNOPSIS.md
+  replace: ["Forty-one claims or open questions are codified as artifacts.",
+            "Forty claims or open questions are codified as artifacts."]
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "does not state the hypothesis artifact count (41)"
+
 - name: synopsis - unprotected-fix count drifting from the log
   file: defects.yaml
   replace: ["    to coincide with an in-progress round.\n  regression: none\n  bead: think-5zwm\n",

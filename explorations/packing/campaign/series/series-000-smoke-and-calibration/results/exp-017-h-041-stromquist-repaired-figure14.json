@@ -1,0 +1,2188 @@
+{
+  "capacity": {
+    "capacity_reason": "pairwise-disjoint open boxes cannot share a marked point",
+    "certified": true,
+    "node_1": {
+      "boxes": 11,
+      "conclusion": "at least one box avoids all ten points",
+      "figure13_points": 10
+    },
+    "node_5": {
+      "consumption_semantics": "at least these three points; consuming more only strengthens the count",
+      "contradiction": "10>9",
+      "remaining_boxes": 10,
+      "remaining_figure14_points": 9,
+      "special_box_consumes": 3
+    },
+    "point_capacity": 1
+  },
+  "determination": {
+    "claim": "G'=(79/100,37/20) restores the complete five-node Stromquist lower-bound mechanism",
+    "outcome": "criterion_met",
+    "scope": "the repaired point set is a post-falsification construction and is not attributed to Stromquist"
+  },
+  "figure13": {
+    "cover": {
+      "boundary_closure": {
+        "all_shared_triangle_boundaries_covered": true,
+        "box_semantics": "open square of side L>1",
+        "closed_cell_union": true,
+        "edge_argument": "a center on a segment of length <=1 is within <=1/2 of an endpoint; the open box contains the open Euclidean disk of radius L/2>1/2",
+        "vertices": "a center at a marked vertex contains that vertex"
+      },
+      "covered_cell_count": 18,
+      "exception_count": 4,
+      "exception_rectangles": [
+        [
+          "K10",
+          "KC0",
+          "P1",
+          "P0"
+        ],
+        [
+          "KC0",
+          "KR0",
+          "P2",
+          "P1"
+        ],
+        [
+          "T0",
+          "T1",
+          "TOPC",
+          "TOP1"
+        ],
+        [
+          "T1",
+          "T2",
+          "TOPR",
+          "TOPC"
+        ]
+      ],
+      "lemma1_corner_cells": [
+        [
+          "K00",
+          "K10",
+          "P0",
+          "L1"
+        ],
+        [
+          "KR0",
+          "KS0",
+          "R1",
+          "P2"
+        ],
+        [
+          "LR",
+          "T0",
+          "TOP1",
+          "LTOP"
+        ],
+        [
+          "T2",
+          "RR",
+          "RTOP",
+          "TOPR"
+        ]
+      ],
+      "lemma2_triangles": [
+        {
+          "squared_edge_lengths": {
+            "M0-M1": "4/5",
+            "M0-P0": "1",
+            "M1-P0": "1"
+          },
+          "vertices": [
+            "M0",
+            "P0",
+            "M1"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "M1-P0": "1",
+            "M1-P1": "1",
+            "P0-P1": "4/5"
+          },
+          "vertices": [
+            "P0",
+            "P1",
+            "M1"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "M1-M2": "4/5",
+            "M1-P1": "1",
+            "M2-P1": "1"
+          },
+          "vertices": [
+            "M1",
+            "P1",
+            "M2"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "M2-P1": "1",
+            "M2-P2": "1",
+            "P1-P2": "4/5"
+          },
+          "vertices": [
+            "P1",
+            "P2",
+            "M2"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "M2-M3": "4/5",
+            "M2-P2": "1",
+            "M3-P2": "1"
+          },
+          "vertices": [
+            "M2",
+            "P2",
+            "M3"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "M0-M1": "4/5",
+            "M0-T0": "1",
+            "M1-T0": "1"
+          },
+          "vertices": [
+            "T0",
+            "M0",
+            "M1"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "M1-T0": "1",
+            "M1-T1": "1",
+            "T0-T1": "4/5"
+          },
+          "vertices": [
+            "T0",
+            "M1",
+            "T1"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "M1-M2": "4/5",
+            "M1-T1": "1",
+            "M2-T1": "1"
+          },
+          "vertices": [
+            "T1",
+            "M1",
+            "M2"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "M2-T1": "1",
+            "M2-T2": "1",
+            "T1-T2": "4/5"
+          },
+          "vertices": [
+            "T1",
+            "M2",
+            "T2"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "M2-M3": "4/5",
+            "M2-T2": "1",
+            "M3-T2": "1"
+          },
+          "vertices": [
+            "T2",
+            "M2",
+            "M3"
+          ]
+        }
+      ],
+      "lemma4_side_cells": [
+        {
+          "a": "2/5*sqrt(5)",
+          "b": "1-1/5*sqrt(5)",
+          "distance_squared": "1",
+          "id": "left_lower",
+          "origin": [
+            "0",
+            "1"
+          ],
+          "polygon": [
+            "L1",
+            "P0",
+            "M0",
+            "LC"
+          ],
+          "threshold": {
+            "cubic_coefficients_low_degree_first": [
+              "-1/5",
+              "19/5-4/5*sqrt(5)",
+              "-2-4/5*sqrt(5)",
+              "2"
+            ],
+            "derivative_signs": [
+              1,
+              -1,
+              1
+            ],
+            "f_lower": "84733829306732284009805880146620121/92652081039450000000000000000000000",
+            "f_upper": "169467658613990272041287929549930731/185304162079000000000000000000000000",
+            "global_minimum_root_index": 1,
+            "parameter": "2/5*sqrt(5)",
+            "root_intervals": [
+              [
+                "128400289459/1000000000000",
+                "6420014473/50000000000"
+              ],
+              [
+                "853041620789/1000000000000",
+                "85304162079/100000000000"
+              ],
+              [
+                "3651941123/4000000000",
+                "912985280751/1000000000000"
+              ]
+            ],
+            "sturm_root_count_0_1": 3,
+            "unsquared_filter": {
+              "extraneous_root_indices": [
+                2
+              ],
+              "required_relation": "x<=a",
+              "valid_root_indices": [
+                0,
+                1
+              ]
+            }
+          },
+          "threshold_passed": true,
+          "u_axis": [
+            "0",
+            "1"
+          ],
+          "v_axis": [
+            "1",
+            "0"
+          ]
+        },
+        {
+          "a": "2/5*sqrt(5)",
+          "b": "1-1/5*sqrt(5)",
+          "distance_squared": "1",
+          "id": "left_upper",
+          "origin": [
+            "0",
+            "1+4/5*sqrt(5)"
+          ],
+          "polygon": [
+            "LC",
+            "M0",
+            "T0",
+            "LR"
+          ],
+          "threshold": {
+            "cubic_coefficients_low_degree_first": [
+              "-1/5",
+              "19/5-4/5*sqrt(5)",
+              "-2-4/5*sqrt(5)",
+              "2"
+            ],
+            "derivative_signs": [
+              1,
+              -1,
+              1
+            ],
+            "f_lower": "84733829306732284009805880146620121/92652081039450000000000000000000000",
+            "f_upper": "169467658613990272041287929549930731/185304162079000000000000000000000000",
+            "global_minimum_root_index": 1,
+            "parameter": "2/5*sqrt(5)",
+            "root_intervals": [
+              [
+                "128400289459/1000000000000",
+                "6420014473/50000000000"
+              ],
+              [
+                "853041620789/1000000000000",
+                "85304162079/100000000000"
+              ],
+              [
+                "3651941123/4000000000",
+                "912985280751/1000000000000"
+              ]
+            ],
+            "sturm_root_count_0_1": 3,
+            "unsquared_filter": {
+              "extraneous_root_indices": [
+                2
+              ],
+              "required_relation": "x<=a",
+              "valid_root_indices": [
+                0,
+                1
+              ]
+            }
+          },
+          "threshold_passed": true,
+          "u_axis": [
+            "0",
+            "-1"
+          ],
+          "v_axis": [
+            "1",
+            "0"
+          ]
+        },
+        {
+          "a": "2/5*sqrt(5)",
+          "b": "1-1/5*sqrt(5)",
+          "distance_squared": "1",
+          "id": "right_lower",
+          "origin": [
+            "2+4/5*sqrt(5)",
+            "1"
+          ],
+          "polygon": [
+            "P2",
+            "R1",
+            "RC",
+            "M3"
+          ],
+          "threshold": {
+            "cubic_coefficients_low_degree_first": [
+              "-1/5",
+              "19/5-4/5*sqrt(5)",
+              "-2-4/5*sqrt(5)",
+              "2"
+            ],
+            "derivative_signs": [
+              1,
+              -1,
+              1
+            ],
+            "f_lower": "84733829306732284009805880146620121/92652081039450000000000000000000000",
+            "f_upper": "169467658613990272041287929549930731/185304162079000000000000000000000000",
+            "global_minimum_root_index": 1,
+            "parameter": "2/5*sqrt(5)",
+            "root_intervals": [
+              [
+                "128400289459/1000000000000",
+                "6420014473/50000000000"
+              ],
+              [
+                "853041620789/1000000000000",
+                "85304162079/100000000000"
+              ],
+              [
+                "3651941123/4000000000",
+                "912985280751/1000000000000"
+              ]
+            ],
+            "sturm_root_count_0_1": 3,
+            "unsquared_filter": {
+              "extraneous_root_indices": [
+                2
+              ],
+              "required_relation": "x<=a",
+              "valid_root_indices": [
+                0,
+                1
+              ]
+            }
+          },
+          "threshold_passed": true,
+          "u_axis": [
+            "0",
+            "1"
+          ],
+          "v_axis": [
+            "-1",
+            "0"
+          ]
+        },
+        {
+          "a": "2/5*sqrt(5)",
+          "b": "1-1/5*sqrt(5)",
+          "distance_squared": "1",
+          "id": "right_upper",
+          "origin": [
+            "2+4/5*sqrt(5)",
+            "1+4/5*sqrt(5)"
+          ],
+          "polygon": [
+            "M3",
+            "RC",
+            "RR",
+            "T2"
+          ],
+          "threshold": {
+            "cubic_coefficients_low_degree_first": [
+              "-1/5",
+              "19/5-4/5*sqrt(5)",
+              "-2-4/5*sqrt(5)",
+              "2"
+            ],
+            "derivative_signs": [
+              1,
+              -1,
+              1
+            ],
+            "f_lower": "84733829306732284009805880146620121/92652081039450000000000000000000000",
+            "f_upper": "169467658613990272041287929549930731/185304162079000000000000000000000000",
+            "global_minimum_root_index": 1,
+            "parameter": "2/5*sqrt(5)",
+            "root_intervals": [
+              [
+                "128400289459/1000000000000",
+                "6420014473/50000000000"
+              ],
+              [
+                "853041620789/1000000000000",
+                "85304162079/100000000000"
+              ],
+              [
+                "3651941123/4000000000",
+                "912985280751/1000000000000"
+              ]
+            ],
+            "sturm_root_count_0_1": 3,
+            "unsquared_filter": {
+              "extraneous_root_indices": [
+                2
+              ],
+              "required_relation": "x<=a",
+              "valid_root_indices": [
+                0,
+                1
+              ]
+            }
+          },
+          "threshold_passed": true,
+          "u_axis": [
+            "0",
+            "-1"
+          ],
+          "v_axis": [
+            "-1",
+            "0"
+          ]
+        }
+      ],
+      "tiling": {
+        "all_boundary_edges_lie_on_container": true,
+        "all_internal_edges_have_two_incident_faces": true,
+        "boundary_edge_count": 16,
+        "edge_count": 47,
+        "euler_characteristic": 1,
+        "face_count": 22,
+        "noncrossing": true,
+        "signed_area_twice": "72/5+32/5*sqrt(5)",
+        "vertex_containment": {
+          "all_vertices_in_closed_container": true,
+          "container_x_interval": [
+            "0",
+            "2+4/5*sqrt(5)"
+          ],
+          "container_y_interval": [
+            "0",
+            "2+4/5*sqrt(5)"
+          ],
+          "vertex_count": 26,
+          "vertices": {
+            "K00": [
+              "0",
+              "0"
+            ],
+            "K10": [
+              "1",
+              "0"
+            ],
+            "KC0": [
+              "1+2/5*sqrt(5)",
+              "0"
+            ],
+            "KR0": [
+              "1+4/5*sqrt(5)",
+              "0"
+            ],
+            "KS0": [
+              "2+4/5*sqrt(5)",
+              "0"
+            ],
+            "L1": [
+              "0",
+              "1"
+            ],
+            "LC": [
+              "0",
+              "1+2/5*sqrt(5)"
+            ],
+            "LR": [
+              "0",
+              "1+4/5*sqrt(5)"
+            ],
+            "LTOP": [
+              "0",
+              "2+4/5*sqrt(5)"
+            ],
+            "M0": [
+              "1-1/5*sqrt(5)",
+              "1+2/5*sqrt(5)"
+            ],
+            "M1": [
+              "1+1/5*sqrt(5)",
+              "1+2/5*sqrt(5)"
+            ],
+            "M2": [
+              "1+3/5*sqrt(5)",
+              "1+2/5*sqrt(5)"
+            ],
+            "M3": [
+              "1+1*sqrt(5)",
+              "1+2/5*sqrt(5)"
+            ],
+            "P0": [
+              "1",
+              "1"
+            ],
+            "P1": [
+              "1+2/5*sqrt(5)",
+              "1"
+            ],
+            "P2": [
+              "1+4/5*sqrt(5)",
+              "1"
+            ],
+            "R1": [
+              "2+4/5*sqrt(5)",
+              "1"
+            ],
+            "RC": [
+              "2+4/5*sqrt(5)",
+              "1+2/5*sqrt(5)"
+            ],
+            "RR": [
+              "2+4/5*sqrt(5)",
+              "1+4/5*sqrt(5)"
+            ],
+            "RTOP": [
+              "2+4/5*sqrt(5)",
+              "2+4/5*sqrt(5)"
+            ],
+            "T0": [
+              "1",
+              "1+4/5*sqrt(5)"
+            ],
+            "T1": [
+              "1+2/5*sqrt(5)",
+              "1+4/5*sqrt(5)"
+            ],
+            "T2": [
+              "1+4/5*sqrt(5)",
+              "1+4/5*sqrt(5)"
+            ],
+            "TOP1": [
+              "1",
+              "2+4/5*sqrt(5)"
+            ],
+            "TOPC": [
+              "1+2/5*sqrt(5)",
+              "2+4/5*sqrt(5)"
+            ],
+            "TOPR": [
+              "1+4/5*sqrt(5)",
+              "2+4/5*sqrt(5)"
+            ]
+          }
+        },
+        "vertex_count": 26
+      }
+    },
+    "localization": {
+      "certified": true,
+      "representative": [
+        "K10",
+        "KC0",
+        "P1",
+        "P0"
+      ],
+      "statement": "a box avoiding all ten points has center in one of four exception rectangles related by K4"
+    },
+    "point_digest": "7ff0aaf32d5ea83ffd95c9b2c3cc1dcc0257e144bd75bbc8233296cdef4db8a1",
+    "point_manifest": {
+      "M0": [
+        "1-1/5*sqrt(5)",
+        "1+2/5*sqrt(5)"
+      ],
+      "M1": [
+        "1+1/5*sqrt(5)",
+        "1+2/5*sqrt(5)"
+      ],
+      "M2": [
+        "1+3/5*sqrt(5)",
+        "1+2/5*sqrt(5)"
+      ],
+      "M3": [
+        "1+1*sqrt(5)",
+        "1+2/5*sqrt(5)"
+      ],
+      "P0": [
+        "1",
+        "1"
+      ],
+      "P1": [
+        "1+2/5*sqrt(5)",
+        "1"
+      ],
+      "P2": [
+        "1+4/5*sqrt(5)",
+        "1"
+      ],
+      "T0": [
+        "1",
+        "1+4/5*sqrt(5)"
+      ],
+      "T1": [
+        "1+2/5*sqrt(5)",
+        "1+4/5*sqrt(5)"
+      ],
+      "T2": [
+        "1+4/5*sqrt(5)",
+        "1+4/5*sqrt(5)"
+      ]
+    },
+    "quarter_turn_counterexample": {
+      "image": [
+        "1+4/5*sqrt(5)",
+        "1+2/5*sqrt(5)"
+      ],
+      "image_absent": true,
+      "source_point": "P1"
+    },
+    "source_seed_names": [
+      "P0",
+      "P1",
+      "M0",
+      "M1"
+    ],
+    "symmetry": {
+      "actions": [
+        "identity",
+        "reflect_x",
+        "reflect_y",
+        "reflect_xy"
+      ],
+      "group": "C2 x C2 (horizontal and vertical centerline reflections)",
+      "order": 4
+    }
+  },
+  "figure14_repaired": {
+    "boundary_closure": {
+      "all_shared_triangle_boundaries_covered": true,
+      "box_semantics": "open square of side L>1",
+      "closed_cell_union": true,
+      "edge_argument": "a center on a segment of length <=1 is within <=1/2 of an endpoint; the open box contains the open Euclidean disk of radius L/2>1/2",
+      "vertices": "a center at a marked vertex contains that vertex"
+    },
+    "central_mesh": {
+      "all_edges_at_most_one": true,
+      "boundary": [
+        "F",
+        "E",
+        "D",
+        "C",
+        "B",
+        "A2",
+        "A3",
+        "A1",
+        "G"
+      ],
+      "boundary_edge_count": 9,
+      "edge_count": 24,
+      "edges": [
+        [
+          "A1",
+          "A3"
+        ],
+        [
+          "A1",
+          "G"
+        ],
+        [
+          "A2",
+          "A3"
+        ],
+        [
+          "A2",
+          "B"
+        ],
+        [
+          "A2",
+          "J"
+        ],
+        [
+          "A3",
+          "G"
+        ],
+        [
+          "A3",
+          "H"
+        ],
+        [
+          "A3",
+          "J"
+        ],
+        [
+          "B",
+          "C"
+        ],
+        [
+          "B",
+          "J"
+        ],
+        [
+          "C",
+          "D"
+        ],
+        [
+          "C",
+          "I"
+        ],
+        [
+          "C",
+          "J"
+        ],
+        [
+          "D",
+          "E"
+        ],
+        [
+          "D",
+          "I"
+        ],
+        [
+          "E",
+          "F"
+        ],
+        [
+          "E",
+          "H"
+        ],
+        [
+          "E",
+          "I"
+        ],
+        [
+          "F",
+          "G"
+        ],
+        [
+          "F",
+          "H"
+        ],
+        [
+          "G",
+          "H"
+        ],
+        [
+          "H",
+          "I"
+        ],
+        [
+          "H",
+          "J"
+        ],
+        [
+          "I",
+          "J"
+        ]
+      ],
+      "euler_characteristic": 1,
+      "face_count": 13,
+      "faces": [
+        {
+          "squared_edge_lengths": {
+            "E-F": "81/100",
+            "E-H": "21/4-2*sqrt(5)",
+            "F-H": "233/50-44/25*sqrt(5)"
+          },
+          "vertices": [
+            "F",
+            "E",
+            "H"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "E-H": "21/4-2*sqrt(5)",
+            "E-I": "621/100-62/25*sqrt(5)",
+            "H-I": "9/25"
+          },
+          "vertices": [
+            "E",
+            "I",
+            "H"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "D-E": "81/100",
+            "D-I": "441/50-88/25*sqrt(5)",
+            "E-I": "621/100-62/25*sqrt(5)"
+          },
+          "vertices": [
+            "E",
+            "D",
+            "I"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "C-D": "81/100",
+            "C-I": "621/100-62/25*sqrt(5)",
+            "D-I": "441/50-88/25*sqrt(5)"
+          },
+          "vertices": [
+            "D",
+            "C",
+            "I"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "C-I": "621/100-62/25*sqrt(5)",
+            "C-J": "21/4-2*sqrt(5)",
+            "I-J": "9/25"
+          },
+          "vertices": [
+            "C",
+            "J",
+            "I"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "H-I": "9/25",
+            "H-J": "18/25",
+            "I-J": "9/25"
+          },
+          "vertices": [
+            "I",
+            "J",
+            "H"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "B-C": "81/100",
+            "B-J": "233/50-44/25*sqrt(5)",
+            "C-J": "21/4-2*sqrt(5)"
+          },
+          "vertices": [
+            "C",
+            "B",
+            "J"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "A2-B": "81/100",
+            "A2-J": "237/100-22/25*sqrt(5)",
+            "B-J": "233/50-44/25*sqrt(5)"
+          },
+          "vertices": [
+            "B",
+            "A2",
+            "J"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "A2-A3": "621/2500",
+            "A2-J": "237/100-22/25*sqrt(5)",
+            "A3-J": "1943/1250-11/25*sqrt(5)"
+          },
+          "vertices": [
+            "A2",
+            "A3",
+            "J"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "A3-H": "1763/1250-1/5*sqrt(5)",
+            "A3-J": "1943/1250-11/25*sqrt(5)",
+            "H-J": "18/25"
+          },
+          "vertices": [
+            "A3",
+            "H",
+            "J"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "A3-G": "777/1000+21/250*sqrt(5)",
+            "A3-H": "1763/1250-1/5*sqrt(5)",
+            "G-H": "2833/5000"
+          },
+          "vertices": [
+            "A3",
+            "G",
+            "H"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "F-G": "19833/5000-34/25*sqrt(5)",
+            "F-H": "233/50-44/25*sqrt(5)",
+            "G-H": "2833/5000"
+          },
+          "vertices": [
+            "G",
+            "F",
+            "H"
+          ]
+        },
+        {
+          "squared_edge_lengths": {
+            "A1-A3": "621/2500",
+            "A1-G": "4733/5000",
+            "A3-G": "777/1000+21/250*sqrt(5)"
+          },
+          "vertices": [
+            "G",
+            "A3",
+            "A1"
+          ]
+        }
+      ],
+      "minimum_abs_face_area_twice": "121/500+4/125*sqrt(5)",
+      "noncrossing": true,
+      "signed_area_twice": "-6421/1000-9/25*sqrt(5)",
+      "vertex_count": 12
+    },
+    "full_tiling": {
+      "all_boundary_edges_lie_on_container": true,
+      "all_internal_edges_have_two_incident_faces": true,
+      "boundary_edge_count": 16,
+      "edge_count": 53,
+      "euler_characteristic": 1,
+      "face_count": 26,
+      "noncrossing": true,
+      "signed_area_twice": "-72/5-32/5*sqrt(5)",
+      "vertex_containment": {
+        "all_vertices_in_closed_container": true,
+        "container_x_interval": [
+          "0",
+          "2+4/5*sqrt(5)"
+        ],
+        "container_y_interval": [
+          "0",
+          "2+4/5*sqrt(5)"
+        ],
+        "vertex_count": 28,
+        "vertices": {
+          "A1": [
+            "1",
+            "9/10"
+          ],
+          "A2": [
+            "1+2/5*sqrt(5)",
+            "9/10"
+          ],
+          "A3": [
+            "1+1/5*sqrt(5)",
+            "28/25"
+          ],
+          "B": [
+            "1+4/5*sqrt(5)",
+            "1"
+          ],
+          "BOT1": [
+            "1",
+            "0"
+          ],
+          "BOTC": [
+            "1+2/5*sqrt(5)",
+            "0"
+          ],
+          "BOTR": [
+            "1+4/5*sqrt(5)",
+            "0"
+          ],
+          "C": [
+            "11/10+4/5*sqrt(5)",
+            "1+2/5*sqrt(5)"
+          ],
+          "D": [
+            "1+4/5*sqrt(5)",
+            "1+4/5*sqrt(5)"
+          ],
+          "E": [
+            "1+2/5*sqrt(5)",
+            "11/10+4/5*sqrt(5)"
+          ],
+          "F": [
+            "1",
+            "1+4/5*sqrt(5)"
+          ],
+          "G": [
+            "79/100",
+            "37/20"
+          ],
+          "H": [
+            "3/2",
+            "21/10"
+          ],
+          "I": [
+            "21/10",
+            "21/10"
+          ],
+          "J": [
+            "21/10",
+            "3/2"
+          ],
+          "K00": [
+            "0",
+            "0"
+          ],
+          "K04": [
+            "0",
+            "2+4/5*sqrt(5)"
+          ],
+          "K40": [
+            "2+4/5*sqrt(5)",
+            "0"
+          ],
+          "K44": [
+            "2+4/5*sqrt(5)",
+            "2+4/5*sqrt(5)"
+          ],
+          "L09": [
+            "0",
+            "9/10"
+          ],
+          "L185": [
+            "0",
+            "37/20"
+          ],
+          "LS1": [
+            "0",
+            "1+4/5*sqrt(5)"
+          ],
+          "R1": [
+            "2+4/5*sqrt(5)",
+            "1"
+          ],
+          "RC": [
+            "2+4/5*sqrt(5)",
+            "1+2/5*sqrt(5)"
+          ],
+          "RS1": [
+            "2+4/5*sqrt(5)",
+            "1+4/5*sqrt(5)"
+          ],
+          "TOP1": [
+            "1",
+            "2+4/5*sqrt(5)"
+          ],
+          "TOPC": [
+            "1+2/5*sqrt(5)",
+            "2+4/5*sqrt(5)"
+          ],
+          "TOPR": [
+            "1+4/5*sqrt(5)",
+            "2+4/5*sqrt(5)"
+          ]
+        }
+      },
+      "vertex_count": 28
+    },
+    "outer_cover": {
+      "inventory": {
+        "lemma1": 4,
+        "lemma2_cap": 1,
+        "lemma3": 1,
+        "lemma4": 7,
+        "total": 13
+      },
+      "lemma1_corner_rectangles": [
+        [
+          "K00",
+          "L09",
+          "A1",
+          "BOT1"
+        ],
+        [
+          "BOTR",
+          "B",
+          "R1",
+          "K40"
+        ],
+        [
+          "LS1",
+          "K04",
+          "TOP1",
+          "F"
+        ],
+        [
+          "D",
+          "TOPR",
+          "K44",
+          "RS1"
+        ]
+      ],
+      "lemma2_bottom_cap": {
+        "squared_edge_lengths": {
+          "A1-A2": "4/5",
+          "A1-A3": "621/2500",
+          "A2-A3": "621/2500"
+        },
+        "vertices": [
+          "A1",
+          "A3",
+          "A2"
+        ]
+      },
+      "lemma3_bottom_rectangle": {
+        "a": "2/5*sqrt(5)",
+        "a_plus_2b": "9/5+2/5*sqrt(5)",
+        "b": "9/10",
+        "condition_a_plus_2b_at_most_2sqrt2": true,
+        "polygon": [
+          "BOT1",
+          "A1",
+          "A2",
+          "BOTC"
+        ]
+      },
+      "lemma4_quadrilaterals": [
+        {
+          "a": "2/5*sqrt(5)",
+          "b": "9/10",
+          "distance_squared": "81/100",
+          "id": "A2_B",
+          "origin": [
+            "1+4/5*sqrt(5)",
+            "0"
+          ],
+          "polygon": [
+            "BOTC",
+            "A2",
+            "B",
+            "BOTR"
+          ],
+          "threshold": {
+            "cubic_coefficients_low_degree_first": [
+              "-1/5",
+              "19/5-4/5*sqrt(5)",
+              "-2-4/5*sqrt(5)",
+              "2"
+            ],
+            "derivative_signs": [
+              1,
+              -1,
+              1
+            ],
+            "f_lower": "84733829306732284009805880146620121/92652081039450000000000000000000000",
+            "f_upper": "169467658613990272041287929549930731/185304162079000000000000000000000000",
+            "global_minimum_root_index": 1,
+            "parameter": "2/5*sqrt(5)",
+            "root_intervals": [
+              [
+                "128400289459/1000000000000",
+                "6420014473/50000000000"
+              ],
+              [
+                "853041620789/1000000000000",
+                "85304162079/100000000000"
+              ],
+              [
+                "3651941123/4000000000",
+                "912985280751/1000000000000"
+              ]
+            ],
+            "sturm_root_count_0_1": 3,
+            "unsquared_filter": {
+              "extraneous_root_indices": [
+                2
+              ],
+              "required_relation": "x<=a",
+              "valid_root_indices": [
+                0,
+                1
+              ]
+            }
+          },
+          "threshold_passed": true,
+          "u_axis": [
+            "-1",
+            "0"
+          ],
+          "v_axis": [
+            "0",
+            "1"
+          ]
+        },
+        {
+          "a": "2/5*sqrt(5)",
+          "b": "9/10",
+          "distance_squared": "81/100",
+          "id": "B_C",
+          "origin": [
+            "2+4/5*sqrt(5)",
+            "1"
+          ],
+          "polygon": [
+            "B",
+            "C",
+            "RC",
+            "R1"
+          ],
+          "threshold": {
+            "cubic_coefficients_low_degree_first": [
+              "-1/5",
+              "19/5-4/5*sqrt(5)",
+              "-2-4/5*sqrt(5)",
+              "2"
+            ],
+            "derivative_signs": [
+              1,
+              -1,
+              1
+            ],
+            "f_lower": "84733829306732284009805880146620121/92652081039450000000000000000000000",
+            "f_upper": "169467658613990272041287929549930731/185304162079000000000000000000000000",
+            "global_minimum_root_index": 1,
+            "parameter": "2/5*sqrt(5)",
+            "root_intervals": [
+              [
+                "128400289459/1000000000000",
+                "6420014473/50000000000"
+              ],
+              [
+                "853041620789/1000000000000",
+                "85304162079/100000000000"
+              ],
+              [
+                "3651941123/4000000000",
+                "912985280751/1000000000000"
+              ]
+            ],
+            "sturm_root_count_0_1": 3,
+            "unsquared_filter": {
+              "extraneous_root_indices": [
+                2
+              ],
+              "required_relation": "x<=a",
+              "valid_root_indices": [
+                0,
+                1
+              ]
+            }
+          },
+          "threshold_passed": true,
+          "u_axis": [
+            "0",
+            "1"
+          ],
+          "v_axis": [
+            "-1",
+            "0"
+          ]
+        },
+        {
+          "a": "2/5*sqrt(5)",
+          "b": "9/10",
+          "distance_squared": "81/100",
+          "id": "C_D",
+          "origin": [
+            "2+4/5*sqrt(5)",
+            "1+4/5*sqrt(5)"
+          ],
+          "polygon": [
+            "C",
+            "D",
+            "RS1",
+            "RC"
+          ],
+          "threshold": {
+            "cubic_coefficients_low_degree_first": [
+              "-1/5",
+              "19/5-4/5*sqrt(5)",
+              "-2-4/5*sqrt(5)",
+              "2"
+            ],
+            "derivative_signs": [
+              1,
+              -1,
+              1
+            ],
+            "f_lower": "84733829306732284009805880146620121/92652081039450000000000000000000000",
+            "f_upper": "169467658613990272041287929549930731/185304162079000000000000000000000000",
+            "global_minimum_root_index": 1,
+            "parameter": "2/5*sqrt(5)",
+            "root_intervals": [
+              [
+                "128400289459/1000000000000",
+                "6420014473/50000000000"
+              ],
+              [
+                "853041620789/1000000000000",
+                "85304162079/100000000000"
+              ],
+              [
+                "3651941123/4000000000",
+                "912985280751/1000000000000"
+              ]
+            ],
+            "sturm_root_count_0_1": 3,
+            "unsquared_filter": {
+              "extraneous_root_indices": [
+                2
+              ],
+              "required_relation": "x<=a",
+              "valid_root_indices": [
+                0,
+                1
+              ]
+            }
+          },
+          "threshold_passed": true,
+          "u_axis": [
+            "0",
+            "-1"
+          ],
+          "v_axis": [
+            "-1",
+            "0"
+          ]
+        },
+        {
+          "a": "2/5*sqrt(5)",
+          "b": "9/10",
+          "distance_squared": "81/100",
+          "id": "D_E",
+          "origin": [
+            "1+4/5*sqrt(5)",
+            "2+4/5*sqrt(5)"
+          ],
+          "polygon": [
+            "E",
+            "TOPC",
+            "TOPR",
+            "D"
+          ],
+          "threshold": {
+            "cubic_coefficients_low_degree_first": [
+              "-1/5",
+              "19/5-4/5*sqrt(5)",
+              "-2-4/5*sqrt(5)",
+              "2"
+            ],
+            "derivative_signs": [
+              1,
+              -1,
+              1
+            ],
+            "f_lower": "84733829306732284009805880146620121/92652081039450000000000000000000000",
+            "f_upper": "169467658613990272041287929549930731/185304162079000000000000000000000000",
+            "global_minimum_root_index": 1,
+            "parameter": "2/5*sqrt(5)",
+            "root_intervals": [
+              [
+                "128400289459/1000000000000",
+                "6420014473/50000000000"
+              ],
+              [
+                "853041620789/1000000000000",
+                "85304162079/100000000000"
+              ],
+              [
+                "3651941123/4000000000",
+                "912985280751/1000000000000"
+              ]
+            ],
+            "sturm_root_count_0_1": 3,
+            "unsquared_filter": {
+              "extraneous_root_indices": [
+                2
+              ],
+              "required_relation": "x<=a",
+              "valid_root_indices": [
+                0,
+                1
+              ]
+            }
+          },
+          "threshold_passed": true,
+          "u_axis": [
+            "-1",
+            "0"
+          ],
+          "v_axis": [
+            "0",
+            "-1"
+          ]
+        },
+        {
+          "a": "2/5*sqrt(5)",
+          "b": "9/10",
+          "distance_squared": "81/100",
+          "id": "E_F",
+          "origin": [
+            "1",
+            "2+4/5*sqrt(5)"
+          ],
+          "polygon": [
+            "F",
+            "TOP1",
+            "TOPC",
+            "E"
+          ],
+          "threshold": {
+            "cubic_coefficients_low_degree_first": [
+              "-1/5",
+              "19/5-4/5*sqrt(5)",
+              "-2-4/5*sqrt(5)",
+              "2"
+            ],
+            "derivative_signs": [
+              1,
+              -1,
+              1
+            ],
+            "f_lower": "84733829306732284009805880146620121/92652081039450000000000000000000000",
+            "f_upper": "169467658613990272041287929549930731/185304162079000000000000000000000000",
+            "global_minimum_root_index": 1,
+            "parameter": "2/5*sqrt(5)",
+            "root_intervals": [
+              [
+                "128400289459/1000000000000",
+                "6420014473/50000000000"
+              ],
+              [
+                "853041620789/1000000000000",
+                "85304162079/100000000000"
+              ],
+              [
+                "3651941123/4000000000",
+                "912985280751/1000000000000"
+              ]
+            ],
+            "sturm_root_count_0_1": 3,
+            "unsquared_filter": {
+              "extraneous_root_indices": [
+                2
+              ],
+              "required_relation": "x<=a",
+              "valid_root_indices": [
+                0,
+                1
+              ]
+            }
+          },
+          "threshold_passed": true,
+          "u_axis": [
+            "1",
+            "0"
+          ],
+          "v_axis": [
+            "0",
+            "-1"
+          ]
+        },
+        {
+          "a": "-17/20+4/5*sqrt(5)",
+          "b": "79/100",
+          "distance_squared": "19833/5000-34/25*sqrt(5)",
+          "id": "F_G",
+          "origin": [
+            "0",
+            "1+4/5*sqrt(5)"
+          ],
+          "polygon": [
+            "L185",
+            "LS1",
+            "F",
+            "G"
+          ],
+          "threshold": {
+            "cubic_coefficients_low_degree_first": [
+              "1169/400-34/25*sqrt(5)",
+              "3449/400-74/25*sqrt(5)",
+              "-3/10-8/5*sqrt(5)",
+              "2"
+            ],
+            "derivative_signs": [
+              1,
+              -1,
+              1
+            ],
+            "f_lower": "99397833533923163812714112738647441/120227554443375000000000000000000000",
+            "f_upper": "63614613461985482729388789325097439/76945634843800000000000000000000000",
+            "global_minimum_root_index": 1,
+            "parameter": "-17/20+4/5*sqrt(5)",
+            "root_intervals": [
+              [
+                "33867070787/500000000000",
+                "2709365663/40000000000"
+              ],
+              [
+                "461820435547/500000000000",
+                "184728174219/200000000000"
+              ],
+              [
+                "947479369331/1000000000000",
+                "236869842333/250000000000"
+              ]
+            ],
+            "sturm_root_count_0_1": 3,
+            "unsquared_filter": {
+              "extraneous_root_indices": [
+                2
+              ],
+              "required_relation": "x<=a",
+              "valid_root_indices": [
+                0,
+                1
+              ]
+            }
+          },
+          "threshold_passed": true,
+          "u_axis": [
+            "0",
+            "-1"
+          ],
+          "v_axis": [
+            "1",
+            "0"
+          ]
+        },
+        {
+          "a": "19/20",
+          "b": "79/100",
+          "distance_squared": "4733/5000",
+          "id": "G_A1",
+          "origin": [
+            "0",
+            "9/10"
+          ],
+          "polygon": [
+            "L09",
+            "L185",
+            "G",
+            "A1"
+          ],
+          "threshold": {
+            "cubic_coefficients_low_degree_first": [
+              "-39/400",
+              "801/400",
+              "-39/10",
+              "2"
+            ],
+            "derivative_signs": [
+              1,
+              -1,
+              1
+            ],
+            "f_lower": "38695412862150839193173180744887951/48481170446625000000000000000000000",
+            "f_upper": "386954128623390461939625294056025733/484811704466500000000000000000000000",
+            "global_minimum_root_index": 1,
+            "parameter": "19/20",
+            "root_intervals": [
+              [
+                "54264400181/1000000000000",
+                "27132200091/500000000000"
+              ],
+              [
+                "187849363573/200000000000",
+                "469623408933/500000000000"
+              ],
+              [
+                "956488781953/1000000000000",
+                "478244390977/500000000000"
+              ]
+            ],
+            "sturm_root_count_0_1": 3,
+            "unsquared_filter": {
+              "extraneous_root_indices": [
+                2
+              ],
+              "required_relation": "x<=a",
+              "valid_root_indices": [
+                0,
+                1
+              ]
+            }
+          },
+          "threshold_passed": true,
+          "u_axis": [
+            "0",
+            "1"
+          ],
+          "v_axis": [
+            "1",
+            "0"
+          ]
+        }
+      ]
+    },
+    "point_digest": "fbe5ac7694a2f1a12a91ab9c2585e19f4b563c1b0e11520a51ce128dac1f24e3",
+    "point_manifest": {
+      "A1": [
+        "1",
+        "9/10"
+      ],
+      "A2": [
+        "1+2/5*sqrt(5)",
+        "9/10"
+      ],
+      "A3": [
+        "1+1/5*sqrt(5)",
+        "28/25"
+      ],
+      "B": [
+        "1+4/5*sqrt(5)",
+        "1"
+      ],
+      "C": [
+        "11/10+4/5*sqrt(5)",
+        "1+2/5*sqrt(5)"
+      ],
+      "D": [
+        "1+4/5*sqrt(5)",
+        "1+4/5*sqrt(5)"
+      ],
+      "E": [
+        "1+2/5*sqrt(5)",
+        "11/10+4/5*sqrt(5)"
+      ],
+      "F": [
+        "1",
+        "1+4/5*sqrt(5)"
+      ],
+      "G": [
+        "79/100",
+        "37/20"
+      ],
+      "H": [
+        "3/2",
+        "21/10"
+      ],
+      "I": [
+        "21/10",
+        "21/10"
+      ],
+      "J": [
+        "21/10",
+        "3/2"
+      ]
+    },
+    "topology_digest": "c6b2c3d491b7b13f65e65f0d133d6eaeb3b493ba43676840341a57f96a149631",
+    "unavoidable": true
+  },
+  "five_node_chain": [
+    {
+      "certificate": {
+        "boxes": 11,
+        "conclusion": "at least one box avoids all ten points",
+        "figure13_points": 10
+      },
+      "claim": "eleven boxes and ten capacity-one points force an avoiding box",
+      "id": 1,
+      "passed": true
+    },
+    {
+      "certificate": {
+        "certified": true,
+        "representative": [
+          "K10",
+          "KC0",
+          "P1",
+          "P0"
+        ],
+        "statement": "a box avoiding all ten points has center in one of four exception rectangles related by K4"
+      },
+      "claim": "every Figure 13 avoider localizes to the K4 exception orbit",
+      "id": 2,
+      "passed": true
+    },
+    {
+      "certificate": {
+        "all_three_forced_in_same_box": true
+      },
+      "claim": "the localized avoiding box contains A1, A2, and A3",
+      "id": 3,
+      "passed": true
+    },
+    {
+      "certificate": {
+        "full_tiling": {
+          "all_boundary_edges_lie_on_container": true,
+          "all_internal_edges_have_two_incident_faces": true,
+          "boundary_edge_count": 16,
+          "edge_count": 53,
+          "euler_characteristic": 1,
+          "face_count": 26,
+          "noncrossing": true,
+          "signed_area_twice": "-72/5-32/5*sqrt(5)",
+          "vertex_containment": {
+            "all_vertices_in_closed_container": true,
+            "container_x_interval": [
+              "0",
+              "2+4/5*sqrt(5)"
+            ],
+            "container_y_interval": [
+              "0",
+              "2+4/5*sqrt(5)"
+            ],
+            "vertex_count": 28,
+            "vertices": {
+              "A1": [
+                "1",
+                "9/10"
+              ],
+              "A2": [
+                "1+2/5*sqrt(5)",
+                "9/10"
+              ],
+              "A3": [
+                "1+1/5*sqrt(5)",
+                "28/25"
+              ],
+              "B": [
+                "1+4/5*sqrt(5)",
+                "1"
+              ],
+              "BOT1": [
+                "1",
+                "0"
+              ],
+              "BOTC": [
+                "1+2/5*sqrt(5)",
+                "0"
+              ],
+              "BOTR": [
+                "1+4/5*sqrt(5)",
+                "0"
+              ],
+              "C": [
+                "11/10+4/5*sqrt(5)",
+                "1+2/5*sqrt(5)"
+              ],
+              "D": [
+                "1+4/5*sqrt(5)",
+                "1+4/5*sqrt(5)"
+              ],
+              "E": [
+                "1+2/5*sqrt(5)",
+                "11/10+4/5*sqrt(5)"
+              ],
+              "F": [
+                "1",
+                "1+4/5*sqrt(5)"
+              ],
+              "G": [
+                "79/100",
+                "37/20"
+              ],
+              "H": [
+                "3/2",
+                "21/10"
+              ],
+              "I": [
+                "21/10",
+                "21/10"
+              ],
+              "J": [
+                "21/10",
+                "3/2"
+              ],
+              "K00": [
+                "0",
+                "0"
+              ],
+              "K04": [
+                "0",
+                "2+4/5*sqrt(5)"
+              ],
+              "K40": [
+                "2+4/5*sqrt(5)",
+                "0"
+              ],
+              "K44": [
+                "2+4/5*sqrt(5)",
+                "2+4/5*sqrt(5)"
+              ],
+              "L09": [
+                "0",
+                "9/10"
+              ],
+              "L185": [
+                "0",
+                "37/20"
+              ],
+              "LS1": [
+                "0",
+                "1+4/5*sqrt(5)"
+              ],
+              "R1": [
+                "2+4/5*sqrt(5)",
+                "1"
+              ],
+              "RC": [
+                "2+4/5*sqrt(5)",
+                "1+2/5*sqrt(5)"
+              ],
+              "RS1": [
+                "2+4/5*sqrt(5)",
+                "1+4/5*sqrt(5)"
+              ],
+              "TOP1": [
+                "1",
+                "2+4/5*sqrt(5)"
+              ],
+              "TOPC": [
+                "1+2/5*sqrt(5)",
+                "2+4/5*sqrt(5)"
+              ],
+              "TOPR": [
+                "1+4/5*sqrt(5)",
+                "2+4/5*sqrt(5)"
+              ]
+            }
+          },
+          "vertex_count": 28
+        },
+        "unavoidable": true
+      },
+      "claim": "the repaired Figure 14 twelve-point set is unavoidable",
+      "id": 4,
+      "passed": true
+    },
+    {
+      "certificate": {
+        "consumption_semantics": "at least these three points; consuming more only strengthens the count",
+        "contradiction": "10>9",
+        "remaining_boxes": 10,
+        "remaining_figure14_points": 9,
+        "special_box_consumes": 3
+      },
+      "claim": "one box consuming three points leaves ten boxes for nine points",
+      "id": 5,
+      "passed": true
+    }
+  ],
+  "hypothesis": "H-041",
+  "schema_version": 1,
+  "selftests": {
+    "bad_threshold_rejected": true,
+    "d4_misuse_rejected": true,
+    "duplicate_record_node_rejected": true,
+    "duplicated_edge_rejected": true,
+    "duplicated_face_rejected": true,
+    "extraneous_root_rejected": true,
+    "omitted_edge_rejected": true,
+    "omitted_face_rejected": true,
+    "outside_tiling_vertex_rejected": true,
+    "printed_g_080_full_cover_rejected": true,
+    "printed_g_080_threshold_failure_certified": true,
+    "stale_record_source_rejected": true,
+    "weakened_capacity_rejected": true
+  },
+  "source_binding": {
+    "decisive_runtime_hashes_verified": [
+      "pdf_sha256",
+      "raw_source_sha256"
+    ],
+    "figure_page": 9,
+    "independent_vector_extraction": {
+      "decisive": false,
+      "pdftocairo_page9_svg_sha256": "95c80e60a018a19c01ebe6a681acfc5a1833c0beb5b433ce200a55df58127d82",
+      "role": "provenance attestation only; exact formulas and topology decide",
+      "runtime_verified": false,
+      "topology_path_sha256": "2aa5004d2e86b1a7be3d9c6463880b8a797e19b8a0999489420c6889357f4839"
+    },
+    "paper": "Walter Stromquist, Packing 10 or 11 Unit Squares in a Square (2003)",
+    "pdf": "resources/papers/stromquist-2003-packing-10-or-11-unit-squares.pdf",
+    "pdf_sha256": "146ac14a015910a95d0c25bf986f6073bcccd21a29ee754a45dcc0d4224d5e0b",
+    "printed_G_token_present": true,
+    "raw_source": "resources/papers/stromquist-2003-packing-10-or-11-unit-squares.raw.md",
+    "raw_source_sha256": "5808f3152c2d3a409c54d1f6ebb2636b7500eb22d489ccf9908435007d8a1d6b"
+  },
+  "source_distinct_repair": {
+    "changed_coordinates": [
+      {
+        "point": "G",
+        "printed": [
+          "4/5",
+          "37/20"
+        ],
+        "repaired": [
+          "79/100",
+          "37/20"
+        ]
+      }
+    ],
+    "printed_point_digest": "62868418be08db7c8bf8f21c7cb6d66ac500b1d7b7f0ce593a7703b8e2c4ea0b",
+    "repaired_point_digest": "fbe5ac7694a2f1a12a91ab9c2585e19f4b563c1b0e11520a51ce128dac1f24e3",
+    "source_attribution": "repair proposed after H-010 falsification; not Stromquist's set"
+  },
+  "subject": {
+    "box_semantics": "pairwise-disjoint open squares of side strictly greater than 1",
+    "container_side": "2+4/5*sqrt(5)",
+    "field": "Q(sqrt(5))",
+    "n": 11
+  },
+  "triple_forcing": {
+    "A1": {
+      "complement_triangle": {
+        "squared_edge_lengths": {
+          "A1-P0": "1/100",
+          "A1-P1": "81/100",
+          "P0-P1": "4/5"
+        },
+        "vertices": [
+          "A1",
+          "P1",
+          "P0"
+        ]
+      },
+      "lemma4": {
+        "a": "2/5*sqrt(5)",
+        "b": "9/10",
+        "distance_squared": "81/100",
+        "id": "force_A1",
+        "origin": [
+          "1+2/5*sqrt(5)",
+          "0"
+        ],
+        "polygon": [
+          "BASE1",
+          "BASEC",
+          "P1",
+          "A1"
+        ],
+        "threshold": {
+          "cubic_coefficients_low_degree_first": [
+            "-1/5",
+            "19/5-4/5*sqrt(5)",
+            "-2-4/5*sqrt(5)",
+            "2"
+          ],
+          "derivative_signs": [
+            1,
+            -1,
+            1
+          ],
+          "f_lower": "84733829306732284009805880146620121/92652081039450000000000000000000000",
+          "f_upper": "169467658613990272041287929549930731/185304162079000000000000000000000000",
+          "global_minimum_root_index": 1,
+          "parameter": "2/5*sqrt(5)",
+          "root_intervals": [
+            [
+              "128400289459/1000000000000",
+              "6420014473/50000000000"
+            ],
+            [
+              "853041620789/1000000000000",
+              "85304162079/100000000000"
+            ],
+            [
+              "3651941123/4000000000",
+              "912985280751/1000000000000"
+            ]
+          ],
+          "sturm_root_count_0_1": 3,
+          "unsquared_filter": {
+            "extraneous_root_indices": [
+              2
+            ],
+            "required_relation": "x<=a",
+            "valid_root_indices": [
+              0,
+              1
+            ]
+          }
+        },
+        "threshold_passed": true,
+        "u_axis": [
+          "-1",
+          "0"
+        ],
+        "v_axis": [
+          "0",
+          "1"
+        ]
+      },
+      "partition": {
+        "edge_count": 6,
+        "face_count": 2,
+        "noncrossing": true,
+        "signed_area_twice": "4/5*sqrt(5)"
+      }
+    },
+    "A2": {
+      "complement_triangle": {
+        "squared_edge_lengths": {
+          "A2-P0": "81/100",
+          "A2-P1": "1/100",
+          "P0-P1": "4/5"
+        },
+        "vertices": [
+          "P0",
+          "A2",
+          "P1"
+        ]
+      },
+      "lemma4": {
+        "a": "2/5*sqrt(5)",
+        "b": "9/10",
+        "distance_squared": "81/100",
+        "id": "force_A2",
+        "origin": [
+          "1",
+          "0"
+        ],
+        "polygon": [
+          "BASE1",
+          "BASEC",
+          "A2",
+          "P0"
+        ],
+        "threshold": {
+          "cubic_coefficients_low_degree_first": [
+            "-1/5",
+            "19/5-4/5*sqrt(5)",
+            "-2-4/5*sqrt(5)",
+            "2"
+          ],
+          "derivative_signs": [
+            1,
+            -1,
+            1
+          ],
+          "f_lower": "84733829306732284009805880146620121/92652081039450000000000000000000000",
+          "f_upper": "169467658613990272041287929549930731/185304162079000000000000000000000000",
+          "global_minimum_root_index": 1,
+          "parameter": "2/5*sqrt(5)",
+          "root_intervals": [
+            [
+              "128400289459/1000000000000",
+              "6420014473/50000000000"
+            ],
+            [
+              "853041620789/1000000000000",
+              "85304162079/100000000000"
+            ],
+            [
+              "3651941123/4000000000",
+              "912985280751/1000000000000"
+            ]
+          ],
+          "sturm_root_count_0_1": 3,
+          "unsquared_filter": {
+            "extraneous_root_indices": [
+              2
+            ],
+            "required_relation": "x<=a",
+            "valid_root_indices": [
+              0,
+              1
+            ]
+          }
+        },
+        "threshold_passed": true,
+        "u_axis": [
+          "1",
+          "0"
+        ],
+        "v_axis": [
+          "0",
+          "1"
+        ]
+      },
+      "partition": {
+        "edge_count": 6,
+        "face_count": 2,
+        "noncrossing": true,
+        "signed_area_twice": "4/5*sqrt(5)"
+      }
+    },
+    "A3": {
+      "exact_constants": {
+        "D_monotonicity_squared_gap_coefficients": [
+          "0",
+          "0",
+          "1"
+        ],
+        "D_outside_central_angle_interval_strictly_exceeds_a": true,
+        "D_theta0": "2/5*sqrt(5)",
+        "critical_height_increases_from_theta0_to_45_degrees": true,
+        "critical_height_strict_lower_bound": "28/25",
+        "height_derivative_squared_gap_coefficients": [
+          "4/5",
+          "2-4/5*sqrt(5)",
+          "4/5",
+          "4-4/5*sqrt(5)"
+        ],
+        "identities_replayed_exactly": true,
+        "sin_2theta0": "5-2*sqrt(5)",
+        "sin_theta0_plus_cos_theta0": "-1+1*sqrt(5)",
+        "squared_inequality_sign_premises": {
+          "D_factor_left_side_positive": true,
+          "D_factor_right_side_positive": true,
+          "D_squared_gap_t_squared_strictly_positive_for_t_gt_zero": true,
+          "all_sign_premises_checked_before_squaring": true,
+          "angle_domain": "0<theta<=45 degrees, hence 0<t=tan(theta)<=1",
+          "height_derivative_left_side_positive": true,
+          "height_derivative_right_side_positive": true,
+          "height_derivative_squared_gap_positive": true,
+          "sin_2theta0_in_open_unit_interval": true,
+          "sin_theta0_cos_theta0_positive": true,
+          "sin_theta0_plus_cos_theta0_positive": true,
+          "tangent_lower_bound_in_open_unit_interval": true,
+          "tangent_map_derivative": "2(1-t^2)/(1+t^2)^2 > 0 for 0<t<1",
+          "tangent_map_derivative_positive_on_0_1": true
+        },
+        "tan_theta0_strict_lower_bound": "3/25*sqrt(5)"
+      },
+      "exception_contained": true,
+      "lemma6_pentagon": [
+        "BASE1",
+        "BASEC",
+        "P1",
+        "A3",
+        "P0"
+      ]
+    },
+    "all_three_forced_in_same_box": true,
+    "avoided_container_boundary": "y=0",
+    "avoided_figure13_points": [
+      "P0",
+      "P1"
+    ],
+    "logical_conclusion": "avoidance of y=0, P0, and P1 leaves A1, A2, and A3 as the forced alternatives",
+    "representative_exception": [
+      "BASE1",
+      "BASEC",
+      "P1",
+      "P0"
+    ],
+    "symmetry_normalization": {
+      "action": "apply the K4 isometry carrying the actual exception to the representative",
+      "scope": "reflect the container and every box before defining the repaired Figure 14 set",
+      "unavoidability_invariance": "the inverse reflection carries the certificate back"
+    }
+  }
+}

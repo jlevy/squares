@@ -359,8 +359,10 @@ describes his method, so a third proof technique may exist there.
 The now-archived **Stromquist 1984 memoranda** recalibrate the lower-bound lane in a
 different way: Memo III’s detailed theorem is restricted to `0°/45°`, while its
 unrestricted `2 + (4/5)√5` result is only asserted.
-It supplies no Figure 14 cover or repair, so the executable priority remains an
-independent repaired certificate rather than further source reconstruction.
+It supplies no Figure 14 cover or repair.
+Exp-016/017 have now replaced further source reconstruction as the calibration: the
+first exactly falsifies the printed cover and the second exactly certifies a
+source-distinct one-coordinate repair.
 **Gensane–Ryckelynck’s contact-class enumeration** (did their billiard algorithm record
 which `n = 11` cells it explored?)
 would tell this program which parts of cell space a serious prior search already covered
@@ -689,7 +691,7 @@ Runtime estimates are provisional until D-101’s timing boundary is repaired.
 | 9 | Adaptive splitting (H-029) | exact synthetic controls, then one `n=10` target event | 1 h | coverage/reference failure or worse variance per pair-test than restarts | controls pass and inverse-variance efficiency improves fourfold |
 | 10 | Fractional-piercing ceiling (H-034) | one `s` inside the `n=11` gap | 1 h pilot | discretization bounds do not narrow monotonically | certified bounds move toward the decision threshold |
 | 11 | Restricted-orientation exclusion (H-036) | exact `0°/45°` theorem as known answer | 2 h | interval boxes do not reproduce Stromquist’s case | a nonzero angle neighborhood is certified or falsified |
-| 12 | `s(12)` proof CEGIS (H-039) | Stromquist reconstruction plus one candidate resource | 4 h | every candidate has an escaping pose with no structural lesson | a certificate survives independent continuous falsification |
+| 12 | `s(12)` proof CEGIS (H-039) | exp-016/017 failure-and-success calibration plus one candidate resource | 4 h | every candidate has an escaping pose with no structural lesson | a certificate survives independent continuous falsification |
 | 13 | `m²-3` extension (H-033) | map Bentz’s `m=7` steps onto `m=8` | one agent-day | a forcing step fails with a retained counterconfiguration | a moving-resource invariant generalizes symbolically |
 | 14 | Record-angle compressibility (H-025) | verified `n=17,29` poses | 1 h | three-class refit damages side beyond threshold | held-out records show stable low effective rank |
 | 15 | Rich descriptor prediction | proved `n≤10` atlas after identity | 1 h | no held-out gain over contact count | rank/load/angle descriptors reduce log loss by the declared margin |
@@ -756,9 +758,10 @@ existing spine.
    structure persists as the container side changes.
 3. **Exploit held-out records.** Reproduce one UnitSquare parent-to-child improvement
    before trusting a surgery proposer on an unseen `n`.
-4. **Diversify the proof lane.** Reproduce Stromquist’s conditional mechanism, pilot
-   certified fractional piercing, attempt a robust restricted-angle theorem, and attack
-   Bentz’s next `m²-3` case at `n=61` as independent programs.
+4. **Exploit and diversify the proof lane.** Use exp-016/017 as the calibrated
+   falsifier/certificate pair for H-039, then separately pilot certified fractional
+   piercing, attempt a robust restricted-angle theorem, and attack Bentz’s next `m²-3`
+   case at `n=61`.
 5. **Use fast-first successive halving.** Give mechanisms short comparable screens;
    expand only on valid response curves; reserve unattended compute for checkpointable
    experiments with independent evaluators and a priced queue.

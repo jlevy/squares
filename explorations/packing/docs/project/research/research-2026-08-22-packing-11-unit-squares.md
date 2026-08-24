@@ -37,10 +37,10 @@ or asserted-but-unverified.
 
 The motivating observation is that `n = 11` is the smallest case of a natural,
 easily-stated geometry problem that remains **unsolved** after nearly fifty years.
-The best known packing dates from 1979 and has never been improved; the best published
-lower-bound value dates from 2003. This audit found a gap in its printed proof and
-preregistered a one-coordinate repair.
-A gap of roughly 0.088 in the side length separates them.
+The best known packing dates from 1979 and has never been improved; the lower-bound
+value was published in 2003. This audit found a gap in its printed proof, preregistered
+a one-coordinate repair, and then certified that repair exactly in exp-017. A gap of
+roughly 0.088 in the side length separates them.
 Understanding precisely *where* that gap comes from — and why the available proof
 technique cannot close it — is the substance of this document.
 
@@ -118,14 +118,15 @@ The entire difficulty of the problem lies between them.
 | Quantity | Value | Status | Source |
 | --- | --- | --- | --- |
 | Area lower bound | `√11 ≈ 3.316625` | Trivial | — |
-| **Best published lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Published proof has gap D-152** | **[Stromquist 2003]**, Thm 2; repeated in **[Friedman DS7]** |
+| **Best certified lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Exact here; published proof has gap D-152** | [exp-017](../../../campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md); value stated in **[Stromquist 2003]**, Thm 2 |
 | **Best known packing (upper bound)** | `≈ 3.877084` | **Construction only** | Trump 1979, via **[Friedman DS7]**, **[Kingbird]** |
 | Lower bound for 0°/45°-only packings | `2 + (4/3)√2 ≈ 3.885618` | **Proved** | **[Stromquist 2003]**, Thm 3 |
 | Grid upper bound | `4` | Trivial | — |
 
-The published interval is `[3.788854…, 3.877084…]`, of width `≈ 0.088230`. Until H-041’s
-repaired certificate is complete, the strongest lower bound this repository treats as
-independently established is the monotonicity consequence `s(11) ≥ s(10) = 3 + √2/2`.
+The certified interval is `[3.788854…, 3.877084…]`, of width `≈ 0.088230`. Exp-017
+independently establishes its lower endpoint with a source-distinct repair; Stromquist’s
+proof remains false as printed, so the repaired coordinate and certificate are not
+attributed to him.
 
 Two facts about this table are worth stating explicitly because they are frequently
 garbled:
@@ -300,8 +301,10 @@ s(11) ≥ 2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854
 
 This is a **lower bound only**. It does not match Trump’s `≈ 3.877084`, and Stromquist
 makes no claim that it does.
-D-152 invalidates the printed Figure 14 cover; the statement therefore remains a
-published claim until the separately preregistered repair is fully checked.
+D-152 invalidates the printed Figure 14 cover.
+Exp-017 separately proves the same inequality with the preregistered source-distinct
+repair `G'=(.79,1.85)`; this restores the numerical lower bound without retroactively
+validating the published proof.
 
 **Theorem 3.** Let `s = 2 + (4/3)√2 ≈ 3.886`. Then eleven non-intersecting boxes cannot
 exist inside a square of side `s` *if each box has orientation 0° or 45° with respect to
@@ -379,11 +382,11 @@ A = { (1, .9),  (s/2, .9) ≈ (1.894, .9),  (1 + √(1/5), 1.12) ≈ (1.447, 1.1
 The paper asserts that nonavoidance lemmas cover every region of that second figure.
 If that assertion held, one box swallowing three points would leave nine points for the
 remaining ten boxes, and the pigeonhole would close.
-The source audit below finds that the printed twelve-point set is not unavoidable, so
-this is the intended implication, not a premise this repository now treats as
-established.
+The source audit below finds that the printed twelve-point set is not unavoidable.
+Exp-017 proves the corresponding implication only for its explicitly different repaired
+set.
 
-**A source-proof gap and a minimal proposed repair.** Let `L=10001/10000`, take
+**A source-proof gap and an exact one-coordinate repair.** Let `L=10001/10000`, take
 `cos(theta)=10/sqrt(829)` and `sin(theta)=27/sqrt(829)`, and center an open square at
 `(37L/(2sqrt(829)),11/8)`. Its left support is `x=0`; its other three container
 clearances are strict.
@@ -394,13 +397,19 @@ The failed drawn cell is precise.
 The outer quadrilateral from `G` to `A1=(1,.9)` invokes Lemma 4 with `(a,b)=(.95,.8)`,
 but the true threshold is `f(.95)≈.798153437834`. This invalidates the proof as printed;
 it does not refute the numerical lower bound.
-The paper explicitly says Figure 14 has slack, and the vector partition supports that
-diagnosis: moving only `G.x` from `.8` to `.79` makes the failed inequality strict,
-preserves the other outer-cell inequalities, and leaves all thirteen interior triangle
-edges shorter than one.
 Exp-016 terminally rejects the original H-010 claim by exact retained replay.
-H-041 preregisters that repair and requires a complete independent cover before the
-lower bound is promoted again.
+H-041 was registered before testing the nearby repair that moves only `G.x` from `.8` to
+`.79`. Exp-017 then certifies the complete chain: an exact 18-cell Figure 13 cover plus
+four exceptions in one Klein-four orbit, the same-box A-triple, an exact repaired Figure
+14 tiling with 26 faces, 28 vertices, and 53 edges, and the final `3+9` capacity count.
+Thirteen mutations exercise source identity, tiling completeness, boundary closure, sign
+premises, capacity, and retained-record coverage.
+Uniform scaling of any hypothetical side-`<s` unit-square packing into the side-`s`
+container converts it to the strict open-box setting, so the exact certificate proves
+`s(11) >= 2 + 4/sqrt(5)`.
+
+The repair is a result of this repository, not part of the paper and not externally
+peer-reviewed. It restores the lower-bound value without closing the gap to Trump.
 
 **Theorem 3 has exactly the same shape** — ten points as in the first figure but at the
 new `s`, the 45°-strengthened Lemma 7 forcing an escaping box into a known position, and
@@ -690,9 +699,10 @@ marks an `n` the catalogue does not picture, where the trivial `⌈√n⌉` pack
 the best known. `deg` is the algebraic degree of the conjectured optimum where the
 catalogue records a minimal polynomial.
 Lower bounds are the strongest of four sources: the area bound `√n`, Nagamochi’s general
-closed form, monotonicity from the largest proved `m ≤ n`, and the published value from
-Stromquist’s Theorem 2 for `n ≥ 11`. D-152 means the generated frontier rows need a
-proof-status qualification until H-041’s repaired certificate is complete.
+closed form, monotonicity from the largest proved `m ≤ n`, and the value stated in
+Stromquist’s Theorem 2 for `n ≥ 11`. Exp-017 now supplies an exact source-distinct
+certificate for the last value; D-152 still requires every provenance display to say
+that the published Figure 14 proof is false as printed.
 
 This table and the solved-case table below are **generated** from
 [`explorations/packing/frontier/`](../../../frontier/README.md), where the same facts
@@ -1569,11 +1579,12 @@ These are frequently conflated with the present problem in casual sources:
 
 ## Key Insights
 
-1. **The problem is open, and the gap is structural, not incidental.** The literature
-   records `[3.788854, 3.877084]`, but D-152 leaves the printed lower-bound proof
-   incomplete until H-041’s repair is certified.
-   Both numerical endpoints have stood unimproved for over two decades (lower) and
-   nearly five (upper).
+1. **The problem is open, and the gap is structural, not incidental.** The current
+   certified interval is `[3.788854, 3.877084]`. D-152 leaves the published lower-bound
+   proof false as printed; exp-017 independently certifies the lower value with H-041’s
+   source-distinct repair.
+   The numerical endpoints themselves have stood unimproved for over two decades (lower)
+   and nearly five (upper).
 
 2. **Gardner’s conjecture was settled without solving the problem.** Stromquist proved
    the *necessity* of oblique tilts by bounding the 0°/45° class from below at
@@ -1912,9 +1923,10 @@ marked **[secondary]** where it does.
 A reader auditing a claim should be able to tell which case they are in without leaving
 the repository.
 
-Recovering Stromquist’s memoranda closes the largest provenance gap, but it does not
-close the 2003 proof gap: Memo III asserts the unrestricted lower bound without the
-mechanism needed to check it.
+Recovering Stromquist’s memoranda closes the largest provenance gap, but the memoranda
+do not close the 2003 proof gap: Memo III asserts the unrestricted lower bound without
+the mechanism needed to check it.
+Exp-017 instead supplies an explicitly source-distinct exact repair.
 The highest-priority remaining acquisition is El Moumni (1999), which holds published
 priority for three values of `s(n)` that most summaries credit elsewhere.
 Trump (2023) and Arslanov–Bui (2025) remain important for local optimality and the
@@ -2046,6 +2058,13 @@ assertion of the unrestricted `2 + (4/5)√5` bound.
 No memo supplies the later Figure 14 coordinates, cover routing, or a coordinate repair.
 The recovery corrects the proof history and source ledger without upgrading the
 evidential status of the 2003 lower-bound proof.
+
+**Sixth pass — exact falsification and source-distinct repair (2026-08-24).** Exp-016
+certifies a strict escape from the printed Figure 14 set.
+Exp-017 changes only `G=(.8,1.85)` to `G'=(.79,1.85)` and certifies the full finite
+cover and capacity argument.
+The published proof remains false as printed, while the numerical inequality now has an
+independent exact computer-assisted certificate in this repository.
 
 ## References
 

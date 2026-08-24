@@ -13,12 +13,13 @@
 | [session-005](agent-sessions/session-005-h024-fast-falsifier.md) | completed | insight | think-w5rb | 3 | Begin H-026 from Trump's exact active-contact table, with complete one-sided branch enumeration and replayable tangent-cone certificates as the guarded deliverable. |
 | [session-006](agent-sessions/session-006-h026-exact-tangent.md) | completed | insight | think-qd9t | 2 | Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and move the fast rotation to H-032's exact n=3 quotient-family control. |
 | [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | insight | think-n82j | 3 | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
+| [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | correctness | think-ciwv | 3 | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
 
 ## Series
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 16 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 17 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -64,7 +65,7 @@
 | H-038 | open question | proof | Which algebraic number fields, minimal-polynomial degrees, Galois grou |  | 0 |  |
 | H-039 | open question | proof | Can a checked extension of Stromquist's conditional forcing or another |  | 0 |  |
 | H-040 | blocked | search | After a known-answer n = 5 control, pivoting across one active separat | n: 5 10 | 0 |  |
-| H-041 | open | proof | At s = 2 + 4/sqrt(5), replacing the printed Figure 14 point G = (4/5,  | n: 11 | 0 |  |
+| H-041 | confirmed | proof | At s = 2 + 4/sqrt(5), replacing the printed Figure 14 point G = (4/5,  | n: 11* | 1 | 90m agent + 1s wall |
 
 ## Rounds
 
@@ -82,7 +83,7 @@
 | exp-012 | series-000 | 29 | openai-codex | H-024 | The reconstructed, numerically valid n = 29 witness has six unambiguous orientation classes, exceeding H-024's preregistered upper bound of three and refuting the universal corpus claim at its first stop cell. |
 | exp-016 | series-000 | 11 | openai-codex | H-010 | The printed Figure 14 set is avoidable, so node four and therefore the five-node conjunction fail; this rejects the proof as printed, not the numerical lower bound. |
 
-### accepted (7)
+### accepted (8)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -93,8 +94,9 @@
 | exp-013 | series-000 | 11 | openai-codex | H-026 | No nonzero linearized direction survives. All 128 derivative-distinct matrices have exact zero-cone certificates, covering all 512 raw nonlinear feature selections with zero unresolved branches. |
 | exp-014 | series-000 | 3 | openai-codex | H-032 | F_3(2) is two labelled 12-cycles; its S3 quotient is one four-cycle and its D4 x S3 quotient is the interval [0,1/2], with every physical configuration axis-aligned and all three quotient strata replayed exactly. |
 | exp-015 | series-000 | 4 | openai-codex | H-032 | Every physical packing is the axis-aligned 2 x 2 grid. F_4(2) consists of 24 isolated labelled states, and both declared symmetry quotients are one point. |
+| exp-017 | series-000 | 11 | openai-codex | H-041 | The one-coordinate repair closes the unique failed outer cell while preserving a complete exact cover, so eleven freely oriented unit squares require side at least 2 + 4/sqrt(5). |
 
 ## Effort
 
-16 rounds, 602 agent-minutes, 24.0 wall-minutes.
+17 rounds, 692 agent-minutes, 24.0 wall-minutes.
 

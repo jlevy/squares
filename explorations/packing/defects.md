@@ -2,7 +2,7 @@
 
 # Defect log
 
-160 defects recorded across the packing toolchain.
+161 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -21,11 +21,11 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `review` | 111 | a human or agent reading the work against a checklist |
 | `anomaly` | 6 | a result that made no sense, chased down |
 | `inspection` | 19 | reading the code or the design with intent |
-| `drift_check` | 7 | a generated view disagreeing with its source |
+| `drift_check` | 8 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 6 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 6 of 160, and none of the 55 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 6 of 161, and none of the 55 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,7 +36,7 @@ The line worth reading twice: **the automated gate caught 6 of 160, and none of 
 | verifier | 4 |
 | record | 43 |
 | tooling | 38 |
-| docs | 53 |
+| docs | 54 |
 
 ## By kind
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 6 of 160, and none of 
 | --- | ---: |
 | soundness | 55 |
 | validity | 45 |
-| bookkeeping | 43 |
+| bookkeeping | 44 |
 | robustness | 13 |
 | performance | 4 |
 
@@ -309,3 +309,4 @@ This is the actionable list.
 | [D-158](tools/check_stromquist_repair.py) | 2026-08-24 | record | validity | flattering | `review` | medium | fixed | The first H-041 record blurred runtime source checks with unattached extraction hashes |
 | [D-159](resources/README.md) | 2026-08-24 | tooling | robustness |  | `drift_check` | medium | fixed | Scanned archive PDFs were misclassified as text by Git |
 | [D-160](defects.yaml) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | A broad H-010 integration patch updated D-002 instead of D-151 |
+| [D-161](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping | conservative | `drift_check` | medium | fixed | The synopsis did not track the live hypothesis count |

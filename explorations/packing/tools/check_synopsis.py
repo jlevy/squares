@@ -11,16 +11,17 @@ It cannot be generated: most of it is judgement, and the judgement is the point.
 So it is *reconciled* instead, the way `campaign/ideas.md` is -- the numbers and
 statuses it asserts must match the artifacts, and every artifact must appear.
 
-Six checks:
+Seven checks:
 
   1. every round's verdict in the roll-up matches its artifact
   2. every hypothesis's status matches the ledger's derived status
   3. the round count and effort totals match the ledger
   4. the defect count and per-class counts match `defects.yaml`
   5. no round, hypothesis or open defect is silently missing from the synopsis
-  6. every relative link and heading anchor resolves
+  6. the stated hypothesis-artifact count matches the registry directory
+  7. every relative link and heading anchor resolves
 
-Check 6 closes a real gap: `campaign/ledger.py` walks links under `campaign/`
+Check 7 closes a real gap: `campaign/ledger.py` walks links under `campaign/`
 only, so the root document's forty-odd references were unchecked.
 
 Usage:  python3 tools/check_synopsis.py
@@ -36,6 +37,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 SYNOPSIS = ROOT / "SYNOPSIS.md"
+HYPOTHESES = ROOT / "campaign/hypotheses"
 
 
 def front(path: Path) -> dict:
@@ -192,6 +194,23 @@ def spell(n: int) -> str:
     return _TENS[tens] if ones == 0 else f"{_TENS[tens]}-{_ONES[ones]}"
 
 
+def check_hypothesis_count(text: str) -> list[str]:
+    """The registry introduction states the number of hypothesis artifacts."""
+    total = len(list(HYPOTHESES.glob("H-*.md")))
+    section = re.search(
+        r"^## The Hypothesis Registry\s*$\n(?P<body>.*?)(?=^##\s|\Z)", text, re.M | re.S
+    )
+    if section is None:
+        return ["SYNOPSIS.md: has no Hypothesis Registry section"]
+    expected = (
+        rf"\b(?:{total}|{re.escape(spell(total))}) "
+        r"claims or open questions are codified as artifacts\b"
+    )
+    if not re.search(expected, section.group("body"), re.I):
+        return [f"SYNOPSIS.md: does not state the hypothesis artifact count ({total})"]
+    return []
+
+
 def check_defects(text: str) -> list[str]:
     """The defect count and per-class counts match the dataset."""
     data = yaml.safe_load((ROOT / "defects.yaml").read_text())
@@ -239,6 +258,7 @@ def main() -> int:
         check_links(text)
         + check_rounds(text)
         + check_hypotheses(text)
+        + check_hypothesis_count(text)
         + check_totals(text)
         + check_defects(text)
     )

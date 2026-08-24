@@ -1490,6 +1490,8 @@ Arslanov–Bui 2025. Those affect proof history, local-optimality claims, and co
 families. Stromquist’s three memoranda were recovered from the author’s site: Memo III
 proves the restricted `0°/45°` theorem but only asserts the unrestricted `2 + (4/5)√5`
 bound, so it does not repair the 2003 Figure 14 gap.
+Exp-016 subsequently refuted the printed cover and exp-017 independently certified a
+source-distinct one-coordinate repair.
 The remaining absences are correctly recorded, but the research program has no
 acquisition/retest cadence tied to decisions that depend on them.
 
@@ -2377,7 +2379,7 @@ capacity mutations. Generation plus complete-record replay takes `0.55` wall sec
 
 The verdict is deliberately narrow.
 It invalidates the 2003 proof as printed; it does not refute the numerical lower bound.
-H-041 was preregistered before checking the nearby repair `G'=(.79,1.85)` and is now
+H-041 was preregistered before checking the nearby repair `G'=(.79,1.85)` and was then
 executable. Its acceptance rule requires the complete Figure 13 and repaired Figure 14
 finite covers, every lemma premise and boundary case, and the final capacity
 implication—not merely failure of a new escape search.
@@ -2389,6 +2391,37 @@ D-154 through D-159 retain checker and archive hardening found before promotion.
 D-160 records a D-145 bookkeeping recurrence caught in this integration diff: a broad
 scalar patch briefly updated D-002 instead of D-151, and no generated view or commit was
 allowed to inherit it.
+
+## Fifth post-merge research result
+
+Exp-017 confirms H-041 under the criterion registered before its repaired cover was
+checked. It changes only Figure 14 point `G=(4/5,37/20)` to the source-distinct
+`G'=(79/100,37/20)` and certifies every implication needed for the lower bound.
+
+The retained exact record contains an 18-cell Figure 13 cover with four exceptional
+rectangles in one Klein-four orbit; exact Lemma 2, 4, and 6 premises forcing the same
+box to contain `A1,A2,A3`; and a repaired Figure 14 square tiling with 26 faces, 28
+vertices, and 53 edges.
+Its checker verifies vertex containment, edge incidence, container boundary,
+noncrossing, exact area, root selection, sign premises, and the final `3+9` capacity
+count. Thirteen targeted mutations all fire, and complete generation plus replay takes
+`0.70` wall seconds.
+
+Uniformly scaling any hypothetical packing below `S=2+4/sqrt(5)` into the side-`S`
+container produces eleven pairwise-disjoint open squares of side strictly greater than
+one. The repaired five-node certificate excludes them.
+This gives the repository an exact computer-assisted proof that `s(11) >= 2+4/sqrt(5)`.
+
+The provenance boundary is part of the result.
+Exp-016 remains a terminal refutation of the 2003 proof as printed; exp-017 does not
+rewrite that history or attribute `G'` to Stromquist.
+It independently restores the numerical inequality, has not undergone external peer
+review, and does not approach global optimality at Trump’s upper bound.
+The proof frontier can now use exp-016/017 as a two-sided falsifier/certificate
+calibration for H-039 at `n=12`. The integration also exposed D-161: the synopsis still
+reported forty hypotheses after H-041 made forty-one.
+The count now comes from the registry consistency check rather than another unguarded
+scalar.
 
 ## Post-merge operating disposition
 
