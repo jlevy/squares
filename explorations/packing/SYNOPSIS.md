@@ -41,6 +41,13 @@ Those principles govern four capabilities built so far:
    experiment record, because most soundness failures found so far pointed in the
    *flattering* direction and none was caught by the automated gate.
 
+Capability 2 is narrower than it sounds and the difference matters: this directory can
+**check** a packing whose exact algebraic description it is given, and cannot yet
+**produce** that description from a packing it found.
+[What Is Built](#what-is-built) states, component by component, what runs, what runs but
+cannot support the claim it appears to, and what is documented and unbuilt.
+Read it before citing any capability here.
+
 The strategy that organises lanes 3 and 4 is stated in
 [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md):
 **a validated map of terminal components is the intended deliverable, and records are
@@ -62,8 +69,9 @@ Nothing here duplicates what another owns.
 
 | Document | Owns |
 | --- | --- |
+| [`TUTORIAL.md`](TUTORIAL.md) | The conceptual on-ramp for a newcomer: the objects, why the approach is shaped this way, and what is established versus open. Owns no status—it defers here for all of it |
 | **This synopsis** | The state of the program: results, their status, the roll-up of rounds |
-| [Current handoff](docs/project/handoff-2026-08-23-quench-spine.md) | Where the work stands *today*: the critical path, the beads it maps to, and what to pick up next. Dated and disposable; this synopsis is the durable account |
+| [Historical quench-spine handoff](docs/project/handoff-2026-08-23-quench-spine.md) | A superseded 2026-08-23 checkpoint retained as provenance. Do not use it for current priority; use the basin confidence ladder and launch agenda |
 | [`README.md`](README.md) | The four-principle operating charter, what is in the directory, how to run it, and the index of the six research reports |
 | [`conventions.md`](conventions.md) | Every rule the directory runs on, and which are machine-checked |
 | [`defects.md`](defects.md) | Every bug and record defect, what caught it, and what now stops it recurring |
@@ -86,6 +94,164 @@ The code that produces the numbers: [`sqpack/verify.py`](sqpack/verify.py) decid
 validity exactly, [`sqpack/quench.py`](sqpack/quench.py) is the LP-in-cell quench,
 [`lp_cell.py`](lp_cell.py) is a second, independent implementation of the quench’s
 linear program, and [`sqsearch/`](sqsearch/) is the screening annealer.
+
+## What Is Built
+
+A documented method here is not necessarily an available one, and implementation status
+has three values rather than two.
+
+| Status | Means |
+| --- | --- |
+| **built** | Exists, runs, and is exercised by `./test.sh` |
+| **built, not admissible** | Runs and produces output, but that output cannot yet support the claim it looks like it supports. The blocking defect is named |
+| **unbuilt** | Documented, tracked as a bead, and not implemented. No result may assume it |
+
+Most of the risk in this project lives in the middle row, because a component that runs
+and prints a plausible number is the shape of every flattering soundness defect logged
+here.
+
+### The exact layer—built
+
+| Component | What it does |
+| --- | --- |
+| [`sqpack/field.py`](sqpack/field.py) | Exact arithmetic in `ℚ(α)`: exact zero test, exact sign by rational interval bisection |
+| [`sqpack/verify.py`](sqpack/verify.py) | Separating-axis validity, generic over the scalar type—exact or `f64` from one predicate |
+| [`sqpack/packings/trump11.py`](sqpack/packings/trump11.py) | The `n = 11` witness, exactly, in `ℚ(u)` |
+| [`derive_field.py`](derive_field.py) | Re-derives the degree-8 field from the published polynomial, factors over `ℚ`, and selects the root by isolating interval |
+| [`negative_control.py`](negative_control.py) | Demonstrates both float failure modes against the same packing |
+
+**One caveat, and it is critical.** [D-053](defects.md) is open: `NumberField` documents
+an irreducible minimal polynomial and an interval containing exactly one real root, but
+checks only an endpoint sign change.
+The built-in `n = 11` witness is independently checked, so **T-1** is unaffected.
+The *generic* path—bring your own packing and your own field—is not yet sound, and no
+third-party field metadata should be trusted through it until a Sturm-sequence check
+lands.
+
+### The refinement layer—built, with a floor
+
+[`sqpack/quench.py`](sqpack/quench.py) is the LP-in-cell quench with class bracketing,
+and [`lp_cell.py`](lp_cell.py) is an independent second formulation of the same feasible
+set. Both are built and agree to `4.4e-16` on Trump’s cell.
+
+Three named limits travel with every number they produce:
+
+- [D-021](defects.md)—the float LP solver has a noise floor of about `1e-11` in the
+  side. Nothing at the `polished` tier may claim a difference finer than that.
+  The general fix is an **exact LP over certified rational or algebraic coefficients,
+  which is unbuilt**; it is purely rational only for rational-coefficient cells.
+- [D-052](defects.md)—coordinatewise stopping is not a certified local optimum.
+  A quench that stops has stopped; it has not proved stationarity.
+- [D-126](defects.md)—the work budget is wall-clock time, so contention changes how many
+  LP solves a run performs.
+  Price basin experiments by retained work units, not by the clock.
+
+### The proposer layer—one instrument, and the interface is unbuilt
+
+[`sqsearch/`](sqsearch/) is the `f64` screening annealer, and it is the only proposer
+the campaign has run.
+Uniform multistart draws exist inside the census and the checkers, with the census
+declaring its regime; the proposer *interface*—the contract that would make two
+proposers comparable—is unbuilt.
+
+**Unbuilt, and each is a registered hypothesis with nothing behind it yet:** the
+proposer interface itself, the pair-test **meter** (so no two proposers have ever been
+compared at equal budget), δ-continuation, angle-class search *as a search*,
+neighbour-transfer seeding, MAP-Elites retention, and billiard/inflation.
+
+This is the campaign’s live bottleneck.
+The refiner takes the tested proved-control starts to residuals of `1e-15` and leaves
+the tested `n = 11` starts at `6e-02`, so proposal is where the gap is—and proposal is
+the layer with the fewest built parts.
+
+### The map layer—built, not admissible
+
+| Component | Runs | Why its output is not yet the thing it looks like |
+| --- | --- | --- |
+| [`sqpack/canonical.py`](sqpack/canonical.py) | yes | Tolerance grouping and exact hash pairs do not form a stable equivalence relation ([D-048](defects.md)); canonicalization is factorial on sparse symmetric endpoints ([D-049](defects.md)) |
+| [`sqpack/atlas.py`](sqpack/atlas.py) | yes | Promotes non-converged stopping points and cannot reconstruct discovery order ([D-050](defects.md)); frequencies merge without regime or identity provenance ([D-051](defects.md)) |
+| [`tools/basin_census.py`](tools/basin_census.py) | yes | An admissible `BasinEvent/v3` event certifies the producer contract and a terminal outcome, not a terminal component—identity stays blocked ([D-034](defects.md), [D-048](defects.md)). The twelve historical v2 poses remain inadmissible under the since-fixed [D-165](defects.md) |
+
+**`distinct_basins` is a count of endpoint keys, not of connected terminal components.**
+The exact `n = 3` sliding family shows one connected optimal set producing many keys, so
+the store can split a single component.
+Until [D-034](defects.md) is resolved the discovery curve cannot plateau, the census
+cannot saturate, and the rarity premise is **untestable rather than untested**.
+
+Cheap endpoint summaries such as angle signatures and contact counts exist.
+A validated terminal-component descriptor interface is unbuilt, so steering strategies
+that depend on component identity or descriptor distances remain unbuilt too.
+
+### The promotion pipeline—unbuilt, and it is the largest structural gap
+
+There is **no executable path from a numerical candidate to a reconstructible exact
+result.** The repository can verify a packing whose exact algebraic description it is
+already given; it cannot produce that description from a packing it found.
+
+Concretely, none of the following exists: corner–edge incidence classification from a
+polished pose (the quench records which *pairs* touch, not which corner meets which
+edge), contact-equation assembly, rank-closure of an underdetermined system,
+high-precision root-finding, algebraic recognition, interval uniqueness, or certificate
+emission. The tracked acceptance criterion is that, **starting only from archived
+floating poses**, one command recovers or explicitly rejects `n = 5, 10, 11, 17` and
+several rational-grid controls, and records recognition failures rather than guessing.
+
+Two consequences bind every other lane:
+
+- **`exact` currently means “checked something already known exactly”.** Every exact
+  configuration here—Trump’s packing, the `n = 3` and `n = 4` optimal families—was
+  authored from published data or derived analytically; none was recovered from a
+  numerical search output.
+- **No admissible endpoint exists at an open `n`, so the pipeline would have nothing new
+  to promote.** The early quench archives (exp-006 through exp-009) retain angles and a
+  contact *count* but not centres; the twelve historical v2 poses remain inadmissible
+  under the since-fixed [D-165](defects.md).
+  The latest complete `BasinEvent/v3` control blocks contain four admissible events at
+  `n = 3` (exp-021 and exp-022) and four at `n = 4` (exp-024); exp-023 preserves the
+  earlier three-of-four n=4 block that exposed D-171. They are all at proved values, so
+  they are known-answer material for the pipeline, not candidates.
+
+The record corpus has the same shape of gap: [`frontier/`](frontier/README.md) records
+each case’s **side value** algebra—minimal polynomials where they are published—and **no
+geometry**. An importer for the catalogue’s layouts is unbuilt.
+
+### The proof lane—built and producing theorems
+
+This is the lane that moved furthest in the most recent rounds: it now carries exact
+results, not only instruments.
+
+| Tool | What it establishes |
+| --- | --- |
+| [`tools/check_stromquist_theorem2.py`](tools/check_stromquist_theorem2.py) | The printed `n = 11` lower-bound proof is false as printed (exp-016) |
+| [`tools/check_stromquist_repair.py`](tools/check_stromquist_repair.py) | A source-distinct repair certifies `s(11) ≥ 2 + 4/√5` exactly (**T-4**, exp-017) |
+| [`tools/check_trump_tangent.py`](tools/check_trump_tangent.py) | Trump’s pose is locally isolated in the anchored chart (exp-013) |
+| [`tools/check_small_n_moduli.py`](tools/check_small_n_moduli.py) | Exact optimal configuration spaces at `n = 3, 4` (exp-014, exp-015) |
+| [`tools/check_kingbird_svg.py`](tools/check_kingbird_svg.py) | High-precision (160-digit) numerical reconstruction of the `n = 29` record source, refuting H-024’s three-class claim. Not an exact optimality certificate—the retained SVG is numerical, and exp-012 says so (exp-012) |
+
+**Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
+LP duals as unavoidable-set generators, and any Lean formalization.
+
+### Compiled acceleration—unbuilt, deliberately
+
+`sqpack-core`, the filtered kernel, the FLINT-backed algebraic scalar, and the language
+bindings are all unbuilt.
+That is a scheduling decision made by measurement rather than an omission: the current
+pipeline is quench-dominated, and moving only the geometry kernel to another language
+would not remove the measured LP-solver and wrapper cost.
+Direct solver bindings or a compiled batch path may still matter; the phase begins by
+re-measuring and builds only what the profile names.
+
+### Reading the gate
+
+`./test.sh` runs thirty steps.
+A green gate means every *built* component behaves as its checks describe; it says
+nothing about the unbuilt ones, and it does not upgrade an inadmissible output.
+
+**The gate is not environment-independent.** Endpoint identity depends on floating-point
+behaviour in a degenerate linear program, so the same seed can reach a different
+endpoint under a different toolchain, and a check written around one observed endpoint
+can fail elsewhere. Separating portable mathematical predicates from stochastic
+characterization is open work ([D-059](defects.md)).
 
 ## Terminology
 
@@ -119,23 +285,22 @@ and a breach of one rejects the round regardless of outcome.
 > **Write “cell” for the configuration-space object and “instance cell”—never bare
 > “cell”—for a sweep position.** In running prose about a round, prefer naming the `n`.
 
-**Basin.** The preimage of one quench endpoint under the quench map: the set of
-configurations the refiner carries to the same local optimum.
-A basin is therefore defined *relative to a specific quench*, which is why basin
-identity may not inherit the search’s tuning parameters—a quench that merged nearby
-angles would make the word depend on the merge tolerance ([D-020](defects.md)). The
-current quench gives each terminal pose a reproducible numerical candidate, but that
-does not make the terminal set discrete or decide whether two candidates belong to one
-connected component.
+**Basin (point-basin where the distinction matters).** The preimage of one pose returned
+by a deterministic quench: the set of configurations the refiner carries to that
+numerical endpoint. A point-basin is therefore defined *relative to a specific quench*,
+which is why basin identity may not inherit the search’s tuning parameters—a quench that
+merged nearby angles would make the word depend on the merge tolerance
+([D-020](defects.md)). The current quench gives each terminal pose a reproducible
+numerical candidate, but that does not make the terminal set discrete or decide whether
+two candidates belong to one connected component.
 D-021 bounds error in the scalar side only; it is not a pose- or component-resolution
 theorem ([D-039](defects.md)).
 
-**The definition has a precondition, and it is not always met.** “The preimage of one
-quench *endpoint*” presupposes the endpoint is a **point**. Where the local optimum is a
-*flat basin*—see below—it is not, the quench lands wherever in the flat region it
-happened to enter, and the word “basin” does not denote anything the census can count.
-This precondition went unstated for the campaign’s first three weeks and cost
-[D-034](defects.md); it is stated here now because every downstream count inherits it.
+**The point-basin exists, but it can be the wrong counted object.** A deterministic
+quench returns a pose even when that pose lies on a connected terminal family.
+Different neutral coordinates then produce different point-preimages and keys inside one
+terminal component. D-034 records why a component census must quotient that family using
+independently validated connectivity rather than declare the quench map undefined.
 
 **The ladder.** The proved instances used as controls—`n = 5` and `n = 10`, both `45°`
 mechanisms with closed-form optima.
@@ -262,15 +427,26 @@ project already has clearer words for both.
   [A cell is not a basin](#a-cell-is-not-a-basin-and-this-trap-has-been-walked-into)—the
   conflation cost a correct finding ([D-029](defects.md)).
 
-### The deliverables, none of them built
+### The deliverables, and what each one currently is
+
+These four words name the cartography strategy’s intended outputs.
+Two now have code behind them and two do not, and neither pair has yet produced the
+object the word promises.
+[What Is Built](#what-is-built) is the component-level view.
 
 **Atlas.** The deduplicated store of known basins for an `n`, keyed by canonical basin
 identity. The stated deliverable of the cartography strategy.
+*Code exists; it stores endpoint keys, which are not certified terminal components.*
+
 **Census.** An enumeration of the basins at one `n`, run to saturation.
+*Code exists; saturation is unreachable while the thing being counted is undefined.*
+
 **Descriptors.** Structural coordinates of a packing—contact counts, angle classes,
 symmetry—used to steer search toward diversity rather than toward loss.
+*Unbuilt, and every steering strategy waits on them.*
+
 **Meter.** The instrument that counts pair-tests, so two proposers can be compared at
-equal budget.
+equal budget. *Unbuilt, so no two proposers have been compared at equal budget.*
 
 ### The record
 
@@ -332,11 +508,12 @@ Disjoint *interiors* means touching is legal, and record packings touch a great 
 In Trump’s packing 14 of the 55 pairs are separated by exactly zero, and 20 corner
 coordinates lie exactly on the container boundary.
 
-Floating point can certify a strict inequality.
-It cannot certify an equality.
-A float verifier therefore needs a tolerance to accept the true contacts, and that
-tolerance is a blind spot that also accepts overlaps smaller than itself; setting it to
-zero rejects the true packing instead.
+Floating-point evaluation can certify a strict inequality when a sound error bound stays
+away from zero. It cannot infer that an unrecognised near-contact is exactly equal to
+zero merely because a computed residual is small.
+A tolerance-based f64 verifier therefore needs a tolerance to accept Trump’s rounded
+algebraic contacts, and that tolerance is a blind spot that also accepts overlaps
+smaller than itself; setting it to zero rejects this true packing instead.
 Both failure modes are demonstrated by `negative_control.py`.
 
 The fix is representational rather than numerical: express the configuration in the real
@@ -362,7 +539,7 @@ Where the program has spent effort, and what came of it.
 | **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**), corner (**T-3**), and repaired lower-bound certificate (**T-4**); nine rounds. Search remains `≈ 6e-02` short, exp-013 proves Trump’s exact pose locally isolated, exp-016 rejects Stromquist’s printed proof, and exp-017 independently restores its numerical bound |
 | **12** | open; `4` believed optimal | `4` | **open-case calibration** | Two rounds. Returns exactly `4.0` on all five seeds, which is baseline evidence rather than a known-answer guard. Also where the search and proof lanes are planned to meet |
 | 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
-| 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) returns **exactly `5.0`**, the trivial `5×5` grid, on all five seeds |
+| 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) reports `5.0`, the trivial `5×5` grid, on all five f64-screen seeds |
 | 61, 78, 97 | open, `m² − 3` | `8`, `9`, `10` (grids) | opportunistic slot | The narrowest gaps in the table. An analytic Cleemann-style attempt at `arctan(3/4)` is registered and **not yet made** |
 | 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](frontier/README.md); 63 of the 65 open cases are bounded below by Nagamochi’s general theorem |
 
@@ -383,9 +560,9 @@ problem.
 instance cell testing record-*finding* rather than machinery, and it was the last one
 never run.
 [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md)
-ran it: the annealer returns **exactly `5.0`** on all five seeds—the trivial `5×5`
-grid—against Bidwell’s `4.67553`, a gap of `+0.324`. It does not leave the grid basin at
-all.
+ran it: the annealer reports `5.0` on all five f64-screen seeds—the trivial `5×5`
+grid—against Bidwell’s `4.67553`, a gap of `+0.324`. The retained final states do not
+leave the grid basin.
 
 That scopes one failure at a second cell: this implementation, five seeds, and the
 registered `1e8` moves per chain did not reach Bidwell’s oblique record at `n = 17`. The
@@ -424,8 +601,9 @@ listed here so the dependencies of this program are explicit.
   has ever been obtained.
 - **The `0°`/`45°` class cannot achieve it.** Stromquist bounds that orientation class
   below at `2 + (4/3)√2 ≈ 3.885618`, which Trump’s oblique packing beats.
-  This is what makes `n = 11` the first case where tilt matters, and the sharpest
-  available statement of why the target differs structurally from the ladder.
+  This makes `n = 11` the first case where genuinely oblique tilt is proved to improve
+  on the `0°`/`45°` class, and is the sharpest available statement of why the target
+  differs structurally from the ladder.
 
 ### Results established here
 
@@ -512,25 +690,25 @@ combinatorial part of the problem, which none of this makes easy.
 
 ### A cell is not a basin, and this trap has been walked into
 
-The statement above fixes the angles.
-A **basin** does not: it is the preimage of a quench endpoint, and the quench moves the
-angles. So a configuration can sit at *exactly* its cell’s optimum and still be far from
-its basin’s, with every remaining unit of gap in the angles and none of it in the
-centres.
+The statement above fixes the angles and a cell.
+A **point-basin** does not: it is the preimage of a quench endpoint, and the quench
+moves the angles and may cross cells.
+So a configuration can sit at exactly its fixed-angle cell optimum and still be far from
+its quench endpoint, with every remaining unit of gap in the angles and none of it in
+the centres.
 
-### Nor is a flat optimum a basin, which is the same trap one level up
+### Nor does a point-basin classify a flat terminal component
 
-The section above separates a *cell* from a *basin* because a cell fixes the angles and
-a basin does not. There is a second separation, discovered later and the harder of the
-two: a basin presumes its optimum is a **point**, and
-[not every optimum is](#terminology).
+The section above separates a fixed-angle cell solve from the full quench.
+There is a second separation, discovered later and the harder of the two: the quench
+returns a point, while [the terminal optimum need not be isolated](#terminology).
 
-Where the optimum is flat, “the configurations the refiner carries to the same local
-optimum” describes a map onto a *set*, and two quenches of the same optimum legitimately
-stop at different places in it.
+Where the optimum is flat, two quenches into the same connected terminal component can
+legitimately stop at different places in it.
 Every symptom then mimics a real discovery—distinct coordinates, distinct geometric
-keys, two rows in the atlas—while the contact graph and the side, the two things that
-actually characterise the optimum, agree exactly.
+keys, two rows in the atlas—while the side agrees exactly and an open stratum can share
+one contact graph. Neither the key nor that graph alone decides component identity; wall
+strata can change inside the same connected family.
 That is [D-034](defects.md), and the shape of the error is the same as the cell/basin
 trap: an object that fixes more than the mathematics does, mistaken for the mathematics.
 
@@ -610,8 +788,10 @@ defect. Three corrections, recorded in the
   at the solver’s floor of `1e-10`, and with every returned solution post-checked
   against the constraints imposed on it, the residual in the side is about `1e-11`. That
   floor is [D-021](defects.md), still open, and eight rounds sit on it.
-- **The polish step does not produce rational output.** R-2 said it does; HiGHS returns
-  floats. Rational output needs an exact rational LP, which is unbuilt and tracked.
+- **The polish step does not produce exact output.** R-2 said it produced rational
+  output; HiGHS returns floats.
+  Exact output needs an exact LP over the cell’s certified rational or algebraic
+  coefficients, which is unbuilt and tracked.
 - **The `polished` tier means exact within a cell to solver precision.** Algebraic
   exactness stays with `sqpack`, and every promotion routes through it.
 
@@ -642,10 +822,12 @@ A 2,001-point scan of `[38°, 42°]` puts the minimum at `40.182°`, one grid st
 (`0.002°`) from `a*`.
 
 Trump’s angle is not an input to this computation.
-It is **the argument that minimises a one-dimensional function anyone can plot.** The
-34-dimensional search problem, once the cell is known, is a scalar minimisation—which is
-the concrete content of the claim that the honest continuous dimension is the number of
-*distinct angles*, empirically one or two at small `n`, rather than `3n + 1`.
+It is **the argument that minimises a one-dimensional function anyone can plot.** For
+this structured cell, the centre coordinates remain LP variables and only one nonlinear
+angle parameter remains.
+This demonstrates a useful compression, not a theorem that angle-class count equals the
+local dimension of the full packing problem; other records already use more classes, and
+each reduction must be derived from its contact structure.
 
 ## The Corner, and the Method It Forced
 
@@ -1047,7 +1229,7 @@ archive beside it.
 | [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) | 10 | positive control | H-002 | quench 0.2.0 | `4.507e-03 → 1.3323e-15` | **accepted** |
 | [exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 11 | target | H-002 | quench 0.2.0 | `6.999e-02 → 6.2894e-02` | rejected |
 | [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 11 | target | H-019 | quench 0.2.0 | slopes `0.1747` / `0.3841`, ratio `2.198` | **accepted** |
-| [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | exactly `5.0` on all five seeds, gap `+3.245e-01` | rejected |
+| [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | reported `5.0` on all five f64-screen seeds, gap `+3.245e-01` | rejected |
 | [exp-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | 29 | target | H-024 | SVG reconstruction + SAT | six classes; minimum class gap `0.296067°` | **rejected** |
 | [exp-013](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | 11 | target | H-026 | exact branchwise linearization | 128/128 exact zero-cone certificates | **accepted** |
 | [exp-014](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) | 3 | positive control | H-032 | exact configuration space | two labelled circles → one quotient interval | **accepted** |
@@ -1179,16 +1361,16 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 171 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 182 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 56 | asserted something false about the mathematics |
-| validity | 51 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 46 | recorded something its own evidence contradicts |
+| soundness | 61 | asserted something false about the mathematics |
+| validity | 53 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 49 | recorded something its own evidence contradicts |
 | robustness | 14 | did not finish, or finished only by luck |
-| performance | 4 | worked, but cost far more than it should |
+| performance | 5 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -1337,7 +1519,7 @@ n=4 v3 block at 4/4 admissible without weakening the screen.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Sixty fixes left no regression check behind, and that list has already predicted a
+Sixty-eight fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
@@ -1416,8 +1598,9 @@ Price the first maps from raw calls or a current receipt until those aggregates 
 reconstructed.
 
 **One contained defect constrains every polished number.** [D-021](defects.md): the
-solver floor is about `1e-11` in the side, so the `polished` tier cannot resolve finer,
-and an exact rational LP is the fix.
+solver floor is about `1e-11` in the side, so the `polished` tier cannot resolve finer.
+The general fix is an exact LP over certified rational or algebraic coefficients; the
+rational special case alone is not a universal remedy.
 
 **The destructive negative-control path is closed.** [D-035](defects.md): `negctl` now
 mutates bounded private source snapshots, so a killed control can abandon only temporary

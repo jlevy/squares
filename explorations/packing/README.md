@@ -9,6 +9,10 @@ The motivating case is `n = 11`, the smallest instance of this problem that is s
 open. Its best known packing dates from 1979 and its best proved lower bound from 2003,
 and a gap of roughly 0.088 in the side length separates them.
 
+**New here?** [`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the
+objects are, why the approach is shaped the way it is, and what is established versus
+open. Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program.
+
 ## Operating principles
 
 This program separates four dimensions of excellent research because none can stand in
@@ -121,7 +125,11 @@ The negative-control marker, generated-view drift checks, bounded subprocesses, 
 resumable on-disk runner state are useful; per-run worktrees, repository copies, or a
 generalized lease/capability system are not the default.
 
-Two documents get you oriented, and they have different jobs.
+Three documents get you oriented, and they have different jobs.
+
+**[`TUTORIAL.md`](TUTORIAL.md) is the conceptual on-ramp:** the objects, the main
+decompositions, the central traps, and the boundary between established and proposed
+work. It owns no changing status.
 
 **[`SYNOPSIS.md`](SYNOPSIS.md) is the technical root:** the single account of what this
 project knows, how it knows it, and what it is doing next.
@@ -130,20 +138,23 @@ of the land, the terminology this directory uses narrowly, the hypothesis regist
 a roll-up of every experiment run so far.
 Its numbers are reconciled against the artifacts in the gate.
 
-**[The current handoff](docs/project/handoff-2026-08-23-quench-spine.md) is where the
-work stands today:** what is built, what is missing, which few things are the critical
-path, and the half-dozen facts that would otherwise cost an arriving agent a day.
-It is dated and written to be thrown away when it stops being true.
+**[The basin confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md)
+is the mutable priority queue:** it separates tool validation, measurement validation,
+and research, and names the next bounded evidence for each `n`. The older
+[quench-spine handoff](docs/project/handoff-2026-08-23-quench-spine.md) is explicitly
+superseded and retained only as historical provenance.
 
 ## Layout
 
 ```
 explorations/packing/
+├── TUTORIAL.md             First-principles orientation for a newcomer: the objects,
+│                           why the approach is shaped this way, what is established
 ├── SYNOPSIS.md             The technical root: results, status, and the experiment
-│                           roll-up. Read this first.
+│                           roll-up. Read this after the tutorial.
 ├── conventions.md          Every rule this directory runs on, and which are checked
-├── docs/project/           Reports, reviews, specs, postmortems, and the dated
-│                           handoff that says where the work stands today
+├── docs/project/           Reports, reviews, specs, postmortems, and historical
+│                           handoffs; active specs and the campaign agenda own priority
 ├── docs/project/research/  The six research reports (see below)
 ├── campaign/               The experiment record: hypothesis registry, series, rounds,
 │                           and a generated ledger. See campaign/README.md.
@@ -343,6 +354,14 @@ Record packings are published as SVG transforms with 33-digit decimal entities a
 the analytically solved ones, Mathematica source in an XML comment; recovering the field
 means reading that by hand, once per packing.
 `sqpack/packings/trump11.py` is the worked example.
+
+**The result is a proof only if the field metadata is right, and the constructor does
+not yet check that** ([D-053](defects.md), open): `NumberField` requires an irreducible
+minimal polynomial and an interval isolating exactly one real root, but verifies only an
+endpoint sign change.
+A reducible polynomial or a multi-root interval yields unsound exact comparisons.
+The built-in Trump witness is independently checked; anything you supply yourself is
+not, so verify irreducibility and root isolation before trusting the verdict.
 
 For a quick, non-certifying check, swap in the float backend:
 

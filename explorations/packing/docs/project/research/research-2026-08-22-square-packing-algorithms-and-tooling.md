@@ -1,6 +1,6 @@
 # Research: Algorithms and Tooling for Square Packing
 
-**Date:** 2026-08-22 (last updated 2026-08-22)
+**Date:** 2026-08-22 (last updated 2026-08-24)
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
 
@@ -155,20 +155,24 @@ still a valid packing:
 The exact verifier also rejects `δ = 10⁻³⁰` and `δ = 10⁻¹⁰⁰`, and would reject any
 `δ > 0`.
 
-The three float rows are the point.
-With `tol = 0` the verifier rejects the *true* packing, because rounding makes some true
-zeros come out slightly negative.
-With any `tol > 0` it accepts overlaps smaller than `tol`. **There is no tolerance that
-both accepts the exact packing and rejects all violations**, so a floating-point check
-can never be a proof, at any precision.
-Raising precision shrinks the blind spot without closing it.
+The three float rows are the point for this tolerance-based SAT predicate on Trump’s
+rounded algebraic coordinates.
+With `tol = 0` it rejects the *true* packing because rounding makes some true zeros come
+out slightly negative.
+With any `tol > 0` it accepts overlaps smaller than `tol`. **There is no tolerance in
+this predicate that both accepts the rounded exact packing and rejects all violations**,
+so a small f64 residual is not an equality proof.
+Raising precision shrinks the blind spot without identifying exact zero.
 
-Interval and ball arithmetic (`Arb`, `MPFI`, `filib++`) do not fix this either.
-They give a rigorous enclosure, so an enclosure lying strictly above zero *is* a proof
-of strict separation.
-But an exactly-zero separation always yields an enclosure straddling zero, no matter how
-much precision is spent.
-Interval arithmetic can prove `>`, never `=`.
+Generic interval evaluation (`Arb`, `MPFI`, `filib++`) does not identify an unknown
+contact from approximate coordinates.
+It gives a rigorous enclosure, so an enclosure lying strictly above zero *is* a proof of
+strict separation, while a finite-width enclosure around a near-zero residual usually
+cannot distinguish equality from a tiny violation.
+Structural simplification can return `[0,0]`, and interval-Newton or related methods can
+certify a root of declared contact equations.
+What interval evaluation alone cannot do is promote a small numerical residual to an
+unrecognised exact contact.
 
 #### Exact verification over a real algebraic number field
 
@@ -520,10 +524,13 @@ symbolic computation enters.
 Read the contact structure off the numerical solution: which square corner touches which
 square edge, which corner touches which container wall.
 Each contact is one polynomial equation.
-The unknowns are `s` and the distinct non-axis-aligned angles — usually far fewer than
-`3n`, because most squares are axis-aligned or rigidly attached to a tilted block.
-Ellsworth’s notation names the angles `a, b, c, …` and the constraints `f1, f2, f3, …`;
-`s(17)` has three unknowns `{s, a, b}`, `s(55)` has eight.
+The unreduced system contains centre coordinates as well as `s` and the angles.
+In the structured constructions discussed by Ellsworth, the contact graph lets those
+centres be eliminated, leaving `s` and the distinct non-axis-aligned angles—usually far
+fewer than `3n`. That elimination is a property to derive from each graph, not a
+consequence of angle classes alone.
+Ellsworth’s reduced notation names the angles `a, b, c, …` and the constraints
+`f1, f2, f3, …`; `s(17)` then has three unknowns `{s, a, b}`, `s(55)` has eight.
 
 If the number of constraints equals the number of unknowns, the system is square, and
 `FindRoot[]` (multivariate Newton) refines to arbitrary precision, or `Solve[]` gives a
@@ -543,10 +550,12 @@ Det[grad] == 0
 
 The reasoning: the matrix maps variable deltas to deltas of `s` and of the constraint
 values.
-Being able to decrease `s` while holding all constraints at zero means being able
-to hit the target vector `{1,0,0,0}`, i.e. the matrix is invertible.
-So a local extremum of `s` on the constraint manifold is exactly a rank drop, i.e.
-`Det[grad] = 0`. When the deficiency is two or more, nest the construction:
+If the matrix is invertible it can hit the target vector `{1,0,0,0}`—a delta that
+decreases `s` while holding every constraint at zero—so an extremum forces the matrix to
+be singular. A local extremum of `s` on the constraint manifold therefore satisfies
+`Det[grad] = 0`. The condition is necessary rather than sufficient: a rank drop can
+occur away from an extremum, and spurious roots are culled when the candidate is
+verified. When the deficiency is two or more, nest the construction:
 
 ```
 f2 = Det[Grad[{s, f1     }, {s, a     }]];
@@ -611,8 +620,10 @@ above.
 
 ### Proving bounds with computational aids
 
-Here the honest summary is short: **for squares in a square, essentially no proof has
-been computer-assisted.**
+Here the honest summary is short: **in the published literature, essentially no proof
+for squares in a square has been computer-assisted.** Within this repository that is no
+longer true of the lower bound: exp-017 carries an exact computer-assisted certificate
+of `s(11) ≥ 2 + 4/√5` (the synopsis’s T-4), not externally reviewed.
 
 #### Lower bounds: unavoidable points, by hand
 
@@ -725,7 +736,9 @@ The relevant precedents, in increasing order of ambition:
   These are what a formal version of the Montanher-style proof would run on.
 
 The gap for square packing is not the proof assistant.
-For *lower* bounds it is that there is no informal computer-assisted proof to formalise.
+For *lower* bounds the missing informal computer-assisted proof now has a first
+in-repository instance—exp-017’s exact certificate—so the formalisation target exists,
+though nothing has been formalised.
 For *upper* bounds there is no gap at all: a packing is a finite algebraic witness, and
 formalising `s(11) ≤ 3.877084…` is available today and unclaimed — see
 [Lean for Square-Packing Proofs and Validation](research-2026-08-22-lean-for-packing-proofs-and-validation.md).

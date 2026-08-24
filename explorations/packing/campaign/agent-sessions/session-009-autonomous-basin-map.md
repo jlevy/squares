@@ -125,16 +125,30 @@ session:
     operator: pr19_comment_checkpoint_2
     status: completed
     outcome: >-
-      Found no GitHub feedback or dead links, but requested changes because the stack is
-      eight commits behind and its living SYNOPSIS still calls every basin event
-      D-165-blocked. Rebase only after exp-024 is durable, then reconcile the v3 rounds.
+      Found no GitHub feedback or dead links. The latest stack correctly incorporated
+      exp-021 through exp-023, but still predates exp-024 and agenda-001; it must preserve
+      the current four-of-four n=4 control, D-171 closure, and 24-round roll-up.
     evidence: [GitHub REST and GraphQL surfaces, exact head comparison, claim-level diff audit]
     files: []
     checks: [remote head and base, comments, reviews, threads, checks, links, current artifacts]
     uncertainty: The delegate did not merge or run PR 20's documentation through the current gate.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Rebase and amend PR 20 after the current branch is clean and pushed.
+    next_action: Merge the reviewed docs onto the exp-024 checkpoint and reconcile current status.
+  - task: Review PR 20's tutorial for mathematical and evidence-boundary errors
+    operator: runbook_mechanical_check
+    status: completed
+    outcome: >-
+      Found the cell-versus-fixed-angle conflation, universal interval-impossibility
+      claim, event-admissibility overstatement, exact-tier n=17 wording, missing direct
+      evidence links, and imprecise genuinely-oblique orientation claim.
+    evidence: [claim-level tutorial review, current experiment and defect artifacts]
+    files: []
+    checks: [terminology consistency, evidence-tier consistency, link audit]
+    uncertainty: The delegate did not edit or merge the branch; the parent independently reviewed and corrected it.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain all accepted findings as D-172 through D-182 and merge only the corrected docs.
   outputs:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-018-h-021-n3-basin-event-calibration.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-019-h-021-n4-basin-event-calibration.md
@@ -158,6 +172,8 @@ session:
   - campaign/agent-sessions/README.md
   - campaign/agent-sessions/session-009-autonomous-basin-map.md
   - campaign/schemas/agent-session.schema.yaml
+  - TUTORIAL.md
+  - docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
   - sqpack/quench.py
   - tools/regression_test.py
@@ -218,20 +234,25 @@ session:
     screen together. The one-retry complete offending-set repair keeps the screen fixed;
     exp-024 then reaches proved side 2 on all four n=4 seeds with 14,301/14,301 settled
     evaluations, zero unsettled evaluations, and 16.97 seconds total wall time.
+  - >-
+    PR 20 was reviewed at head 5d096ae against the exp-024 checkpoint. Eight substantive
+    documentation defects are recorded as D-172 through D-182; the accepted orientation
+    docs preserve agenda-001 and bind project-specific claims to retained evidence.
   stop_reason: null
   next_action: >-
-    Commit and push exp-024 plus agenda-001, close D-171, and refresh PR 19. Then run only
-    BC-003: four fixed n=5 seeds at 10 seconds each under a 60-second command cap. Treat
-    it as tool validation; retain any typed stop and do not begin n=5 connectivity
-    research until the identity-control rows are complete.
+    Finish the reviewed PR 20 merge, run the normal gate, push, and disposition PR 20.
+    Then run only BC-003: four fixed n=5 seeds at 10 seconds each under a 60-second
+    command cap. Treat it as tool validation; retain any typed stop and do not begin n=5
+    connectivity research until the identity-control rows are complete.
 ---
 # Session 009 — Bounded Progress Before Scale
 
 The event pipeline now preserves useful negative evidence, but it is not yet a complete
-basin mapper. The n=3 through n=5 rounds found valid endpoints and exposed termination
-behavior, while the promotion guard correctly kept every event out of the scientific
-atlas because the producer still hides some failed probe evaluations behind a sentinel
-objective.
+basin mapper. The historical n=3 through n=5 v2 rounds found valid endpoints and exposed
+termination behavior while remaining blocked as recorded.
+BasinEvent/v3 now accounts for every fixed-point evaluation in the current n=3 and n=4
+controls and admits the narrow event claim; terminal-component identity and census
+saturation remain blocked.
 
 The session therefore stopped the size sweep after n=5. The finite n=10 tie-cell test
 has now closed every observed two-, four-, and eight-cell degeneracy without claiming a
@@ -243,6 +264,11 @@ Exp-021 derives complete accounting from a balanced receipt and closes D-165; ex
 completes the n=4 v3 block.
 The historical v2 block remains promotion-blocked as recorded, and no endpoint
 descriptor has been promoted to a connected component.
+
+The next size is governed by the campaign agenda rather than this narrative: BC-003 is a
+bounded n=5 tool-validation slice.
+The separate n=5 connectivity question remains blocked until its component-identity
+controls are explicit.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 171
+count: 182
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4361,3 +4361,296 @@ defects:
   recurrence_of: D-164
   bead: think-pwd0
   recorded_in: campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
+- id: D-172
+  title: The orientation tutorial said a configuration-space cell fixes the angles
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: high
+  status: fixed
+  what: >-
+    The tutorial correctly defined a cell as the discrete separating-axis and order
+    choices, then said a cell fixes the angles. It used that false premise to distinguish
+    a cell solve from a basin, conflating the cell with the fixed-angle LP subproblem.
+  consequence: >-
+    A new agent could repeat D-029: treat exhaustion of a centre-only solve as quench
+    convergence, misdiagnose angular residual as a wrong basin, and retract a valid
+    result.
+  fix: >-
+    State that a cell fixes only separation choices, while the LP subproblem fixes both
+    the cell and an angle vector. Define the basin comparison against the full quench,
+    which can move angles and cross cells.
+  regression: none
+  recurrence_of: D-029
+  bead: think-t2kz
+  recorded_in: TUTORIAL.md
+- id: D-173
+  title: The orientation docs ruled out equality certification by all interval methods
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: conservative
+  detected_by: review
+  latent_for: inherited source prose and PR 20 draft
+  severity: high
+  status: fixed
+  what: >-
+    The tutorial and algorithms report said floating point cannot certify any equality,
+    interval arithmetic can prove greater-than but never equality, and certified
+    numerics can never certify a contact. Those universal statements are false:
+    structural evaluation can yield an exact zero enclosure, and interval-Newton,
+    Krawczyk, or alpha-theory can certify a root satisfying declared contact equations.
+  consequence: >-
+    The research plan incorrectly excluded a viable certificate route and confused the
+    actual failure—inferring an unknown exact contact from a small approximate residual—
+    with an impossibility theorem about certified numerics.
+  fix: >-
+    Scope the limitation to enclosure-only evaluation of unrecognised near-contacts.
+    Preserve the tolerance blind-spot result while allowing exact simplification and
+    certified existence and uniqueness for an explicitly declared equality system.
+  regression: none
+  bead: think-0qs4
+  recorded_in: TUTORIAL.md
+- id: D-174
+  title: The recovery narrative silently eliminated centres and universalized rational LPs
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: inherited source prose and PR 20 draft
+  severity: high
+  status: fixed
+  what: >-
+    The numeric-to-exact narrative said only discrete data crosses the boundary, that
+    contact equations have only side and distinct angles as unknowns, and that an exact
+    rational LP is the general remedy for solver noise. Numerical coordinates may seed
+    or select a candidate root; the general contact system still contains centres until
+    a particular graph permits their elimination; and fixed-angle coefficients can be
+    algebraic rather than rational.
+  consequence: >-
+    A recovery instrument could omit necessary variables or choose an inapplicable exact
+    scalar, then present a special-case derivation as a general promotion pipeline.
+  fix: >-
+    Treat the contact structure as the unchecked discrete hypothesis while allowing
+    numerical values only as non-decisive root-finding hints. Require centre elimination
+    to be derived from each contact graph. Describe the solver target as an exact LP over
+    certified rational or algebraic coefficients, with a rational LP only as the
+    rational-coefficient special case.
+  regression: none
+  bead: think-4000
+  recorded_in: docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md
+- id: D-175
+  title: The stacked orientation branch lagged the current basin calibration and agenda
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: drift_check
+  latent_for: one stacked branch update
+  severity: high
+  status: fixed
+  what: >-
+    PR 20 incorporated exp-021 through exp-023 but diverged before exp-024 and
+    agenda-001. Its synopsis therefore retained 23 rounds, a three-of-four n=4 control,
+    and unresolved D-171, and its tutorial called the event surface inadmissible without
+    distinguishing event receipts from terminal-component identity.
+  consequence: >-
+    Merging the docs verbatim would erase the current experiment queue and make a fixed
+    positive-control defect appear open, while understating what BasinEvent/v3 can
+    support.
+  fix: >-
+    Merge onto the exp-024 checkpoint, preserve agenda-001, retain exp-023 as historical
+    failed-control evidence, and state the narrow admissible event claim separately from
+    the still-blocked component census.
+  regression: >-
+    The ledger and synopsis checks derive 24 rounds, one agenda, and the exp-024 roll-up;
+    the basin-event gate replays the current n=3 and n=4 controls.
+  bead: think-lghr
+  recorded_in: SYNOPSIS.md
+- id: D-176
+  title: The orientation tutorial promoted special-case angle evidence into general structure
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: high
+  status: fixed
+  what: >-
+    The tutorial called n=11 the first case where any tilt matters, equated honest
+    continuous dimension with angle-class count, described one or two classes as the
+    small-n empirical rule, and called five f64-screen n=17 values exactly 5.0. Proved
+    n=5 and n=10 packings already use 45-degree tilt, n=29 uses six classes, and the
+    n=17 values are numerical observations.
+  consequence: >-
+    The strategy would overfit one structured cell, misstate the frontier, and cross its
+    own evidence-tier boundary when choosing low-dimensional search models.
+  fix: >-
+    Scope n=11 to genuinely oblique improvement beyond the zero/45-degree class, present
+    angle classes as a graph-specific modeling compression rather than a dimension
+    theorem, and label n=17 as a five-seed f64-screen report.
+  regression: none
+  bead: think-cgm5
+  recorded_in: TUTORIAL.md
+- id: D-177
+  title: The orientation docs asserted unmeasured continuity and language-independent cost
+  date: '2026-08-24'
+  layer: docs
+  class: performance
+  direction: neutral
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: medium
+  status: fixed
+  what: >-
+    The tutorial guaranteed that inflation progress moves continuously, and the synopsis
+    said the quench costs the same in every language. Continuation can cross bifurcations,
+    while current timing identifies LP solves and wrapper overhead rather than proving a
+    language-independent cost law.
+  consequence: >-
+    Agents could preregister an invalid continuous progress model or dismiss direct
+    solver bindings and compiled batching without measuring them.
+  fix: >-
+    Describe inflation as a graded branch-tracking metric with no continuity guarantee
+    across bifurcations. Say only that translating the geometry kernel alone cannot
+    remove the measured LP and wrapper cost, and require profiling before acceleration.
+  regression: none
+  bead: think-frq1
+  recorded_in: SYNOPSIS.md
+- id: D-178
+  title: The orientation tutorial left project-specific theorem claims unbound to evidence
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: medium
+  status: fixed
+  what: >-
+    The standalone tutorial stated the Stromquist falsification and repair, Trump local
+    isolation, small-n optimal moduli, fixed-angle-quench failure, and n=17 screening
+    result without linking the retained experiments or defect records that delimit them.
+  consequence: >-
+    A newcomer could not audit the tutorial without searching the whole repository, and
+    later synopsis drift could silently detach a claim from its exact scope.
+  fix: >-
+    Link each project-specific result at the point of use to exp-013 through exp-017,
+    exp-011, or D-029, and link the mutable campaign agenda from the tutorial's routing
+    table.
+  regression: >-
+    README and synopsis link checks validate every relative path and heading anchor;
+    substantive evidence selection remains a review obligation.
+  bead: think-72rq
+  recorded_in: TUTORIAL.md
+- id: D-179
+  title: The orientation tutorial treated undefined hardness and s(11) tractability as settled
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: high
+  status: fixed
+  what: >-
+    The tutorial called the slack that makes n=11 easy a well-posed scalar without
+    specifying proposer, target, success event, or observed-versus-certified semantics.
+    It then grouped the problem of determining s(11) with tasks described as tractable
+    by known techniques and enough effort.
+  consequence: >-
+    Experiments could report incomparable hardness numbers, while the central open
+    mathematical problem was presented as scheduled engineering rather than an unresolved
+    research risk.
+  fix: >-
+    Require every slack metric to name the proposer, target component or event, success
+    threshold, and whether it measures observed branch entry or a certified clearance
+    barrier. Separate determining s(11) from the engineering tasks with concrete paths.
+  regression: none
+  bead: think-6xfd
+  recorded_in: TUTORIAL.md
+- id: D-180
+  title: Current orientation links sent agents to an explicitly superseded handoff
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: since the quench-spine handoff was superseded
+  severity: high
+  status: fixed
+  what: >-
+    The dated quench-spine handoff correctly marked itself superseded, but README and
+    SYNOPSIS still called it the current handoff and instructed newcomers to use it for
+    today's critical path. Its body describes eleven rounds and unbuilt components that
+    have since landed.
+  consequence: >-
+    A fresh agent following the advertised reading order would bypass agenda-001 and
+    begin obsolete canonicalizer or atlas work instead of the current n=5 validation
+    cell.
+  fix: >-
+    Make the tutorial, synopsis, and basin confidence ladder the current orientation
+    path. Label the old handoff historical everywhere and retain it only as provenance.
+  regression: >-
+    README and synopsis drift checks validate the replacement links; current-versus-
+    historical status remains a review obligation.
+  recurrence_of: D-086
+  bead: think-frmc
+  recorded_in: README.md
+- id: D-181
+  title: The basin definition called a deterministic quench endpoint a non-point
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: since terminal families entered the living terminology
+  severity: high
+  status: fixed
+  what: >-
+    SYNOPSIS and the new tutorial said the preimage definition of a basin is undefined
+    when an optimum is a family because a quench endpoint is not a point. A deterministic
+    quench still returns an individual pose. The real defect is that point-preimages and
+    coordinate keys can split one connected terminal component.
+  consequence: >-
+    The programme described a valid algorithm-relative object as undefined while failing
+    to name the distinct component relation the atlas needs, obscuring both what current
+    event receipts prove and what D-034 still blocks.
+  fix: >-
+    Define a point-basin as the preimage of one returned pose and a terminal component as
+    the intended connected atlas object. State that point-basins are well defined but too
+    fine on flat families, and require independent connectivity before component counts.
+  regression: none
+  recurrence_of: D-034
+  bead: think-balp
+  recorded_in: SYNOPSIS.md
+- id: D-182
+  title: The strategy tutorial excluded safe loss shaping and all repeated endpoint hits
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: medium
+  status: fixed
+  what: >-
+    The tutorial said a reshaped loss changes the minimizers and instructed search to
+    never pay twice for an endpoint already named. Equivalent or lexicographic shaping
+    can preserve the target minimizers, while repeated hits are the observations needed
+    to estimate proposer-conditioned frequency and uncertainty.
+  consequence: >-
+    The strategy would discard potentially sound proposer designs and bias the very
+    frequency measurements used to decide whether record components are rare.
+  fix: >-
+    Make minimizer preservation a proof obligation rather than an impossibility claim.
+    Use duplicate taboo only in declared exploration mode; retain and count repeats in
+    measurement mode.
+  regression: none
+  bead: think-08l0
+  recorded_in: TUTORIAL.md

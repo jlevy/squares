@@ -2,14 +2,14 @@
 
 # Defect log
 
-171 defects recorded across the packing toolchain.
+182 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **56 soundness defects** — the system asserting something false about the mathematics. 46 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **60 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164).
+- **61 soundness defects** — the system asserting something false about the mathematics. 50 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **68 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034).
 - **24 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 14 | a cell of the sweep whose answer is known in advance |
-| `review` | 111 | a human or agent reading the work against a checklist |
+| `review` | 121 | a human or agent reading the work against a checklist |
 | `anomaly` | 6 | a result that made no sense, chased down |
 | `inspection` | 19 | reading the code or the design with intent |
-| `drift_check` | 11 | a generated view disagreeing with its source |
+| `drift_check` | 12 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 7 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 7 of 171, and none of the 56 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 7 of 182, and none of the 61 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,17 +36,17 @@ The line worth reading twice: **the automated gate caught 7 of 171, and none of 
 | verifier | 4 |
 | record | 47 |
 | tooling | 39 |
-| docs | 54 |
+| docs | 65 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 56 |
-| validity | 51 |
-| bookkeeping | 46 |
+| soundness | 61 |
+| validity | 53 |
+| bookkeeping | 49 |
 | robustness | 14 |
-| performance | 4 |
+| performance | 5 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -115,6 +115,14 @@ This is the actionable list.
 | D-148 | The D-091 correction omitted the published Figure 14 unavoidability claim | docs |
 | D-149 | Search saturation was still presented as a Stromquist known-answer test | docs |
 | D-160 | A broad H-010 integration patch updated D-002 instead of D-151 | record |
+| D-172 | The orientation tutorial said a configuration-space cell fixes the angles | docs |
+| D-173 | The orientation docs ruled out equality certification by all interval methods | docs |
+| D-174 | The recovery narrative silently eliminated centres and universalized rational LPs | docs |
+| D-176 | The orientation tutorial promoted special-case angle evidence into general structure | docs |
+| D-177 | The orientation docs asserted unmeasured continuity and language-independent cost | docs |
+| D-179 | The orientation tutorial treated undefined hardness and s(11) tractability as settled | docs |
+| D-181 | The basin definition called a deterministic quench endpoint a non-point | docs |
+| D-182 | The strategy tutorial excluded safe loss shaping and all repeated endpoint hits | docs |
 
 ## Still open
 
@@ -320,3 +328,14 @@ This is the actionable list.
 | [D-169](sqpack/quench.py) | 2026-08-24 | quench | validity | flattering | `control_cell` | critical | fixed | The cell post-check ignored every containment row |
 | [D-170](defects.yaml) | 2026-08-24 | record | bookkeeping | neutral | `drift_check` | high | fixed | D-165 reused the unrelated D-132 bead |
 | [D-171](campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl) | 2026-08-24 | quench | robustness | conservative | `control_cell` | high | fixed | Argmax-only n=4 repair left one positive-control evaluation unsettled |
+| [D-172](TUTORIAL.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The orientation tutorial said a configuration-space cell fixes the angles |
+| [D-173](TUTORIAL.md) | 2026-08-24 | docs | soundness | conservative | `review` | high | fixed | The orientation docs ruled out equality certification by all interval methods |
+| [D-174](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The recovery narrative silently eliminated centres and universalized rational LPs |
+| [D-175](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping | conservative | `drift_check` | high | fixed | The stacked orientation branch lagged the current basin calibration and agenda |
+| [D-176](TUTORIAL.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The orientation tutorial promoted special-case angle evidence into general structure |
+| [D-177](SYNOPSIS.md) | 2026-08-24 | docs | performance | neutral | `review` | medium | fixed | The orientation docs asserted unmeasured continuity and language-independent cost |
+| [D-178](TUTORIAL.md) | 2026-08-24 | docs | bookkeeping | flattering | `review` | medium | fixed | The orientation tutorial left project-specific theorem claims unbound to evidence |
+| [D-179](TUTORIAL.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The orientation tutorial treated undefined hardness and s(11) tractability as settled |
+| [D-180](README.md) | 2026-08-24 | docs | bookkeeping | conservative | `review` | high | fixed | Current orientation links sent agents to an explicitly superseded handoff |
+| [D-181](SYNOPSIS.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The basin definition called a deterministic quench endpoint a non-point |
+| [D-182](TUTORIAL.md) | 2026-08-24 | docs | validity | conservative | `review` | medium | fixed | The strategy tutorial excluded safe loss shaping and all repeated endpoint hits |

@@ -2423,6 +2423,39 @@ reported forty hypotheses after H-041 made forty-one.
 The count now comes from the registry consistency check rather than another unguarded
 scalar.
 
+## Orientation and campaign-agenda delta
+
+PR #20 supplied a useful first-principles tutorial and a built/built-but-inadmissible/
+unbuilt status map. It was reviewed against the later exp-024 checkpoint rather than
+merged at its older stacked base.
+The integration preserves the tutorial, the README orientation, the grouped gate
+description, and the tooling-report additions while keeping `agenda-001` as the only
+mutable size-by-size priority queue.
+
+The delta review found eleven substantive documentation defects.
+All were corrected in the merge, recorded rather than silently rewritten, and assigned
+one bead each:
+
+| Defect | Correction |
+| --- | --- |
+| D-172 | A configuration-space cell fixes separation choices; only the fixed-angle LP subproblem fixes an angle vector |
+| D-173 | Enclosure-only evaluation cannot infer an unknown contact; interval root methods and structural exact zero remain valid certificate routes |
+| D-174 | Centre elimination is contact-graph-specific, numerical values may seed but not decide reconstruction, and exact LP coefficients need not be rational |
+| D-175 | The living status retains exp-024, the 4/4 n=4 control, D-171’s closure, and the canonical campaign agenda |
+| D-176 | `n=11` is the first proved genuinely-oblique improvement over the 0/45-degree class; angle classes are a modeling compression, and n=17 remains f64 evidence |
+| D-177 | Continuation need not be continuous through bifurcations, and moving geometry code alone is distinct from measuring solver-wrapper or batch cost |
+| D-178 | Project-specific theorem and experiment claims link directly to their retained evidence |
+| D-179 | Inflation hardness requires a named operational event, and determining `s(11)` remains an open mathematical problem rather than scheduled engineering |
+| D-180 | Current orientation routes to the tutorial, synopsis, and agenda rather than the explicitly superseded quench-spine handoff |
+| D-181 | A deterministic quench returns a point; point-basins exist but can split one connected terminal component |
+| D-182 | Loss shaping may preserve minimizers if proved, and duplicate suppression belongs only to exploration—not unbiased frequency measurement |
+
+This leaves a deliberately simple reading order: the tutorial teaches the objects, the
+synopsis owns current status, the agenda owns current experimental priority, and the
+ledger renders what has actually run.
+BC-003 is the next bounded slice and is explicitly tool validation at `n=5`;
+terminal-component research at that size remains a later, blocked agenda item.
+
 ## Post-merge operating disposition
 
 PR #14 has merged and is now the stable prototype base.

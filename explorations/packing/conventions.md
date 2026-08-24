@@ -221,41 +221,42 @@ Markdown link. This project has needed that twice.
 
 ## 10. What the Gate Actually Enforces
 
-`./test.sh`, in order:
+`./test.sh` runs thirty read-only steps, concurrently, with the transcript replayed in
+declared order; `./test.sh --list` prints the authoritative step names, and the `STEPS`
+table in the script is the only place a step is registered.
+What they enforce, grouped:
 
-1. Exact verification of Trump’s packing, and the negative control showing why float
-   cannot do it
-2. The degree-8 field polynomial re-derived independently, where sympy is installed
-3. The fixed-angle cell rebuilt as a linear program, solved back to Trump’s packing, and
-   swept over its free angle
-4. Frontier corpus structure, and its soft-schema validation
-5. Generated tables in sync with the frontier data
-6. Strategy catalogue integrity
-7. The lint floor: ruff, ruff-format and basedpyright on the Python; clippy pedantic and
-   rustfmt on the Rust
-8. The negative controls in `tools/controls.yaml`, each a mutation that must be caught
-9. The soundness perimeter: every component that emits a configuration is checked by
-   `sqpack` through code it does not share
-10. The defect log: schema, contiguous ids, every open defect carrying a bead, every
-    narrative link resolving, every cited defect id existing, and the generated view in
-    sync with `defects.yaml`
-11. Every generated Markdown view is exempt from the auto-formatter, so a commit hook
-    cannot reflow a file that is drift-checked byte-for-byte
-12. The bead tree: no open bead under a closed parent, and no two open beads under one
-    parent sharing a title.
-    Skipped, loudly, where no `tbd-sync` store is reachable
-13. `SYNOPSIS.md` reconciled against the artifacts: round verdicts, hypothesis statuses,
-    round and effort totals, defect counts per class, nothing silently missing, and
-    every relative link and heading anchor resolving
-14. `README.md` reconciled against the directory: the layout tree against what is on
-    disk, the report index against `docs/project/research/`, and every link and anchor
-15. `sqsearch --selftest`—geometry against a naive reference, determinism, the `s(5)`
-    positive control, and the recomputed-overlap guard
-16. The differential test between search energy and the validity oracle
-17. Provenance: every round’s recorded engine commit still reachable, or annotated
-18. The campaign record: schema validation, id uniqueness, dangling references, unknown
-    series, more than one open series, stale claims, cross-field verdict rules,
-    idea-board reconciliation, reserved-id rules, dead links, and ledger freshness
+**Mathematics, checked exactly where the claim is exact.** Exact verification of Trump’s
+packing and the negative control showing why float cannot do it; the degree-8 field
+re-derived independently (where sympy is installed); the fixed-angle cell rebuilt as a
+linear program through independent constraint rows and solved back to Trump’s packing;
+Trump’s exact branchwise linearized cones (exp-013); the H-041 repaired-cover exact
+certificate and the H-010 printed-cover exact rejection (exp-016, exp-017); the exact
+`n = 3, 4` optimal moduli (exp-014, exp-015); and the golden basin maps, whose
+proved-case rows are checked against mathematics rather than against a stored snapshot.
+
+**Instruments.** `sqsearch --selftest` (geometry against a naive reference, determinism,
+the `s(5)` positive control, the recomputed-overlap guard); the differential test
+between search energy and the validity oracle; the basin atlas store invariants; the
+basin event record and its replay; basin identity; and the historical regressions each
+earlier defect fix left behind.
+
+**The record.** Frontier corpus structure and its soft-schema validation; generated
+tables in sync with the frontier data; both strategy catalogues; the defect log (schema,
+contiguous ids, open defects carrying beads, links resolving, the generated view in
+sync); `SYNOPSIS.md` and `README.md` reconciled against the artifacts and the directory;
+the campaign record (schema validation, id uniqueness, dangling references, verdict
+rules, idea-board reconciliation, ledger freshness); provenance (every round’s recorded
+engine commit reachable, or annotated); the bead tree; and the skills mirrored between
+`.agents` and `.claude`.
+
+**Hygiene.** The lint floor (ruff, ruff-format and basedpyright on the Python; clippy
+pedantic and rustfmt on the Rust); the soundness perimeter (every component that emits a
+configuration is checked by `sqpack` through code it does not share); and the negative
+controls in `tools/controls.yaml`, each a mutation that must be caught.
+
+A skipped check is recorded and re-listed at the end, `--strict` turns any skip into a
+failure, and “ALL CHECKS PASSED” is printed only when it is literally true.
 
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.
