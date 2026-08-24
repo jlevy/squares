@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 170
+count: 171
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4326,3 +4326,29 @@ defects:
   recurrence_of: D-039
   bead: think-k2vb
   recorded_in: defects.yaml
+- id: D-171
+  title: One n=4 positive-control evaluation remains unsettled after bounded repair
+  date: '2026-08-24'
+  layer: quench
+  class: robustness
+  direction: conservative
+  detected_by: control_cell
+  latent_for: first BasinEvent/v3 n=4 calibration
+  severity: high
+  status: outstanding
+  what: >-
+    Exp-023 seed 3 reaches a fixed-point evaluation whose successful HiGHS solution
+    still violates pair row 16 by 4.209e-10 after the single D-164 one-row retry. The
+    quench stops with one typed unsettled evaluation rather than returning convergence.
+  consequence: >-
+    The n=4 positive-control block is only 3/4 scientifically admissible. The retained
+    stop is trustworthy, but the producer cannot yet map every declared start at this
+    proved size, so scaling the same regime cannot support a complete-map claim.
+  fix: none yet
+  regression: >-
+    Retain and replay the exact seed-3 event and failing row. Diagnose whether the second
+    result reflects a cell-boundary alternative, solver tolerance, or an incorrect row;
+    preregister any bounded remedy and keep the 1e-10 screen unchanged.
+  recurrence_of: D-164
+  bead: think-pwd0
+  recorded_in: campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl

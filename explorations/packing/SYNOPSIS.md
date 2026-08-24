@@ -1010,8 +1010,8 @@ current criterion and kill rule.
 
 ## Experiments Conducted
 
-There are 22 rounds registered in `series-000`; all are terminal.
-They record 735 agent-minutes and 24.8 wall-minutes.
+There are 23 rounds registered in `series-000`; all are terminal.
+They record 743 agent-minutes and 25.0 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1051,6 +1051,7 @@ archive beside it.
 | [exp-020](campaign/series/series-000-smoke-and-calibration/experiments/exp-020-h-021-n5-basin-event-calibration.md) | 5 | positive control | H-021 | full-pose event replay | 4 valid; 4 producer-converged; 0 admissible | **blocked** |
 | [exp-021](campaign/series/series-000-smoke-and-calibration/experiments/exp-021-h-021-n3-basin-event-v3.md) | 3 | positive control | H-021 | BasinEvent/v3 semantic replay | 1 valid; 2,037/2,037 fixed-point evaluations settled; 1 admissible | **baseline** |
 | [exp-022](campaign/series/series-000-smoke-and-calibration/experiments/exp-022-h-021-n3-basin-event-v3-completion.md) | 3 | positive control | H-021 | BasinEvent/v3 semantic replay | 3 valid; 8,364/8,364 evaluations settled; 3 admissible | **baseline** |
+| [exp-023](campaign/series/series-000-smoke-and-calibration/experiments/exp-023-h-021-n4-basin-event-v3.md) | 4 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 3 converged/admissible; one typed unsettled stop | **baseline** |
 
 ### Cost and provenance
 
@@ -1078,8 +1079,9 @@ archive beside it.
 | exp-020 | 4 seeds, 10 s each | 14.821 s | 5 m | dependency | `ee3acc1` |
 | exp-021 | 1 seed, 10 s cap | 1.897 s | 15 m | criterion | `8f20908` |
 | exp-022 | 3 seeds, 10 s each | 6.274 s | 6 m | criterion | `8f20908` |
+| exp-023 | 4 seeds, 10 s each | 12.506 s | 8 m | criterion | `8f20908` |
 
-### What the twenty-two rounds jointly establish
+### What the twenty-three rounds jointly establish
 
 **The numerical basin event trust boundary is now admissible on one proved positive
 control; component classification is not.** Exp-018 through exp-020 retain twelve
@@ -1090,6 +1092,8 @@ settled, whose pose independently verifies, and whose admissibility claim replay
 Exp-022 completes the four-seed v3 block at 4/4 admissible: three endpoints reach side 2
 and one reaches the valid nonoptimal side 2.362735797795. These events are evidence for
 the producer contract and terminal outcomes, not terminal-component counts.
+Exp-023 reaches proved side 2 on three of four n=4 starts; the fourth event retains one
+unsettled post-check rejection and fails closed, so the v3 n=4 cell is 3/4 admissible.
 None of the four `n=5` starts finds its proved optimum.
 The exact small-moduli controls remain valid; component identity is the next blocked
 layer. The `n=12` calibration returns exactly `4.0`, but that is not a known-answer
@@ -1162,7 +1166,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 170 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 171 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -1170,7 +1174,7 @@ and checked in the gate.
 | soundness | 56 | asserted something false about the mathematics |
 | validity | 51 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 46 | recorded something its own evidence contradicts |
-| robustness | 13 | did not finish, or finished only by luck |
+| robustness | 14 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -1262,7 +1266,7 @@ vocabulary that could not record the H-024 result, the omitted `n=29` source pro
 that the falsifier exposed, the roll-up’s obsolete blanket claim about exploratory
 record evidence, the distinction between a branch linearization and a true Bouligand
 motion, and a certificate replay that did not require one-to-one branch coverage.
-The next tranche, D-139 through D-170, records the missing hard-square topology
+The next tranche, D-139 through D-171, records the missing hard-square topology
 literature, a stale closed-family contact claim, exact-moduli integration errors,
 Stromquist source transcription and proof-chain mistakes, stale campaign effort, the
 paper’s extraneous Lemma 4 root, and the escaping Figure 14 box.
@@ -1310,6 +1314,8 @@ were never replayed.
 Every accepted cell now passes the full original LP residual vector.
 D-170 gives D-165 its own bead after the defect log was found to reference the unrelated
 D-132 tracker; the older bead remains unchanged.
+D-171 retains one n=4 seed whose bounded numerical repair still leaves a pair-row
+post-check rejection; the v3 event fails closed instead of promoting it.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).

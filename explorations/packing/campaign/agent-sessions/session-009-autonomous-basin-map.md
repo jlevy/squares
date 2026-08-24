@@ -39,8 +39,9 @@ session:
       poses, independent validity, typed producer termination, and event timings. Their
       twelve historical v2 events remain blocked as recorded. Exp-021 and exp-022 add a
       complete four-seed n=3 block of scientifically admissible v3 terminal events with
-      balanced receipts; the number of component-classified map cells remains zero, so
-      no complete-map claim follows.
+      balanced receipts. Exp-023 adds three admissible n=4 events and one explicit
+      unsettled stop; the number of component-classified map cells remains zero, so no
+      complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -125,11 +126,13 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-020-h-021-n5-basin-event-calibration.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-021-h-021-n3-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-022-h-021-n3-basin-event-v3-completion.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-023-h-021-n4-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-021-h-021-n3-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl
   - tools/basin_census.py
   - README.md
   - campaign/README.md
@@ -186,11 +189,17 @@ session:
     three reach side 2, and one reaches valid nonoptimal side 2.362735797795. The three
     new events contain 8,364 settled and zero unsettled fixed-point evaluations and cost
     6.27 seconds total.
+  - >-
+    Exp-023 completes inside its cap in 12.51 seconds: n=4 seeds 0-2 reach proved side 2
+    and are admissible; seed 3 retains one unsettled fixed-point evaluation after pair
+    row 16 remains 4.209e-10 outside the screen after bounded repair. The event fails
+    closed under D-171, leaving the cell 3/4 admissible.
   stop_reason: null
   next_action: >-
-    Run one prepriced four-seed n=4 BasinEvent/v3 cell under a 60-second process cap,
-    retain every stopping outcome, and compare only event admissibility and cost with the
-    exact n=4 positive control. Stop before n=5 and make no component-count claim.
+    In one thirty-minute D-171 slice, retain the n=4 seed-3 failing fixed cell and
+    classify whether its second result is a cell-boundary alternative, solver artifact,
+    or row error. Preregister at most one bounded remedy if the cause is homogeneous;
+    otherwise preserve the 3/4 cell and switch research lanes before running n=5.
 ---
 # Session 009 — Bounded Progress Before Scale
 
