@@ -174,6 +174,7 @@ agenda:
     depends_on: [BC-006]
     next_evidence: retained event plus canonicalization share of wall time
     parallel_group: performance
+    note: Claimed as exp-030; stop at one seed and profile if the complete cell exceeds 30s.
   - id: BC-008
     purpose: tool_validation
     owner_focus: correctness

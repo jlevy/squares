@@ -162,6 +162,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
@@ -272,9 +273,8 @@ session:
   - The post-exp-029 full normal gate passes all thirty steps in 61 wall-seconds.
   stop_reason: null
   next_action: >-
-    After exp-029 and the full gate are committed and pushed, execute only BC-007: one
-    fixed n=9 seed under a 20-second quench and 60-second command cap, then stop or
-    profile if the full cell exceeds 30 seconds.
+    Execute preregistered exp-030 only: one fixed n=9 seed under a 20-second quench and
+    60-second command cap, then stop or profile if the full cell exceeds 30 seconds.
 ---
 # Session 009 — Bounded Progress Before Scale
 
