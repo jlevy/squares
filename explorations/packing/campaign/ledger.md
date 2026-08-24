@@ -8,6 +8,7 @@
 | --- | --- | --- | --- | ---: | --- |
 | [session-001](agent-sessions/session-001-pr15-review-reset.md) | completed | process | think-m79h | 7 | Resume the broader Correctness and Insight review from the ready bead queue, beginning with the highest-priority mathematical ambiguity. |
 | [session-002](agent-sessions/session-002-pr16-integration.md) | completed | process | think-7wsz | 3 | Review PR 15, then resume the correctness lane at think-1s0h or the independent portability experiment at think-osyp. |
+| [session-003](agent-sessions/session-003-unattended-research-readiness.md) | completed | process | think-1sxv | 4 | Publish this checkpoint, then begin H-023/H-021 terminal-component evidence while think-kmn2 designs per-cell queue pricing. |
 
 ## Series
 
@@ -19,15 +20,30 @@
 
 | id | status | lane | claim | sweep | rounds | spent |
 | --- | --- | --- | --- | --- | --- | --- |
-| H-001 | blocked | search | Optimal packings at n <= ~30 use at most 3 distinct tilt angles, so a  | n: 5 10 11 | 0 |  |
+| H-001 | blocked | search | A proposer restricted to at most three learned angle classes, followed | n: 5 10 17 11 | 0 |  |
 | H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 4 | 190m agent + 4.9m wall |
+| H-003 | blocked | search | Under one versioned proposer, quench, and terminal-component relation, | n: 5 6 7 8 9 10 11 | 0 |  |
+| H-004 | blocked | search | At n = 11, seeds constructed by adding a square to the proved n = 10 p | n: 11 | 0 |  |
+| H-005 | blocked | search | A Cleemann-style construction using a 3-4-5 tilt packs 97 unit squares | n: 78 97 | 0 |  |
+| H-006 | blocked | proof | Fractional-transversal LP duals for pose discretizations at the n = 12 | n: 11 12 | 0 |  |
+| H-007 | blocked | search | For a fixed proposer, quench, and terminal-component relation, indepen | n: 5 6 7 8 9 10 11 | 0 |  |
+| H-008 | blocked | search | Under the declared search and refinement pipeline, the rate at which e | n: 5 6 7 8 9 10 11 12 17 | 0 |  |
+| H-009 | blocked | search | D4 and square-relabel canonicalization merges at least 10 percent of r | n: 3 5 6 7 8 9 10 11 | 0 |  |
+| H-010 | blocked | proof | The continuous falsifier finds the known stage-one escape from the 10- | n: 10 12 | 0 |  |
 | H-011 | blocked | search | Under a versioned proposer P, deterministic quench Q, and terminal-com | n: 5 6 7 8 9 10 | 0 |  |
 | H-012 | blocked | search | Under one versioned raw-coordinate multistart proposal P, deterministi | n: 10 11 | 0 |  |
+| H-013 | blocked | search | Tracking configurations from an inflated container toward the target s | n: 10 11 | 0 |  |
+| H-014 | blocked | search | Continuation from circles through a preregistered superdisk-exponent l | n: 5 6 7 8 9 10 | 0 |  |
+| H-015 | blocked | search | A MAP-Elites proposer keyed by versioned tilt-class and contact-class  | n: 10 11 | 0 |  |
 | H-016 | refuted | search | The stock sqsearch annealer, at 100M moves per chain over 8 chains and | n: 10* 11* 12* | 4 | 10.2m wall |
 | H-017 | open | search | The stock annealer at 100x the baseline budget (1e10 moves per chain)  | n: 11 | 0 |  |
 | H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m wall |
-| H-019 | confirmed | search | On the n=11 Trump contact cell, varying the shared tilt of its five ti | n: 5 10 11* | 1 | 10m agent + 1s wall |
+| H-019 | confirmed | search | On the n=11 Trump contact cell, varying the shared tilt of its five ti | n: 11* | 1 | 10m agent + 1s wall |
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
+| H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3 4 5 6 7 8 | 0 |  |
+| H-022 | open question | proof | Is Trump's n = 11 packing isolated and locally optimal modulo D4 and r |  | 0 |  |
+| H-023 | open question | search | Which of the observed n = 5 polished endpoints are connected by feasib |  | 0 |  |
+| H-024 | blocked | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 | 0 |  |
 
 ## Rounds
 

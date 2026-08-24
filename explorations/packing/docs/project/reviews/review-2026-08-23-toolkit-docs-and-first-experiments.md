@@ -263,6 +263,15 @@ human record table actually advances.
 Test: `n = 12` seeded from 11 and 13 versus cold starts, same budget.
 Kill: no improvement in budget-to-side-4+ε. Tier S.
 
+**Correction, 2026-08-24.** That test is vacuous: the cold `n = 12` grid already has
+side 4 before search.
+The canonical
+[H-004 artifact](../../../campaign/hypotheses/H-004-neighbor-transfer-seeding.md) now
+tests add-from-10 and remove-from-12 seeds against paired cold starts at `n = 11`, with
+a preregistered median best-side improvement.
+The original wording remains above so the validity error is visible rather than silently
+rewritten ([D-080](../../../defects.md)).
+
 **H-5 · The `m² − 3` family fails at `m = 10`.** *A Cleemann-style construction with
 squares tilted at `arctan(3/4)` (the 6–8–10 Pythagorean angle, mirroring Cleemann’s
 8–15–17 `arctan(8/15)` at side 17) packs 97 unit squares in side `< 10`.* Honest prior:

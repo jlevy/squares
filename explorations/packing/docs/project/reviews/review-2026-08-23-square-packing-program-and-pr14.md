@@ -1263,9 +1263,85 @@ state.
 
 **Bead:** `think-55m2` (D-077).
 
+### F-35 (P1): the registered neighbor-transfer test was true before search began
+
+The standing H-4 proposed `n=12` budget-to-side-`4+epsilon` as the outcome.
+A cold grid already has side 4, so the control satisfies the target at initialization
+and the test cannot measure transfer.
+H-004 now makes a paired equal-budget comparison at `n=11`, using add-from-10 and
+remove-from-12 seeds and a fixed median best-side improvement.
+
+**Disposition:** fixed in the canonical registry artifact (D-080).
+
+### F-36 (P0): a nonempty queue is not a priced unattended agenda
+
+Preflight passes with one runnable recipe.
+H-017’s declared eight-hour timebox projects to about 2.8 hours at the recorded local
+throughput, and the runner has no second cell; the same green preflight therefore
+precedes both an underfilled night and an almost idle day.
+Queue state must be per unresolved cell and carry target-host p50/p95 cost, with a
+reserve beyond the intended horizon.
+
+**Bead:** `think-kmn2` (D-081).
+
+### F-37 (P1): living summaries again exceeded two completed experiments
+
+The synopsis repeated D-057’s generalization from one `n=17` method, budget and five-
+seed block to oblique-record blindness as a class.
+It also called Trump’s basin attracting through `epsilon=0.1` after H-018 observed zero
+registered-threshold returns and a finite-quench residual.
+The first result is scoped to its registered regime; the second diagnoses incomplete
+convergence and establishes no component attraction.
+
+**Disposition:** fixed with visible corrections in the synopsis and exp-005 (D-082,
+D-083).
+
+### F-38 (P1): the `n=11` frontier record promoted two unsupported facts
+
+The structured artifact said `rigid: true` while its body admitted that no rank or
+interval-local isolation certificate exists.
+It also called the 0.0882 interval the smallest open gap although the corpus ranks it
+fourth. Rigidity is now unknown, and the text distinguishes the smallest open instance
+from the fourth-smallest numerical gap.
+
+**Disposition:** fixed in `frontier/n-011.md` (D-084); H-022 carries the local-geometry
+question.
+
+### F-39 (P2): documented read-only commands could modify the lockfile
+
+The campaign runbook and synopsis still used unfrozen `uv run`; invoking the documented
+runner help path rewrote tracked `uv.lock`. Living commands now pass `--frozen`,
+restoring the operator boundary D-058 said had been fixed.
+
+**Disposition:** fixed (D-085, recurrence of D-058).
+
+### F-40 (P1): the active overnight plan scheduled finished work and an inadmissible census
+
+The plan retained the old ten-round, 16.4-wall-minute aggregate, scheduled landed
+canonicalization and atlas blocks, and directed an H-011 launch before terminal identity
+and independent runner validity.
+The dated quench handoff made the same path current.
+One rebuilt plan now separates autonomous agent work from numeric execution, records the
+eleven-round/23.0-wall-minute baseline, and supplies exact scientific, lifecycle,
+capacity and morning-artifact gates.
+
+**Disposition:** fixed; overlapping overnight epics are superseded by `think-ydus`
+(D-086).
+
+### F-41 (P1): the angle-class registry combined different claims and an unmeasured sweep
+
+H-001 used one assertion both for a corpus-wide few-angle law and for a proposer’s
+performance. Neither implies the other.
+H-019 named `n=5,10,11` as its sweep while its claim and measurement concern only
+Trump’s `n=11` shared-tilt slice.
+H-001 now owns the algorithm comparison, H-024 owns the corpus law, and H-019 declares
+only its measured cell.
+
+**Bead:** `think-w5rb` for H-024’s corpus evidence (D-087).
+
 ### Technical-finding to defect-logbook crosswalk
 
-Every technical error in F-01 through F-34 now has a durable defect entry.
+Every technical error in F-01 through F-41 now has a durable defect entry.
 A finding can map to more than one entry when it combined independent failure modes;
 prior entries are reused where the review reproduced an already known cause.
 
@@ -1305,6 +1381,13 @@ prior entries are reused where the review reproduced an already known cause.
 | F-32 | D-041, D-063, D-078, D-079 | Fixed: rank and logic corrections now state the actual conditions and witness |
 | F-33 | D-077 | Fixed: five corrections are accounted for consistently |
 | F-34 | D-077 | Fixed: current handoff uses parallel lanes and real blocker edges |
+| F-35 | D-080 | Fixed: neighbor transfer now has a discriminating paired target |
+| F-36 | D-081 | Open: unresolved-cell queue pricing and horizon readiness |
+| F-37 | D-057, D-082, D-083 | Fixed: both results are scoped to their actual regimes and observables |
+| F-38 | D-041, D-084 | Fixed structured facts; local rigidity certification remains open |
+| F-39 | D-058, D-085 | Fixed: living uv commands preserve the lockfile |
+| F-40 | D-071, D-086 | Plan fixed; append-only numerical morning reports remain open |
+| F-41 | D-087 | Fixed: algorithm, corpus, and single-cell kink claims are separate |
 
 ## Key omissions
 
@@ -1827,6 +1910,13 @@ beads because they are concrete corrections, not new strategy lanes:
 | D-076 | `think-dqhd` | Fixed: `n=5` six-of-six is a no-saturation observation, not a causal result |
 | D-077 | `think-sk4a`, `think-hej7`, `think-55m2` | Fixed: PR #16 handoff state, counts, and lanes reconciled |
 | D-078, D-079 | `think-djru` | Fixed: rank conditions and rigidity logic completed |
+| D-080 | `think-isa3` | Fixed: H-004 has a discriminating paired criterion |
+| D-081 | `think-kmn2` | Open: price scientifically admissible unresolved cells for both launch horizons |
+| D-082, D-083 | `think-1sxv` | Fixed: H-020 and H-018 summaries no longer exceed their measurements |
+| D-084 | `think-1sxv` | Fixed structured `n=11` rigidity and gap-rank facts; H-022 remains open |
+| D-085 | `think-1sxv` | Fixed: living uv commands are frozen |
+| D-086 | `think-ydus` | Fixed: one current readiness agenda and superseded stale handoff |
+| D-087 | `think-w5rb` | Claim split fixed; corpus evidence remains to be reconstructed |
 
 Ten hostile-isolation prototype beads—`think-5zzb`, `think-xe5l`, `think-tg66`,
 `think-1pyr`, `think-6wgw`, `think-06vo`, `think-v8ve`, `think-zh3m`, `think-om54`, and
@@ -1972,6 +2062,15 @@ The final normal gate passed in 114 seconds with all 30 mutation controls firing
 defects reconciled, and both agent sessions indexed.
 Its largest stages were the soundness perimeter at 33 seconds, negative controls at 27
 seconds, and historical regressions at 20 seconds.
+
+After PR #15 merged, the unattended-readiness checkpoint rebuilt the active agenda,
+codified the full 24-artifact portfolio, and recorded F-35 through F-41 as D-080 through
+D-087. The normal gate passed in 132 seconds with all 30 mutation controls firing, all
+87 defects reconciled, and three agent sessions indexed.
+Its largest stages were the soundness perimeter at 40 seconds, negative controls at 31
+seconds, and historical regressions at 23 seconds.
+This is repository-checkpoint evidence, not authorization for an unattended numeric run;
+the new plan’s scientific and lifecycle gate remains open.
 
 No primary mathematical or research-strategy remediation bead is closed by these
 checkpoint repairs. The focused D-066 through D-070 and D-072 through D-074 incident

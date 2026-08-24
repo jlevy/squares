@@ -4,21 +4,21 @@ Do not edit by hand.
 
 # Defect log
 
-79 defects recorded across the packing toolchain.
+87 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **28 soundness defects** — the system asserting something false about the mathematics.
-  21 of them pointed in the *flattering* direction, which is the dangerous one: the
+- **30 soundness defects** — the system asserting something false about the mathematics.
+  23 of them pointed in the *flattering* direction, which is the dangerous one: the
   error looks like success.
-- **21 fixes left no regression check behind.** That list is the best predictor of what
+- **28 fixes left no regression check behind.** That list is the best predictor of what
   comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062
   repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075
   repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079
-  repeats D-063).
-- **19 are still open** (outstanding or contained), every one carrying a bead.
+  repeats D-063, D-082 repeats D-057, D-085 repeats D-058).
+- **20 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -26,14 +26,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 1 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 7 | a cell of the sweep whose answer is known in advance |
-| `review` | 50 | a human or agent reading the work against a checklist |
+| `review` | 57 | a human or agent reading the work against a checklist |
 | `anomaly` | 4 | a result that made no sense, chased down |
-| `inspection` | 12 | reading the code or the design with intent |
+| `inspection` | 13 | reading the code or the design with intent |
 | `drift_check` | 2 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 2 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 2 of 79, and none of the 28
+The line worth reading twice: **the automated gate caught 2 of 87, and none of the 30
 soundness defects.** Gates confirm what you already thought to check.
 The rest were found by a device built to be *surprised* — a control cell, a
 pre-registered rule, a generated view contradicting itself — or by someone reading
@@ -46,17 +46,17 @@ carefully.
 | engine | 8 |
 | quench | 10 |
 | verifier | 1 |
-| record | 31 |
-| tooling | 19 |
-| docs | 10 |
+| record | 32 |
+| tooling | 21 |
+| docs | 15 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 28 |
-| validity | 16 |
-| bookkeeping | 26 |
+| soundness | 30 |
+| validity | 20 |
+| bookkeeping | 28 |
 | robustness | 7 |
 | performance | 2 |
 
@@ -88,6 +88,13 @@ This is the actionable list.
 | D-077 | The PR 16 handoff presented stale state and priorities as a current dependency queue | record |
 | D-078 | The n=5 rank correction still named equality independence as the sufficient condition | docs |
 | D-079 | The handoff retained an invalid implication from record rigidity to non-record behavior | docs |
+| D-080 | The original neighbor-transfer criterion was satisfied by the cold-start grid | docs |
+| D-082 | The synopsis again generalized one n=17 regime to oblique-search blindness | docs |
+| D-083 | A finite-quench residual was called evidence of attraction through epsilon 0.1 | docs |
+| D-084 | The n=11 frontier artifact asserted rigidity and the wrong gap rank | docs |
+| D-085 | Living run commands could rewrite the locked dependency state | tooling |
+| D-086 | The overnight agenda and current handoff retained obsolete work and effort state | record |
+| D-087 | Angle-class evidence and an untested kink sweep combined distinct claims | docs |
 
 ## Still open
 
@@ -112,6 +119,7 @@ This is the actionable list.
 | D-059 | outstanding | critical | The golden map mixed unhermetic discovery snapshots with mathematical pass-fail assertions | `think-zt29` |
 | D-061 | outstanding | high | Unrecognised endpoint rows discard the evidence needed to classify them | `think-aans` |
 | D-071 | outstanding | medium | Generated session reports overwrite history and are not durable | `think-y37w` |
+| D-081 | outstanding | high | Runner preflight treats any nonempty queue as enough unattended work | `think-kmn2` |
 
 ## Every defect
 
@@ -196,3 +204,11 @@ This is the actionable list.
 | [D-077](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | record | bookkeeping |  | `review` | high | fixed | The PR 16 handoff presented stale state and priorities as a current dependency queue |
 | [D-078](docs/project/reviews/review-2026-08-23-response-to-pr15-review.md) | 2026-08-23 | docs | soundness | flattering | `review` | medium | fixed | The n=5 rank correction still named equality independence as the sufficient condition |
 | [D-079](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | docs | soundness | flattering | `review` | medium | fixed | The handoff retained an invalid implication from record rigidity to non-record behavior |
+| [D-080](campaign/hypotheses/H-004-neighbor-transfer-seeding.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The original neighbor-transfer criterion was satisfied by the cold-start grid |
+| [D-081](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | tooling | validity | flattering | `review` | high | outstanding | Runner preflight treats any nonempty queue as enough unattended work |
+| [D-082](SYNOPSIS.md) | 2026-08-24 | docs | validity | conservative | `review` | high | fixed | The synopsis again generalized one n=17 regime to oblique-search blindness |
+| [D-083](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | A finite-quench residual was called evidence of attraction through epsilon 0.1 |
+| [D-084](frontier/n-011.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The n=11 frontier artifact asserted rigidity and the wrong gap rank |
+| [D-085](campaign/README.md) | 2026-08-24 | tooling | bookkeeping |  | `inspection` | medium | fixed | Living run commands could rewrite the locked dependency state |
+| [D-086](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | record | bookkeeping |  | `review` | high | fixed | The overnight agenda and current handoff retained obsolete work and effort state |
+| [D-087](campaign/hypotheses/H-001-angle-class-reduction.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Angle-class evidence and an untested kink sweep combined distinct claims |

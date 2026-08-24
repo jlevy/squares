@@ -134,6 +134,13 @@ un-normalised comparison would measure drift rather than the basin.
 
 ## What the prediction got wrong
 
+**Interpretation correction, 2026-08-24.** The approximately linear residual under the
+tested finite schedules supports the conclusion that this refiner had not converged.
+It does not establish that Trump’s terminal component attracts perturbations through
+`eps = 1e-1`, that the endpoint is isolated, or that the perturbed trajectories remain
+in one component. The paragraph below is retained as the original interpretation; its
+“basin is attracting” conclusion is retracted.
+
 The hypothesis was written to distinguish two worlds — “the basin is real but small”
 from “the configuration is an isolated point with no attracting neighbourhood” — and
 expected the `eps` at which the return rate collapses to be the basin’s radius.
@@ -146,9 +153,9 @@ instead is a *rate*: the quench is still converging when it stops, and multiplyi
 effort by ten roughly halves the residual — at `eps = 1e-5` the best trial lands
 `1.4e-10` from Trump’s side, which is the answer to machine precision.
 
-So the third world the hypothesis did not enumerate is the one we are in: the basin is
-attracting, at least out to `eps = 1e-1`, and what limits the return is the refiner’s
-convergence rate, not the landscape.
+The original interpretation called that pattern an attracting basin out to `eps = 1e-1`.
+The correction above narrows the finding to the tested refiner’s residual; component
+attraction remains unresolved.
 The measurement’s own criterion (`1e-6` in `max_dev`) turns out to be a statement about
 the refiner rather than about the basin, which is why the answer is “refuted” and the
 finding is not “no basin”.

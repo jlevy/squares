@@ -34,13 +34,9 @@ registered hypothesis appears here.
 
 **Ids `H-001`–`H-015` belong to the
 [standing review’s register](../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register)**,
-and are reserved even where not yet codified as artifacts, so the two numberings stay
-aligned.
-This campaign’s own claims start at `H-016`. Reserved ids are declared below and
-checked: a reservation that has been fulfilled is flagged as stale rather than left
-claiming the id is unwritten.
-
-<!-- reserved-ids: H-003 H-004 H-005 H-006 H-007 H-008 H-009 H-010 H-013 H-014 H-015 -->
+and are now all codified as artifacts, so the two numberings stay aligned.
+This campaign’s own claims start at `H-016`; later entries include both new hypotheses
+and formally carried open questions.
 Budgets are in **pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`.
 
 ## Status vocabulary
@@ -124,20 +120,23 @@ the ledger can report which whole families remain untried.
 | --- | --- | --- | --- | --- | --- |
 | 5 | Census the `n ≤ 10` landscape to saturation | registered | [H-011](hypotheses/H-011-small-n-census.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | Runs on existing Python plus the validated LP — no Rust. Gates the atlas |
 | 6 | Locate the record basin in the quench-frequency ranking | registered | [H-012](hypotheses/H-012-record-basins-are-rare.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | The load-bearing premise, killable in the cheapest tier |
-| 7 | Basin-entry: perturb Trump’s exact packing, measure the return rate | registered | [H-018](hypotheses/H-018-basin-entry.md) | this campaign | **Measured ([exp-005](series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md)):** refuted as stated, but there is no basin wall — return distance is linear in `eps` and halves with 10× effort, so the limit is the refiner |
-| 8 | Saturation curves are lawful, so coverage is estimable | raw | `H-007` | review H-7 | Turns negative results into estimates. Reserved id, not yet codified |
-| 9 | False-basin rate `r(n)` — float basins the exact verifier rejects | raw | `H-008` | review H-8 | Free: a counter on existing work. Any value is a result |
-| 10 | Symmetry dedup ratio, raw versus canonical counts | raw | `H-009` | review H-9 | Free; and required before any comparison with Ellsworth’s counts |
+| 7 | Basin-entry: perturb Trump’s exact packing, measure the return rate | registered | [H-018](hypotheses/H-018-basin-entry.md) | this campaign | **Measured ([exp-005](series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md)):** refuted as stated. The finite-quench residual scaled with `eps` and decreased with effort; component attraction remains unresolved |
+| 8 | Saturation curves are lawful, so coverage is estimable | registered | [H-007](hypotheses/H-007-saturation-curves.md) | review H-7 | Turns negative results into held-out coverage estimates rather than visual plateau claims |
+| 9 | False-basin rate `r(n)` — float basins the stronger verifier rejects | registered | [H-008](hypotheses/H-008-false-basin-rate.md) | review H-8 | A measured validity-perimeter rate; zero is a legitimate result |
+| 10 | Symmetry dedup ratio, raw versus canonical counts | registered | [H-009](hypotheses/H-009-symmetry-dedup-ratio.md) | review H-9 | Required before comparison with any published count; ambiguity stays as bounds |
+| 10a | Contact count predicts attraction frequency | registered | [H-003](hypotheses/H-003-basin-frequency-and-contacts.md) | review H-3 | A held-out predictor test, not a definition of rigidity or component identity |
+| 10b | Terminal endpoints are identifiable often enough to census | registered | [H-021](hypotheses/H-021-endpoint-identifiability.md) | this campaign | Measurement-system gate: at most 5% unresolved support on every cell through `n=8` |
 
 ## Proposers — the strategies the spine makes cheap
 
 | # | Idea | Status | H | From | Why it might work, or not |
 | --- | --- | --- | --- | --- | --- |
-| 11 | Angle-class two-level search | registered | [H-001](hypotheses/H-001-angle-class-reduction.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | The honest continuous dimension is `n`, not `3n+1`; records use 1–2 angles |
-| 12 | δ-continuation: inflate the container, walk `δ` down with re-polish | raw | `H-013` | review H-13 | Rare-event search becomes path-following; merge-`δ` doubles as the atlas’s barrier scale |
-| 13 | MAP-Elites over mechanism descriptors | raw | `H-015` | review H-15 | Keeps the loss, changes what is retained. Descriptors must separate the grid funnel from oblique and record-like structures without assuming rigidity predicts rarity |
-| 14 | Neighbor-transfer seeding from `n ± 1` records | raw | `H-004` | review H-4 | How the human record table actually advances |
-| 15 | Superdisk continuation from circles to squares | raw | `H-014` | review H-14 | Last in line: the only item needing new geometry |
+| 11 | Angle-class two-level search | registered | [H-001](hypotheses/H-001-angle-class-reduction.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | Algorithmic paired comparison; the corpus-wide angle-count claim is separate |
+| 11a | Verified records through `n=30` use at most three angle classes | registered | [H-024](hypotheses/H-024-record-angle-class-count.md) | split from review H-1 | Descriptive corpus law; neither implies nor follows from H-001’s search performance |
+| 12 | δ-continuation: inflate the container, walk `δ` down with re-polish | registered | [H-013](hypotheses/H-013-delta-continuation.md) | review H-13 | Rare-event search becomes path-following; merge-`δ` doubles as the atlas’s barrier scale |
+| 13 | MAP-Elites over mechanism descriptors | registered | [H-015](hypotheses/H-015-map-elites-illumination.md) | review H-15 | Keeps the loss, changes what is retained. Descriptors are frozen before comparison |
+| 14 | Neighbor-transfer seeding from `n ± 1` records | registered | [H-004](hypotheses/H-004-neighbor-transfer-seeding.md) | review H-4 | Corrected to an equal-budget `n=11` comparison; the original `n=12` side-4 target was vacuous |
+| 15 | Superdisk continuation from circles to squares | registered | [H-014](hypotheses/H-014-superdisk-continuation.md) | review H-14 | Last in line: the only item needing new geometry |
 | 16 | Stock annealer, all cells, fixed budget | registered | [H-016](hypotheses/H-016-stock-annealer-reaches-standing-best.md) | this campaign | Refuted by exp-001. The null |
 | 17 | Same annealer, 100× the budget | registered | [H-017](hypotheses/H-017-budget-scaling.md) | this campaign | Demoted: H-012 answers it better and cheaper |
 | 18 | Billiard / inflation | raw |  | `search:11` | Produced records at `n = 29, 37`; δ-continuation is its principled cousin |
@@ -149,9 +148,9 @@ the ledger can report which whole families remain untried.
 | --- | --- | --- | --- | --- | --- |
 | 20 | `s(17)` as the mechanism-matched calibration target | registered | [H-020](hypotheses/H-020-oblique-record-finding-n17.md) | strategy doc | The nearest case whose record uses genuinely oblique structure. `n = 5, 10` do not exercise it. A one-seed probe already returned exactly `5.0`, the trivial grid |
 | 21 | `n = 11` at inflated `δ` as a continuous progress metric | shaped |  | strategy doc | The largest `δ` at which the engine still finds Trump’s cell moves continuously, unlike found/not-found |
-| 22 | `m² − 3` at `n = 61, 78, 97`, Cleemann-style `arctan(3/4)` | raw | `H-005` | review H-5 | Honest prior low, cost near zero, analytic attempt needs no engine |
-| 23 | LP duals as unavoidable-set generators (proof lane) | raw | `H-006` | review H-6 | First mechanized step anyone would have taken on the proof side |
-| 24 | Stromquist falsifier triple | raw | `H-010` | review H-10 | Known-answer test; a failure is a machinery bug by definition |
+| 22 | `m² − 3` at `n = 61, 78, 97`, Cleemann-style `arctan(3/4)` | registered | [H-005](hypotheses/H-005-m2-minus-3-construction.md) | review H-5 | Honest prior low, cost near zero, analytic attempt needs no engine |
+| 23 | LP duals as unavoidable-set generators (proof lane) | registered | [H-006](hypotheses/H-006-lp-dual-unavoidable-sets.md) | review H-6 | Quantitative cross-resolution support screen; never itself a proof |
+| 24 | Stromquist falsifier triple | registered | [H-010](hypotheses/H-010-stromquist-triple.md) | review H-10 | Known-answer falsifier control followed by a separate certificate leg |
 
 ## Open questions
 
@@ -161,18 +160,23 @@ Registered as `kind: open_question` when worth carrying formally.
 - <a id="the-shape-of-the-search-space"></a>**How wide is Trump’s basin?** **Answered,
   and the question was wrong.**
   [exp-005](series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md)
-  found no width to measure: under a local quench the return distance is linear in the
-  perturbation over four decades with no threshold, and halves when effort is multiplied
-  by ten. What that measures is the refiner’s convergence rate, not a basin radius — so
-  the width question is only answerable once the LP quench
-  ([H-002](hypotheses/H-002-lp-in-cell-polish.md)) lands and converges in one solve.
-  The stock schedule, meanwhile, cannot hold the basin from `eps = 1e-5`, which reframes
-  `exp-003` as partly a polish failure.
+  found no width to measure: under a finite local quench the return residual scaled with
+  the perturbation and decreased with more effort.
+  That measures this refiner’s convergence behavior, not a basin radius — so the width
+  question is only answerable once a converged quench and terminal-component relation
+  are both available ([H-021](hypotheses/H-021-endpoint-identifiability.md)). The stock
+  schedule, meanwhile, moves far from the reference even from `eps = 1e-5`, which
+  reframes `exp-003` as partly a refinement failure without assigning a component.
 - **What does the searcher actually find at `n = 11`?** The baseline’s `3.9144` is some
   configuration. How many distinct local optima does it have, and how many tilt angles do
   they use? A histogram over restarts would say whether the search is finding one wrong
   answer repeatedly or many.
 - **Does any run ever produce a two-tilt configuration unprompted?**
+- **[What is the certified local geometry of Trump’s packing?](hypotheses/H-022-trump-local-geometry.md)**
+  The exact contacts do not by themselves establish isolation or local optimality.
+- **[Are the observed `n=5` endpoints in one terminal family?](hypotheses/H-023-n5-terminal-connectivity.md)**
+  Six endpoints from six proposals do not decide their connectivity.
+  Six endpoints from six draws show non-saturation, not its cause.
 
 ## Dead ends
 

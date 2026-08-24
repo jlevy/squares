@@ -35,7 +35,20 @@ hypothesis:
     hold it", two failures with identical symptoms and different fixes. Runnable today,
     unlike most of the strategy register.
 ---
-# H-018 — the cheapest informative measurement available today
+# H-018 — refuted; the finite quench measured its own residual
+
+The registered claim is refuted by
+[exp-005](../series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md):
+at `eps = 1e-3`, zero of forty trials in every arm returned within `1e-6`. Across the
+tested schedules the residual scaled approximately linearly with the perturbation and
+decreased when effort increased.
+
+That pattern diagnoses incomplete convergence of the tested refiner.
+It does **not** establish an attracting basin, a basin radius, isolation, or
+terminal-component membership; those require a converged quench and the component
+analysis now registered in H-021 through H-023.
+
+## Original rationale
 
 exp-001 says the annealer does not find Trump’s packing.
 Two very different worlds produce that observation: one where the basin is real but
@@ -44,20 +57,22 @@ isolated point with no attracting neighbourhood, where undirected restarting wil
 land on it.
 
 Starting *inside* the answer and walking outward distinguishes them directly.
-The `eps` at which the return rate collapses is the basin width, in the units the search
-actually moves in — so this produces a number either way.
+The proposed diagnostic was the `eps` at which return rate collapsed.
+The completed round showed that, under a finite non-converged refiner, this score is a
+convergence measurement rather than a basin-width measurement.
 
 ## Where it sits among the merged register
 
-[H-012](H-012-record-basins-are-rare.md) measures basin rarity across the whole
-landscape and is the better instrument; this measures one basin’s radius, from the
-inside, and needs nothing that does not already exist.
+[H-012](H-012-record-basins-are-rare.md) is designed to measure component attraction
+frequency across a declared landscape.
+This round attempted a cheaper inside-out diagnostic, but the completed evidence shows
+its finite-quench score did not measure a component radius.
 The
 [search-philosophy report](../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md#calibration-must-match-mechanism-not-just-difficulty)
 lists basin-entry tests as one of three mechanism-matched calibration targets, alongside
 `s(17)` and inflated `n = 11` — none of which the current `n = 5` / `n = 10` ladder
 exercises, because both proved cases are 45° mechanisms.
 
-Worth re-running after [H-002](H-002-lp-in-cell-polish.md) lands: “does the refiner hold
-the cell” is a sharper question than “does the annealer wander back”, and the answers
-may differ.
+A successor may reuse the perturbation fixtures only after it declares a terminal-
+component relation and an independently checked convergence condition.
+H-002’s fixed- cell LP result alone does not supply either one.

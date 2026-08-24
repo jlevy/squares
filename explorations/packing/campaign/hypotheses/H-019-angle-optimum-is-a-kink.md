@@ -23,11 +23,11 @@ hypothesis:
   instrument: >-
     explorations/packing/run_quench.py plus a one-sided difference probe of
     solve_to_fixed_point around the known optimal tilt; measured at n = 11, extend to
-    n = 5, 10 and s(17).
+    other cells only under separately registered generalizations.
   instrument_ready: true
   regime: scipy HiGHS at primal feasibility 1e-10; f64 throughout
   instance: {axis: n, point: 11}
-  sweep: {axis: n, points: [5, 10, 11]}
+  sweep: {axis: n, points: [11]}
   priority: 1
   cost_estimate: tier S; seconds per probe
   prereqs: []
@@ -35,8 +35,8 @@ hypothesis:
   registered: '2026-08-23'
   notes: >-
     Registered by the runner of exp-006 before recording it, because the round measured
-    something H-002 did not predict. Kill: the one-sided derivatives agree at every
-    tested instance, making the stall numerical rather than geometric. Corrected under
+    something H-002 did not predict. Kill: the one-sided derivatives agree at the
+    registered n = 11 slice, making the stall numerical rather than geometric. Corrected under
     D-052 to remove an unsupported claim about all smooth and derivative-free methods;
     the measured one-dimensional kink and criterion are unchanged.
 ---

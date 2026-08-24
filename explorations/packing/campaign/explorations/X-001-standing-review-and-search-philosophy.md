@@ -21,7 +21,7 @@ exploration:
   - docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md
   - docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md
   - docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
-  proposes: [H-001, H-002, H-011, H-012]
+  proposes: [H-001, H-002, H-003, H-004, H-005, H-006, H-007, H-008, H-009, H-010, H-011, H-012, H-013, H-014, H-015, H-021, H-022, H-023, H-024]
 ---
 # X-001 — the idea source this campaign’s registry was mined from
 
@@ -57,7 +57,7 @@ count its own quantizer; `n = 5` supplies an unresolved warning but not a rank o
 connectivity proof. See [D-034](../../defects.md); terminal-component identity is a
 precondition on the deliverable, not a detail of its implementation.
 
-## What has been codified so far
+## What has been codified
 
 | Registry entry | Source |
 | --- | --- |
@@ -65,11 +65,13 @@ precondition on the deliverable, not a detail of its implementation.
 | [H-002](../hypotheses/H-002-lp-in-cell-polish.md) LP-in-cell polish | review H-2 — the register’s own top priority |
 | [H-011](../hypotheses/H-011-small-n-census.md) small-`n` census | review H-11, from the strategy capture |
 | [H-012](../hypotheses/H-012-record-basins-are-rare.md) rarity premise | review H-12, from the strategy capture |
+| [H-003](../hypotheses/H-003-basin-frequency-and-contacts.md) through [H-010](../hypotheses/H-010-stromquist-triple.md) | review H-3 through H-10 |
+| [H-013](../hypotheses/H-013-delta-continuation.md) through [H-015](../hypotheses/H-015-map-elites-illumination.md) | review H-13 through H-15 |
+| [H-021](../hypotheses/H-021-endpoint-identifiability.md), open questions [H-022](../hypotheses/H-022-trump-local-geometry.md) and [H-023](../hypotheses/H-023-n5-terminal-connectivity.md), and [H-024](../hypotheses/H-024-record-angle-class-count.md) | readiness review: measurement-system and local-geometry gaps exposed while preparing the overnight agenda; H-024 splits the corpus-law half from H-001’s algorithmic comparison |
 
-**`H-3`…`H-10` and `H-13`…`H-15` are not yet codified.** They remain prose in the
-review, are listed on the [idea board](../ideas.md), and are tracked as a work item.
-Ids `H-003`…`H-010` and `H-013`…`H-015` are reserved for them, so the review’s numbering
-and this registry’s stay aligned.
+All fifteen review ids are now artifacts.
+The registry versions are canonical where their criteria sharpen or correct the
+historical prose.
 
 ## What this campaign contributed back
 

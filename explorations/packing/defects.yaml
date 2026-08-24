@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 79
+count: 87
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -2001,3 +2001,189 @@ defects:
   recurrence_of: D-063
   bead: think-djru
   recorded_in: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+- id: D-080
+  title: The original neighbor-transfer criterion was satisfied by the cold-start grid
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    Review H-4 proposed comparing neighbor-transfer seeds with cold starts at n = 12 by
+    budget to side 4 plus epsilon. The ordinary n = 12 grid already has side exactly 4,
+    so the control satisfies the target before search and the experiment cannot measure
+    transfer quality.
+  consequence: >-
+    A vacuous success could be presented as evidence that cross-n transfer improves a
+    proposer while no search or comparison occurred.
+  fix: >-
+    H-004 now tests an equal-budget n = 11 comparison: add from the proved n = 10
+    packing or remove from the n = 12 grid, and require a preregistered median best-side
+    improvement over paired cold starts.
+  regression: none
+  recorded_in: campaign/hypotheses/H-004-neighbor-transfer-seeding.md
+- id: D-081
+  title: Runner preflight treats any nonempty queue as enough unattended work
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: outstanding
+  what: >-
+    runner.py preflight passes when one hypothesis is runnable but neither materializes
+    unresolved cells nor prices them on the target host. The only current recipe has an
+    eight-hour timebox yet projects to about 2.8 hours on the recorded local throughput;
+    preflight is green for both an eight-hour and a full-day intention.
+  consequence: >-
+    A nominally ready unattended session can drain its queue early, spend most of its
+    horizon idle, or substitute an unregistered task after launch.
+  fix: >-
+    none yet. Generate a per-cell queue with calibrated p50/p95 costs and scientific-
+    admissibility state. Require at least 1.25 times the requested horizon while keeping
+    ordinary status usable when the queue is underfilled.
+  regression: none
+  bead: think-kmn2
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-082
+  title: The synopsis again generalized one n=17 regime to oblique-search blindness
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: conservative
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    After D-057 narrowed H-020, SYNOPSIS.md still said the proposer cannot reach oblique
+    records as a class and that no budget spent on it can succeed. The evidence is five
+    seeds at n = 17, one implementation and one 1e8-move-per-chain budget, with only the
+    final retained best describing the trajectory.
+  consequence: >-
+    A scoped negative result again ruled out larger budgets, other instances and related
+    proposers, shrinking the research portfolio without supporting observations.
+  fix: >-
+    The synopsis now states the exact tested regime, retains the n = 17 negative result,
+    and explicitly leaves trajectory orientations and larger-budget behavior open.
+  regression: none
+  recurrence_of: D-057
+  recorded_in: SYNOPSIS.md
+- id: D-083
+  title: A finite-quench residual was called evidence of attraction through epsilon 0.1
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    exp-005 refuted H-018 with zero of forty registered-threshold returns in every arm,
+    then inferred from an approximately linear residual that Trump's basin attracts
+    perturbations through epsilon 0.1. The refiner had not converged and terminal-
+    component identity is unresolved, so that observation establishes neither
+    attraction nor component membership.
+  consequence: >-
+    A convergence-rate diagnostic was promoted into a landscape property and could be
+    used to calibrate rarity, continuation or basin width on an undefined object.
+  fix: >-
+    The hypothesis artifact, idea board and synopsis now scope the result to the tested
+    refiner's residual. The experiment retains a dated correction beside its original
+    interpretation, and H-021 through H-023 own the missing component evidence.
+  regression: none
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md
+- id: D-084
+  title: The n=11 frontier artifact asserted rigidity and the wrong gap rank
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    frontier/n-011.md set rigid true while its own narrative admitted that no active-
+    constraint rank or interval-local isolation certificate exists. The same narrative
+    called 0.0882 the smallest open gap at n <= 100 although the generated frontier
+    ordering places it fourth.
+  consequence: >-
+    A conjectural local property became structured fact, and the motivating case's
+    numerical priority was overstated in the corpus artifact agents query.
+  fix: >-
+    The rigidity field is now null; the text calls n = 11 the smallest open instance,
+    identifies its gap as fourth-smallest, and separates contact equations from a
+    missing local certificate.
+  regression: none
+  recorded_in: frontier/n-011.md
+- id: D-085
+  title: Living run commands could rewrite the locked dependency state
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  detected_by: inspection
+  severity: medium
+  status: fixed
+  what: >-
+    Campaign and synopsis commands used unfrozen uv run even though D-058 had recorded
+    frozen project resolution as part of the handover repair. A read-only runner help
+    invocation on the merged baseline rewrote tracked uv.lock.
+  consequence: >-
+    Orientation or preflight can dirty the tree and silently resolve a different
+    dependency set before a research run.
+  fix: >-
+    Living project commands now pass --frozen, including the fallback invocation named
+    in the runbook.
+  regression: none
+  recurrence_of: D-058
+  recorded_in: campaign/README.md
+- id: D-086
+  title: The overnight agenda and current handoff retained obsolete work and effort state
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The active overnight plan still totaled ten rounds and 16.4 wall-minutes, scheduled
+    already-landed canonicalization and atlas work, and proposed an H-011 census before
+    its identity and validity blockers. The handoff remained marked Current with the
+    same obsolete critical path and stronger runner-validation claims than D-044 allows.
+  consequence: >-
+    A new agent could rebuild finished components, skip live correctness blockers, or
+    launch a scientifically inadmissible census from a green but insufficient preflight.
+  fix: >-
+    One rebuilt readiness agenda now records eleven rounds and 23.0 wall-minutes,
+    separates the autonomous agent loop from numeric execution, gives exact launch
+    criteria, and maps the dependency lanes. The dated handoff is marked superseded and
+    links to that agenda.
+  regression: none
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-087
+  title: Angle-class evidence and an untested kink sweep combined distinct claims
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-001 combined a descriptive statement that optimal packings through roughly n = 30
+    use at most three angle classes with an algorithmic statement that a class-restricted
+    proposer beats annealing. H-019 declared a sweep over n = 5, 10 and 11 even though
+    its claim and only completed measurement concern Trump's one-dimensional n = 11
+    shared-tilt slice.
+  consequence: >-
+    A corpus regularity could be treated as evidence for search performance, search
+    performance as evidence for a universal corpus law, and one measured kink as a
+    completed multi-instance sweep.
+  fix: >-
+    H-001 now owns only the paired algorithmic comparison; new H-024 owns the corpus
+    angle-count claim with geometry-provenance requirements; and H-019's declared sweep
+    is n = 11 only. Generalizations require separate registered hypotheses.
+  regression: none
+  recorded_in: campaign/hypotheses/H-001-angle-class-reduction.md

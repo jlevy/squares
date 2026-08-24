@@ -4,7 +4,14 @@
 
 **Author:** Claude (agent)
 
-**Status:** Current
+**Status:** Superseded on 2026-08-24
+
+This is a historical checkpoint.
+Canonicalization and the atlas landed after it was written, while terminal-component
+identity, independent runner validity, and the unattended lifecycle remain open.
+Use the
+[current readiness agenda](specs/active/plan-2026-08-23-overnight-cartography-run.md)
+for priorities and go/no-go status; the dated details below are retained as provenance.
 
 This is the short, dated view: where the work stands and what to pick up.
 It is written to be thrown away when it stops being true, so it states positions rather
