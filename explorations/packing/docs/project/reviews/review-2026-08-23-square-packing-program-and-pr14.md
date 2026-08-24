@@ -2453,8 +2453,67 @@ one bead each:
 This leaves a deliberately simple reading order: the tutorial teaches the objects, the
 synopsis owns current status, the agenda owns current experimental priority, and the
 ledger renders what has actually run.
-BC-003 is the next bounded slice and is explicitly tool validation at `n=5`;
-terminal-component research at that size remains a later, blocked agenda item.
+BC-003 through BC-009 are complete.
+BC-010 is now the active research item at `n=5`, with each candidate-pair slice kept
+inside its own 30-minute bound.
+
+## Sixth post-merge research result
+
+Exp-033 answers the first narrow BC-010 question under a criterion committed before the
+exact checker ran. The two golden `n=5` rows at side `1 + 5sqrt(2)/4` have different
+geometric keys. After one declared D4 action and relabelling, four squares coincide and
+the fifth moves on the exact segment `p0(u)=(1/2+u,5/2-sqrt(2)/4+u)` for
+`0<=u<=3sqrt(2)/2-2`.
+
+Both endpoints pass the exact packing verifier.
+A 30-row common fixed-angle cell contains the whole segment, and an exact dual over
+`Q(sqrt(2))` proves its side is minimal in that cell.
+With side fixed, the active ranks are 11, 10, and 11 at the first endpoint, interior,
+and second endpoint, so the corresponding linear-face nullities are `0/1/0`. Generation
+and independent replay take 0.24 wall seconds and all six controls pass.
+The subsequent normal gate passes all 30 steps in 30 wall seconds.
+
+This proves one connected fixed-angle optimal face and refutes geometric-key inequality
+as evidence of separation for this pair.
+It does not prove that the deterministic quench selects every point on the face, that
+the full angle-varying stationary set is connected there, or that the other four golden
+rows have any declared clearance relation.
+The parent identity bead therefore stays open; its next bounded slice is the complete
+wall-release and separating-axis cone plus stationary continuation from this face.
+
+## Seventh post-merge research result
+
+Exp-034 answers the first second-order question left by exp-033 under a separately
+committed criterion.
+Write `t = tan(theta_0/2)` for the moving square and `e(t)=|t|(1-|t|)/(1+t^2)`. Exact
+arithmetic proves that every pair
+
+`|t| <= 1/100`,
+
+`e(t) <= u <= 3sqrt(2)/2-2-e(t)`
+
+gives a valid packing at side `1+5sqrt(2)/4` when the other four squares remain fixed.
+The exp-033 dual uses only squares 2, 3, and 4, so it proves every orientation-indexed
+LP cell in this declared sheet optimal.
+Four exact boundary fixtures, independent regeneration, and all five mutations pass in
+0.27 wall-seconds.
+
+The pre-run review also caught D-186: the first uncommitted pair `(0,3)` bound omitted
+the slide contribution from one projection and called active boundary inequalities
+strict. The corrected instrument includes the full adverse coefficient and separates
+nonnegative boundary constraints from positive residual margins before preregistration
+or execution.
+
+The result raises the certified local dimension lower bound from one fixed-angle slide
+to a two-parameter sheet.
+It still does not identify the entire stationary component: wall contacts may release,
+the active separating axis may switch, and continuation may leave the declared sheet.
+The next bounded child therefore enumerates the complete nonsmooth feasible cones and
+either continues every surviving branch or records an explicit ambiguity interval.
+
+After D-187 reconciled two stale mutation anchors, the normal gate passes all 30 steps
+in 35 wall-seconds, including all 37 negative controls and all five exact small-`n`
+replays. The campaign now contains 34 terminal rounds and 187 defect records.
 
 ## Post-merge operating disposition
 

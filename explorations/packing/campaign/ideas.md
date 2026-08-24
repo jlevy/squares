@@ -74,13 +74,16 @@ multiplies effort against the measured probability.
 rigid, no converse follows: a non-record optimum can be a positive-dimensional terminal
 family rather than a point.
 The exact `n = 3` side-2 sliding family proves that the current key splits one connected
-component. At `n = 5`, two matching side/contact summaries are an unresolved identity
-signal: raw contact counts establish neither rank deficiency, dimension, nor
-connectivity ([D-034](../defects.md)). Until the census defines what it counts, the
-denominator of “rare” is not a number, and the premise is untestable rather than merely
-untested. The baseline is consistent with that — five independent seeds landing in a
-narrow band five times narrower than the remaining gap is consistent with repeatedly
-finding one score region — but consistent is not evidence, and
+component.
+At `n = 5`, exp-033 proves the two equal-side keys share one exact fixed-angle
+optimal face, and exp-034 embeds it in a two-parameter angle-and-slide sheet of optima.
+This does not prove their complete nonsmooth stationary identity, and raw contact counts
+alone still establish neither rank deficiency, dimension, nor connectivity
+([D-034](../defects.md)). Until the census defines what it counts, the denominator of
+“rare” is not a number, and the premise is untestable rather than merely untested.
+The baseline is consistent with that — five independent seeds landing in a narrow band
+five times narrower than the remaining gap is consistent with repeatedly finding one
+score region — but consistent is not evidence, and
 [H-012](hypotheses/H-012-record-basins-are-rare.md) is registered to kill the premise
 cheaply if it is wrong.
 
@@ -198,7 +201,8 @@ Registered as `kind: open_question` when worth carrying formally.
   The live question is an explicit radius, side-perturbation stability, and transferable
   stress structure.
 - **[Are the observed `n=5` endpoints in one terminal family?](hypotheses/H-023-n5-terminal-connectivity.md)**
-  Six endpoints from six proposals do not decide their connectivity.
+  Exp-033 connects the equal-side pair inside one exact fixed-angle optimal face; full
+  stationary connectivity and unequal-side clearance remain open.
   Six endpoints from six draws show non-saturation, not its cause.
 
 ## Dead ends

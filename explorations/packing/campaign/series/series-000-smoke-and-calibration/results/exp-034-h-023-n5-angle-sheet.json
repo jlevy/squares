@@ -1,0 +1,130 @@
+{
+  "boundary_fixtures": [
+    {
+      "container_contacts": 11,
+      "cosine": "9999/10001",
+      "endpoint": "left",
+      "pairs_tested": 10,
+      "q_abs": "1/100",
+      "rotation_sign": -1,
+      "sine": "-200/10001",
+      "strict_pairs": 7,
+      "touching_pairs": 3,
+      "valid": true
+    },
+    {
+      "container_contacts": 11,
+      "cosine": "9999/10001",
+      "endpoint": "right",
+      "pairs_tested": 10,
+      "q_abs": "1/100",
+      "rotation_sign": -1,
+      "sine": "-200/10001",
+      "strict_pairs": 7,
+      "touching_pairs": 3,
+      "valid": true
+    },
+    {
+      "container_contacts": 11,
+      "cosine": "9999/10001",
+      "endpoint": "left",
+      "pairs_tested": 10,
+      "q_abs": "1/100",
+      "rotation_sign": 1,
+      "sine": "200/10001",
+      "strict_pairs": 7,
+      "touching_pairs": 3,
+      "valid": true
+    },
+    {
+      "container_contacts": 11,
+      "cosine": "9999/10001",
+      "endpoint": "right",
+      "pairs_tested": 10,
+      "q_abs": "1/100",
+      "rotation_sign": 1,
+      "sine": "200/10001",
+      "strict_pairs": 7,
+      "touching_pairs": 3,
+      "valid": true
+    }
+  ],
+  "contract": "packing.squares:N5AngleSheet/v1",
+  "determination": {
+    "claim": "the exp-033 segment lies in an exact two-parameter sheet of feasible orientation-indexed LP optima at side 1+5*sqrt(2)/4",
+    "outcome": "criterion_met",
+    "scope": "declared square-0 half-angle and slide family only; no full stationary component, basin mass, or census-completeness conclusion"
+  },
+  "schema_version": 1,
+  "selftests": {
+    "excessive_angle_is_rejected": true,
+    "signed_instead_of_absolute_support_is_rejected": true,
+    "source_digest_tamper_is_rejected": true,
+    "uniform_dual_drift_is_rejected": true,
+    "unshrunk_left_endpoint_is_rejected": true
+  },
+  "sheet_certificate": {
+    "boundary_inequalities": "u-e(t) >= 0 and 3*sqrt(2)/2-2-e(t)-u >= 0",
+    "contact_0_4_gap": "sqrt(2)*t^2/(1+t^2), nonnegative",
+    "dimension_lower_bound": 2,
+    "parameters": {
+      "e_of_t": "|t|(1-|t|)/(1+t^2)",
+      "moving_square": "centre=(1/2+u, 5/2-sqrt(2)/4+u), angle=2*atan(t)",
+      "other_four_squares": "fixed at the exp-033 exact coordinates and angles",
+      "t": "tan(theta_0/2), |t| <= 1/100",
+      "u": "e(t) <= u <= 3*sqrt(2)/2-2-e(t)"
+    },
+    "proof_scope": "the formulas cover every real t in the interval and every u in its strip; the four exact boundary fixtures are replay controls, not samples standing in for the universal inequalities",
+    "strict_residual_margins": {
+      "moving_square_x_upper": [
+        "2",
+        "-1/4"
+      ],
+      "moving_square_y_lower": [
+        "2",
+        "-1/4"
+      ],
+      "pair_0_1_on_square_1_x_axis": [
+        "1",
+        "-1/4"
+      ],
+      "pair_0_2_on_square_2_y_axis": [
+        "1",
+        "-1/4"
+      ],
+      "pair_0_3_on_square_0_rotated_axis": [
+        "20097/10001",
+        "-50399/40004"
+      ],
+      "pair_0_4_gap_at_q_max": [
+        "0",
+        "1/10001"
+      ],
+      "strip_width_at_q_max": [
+        "-20200/10001",
+        "3/2"
+      ]
+    },
+    "support_derivative_numerator_at_q_max": "9799/10000",
+    "support_shrink_monotone": true,
+    "universal_feasibility_inequalities_verified": true
+  },
+  "source": {
+    "exp_033": "campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json",
+    "exp_033_sha256": "396bc4c168a6f44692b9b2eb93bb84437b555f556084b20b85605580bbceb6b6"
+  },
+  "uniform_dual": {
+    "identity": "A^T y=e_side, y<=0, b^T y=1+5*sqrt(2)/4",
+    "scope": "the declared fixed-angle cells containing the parameterized family",
+    "support": [
+      "2x-lower",
+      "2y-lower",
+      "3x-upper",
+      "3y-upper",
+      "pair-2-4",
+      "pair-3-4"
+    ],
+    "support_avoids_moving_square_0": true,
+    "uniform_over_sheet": true
+  }
+}

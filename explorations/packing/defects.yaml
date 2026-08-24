@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 185
+count: 187
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4736,3 +4736,64 @@ defects:
     tools/check_synopsis.py to report the derived mismatch.
   bead: think-m3io
   recorded_in: tools/check_synopsis.py
+- id: D-186
+  title: The first angle-sheet bound omitted slide motion from one projection
+  date: '2026-08-24'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: minutes; caught before preregistration or scientific execution
+  severity: high
+  status: fixed
+  what: >-
+    The first uncommitted n=5 angle-sheet checker evaluated the pair (0,3) separating
+    projection with square 0 at the maximum slide in its x term but at zero slide in
+    its y term. Because positive rotation makes both coordinates reduce separation,
+    the displayed expression was not a valid lower bound over the whole parameter
+    strip. The same draft also called every boundary margin strict even though two
+    declared containment inequalities are active at the strip boundary.
+  consequence: >-
+    A positive but nonconservative expression could have been presented as a universal
+    feasibility proof for the two-parameter sheet. Exact boundary samples would not by
+    themselves repair the missing all-parameter implication.
+  fix: >-
+    Include the full maximum-slide coefficient sqrt(2)/2-1/2 in the adverse y
+    projection, distinguish nonnegative boundary inequalities from strictly positive
+    residual margins, and commit the corrected instrument before freezing or running
+    exp-034.
+  regression: >-
+    The checker exact-signs the corrected uniform residual and replays all four signed
+    angle/slide boundary fixtures; derivation of the all-parameter bound remains a
+    mathematical review obligation rather than a sampling claim.
+  bead: think-7pn0
+  recorded_in: tools/check_n5_angle_sheet.py
+- id: D-187
+  title: Two synopsis mutation controls retained the pre-D-186 aggregates
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one integration checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    D-186 changed the soundness-direction and total-defect aggregates in SYNOPSIS, but
+    the integration pass updated only the living prose and defect-count mutation. Two
+    separate negative controls still searched for the former 50-of-61 and 7-of-185
+    sentences, so their mutation anchors appeared zero times.
+  consequence: >-
+    The normal gate failed even though the current synopsis was correct, delaying the
+    checkpoint and showing that derived prose and its mutation anchors were not updated
+    as one unit.
+  fix: >-
+    Update both mutations to the current derived sentences and treat a defect addition
+    as an atomic refresh of generated views, synopsis aggregates, and every live-number
+    control anchor.
+  regression: >-
+    The two focused negative controls fire on the current sentences, and the subsequent
+    normal gate runs the complete negative-control catalogue.
+  recurrence_of: D-185
+  bead: think-7pn0
+  recorded_in: tools/controls.yaml

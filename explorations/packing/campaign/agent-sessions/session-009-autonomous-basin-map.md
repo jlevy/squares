@@ -41,8 +41,9 @@ session:
       passes static checks and semantic replay; exp-031 converges on all four source
       perturbations at the proved side with complete receipts. The number of
       exact component controls now classify the n=3 quotient interval and n=4 quotient
-      point, while sampled component-classified map cells remain zero. No complete-map
-      claim follows.
+      point. Exp-033 proves one exact fixed-angle face relation between the equal-side
+      n=5 source poses, while sampled full-component classifications remain zero. No
+      complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -134,6 +135,42 @@ session:
     elapsed_seconds: 3
     elapsed_quality: platform_measured
     next_action: Preregister BC-008, then run its four bounded source perturbations.
+  - task: Check the exact n=5 face instrument mechanically
+    operator: d168_mechanical_check
+    status: completed
+    outcome: Ruff, BasedPyright, byte compilation, and whitespace checks pass.
+    evidence: [frozen Ruff output, BasedPyright output, py_compile output]
+    files: [tools/check_n5_equal_side_face.py]
+    checks: [Ruff, BasedPyright, py_compile, git diff check]
+    uncertainty: The delegate did not run the scientific generation or replay.
+    elapsed_seconds: 1
+    elapsed_quality: platform_measured
+    next_action: Run only after the exp-033 criterion is committed.
+  - task: Integrate the exp-033 exact replay into the focused gate
+    operator: d168_mechanical_check
+    status: completed
+    outcome: >-
+      The small-n lane replays exp-033 with nullities 0/1/0 and six passing controls.
+    evidence: [focused small-n gate output]
+    files: [test.sh]
+    checks: [bash syntax, gate list, small-n optimal-moduli lane, git diff check]
+    uncertainty: The delegate did not run the full normal gate.
+    elapsed_seconds: 2
+    elapsed_quality: platform_measured
+    next_action: Run the normal gate after result integration.
+  - task: Check and integrate the exact n=5 angle-sheet instrument mechanically
+    operator: d168_mechanical_check
+    status: completed
+    outcome: >-
+      Static checks pass, and the small-n lane replays exp-034's dimension-two
+      certificate, four boundary fixtures, and five controls in two seconds.
+    evidence: [frozen static-check output, focused small-n gate output]
+    files: [tools/check_n5_angle_sheet.py, test.sh]
+    checks: [Ruff, BasedPyright, py_compile, bash syntax, focused gate, git diff check]
+    uncertainty: The delegate did not derive the universal bound or run the scientific generation.
+    elapsed_seconds: 4
+    elapsed_quality: platform_measured
+    next_action: Run the normal gate after exp-034 result integration.
   - task: Review every PR 20 surface and compare its documentation with the current branch
     operator: pr19_comment_checkpoint_2
     status: completed
@@ -177,6 +214,9 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
@@ -191,6 +231,9 @@ session:
   - campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
+  - campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
+  - campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - campaign/schemas/agenda.schema.yaml
   - tools/basin_census.py
@@ -205,6 +248,9 @@ session:
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
   - sqpack/quench.py
   - tools/regression_test.py
+  - tools/check_terminal_components.py
+  - tools/check_n5_equal_side_face.py
+  - tools/check_n5_angle_sheet.py
   checks:
   - Basin-event generation and replay pass for n=3, n=4, and n=5.
   - Every retained pose passes the independent floating-point geometry screen.
@@ -311,10 +357,38 @@ session:
     interval remains one component across four geometric keys, two contact signatures,
     and three strata; the exact n=4 quotient is one point; all eight false-policy
     mutations fail and all 16 f64 observations remain unresolved.
+  - >-
+    The post-exp-032 normal gate passes all 30 steps in 34 wall-seconds: 37 negative
+    controls fire, 40 BasinEvent records replay, all 32 declared engine commits are
+    checked, and the 32-round campaign, 185-defect log, and nine sessions reconcile.
+  - >-
+    Exp-033 meets its frozen exact criterion in 0.24 seconds of generation plus replay.
+    The two equal-side n=5 golden keys share one fixed-angle optimal face; exact
+    fixed-side nullities are 0/1/0 across its endpoint, interior, and endpoint strata.
+  - >-
+    The post-exp-033 normal gate passes all 30 steps in 30 wall-seconds: 37 negative
+    controls fire, 40 BasinEvents and all exact records replay, all 33 declared engine
+    commits are reachable, and 33 rounds, 185 defects, and nine sessions reconcile.
+  - >-
+    Exp-034 meets its frozen criterion in 0.27 seconds of generation plus replay. The
+    exp-033 face lies in an exact two-parameter angle-and-slide sheet of
+    orientation-indexed LP optima, and all five controls fail as required.
+  - >-
+    The first post-exp-034 normal gate stops after 31 seconds because two synopsis
+    mutation controls retained pre-D-186 numeric anchors. D-187 records the miss; the
+    defect-count, soundness-direction, and gate-detector controls then all fire.
+  - >-
+    The corrected post-exp-034 normal gate passes all 30 steps in 35 wall-seconds: all
+    37 negative controls fire, 40 BasinEvents and five exact small-n records replay,
+    all 34 engine commits are reachable, and 34 rounds and 187 defects reconcile.
+  - >-
+    Exp-035 orientation identifies one exact non-sheet first-order direction in every
+    n=5 face stratum. Its candidate checker is committed at 8aa0cbb and paused on
+    think-1582 without preregistration or scientific execution.
   stop_reason: null
   next_action: >-
-    Begin one bounded BC-010 n=5 connectivity slice. Preserve every unsupported endpoint
-    as unresolved and stop after one declared pair or one retained blocker.
+    Continue BC-010 with one bounded complete wall-release and SAT-branch cone slice.
+    Preserve every unsupported continuation as unresolved and stop after that slice.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -339,14 +413,17 @@ descriptor has been promoted to a connected component.
 The event stack now retains complete blocks through n=8 plus one bounded n=9 performance
 event. D-126 still prevents a fixed wall-clock budget from defining reproducible
 scientific work, so these cells validate retention and replay only; they do not estimate
-basin frequencies. The separate n=5 connectivity question remains blocked until its
-component-identity controls are explicit.
+basin frequencies. The separate n=5 connectivity question now has two exact partial
+results.
+Exp-033 joins the equal-side pair inside a fixed-angle optimal face, and exp-034
+embeds that face in a two-parameter angle-and-slide sheet of optima.
+Full nonsmooth stationary identity and unequal-side clearance remain open.
 The source-bound n=10 entry path now passes its four-perturbation BC-008 known-answer
 control in exp-031. The exact evidence boundary now also passes BC-009: exp-032
 classifies only the complete `n = 3` and `n = 4` quotient models and refuses to infer a
 component from any current floating-point event.
-The next research cell is therefore local `n = 5` connectivity, not a sample-count
-census.
+The next research cell is therefore the complete nonsmooth cone and continuation test
+around this exact `n = 5` sheet, not a sample-count census.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
