@@ -5,7 +5,7 @@ title: "Spec: deterministic SVG rendering toolkit"
 kind: epic
 status: open
 priority: 1
-version: 16
+version: 17
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
@@ -27,10 +27,10 @@ child_order_hints:
   - is-01m0v102z22dxytc6atqpnszdz
   - is-01m0v10ekmcac6c3v3wm9qtsda
 created_at: 2026-08-24T22:59:17.342Z
-updated_at: 2026-08-24T23:17:16.452Z
+updated_at: 2026-08-24T23:27:10.176Z
 ---
 Implement the plan's zero-dependency deterministic SVG spine, progressive overview/comparison/trajectory views, exact metadata and comments, known-answer n=3 migration, and portability checks. Acceptance is the spec's full criteria: byte-repeatable fixtures, honest evidence labels, safe self-contained SVG, useful static fallbacks, measured size/render cost, and a green repository gate.
 
 ## Notes
 
-Planning is in PR #25, stacked on PR #24 at commit 4f766a9. The spec now includes the file/function map, library decisions, call flows, fixtures, and validation gates. Implementation begins with the typed model and numeric contract.
+Planning is in PR #25, stacked on PR #24 through commit 15aad42. The active spec includes the official-library survey, exact file/function map, CSS reduced-motion fallback, deterministic metrics split, n=5 fixture ownership, and an 11-child dependency graph. The full 30-step packing gate passed with 42 negative controls; implementation remains open and begins at think-5681.
