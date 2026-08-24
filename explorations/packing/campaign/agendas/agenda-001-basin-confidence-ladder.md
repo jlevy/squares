@@ -251,15 +251,17 @@ agenda:
     exit: certified connection, certified separation bound, or explicit ambiguity interval
     bead: think-1s0h
     depends_on: [BC-003, BC-009]
-    next_evidence: exp-033 exact fixed-angle face generation and independent replay
+    next_evidence: full angle-varying active Jacobian and stationary continuation from exp-033's exact face
     parallel_group: identity
     note: >-
-      This is the first genuine basin-structure experiment in the ladder. Exp-033 tests
-      only the equal-side pair's fixed-angle LP face; full stationary connectivity and
-      unequal-side minimax clearance remain later bounded slices.
+      This is the first genuine basin-structure experiment in the ladder. Exp-033
+      proves the equal-side pair shares one exact fixed-angle LP optimal face. Full
+      stationary connectivity and unequal-side minimax clearance remain later bounded
+      slices, so BC-010 stays ready rather than complete.
     artifacts:
     - tools/check_n5_equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness
