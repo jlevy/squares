@@ -1,9 +1,10 @@
 # Contract for one outer autonomous-agent work session.
 #
-# This is deliberately not a scheduler and not an experiment artifact. The platform
-# goal drives continuation, tbd owns the work queue, and experiment artifacts own
-# mathematical measurements. This record is the small durable handoff that says what
-# the parent delegated, what came back, how long it took, and what should happen next.
+# This is deliberately not a scheduler and not an experiment artifact. A coding agent,
+# native goal, external watchdog, or human may drive continuation; tbd owns the work
+# queue, and experiment artifacts own mathematical measurements. This record is the
+# portable handoff that says what was attempted, what came back, how long it took, and
+# what should happen next.
 $schema: https://json-schema.org/draft/2020-12/schema
 $id: packing.squares:AgentSession/v1
 title: Agent session
@@ -52,6 +53,22 @@ properties:
     properties:
       wall_minutes: {type: number, exclusiveMinimum: 0}
       max_cycles: {type: integer, minimum: 1}
+      orientation_minutes:
+        type: number
+        exclusiveMinimum: 0
+        description: Optional session-specific bound for choosing and declaring one slice.
+      checkpoint_minutes:
+        type: number
+        exclusiveMinimum: 0
+        description: Optional session-specific bound before concrete evidence must be preserved.
+      slice_minutes:
+        type: number
+        exclusiveMinimum: 0
+        description: Optional hard bound before the active slice must stop or be restated.
+      finalization_minutes:
+        type: number
+        minimum: 0
+        description: Optional wall-time reserve for reconciliation before the session deadline.
   stop_conditions:
     type: array
     minItems: 1

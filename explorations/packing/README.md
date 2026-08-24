@@ -38,19 +38,37 @@ relations are observed, inferred, or certified.
 A visual embedding is never evidence by itself that two basins are adjacent or that a
 sampled cluster is a connected component.
 
-The implementation map is the four-focus epic in the
-[current program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map).
-The single current launch agenda is
-[Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md):
-it distinguishes the persistent autonomous agent loop, which can work now, from the
-numerical runner, which remains a no-go until its scientific and operational gate
-passes.
+The operating documents divide ownership rather than repeat one another:
+
+| Document | Owns |
+| --- | --- |
+| [Campaign runbook](campaign/README.md#the-bounded-research-cycle) | Portable slice protocol, clocks, result routing, and experiment rules |
+| [Agent sessions](campaign/agent-sessions/README.md) | Versioned objective, budget, delegation evidence, stop reason, and handoff |
+| [Current launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | Current scientific and operational readiness; the agent loop can work now, while the numerical runner remains a no-go |
+| [Program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map) | Four-focus epic, durable findings, and bead map |
 
 ## The Autonomous Work Loop
 
-The outer loop is a persistent agent goal plus the `tbd` queue.
-It chooses and integrates work; [`campaign/runner.py`](campaign/runner.py) remains the
-smaller tool that executes already-preregistered numerical rounds.
+The outer loop is a portable repository protocol, not a feature of one agent platform.
+The `tbd` queue owns ready work, an agent-session artifact owns the current objective
+and clocks, and commits plus research artifacts own the evidence.
+A native long-running goal, periodic watchdog, scheduler, or human may drive that
+protocol. For example, Codex can use a
+[durable goal](https://learn.chatgpt.com/use-cases/follow-goals) and a scheduled
+watchdog; Claude or another coding agent can use its corresponding continuation and
+timer facilities. No platform-only state is authoritative, so changing agents does not
+change the work.
+
+Breadth lives in [`campaign/ideas.md`](campaign/ideas.md), the hypothesis registry, and
+the bead queue. Narrowness lives in the active slice: one focus, one primary bead, one
+question, one promised artifact, and one hard wall-clock bound per agent.
+A new idea found mid-slice is recorded and returned to the queue unless it invalidates
+the current measurement.
+The exact clock and checkpoint protocol is the campaign runbook’s
+[bounded research cycle](campaign/README.md#the-bounded-research-cycle).
+
+The outer loop chooses and integrates work; [`campaign/runner.py`](campaign/runner.py)
+remains the smaller tool that executes already-preregistered numerical rounds.
 Do not turn the runner into a second project manager.
 
 Each autonomous cycle names one focus, one primary bead, one measurable outcome, a
