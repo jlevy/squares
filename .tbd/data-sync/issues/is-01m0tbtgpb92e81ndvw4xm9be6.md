@@ -3,9 +3,9 @@ type: is
 id: is-01m0tbtgpb92e81ndvw4xm9be6
 title: Review and absorb stacked PR 20 into the basin campaign branch
 kind: task
-status: open
+status: closed
 priority: 0
-version: 13
+version: 14
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -25,7 +25,11 @@ child_order_hints:
   - is-01m0td7rar54g83je7jmphch98
   - is-01m0td7rk4je1wp5zmjt0vq837
 created_at: 2026-08-24T17:06:53.762Z
-updated_at: 2026-08-24T17:31:36.419Z
+updated_at: 2026-08-24T17:38:25.729Z
+closed_at: 2026-08-24T17:38:25.709Z
+close_reason: "PR #20 head 5d096ae was independently and delegatedly reviewed, merged as second parent of 5ab8dab, and auto-marked MERGED by GitHub. Eleven substantive findings D-172..D-182 were corrected, logged, and closed under dedicated beads; exp-024 and agenda-001 were preserved. The normal 30-step gate passed in 27s, the merge was pushed, PR #19 was refreshed, and no PR20 feedback/check surfaces were outstanding."
+resolution: null
+duplicate_of: null
 ---
 Carefully review PR #20 (claude/square-packing-concepts-ifkyzr), which is stacked on codex/packing-post-merge-research-runs. Inspect every commit and changed claim against current experiment, defect, source, and tooling state; inspect all GitHub comment/review/check surfaces; reconcile its closed beads; identify stale statements caused by later n=3/n=4 BasinEvent/v3 work; rebase or merge cleanly onto the current branch; retain only sound documentation; run affected checks plus the normal gate; commit/push the integrated result; and close or otherwise disposition PR #20 without losing history. Do not overwrite the current uncommitted exp-024 checkpoint; integrate only from a clean checkpoint.
 
