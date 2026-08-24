@@ -214,18 +214,18 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [3, 4]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Does a frozen terminal-component classifier recover the exact n=3 interval and
       exact n=4 point without equating endpoint keys, contact strata, or samples with
       connected components?
     hypotheses: [H-021, H-032]
-    budget: one 30m implementation slice followed by sub-second exact fixtures
-    entry: >-
-      exact-model assignment and ambiguity-preserving fallback committed; retained
-      known-answer generation and replay not yet run
-    exit: exact ground truth passes; deliberate key/component conflations fail
+    budget: completed in exp-032; 10 agent-minutes and 0.92 seconds generation plus replay
+    entry: exact-model assignment and ambiguity-preserving fallback committed
+    exit: >-
+      Exact n=3 interval and n=4 point replay; eight key, stratum, sample, scope,
+      digest, and f64-assignment mutations fail; unsupported observations stay unresolved.
     bead: think-a2v6
     depends_on: [BC-001, BC-002]
     next_evidence: classifier contract, positive fixtures, and negative mutations
@@ -233,6 +233,7 @@ agenda:
     artifacts:
     - tools/check_terminal_components.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
   - id: BC-010
     purpose: research
     owner_focus: insight

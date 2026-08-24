@@ -21,8 +21,9 @@ hypothesis:
     direction: upper bound at most 0.05 at every cell
     threshold: 0.05
   instrument: >-
-    Not yet built. Retained endpoint poses, active-constraint diagnostics, feasible
-    tangent tests, local continuation, and ambiguity-preserving component assignment.
+    Exp-032 installs the exact n=3/n=4 known-answer boundary: complete exact models may
+    assign components and unsupported observations remain unresolved. The scalable
+    retained-pose, tangent, continuation, and ambiguity classifier is not yet built.
   instrument_ready: false
   regime: >-
     Proved small-n cases; exact n = 3 sliding family as the positive non-isolation

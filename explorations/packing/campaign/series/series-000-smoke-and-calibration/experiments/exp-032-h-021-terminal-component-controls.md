@@ -18,7 +18,7 @@ experiment:
     engine_commit: d3d4ace
     precision: exact
     host_system: macOS arm64, Apple M1 Pro
-    selftest_passed: false
+    selftest_passed: true
   instance: {axis: n, point: 3, role: positive_control}
   method:
     control: complete exact exp-014 and exp-015 quotient models
@@ -38,21 +38,30 @@ experiment:
       one 30-minute implementation slice; 30-second generation cap; 30-second separate
       replay cap; stop on any exact-model drift, false assignment, or failed mutation
     record: campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
-  lease: {expires: '2026-08-24T20:15:00Z', host: spud10.local}
+  effort:
+    timebox: 30m implementation; 30s generation and 30s replay caps
+    wall_seconds: 0.92
+    agent_minutes: 10
+    stopped_by: criterion
   results:
   - shape: determination
     question: >-
       Does the frozen policy recover the exact n = 3 quotient interval and n = 4
       quotient point without treating keys, contact strata, or samples as components?
     role: outcome
-    outcome: invalid
-    checked_by: not yet run
+    outcome: criterion_met
+    checked_by: >-
+      deterministic regeneration from exp-014 and exp-015, separate retained-record
+      replay, exact quotient membership, and eight false-policy mutation controls
   verdict:
-    decision: in-progress
+    decision: baseline
     primary_criterion: exact known answers plus all declared false-policy mutations
-    reason: Preregistered; the retained generation and independent replay have not run.
+    reason: >-
+      The exact connected and isolated controls pass, every declared conflation fails,
+      and all unsupported floating-point observations remain unresolved.
+    commit: 93baf5c
 ---
-# exp-032 — preregistered exact component controls
+# exp-032 — exact component controls pass
 
 This is a measurement-system round, not a basin census.
 It tests the evidence boundary needed before any sampled endpoint can be called a
@@ -65,7 +74,12 @@ Geometric keys, contact signatures, finitely many samples, and floating-point
 compatibility may not.
 Without sufficient evidence, the only valid output is `unresolved`.
 
-## Acceptance rule
+The retained generation took 0.50 wall-seconds and the independent rebuild and replay
+took 0.42 seconds. Both report one `n = 3` quotient component across two contact
+signatures, one `n = 4` quotient component, 16 unresolved floating-point observations,
+and eight of eight rejected false-policy mutations.
+
+## Preregistered acceptance rule
 
 The round passes only if one deterministic generation and one separate rebuild satisfy
 all of these conditions:
@@ -83,8 +97,8 @@ all of these conditions:
 
 Any exact-record drift, quotient-scope drift, forced numerical assignment, missing
 known-answer stratum, or mutation survivor rejects the instrument.
-Passing this round admits the first bounded `n = 5` connectivity work; it does not
-validate a scalable classifier, estimate basin mass, or close the general identity bead.
+This round admits the first bounded `n = 5` connectivity work; it does not validate a
+scalable classifier, estimate basin mass, or close the general identity bead.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
