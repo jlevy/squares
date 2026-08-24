@@ -4,7 +4,7 @@ Do not edit by hand.
 
 # Defect log
 
-131 defects recorded across the packing toolchain.
+132 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -20,7 +20,7 @@ Source of truth is [`defects.yaml`](defects.yaml).
   repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098
   repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117
   repeats D-104).
-- **22 are still open** (outstanding or contained), every one carrying a bead.
+- **23 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -28,14 +28,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 1 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 7 | a cell of the sweep whose answer is known in advance |
-| `review` | 95 | a human or agent reading the work against a checklist |
+| `review` | 96 | a human or agent reading the work against a checklist |
 | `anomaly` | 4 | a result that made no sense, chased down |
 | `inspection` | 13 | reading the code or the design with intent |
 | `drift_check` | 4 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 6 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 6 of 131, and none of the 45
+The line worth reading twice: **the automated gate caught 6 of 132, and none of the 45
 soundness defects.** Gates confirm what you already thought to check.
 The rest were found by a device built to be *surprised* — a control cell, a
 pre-registered rule, a generated view contradicting itself — or by someone reading
@@ -46,7 +46,7 @@ carefully.
 | Layer | Count |
 | --- | ---: |
 | engine | 9 |
-| quench | 12 |
+| quench | 13 |
 | verifier | 1 |
 | record | 36 |
 | tooling | 31 |
@@ -57,7 +57,7 @@ carefully.
 | Class | Count |
 | --- | ---: |
 | soundness | 45 |
-| validity | 35 |
+| validity | 36 |
 | bookkeeping | 37 |
 | robustness | 10 |
 | performance | 4 |
@@ -151,6 +151,7 @@ This is the actionable list.
 | D-101 | outstanding | high | Historical quench round wall times disagree with retained per-call durations | `think-xzew` |
 | D-126 | outstanding | high | Quench convergence work was budgeted by machine time rather than reproducible work | `think-u97a` |
 | D-129 | outstanding | medium | Negative-control checker processes have no bounded timeout or child cleanup | `think-cns0` |
+| D-132 | outstanding | high | Fixed-cell iteration returns capped states without a settlement result | `think-9qz0` |
 
 ## Every defect
 
@@ -287,3 +288,4 @@ This is the actionable list.
 | [D-129](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | tooling | robustness |  | `review` | medium | outstanding | Negative-control checker processes have no bounded timeout or child cleanup |
 | [D-130](tools/controls.yaml) | 2026-08-24 | tooling | bookkeeping |  | `gate` | medium | fixed | A defect-link mutation control reused an anchor that became nonunique |
 | [D-131](test.sh) | 2026-08-24 | tooling | bookkeeping |  | `review` | medium | fixed | The Python lint floor passed while reporting eight type-checker warnings |
+| [D-132](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | 2026-08-24 | quench | validity | flattering | `review` | high | outstanding | Fixed-cell iteration returns capped states without a settlement result |

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 131
+count: 132
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3212,3 +3212,33 @@ defects:
     format, and BasedPyright all return success.
   bead: think-6cbn
   recorded_in: test.sh
+- id: D-132
+  title: Fixed-cell iteration returns capped states without a settlement result
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: since solve_to_fixed_point was introduced
+  severity: high
+  status: outstanding
+  what: >-
+    `solve_to_fixed_point` returns the same untyped five-value tuple when a re-read cell
+    is stable, when the next cell is infeasible or worse, and when its unexplained
+    twelve-iteration cap expires. Downstream callers cannot tell whether the fixed-cell
+    instrument actually settled before using its incumbent. The review also objected to
+    exact equality over the cell's float fields; because `theta` is fixed inside this
+    loop, the same discrete axis choices deterministically regenerate those fields, so
+    no independent float-mismatch failure is established.
+  consequence: >-
+    A capped or rejected cell transition can feed the angle search and later receive an
+    outer `converged: true` result. Basin and stationarity claims can therefore promote
+    a configuration without evidence that their inner fixed-cell problem settled.
+  fix: >-
+    none yet. Return a typed outcome with an explicit termination reason and settled
+    flag, compare a canonical discrete cell identity, justify or replace the iteration
+    cap with a measured work bound, and prohibit outer convergence when the inner cell
+    did not settle.
+  regression: none
+  bead: think-9qz0
+  recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md

@@ -2181,7 +2181,7 @@ checks. The four comments have the following durable disposition.
 | Comment | Disposition | Durable record |
 | --- | --- | --- |
 | [First mathematical-frontier review](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5389861146) | Superseded by its own later correction; all retained findings fixed or explicitly deferred | F-42 through F-56, D-088 through D-107, `think-f82b`, commit `5d772c6` |
-| [Engineering and loop-efficiency review](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5390037297) | Stacked PR #18 rebased and corrected before absorption; larger research-engine work remains open | D-120 through D-131, `think-9a7v` and children, engineering-review status addendum |
+| [Engineering and loop-efficiency review](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5390037297) | Stacked PR #18 rebased and corrected before absorption; larger research-engine work remains open | D-120 through D-132, `think-9a7v` and children, engineering-review status addendum |
 | [Deep mathematical delta checkpoint](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5390373103) | Five false claims retracted; every retained finding logged and dispositioned | F-57 through F-68, D-108 through D-119, `think-vw06`, `think-0vt5`, `think-uyf4`, commit `7d019ab` |
 | [Bead-count correction](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5390382115) | Accepted; the creativity epic and all seven listed review children are closed | `think-7gu0` and its child beads |
 
@@ -2196,10 +2196,18 @@ became nonunique; D-130 records that gate-caught failure and the unique replacem
 
 The review did **not** justify closing every engineering research bead.
 D-050/D-059 keep basin-count and golden semantics open; D-126 keeps scientific work
-budgeting open; D-129 keeps per-control timeout and child reaping open; the batch
-quench, cross-host CI, and target-CPU policy remain named work under `think-9a7v`. This
-is the line between addressing every review comment and pretending every broader
-recommendation has already been implemented.
+budgeting open; D-129 keeps per-control timeout and child reaping open; D-132 keeps the
+fixed-cell termination contract open; the batch quench, cross-host CI, and target-CPU
+policy remain named work under `think-9a7v`. This is the line between addressing every
+review comment and pretending every broader recommendation has already been implemented.
+
+A post-merge sweep of PR #18’s linked review document found one omitted, unnumbered
+smaller finding: `solve_to_fixed_point` does not distinguish a settled cell from its
+iteration cap or a rejected transition.
+D-132 now records that deferred defect under `think-9qz0`. The sweep narrowed the
+review’s exact-float-equality concern because fixed `theta` regenerates the same numeric
+axis fields for the same discrete cell; no separate float-mismatch failure was
+reproduced.
 
 The corrected, rebased stack passed the 25-step normal gate in 26 wall seconds and the
 strict/deep gate in 48 wall seconds.

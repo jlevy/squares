@@ -201,6 +201,8 @@ No unwatched numeric cell starts until every applicable line is true.
 - [ ] A separate verifier recomputes containment and non-overlap from the archived pose.
 - [ ] The actual engine selftest, binary digest, source revision, dirty state, host,
   seeds, and budget are recorded.
+- [ ] D-132 distinguishes a settled fixed cell from a rejected transition or iteration
+  cap and prevents outer convergence when the inner solve did not settle.
 - [ ] Prerequisites are satisfied; an instrument-ready flag changes only with the
   implementation that makes it true.
 

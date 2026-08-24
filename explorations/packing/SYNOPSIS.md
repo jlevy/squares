@@ -1069,13 +1069,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-One hundred thirty-one defects, [one line each](defects.md), generated from
+One hundred thirty-two defects, [one line each](defects.md), generated from
 `defects.yaml` and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 45 | asserted something false about the mathematics |
-| validity | 35 | was correct, but the measurement did not bear on the question |
+| validity | 36 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 37 | recorded something its own evidence contradicts |
 | robustness | 10 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
@@ -1086,7 +1086,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught six defects in one hundred thirty-one, and no soundness
+**The automated gate has caught six defects in one hundred thirty-two, and no soundness
 defect ever.** Every soundness failure was found by a control cell whose answer was
 known in advance, a rule written down before the measurement, a generated view
 contradicting its source, or someone reading carefully.
@@ -1158,12 +1158,12 @@ D-108 through D-119 are the second-pass corrections: the missing piercing paper,
 isostatic and self-stress arguments, fixed-budget and fixed-cell overreach, topology and
 fractional-LP mistakes, unsupported novelty, stale registry state, the H-012/H-017
 estimand conflation, and an impossible continuity-blind angle-sheet criterion.
-D-120 through D-131 record the engineering delta: ulp-sensitive cell selection, gate
+D-120 through D-132 record the engineering delta: ulp-sensitive cell selection, gate
 boundary and skip-contract failures, the per-step worker cap, bounded portable
 snapshots, a parallel negative-control race, wall-clock scientific budgeting, stale
 review status, the missing targeted edit loop, unbounded checker children, and a
 nonunique mutation-control anchor, followed by a lint floor that accepted type-checker
-warnings.
+warnings and a fixed-cell solver that does not expose whether it settled or hit its cap.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
