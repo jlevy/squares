@@ -14,7 +14,7 @@
 | [session-006](agent-sessions/session-006-h026-exact-tangent.md) | completed | insight | think-qd9t | 2 | Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and move the fast rotation to H-032's exact n=3 quotient-family control. |
 | [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | insight | think-n82j | 3 | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | correctness | think-ciwv | 3 | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
-| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 8 | Do not continue the random-start size ladder. Either implement and preregister BC-008's source-bound n=10 seeded-pose entry point, or advance the separate BC-009 identity controls; both remain blocked in the agenda. |
+| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 9 | Preregister BC-008's four source-bound n=10 perturbations, commit that criterion, then run under the declared 90-second command cap. Do not resume blind random starts. |
 
 ## Experiment agendas
 
@@ -31,7 +31,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | BC-005 | tool_validation | 7 | complete | 1 | think-wbra | permanent exp-028 replay and the n=3 through n=7 cost comparison |
 | BC-006 | tool_validation | 8 | complete | 1 | think-wbra | exp-029 plus event replay and a bounded quench/screen/key/replay timing audit |
 | BC-007 | tool_validation | 9 | complete | 2 | think-xzew | retained event plus canonicalization share of wall time |
-| BC-008 | tool_validation | 10 | blocked | 1 | think-ouf0 | a positive-control event artifact rooted in the published exact pose |
+| BC-008 | tool_validation | 10 | ready | 1 | think-ouf0 | Preregister and retain the four-perturbation positive-control event artifact; distinguish valid optimal-side time stops from producer convergence. |
 | BC-009 | measurement_validation | 3, 4 | blocked | 0 | think-0yo9 | classifier contract, positive fixtures, and negative mutations |
 | BC-010 | research | 5 | blocked | 0 | think-1s0h | active-system rank/nullity, tangent checks, continuation trace, and poses |
 | BC-011 | measurement_validation | 5, 6, 7, 8 | blocked | 1 | think-0yo9 | ambiguity-preserving classified event archive through the first failed or n=8 cell |

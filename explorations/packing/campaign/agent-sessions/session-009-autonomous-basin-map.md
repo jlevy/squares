@@ -35,13 +35,11 @@ session:
       No retained per-seed basin-event stream carried full poses, independent validity,
       typed termination evidence, resumable writes, and measured event wall time.
     after: >-
-      Exp-018 through exp-020 retain replayable n=3, n=4, and n=5 event blocks with full
-      poses, independent validity, typed producer termination, and event timings. Their
-      twelve historical v2 events remain blocked as recorded. Exp-021 and exp-022 add a
-      complete four-seed n=3 block of scientifically admissible v3 terminal events with
-      balanced receipts. Exp-023 preserves the n=4 solver-boundary failure that exposed
-      D-171; exp-024 then completes the repaired n=4 block at four of four admissible
-      events with 14,301 of 14,301 evaluations settled. The number of
+      Historical v2 events remain blocked as recorded. BasinEvent/v3 now retains
+      complete tool-validation blocks through n=8, one bounded n=9 performance event,
+      and source-bound n=10 starts tied to the published Göbel pose. The n=10 entry point
+      passes static checks, semantic replay, and a one-second run-path smoke test; BC-008
+      remains unrun until its four perturbations are preregistered. The number of
       component-classified map cells remains zero, so no complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
@@ -121,6 +119,19 @@ session:
     elapsed_seconds: 6
     elapsed_quality: platform_measured
     next_action: Run retained n=3, n=10, n=11, and adversarial failure controls.
+  - task: Check the source-bound n=10 BasinEvent entry point mechanically
+    operator: d168_mechanical_check
+    status: completed
+    outcome: >-
+      Ruff, BasedPyright, byte compilation, the BasinEvent selftest, shell syntax, and
+      whitespace checks pass after the parent narrowed the pose input type.
+    evidence: [frozen static-check output, source-start mutation selftests]
+    files: [sqpack/packings/gobel10.py, tools/basin_census.py]
+    checks: [Ruff, BasedPyright, py_compile, BasinEvent selftest, bash syntax, git diff check]
+    uncertainty: The delegate did not run the scientific four-perturbation BC-008 cell.
+    elapsed_seconds: 3
+    elapsed_quality: platform_measured
+    next_action: Preregister BC-008, then run its four bounded source perturbations.
   - task: Review every PR 20 surface and compare its documentation with the current branch
     operator: pr19_comment_checkpoint_2
     status: completed
@@ -179,6 +190,7 @@ session:
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - campaign/schemas/agenda.schema.yaml
   - tools/basin_census.py
+  - sqpack/packings/gobel10.py
   - README.md
   - campaign/README.md
   - campaign/agent-sessions/README.md
@@ -277,11 +289,15 @@ session:
     command costs 21.36 seconds; retained quench wall is 20.062 seconds, median
     one-event screening is 0.000174 seconds, and median keying is 0.001074 seconds.
   - The post-exp-030 full normal gate passes all thirty steps in 47 wall-seconds.
+  - >-
+    The source-bound n=10 entry point reproduces the published Göbel pose, binds its
+    source URL and SHA-256, retains deterministic perturbations, and rejects changed
+    source or start data. All 36 historical events still replay. A one-second real run
+    reaches a valid optimal-side endpoint and retains a typed producer time stop.
   stop_reason: null
   next_action: >-
-    Do not continue the random-start size ladder. Either implement and preregister
-    BC-008's source-bound n=10 seeded-pose entry point, or advance the separate BC-009
-    identity controls; both remain blocked in the agenda.
+    Preregister BC-008's four source-bound n=10 perturbations, commit that criterion,
+    then run under the declared 90-second command cap. Do not resume blind random starts.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -308,6 +324,8 @@ event. D-126 still prevents a fixed wall-clock budget from defining reproducible
 scientific work, so these cells validate retention and replay only; they do not estimate
 basin frequencies. The separate n=5 connectivity question remains blocked until its
 component-identity controls are explicit.
+The source-bound n=10 entry path is now ready for its preregistered BC-008 known-answer
+control.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

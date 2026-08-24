@@ -1197,10 +1197,11 @@ The mutable size-by-size run order lives in the
 not in this status document.
 It labels every cell as tool validation, measurement validation, or genuine research.
 The event-retention controls through `n = 8` and the bounded `n = 9` performance cell
-are complete. The random-start size ladder stops before BC-008’s missing source-bound
-`n = 10` seeded-pose entry point.
-Exact configuration-space controls still stop at `n = 4`. Component and census claims
-remain blocked on the later identity and coverage rows.
+are complete. The random-start size ladder stops there.
+BC-008’s source-bound `n = 10` seeded-pose entry point now passes replay and a bounded
+run-path smoke test; its four-perturbation known-answer experiment is ready but not yet
+run. Exact configuration-space controls still stop at `n = 4`. Component and census
+claims remain blocked on the later identity and coverage rows.
 
 ## Experiments Conducted
 
@@ -1335,12 +1336,15 @@ command in 21.36 seconds, below its 30-second profile trigger.
 Median one-event keying costs 0.001074 seconds versus 20.062 seconds of quench wall, so
 canonicalization remains negligible at n=9. This one censored event is a performance
 control, not an n=9 landscape sample.
-The size ladder stops before n=10 because its source-bound seeded-pose entry point is
-not implemented. The exact small-moduli controls remain valid; component identity is the
-next blocked layer. The `n=12` calibration returns exactly `4.0`, but that is not a
-known-answer guard.
-The runner’s full-pose independent verification boundary remains open
-under [D-044](defects.md); a producer-reported overlap scalar does not close it.
+The blind random-start size ladder stops after n=9. A source-bound n=10 entry point now
+reconstructs the published Göbel pose, binds its source digest, replays deterministic
+perturbations, and retains typed failure.
+A one-second smoke run reaches a valid endpoint at the proved side but times out before
+producer convergence, so BC-008 remains a ready, unrun four-perturbation control.
+The exact small-moduli controls remain valid; component identity is the next blocked
+layer. The `n=12` calibration returns exactly `4.0`, but that is not a known-answer
+guard. The runner’s full-pose independent verification boundary remains open under
+[D-044](defects.md); a producer-reported overlap scalar does not close it.
 
 **Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
 selections as 128 derivative-distinct matrices.

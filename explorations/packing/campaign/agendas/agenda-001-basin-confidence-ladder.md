@@ -185,19 +185,31 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [10]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       Can the current event path start from a perturbation of the proved 45-degree
       optimum, return to it, and independently verify the full pose under v3?
     hypotheses: [H-002, H-021]
     budget: four preregistered perturbations; 15s each; 90s command cap
-    entry: add a source-bound seeded-pose entry point without changing the quench criterion
+    entry: >-
+      The source-bound `gobel10-svg-v1` entry point replays the published pose, source
+      digest, deterministic perturbation, full start, and independent validity without
+      changing the quench criterion.
     exit: proved-value return and complete receipts, or a typed retained failure
     bead: think-ouf0
     depends_on: [BC-003]
-    next_evidence: a positive-control event artifact rooted in the published exact pose
+    next_evidence: >-
+      Preregister and retain the four-perturbation positive-control event artifact;
+      distinguish valid optimal-side time stops from producer convergence.
     parallel_group: known-answer-controls
+    note: >-
+      A one-second run-path smoke test reached a valid endpoint at the proved side and
+      replayed its source binding, but correctly remained non-admissible after a typed
+      time-budget stop. This validates the entry point, not the BC-008 exit criterion.
+    artifacts:
+    - sqpack/packings/gobel10.py
+    - tools/basin_census.py
   - id: BC-009
     purpose: measurement_validation
     owner_focus: correctness
