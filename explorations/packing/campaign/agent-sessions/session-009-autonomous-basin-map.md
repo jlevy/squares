@@ -157,6 +157,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-022-h-021-n3-basin-event-v3-completion.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-023-h-021-n4-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-024-h-021-n4-basin-event-v3-repair.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
@@ -240,10 +241,9 @@ session:
     docs preserve agenda-001 and bind project-specific claims to retained evidence.
   stop_reason: null
   next_action: >-
-    Finish the reviewed PR 20 merge, run the normal gate, push, and disposition PR 20.
-    Then run only BC-003: four fixed n=5 seeds at 10 seconds each under a 60-second
-    command cap. Treat it as tool validation; retain any typed stop and do not begin n=5
-    connectivity research until the identity-control rows are complete.
+    Execute preregistered exp-025 only: four fixed n=5 seeds at 10 seconds each under a
+    60-second command cap. Treat it as tool validation; retain any typed stop and do not
+    begin n=5 connectivity research until the identity-control rows are complete.
 ---
 # Session 009 — Bounded Progress Before Scale
 

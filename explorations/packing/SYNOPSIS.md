@@ -1200,8 +1200,8 @@ Component and census claims remain blocked on the later identity and coverage ro
 
 ## Experiments Conducted
 
-There are 24 rounds registered in `series-000`; all are terminal.
-They record 758 agent-minutes and 25.3 wall-minutes.
+There are 25 rounds registered in `series-000`; 24 are terminal and exp-025 is in
+progress. The terminal rounds record 758 agent-minutes and 25.3 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1243,6 +1243,7 @@ archive beside it.
 | [exp-022](campaign/series/series-000-smoke-and-calibration/experiments/exp-022-h-021-n3-basin-event-v3-completion.md) | 3 | positive control | H-021 | BasinEvent/v3 semantic replay | 3 valid; 8,364/8,364 evaluations settled; 3 admissible | **baseline** |
 | [exp-023](campaign/series/series-000-smoke-and-calibration/experiments/exp-023-h-021-n4-basin-event-v3.md) | 4 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 3 converged/admissible; one typed unsettled stop | **baseline** |
 | [exp-024](campaign/series/series-000-smoke-and-calibration/experiments/exp-024-h-021-n4-basin-event-v3-repair.md) | 4 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,301/14,301 evaluations settled; 4 admissible at side 2 | **baseline** |
+| [exp-025](campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md) | 5 | positive control | H-021 | BasinEvent/v3 semantic replay | preregistered four-seed tool-validation block; measurement pending | **in-progress** |
 
 ### Cost and provenance
 
@@ -1273,7 +1274,7 @@ archive beside it.
 | exp-023 | 4 seeds, 10 s each | 12.506 s | 8 m | criterion | `8f20908` |
 | exp-024 | 4 seeds, 10 s each | 16.967 s | 15 m | criterion | `f15d036` |
 
-### What the twenty-four rounds jointly establish
+### What the twenty-four terminal rounds jointly establish
 
 **The numerical basin event trust boundary is now admissible on two proved positive
 controls; component classification is not.** Exp-018 through exp-020 retain twelve

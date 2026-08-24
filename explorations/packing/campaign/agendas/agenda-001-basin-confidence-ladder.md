@@ -76,9 +76,11 @@ agenda:
       Any unsettled evaluation opens a defect and blocks all n=5 research scaling.
     bead: think-wbra
     depends_on: [BC-002]
-    next_evidence: one exp-NNN artifact plus its four-event JSONL archive and replay
+    next_evidence: exp-025 plus its four-event JSONL archive and semantic replay
     parallel_group: event-calibration
-    note: Hitting the proved optimum is not the criterion; this cell validates the tool path.
+    note: >-
+      Claimed as exp-025. Hitting the proved optimum is not the criterion; this cell
+      validates the tool path.
   - id: BC-004
     purpose: tool_validation
     owner_focus: correctness
