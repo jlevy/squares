@@ -5,7 +5,7 @@ title: Execute and document the 8-hour autonomous basin-map campaign
 kind: task
 status: in_progress
 priority: 0
-version: 26
+version: 29
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -21,11 +21,13 @@ child_order_hints:
   - is-01m0t6vhfpqs3pw4dtdjzjf7qg
   - is-01m0t7bg0wqr7y4qc5ff1cyeth
   - is-01m0tas8msq5rqx78fd1cyv3qn
+  - is-01m0tbp7nwszshg4b9nngsjwh6
+  - is-01m0tbtgpb92e81ndvw4xm9be6
 created_at: 2026-08-24T14:44:12.384Z
-updated_at: 2026-08-24T16:56:53.636Z
+updated_at: 2026-08-24T17:15:44.006Z
 ---
 Own the 2026-08-24 eight-hour goal from launch audit through durable results. Acceptance: reconcile the exact n-sequence and complete-vs-sampled map definition; close only launch-path tooling gaps; supervise one end-to-end round and forced failure; price the queue on this host; run and record every scientifically admissible cell until the wall budget, queue, or a declared stop fires; commit and push bounded checkpoints; monitor PR feedback; and finish with generated session, ledger, defect, bead, and PR state in sync. Never label endpoint-key saturation a complete basin map without the component identity and uncertainty criteria.
 
 ## Notes
 
-Checkpoint 16, 2026-08-24. Pushed 94b67a5. Exp-023 retains the prepriced n4 v3 cell: 3/4 admissible at proved side 2; seed3 retains one unsettled pair-row post-check rejection, D-171 open. All 4 poses independently validate and the focused event gate replays exp018/021/022/023 in 2s. Next slice is exact D171 diagnosis under 30m cap; no n5 launch yet.
+2026-08-24 checkpoint 7ec721d pushed to PR #19. Event-level controls: n=3 4/4 admissible; n=4 repaired block 4/4 admissible, 14,301/14,301 settled. D-171 and agenda bead closed. agenda-001 is now the canonical mutable size-by-size queue; BC-003 n=5 is ready but held until PR #20 docs are reviewed/absorbed. Full 30-step gate passed in 30s. PR #20 latest head moved to 5d096ae and contains f15d036; re-audit against 7ec721d before merge.
