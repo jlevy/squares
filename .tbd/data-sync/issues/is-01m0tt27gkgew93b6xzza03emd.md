@@ -1,0 +1,22 @@
+---
+type: is
+id: is-01m0tt27gkgew93b6xzza03emd
+title: Reconcile packing runbooks and agent instructions with W1-W6
+kind: task
+status: open
+priority: 1
+version: 2
+spec_path: explorations/packing/campaign/README.md
+labels:
+  - packing
+  - documentation
+  - focus-process
+  - workflow-entry-points
+dependencies:
+  - type: blocks
+    target: is-01m0tt27yf5vjccrqxzygzx6jn
+parent_id: is-01m0r7tkdt35ged6b10gaf9wa0
+created_at: 2026-08-24T21:15:46.578Z
+updated_at: 2026-08-24T21:15:47.022Z
+---
+Update the campaign runbook, agent-sessions README, conventions, root AGENTS.md, and the active unattended-readiness plan with thin pointers and only the rules each document owns. Mark the bounded research cycle as W6; require both workflow and focus at orientation; keep mode switches outside an active slice; and tell future packing agents where to choose and record an entry point. Review TUTORIAL.md and historical reports but change them only when an orientation pointer is necessary. Acceptance: no document duplicates the full workflow table; focus, workflow, phase, and slice are used consistently; generated and historical documents remain untouched unless their ownership requires a correction.
