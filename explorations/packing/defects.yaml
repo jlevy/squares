@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 167
+count: 168
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4219,3 +4219,39 @@ defects:
     termination records.
   bead: think-4g3f
   recorded_in: tools/basin_census.py
+- id: D-168
+  title: A finite equal-objective adjacent-cell closure was labeled an unsettled cycle
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: conservative
+  detected_by: control_cell
+  latent_for: since fixed-cell cycles became typed termination evidence
+  severity: high
+  status: fixed
+  what: >-
+    The retained n=10 positive control alternated between two separating-axis cells and
+    stopped as an unsettled cycle even though the cycle varied only the rows for pairs
+    (0,2) and (0,6). Their complete Cartesian product has four cells. Every LP solve
+    passes, all four objectives agree within 4.44e-16, and every solution rereads into
+    the same four-cell set. Later angle probes expose similarly bounded closures of two,
+    four, or eight cells.
+  consequence: >-
+    A solver-scale representation change on a tie locus blocked a known-answer quench
+    and could make valid local search look nonterminating. Treating every cycle alike
+    also hid the mathematical difference between a closed equal-objective degeneracy
+    and an unresolved transition among materially different objectives.
+  fix: >-
+    On a repeated cell, enumerate the Cartesian product of every row choice observed in
+    the cycle, expand it with any choices exposed by solution rereads, and stop at a
+    hard 64-cell cap. Settle only if every LP passes, the closure stops expanding, and
+    its full objective spread is within the declared LP screen. Keep the largest-side
+    representative and label the result `adjacent cell closure`; do not claim a global
+    fixed-angle or basin optimum.
+  regression: >-
+    The actual n=10 D-029 control must exercise a finite adjacent-cell closure and retain
+    the proved side. A synthetic two-cell closure must settle, while a mutation whose
+    objectives differ by twice the LP screen must remain rejected.
+  recurrence_of: D-132
+  bead: think-8c61
+  recorded_in: sqpack/quench.py

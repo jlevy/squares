@@ -27,6 +27,7 @@ from __future__ import annotations
 import math
 import time
 from dataclasses import dataclass, field
+from itertools import product
 
 import numpy as np
 from scipy.optimize import linprog
@@ -43,6 +44,7 @@ class _FixedCellUnsettledError(Exception):
 # How much constraint violation a returned LP solution may carry. Two orders below the
 # tightened solver tolerance, and far below any quantity the campaign reports.
 LP_FEASIBLE_EPS = 1e-10
+MAX_ADJACENT_CELL_CLOSURE = 64
 
 
 @dataclass
@@ -72,6 +74,17 @@ class FixedPointResult:
     changes: int
     settled: bool
     reason: str
+
+
+@dataclass
+class _AdjacentClosureResult:
+    """A bounded, equal-objective closure of adjacent fixed-angle LP cells."""
+
+    side: float
+    x: list[float]
+    y: list[float]
+    solves: int
+    cell_count: int
 
 
 def _axes(theta: float) -> list[tuple[float, float]]:
@@ -221,7 +234,72 @@ def solve_cell(theta, cell, n: int):
     return float(v[0]), x, y
 
 
-def solve_to_fixed_point(theta, x, y, n: int, max_iters: int = 12):
+def _solve_adjacent_cell_closure(  # noqa: PLR0911 - each failed obligation refuses closure
+    theta,
+    cycle_cells,
+    n: int,
+    *,
+    max_cells: int = MAX_ADJACENT_CELL_CLOSURE,
+) -> tuple[_AdjacentClosureResult | None, int]:
+    """Close a finite cell cycle without claiming a global fixed-angle optimum.
+
+    A tie locus can make the cell reread alternate even though every adjacent LP has
+    the same objective.  Starting only from rows observed in the cycle, enumerate their
+    Cartesian product, solve every cell, and add any row choice exposed by rereading a
+    solution.  The closure is settled only when that process stops, every solve passes,
+    every reread remains inside the enumerated row choices, and the full objective
+    spread is within the LP screen.  The hard cap makes combinatorial growth a typed
+    refusal rather than a hidden search.
+
+    This certifies one finite adjacent-cell closure.  It does not enumerate every cell
+    at these angles and therefore does not certify a global fixed-angle optimum.
+    """
+    if not cycle_cells:
+        return None, 0
+    options = [[row] for row in cycle_cells[0]]
+    for cell in cycle_cells[1:]:
+        if len(cell) != len(options):
+            return None, 0
+        for index, row in enumerate(cell):
+            if row not in options[index]:
+                options[index].append(row)
+
+    solves = 0
+    while True:
+        cell_count = math.prod(len(rows) for rows in options)
+        if cell_count > max_cells:
+            return None, solves
+        outcomes = []
+        expanded = False
+        for selection in product(*options):
+            cell = list(selection)
+            solved = solve_cell(theta, cell, n)
+            solves += 1
+            if solved is None:
+                return None, solves
+            side, x, y = solved
+            reread = choose_cell(x, y, theta, preferred=cell)
+            if len(reread) != len(options):
+                return None, solves
+            for index, row in enumerate(reread):
+                if row not in options[index]:
+                    options[index].append(row)
+                    expanded = True
+            outcomes.append((side, x, y))
+        if expanded:
+            continue
+        sides = [outcome[0] for outcome in outcomes]
+        if max(sides) - min(sides) > LP_FEASIBLE_EPS:
+            return None, solves
+        # Keep the conservative (largest-side) representative.  Differences within
+        # this closure are solver-scale, but choosing the smallest would flatter it.
+        side, x, y = max(outcomes, key=lambda outcome: outcome[0])
+        return _AdjacentClosureResult(side, x, y, solves, cell_count), solves
+
+
+def solve_to_fixed_point(  # noqa: PLR0911 - each termination reason is retained evidence
+    theta, x, y, n: int, max_iters: int = 12
+):
     """Solve, re-read the cell from the solution, and repeat until the cell settles.
 
     A single `solve_cell` optimises the cell suggested by the *incoming* centres, but
@@ -238,7 +316,8 @@ def solve_to_fixed_point(theta, x, y, n: int, max_iters: int = 12):
     """
     solves = changes = 0
     cell = choose_cell(x, y, theta)
-    seen = {tuple(cell)}
+    history = [cell]
+    seen = {tuple(cell): 0}
     best = solve_cell(theta, cell, n)
     solves += 1
     if best is None:
@@ -256,7 +335,22 @@ def solve_to_fixed_point(theta, x, y, n: int, max_iters: int = 12):
                 settled=True,
                 reason="cell fixed point",
             )
-        if tuple(nxt) in seen:
+        nxt_key = tuple(nxt)
+        if nxt_key in seen:
+            closure, closure_solves = _solve_adjacent_cell_closure(
+                theta, history[seen[nxt_key] :], n
+            )
+            solves += closure_solves
+            if closure is not None:
+                return FixedPointResult(
+                    side=closure.side,
+                    x=closure.x,
+                    y=closure.y,
+                    solves=solves,
+                    changes=changes,
+                    settled=True,
+                    reason=f"adjacent cell closure ({closure.cell_count} cells)",
+                )
             return FixedPointResult(
                 side=side,
                 x=x,
@@ -266,7 +360,8 @@ def solve_to_fixed_point(theta, x, y, n: int, max_iters: int = 12):
                 settled=False,
                 reason="cell cycle",
             )
-        seen.add(tuple(nxt))
+        seen[nxt_key] = len(history)
+        history.append(nxt)
         cell = nxt
         changes += 1
         trial = solve_cell(theta, cell, n)

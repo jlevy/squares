@@ -70,7 +70,7 @@ session:
   - task: Check every live PR 19 feedback surface at the latest pushed checkpoint
     operator: pr19_comment_checkpoint_2
     status: completed
-    outcome: No issue comments, reviews, inline comments, review threads, or checks exist at head 8964ebe.
+    outcome: No issue comments, reviews, inline comments, review threads, or checks exist at head 2b43498.
     evidence: [GitHub REST and GraphQL review surfaces]
     files: []
     checks: [remote head matches local head]
@@ -93,6 +93,19 @@ session:
     elapsed_seconds: 2
     elapsed_quality: platform_measured
     next_action: Commit and push the portable runbook checkpoint.
+  - task: Run static checks on the finite adjacent-cell closure implementation
+    operator: d168_mechanical_check
+    status: completed
+    outcome: >-
+      Ruff formatting, BasedPyright, byte compilation, and diff checks pass after one
+      mechanical import-order repair; the parent added narrow return-count annotations.
+    evidence: [frozen Ruff output, BasedPyright output, py_compile output]
+    files: [sqpack/quench.py, tools/regression_test.py]
+    checks: [Ruff, BasedPyright, py_compile, git diff check]
+    uncertainty: The delegate did not run the scientific n=10 or mutation controls.
+    elapsed_seconds: 7
+    elapsed_quality: platform_measured
+    next_action: Retain the n=10 closure trace and run the scientific controls separately.
   outputs:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-018-h-021-n3-basin-event-calibration.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-019-h-021-n4-basin-event-calibration.md
@@ -107,21 +120,26 @@ session:
   - campaign/agent-sessions/session-009-autonomous-basin-map.md
   - campaign/schemas/agent-session.schema.yaml
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+  - sqpack/quench.py
   checks:
   - Basin-event generation and replay pass for n=3, n=4, and n=5.
   - Every retained pose passes the independent floating-point geometry screen.
   - Every event states that D-165 blocks scientific promotion.
   - The portable runbook and session clocks pass Flowmark, schema, campaign-record, README, and synopsis checks.
   - >-
-    The 32-second normal gate remains red at its basin-atlas step under D-162: the real
-    n=4 quench is nonconverged, and the store reports four of six converged proposals.
-    This slice does not hide or redefine that result.
+    The n=10 control exposes finite equal-objective closures of two, four, and eight
+    cells; closure and unequal-objective mutations pass, but sixteen other probe solves
+    still return no typed outcome, so D-165 continues to block scientific promotion.
+  - >-
+    The 36-second normal gate passes all thirty steps after D-168: the real n=4 quench
+    converges and the store reports five of six converged proposals. D-165 still blocks
+    scientific promotion because failed angle probes remain untyped and unaccounted.
   stop_reason: null
   next_action: >-
-    In one thirty-minute slice, decide whether the n=10 equal-objective cell cycle has a
-    complete finite adjacent-tie closure. Implement and retain it only if every tied
-    option is enumerated and the known controls pass; otherwise record the blocker,
-    preserve the trace, and switch lanes.
+    In one thirty-minute slice, land the typed D-164 outcomes from the preserved
+    prototype and measure the sixteen n=10 failed probes by cause. Preregister a bounded
+    repair only if those causes are homogeneous and independently screenable; otherwise
+    retain D-165 and switch lanes.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -131,9 +149,10 @@ behavior, while the promotion guard correctly kept every event out of the scient
 atlas because the producer still hides some failed probe evaluations behind a sentinel
 objective.
 
-The session therefore stopped the size sweep after n=5. The next action is one bounded
-test of the finite tie-cell closure suggested by the n=10 known-answer cycle, not an
-open-ended quench redesign.
+The session therefore stopped the size sweep after n=5. The finite n=10 tie-cell test
+has now closed every observed two-, four-, and eight-cell degeneracy without claiming a
+global optimum. Sixteen different probe evaluations still lack typed outcomes, so the
+next bounded slice classifies those failures rather than widening the quench redesign.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

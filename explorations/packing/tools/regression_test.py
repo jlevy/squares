@@ -32,6 +32,7 @@ from sqpack.quench import (
     FixedPointResult,
     _free_sweep,  # pyright: ignore[reportPrivateUsage]
     _OutOfTimeError,  # pyright: ignore[reportPrivateUsage]
+    _solve_adjacent_cell_closure,  # pyright: ignore[reportPrivateUsage]
     quench_bracket,
     solve_to_fixed_point,
 )
@@ -145,7 +146,7 @@ def check_angle_search_converges() -> str | None:
     return None
 
 
-def check_cell_solve_is_not_a_quench() -> str | None:
+def check_cell_solve_is_not_a_quench() -> str | None:  # noqa: PLR0911
     """D-029: freezing the angles measures the cell, not the basin.
 
     An agent checking exp-001's polish/exploration split built a probe that did one LP
@@ -192,12 +193,28 @@ def check_cell_solve_is_not_a_quench() -> str | None:
             "measurement that separates a cell from a basin has stopped separating them"
         )
 
-    r = quench_bracket(best["x"], best["y"], best["t"], time_budget=60)
+    closures = []
+    original_fixed_point = solve_to_fixed_point
+
+    def trace_adjacent_closures(*args, **kwargs):
+        result = original_fixed_point(*args, **kwargs)
+        if result is not None and result.reason.startswith("adjacent cell closure"):
+            closures.append(result.reason)
+        return result
+
+    with patch.object(
+        quench_module,
+        "solve_to_fixed_point",
+        side_effect=trace_adjacent_closures,
+    ):
+        r = quench_bracket(best["x"], best["y"], best["t"], time_budget=60)
     if r.side - analytic > 1e-12:
         return (
             f"D-029: quench_bracket on exp-002 seed 2 reached only {r.side - analytic:+.2e}; "
             "the angle half has regressed, and n = 10 would read as an exploration failure"
         )
+    if not closures:
+        return "D-168: n=10 no longer exercises the adjacent-cell closure control"
     return None
 
 
@@ -260,6 +277,42 @@ def check_fixed_cell_termination_is_typed() -> str | None:
     return None
 
 
+def check_adjacent_cell_closure_is_bounded() -> str | None:
+    """D-168: equal adjacent cells settle, but unequal objectives remain a refusal."""
+    row_a = (0, 1, 1.0, 0.0, 1.0, 1.0)
+    row_b = (0, 1, 0.0, 1.0, 1.0, 1.0)
+    cells = [[row_a], [row_b]]
+
+    def reread(_x, _y, _theta, preferred=None):
+        return [row_b] if preferred == [row_a] else [row_a]
+
+    def equal_solve(_theta, cell, _n):
+        marker = 0.0 if cell == [row_a] else 1.0
+        return 2.0, [marker, 1.0], [0.0, 0.0]
+
+    with (
+        patch.object(quench_module, "choose_cell", side_effect=reread),
+        patch.object(quench_module, "solve_cell", side_effect=equal_solve),
+    ):
+        closure, solves = _solve_adjacent_cell_closure([0.0, 0.0], cells, 2)
+    if closure is None or closure.cell_count != 2 or solves != 2:
+        return f"D-168: finite equal-objective closure did not settle: {closure!r}, {solves=}"
+
+    def unequal_solve(_theta, cell, _n):
+        marker = 0.0 if cell == [row_a] else 1.0
+        side = 2.0 + marker * 2 * quench_module.LP_FEASIBLE_EPS
+        return side, [marker, 1.0], [0.0, 0.0]
+
+    with (
+        patch.object(quench_module, "choose_cell", side_effect=reread),
+        patch.object(quench_module, "solve_cell", side_effect=unequal_solve),
+    ):
+        rejected, _ = _solve_adjacent_cell_closure([0.0, 0.0], cells, 2)
+    if rejected is not None:
+        return "D-168: unequal adjacent objectives were flattened into a settlement"
+    return None
+
+
 # Named at module level so a process pool can pickle them by reference. The five are
 # independent -- each builds its own fixture and reads nothing the others write -- and
 # each is seconds of LP solving, so running them serially made this file the gate's
@@ -272,6 +325,7 @@ CHECKS = (
     "check_cell_solve_is_not_a_quench",
     "check_free_sweep_deadline_is_not_convergence",
     "check_fixed_cell_termination_is_typed",
+    "check_adjacent_cell_closure_is_bounded",
 )
 
 
@@ -288,7 +342,7 @@ def main() -> int:
         return 1
     print(
         f"  {len(CHECKS)} regression checks pass "
-        "(D-002, D-015, D-016, D-019, D-029, D-036, D-132)"
+        "(D-002, D-015, D-016, D-019, D-029, D-036, D-132, D-168)"
     )
     return 0
 

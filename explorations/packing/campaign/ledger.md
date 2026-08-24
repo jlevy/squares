@@ -14,7 +14,7 @@
 | [session-006](agent-sessions/session-006-h026-exact-tangent.md) | completed | insight | think-qd9t | 2 | Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and move the fast rotation to H-032's exact n=3 quotient-family control. |
 | [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | insight | think-n82j | 3 | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | correctness | think-ciwv | 3 | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
-| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 4 | In one thirty-minute slice, decide whether the n=10 equal-objective cell cycle has a complete finite adjacent-tie closure. Implement and retain it only if every tied option is enumerated and the known controls pass; otherwise record the blocker, preserve the trace, and switch lanes. |
+| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 5 | In one thirty-minute slice, land the typed D-164 outcomes from the preserved prototype and measure the sixteen n=10 failed probes by cause. Preregister a bounded repair only if those causes are homogeneous and independently screenable; otherwise retain D-165 and switch lanes. |
 
 ## Series
 
