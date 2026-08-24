@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 164
+count: 165
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4132,3 +4132,35 @@ defects:
   recurrence_of: D-014
   bead: think-28x5
   recorded_in: golden/basin-maps.yaml
+- id: D-165
+  title: Initial cell-solve failures bypassed the fixed-point termination guard
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: one bounded D-132 implementation slice
+  severity: critical
+  status: outstanding
+  what: >-
+    D-132 made cycles, caps, and failed re-read transitions explicit only after the
+    initial cell LP succeeded. An initial `solve_cell` failure still returns `None`;
+    angle probes convert that outcome to a large dummy objective and continue, so an
+    outer quench can later report convergence without recording the failed evaluation.
+    Propagating a typed initial post-check rejection immediately makes the D-016 and
+    D-029 positive controls stop instead of silently routing around it.
+  consequence: >-
+    The fixed-cell settlement flag is not yet a complete certificate: a nominally
+    converged run may have crossed unmeasured angle probes. Basin membership and
+    stationarity remain inadmissible even though the newly added field says settled.
+  fix: >-
+    none yet. A bounded one-retry experiment with conservatively tightened pair rows
+    restored both positive-control side values, but n=10 still ended on an explicit
+    free-sweep cell cycle. Preserve the typed prototype and design a policy that passes
+    known-answer controls without converting an unknown objective into convergence.
+  regression: >-
+    The D-016 and D-029 fixtures must remain converged under the final typed policy, and
+    a synthetic initial post-check rejection must never be converted to a dummy score.
+  recurrence_of: D-132
+  bead: think-9qz0
+  recorded_in: tools/regression_test.py
