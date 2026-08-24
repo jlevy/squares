@@ -461,6 +461,11 @@ def validate_result(result: dict[str, object]) -> None:
         raise ValueError("the fixed-angle connection criterion was not met")
 
 
+def require_same_result(retained: dict[str, object], regenerated: dict[str, object]) -> None:
+    if retained != regenerated:
+        raise ValueError("retained n=5 face record differs from exact regeneration")
+
+
 def build_result() -> dict[str, object]:
     field = make_field()
     data = exact_data(field)
@@ -505,6 +510,8 @@ def build_result() -> dict[str, object]:
         "full_segment_feasible_by_convexity"
     ] = False
     wrong_action = source_alignment(data, use_quarter_turn=False)
+    wrong_digest = copy.deepcopy(result)
+    require_dict(wrong_digest["sources"], "wrong-digest sources")["golden_sha256"] = "0" * 64
     invalid_endpoint = copy.deepcopy(result)
     require_dict(
         require_dict(invalid_endpoint["exact_model"], "invalid model")["endpoint_a_validity"],
@@ -518,7 +525,7 @@ def build_result() -> dict[str, object]:
         "missing_path_certificate_is_rejected": False,
         "invalid_endpoint_is_rejected": False,
         "wrong_source_D4_action_is_rejected": wrong_action["matches"] is False,
-        "source_digest_tamper_is_detectable": sha256_file(GOLDEN) != "0" * 64,
+        "source_digest_tamper_is_rejected": False,
     }
     try:
         validate_result(shifted)
@@ -528,6 +535,10 @@ def build_result() -> dict[str, object]:
         validate_result(invalid_endpoint)
     except ValueError:
         selftests["invalid_endpoint_is_rejected"] = True
+    try:
+        require_same_result(wrong_digest, result)
+    except ValueError:
+        selftests["source_digest_tamper_is_rejected"] = True
     if not all(selftests.values()):
         raise ValueError(f"n=5 equal-side selftests failed: {selftests}")
     result["selftests"] = selftests
@@ -551,8 +562,7 @@ def parse_args() -> argparse.Namespace:
 
 def require_replay_match(path: Path, result: dict[str, object]) -> None:
     retained = require_dict(json.loads(path.read_text(encoding="utf-8")), "retained result")
-    if retained != result:
-        raise ValueError("retained n=5 face record differs from exact regeneration")
+    require_same_result(retained, result)
 
 
 def main() -> int:
