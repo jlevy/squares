@@ -15,8 +15,9 @@ There is not yet enough admissible, executable numerical work for
 
 The distinction matters:
 
-- the persistent agent goal is the controller for research, implementation, review,
-  delegation, verification, recording, and choosing the next ready bead;
+- the portable outer work loop controls research, implementation, review, delegation,
+  verification, recording, and selection of the next ready bead; a native agent goal or
+  watchdog may supervise it but is not its source of truth;
 - `runner.py` is only the executor for preregistered numerical cells whose instruments,
   evaluators, budgets, and validity paths already exist.
 

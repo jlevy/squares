@@ -77,6 +77,88 @@ nowhere else; a bead may say “build the instrument for H-002” but never “H
 confirmed”. All fifteen entries from the standing review are now codified.
 Later ids carry campaign-native claims and explicit open questions.
 
+## The Bounded Research Cycle
+
+The campaign keeps a broad portfolio and runs one narrow slice at a time.
+This distinction protects both creativity and completion: ideas are cheap to capture,
+but only a preregistered slice may consume the current clock.
+Every slice names one of the packing program’s
+[four operating focuses](../README.md#operating-principles), so correctness, process,
+insight, and efficiency can veto or inform one another without becoming one unbounded
+task.
+
+The protocol is agent-neutral.
+Its authoritative state is the repository: the hypothesis and idea board say what may be
+tried, `tbd` says what is ready, an [agent-session artifact](agent-sessions/README.md)
+says what this session is trying and when it stops, and experiments, defects, commits,
+and bead notes preserve what happened.
+Conversation history, a native goal, and a watchdog are useful controllers, but none is
+the only copy of a decision or result.
+
+### Default Clocks
+
+An agent-session artifact may tighten these defaults before work starts.
+It may not relax them after seeing a result.
+A long numerical or proof computation keeps its separately preregistered round timebox,
+while the agent still checkpoints its supervision work on this cadence.
+
+| Clock | Default | Required outcome at the boundary |
+| --- | ---: | --- |
+| Orientation | 10 minutes | Name one focus, primary bead, question, output, validating command, kill condition, and fallback; otherwise record the ambiguity and switch |
+| Evidence checkpoint | 20 minutes | Produce a passing check, minimized failure, retained measurement, source-bound derivation, or explicit blocked result; prose about continued investigation is not evidence |
+| Active slice | 30 minutes | Integrate a coherent checkpoint, or stop and preserve the partial work with its exact limitation; continuation requires a newly stated slice and clock |
+| Finalization reserve | 15 minutes | Stop new work before the session deadline; reconcile artifacts, defects, beads, generated views, commits, pushes, and the next action |
+| Research command | Declared per hypothesis | Terminate or return at its own wall-clock bound and retain its stopping reason and resumable state |
+
+A dirty worktree may span one active slice only.
+At the boundary, commit a coherent result; if the work is not coherent enough to commit,
+stash it with a descriptive name and put the exact reproducer, limitation, and next
+decision in the bead.
+Raw results that already answer a preregistered question are committed even when the
+answer is negative or invalid.
+
+### One Slice
+
+1. **Select.** Re-screen the portfolio and choose the highest-information ready action,
+   not merely the most recent idea.
+2. **Declare.** Record the focus, bead, question, promised output, narrow validating
+   command, wall budget, kill condition, and fallback before acting.
+3. **Execute.** Take the smallest action that can answer the question.
+   Delegate independent mechanical work with a disjoint scope and the same clock.
+4. **Checkpoint.** At twenty minutes, preserve concrete evidence.
+   A result may be positive, negative, invalid, or blocked; each advances the record if
+   its evidence is replayable.
+5. **Stop or renew.** At thirty minutes, integrate, stash, or abandon the slice.
+   Never extend it merely because the answer feels close.
+   A successor slice must state what new fact makes another bounded attempt worthwhile.
+6. **Record once.** Route an idea to the idea board or a new `H-NNN`, a measurement to
+   raw data and `exp-NNN`, an implementation task to its bead, and an actual error to
+   `defects.yaml` with its detector and regression.
+7. **Commit and re-screen.** Regenerate owned views, run the narrowest sufficient gate,
+   commit and push the checkpoint, then choose again from the now-current queue.
+
+New tangents do not disappear and do not hijack the clock.
+Record one as a bead, defect, exploration, hypothesis, or open question according to
+what it is; pursue it immediately only when it falsifies the active slice’s premise or
+outranks the queue under an explicit re-screen.
+
+### Supervisors and Watchdogs
+
+A supervisor is optional; the bounded protocol is not.
+When available, use a native long-running goal to maintain the session objective and a
+periodic watchdog to inspect repository evidence.
+The watchdog checks elapsed wall time, the latest experiment or commit, the active bead,
+and the agent-session next action.
+After twenty minutes without evidence it requests a checkpoint; after thirty minutes it
+requires the current slice to stop or be restated.
+It never changes a hypothesis, criterion, threshold, or mathematical verdict.
+
+An agent without native goal or watchdog support follows the same rules with a monotonic
+clock and bounded command execution.
+A human, cron job, CI task, or small shell/Python supervisor may poll the same durable
+state. This makes the safety property portable: replacing Codex with Claude, another
+coding agent, or a human changes the driver, not the research contract.
+
 ## The three tiers
 
 A number’s tier is recorded as `subject.precision`, and it decides what the number may
