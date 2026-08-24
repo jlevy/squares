@@ -292,7 +292,7 @@ def build_result() -> dict[str, object]:
             "outcome": "criterion_met",
             "claim": (
                 "the exp-033 segment lies in an exact two-parameter sheet of feasible "
-                "fixed-cell optima at side 1+5*sqrt(2)/4"
+                "orientation-indexed LP optima at side 1+5*sqrt(2)/4"
             ),
             "scope": (
                 "declared square-0 half-angle and slide family only; no full stationary "
