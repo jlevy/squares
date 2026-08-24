@@ -1,7 +1,7 @@
 ---
 title: session-001 — reset PR 15 to the tight research loop
 softschema:
-  contract: packing.squares:AgentSession/v1
+  contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
@@ -12,7 +12,21 @@ session:
   goal: >-
     Quarantine the abandoned isolation detour, correct the stable research record, and
     leave one visible, measured delegation loop on a clean reviewable PR.
-  focus: process
+  entry_workflow: process-review
+  workflow_phases:
+  - workflow: process-review
+    focus: process
+    objective: Reconcile the abandoned detour, record state, and outer delegation loop.
+    status: completed
+    entered_by: session_start
+    switch_reason: null
+    budget_minutes: 240
+    outcome: The detour was quarantined and the stable record became reviewable and green.
+    evidence:
+    - The named attic stash preserves the prototype without promoting its claims.
+    - The normal gate passed in 126 seconds with the session contract integrated.
+    stop_reason: The declared reset and integration checkpoint was complete.
+    next_action: Resume from the highest-priority correctness or insight bead.
   primary_bead: think-m79h
   status: completed
   budget:

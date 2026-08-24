@@ -6,16 +6,20 @@ running them.
 
 `s(n)` is the side of the smallest square holding `n` non-overlapping unit squares.
 The motivating case is `n = 11`, the smallest instance of this problem that is still
-open. Its best known packing dates from 1979 and its best proved lower bound from 2003,
-and a gap of roughly 0.088 in the side length separates them.
+open. Its best-known packing dates from 1979. The familiar lower-bound value was stated
+in 2003, but
+[exp-016](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md)
+finds an exact gap in the printed proof;
+[exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md)
+certifies a source-distinct repair of the same inequality.
+Roughly `0.088` in side length remains between that bound and the 1979 construction.
 
-The work runs on four principles held in balance—correctness, process, insight, and
-efficiency—each worked by its own kind of loop, and joined by one **research loop**:
-insight agents produce hypotheses, the research loop tests each as a preregistered
-experiment against the tooling, correctness decides every verdict at a declared evidence
-tier, and process records all of it.
-[Operating Principles](#operating-principles) below defines each principle and sketches
-the loop; the [campaign runbook](campaign/README.md) runs it.
+Work is organized at three levels.
+Four **operating principles** define what quality means and which concerns may veto
+promotion. Six **workflow entry points** define the purpose and durable output of one
+phase of work. A bounded **slice** is the smallest action taken inside that phase.
+Keeping these levels separate lets an agent optimize one dimension without silently
+changing the kind of work it promised to do.
 
 **New here?** [`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the
 objects are, why the approach is shaped the way it is, and what is established versus
@@ -34,56 +38,78 @@ None can stand in for another, and each has a preeminent goal:
 | **Efficiency** | Infrastructure | Iteration on every layer of the stack, as fast as possible, through efficient algorithms and systems engineering |
 
 Balance carries one asymmetry.
-Correctness and process hold vetoes—no claim is promoted past its evidence, and no run
+Correctness and process hold vetoes—no claim is promoted past its evidence, and no round
 counts if it cannot be reconstructed—while insight is never blocked from proposing, and
 efficiency may never relax either control to go faster.
 
-### How each principle is worked
+### Workflow Entry Points
 
-Deep work on a single principle is one mode, not the only one, and the four are staffed
-differently:
+Choose the workflow whose promised output matches the work, then choose the operating
+focus that will judge it.
+The full entry, exit, and transition contracts live in the
+[synopsis](SYNOPSIS.md#workflow-entry-contracts).
 
-- **Correctness and process are structural first.** The schemas, gate, preregistration,
-  and provenance provide enforceable controls, but do not certify the mathematics or
-  keep every cross-document claim current by themselves.
-  The ongoing flow is survey work—reviewing, fact-checking, and assembling everything
-  known on a topic soundly—and finding and validating the right formal-verification
-  mechanisms.
-- **Efficiency runs as performance loops**: dedicated agentic loops measured purely by
-  declared performance metrics—gate wall time, solver throughput, pair-tests—so an
-  improvement is a number moving, never an impression.
-- **Insight runs as dedicated agents** whose job is extreme context efficiency: absorb
-  the full current research context, then hypothesize a wide range of connections worth
-  pursuing—separately, at whatever depth is needed, by whichever agents or models do it
-  best. Output arrives as explorations and candidate hypotheses, never as unrecorded
-  opinions.
+| ID | Workflow | Enter when | Durable result | Usual handoff |
+| --- | --- | --- | --- | --- |
+| W1 | `research-pass` | The source record or research document is incomplete | Corrected research prose, source notes, and explicit gaps | W2 |
+| W2 | `factual-review` | Existing claims need a correctness-only audit | Findings, corrections, or defects; no new theory smuggled into the review | W3 or W4 |
+| W3 | `insight-iteration` | Current evidence needs new explanations or hypotheses | Candidate `X-NNN`/`H-NNN` items with mechanisms, falsifiers, and information value | W6 |
+| W4 | `process-review` | Work is hard to reconstruct or the discipline itself needs review | Process findings, beads, and narrowly scoped contract or check proposals | W5 or implementation |
+| W5 | `efficiency-loop` | A measured bottleneck limits useful iterations | A baseline, profile, equivalence-safe change, and measured decision | W6 |
+| W6 | `research-loop` | A registered hypothesis has an instrument, criterion, and budget | One or more `exp-NNN` records, raw evidence, verdicts, and a current ledger | W2, then W3 |
 
-### The research loop
+Use `general-improvement` only when a task genuinely fits none of W1–W6. It is an
+explicit fallback, not permission to mix several purposes without checkpoints.
 
-The architecture that ties the four together is a loop between insight and experiment:
+One workflow phase is active at a time.
+It declares a workflow, one focus, an objective, a clock, a promised artifact, and a
+stop condition.
+Start a new phase when the workflow or focus changes; a focus-only change
+may repeat the same workflow and is not a workflow switch.
+Switch only at a planned or evidence checkpoint, on a user request, or when the active
+premise is falsified.
+Close the prior phase with its evidence, stop reason, and next action before opening the
+next.
+
+### W6: The Research Loop
+
+W6 is the recurring experiment loop that turns a registered hypothesis into durable
+evidence. It is the final research work, not an umbrella name for every kind of session:
+creative execution is expected inside the registered question, criterion, regime,
+budget, and stop rule, but those constraints stay fixed for the round.
 
 ```
-insight loop ──> hypotheses ──> preregister ──> run rounds ──> validate ──> record
-  (X-NNN)          (H-NNN)     (kill criteria,    (exp-NNN)    (evidence    (ledger,
-     ^                          budgets, tiers)                  tiers)      defects)
-     └────────── verdicts and negative results return as evidence ──────────────┘
+W3 insight iteration ──> H-NNN ──> W6 research loop ──> exp-NNN + raw evidence
+        ^                                      │                    │
+        └──────── successor hypotheses <── W2 factual review <─────┘
 ```
 
-An insight phase runs until it has produced a batch of candidate hypotheses.
-Each is codified in the registry with a kill criterion and a budget before anything
-runs; the research loop then executes them as preregistered experiment rounds against
-the tooling; every verdict is decided at a declared evidence tier and recorded in the
-generated ledger; and every verdict—refutations and negative results above all—returns
-to the next insight phase as evidence rather than discarded work.
-In one line: **Insight proposes → Process preregisters → Efficiency executes →
-Correctness validates → Process records.**
+W1 keeps the research record complete enough to orient the loop.
+W4 improves its discipline, and W5 removes measured bottlenecks.
+W6 itself does not change a criterion, repair the process, or invent a replacement
+hypothesis mid-round.
+It executes the preregistered question under a declared budget, records every outcome,
+and stops at the criterion or clock.
+The [campaign runbook](campaign/README.md) owns those mechanics; the agenda orders ready
+cells, and the [ledger](campaign/ledger.md) is generated from the artifacts rather than
+typed.
 
-The loop’s mechanics are already codified: the campaign runbook’s
-[bounded research cycle](campaign/README.md#the-bounded-research-cycle) is its clock and
-checkpoint protocol, the agenda queue orders its cells, and the
-[ledger](campaign/ledger.md) is generated from the artifacts rather than typed.
+### Work Units at a Glance
 
-### The record, by id
+The [synopsis](SYNOPSIS.md#work-units-and-records) owns the exact vocabulary.
+The short hierarchy is:
+
+| Unit | Meaning |
+| --- | --- |
+| Packing exploration | This self-contained project directory: research, code, sources, and records |
+| Campaign | The durable, multi-session scientific effort under one question and record contract |
+| Series | One campaign-wide tooling regime and comparability boundary; `series-000` is a documented legacy exception awaiting migration |
+| Agent session | One bounded interval of orchestrated work, containing one or more workflow phases |
+| Workflow phase / slice | One declared purpose and focus / one time-bounded action inside it |
+| Hypothesis / experiment | One falsifiable claim / one durable recorded round testing it |
+| Run / result / ledger | One tool invocation / one typed observation / the generated view of the record |
+
+### The Record, by ID
 
 Every artifact the loop touches carries a typed id.
 The one-line meanings; [`conventions.md`](conventions.md) is the definitive registry of
@@ -92,18 +118,18 @@ full definitions:
 
 | Id | Names |
 | --- | --- |
-| `H-NNN` | A registered hypothesis or open question, with its kill criterion and budget written before any run |
+| `H-NNN` | A registered hypothesis or open question, with its criterion and budget written before measurement |
 | `X-NNN` | An exploration report: the recorded idea source hypotheses are mined from |
-| `exp-NNN` | One experiment round: a schema-validated artifact plus its declared result or archive, commonly JSON or JSONL |
-| `series-NNN` | An ordered group of rounds sharing a runbook; only one open at a time |
-| `session-NNN` | One agent session: objective, budget, delegation evidence, stop reason, and handoff |
+| `exp-NNN` | One experiment: the durable artifact for one research round, which may aggregate several raw runs |
+| `series-NNN` | One campaign tooling regime; experiments also record their narrower subject and provenance |
+| `session-NNN` | One agent session: entry workflow, ordered phase history, budget, evidence, stop reason, and handoff |
 | `agenda-NNN` | One mutable coordination queue ordering bounded cells by dependency and readiness |
 | `BC-NNN` | One cell in an agenda’s priority queue, currently the basin-map confidence ladder |
 | `D-NNN` | One defect: what went wrong, what caught it, and what now stops it recurring |
 | `T-N` | The synopsis’s shorthand for a theoretical result established in this repository |
 | `think-xxxx` | One bead: a tracked work item in the `tbd` queue |
 
-### Essential terms
+### Essential Terms
 
 The eight words a reader meets everywhere here, in one line each;
 [`SYNOPSIS.md`](SYNOPSIS.md#terminology) owns the full definitions:
@@ -123,22 +149,27 @@ The operating documents divide ownership rather than repeat one another:
 
 | Document | Owns |
 | --- | --- |
-| [Campaign runbook](campaign/README.md#the-bounded-research-cycle) | Portable slice protocol, clocks, result routing, and experiment rules |
-| [Agent sessions](campaign/agent-sessions/README.md) | Versioned objective, budget, delegation evidence, stop reason, and handoff |
+| This README | Operating principles, the compact workflow selector, and repository orientation |
+| [Synopsis](SYNOPSIS.md#workflow-entry-contracts) | Full workflow contracts, work-unit vocabulary, transitions, and current technical state |
+| [Campaign runbook](campaign/README.md#the-bounded-research-cycle) | W6 experiment mechanics, portable slice protocol, clocks, result routing, and refusal rules |
+| [Agent sessions](campaign/agent-sessions/README.md) | Versioned objective, entry workflow, phase history, budget, evidence, stop reason, and handoff |
 | [Basin confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) | Mutable, size-by-size priority queue separating tool validation, measurement validation, and genuine research |
 | [Current launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | Broader scientific and operational readiness; the agent loop can work now, while the generic numerical runner remains a no-go |
 | [Program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map) | Four-focus epic, durable findings, and bead map |
 
 ## The Autonomous Work Loop
 
-The outer loop is a portable repository protocol, not a feature of one agent platform:
-the `tbd` queue owns ready work, an
-[agent-session artifact](campaign/agent-sessions/README.md) owns the current objective,
-clocks, and delegation evidence, and commits plus research artifacts own the results.
-Changing agents changes the driver, not the work.
+The outer loop is a portable repository protocol, not a feature of one agent platform.
+The `tbd` queue owns ready work; an
+[agent-session artifact](campaign/agent-sessions/README.md) owns the current workflow
+phase, focus, objective, clocks, and delegation evidence; commits and research artifacts
+own the results. Changing agents changes the driver, not the work.
 
 Breadth lives in [`campaign/ideas.md`](campaign/ideas.md), the hypothesis registry, and
-the bead queue; narrowness lives in one preregistered slice at a time, with hard clocks.
+the bead queue. At session entry, declare the workflow, focus, output, and stop
+condition; narrowness then lives in one slice at a time, with hard clocks.
+At a checkpoint, close the phase before changing purpose or focus so the ledger can
+summarize what kinds of work actually occurred.
 The slice protocol, clocks, result routing, budgets, and stop rules are the campaign
 runbook’s [bounded research cycle](campaign/README.md#the-bounded-research-cycle); which
 validation loop to run at each step is
@@ -285,16 +316,16 @@ It turns the six reports into seven phases and a bead tree, one epic per phase;
 `tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md`
 shows the work items and `tbd ready` the unblocked subset.
 
-The current standing review,
+The standing review,
 [review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md),
-audits the toolkit documents, supplies the experiment method they lacked (a hypothesis
-register with kill criteria, a run protocol, a series plan starting from an `n = 11`
-smoke), and contributes the result the refiner rests on: for fixed angles and a fixed
-cell the whole problem is a linear program.
-That is **proved**, and the synopsis records it as
-[T-2](SYNOPSIS.md#the-cell-decomposition) with two independent implementations.
-The review’s register carries the search-philosophy report’s boil-down as hypotheses
-`H-011`–`H-015` and series S6, landscape cartography.
+is the historical source of the initial experiment method and `H-001`–`H-015` register.
+Once those claims were codified, their registry artifacts became authoritative; use the
+[idea board](campaign/ideas.md) and [generated ledger](campaign/ledger.md) for current
+status, not the review’s tables.
+The review also contains the proof that fixed angles and a fixed cell reduce the problem
+to a linear program.
+The synopsis records that current result as [T-2](SYNOPSIS.md#the-cell-decomposition),
+backed by two independent implementations.
 
 ## Exact Verification
 
@@ -338,7 +369,7 @@ The 33 leading digits match the value published on the
 [Squares in Squares](https://kingbird.myphotos.cc/packing/squares_in_squares.html)
 record page, so this is also an independent check of that record.
 
-### Verifying another packing
+### Verifying Another Packing
 
 Supply the corners in an exact field and call `verify_packing`:
 

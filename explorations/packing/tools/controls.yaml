@@ -78,6 +78,12 @@ controls:
   run: python3 tools/check_readme.py
   expect: "repeats a numeric gate-defect aggregate"
 
+- name: README - workflow selector drifts from the canonical names
+  file: README.md
+  replace: ["| W5 | `efficiency-loop` |", "| W5 | `speed-loop` |"]
+  run: python3 tools/check_readme.py
+  expect: "README.md: workflow table is"
+
 # The unprotected-fix count in SYNOPSIS.md. This claim -- the list that predicts what
 # comes back -- was hand-written, and it drifted: the prose said six while the generated
 # view said seven. That is D-028 recurring inside the document D-028 is about, which is
@@ -88,6 +94,12 @@ controls:
             "Forty claims or open questions are codified as artifacts."]
   run: uv run --frozen --quiet python tools/check_synopsis.py
   expect: "does not state the hypothesis artifact count (41)"
+
+- name: synopsis - dateline duplicates volatile campaign progress
+  file: SYNOPSIS.md
+  replace: ["**Date:** 2026-08-24", "**Date:** 2026-08-24, after round 36"]
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "Date dateline repeats campaign progress"
 
 - name: synopsis - duplicate experiment cost row
   file: SYNOPSIS.md
@@ -211,6 +223,26 @@ controls:
   replace: ["  id: session-001", "  id: session-002"]
   run: python3 campaign/ledger.py --check
   expect: "name does not start with its id 'session-002'"
+
+- name: campaign - entry workflow disagrees with first phase
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["  entry_workflow: process-review", "  entry_workflow: research-loop"]
+  run: python3 campaign/ledger.py --check
+  expect: "entry_workflow does not match first workflow phase"
+
+- name: campaign - first workflow phase does not start with the session
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["    entered_by: session_start", "    entered_by: planned_checkpoint"]
+  run: python3 campaign/ledger.py --check
+  expect: "first workflow phase was not entered at session_start"
+
+- name: campaign - non-final workflow phase remains active
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "  - workflow: process-review\n    focus: process\n    objective: Close only the evidence-contract gaps blocking admissible basin events.\n    status: completed"
+    - "  - workflow: process-review\n    focus: process\n    objective: Close only the evidence-contract gaps blocking admissible basin events.\n    status: in_progress"
+  run: python3 campaign/ledger.py --check
+  expect: "only the final workflow phase may be in_progress"
 
 - name: campaign - approximate delegation time labeled unavailable
   file: campaign/agent-sessions/session-001-pr15-review-reset.md

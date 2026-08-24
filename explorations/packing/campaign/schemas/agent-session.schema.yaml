@@ -6,7 +6,7 @@
 # portable handoff that says what was attempted, what came back, how long it took, and
 # what should happen next.
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: packing.squares:AgentSession/v1
+$id: packing.squares:AgentSession/v2
 title: Agent session
 type: object
 additionalProperties: false
@@ -15,7 +15,8 @@ required:
   - title
   - date
   - goal
-  - focus
+  - entry_workflow
+  - workflow_phases
   - primary_bead
   - status
   - budget
@@ -37,9 +38,70 @@ properties:
     type: string
     minLength: 1
     description: The measurable outcome this session is advancing.
-  focus:
-    enum: [correctness, process, insight, efficiency]
-    description: The one primary operating dimension for this session.
+  entry_workflow:
+    enum:
+      - research-pass
+      - factual-review
+      - insight-iteration
+      - process-review
+      - efficiency-loop
+      - research-loop
+      - general-improvement
+    description: The workflow under which the session began; the first phase must agree.
+  workflow_phases:
+    type: array
+    minItems: 1
+    description: >-
+      Ordered, contiguous phases. Start a new phase when the workflow or focus changes;
+      the checker enforces explicit transitions and terminal state.
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - workflow
+        - focus
+        - objective
+        - status
+        - entered_by
+        - switch_reason
+        - budget_minutes
+        - outcome
+        - evidence
+        - stop_reason
+        - next_action
+      properties:
+        workflow:
+          enum:
+            - research-pass
+            - factual-review
+            - insight-iteration
+            - process-review
+            - efficiency-loop
+            - research-loop
+            - general-improvement
+        focus:
+          enum: [correctness, process, insight, efficiency]
+          description: The one quality dimension optimized in this phase.
+        objective: {type: string, minLength: 1}
+        status: {enum: [in_progress, completed, stopped]}
+        entered_by:
+          enum: [session_start, planned_checkpoint, evidence_checkpoint, user_request]
+        switch_reason:
+          type: [string, "null"]
+          description: Null only for the first phase; later phases state why purpose or focus changed.
+        budget_minutes:
+          type: [number, "null"]
+          exclusiveMinimum: 0
+          description: Declared phase budget; null only when a migrated historical record lacks one.
+        outcome: {type: string, minLength: 1}
+        evidence:
+          type: array
+          minItems: 1
+          items: {type: string, minLength: 1}
+        stop_reason:
+          type: [string, "null"]
+          description: Null while in progress; explicit when completed or stopped.
+        next_action: {type: string, minLength: 1}
   primary_bead:
     type: string
     pattern: "^think-[a-z0-9]+$"

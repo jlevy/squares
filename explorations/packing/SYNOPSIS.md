@@ -1,6 +1,6 @@
 # Synopsis: The `s(n)` Program
 
-**Date:** 2026-08-24 (last updated after terminal `series-000` round 15)
+**Date:** 2026-08-24
 
 **Status:** Living document, revised whenever a result lands.
 
@@ -11,7 +11,7 @@ what it is doing next.
 > reproducible by a command given in the text, and the artifact is authoritative where
 > the two differ. `tools/check_synopsis.py` enforces that in the gate.
 
-## Overview
+## The Program at a Glance
 
 `s(n)` is the side of the smallest square that contains `n` non-overlapping unit
 squares, which may be rotated freely.
@@ -23,8 +23,9 @@ mathematical truth and may veto promotion; **Process** (Discipline) owns reprodu
 research operations and may veto an unreconstructable run; **Insight** (Creativity) owns
 hypotheses and strategy but cannot certify them; and **Efficiency** (Infrastructure)
 owns stable, measured throughput without relaxing Correctness or Process controls.
-An agent normally focuses on one dimension at a time and hands explicit artifacts to the
-next.
+These are quality dimensions, not session types.
+An agent declares one focus inside one workflow phase, then hands explicit artifacts to
+the next phase.
 
 Those principles govern four capabilities built so far:
 
@@ -57,9 +58,8 @@ The argument for it, and the measurement registered to kill it if it is wrong, a
 [Theoretical Results](#theoretical-results) and
 [The Hypothesis Registry](#the-hypothesis-registry) below.
 
-[Terminology](#terminology) below fixes the sense of every word this project uses
-narrowly—quench, basin, polish, exploration, gap, tier—and disambiguates the one word
-used for two different things.
+[Terminology](#terminology) below fixes both the work units—campaign, session, phase,
+slice, experiment, round, and run—and the mathematical terms used narrowly here.
 Those definitions apply in the campaign artifacts and the beads too, not only here.
 
 ### Document map
@@ -70,9 +70,9 @@ Nothing here duplicates what another owns.
 | Document | Owns |
 | --- | --- |
 | [`TUTORIAL.md`](TUTORIAL.md) | The conceptual on-ramp for a newcomer: the objects, why the approach is shaped this way, and what is established versus open. Owns no status—it defers here for all of it |
-| **This synopsis** | The state of the program: results, their status, the roll-up of rounds |
+| **This synopsis** | The state of the program, full workflow contracts, work-unit vocabulary, and roll-up of rounds |
 | [Historical quench-spine handoff](docs/project/handoff-2026-08-23-quench-spine.md) | A superseded 2026-08-23 checkpoint retained as provenance. Do not use it for current priority; use the basin confidence ladder and launch agenda |
-| [`README.md`](README.md) | The four-principle operating charter, what is in the directory, how to run it, and the index of the six research reports |
+| [`README.md`](README.md) | The four-principle operating charter, compact workflow selector, directory orientation, and index of the six research reports |
 | [`conventions.md`](conventions.md) | The definitive registry of every convention, id class, and naming rule, and which are machine-checked |
 | [`defects.md`](defects.md) | Every bug and record defect, what caught it, and what now stops it recurring |
 | [Soundness postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | Why D-014 was possible, and rules R1–R4 that apply to code not yet written |
@@ -84,16 +84,94 @@ Nothing here duplicates what another owns.
 | [Infrastructure for Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | The build order, the language boundary, what not to build |
 | [Lean for Packing Proofs](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where a proof assistant fits, and what it would be pointed at first |
 | [A Search Philosophy](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | The strategy layer: why pointing should beat scaling |
-| [Standing review](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | The experimental method, and the register `H-001`–`H-015` in prose |
+| [Standing review](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | Historical source of the experimental method and initial `H-001`–`H-015` register; the codified registry owns current claims |
 | [Plan spec](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | The seven build phases, and a revision note recording what building the quench corrected |
-| [Campaign runbook](campaign/README.md) | The contract every round runs under, frozen while rounds run |
+| [Campaign runbook](campaign/README.md) | W6 mechanics: the contract every experiment round runs under, frozen while rounds run |
+| [Agent sessions](campaign/agent-sessions/README.md) | The v2 session contract: entry workflow, ordered phase history, clocks, evidence, stop reason, and handoff |
+| [Basin confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) | Mutable order of bounded experiment cells and their readiness; it does not own claims or current program prose |
 | [Idea board](campaign/ideas.md) | The whole idea space on one page, including dead ends |
-| [Ledger](campaign/ledger.md) | Generated roll-up of series, registry, rounds and effort |
+| [Ledger](campaign/ledger.md) | Generated roll-up of session workflow phases, agendas, series, registry, rounds, and effort |
 
 The code that produces the numbers: [`sqpack/verify.py`](sqpack/verify.py) decides
 validity exactly, [`sqpack/quench.py`](sqpack/quench.py) is the LP-in-cell quench,
 [`lp_cell.py`](lp_cell.py) is a second, independent implementation of the quench’s
 linear program, and [`sqsearch/`](sqsearch/) is the screening annealer.
+
+## Workflow Entry Contracts
+
+A workflow is the purpose-and-output contract for one contiguous phase of agent work.
+It is independent of the operating focus: W6 may run under a Correctness focus while an
+exact certificate is checked, then enter another W6 phase under Insight when the same
+registered question needs a creative construction.
+The focus changed; the workflow did not.
+
+Every phase begins by recording five things: workflow and focus; objective and required
+inputs; promised durable output; clock and stop condition; and the check or evidence
+that will decide the phase.
+The session artifact records the ordered history.
+The generated ledger summarizes both entry workflows and later switches.
+
+| ID | Workflow | Enter with | Work boundary | Durable exit | Default handoff |
+| --- | --- | --- | --- | --- | --- |
+| W1 | `research-pass` | A bounded question, source corpus, and identified coverage gap | Establish and source the state of knowledge; do not turn untested connections into campaign verdicts | Corrected or enriched research docs, source notes, explicit conflicts, and unresolved gaps | W2 audits the claims; W3 may mine supported gaps |
+| W2 | `factual-review` | A fixed artifact set, its sources, and the claims to audit | Correctness only; read-only by default; do not invent successor theory or redesign the process inside the review | Claim-by-claim dispositions, corrections, or defects with exact evidence | W3 for new hypotheses; W4 for a process failure |
+| W3 | `insight-iteration` | Current synopsis, idea board, ledger, negative results, and a sharp frontier | Generate explanations and hypotheses freely; do not certify them or spend an undeclared experiment budget | `X-NNN` reports and candidate `H-NNN` items with mechanism, falsifier, expected information, and limits | Codification, then W6 |
+| W4 | `process-review` | Artifacts, beads, logs, checks, and a reconstructability or discipline question | Inspect ownership, handoffs, refusals, and controls; do not substitute process polish for a scientific result | Review findings, beads, and narrowly scoped contract or checker changes | W5 for a measured bottleneck; implementation for an accepted repair |
+| W5 | `efficiency-loop` | A measured baseline, profile, target metric, and equivalence or validity guard | Improve time, cost, or throughput under the same regime; never relax correctness or provenance to win | Benchmark record, change or rejection, measured delta, and preserved guards | W6 when the research bottleneck moves; W4 if the process contract is wrong |
+| W6 | `research-loop` | A registered hypothesis, ready instrument, preregistered criterion, regime, budget, and stop rule | Use creative effort inside the registered scope to execute the smallest fair test; never change the criterion, suppress a failure, or improvise a replacement hypothesis mid-round | `exp-NNN`, raw data or proof record, verdict, regenerated views, and the next bounded question | W2 first, then W3 |
+
+`general-improvement` is the explicit fallback for work that fits none of W1–W6. It
+still declares a focus, output, and stop condition.
+It must not hide a session that is actually alternating among research, review, and
+infrastructure work; those are separate phases.
+
+### Switching Workflows in One Session
+
+One phase is active at a time.
+Start a new phase when its purpose or focus changes.
+A focus-only change repeats the workflow name and is a phase boundary, not a workflow
+switch. An orchestrator may switch at a planned checkpoint, after a concrete evidence
+checkpoint, on a user request, or because the active premise was falsified.
+It closes the old phase first with status, evidence, stop reason, and next action; then
+it declares the new workflow, focus, objective, and clock.
+It does not relabel mixed work after the fact.
+
+The normal research cadence is not a mandate to traverse every workflow:
+
+```
+W1 research-pass ──> W2 factual-review ──> W3 insight-iteration
+                                               │
+                                               v
+W5 efficiency-loop <── W4 process-review    W6 research-loop
+        │                                      │
+        └──────── measured capability ─────────┘
+                         W6 result ──> W2 ──> W3
+```
+
+At any checkpoint, the human operator may choose the next phase, narrow the question, or
+stop. Long autonomous sessions use the same rule; autonomy changes the duration and
+controller, not permission to blur contracts.
+
+### The Current `n = 5` Handoff
+
+The H-023 line shows why the distinction matters.
+Session 004 used W3 to turn an ambiguous terminal-family observation into the
+falsifiable connectivity hypothesis.
+Session 009 first used W4 to make basin events and exact identity controls admissible.
+W6 then produced exp-033’s exact fixed-angle face and exp-034’s angle-and-slide sheet.
+A W2 instrument review found D-194 and D-195 before the next measurement, preventing a
+reused contact differential and an invalid alternative-row interpretation from entering
+the result.
+W6 resumed only after the corrected criterion was frozen; exp-035 then proved
+exact first-order directions outside the sheet without proving nonlinear realization.
+W3 turned that limitation into exp-036’s registered second-order obstruction, and W6
+then excluded the displayed direction from the true tangent cone without classifying the
+other non-sheet directions.
+When the post-round strict gate failed, W4 separated stale controls from an independent
+deep-golden solver rejection.
+The session now uses `general-improvement` under a Correctness focus for that bounded
+code repair; the scientific queue remains separate.
+At no point may exp-035 or exp-036 be reinterpreted as a connectivity proof.
 
 ## What Is Built
 
@@ -271,9 +349,85 @@ characterization is open work ([D-059](defects.md)).
 
 These words are used in a narrow sense throughout this directory, the campaign
 artifacts, and the beads.
-Two of them carry more than one sense—**cell** and **quench**—and for each, the rule for
-which to write is stated with the definition.
+Three carry controlled multiple senses—**exploration**, **cell**, and **quench**—and for
+each, the rule for which form to write is stated with the definition.
 Nothing below is a synonym for anything else below.
+
+### Work Units and Records
+
+**Packing exploration.** The complete self-contained project at `explorations/packing/`:
+research documents, sources, code, tests, plans, and campaign record.
+Write the full phrase when this directory is meant.
+Bare *exploration* retains the mathematical meaning under
+[The Operations](#the-operations).
+
+**Campaign.** The durable, multi-session scientific effort under one bounded question,
+registry, evidence contract, and generated record.
+This campaign lives in `campaign/`. It can span many series and agent sessions; neither
+is a synonym for it.
+
+**Series.** One campaign-wide tooling generation and comparability boundary.
+Open a new series when an instrument or regime change makes earlier conclusions unsafe
+to compare or carry forward.
+Each experiment still records its narrower subject, instrument, and provenance, so
+sharing a series does not make unlike result shapes comparable.
+The open `series-000` predates strict application of this rule; its
+[series note](campaign/series/series-000-smoke-and-calibration/README.md#current-scope-and-safe-reading)
+states the safe reading, and `think-i08r` owns the persisted-record migration.
+
+**Agent session.** One bounded interval of orchestrated work under an overall goal,
+budget, and stop conditions.
+A session may contain several workflow phases and may produce zero, one, or many
+experiments. It is a handoff record, not a scientific measurement.
+
+**Workflow phase.** One contiguous interval inside a session with one workflow, one
+focus, one objective, and one clock.
+A focus-only change starts another phase with the same workflow; a changed purpose
+starts a phase under a different workflow.
+
+**Focus.** The single quality dimension optimized during a phase: correctness, process,
+insight, or efficiency.
+It answers *what quality is being privileged*, while workflow answers *what kind of
+result the phase promises*.
+
+**Slice.** The smallest time-bounded action inside a phase.
+It ends at a concrete evidence checkpoint and may be renewed only by stating the next
+bounded question. A slice is not automatically an experiment; source inspection, a
+checker repair, or one proof derivation can each be a slice.
+
+**Hypothesis.** One registered claim stated so it could be wrong, with a criterion,
+regime, and instrument.
+It persists across sessions and series and may be tested by several experiments.
+An open question that cannot yet carry a falsifiable criterion is recorded honestly as
+such.
+
+**Experiment.** One durable `exp-NNN` artifact recording one preregistered research
+round in exactly one series.
+It contains the method, typed results, effort, verdict, and links to raw evidence.
+An experiment can aggregate several lower-level runs and is not an agent session.
+
+**Round.** The bounded research work recorded by one experiment.
+Use *round* for the act or its place in a sequence and *experiment* for the durable
+`exp-NNN` record. They are one-to-one in this campaign; neither means one solver
+invocation.
+
+**Run.** One invocation or trial of a tool, solver, or proof checker.
+Several seeds or conditions can produce several runs inside one experiment.
+`runner.py run` is a command name that sequences experiments; it does not change this
+definition.
+
+**Result.** One typed observation inside an experiment—a record score, categorical
+determination, paired comparison, or condition comparison.
+The verdict applies the preregistered rule to the results; it is not another result
+shape.
+
+**Ledger.** A generated view over session, agenda, series, hypothesis, experiment, and
+effort artifacts. It summarizes authoritative sources and is never edited by hand.
+
+**Exploration report.** One free-form `X-NNN` idea record from which hypotheses may be
+mined. Write the full phrase for the artifact.
+It is distinct from both the packing exploration directory and the basin-exploration
+operation below.
 
 ### The objects
 
@@ -334,9 +488,10 @@ Say “the quench map” where the distinction matters.
 down to the local optimum without changing which local optimum that is.
 This is what the quench does, and all it does.
 
-**Exploration.** Reaching a different basin.
+**Exploration**—without a qualifier, the operation of reaching a different basin.
 No amount of polish performs it, and nothing currently in the toolkit does it reliably
-at `n = 11`.
+at `n = 11`. Write **packing exploration** for the project directory and **exploration
+report** for an `X-NNN` artifact.
 
 **Proposer** and **refiner**. The two halves of the loop, named separately because the
 measurement that matters is which one is failing.
@@ -480,19 +635,21 @@ symmetry—used to steer search toward diversity rather than toward loss.
 **Meter.** The instrument that counts pair-tests, so two proposers can be compared at
 equal budget. *Unbuilt, so no two proposers have been compared at equal budget.*
 
-### The record
+### Identifiers and Control Records
 
-**Round.** One executed experiment against exactly one registered hypothesis under the
-current contract, with a declared timebox and a pre-registered accept rule, recorded as
-a schema-validated artifact plus its declared result or archive.
-The hypothesis field remains an array for format compatibility; one verdict is never
+Round and series are defined once under
+[Work Units and Records](#work-units-and-records).
+Under the current experiment contract, every round tests exactly one registered
+hypothesis. The field remains an array for format compatibility; one verdict is never
 applied to several claims.
-**Series.** An ordered group of rounds sharing a runbook; only one may be open at a
-time. **Agenda.** A mutable priority queue of cells (`BC-001`, …) ordering upcoming work
-by dependency and readiness, rendered into the ledger.
-A coordination artifact, not a second hypothesis registry and not a scheduler.
+
+**Agenda.** A mutable priority queue of cells (`BC-001`, …) ordering upcoming work by
+dependency and readiness, rendered into the ledger.
+It is a coordination artifact, not a second hypothesis registry and not a scheduler.
+
 **Defect.** One record in [`defects.yaml`](defects.yaml)—what went wrong, what caught
 it, and what now stops it recurring—rendered to [`defects.md`](defects.md).
+
 **Bead.** One tracked work item (`think-xxxx`) in the `tbd` queue; every open defect
 carries one.
 

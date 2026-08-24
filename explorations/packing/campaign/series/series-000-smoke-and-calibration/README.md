@@ -37,10 +37,27 @@ series:
 ---
 # series-000 (S0) — smoke and calibration
 
-This is **S0** of the
+## Current Scope and Safe Reading
+
+This artifact opened as **S0** of the
 [standing review’s series plan](../../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#series-and-priorities):
 prove all the machinery works end to end and establish every baseline metric, before any
 strategy is tested.
+
+The record has outgrown that opening description.
+The latest branch retains 35 experiments here, including search baselines, exact proof
+determinations, event-contract controls, and the H-023 first-order sequence.
+Those result shapes are not pooled or compared merely because they share `series-000`.
+Each experiment’s `subject`, method, regime, and provenance govern what comparison is
+legal; the frontmatter `instrument` records the series’ opening search instrument, not
+every checker later used.
+
+`think-i08r` tracks the all-at-once persisted-record migration needed to restore strict
+series boundaries.
+Until that lands, treat this as a legacy campaign container and do not
+infer a shared numerical regime from its id.
+The original S0 intent below remains useful history and still explains why the early
+controls exist.
 
 The first pass exists to test the loop, not the mathematics.
 Its hypotheses are deliberately the obvious ones, its cells are mostly cases whose
@@ -48,7 +65,7 @@ answers are already known, and a round that merely confirms something everyone e
 is a success here — because what is under test is the machinery that will carry the
 non-obvious rounds later.
 
-## What has to be true before this series can conclude anything
+## What Had to Be True Before S0 Could Conclude Anything
 
 Three things, in order, and each was already worth its cost.
 
@@ -71,7 +88,7 @@ every chain before the move budget did, so `--budget-moves` was inert and two st
 compared “at equal budget” would have had unequal work.
 The tell was that results got *worse* when the declared budget was raised.
 
-## What S0 cannot tell us, and the correction that revealed it
+## What S0 Could Not Tell Us
 
 The review’s calibration ladder and this series’ controls both use `n = 5` and `n = 10`.
 The
@@ -82,17 +99,20 @@ An engine can pass this ladder and remain structurally blind to what `n = 11` ac
 demands: an oblique core locked at `≈ 40.182°`, a mechanism **no proved case
 exercises**.
 
-So this series validates *machinery*, not *strategy*, and its passing controls must not
-be read as evidence that the search can find records.
-Mechanism-matched calibration — `s(17)`, `n = 11` at inflated `δ`, basin-entry tests —
-belongs to the later series and is registered separately.
+So the original S0 controls validate *machinery*, not *strategy*, and their passing
+results must not be read as evidence that the search can find records.
+Mechanism-matched calibration was assigned to a later topical stage in the original
+plan. Exp-011 subsequently ran the `n = 17` cell inside this legacy container; its own
+subject and regime carry that evidence, not the S0 label.
 
-## What this series will not do
+## What This Series Cannot Claim
 
-It will not attempt a record.
-Screening in `f64` cannot certify one — Trump’s packing has 14 of its 55 pairs touching
-at exactly zero separation, which no floating-point check can decide — so a record claim
-needs the polish and exact tiers, and those are the subject of a later series.
+The shared id does not establish that all 35 experiments used one executable instrument
+or that unlike measurements are comparable.
+Screening in `f64` also cannot certify a record—Trump’s packing has 14 of its 55 pairs
+touching at exactly zero separation, which no floating-point check can decide.
+A record claim still needs exact promotion, whatever series contains the proposing
+screen.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1,7 +1,7 @@
 ---
 title: session-009 — bounded autonomous basin mapping
 softschema:
-  contract: packing.squares:AgentSession/v1
+  contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
@@ -13,7 +13,144 @@ session:
     Close only the launch-path gaps needed for scientifically admissible basin events,
     then run and retain successively larger cells until the four-hour deadline, an
     empty admissible queue, or a declared stop condition fires.
-  focus: process
+  entry_workflow: process-review
+  workflow_phases:
+  - workflow: process-review
+    focus: process
+    objective: Close only the evidence-contract gaps blocking admissible basin events.
+    status: completed
+    entered_by: session_start
+    switch_reason: null
+    budget_minutes: null
+    outcome: BasinEvent/v3 and the confidence ladder made the first genuine basin cell admissible.
+    evidence:
+    - Tool-validation blocks through n=10 retain full poses, independent validity, and typed stops.
+    - Exact n=3 and n=4 component controls separate endpoint keys from connected components.
+    stop_reason: The launch-path review reached a checkpoint with BC-010 ready for research.
+    next_action: Enter the research loop on the preregistered n=5 component question.
+  - workflow: research-loop
+    focus: correctness
+    objective: Test H-023's exact fixed-angle and angle-sheet connectivity candidates.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The process review produced an admissible research cell, so the purpose changed
+      from repairing the loop to testing H-023.
+    budget_minutes: null
+    outcome: Exp-033 and exp-034 established an exact face and its angle-and-slide sheet.
+    evidence:
+    - Exp-033 proves one fixed-angle face and exp-034 embeds it in an angle-and-slide sheet.
+    stop_reason: The declared sheet was proved, while full stationary connectivity remained open.
+    next_action: Audit the proposed first-order checker before another measurement.
+  - workflow: factual-review
+    focus: correctness
+    objective: Audit the exp-035 candidate instrument and the claims it could support.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Exp-034 narrowed the question to motion outside its sheet; the proposed checker
+      required a correctness-only review before it could define the next experiment.
+    budget_minutes: null
+    outcome: The review found D-194 and D-195, and the corrected instrument froze the right criterion.
+    evidence:
+    - One contact differential had been reused across slide strata.
+    - Tied support rows had been treated as alternatives rather than a conjunction.
+    stop_reason: Both defects were corrected before measurement and the criterion was unambiguous.
+    next_action: Resume W6 and execute the frozen exp-035 criterion.
+  - workflow: research-loop
+    focus: correctness
+    objective: Execute BC-010's corrected exact first-order tangent criterion.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: The factual review made the proposed instrument admissible for H-023.
+    budget_minutes: null
+    outcome: Exp-035 established exact non-sheet first-order directions at all three strata.
+    evidence:
+    - Exp-035 certifies directions at both endpoints and one interior point in 0.28 wall-seconds.
+    - The artifact explicitly withholds nonlinear realization and component connectivity.
+    stop_reason: The first-order criterion passed, while nonlinear realization remained unresolved.
+    next_action: Stop W6 and frame the nonlinear question before running another experiment.
+  - workflow: insight-iteration
+    focus: insight
+    objective: Form a falsifiable nonlinear-realization successor to exp-035.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Exp-035 answered the first-order question but not connectivity; another experiment
+      requires a new mechanism, criterion, and refusal boundary.
+    budget_minutes: 30
+    outcome: >-
+      A source-bound second-order obstruction with two exhaustive owner-axis branches
+      and seven falsifiers was registered for exp-036.
+    evidence:
+    - Exp-035 and BC-010 preserve the exact tangent result and the remaining nonlinear limitation.
+    - Exp-036 froze the two branch contradictions, exact margins, source binding, controls, and refusal scope before target execution.
+    stop_reason: The successor criterion was unambiguous and no target code had run.
+    next_action: Resolve the shared-checkout provenance defect before scientific execution.
+  - workflow: process-review
+    focus: process
+    objective: Resolve the shared-checkout provenance break before running exp-036.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The isolated checker commit landed on another active branch, so provenance and
+      checkout discipline had to be restored before the registered round could run.
+    budget_minutes: null
+    outcome: D-197 was recorded, the checker commit was moved to the campaign branch, and the other branch ref was restored without data loss.
+    evidence:
+    - The commit banner caught the wrong-branch checkpoint before push or target execution.
+    - Commit f2d2e53 is the source-bound exp-036 instrument on the current campaign branch.
+    stop_reason: Repository provenance was restored and the frozen experiment was safe to execute.
+    next_action: Enter W6 and run exp-036 under its registered criterion and caps.
+  - workflow: research-loop
+    focus: correctness
+    objective: Test whether exp-035's displayed direction survives exact second order.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: The provenance repair was complete and exp-036's criterion, instrument, and budget were frozen.
+    budget_minutes: 30
+    outcome: Exp-036 excluded the displayed direction from the true tangent cone in both possible nearby owner-axis branches.
+    evidence:
+    - The owner-4 excess is sqrt(2)/8 and the owner-3 gap is -1/4 with positive relative-angle margin sqrt(2)/2 - 1/4.
+    - All seven controls rejected and retained replay matched in 0.21 external wall-seconds.
+    stop_reason: The criterion passed for the displayed direction; other non-sheet directions and component identity remain open.
+    next_action: Enter W4 because the post-round strict handoff gate failed independently of the exact result.
+  - workflow: process-review
+    focus: process
+    objective: Classify the post-exp-036 strict-gate failures and preserve independent blockers.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The research criterion passed, but a strict handoff gate failed; its cause had to
+      be separated from the scientific verdict before either could move.
+    budget_minutes: null
+    outcome: >-
+      D-198's stale controls were repaired, the normal gate passed, and a bounded trace
+      isolated the remaining deep-golden failure as a solver post-check rejection rather
+      than a wall-budget stop.
+    evidence:
+    - All 37 then-current negative controls and the 30-step normal gate passed after D-198.
+    - The capped deep replay retained the independent D-126/D-162 failure and its 1e-10 all-row guard.
+    stop_reason: The review produced one bounded correctness repair and kept the separate work-budget conversion out of scope.
+    next_action: Hand the solver-acceptance repair to a general-improvement phase.
+  - workflow: general-improvement
+    focus: correctness
+    objective: Repair the finitely capped deep-golden solver acceptance without weakening the all-row replay screen.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      W4 isolated an accepted code repair outside the six specialized workflows; the
+      scientific queue and the separate efficiency question remain unchanged.
+    budget_minutes: 30
+    outcome: The review isolated the repair target; implementation has not yet produced a result.
+    evidence:
+    - Think-yi6x owns first-versus-repaired LP receipts and the finite correction boundary.
+    - D-126's work-budget conversion remains separate, and research resumes independently at think-nm35.
+    stop_reason: null
+    next_action: >-
+      Run the bounded think-yi6x solver-acceptance slice before another deep golden retry.
+      Keep the D-126 work-budget conversion separate; the independent exact-research
+      queue resumes at think-nm35.
   primary_bead: think-05hr
   status: in_progress
   budget:

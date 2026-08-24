@@ -96,6 +96,12 @@ read, run, and moved as one unit.
 - **Reports separate claims by evidential status** — proved, computationally verified,
   best known, or asserted-but-unverified — and cite primary sources near the claims they
   support.
+- **Packing work declares its entry point.** Choose W1–W6 (or the explicit fallback)
+  from
+  [`explorations/packing/README.md`](explorations/packing/README.md#workflow-entry-points)
+  before beginning. Longer sessions record workflow and focus changes as ordered phases;
+  [`explorations/packing/SYNOPSIS.md`](explorations/packing/SYNOPSIS.md#workflow-entry-contracts)
+  owns the full contracts.
 - **Archived source material is never edited to look tidy.** Where a transcription
   reconstructs damaged text, it is flagged inline and counted in the archive README.
 
@@ -111,3 +117,7 @@ Auto-format Markdown with `flowmark` for clean, semantic git diffs.
 - Python build (library / newest patch): `uvx --from flowmark==0.7.2 flowmark`.
 
 <!-- END FLOWMARK INTEGRATION -->
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

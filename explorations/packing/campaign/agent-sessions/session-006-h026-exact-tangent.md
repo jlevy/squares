@@ -1,7 +1,7 @@
 ---
 title: session-006 — H-026 exact linearization screen
 softschema:
-  contract: packing.squares:AgentSession/v1
+  contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
@@ -13,7 +13,21 @@ session:
     Turn H-026 into one finite, executable exact calculation with a complete active
     branch inventory, replayable certificates, known-answer controls, and a disciplined
     distinction between a linearized direction and a true feasible motion.
-  focus: insight
+  entry_workflow: research-loop
+  workflow_phases:
+  - workflow: research-loop
+    focus: insight
+    objective: Decide every branchwise first-order cone at Trump's exact packing.
+    status: completed
+    entered_by: session_start
+    switch_reason: null
+    budget_minutes: 180
+    outcome: Exp-013 certified all 128 derivative-distinct cones and local isolation.
+    evidence:
+    - The exact replay covers 512 raw branches with zero unresolved cones.
+    - A separate omission control demonstrates that the certificate guard can fail.
+    stop_reason: Every complete branch received an exact zero-cone certificate.
+    next_action: Quantify a local radius only under a separately registered hypothesis.
   primary_bead: think-qd9t
   status: completed
   budget:

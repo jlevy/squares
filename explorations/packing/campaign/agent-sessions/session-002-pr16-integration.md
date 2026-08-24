@@ -1,7 +1,7 @@
 ---
 title: session-002 — integrate the independent PR 16 review
 softschema:
-  contract: packing.squares:AgentSession/v1
+  contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
@@ -12,7 +12,21 @@ session:
   goal: >-
     Preserve PR 16's independent evidence and correction history, remove its unsupported
     conclusions and stale process state, and absorb it into one reviewable PR 15.
-  focus: process
+  entry_workflow: process-review
+  workflow_phases:
+  - workflow: process-review
+    focus: process
+    objective: Integrate the independent review without losing provenance or stale claims.
+    status: completed
+    entered_by: session_start
+    switch_reason: null
+    budget_minutes: 180
+    outcome: PR 16's useful evidence was retained and each unsupported claim was routed.
+    evidence:
+    - Six findings map to durable defects and focused beads.
+    - The combined normal gate passed in 114 seconds.
+    stop_reason: The review history and every finding had a current disposition.
+    next_action: Resume the correctness lane or its independent portability experiment.
   primary_bead: think-7wsz
   status: completed
   budget:

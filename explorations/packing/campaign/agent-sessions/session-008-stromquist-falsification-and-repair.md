@@ -1,7 +1,7 @@
 ---
 title: session-008 — exact Stromquist falsification and repair
 softschema:
-  contract: packing.squares:AgentSession/v1
+  contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
@@ -13,7 +13,21 @@ session:
     Decide Stromquist's printed Theorem 2 mechanism against the primary source, preserve
     any failure as an exact counterexample, and test a separately preregistered repair
     with a complete replayable proof certificate.
-  focus: correctness
+  entry_workflow: research-loop
+  workflow_phases:
+  - workflow: research-loop
+    focus: correctness
+    objective: Falsify the printed proof exactly, then test the preregistered repair.
+    status: completed
+    entered_by: session_start
+    switch_reason: null
+    budget_minutes: 300
+    outcome: Exp-016 refuted the printed cover and exp-017 certified a source-distinct repair.
+    evidence:
+    - The strict escape and the complete repaired finite cover both replay exactly.
+    - Provenance keeps the paper's failed proof distinct from this repository's theorem.
+    stop_reason: The source claim was refuted and the separate repair met every criterion.
+    next_action: Preserve both controls and rotate the proof lane to H-039.
   primary_bead: think-ciwv
   status: completed
   budget:

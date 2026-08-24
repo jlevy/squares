@@ -67,6 +67,13 @@ Visualization belongs to both Insight and Efficiency: the infrastructure must re
 atlas, ambiguity graph, discovery curve, and continuation tree, while the research work
 decides which views expose mechanisms rather than decorate a report.
 
+A focus is a quality dimension, not a workflow.
+Before taking work, choose W1–W6 from the
+[workflow entry contracts](../../../../SYNOPSIS.md#workflow-entry-contracts), then
+declare the focus inside that phase.
+A focus-only change starts another phase under the same workflow; a changed purpose
+starts a different workflow.
+
 ## Measured checkpoint — 2026-08-24
 
 This table is a dated planning checkpoint, not a generated current-status view.
@@ -102,13 +109,12 @@ The ladder owns the frequently revised order of concrete cells.
 measurements, beads own unfinished work, and the agent-session artifact owns one bounded
 clock. None is a duplicate runner queue.
 
-The current ladder has completed exact and event-level controls at `n = 3,4`. Its next
-ready item, BC-003, is a four-seed `n = 5` **tool-validation** cell, not basin research.
-The first genuine basin-structure item is the later H-023 connectivity cell, which stays
-blocked until both the `n = 5` event path and the exact `n = 3,4` identity controls
-pass.
-This distinction lets the campaign run many basic checks without converting a clean
-program execution into evidence about the landscape.
+Do not copy the current ready item into this plan.
+The agenda frontmatter and generated ledger own that volatile state; this plan owns the
+launch boundary.
+The dependency ladder keeps tool validation, measurement validation, and
+research distinct, so a clean program execution cannot silently become evidence about
+the landscape.
 
 ## The scientific portfolio
 
@@ -197,8 +203,8 @@ Endpoint hashes or continuation-branch dendrograms are never labelled feasible t
 
 This loop can run now under a persistent goal.
 
-1. Read `tbd ready` and choose one P0 item from one focus.
-2. State the intended evidence and stopping condition before implementation.
+1. Read `tbd ready`; choose the workflow whose output matches the item, then one focus.
+2. Open or renew the session phase with its intended evidence and stopping condition.
 3. Delegate bounded mechanical work—formatting, lint repair, data extraction, repeated
    checks—while the primary agent owns mathematical and integration judgment.
 4. Work in the smallest loop that bears on the change: source inspection, focused check,
@@ -208,7 +214,8 @@ This loop can run now under a persistent goal.
 6. Update the hypothesis, experiment, or session artifact that owns the result; do not
    leave a conclusion in chat or a bead description alone.
 7. Commit and push a bounded checkpoint, then re-read the ready queue.
-   Stop or switch focus when the evidence demands a handoff.
+   Close the phase before switching workflow or focus when the evidence demands a
+   handoff.
 
 For an eight-hour goal, take the first dependency-ready slice of H-023/H-021 and carry
 it to a retained measurement or explicit blocker.
@@ -298,8 +305,10 @@ It leads with:
 6. **Health** — recovery, persistence, and gate status;
 7. **Next action** — one dependency-ready bead and the evidence it needs.
 
-`campaign/session-report.md` currently overwrites its predecessor and is not durable;
-D-071 and `think-y37w` own that correction.
+The numeric runner’s generated `campaign/session-report.md` currently overwrites its
+predecessor and is not durable.
+It is a batch report, not a versioned `session-NNN` agent-session record; D-071 and
+`think-y37w` own that correction.
 
 ## Efficiency agenda
 

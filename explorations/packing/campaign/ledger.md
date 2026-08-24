@@ -4,17 +4,29 @@
 
 ## Agent sessions
 
-| id | status | focus | primary bead | delegations | next action |
-| --- | --- | --- | --- | ---: | --- |
-| [session-001](agent-sessions/session-001-pr15-review-reset.md) | completed | process | think-m79h | 7 | Resume the broader Correctness and Insight review from the ready bead queue, beginning with the highest-priority mathematical ambiguity. |
-| [session-002](agent-sessions/session-002-pr16-integration.md) | completed | process | think-7wsz | 3 | Review PR 15, then resume the correctness lane at think-1s0h or the independent portability experiment at think-osyp. |
-| [session-003](agent-sessions/session-003-unattended-research-readiness.md) | completed | process | think-1sxv | 4 | Publish this checkpoint, then begin H-023/H-021 terminal-component evidence while think-kmn2 designs per-cell queue pricing. |
-| [session-004](agent-sessions/session-004-creative-frontier-review.md) | completed | insight | think-7gu0 | 5 | Finish generated-view and bead reconciliation, run the normal gate, publish the checkpoint, then start H-026 and the exact n=3 quotient-map control in parallel lanes. |
-| [session-005](agent-sessions/session-005-h024-fast-falsifier.md) | completed | insight | think-w5rb | 3 | Begin H-026 from Trump's exact active-contact table, with complete one-sided branch enumeration and replayable tangent-cone certificates as the guarded deliverable. |
-| [session-006](agent-sessions/session-006-h026-exact-tangent.md) | completed | insight | think-qd9t | 2 | Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and move the fast rotation to H-032's exact n=3 quotient-family control. |
-| [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | insight | think-n82j | 3 | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
-| [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | correctness | think-ciwv | 3 | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
-| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 13 | Run the bounded think-yi6x solver-acceptance slice before another deep golden retry. Keep the D-126 work-budget conversion separate; the independent exact-research queue resumes at think-nm35. |
+| id | status | entry workflow | phase sequence | last focus | primary bead | delegations | next action |
+| --- | --- | --- | --- | --- | --- | ---: | --- |
+| [session-001](agent-sessions/session-001-pr15-review-reset.md) | completed | `process-review` | `process-review` (process) | process | think-m79h | 7 | Resume the broader Correctness and Insight review from the ready bead queue, beginning with the highest-priority mathematical ambiguity. |
+| [session-002](agent-sessions/session-002-pr16-integration.md) | completed | `process-review` | `process-review` (process) | process | think-7wsz | 3 | Review PR 15, then resume the correctness lane at think-1s0h or the independent portability experiment at think-osyp. |
+| [session-003](agent-sessions/session-003-unattended-research-readiness.md) | completed | `process-review` | `process-review` (process) | process | think-1sxv | 4 | Publish this checkpoint, then begin H-023/H-021 terminal-component evidence while think-kmn2 designs per-cell queue pricing. |
+| [session-004](agent-sessions/session-004-creative-frontier-review.md) | completed | `insight-iteration` | `insight-iteration` (insight) | insight | think-7gu0 | 5 | Finish generated-view and bead reconciliation, run the normal gate, publish the checkpoint, then start H-026 and the exact n=3 quotient-map control in parallel lanes. |
+| [session-005](agent-sessions/session-005-h024-fast-falsifier.md) | completed | `research-loop` | `research-loop` (insight) | insight | think-w5rb | 3 | Begin H-026 from Trump's exact active-contact table, with complete one-sided branch enumeration and replayable tangent-cone certificates as the guarded deliverable. |
+| [session-006](agent-sessions/session-006-h026-exact-tangent.md) | completed | `research-loop` | `research-loop` (insight) | insight | think-qd9t | 2 | Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and move the fast rotation to H-032's exact n=3 quotient-family control. |
+| [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | `research-loop` | `research-loop` (insight) | insight | think-n82j | 3 | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
+| [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | `research-loop` | `research-loop` (correctness) | correctness | think-ciwv | 3 | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
+| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | `process-review` | `process-review` (process) → `research-loop` (correctness) → `factual-review` (correctness) → `research-loop` (correctness) → `insight-iteration` (insight) → `process-review` (process) → `research-loop` (correctness) → `process-review` (process) → `general-improvement` (correctness) | correctness | think-05hr | 13 | Run the bounded think-yi6x solver-acceptance slice before another deep golden retry. Keep the D-126 work-budget conversion separate; the independent exact-research queue resumes at think-nm35. |
+
+### Workflow summary
+
+Session entries count where work began; phases also count explicit switches.
+
+| workflow | session entries | phases |
+| --- | ---: | ---: |
+| `factual-review` | 0 | 1 |
+| `insight-iteration` | 1 | 2 |
+| `process-review` | 4 | 6 |
+| `research-loop` | 4 | 7 |
+| `general-improvement` | 0 | 1 |
 
 ## Experiment agendas
 
@@ -162,3 +174,6 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 36 rounds, 868 agent-minutes, 28.2 wall-minutes.
 
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
