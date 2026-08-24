@@ -6,11 +6,12 @@
 # the research document is generated from this file by ../tools/render_tables.py.
 #
 # RE-TEST RATHER THAN INHERIT. A "not retrievable" verdict is a negative search
-# result. This list has now been wrong five times: Gensane-Ryckelynck, Nagamochi
+# result. This list has now been wrong six times: Gensane-Ryckelynck, Nagamochi
 # and Wang-Dong-Li were all freely available when re-tested on 2026-08-22, and
 # Markot 2021 was open access at PMC the whole time. Roth-Vaughan was supplied
-# by the requester on the same day. Every entry below carries the date it was
-# last checked and the exact evidence.
+# by the requester on the same day. Stromquist's three memoranda were linked
+# directly from the author's publication page. Every entry below carries the
+# date it was last checked and the exact evidence.
 softschema:
   contract: packing.squares:SourceAvailability/v1
   schema: source-availability.schema.yaml
@@ -43,6 +44,19 @@ recovered:
   - key: "[Wang–Dong–Li 2016]"
     title: A New Result on Packing Unit Squares into a Large Square
     how: On arXiv.
+  - key: "[Stromquist 1984]"
+    title: Packing Unit Squares Inside Squares, I-III
+    how: >
+      The author's official publication page at
+      https://www.walterstromquist.com/publications.html links squares1.pdf,
+      squares2.pdf and squares3.pdf directly; "unpublished" described their
+      publication status, not their present-day retrievability.
+    impact: >
+      Memoranda I and II contain the detailed n = 6 and n = 10 proofs. Memorandum III
+      proves only the 0/45-degree n = 11 bound at 2 + (4/3)sqrt(2); page 10 separately
+      asserts the unrestricted 2 + (4/5)sqrt(5) bound without coordinates, cover
+      routing or proof. It therefore supplies no repair for the printed 2003 Figure 14
+      gap.
 
 # Still missing. `blocker` is the mechanism, not a guess.
 unretrieved:
@@ -65,21 +79,6 @@ unretrieved:
       exact optimal-moduli spaces asked there.
     priority: 2
     route: author copy, institutional repository, or lawful institutional access
-
-  - key: "[Stromquist 1984]"
-    title: Packing unit squares inside squares, I-III
-    authors: [Walter Stromquist]
-    year: 1984
-    venue: Daniel H. Wagner Associates Memoranda
-    blocker: unpublished
-    detail: >
-      Never published. Memorandum III covers n <= 65 and Gardner's conjecture
-      for n = 11.
-    depends_on_it: >
-      A large share of the claim column in the priority ledger. The single most
-      valuable unretrieved document in this subject.
-    priority: 1
-    route: author or institutional contact
 
   - key: "[El Moumni 1999]"
     title: Optimal Packings of Unit Squares in a Square

@@ -138,6 +138,18 @@ step_trump_linearized_cones() {
     --replay campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json
 }
 
+step_stromquist_h010_exact_rejection() {
+  # Non-record mode rebuilds both exact escape witnesses and runs every mutation
+  # control. A refuted printed Figure 14 cover is the expected successful verdict.
+  $PY tools/check_stromquist_theorem2.py
+}
+
+step_stromquist_h041_exact_repair() {
+  # Non-record mode rebuilds the repaired finite cover and its exact selftests without
+  # creating or updating a retained experiment artifact.
+  $PY tools/check_stromquist_repair.py
+}
+
 step_negative_control() {
   out=$(python3 negative_control.py)
   echo "$out"
@@ -526,6 +538,8 @@ STEPS=(
   "search engine (sqsearch)|step_search_engine"
   "lint floor (rust)|step_lint_floor_rust"
   "Trump exact branchwise linearized cones|step_trump_linearized_cones"
+  "H-041 Stromquist repaired-cover exact certificate|step_stromquist_h041_exact_repair"
+  "H-010 Stromquist printed-cover exact rejection|step_stromquist_h010_exact_rejection"
   "exact verification|step_exact_verification"
   "negative control|step_negative_control"
   "frontier corpus|step_frontier_corpus"

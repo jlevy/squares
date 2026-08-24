@@ -33,7 +33,7 @@
 | H-007 | blocked | search | For a fixed proposer, quench, and terminal-component relation, indepen | n: 5 6 7 8 9 10 11 | 0 |  |
 | H-008 | blocked | search | Under the declared search and refinement pipeline, the rate at which e | n: 5 6 7 8 9 10 11 12 17 | 0 |  |
 | H-009 | blocked | search | D4 and square-relabel canonicalization merges at least 10 percent of r | n: 3 5 6 7 8 9 10 11 | 0 |  |
-| H-010 | blocked | proof | At s = 2 + 4/sqrt(5), a checked reconstruction reproduces all five imp | n: 11 | 0 |  |
+| H-010 | open | proof | At s = 2 + 4/sqrt(5), a checked reconstruction reproduces all five imp | n: 11 | 0 |  |
 | H-011 | blocked | search | Under a versioned proposer P, deterministic quench Q, and terminal-com | n: 5 6 7 8 9 10 | 0 |  |
 | H-012 | blocked | search | Under one versioned raw-coordinate multistart proposal P, deterministi | n: 10 11 | 0 |  |
 | H-013 | blocked | search | Tracking feasible configurations through a fixed-side projection famil | n: 10 11 | 0 |  |

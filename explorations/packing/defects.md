@@ -2,14 +2,14 @@
 
 # Defect log
 
-152 defects recorded across the packing toolchain.
+159 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **52 soundness defects** — the system asserting something false about the mathematics. 42 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **60 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086).
+- **55 soundness defects** — the system asserting something false about the mathematics. 45 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **60 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059).
 - **25 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 8 | a cell of the sweep whose answer is known in advance |
-| `review` | 106 | a human or agent reading the work against a checklist |
+| `review` | 111 | a human or agent reading the work against a checklist |
 | `anomaly` | 6 | a result that made no sense, chased down |
-| `inspection` | 18 | reading the code or the design with intent |
-| `drift_check` | 5 | a generated view disagreeing with its source |
+| `inspection` | 19 | reading the code or the design with intent |
+| `drift_check` | 6 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 6 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 6 of 152, and none of the 52 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 6 of 159, and none of the 55 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -33,19 +33,19 @@ The line worth reading twice: **the automated gate caught 6 of 152, and none of 
 | --- | ---: |
 | engine | 9 |
 | quench | 13 |
-| verifier | 1 |
-| record | 40 |
-| tooling | 37 |
-| docs | 52 |
+| verifier | 4 |
+| record | 42 |
+| tooling | 38 |
+| docs | 53 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 52 |
-| validity | 44 |
-| bookkeeping | 41 |
-| robustness | 11 |
+| soundness | 55 |
+| validity | 45 |
+| bookkeeping | 42 |
+| robustness | 13 |
 | performance | 4 |
 
 ## Fixed, but nothing stops it coming back
@@ -112,7 +112,7 @@ This is the actionable list.
 | D-127 | The engineering review called its branch complete before its delta blockers were resolved | docs |
 | D-146 | The Stromquist Figure 13 transcription changed its defining point set | docs |
 | D-147 | H-010 substituted unit squares for Stromquist's strict open boxes | docs |
-| D-148 | The D-091 correction omitted genuine Figure 14 unavoidability | docs |
+| D-148 | The D-091 correction omitted the published Figure 14 unavoidability claim | docs |
 | D-149 | Search saturation was still presented as a Stromquist known-answer test | docs |
 | D-151 | Stromquist's middle Lemma 4 table selected an extraneous cubic root | docs |
 
@@ -297,8 +297,15 @@ This is the actionable list.
 | [D-145](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | bookkeeping |  | `review` | medium | fixed | A broad integration edit fixed the wrong defect record |
 | [D-146](resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md) | 2026-08-24 | docs | validity | flattering | `inspection` | high | fixed | The Stromquist Figure 13 transcription changed its defining point set |
 | [D-147](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | H-010 substituted unit squares for Stromquist's strict open boxes |
-| [D-148](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The D-091 correction omitted genuine Figure 14 unavoidability |
+| [D-148](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The D-091 correction omitted the published Figure 14 unavoidability claim |
 | [D-149](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Search saturation was still presented as a Stromquist known-answer test |
 | [D-150](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | Active effort and priority views drifted after four exact research rounds |
 | [D-151](resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | high | fixed | Stromquist's middle Lemma 4 table selected an extraneous cubic root |
 | [D-152](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | critical | outstanding | Stromquist's printed Figure 14 point set admits an escaping box |
+| [D-153](frontier/source-availability.yaml) | 2026-08-24 | docs | bookkeeping |  | `inspection` | high | fixed | The source ledger called three directly hosted 1984 Stromquist memoranda unavailable |
+| [D-154](tools/check_stromquist_theorem2.py) | 2026-08-24 | verifier | soundness | flattering | `review` | high | fixed | The first H-010 checker draft treated unchecked polynomials as exact fields |
+| [D-155](tools/check_stromquist_theorem2.py) | 2026-08-24 | record | robustness |  | `review` | medium | fixed | The first H-010 record draft retained raw platform floating-point diagnostics |
+| [D-156](tools/check_stromquist_repair.py) | 2026-08-24 | verifier | soundness | flattering | `review` | high | fixed | The first H-041 checker draft did not prove that tiling vertices stayed inside the container |
+| [D-157](tools/check_stromquist_repair.py) | 2026-08-24 | verifier | soundness | flattering | `review` | high | fixed | The first H-041 Lemma 6 replay squared inequalities without executable sign guards |
+| [D-158](tools/check_stromquist_repair.py) | 2026-08-24 | record | validity | flattering | `review` | medium | fixed | The first H-041 record blurred runtime source checks with unattached extraction hashes |
+| [D-159](resources/README.md) | 2026-08-24 | tooling | robustness |  | `drift_check` | medium | fixed | Scanned archive PDFs were misclassified as text by Git |

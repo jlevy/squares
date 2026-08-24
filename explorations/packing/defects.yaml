@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 152
+count: 159
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -2272,8 +2272,8 @@ defects:
   severity: high
   status: fixed
   what: >-
-    H-010 treated a ten-point escape and the genuine twelve-point Figure 14
-    unavoidability statement as the complete theorem. That omitted the conditional
+    H-010 treated a ten-point escape and the published twelve-point Figure 14
+    unavoidability claim as the complete theorem. That omitted the conditional
     mechanism: the ten points localize one avoiding box, and the proof forces that same
     box to contain three of the twelve points before applying the 3+9 count.
   consequence: >-
@@ -2283,7 +2283,8 @@ defects:
     Rewrote H-010 around independently checked localization, forced cohabitation and
     counting implications. That first correction still failed to register Figure 14
     unavoidability explicitly and wrongly described it as nonexistent; D-148 records
-    and repairs the recurrence.
+    that recurrence. D-152 later showed that the registered source premise is itself
+    false as printed; the five-node contract remains necessary so the right claim fails.
   regression: none
   bead: think-bvy9
   recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
@@ -3668,7 +3669,7 @@ defects:
   bead: think-fe8n
   recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
 - id: D-148
-  title: The D-091 correction omitted genuine Figure 14 unavoidability
+  title: The D-091 correction omitted the published Figure 14 unavoidability claim
   date: '2026-08-24'
   layer: docs
   class: validity
@@ -3680,7 +3681,7 @@ defects:
   what: >-
     D-091 correctly restored localization and same-box A-triple forcing but H-010 did
     not require a certificate that all twelve Figure 14 points are unavoidable. Its note
-    and the master review went further and called that genuine source statement
+    and the master review went further and called that explicit source claim
     nonexistent.
   consequence: >-
     The registered proof DAG still lacked one premise of the counting contradiction,
@@ -3688,7 +3689,8 @@ defects:
   fix: >-
     Corrected D-091 and the living review, and made H-010's acceptance rule an explicit
     five-node chain containing Figure 14 unavoidability as a necessary but insufficient
-    node.
+    node. D-152 later falsified that node for the printed point tuple; D-148 remains the
+    process correction that made the falsifier answer the actual source claim.
   regression: none
   recurrence_of: D-091
   bead: think-1vs7
@@ -3799,3 +3801,182 @@ defects:
   regression: none
   bead: think-bv1d
   recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
+- id: D-153
+  title: The source ledger called three directly hosted 1984 Stromquist memoranda unavailable
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: two corpus revisions
+  severity: high
+  status: fixed
+  what: >-
+    The source-availability ledger classified Stromquist's 1984 memoranda as an
+    unpublished, author-contact blocker even though the author's publication page links
+    directly to all three PDF files.
+  consequence: >-
+    The research omitted the most important stated source gap in its proof-history lane
+    and could misstate what the memoranda do or do not contribute to the 2003 proof.
+  fix: >-
+    Archived all three author-hosted PDFs with hashes and unedited OCR, added bounded
+    reading aids, moved the source from unretrieved to recovered, and corrected the
+    current research documents. The audit distinguishes Memo III's unsupported
+    unrestricted assertion from its detailed 0/45-degree proof.
+  regression: >-
+    validate_schemas.py enforces disjoint recovered and unretrieved keys;
+    render_tables.py --check keeps both report tables synchronized with the source
+    ledger, whose recovered row retains the exact acquisition route and mathematical
+    impact.
+  bead: think-7856
+  recorded_in: frontier/source-availability.yaml
+- id: D-154
+  title: The first H-010 checker draft treated unchecked polynomials as exact fields
+  date: '2026-08-24'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted checker draft
+  severity: high
+  status: fixed
+  what: >-
+    The draft constructed NumberField instances from claimed minimal polynomials and
+    sign-changing intervals without checking irreducibility, squarefreeness, or that an
+    interval contained exactly one root. The generic helper's exact equality and sign
+    guarantees are conditional on those facts.
+  consequence: >-
+    A reducible polynomial or ambiguous interval could make an apparent exact witness
+    rely on an invalid quotient field or the wrong real embedding.
+  fix: >-
+    Every algebraic field used by the H-010 checker now replays irreducibility,
+    squarefreeness, and exact one-root isolation with rational SymPy calculations before
+    any field decision is accepted.
+  regression: Every generated and replayed H-010 record contains passing metadata checks for all four fields.
+  bead: think-bv1d
+  recorded_in: tools/check_stromquist_theorem2.py
+- id: D-155
+  title: The first H-010 record draft retained raw platform floating-point diagnostics
+  date: '2026-08-24'
+  layer: record
+  class: robustness
+  detected_by: review
+  latent_for: one uncommitted checker draft
+  severity: medium
+  status: fixed
+  what: >-
+    The draft put raw libm bisection and trigonometric floats into a record that replayed
+    by exact JSON equality, even though those diagnostics do not decide the exact
+    counterexample.
+  consequence: >-
+    A harmless last-bit difference across platforms could reject a valid retained
+    result and make the proof calibration less portable than its exact evidence.
+  fix: >-
+    Non-decisive diagnostics are now explicitly labeled and rounded to stable display
+    strings; every verdict-bearing containment and avoidance decision remains exact.
+  regression: The retained record replays by semantic equality while the determination depends only on exact field signs.
+  recurrence_of: D-059
+  bead: think-x2ni
+  recorded_in: tools/check_stromquist_theorem2.py
+- id: D-156
+  title: The first H-041 checker draft did not prove that tiling vertices stayed inside the container
+  date: '2026-08-24'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted checker draft
+  severity: high
+  status: fixed
+  what: >-
+    The draft inferred a full square tiling from exact face incidence, noncrossing,
+    Euler characteristic, boundary-line membership, and total area, but never directly
+    checked that every vertex used by the cell complex lay in `[0,s]^2`.
+  consequence: >-
+    A malformed or mutated certificate could place vertices beyond a container side and
+    still present the combinatorial and area invariants expected of an exhaustive cover.
+    The hard-coded repaired geometry happened to be inside, but the verifier had not
+    established that premise.
+  fix: >-
+    The shared tiling validator now exact-checks both coordinates of all 26 Figure 13
+    vertices and all 28 Figure 14 vertices in `Q(sqrt(5))`, and retains the complete
+    checked inventory in the replayed record.
+  regression: An adversarial Figure 14 mutation moves H beyond the container and the checker rejects it.
+  bead: think-5fmh
+  recorded_in: tools/check_stromquist_repair.py
+- id: D-157
+  title: The first H-041 Lemma 6 replay squared inequalities without executable sign guards
+  date: '2026-08-24'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted checker draft
+  severity: high
+  status: fixed
+  what: >-
+    The draft compared exact squared polynomial expressions in its reconstruction of
+    Lemma 6, but did not executable-assert every angle-domain and side-positivity premise
+    that makes those squarings implication-preserving.
+  consequence: >-
+    Squaring can erase sign information. A future coefficient or interval drift could
+    leave a positive squared gap while invalidating the unsquared inequality that the
+    proof actually needs.
+  fix: >-
+    The checker now verifies the tangent domain, positivity of sine, cosine, products,
+    and both sides before each squaring, the tangent-map derivative sign, and every
+    exact positive gap coefficient. The record exposes those premises separately.
+  regression: Every generated and replayed H-041 record contains the complete passing sign-premise inventory.
+  bead: think-ie1b
+  recorded_in: tools/check_stromquist_repair.py
+- id: D-158
+  title: The first H-041 record blurred runtime source checks with unattached extraction hashes
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted checker draft
+  severity: medium
+  status: fixed
+  what: >-
+    The draft placed page-SVG and topology-path digests beside the PDF and raw-source
+    hashes under a blanket runtime-verification statement, although those derived
+    extraction artifacts are not retained or recomputed by the checker.
+  consequence: >-
+    The record could imply an independent runtime provenance check that had not
+    occurred. The exact repaired construction remained decidable from its own manifests,
+    so this affected evidence scope rather than the mathematical determination.
+  fix: >-
+    Only the retained PDF and raw-source hashes are now labeled decisive runtime checks.
+    The SVG and path digests are explicitly non-runtime, non-decisive provenance
+    attestations.
+  regression: Deterministic replay requires the source-binding record to preserve the decisive and non-decisive labels.
+  bead: think-q1sd
+  recorded_in: tools/check_stromquist_repair.py
+- id: D-159
+  title: Scanned archive PDFs were misclassified as text by Git
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  detected_by: drift_check
+  latent_for: one uncommitted source-archive integration
+  severity: medium
+  status: fixed
+  what: >-
+    The recovered image-only PDFs contained no early NUL byte, so Git treated their
+    compressed streams as text and `git diff --cached --check` emitted thousands of
+    false trailing-whitespace diagnostics. The excluded hand-written reading aids also
+    carried Markdown hard-break spaces that the same staged check correctly rejected.
+  consequence: >-
+    A faithful source archive could not pass the repository's precommit hygiene check.
+    An agent could be tempted either to rewrite immutable PDF bytes or to bypass the
+    staged-diff check, weakening both provenance and process discipline.
+  fix: >-
+    Marked every archived PDF as binary in the root `.gitattributes` without changing
+    its bytes, removed trailing spaces only from the hand-written reading aids, and
+    retained the stricter whitespace policy for all other authored Markdown.
+  regression: >-
+    `git check-attr diff` reports `unset` for each archived PDF, their SHA-256 digests
+    remain identical to the source manifests, and `git diff --cached --check` passes.
+  bead: think-7fz7
+  recorded_in: resources/README.md

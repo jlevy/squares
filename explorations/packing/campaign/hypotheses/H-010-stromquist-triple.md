@@ -24,11 +24,11 @@ hypothesis:
     metric: five independently replayed source, geometry, and finite-count implications
     direction: every implication, strict inequality, symmetry reduction, and boundary case reproduces the published proof
   instrument: >-
-    Not yet built. Exact Q(sqrt(5)) source and planar-face reconstruction, a positive
-    escape-witness checker for the non-unavoidable Figure 13 set, certificate-producing
-    exact or interval checks for localization, cohabitation, and Figure 14
-    unavoidability, a finite resource-count checker, and an independent replay path.
-  instrument_ready: false
+    tools/check_stromquist_theorem2.py binds the printed source tuple, exactly replays
+    strict Figure 13 and Figure 14 escape witnesses, checks the conditional capacity
+    logic, and regenerates retained evidence. A false Figure 14 node terminally rejects
+    this conjunction; the checker does not claim a universal Figure 13 cover.
+  instrument_ready: true
   regime: >-
     Stromquist's published point sets at exact s = 2 + 4/sqrt(5), with open boxes of
     side >1 inside [0,s]^2; a unit-square limiting relaxation is admissible only when

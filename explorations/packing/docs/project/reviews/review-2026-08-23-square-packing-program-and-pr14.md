@@ -1485,12 +1485,13 @@ implementation, and no generic certificate round trip.
 The regression file that does exist is outside the gate.
 
 The source archive is strong but its own availability record still names 11 missing
-primary items.
-The highest-value gaps remain Stromquist’s 1984 memoranda, El Moumni 1999,
-Trump 2023, and Arslanov–Bui 2025. Those affect proof history, local-optimality claims,
-and constructive families.
-Their absence is correctly recorded, but the research program has no acquisition/retest
-cadence tied to decisions that depend on them.
+primary items. The highest-value gaps now are El Moumni 1999, Trump 2023, and
+Arslanov–Bui 2025. Those affect proof history, local-optimality claims, and constructive
+families. Stromquist’s three memoranda were recovered from the author’s site: Memo III
+proves the restricted `0°/45°` theorem but only asserts the unrestricted `2 + (4/5)√5`
+bound, so it does not repair the 2003 Figure 14 gap.
+The remaining absences are correctly recorded, but the research program has no
+acquisition/retest cadence tied to decisions that depend on them.
 
 The lower-bound lane also lacks an end-to-end known-answer control.
 The repository knows what that control should be: a falsifier must replay a retained

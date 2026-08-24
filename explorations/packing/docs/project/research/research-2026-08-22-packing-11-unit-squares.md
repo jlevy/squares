@@ -629,9 +629,12 @@ Two consequences. First, **El Moumni holds published priority for `s(7) = s(8) =
 `s(15) = 4`**, three years before Kearney–Shiu, and is absent from most summaries of
 this field including earlier drafts of this document; Kearney–Shiu’s genuine first is
 `s(6) = 3`. Second, Stromquist’s 1984 Daniel H. Wagner Associates memoranda I–III sit
-behind a remarkable share of the claim column and have never been published; memorandum
-III covers `n ≤ 65` and Gardner’s conjecture for `n = 11`, and remains the single most
-valuable unretrieved document in this subject.
+behind a remarkable share of the claim column.
+They remain unpublished, but are now archived from the author’s own site.
+Memoranda I and II contain the detailed `n = 6` and `n = 10` proofs.
+Memorandum III proves the `0°/45°` `n = 11` bound and, on p. 10, asserts the
+unrestricted `2 + (4/5)√5` bound without giving its point set or proof.
+It therefore supplies no missing certificate or repair for the 2003 Figure 14 gap.
 
 Friedman’s survey supplies relatively simple proofs for `n = 2, 3, 5, 8, 15, 24, 35` and
 more complicated ones for `n = 7, 14`. Stromquist’s 2003 abstract notes that at that
@@ -1683,12 +1686,10 @@ covers two values of `n`. Any program should be weighted accordingly.
 
 ### Foundations: finish the archive and the survey
 
-1. **Retrieve the remaining primaries.** Roth–Vaughan (1978) first — it is the only
-   source in this document whose statement could not be pinned down, and three secondary
-   renderings of it disagree.
-   Then El Moumni (1999), Stromquist’s 1984 memoranda, Chung–Graham (2009), and
-   Arslanov–Bui (2025). Each per the three-format archive discipline in
-   [`resources/`](../../../resources/README.md).
+1. **Retrieve the remaining primaries.** El Moumni (1999) first, because it holds
+   published priority for three solved values and no summary describes its method.
+   Then Trump (2023), Chung–Graham (2009 and 2020), and Arslanov–Bui (2025). Each per
+   the three-format archive discipline in [`resources/`](../../../resources/README.md).
 2. **Machine-readable record corpus.** A first version now exists:
    [`frontier/`](../../../frontier/README.md) carries one schema-validated artifact per
    `n ≤ 100`, built by parsing the catalogue’s *prose* for upper bounds and computing
@@ -1819,10 +1820,12 @@ Every item in the proof lane above exists because of this.
 - [ ] Obtain El Moumni (1999), *Studia Sci.
   Math. Hungar.* **35** 281–290, and confirm what it proves and how; it holds published
   priority for three values and no summary of this field describes its method.
-- [ ] Obtain Stromquist’s 1984 Wagner Associates memoranda I–III. Memorandum III covers
-  `n ≤ 65` and Gardner’s conjecture for `n = 11`, and sits behind a large share of the
-  claim column in the
-  [priority ledger](#priority-claims-and-what-was-actually-published).
+- [x] ~~Obtain Stromquist’s 1984 Wagner Associates memoranda I–III~~ — **resolved**: all
+  three PDFs are linked from the author’s publication page and are archived with hashes,
+  raw OCR, and page-checked reading aids.
+  Memorandum III’s detailed proof is restricted to `0°/45°`; its p. 10 unrestricted
+  `2 + (4/5)√5` statement is only an assertion and does not repair the printed 2003
+  Figure 14 cover.
 - [ ] Obtain the full text of the March 2023 “Packing of 11 unit squares in a square
   with minimum size” note (ResearchGate 403).
 - [ ] Read the “crucial relation” of **[Gensane–Ryckelynck 2005]** off the PDF directly:
@@ -1858,10 +1861,10 @@ The structured form is
 tables below are generated from it.
 
 **Re-test this list rather than inheriting it.** A “not retrievable” verdict is a
-negative search result, and this document has now been wrong about one five times.
+negative search result, and this document has now made that error six times.
 Three sources recorded as unavailable turned out to be freely downloadable when
-re-tested; a fourth was open access at PMC the whole time; and the fifth — the most
-consequential of all — was supplied on request.
+re-tested; Markót was open access at PMC, Roth–Vaughan was supplied on request, and
+Stromquist’s memoranda were linked directly from the author’s publication page.
 
 <!-- BEGIN GENERATED: sources-recovered (tools/render_tables.py) -->
 
@@ -1872,6 +1875,7 @@ consequential of all — was supplied on request.
 | **[Gensane–Ryckelynck 2005]** Improved Dense Packings of Congruent Squares in a Square | Springer serves the PDF openly at its /content/pdf/ URL; the earlier attempt fetched the article landing page. |
 | **[Nagamochi 2005]** Packing Unit Squares in a Rectangle | Open access in Electron. J. Combin.; cited by exact title in the archived DS7 reference list all along. |
 | **[Wang–Dong–Li 2016]** A New Result on Packing Unit Squares into a Large Square | On arXiv. |
+| **[Stromquist 1984]** Packing Unit Squares Inside Squares, I-III | The author’s official publication page at https://www.walterstromquist.com/publications.html links squares1.pdf, squares2.pdf and squares3.pdf directly; “unpublished” described their publication status, not their present-day retrievability. |
 
 <!-- END GENERATED: sources-recovered -->
 
@@ -1885,7 +1889,6 @@ in place of the PDF on a re-test, not that access was assumed to be blocked.
 
 | Source | Year | Where | Obstacle | What rests on it |
 | --- | --- | --- | --- | --- |
-| **[Stromquist 1984]** Packing unit squares inside squares, I-III | 1984 | Daniel H. Wagner Associates Memoranda | unpublished | A large share of the claim column in the priority ledger. The single most valuable unretrieved document in this subject. |
 | **[Arslanov–Bui 2025]** Note on “efficient packings of unit squares in a large square” | 2025 | Discrete Comput. Geom. | paywall | Current continuation of the Kearney-Shiu delta_n / n_r line. |
 | **[El Moumni 1999]** Optimal Packings of Unit Squares in a Square | 1999 | Studia Sci. Math. Hungar. 35, 281-290 | print only | Published priority for s(7) = s(8) = 3 and s(15) = 4. No summary of this field describes its method. |
 | **[Plakhta 2021]** Configuration spaces of squares in a rectangle | 2021 | Algebraic & Geometric Topology 21, 1445-1478 | bot-blocked | H-032’s literature routing for affine Morse-Bott analysis of square configuration spaces in a rectangle; it is context and method, not a classification of the exact optimal-moduli spaces asked there. |
@@ -1902,17 +1905,19 @@ in place of the PDF on a re-test, not that access was assumed to be blocked.
 
 **What this list is for.** It is the fact-checking boundary of this research.
 Every claim in this document either traces to a file in `resources/` — where the
-original PDF, a cleaned transcription and a faithful raw extraction sit side by side, so
-a formula can be checked against the extraction it came from — or traces to something in
-the table above, and is marked **[secondary]** where it does.
+original PDF and its extraction sit side by side, with a cleaned transcription or an
+explicitly bounded reading aid — or traces to something in the table above, and is
+marked **[secondary]** where it does.
 A reader auditing a claim should be able to tell which case they are in without leaving
 the repository.
 
-The two highest-priority acquisitions are both about **provenance rather than
-mathematics**: Stromquist’s 1984 memoranda sit behind a large share of the claim column
-in the [priority ledger](#priority-claims-and-what-was-actually-published), and El
-Moumni (1999) holds published priority for three values of `s(n)` that most summaries of
-this field credit to someone else.
+Recovering Stromquist’s memoranda closes the largest provenance gap, but it does not
+close the 2003 proof gap: Memo III asserts the unrestricted lower bound without the
+mechanism needed to check it.
+The highest-priority remaining acquisition is El Moumni (1999), which holds published
+priority for three values of `s(n)` that most summaries credit elsewhere.
+Trump (2023) and Arslanov–Bui (2025) remain important for local optimality and the
+current asymptotic construction line.
 
 ## Methodology
 
@@ -2033,12 +2038,21 @@ them open access in the same journal as much of the rest of the bibliography.
 A “not retrievable” conclusion is itself a negative search result and should be
 re-tested rather than inherited.
 
+**Fifth pass — recovered Stromquist memoranda (2026-08-24).** The author’s publication
+page directly linked all three scans.
+Memo III confirms the detailed restricted-angle proof but gives only a one-sentence
+assertion of the unrestricted `2 + (4/5)√5` bound.
+No memo supplies the later Figure 14 coordinates, cover routing, or a coordinate repair.
+The recovery corrects the proof history and source ledger without upgrading the
+evidential status of the 2003 lower-bound proof.
+
 ## References
 
 Every key below resolves to a local copy under
 [`resources/`](../../../resources/README.md) unless marked **[not retrieved]**. Local
-stems are given as `papers/<stem>` or `web/<stem>`; each stem has a `.pdf`/`.html`
-original, a cleaned `.md`, and for papers a faithful `.raw.md` extraction.
+stems are given as `papers/<stem>` or `web/<stem>`. Papers normally have a PDF, cleaned
+Markdown, and faithful raw extraction; the image-only Stromquist memoranda instead have
+explicitly bounded reading aids and unedited raw OCR.
 
 ### Core literature on `s(n)`
 
@@ -2104,9 +2118,14 @@ original, a cleaned `.md`, and for papers a faithful `.raw.md` extraction.
   **[not retrieved]** — print.
 - **Pertti Hämäläinen**, correspondence, 20 April 1980 — the optimal 45° packing of 11
   squares. **[not retrieved]** — cited by **[Stromquist 2003]**.
-- **Stromquist**, “Packing unit squares inside squares,” I–III, Daniel H. Wagner
-  Associates Memoranda, 1984. **[not retrieved]** — unpublished; memorandum III covers
-  `n ≤ 65` and Gardner’s conjecture for `n = 11`.
+- **[Stromquist 1984]** — Walter R. Stromquist, “Packing Unit Squares Inside Squares,”
+  I–III, Daniel H. Wagner, Associates internal memoranda, September 11, October 15, and
+  November 15, 1984. [Memo I](https://www.walterstromquist.com/papers/squares1.pdf) ·
+  [Memo II](https://www.walterstromquist.com/papers/squares2.pdf) ·
+  [Memo III](https://www.walterstromquist.com/papers/squares3.pdf) · local
+  `papers/stromquist-1984-packing-unit-squares-inside-squares-*`. *Memo III proves the
+  restricted `0°/45°` result and only asserts the unrestricted bound; it does not repair
+  the 2003 Figure 14 proof.*
 
 ### Rigorous computational methods (the certification frontier)
 

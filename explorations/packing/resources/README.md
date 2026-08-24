@@ -20,14 +20,14 @@ Every paper is stored three ways:
 | --- | --- | --- |
 | `<name>.pdf` | The original, byte-for-byte as retrieved | Authority; figures; anything the text loses |
 | `<name>.md` | Cleaned Markdown, headings and LaTeX restored | Reading and quoting |
-| `<name>.raw.md` | Unedited `pdfminer.six` output | **Ground truth.** Check the clean copy against this before trusting a formula |
+| `<name>.raw.md` | Unedited extraction or OCR output | Check the clean copy against this; for image-only scans, the PDF remains the ground truth |
 
 The `.raw.md` files are deliberately retained.
 Cleanup was done by language models, so the raw extraction is the fallback whenever a
 formula in a `.md` looks suspicious.
 
 **Transcription status, stated exactly.** The archive’s discipline is original + cleaned
-`.md` + faithful `.raw.md`, and seven entries currently fall short of it in ways worth
+`.md` + faithful `.raw.md`, and ten entries currently fall short of it in ways worth
 naming rather than hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
@@ -45,6 +45,10 @@ naming rather than hiding:
   The 1978 scan’s OCR loses subscripts, superscripts and interval notation, and
   transcribing it would mean reconstructing mathematics rather than reformatting it.
   The file opens with a banner saying so.
+- The three `stromquist-1984-packing-unit-squares-inside-squares-*` memoranda are
+  **image-only scans with concise reading aids**, not cleaned transcriptions.
+  Their `.raw.md` files are unedited page-ordered Tesseract OCR for search, not source
+  ground truth; formulas and figures must be checked against the PDFs.
 
 Writing the missing transcriptions is deferred deliberately rather than done hastily —
 model-assisted cleanup is exactly what produced the reconstruction hazards tabulated in
@@ -123,6 +127,9 @@ Citation keys match those used in the research document.
 
 | Key | Title | Authors | Year | Venue | File stem |
 | --- | --- | --- | --- | --- | --- |
+| **[Stromquist Memo I]** | Packing Unit Squares Inside Squares, I (Six Unit Squares) | W. Stromquist | 1984 | Daniel H. Wagner, Associates internal memorandum, September 11 | `stromquist-1984-packing-unit-squares-inside-squares-i-six-unit-squares` |
+| **[Stromquist Memo II]** | Packing Unit Squares Inside Squares, II (Ten Unit Squares) | W. Stromquist | 1984 | Daniel H. Wagner, Associates internal memorandum, October 15 | `stromquist-1984-packing-unit-squares-inside-squares-ii-ten-unit-squares` |
+| **[Stromquist Memo III]** | Packing Unit Squares Inside Squares, III (Cases with n ≤ 65 and Martin Gardner’s Conjecture for n = 11) | W. Stromquist | 1984 | Daniel H. Wagner, Associates internal memorandum, November 15 | `stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture` |
 | **[Stromquist 2003]** | Packing 10 or 11 Unit Squares in a Square | W. Stromquist | 2003 | Electron. J. Combin. 10, #R8 | `stromquist-2003-packing-10-or-11-unit-squares` |
 | **[Friedman DS7]** | Packing Unit Squares in Squares: A Survey and New Results | E. Friedman | 1998– | Electron. J. Combin., Dynamic Survey DS7 | `friedman-ds7-packing-unit-squares-in-squares` |
 | **[Kearney–Shiu 2002]** | Efficient packing of unit squares in a square | M. J. Kearney, P. Shiu | 2002 | Electron. J. Combin. 9, #R14 | `kearney-shiu-2002-efficient-packing-unit-squares` |
@@ -186,10 +193,10 @@ article landing page), Nagamochi (open access in the *Electronic Journal of
 Combinatorics*, and cited by its exact title in the archived DS7 reference list all
 along), and Wang–Dong–Li (arXiv).
 A “not retrievable” verdict is a negative search result, and this archive has now been
-wrong about it **five** times: Markót 2021 was open access at PMC the whole time, and
-Roth & Vaughan (1978) — recorded here as the highest-priority acquisition — was supplied
-on request and is now archived.
-Reading it produced two corrections to the published secondary literature.
+wrong about it **six** times: Markót 2021 was open access at PMC the whole time, Roth &
+Vaughan (1978) was supplied on request, and Stromquist’s three memoranda were linked
+directly from the author’s publication page.
+Reading Roth–Vaughan produced two corrections to the published secondary literature.
 
 **The canonical list now lives in
 [`../frontier/source-availability.yaml`](../frontier/source-availability.yaml)**, with
@@ -201,16 +208,24 @@ The short version below is kept for readers of this archive.
 | --- | --- |
 | Trump, *Packing of 11 unit squares in a square with minimum size* (Mar 2023) | ResearchGate 403 |
 | El Moumni, *Optimal Packings of Unit Squares in a Square*, Studia Sci. Math. Hungar. 35 (1999) | Print-only; no digital copy located. Holds published priority for `s(7) = s(8) = 3` and `s(15) = 4`. |
-| Stromquist, *Packing unit squares inside squares* I–III, Wagner Associates memoranda (1984) | Unpublished; memorandum III covers `n ≤ 65` and Gardner’s conjecture for `n = 11`. |
 | Arslanov & Bui, *Note on “efficient packings of unit squares in a large square”*, DCG (2025) | Springer; not open access. |
 | Brooks, Smith, Stone & Tutte, *The dissection of rectangles into squares*, Duke Math. J. 7 (1940) | Project Euclid; not open access |
 | Gustafsson & Thulin (1980), *Ronden* | Swedish company periodical; Ellsworth notes he has not read it directly either |
 
 ## Provenance and licence
 
-Everything here was retrieved on **2026-08-22** from the URLs recorded in each file’s
-metadata header.
-The arXiv and Electronic Journal of Combinatorics items are open access;
-the Stanford technical report and PMC item are publicly posted.
+The original archive was retrieved on **2026-08-22** from the URLs recorded in each
+file’s metadata header.
+The three Stromquist memoranda were retrieved on **2026-08-24** from the author’s
+[official publication page](https://www.walterstromquist.com/publications.html), which
+links the exact archived PDFs as `squares1.pdf`, `squares2.pdf`, and `squares3.pdf`.
+Their respective SHA-256 digests are `5a20c8d…1423e2`, `3b9a8af…9337d2`, and
+`f203470…129878`. All three PDFs are image-only scans; their raw aids are unedited
+Tesseract 5.5.0 English OCR from 300 dpi Poppler-rendered page images, concatenated in
+page order with form-feed and newline separators.
+Archive PDFs are marked binary in the repository’s `.gitattributes`; this prevents Git
+from interpreting compressed scan streams as text without changing any source bytes.
+The arXiv and Electronic Journal of Combinatorics items are open access; the Stanford
+technical report and PMC item are publicly posted.
 Retained for private research use.
 Consult the original publisher before redistributing.

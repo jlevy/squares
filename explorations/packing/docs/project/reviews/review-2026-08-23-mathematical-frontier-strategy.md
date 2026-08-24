@@ -351,14 +351,18 @@ with no mathematical risk.
 On value-per-unit-effort it belongs at the top of the Insight-lane build queue, not in
 the backlog.
 
-### G-8: Sources whose absence could change the plan
+### G-8: Source recovery changes the plan
 
-Unchanged from the `n = 11` report’s open list, but three deserve their standing raised
-because they bear on *strategy*, not completeness: **El Moumni (1999)** holds published
-priority for three proved values and no summary describes his method — a third proof
-technique may exist in that paper; **Stromquist’s 1984 memoranda** cover `n ≤ 65` and
-would recalibrate the priority ledger; and **Gensane–Ryckelynck’s contact-class
-enumeration** (did their billiard algorithm record which `n = 11` cells it explored?)
+Three sources bear on *strategy*, not completeness.
+**El Moumni (1999)** holds published priority for three proved values and no summary
+describes his method, so a third proof technique may exist there.
+The now-archived **Stromquist 1984 memoranda** recalibrate the lower-bound lane in a
+different way: Memo III’s detailed theorem is restricted to `0°/45°`, while its
+unrestricted `2 + (4/5)√5` result is only asserted.
+It supplies no Figure 14 cover or repair, so the executable priority remains an
+independent repaired certificate rather than further source reconstruction.
+**Gensane–Ryckelynck’s contact-class enumeration** (did their billiard algorithm record
+which `n = 11` cells it explored?)
 would tell this program which parts of cell space a serious prior search already covered
 — negative information that would re-aim every proposer.
 The phantom-constant episode is the standing reason to treat unretrieved primaries as

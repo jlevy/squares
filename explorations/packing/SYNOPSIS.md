@@ -890,7 +890,7 @@ view; this section is the reading of it.
 | [H-007](campaign/hypotheses/H-007-saturation-curves.md) | blocked | Coverage models predict held-out component discovery | 0 | — |
 | [H-008](campaign/hypotheses/H-008-false-basin-rate.md) | blocked | The stronger-verifier rejection rate is measurable across `n` | 0 | — |
 | [H-009](campaign/hypotheses/H-009-symmetry-dedup-ratio.md) | blocked | Symmetry quotienting materially changes endpoint counts | 0 | — |
-| [H-010](campaign/hypotheses/H-010-stromquist-triple.md) | blocked | Stromquist’s five-node Theorem 2 mechanism reproduces | 0 | — |
+| [H-010](campaign/hypotheses/H-010-stromquist-triple.md) | open | Stromquist’s five-node Theorem 2 mechanism reproduces | 0 | — |
 | [H-011](campaign/hypotheses/H-011-small-n-census.md) | blocked | The small-`n` landscape is censusable | 0 | — |
 | [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) | blocked | Record basins are rare in quench measure | 0 | — |
 | [H-013](campaign/hypotheses/H-013-delta-continuation.md) | blocked | Delta-continuation improves target-component arrival | 0 | — |
@@ -1119,24 +1119,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 152 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 159 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 52 | asserted something false about the mathematics |
-| validity | 44 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 41 | recorded something its own evidence contradicts |
-| robustness | 11 | did not finish, or finished only by luck |
+| soundness | 55 | asserted something false about the mathematics |
+| validity | 45 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 42 | recorded something its own evidence contradicts |
+| robustness | 13 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Forty-one of the fifty-one soundness defects pointed in the *flattering* direction**,
-where the error looks like a success.
+**Forty-five of the fifty-five soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught six defects in one hundred fifty-one, and no soundness
+**The automated gate has caught six defects in one hundred fifty-nine, and no soundness
 defect ever.** Every soundness failure was found by a control cell whose answer was
 known in advance, a rule written down before the measurement, a generated view
 contradicting its source, or someone reading carefully.
@@ -1219,8 +1219,17 @@ vocabulary that could not record the H-024 result, the omitted `n=29` source pro
 that the falsifier exposed, the roll-up’s obsolete blanket claim about exploratory
 record evidence, the distinction between a branch linearization and a true Bouligand
 motion, and a certificate replay that did not require one-to-one branch coverage.
-The last entry catches the provenance gate silently skipping schema-valid unquoted
-execution commits, including exp-011 and exp-013.
+The next tranche, D-139 through D-159, records the missing hard-square topology
+literature, a stale closed-family contact claim, exact-moduli integration errors,
+Stromquist source transcription and proof-chain mistakes, stale campaign effort, the
+paper’s extraneous Lemma 4 root, and the escaping Figure 14 box.
+D-153 records that the three 1984 memoranda were directly hosted while the source ledger
+called them unavailable; D-154 and D-155 close exact-field metadata and cross-platform
+record gaps in the first uncommitted H-010 checker.
+D-156 through D-158 close tiling-containment, sign-preservation, and provenance-scope
+gaps in the H-041 repair checker before any H-041 evidence could land.
+D-159 keeps immutable scanned PDFs out of Git’s text-whitespace path while preserving
+strict whitespace checks for the associated hand-written reading aids.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
