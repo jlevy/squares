@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 196
+count: 197
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -5036,4 +5036,32 @@ defects:
     defect view, and requires schema and synopsis aggregate agreement before commit.
   recurrence_of: D-160
   bead: think-uz8o
+  recorded_in: defects.yaml
+- id: D-197
+  title: A concurrent checkout moved the exp-036 instrument commit to the wrong branch
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: anomaly
+  latent_for: one commit banner; no push or experiment execution
+  severity: medium
+  status: fixed
+  what: >-
+    Another agent changed the shared worktree from the four-hour campaign branch to the
+    engineering-maturity branch after the last status inspection. The checker-only
+    exp-036 instrument commit therefore landed on that branch instead of the campaign.
+  consequence: >-
+    Pushing without reading the commit banner would have mixed an unrelated research
+    instrument into the engineering-plan branch and left the preregistration chain on
+    PR 22 without its declared instrument commit.
+  fix: >-
+    Switch back to the campaign branch, cherry-pick the isolated checker commit, and
+    restore the engineering-plan branch ref to its already-pushed plan commit. Check
+    the current branch and staged scope immediately before each remaining campaign
+    commit; do not add a lease or worktree protocol for this bounded race.
+  regression: >-
+    none; the lightweight campaign rule is an immediate branch-and-staged-scope check,
+    and the mistaken commit was detected before push or target execution
+  bead: think-x7vd
   recorded_in: defects.yaml
