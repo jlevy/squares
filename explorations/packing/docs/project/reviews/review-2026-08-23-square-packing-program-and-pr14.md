@@ -2540,15 +2540,19 @@ one classification error found in the integration draft:
 | D-191 | Mechanical controls do not certify mathematics, and conventions own ids and naming rather than overriding schemas, evidence, or current status |
 | D-192 | A stacked documentation PR is compared with the current head, not only its configured base, before living status is incorporated |
 | D-193 | D-189 is recorded as a validity/scope omission rather than falsely inflating the soundness class |
+| D-194 | The exp-035 candidate must derive pair (0,4) separately at every slide stratum rather than reuse endpoint A’s differential |
+| D-195 | Pair (3,4) has two owner-axis branches, each requiring both tied support inequalities; the tied rows are not four alternatives |
 
 The retained commit map is `a1009cb → b3ab594`, `f9d8bae → 7353a34`,
 `62c227c → 2c4cd0e`, and `7a5787c → 1210e07`; corrections land separately in `8611e85`,
 with this late-head reconciliation following it.
 
-The paused exp-035 orientation remains separate and explicit: its candidate checker is
+The exp-035 orientation remains separate and explicit: its candidate checker was
 committed at `8aa0cbb`, but it has not been preregistered or scientifically executed and
-supports no result. `think-1582` owns that continuation; `think-4rk3` and its four
-children own only this documentation-stack review, correction, and validation.
+supports no result. Review after PR 19 merged found D-194 and D-195 before measurement;
+`think-1582`, `think-5hh9`, and `think-s41l` own the correction on the new four-hour
+campaign branch. `think-4rk3` and its four children own only the completed
+documentation-stack review, correction, and validation.
 
 On the final integrated head, the normal gate passes all 30 steps in 38 wall-seconds:
 all 37 negative controls fire, 12 basin archives replay 40 events, all five exact

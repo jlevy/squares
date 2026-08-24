@@ -260,8 +260,12 @@ agenda:
       proves one exact fixed-angle optimal face, and exp-034 proves it lies in an exact
       two-parameter angle-and-slide sheet. Full nonsmooth stationary connectivity and
       unequal-side minimax clearance remain later bounded slices, so BC-010 stays ready
-      rather than complete. The exp-035 candidate checker is paused on think-1582 at
-      commit 8aa0cbb; it is statically clean but neither preregistered nor run.
+      rather than complete. After PR 19 merged, the campaign resumed on a fresh branch
+      with a four-hour horizon. Pre-measurement review found D-194 and D-195 in the
+      exp-035 candidate checker: one contact differential was reused across slide
+      strata, and tied support rows were treated as alternatives. Think-1582 remains
+      active while those exact-derivative corrections are completed; exp-035 is still
+      neither preregistered nor run.
     artifacts:
     - tools/check_n5_equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md

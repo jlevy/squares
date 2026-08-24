@@ -11,14 +11,14 @@ session:
   date: '2026-08-24'
   goal: >-
     Close only the launch-path gaps needed for scientifically admissible basin events,
-    then run and retain successively larger cells until the eight-hour deadline, an
+    then run and retain successively larger cells until the four-hour deadline, an
     empty admissible queue, or a declared stop condition fires.
   focus: process
   primary_bead: think-05hr
   status: in_progress
   budget:
-    wall_minutes: 480
-    max_cycles: 16
+    wall_minutes: 240
+    max_cycles: 8
     orientation_minutes: 10
     checkpoint_minutes: 20
     slice_minutes: 30
@@ -44,7 +44,8 @@ session:
       point. Exp-033 proves one exact fixed-angle face relation between the equal-side
       n=5 source poses, and exp-034 embeds it in one exact angle-and-slide sheet, while
       sampled full-component classifications remain zero. The next cone checker is
-      committed but paused before scientific execution. No complete-map claim follows.
+      committed but under correction before scientific execution after review exposed
+      D-194 and D-195. No complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -405,6 +406,15 @@ session:
     PR 21's four substantive documentation commits are incorporated without either
     stale base merge. D-188 through D-193 record the review corrections, and the final
     integrated normal gate passes all 30 steps in 38 wall-seconds with 193 defects.
+  - >-
+    After PR 19 merged, the user shortened the remaining campaign checkpoint from eight
+    hours to four. Work resumed from merged main on a fresh branch; no completed result
+    or historical timing was changed by the shorter horizon.
+  - >-
+    Semantic review of the unexecuted exp-035 candidate found D-194 and D-195 before
+    preregistration: the pair (0,4) differential changes along the slide, and the tied
+    pair (3,4) support rows are conjunctive within each owner-axis branch. Both repairs
+    are tracked under think-1582; the experiment remains unrun.
   stop_reason: null
   next_action: >-
     Continue BC-010 with one bounded complete wall-release and SAT-branch cone slice.

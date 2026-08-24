@@ -1467,12 +1467,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 193 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 195 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 62 | asserted something false about the mathematics |
+| soundness | 64 | asserted something false about the mathematics |
 | validity | 57 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 54 | recorded something its own evidence contradicts |
 | robustness | 15 | did not finish, or finished only by luck |
@@ -1480,11 +1480,11 @@ and checked in the gate.
 
 Two observations the log exists to make.
 
-**Fifty-one of the sixty-two soundness defects pointed in the *flattering* direction**,
-where the error looks like a success.
+**Fifty-three of the sixty-four soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught eight defects in 193, and no soundness defect ever.**
+**The automated gate has caught eight defects in 195, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1621,6 +1621,12 @@ D-171 records why the former argmax-only repair left one n=4 event unsettled: ro
 and 21 already violated the screen together.
 The complete offending-set retry closes the exact regression, and exp-024 completes the
 n=4 v3 block at 4/4 admissible without weakening the screen.
+D-194 and D-195 stop the unexecuted exp-035 candidate before preregistration.
+Its pair `(0,4)` differential must be regenerated at each slide stratum, and pair
+`(3,4)` has two owner-axis branches whose tied support rows are conjunctive within each
+branch.
+Neither candidate claim is evidence until both outstanding instrument defects are
+fixed.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).

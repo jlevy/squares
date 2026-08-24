@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 193
+count: 195
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4954,3 +4954,57 @@ defects:
   regression: none
   bead: think-tbmj
   recorded_in: defects.yaml
+- id: D-194
+  title: The n=5 tangent checker reused one contact differential across three slide strata
+  date: '2026-08-24'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one committed but unexecuted candidate checker; caught before preregistration
+  severity: high
+  status: outstanding
+  what: >-
+    The candidate exp-035 checker hand-wrote the active pair (0,4) differential once
+    and reused it at endpoint A, the segment interior, and endpoint B. Rotating the
+    owner axis differentiates the centre projection, whose coefficient changes with
+    the slide parameter, so the advertised interior and endpoint-B witnesses were not
+    checked against the true first-order row.
+  consequence: >-
+    Running the candidate as written would have recorded non-sheet tangent directions
+    that do not satisfy the actual active contact system, falsely advancing the
+    stationary-connectivity program.
+  fix: >-
+    Derive every active contact row from the exact centre and orientation data at each
+    stratum before preregistering or executing exp-035; the correction is in progress.
+  regression: >-
+    Planned: an exact mutation reuses endpoint A's pair (0,4) coefficient at the
+    interior and must fail against the regenerated stratum-specific row and witness.
+  bead: think-5hh9
+  recorded_in: tools/check_n5_tangent_cones.py
+- id: D-195
+  title: The n=5 tangent checker treated tied support inequalities as alternatives
+  date: '2026-08-24'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one committed but unexecuted candidate checker; caught before preregistration
+  severity: high
+  status: outstanding
+  what: >-
+    For pair (3,4), the candidate checker modeled each tied support-feature derivative
+    as its own SAT branch. For one chosen owner axis the support function is a maximum,
+    so both tied feature inequalities must hold together; only the owner-axis choice is
+    disjunctive.
+  consequence: >-
+    Treating a conjunction as a union enlarges the linearized feasible set and can
+    accept a direction that violates one of the two one-sided support derivatives.
+  fix: >-
+    Retain two owner-axis branches, each containing both tied support rows, derive them
+    exactly, and reject a record that drops either row before running exp-035.
+  regression: >-
+    Planned: remove one tied support row from one owner-axis branch and require semantic
+    validation and retained replay to reject the incomplete cone.
+  bead: think-s41l
+  recorded_in: tools/check_n5_tangent_cones.py
