@@ -1,0 +1,20 @@
+{
+  "branch_count": 128,
+  "determination_outcome": "criterion_met",
+  "elapsed_seconds": 10.186803,
+  "exact_nonzero_directions": 0,
+  "exact_zero_certificates": 128,
+  "raw_branch_count": 512,
+  "record_replayed": true,
+  "schema_version": 1,
+  "selftests": {
+    "duplicate_branch_records_are_rejected": true,
+    "flexible_cone_has_no_positive_stress": true,
+    "rigid_cone_has_positive_stress": true,
+    "trump_wall_omission_has_exact_nonzero_direction": true,
+    "u_interval_contains_exactly_one_root": true,
+    "u_polynomial_irreducible_over_Q": true,
+    "u_polynomial_squarefree": true
+  },
+  "unresolved_cones": 0
+}

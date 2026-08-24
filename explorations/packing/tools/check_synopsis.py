@@ -11,16 +11,17 @@ It cannot be generated: most of it is judgement, and the judgement is the point.
 So it is *reconciled* instead, the way `campaign/ideas.md` is -- the numbers and
 statuses it asserts must match the artifacts, and every artifact must appear.
 
-Six checks:
+Seven checks:
 
   1. every round's verdict in the roll-up matches its artifact
   2. every hypothesis's status matches the ledger's derived status
   3. the round count and effort totals match the ledger
   4. the defect count and per-class counts match `defects.yaml`
   5. no round, hypothesis or open defect is silently missing from the synopsis
-  6. every relative link and heading anchor resolves
+  6. the stated hypothesis-artifact count matches the registry directory
+  7. every relative link and heading anchor resolves
 
-Check 6 closes a real gap: `campaign/ledger.py` walks links under `campaign/`
+Check 7 closes a real gap: `campaign/ledger.py` walks links under `campaign/`
 only, so the root document's forty-odd references were unchecked.
 
 Usage:  python3 tools/check_synopsis.py
@@ -30,12 +31,14 @@ from __future__ import annotations
 
 import re
 import sys
+from collections import Counter
 from pathlib import Path
 
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 SYNOPSIS = ROOT / "SYNOPSIS.md"
+HYPOTHESES = ROOT / "campaign/hypotheses"
 
 
 def front(path: Path) -> dict:
@@ -77,24 +80,51 @@ def check_links(text: str, doc: Path = SYNOPSIS) -> list[str]:
 
 
 def check_rounds(text: str) -> list[str]:
-    """Every round appears, and the verdict shown is the verdict recorded."""
+    """Every round appears exactly once in each table, with its recorded verdict."""
     problems = []
+    rollup_match = re.search(
+        r"^### Roll-up\s*$\n(?P<body>.*?)(?=^### Cost and provenance\s*$)",
+        text,
+        re.M | re.S,
+    )
+    cost_match = re.search(
+        r"^### Cost and provenance\s*$\n(?P<body>.*?)(?=^###\s)",
+        text,
+        re.M | re.S,
+    )
+    if rollup_match is None:
+        return ["SYNOPSIS.md: has no Roll-up section"]
+    if cost_match is None:
+        return ["SYNOPSIS.md: has no Cost and provenance section"]
+
     shown: dict[str, str] = {}
-    for rid, rest in re.findall(r"\| \[(exp-\d{3})\]\([^)]+\) \|(.+)\|\n", text):
+    rollup_ids: list[str] = []
+    for rid, rest in re.findall(
+        r"\| \[(exp-\d{3})\]\([^)]+\) \|(.+)\|\n", rollup_match.group("body")
+    ):
         cells = [c.strip().replace("*", "") for c in rest.split("|")]
-        if len(cells) >= 6:  # the roll-up table, not the cost table
+        if len(cells) >= 6:
+            rollup_ids.append(rid)
             shown.setdefault(rid, cells[-1])
+    rollup_counts = Counter(rollup_ids)
+    cost_counts = Counter(re.findall(r"^\| (exp-\d{3}) \|", cost_match.group("body"), re.M))
 
     for path in sorted(ROOT.glob("campaign/series/*/experiments/exp-*.md")):
         experiment = front(path)["experiment"]
         rid = experiment["id"]
         recorded = experiment["verdict"]["decision"]
-        if rid not in shown:
-            problems.append(f"SYNOPSIS.md: {rid} is not in the roll-up table")
+        rollup_count = rollup_counts[rid]
+        cost_count = cost_counts[rid]
+        if rollup_count != 1:
+            problems.append(
+                f"SYNOPSIS.md: {rid} appears {rollup_count} times in the roll-up table"
+            )
         elif shown[rid] != recorded:
             problems.append(
                 f"SYNOPSIS.md: {rid} shown as '{shown[rid]}', artifact says '{recorded}'"
             )
+        if cost_count != 1:
+            problems.append(f"SYNOPSIS.md: {rid} appears {cost_count} times in the cost table")
     return problems
 
 
@@ -192,6 +222,23 @@ def spell(n: int) -> str:
     return _TENS[tens] if ones == 0 else f"{_TENS[tens]}-{_ONES[ones]}"
 
 
+def check_hypothesis_count(text: str) -> list[str]:
+    """The registry introduction states the number of hypothesis artifacts."""
+    total = len(list(HYPOTHESES.glob("H-*.md")))
+    section = re.search(
+        r"^## The Hypothesis Registry\s*$\n(?P<body>.*?)(?=^##\s|\Z)", text, re.M | re.S
+    )
+    if section is None:
+        return ["SYNOPSIS.md: has no Hypothesis Registry section"]
+    expected = (
+        rf"\b(?:{total}|{re.escape(spell(total))}) "
+        r"claims or open questions are codified as artifacts\b"
+    )
+    if not re.search(expected, section.group("body"), re.I):
+        return [f"SYNOPSIS.md: does not state the hypothesis artifact count ({total})"]
+    return []
+
+
 def check_defects(text: str) -> list[str]:
     """The defect count and per-class counts match the dataset."""
     data = yaml.safe_load((ROOT / "defects.yaml").read_text())
@@ -210,6 +257,30 @@ def check_defects(text: str) -> list[str]:
             problems.append(
                 f"SYNOPSIS.md: class table says wrong count for {name} (is {count})"
             )
+
+    soundness = [defect for defect in defects if defect["class"] == "soundness"]
+    flattering = sum(defect.get("direction") == "flattering" for defect in soundness)
+    soundness_pattern = (
+        rf"\b(?:{flattering}|{re.escape(spell(flattering))})\s+of\s+the\s+"
+        rf"(?:{len(soundness)}|{re.escape(spell(len(soundness)))})\s+soundness\s+"
+        r"defects\s+pointed\s+in\s+the\s+\*flattering\*\s+direction"
+    )
+    if not re.search(soundness_pattern, text, re.I):
+        problems.append(
+            "SYNOPSIS.md: soundness-direction aggregate is not "
+            f"{flattering} of {len(soundness)}"
+        )
+
+    caught_by_gate = sum(defect["detected_by"] == "gate" for defect in defects)
+    gate_pattern = (
+        rf"the\s+automated\s+gate\s+has\s+caught\s+"
+        rf"(?:{caught_by_gate}|{re.escape(spell(caught_by_gate))})\s+defects\s+in\s+"
+        rf"(?:{total}|{re.escape(spell(total))})"
+    )
+    if not re.search(gate_pattern, text, re.I):
+        problems.append(
+            f"SYNOPSIS.md: gate-detector aggregate is not {caught_by_gate} of {total}"
+        )
 
     # The unprotected-fix count. This is the log's most actionable claim -- the list
     # that predicts what comes back -- and it is the one that drifted: the synopsis said
@@ -239,6 +310,7 @@ def main() -> int:
         check_links(text)
         + check_rounds(text)
         + check_hypotheses(text)
+        + check_hypothesis_count(text)
         + check_totals(text)
         + check_defects(text)
     )

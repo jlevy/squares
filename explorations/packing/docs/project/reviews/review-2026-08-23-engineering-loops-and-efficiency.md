@@ -368,12 +368,25 @@ engineering work:
   wall time only as a recorded outer safety deadline.
 - D-129 / `think-cns0`: bound each negative-control checker and reap its process group;
   snapshots protect source integrity but do not make a stuck child finish.
+- D-132 / `think-9qz0`: return a typed fixed-cell outcome that distinguishes a settled
+  cell from an infeasible or worse transition and the iteration cap, then prevent outer
+  convergence when the inner cell did not settle.
 - `think-y91x`: build the deterministic batch-census primitive after the identity and
   stability contract is settled.
 - `think-lrsk`: add cross-host CI after the golden comparison has portable semantics.
 
 These are explicit deferrals, not claims that the stacked branch solved unattended
 research readiness.
+
+The post-merge review sweep assigned R9 to the previously unnumbered fixed-point finding
+and found that it had a bead but no distinct defect record or disposition row.
+D-132 closes that documentation gap.
+Its equality subclaim is narrower than the original wording: fixed `theta`
+deterministically regenerates the numeric axis fields for the same discrete cell, so the
+demonstrated defect is the missing termination contract and unexplained cap, not an
+observed float-comparison mismatch.
+The follow-up strict/deep gate passed all 25 steps and 30 negative controls with 132
+defects reconciled in 55 wall seconds.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

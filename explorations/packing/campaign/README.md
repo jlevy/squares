@@ -42,7 +42,7 @@ The **instance axis is `n`**, and the standing cells have different jobs:
 | `n` | role | standing best | why this cell |
 | --- | --- | --- | --- |
 | 10 | **positive control** (machinery only) | `3 + 1/√2 = 3.70710678…`, proved | Known answer, and *not* the grid. But its mechanism is a 45° tilt, so passing it proves the machinery and says nothing about finding an oblique record — see the caveat below. |
-| 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case and a degree-8 side construction; a strong rigidity candidate, not yet rank-certified here. |
+| 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case and a degree-8 side construction; exp-013 proves qualitative local isolation, while a radius and global optimality remain open. |
 | 12 | **open-case calibration** | `4`, the trivial grid | The 4×4 grid is the standing best, not a proved optimum. A valid lower side would be a discovery and must enter exact promotion. |
 | 16 | **proved not-below control** | `4`, proved | A reported side below `4` is known to be invalid. This is the valid replacement for the old `n=12` guard. |
 | 17 | **mechanism-matched calibration** | `4.67553009360455`, Bidwell 1998, still open | The nearest case whose record uses genuinely *oblique* structure — the primary SVG records `0°`, `+39.80496°`, and `−36.62379°`, so two unequal non-trivial orientations against a grid frame. The only cell here that speaks to record-*finding* rather than machinery. |
@@ -76,6 +76,119 @@ So a claim’s criterion, tier, kill condition and status are read from the arti
 nowhere else; a bead may say “build the instrument for H-002” but never “H-002 is
 confirmed”. All fifteen entries from the standing review are now codified.
 Later ids carry campaign-native claims and explicit open questions.
+
+## The Bounded Research Cycle
+
+The campaign keeps a broad portfolio and runs one narrow slice at a time.
+This distinction protects both creativity and completion: ideas are cheap to capture,
+but only a preregistered slice may consume the current clock.
+Every slice names one of the packing program’s
+[four operating focuses](../README.md#operating-principles), so correctness, process,
+insight, and efficiency can veto or inform one another without becoming one unbounded
+task.
+
+The protocol is agent-neutral.
+Its authoritative state is the repository: the hypothesis and idea board say what may be
+tried, `tbd` says what is ready, an [agent-session artifact](agent-sessions/README.md)
+says what this session is trying and when it stops, and experiments, defects, commits,
+and bead notes preserve what happened.
+Conversation history, a native goal, and a watchdog are useful controllers, but none is
+the only copy of a decision or result.
+
+### Default Clocks
+
+An agent-session artifact may tighten these defaults before work starts.
+It may not relax them after seeing a result.
+A long numerical or proof computation keeps its separately preregistered round timebox,
+while the agent still checkpoints its supervision work on this cadence.
+
+| Clock | Default | Required outcome at the boundary |
+| --- | ---: | --- |
+| Orientation | 10 minutes | Name one focus, primary bead, question, output, validating command, kill condition, and fallback; otherwise record the ambiguity and switch |
+| Evidence checkpoint | 20 minutes | Produce a passing check, minimized failure, retained measurement, source-bound derivation, or explicit blocked result; prose about continued investigation is not evidence |
+| Active slice | 30 minutes | Integrate a coherent checkpoint, or stop and preserve the partial work with its exact limitation; continuation requires a newly stated slice and clock |
+| Finalization reserve | 15 minutes | Stop new work before the session deadline; reconcile artifacts, defects, beads, generated views, commits, pushes, and the next action |
+| Research command | Declared per hypothesis | Terminate or return at its own wall-clock bound and retain its stopping reason and resumable state |
+
+A dirty worktree may span one active slice only.
+At the boundary, commit a coherent result; if the work is not coherent enough to commit,
+stash it with a descriptive name and put the exact reproducer, limitation, and next
+decision in the bead.
+Raw results that already answer a preregistered question are committed even when the
+answer is negative or invalid.
+
+### One Slice
+
+1. **Select.** Re-screen the portfolio and choose the highest-information ready action,
+   not merely the most recent idea.
+2. **Declare.** Record the focus, bead, question, promised output, narrow validating
+   command, wall budget, kill condition, and fallback before acting.
+3. **Execute.** Take the smallest action that can answer the question.
+   Delegate independent mechanical work with a disjoint scope and the same clock.
+4. **Checkpoint.** At twenty minutes, preserve concrete evidence.
+   A result may be positive, negative, invalid, or blocked; each advances the record if
+   its evidence is replayable.
+5. **Stop or renew.** At thirty minutes, integrate, stash, or abandon the slice.
+   Never extend it merely because the answer feels close.
+   A successor slice must state what new fact makes another bounded attempt worthwhile.
+6. **Record once.** Route an idea to the idea board or a new `H-NNN`, a measurement to
+   raw data and `exp-NNN`, an implementation task to its bead, and an actual error to
+   `defects.yaml` with its detector and regression.
+7. **Commit and re-screen.** Regenerate owned views, run the narrowest sufficient gate,
+   commit and push the checkpoint, then choose again from the now-current queue.
+
+New tangents do not disappear and do not hijack the clock.
+Record one as a bead, defect, exploration, hypothesis, or open question according to
+what it is; pursue it immediately only when it falsifies the active slice’s premise or
+outranks the queue under an explicit re-screen.
+
+### Supervisors and Watchdogs
+
+A supervisor is optional; the bounded protocol is not.
+When available, use a native long-running goal to maintain the session objective and a
+periodic watchdog to inspect repository evidence.
+The watchdog checks elapsed wall time, the latest experiment or commit, the active bead,
+and the agent-session next action.
+After twenty minutes without evidence it requests a checkpoint; after thirty minutes it
+requires the current slice to stop or be restated.
+It never changes a hypothesis, criterion, threshold, or mathematical verdict.
+
+An agent without native goal or watchdog support follows the same rules with a monotonic
+clock and bounded command execution.
+A human, cron job, CI task, or small shell/Python supervisor may poll the same durable
+state. This makes the safety property portable: replacing Codex with Claude, another
+coding agent, or a human changes the driver, not the research contract.
+
+## Campaign Agendas
+
+A hypothesis registry is deliberately broad, while one agent session is deliberately
+narrow.
+A campaign agenda is the small coordination layer between them: an ordered set of
+bounded experiment cells that can be reprioritized at a checkpoint or divided among
+agents without changing a scientific claim.
+
+The active [basin-map confidence ladder](agendas/agenda-001-basin-confidence-ladder.md)
+separates three purposes:
+
+- `tool_validation` tests whether this repository emits, retains, replays, and checks
+  the evidence it says it does;
+- `measurement_validation` tests whether the counted object or estimator agrees with
+  mathematical ground truth; and
+- `research` asks about the packing landscape itself and remains blocked until its
+  validation dependencies pass.
+
+The agenda frontmatter is a lightweight soft schema, not an executable scheduler.
+It stores stable cell IDs, priorities, budgets, prerequisites, beads, and promised
+evidence; the body carries the rationale.
+Hypotheses still own criteria, experiment artifacts still own measurements, `tbd` still
+owns work dependencies, and the active session still owns the clock.
+`campaign/runner.py` does not consume an agenda.
+
+Update an agenda only at a checkpoint.
+A completed item means its bounded question has a retained answer, not that a basin map
+or hypothesis is complete.
+The generated ledger shows agenda states alongside experiments so the next agent does
+not need conversation history to find the next ready cell.
 
 ## The three tiers
 
@@ -113,7 +226,7 @@ Recorded on every round; the role says what each may conclude.
 | Metric | Role | Source |
 | --- | --- | --- |
 | `best_side` | **outcome** | smallest valid side found, `record` shape against the frontier’s standing best |
-| `outcome` | **outcome** | `determination`: `beat_record`, `reached_basin`, `near_miss`, `no_progress`, `invalid` |
+| `outcome` | **outcome** | `determination`: generic `criterion_met` / `criterion_missed`, or the search-specific `beat_record`, `reached_basin`, `near_miss`, `no_progress`, `invalid` |
 | `pair_tests` | cost | **the budget currency**; tiers S/M/L = `1e9`/`1e11`/`1e13`. Machine-independent, unlike wall clock |
 | `moves`, `seconds` | cost | engine summary; reported alongside as a courtesy |
 | `overlap` | **guard** | total penetration depth of the reported packing; a non-zero value at screen tier invalidates the run |
@@ -298,9 +411,11 @@ regenerated views together.
 
 This is still the right path for any round whose analysis is the work — a new refiner, a
 new probe, anything the recipe vocabulary cannot express.
-Ten of the eleven rounds so far went this way.
-All eleven total **275 agent-minutes and 23.0 wall-minutes**: this campaign’s cost has
-never been the compute, and the runner does not change that.
+The first eleven search and quench rounds used this watched path; later corpus and exact
+proof rounds use dedicated deterministic checkers.
+The generated [ledger](ledger.md#effort) owns the cumulative effort total: this
+campaign’s cost has so far been agent analysis rather than machine compute, and the
+runner does not change that.
 It removes the *waiting* from the rounds that are pure engine time, which is a smaller
 claim than it sounds and still the difference between one round a night and a queue
 draining while nobody is up.

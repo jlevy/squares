@@ -1,6 +1,6 @@
 # Synopsis: The `s(n)` Program
 
-**Date:** 2026-08-23 (last updated 2026-08-23, after `series-000` rounds 5–10)
+**Date:** 2026-08-24 (last updated after terminal `series-000` round 15)
 
 **Status:** Living document, revised whenever a result lands.
 
@@ -38,8 +38,15 @@ Those principles govern four capabilities built so far:
    written before the run, a metric vector, an accept rule, a declared timebox, and a
    ledger generated from the artifacts rather than typed.
 4. **Account for what goes wrong.** A defect log with the same discipline as the
-   experiment record, because 30 of the 40 soundness failures found so far pointed in
-   the *flattering* direction and none was caught by the automated gate.
+   experiment record, because most soundness failures found so far pointed in the
+   *flattering* direction and none was caught by the automated gate.
+
+Capability 2 is narrower than it sounds and the difference matters: this directory can
+**check** a packing whose exact algebraic description it is given, and cannot yet
+**produce** that description from a packing it found.
+[What Is Built](#what-is-built) states, component by component, what runs, what runs but
+cannot support the claim it appears to, and what is documented and unbuilt.
+Read it before citing any capability here.
 
 The strategy that organises lanes 3 and 4 is stated in
 [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md):
@@ -62,10 +69,11 @@ Nothing here duplicates what another owns.
 
 | Document | Owns |
 | --- | --- |
+| [`TUTORIAL.md`](TUTORIAL.md) | The conceptual on-ramp for a newcomer: the objects, why the approach is shaped this way, and what is established versus open. Owns no status—it defers here for all of it |
 | **This synopsis** | The state of the program: results, their status, the roll-up of rounds |
-| [Current handoff](docs/project/handoff-2026-08-23-quench-spine.md) | Where the work stands *today*: the critical path, the beads it maps to, and what to pick up next. Dated and disposable; this synopsis is the durable account |
+| [Historical quench-spine handoff](docs/project/handoff-2026-08-23-quench-spine.md) | A superseded 2026-08-23 checkpoint retained as provenance. Do not use it for current priority; use the basin confidence ladder and launch agenda |
 | [`README.md`](README.md) | The four-principle operating charter, what is in the directory, how to run it, and the index of the six research reports |
-| [`conventions.md`](conventions.md) | Every rule the directory runs on, and which are machine-checked |
+| [`conventions.md`](conventions.md) | The definitive registry of every convention, id class, and naming rule, and which are machine-checked |
 | [`defects.md`](defects.md) | Every bug and record defect, what caught it, and what now stops it recurring |
 | [Soundness postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | Why D-014 was possible, and rules R1–R4 that apply to code not yet written |
 | [`frontier/`](frontier/README.md) | What is known about `s(n)` for every `n ≤ 100`, one artifact per case |
@@ -86,6 +94,174 @@ The code that produces the numbers: [`sqpack/verify.py`](sqpack/verify.py) decid
 validity exactly, [`sqpack/quench.py`](sqpack/quench.py) is the LP-in-cell quench,
 [`lp_cell.py`](lp_cell.py) is a second, independent implementation of the quench’s
 linear program, and [`sqsearch/`](sqsearch/) is the screening annealer.
+
+## What Is Built
+
+A documented method here is not necessarily an available one, and implementation status
+has three values rather than two.
+
+| Status | Means |
+| --- | --- |
+| **built** | Exists, runs, and is exercised by `./test.sh` |
+| **built, not admissible** | Runs and produces output, but that output cannot yet support the claim it looks like it supports. The blocking defect is named |
+| **unbuilt** | Documented, tracked as a bead, and not implemented. No result may assume it |
+
+Most of the risk in this project lives in the middle row, because a component that runs
+and prints a plausible number is the shape of every flattering soundness defect logged
+here.
+
+### The exact layer—built
+
+| Component | What it does |
+| --- | --- |
+| [`sqpack/field.py`](sqpack/field.py) | Exact arithmetic in `ℚ(α)`: exact zero test, exact sign by rational interval bisection |
+| [`sqpack/verify.py`](sqpack/verify.py) | Separating-axis validity, generic over the scalar type—exact or `f64` from one predicate |
+| [`sqpack/packings/trump11.py`](sqpack/packings/trump11.py) | The `n = 11` witness, exactly, in `ℚ(u)` |
+| [`derive_field.py`](derive_field.py) | Re-derives the degree-8 field from the published polynomial, factors over `ℚ`, and selects the root by isolating interval |
+| [`negative_control.py`](negative_control.py) | Demonstrates both float failure modes against the same packing |
+
+**One caveat, and it is critical.** [D-053](defects.md) is open: `NumberField` documents
+an irreducible minimal polynomial and an interval containing exactly one real root, but
+checks only an endpoint sign change.
+The built-in `n = 11` witness is independently checked, so **T-1** is unaffected.
+The *generic* path—bring your own packing and your own field—is not yet sound, and no
+third-party field metadata should be trusted through it until a Sturm-sequence check
+lands.
+
+### The refinement layer—built, with a floor
+
+[`sqpack/quench.py`](sqpack/quench.py) is the LP-in-cell quench with class bracketing,
+and [`lp_cell.py`](lp_cell.py) is an independent second formulation of the same feasible
+set. Both are built and agree to `4.4e-16` on Trump’s cell.
+
+Three named limits travel with every number they produce:
+
+- [D-021](defects.md)—the float LP solver has a noise floor of about `1e-11` in the
+  side. Nothing at the `polished` tier may claim a difference finer than that.
+  The general fix is an **exact LP over certified rational or algebraic coefficients,
+  which is unbuilt**; it is purely rational only for rational-coefficient cells.
+- [D-052](defects.md)—coordinatewise stopping is not a certified local optimum.
+  A quench that stops has stopped; it has not proved stationarity.
+- [D-126](defects.md)—the work budget is wall-clock time, so contention changes how many
+  LP solves a run performs.
+  Price basin experiments by retained work units, not by the clock.
+
+### The proposer layer—one instrument, and the interface is unbuilt
+
+[`sqsearch/`](sqsearch/) is the `f64` screening annealer, and it is the only proposer
+the campaign has run.
+Uniform multistart draws exist inside the census and the checkers, with the census
+declaring its regime; the proposer *interface*—the contract that would make two
+proposers comparable—is unbuilt.
+
+**Unbuilt, and each is a registered hypothesis with nothing behind it yet:** the
+proposer interface itself, the pair-test **meter** (so no two proposers have ever been
+compared at equal budget), δ-continuation, angle-class search *as a search*,
+neighbour-transfer seeding, MAP-Elites retention, and billiard/inflation.
+
+This is the campaign’s live bottleneck.
+The refiner takes the tested proved-control starts to residuals of `1e-15` and leaves
+the tested `n = 11` starts at `6e-02`, so proposal is where the gap is—and proposal is
+the layer with the fewest built parts.
+
+### The map layer—built, not admissible
+
+| Component | Runs | Why its output is not yet the thing it looks like |
+| --- | --- | --- |
+| [`sqpack/canonical.py`](sqpack/canonical.py) | yes | Tolerance grouping and exact hash pairs do not form a stable equivalence relation ([D-048](defects.md)); canonicalization is factorial on sparse symmetric endpoints ([D-049](defects.md)) |
+| [`sqpack/atlas.py`](sqpack/atlas.py) | yes | Promotes non-converged stopping points and cannot reconstruct discovery order ([D-050](defects.md)); frequencies merge without regime or identity provenance ([D-051](defects.md)) |
+| [`tools/basin_census.py`](tools/basin_census.py) | yes | An admissible `BasinEvent/v3` event certifies the producer contract and a terminal outcome, not a terminal component—identity stays blocked ([D-034](defects.md), [D-048](defects.md)). The twelve historical v2 poses remain inadmissible under the since-fixed [D-165](defects.md) |
+
+**`distinct_basins` is a count of endpoint keys, not of connected terminal components.**
+The exact `n = 3` sliding family shows one connected optimal set producing many keys, so
+the store can split a single component.
+Until [D-034](defects.md) is resolved the discovery curve cannot plateau, the census
+cannot saturate, and the rarity premise is **untestable rather than untested**.
+
+Cheap endpoint summaries such as angle signatures and contact counts exist.
+Exp-032 now supplies an exact known-answer boundary: complete `n = 3` and `n = 4`
+quotient models may assign components, while unsupported numerical observations remain
+unresolved. A scalable retained-pose classifier is still unbuilt, so steering strategies
+that depend on sampled component identity or descriptor distances remain unbuilt too.
+
+### The promotion pipeline—unbuilt, and it is the largest structural gap
+
+There is **no general executable path from a numerical candidate to a reconstructible
+exact result.** The repository can verify a packing whose exact algebraic description it
+is already given; it cannot, as a tool, produce that description from a packing it
+found. Exp-033 crossed the boundary once, narrowly: a dedicated checker bound two
+retained `n = 5` float poses to exact endpoints on one certified fixed-angle optimal
+face, with an exact dual proving that cell’s side minimal.
+One hand-built instance at fixed angles is a proof of concept, not the pipeline.
+
+Concretely, none of the following exists: corner–edge incidence classification from a
+polished pose (the quench records which *pairs* touch, not which corner meets which
+edge), contact-equation assembly, rank-closure of an underdetermined system,
+high-precision root-finding, algebraic recognition, interval uniqueness, or certificate
+emission. The tracked acceptance criterion is that, **starting only from archived
+floating poses**, one command recovers or explicitly rejects `n = 5, 10, 11, 17` and
+several rational-grid controls, and records recognition failures rather than guessing.
+
+Two consequences bind every other lane:
+
+- **`exact` almost always means “checked something already known exactly”.** Trump’s
+  packing and the `n = 3` and `n = 4` optimal families were authored from published data
+  or derived analytically.
+  The one exception is exp-033’s pair of exact `n = 5` endpoints, recovered from
+  retained search poses at their shared nonoptimal side—through a dedicated
+  single-instance checker, not a general tool.
+- **No admissible endpoint exists at an open `n`, so the pipeline would have nothing new
+  to promote.** The early quench archives (exp-006 through exp-009) retain angles and a
+  contact *count* but not centres; the twelve historical v2 poses remain inadmissible
+  under the since-fixed [D-165](defects.md).
+  The latest complete `BasinEvent/v3` control blocks contain four admissible events at
+  `n = 3` (exp-021 and exp-022) and four at `n = 4` (exp-024); exp-023 preserves the
+  earlier three-of-four n=4 block that exposed D-171. They are all at proved values, so
+  they are known-answer material for the pipeline, not candidates.
+  Exp-025 adds four admissible nonoptimal `n = 5` events as a tool-path stress cell; it
+  does not promote their descriptors to components or record candidates.
+
+The record corpus has the same shape of gap: [`frontier/`](frontier/README.md) records
+each case’s **side value** algebra—minimal polynomials where they are published—and **no
+geometry**. An importer for the catalogue’s layouts is unbuilt.
+
+### The proof lane—built and producing theorems
+
+This is the lane that moved furthest in the most recent rounds: it now carries exact
+results, not only instruments.
+
+| Tool | What it establishes |
+| --- | --- |
+| [`tools/check_stromquist_theorem2.py`](tools/check_stromquist_theorem2.py) | The printed `n = 11` lower-bound proof is false as printed (exp-016) |
+| [`tools/check_stromquist_repair.py`](tools/check_stromquist_repair.py) | A source-distinct repair certifies `s(11) ≥ 2 + 4/√5` exactly (**T-4**, exp-017) |
+| [`tools/check_trump_tangent.py`](tools/check_trump_tangent.py) | Trump’s pose is locally isolated in the anchored chart (exp-013) |
+| [`tools/check_small_n_moduli.py`](tools/check_small_n_moduli.py) | Exact optimal configuration spaces at `n = 3, 4` (exp-014, exp-015) |
+| [`tools/check_kingbird_svg.py`](tools/check_kingbird_svg.py) | High-precision (160-digit) numerical reconstruction of the `n = 29` record source, refuting H-024’s three-class claim. Not an exact optimality certificate—the retained SVG is numerical, and exp-012 says so (exp-012) |
+
+**Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
+LP duals as unavoidable-set generators, and any Lean formalization.
+
+### Compiled acceleration—unbuilt, deliberately
+
+`sqpack-core`, the filtered kernel, the FLINT-backed algebraic scalar, and the language
+bindings are all unbuilt.
+That is a scheduling decision made by measurement rather than an omission: the current
+pipeline is quench-dominated, and moving only the geometry kernel to another language
+would not remove the measured LP-solver and wrapper cost.
+Direct solver bindings or a compiled batch path may still matter; the phase begins by
+re-measuring and builds only what the profile names.
+
+### Reading the gate
+
+`./test.sh` runs thirty steps.
+A green gate means every *built* component behaves as its checks describe; it says
+nothing about the unbuilt ones, and it does not upgrade an inadmissible output.
+
+**The gate is not environment-independent.** Endpoint identity depends on floating-point
+behaviour in a degenerate linear program, so the same seed can reach a different
+endpoint under a different toolchain, and a check written around one observed endpoint
+can fail elsewhere. Separating portable mathematical predicates from stochastic
+characterization is open work ([D-059](defects.md)).
 
 ## Terminology
 
@@ -119,23 +295,22 @@ and a breach of one rejects the round regardless of outcome.
 > **Write “cell” for the configuration-space object and “instance cell”—never bare
 > “cell”—for a sweep position.** In running prose about a round, prefer naming the `n`.
 
-**Basin.** The preimage of one quench endpoint under the quench map: the set of
-configurations the refiner carries to the same local optimum.
-A basin is therefore defined *relative to a specific quench*, which is why basin
-identity may not inherit the search’s tuning parameters—a quench that merged nearby
-angles would make the word depend on the merge tolerance ([D-020](defects.md)). The
-current quench gives each terminal pose a reproducible numerical candidate, but that
-does not make the terminal set discrete or decide whether two candidates belong to one
-connected component.
+**Basin (point-basin where the distinction matters).** The preimage of one pose returned
+by a deterministic quench: the set of configurations the refiner carries to that
+numerical endpoint. A point-basin is therefore defined *relative to a specific quench*,
+which is why basin identity may not inherit the search’s tuning parameters—a quench that
+merged nearby angles would make the word depend on the merge tolerance
+([D-020](defects.md)). The current quench gives each terminal pose a reproducible
+numerical candidate, but that does not make the terminal set discrete or decide whether
+two candidates belong to one connected component.
 D-021 bounds error in the scalar side only; it is not a pose- or component-resolution
 theorem ([D-039](defects.md)).
 
-**The definition has a precondition, and it is not always met.** “The preimage of one
-quench *endpoint*” presupposes the endpoint is a **point**. Where the local optimum is a
-*flat basin*—see below—it is not, the quench lands wherever in the flat region it
-happened to enter, and the word “basin” does not denote anything the census can count.
-This precondition went unstated for the campaign’s first three weeks and cost
-[D-034](defects.md); it is stated here now because every downstream count inherits it.
+**The point-basin exists, but it can be the wrong counted object.** A deterministic
+quench returns a pose even when that pose lies on a connected terminal family.
+Different neutral coordinates then produce different point-preimages and keys inside one
+terminal component. D-034 records why a component census must quotient that family using
+independently validated connectivity rather than declare the quench map undefined.
 
 **The ladder.** The proved instances used as controls—`n = 5` and `n = 10`, both `45°`
 mechanisms with closed-form optima.
@@ -181,8 +356,9 @@ for “sharp minimum”—the derivative does not become large, it fails to exis
 under the declared quotient and container condition.
 Contact counts and visual pinning are candidates for this property, not proofs; they
 require an active-constraint rank or stronger local certificate.
-Trump’s packing appears highly constrained, but this repository has not yet supplied
-that certificate ([D-041](defects.md)).
+Exp-013 supplies that stronger certificate for Trump’s packing: every complete
+branchwise fixed-side linearized cone is zero, and a finite-branch argument proves local
+isolation. It does not quantify the neighborhood or prove global optimality.
 
 **Terminal family** (called a *flat basin* in older campaign prose).
 A local-optimal terminal set that is not an isolated point.
@@ -195,9 +371,13 @@ cells may change along a motion.
 At `n = 3`, the exact family with centres `(1/2,1/2)`, `(3/2,1/2)`, and `(t,3/2)` for
 `t ∈ [1/2,3/2]` proves that terminal continua occur and that the current endpoint key
 splits one connected optimum component.
-At `n = 5`, two rows share side and contact summaries but differ geometrically.
-That is an unresolved identity signal, not a proof of a five-dimensional connected
-family ([D-034](defects.md), [D-041](defects.md)).
+At `n = 5`, exp-033 proves that the two equal-side rows with different geometric keys
+share one exact connected fixed-angle LP optimal face.
+Its fixed-side active nullity is one in the interior and zero at the two boundary
+strata. Exp-034 proves that face lies in a two-parameter angle-and-slide sheet of
+orientation-indexed LP optima.
+This is not a proof of a five-dimensional family or of the complete nonsmooth stationary
+component ([D-034](defects.md), [D-041](defects.md)).
 
 **This distinction should have existed from the first day.** “Rigidity” was treated as
 an informal visual property of the target while the census silently assumed every
@@ -261,23 +441,50 @@ project already has clearer words for both.
   [A cell is not a basin](#a-cell-is-not-a-basin-and-this-trap-has-been-walked-into)—the
   conflation cost a correct finding ([D-029](defects.md)).
 
-### The deliverables, none of them built
+### The deliverables, and what each one currently is
+
+These four words name the cartography strategy’s intended outputs.
+Two now have code behind them and two do not, and neither pair has yet produced the
+object the word promises.
+[What Is Built](#what-is-built) is the component-level view.
 
 **Atlas.** The deduplicated store of known basins for an `n`, keyed by canonical basin
 identity. The stated deliverable of the cartography strategy.
+*Code exists; it stores endpoint keys, which are not certified terminal components.* The
+atlas is also the flagship cross-focus instrument: Insight specifies views that could
+expose mathematical structure—symmetry orbits, terminal components, contact types,
+transitions, continuation across `n`, proposer-conditioned frequency with uncertainty;
+Efficiency makes those views responsive and reproducible; Process owns the event and
+provenance contract; and Correctness decides which relations are observed, inferred, or
+certified.
+A visual embedding is never evidence by itself that two basins are adjacent or
+that a sampled cluster is a connected component.
+
 **Census.** An enumeration of the basins at one `n`, run to saturation.
+*Code exists; saturation is unreachable while the thing being counted is undefined.*
+
 **Descriptors.** Structural coordinates of a packing—contact counts, angle classes,
 symmetry—used to steer search toward diversity rather than toward loss.
+*Unbuilt, and every steering strategy waits on them.*
+
 **Meter.** The instrument that counts pair-tests, so two proposers can be compared at
-equal budget.
+equal budget. *Unbuilt, so no two proposers have been compared at equal budget.*
 
 ### The record
 
-**Round.** One executed experiment against one registered hypothesis, with a declared
-timebox and a pre-registered accept rule, recorded as a schema-validated artifact plus
-its JSONL archive.
-**Series.** An ordered group of rounds sharing a runbook; only one may
-be open at a time.
+**Round.** One executed experiment against exactly one registered hypothesis under the
+current contract, with a declared timebox and a pre-registered accept rule, recorded as
+a schema-validated artifact plus its declared result or archive.
+The hypothesis field remains an array for format compatibility; one verdict is never
+applied to several claims.
+**Series.** An ordered group of rounds sharing a runbook; only one may be open at a
+time. **Agenda.** A mutable priority queue of cells (`BC-001`, …) ordering upcoming work
+by dependency and readiness, rendered into the ledger.
+A coordination artifact, not a second hypothesis registry and not a scheduler.
+**Defect.** One record in [`defects.yaml`](defects.yaml)—what went wrong, what caught
+it, and what now stops it recurring—rendered to [`defects.md`](defects.md).
+**Bead.** One tracked work item (`think-xxxx`) in the `tbd` queue; every open defect
+carries one.
 
 **Soundness perimeter.** The rule that every component emitting a configuration is
 checked by `sqpack` through code it does not share, enforced by
@@ -301,8 +508,16 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 |  | value | source |
 | --- | --- | --- |
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
-| Best proved lower bound | `2 + 4/√5 = 3.788854382…` | Stromquist 2003, Theorem 2 |
-| Gap | `0.088229208023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+| Best certified lower bound | `2 + 4/√5 = 3.788854382…` | exp-017 exact source-distinct repair; value stated by Stromquist 2003, whose printed proof has gap D-152 |
+| Published gap | `0.088229208023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+
+The current audit found an explicit strict box avoiding all twelve printed Figure 14
+points, so the paper’s unavoidability subclaim is false as printed
+([D-152](defects.md)). Exp-017 independently certifies the same numerical inequality by
+moving only `G=(.8,1.85)` to the source-distinct `G'=(.79,1.85)` and replaying the
+complete finite cover and capacity argument.
+The repaired coordinate and certificate are results of this repository, not claims
+attributed to Stromquist.
 
 Trump’s packing is six axis-aligned squares plus a block of five tilted at
 `a* ≈ 40.181937290329714°`. The container side is an algebraic number of degree 8, the
@@ -312,11 +527,10 @@ root of
 s⁸ − 20s⁷ + 178s⁶ − 842s⁵ + 1923s⁴ − 496s³ − 6754s² + 12420s − 6865 = 0
 ```
 
-lying in `[3.87, 3.88]`. The packing is visually and numerically highly constrained and
-is a strong rigidity candidate.
-This repository has not yet supplied an active-constraint rank or interval-local proof
-of isolation, so rigidity is not used as an established explanation for search
-difficulty ([D-041](defects.md)).
+lying in `[3.87, 3.88]`. Exp-013 exactly certifies every complete branchwise fixed-side
+linearized cone and proves the pose locally isolated by a finite-branch subsequence
+argument. This qualitative local theorem does not provide an explicit radius or explain
+the global search difficulty.
 
 ### Why exactness is not optional
 
@@ -324,11 +538,12 @@ Disjoint *interiors* means touching is legal, and record packings touch a great 
 In Trump’s packing 14 of the 55 pairs are separated by exactly zero, and 20 corner
 coordinates lie exactly on the container boundary.
 
-Floating point can certify a strict inequality.
-It cannot certify an equality.
-A float verifier therefore needs a tolerance to accept the true contacts, and that
-tolerance is a blind spot that also accepts overlaps smaller than itself; setting it to
-zero rejects the true packing instead.
+Floating-point evaluation can certify a strict inequality when a sound error bound stays
+away from zero. It cannot infer that an unrecognised near-contact is exactly equal to
+zero merely because a computed residual is small.
+A tolerance-based f64 verifier therefore needs a tolerance to accept Trump’s rounded
+algebraic contacts, and that tolerance is a blind spot that also accepts overlaps
+smaller than itself; setting it to zero rejects this true packing instead.
 Both failure modes are demonstrated by `negative_control.py`.
 
 The fix is representational rather than numerical: express the configuration in the real
@@ -350,11 +565,11 @@ Where the program has spent effort, and what came of it.
 | --- | --- | --- | --- | --- |
 | 5 | proved, `2 + ½√2` | `2.70710678…` | positive control | `sqsearch --selftest` recovers it on every run. [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md): the bracketing quench refines annealer output to `2.22e-15`—the analytic value to machine precision |
 | 8 | proved, `3` | `3` | census kill line | The `n` at which [H-011](campaign/hypotheses/H-011-small-n-census.md)’s discovery curve must plateau, or enumeration is abandoned. No rounds |
-| **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Four rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); angle descent barely helps; [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`—**twelve orders** |
-| **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); six rounds. Every method tried lands `≈ 6e-02` short: the failure is **exploration**, not polish |
+| **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Five rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`; exp-031 returns all four source perturbations within `2.221e-15` |
+| **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**), corner (**T-3**), and repaired lower-bound certificate (**T-4**); nine rounds. Search remains `≈ 6e-02` short, exp-013 proves Trump’s exact pose locally isolated, exp-016 rejects Stromquist’s printed proof, and exp-017 independently restores its numerical bound |
 | **12** | open; `4` believed optimal | `4` | **open-case calibration** | Two rounds. Returns exactly `4.0` on all five seeds, which is baseline evidence rather than a known-answer guard. Also where the search and proof lanes are planned to meet |
 | 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
-| 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) returns **exactly `5.0`**, the trivial `5×5` grid, on all five seeds |
+| 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) reports `5.0`, the trivial `5×5` grid, on all five f64-screen seeds |
 | 61, 78, 97 | open, `m² − 3` | `8`, `9`, `10` (grids) | opportunistic slot | The narrowest gaps in the table. An analytic Cleemann-style attempt at `arctan(3/4)` is registered and **not yet made** |
 | 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](frontier/README.md); 63 of the 65 open cases are bounded below by Nagamochi’s general theorem |
 
@@ -375,9 +590,9 @@ problem.
 instance cell testing record-*finding* rather than machinery, and it was the last one
 never run.
 [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md)
-ran it: the annealer returns **exactly `5.0`** on all five seeds—the trivial `5×5`
-grid—against Bidwell’s `4.67553`, a gap of `+0.324`. It does not leave the grid basin at
-all.
+ran it: the annealer reports `5.0` on all five f64-screen seeds—the trivial `5×5`
+grid—against Bidwell’s `4.67553`, a gap of `+0.324`. The retained final states do not
+leave the grid basin.
 
 That scopes one failure at a second cell: this implementation, five seeds, and the
 registered `1e8` moves per chain did not reach Bidwell’s oblique record at `n = 17`. The
@@ -406,14 +621,19 @@ listed here so the dependencies of this program are explicit.
 
 - **`s(10) = 3 + ½√2`**, Stromquist 2003, Theorem 1. Ten unavoidable points, then case
   analysis. Not pigeonhole alone.
-- **`s(11) ≥ 2 + 4/√5`**, Stromquist 2003, Theorem 2, proved directly for `n = 11`.
+- **The published statement `s(11) ≥ 2 + 4/√5`**, Stromquist 2003, Theorem 2. D-152 and
+  exp-016 give a strict counterexample to the printed Figure 14 unavoidability claim, so
+  the published proof is not relied on as complete.
+  The same inequality is established independently as **T-4** below, using H-041’s
+  separately preregistered source-distinct repaired point set.
 - **`s(11) ≤ 3.877083590022814…`**, Trump 1979, by construction.
   Every upper bound in this subject is a construction; no non-constructive upper bound
   has ever been obtained.
 - **The `0°`/`45°` class cannot achieve it.** Stromquist bounds that orientation class
   below at `2 + (4/3)√2 ≈ 3.885618`, which Trump’s oblique packing beats.
-  This is what makes `n = 11` the first case where tilt matters, and the sharpest
-  available statement of why the target differs structurally from the ladder.
+  This makes `n = 11` the first case where genuinely oblique tilt is proved to improve
+  on the `0°`/`45°` class, and is the sharpest available statement of why the target
+  differs structurally from the ladder.
 
 ### Results established here
 
@@ -422,6 +642,7 @@ listed here so the dependencies of this program are explicit.
 | **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **exact** | `sqpack` | `python3 verify_trump11.py` |
 | **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated at **polished** | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack/quench.py`](sqpack/quench.py) | `uv run --frozen python lp_cell.py` |
 | **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run --frozen python lp_cell.py` |
+| **T-4** | The source-distinct replacement `G=(.8,1.85) → G'=(.79,1.85)` restores the complete Figure 13 localization, A-triple forcing, repaired Figure 14 unavoidability, and `3+9` capacity chain, proving `s(11) ≥ 2 + 4/√5` | **exact** | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md), confirmed by [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | `uv run --frozen python tools/check_stromquist_repair.py --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json` |
 
 **T-1** is also an independent check of the published record: the 33 digits on the
 *Squares in Squares* record page agree with the value computed here from the field.
@@ -499,25 +720,25 @@ combinatorial part of the problem, which none of this makes easy.
 
 ### A cell is not a basin, and this trap has been walked into
 
-The statement above fixes the angles.
-A **basin** does not: it is the preimage of a quench endpoint, and the quench moves the
-angles. So a configuration can sit at *exactly* its cell’s optimum and still be far from
-its basin’s, with every remaining unit of gap in the angles and none of it in the
-centres.
+The statement above fixes the angles and a cell.
+A **point-basin** does not: it is the preimage of a quench endpoint, and the quench
+moves the angles and may cross cells.
+So a configuration can sit at exactly its fixed-angle cell optimum and still be far from
+its quench endpoint, with every remaining unit of gap in the angles and none of it in
+the centres.
 
-### Nor is a flat optimum a basin, which is the same trap one level up
+### Nor does a point-basin classify a flat terminal component
 
-The section above separates a *cell* from a *basin* because a cell fixes the angles and
-a basin does not. There is a second separation, discovered later and the harder of the
-two: a basin presumes its optimum is a **point**, and
-[not every optimum is](#terminology).
+The section above separates a fixed-angle cell solve from the full quench.
+There is a second separation, discovered later and the harder of the two: the quench
+returns a point, while [the terminal optimum need not be isolated](#terminology).
 
-Where the optimum is flat, “the configurations the refiner carries to the same local
-optimum” describes a map onto a *set*, and two quenches of the same optimum legitimately
-stop at different places in it.
+Where the optimum is flat, two quenches into the same connected terminal component can
+legitimately stop at different places in it.
 Every symptom then mimics a real discovery—distinct coordinates, distinct geometric
-keys, two rows in the atlas—while the contact graph and the side, the two things that
-actually characterise the optimum, agree exactly.
+keys, two rows in the atlas—while the side agrees exactly and an open stratum can share
+one contact graph. Neither the key nor that graph alone decides component identity; wall
+strata can change inside the same connected family.
 That is [D-034](defects.md), and the shape of the error is the same as the cell/basin
 trap: an object that fixes more than the mathematics does, mistaken for the mathematics.
 
@@ -597,8 +818,10 @@ defect. Three corrections, recorded in the
   at the solver’s floor of `1e-10`, and with every returned solution post-checked
   against the constraints imposed on it, the residual in the side is about `1e-11`. That
   floor is [D-021](defects.md), still open, and eight rounds sit on it.
-- **The polish step does not produce rational output.** R-2 said it does; HiGHS returns
-  floats. Rational output needs an exact rational LP, which is unbuilt and tracked.
+- **The polish step does not produce exact output.** R-2 said it produced rational
+  output; HiGHS returns floats.
+  Exact output needs an exact LP over the cell’s certified rational or algebraic
+  coefficients, which is unbuilt and tracked.
 - **The `polished` tier means exact within a cell to solver precision.** Algebraic
   exactness stays with `sqpack`, and every promotion routes through it.
 
@@ -629,10 +852,12 @@ A 2,001-point scan of `[38°, 42°]` puts the minimum at `40.182°`, one grid st
 (`0.002°`) from `a*`.
 
 Trump’s angle is not an input to this computation.
-It is **the argument that minimises a one-dimensional function anyone can plot.** The
-34-dimensional search problem, once the cell is known, is a scalar minimisation—which is
-the concrete content of the claim that the honest continuous dimension is the number of
-*distinct angles*, empirically one or two at small `n`, rather than `3n + 1`.
+It is **the argument that minimises a one-dimensional function anyone can plot.** For
+this structured cell, the centre coordinates remain LP variables and only one nonlinear
+angle parameter remains.
+This demonstrates a useful compression, not a theorem that angle-class count equals the
+local dimension of the full packing problem; other records already use more classes, and
+each reduction must be derived from its contact structure.
 
 ## The Corner, and the Method It Forced
 
@@ -859,7 +1084,7 @@ reading the results below:
 
 ## The Hypothesis Registry
 
-Forty claims or open questions are codified as artifacts.
+Forty-one claims or open questions are codified as artifacts.
 The standing review’s complete H-001 through H-015 block is now in the registry; later
 ids carry campaign-native claims and seven explicit open questions.
 The [ledger](campaign/ledger.md) is generated from the artifacts and is the current
@@ -880,7 +1105,7 @@ view; this section is the reading of it.
 | [H-007](campaign/hypotheses/H-007-saturation-curves.md) | blocked | Coverage models predict held-out component discovery | 0 | — |
 | [H-008](campaign/hypotheses/H-008-false-basin-rate.md) | blocked | The stronger-verifier rejection rate is measurable across `n` | 0 | — |
 | [H-009](campaign/hypotheses/H-009-symmetry-dedup-ratio.md) | blocked | Symmetry quotienting materially changes endpoint counts | 0 | — |
-| [H-010](campaign/hypotheses/H-010-stromquist-triple.md) | blocked | The Stromquist falsifier and certificate triple reproduces | 0 | — |
+| [H-010](campaign/hypotheses/H-010-stromquist-triple.md) | **refuted** | Stromquist’s five-node Theorem 2 mechanism reproduces | 1 | 180m agent, 0.55s wall |
 | [H-011](campaign/hypotheses/H-011-small-n-census.md) | blocked | The small-`n` landscape is censusable | 0 | — |
 | [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) | blocked | Record basins are rare in quench measure | 0 | — |
 | [H-013](campaign/hypotheses/H-013-delta-continuation.md) | blocked | Delta-continuation improves target-component arrival | 0 | — |
@@ -888,17 +1113,17 @@ view; this section is the reading of it.
 | [H-015](campaign/hypotheses/H-015-map-elites-illumination.md) | blocked | MAP-Elites improves certified component discovery rate | 0 | — |
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 0 | — |
-| [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What is the certified local geometry of Trump’s packing? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected? | 0 | — |
-| [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | blocked | Verified record packings through `n=30` use at most three angle classes; `n=29` is a counterexample candidate | 0 | — |
+| [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question; one exact 2D sheet solved | How are the observed `n=5` endpoint candidates connected? | 2 | 25m agent, 0.51s wall |
+| [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | **refuted** | Verified record packings through `n=30` use at most three angle classes; exp-012 verifies six at `n=29` | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
-| [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | blocked | Trump has no nonzero direction in any branchwise fixed-side tangent cone | 0 | — |
+| [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
 | [H-027](campaign/hypotheses/H-027-record-angle-cones.md) | blocked | The imported `n=11,17` record cells have positive class-angle directional cones | 0 | — |
 | [H-028](campaign/hypotheses/H-028-reference-cell-angle-sheets.md) | blocked | Each published point is the sole refined local minimum on its declared reference-cell angle sheet, with a boundary margin | 0 | — |
 | [H-029](campaign/hypotheses/H-029-adaptive-splitting.md) | blocked | Calibrated adaptive splitting beats restarts on rare target events | 0 | — |
 | [H-030](campaign/hypotheses/H-030-public-parent-surgery.md) | blocked | Construction surgery reproduces at least two of six hidden public record improvements | 0 | — |
 | [H-031](campaign/hypotheses/H-031-load-guided-block-moves.md) | blocked | LP-load-guided block moves beat coordinate-only moves per pair-test | 0 | — |
-| [H-032](campaign/hypotheses/H-032-small-n-optimal-moduli.md) | open question | What are the exact optimal configuration spaces for `n=3…6`? | 0 | — |
+| [H-032](campaign/hypotheses/H-032-small-n-optimal-moduli.md) | open; `n=3,4` solved | What are the exact optimal configuration spaces for `n=3…6`? | 2 | 35m agent, 1.28s wall |
 | [H-033](campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | open question | Can the `m²−3` theorem be extended to `s(61)=8`? | 0 | — |
 | [H-034](campaign/hypotheses/H-034-fractional-piercing-ceiling.md) | blocked | The fractional piercing value at Trump’s side is greater than ten | 0 | — |
 | [H-035](campaign/hypotheses/H-035-asymptotic-primitive-finite-transfer.md) | blocked | Current asymptotic construction primitives improve a finite public parent | 0 | — |
@@ -907,6 +1132,7 @@ view; this section is the reading of it.
 | [H-038](campaign/hypotheses/H-038-record-number-fields.md) | open question | Which exact fields and elimination mechanisms occur in verified records? | 0 | — |
 | [H-039](campaign/hypotheses/H-039-s12-proof-frontier.md) | open question | Can the lower bound for `s(12)` be improved and ultimately closed at four? | 0 | — |
 | [H-040](campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | blocked | Active-cell neighbor walks beat multistart in new verified cells per LP solve | 0 | — |
+| [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **confirmed** | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 1 | 90m agent, 0.70s wall |
 
 ### Confirmed
 
@@ -956,9 +1182,14 @@ establish component membership for the perturbed trajectories.
 
 ### Blocked, and on what
 
-The priority-1 strategic claims are blocked on the measurement system around the quench:
+The priority-1 agenda has two independent bottlenecks.
+The basin lane is blocked on the measurement system around the quench:
 terminal-component identity, endpoint classification, event provenance, coverage
 estimation, independent validity, and a named proposer regime.
+The proof lane now has both halves of its calibration: exp-016 falsifies Stromquist’s
+printed certificate, while exp-017 certifies a complete source-distinct repair.
+The same two-sided falsifier/certificate architecture can now target a new lower bound
+at `n=12`.
 
 - **[H-011](campaign/hypotheses/H-011-small-n-census.md)** (census at `n ≤ 10`) needs
   H-021’s classification evidence, event records, and a coverage estimator.
@@ -971,6 +1202,14 @@ estimation, independent validity, and a named proposer regime.
   has a strong prior from `exp-006` but remains unmeasured as a *search* claim: the
   class-constrained arm assumed the answer’s own structure, so it shows the angle search
   method decides the outcome, not that an unguided method would find that structure.
+- **[H-010](campaign/hypotheses/H-010-stromquist-triple.md)** (Stromquist calibration)
+  is terminally refuted by exp-016. An exact strict box avoids every printed Figure 14
+  point, so the five-node conjunction fails at its fourth node.
+  The result rejects the published proof as printed, not the numerical lower bound.
+- **[H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md)** (proof repair)
+  is confirmed by exp-017 after moving only `G.x` from `.8` to `.79`. The complete exact
+  repair proves the same lower bound with 26 repaired Figure 14 faces and thirteen
+  passing mutations; it does not make the published proof correct as printed.
 
 **[H-017](campaign/hypotheses/H-017-budget-scaling.md)** (100× budget) stays open and
 demoted behind a short response curve.
@@ -981,14 +1220,37 @@ ideas and dead ends.
 The registry artifact, not the review’s historical prose or this summary, owns each
 current criterion and kill rule.
 
+The mutable size-by-size run order lives in the
+[basin-map confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md),
+not in this status document.
+It labels every cell as tool validation, measurement validation, or genuine research.
+The event-retention controls through `n = 8` and the bounded `n = 9` performance cell
+are complete. The random-start size ladder stops there.
+BC-008’s source-bound `n = 10` seeded-pose entry point now passes replay and a bounded
+run-path smoke test.
+Exp-031 completes its four-perturbation known-answer experiment at 4/4 converged,
+independently valid, and admissible.
+Exp-032 completes BC-009: exact `n = 3` and `n = 4` component controls pass while all 16
+retained f64 observations remain unresolved.
+Exp-033 completes the first bounded BC-010 `n = 5` connectivity slice: the equal-side
+pair shares one exact fixed-angle optimal face.
+Exp-034 embeds that face in an exact two-parameter angle-and-slide sheet, but complete
+stationary identity and the unequal-side rows remain open.
+
 ## Experiments Conducted
 
-Eleven rounds, all in `series-000`, **275 agent-minutes and 23.0 wall-minutes** in
-total. Two instruments: `sqsearch` 0.1.0 (the `f64` screening annealer) and
-`sqpack.quench` (0.1.0 with angle descent, 0.2.0 with class bracketing).
+There are 34 terminal rounds registered in `series-000`. They record 828 agent-minutes
+and 28.2 wall-minutes.
+Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
+(0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
+SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
+checker, the exact Stromquist printed-set falsifier, and the exact repaired-cover
+certificate, the exact terminal-component known-answer checker, and the exact `n = 5`
+fixed-angle face and angle-sheet checkers.
 
-No round has been run at the `exact` tier, so **no result below claims anything about a
-record**, and none may.
+No record-search round has been run at the `exact` tier, so **no result below claims a
+new record**. Exp-012 is an exploratory reconstruction of a published record witness;
+its six-class determination does not certify that witness as exact or optimal.
 
 ### Roll-up
 
@@ -1007,7 +1269,30 @@ archive beside it.
 | [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) | 10 | positive control | H-002 | quench 0.2.0 | `4.507e-03 → 1.3323e-15` | **accepted** |
 | [exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 11 | target | H-002 | quench 0.2.0 | `6.999e-02 → 6.2894e-02` | rejected |
 | [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 11 | target | H-019 | quench 0.2.0 | slopes `0.1747` / `0.3841`, ratio `2.198` | **accepted** |
-| [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | exactly `5.0` on all five seeds, gap `+3.245e-01` | rejected |
+| [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | reported `5.0` on all five f64-screen seeds, gap `+3.245e-01` | rejected |
+| [exp-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | 29 | target | H-024 | SVG reconstruction + SAT | six classes; minimum class gap `0.296067°` | **rejected** |
+| [exp-013](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | 11 | target | H-026 | exact branchwise linearization | 128/128 exact zero-cone certificates | **accepted** |
+| [exp-014](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) | 3 | positive control | H-032 | exact configuration space | two labelled circles → one quotient interval | **accepted** |
+| [exp-015](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | 4 | positive control | H-032 | exact configuration space | 24 labelled points → one quotient point | **accepted** |
+| [exp-016](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md) | 11 | proof calibration | H-010 | exact source-bound falsifier | strict side `1.0001` box avoids all 12 printed points | **rejected** |
+| [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | 11 | proof calibration | H-041 | exact repaired cover | 26-face cover; complete five-node certificate | **accepted** |
+| [exp-018](campaign/series/series-000-smoke-and-calibration/experiments/exp-018-h-021-n3-basin-event-calibration.md) | 3 | positive control | H-021 | full-pose event replay | 4 valid; 3 producer-converged; 0 admissible | **blocked** |
+| [exp-019](campaign/series/series-000-smoke-and-calibration/experiments/exp-019-h-021-n4-basin-event-calibration.md) | 4 | positive control | H-021 | full-pose event replay | 4 valid; 2 producer-converged; 0 admissible | **blocked** |
+| [exp-020](campaign/series/series-000-smoke-and-calibration/experiments/exp-020-h-021-n5-basin-event-calibration.md) | 5 | positive control | H-021 | full-pose event replay | 4 valid; 4 producer-converged; 0 admissible | **blocked** |
+| [exp-021](campaign/series/series-000-smoke-and-calibration/experiments/exp-021-h-021-n3-basin-event-v3.md) | 3 | positive control | H-021 | BasinEvent/v3 semantic replay | 1 valid; 2,037/2,037 fixed-point evaluations settled; 1 admissible | **baseline** |
+| [exp-022](campaign/series/series-000-smoke-and-calibration/experiments/exp-022-h-021-n3-basin-event-v3-completion.md) | 3 | positive control | H-021 | BasinEvent/v3 semantic replay | 3 valid; 8,364/8,364 evaluations settled; 3 admissible | **baseline** |
+| [exp-023](campaign/series/series-000-smoke-and-calibration/experiments/exp-023-h-021-n4-basin-event-v3.md) | 4 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 3 converged/admissible; one typed unsettled stop | **baseline** |
+| [exp-024](campaign/series/series-000-smoke-and-calibration/experiments/exp-024-h-021-n4-basin-event-v3-repair.md) | 4 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,301/14,301 evaluations settled; 4 admissible at side 2 | **baseline** |
+| [exp-025](campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md) | 5 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,219/14,219 evaluations settled; 4 admissible | **baseline** |
+| [exp-026](campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 3 valid/admissible retained; seed 3 crashes before retention | **blocked** |
+| [exp-027](campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 3 admissible; one typed time-budget stop | **baseline** |
+| [exp-028](campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md) | 7 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; three typed time-budget stops | **baseline** |
+| [exp-029](campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md) | 8 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; one typed unsettled stop and two time-budget stops | **baseline** |
+| [exp-030](campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md) | 9 | positive control | H-021 | BasinEvent/v3 semantic replay | 1 retained/valid typed time-budget stop; full command 21.36 s | **baseline** |
+| [exp-031](campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md) | 10 | positive control | H-002 | source-bound BasinEvent/v3 replay | 4/4 admissible; max proved-side error `2.221e-15` | **baseline** |
+| [exp-032](campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md) | 3 | positive control | H-021 | exact component-policy replay | one n=3 interval; one n=4 point; 8/8 false policies rejected | **baseline** |
+| [exp-033](campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md) | 5 | target | H-023 | exact fixed-angle face test | one segment; nullities `0/1/0`; six controls pass | **accepted** |
+| [exp-034](campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md) | 5 | target | H-023 | exact angle-and-slide sheet | dimension at least two; four fixtures and five controls pass | **accepted** |
 
 ### Cost and provenance
 
@@ -1024,14 +1309,127 @@ archive beside it.
 | exp-009 | 5 seeds, 30 s each | 150.0 s | 30 m | criterion | `8b450a1` |
 | exp-010 | 11 probes | 1.0 s | 10 m | criterion | `8b450a1` |
 | exp-011 | 4e9 moves | 397.474 s | 0 m | criterion | `60a50cc` |
+| exp-012 | one SVG, 406 pairs | 0.158 s | 12 m | criterion | `5384209` |
+| exp-013 | 512 raw branches | 57.308 s | 100 m | criterion | `faba023` |
+| exp-014 | 64 raw separation branches | 0.63 s | 30 m | criterion | `257cb0d` |
+| exp-015 | 4,096 raw separation branches | 0.65 s | 5 m | criterion | `257cb0d` |
+| exp-016 | exact printed-set escape + replay | 0.55 s | 180 m | criterion | `178fc6b` |
+| exp-017 | exact repaired cover + replay | 0.70 s | 90 m | criterion | `c6d036b` |
+| exp-018 | 4 seeds, 10 s each | 10.025 s | 12 m | dependency | `ee3acc1` |
+| exp-019 | 4 seeds, 10 s each | 13.322 s | 5 m | dependency | `ee3acc1` |
+| exp-020 | 4 seeds, 10 s each | 14.821 s | 5 m | dependency | `ee3acc1` |
+| exp-021 | 1 seed, 10 s cap | 1.897 s | 15 m | criterion | `8f20908` |
+| exp-022 | 3 seeds, 10 s each | 6.274 s | 6 m | criterion | `8f20908` |
+| exp-023 | 4 seeds, 10 s each | 12.506 s | 8 m | criterion | `8f20908` |
+| exp-024 | 4 seeds, 10 s each | 16.967 s | 15 m | criterion | `f15d036` |
+| exp-025 | 4 seeds, 10 s each | 14.473 s | 5 m | criterion | `5ab8dab` |
+| exp-026 | 4 seeds declared; 3 retained | 19.017 s | 5 m | error | `da6bac3` |
+| exp-027 | 4 seeds, 10 s each | 34.425 s | 5 m | criterion | `a3be8e4` |
+| exp-028 | 4 seeds, 10 s each | 38.628 s | 5 m | criterion | `ce84ef6` |
+| exp-029 | 4 seeds, 10 s each | 38.004 s | 5 m | criterion | `69c6008` |
+| exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
+| exp-031 | 4 seeds, 15 s each | 10.337 s | 5 m | criterion | `dab797c` |
+| exp-032 | exact n=3/n=4 models + 8 mutations | 0.92 s | 10 m | criterion | `d3d4ace` |
+| exp-033 | one exact common-cell face + six controls | 0.24 s | 15 m | criterion | `26360f1` |
+| exp-034 | one exact parameter sheet + five controls | 0.27 s | 10 m | criterion | `329b848` |
 
-### What the eleven rounds jointly establish
+### What the 34 rounds jointly establish
 
-**The instrument works on the proved positive controls.** They now resolve to machine
-precision under the bracketing quench.
-The `n=12` calibration returns exactly `4.0`, but that is not a known-answer guard.
-The runner’s full-pose independent verification boundary remains open under
-[D-044](defects.md); a producer-reported overlap scalar does not close it.
+**The numerical basin event trust boundary now retains complete declared blocks through
+`n = 8` plus one bounded `n = 9` performance event; exact component controls pass only
+at `n = 3` and `n = 4`.** Exp-018 through exp-020 retain twelve independently valid
+historical v2 poses at `n=3` through `n=5`, including four at the proved `n=3` and `n=4`
+optima, but D-165 correctly remains recorded on those artifacts.
+Exp-021 adds one v3 `n=3` event whose 2,037 fixed-point evaluations are all retained and
+settled, whose pose independently verifies, and whose admissibility claim replays.
+Exp-022 completes the four-seed v3 block at 4/4 admissible: three endpoints reach side 2
+and one reaches the valid nonoptimal side 2.362735797795. These events are evidence for
+the producer contract and terminal outcomes, not terminal-component counts.
+Exp-032 freezes the missing evidence rule: the complete exact `n = 3` quotient is one
+interval across four geometric keys and two contact signatures, and the complete exact
+`n = 4` quotient is one point.
+All current f64 events remain unresolved because none carries an exact
+component-membership witness.
+Exp-033 adds the first exact relation between sampled `n = 5` source poses: after one D4
+action and relabelling, two different golden keys share a one-dimensional fixed-angle
+optimal face at side `1 + 5sqrt(2)/4`. It does not assign a full terminal component.
+Exp-023 reaches proved side 2 on three of four n=4 starts and preserves the fourth
+event’s post-check rejection.
+That stop exposed D-171: two rows were already outside the screen before an argmax-only
+retry. Exp-024 applies one complete offending-set retry and reaches side 2 on all four
+starts, with 14,301 of 14,301 evaluations settled and all four events admissible.
+Exp-025 extends the unchanged event path to `n=5`: all four starts independently replay,
+all 14,219 fixed-point evaluations settle, and the run observes three descriptors at two
+nonoptimal side values.
+Those descriptors are not component identities, and none of the four starts finds the
+proved optimum. Exp-026 then finds the next retention boundary: three `n=6` events reach
+side 3 and replay, but seed 3 fails independent validity and is censored when event
+validation raises before writing it.
+D-183 now routes independently invalid endpoints through the same atomic retention path
+as every other terminal outcome.
+Exp-027 retains all four starts: three admissible side-3 events and one independently
+valid, non-admissible time-budget stop at side 3.040392660291. The earlier invalid
+endpoint does not reproduce because open D-126 makes wall-clock-limited work
+load-dependent; neither round supports frequency or component claims.
+Exp-028 retains four independently valid `n=7` outcomes but only one converges; three
+carry typed time-budget stops.
+This validates the event path at `n=7` while showing that the ten-second cell is already
+too censored for landscape statistics.
+Exp-029 retains four independently valid `n=8` outcomes: one admissible side-3 event,
+one typed unsettled cell-cycle stop, and two typed time-budget stops.
+Its bounded cost audit measures median four-event independent screening at 0.000684
+seconds and canonical key computation at 0.004956 seconds, versus 38.004 seconds of
+retained quench wall.
+Canonicalization is therefore not yet the event-loop bottleneck at n=8, while the 3/4
+typed-stop rate again bars landscape statistics.
+Exp-030 retains one independently valid `n=9` time-budget stop and completes the frozen
+command in 21.36 seconds, below its 30-second profile trigger.
+Median one-event keying costs 0.001074 seconds versus 20.062 seconds of quench wall, so
+canonicalization remains negligible at n=9. This one censored event is a performance
+control, not an n=9 landscape sample.
+The blind random-start size ladder stops after n=9. A source-bound n=10 entry point now
+reconstructs the published Göbel pose, binds its source digest, replays deterministic
+perturbations, and retains typed failure.
+A one-second smoke run reaches a valid endpoint at the proved side but times out before
+producer convergence.
+Exp-031 then converges on all four preregistered perturbations: every endpoint validates
+and replays, all 6,631 fixed-point evaluations settle, and the maximum proved-side error
+is `2.221e-15`. This is a local known-answer control, not a random-search or component
+claim. The exact small-moduli controls remain valid; component identity is the next
+blocked layer. The `n=12` calibration returns exactly `4.0`, but that is not a
+known-answer guard.
+The runner’s full-pose independent verification boundary remains open
+under [D-044](defects.md); a producer-reported overlap scalar does not close it.
+
+**Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
+selections as 128 derivative-distinct matrices.
+Every matrix has exact rank 33 and a strictly positive exact `Q(u)` stress, so every
+branchwise fixed-side linearized cone is zero.
+A finite-branch subsequence argument upgrades that result to local isolation and strict
+local side optimality in the anchored pose–side chart, modulo finite symmetries.
+It does not prove global optimality or give an explicit isolation radius.
+
+**The optimal configuration spaces at `n = 3,4` are now exact controls.** Exp-014 proves
+that `F_3(2)` is two labelled circles, its `S3` quotient is one circle, and its
+`D4 x S3` quotient is an interval whose corner endpoint changes the active signature and
+whose midpoint only changes the stabilizer.
+Exp-015 proves that `F_4(2)` is 24 isolated labelled grids and both declared quotients
+are one point. Arbitrary rotations add no side-2 configurations in either case.
+Generation plus complete replay costs 1.28 wall seconds, so both controls belong in
+every gate. H-032 remains open at `n = 5,6`.
+
+**The published `n = 11` lower-bound proof is false as printed.** Exp-016 exactly
+certifies an open box of side `10001/10000` that fits Stromquist’s claimed container and
+strictly avoids all twelve printed Figure 14 points.
+This rejects the registered five-node H-010 conjunction but not the numerical lower
+bound itself.
+
+**The numerical lower bound now has an independent exact certificate.** Exp-017 moves
+only Figure 14 point `G.x` from `.8` to `.79` and exactly certifies the complete
+five-node argument. Its 18-cell Figure 13 cover plus four Klein-four-related exceptions,
+26-face repaired Figure 14 tiling, exact lemma premises, and `3+9` count prove
+`s(11) ≥ 2 + 4/√5`. This source-distinct computer-assisted result is not attributed to
+Stromquist, is not externally peer-reviewed, and does not close the gap to Trump.
 
 **The tested class-bracketing refiner separates the proved controls from the target.**
 It takes the tested `n = 5` and `n = 10` starts to `1e-15` and leaves the tested
@@ -1069,34 +1467,34 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-One hundred thirty-one defects, [one line each](defects.md), generated from
-`defects.yaml` and checked in the gate.
+The log contains 193 defects, [one line each](defects.md), generated from `defects.yaml`
+and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 45 | asserted something false about the mathematics |
-| validity | 35 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 37 | recorded something its own evidence contradicts |
-| robustness | 10 | did not finish, or finished only by luck |
-| performance | 4 | worked, but cost far more than it should |
+| soundness | 62 | asserted something false about the mathematics |
+| validity | 57 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 54 | recorded something its own evidence contradicts |
+| robustness | 15 | did not finish, or finished only by luck |
+| performance | 5 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Thirty-five of the forty-five soundness defects pointed in the *flattering*
-direction**, where the error looks like a success.
+**Fifty-one of the sixty-two soundness defects pointed in the *flattering* direction**,
+where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught six defects in one hundred thirty-one, and no soundness
-defect ever.** Every soundness failure was found by a control cell whose answer was
-known in advance, a rule written down before the measurement, a generated view
-contradicting its source, or someone reading carefully.
+**The automated gate has caught eight defects in 193, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. The six the gate did catch ([D-024](defects.md), [D-064](defects.md),
-[D-106](defects.md), [D-107](defects.md), [D-125](defects.md), and [D-130](defects.md))
-are bookkeeping or robustness defects, found by contiguity, integration,
-mutation-anchor, and reconciliation checks—which is the pattern, not an exception: gates
-are good at the mechanical classes and have never once caught the mathematics being
-wrong.
+*surprised*. The eight the gate did catch ([D-024](defects.md), [D-064](defects.md),
+[D-106](defects.md), [D-107](defects.md), [D-125](defects.md), [D-130](defects.md), and
+[D-163](defects.md), and [D-187](defects.md)) are bookkeeping or robustness defects,
+found by contiguity, integration, mutation-anchor, and reconciliation checks—which is
+the pattern, not an exception: gates are good at the mechanical classes and have never
+once caught the mathematics being wrong.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed
@@ -1158,17 +1556,76 @@ D-108 through D-119 are the second-pass corrections: the missing piercing paper,
 isostatic and self-stress arguments, fixed-budget and fixed-cell overreach, topology and
 fractional-LP mistakes, unsupported novelty, stale registry state, the H-012/H-017
 estimand conflation, and an impossible continuity-blind angle-sheet criterion.
-D-120 through D-131 record the engineering delta: ulp-sensitive cell selection, gate
-boundary and skip-contract failures, the per-step worker cap, bounded portable
-snapshots, a parallel negative-control race, wall-clock scientific budgeting, stale
-review status, the missing targeted edit loop, unbounded checker children, and a
-nonunique mutation-control anchor, followed by a lint floor that accepted type-checker
-warnings.
+D-120 through D-138 record the engineering delta and first post-merge runs:
+ulp-sensitive cell selection, gate boundary and skip-contract failures, the per-step
+worker cap, bounded portable snapshots, a parallel negative-control race, wall-clock
+scientific budgeting, stale review status, the missing targeted edit loop, unbounded
+checker children, and a nonunique mutation-control anchor, followed by a lint floor that
+accepted type-checker warnings and a fixed-cell solver that does not expose whether it
+settled or hit its cap ([D-132](defects.md)), then the search-only determination
+vocabulary that could not record the H-024 result, the omitted `n=29` source provenance
+that the falsifier exposed, the roll-up’s obsolete blanket claim about exploratory
+record evidence, the distinction between a branch linearization and a true Bouligand
+motion, and a certificate replay that did not require one-to-one branch coverage.
+The next tranche, D-139 through D-171, records the missing hard-square topology
+literature, a stale closed-family contact claim, exact-moduli integration errors,
+Stromquist source transcription and proof-chain mistakes, stale campaign effort, the
+paper’s extraneous Lemma 4 root, and the escaping Figure 14 box.
+D-153 records that the three 1984 memoranda were directly hosted while the source ledger
+called them unavailable; D-154 and D-155 close exact-field metadata and cross-platform
+record gaps in the first uncommitted H-010 checker.
+D-156 through D-158 close tiling-containment, sign-preservation, and provenance-scope
+gaps in the H-041 repair checker before any H-041 evidence could land.
+D-159 keeps immutable scanned PDFs out of Git’s text-whitespace path while preserving
+strict whitespace checks for the associated hand-written reading aids.
+D-160 records a D-145 recurrence caught in this round’s own diff: a broad scalar match
+attached H-010’s regression text to D-002 before an ID-scoped correction restored both.
+D-161 records the stale forty-hypothesis synopsis count exposed when H-041 became the
+forty-first artifact; the current consistency check now derives that count from the
+registry. D-162 records the first consequence exposed by typed fixed-cell termination: a
+deep rebuild reduces the converged totals at `n=3`, `n=4`, and `n=5`, and exposes
+unsettled ladder evaluations at `n=9` and `n=10`. Their full poses remain useful
+evidence, but the small-`n` convergence totals must be rebuilt before any such event can
+be promoted to a terminal component.
+D-163 records the gate failure that first hid that evidence: the historical-regression
+step continued after its checker failed and returned the status of a later successful
+probe. The step now propagates the checker failure immediately.
+D-164 separates one source of the newly visible nonconvergence: a successful HiGHS solve
+missed the fixed-cell post-check by about `2e-11` beyond its cutoff and was labeled
+mathematically infeasible.
+Typed outcomes now retain the cause, rows, residuals, retry margins, and actual
+solver-call count.
+A single retry tightens the complete initial offending set, leaves the
+`1e-10` acceptance screen unchanged, restores the proved n=3 and n=10 controls, and is
+replayed against the original LP rows.
+D-165 records the bounded implementation’s stop condition: initial cell-solve failures
+still bypass D-132’s typed result and become dummy objectives inside the angle search.
+That code path is now typed, D-168 closes the n=10 cell degeneracy, and BasinEvent/v3
+routes every fixed-point evaluation through one audited path.
+Exp-021 retains and replays a balanced 2,037-evaluation receipt, so D-165 is fixed; the
+older exp-018 through exp-020 artifacts remain correctly blocked under their historical
+v2 contract. D-166 removes the resulting false certificate from BasinEvent/v1. Version 2
+retains the full stopping event and independent validity screen but marks every current
+event promotion-blocked by D-165, and replay refuses a forged admissible flag.
+D-167 adds the missing per-event wall time, so subsequent seed blocks and larger `n`
+values can be selected from measured throughput rather than command-level guesses.
+D-168 separates an equal-objective finite cell closure from a genuinely unresolved
+cycle. The n=10 control closes after enumerating at most eight adjacent cells; exp-021
+then records the new typed path without rewriting the historical blocked events.
+D-169 fixes a second post-check hole found while typing those failures: containment rows
+were never replayed.
+Every accepted cell now passes the full original LP residual vector.
+D-170 gives D-165 its own bead after the defect log was found to reference the unrelated
+D-132 tracker; the older bead remains unchanged.
+D-171 records why the former argmax-only repair left one n=4 event unsettled: rows 16
+and 21 already violated the screen together.
+The complete offending-set retry closes the exact regression, and exp-024 completes the
+n=4 v3 block at 4/4 admissible without weakening the screen.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Fifty-five fixes left no regression check behind, and that list has already predicted a
+Seventy-one fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
@@ -1186,27 +1643,34 @@ defect log good enough to predict its own regressions.
 
 **The bottleneck has moved from polish to proposal.** Nothing in the current toolkit
 reaches Trump’s standing side, and the refiner cannot rescue the tested starts by
-construction; no terminal-component relation has been measured.
+construction; no sampled `n >= 5` full terminal-component relation has been measured.
 The named candidates are δ-continuation, angle-class search as a *search* rather than an
 assumption, neighbour-transfer seeding, and quality-diversity retention—none built.
 
-**The premise is still untested, and now blocked on a harder question than expected.**
-Everything the strategy layer recommends rests on record basins being rare in quench
-measure, and [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is the
-measurement that would refute it.
-The quench supplies one needed instrument, but full event retention, independent pose
-validity, and terminal identity are not ready.
+**The premise is still untested, and now blocked on the first nontrivial component
+question.** Everything the strategy layer recommends rests on record basins being rare
+in quench measure, and [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is
+the measurement that would refute it.
+The quench supplies one needed instrument, and exact `n = 3`/`n = 4` identity controls
+now pass, but sampled terminal identity at `n = 5` is not ready.
 What is not settled is what a basin *is*.
 
 [D-034](defects.md) is the open defect that says so.
 The exact `n=3` side-2 sliding family proves that one connected optimal set produces
-many geometric keys while retaining one contact certificate.
-At `n=5`, two rows also share side, short form, contact certificate, angle signature,
-and contact count while differing geometrically.
-That is strong evidence of unresolved terminal identity, but raw contact counts do not
-prove an exact family dimension and matching side/contact data do not prove the two rows
-are path-connected; generalized tangent evidence and certified continuation must decide
-those claims.
+many geometric keys.
+Its open stratum retains one contact certificate, but the wall endpoint has a different
+certificate after node attributes were restored; exp-014 fixes the stale closed-family
+claim recorded as [D-140](defects.md).
+At `n=5`, exp-033 replaces the matching-summary conjecture with a narrow exact result.
+After one D4 action and relabelling, four squares coincide and the fifth slides through
+an exact side-constant segment in one fixed-angle cell.
+An exact dual proves optimality within that cell, while active fixed-side nullity
+changes from zero at each endpoint to one in the interior.
+Exp-034 proves that exact face lies in a two-parameter angle-and-slide sheet of
+orientation-indexed LP optima.
+The complete wall-release and separating-axis cone plus certified continuation must
+still decide the full component; the unequal-side rows still need minimax-clearance
+bounds.
 
 So `distinct_basins` currently counts family members, the discovery curve cannot
 plateau, and H-011’s saturation criterion is unreachable until the definition is fixed.
@@ -1222,10 +1686,21 @@ program: Trump’s nonsmooth local geometry, exact small-`n` quotient spaces, he
 construction surgery, pure-point piercing limits, robust restricted-angle proofs,
 `s(12)`, `s(61)`, exact record fields, and the asymptotic waste exponent.
 
-**The first fast rotation is cheap and high-information.** Verify the primary `n = 29`
-counterexample to H-024; solve H-026’s branchwise Trump tangent screen; render the exact
-`n = 3` quotient-family control; regenerate the `n = 5` equal-side pair with full poses;
-and hide the UnitSquare `n = 68,69` children for the first parent-surgery test.
+**The small-`n` lane was missing its direct prior art.** [D-139](defects.md) records the
+omission. Two primary hard-square configuration-space papers are now archived; the
+Plakhta paper remains explicitly publisher-blocked, so no novelty language is permitted
+until its scope is checked from a lawful primary copy.
+
+**The first fast rotation is cheap and high-information.** Exp-012 refuted H-024,
+exp-013 confirmed H-026 and locally isolated Trump’s pose, and exp-014/015 solved the
+exact `n=3,4` quotient controls in 1.28 wall seconds.
+Exp-033 then certified the `n = 5` equal-side pair’s exact fixed-angle face in 0.24 wall
+seconds of generation plus replay.
+Next test angle-varying stationarity along that face, bound clearance between the
+unequal-side rows, and hide the UnitSquare `n = 68,69` children for the first
+parent-surgery test.
+The quantitative Trump successor is an explicit isolation radius or minimal-support
+stress analysis, not another rank count.
 No hour-scale lane is promoted without a known-answer response, independent validity,
 and a result that changes a decision.
 
@@ -1235,8 +1710,9 @@ Price the first maps from raw calls or a current receipt until those aggregates 
 reconstructed.
 
 **One contained defect constrains every polished number.** [D-021](defects.md): the
-solver floor is about `1e-11` in the side, so the `polished` tier cannot resolve finer,
-and an exact rational LP is the fix.
+solver floor is about `1e-11` in the side, so the `polished` tier cannot resolve finer.
+The general fix is an exact LP over certified rational or algebraic coefficients; the
+rational special case alone is not a universal remedy.
 
 **The destructive negative-control path is closed.** [D-035](defects.md): `negctl` now
 mutates bounded private source snapshots, so a killed control can abandon only temporary
@@ -1260,8 +1736,10 @@ citation keys below resolve there and in the per-case [`frontier/`](frontier/REA
 artifacts. Each entry names what this project relies on it for.
 
 - Stromquist, W. (2003). *Packing 10 or 11 unit squares in a square.* Electronic Journal
-  of Combinatorics 10(1), R8. Supplies `s(10)`, the `s(11)` lower bound, and the
-  `0°`/`45°` class bound.
+  of Combinatorics 10(1), R8. Supplies `s(10)`, states the `s(11)` lower-bound value,
+  and proves the `0°`/`45°` class bound.
+  Exp-016 refutes its printed unrestricted Figure 14 cover; exp-017 independently
+  certifies the same value with a source-distinct repair.
 - Trump, W. (1979). The `n = 11` packing, as published on the *Squares in Squares*
   record page with Ellsworth’s exact solution in the SVG source.
   The standing upper bound.

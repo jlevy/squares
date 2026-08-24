@@ -7,6 +7,14 @@
 **Archived:** 2026-08-22
 **Extraction:** pdfminer.six from the original PDF, cleaned for readability. Raw extraction preserved alongside as `stromquist-2003-packing-10-or-11-unit-squares.raw.md`.
 
+> ⚠️ **Three annotated source issues.** The raw multi-column extraction interleaves the
+> fractions in Figure 13's four defining coordinates. The Theorem 2 and Theorem 3
+> coordinate lists below were read directly from the rendered primary PDF, page 9.
+> The paper's middle numerical row for Lemma 4 is preserved below but followed by an
+> explicit algebraic correction. A third note records an escaping box from the printed
+> Figure 14 set; it invalidates the proof as printed but not necessarily the theorem,
+> because moving `G.x` from `.8` to `.79` appears to repair the finite cover.
+
 ---
 
 ## Abstract
@@ -63,6 +71,16 @@ We rely on these cases of Lemma 4:
 |------|:---:|:---:|:---:|
 | $f(a)$: | $.972$ | $.926$ | $.769$ |
 | $\theta^*$: | $39.5^\circ$ | $24.1^\circ$ | $17.7^\circ$ |
+
+> ⚠️ **Source erratum in the middle column.** For
+> $a=\sqrt{4/5}$, differentiating (3) before squaring requires
+> $(1-x)\sqrt{1-x^2}=(1+x)(a-x)$ with $x=\cos\theta$, hence $x\leq a$.
+> Squaring introduces the paper's smaller cubic root
+> $\theta\approx24.0788^\circ$, for which $\cos\theta>a$; it is extraneous.
+> The true minimum is at $\theta\approx31.45595^\circ$ with
+> $f(a)\approx0.9145377886$, not $.926$.
+> The particular $a=\sqrt{4/5},b=.9$ application is unaffected. The complete
+> Theorem 2 cover has a separate Figure 14 failure recorded below.
 
 > *[Figure 5: Proof of Lemma 4 -- not extractable from PDF]*
 
@@ -160,7 +178,7 @@ Now, the thirteen points in Figure 12---the eight asterisks, the points $A$, $C$
 
 **Theorem 2.** Let $s = 2 + 2\sqrt{\frac{4}{5}} \approx 3.789$. Then eleven non-intersecting boxes cannot exist inside a square of side $s$.
 
-*Proof.* For this proof, fix $s = 2 + 2\sqrt{\frac{4}{5}}$ and let $S = [0, s]^2$. Consider the ten points in Figure 13. Four of these points have coordinates $(1, 1)$, $\left(\frac{s}{2}, \frac{s}{2}\right)$, $\left(1, \frac{s}{2}\right)$, $\left(\frac{3}{2}, 1\right)$, and the rest are placed symmetrically. The vertical distance between the rows of points is $\frac{s}{2} - 1 = \sqrt{\frac{4}{5}} \approx .894$. The triangles in the figure are all congruent, and the sloping sides have length 1.
+*Proof.* For this proof, fix $s = 2 + 2\sqrt{\frac{4}{5}}$ and let $S = [0, s]^2$. Consider the ten points in Figure 13. Four of these points have coordinates $(1, 1)$, $\left(\frac{s}{2}, 1\right)$, $\left(\frac{3}{2} - \frac{s}{4}, \frac{s}{2}\right)$, $\left(\frac{1}{2} + \frac{s}{4}, \frac{s}{2}\right)$, and the rest are placed symmetrically. The vertical distance between the rows of points is $\frac{s}{2} - 1 = \sqrt{\frac{4}{5}} \approx .894$. The triangles in the figure are all congruent, and the sloping sides have length 1.
 
 Nonavoidance lemmas apply to all of the regions shown except for the rectangles at the top and bottom. If 11 boxes are to be packed into the square, at least one of them must be placed in one of those rectangles, roughly as shown in the figure (up to symmetry). From Lemmas 4 and 6 we can see that this box must contain all three of the points marked "A" in Figure 14:
 
@@ -178,6 +196,19 @@ $$H = (1.5, 2.1)$$
 $$I = (2.1, 2.1)$$
 $$J = (2.1, 1.5)$$
 
+> ⚠️ **Source-proof gap in Figure 14.** The outer quadrilateral between
+> $A_1=(1,.9)$ and $G=(.8,1.85)$ invokes Lemma 4 with $(a,b)=(.95,.8)$, but the true
+> threshold is $f(.95)\approx.798153437834<.8$. More decisively, let
+> $L=10001/10000$, choose $\cos\theta=10/\sqrt{829}$ and
+> $\sin\theta=27/\sqrt{829}$, and center the open box at
+> $(37L/(2\sqrt{829}),11/8)$. It fits in $[0,s]^2$, with its left support at $x=0$,
+> and avoids all twelve printed points; the smallest strict avoidance margin is about
+> $4.94\times10^{-5}$ at $G$. Thus the next sentence is false for the printed tuple.
+> The paper's stated slack is real: replacing only $G$ by $(.79,1.85)$ makes this
+> Lemma 4 cell strict while preserving the other outer cells and all interior triangle
+> inequalities. That repair is a new, separately checked claim rather than part of the
+> source text.
+
 Nonavoidance lemmas apply to all of the regions in this figure. Since three of the twelve points are in one box, there cannot be eleven nonintersecting boxes. This completes the proof of Theorem 2. $\square$
 
 The argument in Figure 14 is not rigid; any point in the figure could be moved by a small amount in almost any direction without causing the argument to fail. The critical distances are all in Figure 13.
@@ -194,7 +225,7 @@ The proofs are easier than in the general case and are omitted. With these more 
 
 **Theorem 3.** Let $s = 2 + \frac{4}{3}\sqrt{2} \approx 3.886$. Then eleven non-intersecting boxes cannot exist inside a square of side $s$, if each box has orientation $0^\circ$ or $45^\circ$ with respect to the square.
 
-*Proof.* Now fix $s = 2 + \frac{4}{3}\sqrt{2}$ and let $S = [0, s]^2$. Consider ten points defined exactly as in Figure 13---four of these points have coordinates $(1, 1)$, $\left(\frac{s}{2}, \frac{s}{2}\right)$, $\left(1, \frac{s}{2}\right)$, $\left(\frac{3}{2}, 1\right)$---but with the new value of $s$. If eleven boxes are to be packed into the square, one of them will have to avoid the marked points. This is impossible for a box with $0^\circ$ orientation.
+*Proof.* Now fix $s = 2 + \frac{4}{3}\sqrt{2}$ and let $S = [0, s]^2$. Consider ten points defined exactly as in Figure 13---four of these points have coordinates $(1, 1)$, $\left(\frac{s}{2}, 1\right)$, $\left(\frac{3}{2} - \frac{s}{4}, \frac{s}{2}\right)$, $\left(\frac{1}{2} + \frac{s}{4}, \frac{s}{2}\right)$---but with the new value of $s$. If eleven boxes are to be packed into the square, one of them will have to avoid the marked points. This is impossible for a box with $0^\circ$ orientation.
 
 The interior sloping lines now have length $\sqrt{\frac{10}{9}}$, but their components in the direction of a $45^\circ$ unit vector are at most 1, so Lemma 7 applies to the triangles in the figure. It follows that a $45^\circ$ box that avoids the points must be (up to symmetry) in approximately the position shown in Figure 13. This box must contain three points like those marked "A" in Figure 14, but now they have these coordinates:
 

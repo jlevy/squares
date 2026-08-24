@@ -34,15 +34,41 @@ controls:
   run: python3 tools/validate_schemas.py
   expect: "recurrence_of unknown"
 
-# The only control whose anchor tracks a live number, because the thing under test IS
-# a number. It needs updating whenever a defect is added -- and that is fine: negctl
+- name: defect log - fixed status contradicting an unresolved fix
+  file: defects.yaml
+  replace:
+    - |-
+      - id: D-039
+        title: A scalar side-error floor was treated as a basin-resolution theorem
+        date: '2026-08-23'
+        layer: tooling
+        class: soundness
+        direction: flattering
+        detected_by: review
+        severity: high
+        status: outstanding
+    - |-
+      - id: D-039
+        title: A scalar side-error floor was treated as a basin-resolution theorem
+        date: '2026-08-23'
+        layer: tooling
+        class: soundness
+        direction: flattering
+        detected_by: review
+        severity: high
+        status: fixed
+  run: python3 tools/validate_schemas.py
+  expect: "D-039: fixed while fix still says none yet"
+
+# This control's anchor tracks a live number because the thing under test IS a number.
+# It needs updating whenever a defect is added -- and that is fine: negctl
 # requires the anchor to appear exactly once, so a stale one fails the suite by name
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 131", "count: 20"]
+  replace: ["count: 193", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 131"
+  expect: "count 20 != 193"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -56,6 +82,35 @@ controls:
 # comes back -- was hand-written, and it drifted: the prose said six while the generated
 # view said seven. That is D-028 recurring inside the document D-028 is about, which is
 # why the count is now derived and why it gets a control.
+- name: synopsis - hypothesis artifact count drifting from the registry
+  file: SYNOPSIS.md
+  replace: ["Forty-one claims or open questions are codified as artifacts.",
+            "Forty claims or open questions are codified as artifacts."]
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "does not state the hypothesis artifact count (41)"
+
+- name: synopsis - duplicate experiment cost row
+  file: SYNOPSIS.md
+  replace:
+    - "| exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |"
+    - |-
+      | exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
+      | exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "exp-030 appears 2 times in the cost table"
+
+- name: synopsis - soundness direction aggregate drifting from the log
+  file: SYNOPSIS.md
+  replace: ["Fifty-one of the sixty-two soundness defects", "Fifty of the sixty-two soundness defects"]
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "soundness-direction aggregate is not 51 of 62"
+
+- name: synopsis - gate detector aggregate drifting from the log
+  file: SYNOPSIS.md
+  replace: ["gate has caught eight defects in 193", "gate has caught seven defects in 193"]
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "gate-detector aggregate is not 8 of 193"
+
 - name: synopsis - unprotected-fix count drifting from the log
   file: defects.yaml
   replace: ["    to coincide with an in-progress round.\n  regression: none\n  bead: think-5zwm\n",
@@ -69,6 +124,12 @@ controls:
   run: bash test.sh --strict
   expect: "strict mode did not enable deep regeneration"
 
+- name: gate - historical regression failure is not masked by later probes
+  file: test.sh
+  replace: ["  $PY tools/regression_test.py || return", "  false || return"]
+  run: bash test.sh --only 'historical regressions'
+  expect: "historical regressions (exit 1)"
+
 - name: defect log - generated view left stale
   file: defects.yaml
   replace: ["  title: A restart cap made the declared move budget inert",
@@ -80,6 +141,12 @@ controls:
 - name: campaign - artifact violating its declared schema
   file: campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md
   replace: ["  priority: 3", "  priority: 0"]
+  run: python3 campaign/ledger.py --check
+  expect: "schema violation"
+
+- name: campaign - generic determination outcome outside the schema
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md
+  replace: ["    outcome: criterion_missed", "    outcome: corpus_refuted"]
   run: python3 campaign/ledger.py --check
   expect: "schema violation"
 

@@ -1,5 +1,5 @@
 ---
-title: H-010 — the Stromquist conditional-forcing argument reproduces
+title: H-010 — Stromquist's full Theorem 2 mechanism reproduces
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
@@ -9,52 +9,91 @@ hypothesis:
   id: H-010
   kind: hypothesis
   claim: >-
-    A checked computational reconstruction reproduces Stromquist's complete Theorem 2
-    mechanism: avoiding the initial 10 points localizes a unit square to the declared
-    top or bottom exceptional region; the relevant lemmas force that same square to
-    contain all three A-points; and nine further points complete the counting
-    contradiction for 11 packed squares.
+    At s = 2 + 4/sqrt(5), a checked reconstruction reproduces all five implications in
+    Stromquist's Theorem 2: eleven pairwise-disjoint open boxes of side strictly greater
+    than one force one box to avoid the ten Figure 13 points; every such box lies in a
+    declared exceptional region up to the horizontal and vertical centerline
+    reflections; that same box contains all three A-points;
+    the complete twelve-point Figure 14 set is unavoidable; and the resulting 3+9
+    resource count excludes eleven boxes.
   lane: proof
   derived_from: [X-001]
   strategy_refs: ['proof:2', 'proof:3', 'proof:15']
   criterion:
     shape: conditions
-    metric: independently checked localization, forced-triple cohabitation, and final counting implications
-    direction: every implication and its boundary cases reproduce the published proof
+    metric: five independently replayed source, geometry, and finite-count implications
+    direction: every implication, strict inequality, symmetry reduction, and boundary case reproduces the published proof
   instrument: >-
-    Not yet built. A source-faithful point-set transcription, continuous escape
-    falsifier, and certificate-producing interval subdivision for each localization and
-    cohabitation implication.
-  instrument_ready: false
-  regime: published point sets transcribed with provenance; exact geometry at certificate checking
+    tools/check_stromquist_theorem2.py binds the printed source tuple, exactly replays
+    strict Figure 13 and Figure 14 escape witnesses, checks the conditional capacity
+    logic, and regenerates retained evidence. A false Figure 14 node terminally rejects
+    this conjunction; the checker does not claim a universal Figure 13 cover.
+  instrument_ready: true
+  regime: >-
+    Stromquist's published point sets at exact s = 2 + 4/sqrt(5), with open boxes of
+    side >1 inside [0,s]^2; a unit-square limiting relaxation is admissible only when
+    its monotone and strict-boundary implication is proved explicitly
   instance: {axis: n, point: 11}
   sweep: {axis: n, points: [11]}
-  priority: 2
-  cost_estimate: tier S falsifier checks; proof leg separately budgeted
+  priority: 1
+  cost_estimate: tier S source and falsifier checks; exact certificate leg separately timed
   prereqs: []
   replication: true
   registered: retroactive
   notes: >-
-    This is a known-answer machinery test of Stromquist's proof structure, not a claim
-    that one standalone 12-point set is unavoidable. Ten points localize an avoiding
-    square; three A-points are forced into that same square; nine further points then
-    make the count work. A saturated numerical falsifier remains censored until the
-    corresponding implication has an independently checked certificate.
+    The published proof asserts that the twelve Figure 14 points are unavoidable, but
+    that assertion alone would not exclude eleven boxes. The proof also needs the
+    ten-point localization and the fact that one named box contains three of those
+    twelve points. A positive escape witness is decisive falsifier evidence; failure to
+    find one is never a known-answer result or a certificate. D-151 corrects the
+    source's extraneous middle Lemma 4 root. The source audit has since produced an
+    explicit candidate escape from the printed twelve-point set, tracked by D-152; this
+    original claim remains unchanged so the experiment can reject it honestly.
 ---
-# H-010 — a source-faithful proof-lane calibration
+# H-010 — Stromquist’s full Theorem 2 mechanism
 
-The original artifact compressed Stromquist’s proof into “10-point escape, 12-point
-unavoidability.” That is not the published implication and would calibrate the tool on
-the wrong object. The load-bearing structure is conditional: localization of an avoiding
-square, forced cohabitation of three points in that same square, then a count using nine
-more points.
+The theorem is formulated for open boxes of side strictly greater than one, not unit
+squares. This strict relaxation is what lets a lower bound for unit-square packing be
+proved without losing boundary cases.
 
-Each implication needs a falsifier and an independently checkable certificate.
-Keeping them separate prevents numerical search saturation from being narrated as the
-theorem.
+The proof has five separately checkable nodes:
+
+1. eleven disjoint boxes and ten Figure 13 points force one box to avoid all ten;
+2. every avoiding box lies in one of four exceptional top/bottom regions, one up to the
+   Klein four group generated by horizontal and vertical centerline reflections;
+3. Lemmas 4 and 6 force that same box to contain A1, A2, and A3;
+4. the twelve Figure 14 points are unavoidable; and
+5. after the named box consumes three A-points, ten other boxes cannot each consume one
+   of the nine remaining points.
+
+The earlier “10-point escape, 12-point unavoidability” summary named two true facts but
+omitted the conditional link that makes the count work.
+A checker that establishes only those two facts does not reproduce the theorem.
+
+Each geometric implication needs a positive falsifier path and an independently
+checkable certificate.
+Search saturation is censored diagnostic evidence, never a negative control or a proof.
 
 The source transcription and the final certificate need independent checks because a
 faithfully executed experiment on the wrong point set answers nothing.
+
+The checker must also replay the unsquared sign condition in Lemma 4. The paper’s
+`24.1°/.926` table entry at `a = √(4/5)` comes from an extraneous cubic root; the actual
+minimum is about `.9145377886`, still above the `.9` used in that particular Lemma 4
+application.
+
+## Current falsifier
+
+The source audit found a candidate open square of side `10001/10000`, with
+`tan(theta) = 27/10` and center `(37L/(2 sqrt(829)), 11/8)`, that fits in the container
+and avoids every printed Figure 14 point.
+Its smallest computed avoidance margin is about `4.94e-5`, at `G`.
+
+H-010 is not rewritten around that observation.
+The retained checker must bind the printed point tuple, certify every strict inequality,
+and replay the result independently.
+If it does, H-010 is rejected.
+The proposed one-coordinate repair belongs to the separately preregistered H-041.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

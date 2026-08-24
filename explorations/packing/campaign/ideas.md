@@ -74,13 +74,16 @@ multiplies effort against the measured probability.
 rigid, no converse follows: a non-record optimum can be a positive-dimensional terminal
 family rather than a point.
 The exact `n = 3` side-2 sliding family proves that the current key splits one connected
-component. At `n = 5`, two matching side/contact summaries are an unresolved identity
-signal: raw contact counts establish neither rank deficiency, dimension, nor
-connectivity ([D-034](../defects.md)). Until the census defines what it counts, the
-denominator of “rare” is not a number, and the premise is untestable rather than merely
-untested. The baseline is consistent with that — five independent seeds landing in a
-narrow band five times narrower than the remaining gap is consistent with repeatedly
-finding one score region — but consistent is not evidence, and
+component.
+At `n = 5`, exp-033 proves the two equal-side keys share one exact fixed-angle
+optimal face, and exp-034 embeds it in a two-parameter angle-and-slide sheet of optima.
+This does not prove their complete nonsmooth stationary identity, and raw contact counts
+alone still establish neither rank deficiency, dimension, nor connectivity
+([D-034](../defects.md)). Until the census defines what it counts, the denominator of
+“rare” is not a number, and the premise is untestable rather than merely untested.
+The baseline is consistent with that — five independent seeds landing in a narrow band
+five times narrower than the remaining gap is consistent with repeatedly finding one
+score region — but consistent is not evidence, and
 [H-012](hypotheses/H-012-record-basins-are-rare.md) is registered to kill the premise
 cheaply if it is wrong.
 
@@ -92,10 +95,10 @@ reproducible and numerically polishable.
 Component identity, countability, and exact value require separate evidence.
 
 Two further observations constrain most of these ideas.
-**Trump’s packing is a strong rigidity candidate**, but this repository has not yet
-supplied the active-constraint rank or interval proof needed to call it isolated.
-Its apparent local jamming is a reason to test whether named random-start proposers miss
-it. [H-018](hypotheses/H-018-basin-entry.md) has already been refuted as registered; its
+**Trump’s packing is locally isolated.** Exp-013 proves this from the complete finite
+branch system and exact zero-cone certificates; it does not give an explicit radius or
+show why named random-start proposers miss it.
+[H-018](hypotheses/H-018-basin-entry.md) has already been refuted as registered; its
 finite-refiner residual motivates H-021 through H-023 but is not a runnable basin-width
 experiment. It uses exactly two observed tilt classes, `0°` and one non-trivial angle, a
 structural prior an unconstrained search does not exploit.
@@ -118,7 +121,7 @@ families remain untried.
 | 4b | Non-smooth angle search: bracket over merged angle classes | **works** |  | [exp-007](series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md)–[exp-009](series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | Reaches the analytic optimum to machine precision at `n = 5` and `n = 10` (`2e-15`, `1e-15`), where descent reaches `3e-08` and `5e-03`. The tested `n = 11` starts remain far from Trump; component identity is unresolved |
 | 25 | Retain the fixed-cell LP’s primal-dual equilibrium-load certificate; test normalized loads as descriptors and block-move signals | registered | [H-031](hypotheses/H-031-load-guided-block-moves.md) | [depth review G-2](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | The dual balances a nonzero container objective, so it is not automatically a free-framework self-stress or an angle certificate; its search value gets a held-out paired test |
 | 26 | Kink-codimension candidate: known record cells have strictly positive first-order growth in every independent class-angle direction | registered | [H-027](hypotheses/H-027-record-angle-cones.md) | [depth review G-4](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | T-3 supplies one one-dimensional slice, not a law; test the full local directional model at `n=11` and the two-direction prediction at `n=17` |
-| 31 | Generalized one-sided feasible-tangent screen at Trump’s packing | registered | [H-026](hypotheses/H-026-trump-first-order-rigidity.md) | [depth review G-1](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | Fourteen pair contacts plus eleven wall incidences are feature counts, not a rank theorem; enumerate nonsmooth branches and either exhibit a mechanism or certify no first-order fixed-side motion |
+| 31 | Exact branchwise linearized-cone screen at Trump’s packing | confirmed | [H-026](hypotheses/H-026-trump-first-order-rigidity.md) | [exp-013](series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | All 128 derivative-distinct cones are zero by exact positive-stress certificates, covering 512 raw branches; the finite-branch lemma locally isolates the pose |
 
 ## The premise, and the census that tests it
 
@@ -140,7 +143,7 @@ families remain untried.
 | # | Idea | Status | H | From | Why it might work, or not |
 | --- | --- | --- | --- | --- | --- |
 | 11 | Angle-class two-level search | registered | [H-001](hypotheses/H-001-angle-class-reduction.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | Algorithmic paired comparison; the corpus-wide angle-count claim is separate |
-| 11a | Verified records through `n=30` use at most three angle classes | registered; counterexample candidate | [H-024](hypotheses/H-024-record-angle-class-count.md) | split from review H-1 | The primary `n=29` SVG appears to have six classes; verify that pose first, then replace the brittle class bound with effective angular rank/compressibility if it survives |
+| 11a | Verified records through `n=30` use at most three angle classes | **refuted** by six verified classes at `n=29` | [H-024](hypotheses/H-024-record-angle-class-count.md), [exp-012](series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | split from review H-1 | Literal class count was too brittle; the useful successor is H-025’s effective angular compression at bounded side loss |
 | 12 | δ-continuation: fixed-side projection while walking `δ` down | registered | [H-013](hypotheses/H-013-delta-continuation.md) | review H-13 | A verified path gives an upper bound on minimax clearance; numerical branch coalescence is not a feasible-component merge certificate |
 | 13 | MAP-Elites over mechanism descriptors | registered | [H-015](hypotheses/H-015-map-elites-illumination.md) | review H-15 | Keeps the loss, changes what is retained. Descriptors are frozen before comparison |
 | 14 | Neighbor-transfer seeding from `n ± 1` records | registered | [H-004](hypotheses/H-004-neighbor-transfer-seeding.md) | review H-4 | Corrected to an equal-budget `n=11` comparison; the original `n=12` side-4 target was vacuous |
@@ -149,7 +152,7 @@ families remain untried.
 | 17 | Same annealer, 100× the budget | registered | [H-017](hypotheses/H-017-budget-scaling.md) | this campaign | Park behind a short budget-response ladder; one long run cannot distinguish a flat response from a threshold crossing |
 | 18 | Billiard / inflation | raw |  | `search:11` | Produced records at `n = 29, 37`; δ-continuation is its principled cousin |
 | 19 | Constructor DSL proposed by an LLM, evaluated by LP + exact check | raw |  | strategy doc | Sequenced behind the first atlas artifact — there must be something verified to read |
-| 33 | Effective orientation compression: few fitted class angles retain nearly all record quality even when raw classes are numerous | registered | [H-025](hypotheses/H-025-record-angle-compressibility.md) | successor to H-024 | The `n=29` six-class candidate kills a universal raw count, not a quantitative refit criterion |
+| 33 | Effective orientation compression: few fitted class angles retain nearly all record quality even when raw classes are numerous | registered; promoted after H-024 refutation | [H-025](hypotheses/H-025-record-angle-compressibility.md) | successor to H-024 | Exp-012’s six-class `n=29` witness kills a universal raw count, not a quantitative refit criterion |
 | 34 | Public-parent surgery reproduces held-out 2026 UnitSquare improvements before chasing unseen records | registered | [H-030](hypotheses/H-030-public-parent-surgery.md) | [depth review G-10](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | Known parent/child geometries turn construction grammar into a falsifiable methods test |
 | 36 | Finite instances of current asymptotic stack/trapezoid primitives improve a public parent | registered | [H-035](hypotheses/H-035-asymptotic-primitive-finite-transfer.md) | [depth review G-9](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | Bridges active 2025–26 theory to finite records without pretending finite success improves an exponent |
 
@@ -161,16 +164,17 @@ families remain untried.
 | 21 | `n = 11` at inflated `δ` as a continuous progress metric | shaped |  | strategy doc | Define a fixed-side feasibility/projection family; the minimum inflation needed for a preregistered target-component hit rate is the scalar, and smaller is better |
 | 22 | Cleemann-style 3-4-5 construction at `n=97`, with `n=78` as a diagnostic | registered | [H-005](hypotheses/H-005-m2-minus-3-construction.md) | review H-5 | A specific upper-bound construction claim; the next `m²-3` proof target `n=61` is separate H-033 |
 | 23 | LP duals as unavoidable-set generators (proof lane) | registered | [H-006](hypotheses/H-006-lp-dual-unavoidable-sets.md) | review H-6 | Quantitative cross-resolution support screen; never itself a proof |
-| 24 | Stromquist falsifier triple | registered | [H-010](hypotheses/H-010-stromquist-triple.md) | review H-10 | Known-answer falsifier control followed by a separate certificate leg |
+| 24 | Stromquist conditional-forcing reconstruction | refuted | [H-010](hypotheses/H-010-stromquist-triple.md) | [exp-016](series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md) | An exact strict box avoids all twelve printed Figure 14 points; this rejects the proof as printed, not its numerical lower bound |
 | 29 | Reference-cell two-angle value sheets `Φ_C(a₁,a₂)` at `n=11`, then `n=17` | registered | [H-028](hypotheses/H-028-reference-cell-angle-sheets.md) | [depth review G-6](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | Cheap for one imported cell and assignment; a global two-class lower envelope is a separate multi-cell search and is not claimed |
 | 30 | Fractional-piercing ceiling of the pure ten-point method at `n=11` | registered | [H-034](hypotheses/H-034-fractional-piercing-ceiling.md) | [depth review G-3](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | `τ*(U_s)>10` rules out ten points; `τ*≤10` does not produce an integral set. Bašić–Slivková is the direct integral-piercing precedent; continuous discretization needs two-sided certification |
-| 37 | Exact quotient topology of the optimal configuration set at `n=3…6` | registered | [H-032](hypotheses/H-032-small-n-optimal-moduli.md) | basin ontology | The analytic `n=3` family is the calibration; sampling keys cannot answer connectedness or strata |
+| 37 | Exact quotient topology of the optimal configuration set at `n=3…6` | active; `n=3,4` solved by exp-014/015 | [H-032](hypotheses/H-032-small-n-optimal-moduli.md) | basin ontology | The sub-second exact controls are permanent; `n=5` is the first unresolved continuous case, and sampling keys cannot answer connectedness or strata |
 | 38 | Extend the proved `m²-3` family from `m=7` to `m=8`, i.e. decide `s(61)=8` | registered | [H-033](hypotheses/H-033-m2-minus-3-at-n61.md) | Bentz 2010/2016 | The natural next exact-value case; Bašić–Slivková gives a weaker specialized bound, not the theorem |
 | 39 | Robustify Stromquist’s exact `0°/45°` exclusion to a nonzero angle neighborhood | registered | [H-036](hypotheses/H-036-robust-restricted-orientation.md) | proof frontier | A tractable structural theorem between one exact restricted class and the unrestricted record |
 | 40 | Close the asymptotic waste exponent gap `1/2` versus `3/5` | registered | [H-037](hypotheses/H-037-asymptotic-waste-exponent.md) | Bui 2025; McClenagan 2026 | A separate mathematical lane; finite constructor optimization supplies experiments but not the exponent verdict |
 | 41 | Classify the exact number fields, elimination systems, and mechanism associations of verified record witnesses | registered | [H-038](hypotheses/H-038-record-number-fields.md) | algebraic frontier | Metadata follows the verified active cell, never a superseded decimal row; a failed degree law is retained |
-| 42 | Improve the lower bound for `s(12)` and ultimately decide whether `s(12)=4` | registered | [H-039](hypotheses/H-039-s12-proof-frontier.md) | proof frontier | H-010 first calibrates the whole Stromquist implication; CEGIS then alternates candidate resources with continuous escape witnesses |
+| 42 | Improve the lower bound for `s(12)` and ultimately decide whether `s(12)=4` | registered | [H-039](hypotheses/H-039-s12-proof-frontier.md) | proof frontier | Exp-016/017 now calibrate failure and success of the forcing architecture; CEGIS can alternate candidate resources with continuous escape witnesses |
 | 43 | Walk adjacent active LP cells instead of resampling cell volume | registered | [H-040](hypotheses/H-040-active-cell-neighbor-walk.md) | piecewise-linear geometry | Compare new verified cells per LP solve at `n=5,10`; a cell is not automatically a component or basin |
+| 44 | Repair Stromquist’s printed Figure 14 set without changing the proof architecture | confirmed | [H-041](hypotheses/H-041-repaired-stromquist-point-set.md) | [exp-017](series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | Moving only `G.x` from `.8` to `.79` yields a complete exact five-node certificate and independently restores the stated lower bound |
 
 ## Open questions
 
@@ -192,10 +196,13 @@ Registered as `kind: open_question` when worth carrying formally.
   they use? A histogram over restarts would say whether the search is finding one wrong
   answer repeatedly or many.
 - **Does any run ever produce a two-tilt configuration unprompted?**
-- **[What is the certified local geometry of Trump’s packing?](hypotheses/H-022-trump-local-geometry.md)**
-  The exact contacts do not by themselves establish isolation or local optimality.
+- **[What quantitative local geometry remains after exp-013?](hypotheses/H-022-trump-local-geometry.md)**
+  Exact contacts alone did not establish isolation; exp-013 now does.
+  The live question is an explicit radius, side-perturbation stability, and transferable
+  stress structure.
 - **[Are the observed `n=5` endpoints in one terminal family?](hypotheses/H-023-n5-terminal-connectivity.md)**
-  Six endpoints from six proposals do not decide their connectivity.
+  Exp-033 connects the equal-side pair inside one exact fixed-angle optimal face; full
+  stationary connectivity and unequal-side clearance remain open.
   Six endpoints from six draws show non-saturation, not its cause.
 
 ## Dead ends
@@ -209,7 +216,7 @@ This section is why the campaign does not rediscover its own mistakes.
   the exact pose has eleven square-wall incidences, so the proposed equality count
   double-counted. The remaining system is nonsmooth, and neither the corrected feature
   count nor a smooth Jacobian decides rigidity.
-  Replaced by H-026’s generalized one-sided tangent screen.
+  Replaced by H-026’s exact branchwise linearized-cone screen, confirmed by exp-013.
 
 - **GPU population search.** Measured at 2.5M evals/s on MPS against 18–20M on the CPU’s
   cores: the kernel is elementwise with almost no arithmetic intensity, so it is launch-

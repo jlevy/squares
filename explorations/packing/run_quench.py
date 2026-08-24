@@ -143,7 +143,7 @@ def main() -> int:
             nonlocal calls
             calls += 1
             got = solve_to_fixed_point([0.0] * 6 + [tt] * 5, list(ref_x), list(ref_y), 11)
-            return got[0] if got else 1e3
+            return got.side if got and got.settled else 1e3
 
         t0 = time.time()
         gr = (math.sqrt(5) - 1) / 2

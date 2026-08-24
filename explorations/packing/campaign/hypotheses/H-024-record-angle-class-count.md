@@ -21,10 +21,10 @@ hypothesis:
     direction: at most 3
     threshold: 3
   instrument: >-
-    Not yet complete. Import full record geometry with provenance, independently verify
-    each packing, and count quarter-turn orientation classes with exact values where
-    available and ambiguity intervals otherwise.
-  instrument_ready: false
+    tools/check_kingbird_svg.py imports the retained primary SVG, reconstructs every
+    square, replays its source equations, independently checks all pairs with
+    sqpack.verify, and counts quarter-turn orientation classes under declared intervals.
+  instrument_ready: true
   regime: all n <= 30 with retained, independently verified record geometry; missing cases reported
   instance: {axis: n, point: 29}
   sweep: {axis: n, points: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]}
@@ -34,13 +34,11 @@ hypothesis:
   replication: true
   registered: '2026-08-24'
   notes: >-
-    The primary n = 29 SVG contains five distinct nonzero angle entities plus the
-    axis-aligned class, making it a direct counterexample candidate. Independently
-    reconstruct and verify that one packing before importing the rest of n <= 30.
-    Missing or picture-only cases do not count as confirmations. Refutation of this
-    descriptive corpus claim does not refute H-001's algorithmic comparison; its useful
-    successor asks about effective angular rank or compressibility rather than raw class
-    count.
+    Exp-012 reconstructed and numerically verified the primary n = 29 SVG: its five
+    distinct nonzero angle entities plus the axis-aligned class give six unambiguous
+    classes and refute this universal claim at the preregistered stop cell. Refutation
+    of this descriptive corpus claim does not refute H-001's algorithmic comparison;
+    H-025 asks the useful successor question about effective angular compressibility.
 ---
 # H-024 — separate the corpus law from the search algorithm
 
@@ -53,12 +51,14 @@ The equality rule is part of the measurement.
 Numerically close orientations remain an ambiguity unless their representation or
 interval evidence resolves them.
 
-**Counterexample candidate, 2026-08-24.** The primary Kingbird `n = 29` SVG declares
-nonzero orientations `25.258655°`, `20.800127°`, `17.506268°`, `24.962588°`, and
-`24.308358°`, in addition to axis-aligned squares.
-If the imported pose passes the independent verifier, six classes determine this
-hypothesis immediately.
-Do that one-cell check before a full corpus sweep.
+**Refuted, 2026-08-24.**
+[Exp-012](../series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md)
+reconstructs the primary Kingbird `n = 29` SVG and checks all 29 squares and 406 pairs
+at 160 decimal digits.
+Its orientations are aligned, `a = 25.258655°`, `b = 20.800127°`, `−c = −17.506268°`,
+`d = 24.962588°`, and `i = 24.308358°`. The six intervals are disjoint by a minimum of
+`0.296067°`, so the result misses the registered upper bound of three without a
+clustering ambiguity.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -15,8 +15,9 @@ There is not yet enough admissible, executable numerical work for
 
 The distinction matters:
 
-- the persistent agent goal is the controller for research, implementation, review,
-  delegation, verification, recording, and choosing the next ready bead;
+- the portable outer work loop controls research, implementation, review, delegation,
+  verification, recording, and selection of the next ready bead; a native agent goal or
+  watchdog may supervise it but is not its source of truth;
 - `runner.py` is only the executor for preregistered numerical cells whose instruments,
   evaluators, budgets, and validity paths already exist.
 
@@ -66,24 +67,48 @@ Visualization belongs to both Insight and Efficiency: the infrastructure must re
 atlas, ambiguity graph, discovery curve, and continuation tree, while the research work
 decides which views expose mechanisms rather than decorate a report.
 
-## Current measured state
+## Measured checkpoint — 2026-08-24
 
-Measured on the merged PR 15 baseline unless stated otherwise:
+This table is a dated planning checkpoint, not a generated current-status view.
+The campaign ledger owns cumulative round and effort totals.
 
 | Item | Current fact | Consequence |
 | --- | --- | --- |
 | Scientific registry | 40 artifacts: H-001 through H-040, including seven explicit open questions | The census spine now sits beside local geometry, construction, exact-value, algebraic and asymptotic lanes |
-| Recorded campaign | 11 rounds, 275 agent-minutes, 1,380.674 machine seconds (23.0 wall-minutes) | The historical loop is about 12:1 agent-bound |
+| Recorded campaign | [Generated ledger](../../../../campaign/ledger.md#effort): 15 terminal rounds, 422 agent-minutes, 24.0 wall-minutes at this checkpoint | The loop remains overwhelmingly agent-bound |
 | Operational runner queue | one H-017 cell, five seeds, recipe timebox 8h | “Queue nonempty” is not an overnight-readiness test |
 | Estimated H-017 runtime | 2.80h at 39.7M moves/s locally; 7.46h at the recorded 14.9M moves/s cloud rate | Target-host calibration is mandatory |
 | Fast checks | status 0.22–0.24s; preflight 0.12s; ledger 0.23s; schemas 1.60s; engine selftest 1.43s | Orientation and focused feedback are already cheap |
-| Normal gate | recent single runs 108–135s | Profile repeated samples before optimizing further |
+| Strict/deep gate | 40s after exp-015 on the recorded development host | Keep cheap focused checks in the inner loop; remeasure before optimizing the gate again |
 | Canonicalizer | 0.098s at `n=7`, 7.91s at `n=9` in one audit | Likely census bottleneck; confirm under `think-xzew` before redesign |
 
 The existing preflight is useful but not a launch decision.
 It proves that its current guards fire and that at least one recipe is visible.
 It does not independently verify a pose, price the queue, bind the session deadline, or
 rehearse crash persistence.
+
+## Successive-`n` Confidence Ladder
+
+The active, mutable experiment order now lives in the
+[basin-map confidence ladder](../../../../campaign/agendas/agenda-001-basin-confidence-ladder.md).
+That soft-schema artifact is the handoff surface for one series of loops: every item
+states whether it is validating the tools, validating the measurement system, or asking
+a genuine research question; it also names the size, budget, entry condition, exit
+evidence, bead, and dependencies.
+
+This document continues to own broad launch readiness and the portfolio below.
+The ladder owns the frequently revised order of concrete cells.
+`SYNOPSIS.md` owns current knowledge, hypotheses own claims, experiments own
+measurements, beads own unfinished work, and the agent-session artifact owns one bounded
+clock. None is a duplicate runner queue.
+
+The current ladder has completed exact and event-level controls at `n = 3,4`. Its next
+ready item, BC-003, is a four-seed `n = 5` **tool-validation** cell, not basin research.
+The first genuine basin-structure item is the later H-023 connectivity cell, which stays
+blocked until both the `n = 5` event path and the exact `n = 3,4` identity controls
+pass.
+This distinction lets the campaign run many basic checks without converting a clean
+program execution into evidence about the landscape.
 
 ## The scientific portfolio
 
@@ -127,10 +152,10 @@ not component identity or a rigidity certificate.
 
 H-024 separately tests the descriptive claim that verified record packings through
 `n=30` use at most three orientation classes.
-The primary `n=29` SVG is now a six-class counterexample candidate, so verify that one
-pose before funding the full corpus sweep.
-It neither proves nor is proved by H-001’s algorithmic performance; a refutation should
-produce a successor about effective angular rank or compressibility.
+Exp-012 reconstructed and independently screened the primary `n=29` SVG and found six
+unambiguous classes, refuting H-024 at its first stop cell.
+That neither proves nor is proved by H-001’s algorithmic performance; H-025 now owns the
+successor question about effective angular rank or compressibility.
 
 H-017 remains a low-priority scaling fallback after the validity boundary is repaired.
 H-016, H-018, H-019, and H-020 are resolved for their registered regimes and should not
@@ -140,26 +165,29 @@ be silently rerun as fresh hypotheses.
 
 | Priority | Artifact | Output | Boundary |
 | ---: | --- | --- | --- |
-| 1 | [H-010](../../../../campaign/hypotheses/H-010-stromquist-triple.md) | known escape, censored hard case, then independently checked PoseBox certificate | search saturation is never proof |
-| 1 | [H-026](../../../../campaign/hypotheses/H-026-trump-first-order-rigidity.md) / [H-022](../../../../campaign/hypotheses/H-022-trump-local-geometry.md) | union-of-branchwise tangent test, then continuation or interval-local exclusion | feature counts and a smooth Jacobian decide neither rigidity nor isolation |
+| 1 | [H-010](../../../../campaign/hypotheses/H-010-stromquist-triple.md) / [H-041](../../../../campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **exp-016/017 complete:** exact rejection of the printed cover plus exact certification of a source-distinct one-coordinate repair | the published proof remains false as printed; only the repaired set proves the numerical inequality here |
+| 1 | [H-026](../../../../campaign/hypotheses/H-026-trump-first-order-rigidity.md) / [H-022](../../../../campaign/hypotheses/H-022-trump-local-geometry.md) | **exp-013 complete:** 128/128 exact zero-cone certificates and finite-branch local isolation; next quantify a radius | feature counts and a smooth Jacobian decided neither rigidity nor isolation |
 | 2 | [H-006](../../../../campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md) | quantitative, refinement-stable dual support for candidate loci | discretized LP generates proof objects; it proves no bound |
-| 1 | [H-039](../../../../campaign/hypotheses/H-039-s12-proof-frontier.md) | checked improvement to the `s(12)` lower bound | H-010’s complete conditional mechanism is the known-answer gate |
+| 1 | [H-039](../../../../campaign/hypotheses/H-039-s12-proof-frontier.md) | checked improvement to the `s(12)` lower bound | exp-016/017 are the calibrated failure and success gates for the forcing architecture |
 | 1 | [H-033](../../../../campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | extend Bentz’s `m²−3` method to `m=8` or retain its first blocking pose | the direct 2018 piercing bound is weaker than Nagamochi and does not settle `s(61)` |
 | 2 | [H-034](../../../../campaign/hypotheses/H-034-fractional-piercing-ceiling.md) | certified decision whether `τ*(U_s)>10` at Trump’s side | `>10` rules out ten points; `≤10` does not construct an integral set |
 | 2 | [H-036](../../../../campaign/hypotheses/H-036-robust-restricted-orientation.md) | extend Stromquist’s exact `0°/45°` exclusion to a fixed neighborhood | reproduce the exact theorem before interval enlargement |
-| 2 | [H-032](../../../../campaign/hypotheses/H-032-small-n-optimal-moduli.md) / [H-038](../../../../campaign/hypotheses/H-038-record-number-fields.md) | exact quotient spaces and exact-field taxonomy | begin at `n=3` and one reconstructed known algebraic witness |
+| 2 | [H-032](../../../../campaign/hypotheses/H-032-small-n-optimal-moduli.md) / [H-038](../../../../campaign/hypotheses/H-038-record-number-fields.md) | exp-014/015 solve the exact `n=3,4` quotient cells; next classify `n=5`, alongside exact-field taxonomy | keep the sub-second controls permanent; sampling cannot decide the `n=5` component relation |
 | 3 | [H-037](../../../../campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | narrow the `1/2` versus `3/5` exponent gap | separate paper-mathematics lane; finite diagnostics do not decide it |
 
-The first proof rotation is H-026, the exact `n=3` control in H-032, and H-010. The
-slower `s(12)`, `s(61)`, fractional-piercing, restricted-orientation, exact-field and
-asymptotic programs remain visible with explicit intermediate artifacts rather than
+H-026 completed in exp-013, exp-014/015 completed H-032’s `n=3,4` controls, and
+exp-016/017 completed the printed-failure/repaired-success Stromquist calibration.
+The next proof rotation is H-039’s first fixed-threshold `n=12` candidate alongside the
+first complete `n=5` component analysis.
+The slower `s(12)`, `s(61)`, fractional-piercing, restricted-orientation, exact-field
+and asymptotic programs remain visible with explicit intermediate artifacts rather than
 being forced into the stochastic census queue.
 
 ### Basin maps, in order of mathematical honesty
 
-The first views are generated packing glyphs and the exact `n=3` quotient family.
-Next come fixed-cell angle sheets with active-basis overlays, an `n=5` ambiguity graph
-with tangent evidence, and valid-path clearance profiles.
+The first view has landed: exp-014’s generated packing glyphs and exact `n=3` quotient
+family. Next come fixed-cell angle sheets with active-basis overlays, an `n=5` ambiguity
+graph with tangent evidence, and valid-path clearance profiles.
 Kernel-conditioned transition networks and discovery curves wait for full event
 retention and `P/Q/E`; a global merge tree waits for certified components of a
 fixed-side filtration.
@@ -201,6 +229,8 @@ No unwatched numeric cell starts until every applicable line is true.
 - [ ] A separate verifier recomputes containment and non-overlap from the archived pose.
 - [ ] The actual engine selftest, binary digest, source revision, dirty state, host,
   seeds, and budget are recorded.
+- [ ] D-132 distinguishes a settled fixed cell from a rejected transition or iteration
+  cap and prevents outer convergence when the inner solve did not settle.
 - [ ] Prerequisites are satisfied; an instrument-ready flag changes only with the
   implementation that makes it true.
 
@@ -327,6 +357,9 @@ The new H-024 corpus reconstruction is `think-w5rb` under the Insight focus.
   added the exact-small-`n`, public-parent, `s(12)`, `s(61)`, algebraic-field and
   asymptotic lanes, and adopted the fast-first visualization and successive-halving
   agenda.
+- **2026-08-24:** added the soft-schema basin confidence ladder as the mutable
+  size-by-size queue. It separates tool validation, measurement validation, and research
+  so proved controls can build confidence without being reported as landscape results.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

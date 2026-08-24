@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 131
+count: 193
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -846,9 +846,10 @@ defects:
   status: outstanding
   what: >-
     The exact n = 3 side-2 family with centres `(1/2,1/2)`, `(3/2,1/2)`, and
-    `(t,3/2)` for `t in [1/2,3/2]` has one contact certificate but many geometric keys;
-    `Atlas.add` requires both hashes to agree and therefore splits one connected optimum
-    family into quantization-dependent rows. At n = 5, two rows also share side
+    `(t,3/2)` for `t in [1/2,3/2]` has infinitely many interior geometric keys sharing
+    one contact certificate, plus a second wall-endpoint certificate; `Atlas.add`
+    requires both hashes to agree and therefore splits one connected optimum family into
+    quantization-dependent rows. At n = 5, two rows also share side
     2.767766952966, short form, contact certificate, angle signature, and contact count
     while differing geometrically. That makes their identity unresolved, but does not by
     itself prove they lie in the same connected component or establish its dimension.
@@ -859,12 +860,14 @@ defects:
     The error is flattering in both directions: the landscape reads as richer and an
     isolated record component can look rarer against an inflated denominator.
   fix: >-
-    none yet. Detect active-constraint rank deficiency, continue every null direction,
-    and define the counted object as an isolated endpoint or connected terminal
-    component under a fully specified quench and quotient. Contact/side agreement alone
-    may merge distinct components, while exact two-hash agreement splits the n = 3
-    family. Reconcile think-1s0h with the more explicit acceptance test on think-0yo9.
-  regression: none
+    Exp-014 exactly classifies the n = 3 control as two labelled circles, one unlabelled
+    circle, and a D4 x S3 quotient interval with three orbit strata. The general atlas
+    defect remains open: define and certify connected terminal components under a fully
+    specified quench and quotient before counting n = 5 or larger landscapes.
+  regression: >-
+    The gate replays exp-014's exact topology, its interior-versus-wall certificate
+    distinction, and its deterministic quotient map. Think-1s0h retains the unresolved
+    general and n = 5 acceptance work.
   bead: think-1s0h
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 - id: D-035
@@ -1066,11 +1069,14 @@ defects:
     settled and can send implementation toward the wrong quotient or continuation
     model.
   fix: >-
-    The rank-free claims are removed from the living docs. The underlying questions stay
-    open: compute fixed-cell active-matrix rank, the full pose-and-angle Jacobian after
-    quotienting symmetries, feasible null directions, and validated continuation across
-    active-set changes before asserting rigidity, dimension, or connectivity.
-  regression: none
+    The rank-free claims are removed from the living docs. Exp-013 now resolves the
+    Trump half with complete branchwise linearizations and exact zero-cone certificates.
+    The n = 5 question stays open: compute fixed-cell active-matrix rank, full
+    pose-and-angle linearizations, feasible null directions, and validated continuation
+    across active-set changes before asserting dimension or connectivity.
+  regression: >-
+    tools/check_trump_tangent.py replays the n = 11 result; no n = 5 regression exists
+    yet, so this combined defect remains outstanding under think-1s0h.
   bead: think-1s0h
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 - id: D-042
@@ -2266,16 +2272,19 @@ defects:
   severity: high
   status: fixed
   what: >-
-    H-010 compressed Stromquist's argument into a ten-point escape followed by a
-    standalone twelve-point unavoidability claim. The theorem instead localizes an
-    avoiding square, forces that same square to contain three A-points, then uses nine
-    further points in a counting contradiction for eleven packed squares.
+    H-010 treated a ten-point escape and the published twelve-point Figure 14
+    unavoidability claim as the complete theorem. That omitted the conditional
+    mechanism: the ten points localize one avoiding box, and the proof forces that same
+    box to contain three of the twelve points before applying the 3+9 count.
   consequence: >-
     A tool could pass the registered known-answer control without reproducing the
     implication that makes the published lower bound work.
   fix: >-
     Rewrote H-010 around independently checked localization, forced cohabitation and
-    counting implications; numerical saturation remains censored rather than proof.
+    counting implications. That first correction still failed to register Figure 14
+    unavoidability explicitly and wrongly described it as nonexistent; D-148 records
+    that recurrence. D-152 later showed that the registered source premise is itself
+    false as printed; the five-node contract remains necessary so the right claim fails.
   regression: none
   bead: think-bvy9
   recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
@@ -3212,3 +3221,1736 @@ defects:
     format, and BasedPyright all return success.
   bead: think-6cbn
   recorded_in: test.sh
+- id: D-132
+  title: Fixed-cell iteration returns capped states without a settlement result
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: since solve_to_fixed_point was introduced
+  severity: high
+  status: fixed
+  what: >-
+    `solve_to_fixed_point` returns the same untyped five-value tuple when a re-read cell
+    is stable, when the next cell is infeasible or worse, and when its unexplained
+    twelve-iteration cap expires. Downstream callers cannot tell whether the fixed-cell
+    instrument actually settled before using its incumbent. The review also objected to
+    exact equality over the cell's float fields; because `theta` is fixed inside this
+    loop, the same discrete axis choices deterministically regenerate those fields, so
+    no independent float-mismatch failure is established.
+  consequence: >-
+    A capped or rejected cell transition can feed the angle search and later receive an
+    outer `converged: true` result. Basin and stationarity claims can therefore promote
+    a configuration without evidence that their inner fixed-cell problem settled.
+  fix: >-
+    `solve_to_fixed_point` now returns a typed result with an explicit settled flag and
+    reason for a fixed point, repeated-cell cycle, infeasible or worse transition, or
+    iteration limit. Both angle-search variants refuse to report outer convergence from
+    any unsettled evaluation. The cap remains a conservative resource stop, but it can
+    no longer masquerade as mathematical settlement.
+  regression: >-
+    The historical regression suite exercises a known settled n=1 cell, an explicit
+    zero-iteration cap, a mocked worse transition, and an outer quench fed an unsettled
+    inner result; only the first may report settlement or convergence.
+  bead: think-9qz0
+  recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+- id: D-133
+  title: Determination results could encode only search-specific basin outcomes
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: neutral
+  detected_by: pre_registered_rule
+  latent_for: since non-search hypotheses entered the registry
+  severity: high
+  status: fixed
+  what: >-
+    The experiment schema allowed only beat_record, reached_basin, near_miss,
+    no_progress, or invalid as a determination outcome. H-024's angle-corpus claim and
+    H-026's rigidity claim both declared categorical determination criteria, but a
+    valid round could not record that its criterion was met or missed without falsely
+    calling a mathematical result basin progress.
+  consequence: >-
+    Diverse proof and corpus experiments were either blocked at record time or pushed
+    toward semantically false labels, defeating the campaign's attempt to run one
+    disciplined loop across genuinely different mathematical questions.
+  fix: >-
+    Added generic criterion_met and criterion_missed outcomes while retaining the
+    search-specific vocabulary for existing rounds, and documented the distinction in
+    the runbook.
+  regression: >-
+    The H-024 result records criterion_missed, and a negative control mutates that value
+    to an unknown outcome and requires schema validation to refuse it.
+  bead: think-20fr
+  recorded_in: campaign/schemas/experiment.schema.yaml
+- id: D-134
+  title: The n = 29 frontier row omitted its analytic improver and verified angles
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: since the n = 29 frontier artifact was generated
+  severity: medium
+  status: fixed
+  what: >-
+    frontier/n-029.md attributed the standing construction only to Thomas Schadt,
+    stored improved_by as empty, left all tilt angles null, and linked only the
+    catalogue page. The primary SVG explicitly says David Ellsworth improved the
+    construction with an analytic solution and supplies the complete transform tree
+    and five nonzero angle entities.
+  consequence: >-
+    The structured frontier lost contributor provenance and made a fully available
+    six-class geometry look like a picture-only record, delaying both the H-024
+    falsifier and reusable corpus import work.
+  fix: >-
+    Added Ellsworth as improver, retained the primary SVG locally, populated all six
+    verified angle classes, linked exp-012's numerical reconstruction, and kept that
+    evidence explicitly separate from exact certification or optimality.
+  regression: >-
+    The frontier schema and generated-table checks cover the structured row, while the
+    gate replays the retained source hash, 29-square reconstruction, source equations,
+    406 SAT pairs, and six-class multiplicities.
+  bead: think-nayd
+  recorded_in: frontier/n-029.md
+- id: D-135
+  title: The experiment roll-up forbade the record-source evidence it displayed
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: since exp-012 was integrated into the experiment roll-up
+  severity: low
+  status: fixed
+  what: >-
+    SYNOPSIS.md retained the blanket rule that no exploratory-tier round could claim
+    anything about a record immediately before displaying exp-012's reconstruction of
+    a published standing-record witness.
+  consequence: >-
+    The roll-up contradicted its own evidence and obscured the important distinction
+    between reconstructing a published record source and independently certifying its
+    exactness, optimality, or status as a new record.
+  fix: >-
+    Narrowed the rule to forbid claims of a new record and stated explicitly that
+    exp-012's six-class determination is an exploratory source reconstruction, not an
+    exactness or optimality certificate.
+  regression: >-
+    tools/check_synopsis.py binds the roll-up's defect totals and experiment table to
+    their sources; review still checks the prose evidence boundary when a new result
+    kind is introduced.
+  bead: think-uxj5
+  recorded_in: SYNOPSIS.md
+- id: D-136
+  title: A branch linearization was mislabeled as the true Bouligand tangent
+  date: '2026-08-24'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one preregistration checkpoint
+  severity: high
+  status: fixed
+  what: >-
+    H-026 and the claimed exp-013 described each one-sided branch linearization as a
+    Bouligand tangent cone and said any nonzero vector would be a feasible first-order
+    motion. The linearized cone is only an outer approximation to the true tangent.
+  consequence: >-
+    A nonzero algebraic vector could have been promoted as a structural flex even when
+    no nonlinear feasible path realizes it. The opposite verdict is asymmetric: if
+    every complete branch linearization is zero, then the true tangent is necessarily
+    zero as well.
+  fix: >-
+    Recast H-026, exp-013, the session, checker, synopsis, and strategy review in terms
+    of branchwise one-sided linearized cones. A nonzero vector now routes to nonlinear
+    continuation; a zero union may support a separately stated finite-branch local-
+    isolation argument. Orientations use open real charts rather than folded angle
+    representatives.
+  regression: >-
+    The terminal artifact must retain the asymmetric interpretation beside its verdict,
+    and the checker records the linearized-versus-true-tangent scope in its raw result.
+  bead: think-4oos
+  recorded_in: campaign/hypotheses/H-026-trump-first-order-rigidity.md
+- id: D-137
+  title: Trump certificate replay did not require one-to-one branch coverage
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted instrument iteration
+  severity: high
+  status: fixed
+  what: >-
+    The first H-026 instrument draft deduplicated local derivative options without
+    retaining their raw alias multiplicities, and its separate replay checked only that
+    128 records each named some derived matrix. A record containing 128 copies of one
+    valid certificate passed while omitting the other 127 matrices.
+  consequence: >-
+    The retained result could claim complete coverage of 512 nonlinear feature
+    selections and 128 derivative-distinct cones while certifying only one cone.
+  fix: >-
+    Retain the exact alias-weighted 512-to-128 map, assert the wall, contact, feature,
+    row, and matrix inventories, reject duplicate or missing digests, bind certificate
+    row order, and recompute the determination and its scope from replayed witnesses.
+  regression: >-
+    The checker selftest presents duplicate records for one digest against a two-matrix
+    derived set and requires replay coverage indexing to reject them. The gate replays
+    all retained exp-013 certificates and therefore runs this control on every check.
+  bead: think-vevb
+  recorded_in: tools/check_trump_tangent.py
+- id: D-138
+  title: The provenance gate skipped schema-valid unquoted commit hashes
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: anomaly
+  latent_for: since exp-011 adopted an unquoted engine_commit value
+  severity: high
+  status: fixed
+  what: >-
+    test.sh extracted only single-quoted engine_commit values even though the enforced
+    experiment schema permits quoted or unquoted YAML strings. The strict gate therefore
+    printed no provenance result for exp-011 or exp-013 and still passed.
+  consequence: >-
+    A green gate claimed every recorded execution revision was reachable while silently
+    omitting exactly the two most recent unquoted records. An orphaned instrument commit
+    in either round would not have required the documented annotation.
+  fix: >-
+    Normalize quoted and unquoted commit scalars, require a 7-to-40-digit hexadecimal Git
+    id, and compare the number checked with an independent count of every declared
+    engine_commit field.
+  regression: >-
+    The provenance step now fails unless it checks every declaration. Exp-011 and
+    exp-013 are live unquoted known answers, and a successful gate prints both plus the
+    exact checked-total line.
+  recurrence_of: D-006
+  bead: think-t4xv
+  recorded_in: test.sh
+- id: D-139
+  title: H-032 omitted directly relevant hard-square configuration-space literature
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: since H-032 was registered
+  severity: high
+  status: contained
+  what: >-
+    H-032's initial literature routing omitted Alpert–Bauer–Kahle–MacPherson–Spendlove
+    (2023), Plakhta (2021), and Alvarado-Garduño–González (2025), all directly relevant
+    to topology or unlabelled hard-square configuration spaces in rectangles.
+  consequence: >-
+    The programme could misstate the novelty or difficulty of its small-n moduli work,
+    or select an experiment without distinguishing the exact optimal-moduli question
+    from broader configuration-space topology.
+  fix: >-
+    Archived the two retrievable primary sources, routed their restricted evidential
+    role into H-032, and recorded the publisher-blocked Plakhta source with its exact
+    acquisition route.
+  regression: >-
+    The H-032 bead requires this literature boundary in its acceptance work; the source
+    availability schema and generated research tables retain the Plakhta acquisition
+    blocker until a primary PDF is archived.
+  bead: think-izep
+  recorded_in: campaign/hypotheses/H-032-small-n-optimal-moduli.md
+- id: D-140
+  title: The closed n = 3 sliding family was said to have one contact certificate
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: since D-093 restored node attributes in the canonical certificate
+  severity: high
+  status: fixed
+  what: >-
+    Living docs and sqpack/canonical.py still say that the closed side-2 family with
+    centres `(1/2,1/2)`, `(3/2,1/2)`, and `(t,3/2)` has one constant contact
+    certificate. The current certificate includes wall-contact counts: the two outer
+    display endpoints have multiset `[2,2,2]`, while every interior member has
+    `[1,2,2]`, so the endpoint and open-stratum certificates differ.
+  consequence: >-
+    The programme erased the active wall stratum at exactly the calibration object meant
+    to define families, strata and quotient maps. The main D-034 conclusion survives:
+    infinitely many interior geometric keys share one certificate, and the endpoint
+    strata remain in the same connected family.
+  fix: >-
+    Corrected every living statement to distinguish the constant open stratum from the
+    endpoint wall stratum, retained the historical claim as an explicit correction, and
+    added exp-014's exact canonical-key regression and quotient visualization.
+  regression: >-
+    The small-n moduli gate step rebuilds all four exact samples, requires exactly two
+    certificates with one shared by every non-corner sample, and byte-compares the
+    quotient SVG.
+  recurrence_of: D-093
+  bead: think-030v
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md
+- id: D-141
+  title: Byte-exact raw literature failed the generic Git whitespace check
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  detected_by: anomaly
+  latent_for: first raw extraction containing trailing blank-line spaces
+  severity: medium
+  status: fixed
+  what: >-
+    A faithful pdfminer extraction contained spaces on otherwise blank lines. Staging
+    the new `.raw.md` made `git diff --cached --check` fail, while stripping those bytes
+    would violate the archive's byte-for-byte ground-truth contract.
+  consequence: >-
+    An agent following both repository rules had to choose between a clean precommit
+    check and faithful evidence, encouraging either an unreported bypass or a silently
+    altered raw source.
+  fix: >-
+    Added one path-scoped Git attribute that disables whitespace diagnostics only for
+    `explorations/packing/resources/**/*.raw.md`. Hand-written Markdown and every other
+    file retain the normal whitespace policy.
+  regression: >-
+    The two archived raw SHA-256 values remain unchanged, `git check-attr whitespace`
+    reports `unset` only on the raw path, and `git diff --cached --check` passes with the
+    exact extractions staged.
+  bead: think-r2n2
+  recorded_in: resources/README.md
+- id: D-142
+  title: The n = 3 source replay compared an unlabelled theorem with labelled homology
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: one uncommitted instrument iteration
+  severity: high
+  status: fixed
+  what: >-
+    The first H-032 checker draft passed the labelled Betti vector `[2,2]` into the
+    Alvarado-Garduño–González comparison, even though that theorem concerns the
+    unlabelled space, whose derived Betti vector is `[1,1]`.
+  consequence: >-
+    A correct exact classification would have retained a false source-mismatch flag and
+    obscured the independent agreement between the four-cycle quotient and the published
+    unlabelled homotopy type.
+  fix: >-
+    Split labelled and unlabelled invariants at the literature boundary and compare the
+    Alpert result only with the labelled complex and the Alvarado-Garduño–González result
+    only with the S3 quotient.
+  regression: >-
+    Exp-014 replay rebuilds the complete model and requires the retained unlabelled
+    source match to be true before the terminal determination can pass.
+  bead: think-w4m2
+  recorded_in: tools/check_small_n_moduli.py
+- id: D-143
+  title: The n = 4 source replay attributed an unreported f-vector to Alpert et al.
+  date: '2026-08-24'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted instrument iteration
+  severity: high
+  status: fixed
+  what: >-
+    The first H-032 checker draft recorded `[24]` as Alpert et al.'s reported n = 4
+    f-vector and cited their Table 2, but that table does not contain an n = 4 row. Their
+    Table 1 reports the Betti vector `[24,0]`.
+  consequence: >-
+    The experiment would have overstated prior-source corroboration for the independently
+    derived discrete cell count and blurred the boundary between a published invariant
+    and this repository's exhaustive enumeration.
+  fix: >-
+    Retain the derived 24-state f-vector separately, compare the source only against the
+    published Betti vector, and state explicitly that no n = 4 f-vector is tabulated.
+  regression: >-
+    Exp-015 replay rebuilds the literature record from source hashes and requires its
+    n = 4 evidence field to name Table 1 while leaving the reported f-vector null.
+  bead: think-eb3w
+  recorded_in: tools/check_small_n_moduli.py
+- id: D-144
+  title: The orientation identity check compared two identical hard-coded tuples
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted instrument iteration
+  severity: high
+  status: fixed
+  what: >-
+    The first H-032 checker draft assigned the same coefficient tuple to both sides of
+    `1/2 - w(1-w/2) = (w-1)^2/2` and then recorded the identity as checked. The
+    comparison was tautological and could not catch a transcription error in either
+    expression.
+  consequence: >-
+    A central equality in the arbitrary-rotation exclusion would have carried an
+    executable-success flag without executable evidence, weakening the exactness claim
+    at the first reduction in both rounds.
+  fix: >-
+    Derive the left coefficients from `w(1-w/2)` and the right coefficients from the
+    square of `w-1` through separate exact rational calculations, compare the resulting
+    polynomials, and state the identified endpoints of the physical angle quotient.
+  regression: >-
+    Both exp-014 and exp-015 rebuild the independently derived coefficient vectors before
+    any branch enumeration, and refuse to emit or replay a determination on mismatch.
+  bead: think-uxlg
+  recorded_in: tools/check_small_n_moduli.py
+- id: D-145
+  title: A broad integration edit fixed the wrong defect record
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  latent_for: one uncommitted integration pass
+  severity: medium
+  status: fixed
+  what: >-
+    While terminalizing exp-014, a broad status edit changed D-039 from outstanding to
+    fixed but left the actually resolved D-140 outstanding. D-039's own fix field still
+    began with `none yet`, so its status contradicted the evidence in the same record.
+  consequence: >-
+    The generated log and synopsis would have understated unresolved identity-calibration
+    work while overstating the remaining n = 3 correction, reversing the current agenda
+    without any mathematical change.
+  fix: >-
+    Restored D-039 to outstanding, marked D-140 fixed, and added a whole-log invariant
+    that refuses any fixed record whose fix still begins with `none yet`.
+  regression: >-
+    A negative control changes D-039 back to fixed and requires schema validation to
+    reject the contradiction before generated views or a commit can pass.
+  bead: think-csji
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-146
+  title: The Stromquist Figure 13 transcription changed its defining point set
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: inspection
+  latent_for: two days and one registered proof hypothesis
+  severity: high
+  status: fixed
+  what: >-
+    The cleaned transcription and downstream research report replaced Stromquist's
+    Figure 13 seed coordinates `(1,1)`, `(s/2,1)`, `(3/2-s/4,s/2)`, and
+    `(1/2+s/4,s/2)` with `(1,1)`, `(s/2,s/2)`, `(1,s/2)`, and `(3/2,1)`. The same
+    corrupted tuple appeared in the transcription of Theorem 3.
+  consequence: >-
+    H-010 could have passed a complete falsifier and certificate suite for a point set
+    that is not the one in the primary proof. Because the wrong coordinates still look
+    symmetric and plausible, the result would have appeared source-faithful.
+  fix: >-
+    Read the four coordinates directly from rendered primary PDF page 9, corrected both
+    theorem passages and the research report, and flagged the repaired transcription in
+    the archive reconstruction table.
+  regression: none
+  bead: think-abdh
+  recorded_in: resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md
+- id: D-147
+  title: H-010 substituted unit squares for Stromquist's strict open boxes
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one registered proof hypothesis
+  severity: high
+  status: fixed
+  what: >-
+    The canonical H-010 claim localized a unit square. Stromquist's proof instead works
+    with open boxes of side strictly greater than one inside the exact container; the
+    strict relaxation carries the boundary argument from a hypothetical smaller
+    unit-square packing.
+  consequence: >-
+    A checker could certify a closed unit-square statement while missing a boundary case
+    needed by the published lower bound, then promote a result stronger than its actual
+    semantics.
+  fix: >-
+    H-010 now states the exact open-box regime, makes strict inequalities and boundary
+    cases part of its criterion, and permits a unit-square limiting computation only
+    after its monotone implication is proved explicitly.
+  regression: none
+  bead: think-fe8n
+  recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
+- id: D-148
+  title: The D-091 correction omitted the published Figure 14 unavoidability claim
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one correction cycle
+  severity: high
+  status: fixed
+  what: >-
+    D-091 correctly restored localization and same-box A-triple forcing but H-010 did
+    not require a certificate that all twelve Figure 14 points are unavoidable. Its note
+    and the master review went further and called that explicit source claim
+    nonexistent.
+  consequence: >-
+    The registered proof DAG still lacked one premise of the counting contradiction,
+    while the correction log misreported what the primary paper proves.
+  fix: >-
+    Corrected D-091 and the living review, and made H-010's acceptance rule an explicit
+    five-node chain containing Figure 14 unavoidability as a necessary but insufficient
+    node. D-152 later falsified that node for the printed point tuple; D-148 remains the
+    process correction that made the falsifier answer the actual source claim.
+  regression: none
+  recurrence_of: D-091
+  bead: think-1vs7
+  recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
+- id: D-149
+  title: Search saturation was still presented as a Stromquist known-answer test
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: two planning revisions
+  severity: high
+  status: fixed
+  what: >-
+    Living plans and reviews said a falsifier should saturate or fail on the Figure 14
+    set. A continuous search that finds no escape can be incomplete, poorly conditioned,
+    or broken; its negative result does not validate either the search or the theorem.
+  consequence: >-
+    Weak search machinery could pass the proof lane's known-answer gate precisely by
+    failing to find a counterexample.
+  fix: >-
+    Positive escape witnesses remain falsifier controls. Negative conclusions now
+    require independently replayed exact or interval certificates for every proof node;
+    the historical review retains its original proposal under a dated erratum.
+  regression: none
+  bead: think-tk62
+  recorded_in: docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md
+- id: D-150
+  title: Active effort and priority views drifted after four exact research rounds
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: drift_check
+  latent_for: rounds exp-012 through exp-015
+  severity: medium
+  status: fixed
+  what: >-
+    The active overnight plan and campaign runbook retained eleven rounds, 275
+    agent-minutes, old gate timings, and inconsistent H-010 priority after the generated
+    ledger reached fifteen terminal rounds and 422 agent-minutes.
+  consequence: >-
+    An autonomous agent could choose work from an obsolete cost model, overlook the
+    proof lane's priority-one dependency, or optimize a gate profile that no longer
+    described the current system.
+  fix: >-
+    The campaign runbook now delegates cumulative totals to the generated ledger, the
+    active plan labels performance data as a dated checkpoint, and the synopsis and
+    H-010 artifact agree on round state and proof-lane priority.
+  regression: >-
+    The ledger generates cumulative effort and check_synopsis reconciles the synopsis;
+    duplicated plan measurements are explicitly dated rather than called current.
+  recurrence_of: D-086
+  bead: think-1bse
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-151
+  title: Stromquist's middle Lemma 4 table selected an extraneous cubic root
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: inspection
+  latent_for: twenty-three years in the primary source and two days in the local archive
+  severity: high
+  status: fixed
+  what: >-
+    At `a = sqrt(4/5)`, Stromquist's table reports `theta*=24.1 degrees` and
+    `f(a)=.926`. Squaring the stationarity equation introduces that smaller cubic root:
+    it has `cos(theta)>a` and violates the unsquared sign condition. The true minimum is
+    at about 31.45595 degrees with `f(a)=0.9145377886`.
+  consequence: >-
+    Trusting the printed threshold would certify Lemma 4 for some `b` between about
+    .91454 and .926 where the stated sufficient condition has not been established.
+    The particular `a=sqrt(4/5), b=.9` application survives. That does not validate the
+    complete Figure 14 cover: its separate `a=.95, b=.8` gap is D-152.
+  fix: >-
+    Preserved the printed row as source text, annotated the algebraic error in the clean
+    archive and research report, and require H-010 to select roots with the unsquared
+    sign condition and certify `.9 < f(a)` directly.
+  regression: >-
+    The H-010 exact checker rejects the extraneous squared-cubic root, certifies every
+    accepted stationary root against the unsquared condition, and is replayed from the
+    retained exp-016 record in the strict gate.
+  bead: think-7nwj
+  recorded_in: resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md
+- id: D-152
+  title: Stromquist's printed Figure 14 point set admits an escaping box
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: inspection
+  latent_for: twenty-three years in the primary source and two days in the local archive
+  severity: critical
+  status: fixed
+  what: >-
+    The paper says nonavoidance lemmas cover every Figure 14 region, but the outer
+    quadrilateral adjacent to `A1=(1,.9)` and `G=(.8,1.85)` has Lemma 4 parameters
+    `a=.95, b=.8`, while the true threshold is about `.79815344`. An explicit strict
+    box of side `10001/10000`, slope `27/10`, and center
+    `(37L/(2sqrt(829)),11/8)` fits the container and avoids all twelve printed points.
+  consequence: >-
+    The printed twelve-point set is not unavoidable, so the published five-node proof
+    chain and every local description that called it a known-answer certificate are
+    unsound. This does not by itself refute the lower-bound theorem: the paper says the
+    second figure has slack, and a nearby repaired point set may close the gap.
+  fix: >-
+    Preserved H-010 as the source-faithful claim and rejected it in exp-016 after exact
+    retained replay of the strict witness and printed source tuple. The numerical lower
+    bound remains a separate question; the preregistered source-distinct H-041 repair
+    must pass a complete finite cover rather than merely block this witness.
+  regression: >-
+    The strict gate regenerates and replays exp-016, including the exact source hashes,
+    all twelve avoidance signs, the failing Lemma 4 cell, and a left-shift mutation that
+    makes the witness container-infeasible.
+  bead: think-bv1d
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md
+- id: D-153
+  title: The source ledger called three directly hosted 1984 Stromquist memoranda unavailable
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: two corpus revisions
+  severity: high
+  status: fixed
+  what: >-
+    The source-availability ledger classified Stromquist's 1984 memoranda as an
+    unpublished, author-contact blocker even though the author's publication page links
+    directly to all three PDF files.
+  consequence: >-
+    The research omitted the most important stated source gap in its proof-history lane
+    and could misstate what the memoranda do or do not contribute to the 2003 proof.
+  fix: >-
+    Archived all three author-hosted PDFs with hashes and unedited OCR, added bounded
+    reading aids, moved the source from unretrieved to recovered, and corrected the
+    current research documents. The audit distinguishes Memo III's unsupported
+    unrestricted assertion from its detailed 0/45-degree proof.
+  regression: >-
+    validate_schemas.py enforces disjoint recovered and unretrieved keys;
+    render_tables.py --check keeps both report tables synchronized with the source
+    ledger, whose recovered row retains the exact acquisition route and mathematical
+    impact.
+  bead: think-7856
+  recorded_in: frontier/source-availability.yaml
+- id: D-154
+  title: The first H-010 checker draft treated unchecked polynomials as exact fields
+  date: '2026-08-24'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted checker draft
+  severity: high
+  status: fixed
+  what: >-
+    The draft constructed NumberField instances from claimed minimal polynomials and
+    sign-changing intervals without checking irreducibility, squarefreeness, or that an
+    interval contained exactly one root. The generic helper's exact equality and sign
+    guarantees are conditional on those facts.
+  consequence: >-
+    A reducible polynomial or ambiguous interval could make an apparent exact witness
+    rely on an invalid quotient field or the wrong real embedding.
+  fix: >-
+    Every algebraic field used by the H-010 checker now replays irreducibility,
+    squarefreeness, and exact one-root isolation with rational SymPy calculations before
+    any field decision is accepted.
+  regression: Every generated and replayed H-010 record contains passing metadata checks for all four fields.
+  bead: think-bv1d
+  recorded_in: tools/check_stromquist_theorem2.py
+- id: D-155
+  title: The first H-010 record draft retained raw platform floating-point diagnostics
+  date: '2026-08-24'
+  layer: record
+  class: robustness
+  detected_by: review
+  latent_for: one uncommitted checker draft
+  severity: medium
+  status: fixed
+  what: >-
+    The draft put raw libm bisection and trigonometric floats into a record that replayed
+    by exact JSON equality, even though those diagnostics do not decide the exact
+    counterexample.
+  consequence: >-
+    A harmless last-bit difference across platforms could reject a valid retained
+    result and make the proof calibration less portable than its exact evidence.
+  fix: >-
+    Non-decisive diagnostics are now explicitly labeled and rounded to stable display
+    strings; every verdict-bearing containment and avoidance decision remains exact.
+  regression: The retained record replays by semantic equality while the determination depends only on exact field signs.
+  recurrence_of: D-059
+  bead: think-x2ni
+  recorded_in: tools/check_stromquist_theorem2.py
+- id: D-156
+  title: The first H-041 checker draft did not prove that tiling vertices stayed inside the container
+  date: '2026-08-24'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted checker draft
+  severity: high
+  status: fixed
+  what: >-
+    The draft inferred a full square tiling from exact face incidence, noncrossing,
+    Euler characteristic, boundary-line membership, and total area, but never directly
+    checked that every vertex used by the cell complex lay in `[0,s]^2`.
+  consequence: >-
+    A malformed or mutated certificate could place vertices beyond a container side and
+    still present the combinatorial and area invariants expected of an exhaustive cover.
+    The hard-coded repaired geometry happened to be inside, but the verifier had not
+    established that premise.
+  fix: >-
+    The shared tiling validator now exact-checks both coordinates of all 26 Figure 13
+    vertices and all 28 Figure 14 vertices in `Q(sqrt(5))`, and retains the complete
+    checked inventory in the replayed record.
+  regression: An adversarial Figure 14 mutation moves H beyond the container and the checker rejects it.
+  bead: think-5fmh
+  recorded_in: tools/check_stromquist_repair.py
+- id: D-157
+  title: The first H-041 Lemma 6 replay squared inequalities without executable sign guards
+  date: '2026-08-24'
+  layer: verifier
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted checker draft
+  severity: high
+  status: fixed
+  what: >-
+    The draft compared exact squared polynomial expressions in its reconstruction of
+    Lemma 6, but did not executable-assert every angle-domain and side-positivity premise
+    that makes those squarings implication-preserving.
+  consequence: >-
+    Squaring can erase sign information. A future coefficient or interval drift could
+    leave a positive squared gap while invalidating the unsquared inequality that the
+    proof actually needs.
+  fix: >-
+    The checker now verifies the tangent domain, positivity of sine, cosine, products,
+    and both sides before each squaring, the tangent-map derivative sign, and every
+    exact positive gap coefficient. The record exposes those premises separately.
+  regression: Every generated and replayed H-041 record contains the complete passing sign-premise inventory.
+  bead: think-ie1b
+  recorded_in: tools/check_stromquist_repair.py
+- id: D-158
+  title: The first H-041 record blurred runtime source checks with unattached extraction hashes
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted checker draft
+  severity: medium
+  status: fixed
+  what: >-
+    The draft placed page-SVG and topology-path digests beside the PDF and raw-source
+    hashes under a blanket runtime-verification statement, although those derived
+    extraction artifacts are not retained or recomputed by the checker.
+  consequence: >-
+    The record could imply an independent runtime provenance check that had not
+    occurred. The exact repaired construction remained decidable from its own manifests,
+    so this affected evidence scope rather than the mathematical determination.
+  fix: >-
+    Only the retained PDF and raw-source hashes are now labeled decisive runtime checks.
+    The SVG and path digests are explicitly non-runtime, non-decisive provenance
+    attestations.
+  regression: Deterministic replay requires the source-binding record to preserve the decisive and non-decisive labels.
+  bead: think-q1sd
+  recorded_in: tools/check_stromquist_repair.py
+- id: D-159
+  title: Scanned archive PDFs were misclassified as text by Git
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  detected_by: drift_check
+  latent_for: one uncommitted source-archive integration
+  severity: medium
+  status: fixed
+  what: >-
+    The recovered image-only PDFs contained no early NUL byte, so Git treated their
+    compressed streams as text and `git diff --cached --check` emitted thousands of
+    false trailing-whitespace diagnostics. The excluded hand-written reading aids also
+    carried Markdown hard-break spaces that the same staged check correctly rejected.
+  consequence: >-
+    A faithful source archive could not pass the repository's precommit hygiene check.
+    An agent could be tempted either to rewrite immutable PDF bytes or to bypass the
+    staged-diff check, weakening both provenance and process discipline.
+  fix: >-
+    Marked every archived PDF as binary in the root `.gitattributes` without changing
+    its bytes, removed trailing spaces only from the hand-written reading aids, and
+    retained the stricter whitespace policy for all other authored Markdown.
+  regression: >-
+    `git check-attr diff` reports `unset` for each archived PDF, their SHA-256 digests
+    remain identical to the source manifests, and `git diff --cached --check` passes.
+  bead: think-7fz7
+  recorded_in: resources/README.md
+- id: D-160
+  title: A broad H-010 integration patch updated D-002 instead of D-151
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: drift_check
+  latent_for: one uncommitted integration diff
+  severity: medium
+  status: fixed
+  what: >-
+    A patch intended to replace D-151's generic `regression: none` matched the first
+    identical scalar in the file and attached the H-010 root-replay text to D-002. The
+    intended D-151 field remained unchanged.
+  consequence: >-
+    The log would have falsely claimed that an exact Stromquist checker protected an
+    unrelated annealer-cap defect while continuing to count the source-root correction
+    as unprotected. Generated aggregate claims would then be internally misleading.
+  fix: >-
+    Restored D-002 exactly, reapplied the change under explicit D-151 context, and made
+    the final defect diff plus generated synopsis reconciliation part of the round's
+    integration check.
+  regression: none
+  recurrence_of: D-145
+  bead: think-4cua
+  recorded_in: defects.yaml
+- id: D-161
+  title: The synopsis did not track the live hypothesis count
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: drift_check
+  latent_for: one committed H-041 registration
+  severity: medium
+  status: fixed
+  what: >-
+    Registering H-041 raised the hypothesis catalogue from forty to forty-one artifacts,
+    but the current synopsis continued to say forty. The ledger counted the registry
+    correctly, while no synopsis check compared that count with the prose.
+  consequence: >-
+    The high-level agenda understated its own research portfolio and could drift farther
+    each time a hypothesis was added, despite the generated ledger remaining correct.
+  fix: >-
+    Updated the current synopsis count and extended its consistency checker to derive the
+    registry count from hypothesis artifacts rather than trusting another hand-maintained
+    scalar.
+  regression: The synopsis consistency check rejects a stated hypothesis count that disagrees with the registry.
+  bead: think-j8tv
+  recorded_in: SYNOPSIS.md
+- id: D-162
+  title: The small-n golden convergence labels hid unsettled fixed-cell evaluations
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: since the cold-start basin golden was recorded
+  severity: high
+  status: outstanding
+  what: >-
+    After D-132 made fixed-cell termination observable, a deep deterministic rebuild
+    reports only 3/4 converged proposals for n=3, 1/4 for n=4, and 5/6 for n=5, while
+    the committed golden reports 4/4, 4/4, and 6/6. The convergence ladder also marks
+    n=9 and n=10 unsettled; n=10 no longer reaches the proved value. The newly exposed
+    reasons include a repeated cell cycle and a re-read LP solve that failed its solver
+    boundary check. The former untyped result supplied both as ordinary objective values.
+  consequence: >-
+    Current small-n convergence totals and endpoint rows can include configurations whose
+    inner fixed-cell problem never settled. They remain reproducible numerical stopping
+    events, but they are not yet admissible terminal components or evidence of census
+    saturation.
+  fix: >-
+    none yet. Diagnose the newly explicit n=3 through n=10 outcomes without weakening
+    the settlement contract, then regenerate every small-n calibration with full poses
+    and reasons and correct the derived counts and prose before enabling a census.
+  regression: >-
+    The basin-event replay retains the fixed-cell settlement flag, and the deep golden
+    must reject any attempt to count a cycle, cap, or rejected transition as converged.
+  recurrence_of: D-030
+  bead: think-wbra
+  recorded_in: golden/basin-maps.yaml
+- id: D-163
+  title: The historical-regression gate masked a failing checker
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: gate
+  latent_for: since command-line boundary checks followed the regression checker
+  severity: critical
+  status: fixed
+  what: >-
+    `step_historical_regressions` ran its Python checker and then continued into several
+    shell-boundary probes without propagating the checker's status. When D-132 made the
+    D-029 regression fail, the later successful probe became the function status and
+    `test.sh --only historical regressions` printed PASSED with exit zero.
+  consequence: >-
+    A named scientific regression could be visible in the transcript while both focused
+    and full gates reported success. An unattended loop that reads exit status rather
+    than the complete transcript would proceed on a known-broken quench.
+  fix: >-
+    The step now returns immediately when `tools/regression_test.py` is nonzero, before
+    any later command-line boundary probe can replace its status.
+  regression: >-
+    A negative control replaces the Python regression invocation with `false || return`
+    and requires the focused gate to report the historical-regression step at exit one;
+    the ordinary step then continues to exercise its later boundary probes when green.
+  recurrence_of: D-004
+  bead: think-0bpx
+  recorded_in: test.sh
+- id: D-164
+  title: The fixed-cell solver mislabeled a numerical rejection as mathematical infeasibility
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: conservative
+  detected_by: control_cell
+  latent_for: since solve_cell collapsed every failure to None
+  severity: high
+  status: fixed
+  what: >-
+    `solve_cell` returns the same `None` for a mathematically infeasible cell, a HiGHS
+    failure, and a successful LP whose returned point fails the post-solve residual
+    check. On the retained n=3 seed-1 calibration, HiGHS reports an optimum whose worst
+    residual is 1.19996e-10; the 1e-10 post-check rejects it and the fixed-point layer
+    reports `re-read cell infeasible`. With only the internal cutoff changed to 2e-10,
+    the same start reaches the proved side 2 and reports a clean free pass.
+  consequence: >-
+    The calibration undercounts convergence and reports a numerical solver-boundary
+    event as geometric evidence. More importantly, the loop cannot choose a principled
+    retry, repair, or stop policy because the failure channel has erased its cause.
+  fix: >-
+    Return typed cell-solve outcomes for infeasibility, solver failure, post-check
+    rejection, and accepted optima, retaining solver status, maximum residual, row index,
+    row kind, and actual solver-call count. On a post-check rejection only, collect every
+    row outside the unchanged 1e-10 screen, tighten each RHS by its measured violation
+    plus that screen, and retry exactly once; replay the second result against every
+    original row. The n=10 control uses 25 bounded retries, all accepted with worst final
+    residual 1.55e-15, and reaches the proved side within 1.33e-15. An independent
+    `sqpack.verify` screen accepts all 45 n=10 pairs with the identical required side.
+    The retained n=3 seed-1 control reaches side 2.
+  regression: >-
+    The exact failing cell from n=3 seed 1 must replay its row-12 repair and side;
+    synthetic post-check, infeasible, and solver-failure outcomes must remain distinct;
+    a two-call repair must retain its complete row set and margins; and actual LP-call
+    accounting includes the retry. A separately measured full n=3 seed-1 quench reaches
+    side 2.
+  recurrence_of: D-014
+  bead: think-28x5
+  recorded_in: golden/basin-maps.yaml
+- id: D-165
+  title: Initial cell-solve failures bypassed the fixed-point termination guard
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: one bounded D-132 implementation slice
+  severity: critical
+  status: fixed
+  what: >-
+    D-132 made cycles, caps, and failed re-read transitions explicit only after the
+    initial cell LP succeeded. An initial `solve_cell` failure still returns `None`;
+    angle probes convert that outcome to a large dummy objective and continue, so an
+    outer quench can later report convergence without recording the failed evaluation.
+    Propagating a typed initial post-check rejection immediately makes the D-016 and
+    D-029 positive controls stop instead of silently routing around it.
+  consequence: >-
+    The fixed-cell settlement flag is not yet a complete certificate: a nominally
+    converged run may have crossed unmeasured angle probes. Basin membership and
+    stationarity remain inadmissible even though the newly added field says settled.
+  fix: >-
+    Route every quench-bracket fixed-point evaluation, including the free sweep, through
+    one audited call path. Retain total, settled, and unsettled counts in BasinEvent/v3;
+    derive the all-probes, blocker, and scientific-admissibility fields from those
+    counts, producer convergence, and the independent pose screen. Exp-021 retains a
+    balanced 2037 = 2037 + 0 receipt and replay rejects a forged all-probes flag. The
+    older exp-018 through exp-020 events remain correctly blocked under their v2
+    contract rather than being rewritten.
+  regression: >-
+    The D-016 and D-029 fixtures remain converged; the BasinEvent selftest requires a
+    balanced quench receipt, replays the historical v2 archive, and rejects a forged v3
+    all-probes claim. Exp-021 must independently replay its complete receipt and pose.
+  recurrence_of: D-132
+  bead: think-007f
+  recorded_in: tools/basin_census.py
+- id: D-166
+  title: Basin events called producer convergence a fixed-cell certificate
+  date: '2026-08-24'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: drift_check
+  latent_for: one committed event-contract checkpoint
+  severity: critical
+  status: fixed
+  what: >-
+    BasinEvent/v1 set `fixed_cell_settlement_certified` directly from the quench's
+    `producer_converged` flag. D-165 proves that an initial cell-solve failure can bypass
+    the typed termination path and become a dummy angle objective, so that producer flag
+    cannot certify that every evaluation settled.
+  consequence: >-
+    A replayable, independently valid pose could be promoted as a terminal basin on the
+    strength of a certificate the instrument did not possess. The event archive would
+    make the overclaim durable and easy for an unattended consumer to trust.
+  fix: >-
+    BasinEvent/v2 removes the false certificate and explicitly records that all probe
+    evaluations are not accounted for, scientific promotion is false, and D-165 is the
+    blocker. Starts, full poses, producer outcomes, and independent validity remain
+    usable as stopping-event evidence.
+  regression: >-
+    The event selftest changes scientific admissibility to true and requires replay to
+    reject the forged promotion while D-165 is the declared blocker.
+  recurrence_of: D-044
+  bead: think-f2t0
+  recorded_in: tools/basin_census.py
+- id: D-167
+  title: Basin events omitted the wall time needed to price the loop
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: drift_check
+  latent_for: one four-seed calibration block
+  severity: high
+  status: fixed
+  what: >-
+    BasinEvent/v2 retained LP solves and angle steps but no per-event wall time. The
+    first n=3 block completed quickly, yet its archive could not say which seeds were
+    expensive or price a larger block from its own evidence.
+  consequence: >-
+    An autonomous scheduler would have to guess from command-level timing, obscuring
+    stragglers and preventing measured decisions about which n values fit the next
+    checkpoint or the remaining eight-hour budget.
+  fix: >-
+    Measure monotonic wall time around each quench, retain it with the termination
+    evidence, and require a finite non-negative value during replay.
+  regression: >-
+    Basin-event selftest and replay require the wall_seconds field and reject malformed
+    termination records.
+  bead: think-4g3f
+  recorded_in: tools/basin_census.py
+- id: D-168
+  title: A finite equal-objective adjacent-cell closure was labeled an unsettled cycle
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: conservative
+  detected_by: control_cell
+  latent_for: since fixed-cell cycles became typed termination evidence
+  severity: high
+  status: fixed
+  what: >-
+    The retained n=10 positive control alternated between two separating-axis cells and
+    stopped as an unsettled cycle even though the cycle varied only the rows for pairs
+    (0,2) and (0,6). Their complete Cartesian product has four cells. Every LP solve
+    passes, all four objectives agree within 4.44e-16, and every solution rereads into
+    the same four-cell set. Later angle probes expose similarly bounded closures of two,
+    four, or eight cells.
+  consequence: >-
+    A solver-scale representation change on a tie locus blocked a known-answer quench
+    and could make valid local search look nonterminating. Treating every cycle alike
+    also hid the mathematical difference between a closed equal-objective degeneracy
+    and an unresolved transition among materially different objectives.
+  fix: >-
+    On a repeated cell, enumerate the Cartesian product of every row choice observed in
+    the cycle, expand it with any choices exposed by solution rereads, and stop at a
+    hard 64-cell cap. Settle only if every LP passes, the closure stops expanding, and
+    its full objective spread is within the declared LP screen. Keep the largest-side
+    representative and label the result `adjacent cell closure`; do not claim a global
+    fixed-angle or basin optimum.
+  regression: >-
+    The actual n=10 D-029 control must exercise a finite adjacent-cell closure and retain
+    the proved side. A synthetic two-cell closure must settle, while a mutation whose
+    objectives differ by twice the LP screen must remain rejected.
+  recurrence_of: D-132
+  bead: think-8c61
+  recorded_in: sqpack/quench.py
+- id: D-169
+  title: The cell post-check ignored every containment row
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: since the cell post-check was introduced
+  severity: critical
+  status: fixed
+  what: >-
+    `solve_cell` said it checked the returned point against the constraints that were
+    imposed, but its loop visited only the pair-separation rows. The four containment
+    rows per square were absent, so a solver result outside a container wall by more
+    than the declared LP screen could still be returned as an accepted cell optimum.
+  consequence: >-
+    Fixed-cell sides, angle objectives, convergence decisions, and downstream endpoint
+    poses could be based on a point that did not fit its own reported container. An
+    independent final-pose screen might catch a terminal case, but intermediate angle
+    comparisons could already have followed the invalid objective.
+  fix: >-
+    Materialize the complete A_ub and b_ub arrays once and replay their full residual
+    vector after both the initial solve and the bounded D-164 retry. Retain the maximum
+    row index and classify it as containment or pair evidence before accepting or
+    rejecting the result.
+  regression: >-
+    A synthetic n=1 optimum that violates its upper-x containment row by 2e-10 must be
+    rejected after the single bounded retry, with row 1 and kind `containment` retained.
+  recurrence_of: D-014
+  bead: think-4hc3
+  recorded_in: sqpack/quench.py
+- id: D-170
+  title: D-165 reused the unrelated D-132 bead
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: drift_check
+  latent_for: from D-165 registration through its attempted closure
+  severity: high
+  status: fixed
+  what: >-
+    D-165's defect entry pointed to `think-9qz0`, but that bead's title, description,
+    notes, and close reason all track the older D-132 fixed-cell-cycle defect. Closing
+    D-165 through the logged reference would therefore have changed an unrelated issue.
+  consequence: >-
+    The defect log and bead graph disagreed about ownership and completion. An agent
+    following either source could report the wrong launch blocker closed, or reopen
+    already completed D-132 work while leaving D-165 without durable tracking.
+  fix: >-
+    Create dedicated D-165 bead `think-007f`, update the defect cross-reference, and
+    preserve `think-9qz0` unchanged. Track this bookkeeping correction separately in
+    `think-k2vb` so the mistaken reuse is visible rather than silently overwritten.
+  regression: >-
+    The bead-tree review must compare a defect's subject with its referenced bead before
+    closing it; D-165 must resolve through `think-007f`, never `think-9qz0`.
+  recurrence_of: D-039
+  bead: think-k2vb
+  recorded_in: defects.yaml
+- id: D-171
+  title: Argmax-only n=4 repair left one positive-control evaluation unsettled
+  date: '2026-08-24'
+  layer: quench
+  class: robustness
+  direction: conservative
+  detected_by: control_cell
+  latent_for: first BasinEvent/v3 n=4 calibration
+  severity: high
+  status: fixed
+  what: >-
+    Exp-023 seed 3 reaches a fixed-point evaluation whose successful HiGHS solution
+    still violates pair row 16 by 4.209e-10 after the single D-164 one-row retry. The
+    quench stops with one typed unsettled evaluation rather than returning convergence.
+  consequence: >-
+    Before correction, the n=4 positive-control block was only 3/4 scientifically
+    admissible. The retained stop was trustworthy, but the producer could not map every
+    declared start at this proved size, so scaling the same regime could not support a
+    complete-map claim.
+  fix: >-
+    Retaining the exact fixed cell showed that rows 16 and 21 both exceeded the screen
+    in the first returned point by about 4.209e-10. The former argmax-only retry tightened
+    row 21 and exposed the already-offending row 16. Freeze the complete first-pass
+    offending set, tighten both rows by their measured residual plus the unchanged
+    screen, retry once, and replay the result against all original rows. Exp-024 then
+    produces four of four independently valid and admissible events at proved side 2.
+  regression: >-
+    The exact seed-3 cell must identify repair rows `[16, 21]`, settle under one retry,
+    and replay against the complete original residual vector without changing the 1e-10
+    screen. Exp-024 must replay 14,301 settled and zero unsettled evaluations across four
+    independently valid, admissible events.
+  recurrence_of: D-164
+  bead: think-pwd0
+  recorded_in: campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
+- id: D-172
+  title: The orientation tutorial said a configuration-space cell fixes the angles
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: high
+  status: fixed
+  what: >-
+    The tutorial correctly defined a cell as the discrete separating-axis and order
+    choices, then said a cell fixes the angles. It used that false premise to distinguish
+    a cell solve from a basin, conflating the cell with the fixed-angle LP subproblem.
+  consequence: >-
+    A new agent could repeat D-029: treat exhaustion of a centre-only solve as quench
+    convergence, misdiagnose angular residual as a wrong basin, and retract a valid
+    result.
+  fix: >-
+    State that a cell fixes only separation choices, while the LP subproblem fixes both
+    the cell and an angle vector. Define the basin comparison against the full quench,
+    which can move angles and cross cells.
+  regression: none
+  recurrence_of: D-029
+  bead: think-t2kz
+  recorded_in: TUTORIAL.md
+- id: D-173
+  title: The orientation docs ruled out equality certification by all interval methods
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: conservative
+  detected_by: review
+  latent_for: inherited source prose and PR 20 draft
+  severity: high
+  status: fixed
+  what: >-
+    The tutorial and algorithms report said floating point cannot certify any equality,
+    interval arithmetic can prove greater-than but never equality, and certified
+    numerics can never certify a contact. Those universal statements are false:
+    structural evaluation can yield an exact zero enclosure, and interval-Newton,
+    Krawczyk, or alpha-theory can certify a root satisfying declared contact equations.
+  consequence: >-
+    The research plan incorrectly excluded a viable certificate route and confused the
+    actual failure—inferring an unknown exact contact from a small approximate residual—
+    with an impossibility theorem about certified numerics.
+  fix: >-
+    Scope the limitation to enclosure-only evaluation of unrecognised near-contacts.
+    Preserve the tolerance blind-spot result while allowing exact simplification and
+    certified existence and uniqueness for an explicitly declared equality system.
+  regression: none
+  bead: think-0qs4
+  recorded_in: TUTORIAL.md
+- id: D-174
+  title: The recovery narrative silently eliminated centres and universalized rational LPs
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: inherited source prose and PR 20 draft
+  severity: high
+  status: fixed
+  what: >-
+    The numeric-to-exact narrative said only discrete data crosses the boundary, that
+    contact equations have only side and distinct angles as unknowns, and that an exact
+    rational LP is the general remedy for solver noise. Numerical coordinates may seed
+    or select a candidate root; the general contact system still contains centres until
+    a particular graph permits their elimination; and fixed-angle coefficients can be
+    algebraic rather than rational.
+  consequence: >-
+    A recovery instrument could omit necessary variables or choose an inapplicable exact
+    scalar, then present a special-case derivation as a general promotion pipeline.
+  fix: >-
+    Treat the contact structure as the unchecked discrete hypothesis while allowing
+    numerical values only as non-decisive root-finding hints. Require centre elimination
+    to be derived from each contact graph. Describe the solver target as an exact LP over
+    certified rational or algebraic coefficients, with a rational LP only as the
+    rational-coefficient special case.
+  regression: none
+  bead: think-4000
+  recorded_in: docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md
+- id: D-175
+  title: The stacked orientation branch lagged the current basin calibration and agenda
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: drift_check
+  latent_for: one stacked branch update
+  severity: high
+  status: fixed
+  what: >-
+    PR 20 incorporated exp-021 through exp-023 but diverged before exp-024 and
+    agenda-001. Its synopsis therefore retained 23 rounds, a three-of-four n=4 control,
+    and unresolved D-171, and its tutorial called the event surface inadmissible without
+    distinguishing event receipts from terminal-component identity.
+  consequence: >-
+    Merging the docs verbatim would erase the current experiment queue and make a fixed
+    positive-control defect appear open, while understating what BasinEvent/v3 can
+    support.
+  fix: >-
+    Merge onto the exp-024 checkpoint, preserve agenda-001, retain exp-023 as historical
+    failed-control evidence, and state the narrow admissible event claim separately from
+    the still-blocked component census.
+  regression: >-
+    The ledger and synopsis checks derive 24 rounds, one agenda, and the exp-024 roll-up;
+    the basin-event gate replays the current n=3 and n=4 controls.
+  bead: think-lghr
+  recorded_in: SYNOPSIS.md
+- id: D-176
+  title: The orientation tutorial promoted special-case angle evidence into general structure
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: high
+  status: fixed
+  what: >-
+    The tutorial called n=11 the first case where any tilt matters, equated honest
+    continuous dimension with angle-class count, described one or two classes as the
+    small-n empirical rule, and called five f64-screen n=17 values exactly 5.0. Proved
+    n=5 and n=10 packings already use 45-degree tilt, n=29 uses six classes, and the
+    n=17 values are numerical observations.
+  consequence: >-
+    The strategy would overfit one structured cell, misstate the frontier, and cross its
+    own evidence-tier boundary when choosing low-dimensional search models.
+  fix: >-
+    Scope n=11 to genuinely oblique improvement beyond the zero/45-degree class, present
+    angle classes as a graph-specific modeling compression rather than a dimension
+    theorem, and label n=17 as a five-seed f64-screen report.
+  regression: none
+  bead: think-cgm5
+  recorded_in: TUTORIAL.md
+- id: D-177
+  title: The orientation docs asserted unmeasured continuity and language-independent cost
+  date: '2026-08-24'
+  layer: docs
+  class: performance
+  direction: neutral
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: medium
+  status: fixed
+  what: >-
+    The tutorial guaranteed that inflation progress moves continuously, and the synopsis
+    said the quench costs the same in every language. Continuation can cross bifurcations,
+    while current timing identifies LP solves and wrapper overhead rather than proving a
+    language-independent cost law.
+  consequence: >-
+    Agents could preregister an invalid continuous progress model or dismiss direct
+    solver bindings and compiled batching without measuring them.
+  fix: >-
+    Describe inflation as a graded branch-tracking metric with no continuity guarantee
+    across bifurcations. Say only that translating the geometry kernel alone cannot
+    remove the measured LP and wrapper cost, and require profiling before acceleration.
+  regression: none
+  bead: think-frq1
+  recorded_in: SYNOPSIS.md
+- id: D-178
+  title: The orientation tutorial left project-specific theorem claims unbound to evidence
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: medium
+  status: fixed
+  what: >-
+    The standalone tutorial stated the Stromquist falsification and repair, Trump local
+    isolation, small-n optimal moduli, fixed-angle-quench failure, and n=17 screening
+    result without linking the retained experiments or defect records that delimit them.
+  consequence: >-
+    A newcomer could not audit the tutorial without searching the whole repository, and
+    later synopsis drift could silently detach a claim from its exact scope.
+  fix: >-
+    Link each project-specific result at the point of use to exp-013 through exp-017,
+    exp-011, or D-029, and link the mutable campaign agenda from the tutorial's routing
+    table.
+  regression: >-
+    README and synopsis link checks validate every relative path and heading anchor;
+    substantive evidence selection remains a review obligation.
+  bead: think-72rq
+  recorded_in: TUTORIAL.md
+- id: D-179
+  title: The orientation tutorial treated undefined hardness and s(11) tractability as settled
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: high
+  status: fixed
+  what: >-
+    The tutorial called the slack that makes n=11 easy a well-posed scalar without
+    specifying proposer, target, success event, or observed-versus-certified semantics.
+    It then grouped the problem of determining s(11) with tasks described as tractable
+    by known techniques and enough effort.
+  consequence: >-
+    Experiments could report incomparable hardness numbers, while the central open
+    mathematical problem was presented as scheduled engineering rather than an unresolved
+    research risk.
+  fix: >-
+    Require every slack metric to name the proposer, target component or event, success
+    threshold, and whether it measures observed branch entry or a certified clearance
+    barrier. Separate determining s(11) from the engineering tasks with concrete paths.
+  regression: none
+  bead: think-6xfd
+  recorded_in: TUTORIAL.md
+- id: D-180
+  title: Current orientation links sent agents to an explicitly superseded handoff
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: since the quench-spine handoff was superseded
+  severity: high
+  status: fixed
+  what: >-
+    The dated quench-spine handoff correctly marked itself superseded, but README and
+    SYNOPSIS still called it the current handoff and instructed newcomers to use it for
+    today's critical path. Its body describes eleven rounds and unbuilt components that
+    have since landed.
+  consequence: >-
+    A fresh agent following the advertised reading order would bypass agenda-001 and
+    begin obsolete canonicalizer or atlas work instead of the current n=5 validation
+    cell.
+  fix: >-
+    Make the tutorial, synopsis, and basin confidence ladder the current orientation
+    path. Label the old handoff historical everywhere and retain it only as provenance.
+  regression: >-
+    README and synopsis drift checks validate the replacement links; current-versus-
+    historical status remains a review obligation.
+  recurrence_of: D-086
+  bead: think-frmc
+  recorded_in: README.md
+- id: D-181
+  title: The basin definition called a deterministic quench endpoint a non-point
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: since terminal families entered the living terminology
+  severity: high
+  status: fixed
+  what: >-
+    SYNOPSIS and the new tutorial said the preimage definition of a basin is undefined
+    when an optimum is a family because a quench endpoint is not a point. A deterministic
+    quench still returns an individual pose. The real defect is that point-preimages and
+    coordinate keys can split one connected terminal component.
+  consequence: >-
+    The programme described a valid algorithm-relative object as undefined while failing
+    to name the distinct component relation the atlas needs, obscuring both what current
+    event receipts prove and what D-034 still blocks.
+  fix: >-
+    Define a point-basin as the preimage of one returned pose and a terminal component as
+    the intended connected atlas object. State that point-basins are well defined but too
+    fine on flat families, and require independent connectivity before component counts.
+  regression: none
+  recurrence_of: D-034
+  bead: think-balp
+  recorded_in: SYNOPSIS.md
+- id: D-182
+  title: The strategy tutorial excluded safe loss shaping and all repeated endpoint hits
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: PR 20 draft review
+  severity: medium
+  status: fixed
+  what: >-
+    The tutorial said a reshaped loss changes the minimizers and instructed search to
+    never pay twice for an endpoint already named. Equivalent or lexicographic shaping
+    can preserve the target minimizers, while repeated hits are the observations needed
+    to estimate proposer-conditioned frequency and uncertainty.
+  consequence: >-
+    The strategy would discard potentially sound proposer designs and bias the very
+    frequency measurements used to decide whether record components are rare.
+  fix: >-
+    Make minimizer preservation a proof obligation rather than an impossibility claim.
+    Use duplicate taboo only in declared exploration mode; retain and count repeats in
+    measurement mode.
+  regression: none
+  bead: think-08l0
+  recorded_in: TUTORIAL.md
+- id: D-183
+  title: The basin-event batch crashed before retaining an independently invalid endpoint
+  date: '2026-08-24'
+  layer: record
+  class: robustness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: since BasinEvent/v3 made independent validity part of event construction
+  severity: high
+  status: fixed
+  what: >-
+    Exp-026 produced three valid n=6 events, then seed 3 failed the independent packing
+    screen. validate_event raised before run() appended that fourth outcome, leaving a
+    three-line archive and aborting the batch despite the declared retain-every-stop
+    contract.
+  consequence: >-
+    An unattended campaign censors the exact invalid endpoints needed to diagnose the
+    producer and cannot distinguish a missing seed from an unattempted seed without its
+    terminal traceback. Successful prefixes survive while failed outcomes disappear.
+  fix: >-
+    BasinEvent/v3 now treats a finite independently invalid endpoint as a replayable
+    blocked event rather than an invalid record. It derives a specific promotion
+    blocker, forces scientific admissibility false, and routes every outcome through
+    one validated atomic append helper.
+  regression: >-
+    A known overlapping endpoint survives the same retention helper used by run() only
+    with the independent-validity blocker; forged admissibility and a missing blocker
+    fail. Exp-027 retains and replays all four declared outcomes without resuming or
+    rewriting exp-026.
+  bead: think-78ws
+  recorded_in: tools/basin_census.py
+- id: D-184
+  title: Overlapping synopsis excerpts were mistaken for a duplicate experiment row
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: inspection
+  latent_for: minutes; corrected before commit
+  severity: low
+  status: fixed
+  what: >-
+    A review command printed lines 1188-1285 and then 1285-1365. The shared boundary
+    printed exp-024 twice, and the reviewer initially treated that display artifact as
+    a duplicate in the source. Direct `rg`, a non-overlapping excerpt, and `git show`
+    confirmed that the file contained exactly one row.
+  consequence: >-
+    The review opened a false defect and began an unnecessary correction, which could
+    have left a durable false criticism of a sound record.
+  fix: >-
+    Retract the source claim before commit and require every registered experiment id to
+    occur exactly once in both synopsis tables, so the source—not an excerpt—is the
+    adjudicator for future duplicate suspicions.
+  regression: >-
+    tools/check_synopsis.py counts both tables independently; a negative control
+    duplicates one cost row and requires the check to fail.
+  bead: think-h1wm
+  recorded_in: tools/check_synopsis.py
+- id: D-185
+  title: The synopsis carried stale defect-direction and gate-detector aggregates
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: twenty-two defect additions
+  severity: medium
+  status: fixed
+  what: >-
+    The synopsis still said 45 of 55 soundness defects were flattering and that the
+    automated gate caught 6 defects in 161. Before this correction defects.yaml derived
+    50 of 61 and 7 of 183; after D-184 and this entry the total is 185.
+  consequence: >-
+    The program's own process summary understated both the prevalence of flattering
+    mathematical errors and the small number of defects found by ordinary gates.
+  fix: >-
+    Reconcile the prose and derive the soundness-direction and gate-detector aggregates
+    from defects.yaml in the synopsis checker.
+  regression: >-
+    Focused negative controls change each displayed aggregate and require
+    tools/check_synopsis.py to report the derived mismatch.
+  bead: think-m3io
+  recorded_in: tools/check_synopsis.py
+- id: D-186
+  title: The first angle-sheet bound omitted slide motion from one projection
+  date: '2026-08-24'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: minutes; caught before preregistration or scientific execution
+  severity: high
+  status: fixed
+  what: >-
+    The first uncommitted n=5 angle-sheet checker evaluated the pair (0,3) separating
+    projection with square 0 at the maximum slide in its x term but at zero slide in
+    its y term. Because positive rotation makes both coordinates reduce separation,
+    the displayed expression was not a valid lower bound over the whole parameter
+    strip. The same draft also called every boundary margin strict even though two
+    declared containment inequalities are active at the strip boundary.
+  consequence: >-
+    A positive but nonconservative expression could have been presented as a universal
+    feasibility proof for the two-parameter sheet. Exact boundary samples would not by
+    themselves repair the missing all-parameter implication.
+  fix: >-
+    Include the full maximum-slide coefficient sqrt(2)/2-1/2 in the adverse y
+    projection, distinguish nonnegative boundary inequalities from strictly positive
+    residual margins, and commit the corrected instrument before freezing or running
+    exp-034.
+  regression: >-
+    The checker exact-signs the corrected uniform residual and replays all four signed
+    angle/slide boundary fixtures; derivation of the all-parameter bound remains a
+    mathematical review obligation rather than a sampling claim.
+  bead: think-7pn0
+  recorded_in: tools/check_n5_angle_sheet.py
+- id: D-187
+  title: Two synopsis mutation controls retained the pre-D-186 aggregates
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one integration checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    D-186 changed the soundness-direction and total-defect aggregates in SYNOPSIS, but
+    the integration pass updated only the living prose and defect-count mutation. Two
+    separate negative controls still searched for the former 50-of-61 and 7-of-185
+    sentences, so their mutation anchors appeared zero times.
+  consequence: >-
+    The normal gate failed even though the current synopsis was correct, delaying the
+    checkpoint and showing that derived prose and its mutation anchors were not updated
+    as one unit.
+  fix: >-
+    Update both mutations to the current derived sentences and treat a defect addition
+    as an atomic refresh of generated views, synopsis aggregates, and every live-number
+    control anchor.
+  regression: >-
+    The two focused negative controls fire on the current sentences, and the subsequent
+    normal gate runs the complete negative-control catalogue.
+  recurrence_of: D-185
+  bead: think-7pn0
+  recorded_in: tools/controls.yaml
+- id: D-188
+  title: The conventions authorized multi-hypothesis rounds after the schema prohibited them
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: since the one-verdict contract replaced multi-hypothesis rounds
+  severity: high
+  status: fixed
+  what: >-
+    conventions.md still said one round may test one or more hypotheses, and PR 21
+    propagated that rule into the synopsis. The enforced experiment schema permits
+    exactly one hypothesis because a round carries one verdict; applying it to several
+    claims previously produced the false ledger decisions recorded as D-018.
+  consequence: >-
+    Agents following the definitive conventions could design an artifact the schema
+    rejects or, after weakening the schema, revive the exact verdict-contamination bug
+    the one-hypothesis rule was introduced to prevent.
+  fix: >-
+    State exactly one hypothesis per new round in conventions and synopsis. Keep the
+    array only for format compatibility, and explain that one hypothesis may aggregate
+    many rounds rather than one round deciding many hypotheses.
+  regression: >-
+    experiment.schema.yaml enforces maxItems one; the campaign ledger preserves the
+    historical array shape without applying one verdict across claims.
+  recurrence_of: D-018
+  bead: think-tbmj
+  recorded_in: conventions.md
+- id: D-189
+  title: The newcomer glossary omitted the point-basin and component boundary
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: PR 21 draft review
+  severity: high
+  status: fixed
+  what: >-
+    README correctly defined a quench-relative point-basin as the configurations carried
+    to one endpoint, but its unqualified glossary omitted the central n=3 distinction:
+    many returned poses and keys can lie in one connected terminal component.
+  consequence: >-
+    A new agent could treat endpoint equality as the atlas identity relation, declare a
+    component census from point-preimages, and bypass the exact ambiguity boundary that
+    still blocks H-011.
+  fix: >-
+    Define the short glossary term explicitly as a point-basin for one deterministic
+    quench and state that it can split one connected terminal component. Defer the full
+    distinction to the synopsis.
+  regression: none
+  recurrence_of: D-181
+  bead: think-tbmj
+  recorded_in: README.md
+- id: D-190
+  title: The id glossary said every experiment retains a JSONL archive
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: PR 21 draft review
+  severity: medium
+  status: fixed
+  what: >-
+    README and SYNOPSIS described every exp-NNN round as an artifact plus a raw JSONL
+    archive. Search/event rounds use JSONL, but the exact proof and configuration-space
+    rounds retain deterministic JSON records.
+  consequence: >-
+    Sound exact rounds appear nonconforming or missing their promised raw evidence, and
+    an agent may rewrite a deterministic record into an inappropriate stream format.
+  fix: >-
+    Define a round as its schema-validated artifact plus the declared result or archive,
+    commonly JSON or JSONL, without making one serialization universal.
+  regression: >-
+    Every terminal experiment declares method.record, and provenance/replay checks read
+    the format named by that round.
+  bead: think-tbmj
+  recorded_in: README.md
+- id: D-191
+  title: Orientation prose overstated both control automation and conventions ownership
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: PR 21 draft review
+  severity: high
+  status: fixed
+  what: >-
+    README said schemas, the gate, preregistration, and provenance now largely enforce
+    themselves, while conventions.md said it wins on any difference with another
+    document. The defect history shows continuing mathematical and cross-document
+    review is essential, and conventions cannot override schemas, source evidence, or
+    the synopsis's changing program status.
+  consequence: >-
+    Agents could treat a green mechanical gate as scientific admissibility or resolve a
+    status/evidence conflict in favor of generic convention prose rather than the owning
+    artifact.
+  fix: >-
+    Say the machinery provides enforceable controls but does not certify mathematics or
+    maintain every claim automatically. Narrow conventions precedence to id and naming
+    conventions; schemas, source artifacts, and synopsis status keep their own authority.
+  regression: none
+  bead: think-tbmj
+  recorded_in: README.md
+- id: D-192
+  title: The stacked documentation PR was twelve commits behind the living synopsis
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: until PR 21 integration review
+  severity: high
+  status: fixed
+  what: >-
+    PR 21 was clean relative to its old stacked base but diverged from the current PR 19
+    by twelve commits. Its living synopsis stopped at exp-032, 32 rounds, and 185
+    defects, omitting exp-033, exp-034, BC-010 progress, and D-186 through D-187.
+  consequence: >-
+    A direct merge could replace the authoritative current-status document with an
+    older snapshot while GitHub still reported the stack as mergeable relative to its
+    configured base.
+  fix: >-
+    Reapply PR 21's four substantive documentation commits onto the current PR 19 head,
+    including its late exp-033 promotion-boundary delta, while omitting its two base-merge
+    commits. Preserve all current generated and hand-authored status before a fresh gate.
+  regression: >-
+    Synopsis, ledger, defect, README, and provenance checks run on the rebased integrated
+    tree; review compares every stacked PR against the current head, not only its stored base.
+  bead: think-2pld
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-193
+  title: The draft PR 21 review misclassified a valid but incomplete definition as soundness
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted integration pass
+  severity: medium
+  status: fixed
+  what: >-
+    The first draft of D-189 called PR 21's short point-basin definition mathematically
+    false and classified it as soundness. The definition was valid; it omitted the
+    separate terminal-component relation and therefore had a validity/scope defect.
+  consequence: >-
+    Committing that classification would have overstated the source error and inflated
+    both the soundness and flattering-soundness aggregates by one.
+  fix: >-
+    Retitle D-189 around the omitted boundary, classify it as validity, and derive all
+    affected synopsis aggregates again before committing the review.
+  regression: none
+  bead: think-tbmj
+  recorded_in: defects.yaml

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img">
+<title>Exact optimal configuration spaces for three unit squares in side 2</title>
+<desc>Two labelled 12-cycles quotient to one unlabelled four-cycle and then to the C-G-M interval. Packing glyphs show the corner, generic, and centred strata.</desc>
+<style>
+:root{--bg:#fbfaf7;--ink:#17202a;--muted:#637083;--line:#8290a3;--panel:#ffffff;--c:#d97706;--g:#2563eb;--m:#7c3aed;--sq1:#0f766e;--sq2:#be123c;--sq3:#7c3aed}
+@media(prefers-color-scheme:dark){:root{--bg:#111827;--ink:#f3f4f6;--muted:#aab4c3;--line:#64748b;--panel:#1f2937;--c:#f59e0b;--g:#60a5fa;--m:#a78bfa;--sq1:#2dd4bf;--sq2:#fb7185;--sq3:#c4b5fd}}
+text{font-family:ui-sans-serif,system-ui,-apple-system,sans-serif;fill:var(--ink)} .muted{fill:var(--muted)} .edge{stroke:var(--line);stroke-width:2;fill:none} .panel{fill:var(--panel);stroke:var(--line);stroke-width:1.5} .node{stroke:var(--panel);stroke-width:2} .label{font-size:15px;font-weight:650} .small{font-size:12px}
+</style>
+<rect width="1200" height="900" fill="var(--bg)"/>
+<text x="55" y="55" font-size="27" font-weight="750">F₃(2): exact quotient and stratum map</text>
+<text x="55" y="82" class="muted" font-size="14">Arbitrary rotations add no configurations; the full physical space is axis-aligned.</text>
+<rect class="panel" x="45" y="105" width="670" height="360" rx="14"/>
+<text x="70" y="140" class="label">Labelled space: two disjoint 12-cycles</text>
+<line id="labelled-0-edge-0" class="edge" x1="230" y1="190" x2="280" y2="203"/>
+<line id="labelled-0-edge-1" class="edge" x1="280" y1="203" x2="317" y2="240"/>
+<line id="labelled-0-edge-2" class="edge" x1="317" y1="240" x2="330" y2="290"/>
+<line id="labelled-0-edge-3" class="edge" x1="330" y1="290" x2="317" y2="340"/>
+<line id="labelled-0-edge-4" class="edge" x1="317" y1="340" x2="280" y2="377"/>
+<line id="labelled-0-edge-5" class="edge" x1="280" y1="377" x2="230" y2="390"/>
+<line id="labelled-0-edge-6" class="edge" x1="230" y1="390" x2="180" y2="377"/>
+<line id="labelled-0-edge-7" class="edge" x1="180" y1="377" x2="143" y2="340"/>
+<line id="labelled-0-edge-8" class="edge" x1="143" y1="340" x2="130" y2="290"/>
+<line id="labelled-0-edge-9" class="edge" x1="130" y1="290" x2="143" y2="240"/>
+<line id="labelled-0-edge-10" class="edge" x1="143" y1="240" x2="180" y2="203"/>
+<line id="labelled-0-edge-11" class="edge" x1="180" y1="203" x2="230" y2="190"/>
+<circle id="labelled-0-vertex-0" class="node" cx="230" cy="190" r="7" fill="var(--g)"/>
+<circle id="labelled-0-vertex-1" class="node" cx="280" cy="203" r="7" fill="var(--g)"/>
+<circle id="labelled-0-vertex-2" class="node" cx="317" cy="240" r="7" fill="var(--g)"/>
+<circle id="labelled-0-vertex-3" class="node" cx="330" cy="290" r="7" fill="var(--g)"/>
+<circle id="labelled-0-vertex-4" class="node" cx="317" cy="340" r="7" fill="var(--g)"/>
+<circle id="labelled-0-vertex-5" class="node" cx="280" cy="377" r="7" fill="var(--g)"/>
+<circle id="labelled-0-vertex-6" class="node" cx="230" cy="390" r="7" fill="var(--g)"/>
+<circle id="labelled-0-vertex-7" class="node" cx="180" cy="377" r="7" fill="var(--g)"/>
+<circle id="labelled-0-vertex-8" class="node" cx="143" cy="340" r="7" fill="var(--g)"/>
+<circle id="labelled-0-vertex-9" class="node" cx="130" cy="290" r="7" fill="var(--g)"/>
+<circle id="labelled-0-vertex-10" class="node" cx="143" cy="240" r="7" fill="var(--g)"/>
+<circle id="labelled-0-vertex-11" class="node" cx="180" cy="203" r="7" fill="var(--g)"/>
+<text x="230" y="295" text-anchor="middle" class="small">component 1</text>
+<line id="labelled-1-edge-0" class="edge" x1="520" y1="190" x2="570" y2="203"/>
+<line id="labelled-1-edge-1" class="edge" x1="570" y1="203" x2="607" y2="240"/>
+<line id="labelled-1-edge-2" class="edge" x1="607" y1="240" x2="620" y2="290"/>
+<line id="labelled-1-edge-3" class="edge" x1="620" y1="290" x2="607" y2="340"/>
+<line id="labelled-1-edge-4" class="edge" x1="607" y1="340" x2="570" y2="377"/>
+<line id="labelled-1-edge-5" class="edge" x1="570" y1="377" x2="520" y2="390"/>
+<line id="labelled-1-edge-6" class="edge" x1="520" y1="390" x2="470" y2="377"/>
+<line id="labelled-1-edge-7" class="edge" x1="470" y1="377" x2="433" y2="340"/>
+<line id="labelled-1-edge-8" class="edge" x1="433" y1="340" x2="420" y2="290"/>
+<line id="labelled-1-edge-9" class="edge" x1="420" y1="290" x2="433" y2="240"/>
+<line id="labelled-1-edge-10" class="edge" x1="433" y1="240" x2="470" y2="203"/>
+<line id="labelled-1-edge-11" class="edge" x1="470" y1="203" x2="520" y2="190"/>
+<circle id="labelled-1-vertex-0" class="node" cx="520" cy="190" r="7" fill="var(--m)"/>
+<circle id="labelled-1-vertex-1" class="node" cx="570" cy="203" r="7" fill="var(--m)"/>
+<circle id="labelled-1-vertex-2" class="node" cx="607" cy="240" r="7" fill="var(--m)"/>
+<circle id="labelled-1-vertex-3" class="node" cx="620" cy="290" r="7" fill="var(--m)"/>
+<circle id="labelled-1-vertex-4" class="node" cx="607" cy="340" r="7" fill="var(--m)"/>
+<circle id="labelled-1-vertex-5" class="node" cx="570" cy="377" r="7" fill="var(--m)"/>
+<circle id="labelled-1-vertex-6" class="node" cx="520" cy="390" r="7" fill="var(--m)"/>
+<circle id="labelled-1-vertex-7" class="node" cx="470" cy="377" r="7" fill="var(--m)"/>
+<circle id="labelled-1-vertex-8" class="node" cx="433" cy="340" r="7" fill="var(--m)"/>
+<circle id="labelled-1-vertex-9" class="node" cx="420" cy="290" r="7" fill="var(--m)"/>
+<circle id="labelled-1-vertex-10" class="node" cx="433" cy="240" r="7" fill="var(--m)"/>
+<circle id="labelled-1-vertex-11" class="node" cx="470" cy="203" r="7" fill="var(--m)"/>
+<text x="520" y="295" text-anchor="middle" class="small">component 2</text>
+<text x="690" y="280" text-anchor="middle" class="label">/ S₃</text>
+<path class="edge" d="M650 295 H735" marker-end="url(#arrow)"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="var(--line)"/></marker></defs>
+<rect class="panel" x="750" y="105" width="405" height="360" rx="14"/>
+<text x="775" y="140" class="label">Unlabelled quotient: one four-cycle</text>
+<line id="s3-edge-0" class="edge" x1="860" y1="220" x2="1020" y2="220"/>
+<circle id="s3-vertex-0" class="node" cx="860" cy="220" r="9" fill="var(--c)"/>
+<line id="s3-edge-1" class="edge" x1="1020" y1="220" x2="1020" y2="380"/>
+<circle id="s3-vertex-1" class="node" cx="1020" cy="220" r="9" fill="var(--c)"/>
+<line id="s3-edge-2" class="edge" x1="1020" y1="380" x2="860" y2="380"/>
+<circle id="s3-vertex-2" class="node" cx="1020" cy="380" r="9" fill="var(--c)"/>
+<line id="s3-edge-3" class="edge" x1="860" y1="380" x2="860" y2="220"/>
+<circle id="s3-vertex-3" class="node" cx="860" cy="380" r="9" fill="var(--c)"/>
+<text x="940" y="305" text-anchor="middle" class="small">missing-corner cycle</text>
+<text x="940" y="430" text-anchor="middle" class="muted small">The D₄ reflection fixes each edge midpoint.</text>
+<rect class="panel" x="45" y="495" width="1110" height="360" rx="14"/>
+<text x="70" y="530" class="label">Full quotient by D₄ × S₃: interval λ ∈ [0, 1/2]</text>
+<line id="quotient-edge" x1="180" y1="600" x2="1020" y2="600" stroke="var(--g)" stroke-width="8" stroke-linecap="round"/>
+<circle id="stratum-C" cx="180" cy="600" r="15" fill="var(--c)" class="node"/>
+<circle id="stratum-M" cx="1020" cy="600" r="15" fill="var(--m)" class="node"/>
+<text x="180" y="575" text-anchor="middle" class="label">C</text>
+<text x="600" y="575" text-anchor="middle" class="label">G</text>
+<text x="1020" y="575" text-anchor="middle" class="label">M</text>
+<text x="180" y="630" text-anchor="middle" class="small">walls 6 · axes 4 · stab 2</text>
+<text x="600" y="630" text-anchor="middle" class="small">walls 5 · axes 3 · stab 1</text>
+<text x="1020" y="630" text-anchor="middle" class="small">walls 5 · axes 3 · stab 2</text>
+<g id="packing-0" transform="translate(120,675)">
+<rect x="0" y="0" width="120" height="120" fill="none" stroke="var(--ink)" stroke-width="3"/>
+<rect x="0.0" y="60.0" width="60" height="60" fill="var(--sq1)" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>
+<rect x="60.0" y="60.0" width="60" height="60" fill="var(--sq2)" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>
+<rect x="0.0" y="0.0" width="60" height="60" fill="var(--sq3)" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>
+</g>
+<text x="180" y="820" text-anchor="middle" class="small">λ=0 · corner/L</text>
+<g id="packing-1-4" transform="translate(540,675)">
+<rect x="0" y="0" width="120" height="120" fill="none" stroke="var(--ink)" stroke-width="3"/>
+<rect x="0.0" y="60.0" width="60" height="60" fill="var(--sq1)" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>
+<rect x="60.0" y="60.0" width="60" height="60" fill="var(--sq2)" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>
+<rect x="15.0" y="0.0" width="60" height="60" fill="var(--sq3)" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>
+</g>
+<text x="600" y="820" text-anchor="middle" class="small">λ=1/4 · generic</text>
+<g id="packing-1-2" transform="translate(960,675)">
+<rect x="0" y="0" width="120" height="120" fill="none" stroke="var(--ink)" stroke-width="3"/>
+<rect x="0.0" y="60.0" width="60" height="60" fill="var(--sq1)" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>
+<rect x="60.0" y="60.0" width="60" height="60" fill="var(--sq2)" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>
+<rect x="30.0" y="0.0" width="60" height="60" fill="var(--sq3)" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>
+</g>
+<text x="1020" y="820" text-anchor="middle" class="small">λ=1/2 · centred</text>
+<text x="70" y="842" class="muted small">C and M are zero-dimensional orbit strata. Only C changes the active signature; M is singular because its stabilizer jumps.</text>
+</svg>

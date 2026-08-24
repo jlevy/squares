@@ -1,0 +1,481 @@
+{
+  "conditional_capacity": {
+    "assumed_points_in_special_box": 3,
+    "boxes": 11,
+    "conditional_capacity_contradiction": true,
+    "figure13_points": 10,
+    "remaining_boxes": 10,
+    "remaining_figure14_points": 9,
+    "stage_one_forces_an_avoider_if_localization_is_valid": true
+  },
+  "determination": {
+    "claim": "the printed Figure 14 twelve-point set is unavoidable",
+    "outcome": "refuted",
+    "reason": "an exactly verified open box of side 10001/10000 fits in the claimed container and strictly avoids all twelve printed points",
+    "scope": "rejects Stromquist's printed Figure 14 cover and hence the proof as printed; does not refute the numerical lower bound itself"
+  },
+  "figure13": {
+    "all_sloping_edges_squared_length_one": true,
+    "container_side": {
+      "coefficients_low_to_high": [
+        "2",
+        "4/5"
+      ],
+      "decimal_for_display_only": "3.788854381999832"
+    },
+    "exact_escape": {
+      "all_ten_figure13_points_strictly_avoided": true,
+      "all_three_A_points_strictly_contained": true,
+      "box": {
+        "center_formula": [
+          "1+1/sqrt(5)",
+          "18/25"
+        ],
+        "orientation": "45 degrees; cos=sin=1/sqrt(2)",
+        "side": {
+          "coefficients_low_to_high": [
+            "101/100",
+            "0",
+            "0",
+            "0"
+          ],
+          "decimal_for_display_only": "1.01"
+        },
+        "side_formula": "101/100",
+        "strictly_greater_than_one": true
+      },
+      "field": {
+        "all_decisions": "exact signs in Q(alpha)",
+        "generator": "alpha=sqrt(2)+sqrt(5)",
+        "metadata_checks": {
+          "isolating_interval_contains_exactly_one_root": true,
+          "minimal_polynomial_irreducible_over_Q": true,
+          "minimal_polynomial_squarefree": true
+        },
+        "minimal_polynomial_high_to_low": [
+          1,
+          0,
+          -14,
+          0,
+          9
+        ],
+        "rational_isolating_interval": [
+          "365/100",
+          "366/100"
+        ]
+      },
+      "independent_verify_packing_valid": true,
+      "minimum_A_containment_margin": {
+        "coefficients_low_to_high": [
+          "171/200",
+          "33/200",
+          "-1/20",
+          "-3/200"
+        ],
+        "decimal_for_display_only": "0.06149301336958352"
+      },
+      "minimum_A_containment_margin_point": "A1",
+      "minimum_avoidance_margin": {
+        "coefficients_low_to_high": [
+          "-171/200",
+          "-77/300",
+          "1/20",
+          "7/300"
+        ],
+        "decimal_for_display_only": "0.009217664749071239"
+      },
+      "minimum_avoidance_margin_point": "bottom_left",
+      "minimum_container_clearance": {
+        "coefficients_low_to_high": [
+          "18/25",
+          "1111/1200",
+          "0",
+          "-101/1200"
+        ],
+        "decimal_for_display_only": "0.005822151001587001"
+      },
+      "minimum_container_clearance_location": "corner_0_bottom",
+      "role": "constructive non-unavoidability witness, not a localization proof",
+      "strictly_inside_container": true
+    },
+    "field_metadata": {
+      "isolating_interval_contains_exactly_one_root": true,
+      "minimal_polynomial_irreducible_over_Q": true,
+      "minimal_polynomial_squarefree": true
+    },
+    "point_count": 10,
+    "quarter_turn_is_symmetry": false,
+    "quarter_turn_negative_control_passed": true,
+    "sloping_edge_count": 12,
+    "source_seed_formulas": [
+      "(1,1)",
+      "(s/2,1)",
+      "(3/2-s/4,s/2)",
+      "(1/2+s/4,s/2)"
+    ],
+    "symmetry_group": "K4: x -> s-x and y -> s-y"
+  },
+  "figure14": {
+    "claimed_unavoidable": true,
+    "exact_escape": {
+      "all_twelve_strictly_avoided": true,
+      "box": {
+        "center": [
+          {
+            "coefficients_low_to_high": [
+              "0",
+              "230533051/6830960000",
+              "0",
+              "-370037/27323840000"
+            ],
+            "decimal_for_display_only": "0.6425958114294762"
+          },
+          {
+            "coefficients_low_to_high": [
+              "11/8",
+              "0",
+              "0",
+              "0"
+            ],
+            "decimal_for_display_only": "1.375"
+          }
+        ],
+        "center_formula": [
+          "37L/(2sqrt(829))",
+          "11/8"
+        ],
+        "cosine_formula": "10/sqrt(829)",
+        "exact_square_shape": true,
+        "side": {
+          "coefficients_low_to_high": [
+            "10001/10000",
+            "0",
+            "0",
+            "0"
+          ],
+          "decimal_for_display_only": "1.0001"
+        },
+        "side_formula": "10001/10000",
+        "sine_formula": "27/sqrt(829)",
+        "strictly_greater_than_one": true
+      },
+      "container": {
+        "all_other_clearances_strictly_positive": true,
+        "exact_boundary_contacts": [
+          "corner_3_left"
+        ],
+        "independent_verify_packing_valid": true,
+        "minimum_positive_clearance": {
+          "coefficients_low_to_high": [
+            "0",
+            "6230623/341548000",
+            "0",
+            "-10001/1366192000"
+          ],
+          "decimal_for_display_only": "0.3473490872591763"
+        },
+        "minimum_positive_clearance_location": "corner_2_left",
+        "side": {
+          "coefficients_low_to_high": [
+            "2",
+            "-211/515",
+            "0",
+            "1/2060"
+          ],
+          "decimal_for_display_only": "3.788854381999832"
+        },
+        "side_formula": "2+4/sqrt(5)"
+      },
+      "field": {
+        "all_decisions": "exact signs in Q(alpha)",
+        "generator": "alpha=sqrt(5)+sqrt(829)",
+        "metadata_checks": {
+          "isolating_interval_contains_exactly_one_root": true,
+          "minimal_polynomial_irreducible_over_Q": true,
+          "minimal_polynomial_squarefree": true
+        },
+        "minimal_polynomial_high_to_low": [
+          1,
+          0,
+          -1668,
+          0,
+          678976
+        ],
+        "rational_isolating_interval": [
+          "31",
+          "32"
+        ]
+      },
+      "minimum_avoidance_margin": {
+        "coefficients_low_to_high": [
+          "-11991199/16580000",
+          "518959/13661920",
+          "0",
+          "-833/54647680"
+        ],
+        "decimal_for_display_only": "4.939570106622544e-05"
+      },
+      "minimum_avoidance_margin_point": "G",
+      "mutations": {
+        "left_shift_by_1_over_10000_rejected_by_container": true
+      },
+      "printed_points": [
+        {
+          "active_local_axis": "v",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-4570457/4145000",
+              "79121/1366192",
+              "0",
+              "-127/5464768"
+            ],
+            "decimal_for_display_only": "7.965392567674228e-05"
+          },
+          "label": "A1",
+          "strictly_outside_open_box": true
+        },
+        {
+          "active_local_axis": "v",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-27088457/4145000",
+              "79121/1366192",
+              "27/4145",
+              "-127/5464768"
+            ],
+            "decimal_for_display_only": "0.8388276438434312"
+          },
+          "label": "A2",
+          "strictly_outside_open_box": true
+        },
+        {
+          "active_local_axis": "v",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-15829457/4145000",
+              "368193/6830960",
+              "27/8290",
+              "-591/27323840"
+            ],
+            "decimal_for_display_only": "0.3430444906033633"
+          },
+          "label": "A3",
+          "strictly_outside_open_box": true
+        },
+        {
+          "active_local_axis": "v",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-49606457/4145000",
+              "76629/1366192",
+              "54/4145",
+              "-123/5464768"
+            ],
+            "decimal_for_display_only": "1.642844198178826"
+          },
+          "label": "B",
+          "strictly_outside_open_box": true
+        },
+        {
+          "active_local_axis": "v",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-41266457/4145000",
+              "416787/6830960",
+              "44/4145",
+              "-669/27323840"
+            ],
+            "decimal_for_display_only": "1.425971670577954"
+          },
+          "label": "C",
+          "strictly_outside_open_box": true
+        },
+        {
+          "active_local_axis": "u",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-258855199/16580000",
+              "-623/2732384",
+              "74/4145",
+              "1/10929536"
+            ],
+            "decimal_for_display_only": "1.571216607432631"
+          },
+          "label": "D",
+          "strictly_outside_open_box": true
+        },
+        {
+          "active_local_axis": "u",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-225495199/16580000",
+              "623/132640",
+              "64/4145",
+              "-1/530560"
+            ],
+            "decimal_for_display_only": "1.354344079831759"
+          },
+          "label": "E",
+          "strictly_outside_open_box": true
+        },
+        {
+          "active_local_axis": "u",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-192135199/16580000",
+              "-623/2732384",
+              "54/4145",
+              "1/10929536"
+            ],
+            "decimal_for_display_only": "0.9499218000861459"
+          },
+          "label": "F",
+          "strictly_outside_open_box": true
+        },
+        {
+          "active_local_axis": "u",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-11991199/16580000",
+              "518959/13661920",
+              "0",
+              "-833/54647680"
+            ],
+            "decimal_for_display_only": "4.939570106622544e-05"
+          },
+          "label": "G",
+          "strictly_outside_open_box": true
+        },
+        {
+          "active_local_axis": "u",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-11991199/16580000",
+              "861609/13661920",
+              "0",
+              "-1383/54647680"
+            ],
+            "decimal_for_display_only": "0.4776066349585079"
+          },
+          "label": "H",
+          "strictly_outside_open_box": true
+        },
+        {
+          "active_local_axis": "u",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-11991199/16580000",
+              "1011129/13661920",
+              "0",
+              "-1623/54647680"
+            ],
+            "decimal_for_display_only": "0.6859952484526642"
+          },
+          "label": "I",
+          "strictly_outside_open_box": true
+        },
+        {
+          "active_local_axis": "v",
+          "exact_margin": {
+            "coefficients_low_to_high": [
+              "-4570457/4145000",
+              "690907/6830960",
+              "0",
+              "-1109/27323840"
+            ],
+            "decimal_for_display_only": "0.8232146772275943"
+          },
+          "label": "J",
+          "strictly_outside_open_box": true
+        }
+      ]
+    },
+    "printed_point_count": 12,
+    "reason_cover_rejected": "the outer G-A1 Lemma 4 premise fails and an exact strict escape exists",
+    "source_faithful_cover_certified": false
+  },
+  "hypothesis_id": "H-010",
+  "lemma4": {
+    "checks": {
+      "corrected_middle_application_b_0_9_passes": true,
+      "corrected_root_satisfies_unsquared_sign": true,
+      "figure14_G_A1_application_b_0_8_fails": true,
+      "figure14_G_A1_failure_has_exact_upper_bound": true,
+      "paper_cubic_root_is_not_stationary": true,
+      "paper_cubic_root_violates_unsquared_sign": true
+    },
+    "failed_figure14_face": {
+      "a": "0.95",
+      "claimed_b": "0.8",
+      "exact_upper_bound_certificate": {
+        "b_star_at_test_orientation": {
+          "coefficients_low_to_high": [
+            "-434/45",
+            "11/9"
+          ],
+          "decimal_for_display_only": "0.7982267998325381"
+        },
+        "conclusion": "f(19/20) <= b_star(theta) < 4/5",
+        "field_metadata": {
+          "isolating_interval_contains_exactly_one_root": true,
+          "minimal_polynomial_irreducible_over_Q": true,
+          "minimal_polynomial_squarefree": true
+        },
+        "strict_gap_4_over_5_minus_b_star": {
+          "coefficients_low_to_high": [
+            "94/9",
+            "-11/9"
+          ],
+          "decimal_for_display_only": "0.001773200167461906"
+        },
+        "test_orientation": "tan(theta)=3/8; cos=8/sqrt(73); sin=3/sqrt(73)"
+      },
+      "inequality_b_le_f_a": false,
+      "name": "outer G-A1 Lemma 4 cell",
+      "true_f_a_display_only": "0.798153437834"
+    },
+    "middle_table": {
+      "a": "0.894427191",
+      "corrected_f_a": "0.914537788641",
+      "corrected_root_degrees": "31.4559497359",
+      "derivative_at_extraneous_root": "-0.222976407848",
+      "extraneous_cubic_root_degrees": "24.0787888025",
+      "role": "rounded display diagnostics; no verdict depends on these strings"
+    },
+    "role": "floating-point diagnostic only; the terminal witness uses exact signs",
+    "unsquared_stationarity_sign_condition": "cos(theta) <= a"
+  },
+  "mutations": {
+    "standalone_figure14_pigeonhole_contradiction": false,
+    "triple_size_2": {
+      "assumed_points_in_special_box": 2,
+      "boxes": 11,
+      "conditional_capacity_contradiction": false,
+      "figure13_points": 10,
+      "remaining_boxes": 10,
+      "remaining_figure14_points": 10,
+      "stage_one_forces_an_avoider_if_localization_is_valid": true
+    }
+  },
+  "schema_version": 1,
+  "selftests": {
+    "box_side_is_strictly_greater_than_one": true,
+    "exact_witness_avoids_all_printed_points": true,
+    "figure13_K4_not_D4": true,
+    "figure13_escape_contains_A_triple": true,
+    "figure13_strict_escape_avoids_all_ten": true,
+    "left_shift_witness_mutation_is_rejected": true,
+    "lemma4_squared_root_negative_control": true,
+    "source_hashes_match": true,
+    "standalone_twelve_point_pigeonhole_does_not_close": true,
+    "three_point_capacity_closes_conditionally": true,
+    "two_point_capacity_mutation_does_not_close": true
+  },
+  "source": {
+    "author": "Walter Stromquist",
+    "paper_sha256": "146ac14a015910a95d0c25bf986f6073bcccd21a29ee754a45dcc0d4224d5e0b",
+    "raw_text_sha256": "5808f3152c2d3a409c54d1f6ebb2636b7500eb22d489ccf9908435007d8a1d6b",
+    "title": "Packing 10 or 11 Unit Squares in a Square",
+    "year": 2003
+  }
+}

@@ -130,6 +130,29 @@ step_exact_verification() {
   grep -q "s = 3.87708359002281417730789706010096" <<<"$out"
 }
 
+step_trump_linearized_cones() {
+  # Exp-013 is a proof-style result, not a frozen display number. Re-derive the complete
+  # active system and replay every retained exact Q(u) certificate. The checker also
+  # exercises a known-flexible wall omission and rejects duplicate branch coverage.
+  $PY tools/check_trump_tangent.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json
+}
+
+step_stromquist_h010_exact_rejection() {
+  # Rebuild the source-bound exact escape, run every mutation control, and require the
+  # retained terminal H-010 evidence to match. A refuted printed Figure 14 cover is the
+  # expected successful verdict; the numerical lower bound is a separate claim.
+  $PY tools/check_stromquist_theorem2.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-016-h-010-stromquist-printed-figure14.json
+}
+
+step_stromquist_h041_exact_repair() {
+  # Rebuild every repaired finite-cover obligation and mutation control, then require
+  # the retained terminal H-041 certificate to match exactly.
+  $PY tools/check_stromquist_repair.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
+}
+
 step_negative_control() {
   out=$(python3 negative_control.py)
   echo "$out"
@@ -198,6 +221,30 @@ print(f"  100 artifacts, n = 1..100, {100-open_n} proved, {open_n} open")
 print(f"  {nag} of {open_n} open cases bounded below by Nagamochi's general theorem")
 assert open_n == 65 and nag == 63, "corpus counts drifted from the documented figures"
 PY
+
+  # The first retained public geometry beyond the n=11 exact witness. This replays the
+  # source's transform tree, defining equations, independent SAT check, and angle-class
+  # count. It is cheap enough to keep the result that refuted H-024 executable.
+  local checker out
+  if command -v uv >/dev/null 2>&1; then
+    checker="uv run --frozen --quiet python"
+  elif python3 -c "import mpmath" 2>/dev/null; then
+    checker=python3
+  else
+    skip "mpmath unavailable: the retained Kingbird n=29 witness was not replayed"
+    return 0
+  fi
+  out=$($checker tools/check_kingbird_svg.py resources/papers/kingbird-square-29-provenance.svg)
+  $PY -c '
+import json, sys
+d = json.load(sys.stdin)
+assert d["packing"]["valid"] and d["packing"]["n"] == 29
+assert d["packing"]["pairs_tested"] == 406
+assert d["orientation_class_count"] == 6
+assert [c["count"] for c in d["orientation_classes"]] == [15, 1, 9, 1, 2, 1]
+assert all(d["selftests"].values())
+print("  n=29 source: 29 squares, 406 pairs, six classes, source equations replayed")
+' <<<"$out"
 }
 
 step_soft_schema_validation() {
@@ -287,6 +334,57 @@ step_basin_atlas() {
   $PY tools/atlas_check.py
 }
 
+step_basin_events() {
+  # The durable observation boundary for a census: full poses, deterministic starts,
+  # independent validity replay, tamper detection, and idempotent event ids. This does
+  # not call an endpoint key a connected basin; classification is a later instrument.
+  $PY tools/basin_census.py --selftest
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-021-h-021-n3-basin-event-v3.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-027-h-021-n6-basin-event-v3-retention.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-028-h-021-n7-basin-event-v3.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
+}
+
+step_small_n_moduli() {
+  # Rebuild the exact n = 3 record and SVG, then the separate rigid n = 4 record.
+  # Finally require the component policy to preserve the connected interval across
+  # key/contact strata while collapsing rigid labelled grids only in the quotient.
+  # These replay checks do not write artifacts.
+  $PY tools/check_small_n_moduli.py \
+    --n 3 \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json \
+    --check-svg atlas/n-003-optimal-moduli.svg
+  $PY tools/check_small_n_moduli.py \
+    --n 4 \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-015-h-032-n4-optimal-moduli.json
+  $PY tools/check_terminal_components.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
+  $PY tools/check_n5_equal_side_face.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
+  $PY tools/check_n5_angle_sheet.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
+}
+
 step_negative_controls() {
   # Every guard in this directory, watched failing. A check nobody has seen fail is not a
   # check, and until now each of these was run once by hand and thrown away. Each control
@@ -299,7 +397,7 @@ step_historical_regressions() {
   # Named reproductions for defects that span components or need a focused fixture.
   # Keeping this in the main gate prevents a passing standalone check from becoming a
   # forgotten optional command.
-  $PY tools/regression_test.py
+  $PY tools/regression_test.py || return
 
   # Command-line boundary checks for the gate itself. `--list` exits before acquiring
   # the activity marker, so these nested probes cannot clear the parent gate's marker.
@@ -425,9 +523,21 @@ step_provenance() {
   # net -- which happened once here, to exp-001, and is annotated there. Orphans are
   # reported rather than fatal: history that has already been published cannot be
   # fixed by failing a test, and the annotation is the honest record.
+  local declared checked raw c
+  declared=$(grep -h '^[[:space:]]*engine_commit:' campaign/series/*/experiments/*.md | wc -l | tr -d ' ')
+  checked=0
   for f in campaign/series/*/experiments/*.md; do
-    c=$(sed -n "s/.*engine_commit: '\(.*\)'.*/\1/p" "$f" | head -1)
-    [ -n "$c" ] || continue
+    raw=$(sed -n 's/^[[:space:]]*engine_commit:[[:space:]]*//p' "$f" | head -1)
+    [ -n "$raw" ] || continue
+    # engine_commit is a YAML string and may legally be quoted or unquoted. Strip an
+    # optional comment, whitespace and either quote style, then require a Git hex id.
+    raw=${raw%%#*}
+    c=$(printf '%s\n' "$raw" | tr -d "'\"[:space:]")
+    [[ "$c" =~ ^[0-9a-fA-F]{7,40}$ ]] || {
+      echo "  INVALID $(basename "$f") engine_commit: $raw"
+      return 1
+    }
+    checked=$((checked + 1))
     if git merge-base --is-ancestor "$c" HEAD 2>/dev/null; then
       echo "  ok       $(basename "$f") -> $c"
     else
@@ -435,6 +545,11 @@ step_provenance() {
       grep -q "^## Annotation" "$f" || { echo "    and it has none"; exit 1; }
     fi
   done
+  [ "$checked" -eq "$declared" ] || {
+    echo "  checked $checked of $declared declared engine commits"
+    return 1
+  }
+  echo "  checked all $checked declared engine commits"
 }
 
 step_campaign_record() {
@@ -453,7 +568,9 @@ STEPS=(
   "soundness perimeter|step_soundness_perimeter"
   "lint floor (python)|step_lint_floor_python"
   "basin atlas|step_basin_atlas"
+  "basin event record and replay|step_basin_events"
   "historical regressions|step_historical_regressions"
+  "small-n optimal moduli|step_small_n_moduli"
   "negative controls|step_negative_controls"
   "fixed-angle cell is an LP, rebuilt independently|step_lp_cell"
   "bead tree|step_bead_tree"
@@ -463,6 +580,9 @@ STEPS=(
   "derivation (needs sympy)|step_derivation"
   "search engine (sqsearch)|step_search_engine"
   "lint floor (rust)|step_lint_floor_rust"
+  "Trump exact branchwise linearized cones|step_trump_linearized_cones"
+  "H-041 Stromquist repaired-cover exact certificate|step_stromquist_h041_exact_repair"
+  "H-010 Stromquist printed-cover exact rejection|step_stromquist_h010_exact_rejection"
   "exact verification|step_exact_verification"
   "negative control|step_negative_control"
   "frontier corpus|step_frontier_corpus"

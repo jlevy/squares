@@ -1,0 +1,99 @@
+{
+  "elapsed_seconds": 0.157556,
+  "orientation_class_count": 6,
+  "orientation_classes": [
+    {
+      "count": 15,
+      "degrees": "0.0",
+      "label": "axis"
+    },
+    {
+      "count": 1,
+      "degrees": "25.2586553083514058513567614369",
+      "label": "a"
+    },
+    {
+      "count": 9,
+      "degrees": "20.8001267626996105663146232033",
+      "label": "b"
+    },
+    {
+      "count": 1,
+      "degrees": "-17.5062684757323675007868691576",
+      "label": "-c"
+    },
+    {
+      "count": 2,
+      "degrees": "24.9625879894377186810714309248",
+      "label": "d"
+    },
+    {
+      "count": 1,
+      "degrees": "24.3083584013469067264676340473",
+      "label": "i"
+    }
+  ],
+  "orientation_rule": {
+    "canonical_interval_degrees": "[-45, 45)",
+    "merge_rule": "same symbolic entity or overlapping declared decimal intervals",
+    "minimum_class_gap_degrees": "0.296067318913687170285330512106",
+    "quotient_degrees": 90
+  },
+  "packing": {
+    "container_contacts_within_tolerance": 37,
+    "minimum_container_margin": "0.0",
+    "minimum_pair_separation_margin": "-4.05463524318447671695463160066e-101",
+    "n": 29,
+    "pairs_tested": 406,
+    "side": "5.933833462676929189689460616352019138433834181077886974638825915080254236879801441252051729965280562",
+    "smallest_strict_pair_separation": "0.0361709426628904827855466847334",
+    "strict_pairs": 354,
+    "touching_pairs_within_tolerance": 52,
+    "valid": true
+  },
+  "precision": {
+    "angle_interval_radius_degrees": "1.0000e-90",
+    "angle_match_tolerance_degrees": "1.0000e-70",
+    "claim_scope": "high-precision numerical source reconstruction; not an exact certificate",
+    "decimal_digits": 160,
+    "zero_tolerance": "1.0000e-80"
+  },
+  "schema_version": 1,
+  "selftests": {
+    "duplicate_square_rejected": true,
+    "polyomino_cell_extraction": true,
+    "transform_composition": true
+  },
+  "source": {
+    "normalisation": "CRLF converted to LF and one terminal newline added",
+    "path": "resources/papers/kingbird-square-29-provenance.svg",
+    "retained_bytes": 7303,
+    "retained_sha256": "d25d36f87a75066b13fb9f88c67b9feb2d99eaa6e9a310295dcbf3591b6b3726",
+    "retrieved": "2026-08-24",
+    "upstream_sha256": "30c725b27e1b90ff0c9c238fb8923c3da6ce26e046cdd46d5c33a485bbec821c",
+    "url": "https://kingbird.myphotos.cc/packing/square-29.svg"
+  },
+  "source_equations": {
+    "defining_equations_checked": [
+      "f1",
+      "f2",
+      "f3",
+      "f4",
+      "f5",
+      "f6"
+    ],
+    "derived_offsets_checked": [
+      "r1",
+      "r2",
+      "r3",
+      "r4",
+      "r5",
+      "r8",
+      "rB",
+      "rC",
+      "rD"
+    ],
+    "maximum_equation_residual": "2.55680615359960019954413371343e-100",
+    "maximum_offset_discrepancy": "1.11860090549459000368778882199e-99"
+  }
+}

@@ -37,9 +37,10 @@ or asserted-but-unverified.
 
 The motivating observation is that `n = 11` is the smallest case of a natural,
 easily-stated geometry problem that remains **unsolved** after nearly fifty years.
-The best known packing dates from 1979 and has never been improved; the best proved
-lower bound dates from 2003 and has never been improved.
-A gap of roughly 0.088 in the side length separates them.
+The best known packing dates from 1979 and has never been improved; the lower-bound
+value was published in 2003. This audit found a gap in its printed proof, preregistered
+a one-coordinate repair, and then certified that repair exactly in exp-017. A gap of
+roughly 0.088 in the side length separates them.
 Understanding precisely *where* that gap comes from — and why the available proof
 technique cannot close it — is the substance of this document.
 
@@ -117,12 +118,15 @@ The entire difficulty of the problem lies between them.
 | Quantity | Value | Status | Source |
 | --- | --- | --- | --- |
 | Area lower bound | `√11 ≈ 3.316625` | Trivial | — |
-| **Best proved lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Proved** | **[Stromquist 2003]**, Thm 2; still the recorded bound in **[Friedman DS7]** |
+| **Best certified lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Exact here; published proof has gap D-152** | [exp-017](../../../campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md); value stated in **[Stromquist 2003]**, Thm 2 |
 | **Best known packing (upper bound)** | `≈ 3.877084` | **Construction only** | Trump 1979, via **[Friedman DS7]**, **[Kingbird]** |
 | Lower bound for 0°/45°-only packings | `2 + (4/3)√2 ≈ 3.885618` | **Proved** | **[Stromquist 2003]**, Thm 3 |
 | Grid upper bound | `4` | Trivial | — |
 
-The open interval is `[3.788854…, 3.877084…]`, of width `≈ 0.088230`.
+The certified interval is `[3.788854…, 3.877084…]`, of width `≈ 0.088230`. Exp-017
+independently establishes its lower endpoint with a source-distinct repair; Stromquist’s
+proof remains false as printed, so the repaired coordinate and certificate are not
+attributed to him.
 
 Two facts about this table are worth stating explicitly because they are frequently
 garbled:
@@ -288,8 +292,8 @@ s(10) = 3 + ½√2 ≈ 3.707107
 
 This *is* an exact determination — `n = 10` is solved.
 
-**Theorem 2.** Let `s = 2 + 2√(4/5) ≈ 3.789`. Then eleven non-intersecting boxes cannot
-exist inside a square of side `s`. Consequently
+**Theorem 2, as stated.** Let `s = 2 + 2√(4/5) ≈ 3.789`. Then eleven non-intersecting
+boxes cannot exist inside a square of side `s`. Its claimed consequence is
 
 ```
 s(11) ≥ 2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854
@@ -297,6 +301,10 @@ s(11) ≥ 2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854
 
 This is a **lower bound only**. It does not match Trump’s `≈ 3.877084`, and Stromquist
 makes no claim that it does.
+D-152 invalidates the printed Figure 14 cover.
+Exp-017 separately proves the same inequality with the preregistered source-distinct
+repair `G'=(.79,1.85)`; this restores the numerical lower bound without retroactively
+validating the published proof.
 
 **Theorem 3.** Let `s = 2 + (4/3)√2 ≈ 3.886`. Then eleven non-intersecting boxes cannot
 exist inside a square of side `s` *if each box has orientation 0° or 45° with respect to
@@ -355,12 +363,13 @@ out exactly, because the simplified version — “ten unavoidable points, eleve
 done” — misses the device that carries the proof.
 
 *Stage one.* Stromquist places **ten** points in the square of side `2 + 2√(4/5)`. Four
-sit at `(1, 1)`, `(s/2, s/2)`, `(1, s/2)` and `(3/2, 1)`; the rest are placed
-symmetrically. The vertical distance between the rows is `s/2 − 1 = √(4/5) ≈ 0.894`, and
-the triangles in the construction are congruent with sloping sides of length exactly 1.
-These ten points are **not** an unavoidable set, and the paper says so: “Nonavoidance
-lemmas apply to all of the regions shown *except for the rectangles at the top and
-bottom*.” A box can evade all ten, but only by sitting in one of those two rectangles.
+sit at `(1, 1)`, `(s/2, 1)`, `(3/2 − s/4, s/2)` and `(1/2 + s/4, s/2)`; the rest are
+placed symmetrically.
+The vertical distance between the rows is `s/2 − 1 = √(4/5) ≈ 0.894`, and the triangles
+in the construction are congruent with sloping sides of length exactly 1. These ten
+points are **not** an unavoidable set, and the paper says so: “Nonavoidance lemmas apply
+to all of the regions shown *except for the rectangles at the top and bottom*.” A box
+can evade all ten, but only by sitting in one of those two rectangles.
 
 *Stage two.* A second configuration of **twelve** points is introduced, chosen so that
 the escaping box — pinned to the top or bottom rectangle up to symmetry, by Lemmas 4 and
@@ -370,10 +379,37 @@ the escaping box — pinned to the top or bottom rectangle up to symmetry, by Le
 A = { (1, .9),  (s/2, .9) ≈ (1.894, .9),  (1 + √(1/5), 1.12) ≈ (1.447, 1.12) }
 ```
 
-Nonavoidance lemmas cover every region of that second figure, so the twelve points *are*
-unavoidable. One box swallowing three of them leaves nine points for the remaining ten
-boxes, and the pigeonhole closes: “Since three of the twelve points are in one box,
-there cannot be eleven nonintersecting boxes.”
+The paper asserts that nonavoidance lemmas cover every region of that second figure.
+If that assertion held, one box swallowing three points would leave nine points for the
+remaining ten boxes, and the pigeonhole would close.
+The source audit below finds that the printed twelve-point set is not unavoidable.
+Exp-017 proves the corresponding implication only for its explicitly different repaired
+set.
+
+**A source-proof gap and an exact one-coordinate repair.** Let `L=10001/10000`, take
+`cos(theta)=10/sqrt(829)` and `sin(theta)=27/sqrt(829)`, and center an open square at
+`(37L/(2sqrt(829)),11/8)`. Its left support is `x=0`; its other three container
+clearances are strict.
+Exact radical comparisons show that it avoids all twelve printed Figure 14 points, with
+the smallest margin about `4.94e-5` at `G=(.8,1.85)`.
+
+The failed drawn cell is precise.
+The outer quadrilateral from `G` to `A1=(1,.9)` invokes Lemma 4 with `(a,b)=(.95,.8)`,
+but the true threshold is `f(.95)≈.798153437834`. This invalidates the proof as printed;
+it does not refute the numerical lower bound.
+Exp-016 terminally rejects the original H-010 claim by exact retained replay.
+H-041 was registered before testing the nearby repair that moves only `G.x` from `.8` to
+`.79`. Exp-017 then certifies the complete chain: an exact 18-cell Figure 13 cover plus
+four exceptions in one Klein-four orbit, the same-box A-triple, an exact repaired Figure
+14 tiling with 26 faces, 28 vertices, and 53 edges, and the final `3+9` capacity count.
+Thirteen mutations exercise source identity, tiling completeness, boundary closure, sign
+premises, capacity, and retained-record coverage.
+Uniform scaling of any hypothetical side-`<s` unit-square packing into the side-`s`
+container converts it to the strict open-box setting, so the exact certificate proves
+`s(11) >= 2 + 4/sqrt(5)`.
+
+The repair is a result of this repository, not part of the paper and not externally
+peer-reviewed. It restores the lower-bound value without closing the gap to Trump.
 
 **Theorem 3 has exactly the same shape** — ten points as in the first figure but at the
 new `s`, the 45°-strengthened Lemma 7 forcing an escaping box into a known position, and
@@ -408,6 +444,15 @@ Representative statements:
 - **Lemma 5.** A specialized statement about the pentagon with vertices `(1,0)`,
   `(1,1)`, `(2,1)`, `(2.12,0.9)`, `(2.12,0)`, needed for the `n = 10` argument.
 
+**A source-table correction.** Stromquist’s middle numerical row for Lemma 4 chooses the
+smaller root of a cubic obtained after squaring the stationarity equation.
+At `a = √(4/5)`, that root gives `θ ≈ 24.0788°` but violates the unsquared sign
+condition `cos θ ≤ a`. The true minimum is at `θ ≈ 31.45595°`, with
+`f(a) ≈ 0.9145377886`, rather than the printed `.926`. The particular application with
+`b=.9` still goes through.
+The complete Figure 14 cover does not: its distinct `a=.95,b=.8` cell is the
+source-proof gap recorded below.
+
 The 45°-restricted case (Theorem 3) exploits the fact that the projections of a 45° unit
 vector are at most 1, which brings the triangle lemmas into play in a stronger form
 (Lemmas 7 and 8); its counting stage is the same twelve-point, three-points-in-one-box
@@ -417,8 +462,9 @@ argument described above.
 built from the container side `s` and from unit distances — that is, from rational
 functions of `s` and square roots.
 The bound one can prove is therefore naturally an algebraic number of low degree.
-Both proved constants in this paper — `3 + ½√2` and `2 + 4/√5` — are degree-2 algebraic
-numbers. The conjectured `s(11)` is degree **8** (verified above).
+Both lower-bound constants claimed in this paper — the proved `3 + ½√2` and the
+currently repair-pending `2 + 4/√5` — are degree-2 algebraic numbers.
+The conjectured `s(11)` is degree **8** (verified above).
 There is no evident way for a finite unavoidable-point configuration with low-degree
 coordinates to certify a degree-8 threshold.
 This is, in our assessment, the structural reason the method stalls well short of
@@ -593,9 +639,12 @@ Two consequences. First, **El Moumni holds published priority for `s(7) = s(8) =
 `s(15) = 4`**, three years before Kearney–Shiu, and is absent from most summaries of
 this field including earlier drafts of this document; Kearney–Shiu’s genuine first is
 `s(6) = 3`. Second, Stromquist’s 1984 Daniel H. Wagner Associates memoranda I–III sit
-behind a remarkable share of the claim column and have never been published; memorandum
-III covers `n ≤ 65` and Gardner’s conjecture for `n = 11`, and remains the single most
-valuable unretrieved document in this subject.
+behind a remarkable share of the claim column.
+They remain unpublished, but are now archived from the author’s own site.
+Memoranda I and II contain the detailed `n = 6` and `n = 10` proofs.
+Memorandum III proves the `0°/45°` `n = 11` bound and, on p. 10, asserts the
+unrestricted `2 + (4/5)√5` bound without giving its point set or proof.
+It therefore supplies no missing certificate or repair for the 2003 Figure 14 gap.
 
 Friedman’s survey supplies relatively simple proofs for `n = 2, 3, 5, 8, 15, 24, 35` and
 more complicated ones for `n = 7, 14`. Stromquist’s 2003 abstract notes that at that
@@ -650,8 +699,10 @@ marks an `n` the catalogue does not picture, where the trivial `⌈√n⌉` pack
 the best known. `deg` is the algebraic degree of the conjectured optimum where the
 catalogue records a minimal polynomial.
 Lower bounds are the strongest of four sources: the area bound `√n`, Nagamochi’s general
-closed form, monotonicity from the largest proved `m ≤ n`, and Stromquist’s Theorem 2
-for `n ≥ 11`.
+closed form, monotonicity from the largest proved `m ≤ n`, and the value stated in
+Stromquist’s Theorem 2 for `n ≥ 11`. Exp-017 now supplies an exact source-distinct
+certificate for the last value; D-152 still requires every provenance display to say
+that the published Figure 14 proof is false as printed.
 
 This table and the solved-case table below are **generated** from
 [`explorations/packing/frontier/`](../../../frontier/README.md), where the same facts
@@ -1528,9 +1579,12 @@ These are frequently conflated with the present problem in casual sources:
 
 ## Key Insights
 
-1. **The problem is open, and the gap is structural, not incidental.** `s(11)` is pinned
-   only to `[3.788854, 3.877084]`. Both endpoints have stood unimproved for over two
-   decades (lower) and nearly five (upper).
+1. **The problem is open, and the gap is structural, not incidental.** The current
+   certified interval is `[3.788854, 3.877084]`. D-152 leaves the published lower-bound
+   proof false as printed; exp-017 independently certifies the lower value with H-041’s
+   source-distinct repair.
+   The numerical endpoints themselves have stood unimproved for over two decades (lower)
+   and nearly five (upper).
 
 2. **Gardner’s conjecture was settled without solving the problem.** Stromquist proved
    the *necessity* of oblique tilts by bounding the 0°/45° class from below at
@@ -1546,12 +1600,11 @@ These are frequently conflated with the present problem in casual sources:
    Closing the `n = 11` gap by that method would require certifying a degree-8 threshold
    — no such argument is known, and it is not obvious one exists.
 
-4. **Contact equations explain computability but not optimality.** Trump’s construction
-   is a strong rigidity candidate, and its contact conditions determine the displayed
-   algebraic side value.
-   This repository has not yet supplied an active-constraint rank or interval-local
-   certificate establishing rigidity or local optimality in the full configuration
-   space. Even such a local result would say nothing about whether a different contact
+4. **Contact equations explain computability but not global optimality.** Trump’s
+   contact conditions determine the displayed algebraic side value.
+   Exp-013 now certifies all complete branchwise fixed-side linearized cones and proves
+   qualitative local isolation by a finite-branch argument.
+   It supplies no explicit radius and says nothing about whether a different contact
    class does better, which is precisely what a global proof must exclude.
 
 5. **The failure of computation is informative in one direction only.** Fifty years of
@@ -1645,12 +1698,10 @@ covers two values of `n`. Any program should be weighted accordingly.
 
 ### Foundations: finish the archive and the survey
 
-1. **Retrieve the remaining primaries.** Roth–Vaughan (1978) first — it is the only
-   source in this document whose statement could not be pinned down, and three secondary
-   renderings of it disagree.
-   Then El Moumni (1999), Stromquist’s 1984 memoranda, Chung–Graham (2009), and
-   Arslanov–Bui (2025). Each per the three-format archive discipline in
-   [`resources/`](../../../resources/README.md).
+1. **Retrieve the remaining primaries.** El Moumni (1999) first, because it holds
+   published priority for three solved values and no summary describes its method.
+   Then Trump (2023), Chung–Graham (2009 and 2020), and Arslanov–Bui (2025). Each per
+   the three-format archive discipline in [`resources/`](../../../resources/README.md).
 2. **Machine-readable record corpus.** A first version now exists:
    [`frontier/`](../../../frontier/README.md) carries one schema-validated artifact per
    `n ≤ 100`, built by parsing the catalogue’s *prose* for upper bounds and computing
@@ -1781,10 +1832,12 @@ Every item in the proof lane above exists because of this.
 - [ ] Obtain El Moumni (1999), *Studia Sci.
   Math. Hungar.* **35** 281–290, and confirm what it proves and how; it holds published
   priority for three values and no summary of this field describes its method.
-- [ ] Obtain Stromquist’s 1984 Wagner Associates memoranda I–III. Memorandum III covers
-  `n ≤ 65` and Gardner’s conjecture for `n = 11`, and sits behind a large share of the
-  claim column in the
-  [priority ledger](#priority-claims-and-what-was-actually-published).
+- [x] ~~Obtain Stromquist’s 1984 Wagner Associates memoranda I–III~~ — **resolved**: all
+  three PDFs are linked from the author’s publication page and are archived with hashes,
+  raw OCR, and page-checked reading aids.
+  Memorandum III’s detailed proof is restricted to `0°/45°`; its p. 10 unrestricted
+  `2 + (4/5)√5` statement is only an assertion and does not repair the printed 2003
+  Figure 14 cover.
 - [ ] Obtain the full text of the March 2023 “Packing of 11 unit squares in a square
   with minimum size” note (ResearchGate 403).
 - [ ] Read the “crucial relation” of **[Gensane–Ryckelynck 2005]** off the PDF directly:
@@ -1820,10 +1873,10 @@ The structured form is
 tables below are generated from it.
 
 **Re-test this list rather than inheriting it.** A “not retrievable” verdict is a
-negative search result, and this document has now been wrong about one five times.
+negative search result, and this document has now made that error six times.
 Three sources recorded as unavailable turned out to be freely downloadable when
-re-tested; a fourth was open access at PMC the whole time; and the fifth — the most
-consequential of all — was supplied on request.
+re-tested; Markót was open access at PMC, Roth–Vaughan was supplied on request, and
+Stromquist’s memoranda were linked directly from the author’s publication page.
 
 <!-- BEGIN GENERATED: sources-recovered (tools/render_tables.py) -->
 
@@ -1834,6 +1887,7 @@ consequential of all — was supplied on request.
 | **[Gensane–Ryckelynck 2005]** Improved Dense Packings of Congruent Squares in a Square | Springer serves the PDF openly at its /content/pdf/ URL; the earlier attempt fetched the article landing page. |
 | **[Nagamochi 2005]** Packing Unit Squares in a Rectangle | Open access in Electron. J. Combin.; cited by exact title in the archived DS7 reference list all along. |
 | **[Wang–Dong–Li 2016]** A New Result on Packing Unit Squares into a Large Square | On arXiv. |
+| **[Stromquist 1984]** Packing Unit Squares Inside Squares, I-III | The author’s official publication page at https://www.walterstromquist.com/publications.html links squares1.pdf, squares2.pdf and squares3.pdf directly; “unpublished” described their publication status, not their present-day retrievability. |
 
 <!-- END GENERATED: sources-recovered -->
 
@@ -1847,9 +1901,9 @@ in place of the PDF on a re-test, not that access was assumed to be blocked.
 
 | Source | Year | Where | Obstacle | What rests on it |
 | --- | --- | --- | --- | --- |
-| **[Stromquist 1984]** Packing unit squares inside squares, I-III | 1984 | Daniel H. Wagner Associates Memoranda | unpublished | A large share of the claim column in the priority ledger. The single most valuable unretrieved document in this subject. |
 | **[Arslanov–Bui 2025]** Note on “efficient packings of unit squares in a large square” | 2025 | Discrete Comput. Geom. | paywall | Current continuation of the Kearney-Shiu delta_n / n_r line. |
 | **[El Moumni 1999]** Optimal Packings of Unit Squares in a Square | 1999 | Studia Sci. Math. Hungar. 35, 281-290 | print only | Published priority for s(7) = s(8) = 3 and s(15) = 4. No summary of this field describes its method. |
+| **[Plakhta 2021]** Configuration spaces of squares in a rectangle | 2021 | Algebraic & Geometric Topology 21, 1445-1478 | bot-blocked | H-032’s literature routing for affine Morse-Bott analysis of square configuration spaces in a rectangle; it is context and method, not a classification of the exact optimal-moduli spaces asked there. |
 | **[Trump 2023]** Packing of 11 unit squares in a square with minimum size | 2023 | ResearchGate | bot-blocked | Accessible excerpts confirm rigidity and state the packing “cannot be improved by computer programs as long as the same geometrical arrangement is used” -- a statement about local, not global, optimality. |
 | **[Chung–Graham 2009]** Packing equal squares into a large square | 2009 | J. Combin. Theory Ser. A 116, 1167-1175 | paywall | The O(x^{(3+sqrt(2))/7} log x) step in the asymptotic chain. |
 | **[Chung–Graham 2020]** Efficient packings of unit squares in a large square | 2020 | Discrete Comput. Geom. | paywall | The claimed O(x^{3/5}) bound that McClenagan states “has an error in it”. Reading it would let us describe the error rather than relay the claim. |
@@ -1863,17 +1917,20 @@ in place of the PDF on a re-test, not that access was assumed to be blocked.
 
 **What this list is for.** It is the fact-checking boundary of this research.
 Every claim in this document either traces to a file in `resources/` — where the
-original PDF, a cleaned transcription and a faithful raw extraction sit side by side, so
-a formula can be checked against the extraction it came from — or traces to something in
-the table above, and is marked **[secondary]** where it does.
+original PDF and its extraction sit side by side, with a cleaned transcription or an
+explicitly bounded reading aid — or traces to something in the table above, and is
+marked **[secondary]** where it does.
 A reader auditing a claim should be able to tell which case they are in without leaving
 the repository.
 
-The two highest-priority acquisitions are both about **provenance rather than
-mathematics**: Stromquist’s 1984 memoranda sit behind a large share of the claim column
-in the [priority ledger](#priority-claims-and-what-was-actually-published), and El
-Moumni (1999) holds published priority for three values of `s(n)` that most summaries of
-this field credit to someone else.
+Recovering Stromquist’s memoranda closes the largest provenance gap, but the memoranda
+do not close the 2003 proof gap: Memo III asserts the unrestricted lower bound without
+the mechanism needed to check it.
+Exp-017 instead supplies an explicitly source-distinct exact repair.
+The highest-priority remaining acquisition is El Moumni (1999), which holds published
+priority for three values of `s(n)` that most summaries credit elsewhere.
+Trump (2023) and Arslanov–Bui (2025) remain important for local optimality and the
+current asymptotic construction line.
 
 ## Methodology
 
@@ -1994,12 +2051,28 @@ them open access in the same journal as much of the rest of the bibliography.
 A “not retrievable” conclusion is itself a negative search result and should be
 re-tested rather than inherited.
 
+**Fifth pass — recovered Stromquist memoranda (2026-08-24).** The author’s publication
+page directly linked all three scans.
+Memo III confirms the detailed restricted-angle proof but gives only a one-sentence
+assertion of the unrestricted `2 + (4/5)√5` bound.
+No memo supplies the later Figure 14 coordinates, cover routing, or a coordinate repair.
+The recovery corrects the proof history and source ledger without upgrading the
+evidential status of the 2003 lower-bound proof.
+
+**Sixth pass — exact falsification and source-distinct repair (2026-08-24).** Exp-016
+certifies a strict escape from the printed Figure 14 set.
+Exp-017 changes only `G=(.8,1.85)` to `G'=(.79,1.85)` and certifies the full finite
+cover and capacity argument.
+The published proof remains false as printed, while the numerical inequality now has an
+independent exact computer-assisted certificate in this repository.
+
 ## References
 
 Every key below resolves to a local copy under
 [`resources/`](../../../resources/README.md) unless marked **[not retrieved]**. Local
-stems are given as `papers/<stem>` or `web/<stem>`; each stem has a `.pdf`/`.html`
-original, a cleaned `.md`, and for papers a faithful `.raw.md` extraction.
+stems are given as `papers/<stem>` or `web/<stem>`. Papers normally have a PDF, cleaned
+Markdown, and faithful raw extraction; the image-only Stromquist memoranda instead have
+explicitly bounded reading aids and unedited raw OCR.
 
 ### Core literature on `s(n)`
 
@@ -2065,9 +2138,14 @@ original, a cleaned `.md`, and for papers a faithful `.raw.md` extraction.
   **[not retrieved]** — print.
 - **Pertti Hämäläinen**, correspondence, 20 April 1980 — the optimal 45° packing of 11
   squares. **[not retrieved]** — cited by **[Stromquist 2003]**.
-- **Stromquist**, “Packing unit squares inside squares,” I–III, Daniel H. Wagner
-  Associates Memoranda, 1984. **[not retrieved]** — unpublished; memorandum III covers
-  `n ≤ 65` and Gardner’s conjecture for `n = 11`.
+- **[Stromquist 1984]** — Walter R. Stromquist, “Packing Unit Squares Inside Squares,”
+  I–III, Daniel H. Wagner, Associates internal memoranda, September 11, October 15, and
+  November 15, 1984. [Memo I](https://www.walterstromquist.com/papers/squares1.pdf) ·
+  [Memo II](https://www.walterstromquist.com/papers/squares2.pdf) ·
+  [Memo III](https://www.walterstromquist.com/papers/squares3.pdf) · local
+  `papers/stromquist-1984-packing-unit-squares-inside-squares-*`. *Memo III proves the
+  restricted `0°/45°` result and only asserts the unrestricted bound; it does not repair
+  the 2003 Figure 14 proof.*
 
 ### Rigorous computational methods (the certification frontier)
 

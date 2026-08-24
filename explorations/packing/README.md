@@ -9,122 +9,154 @@ The motivating case is `n = 11`, the smallest instance of this problem that is s
 open. Its best known packing dates from 1979 and its best proved lower bound from 2003,
 and a gap of roughly 0.088 in the side length separates them.
 
-## Operating principles
+The work runs on four principles held in balance—correctness, process, insight, and
+efficiency—each worked by its own kind of loop, and joined by one **research loop**:
+insight agents produce hypotheses, the research loop tests each as a preregistered
+experiment against the tooling, correctness decides every verdict at a declared evidence
+tier, and process records all of it.
+[Operating Principles](#operating-principles) below defines each principle and sketches
+the loop; the [campaign runbook](campaign/README.md) runs it.
 
-This program separates four dimensions of excellent research because none can stand in
-for another:
+**New here?** [`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the
+objects are, why the approach is shaped the way it is, and what is established versus
+open. Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program.
 
-| Principle | Agent focus | Owns | Boundary |
-| --- | --- | --- | --- |
-| **Correctness** | Soundness | Mathematical claims, primary-source research, rigorous proof and certification, independent validation | May veto any claim or promotion that exceeds its evidence |
-| **Process** | Discipline | Preregistration, run lifecycle, schemas, provenance, logbooks, reconciliation, and handoffs | May veto any run or record that cannot be reconstructed or whose rule changed after observation |
-| **Insight** | Creativity | Structural explanations, conjectures, search and proof ideas, cross-`n` grammar, and tractable questions | Proposes and prioritizes; it does not certify its own ideas |
-| **Efficiency** | Infrastructure | Stable executors, profiling, parallelism, caching, visualization systems, and measured agent-loop throughput | Accelerates specified work; it may not weaken mathematical or process controls |
+## Operating Principles
 
-At a given time, an agent normally works in one focus.
-A task may cross focuses, but its handoffs are explicit: **Insight proposes → Process
-preregisters → Efficiency executes → Correctness validates → Process records.**
-Rejection and negative results return to Insight as evidence for the next strategy, not
-as discarded runs.
+Successful research here is the result of four principles held in balance.
+None can stand in for another, and each has a preeminent goal:
 
-The basin atlas is the flagship cross-focus instrument.
-Insight specifies views that could expose mathematical structure—symmetry orbits,
-terminal components, contact types, observed transitions, continuation across `n`, and
-proposer-conditioned frequency with uncertainty.
-Efficiency makes those views responsive, traceable, and reproducible as both an
-interactive explorer and deterministic review snapshots.
-Process owns the underlying event and provenance contract; Correctness decides which
-relations are observed, inferred, or certified.
-A visual embedding is never evidence by itself that two basins are adjacent or that a
-sampled cluster is a connected component.
+| Principle | Agent focus | Preeminent goal |
+| --- | --- | --- |
+| **Correctness** | Soundness | Formal validation checkable by third parties, and cross-validation of every claim and report against known research—accurate surveys of prior work included |
+| **Process** | Discipline | Operational discipline: results delivered efficiently, priorities balanced, and every piece of work traceable to what happened and when |
+| **Insight** | Creativity | Extreme freedom to understand the problem creatively and to form a wide range of hypotheses, using all available information and tooling |
+| **Efficiency** | Infrastructure | Iteration on every layer of the stack, as fast as possible, through efficient algorithms and systems engineering |
 
-The implementation map is the four-focus epic in the
-[current program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map).
-The single current launch agenda is
-[Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md):
-it distinguishes the persistent autonomous agent loop, which can work now, from the
-numerical runner, which remains a no-go until its scientific and operational gate
-passes.
+Balance carries one asymmetry.
+Correctness and process hold vetoes—no claim is promoted past its evidence, and no run
+counts if it cannot be reconstructed—while insight is never blocked from proposing, and
+efficiency may never relax either control to go faster.
+
+### How each principle is worked
+
+Deep work on a single principle is one mode, not the only one, and the four are staffed
+differently:
+
+- **Correctness and process are structural first.** The schemas, gate, preregistration,
+  and provenance provide enforceable controls, but do not certify the mathematics or
+  keep every cross-document claim current by themselves.
+  The ongoing flow is survey work—reviewing, fact-checking, and assembling everything
+  known on a topic soundly—and finding and validating the right formal-verification
+  mechanisms.
+- **Efficiency runs as performance loops**: dedicated agentic loops measured purely by
+  declared performance metrics—gate wall time, solver throughput, pair-tests—so an
+  improvement is a number moving, never an impression.
+- **Insight runs as dedicated agents** whose job is extreme context efficiency: absorb
+  the full current research context, then hypothesize a wide range of connections worth
+  pursuing—separately, at whatever depth is needed, by whichever agents or models do it
+  best. Output arrives as explorations and candidate hypotheses, never as unrecorded
+  opinions.
+
+### The research loop
+
+The architecture that ties the four together is a loop between insight and experiment:
+
+```
+insight loop ──> hypotheses ──> preregister ──> run rounds ──> validate ──> record
+  (X-NNN)          (H-NNN)     (kill criteria,    (exp-NNN)    (evidence    (ledger,
+     ^                          budgets, tiers)                  tiers)      defects)
+     └────────── verdicts and negative results return as evidence ──────────────┘
+```
+
+An insight phase runs until it has produced a batch of candidate hypotheses.
+Each is codified in the registry with a kill criterion and a budget before anything
+runs; the research loop then executes them as preregistered experiment rounds against
+the tooling; every verdict is decided at a declared evidence tier and recorded in the
+generated ledger; and every verdict—refutations and negative results above all—returns
+to the next insight phase as evidence rather than discarded work.
+In one line: **Insight proposes → Process preregisters → Efficiency executes →
+Correctness validates → Process records.**
+
+The loop’s mechanics are already codified: the campaign runbook’s
+[bounded research cycle](campaign/README.md#the-bounded-research-cycle) is its clock and
+checkpoint protocol, the agenda queue orders its cells, and the
+[ledger](campaign/ledger.md) is generated from the artifacts rather than typed.
+
+### The record, by id
+
+Every artifact the loop touches carries a typed id.
+The one-line meanings; [`conventions.md`](conventions.md) is the definitive registry of
+every id class and naming rule, and [`SYNOPSIS.md`](SYNOPSIS.md#terminology) carries the
+full definitions:
+
+| Id | Names |
+| --- | --- |
+| `H-NNN` | A registered hypothesis or open question, with its kill criterion and budget written before any run |
+| `X-NNN` | An exploration report: the recorded idea source hypotheses are mined from |
+| `exp-NNN` | One experiment round: a schema-validated artifact plus its declared result or archive, commonly JSON or JSONL |
+| `series-NNN` | An ordered group of rounds sharing a runbook; only one open at a time |
+| `session-NNN` | One agent session: objective, budget, delegation evidence, stop reason, and handoff |
+| `agenda-NNN` | One mutable coordination queue ordering bounded cells by dependency and readiness |
+| `BC-NNN` | One cell in an agenda’s priority queue, currently the basin-map confidence ladder |
+| `D-NNN` | One defect: what went wrong, what caught it, and what now stops it recurring |
+| `T-N` | The synopsis’s shorthand for a theoretical result established in this repository |
+| `think-xxxx` | One bead: a tracked work item in the `tbd` queue |
+
+### Essential terms
+
+The eight words a reader meets everywhere here, in one line each;
+[`SYNOPSIS.md`](SYNOPSIS.md#terminology) owns the full definitions:
+
+| Term | Means |
+| --- | --- |
+| **configuration** | A placement of all `n` squares plus the container side: `3n + 1` coordinates |
+| **cell** | A choice of separating axis and order for every pair of squares; at fixed angles, one cell is one linear program |
+| **quench** | The deterministic refinement carrying a configuration to a local optimum |
+| **basin** | For a fixed deterministic quench, the preimage of one returned pose; this point-basin can split one connected terminal component |
+| **polish** vs **exploration** | Refining within the basin you are in, versus reaching a different one |
+| **standing best** | The best side ever published for that `n`—an upper bound, not known optimal in open cases |
+| **gap** | `best_side − standing_best`, always signed |
+| **evidence tier** | What a number may claim: `f64_screen`, `polished`, or `exact`—and a record only at `exact` |
+
+The operating documents divide ownership rather than repeat one another:
+
+| Document | Owns |
+| --- | --- |
+| [Campaign runbook](campaign/README.md#the-bounded-research-cycle) | Portable slice protocol, clocks, result routing, and experiment rules |
+| [Agent sessions](campaign/agent-sessions/README.md) | Versioned objective, budget, delegation evidence, stop reason, and handoff |
+| [Basin confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) | Mutable, size-by-size priority queue separating tool validation, measurement validation, and genuine research |
+| [Current launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | Broader scientific and operational readiness; the agent loop can work now, while the generic numerical runner remains a no-go |
+| [Program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map) | Four-focus epic, durable findings, and bead map |
 
 ## The Autonomous Work Loop
 
-The outer loop is a persistent agent goal plus the `tbd` queue.
-It chooses and integrates work; [`campaign/runner.py`](campaign/runner.py) remains the
-smaller tool that executes already-preregistered numerical rounds.
-Do not turn the runner into a second project manager.
+The outer loop is a portable repository protocol, not a feature of one agent platform:
+the `tbd` queue owns ready work, an
+[agent-session artifact](campaign/agent-sessions/README.md) owns the current objective,
+clocks, and delegation evidence, and commits plus research artifacts own the results.
+Changing agents changes the driver, not the work.
 
-Each autonomous cycle names one focus, one primary bead, one measurable outcome, a
-budget, and explicit stop conditions in a versioned
-[agent-session artifact](campaign/agent-sessions/README.md).
-It then selects one bounded action, delegates independent pieces, runs the narrowest
-adequate check, integrates the evidence, updates the durable record, and repeats.
-A delegated result is not complete until the parent can see its **outcome, evidence,
-files or artifacts, checks, remaining uncertainty, recommended next action, and elapsed
-wall time**. The parent owns integration and shared files; delegates receive disjoint
-write scopes or read-only briefs.
-
-Use the cheapest loop that answers the current question:
-
-| Loop | Target latency | Use |
-| --- | ---: | --- |
-| Interactive | under about 2 seconds | Status, ledger and schema checks, exact-witness verification, engine self-test |
-| Focused | under about 60 seconds | One changed component and its named negative control |
-| Checkpoint | about 2 minutes | Normal `./test.sh` before a commit, push, or cross-component handoff |
-| Deep handoff | about 5 minutes | `./test.sh --strict` before an unattended campaign, major handoff, or merge |
-| Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
-
-These are working envelopes, not promises.
-The retained normal-gate observations are 108 seconds at the prior pushed checkpoint,
-126 seconds for the first integration, and 114 seconds for the PR #16 absorption.
-Repeated versioned benchmarks, fuller stage attribution, and warm/cold regimes remain
-tracked work.
-The research round is intentionally separate from the edit/test loop, so an
-eight-hour hypothesis never makes a documentation correction take eight hours to
-validate.
-
-Route each result once:
-
-- a structural idea becomes an exploration (`X-NNN`) and, when falsifiable, a hypothesis
-  (`H-NNN`);
-- a measurement becomes raw data plus an experiment (`exp-NNN`);
-- an implementation or process action updates its bead;
-- an actual mistake enters [`defects.yaml`](defects.yaml), categorized by what failed
-  and linked to its detector and regression; and
-- the outer-loop handoff stays in the agent-session artifact instead of being spread
-  across chat summaries.
-
-Stop when the declared budget expires, no ready work remains, three consecutive guards
-or runs fail, a decision needs the user, or two cycles fail to move the chosen progress
-metric.
-This is a cooperative mathematical workspace: optimize for rapid detection, exact
-records, and cheap recovery.
-The negative-control marker, generated-view drift checks, bounded subprocesses, and
-resumable on-disk runner state are useful; per-run worktrees, repository copies, or a
-generalized lease/capability system are not the default.
-
-Two documents get you oriented, and they have different jobs.
-
-**[`SYNOPSIS.md`](SYNOPSIS.md) is the technical root:** the single account of what this
-project knows, how it knows it, and what it is doing next.
-The problem, the results established here and their evidential status, the per-`n` lay
-of the land, the terminology this directory uses narrowly, the hypothesis registry, and
-a roll-up of every experiment run so far.
-Its numbers are reconciled against the artifacts in the gate.
-
-**[The current handoff](docs/project/handoff-2026-08-23-quench-spine.md) is where the
-work stands today:** what is built, what is missing, which few things are the critical
-path, and the half-dozen facts that would otherwise cost an arriving agent a day.
-It is dated and written to be thrown away when it stops being true.
+Breadth lives in [`campaign/ideas.md`](campaign/ideas.md), the hypothesis registry, and
+the bead queue; narrowness lives in one preregistered slice at a time, with hard clocks.
+The slice protocol, clocks, result routing, budgets, and stop rules are the campaign
+runbook’s [bounded research cycle](campaign/README.md#the-bounded-research-cycle); which
+validation loop to run at each step is
+[`conventions.md`](conventions.md#10-what-the-gate-actually-enforces).
+[`campaign/runner.py`](campaign/runner.py) stays the smaller tool that executes
+already-preregistered numerical rounds, never a second project manager.
 
 ## Layout
 
 ```
 explorations/packing/
+├── TUTORIAL.md             First-principles orientation for a newcomer: the objects,
+│                           why the approach is shaped this way, what is established
 ├── SYNOPSIS.md             The technical root: results, status, and the experiment
-│                           roll-up. Read this first.
+│                           roll-up. Read this after the tutorial.
 ├── conventions.md          Every rule this directory runs on, and which are checked
-├── docs/project/           Reports, reviews, specs, postmortems, and the dated
-│                           handoff that says where the work stands today
+├── docs/project/           Reports, reviews, specs, postmortems, and historical
+│                           handoffs; active specs and the campaign agenda own priority
 ├── docs/project/research/  The six research reports (see below)
 ├── campaign/               The experiment record: hypothesis registry, series, rounds,
 │                           and a generated ledger. See campaign/README.md.
@@ -199,10 +231,10 @@ before, and copied aggregates repeatedly went stale.
 
 ## Conventions
 
-[`conventions.md`](conventions.md) consolidates every convention this directory runs on:
-the id scheme across all layers, file naming, artifact discipline, the evidence tiers
-and what each may claim, provenance, corrections, and which rules are machine-checked
-versus which rest on care.
+[`conventions.md`](conventions.md) is the definitive registry of every convention and
+naming this directory runs on: the id scheme across all layers, file naming, artifact
+discipline, the evidence tiers and what each may claim, provenance, corrections, and
+which rules are machine-checked versus which rest on care.
 Read it before adding an artifact, a round, or a tool.
 
 ## Reports
@@ -319,22 +351,14 @@ squares = [...]  # 11 x 4 corners of FieldElements
 print(verify_packing(squares, side, sign=exact_sign))
 ```
 
-The work is in the first line.
-Record packings are published as SVG transforms with 33-digit decimal entities and, for
-the analytically solved ones, Mathematica source in an XML comment; recovering the field
-means reading that by hand, once per packing.
-`sqpack/packings/trump11.py` is the worked example.
+The work is in the first line: recovering the field means reading the published exact
+data by hand, once per packing, and `sqpack/packings/trump11.py` is the worked example.
 
-For a quick, non-certifying check, swap in the float backend:
-
-```python
-from sqpack.verify import float_sign
-
-verify_packing(squares, side, sign=float_sign(1e-9), bucket=True)
-```
-
-`bucket=True` grid-buckets the squares so pair enumeration is linear rather than
-quadratic: at `n = 1000` that is 15,936 candidate pairs instead of 499,500.
+**The result is a proof only if the field metadata is right, and the constructor does
+not yet check that** ([D-053](defects.md), open): verify irreducibility and single-root
+isolation yourself before trusting a verdict on a field you supplied.
+The [synopsis](SYNOPSIS.md#what-is-built) carries the full caveat; the module docstrings
+in [`sqpack/`](sqpack/) carry the API, including the fast non-certifying float backend.
 
 ### Scope
 

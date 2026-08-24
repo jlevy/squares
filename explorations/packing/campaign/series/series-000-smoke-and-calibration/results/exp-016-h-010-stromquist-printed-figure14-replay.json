@@ -1,0 +1,22 @@
+{
+  "determination_outcome": "refuted",
+  "elapsed_seconds": 0.015875,
+  "hypothesis_id": "H-010",
+  "minimum_avoidance_margin_point": "G",
+  "record_replayed": true,
+  "record_written": false,
+  "schema_version": 1,
+  "selftests": {
+    "box_side_is_strictly_greater_than_one": true,
+    "exact_witness_avoids_all_printed_points": true,
+    "figure13_K4_not_D4": true,
+    "figure13_escape_contains_A_triple": true,
+    "figure13_strict_escape_avoids_all_ten": true,
+    "left_shift_witness_mutation_is_rejected": true,
+    "lemma4_squared_root_negative_control": true,
+    "source_hashes_match": true,
+    "standalone_twelve_point_pigeonhole_does_not_close": true,
+    "three_point_capacity_closes_conditionally": true,
+    "two_point_capacity_mutation_does_not_close": true
+  }
+}

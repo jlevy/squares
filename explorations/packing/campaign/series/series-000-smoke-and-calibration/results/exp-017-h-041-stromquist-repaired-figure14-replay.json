@@ -1,0 +1,22 @@
+{
+  "determination_outcome": "criterion_met",
+  "elapsed_seconds": 0.28501,
+  "hypothesis": "H-041",
+  "record_replayed": true,
+  "schema_version": 1,
+  "selftests": {
+    "bad_threshold_rejected": true,
+    "d4_misuse_rejected": true,
+    "duplicate_record_node_rejected": true,
+    "duplicated_edge_rejected": true,
+    "duplicated_face_rejected": true,
+    "extraneous_root_rejected": true,
+    "omitted_edge_rejected": true,
+    "omitted_face_rejected": true,
+    "outside_tiling_vertex_rejected": true,
+    "printed_g_080_full_cover_rejected": true,
+    "printed_g_080_threshold_failure_certified": true,
+    "stale_record_source_rejected": true,
+    "weakened_capacity_rejected": true
+  }
+}

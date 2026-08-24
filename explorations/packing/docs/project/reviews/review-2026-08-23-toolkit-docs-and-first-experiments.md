@@ -149,6 +149,14 @@ curve is E4’s main plot and H-7’s test object.
 
 ### R-5: the proof lane’s smoke test should be the falsifier, and it has a beautiful known answer
 
+> **Erratum, 2026-08-24 (D-091/D-149).** The historical proposal below is preserved as
+> written, but its negative leg is invalid: a search that saturates without finding an
+> escape does not validate the search or prove unavoidability.
+> Stromquist’s Figure 14 twelve-point set genuinely is unavoidable, but that statement
+> alone is insufficient; the theorem also needs ten-point localization, same-box
+> A-triple forcing, and the 3+9 count.
+> The canonical H-010 artifact now owns the corrected five-node control.
+
 The spec’s proof-lane hook is `hits_all_poses` (prove a point set unavoidable).
 But the *cheap* direction is the **falsifier**: search for a single pose avoiding all
 points — three parameters, same predicate, no PoseBox needed.

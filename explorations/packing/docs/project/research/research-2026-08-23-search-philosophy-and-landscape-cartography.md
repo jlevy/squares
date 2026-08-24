@@ -87,8 +87,10 @@ Start from what the exact verifier measured.
 In Trump’s `n = 11` packing, 14 of the 55 square pairs touch with *exactly zero* gap,
 and 20 corner coordinates lie on the container boundary in the exact witness.
 Those contacts make the packing a strong rigidity candidate, but raw contact counts do
-not establish independence or infinitesimal rigidity; that requires a rank or interval
-certificate that the repository does not yet have.
+not establish independence or infinitesimal rigidity.
+Exp-013 later supplies the missing evidence: complete exact branchwise linearizations
+and a finite-branch argument prove qualitative local isolation.
+It does not quantify the neighborhood or identify the attraction basin.
 
 What matters for search is not the stratum (measure zero) but its **basin of
 attraction** (positive measure, but how much?). Here the energy-landscape literature has
@@ -154,8 +156,8 @@ Two consequences frame everything downstream:
 1. **Each fixed separating-axis cell exposes a lower-dimensional continuous problem.**
    Trump’s packing uses one non-trivial tilt and the `s(17)` record uses two, but those
    two cases do not establish that record packings generally have few raw orientation
-   classes. The primary `n = 29` SVG is already a counterexample candidate to the
-   registered three-class bound.
+   classes. Exp-012 reconstructed the primary `n = 29` SVG and verified six classes,
+   refuting the registered three-class bound.
    The useful question is effective angular dimension— rank, algebraic dependence, or
    compressibility—rather than a universal class count.
 2. **Declared landscape views can become statistical questions.** Under a versioned
@@ -171,8 +173,9 @@ Consequence 2 does not follow from consequence 1, and the gap between them is
 
 The exact `n=3` optimum supplies the counterexample directly: centres `(1/2,1/2)`,
 `(3/2,1/2)`, and `(t,3/2)` for `t in [1/2,3/2]` form one connected side-2 family.
-The current contact certificate is constant on sampled members while the geometric key
-changes, so the atlas count depends on its quantum.
+The current contact certificate is constant on sampled interior members while the
+geometric key changes; the wall endpoints have a second certificate, and the atlas count
+still depends on its quantum.
 
 The `n=5` golden gives a second, unresolved signal: two rows share side, short form,
 contact certificate, angle signature, and contact count while differing geometrically.
@@ -191,9 +194,11 @@ for joining boundary strata.
 Until those checks run, the `n=5` pair remains unresolved and the safe artifact is an
 endpoint-key map with lower/upper component-count bounds.
 
-That reframing keeps D-034 as a blocker with executable work.
-`think-1s0h` and `think-0yo9` must be reconciled around the exact `n=3` control,
-rank/nullity evidence, and continuation rather than contact counting.
+Exp-014 now closes the exact `n=3` control: the labelled space is two circles, the
+unlabelled space one circle, and the full symmetry quotient an interval with separate
+active and stabilizer strata.
+D-034 remains a blocker for the general atlas and the `n=5` ambiguity.
+`think-1s0h` owns rank/nullity evidence and continuation rather than contact counting.
 
 **The lesson, restated one level up.** This section already said *“whatever defines a
 basin must be independent of the search’s own knobs, and that has to be checked rather

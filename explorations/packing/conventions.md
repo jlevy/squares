@@ -1,6 +1,9 @@
 # Conventions for `explorations/packing/`
 
-Every convention this project runs on, in one place.
+**The definitive registry of every convention and naming this project uses.** Where
+another document restates an id or naming convention, this one wins.
+Changing program status remains owned by `SYNOPSIS.md`, and schemas and source artifacts
+remain authoritative for their own fields and evidence.
 Read this before adding an artifact, a round, a series, or a tool.
 
 Each rule is marked **[checked]** when something fails on a violation, or
@@ -22,7 +25,14 @@ The prefix says what kind of thing it is.
 | Hypothesis | `H-NNN` | campaign, spans series | `H-016` |
 | Exploration report | `X-NNN` | campaign | `X-001` |
 | Agent session | `session-NNN` | campaign | `session-001` |
+| Agenda | `agenda-NNN` | campaign | `agenda-001` |
+| Agenda cell | `AA-NNN`, prefix declared per agenda | its agenda | `BC-001` |
+| Frontier case | `n-NNN` | `frontier/`, one artifact per `n ≤ 100` | `n-011` |
 | Search/proof strategy | `search:N`, `proof:N` | the frontier catalogues | `search:12` |
+| Defect | `D-NNN` | the directory, logged in `defects.yaml` | `D-014` |
+| Bead | `think-xxxx` | the repository’s `tbd` queue (prefix set in `.tbd/config.yml`) | `think-1s0h` |
+| Theoretical result | `T-N` | `SYNOPSIS.md` shorthand; the registry artifact it cites is authoritative | `T-2` |
+| Review finding | `R-N`, `F-NN` | the review document that declares them | `R-2`, `F-07` |
 | Basin (planned) | canonical key, plus a `B-NNN` alias | campaign, spans series | — |
 
 **Rounds do not restart at `exp-001` in each series, and this is deliberate.** A series
@@ -42,13 +52,15 @@ that series’ directory.
 | Relation | Cardinality |
 | --- | --- |
 | round → series | exactly one |
-| round → hypotheses | **one or more**—a round may test several |
+| round → hypotheses | **exactly one** under the current contract; the field remains an array for format compatibility |
 | hypothesis → rounds | zero or more—sweep cells and replications |
 | hypothesis → exploration reports | zero or more (`derived_from`) |
 | hypothesis → strategies | zero or more (`strategy_refs`) |
 
-So `exp-` does **not** map one-to-one onto `H-`. Four rounds currently reference
-`H-016`: one three-cell round and its three per-cell replacements.
+So `exp-` does **not** map one-to-one onto `H-`: one hypothesis may aggregate many
+rounds. Four rounds currently reference `H-016`: one historical three-cell round and its
+three per-cell replacements.
+A round does not apply its one verdict to several hypotheses.
 
 **Ids are never reused, and never renumbered except on merge collision.**
 [checked: whole-set uniqueness] When two branches collide, the newer campaign renumbers
@@ -221,41 +233,57 @@ Markdown link. This project has needed that twice.
 
 ## 10. What the Gate Actually Enforces
 
-`./test.sh`, in order:
+`./test.sh` runs thirty read-only steps, concurrently, with the transcript replayed in
+declared order; `./test.sh --list` prints the authoritative step names, and the `STEPS`
+table in the script is the only place a step is registered.
+What they enforce, grouped:
 
-1. Exact verification of Trump’s packing, and the negative control showing why float
-   cannot do it
-2. The degree-8 field polynomial re-derived independently, where sympy is installed
-3. The fixed-angle cell rebuilt as a linear program, solved back to Trump’s packing, and
-   swept over its free angle
-4. Frontier corpus structure, and its soft-schema validation
-5. Generated tables in sync with the frontier data
-6. Strategy catalogue integrity
-7. The lint floor: ruff, ruff-format and basedpyright on the Python; clippy pedantic and
-   rustfmt on the Rust
-8. The negative controls in `tools/controls.yaml`, each a mutation that must be caught
-9. The soundness perimeter: every component that emits a configuration is checked by
-   `sqpack` through code it does not share
-10. The defect log: schema, contiguous ids, every open defect carrying a bead, every
-    narrative link resolving, every cited defect id existing, and the generated view in
-    sync with `defects.yaml`
-11. Every generated Markdown view is exempt from the auto-formatter, so a commit hook
-    cannot reflow a file that is drift-checked byte-for-byte
-12. The bead tree: no open bead under a closed parent, and no two open beads under one
-    parent sharing a title.
-    Skipped, loudly, where no `tbd-sync` store is reachable
-13. `SYNOPSIS.md` reconciled against the artifacts: round verdicts, hypothesis statuses,
-    round and effort totals, defect counts per class, nothing silently missing, and
-    every relative link and heading anchor resolving
-14. `README.md` reconciled against the directory: the layout tree against what is on
-    disk, the report index against `docs/project/research/`, and every link and anchor
-15. `sqsearch --selftest`—geometry against a naive reference, determinism, the `s(5)`
-    positive control, and the recomputed-overlap guard
-16. The differential test between search energy and the validity oracle
-17. Provenance: every round’s recorded engine commit still reachable, or annotated
-18. The campaign record: schema validation, id uniqueness, dangling references, unknown
-    series, more than one open series, stale claims, cross-field verdict rules,
-    idea-board reconciliation, reserved-id rules, dead links, and ledger freshness
+**Mathematics, checked exactly where the claim is exact.** Exact verification of Trump’s
+packing and the negative control showing why float cannot do it; the degree-8 field
+re-derived independently (where sympy is installed); the fixed-angle cell rebuilt as a
+linear program through independent constraint rows and solved back to Trump’s packing;
+Trump’s exact branchwise linearized cones (exp-013); the H-041 repaired-cover exact
+certificate and the H-010 printed-cover exact rejection (exp-016, exp-017); the exact
+`n = 3, 4` optimal moduli (exp-014, exp-015); and the golden basin maps, whose
+proved-case rows are checked against mathematics rather than against a stored snapshot.
+
+**Instruments.** `sqsearch --selftest` (geometry against a naive reference, determinism,
+the `s(5)` positive control, the recomputed-overlap guard); the differential test
+between search energy and the validity oracle; the basin atlas store invariants; the
+basin event record and its replay; basin identity; and the historical regressions each
+earlier defect fix left behind.
+
+**The record.** Frontier corpus structure and its soft-schema validation; generated
+tables in sync with the frontier data; both strategy catalogues; the defect log (schema,
+contiguous ids, open defects carrying beads, links resolving, the generated view in
+sync); `SYNOPSIS.md` and `README.md` reconciled against the artifacts and the directory;
+the campaign record (schema validation, id uniqueness, dangling references, verdict
+rules, idea-board reconciliation, ledger freshness); provenance (every round’s recorded
+engine commit reachable, or annotated); the bead tree; and the skills mirrored between
+`.agents` and `.claude`.
+
+**Hygiene.** The lint floor (ruff, ruff-format and basedpyright on the Python; clippy
+pedantic and rustfmt on the Rust); the soundness perimeter (every component that emits a
+configuration is checked by `sqpack` through code it does not share); and the negative
+controls in `tools/controls.yaml`, each a mutation that must be caught.
+
+A skipped check is recorded and re-listed at the end, `--strict` turns any skip into a
+failure, and “ALL CHECKS PASSED” is printed only when it is literally true.
+
+**Run the cheapest loop that answers the current question.** The research round is
+deliberately separate from the edit/test loop, so an eight-hour hypothesis never makes a
+documentation correction take eight hours to validate:
+
+| Loop | Target latency | Use |
+| --- | ---: | --- |
+| Interactive | under about 2 seconds | Status, ledger and schema checks, exact-witness verification, engine self-test |
+| Focused | under about 60 seconds | One changed component and its named negative control (`./test.sh --only`) |
+| Checkpoint | about 2 minutes | Normal `./test.sh` before a commit, push, or cross-component handoff |
+| Deep handoff | about 5 minutes | `./test.sh --strict` before an unattended campaign, major handoff, or merge |
+| Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
+
+These are working envelopes, not promises; repeated versioned benchmarks and warm/cold
+regimes remain tracked work.
 
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.

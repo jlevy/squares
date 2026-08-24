@@ -1,0 +1,213 @@
+{
+  "contract": "packing.squares:N5EqualSideFace/v1",
+  "determination": {
+    "claim": "the two equal-side n=5 golden rows lie in one exact connected fixed-angle LP optimal face",
+    "outcome": "criterion_met",
+    "scope": "fixed-angle common-cell connection only; full angle-varying stationarity, attraction mass, and component completeness remain unresolved"
+  },
+  "exact_model": {
+    "endpoint_a": [
+      [
+        [
+          "1/2",
+          "0"
+        ],
+        [
+          "5/2",
+          "-1/4"
+        ]
+      ],
+      [
+        [
+          "1/2",
+          "5/4"
+        ],
+        [
+          "1/2",
+          "0"
+        ]
+      ],
+      [
+        [
+          "1/2",
+          "0"
+        ],
+        [
+          "1/2",
+          "0"
+        ]
+      ],
+      [
+        [
+          "1",
+          "3/4"
+        ],
+        [
+          "1",
+          "3/4"
+        ]
+      ],
+      [
+        [
+          "1/2",
+          "5/8"
+        ],
+        [
+          "3/2",
+          "-1/8"
+        ]
+      ]
+    ],
+    "endpoint_a_validity": {
+      "container_contacts": 12,
+      "pairs_tested": 10,
+      "strict_pairs": 6,
+      "touching_pairs": 4,
+      "valid": true
+    },
+    "endpoint_b_after_D4_and_S5": [
+      [
+        [
+          "-3/2",
+          "3/2"
+        ],
+        [
+          "1/2",
+          "5/4"
+        ]
+      ],
+      [
+        [
+          "1/2",
+          "5/4"
+        ],
+        [
+          "1/2",
+          "0"
+        ]
+      ],
+      [
+        [
+          "1/2",
+          "0"
+        ],
+        [
+          "1/2",
+          "0"
+        ]
+      ],
+      [
+        [
+          "1",
+          "3/4"
+        ],
+        [
+          "1",
+          "3/4"
+        ]
+      ],
+      [
+        [
+          "1/2",
+          "5/8"
+        ],
+        [
+          "3/2",
+          "-1/8"
+        ]
+      ]
+    ],
+    "endpoint_b_validity": {
+      "container_contacts": 12,
+      "pairs_tested": 10,
+      "strict_pairs": 6,
+      "touching_pairs": 4,
+      "valid": true
+    },
+    "field": "Q(sqrt(2)), sqrt(2) in (1,2)",
+    "orientations": [
+      "axis",
+      "axis",
+      "axis",
+      "diagonal",
+      "diagonal"
+    ],
+    "side": "1+5*sqrt(2)/4"
+  },
+  "fixed_angle_face": {
+    "common_cell_row_count": 30,
+    "dual_identity": "A^T y = e_side, y <= 0, b^T y = 1+5*sqrt(2)/4",
+    "dual_nonzero_weights": {
+      "2x-lower": "-1/2",
+      "2y-lower": "-1/2",
+      "3x-upper": "-1/2",
+      "3y-upper": "-1/2",
+      "pair-2-4": "-sqrt(2)/2",
+      "pair-3-4": "-sqrt(2)/2"
+    },
+    "endpoint_slacks_nonnegative": true,
+    "fixed_angle_cell_optimal_side": "1+5*sqrt(2)/4",
+    "full_segment_feasible_by_convexity": true,
+    "interior_kernel_generator": "dx0=dy0=1; all other coordinates and ds zero",
+    "moving_square": "p0(u)=(1/2+u, 5/2-sqrt(2)/4+u), theta=0 mod pi/2",
+    "other_four_squares": "fixed",
+    "parameter": "u in [0, 3*sqrt(2)/2 - 2]",
+    "strata": [
+      {
+        "active_row_count": 11,
+        "linear_face_nullity": 0,
+        "name": "A",
+        "rank_with_fixed_side": 11
+      },
+      {
+        "active_row_count": 10,
+        "linear_face_nullity": 1,
+        "name": "interior",
+        "rank_with_fixed_side": 10
+      },
+      {
+        "active_row_count": 11,
+        "linear_face_nullity": 0,
+        "name": "B",
+        "rank_with_fixed_side": 11
+      }
+    ]
+  },
+  "schema_version": 1,
+  "selftests": {
+    "disconnected_key_labels_do_not_block_exact_path": true,
+    "invalid_endpoint_is_rejected": true,
+    "missing_path_certificate_is_rejected": true,
+    "shared_contact_key_alone_is_not_the_certificate": true,
+    "source_digest_tamper_is_rejected": true,
+    "wrong_source_D4_action_is_rejected": true
+  },
+  "source_alignment": {
+    "container_action_on_seed_5": "quarter-turn counterclockwise",
+    "golden_seeds": [
+      2,
+      5
+    ],
+    "matches": true,
+    "maximum_f64_to_exact_residual": 2.82556487762875e-07,
+    "seed_5_square_permutation": [
+      3,
+      0,
+      4,
+      2,
+      1
+    ],
+    "shared_contact_key": "5dcbd27037e1bd5227723319c9f55c72",
+    "source_geometric_keys": [
+      "07860b128b38dd2e7856c11e9ff03eb7",
+      "0373183838f6f0c42956f969dadfda97"
+    ],
+    "tolerance": 1e-06
+  },
+  "sources": {
+    "golden": "golden/basin-maps.yaml",
+    "golden_sha256": "f7bf09df600ac8402ac9deb9025decd3194ceda7d61fe46b3aee464bb13666ac",
+    "recovery_engine_commit": "9dbbd24",
+    "recovery_regime": "golden census Random(1005), seeds 2 and 5, quench_bracket"
+  }
+}

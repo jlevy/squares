@@ -1364,7 +1364,7 @@ prior entries are reused where the review reproduced an already known cause.
 | F-15 | D-027, D-028, D-058, D-065 | Local handover and derived README claim reconciled; configured PR CI remains on the remediation bead |
 | F-16 | D-038, D-050, D-059 | Hermetic safety fixes landed; oracle/characterization separation remains open |
 | F-17 | D-060, D-064 | Fixed with strict-implies-deep, a firing mutation control, and a read-only preflight path that remains testable inside the gate |
-| F-18 | D-034 | Open: terminal-component definition on the exact `n=3` control |
+| F-18 | D-034, D-140 | Exact `n=3` control closed by exp-014; general and `n=5` terminal-component semantics remain open |
 | F-19 | D-061 | Open: evidence-complete endpoint classification |
 | F-20 | D-039 | Open: identity calibration independent of side precision |
 | F-21 | D-040 | Open: durable proposer-conditioned `P/Q/E` estimand |
@@ -1485,17 +1485,21 @@ implementation, and no generic certificate round trip.
 The regression file that does exist is outside the gate.
 
 The source archive is strong but its own availability record still names 11 missing
-primary items.
-The highest-value gaps remain Stromquist’s 1984 memoranda, El Moumni 1999,
-Trump 2023, and Arslanov–Bui 2025. Those affect proof history, local-optimality claims,
-and constructive families.
-Their absence is correctly recorded, but the research program has no acquisition/retest
-cadence tied to decisions that depend on them.
+primary items. The highest-value gaps now are El Moumni 1999, Trump 2023, and
+Arslanov–Bui 2025. Those affect proof history, local-optimality claims, and constructive
+families. Stromquist’s three memoranda were recovered from the author’s site: Memo III
+proves the restricted `0°/45°` theorem but only asserts the unrestricted `2 + (4/5)√5`
+bound, so it does not repair the 2003 Figure 14 gap.
+Exp-016 subsequently refuted the printed cover and exp-017 independently certified a
+source-distinct one-coordinate repair.
+The remaining absences are correctly recorded, but the research program has no
+acquisition/retest cadence tied to decisions that depend on them.
 
 The lower-bound lane also lacks an end-to-end known-answer control.
-The repository knows what that control should be: a falsifier must find a pose escaping
-Stromquist’s ten-point set and must fail on the twelve-point set before interval proof
-is trusted.
+The repository knows what that control should be: a falsifier must replay a retained
+pose escaping Stromquist’s ten-point set, while independently checked certificates must
+establish localization, same-box A-triple forcing, Figure 14 unavoidability, and the
+finite 3+9 count. Failure to find an escape is censored search evidence, not a control.
 
 **Required artifact:** a property/differential suite and disagreement ledger; a dated
 source-retest job with impact-ranked acquisition routes; and a proof-lane control suite
@@ -1630,9 +1634,11 @@ the pose-space subdivision, interval bounds, and LP dual.
 A small independent checker replays the certificate; a later Lean checker can verify the
 same finite object.
 
-**Calibration.** Find the known escape from Stromquist’s ten-point set, distinguish the
-twelve-point set, and replay a published optimal case such as `n=10`, `13`, `22`, `33`,
-or `46`. Then target `n=12` at side 4 and restricted `m²-3` boundary layers.
+**Calibration.** Replay the known Figure 13 escape and certify every implication in
+Stromquist’s five-node conditional argument, including the genuine but insufficient
+Figure 14 unavoidability statement.
+Then replay a published optimal case such as `n=10`, `13`, `22`, `33`, or `46`, before
+targeting `n=12` at side 4 and restricted `m²-3` boundary layers.
 
 **Accept rule.** A new certified lower bound, a smaller published unavoidable set, or a
 strictly stronger relaxation on a known case.
@@ -1948,7 +1954,7 @@ claim.
 | F-42 | D-088 | The 29 July 2026 UnitSquare release replaces the stored `n=68,69` upper bounds; the release validation is cited but not claimed as independently re-run here |
 | F-43 | D-089 | `n=17` uses `0°`, `+39.8049589798°`, and `−36.6237863834°`, not symmetric `±40°` |
 | F-44 | D-090 | The primary `n=29` SVG is a six-angle-class counterexample candidate to H-024; effective angular rank replaces the universal small-class prior |
-| F-45 | D-091 | H-010 now reproduces Stromquist’s localization, forced-three-point cohabitation, and counting implications rather than a nonexistent standalone 12-point theorem |
+| F-45 | D-091, D-148 | The first correction still omitted the genuine Figure 14 unavoidability implication and miscalled it nonexistent; H-010 now registers the complete five-node argument |
 | F-46 | D-092 | The structured asymptotic record no longer attributes an explicit `10^-100` constant to Roth and Vaughan |
 | F-47 | D-093 | Contact canonicalization now preserves angle/wall/degree attributes through individualization, with a colored-`K3` regression |
 | F-48 | D-094, D-095 | The idea board has the correct `n=11` gap rank and no longer schedules refuted H-018 as a fresh experiment |
@@ -1999,7 +2005,8 @@ are Trump’s nonsmooth local geometry, exact optimal configuration spaces at sm
 held-out construction surgery, pure-point piercing limits, robust restricted-angle
 proofs, `s(12)`, the next `m²−3` case at `n=61`, exact record fields, and the asymptotic
 waste exponent. The basin program now has a typed object hierarchy and visualization
-ladder; a glyph gallery and exact `n=3` quotient precede any point-cloud atlas.
+ladder; exp-014 lands the glyph gallery and exact `n=3` quotient, which now gate any
+point-cloud atlas.
 
 Three source checks materially changed the frontier.
 The [UnitSquare machine-readable release](https://hmbelvedere.com/data/results.json)
@@ -2008,8 +2015,10 @@ Kingbird [`n=17` SVG](https://kingbird.myphotos.cc/packing/square-17.svg) correc
 orientation data, while its
 [`n=29` SVG](https://kingbird.myphotos.cc/packing/square-29.svg) declares five distinct
 nonzero angle entities plus the axis-aligned class.
-The latter remains a counterexample candidate rather than a campaign verdict until the
-complete pose is independently reconstructed and verified.
+Exp-012 has now reconstructed the complete `n=29` pose, checked all 406 pairs at 160
+decimal digits, replayed its defining equations, and found six disjoint orientation
+classes. That refutes H-024’s universal upper bound of three while leaving H-001’s
+algorithmic comparison and H-025’s quantitative compressibility question open.
 
 The canonicalization witness was exact and local: before the repair,
 `_certificate([0,0,0], K3)`, `_certificate([0,0,1], K3)`, and the fully distinguished
@@ -2181,7 +2190,7 @@ checks. The four comments have the following durable disposition.
 | Comment | Disposition | Durable record |
 | --- | --- | --- |
 | [First mathematical-frontier review](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5389861146) | Superseded by its own later correction; all retained findings fixed or explicitly deferred | F-42 through F-56, D-088 through D-107, `think-f82b`, commit `5d772c6` |
-| [Engineering and loop-efficiency review](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5390037297) | Stacked PR #18 rebased and corrected before absorption; larger research-engine work remains open | D-120 through D-131, `think-9a7v` and children, engineering-review status addendum |
+| [Engineering and loop-efficiency review](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5390037297) | Stacked PR #18 rebased and corrected before absorption; larger research-engine work remains open | D-120 through D-132, `think-9a7v` and children, engineering-review status addendum |
 | [Deep mathematical delta checkpoint](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5390373103) | Five false claims retracted; every retained finding logged and dispositioned | F-57 through F-68, D-108 through D-119, `think-vw06`, `think-0vt5`, `think-uyf4`, commit `7d019ab` |
 | [Bead-count correction](https://github.com/jlevy/thinking-scratchpad/pull/17#issuecomment-5390382115) | Accepted; the creativity epic and all seven listed review children are closed | `think-7gu0` and its child beads |
 
@@ -2196,10 +2205,19 @@ became nonunique; D-130 records that gate-caught failure and the unique replacem
 
 The review did **not** justify closing every engineering research bead.
 D-050/D-059 keep basin-count and golden semantics open; D-126 keeps scientific work
-budgeting open; D-129 keeps per-control timeout and child reaping open; the batch
-quench, cross-host CI, and target-CPU policy remain named work under `think-9a7v`. This
-is the line between addressing every review comment and pretending every broader
-recommendation has already been implemented.
+budgeting open; D-129 keeps per-control timeout and child reaping open; D-132 keeps the
+fixed-cell termination contract open; the batch quench, cross-host CI, and target-CPU
+policy remain named work under `think-9a7v`. This is the line between addressing every
+review comment and pretending every broader recommendation has already been implemented.
+
+A post-merge sweep of PR #18’s linked review document found one omitted, unnumbered
+smaller finding: `solve_to_fixed_point` does not distinguish a settled cell from its
+iteration cap or a rejected transition.
+D-132 now records that deferred defect under `think-9qz0`. The sweep narrowed the
+review’s exact-float-equality concern because fixed `theta` regenerates the same numeric
+axis fields for the same discrete cell; no separate float-mismatch failure was
+reproduced. The post-merge strict/deep gate then passed all 25 steps and 30 negative
+controls with 132 defects reconciled in 55 wall seconds.
 
 The corrected, rebased stack passed the 25-step normal gate in 26 wall seconds and the
 strict/deep gate in 48 wall seconds.
@@ -2208,15 +2226,335 @@ zero-error, zero-warning Python lint floor.
 GitHub had no configured check runs on either PR, so these are retained local validation
 results rather than a CI claim.
 
-No primary mathematical or research-strategy remediation bead is closed by these
-checkpoint repairs. The focused D-066 through D-070 and D-072 through D-074 incident
-beads plus D-075 through D-079 are fixed; D-071 remains open for append-only numerical
-runner reports.
-In particular, the runner still trusts a producer-reported scalar overlap
-rather than a stored pose checked independently; contact canonicalization still has
+## First post-merge research result
+
+The first main-based round chose a cheap primary-source falsifier instead of funding the
+full H-024 corpus sweep.
+Exp-012 retains Kingbird’s `n=29` SVG, reconstructs its 15 aligned and 14 rotated
+squares, checks all 406 pairs at 160 decimal digits, and replays the source’s nine
+derived offsets and six defining equations.
+An independent derivation reproduced the transform order, square formulas, and class
+multiplicities.
+
+The witness uses six orientation classes modulo quarter turns, with multiplicities
+`15/1/9/1/2/1`. The nearest declared classes differ by `0.296067318913687…°`, while the
+numerical interval radius is `1e-90°`. This refutes H-024’s universal upper bound of
+three at its preregistered first stop cell.
+It does not refute H-001’s proposer comparison; H-025 now owns the more useful claim
+that records may be compressible to a few fitted angles at bounded side loss.
+
+The evidence boundary remains numerical.
+The retained SVG serializes a high-precision `FindRoot` solution, not an exact or
+interval certificate, so exp-012 does not certify the record value as exact or optimal.
+D-133 adds generic determination outcomes to the experiment schema, D-134 restores David
+Ellsworth’s provenance and the verified angles to the `n=29` frontier row, and D-135
+narrows the roll-up’s obsolete blanket claim about exploratory record evidence.
+
+The final replay took `0.157556` machine-seconds after 12 agent-minutes of instrument
+and source work. The pushed result then passed the 25-step strict/deep gate in 38 wall
+seconds: 31 negative controls fired, all 135 defects reconciled, and the retained `n=29`
+source was reconstructed again inside the frontier-corpus step.
+H-024 stopped; the next fast mathematical lane was H-026’s exact branchwise
+linearization screen.
+
+## Second post-merge research result
+
+Exp-013 confirms H-026 and settles the qualitative local-isolation leg of H-022. The
+retained exact Trump witness has 33 pose variables, 11 square-wall incidences that
+expand to 20 tied-corner rows, and 14 true pair contacts.
+Those contacts expose 24 raw zero-gap SAT features.
+Their 512 nonlinear selections reduce to 128 derivative-distinct 42-row matrices; the
+full 512-to-128 map remains in the raw record because branches that agree to first order
+may differ later.
+
+Every one of the 128 matrices has exact rank 33 and a strictly positive left-kernel
+stress over `Q(u)`. For a branch matrix `A`, the retained certificate satisfies `λ > 0`
+and `Aᵀλ = 0`. If `Av ≥ 0`, the equality `λᵀAv = 0` forces every row product to zero;
+full rank then forces `v = 0`. Floating point proposes the nine free stress weights
+only. Deterministic exact elimination chooses the row basis and replays rank, sign, and
+residual.
+A separate invocation re-derived the active system and replayed all 128 records
+with zero unresolved branches.
+
+The linearized cones are outer approximations to the true Bouligand tangent, so a
+nonzero vector would only have nominated nonlinear continuation.
+The observed zero union has a stronger consequence by a separate finite-branch argument:
+any sequence of distinct feasible poses approaching Trump’s pose has normalized
+displacements with a unit convergent subsequence; a further subsequence uses one fixed
+finite branch, placing that unit limit in its zero cone, a contradiction.
+Trump’s labeled fixed-side pose is therefore locally isolated.
+Finite D4 and relabelling actions preserve the conclusion modulo symmetry, and any
+nearby smaller-side packing would also fit the fixed Trump container, so the pose is a
+strict local side minimum in the anchored pose–side chart.
+
+This is not a global-optimality proof, an explicit isolation radius, or a novelty claim.
+It does replace the earlier contact-count heuristic with a machine-checkable qualitative
+local theorem. D-136 records the crucial linearized-versus-true-tangent distinction;
+D-137 records and fixes the first replay’s failure to require one-to-one matrix
+coverage. The duplicate-record and known-flexible wall-omission controls now run inside
+the retained replay.
+
+Generation took `47.121073` internal seconds and retained replay `10.186803`; external
+process timings were `47.85` and `11.01` seconds.
+This is the loop shape the research program wants: the proof-model audit consumed the
+judgment, while the final exact experiment and its durable recheck stayed below one
+machine-minute.
+
+The first 26-step strict/deep pass exposed one further process defect in its own output.
+The provenance step omitted exp-011 and exp-013 because their schema-valid
+`engine_commit` values were unquoted, while the shell extractor recognized only
+single-quoted YAML strings; the gate still returned green.
+D-138 records this recurrence of D-006. The extractor now accepts either representation,
+validates the Git hash, and independently requires the checked count to equal all 13
+declarations. The focused provenance step prints both formerly omitted rounds and the
+exact total.
+
+Exp-013 closes the focused H-026 execution bead and the qualitative local-isolation leg,
+not the broader `n=11` global-optimality program.
+The earlier focused D-066 through D-070 and D-072 through D-074 incident beads plus
+D-075 through D-079 remain fixed; D-071 remains open for append-only numerical runner
+reports.
+In particular, the runner still trusts a producer-reported scalar overlap rather
+than a stored pose checked independently; contact canonicalization still has
 order-dependent angle clustering and factorial worst-case search; and the atlas,
 fixed-angle semantics, criterion evaluators, exact-promotion path, event record, and
 statistical contract remain open.
+
+## Third post-merge research result
+
+Exp-014 and exp-015 fill the first two H-032 cells exactly.
+The common orientation lemma writes a contained unit square’s support width as
+`w = |cos(theta)| + |sin(theta)|`. Its center offset is bounded by `1-w/2`, so the
+container center has local-axis projection at most `w(1-w/2) = 1/2 - (w-1)^2/2`. Every
+contained square contains that point, and every genuinely rotated square contains it in
+its interior; hence no side-2 packing of at least two squares can contain a genuinely
+rotated member.
+
+The remaining axis-aligned problem is finite and exact.
+At `n=3`, 64 raw pairwise separation choices leave 24 one-cells.
+Their 24 endpoint states and 24 edges form two labelled 12-cycles.
+Relabelling gives one four-cycle, and quotienting its `D4` action gives the interval
+`[0,1/2]`. Its corner endpoint changes the active wall/contact signature, its open
+stratum is one-dimensional, and its midpoint is a pure stabilizer jump.
+At `n=4`, 4,096 raw choices leave 96 zero-cells, four aliases for each of 24 labelled
+grids; both declared symmetry quotients are one point.
+
+This resolves the exact `n=3` calibration side of D-034 and fixes D-140’s false
+closed-family certificate claim.
+Interior `n=3` members have many geometric keys and one contact certificate, while the
+wall endpoints have a second; all remain one connected family.
+The general atlas defect and the `n=5` identity problem stay open.
+
+The result compares labelled and unlabelled invariants separately against the archived
+Alpert et al. and Alvarado-Garduño–González sources.
+Plakhta remains unavailable, so no novelty claim is made.
+D-142 through D-144 record three pre-run checker corrections: conflated
+labelled/unlabelled homology, an unreported `n=4` f-vector, and a tautological
+polynomial-identity check.
+D-145 records and guards the integration pass that temporarily fixed D-039 instead of
+D-140; no generated roll-up was permitted to make that reversal durable.
+
+The retained `n=3` generation and complete semantic/SVG replay take 0.63 wall seconds;
+the `n=4` pair takes 0.65 seconds.
+All fifteen known-answer controls pass.
+The exact quotient SVG makes active-stratum and stabilizer-stratum changes visible
+without confusing either with separate components.
+H-032 remains open at `n=5,6`; the next cell requires complete poses and a certified
+component relation rather than more endpoint sampling.
+
+## Fourth post-merge research result
+
+Exp-016 terminally refutes H-010 on the source-faithful claim registered before the
+measurement. An exact open square of side `10001/10000`, slope `27/10`, and center
+`(37L/(2sqrt(829)),11/8)` fits inside Stromquist’s side `2 + 4/sqrt(5)` container and
+strictly avoids every point printed in Figure 14. The smallest avoidance margin is about
+`4.94e-5` at `G=(.8,1.85)`.
+
+The failed cover cell is the outer `G`–`A1` quadrilateral.
+Its Lemma 4 parameters are `a=.95,b=.8`, while the exact admissible threshold is
+approximately `.7981534378`. The retained checker binds the primary-source tuple and
+hashes, filters the paper’s separate extraneous stationary root through the unsquared
+equation, replays the conditional `3+9` count, and runs eleven source, geometry, and
+capacity mutations. Generation plus complete-record replay takes `0.55` wall seconds.
+
+The verdict is deliberately narrow.
+It invalidates the 2003 proof as printed; it does not refute the numerical lower bound.
+H-041 was preregistered before checking the nearby repair `G'=(.79,1.85)` and was then
+executable. Its acceptance rule requires the complete Figure 13 and repaired Figure 14
+finite covers, every lemma premise and boundary case, and the final capacity
+implication—not merely failure of a new escape search.
+
+D-151 and D-152 now have retained exact regressions.
+D-153 records recovery of the three 1984 memoranda, whose third installment proves only
+the restricted-angle case and merely asserts the unrestricted bound.
+D-154 through D-159 retain checker and archive hardening found before promotion.
+D-160 records a D-145 bookkeeping recurrence caught in this integration diff: a broad
+scalar patch briefly updated D-002 instead of D-151, and no generated view or commit was
+allowed to inherit it.
+
+## Fifth post-merge research result
+
+Exp-017 confirms H-041 under the criterion registered before its repaired cover was
+checked. It changes only Figure 14 point `G=(4/5,37/20)` to the source-distinct
+`G'=(79/100,37/20)` and certifies every implication needed for the lower bound.
+
+The retained exact record contains an 18-cell Figure 13 cover with four exceptional
+rectangles in one Klein-four orbit; exact Lemma 2, 4, and 6 premises forcing the same
+box to contain `A1,A2,A3`; and a repaired Figure 14 square tiling with 26 faces, 28
+vertices, and 53 edges.
+Its checker verifies vertex containment, edge incidence, container boundary,
+noncrossing, exact area, root selection, sign premises, and the final `3+9` capacity
+count. Thirteen targeted mutations all fire, and complete generation plus replay takes
+`0.70` wall seconds.
+
+Uniformly scaling any hypothetical packing below `S=2+4/sqrt(5)` into the side-`S`
+container produces eleven pairwise-disjoint open squares of side strictly greater than
+one. The repaired five-node certificate excludes them.
+This gives the repository an exact computer-assisted proof that `s(11) >= 2+4/sqrt(5)`.
+
+The provenance boundary is part of the result.
+Exp-016 remains a terminal refutation of the 2003 proof as printed; exp-017 does not
+rewrite that history or attribute `G'` to Stromquist.
+It independently restores the numerical inequality, has not undergone external peer
+review, and does not approach global optimality at Trump’s upper bound.
+The proof frontier can now use exp-016/017 as a two-sided falsifier/certificate
+calibration for H-039 at `n=12`. The integration also exposed D-161: the synopsis still
+reported forty hypotheses after H-041 made forty-one.
+The count now comes from the registry consistency check rather than another unguarded
+scalar.
+
+## Orientation and campaign-agenda delta
+
+PR #20 supplied a useful first-principles tutorial and a built/built-but-inadmissible/
+unbuilt status map. It was reviewed against the later exp-024 checkpoint rather than
+merged at its older stacked base.
+The integration preserves the tutorial, the README orientation, the grouped gate
+description, and the tooling-report additions while keeping `agenda-001` as the only
+mutable size-by-size priority queue.
+
+The delta review found eleven substantive documentation defects.
+All were corrected in the merge, recorded rather than silently rewritten, and assigned
+one bead each:
+
+| Defect | Correction |
+| --- | --- |
+| D-172 | A configuration-space cell fixes separation choices; only the fixed-angle LP subproblem fixes an angle vector |
+| D-173 | Enclosure-only evaluation cannot infer an unknown contact; interval root methods and structural exact zero remain valid certificate routes |
+| D-174 | Centre elimination is contact-graph-specific, numerical values may seed but not decide reconstruction, and exact LP coefficients need not be rational |
+| D-175 | The living status retains exp-024, the 4/4 n=4 control, D-171’s closure, and the canonical campaign agenda |
+| D-176 | `n=11` is the first proved genuinely-oblique improvement over the 0/45-degree class; angle classes are a modeling compression, and n=17 remains f64 evidence |
+| D-177 | Continuation need not be continuous through bifurcations, and moving geometry code alone is distinct from measuring solver-wrapper or batch cost |
+| D-178 | Project-specific theorem and experiment claims link directly to their retained evidence |
+| D-179 | Inflation hardness requires a named operational event, and determining `s(11)` remains an open mathematical problem rather than scheduled engineering |
+| D-180 | Current orientation routes to the tutorial, synopsis, and agenda rather than the explicitly superseded quench-spine handoff |
+| D-181 | A deterministic quench returns a point; point-basins exist but can split one connected terminal component |
+| D-182 | Loss shaping may preserve minimizers if proved, and duplicate suppression belongs only to exploration—not unbiased frequency measurement |
+
+This leaves a deliberately simple reading order: the tutorial teaches the objects, the
+synopsis owns current status, the agenda owns current experimental priority, and the
+ledger renders what has actually run.
+BC-003 through BC-009 are complete.
+BC-010 is now the active research item at `n=5`, with each candidate-pair slice kept
+inside its own 30-minute bound.
+
+## Sixth post-merge research result
+
+Exp-033 answers the first narrow BC-010 question under a criterion committed before the
+exact checker ran. The two golden `n=5` rows at side `1 + 5sqrt(2)/4` have different
+geometric keys. After one declared D4 action and relabelling, four squares coincide and
+the fifth moves on the exact segment `p0(u)=(1/2+u,5/2-sqrt(2)/4+u)` for
+`0<=u<=3sqrt(2)/2-2`.
+
+Both endpoints pass the exact packing verifier.
+A 30-row common fixed-angle cell contains the whole segment, and an exact dual over
+`Q(sqrt(2))` proves its side is minimal in that cell.
+With side fixed, the active ranks are 11, 10, and 11 at the first endpoint, interior,
+and second endpoint, so the corresponding linear-face nullities are `0/1/0`. Generation
+and independent replay take 0.24 wall seconds and all six controls pass.
+The subsequent normal gate passes all 30 steps in 30 wall seconds.
+
+This proves one connected fixed-angle optimal face and refutes geometric-key inequality
+as evidence of separation for this pair.
+It does not prove that the deterministic quench selects every point on the face, that
+the full angle-varying stationary set is connected there, or that the other four golden
+rows have any declared clearance relation.
+The parent identity bead therefore stays open; its next bounded slice is the complete
+wall-release and separating-axis cone plus stationary continuation from this face.
+
+## Seventh post-merge research result
+
+Exp-034 answers the first second-order question left by exp-033 under a separately
+committed criterion.
+Write `t = tan(theta_0/2)` for the moving square and `e(t)=|t|(1-|t|)/(1+t^2)`. Exact
+arithmetic proves that every pair
+
+`|t| <= 1/100`,
+
+`e(t) <= u <= 3sqrt(2)/2-2-e(t)`
+
+gives a valid packing at side `1+5sqrt(2)/4` when the other four squares remain fixed.
+The exp-033 dual uses only squares 2, 3, and 4, so it proves every orientation-indexed
+LP cell in this declared sheet optimal.
+Four exact boundary fixtures, independent regeneration, and all five mutations pass in
+0.27 wall-seconds.
+
+The pre-run review also caught D-186: the first uncommitted pair `(0,3)` bound omitted
+the slide contribution from one projection and called active boundary inequalities
+strict. The corrected instrument includes the full adverse coefficient and separates
+nonnegative boundary constraints from positive residual margins before preregistration
+or execution.
+
+The result raises the certified local dimension lower bound from one fixed-angle slide
+to a two-parameter sheet.
+It still does not identify the entire stationary component: wall contacts may release,
+the active separating axis may switch, and continuation may leave the declared sheet.
+The next bounded child therefore enumerates the complete nonsmooth feasible cones and
+either continues every surviving branch or records an explicit ambiguity interval.
+
+After D-187 reconciled two stale mutation anchors, the normal gate passes all 30 steps
+in 35 wall-seconds, including all 37 negative controls and all five exact small-`n`
+replays. The campaign now contains 34 terminal rounds and 187 defect records.
+
+## PR #21 documentation-stack disposition
+
+PR #21 contributed a useful high-level account of the four operating principles, a short
+research-loop map, a typed-id glossary, and a more navigable division of ownership among
+the README, synopsis, campaign, agenda, and conventions.
+Its configured base was twelve commits behind the current PR #19 checkpoint, however, so
+merging it directly would have replaced the living synopsis with the state before
+exp-033 and exp-034.
+
+The integration therefore reapplies its four substantive documentation commits onto the
+current branch and omits its two base-merge commits.
+The fourth arrived during review and correctly narrows the promotion gap: exp-033 is the
+first hand-built recovery of an exact object from retained numerical source poses, not a
+general promotion pipeline.
+The review retains the orientation improvements while correcting five source defects and
+one classification error found in the integration draft:
+
+| Defect | Correction |
+| --- | --- |
+| D-188 | One new round decides exactly one hypothesis under the enforced schema; one hypothesis may aggregate many rounds |
+| D-189 | The valid short point-basin definition now states its missing boundary: one connected terminal component can contain many returned poses |
+| D-190 | An experiment retains the result or archive it declares; exact rounds use deterministic JSON as well as streamed JSONL |
+| D-191 | Mechanical controls do not certify mathematics, and conventions own ids and naming rather than overriding schemas, evidence, or current status |
+| D-192 | A stacked documentation PR is compared with the current head, not only its configured base, before living status is incorporated |
+| D-193 | D-189 is recorded as a validity/scope omission rather than falsely inflating the soundness class |
+
+The retained commit map is `a1009cb → b3ab594`, `f9d8bae → 7353a34`,
+`62c227c → 2c4cd0e`, and `7a5787c → 1210e07`; corrections land separately in `8611e85`,
+with this late-head reconciliation following it.
+
+The paused exp-035 orientation remains separate and explicit: its candidate checker is
+committed at `8aa0cbb`, but it has not been preregistered or scientifically executed and
+supports no result. `think-1582` owns that continuation; `think-4rk3` and its four
+children own only this documentation-stack review, correction, and validation.
+
+On the final integrated head, the normal gate passes all 30 steps in 38 wall-seconds:
+all 37 negative controls fire, 12 basin archives replay 40 events, all five exact
+small-`n` records replay, all 34 declared engine commits are reachable apart from the
+explicitly annotated exp-001 orphan, and the 34-round, nine-session, one-agenda campaign
+reconciles with 193 defect records.
 
 ## Post-merge operating disposition
 
