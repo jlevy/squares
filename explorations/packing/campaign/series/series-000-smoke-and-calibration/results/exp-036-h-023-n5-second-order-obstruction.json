@@ -107,7 +107,7 @@
   },
   "source": {
     "exp_035": "campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json",
-    "exp_035_sha256": "6e803258e36b3f91518f2a8754dd82c977605815ffa365a8baf6f691e7afd477",
+    "exp_035_sha256": "d68316d22a7106ac42e3580d2ff4936cd19466f85cc2326e7e4df697fe75ac90",
     "field": "Q(sqrt(2)), sqrt(2) in (1,2)",
     "validated_owner_branches": [
       "owner3:a+",

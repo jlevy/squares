@@ -216,6 +216,10 @@ checking surface.
 - Server, plugin, database, and persisted client APIs: not applicable.
 - Campaign, atlas, event, and certificate formats: versioned and fail-fast; unchanged by
   this work.
+- Source-bound exact records: the golden producer-label migration changed one source
+  digest, so the exp-033 through exp-036 chain was replayed in order and refreshed.
+  The four reviewed diffs contain only each record’s immediate source SHA-256;
+  mathematical payloads and self-tests are unchanged.
 - Historical experiment prose: retained when the old filename is part of the historical
   record; active entry points and reproducibility commands use the new paths.
 
@@ -235,8 +239,8 @@ The change is complete when all of the following are green on the final tree:
 - [x] CI runs the locked full validation command on Python 3.14.
 - [x] README, synopsis, campaign record, generated views, and code references agree with
   the new layout.
-- [ ] Final full local `packing-validate` transcript is green on the rebased
-  implementation tree.
+- [x] Final full local `packing-validate` transcript is green on the rebased
+  implementation tree: all 31 steps passed in 93.88 seconds.
 - [ ] Stacked PR checks are green.
 
 The remaining box is remote integration evidence, not deferred implementation.

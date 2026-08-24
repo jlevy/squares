@@ -111,7 +111,7 @@
   },
   "source": {
     "exp_033": "campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json",
-    "exp_033_sha256": "396bc4c168a6f44692b9b2eb93bb84437b555f556084b20b85605580bbceb6b6"
+    "exp_033_sha256": "953f586e19038e6fdf6ccd2fccffbd8c5fdd80520010423324455b27a3b3bf40"
   },
   "uniform_dual": {
     "identity": "A^T y=e_side, y<=0, b^T y=1+5*sqrt(2)/4",

@@ -310,7 +310,7 @@ def mutation_rejected(
     mutate(candidate)
     try:
         validate_result(candidate)
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         return True
     return False
 
@@ -399,7 +399,7 @@ def build_result() -> dict[str, object]:
     def source_mutation_rejected(candidate: dict[str, object]) -> bool:
         try:
             validate_exp035_source(candidate)
-        except (TypeError, ValueError):
+        except TypeError, ValueError:
             return True
         return False
 

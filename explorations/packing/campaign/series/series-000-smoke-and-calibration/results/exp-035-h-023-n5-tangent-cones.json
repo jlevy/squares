@@ -89,7 +89,7 @@
   },
   "source": {
     "exp_034": "campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json",
-    "exp_034_sha256": "a718d64f705612eb4c4fde66a8119921aa45262f0c4994bcfffa0f3653c9d73e",
+    "exp_034_sha256": "884d9323a4959afe7d420a0032d4cb5a0d8c40f87b19f5cb251808021d4a9e54",
     "field": "Q(sqrt(2)), sqrt(2) in (1,2)"
   },
   "strata": [

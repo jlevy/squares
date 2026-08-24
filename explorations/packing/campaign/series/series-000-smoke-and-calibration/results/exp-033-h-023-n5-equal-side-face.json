@@ -206,7 +206,7 @@
   },
   "sources": {
     "golden": "golden/basin-maps.yaml",
-    "golden_sha256": "f7bf09df600ac8402ac9deb9025decd3194ceda7d61fe46b3aee464bb13666ac",
+    "golden_sha256": "051841b61a33c1ccf1d799b2da839619407ff418019740227f662c8ff5d3eb44",
     "recovery_engine_commit": "9dbbd24",
     "recovery_regime": "golden census Random(1005), seeds 2 and 5, quench_bracket"
   }
