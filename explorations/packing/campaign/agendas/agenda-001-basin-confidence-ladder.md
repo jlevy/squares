@@ -63,7 +63,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Under the unchanged v3 regime, can the first non-grid proved case retain four
@@ -76,16 +76,19 @@ agenda:
       Any unsettled evaluation opens a defect and blocks all n=5 research scaling.
     bead: think-wbra
     depends_on: [BC-002]
-    next_evidence: exp-025 plus its four-event JSONL archive and semantic replay
+    next_evidence: permanent semantic replay in the focused and normal gates
     parallel_group: event-calibration
     note: >-
-      Claimed as exp-025. Hitting the proved optimum is not the criterion; this cell
-      validates the tool path.
+      Exp-025 replays four of four admissible events with 14,219 of 14,219 fixed-point
+      evaluations settled. Hitting the proved optimum was not the criterion.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl
   - id: BC-004
     purpose: tool_validation
     owner_focus: correctness
     instances: [6]
-    state: tentative
+    state: ready
     priority: 1
     question: >-
       Does the same event contract remain complete at the first proved side-3 case, with

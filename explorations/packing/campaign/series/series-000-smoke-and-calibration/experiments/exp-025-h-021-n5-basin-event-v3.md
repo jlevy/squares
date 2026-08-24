@@ -34,23 +34,31 @@ experiment:
       campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl
     budget: four seeds; 10 seconds per quench; 60-second process cap; retain every stop
     record: campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl
-  lease: {expires: '2026-08-24T18:20:00Z', host: local-m1-pro}
+  effort:
+    timebox: 30m result slice; 60s measurement cap
+    wall_seconds: 14.472714583040215
+    agent_minutes: 5
+    stopped_by: criterion
   results:
   - shape: determination
     question: >-
       Under the unchanged v3 regime, do all four n=5 starts retain independently valid,
       balanced events or a typed stop without censoring any fixed-point evaluation?
     role: outcome
-    outcome: invalid
-    checked_by: pending BasinEvent/v3 semantic replay
+    outcome: criterion_met
+    checked_by: >-
+      BasinEvent/v3 replay: 4/4 producer-converged, independently valid, admissible,
+      and balanced; 14,219/14,219 fixed-point evaluations settled
   verdict:
-    decision: in-progress
+    decision: baseline
     primary_criterion: complete independently replayable event outcome for every fixed seed
     reason: >-
-      Preregistered before measurement. This is tool validation: reaching the proved
-      optimum is not required, and no endpoint key may be promoted to a component.
+      All four events replay as admissible and retain complete fixed-point accounting.
+      This validates the n=5 event path; reaching the proved optimum was not required,
+      and no endpoint key is promoted to a component.
+    commit: 5ab8dab
 ---
-# exp-025 — preregistered `n = 5` event validation
+# exp-025 — the `n = 5` event-validation cell is complete
 
 BC-003 moves one size beyond the exact `n=3,4` event controls without changing the
 instrument, seeds, per-seed budget, or acceptance screen.
@@ -60,9 +68,15 @@ replayable account for every start at the first non-grid proved case.
 The criterion is event-level only.
 A valid nonoptimal endpoint is a successful tool observation, while any unsettled
 fixed-point evaluation is a retained blocker and opens a defect before the campaign
-scales further.
-Repeated sides, keys, or contact descriptors are not evidence of repeated
-or distinct terminal components.
+scales further. All four seeds converged and independently validate.
+Their receipts account for 14,219 fixed-point evaluations, all settled and none
+unsettled, in 14.47 seconds of recorded quench wall time.
+Seeds 0 and 1 end at side `2.974873734153` with one shared descriptor; seeds 2 and 3 end
+at side `2.828427124746` with distinct descriptors.
+
+Those are three observed event descriptors at two side values, not three terminal
+components. Repeated or distinct sides, keys, and contact descriptors do not establish
+connected-component identity, path separation, basin measure, or census saturation.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

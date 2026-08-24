@@ -165,6 +165,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - campaign/schemas/agenda.schema.yaml
   - tools/basin_census.py
@@ -239,19 +240,23 @@ session:
     PR 20 was reviewed at head 5d096ae against the exp-024 checkpoint. Eight substantive
     documentation defects are recorded as D-172 through D-182; the accepted orientation
     docs preserve agenda-001 and bind project-specific claims to retained evidence.
+  - >-
+    Exp-025 completes BC-003 in 14.47 seconds: all four n=5 events independently replay,
+    all 14,219 fixed-point evaluations are settled, and no event descriptor is promoted
+    to a terminal component. The cell observes three descriptors at two side values.
   stop_reason: null
   next_action: >-
-    Execute preregistered exp-025 only: four fixed n=5 seeds at 10 seconds each under a
-    60-second command cap. Treat it as tool validation; retain any typed stop and do not
-    begin n=5 connectivity research until the identity-control rows are complete.
+    After the exp-025 checkpoint is green and pushed, execute only BC-004: four fixed
+    n=6 seeds at 10 seconds each under a 90-second command cap. Treat it as tool
+    validation and retain any typed stop; component research remains blocked.
 ---
 # Session 009 — Bounded Progress Before Scale
 
 The event pipeline now preserves useful negative evidence, but it is not yet a complete
 basin mapper. The historical n=3 through n=5 v2 rounds found valid endpoints and exposed
 termination behavior while remaining blocked as recorded.
-BasinEvent/v3 now accounts for every fixed-point evaluation in the current n=3 and n=4
-controls and admits the narrow event claim; terminal-component identity and census
+BasinEvent/v3 now accounts for every fixed-point evaluation in the current n=3, n=4, and
+n=5 controls and admits the narrow event claim; terminal-component identity and census
 saturation remain blocked.
 
 The session therefore stopped the size sweep after n=5. The finite n=10 tie-cell test
@@ -265,8 +270,8 @@ completes the n=4 v3 block.
 The historical v2 block remains promotion-blocked as recorded, and no endpoint
 descriptor has been promoted to a connected component.
 
-The next size is governed by the campaign agenda rather than this narrative: BC-003 is a
-bounded n=5 tool-validation slice.
+The next size is governed by the campaign agenda rather than this narrative: BC-004 is a
+bounded n=6 tool-validation slice.
 The separate n=5 connectivity question remains blocked until its component-identity
 controls are explicit.
 
