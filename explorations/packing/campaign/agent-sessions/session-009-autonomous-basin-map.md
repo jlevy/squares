@@ -401,6 +401,10 @@ session:
     Exp-035 orientation identifies one exact non-sheet first-order direction in every
     n=5 face stratum. Its candidate checker is committed at 8aa0cbb and paused on
     think-1582 without preregistration or scientific execution.
+  - >-
+    PR 21's four substantive documentation commits are incorporated without either
+    stale base merge. D-188 through D-193 record the review corrections, and the final
+    integrated normal gate passes all 30 steps in 38 wall-seconds with 193 defects.
   stop_reason: null
   next_action: >-
     Continue BC-010 with one bounded complete wall-release and SAT-branch cone slice.

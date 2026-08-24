@@ -2547,8 +2547,14 @@ with this late-head reconciliation following it.
 
 The paused exp-035 orientation remains separate and explicit: its candidate checker is
 committed at `8aa0cbb`, but it has not been preregistered or scientifically executed and
-supports no result. `think-1582` owns that continuation; `think-4rk3` and its three
+supports no result. `think-1582` owns that continuation; `think-4rk3` and its four
 children own only this documentation-stack review, correction, and validation.
+
+On the final integrated head, the normal gate passes all 30 steps in 38 wall-seconds:
+all 37 negative controls fire, 12 basin archives replay 40 events, all five exact
+small-`n` records replay, all 34 declared engine commits are reachable apart from the
+explicitly annotated exp-001 orphan, and the 34-round, nine-session, one-agenda campaign
+reconciles with 193 defect records.
 
 ## Post-merge operating disposition
 
