@@ -149,8 +149,9 @@ Three named limits travel with every number they produce:
 
 [`sqsearch/`](sqsearch/) is the `f64` screening annealer, and it is the only proposer
 the campaign has run.
-Uniform multistart exists as a draw helper inside the checkers, not as a named proposer
-under a contract.
+Uniform multistart draws exist inside the census and the checkers, with the census
+declaring its regime; the proposer *interface*—the contract that would make two
+proposers comparable—is unbuilt.
 
 **Unbuilt, and each is a registered hypothesis with nothing behind it yet:** the
 proposer interface itself, the pair-test **meter** (so no two proposers have ever been
@@ -158,8 +159,9 @@ compared at equal budget), δ-continuation, angle-class search *as a search*,
 neighbour-transfer seeding, MAP-Elites retention, and billiard/inflation.
 
 This is the campaign’s live bottleneck.
-The refiner takes the proved controls to `1e-15` and leaves `n = 11` at `6e-02`, so
-proposal is where the gap is—and proposal is the layer with the fewest built parts.
+The refiner takes the tested proved-control starts to residuals of `1e-15` and leaves
+the tested `n = 11` starts at `6e-02`, so proposal is where the gap is—and proposal is
+the layer with the fewest built parts.
 
 ### The map layer—built, not admissible
 
@@ -184,29 +186,34 @@ There is **no executable path from a numerical candidate to a reconstructible ex
 result.** The repository can verify a packing whose exact algebraic description it is
 already given; it cannot produce that description from a packing it found.
 
-Concretely, none of the following exists: contact extraction from a polished pose,
-contact-equation assembly, rank-closure of an underdetermined system, high-precision
-root-finding, algebraic recognition, interval uniqueness, or certificate emission.
-The tracked acceptance criterion is that, **starting only from archived floating
-poses**, one command recovers or explicitly rejects `n = 5, 10, 11, 17` and several
-rational-grid controls, and records recognition failures rather than guessing.
+Concretely, none of the following exists: corner–edge incidence classification from a
+polished pose (the quench records which *pairs* touch, not which corner meets which
+edge), contact-equation assembly, rank-closure of an underdetermined system,
+high-precision root-finding, algebraic recognition, interval uniqueness, or certificate
+emission. The tracked acceptance criterion is that, **starting only from archived
+floating poses**, one command recovers or explicitly rejects `n = 5, 10, 11, 17` and
+several rational-grid controls, and records recognition failures rather than guessing.
 
 Two consequences bind every other lane:
 
-- **`exact` currently means “checked something already known exactly”.** The one exact
-  witness in this directory is hand-authored from published data.
-- **The archived polished endpoints cannot feed the pipeline even once it exists**,
-  because the quench archives retain angles and a contact *count* but not centres.
-  Full-pose retention is a precondition, not a detail.
+- **`exact` currently means “checked something already known exactly”.** Every exact
+  configuration here—Trump’s packing, the `n = 3` and `n = 4` optimal families—was
+  authored from published data or derived analytically; none was recovered from a
+  numerical search output.
+- **Most archived endpoints cannot feed the pipeline even once it exists.** The early
+  quench archives (exp-006 through exp-009) retain angles and a contact *count* but not
+  centres. The basin event records do retain full poses—twelve independently valid at
+  `n = 3` through `n = 5`—but [D-165](defects.md) leaves all twelve inadmissible for
+  promotion, and every one is at a proved `n`.
 
 The record corpus has the same shape of gap: [`frontier/`](frontier/README.md) records
 each case’s **side value** algebra—minimal polynomials where they are published—and **no
 geometry**. An importer for the catalogue’s layouts is unbuilt.
 
-### The proof lane—more built than expected
+### The proof lane—built and producing theorems
 
-This is the part of the program that moved furthest in the most recent rounds, and it is
-the counterexample to the idea that everything here is instrumentation.
+This is the lane that moved furthest in the most recent rounds: it now carries exact
+results, not only instruments.
 
 | Tool | What it establishes |
 | --- | --- |
@@ -214,7 +221,7 @@ the counterexample to the idea that everything here is instrumentation.
 | [`tools/check_stromquist_repair.py`](tools/check_stromquist_repair.py) | A source-distinct repair certifies `s(11) ≥ 2 + 4/√5` exactly (**T-4**, exp-017) |
 | [`tools/check_trump_tangent.py`](tools/check_trump_tangent.py) | Trump’s pose is locally isolated in the anchored chart (exp-013) |
 | [`tools/check_small_n_moduli.py`](tools/check_small_n_moduli.py) | Exact optimal configuration spaces at `n = 3, 4` (exp-014, exp-015) |
-| [`tools/check_kingbird_svg.py`](tools/check_kingbird_svg.py) | Exact replay of a retained record witness at 160 digits (exp-012) |
+| [`tools/check_kingbird_svg.py`](tools/check_kingbird_svg.py) | High-precision (160-digit) numerical reconstruction of the `n = 29` record source, refuting H-024’s three-class claim. Not an exact optimality certificate—the retained SVG is numerical, and exp-012 says so (exp-012) |
 
 **Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
 LP duals as unavoidable-set generators, and any Lean formalization.

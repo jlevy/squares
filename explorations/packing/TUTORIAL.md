@@ -183,7 +183,8 @@ At `n = 3` the exact side-2 optimum contains a connected **sliding family**: cen
 component, infinitely many distinct coordinate keys.
 The quench lands wherever in the flat region it happened to enter, and every symptom
 mimics a real discovery—distinct coordinates, distinct keys, two rows in the store—while
-the side and the contact structure agree.
+the side agrees exactly and, along the family’s open stratum, so does the contact
+certificate (the wall endpoints carry a different one).
 
 The project’s term for this is a **terminal family**, and its definition is deliberately
 strict: local dimension is the nullity of the appropriate independent active-constraint
@@ -317,8 +318,10 @@ inequalities become equalities, and an equality system is something algebra can 
 3. **Write the contact equations.** The unknowns are `s` and the *distinct* non-axis-
    aligned angles, not `3n + 1` coordinates—two unknowns at `n = 11`, three at `n = 17`.
 4. **Close an underdetermined system analytically.** A local extremum of `s` on the
-   constraint manifold is exactly a rank drop, so the missing equations are
+   constraint manifold forces a rank drop, so the missing equations are
    Jacobian-determinant conditions—Lagrange/Fritz-John in determinant form.
+   The condition is necessary rather than sufficient; roots that are not extrema are
+   culled when the reconstruction is verified.
    The practical point is not elegance: it keeps the problem **root-finding**, which
    reaches thousands of digits, rather than **minimization**, which does not reach the
    precision the next step needs.
@@ -361,9 +364,10 @@ exact optimal configuration spaces at `n = 3` and `n = 4`, and the local-isolati
 theorem for Trump’s pose.
 
 **The recovery half is not built.** There is **no executable path from a numerical
-candidate to a reconstructible exact result**. The one exact witness in the repository
-is hand-authored from published data, and the published data is where its field came
-from. Steps 2 through 6 of the pipeline above exist as a tracked, unbuilt work item.
+candidate to a reconstructible exact result**. Every exact configuration in the
+repository—Trump’s packing, the `n = 3` and `n = 4` optimal families—was authored from
+published data or derived analytically, none recovered from a search output.
+Steps 2 through 6 of the pipeline above exist as a tracked, unbuilt work item.
 Until they exist, “verify exactly” means *check something already known exactly*, not
 *promote something we found*.
 
@@ -417,9 +421,8 @@ run.
 If that transfers, scaling the same proposer merely multiplies samples against a small
 fixed probability, and the response is to point search rather than enlarge it.
 
-**Read the epistemic status of that paragraph carefully, because it is the project’s own
-discipline on display.** The precedent enters as a *reason to expect a direction to be
-productive*, never as a fact about this landscape.
+**That reasoning is a precedent, not a measurement.** It enters as a reason to expect a
+direction to be productive, never as a fact about this landscape.
 Contact counts do not establish rigidity; rigidity does not establish rare attraction;
 another author’s basin counts are a property of *their* proposer, not of the problem.
 The premise is registered as a hypothesis with a kill criterion—if record basins turn
@@ -469,9 +472,11 @@ exclude the true optimum, and that risk is stated rather than hidden.
 
 ### Calibration must match mechanism, not just difficulty
 
-The proved small cases are all `45°` mechanisms.
+The proved cases used as positive controls, `n = 5` and `n = 10`, are both `45°`
+mechanisms (the other proved small cases are plain grids).
 They validate **machinery**, not **strategy**—an engine can take them to machine
-precision and remain structurally blind to what `n = 11` demands.
+precision and remain structurally blind to the irrational oblique tilt that `n = 11`
+demands and that no proved case exercises.
 
 So record-*finding* needs its own targets, chosen by mechanism: the nearest case whose
 record uses genuinely oblique structure, the target at small inflation (which gives a
@@ -479,9 +484,11 @@ progress metric that **moves continuously**, unlike binary found/not-found), and
 basin-entry tests that separate “search cannot find the region” from “the refiner cannot
 hold it”—two failures with identical symptoms and different fixes.
 
-The result that most sharpened this: the annealer, pointed at the nearest oblique
-record, returns the **trivial grid** on every seed and never leaves it.
-That is a statement about a *class* of targets, not about `n = 11`.
+The result that most sharpened this: the annealer, pointed at `n = 17`, returns
+**exactly `5.0`**—the trivial grid—on every seed, against a record of `4.6755`. Because
+that miss is at a second, independent cell whose record needs oblique structure, the
+failure is not specific to `n = 11`; whether it covers every oblique target is an
+inference the registry states as such, not a theorem.
 
 ### Near-misses are the data
 
@@ -506,7 +513,7 @@ Evidence tiers are the ones in [§5](#5-algebra-versus-numerics).
 | Trump’s pose is locally isolated: 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | exact | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries |
 | The one-dimensional class-angle optimum is a corner, with one-sided slopes of `0.1747` and `0.384` per radian | verified (f64) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails |
 | The exact optimal configuration spaces at `n = 3` and `n = 4` | exact | Only those two cases; `n = 5` and `n = 6` are unsolved |
-| Refinement is not the current bottleneck: the same refiner reaches `1e-15` on the tested proved-control starts and `6e-02` at `n = 11` | polished | It does not establish *why* the `n = 11` starts are far away |
+| Refinement is not the current bottleneck: the same refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | polished | The tier guarantees only `≈1e-11` in the side, so read the residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
 
 ### Open
 
