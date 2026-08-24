@@ -5,8 +5,12 @@ title: Define the unattended research agenda and hypothesis portfolio
 kind: task
 status: in_progress
 priority: 0
-version: 5
+version: 6
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+refs:
+  - kind: pr
+    url: https://github.com/jlevy/thinking-scratchpad/pull/17
+    at: 2026-08-24T01:27:20.523Z
 labels:
   - packing
   - unattended
@@ -14,7 +18,7 @@ labels:
 dependencies: []
 parent_id: is-01m0rkz14t04yjme92gnfncfv7
 created_at: 2026-08-24T00:50:41.748Z
-updated_at: 2026-08-24T01:14:28.485Z
+updated_at: 2026-08-24T01:27:20.524Z
 ---
 Inventory the merged campaign and open research work, codify the hypothesis and open-question portfolio, reconcile it with ideas, strategies, beads and instruments, declare the eight-hour and twenty-four-hour launch matrix, and implement the smallest safe readiness corrections that fit one reviewable checkpoint. Acceptance: the spec is a single orientation point; no hypothesis lives only in prose without an explicit reserved or blocked disposition; launch blockers name existing or new beads; queue depth and wall cost are computed from machine-readable recipes; focused checks and the normal gate pass; branch and draft PR are pushed.
 
