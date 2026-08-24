@@ -214,8 +214,10 @@ No unwatched numeric cell starts until every applicable line is true.
   toward the three-consecutive-failure stop and leave a durable non-scientific outcome.
 - [ ] Narrow checked commits persist claims before long compute, checkpoints at each
   seed or thirty minutes, terminal artifacts, releases, and the final report.
-- [ ] The cooperative D-035 recovery path handles timeout and interruption without
-  leaving a deliberate negative-control mutation.
+- [x] D-035 cannot leave a deliberate negative-control mutation: controls write only
+  bounded private source snapshots.
+- [ ] D-129 bounds each checker, terminates and reaps its process group on timeout or
+  interruption, and retains the failure.
   No hostile isolation is required.
 
 ### Rehearsal and capacity
@@ -301,7 +303,7 @@ The canonical readiness epic is `think-ydus`.
 | Mathematical frontier | `think-7gu0` with `think-jbcm`, `think-1xex`, `think-vvd5`, `think-xbab`, `think-z4m0`; execution continues on `think-chbu`, `think-ykt7` and the existing Insight beads | ranked review, 40-artifact registry, basin ontology, priced rotation and source-correct proof/search lanes |
 | Counted object | `think-1s0h` → `think-0yo9`; `think-3szr`, `think-aans` | H-023/H-021 classification evidence and ambiguity bounds |
 | Events and evaluator | `think-31k1`, `think-rrht`, `think-apwt`, `think-jxx8` | full observations, named `P/Q/E`, held-out coverage evaluator |
-| Validity and lifecycle | `think-ldq2`, `think-97pp`, `think-5zwm`, `think-ouf0`, `think-osyp` | independent pose checks, real selftest, transitions, interruption and control rehearsals |
+| Validity and lifecycle | `think-ldq2`, `think-cns0`, `think-5zwm`, `think-ouf0`, `think-osyp` | independent pose checks, real selftest, transitions, interruption and control rehearsals |
 | Budget and reporting | `think-krqi`, `think-b4jc`, `think-kmn2`, `think-y37w`, `think-xzew` | pair-test budget, priced queue, durable report, measured loop |
 | First supervised cell | `think-l4z5` | H-011 instrument and recipe become true together; one complete cell retained |
 | Launch and morning | `think-4jnv`, `think-20z4` | all launch checks green, then reviewed morning artifact |

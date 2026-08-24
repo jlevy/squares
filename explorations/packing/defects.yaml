@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 119
+count: 131
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -877,7 +877,7 @@ defects:
     since negctl was built (D-023) -- hit for the first time on 2026-08-23, when a gate
     run was interrupted mid-suite
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     tools/negctl.py tests a guard by corrupting a tracked source file in place, running
     the check, asserting it fails, and restoring the bytes in a `finally:` block.
@@ -896,15 +896,14 @@ defects:
     deliberate sabotage of basin identity behind a green-looking history, and the
     misleading failure message costs an investigation on top.
   fix: >-
-    none yet. Written up on think-97pp: a marker file recording the target, its checksum
-    and the control before mutating, restored-from and refused-on at startup (the
-    `.gate-running` pattern already in this repo); SIGINT and SIGTERM handlers as a
-    courtesy on top of it; the gate refusing to start while the marker exists; and
-    runner.py refusing to stage a file the marker names. The stronger fix is to mutate a
-    COPY and point the check at it, which removes the hazard rather than detecting it --
-    constrained by the rule that a check must import the real module rather than a
-    pasted copy.
-  regression: none
+    Negative controls now mutate private source snapshots and never write the checkout.
+    The copied surface is 2.9 MiB and capped at 32 MiB; build products are linked and
+    the literature archive is omitted. Five local trials measured median setup at
+    0.0779 seconds with APFS cloning and 0.1944 seconds through the forced plain-copy
+    fallback.
+  regression: >-
+    Every negative control runs through the snapshot harness in the main gate, and the
+    harness refuses if its portable-copy source exceeds the declared cap.
   bead: think-97pp
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 - id: D-036
@@ -2917,3 +2916,299 @@ defects:
   regression: none
   bead: think-uyf4
   recorded_in: campaign/hypotheses/H-028-reference-cell-angle-sheets.md
+- id: D-120
+  title: Pair half-extent was recomputed four ways and injected ulp noise into cell selection
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: since the first fixed-cell quench
+  severity: high
+  status: fixed
+  what: >-
+    `choose_cell` separately evaluated the pair support radius on four candidate axes
+    even though congruent squares give the same closed form on each. In 20,000 sampled
+    pairs, 9.7 percent disagreed across axes by up to 4.4e-16, and that numerical noise
+    entered the separating-axis argmax.
+  consequence: >-
+    A mathematically irrelevant evaluation-order difference could change the selected
+    LP cell, stall or unstall a quench, and move a published basin count.
+  fix: >-
+    Compute the shared half-extent once from the relative angle and choose the axis from
+    centre separation alone, matching the independently tested Rust identity.
+  regression: >-
+    The sqsearch selftest compares the shared identity with the naive four-axis
+    construction, and the strict gate regenerates the full golden producer.
+  bead: think-9qz0
+  recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+- id: D-121
+  title: Invalid gate worker counts were accepted and a negative count could hang the throttle
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: one stacked PR
+  severity: high
+  status: fixed
+  what: >-
+    `test.sh` accepted nonpositive `--jobs`, `GATE_JOBS`, and `GATE_INNER_JOBS` values.
+    With `--jobs -1`, the launch throttle repeatedly waited for a nonexistent child and
+    never advanced.
+  consequence: >-
+    A typo in an unattended or delegated gate command could consume the entire session
+    without producing a result or a useful refusal.
+  fix: >-
+    Resolve the automatic default first, then reject every noninteger or nonpositive
+    outer and inner worker count with exit status 2.
+  regression: >-
+    The historical-regression step invokes the gate boundary with negative and
+    nonnumeric values and checks the exact refusal.
+  bead: think-wo4p
+  recorded_in: test.sh
+- id: D-122
+  title: A targeted gate built unrelated Rust code and could hide its build skip
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one stacked PR
+  severity: high
+  status: fixed
+  what: >-
+    `test.sh --only` built sqsearch before every selected check, even when the check did
+    not consume the engine. Its partial-success branch also exited before reporting a
+    recorded build skip.
+  consequence: >-
+    The advertised subsecond edit loop paid unrelated build cost, while a targeted
+    engine check on a host without Cargo could be labelled passed despite not running.
+  fix: >-
+    Derive the engine-build requirement from the selected step functions and report
+    skips before any targeted-success line; an incomplete targeted run is never called
+    passed.
+  regression: >-
+    Focused command checks verify a README-only selection contains no build step and
+    that skip accounting precedes the partial-run disposition.
+  bead: think-bdv1
+  recorded_in: test.sh
+- id: D-123
+  title: A per-step process cap was documented as a shared global worker budget
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  latent_for: one stacked PR
+  severity: medium
+  status: fixed
+  what: >-
+    The gate and worker helper called `PACK_JOBS` a shared budget, but each concurrent
+    child read the same value independently. Several pool-backed steps could therefore
+    exceed it in aggregate, and `--jobs 1` still assigned two inner workers.
+  consequence: >-
+    Operators could infer a resource ceiling the implementation did not enforce, and a
+    supposedly serial transcript could still contain multiprocessing behavior.
+  fix: >-
+    Document `PACK_JOBS` as a measured per-step cap, state that aggregate fanout can be
+    larger, and make `--jobs 1` export an inner cap of one.
+  regression: >-
+    The historical-regression step traces a `--jobs 1 --list` invocation and requires
+    `PACK_JOBS=1`.
+  bead: think-mmw8
+  recorded_in: test.sh
+- id: D-124
+  title: The portable negative-control fallback copied a needlessly broad repository surface
+  date: '2026-08-24'
+  layer: tooling
+  class: performance
+  detected_by: review
+  latent_for: one stacked PR
+  severity: medium
+  status: fixed
+  what: >-
+    Private negative-control trees used cheap copy-on-write clones on APFS but fell back
+    to unrestricted `cp -R` over the repository elsewhere. The fallback cost and disk
+    multiplier were neither bounded nor measured.
+  consequence: >-
+    A fast local gate could become slow and disk-heavy in CI or on Linux, recreating the
+    loop-cost problem the snapshot design was intended to remove.
+  fix: >-
+    Copy only the packing source needed by controls, omit the literature archive and
+    build products, link the existing environment, and refuse above a 32 MiB source
+    cap. The current 2.9 MiB surface measured 0.0779 seconds median with APFS cloning
+    and 0.1944 seconds with a forced plain copy over five trials each.
+  regression: >-
+    The harness prints the source size on every run and refuses before materialization
+    if the portable-copy surface crosses its cap.
+  bead: think-lyzi
+  recorded_in: tools/negctl.py
+- id: D-125
+  title: Parallel negative controls could share one worker tree and erase each other's mutation
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  detected_by: gate
+  latent_for: caught during the first concurrency sweep
+  severity: high
+  status: fixed
+  what: >-
+    The first parallel harness assigned control i to tree i modulo the worker count, but
+    a thread pool does not bind queued item indices to worker indices. A slow control
+    let two live tasks share one tree, and one restored `defects.yaml` while the other
+    expected its mutation to remain.
+  consequence: >-
+    A negative control stopped firing because another control erased its evidence,
+    making the guard suite flattering under exactly the concurrent mode meant to speed
+    it up.
+  fix: >-
+    Treat trees as checked-out resources in an explicit queue and return each only after
+    its control has restored the private mutation.
+  regression: >-
+    The full control catalogue is run through the queue in the main gate; the original
+    failing width sweep was repeated at 1, 2, 3, 5, and 10 workers.
+  bead: think-oxwd
+  recorded_in: tools/negctl.py
+- id: D-126
+  title: Quench convergence work was budgeted by machine time rather than reproducible work
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: since quench_bracket was introduced
+  severity: high
+  status: outstanding
+  what: >-
+    `quench_bracket` and its free sweep stop on wall-clock deadlines. Host speed, load,
+    pool width, and contention therefore change how many LP solves and angle probes a
+    nominally identical quench performs.
+  consequence: >-
+    Convergence and basin-frequency results can depend on the machine regime rather
+    than only the retained input, even when seed and code provenance agree.
+  fix: >-
+    none yet. Make LP solves or bracket iterations the scientific budget, retain wall
+    time only as a recorded outer safety deadline, and mark any deadline hit censored.
+  regression: none
+  bead: think-u97a
+  recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+- id: D-127
+  title: The engineering review called its branch complete before its delta blockers were resolved
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  latent_for: one review cycle
+  severity: medium
+  status: fixed
+  what: >-
+    The engineering review's header said Complete while the stacked branch was behind
+    its base and a later formal review had identified gate-contract, fallback-cost, and
+    logbook blockers.
+  consequence: >-
+    A reader could treat the 22-second gate and the stacked implementation as accepted
+    baseline behavior before its known corrections landed.
+  fix: >-
+    Added a dated status addendum with the exact corrections, retained deferrals, local
+    measurements, validation evidence, and absorption commit.
+  regression: none
+  bead: think-z8wf
+  recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+- id: D-128
+  title: The packing gate serialized independent checks and offered no targeted edit loop
+  date: '2026-08-24'
+  layer: tooling
+  class: performance
+  detected_by: review
+  latent_for: several research rounds
+  severity: high
+  status: fixed
+  what: >-
+    Twenty-five largely independent checks ran serially, and the harness had no way to
+    select one named check. A normal run measured 170 seconds while delivering only 133
+    CPU-seconds on a ten-core host.
+  consequence: >-
+    Agents batched unrelated edits between checks, lengthening fault localization and
+    making disciplined iteration several times slower than the underlying work.
+  fix: >-
+    Run read-only steps concurrently with deterministic transcript replay, pool the
+    internal quench lists, and provide explicit `--only`, `--list`, and `--jobs` entry
+    points without weakening the full or strict gates.
+  regression: >-
+    The same twenty-five step table drives full and targeted runs; strict refuses
+    `--only`, and the full gate continues to exercise every listed step.
+  bead: think-l3ds
+  recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+- id: D-129
+  title: Negative-control checker processes have no bounded timeout or child cleanup
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  detected_by: review
+  latent_for: since the negative-control harness was introduced
+  severity: medium
+  status: outstanding
+  what: >-
+    Source snapshots prevent a killed negative control from corrupting the checkout,
+    but each checker still runs without a deadline and a shell child can outlive the
+    harness. One stuck check can therefore stall the gate indefinitely.
+  consequence: >-
+    An unattended or delegated verification loop can lose its whole timebox and leave
+    temporary descendants consuming resources even though the scientific tree remains
+    safe.
+  fix: >-
+    none yet. Give each control a declared or documented default timeout, launch it in
+    a process group, terminate and reap the group on timeout or interruption, and
+    rehearse a child that ignores the first termination signal.
+  regression: none
+  bead: think-cns0
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-130
+  title: A defect-link mutation control reused an anchor that became nonunique
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  detected_by: gate
+  latent_for: caught on the first integrated gate
+  severity: medium
+  status: fixed
+  what: >-
+    The narrative-link negative control replaced the literal `recorded_in: test.sh`.
+    New engineering defects legitimately added three more copies, so the anchor appeared
+    four times and the control could no longer identify which record to corrupt.
+  consequence: >-
+    The normal gate stopped at the control catalogue. Without the one-match invariant,
+    it could instead have mutated an arbitrary defect and supplied ambiguous evidence
+    about link validation.
+  fix: >-
+    Anchor the mutation on the unique bead-and-recorded-path pair for D-121 rather than
+    on the reused path alone.
+  regression: >-
+    negctl refuses every replacement whose anchor does not appear exactly once, and the
+    focused narrative-link control runs in the gate.
+  bead: think-f7km
+  recorded_in: tools/controls.yaml
+- id: D-131
+  title: The Python lint floor passed while reporting eight type-checker warnings
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  detected_by: review
+  latent_for: several full-gate runs
+  severity: medium
+  status: fixed
+  what: >-
+    BasedPyright returned success with eight `reportPrivateUsage` warnings, and the gate
+    treated that exit code as a clean lint floor. Its transcript ended with zero errors
+    and eight warnings immediately before `ALL CHECKS PASSED`.
+  consequence: >-
+    The enforced Python hygiene claim disagreed with its own output, and future warnings
+    could accumulate without making either supervised or unattended validation red.
+  fix: >-
+    Keep the field helpers private, mark the intentional same-module and benchmark
+    accesses locally for Ruff and BasedPyright, and require the exact zero-error,
+    zero-warning summary in the gate.
+  regression: >-
+    `step_lint_floor_python` now greps for `0 errors, 0 warnings, 0 notes` after Ruff,
+    format, and BasedPyright all return success.
+  bead: think-6cbn
+  recorded_in: test.sh

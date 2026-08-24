@@ -17,7 +17,7 @@ import random
 import time
 from fractions import Fraction
 
-from sqpack.field import NumberField, _poly_mul
+from sqpack.field import NumberField, _poly_mul  # pyright: ignore[reportPrivateUsage]
 from sqpack.packings import trump11
 from sqpack.verify import exact_sign, float_sign, verify_packing
 
@@ -77,14 +77,14 @@ def bench_degrees() -> None:
         min_poly = [1] + [rnd.randint(-9, 9) for _ in range(degree)]
         field = NumberField.__new__(NumberField)
         field.degree = degree
-        field._high_to_low = [Fraction(c) for c in min_poly]
-        field._low_to_high = field._high_to_low[::-1]
+        field._high_to_low = [Fraction(c) for c in min_poly]  # pyright: ignore[reportPrivateUsage]
+        field._low_to_high = field._high_to_low[::-1]  # pyright: ignore[reportPrivateUsage]
         a = [Fraction(rnd.randint(-9999, 9999), rnd.randint(1, 9999)) for _ in range(degree)]
         b = [Fraction(rnd.randint(-9999, 9999), rnd.randint(1, 9999)) for _ in range(degree)]
         trials = 200 if degree <= 18 else 40
         t0 = time.time()
         for _ in range(trials):  # fixed operands: no coefficient blow-up
-            field._reduce(_poly_mul(a, b))
+            field._reduce(_poly_mul(a, b))  # pyright: ignore[reportPrivateUsage]
         dt = (time.time() - t0) / trials
         baseline = baseline or dt
         print(f"      {degree:>3}   {dt * 1e3:>10.2f}   {dt / baseline:>6.1f}x")

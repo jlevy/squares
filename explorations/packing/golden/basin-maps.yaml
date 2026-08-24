@@ -97,8 +97,8 @@ golden:
       valid: true
   - n: 3
     proposals: 4
-    converged: 3
-    distinct_basins: 3
+    converged: 4
+    distinct_basins: 2
     proved_optimum: '2'
     found_optimum: true
     basins:
@@ -107,17 +107,8 @@ golden:
       contacts: 3
       angle_classes:
       - 3
-      quench_frequency: 2
-      converged_frequency: 2
-      valid: true
-    - side: 2.0176058468
-      closed_form: null
-      contacts: 2
-      angle_classes:
-      - 1
-      - 2
-      quench_frequency: 1
-      converged_frequency: 0
+      quench_frequency: 3
+      converged_frequency: 3
       valid: true
     - side: 2.2766787412
       closed_form: null
