@@ -349,10 +349,10 @@ def check_cell_solve_failure_is_typed() -> str | None:  # noqa: PLR0911
     if (
         accepted.outcome != "optimal"
         or accepted.solver_calls != 2
-        or accepted.repair_row != 8
-        or accepted.repair_margin is None
+        or accepted.repair_rows != [8]
+        or len(accepted.repair_margins) != 1
     ):
-        return f"D-164: bounded one-row repair was not retained: {accepted!r}"
+        return f"D-164: bounded one-retry repair was not retained: {accepted!r}"
 
     infeasible = SimpleNamespace(success=False, status=2, message="synthetic infeasible")
     with patch.object(quench_module, "linprog", return_value=infeasible):
@@ -395,13 +395,38 @@ def check_cell_solve_failure_is_typed() -> str | None:  # noqa: PLR0911
     if (
         retained.outcome != "optimal"
         or retained.solver_calls != 2
-        or retained.repair_row != 12
-        or retained.repair_margin is None
-        or abs(retained.repair_margin - 2.1999601312595589e-10) > 1e-15
+        or retained.repair_rows != [12]
+        or len(retained.repair_margins) != 1
+        or abs(retained.repair_margins[0] - 2.1999601312595589e-10) > 1e-15
         or retained.side is None
         or abs(retained.side - 2.405678412790218) > 1e-12
     ):
         return f"D-164: retained n=3 seed-1 failing cell did not replay: {retained!r}"
+
+    n4_theta = [
+        1.5707963263740359,
+        -1.0000151967426634e-09,
+        -1.0000151967426634e-09,
+        1.5707963263740359,
+    ]
+    n4_cell = [
+        (0, 1, -1.0, 4.208607408719852e-10, 1.0000000002895773, -1.0),
+        (0, 2, 1.0000151967426634e-09, 1.0, 1.0000000002895773, 1.0),
+        (0, 3, -1.0, 4.208607408719852e-10, 1.0, -1.0),
+        (1, 2, 1.0, -1.0000151967426634e-09, 1.0, -1.0),
+        (1, 3, 1.0000151967426634e-09, 1.0, 1.0000000002895773, -1.0),
+        (2, 3, 4.208607408719852e-10, 1.0, 1.0000000002895773, -1.0),
+    ]
+    tied = quench_module.solve_cell(n4_theta, n4_cell, 4)
+    if (
+        tied.outcome != "optimal"
+        or tied.solver_calls != 2
+        or tied.repair_rows != [16, 21]
+        or len(tied.repair_margins) != 2
+        or tied.max_violation is None
+        or tied.max_violation > quench_module.LP_FEASIBLE_EPS
+    ):
+        return f"D-171: tied offending rows did not share one bounded repair: {tied!r}"
     return None
 
 
@@ -435,7 +460,7 @@ def main() -> int:
         return 1
     print(
         f"  {len(CHECKS)} regression checks pass "
-        "(D-002, D-015, D-016, D-019, D-029, D-036, D-132, D-164, D-168, D-169)"
+        "(D-002, D-015, D-016, D-019, D-029, D-036, D-132, D-164, D-168, D-169, D-171)"
     )
     return 0
 

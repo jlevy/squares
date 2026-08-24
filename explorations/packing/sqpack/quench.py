@@ -94,8 +94,8 @@ class CellSolveResult:
     max_violation_row: int | None = None
     max_violation_kind: Literal["containment", "pair"] | None = None
     solver_calls: int = 1
-    repair_row: int | None = None
-    repair_margin: float | None = None
+    repair_rows: list[int] = field(default_factory=list)
+    repair_margins: list[float] = field(default_factory=list)
 
 
 @dataclass
@@ -259,19 +259,23 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
     max_violation = max(float(violations[max_row]), 0.0)
     max_kind: Literal["containment", "pair"] = "containment" if max_row < 4 * n else "pair"
     solver_calls = 1
-    repair_row = None
-    repair_margin = None
+    repair_rows: list[int] = []
+    repair_margins: list[float] = []
 
     # HiGHS can report an optimum just beyond its own requested feasibility screen.
-    # Retry exactly once, tightening only the offending RHS by the measured violation
-    # plus the original screen. The second result is still replayed against ORIGINAL
-    # rows. This changes neither the acceptance tolerance nor an infeasible/failure
-    # outcome, and the one-retry bound prevents a numerical repair loop.
+    # Retry exactly once, tightening every RHS that the first solution already violates
+    # beyond the screen by its measured violation plus that screen. Tightening only the
+    # single argmax row was D-171: two tied n=4 rows were already outside the screen, so
+    # the retry merely moved the argmax to the other one. The offending set is frozen
+    # before the retry; the second result is replayed against ORIGINAL rows. This changes
+    # neither the acceptance tolerance nor an infeasible/failure outcome, and it cannot
+    # turn into an iterative numerical repair.
     if max_violation > LP_FEASIBLE_EPS:
-        repair_row = max_row
-        repair_margin = max_violation + LP_FEASIBLE_EPS
+        repair_rows = [int(row) for row in np.flatnonzero(violations > LP_FEASIBLE_EPS)]
+        repair_margins = [float(violations[row]) + LP_FEASIBLE_EPS for row in repair_rows]
         repair_rhs = np.array(b_ub, copy=True)
-        repair_rhs[repair_row] -= repair_margin
+        for row, margin in zip(repair_rows, repair_margins, strict=True):
+            repair_rhs[row] -= margin
         repaired = run_lp(repair_rhs)
         solver_calls = 2
         if repaired.success:
@@ -293,8 +297,8 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
                 max_violation_row=max_row,
                 max_violation_kind=max_kind,
                 solver_calls=solver_calls,
-                repair_row=repair_row,
-                repair_margin=repair_margin,
+                repair_rows=repair_rows,
+                repair_margins=repair_margins,
             )
     x, y = list(v[1 : 1 + n]), list(v[1 + n :])
     if max_violation > LP_FEASIBLE_EPS:
@@ -309,8 +313,8 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
             max_violation_row=max_row,
             max_violation_kind=max_kind,
             solver_calls=solver_calls,
-            repair_row=repair_row,
-            repair_margin=repair_margin,
+            repair_rows=repair_rows,
+            repair_margins=repair_margins,
         )
     return CellSolveResult(
         outcome="optimal",
@@ -323,8 +327,8 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
         max_violation_row=max_row,
         max_violation_kind=max_kind,
         solver_calls=solver_calls,
-        repair_row=repair_row,
-        repair_margin=repair_margin,
+        repair_rows=repair_rows,
+        repair_margins=repair_margins,
     )
 
 
