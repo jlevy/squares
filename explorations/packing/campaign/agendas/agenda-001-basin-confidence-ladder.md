@@ -252,8 +252,8 @@ agenda:
     bead: think-1s0h
     depends_on: [BC-003, BC-009]
     next_evidence: >-
-      complete wall-release and SAT-branch feasible cones, followed by certified
-      continuation beyond exp-034's declared sheet
+      execute exp-036's frozen second-order test of the displayed exp-035 direction,
+      then return to the other wall-release and SAT-branch feasible cones
     parallel_group: identity
     note: >-
       This is the first genuine basin-structure experiment in the ladder. Exp-033
@@ -269,7 +269,11 @@ agenda:
       0.28 wall-seconds. All three declared strata admit an exact non-sheet linearized
       direction. The post-run normal gate passes all 30 steps in 70 wall-seconds with
       all six exact small-n records replayed. Think-1582 is closed; think-imav owns the
-      next bounded nonlinear-realization slice.
+      next bounded nonlinear-realization slice. Its independent instrument is committed
+      at `f2d2e53`; exp-036 freezes exact owner-4 and owner-3 obstruction margins, source
+      topology, seven mutations, and separate 30-second generation and replay caps. It
+      is preregistered but has not been run. D-197 records and repairs the intervening
+      shared-workspace branch race without adding a lease or worktree protocol.
     artifacts:
     - tools/check_n5_equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
@@ -280,6 +284,8 @@ agenda:
     - tools/check_n5_tangent_cones.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
+    - tools/check_n5_second_order_obstruction.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

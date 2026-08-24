@@ -45,8 +45,9 @@ session:
       n=5 source poses, and exp-034 embeds it in one exact angle-and-slide sheet, while
       sampled full-component classifications remain zero. The next cone checker is
       corrected, and exp-035 now retains exact non-sheet first-order directions at both
-      endpoints and one interior point. Nonlinear realization remains unresolved. No
-      complete-map claim follows.
+      endpoints and one interior point. Exp-036 is preregistered to test that displayed
+      direction at second order but has not run. Nonlinear realization remains
+      unresolved. No complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -436,11 +437,19 @@ session:
     controls fire, 40 BasinEvents and six exact small-n records replay, all 35 declared
     engine commits are reachable apart from the annotated exp-001 orphan, and 35 rounds,
     nine sessions, one agenda, and 196 defects reconcile.
+  - >-
+    D-197 records a concurrent checkout that moved the isolated exp-036 checker commit
+    onto the engineering-plan branch. The commit banner caught it before push or target
+    execution; the checker is now at f2d2e53 on the campaign branch and the other branch
+    ref is restored without data loss or new lease machinery.
+  - >-
+    Exp-036 freezes the two exact second-order branch contradictions, the positive
+    relative-angle cusp margin, source-topology binding, seven controls, and separate
+    30-second generation and replay caps. Static checks pass; the target has not run.
   stop_reason: null
   next_action: >-
-    Continue BC-010 on think-imav with one bounded nonlinear realization or obstruction
-    of exp-035's exact direction. Preserve every unsupported continuation as unresolved
-    and stop after that slice.
+    Execute only preregistered exp-036 generation and replay, integrate its narrow
+    verdict, run the normal gate, and stop this slice at a pushed checkpoint.
 ---
 # Session 009 — Bounded Progress Before Scale
 
