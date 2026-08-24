@@ -22,6 +22,8 @@ The prefix says what kind of thing it is.
 | Hypothesis | `H-NNN` | campaign, spans series | `H-016` |
 | Exploration report | `X-NNN` | campaign | `X-001` |
 | Agent session | `session-NNN` | campaign | `session-001` |
+| Agenda | `agenda-NNN` | campaign | `agenda-001` |
+| Agenda cell | `AA-NNN`, prefix declared per agenda | its agenda | `BC-001` |
 | Search/proof strategy | `search:N`, `proof:N` | the frontier catalogues | `search:12` |
 | Basin (planned) | canonical key, plus a `B-NNN` alias | campaign, spans series | — |
 

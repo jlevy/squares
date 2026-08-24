@@ -9,27 +9,96 @@ The motivating case is `n = 11`, the smallest instance of this problem that is s
 open. Its best known packing dates from 1979 and its best proved lower bound from 2003,
 and a gap of roughly 0.088 in the side length separates them.
 
+The work runs on four principles held in balance—correctness, process, insight, and
+efficiency—each worked by its own kind of loop, and joined by one **research loop**:
+insight agents produce hypotheses, the research loop tests each as a preregistered
+experiment against the tooling, correctness decides every verdict at a declared evidence
+tier, and process records all of it.
+[Operating Principles](#operating-principles) below defines each principle and sketches
+the loop; the [campaign runbook](campaign/README.md) runs it.
+
 **New here?** [`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the
 objects are, why the approach is shaped the way it is, and what is established versus
 open. Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program.
 
-## Operating principles
+## Operating Principles
 
-This program separates four dimensions of excellent research because none can stand in
-for another:
+Successful research here is the result of four principles held in balance.
+None can stand in for another, and each has a preeminent goal:
 
-| Principle | Agent focus | Owns | Boundary |
-| --- | --- | --- | --- |
-| **Correctness** | Soundness | Mathematical claims, primary-source research, rigorous proof and certification, independent validation | May veto any claim or promotion that exceeds its evidence |
-| **Process** | Discipline | Preregistration, run lifecycle, schemas, provenance, logbooks, reconciliation, and handoffs | May veto any run or record that cannot be reconstructed or whose rule changed after observation |
-| **Insight** | Creativity | Structural explanations, conjectures, search and proof ideas, cross-`n` grammar, and tractable questions | Proposes and prioritizes; it does not certify its own ideas |
-| **Efficiency** | Infrastructure | Stable executors, profiling, parallelism, caching, visualization systems, and measured agent-loop throughput | Accelerates specified work; it may not weaken mathematical or process controls |
+| Principle | Agent focus | Preeminent goal |
+| --- | --- | --- |
+| **Correctness** | Soundness | Formal validation checkable by third parties, and cross-validation of every claim and report against known research—accurate surveys of prior work included |
+| **Process** | Discipline | Operational discipline: results delivered efficiently, priorities balanced, and every piece of work traceable to what happened and when |
+| **Insight** | Creativity | Extreme freedom to understand the problem creatively and to form a wide range of hypotheses, using all available information and tooling |
+| **Efficiency** | Infrastructure | Iteration on every layer of the stack, as fast as possible, through efficient algorithms and systems engineering |
 
-At a given time, an agent normally works in one focus.
-A task may cross focuses, but its handoffs are explicit: **Insight proposes → Process
-preregisters → Efficiency executes → Correctness validates → Process records.**
-Rejection and negative results return to Insight as evidence for the next strategy, not
-as discarded runs.
+Balance carries one asymmetry.
+Correctness and process hold vetoes—no claim is promoted past its evidence, and no run
+counts if it cannot be reconstructed—while insight is never blocked from proposing, and
+efficiency may never relax either control to go faster.
+
+### How each principle is worked
+
+Deep work on a single principle is one mode, not the only one, and the four are staffed
+differently:
+
+- **Correctness and process are structural first.** The schemas, the gate,
+  preregistration, and provenance were set up early and now largely enforce themselves.
+  The ongoing mathematical flow is survey work—reviewing, fact-checking, and assembling
+  everything known on a topic soundly—and finding and validating the right mechanisms
+  for formal verification of key claims and new results.
+- **Efficiency runs as performance loops**: dedicated agentic loops measured purely by
+  declared performance metrics—gate wall time, solver throughput, pair-tests—so an
+  improvement is a number moving, never an impression.
+- **Insight runs as dedicated agents** whose job is extreme context efficiency: absorb
+  the full current research context, then hypothesize a wide range of connections worth
+  pursuing—separately, at whatever depth is needed, by whichever agents or models do it
+  best. Output arrives as explorations and candidate hypotheses, never as unrecorded
+  opinions.
+
+### The research loop
+
+The architecture that ties the four together is a loop between insight and experiment:
+
+```
+insight loop ──> hypotheses ──> preregister ──> run rounds ──> validate ──> record
+  (X-NNN)          (H-NNN)     (kill criteria,    (exp-NNN)    (evidence    (ledger,
+     ^                          budgets, tiers)                  tiers)      defects)
+     └────────── verdicts and negative results return as evidence ──────────────┘
+```
+
+An insight phase runs until it has produced a batch of candidate hypotheses.
+Each is codified in the registry with a kill criterion and a budget before anything
+runs; the research loop then executes them as preregistered experiment rounds against
+the tooling; every verdict is decided at a declared evidence tier and recorded in the
+generated ledger; and every verdict—refutations and negative results above all—returns
+to the next insight phase as evidence rather than discarded work.
+In one line: **Insight proposes → Process preregisters → Efficiency executes →
+Correctness validates → Process records.**
+
+The loop’s mechanics are already codified: the campaign runbook’s
+[bounded research cycle](campaign/README.md#the-bounded-research-cycle) is its clock and
+checkpoint protocol, the agenda queue orders its cells, and the
+[ledger](campaign/ledger.md) is generated from the artifacts rather than typed.
+
+### The record, by id
+
+Every artifact the loop touches carries a typed id.
+The one-line meanings; [`conventions.md`](conventions.md) owns the id rules and
+[`SYNOPSIS.md`](SYNOPSIS.md#terminology) the full definitions:
+
+| Id | Names |
+| --- | --- |
+| `H-NNN` | A registered hypothesis or open question, with its kill criterion and budget written before any run |
+| `X-NNN` | An exploration report: the recorded idea source hypotheses are mined from |
+| `exp-NNN` | One experiment round: a schema-validated artifact plus its raw JSONL archive |
+| `series-NNN` | An ordered group of rounds sharing a runbook; only one open at a time |
+| `session-NNN` | One agent session: objective, budget, delegation evidence, stop reason, and handoff |
+| `BC-NNN` | One cell in an agenda’s priority queue, currently the basin-map confidence ladder |
+| `D-NNN` | One defect: what went wrong, what caught it, and what now stops it recurring |
+| `T-N` | The synopsis’s shorthand for a theoretical result established in this repository |
+| `think-xxxx` | One bead: a tracked work item in the `tbd` queue |
 
 The basin atlas is the flagship cross-focus instrument.
 Insight specifies views that could expose mathematical structure—symmetry orbits,
