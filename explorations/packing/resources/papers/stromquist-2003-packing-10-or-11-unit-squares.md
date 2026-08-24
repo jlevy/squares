@@ -7,11 +7,13 @@
 **Archived:** 2026-08-22
 **Extraction:** pdfminer.six from the original PDF, cleaned for readability. Raw extraction preserved alongside as `stromquist-2003-packing-10-or-11-unit-squares.raw.md`.
 
-> ⚠️ **Two annotated source issues.** The raw multi-column extraction interleaves the
+> ⚠️ **Three annotated source issues.** The raw multi-column extraction interleaves the
 > fractions in Figure 13's four defining coordinates. The Theorem 2 and Theorem 3
 > coordinate lists below were read directly from the rendered primary PDF, page 9.
 > The paper's middle numerical row for Lemma 4 is preserved below but followed by an
-> explicit algebraic correction.
+> explicit algebraic correction. A third note records an escaping box from the printed
+> Figure 14 set; it invalidates the proof as printed but not necessarily the theorem,
+> because moving `G.x` from `.8` to `.79` appears to repair the finite cover.
 
 ---
 
@@ -77,7 +79,8 @@ We rely on these cases of Lemma 4:
 > $\theta\approx24.0788^\circ$, for which $\cos\theta>a$; it is extraneous.
 > The true minimum is at $\theta\approx31.45595^\circ$ with
 > $f(a)\approx0.9145377886$, not $.926$.
-> Theorem 2 is unaffected because its application uses $b=.9<f(a)$.
+> The particular $a=\sqrt{4/5},b=.9$ application is unaffected. The complete
+> Theorem 2 cover has a separate Figure 14 failure recorded below.
 
 > *[Figure 5: Proof of Lemma 4 -- not extractable from PDF]*
 
@@ -192,6 +195,19 @@ $$G = (.8, 1.85)$$
 $$H = (1.5, 2.1)$$
 $$I = (2.1, 2.1)$$
 $$J = (2.1, 1.5)$$
+
+> ⚠️ **Source-proof gap in Figure 14.** The outer quadrilateral between
+> $A_1=(1,.9)$ and $G=(.8,1.85)$ invokes Lemma 4 with $(a,b)=(.95,.8)$, but the true
+> threshold is $f(.95)\approx.798153437834<.8$. More decisively, let
+> $L=10001/10000$, choose $\cos\theta=10/\sqrt{829}$ and
+> $\sin\theta=27/\sqrt{829}$, and center the open box at
+> $(37L/(2\sqrt{829}),11/8)$. It fits in $[0,s]^2$, with its left support at $x=0$,
+> and avoids all twelve printed points; the smallest strict avoidance margin is about
+> $4.94\times10^{-5}$ at $G$. Thus the next sentence is false for the printed tuple.
+> The paper's stated slack is real: replacing only $G$ by $(.79,1.85)$ makes this
+> Lemma 4 cell strict while preserving the other outer cells and all interior triangle
+> inequalities. That repair is a new, separately checked claim rather than part of the
+> source text.
 
 Nonavoidance lemmas apply to all of the regions in this figure. Since three of the twelve points are in one box, there cannot be eleven nonintersecting boxes. This completes the proof of Theorem 2. $\square$
 

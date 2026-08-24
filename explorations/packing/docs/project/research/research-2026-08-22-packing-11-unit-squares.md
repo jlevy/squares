@@ -37,8 +37,9 @@ or asserted-but-unverified.
 
 The motivating observation is that `n = 11` is the smallest case of a natural,
 easily-stated geometry problem that remains **unsolved** after nearly fifty years.
-The best known packing dates from 1979 and has never been improved; the best proved
-lower bound dates from 2003 and has never been improved.
+The best known packing dates from 1979 and has never been improved; the best published
+lower-bound value dates from 2003. This audit found a gap in its printed proof and
+preregistered a one-coordinate repair.
 A gap of roughly 0.088 in the side length separates them.
 Understanding precisely *where* that gap comes from — and why the available proof
 technique cannot close it — is the substance of this document.
@@ -117,12 +118,14 @@ The entire difficulty of the problem lies between them.
 | Quantity | Value | Status | Source |
 | --- | --- | --- | --- |
 | Area lower bound | `√11 ≈ 3.316625` | Trivial | — |
-| **Best proved lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Proved** | **[Stromquist 2003]**, Thm 2; still the recorded bound in **[Friedman DS7]** |
+| **Best published lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Published proof has gap D-152** | **[Stromquist 2003]**, Thm 2; repeated in **[Friedman DS7]** |
 | **Best known packing (upper bound)** | `≈ 3.877084` | **Construction only** | Trump 1979, via **[Friedman DS7]**, **[Kingbird]** |
 | Lower bound for 0°/45°-only packings | `2 + (4/3)√2 ≈ 3.885618` | **Proved** | **[Stromquist 2003]**, Thm 3 |
 | Grid upper bound | `4` | Trivial | — |
 
-The open interval is `[3.788854…, 3.877084…]`, of width `≈ 0.088230`.
+The published interval is `[3.788854…, 3.877084…]`, of width `≈ 0.088230`. Until H-041’s
+repaired certificate is complete, the strongest lower bound this repository treats as
+independently established is the monotonicity consequence `s(11) ≥ s(10) = 3 + √2/2`.
 
 Two facts about this table are worth stating explicitly because they are frequently
 garbled:
@@ -288,8 +291,8 @@ s(10) = 3 + ½√2 ≈ 3.707107
 
 This *is* an exact determination — `n = 10` is solved.
 
-**Theorem 2.** Let `s = 2 + 2√(4/5) ≈ 3.789`. Then eleven non-intersecting boxes cannot
-exist inside a square of side `s`. Consequently
+**Theorem 2, as stated.** Let `s = 2 + 2√(4/5) ≈ 3.789`. Then eleven non-intersecting
+boxes cannot exist inside a square of side `s`. Its claimed consequence is
 
 ```
 s(11) ≥ 2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854
@@ -297,6 +300,8 @@ s(11) ≥ 2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854
 
 This is a **lower bound only**. It does not match Trump’s `≈ 3.877084`, and Stromquist
 makes no claim that it does.
+D-152 invalidates the printed Figure 14 cover; the statement therefore remains a
+published claim until the separately preregistered repair is fully checked.
 
 **Theorem 3.** Let `s = 2 + (4/3)√2 ≈ 3.886`. Then eleven non-intersecting boxes cannot
 exist inside a square of side `s` *if each box has orientation 0° or 45° with respect to
@@ -371,10 +376,30 @@ the escaping box — pinned to the top or bottom rectangle up to symmetry, by Le
 A = { (1, .9),  (s/2, .9) ≈ (1.894, .9),  (1 + √(1/5), 1.12) ≈ (1.447, 1.12) }
 ```
 
-Nonavoidance lemmas cover every region of that second figure, so the twelve points *are*
-unavoidable. One box swallowing three of them leaves nine points for the remaining ten
-boxes, and the pigeonhole closes: “Since three of the twelve points are in one box,
-there cannot be eleven nonintersecting boxes.”
+The paper asserts that nonavoidance lemmas cover every region of that second figure.
+If that assertion held, one box swallowing three points would leave nine points for the
+remaining ten boxes, and the pigeonhole would close.
+The source audit below finds that the printed twelve-point set is not unavoidable, so
+this is the intended implication, not a premise this repository now treats as
+established.
+
+**A source-proof gap and a minimal proposed repair.** Let `L=10001/10000`, take
+`cos(theta)=10/sqrt(829)` and `sin(theta)=27/sqrt(829)`, and center an open square at
+`(37L/(2sqrt(829)),11/8)`. Its left support is `x=0`; its other three container
+clearances are strict.
+Exact radical comparisons show that it avoids all twelve printed Figure 14 points, with
+the smallest margin about `4.94e-5` at `G=(.8,1.85)`.
+
+The failed drawn cell is precise.
+The outer quadrilateral from `G` to `A1=(1,.9)` invokes Lemma 4 with `(a,b)=(.95,.8)`,
+but the true threshold is `f(.95)≈.798153437834`. This invalidates the proof as printed;
+it does not refute the numerical lower bound.
+The paper explicitly says Figure 14 has slack, and the vector partition supports that
+diagnosis: moving only `G.x` from `.8` to `.79` makes the failed inequality strict,
+preserves the other outer-cell inequalities, and leaves all thirteen interior triangle
+edges shorter than one.
+H-010 retains the original claim for terminal rejection; H-041 preregisters that repair
+and requires a complete independent cover before the lower bound is promoted again.
 
 **Theorem 3 has exactly the same shape** — ten points as in the first figure but at the
 new `s`, the 45°-strengthened Lemma 7 forcing an escaping box into a known position, and
@@ -413,8 +438,10 @@ Representative statements:
 smaller root of a cubic obtained after squaring the stationarity equation.
 At `a = √(4/5)`, that root gives `θ ≈ 24.0788°` but violates the unsquared sign
 condition `cos θ ≤ a`. The true minimum is at `θ ≈ 31.45595°`, with
-`f(a) ≈ 0.9145377886`, rather than the printed `.926`. Theorem 2 still goes through
-because its application needs only `.9 < f(a)`.
+`f(a) ≈ 0.9145377886`, rather than the printed `.926`. The particular application with
+`b=.9` still goes through.
+The complete Figure 14 cover does not: its distinct `a=.95,b=.8` cell is the
+source-proof gap recorded below.
 
 The 45°-restricted case (Theorem 3) exploits the fact that the projections of a 45° unit
 vector are at most 1, which brings the triangle lemmas into play in a stronger form
@@ -425,8 +452,9 @@ argument described above.
 built from the container side `s` and from unit distances — that is, from rational
 functions of `s` and square roots.
 The bound one can prove is therefore naturally an algebraic number of low degree.
-Both proved constants in this paper — `3 + ½√2` and `2 + 4/√5` — are degree-2 algebraic
-numbers. The conjectured `s(11)` is degree **8** (verified above).
+Both lower-bound constants claimed in this paper — the proved `3 + ½√2` and the
+currently repair-pending `2 + 4/√5` — are degree-2 algebraic numbers.
+The conjectured `s(11)` is degree **8** (verified above).
 There is no evident way for a finite unavoidable-point configuration with low-degree
 coordinates to certify a degree-8 threshold.
 This is, in our assessment, the structural reason the method stalls well short of
@@ -658,8 +686,9 @@ marks an `n` the catalogue does not picture, where the trivial `⌈√n⌉` pack
 the best known. `deg` is the algebraic degree of the conjectured optimum where the
 catalogue records a minimal polynomial.
 Lower bounds are the strongest of four sources: the area bound `√n`, Nagamochi’s general
-closed form, monotonicity from the largest proved `m ≤ n`, and Stromquist’s Theorem 2
-for `n ≥ 11`.
+closed form, monotonicity from the largest proved `m ≤ n`, and the published value from
+Stromquist’s Theorem 2 for `n ≥ 11`. D-152 means the generated frontier rows need a
+proof-status qualification until H-041’s repaired certificate is complete.
 
 This table and the solved-case table below are **generated** from
 [`explorations/packing/frontier/`](../../../frontier/README.md), where the same facts
@@ -1536,9 +1565,11 @@ These are frequently conflated with the present problem in casual sources:
 
 ## Key Insights
 
-1. **The problem is open, and the gap is structural, not incidental.** `s(11)` is pinned
-   only to `[3.788854, 3.877084]`. Both endpoints have stood unimproved for over two
-   decades (lower) and nearly five (upper).
+1. **The problem is open, and the gap is structural, not incidental.** The literature
+   records `[3.788854, 3.877084]`, but D-152 leaves the printed lower-bound proof
+   incomplete until H-041’s repair is certified.
+   Both numerical endpoints have stood unimproved for over two decades (lower) and
+   nearly five (upper).
 
 2. **Gardner’s conjecture was settled without solving the problem.** Stromquist proved
    the *necessity* of oblique tilts by bounding the 0°/45° class from below at
