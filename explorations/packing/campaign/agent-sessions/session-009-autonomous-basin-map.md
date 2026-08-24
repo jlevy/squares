@@ -161,6 +161,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
@@ -264,8 +265,8 @@ session:
     validates retention, not basin frequency or component completeness.
   stop_reason: null
   next_action: >-
-    After exp-028 and the full gate are committed and pushed, execute only BC-006: four
-    fixed n=8 seeds at 10 seconds each under a 120-second command cap.
+    Execute preregistered exp-029 only: four fixed n=8 seeds at 10 seconds each under a
+    120-second command cap, followed by its bounded stage timing audit.
 ---
 # Session 009 — Bounded Progress Before Scale
 

@@ -1196,15 +1196,15 @@ The mutable size-by-size run order lives in the
 [basin-map confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md),
 not in this status document.
 It labels every cell as tool validation, measurement validation, or genuine research.
-The event-retention controls through `n = 7` are complete; BC-006 is the next bounded
-`n = 8` tool-validation cell.
+The event-retention controls through `n = 7` are complete; exp-029 is the active bounded
+`n = 8` BC-006 tool-validation cell.
 Exact configuration-space controls still stop at `n = 4`. Component and census claims
 remain blocked on the later identity and coverage rows.
 
 ## Experiments Conducted
 
-There are 28 rounds registered in `series-000`; all are terminal.
-They record 778 agent-minutes and 27.1 wall-minutes.
+There are 29 rounds registered in `series-000`; 28 are terminal and exp-029 is in
+progress. The terminal rounds record 778 agent-minutes and 27.1 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1250,6 +1250,7 @@ archive beside it.
 | [exp-026](campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 3 valid/admissible retained; seed 3 crashes before retention | **blocked** |
 | [exp-027](campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 3 admissible; one typed time-budget stop | **baseline** |
 | [exp-028](campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md) | 7 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; three typed time-budget stops | **baseline** |
+| [exp-029](campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md) | 8 | positive control | H-021 | BasinEvent/v3 semantic replay | preregistered four-seed tool-validation block; measurement pending | **in-progress** |
 
 ### Cost and provenance
 

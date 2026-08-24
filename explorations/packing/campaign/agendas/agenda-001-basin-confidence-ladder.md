@@ -148,8 +148,9 @@ agenda:
     exit: four replayable events or one retained blocker; no unseen-mass inference
     bead: think-wbra
     depends_on: [BC-005]
-    next_evidence: one event block plus a measured per-stage timing breakdown
+    next_evidence: exp-029 plus event replay and a bounded quench/screen/key/replay timing audit
     parallel_group: event-calibration
+    note: Claimed as exp-029 with D-126 carried explicitly.
   - id: BC-007
     purpose: tool_validation
     owner_focus: efficiency
