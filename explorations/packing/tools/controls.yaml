@@ -40,9 +40,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 133", "count: 20"]
+  replace: ["count: 135", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 133"
+  expect: "count 20 != 135"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -80,6 +80,12 @@ controls:
 - name: campaign - artifact violating its declared schema
   file: campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md
   replace: ["  priority: 3", "  priority: 0"]
+  run: python3 campaign/ledger.py --check
+  expect: "schema violation"
+
+- name: campaign - generic determination outcome outside the schema
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md
+  replace: ["    outcome: criterion_missed", "    outcome: corpus_refuted"]
   run: python3 campaign/ledger.py --check
   expect: "schema violation"
 

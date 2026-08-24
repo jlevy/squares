@@ -2008,8 +2008,10 @@ Kingbird [`n=17` SVG](https://kingbird.myphotos.cc/packing/square-17.svg) correc
 orientation data, while its
 [`n=29` SVG](https://kingbird.myphotos.cc/packing/square-29.svg) declares five distinct
 nonzero angle entities plus the axis-aligned class.
-The latter remains a counterexample candidate rather than a campaign verdict until the
-complete pose is independently reconstructed and verified.
+Exp-012 has now reconstructed the complete `n=29` pose, checked all 406 pairs at 160
+decimal digits, replayed its defining equations, and found six disjoint orientation
+classes. That refutes H-024’s universal upper bound of three while leaving H-001’s
+algorithmic comparison and H-025’s quantitative compressibility question open.
 
 The canonicalization witness was exact and local: before the repair,
 `_certificate([0,0,0], K3)`, `_certificate([0,0,1], K3)`, and the fully distinguished

@@ -2,7 +2,7 @@
 
 # Defect log
 
-133 defects recorded across the packing toolchain.
+135 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `control_cell` | 7 | a cell of the sweep whose answer is known in advance |
 | `review` | 96 | a human or agent reading the work against a checklist |
 | `anomaly` | 4 | a result that made no sense, chased down |
-| `inspection` | 13 | reading the code or the design with intent |
+| `inspection` | 15 | reading the code or the design with intent |
 | `drift_check` | 4 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 6 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 6 of 133, and none of the 45 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 6 of 135, and none of the 45 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,7 +36,7 @@ The line worth reading twice: **the automated gate caught 6 of 133, and none of 
 | verifier | 1 |
 | record | 37 |
 | tooling | 31 |
-| docs | 42 |
+| docs | 44 |
 
 ## By kind
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 6 of 133, and none of 
 | --- | ---: |
 | soundness | 45 |
 | validity | 37 |
-| bookkeeping | 37 |
+| bookkeeping | 39 |
 | robustness | 10 |
 | performance | 4 |
 
@@ -276,3 +276,5 @@ This is the actionable list.
 | [D-131](test.sh) | 2026-08-24 | tooling | bookkeeping |  | `review` | medium | fixed | The Python lint floor passed while reporting eight type-checker warnings |
 | [D-132](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | 2026-08-24 | quench | validity | flattering | `review` | high | outstanding | Fixed-cell iteration returns capped states without a settlement result |
 | [D-133](campaign/schemas/experiment.schema.yaml) | 2026-08-24 | record | validity | neutral | `pre_registered_rule` | high | fixed | Determination results could encode only search-specific basin outcomes |
+| [D-134](frontier/n-029.md) | 2026-08-24 | docs | bookkeeping |  | `inspection` | medium | fixed | The n = 29 frontier row omitted its analytic improver and verified angles |
+| [D-135](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping |  | `inspection` | low | fixed | The experiment roll-up forbade the record-source evidence it displayed |

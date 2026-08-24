@@ -386,7 +386,7 @@ def source_equation_residuals(entities):
     )[1] / cos(i - b)
 
     r1, r4, r5 = (entities[name] for name in ("r1", "r4", "r5"))
-    r8, _r_b, r_c, r_d = (entities[name] for name in ("r8", "rB", "rC", "rD"))
+    r8, r_c, r_d = (entities[name] for name in ("r8", "rC", "rD"))
     upper_middle = vector_sum(
         (mp.mpf(1), mp.mpf(2)),
         rotate_vector(i, (1, -r_c + r_d)),

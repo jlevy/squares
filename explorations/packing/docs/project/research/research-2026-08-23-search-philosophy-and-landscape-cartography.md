@@ -154,8 +154,8 @@ Two consequences frame everything downstream:
 1. **Each fixed separating-axis cell exposes a lower-dimensional continuous problem.**
    Trump’s packing uses one non-trivial tilt and the `s(17)` record uses two, but those
    two cases do not establish that record packings generally have few raw orientation
-   classes. The primary `n = 29` SVG is already a counterexample candidate to the
-   registered three-class bound.
+   classes. Exp-012 reconstructed the primary `n = 29` SVG and verified six classes,
+   refuting the registered three-class bound.
    The useful question is effective angular dimension— rank, algebraic dependence, or
    compressibility—rather than a universal class count.
 2. **Declared landscape views can become statistical questions.** Under a versioned

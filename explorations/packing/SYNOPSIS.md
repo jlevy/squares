@@ -890,7 +890,7 @@ view; this section is the reading of it.
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 0 | — |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What is the certified local geometry of Trump’s packing? | 0 | — |
 | [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected? | 0 | — |
-| [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | blocked | Verified record packings through `n=30` use at most three angle classes; `n=29` is a counterexample candidate | 0 | — |
+| [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | **refuted** | Verified record packings through `n=30` use at most three angle classes; exp-012 verifies six at `n=29` | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | blocked | Trump has no nonzero direction in any branchwise fixed-side tangent cone | 0 | — |
 | [H-027](campaign/hypotheses/H-027-record-angle-cones.md) | blocked | The imported `n=11,17` record cells have positive class-angle directional cones | 0 | — |
@@ -983,12 +983,14 @@ current criterion and kill rule.
 
 ## Experiments Conducted
 
-Eleven rounds, all in `series-000`, **275 agent-minutes and 23.0 wall-minutes** in
-total. Two instruments: `sqsearch` 0.1.0 (the `f64` screening annealer) and
-`sqpack.quench` (0.1.0 with angle descent, 0.2.0 with class bracketing).
+Twelve rounds, all in `series-000`, **287 agent-minutes and 23.0 wall-minutes** in
+total. Three instruments: `sqsearch` 0.1.0 (the `f64` screening annealer),
+`sqpack.quench` (0.1.0 with angle descent, 0.2.0 with class bracketing), and the
+high-precision Kingbird SVG reconstruction checker.
 
-No round has been run at the `exact` tier, so **no result below claims anything about a
-record**, and none may.
+No search round has been run at the `exact` tier, so **no result below claims a new
+record**. Exp-012 is an exploratory reconstruction of a published record witness; its
+six-class determination does not certify that witness as exact or optimal.
 
 ### Roll-up
 
@@ -1008,6 +1010,7 @@ archive beside it.
 | [exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 11 | target | H-002 | quench 0.2.0 | `6.999e-02 → 6.2894e-02` | rejected |
 | [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 11 | target | H-019 | quench 0.2.0 | slopes `0.1747` / `0.3841`, ratio `2.198` | **accepted** |
 | [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | exactly `5.0` on all five seeds, gap `+3.245e-01` | rejected |
+| [exp-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | 29 | target | H-024 | SVG reconstruction + SAT | six classes; minimum class gap `0.296067°` | **rejected** |
 
 ### Cost and provenance
 
@@ -1024,8 +1027,9 @@ archive beside it.
 | exp-009 | 5 seeds, 30 s each | 150.0 s | 30 m | criterion | `8b450a1` |
 | exp-010 | 11 probes | 1.0 s | 10 m | criterion | `8b450a1` |
 | exp-011 | 4e9 moves | 397.474 s | 0 m | criterion | `60a50cc` |
+| exp-012 | one SVG, 406 pairs | 0.158 s | 12 m | criterion | `5384209` |
 
-### What the eleven rounds jointly establish
+### What the twelve rounds jointly establish
 
 **The instrument works on the proved positive controls.** They now resolve to machine
 precision under the bracketing quench.
@@ -1069,14 +1073,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-One hundred thirty-two defects, [one line each](defects.md), generated from
+One hundred thirty-five defects, [one line each](defects.md), generated from
 `defects.yaml` and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 45 | asserted something false about the mathematics |
-| validity | 36 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 37 | recorded something its own evidence contradicts |
+| validity | 37 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 39 | recorded something its own evidence contradicts |
 | robustness | 10 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
 
@@ -1086,7 +1090,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught six defects in one hundred thirty-two, and no soundness
+**The automated gate has caught six defects in one hundred thirty-five, and no soundness
 defect ever.** Every soundness failure was found by a control cell whose answer was
 known in advance, a rule written down before the measurement, a generated view
 contradicting its source, or someone reading carefully.
@@ -1158,12 +1162,16 @@ D-108 through D-119 are the second-pass corrections: the missing piercing paper,
 isostatic and self-stress arguments, fixed-budget and fixed-cell overreach, topology and
 fractional-LP mistakes, unsupported novelty, stale registry state, the H-012/H-017
 estimand conflation, and an impossible continuity-blind angle-sheet criterion.
-D-120 through D-132 record the engineering delta: ulp-sensitive cell selection, gate
-boundary and skip-contract failures, the per-step worker cap, bounded portable
-snapshots, a parallel negative-control race, wall-clock scientific budgeting, stale
-review status, the missing targeted edit loop, unbounded checker children, and a
-nonunique mutation-control anchor, followed by a lint floor that accepted type-checker
-warnings and a fixed-cell solver that does not expose whether it settled or hit its cap.
+D-120 through D-135 record the engineering delta and first post-merge run: ulp-sensitive
+cell selection, gate boundary and skip-contract failures, the per-step worker cap,
+bounded portable snapshots, a parallel negative-control race, wall-clock scientific
+budgeting, stale review status, the missing targeted edit loop, unbounded checker
+children, and a nonunique mutation-control anchor, followed by a lint floor that
+accepted type-checker warnings and a fixed-cell solver that does not expose whether it
+settled or hit its cap ([D-132](defects.md)), then the search-only determination
+vocabulary that could not record the H-024 result, the omitted `n=29` source provenance
+that the falsifier exposed, and the roll-up’s obsolete blanket claim about exploratory
+record evidence.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
@@ -1222,10 +1230,11 @@ program: Trump’s nonsmooth local geometry, exact small-`n` quotient spaces, he
 construction surgery, pure-point piercing limits, robust restricted-angle proofs,
 `s(12)`, `s(61)`, exact record fields, and the asymptotic waste exponent.
 
-**The first fast rotation is cheap and high-information.** Verify the primary `n = 29`
-counterexample to H-024; solve H-026’s branchwise Trump tangent screen; render the exact
-`n = 3` quotient-family control; regenerate the `n = 5` equal-side pair with full poses;
-and hide the UnitSquare `n = 68,69` children for the first parent-surgery test.
+**The first fast rotation is cheap and high-information.** Exp-012 has already verified
+the primary `n = 29` counterexample and refuted H-024. Next solve H-026’s branchwise
+Trump tangent screen; render the exact `n = 3` quotient-family control; regenerate the
+`n = 5` equal-side pair with full poses; and hide the UnitSquare `n = 68,69` children
+for the first parent-surgery test.
 No hour-scale lane is promoted without a known-answer response, independent validity,
 and a result that changes a decision.
 

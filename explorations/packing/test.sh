@@ -198,6 +198,30 @@ print(f"  100 artifacts, n = 1..100, {100-open_n} proved, {open_n} open")
 print(f"  {nag} of {open_n} open cases bounded below by Nagamochi's general theorem")
 assert open_n == 65 and nag == 63, "corpus counts drifted from the documented figures"
 PY
+
+  # The first retained public geometry beyond the n=11 exact witness. This replays the
+  # source's transform tree, defining equations, independent SAT check, and angle-class
+  # count. It is cheap enough to keep the result that refuted H-024 executable.
+  local checker out
+  if command -v uv >/dev/null 2>&1; then
+    checker="uv run --frozen --quiet python"
+  elif python3 -c "import mpmath" 2>/dev/null; then
+    checker=python3
+  else
+    skip "mpmath unavailable: the retained Kingbird n=29 witness was not replayed"
+    return 0
+  fi
+  out=$($checker tools/check_kingbird_svg.py resources/papers/kingbird-square-29-provenance.svg)
+  $PY -c '
+import json, sys
+d = json.load(sys.stdin)
+assert d["packing"]["valid"] and d["packing"]["n"] == 29
+assert d["packing"]["pairs_tested"] == 406
+assert d["orientation_class_count"] == 6
+assert [c["count"] for c in d["orientation_classes"]] == [15, 1, 9, 1, 2, 1]
+assert all(d["selftests"].values())
+print("  n=29 source: 29 squares, 406 pairs, six classes, source equations replayed")
+' <<<"$out"
 }
 
 step_soft_schema_validation() {

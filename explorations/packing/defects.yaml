@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 133
+count: 135
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3271,3 +3271,59 @@ defects:
     to an unknown outcome and requires schema validation to refuse it.
   bead: think-20fr
   recorded_in: campaign/schemas/experiment.schema.yaml
+- id: D-134
+  title: The n = 29 frontier row omitted its analytic improver and verified angles
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: since the n = 29 frontier artifact was generated
+  severity: medium
+  status: fixed
+  what: >-
+    frontier/n-029.md attributed the standing construction only to Thomas Schadt,
+    stored improved_by as empty, left all tilt angles null, and linked only the
+    catalogue page. The primary SVG explicitly says David Ellsworth improved the
+    construction with an analytic solution and supplies the complete transform tree
+    and five nonzero angle entities.
+  consequence: >-
+    The structured frontier lost contributor provenance and made a fully available
+    six-class geometry look like a picture-only record, delaying both the H-024
+    falsifier and reusable corpus import work.
+  fix: >-
+    Added Ellsworth as improver, retained the primary SVG locally, populated all six
+    verified angle classes, linked exp-012's numerical reconstruction, and kept that
+    evidence explicitly separate from exact certification or optimality.
+  regression: >-
+    The frontier schema and generated-table checks cover the structured row, while the
+    gate replays the retained source hash, 29-square reconstruction, source equations,
+    406 SAT pairs, and six-class multiplicities.
+  bead: think-nayd
+  recorded_in: frontier/n-029.md
+- id: D-135
+  title: The experiment roll-up forbade the record-source evidence it displayed
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: inspection
+  latent_for: since exp-012 was integrated into the experiment roll-up
+  severity: low
+  status: fixed
+  what: >-
+    SYNOPSIS.md retained the blanket rule that no exploratory-tier round could claim
+    anything about a record immediately before displaying exp-012's reconstruction of
+    a published standing-record witness.
+  consequence: >-
+    The roll-up contradicted its own evidence and obscured the important distinction
+    between reconstructing a published record source and independently certifying its
+    exactness, optimality, or status as a new record.
+  fix: >-
+    Narrowed the rule to forbid claims of a new record and stated explicitly that
+    exp-012's six-class determination is an exploratory source reconstruction, not an
+    exactness or optimality certificate.
+  regression: >-
+    tools/check_synopsis.py binds the roll-up's defect totals and experiment table to
+    their sources; review still checks the prose evidence boundary when a new result
+    kind is introduced.
+  bead: think-uxj5
+  recorded_in: SYNOPSIS.md

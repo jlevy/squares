@@ -672,7 +672,7 @@ Runtime estimates are provisional until D-101’s timing boundary is repaired.
 | ---: | --- | --- | ---: | --- | --- |
 | 1 | Generalized Trump tangent screen (H-026) | exact `n=11` witness | 10 min compute after derivation | explicit nonzero fixed-side direction, or unresolved feature branching | every branch is enumerated and the result replays |
 | 2 | Exact quotient-map control (H-032) | analytic `n=3`, side 2 | 1 h | renderer cannot represent the known family and singular strata | sampled poses, quotient invariants, and analytic parameter agree |
-| 3 | `n=29` angle-corpus falsifier (H-024) | one primary SVG | 10 min after importer | six verified classes refute H-024 | only if source reconstruction is independently valid |
+| 3 | `n=29` angle-corpus falsifier (H-024) | one primary SVG | **completed by exp-012** | six verified classes refuted H-024 | source reconstruction, all 406 SAT pairs, and source equations replayed |
 | 4 | Trump reference-cell angle sheet (H-028) | `6+5` known cell, coarse grid | 10 min | reference not recovered or basis labels unstable | a reproducible local feature changes a decision |
 | 5 | Equal-side `n=5` continuation (H-023) | two `2.767766953` poses | 20 min | path invalid, leaves stationarity tolerance, or lacks full poses | a valid path or certified local obstruction survives refinement |
 | 6 | Parent-derived known-answer surgery (H-030) | hide UnitSquare `n=68,69` children | 1 h | no response curve under any declared surgery | one child is approached reproducibly with valid intermediates |
@@ -731,7 +731,7 @@ existing spine.
 | H-013 | fixed-side projection and valid-path upper bounds only; no topology from branch coalescence |
 | H-017 | park behind the short budget-response ladder; eight hours is low-information before a response curve |
 | H-022 | umbrella local-geometry question; H-026 is its cheap one-sided tangent test |
-| H-024 | likely refuted by `n=29`; verify before determination; H-025 is the non-brittle successor |
+| H-024 | refuted by exp-012: the checked `n=29` witness has six classes; H-025 is the non-brittle successor |
 | H-025–H-031 | angle compression, local geometry/sheets, rare events, held-out surgery, and move topology |
 | H-032–H-037 | exact quotient spaces, `n=61`, fractional piercing, asymptotic transfer, robust orientation exclusion, and the exponent question |
 | H-038–H-040 | exact record fields, the `s(12)` theorem frontier, and active-cell neighbor exploration |
