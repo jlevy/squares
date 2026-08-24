@@ -264,8 +264,9 @@ agenda:
       with a four-hour horizon. Pre-measurement review found D-194 and D-195 in the
       exp-035 candidate checker: one contact differential was reused across slide
       strata, and tied support rows were treated as alternatives. Think-1582 remains
-      active while those exact-derivative corrections are completed; exp-035 is still
-      neither preregistered nor run.
+      active. The corrected instrument is committed at `aa63cf4`, and exp-035 freezes
+      the two-owner, tied-row-conjunction criterion before execution; it is
+      preregistered but has not been run.
     artifacts:
     - tools/check_n5_equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
@@ -274,6 +275,7 @@ agenda:
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
     - tools/check_n5_tangent_cones.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

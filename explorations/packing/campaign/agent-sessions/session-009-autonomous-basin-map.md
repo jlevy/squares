@@ -44,8 +44,9 @@ session:
       point. Exp-033 proves one exact fixed-angle face relation between the equal-side
       n=5 source poses, and exp-034 embeds it in one exact angle-and-slide sheet, while
       sampled full-component classifications remain zero. The next cone checker is
-      committed but under correction before scientific execution after review exposed
-      D-194 and D-195. No complete-map claim follows.
+      corrected and exp-035 is preregistered, but it has not been scientifically run.
+      D-194 and D-195 remain open until the frozen controls execute. No complete-map
+      claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -415,6 +416,11 @@ session:
     preregistration: the pair (0,4) differential changes along the slide, and the tied
     pair (3,4) support rows are conjunctive within each owner-axis branch. Both repairs
     are tracked under think-1582; the experiment remains unrun.
+  - >-
+    The corrected exact-derivative instrument is committed at aa63cf4 after static-only
+    checks. Exp-035 now freezes the two owner-axis branches, both tied support rows per
+    branch, the stratum-specific coefficient control, and separate 30-second generation
+    and replay caps. No target code has run at this checkpoint.
   stop_reason: null
   next_action: >-
     Continue BC-010 with one bounded complete wall-release and SAT-branch cone slice.
