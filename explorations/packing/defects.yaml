@@ -4923,9 +4923,9 @@ defects:
     older snapshot while GitHub still reported the stack as mergeable relative to its
     configured base.
   fix: >-
-    Reapply only PR 21's three substantive documentation commits onto the current PR 19
-    head, omit its stale base-merge commit, and preserve all current generated and
-    hand-authored status before running a fresh gate.
+    Reapply PR 21's four substantive documentation commits onto the current PR 19 head,
+    including its late exp-033 promotion-boundary delta, while omitting its two base-merge
+    commits. Preserve all current generated and hand-authored status before a fresh gate.
   regression: >-
     Synopsis, ledger, defect, README, and provenance checks run on the rebased integrated
     tree; review compares every stacked PR against the current head, not only its stored base.

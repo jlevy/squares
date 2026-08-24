@@ -205,15 +205,16 @@ session:
     status: completed
     outcome: >-
       Found no GitHub feedback or checks. PR 21 was twelve commits behind the living
-      checkpoint; its three substantive documentation commits were suitable to reapply,
-      but its stale base merge and status roll-up were not.
+      checkpoint; its three initial documentation commits and later exp-033 boundary
+      delta were suitable to reapply, but its two base merges and stale status roll-ups
+      were not.
     evidence: [GitHub REST and GraphQL surfaces, exact head and merge-base comparison, claim-level diff audit]
     files: []
     checks: [remote head and base, comments, reviews, threads, checks, current-status comparison]
     uncertainty: The delegate performed a read-only review and did not integrate or validate the corrected tree.
     elapsed_seconds: 240
     elapsed_quality: platform_measured
-    next_action: Reapply the three documentation commits, correct D-188 through D-192, and run a fresh normal gate.
+    next_action: Reapply the four substantive documentation commits, correct D-188 through D-193, and run a fresh normal gate.
   outputs:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-018-h-021-n3-basin-event-calibration.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-019-h-021-n4-basin-event-calibration.md

@@ -2524,8 +2524,11 @@ Its configured base was twelve commits behind the current PR #19 checkpoint, how
 merging it directly would have replaced the living synopsis with the state before
 exp-033 and exp-034.
 
-The integration therefore reapplies only its three substantive documentation commits
-onto the current branch and omits its stale base-merge commit.
+The integration therefore reapplies its four substantive documentation commits onto the
+current branch and omits its two base-merge commits.
+The fourth arrived during review and correctly narrows the promotion gap: exp-033 is the
+first hand-built recovery of an exact object from retained numerical source poses, not a
+general promotion pipeline.
 The review retains the orientation improvements while correcting five source defects and
 one classification error found in the integration draft:
 
@@ -2537,6 +2540,10 @@ one classification error found in the integration draft:
 | D-191 | Mechanical controls do not certify mathematics, and conventions own ids and naming rather than overriding schemas, evidence, or current status |
 | D-192 | A stacked documentation PR is compared with the current head, not only its configured base, before living status is incorporated |
 | D-193 | D-189 is recorded as a validity/scope omission rather than falsely inflating the soundness class |
+
+The retained commit map is `a1009cb → b3ab594`, `f9d8bae → 7353a34`,
+`62c227c → 2c4cd0e`, and `7a5787c → 1210e07`; corrections land separately in `8611e85`,
+with this late-head reconciliation following it.
 
 The paused exp-035 orientation remains separate and explicit: its candidate checker is
 committed at `8aa0cbb`, but it has not been preregistered or scientifically executed and
