@@ -3,9 +3,9 @@ type: is
 id: is-01m0ttevapnhz0sgm9r09gweew
 title: Inventory and classify packing code by maturity and dependency
 kind: task
-status: open
+status: in_progress
 priority: 0
-version: 5
+version: 6
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
@@ -20,6 +20,6 @@ dependencies:
     target: is-01m0tth2dgvwnagwh2975ac6k3
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T21:22:40.084Z
-updated_at: 2026-08-24T21:23:52.879Z
+updated_at: 2026-08-24T21:48:22.713Z
 ---
 Build the engineering orientation inventory before moving code. Classify every maintained Python and Rust module, shell entry point, command, generator, and campaign subsystem as E0-E3; record its purpose, callers, emitted artifacts, evidence role, expected lifetime, tests, known limitations, and proposed dependency layer. Propose concrete shared-foundation, stable research-loop, case-specific, command, and scratch locations with one-way dependencies. Acceptance: the full tracked code surface is accounted for, ambiguous classifications are explicit decisions, and the inventory identifies cleanup targets without performing file moves.
