@@ -7,9 +7,11 @@
 **Archived:** 2026-08-22
 **Extraction:** pdfminer.six from the original PDF, cleaned for readability. Raw extraction preserved alongside as `stromquist-2003-packing-10-or-11-unit-squares.raw.md`.
 
-> ⚠️ **One repaired figure passage.** The raw multi-column extraction interleaves
-> the fractions in Figure 13's four defining coordinates. The Theorem 2 and Theorem 3
+> ⚠️ **Two annotated source issues.** The raw multi-column extraction interleaves the
+> fractions in Figure 13's four defining coordinates. The Theorem 2 and Theorem 3
 > coordinate lists below were read directly from the rendered primary PDF, page 9.
+> The paper's middle numerical row for Lemma 4 is preserved below but followed by an
+> explicit algebraic correction.
 
 ---
 
@@ -67,6 +69,15 @@ We rely on these cases of Lemma 4:
 |------|:---:|:---:|:---:|
 | $f(a)$: | $.972$ | $.926$ | $.769$ |
 | $\theta^*$: | $39.5^\circ$ | $24.1^\circ$ | $17.7^\circ$ |
+
+> ⚠️ **Source erratum in the middle column.** For
+> $a=\sqrt{4/5}$, differentiating (3) before squaring requires
+> $(1-x)\sqrt{1-x^2}=(1+x)(a-x)$ with $x=\cos\theta$, hence $x\leq a$.
+> Squaring introduces the paper's smaller cubic root
+> $\theta\approx24.0788^\circ$, for which $\cos\theta>a$; it is extraneous.
+> The true minimum is at $\theta\approx31.45595^\circ$ with
+> $f(a)\approx0.9145377886$, not $.926$.
+> Theorem 2 is unaffected because its application uses $b=.9<f(a)$.
 
 > *[Figure 5: Proof of Lemma 4 -- not extractable from PDF]*
 

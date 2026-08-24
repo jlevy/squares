@@ -1,6 +1,6 @@
 # Synopsis: The `s(n)` Program
 
-**Date:** 2026-08-24 (last updated after terminal `series-000` round 13)
+**Date:** 2026-08-24 (last updated after terminal `series-000` round 15)
 
 **Status:** Living document, revised whenever a result lands.
 
@@ -38,8 +38,8 @@ Those principles govern four capabilities built so far:
    written before the run, a metric vector, an accept rule, a declared timebox, and a
    ledger generated from the artifacts rather than typed.
 4. **Account for what goes wrong.** A defect log with the same discipline as the
-   experiment record, because 30 of the 40 soundness failures found so far pointed in
-   the *flattering* direction and none was caught by the automated gate.
+   experiment record, because most soundness failures found so far pointed in the
+   *flattering* direction and none was caught by the automated gate.
 
 The strategy that organises lanes 3 and 4 is stated in
 [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md):
@@ -880,7 +880,7 @@ view; this section is the reading of it.
 | [H-007](campaign/hypotheses/H-007-saturation-curves.md) | blocked | Coverage models predict held-out component discovery | 0 | — |
 | [H-008](campaign/hypotheses/H-008-false-basin-rate.md) | blocked | The stronger-verifier rejection rate is measurable across `n` | 0 | — |
 | [H-009](campaign/hypotheses/H-009-symmetry-dedup-ratio.md) | blocked | Symmetry quotienting materially changes endpoint counts | 0 | — |
-| [H-010](campaign/hypotheses/H-010-stromquist-triple.md) | blocked | The Stromquist falsifier and certificate triple reproduces | 0 | — |
+| [H-010](campaign/hypotheses/H-010-stromquist-triple.md) | blocked | Stromquist’s five-node Theorem 2 mechanism reproduces | 0 | — |
 | [H-011](campaign/hypotheses/H-011-small-n-census.md) | blocked | The small-`n` landscape is censusable | 0 | — |
 | [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) | blocked | Record basins are rare in quench measure | 0 | — |
 | [H-013](campaign/hypotheses/H-013-delta-continuation.md) | blocked | Delta-continuation improves target-component arrival | 0 | — |
@@ -956,9 +956,12 @@ establish component membership for the perturbed trajectories.
 
 ### Blocked, and on what
 
-The priority-1 strategic claims are blocked on the measurement system around the quench:
+The priority-1 agenda has two independent bottlenecks.
+The basin lane is blocked on the measurement system around the quench:
 terminal-component identity, endpoint classification, event provenance, coverage
 estimation, independent validity, and a named proposer regime.
+The proof lane is blocked on a source-faithful executable reconstruction of Stromquist’s
+full conditional argument before it can target a new lower bound at `n=12`.
 
 - **[H-011](campaign/hypotheses/H-011-small-n-census.md)** (census at `n ≤ 10`) needs
   H-021’s classification evidence, event records, and a coverage estimator.
@@ -971,6 +974,10 @@ estimation, independent validity, and a named proposer regime.
   has a strong prior from `exp-006` but remains unmeasured as a *search* claim: the
   class-constrained arm assumed the answer’s own structure, so it shows the angle search
   method decides the outcome, not that an unguided method would find that structure.
+- **[H-010](campaign/hypotheses/H-010-stromquist-triple.md)** (Stromquist calibration)
+  needs all five source implications: ten-point localization, centerline-reflection
+  reduction, same-box A-triple forcing, Figure 14 unavoidability, and the finite 3+9
+  count. A failed numerical escape search does not discharge any of those obligations.
 
 **[H-017](campaign/hypotheses/H-017-budget-scaling.md)** (100× budget) stays open and
 demoted behind a short response curve.
@@ -1098,24 +1105,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 146 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 151 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 49 | asserted something false about the mathematics |
-| validity | 42 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 40 | recorded something its own evidence contradicts |
+| soundness | 51 | asserted something false about the mathematics |
+| validity | 44 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 41 | recorded something its own evidence contradicts |
 | robustness | 11 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Thirty-nine of the forty-nine soundness defects pointed in the *flattering*
-direction**, where the error looks like a success.
+**Forty-one of the fifty-one soundness defects pointed in the *flattering* direction**,
+where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught six defects in one hundred forty-six, and no soundness
+**The automated gate has caught six defects in one hundred fifty-one, and no soundness
 defect ever.** Every soundness failure was found by a control cell whose answer was
 known in advance, a rule written down before the measurement, a generated view
 contradicting its source, or someone reading carefully.
@@ -1204,7 +1211,7 @@ execution commits, including exp-011 and exp-013.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Fifty-five fixes left no regression check behind, and that list has already predicted a
+Sixty fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated

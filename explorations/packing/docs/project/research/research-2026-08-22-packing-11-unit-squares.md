@@ -409,6 +409,13 @@ Representative statements:
 - **Lemma 5.** A specialized statement about the pentagon with vertices `(1,0)`,
   `(1,1)`, `(2,1)`, `(2.12,0.9)`, `(2.12,0)`, needed for the `n = 10` argument.
 
+**A source-table correction.** Stromquist’s middle numerical row for Lemma 4 chooses the
+smaller root of a cubic obtained after squaring the stationarity equation.
+At `a = √(4/5)`, that root gives `θ ≈ 24.0788°` but violates the unsquared sign
+condition `cos θ ≤ a`. The true minimum is at `θ ≈ 31.45595°`, with
+`f(a) ≈ 0.9145377886`, rather than the printed `.926`. Theorem 2 still goes through
+because its application needs only `.9 < f(a)`.
+
 The 45°-restricted case (Theorem 3) exploits the fact that the projections of a 45° unit
 vector are at most 1, which brings the triangle lemmas into play in a stronger form
 (Lemmas 7 and 8); its counting stage is the same twelve-point, three-points-in-one-box

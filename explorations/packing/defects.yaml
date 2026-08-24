@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 146
+count: 151
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -2272,16 +2272,18 @@ defects:
   severity: high
   status: fixed
   what: >-
-    H-010 compressed Stromquist's argument into a ten-point escape followed by a
-    standalone twelve-point unavoidability claim. The theorem instead localizes an
-    avoiding square, forces that same square to contain three A-points, then uses nine
-    further points in a counting contradiction for eleven packed squares.
+    H-010 treated a ten-point escape and the genuine twelve-point Figure 14
+    unavoidability statement as the complete theorem. That omitted the conditional
+    mechanism: the ten points localize one avoiding box, and the proof forces that same
+    box to contain three of the twelve points before applying the 3+9 count.
   consequence: >-
     A tool could pass the registered known-answer control without reproducing the
     implication that makes the published lower bound work.
   fix: >-
     Rewrote H-010 around independently checked localization, forced cohabitation and
-    counting implications; numerical saturation remains censored rather than proof.
+    counting implications. That first correction still failed to register Figure 14
+    unavoidability explicitly and wrongly described it as nonexistent; D-148 records
+    and repairs the recurrence.
   regression: none
   bead: think-bvy9
   recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
@@ -3636,6 +3638,135 @@ defects:
     Read the four coordinates directly from rendered primary PDF page 9, corrected both
     theorem passages and the research report, and flagged the repaired transcription in
     the archive reconstruction table.
-  regression: none; think-bvy9 will bind the executable Figure 13 tuple before H-010 can run
+  regression: none
   bead: think-abdh
+  recorded_in: resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md
+- id: D-147
+  title: H-010 substituted unit squares for Stromquist's strict open boxes
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one registered proof hypothesis
+  severity: high
+  status: fixed
+  what: >-
+    The canonical H-010 claim localized a unit square. Stromquist's proof instead works
+    with open boxes of side strictly greater than one inside the exact container; the
+    strict relaxation carries the boundary argument from a hypothetical smaller
+    unit-square packing.
+  consequence: >-
+    A checker could certify a closed unit-square statement while missing a boundary case
+    needed by the published lower bound, then promote a result stronger than its actual
+    semantics.
+  fix: >-
+    H-010 now states the exact open-box regime, makes strict inequalities and boundary
+    cases part of its criterion, and permits a unit-square limiting computation only
+    after its monotone implication is proved explicitly.
+  regression: none
+  bead: think-fe8n
+  recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
+- id: D-148
+  title: The D-091 correction omitted genuine Figure 14 unavoidability
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one correction cycle
+  severity: high
+  status: fixed
+  what: >-
+    D-091 correctly restored localization and same-box A-triple forcing but H-010 did
+    not require a certificate that all twelve Figure 14 points are unavoidable. Its note
+    and the master review went further and called that genuine source statement
+    nonexistent.
+  consequence: >-
+    The registered proof DAG still lacked one premise of the counting contradiction,
+    while the correction log misreported what the primary paper proves.
+  fix: >-
+    Corrected D-091 and the living review, and made H-010's acceptance rule an explicit
+    five-node chain containing Figure 14 unavoidability as a necessary but insufficient
+    node.
+  regression: none
+  recurrence_of: D-091
+  bead: think-1vs7
+  recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
+- id: D-149
+  title: Search saturation was still presented as a Stromquist known-answer test
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: two planning revisions
+  severity: high
+  status: fixed
+  what: >-
+    Living plans and reviews said a falsifier should saturate or fail on the Figure 14
+    set. A continuous search that finds no escape can be incomplete, poorly conditioned,
+    or broken; its negative result does not validate either the search or the theorem.
+  consequence: >-
+    Weak search machinery could pass the proof lane's known-answer gate precisely by
+    failing to find a counterexample.
+  fix: >-
+    Positive escape witnesses remain falsifier controls. Negative conclusions now
+    require independently replayed exact or interval certificates for every proof node;
+    the historical review retains its original proposal under a dated erratum.
+  regression: none
+  bead: think-tk62
+  recorded_in: docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md
+- id: D-150
+  title: Active effort and priority views drifted after four exact research rounds
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: drift_check
+  latent_for: rounds exp-012 through exp-015
+  severity: medium
+  status: fixed
+  what: >-
+    The active overnight plan and campaign runbook retained eleven rounds, 275
+    agent-minutes, old gate timings, and inconsistent H-010 priority after the generated
+    ledger reached fifteen terminal rounds and 422 agent-minutes.
+  consequence: >-
+    An autonomous agent could choose work from an obsolete cost model, overlook the
+    proof lane's priority-one dependency, or optimize a gate profile that no longer
+    described the current system.
+  fix: >-
+    The campaign runbook now delegates cumulative totals to the generated ledger, the
+    active plan labels performance data as a dated checkpoint, and the synopsis and
+    H-010 artifact agree on round state and proof-lane priority.
+  regression: >-
+    The ledger generates cumulative effort and check_synopsis reconciles the synopsis;
+    duplicated plan measurements are explicitly dated rather than called current.
+  recurrence_of: D-086
+  bead: think-1bse
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-151
+  title: Stromquist's middle Lemma 4 table selected an extraneous cubic root
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: inspection
+  latent_for: twenty-three years in the primary source and two days in the local archive
+  severity: high
+  status: fixed
+  what: >-
+    At `a = sqrt(4/5)`, Stromquist's table reports `theta*=24.1 degrees` and
+    `f(a)=.926`. Squaring the stationarity equation introduces that smaller cubic root:
+    it has `cos(theta)>a` and violates the unsquared sign condition. The true minimum is
+    at about 31.45595 degrees with `f(a)=0.9145377886`.
+  consequence: >-
+    Trusting the printed threshold would certify Lemma 4 for some `b` between about
+    .91454 and .926 where the stated sufficient condition has not been established.
+    Theorem 2 itself survives because its application uses `b=.9`.
+  fix: >-
+    Preserved the printed row as source text, annotated the algebraic error in the clean
+    archive and research report, and require H-010 to select roots with the unsquared
+    sign condition and certify `.9 < f(a)` directly.
+  regression: none
+  bead: think-7nwj
   recorded_in: resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md

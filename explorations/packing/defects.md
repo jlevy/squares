@@ -2,14 +2,14 @@
 
 # Defect log
 
-146 defects recorded across the packing toolchain.
+151 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **49 soundness defects** — the system asserting something false about the mathematics. 39 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **55 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093).
+- **51 soundness defects** — the system asserting something false about the mathematics. 41 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **60 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086).
 - **24 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 8 | a cell of the sweep whose answer is known in advance |
-| `review` | 103 | a human or agent reading the work against a checklist |
+| `review` | 106 | a human or agent reading the work against a checklist |
 | `anomaly` | 6 | a result that made no sense, chased down |
-| `inspection` | 16 | reading the code or the design with intent |
-| `drift_check` | 4 | a generated view disagreeing with its source |
+| `inspection` | 17 | reading the code or the design with intent |
+| `drift_check` | 5 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 6 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 6 of 146, and none of the 49 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 6 of 151, and none of the 51 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,17 +34,17 @@ The line worth reading twice: **the automated gate caught 6 of 146, and none of 
 | engine | 9 |
 | quench | 13 |
 | verifier | 1 |
-| record | 39 |
+| record | 40 |
 | tooling | 37 |
-| docs | 47 |
+| docs | 51 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 49 |
-| validity | 42 |
-| bookkeeping | 40 |
+| soundness | 51 |
+| validity | 44 |
+| bookkeeping | 41 |
 | robustness | 11 |
 | performance | 4 |
 
@@ -110,6 +110,11 @@ This is the actionable list.
 | D-117 | The idea board again said a basin-width question had been answered | docs |
 | D-119 | A continuous angle sheet was required to have only one nearby grid point | record |
 | D-127 | The engineering review called its branch complete before its delta blockers were resolved | docs |
+| D-146 | The Stromquist Figure 13 transcription changed its defining point set | docs |
+| D-147 | H-010 substituted unit squares for Stromquist's strict open boxes | docs |
+| D-148 | The D-091 correction omitted genuine Figure 14 unavoidability | docs |
+| D-149 | Search saturation was still presented as a Stromquist known-answer test | docs |
+| D-151 | Stromquist's middle Lemma 4 table selected an extraneous cubic root | docs |
 
 ## Still open
 
@@ -290,3 +295,8 @@ This is the actionable list.
 | [D-144](tools/check_small_n_moduli.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | The orientation identity check compared two identical hard-coded tuples |
 | [D-145](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | bookkeeping |  | `review` | medium | fixed | A broad integration edit fixed the wrong defect record |
 | [D-146](resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md) | 2026-08-24 | docs | validity | flattering | `inspection` | high | fixed | The Stromquist Figure 13 transcription changed its defining point set |
+| [D-147](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | H-010 substituted unit squares for Stromquist's strict open boxes |
+| [D-148](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The D-091 correction omitted genuine Figure 14 unavoidability |
+| [D-149](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Search saturation was still presented as a Stromquist known-answer test |
+| [D-150](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | Active effort and priority views drifted after four exact research rounds |
+| [D-151](resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | high | fixed | Stromquist's middle Lemma 4 table selected an extraneous cubic root |

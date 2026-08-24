@@ -66,18 +66,19 @@ Visualization belongs to both Insight and Efficiency: the infrastructure must re
 atlas, ambiguity graph, discovery curve, and continuation tree, while the research work
 decides which views expose mechanisms rather than decorate a report.
 
-## Current measured state
+## Measured checkpoint — 2026-08-24
 
-Measured on the merged PR 15 baseline unless stated otherwise:
+This table is a dated planning checkpoint, not a generated current-status view.
+The campaign ledger owns cumulative round and effort totals.
 
 | Item | Current fact | Consequence |
 | --- | --- | --- |
 | Scientific registry | 40 artifacts: H-001 through H-040, including seven explicit open questions | The census spine now sits beside local geometry, construction, exact-value, algebraic and asymptotic lanes |
-| Recorded campaign | 11 rounds, 275 agent-minutes, 1,380.674 machine seconds (23.0 wall-minutes) | The historical loop is about 12:1 agent-bound |
+| Recorded campaign | [Generated ledger](../../../../campaign/ledger.md#effort): 15 terminal rounds, 422 agent-minutes, 24.0 wall-minutes at this checkpoint | The loop remains overwhelmingly agent-bound |
 | Operational runner queue | one H-017 cell, five seeds, recipe timebox 8h | “Queue nonempty” is not an overnight-readiness test |
 | Estimated H-017 runtime | 2.80h at 39.7M moves/s locally; 7.46h at the recorded 14.9M moves/s cloud rate | Target-host calibration is mandatory |
 | Fast checks | status 0.22–0.24s; preflight 0.12s; ledger 0.23s; schemas 1.60s; engine selftest 1.43s | Orientation and focused feedback are already cheap |
-| Normal gate | recent single runs 108–135s | Profile repeated samples before optimizing further |
+| Strict/deep gate | 40s after exp-015 on the recorded development host | Keep cheap focused checks in the inner loop; remeasure before optimizing the gate again |
 | Canonicalizer | 0.098s at `n=7`, 7.91s at `n=9` in one audit | Likely census bottleneck; confirm under `think-xzew` before redesign |
 
 The existing preflight is useful but not a launch decision.
@@ -140,7 +141,7 @@ be silently rerun as fresh hypotheses.
 
 | Priority | Artifact | Output | Boundary |
 | ---: | --- | --- | --- |
-| 1 | [H-010](../../../../campaign/hypotheses/H-010-stromquist-triple.md) | known escape, censored hard case, then independently checked PoseBox certificate | search saturation is never proof |
+| 1 | [H-010](../../../../campaign/hypotheses/H-010-stromquist-triple.md) | source-bound Figure 13 escape witness plus independently replayed localization, A-triple, Figure 14 unavoidability, and 3+9 count | open boxes have side `>1`; search saturation is never proof |
 | 1 | [H-026](../../../../campaign/hypotheses/H-026-trump-first-order-rigidity.md) / [H-022](../../../../campaign/hypotheses/H-022-trump-local-geometry.md) | **exp-013 complete:** 128/128 exact zero-cone certificates and finite-branch local isolation; next quantify a radius | feature counts and a smooth Jacobian decided neither rigidity nor isolation |
 | 2 | [H-006](../../../../campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md) | quantitative, refinement-stable dual support for candidate loci | discretized LP generates proof objects; it proves no bound |
 | 1 | [H-039](../../../../campaign/hypotheses/H-039-s12-proof-frontier.md) | checked improvement to the `s(12)` lower bound | H-010’s complete conditional mechanism is the known-answer gate |

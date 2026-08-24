@@ -1493,9 +1493,10 @@ Their absence is correctly recorded, but the research program has no acquisition
 cadence tied to decisions that depend on them.
 
 The lower-bound lane also lacks an end-to-end known-answer control.
-The repository knows what that control should be: a falsifier must find a pose escaping
-Stromquist’s ten-point set and must fail on the twelve-point set before interval proof
-is trusted.
+The repository knows what that control should be: a falsifier must replay a retained
+pose escaping Stromquist’s ten-point set, while independently checked certificates must
+establish localization, same-box A-triple forcing, Figure 14 unavoidability, and the
+finite 3+9 count. Failure to find an escape is censored search evidence, not a control.
 
 **Required artifact:** a property/differential suite and disagreement ledger; a dated
 source-retest job with impact-ranked acquisition routes; and a proof-lane control suite
@@ -1630,9 +1631,11 @@ the pose-space subdivision, interval bounds, and LP dual.
 A small independent checker replays the certificate; a later Lean checker can verify the
 same finite object.
 
-**Calibration.** Find the known escape from Stromquist’s ten-point set, distinguish the
-twelve-point set, and replay a published optimal case such as `n=10`, `13`, `22`, `33`,
-or `46`. Then target `n=12` at side 4 and restricted `m²-3` boundary layers.
+**Calibration.** Replay the known Figure 13 escape and certify every implication in
+Stromquist’s five-node conditional argument, including the genuine but insufficient
+Figure 14 unavoidability statement.
+Then replay a published optimal case such as `n=10`, `13`, `22`, `33`, or `46`, before
+targeting `n=12` at side 4 and restricted `m²-3` boundary layers.
 
 **Accept rule.** A new certified lower bound, a smaller published unavoidable set, or a
 strictly stronger relaxation on a known case.
@@ -1948,7 +1951,7 @@ claim.
 | F-42 | D-088 | The 29 July 2026 UnitSquare release replaces the stored `n=68,69` upper bounds; the release validation is cited but not claimed as independently re-run here |
 | F-43 | D-089 | `n=17` uses `0°`, `+39.8049589798°`, and `−36.6237863834°`, not symmetric `±40°` |
 | F-44 | D-090 | The primary `n=29` SVG is a six-angle-class counterexample candidate to H-024; effective angular rank replaces the universal small-class prior |
-| F-45 | D-091 | H-010 now reproduces Stromquist’s localization, forced-three-point cohabitation, and counting implications rather than a nonexistent standalone 12-point theorem |
+| F-45 | D-091, D-148 | The first correction still omitted the genuine Figure 14 unavoidability implication and miscalled it nonexistent; H-010 now registers the complete five-node argument |
 | F-46 | D-092 | The structured asymptotic record no longer attributes an explicit `10^-100` constant to Roth and Vaughan |
 | F-47 | D-093 | Contact canonicalization now preserves angle/wall/degree attributes through individualization, with a colored-`K3` regression |
 | F-48 | D-094, D-095 | The idea board has the correct `n=11` gap rank and no longer schedules refuted H-018 as a fresh experiment |

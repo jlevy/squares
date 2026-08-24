@@ -298,9 +298,11 @@ regenerated views together.
 
 This is still the right path for any round whose analysis is the work — a new refiner, a
 new probe, anything the recipe vocabulary cannot express.
-Ten of the eleven rounds so far went this way.
-All eleven total **275 agent-minutes and 23.0 wall-minutes**: this campaign’s cost has
-never been the compute, and the runner does not change that.
+The first eleven search and quench rounds used this watched path; later corpus and exact
+proof rounds use dedicated deterministic checkers.
+The generated [ledger](ledger.md#effort) owns the cumulative effort total: this
+campaign’s cost has so far been agent analysis rather than machine compute, and the
+runner does not change that.
 It removes the *waiting* from the rounds that are pure engine time, which is a smaller
 claim than it sounds and still the difference between one round a night and a queue
 draining while nobody is up.

@@ -60,7 +60,7 @@ them opens with a ⚠️ banner giving the count.
 
 | File stem | Annotated | Notes |
 | --- | --- | --- |
-| `stromquist-2003-packing-10-or-11-unit-squares` | 1 | Figure 13’s four defining coordinates were interleaved by the raw multi-column extraction and then reconstructed incorrectly. The Theorem 2 and Theorem 3 lists are now read directly from rendered PDF page 9 and explicitly flagged. |
+| `stromquist-2003-packing-10-or-11-unit-squares` | 2 | Figure 13’s four defining coordinates were interleaved by the raw multi-column extraction and then reconstructed incorrectly. The lists are now read directly from rendered PDF page 9. A second annotation preserves but corrects the paper’s own extraneous-root error in the middle Lemma 4 table. |
 | `erdos-graham-1975-on-packing-squares-with-equal-squares` | 17 | **Heavily damaged** 1975 typescript scan. The central theorem was *not extracted at all* — raw shows only `Theorem.` then `(1)` — and the transcription supplies the known `w(α) = Θ(α^{7/11})` as a flagged reconstruction. A reading aid, not a source. |
 | `compound-perfect-squared-squares-1303.0599` | 10 | Ten passages, nearly all **tables and matrices** scrambled by multi-column extraction. Do not cite its tables. |
 | `bentz-2016-optimal-packings-22-and-33` | 3 | Probable “Stromberg” → “Stromquist” correction and a reconstructed distance bound in Lemma 7. |

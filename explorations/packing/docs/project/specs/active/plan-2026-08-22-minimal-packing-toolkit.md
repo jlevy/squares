@@ -446,12 +446,16 @@ The certificate’s durable interface is JSON either way.
 
 - [ ] `PoseBox` scalar and `hits_all_poses(points, box)` — the hook, subdivision left to
   the caller. One worked example, no proof attempt.
-- [ ] **H-10 — the Stromquist falsifier triple.** A known-answer test: failure is a
-  machinery bug by definition.
+- [ ] **H-10 — Stromquist’s conditional-forcing reconstruction.** Bind both published
+  point sets, retain a positive Figure 13 escape witness, and independently replay all
+  five proof nodes: localization, centerline-reflection reduction, same-box A-triple
+  forcing, Figure 14 unavoidability, and the finite 3+9 count.
+  Search saturation proves nothing.
 - [ ] **H-6 — LP duals as unavoidable-set generators** at side 4 for `n = 12`.
 
-**Done when:** the falsifier reproduces Stromquist’s two-stage result and the dual
-support at side 4 has been characterised.
+**Done when:** the source-faithful certificate reproduces Stromquist’s open-box theorem,
+the independent replay rejects a mutation of every proof node, and the dual support at
+side 4 has been characterised.
 
 ### Phase 7: The LLM lanes
 
