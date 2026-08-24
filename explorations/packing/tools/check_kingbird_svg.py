@@ -37,7 +37,7 @@ TRANSFORM_RE = re.compile(r"([A-Za-z]+)\s*\(([^)]*)\)")
 NUMBER_RE = re.compile(r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?")
 PATH_TOKEN_RE = re.compile(r"[A-Za-z]|[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?")
 
-DECIMAL_DIGITS = 110
+DECIMAL_DIGITS = 160
 ZERO_TOLERANCE = mp.mpf("1e-80")
 ANGLE_MATCH_TOLERANCE_DEGREES = mp.mpf("1e-70")
 ANGLE_INTERVAL_RADIUS_DEGREES = mp.mpf("1e-90")
@@ -89,6 +89,18 @@ def rotate(degrees):
     radians = mp.radians(degrees)
     cosine, sine = mp.cos(radians), mp.sin(radians)
     return (cosine, sine, -sine, cosine, mp.mpf(0), mp.mpf(0))
+
+
+def rotate_vector(degrees, point):
+    return apply(rotate(degrees), point)
+
+
+def vector_sum(*vectors):
+    return sum(vector[0] for vector in vectors), sum(vector[1] for vector in vectors)
+
+
+def vector_difference(left, right):
+    return left[0] - right[0], left[1] - right[1]
 
 
 def parse_transform(value: str | None):
@@ -313,6 +325,145 @@ def pair_separation_margin(first, second):
     return max(margins)
 
 
+def source_equation_residuals(entities):
+    """Recompute every derived offset and defining equation in the SVG comment."""
+    s = entities["s"]
+    a, b, c, d, i = (entities[name] for name in ("a", "b", "c", "d", "i"))
+
+    def sin(degrees):
+        return mp.sin(mp.radians(degrees))
+
+    def cos(degrees):
+        return mp.cos(mp.radians(degrees))
+
+    derived = {}
+    derived["r1"] = (s - 5) * sin(a)
+    derived["r2"] = 1 - (s - 5) * cos(b)
+    derived["r3"] = (
+        vector_sum((s - 1, mp.mpf(3)), rotate_vector(-c, (-1, 1)))[1] - (s - 2)
+    ) / cos(c)
+    derived["r4"] = (
+        vector_sum((s - 3, mp.mpf(1)), rotate_vector(a, (1 - (s - 5) * cos(a), 0)))[1] - 1
+    ) / cos(d)
+    derived["r5"] = (
+        (s - 1)
+        - vector_sum(
+            (mp.mpf(2), mp.mpf(1)),
+            rotate_vector(a, (1, -derived["r1"])),
+            rotate_vector(d, (1, -derived["r4"])),
+            rotate_vector(d, (1, 0)),
+        )[0]
+    ) / sin(d)
+    derived["r8"] = 2 - rotate_vector(-b, (4 - s, 1))[1]
+    derived["rB"] = -vector_sum((s - 2, s - 2), rotate_vector(b, (-4, 1 - derived["r8"])))[
+        0
+    ] / sin(b)
+    derived["rC"] = (
+        1
+        - rotate_vector(
+            -i,
+            vector_difference(
+                vector_sum(
+                    (s - 2, s - 2),
+                    rotate_vector(b, (-3, -derived["r8"] - derived["rB"])),
+                ),
+                (mp.mpf(1), mp.mpf(2)),
+            ),
+        )[1]
+    )
+    derived["rD"] = rotate_vector(
+        -b,
+        vector_difference(
+            vector_sum(
+                (mp.mpf(2), mp.mpf(1)),
+                rotate_vector(a, (1, 1 - derived["r1"])),
+            ),
+            vector_sum(
+                (mp.mpf(1), mp.mpf(2)),
+                rotate_vector(i, (1, -derived["rC"])),
+            ),
+        ),
+    )[1] / cos(i - b)
+
+    r1, r4, r5 = (entities[name] for name in ("r1", "r4", "r5"))
+    r8, _r_b, r_c, r_d = (entities[name] for name in ("r8", "rB", "rC", "rD"))
+    upper_middle = vector_sum(
+        (mp.mpf(1), mp.mpf(2)),
+        rotate_vector(i, (1, -r_c + r_d)),
+        rotate_vector(b, (2, 0)),
+    )
+    f1 = rotate_vector(
+        -a,
+        vector_difference(
+            vector_sum((mp.mpf(1), mp.mpf(2)), rotate_vector(i, (1, -r_c))),
+            vector_sum((mp.mpf(2), mp.mpf(1)), rotate_vector(a, (0, 1 - r1))),
+        ),
+    )[1]
+    f2 = rotate_vector(
+        -d,
+        vector_difference(
+            upper_middle,
+            vector_sum(
+                (mp.mpf(2), mp.mpf(1)),
+                rotate_vector(a, (1, -r1)),
+                rotate_vector(d, (1, -r4)),
+                rotate_vector(d, (0, 1 - r5)),
+            ),
+        ),
+    )[1]
+    f3 = rotate_vector(
+        -b,
+        vector_difference(
+            upper_middle,
+            vector_sum(
+                (mp.mpf(2), mp.mpf(1)),
+                rotate_vector(a, (1, -r1)),
+                rotate_vector(d, (1, 1 - r4)),
+            ),
+        ),
+    )[1]
+    f4 = rotate_vector(
+        -b,
+        vector_difference(
+            vector_sum((s - 1, mp.mpf(3)), rotate_vector(-c, (-1, -entities["r3"]))),
+            upper_middle,
+        ),
+    )[0]
+    f5 = rotate_vector(
+        -b,
+        vector_difference(
+            vector_sum((s - 2, s - 2), rotate_vector(b, (-1, -r8))),
+            vector_sum(
+                (mp.mpf(1), mp.mpf(2)),
+                rotate_vector(i, (1, -r_c + r_d)),
+                rotate_vector(b, (0, 1)),
+            ),
+        ),
+    )[1]
+    f6 = (
+        rotate_vector(
+            c,
+            vector_difference(
+                (s - 1, mp.mpf(3)),
+                vector_sum((s - 2, s - 2), rotate_vector(b, (0, -r8))),
+            ),
+        )[0]
+        - 1
+    )
+    offset_errors = {name: derived[name] - entities[name] for name in derived}
+    equation_residuals = dict(
+        zip(("f1", "f2", "f3", "f4", "f5", "f6"), (f1, f2, f3, f4, f5, f6), strict=True)
+    )
+    maximum_offset_error = max(abs(value) for value in offset_errors.values())
+    maximum_equation_residual = max(abs(value) for value in equation_residuals.values())
+    if maximum_offset_error > ZERO_TOLERANCE or maximum_equation_residual > ZERO_TOLERANCE:
+        raise ValueError(
+            "source equations exceed the declared serialization tolerance: "
+            f"offset={maximum_offset_error}, equation={maximum_equation_residual}"
+        )
+    return maximum_offset_error, maximum_equation_residual
+
+
 def run_selftests(squares, side) -> dict[str, bool]:
     composition = parse_transform("translate(2 1) rotate(90) translate(1)")
     x, y = apply(composition, (mp.mpf(0), mp.mpf(0)))
@@ -358,6 +509,7 @@ def build_result(source: Path) -> dict:
     if not report.valid:
         raise ValueError(f"source reconstruction failed validity:\n{report}")
     expected, counts, _observed, minimum_angle_gap = classify_angles(squares, entities)
+    maximum_offset_error, maximum_equation_residual = source_equation_residuals(entities)
     pair_margins = [
         pair_separation_margin(squares[left], squares[right])
         for left in range(len(squares))
@@ -395,7 +547,26 @@ def build_result(source: Path) -> dict:
             "strict_pairs": report.strict_pairs,
             "container_contacts_within_tolerance": report.container_contacts,
             "minimum_pair_separation_margin": decimal_string(min(pair_margins), 30),
+            "smallest_strict_pair_separation": decimal_string(
+                min(margin for margin in pair_margins if margin > ZERO_TOLERANCE), 30
+            ),
             "minimum_container_margin": decimal_string(min(container_margins), 30),
+        },
+        "source_equations": {
+            "derived_offsets_checked": [
+                "r1",
+                "r2",
+                "r3",
+                "r4",
+                "r5",
+                "r8",
+                "rB",
+                "rC",
+                "rD",
+            ],
+            "defining_equations_checked": ["f1", "f2", "f3", "f4", "f5", "f6"],
+            "maximum_offset_discrepancy": decimal_string(maximum_offset_error, 30),
+            "maximum_equation_residual": decimal_string(maximum_equation_residual, 30),
         },
         "orientation_rule": {
             "quotient_degrees": 90,
