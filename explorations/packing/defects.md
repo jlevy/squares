@@ -2,15 +2,15 @@
 
 # Defect log
 
-159 defects recorded across the packing toolchain.
+160 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **55 soundness defects** — the system asserting something false about the mathematics. 45 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **60 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059).
-- **25 are still open** (outstanding or contained), every one carrying a bead.
+- **60 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145).
+- **24 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -21,11 +21,11 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `review` | 111 | a human or agent reading the work against a checklist |
 | `anomaly` | 6 | a result that made no sense, chased down |
 | `inspection` | 19 | reading the code or the design with intent |
-| `drift_check` | 6 | a generated view disagreeing with its source |
+| `drift_check` | 7 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 6 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 6 of 159, and none of the 55 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 6 of 160, and none of the 55 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 6 of 159, and none of 
 | engine | 9 |
 | quench | 13 |
 | verifier | 4 |
-| record | 42 |
+| record | 43 |
 | tooling | 38 |
 | docs | 53 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 6 of 159, and none of 
 | --- | ---: |
 | soundness | 55 |
 | validity | 45 |
-| bookkeeping | 42 |
+| bookkeeping | 43 |
 | robustness | 13 |
 | performance | 4 |
 
@@ -114,7 +114,7 @@ This is the actionable list.
 | D-147 | H-010 substituted unit squares for Stromquist's strict open boxes | docs |
 | D-148 | The D-091 correction omitted the published Figure 14 unavoidability claim | docs |
 | D-149 | Search saturation was still presented as a Stromquist known-answer test | docs |
-| D-151 | Stromquist's middle Lemma 4 table selected an extraneous cubic root | docs |
+| D-160 | A broad H-010 integration patch updated D-002 instead of D-151 | record |
 
 ## Still open
 
@@ -144,7 +144,6 @@ This is the actionable list.
 | D-129 | outstanding | medium | Negative-control checker processes have no bounded timeout or child cleanup | `think-cns0` |
 | D-132 | outstanding | high | Fixed-cell iteration returns capped states without a settlement result | `think-9qz0` |
 | D-139 | contained | high | H-032 omitted directly relevant hard-square configuration-space literature | `think-izep` |
-| D-152 | outstanding | critical | Stromquist's printed Figure 14 point set admits an escaping box | `think-bv1d` |
 
 ## Every defect
 
@@ -301,7 +300,7 @@ This is the actionable list.
 | [D-149](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Search saturation was still presented as a Stromquist known-answer test |
 | [D-150](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | Active effort and priority views drifted after four exact research rounds |
 | [D-151](resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | high | fixed | Stromquist's middle Lemma 4 table selected an extraneous cubic root |
-| [D-152](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | critical | outstanding | Stromquist's printed Figure 14 point set admits an escaping box |
+| [D-152](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | critical | fixed | Stromquist's printed Figure 14 point set admits an escaping box |
 | [D-153](frontier/source-availability.yaml) | 2026-08-24 | docs | bookkeeping |  | `inspection` | high | fixed | The source ledger called three directly hosted 1984 Stromquist memoranda unavailable |
 | [D-154](tools/check_stromquist_theorem2.py) | 2026-08-24 | verifier | soundness | flattering | `review` | high | fixed | The first H-010 checker draft treated unchecked polynomials as exact fields |
 | [D-155](tools/check_stromquist_theorem2.py) | 2026-08-24 | record | robustness |  | `review` | medium | fixed | The first H-010 record draft retained raw platform floating-point diagnostics |
@@ -309,3 +308,4 @@ This is the actionable list.
 | [D-157](tools/check_stromquist_repair.py) | 2026-08-24 | verifier | soundness | flattering | `review` | high | fixed | The first H-041 Lemma 6 replay squared inequalities without executable sign guards |
 | [D-158](tools/check_stromquist_repair.py) | 2026-08-24 | record | validity | flattering | `review` | medium | fixed | The first H-041 record blurred runtime source checks with unattached extraction hashes |
 | [D-159](resources/README.md) | 2026-08-24 | tooling | robustness |  | `drift_check` | medium | fixed | Scanned archive PDFs were misclassified as text by Git |
+| [D-160](defects.yaml) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | A broad H-010 integration patch updated D-002 instead of D-151 |

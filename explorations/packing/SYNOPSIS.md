@@ -357,7 +357,7 @@ Where the program has spent effort, and what came of it.
 | 5 | proved, `2 + ½√2` | `2.70710678…` | positive control | `sqsearch --selftest` recovers it on every run. [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md): the bracketing quench refines annealer output to `2.22e-15`—the analytic value to machine precision |
 | 8 | proved, `3` | `3` | census kill line | The `n` at which [H-011](campaign/hypotheses/H-011-small-n-census.md)’s discovery curve must plateau, or enumeration is abandoned. No rounds |
 | **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Four rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); angle descent barely helps; [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`—**twelve orders** |
-| **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); seven rounds. Search remains `≈ 6e-02` short, but exp-013 proves Trump’s exact pose is locally isolated and a strict local side minimum in the anchored pose–side chart |
+| **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**) and the corner at its optimum (**T-3**); eight rounds. Search remains `≈ 6e-02` short, exp-013 proves Trump’s exact pose is locally isolated, and exp-016 exactly rejects Stromquist’s printed lower-bound proof without refuting the bound itself |
 | **12** | open; `4` believed optimal | `4` | **open-case calibration** | Two rounds. Returns exactly `4.0` on all five seeds, which is baseline evidence rather than a known-answer guard. Also where the search and proof lanes are planned to meet |
 | 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
 | 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) returns **exactly `5.0`**, the trivial `5×5` grid, on all five seeds |
@@ -415,8 +415,8 @@ listed here so the dependencies of this program are explicit.
 - **`s(11) ≥ 2 + 4/√5`**, Stromquist 2003, Theorem 2. D-152 identifies a strict
   counterexample to the printed Figure 14 unavoidability claim, so the published proof
   is not currently relied on as complete.
-  H-010 retains and tests that source-faithful chain; H-041 preregisters a nearby
-  repaired point set.
+  Exp-016 exactly replays that counterexample and rejects H-010’s source-faithful chain;
+  H-041 is the separately preregistered, source-distinct repaired point set.
 - **`s(11) ≤ 3.877083590022814…`**, Trump 1979, by construction.
   Every upper bound in this subject is a construction; no non-constructive upper bound
   has ever been obtained.
@@ -890,7 +890,7 @@ view; this section is the reading of it.
 | [H-007](campaign/hypotheses/H-007-saturation-curves.md) | blocked | Coverage models predict held-out component discovery | 0 | — |
 | [H-008](campaign/hypotheses/H-008-false-basin-rate.md) | blocked | The stronger-verifier rejection rate is measurable across `n` | 0 | — |
 | [H-009](campaign/hypotheses/H-009-symmetry-dedup-ratio.md) | blocked | Symmetry quotienting materially changes endpoint counts | 0 | — |
-| [H-010](campaign/hypotheses/H-010-stromquist-triple.md) | open | Stromquist’s five-node Theorem 2 mechanism reproduces | 0 | — |
+| [H-010](campaign/hypotheses/H-010-stromquist-triple.md) | **refuted** | Stromquist’s five-node Theorem 2 mechanism reproduces | 1 | 180m agent, 0.55s wall |
 | [H-011](campaign/hypotheses/H-011-small-n-census.md) | blocked | The small-`n` landscape is censusable | 0 | — |
 | [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) | blocked | Record basins are rare in quench measure | 0 | — |
 | [H-013](campaign/hypotheses/H-013-delta-continuation.md) | blocked | Delta-continuation improves target-component arrival | 0 | — |
@@ -917,7 +917,7 @@ view; this section is the reading of it.
 | [H-038](campaign/hypotheses/H-038-record-number-fields.md) | open question | Which exact fields and elimination mechanisms occur in verified records? | 0 | — |
 | [H-039](campaign/hypotheses/H-039-s12-proof-frontier.md) | open question | Can the lower bound for `s(12)` be improved and ultimately closed at four? | 0 | — |
 | [H-040](campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | blocked | Active-cell neighbor walks beat multistart in new verified cells per LP solve | 0 | — |
-| [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | blocked | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 0 | — |
+| [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | open | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 0 | — |
 
 ### Confirmed
 
@@ -971,8 +971,9 @@ The priority-1 agenda has two independent bottlenecks.
 The basin lane is blocked on the measurement system around the quench:
 terminal-component identity, endpoint classification, event provenance, coverage
 estimation, independent validity, and a named proposer regime.
-The proof lane is blocked on a source-faithful executable reconstruction of Stromquist’s
-full conditional argument before it can target a new lower bound at `n=12`.
+The proof lane has now falsified Stromquist’s printed certificate and made a complete
+source-distinct repair executable; that repair is the remaining calibration before the
+same architecture can target a new lower bound at `n=12`.
 
 - **[H-011](campaign/hypotheses/H-011-small-n-census.md)** (census at `n ≤ 10`) needs
   H-021’s classification evidence, event records, and a coverage estimator.
@@ -986,12 +987,12 @@ full conditional argument before it can target a new lower bound at `n=12`.
   class-constrained arm assumed the answer’s own structure, so it shows the angle search
   method decides the outcome, not that an unguided method would find that structure.
 - **[H-010](campaign/hypotheses/H-010-stromquist-triple.md)** (Stromquist calibration)
-  now has an explicit candidate escape from the printed Figure 14 set.
-  It must certify that witness and terminally reject the source-faithful five-node claim
-  rather than editing the claim after observation.
+  is terminally refuted by exp-016. An exact strict box avoids every printed Figure 14
+  point, so the five-node conjunction fails at its fourth node.
+  The result rejects the published proof as printed, not the numerical lower bound.
 - **[H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md)** (proof repair)
-  moves only `G.x` from `.8` to `.79`. It remains blocked until H-010 is terminal and a
-  complete repaired face cover—not merely rejection of the known escape—is encoded.
+  moves only `G.x` from `.8` to `.79`. H-010 is terminal and the complete exact repaired
+  face-cover instrument is ready; merely rejecting the known escape cannot accept it.
 
 **[H-017](campaign/hypotheses/H-017-budget-scaling.md)** (100× budget) stays open and
 demoted behind a short response curve.
@@ -1004,12 +1005,12 @@ current criterion and kill rule.
 
 ## Experiments Conducted
 
-There are 15 rounds registered in `series-000`; all are terminal.
-They record 422 agent-minutes and 24.0 wall-minutes.
+There are 16 rounds registered in `series-000`; all are terminal.
+They record 602 agent-minutes and 24.0 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
-SVG reconstruction, the exact Trump linearized-cone checker, and the exact small-moduli
-checker.
+SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
+checker, and the exact Stromquist printed-set falsifier.
 
 No search round has been run at the `exact` tier, so **no result below claims a new
 record**. Exp-012 is an exploratory reconstruction of a published record witness; its
@@ -1037,6 +1038,7 @@ archive beside it.
 | [exp-013](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | 11 | target | H-026 | exact branchwise linearization | 128/128 exact zero-cone certificates | **accepted** |
 | [exp-014](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) | 3 | positive control | H-032 | exact configuration space | two labelled circles → one quotient interval | **accepted** |
 | [exp-015](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | 4 | positive control | H-032 | exact configuration space | 24 labelled points → one quotient point | **accepted** |
+| [exp-016](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md) | 11 | proof calibration | H-010 | exact source-bound falsifier | strict side `1.0001` box avoids all 12 printed points | **rejected** |
 
 ### Cost and provenance
 
@@ -1057,8 +1059,9 @@ archive beside it.
 | exp-013 | 512 raw branches | 57.308 s | 100 m | criterion | `faba023` |
 | exp-014 | 64 raw separation branches | 0.63 s | 30 m | criterion | `257cb0d` |
 | exp-015 | 4,096 raw separation branches | 0.65 s | 5 m | criterion | `257cb0d` |
+| exp-016 | exact printed-set escape + replay | 0.55 s | 180 m | criterion | `178fc6b` |
 
-### What the fifteen rounds jointly establish
+### What the sixteen rounds jointly establish
 
 **The instrument works on the proved positive controls.** They now resolve to machine
 precision under the bracketing quench.
@@ -1082,6 +1085,12 @@ Exp-015 proves that `F_4(2)` is 24 isolated labelled grids and both declared quo
 are one point. Arbitrary rotations add no side-2 configurations in either case.
 Generation plus complete replay costs 1.28 wall seconds, so both controls belong in
 every gate. H-032 remains open at `n = 5,6`.
+
+**The published `n = 11` lower-bound proof is false as printed.** Exp-016 exactly
+certifies an open box of side `10001/10000` that fits Stromquist’s claimed container and
+strictly avoids all twelve printed Figure 14 points.
+This rejects the registered five-node H-010 conjunction but not the numerical lower
+bound itself; H-041 owns the source-distinct repair.
 
 **The tested class-bracketing refiner separates the proved controls from the target.**
 It takes the tested `n = 5` and `n = 10` starts to `1e-15` and leaves the tested
@@ -1119,14 +1128,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 159 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 160 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 55 | asserted something false about the mathematics |
 | validity | 45 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 42 | recorded something its own evidence contradicts |
+| bookkeeping | 43 | recorded something its own evidence contradicts |
 | robustness | 13 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
 
@@ -1136,7 +1145,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught six defects in one hundred fifty-nine, and no soundness
+**The automated gate has caught six defects in one hundred sixty, and no soundness
 defect ever.** Every soundness failure was found by a control cell whose answer was
 known in advance, a rule written down before the measurement, a generated view
 contradicting its source, or someone reading carefully.
@@ -1219,7 +1228,7 @@ vocabulary that could not record the H-024 result, the omitted `n=29` source pro
 that the falsifier exposed, the roll-up’s obsolete blanket claim about exploratory
 record evidence, the distinction between a branch linearization and a true Bouligand
 motion, and a certificate replay that did not require one-to-one branch coverage.
-The next tranche, D-139 through D-159, records the missing hard-square topology
+The next tranche, D-139 through D-160, records the missing hard-square topology
 literature, a stale closed-family contact claim, exact-moduli integration errors,
 Stromquist source transcription and proof-chain mistakes, stale campaign effort, the
 paper’s extraneous Lemma 4 root, and the escaping Figure 14 box.
@@ -1230,6 +1239,8 @@ D-156 through D-158 close tiling-containment, sign-preservation, and provenance-
 gaps in the H-041 repair checker before any H-041 evidence could land.
 D-159 keeps immutable scanned PDFs out of Git’s text-whitespace path while preserving
 strict whitespace checks for the associated hand-written reading aids.
+D-160 records a D-145 recurrence caught in this round’s own diff: a broad scalar match
+attached H-010’s regression text to D-002 before an ID-scoped correction restored both.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).

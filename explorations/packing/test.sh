@@ -139,9 +139,11 @@ step_trump_linearized_cones() {
 }
 
 step_stromquist_h010_exact_rejection() {
-  # Non-record mode rebuilds both exact escape witnesses and runs every mutation
-  # control. A refuted printed Figure 14 cover is the expected successful verdict.
-  $PY tools/check_stromquist_theorem2.py
+  # Rebuild the source-bound exact escape, run every mutation control, and require the
+  # retained terminal H-010 evidence to match. A refuted printed Figure 14 cover is the
+  # expected successful verdict; the numerical lower bound is a separate claim.
+  $PY tools/check_stromquist_theorem2.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-016-h-010-stromquist-printed-figure14.json
 }
 
 step_stromquist_h041_exact_repair() {

@@ -18,7 +18,7 @@
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 15 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 16 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -33,7 +33,7 @@
 | H-007 | blocked | search | For a fixed proposer, quench, and terminal-component relation, indepen | n: 5 6 7 8 9 10 11 | 0 |  |
 | H-008 | blocked | search | Under the declared search and refinement pipeline, the rate at which e | n: 5 6 7 8 9 10 11 12 17 | 0 |  |
 | H-009 | blocked | search | D4 and square-relabel canonicalization merges at least 10 percent of r | n: 3 5 6 7 8 9 10 11 | 0 |  |
-| H-010 | open | proof | At s = 2 + 4/sqrt(5), a checked reconstruction reproduces all five imp | n: 11 | 0 |  |
+| H-010 | refuted | proof | At s = 2 + 4/sqrt(5), a checked reconstruction reproduces all five imp | n: 11* | 1 | 180m agent + 1s wall |
 | H-011 | blocked | search | Under a versioned proposer P, deterministic quench Q, and terminal-com | n: 5 6 7 8 9 10 | 0 |  |
 | H-012 | blocked | search | Under one versioned raw-coordinate multistart proposal P, deterministi | n: 10 11 | 0 |  |
 | H-013 | blocked | search | Tracking feasible configurations through a fixed-side projection famil | n: 10 11 | 0 |  |
@@ -64,11 +64,11 @@
 | H-038 | open question | proof | Which algebraic number fields, minimal-polynomial degrees, Galois grou |  | 0 |  |
 | H-039 | open question | proof | Can a checked extension of Stromquist's conditional forcing or another |  | 0 |  |
 | H-040 | blocked | search | After a known-answer n = 5 control, pivoting across one active separat | n: 5 10 | 0 |  |
-| H-041 | blocked | proof | At s = 2 + 4/sqrt(5), replacing the printed Figure 14 point G = (4/5,  | n: 11 | 0 |  |
+| H-041 | open | proof | At s = 2 + 4/sqrt(5), replacing the printed Figure 14 point G = (4/5,  | n: 11 | 0 |  |
 
 ## Rounds
 
-### rejected (8)
+### rejected (9)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -80,6 +80,7 @@
 | exp-009 | series-000 | 11 | claude-opus-5 | H-002 | Refutes H-002 on this cell: the median gap improves only from 8.85e-02 to 6.29e-02, against machine precision at n = 5 and n = 10. The tested starts remain far from the target after this local procedure; no terminal-component relation was measured. |
 | exp-011 | series-000 | 17 | claude-opus-5 | H-020 | The criterion was measured and missed: n=17 +3.245e-01, against the 1e-04 H-020 declared. The claim is refuted for these cells and this regime. |
 | exp-012 | series-000 | 29 | openai-codex | H-024 | The reconstructed, numerically valid n = 29 witness has six unambiguous orientation classes, exceeding H-024's preregistered upper bound of three and refuting the universal corpus claim at its first stop cell. |
+| exp-016 | series-000 | 11 | openai-codex | H-010 | The printed Figure 14 set is avoidable, so node four and therefore the five-node conjunction fail; this rejects the proof as printed, not the numerical lower bound. |
 
 ### accepted (7)
 
@@ -95,5 +96,5 @@
 
 ## Effort
 
-15 rounds, 422 agent-minutes, 24.0 wall-minutes.
+16 rounds, 602 agent-minutes, 24.0 wall-minutes.
 

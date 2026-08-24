@@ -398,8 +398,9 @@ The paper explicitly says Figure 14 has slack, and the vector partition supports
 diagnosis: moving only `G.x` from `.8` to `.79` makes the failed inequality strict,
 preserves the other outer-cell inequalities, and leaves all thirteen interior triangle
 edges shorter than one.
-H-010 retains the original claim for terminal rejection; H-041 preregisters that repair
-and requires a complete independent cover before the lower bound is promoted again.
+Exp-016 terminally rejects the original H-010 claim by exact retained replay.
+H-041 preregisters that repair and requires a complete independent cover before the
+lower bound is promoted again.
 
 **Theorem 3 has exactly the same shape** — ten points as in the first figure but at the
 new `s`, the 45°-strengthened Lemma 7 forcing an escaping box into a known position, and

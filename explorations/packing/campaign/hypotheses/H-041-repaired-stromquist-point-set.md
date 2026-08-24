@@ -21,10 +21,12 @@ hypothesis:
     metric: complete independently replayed finite cover and five-node implication chain
     direction: every cover cell, strict inequality, conditional triple, and capacity implication certifies
   instrument: >-
-    The H-010 exact checker with a source-distinct repaired Figure 14 tuple, a complete
-    face-to-lemma cover, exact or outward-rounded inequality certificates, explicit
-    uncovered-cell witnesses, a finite resource-count checker, and independent replay.
-  instrument_ready: false
+    tools/check_stromquist_repair.py binds the source-distinct repaired Figure 14 tuple,
+    exactly tiles the Figure 13 and Figure 14 center spaces, certifies every lemma
+    premise and boundary, checks the finite resource count, and regenerates the complete
+    retained record. Its mutation suite removes cells and edges, restores the printed
+    failing point, changes thresholds and capacity, and corrupts source scope.
+  instrument_ready: true
   regime: >-
     Stromquist's exact Figure 13 geometry and strict open-box semantics at
     s = 2 + 4/sqrt(5), with only G moved from x = 4/5 to x = 79/100 in Figure 14
@@ -39,7 +41,8 @@ hypothesis:
     This is a post-falsification successor, not a correction silently attributed to
     Stromquist. Defeating the known H-010 escape witness is necessary but insufficient:
     acceptance requires the complete repaired unavoidability cover and the other four
-    proof nodes. Any uncovered pose rejects the claim.
+    proof nodes. Any uncovered pose rejects the claim. Exact exhaustive coverage, not a
+    failed numerical escape search, decides the result.
 ---
 # H-041 — test the smallest visible repair
 
@@ -52,10 +55,10 @@ This claim was registered after finding the printed-set witness and before check
 repaired cover. It therefore tests a new construction; it does not rescue H-010’s
 source-faithful claim after the fact.
 
-The checker must search for a fresh escape and certify every face in the reconstructed
-Figure 14 partition.
-Passing the one witness that killed H-010 is not evidence that the new set is
-unavoidable.
+The checker must certify every face in the reconstructed Figure 13 and Figure 14
+partitions. A fresh escape would refute the proposal, but failure to find one is not
+evidence; only the complete exact cover can accept H-041. Passing the one witness that
+killed H-010 is likewise insufficient.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 159
+count: 160
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3770,7 +3770,10 @@ defects:
     Preserved the printed row as source text, annotated the algebraic error in the clean
     archive and research report, and require H-010 to select roots with the unsquared
     sign condition and certify `.9 < f(a)` directly.
-  regression: none
+  regression: >-
+    The H-010 exact checker rejects the extraneous squared-cubic root, certifies every
+    accepted stationary root against the unsquared condition, and is replayed from the
+    retained exp-016 record in the strict gate.
   bead: think-7nwj
   recorded_in: resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md
 - id: D-152
@@ -3782,7 +3785,7 @@ defects:
   detected_by: inspection
   latent_for: twenty-three years in the primary source and two days in the local archive
   severity: critical
-  status: outstanding
+  status: fixed
   what: >-
     The paper says nonavoidance lemmas cover every Figure 14 region, but the outer
     quadrilateral adjacent to `A1=(1,.9)` and `G=(.8,1.85)` has Lemma 4 parameters
@@ -3795,12 +3798,16 @@ defects:
     unsound. This does not by itself refute the lower-bound theorem: the paper says the
     second figure has slack, and a nearby repaired point set may close the gap.
   fix: >-
-    Preserve H-010 as the source-faithful claim and reject it only after exact retained
-    replay. Test the source-distinct one-coordinate repair under preregistered H-041,
-    with a complete finite cover rather than merely blocking this witness.
-  regression: none
+    Preserved H-010 as the source-faithful claim and rejected it in exp-016 after exact
+    retained replay of the strict witness and printed source tuple. The numerical lower
+    bound remains a separate question; the preregistered source-distinct H-041 repair
+    must pass a complete finite cover rather than merely block this witness.
+  regression: >-
+    The strict gate regenerates and replays exp-016, including the exact source hashes,
+    all twelve avoidance signs, the failing Lemma 4 cell, and a left-shift mutation that
+    makes the witness container-infeasible.
   bead: think-bv1d
-  recorded_in: campaign/hypotheses/H-010-stromquist-triple.md
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md
 - id: D-153
   title: The source ledger called three directly hosted 1984 Stromquist memoranda unavailable
   date: '2026-08-24'
@@ -3980,3 +3987,28 @@ defects:
     remain identical to the source manifests, and `git diff --cached --check` passes.
   bead: think-7fz7
   recorded_in: resources/README.md
+- id: D-160
+  title: A broad H-010 integration patch updated D-002 instead of D-151
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  detected_by: drift_check
+  latent_for: one uncommitted integration diff
+  severity: medium
+  status: fixed
+  what: >-
+    A patch intended to replace D-151's generic `regression: none` matched the first
+    identical scalar in the file and attached the H-010 root-replay text to D-002. The
+    intended D-151 field remained unchanged.
+  consequence: >-
+    The log would have falsely claimed that an exact Stromquist checker protected an
+    unrelated annealer-cap defect while continuing to count the source-root correction
+    as unprotected. Generated aggregate claims would then be internally misleading.
+  fix: >-
+    Restored D-002 exactly, reapplied the change under explicit D-151 context, and made
+    the final defect diff plus generated synopsis reconciliation part of the round's
+    integration check.
+  regression: none
+  recurrence_of: D-145
+  bead: think-4cua
+  recorded_in: defects.yaml

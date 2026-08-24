@@ -2360,6 +2360,36 @@ without confusing either with separate components.
 H-032 remains open at `n=5,6`; the next cell requires complete poses and a certified
 component relation rather than more endpoint sampling.
 
+## Fourth post-merge research result
+
+Exp-016 terminally refutes H-010 on the source-faithful claim registered before the
+measurement. An exact open square of side `10001/10000`, slope `27/10`, and center
+`(37L/(2sqrt(829)),11/8)` fits inside Stromquist’s side `2 + 4/sqrt(5)` container and
+strictly avoids every point printed in Figure 14. The smallest avoidance margin is about
+`4.94e-5` at `G=(.8,1.85)`.
+
+The failed cover cell is the outer `G`–`A1` quadrilateral.
+Its Lemma 4 parameters are `a=.95,b=.8`, while the exact admissible threshold is
+approximately `.7981534378`. The retained checker binds the primary-source tuple and
+hashes, filters the paper’s separate extraneous stationary root through the unsquared
+equation, replays the conditional `3+9` count, and runs eleven source, geometry, and
+capacity mutations. Generation plus complete-record replay takes `0.55` wall seconds.
+
+The verdict is deliberately narrow.
+It invalidates the 2003 proof as printed; it does not refute the numerical lower bound.
+H-041 was preregistered before checking the nearby repair `G'=(.79,1.85)` and is now
+executable. Its acceptance rule requires the complete Figure 13 and repaired Figure 14
+finite covers, every lemma premise and boundary case, and the final capacity
+implication—not merely failure of a new escape search.
+
+D-151 and D-152 now have retained exact regressions.
+D-153 records recovery of the three 1984 memoranda, whose third installment proves only
+the restricted-angle case and merely asserts the unrestricted bound.
+D-154 through D-159 retain checker and archive hardening found before promotion.
+D-160 records a D-145 bookkeeping recurrence caught in this integration diff: a broad
+scalar patch briefly updated D-002 instead of D-151, and no generated view or commit was
+allowed to inherit it.
+
 ## Post-merge operating disposition
 
 PR #14 has merged and is now the stable prototype base.
