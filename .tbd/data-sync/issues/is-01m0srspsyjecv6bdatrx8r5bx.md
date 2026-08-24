@@ -5,7 +5,7 @@ title: "H-041: certify a repaired Stromquist Theorem 2 point set"
 kind: task
 status: closed
 priority: 1
-version: 6
+version: 7
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
@@ -15,7 +15,7 @@ child_order_hints:
   - is-01m0sy3cf8rxrbcdq99vkrav4q
   - is-01m0sy3hy65kzwwpyb7m3r66tx
 created_at: 2026-08-24T11:34:24.317Z
-updated_at: 2026-08-24T14:34:23.317Z
+updated_at: 2026-08-24T14:34:51.432Z
 closed_at: 2026-08-24T14:34:23.305Z
 close_reason: "Exp-017 confirms H-041 exactly: the source-distinct G'=(79/100,37/20) repair passes the complete Figure 13 localization, A-triple, 26-face repaired Figure 14 cover, and 3+9 capacity chain; generation/replay are retained, 13 mutations pass, and the 29-step strict/deep gate is green. The result proves s(11) >= 2 + 4/sqrt(5) here without validating Stromquist's printed proof or closing the Trump gap."
 resolution: null
@@ -25,4 +25,4 @@ Successor hypothesis after the printed Figure 14 set failed. Test a preregistere
 
 ## Notes
 
-2026-08-24 post-registration vector-path reconstruction of PDF p9: the outer cover has four Lemma1 corner rectangles, one Lemma3 bottom rectangle plus cap triangle, and seven Lemma4 quads. Printed g=.8 fails only G-A1 because f(.95)=.798153437834<.8. Registered g=.79 gives ~.0081534 slack there and remains below f(s-2.85)=.826747528837 in F-G. The PDF edge graph has 13 interior Lemma2 triangles; every repaired edge remains strictly <1 (largest ~.98225746) and the polygon remains simple. Awaiting an exact encoded planar-cover/root/edge replay before acceptance.
+2026-08-24 post-registration reconstruction: the outer cover has four Lemma 1 corner rectangles, one Lemma 3 bottom rectangle plus cap triangle, and seven Lemma 4 quadrilaterals. Printed g=.8 fails only G-A1 because f(.95)=.798153437834<.8. Registered g=.79 gives about .0081534 slack there and remains below f(s-2.85)=.826747528837 in F-G. Exp-017 exactly certifies the complete Figure 13 and repaired Figure 14 covers, all lemma and sign premises, boundary closure, and the 3+9 count; 13 mutations and retained replay pass. The source-distinct certificate proves s(11)>=2+4/sqrt(5) here without validating the printed proof or closing the Trump gap.
