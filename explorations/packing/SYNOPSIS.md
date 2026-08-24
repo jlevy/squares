@@ -38,7 +38,7 @@ Those principles govern four capabilities built so far:
    written before the run, a metric vector, an accept rule, a declared timebox, and a
    ledger generated from the artifacts rather than typed.
 4. **Account for what goes wrong.** A defect log with the same discipline as the
-   experiment record, because 18 of the 23 soundness failures found so far pointed in
+   experiment record, because 21 of the 28 soundness failures found so far pointed in
    the *flattering* direction and none was caught by the automated gate.
 
 The strategy that organises lanes 3 and 4 is stated in
@@ -1034,24 +1034,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-Seventy-four defects, [one line each](defects.md), generated from `defects.yaml` and
+Seventy-nine defects, [one line each](defects.md), generated from `defects.yaml` and
 checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 24 | asserted something false about the mathematics |
+| soundness | 28 | asserted something false about the mathematics |
 | validity | 16 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 25 | recorded something its own evidence contradicts |
+| bookkeeping | 26 | recorded something its own evidence contradicts |
 | robustness | 7 | did not finish, or finished only by luck |
 | performance | 2 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Eighteen of the twenty-four soundness defects pointed in the *flattering* direction**,
-where the error looks like a success.
+**Twenty-one of the twenty-eight soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught two defects in seventy-four, and no soundness defect
+**The automated gate has caught two defects in seventy-nine, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -1102,11 +1102,16 @@ D-072 closes the two direct runner commands that bypassed the cooperative gate m
 and D-073 wires those new session artifacts into the filename/id invariant.
 D-074 corrects the first D-070 regression claim: receipt parsing alone did not exercise
 the terminal artifact mapping, which is now centralized and mutation-tested.
+D-075 narrows PR #16’s cross-environment mismatch to what its aggregate output actually
+establishes; D-076 keeps the `n=5` six-of-six observation from deciding among identity,
+landscape, stationarity, and numerical explanations; D-077 replaces a stale serial
+handoff with current parallel lanes; and D-078/D-079 complete the rank and implication
+corrections in that response.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Sixteen fixes left no regression check behind, and that list has already predicted a
+Twenty-one fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated

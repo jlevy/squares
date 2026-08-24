@@ -1197,9 +1197,75 @@ receipt and requires the named assertion to fail.
 
 **Bead:** `think-9ork` (D-074).
 
+### F-29 (P1): PR #16’s portable-oracle conclusion exceeded its evidence
+
+The response retained a report that seed 7 did not quench to the proved optimum in one
+environment, then said every tested environment reached the proved optimum.
+Its generic `ORACLE FAILURES` excerpt identifies a rendered-byte mismatch, not the
+failed predicate. It also proposed dropping only `annealer_gap`, although the
+byte-compared map contains other stochastic characterization fields.
+The cross-environment mismatch is real evidence that source-build reproducibility is
+insufficient; the portable mathematical surface, failed predicate, and cause remain
+unresolved.
+
+**Bead:** `think-v6n1` (D-075); continuing experiment `think-osyp` under D-059.
+
+### F-30 (P1): six endpoint rows from six proposals did not identify the cause
+
+PR #16 correctly observed six converged `n=5` terminators and six endpoint-key rows,
+then concluded that identity was too fine rather than the landscape being rich.
+The sample establishes only no observed saturation.
+Terminal diversity, insufficient stationarity, quench sensitivity, identity instability,
+and numerical splitting remain competing explanations for `think-1s0h`.
+
+**Bead:** `think-dqhd` (D-076).
+
+### F-31 (P1): the PR #16 handoff sent agents toward stale and rejected work
+
+The handoff called `think-97pp` closed, recommended pushing a snapshot/worktree/lease
+prototype that had been quarantined, and reported obsolete branch and defect state.
+The integrated handoff now records D-035’s narrow cooperative interruption-recovery and
+per-control-timeout scope.
+`git status` before broad staging remains a temporary precaution after an interrupted
+negative-control run.
+
+**Bead:** `think-sk4a` (D-077).
+
+### F-32 (P2): the corrected `n=5` rank explanation was still incomplete
+
+The response correctly retracted the five-dimensional family claim, but said the
+constraint subtraction would be valid if the contact gradients were independent.
+Independence can establish equality-stratum rank; it does not establish a connected
+feasible optimal family.
+The objective level, unilateral constraints, feasible tangent cone, higher-order
+obstruction, and continuation still matter.
+The handoff also retained an implication from record rigidity to possible non-record
+flexibility; the exact `n=3` witness supplies that fact, not the strategy premise.
+
+**Bead:** `think-djru` (D-078, D-079).
+
+### F-33 (P2): PR #16’s fixed-finding count contradicted its own table
+
+The response said four of five cited findings were fixed while its table listed all five
+as fixed. The correct accounting is four executable repairs plus one closed-form prose
+repair. The original commits preserve the mistake; the status addendum and current
+handoff reconcile it.
+
+**Bead:** `think-hej7` (D-077).
+
+### F-34 (P2): a priority sketch was presented as a dependency chain
+
+The handoff serialized independent ready work behind terminal-flatness measurement.
+Only `think-siui` and `think-jxx8` have the relevant blocker edge from `think-1s0h`;
+portability, recovery, terminology, timing, and other infrastructure work can proceed in
+parallel. The current handoff publishes lanes and explicitly defers to `tbd` for live
+state.
+
+**Bead:** `think-55m2` (D-077).
+
 ### Technical-finding to defect-logbook crosswalk
 
-Every technical error in F-01 through F-28 now has a durable defect entry.
+Every technical error in F-01 through F-34 now has a durable defect entry.
 A finding can map to more than one entry when it combined independent failure modes;
 prior entries are reused where the review reproduced an already known cause.
 
@@ -1233,6 +1299,12 @@ prior entries are reused where the review reproduced an already known cause.
 | F-26 | D-072 | Fixed: direct execute and release paths refuse the active gate marker |
 | F-27 | D-073 | Fixed: session filenames and declared ids are reconciled |
 | F-28 | D-074 | Fixed: receipt-to-artifact provenance mapping is directly mutation-tested |
+| F-29 | D-059, D-075 | Response corrected; portable mathematical versus stochastic characterization surfaces remain open |
+| F-30 | D-076 | Fixed: six-of-six is a no-saturation observation with competing explanations |
+| F-31 | D-035, D-077 | Handoff fixed; narrow cooperative recovery remains open |
+| F-32 | D-041, D-063, D-078, D-079 | Fixed: rank and logic corrections now state the actual conditions and witness |
+| F-33 | D-077 | Fixed: five corrections are accounted for consistently |
+| F-34 | D-077 | Fixed: current handoff uses parallel lanes and real blocker edges |
 
 ## Key omissions
 
@@ -1737,7 +1809,7 @@ relevant remediation beads, not as a second epic:
 | Numerical identity versus D-021 | `think-3szr` | `think-siui` | Counts carry calibrated ambiguity bounds; scalar side gap has no identity authority |
 | Proposer-conditioned null | `think-apwt` | `think-rrht` | H-012 names `P`, `Q`, and `E`; multiple proposal measures are compared at equal budget |
 
-Nine checkpoint defects are tracked separately from the 26 primary research-program
+Fourteen checkpoint defects are tracked separately from the 26 primary research-program
 beads because they are concrete corrections, not new strategy lanes:
 
 | Defect | Bead | State at this checkpoint |
@@ -1751,6 +1823,10 @@ beads because they are concrete corrections, not new strategy lanes:
 | D-072 | `think-ep8g` | Fixed: direct runner commands honor the gate marker |
 | D-073 | `think-tsck` | Fixed: session filename/id invariant |
 | D-074 | `think-9ork` | Fixed: provenance regression covers artifact-field mapping |
+| D-075 | `think-v6n1` | Fixed: cross-environment mismatch no longer proves a portable oracle |
+| D-076 | `think-dqhd` | Fixed: `n=5` six-of-six is a no-saturation observation, not a causal result |
+| D-077 | `think-sk4a`, `think-hej7`, `think-55m2` | Fixed: PR #16 handoff state, counts, and lanes reconciled |
+| D-078, D-079 | `think-djru` | Fixed: rank conditions and rigidity logic completed |
 
 Ten hostile-isolation prototype beads—`think-5zzb`, `think-xe5l`, `think-tg66`,
 `think-1pyr`, `think-6wgw`, `think-06vo`, `think-v8ve`, `think-zh3m`, `think-om54`, and
@@ -1884,14 +1960,28 @@ After centralizing and mutation-testing that mapping, the final normal gate pass
 Its largest stages were the soundness perimeter at 34 seconds, negative controls at 31
 seconds, and historical regressions at 22 seconds.
 
+PR #16 was then reviewed and absorbed through a merge parent so its five-commit
+self-correction history remains visible.
+F-29 through F-34 and D-075 through D-079 correct its unsupported portable-oracle and
+`n=5` interpretations, incomplete rank and logic explanations, stale bead state, finding
+count, and invented dependency chain.
+A fresh deep golden run passed locally in about 91 seconds but does not rebut the
+retained other-environment mismatch; `think-osyp` now requires per-predicate output and
+complete environment provenance.
+The final normal gate passed in 114 seconds with all 30 mutation controls firing, all 79
+defects reconciled, and both agent sessions indexed.
+Its largest stages were the soundness perimeter at 33 seconds, negative controls at 27
+seconds, and historical regressions at 20 seconds.
+
 No primary mathematical or research-strategy remediation bead is closed by these
 checkpoint repairs. The focused D-066 through D-070 and D-072 through D-074 incident
-beads are fixed; D-071 remains open for append-only numerical runner reports.
-In particular, the runner still trusts a producer-reported scalar overlap rather than a
-stored pose checked independently; contact canonicalization still has order-dependent
-angle clustering and factorial worst-case search; and the atlas, fixed-angle semantics,
-criterion evaluators, exact-promotion path, event record, and statistical contract
-remain open.
+beads plus D-075 through D-079 are fixed; D-071 remains open for append-only numerical
+runner reports.
+In particular, the runner still trusts a producer-reported scalar overlap
+rather than a stored pose checked independently; contact canonicalization still has
+order-dependent angle clustering and factorial worst-case search; and the atlas,
+fixed-angle semantics, criterion evaluators, exact-promotion path, event record, and
+statistical contract remain open.
 
 ## Post-merge operating disposition
 

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 74
+count: 79
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -1513,17 +1513,19 @@ defects:
     The golden command originally used an unbuilt stale binary, could write before
     rejecting oracle failures, allowed incomplete convergence, paired the best side with
     the first pose for an identity, serialized below its evidence floor, and byte-compared
-    stochastic discovery rows as though any change were a mathematical regression. The
-    committed n=10 row did not reproduce from source.
+    stochastic discovery rows as though any change were a mathematical regression.
+    Source-built runs in two environments have produced different stochastic renderings,
+    but the retained aggregate failure does not identify the failed predicates.
   consequence: >-
     Stale or internally mismatched data could be blessed, while a legitimate proposer or
     quench improvement failed exactly like a mathematical error. The fixture could both
     miss regressions and reject progress.
   fix: >-
-    Source build, selected control seeds, convergence/validity refusal, matching pose-side
-    verification, tier-aligned serialization, atomic update and strict/deep execution are
-    fixed. Still open: separate immutable mathematical oracles from characterization
-    snapshots and store the poses needed for independent fast-path validation.
+    Source build, convergence/validity refusal, matching pose-side verification,
+    tier-aligned serialization, atomic update and strict/deep execution are fixed.
+    Selected control seeds do not establish portability. Still open: separate portable
+    mathematical predicates from provenance-bound characterization snapshots and store
+    the poses needed for independent fast-path validation.
   regression: none
   bead: think-zt29
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
@@ -1877,3 +1879,125 @@ defects:
     named record-field preflight check to fail.
   bead: think-9ork
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-075
+  title: The PR 16 response claimed a portable oracle from an aggregate byte mismatch
+  date: '2026-08-23'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The response reported that one environment did not quench seed 7 to the proved
+    optimum, then concluded that every tested environment reached the proved optimum.
+    It treated a generic ORACLE FAILURES heading as predicate-specific evidence and
+    proposed dropping only annealer_gap even though the complete stochastic map was
+    byte-compared.
+  consequence: >-
+    The program could declare the mathematical surface portable without preserving the
+    failed predicate and could keep rejecting legitimate cross-environment changes in
+    identities, discovery counts, frequencies, or found_optimum.
+  fix: >-
+    The response and handoff now retain the cross-environment mismatch but leave the
+    post-quench predicates and cause unresolved. D-059 and think-osyp require separate
+    portable mathematical and provenance-bound characterization surfaces.
+  regression: none
+  recurrence_of: D-059
+  bead: think-v6n1
+  recorded_in: docs/project/reviews/review-2026-08-23-response-to-pr15-review.md
+- id: D-076
+  title: Six distinct n=5 endpoint rows were treated as proof that identity was too fine
+  date: '2026-08-23'
+  layer: docs
+  class: soundness
+  direction: neutral
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The PR 16 handoff correctly recorded six converged terminators and six endpoint-key
+    rows from six proposals, then said that this was the shape of an over-fine identity
+    rather than a rich landscape and called the terminal-flatness bead measured.
+  consequence: >-
+    A non-saturating six-draw sample was promoted into a causal conclusion before
+    distinguishing terminal diversity, incomplete stationarity, quench sensitivity,
+    identity instability, or numerical clustering.
+  fix: >-
+    The handoff now concludes only that the observed sample did not saturate and lists
+    the competing hypotheses that think-1s0h must discriminate.
+  regression: none
+  recurrence_of: D-034
+  bead: think-dqhd
+  recorded_in: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+- id: D-077
+  title: The PR 16 handoff presented stale state and priorities as a current dependency queue
+  date: '2026-08-23'
+  layer: record
+  class: bookkeeping
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The handoff called think-97pp closed, recommended pushing a rejected hostile-
+    isolation prototype, reported obsolete branch and defect counts, miscounted fixed
+    findings, and serialized several independent ready beads without dependencies.
+  consequence: >-
+    A new agent could restore abandoned architecture, overlook the live D-035 scope, or
+    wait on unrelated mathematical work instead of using the intended parallel lanes.
+  fix: >-
+    The integrated handoff records the current narrow recovery scope, distinguishes
+    five corrections as four executable repairs plus one prose repair, and publishes a
+    dated lane map with only real blocker edges.
+  regression: none
+  recurrence_of: D-028
+  bead: think-sk4a
+  recorded_in: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+- id: D-078
+  title: The n=5 rank correction still named equality independence as the sufficient condition
+  date: '2026-08-23'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    The response correctly retracted a dimension claim made by subtracting constraints,
+    but said the argument would be valid if the contact gradients were independent.
+    Equality rank alone does not prove a connected feasible optimal family.
+  consequence: >-
+    The corrected prose could still promote a regular equality stratum into a feasible
+    finite family without fixing the objective level or checking unilateral contacts,
+    tangent directions, higher-order obstruction, and continuation.
+  fix: >-
+    The status addendum and handoff align the claim with D-041 and require full active-
+    matrix rank, feasible tangent directions, objective-level constraints, and
+    continuation evidence.
+  regression: none
+  recurrence_of: D-041
+  bead: think-djru
+  recorded_in: docs/project/reviews/review-2026-08-23-response-to-pr15-review.md
+- id: D-079
+  title: The handoff retained an invalid implication from record rigidity to non-record behavior
+  date: '2026-08-23'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    After correctly admitting that non-records-need-not-be-rigid is not the
+    contrapositive of records-are-rigid, the handoff still said the strategy premise
+    presupposed that non-records may be non-rigid. The premise entails no such fact.
+  consequence: >-
+    A mathematically unsupported implication remained in the summary that new agents
+    use to choose controls and interpret terminal families.
+  fix: >-
+    The handoff now attributes the existence of a non-isolated non-record terminal set
+    to the exact n=3 sliding witness, not to any converse of the rigidity premise.
+  regression: none
+  recurrence_of: D-063
+  bead: think-djru
+  recorded_in: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md

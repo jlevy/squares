@@ -7,6 +7,7 @@
 | id | status | focus | primary bead | delegations | next action |
 | --- | --- | --- | --- | ---: | --- |
 | [session-001](agent-sessions/session-001-pr15-review-reset.md) | completed | process | think-m79h | 7 | Resume the broader Correctness and Insight review from the ready bead queue, beginning with the highest-priority mathematical ambiguity. |
+| [session-002](agent-sessions/session-002-pr16-integration.md) | completed | process | think-7wsz | 3 | Review PR 15, then resume the correctness lane at think-1s0h or the independent portability experiment at think-osyp. |
 
 ## Series
 

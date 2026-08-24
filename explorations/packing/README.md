@@ -69,8 +69,8 @@ Use the cheapest loop that answers the current question:
 | Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
 
 These are working envelopes, not promises.
-The retained normal-gate observations are 108 seconds at the prior pushed checkpoint and
-126 seconds for this integration.
+The retained normal-gate observations are 108 seconds at the prior pushed checkpoint,
+126 seconds for the first integration, and 114 seconds for the PR #16 absorption.
 Repeated versioned benchmarks, fuller stage attribution, and warm/cold regimes remain
 tracked work.
 The research round is intentionally separate from the edit/test loop, so an
