@@ -5,7 +5,7 @@ title: "Insight (Creativity): mathematical strategy and discovery portfolio"
 kind: epic
 status: open
 priority: 1
-version: 12
+version: 13
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -24,8 +24,9 @@ child_order_hints:
   - is-01m0qxpg0nryz3nwhedeqgwm1g
   - is-01m0qxpgm5e4gx92d9f1r4bqgj
   - is-01m0rmz90gpps8wregvc64ykz9
+  - is-01m0rpqqcarvbbtswbgnxd7cvp
 created_at: 2026-08-23T21:16:39.845Z
-updated_at: 2026-08-24T01:08:18.063Z
+updated_at: 2026-08-24T01:39:07.778Z
 ---
 Owns conjecture generation, structural explanations, cross-n grammar, constructor and lower-bound ideas, diverse proposer families, and selection of tractable open questions. This lane proposes and prioritizes; it cannot certify its own claims. It hands falsifiable hypotheses and discriminating experiments to Process.
 

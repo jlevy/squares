@@ -1,0 +1,27 @@
+---
+type: is
+id: is-01m0rpqqcarvbbtswbgnxd7cvp
+title: Deep creativity and mathematical-frontier portfolio review
+kind: task
+status: in_progress
+priority: 0
+version: 4
+spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+refs:
+  - kind: pr
+    url: https://github.com/jlevy/thinking-scratchpad/pull/17
+    at: 2026-08-24T01:39:16.375Z
+labels:
+  - packing
+  - focus-insight
+  - research
+dependencies: []
+parent_id: is-01m0r7q4h688g8gx54wk0vmrhp
+created_at: 2026-08-24T01:39:07.778Z
+updated_at: 2026-08-24T02:01:10.501Z
+---
+Perform a global mathematical-depth review of the current hypotheses and research corpus. Rank promising frontiers; identify literature and strategy gaps; model distinct senior-mathematician attack styles; define mathematically honest basin maps and staged visualization experiments; and price a diverse fast-first portfolio by expected information gain, frontier payoff, and wall/agent-loop cost. Acceptance: one durable research review distinguishes known facts, repository evidence, conjectures, and experiments; every recommended direction has a smallest informative cell, falsifier, escalation rule, and cost tier; strong new claims become hypothesis or open-question artifacts; overlapping ideas are reconciled; existing visualization and readiness beads are updated instead of duplicated; the review, ideas, ledger, agenda, review log, and beads agree.
+
+## Notes
+
+Soundness delta on PR #17: D-088..D-105 record stale n68/69 records, false n17 symmetry, n29 counterexample candidate to H-024, incorrect Stromquist target, phantom asymptotic constant, lost canonical attributes, stale gap/experiment state, unsupported degree/catalogue claims, basin-radius/wrong-basin overclaims, mis-scoped H-023 and delta continuation, unreliable quench timing, mistyped LP dual support, missing census prerequisites, and superdisk normalization. Corrections are being committed before the creative portfolio.

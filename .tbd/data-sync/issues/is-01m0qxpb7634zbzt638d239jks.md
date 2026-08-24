@@ -5,7 +5,7 @@ title: Make canonical basin identity invariant, stable, and scalable
 kind: bug
 status: open
 priority: 0
-version: 13
+version: 14
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -27,7 +27,7 @@ child_order_hints:
   - is-01m0r50mrppgcvsp2ewrac0x6z
   - is-01m0r516kvkaaa5bbf9nm948qa
 created_at: 2026-08-23T18:21:28.165Z
-updated_at: 2026-08-23T21:17:48.396Z
+updated_at: 2026-08-24T01:49:13.989Z
 ---
 Category: technical errors. The contact certificate is not invariant under container reflection because folded-angle classes are ranked by angle value; tolerance grouping is order-dependent; exact tuple identity splits geometrically equivalent packings at quantization boundaries; and exhaustive individualization becomes factorial on sparse symmetric graphs.
 
@@ -35,4 +35,4 @@ Acceptance: property tests cover all D4 images, every square permutation, bounda
 
 ## Notes
 
-2026-08-23 merged-state reconciliation: PR #14 fixed D4 reflection and the angle seam, while D-034 exposed a separate isolation failure. The exact n=3 side-2 sliding family proves the current two-hash atlas splits one connected terminal component. At n=5, two rows share side/contact descriptors but remain an unresolved connectivity question; the merged branch's five-dimensional claim was not rank-certified. think-1s0h measures fixed-cell and full-Jacobian nullity/connectivity; child think-0yo9 defines component identity; child think-3szr calibrates numerical ambiguity. Remaining original work is order-independent circular clustering, quantization-boundary handling, and scalable canonical labeling.
+2026-08-24 creativity review found a concrete D-093 witness: `_certificate([0,0,0], K3)` equalled marked-color variants because final serialization used individualized colors rather than original node attributes. Focused repair and attribute/relabel regression are being integrated on PR #17; the larger bead remains open for angle clustering and worst-case scaling.
