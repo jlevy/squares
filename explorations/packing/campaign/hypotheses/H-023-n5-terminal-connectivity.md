@@ -34,9 +34,10 @@ hypothesis:
     a path in the terminal set. This question therefore separates same-level terminal
     connectivity for that pair from the weaker clearance-connectivity question for
     unequal-side candidates. Exp-033 proves the equal-side pair shares one exact
-    fixed-angle LP optimal face with endpoint/interior nullities 0/1/0. That is partial
-    evidence, not a complete answer to this hypothesis: full angle-varying stationarity
-    and the unequal-side clearance questions remain open.
+    fixed-angle LP optimal face with endpoint/interior nullities 0/1/0. Exp-034 then
+    proves that face lies in an exact two-parameter angle-and-slide sheet of optima.
+    These are partial results, not a complete answer: the full nonsmooth stationary
+    component and the unequal-side clearance questions remain open.
 ---
 # H-023 — resolve the first ambiguous census cell
 
@@ -47,7 +48,7 @@ optimum-side family.
 Calling it either a rich landscape or one flat family before continuation would repeat
 the same soundness error in opposite directions.
 
-## First exact slice
+## Two exact slices
 
 Exp-033 aligns the two equal-side source poses after one declared D4 action and
 relabelling. Four squares coincide, and the fifth traverses an exact segment at constant
@@ -57,8 +58,14 @@ nullities `0/1/0` prove that the two different geometric keys lie in one connect
 fixed-angle optimal face.
 
 This removes key inequality as evidence of separation for this pair.
-It does not yet identify the full stationary component because angle directions and the
-deterministic quench selection have not been certified along the face.
+Exp-034 goes further: for `t = tan(theta_0/2)` with `|t| <= 1/100`, it certifies every
+slide parameter in the exact strip `e(t) <= u <= 3sqrt(2)/2 - 2 - e(t)`, where
+`e(t) = |t|(1 - |t|)/(1 + t^2)`. The same exact dual proves the resulting two-parameter
+sheet optimal because its support avoids the moving square.
+
+This still does not identify the full stationary component.
+The complete nonsmooth wall-release and separating-axis cone, certified continuation
+beyond the declared sheet, and deterministic quench selection have not been established.
 The unequal-side rows still require minimax-clearance bounds.
 
 This is the focused control for H-021 and the practical precursor to H-011.

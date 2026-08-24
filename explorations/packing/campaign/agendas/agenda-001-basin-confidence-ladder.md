@@ -247,21 +247,27 @@ agenda:
     budget: one 30m local-geometry slice per declared candidate pair; retain partial bounds
     entry: >-
       BC-003 and BC-009 complete; exp-033 binds the first declared pair to exact poses
-      and preregisters its common-cell test on committed instrument 26360f1
+      and exp-034 embeds its exact face in a two-parameter optimal sheet
     exit: certified connection, certified separation bound, or explicit ambiguity interval
     bead: think-1s0h
     depends_on: [BC-003, BC-009]
-    next_evidence: full angle-varying active Jacobian and stationary continuation from exp-033's exact face
+    next_evidence: >-
+      complete wall-release and SAT-branch feasible cones, followed by certified
+      continuation beyond exp-034's declared sheet
     parallel_group: identity
     note: >-
       This is the first genuine basin-structure experiment in the ladder. Exp-033
-      proves the equal-side pair shares one exact fixed-angle LP optimal face. Full
-      stationary connectivity and unequal-side minimax clearance remain later bounded
-      slices, so BC-010 stays ready rather than complete.
+      proves one exact fixed-angle optimal face, and exp-034 proves it lies in an exact
+      two-parameter angle-and-slide sheet. Full nonsmooth stationary connectivity and
+      unequal-side minimax clearance remain later bounded slices, so BC-010 stays ready
+      rather than complete.
     artifacts:
     - tools/check_n5_equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
+    - tools/check_n5_angle_sheet.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

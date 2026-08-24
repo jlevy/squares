@@ -74,9 +74,10 @@ multiplies effort against the measured probability.
 rigid, no converse follows: a non-record optimum can be a positive-dimensional terminal
 family rather than a point.
 The exact `n = 3` side-2 sliding family proves that the current key splits one connected
-component. At `n = 5`, exp-033 now proves the two equal-side keys share one exact
-fixed-angle optimal face with interior nullity one.
-It does not prove their full angle-varying stationary identity, and raw contact counts
+component.
+At `n = 5`, exp-033 proves the two equal-side keys share one exact fixed-angle
+optimal face, and exp-034 embeds it in a two-parameter angle-and-slide sheet of optima.
+This does not prove their complete nonsmooth stationary identity, and raw contact counts
 alone still establish neither rank deficiency, dimension, nor connectivity
 ([D-034](../defects.md)). Until the census defines what it counts, the denominator of
 “rare” is not a number, and the premise is untestable rather than merely untested.

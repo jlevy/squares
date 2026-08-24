@@ -368,8 +368,10 @@ splits one connected optimum component.
 At `n = 5`, exp-033 proves that the two equal-side rows with different geometric keys
 share one exact connected fixed-angle LP optimal face.
 Its fixed-side active nullity is one in the interior and zero at the two boundary
-strata. This is not a proof of a five-dimensional family or of full angle-varying
-stationary connectivity ([D-034](defects.md), [D-041](defects.md)).
+strata. Exp-034 proves that face lies in a two-parameter angle-and-slide sheet of
+orientation-indexed LP optima.
+This is not a proof of a five-dimensional family or of the complete nonsmooth stationary
+component ([D-034](defects.md), [D-041](defects.md)).
 
 **This distinction should have existed from the first day.** “Rigidity” was treated as
 an informal visual property of the target while the census silently assumed every
@@ -1090,7 +1092,7 @@ view; this section is the reading of it.
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 0 | — |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question; fixed-angle pair face solved | How are the observed `n=5` endpoint candidates connected? | 1 | 15m agent, 0.24s wall |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question; one exact 2D sheet solved | How are the observed `n=5` endpoint candidates connected? | 2 | 25m agent, 0.51s wall |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | **refuted** | Verified record packings through `n=30` use at most three angle classes; exp-012 verifies six at `n=29` | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
@@ -1209,19 +1211,20 @@ independently valid, and admissible.
 Exp-032 completes BC-009: exact `n = 3` and `n = 4` component controls pass while all 16
 retained f64 observations remain unresolved.
 Exp-033 completes the first bounded BC-010 `n = 5` connectivity slice: the equal-side
-pair shares one exact fixed-angle optimal face, but full stationary identity and the
-unequal-side rows remain open.
+pair shares one exact fixed-angle optimal face.
+Exp-034 embeds that face in an exact two-parameter angle-and-slide sheet, but complete
+stationary identity and the unequal-side rows remain open.
 
 ## Experiments Conducted
 
-There are 33 terminal rounds registered in `series-000`. They record 818 agent-minutes
+There are 34 terminal rounds registered in `series-000`. They record 828 agent-minutes
 and 28.2 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
 checker, the exact Stromquist printed-set falsifier, and the exact repaired-cover
 certificate, the exact terminal-component known-answer checker, and the exact `n = 5`
-fixed-angle face checker.
+fixed-angle face and angle-sheet checkers.
 
 No record-search round has been run at the `exact` tier, so **no result below claims a
 new record**. Exp-012 is an exploratory reconstruction of a published record witness;
@@ -1267,6 +1270,7 @@ archive beside it.
 | [exp-031](campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md) | 10 | positive control | H-002 | source-bound BasinEvent/v3 replay | 4/4 admissible; max proved-side error `2.221e-15` | **baseline** |
 | [exp-032](campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md) | 3 | positive control | H-021 | exact component-policy replay | one n=3 interval; one n=4 point; 8/8 false policies rejected | **baseline** |
 | [exp-033](campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md) | 5 | target | H-023 | exact fixed-angle face test | one segment; nullities `0/1/0`; six controls pass | **accepted** |
+| [exp-034](campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md) | 5 | target | H-023 | exact angle-and-slide sheet | dimension at least two; four fixtures and five controls pass | **accepted** |
 
 ### Cost and provenance
 
@@ -1305,8 +1309,9 @@ archive beside it.
 | exp-031 | 4 seeds, 15 s each | 10.337 s | 5 m | criterion | `dab797c` |
 | exp-032 | exact n=3/n=4 models + 8 mutations | 0.92 s | 10 m | criterion | `d3d4ace` |
 | exp-033 | one exact common-cell face + six controls | 0.24 s | 15 m | criterion | `26360f1` |
+| exp-034 | one exact parameter sheet + five controls | 0.27 s | 10 m | criterion | `329b848` |
 
-### What the 33 rounds jointly establish
+### What the 34 rounds jointly establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only
@@ -1440,12 +1445,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 185 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 186 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 61 | asserted something false about the mathematics |
+| soundness | 62 | asserted something false about the mathematics |
 | validity | 54 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 50 | recorded something its own evidence contradicts |
 | robustness | 15 | did not finish, or finished only by luck |
@@ -1453,11 +1458,11 @@ and checked in the gate.
 
 Two observations the log exists to make.
 
-**Fifty of the sixty-one soundness defects pointed in the *flattering* direction**,
+**Fifty-one of the sixty-two soundness defects pointed in the *flattering* direction**,
 where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seven defects in 185, and no soundness defect ever.**
+**The automated gate has caught seven defects in 186, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1639,9 +1644,11 @@ After one D4 action and relabelling, four squares coincide and the fifth slides 
 an exact side-constant segment in one fixed-angle cell.
 An exact dual proves optimality within that cell, while active fixed-side nullity
 changes from zero at each endpoint to one in the interior.
-This proves fixed-angle path connectivity for the equal-side pair, but generalized angle
-tangents and certified stationary continuation must decide the full component; the
-unequal-side rows still need minimax-clearance bounds.
+Exp-034 proves that exact face lies in a two-parameter angle-and-slide sheet of
+orientation-indexed LP optima.
+The complete wall-release and separating-axis cone plus certified continuation must
+still decide the full component; the unequal-side rows still need minimax-clearance
+bounds.
 
 So `distinct_basins` currently counts family members, the discovery curve cannot
 plateau, and H-011’s saturation criterion is unreachable until the definition is fixed.

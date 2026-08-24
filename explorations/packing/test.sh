@@ -381,6 +381,8 @@ step_small_n_moduli() {
     --replay campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
   $PY tools/check_n5_equal_side_face.py \
     --replay campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
+  $PY tools/check_n5_angle_sheet.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
 }
 
 step_negative_controls() {

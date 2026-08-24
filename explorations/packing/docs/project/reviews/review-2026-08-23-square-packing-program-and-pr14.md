@@ -2478,8 +2478,38 @@ as evidence of separation for this pair.
 It does not prove that the deterministic quench selects every point on the face, that
 the full angle-varying stationary set is connected there, or that the other four golden
 rows have any declared clearance relation.
-The parent identity bead therefore stays open; its next bounded slice is the full
-angle-active Jacobian and stationary continuation from this exact face.
+The parent identity bead therefore stays open; its next bounded slice is the complete
+wall-release and separating-axis cone plus stationary continuation from this face.
+
+## Seventh post-merge research result
+
+Exp-034 answers the first second-order question left by exp-033 under a separately
+committed criterion.
+Write `t = tan(theta_0/2)` for the moving square and `e(t)=|t|(1-|t|)/(1+t^2)`. Exact
+arithmetic proves that every pair
+
+`|t| <= 1/100`,
+
+`e(t) <= u <= 3sqrt(2)/2-2-e(t)`
+
+gives a valid packing at side `1+5sqrt(2)/4` when the other four squares remain fixed.
+The exp-033 dual uses only squares 2, 3, and 4, so it proves every orientation-indexed
+LP cell in this declared sheet optimal.
+Four exact boundary fixtures, independent regeneration, and all five mutations pass in
+0.27 wall-seconds.
+
+The pre-run review also caught D-186: the first uncommitted pair `(0,3)` bound omitted
+the slide contribution from one projection and called active boundary inequalities
+strict. The corrected instrument includes the full adverse coefficient and separates
+nonnegative boundary constraints from positive residual margins before preregistration
+or execution.
+
+The result raises the certified local dimension lower bound from one fixed-angle slide
+to a two-parameter sheet.
+It still does not identify the entire stationary component: wall contacts may release,
+the active separating axis may switch, and continuation may leave the declared sheet.
+The next bounded child therefore enumerates the complete nonsmooth feasible cones and
+either continues every surviving branch or records an explicit ambiguity interval.
 
 ## Post-merge operating disposition
 

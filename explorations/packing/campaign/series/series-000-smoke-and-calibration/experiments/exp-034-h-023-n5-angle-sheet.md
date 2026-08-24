@@ -15,10 +15,10 @@ experiment:
   subject:
     label: exact two-parameter orientation-indexed LP optimal sheet through exp-033
     engine: n = 5 angle-sheet checker 0.1.0
-    engine_commit: 9c4d80b
+    engine_commit: 329b848
     precision: exact
     host_system: macOS arm64, Apple M1 Pro
-    selftest_passed: false
+    selftest_passed: true
   instance: {axis: n, point: 5, role: target}
   method:
     control: four exact boundary fixtures and five mutations of the sheet certificate
@@ -26,7 +26,7 @@ experiment:
     runs_per_condition: 1
     interleaved: false
     operator: openai-codex
-    commit: 9c4d80b
+    commit: 329b848
     dirty: false
     entry_point: explorations/packing/tools/check_n5_angle_sheet.py
     command: >-
@@ -39,24 +39,32 @@ experiment:
       stop on an empty parameter strip, nonpositive residual margin, invalid boundary
       fixture, failed exact dual, surviving mutation, or retained-record drift
     record: campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
-  lease:
-    expires: '2026-08-24T20:45:00Z'
+  effort:
+    timebox: 30m exact-geometry slice; 30s generation and 30s replay caps
+    wall_seconds: 0.27
+    agent_minutes: 10
+    stopped_by: criterion
   results:
   - shape: determination
     question: >-
       Does the exp-033 exact segment lie inside a two-parameter feasible family at the
       same exactly certified side when square 0 may rotate through a small interval?
     role: outcome
-    outcome: no_progress
-    checked_by: preregistered but not yet run
+    outcome: criterion_met
+    checked_by: >-
+      universal exact inequalities over Q(sqrt(2)), four independent exact boundary
+      fixtures, the unchanged LP dual, retained-record regeneration, and five controls
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: >-
       exact universal half-angle inequalities, four valid boundary fixtures, the
       unchanged exact LP dual, independent replay, and all five declared mutations
-    reason: The acceptance rule is frozen before generation or replay.
+    reason: >-
+      The full declared parameter strip is feasible at the exp-033 side, the exact dual
+      proves every orientation-indexed LP cell optimal, and generation and replay agree.
+    commit: 7c6fe96
 ---
-# exp-034 — preregistered n = 5 angle-and-slide sheet
+# exp-034 — an exact n = 5 angle-and-slide sheet
 
 Write `r = sqrt(2)`, `S = 1 + 5r/4`, and `t = tan(theta_0/2)` for the angle of the
 moving square in exp-033. This round accepts only if exact arithmetic proves that every
@@ -79,10 +87,21 @@ square and replays unchanged.
 Excessive angle, an unshrunk endpoint, a signed rather than absolute support correction,
 dual drift, and source-digest drift must all be rejected.
 
-An accepted result would prove a two-dimensional sheet of optima within the declared
-orientation-indexed separating cells.
-It would not prove that this sheet is a whole stationary component, that every point
-attracts the quench, or that the `n = 5` census is complete.
+The criterion is met.
+The universal exact inequalities and all four boundary fixtures pass, and the exp-033
+dual has support only on squares 2, 3, and 4, so it remains valid for every
+orientation-indexed LP cell in the sheet.
+Generation and independent replay took 0.27 wall-seconds together; all five declared
+mutations fail.
+
+This proves a two-dimensional sheet of optima within the declared orientation-indexed
+separating cells.
+It does not prove that this sheet is a whole stationary component, that
+every point attracts the quench, or that the `n = 5` census is complete.
+
+[`exp-034-h-023-n5-angle-sheet.json`](../results/exp-034-h-023-n5-angle-sheet.json)
+retains the universal certificate, four exact fixtures, dual, determination scope, and
+controls (`sha256:a718d64f705612eb4c4fde66a8119921aa45262f0c4994bcfffa0f3653c9d73e`).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
