@@ -3,18 +3,18 @@ type: is
 id: is-01m0r4jb9qj3fk9sjm9senp9gz
 title: negctl leaves the repo holding a deliberate sabotage if it is interrupted
 kind: bug
-status: open
+status: closed
 priority: 0
-version: 14
+version: 15
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - focus-efficiency
 dependencies: []
 parent_id: is-01m0rkz14t04yjme92gnfncfv7
 created_at: 2026-08-23T20:21:37.206Z
-updated_at: 2026-08-24T01:00:50.009Z
-closed_at: null
-close_reason: null
+updated_at: 2026-08-24T07:13:47.135Z
+closed_at: 2026-08-24T07:13:47.134Z
+close_reason: D-035 is eliminated by bounded private source snapshots that never mutate the checkout. Per-control timeout and child reaping remain separately open as think-cns0 / D-129.
 resolution: null
 duplicate_of: null
 ---

@@ -5,7 +5,7 @@ title: "Engineering: make the packing research loops fast enough to iterate"
 kind: epic
 status: open
 priority: 1
-version: 10
+version: 11
 labels: []
 dependencies: []
 child_order_hints:
@@ -18,8 +18,9 @@ child_order_hints:
   - is-01m0rrjtq99x8zbzd5hvqxrjcg
   - is-01m0rrwmf90rynrj697ge7nk1k
   - is-01m0rwwt8912eq5f3507d581e1
+  - is-01m0s8tvzd11dyjk9s2fw40z16
 created_at: 2026-08-24T02:10:15.746Z
-updated_at: 2026-08-24T03:26:46.011Z
+updated_at: 2026-08-24T06:55:25.164Z
 ---
 Engineering review of PR #17 (codex/packing-unattended-research-readiness) from a process, efficiency and software-correctness angle.
 
