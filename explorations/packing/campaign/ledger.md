@@ -14,7 +14,7 @@
 | [session-006](agent-sessions/session-006-h026-exact-tangent.md) | completed | insight | think-qd9t | 2 | Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and move the fast rotation to H-032's exact n=3 quotient-family control. |
 | [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | insight | think-n82j | 3 | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | correctness | think-ciwv | 3 | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
-| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 8 | After the exp-025 checkpoint is green and pushed, execute only BC-004: four fixed n=6 seeds at 10 seconds each under a 90-second command cap. Treat it as tool validation and retain any typed stop; component research remains blocked. |
+| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 8 | Execute preregistered exp-026 only: four fixed n=6 seeds at 10 seconds each under a 90-second command cap. Treat it as tool validation and retain any typed stop; component research remains blocked. |
 
 ## Experiment agendas
 
@@ -27,7 +27,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | BC-001 | tool_validation | 3 | complete | 0 | think-wbra | permanent replay in the focused and normal gates |
 | BC-002 | tool_validation | 4 | complete | 0 | think-pwd0 | full normal gate on engine f15d036 and durable exp-024 checkpoint |
 | BC-003 | tool_validation | 5 | complete | 0 | think-wbra | permanent semantic replay in the focused and normal gates |
-| BC-004 | tool_validation | 6 | ready | 1 | think-wbra | one event block with per-seed time and settlement counts |
+| BC-004 | tool_validation | 6 | ready | 1 | think-wbra | exp-026 plus its four-event JSONL archive and semantic replay |
 | BC-005 | tool_validation | 7 | tentative | 1 | think-wbra | one event block and comparison with n=3 through n=6 throughput |
 | BC-006 | tool_validation | 8 | tentative | 1 | think-wbra | one event block plus a measured per-stage timing breakdown |
 | BC-007 | tool_validation | 9 | tentative | 2 | think-xzew | retained event plus canonicalization share of wall time |
@@ -44,7 +44,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 25 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 26 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -70,7 +70,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | H-018 | refuted | search | Started from Trump's exact configuration perturbed by uniform noise of |  | 1 | 75m agent + 1.3m wall |
 | H-019 | confirmed | search | On the n=11 Trump contact cell, varying the shared tilt of its five ti | n: 11* | 1 | 10m agent + 1s wall |
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
-| H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6 7 8 | 8 | 71m agent + 1.5m wall |
+| H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6 7 8 | 9 | 71m agent + 1.5m wall |
 | H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
 | H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 0 |  |
 | H-024 | refuted | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
@@ -139,6 +139,12 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-024 | series-000 | 4 | openai-codex | H-021 | All four events reach proved side 2 and replay as admissible. This confirms the bounded numerical repair and completes the event-level control cell; it does not classify endpoint components or decide H-021. |
 | exp-025 | series-000 | 5 | openai-codex | H-021 | All four events replay as admissible and retain complete fixed-point accounting. This validates the n=5 event path; reaching the proved optimum was not required, and no endpoint key is promoted to a component. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-026 | series-000 | 6 | openai-codex | H-021 | Preregistered before measurement. This is tool validation: reaching proved side 3 is not required, and no endpoint key may be promoted to a component. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -149,5 +155,5 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 ## Effort
 
-25 rounds, 763 agent-minutes, 25.5 wall-minutes.
+26 rounds, 763 agent-minutes, 25.5 wall-minutes.
 

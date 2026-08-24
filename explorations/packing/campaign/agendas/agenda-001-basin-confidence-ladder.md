@@ -99,8 +99,9 @@ agenda:
     exit: four replayable events or one retained blocker; no component-count claim
     bead: think-wbra
     depends_on: [BC-003]
-    next_evidence: one event block with per-seed time and settlement counts
+    next_evidence: exp-026 plus its four-event JSONL archive and semantic replay
     parallel_group: event-calibration
+    note: Claimed as exp-026 under the unchanged event contract.
   - id: BC-005
     purpose: tool_validation
     owner_focus: correctness

@@ -158,6 +158,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-023-h-021-n4-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-024-h-021-n4-basin-event-v3-repair.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
@@ -246,9 +247,9 @@ session:
     to a terminal component. The cell observes three descriptors at two side values.
   stop_reason: null
   next_action: >-
-    After the exp-025 checkpoint is green and pushed, execute only BC-004: four fixed
-    n=6 seeds at 10 seconds each under a 90-second command cap. Treat it as tool
-    validation and retain any typed stop; component research remains blocked.
+    Execute preregistered exp-026 only: four fixed n=6 seeds at 10 seconds each under a
+    90-second command cap. Treat it as tool validation and retain any typed stop;
+    component research remains blocked.
 ---
 # Session 009 — Bounded Progress Before Scale
 
