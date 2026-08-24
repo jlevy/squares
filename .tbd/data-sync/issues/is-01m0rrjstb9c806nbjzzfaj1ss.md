@@ -5,12 +5,12 @@ title: solve_to_fixed_point decides convergence by exact float equality of the c
 kind: bug
 status: in_progress
 priority: 2
-version: 5
+version: 6
 labels: []
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:11:23.594Z
-updated_at: 2026-08-24T15:25:57.133Z
+updated_at: 2026-08-24T15:42:51.064Z
 closed_at: 2026-08-24T15:12:21.943Z
 close_reason: "D-132 fixed: fixed-cell iteration returns typed settlement evidence for fixed point, cycle, infeasible or worse transition, and cap; both quench paths refuse outer convergence after unsettled evidence. Focused regression, historical gate, Ruff, BasedPyright, schema, and replay checks pass. The newly exposed golden drift is separately open as D-162 / think-wbra."
 resolution: null
@@ -27,4 +27,4 @@ Suggested work: make the fixed-point test compare the discrete part of the cell 
 
 ## Notes
 
-Reopened after D-165 recurrence. The D-132 implementation typed fixed-point exits only after an initial cell solve succeeded. An initial solve returning None still becomes a dummy 1e3 objective in angle probes, so the outer quench can later report convergence without acknowledging that failure. A typed CellSolveResult prototype proved the bypass: once initial post-check rejection is propagated, D-016 and D-029 controls stop early; one bounded tightened-constraint retry restores both side values, but n=10 remains explicitly nonconverged on a free-sweep cell cycle. Prototype is recoverable in stash@{0}; do not merge until policy and controls are scientifically green.
+2026-08-24 bounded phase-policy test, stash@{0}. Hypothesis: censor unsettled exploratory bracket evaluations but require every terminal free-sweep evaluation to settle. Historical side-value regressions pass under this split, but strict outcomes do not: exp-002 n10 reaches the proved side within 1.3e-15 then stops on a free-sweep cell cycle; the Trump perturbation reaches -2.2e-11 side gap then stops because a terminal probe initial cell solve fails. Therefore do not merge or call either converged. Next work must repair or certify the fixed-cell objective, not redefine convergence.
