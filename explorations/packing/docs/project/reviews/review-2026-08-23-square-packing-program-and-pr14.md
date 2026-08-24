@@ -2219,6 +2219,37 @@ zero-error, zero-warning Python lint floor.
 GitHub had no configured check runs on either PR, so these are retained local validation
 results rather than a CI claim.
 
+## First post-merge research result
+
+The first main-based round chose a cheap primary-source falsifier instead of funding the
+full H-024 corpus sweep.
+Exp-012 retains Kingbird’s `n=29` SVG, reconstructs its 15 aligned and 14 rotated
+squares, checks all 406 pairs at 160 decimal digits, and replays the source’s nine
+derived offsets and six defining equations.
+An independent derivation reproduced the transform order, square formulas, and class
+multiplicities.
+
+The witness uses six orientation classes modulo quarter turns, with multiplicities
+`15/1/9/1/2/1`. The nearest declared classes differ by `0.296067318913687…°`, while the
+numerical interval radius is `1e-90°`. This refutes H-024’s universal upper bound of
+three at its preregistered first stop cell.
+It does not refute H-001’s proposer comparison; H-025 now owns the more useful claim
+that records may be compressible to a few fitted angles at bounded side loss.
+
+The evidence boundary remains numerical.
+The retained SVG serializes a high-precision `FindRoot` solution, not an exact or
+interval certificate, so exp-012 does not certify the record value as exact or optimal.
+D-133 adds generic determination outcomes to the experiment schema, D-134 restores David
+Ellsworth’s provenance and the verified angles to the `n=29` frontier row, and D-135
+narrows the roll-up’s obsolete blanket claim about exploratory record evidence.
+
+The final replay took `0.157556` machine-seconds after 12 agent-minutes of instrument
+and source work. The pushed result then passed the 25-step strict/deep gate in 38 wall
+seconds: 31 negative controls fired, all 135 defects reconciled, and the retained `n=29`
+source was reconstructed again inside the frontier-corpus step.
+H-024 stopped; the next fast mathematical lane is H-026’s exact first-order tangent
+screen.
+
 No primary mathematical or research-strategy remediation bead is closed by these
 checkpoint repairs. The focused D-066 through D-070 and D-072 through D-074 incident
 beads plus D-075 through D-079 are fixed; D-071 remains open for append-only numerical

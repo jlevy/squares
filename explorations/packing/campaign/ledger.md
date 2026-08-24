@@ -10,7 +10,7 @@
 | [session-002](agent-sessions/session-002-pr16-integration.md) | completed | process | think-7wsz | 3 | Review PR 15, then resume the correctness lane at think-1s0h or the independent portability experiment at think-osyp. |
 | [session-003](agent-sessions/session-003-unattended-research-readiness.md) | completed | process | think-1sxv | 4 | Publish this checkpoint, then begin H-023/H-021 terminal-component evidence while think-kmn2 designs per-cell queue pricing. |
 | [session-004](agent-sessions/session-004-creative-frontier-review.md) | completed | insight | think-7gu0 | 5 | Finish generated-view and bead reconciliation, run the normal gate, publish the checkpoint, then start H-026 and the exact n=3 quotient-map control in parallel lanes. |
-| [session-005](agent-sessions/session-005-h024-fast-falsifier.md) | in_progress | insight | think-w5rb | 3 | Reconcile generated views and current strategy documents, run focused controls and the strict/deep gate, close the session, then begin H-026 from its exact active contact table. |
+| [session-005](agent-sessions/session-005-h024-fast-falsifier.md) | completed | insight | think-w5rb | 3 | Begin H-026 from Trump's exact active-contact table, with complete one-sided branch enumeration and replayable tangent-cone certificates as the guarded deliverable. |
 
 ## Series
 
