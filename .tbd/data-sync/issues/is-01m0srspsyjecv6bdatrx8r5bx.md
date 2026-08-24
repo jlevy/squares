@@ -5,13 +5,17 @@ title: "H-041: certify a repaired Stromquist Theorem 2 point set"
 kind: task
 status: in_progress
 priority: 1
-version: 2
+version: 5
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0p4bxnqxb8dsv2rnqgyp0w8
+child_order_hints:
+  - is-01m0sy35vs5bh8b3692qvp0v6j
+  - is-01m0sy3cf8rxrbcdq99vkrav4q
+  - is-01m0sy3hy65kzwwpyb7m3r66tx
 created_at: 2026-08-24T11:34:24.317Z
-updated_at: 2026-08-24T11:41:15.724Z
+updated_at: 2026-08-24T13:07:09.893Z
 ---
 Successor hypothesis after the printed Figure 14 set failed. Test a preregistered repaired point set, initially G'=(79/100,37/20) in place of G=(4/5,37/20), against the complete five-node Stromquist mechanism. Acceptance: H-010 is first terminally rejected on the printed set; H-041 is registered before its repair result; the repair is source-distinct and never attributed to Stromquist; every finite cover cell and lemma precondition is certified exactly or by outward-rounded intervals; the strict open-box, conditional triple, standalone unavoidability, and 3+9 capacity implications replay independently; and any uncovered cell rejects the repair.
 
