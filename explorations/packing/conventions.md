@@ -260,6 +260,21 @@ controls in `tools/controls.yaml`, each a mutation that must be caught.
 A skipped check is recorded and re-listed at the end, `--strict` turns any skip into a
 failure, and “ALL CHECKS PASSED” is printed only when it is literally true.
 
+**Run the cheapest loop that answers the current question.** The research round is
+deliberately separate from the edit/test loop, so an eight-hour hypothesis never makes a
+documentation correction take eight hours to validate:
+
+| Loop | Target latency | Use |
+| --- | ---: | --- |
+| Interactive | under about 2 seconds | Status, ledger and schema checks, exact-witness verification, engine self-test |
+| Focused | under about 60 seconds | One changed component and its named negative control (`./test.sh --only`) |
+| Checkpoint | about 2 minutes | Normal `./test.sh` before a commit, push, or cross-component handoff |
+| Deep handoff | about 5 minutes | `./test.sh --strict` before an unattended campaign, major handoff, or merge |
+| Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
+
+These are working envelopes, not promises; repeated versioned benchmarks and warm/cold
+regimes remain tracked work.
+
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.
 
