@@ -1196,15 +1196,15 @@ The mutable size-by-size run order lives in the
 [basin-map confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md),
 not in this status document.
 It labels every cell as tool validation, measurement validation, or genuine research.
-The exact and event controls through `n = 5` are complete.
-BC-004 exposed D-183 at `n = 6`; exp-027 is the active repair replication, and larger
-slices remain blocked.
-Component and census claims remain blocked on the later identity and coverage rows.
+The event-retention controls through `n = 6` are complete; BC-005 is the next bounded
+`n = 7` tool-validation cell.
+Exact configuration-space controls still stop at `n = 4`. Component and census claims
+remain blocked on the later identity and coverage rows.
 
 ## Experiments Conducted
 
-There are 27 rounds registered in `series-000`; 26 are terminal and exp-027 is in
-progress. The terminal rounds record 768 agent-minutes and 25.8 wall-minutes.
+There are 27 rounds registered in `series-000`; all are terminal.
+They record 773 agent-minutes and 26.4 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1248,7 +1248,7 @@ archive beside it.
 | [exp-024](campaign/series/series-000-smoke-and-calibration/experiments/exp-024-h-021-n4-basin-event-v3-repair.md) | 4 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,301/14,301 evaluations settled; 4 admissible at side 2 | **baseline** |
 | [exp-025](campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md) | 5 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,219/14,219 evaluations settled; 4 admissible | **baseline** |
 | [exp-026](campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 3 valid/admissible retained; seed 3 crashes before retention | **blocked** |
-| [exp-027](campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | preregistered D-183 retention replication; measurement pending | **in-progress** |
+| [exp-027](campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 3 admissible; one typed time-budget stop | **baseline** |
 
 ### Cost and provenance
 
@@ -1280,18 +1280,19 @@ archive beside it.
 | exp-024 | 4 seeds, 10 s each | 16.967 s | 15 m | criterion | `f15d036` |
 | exp-025 | 4 seeds, 10 s each | 14.473 s | 5 m | criterion | `5ab8dab` |
 | exp-026 | 4 seeds declared; 3 retained | 19.017 s | 5 m | error | `da6bac3` |
+| exp-027 | 4 seeds, 10 s each | 34.425 s | 5 m | criterion | `a3be8e4` |
 
-### What the twenty-six rounds jointly establish
+### What the twenty-seven rounds jointly establish
 
-**The numerical basin event trust boundary is now admissible through the declared
-`n = 5` tool-validation cell; component classification is not.** Exp-018 through exp-020
-retain twelve independently valid historical v2 poses at `n=3` through `n=5`, including
-four at the proved `n=3` and `n=4` optima, but D-165 correctly remains recorded on those
-artifacts. Exp-021 adds one v3 `n=3` event whose 2,037 fixed-point evaluations are all
-retained and settled, whose pose independently verifies, and whose admissibility claim
-replays. Exp-022 completes the four-seed v3 block at 4/4 admissible: three endpoints
-reach side 2 and one reaches the valid nonoptimal side 2.362735797795. These events are
-evidence for the producer contract and terminal outcomes, not terminal-component counts.
+**The numerical basin event trust boundary now retains complete declared blocks through
+`n = 6`; component classification is not.** Exp-018 through exp-020 retain twelve
+independently valid historical v2 poses at `n=3` through `n=5`, including four at the
+proved `n=3` and `n=4` optima, but D-165 correctly remains recorded on those artifacts.
+Exp-021 adds one v3 `n=3` event whose 2,037 fixed-point evaluations are all retained and
+settled, whose pose independently verifies, and whose admissibility claim replays.
+Exp-022 completes the four-seed v3 block at 4/4 admissible: three endpoints reach side 2
+and one reaches the valid nonoptimal side 2.362735797795. These events are evidence for
+the producer contract and terminal outcomes, not terminal-component counts.
 Exp-023 reaches proved side 2 on three of four n=4 starts and preserves the fourth
 event’s post-check rejection.
 That stop exposed D-171: two rows were already outside the screen before an argmax-only
@@ -1304,8 +1305,12 @@ Those descriptors are not component identities, and none of the four starts find
 proved optimum. Exp-026 then finds the next retention boundary: three `n=6` events reach
 side 3 and replay, but seed 3 fails independent validity and is censored when event
 validation raises before writing it.
-D-183 blocks the size ladder until a new, source-distinct replication retains that
-failure as a typed non-admissible event.
+D-183 now routes independently invalid endpoints through the same atomic retention path
+as every other terminal outcome.
+Exp-027 retains all four starts: three admissible side-3 events and one independently
+valid, non-admissible time-budget stop at side 3.040392660291. The earlier invalid
+endpoint does not reproduce because open D-126 makes wall-clock-limited work
+load-dependent; neither round supports frequency or component claims.
 The exact small-moduli controls remain valid; component identity is the next blocked
 layer. The `n=12` calibration returns exactly `4.0`, but that is not a known-answer
 guard. The runner’s full-pose independent verification boundary remains open under

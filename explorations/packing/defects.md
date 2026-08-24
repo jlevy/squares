@@ -10,7 +10,7 @@ Source of truth is [`defects.yaml`](defects.yaml).
 
 - **61 soundness defects** — the system asserting something false about the mathematics. 50 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
 - **68 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034).
-- **25 are still open** (outstanding or contained), every one carrying a bead.
+- **24 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -152,7 +152,6 @@ This is the actionable list.
 | D-129 | outstanding | medium | Negative-control checker processes have no bounded timeout or child cleanup | `think-cns0` |
 | D-139 | contained | high | H-032 omitted directly relevant hard-square configuration-space literature | `think-izep` |
 | D-162 | outstanding | high | The small-n golden convergence labels hid unsettled fixed-cell evaluations | `think-wbra` |
-| D-183 | outstanding | high | The basin-event batch crashed before retaining an independently invalid endpoint | `think-78ws` |
 
 ## Every defect
 
@@ -340,4 +339,4 @@ This is the actionable list.
 | [D-180](README.md) | 2026-08-24 | docs | bookkeeping | conservative | `review` | high | fixed | Current orientation links sent agents to an explicitly superseded handoff |
 | [D-181](SYNOPSIS.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The basin definition called a deterministic quench endpoint a non-point |
 | [D-182](TUTORIAL.md) | 2026-08-24 | docs | validity | conservative | `review` | medium | fixed | The strategy tutorial excluded safe loss shaping and all repeated endpoint hits |
-| [D-183](tools/basin_census.py) | 2026-08-24 | record | robustness | flattering | `control_cell` | high | outstanding | The basin-event batch crashed before retaining an independently invalid endpoint |
+| [D-183](tools/basin_census.py) | 2026-08-24 | record | robustness | flattering | `control_cell` | high | fixed | The basin-event batch crashed before retaining an independently invalid endpoint |

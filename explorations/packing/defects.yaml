@@ -4663,7 +4663,7 @@ defects:
   detected_by: control_cell
   latent_for: since BasinEvent/v3 made independent validity part of event construction
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     Exp-026 produced three valid n=6 events, then seed 3 failed the independent packing
     screen. validate_event raised before run() appended that fourth outcome, leaving a
@@ -4674,13 +4674,14 @@ defects:
     producer and cannot distinguish a missing seed from an unattempted seed without its
     terminal traceback. Successful prefixes survive while failed outcomes disappear.
   fix: >-
-    Treat a finite independently invalid endpoint as a replayable blocked event rather
-    than an invalid record. Derive a specific promotion blocker, force scientific
-    admissibility false, retain the event atomically, and continue the declared seed
-    block.
+    BasinEvent/v3 now treats a finite independently invalid endpoint as a replayable
+    blocked event rather than an invalid record. It derives a specific promotion
+    blocker, forces scientific admissibility false, and routes every outcome through
+    one validated atomic append helper.
   regression: >-
-    A known overlapping endpoint must replay only with the independent-validity blocker;
-    forged admissibility or a missing blocker must fail. Resuming exp-026 must skip seeds
-    0 through 2 and retain seed 3.
+    A known overlapping endpoint survives the same retention helper used by run() only
+    with the independent-validity blocker; forged admissibility and a missing blocker
+    fail. Exp-027 retains and replays all four declared outcomes without resuming or
+    rewriting exp-026.
   bead: think-78ws
   recorded_in: tools/basin_census.py

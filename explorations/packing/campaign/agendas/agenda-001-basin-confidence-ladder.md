@@ -88,7 +88,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [6]
-    state: blocked
+    state: complete
     priority: 1
     question: >-
       Does the same event contract remain complete at the first proved side-3 case, with
@@ -99,20 +99,22 @@ agenda:
     exit: four replayable events or one retained blocker; no component-count claim
     bead: think-wbra
     depends_on: [BC-003]
-    next_evidence: exp-027 plus its complete four-event archive and semantic replay
+    next_evidence: permanent semantic replay of exp-026 and exp-027 in the focused and normal gates
     parallel_group: event-calibration
     note: >-
       Exp-026 retains three admissible events, then crashes before retaining seed 3's
-      independent-validity failure. The committed D-183 repair is claimed as exp-027;
-      larger event slices remain stopped until that replication closes.
+      independent-validity failure. Exp-027 retains all four outcomes: three admissible
+      side-3 events and one valid typed time-budget stop. D-183 is fixed; D-126 remains.
     artifacts:
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-027-h-021-n6-basin-event-v3-retention.jsonl
   - id: BC-005
     purpose: tool_validation
     owner_focus: correctness
     instances: [7]
-    state: tentative
+    state: ready
     priority: 1
     question: >-
       Does event generation, independent validity, and canonical-key computation remain

@@ -169,6 +169,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-027-h-021-n6-basin-event-v3-retention.jsonl
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - campaign/schemas/agenda.schema.yaml
   - tools/basin_census.py
@@ -251,10 +252,14 @@ session:
     Exp-026 retains three admissible side-3 events with 12,777 settled evaluations, then
     seed 3 fails independent validity and the batch crashes before writing its outcome.
     D-183 records the flattering retention failure and stops the size ladder.
+  - >-
+    Exp-027 retains and replays all four n=6 outcomes. Three converge at side 3; seed 3
+    is independently valid but hits the wall-clock budget at side 3.040392660291 and is
+    non-admissible. A deterministic run-path fixture closes D-183; D-126 remains open.
   stop_reason: null
   next_action: >-
-    Execute preregistered exp-027 only. Require four retained n=6 outcomes, with seed 3
-    visibly non-admissible if independent validation still fails; do not begin n=7.
+    After exp-027, D-183, and the full gate are committed and pushed, execute only
+    BC-005: four fixed n=7 seeds at 10 seconds each under a 90-second command cap.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -276,8 +281,9 @@ completes the n=4 v3 block.
 The historical v2 block remains promotion-blocked as recorded, and no endpoint
 descriptor has been promoted to a connected component.
 
-The size ladder is stopped at BC-004 by D-183 until an independently invalid endpoint
-can be retained as a typed event and the four-seed n=6 block is replicated.
+The event stack now retains complete blocks through n=6. D-126 still prevents a fixed
+wall-clock budget from defining reproducible scientific work, so these cells validate
+retention and replay only; they do not estimate basin frequencies.
 The separate n=5 connectivity question remains blocked until its component-identity
 controls are explicit.
 

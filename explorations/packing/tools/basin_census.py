@@ -363,6 +363,22 @@ def write_events(path: Path, events: list[dict[str, Any]]) -> None:
         temporary.write_text("".join(canonical_json(event) + "\n" for event in events))
 
 
+def retain_event(
+    path: Path,
+    events: list[dict[str, Any]],
+    by_id: dict[str, dict[str, Any]],
+    event: dict[str, Any],
+) -> None:
+    """Validate and atomically append one terminal outcome to a resumable archive."""
+    validate_event(event)
+    event_id = event["event_id"]
+    if event_id in by_id:
+        raise EventError(f"duplicate event id {event_id}")
+    events.append(event)
+    by_id[event_id] = event
+    write_events(path, events)
+
+
 def parse_seeds(value: str) -> list[int]:
     seeds: list[int] = []
     for part in value.split(","):
@@ -398,9 +414,7 @@ def run(args: argparse.Namespace) -> int:
             start_side=start_side,
             time_budget=args.time_budget,
         )
-        events.append(event)
-        by_id[event_id] = event
-        write_events(path, events)
+        retain_event(path, events, by_id, event)
         term = event["termination"]
         status = "OK" if term["scientifically_admissible_terminal_event"] else "STOP"
         print(
@@ -547,8 +561,11 @@ def selftest() -> None:
                 "contact_count": invalid_key.contact_count,
             },
         }
-        write_events(path, [blocked])
-        read_events(path)
+        retained: list[dict[str, Any]] = []
+        retained_by_id: dict[str, dict[str, Any]] = {}
+        retain_event(path, retained, retained_by_id, blocked)
+        if read_events(path) != [blocked]:
+            raise EventError("invalid endpoint did not survive the run-path retention helper")
         blocked["termination"]["scientifically_admissible_terminal_event"] = True
         write_events(path, [blocked])
         try:
