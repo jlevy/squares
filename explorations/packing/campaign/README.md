@@ -215,7 +215,7 @@ It stores stable cell IDs, priorities, budgets, prerequisites, beads, and promis
 evidence; the body carries the rationale.
 Hypotheses still own criteria, experiment artifacts still own measurements, `tbd` still
 owns work dependencies, and the active session still owns the clock.
-`campaign/runner.py` does not consume an agenda.
+`packing-campaign` does not consume an agenda.
 
 Update an agenda only at a checkpoint.
 A completed item means its bounded question has a retained answer, not that a basin map
@@ -360,7 +360,7 @@ into this claim” is a generated number rather than an impression.
 
 Two ways, and the difference is who is watching.
 
-### With the harness — [`runner.py`](runner.py)
+### With the harness — [`packing-campaign`](../src/sqpack/campaign/runner.py)
 
 Each step does one thing, the same way, always.
 An agent drives them; nothing here needs a human awake.
@@ -373,17 +373,17 @@ Use the
 [current readiness agenda](../docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md)
 for the exact 8-hour and 24-hour gate.
 
-```bash
+```shell
 cd explorations/packing
-./test.sh --strict                                   # must be clean before a night starts
-uv run --frozen python campaign/runner.py status              # queue, in-progress, last session
-uv run --frozen python campaign/runner.py preflight           # fire every guard and report
+uv run --frozen --group dev packing-validate --strict
+uv run --frozen packing-campaign status
+uv run --frozen packing-campaign preflight
 
-uv run --frozen python campaign/runner.py claim H-020         # -> exp-011
-uv run --frozen python campaign/runner.py execute exp-011     # run the declared command, archive it
-uv run --frozen python campaign/runner.py record  exp-011     # decide, write the round, commit
+uv run --frozen packing-campaign claim H-020
+uv run --frozen packing-campaign execute exp-011
+uv run --frozen packing-campaign record exp-011
 
-uv run --frozen python campaign/runner.py run --session-hours 8   # the middle three, over the queue
+uv run --frozen packing-campaign run --session-hours 8
 ```
 
 **State lives on disk, never between steps.** `claim` writes the stub, `execute` appends
@@ -391,8 +391,8 @@ to the archive beside it, `record` reads that archive back.
 So a step that fails loses nothing: fix what it named and re-run *that step*, not the
 session. `execute` truncates its archive first, so re-running it never double-counts.
 
-`runner.py release exp-011 --why "..."` gives up a round that died, recording it as
-`unresolved` rather than deleting it, and returns its hypothesis to the queue.
+`packing-campaign release exp-011 --why "..."` gives up a round that died, recording it
+as `unresolved` rather than deleting it, and returns its hypothesis to the queue.
 
 Two refusals worth knowing, because they are structural rather than advisory:
 
@@ -417,14 +417,15 @@ It must print JSON Lines carrying `best_side` and an `overlap` of exactly zero o
 result line, and exit 0. The seed’s result is the *minimum* `best_side` over its lines,
 so nothing has to agree about which line is the summary.
 
-Adding an experiment therefore never edits `runner.py`. Writing new experiment code is
-expected; writing new harness code per round is the error-prone step this removes,
-because it is code that runs once, at 3am, having never been exercised.
+Adding an experiment therefore never edits the campaign runner.
+Writing new experiment code is expected; writing new harness code per round is the
+error-prone step this removes, because it is code that runs once, at 3am, having never
+been exercised.
 
 #### Before the first night on a new machine
 
-```bash
-uv run --frozen python campaign/runner.py preflight
+```shell
+uv run --frozen packing-campaign preflight
 ```
 
 **The regime is part of the result.** `moves` is the budget unit and the engine is
@@ -435,10 +436,10 @@ machine you are actually on.
 
 ### Watched — by hand
 
-```bash
-./sqsearch/target/release/sqsearch --selftest   # gate; refuse to record if it fails
-./run_baseline.sh <archive.jsonl>               # or a strategy's own invocation
-./test.sh                                       # engine gate + record invariants + drift
+```shell
+./sqsearch/target/release/sqsearch --selftest
+uv run --frozen python -m cases.campaign_smoke.baseline_sweep <archive.jsonl>
+uv run --frozen --group dev packing-validate
 ```
 
 Then write the artifact into `series/<current>/experiments/`, lifting every number from
@@ -456,9 +457,9 @@ It removes the *waiting* from the rounds that are pure engine time, which is a s
 claim than it sounds and still the difference between one round a night and a queue
 draining while nobody is up.
 
-`ledger.py` needs PyYAML. `test.sh` picks an interpreter that has it, falling back to a
-pinned `uv run --frozen --with pyyaml==6.0.3 --with jsonschema==4.26.0 python3`; run it
-the same way if invoking `ledger.py` directly.
+Use `packing-ledger check` for a read-only campaign check and `packing-ledger render`
+after a reviewed artifact change.
+Both run in the locked uv environment and share the same invariant implementation.
 
 ## What a runner may not do
 
@@ -523,12 +524,13 @@ campaign/
     README.md            the series artifact: goal, instrument, why it exists
     experiments/         exp-NNN, one per round
     results/             raw JSONL from the engine
-  runner.py              harness steps: status, preflight, claim, execute, record, run
-  ledger.py              regenerates ledger.md and runs the whole-set checks
   ledger.md              generated; never hand-edited
   session-report.md      generated numeric-runner batch handoff; historical filename,
                          not a versioned session-NNN agent-session artifact
 ```
+
+The implementation lives in `src/sqpack/campaign/`; the durable campaign state stays in
+this directory.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

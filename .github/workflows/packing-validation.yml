@@ -1,0 +1,80 @@
+name: Packing validation
+
+on:
+  pull_request:
+    paths:
+      - ".agents/skills/experiment-loop/**"
+      - ".claude/skills/experiment-loop/**"
+      - ".github/workflows/packing-validation.yml"
+      - "explorations/packing/**"
+  push:
+    branches: [main]
+    paths:
+      - ".agents/skills/experiment-loop/**"
+      - ".claude/skills/experiment-loop/**"
+      - ".github/workflows/packing-validation.yml"
+      - "explorations/packing/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: packing-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: explorations/packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          python-version: "3.14"
+          working-directory: explorations/packing
+          enable-cache: true
+          cache-dependency-glob: explorations/packing/uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the complete packing validation surface
+        run: uv run --frozen --group dev packing-validate --jobs 2 --inner-jobs 1
+
+  macos-portability:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: explorations/packing
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install uv and Python 3.14
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          python-version: "3.14"
+          working-directory: explorations/packing
+          enable-cache: true
+          cache-dependency-glob: explorations/packing/uv.lock
+
+      - name: Synchronize the locked development environment
+        run: uv sync --frozen --all-extras --group dev
+
+      - name: Run the complete packing validation surface on a second architecture
+        run: uv run --frozen --group dev packing-validate --jobs 2 --inner-jobs 1
+
+      # The deep reconstruction currently exposes the known numerical-instability
+      # contracts in think-sk15, think-lwao, and think-u97a. Keep the signal visible
+      # without making an unrelated structural PR accept or conceal a changed golden.
+      - name: Probe the known deep-golden portability gap
+        id: deep-golden
+        continue-on-error: true
+        run: >-
+          uv run --frozen --group dev packing-validate --deep
+          --only "golden basin maps" --jobs 1 --inner-jobs 1

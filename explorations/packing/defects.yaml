@@ -1,4 +1,4 @@
-# The defect logbook. Generated view: defects.md (run tools/render_defects.py).
+# The defect logbook. Generated view: defects.md (run python -m devtools.render_defects).
 #
 # Scope: defects in the packing toolchain -- the engine, the quench, the verifier, the
 # experiment record, and the tooling around them. Approaches tried and rejected on
@@ -92,7 +92,7 @@ defects:
     dependencies and falling back to a pinned zero-install runner; the chosen runner is
     echoed.
   regression: 'the runner is printed on every run, and a missing dependency now exits non-zero'
-  recorded_in: test.sh
+  recorded_in: src/sqpack/cli/validate.py
 - id: D-005
   title: Campaign schemas declared enforced, and nothing enforced them
   date: '2026-08-23'
@@ -468,7 +468,7 @@ defects:
   consequence: 'An artifact carrying a number the report never shows, with no signal that they had parted.'
   fix: 'A cross-check that value_str parses to value, on every bound of every case.'
   regression: 'the cross-check, plus a negative control that mutates value_str and asserts it fires'
-  recorded_in: tools/controls.yaml
+  recorded_in: devtools/controls.yaml
 - id: D-023
   title: Verification was done in throwaway snippets and left nothing behind
   date: '2026-08-23'
@@ -494,7 +494,7 @@ defects:
     and run in the gate. On its first full run it found D-022 and corrected two of its
     own control definitions.
   regression: 'the controls run in test.sh; a control whose anchor is ambiguous or absent fails loudly rather than mutating the wrong text'
-  recorded_in: tools/negctl.py
+  recorded_in: devtools/run_negative_controls.py
 - id: D-024
   title: A strategy's enum and its prose said opposite things
   date: '2026-08-23'
@@ -607,7 +607,7 @@ defects:
     `tools/check_generated_exempt.py` in the gate, so a third generated view cannot
     repeat this.
   regression: 'tools/check_generated_exempt.py in test.sh, with a negative control in tools/controls.yaml'
-  recorded_in: tools/check_generated_exempt.py
+  recorded_in: devtools/check_generated_markdown.py
 - id: D-028
   title: A defect-log headline stayed asserted after it stopped being true
   date: '2026-08-23'
@@ -637,7 +637,7 @@ defects:
     the claim is derived in tools/render_defects.py rather than written, so it cannot
     disagree with defects.yaml; check_synopsis.py already reconciles the synopsis's
     per-class counts against the same source
-  recorded_in: tools/render_defects.py
+  recorded_in: devtools/render_defects.py
 - id: D-029
   title: A single fixed-angle LP solve was called "the quench", and retracted a correct finding
   date: '2026-08-23'
@@ -1702,7 +1702,7 @@ defects:
     candidate to promotion.
   regression: none
   recurrence_of: D-042
-  recorded_in: run_baseline.sh
+  recorded_in: cases/campaign_smoke/baseline_sweep.py
 - id: D-067
   title: The eleventh terminal round was omitted from campaign wall-time accounting
   date: '2026-08-23'
@@ -2617,7 +2617,7 @@ defects:
     same nonexistent-H-777 failure.
   regression: negctl requires every replacement anchor to appear exactly once
   bead: think-f82b
-  recorded_in: tools/controls.yaml
+  recorded_in: devtools/controls.yaml
 - id: D-107
   title: Generated campaign views and next-work state lagged their corrected sources
   date: '2026-08-24'
@@ -2974,7 +2974,7 @@ defects:
     The historical-regression step invokes the gate boundary with negative and
     nonnumeric values and checks the exact refusal.
   bead: think-wo4p
-  recorded_in: test.sh
+  recorded_in: src/sqpack/cli/validate.py
 - id: D-122
   title: A targeted gate built unrelated Rust code and could hide its build skip
   date: '2026-08-24'
@@ -3000,7 +3000,7 @@ defects:
     Focused command checks verify a README-only selection contains no build step and
     that skip accounting precedes the partial-run disposition.
   bead: think-bdv1
-  recorded_in: test.sh
+  recorded_in: src/sqpack/cli/validate.py
 - id: D-123
   title: A per-step process cap was documented as a shared global worker budget
   date: '2026-08-24'
@@ -3024,7 +3024,7 @@ defects:
     The historical-regression step traces a `--jobs 1 --list` invocation and requires
     `PACK_JOBS=1`.
   bead: think-mmw8
-  recorded_in: test.sh
+  recorded_in: src/sqpack/cli/validate.py
 - id: D-124
   title: The portable negative-control fallback copied a needlessly broad repository surface
   date: '2026-08-24'
@@ -3050,7 +3050,7 @@ defects:
     The harness prints the source size on every run and refuses before materialization
     if the portable-copy surface crosses its cap.
   bead: think-lyzi
-  recorded_in: tools/negctl.py
+  recorded_in: devtools/run_negative_controls.py
 - id: D-125
   title: Parallel negative controls could share one worker tree and erase each other's mutation
   date: '2026-08-24'
@@ -3076,7 +3076,7 @@ defects:
     The full control catalogue is run through the queue in the main gate; the original
     failing width sweep was repeated at 1, 2, 3, 5, and 10 workers.
   bead: think-oxwd
-  recorded_in: tools/negctl.py
+  recorded_in: devtools/run_negative_controls.py
 - id: D-126
   title: Quench convergence work was budgeted by machine time rather than reproducible work
   date: '2026-08-24'
@@ -3195,7 +3195,7 @@ defects:
     negctl refuses every replacement whose anchor does not appear exactly once, and the
     focused narrative-link control runs in the gate.
   bead: think-f7km
-  recorded_in: tools/controls.yaml
+  recorded_in: devtools/controls.yaml
 - id: D-131
   title: The Python lint floor passed while reporting eight type-checker warnings
   date: '2026-08-24'
@@ -3220,7 +3220,7 @@ defects:
     `step_lint_floor_python` now greps for `0 errors, 0 warnings, 0 notes` after Ruff,
     format, and BasedPyright all return success.
   bead: think-6cbn
-  recorded_in: test.sh
+  recorded_in: src/sqpack/cli/validate.py
 - id: D-132
   title: Fixed-cell iteration returns capped states without a settlement result
   date: '2026-08-24'
@@ -3397,7 +3397,7 @@ defects:
     derived set and requires replay coverage indexing to reject them. The gate replays
     all retained exp-013 certificates and therefore runs this control on every check.
   bead: think-vevb
-  recorded_in: tools/check_trump_tangent.py
+  recorded_in: cases/trump11/tangent_cones.py
 - id: D-138
   title: The provenance gate skipped schema-valid unquoted commit hashes
   date: '2026-08-24'
@@ -3426,7 +3426,7 @@ defects:
     exact checked-total line.
   recurrence_of: D-006
   bead: think-t4xv
-  recorded_in: test.sh
+  recorded_in: src/sqpack/cli/validate.py
 - id: D-139
   title: H-032 omitted directly relevant hard-square configuration-space literature
   date: '2026-08-24'
@@ -3540,7 +3540,7 @@ defects:
     Exp-014 replay rebuilds the complete model and requires the retained unlabelled
     source match to be true before the terminal determination can pass.
   bead: think-w4m2
-  recorded_in: tools/check_small_n_moduli.py
+  recorded_in: cases/small_n/optimal_moduli.py
 - id: D-143
   title: The n = 4 source replay attributed an unreported f-vector to Alpert et al.
   date: '2026-08-24'
@@ -3566,7 +3566,7 @@ defects:
     Exp-015 replay rebuilds the literature record from source hashes and requires its
     n = 4 evidence field to name Table 1 while leaving the reported f-vector null.
   bead: think-eb3w
-  recorded_in: tools/check_small_n_moduli.py
+  recorded_in: cases/small_n/optimal_moduli.py
 - id: D-144
   title: The orientation identity check compared two identical hard-coded tuples
   date: '2026-08-24'
@@ -3594,7 +3594,7 @@ defects:
     Both exp-014 and exp-015 rebuild the independently derived coefficient vectors before
     any branch enumeration, and refuse to emit or replay a determination on mismatch.
   bead: think-uxlg
-  recorded_in: tools/check_small_n_moduli.py
+  recorded_in: cases/small_n/optimal_moduli.py
 - id: D-145
   title: A broad integration edit fixed the wrong defect record
   date: '2026-08-24'
@@ -3864,7 +3864,7 @@ defects:
     any field decision is accepted.
   regression: Every generated and replayed H-010 record contains passing metadata checks for all four fields.
   bead: think-bv1d
-  recorded_in: tools/check_stromquist_theorem2.py
+  recorded_in: cases/stromquist/printed_cover.py
 - id: D-155
   title: The first H-010 record draft retained raw platform floating-point diagnostics
   date: '2026-08-24'
@@ -3887,7 +3887,7 @@ defects:
   regression: The retained record replays by semantic equality while the determination depends only on exact field signs.
   recurrence_of: D-059
   bead: think-x2ni
-  recorded_in: tools/check_stromquist_theorem2.py
+  recorded_in: cases/stromquist/printed_cover.py
 - id: D-156
   title: The first H-041 checker draft did not prove that tiling vertices stayed inside the container
   date: '2026-08-24'
@@ -3913,7 +3913,7 @@ defects:
     checked inventory in the replayed record.
   regression: An adversarial Figure 14 mutation moves H beyond the container and the checker rejects it.
   bead: think-5fmh
-  recorded_in: tools/check_stromquist_repair.py
+  recorded_in: cases/stromquist/repaired_cover.py
 - id: D-157
   title: The first H-041 Lemma 6 replay squared inequalities without executable sign guards
   date: '2026-08-24'
@@ -3938,7 +3938,7 @@ defects:
     exact positive gap coefficient. The record exposes those premises separately.
   regression: Every generated and replayed H-041 record contains the complete passing sign-premise inventory.
   bead: think-ie1b
-  recorded_in: tools/check_stromquist_repair.py
+  recorded_in: cases/stromquist/repaired_cover.py
 - id: D-158
   title: The first H-041 record blurred runtime source checks with unattached extraction hashes
   date: '2026-08-24'
@@ -3963,7 +3963,7 @@ defects:
     attestations.
   regression: Deterministic replay requires the source-binding record to preserve the decisive and non-decisive labels.
   bead: think-q1sd
-  recorded_in: tools/check_stromquist_repair.py
+  recorded_in: cases/stromquist/repaired_cover.py
 - id: D-159
   title: Scanned archive PDFs were misclassified as text by Git
   date: '2026-08-24'
@@ -4100,7 +4100,7 @@ defects:
     the ordinary step then continues to exercise its later boundary probes when green.
   recurrence_of: D-004
   bead: think-0bpx
-  recorded_in: test.sh
+  recorded_in: src/sqpack/cli/validate.py
 - id: D-164
   title: The fixed-cell solver mislabeled a numerical rejection as mathematical infeasibility
   date: '2026-08-24'
@@ -4176,7 +4176,7 @@ defects:
     all-probes claim. Exp-021 must independently replay its complete receipt and pose.
   recurrence_of: D-132
   bead: think-007f
-  recorded_in: tools/basin_census.py
+  recorded_in: cases/campaign_smoke/basin_events.py
 - id: D-166
   title: Basin events called producer convergence a fixed-cell certificate
   date: '2026-08-24'
@@ -4206,7 +4206,7 @@ defects:
     reject the forged promotion while D-165 is the declared blocker.
   recurrence_of: D-044
   bead: think-f2t0
-  recorded_in: tools/basin_census.py
+  recorded_in: cases/campaign_smoke/basin_events.py
 - id: D-167
   title: Basin events omitted the wall time needed to price the loop
   date: '2026-08-24'
@@ -4231,7 +4231,7 @@ defects:
     Basin-event selftest and replay require the wall_seconds field and reject malformed
     termination records.
   bead: think-4g3f
-  recorded_in: tools/basin_census.py
+  recorded_in: cases/campaign_smoke/basin_events.py
 - id: D-168
   title: A finite equal-objective adjacent-cell closure was labeled an unsettled cycle
   date: '2026-08-24'
@@ -4267,7 +4267,7 @@ defects:
     objectives differ by twice the LP screen must remain rejected.
   recurrence_of: D-132
   bead: think-8c61
-  recorded_in: sqpack/quench.py
+  recorded_in: src/sqpack/research/quench.py
 - id: D-169
   title: The cell post-check ignored every containment row
   date: '2026-08-24'
@@ -4298,7 +4298,7 @@ defects:
     rejected after the single bounded retry, with row 1 and kind `containment` retained.
   recurrence_of: D-014
   bead: think-4hc3
-  recorded_in: sqpack/quench.py
+  recorded_in: src/sqpack/research/quench.py
 - id: D-170
   title: D-165 reused the unrelated D-132 bead
   date: '2026-08-24'
@@ -4684,7 +4684,7 @@ defects:
     fail. Exp-027 retains and replays all four declared outcomes without resuming or
     rewriting exp-026.
   bead: think-78ws
-  recorded_in: tools/basin_census.py
+  recorded_in: cases/campaign_smoke/basin_events.py
 - id: D-184
   title: Overlapping synopsis excerpts were mistaken for a duplicate experiment row
   date: '2026-08-24'
@@ -4711,7 +4711,7 @@ defects:
     tools/check_synopsis.py counts both tables independently; a negative control
     duplicates one cost row and requires the check to fail.
   bead: think-h1wm
-  recorded_in: tools/check_synopsis.py
+  recorded_in: devtools/check_synopsis.py
 - id: D-185
   title: The synopsis carried stale defect-direction and gate-detector aggregates
   date: '2026-08-24'
@@ -4735,7 +4735,7 @@ defects:
     Focused negative controls change each displayed aggregate and require
     tools/check_synopsis.py to report the derived mismatch.
   bead: think-m3io
-  recorded_in: tools/check_synopsis.py
+  recorded_in: devtools/check_synopsis.py
 - id: D-186
   title: The first angle-sheet bound omitted slide motion from one projection
   date: '2026-08-24'
@@ -4767,7 +4767,7 @@ defects:
     angle/slide boundary fixtures; derivation of the all-parameter bound remains a
     mathematical review obligation rather than a sampling claim.
   bead: think-7pn0
-  recorded_in: tools/check_n5_angle_sheet.py
+  recorded_in: cases/n5/angle_sheet.py
 - id: D-187
   title: Two synopsis mutation controls retained the pre-D-186 aggregates
   date: '2026-08-24'
@@ -4796,7 +4796,7 @@ defects:
     normal gate runs the complete negative-control catalogue.
   recurrence_of: D-185
   bead: think-7pn0
-  recorded_in: tools/controls.yaml
+  recorded_in: devtools/controls.yaml
 - id: D-188
   title: The conventions authorized multi-hypothesis rounds after the schema prohibited them
   date: '2026-08-24'
@@ -4982,7 +4982,7 @@ defects:
     The exact selftest reuses endpoint A's pair (0,4) coefficient at the interior and
     requires it to differ from the regenerated row and fail on the interior witness.
   bead: think-5hh9
-  recorded_in: tools/check_n5_tangent_cones.py
+  recorded_in: cases/n5/tangent_cones.py
 - id: D-195
   title: The n=5 tangent checker treated tied support inequalities as alternatives
   date: '2026-08-24'
@@ -5009,7 +5009,7 @@ defects:
     The selftest removes one tied support row, coherently updates the redundant count
     and matrix digest, and requires semantic validation to reject the incomplete cone.
   bead: think-s41l
-  recorded_in: tools/check_n5_tangent_cones.py
+  recorded_in: cases/n5/tangent_cones.py
 - id: D-196
   title: A broad exp-035 status patch updated D-034 instead of D-194
   date: '2026-08-24'
@@ -5091,7 +5091,7 @@ defects:
     reject the changed aggregates.
   recurrence_of: D-187
   bead: think-tjqh
-  recorded_in: tools/controls.yaml
+  recorded_in: devtools/controls.yaml
 - id: D-199
   title: A frozen residual-repair set rejected a valid n=10 cell
   date: '2026-08-24'
@@ -5121,7 +5121,7 @@ defects:
     cell, the typed four-call exhaustion fixture, and deep known-answer regeneration at
     pool widths 10 and 1.
   bead: think-yi6x
-  recorded_in: sqpack/quench.py
+  recorded_in: src/sqpack/research/quench.py
 - id: D-200
   title: The synopsis gate-defect enumeration omitted D-198
   date: '2026-08-24'
@@ -5170,7 +5170,7 @@ defects:
     with the declared diagnostic.
   recurrence_of: D-198
   bead: think-u0ui
-  recorded_in: tools/controls.yaml
+  recorded_in: devtools/controls.yaml
 - id: D-202
   title: A delegated long-running validation lost its final receipt
   date: '2026-08-24'
@@ -5249,7 +5249,7 @@ defects:
     and the normal gate must pass before this checkpoint is pushed.
   recurrence_of: D-201
   bead: think-g4jc
-  recorded_in: tools/controls.yaml
+  recorded_in: devtools/controls.yaml
 - id: D-205
   title: The stacked workflow PR retained a superseded scientific checkpoint
   date: '2026-08-24'
@@ -5402,7 +5402,7 @@ defects:
     The session schema and mutation controls require recording provenance and reject an
     active retrospective phase or an underdeclared contemporaneous phase
   bead: think-o8wu
-  recorded_in: campaign/ledger.py
+  recorded_in: src/sqpack/campaign/ledger.py
 - id: D-211
   title: The workflow cadence mandated review phases after routine guarded rounds
   date: '2026-08-24'
@@ -5476,7 +5476,7 @@ defects:
     The README work-model check derives the allowed rows from the schema and rejects an
     extra, missing, reordered, or renamed numbered workflow row
   bead: think-u7lr
-  recorded_in: tools/check_readme.py
+  recorded_in: devtools/check_readme.py
 - id: D-214
   title: The v2 loader ignored its declared contract and envelope identity
   date: '2026-08-24'
@@ -5501,7 +5501,7 @@ defects:
     Negative controls mutate the contract and envelope independently and require both
     identity mismatches to fail
   bead: think-4utf
-  recorded_in: campaign/ledger.py
+  recorded_in: src/sqpack/campaign/ledger.py
 - id: D-215
   title: Workflow drift checks accepted unauthorized rows and invalid transitions
   date: '2026-08-24'
@@ -5527,7 +5527,7 @@ defects:
     The expanded negative-control suite mutates each previously uncovered branch and
     requires the owning semantic checker to reject it
   bead: think-w40g
-  recorded_in: tools/controls.yaml
+  recorded_in: devtools/controls.yaml
 - id: D-216
   title: Full phase histories made the generated orientation table unboundedly wide
   date: '2026-08-24'
@@ -5550,7 +5550,7 @@ defects:
     table; retain the full ordered phase history only in the authoritative session.
   regression: none
   bead: think-0gui
-  recorded_in: campaign/ledger.py
+  recorded_in: src/sqpack/campaign/ledger.py
 - id: D-217
   title: A parallel validation wrapper discarded a live command receipt
   date: '2026-08-24'

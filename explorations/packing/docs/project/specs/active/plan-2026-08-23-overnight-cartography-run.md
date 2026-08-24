@@ -11,7 +11,7 @@
 There is enough organized work for an autonomous **agent** to make useful progress for
 eight or twenty-four hours.
 There is not yet enough admissible, executable numerical work for
-[`campaign/runner.py`](../../../../campaign/runner.py) to run unattended.
+[`packing-campaign`](../../../../src/sqpack/campaign/runner.py) to run unattended.
 
 The distinction matters:
 
@@ -277,7 +277,7 @@ No unwatched numeric cell starts until every applicable line is true.
 - [ ] Invalid-pose, false-overlap, timeout, mid-round kill/release, three guard
   failures, three crashes, short-session budget, and failed-commit rehearsals reach the
   expected refusals.
-- [ ] `./test.sh --strict` and the deep checks pass with zero skips from a clean
+- [ ] `packing-validate --strict` passes the deep checks with zero skips from a clean
   checkout.
 - [ ] Three representative cold/warm target-host calibrations retain p50/p95 runtime and
   the exact binary/toolchain fingerprint.

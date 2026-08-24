@@ -12,6 +12,11 @@ dependencies = [
     "strif>=3.0.0",
 ]
 
+[project.scripts]
+packing-campaign = "sqpack.campaign.runner:main"
+packing-ledger = "sqpack.campaign.ledger:main"
+packing-validate = "sqpack.cli.validate:main"
+
 [project.optional-dependencies]
 symbolic = ["sympy>=1.13"]
 
@@ -31,7 +36,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["sqpack"]
+packages = ["src/sqpack"]
 
 # --- Lint -------------------------------------------------------------------
 #
@@ -47,7 +52,7 @@ packages = ["sqpack"]
 [tool.ruff]
 line-length = 96
 target-version = "py314"
-extend-exclude = ["resources", "frankensim-probe"]
+extend-exclude = ["resources"]
 
 [tool.ruff.lint]
 select = [
@@ -96,26 +101,21 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 # `K` is the published symbol in the source these modules transcribe; renaming it to
 # `k` would make the code harder to check against the paper, which is the point.
-"sqpack/packings/trump11.py" = ["N806"]
-"negative_control.py" = ["N806"]
+"cases/trump11/packing.py" = ["N806"]
+"cases/trump11/verifier_limits.py" = ["N806"]
 # The benchmark deliberately times the field's internals; that is what it measures.
-"bench.py" = ["SLF001"]
+"benchmarks/exact_verification.py" = ["SLF001"]
 # The ledger and renderers build markdown a line at a time, which reads better than
 # the comprehension PERF401 would prefer.
-"campaign/ledger.py" = ["PERF401"]
-"tools/render_defects.py" = ["PERF401"]
-"tools/render_tables.py" = ["PERF401"]
-# Tools are scripts with a main(); they legitimately sys.path.insert before
-# importing the package they are testing, which is E402 by construction.
-"tools/*.py" = ["E402"]
-"differential_test.py" = ["E402"]
-"run_quench.py" = ["E402"]
+"src/sqpack/campaign/ledger.py" = ["PERF401"]
+"devtools/render_defects.py" = ["PERF401"]
+"devtools/render_research_tables.py" = ["PERF401"]
 
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
 
 [tool.ruff.lint.isort]
-known-first-party = ["sqpack"]
+known-first-party = ["cases", "devtools", "sqpack"]
 
 [tool.ruff.format]
 docstring-code-format = true
@@ -123,8 +123,8 @@ docstring-code-format = true
 # --- Types ------------------------------------------------------------------
 
 [tool.basedpyright]
-include = ["sqpack", "tools", "*.py"]
-exclude = ["**/__pycache__", "resources", "frankensim-probe", ".venv"]
+include = ["src/sqpack", "cases", "devtools", "benchmarks", "tests"]
+exclude = ["**/__pycache__", "resources", ".venv"]
 pythonVersion = "3.14"
 typeCheckingMode = "standard"
 reportMissingImports = "error"
@@ -144,5 +144,6 @@ reportUnannotatedClassAttribute = "none"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]
 python_files = ["test_*.py"]
 addopts = ["--strict-config", "--strict-markers"]

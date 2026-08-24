@@ -21,7 +21,7 @@ hypothesis:
     metric: ratio of the two one-sided derivatives of s at the optimal tilt
     direction: bounded away from 1
   instrument: >-
-    explorations/packing/run_quench.py plus a one-sided difference probe of
+    cases.campaign_smoke.quench_experiment plus a one-sided difference probe of
     solve_to_fixed_point around the known optimal tilt; measured at n = 11, extend to
     other cells only under separately registered generalizations.
   instrument_ready: true

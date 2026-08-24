@@ -1,0 +1,465 @@
+# Negative controls: each one corrupts something and asserts the guard complains.
+#
+# Every entry here was run by hand at least once and then thrown away. Checked in, they
+# become the answer to "how do you know that check works?" -- and they are the
+# regression layer the defect log kept recording as absent.
+#
+# Run: uv run --frozen --group dev python -m devtools.run_negative_controls
+controls:
+
+- name: test harness - missing configured test directory
+  file: pyproject.toml
+  replace: ['testpaths = ["tests"]', 'testpaths = ["tests-missing"]']
+  run: uv run --frozen --group dev pytest -q
+  expect: "configured test directories do not exist: tests-missing"
+
+# --- the defect log's own invariants (D-018's class of bookkeeping failure) ---
+- name: defect log - open defect with no bead
+  file: defects.yaml
+  replace: ["  bead: think-hg3u\n", ""]
+  run: python3 -m devtools.validate_schemas
+  expect: "without a bead"
+
+- name: defect log - soundness defect with no direction
+  file: defects.yaml
+  replace: ["  class: soundness\n  direction: flattering\n  detected_by: pre_registered_rule",
+            "  class: soundness\n  detected_by: pre_registered_rule"]
+  run: python3 -m devtools.validate_schemas
+  expect: "soundness without a direction"
+
+- name: defect log - narrative link pointing nowhere
+  file: defects.yaml
+  replace: ["  bead: think-wo4p\n  recorded_in: src/sqpack/cli/validate.py",
+            "  bead: think-wo4p\n  recorded_in: no/such/file.md"]
+  run: python3 -m devtools.validate_schemas
+  expect: "recorded_in does not exist"
+
+- name: defect log - recurrence naming a defect that does not exist
+  file: defects.yaml
+  replace: ["  recurrence_of: D-010", "  recurrence_of: D-999"]
+  run: python3 -m devtools.validate_schemas
+  expect: "recurrence_of unknown"
+
+- name: defect log - fixed status contradicting an unresolved fix
+  file: defects.yaml
+  replace:
+    - |-
+      - id: D-039
+        title: A scalar side-error floor was treated as a basin-resolution theorem
+        date: '2026-08-23'
+        layer: tooling
+        class: soundness
+        direction: flattering
+        detected_by: review
+        severity: high
+        status: outstanding
+    - |-
+      - id: D-039
+        title: A scalar side-error floor was treated as a basin-resolution theorem
+        date: '2026-08-23'
+        layer: tooling
+        class: soundness
+        direction: flattering
+        detected_by: review
+        severity: high
+        status: fixed
+  run: python3 -m devtools.validate_schemas
+  expect: "D-039: fixed while fix still says none yet"
+
+# This control's anchor tracks a live number because the thing under test IS a number.
+# It needs updating whenever a defect is added -- and that is fine: negctl
+# requires the anchor to appear exactly once, so a stale one fails the suite by name
+# rather than quietly testing nothing.
+- name: defect log - count disagreeing with the list
+  file: defects.yaml
+  replace: ["count: 218", "count: 20"]
+  run: python3 -m devtools.validate_schemas
+  expect: "count 20 != 218"
+
+- name: README - repeated numeric gate-defect aggregate
+  file: README.md
+  replace:
+    - "No soundness\n  defect in the log was caught by it."
+    - "No soundness\n  defect in the log was caught by it. The gate caught two defects."
+  run: python3 -m devtools.check_readme
+  expect: "repeats a numeric gate-defect aggregate"
+
+- name: README - workflow selector drifts from the canonical names
+  file: README.md
+  replace: ["| W5 | `efficiency-loop` |", "| W5 | `speed-loop` |"]
+  run: python3 -m devtools.check_readme
+  expect: "README.md: workflow table is"
+
+- name: README - undeclared seventh workflow is not ignored
+  file: README.md
+  replace:
+    - "| W6 | `research-loop` |"
+    - |-
+      | W6 | `research-loop` |
+      | W7 | `rogue-loop` |
+  run: python3 -m devtools.check_readme
+  expect: "README.md: workflow table is"
+
+# The unprotected-fix count in SYNOPSIS.md. This claim -- the list that predicts what
+# comes back -- was hand-written, and it drifted: the prose said six while the generated
+# view said seven. That is D-028 recurring inside the document D-028 is about, which is
+# why the count is now derived and why it gets a control.
+- name: synopsis - hypothesis artifact count drifting from the registry
+  file: SYNOPSIS.md
+  replace: ["Forty-one claims or open questions are codified as artifacts.",
+            "Forty claims or open questions are codified as artifacts."]
+  run: uv run --frozen --quiet python -m devtools.check_synopsis
+  expect: "does not state the hypothesis artifact count (41)"
+
+- name: synopsis - dateline duplicates volatile campaign progress
+  file: SYNOPSIS.md
+  replace: ["**Date:** 2026-08-24", "**Date:** 2026-08-24, after 36 rounds"]
+  run: uv run --frozen --quiet python -m devtools.check_synopsis
+  expect: "Date dateline repeats campaign progress"
+
+- name: synopsis - duplicate experiment cost row
+  file: SYNOPSIS.md
+  replace:
+    - "| exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |"
+    - |-
+      | exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
+      | exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
+  run: uv run --frozen --quiet python -m devtools.check_synopsis
+  expect: "exp-030 appears 2 times in the cost table"
+
+- name: synopsis - soundness direction aggregate drifting from the log
+  file: SYNOPSIS.md
+  replace: ["Fifty-three of the sixty-four soundness defects", "Fifty-two of the sixty-four soundness defects"]
+  run: uv run --frozen --quiet python -m devtools.check_synopsis
+  expect: "soundness-direction aggregate is not 53 of 64"
+
+- name: synopsis - gate detector aggregate drifting from the log
+  file: SYNOPSIS.md
+  replace: ["gate has caught twelve defects in 218", "gate has caught eleven defects in 218"]
+  run: uv run --frozen --quiet python -m devtools.check_synopsis
+  expect: "gate-detector aggregate is not 12 of 218"
+
+- name: synopsis - unprotected-fix count drifting from the log
+  file: defects.yaml
+  replace: ["    to coincide with an in-progress round.\n  regression: none\n  bead: think-5zwm\n",
+            "    to coincide with an in-progress round.\n  regression: 'a check that does not exist'\n  bead: think-5zwm\n"]
+  run: uv run --frozen --quiet python -m devtools.check_synopsis
+  expect: "does not state the unprotected-fix count"
+
+- name: gate - strict handover skips deep golden regeneration
+  file: src/sqpack/cli/validate.py
+  replace:
+    - 'deep = namespace.deep or _environment_flag("PACKING_VALIDATE_DEEP") or strict'
+    - 'deep = namespace.deep or _environment_flag("PACKING_VALIDATE_DEEP") or False'
+  run: python3 -m sqpack.cli.validate --strict
+  expect: "strict mode did not enable deep validation"
+
+- name: gate - historical regression failure is not masked by later probes
+  file: src/sqpack/cli/validate.py
+  replace:
+    - '    return _module(context, "devtools.check_regressions")'
+    - '    raise StepFailureError("forced historical regression failure")'
+  run: python3 -m sqpack.cli.validate --only 'historical regressions'
+  expect: "forced historical regression failure"
+
+- name: defect log - generated view left stale
+  file: defects.yaml
+  replace: ["  title: A restart cap made the declared move budget inert",
+            "  title: A restart cap made the declared move budget inert, edited"]
+  run: python3 -m devtools.render_defects --check
+  expect: "defects.md is stale"
+
+# --- the experiment record (D-005, D-018) ---
+- name: campaign - artifact violating its declared schema
+  file: campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md
+  replace: ["  priority: 3", "  priority: 0"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "schema violation"
+
+- name: campaign - enforced contract metadata disagrees with schema id
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - "  contract: packing.squares:AgentSession/v2"
+    - "  contract: packing.squares:AgentSession/v1"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "softschema.contract"
+
+- name: campaign - enforced envelope metadata disagrees with loader
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["  envelope: session", "  envelope: experiment"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "softschema.envelope"
+
+- name: campaign - generic determination outcome outside the schema
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md
+  replace: ["    outcome: criterion_missed", "    outcome: corpus_refuted"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "schema violation"
+
+- name: campaign - one round naming two hypotheses
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md
+  replace: ["  hypotheses: [H-019]", "  hypotheses: [H-019, H-002]"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "is too long"
+
+- name: campaign - terminal round with no effort block
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["  effort:\n    wall_seconds: 108.8\n    stopped_by: criterion\n", ""]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "terminal round without an effort block"
+
+- name: campaign - terminal round with no measured wall time
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["    wall_seconds: 108.8\n", ""]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "terminal round without effort.wall_seconds"
+
+- name: campaign - open instance mislabeled as a known-answer control
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["instance: {axis: n, point: 12, role: calibration}",
+            "instance: {axis: n, point: 12, role: negative_control}"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "control role negative_control requires a proved instance"
+
+- name: campaign runner - n12 improvement rejected as a control breach
+  file: src/sqpack/campaign/runner.py
+  replace: ['CONTROLS = {10: ("within", 1e-2), 16: ("not_below", 4.0)}',
+            'CONTROLS = {10: ("within", 1e-2), 12: ("not_below", 4.0)}']
+  run: python3 -m sqpack.campaign.runner preflight
+  expect: "FAIL  an n=12 improvement is not rejected as a control breach"
+
+- name: campaign runner - execute bypasses the active gate marker
+  file: src/sqpack/campaign/runner.py
+  replace:
+    - "    refuse_if_gate_running()\n    path, e = find_round(eid)\n"
+    - "    path, e = find_round(eid)\n"
+  run: python3 -m sqpack.campaign.runner preflight
+  expect: "FAIL  execute refuses while the gate marker exists"
+
+- name: campaign runner - release bypasses the active gate marker
+  file: src/sqpack/campaign/runner.py
+  replace:
+    - "    with `stopped_by: error`: the round died, and nothing may be concluded from it.\n    \"\"\"\n    refuse_if_gate_running()\n    path, stub = find_round(eid)\n"
+    - "    with `stopped_by: error`: the round died, and nothing may be concluded from it.\n    \"\"\"\n    path, stub = find_round(eid)\n"
+  run: python3 -m sqpack.campaign.runner preflight
+  expect: "FAIL  release refuses while the gate marker exists"
+
+- name: campaign runner - record fields drift from the execution receipt
+  file: src/sqpack/campaign/runner.py
+  replace:
+    - "        \"method_commit\": execution[\"commit\"],\n"
+    - "        \"method_commit\": \"record-time-sha\",\n"
+  run: python3 -m sqpack.campaign.runner preflight
+  expect: "FAIL  record fields are bound to the execution receipt"
+
+- name: campaign - agent session id disagrees with its filename
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["  id: session-001", "  id: session-002"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "name does not start with its id 'session-002'"
+
+- name: campaign - first workflow phase does not start with the session
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["    entered_by: session_start", "    entered_by: planned_checkpoint"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "first workflow phase was not entered at session_start"
+
+- name: campaign - retrospective workflow phase cannot remain active
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - |-
+      recording: retrospective
+          objective: Reconcile the abandoned detour, record state, and outer delegation loop.
+          status: completed
+    - |-
+      recording: retrospective
+          objective: Reconcile the abandoned detour, record state, and outer delegation loop.
+          status: in_progress
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "active workflow phase 1 is not contemporaneously recorded"
+
+- name: campaign - contemporaneous phase cannot omit its declared clock and contract
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["    recording: retrospective", "    recording: contemporaneous"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "contemporaneous workflow phase 1 has no started_at"
+
+- name: campaign - terminal workflow phase cannot omit its outcome
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - "    outcome: The detour was quarantined and the stable record became reviewable and green."
+    - "    outcome: null"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "terminal workflow phase 1 has no outcome"
+
+- name: campaign - terminal workflow phase cannot omit its evidence
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - |-
+      evidence:
+          - The named attic stash preserves the prototype without promoting its claims.
+          - The normal gate passed in 126 seconds with the session contract integrated.
+    - "evidence: []"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "terminal workflow phase 1 has no evidence"
+
+- name: campaign - terminal workflow phase cannot omit its stop reason
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - "    stop_reason: The declared reset and integration checkpoint was complete."
+    - "    stop_reason: null"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "terminal workflow phase 1 has no stop_reason"
+
+- name: campaign - session status must match its final workflow phase
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - "  primary_bead: think-m79h\n  status: completed\n  budget:"
+    - "  primary_bead: think-m79h\n  status: stopped\n  budget:"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "session status does not match final workflow phase"
+
+- name: campaign - non-final workflow phase remains active
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "  - workflow: process-review\n    recording: retrospective\n    focus: process\n    objective: Close only the evidence-contract gaps blocking admissible basin events.\n    status: completed"
+    - "  - workflow: process-review\n    recording: retrospective\n    focus: process\n    objective: Close only the evidence-contract gaps blocking admissible basin events.\n    status: in_progress"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "only the final workflow phase may be in_progress"
+
+- name: campaign - later workflow phase must explain its transition
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "    switch_reason: The factual review made the proposed instrument admissible for H-023."
+    - "    switch_reason: null"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "workflow phase 4 has no switch_reason"
+
+- name: campaign - later workflow phase must change workflow or focus
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "  - workflow: research-loop\n    recording: retrospective\n    focus: correctness\n    objective: Test H-023's exact fixed-angle and angle-sheet connectivity candidates."
+    - "  - workflow: process-review\n    recording: retrospective\n    focus: process\n    objective: Test H-023's exact fixed-angle and angle-sheet connectivity candidates."
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "workflow phase 2 changes neither workflow nor focus"
+
+- name: campaign - active workflow phase must be contemporaneously recorded
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "    recording: contemporaneous\n    focus: process\n    objective: Review and integrate PR 24's workflow entry points without losing the live scientific checkpoint.\n    status: stopped"
+    - "    recording: retrospective\n    focus: process\n    objective: Review and integrate PR 24's workflow entry points without losing the live scientific checkpoint.\n    status: in_progress"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "active workflow phase 10 is not contemporaneously recorded"
+
+- name: campaign - contemporaneous workflow phase must retain its declared output
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "expected_output: >-\n      One corrected merge on PR 22, a published finding-by-finding PR 24 review and\n      disposition, synchronized beads and defect log, and an explicit D-203 resume point."
+    - "expected_output: null"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "contemporaneous workflow phase 10 has no expected_output"
+
+- name: campaign - contemporaneous workflow deadline must follow its start
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "    deadline_at: '2026-08-24T23:46:44Z'"
+    - "    deadline_at: '2026-08-24T22:45:44Z'"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "workflow phase 10 deadline_at is not after started_at"
+
+- name: campaign - approximate delegation time labeled unavailable
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["    elapsed_seconds: 900\n    elapsed_quality: operator_reported_approximate",
+            "    elapsed_seconds: 900\n    elapsed_quality: unavailable"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "delegation elapsed value and quality disagree"
+
+- name: campaign - stopped on the clock without saying where to resume
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["    stopped_by: criterion", "    stopped_by: timebox"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "without verdict.resume_from"
+
+- name: campaign - exhausted verdict with no reopen condition
+  file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
+  replace: ["    decision: accepted", "    decision: exhausted"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "exhausted without reopen_when"
+
+- name: campaign - hypothesis on the board but not in the registry
+  file: campaign/ideas.md
+  replace: ["[H-018](hypotheses/H-018-basin-entry.md) has already been refuted as registered",
+            "[H-777](hypotheses/H-777-nonexistent.md) has already been refuted as registered"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "which is not in the registry"
+
+# --- the frontier corpus ---
+- name: frontier - generated table drifting from its source
+  file: frontier/n-011.md
+  # Mutate a digit the table actually SHOWS. The rendered cell carries 8 significant
+  # digits, so a change at the 14th is invisible to it and the check is right not to
+  # fire -- which this control asserted the wrong way round on its first attempt.
+  replace: ["    value: 3.87708359002281", "    value: 3.88708359002281"]
+  run: python3 -m devtools.render_research_tables --check
+  expect: "STALE (re-run `python -m devtools.render_research_tables`)"
+
+- name: frontier - numeric value and its display string disagreeing
+  file: frontier/n-011.md
+  replace: ["    value_str: '3.87708359002281'", "    value_str: '3.87708359002282'"]
+  run: python3 -m devtools.validate_schemas
+  expect: "value_str disagrees with value"
+
+- name: generated view left un-exempt from the Markdown formatter
+  file: ../../.flowmarkignore
+  replace: ["explorations/packing/defects.md\n", ""]
+  run: python3 -m devtools.check_generated_markdown
+  expect: "generated views not exempt from the Markdown formatter"
+
+# --- basin identity (the census cannot count what it cannot tell apart) ---
+#
+# Each of these breaks one invariance the key claims, and each is a way a census would
+# fail silently rather than loudly: an inflated basin count, a curve that never
+# saturates, a key that agrees with everything. Watched failing, not assumed.
+- name: canonical - container symmetry not quotiented out
+  file: src/sqpack/research/canonical.py
+  replace: ["    for flip in (False, True):\n", "    for flip in (False,):\n"]
+  run: uv run --frozen --quiet python -m devtools.check_canonical
+  expect: "FAIL  invariant under all 8 container symmetries"
+
+- name: canonical - square relabelling changes the key
+  file: src/sqpack/research/canonical.py
+  replace: ["        squares = sorted(\n", "        squares = list(\n"]
+  run: uv run --frozen --quiet python -m devtools.check_canonical
+  expect: "FAIL  invariant under square relabelling"
+
+# The SEAM is the property only one thing guards: an angle one ULP below pi/2 must key
+# as one at zero. The quantizer's trailing `% steps` is the whole of it, so this control
+# reaches it and nothing else does.
+#
+# Three dead ends here, all worth not repeating: a `theta % QUARTER` inside the quantizer
+# (redundant with the upstream fold, so mutating it changed nothing and the control
+# silently stopped firing); perturbing the step COUNT (harmless -- scaling and modulo use
+# the same number, so the seam closes for any integer); and trying to break quarter-turn
+# invariance, which has two independent guards -- see below.
+- name: canonical - the angle seam at pi/2 splits identical squares
+  file: src/sqpack/research/canonical.py
+  replace: ["    return round(theta / QUARTER * steps) % steps",
+            "    return round(theta / QUARTER * steps)"]
+  run: uv run --frozen --quiet python -m devtools.check_canonical
+  expect: "FAIL  an angle one ULP below pi/2 keys as one at zero"
+
+# There is deliberately NO control for "invariant under a quarter turn of one square",
+# and the reason is worth recording rather than leaving as a hole. That property has two
+# independent guards -- `canonical_key` folds angles into [0, pi/2) on the way in, and
+# the quantizer's `% steps` folds them again -- so breaking either one leaves the check
+# passing. Measured both ways. A control needs a single mutation that reaches the
+# property, and here none exists; the honest options are to record that or to weaken the
+# code so a control can fire, and weakening working code to make a test look better is
+# not a trade this directory makes.
+
+- name: canonical - the contact certificate agrees with everything
+  file: src/sqpack/research/canonical.py
+  replace: ["    digest = _certificate([ranks[a] for a in initial], adjacency).encode()",
+            "    digest = b'constant'"]
+  run: uv run --frozen --quiet python -m devtools.check_canonical
+  expect: "FAIL  a different arrangement keys differently"

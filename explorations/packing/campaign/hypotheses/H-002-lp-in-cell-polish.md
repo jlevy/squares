@@ -21,7 +21,8 @@ hypothesis:
     direction: lower
     threshold: 1e-12 against the analytic value
   instrument: >-
-    Built: sqpack/quench.py and run_quench.py. A scipy HiGHS LP solves a fixed-angle,
+    Built: sqpack.research.quench and cases.campaign_smoke.quench_experiment. A scipy
+    HiGHS LP solves a fixed-angle,
     fixed-axis cell; the quench re-reads the cell and uses local angle descent or
     class-bracketing search.
   instrument_ready: true

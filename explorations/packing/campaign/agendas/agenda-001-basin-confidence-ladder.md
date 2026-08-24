@@ -206,8 +206,8 @@ agenda:
       every endpoint, settles all 6,631 evaluations, and returns within 2.221e-15 of the
       proved side. This validates a local known-answer control, not basin frequency.
     artifacts:
-    - sqpack/packings/gobel10.py
-    - tools/basin_census.py
+    - cases/gobel10/packing.py
+    - cases/campaign_smoke/basin_events.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
   - id: BC-009
@@ -231,7 +231,7 @@ agenda:
     next_evidence: classifier contract, positive fixtures, and negative mutations
     parallel_group: identity
     artifacts:
-    - tools/check_terminal_components.py
+    - cases/small_n/terminal_components.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
   - id: BC-010
@@ -283,16 +283,16 @@ agenda:
       one-worker run reproduces the n=4 and n=10 drift in 109 seconds. No tolerance or
       golden record was changed.
     artifacts:
-    - tools/check_n5_equal_side_face.py
+    - cases/n5/equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
-    - tools/check_n5_angle_sheet.py
+    - cases/n5/angle_sheet.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
-    - tools/check_n5_tangent_cones.py
+    - cases/n5/tangent_cones.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
-    - tools/check_n5_second_order_obstruction.py
+    - cases/n5/second_order_obstruction.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json
   - id: BC-011

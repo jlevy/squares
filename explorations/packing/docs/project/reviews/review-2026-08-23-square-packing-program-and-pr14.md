@@ -381,8 +381,8 @@ per-stage attribution remain open work on `think-xzew`.
 
 ### F-01 (P0): the runner can record data that its own overlap guard rejects
 
-[`read_lines`](../../../campaign/runner.py) writes each line to the archive at lines
-315–322 *before* parsing or checking it.
+[`read_lines`](../../../src/sqpack/campaign/runner.py) writes each line to the archive
+at lines 315–322 *before* parsing or checking it.
 `run` catches `GuardError` at lines 779–785 and then calls `record` unconditionally.
 More seriously, `record` rebuilds cells through `cells_from`, lines 393–412, which reads
 only `n`, `seed`, and `best_side`; it does not re-run any of the JSON, overlap,
@@ -412,13 +412,14 @@ scientific result rows from guard-invalid data.
 
 ### F-02 (P0): validity is a proposer assertion, not an independent measurement
 
-The command contract at [`campaign/runner.py:20–34`](../../../campaign/runner.py)
-requires only a scalar `overlap` or `best_overlap`. No pose is required.
+The command contract at
+[`campaign/runner.py:20–34`](../../../src/sqpack/campaign/runner.py) requires only a
+scalar `overlap` or `best_overlap`. No pose is required.
 The harness then checks exact equality to the value zero *reported by the same code that
 proposed the configuration*. It cannot recompute containment or separation.
 The PR’s own quench driver illustrates the loss:
-[`run_quench.py:78–120`](../../../run_quench.py) emits side, convergence, counts, and
-timings but omits `x`, `y`, and `theta`.
+[`run_quench.py:78–120`](../../../cases/campaign_smoke/quench_experiment.py) emits side,
+convergence, counts, and timings but omits `x`, `y`, and `theta`.
 
 The provenance fields repeat the same mistake.
 The claim stub hardcodes `selftest_passed: true` at `runner.py:221–240`; the terminal
@@ -441,8 +442,8 @@ is.
 
 ### F-03 (P0): the generic evaluator cannot evaluate the hypotheses it is meant to queue
 
-[`decide`](../../../campaign/runner.py) ignores `criterion.shape`, uses only a numeric
-`criterion.threshold` at line 438, and reduces every outcome to
+[`decide`](../../../src/sqpack/campaign/runner.py) ignores `criterion.shape`, uses only
+a numeric `criterion.threshold` at line 438, and reduces every outcome to
 `best_side - standing_best` at lines 457–470. That implements H-016/H-017/H-020 only.
 It does not implement:
 
@@ -490,9 +491,9 @@ Several smaller defects combine at the overnight boundary:
 - `release` regenerates the ledger but does not check regeneration or persist the
   release. The report can omit runnable-but-unrun work and does not implement the
   promised “what moved / what died” distinction.
-- [`ledger.py:298–303`](../../../campaign/ledger.py) drops a parsed timezone with
-  `.replace(tzinfo=None)` instead of converting it to UTC. A non-zero offset can make a
-  fresh lease stale or an expired lease live.
+- [`ledger.py:298–303`](../../../src/sqpack/campaign/ledger.py) drops a parsed timezone
+  with `.replace(tzinfo=None)` instead of converting it to UTC. A non-zero offset can
+  make a fresh lease stale or an expired lease live.
 
 **Required repair:** model claim, execution, validation, recording, persistence,
 release, and terminal states explicitly.
@@ -507,23 +508,25 @@ terminal error that cannot be reported as a scientific verdict.
 
 The geometric key does minimize over `D4`, and the shipped test checks that path.
 The contact certificate does not.
-At [`canonical.py:201–210`](../../../sqpack/canonical.py), angle classes are ranked by
-their folded representative angle.
+At [`canonical.py:201–210`](../../../src/sqpack/research/canonical.py), angle classes
+are ranked by their folded representative angle.
 Reflection sends `a -> pi/2 - a`, which reverses those ranks; a contact graph whose
 topology distinguishes the classes can therefore change certificate.
-The shipped D4 test at [`canonical_check.py:100–122`](../../../tools/canonical_check.py)
-compares only `.geometric`, so it misses this failure.
+The shipped D4 test at
+[`canonical_check.py:100–122`](../../../devtools/check_canonical.py) compares only
+`.geometric`, so it misses this failure.
 
 The angle classes used as node colours are themselves order-dependent.
-The greedy representative algorithm at [`quench.py:349–368`](../../../sqpack/quench.py)
-does not define a transitive equivalence relation near its tolerance.
+The greedy representative algorithm at
+[`quench.py:349–368`](../../../src/sqpack/research/quench.py) does not define a
+transitive equivalence relation near its tolerance.
 A relabelling can therefore change both the contact certificate and angle signature.
 
 Finally, the two-key policy is internally inconsistent.
 The module says a matching contact certificate resolves a quantization split, and
 `agrees_with` reports exactly that state.
-[`Atlas.add`](../../../sqpack/atlas.py), however, deduplicates only when the exact tuple
-`(geometric, contact)` matches.
+[`Atlas.add`](../../../src/sqpack/research/atlas.py), however, deduplicates only when
+the exact tuple `(geometric, contact)` matches.
 The demonstrated 2e-12 perturbation is stored twice.
 There is no disagreement ledger or later union operation.
 
@@ -560,8 +563,8 @@ screen most cases, but the slow path must have a bounded operating envelope.
 ### F-07 (P0): the atlas counts stopping points as basins and cannot reconstruct its claimed discovery curve
 
 The atlas class calls every row “one distinct local optimum,” but
-[`Atlas.add:82–116`](../../../sqpack/atlas.py) stores the endpoint even when
-`converged=False`. Its comments explicitly defend that choice.
+[`Atlas.add:82–116`](../../../src/sqpack/research/atlas.py) stores the endpoint even
+when `converged=False`. Its comments explicitly defend that choice.
 The observed result at `n = 5`—11 sweep-limit stops, one convergence, 12 rows, and no
 known optimum—is the consequence.
 The result counts termination artifacts rather than basins.
@@ -631,16 +634,17 @@ The correct theorem in this repository is:
 
 > Fixed angles **and one separating-axis cell** define a linear program.
 
-[`solve_to_fixed_point`](../../../sqpack/quench.py) instead starts from the cell chosen
-by the input centres, solves it, chooses another cell, and stops when a cell repeats or
-when the next cell is worse or infeasible.
+[`solve_to_fixed_point`](../../../src/sqpack/research/quench.py) instead starts from the
+cell chosen by the input centres, solves it, chooses another cell, and stops when a cell
+repeats or when the next cell is worse or infeasible.
 At lines 194–197 it returns the incumbent even though the re-read cell differs, so the
 result need not be a fixed point.
 Its docstring claims this removes path dependence; the same-theta counterexample proves
 otherwise.
 
-The D-015 regression at [`regression_test.py:80–105`](../../../tools/regression_test.py)
-checks deterministic repetition and a pure translation of one start.
+The D-015 regression at
+[`regression_test.py:80–105`](../../../devtools/check_regressions.py) checks
+deterministic repetition and a pure translation of one start.
 It never supplies distinct starting cells, so it cannot test the property it names.
 The file is not wired into `test.sh` in any case.
 
@@ -697,7 +701,7 @@ Benchmark multiple brackets and coupled directions on proved controls.
 
 ### F-11 (P1): the generic exact-arithmetic API does not enforce its completeness preconditions
 
-[`NumberField.__init__`](../../../sqpack/field.py) documents an irreducible minimal
+[`NumberField.__init__`](../../../src/sqpack/field.py) documents an irreducible minimal
 polynomial and an interval containing exactly one real root.
 The implementation checks only a sign change at the endpoints.
 A reducible polynomial can pass, after which a non-zero reduced representative can
@@ -873,9 +877,9 @@ blocker.
 
 ### F-16 (P0): the mathematical golden is not hermetic and asserts what it says it only records
 
-[`tools/golden_basins.py`](../../../tools/golden_basins.py) combines two different
-artifacts: an oracle-driven convergence ladder and an exact characterization snapshot of
-a few multistart draws.
+[`tools/golden_basins.py`](../../../devtools/check_golden_basins.py) combines two
+different artifacts: an oracle-driven convergence ladder and an exact characterization
+snapshot of a few multistart draws.
 The prose says discovery is “measured, never asserted,” but the whole rebuilt
 YAML—including which basins those draws found, their frequencies, and `found_optimum`—is
 compared byte for byte.
@@ -923,17 +927,18 @@ Non-converged endpoints remain observations, never certified basins.
 
 ### F-17 (P0): the fast gate removed the producer-level regression it claimed to preserve
 
-At PR head `c412b8c`, [`test.sh`](../../../test.sh) makes `--deep` and `--strict`
-independent flags. The handover specification invokes only `./test.sh --strict`, so its
-golden step calls `verify_stored()` rather than annealing, quenching, rebuilding the
-map, or independently checking a pose.
-That function can derive mathematical constraints on stored scalars, but a YAML row
-saying `valid: true` is not independent validation.
+At PR head `c412b8c`, [`test.sh`](../../../src/sqpack/cli/validate.py) makes `--deep`
+and `--strict` independent flags.
+The handover specification invokes only `./test.sh --strict`, so its golden step calls
+`verify_stored()` rather than annealing, quenching, rebuilding the map, or independently
+checking a pose.
+That function can derive mathematical constraints on stored scalars, but
+a YAML row saying `valid: true` is not independent validation.
 The file contains no pose with which the fast path could establish that claim.
 
-At the same time, [`tools/atlas_check.py`](../../../tools/atlas_check.py) replaced its
-real six-start `n=5` census with one cheap real `n=4` quench and five synthetic keys.
-All six offers were passed with `converged=True`; the check then asserted that the
+At the same time, [`tools/atlas_check.py`](../../../devtools/check_atlas.py) replaced
+its real six-start `n=5` census with one cheap real `n=4` quench and five synthetic
+keys. All six offers were passed with `converged=True`; the check then asserted that the
 non-convergence counter was zero and described this as testing that the store did not
 hide non-convergence.
 A branch that deletes or ignores the false path can pass that fixture.
@@ -969,8 +974,9 @@ The top square slides continuously while the optimum side remains fixed.
 Running the current canonicalizer at `t = 0.50, 0.75, 1.00, 1.25, 1.50` produced one
 contact certificate, `af4ca4659c8fc659a37907833f922899`, but three geometric keys; D4
 identifies `t` with `2-t` and does not identify the remaining continuum.
-Because [`Atlas.add`](../../../sqpack/atlas.py) merges only when both hashes agree, a
-finer geometric quantum creates more rows from the same connected optimal family.
+Because [`Atlas.add`](../../../src/sqpack/research/atlas.py) merges only when both
+hashes agree, a finer geometric quantum creates more rows from the same connected
+optimal family.
 
 This is not repaired by choosing the contact key instead.
 The family’s active contact graph is constant through its interior, but contact graphs
@@ -1021,9 +1027,9 @@ The atlas stores hashes and the same coarse descriptors.
 Neither artifact retains the pose, active constraints, termination reason, residuals, or
 a content-addressed observation from which the alternatives can be tested.
 Rediscovery is evidence about proposal mass, not a convergence certificate.
-Conversely, [`closed_form.py`](../../../sqpack/closed_form.py) searches only a finite
-family `(p + q sqrt(d))/r`; a match is a heuristic clue, and a miss says only that this
-family did not match.
+Conversely, [`closed_form.py`](../../../src/sqpack/research/closed_form.py) searches
+only a finite family `(p + q sqrt(d))/r`; a match is a heuristic clue, and a miss says
+only that this family did not match.
 
 **Required repair:** preserve every pose and active set, then replay each singleton
 through a preregistered precision and budget ladder.
@@ -1045,11 +1051,11 @@ not say that two terminal configurations whose sides differ by more than that ar
 different, or that two configurations whose sides differ by less are the same.
 The current system nevertheless makes that inference in three places:
 
-- [`canonical.py`](../../../sqpack/canonical.py) says its `1e-6` pose quantum is far
-  below every real basin distinction because real basins differ in side by `1e-3` or
-  more;
-- [`atlas.py`](../../../sqpack/atlas.py) calls the minimum scalar side gap the number
-  that determines whether two rows are resolvable; and
+- [`canonical.py`](../../../src/sqpack/research/canonical.py) says its `1e-6` pose
+  quantum is far below every real basin distinction because real basins differ in side
+  by `1e-3` or more;
+- [`atlas.py`](../../../src/sqpack/research/atlas.py) calls the minimum scalar side gap
+  the number that determines whether two rows are resolvable; and
 - [`atlas.schema.yaml`](../../../atlas/atlas.schema.yaml) gives `closest_pair` the same
   interpretation.
 

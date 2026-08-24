@@ -8,8 +8,8 @@ Both ask a question our square-packing work actually needs answered.
 Nothing from FrankenSim is vendored here — these are our own sources, dropped into a
 local checkout’s `examples/` directories and removed afterwards.
 
-```bash
-./run.sh /path/to/frankensim
+```shell
+uv run --frozen python frankensim-probe/run_probe.py /path/to/frankensim
 ```
 
 The checkout must have its constellation siblings materialized
@@ -48,3 +48,7 @@ FrankenSim and its sibling repositories are MIT **with an OpenAI/Anthropic rider
 grants no rights to those parties or anyone acting on their behalf.
 Read it before depending on any of that code.
 These probe sources are ours and carry this repository’s terms.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

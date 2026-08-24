@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import math
 
-from sqpack.closed_form import recognise
+from sqpack.research.closed_form import recognise
 
 
 def test_closed_form_recognises_simple_surd_without_overclaiming() -> None:

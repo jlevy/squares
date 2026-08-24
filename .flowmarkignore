@@ -51,20 +51,20 @@ explorations/packing/resources/web/
 # Generated experiment-loop views.
 # ---------------------------------------------------------------------------
 #
-# ledger.md is rebuilt byte-for-byte by campaign/ledger.py and drift-checked by
-# `ledger.py --check` in explorations/packing/test.sh. Formatting it makes the
+# ledger.md is rebuilt byte-for-byte by `packing-ledger render` and drift-checked by
+# `packing-ledger check` through `packing-validate`. Formatting it makes the
 # check fail forever: flowmark rewraps the generated text, ledger.py regenerates
 # the unwrapped form, and the two never agree. Measured on 2026-08-22 -- the gate
 # failed on the first run after the file was formatted.
 explorations/packing/campaign/ledger.md
 
 # defects.md is the same case, and was missed when the rule above was written: it is
-# rebuilt by tools/render_defects.py and drift-checked by `render_defects.py --check`
-# in the same test.sh. flowmark reflows it today -- verified on 2026-08-23 against
+# rebuilt by `devtools.render_defects` and drift-checked through `packing-validate`.
+# flowmark reflows it today -- verified on 2026-08-23 against
 # main, where `flowmark --check` reports it would reformat. Any commit touching
 # Markdown on a machine with the lefthook pre-commit hook installed would have
 # reformatted it and left the gate failing until someone regenerated it.
 #
-# The gate now enforces this list rather than trusting it: test.sh fails if a file
+# The gate now enforces this list rather than trusting it: `packing-validate` fails if a file
 # carrying the generated-by banner is not named here.
 explorations/packing/defects.md

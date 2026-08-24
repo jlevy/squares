@@ -84,7 +84,7 @@ Four research documents lead here, and their conclusions constrain this design:
 
 What exists today: `sqpack` in Python — exact `ℚ(α)` arithmetic, a separating-axis
 verifier generic over the scalar type, Trump’s packing as a worked example, negative
-controls, and `test.sh` green.
+controls, and `packing-validate` green.
 It verifies `n = 11` in 0.35 s and is **the correctness oracle this spec builds
 against**, not something to replace.
 
@@ -292,8 +292,8 @@ run.basins  # each with key, side, verdict
 sqpack.search(n=12, seed=42, workers=32).digest == run.digest  # must hold
 ```
 
-The Python `sqpack.verify_packing(..., sign=...)` signature stays as-is so `test.sh`
-keeps passing unchanged.
+The Python `sqpack.verify_packing(..., sign=...)` signature stays as-is so
+`packing-validate` keeps passing unchanged.
 
 ## Implementation Plan
 
@@ -434,7 +434,8 @@ So this phase begins by re-measuring, and builds only what the measurement names
   negative control already in `negative_control.py`, and on every corpus entry with
   exact algebraic data.
 
-- [ ] Extend `test.sh` with the differential test and the certificate round-trip.
+- [x] Extend `packing-validate` with the differential test and the certificate
+  round-trip.
 
 - [ ] **E1 — corpus re-verification.** Every analytically-optimized record, exactly,
   with filter rates per `n`. This is what the speed is *for*.
@@ -482,7 +483,7 @@ model into the atlas or the corpus without passing the exact layer.
 
 ## Testing Strategy
 
-The existing `test.sh` is the harness; these are additions to it.
+`packing-validate` is the current harness; these are registered steps within it.
 
 **Differential testing against the oracle.** The pure-Python verifier is the reference
 implementation. Every Rust verdict must match it on: Trump’s packing, all six
@@ -530,12 +531,12 @@ Floors, from measurements already taken:
 
 Everything lands in `explorations/packing/`, alongside what is already there.
 The Python `sqpack` package keeps working throughout — Phase 1 adds a faster path and a
-richer return type without changing the existing signature, so `test.sh` passes at every
-commit.
+richer return type without changing the existing signature, so `packing-validate` passes
+at every commit.
 
 Rust is additive: `cargo` is not required to run the existing Python suite, and
-`test.sh` skips the Rust checks when no toolchain is present, in the same way it already
-skips the SymPy-dependent derivation.
+`packing-validate` skips the Rust checks when no toolchain is present, in the same way
+it skips the SymPy-dependent derivation.
 
 No deployment, no consumers outside this repository, no compatibility surface to
 maintain.
@@ -571,7 +572,7 @@ consume; version it from the start.
 
 **2026-08-23 (later) — the harness exists, and it changes what a phase item must ship.**
 
-`campaign/runner.py` now executes rounds unattended, and it reads a machine-readable
+`packing-campaign` now executes rounds unattended, and it reads a machine-readable
 `runner.command` recipe from each hypothesis rather than the prose `instrument` field.
 So a Phase item is not finished when its code works: it is finished when the hypothesis
 it unblocks carries a recipe and has `instrument_ready: true` flipped **in the same
@@ -618,8 +619,9 @@ implementation, and are corrected here rather than left to be discovered again:
   in the [postmortem](../../postmortems/postmortem-2026-08-23-soundness-class.md).
 
 And one addition to Phase 1’s definition of done: a new component joins the **soundness
-perimeter** ([`tools/perimeter_test.py`](../../../../tools/perimeter_test.py)) in the
-same change that introduces it.
+perimeter**
+([`devtools.check_soundness_perimeter`](../../../../devtools/check_soundness_perimeter.py))
+in the same change that introduces it.
 The quench did not, which is why D-014 was possible.
 
 **2026-08-23 (second revision) — Python first, compiled code where a profile says.**
@@ -691,7 +693,7 @@ Research documents this spec implements:
 Existing code and data this builds on:
 
 - [`explorations/packing/`](../../../../README.md) — the Python verifier, negative
-  controls, and `test.sh`.
+  controls, and `packing-validate`.
 - [`explorations/packing/frontier/`](../../../../frontier/README.md) — the per-`n`
   corpus and the datasets the experiments will write back into.
 

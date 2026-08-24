@@ -19,7 +19,7 @@ hypothesis:
     metric: best_side
     direction: lower
     threshold: 1e-4
-  instrument: explorations/packing/run_baseline.sh, gated by sqsearch --selftest
+  instrument: cases.campaign_smoke.baseline_sweep, gated by sqsearch --selftest
   instrument_ready: true
   regime: sqsearch 0.1.0, f64 screening, M1 Pro 8P+2E, deterministic seeds 1-5
   instance: {axis: n, point: 11}
@@ -48,3 +48,7 @@ one criterion could not distinguish.
 
 That distinction is the reason [H-002](H-002-lp-in-cell-polish.md) is now the registry’s
 top priority: `n = 10` was a polish failure inside the right basin.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->
