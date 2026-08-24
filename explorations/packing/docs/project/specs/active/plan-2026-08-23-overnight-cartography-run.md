@@ -87,6 +87,29 @@ It proves that its current guards fire and that at least one recipe is visible.
 It does not independently verify a pose, price the queue, bind the session deadline, or
 rehearse crash persistence.
 
+## Successive-`n` Confidence Ladder
+
+The active, mutable experiment order now lives in the
+[basin-map confidence ladder](../../../../campaign/agendas/agenda-001-basin-confidence-ladder.md).
+That soft-schema artifact is the handoff surface for one series of loops: every item
+states whether it is validating the tools, validating the measurement system, or asking
+a genuine research question; it also names the size, budget, entry condition, exit
+evidence, bead, and dependencies.
+
+This document continues to own broad launch readiness and the portfolio below.
+The ladder owns the frequently revised order of concrete cells.
+`SYNOPSIS.md` owns current knowledge, hypotheses own claims, experiments own
+measurements, beads own unfinished work, and the agent-session artifact owns one bounded
+clock. None is a duplicate runner queue.
+
+The current ladder has completed exact and event-level controls at `n = 3,4`. Its next
+ready item, BC-003, is a four-seed `n = 5` **tool-validation** cell, not basin research.
+The first genuine basin-structure item is the later H-023 connectivity cell, which stays
+blocked until both the `n = 5` event path and the exact `n = 3,4` identity controls
+pass.
+This distinction lets the campaign run many basic checks without converting a clean
+program execution into evidence about the landscape.
+
 ## The scientific portfolio
 
 The registry artifact is authoritative for each claim’s wording, metric, threshold,
@@ -334,6 +357,9 @@ The new H-024 corpus reconstruction is `think-w5rb` under the Insight focus.
   added the exact-small-`n`, public-parent, `s(12)`, `s(61)`, algebraic-field and
   asymptotic lanes, and adopted the fast-first visualization and successive-halving
   agenda.
+- **2026-08-24:** added the soft-schema basin confidence ladder as the mutable
+  size-by-size queue. It separates tool validation, measurement validation, and research
+  so proved controls can build confidence without being reported as landscape results.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1008,10 +1008,18 @@ ideas and dead ends.
 The registry artifact, not the review’s historical prose or this summary, owns each
 current criterion and kill rule.
 
+The mutable size-by-size run order lives in the
+[basin-map confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md),
+not in this status document.
+It labels every cell as tool validation, measurement validation, or genuine research.
+The exact and event controls at `n = 3,4` are complete; BC-003 is the next `n = 5`
+tool-validation cell.
+Component and census claims remain blocked on the later identity and coverage rows.
+
 ## Experiments Conducted
 
-There are 23 rounds registered in `series-000`; all are terminal.
-They record 743 agent-minutes and 25.0 wall-minutes.
+There are 24 rounds registered in `series-000`; all are terminal.
+They record 758 agent-minutes and 25.3 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1052,6 +1060,7 @@ archive beside it.
 | [exp-021](campaign/series/series-000-smoke-and-calibration/experiments/exp-021-h-021-n3-basin-event-v3.md) | 3 | positive control | H-021 | BasinEvent/v3 semantic replay | 1 valid; 2,037/2,037 fixed-point evaluations settled; 1 admissible | **baseline** |
 | [exp-022](campaign/series/series-000-smoke-and-calibration/experiments/exp-022-h-021-n3-basin-event-v3-completion.md) | 3 | positive control | H-021 | BasinEvent/v3 semantic replay | 3 valid; 8,364/8,364 evaluations settled; 3 admissible | **baseline** |
 | [exp-023](campaign/series/series-000-smoke-and-calibration/experiments/exp-023-h-021-n4-basin-event-v3.md) | 4 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 3 converged/admissible; one typed unsettled stop | **baseline** |
+| [exp-024](campaign/series/series-000-smoke-and-calibration/experiments/exp-024-h-021-n4-basin-event-v3-repair.md) | 4 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,301/14,301 evaluations settled; 4 admissible at side 2 | **baseline** |
 
 ### Cost and provenance
 
@@ -1080,11 +1089,12 @@ archive beside it.
 | exp-021 | 1 seed, 10 s cap | 1.897 s | 15 m | criterion | `8f20908` |
 | exp-022 | 3 seeds, 10 s each | 6.274 s | 6 m | criterion | `8f20908` |
 | exp-023 | 4 seeds, 10 s each | 12.506 s | 8 m | criterion | `8f20908` |
+| exp-024 | 4 seeds, 10 s each | 16.967 s | 15 m | criterion | `f15d036` |
 
-### What the twenty-three rounds jointly establish
+### What the twenty-four rounds jointly establish
 
-**The numerical basin event trust boundary is now admissible on one proved positive
-control; component classification is not.** Exp-018 through exp-020 retain twelve
+**The numerical basin event trust boundary is now admissible on two proved positive
+controls; component classification is not.** Exp-018 through exp-020 retain twelve
 independently valid historical v2 poses at `n=3` through `n=5`, including four at the
 proved `n=3` and `n=4` optima, but D-165 correctly remains recorded on those artifacts.
 Exp-021 adds one v3 `n=3` event whose 2,037 fixed-point evaluations are all retained and
@@ -1092,8 +1102,11 @@ settled, whose pose independently verifies, and whose admissibility claim replay
 Exp-022 completes the four-seed v3 block at 4/4 admissible: three endpoints reach side 2
 and one reaches the valid nonoptimal side 2.362735797795. These events are evidence for
 the producer contract and terminal outcomes, not terminal-component counts.
-Exp-023 reaches proved side 2 on three of four n=4 starts; the fourth event retains one
-unsettled post-check rejection and fails closed, so the v3 n=4 cell is 3/4 admissible.
+Exp-023 reaches proved side 2 on three of four n=4 starts and preserves the fourth
+event’s post-check rejection.
+That stop exposed D-171: two rows were already outside the screen before an argmax-only
+retry. Exp-024 applies one complete offending-set retry and reaches side 2 on all four
+starts, with 14,301 of 14,301 evaluations settled and all four events admissible.
 None of the four `n=5` starts finds its proved optimum.
 The exact small-moduli controls remain valid; component identity is the next blocked
 layer. The `n=12` calibration returns exactly `4.0`, but that is not a known-answer
@@ -1292,9 +1305,11 @@ probe. The step now propagates the checker failure immediately.
 D-164 separates one source of the newly visible nonconvergence: a successful HiGHS solve
 missed the fixed-cell post-check by about `2e-11` beyond its cutoff and was labeled
 mathematically infeasible.
-Typed outcomes now retain the cause, row, residual, retry margin, and actual solver-call
-count. A single one-row retry leaves the `1e-10` acceptance screen unchanged, restores
-the proved n=3 and n=10 controls, and is replayed against the original LP rows.
+Typed outcomes now retain the cause, rows, residuals, retry margins, and actual
+solver-call count.
+A single retry tightens the complete initial offending set, leaves the
+`1e-10` acceptance screen unchanged, restores the proved n=3 and n=10 controls, and is
+replayed against the original LP rows.
 D-165 records the bounded implementation’s stop condition: initial cell-solve failures
 still bypass D-132’s typed result and become dummy objectives inside the angle search.
 That code path is now typed, D-168 closes the n=10 cell degeneracy, and BasinEvent/v3
@@ -1314,8 +1329,10 @@ were never replayed.
 Every accepted cell now passes the full original LP residual vector.
 D-170 gives D-165 its own bead after the defect log was found to reference the unrelated
 D-132 tracker; the older bead remains unchanged.
-D-171 retains one n=4 seed whose bounded numerical repair still leaves a pair-row
-post-check rejection; the v3 event fails closed instead of promoting it.
+D-171 records why the former argmax-only repair left one n=4 event unsettled: rows 16
+and 21 already violated the screen together.
+The complete offending-set retry closes the exact regression, and exp-024 completes the
+n=4 v3 block at 4/4 admissible without weakening the screen.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).

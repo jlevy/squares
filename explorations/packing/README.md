@@ -44,7 +44,8 @@ The operating documents divide ownership rather than repeat one another:
 | --- | --- |
 | [Campaign runbook](campaign/README.md#the-bounded-research-cycle) | Portable slice protocol, clocks, result routing, and experiment rules |
 | [Agent sessions](campaign/agent-sessions/README.md) | Versioned objective, budget, delegation evidence, stop reason, and handoff |
-| [Current launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | Current scientific and operational readiness; the agent loop can work now, while the numerical runner remains a no-go |
+| [Basin confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) | Mutable, size-by-size priority queue separating tool validation, measurement validation, and genuine research |
+| [Current launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | Broader scientific and operational readiness; the agent loop can work now, while the generic numerical runner remains a no-go |
 | [Program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map) | Four-focus epic, durable findings, and bead map |
 
 ## The Autonomous Work Loop

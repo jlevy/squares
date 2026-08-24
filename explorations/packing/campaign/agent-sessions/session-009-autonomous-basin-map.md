@@ -39,9 +39,10 @@ session:
       poses, independent validity, typed producer termination, and event timings. Their
       twelve historical v2 events remain blocked as recorded. Exp-021 and exp-022 add a
       complete four-seed n=3 block of scientifically admissible v3 terminal events with
-      balanced receipts. Exp-023 adds three admissible n=4 events and one explicit
-      unsettled stop; the number of component-classified map cells remains zero, so no
-      complete-map claim follows.
+      balanced receipts. Exp-023 preserves the n=4 solver-boundary failure that exposed
+      D-171; exp-024 then completes the repaired n=4 block at four of four admissible
+      events with 14,301 of 14,301 evaluations settled. The number of
+      component-classified map cells remains zero, so no complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -120,6 +121,20 @@ session:
     elapsed_seconds: 6
     elapsed_quality: platform_measured
     next_action: Run retained n=3, n=10, n=11, and adversarial failure controls.
+  - task: Review every PR 20 surface and compare its documentation with the current branch
+    operator: pr19_comment_checkpoint_2
+    status: completed
+    outcome: >-
+      Found no GitHub feedback or dead links, but requested changes because the stack is
+      eight commits behind and its living SYNOPSIS still calls every basin event
+      D-165-blocked. Rebase only after exp-024 is durable, then reconcile the v3 rounds.
+    evidence: [GitHub REST and GraphQL surfaces, exact head comparison, claim-level diff audit]
+    files: []
+    checks: [remote head and base, comments, reviews, threads, checks, links, current artifacts]
+    uncertainty: The delegate did not merge or run PR 20's documentation through the current gate.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Rebase and amend PR 20 after the current branch is clean and pushed.
   outputs:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-018-h-021-n3-basin-event-calibration.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-019-h-021-n4-basin-event-calibration.md
@@ -127,12 +142,16 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-021-h-021-n3-basin-event-v3.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-022-h-021-n3-basin-event-v3-completion.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-023-h-021-n4-basin-event-v3.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-024-h-021-n4-basin-event-v3-repair.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-021-h-021-n3-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
+  - campaign/agendas/agenda-001-basin-confidence-ladder.md
+  - campaign/schemas/agenda.schema.yaml
   - tools/basin_census.py
   - README.md
   - campaign/README.md
@@ -152,11 +171,11 @@ session:
     post-check rejections on pair rows 66 or 77, with residuals from 1.00000008e-10 to
     9.999996e-10; none was mathematical infeasibility or a solver failure.
   - >-
-    The bounded one-row retry keeps the original 1e-10 screen, uses 25 retries on n=10,
-    accepts every result against the original rows with worst residual 1.55e-15, and
-    reaches the proved side within 1.33e-15. The retained n=3 seed-1 and n=11 controls
-    also pass; synthetic infeasible, solver-failure, pair, and containment cases retain
-    their distinct causes.
+    The bounded one-retry repair keeps the original 1e-10 screen, tightens every row
+    outside it in the first returned point, uses 25 retries on n=10, accepts every result
+    against the original rows with worst residual 1.55e-15, and reaches the proved side
+    within 1.33e-15. The retained n=3 seed-1 and n=11 controls also pass; synthetic
+    infeasible, solver-failure, pair, and containment cases retain their distinct causes.
   - >-
     An independent `sqpack.verify` screen accepts the repaired n=10 terminal pose,
     checks all 45 pairs, reports no failures, and recomputes the identical side
@@ -194,12 +213,17 @@ session:
     and are admissible; seed 3 retains one unsettled fixed-point evaluation after pair
     row 16 remains 4.209e-10 outside the screen after bounded repair. The event fails
     closed under D-171, leaving the cell 3/4 admissible.
+  - >-
+    D-171's retained fixed cell shows that rows 16 and 21 were already outside the
+    screen together. The one-retry complete offending-set repair keeps the screen fixed;
+    exp-024 then reaches proved side 2 on all four n=4 seeds with 14,301/14,301 settled
+    evaluations, zero unsettled evaluations, and 16.97 seconds total wall time.
   stop_reason: null
   next_action: >-
-    In one thirty-minute D-171 slice, retain the n=4 seed-3 failing fixed cell and
-    classify whether its second result is a cell-boundary alternative, solver artifact,
-    or row error. Preregister at most one bounded remedy if the cause is homogeneous;
-    otherwise preserve the 3/4 cell and switch research lanes before running n=5.
+    Commit and push exp-024 plus agenda-001, close D-171, and refresh PR 19. Then run only
+    BC-003: four fixed n=5 seeds at 10 seconds each under a 60-second command cap. Treat
+    it as tool validation; retain any typed stop and do not begin n=5 connectivity
+    research until the identity-control rows are complete.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -211,11 +235,14 @@ objective.
 
 The session therefore stopped the size sweep after n=5. The finite n=10 tie-cell test
 has now closed every observed two-, four-, and eight-cell degeneracy without claiming a
-global optimum. The next slice typed all sixteen missing outcomes, added one bounded
-one-row retry, and replayed every accepted result against every original LP row.
-Exp-021 now derives that evidence from a balanced fixed-point receipt and closes D-165.
-The historical v2 block remains promotion-blocked as recorded; no endpoint descriptor
-has been promoted to a connected component.
+global optimum. The next slices typed all sixteen missing outcomes, added one bounded
+retry, and replayed every accepted result against every original LP row.
+D-171 then showed that a retry must tighten the complete initial offending set rather
+than only its largest row.
+Exp-021 derives complete accounting from a balanced receipt and closes D-165; exp-024
+completes the n=4 v3 block.
+The historical v2 block remains promotion-blocked as recorded, and no endpoint
+descriptor has been promoted to a connected component.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

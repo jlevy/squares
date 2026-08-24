@@ -4125,18 +4125,19 @@ defects:
   fix: >-
     Return typed cell-solve outcomes for infeasibility, solver failure, post-check
     rejection, and accepted optima, retaining solver status, maximum residual, row index,
-    row kind, and actual solver-call count. On a post-check rejection only, tighten that
-    one RHS by its measured violation plus the unchanged 1e-10 screen and retry exactly
-    once; replay the second result against every original row. The n=10 control uses 25
-    bounded retries, all accepted with worst final residual 1.55e-15, and reaches the
-    proved side within 1.33e-15. An independent `sqpack.verify` screen accepts all 45
-    n=10 pairs with the identical required side. The retained n=3 seed-1 control reaches
-    side 2.
+    row kind, and actual solver-call count. On a post-check rejection only, collect every
+    row outside the unchanged 1e-10 screen, tighten each RHS by its measured violation
+    plus that screen, and retry exactly once; replay the second result against every
+    original row. The n=10 control uses 25 bounded retries, all accepted with worst final
+    residual 1.55e-15, and reaches the proved side within 1.33e-15. An independent
+    `sqpack.verify` screen accepts all 45 n=10 pairs with the identical required side.
+    The retained n=3 seed-1 control reaches side 2.
   regression: >-
     The exact failing cell from n=3 seed 1 must replay its row-12 repair and side;
     synthetic post-check, infeasible, and solver-failure outcomes must remain distinct;
-    a two-call repair must retain its row and margin; and actual LP-call accounting
-    includes the retry. A separately measured full n=3 seed-1 quench reaches side 2.
+    a two-call repair must retain its complete row set and margins; and actual LP-call
+    accounting includes the retry. A separately measured full n=3 seed-1 quench reaches
+    side 2.
   recurrence_of: D-014
   bead: think-28x5
   recorded_in: golden/basin-maps.yaml
@@ -4327,7 +4328,7 @@ defects:
   bead: think-k2vb
   recorded_in: defects.yaml
 - id: D-171
-  title: One n=4 positive-control evaluation remains unsettled after bounded repair
+  title: Argmax-only n=4 repair left one positive-control evaluation unsettled
   date: '2026-08-24'
   layer: quench
   class: robustness
@@ -4335,20 +4336,28 @@ defects:
   detected_by: control_cell
   latent_for: first BasinEvent/v3 n=4 calibration
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     Exp-023 seed 3 reaches a fixed-point evaluation whose successful HiGHS solution
     still violates pair row 16 by 4.209e-10 after the single D-164 one-row retry. The
     quench stops with one typed unsettled evaluation rather than returning convergence.
   consequence: >-
-    The n=4 positive-control block is only 3/4 scientifically admissible. The retained
-    stop is trustworthy, but the producer cannot yet map every declared start at this
-    proved size, so scaling the same regime cannot support a complete-map claim.
-  fix: none yet
+    Before correction, the n=4 positive-control block was only 3/4 scientifically
+    admissible. The retained stop was trustworthy, but the producer could not map every
+    declared start at this proved size, so scaling the same regime could not support a
+    complete-map claim.
+  fix: >-
+    Retaining the exact fixed cell showed that rows 16 and 21 both exceeded the screen
+    in the first returned point by about 4.209e-10. The former argmax-only retry tightened
+    row 21 and exposed the already-offending row 16. Freeze the complete first-pass
+    offending set, tighten both rows by their measured residual plus the unchanged
+    screen, retry once, and replay the result against all original rows. Exp-024 then
+    produces four of four independently valid and admissible events at proved side 2.
   regression: >-
-    Retain and replay the exact seed-3 event and failing row. Diagnose whether the second
-    result reflects a cell-boundary alternative, solver tolerance, or an incorrect row;
-    preregister any bounded remedy and keep the 1e-10 screen unchanged.
+    The exact seed-3 cell must identify repair rows `[16, 21]`, settle under one retry,
+    and replay against the complete original residual vector without changing the 1e-10
+    screen. Exp-024 must replay 14,301 settled and zero unsettled evaluations across four
+    independently valid, admissible events.
   recurrence_of: D-164
   bead: think-pwd0
-  recorded_in: campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl
+  recorded_in: campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl

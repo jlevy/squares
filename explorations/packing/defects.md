@@ -10,7 +10,7 @@ Source of truth is [`defects.yaml`](defects.yaml).
 
 - **56 soundness defects** — the system asserting something false about the mathematics. 46 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
 - **60 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164).
-- **25 are still open** (outstanding or contained), every one carrying a bead.
+- **24 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -144,7 +144,6 @@ This is the actionable list.
 | D-129 | outstanding | medium | Negative-control checker processes have no bounded timeout or child cleanup | `think-cns0` |
 | D-139 | contained | high | H-032 omitted directly relevant hard-square configuration-space literature | `think-izep` |
 | D-162 | outstanding | high | The small-n golden convergence labels hid unsettled fixed-cell evaluations | `think-wbra` |
-| D-171 | outstanding | high | One n=4 positive-control evaluation remains unsettled after bounded repair | `think-pwd0` |
 
 ## Every defect
 
@@ -320,4 +319,4 @@ This is the actionable list.
 | [D-168](sqpack/quench.py) | 2026-08-24 | quench | validity | conservative | `control_cell` | high | fixed | A finite equal-objective adjacent-cell closure was labeled an unsettled cycle |
 | [D-169](sqpack/quench.py) | 2026-08-24 | quench | validity | flattering | `control_cell` | critical | fixed | The cell post-check ignored every containment row |
 | [D-170](defects.yaml) | 2026-08-24 | record | bookkeeping | neutral | `drift_check` | high | fixed | D-165 reused the unrelated D-132 bead |
-| [D-171](campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl) | 2026-08-24 | quench | robustness | conservative | `control_cell` | high | outstanding | One n=4 positive-control evaluation remains unsettled after bounded repair |
+| [D-171](campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl) | 2026-08-24 | quench | robustness | conservative | `control_cell` | high | fixed | Argmax-only n=4 repair left one positive-control evaluation unsettled |

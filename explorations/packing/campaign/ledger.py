@@ -119,10 +119,10 @@ def board_ids() -> tuple[set[str], set[str]] | None:
     return set(re.findall(r"\bH-[0-9]{3}\b", text)), reserved
 
 
-def naming(series, explorations, hypotheses, experiments, sessions) -> list[str]:
+def naming(series, explorations, hypotheses, experiments, sessions, *, agendas) -> list[str]:
     """Ids in filenames agree with ids in frontmatter, and slugs are kebab-case."""
     problems = []
-    for items in (series, explorations, hypotheses, experiments, sessions):
+    for items in (series, explorations, hypotheses, experiments, sessions, agendas):
         for item in items:
             path = item["_path"]
             # A series is named by its directory; everything else by its own filename.
@@ -157,7 +157,7 @@ def dead_links() -> list[str]:
 
 
 def check(
-    series, explorations, hypotheses, experiments, sessions, *, now: dt.datetime
+    series, explorations, hypotheses, experiments, sessions, *, agendas, now: dt.datetime
 ) -> list[str]:
     """Whole-set invariants. Per-artifact validation cannot see any of these."""
     problems = []
@@ -168,6 +168,7 @@ def check(
         ("hypothesis", hypotheses),
         ("experiment", experiments),
         ("session", sessions),
+        ("agenda", agendas),
     ):
         seen = defaultdict(list)
         for item in items:
@@ -197,6 +198,44 @@ def check(
                 problems.append(
                     f"{experiment['_path'].name}: references unknown {hypothesis_id}"
                 )
+
+    for agenda in agendas:
+        name = agenda["_path"].name
+        items = agenda["items"]
+        item_ids = [item["id"] for item in items]
+        duplicate_items = {item_id for item_id in item_ids if item_ids.count(item_id) > 1}
+        if duplicate_items:
+            problems.append(f"{name}: duplicate item ids: {sorted(duplicate_items)}")
+        known_items = set(item_ids)
+        state_by_id = {item["id"]: item["state"] for item in items}
+        for item in items:
+            item_id = item["id"]
+            unknown_hypotheses = set(item.get("hypotheses") or []) - known
+            if unknown_hypotheses:
+                problems.append(
+                    f"{name}: {item_id} references unknown hypotheses "
+                    f"{sorted(unknown_hypotheses)}"
+                )
+            dependencies = set(item["depends_on"])
+            unknown_dependencies = dependencies - known_items
+            if unknown_dependencies:
+                problems.append(
+                    f"{name}: {item_id} depends on unknown items {sorted(unknown_dependencies)}"
+                )
+            if item_id in dependencies:
+                problems.append(f"{name}: {item_id} depends on itself")
+            if item["state"] == "ready":
+                incomplete = sorted(
+                    dependency
+                    for dependency in dependencies
+                    if state_by_id.get(dependency) != "complete"
+                )
+                if incomplete:
+                    problems.append(
+                        f"{name}: {item_id} is ready with incomplete dependencies {incomplete}"
+                    )
+            if item["state"] == "complete" and not item.get("artifacts"):
+                problems.append(f"{name}: {item_id} is complete without retained artifacts")
 
     reports = {x["id"] for x in explorations}
     for hypothesis in hypotheses:
@@ -330,7 +369,7 @@ def check(
                     f"{session['_path'].name}: delegation elapsed value and quality disagree"
                 )
 
-    problems += naming(series, explorations, hypotheses, experiments, sessions)
+    problems += naming(series, explorations, hypotheses, experiments, sessions, agendas=agendas)
     problems += dead_links()
 
     return problems
@@ -392,7 +431,7 @@ def spent(rounds: list[dict]) -> str:
     return " + ".join(parts)
 
 
-def render(series, explorations, hypotheses, experiments, sessions) -> str:
+def render(series, explorations, hypotheses, experiments, sessions, *, agendas) -> str:
     by_hypothesis = defaultdict(list)
     for experiment in experiments:
         for hypothesis_id in experiment.get("hypotheses") or []:
@@ -416,6 +455,28 @@ def render(series, explorations, hypotheses, experiments, sessions) -> str:
                 f"| {next_action} |"
             )
         lines.append("")
+
+    if agendas:
+        lines += ["## Experiment agendas", ""]
+        for agenda in sorted(agendas, key=lambda a: a["id"]):
+            path = agenda["_path"].relative_to(ROOT).as_posix()
+            objective = agenda["objective"].replace("\n", " ").strip()
+            lines += [
+                f"### [{agenda['id']}]({path}) — {agenda['title']}",
+                "",
+                f"Status: **{agenda['status']}**. {objective}",
+                "",
+                "| item | purpose | n | state | priority | bead | next evidence |",
+                "| --- | --- | --- | --- | ---: | --- | --- |",
+            ]
+            for item in agenda["items"]:
+                instances = ", ".join(str(n) for n in item["instances"])
+                evidence = item["next_evidence"].replace("\n", " ").strip()
+                lines.append(
+                    f"| {item['id']} | {item['purpose']} | {instances} | {item['state']} "
+                    f"| {item['priority']} | {item['bead']} | {evidence} |"
+                )
+            lines.append("")
 
     lines += [
         "## Series",
@@ -545,12 +606,15 @@ def main() -> int:
     hypotheses = load(ROOT / "hypotheses", "hypothesis")
     experiments = load(ROOT / "series", "experiment", "*/experiments/*.md")
     sessions = load(ROOT / "agent-sessions", "session", "session-*.md")
+    agendas = load(ROOT / "agendas", "agenda", "agenda-*.md")
 
-    problems = check(series, explorations, hypotheses, experiments, sessions, now=now)
+    problems = check(
+        series, explorations, hypotheses, experiments, sessions, agendas=agendas, now=now
+    )
     for problem in problems:
         print(f"FAIL {problem}", file=sys.stderr)
 
-    rendered = render(series, explorations, hypotheses, experiments, sessions)
+    rendered = render(series, explorations, hypotheses, experiments, sessions, agendas=agendas)
     if "--check" in sys.argv:
         current = LEDGER.read_text() if LEDGER.exists() else ""
         if current != rendered:
@@ -566,7 +630,7 @@ def main() -> int:
     print(
         f"OK {len(series)} series, {len(explorations)} reports, "
         f"{len(hypotheses)} hypotheses, {len(experiments)} rounds, "
-        f"{len(sessions)} agent {session_label}"
+        f"{len(sessions)} agent {session_label}, {len(agendas)} agendas"
     )
     return 0
 
