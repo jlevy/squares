@@ -349,6 +349,10 @@ session:
     Exp-033 meets its frozen exact criterion in 0.24 seconds of generation plus replay.
     The two equal-side n=5 golden keys share one fixed-angle optimal face; exact
     fixed-side nullities are 0/1/0 across its endpoint, interior, and endpoint strata.
+  - >-
+    The post-exp-033 normal gate passes all 30 steps in 30 wall-seconds: 37 negative
+    controls fire, 40 BasinEvents and all exact records replay, all 33 declared engine
+    commits are reachable, and 33 rounds, 185 defects, and nine sessions reconcile.
   stop_reason: null
   next_action: >-
     Continue BC-010 with one bounded angle-varying stationarity slice on exp-033's exact

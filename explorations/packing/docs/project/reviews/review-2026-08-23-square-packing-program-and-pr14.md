@@ -2471,6 +2471,7 @@ A 30-row common fixed-angle cell contains the whole segment, and an exact dual o
 With side fixed, the active ranks are 11, 10, and 11 at the first endpoint, interior,
 and second endpoint, so the corresponding linear-face nullities are `0/1/0`. Generation
 and independent replay take 0.24 wall seconds and all six controls pass.
+The subsequent normal gate passes all 30 steps in 30 wall seconds.
 
 This proves one connected fixed-angle optimal face and refutes geometric-key inequality
 as evidence of separation for this pair.
