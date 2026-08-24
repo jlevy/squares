@@ -80,7 +80,7 @@ def _from_git() -> tuple[list[dict[str, Any]], str] | None:
                 text=True,
                 check=True,
             ).stdout.split()
-        except (subprocess.CalledProcessError, OSError):
+        except subprocess.CalledProcessError, OSError:
             continue
         names = [n for n in listing if Path(n).name.startswith("is-")]
         if not names:

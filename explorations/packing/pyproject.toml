@@ -3,7 +3,7 @@ name = "sqpack"
 version = "0.2.0"
 description = "Exact verification and LP-in-cell quenching for square packings"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.14,<3.15"
 dependencies = [
     "jsonschema>=4.26.0",
     "numpy>=2.0",
@@ -46,7 +46,7 @@ packages = ["sqpack"]
 
 [tool.ruff]
 line-length = 96
-target-version = "py311"
+target-version = "py314"
 extend-exclude = ["resources", "frankensim-probe"]
 
 [tool.ruff.lint]
@@ -125,7 +125,7 @@ docstring-code-format = true
 [tool.basedpyright]
 include = ["sqpack", "tools", "*.py"]
 exclude = ["**/__pycache__", "resources", "frankensim-probe", ".venv"]
-pythonVersion = "3.11"
+pythonVersion = "3.14"
 typeCheckingMode = "standard"
 reportMissingImports = "error"
 reportUnusedImport = "error"
@@ -142,12 +142,7 @@ reportUnknownVariableType = "none"
 reportUnknownParameterType = "none"
 reportUnannotatedClassAttribute = "none"
 
-# No pytest configuration, deliberately. `test.sh` is the gate and nothing here wants
-# a second test runner. The config that used to sit here declared testpaths including a
-# `tests/` that does not exist and matched `*_test.py`, which collected
-# perimeter_test.py and regression_test.py by name -- both `main()` scripts with no
-# `def test_*` in them. The result was `pytest` printing "no tests ran" and exiting 0:
-# a configured, green test runner that checked nothing, which is the exact failure this
-# directory's defect log is about (D-004). Removing the config makes an empty
-# collection exit non-zero again. Renaming the three gate scripts off the `_test.py`
-# suffix is tracked separately (T-2 in the tooling-layout review).
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = ["--strict-config", "--strict-markers"]

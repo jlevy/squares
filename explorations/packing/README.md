@@ -248,6 +248,7 @@ explorations/packing/
 ├── run_baseline.sh         the baseline annealer sweep a round is run from
 ├── tools/                  checkers and generators: the soundness perimeter, the
 │                           negative controls, the generated views and their drift gates
+├── tests/                  fast behavioral contracts for safe Python refactors
 ├── sqsearch/               tier-1 screening annealer (Rust)
 ├── test.sh                 run everything and check the expected results
 └── frankensim-probe/       two experiments run against Jeffrey Emanuel's FrankenSim,

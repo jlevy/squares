@@ -1673,7 +1673,7 @@ def validate_record_invariants(record: dict[str, object]) -> None:
 def _raises_expected_error(action: Callable[[], object]) -> bool:
     try:
         action()
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         return True
     return False
 

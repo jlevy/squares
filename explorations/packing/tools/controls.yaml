@@ -7,6 +7,12 @@
 # Run:  python3 tools/negctl.py tools/controls.yaml
 controls:
 
+- name: test harness - missing configured test directory
+  file: pyproject.toml
+  replace: ['testpaths = ["tests"]', 'testpaths = ["tests-missing"]']
+  run: uv run --frozen --group dev pytest -q
+  expect: "configured test directories do not exist: tests-missing"
+
 # --- the defect log's own invariants (D-018's class of bookkeeping failure) ---
 - name: defect log - open defect with no bead
   file: defects.yaml

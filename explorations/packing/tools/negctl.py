@@ -173,8 +173,24 @@ def run_one(c: dict, tree: Path) -> tuple[bool, str]:
         target.write_text(text.replace(old, new, 1), encoding="utf-8")
         # check=False deliberately: a non-zero exit is the EXPECTED outcome here, and
         # inspecting it is this function's whole job.
+        env = os.environ.copy()
+        # Every worker links the already-synced environment to avoid reinstalling the
+        # scientific stack. Letting `uv run` sync that shared environment installs the
+        # editable project from a temporary snapshot, which disappears after this run
+        # and leaves the developer environment broken. Snapshot imports must still win.
+        env["UV_NO_SYNC"] = "1"
+        import_roots = (str(work / "src"), str(work))
+        env["PYTHONPATH"] = os.pathsep.join(
+            (*import_roots, env["PYTHONPATH"]) if env.get("PYTHONPATH") else import_roots
+        )
         proc = subprocess.run(
-            c["run"], shell=True, cwd=work, capture_output=True, text=True, check=False
+            c["run"],
+            shell=True,
+            cwd=work,
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False,
         )
         output = proc.stdout + proc.stderr
         if proc.returncode == 0:
