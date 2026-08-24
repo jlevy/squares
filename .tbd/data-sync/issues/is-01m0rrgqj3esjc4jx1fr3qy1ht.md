@@ -5,7 +5,7 @@ title: "Engineering: make packing research code clear, safe, and scalable"
 kind: epic
 status: open
 priority: 1
-version: 25
+version: 26
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
@@ -32,12 +32,14 @@ child_order_hints:
   - is-01m0rrjtq99x8zbzd5hvqxrjcg
   - is-01m0rwwt8912eq5f3507d581e1
 created_at: 2026-08-24T02:10:15.746Z
-updated_at: 2026-08-24T21:41:19.631Z
+updated_at: 2026-08-24T22:55:50.392Z
 ---
 Umbrella for the packing engineering-maturity plan: classify code by reuse and consequence, separate shared foundations from stable research-loop tools and retained case code, establish a refactor-safety harness, standardize on Python 3.14, improve CLI and documentation quality, migrate substantial shell orchestration to Python, and optimize measured research-loop bottlenecks without burdening one-off experiments.
 
 ## Notes
 
-Reconciliation: keep think-xzew and think-rthe under the existing efficiency review; think-ldq2 under the process review; think-lcfd and think-ugt1 under the minimal-toolkit spec; and think-krqi under unattended-readiness. New cleanup beads must reuse those acceptance contracts rather than duplicate them.
+Reconciliation: keep think-xzew and think-rthe under the existing efficiency review; think-ldq2 under the process review; think-lcfd and think-ugt1 under the minimal-toolkit spec; and think-krqi under unattended-readiness. The cleanup reused those acceptance contracts rather than duplicating them.
 
-Plan published in commit f9d0d07 and stacked draft PR #23, based on PR #22 branch codex/packing-four-hour-basin-campaign. The plan-only PR passed the local 30-step packing gate; GitHub reports no configured check contexts.
+The structural tranche is implemented on stacked PR #23 above PR #22. The final local packing-validate run passed all 31 steps under Python 3.14: 15 pytest contracts, 38 one-worker mutation controls, Python and Rust quality, exact and differential mathematics, replay, schemas, generated views, provenance, and campaign invariants. The focused cleanup beads, existing CI bead think-lrsk, and negative-control timeout bead think-cns0 are closed with evidence.
+
+Keep this epic open for the distinct numerical and measured-performance work in think-sk15, think-y91x, think-lwao, think-9qz0, think-u97a, think-uvmb, and think-r33j. Those research contracts were reconciled but not absorbed or declared fixed by module movement.

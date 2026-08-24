@@ -3,16 +3,20 @@ type: is
 id: is-01m0rrjt4p850rt1t2z32b5sm0
 title: "No CI: every check has only ever run on one developer's machine"
 kind: task
-status: open
+status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:11:23.925Z
-updated_at: 2026-08-24T21:22:11.732Z
+updated_at: 2026-08-24T22:55:30.073Z
+closed_at: 2026-08-24T22:55:30.072Z
+close_reason: "Added pinned GitHub Actions validation: the locked complete gate on Linux and focused deep-golden reconstruction on macOS, both on Python 3.14 and the same packing-validate command used locally."
+resolution: null
+duplicate_of: null
 ---
 There is no .github/workflows. The Makefile has format, format-check, hooks-install, skills-sync, skills-check and a 'check' target that runs skills-check alone. lefthook runs only the Markdown formatter on pre-commit. explorations/packing/test.sh is the entire gate and nothing runs it automatically.
 

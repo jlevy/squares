@@ -3,9 +3,9 @@ type: is
 id: is-01m0ttf36md7yh66m1gz6h6svn
 title: Migrate packing uniformly to Python 3.14 only
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 7
+version: 8
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
@@ -23,6 +23,10 @@ dependencies:
     target: is-01m0rrjt4p850rt1t2z32b5sm0
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T21:22:48.130Z
-updated_at: 2026-08-24T21:57:50.676Z
+updated_at: 2026-08-24T22:55:27.324Z
+closed_at: 2026-08-24T22:55:27.323Z
+close_reason: Python 3.14 is now the sole version in package metadata, uv lock, .python-version, Ruff, BasedPyright, CI, and documentation; the complete validation gate passed under Python 3.14.
+resolution: null
+duplicate_of: null
 ---
 Make Python 3.14 the sole supported runtime across the packing project before later refactors rely on its language and standard-library behavior. Align project.requires-python, the uv lock and environment, Ruff target, BasedPyright target, CI, executable commands, scripts, and documentation; remove compatibility branches for Python 3.11-3.13 unless a named external consumer requires one. Acceptance: metadata expresses one uniform policy, all Python checks and the complete packing gate run under 3.14, and development.md documents the supported runtime and setup.
