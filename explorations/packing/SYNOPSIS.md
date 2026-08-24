@@ -458,11 +458,17 @@ equal budget. *Unbuilt, so no two proposers have been compared at equal budget.*
 
 ### The record
 
-**Round.** One executed experiment against one registered hypothesis, with a declared
-timebox and a pre-registered accept rule, recorded as a schema-validated artifact plus
-its JSONL archive.
-**Series.** An ordered group of rounds sharing a runbook; only one may
-be open at a time.
+**Round.** One executed experiment against one or more registered hypotheses, with a
+declared timebox and a pre-registered accept rule, recorded as a schema-validated
+artifact plus its JSONL archive.
+**Series.** An ordered group of rounds sharing a runbook; only one may be open at a
+time. **Agenda.** A mutable priority queue of cells (`BC-001`, …) ordering upcoming work
+by dependency and readiness, rendered into the ledger.
+A coordination artifact, not a second hypothesis registry and not a scheduler.
+**Defect.** One record in [`defects.yaml`](defects.yaml)—what went wrong, what caught
+it, and what now stops it recurring—rendered to [`defects.md`](defects.md).
+**Bead.** One tracked work item (`think-xxxx`) in the `tbd` queue; every open defect
+carries one.
 
 **Soundness perimeter.** The rule that every component emitting a configuration is
 checked by `sqpack` through code it does not share, enforced by
