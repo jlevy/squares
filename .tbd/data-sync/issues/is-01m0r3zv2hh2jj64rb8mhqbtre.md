@@ -3,9 +3,9 @@ type: is
 id: is-01m0r3zv2hh2jj64rb8mhqbtre
 title: Measure terminal flatness and connectivity before defining basin identity
 kind: bug
-status: open
+status: in_progress
 priority: 0
-version: 15
+version: 17
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - focus-correctness
@@ -23,8 +23,10 @@ dependencies:
   - type: blocks
     target: is-01m0snvvpwxt2z0efp3r89scxk
 parent_id: is-01m0p49s01h862tq6wp0dd085c
+child_order_hints:
+  - is-01m0t4phe1905yy2jk7czp1391
 created_at: 2026-08-23T20:11:30.757Z
-updated_at: 2026-08-24T10:43:22.642Z
+updated_at: 2026-08-24T15:02:23.411Z
 ---
 D-034, blocking the census. Exact evidence: the n=3 side-2 sliding family is a connected positive-dimensional terminal set that one contact certificate and many geometric keys split into quantum-dependent rows. The n=5 golden adds an unresolved pair: equal side, short form, contact certificate, angle signature and contact count but different geometry. Those facts do not prove the n=5 rows are connected or establish a five-dimensional family; raw constraint counting is not a rank certificate. Acceptance: archive both n=5 poses and their active cells; compute the fixed-cell optimal-face rank/nullity from the active LP matrix and objective; compute the full pose/angle active-constraint Jacobian; continue every null direction with independent validity checks; test whether the two endpoints are path-connected across cell/contact strata; report certified dimension or unresolved bounds; and feed the evidence to think-0yo9 rather than choosing identity from side/contact hashes.
 

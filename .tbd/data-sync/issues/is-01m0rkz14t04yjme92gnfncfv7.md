@@ -3,9 +3,9 @@ type: is
 id: is-01m0rkz14t04yjme92gnfncfv7
 title: Unattended square-packing research readiness
 kind: epic
-status: open
+status: in_progress
 priority: 0
-version: 16
+version: 19
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 refs:
   - kind: pr
@@ -29,8 +29,10 @@ child_order_hints:
   - is-01m0pw875cy2xbh4ferkj5m7yf
   - is-01m0r2atvyphxm28s5819fn3rg
   - is-01m0rmz8mp3e2zgfmkd9vqnmyz
+  - is-01m0t3n7z9fj0p7wwt1kn4nzqk
+  - is-01m0t4tnzhbhf3j6px053wtveg
 created_at: 2026-08-24T00:50:41.433Z
-updated_at: 2026-08-24T01:27:20.282Z
+updated_at: 2026-08-24T15:04:39.151Z
 ---
 Prepare the square-packing program to run a trustworthy, useful eight-hour overnight campaign and a full twenty-four-hour campaign. This is a cross-focus launch epic: Correctness defines admissible claims and guards; Process owns preregistration, queue state, artifacts, refusals and morning review; Insight supplies a diverse falsifiable portfolio; Efficiency supplies measured throughput, resumability and budget enforcement. Acceptance: a generated readiness view shows a nonempty, priced queue for both durations; hypotheses and open questions are fully inventoried without duplicate authority; every runnable hypothesis has a fixed recipe, instance points, seeds, timebox, outcome, cost, guard and mechanism metrics and an independent validity path; one supervised round, guard refusal, interruption recovery, abnormal-stop, budget-binding and durable-report rehearsal pass; strict validation has no skips; and the launch document states exact go or no-go criteria and remaining human decisions.
 

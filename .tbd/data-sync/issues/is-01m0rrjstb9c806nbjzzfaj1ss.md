@@ -3,14 +3,18 @@ type: is
 id: is-01m0rrjstb9c806nbjzzfaj1ss
 title: solve_to_fixed_point decides convergence by exact float equality of the cell tuple
 kind: bug
-status: open
+status: closed
 priority: 2
-version: 2
+version: 4
 labels: []
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:11:23.594Z
-updated_at: 2026-08-24T07:25:37.581Z
+updated_at: 2026-08-24T15:12:21.944Z
+closed_at: 2026-08-24T15:12:21.943Z
+close_reason: "D-132 fixed: fixed-cell iteration returns typed settlement evidence for fixed point, cycle, infeasible or worse transition, and cap; both quench paths refuse outer convergence after unsettled evidence. Focused regression, historical gate, Ruff, BasedPyright, schema, and replay checks pass. The newly exposed golden drift is separately open as D-162 / think-wbra."
+resolution: null
+duplicate_of: null
 ---
 The loop stops when 'nxt == cell', a tuple comparison over (i, j, ax, ay, h, sign) floats. Two consequences:
 
