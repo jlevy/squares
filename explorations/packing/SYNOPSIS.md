@@ -69,7 +69,7 @@ Nothing here duplicates what another owns.
 
 | Document | Owns |
 | --- | --- |
-| [`TUTORIAL.md`](TUTORIAL.md) | The conceptual on-ramp for a newcomer: the objects, why the approach is shaped this way, and where it is uncertain. Owns no status — it defers here for all of it |
+| [`TUTORIAL.md`](TUTORIAL.md) | The conceptual on-ramp for a newcomer: the objects, why the approach is shaped this way, and what is established versus open. Owns no status—it defers here for all of it |
 | **This synopsis** | The state of the program: results, their status, the roll-up of rounds |
 | [Current handoff](docs/project/handoff-2026-08-23-quench-spine.md) | Where the work stands *today*: the critical path, the beads it maps to, and what to pick up next. Dated and disposable; this synopsis is the durable account |
 | [`README.md`](README.md) | The four-principle operating charter, what is in the directory, how to run it, and the index of the six research reports |
@@ -97,8 +97,8 @@ linear program, and [`sqsearch/`](sqsearch/) is the screening annealer.
 
 ## What Is Built
 
-The single most common misreading of this directory is that a documented method is an
-available one. It is not, and the distinction has three values rather than two.
+A documented method here is not necessarily an available one, and implementation status
+has three values rather than two.
 
 | Status | Means |
 | --- | --- |
@@ -106,16 +106,16 @@ available one. It is not, and the distinction has three values rather than two.
 | **built, not admissible** | Runs and produces output, but that output cannot yet support the claim it looks like it supports. The blocking defect is named |
 | **unbuilt** | Documented, tracked as a bead, and not implemented. No result may assume it |
 
-Read the middle row carefully.
-It is where most of the risk in this project lives, because a component that runs and
-prints a plausible number is the shape of every flattering soundness defect logged here.
+Most of the risk in this project lives in the middle row, because a component that runs
+and prints a plausible number is the shape of every flattering soundness defect logged
+here.
 
-### The exact layer — built
+### The exact layer—built
 
 | Component | What it does |
 | --- | --- |
 | [`sqpack/field.py`](sqpack/field.py) | Exact arithmetic in `ℚ(α)`: exact zero test, exact sign by rational interval bisection |
-| [`sqpack/verify.py`](sqpack/verify.py) | Separating-axis validity, generic over the scalar type — exact or `f64` from one predicate |
+| [`sqpack/verify.py`](sqpack/verify.py) | Separating-axis validity, generic over the scalar type—exact or `f64` from one predicate |
 | [`sqpack/packings/trump11.py`](sqpack/packings/trump11.py) | The `n = 11` witness, exactly, in `ℚ(u)` |
 | [`derive_field.py`](derive_field.py) | Re-derives the degree-8 field from the published polynomial, factors over `ℚ`, and selects the root by isolating interval |
 | [`negative_control.py`](negative_control.py) | Demonstrates both float failure modes against the same packing |
@@ -124,11 +124,11 @@ prints a plausible number is the shape of every flattering soundness defect logg
 an irreducible minimal polynomial and an interval containing exactly one real root, but
 checks only an endpoint sign change.
 The built-in `n = 11` witness is independently checked, so **T-1** is unaffected.
-The *generic* path — bring your own packing and your own field — is not yet sound, and
-no third-party field metadata should be trusted through it until a Sturm-sequence check
+The *generic* path—bring your own packing and your own field—is not yet sound, and no
+third-party field metadata should be trusted through it until a Sturm-sequence check
 lands.
 
-### The refinement layer — built, with a floor
+### The refinement layer—built, with a floor
 
 [`sqpack/quench.py`](sqpack/quench.py) is the LP-in-cell quench with class bracketing,
 and [`lp_cell.py`](lp_cell.py) is an independent second formulation of the same feasible
@@ -136,16 +136,16 @@ set. Both are built and agree to `4.4e-16` on Trump’s cell.
 
 Three named limits travel with every number they produce:
 
-- [D-021](defects.md) — the float LP solver has a noise floor of about `1e-11` in the
+- [D-021](defects.md)—the float LP solver has a noise floor of about `1e-11` in the
   side. Nothing at the `polished` tier may claim a difference finer than that.
   The fix is an **exact rational LP, which is unbuilt.**
-- [D-052](defects.md) — coordinatewise stopping is not a certified local optimum.
+- [D-052](defects.md)—coordinatewise stopping is not a certified local optimum.
   A quench that stops has stopped; it has not proved stationarity.
-- [D-126](defects.md) — the work budget is wall-clock time, so contention changes how
-  many LP solves a run performs.
+- [D-126](defects.md)—the work budget is wall-clock time, so contention changes how many
+  LP solves a run performs.
   Price basin experiments by retained work units, not by the clock.
 
-### The proposer layer — one instrument, and the interface is unbuilt
+### The proposer layer—one instrument, and the interface is unbuilt
 
 [`sqsearch/`](sqsearch/) is the `f64` screening annealer, and it is the only proposer
 the campaign has run.
@@ -159,15 +159,15 @@ neighbour-transfer seeding, MAP-Elites retention, and billiard/inflation.
 
 This is the campaign’s live bottleneck.
 The refiner takes the proved controls to `1e-15` and leaves `n = 11` at `6e-02`, so
-proposal is where the gap is — and proposal is the layer with the fewest built parts.
+proposal is where the gap is—and proposal is the layer with the fewest built parts.
 
-### The map layer — built, not admissible
+### The map layer—built, not admissible
 
 | Component | Runs | Why its output is not yet the thing it looks like |
 | --- | --- | --- |
 | [`sqpack/canonical.py`](sqpack/canonical.py) | yes | Tolerance grouping and exact hash pairs do not form a stable equivalence relation ([D-048](defects.md)); canonicalization is factorial on sparse symmetric endpoints ([D-049](defects.md)) |
 | [`sqpack/atlas.py`](sqpack/atlas.py) | yes | Promotes non-converged stopping points and cannot reconstruct discovery order ([D-050](defects.md)); frequencies merge without regime or identity provenance ([D-051](defects.md)) |
-| [`tools/basin_census.py`](tools/basin_census.py) | yes | A settled flag is not a complete certificate — a nominally converged run may have crossed unmeasured angle probes, so basin membership and stationarity stay inadmissible ([D-165](defects.md)) |
+| [`tools/basin_census.py`](tools/basin_census.py) | yes | A settled flag is not a complete certificate—a nominally converged run may have crossed unmeasured angle probes, so basin membership and stationarity stay inadmissible ([D-165](defects.md)) |
 
 **`distinct_basins` is a count of endpoint keys, not of connected terminal components.**
 The exact `n = 3` sliding family shows one connected optimal set producing many keys, so
@@ -178,7 +178,7 @@ cannot saturate, and the rarity premise is **untestable rather than untested**.
 **Descriptors are unbuilt.** Every steering strategy that depends on them is therefore
 unbuilt too.
 
-### The promotion pipeline — unbuilt, and it is the largest structural gap
+### The promotion pipeline—unbuilt, and it is the largest structural gap
 
 There is **no executable path from a numerical candidate to a reconstructible exact
 result.** The repository can verify a packing whose exact algebraic description it is
@@ -200,10 +200,10 @@ Two consequences bind every other lane:
   Full-pose retention is a precondition, not a detail.
 
 The record corpus has the same shape of gap: [`frontier/`](frontier/README.md) records
-each case’s **side value** algebra — minimal polynomials where they are published — and
-**no geometry**. An importer for the catalogue’s layouts is unbuilt.
+each case’s **side value** algebra—minimal polynomials where they are published—and **no
+geometry**. An importer for the catalogue’s layouts is unbuilt.
 
-### The proof lane — more built than expected
+### The proof lane—more built than expected
 
 This is the part of the program that moved furthest in the most recent rounds, and it is
 the counterexample to the idea that everything here is instrumentation.
@@ -219,7 +219,7 @@ the counterexample to the idea that everything here is instrumentation.
 **Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
 LP duals as unavoidable-set generators, and any Lean formalization.
 
-### Compiled acceleration — unbuilt, deliberately
+### Compiled acceleration—unbuilt, deliberately
 
 `sqpack-core`, the filtered kernel, the FLINT-backed algebraic scalar, and the language
 bindings are all unbuilt.

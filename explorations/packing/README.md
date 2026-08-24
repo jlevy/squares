@@ -10,8 +10,8 @@ open. Its best known packing dates from 1979 and its best proved lower bound fro
 and a gap of roughly 0.088 in the side length separates them.
 
 **New here?** [`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the
-objects are, why the approach is shaped the way it is, and where it is uncertain.
-Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program.
+objects are, why the approach is shaped the way it is, and what is established versus
+open. Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program.
 
 ## Operating principles
 
@@ -143,7 +143,7 @@ It is dated and written to be thrown away when it stops being true.
 ```
 explorations/packing/
 ├── TUTORIAL.md             First-principles orientation for a newcomer: the objects,
-│                           why the approach is shaped this way, where it is uncertain
+│                           why the approach is shaped this way, what is established
 ├── SYNOPSIS.md             The technical root: results, status, and the experiment
 │                           roll-up. Read this after the tutorial.
 ├── conventions.md          Every rule this directory runs on, and which are checked
