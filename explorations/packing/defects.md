@@ -4,7 +4,7 @@ Do not edit by hand.
 
 # Defect log
 
-197 defects recorded across the packing toolchain.
+198 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -24,7 +24,7 @@ Source of truth is [`defects.yaml`](defects.yaml).
   repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168
   repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172
   repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188
-  repeats D-018, D-189 repeats D-181, D-196 repeats D-160).
+  repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187).
 - **24 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -38,9 +38,9 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `inspection` | 21 | reading the code or the design with intent |
 | `drift_check` | 13 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 8 | the automated test suite |
+| `gate` | 9 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 8 of 197, and none of the 64
+The line worth reading twice: **the automated gate caught 9 of 198, and none of the 64
 soundness defects.** Gates confirm what you already thought to check.
 The rest were found by a device built to be *surprised* — a control cell, a
 pre-registered rule, a generated view contradicting itself — or by someone reading
@@ -54,7 +54,7 @@ carefully.
 | quench | 18 |
 | verifier | 4 |
 | record | 50 |
-| tooling | 44 |
+| tooling | 45 |
 | docs | 72 |
 
 ## By kind
@@ -63,7 +63,7 @@ carefully.
 | --- | ---: |
 | soundness | 64 |
 | validity | 57 |
-| bookkeeping | 56 |
+| bookkeeping | 57 |
 | robustness | 15 |
 | performance | 5 |
 
@@ -376,3 +376,4 @@ This is the actionable list.
 | [D-195](tools/check_n5_tangent_cones.py) | 2026-08-24 | tooling | soundness | flattering | `review` | high | fixed | The n=5 tangent checker treated tied support inequalities as alternatives |
 | [D-196](defects.yaml) | 2026-08-24 | record | bookkeeping | flattering | `drift_check` | medium | fixed | A broad exp-035 status patch updated D-034 instead of D-194 |
 | [D-197](defects.yaml) | 2026-08-24 | record | bookkeeping | neutral | `anomaly` | medium | fixed | A concurrent checkout moved the exp-036 instrument commit to the wrong branch |
+| [D-198](tools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Two numeric negative-control anchors lagged the D-197 aggregates |

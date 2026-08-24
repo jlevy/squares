@@ -38,9 +38,11 @@ hypothesis:
     proves that face lies in an exact two-parameter angle-and-slide sheet of optima.
     Exp-035 then proves that the complete branchwise first-order systems at both
     endpoints and one interior point admit an exact direction outside that sheet. These
-    are partial results, not a complete answer: nonlinear realization, the full
-    nonsmooth stationary component, and the unequal-side clearance questions remain
-    open.
+    are partial results, not a complete answer. Exp-036 proves that particular direction
+    is excluded from the true Bouligand tangent cone by exact second-order obstructions
+    in both possible nearby owner-axis branches. The other non-sheet directions, the
+    full nonsmooth stationary component, and the unequal-side clearance questions
+    remain open.
 ---
 # H-023 — resolve the first ambiguous census cell
 
@@ -69,9 +71,14 @@ sheet optimal because its support avoids the moving square.
 This still does not identify the full stationary component.
 Exp-035 derives the complete active first-order rows at both endpoints and one interior
 point. Both owner-axis branches admit the same exact non-sheet direction, with both tied
-support rows enforced, but no nonlinear continuation has yet realized it.
-Certified continuation and deterministic quench selection have not been established.
-The unequal-side rows still require minimax-clearance bounds.
+support rows enforced.
+Exp-036 then proves that displayed direction is not a true Bouligand tangent: the
+owner-4 branch has exact excess coefficient `sqrt(2)/8`, and the owner-3 branch has gap
+coefficient `-1/4` with positive relative-angle cusp margin `sqrt(2)/2 - 1/4`.
+
+This is a strict linearized-versus-true-tangent gap for one direction, not a local
+isolation theorem. The remaining non-sheet cone directions, certified continuation,
+deterministic quench selection, and unequal-side minimax-clearance bounds remain open.
 
 This is the focused control for H-021 and the practical precursor to H-011.
 

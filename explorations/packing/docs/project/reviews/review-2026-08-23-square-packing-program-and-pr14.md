@@ -2543,6 +2543,8 @@ one classification error found in the integration draft:
 | D-194 | The exp-035 candidate must derive pair (0,4) separately at every slide stratum rather than reuse endpoint A’s differential |
 | D-195 | Pair (3,4) has two owner-axis branches, each requiring both tied support inequalities; the tied rows are not four alternatives |
 | D-196 | The exp-035 integration briefly changed D-034 instead of D-194; an id-scoped correction and complete defect diff caught the recurrence before commit |
+| D-197 | A concurrent checkout moved the isolated exp-036 checker commit to the engineering-plan branch; the commit banner caught it before push or execution, and both refs were restored without new lease machinery |
+| D-198 | The first post-exp-036 gate found two numeric negative-control anchors still targeting the pre-D-197 aggregates; both now target the final totals and all 37 controls fire |
 
 The retained commit map is `a1009cb → b3ab594`, `f9d8bae → 7353a34`,
 `62c227c → 2c4cd0e`, and `7a5787c → 1210e07`; corrections land separately in `8611e85`,
@@ -2554,9 +2556,19 @@ The corrected checker at `aa63cf4` derives each slide-stratum contact row and re
 pair `(3,4)` as two owner-axis branches with both tied support rows in each.
 Exp-035 then met its frozen criterion: six exact matrices across A, the interior, and B
 admit one exact direction outside exp-034’s sheet, and all seven controls reject.
-Nonlinear realization and component identity remain open.
-`think-1582` is closed by the first-order result; `think-imav` owns nonlinear
-realization, while `think-5hh9` and `think-s41l` own the fixed pre-measurement defects.
+Exp-036 then tested that displayed direction under a separately frozen criterion.
+The owner-4 branch requires an exact positive side excess with coefficient `sqrt(2)/8`;
+the owner-3 branch has exact upper-minus-lower coefficient `-1/4`, and its
+relative-angle cusp has positive margin `sqrt(2)/2 - 1/4`. Those two branches exhaust
+every nearby feasible subsequence, so the vector is not a true Bouligand tangent at A,
+the interior, or B. All seven controls reject and retained replay is identical in 0.21
+external wall-seconds.
+This is one strict linearized-versus-true-tangent gap, not local isolation or a
+classification of the other non-sheet directions.
+
+`think-1582` is closed by the first-order result; `think-imav` closes with the narrow
+second-order obstruction, while `think-5hh9` and `think-s41l` own the fixed
+pre-measurement defects.
 `think-4rk3` and its four children own only the completed documentation-stack review,
 correction, and validation.
 
@@ -2571,6 +2583,15 @@ The normal gate passes all 30 steps in 70 wall-seconds: all 37 negative controls
 12 basin archives replay 40 events, all six exact small-`n` records replay, all 35
 declared engine commits are reachable apart from the annotated exp-001 orphan, and the
 35-round, nine-session, one-agenda campaign reconciles with 196 defect records.
+
+The exp-036 checkpoint adds the seventh exact small-`n` replay and a 36th declared
+engine commit. Its 30-step normal gate passes in 37 wall-seconds with all 37 negative
+controls firing and 198 defects reconciled.
+The strict deep gate is not green: its first run exposed D-198 and the already
+outstanding D-126/D-162 golden drift.
+D-198 is fixed; an isolated one-worker deep regeneration still reports `n=4` at 3/4
+converged and stops `n=10` on pair-row 61 at residual `1.503e-10` after 109 seconds.
+That blocker is retained without changing the `1e-10` screen or the committed golden.
 
 ## Post-merge operating disposition
 

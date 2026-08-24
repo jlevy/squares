@@ -236,6 +236,10 @@ results, not only instruments.
 | [`tools/check_stromquist_repair.py`](tools/check_stromquist_repair.py) | A source-distinct repair certifies `s(11) ≥ 2 + 4/√5` exactly (**T-4**, exp-017) |
 | [`tools/check_trump_tangent.py`](tools/check_trump_tangent.py) | Trump’s pose is locally isolated in the anchored chart (exp-013) |
 | [`tools/check_small_n_moduli.py`](tools/check_small_n_moduli.py) | Exact optimal configuration spaces at `n = 3, 4` (exp-014, exp-015) |
+| [`tools/check_n5_equal_side_face.py`](tools/check_n5_equal_side_face.py) | Two retained equal-side `n = 5` poses share one exact fixed-angle optimal face (exp-033) |
+| [`tools/check_n5_angle_sheet.py`](tools/check_n5_angle_sheet.py) | That face lies in an exact two-parameter angle-and-slide sheet of optima (exp-034) |
+| [`tools/check_n5_tangent_cones.py`](tools/check_n5_tangent_cones.py) | Complete active first-order systems admit one displayed non-sheet direction (exp-035) |
+| [`tools/check_n5_second_order_obstruction.py`](tools/check_n5_second_order_obstruction.py) | That displayed direction is excluded from the true Bouligand tangent cone (exp-036) |
 | [`tools/check_kingbird_svg.py`](tools/check_kingbird_svg.py) | High-precision (160-digit) numerical reconstruction of the `n = 29` record source, refuting H-024’s three-class claim. Not an exact optimality certificate—the retained SVG is numerical, and exp-012 says so (exp-012) |
 
 **Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
@@ -377,10 +381,13 @@ Its fixed-side active nullity is one in the interior and zero at the two boundar
 strata. Exp-034 proves that face lies in a two-parameter angle-and-slide sheet of
 orientation-indexed LP optima.
 Exp-035 derives the full active first-order systems at both endpoints and one interior
-point; every owner branch admits one exact direction outside that sheet, but nonlinear
-realization is unresolved.
-This is not a proof of a five-dimensional family or of the complete nonsmooth stationary
-component ([D-034](defects.md), [D-041](defects.md)).
+point; every owner branch admits one exact direction outside that sheet.
+Exp-036 proves that displayed direction is not a true Bouligand tangent: both possible
+nearby owner axes have strict exact second-order obstructions.
+Other non-sheet directions remain unclassified.
+This is not a local-isolation theorem, a proof of a five-dimensional family, or a
+classification of the complete nonsmooth stationary component ([D-034](defects.md),
+[D-041](defects.md)).
 
 **This distinction should have existed from the first day.** “Rigidity” was treated as
 an informal visual property of the target while the census silently assumed every
@@ -1117,7 +1124,7 @@ view; this section is the reading of it.
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 0 | — |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question; one exact 2D sheet solved | How are the observed `n=5` endpoint candidates connected? | 2 | 25m agent, 0.51s wall |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question; one exact 2D sheet and one obstructed tangent direction | How are the observed `n=5` endpoint candidates connected? | 4 | 65m agent, 1.00s wall |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | **refuted** | Verified record packings through `n=30` use at most three angle classes; exp-012 verifies six at `n=29` | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
@@ -1241,18 +1248,21 @@ Exp-034 embeds that face in an exact two-parameter angle-and-slide sheet, but co
 stationary identity and the unequal-side rows remain open.
 Exp-035 derives the complete active first-order systems at both endpoints and one
 interior point and finds an exact direction outside that sheet in every owner branch;
-nonlinear realization remains open.
+exp-036 excludes that displayed direction from the true Bouligand tangent cone by exact
+second-order inequalities in both owner branches.
+Other non-sheet directions remain open.
 
 ## Experiments Conducted
 
-There are 35 terminal rounds registered in `series-000`. They record 848 agent-minutes
+There are 36 terminal rounds registered in `series-000`. They record 868 agent-minutes
 and 28.2 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
 checker, the exact Stromquist printed-set falsifier, and the exact repaired-cover
 certificate, the exact terminal-component known-answer checker, and the exact `n = 5`
-fixed-angle face, angle-sheet, and full-angle tangent checkers.
+fixed-angle face, angle-sheet, full-angle tangent, and second-order obstruction
+checkers.
 
 No record-search round has been run at the `exact` tier, so **no result below claims a
 new record**. Exp-012 is an exploratory reconstruction of a published record witness;
@@ -1300,6 +1310,7 @@ archive beside it.
 | [exp-033](campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md) | 5 | target | H-023 | exact fixed-angle face test | one segment; nullities `0/1/0`; six controls pass | **accepted** |
 | [exp-034](campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md) | 5 | target | H-023 | exact angle-and-slide sheet | dimension at least two; four fixtures and five controls pass | **accepted** |
 | [exp-035](campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md) | 5 | target | H-023 | exact full-angle active systems | non-sheet direction at A/interior/B; seven controls pass | **accepted** |
+| [exp-036](campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md) | 5 | target | H-023 | exact second-order branch obstruction | displayed direction excluded at A/interior/B; seven controls pass | **accepted** |
 
 ### Cost and provenance
 
@@ -1340,8 +1351,9 @@ archive beside it.
 | exp-033 | one exact common-cell face + six controls | 0.24 s | 15 m | criterion | `26360f1` |
 | exp-034 | one exact parameter sheet + five controls | 0.27 s | 10 m | criterion | `329b848` |
 | exp-035 | six exact owner matrices + seven controls | 0.28 s | 20 m | criterion | `aa63cf4` |
+| exp-036 | two exact branch obstructions + seven controls | 0.21 s | 20 m | criterion | `f2d2e53` |
 
-### What the 35 rounds jointly establish
+### What the 36 rounds jointly establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only
@@ -1364,9 +1376,11 @@ optimal face at side `1 + 5sqrt(2)/4`. It does not assign a full terminal compon
 Exp-034 embeds that face in an exact two-parameter angle-and-slide sheet.
 Exp-035 then retains six exact active-system matrices across A, the interior, and B and
 verifies a non-sheet direction against every row.
-This is first-order evidence, not a nonlinear path or component assignment.
-Exp-023 reaches proved side 2 on three of four n=4 starts and preserves the fourth
-event’s post-check rejection.
+Exp-036 proves that displayed direction cannot be a nonlinear path tangent: the only two
+nearby pair `(3,4)` owner-axis branches have exact second-order obstruction margins.
+This strict linearized-versus-true-tangent gap does not classify the other directions or
+assign a component. Exp-023 reaches proved side 2 on three of four n=4 starts and
+preserves the fourth event’s post-check rejection.
 That stop exposed D-171: two rows were already outside the screen before an argmax-only
 retry. Exp-024 applies one complete offending-set retry and reaches side 2 on all four
 starts, with 14,301 of 14,301 evaluations settled and all four events admissible.
@@ -1479,14 +1493,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 196 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 198 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 64 | asserted something false about the mathematics |
 | validity | 57 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 55 | recorded something its own evidence contradicts |
+| bookkeeping | 57 | recorded something its own evidence contradicts |
 | robustness | 15 | did not finish, or finished only by luck |
 | performance | 5 | worked, but cost far more than it should |
 
@@ -1496,7 +1510,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught eight defects in 196, and no soundness defect ever.**
+**The automated gate has caught nine defects in 198, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1638,7 +1652,9 @@ regenerated at each slide stratum, and pair `(3,4)` has two owner-axis branches 
 tied support rows are conjunctive within each branch.
 The frozen controls now execute and both defects are fixed.
 D-196 records the integration recurrence caught before commit when a context-poor edit
-briefly changed D-034 instead of D-194.
+briefly changed D-034 instead of D-194. D-197 records the concurrent checkout caught by
+the exp-036 commit banner; the isolated checker commit was moved to the campaign branch
+and the other branch ref restored before push or target execution.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
@@ -1715,15 +1731,26 @@ exp-013 confirmed H-026 and locally isolated Trump’s pose, and exp-014/015 sol
 exact `n=3,4` quotient controls in 1.28 wall seconds.
 Exp-033 then certified the `n = 5` equal-side pair’s exact fixed-angle face in 0.24 wall
 seconds of generation plus replay.
-Exp-034 and exp-035 then certify an exact angle-and-slide sheet and a non-sheet
-first-order direction in 0.55 further wall-seconds.
-Next realize or obstruct that direction nonlinearly, bound clearance between the
+Exp-034 through exp-036 then certify an exact angle-and-slide sheet, a non-sheet
+first-order direction, and an exact second-order obstruction to that displayed direction
+in 0.76 further wall-seconds.
+Next classify the remaining non-sheet directions, bound clearance between the
 unequal-side rows, and hide the UnitSquare `n = 68,69` children for the first
 parent-surgery test.
 The quantitative Trump successor is an explicit isolation radius or minimal-support
 stress analysis, not another rank count.
 No hour-scale lane is promoted without a known-answer response, independent validity,
 and a result that changes a decision.
+
+**The normal checkpoint is green; the strict unattended-handoff gate is not.** All 30
+fast-path steps pass in 37 wall-seconds, including seven exact small-`n` replays and all
+37 negative controls.
+Deep golden regeneration independently reproduces the outstanding D-126/D-162 failure
+after 109 seconds: one `n=4` proposal remains unsettled and `n=10` stops at a
+`1.503e-10` pair-row residual.
+The research result does not depend on that path, but an unattended numerical campaign
+remains blocked until the quench budget is work-based and the golden known-answer
+response is stable.
 
 **One open measurement defect constrains timing forecasts.** [D-101](defects.md): the
 historical exp-007/008 round-level wall times disagree with retained per-call durations.

@@ -45,9 +45,10 @@ session:
       n=5 source poses, and exp-034 embeds it in one exact angle-and-slide sheet, while
       sampled full-component classifications remain zero. The next cone checker is
       corrected, and exp-035 now retains exact non-sheet first-order directions at both
-      endpoints and one interior point. Exp-036 is preregistered to test that displayed
-      direction at second order but has not run. Nonlinear realization remains
-      unresolved. No complete-map claim follows.
+      endpoints and one interior point. Exp-036 excludes that displayed direction from
+      the true tangent cone at second order in both owner-axis branches. Other non-sheet
+      directions and full component identity remain unresolved. No complete-map claim
+      follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -446,10 +447,25 @@ session:
     Exp-036 freezes the two exact second-order branch contradictions, the positive
     relative-angle cusp margin, source-topology binding, seven controls, and separate
     30-second generation and replay caps. Static checks pass; the target has not run.
+  - >-
+    Exp-036 meets its frozen criterion in 0.21 external wall-seconds. The owner-4 branch
+    has exact excess coefficient sqrt(2)/8; the owner-3 branch has gap coefficient -1/4
+    and positive relative-angle margin sqrt(2)/2 - 1/4. All seven controls reject and
+    retained replay is identical. Only exp-035's displayed direction is excluded.
+  - >-
+    The first post-exp-036 strict gate stops after 55 seconds with 28 of 30 steps green.
+    D-198 records two stale numeric mutation anchors; the other failure is the already
+    outstanding D-126/D-162 deep golden drift, not an exp-036 or exact-replay failure.
+  - >-
+    After D-198, all 37 negative controls fire in 31 seconds and the 30-step normal gate
+    passes in 37 seconds. A separately capped one-worker deep golden run reproduces the
+    n=4 3/4 convergence total and n=10 pair-row-61 post-check rejection in 109 seconds.
+    The strict unattended-handoff gate therefore remains blocked by D-126/D-162; no
+    threshold or committed golden was changed.
   stop_reason: null
   next_action: >-
-    Execute only preregistered exp-036 generation and replay, integrate its narrow
-    verdict, run the normal gate, and stop this slice at a pushed checkpoint.
+    Push the terminal exp-036 checkpoint. The next process slice belongs to think-wbra
+    and think-u97a; the independent exact-research queue resumes at think-nm35.
 ---
 # Session 009 — Bounded Progress Before Scale
 

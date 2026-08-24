@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 197
+count: 198
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -5065,3 +5065,30 @@ defects:
     and the mistaken commit was detected before push or target execution
   bead: think-x7vd
   recorded_in: defects.yaml
+- id: D-198
+  title: Two numeric negative-control anchors lagged the D-197 aggregates
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: the first post-exp-036 strict gate
+  severity: medium
+  status: fixed
+  what: >-
+    The defect-count and synopsis gate-detector mutations in controls.yaml still named
+    the 196-defect state after D-197 raised the current total. Their exact anchors no
+    longer appeared, so both controls failed before attempting their mutations.
+  consequence: >-
+    The strict gate stopped a valid exp-036 checkpoint. It did not flatter the research
+    result because the control harness reports a missing anchor as a failure.
+  fix: >-
+    Update both exact anchors only after recording D-198, so they target the final
+    198-defect total and the nine defects now detected by the gate.
+  regression: >-
+    The negative-control harness requires every declared anchor to appear exactly once,
+    applies both mutations in private worker trees, and requires both semantic checks to
+    reject the changed aggregates.
+  recurrence_of: D-187
+  bead: think-tjqh
+  recorded_in: tools/controls.yaml
