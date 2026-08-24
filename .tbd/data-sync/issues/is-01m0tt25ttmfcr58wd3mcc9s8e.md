@@ -3,9 +3,9 @@ type: is
 id: is-01m0tt25ttmfcr58wd3mcc9s8e
 title: Specify the six packing workflow entry contracts
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 6
 spec_path: explorations/packing/SYNOPSIS.md
 delegate: unknown@spud10.local
 labels:
@@ -24,7 +24,11 @@ parent_id: is-01m0r7tkdt35ged6b10gaf9wa0
 hold: null
 hold_until: null
 created_at: 2026-08-24T21:15:44.857Z
-updated_at: 2026-08-24T21:28:42.669Z
+updated_at: 2026-08-24T22:08:31.421Z
 started_at: 2026-08-24T21:28:42.668Z
+closed_at: 2026-08-24T22:08:31.416Z
+close_reason: Defined the canonical W1-W6 taxonomy and normalized campaign, series, session, phase, slice, experiment, round, run, result, and ledger vocabulary in the synopsis, with compact README orientation and enforced schema agreement.
+resolution: null
+duplicate_of: null
 ---
 Define stable workflow names and readable W1-W6 labels for research-pass, factual-review, insight-iteration, process-review, efficiency-loop, and research-loop, plus an unnumbered general-improvement fallback. Keep workflow orthogonal to the four operating focuses and to bounded slices. For each workflow define its trigger, required inputs, allowed work, forbidden substitutions, durable outputs, stop condition, and default handoff. Define when a focus change stays inside a research loop and when a changed purpose requires a workflow transition. Acceptance: research-pass and research-loop cannot be confused; general-improvement cannot hide multi-mode work; one document owns the full contract; and the vocabulary is representable in session artifacts.
