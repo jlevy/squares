@@ -1493,15 +1493,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 198 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 204 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 64 | asserted something false about the mathematics |
 | validity | 57 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 57 | recorded something its own evidence contradicts |
-| robustness | 15 | did not finish, or finished only by luck |
+| bookkeeping | 61 | recorded something its own evidence contradicts |
+| robustness | 17 | did not finish, or finished only by luck |
 | performance | 5 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -1510,17 +1510,15 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught nine defects in 198, and no soundness defect ever.**
+**The automated gate has caught twelve defects in 204, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. The eight the gate did catch ([D-024](defects.md), [D-064](defects.md),
-[D-106](defects.md), [D-107](defects.md), [D-125](defects.md), [D-130](defects.md), and
-[D-163](defects.md), and [D-187](defects.md)) are bookkeeping or robustness defects,
-found by contiguity, integration, mutation-anchor, and reconciliation checks—which is
-the pattern, not an exception: gates are good at the mechanical classes and have never
-once caught the mathematics being wrong.
+*surprised*. Every gate-detected entry is a bookkeeping or robustness defect, found by
+contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
+That is the pattern, not an exception: gates are good at the mechanical classes and have
+never once caught the mathematics being wrong.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed
@@ -1745,12 +1743,20 @@ and a result that changes a decision.
 **The normal checkpoint is green; the strict unattended-handoff gate is not.** All 30
 fast-path steps pass in 37 wall-seconds, including seven exact small-`n` replays and all
 37 negative controls.
-Deep golden regeneration independently reproduces the outstanding D-126/D-162 failure
-after 109 seconds: one `n=4` proposal remains unsettled and `n=10` stops at a
+The first deep regeneration reproduced one unsettled `n=4` proposal and an `n=10`
 `1.503e-10` pair-row residual.
+[D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders
+49 and 66 exposes previously clean row 61, which a third conservative call settles with
+zero all-original-row residual.
+All seven ladder rungs now converge at pool widths 10 and 1. [D-203](defects.md)
+isolates the remaining n=4 seed-0 stop as a distinct HiGHS status-4 Solve error; the
+golden remains red at 3/4 n=4 proposals.
+[D-202](defects.md) separately keeps final-receipt capture open after one delegated long
+command terminated without returning its output; the evidentiary rerun used a durable
+parent-owned session.
 The research result does not depend on that path, but an unattended numerical campaign
-remains blocked until the quench budget is work-based and the golden known-answer
-response is stable.
+remains blocked until D-203 is fixed, the quench budget is work-based, and the golden
+known-answer response is stable.
 
 **One open measurement defect constrains timing forecasts.** [D-101](defects.md): the
 historical exp-007/008 round-level wall times disagree with retained per-call durations.

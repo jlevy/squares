@@ -468,11 +468,36 @@ session:
     a wall-deadline stop, so converting D-126 to a deterministic work budget cannot by
     itself repair this gate. Think-yi6x owns first-versus-repaired LP receipts and a
     finitely capped correction that must preserve the 1e-10 all-row replay screen.
+  - >-
+    D-199 records the resolved n=10 mechanism. First-call offenders 49 and 66 move the
+    residual to previously clean row 61; a third conservative solve reaches zero
+    all-original-row residual. A senior numerical review approves the correction and
+    leaves only low-priority direct cumulative-RHS and portable-contract test hardening
+    under think-fx6r.
+  - >-
+    Serialized deep replays at PACK_JOBS=10 and PACK_JOBS=1 finish in 23.94 and 79.66
+    seconds. Both restore all seven convergence-ladder rungs, including n=10, but both
+    retain the same n=4 drift: 3/4 converged and one extra valid nonconverged endpoint at
+    side 2.0205018999. The committed golden is unchanged.
+  - >-
+    D-202 discards the first delegated one-worker replay because its final stdout and
+    exit status were lost; one parent-owned durable-session rerun retained the complete
+    receipt. A 13.70-second four-seed diagnostic then isolates the remaining n=4 failure
+    as seed 0 and a typed HiGHS status-4 Solve error after 3,404 LP solves. D-203 and
+    think-nr5w own the exact-cell diagnosis; no further deep retry is authorized first.
+  - >-
+    The first frozen-state normal gate passes 29 of 30 steps and 36 of 37 negative
+    controls. D-204 records the sole failure: the gate-aggregate mutation correctly
+    produces the authoritative 11-of-203 diagnostic, while its harness expectation
+    incorrectly names the deliberately mutated 10-of-203 value. The checkpoint remains
+    unpushed until the corrected final aggregate passes the complete normal gate. After
+    correction, all 37 controls fire and all 30 normal-gate steps pass in 42 wall-seconds
+    with 204 defects reconciled.
   stop_reason: null
   next_action: >-
-    Run the bounded think-yi6x solver-acceptance slice before another deep golden retry.
-    Keep the D-126 work-budget conversion separate; the independent exact-research queue
-    resumes at think-nm35.
+    Preserve this checkpoint while the user supplies updates. Then capture a millisecond
+    n=4 seed-0 status-4 fixture under think-nr5w before another deep golden retry. Keep
+    D-126 separate; the independent exact-research queue remains think-nm35.
 ---
 # Session 009 — Bounded Progress Before Scale
 

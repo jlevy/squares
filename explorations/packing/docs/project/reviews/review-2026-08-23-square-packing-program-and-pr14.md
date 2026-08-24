@@ -2545,6 +2545,12 @@ one classification error found in the integration draft:
 | D-196 | The exp-035 integration briefly changed D-034 instead of D-194; an id-scoped correction and complete defect diff caught the recurrence before commit |
 | D-197 | A concurrent checkout moved the isolated exp-036 checker commit to the engineering-plan branch; the commit banner caught it before push or execution, and both refs were restored without new lease machinery |
 | D-198 | The first post-exp-036 gate found two numeric negative-control anchors still targeting the pre-D-197 aggregates; both now target the final totals and all 37 controls fire |
+| D-199 | The first complete-set residual repair moved the n=10 violation from rows 49 and 66 to previously clean row 61; a capped re-observation loop now shrinks the feasible region without weakening the all-row screen |
+| D-200 | The synopsis gate-detection aggregate had advanced to nine while its duplicate id list still said eight and omitted D-198; the hand-maintained enumeration is removed |
+| D-201 | The D-199/D-200 edit advanced two mutation anchors without advancing their expected checker diagnostics; the record-audit lane caught the recurrence before commit |
+| D-202 | The first delegated pool-width-1 validation terminated without returning stdout or exit status; it was discarded and one durable-session rerun retained the complete receipt |
+| D-203 | Both pool widths isolate the remaining n=4 drift to seed 0 and a typed HiGHS status-4 Solve error, distinct from D-199’s repaired residual path |
+| D-204 | The gate-aggregate mutation expected a diagnostic naming its deliberately mutated count rather than the authoritative count; the first freeze gate caught the reversed expectation |
 
 The retained commit map is `a1009cb → b3ab594`, `f9d8bae → 7353a34`,
 `62c227c → 2c4cd0e`, and `7a5787c → 1210e07`; corrections land separately in `8611e85`,
@@ -2597,6 +2603,14 @@ after the repair LP, not a wall-deadline stop.
 Thus D-126’s deterministic work budget remains necessary but is not this correction;
 `think-yi6x` owns the narrower D-162 repair with first-versus-repaired receipts, finite
 solver caps, and unchanged all-row acceptance.
+The implemented D-199 repair re-observes every successful LP under a four-call cap.
+At n=10 the offender sets are `(49, 66)`, then `(61)`, then empty; both declared pool
+widths recover all seven known-answer ladder rungs without changing the screen or
+golden. The same replays leave n=4 at 3/4 converged.
+A bounded seed slice identifies a distinct D-203 cause: seed 0 receives a typed HiGHS
+status-4 Solve error.
+Therefore the n=10 correction stands, but `think-yi6x` and the strict gate remain open
+for n=4.
 
 ## Post-merge operating disposition
 

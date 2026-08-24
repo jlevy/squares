@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 198
+count: 204
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -5091,4 +5091,162 @@ defects:
     reject the changed aggregates.
   recurrence_of: D-187
   bead: think-tjqh
+  recorded_in: tools/controls.yaml
+- id: D-199
+  title: A frozen residual-repair set rejected a valid n=10 cell
+  date: '2026-08-24'
+  layer: quench
+  class: robustness
+  direction: conservative
+  detected_by: gate
+  latent_for: since D-171 introduced the complete first-offending-set repair
+  severity: high
+  status: fixed
+  what: >-
+    The first n=10 seed-14 LP solve violated pair rows 49 and 66 by about 7.26e-10.
+    Tightening those complete first-solve offenders moved the residual to previously
+    clean pair row 61 at 1.503e-10, but solve_cell allowed no second observation and
+    rejected the cell.
+  consequence: >-
+    The proved n=10 convergence ladder and one n=4 census proposal were reported
+    nonconverged even though a further conservative solve satisfied every original row.
+    This blocked the strict unattended gate and could undercount admissible endpoints.
+  fix: >-
+    Replay every successful solve against all original rows, retain a per-call residual
+    receipt, and cumulatively tighten every currently offending row under a four-call
+    cap. Every repair shrinks the feasible region; the 1e-10 acceptance screen is
+    unchanged. Both declared pool-width replays now recover the n=10 known answer.
+  regression: >-
+    A synthetic three-call moving-row fixture, the retained n=10 row-49/66-to-row-61
+    cell, the typed four-call exhaustion fixture, and deep known-answer regeneration at
+    pool widths 10 and 1.
+  bead: think-yi6x
+  recorded_in: sqpack/quench.py
+- id: D-200
+  title: The synopsis gate-defect enumeration omitted D-198
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: inspection
+  latent_for: one post-D-198 checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    The synopsis aggregate correctly said that nine defects were gate-detected, but the
+    next paragraph still said eight and its hand-maintained list stopped at D-187.
+  consequence: >-
+    The explanation understated the gate's actual history and created a second defect
+    inventory that could drift independently of defects.yaml.
+  fix: >-
+    Remove the duplicate id enumeration, derive the aggregate from defects.yaml, and
+    state only the stable class-level pattern in prose.
+  regression: >-
+    check_synopsis.py derives the total and gate count from defects.yaml; the mutation
+    control changes the rendered aggregate and requires that checker to reject it.
+  bead: think-ur1q
+  recorded_in: SYNOPSIS.md
+- id: D-201
+  title: Two mutation controls retained pre-integration expected diagnostics
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: one uncommitted D-199/D-200 integration pass
+  severity: medium
+  status: fixed
+  what: >-
+    The D-199/D-200 edit advanced the defect-count and gate-detector mutation anchors,
+    but their expected checker messages still named the 198-defect state.
+  consequence: >-
+    Both controls would apply their mutations correctly and then fail because the
+    harness expected stale diagnostic text, stopping an otherwise valid checkpoint.
+  fix: >-
+    Update each exact anchor and its expected diagnostic together only after the final
+    defect count is known, then run the complete negative-control suite.
+  regression: >-
+    negctl requires every anchor to occur exactly once and every mutated checker to fail
+    with the declared diagnostic.
+  recurrence_of: D-198
+  bead: think-u0ui
+  recorded_in: tools/controls.yaml
+- id: D-202
+  title: A delegated long-running validation lost its final receipt
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: anomaly
+  latent_for: one serialized pool-width validation
+  severity: medium
+  status: contained
+  what: >-
+    The first delegated PACK_JOBS=1 deep-golden command finished before its 180-second
+    cap, but the execution path returned no stdout, stderr, timing, or exit status.
+    Process disappearance proved only termination, not the result.
+  consequence: >-
+    Treating that run as evidence would make a pool-width claim without a verdict or
+    changed-case record; repeating commands blindly would also waste the agent budget.
+  fix: >-
+    Discard the run and perform one justified rerun through a parent-owned durable
+    session. It retained the full diff, timing, cleanup, and exit status. The portable
+    runbook still needs to require a final receipt for every long command.
+  regression: >-
+    none yet; think-b3bm owns the cross-agent runbook requirement and its forced
+    long-command rehearsal
+  bead: think-b3bm
+  recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+- id: D-203
+  title: The n=4 seed-0 quench ends on a HiGHS solve error
+  date: '2026-08-24'
+  layer: quench
+  class: robustness
+  direction: conservative
+  detected_by: gate
+  latent_for: since typed fixed-cell termination exposed the small-n drift
+  severity: high
+  status: outstanding
+  what: >-
+    After D-199 restores the n=10 ladder, both declared pool widths still rebuild n=4
+    with only 3/4 proposals converged. A bounded four-seed slice isolates seed 0 at side
+    2.0205018998600455: its bracket probe stops on an initial-cell HiGHS status-4 Solve
+    error after 3,404 LP solves and 2,884 fixed-point evaluations.
+  consequence: >-
+    The strict golden remains red and the extra valid but nonconverged n=4 endpoint
+    cannot be promoted or silently removed. Small-n calibration is not yet a trustworthy
+    unattended launch gate.
+  fix: >-
+    none yet; capture the exact failing theta, cell, matrices and solver receipt, then
+    diagnose from a millisecond fixture before another full-golden run
+  regression: none yet
+  bead: think-nr5w
+  recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+- id: D-204
+  title: The gate-aggregate control expected the mutated value
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted D-199 through D-203 integration pass
+  severity: medium
+  status: fixed
+  what: >-
+    The synopsis negative control changed the current gate-detected aggregate from 11
+    to 10, but expected the checker to say that the prose was not 10 of 203. The
+    checker correctly named the authoritative aggregate instead: not 11 of 203.
+  consequence: >-
+    The mutation fired and the semantic checker rejected it, but the harness rejected
+    that correct diagnostic. One of 37 controls and therefore the normal checkpoint
+    gate failed.
+  fix: >-
+    Make the expected diagnostic name the authoritative aggregate rather than the
+    deliberately mutated value, then advance both the anchor and diagnostic to the
+    final 204-defect state.
+  regression: >-
+    The complete negative-control suite requires the exact authoritative diagnostic,
+    and the normal gate must pass before this checkpoint is pushed.
+  recurrence_of: D-201
+  bead: think-g4jc
   recorded_in: tools/controls.yaml

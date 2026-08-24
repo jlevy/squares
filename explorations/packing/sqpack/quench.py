@@ -42,9 +42,13 @@ class _FixedCellUnsettledError(Exception):
     """Raised when an angle evaluation did not reach its own cell fixed point."""
 
 
-# How much constraint violation a returned LP solution may carry. Two orders below the
-# tightened solver tolerance, and far below any quantity the campaign reports.
+# How much constraint violation a returned LP solution may carry. This is the strictest
+# feasibility tolerance HiGHS accepts; the independent all-row replay below enforces it
+# instead of trusting the solver's success flag.
 LP_FEASIBLE_EPS = 1e-10
+# One initial solve, the two calls required by the retained n=10 moving-residual cell,
+# and one reserve call before the outcome stays a typed rejection.
+MAX_RESIDUAL_SOLVER_CALLS = 4
 MAX_ADJACENT_CELL_CLOSURE = 64
 
 
@@ -81,6 +85,18 @@ class FixedPointResult:
 
 
 @dataclass
+class CellResidualReceipt:
+    """All-row residual evidence from one successful LP solver call."""
+
+    solver_call: int
+    max_violation: float
+    max_violation_row: int
+    max_violation_kind: Literal["containment", "pair"]
+    offending_rows: tuple[int, ...]
+    offending_violations: tuple[float, ...]
+
+
+@dataclass
 class CellSolveResult:
     """One LP outcome, retaining numerical failure separately from infeasibility."""
 
@@ -94,6 +110,9 @@ class CellSolveResult:
     max_violation_row: int | None = None
     max_violation_kind: Literal["containment", "pair"] | None = None
     solver_calls: int = 1
+    residual_receipts: list[CellResidualReceipt] = field(default_factory=list)
+    # Compatibility summary of the first repair. The complete sequence is retained in
+    # residual_receipts, including rows that become offending only after that repair.
     repair_rows: list[int] = field(default_factory=list)
     repair_margins: list[float] = field(default_factory=list)
 
@@ -253,39 +272,52 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
             solver_status=int(res.status),
             detail=str(res.message),
         )
-    v = res.x
-    violations = a_ub @ v - b_ub
-    max_row = int(np.argmax(violations))
-    max_violation = max(float(violations[max_row]), 0.0)
-    max_kind: Literal["containment", "pair"] = "containment" if max_row < 4 * n else "pair"
     solver_calls = 1
+    residual_receipts: list[CellResidualReceipt] = []
     repair_rows: list[int] = []
     repair_margins: list[float] = []
+    active_rhs = np.array(b_ub, copy=True)
 
     # HiGHS can report an optimum just beyond its own requested feasibility screen.
-    # Retry exactly once, tightening every RHS that the first solution already violates
-    # beyond the screen by its measured violation plus that screen. Tightening only the
-    # single argmax row was D-171: two tied n=4 rows were already outside the screen, so
-    # the retry merely moved the argmax to the other one. The offending set is frozen
-    # before the retry; the second result is replayed against ORIGINAL rows. This changes
-    # neither the acceptance tolerance nor an infeasible/failure outcome, and it cannot
-    # turn into an iterative numerical repair.
-    if max_violation > LP_FEASIBLE_EPS:
-        repair_rows = [int(row) for row in np.flatnonzero(violations > LP_FEASIBLE_EPS)]
-        repair_margins = [float(violations[row]) + LP_FEASIBLE_EPS for row in repair_rows]
-        repair_rhs = np.array(b_ub, copy=True)
-        for row, margin in zip(repair_rows, repair_margins, strict=True):
-            repair_rhs[row] -= margin
-        repaired = run_lp(repair_rhs)
-        solver_calls = 2
-        if repaired.success:
-            res = repaired
-            v = repaired.x
-            violations = a_ub @ v - b_ub
-            max_row = int(np.argmax(violations))
-            max_violation = max(float(violations[max_row]), 0.0)
-            max_kind = "containment" if max_row < 4 * n else "pair"
-        else:
+    # Tighten every currently offending row and retry under a small solver-call cap.
+    # D-171 requires the complete offending set: repairing only its argmax moved the
+    # violation to an already-tied row. D-199 requires re-observation after each solve:
+    # the retained n=10 cell first violates rows 49 and 66, then moves the violation to
+    # previously clean row 61. Every successful call is replayed against ORIGINAL rows,
+    # and every tightening makes the feasible region smaller, so this cannot weaken the
+    # acceptance screen or flatter the objective.
+    while True:
+        v = res.x
+        violations = a_ub @ v - b_ub
+        max_row = int(np.argmax(violations))
+        max_violation = max(float(violations[max_row]), 0.0)
+        max_kind: Literal["containment", "pair"] = "containment" if max_row < 4 * n else "pair"
+        offending_rows = tuple(int(row) for row in np.flatnonzero(violations > LP_FEASIBLE_EPS))
+        offending_violations = tuple(float(violations[row]) for row in offending_rows)
+        residual_receipts.append(
+            CellResidualReceipt(
+                solver_call=solver_calls,
+                max_violation=max_violation,
+                max_violation_row=max_row,
+                max_violation_kind=max_kind,
+                offending_rows=offending_rows,
+                offending_violations=offending_violations,
+            )
+        )
+        if max_violation <= LP_FEASIBLE_EPS:
+            break
+        if solver_calls >= MAX_RESIDUAL_SOLVER_CALLS:
+            break
+
+        margins = [float(violations[row]) + LP_FEASIBLE_EPS for row in offending_rows]
+        if not repair_rows:
+            repair_rows = list(offending_rows)
+            repair_margins = margins
+        for row, margin in zip(offending_rows, margins, strict=True):
+            active_rhs[row] -= margin
+        repaired = run_lp(active_rhs)
+        solver_calls += 1
+        if not repaired.success:
             return CellSolveResult(
                 outcome="postcheck_rejection",
                 side=float(v[0]),
@@ -297,9 +329,11 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
                 max_violation_row=max_row,
                 max_violation_kind=max_kind,
                 solver_calls=solver_calls,
+                residual_receipts=residual_receipts,
                 repair_rows=repair_rows,
                 repair_margins=repair_margins,
             )
+        res = repaired
     x, y = list(v[1 : 1 + n]), list(v[1 + n :])
     if max_violation > LP_FEASIBLE_EPS:
         return CellSolveResult(
@@ -308,11 +342,15 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
             x=x,
             y=y,
             solver_status=int(res.status),
-            detail="optimal LP solution exceeded the declared residual screen",
+            detail=(
+                "optimal LP solution exceeded the declared residual screen after "
+                f"{solver_calls} capped solver calls"
+            ),
             max_violation=max_violation,
             max_violation_row=max_row,
             max_violation_kind=max_kind,
             solver_calls=solver_calls,
+            residual_receipts=residual_receipts,
             repair_rows=repair_rows,
             repair_margins=repair_margins,
         )
@@ -327,6 +365,7 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
         max_violation_row=max_row,
         max_violation_kind=max_kind,
         solver_calls=solver_calls,
+        residual_receipts=residual_receipts,
         repair_rows=repair_rows,
         repair_margins=repair_margins,
     )
