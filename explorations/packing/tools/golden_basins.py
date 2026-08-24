@@ -62,10 +62,12 @@ from __future__ import annotations
 import argparse
 import difflib
 import math
+import os
 import random
 import shutil
 import subprocess
 import sys
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 import yaml
@@ -142,16 +144,31 @@ def start(n: int, side: float, rng: random.Random):
     )
 
 
-def census(n: int, seeds: int) -> tuple[Atlas, dict[tuple[str, str], tuple]]:
-    """Quench `seeds` uniform starts and store the endpoints. Returns (atlas, configs)."""
+def census_starts(n: int, seeds: int) -> list[tuple[int, int, list, list, list]]:
+    """The `seeds` uniform starts for case `n`, drawn in order from a fixed stream.
+
+    Split out from the quench so the draws stay serial while the quenches parallelise.
+    The stream is `random.Random(1000 + n)` and it must stay that way: the golden is a
+    claim about these particular starts, and a start that depended on which worker got
+    there first would make the map unreproducible from the seed.
+    """
     proved = proved_side(n)
     box = (proved[0] if proved else math.ceil(math.sqrt(n))) + 0.6
     rng = random.Random(1000 + n)
+    return [(n, seed, *start(n, box, rng)) for seed in range(seeds)]
+
+
+def _census_unit(unit: tuple[int, int, list, list, list]):
+    """One start, quenched. Module-level so a process pool can pickle it."""
+    n, seed, x, y, theta = unit
+    return n, seed, quench_bracket(x, y, theta, time_budget=90.0)
+
+
+def census_from(n: int, endpoints: list) -> tuple[Atlas, dict[tuple[str, str], tuple]]:
+    """Assemble one case's atlas from its quenched endpoints, in seed order."""
     atlas = Atlas(n=n)
     configs: dict[tuple[str, str], tuple] = {}
-    for seed in range(seeds):
-        x, y, theta = start(n, box, rng)
-        r = quench_bracket(x, y, theta, time_budget=90.0)
+    for seed, r in endpoints:
         key = canonical_key(r.x, r.y, r.theta, r.side)
         atlas.add(key, seed=seed, converged=r.converged)
         identity = (key.geometric, key.contact)
@@ -162,6 +179,13 @@ def census(n: int, seeds: int) -> tuple[Atlas, dict[tuple[str, str], tuple]]:
             # the golden reports another configuration's side.
             configs[identity] = (r.x, r.y, r.theta, r.side)
     return atlas, configs
+
+
+def _ladder_unit(item: tuple[int, int]):
+    """One ladder rung: anneal near the proved optimum, then quench onto it."""
+    n, seed = item
+    seeded = anneal(n, seed=seed)
+    return seeded, quench_bracket(seeded["x"], seeded["y"], seeded["t"], time_budget=90.0)
 
 
 def ladder() -> tuple[list[dict], list[str]]:
@@ -178,15 +202,21 @@ def ladder() -> tuple[list[dict], list[str]]:
     """
     rows: list[dict] = []
     problems: list[str] = []
-    for n, seed in LADDER:
-        proved = proved_side(n)
-        if proved is None:
-            problems.append(f"n={n} is on the ladder but is not proved in frontier/")
-            continue
-        want = recognise(proved[0])
+    runnable = [(n, seed) for n, seed in LADDER if proved_side(n) is not None]
+    problems += [
+        f"n={n} is on the ladder but is not proved in frontier/"
+        for n, _ in LADDER
+        if proved_side(n) is None
+    ]
+    # Each rung is an independent anneal-then-quench; only the judging below needs to
+    # happen in order. `pool.map` preserves it.
+    with ProcessPoolExecutor(max_workers=min(len(runnable), os.cpu_count() or 4)) as pool:
+        produced = list(pool.map(_ladder_unit, runnable))
 
-        seeded = anneal(n, seed=seed)
-        r = quench_bracket(seeded["x"], seeded["y"], seeded["t"], time_budget=90.0)
+    for (n, seed), (seeded, r) in zip(runnable, produced, strict=True):
+        proved = proved_side(n)
+        assert proved is not None  # filtered above
+        want = recognise(proved[0])
         got, gap = recognise(r.side), r.side - proved[0]
 
         report = verify_packing(
@@ -235,8 +265,16 @@ def build() -> tuple[dict, list[str]]:
     rungs, ladder_problems = ladder()
     problems += ladder_problems
 
-    for n, seeds in CASES:
-        atlas, configs = census(n, seeds)
+    # Every start of every case in ONE pool: the cases are 3, 3, 4, 4 and 6 quenches,
+    # so pooling per case would leave most of the machine idle on the small ones.
+    units = [u for n, seeds in CASES for u in census_starts(n, seeds)]
+    endpoints: dict[int, list] = {n: [] for n, _ in CASES}
+    with ProcessPoolExecutor(max_workers=min(len(units), os.cpu_count() or 4)) as pool:
+        for n, seed, r in pool.map(_census_unit, units):
+            endpoints[n].append((seed, r))
+
+    for n, _seeds in CASES:
+        atlas, configs = census_from(n, sorted(endpoints[n]))
         proved = proved_side(n)
         best = min(b.side for b in atlas.basins)
 
