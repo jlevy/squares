@@ -36,6 +36,10 @@ class _OutOfTimeError(Exception):
     """Raised inside a line search when the quench's wall budget expires."""
 
 
+class _FixedCellUnsettledError(Exception):
+    """Raised when an angle evaluation did not reach its own cell fixed point."""
+
+
 # How much constraint violation a returned LP solution may carry. Two orders below the
 # tightened solver tolerance, and far below any quantity the campaign reports.
 LP_FEASIBLE_EPS = 1e-10
@@ -57,6 +61,19 @@ class QuenchResult:
     reason: str = ""
 
 
+@dataclass
+class FixedPointResult:
+    """One fixed-angle cell iteration, including whether its cell actually settled."""
+
+    side: float
+    x: list[float]
+    y: list[float]
+    solves: int
+    changes: int
+    settled: bool
+    reason: str
+
+
 def _axes(theta: float) -> list[tuple[float, float]]:
     """The two edge normals of a square at this angle."""
     c, s = math.cos(theta), math.sin(theta)
@@ -69,7 +86,12 @@ def _half_extent(theta: float, ax: float, ay: float) -> float:
     return 0.5 * (abs(ax * c + ay * s) + abs(-ax * s + ay * c))
 
 
-def choose_cell(x, y, theta) -> list[tuple[int, int, float, float, float, float]]:
+def choose_cell(
+    x,
+    y,
+    theta,
+    preferred: list[tuple[int, int, float, float, float, float]] | None = None,
+) -> list[tuple[int, int, float, float, float, float]]:
     """Pick, for each pair, the axis and sign that separates it best.
 
     This is what reads a cell off a configuration. The chosen axis is the one with the
@@ -115,6 +137,17 @@ def choose_cell(x, y, theta) -> list[tuple[int, int, float, float, float, float]
                 gap = abs(d) - h
                 if gap > best[0]:
                     best = (gap, ax, ay, 1.0 if d >= 0 else -1.0)
+            if preferred is not None:
+                pi, pj, pax, pay, _, psign = preferred[len(cell)]
+                if (pi, pj) != (i, j):
+                    raise ValueError("preferred cell has a different pair order")
+                preferred_gap = psign * (dx * pax + dy * pay) - h
+                # At a corner contact, two SAT axes can differ only by LP-scale
+                # roundoff. Flipping between them made a deterministic two-cycle on
+                # the n=10 positive control. Keep the current valid cell across such a
+                # tie; change only when another axis is materially better.
+                if preferred_gap >= best[0] - LP_FEASIBLE_EPS:
+                    best = (preferred_gap, pax, pay, psign)
             gap, ax, ay, sign = best
             cell.append((i, j, ax, ay, h, sign))
     return cell
@@ -198,33 +231,85 @@ def solve_to_fixed_point(theta, x, y, n: int, max_iters: int = 12):
     makes any angle search optimise a moving target: measured here, it is what made
     Powell and Nelder-Mead both do *worse* than plain descent.
 
-    Iterating to a cell fixed point removes it. Returns (side, x, y, solves, changes).
+    Iterating to a cell fixed point removes it.  The incumbent is returned even when a
+    transition is infeasible, worse, or reaches the iteration cap, but ``settled`` is
+    false in those cases.  Callers may use such an incumbent as exploratory data; they
+    may not call an outer quench converged from it.
     """
     solves = changes = 0
     cell = choose_cell(x, y, theta)
+    seen = {tuple(cell)}
     best = solve_cell(theta, cell, n)
     solves += 1
     if best is None:
         return None
     for _ in range(max_iters):
         side, x, y = best
-        nxt = choose_cell(x, y, theta)
+        nxt = choose_cell(x, y, theta, preferred=cell)
         if nxt == cell:
-            return side, x, y, solves, changes
+            return FixedPointResult(
+                side=side,
+                x=x,
+                y=y,
+                solves=solves,
+                changes=changes,
+                settled=True,
+                reason="cell fixed point",
+            )
+        if tuple(nxt) in seen:
+            return FixedPointResult(
+                side=side,
+                x=x,
+                y=y,
+                solves=solves,
+                changes=changes,
+                settled=False,
+                reason="cell cycle",
+            )
+        seen.add(tuple(nxt))
         cell = nxt
         changes += 1
         trial = solve_cell(theta, cell, n)
         solves += 1
-        if trial is None or trial[0] > side + 1e-15:
+        if trial is None:
             # The re-read cell is worse or infeasible: keep the incumbent rather than
             # letting the loop oscillate between two cells forever.
-            return side, x, y, solves, changes
+            return FixedPointResult(
+                side=side,
+                x=x,
+                y=y,
+                solves=solves,
+                changes=changes,
+                settled=False,
+                reason="re-read cell infeasible",
+            )
+        # HiGHS is asked for 1e-10 primal/dual feasibility. Comparing two LP
+        # objectives at 1e-15 treated solver-scale roundoff as a genuinely worse cell
+        # and is exactly what D-132 exposed on the n=10 positive control.
+        if trial[0] > side + LP_FEASIBLE_EPS:
+            return FixedPointResult(
+                side=side,
+                x=x,
+                y=y,
+                solves=solves,
+                changes=changes,
+                settled=False,
+                reason="re-read cell worse",
+            )
         best = trial
     side, x, y = best
-    return side, x, y, solves, changes
+    return FixedPointResult(
+        side=side,
+        x=x,
+        y=y,
+        solves=solves,
+        changes=changes,
+        settled=False,
+        reason="cell iteration limit",
+    )
 
 
-def quench(
+def quench(  # noqa: PLR0911 - each scientific stop condition returns its evidence
     x,
     y,
     theta,
@@ -265,9 +350,21 @@ def quench(
             cell_changes=0,
             reason="initial cell infeasible",
         )
-    side, x, y, used, changed = solved
-    lp_solves += used
-    cell_changes += changed
+    if not solved.settled:
+        return QuenchResult(
+            side=solved.side,
+            x=solved.x,
+            y=solved.y,
+            theta=theta,
+            lp_solves=solved.solves,
+            angle_steps=0,
+            converged=False,
+            cell_changes=solved.changes,
+            reason=f"fixed cell unsettled: {solved.reason}",
+        )
+    side, x, y = solved.side, solved.x, solved.y
+    lp_solves += solved.solves
+    cell_changes += solved.changes
     cell = choose_cell(x, y, theta)
 
     step = angle_step
@@ -279,9 +376,21 @@ def quench(
             solved = solve_to_fixed_point(theta, x, y, n)
             if solved is None:
                 break
-            side, x, y, used, changed = solved
-            lp_solves += used
-            cell_changes += changed + 1
+            if not solved.settled:
+                return QuenchResult(
+                    side=solved.side,
+                    x=solved.x,
+                    y=solved.y,
+                    theta=theta,
+                    lp_solves=lp_solves + solved.solves,
+                    angle_steps=angle_steps,
+                    converged=False,
+                    cell_changes=cell_changes + solved.changes + 1,
+                    reason=f"fixed cell unsettled: {solved.reason}",
+                )
+            side, x, y = solved.side, solved.x, solved.y
+            lp_solves += solved.solves
+            cell_changes += solved.changes + 1
             cell = choose_cell(x, y, theta)
 
         if not polish_angles:
@@ -293,8 +402,20 @@ def quench(
             probe = list(theta)
             probe[k] += fd_h
             trial = solve_to_fixed_point(probe, x, y, n)
-            lp_solves += trial[3] if trial else 1
-            grad.append((trial[0] - side) / fd_h if trial else 0.0)
+            lp_solves += trial.solves if trial else 1
+            if trial is not None and not trial.settled:
+                return QuenchResult(
+                    side=side,
+                    x=x,
+                    y=y,
+                    theta=theta,
+                    lp_solves=lp_solves,
+                    angle_steps=angle_steps,
+                    converged=False,
+                    cell_changes=cell_changes + trial.changes,
+                    reason=f"fixed cell unsettled during angle probe: {trial.reason}",
+                )
+            grad.append((trial.side - side) / fd_h if trial else 0.0)
 
         norm = math.sqrt(sum(g * g for g in grad))
         if norm < tol:
@@ -318,9 +439,21 @@ def quench(
         while step > 1e-13:
             probe = [t - step * g / norm for t, g in zip(theta, grad, strict=True)]
             trial = solve_to_fixed_point(probe, x, y, n)
-            lp_solves += trial[3] if trial else 1
-            if trial and trial[0] < side - tol:
-                side, x, y = trial[0], trial[1], trial[2]
+            lp_solves += trial.solves if trial else 1
+            if trial is not None and not trial.settled:
+                return QuenchResult(
+                    side=side,
+                    x=x,
+                    y=y,
+                    theta=theta,
+                    lp_solves=lp_solves,
+                    angle_steps=angle_steps,
+                    converged=False,
+                    cell_changes=cell_changes + trial.changes,
+                    reason=f"fixed cell unsettled during line search: {trial.reason}",
+                )
+            if trial and trial.side < side - tol:
+                side, x, y = trial.side, trial.x, trial.y
                 theta = probe
                 cell = choose_cell(x, y, theta)
                 angle_steps += 1
@@ -431,7 +564,8 @@ def _free_sweep(side, x, y, theta, n, *, deadline, span: float = 1e-3):
 
     Returns (side, x, y, theta, lp_solves). Used to test whether a class-converged
     point is coordinate-wise stationary rather than an artifact of the merge
-    tolerance. Raises `_OutOfTimeError` unless every coordinate was checked.
+    tolerance. Raises `_OutOfTimeError` unless every coordinate was checked, and
+    `_FixedCellUnsettledError` rather than evaluating a path-dependent incumbent.
     """
     lp_solves = 0
     best = (side, list(x), list(y), list(theta))
@@ -448,8 +582,10 @@ def _free_sweep(side, x, y, theta, n, *, deadline, span: float = 1e-3):
             trial_theta = list(angles)
             trial_theta[k] = value
             got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
-            lp_solves += got[3] if got else 1
-            return got[0] if got else 1e3
+            lp_solves += got.solves if got else 1
+            if got is not None and not got.settled:
+                raise _FixedCellUnsettledError(got.reason)
+            return got.side if got else 1e3
 
         angle = _bracket_min(probe, base, span)
         trial_theta = list(best[3])
@@ -457,13 +593,15 @@ def _free_sweep(side, x, y, theta, n, *, deadline, span: float = 1e-3):
         got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
         if time.monotonic() > deadline:
             raise _OutOfTimeError
-        lp_solves += got[3] if got else 1
-        if got and got[0] < best[0] - 1e-13:
-            best = (got[0], got[1], got[2], trial_theta)
+        lp_solves += got.solves if got else 1
+        if got is not None and not got.settled:
+            raise _FixedCellUnsettledError(got.reason)
+        if got and got.side < best[0] - 1e-13:
+            best = (got.side, got.x, got.y, trial_theta)
     return best[0], best[1], best[2], best[3], lp_solves
 
 
-def quench_bracket(
+def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns its evidence
     x,
     y,
     theta,
@@ -538,8 +676,20 @@ def quench_bracket(
             cell_changes=0,
             reason="initial cell infeasible",
         )
-    side, x, y, used, changes = solved
-    lp_solves += used
+    if not solved.settled:
+        return QuenchResult(
+            side=solved.side,
+            x=solved.x,
+            y=solved.y,
+            theta=theta,
+            lp_solves=solved.solves,
+            angle_steps=0,
+            converged=False,
+            cell_changes=solved.changes,
+            reason=f"fixed cell unsettled: {solved.reason}",
+        )
+    side, x, y, changes = solved.side, solved.x, solved.y, solved.changes
+    lp_solves += solved.solves
 
     # `class_tol` is the one real knob, and it is doing more than grouping. A search
     # arrives with every angle slightly different, so a tight tolerance sees eleven
@@ -580,8 +730,10 @@ def quench_bracket(
                 for k in group:
                     trial_theta[k] = value
                 got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
-                lp_solves += got[3] if got else 1
-                return got[0] if got else 1e3
+                lp_solves += got.solves if got else 1
+                if got is not None and not got.settled:
+                    raise _FixedCellUnsettledError(got.reason)
+                return got.side if got else 1e3
 
             try:
                 best_angle = _bracket_min(probe, base, span)
@@ -597,13 +749,37 @@ def quench_bracket(
                     cell_changes=changes,
                     reason="time budget",
                 )
+            except _FixedCellUnsettledError as exc:
+                return QuenchResult(
+                    side=side,
+                    x=x,
+                    y=y,
+                    theta=theta,
+                    lp_solves=lp_solves,
+                    angle_steps=angle_steps,
+                    converged=False,
+                    cell_changes=changes,
+                    reason=f"fixed cell unsettled during bracket: {exc}",
+                )
             trial_theta = list(theta)
             for k in group:
                 trial_theta[k] = best_angle
             got = solve_to_fixed_point(trial_theta, ref_x, ref_y, n)
-            lp_solves += got[3] if got else 1
-            if got and got[0] < side - tol:
-                side, x, y = got[0], got[1], got[2]
+            lp_solves += got.solves if got else 1
+            if got is not None and not got.settled:
+                return QuenchResult(
+                    side=side,
+                    x=x,
+                    y=y,
+                    theta=theta,
+                    lp_solves=lp_solves,
+                    angle_steps=angle_steps,
+                    converged=False,
+                    cell_changes=changes,
+                    reason=f"fixed cell unsettled after bracket: {got.reason}",
+                )
+            if got and got.side < side - tol:
+                side, x, y = got.side, got.x, got.y
                 theta = trial_theta
                 angle_steps += 1
                 improved = True
@@ -668,6 +844,9 @@ def quench_bracket(
             )
         except _OutOfTimeError:
             stop_reason = "time budget during free sweep"
+            break
+        except _FixedCellUnsettledError as exc:
+            stop_reason = f"fixed cell unsettled during free sweep: {exc}"
             break
         lp_solves += used
         if free_side < side - tol:

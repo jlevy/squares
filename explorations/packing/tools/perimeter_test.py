@@ -120,7 +120,7 @@ def _quench_unit(
         got = solve_to_fixed_point(t, x, y, len(x))
         if not got:
             return [], 0
-        return oracle(got[1], got[2], t, got[0] + ORACLE_TOL, label), 1
+        return oracle(got.x, got.y, t, got.side + ORACLE_TOL, label), 1
 
     fn = quench if kind == "quench" else quench_bracket
     r = fn(x, y, t)

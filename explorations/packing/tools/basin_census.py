@@ -169,9 +169,9 @@ def make_event(
             "lp_solves": result.lp_solves,
             "angle_steps": result.angle_steps,
             "cell_changes": result.cell_changes,
-            # D-132 remains explicit: this event is not component-eligible until the
-            # fixed-cell solver proves that its terminal cell settled.
-            "fixed_cell_settlement_certified": False,
+            # ``converged`` is now unreachable unless every fixed-cell evaluation used
+            # by the quench settled; D-132's typed result is the enforcement boundary.
+            "fixed_cell_settlement_certified": result.converged,
         },
         "verification": verification,
         "endpoint_key": {

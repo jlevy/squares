@@ -22,11 +22,14 @@ import sys
 import time
 from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+import sqpack.quench as quench_module
 from sqpack.quench import (
+    FixedPointResult,
     _free_sweep,  # pyright: ignore[reportPrivateUsage]
     _OutOfTimeError,  # pyright: ignore[reportPrivateUsage]
     quench_bracket,
@@ -105,9 +108,9 @@ def check_quench_deterministic() -> str | None:
     # And the underlying evaluation must not depend on the centres it is handed.
     first = solve_to_fixed_point(t, x, y, len(x))
     shifted = solve_to_fixed_point(t, [v + 3.0 for v in x], [v - 2.0 for v in y], len(x))
-    if first and shifted and abs(first[0] - shifted[0]) > 1e-9:
+    if first and shifted and abs(first.side - shifted.side) > 1e-9:
         return (
-            f"D-015: s(theta) moved by {abs(first[0] - shifted[0]):.2e} under a pure "
+            f"D-015: s(theta) moved by {abs(first.side - shifted.side):.2e} under a pure "
             f"translation of the centres it was handed"
         )
     return None
@@ -181,7 +184,7 @@ def check_cell_solve_is_not_a_quench() -> str | None:
             "it is supposed to succeed and merely fall short, so the LP or the cell "
             "read has regressed"
         )
-    cell_side = solved[0]
+    cell_side = solved.side
     if cell_side - analytic < 1e-6:
         return (
             f"D-029: the fixed-angle cell solve reached {cell_side - analytic:+.2e} of the "
@@ -214,6 +217,49 @@ def check_free_sweep_deadline_is_not_convergence() -> str | None:
     return "D-036: an already-expired free sweep returned as if every angle was checked"
 
 
+def check_fixed_cell_termination_is_typed() -> str | None:
+    """D-132: an incumbent is not a fixed point unless the cell actually settled."""
+    settled = solve_to_fixed_point([0.0], [0.5], [0.5], 1)
+    if settled is None or not settled.settled or settled.reason != "cell fixed point":
+        return f"D-132: the known n=1 fixed point was not marked settled: {settled!r}"
+
+    capped = solve_to_fixed_point([0.0], [0.5], [0.5], 1, max_iters=0)
+    if capped is None or capped.settled or capped.reason != "cell iteration limit":
+        return f"D-132: an iteration cap was not exposed as unsettled: {capped!r}"
+
+    cell_a = [(0, 1, 1.0, 0.0, 1.0, 1.0)]
+    cell_b = [(0, 1, 0.0, 1.0, 1.0, 1.0)]
+    with (
+        patch.object(quench_module, "choose_cell", side_effect=[cell_a, cell_b]),
+        patch.object(
+            quench_module,
+            "solve_cell",
+            side_effect=[(2.0, [0.5], [0.5]), (2.1, [0.5], [0.5])],
+        ),
+    ):
+        worse = solve_to_fixed_point([0.0], [0.5], [0.5], 1)
+    if worse is None or worse.settled or worse.reason != "re-read cell worse":
+        return f"D-132: a worse transition was not exposed as unsettled: {worse!r}"
+
+    with patch.object(
+        quench_module,
+        "solve_to_fixed_point",
+        return_value=FixedPointResult(
+            side=2.0,
+            x=[0.5],
+            y=[0.5],
+            solves=1,
+            changes=1,
+            settled=False,
+            reason="synthetic iteration limit",
+        ),
+    ):
+        outer = quench_bracket([0.5], [0.5], [0.0], time_budget=1.0)
+    if outer.converged or "fixed cell unsettled" not in outer.reason:
+        return f"D-132: outer quench promoted an unsettled inner solve: {outer!r}"
+    return None
+
+
 # Named at module level so a process pool can pickle them by reference. The five are
 # independent -- each builds its own fixture and reads nothing the others write -- and
 # each is seconds of LP solving, so running them serially made this file the gate's
@@ -225,6 +271,7 @@ CHECKS = (
     "check_angle_search_converges",
     "check_cell_solve_is_not_a_quench",
     "check_free_sweep_deadline_is_not_convergence",
+    "check_fixed_cell_termination_is_typed",
 )
 
 
@@ -239,7 +286,10 @@ def main() -> int:
         print(f"  REGRESSION  {msg}", file=sys.stderr)
     if failures:
         return 1
-    print(f"  {len(CHECKS)} regression checks pass (D-002, D-015, D-016, D-019, D-029, D-036)")
+    print(
+        f"  {len(CHECKS)} regression checks pass "
+        "(D-002, D-015, D-016, D-019, D-029, D-036, D-132)"
+    )
     return 0
 
 

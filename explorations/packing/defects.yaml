@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 161
+count: 163
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3230,7 +3230,7 @@ defects:
   detected_by: review
   latent_for: since solve_to_fixed_point was introduced
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     `solve_to_fixed_point` returns the same untyped five-value tuple when a re-read cell
     is stable, when the next cell is infeasible or worse, and when its unexplained
@@ -3244,11 +3244,15 @@ defects:
     outer `converged: true` result. Basin and stationarity claims can therefore promote
     a configuration without evidence that their inner fixed-cell problem settled.
   fix: >-
-    none yet. Return a typed outcome with an explicit termination reason and settled
-    flag, compare a canonical discrete cell identity, justify or replace the iteration
-    cap with a measured work bound, and prohibit outer convergence when the inner cell
-    did not settle.
-  regression: none
+    `solve_to_fixed_point` now returns a typed result with an explicit settled flag and
+    reason for a fixed point, repeated-cell cycle, infeasible or worse transition, or
+    iteration limit. Both angle-search variants refuse to report outer convergence from
+    any unsettled evaluation. The cap remains a conservative resource stop, but it can
+    no longer masquerade as mathematical settlement.
+  regression: >-
+    The historical regression suite exercises a known settled n=1 cell, an explicit
+    zero-iteration cap, a mocked worse transition, and an outer quench fed an unsettled
+    inner result; only the first may report settlement or convergence.
   bead: think-9qz0
   recorded_in: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
 - id: D-133
@@ -4036,3 +4040,65 @@ defects:
   regression: The synopsis consistency check rejects a stated hypothesis count that disagrees with the registry.
   bead: think-j8tv
   recorded_in: SYNOPSIS.md
+- id: D-162
+  title: The small-n golden convergence labels hid unsettled fixed-cell evaluations
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: since the cold-start basin golden was recorded
+  severity: high
+  status: outstanding
+  what: >-
+    After D-132 made fixed-cell termination observable, a deep deterministic rebuild
+    reports only 3/4 converged proposals for n=3, 1/4 for n=4, and 5/6 for n=5, while
+    the committed golden reports 4/4, 4/4, and 6/6. The convergence ladder also marks
+    n=9 and n=10 unsettled; n=10 no longer reaches the proved value. The newly exposed
+    reasons include a repeated cell cycle and a re-read cell that is infeasible under
+    the solver tolerance. The former untyped result supplied both as ordinary objective
+    values.
+  consequence: >-
+    Current small-n convergence totals and endpoint rows can include configurations whose
+    inner fixed-cell problem never settled. They remain reproducible numerical stopping
+    events, but they are not yet admissible terminal components or evidence of census
+    saturation.
+  fix: >-
+    none yet. Diagnose the newly explicit n=3 through n=10 outcomes without weakening
+    the settlement contract, then regenerate every small-n calibration with full poses
+    and reasons and correct the derived counts and prose before enabling a census.
+  regression: >-
+    The basin-event replay retains the fixed-cell settlement flag, and the deep golden
+    must reject any attempt to count a cycle, cap, or rejected transition as converged.
+  recurrence_of: D-030
+  bead: think-wbra
+  recorded_in: golden/basin-maps.yaml
+- id: D-163
+  title: The historical-regression gate masked a failing checker
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: gate
+  latent_for: since command-line boundary checks followed the regression checker
+  severity: critical
+  status: fixed
+  what: >-
+    `step_historical_regressions` ran its Python checker and then continued into several
+    shell-boundary probes without propagating the checker's status. When D-132 made the
+    D-029 regression fail, the later successful probe became the function status and
+    `test.sh --only historical regressions` printed PASSED with exit zero.
+  consequence: >-
+    A named scientific regression could be visible in the transcript while both focused
+    and full gates reported success. An unattended loop that reads exit status rather
+    than the complete transcript would proceed on a known-broken quench.
+  fix: >-
+    The step now returns immediately when `tools/regression_test.py` is nonzero, before
+    any later command-line boundary probe can replace its status.
+  regression: >-
+    A negative control replaces the Python regression invocation with `false || return`
+    and requires the focused gate to report the historical-regression step at exit one;
+    the ordinary step then continues to exercise its later boundary probes when green.
+  recurrence_of: D-004
+  bead: think-0bpx
+  recorded_in: test.sh

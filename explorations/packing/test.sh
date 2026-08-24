@@ -365,7 +365,7 @@ step_historical_regressions() {
   # Named reproductions for defects that span components or need a focused fixture.
   # Keeping this in the main gate prevents a passing standalone check from becoming a
   # forgotten optional command.
-  $PY tools/regression_test.py
+  $PY tools/regression_test.py || return
 
   # Command-line boundary checks for the gate itself. `--list` exits before acquiring
   # the activity marker, so these nested probes cannot clear the parent gate's marker.

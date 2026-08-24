@@ -66,9 +66,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 161", "count: 20"]
+  replace: ["count: 163", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 161"
+  expect: "count 20 != 163"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -101,6 +101,12 @@ controls:
   replace: ['[ "$STRICT" = "1" ] && DEEP=1', '[ "$STRICT" = "1" ] && DEEP=0']
   run: bash test.sh --strict
   expect: "strict mode did not enable deep regeneration"
+
+- name: gate - historical regression failure is not masked by later probes
+  file: test.sh
+  replace: ["  $PY tools/regression_test.py || return", "  false || return"]
+  run: bash test.sh --only 'historical regressions'
+  expect: "historical regressions (exit 1)"
 
 - name: defect log - generated view left stale
   file: defects.yaml
