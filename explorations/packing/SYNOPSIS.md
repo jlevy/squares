@@ -1196,15 +1196,16 @@ The mutable size-by-size run order lives in the
 [basin-map confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md),
 not in this status document.
 It labels every cell as tool validation, measurement validation, or genuine research.
-The event-retention controls through `n = 8` are complete; exp-030 is the active bounded
-`n = 9` BC-007 performance-validation cell.
+The event-retention controls through `n = 8` and the bounded `n = 9` performance cell
+are complete. The random-start size ladder stops before BC-008’s missing source-bound
+`n = 10` seeded-pose entry point.
 Exact configuration-space controls still stop at `n = 4`. Component and census claims
 remain blocked on the later identity and coverage rows.
 
 ## Experiments Conducted
 
-There are 30 rounds registered in `series-000`; 29 are terminal and exp-030 is in
-progress. The terminal rounds record 783 agent-minutes and 27.7 wall-minutes.
+There are 30 rounds registered in `series-000`; all are terminal.
+They record 788 agent-minutes and 28.0 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1251,7 +1252,7 @@ archive beside it.
 | [exp-027](campaign/series/series-000-smoke-and-calibration/experiments/exp-027-h-021-n6-basin-event-v3-retention.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 3 admissible; one typed time-budget stop | **baseline** |
 | [exp-028](campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md) | 7 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; three typed time-budget stops | **baseline** |
 | [exp-029](campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md) | 8 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; one typed unsettled stop and two time-budget stops | **baseline** |
-| [exp-030](campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md) | 9 | positive control | H-021 | BasinEvent/v3 semantic replay | preregistered one-seed performance cell; measurement pending | **in-progress** |
+| [exp-030](campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md) | 9 | positive control | H-021 | BasinEvent/v3 semantic replay | 1 retained/valid typed time-budget stop; full command 21.36 s | **baseline** |
 
 ### Cost and provenance
 
@@ -1286,13 +1287,15 @@ archive beside it.
 | exp-027 | 4 seeds, 10 s each | 34.425 s | 5 m | criterion | `a3be8e4` |
 | exp-028 | 4 seeds, 10 s each | 38.628 s | 5 m | criterion | `ce84ef6` |
 | exp-029 | 4 seeds, 10 s each | 38.004 s | 5 m | criterion | `69c6008` |
+| exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
 
-### What the twenty-nine rounds jointly establish
+### What the thirty rounds jointly establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
-`n = 7`; component classification is not.** Exp-018 through exp-020 retain twelve
-independently valid historical v2 poses at `n=3` through `n=5`, including four at the
-proved `n=3` and `n=4` optima, but D-165 correctly remains recorded on those artifacts.
+`n = 8` plus one bounded `n = 9` performance event; component classification is not.**
+Exp-018 through exp-020 retain twelve independently valid historical v2 poses at `n=3`
+through `n=5`, including four at the proved `n=3` and `n=4` optima, but D-165 correctly
+remains recorded on those artifacts.
 Exp-021 adds one v3 `n=3` event whose 2,037 fixed-point evaluations are all retained and
 settled, whose pose independently verifies, and whose admissibility claim replays.
 Exp-022 completes the four-seed v3 block at 4/4 admissible: three endpoints reach side 2
@@ -1327,10 +1330,17 @@ seconds and canonical key computation at 0.004956 seconds, versus 38.004 seconds
 retained quench wall.
 Canonicalization is therefore not yet the event-loop bottleneck at n=8, while the 3/4
 typed-stop rate again bars landscape statistics.
-The exact small-moduli controls remain valid; component identity is the next blocked
-layer. The `n=12` calibration returns exactly `4.0`, but that is not a known-answer
-guard. The runner’s full-pose independent verification boundary remains open under
-[D-044](defects.md); a producer-reported overlap scalar does not close it.
+Exp-030 retains one independently valid `n=9` time-budget stop and completes the frozen
+command in 21.36 seconds, below its 30-second profile trigger.
+Median one-event keying costs 0.001074 seconds versus 20.062 seconds of quench wall, so
+canonicalization remains negligible at n=9. This one censored event is a performance
+control, not an n=9 landscape sample.
+The size ladder stops before n=10 because its source-bound seeded-pose entry point is
+not implemented. The exact small-moduli controls remain valid; component identity is the
+next blocked layer. The `n=12` calibration returns exactly `4.0`, but that is not a
+known-answer guard.
+The runner’s full-pose independent verification boundary remains open
+under [D-044](defects.md); a producer-reported overlap scalar does not close it.
 
 **Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
 selections as 128 derivative-distinct matrices.

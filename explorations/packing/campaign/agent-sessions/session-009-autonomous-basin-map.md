@@ -175,6 +175,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/results/exp-027-h-021-n6-basin-event-v3-retention.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-028-h-021-n7-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - campaign/schemas/agenda.schema.yaml
   - tools/basin_census.py
@@ -271,10 +272,16 @@ session:
     two hit the time budget. Four-event median screen and key batches cost 0.000684s and
     0.004956s; quench work, not canonicalization, dominates this cell.
   - The post-exp-029 full normal gate passes all thirty steps in 61 wall-seconds.
+  - >-
+    Exp-030 retains and replays one independently valid n=9 time-budget stop. The full
+    command costs 21.36 seconds; retained quench wall is 20.062 seconds, median
+    one-event screening is 0.000174 seconds, and median keying is 0.001074 seconds.
+  - The post-exp-030 full normal gate passes all thirty steps in 47 wall-seconds.
   stop_reason: null
   next_action: >-
-    Execute preregistered exp-030 only: one fixed n=9 seed under a 20-second quench and
-    60-second command cap, then stop or profile if the full cell exceeds 30 seconds.
+    Do not continue the random-start size ladder. Either implement and preregister
+    BC-008's source-bound n=10 seeded-pose entry point, or advance the separate BC-009
+    identity controls; both remain blocked in the agenda.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -296,11 +303,11 @@ completes the n=4 v3 block.
 The historical v2 block remains promotion-blocked as recorded, and no endpoint
 descriptor has been promoted to a connected component.
 
-The event stack now retains complete blocks through n=8. D-126 still prevents a fixed
-wall-clock budget from defining reproducible scientific work, so these cells validate
-retention and replay only; they do not estimate basin frequencies.
-The separate n=5 connectivity question remains blocked until its component-identity
-controls are explicit.
+The event stack now retains complete blocks through n=8 plus one bounded n=9 performance
+event. D-126 still prevents a fixed wall-clock budget from defining reproducible
+scientific work, so these cells validate retention and replay only; they do not estimate
+basin frequencies. The separate n=5 connectivity question remains blocked until its
+component-identity controls are explicit.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

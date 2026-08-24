@@ -35,34 +35,50 @@ experiment:
       campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
     budget: one seed; 20-second quench; 60-second process cap; retain every stop
     record: campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
-  lease: {expires: '2026-08-24T19:15:00Z', host: local-m1-pro}
+  effort:
+    timebox: 30m result slice; 60s measurement cap
+    wall_seconds: 20.06198708305601
+    agent_minutes: 5
+    stopped_by: criterion
   results:
   - shape: determination
     question: >-
       Does one n=9 start traverse generation, quench, independent validation, keying,
       retention, and replay inside the declared performance stop?
     role: outcome
-    outcome: invalid
-    checked_by: pending BasinEvent/v3 semantic replay and bounded stage timing
+    outcome: criterion_met
+    checked_by: >-
+      BasinEvent/v3 replay: 1/1 independently valid event retained; the event is a
+      typed 20-second time-budget stop with 5,845/5,845 evaluations settled; complete
+      command wall 21.36 seconds
   verdict:
-    decision: in-progress
+    decision: baseline
     primary_criterion: one complete independently replayable event with attributed stage cost
     reason: >-
-      Preregistered before measurement. Stop for a profile rather than expanding the
-      sample if the complete cell exceeds 30 seconds or exposes a launch-path defect.
+      The complete event path stays below the 30-second profile trigger and retains its
+      nonconverged outcome without censorship. D-126 bars frequency or deterministic-work
+      claims, and no additional n=9 samples are authorized by this performance cell.
+    commit: 56bf66c
 ---
-# exp-030 — preregistered `n = 9` performance cell
+# exp-030 — the `n = 9` performance cell is complete
 
 BC-007 asks whether the complete event path remains cheap enough to inspect before any
 broader sampling at n=9. It changes only the size, the per-seed cap, and the number of
-starts from exp-029. The single event must be retained and semantically replayed whether
-it is admissible or blocked.
+starts from exp-029. The single event is retained and semantically replayed as a valid,
+non-admissible time-budget stop at side `3.151852534444`; all 5,845 fixed-point
+evaluations settle.
 
-After the event, the same bounded audit used by exp-029 measures independent screening,
-canonical-key computation, and semantic replay.
-If the complete cell exceeds 30 seconds, this round stops at one seed and hands the
-measured bottleneck to `think-xzew`; it does not expand the sample or infer a basin
-frequency.
+The quench retains 20.062 seconds of wall time, and the complete frozen command takes
+21.36 seconds. Across five one-event batches, the median independent screen costs
+0.000174 seconds and the median canonical key costs 0.001074 seconds.
+Full semantic replay costs 0.001622 seconds in the already-started process; the separate
+frozen CLI costs 0.771 seconds including startup.
+Keying is about 0.0054% of retained quench wall, so the cell does not trigger a profile.
+
+This result validates the n=9 event and timing path only.
+It neither samples the n=9 landscape nor tests return to the proved side-3 grid.
+D-126 remains explicit, and the size ladder stops here because BC-008 requires a
+source-bound n=10 seeded-pose entry point that does not yet exist.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

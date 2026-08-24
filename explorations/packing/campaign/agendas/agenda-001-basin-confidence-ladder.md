@@ -161,7 +161,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [9]
-    state: ready
+    state: complete
     priority: 2
     question: >-
       Can one proved perfect-grid cell traverse the full event and key path before the
@@ -174,7 +174,13 @@ agenda:
     depends_on: [BC-006]
     next_evidence: retained event plus canonicalization share of wall time
     parallel_group: performance
-    note: Claimed as exp-030; stop at one seed and profile if the complete cell exceeds 30s.
+    note: >-
+      Exp-030 retains one independently valid typed time-budget stop in 21.36s complete
+      command wall, below the 30s profile trigger. Median one-event keying is 0.001074s;
+      no additional n=9 sampling is authorized.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
   - id: BC-008
     purpose: tool_validation
     owner_focus: correctness
