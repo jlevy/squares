@@ -16,10 +16,12 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import random
 import subprocess
 import sys
 import time
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -212,20 +214,32 @@ def check_free_sweep_deadline_is_not_convergence() -> str | None:
     return "D-036: an already-expired free sweep returned as if every angle was checked"
 
 
+# Named at module level so a process pool can pickle them by reference. The five are
+# independent -- each builds its own fixture and reads nothing the others write -- and
+# each is seconds of LP solving, so running them serially made this file the gate's
+# second-longest step for no reason. `pool.map` preserves submission order, so the
+# failure list reads the same as it did serially.
+CHECKS = (
+    "check_budget_binds",
+    "check_quench_deterministic",
+    "check_angle_search_converges",
+    "check_cell_solve_is_not_a_quench",
+    "check_free_sweep_deadline_is_not_convergence",
+)
+
+
+def _run_check(name: str) -> str | None:
+    return globals()[name]()
+
+
 def main() -> int:
-    checks = [
-        check_budget_binds,
-        check_quench_deterministic,
-        check_angle_search_converges,
-        check_cell_solve_is_not_a_quench,
-        check_free_sweep_deadline_is_not_convergence,
-    ]
-    failures = [msg for msg in (c() for c in checks) if msg]
+    with ProcessPoolExecutor(max_workers=min(len(CHECKS), os.cpu_count() or 4)) as pool:
+        failures = [msg for msg in pool.map(_run_check, CHECKS) if msg]
     for msg in failures:
         print(f"  REGRESSION  {msg}", file=sys.stderr)
     if failures:
         return 1
-    print(f"  {len(checks)} regression checks pass (D-002, D-015, D-016, D-019, D-029, D-036)")
+    print(f"  {len(CHECKS)} regression checks pass (D-002, D-015, D-016, D-019, D-029, D-036)")
     return 0
 
 
