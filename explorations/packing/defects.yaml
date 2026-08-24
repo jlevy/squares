@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 137
+count: 138
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3388,3 +3388,32 @@ defects:
     all retained exp-013 certificates and therefore runs this control on every check.
   bead: think-vevb
   recorded_in: tools/check_trump_tangent.py
+- id: D-138
+  title: The provenance gate skipped schema-valid unquoted commit hashes
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: anomaly
+  latent_for: since exp-011 adopted an unquoted engine_commit value
+  severity: high
+  status: fixed
+  what: >-
+    test.sh extracted only single-quoted engine_commit values even though the enforced
+    experiment schema permits quoted or unquoted YAML strings. The strict gate therefore
+    printed no provenance result for exp-011 or exp-013 and still passed.
+  consequence: >-
+    A green gate claimed every recorded execution revision was reachable while silently
+    omitting exactly the two most recent unquoted records. An orphaned instrument commit
+    in either round would not have required the documented annotation.
+  fix: >-
+    Normalize quoted and unquoted commit scalars, require a 7-to-40-digit hexadecimal Git
+    id, and compare the number checked with an independent count of every declared
+    engine_commit field.
+  regression: >-
+    The provenance step now fails unless it checks every declaration. Exp-011 and
+    exp-013 are live unquoted known answers, and a successful gate prints both plus the
+    exact checked-total line.
+  recurrence_of: D-006
+  bead: think-t4xv
+  recorded_in: test.sh

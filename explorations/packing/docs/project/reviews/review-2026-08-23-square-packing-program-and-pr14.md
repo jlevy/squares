@@ -2293,6 +2293,15 @@ This is the loop shape the research program wants: the proof-model audit consume
 judgment, while the final exact experiment and its durable recheck stayed below one
 machine-minute.
 
+The first 26-step strict/deep pass exposed one further process defect in its own output.
+The provenance step omitted exp-011 and exp-013 because their schema-valid
+`engine_commit` values were unquoted, while the shell extractor recognized only
+single-quoted YAML strings; the gate still returned green.
+D-138 records this recurrence of D-006. The extractor now accepts either representation,
+validates the Git hash, and independently requires the checked count to equal all 13
+declarations. The focused provenance step prints both formerly omitted rounds and the
+exact total.
+
 Exp-013 closes the focused H-026 execution bead and the qualitative local-isolation leg,
 not the broader `n=11` global-optimality program.
 The earlier focused D-066 through D-070 and D-072 through D-074 incident beads plus

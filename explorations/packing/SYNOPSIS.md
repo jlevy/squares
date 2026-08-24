@@ -1083,13 +1083,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-One hundred thirty-seven defects, [one line each](defects.md), generated from
+One hundred thirty-eight defects, [one line each](defects.md), generated from
 `defects.yaml` and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 46 | asserted something false about the mathematics |
-| validity | 38 | was correct, but the measurement did not bear on the question |
+| validity | 39 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 39 | recorded something its own evidence contradicts |
 | robustness | 10 | did not finish, or finished only by luck |
 | performance | 4 | worked, but cost far more than it should |
@@ -1172,7 +1172,7 @@ D-108 through D-119 are the second-pass corrections: the missing piercing paper,
 isostatic and self-stress arguments, fixed-budget and fixed-cell overreach, topology and
 fractional-LP mistakes, unsupported novelty, stale registry state, the H-012/H-017
 estimand conflation, and an impossible continuity-blind angle-sheet criterion.
-D-120 through D-137 record the engineering delta and first post-merge runs:
+D-120 through D-138 record the engineering delta and first post-merge runs:
 ulp-sensitive cell selection, gate boundary and skip-contract failures, the per-step
 worker cap, bounded portable snapshots, a parallel negative-control race, wall-clock
 scientific budgeting, stale review status, the missing targeted edit loop, unbounded
@@ -1183,6 +1183,8 @@ vocabulary that could not record the H-024 result, the omitted `n=29` source pro
 that the falsifier exposed, the roll-up’s obsolete blanket claim about exploratory
 record evidence, the distinction between a branch linearization and a true Bouligand
 motion, and a certificate replay that did not require one-to-one branch coverage.
+The last entry catches the provenance gate silently skipping schema-valid unquoted
+execution commits, including exp-011 and exp-013.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).

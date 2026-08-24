@@ -62,6 +62,7 @@ session:
   - All 128 rank-33 positive-stress certificates replay exactly in Q(u).
   - Known-rigid, known-flexible wall omission, field-root, and duplicate-record controls pass.
   - Generation takes 47.121 internal seconds and retained replay takes 10.187 internal seconds.
+  - The 26-step strict/deep gate replays the result and checks all 13 declared experiment commits.
   stop_reason: Every complete branch received an exact zero-cone certificate; the preregistered criterion was met.
   next_action: >-
     Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and

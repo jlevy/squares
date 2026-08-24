@@ -457,9 +457,21 @@ step_provenance() {
   # net -- which happened once here, to exp-001, and is annotated there. Orphans are
   # reported rather than fatal: history that has already been published cannot be
   # fixed by failing a test, and the annotation is the honest record.
+  local declared checked raw c
+  declared=$(grep -h '^[[:space:]]*engine_commit:' campaign/series/*/experiments/*.md | wc -l | tr -d ' ')
+  checked=0
   for f in campaign/series/*/experiments/*.md; do
-    c=$(sed -n "s/.*engine_commit: '\(.*\)'.*/\1/p" "$f" | head -1)
-    [ -n "$c" ] || continue
+    raw=$(sed -n 's/^[[:space:]]*engine_commit:[[:space:]]*//p' "$f" | head -1)
+    [ -n "$raw" ] || continue
+    # engine_commit is a YAML string and may legally be quoted or unquoted. Strip an
+    # optional comment, whitespace and either quote style, then require a Git hex id.
+    raw=${raw%%#*}
+    c=$(printf '%s\n' "$raw" | tr -d "'\"[:space:]")
+    [[ "$c" =~ ^[0-9a-fA-F]{7,40}$ ]] || {
+      echo "  INVALID $(basename "$f") engine_commit: $raw"
+      return 1
+    }
+    checked=$((checked + 1))
     if git merge-base --is-ancestor "$c" HEAD 2>/dev/null; then
       echo "  ok       $(basename "$f") -> $c"
     else
@@ -467,6 +479,11 @@ step_provenance() {
       grep -q "^## Annotation" "$f" || { echo "    and it has none"; exit 1; }
     fi
   done
+  [ "$checked" -eq "$declared" ] || {
+    echo "  checked $checked of $declared declared engine commits"
+    return 1
+  }
+  echo "  checked all $checked declared engine commits"
 }
 
 step_campaign_record() {
