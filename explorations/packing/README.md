@@ -85,8 +85,9 @@ checkpoint protocol, the agenda queue orders its cells, and the
 ### The record, by id
 
 Every artifact the loop touches carries a typed id.
-The one-line meanings; [`conventions.md`](conventions.md) owns the id rules and
-[`SYNOPSIS.md`](SYNOPSIS.md#terminology) the full definitions:
+The one-line meanings; [`conventions.md`](conventions.md) is the definitive registry of
+every id class and naming rule, and [`SYNOPSIS.md`](SYNOPSIS.md#terminology) carries the
+full definitions:
 
 | Id | Names |
 | --- | --- |
@@ -228,10 +229,10 @@ before, and copied aggregates repeatedly went stale.
 
 ## Conventions
 
-[`conventions.md`](conventions.md) consolidates every convention this directory runs on:
-the id scheme across all layers, file naming, artifact discipline, the evidence tiers
-and what each may claim, provenance, corrections, and which rules are machine-checked
-versus which rest on care.
+[`conventions.md`](conventions.md) is the definitive registry of every convention and
+naming this directory runs on: the id scheme across all layers, file naming, artifact
+discipline, the evidence tiers and what each may claim, provenance, corrections, and
+which rules are machine-checked versus which rest on care.
 Read it before adding an artifact, a round, or a tool.
 
 ## Reports
