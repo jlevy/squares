@@ -247,10 +247,10 @@ The change is complete when all of the following are green on the final tree:
   the new layout.
 - [x] Final full local `packing-validate` transcript is green on the rebased
   implementation tree: all 31 steps passed in 112.21 seconds.
-- [ ] Stacked PR checks are green.
+- [x] Stacked PR checks are green on implementation commit `df73b88`: Linux validation
+  passed in 2 minutes 2 seconds and macOS portability passed in 3 minutes 1 second.
 
-The remaining box is remote integration evidence, not deferred implementation.
-It is updated after the stacked PR checks finish.
+All implementation and integration acceptance evidence is now recorded.
 
 ## Bead Reconciliation
 
