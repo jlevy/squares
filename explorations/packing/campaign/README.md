@@ -1,13 +1,15 @@
-# The `s(n)` search campaign — runbook
+# The `s(n)` Research Campaign — W6 Runbook
 
-An [experiment loop](../../../.agents/skills/experiment-loop/SKILL.md) aimed at the
-search side of square packing.
-This file is the contract every round is run under: the question, the metric vector, the
-accept rule, and the budget.
+An [experiment loop](../../../.agents/skills/experiment-loop/SKILL.md) for the durable
+square-packing research program.
+This file owns W6, `research-loop`: the contract every experiment round runs under—the
+question, metric vector, accept rule, and budget.
+The [synopsis](../SYNOPSIS.md#workflow-entry-contracts) owns the six workflow entry
+points and the distinction among campaign, series, session, experiment, round, and run.
 It is frozen while rounds are running — see
 [what a runner may not do](#what-a-runner-may-not-do).
 
-## The campaign question
+## The Current Search Objective
 
 **What is the structure of the `s(n)` landscape — how many basins, how rare is the
 record’s, and which proposers reach which — with records as corollaries rather than the
@@ -15,9 +17,12 @@ objective?**
 
 This is the
 [search-philosophy report’s](../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
-framing, adopted here: **the map is the deliverable.** The campaign’s original question
-— which strategies reach the standing best — is the special case that asks about one
-basin only, and it remains a sub-question rather than the goal.
+framing for the current search lane: **the map is the deliverable.** The campaign itself
+is broader: it also contains exact proof, validation, local-geometry, construction, and
+infrastructure questions under the same registry and evidence contract.
+Its original search question—which strategies reach the standing best—is the special
+case that asks about one basin only, and it remains a sub-question rather than the
+search goal.
 
 Note what this does *not* say.
 It does not say “beat Trump’s 1979 packing”.
@@ -57,8 +62,8 @@ and rediscovering an oblique record is the only calibration that speaks to
 record-finding. The other two mechanism-matched targets — `n = 11` at inflated `δ`, and
 basin-entry tests — are registered separately.
 
-Standing bests are read from [`../frontier/`](../frontier/README.md) — `n-010.md`,
-`n-011.md`, `n-012.md` — never retyped into a round.
+Standing bests are read from [`../frontier/`](../frontier/README.md)—`n-010.md`,
+`n-011.md`, `n-012.md`, `n-016.md`, and `n-017.md`—never retyped into a round.
 The frontier artifacts are the campaign’s source of truth for what is already known, and
 a round that moved the frontier would edit one file.
 
@@ -79,13 +84,16 @@ Later ids carry campaign-native claims and explicit open questions.
 
 ## The Bounded Research Cycle
 
-The campaign keeps a broad portfolio and runs one narrow slice at a time.
+The campaign keeps a broad portfolio, while one W6 phase per independently tracked
+session runs one narrow slice at a time.
+Other workflows use the same discipline but leave different artifacts; their contracts
+live in the synopsis rather than in this experiment runbook.
 This distinction protects both creativity and completion: ideas are cheap to capture,
 but only a preregistered slice may consume the current clock.
-Every slice names one of the packing program’s
-[four operating focuses](../README.md#operating-principles), so correctness, process,
-insight, and efficiency can veto or inform one another without becoming one unbounded
-task.
+The phase declares `research-loop` and one primary focus from the packing program’s
+[four operating focuses](../README.md#operating-principles).
+A focus change starts a new phase even when the workflow remains W6. The other three
+principles continue to constrain and contribute to the work.
 
 The protocol is agent-neutral.
 Its authoritative state is the repository: the hypothesis and idea board say what may be
@@ -101,10 +109,13 @@ An agent-session artifact may tighten these defaults before work starts.
 It may not relax them after seeing a result.
 A long numerical or proof computation keeps its separately preregistered round timebox,
 while the agent still checkpoints its supervision work on this cadence.
+The active phase records its expected output, validation command, kill condition,
+fallback, start, and deadline.
+Outcome and evidence are recorded only when it closes.
 
 | Clock | Default | Required outcome at the boundary |
 | --- | ---: | --- |
-| Orientation | 10 minutes | Name one focus, primary bead, question, output, validating command, kill condition, and fallback; otherwise record the ambiguity and switch |
+| Orientation | 10 minutes | Name the workflow, focus, primary bead, question, output, validation command, kill condition, fallback, start, and deadline; otherwise record the ambiguity and switch |
 | Evidence checkpoint | 20 minutes | Produce a passing check, minimized failure, retained measurement, source-bound derivation, or explicit blocked result; prose about continued investigation is not evidence |
 | Active slice | 30 minutes | Integrate a coherent checkpoint, or stop and preserve the partial work with its exact limitation; continuation requires a newly stated slice and clock |
 | Finalization reserve | 15 minutes | Stop new work before the session deadline; reconcile artifacts, defects, beads, generated views, commits, pushes, and the next action |
@@ -121,10 +132,13 @@ answer is negative or invalid.
 
 1. **Select.** Re-screen the portfolio and choose the highest-information ready action,
    not merely the most recent idea.
-2. **Declare.** Record the focus, bead, question, promised output, narrow validating
-   command, wall budget, kill condition, and fallback before acting.
+2. **Declare.** Confirm the active workflow and record the focus, bead, question,
+   promised output, narrow validation command, wall budget, kill condition, fallback,
+   start, and deadline before acting.
 3. **Execute.** Take the smallest action that can answer the question.
    Delegate independent mechanical work with a disjoint scope and the same clock.
+   The delegation inherits the coordinating phase unless it opens its own independently
+   tracked session.
 4. **Checkpoint.** At twenty minutes, preserve concrete evidence.
    A result may be positive, negative, invalid, or blocked; each advances the record if
    its evidence is replayable.
@@ -132,15 +146,34 @@ answer is negative or invalid.
    Never extend it merely because the answer feels close.
    A successor slice must state what new fact makes another bounded attempt worthwhile.
 6. **Record once.** Route an idea to the idea board or a new `H-NNN`, a measurement to
-   raw data and `exp-NNN`, an implementation task to its bead, and an actual error to
-   `defects.yaml` with its detector and regression.
+   raw data and `exp-NNN`, an implementation task to its bead and owning workflow, and
+   an actual error to `defects.yaml` with its detector and regression.
 7. **Commit and re-screen.** Regenerate owned views, run the narrowest sufficient gate,
    commit and push the checkpoint, then choose again from the now-current queue.
 
 New tangents do not disappear and do not hijack the clock.
-Record one as a bead, defect, exploration, hypothesis, or open question according to
-what it is; pursue it immediately only when it falsifies the active slice’s premise or
-outranks the queue under an explicit re-screen.
+Record one as a bead, defect, exploration report, hypothesis, or open question according
+to what it is; pursue it immediately only when it falsifies the active slice’s premise
+or outranks the queue under an explicit re-screen.
+
+### Workflow Checkpoints
+
+At a slice boundary, either renew W6 under a newly stated question or close the phase.
+Close it before changing purpose or focus: record status, evidence, stop reason, and
+next action in the agent-session artifact.
+A promoted, novel, disputed, or otherwise high-risk claim receives an independent W2
+audit. A routine guarded result whose preregistered criterion and independent replay
+already decide its claim may proceed directly to W3 or another W6 slice.
+Generating a successor hypothesis enters W3; repairing the loop enters W4; and
+optimizing a measured bottleneck enters W5. Bounded implementation remains inside
+whichever workflow owns its promised output.
+A W6 phase may prepare its registered instrument under that contract, but measurement
+begins only after the hypothesis, criterion, budget, and instrument are ready and
+frozen.
+
+A user request may cause the same transition immediately, but it does not erase the
+phase already performed.
+The ordered phase history is the account of what the session actually did.
 
 ### Supervisors and Watchdogs
 
@@ -373,13 +406,16 @@ Two refusals worth knowing, because they are structural rather than advisory:
   A hypothesis carrying only the former is reported as needing an operator, never
   improvised into a command.
 
-#### The experiment contract
+#### The Experiment Contract
 
-The harness holds no experiment code and an experiment holds no harness code.
-An experiment is a **command** declared in its hypothesis, run once per `{n}` and
-`{seed}`, which must print JSON Lines carrying `best_side` and an `overlap` of exactly
-zero on every result line, and exit 0. The seed’s result is the *minimum* `best_side`
-over its lines, so nothing has to agree about which line is the summary.
+The harness holds no experiment-specific code, and an experiment holds no harness code.
+An experiment is one durable `exp-NNN` record for one round.
+Its executable recipe is a **command** declared in the hypothesis.
+The harness invokes that command once per `{n}` and `{seed}`; each invocation is a run
+inside the experiment.
+It must print JSON Lines carrying `best_side` and an `overlap` of exactly zero on every
+result line, and exit 0. The seed’s result is the *minimum* `best_side` over its lines,
+so nothing has to agree about which line is the summary.
 
 Adding an experiment therefore never edits `runner.py`. Writing new experiment code is
 expected; writing new harness code per round is the error-prone step this removes,
@@ -442,9 +478,11 @@ The ones specific to this campaign:
 
 ## Series
 
-The series map 1:1 onto the
-[standing review’s plan](../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#series-and-priorities):
-`series-000` is S0, `series-001` is S1, and so on through S6.
+The standing review named topical stages S0–S6. Only S0 currently has a series artifact:
+`series-000`. The remaining rows are historical planning labels, not current records and
+not automatic reasons to open a new series.
+A series is earned by a tooling or regime change that affects comparability, recorded in
+`opened_because`; a topic change alone does not earn one.
 
 | Series | Purpose | State |
 | --- | --- | --- |
@@ -488,7 +526,8 @@ campaign/
   runner.py              harness steps: status, preflight, claim, execute, record, run
   ledger.py              regenerates ledger.md and runs the whole-set checks
   ledger.md              generated; never hand-edited
-  session-report.md      current generated runner handoff; overwritten until D-071 closes
+  session-report.md      generated numeric-runner batch handoff; historical filename,
+                         not a versioned session-NNN agent-session artifact
 ```
 
 <!-- This document follows common-doc-guidelines.md.

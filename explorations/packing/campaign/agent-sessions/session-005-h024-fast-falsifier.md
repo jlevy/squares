@@ -1,7 +1,7 @@
 ---
 title: session-005 — H-024 fast falsifier
 softschema:
-  contract: packing.squares:AgentSession/v1
+  contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
@@ -13,7 +13,27 @@ session:
     Complete one preregistered, independently checked, high-information research round
     on the new main-based branch and leave its instrument, source, raw result, verdict,
     successor, logbook entry, and execution cost durable.
-  focus: insight
+  workflow_phases:
+  - workflow: research-loop
+    focus: insight
+    recording: retrospective
+    objective: Run H-024's cheapest source-bound falsifier and retain every result.
+    status: completed
+    entered_by: session_start
+    switch_reason: null
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
+    outcome: Exp-012 found six orientation classes and refuted H-024 at its first stop cell.
+    evidence:
+    - The source witness reconstructs and passes the independent separating-axis guard.
+    - The terminal artifact records 0.158 machine-seconds and routes H-025 as successor.
+    stop_reason: One verified witness exceeded three classes and met the kill condition.
+    next_action: Move the portfolio to H-026 or H-032; do not rerun H-024.
   primary_bead: think-w5rb
   status: completed
   budget:

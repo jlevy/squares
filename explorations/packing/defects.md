@@ -2,15 +2,15 @@
 
 # Defect log
 
-204 defects recorded across the packing toolchain.
+218 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **64 soundness defects** — the system asserting something false about the mathematics. 53 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **71 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201).
-- **26 are still open** (outstanding or contained), every one carrying a bead.
+- **78 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202).
+- **27 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 15 | a cell of the sweep whose answer is known in advance |
-| `review` | 131 | a human or agent reading the work against a checklist |
-| `anomaly` | 8 | a result that made no sense, chased down |
-| `inspection` | 22 | reading the code or the design with intent |
+| `review` | 143 | a human or agent reading the work against a checklist |
+| `anomaly` | 9 | a result that made no sense, chased down |
+| `inspection` | 23 | reading the code or the design with intent |
 | `drift_check` | 13 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 12 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 12 of 204, and none of the 64 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 12 of 218, and none of the 64 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,19 +34,19 @@ The line worth reading twice: **the automated gate caught 12 of 204, and none of
 | engine | 9 |
 | quench | 20 |
 | verifier | 4 |
-| record | 51 |
-| tooling | 47 |
-| docs | 73 |
+| record | 56 |
+| tooling | 51 |
+| docs | 78 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
 | soundness | 64 |
-| validity | 57 |
-| bookkeeping | 61 |
-| robustness | 17 |
-| performance | 5 |
+| validity | 62 |
+| bookkeeping | 67 |
+| robustness | 18 |
+| performance | 7 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -126,6 +126,13 @@ This is the actionable list.
 | D-189 | The newcomer glossary omitted the point-basin and component boundary | docs |
 | D-191 | Orientation prose overstated both control automation and conventions ownership | docs |
 | D-193 | The draft PR 21 review misclassified a valid but incomplete definition as soundness | docs |
+| D-207 | The workflow map handed repairs to an undefined implementation workflow | docs |
+| D-208 | The new campaign definition excluded work already stored in the campaign | docs |
+| D-209 | The legacy-series summary stopped at 35 of 36 experiments | docs |
+| D-211 | The workflow cadence mandated review phases after routine guarded rounds | docs |
+| D-212 | The workflow prose turned a primary focus into an exclusive focus | docs |
+| D-216 | Full phase histories made the generated orientation table unboundedly wide | tooling |
+| D-218 | Session-009's output inventory stopped before exp-035 and exp-036 | record |
 
 ## Still open
 
@@ -157,6 +164,7 @@ This is the actionable list.
 | D-162 | outstanding | high | The small-n golden convergence labels hid unsettled fixed-cell evaluations | `think-wbra` |
 | D-202 | contained | medium | A delegated long-running validation lost its final receipt | `think-b3bm` |
 | D-203 | outstanding | high | The n=4 seed-0 quench ends on a HiGHS solve error | `think-nr5w` |
+| D-217 | contained | medium | A parallel validation wrapper discarded a live command receipt | `think-b3bm` |
 
 ## Every defect
 
@@ -366,3 +374,17 @@ This is the actionable list.
 | [D-202](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `anomaly` | medium | contained | A delegated long-running validation lost its final receipt |
 | [D-203](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | quench | robustness | conservative | `gate` | high | outstanding | The n=4 seed-0 quench ends on a HiGHS solve error |
 | [D-204](tools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The gate-aggregate control expected the mutated value |
+| [D-205](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `review` | high | fixed | The stacked workflow PR retained a superseded scientific checkpoint |
+| [D-206](campaign/schemas/agent-session.schema.yaml) | 2026-08-24 | record | robustness | flattering | `review` | high | fixed | The phase schema could not express the resumable contract promised by the docs |
+| [D-207](README.md) | 2026-08-24 | docs | validity | neutral | `review` | medium | fixed | The workflow map handed repairs to an undefined implementation workflow |
+| [D-208](SYNOPSIS.md) | 2026-08-24 | docs | validity | neutral | `review` | medium | fixed | The new campaign definition excluded work already stored in the campaign |
+| [D-209](campaign/series/series-000-smoke-and-calibration/README.md) | 2026-08-24 | docs | bookkeeping | conservative | `review` | medium | fixed | The legacy-series summary stopped at 35 of 36 experiments |
+| [D-210](campaign/ledger.py) | 2026-08-24 | record | validity | flattering | `review` | high | fixed | Retrospective workflow labels were counted as contemporaneous declarations |
+| [D-211](SYNOPSIS.md) | 2026-08-24 | docs | performance | neutral | `review` | medium | fixed | The workflow cadence mandated review phases after routine guarded rounds |
+| [D-212](README.md) | 2026-08-24 | docs | validity | neutral | `review` | medium | fixed | The workflow prose turned a primary focus into an exclusive focus |
+| [D-213](tools/check_readme.py) | 2026-08-24 | tooling | bookkeeping | neutral | `review` | medium | fixed | Workflow vocabulary and entry state had several machine authorities |
+| [D-214](campaign/ledger.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | The v2 loader ignored its declared contract and envelope identity |
+| [D-215](tools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | flattering | `review` | medium | fixed | Workflow drift checks accepted unauthorized rows and invalid transitions |
+| [D-216](campaign/ledger.py) | 2026-08-24 | tooling | performance | neutral | `review` | low | fixed | Full phase histories made the generated orientation table unboundedly wide |
+| [D-217](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `anomaly` | medium | contained | A parallel validation wrapper discarded a live command receipt |
+| [D-218](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `inspection` | medium | fixed | Session-009's output inventory stopped before exp-035 and exp-036 |

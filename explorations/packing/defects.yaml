@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 204
+count: 218
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -5250,3 +5250,356 @@ defects:
   recurrence_of: D-201
   bead: think-g4jc
   recorded_in: tools/controls.yaml
+- id: D-205
+  title: The stacked workflow PR retained a superseded scientific checkpoint
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: one stacked-PR base advance
+  severity: high
+  status: fixed
+  what: >-
+    PR 24's synopsis, active session phase, generated ledger, and mutation anchors still
+    described the pre-D-199 state after its base advanced to the 204-defect checkpoint.
+    The branch said the n=10 repair had produced no result and pointed at the obsolete
+    think-yi6x action.
+  consequence: >-
+    A direct conflict resolution could have erased D-199 through D-204, reopened a
+    completed repair, and replaced the frozen n=4 diagnosis with a stale next action.
+  fix: >-
+    Preserve the base's scientific and defect state, complete the historical D-199
+    phase, record the workflow integration separately, retain think-nr5w as the next
+    correctness slice, and regenerate every derived view.
+  regression: >-
+    none; stacked documentation changes still require a current-base semantic review
+    before living state is incorporated
+  bead: think-j3io
+  recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+- id: D-206
+  title: The phase schema could not express the resumable contract promised by the docs
+  date: '2026-08-24'
+  layer: record
+  class: robustness
+  direction: flattering
+  detected_by: review
+  latent_for: the PR 24 draft
+  severity: high
+  status: fixed
+  what: >-
+    The workflow docs said each phase records its expected output, deciding check,
+    kill condition, fallback, and clock. AgentSession/v2 recorded only a duration and
+    required placeholder outcome and evidence even while a phase was active.
+  consequence: >-
+    A restarted agent or watchdog could not determine the remaining time or reconstruct
+    the declared slice, while the documentation falsely called the record portable.
+  fix: >-
+    Add expected output, validation command, kill condition, fallback, start, and
+    deadline fields; require them for active contemporaneous phases and require actual
+    outcome and evidence only when a phase terminates.
+  regression: >-
+    AgentSession schema validation and negative controls remove each required active
+    declaration or clock field and require the campaign checker to reject the mutation
+  bead: think-84tp
+  recorded_in: campaign/schemas/agent-session.schema.yaml
+- id: D-207
+  title: The workflow map handed repairs to an undefined implementation workflow
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: the PR 24 draft
+  severity: medium
+  status: fixed
+  what: >-
+    W4 handed accepted repairs to “implementation,” although no such workflow existed,
+    and the live solver repair was forced into the vague general-improvement fallback.
+    The agent rules could also be read as making every mechanical delegated slice open
+    a new workflow phase.
+  consequence: >-
+    Core implementation work had no honest owner, while low-judgment delegation could
+    create process records that add no orientation value and slow the agent loop.
+  fix: >-
+    Keep bounded implementation inside the workflow that owns its intended result and
+    make delegated slices inherit the coordinating phase unless they open an
+    independently tracked session. Reserve general-improvement for genuine repository
+    maintenance outside W1 through W6.
+  regression: none
+  bead: think-7ehm
+  recorded_in: README.md
+- id: D-208
+  title: The new campaign definition excluded work already stored in the campaign
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: the PR 24 draft
+  severity: medium
+  status: fixed
+  what: >-
+    PR 24 defined a campaign as one bounded basin question even though this campaign
+    already owns exact lower-bound repair, isolation and moduli questions, finite-n
+    records, and asymptotic proof lanes alongside basin cartography.
+  consequence: >-
+    A later agent following the definition would misroute broad mathematical work or
+    split one coherent evidence registry merely to satisfy inaccurate terminology.
+  fix: >-
+    Define the campaign as the durable square-packing research program with bounded
+    hypotheses, series, and rounds, and identify basin cartography as the current search
+    objective rather than the campaign's only question.
+  regression: none
+  bead: think-bl42
+  recorded_in: SYNOPSIS.md
+- id: D-209
+  title: The legacy-series summary stopped at 35 of 36 experiments
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: one PR 24 commit
+  severity: medium
+  status: fixed
+  what: >-
+    The series-000 note said the tree contained 35 experiments and described only the
+    first-order H-023 result, while the same commit contained exp-001 through exp-036
+    and the second-order obstruction.
+  consequence: >-
+    The orientation omitted the newest retained round and could send a returning agent
+    back to a question already narrowed by exp-036.
+  fix: >-
+    Name the actual exp-001 through exp-036 span and describe both exp-035's first-order
+    directions and exp-036's narrow second-order exclusion without claiming component
+    connectivity.
+  regression: none
+  bead: think-2m3b
+  recorded_in: campaign/series/series-000-smoke-and-calibration/README.md
+- id: D-210
+  title: Retrospective workflow labels were counted as contemporaneous declarations
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: the PR 24 draft
+  severity: high
+  status: fixed
+  what: >-
+    Sessions written under AgentSession/v1 were assigned workflow, focus, objective,
+    and phase labels during the v2 migration. The docs and generated workflow summary
+    presented those reconstructions as if they had been declared before the work.
+  consequence: >-
+    Process statistics would appear to demonstrate workflow discipline that the
+    historical records could not establish, undermining the purpose of the migration.
+  fix: >-
+    Mark every phase as retrospective or contemporaneous, permit missing declaration
+    precision only for terminal retrospective phases, and report the two provenance
+    classes separately in the ledger.
+  regression: >-
+    The session schema and mutation controls require recording provenance and reject an
+    active retrospective phase or an underdeclared contemporaneous phase
+  bead: think-o8wu
+  recorded_in: campaign/ledger.py
+- id: D-211
+  title: The workflow cadence mandated review phases after routine guarded rounds
+  date: '2026-08-24'
+  layer: docs
+  class: performance
+  direction: neutral
+  detected_by: review
+  latent_for: the PR 24 draft
+  severity: medium
+  status: fixed
+  what: >-
+    W6 always handed results to W2 and then W3, even when independent replay already
+    closed a routine guarded round. W2 was also described as read-only while promising
+    obvious corrections.
+  consequence: >-
+    Mechanical phase churn would reduce useful iteration throughput without buying an
+    independent check, and agents could not tell whether a factual repair was allowed.
+  fix: >-
+    Require W2 before promotion of novel, disputed, high-risk, or otherwise material
+    claims; make it optional after routine guarded rounds, and permit authorized bounded
+    factual corrections while keeping review read-only by default.
+  regression: none
+  bead: think-h0wf
+  recorded_in: SYNOPSIS.md
+- id: D-212
+  title: The workflow prose turned a primary focus into an exclusive focus
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: the PR 24 draft
+  severity: medium
+  status: fixed
+  what: >-
+    Several new definitions said a phase optimized a single quality dimension, contrary
+    to the established policy that an agent typically emphasizes one while all four
+    principles still constrain or contribute to the work.
+  consequence: >-
+    Cross-cutting work such as basin visualization would be forced into a false choice
+    between mathematical insight and infrastructure, weakening rather than clarifying
+    the four-principle model.
+  fix: >-
+    Define the machine-readable focus as the phase's primary quality emphasis and state
+    explicitly that the other principles retain their vetoes and contributions.
+  regression: none
+  bead: think-vcb7
+  recorded_in: README.md
+- id: D-213
+  title: Workflow vocabulary and entry state had several machine authorities
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: the PR 24 draft
+  severity: medium
+  status: fixed
+  what: >-
+    Workflow names and order were copied into two schema properties, check_readme.py,
+    ledger.py, README, and the synopsis. Each session's entry_workflow also duplicated
+    the first phase's workflow.
+  consequence: >-
+    The orientation feature created its own drift surface and a negative control for a
+    state that did not need to exist, increasing maintenance cost on every change.
+  fix: >-
+    Put the ordered machine vocabulary in one schema definition, derive the session
+    entry from the first phase, and have checkers and generators consume that source
+    while still comparing the two human workflow tables against it.
+  regression: >-
+    The README work-model check derives the allowed rows from the schema and rejects an
+    extra, missing, reordered, or renamed numbered workflow row
+  bead: think-u7lr
+  recorded_in: tools/check_readme.py
+- id: D-214
+  title: The v2 loader ignored its declared contract and envelope identity
+  date: '2026-08-24'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: the PR 24 draft
+  severity: high
+  status: fixed
+  what: >-
+    ledger.py validated the payload selected by its caller but never checked that
+    softschema.contract matched the loaded schema id or that softschema.envelope named
+    that payload. A mislabeled v2 artifact could therefore pass the enforced gate.
+  consequence: >-
+    Migration provenance and contract identity were asserted but not enforced, allowing
+    an artifact to appear validated under a contract it did not actually use.
+  fix: >-
+    Compare the metadata envelope with the loader envelope and the metadata contract
+    with the loaded schema id before validating the payload.
+  regression: >-
+    Negative controls mutate the contract and envelope independently and require both
+    identity mismatches to fail
+  bead: think-4utf
+  recorded_in: campaign/ledger.py
+- id: D-215
+  title: Workflow drift checks accepted unauthorized rows and invalid transitions
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: the PR 24 draft
+  severity: medium
+  status: fixed
+  what: >-
+    The README parser matched only W1 through W6 and ignored an added W7. The synopsis
+    freshness test missed plural round and experiment labels, while mutation controls
+    omitted several transition, final-state, and active-clock branches.
+  consequence: >-
+    Unauthorized workflow vocabulary, stale progress datelines, or malformed phase
+    histories could pass checks advertised as preventing exactly that drift.
+  fix: >-
+    Parse every numbered workflow row before exact comparison, reject all volatile
+    experiment, round, and series progress in the dateline, enforce final-phase/session
+    agreement and phase transitions, and add focused mutations for the missing paths.
+  regression: >-
+    The expanded negative-control suite mutates each previously uncovered branch and
+    requires the owning semantic checker to reject it
+  bead: think-w40g
+  recorded_in: tools/controls.yaml
+- id: D-216
+  title: Full phase histories made the generated orientation table unboundedly wide
+  date: '2026-08-24'
+  layer: tooling
+  class: performance
+  direction: neutral
+  detected_by: review
+  latent_for: session-009's ninth phase
+  severity: low
+  status: fixed
+  what: >-
+    The ledger's top table printed every workflow and focus in sequence. Session-009's
+    row already exceeded six hundred characters and would grow on every legitimate
+    phase change.
+  consequence: >-
+    The quick-orientation view became hard to scan in terminals and diffs even though
+    the linked session artifact already owned the complete history.
+  fix: >-
+    Render provenance, derived entry workflow, current workflow, and phase count in the
+    table; retain the full ordered phase history only in the authoritative session.
+  regression: none
+  bead: think-0gui
+  recorded_in: campaign/ledger.py
+- id: D-217
+  title: A parallel validation wrapper discarded a live command receipt
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: anomaly
+  latent_for: one PR 24 focused-validation batch
+  severity: medium
+  status: contained
+  what: >-
+    The parallel focused-check wrapper returned before the negative-control command and
+    printed only its absent exit code. The wrapper neither retained nor displayed the
+    live session identifier needed to collect the terminal output.
+  consequence: >-
+    Treating the batch as green would claim 55 controls without a final receipt, while
+    rerunning every parallel check would waste the validation budget.
+  fix: >-
+    Discard only the unreceipted negative-control result and rerun that command once
+    through a direct execution path that preserves output, exit status, and elapsed
+    time. Keep the general final-receipt requirement under think-b3bm.
+  regression: >-
+    none yet; think-b3bm owns the portable final-receipt rehearsal, including yielded
+    command identifiers and terminal polling
+  recurrence_of: D-202
+  bead: think-b3bm
+  recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+- id: D-218
+  title: Session-009's output inventory stopped before exp-035 and exp-036
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: inspection
+  latent_for: the exp-035 and exp-036 checkpoints
+  severity: medium
+  status: fixed
+  what: >-
+    Session-009's event history described both exact H-023 rounds, but its outputs array
+    stopped at exp-034 and omitted the exp-035 and exp-036 artifacts, result records,
+    and checkers.
+  consequence: >-
+    A returning agent following only the declared output inventory could miss the
+    first-order result and narrow second-order obstruction and repeat already completed
+    work.
+  fix: >-
+    Add both experiment artifacts, both deterministic result records, and both exact
+    checkers to the session output inventory without changing either mathematical
+    verdict.
+  regression: none
+  bead: think-kts5
+  recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md

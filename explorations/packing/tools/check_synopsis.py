@@ -11,7 +11,7 @@ It cannot be generated: most of it is judgement, and the judgement is the point.
 So it is *reconciled* instead, the way `campaign/ideas.md` is -- the numbers and
 statuses it asserts must match the artifacts, and every artifact must appear.
 
-Seven checks:
+Eight checks:
 
   1. every round's verdict in the roll-up matches its artifact
   2. every hypothesis's status matches the ledger's derived status
@@ -20,6 +20,7 @@ Seven checks:
   5. no round, hypothesis or open defect is silently missing from the synopsis
   6. the stated hypothesis-artifact count matches the registry directory
   7. every relative link and heading anchor resolves
+  8. freshness labels name the current round count and do not embed a stale update note
 
 Check 7 closes a real gap: `campaign/ledger.py` walks links under `campaign/`
 only, so the root document's forty-odd references were unchecked.
@@ -188,10 +189,31 @@ def check_totals(text: str) -> list[str]:
     spelled = words[int(rounds)] if int(rounds) < len(words) else rounds
     if not re.search(rf"\b({rounds}|{spelled})\b rounds", text, re.I):
         problems.append(f"SYNOPSIS.md: does not say there are {rounds} rounds")
+    if not re.search(
+        rf"^### What the {rounds} rounds jointly establish\s*$", text, re.I | re.M
+    ):
+        problems.append(
+            f"SYNOPSIS.md: synthesis heading does not name the current round count ({rounds})"
+        )
     for value, label in ((agent, "agent-minutes"), (wall, "wall-minutes")):
         if f"{value} {label}" not in text:
             problems.append(f"SYNOPSIS.md: effort total '{value} {label}' not stated")
     return problems
+
+
+def check_freshness_label(text: str) -> list[str]:
+    """The dateline may state a date, but not duplicate volatile campaign state."""
+    dateline = re.search(r"^\*\*Date:\*\*.*$", text, re.M)
+    if dateline is None:
+        return ["SYNOPSIS.md: has no Date dateline"]
+    if not re.fullmatch(r"\*\*Date:\*\* \d{4}-\d{2}-\d{2}", dateline.group(0)):
+        return [
+            (
+                "SYNOPSIS.md: Date dateline repeats campaign progress or is not an ISO "
+                "date; the ledger owns progress"
+            )
+        ]
+    return []
 
 
 # fmt: off
@@ -312,6 +334,7 @@ def main() -> int:
         + check_hypotheses(text)
         + check_hypothesis_count(text)
         + check_totals(text)
+        + check_freshness_label(text)
         + check_defects(text)
     )
     if problems:

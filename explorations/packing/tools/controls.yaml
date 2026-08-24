@@ -66,9 +66,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 204", "count: 20"]
+  replace: ["count: 218", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 204"
+  expect: "count 20 != 218"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -77,6 +77,22 @@ controls:
     - "No soundness\n  defect in the log was caught by it. The gate caught two defects."
   run: python3 tools/check_readme.py
   expect: "repeats a numeric gate-defect aggregate"
+
+- name: README - workflow selector drifts from the canonical names
+  file: README.md
+  replace: ["| W5 | `efficiency-loop` |", "| W5 | `speed-loop` |"]
+  run: python3 tools/check_readme.py
+  expect: "README.md: workflow table is"
+
+- name: README - undeclared seventh workflow is not ignored
+  file: README.md
+  replace:
+    - "| W6 | `research-loop` |"
+    - |-
+      | W6 | `research-loop` |
+      | W7 | `rogue-loop` |
+  run: python3 tools/check_readme.py
+  expect: "README.md: workflow table is"
 
 # The unprotected-fix count in SYNOPSIS.md. This claim -- the list that predicts what
 # comes back -- was hand-written, and it drifted: the prose said six while the generated
@@ -88,6 +104,12 @@ controls:
             "Forty claims or open questions are codified as artifacts."]
   run: uv run --frozen --quiet python tools/check_synopsis.py
   expect: "does not state the hypothesis artifact count (41)"
+
+- name: synopsis - dateline duplicates volatile campaign progress
+  file: SYNOPSIS.md
+  replace: ["**Date:** 2026-08-24", "**Date:** 2026-08-24, after 36 rounds"]
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "Date dateline repeats campaign progress"
 
 - name: synopsis - duplicate experiment cost row
   file: SYNOPSIS.md
@@ -107,9 +129,9 @@ controls:
 
 - name: synopsis - gate detector aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["gate has caught twelve defects in 204", "gate has caught eleven defects in 204"]
+  replace: ["gate has caught twelve defects in 218", "gate has caught eleven defects in 218"]
   run: uv run --frozen --quiet python tools/check_synopsis.py
-  expect: "gate-detector aggregate is not 12 of 204"
+  expect: "gate-detector aggregate is not 12 of 218"
 
 - name: synopsis - unprotected-fix count drifting from the log
   file: defects.yaml
@@ -143,6 +165,20 @@ controls:
   replace: ["  priority: 3", "  priority: 0"]
   run: python3 campaign/ledger.py --check
   expect: "schema violation"
+
+- name: campaign - enforced contract metadata disagrees with schema id
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - "  contract: packing.squares:AgentSession/v2"
+    - "  contract: packing.squares:AgentSession/v1"
+  run: python3 campaign/ledger.py --check
+  expect: "softschema.contract"
+
+- name: campaign - enforced envelope metadata disagrees with loader
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["  envelope: session", "  envelope: experiment"]
+  run: python3 campaign/ledger.py --check
+  expect: "softschema.envelope"
 
 - name: campaign - generic determination outcome outside the schema
   file: campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md
@@ -211,6 +247,115 @@ controls:
   replace: ["  id: session-001", "  id: session-002"]
   run: python3 campaign/ledger.py --check
   expect: "name does not start with its id 'session-002'"
+
+- name: campaign - first workflow phase does not start with the session
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["    entered_by: session_start", "    entered_by: planned_checkpoint"]
+  run: python3 campaign/ledger.py --check
+  expect: "first workflow phase was not entered at session_start"
+
+- name: campaign - retrospective workflow phase cannot remain active
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - |-
+      recording: retrospective
+          objective: Reconcile the abandoned detour, record state, and outer delegation loop.
+          status: completed
+    - |-
+      recording: retrospective
+          objective: Reconcile the abandoned detour, record state, and outer delegation loop.
+          status: in_progress
+  run: python3 campaign/ledger.py --check
+  expect: "active workflow phase 1 is not contemporaneously recorded"
+
+- name: campaign - contemporaneous phase cannot omit its declared clock and contract
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace: ["    recording: retrospective", "    recording: contemporaneous"]
+  run: python3 campaign/ledger.py --check
+  expect: "contemporaneous workflow phase 1 has no started_at"
+
+- name: campaign - terminal workflow phase cannot omit its outcome
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - "    outcome: The detour was quarantined and the stable record became reviewable and green."
+    - "    outcome: null"
+  run: python3 campaign/ledger.py --check
+  expect: "terminal workflow phase 1 has no outcome"
+
+- name: campaign - terminal workflow phase cannot omit its evidence
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - |-
+      evidence:
+          - The named attic stash preserves the prototype without promoting its claims.
+          - The normal gate passed in 126 seconds with the session contract integrated.
+    - "evidence: []"
+  run: python3 campaign/ledger.py --check
+  expect: "terminal workflow phase 1 has no evidence"
+
+- name: campaign - terminal workflow phase cannot omit its stop reason
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - "    stop_reason: The declared reset and integration checkpoint was complete."
+    - "    stop_reason: null"
+  run: python3 campaign/ledger.py --check
+  expect: "terminal workflow phase 1 has no stop_reason"
+
+- name: campaign - session status must match its final workflow phase
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - "  primary_bead: think-m79h\n  status: completed\n  budget:"
+    - "  primary_bead: think-m79h\n  status: stopped\n  budget:"
+  run: python3 campaign/ledger.py --check
+  expect: "session status does not match final workflow phase"
+
+- name: campaign - non-final workflow phase remains active
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "  - workflow: process-review\n    recording: retrospective\n    focus: process\n    objective: Close only the evidence-contract gaps blocking admissible basin events.\n    status: completed"
+    - "  - workflow: process-review\n    recording: retrospective\n    focus: process\n    objective: Close only the evidence-contract gaps blocking admissible basin events.\n    status: in_progress"
+  run: python3 campaign/ledger.py --check
+  expect: "only the final workflow phase may be in_progress"
+
+- name: campaign - later workflow phase must explain its transition
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "    switch_reason: The factual review made the proposed instrument admissible for H-023."
+    - "    switch_reason: null"
+  run: python3 campaign/ledger.py --check
+  expect: "workflow phase 4 has no switch_reason"
+
+- name: campaign - later workflow phase must change workflow or focus
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "  - workflow: research-loop\n    recording: retrospective\n    focus: correctness\n    objective: Test H-023's exact fixed-angle and angle-sheet connectivity candidates."
+    - "  - workflow: process-review\n    recording: retrospective\n    focus: process\n    objective: Test H-023's exact fixed-angle and angle-sheet connectivity candidates."
+  run: python3 campaign/ledger.py --check
+  expect: "workflow phase 2 changes neither workflow nor focus"
+
+- name: campaign - active workflow phase must be contemporaneously recorded
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "    recording: contemporaneous\n    focus: process\n    objective: Review and integrate PR 24's workflow entry points without losing the live scientific checkpoint.\n    status: stopped"
+    - "    recording: retrospective\n    focus: process\n    objective: Review and integrate PR 24's workflow entry points without losing the live scientific checkpoint.\n    status: in_progress"
+  run: python3 campaign/ledger.py --check
+  expect: "active workflow phase 10 is not contemporaneously recorded"
+
+- name: campaign - contemporaneous workflow phase must retain its declared output
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "expected_output: >-\n      One corrected merge on PR 22, a published finding-by-finding PR 24 review and\n      disposition, synchronized beads and defect log, and an explicit D-203 resume point."
+    - "expected_output: null"
+  run: python3 campaign/ledger.py --check
+  expect: "contemporaneous workflow phase 10 has no expected_output"
+
+- name: campaign - contemporaneous workflow deadline must follow its start
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "    deadline_at: '2026-08-24T23:46:44Z'"
+    - "    deadline_at: '2026-08-24T22:45:44Z'"
+  run: python3 campaign/ledger.py --check
+  expect: "workflow phase 10 deadline_at is not after started_at"
 
 - name: campaign - approximate delegation time labeled unavailable
   file: campaign/agent-sessions/session-001-pr15-review-reset.md

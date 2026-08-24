@@ -5,9 +5,9 @@
 not, and it drifted twice in one day for exactly that reason -- it restated defect
 counts owned by `defects.yaml` and went stale behind them both times. The counts are
 gone now, moved to the generated view that owns them. What is left is the part a
-checker can hold: the layout tree, the report index, and the links.
+checker can hold: the layout tree, the report index, the links, and the work model.
 
-Four checks:
+Five checks:
 
 1. **Every link resolves**, including anchors into other documents. README and SYNOPSIS
    cross-reference each other heavily and a dead link between them is invisible until
@@ -20,6 +20,9 @@ Four checks:
    lists six; both must match what is in `docs/project/research/`.
 4. **The defect summary is derived.** README may state whether the gate has caught a
    soundness defect, but may not repeat a numeric aggregate owned by `defects.yaml`.
+5. **The work model agrees.** README and SYNOPSIS must expose the same six numbered
+   workflow entry points, the agent-session schema must be able to record them, and the
+   synopsis must define the work units those workflows produce.
 
 Usage:  python3 tools/check_readme.py
 """
@@ -38,8 +41,26 @@ from check_synopsis import check_links  # needs the sys.path line above
 
 ROOT = Path(__file__).resolve().parent.parent
 README = ROOT / "README.md"
+SYNOPSIS = ROOT / "SYNOPSIS.md"
 RESEARCH = ROOT / "docs/project/research"
 DEFECTS = ROOT / "defects.yaml"
+SESSION_SCHEMA = ROOT / "campaign/schemas/agent-session.schema.yaml"
+
+WORK_UNITS = (
+    "Packing exploration",
+    "Campaign",
+    "Series",
+    "Agent session",
+    "Workflow phase",
+    "Focus",
+    "Slice",
+    "Hypothesis",
+    "Experiment",
+    "Round",
+    "Run",
+    "Result",
+    "Ledger",
+)
 
 # Tooling that is not part of what the directory *is*: caches, lockfiles, build config.
 NOT_CONTENT = {"uv.lock", "pyproject.toml", "__pycache__", ".venv"}
@@ -151,6 +172,83 @@ def check_defect_summary(text: str) -> list[str]:
     return problems
 
 
+def workflow_rows(text: str) -> list[tuple[str, str]]:
+    """Numbered workflow rows in a Markdown table."""
+    return re.findall(r"^\| (W\d+) \| `([^`]+)` \|", text, re.M)
+
+
+def check_work_model(text: str) -> list[str]:
+    """Keep the human workflow entry points and machine contract in lockstep."""
+    synopsis = SYNOPSIS.read_text(encoding="utf-8")
+    schema = yaml.safe_load(SESSION_SCHEMA.read_text(encoding="utf-8"))
+    properties = schema.get("properties", {})
+    schema_workflows = (schema.get("$defs") or {}).get("workflow", {}).get("enum", [])
+    phase_workflow = (
+        properties.get("workflow_phases", {})
+        .get("items", {})
+        .get("properties", {})
+        .get("workflow", {})
+    )
+
+    problems: list[str] = []
+    if not isinstance(schema_workflows, list) or not all(
+        isinstance(workflow, str) and workflow for workflow in schema_workflows
+    ):
+        problems.append(
+            "agent-session.schema.yaml: canonical workflow enum is missing or malformed"
+        )
+        schema_workflows = []
+
+    # The schema owns names and ordering. Its final enum value is the unnumbered
+    # fallback; everything before it receives the compact W1, W2, ... labels used by
+    # the two human orientation tables.
+    numbered_workflows = schema_workflows[:-1]
+    fallback = schema_workflows[-1] if schema_workflows else ""
+    expected_rows = [
+        (f"W{index}", workflow) for index, workflow in enumerate(numbered_workflows, start=1)
+    ]
+    if len(numbered_workflows) != 6 or not fallback:
+        problems.append(
+            "agent-session.schema.yaml: workflow enum must contain six numbered "
+            "workflows followed by one fallback"
+        )
+    for label, rows in (
+        ("README.md", workflow_rows(text)),
+        ("SYNOPSIS.md", workflow_rows(synopsis)),
+    ):
+        if rows != expected_rows:
+            problems.append(
+                f"{label}: workflow table is {rows or 'missing'}, expected {expected_rows}"
+            )
+        if fallback and fallback not in (text if label == "README.md" else synopsis):
+            problems.append(f"{label}: does not name the {fallback} fallback")
+    if phase_workflow.get("$ref") != "#/$defs/workflow":
+        problems.append(
+            "agent-session.schema.yaml: phase workflow does not reference the canonical enum"
+        )
+    if "entry_workflow" in properties or "entry_workflow" in schema.get("required", []):
+        problems.append(
+            "agent-session.schema.yaml: redundant entry_workflow must be derived "
+            "from the first phase"
+        )
+
+    terminology = re.search(
+        r"^### Work Units and Records\s*$\n(?P<body>.*?)(?=^###\s)",
+        synopsis,
+        re.M | re.S,
+    )
+    if terminology is None:
+        problems.append("SYNOPSIS.md: has no Work Units and Records section")
+    else:
+        body = terminology.group("body")
+        problems.extend(
+            f"SYNOPSIS.md: does not define {term}"
+            for term in WORK_UNITS
+            if not re.search(rf"\*\*{re.escape(term)}(?:\.|\s|\()", body)
+        )
+    return problems
+
+
 def main() -> int:
     text = README.read_text(encoding="utf-8")
     problems = (
@@ -158,13 +256,17 @@ def main() -> int:
         + check_layout(text)
         + check_reports(text)
         + check_defect_summary(text)
+        + check_work_model(text)
     )
     if problems:
         print("README.md has drifted from the directory:", file=sys.stderr)
         for problem in problems:
             print(f"  {problem}", file=sys.stderr)
         return 1
-    print("  README.md agrees with the directory, reports, defect source and its own links")
+    print(
+        "  README.md agrees with the directory, reports, defect source, work model "
+        "and its own links"
+    )
     return 0
 
 

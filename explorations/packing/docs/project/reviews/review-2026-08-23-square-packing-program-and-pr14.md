@@ -2612,6 +2612,53 @@ status-4 Solve error.
 Therefore the n=10 correction stands, but `think-yi6x` and the strict gate remain open
 for n=4.
 
+## PR #24 workflow-entry-point disposition
+
+PR #24 adds a useful distinction between the four quality principles and six kinds of
+work. Its compact selector, ordered phase history, work-unit vocabulary, and legacy
+series warning are retained.
+The stacked head could not be incorporated verbatim: it predated D-199 through D-204,
+and its first AgentSession/v2 draft promised more resumability and historical precision
+than its schema recorded.
+
+The review was published on PR #24 before correction.
+Each finding has one child bead under `think-hie2`, and each actual error has a matching
+logbook entry:
+
+| Review | Defect | Bead | Disposition |
+| --- | --- | --- | --- |
+| R1 | D-205 | `think-j3io` | Preserve the 204-defect checkpoint, complete the D-199 phase, and keep `think-nr5w` as the next correctness slice |
+| R2 | D-206 | `think-84tp` | Make an active phase record its expected output, deciding command, kill condition, fallback, start, and deadline; reserve outcome and evidence for terminal facts |
+| R3 | D-207 | `think-7ehm` | Keep bounded implementation inside its owning workflow and let mechanical delegations inherit the coordinating phase |
+| R4 | D-208 | `think-bl42` | Define the campaign as the durable square-packing research program and basin cartography as its current search objective |
+| R5 | D-209 | `think-2m3b` | Reconcile `series-000` with exp-001 through exp-036 and state the first- and second-order H-023 boundaries |
+| R6 | D-210 | `think-o8wu` | Mark phases retrospective or contemporaneous and separate their process statistics |
+| R7 | D-211 | `think-h0wf` | Require W2 before material promotion, not after every routine guarded W6 round; allow an authorized bounded factual repair |
+| R8 | D-212 | `think-vcb7` | Treat focus as the primary emphasis while all four principles continue to constrain or contribute |
+| R9 | D-213 | `think-u7lr` | Derive workflow order and entry from one schema vocabulary rather than copying machine state |
+| R10 | D-214 | `think-4utf` | Enforce the declared soft-schema contract and envelope identities |
+| R11 | D-215 | `think-w40g` | Reject extra workflow rows, stale progress datelines, and malformed transition or clock branches with focused controls |
+| R12 | D-216 | `think-0gui` | Keep the generated session table compact and leave complete phase history in the linked source artifact |
+
+The focused landing gate then exposed D-217, a direct recurrence of D-202: a parallel
+wrapper returned while the negative-control command was live but failed to retain the
+session identifier needed for its terminal receipt.
+That result was discarded, the single check was rerun through a receipt-preserving path,
+`think-kjpl` records the landing incident, and the systemic final-receipt rehearsal
+remains open under `think-b3bm`.
+
+The same source-to-session reconciliation found D-218: session-009’s event history
+already contained exp-035 and exp-036, but its output inventory stopped at exp-034. The
+inventory now includes both experiment artifacts, both deterministic result records, and
+both exact checkers under `think-kts5`; neither H-023 verdict changed.
+
+This remains a record and orientation layer, not an unattended scheduler.
+The numerical launch no-go is unchanged: D-203 still blocks the strict small-`n`
+calibration path, and the exact next slice is the millisecond n=4 seed-0 status-4
+fixture under `think-nr5w`. The full legacy-series migration is deferred until a real
+series-level consumer needs it; experiment-level subject, instrument, regime, and
+provenance plus the explicit legacy warning already prevent unsafe pooling.
+
 ## Post-merge operating disposition
 
 PR #14 has merged and is now the stable prototype base.
