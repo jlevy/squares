@@ -5,7 +5,7 @@ title: "Spec: deterministic SVG rendering toolkit"
 kind: epic
 status: open
 priority: 1
-version: 8
+version: 11
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
@@ -19,8 +19,11 @@ child_order_hints:
   - is-01m0v0yf3ffe0tg78dss3cdx77
   - is-01m0v0yfcmzrkj40qhph74gk1n
   - is-01m0v0ypqc2shhf313140pqsmk
+  - is-01m0v0z1kj1v09bzcd9qqk45ap
+  - is-01m0v0z3ve6y0n6bc9e0ddwh1w
+  - is-01m0v0zahjq54tvtm1sxr0c9yx
 created_at: 2026-08-24T22:59:17.342Z
-updated_at: 2026-08-24T23:16:11.115Z
+updated_at: 2026-08-24T23:16:31.409Z
 ---
 Implement the plan's zero-dependency deterministic SVG spine, progressive overview/comparison/trajectory views, exact metadata and comments, known-answer n=3 migration, and portability checks. Acceptance is the spec's full criteria: byte-repeatable fixtures, honest evidence labels, safe self-contained SVG, useful static fallbacks, measured size/render cost, and a green repository gate.
 
