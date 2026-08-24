@@ -15,13 +15,14 @@ hypothesis:
   derived_from: [X-001]
   strategy_refs: ['proof:20', 'proof:21']
   instrument: >-
-    Active-constraint Jacobian and feasible tangent analysis followed by interval-local
-    exclusion or an explicit feasible continuation witness.
+    H-026's union of branchwise one-sided tangent cones, followed by nonlinear
+    continuation on any surviving direction or interval-local exclusion over every
+    active branch.
   instrument_ready: false
   regime: exact algebraic reference packing with all containment and non-overlap inequalities
   instance: {axis: n, point: 11}
   priority: 1
-  cost_estimate: analytic rank screen, then a separately budgeted interval neighborhood proof
+  cost_estimate: branchwise tangent screen, then a separately budgeted continuation or interval neighborhood proof
   prereqs: []
   replication: true
   registered: '2026-08-24'
@@ -33,13 +34,14 @@ hypothesis:
 # H-022 — certify the local object before using it as a landmark
 
 Trump’s construction is a strong rigidity candidate, but this repository currently has
-no active-system rank or interval-local certificate.
+no generalized tangent or interval-local certificate.
 The question is registered because several strategy claims refer to its basin or
 component as though its local geometry were settled.
 
-The first deliverable is a complete constraint matrix and tangent calculation.
-It is a screen, not the final certificate: inequality directions and higher-order
-obstruction still have to be handled.
+The first deliverable is the complete disjunctive active system and its branchwise
+one-sided tangent cones.
+It is a screen, not the final certificate: nonlinear continuation, interval exclusion,
+and higher-order obstruction still have to be handled.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

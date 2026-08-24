@@ -384,8 +384,8 @@ criterion already written, and — because they are all quench-dominated — eac
 in Python at full speed.
 
 - [ ] **δ-continuation** (H-13): inflate the container, walk `δ` down with a re-quench
-  at every step. Its merge-`δ` data is the atlas’s barrier scale, so the same runs pay
-  twice.
+  at every step. Valid paths give upper bounds on minimax required-side clearance, so the
+  same runs pay twice; numerical branch coalescence is not a topology certificate.
 - [ ] **Angle-class two-level** (H-1): outer over class count and angles, inner the cell
   LP.
 - [ ] **Neighbour-transfer seeding** (H-4): seeds built from `n ± 1` records.
@@ -590,8 +590,8 @@ implementation, and are corrected here rather than left to be discovered again:
   axis assignment the cell optimum *is* the solution of a linear program, and that is
   still true. A floating-point LP solver does not deliver it: at its default tolerance it
   returned a packing violating its own separation constraint, and so a side below the
-  standing record ([D-014](../../../defects.md)). Pinned at the solver’s floor the
-  residual is about `1e-11` in the side ([D-021](../../../defects.md), open).
+  standing record ([D-014](../../../../defects.md)). Pinned at the solver’s floor the
+  residual is about `1e-11` in the side ([D-021](../../../../defects.md), open).
   The `polished` tier means *exact within a cell to solver precision*; algebraic
   exactness stays with `sqpack`, and every promotion must route through it.
 - **The polish step does not produce rational output.** The review’s R-2 says it does;
@@ -600,7 +600,7 @@ implementation, and are corrected here rather than left to be discovered again:
   (`think-hg3u`).
 - **Basin identity must not inherit the search’s knobs.** A quench whose angle search
   merges nearby angles returns a constrained optimum, so what counts as a basin would
-  depend on the merge tolerance ([D-020](../../../defects.md)). Fixed by a free-angle
+  depend on the merge tolerance ([D-020](../../../../defects.md)). Fixed by a free-angle
   pass that certifies the landing point is a genuine local optimum; the general rule is
   in the [postmortem](../../postmortems/postmortem-2026-08-23-soundness-class.md).
 

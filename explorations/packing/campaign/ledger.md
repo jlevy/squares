@@ -9,6 +9,7 @@
 | [session-001](agent-sessions/session-001-pr15-review-reset.md) | completed | process | think-m79h | 7 | Resume the broader Correctness and Insight review from the ready bead queue, beginning with the highest-priority mathematical ambiguity. |
 | [session-002](agent-sessions/session-002-pr16-integration.md) | completed | process | think-7wsz | 3 | Review PR 15, then resume the correctness lane at think-1s0h or the independent portability experiment at think-osyp. |
 | [session-003](agent-sessions/session-003-unattended-research-readiness.md) | completed | process | think-1sxv | 4 | Publish this checkpoint, then begin H-023/H-021 terminal-component evidence while think-kmn2 designs per-cell queue pricing. |
+| [session-004](agent-sessions/session-004-creative-frontier-review.md) | completed | insight | think-7gu0 | 5 | Finish generated-view and bead reconciliation, run the normal gate, publish the checkpoint, then start H-026 and the exact n=3 quotient-map control in parallel lanes. |
 
 ## Series
 
@@ -44,6 +45,22 @@
 | H-022 | open question | proof | Is Trump's n = 11 packing isolated and locally optimal modulo D4 and r |  | 0 |  |
 | H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 0 |  |
 | H-024 | blocked | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 | 0 |  |
+| H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
+| H-026 | blocked | proof | After quotienting finite container symmetries and relabelling, Trump's |  | 0 |  |
+| H-027 | blocked | search | In the imported reference contact cells at n = 11 and n = 17, the mini | n: 11 17 | 0 |  |
+| H-028 | blocked | search | On preregistered two-degree class-angle boxes in the imported n = 11 a | n: 11 17 | 0 |  |
+| H-029 | blocked | search | After passing exact synthetic rare-event controls, adaptive multilevel |  | 0 |  |
+| H-030 | blocked | search | Starting only from the six cited parent geometries in UnitSquare Relea |  | 0 |  |
+| H-031 | blocked | search | Under a common temperature schedule and LP-in-cell quench, a move kern | n: 10 17 | 0 |  |
+| H-032 | open question | proof | What are the connected components, dimensions, active strata, and symm | n: 3 4 5 6 | 0 |  |
+| H-033 | open question | proof | Can Bentz's moving unavoidable-resource method or a strict generalizat |  | 0 |  |
+| H-034 | blocked | proof | For the family U_s of all open unit-square poses contained in a square |  | 0 |  |
+| H-035 | blocked | search | A finite, independently verified instantiation of the stack, strip, or |  | 0 |  |
+| H-036 | blocked | proof | If every n = 11 square orientation modulo quarter turns lies within 0. |  | 0 |  |
+| H-037 | open question | proof | Can the gap between W(x) not in o(x^(1/2)) and W(x) = O(x^(3/5)) be na |  | 0 |  |
+| H-038 | open question | proof | Which algebraic number fields, minimal-polynomial degrees, Galois grou |  | 0 |  |
+| H-039 | open question | proof | Can a checked extension of Stromquist's conditional forcing or another |  | 0 |  |
+| H-040 | blocked | search | After a known-answer n = 5 control, pivoting across one active separat | n: 5 10 | 0 |  |
 
 ## Rounds
 

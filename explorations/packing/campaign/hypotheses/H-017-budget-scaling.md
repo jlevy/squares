@@ -35,23 +35,22 @@ hypothesis:
     seeds: [1, 2, 3, 4, 5]
     timebox: 8h
   notes: >-
-    Demoted to priority 4 on merging with the standing review's register: H-012 answers
-    the same question far better. This tests budget scaling as a proxy for basin rarity;
-    H-012 measures basin rarity directly, off a census worth building anyway. Kept
-    because it is the one runnable-today item bearing on the premise, and because a
-    cheap crude confirmation before an expensive precise one is not waste.
+    Demoted to priority 4 and parked behind a short response curve. H-012 estimates a
+    different P/Q/E attraction-probability ratio; it neither answers this fixed-budget
+    reachability claim nor comes for free from the n <= 10 census. This recipe is
+    operationally shaped but is not scientifically admissible unattended while D-044
+    leaves independent pose validation and selftest receipts unresolved.
 ---
 # H-017 — the crude version of the premise test
 
-This separates the two explanations for exp-001’s `n = 11` result — needs more compute
-versus needs a different method — by the blunt instrument of multiplying the budget.
+This probes one point on the budget-response curve for exp-001’s `n = 11` method.
+Passing would show that this budget can reach the threshold on at least one declared
+seed; failing would rule out neither larger budgets nor other schedules.
 
-[H-012](H-012-record-basins-are-rare.md) tests the proposed explanation more directly,
-by measuring the record component’s quench probability against the modal component’s
-under a named regime, and it does so as a query over a census the campaign wants
-regardless.
-That is more discriminating evidence, so this is now the fallback rather than
-the plan.
+[H-012](H-012-record-basins-are-rare.md) asks a different question: the record-to-modal
+attraction-probability ratio under one named `P/Q/E`. It needs a new identified `n = 11`
+sample beyond H-011, so it is not a free or interchangeable substitute.
+H-017 remains a low-priority response-curve cell rather than the default eight-hour run.
 
 **The prediction is that it fails**, because the baseline proposer may assign very low
 hit probability to the terminal component containing Trump’s construction.

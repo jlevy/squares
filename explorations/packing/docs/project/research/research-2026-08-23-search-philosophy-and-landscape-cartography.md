@@ -206,10 +206,13 @@ from the same argument and was not.
 
 ### The map itself: a basin atlas, and what it buys both lanes
 
-“A map of the structure of the minima” has an established form: the **disconnectivity
-graph** of Becker and Karplus, popularized by Wales — minima as leaves, joined at the
-lowest barrier connecting them, giving the landscape’s tree structure at a glance
-(funnels are visible as long unbranched spines).
+“A map of the structure of the minima” has an established analogue: the
+**disconnectivity graph** of Becker and Karplus, popularized by Wales — minima as
+leaves, joined at the lowest energy barrier connecting them.
+A true square-packing counterpart would require certified components of a fixed-side
+filtration and their minimax required-side levels.
+A dendrogram of sampled endpoints or continuation branches is an algorithmic view, not
+that object.
 
 Our target, concretely: an **atlas** with one record per resolved terminal component —
 
@@ -221,9 +224,9 @@ Our target, concretely: an **atlas** with one record per resolved terminal compo
   (an empirical probability conditional on `P/Q/E`, not an intrinsic volume);
 - the contact graph and angle signature;
 - symmetry group of the packing;
-- neighbor links: which basins it merges with, and at what container inflation `δ` — the
-  natural barrier scale here, and (deliberately) the same quantity the δ-ladder below
-  computes anyway.
+- typed neighbor evidence: verified continuous paths with their maximum required side,
+  giving upper bounds on minimax clearance; certified nonconnection below a side level,
+  when available; and separately labelled algorithmic transitions under named kernels.
 
 The atlas pays four ways.
 It is **steering data** — the review’s H-3 (rarity versus contact count) becomes a
@@ -334,20 +337,22 @@ Three ladders fit this problem, each watching for different events on the way.
 
 | Ladder | Parameter | Easy end | Hard end | What to watch |
 | --- | --- | --- | --- | --- |
-| Container inflation | slack `δ` in side `s* + δ` | large `δ`: few, broad basins | `δ → 0`: the true instance | basin splits and vanishings (a bifurcation tree); merge-`δ` between basins = the atlas’s barrier scale; the `δ` at which the record basin appears |
+| Container inflation | slack `δ` in side `s* + δ` | large `δ`: an empirically easier feasibility problem | `δ → 0`: the true instance | branch and attractor transitions under the declared continuation; valid paths and their maximum required side; topology only with separate certification |
 | Superdisk shape | exponent `p` in `\|x\|^{2p} + \|y\|^{2p} ≤ 1` | `p = 1`: circles — orientation-free, mature literature | `p → ∞`: squares | where orientation symmetry breaks; which circle structures survive to the square end |
 | Boundary-layer reduction | frozen grid bulk | the pure grid | grid plus a sheared band (the Cleemann mechanism) | whether any band re-synchronizes with the bulk at `m² − 3` |
 
 **Container inflation** (equivalently, by scaling: shrink the squares slightly in a
 fixed container) is the primary ladder.
-At generous `δ` the landscape is simple and search is trivial; walking `δ` down with an
-LP re-polish at every step is cheap path-following; and the recorded events are the
-intuition, made durable: which basins die, which split, and at what `δ` the record’s
-basin first exists as a distinct attractor.
-Three payoffs from one computation: a search method that can *walk into* basins direct
-sampling never hits (H-13); the merge-`δ` barrier estimates the atlas wants anyway; and
-a scalar hardness measure per instance — “how much slack makes `n = 11` easy” is a
-well-posed, reportable number.
+Generous `δ` may make projection and search easier; H-013 tests that rather than
+assuming it. Walking `δ` down with fixed-side feasibility projection records numerical
+branch events and, when every intermediate pose is valid, explicit paths through the
+side-clearance filtration.
+Such a path supplies an upper bound on a minimax connection level.
+Branch coalescence, loss, or rediscovery does not prove a component merge, split, or
+disappearance. The computation still has three payoffs: a search method that may walk
+into endpoints direct sampling misses; replayable valid-path clearance bounds; and a
+kernel-conditional hardness curve — how much slack the declared proposer/projector needs
+to reach a declared target event.
 
 **Superdisk continuation** makes “a square is a circle with orientation” quantitative.
 Circle packing in a square is far better understood — proved optima into the dozens,
@@ -429,9 +434,10 @@ the strategy that turns the residue into the asset.
   and cross-`n` transfer put the LLM where it is strong, and exact verification makes
   its error rate affordable.
   Nothing unverified enters a prompt; nothing unverified leaves one into the corpus.
-- **Continuation turns rare-event search into path-following**, and its events —
-  bifurcations, symmetry breaking — are “a feel for the space” in recordable form, with
-  the δ-ladder’s barrier data feeding the atlas for free.
+- **Continuation can turn rare-event search into path-following.** Its numerical branch
+  events are recordable algorithmic observations; its verified paths feed clearance
+  upper bounds to the atlas.
+  Neither becomes topology for free.
 - **Calibrate on mechanism, not difficulty.** Passing `n = 5, 10` proves the machinery;
   only oblique targets — `s(17)`, inflated `n = 11`, basin-entry tests — prove the
   strategy.

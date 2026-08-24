@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 107
+count: 119
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -2633,3 +2633,287 @@ defects:
   regression: tools/check_synopsis.py derives registry, defect, class, open and unprotected counts from source artifacts
   bead: think-f82b
   recorded_in: SYNOPSIS.md
+- id: D-108
+  title: A direct piercing-number application was missing from the method history
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The proof catalogue and strategy review said transversal theory had never been
+    applied to s(n). Bašić and Slivková (2018) explicitly study the piercing number of
+    all unit-square poses in a square, connect it to packing, and derive a specialized
+    n=61 lower bound.
+  consequence: >-
+    The proof program could claim novelty for an existing method and misread a genuine
+    precedent as an open research gap.
+  fix: >-
+    Archived the primary PDF and raw extraction, marked transversal theory used, and
+    recorded that the specialized n=61 bound is real but weaker than Nagamochi's
+    standing bound.
+  regression: none
+  bead: think-vw06
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-109
+  title: Boundary corner coordinates were double-counted as independent wall equations
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: critical
+  status: fixed
+  what: >-
+    The incoming frontier review added the verifier's 14 contacting pairs to 20
+    boundary corner coordinates and declared Trump's 34-variable pose exactly
+    isostatic. A square edge flush with a wall contributes two reported corners but one
+    wall incidence; the witness has 11 square-wall incidences, and the feasibility
+    system is nonsmooth and disjunctive.
+  consequence: >-
+    A duplicate-coordinate count could be promoted into a false rigidity theorem and
+    used to prune valid contact structures.
+  fix: >-
+    Removed the isostatic claim and registered a union-of-branchwise one-sided tangent
+    test with no expected rank. Counts are now described only as feature incidences.
+  regression: none
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-110
+  title: A fixed-cell LP dual was mislabeled a free-framework self-stress
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The incoming review treated dual multipliers for minimizing container side in one
+    fixed-angle cell as a mechanical self-stress and local-optimality certificate. They
+    balance a nonzero container objective and certify only that LP cell.
+  consequence: >-
+    A valid primal-dual receipt could be used as evidence for angle rigidity, cell
+    switching, or nonlinear local optimality that it does not test.
+  fix: >-
+    Renamed the object an equilibrium-load certificate, bounded its proof scope to the
+    declared cell, and made load-guided moves a held-out empirical hypothesis.
+  regression: none
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-111
+  title: A fixed-budget extreme-value fit was generalized to unlimited search support
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The incoming review proposed fitting a terminal endpoint to a small archive and
+    using it to show that the proposer would miss the record at any budget. The fitted
+    distribution changes with the move kernel, schedule, censoring, retention, and
+    budget.
+  consequence: >-
+    A cheap sensitivity analysis could be narrated as a support theorem and terminate
+    a search family without testing larger-budget behavior.
+  fix: >-
+    Restricted the proposal to calibrated, held-out-stable diagnostics on one declared
+    fixed-budget distribution and gave it no support or impossibility interpretation.
+  regression: none
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-112
+  title: One fixed-cell angle sheet was presented as the global two-class landscape
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The incoming review priced a two-angle LP grid as a global map. One imported
+    separating cell and class assignment gives only one value sheet; the global object
+    is the lower envelope over assignments, cells, and possibly disconnected center
+    solutions.
+  consequence: >-
+    A local picture could be used to claim there is no competing mechanism elsewhere
+    in the same angle-class restriction.
+  fix: >-
+    Registered H-028 as a reference-cell sheet, required every pixel to identify its
+    cell and precision tier, and reserved global language for a separately enumerated
+    or searched lower envelope.
+  regression: none
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-113
+  title: Numerical branch coalescence was called a feasible-component merge and barrier
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    Several living strategy documents said the delta where continuation branches
+    coalesce is the atlas's component-merge level and barrier. Algorithmic branches can
+    meet, disappear, or fail without deciding the topology of the valid configuration
+    set.
+  consequence: >-
+    A continuation artifact could be promoted into false connectedness, nonconnection,
+    or minimax-clearance evidence.
+  fix: >-
+    Defined the intrinsic minimax required-side level. Verified paths now provide only
+    upper bounds; lower bounds require certified nonconnection, and branch transitions
+    remain algorithmic observations.
+  regression: none
+  recurrence_of: D-100
+  bead: think-0vt5
+  recorded_in: docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md
+- id: D-114
+  title: Fractional piercing was given an integral and symmetric conclusion
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    The incoming proof idea blurred a fractional hitting-set optimum with an integral
+    ten-point set and did not track that restricting poses lowers the optimum while
+    restricting candidate points raises it.
+  consequence: >-
+    A discretized LP could appear to prove either existence or impossibility with the
+    inequality pointing the wrong way.
+  fix: >-
+    Registered the one-sided H-034 decision: tau-star greater than 10 rules out ten
+    points, while tau-star at most 10 does not produce them. Promotion requires separate
+    certified point and pose discretization bounds.
+  regression: none
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-115
+  title: Negative novelty claims exceeded the searched literature surface
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    The incoming review called several ideas first, unpublished, or never attempted
+    without a recorded exhaustive search. The newly found Bašić-Slivková paper directly
+    falsified one such claim during the same delta review.
+  consequence: >-
+    A rediscovery could be advertised as a novel result, and strategy ranking could be
+    based on a false picture of prior work.
+  fix: >-
+    Scoped negative claims to the retrieved corpus, made novelty a source-search
+    obligation rather than an accept criterion, and added recurring frontier refresh to
+    the recommendations.
+  regression: none
+  recurrence_of: D-097
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-116
+  title: The incoming strategy review mixed stale corpus state with current proposals
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  detected_by: review
+  severity: medium
+  status: fixed
+  what: >-
+    The review still described a 24-artifact registry after adding sixteen artifacts,
+    said it registered nothing, and inherited a superseded n=69 algebraic-degree claim.
+  consequence: >-
+    Readers could not tell which proposals were contractual, and a field-pattern
+    program could analyze a polynomial that belongs to an older parent rather than the
+    standing witness.
+  fix: >-
+    Reconciled the review with the 40-artifact registry and current UnitSquare frontier;
+    algebraic metadata now follows independently verified witnesses rather than side
+    rows.
+  regression: campaign ledger and synopsis checks reconcile generated registry state
+  bead: think-0vt5
+  recorded_in: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+- id: D-117
+  title: The idea board again said a basin-width question had been answered
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    Despite the H-018 retraction, the open-question heading still said Trump's basin
+    width had been answered. The attached prose correctly admitted that the finite
+    refiner measured convergence behavior and that terminal-component identity was
+    unavailable.
+  consequence: >-
+    A heading could revive the same intrinsic-radius claim that the experiment body and
+    source comments had already withdrawn.
+  fix: >-
+    The heading now says the measurement is not yet defined and routes it through the
+    proposer, quench, event, and component-identity contract.
+  regression: none
+  recurrence_of: D-104
+  bead: think-0vt5
+  recorded_in: campaign/ideas.md
+- id: D-118
+  title: Budget scaling and attraction rarity were treated as the same cheap question
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-017's fixed 100x-budget reachability event and H-012's record-to-modal attraction
+    ratio under one P/Q/E were described as the same question, with H-012 supposedly a
+    free tier-S query. H-011 stops at n=10, while H-012 requires new identified n=11
+    events.
+  consequence: >-
+    The campaign could skip a response curve, underprice a major measurement, or treat
+    failure at one budget as evidence about unlimited support.
+  fix: >-
+    Separated the estimands, priced H-012 as a new n=11 measurement behind component
+    identity, and parked H-017 behind a short budget-response ladder and its scientific
+    validation blockers.
+  regression: campaign ledger exposes each artifact's distinct metric, cost and prerequisites
+  bead: think-0vt5
+  recorded_in: campaign/hypotheses/H-012-record-basins-are-rare.md
+- id: D-119
+  title: A continuous angle sheet was required to have only one nearby grid point
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: conservative
+  detected_by: review
+  severity: high
+  status: fixed
+  what: >-
+    H-028 required the published angle point to be the only adaptively refined grid
+    point within 1e-5 of the objective minimum. On a continuous value sheet,
+    arbitrarily close angle points have arbitrarily close values, so sufficient
+    refinement makes that condition impossible even at a unique strict minimum.
+  consequence: >-
+    The experiment would inevitably refute a correct local-uniqueness picture and could
+    park a useful visualization instrument for a mathematical reason unrelated to its
+    intended question.
+  fix: >-
+    The criterion now asks for one refined local minimizer recovered within 0.01
+    degrees and a 1e-5 boundary gap, with every candidate minimum checked under two
+    grid offsets. Nearby non-minimizing points are expected rather than failures.
+  regression: none
+  bead: think-uyf4
+  recorded_in: campaign/hypotheses/H-028-reference-cell-angle-sheets.md

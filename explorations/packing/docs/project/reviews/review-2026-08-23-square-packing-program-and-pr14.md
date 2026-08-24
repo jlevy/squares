@@ -4,7 +4,7 @@
 
 **Author:** Codex (agent)
 
-**Status:** In progress; stabilized post-merge checkpoint
+**Status:** Current; deep mathematical-strategy delta complete
 
 **Reviewed:** [PR #14](https://github.com/jlevy/thinking-scratchpad/pull/14), initially
 at `fa538931b20fef0f51dffedb9e4d7071603b7790`, reassessed as its branch and description
@@ -1585,9 +1585,12 @@ Continue across `n` by inserting/deleting one square or duplicating a motif.
 Track the active contact graph and LP basis at every step.
 
 **Branch handling.** Detect contact changes, singular active sets, and basis degeneracy
-as bifurcations. Launch branch-switching solves on each admissible new topology instead
-of following only the locally smooth branch.
-Archive merge `delta` and barrier estimates.
+as numerical branch events.
+Launch branch-switching solves on each admissible new cell instead of following only the
+locally smooth branch.
+Archive valid continuation paths and their maximum required side as clearance upper
+bounds. A branch merge or loss is not, without separate certification, a
+feasible-component bifurcation or barrier.
 
 **Diversity.** Store branches in a MAP-Elites or novelty archive keyed by versioned
 structural descriptors.
@@ -1600,9 +1603,10 @@ boundary layer.
 **LLM role.** Generate graph grammars, constructors, or checked code—not raw coordinates
 or claims. Every proposal enters through the same typed proposer interface.
 
-**Accept rule.** At equal pair tests, improve certified basin diversity, branch
-coverage, or target-hitting time over restart; or discover a reproducible topology
-absent from the record corpus.
+**Accept rule.** At equal pair tests, improve independently valid cell diversity,
+declared branch coverage, or target-hitting time over restart; after terminal identity
+exists, component diversity may be added as a separate metric.
+A new active topology is an observation until its mathematical status is certified.
 Hold out `n` values when evaluating learned surgery rules.
 
 **Bead:** `think-g2ko`.
@@ -1824,14 +1828,16 @@ Epic **`think-6sst` — “Review remediation: executable square-packing researc
 (PR #14)”** is a child of the standing square-packing epic `think-xkqu` and links to
 this review as its spec.
 Its direct children are the four focus epics below.
-Their 26 primary work beads preserve the original technical-error, omission, creative-
+Their 31 direct work beads preserve the original technical-error, omission, creative-
 alternative, and open-question labels while assigning exactly one primary owner.
+The increase is the deep creativity review, its new exact-small-`n` and asymptotic
+lanes, and the missing-primary correction.
 
 | Focus epic | Primary authority | Direct work beads |
 | --- | --- | ---: |
-| `think-6awy` — Correctness (Soundness) | Mathematical truth and certification | 5 |
+| `think-6awy` — Correctness (Soundness) | Mathematical truth and certification | 6 |
 | `think-p76j` — Process (Discipline) | Reproducible research operations | 7 |
-| `think-z3g5` — Insight (Creativity) | Mathematical strategy and discovery portfolio | 9 |
+| `think-z3g5` — Insight (Creativity) | Mathematical strategy and discovery portfolio | 13 |
 | `think-r1yl` — Efficiency (Infrastructure) | Trustworthy experimental throughput | 5 |
 
 | Focus | Bead | Work item | Depends on in this review epic |
@@ -1841,6 +1847,7 @@ alternative, and open-question labels while assigning exactly one primary owner.
 | Correctness | `think-n4f6` | Implement float-candidate to exact-certificate promotion | `think-zcx4`, `think-2o5w` |
 | Correctness | `think-thhk` | Close source, test-oracle, and independent-implementation gaps | — |
 | Correctness | `think-zt29` | Correct false research claims and wire every enforcement gate | `think-ldq2`, `think-siui`, `think-31k1`, `think-zcx4` |
+| Correctness | `think-vw06` | Archive and reconcile the direct 2018 piercing-number application | — |
 | Process | `think-jmjn` | Publish the four-principle packing research charter | — |
 | Process | `think-2w1a` | Maintain the review, defect logbook, and bead reconciliation map | — |
 | Process | `think-m79h` | Define lane-specific agent handoffs and evidence contracts | `think-jmjn` |
@@ -1857,6 +1864,10 @@ alternative, and open-question labels while assigning exactly one primary owner.
 | Insight | `think-9m9x` | Extend the `m²-3` frontier at `n=61,78,97` | `think-2o5w`, `think-9vh7`, `think-g2ko` |
 | Insight | `think-qv90` | Certify and structurally constrain the `n=11` optimum | `think-2o5w`, `think-n4f6`, `think-9vh7` |
 | Insight | `think-3b3s` | Determine cross-`n` packing grammar and proposer-specific basin laws | `think-2o5w`, `think-rrht`, `think-g2ko` |
+| Insight | `think-7gu0` | Deep creativity and mathematical-frontier portfolio review | — |
+| Insight | `think-w5rb` | Reconstruct and test the record angle-class corpus through `n=30` | — |
+| Insight | `think-chbu` | Classify exact small-`n` optimal configuration spaces | — |
+| Insight | `think-ykt7` | Advance the asymptotic waste and finite-transfer lane | — |
 | Efficiency | `think-xzew` | Baseline and profile the end-to-end research loop | — |
 | Efficiency | `think-rthe` | Profile and reduce negative-control latency; parallelize only if the measured simple design preserves serial results | `think-xzew` |
 | Efficiency | `think-ba88` | Build a resumable sharded executor for packing campaigns | `think-xzew`, `think-ldq2` |
@@ -1960,6 +1971,35 @@ already-resolved work.
 Its aggregates and next-work state now agree with the corrected sources.
 A later stage of the same reconciliation defect caught the generated ledger stale after
 source formatting; regeneration now follows formatting at this checkpoint.
+
+### Second creativity delta: audit the attractive ideas before funding them
+
+The independent
+[mathematical-frontier review](review-2026-08-23-mathematical-frontier-strategy.md) then
+re-read the first creativity draft as adversarially as the code.
+Twelve additional defects were found before its proposals were promoted:
+
+| Finding | Defect | Disposition |
+| --- | --- | --- |
+| F-57 | D-108 | Bašić–Slivková (2018) is now archived and restores the direct piercing-number precedent; its `n=61` bound is weaker than Nagamochi’s stored bound |
+| F-58 | D-109 | The verifier’s 20 boundary count is corner coordinates, not wall equations; the false `14+20=34` isostatic argument is replaced by branchwise one-sided tangent cones |
+| F-59 | D-110 | A fixed-cell LP dual is an equilibrium-load certificate against the container objective, not automatically a free-framework self-stress or angle certificate |
+| F-60 | D-111 | A calibrated fixed-budget tail fit is a sensitivity analysis, never a proof about all future budgets or proposer support |
+| F-61 | D-112 | H-028 maps one imported cell and class assignment; the global two-class landscape is a separate lower-envelope problem |
+| F-62 | D-113 | A numerical branch merge is not feasible topology; verified paths give only upper bounds on minimax required-side clearance |
+| F-63 | D-114 | Fractional piercing has asymmetric conclusions: `τ*>10` rules out ten points, while `τ*≤10` does not construct an integral set |
+| F-64 | D-115 | Claims of “first,” “never,” and “unpublished” are scoped to a recorded retrieved corpus rather than asserted globally |
+| F-65 | D-116 | The review now agrees with the 40-artifact registry and assigns algebraic metadata only to independently verified standing witnesses |
+| F-66 | D-117 | The idea board no longer says H-018 answered an intrinsic basin-width question |
+| F-67 | D-118 | H-017’s fixed-budget reachability and H-012’s `P/Q/E` attraction ratio are separate estimands; H-012 needs a new identified `n=11` sample |
+| F-68 | D-119 | H-028 now tests for one refined local minimizer and a boundary margin; continuity makes uniqueness inside a fixed positive objective tolerance impossible |
+
+The corrected portfolio registers H-025 through H-040. Its strongest independent fronts
+are Trump’s nonsmooth local geometry, exact optimal configuration spaces at small `n`,
+held-out construction surgery, pure-point piercing limits, robust restricted-angle
+proofs, `s(12)`, the next `m²−3` case at `n=61`, exact record fields, and the asymptotic
+waste exponent. The basin program now has a typed object hierarchy and visualization
+ladder; a glyph gallery and exact `n=3` quotient precede any point-cloud atlas.
 
 Three source checks materially changed the frontier.
 The [UnitSquare machine-readable release](https://hmbelvedere.com/data/results.json)
@@ -2195,6 +2235,8 @@ poses are retained and their results are labelled untrusted screen data.
   [Packing Unit Squares in a Rectangle](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v12i1r37).
 - Wolfram Bentz,
   [Optimal Packings of 13 and 46 Unit Squares in a Square](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v17i1r126).
+- Bojan Bašić and Anna Slivková,
+  [On optimal piercing of a square](https://doi.org/10.1016/j.dam.2018.03.048).
 - M. Z. Arslanov and S. A. Mustafin,
   [Improved Packings of n(n-1) Unit Squares in a Square](https://www.combinatorics.org/ojs/index.php/eljc/article/view/v28i4p22).
 - David Ellsworth,

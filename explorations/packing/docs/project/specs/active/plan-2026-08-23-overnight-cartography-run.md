@@ -72,12 +72,12 @@ Measured on the merged PR 15 baseline unless stated otherwise:
 
 | Item | Current fact | Consequence |
 | --- | --- | --- |
-| Scientific registry | 24 artifacts: H-001 through H-024, including two explicit open questions | The standing review’s fifteen hypotheses no longer live only in prose |
+| Scientific registry | 40 artifacts: H-001 through H-040, including seven explicit open questions | The census spine now sits beside local geometry, construction, exact-value, algebraic and asymptotic lanes |
 | Recorded campaign | 11 rounds, 275 agent-minutes, 1,380.674 machine seconds (23.0 wall-minutes) | The historical loop is about 12:1 agent-bound |
 | Operational runner queue | one H-017 cell, five seeds, recipe timebox 8h | “Queue nonempty” is not an overnight-readiness test |
 | Estimated H-017 runtime | 2.80h at 39.7M moves/s locally; 7.46h at the recorded 14.9M moves/s cloud rate | Target-host calibration is mandatory |
 | Fast checks | status 0.22–0.24s; preflight 0.12s; ledger 0.23s; schemas 1.60s; engine selftest 1.43s | Orientation and focused feedback are already cheap |
-| Normal gate | recent single runs 108–126s | Profile repeated samples before optimizing further |
+| Normal gate | recent single runs 108–135s | Profile repeated samples before optimizing further |
 | Canonicalizer | 0.098s at `n=7`, 7.91s at `n=9` in one audit | Likely census bottleneck; confirm under `think-xzew` before redesign |
 
 The existing preflight is useful but not a launch decision.
@@ -90,12 +90,16 @@ rehearse crash persistence.
 The registry artifact is authoritative for each claim’s wording, metric, threshold,
 regime, prerequisites, and status.
 The table below is a routing view, not a second registry.
+The
+[mathematical-frontier review](../../reviews/review-2026-08-23-mathematical-frontier-strategy.md)
+ranks the full portfolio and defines the basin ontology, visualization ladder, and
+fast-first promotion rules.
 
 ### First: define and validate the counted object
 
 | Order | Artifact | Question | Why now | Runnable? |
 | ---: | --- | --- | --- | --- |
-| 1 | [H-023](../../../../campaign/hypotheses/H-023-n5-terminal-connectivity.md) | Which observed `n=5` endpoints are connected at the proved optimum? | Focused ambiguity at the first nontrivial census cell | No; local geometry study |
+| 1 | [H-023](../../../../campaign/hypotheses/H-023-n5-terminal-connectivity.md) | Are the equal-side `n=5` candidates in one terminal family, and what valid-path bounds connect unequal levels? | Focused ambiguity at the first nontrivial census cell | No; full poses and local geometry study absent |
 | 2 | [H-021](../../../../campaign/hypotheses/H-021-endpoint-identifiability.md) | Can the classifier resolve at least 95% of endpoint support through `n=8`? | Measurement-system gate; failure redirects the program | No; classifier and controls absent |
 | 3 | [H-011](../../../../campaign/hypotheses/H-011-small-n-census.md) | Does unseen terminal-component mass fall below 0.05 by `n=8`? | Builds the atlas and tests whether census is viable | No; waits on identity, events and estimator |
 | 4 | [H-007](../../../../campaign/hypotheses/H-007-saturation-curves.md) | Do preregistered coverage estimates predict held-out discovery? | Makes negative search results quantitative | No; waits on H-011 data |
@@ -116,6 +120,10 @@ not component identity or a rigidity certificate.
 | 2 | [H-015](../../../../campaign/hypotheses/H-015-map-elites-illumination.md) | quality diversity versus matched restarts | at least 1.5× certified components per pair-test |
 | 2 | [H-005](../../../../campaign/hypotheses/H-005-m2-minus-3-construction.md) | analytic 3-4-5-tilt construction at `n=97` | analytic geometry first; no numerical rescue of a failed family |
 | 3 | [H-014](../../../../campaign/hypotheses/H-014-superdisk-continuation.md) | circle-to-square continuation versus direct square starts | last because it alone needs a new geometry model |
+| 1 | [H-030](../../../../campaign/hypotheses/H-030-public-parent-surgery.md) | held-out UnitSquare parent-to-child construction surgery | recover a hidden known child before any unseen-record budget |
+| 2 | [H-031](../../../../campaign/hypotheses/H-031-load-guided-block-moves.md) | LP-load-guided block moves versus coordinate-only moves | at least 2× valid target events per pair-test on paired controls |
+| 2 | [H-029](../../../../campaign/hypotheses/H-029-adaptive-splitting.md) | rare-event splitting versus independent restarts | pass exact synthetic coverage and an independent `n=10` reference before a new `n=11` cell |
+| 2 | [H-040](../../../../campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | adjacent-cell pivots versus random-coordinate multistart | at least 2× new verified cells per LP solve; cells are not components |
 
 H-024 separately tests the descriptive claim that verified record packings through
 `n=30` use at most three orientation classes.
@@ -133,13 +141,29 @@ be silently rerun as fresh hypotheses.
 | Priority | Artifact | Output | Boundary |
 | ---: | --- | --- | --- |
 | 1 | [H-010](../../../../campaign/hypotheses/H-010-stromquist-triple.md) | known escape, censored hard case, then independently checked PoseBox certificate | search saturation is never proof |
-| 1 | [H-022](../../../../campaign/hypotheses/H-022-trump-local-geometry.md) | active-system rank/tangent evidence and an interval-local certificate or continuation witness | local geometry is distinct from global optimality |
+| 1 | [H-026](../../../../campaign/hypotheses/H-026-trump-first-order-rigidity.md) / [H-022](../../../../campaign/hypotheses/H-022-trump-local-geometry.md) | union-of-branchwise tangent test, then continuation or interval-local exclusion | feature counts and a smooth Jacobian decide neither rigidity nor isolation |
 | 2 | [H-006](../../../../campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md) | quantitative, refinement-stable dual support for candidate loci | discretized LP generates proof objects; it proves no bound |
+| 1 | [H-039](../../../../campaign/hypotheses/H-039-s12-proof-frontier.md) | checked improvement to the `s(12)` lower bound | H-010’s complete conditional mechanism is the known-answer gate |
+| 1 | [H-033](../../../../campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | extend Bentz’s `m²−3` method to `m=8` or retain its first blocking pose | the direct 2018 piercing bound is weaker than Nagamochi and does not settle `s(61)` |
+| 2 | [H-034](../../../../campaign/hypotheses/H-034-fractional-piercing-ceiling.md) | certified decision whether `τ*(U_s)>10` at Trump’s side | `>10` rules out ten points; `≤10` does not construct an integral set |
+| 2 | [H-036](../../../../campaign/hypotheses/H-036-robust-restricted-orientation.md) | extend Stromquist’s exact `0°/45°` exclusion to a fixed neighborhood | reproduce the exact theorem before interval enlargement |
+| 2 | [H-032](../../../../campaign/hypotheses/H-032-small-n-optimal-moduli.md) / [H-038](../../../../campaign/hypotheses/H-038-record-number-fields.md) | exact quotient spaces and exact-field taxonomy | begin at `n=3` and one reconstructed known algebraic witness |
+| 3 | [H-037](../../../../campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | narrow the `1/2` versus `3/5` exponent gap | separate paper-mathematics lane; finite diagnostics do not decide it |
 
-After H-010 validates the falsifier/certificate loop, the most tractable new theorem
-targets are a certified restricted-orientation or contact family, a local certificate
-around Trump’s packing, and a cutting-plane improvement to the `n=12` lower bound.
-Each must become its own registered hypothesis before compute begins.
+The first proof rotation is H-026, the exact `n=3` control in H-032, and H-010. The
+slower `s(12)`, `s(61)`, fractional-piercing, restricted-orientation, exact-field and
+asymptotic programs remain visible with explicit intermediate artifacts rather than
+being forced into the stochastic census queue.
+
+### Basin maps, in order of mathematical honesty
+
+The first views are generated packing glyphs and the exact `n=3` quotient family.
+Next come fixed-cell angle sheets with active-basis overlays, an `n=5` ambiguity graph
+with tangent evidence, and valid-path clearance profiles.
+Kernel-conditioned transition networks and discovery curves wait for full event
+retention and `P/Q/E`; a global merge tree waits for certified components of a
+fixed-side filtration.
+Endpoint hashes or continuation-branch dendrograms are never labelled feasible topology.
 
 ## The autonomous agent loop
 
@@ -274,6 +298,7 @@ The canonical readiness epic is `think-ydus`.
 | Lane | Beads | Exit evidence |
 | --- | --- | --- |
 | Portfolio and agenda | `think-1sxv`, `think-isa3` | registry, idea board, exploration source and this spec reconcile |
+| Mathematical frontier | `think-7gu0` with `think-jbcm`, `think-1xex`, `think-vvd5`, `think-xbab`, `think-z4m0`; execution continues on `think-chbu`, `think-ykt7` and the existing Insight beads | ranked review, 40-artifact registry, basin ontology, priced rotation and source-correct proof/search lanes |
 | Counted object | `think-1s0h` → `think-0yo9`; `think-3szr`, `think-aans` | H-023/H-021 classification evidence and ambiguity bounds |
 | Events and evaluator | `think-31k1`, `think-rrht`, `think-apwt`, `think-jxx8` | full observations, named `P/Q/E`, held-out coverage evaluator |
 | Validity and lifecycle | `think-ldq2`, `think-97pp`, `think-5zwm`, `think-ouf0`, `think-osyp` | independent pose checks, real selftest, transitions, interruption and control rehearsals |
@@ -295,6 +320,11 @@ The new H-024 corpus reconstruction is `think-w5rb` under the Insight focus.
   locally; separated the autonomous agent loop from the numeric runner; codified H-003
   through H-015 plus H-021 through H-024; and replaced a premature schedule with the
   explicit scientific, lifecycle, capacity, and morning-artifact gate above.
+- **2026-08-24:** deep creativity review expanded the registry from 24 to 40 artifacts,
+  corrected the rigidity, LP-dual, topology, tail-model and fractional-piercing claims,
+  added the exact-small-`n`, public-parent, `s(12)`, `s(61)`, algebraic-field and
+  asymptotic lanes, and adopted the fast-first visualization and successive-halving
+  agenda.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

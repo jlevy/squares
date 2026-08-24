@@ -859,9 +859,9 @@ reading the results below:
 
 ## The Hypothesis Registry
 
-Twenty-four claims or open questions are codified as artifacts.
+Forty claims or open questions are codified as artifacts.
 The standing review’s complete H-001 through H-015 block is now in the registry; later
-ids carry campaign- native claims and two explicit open questions.
+ids carry campaign-native claims and seven explicit open questions.
 The [ledger](campaign/ledger.md) is generated from the artifacts and is the current
 view; this section is the reading of it.
 
@@ -891,6 +891,22 @@ view; this section is the reading of it.
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What is the certified local geometry of Trump’s packing? | 0 | — |
 | [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected? | 0 | — |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | blocked | Verified record packings through `n=30` use at most three angle classes; `n=29` is a counterexample candidate | 0 | — |
+| [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
+| [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | blocked | Trump has no nonzero direction in any branchwise fixed-side tangent cone | 0 | — |
+| [H-027](campaign/hypotheses/H-027-record-angle-cones.md) | blocked | The imported `n=11,17` record cells have positive class-angle directional cones | 0 | — |
+| [H-028](campaign/hypotheses/H-028-reference-cell-angle-sheets.md) | blocked | Each published point is the sole refined local minimum on its declared reference-cell angle sheet, with a boundary margin | 0 | — |
+| [H-029](campaign/hypotheses/H-029-adaptive-splitting.md) | blocked | Calibrated adaptive splitting beats restarts on rare target events | 0 | — |
+| [H-030](campaign/hypotheses/H-030-public-parent-surgery.md) | blocked | Construction surgery reproduces at least two of six hidden public record improvements | 0 | — |
+| [H-031](campaign/hypotheses/H-031-load-guided-block-moves.md) | blocked | LP-load-guided block moves beat coordinate-only moves per pair-test | 0 | — |
+| [H-032](campaign/hypotheses/H-032-small-n-optimal-moduli.md) | open question | What are the exact optimal configuration spaces for `n=3…6`? | 0 | — |
+| [H-033](campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | open question | Can the `m²−3` theorem be extended to `s(61)=8`? | 0 | — |
+| [H-034](campaign/hypotheses/H-034-fractional-piercing-ceiling.md) | blocked | The fractional piercing value at Trump’s side is greater than ten | 0 | — |
+| [H-035](campaign/hypotheses/H-035-asymptotic-primitive-finite-transfer.md) | blocked | Current asymptotic construction primitives improve a finite public parent | 0 | — |
+| [H-036](campaign/hypotheses/H-036-robust-restricted-orientation.md) | blocked | Stromquist’s restricted-orientation gap survives a `0.25°` neighborhood | 0 | — |
+| [H-037](campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | open question | What is the asymptotic waste exponent between `1/2` and `3/5`? | 0 | — |
+| [H-038](campaign/hypotheses/H-038-record-number-fields.md) | open question | Which exact fields and elimination mechanisms occur in verified records? | 0 | — |
+| [H-039](campaign/hypotheses/H-039-s12-proof-frontier.md) | open question | Can the lower bound for `s(12)` be improved and ultimately closed at four? | 0 | — |
+| [H-040](campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | blocked | Active-cell neighbor walks beat multistart in new verified cells per LP solve | 0 | — |
 
 ### Confirmed
 
@@ -908,9 +924,10 @@ It is the campaign’s first confirmed claim, and the one that changed a method.
 null: a serious budget on a general-purpose annealer finds the best known packing.
 Within `1e-4` only at `n = 12`. The refutation is not the interesting part—the two
 failures were different in kind.
-At `n = 10` the search found the right basin and stopped `4.19e-04` short (**polish**);
-at `n = 11` it never reached the right region (**exploration**). That distinction set
-the next four rounds.
+At `n = 10` later cell polishing showed the candidate had the record’s declared
+structure and stopped `4.19e-04` short (**polish**); at `n = 11` it remained `3.73e-02`
+above Trump and no terminal-component relation was measured.
+That operational distinction set the next four rounds without proving a topological one.
 
 **[H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md).** Claimed that alternating LP
 solves with local angle moves refines *any* annealer output to the analytic value.
@@ -924,8 +941,9 @@ Refuted as stated, and the cell-level split is the result:
 | all three | [exp-006](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | **rejected**—the original free-angle descent, 1.1–1.3× everywhere |
 
 The word that failed is *any*. The quench is a **polisher, not a rescue**: it makes the
-landing point exact and nameable, which is what the census and the atlas need, and it
-does not lift the burden of finding the right basin off the proposer.
+declared cell optimum reproducible to solver precision, which is an input to the census
+and atlas, and it does not lift the burden of finding a competitive region off the
+proposer.
 
 **[H-018](campaign/hypotheses/H-018-basin-entry.md).** Predicted an `ε` at which the
 return rate collapses, which would be the basin’s radius.
@@ -955,7 +973,8 @@ estimation, independent validity, and a named proposer regime.
   method decides the outcome, not that an unguided method would find that structure.
 
 **[H-017](campaign/hypotheses/H-017-budget-scaling.md)** (100× budget) stays open and
-demoted, with its failure predicted in writing.
+demoted behind a short response curve.
+It is operationally shaped but not admissible unattended while D-044 remains open.
 
 The [idea board](campaign/ideas.md) carries the full registered portfolio alongside raw
 ideas and dead ends.
@@ -1050,24 +1069,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-One hundred seven defects, [one line each](defects.md), generated from `defects.yaml`
+One hundred nineteen defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 40 | asserted something false about the mathematics |
-| validity | 26 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 32 | recorded something its own evidence contradicts |
+| soundness | 45 | asserted something false about the mathematics |
+| validity | 32 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 33 | recorded something its own evidence contradicts |
 | robustness | 7 | did not finish, or finished only by luck |
 | performance | 2 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Thirty of the forty soundness defects pointed in the *flattering* direction**, where
-the error looks like a success.
+**Thirty-five of the forty-five soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught four defects in one hundred seven, and no soundness
+**The automated gate has caught four defects in one hundred nineteen, and no soundness
 defect ever.** Every soundness failure was found by a control cell whose answer was
 known in advance, a rule written down before the measurement, a generated view
 contradicting its source, or someone reading carefully.
@@ -1131,14 +1150,18 @@ quench residual; D-084 removes unsupported rigidity and gap-rank facts from the 
 frontier artifact; D-085 freezes living uv commands; and D-086 replaces stale overnight
 and handoff state with the current launch agenda.
 D-087 separates the angle-class algorithm, corpus law, and single-cell kink claims.
-D-088 through D-105 are the source, geometry, identity and hypothesis-design corrections
-from the final creativity pass; D-106 and D-107 are the mutation-anchor and synopsis
+D-088 through D-105 are source, geometry, identity, and hypothesis-design corrections
+from the first creativity pass; D-106 and D-107 are the mutation-anchor and synopsis
 reconciliation failures its first gate attempts caught.
+D-108 through D-119 are the second-pass corrections: the missing piercing paper, false
+isostatic and self-stress arguments, fixed-budget and fixed-cell overreach, topology and
+fractional-LP mistakes, unsupported novelty, stale registry state, the H-012/H-017
+estimand conflation, and an impossible continuity-blind angle-sheet criterion.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Forty-four fixes left no regression check behind, and that list has already predicted a
+Fifty-four fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
@@ -1155,7 +1178,8 @@ One hypothesis is confirmed, four are refuted informatively, and the campaign ha
 defect log good enough to predict its own regressions.
 
 **The bottleneck has moved from polish to proposal.** Nothing in the current toolkit
-reaches Trump’s basin, and the refiner cannot help with that by construction.
+reaches Trump’s standing side, and the refiner cannot rescue the tested starts by
+construction; no terminal-component relation has been measured.
 The named candidates are δ-continuation, angle-class search as a *search* rather than an
 assumption, neighbour-transfer seeding, and quality-diversity retention—none built.
 
@@ -1163,7 +1187,8 @@ assumption, neighbour-transfer seeding, and quality-diversity retention—none b
 Everything the strategy layer recommends rests on record basins being rare in quench
 measure, and [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is the
 measurement that would refute it.
-The quench is now sound enough to run it.
+The quench supplies one needed instrument, but full event retention, independent pose
+validity, and terminal identity are not ready.
 What is not settled is what a basin *is*.
 
 [D-034](defects.md) is the open defect that says so.
@@ -1173,8 +1198,8 @@ At `n=5`, two rows also share side, short form, contact certificate, angle signa
 and contact count while differing geometrically.
 That is strong evidence of unresolved terminal identity, but raw contact counts do not
 prove an exact family dimension and matching side/contact data do not prove the two rows
-are path-connected; a rigidity-matrix rank and continuation test must decide those
-claims.
+are path-connected; generalized tangent evidence and certified continuation must decide
+those claims.
 
 So `distinct_basins` currently counts family members, the discovery curve cannot
 plateau, and H-011’s saturation criterion is unreachable until the definition is fixed.
@@ -1183,11 +1208,19 @@ because this is the deliverable’s own shape.
 Until that is settled and the census runs, the cartography program is a well-argued bet
 rather than a finding.
 
-**Three things are cheap and high-information.** Independently reconstruct the primary
-`n = 29` pose to decide H-024’s apparent counterexample; analyze Trump’s complete active
-system for H-022; and regenerate the `n = 5` equal-side pair with full poses for the
-repaired H-023. `n = 17` has already been run, while H-018’s registered basin-entry
-claim is refuted and its useful successors are H-021 through H-023.
+The
+[mathematical-frontier review](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md)
+now keeps several independent routes alive rather than making the census spine the whole
+program: Trump’s nonsmooth local geometry, exact small-`n` quotient spaces, held-out
+construction surgery, pure-point piercing limits, robust restricted-angle proofs,
+`s(12)`, `s(61)`, exact record fields, and the asymptotic waste exponent.
+
+**The first fast rotation is cheap and high-information.** Verify the primary `n = 29`
+counterexample to H-024; solve H-026’s branchwise Trump tangent screen; render the exact
+`n = 3` quotient-family control; regenerate the `n = 5` equal-side pair with full poses;
+and hide the UnitSquare `n = 68,69` children for the first parent-surgery test.
+No hour-scale lane is promoted without a known-answer response, independent validity,
+and a result that changes a decision.
 
 **One open measurement defect constrains timing forecasts.** [D-101](defects.md): the
 historical exp-007/008 round-level wall times disagree with retained per-call durations.
