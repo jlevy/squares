@@ -5,7 +5,7 @@ title: "Engine anchors: sqsearch must recover s(n) at the trivial n, and budget 
 kind: task
 status: in_progress
 priority: 0
-version: 10
+version: 11
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: unknown@spud10.local
 labels:
@@ -17,7 +17,7 @@ parent_id: is-01m0rkz14t04yjme92gnfncfv7
 hold: null
 hold_until: null
 created_at: 2026-08-23T18:09:09.771Z
-updated_at: 2026-08-24T18:48:19.842Z
+updated_at: 2026-08-24T19:03:13.363Z
 started_at: 2026-08-24T18:39:12.483Z
 ---
 Anchor sqsearch against proved instances and verify budget accounting. Existing selftests cover n=4 and n=5; add the missing proved ladder cases appropriate to their mechanism, including the proved n=16 not-below-4 guard, and reconcile the recorded n=10 control.
@@ -28,4 +28,6 @@ For budget behavior, distinguish two claims. Exact best-so-far monotonicity is v
 
 2026-08-24 BC-008 now explicitly gates the size ladder after exp-030: random-start BasinEvent/v3 is validated through complete blocks n=3..8 and one n=9 performance event. Before n=10, add a source-bound seeded-pose entry that perturbs the proved n=10 witness, retain the full start and endpoint, replay independent validity, and distinguish return-to-known-answer from random-search performance. Do not substitute another blind random-start block.
 
-2026-08-24 source-start checkpoint: `gobel10-svg-v1` reconstructs the published Göbel n=10 witness and binds URL plus SHA-256; BasinEvent/v3 retains deterministic perturbations and rejects source/start tampering. All 36 prior events replay. A one-second real smoke run reached a valid endpoint at the proved side and retained a typed time-budget stop. BC-008 is ready, not complete: preregister and run four 15-second perturbations under the 90-second cap.
+2026-08-24 source-start checkpoint: `gobel10-svg-v1` reconstructs the published Göbel n=10 witness and binds URL plus SHA-256; BasinEvent/v3 retains deterministic perturbations and rejects source/start tampering. All 36 prior events replay. A one-second real smoke run reached a valid endpoint at the proved side and retained a typed time-budget stop.
+
+2026-08-24 exp-031 completes BC-008 at engine dab797c under preregistration 29d99b1: all four scale-1e-4 source perturbations converge, independently validate, and are scientifically admissible; max error from 3+sqrt(2)/2 is 2.220446049250313e-15; 6,631/6,631 fixed-point evaluations settle in 10.3366s. This is a local known-answer control, not random-search performance. The broader engine-anchor and budget-monotonicity acceptance on this bead remains open.
