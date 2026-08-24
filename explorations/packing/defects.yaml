@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 163
+count: 164
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4055,9 +4055,8 @@ defects:
     reports only 3/4 converged proposals for n=3, 1/4 for n=4, and 5/6 for n=5, while
     the committed golden reports 4/4, 4/4, and 6/6. The convergence ladder also marks
     n=9 and n=10 unsettled; n=10 no longer reaches the proved value. The newly exposed
-    reasons include a repeated cell cycle and a re-read cell that is infeasible under
-    the solver tolerance. The former untyped result supplied both as ordinary objective
-    values.
+    reasons include a repeated cell cycle and a re-read LP solve that failed its solver
+    boundary check. The former untyped result supplied both as ordinary objective values.
   consequence: >-
     Current small-n convergence totals and endpoint rows can include configurations whose
     inner fixed-cell problem never settled. They remain reproducible numerical stopping
@@ -4102,3 +4101,34 @@ defects:
   recurrence_of: D-004
   bead: think-0bpx
   recorded_in: test.sh
+- id: D-164
+  title: The fixed-cell solver mislabeled a numerical rejection as mathematical infeasibility
+  date: '2026-08-24'
+  layer: quench
+  class: validity
+  direction: conservative
+  detected_by: control_cell
+  latent_for: since solve_cell collapsed every failure to None
+  severity: high
+  status: outstanding
+  what: >-
+    `solve_cell` returns the same `None` for a mathematically infeasible cell, a HiGHS
+    failure, and a successful LP whose returned point fails the post-solve residual
+    check. On the retained n=3 seed-1 calibration, HiGHS reports an optimum whose worst
+    residual is 1.19996e-10; the 1e-10 post-check rejects it and the fixed-point layer
+    reports `re-read cell infeasible`. With only the internal cutoff changed to 2e-10,
+    the same start reaches the proved side 2 and reports a clean free pass.
+  consequence: >-
+    The calibration undercounts convergence and reports a numerical solver-boundary
+    event as geometric evidence. More importantly, the loop cannot choose a principled
+    retry, repair, or stop policy because the failure channel has erased its cause.
+  fix: >-
+    none yet. Return typed cell-solve outcomes for mathematical infeasibility, solver
+    failure, and post-check rejection; retain the failing row and residual; then
+    preregister a bounded retry or repair whose final pose is independently screened.
+  regression: >-
+    Retain the n=3 seed-1 fixed-cell fixture and require the solver-boundary rejection
+    to remain distinct from mathematical infeasibility before regenerating the golden.
+  recurrence_of: D-014
+  bead: think-28x5
+  recorded_in: golden/basin-maps.yaml
