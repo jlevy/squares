@@ -12,10 +12,11 @@
 #
 # The steps run CONCURRENTLY. Every one of them is read-only -- the renderers and the
 # ledger only write under `--update`, and the negative controls now mutate a private
-# clone rather than this directory -- so there is nothing for them to race over, and
+# snapshot rather than this directory -- so there is nothing for them to race over, and
 # running them one at a time was leaving nine of ten cores idle for three minutes. The
-# machine's core count is the default width; `--jobs 1` restores serial execution,
-# which is what to use when a failure needs a clean transcript.
+# machine's core count is the default width; `--jobs 1` restores serial execution at
+# both the step and process-pool layers, which is what to use when a failure needs a
+# clean transcript.
 #
 # Output is replayed in the declared order regardless of which step finished first, so
 # two runs of the same tree produce the same transcript and a diff of two runs means
@@ -36,9 +37,15 @@ while [ $# -gt 0 ]; do
   case "$1" in
     --strict) STRICT=1 ;;
     --deep) DEEP=1 ;;
-    --jobs) JOBS="$2"; shift ;;
+    --jobs)
+      [ $# -ge 2 ] || { echo "--jobs requires a value" >&2; exit 2; }
+      JOBS="$2"; shift
+      ;;
     --jobs=*) JOBS="${1#*=}" ;;
-    --only) ONLY="$2"; shift ;;
+    --only)
+      [ $# -ge 2 ] || { echo "--only requires a value" >&2; exit 2; }
+      ONLY="$2"; shift
+      ;;
     --only=*) ONLY="${1#*=}" ;;
     --list) LIST=1 ;;
     *) echo "unknown argument: $1" >&2; exit 2 ;;
@@ -60,32 +67,32 @@ if [ "$JOBS" = "0" ]; then
   JOBS=$( { command -v sysctl >/dev/null 2>&1 && sysctl -n hw.ncpu; } \
     || { command -v nproc >/dev/null 2>&1 && nproc; } || echo 4 )
 fi
+
+require_positive_integer() {
+  local name="$1" value="$2"
+  case "$value" in
+    ''|*[!0-9]*|0)
+      echo "$name must be a positive integer, got '$value'" >&2
+      exit 2
+      ;;
+  esac
+}
+
+require_positive_integer "--jobs/GATE_JOBS" "$JOBS"
+
 # Several steps are themselves lists of independent multi-second quenches and open
-# their own process pool. Without a shared budget the two layers MULTIPLY -- ten steps
-# each asking for ten workers is a hundred processes on ten cores, and the strict gate
-# measured 232s of CPU delivered over 50s of wall because of it. `PACK_JOBS` is the
-# per-step share; sqpack.workers.worker_count reads it, and a tool run straight from a
-# shell sees no variable and still gets the whole machine.
+# their own process pool. If both layers use every core, ten concurrent steps can each
+# ask for ten workers. `PACK_JOBS` is therefore a PER-STEP CAP, not a shared global
+# budget. The default below was measured on the ten-core development host; concurrent
+# pool-backed steps can still exceed JOBS in aggregate. `--jobs 1` is the exact serial
+# mode. A tool run directly from a shell sees no cap and uses the whole machine.
 INNER="${GATE_INNER_JOBS:-0}"
 if [ "$INNER" = "0" ]; then
   INNER=$(( JOBS / 3 ))
-  [ "$INNER" -lt 2 ] && INNER=2
+  [ "$INNER" -lt 1 ] && INNER=1
 fi
+require_positive_integer "GATE_INNER_JOBS" "$INNER"
 export PACK_JOBS="$INNER"
-
-# A private directory per run for each step's captured output, exit code, timing and
-# skips. Steps run in subshells and cannot append to a parent array, so they report
-# through files and the parent does the accounting after the wait.
-RESULTS=$(mktemp -d "${TMPDIR:-/tmp}/gate-XXXXXX")
-
-# The gate itself no longer writes anything into this directory: tools/negctl.py used
-# to corrupt tracked files in place and now works in a clone, and every other step is
-# read-only unless asked for --update. The marker stays because campaign/runner.py
-# refuses to start a round while a gate is running, which is still worth enforcing --
-# a round that recorded numbers from a tree mid-check would be a round nobody could
-# reproduce.
-touch .gate-running
-trap 'rm -f .gate-running; rm -rf "$RESULTS"' EXIT
 
 # Record a skip. Called from inside a step, so it reports through the step's file;
 # never called for a check that ran.
@@ -290,6 +297,27 @@ step_historical_regressions() {
   # Keeping this in the main gate prevents a passing standalone check from becoming a
   # forgotten optional command.
   $PY tools/regression_test.py
+
+  # Command-line boundary checks for the gate itself. `--list` exits before acquiring
+  # the activity marker, so these nested probes cannot clear the parent gate's marker.
+  local out trace
+  if out=$(bash test.sh --jobs -1 --list 2>&1); then
+    echo "test.sh accepted --jobs -1" >&2
+    return 1
+  fi
+  grep -q -- "--jobs/GATE_JOBS must be a positive integer" <<<"$out"
+  if out=$(bash test.sh --jobs nope --list 2>&1); then
+    echo "test.sh accepted --jobs nope" >&2
+    return 1
+  fi
+  grep -q -- "--jobs/GATE_JOBS must be a positive integer" <<<"$out"
+  if out=$(GATE_INNER_JOBS=nope bash test.sh --list 2>&1); then
+    echo "test.sh accepted GATE_INNER_JOBS=nope" >&2
+    return 1
+  fi
+  grep -q "GATE_INNER_JOBS must be a positive integer" <<<"$out"
+  trace=$(bash -x test.sh --jobs 1 --list 2>&1 >/dev/null)
+  grep -q "export PACK_JOBS=1" <<<"$trace"
 }
 
 step_soundness_perimeter() {
@@ -461,8 +489,30 @@ if [ ${#SELECTED[@]} -eq 0 ]; then
   exit 2
 fi
 
+# A private directory per run for each step's captured output, exit code, timing and
+# skips. Steps run in subshells and cannot append to a parent array, so they report
+# through files and the parent does the accounting after the wait. This starts after
+# `--list`, so nested CLI regressions never acquire or clear the activity marker.
+RESULTS=$(mktemp -d "${TMPDIR:-/tmp}/gate-XXXXXX")
+
+# The gate itself no longer writes anything into this directory: tools/negctl.py used
+# to corrupt tracked files in place and now works in a snapshot, and every other step
+# is read-only unless asked for --update. The marker stays because campaign/runner.py
+# refuses to start a round while a gate is running.
+touch .gate-running
+trap 'rm -f .gate-running; rm -rf "$RESULTS"' EXIT
+
 echo "python runner: $PY"
-echo "running ${#SELECTED[@]} steps, $JOBS at a time"
+echo "running ${#SELECTED[@]} steps, $JOBS at a time; pool cap $INNER per step"
+
+NEEDS_ENGINE=0
+for entry in "${SELECTED[@]}"; do
+  case "${entry##*|}" in
+    step_soundness_perimeter|step_search_engine|step_differential)
+      NEEDS_ENGINE=1
+      ;;
+  esac
+done
 
 # Build the engine FIRST, before anything that reads the binary.
 #
@@ -475,14 +525,16 @@ echo "running ${#SELECTED[@]} steps, $JOBS at a time"
 # guard. Ordering is the fix: build once, up front, and every later step that needs
 # the binary finds it. It is also why this is not one of the concurrent steps: three
 # of them read the binary, and a build racing its readers is the same bug again.
-echo
-echo "== building sqsearch =="
-STEP_ID="build"
-if command -v cargo >/dev/null 2>&1; then
-  ( cd sqsearch && cargo build --locked --release --quiet )
-  echo "  built sqsearch/target/release/sqsearch"
-else
-  skip "cargo not installed: the engine, perimeter engine cells, differential test and selftest cannot run"
+if [ "$NEEDS_ENGINE" = "1" ]; then
+  echo
+  echo "== building sqsearch =="
+  STEP_ID="build"
+  if command -v cargo >/dev/null 2>&1; then
+    ( cd sqsearch && cargo build --locked --release --quiet )
+    echo "  built sqsearch/target/release/sqsearch"
+  else
+    skip "cargo not installed: the engine, perimeter engine cells, differential test and selftest cannot run"
+  fi
 fi
 
 # --- the concurrent run ------------------------------------------------------------
@@ -549,18 +601,20 @@ if [ ${#FAILED[@]} -ne 0 ]; then
   for f in "${FAILED[@]}"; do echo "  - $f"; done
   exit 1
 fi
-if [ -n "$ONLY" ]; then
-  echo "${#SELECTED[@]} of ${#STEPS[@]} STEPS PASSED (--only '$ONLY'; this is not a full gate)"
-  exit 0
-fi
-if [ ${#SKIPPED[@]} -eq 0 ]; then
-  echo "ALL CHECKS PASSED"
-else
-  echo "CHECKS PASSED, BUT ${#SKIPPED[@]} WERE SKIPPED:"
+if [ ${#SKIPPED[@]} -ne 0 ]; then
+  echo "GATE COMPLETED, BUT ${#SKIPPED[@]} CHECKS WERE SKIPPED:"
   for s in "${SKIPPED[@]}"; do echo "  - $s"; done
   if [ "$STRICT" = "1" ]; then
     echo "strict mode: a skipped check is not a passed check" >&2
     exit 1
   fi
+  if [ -n "$ONLY" ]; then
+    echo "${#SELECTED[@]} of ${#STEPS[@]} STEPS COMPLETED (--only '$ONLY'; skipped checks make this incomplete)"
+    exit 0
+  fi
   echo "(re-run with --strict to make this an error; the unattended runner does)"
+elif [ -n "$ONLY" ]; then
+  echo "${#SELECTED[@]} of ${#STEPS[@]} STEPS PASSED (--only '$ONLY'; this is not a full gate)"
+else
+  echo "ALL CHECKS PASSED"
 fi

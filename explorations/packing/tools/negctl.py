@@ -11,8 +11,7 @@ suite. It also removes the way the hand version goes wrong: restoring with
 `git checkout` reverts to HEAD, which silently discards uncommitted work in the same
 file.
 
-Each control runs in its own throwaway copy of this directory, and the working tree is
-never touched.
+Each control runs in a throwaway source snapshot, and the working tree is never touched.
 ------------------------------------------------------------------------------------
 The first version of this file corrupted tracked files IN PLACE and restored them
 afterwards. That worked, and it cost more than it looked like it did:
@@ -30,10 +29,10 @@ afterwards. That worked, and it cost more than it looked like it did:
   * A crash between mutate and restore left the tree corrupt. `finally` covers
     exceptions; it does not cover SIGKILL or a power cut.
 
-On APFS (and any filesystem with copy-on-write cloning) a copy of this directory costs
-~0.2s and no disk, so isolation is cheaper than the workaround for the lack of it. One
-clone per worker, reused across the controls that worker runs, `.venv` and the cargo
-target symlinked back so nothing is rebuilt.
+On APFS a snapshot uses copy-on-write cloning. Elsewhere it falls back to a plain copy
+of a bounded source surface: the packing tree without the literature archive or build
+products, plus the root formatter ignore file. One snapshot per worker is reused across
+controls; `.venv` and the cargo target are symlinked back so nothing is rebuilt.
 
 The gate can now run this step concurrently with every other step, and a control can no
 longer corrupt anyone's checkout.
@@ -55,7 +54,9 @@ Usage:
 
 from __future__ import annotations
 
+import os
 import queue
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -78,26 +79,27 @@ ROOT = Path(__file__).resolve().parent.parent
 REPO = ROOT.parent.parent
 HERE = ROOT.relative_to(REPO)
 
-# Never copied. `.git` and the two build artifacts are the whole weight of this tree
-# (the virtualenv alone is ~440MB); everything a control mutates is a tracked source
-# file. The virtualenv and the cargo target are symlinked back instead, so nothing is
-# rebuilt and nothing is resolved again.
+# Controls need the packing source, not the literature archive, the rest of the
+# repository, or build products. `resources/README.md` is copied separately because the
+# README link checker requires that one path. The virtualenv and cargo target are
+# symlinked back so nothing is rebuilt or resolved again.
 PRUNE = frozenset(
     {
-        REPO / ".git",
-        REPO / "node_modules",
         # The gate's own marker. A clone that carried it would make campaign/runner.py
         # refuse to start, and four controls drive the runner expecting a DIFFERENT
         # refusal -- so the control would "fire" for the wrong reason and prove nothing.
-        REPO / HERE / ".gate-running",
-        REPO / HERE / ".venv",
-        REPO / HERE / "sqsearch/target",
+        ROOT / ".gate-running",
+        ROOT / ".venv",
+        ROOT / "resources",
+        ROOT / "sqsearch/target",
     }
 )
-LINK_BACK = (HERE / ".venv", HERE / "sqsearch/target")
+LINK_BACK = (Path(".venv"), Path("sqsearch/target"))
+COPY_SEPARATELY = (ROOT / "resources/README.md", REPO / ".flowmarkignore")
+SNAPSHOT_MAX_BYTES = 32 * 1024 * 1024
 # Directories that must be walked into rather than bulk-copied, because something
 # below them is pruned. Computed from PRUNE so the two cannot drift.
-DESCEND = frozenset(a for p in PRUNE for a in p.parents if REPO in (a, *a.parents))
+DESCEND = frozenset(a for p in PRUNE for a in p.parents if ROOT in (a, *a.parents))
 
 
 def _clone_into(src: Path, dst: Path) -> None:
@@ -125,14 +127,35 @@ def _clone_into(src: Path, dst: Path) -> None:
         subprocess.run(["cp", "-R", *bulk, str(dst)], capture_output=True, check=True)
 
 
+def snapshot_source_bytes() -> int:
+    """Bytes copied by the portable fallback, excluding linked build products."""
+    total = sum(path.stat().st_size for path in COPY_SEPARATELY)
+    for directory, names, files in os.walk(ROOT):
+        parent = Path(directory)
+        names[:] = [name for name in names if parent / name not in PRUNE]
+        for name in files:
+            path = parent / name
+            if path in PRUNE or path.is_symlink():
+                continue
+            total += path.stat().st_size
+    return total
+
+
 def clone_tree(dest: Path) -> None:
-    """A private, writable copy of the repository for one worker to corrupt."""
-    _clone_into(REPO, dest)
+    """A private, writable source snapshot for one worker to corrupt."""
+    work = dest / HERE
+    _clone_into(ROOT, work)
+
+    resource_readme = work / "resources/README.md"
+    resource_readme.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(ROOT / "resources/README.md", resource_readme)
+    shutil.copy2(REPO / ".flowmarkignore", dest / ".flowmarkignore")
+
     for rel in LINK_BACK:
-        source = REPO / rel
+        source = ROOT / rel
         if not source.exists():
             continue
-        link = dest / rel
+        link = work / rel
         link.parent.mkdir(parents=True, exist_ok=True)
         link.symlink_to(source)
 
@@ -178,6 +201,19 @@ def main() -> int:
 
     requested = int(sys.argv[sys.argv.index("-j") + 1]) if "-j" in sys.argv else 0
     workers = requested or worker_count(len(controls))
+
+    source_bytes = snapshot_source_bytes()
+    if source_bytes > SNAPSHOT_MAX_BYTES:
+        print(
+            f"negative-control snapshot source is {source_bytes} bytes; "
+            f"cap is {SNAPSHOT_MAX_BYTES}",
+            file=sys.stderr,
+        )
+        return 1
+    print(
+        f"  snapshot source {source_bytes / (1024 * 1024):.1f} MiB; "
+        f"{workers} private worker trees"
+    )
 
     failures: list[tuple[str, str]] = []
     with tempfile.TemporaryDirectory(prefix="negctl-") as tmp:
