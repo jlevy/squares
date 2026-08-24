@@ -343,6 +343,8 @@ step_basin_events() {
     campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   $PY tools/basin_census.py replay \
     campaign/series/series-000-smoke-and-calibration/results/exp-021-h-021-n3-basin-event-v3.jsonl
+  $PY tools/basin_census.py replay \
+    campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl
 }
 
 step_small_n_moduli() {

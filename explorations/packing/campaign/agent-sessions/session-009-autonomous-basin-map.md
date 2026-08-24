@@ -37,9 +37,10 @@ session:
     after: >-
       Exp-018 through exp-020 retain replayable n=3, n=4, and n=5 event blocks with full
       poses, independent validity, typed producer termination, and event timings. Their
-      twelve historical v2 events remain blocked as recorded. Exp-021 adds one
-      scientifically admissible v3 terminal event with a complete receipt; the number
-      of component-classified map cells remains zero, so no complete-map claim follows.
+      twelve historical v2 events remain blocked as recorded. Exp-021 and exp-022 add a
+      complete four-seed n=3 block of scientifically admissible v3 terminal events with
+      balanced receipts; the number of component-classified map cells remains zero, so
+      no complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -123,10 +124,12 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-019-h-021-n4-basin-event-calibration.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-020-h-021-n5-basin-event-calibration.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-021-h-021-n3-basin-event-v3.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-022-h-021-n3-basin-event-v3-completion.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-021-h-021-n3-basin-event-v3.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl
   - tools/basin_census.py
   - README.md
   - campaign/README.md
@@ -178,12 +181,16 @@ session:
   - >-
     D-170 corrects the closing audit: D-165 now has dedicated bead `think-007f` instead
     of reusing the unrelated D-132 tracker; `think-9qz0` remains unchanged.
+  - >-
+    Exp-022 completes the fixed four-seed n=3 v3 block: all four events are admissible,
+    three reach side 2, and one reaches valid nonoptimal side 2.362735797795. The three
+    new events contain 8,364 settled and zero unsettled fixed-point evaluations and cost
+    6.27 seconds total.
   stop_reason: null
   next_action: >-
-    In one thirty-minute slice, regenerate the remaining n=3 seeds under BasinEvent/v3,
-    retain every stopping outcome, and reconcile the exact known moduli without calling
-    endpoint descriptors components. Stop before n=4 and price that next cell from the
-    measured n=3 block.
+    Run one prepriced four-seed n=4 BasinEvent/v3 cell under a 60-second process cap,
+    retain every stopping outcome, and compare only event admissibility and cost with the
+    exact n=4 positive control. Stop before n=5 and make no component-count claim.
 ---
 # Session 009 — Bounded Progress Before Scale
 
