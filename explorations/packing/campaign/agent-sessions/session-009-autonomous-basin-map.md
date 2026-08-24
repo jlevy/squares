@@ -38,9 +38,9 @@ session:
       Historical v2 events remain blocked as recorded. BasinEvent/v3 now retains
       complete tool-validation blocks through n=8, one bounded n=9 performance event,
       and source-bound n=10 starts tied to the published Göbel pose. The n=10 entry point
-      passes static checks, semantic replay, and a one-second run-path smoke test;
-      exp-031 preregisters BC-008's four perturbations but has not run them. The number
-      of component-classified map cells remains zero, so no complete-map claim follows.
+      passes static checks and semantic replay; exp-031 converges on all four source
+      perturbations at the proved side with complete receipts. The number of
+      component-classified map cells remains zero, so no complete-map claim follows.
   delegations:
   - task: Audit the numerical runner for an unattended eight-hour launch
     operator: autonomous_runner_audit
@@ -188,6 +188,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/results/exp-028-h-021-n7-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-029-h-021-n8-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - campaign/schemas/agenda.schema.yaml
   - tools/basin_census.py
@@ -299,10 +300,14 @@ session:
     Exp-031 preregisters four fixed source perturbations at scale 1e-4, a 15-second
     per-seed budget, a 90-second process cap, and the distinction between optimal-side
     validity and producer convergence before observing the four outcomes.
+  - >-
+    Exp-031 then meets its complete criterion: 4/4 events converge, validate, replay,
+    and return within 2.221e-15 of the proved side; 6,631/6,631 fixed-point evaluations
+    settle in 10.337 seconds of retained quench wall.
   stop_reason: null
   next_action: >-
-    Execute preregistered exp-031 only under its declared 90-second command cap, replay
-    every retained event, and stop rather than changing its criterion or seeds.
+    Stop the size ladder. Take one bounded BC-009 identity-contract slice; do not sample
+    more endpoints until exact n=3 and n=4 component-classification controls exist.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -329,8 +334,8 @@ event. D-126 still prevents a fixed wall-clock budget from defining reproducible
 scientific work, so these cells validate retention and replay only; they do not estimate
 basin frequencies. The separate n=5 connectivity question remains blocked until its
 component-identity controls are explicit.
-The source-bound n=10 entry path is now ready for its preregistered BC-008 known-answer
-control.
+The source-bound n=10 entry path now passes its four-perturbation BC-008 known-answer
+control in exp-031.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

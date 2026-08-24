@@ -14,7 +14,7 @@
 | [session-006](agent-sessions/session-006-h026-exact-tangent.md) | completed | insight | think-qd9t | 2 | Preserve exp-013 in the gate, use the local-isolation result to sharpen H-022, and move the fast rotation to H-032's exact n=3 quotient-family control. |
 | [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | insight | think-n82j | 3 | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | correctness | think-ciwv | 3 | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
-| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 9 | Execute preregistered exp-031 only under its declared 90-second command cap, replay every retained event, and stop rather than changing its criterion or seeds. |
+| [session-009](agent-sessions/session-009-autonomous-basin-map.md) | in_progress | process | think-05hr | 9 | Stop the size ladder. Take one bounded BC-009 identity-contract slice; do not sample more endpoints until exact n=3 and n=4 component-classification controls exist. |
 
 ## Experiment agendas
 
@@ -31,7 +31,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | BC-005 | tool_validation | 7 | complete | 1 | think-wbra | permanent exp-028 replay and the n=3 through n=7 cost comparison |
 | BC-006 | tool_validation | 8 | complete | 1 | think-wbra | exp-029 plus event replay and a bounded quench/screen/key/replay timing audit |
 | BC-007 | tool_validation | 9 | complete | 2 | think-xzew | retained event plus canonicalization share of wall time |
-| BC-008 | tool_validation | 10 | ready | 1 | think-ouf0 | Preregister and retain the four-perturbation positive-control event artifact; distinguish valid optimal-side time stops from producer convergence. |
+| BC-008 | tool_validation | 10 | complete | 1 | think-ouf0 | permanent exp-031 semantic replay in the focused and normal gates |
 | BC-009 | measurement_validation | 3, 4 | blocked | 0 | think-0yo9 | classifier contract, positive fixtures, and negative mutations |
 | BC-010 | research | 5 | blocked | 0 | think-1s0h | active-system rank/nullity, tangent checks, continuation trace, and poses |
 | BC-011 | measurement_validation | 5, 6, 7, 8 | blocked | 1 | think-0yo9 | ambiguity-preserving classified event archive through the first failed or n=8 cell |
@@ -51,7 +51,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | id | status | lane | claim | sweep | rounds | spent |
 | --- | --- | --- | --- | --- | --- | --- |
 | H-001 | blocked | search | A proposer restricted to at most three learned angle classes, followed | n: 5 10 17 11 | 0 |  |
-| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 5 | 190m agent + 4.9m wall |
+| H-002 | refuted | search | Alternating per-cell LP solves with local angle moves refines any anne | n: 5* 10* 11* | 5 | 195m agent + 5.1m wall |
 | H-003 | blocked | search | Under one versioned proposer, quench, and terminal-component relation, | n: 5 6 7 8 9 10 11 | 0 |  |
 | H-004 | blocked | search | At n = 11, seeds constructed by adding a square to the proved n = 10 p | n: 11 | 0 |  |
 | H-005 | blocked | search | A Cleemann-style construction using a 3-4-5 tilt packs 97 unit squares | n: 78 97 | 0 |  |
@@ -130,7 +130,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-015 | series-000 | 4 | openai-codex | H-032 | Every physical packing is the axis-aligned 2 x 2 grid. F_4(2) consists of 24 isolated labelled states, and both declared symmetry quotients are one point. |
 | exp-017 | series-000 | 11 | openai-codex | H-041 | The one-coordinate repair closes the unique failed outer cell while preserving a complete exact cover, so eleven freely oriented unit squares require side at least 2 + 4/sqrt(5). |
 
-### baseline (9)
+### baseline (10)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -143,12 +143,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-028 | series-000 | 7 | openai-codex | H-021 | The complete block retains and replays without a launch-path failure. Three time-budget stops make the cell unsuitable for basin-frequency or completeness claims under D-126, and endpoint keys remain observations rather than components. |
 | exp-029 | series-000 | 8 | openai-codex | H-021 | The complete block retains and replays without a launch-path failure. Three typed stops make the cell unsuitable for basin-frequency or completeness claims under D-126, and endpoint keys remain observations rather than components. |
 | exp-030 | series-000 | 9 | openai-codex | H-021 | The complete event path stays below the 30-second profile trigger and retains its nonconverged outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional n=9 samples are authorized by this performance cell. |
-
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-031 | series-000 | 10 | openai-codex | H-002 | Preregistered before the four-event measurement. A fully retained typed stop is a criterion miss even if its endpoint reaches the proved side; an outer timeout or missing event invalidates the round rather than censoring the failed seed. |
+| exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 
 ## Resumable — stopped on the clock, not on an answer
 
@@ -160,5 +155,5 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 ## Effort
 
-31 rounds, 788 agent-minutes, 28.0 wall-minutes.
+31 rounds, 793 agent-minutes, 28.2 wall-minutes.
 

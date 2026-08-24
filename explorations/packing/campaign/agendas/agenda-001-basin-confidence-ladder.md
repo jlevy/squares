@@ -185,7 +185,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [10]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can the current event path start from a perturbation of the proved 45-degree
@@ -199,19 +199,17 @@ agenda:
     exit: proved-value return and complete receipts, or a typed retained failure
     bead: think-ouf0
     depends_on: [BC-003]
-    next_evidence: >-
-      Preregister and retain the four-perturbation positive-control event artifact;
-      distinguish valid optimal-side time stops from producer convergence.
+    next_evidence: permanent exp-031 semantic replay in the focused and normal gates
     parallel_group: known-answer-controls
     note: >-
-      A one-second run-path smoke test reached a valid endpoint at the proved side and
-      replayed its source binding, but correctly remained non-admissible after a typed
-      time-budget stop. Exp-031 now owns the preregistered four-perturbation measurement;
-      the smoke validates the entry point, not the BC-008 exit criterion.
+      Exp-031 converges on all four declared source perturbations, independently validates
+      every endpoint, settles all 6,631 evaluations, and returns within 2.221e-15 of the
+      proved side. This validates a local known-answer control, not basin frequency.
     artifacts:
     - sqpack/packings/gobel10.py
     - tools/basin_census.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
   - id: BC-009
     purpose: measurement_validation
     owner_focus: correctness

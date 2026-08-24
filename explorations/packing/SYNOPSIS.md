@@ -537,7 +537,7 @@ Where the program has spent effort, and what came of it.
 | --- | --- | --- | --- | --- |
 | 5 | proved, `2 + ½√2` | `2.70710678…` | positive control | `sqsearch --selftest` recovers it on every run. [exp-007](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md): the bracketing quench refines annealer output to `2.22e-15`—the analytic value to machine precision |
 | 8 | proved, `3` | `3` | census kill line | The `n` at which [H-011](campaign/hypotheses/H-011-small-n-census.md)’s discovery curve must plateau, or enumeration is abandoned. No rounds |
-| **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Four rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); angle descent barely helps; [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`—**twelve orders** |
+| **10** | **proved**, `3 + ½√2` | `3.70710678…` | **positive control** | Five rounds. The annealer stops `4.19e-04` short ([exp-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-002-baseline-n10-positive-control.md)); [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) closes it to `1.33e-15`; exp-031 returns all four source perturbations within `2.221e-15` |
 | **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**), corner (**T-3**), and repaired lower-bound certificate (**T-4**); nine rounds. Search remains `≈ 6e-02` short, exp-013 proves Trump’s exact pose locally isolated, exp-016 rejects Stromquist’s printed proof, and exp-017 independently restores its numerical bound |
 | **12** | open; `4` believed optimal | `4` | **open-case calibration** | Two rounds. Returns exactly `4.0` on all five seeds, which is baseline evidence rather than a known-answer guard. Also where the search and proof lanes are planned to meet |
 | 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
@@ -1200,14 +1200,15 @@ The event-retention controls through `n = 8` and the bounded `n = 9` performance
 are complete. The random-start size ladder stops there.
 BC-008’s source-bound `n = 10` seeded-pose entry point now passes replay and a bounded
 run-path smoke test.
-Exp-031 is the active preregistered four-perturbation known-answer experiment.
+Exp-031 completes its four-perturbation known-answer experiment at 4/4 converged,
+independently valid, and admissible.
 Exact configuration-space controls still stop at `n = 4`. Component and census claims
 remain blocked on the later identity and coverage rows.
 
 ## Experiments Conducted
 
-There are 31 rounds registered in `series-000`; 30 are terminal and exp-031 is in
-progress. The terminal rounds record 788 agent-minutes and 28.0 wall-minutes.
+There are 31 rounds registered in `series-000`; all are terminal.
+They record 793 agent-minutes and 28.2 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1255,7 +1256,7 @@ archive beside it.
 | [exp-028](campaign/series/series-000-smoke-and-calibration/experiments/exp-028-h-021-n7-basin-event-v3.md) | 7 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; three typed time-budget stops | **baseline** |
 | [exp-029](campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md) | 8 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; one typed unsettled stop and two time-budget stops | **baseline** |
 | [exp-030](campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md) | 9 | positive control | H-021 | BasinEvent/v3 semantic replay | 1 retained/valid typed time-budget stop; full command 21.36 s | **baseline** |
-| [exp-031](campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md) | 10 | positive control | H-002 | source-bound BasinEvent/v3 replay | four preregistered perturbations; measurement pending | **in-progress** |
+| [exp-031](campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md) | 10 | positive control | H-002 | source-bound BasinEvent/v3 replay | 4/4 admissible; max proved-side error `2.221e-15` | **baseline** |
 
 ### Cost and provenance
 
@@ -1291,9 +1292,9 @@ archive beside it.
 | exp-028 | 4 seeds, 10 s each | 38.628 s | 5 m | criterion | `ce84ef6` |
 | exp-029 | 4 seeds, 10 s each | 38.004 s | 5 m | criterion | `69c6008` |
 | exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
-| exp-031 | 4 seeds, 15 s each | — | — | — | `dab797c` |
+| exp-031 | 4 seeds, 15 s each | 10.337 s | 5 m | criterion | `dab797c` |
 
-### What the thirty terminal rounds jointly establish
+### What the thirty-one rounds jointly establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; component classification is not.**
@@ -1344,11 +1345,14 @@ reconstructs the published Göbel pose, binds its source digest, replays determi
 perturbations, and retains typed failure.
 A one-second smoke run reaches a valid endpoint at the proved side but times out before
 producer convergence.
-Exp-031 now preregisters BC-008’s four perturbations without yet observing them.
-The exact small-moduli controls remain valid; component identity is the next blocked
-layer. The `n=12` calibration returns exactly `4.0`, but that is not a known-answer
-guard. The runner’s full-pose independent verification boundary remains open under
-[D-044](defects.md); a producer-reported overlap scalar does not close it.
+Exp-031 then converges on all four preregistered perturbations: every endpoint validates
+and replays, all 6,631 fixed-point evaluations settle, and the maximum proved-side error
+is `2.221e-15`. This is a local known-answer control, not a random-search or component
+claim. The exact small-moduli controls remain valid; component identity is the next
+blocked layer. The `n=12` calibration returns exactly `4.0`, but that is not a
+known-answer guard.
+The runner’s full-pose independent verification boundary remains open
+under [D-044](defects.md); a producer-reported overlap scalar does not close it.
 
 **Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
 selections as 128 derivative-distinct matrices.
