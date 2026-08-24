@@ -5,7 +5,7 @@ title: Maintain the review, defect logbook, and bead reconciliation map
 kind: task
 status: in_progress
 priority: 0
-version: 8
+version: 9
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -17,7 +17,7 @@ parent_id: is-01m0r7q3zk8x6cg4e30d149698
 child_order_hints:
   - is-01m0rj3jzb99380az12g72g6n8
 created_at: 2026-08-23T21:18:32.967Z
-updated_at: 2026-08-24T00:39:22.843Z
+updated_at: 2026-08-24T00:41:34.228Z
 ---
 Keep one authoritative crosswalk from every technical review finding to its defect-logbook entry, remediation bead, evidential status, regression control, and final disposition. Reconcile generated defect views and the campaign ledger after each correction.
 
@@ -25,4 +25,4 @@ Acceptance: no finding lacks a defect ID or explicit non-defect rationale; every
 
 ## Notes
 
-2026-08-23 local PR 16 absorption checkpoint. The review crosswalk now runs through F-34 / D-079. PR 16's five commits are preserved as a merge parent; D-075 through D-079 are fixed and their six incident beads are closed. D-071 and the primary research defects remain open. Fresh deep golden check passed locally in about 91 seconds; final normal gate passed in 114 seconds with 30/30 controls, 79 reconciled defects, and two agent sessions. Push and remote PR-state verification remain on think-7wsz.
+2026-08-23 pushed PR 16 absorption checkpoint 85f39b9 to draft PR 15. The review crosswalk now runs through F-34 / D-079; D-075 through D-079 are fixed and all six incident beads plus integration bead think-7wsz are closed. D-071 and primary research defects remain open. Deep golden passed locally in about 91 seconds; final normal gate passed in 114 seconds with 30/30 controls, 79 defects, and two sessions. PR 15 is MERGEABLE/CLEAN with no configured checks; PR 16 is MERGED and has a full disposition comment. This bead remains active for the broader Correctness and Insight review.
