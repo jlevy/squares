@@ -5,14 +5,16 @@ title: golden/basin-maps.yaml is byte-frozen, so it cannot tell 'improved' from 
 kind: bug
 status: open
 priority: 1
-version: 3
+version: 4
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
-dependencies: []
+dependencies:
+  - type: blocks
+    target: is-01m0rrhwd2zzyj0x0jwa8cqwtw
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:10:53.772Z
-updated_at: 2026-08-24T21:22:10.690Z
+updated_at: 2026-08-24T21:24:06.948Z
 ---
 tools/golden_basins.py --deep compares re-quenched output to the committed file with GOLDEN.read_text() != rendered -- an exact string comparison over floats formatted to 10 decimals plus derived counts.
 
