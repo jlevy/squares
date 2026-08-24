@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 182
+count: 183
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -4654,3 +4654,33 @@ defects:
   regression: none
   bead: think-08l0
   recorded_in: TUTORIAL.md
+- id: D-183
+  title: The basin-event batch crashed before retaining an independently invalid endpoint
+  date: '2026-08-24'
+  layer: record
+  class: robustness
+  direction: flattering
+  detected_by: control_cell
+  latent_for: since BasinEvent/v3 made independent validity part of event construction
+  severity: high
+  status: outstanding
+  what: >-
+    Exp-026 produced three valid n=6 events, then seed 3 failed the independent packing
+    screen. validate_event raised before run() appended that fourth outcome, leaving a
+    three-line archive and aborting the batch despite the declared retain-every-stop
+    contract.
+  consequence: >-
+    An unattended campaign censors the exact invalid endpoints needed to diagnose the
+    producer and cannot distinguish a missing seed from an unattempted seed without its
+    terminal traceback. Successful prefixes survive while failed outcomes disappear.
+  fix: >-
+    Treat a finite independently invalid endpoint as a replayable blocked event rather
+    than an invalid record. Derive a specific promotion blocker, force scientific
+    admissibility false, retain the event atomically, and continue the declared seed
+    block.
+  regression: >-
+    A known overlapping endpoint must replay only with the independent-validity blocker;
+    forged admissibility or a missing blocker must fail. Resuming exp-026 must skip seeds
+    0 through 2 and retain seed 3.
+  bead: think-78ws
+  recorded_in: tools/basin_census.py

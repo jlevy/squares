@@ -45,7 +45,7 @@ ORACLE_TOL = 1e-10
 
 
 class EventError(ValueError):
-    """A retained event is incomplete, inconsistent, or invalid."""
+    """A retained event is incomplete or internally inconsistent."""
 
 
 def canonical_json(value: Any) -> str:
@@ -169,6 +169,8 @@ def make_event(
         promotion_blockers.append("producer_not_converged")
     if result.fixed_point_unsettled:
         promotion_blockers.append("unsettled_fixed_point_evaluation")
+    if not verification["valid"]:
+        promotion_blockers.append("independent_validity_failure")
     scientifically_admissible = (
         result.converged
         and all_accounted
@@ -294,8 +296,8 @@ def validate_event(event: dict[str, Any]) -> None:
     observed_screen = screen_pose(event["endpoint"])
     if event["verification"] != observed_screen:
         raise EventError("retained independent verification does not replay")
-    if not observed_screen["valid"]:
-        raise EventError("endpoint fails the independent validity screen")
+    if contract == CONTRACT_V2 and not observed_screen["valid"]:
+        raise EventError("historical v2 endpoint fails the independent validity screen")
 
     if contract == CONTRACT:
         evaluations = termination["fixed_point_evaluations"]
@@ -307,6 +309,8 @@ def validate_event(event: dict[str, Any]) -> None:
             expected_blockers.append("producer_not_converged")
         if unsettled:
             expected_blockers.append("unsettled_fixed_point_evaluation")
+        if not observed_screen["valid"]:
+            expected_blockers.append("independent_validity_failure")
         expected_admissible = (
             termination["producer_converged"]
             and expected_accounted
@@ -398,9 +402,12 @@ def run(args: argparse.Namespace) -> int:
         by_id[event_id] = event
         write_events(path, events)
         term = event["termination"]
+        status = "OK" if term["scientifically_admissible_terminal_event"] else "STOP"
         print(
-            f"OK n={args.n} seed={seed} side={event['endpoint']['side']:.12f} "
-            f"converged={term['producer_converged']} reason={term['reason']}"
+            f"{status} n={args.n} seed={seed} side={event['endpoint']['side']:.12f} "
+            f"converged={term['producer_converged']} "
+            f"valid={event['verification']['valid']} "
+            f"blockers={term['promotion_blockers']} reason={term['reason']}"
         )
     print(f"RETAINED {len(events)} events in {path}")
     return 0
@@ -497,6 +504,68 @@ def selftest() -> None:
             pass
         else:
             raise EventError("negative event wall time replayed successfully")
+
+        invalid_start = deterministic_start(2, 1, 1.6)
+        invalid_key = canonical_key(
+            invalid_pose["x"],
+            invalid_pose["y"],
+            invalid_pose["theta"],
+            invalid_pose["side"],
+        )
+        blocked = {
+            "contract": CONTRACT,
+            "event_id": digest({"contract": CONTRACT, "regime": regime, "n": 2, "seed": 1}),
+            "n": 2,
+            "seed": 1,
+            "regime": regime,
+            "start": {
+                "x": invalid_start[0],
+                "y": invalid_start[1],
+                "theta": invalid_start[2],
+            },
+            "endpoint": invalid_pose,
+            "termination": {
+                "producer_converged": True,
+                "reason": "selftest invalid endpoint",
+                "lp_solves": 1,
+                "angle_steps": 0,
+                "cell_changes": 0,
+                "wall_seconds": 0.0,
+                "fixed_point_evaluations": 1,
+                "fixed_point_settled": 1,
+                "fixed_point_unsettled": 0,
+                "all_probe_evaluations_accounted_for": True,
+                "scientifically_admissible_terminal_event": False,
+                "promotion_blockers": ["independent_validity_failure"],
+            },
+            "verification": screen_pose(invalid_pose),
+            "endpoint_key": {
+                "geometric": invalid_key.geometric,
+                "contact": invalid_key.contact,
+                "side": invalid_key.side,
+                "angle_signature": list(invalid_key.angle_signature),
+                "contact_count": invalid_key.contact_count,
+            },
+        }
+        write_events(path, [blocked])
+        read_events(path)
+        blocked["termination"]["scientifically_admissible_terminal_event"] = True
+        write_events(path, [blocked])
+        try:
+            read_events(path)
+        except EventError:
+            pass
+        else:
+            raise EventError("invalid endpoint forged scientific admissibility")
+        blocked["termination"]["scientifically_admissible_terminal_event"] = False
+        blocked["termination"]["promotion_blockers"] = []
+        write_events(path, [blocked])
+        try:
+            read_events(path)
+        except EventError:
+            pass
+        else:
+            raise EventError("invalid endpoint omitted its promotion blocker")
     print("BASIN EVENT SELFTEST PASSED")
 
 

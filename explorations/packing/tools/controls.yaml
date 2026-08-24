@@ -66,9 +66,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 182", "count: 20"]
+  replace: ["count: 183", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 182"
+  expect: "count 20 != 183"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md

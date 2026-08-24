@@ -88,7 +88,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [6]
-    state: ready
+    state: blocked
     priority: 1
     question: >-
       Does the same event contract remain complete at the first proved side-3 case, with
@@ -99,9 +99,14 @@ agenda:
     exit: four replayable events or one retained blocker; no component-count claim
     bead: think-wbra
     depends_on: [BC-003]
-    next_evidence: exp-026 plus its four-event JSONL archive and semantic replay
+    next_evidence: D-183 regression followed by a separately preregistered four-seed replication
     parallel_group: event-calibration
-    note: Claimed as exp-026 under the unchanged event contract.
+    note: >-
+      Exp-026 retains three admissible events, then crashes before retaining seed 3's
+      independent-validity failure. Larger event slices stop at D-183.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
   - id: BC-005
     purpose: tool_validation
     owner_focus: correctness

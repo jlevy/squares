@@ -1196,14 +1196,15 @@ The mutable size-by-size run order lives in the
 [basin-map confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md),
 not in this status document.
 It labels every cell as tool validation, measurement validation, or genuine research.
-The exact and event controls through `n = 5` are complete; BC-004 is the active `n = 6`
-tool-validation cell.
+The exact and event controls through `n = 5` are complete.
+BC-004 exposed D-183 at `n = 6` and blocks larger event slices until a clean replication
+retains every outcome.
 Component and census claims remain blocked on the later identity and coverage rows.
 
 ## Experiments Conducted
 
-There are 26 rounds registered in `series-000`; 25 are terminal and exp-026 is in
-progress. The terminal rounds record 763 agent-minutes and 25.5 wall-minutes.
+There are 26 rounds registered in `series-000`; all are terminal.
+They record 768 agent-minutes and 25.8 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1246,7 +1247,7 @@ archive beside it.
 | [exp-023](campaign/series/series-000-smoke-and-calibration/experiments/exp-023-h-021-n4-basin-event-v3.md) | 4 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 3 converged/admissible; one typed unsettled stop | **baseline** |
 | [exp-024](campaign/series/series-000-smoke-and-calibration/experiments/exp-024-h-021-n4-basin-event-v3-repair.md) | 4 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,301/14,301 evaluations settled; 4 admissible at side 2 | **baseline** |
 | [exp-025](campaign/series/series-000-smoke-and-calibration/experiments/exp-025-h-021-n5-basin-event-v3.md) | 5 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 valid; 14,219/14,219 evaluations settled; 4 admissible | **baseline** |
-| [exp-026](campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | preregistered four-seed tool-validation block; measurement pending | **in-progress** |
+| [exp-026](campaign/series/series-000-smoke-and-calibration/experiments/exp-026-h-021-n6-basin-event-v3.md) | 6 | positive control | H-021 | BasinEvent/v3 semantic replay | 3 valid/admissible retained; seed 3 crashes before retention | **blocked** |
 
 ### Cost and provenance
 
@@ -1277,8 +1278,9 @@ archive beside it.
 | exp-023 | 4 seeds, 10 s each | 12.506 s | 8 m | criterion | `8f20908` |
 | exp-024 | 4 seeds, 10 s each | 16.967 s | 15 m | criterion | `f15d036` |
 | exp-025 | 4 seeds, 10 s each | 14.473 s | 5 m | criterion | `5ab8dab` |
+| exp-026 | 4 seeds declared; 3 retained | 19.017 s | 5 m | error | `da6bac3` |
 
-### What the twenty-five rounds jointly establish
+### What the twenty-six rounds jointly establish
 
 **The numerical basin event trust boundary is now admissible through the declared
 `n = 5` tool-validation cell; component classification is not.** Exp-018 through exp-020
@@ -1298,11 +1300,15 @@ Exp-025 extends the unchanged event path to `n=5`: all four starts independently
 all 14,219 fixed-point evaluations settle, and the run observes three descriptors at two
 nonoptimal side values.
 Those descriptors are not component identities, and none of the four starts finds the
-proved optimum. The exact small-moduli controls remain valid; component identity is the
-next blocked layer. The `n=12` calibration returns exactly `4.0`, but that is not a
-known-answer guard.
-The runner’s full-pose independent verification boundary remains open
-under [D-044](defects.md); a producer-reported overlap scalar does not close it.
+proved optimum. Exp-026 then finds the next retention boundary: three `n=6` events reach
+side 3 and replay, but seed 3 fails independent validity and is censored when event
+validation raises before writing it.
+D-183 blocks the size ladder until a new, source-distinct replication retains that
+failure as a typed non-admissible event.
+The exact small-moduli controls remain valid; component identity is the next blocked
+layer. The `n=12` calibration returns exactly `4.0`, but that is not a known-answer
+guard. The runner’s full-pose independent verification boundary remains open under
+[D-044](defects.md); a producer-reported overlap scalar does not close it.
 
 **Trump’s exact pose is locally isolated.** Exp-013 retains all 512 raw active-feature
 selections as 128 derivative-distinct matrices.
@@ -1370,7 +1376,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 182 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 183 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -1378,7 +1384,7 @@ and checked in the gate.
 | soundness | 61 | asserted something false about the mathematics |
 | validity | 53 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 49 | recorded something its own evidence contradicts |
-| robustness | 14 | did not finish, or finished only by luck |
+| robustness | 15 | did not finish, or finished only by luck |
 | performance | 5 | worked, but cost far more than it should |
 
 Two observations the log exists to make.

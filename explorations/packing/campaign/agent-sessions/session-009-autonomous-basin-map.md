@@ -167,6 +167,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/results/exp-023-h-021-n4-basin-event-v3.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-025-h-021-n5-basin-event-v3.jsonl
+  - campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - campaign/schemas/agenda.schema.yaml
   - tools/basin_census.py
@@ -245,11 +246,14 @@ session:
     Exp-025 completes BC-003 in 14.47 seconds: all four n=5 events independently replay,
     all 14,219 fixed-point evaluations are settled, and no event descriptor is promoted
     to a terminal component. The cell observes three descriptors at two side values.
+  - >-
+    Exp-026 retains three admissible side-3 events with 12,777 settled evaluations, then
+    seed 3 fails independent validity and the batch crashes before writing its outcome.
+    D-183 records the flattering retention failure and stops the size ladder.
   stop_reason: null
   next_action: >-
-    Execute preregistered exp-026 only: four fixed n=6 seeds at 10 seconds each under a
-    90-second command cap. Treat it as tool validation and retain any typed stop;
-    component research remains blocked.
+    Close D-183's retention regression, commit it, and preregister a new n=6 four-seed
+    replication. Do not resume exp-026 under changed code and do not begin n=7.
 ---
 # Session 009 — Bounded Progress Before Scale
 
@@ -271,8 +275,8 @@ completes the n=4 v3 block.
 The historical v2 block remains promotion-blocked as recorded, and no endpoint
 descriptor has been promoted to a connected component.
 
-The next size is governed by the campaign agenda rather than this narrative: BC-004 is a
-bounded n=6 tool-validation slice.
+The size ladder is stopped at BC-004 by D-183 until an independently invalid endpoint
+can be retained as a typed event and the four-seed n=6 block is replicated.
 The separate n=5 connectivity question remains blocked until its component-identity
 controls are explicit.
 
