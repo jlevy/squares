@@ -5,7 +5,7 @@ title: Execute and document the 8-hour autonomous basin-map campaign
 kind: task
 status: in_progress
 priority: 0
-version: 30
+version: 31
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -24,10 +24,12 @@ child_order_hints:
   - is-01m0tbp7nwszshg4b9nngsjwh6
   - is-01m0tbtgpb92e81ndvw4xm9be6
 created_at: 2026-08-24T14:44:12.384Z
-updated_at: 2026-08-24T17:38:26.005Z
+updated_at: 2026-08-24T18:48:20.142Z
 ---
 Own the 2026-08-24 eight-hour goal from launch audit through durable results. Acceptance: reconcile the exact n-sequence and complete-vs-sampled map definition; close only launch-path tooling gaps; supervise one end-to-end round and forced failure; price the queue on this host; run and record every scientifically admissible cell until the wall budget, queue, or a declared stop fires; commit and push bounded checkpoints; monitor PR feedback; and finish with generated session, ledger, defect, bead, and PR state in sync. Never label endpoint-key saturation a complete basin map without the component identity and uncertainty criteria.
 
 ## Notes
 
 2026-08-24 checkpoint 5ab8dab pushed to PR #19. PR #20 is merged after an 11-finding semantic review (D-172..D-182); all child beads and think-tfbc are closed. The normal 30-step gate passed in 27s; 182 defects, 24 rounds, 9 sessions, 1 agenda reconcile. BC-003 is now the sole next ready cell: four fixed n=5 seeds at 10s each under a 60s command cap, tool_validation only. Stop and log any unsettled event; do not begin n5 component research.
+
+2026-08-24 BC-003 through BC-007 are now complete through the bounded n=9 performance cell. The source-bound BC-008 entry point passes static checks, semantic replay, tamper controls, and a one-second real run-path smoke test. Next slice: commit the entry point, preregister four n=10 perturbations, then execute under the declared 90-second command cap. Component-classified cells remain zero.
