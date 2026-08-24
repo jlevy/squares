@@ -5,7 +5,7 @@ title: Define lane-specific agent handoffs and evidence contracts
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 4
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 delegate: unknown@spud10.local
 labels:
@@ -18,7 +18,7 @@ parent_id: is-01m0r7q3zk8x6cg4e30d149698
 hold: null
 hold_until: null
 created_at: 2026-08-23T21:18:33.401Z
-updated_at: 2026-08-23T23:47:53.008Z
+updated_at: 2026-08-24T00:16:09.910Z
 started_at: 2026-08-23T23:30:08.501Z
 ---
 Document how work moves from Insight to Process to Efficiency to Correctness and back, including minimum inputs, immutable outputs, rejection states, escalation, and who may change hypotheses, acceptance rules, code, claims, or runtime budgets.
@@ -27,4 +27,4 @@ Acceptance: each lane has an agent brief with owned decisions and forbidden subs
 
 ## Notes
 
-2026-08-23 checkpoint: README now defines the persistent-goal + tbd outer loop, one-focus cycles, delegation return contract, latency tiers, routing rules, and stop conditions. Added validated campaign/agent-sessions/session-001-pr15-review-reset.md and ledger integration; six real delegations record outcome/evidence/files/checks/uncertainty/next action and available elapsed time. This is a concrete process-lane example, but the bead remains open for complete lane-specific briefs and a worked basin-atlas handoff through Insight, Process, Efficiency, and Correctness.
+2026-08-23 checkpoint in 5fee7f0: README defines the persistent-goal plus tbd outer loop, one-focus cycles, delegation return contract, latency tiers, routing and stop conditions. session-001 is a validated completed record with seven delegations and explicit elapsed-quality labels; ledger indexes it. Final gate passed in 126 seconds with 30 controls and 74 defects. This bead remains open for complete lane-specific briefs and a worked basin-atlas handoff through Insight, Process, Efficiency, and Correctness.

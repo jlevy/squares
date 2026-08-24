@@ -5,7 +5,7 @@ title: "Efficiency (Infrastructure): trustworthy experimental throughput"
 kind: epic
 status: in_progress
 priority: 1
-version: 21
+version: 22
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -30,7 +30,7 @@ child_order_hints:
   - is-01m0rdh1q6djg0e4xpv04ty41j
   - is-01m0rfbfrwtexvw63m42ngkx6g
 created_at: 2026-08-23T21:16:40.335Z
-updated_at: 2026-08-23T23:30:06.747Z
+updated_at: 2026-08-24T00:16:10.387Z
 ---
 Owns stable executors, profiling, batching, parallelism, caching, reproducible environments, observability, and measured agent-loop latency. This lane accelerates already specified work without weakening correctness or process controls. It hands versioned artifacts and benchmark evidence to Soundness and Process.
 
@@ -38,4 +38,4 @@ Acceptance: latency and throughput have reproducible baselines; the slowest loop
 
 ## Notes
 
-2026-08-23 stable baseline. The pushed PR checkpoint completed the normal gate in 108 seconds with 24 controls, but no durable per-stage breakdown was retained. Historical measured points remain: ~480 seconds original; 152 seconds after major optimization; 291-298 seconds for older strict/deep gates. The stashed 129-second isolation run is not a branch baseline. Current work is measured loop tiers, durable wall-time accounting, and profiling before optimization; no worktree-copy or capability/lease subsystem is planned.
+2026-08-23 pushed baseline 5fee7f0: normal gate 126 seconds with stage split soundness perimeter 34s, negative controls 31s, historical regressions 22s, LP 8s, lint 7s, atlas 5s, bead tree 4s and canonical identity 4s. The 30-control catalogue and 74-defect record pass. Optimize from measured profiles; no worktree-copy, capability-token or generalized lease subsystem is planned.

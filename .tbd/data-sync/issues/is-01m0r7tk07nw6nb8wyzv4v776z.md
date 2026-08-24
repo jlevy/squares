@@ -5,7 +5,7 @@ title: Maintain the review, defect logbook, and bead reconciliation map
 kind: task
 status: in_progress
 priority: 0
-version: 5
+version: 6
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -15,7 +15,7 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q3zk8x6cg4e30d149698
 created_at: 2026-08-23T21:18:32.967Z
-updated_at: 2026-08-23T23:58:58.257Z
+updated_at: 2026-08-24T00:16:09.661Z
 ---
 Keep one authoritative crosswalk from every technical review finding to its defect-logbook entry, remediation bead, evidential status, regression control, and final disposition. Reconcile generated defect views and the campaign ledger after each correction.
 
@@ -23,4 +23,4 @@ Acceptance: no finding lacks a defect ID or explicit non-defect rationale; every
 
 ## Notes
 
-2026-08-23 stabilized checkpoint: review crosswalk runs through F-27 / D-073. D-066–D-070 and D-072/D-073 are fixed and their beads closed after a 125-second normal gate with 29/29 controls and 73 reconciled defects; D-071 remains open. The hostile isolation/worktree detour is excluded from the branch and ten prototype beads are canceled as attic work. Branch is based directly on merged PR 14 at 8926a7c with no merge conflict; commit/push/CI are the remaining checkpoint steps.
+2026-08-23 pushed checkpoint 5fee7f0 to draft PR 15. The review crosswalk now runs through F-28 / D-074; D-066 through D-070 and D-072 through D-074 are fixed and their incident beads closed, while D-071 remains open. Final normal gate: 126 seconds, 30/30 controls, 74 reconciled defects. Fresh origin/main remains 8926a7c; GitHub reports MERGEABLE/CLEAN and no remote checks are configured. This bead remains active for the broader Correctness and Insight review.
