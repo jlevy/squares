@@ -355,12 +355,13 @@ out exactly, because the simplified version — “ten unavoidable points, eleve
 done” — misses the device that carries the proof.
 
 *Stage one.* Stromquist places **ten** points in the square of side `2 + 2√(4/5)`. Four
-sit at `(1, 1)`, `(s/2, s/2)`, `(1, s/2)` and `(3/2, 1)`; the rest are placed
-symmetrically. The vertical distance between the rows is `s/2 − 1 = √(4/5) ≈ 0.894`, and
-the triangles in the construction are congruent with sloping sides of length exactly 1.
-These ten points are **not** an unavoidable set, and the paper says so: “Nonavoidance
-lemmas apply to all of the regions shown *except for the rectangles at the top and
-bottom*.” A box can evade all ten, but only by sitting in one of those two rectangles.
+sit at `(1, 1)`, `(s/2, 1)`, `(3/2 − s/4, s/2)` and `(1/2 + s/4, s/2)`; the rest are
+placed symmetrically.
+The vertical distance between the rows is `s/2 − 1 = √(4/5) ≈ 0.894`, and the triangles
+in the construction are congruent with sloping sides of length exactly 1. These ten
+points are **not** an unavoidable set, and the paper says so: “Nonavoidance lemmas apply
+to all of the regions shown *except for the rectangles at the top and bottom*.” A box
+can evade all ten, but only by sitting in one of those two rectangles.
 
 *Stage two.* A second configuration of **twelve** points is introduced, chosen so that
 the escaping box — pinned to the top or bottom rectangle up to symmetry, by Lemmas 4 and

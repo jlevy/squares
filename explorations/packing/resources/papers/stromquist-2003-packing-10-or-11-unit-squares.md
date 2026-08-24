@@ -7,6 +7,10 @@
 **Archived:** 2026-08-22
 **Extraction:** pdfminer.six from the original PDF, cleaned for readability. Raw extraction preserved alongside as `stromquist-2003-packing-10-or-11-unit-squares.raw.md`.
 
+> ⚠️ **One repaired figure passage.** The raw multi-column extraction interleaves
+> the fractions in Figure 13's four defining coordinates. The Theorem 2 and Theorem 3
+> coordinate lists below were read directly from the rendered primary PDF, page 9.
+
 ---
 
 ## Abstract
@@ -160,7 +164,7 @@ Now, the thirteen points in Figure 12---the eight asterisks, the points $A$, $C$
 
 **Theorem 2.** Let $s = 2 + 2\sqrt{\frac{4}{5}} \approx 3.789$. Then eleven non-intersecting boxes cannot exist inside a square of side $s$.
 
-*Proof.* For this proof, fix $s = 2 + 2\sqrt{\frac{4}{5}}$ and let $S = [0, s]^2$. Consider the ten points in Figure 13. Four of these points have coordinates $(1, 1)$, $\left(\frac{s}{2}, \frac{s}{2}\right)$, $\left(1, \frac{s}{2}\right)$, $\left(\frac{3}{2}, 1\right)$, and the rest are placed symmetrically. The vertical distance between the rows of points is $\frac{s}{2} - 1 = \sqrt{\frac{4}{5}} \approx .894$. The triangles in the figure are all congruent, and the sloping sides have length 1.
+*Proof.* For this proof, fix $s = 2 + 2\sqrt{\frac{4}{5}}$ and let $S = [0, s]^2$. Consider the ten points in Figure 13. Four of these points have coordinates $(1, 1)$, $\left(\frac{s}{2}, 1\right)$, $\left(\frac{3}{2} - \frac{s}{4}, \frac{s}{2}\right)$, $\left(\frac{1}{2} + \frac{s}{4}, \frac{s}{2}\right)$, and the rest are placed symmetrically. The vertical distance between the rows of points is $\frac{s}{2} - 1 = \sqrt{\frac{4}{5}} \approx .894$. The triangles in the figure are all congruent, and the sloping sides have length 1.
 
 Nonavoidance lemmas apply to all of the regions shown except for the rectangles at the top and bottom. If 11 boxes are to be packed into the square, at least one of them must be placed in one of those rectangles, roughly as shown in the figure (up to symmetry). From Lemmas 4 and 6 we can see that this box must contain all three of the points marked "A" in Figure 14:
 
@@ -194,7 +198,7 @@ The proofs are easier than in the general case and are omitted. With these more 
 
 **Theorem 3.** Let $s = 2 + \frac{4}{3}\sqrt{2} \approx 3.886$. Then eleven non-intersecting boxes cannot exist inside a square of side $s$, if each box has orientation $0^\circ$ or $45^\circ$ with respect to the square.
 
-*Proof.* Now fix $s = 2 + \frac{4}{3}\sqrt{2}$ and let $S = [0, s]^2$. Consider ten points defined exactly as in Figure 13---four of these points have coordinates $(1, 1)$, $\left(\frac{s}{2}, \frac{s}{2}\right)$, $\left(1, \frac{s}{2}\right)$, $\left(\frac{3}{2}, 1\right)$---but with the new value of $s$. If eleven boxes are to be packed into the square, one of them will have to avoid the marked points. This is impossible for a box with $0^\circ$ orientation.
+*Proof.* Now fix $s = 2 + \frac{4}{3}\sqrt{2}$ and let $S = [0, s]^2$. Consider ten points defined exactly as in Figure 13---four of these points have coordinates $(1, 1)$, $\left(\frac{s}{2}, 1\right)$, $\left(\frac{3}{2} - \frac{s}{4}, \frac{s}{2}\right)$, $\left(\frac{1}{2} + \frac{s}{4}, \frac{s}{2}\right)$---but with the new value of $s$. If eleven boxes are to be packed into the square, one of them will have to avoid the marked points. This is impossible for a box with $0^\circ$ orientation.
 
 The interior sloping lines now have length $\sqrt{\frac{10}{9}}$, but their components in the direction of a $45^\circ$ unit vector are at most 1, so Lemma 7 applies to the triangles in the figure. It follows that a $45^\circ$ box that avoids the points must be (up to symmetry) in approximately the position shown in Figure 13. This box must contain three points like those marked "A" in Figure 14, but now they have these coordinates:
 

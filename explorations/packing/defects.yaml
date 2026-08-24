@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 145
+count: 146
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3613,3 +3613,29 @@ defects:
     reject the contradiction before generated views or a commit can pass.
   bead: think-csji
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-146
+  title: The Stromquist Figure 13 transcription changed its defining point set
+  date: '2026-08-24'
+  layer: docs
+  class: validity
+  direction: flattering
+  detected_by: inspection
+  latent_for: two days and one registered proof hypothesis
+  severity: high
+  status: fixed
+  what: >-
+    The cleaned transcription and downstream research report replaced Stromquist's
+    Figure 13 seed coordinates `(1,1)`, `(s/2,1)`, `(3/2-s/4,s/2)`, and
+    `(1/2+s/4,s/2)` with `(1,1)`, `(s/2,s/2)`, `(1,s/2)`, and `(3/2,1)`. The same
+    corrupted tuple appeared in the transcription of Theorem 3.
+  consequence: >-
+    H-010 could have passed a complete falsifier and certificate suite for a point set
+    that is not the one in the primary proof. Because the wrong coordinates still look
+    symmetric and plausible, the result would have appeared source-faithful.
+  fix: >-
+    Read the four coordinates directly from rendered primary PDF page 9, corrected both
+    theorem passages and the research report, and flagged the repaired transcription in
+    the archive reconstruction table.
+  regression: none; think-bvy9 will bind the executable Figure 13 tuple before H-010 can run
+  bead: think-abdh
+  recorded_in: resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md

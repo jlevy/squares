@@ -2,7 +2,7 @@
 
 # Defect log
 
-145 defects recorded across the packing toolchain.
+146 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `control_cell` | 8 | a cell of the sweep whose answer is known in advance |
 | `review` | 103 | a human or agent reading the work against a checklist |
 | `anomaly` | 6 | a result that made no sense, chased down |
-| `inspection` | 15 | reading the code or the design with intent |
+| `inspection` | 16 | reading the code or the design with intent |
 | `drift_check` | 4 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 6 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 6 of 145, and none of the 49 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 6 of 146, and none of the 49 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,14 +36,14 @@ The line worth reading twice: **the automated gate caught 6 of 145, and none of 
 | verifier | 1 |
 | record | 39 |
 | tooling | 37 |
-| docs | 46 |
+| docs | 47 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
 | soundness | 49 |
-| validity | 41 |
+| validity | 42 |
 | bookkeeping | 40 |
 | robustness | 11 |
 | performance | 4 |
@@ -289,3 +289,4 @@ This is the actionable list.
 | [D-143](tools/check_small_n_moduli.py) | 2026-08-24 | tooling | soundness | flattering | `review` | high | fixed | The n = 4 source replay attributed an unreported f-vector to Alpert et al. |
 | [D-144](tools/check_small_n_moduli.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | The orientation identity check compared two identical hard-coded tuples |
 | [D-145](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | bookkeeping |  | `review` | medium | fixed | A broad integration edit fixed the wrong defect record |
+| [D-146](resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md) | 2026-08-24 | docs | validity | flattering | `inspection` | high | fixed | The Stromquist Figure 13 transcription changed its defining point set |
