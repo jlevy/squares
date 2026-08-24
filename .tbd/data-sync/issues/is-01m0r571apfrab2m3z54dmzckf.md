@@ -5,14 +5,14 @@ title: "Reconcile PR #14 with the codex review branch: colliding D-numbers, and 
 kind: task
 status: closed
 priority: 0
-version: 4
+version: 5
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - focus-process
 dependencies: []
 parent_id: is-01m0pw7redm194km37gpb3cvmf
 created_at: 2026-08-23T20:32:55.125Z
-updated_at: 2026-08-23T21:32:17.426Z
+updated_at: 2026-08-24T00:31:19.331Z
 closed_at: 2026-08-23T21:32:17.425Z
 close_reason: "Resolved on the merged-main review stack: PR #14 source is an ancestor of this branch; colliding review defects were renumbered D-036/D-037; the source-built golden was regenerated and reviewed under corrected convergence semantics; strict/deep and later post-merge gates passed. Continuing golden-policy work is tracked separately as D-059 on think-zt29."
 ---
@@ -46,13 +46,4 @@ origin/codex/pr14-square-packing-review has REBASED onto c412b8c, so it now carr
 
 ## Notes
 
-2026-08-23 20:38. PR #14 MERGED as 8926a7c. main now carries D-001..D-035 with count: 35, so the collision described above is live from this moment: the codex branch's own D-034 and D-035 now sit against main's different D-034 and D-035.
-
-CORRECTION to the risk assessment, in the reassuring direction. The collision cannot land silently. tools/validate_schemas.py does not merely check that count == len(defects); it requires the ids to be EXACTLY contiguous from D-001:
-
-    if ids != [f"D-{i:03d}" for i in range(1, len(ids) + 1)]:
-        errs.append("defects: ids are not contiguous from D-001")
-
-A merge that leaves two entries claiming D-034 breaks contiguity and fails by name in the gate. So this is a loud failure, not a quiet one, and no duplicate-id guard needs building. Renumbering theirs to D-036/D-037 is bookkeeping the gate will insist on rather than a trap.
-
-What is still quiet, and remains the item to actually worry about, is point 2 above: their convergence fix changes what `converged` means, and NOTHING fails if the golden is left un-regenerated. The stale numbers stay green because they are internally consistent. That asymmetry is worth noticing on its own -- the id collision is trivial and loudly guarded, while the measurement invalidation is significant and has no guard at all, which is the same pattern the defect log keeps recording.
+2026-08-23 closure clarification. The D-number collision and convergence-regeneration work remain validly closed. Regeneration preserved convergence counts and exposed the useful n=5 six-of-six no-saturation observation. Golden portability is not owned by this closed bead: predicate-level cross-environment work is think-osyp, while D-059's broader mathematical-versus-characterization policy is integrated under think-zt29.

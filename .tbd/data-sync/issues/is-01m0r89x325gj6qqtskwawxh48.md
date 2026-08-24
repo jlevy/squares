@@ -1,61 +1,26 @@
 ---
 type: is
 id: is-01m0r89x325gj6qqtskwawxh48
-title: The golden's annealer_gap is a non-portable fixture, and the review's repair does not fix it
+title: Separate portable mathematical checks from stochastic golden characterization
 kind: bug
 status: open
 priority: 0
-version: 2
+version: 4
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
 parent_id: is-01m0pqfp4rm5r4fy7ys6t03h0w
 created_at: 2026-08-23T21:26:54.818Z
-updated_at: 2026-08-23T22:47:03.137Z
+updated_at: 2026-08-24T00:31:18.565Z
 ---
-Recorded 2026-08-23 after verifying the PR #15 review's F-16 reproduction claim and finding it does not hold. Read this BEFORE implementing F-16's stated repair.
+D-059 and D-075. PR #16 retained a useful like-for-like cross-environment discrepancy: after source builds, the rendered golden differed at fixed n=10 seeds across two environments. A fresh PR #15 integration run of tools/golden_basins.py --deep passed locally in about 91 seconds, while PR #16 records a generic rebuilt-map mismatch elsewhere.
 
-WHAT THE REVIEW CLAIMS: "The committed file did not reproduce from the checked-in engine. After an explicit release build, fixed seed 7 at n=10 annealed to gap +0.077126752369 and quenched to (8 + 5*sqrt(2))/4 ... The standalone command did not build the engine, so an untracked stale binary could supply its supposedly fixed inputs." Its repair: build the source-locked engine before every standalone rebuild.
+The evidence does not identify which mathematical predicate failed in the other environment: golden_basins.py labels any rendered-byte drift under the aggregate ORACLE FAILURES heading. It also does not establish the proposed floating-point/toolchain cause because the other run did not retain a complete fingerprint or raw per-predicate result. The earlier comparison of seed 14 against seed 7 was invalid and remains retracted.
 
-WHAT ACTUALLY HAPPENS: on merged main, after `cargo build --release` of the checked-in engine, n=10 seed 7 gives annealer gap +0.021003996487 and quenches to (6 + sqrt(2))/2 -- matching the committed golden. Three consecutive runs gave byte-identical 3.728110777674047. The fixture reproduces. n=5 matches too.
+The defect is broader than annealer_gap. The byte-compared rendering includes stochastic endpoint identities, discovery counts, frequencies, found_optimum, and trajectory data. Dropping one scalar would not make that surface portable.
 
-There are now THREE values for one nominally fixed input:
-    +0.021003996488   committed golden on main
-    +0.021003996487   this environment, clean build, 3/3 stable
-    +0.077126752369   the PR #15 review text
-    +0.000493446      PR #15's OWN committed golden
-
-PR #15 does not touch sqsearch/ or perimeter_test.py, so the annealer source is identical on both branches. run_chain is budget-driven with no wall-clock term, chains are keyed by (seed, chain), and the reduction is a deterministic loop over a collected Vec -- so this is not core count, not scheduling, and both parties observed run-to-run stability.
-
-THE REAL DEFECT: a simulated annealer is chaotic. One ULP in a single accept/reject comparison diverges the trajectory completely. With lto = "fat", codegen-units = 1, opt-level = 3, a different Rust version or target microarchitecture changes float contraction and the output changes entirely while staying perfectly deterministic within each environment. The fixture is not stale, it is NON-PORTABLE.
-
-WHY THIS MATTERS MORE THAN THE DIAGNOSIS IT REPLACES:
-- the prescribed repair does not fix it. Building the engine first is exactly what was done here, and it still differs from PR #15.
-- PR #15's own committed golden carries the same defect. Its 0.000493446 will not reproduce elsewhere either. The branch shipped a fresh instance of the bug it diagnosed.
-- an agent who implements the stated repair will believe the problem is solved.
-
-FIX: the ladder's ORACLE is robust -- every environment quenched to the proved optimum and recognised the right closed form. Only the recorded trajectory scalar moves. So assert the oracle and stop committing the trajectory: drop annealer_gap from the byte-compared surface (keep it as printed diagnostic output), or store it with an explicit tolerance plus a recorded toolchain and CPU fingerprint. Do not chase build hermeticity for a chaotic search.
+Acceptance: define a cross-environment mathematical surface with individually reported convergence, retained-pose validity, and proved-value predicates; define a separate versioned characterization surface; retain raw output, endpoint poses, engine binary digest, Rust version, target, CPU/host, proposer, quench, equivalence policy, seeds, and budgets; run the same artifact on at least two environments; and update D-059/golden policy from the observed predicate-level comparison. Do not claim the post-quench oracle or the cause is portable before this experiment.
 
 ## Notes
 
-2026-08-23 22:40. CORRECTION plus a decisive test.
-
-CORRECTION TO MY OWN EVIDENCE: the original write-up tabulated PR #15's committed golden (+0.000493446 at n=10) as a fourth conflicting value for one fixed input. That was WRONG. Their branch changed LADDER to (n, seed) pairs and moved n=10 to seed 14, so their row is a different experiment from the seed-7 row. Retracted.
-
-LIKE-FOR-LIKE, n=10, this environment, engine built from source:
-    seed 7   here +0.021003996487, and the quench reaches the proved optimum.
-             There: their LADDER comment says seed 7 "does not do that with the checked-in engine", which is why they moved off it.
-    seed 14  here +0.032867764695.
-             There: committed +0.000493446, reaching the proved optimum.
-
-The environments disagree at BOTH seeds, in opposite directions, two orders of magnitude apart at the same seed. Stronger evidence than the retracted comparison, not weaker.
-
-DECISIVE TEST. PR #15 marks the source-build repair done and selects control seeds to stabilise the ladder. That is a falsifiable prediction: their golden should then reproduce anywhere after a source build. Checked out their branch, built their engine with cargo build --release, ran THEIR tools/golden_basins.py --deep:
-
-    ORACLE FAILURES:
-      the rebuilt map differs from the committed golden
-    GOLDEN BASIN CHECKS FAILED
-
-Their fix, their code, their fixture, a different machine: it fails. Selecting control seeds makes it worse rather than better, because it tunes the fixture to the machine that chose the seeds.
-
-The oracle survives everywhere tested -- every environment reached the proved optimum and the right closed form. Only the recorded trajectory moves. Assert the oracle; drop annealer_gap from the byte-compared surface, or store it with a tolerance plus a toolchain and CPU fingerprint.
+2026-08-23 PR #16 integration correction. The original bead correctly discovered that source-build hermeticity did not guarantee byte-identical output, but overclaimed that every post-quench oracle survived and that only annealer_gap moved. The generic failure output cannot support that conclusion, and the full stochastic map remains compared. PR #16's five-commit correction history and like-for-like discrepancy are preserved in PR #15; D-075 records the overclaim. Work remains open under the acceptance criteria above.
