@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 270
+count: 274
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -6966,3 +6966,102 @@ defects:
   regression: precommit review compares every active phase next action with its latest evidence
   bead: think-ygpr
   recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-271
+  title: A phase rotation used an undeclared transition label
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted phase-12 opening
+  severity: low
+  status: fixed
+  what: >-
+    The first phase-12 record used `entered_by: timebox_rotation` to describe the phase-11
+    hard stop, but that intuitive phrase is not one of the four values declared by the
+    enforced session contract.
+  consequence: >-
+    The campaign ledger correctly refused the checkpoint rather than accepting a new
+    transition vocabulary that other agents and generated views do not understand.
+  fix: >-
+    Classify the scheduled hard-stop rotation as `planned_checkpoint` and rerun the
+    ledger validator before collecting the remaining CI receipt.
+  regression: packing-ledger check validates every workflow-phase entered_by value
+  bead: think-sx6j
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-272
+  title: The macOS expected-failure guard rejected a recovered deep golden
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one repaired D-203 checkpoint
+  severity: medium
+  status: outstanding
+  what: >-
+    The temporary macOS classifier correctly required D-203's exact deep-golden failure
+    and rejected every other outcome. After the strict-IPM repair made the focused deep
+    golden pass, that guard deliberately converted the recovered result into a red CI job.
+  consequence: >-
+    PR 29's macOS job failed even though all seven proved ladder rungs converged and the
+    rebuilt basin map matched the golden, preventing the repaired portable state from
+    becoming a green checkpoint.
+  fix: >-
+    Remove the obsolete expected-failure classifier and its dedicated tests, run the
+    focused deep golden directly as a blocking macOS step, and retain a workflow control
+    that forbids `continue-on-error` or the old wrapper.
+  regression: >-
+    the workflow contract requires one direct blocking `packing-validate --deep --only
+    "golden basin maps"` macOS step, and both PR jobs must pass
+  bead: think-8qco
+  recorded_in: ../../.github/workflows/packing-validation.yml
+- id: D-273
+  title: The direct-blocking workflow test admitted advisory variants
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated D-272 draft, before commit
+  severity: high
+  status: fixed
+  what: >-
+    The first D-272 test selected one step with `next`, matched the expected command as a
+    substring, and checked the retired wrapper only inside that selected step.
+  consequence: >-
+    The test could pass if a second obsolete wrapper were added, if `|| true` or `; true`
+    masked the direct command's exit status, or if job-level `continue-on-error` made the
+    whole macOS job advisory. It therefore did not establish the blocking property it
+    claimed to test.
+  fix: >-
+    Require no job- or step-level `continue-on-error`, exactly one focused deep step,
+    normalized exact command equality, and absence of the old wrapper from every macOS
+    run command.
+  regression: the strengthened workflow contract passes ten focused module-boundary tests
+  bead: think-8aw8
+  recorded_in: tests/test_module_boundaries.py
+- id: D-274
+  title: The delegated promotion check named deleted paths and left one long assertion
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one delegated D-272 draft, before integration
+  severity: low
+  status: fixed
+  what: >-
+    The first focused Ruff command still named both classifier files after deleting them,
+    and the replacement module-boundary assertion was unformatted and exceeded the line
+    limit at line 215.
+  consequence: >-
+    The delegated check failed for stale command scope and formatting rather than the
+    workflow contract, so its first receipt was not admissible integration evidence.
+  fix: >-
+    Remove the deleted paths from the check, format the remaining test, and rerun focused
+    format, lint, and pytest commands against the live file set.
+  regression: focused Ruff format and lint pass, and all ten module-boundary tests pass
+  recurrence_of: D-268
+  bead: think-3bg6
+  recorded_in: tests/test_module_boundaries.py

@@ -2,15 +2,15 @@
 
 # Defect log
 
-270 defects recorded across the packing toolchain.
+274 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **70 soundness defects** — the system asserting something false about the mathematics. 58 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **92 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255).
-- **28 are still open** (outstanding or contained), every one carrying a bead.
+- **92 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268).
+- **29 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 17 | a cell of the sweep whose answer is known in advance |
-| `review` | 171 | a human or agent reading the work against a checklist |
+| `review` | 172 | a human or agent reading the work against a checklist |
 | `anomaly` | 11 | a result that made no sense, chased down |
 | `inspection` | 30 | reading the code or the design with intent |
 | `drift_check` | 15 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 23 | the automated test suite |
+| `gate` | 26 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 23 of 270, and none of the 70 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 26 of 274, and none of the 70 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,8 +34,8 @@ The line worth reading twice: **the automated gate caught 23 of 270, and none of
 | engine | 9 |
 | quench | 21 |
 | verifier | 4 |
-| record | 78 |
-| tooling | 75 |
+| record | 79 |
+| tooling | 78 |
 | docs | 83 |
 
 ## By kind
@@ -43,8 +43,8 @@ The line worth reading twice: **the automated gate caught 23 of 270, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 70 |
-| validity | 68 |
-| bookkeeping | 96 |
+| validity | 69 |
+| bookkeeping | 99 |
 | robustness | 28 |
 | performance | 8 |
 
@@ -180,6 +180,7 @@ This is the actionable list.
 | D-217 | contained | medium | A parallel validation wrapper discarded a live command receipt | `think-b3bm` |
 | D-222 | contained | medium | A delegated read-only audit launched an explicitly excluded deep gate | `think-ysz2` |
 | D-239 | outstanding | medium | Validation steps have no outer deadline or process-group cleanup | `think-tx0b` |
+| D-272 | outstanding | medium | The macOS expected-failure guard rejected a recovered deep golden | `think-8qco` |
 
 ## Every defect
 
@@ -455,3 +456,7 @@ This is the actionable list.
 | [D-268](tests/test_research_contracts.py) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Focused fallback checks omitted the Python format gate |
 | [D-269](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | A session delegation used an undeclared timing-quality value |
 | [D-270](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | low | fixed | Phase 11 retained a next action that its own evidence had completed |
+| [D-271](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | A phase rotation used an undeclared transition label |
+| [D-272](../../.github/workflows/packing-validation.yml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | outstanding | The macOS expected-failure guard rejected a recovered deep golden |
+| [D-273](tests/test_module_boundaries.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The direct-blocking workflow test admitted advisory variants |
+| [D-274](tests/test_module_boundaries.py) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The delegated promotion check named deleted paths and left one long assertion |

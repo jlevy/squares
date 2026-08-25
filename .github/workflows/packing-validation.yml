@@ -80,9 +80,8 @@ jobs:
           uv run --frozen --all-extras --group dev
           packing-validate --jobs 2 --inner-jobs 1
 
-      # D-203 owns this exact expected failure. The classifier fails on a changed
-      # error and on a pass, which means neither outcome can disappear into CI noise.
-      - name: Assert the known deep-golden portability gap
+      - name: Run the focused deep-golden portability check
         run: >-
-          uv run --frozen --all-extras --group dev python
-          -m devtools.check_known_macos_golden_drift
+          uv run --frozen --all-extras --group dev
+          packing-validate --deep --only "golden basin maps"
+          --jobs 1 --inner-jobs 1

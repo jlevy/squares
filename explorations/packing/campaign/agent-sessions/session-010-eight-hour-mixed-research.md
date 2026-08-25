@@ -577,7 +577,7 @@ session:
       Review the committed D-203 fallback independently, confirm both CI platforms, and
       run only the retained n=4 seed-0 path to decide whether the repair restores a
       converged producer result without changing its value or screen.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: >-
       Phase 10's source and deterministic controls are green and independently reviewed;
@@ -598,9 +598,9 @@ session:
     fallback: >-
       Keep D-203 and think-nr5w open with the exact committed control or seed-level blocker.
     outcome: >-
-      The one authorized seed-0 replay now converges at the proved side 2 with every
-      fixed-point evaluation settled and an independently valid packing; phase closure
-      awaits replacement cross-platform CI after D-268's test-format failure.
+      The one authorized seed-0 replay converges at the proved side 2 with every
+      fixed-point evaluation settled and an independently valid packing. The replacement
+      Linux job is green; macOS remained pending at the hard stop, so D-203 stays open.
     evidence:
     - >-
       The seed-0 quench returned side 2.0, converged true, 4,293 LP solves, 38 angle
@@ -619,10 +619,113 @@ session:
     - >-
       After the repair, the complete 31-step local gate passed in 99.46 wall-seconds,
       including all 60 behavioral tests and all 62 mutation controls.
-    stop_reason: null
+    - >-
+      PR 29 Linux validation passed in 3m01s at head 8c20020; macOS portability remained
+      pending when the phase reached its 03:08 hard stop.
+    stop_reason: >-
+      The phase reached its declared twenty-minute boundary with the single seed and
+      local/Linux receipts complete but macOS still pending; no experiment was extended
+      or rerun merely to wait for external CI.
     next_action: >-
-      Push the D-268 checkpoint and require green Linux plus macOS CI before closing
-      this phase or D-203.
+      Open one bounded process-review phase to collect macOS's terminal receipt and
+      close D-203 only if both committed platform jobs are green.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: work
+    focus: process
+    objective: >-
+      Collect the terminal macOS receipt for committed head 8c20020, reconcile the
+      portable checkpoint without rerunning research, and decide the narrow D-203 bead
+      closure before rotating to frozen order 6.
+    status: stopped
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      Phase 11 reached its hard stop after Linux passed while macOS was still pending;
+      the mathematical and local evidence is complete, leaving only a bounded portable
+      checkpoint decision.
+    budget_minutes: 10
+    started_at: '2026-08-25T03:08:07-07:00'
+    deadline_at: '2026-08-25T03:18:07-07:00'
+    expected_output: >-
+      One terminal macOS status for head 8c20020, an exact D-203/think-nr5w disposition,
+      synchronized records and beads, and no claim about any unrun golden or seed.
+    validation_command: gh pr checks 29 --watch --interval 10
+    kill_condition: >-
+      Stop at the first failed platform receipt or at 03:18; do not rerun a seed, golden,
+      platform job, or complete local gate in this phase.
+    fallback: >-
+      Preserve the exact pending or failed CI receipt, leave D-203 open, and rotate to
+      the first independent dependency-ready slice.
+    outcome: >-
+      Linux passed, and the macOS focused deep golden also passed all seven proved
+      ladder rungs and matched the committed map. The macOS job is red only because its
+      temporary D-203 expected-failure classifier rejects a successful probe.
+    evidence:
+    - Linux validation passed in 3m01s at committed head 8c20020.
+    - >-
+      The macOS focused deep run completed in 85.10 wall-seconds: n=4 converged 4/4,
+      n=5 converged 6/6, every ladder value matched its proof, and `GOLDEN BASIN CHECKS
+      PASSED`.
+    - >-
+      `devtools.check_known_macos_golden_drift` then exited one with its intentional
+      instruction to remove the D-203 expected-failure contract and make the deep check
+      blocking.
+    stop_reason: >-
+      The first terminal macOS receipt was a CI failure, so the phase stopped at its
+      declared kill condition without rerunning any platform job, seed, or golden.
+    next_action: >-
+      Open one evidence-earned W7 repair to replace the obsolete expected-failure
+      wrapper with the same focused deep command as a direct blocking macOS step.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Resolve D-272 by deleting only the obsolete macOS expected-failure classifier and
+      making its unchanged focused deep-golden command a direct blocking workflow step,
+      with a deterministic workflow contract and no golden or numerical change.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The portable probe itself passed; only the temporary guard that was designed to
+      demand promotion now fails, earning one narrow workflow repair.
+    budget_minutes: 20
+    started_at: '2026-08-25T03:10:01-07:00'
+    deadline_at: '2026-08-25T03:30:01-07:00'
+    expected_output: >-
+      One direct blocking macOS deep-golden step, removal of the obsolete classifier and
+      its dedicated tests, focused workflow tests, independent review, and a pushed CI
+      checkpoint.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --all-extras --group dev
+      pytest -q tests/test_module_boundaries.py
+    kill_condition: >-
+      Stop by 03:30 or at the first semantic change to the golden command; do not rerun
+      the deep golden locally, change a threshold, or broaden the workflow refactor.
+    fallback: >-
+      Retain D-272 and the exact passing macOS transcript, leave D-203 open, and preserve
+      the last pushed checkpoint.
+    outcome: >-
+      The obsolete classifier and its dedicated test are removed; macOS now runs the
+      identical focused deep command directly and blockingly. Independent review found
+      and resolved D-273's advisory-variant gap, with no remaining P0/P1 in the delta;
+      D-272 and D-203 still await fresh portable CI.
+    evidence:
+    - >-
+      The workflow has exactly one focused deep step, no job- or step-level
+      `continue-on-error`, and no reference to the retired classifier.
+    - >-
+      Exact normalized command comparison rejects extra arguments, shell-masked success,
+      duplicate steps, or a changed jobs/inner-jobs contract.
+    - Focused Ruff format and lint pass, and all ten module-boundary tests pass in 0.67 seconds.
+    - >-
+      Independent re-review confirms D-273 fixed and reports no remaining P0/P1; no
+      golden, threshold, quench, or numerical behavior changed.
+    - >-
+      The normal complete gate passes all 31 steps in 97.68 wall-seconds, including 59
+      behavioral tests and all 62 mutation controls.
+    stop_reason: null
+    next_action: Commit and push the reviewed D-272 promotion, then await both fresh CI jobs.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -1524,9 +1627,48 @@ session:
     elapsed_quality: platform_measured
     next_action: Record D-268 and run the complete validation surface before push.
     phase: 11
+  - task: Promote the passing macOS deep probe to one direct blocking workflow step.
+    operator: /root/macos_guard_promotion
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Replaced the obsolete D-203 classifier with the identical direct focused deep
+      command, deleted the classifier and its dedicated test, and strengthened the
+      surviving workflow contract after review.
+    evidence:
+    - Focused Ruff format and lint pass.
+    - All ten module-boundary tests pass in 0.67 seconds after the D-273 correction.
+    files:
+    - ../../.github/workflows/packing-validation.yml
+    - tests/test_module_boundaries.py
+    checks: [Focused Ruff format, Ruff lint, and module-boundary pytest.]
+    uncertainty: Fresh Linux and macOS jobs have not yet run on the promoted workflow.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Submit the minimal workflow delta to independent review and portable CI.
+    phase: 13
+  - task: Independently review the D-272 promotion and its blocking test contract.
+    operator: /root/n4_ipm_fallback_review
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Found D-273's P1 advisory-variant gap, verified the strengthened exact contract,
+      and reported no remaining P0/P1 in the final delta.
+    evidence:
+    - >-
+      The final test forbids job- and step-level advisory execution, requires one exact
+      command, and scans every macOS run step for the retired wrapper.
+    files: []
+    checks: [Read-only workflow/deletion/test review and one focused contract test.]
+    uncertainty: D-272 and D-203 still require fresh portable CI before closure.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Accept the narrow delta subject to normal local and portable CI gates.
+    phase: 13
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - campaign/ledger.md
+  - ../../.github/workflows/packing-validation.yml
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
@@ -1538,6 +1680,7 @@ session:
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
   - tests/fixtures/n4_seed0_highs_status4.yaml
   - tests/test_research_contracts.py
+  - tests/test_module_boundaries.py
   - src/sqpack/research/quench.py
   - defects.yaml
   - defects.md
@@ -1613,10 +1756,20 @@ session:
     The replacement tree passes all 31 complete local validation steps in 99.46
     wall-seconds, including 60 behavioral tests, 62 mutation controls, 269 synchronized
     defects, and the campaign ledger.
+  - PR 29 Linux validation passed in 3m01s at head 8c20020.
+  - >-
+    The macOS focused deep golden passed all seven ladder rungs in 85.10 seconds, then
+    D-272's obsolete expected-failure classifier intentionally made the CI job red.
+  - >-
+    Phase-13 focused workflow checks pass ten of ten tests; independent review found and
+    fixed D-273's P1 advisory-variant gap and reports no remaining P0/P1.
+  - >-
+    The final D-272 tree passes all 31 normal validation steps in 97.68 wall-seconds,
+    including 59 behavioral tests, 62 mutation controls, and 274 synchronized defects.
   stop_reason: null
   next_action: >-
-    Push the D-268 repair checkpoint and require green Linux plus macOS CI before
-    closing phase 11 and D-203.
+    Commit and push the final D-272 delta, then require both fresh CI jobs before
+    closing D-272 or D-203.
 ---
 ## Session Boundary
 

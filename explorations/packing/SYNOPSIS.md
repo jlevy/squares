@@ -1758,14 +1758,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 270 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 274 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 70 | asserted something false about the mathematics |
-| validity | 68 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 96 | recorded something its own evidence contradicts |
+| validity | 69 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 99 | recorded something its own evidence contradicts |
 | robustness | 28 | did not finish, or finished only by luck |
 | performance | 8 | worked, but cost far more than it should |
 
@@ -1775,7 +1775,7 @@ Two observations the log exists to make.
 where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught twenty-three defects in 270, and no soundness defect
+**The automated gate has caught twenty-six defects in 274, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2027,6 +2027,9 @@ zero duality gap. The failure is dual-simplex presolve/postsolve instability on 
 near-degenerate optimal face.
 Strict `highs-ipm` solves the identical LP with zero original-row residual; default
 tolerances and presolve-off simplex are rejected because their residuals exceed `1e-10`.
+[D-272](defects.md) keeps the portable checkpoint red for one narrower reason: the
+temporary macOS expected-failure classifier correctly rejects the now-passing focused
+deep golden until that unchanged command is promoted to a direct blocking CI step.
 [D-266](defects.md) records a soundness error caught in the first fallback draft: a
 primary status 4 followed by IPM status 2 was briefly promoted to mathematical
 infeasibility. The corrected classifier reserves infeasible for a sole primary status-2
