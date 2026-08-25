@@ -15,9 +15,10 @@ experiment:
   subject:
     label: exact branchwise fixed-side tangent-cone factorization at n = 5
     engine: n = 5 tangent-inventory checker 0.1.0
+    engine_commit: b8d0104
     precision: exact
     host_system: macOS arm64, Apple M1 Pro
-    selftest_passed: false
+    selftest_passed: true
   instance: {axis: n, point: 5, role: target}
   method:
     control: >-
@@ -31,6 +32,8 @@ experiment:
     runs_per_condition: 1
     interleaved: false
     operator: openai-codex
+    commit: b8d0104
+    dirty: false
     entry_point: explorations/packing/cases/n5/tangent_inventory.py
     command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
@@ -44,8 +47,6 @@ experiment:
       and replay caps; stop on source drift, incomplete branch coverage, a failed exact
       certificate, a surviving control, a nonlinear overclaim, or retained-record drift
     record: campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
-  lease:
-    expires: '2026-08-25T09:00:00Z'
   results:
   - shape: determination
     question: >-
@@ -53,10 +54,18 @@ experiment:
       point, and B after identifying the certified exp-034 sheet without treating
       exp-036's one obstructed orientation as a quotient symmetry?
     role: outcome
-    outcome: no_progress
-    checked_by: preregistered but not yet run
+    outcome: criterion_met
+    checked_by: >-
+      exact Q(sqrt(2)) left-kernel exhaustion, physical generator and source checks,
+      deterministic record regeneration, independent result review, and ten declared
+      controls
+  effort:
+    timebox: 30m exact-inventory slice; 30s generation and 30s replay caps
+    wall_seconds: 1.06
+    agent_minutes: 30
+    stopped_by: criterion
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: >-
       rebuild all six exact source matrices; certify their ranks, lineality, and complete
       positive left-kernel relations; prove that both owner branches have the same exact
@@ -65,10 +74,13 @@ experiment:
       identically; reject all ten controls; and leave -W and every transverse or mixed
       nonlinear lift unresolved
     reason: >-
-      The confirmatory analytic criterion and its refusal boundary are frozen after an
-      explicitly disclosed active-set pilot and before target implementation or replay.
+      All six source matrices have the preregistered complete V-representation, both
+      owner branches coincide at first order, both pointed-quotient face vectors are
+      derived, replay is identical, and all ten controls reject their mutations. The
+      verdict remains limited to branchwise linearization cones.
+    commit: b8d0104
 ---
-# exp-037 — preregistered exact n = 5 tangent-cone inventory
+# exp-037 — accepted exact n = 5 tangent-cone inventory
 
 Exp-035 retained one non-sheet vector but did not enumerate its branchwise cones.
 An exact active-set pilot has now supplied discovery evidence: each endpoint branch has
@@ -137,6 +149,29 @@ motion `s`. Extreme-ray checks also do not classify face interiors of the true B
 cone. This round therefore cannot establish terminal or stationary membership, local
 isolation, component identity, basin mass, census completeness, or unequal-side
 clearance.
+
+## Result
+
+The frozen criterion was met from clean engine commit `b8d0104`. Exact generation and
+replay took 0.534 and 0.526 seconds, respectively, and every declared control rejected
+its mutation.
+
+At A and B, each owner branch has eight rays after quotienting by its one-dimensional
+lineality; at the interior, each owner branch has six rays after quotienting by its
+three-dimensional lineality.
+The two owner branches have identical physical V-representations at every stratum.
+Removing the endpoint sheet rays leaves the same six-generator transverse cone
+throughout:
+
+`R_+^2 × {X-, X+, Y-, Y+ >= 0 : X- + Y+ = X+ + Y-}`.
+
+Its only positive ray relation is `R3 + R6 = R4 + R5`. The pointed transverse and
+endpoint quotient face vectors are `(1,6,13,13,6,1)` and `(1,8,26,45,45,26,8,1)` under
+the declared convention.
+
+This settles the complete branchwise first-order linearization inventory only.
+It does not promote `-W`, a transverse or mixed direction, a face interior, or any
+terminal, stationary, component, basin, census, or unequal-side claim.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -36,13 +36,15 @@ hypothesis:
     unequal-side candidates. Exp-033 proves the equal-side pair shares one exact
     fixed-angle LP optimal face with endpoint/interior nullities 0/1/0. Exp-034 then
     proves that face lies in an exact two-parameter angle-and-slide sheet of optima.
-    Exp-035 then proves that the complete branchwise first-order systems at both
-    endpoints and one interior point admit an exact direction outside that sheet. These
-    are partial results, not a complete answer. Exp-036 proves that particular direction
-    is excluded from the true Bouligand tangent cone by exact second-order obstructions
-    in both possible nearby owner-axis branches. The other non-sheet directions, the
-    full nonsmooth stationary component, and the unequal-side clearance questions
-    remain open.
+    Exp-035 proves that the complete branchwise first-order systems at both endpoints
+    and one interior point admit an exact direction outside that sheet. Exp-036 excludes
+    that particular direction from the true Bouligand tangent cone by exact second-order
+    obstructions in both possible nearby owner-axis branches. Exp-037 now certifies the
+    complete branchwise linearization-cone inventory: both owner branches coincide, the
+    endpoint quotients have eight rays, and the interior quotients have six. These are
+    partial results, not a complete answer. Nonlinear realization of the transverse and
+    mixed directions, the full nonsmooth stationary component, and the unequal-side
+    clearance questions remain open.
 ---
 # H-023 — resolve the first ambiguous census cell
 
@@ -53,7 +55,7 @@ optimum-side family.
 Calling it either a rich landscape or one flat family before continuation would repeat
 the same soundness error in opposite directions.
 
-## Two exact slices
+## Exact slices
 
 Exp-033 aligns the two equal-side source poses after one declared D4 action and
 relabelling. Four squares coincide, and the fifth traverses an exact segment at constant
@@ -77,8 +79,14 @@ owner-4 branch has exact excess coefficient `sqrt(2)/8`, and the owner-3 branch 
 coefficient `-1/4` with positive relative-angle cusp margin `sqrt(2)/2 - 1/4`.
 
 This is a strict linearized-versus-true-tangent gap for one direction, not a local
-isolation theorem. The remaining non-sheet cone directions, certified continuation,
-deterministic quench selection, and unequal-side minimax-clearance bounds remain open.
+isolation theorem. Exp-037 completes the branchwise linear inventory: the owner branches
+coincide at first order, the endpoint quotients have eight rays, the interior quotients
+have six, and the common transverse cone has six rays with sole relation
+`R3 + R6 = R4 + R5`.
+
+That finite inventory does not prove that a transverse or mixed direction is a true
+tangent. Certified continuation, deterministic quench selection, the complete stationary
+component, and unequal-side minimax-clearance bounds remain open.
 
 This is the focused control for H-021 and the practical precursor to H-011.
 

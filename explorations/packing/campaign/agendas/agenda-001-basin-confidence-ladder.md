@@ -252,8 +252,9 @@ agenda:
     bead: think-1s0h
     depends_on: [BC-003, BC-009]
     next_evidence: >-
-      enumerate the other wall-release and SAT-branch cone directions before attempting
-      any further nonlinear continuation or local-isolation claim
+      certify the discovered five-dimensional fixed-angle optimal-position polytope,
+      then test the remaining angle and mixed classes without inferring terminality from
+      the completed linear inventory
     parallel_group: identity
     note: >-
       This is the first genuine basin-structure experiment in the ladder. Exp-033
@@ -274,8 +275,12 @@ agenda:
       topology, six mutations, and separate 30-second generation and replay caps.
       Exp-036 meets that criterion in 0.21 external wall-seconds: exact owner-4 and
       owner-3 contradictions exclude exp-035's displayed direction from the true
-      Bouligand tangent at all three strata. This is not local isolation; other
-      non-sheet directions remain unclassified. D-197 records and repairs the
+      Bouligand tangent at all three strata. Exp-037 then certifies the complete
+      branchwise linearization-cone inventory from engine commit `b8d0104`: the owner
+      branches coincide, endpoint quotients have eight rays, the interior quotients have
+      six, both face vectors are derived, and all ten controls pass. This is not local
+      isolation; transverse and mixed nonlinear realization remains unclassified.
+      D-197 records and repairs the
       intervening shared-workspace branch race without adding a lease or worktree
       protocol. Think-imav is complete; think-nm35 owns the next remaining-cone slice.
       D-199's capped cumulative residual repair restores n=10 and all seven ladder rungs
@@ -298,6 +303,9 @@ agenda:
     - cases/n5/second_order_obstruction.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json
+    - cases/n5/tangent_inventory.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

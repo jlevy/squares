@@ -196,7 +196,7 @@ session:
       Run the frozen exp-037 confirmatory criterion exactly once from the clean reviewed
       engine commit, replay its retained record, and update only conclusions warranted
       by the first-order linearization-cone evidence.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The distinct W7 instrument phase is complete and independently reviewed; a clean
@@ -218,10 +218,65 @@ session:
     fallback: >-
       Leave exp-037 in progress, retain the clean instrument commit and temporary
       diagnostic only, and rotate to the next dependency-ready portfolio row.
+    outcome: >-
+      Exp-037 met its frozen confirmatory criterion from clean engine commit b8d0104.
+      The retained record and replay agree exactly, both owner branches have the same
+      complete V-representation at every stratum, the endpoint and interior quotient ray
+      counts are 8/6/8, both face vectors are derived, and all ten controls pass.
+    evidence:
+    - Exact generation completed in 0.534 seconds and replay in 0.526 seconds.
+    - >-
+      A 143-second independent Q(sqrt(2)) audit rebuilt all six matrices, ranks,
+      nullities, left-kernel exhaustion, physical generators, lineality, sheet and
+      transverse supports, owner equality, ray relation, and face vectors with no P0 or
+      P1 finding.
+    - >-
+      The focused small-n validation step replays exp-037 with its seven predecessors in
+      3.07 wall seconds; experiment and hypothesis soft schemas, ledger, and synopsis
+      reconciliation pass.
+    stop_reason: >-
+      The frozen criterion was met and independently audited before the 20-minute
+      deadline. The conclusion stops at complete branchwise first-order linearization
+      cones and does not classify nonlinear realization or terminal components.
+    next_action: >-
+      Commit and push the terminal exp-037 artifact, then preregister the independently
+      derived five-dimensional fixed-angle optimal-position polytope as a successor.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Convert the independent exact continuation discovery into the smallest frozen
+      successor criterion: certify the connected five-dimensional fixed-angle
+      optimal-position polytope and its first-order no-descent stress without conflating
+      it with -W, mixed-angle lifts, quench terminality, or component identity.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Exp-037 closes the finite first-order inventory and the continuation analyst found
+      a stronger exact polytope target; experiment-loop discipline requires a separate
+      criterion before its proof is retained as a campaign verdict.
+    budget_minutes: 15
+    started_at: '2026-08-25T01:25:36-07:00'
+    deadline_at: '2026-08-25T01:40:36-07:00'
+    expected_output: >-
+      A valid preregistered exp-038 artifact with exact source bindings, affine-hull and
+      dual-stress checks, mutations, runtime caps, and explicit nonlinear and terminal
+      refusal boundaries.
+    validation_command: >-
+      uvx --from softschema softschema validate
+      explorations/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
+    kill_condition: >-
+      Stop at fifteen minutes if the global common-cell domain, dual identity, or claim
+      boundary cannot be stated exactly; preserve the proof skeleton in think-oiv4
+      without allocating or running the experiment.
+    fallback: >-
+      Retain only the twelve exact straight-path interval formulas and rotate to the
+      separate -W obstruction bead; do not weaken exp-038 into an ambiguous criterion.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Commit and push the completed instrument phase before recording the target result.
+    next_action: Commit and push exp-037 before creating the exp-038 artifact.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -509,9 +564,77 @@ session:
     fallback: Return the rejecting test and nearest accepted sibling pattern.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
+  - task: Independently audit the retained exp-037 result against its frozen criterion.
+    operator: /root/exp037_result_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Found no mathematical P0 or P1 issue. Independently rebuilt the exact matrices,
+      certificates, physical generators, owner equality, face vectors, and claim scope;
+      confirmed identical replay and all ten controls.
+    evidence:
+    - Independent exact replay completed in 0.539 seconds.
+    - >-
+      A separate Q(sqrt(2)) audit checked row identities, ranks 14/12/14, nullities
+      1/3/1, rank-three left-kernel exhaustion, nine forced slacks, all physical
+      residuals and supports, generator ranks, the sole ray relation, and both face
+      vectors.
+    files: []
+    checks:
+    - Read-only retained replay and independent exact reconstruction; no broad gate.
+    uncertainty: >-
+      The result certifies linearization cones only; -W, transverse or mixed Bouligand
+      lifting, stationary or terminal membership, component identity, basin mass,
+      census completeness, and unequal-side clearance remain unresolved.
+    elapsed_seconds: 143
+    elapsed_quality: platform_measured
+    next_action: Keep the successor continuation evidence outside exp-037.
+    phase: 4
+    budget_minutes: 8
+    started_at: '2026-08-25T01:22:00-07:00'
+    deadline_at: '2026-08-25T01:30:00-07:00'
+    expected_output: Exact criterion disposition and claim boundary.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --quiet python
+      -m cases.n5.tangent_inventory --replay
+      campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
+    kill_condition: Stop within eight minutes with the first exact discrepancy.
+    fallback: Return the smallest failing certificate or unproved criterion clause.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, packing-validate]
+  - task: Map the minimal terminal landing surface for exp-037.
+    operator: /root/exp037_landing_map
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Identified the experiment, result, validation registry, H-023, active agenda,
+      generated ledger, and synopsis as the required landing surface, while correctly
+      leaving H-023 and BC-010 open.
+    evidence:
+    - Read-only comparison with exp-036 and the maintained small-n validation registry.
+    files: []
+    checks:
+    - Source-location and terminal-artifact pattern inspection.
+    uncertainty: Agent wall time was not exposed; mathematical evidence was not re-audited.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Reconcile only required owners and generated views.
+    phase: 4
+    budget_minutes: 5
+    started_at: '2026-08-25T01:22:00-07:00'
+    deadline_at: '2026-08-25T01:27:00-07:00'
+    expected_output: Required versus optional files and exact focused commands.
+    validation_command: null
+    kill_condition: Return within five minutes without editing shared files.
+    fallback: Return the exp-036 pattern and validation-registry insertion point.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, packing-validate]
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
+  - campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
+  - campaign/hypotheses/H-023-n5-terminal-connectivity.md
+  - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
   - PR 29
   checks:
@@ -542,10 +665,14 @@ session:
     The fast integration gate rejected the legacy tools wrapper; after rebinding to
     cases.n5.tangent_inventory, all ten module-boundary tests, README reconciliation,
     synopsis reconciliation, and campaign-ledger checks pass.
+  - >-
+    Exp-037 generation/replay passed in 0.534/0.526 seconds; an independent exact audit
+    found no P0/P1 issue, and the maintained small-n validation step passed in 3.07
+    seconds with exp-037 included.
   stop_reason: null
   next_action: >-
-    Commit and push the reviewed exp-037 instrument checkpoint, then execute the one
-    frozen confirmatory record/replay by 01:35:06-07:00.
+    Commit and push terminal exp-037, then preregister the five-dimensional fixed-angle
+    optimal-position polytope successor by 01:40:36-07:00.
 ---
 ## Session Boundary
 
