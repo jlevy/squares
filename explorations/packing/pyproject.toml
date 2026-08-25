@@ -108,6 +108,7 @@ ignore = [
 # Tools are scripts with a main(); they legitimately sys.path.insert before
 # importing the package they are testing, which is E402 by construction.
 "tools/*.py" = ["E402"]
+"tools/check_svg_rendering.py" = ["E402", "PLC0415"]
 "differential_test.py" = ["E402"]
 "run_quench.py" = ["E402"]
 

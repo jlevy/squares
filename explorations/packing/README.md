@@ -211,6 +211,8 @@ explorations/packing/
 │   ├── canonical.py        provisional endpoint keys: D4- and relabel-invariant
 │   │                       geometry plus a contact graph canonical up to isomorphism
 │   ├── atlas.py            provisional endpoint-observation store and merge logic
+│   ├── render/             deterministic SVG model, adapters, safe serializer,
+│   │                       paper theme, static views, overlays, and CSS motion
 │   ├── closed_form.py      recognise a side as (p + q*sqrt(d))/r, or decline;
 │   │                       recognition alone proves neither convergence nor optimality
 │   └── packings/trump11.py Walter Trump's 1979 packing of 11 unit squares, exactly
@@ -235,6 +237,30 @@ explorations/packing/
 └── frankensim-probe/       two experiments run against Jeffrey Emanuel's FrankenSim,
                             asking whether its certified-arithmetic and RNG layers help
                             here (see that directory's README)
+```
+
+## Rendering Packing Figures
+
+`sqpack.render` turns retained pose arrays and exact constructions into deterministic,
+self-contained SVG without adding a runtime dependency.
+The base overview is compact enough for ordinary Markdown, HTML, Word, PDF, and slide
+documents.
+Comparison and trajectory views are opt-in; animation is enabled only inside a
+`prefers-reduced-motion: no-preference` media query, so unsupported or reduced-motion
+renderers show the useful final packing.
+
+The renderer preserves the input’s evidence tier.
+Its caption and metadata distinguish candidates, verified constructions, certified upper
+bounds, and proved optima; typography cannot upgrade a numerical candidate.
+Exact annotations retain algebraic or rational source expressions in SVG comments and
+namespaced metadata while using stable high-precision decimal projections for geometry.
+
+See the [SVG gallery README](atlas/rendering/README.md) for API and CLI examples,
+retained fixtures, byte sizes, portability review, and the raster-golden decision.
+The focused read-only gate is:
+
+```bash
+./test.sh --only "deterministic SVG"
 ```
 
 ## What Has Gone Wrong Here

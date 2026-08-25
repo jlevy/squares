@@ -1,0 +1,23 @@
+{
+  "fixtures": {
+    "gobel10-source-return-comparison.svg": {
+      "bytes": 9583,
+      "elements": 38,
+      "renderer_version": "1",
+      "viewBox": "0 0 1280 680"
+    },
+    "n5-exact-face-trajectory.svg": {
+      "bytes": 4631,
+      "elements": 23,
+      "renderer_version": "1",
+      "viewBox": "0 0 960 680"
+    },
+    "trump11-overview.svg": {
+      "bytes": 5411,
+      "elements": 26,
+      "renderer_version": "1",
+      "viewBox": "0 0 960 680"
+    }
+  },
+  "schema_version": 1
+}

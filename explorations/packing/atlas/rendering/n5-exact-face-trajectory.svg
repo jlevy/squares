@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:sqpack="https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1" width="960" height="680" viewBox="0 0 960 680" role="img" aria-labelledby="figure-title figure-description" data-static-fallback="final">
+  <title id="figure-title">Square packing</title>
+  <desc id="figure-description">A square packing rendered with mathematical y coordinates upward.</desc>
+  <metadata>
+    <sqpack:profile version="1">
+      <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
+      <sqpack:value name="annotations">minimal</sqpack:value>
+      <sqpack:value name="evidence">certified-upper-bound</sqpack:value>
+      <sqpack:value name="source-id">exp-033-h-023-equal-side-face</sqpack:value>
+      <sqpack:value name="source-url" />
+      <sqpack:value name="trajectory-certificate">Every parameter in [0, 3*sqrt(2)/2-2] satisfies the retained exact cell certificate.</sqpack:value>
+      <sqpack:value name="trajectory-kind">certified</sqpack:value>
+      <sqpack:value name="view">trajectory</sqpack:value>
+    </sqpack:profile>
+  </metadata>
+  <rect width="960" height="680" fill="#ffffff" />
+  <g id="panel-0" data-panel="endpoint B">
+    <rect x="36" y="36" width="536" height="536" fill="none" stroke="#263238" stroke-width="3" vector-effect="non-scaling-stroke" />
+    <polygon points="59.49464577509845429137852955,229.6579231952817330339442095 253.152568970380187325322739,229.6579231952817330339442095 253.152568970380187325322739,36 59.49464577509845429137852955,36" fill-opacity="0.72" stroke-linejoin="round" fill="#4c78a8" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" class="motion-square-00" />
+    <polygon points="378.3420768047182669660557905,571.9999999999999999999999999 572,571.9999999999999999999999999 572,378.3420768047182669660557904 378.3420768047182669660557905,378.3420768047182669660557904" fill-opacity="0.72" stroke-linejoin="round" fill="#f58518" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" class="motion-square-01" />
+    <polygon points="36,571.9999999999999999999999999 229.6579231952817330339442095,571.9999999999999999999999999 229.6579231952817330339442095,378.3420768047182669660557904 36,378.3420768047182669660557904" fill-opacity="0.72" stroke-linejoin="round" fill="#54a24b" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" class="motion-square-02" />
+    <polygon points="435.0631692781126932135776838,309.8736614437746135728446323 572,172.9368307218873067864223162 435.0631692781126932135776838,36 298.1263385562253864271553676,172.9368307218873067864223162" fill-opacity="0.72" stroke-linejoin="round" fill="#e45756" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" class="motion-square-03" />
+    <polygon points="304,452.684153609436533932111581 440.9368307218873067864223162,315.7473228875492271456892648 304,178.8104921656619203592669486 167.0631692781126932135776838,315.7473228875492271456892648" fill-opacity="0.72" stroke-linejoin="round" fill="#72b7b2" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" class="motion-square-04" />
+  </g>
+  <text x="36" y="602" font-size="18" font-family="system-ui, sans-serif" fill="#17202a" data-evidence="certified-upper-bound" stroke-dasharray="3 3">U endpoint B: side &lt;= 2.767766953 (certified upper bound)</text>
+  <style data-sqpack-style="sqpack-motion-v1">@media (prefers-reduced-motion: no-preference){@keyframes sqpack-square-00{0%{transform:translate(-23.49464577509845429137852955px,23.49464577509845429137852955px)}50%{transform:translate(-11.74732288754922714568926477px,11.74732288754922714568926477px)}100%{transform:translate(0px,0px)}}.motion-square-00{animation:sqpack-square-00 4s ease-in-out 1 forwards}@keyframes sqpack-square-01{0%{transform:translate(0px,0px)}50%{transform:translate(0px,0px)}100%{transform:translate(0px,0px)}}.motion-square-01{animation:sqpack-square-01 4s ease-in-out 1 forwards}@keyframes sqpack-square-02{0%{transform:translate(0px,0px)}50%{transform:translate(0px,0px)}100%{transform:translate(0px,0px)}}.motion-square-02{animation:sqpack-square-02 4s ease-in-out 1 forwards}@keyframes sqpack-square-03{0%{transform:translate(0px,0px)}50%{transform:translate(0px,0px)}100%{transform:translate(0px,0px)}}.motion-square-03{animation:sqpack-square-03 4s ease-in-out 1 forwards}@keyframes sqpack-square-04{0%{transform:translate(0px,0px)}50%{transform:translate(0px,0px)}100%{transform:translate(0px,0px)}}.motion-square-04{animation:sqpack-square-04 4s ease-in-out 1 forwards}}</style>
+</svg>

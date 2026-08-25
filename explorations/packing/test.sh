@@ -389,6 +389,12 @@ step_small_n_moduli() {
     --replay campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json
 }
 
+step_svg_rendering() {
+  # Rebuild every retained figure in fresh processes, reject unsafe SVG features,
+  # and byte-compare the deterministic gallery and structural metrics.
+  $PY tools/check_svg_rendering.py --check
+}
+
 step_negative_controls() {
   # Every guard in this directory, watched failing. A check nobody has seen fail is not a
   # check, and until now each of these was run once by hand and thrown away. Each control
@@ -575,6 +581,7 @@ STEPS=(
   "basin event record and replay|step_basin_events"
   "historical regressions|step_historical_regressions"
   "small-n optimal moduli|step_small_n_moduli"
+  "deterministic SVG rendering|step_svg_rendering"
   "negative controls|step_negative_controls"
   "fixed-angle cell is an LP, rebuilt independently|step_lp_cell"
   "bead tree|step_bead_tree"

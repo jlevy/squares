@@ -1,7 +1,7 @@
 {
   "artifacts": {
     "svg": "atlas/n-003-optimal-moduli.svg",
-    "svg_sha256": "96d425a4a2d0d3c2121a995d8c24f1ab5bba17196f2e98067f98348a4cb189c2"
+    "svg_sha256": "0e987cff6b9a02bb5b005e113f9c568fef3277cfcf6d13924891214f9380e653"
   },
   "determination": {
     "claim": "F_3(2) is two labelled circles; its S3 quotient is a circle and its D4 x S3 quotient is a closed interval",

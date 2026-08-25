@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:sqpack="https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1" width="960" height="680" viewBox="0 0 960 680" role="img" aria-labelledby="figure-title figure-description" data-static-fallback="final">
+  <title id="figure-title">Square packing</title>
+  <desc id="figure-description">A square packing rendered with mathematical y coordinates upward.</desc>
+  <metadata>
+    <sqpack:profile version="1">
+      <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
+      <sqpack:value name="annotations">minimal</sqpack:value>
+      <sqpack:value name="evidence">certified-upper-bound</sqpack:value>
+      <sqpack:value name="source-id">trump11-exact-q-u</sqpack:value>
+      <sqpack:value name="source-url" />
+      <sqpack:value name="view">overview</sqpack:value>
+    </sqpack:profile>
+  </metadata>
+  <rect width="960" height="680" fill="#ffffff" />
+  <g id="panel-0" data-panel="Trump n=11">
+    <rect x="36" y="36" width="535.9999999999999999999999999" height="535.9999999999999999999999999" fill="none" stroke="#263238" stroke-width="3" vector-effect="non-scaling-stroke" />
+    <polygon points="36,571.9999999999999999999999998 174.2482444741012096770558292,571.9999999999999999999999998 174.2482444741012096770558292,433.7517555258987903229441706 36,433.7517555258987903229441706" fill-opacity="0.72" stroke-linejoin="round" fill="#4c78a8" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" />
+    <polygon points="433.7517555258987903229441707,571.9999999999999999999999998 571.9999999999999999999999999,571.9999999999999999999999998 571.9999999999999999999999999,433.7517555258987903229441706 433.7517555258987903229441707,433.7517555258987903229441706" fill-opacity="0.72" stroke-linejoin="round" fill="#f58518" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" />
+    <polygon points="316.9976187500726019601504957,174.2482444741012096770558292 455.2458632241738116372063249,174.2482444741012096770558292 455.2458632241738116372063249,36 316.9976187500726019601504957,36" fill-opacity="0.72" stroke-linejoin="round" fill="#54a24b" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" />
+    <polygon points="36,174.2482444741012096770558292 174.2482444741012096770558292,174.2482444741012096770558292 174.2482444741012096770558292,36 36,36" fill-opacity="0.72" stroke-linejoin="round" fill="#e45756" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" />
+    <polygon points="174.2482444741012096770558292,174.2482444741012096770558292 312.4964889482024193541116584,174.2482444741012096770558292 312.4964889482024193541116584,36 174.2482444741012096770558292,36" fill-opacity="0.72" stroke-linejoin="round" fill="#72b7b2" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" />
+    <polygon points="36,312.4964889482024193541116584 174.2482444741012096770558292,312.4964889482024193541116584 174.2482444741012096770558292,174.2482444741012096770558292 36,174.2482444741012096770558292" fill-opacity="0.72" stroke-linejoin="round" fill="#b279a2" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" />
+    <polygon points="203.6761241695345890955586471,468.5972249785157420538328984 309.2977101789161800297084415,379.3971259369022140919773722 220.0976111373026520678529153,273.7755399275206231578275779 114.4760251279210611337031209,362.975638969134151119683104" fill-opacity="0.72" stroke-linejoin="round" fill="#4c78a8" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" />
+    <polygon points="295.5035110517975806458883415,571.9999999999999999999999998 401.1250970611791715800381359,482.7999009583864720381444737 311.9249980195656436181826097,377.1783149490048811039946792 206.3034120101840526840328153,466.3784139906184090658502055" fill-opacity="0.72" stroke-linejoin="round" fill="#f58518" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" />
+    <polygon points="298.7022898210838199702915584,366.8511185371989955850784568 404.3238758304654109044413528,277.6510194955854676232229307 315.1237767888518829425858266,172.0294334862038766890731362 209.5021907794702920084360322,261.2295325278174046509286623" fill-opacity="0.72" stroke-linejoin="round" fill="#54a24b" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" />
+    <polygon points="390.5296767033468115206212528,470.2538935586832535312455582 496.1512627127284024547710472,381.053794517069725569390032 406.951163671114874492915521,275.4322085076881346352402377 301.3295776617332835587657266,364.6323075493016625970957638" fill-opacity="0.72" stroke-linejoin="round" fill="#e45756" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" />
+    <polygon points="466.3784139906184090658502054,345.799848211700643238009829 571.9999999999999999999999999,256.5997491700871152761543029 482.7999009583864720381444737,150.9781631607055243420045084 377.1783149490048811039946793,240.1782622023190523038600346" fill-opacity="0.72" stroke-linejoin="round" fill="#72b7b2" stroke="#ffffff" stroke-width="2" vector-effect="non-scaling-stroke" />
+  </g>
+  <text x="36" y="602" font-size="18" font-family="system-ui, sans-serif" fill="#17202a" data-evidence="certified-upper-bound" stroke-dasharray="3 3">U Trump n=11: side &lt;= 3.87708359 (certified upper bound)</text>
+</svg>

@@ -27,6 +27,7 @@ from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
 from typing import cast
+from xml.etree import ElementTree as ET
 
 from strif import atomic_output_file
 
@@ -34,6 +35,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from sqpack.canonical import canonical_key
+from sqpack.render.numbers import format_svg_number
+from sqpack.render.svg import append_metadata, serialize_svg, svg_tag
 from sqpack.verify import verify_packing
 
 SCHEMA_VERSION = 1
@@ -726,7 +729,7 @@ def build_n4_model() -> dict[str, object]:
     }
 
 
-def svg_text(model: dict[str, object]) -> str:
+def render_n3_moduli_svg(model: dict[str, object]) -> str:
     """Render the deterministic n=3 quotient and stratum map."""
     if model["subject"] != {
         "n": 3,
@@ -813,10 +816,13 @@ def svg_text(model: dict[str, object]) -> str:
             f'<rect x="0" y="0" width="{GLYPH_BOARD_SIZE}" height="{GLYPH_BOARD_SIZE}" fill="none" stroke="var(--ink)" stroke-width="3"/>'
         )
         for square, (x, y) in enumerate(n3_positions(parameter)):
-            svg_x = float(x) * GLYPH_SQUARE_SIZE
-            svg_y = (1.0 - float(y)) * GLYPH_SQUARE_SIZE
+            svg_x = format_svg_number(x.numerator * GLYPH_SQUARE_SIZE / x.denominator)
+            flipped = Fraction(1) - y
+            svg_y = format_svg_number(
+                flipped.numerator * GLYPH_SQUARE_SIZE / flipped.denominator
+            )
             lines.append(
-                f'<rect x="{svg_x:.1f}" y="{svg_y:.1f}" width="{GLYPH_SQUARE_SIZE}" height="{GLYPH_SQUARE_SIZE}" fill="var(--sq{square + 1})" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>'
+                f'<rect x="{svg_x}" y="{svg_y}" width="{GLYPH_SQUARE_SIZE}" height="{GLYPH_SQUARE_SIZE}" fill="var(--sq{square + 1})" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>'
             )
         lines.append("</g>")
         lines.append(
@@ -827,7 +833,66 @@ def svg_text(model: dict[str, object]) -> str:
         "</svg>",
         "",
     ]
-    return "\n".join(lines)
+    root = ET.fromstring("\n".join(lines))
+    style = root.find(svg_tag("style"))
+    if style is None:
+        raise ValueError("the n=3 figure lost its renderer-owned style")
+    root.remove(style)
+    colours = {
+        "--bg": "#fbfaf7",
+        "--ink": "#17202a",
+        "--muted": "#637083",
+        "--line": "#8290a3",
+        "--panel": "#ffffff",
+        "--c": "#d97706",
+        "--g": "#2563eb",
+        "--m": "#7c3aed",
+        "--sq1": "#0f766e",
+        "--sq2": "#be123c",
+        "--sq3": "#7c3aed",
+    }
+    class_attributes = {
+        "muted": {"fill": colours["--muted"]},
+        "edge": {"stroke": colours["--line"], "stroke-width": "2", "fill": "none"},
+        "panel": {
+            "fill": colours["--panel"],
+            "stroke": colours["--line"],
+            "stroke-width": "1.5",
+        },
+        "node": {"stroke": colours["--panel"], "stroke-width": "2"},
+        "label": {"font-size": "15", "font-weight": "650"},
+        "small": {"font-size": "12"},
+    }
+    for node in root.iter():
+        if node.tag == svg_tag("text"):
+            node.attrib.setdefault("font-family", "ui-sans-serif, system-ui, sans-serif")
+            node.attrib.setdefault("fill", colours["--ink"])
+        for class_name in node.attrib.get("class", "").split():
+            for attribute, value in class_attributes.get(class_name, {}).items():
+                node.attrib.setdefault(attribute, value)
+        for attribute, attribute_value in tuple(node.attrib.items()):
+            resolved_value = attribute_value
+            for variable, colour in colours.items():
+                resolved_value = resolved_value.replace(f"var({variable})", colour)
+            node.set(attribute, resolved_value)
+    title = root.find(svg_tag("title"))
+    description = root.find(svg_tag("desc"))
+    if title is None or description is None:
+        raise ValueError("the n=3 figure requires an accessible name")
+    title.set("id", "figure-title")
+    description.set("id", "figure-description")
+    root.set("aria-labelledby", "figure-title figure-description")
+    metadata = append_metadata(
+        root,
+        {
+            "evidence": "proved-optimum",
+            "source-id": "exp-014-h-032-n3-optimal-moduli",
+            "view": "exact-quotient-map",
+        },
+    )
+    root.remove(metadata)
+    root.insert(2, metadata)
+    return serialize_svg(root)
 
 
 def invalid_lowered_slider_rejected() -> bool:
@@ -942,7 +1007,7 @@ def run_n4_selftests(model: dict[str, object]) -> dict[str, bool]:
 def build_result(n: int) -> tuple[dict[str, object], str | None]:
     """Build one deterministic terminal result and optional n=3 SVG."""
     model = build_n3_model() if n == 3 else build_n4_model()
-    svg = svg_text(model) if n == 3 else None
+    svg = render_n3_moduli_svg(model) if n == 3 else None
     selftests = run_n3_selftests(model, svg) if svg is not None else run_n4_selftests(model)
     if not all(selftests.values()):
         failed = [name for name, passed in selftests.items() if not passed]

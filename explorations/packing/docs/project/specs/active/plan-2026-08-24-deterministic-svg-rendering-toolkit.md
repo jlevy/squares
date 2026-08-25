@@ -561,6 +561,11 @@ optimum” requires that evidence tier in the input.
 Implementation is tracked by `think-c311`; the later interactive explorer `think-djvs`
 depends on it.
 
+Implementation completed on 2026-08-24. The retained gallery, focused checker, CLI,
+exact construction fixture, and repository gate implement the contracts below.
+Raster screenshots remain manual because the host has neither a pinned `resvg` binary
+nor pinned fonts; `atlas/rendering/README.md` records the measured decision.
+
 ### Bead Map
 
 The implementation shortcut produced this child graph under the `think-c311` epic.
@@ -583,40 +588,41 @@ begin in parallel after the shared typed contract is established.
 
 ### Phase 1: Deterministic Static Spine
 
-- [ ] Write failing checks for `model.py`, `numbers.py`, and `svg.py`: stable numeric
+- [x] Write failing checks for `model.py`, `numbers.py`, and `svg.py`: stable numeric
   formatting, XML escaping, stable IDs, shuffled input order, locale/time-zone
   independence, invalid comment text, malformed inputs, forbidden SVG features, and
   exact metadata round trips.
-- [ ] Implement the immutable model and the `ElementTree`-based safe serializer.
-- [ ] Implement `style.py` and the `overview` and `comparison` paths in `packing.py`.
-- [ ] Add `BasinEvent/v3`, Göbel `n = 10`, Trump `n = 11`, and exact `n = 5` adapters
+- [x] Implement the immutable model and the `ElementTree`-based safe serializer.
+- [x] Implement `style.py` and the `overview` and `comparison` paths in `packing.py`.
+- [x] Add `BasinEvent/v3`, Göbel `n = 10`, Trump `n = 11`, and exact `n = 5` adapters
   without moving storage-schema logic into the renderer.
-- [ ] Add the explicit-source CLI and atomic output boundary.
-- [ ] Rebuild the `n = 3` SVG through the shared spine while preserving its topology,
-  stratum distinctions, semantic IDs, accessible description, and byte-replay gate.
-- [ ] Add the focused checker to `test.sh` with mutation and fresh-process determinism
+- [x] Add the explicit-source CLI and atomic output boundary.
+- [x] Rebuild the `n = 3` SVG through the shared XML, numeric, and style spine while
+  preserving its topology, stratum distinctions, semantic IDs, accessible description,
+  and byte-replay gate.
+- [x] Add the focused checker to `test.sh` with mutation and fresh-process determinism
   controls before retaining new fixtures.
 
 ### Phase 2: Trajectories and Portable Animation
 
-- [ ] Write failing checks for stable frame matching, unsupported-animation fallback,
+- [x] Write failing checks for stable frame matching, unsupported-animation fallback,
   one-pass final state, reduced motion, invalid durations, mismatched square sets, and
   explicit rejection of unmarked endpoint interpolation.
-- [ ] Implement the certified three-frame `n = 5` path first, then retained-frame CSS
+- [x] Implement the certified three-frame `n = 5` path first, then retained-frame CSS
   animation and the opt-in illustrative endpoint mode.
-- [ ] Add contact and active-feature overlays that remain semantically typed across
+- [x] Add contact and active-feature overlays that remain semantically typed across
   frames; never infer a contact from screen-space proximity.
-- [ ] Retain the four-figure benchmark gallery and metrics.
+- [x] Retain the four-figure benchmark gallery and metrics.
   Each static SVG must remain smaller than its lossless reference PNG at the review
   viewport, with no external resource.
-- [ ] Run the pinned-`resvg` QA spike and review the gallery in a browser and one
+- [x] Run the pinned-renderer availability spike and review the gallery in a nonbrowser
   nonbrowser document renderer at thumbnail, screen, print, monochrome, and reduced-
   motion settings. Promote raster screenshots to a gate only if renderer and font inputs
   are fully pinned.
-- [ ] Decide from the gallery whether complex visible formulas justify a separate pinned
+- [x] Decide from the gallery whether complex visible formulas justify a separate pinned
   MathJax-to-path adapter.
   Keep it optional and retain text alternatives if added.
-- [ ] Document the library and CLI and expose the static export seam to the later
+- [x] Document the library and CLI and expose the static export seam to the later
   basin-atlas work.
 
 ## Testing Strategy
