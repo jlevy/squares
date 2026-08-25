@@ -5,7 +5,7 @@ author: Codex, for the project maintainers
 ---
 # Feature: Frontier Assurance and Verification
 
-**Date:** 2026-08-24 (last updated 2026-08-24)
+**Date:** 2026-08-24 (last updated 2026-08-25)
 
 **Author:** Codex, for the project maintainers
 
@@ -725,8 +725,8 @@ gate.
 ## Rollout Plan
 
 Implementation lands as successive PRs on the current square-packing stack.
-As lower PRs merge, the next PR rebases and retargets to the new stack tip without
-changing the ownership boundaries above:
+As lower PRs merge, the next PR merges the new stack tip and retargets without changing
+the ownership boundaries above:
 
 1. this plan and its bead map;
 2. vocabulary, schema, definitive-doc, and current-corpus migration;
