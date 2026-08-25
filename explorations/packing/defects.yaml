@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 313
+count: 318
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -6131,14 +6131,19 @@ defects:
     One hung validation step can consume an entire unattended handoff and leave
     descendants alive even though the bounded research-slice protocol says to stop.
   fix: >-
-    Partial only. The shared command seam now supports an explicit finite timeout on
-    Linux and macOS, gives the isolated process group a TERM grace period, escalates to
-    KILL, bounds direct-child reaping and retains timeout output. Existing calls still
-    request no timeout, Windows bounded-tree mode fails closed, and the per-step deadline
-    policy remains unimplemented.
+    Partial only. Production subprocess commands now have a finite 600-second POSIX
+    default, with an isolated process group, TERM grace period, KILL escalation, bounded
+    direct-child reaping, retained timeout output, and coordinator cleanup for detached
+    workers. Pure-Python worker code, aggregate multi-command duration, detached daemons,
+    and Windows remain open; the per-step deadline policy remains unimplemented.
   regression: >-
-    test_run_timeout_terminates_child_and_reports_captured_output exercises an
-    output-detached SIGTERM-ignoring descendant that would write a sentinel if leaked
+    test_run_timeout_terminates_child_and_reports_captured_output,
+    test_run_selected_interrupt_stops_detached_production_process,
+    test_process_registry_rejects_registration_after_stop,
+    test_quiet_returncode_path_fails_closed_without_windows_tree_cleanup,
+    and test_commit_state_routes_git_probes_through_bounded_seam cover production
+    inheritance, SIGINT cleanup, late registration, Windows fail-closed behavior, and
+    provenance probes
   bead: think-tx0b
   recorded_in: src/sqpack/cli/validate.py
 - id: D-240
@@ -7598,8 +7603,12 @@ defects:
     recreating the unattended stall it was intended to prevent.
   fix: >-
     Preserve the original subprocess.run path exactly when no timeout is requested and
-    create a new process group only for an explicitly bounded call.
-  regression: none
+    create a new process group only for an explicitly bounded call. D-315 supersedes this
+    first draft's detached-worker interruption gap with a Context-owned stopping registry
+    and coordinator TERM/KILL cleanup.
+  regression: >-
+    test_run_selected_interrupt_stops_detached_production_process and
+    test_process_registry_rejects_registration_after_stop
   bead: think-zms2
   recorded_in: src/sqpack/cli/validate.py
 - id: D-296
@@ -8028,3 +8037,119 @@ defects:
   recurrence_of: D-259
   bead: think-chfy
   recorded_in: campaign/agent-sessions/session-013-generated-view-recurrence-checkpoint.md
+- id: D-314
+  title: The production commit-state probe was initially unbounded
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one production-default timeout implementation
+  severity: high
+  status: fixed
+  what: >-
+    The first production-default draft left _commit_state's git cat-file and merge-base
+    probes on raw subprocess.run, so the new finite timeout policy did not cover them.
+  consequence: >-
+    A hung repository probe could still stall an unattended validation run despite the
+    apparent production timeout guarantee.
+  fix: >-
+    Route commit-state git probes through the shared bounded subprocess seam and retain
+    the finite production default.
+  regression: test_commit_state_routes_git_probes_through_bounded_seam
+  bead: think-orf4
+  recorded_in: src/sqpack/cli/validate.py
+- id: D-315
+  title: Detached production defaults could still wait on interrupted workers
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one production-default timeout implementation
+  severity: high
+  status: fixed
+  what: >-
+    Finite detached defaults reintroduced D-295: a SIGINT at the coordinator could leave
+    ThreadPoolExecutor waiting for workers for the full 600-second command timeout.
+  consequence: >-
+    An unattended run could ignore its operator stop request for minutes even though each
+    child command had a finite timeout.
+  fix: >-
+    Use a Context-owned atomic stopping registry and have the coordinator terminate and
+    kill detached workers on stop, while rejecting registrations after stopping begins.
+  regression: >-
+    test_run_selected_interrupt_stops_detached_production_process and
+    test_process_registry_rejects_registration_after_stop
+  recurrence_of: D-295
+  bead: think-7c35
+  recorded_in: src/sqpack/cli/validate.py
+- id: D-316
+  title: Quiet provenance probing lacked a Windows fail-closed guard
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one production-default timeout implementation
+  severity: high
+  status: fixed
+  what: >-
+    The quiet provenance helper omitted the Windows fail-closed guard, leaving a platform
+    path whose descendant cleanup was not established by the supported process backend.
+  consequence: >-
+    A Windows validation run could claim bounded provenance probing without a proved tree
+    cleanup guarantee.
+  fix: >-
+    Fail closed on Windows unless the supported tree-cleanup backend is available.
+  regression: test_quiet_returncode_path_fails_closed_without_windows_tree_cleanup
+  bead: think-fwnn
+  recorded_in: src/sqpack/cli/validate.py
+- id: D-317
+  title: The SIGINT timeout regression ceiling was too tight for the focused suite
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: one focused timeout regression suite
+  severity: medium
+  status: fixed
+  what: >-
+    The first SIGINT regression required wall time below three seconds. It passed alone
+    in about 2.5 seconds, but the focused suite measured 3.008 seconds despite no
+    survivor or leak and a ten-second command deadline.
+  consequence: >-
+    Scheduling variance could make a semantically valid interruption test fail and slow
+    iteration without detecting a real process-cleanup defect.
+  fix: >-
+    Relax the test ceiling to below five seconds while preserving the survivor, leak,
+    and bounded-command semantic assertions.
+  regression: test_run_selected_interrupt_stops_detached_production_process
+  bead: think-9pz6
+  recorded_in: tests/test_validation_cli.py
+- id: D-318
+  title: The unprotected-fix mutation control retained a stale expected count
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: control_cell
+  latent_for: one aggregate mutation-control reconciliation
+  severity: low
+  status: fixed
+  what: >-
+    After the canonical defect log settled at 106 fixes without a regression check,
+    the negative-control expectation still described the pre-mutation value 106. The
+    control changes one regression from none, so its deliberately mutated state must
+    report 105.
+  consequence: >-
+    The negative-control suite rejected the correct checker diagnostic and obscured
+    whether the unprotected-fix invariant itself was still covered.
+  fix: >-
+    Update the mutation expectation to 105 while retaining the canonical synopsis
+    count of 106 and rerun the full negative-control suite.
+  regression: uv run --frozen python -m devtools.run_negative_controls devtools/controls.yaml
+  recurrence_of: D-308
+  bead: think-6lka
+  recorded_in: devtools/controls.yaml

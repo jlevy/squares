@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import re
 import shutil
@@ -23,6 +24,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from contextlib import contextmanager, suppress
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
+from threading import Lock
 from typing import Literal, Never, override
 
 import yaml
@@ -44,6 +46,41 @@ TOP_TIMING_COUNT = 8
 SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 PROCESS_TERMINATION_GRACE_SECONDS = 1.0
+DEFAULT_TIMEOUT_SECONDS = 600.0
+
+
+class _ProcessRegistry:
+    """Process groups owned by one validation run."""
+
+    def __init__(self) -> None:
+        self._lock = Lock()
+        self._pids: set[int] = set()
+        self._stopping = False
+
+    def register(self, pid: int) -> None:
+        with self._lock:
+            if self._stopping:
+                with suppress(ProcessLookupError):
+                    os.killpg(pid, signal.SIGKILL)
+                raise StepFailureError("validation is stopping; rejected new subprocess")
+            self._pids.add(pid)
+
+    def discard(self, pid: int) -> None:
+        with self._lock:
+            self._pids.discard(pid)
+
+    def stop(self) -> None:
+        with self._lock:
+            self._stopping = True
+            pids = tuple(self._pids)
+        for pid in pids:
+            with suppress(ProcessLookupError):
+                os.killpg(pid, signal.SIGTERM)
+        time.sleep(PROCESS_TERMINATION_GRACE_SECONDS)
+        for pid in pids:
+            with suppress(ProcessLookupError):
+                os.killpg(pid, signal.SIGKILL)
+
 
 type CommitState = Literal["reachable", "orphaned", "missing"]
 
@@ -94,6 +131,10 @@ class Context:
     jobs: int
     inner_jobs: int
     environment: dict[str, str]
+    timeout_seconds: float = DEFAULT_TIMEOUT_SECONDS
+    processes: _ProcessRegistry = field(
+        default_factory=_ProcessRegistry, compare=False, repr=False
+    )
 
 
 StepAction = Callable[[Context], str]
@@ -192,24 +233,11 @@ def _run(
     cwd: Path = PROJECT_ROOT,
     timeout_seconds: float | None = None,
 ) -> str:
-    if timeout_seconds is None:
-        completed = subprocess.run(
-            list(command),
-            cwd=cwd,
-            env=context.environment,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True,
-            check=False,
-        )
-        output = completed.stdout.rstrip()
-        if completed.returncode:
-            rendered = " ".join(command)
-            detail = f"command exited {completed.returncode}: {rendered}"
-            if output:
-                detail += f"\n{output}"
-            raise StepFailureError(detail)
-        return output
+    effective_timeout = (
+        context.timeout_seconds
+        if timeout_seconds is None
+        else min(timeout_seconds, context.timeout_seconds)
+    )
 
     if os.name == "nt":
         raise StepFailureError(
@@ -227,18 +255,29 @@ def _run(
         start_new_session=True,
     )
     try:
-        stdout, _ = process.communicate(timeout=timeout_seconds)
+        context.processes.register(process.pid)
+    except StepFailureError:
+        try:
+            process.wait(timeout=PROCESS_TERMINATION_GRACE_SECONDS)
+        except subprocess.TimeoutExpired as error:
+            raise StepFailureError(
+                "rejected validation subprocess did not exit after SIGKILL"
+            ) from error
+        raise
+    try:
+        stdout, _ = process.communicate(timeout=effective_timeout)
     except subprocess.TimeoutExpired:
         output = _stop_process_group(process).rstrip()
         rendered = " ".join(command)
-        detail = f"command timed out after {timeout_seconds:g} seconds: {rendered}"
+        detail = f"command timed out after {effective_timeout:g} seconds: {rendered}"
         if output:
             detail += f"\n{output}"
         raise StepFailureError(detail) from None
     except BaseException:
         _stop_process_group(process)
         raise
-
+    finally:
+        context.processes.discard(process.pid)
     output = (stdout or "").rstrip()
     if process.returncode:
         rendered = " ".join(command)
@@ -681,29 +720,64 @@ def _differential(context: Context) -> str:
     return _module(context, "devtools.check_search_differential", "20000")
 
 
-def _commit_state(commit: str) -> CommitState:
-    available = subprocess.run(
-        ("git", "cat-file", "-e", f"{commit}^{{commit}}"),
-        cwd=PROJECT_ROOT,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-        check=False,
-    )
-    if available.returncode != 0:
-        return "missing"
-    ancestry = subprocess.run(
-        ("git", "merge-base", "--is-ancestor", commit, "HEAD"),
-        cwd=PROJECT_ROOT,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-        check=False,
-    )
-    if ancestry.returncode not in {0, 1}:
+def _run_returncode(context: Context, command: Sequence[str]) -> int:
+    """Run a quiet command through the same bounded process-group path as _run."""
+    if os.name == "nt":
         raise StepFailureError(
-            f"git could not compare engine commit {commit} with HEAD "
-            f"(exit {ancestry.returncode})"
+            "bounded validation subprocesses require verified process-tree cleanup; "
+            "Windows support is not yet implemented"
         )
-    return "reachable" if ancestry.returncode == 0 else "orphaned"
+    process = subprocess.Popen(
+        list(command),
+        cwd=PROJECT_ROOT,
+        env=context.environment,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        text=True,
+        start_new_session=True,
+    )
+    try:
+        context.processes.register(process.pid)
+    except StepFailureError:
+        try:
+            process.wait(timeout=PROCESS_TERMINATION_GRACE_SECONDS)
+        except subprocess.TimeoutExpired as error:
+            raise StepFailureError(
+                "rejected validation subprocess did not exit after SIGKILL"
+            ) from error
+        raise
+    try:
+        process.wait(timeout=context.timeout_seconds)
+    except subprocess.TimeoutExpired:
+        _stop_process_group(process)
+        rendered = " ".join(command)
+        raise StepFailureError(
+            f"command timed out after {context.timeout_seconds:g} seconds: {rendered}"
+        ) from None
+    except BaseException:
+        _stop_process_group(process)
+        raise
+    finally:
+        context.processes.discard(process.pid)
+    return process.returncode
+
+
+def _commit_state(context: Context, commit: str) -> CommitState:
+    available = _run_returncode(
+        context,
+        ("git", "cat-file", "-e", f"{commit}^{{commit}}"),
+    )
+    if available != 0:
+        return "missing"
+    ancestry = _run_returncode(
+        context,
+        ("git", "merge-base", "--is-ancestor", commit, "HEAD"),
+    )
+    if ancestry not in {0, 1}:
+        raise StepFailureError(
+            f"git could not compare engine commit {commit} with HEAD (exit {ancestry})"
+        )
+    return "reachable" if ancestry == 0 else "orphaned"
 
 
 def _provenance_line(name: str, commit: str, text: str, state: CommitState) -> str:
@@ -725,7 +799,6 @@ def _provenance_line(name: str, commit: str, text: str, state: CommitState) -> s
 
 
 def _provenance(context: Context) -> str:
-    del context
     lines: list[str] = []
     checked = 0
     declared = 0
@@ -741,7 +814,7 @@ def _provenance(context: Context) -> str:
         if re.fullmatch(r"[0-9a-fA-F]{7,40}", commit) is None:
             raise StepFailureError(f"invalid {path.name} engine_commit: {raw}")
         checked += 1
-        state = _commit_state(commit)
+        state = _commit_state(context, commit)
         lines.append(_provenance_line(path.name, commit, text, state))
     if checked != declared:
         raise StepFailureError(f"checked {checked} of {declared} declared engine commits")
@@ -795,6 +868,18 @@ def _positive_integer(name: str, value: str) -> int:
         raise UsageError(f"{name} must be a positive integer, got {value!r}") from error
     if parsed <= 0:
         raise UsageError(f"{name} must be a positive integer, got {value!r}")
+    return parsed
+
+
+def _positive_seconds(name: str, value: str) -> float:
+    try:
+        parsed = float(value)
+    except ValueError as error:
+        raise UsageError(
+            f"{name} must be a positive number of seconds, got {value!r}"
+        ) from error
+    if not math.isfinite(parsed) or parsed <= 0:
+        raise UsageError(f"{name} must be a positive number of seconds, got {value!r}")
     return parsed
 
 
@@ -894,9 +979,15 @@ def _run_selected(
             futures = {
                 pool.submit(_execute_step, step, context): step.name for step in selected
             }
-            for future in as_completed(futures):
-                result = future.result()
-                by_name[result.name] = result
+            try:
+                for future in as_completed(futures):
+                    result = future.result()
+                    by_name[result.name] = result
+            except BaseException:
+                for future in futures:
+                    future.cancel()
+                context.processes.stop()
+                raise
     ordered = [by_name[step.name] for step in selected]
     return RunSummary(
         results=ordered,
@@ -986,6 +1077,14 @@ def _parser() -> ArgumentParser:
     parser.add_argument("--jobs", metavar="N", help="maximum concurrent validation steps")
     parser.add_argument("--inner-jobs", metavar="N", help="worker cap exported to each step")
     parser.add_argument(
+        "--timeout-seconds",
+        metavar="SECONDS",
+        help=(
+            "maximum time for each validation subprocess (default: 600; also "
+            "PACKING_VALIDATE_TIMEOUT_SECONDS)"
+        ),
+    )
+    parser.add_argument(
         "--list", action="store_true", help="list check names and tiers, then exit"
     )
     parser.add_argument(
@@ -1027,6 +1126,19 @@ def main(arguments: list[str] | None = None) -> int:
             if inner_value is not None
             else max(1, jobs // INNER_JOB_DIVISOR)
         )
+        timeout_value = namespace.timeout_seconds or os.environ.get(
+            "PACKING_VALIDATE_TIMEOUT_SECONDS"
+        )
+        timeout_seconds = (
+            _positive_seconds(
+                "--timeout-seconds"
+                if namespace.timeout_seconds is not None
+                else "PACKING_VALIDATE_TIMEOUT_SECONDS",
+                timeout_value,
+            )
+            if timeout_value is not None
+            else DEFAULT_TIMEOUT_SECONDS
+        )
         _validate_runtime()
         require_project_root(PROJECT_ROOT)
         selected = _select_steps(only=namespace.only, fast=namespace.fast)
@@ -1046,6 +1158,7 @@ def main(arguments: list[str] | None = None) -> int:
             jobs=jobs,
             inner_jobs=inner_jobs,
             environment=environment,
+            timeout_seconds=timeout_seconds,
         )
         summary = _run_selected(selected, context, namespace.only)
     except ParserExitError as error:

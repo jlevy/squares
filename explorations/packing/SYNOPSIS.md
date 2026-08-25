@@ -1768,15 +1768,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 313 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 318 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 74 | asserted something false about the mathematics |
-| validity | 80 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 118 | recorded something its own evidence contradicts |
-| robustness | 32 | did not finish, or finished only by luck |
+| validity | 81 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 119 | recorded something its own evidence contradicts |
+| robustness | 35 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -1785,17 +1785,17 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught thirty-nine defects in 313, and no soundness defect
-ever.** Every soundness failure was found by a control cell whose answer was known in
-advance, a rule written down before the measurement, a generated view contradicting its
-source, or someone reading carefully.
+**The automated gate has caught forty defects in 318, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Every gate-detected entry is a bookkeeping or robustness defect, found by
 contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
 That is the pattern, not an exception: gates are good at the mechanical classes and have
 never once caught the mathematics being wrong.
 
-107 fixes left no regression check behind.
+106 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
@@ -2088,11 +2088,11 @@ review: an explicitly excluded strict run was terminated by exact process group,
 partial output discarded, and `think-ysz2` owns explicit command and wall ceilings for
 future bounded delegations.
 The repaired small-`n` path no longer blocks the campaign, but unattended numerical work
-still lacks a reproducible work-based quench budget ([D-126](defects.md)), outer
-deadlines and process-group cleanup for every validation step ([D-239](defects.md)), and
-portable terminal-receipt discipline for delegated long commands ([D-202](defects.md)).
-[D-280](defects.md) records the phase-count cap exhausting the fast campaign early; its
-continuation remains open.
+still lacks a reproducible work-based quench budget ([D-126](defects.md)), a bound
+around pure-Python validation workers and the aggregate duration of multi-command steps
+([D-239](defects.md)), and portable terminal-receipt discipline for delegated long
+commands ([D-202](defects.md)). [D-280](defects.md) records the phase-count cap
+exhausting the fast campaign early; its continuation remains open.
 
 **One open measurement defect constrains timing forecasts.** [D-101](defects.md): the
 historical exp-007/008 round-level wall times disagree with retained per-call durations.
@@ -2114,11 +2114,14 @@ TERM and then KILL if necessary.
 This closes that specific gate-stall path; the unattended numerical runner still has the
 separate launch requirements above.
 
-**The outer validation command is not yet time-bounded.** [D-239](defects.md) records
-that proof, solver, Cargo and other checker subprocesses still have no per-step deadline
-or process-group cleanup.
-This does not block the next supervised exact slice, but a strict gate is not itself a
-safe unattended watchdog until that follow-up lands.
+**Validation subprocesses now have finite POSIX deadlines.** The shared captured-command
+path and quiet Git provenance probes use a 600-second production default, configurable
+by CLI or environment, and retain smaller call-site caps.
+Timeout and coordinator interruption terminate and reap the registered process groups.
+[D-239](defects.md) remains open because pure-Python worker code, aggregate
+multi-command duration, detached daemons, and Windows process-tree cleanup are not
+bounded by that policy.
+A strict gate therefore still needs an independent outer watchdog for unattended use.
 
 **One open defect makes quench evidence load-dependent.** [D-126](defects.md): the
 scientific work budget is still wall-clock time, so contention changes the number of LP
