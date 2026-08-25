@@ -240,7 +240,7 @@ session:
       Execute frozen order 11 under think-tx0b: add one reusable timeout and process-
       group termination primitive to the packing validation CLI with one focused failure
       test, without retrofitting every deep step.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Order 10 accepted one branch but prohibited wider H-042 execution; the frozen
@@ -262,10 +262,64 @@ session:
     fallback: >-
       Preserve the smallest timeout or process-group blocker under think-tx0b and rotate
       to frozen order 12 without changing existing step criteria or durations.
+    outcome: >-
+      Added an opt-in Linux/macOS timeout primitive at the existing command seam without
+      changing any current validation duration. It isolates only explicitly bounded
+      commands, preserves captured output, gives the process group a TERM grace period,
+      escalates to KILL and bounds direct-child reaping. Windows bounded-tree mode fails
+      closed. D-239 remains outstanding because all production calls still pass no
+      timeout and no per-step deadline policy has been declared.
+    evidence:
+    - >-
+      The focused adversarial test launches a SIGTERM-ignoring child whose output is
+      detached from the parent pipe and which writes a delayed sentinel if leaked. The
+      complete validation-CLI file passes 12 tests in 2.83 seconds on macOS.
+    - >-
+      Focused Ruff check and format plus BasedPyright pass. An independent final audit
+      accepts the ordinary-descendants-within-one-POSIX-group contract with no P1 and
+      explicitly excludes detached daemons, Windows and production call-site policy.
+    - >-
+      Review caught and repaired D-295 through D-297 before commit: the first draft
+      isolated unbounded calls, its test exercised only the pipe-held path, and its
+      untested taskkill fallback could leave a child and hang.
+    stop_reason: >-
+      The first coherent POSIX primitive and adversarial control are complete. The
+      declared portability boundary fired: Windows and the per-step deadline policy
+      require later work, so this slice does not retrofit callers or close D-239.
+    next_action: Checkpoint the primitive and rotate to frozen order 12's receipt rehearsal.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: work
+    focus: process
+    objective: >-
+      Execute frozen order 12 under think-b3bm: rehearse one short parent-owned command
+      and retain its exact argv, start and end, exit or signal, output location or inline
+      capture, timeout and cleanup result; put the portable terminal-receipt rule in the
+      agent-session runbook.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Order 11 retained the narrow timeout primitive and froze its unsupported boundary;
+      the portfolio now rotates from implementation to the distinct durable-receipt gap.
+    budget_minutes: 30
+    started_at: '2026-08-25T04:53:00-07:00'
+    deadline_at: '2026-08-25T05:23:00-07:00'
+    expected_output: >-
+      One portable runbook sentence plus a complete terminal receipt for a command that
+      finishes in at most five seconds, or an explicit missing-field failure that leaves
+      think-b3bm open.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop at twenty minutes or when any receipt field cannot be retained; do not run a
+      strict, deep or numerical command and do not build another scheduler or lease layer.
+    fallback: >-
+      Record the exact missing field under think-b3bm, preserve the command evidence that
+      did return, and rotate to frozen order 13 without claiming portable receipt closure.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Checkpoint phase 3-4 first, then delegate implementation and adversarial test review.
+    next_action: Rehearse one deliberately nonzero command with a five-second parent deadline.
   primary_bead: think-gszk
   status: in_progress
   budget:
@@ -471,17 +525,73 @@ session:
     elapsed_quality: unavailable
     next_action: Track D-292/D-293 and stop the H-042 expansion.
     phase: 4
+  - task: Inventory the packing validation subprocess seams and current diagnostics.
+    operator: /root/validation_subprocess_inventory
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Confirmed that every ordinary validation action routes through the unbounded _run
+      seam except two provenance git probes, and identified the narrow opt-in primitive.
+    evidence:
+    - No existing timeout, process-group or environment deadline setting was present.
+    files: []
+    checks: [Read-only source and focused-test inventory.]
+    uncertainty: The inventory did not select timeout durations or change code.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Keep production duration policy outside the primitive slice.
+    phase: 5
+  - task: Implement and focus-test one bounded validation subprocess primitive.
+    operator: /root/validation_timeout_impl
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Added the opt-in POSIX timeout seam and adversarial descendant-leak control; revised
+      the first draft after independent review exposed three pre-commit defects.
+    evidence:
+    - Twelve focused tests pass in 2.83 seconds; Ruff and BasedPyright are clean.
+    files: [src/sqpack/cli/validate.py, tests/test_validation_cli.py]
+    checks: [Focused pytest, Ruff check, Ruff format check, BasedPyright, diff check.]
+    uncertainty: No Windows bounded-tree backend or production deadline policy was implemented.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Keep D-239 open and wire durations only in a separately declared slice.
+    phase: 5
+  - task: Independently audit timeout semantics and the adversarial cleanup control.
+    operator: /root/validation_timeout_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted the revised Linux/macOS opt-in group contract with no P1 and required
+      explicit refusal of arbitrary detached-child, Windows and production-call claims.
+    evidence:
+    - The audit caught D-295 through D-297 in the first uncommitted draft.
+    files: []
+    checks: [Read-only first-draft and final-diff review.]
+    uncertainty: A descendant that deliberately detaches is outside process-group cleanup.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain the narrow claim and leave D-239 outstanding.
+    phase: 5
   outputs:
   - campaign/agent-sessions/session-011-eight-hour-continuation.md
   - campaign/hypotheses/H-042-trump-incidence-rigidity-cores.md
   - cases/trump11/incidence_cores.py
+  - src/sqpack/cli/validate.py
+  - tests/test_validation_cli.py
+  - defects.yaml
+  - defects.md
   checks:
   - PR 29 final head eb1473a passes Linux in 3m04s and macOS in 4m31s.
   - uv run --directory explorations/packing --frozen packing-ledger check
+  - >-
+    uv run --directory explorations/packing --frozen pytest -q
+    tests/test_validation_cli.py passes 12 tests in 2.83 seconds.
+  - Focused Ruff and BasedPyright pass on the timeout primitive and its test.
   stop_reason: null
   next_action: >-
-    Checkpoint and push the accepted branch-0 pilot, then implement only order 11's
-    bounded validation timeout primitive; do not resume the H-042 wider run.
+    Execute frozen order 12's short parent-owned terminal-receipt rehearsal; do not run a
+    strict, deep or numerical command and do not resume the H-042 wider run.
 ---
 # Session 011 — Eight-Hour Portfolio Continuation
 

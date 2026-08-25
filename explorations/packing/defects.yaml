@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 282
+count: 299
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -6129,10 +6129,14 @@ defects:
     One hung validation step can consume an entire unattended handoff and leave
     descendants alive even though the bounded research-slice protocol says to stop.
   fix: >-
-    none yet. Give steps declared or documented default deadlines appropriate to deep
-    mathematics, terminate and reap their process groups, and report a distinct timeout
-    failure without imposing one short uniform cap.
-  regression: none
+    Partial only. The shared command seam now supports an explicit finite timeout on
+    Linux and macOS, gives the isolated process group a TERM grace period, escalates to
+    KILL, bounds direct-child reaping and retains timeout output. Existing calls still
+    request no timeout, Windows bounded-tree mode fails closed, and the per-step deadline
+    policy remains unimplemented.
+  regression: >-
+    test_run_timeout_terminates_child_and_reports_captured_output exercises an
+    output-detached SIGTERM-ignoring descendant that would write a sentinel if leaked
   bead: think-tx0b
   recorded_in: src/sqpack/cli/validate.py
 - id: D-240
@@ -7546,3 +7550,151 @@ defects:
   regression: none
   bead: think-8wgw
   recorded_in: cases/trump11/incidence_cores.py
+- id: D-294
+  title: The canonical defect count lagged eleven committed records
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: inspection
+  latent_for: one committed research checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    defects.yaml declared count 282 while containing 293 records. The generated Markdown
+    derived its displayed total directly from the rows, so its check remained green and
+    disagreed silently with the canonical soft-schema field.
+  consequence: >-
+    The source of truth was internally inconsistent at a checkpoint advertised as
+    synchronized, and a consumer trusting the declared count could truncate or reject
+    the log even though the human-facing view looked current.
+  fix: >-
+    Set the count to the complete post-review total and run the cross-field schema check,
+    not only the generated-view comparison, before the next checkpoint.
+  regression: >-
+    python -m devtools.validate_schemas rejects any future mismatch between count and the
+    number of defect rows
+  bead: think-w5eq
+  recorded_in: defects.yaml
+- id: D-295
+  title: The first timeout draft isolated validation calls that remained unbounded
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one uncommitted implementation review
+  severity: high
+  status: fixed
+  what: >-
+    The first draft started every validation subprocess in a new session even when its
+    timeout was None. The worker-thread calls would stop receiving an interrupt sent to
+    the validator's original process group while ThreadPoolExecutor still waited for
+    every future.
+  consequence: >-
+    Adding an unused timeout primitive could have made the existing gate harder to stop,
+    recreating the unattended stall it was intended to prevent.
+  fix: >-
+    Preserve the original subprocess.run path exactly when no timeout is requested and
+    create a new process group only for an explicitly bounded call.
+  regression: none
+  bead: think-zms2
+  recorded_in: src/sqpack/cli/validate.py
+- id: D-296
+  title: The first timeout test could not expose an early-parent descendant leak
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted implementation review
+  severity: high
+  status: fixed
+  what: >-
+    The first regression let the SIGTERM-ignoring child inherit the captured output
+    pipe. communicate therefore stayed blocked after the parent exited and forced the
+    helper down its easy timeout-and-KILL path.
+  consequence: >-
+    The test could pass even if a child that closed its output handles survived after
+    the parent and pipe finished early, overstating process-tree cleanup exactly where
+    unattended runs are vulnerable.
+  fix: >-
+    Redirect the adversarial child's output away from the capture pipe, wait until its
+    signal handler is installed, and require the helper to preserve the full TERM grace,
+    KILL the remaining group, remove the live PID and prevent a delayed sentinel write.
+  regression: >-
+    test_run_timeout_terminates_child_and_reports_captured_output covers the
+    early-parent-exit, output-detached descendant path
+  bead: think-h20g
+  recorded_in: tests/test_validation_cli.py
+- id: D-297
+  title: The first Windows timeout path treated taskkill as a proved tree guarantee
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one uncommitted implementation review
+  severity: high
+  status: fixed
+  what: >-
+    The first draft ignored a nonzero taskkill result and fell back to killing only the
+    direct parent before an unbounded communicate. No Windows CI or Job Object backend
+    established descendant cleanup.
+  consequence: >-
+    A Windows caller could have received a false portability promise, leaked a child
+    holding the capture pipe and then hung forever inside the timeout cleanup path.
+  fix: >-
+    Remove the unverified taskkill path. Ordinary unbounded validation keeps its prior
+    portable behavior, while an explicit bounded-tree request now fails closed on
+    Windows until a tested process-tree backend exists.
+  regression: none
+  bead: think-j3ti
+  recorded_in: src/sqpack/cli/validate.py
+- id: D-298
+  title: Overlapping inspection ranges fabricated a duplicate session key
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: one coordinator diagnosis
+  severity: low
+  status: fixed
+  what: >-
+    The coordinator printed lines 245 through 430 and then 430 through 720 of the same
+    session file. Shared line 430 appeared twice in the concatenated terminal output and
+    was misread as two adjacent status keys in the source.
+  consequence: >-
+    Without a source-level recheck, the review would have edited a clean session artifact
+    and retained a false defect claim about committed work.
+  fix: >-
+    Compare the numbered working file and HEAD directly, retract the duplicate-key claim,
+    make no session edit for it, and keep this inspection error visible instead.
+  regression: none
+  bead: think-ntfh
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-299
+  title: A later successful check masked an earlier gate failure in the shell status
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one checkpoint command
+  severity: medium
+  status: fixed
+  what: >-
+    The coordinator ran several checkpoint checks sequentially without shell fail-fast
+    behavior. packing-ledger check reported stale generated output, but the later
+    successful diff check made the aggregate command exit zero.
+  consequence: >-
+    Reading only the tool's terminal exit field could have promoted an internally failed
+    checkpoint as green even though the failure remained visible earlier in stdout.
+  fix: >-
+    Treat the inner ledger failure as binding, regenerate its view, and rerun the
+    decisive checkpoint commands with shell fail-fast behavior so the first failure owns
+    the terminal status.
+  regression: none
+  bead: think-di0u
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md

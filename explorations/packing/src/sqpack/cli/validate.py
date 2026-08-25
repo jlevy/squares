@@ -13,13 +13,14 @@ import json
 import os
 import re
 import shutil
+import signal
 import subprocess
 import sys
 import time
 import traceback
 from collections.abc import Callable, Iterator, Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from contextlib import contextmanager
+from contextlib import contextmanager, suppress
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Literal, Never, override
@@ -42,6 +43,7 @@ INNER_JOB_DIVISOR = 3
 TOP_TIMING_COUNT = 8
 SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
+PROCESS_TERMINATION_GRACE_SECONDS = 1.0
 
 type CommitState = Literal["reachable", "orphaned", "missing"]
 
@@ -137,25 +139,110 @@ class RunSummary:
     partial_pattern: list[str] = field(default_factory=list)
 
 
+def _timeout_output(error: subprocess.TimeoutExpired) -> str:
+    output = error.output
+    if isinstance(output, bytes):
+        return output.decode(errors="replace")
+    return output or ""
+
+
+def _stop_process_group(process: subprocess.Popen[str]) -> str:
+    """Stop one POSIX group and reap its parent.
+
+    Deliberately detached descendants are outside this group-scoped guarantee.
+    """
+    grace_deadline = time.monotonic() + PROCESS_TERMINATION_GRACE_SECONDS
+    with suppress(ProcessLookupError):
+        os.killpg(process.pid, signal.SIGTERM)
+    try:
+        stdout, _ = process.communicate(timeout=PROCESS_TERMINATION_GRACE_SECONDS)
+        output = stdout or ""
+    except subprocess.TimeoutExpired as error:
+        output = _timeout_output(error)
+
+    # communicate() can return as soon as the parent exits even though a descendant
+    # ignores TERM and no longer holds the parent's output pipe. Preserve the complete
+    # grace interval before escalating the whole group.
+    remaining = grace_deadline - time.monotonic()
+    if remaining > 0:
+        time.sleep(remaining)
+    with suppress(ProcessLookupError):
+        os.killpg(process.pid, signal.SIGKILL)
+
+    try:
+        stdout, _ = process.communicate(timeout=PROCESS_TERMINATION_GRACE_SECONDS)
+    except subprocess.TimeoutExpired as error:
+        if process.stdout is not None:
+            process.stdout.close()
+        try:
+            process.wait(timeout=PROCESS_TERMINATION_GRACE_SECONDS)
+        except subprocess.TimeoutExpired as reap_error:
+            raise StepFailureError(
+                "timed-out command did not exit after process-group SIGKILL"
+            ) from reap_error
+        return _timeout_output(error) or output
+    else:
+        return stdout or output
+
+
 def _run(
     context: Context,
     command: Sequence[str],
     *,
     cwd: Path = PROJECT_ROOT,
+    timeout_seconds: float | None = None,
 ) -> str:
-    completed = subprocess.run(
+    if timeout_seconds is None:
+        completed = subprocess.run(
+            list(command),
+            cwd=cwd,
+            env=context.environment,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            check=False,
+        )
+        output = completed.stdout.rstrip()
+        if completed.returncode:
+            rendered = " ".join(command)
+            detail = f"command exited {completed.returncode}: {rendered}"
+            if output:
+                detail += f"\n{output}"
+            raise StepFailureError(detail)
+        return output
+
+    if os.name == "nt":
+        raise StepFailureError(
+            "bounded validation subprocesses require verified process-tree cleanup; "
+            "Windows support is not yet implemented"
+        )
+
+    process = subprocess.Popen(
         list(command),
         cwd=cwd,
         env=context.environment,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         text=True,
-        check=False,
+        start_new_session=True,
     )
-    output = completed.stdout.rstrip()
-    if completed.returncode:
+    try:
+        stdout, _ = process.communicate(timeout=timeout_seconds)
+    except subprocess.TimeoutExpired:
+        output = _stop_process_group(process).rstrip()
         rendered = " ".join(command)
-        detail = f"command exited {completed.returncode}: {rendered}"
+        detail = f"command timed out after {timeout_seconds:g} seconds: {rendered}"
+        if output:
+            detail += f"\n{output}"
+        raise StepFailureError(detail) from None
+    except BaseException:
+        _stop_process_group(process)
+        raise
+
+    output = (stdout or "").rstrip()
+    if process.returncode:
+        rendered = " ".join(command)
+        detail = f"command exited {process.returncode}: {rendered}"
         if output:
             detail += f"\n{output}"
         raise StepFailureError(detail)

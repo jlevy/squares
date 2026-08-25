@@ -6,6 +6,10 @@
 from __future__ import annotations
 
 import io
+import os
+import subprocess
+import sys
+import time
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 
@@ -21,6 +25,92 @@ def _invoke(*arguments: str) -> tuple[int, str, str]:
     with redirect_stdout(stdout), redirect_stderr(stderr):
         status = main(list(arguments))
     return status, stdout.getvalue(), stderr.getvalue()
+
+
+def _process_is_running(pid: int) -> bool:
+    if os.name == "nt":
+        result = subprocess.run(
+            ("tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV", "/NH"),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        return f'"{pid}"' in result.stdout
+    result = subprocess.run(
+        ("ps", "-o", "stat=", "-p", str(pid)),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    state = result.stdout.strip()
+    return result.returncode == 0 and bool(state) and not state.startswith("Z")
+
+
+@pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
+def test_run_timeout_terminates_child_and_reports_captured_output(tmp_path: Path) -> None:
+    child_pid_path = tmp_path / "child.pid"
+    child_ready_path = tmp_path / "child.ready"
+    leaked_path = tmp_path / "child-leaked"
+    child_script = "\n".join(
+        (
+            "import os",
+            "import signal",
+            "import time",
+            "from pathlib import Path",
+            "signal.signal(signal.SIGTERM, signal.SIG_IGN)",
+            f"Path({str(child_pid_path)!r}).write_text(str(os.getpid()), encoding='utf-8')",
+            f"Path({str(child_ready_path)!r}).write_text('ready', encoding='utf-8')",
+            "time.sleep(2)",
+            f"Path({str(leaked_path)!r}).write_text('leaked', encoding='utf-8')",
+            "time.sleep(30)",
+        )
+    )
+    parent_script = "\n".join(
+        (
+            "import subprocess",
+            "import sys",
+            "import time",
+            f"child_script = {child_script!r}",
+            "child = subprocess.Popen(",
+            "    [sys.executable, '-c', child_script],",
+            "    stdout=subprocess.DEVNULL,",
+            "    stderr=subprocess.DEVNULL,",
+            ")",
+            f"ready_path = __import__('pathlib').Path({str(child_ready_path)!r})",
+            "while not ready_path.exists():",
+            "    time.sleep(0.01)",
+            "print('parent captured output', flush=True)",
+            "time.sleep(30)",
+        )
+    )
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+
+    started = time.monotonic()
+    with pytest.raises(validate.StepFailureError) as captured:
+        validate._run(
+            context,
+            (sys.executable, "-c", parent_script),
+            cwd=tmp_path,
+            timeout_seconds=0.25,
+        )
+    elapsed = time.monotonic() - started
+
+    assert 1 <= elapsed < 3
+    assert "command timed out after 0.25 seconds" in str(captured.value)
+    assert "parent captured output" in str(captured.value)
+    child_pid = int(child_pid_path.read_text(encoding="utf-8"))
+    deadline = time.monotonic() + 1
+    while _process_is_running(child_pid) and time.monotonic() < deadline:
+        time.sleep(0.01)
+    assert not _process_is_running(child_pid)
+    time.sleep(1)
+    assert not leaked_path.exists()
 
 
 def test_list_is_read_only_and_exposes_fast_and_full_check_groups() -> None:
