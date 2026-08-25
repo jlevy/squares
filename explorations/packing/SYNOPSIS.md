@@ -33,9 +33,11 @@ Those principles govern four capabilities built so far:
 1. **Know the frontier.** A schema-validated record of the best known packing and the
    best proved lower bound for every `n ≤ 100`, with provenance, plus a local archive of
    the primary literature.
-2. **Verify exactly.** A separating-axis verifier that decides validity over the
-   packing’s own algebraic number field, so a configuration with contacts at *exactly*
-   zero separation can be certified rather than guessed at.
+2. **Verify exact witnesses under certified fields.** A separating-axis verifier that
+   decides validity over the packing’s algebraic number field, so a configuration with
+   contacts at *exactly* zero separation can be certified rather than guessed at.
+   The bundled fields are independently isolated; the generic third-party field path is
+   not yet sound.
 3. **Search, under an experiment contract.** A hypothesis registry with kill criteria
    written before the run, a metric vector, an accept rule, a declared timebox, and a
    ledger generated from the artifacts rather than typed.
@@ -49,6 +51,57 @@ Capability 2 is narrower than it sounds and the difference matters: this directo
 [What Is Built](#what-is-built) states, component by component, what runs, what runs but
 cannot support the claim it appears to, and what is documented and unbuilt.
 Read it before citing any capability here.
+
+### Current research readiness
+
+The program has two promoted mathematical outputs: an exactly verified packing that
+improves an upper bound, or a proof certificate that improves a lower bound.
+Search, refinement, local geometry, component statistics, and visualization are
+instruments for producing those outputs.
+They do not inherit the status of a bound merely because they run or reveal structure.
+
+The judgments below concern safe research use, not whether code exists.
+The detailed implementation statuses remain in [What Is Built](#what-is-built).
+
+<!-- BEGIN CURRENT-RESEARCH-READINESS -->
+
+| Layer | Safe use now | Blocking boundary or next gate | Owner |
+| --- | --- | --- | --- |
+| Research record and process | Reconstruct hypotheses, experiments, sessions, effort, and known failures | A closed bead or plausible output is not evidence until the artifact, landed tree, and generated views agree | [Ledger](campaign/ledger.md), [defect log](defects.md), and [confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) |
+| Agent loop and throughput | Run bounded phases with declared clocks, checkpoint each result, and select the next dependency-ready bead | Portable recovery and final receipts remain incomplete; wall-clock budgets do not define equal scientific work under load | [Campaign runbook](campaign/README.md), [launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-autonomous-agent-loop), and [D-126](defects.md) |
+| Frontier and literature | Establish best-known values and proved bounds with provenance through `n = 100` | The corpus records values and sources, not an executable geometry witness for every record | [`frontier/`](frontier/README.md) and [`resources/`](resources/README.md) |
+| Exact witness verification | Certify the bundled Trump witness and other independently isolated algebraic inputs | The generic `NumberField` path needs a root-count certificate before accepting third-party field metadata ([D-053](defects.md)) | [Exact layer](#the-exact-layerbuilt) |
+| Numerical refinement | Polish and compare fixed-cell controls above the measured solver floor | A stopped quench is neither certified stationary nor comparable by wall-clock budget under load | [Refinement layer](#the-refinement-layerbuilt-with-a-floor) and [D-021, D-052, D-126](defects.md) |
+| Exact local geometry and proof | Run the specialized small-`n`, Trump, and Stromquist checkers; this is the most productive mathematical lane so far | There is no generic proof-synthesis or interval branch-and-bound pipeline | [Proof lane](#the-proof-lanebuilt-and-producing-theorems) |
+| Proposal and search | Use the stock annealer for calibration and candidate generation | The proposer interface, equal-work pair-test meter, and mechanism-diverse proposers are unbuilt | [Proposer layer](#the-proposer-layerone-instrument-and-the-interface-is-unbuilt) |
+| Event capture and replay | Retain and independently replay watched control events | A valid terminal event is an observation, not a connected terminal component | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) |
+| Basin identity, census, and atlas | Use exact `n = 3` and `n = 4` models as identity controls | Component counting is not admissible until the `n = 5` ambiguity is bounded and the classifier is validated successively | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) |
+| Numerical-to-exact promotion | Reuse the dedicated `n = 5` fixed-angle proof of concept | No general command turns a retained floating pose into an exact witness or an explicit rejection | [Promotion pipeline](#the-promotion-pipelineunbuilt-and-it-is-the-largest-structural-gap) |
+| Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
+| Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
+
+The generated ledger currently derives three confirmed hypotheses, six refuted
+hypotheses, one open hypothesis, seven open questions, and twenty-four blocked
+hypotheses.
+Its active confidence ladder has completed the exact and event controls up to
+the first nontrivial identity question; the next scientific transition is from
+specialized `n = 5` local geometry to a defensible component relation, not to a larger
+raw census.
+
+#### Refresh rule
+
+Refresh this block whenever a layer’s admissibility or built state changes, the
+confidence-ladder head moves, or the numerical launch decision changes.
+Take counts and verdicts from the [generated ledger](campaign/ledger.md), cell order
+from the [confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md),
+blockers from the [defect log](defects.md), and numeric go/no-go from the
+[launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md).
+Do not copy a ready bead, dated throughput, or a candidate mathematical verdict into
+this table. Reconcile the table with [What Is Built](#what-is-built) and
+[Where This Stands](#where-this-stands), then run `tools/check_synopsis.py`; the checker
+keeps the marked block attached to these canonical owners without freezing its wording.
+
+<!-- END CURRENT-RESEARCH-READINESS -->
 
 The strategy that organises lanes 3 and 4 is stated in
 [A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md):
@@ -251,7 +304,7 @@ proposer interface itself, the pair-test **meter** (so no two proposers have eve
 compared at equal budget), δ-continuation, angle-class search *as a search*,
 neighbour-transfer seeding, MAP-Elites retention, and billiard/inflation.
 
-This is the campaign’s live bottleneck.
+This is the record-finding lane’s live bottleneck.
 The refiner takes the tested proved-control starts to residuals of `1e-15` and leaves
 the tested `n = 11` starts at `6e-02`, so proposal is where the gap is—and proposal is
 the layer with the fewest built parts.
@@ -1301,7 +1354,7 @@ view; this section is the reading of it.
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 0 | — |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question; one exact 2D sheet and one obstructed tangent direction | How are the observed `n=5` endpoint candidates connected? | 4 | 65m agent, 1.00s wall |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected, given one exact two-dimensional sheet and one obstructed tangent direction? | 4 | 65m agent, 1.00s wall |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | **refuted** | Verified record packings through `n=30` use at most three angle classes; exp-012 verifies six at `n=29` | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
@@ -1310,7 +1363,7 @@ view; this section is the reading of it.
 | [H-029](campaign/hypotheses/H-029-adaptive-splitting.md) | blocked | Calibrated adaptive splitting beats restarts on rare target events | 0 | — |
 | [H-030](campaign/hypotheses/H-030-public-parent-surgery.md) | blocked | Construction surgery reproduces at least two of six hidden public record improvements | 0 | — |
 | [H-031](campaign/hypotheses/H-031-load-guided-block-moves.md) | blocked | LP-load-guided block moves beat coordinate-only moves per pair-test | 0 | — |
-| [H-032](campaign/hypotheses/H-032-small-n-optimal-moduli.md) | open; `n=3,4` solved | What are the exact optimal configuration spaces for `n=3…6`? | 2 | 35m agent, 1.28s wall |
+| [H-032](campaign/hypotheses/H-032-small-n-optimal-moduli.md) | open question | What are the exact optimal configuration spaces for `n=3…6`, given that `n=3,4` are solved? | 2 | 35m agent, 1.28s wall |
 | [H-033](campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | open question | Can the `m²−3` theorem be extended to `s(61)=8`? | 0 | — |
 | [H-034](campaign/hypotheses/H-034-fractional-piercing-ceiling.md) | blocked | The fractional piercing value at Trump’s side is greater than ten | 0 | — |
 | [H-035](campaign/hypotheses/H-035-asymptotic-primitive-finite-transfer.md) | blocked | Current asymptotic construction primitives improve a finite public parent | 0 | — |
@@ -1670,14 +1723,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 225 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 229 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 64 | asserted something false about the mathematics |
-| validity | 64 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 71 | recorded something its own evidence contradicts |
+| validity | 65 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 74 | recorded something its own evidence contradicts |
 | robustness | 19 | did not finish, or finished only by luck |
 | performance | 7 | worked, but cost far more than it should |
 
@@ -1687,7 +1740,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught twelve defects in 225, and no soundness defect ever.**
+**The automated gate has caught twelve defects in 229, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1834,8 +1887,8 @@ and the other branch ref restored before push or target execution.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Eighty-five fixes left no regression check behind, and that list has already predicted a
-recurrence once. The
+Eighty-seven fixes left no regression check behind, and that list has already predicted
+a recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
 relative to what they govern, a discovery treated as a defect until an independent layer
@@ -1843,23 +1896,27 @@ agrees, and new components inheriting the perimeter—that apply to code not yet
 
 ## Where This Stands
 
-The middle tier is built and works.
+The middle tier is built and works within the explicit boundaries above.
 Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s
 slopes to three decimals.
 Polish is solved on both proved instance cells to machine precision.
-One hypothesis is confirmed, four are refuted informatively, and the campaign has a
-defect log good enough to predict its own regressions.
+The current hypothesis-status aggregate is reconciled from the generated ledger in
+[Current research readiness](#current-research-readiness), and the campaign has a defect
+log that has already predicted a recurrence.
 
-**The bottleneck has moved from polish to proposal.** Nothing in the current toolkit
-reaches Trump’s standing side, and the refiner cannot rescue the tested starts by
-construction; no sampled `n >= 5` full terminal-component relation has been measured.
-The named candidates are δ-continuation, angle-class search as a *search* rather than an
-assumption, neighbour-transfer seeding, and quality-diversity retention—none built.
+**For record-finding, the bottleneck has moved from polish to proposal.** Nothing in the
+current toolkit reaches Trump’s standing side, and the refiner cannot rescue the tested
+starts by construction; no sampled `n >= 5` full terminal-component relation has been
+measured. The named candidates are δ-continuation, angle-class search as a *search*
+rather than an assumption, neighbour-transfer seeding, and quality-diversity
+retention—none built.
 
-**The premise is still untested, and now blocked on the first nontrivial component
-question.** Everything the strategy layer recommends rests on record basins being rare
-in quench measure, and [H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is
-the measurement that would refute it.
+**The cartography premise is still untested, and now blocked on the first nontrivial
+component question.** The claim that mapping terminal components is the best route to
+records rests on record basins being rare in quench measure, and
+[H-012](campaign/hypotheses/H-012-record-basins-are-rare.md) is the measurement that
+would refute it. The independent proof, construction, exact-value, and asymptotic lanes
+do not depend on that premise.
 The quench supplies one needed instrument, and exact `n = 3`/`n = 4` identity controls
 now pass, but sampled terminal identity at `n = 5` is not ready.
 What is not settled is what a basin *is*.
