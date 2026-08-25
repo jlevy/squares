@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 332
+count: 334
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8338,6 +8338,53 @@ defects:
   bead: think-z96r
   recorded_in: devtools/check_synopsis.py
 - id: D-326
+  title: A second unprotected-fix aggregate escaped the single-match drift check
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one merged checkpoint
+  severity: medium
+  status: fixed
+  recurrence_of: D-305
+  what: >-
+    SYNOPSIS.md stated the unprotected-fix aggregate in two places. The D-305 repair
+    corrected the defect-log section to the derived 106, but a later postmortem
+    paragraph still said ninety-eight; check_synopsis accepted the document because its
+    pattern required only one matching occurrence.
+  consequence: >-
+    The postmortem conclusion understated the unprotected-fix debt by eight while the
+    drift check reported the aggregate as reconciled.
+  fix: >-
+    Remove the duplicate from the maintained synopsis and make check_synopsis validate
+    every occurrence of the aggregate phrase instead of accepting the first match.
+  regression: test_unprotected_fix_claims_rejects_stale_duplicate
+  bead: think-8mkk
+  recorded_in: devtools/check_synopsis.py
+- id: D-327
+  title: The timeout documentation split another compound adjective after its hyphen
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: one merged checkpoint
+  severity: low
+  status: fixed
+  recurrence_of: D-301
+  what: >-
+    The production-timeout paragraph in development.md began a sentence with
+    "Mutation- control commands", splitting the compound modifier the same way D-301
+    had just repaired in the session receipt rules.
+  consequence: >-
+    The sentence parsed with a dangling "Mutation-" fragment; the timeout guidance
+    itself was unaffected.
+  fix: Rejoin the compound as "Mutation-control commands".
+  regression: none
+  bead: think-7456
+  recorded_in: development.md
+- id: D-328
   title: Concurrent-branch rounds were authored to a superseded experiment schema
   date: '2026-08-25'
   layer: record
@@ -8363,7 +8410,7 @@ defects:
     what caught it; no additional check is needed.
   bead: think-clin
   recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
-- id: D-327
+- id: D-329
   title: The tutorial's promotion example asserted an unattested separation value
   date: '2026-08-25'
   layer: record
@@ -8387,7 +8434,7 @@ defects:
     work.
   bead: think-mb6q
   recorded_in: TUTORIAL.md
-- id: D-328
+- id: D-330
   title: The tutorial identified the side floor with the feasibility tolerance
   date: '2026-08-25'
   layer: record
@@ -8410,7 +8457,7 @@ defects:
   regression: none automated
   bead: think-suzm
   recorded_in: TUTORIAL.md
-- id: D-329
+- id: D-331
   title: A benchmark ratio was relabeled across implementations
   date: '2026-08-25'
   layer: record
@@ -8434,7 +8481,7 @@ defects:
   regression: none automated
   bead: think-6z2v
   recorded_in: TUTORIAL.md
-- id: D-330
+- id: D-332
   title: The tutorial overstated archive coverage of the record constructions
   date: '2026-08-25'
   layer: record
@@ -8460,7 +8507,7 @@ defects:
     what was and was not retrieved.
   bead: think-bqjd
   recorded_in: TUTORIAL.md
-- id: D-331
+- id: D-333
   title: The registry's rounds column drifted from the ledger under no stated rule
   date: '2026-08-25'
   layer: record
@@ -8487,7 +8534,7 @@ defects:
     one row and expects the checker to name it.
   bead: think-ojgc
   recorded_in: SYNOPSIS.md
-- id: D-332
+- id: D-334
   title: A hand-copied no-regression count drifted beside a sentence promising no drift
   date: '2026-08-25'
   layer: record

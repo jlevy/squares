@@ -73,6 +73,8 @@ class _ProcessRegistry:
         with self._lock:
             self._stopping = True
             pids = tuple(self._pids)
+        if not pids:
+            return
         for pid in pids:
             with suppress(ProcessLookupError):
                 os.killpg(pid, signal.SIGTERM)
@@ -258,8 +260,10 @@ def _run(
         context.processes.register(process.pid)
     except StepFailureError:
         try:
-            process.wait(timeout=PROCESS_TERMINATION_GRACE_SECONDS)
+            process.communicate(timeout=PROCESS_TERMINATION_GRACE_SECONDS)
         except subprocess.TimeoutExpired as error:
+            if process.stdout is not None:
+                process.stdout.close()
             raise StepFailureError(
                 "rejected validation subprocess did not exit after SIGKILL"
             ) from error
@@ -1171,16 +1175,14 @@ def main(arguments: list[str] | None = None) -> int:
             if inner_value is not None
             else max(1, jobs // INNER_JOB_DIVISOR)
         )
-        timeout_value = namespace.timeout_seconds or os.environ.get(
-            "PACKING_VALIDATE_TIMEOUT_SECONDS"
-        )
+        if namespace.timeout_seconds is not None:
+            timeout_name = "--timeout-seconds"
+            timeout_value = namespace.timeout_seconds
+        else:
+            timeout_name = "PACKING_VALIDATE_TIMEOUT_SECONDS"
+            timeout_value = os.environ.get(timeout_name)
         timeout_seconds = (
-            _positive_seconds(
-                "--timeout-seconds"
-                if namespace.timeout_seconds is not None
-                else "PACKING_VALIDATE_TIMEOUT_SECONDS",
-                timeout_value,
-            )
+            _positive_seconds(timeout_name, timeout_value)
             if timeout_value is not None
             else DEFAULT_TIMEOUT_SECONDS
         )

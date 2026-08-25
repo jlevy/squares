@@ -105,7 +105,7 @@ controls:
   expect: "Date dateline repeats campaign progress"
 
 # The registry table repeats the ledger's per-hypothesis totals verbatim. H-023
-# silently lagged exp-039 this way (D-327), so the rounds column is now compared
+# silently lagged exp-039 this way (D-333), so the rounds column is now compared
 # row by row and this control rehearses one row going stale.
 - name: synopsis - registry rounds column lagging the ledger
   file: SYNOPSIS.md

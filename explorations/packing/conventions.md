@@ -82,7 +82,9 @@ A round does not apply its one verdict to several hypotheses.
 **Ids are never reused, and never renumbered except on merge collision.**
 [checked: whole-set uniqueness] When two branches collide, the newer campaign renumbers
 and the change is recorded as an annotation on the affected artifacts, never as a silent
-edit.
+edit. Sequential defect IDs are branch-provisional: the later branch takes the next free
+IDs at merge and updates its references in the same change.
+Do not reserve IDs or add a second coordination ledger.
 
 **Reserved ids.** [checked] No hypothesis ids are currently reserved.
 A future reservation is declared in a `reserved-ids` comment on the idea board and names
@@ -158,6 +160,8 @@ tracked delegation, expensive experiment or proof supervision, or a consequentia
 recovery handoff.
 Once opened, one phase declares one workflow and one primary focus; the
 other principles still constrain and may contribute to the work.
+A review document may be committed on its review branch and becomes durable when that PR
+merges. Do not create a separate default-branch copy or publication mechanism.
 
 **Implementation stays with its owning workflow.** [convention] Bounded research
 corrections stay in W1 or W2, idea probes in W3, process and checker repairs in W4,

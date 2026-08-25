@@ -40,7 +40,7 @@ replay. The process concern — closed rounds edited in place rather than annota
 recorded here rather than as a defect entry, since the landed record has made the
 rewrite its deliberate form.
 
-**The concurrent schema fork was repaired forward twice, identically** (D-326,
+**The concurrent schema fork was repaired forward twice, identically** (D-328,
 `think-clin`). `main`’s exp-038 and exp-039 were authored to `Experiment/v1` after this
 branch had shipped v2; this branch’s first merge migrated both (`assurance: verified`,
 `method: exact-algebraic`), and #31’s own merge into `main` applied the same migration
@@ -92,27 +92,27 @@ could be traced to a primary artifact:
   reserved formal term.
   The row was reworded during the first merge; #31’s landed registry row replaced it
   entirely, and no defect entry remains.
-- **SR-2** (D-327, `think-mb6q`) — §5’s promotion example asserted a separation of
+- **SR-2** (D-329, `think-mb6q`) — §5’s promotion example asserted a separation of
   `3.7e-12` that exists in no artifact (it entered with the original tutorial commit and
   survived two reviews).
   Reworded to the attested solver-floor scale.
-- **SR-3** (D-328, `think-suzm`) — §8 called the `1e-11` floor “HiGHS’s own feasibility
+- **SR-3** (D-330, `think-suzm`) — §8 called the `1e-11` floor “HiGHS’s own feasibility
   tolerance, pinned at the strictest value it accepts”.
   The pinned tolerance is `1e-10`; `1e-11` is the post-checked side residual it
   produces. Restated with both numbers.
-- **SR-4** (D-329, `think-6z2v`) — §5 labelled `177×`/`578×` “the exact-to-float ratio”;
+- **SR-4** (D-331, `think-6z2v`) — §5 labelled `177×`/`578×` “the exact-to-float ratio”;
   the source measures compiled-over-pure-Python for the same exact multiplication.
   Reworded, and the compiled-backend table row now says *benchmarked; not integrated*,
   agreeing with §11.
-- **SR-5** (D-330, `think-bqjd`) — §11 claimed every cited source is archived locally;
+- **SR-5** (D-332, `think-bqjd`) — §11 claimed every cited source is archived locally;
   no Trump 1979 or Bidwell 1998 document exists (the archive README records the failed
   Trump retrieval). The claim now names the two exceptions.
-- **SR-6** (D-331, `think-ojgc`) — the synopsis registry’s Rounds column was
+- **SR-6** (D-333, `think-ojgc`) — the synopsis registry’s Rounds column was
   hand-maintained under no reproducible rule (H-023 lagged exp-039; H-002 showed 4
   against the ledger’s 5; H-021 showed 0 against 14). Rows aligned to the ledger’s
   totals, the rule stated inline, `check_synopsis` extended to compare the column, and a
   negative control added.
-- **SR-7** (D-332, `think-aihj`, recurrence of D-028) — the synopsis restated the
+- **SR-7** (D-334, `think-aihj`, recurrence of D-028) — the synopsis restated the
   no-regression-fix count by hand (“ninety-eight” against the generated 106) two
   sentences after promising the neighbouring claims cannot drift.
   The copied number is gone; #31’s landed narrative removes the aggregate restatement
@@ -144,10 +144,11 @@ Merge-phase findings: `think-16qn`, `think-clin`, `think-0emo`. Tutorial-pass fi
 `think-mb6q`, `think-suzm`, `think-6z2v`, `think-bqjd`, `think-ojgc`, `think-aihj`.
 Post-push CI finding: `think-d2ah`; durability follow-up `think-57x3`, resolved by #31’s
 semantic golden comparison.
-After #31 landed with its own D-320 through D-325, this review’s surviving entries were
-renumbered to D-326 through D-332; the three superseded ones (the H-024 restoration, the
-H-024 row rewording, and the golden serialization) carry no entries.
-Defects D-326 through D-332 are registered with these beads and are all fixed on this
+After #31 landed with D-320 through D-325 and the PR 37 review with D-326 and D-327,
+this review’s surviving entries were renumbered again to D-328 through D-334 after the
+PR 37 review landed main’s D-326 and D-327; the three superseded ones (the H-024
+restoration, the H-024 row rewording, and the golden serialization) carry no entries.
+Defects D-328 through D-334 are registered with these beads and are all fixed on this
 branch.
 
 <!-- This document follows common-doc-guidelines.md.

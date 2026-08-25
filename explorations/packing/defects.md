@@ -2,14 +2,14 @@
 
 # Defect log
 
-332 defects recorded across the packing toolchain.
+334 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **79 soundness defects** — the system asserting something false about the mathematics. 63 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **107 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264, D-312 repeats D-309, D-313 repeats D-259, D-315 repeats D-295, D-318 repeats D-308, D-321 repeats D-317, D-323 repeats D-022, D-324 repeats D-320, D-325 repeats D-319, D-332 repeats D-028).
+- **108 fixes left no regression check behind.** That list is the best predictor of what comes back; recorded recurrences are D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264, D-312 repeats D-309, D-313 repeats D-259, D-315 repeats D-295, D-318 repeats D-308, D-321 repeats D-317, D-323 repeats D-022, D-324 repeats D-320, D-325 repeats D-319, D-326 repeats D-305, D-327 repeats D-301, D-334 repeats D-028.
 - **35 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 20 | a cell of the sweep whose answer is known in advance |
-| `review` | 206 | a human or agent reading the work against a checklist |
+| `review` | 208 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
 | `inspection` | 31 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 43 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 43 of 332, and none of the 79 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 43 of 334, and none of the 79 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,7 +36,7 @@ The line worth reading twice: **the automated gate caught 43 of 332, and none of
 | verifier | 4 |
 | record | 101 |
 | tooling | 104 |
-| docs | 91 |
+| docs | 93 |
 
 ## By kind
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 43 of 332, and none of
 | --- | ---: |
 | soundness | 79 |
 | validity | 82 |
-| bookkeeping | 125 |
+| bookkeeping | 127 |
 | robustness | 37 |
 | performance | 9 |
 
@@ -162,6 +162,7 @@ This is the actionable list.
 | D-304 | McClenagan's Section 3 proof uses a contradictory inequality chain | docs |
 | D-310 | McClenagan's equation 3.2 calls a periodic tangent solution unique | docs |
 | D-322 | The synopsis overstated which defect classes the gate had caught | docs |
+| D-327 | The timeout documentation split another compound adjective after its hyphen | docs |
 
 ## Still open
 
@@ -532,13 +533,15 @@ This is the actionable list.
 | [D-323](devtools/render_research_tables.py) | 2026-08-25 | docs | soundness | flattering | `review` | high | fixed | The reader-first frontier view discarded long exact forms |
 | [D-324](devtools/check_golden_basins.py) | 2026-08-25 | tooling | soundness | flattering | `review` | medium | fixed | Semantic golden comparison accepted ambiguous YAML identities |
 | [D-325](devtools/check_synopsis.py) | 2026-08-25 | tooling | robustness | conservative | `review` | low | fixed | The current-handoff validator embedded one live agenda cell |
-| [D-326](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md) | 2026-08-25 | record | bookkeeping | neutral | `gate` | medium | fixed | Concurrent-branch rounds were authored to a superseded experiment schema |
-| [D-327](TUTORIAL.md) | 2026-08-25 | record | soundness | neutral | `review` | medium | fixed | The tutorial's promotion example asserted an unattested separation value |
-| [D-328](TUTORIAL.md) | 2026-08-25 | record | soundness | neutral | `review` | medium | fixed | The tutorial identified the side floor with the feasibility tolerance |
-| [D-329](TUTORIAL.md) | 2026-08-25 | record | soundness | neutral | `review` | low | fixed | A benchmark ratio was relabeled across implementations |
-| [D-330](TUTORIAL.md) | 2026-08-25 | record | bookkeeping | flattering | `review` | low | fixed | The tutorial overstated archive coverage of the record constructions |
-| [D-331](SYNOPSIS.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | medium | fixed | The registry's rounds column drifted from the ledger under no stated rule |
-| [D-332](SYNOPSIS.md) | 2026-08-25 | record | bookkeeping | flattering | `review` | low | fixed | A hand-copied no-regression count drifted beside a sentence promising no drift |
+| [D-326](devtools/check_synopsis.py) | 2026-08-25 | docs | bookkeeping | flattering | `review` | medium | fixed | A second unprotected-fix aggregate escaped the single-match drift check |
+| [D-327](development.md) | 2026-08-25 | docs | bookkeeping | neutral | `review` | low | fixed | The timeout documentation split another compound adjective after its hyphen |
+| [D-328](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md) | 2026-08-25 | record | bookkeeping | neutral | `gate` | medium | fixed | Concurrent-branch rounds were authored to a superseded experiment schema |
+| [D-329](TUTORIAL.md) | 2026-08-25 | record | soundness | neutral | `review` | medium | fixed | The tutorial's promotion example asserted an unattested separation value |
+| [D-330](TUTORIAL.md) | 2026-08-25 | record | soundness | neutral | `review` | medium | fixed | The tutorial identified the side floor with the feasibility tolerance |
+| [D-331](TUTORIAL.md) | 2026-08-25 | record | soundness | neutral | `review` | low | fixed | A benchmark ratio was relabeled across implementations |
+| [D-332](TUTORIAL.md) | 2026-08-25 | record | bookkeeping | flattering | `review` | low | fixed | The tutorial overstated archive coverage of the record constructions |
+| [D-333](SYNOPSIS.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | medium | fixed | The registry's rounds column drifted from the ledger under no stated rule |
+| [D-334](SYNOPSIS.md) | 2026-08-25 | record | bookkeeping | flattering | `review` | low | fixed | A hand-copied no-regression count drifted beside a sentence promising no drift |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

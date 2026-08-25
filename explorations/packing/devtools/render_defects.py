@@ -65,8 +65,8 @@ def render(d: dict) -> str:
         ),
         (
             f"- **{len(unprotected)} fixes left no regression check behind.** That "
-            "list is the best predictor of what comes back — and it already has, once "
-            f"({repeats or 'none yet'})."
+            "list is the best predictor of what comes back; recorded recurrences are "
+            f"{repeats or 'none yet'}."
         ),
         (
             f"- **{len(open_)} {plural} still open** (outstanding or contained), every "
