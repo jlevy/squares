@@ -5,7 +5,7 @@ title: Bound packing validation steps and reap timed-out process groups
 kind: bug
 status: in_progress
 priority: 1
-version: 9
+version: 10
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex-root
 labels: []
@@ -16,8 +16,9 @@ child_order_hints:
   - is-01m0wbykxb2qt4bcjyf2eq3k8r
   - is-01m0wbym69h0rtff9hh1b13a4g
   - is-01m0wkpjps57ptqvd15dfnk8ps
+  - is-01m0wkr0es931jvxpg735s7vq5
 created_at: 2026-08-25T05:29:40.976Z
-updated_at: 2026-08-25T14:03:02.232Z
+updated_at: 2026-08-25T14:03:49.081Z
 ---
 packing-validate launches proof, solver, Cargo, and checker subprocesses without per-step deadlines or process-group cleanup; _run_selected waits for every future. A hung step can consume an entire unattended handoff despite mutation controls now being bounded. Add configurable per-step/default deadlines suitable for deep mathematics, group termination/reaping, timed-out diagnostics and focused failure tests. This is a follow-up robustness blocker for unattended use, not for the next supervised exact slice.
 
