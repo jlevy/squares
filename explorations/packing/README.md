@@ -195,10 +195,10 @@ The eight words a reader meets everywhere here, in one line each;
 | **cell** | A choice of separating axis and order for every pair of squares; at fixed angles, one cell is one linear program |
 | **quench** | The deterministic refinement carrying a configuration to a local optimum |
 | **basin** | For a fixed deterministic quench, the preimage of one returned pose; this point-basin can split one connected terminal component |
-| **local refinement** vs **exploration** | Improving within the basin you are in, versus reaching a different one; neither term says anything about formal assurance |
+| **polish** vs **exploration** | Refining within the basin you are in, versus reaching a different one; neither term says anything about formal assurance |
 | **standing best** | The best side ever published for that `n`—an upper bound, not known optimal in open cases |
 | **gap** | `best_side − standing_best`, always signed |
-| **assurance** | `reported`, `numerically checked`, or `verified`; only the last is formal, and method, precision, tolerance, and origin are recorded separately |
+| **assurance** | `reported`, `numerically-checked`, or `verified`; only the last is formal, and method, precision, tolerance, and origin are recorded separately |
 
 The operating documents divide ownership rather than repeat one another:
 

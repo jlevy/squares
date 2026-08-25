@@ -31,7 +31,7 @@ Two bounds are immediate:
 - **Grid:** `s(n) ≤ ⌈√n⌉`, by the axis-aligned grid packing.
 
 At `n = 11` those give `3.3166… ≤ s(11) ≤ 4`, and the whole subject lives in that
-interval. For a perfect square `s(k²) = k`, since the two bounds meet, and there is
+interval. For a perfect square `s(m²) = m`, since the two bounds meet, and there is
 nothing to say about the side value.
 Some of the most interesting cases lie just above a perfect square, where improving on
 the next grid side can require tilted structure.
@@ -526,10 +526,14 @@ coordinate is rational and the degree is 1. Which fields and degrees actually oc
 how they follow from the contact mechanism, is an open question in the registry rather
 than something known.
 
-**And the guarantee is not pointwise.** The optimal *side* is algebraic: the half-angle
-substitution `u = tan(θ/2)` turns `cos θ` and `sin θ` into rational functions of `u`, so
-validity defines a semialgebraic set over `ℚ` with no transcendental functions anywhere,
-and the set of achievable sides is a projection of it.
+**And the guarantee is not pointwise.** The optimal *side* is algebraic, by a standard
+argument this directory does not otherwise use.
+The half-angle substitution `u = tan(θ/2)` turns `cos θ` and `sin θ` into rational
+functions of `u`, so validity defines a semialgebraic set over `ℚ` with no
+transcendental functions anywhere.
+The set of achievable sides is a projection of that set, and by the Tarski–Seidenberg
+theorem a projection of a semialgebraic set is semialgebraic—hence a finite union of
+points and intervals with algebraic endpoints, whose infimum is algebraic.
 An individual optimal *configuration* need not be.
 Where the optimum is a positive-dimensional family, the family is cut out by polynomials
 but a point on it carries a free parameter: the `n = 3` sliding family in
@@ -887,9 +891,11 @@ task whose tractability is established.
 
 Every word below is used narrowly here, and each earns a row by being one a general
 reader would otherwise read loosely.
-Symbols are in [§10](#10-a-notation-card); [`SYNOPSIS.md`](SYNOPSIS.md#terminology) is
-the authority and is complete, and this is the short form.
-The order is by dependency, so it reads top to bottom.
+Symbols are in [§10](#10-a-notation-card), and [`SYNOPSIS.md`](SYNOPSIS.md#terminology)
+is the authority for everything it defines.
+Two rows below are local to this document: **terminal set**, which the synopsis uses
+without defining, and **feasibility tolerance**, which belongs to the solver rather than
+to the project. The order is by dependency, so it reads top to bottom.
 
 Three words carry controlled multiple senses, and the rule for each is given with it.
 
@@ -927,7 +933,8 @@ A subscript `i` always picks out one square; a bare letter is the whole `n`-vect
 | --- | --- | --- |
 | `n` | integer | How many unit squares are being packed |
 | `s(n)` | real | The optimal side: the smallest container that fits `n` unit squares |
-| `k` | integer | A perfect-square root, in `s(k²) = k`; also a corner index `1…4` in `oᵢₖ` |
+| `m` | integer | A perfect-square root, in `s(m²) = m` |
+| `k` | integer | A corner index, `1…4`, in `oᵢₖ` |
 | `s` | real, variable | The container side being minimised. Distinct from `s(n)`, which is the answer; `s` is what the program solves for |
 | `(xᵢ, yᵢ)` | `ℝ²` per square | The centre of square `i` |
 | `x`, `y` | `ℝⁿ` each | All `n` centre coordinates |
@@ -981,6 +988,11 @@ certificate the same section mentions.
 **Symbolic elimination** ([§5](#5-algebra-versus-numerics)). Cox, Little and O'Shea's
 *Ideals, Varieties, and Algorithms* for Gröbner bases, lexicographic order, and
 resultants—the tools that turn a contact system into a minimal polynomial.
+
+**Real semialgebraic geometry** ([§5](#5-algebra-versus-numerics)). Bochnak, Coste and
+Roy’s *Real Algebraic Geometry*, or Basu, Pollack and Roy’s *Algorithms in Real
+Algebraic Geometry*, for the Tarski–Seidenberg theorem and quantifier elimination over
+the reals—the results behind “the optimal side is algebraic”.
 
 **Integer relation** ([§5](#5-algebra-versus-numerics)). The PSLQ and LLL algorithms,
 and specifically what they do and do not prove: they find a relation, which is evidence,

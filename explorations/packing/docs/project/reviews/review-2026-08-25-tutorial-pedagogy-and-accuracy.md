@@ -657,6 +657,86 @@ retained Schadt `n = 29` decimal pose is numerically checked at 300 digits and t
 `frontier/n-029.md` and the witness are three different objects, the last deliberately
 weaker.
 
+## W2 Correctness Pass, 2026-08-25
+
+An independent correctness-only pass over the rework, under `W2 factual-review`.
+Findings are dispositions on claims the rework *introduced*, checked against primary
+sources in this directory rather than against the review that proposed them.
+
+### Confirmed
+
+**Every measured number.** The `f64` and exact-arithmetic costs (57 ns, 2,726 ns, 215.5
+µs, 1.2 µs, 13 ms, 0.35 s), the 177× and 578× ratios, and the three latency budgets all
+match `research-2026-08-22-infrastructure-for-packing-exploration.md`, which records
+13,490.5 µs at degree 62 and itself writes “more than 13 ms”.
+`1.28 ms`, `2n + 1 = 23`, `1,056 = 16 × (11 + 55)`, and `8^55 ≈ 4.7 × 10⁴⁹` all check.
+
+**The quench description.** Re-read against `sqpack.research.quench`. Variable order
+`[s, x₀…x_{n−1}, y₀…y_{n−1}]`, four containment rows per square, one separation row per
+pair because the cell fixes axis *and* sign, the cell fixed point, golden-section
+bracketing over merged classes, and the free pass are all as described.
+The window-narrowing rule is confirmed exactly: it narrows only when a whole sweep fails
+to improve, which the module records as the fix for D-030.
+
+**HiGHS.** Both LP implementations call `scipy.optimize.linprog` with `method="highs"`,
+so “reached through SciPy” is right.
+
+**Attainment.** `frontier/proof-strategies.yaml` entry 27, “Compactness / limit
+arguments”, carries mechanism “Guarantee the optimum is attained”, status `used`, and
+cites Martin 2000. The §1 attribution stands.
+
+**Weak separation.** Interior-disjointness holds exactly when a weakly separating line
+exists, in both directions, and edge-normal candidates suffice for convex polygons.
+
+**The primitive element argument.** Characteristic zero gives separability, and a finite
+separable extension is simple, so one `α` always suffices.
+
+### Corrected
+
+**A collision the rework introduced.** Moving the minimal polynomial to `μ` freed `m`,
+but the perfect-square root had already been moved to `k`—which is also the corner index
+in `oᵢₖ`. The rework therefore traded one collision for another, and diverged from
+`SYNOPSIS.md`, which still writes `s(m²) = m`. Reverted: the perfect-square root is `m`
+again, `k` means only the corner index, and the notation card carries both.
+
+**An over-claim on the semialgebraic argument.** TR-12 flagged this as unverified, and
+the tutorial asserted the conclusion without naming the step that carries it.
+The mathematics is standard and correct—the feasible set is semialgebraic over `ℚ` after
+the half-angle substitution, its projection is semialgebraic by **Tarski–Seidenberg**,
+and a semialgebraic subset of `ℝ` has algebraic endpoints—so the fix is attribution
+rather than retraction.
+The theorem is now named, marked as an argument this directory does not otherwise use,
+and given a further-reading entry.
+
+**A false completeness claim.** §9’s preamble said the synopsis “is the authority and is
+complete”. Two rows are not in it: **terminal set**, which the synopsis uses without
+defining, and **feasibility tolerance**, which belongs to the solver.
+The preamble now says which rows are local.
+
+**Two terms in `README.md`.** Its Essential Terms table called polish “local
+refinement”, a name no other document uses—`SYNOPSIS.md` defines **Polish** and uses it
+fifteen times. And it spelled the assurance value `numerically checked` where the schema
+enum is `numerically-checked`, the same defect fixed in the tutorial as TR-15. Both
+corrected.
+
+### Recorded, not fixed
+
+**The `gap` split has no owner.** The tutorial now distinguishes **bound gap** from
+**search gap**, and both `SYNOPSIS.md` and `README.md` define a single unqualified `gap`
+as `best_side − standing_best`—which is the tutorial’s *search* gap.
+The split is a genuine disambiguation and the tutorial is not wrong, but it introduces
+two terms the declared authority does not define.
+Deciding whether the split propagates, or whether the tutorial marks the terms local, is
+an ownership question and belongs to `think-segx` rather than to a correctness pass.
+
+**Cross-document symbol collisions persist**, as the notation card already records: the
+`n = 11` report uses `θ` for the tutorial’s `a`, `u_i` for a per-square parameter, and
+`α` for two further things.
+Out of scope here; recorded on `think-segx`.
+
+**No document links to the tutorial’s section anchors**, only to the file, so
+renumbering to §12 broke nothing.
+
 ## Bead Map
 
 The epic is `think-ysoj`. Every finding above lands on exactly one bead.
