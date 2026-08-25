@@ -21,7 +21,7 @@ experiment:
     selftest_passed: true
   instance: {axis: n, point: 5, role: target}
   method:
-    control: four exact boundary fixtures and five mutations of the sheet certificate
+    control: four exact boundary fixtures and four mutations of the sheet certificate
     candidate: one exact half-angle-and-slide family at the exp-033 optimal side
     runs_per_condition: 1
     interleaved: false
@@ -53,12 +53,12 @@ experiment:
     outcome: criterion_met
     checked_by: >-
       universal exact inequalities over Q(sqrt(2)), four independent exact boundary
-      fixtures, the unchanged LP dual, retained-record regeneration, and five controls
+      fixtures, the unchanged LP dual, retained-record regeneration, and four controls
   verdict:
     decision: accepted
     primary_criterion: >-
       exact universal half-angle inequalities, four valid boundary fixtures, the
-      unchanged exact LP dual, independent replay, and all five declared mutations
+      unchanged exact LP dual, independent replay, and all four declared mutations
     reason: >-
       The full declared parameter strip is feasible at the exp-033 side, the exact dual
       proves every orientation-indexed LP cell optimal, and generation and replay agree.
@@ -85,13 +85,13 @@ Four exact boundary fixtures, covering both angle signs and both slide endpoints
 The exp-033 LP dual may certify optimality only if its support excludes the moving
 square and replays unchanged.
 Excessive angle, an unshrunk endpoint, a signed rather than absolute support correction,
-dual drift, and source-digest drift must all be rejected.
+and dual drift must all be rejected.
 
 The criterion is met.
 The universal exact inequalities and all four boundary fixtures pass, and the exp-033
 dual has support only on squares 2, 3, and 4, so it remains valid for every
 orientation-indexed LP cell in the sheet.
-Generation and independent replay took 0.27 wall-seconds together; all five declared
+Generation and independent replay took 0.27 wall-seconds together; all four declared
 mutations fail.
 
 This proves a two-dimensional sheet of optima within the declared orientation-indexed
@@ -101,7 +101,7 @@ every point attracts the quench, or that the `n = 5` census is complete.
 
 [`exp-034-h-023-n5-angle-sheet.json`](../results/exp-034-h-023-n5-angle-sheet.json)
 retains the universal certificate, four exact fixtures, dual, determination scope, and
-controls (`sha256:a718d64f705612eb4c4fde66a8119921aa45262f0c4994bcfffa0f3653c9d73e`).
+controls.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

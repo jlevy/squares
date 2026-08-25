@@ -3,7 +3,7 @@
   <title id="figure-title">Square packing</title>
   <desc id="figure-description">A square packing rendered with mathematical y coordinates upward.</desc>
   <metadata>
-    <sqpack:profile version="3">
+    <sqpack:profile version="4">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="annotations">minimal</sqpack:value>
       <sqpack:value name="evidence">certified-upper-bound</sqpack:value>
@@ -171,5 +171,5 @@
       <rect data-feature="container-outline" x="36" y="36" width="535.9999999999999999999999999" height="535.9999999999999999999999999" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
     </g>
   </g>
-  <text x="36" y="602" font-size="18" font-family="system-ui, sans-serif" fill="#17202a" data-evidence="certified-upper-bound" stroke-dasharray="3 3">U Trump n=11: side &lt;= 3.87708359 (certified upper bound)</text>
+  <text x="36" y="602" font-size="18" font-family="system-ui, sans-serif" fill="#17202a" data-evidence="certified-upper-bound" stroke-dasharray="3 3">U Trump n=11: side ~ 3.87708359 (certified upper bound)</text>
 </svg>

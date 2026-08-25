@@ -51,7 +51,6 @@
         }
       ],
       "source": "campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json",
-      "source_sha256": "d661e30eb2017cdfb1be8517a037c33474b93768414afeafff5a99a508b9acc0",
       "strata": [
         {
           "active_sat_axes": 4,
@@ -94,12 +93,10 @@
       "component_count": 1,
       "component_id": "F4(2)/(D4xS4):0",
       "labelled_state_count": 24,
-      "labelled_state_sha256": "89bf88159b30d08d244a6dd0d4a5d50fc254976fd1608d4ce8ade8eca40b66fe",
       "model_kind": "complete_exact_isolated_model",
       "n": 4,
       "quotient_scope": "container D4 x square relabelling x per-square quarter turns",
       "source": "campaign/series/series-000-smoke-and-calibration/results/exp-015-h-032-n4-optimal-moduli.json",
-      "source_sha256": "6f605fc82c2f521168b7eafb9a8811557501720ee53b8e0eb9cdd93aeaf2db28",
       "topology": "point"
     }
   },
@@ -258,7 +255,6 @@
   "schema_version": 1,
   "selftests": {
     "contact_keys_as_components": true,
-    "exact_model_digest_ignored": true,
     "f64_event_forced_assigned": true,
     "geometric_keys_as_components": true,
     "labelled_scope_as_quotient": true,

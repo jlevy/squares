@@ -17,15 +17,20 @@ case’s mathematical frontmatter.
 
 ![Walter Trump’s exact packing for the smallest open case.](../atlas/rendering/trump11-overview.svg)
 
-*The `n = 11` overview is one of four retained known answers.
+*The `n = 11` overview is one of five retained known answers.*
+
+![The high-precision Kingbird packing of twenty-nine unit squares.](../atlas/rendering/kingbird29-overview.svg)
+
+*The larger `n = 29` example exercises deterministic palette reuse while preserving the
+source’s status as a verified numerical construction.
 The other entries exercise an exact moduli map, a certified trajectory, and a numerical
 start/final comparison.*
 
 From the exploration root, list or rebuild every discoverable example with:
 
 ```bash
-uv run --frozen python tools/render_packing_gallery.py --list
-uv run --frozen python tools/render_packing_gallery.py --update
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --list
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --update
 ```
 
 Every currently rendered case embeds its own artifact below the frontmatter.
@@ -41,12 +46,12 @@ plotted, and checked.
 
 **The duplication is deliberate and it cannot drift**, because the Markdown tables in
 the reports are *generated* from these files by
-[`../tools/render_tables.py`](../tools/render_tables.py), between
-`<!-- BEGIN GENERATED: … -->` markers, and `../test.sh` fails if any is stale:
+[`devtools.render_research_tables`](../devtools/render_research_tables.py), between
+`<!-- BEGIN GENERATED: … -->` markers, and `packing-validate` fails if any is stale:
 
-```bash
-python3 ../tools/render_tables.py           # rewrite the tables in the report
-python3 ../tools/render_tables.py --check   # fail if any is stale
+```shell
+uv run --frozen python -m devtools.render_research_tables
+uv run --frozen python -m devtools.render_research_tables --check
 ```
 
 Four tables are generated this way: the open frontier (65 rows), the solved cases (35),
@@ -87,11 +92,12 @@ checks.
 | `asymptotic-waste-bounds.yaml` | `pure-yaml` | `asymptotic-waste-bounds.schema.yaml` |
 | `source-availability.yaml` | `pure-yaml` | `source-availability.schema.yaml` |
 
-```bash
-python3 ../tools/validate_schemas.py    # all of it, no network
+```shell
+uv run --frozen python -m devtools.validate_schemas
 ```
 
-`../test.sh` runs that, so an artifact cannot drift from its schema unnoticed.
+`packing-validate` runs that check, so an artifact cannot drift from its schema
+unnoticed.
 
 **A caveat about how the pure-YAML files are validated.** softschema’s spec defines the
 `pure-yaml` profile, and its library implements it correctly — but as of 0.6.1 the CLI
@@ -102,7 +108,7 @@ profile, so `softschema validate` rejects a conforming pure-YAML file with
 showing the library returns `valid` for the same file when the profile is set
 explicitly.
 
-Until that lands, `tools/validate_schemas.py` validates the pure-YAML datasets against
+Until that lands, `devtools.validate_schemas` validates the pure-YAML datasets against
 the *same compiled schema the CLI would use*, so `status: enforced` on those files is a
 fact rather than an aspiration.
 The Markdown artifacts are additionally checkable with the CLI directly:

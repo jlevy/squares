@@ -12,15 +12,21 @@ session:
   goal: >-
     Quarantine the abandoned isolation detour, correct the stable research record, and
     leave one visible, measured delegation loop on a clean reviewable PR.
-  entry_workflow: process-review
   workflow_phases:
   - workflow: process-review
     focus: process
+    recording: retrospective
     objective: Reconcile the abandoned detour, record state, and outer delegation loop.
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 240
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: The detour was quarantined and the stable record became reviewable and green.
     evidence:
     - The named attic stash preserves the prototype without promoting its claims.

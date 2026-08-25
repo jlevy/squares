@@ -24,8 +24,10 @@ Work is organized at three levels.
 Four **operating principles** define what quality means and which concerns may veto
 promotion. Six **workflow entry points** define the purpose and durable output of one
 phase of work. A bounded **slice** is the smallest action taken inside that phase.
-Keeping these levels separate lets an agent optimize one dimension without silently
+Keeping these levels separate lets an agent emphasize one dimension without silently
 changing the kind of work it promised to do.
+The focus is primary, not exclusive: the other three principles continue to constrain
+and contribute to the phase.
 
 **New here?** [`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the
 objects are, why the approach is shaped the way it is, and what is established versus
@@ -58,20 +60,28 @@ The full entry, exit, and transition contracts live in the
 | ID | Workflow | Enter when | Durable result | Usual handoff |
 | --- | --- | --- | --- | --- |
 | W1 | `research-pass` | The source record or research document is incomplete | Corrected research prose, source notes, and explicit gaps | W2 |
-| W2 | `factual-review` | Existing claims need a correctness-only audit | Findings, corrections, or defects; no new theory smuggled into the review | W3 or W4 |
+| W2 | `factual-review` | Existing claims need a correctness-only audit | Findings, authorized bounded corrections, or defects; no new theory smuggled into the review | W3 or W4 |
 | W3 | `insight-iteration` | Current evidence needs new explanations or hypotheses | Candidate `X-NNN`/`H-NNN` items with mechanisms, falsifiers, and information value | W6 |
-| W4 | `process-review` | Work is hard to reconstruct or the discipline itself needs review | Process findings, beads, and narrowly scoped contract or check proposals | W5 or implementation |
+| W4 | `process-review` | Work is hard to reconstruct or the discipline itself needs review | Process findings, beads, and narrowly scoped contract or check changes | W5 or the next owning workflow |
 | W5 | `efficiency-loop` | A measured bottleneck limits useful iterations | A baseline, profile, equivalence-safe change, and measured decision | W6 |
-| W6 | `research-loop` | A registered hypothesis has an instrument, criterion, and budget | One or more `exp-NNN` records, raw evidence, verdicts, and a current ledger | W2, then W3 |
+| W6 | `research-loop` | A registered hypothesis has a fixed criterion, regime, budget, and instrument contract | A frozen instrument and one or more `exp-NNN` records, raw evidence, verdicts, and a current ledger | W2 for promoted or high-risk claims; otherwise W3 or another W6 slice |
 
-Use `general-improvement` only when a task genuinely fits none of W1–W6. It is an
-explicit fallback, not permission to mix several purposes without checkpoints.
+Bounded implementation stays inside the workflow that owns its promised result: W1 or W2
+may correct research prose, W3 may implement a bounded exploratory derivation or
+visualization without spending an undeclared experiment budget, W4 may repair a process
+contract, W5 may implement a measured speedup, and W6 may build or repair the instrument
+for its registered round before measurement begins.
+Use `general-improvement` only for genuine repository maintenance whose output belongs
+to none of W1–W6. It is not a core-work catchall or permission to mix several purposes
+without checkpoints.
 
-One workflow phase is active at a time.
-It declares a workflow, one focus, an objective, a clock, a promised artifact, and a
-stop condition.
-Start a new phase when the workflow or focus changes; a focus-only change
-may repeat the same workflow and is not a workflow switch.
+One workflow phase is active at a time in each independently tracked agent session.
+It declares a workflow, one primary focus, an objective, expected output, validating
+command, kill condition, fallback, start, and deadline.
+Other principles still constrain the work.
+Actual outcome and evidence are recorded when the phase closes.
+Start a new phase when the workflow or focus changes; a focus-only change may repeat the
+same workflow and is not a workflow switch.
 Switch only at a planned or evidence checkpoint, on a user request, or when the active
 premise is falsified.
 Close the prior phase with its evidence, stop reason, and next action before opening the
@@ -96,6 +106,10 @@ W6 itself does not change a criterion, repair the process, or invent a replaceme
 hypothesis mid-round.
 It executes the preregistered question under a declared budget, records every outcome,
 and stops at the criterion or clock.
+An independent W2 pass is required before a promoted, novel, disputed, or otherwise
+high-risk claim moves forward.
+Routine W6 rounds whose preregistered guards and independent replay already decide the
+stated criterion may proceed directly to W3 or another W6 slice.
 The [campaign runbook](campaign/README.md) owns those mechanics; the agenda orders ready
 cells, and the [ledger](campaign/ledger.md) is generated from the artifacts rather than
 typed.
@@ -108,7 +122,7 @@ The short hierarchy is:
 | Unit | Meaning |
 | --- | --- |
 | Packing exploration | This self-contained project directory: research, code, sources, and records |
-| Campaign | The durable, multi-session scientific effort under one question and record contract |
+| Campaign | The durable, multi-session square-packing research program and its shared record contract |
 | Series | One campaign-wide tooling regime and comparability boundary; `series-000` is a documented legacy exception awaiting migration |
 | Agent session | One bounded interval of orchestrated work, containing one or more workflow phases |
 | Workflow phase / slice | One declared purpose and focus / one time-bounded action inside it |
@@ -168,19 +182,23 @@ The operating documents divide ownership rather than repeat one another:
 The outer loop is a portable repository protocol, not a feature of one agent platform.
 The `tbd` queue owns ready work; an
 [agent-session artifact](campaign/agent-sessions/README.md) owns the current workflow
-phase, focus, objective, clocks, and delegation evidence; commits and research artifacts
-own the results. Changing agents changes the driver, not the work.
+phase, primary focus, objective, clocks, and delegation evidence; commits and research
+artifacts own the results.
+Changing agents changes the driver, not the work.
+Mechanical delegations inherit that phase unless they open independently tracked
+sessions.
 
 Breadth lives in [`campaign/ideas.md`](campaign/ideas.md), the hypothesis registry, and
-the bead queue. At session entry, declare the workflow, focus, output, and stop
-condition; narrowness then lives in one slice at a time, with hard clocks.
+the bead queue. At session entry, declare the workflow, primary focus, expected output,
+validation command, kill condition, fallback, start, and deadline; narrowness then lives
+in one slice at a time, with hard clocks.
 At a checkpoint, close the phase before changing purpose or focus so the ledger can
 summarize what kinds of work actually occurred.
 The slice protocol, clocks, result routing, budgets, and stop rules are the campaign
 runbook’s [bounded research cycle](campaign/README.md#the-bounded-research-cycle); which
 validation loop to run at each step is
 [`conventions.md`](conventions.md#10-what-the-gate-actually-enforces).
-[`campaign/runner.py`](campaign/runner.py) stays the smaller tool that executes
+[`packing-campaign`](src/sqpack/campaign/runner.py) stays the smaller tool that executes
 already-preregistered numerical rounds, never a second project manager.
 
 ## Layout
@@ -192,6 +210,8 @@ explorations/packing/
 ├── SYNOPSIS.md             The technical root: results, status, and the experiment
 │                           roll-up. Read this after the tutorial.
 ├── conventions.md          Every rule this directory runs on, and which are checked
+├── development.md          Python 3.14 setup, maturity boundaries, validation loops,
+│                           CLI policy, and the refactoring workflow
 ├── docs/project/           Reports, reviews, specs, postmortems, and historical
 │                           handoffs; active specs and the campaign agenda own priority
 ├── docs/project/research/  The six research reports (see below)
@@ -202,45 +222,30 @@ explorations/packing/
 │                           See frontier/README.md.
 ├── golden/                 Stored calibration endpoint snapshots for small PROVED
 │                           cases. Mathematical oracle checks are distinct from the
-│                           provisional discovery rows. Rebuilt by tools/golden_basins.py
-├── atlas/                  Endpoint-observation schema and deterministic example
-│                           gallery. See atlas/README.md.
+│                           provisional discovery rows
+├── atlas/                  Endpoint-observation schema and deterministic SVG gallery.
+│                           See atlas/README.md.
 ├── resources/              Local archive of the primary literature: papers and web
 │                           sources, each kept as original, cleaned .md, and raw
 │                           extraction. See resources/README.md.
-├── sqpack/
-│   ├── field.py            exact arithmetic in Q(alpha): +, -, *, /, exact zero test,
-│   │                       exact sign by rational interval arithmetic with bisection
-│   ├── verify.py           separating-axis validity check, generic over the scalar
-│   │                       type; exact or float backend, optional grid bucketing
-│   ├── quench.py           LP-in-cell quench: solve the cell, search the angles,
-│   │                       produce a coordinatewise-stationary endpoint candidate
-│   ├── canonical.py        provisional endpoint keys: D4- and relabel-invariant
-│   │                       geometry plus a contact graph canonical up to isomorphism
-│   ├── atlas.py            provisional endpoint-observation store and merge logic
-│   ├── render/             deterministic SVG model, adapters, safe serializer,
-│   │                       paper theme, static views, overlays, and CSS motion
-│   ├── closed_form.py      recognise a side as (p + q*sqrt(d))/r, or decline;
-│   │                       recognition alone proves neither convergence nor optimality
-│   └── packings/trump11.py Walter Trump's 1979 packing of 11 unit squares, exactly
-├── derive_field.py         derives the number field from the published polynomial
-├── verify_trump11.py       verify the packing and report what it took
-├── negative_control.py     show the verifier rejects bad packings, and where float64
-│                           fails
-├── bench.py                exact vs approximate cost, and scaling with algebraic degree
-├── lp_cell.py              rebuild the fixed-angle cell as a linear program, through
-│                           constraint rows sqpack/quench.py does not share
-├── run_quench.py           quench annealer output, both angle methods
-├── run_basin_entry.sh      perturb a known packing and measure the return
+├── src/sqpack/             Maintained package; dependencies flow downward only
+│   ├── field.py            E3 exact arithmetic and sign certification
+│   ├── verify.py           E3 independent exact/float packing verification
+│   ├── render/             E2 deterministic SVG model, safe serializer, visual
+│   │                       tokens, static views, exact overlays, and CSS motion
+│   ├── research/           E2 quench, canonical identity, atlas, and recognition tools
+│   ├── campaign/           E3 campaign state machine and generated ledger
+│   └── cli/                Stable, self-documenting command entry points
+├── cases/                  E1 retained code scoped to a named n, source, theorem,
+│                           hypothesis, or campaign smoke experiment
+├── devtools/               Developer-only checkers, source adapters, SVG generators,
+│                           and mutation controls
+├── benchmarks/             Explicit performance probes, outside the runtime package
+├── tests/                  Fast behavior, command, and architecture contracts
+├── sqsearch/               Tier-1 screening annealer (Rust)
 ├── defects.yaml            the defect logbook: every bug and record defect found here
 ├── defects.schema.yaml     its contract, enforced in the gate
 ├── defects.md              generated from defects.yaml; never edited by hand
-├── differential_test.py    search energy against the validity oracle, on near contacts
-├── run_baseline.sh         the baseline annealer sweep a round is run from
-├── tools/                  checkers and generators: the soundness perimeter, the
-│                           negative controls, the generated views and their drift gates
-├── sqsearch/               tier-1 screening annealer (Rust)
-├── test.sh                 run everything and check the expected results
 └── frankensim-probe/       two experiments run against Jeffrey Emanuel's FrankenSim,
                             asking whether its certified-arithmetic and RNG layers help
                             here (see that directory's README)
@@ -261,6 +266,14 @@ renderers show the useful final packing.
 *The comparison view holds both panels to one geometric scale.
 This retained `n = 10` event is a numerical source-return control, so the figure labels
 it as a candidate rather than silently promoting it to an exact proof artifact.*
+
+![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
+
+*The larger `n = 29` example exercises the full 20-color sequence and deterministic
+reuse on 29 squares.
+It is reconstructed at 160 decimal digits and passes all 406 pairwise separating-axis
+checks, so the renderer calls it a verified construction—not an exact certificate or a
+proof of global optimality.*
 
 The renderer preserves the input’s evidence tier.
 Its caption and metadata distinguish candidates, verified constructions, certified upper
@@ -287,15 +300,15 @@ regeneration command.
 From this directory:
 
 ```bash
-uv run --frozen python tools/render_packing_gallery.py --list
-uv run --frozen python tools/render_packing_gallery.py --update
-uv run --frozen python tools/render_packing_gallery.py --check
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --list
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --update
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --check
 ```
 
 The focused read-only gate is:
 
 ```bash
-./test.sh --only "deterministic SVG"
+uv run --frozen --all-extras --group dev packing-validate --only "deterministic SVG rendering"
 ```
 
 ## What Has Gone Wrong Here
@@ -377,7 +390,11 @@ It turns the six reports into seven phases and a bead tree, one epic per phase;
 `tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md`
 shows the work items and `tbd ready` the unblocked subset.
 
-The standing review,
+The implemented engineering reorganization and its evidence are recorded in
+[Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md).
+[`development.md`](development.md) is the maintained operating guide for that design.
+
+The current standing review,
 [review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md),
 is the historical source of the initial experiment method and `H-001`–`H-015` register.
 Once those claims were codified, their registry artifacts became authoritative; use the
@@ -398,23 +415,22 @@ separation, floating point can certify a strict inequality but not an equality, 
 every tolerance that accepts the true contacts also accepts overlaps smaller than
 itself. The argument in full, with what it cost when ignored, is
 [Why Exactness Is Not Optional](SYNOPSIS.md#why-exactness-is-not-optional).
-`negative_control.py` demonstrates both failure modes.
+`cases.trump11.verifier_limits` demonstrates both failure modes.
 
 ### Use
 
-```bash
-python3 verify_trump11.py     # exact verification of s(11) <= 3.877083590022814...
-python3 negative_control.py   # exact rejects any overlap; float64 has a blind spot
-python3 bench.py              # timings
-python3 derive_field.py       # re-derive the field (needs sympy)
-./test.sh                     # the whole gate: the above plus the corpus, the
-                              # lint floor, the controls, and every drift check
+```shell
+uv run --frozen python -m cases.trump11.verify_exact
+uv run --frozen python -m cases.trump11.verifier_limits
+uv run --frozen python -m benchmarks.exact_verification
+uv run --frozen python -m cases.trump11.derive_field
+uv run --frozen --group dev packing-validate
 ```
 
-Only `derive_field.py` needs a third-party package (SymPy).
+Only `cases.trump11.derive_field` needs the optional symbolic dependency (SymPy).
 The verifier itself is standard library only.
 
-`verify_trump11.py` output:
+`cases.trump11.verify_exact` output:
 
 ```
 VALID: 11 squares, 55 pairs tested
@@ -444,13 +460,15 @@ print(verify_packing(squares, side, sign=exact_sign))
 ```
 
 The work is in the first line: recovering the field means reading the published exact
-data by hand, once per packing, and `sqpack/packings/trump11.py` is the worked example.
+data by hand, once per packing, and
+[`cases/trump11/packing.py`](cases/trump11/packing.py) is the worked example.
 
 **The result is a proof only if the field metadata is right, and the constructor does
 not yet check that** ([D-053](defects.md), open): verify irreducibility and single-root
 isolation yourself before trusting a verdict on a field you supplied.
 The [synopsis](SYNOPSIS.md#what-is-built) carries the full caveat; the module docstrings
-in [`sqpack/`](sqpack/) carry the API, including the fast non-certifying float backend.
+in [`src/sqpack/`](src/sqpack/) carry the maintained APIs, including the fast
+non-certifying float backend.
 
 ### Scope
 

@@ -96,10 +96,14 @@ read, run, and moved as one unit.
 - **Reports separate claims by evidential status** — proved, computationally verified,
   best known, or asserted-but-unverified — and cite primary sources near the claims they
   support.
-- **Packing work declares its entry point.** Choose W1–W6 (or the explicit fallback)
-  from
+- **Independently tracked packing work declares its entry point.** The coordinating
+  agent chooses W1–W6 (or `general-improvement` only for genuine repository maintenance
+  outside those workflows) from
   [`explorations/packing/README.md`](explorations/packing/README.md#workflow-entry-points)
-  before beginning. Longer sessions record workflow and focus changes as ordered phases;
+  before beginning a session or a genuine workflow phase.
+  Bounded delegated work such as formatting, lint repair, extraction, or repeated checks
+  inherits the parent phase unless it opens its own independently tracked session.
+  Longer sessions record workflow and primary-focus changes as ordered phases;
   [`explorations/packing/SYNOPSIS.md`](explorations/packing/SYNOPSIS.md#workflow-entry-contracts)
   owns the full contracts.
 - **Archived source material is never edited to look tidy.** Where a transcription

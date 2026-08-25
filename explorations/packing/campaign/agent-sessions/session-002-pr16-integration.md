@@ -12,15 +12,21 @@ session:
   goal: >-
     Preserve PR 16's independent evidence and correction history, remove its unsupported
     conclusions and stale process state, and absorb it into one reviewable PR 15.
-  entry_workflow: process-review
   workflow_phases:
   - workflow: process-review
     focus: process
+    recording: retrospective
     objective: Integrate the independent review without losing provenance or stale claims.
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 180
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: PR 16's useful evidence was retained and each unsupported claim was routed.
     evidence:
     - Six findings map to durable defects and focused beads.

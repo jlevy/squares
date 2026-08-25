@@ -13,15 +13,21 @@ session:
     Turn H-026 into one finite, executable exact calculation with a complete active
     branch inventory, replayable certificates, known-answer controls, and a disciplined
     distinction between a linearized direction and a true feasible motion.
-  entry_workflow: research-loop
   workflow_phases:
   - workflow: research-loop
     focus: insight
+    recording: retrospective
     objective: Decide every branchwise first-order cone at Trump's exact packing.
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 180
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: Exp-013 certified all 128 derivative-distinct cones and local isolation.
     evidence:
     - The exact replay covers 512 raw branches with zero unresolved cones.

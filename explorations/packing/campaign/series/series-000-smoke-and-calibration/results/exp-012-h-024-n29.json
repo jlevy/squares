@@ -1,5 +1,5 @@
 {
-  "elapsed_seconds": 0.157556,
+  "elapsed_seconds": 0.177115,
   "orientation_class_count": 6,
   "orientation_classes": [
     {
@@ -68,9 +68,7 @@
     "normalisation": "CRLF converted to LF and one terminal newline added",
     "path": "resources/papers/kingbird-square-29-provenance.svg",
     "retained_bytes": 7303,
-    "retained_sha256": "d25d36f87a75066b13fb9f88c67b9feb2d99eaa6e9a310295dcbf3591b6b3726",
     "retrieved": "2026-08-24",
-    "upstream_sha256": "30c725b27e1b90ff0c9c238fb8923c3da6ce26e046cdd46d5c33a485bbec821c",
     "url": "https://kingbird.myphotos.cc/packing/square-29.svg"
   },
   "source_equations": {

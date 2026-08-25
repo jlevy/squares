@@ -13,15 +13,21 @@ session:
     Decide Stromquist's printed Theorem 2 mechanism against the primary source, preserve
     any failure as an exact counterexample, and test a separately preregistered repair
     with a complete replayable proof certificate.
-  entry_workflow: research-loop
   workflow_phases:
   - workflow: research-loop
     focus: correctness
+    recording: retrospective
     objective: Falsify the printed proof exactly, then test the preregistered repair.
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 300
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: Exp-016 refuted the printed cover and exp-017 certified a source-distinct repair.
     evidence:
     - The strict escape and the complete repaired finite cover both replay exactly.
@@ -60,7 +66,7 @@ session:
       an exact strict escape, and reconstructed the complete repaired face routing.
     evidence: [primary PDF page 9 vector paths, exact radical witness, exact face and edge inventory]
     files: []
-    checks: [source hashes, K4 orbit, strict open-box margins, Lemma 4 sign filter, planar cover incidence]
+    checks: [retained source paths, K4 orbit, strict open-box margins, Lemma 4 sign filter, planar cover incidence]
     uncertainty: The source-distinct repair has not undergone external peer review.
     elapsed_seconds: null
     elapsed_quality: unavailable

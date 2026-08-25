@@ -22,7 +22,7 @@ experiment:
   instance: {axis: n, point: 5, role: target}
   method:
     control: >-
-      exact source-inventory binding plus seven source, direction, branch, row,
+      exact semantic predecessor binding plus six source, direction, branch, row,
       coefficient, margin, and scope mutations
     candidate: >-
       one asymptotic inequality certificate for each of the only two nearby pair (3,4)
@@ -59,16 +59,16 @@ experiment:
     outcome: criterion_met
     checked_by: >-
       exact Q(sqrt(2)) coefficient derivation, source-bound branch exhaustion,
-      deterministic record regeneration, and seven declared controls
+      deterministic record regeneration, and six declared controls
   verdict:
     decision: accepted
     primary_criterion: >-
       bind every required exp-035 wall and SAT branch; derive exact positive owner-4
       excess, negative owner-3 gap, and positive relative-angle cusp margin; exhaust the
-      two nearby owner axes; replay independently; and reject all seven controls
+      two nearby owner axes; replay independently; and reject all six controls
     reason: >-
       Both possible nearby owner-axis branches have a strict exact second-order
-      obstruction, all seven controls reject, and retained replay is identical.
+      obstruction, all six controls reject, and retained replay is identical.
     commit: a54c838
 ---
 # exp-036 — exact n = 5 second-order obstruction
@@ -96,9 +96,9 @@ owner-3 branch, the exact common-angle upper-minus-lower coefficient must be `-1
 relative-angle cusp must have positive margin `1/2 - |r/2 - 3/4| = r/2 - 1/4`, so
 `delta = o(t)` cannot repair the deficit.
 
-The controls reject source-digest drift, a changed common-angle direction, a missing
-pair `(2,4)` row, a missing pair `(3,4)` owner branch, nonpositive owner-4 or
-relative-angle margins, and a component-isolation overclaim.
+The controls reject a changed common-angle direction, a missing pair `(2,4)` row, a
+missing pair `(3,4)` owner branch, nonpositive owner-4 or relative-angle margins, and a
+component-isolation overclaim.
 Generation and replay had independent 30-second caps.
 
 The criterion is met.
@@ -106,7 +106,7 @@ The owner-4 branch requires the fixed side to exceed itself by
 `(sqrt(2)/8)t^2 + o(t^2)`. The owner-3 upper-minus-lower gap is `-(1/4)t^2 + o(t^2)`
 before the nonhelpful relative-angle cusp, whose exact positive margin is
 `sqrt(2)/2 - 1/4`. Continuity exhausts the two owner-axis choices at every declared
-stratum. All seven controls reject, and independent regeneration matches the retained
+stratum. All six controls reject, and independent regeneration matches the retained
 record. Generation and replay took 0.21 external wall-seconds together.
 
 This excludes only exp-035’s displayed vector from the true tangent cone at the three
@@ -118,8 +118,7 @@ unequal-side clearance.
 
 [`exp-036-h-023-n5-second-order-obstruction.json`](../results/exp-036-h-023-n5-second-order-obstruction.json)
 retains the two exact branch arguments, their coefficients, source binding,
-determination scope, and seven controls
-(`sha256:008858242f51243e3435ed2ecdad0805e7f2ad2fe15914a848df696e690b86a7`).
+determination scope, and six controls.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

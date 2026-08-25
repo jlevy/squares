@@ -21,7 +21,7 @@ hypothesis:
     metric: complete independently replayed finite cover and five-node implication chain
     direction: every cover cell, strict inequality, conditional triple, and capacity implication certifies
   instrument: >-
-    tools/check_stromquist_repair.py binds the source-distinct repaired Figure 14 tuple,
+    cases.stromquist.repaired_cover binds the source-distinct repaired Figure 14 tuple,
     exactly tiles the Figure 13 and Figure 14 center spaces, certifies every lemma
     premise and boundary, checks the finite resource count, and regenerates the complete
     retained record. Its mutation suite removes cells and edges, restores the printed

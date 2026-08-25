@@ -178,10 +178,10 @@ These are not papers, but they carry the source geometry rather than a rendered 
 - `papers/kingbird-square-29-provenance.svg` carries Thomas Schadt and David Ellsworth’s
   `n = 29` construction, 100-digit placement constants, the six defining equations, and
   the full SVG transform tree.
-  The upstream response retrieved on 2026-08-24 had SHA-256 `30c725b…821c`; the retained
-  text differs only by CRLF-to-LF normalization and a terminal newline and has SHA-256
-  `d25d36f…3726`. The H-024 experiment records and verifies both identities rather than
-  calling the normalized copy byte-exact.
+  The upstream response was retrieved on 2026-08-24. The retained text differs only by
+  CRLF-to-LF normalization and a terminal newline.
+  The H-024 experiment records the URL, retrieval date, normalization, and retained
+  path; Git retains the source bytes.
 
 ## Not retrievable
 
@@ -218,14 +218,16 @@ The original archive was retrieved on **2026-08-22** from the URLs recorded in e
 file’s metadata header.
 The three Stromquist memoranda were retrieved on **2026-08-24** from the author’s
 [official publication page](https://www.walterstromquist.com/publications.html), which
-links the exact archived PDFs as `squares1.pdf`, `squares2.pdf`, and `squares3.pdf`.
-Their respective SHA-256 digests are `5a20c8d…1423e2`, `3b9a8af…9337d2`, and
-`f203470…129878`. All three PDFs are image-only scans; their raw aids are unedited
-Tesseract 5.5.0 English OCR from 300 dpi Poppler-rendered page images, concatenated in
-page order with form-feed and newline separators.
-Archive PDFs are marked binary in the repository’s `.gitattributes`; this prevents Git
-from interpreting compressed scan streams as text without changing any source bytes.
-The arXiv and Electronic Journal of Combinatorics items are open access; the Stanford
-technical report and PMC item are publicly posted.
+links the exact archived PDFs as `squares1.pdf`, `squares2.pdf`, and `squares3.pdf`. All
+three PDFs are image-only scans; their raw aids are unedited Tesseract 5.5.0 English OCR
+from 300 dpi Poppler-rendered page images, concatenated in page order with form-feed and
+newline separators. Archive PDFs are marked binary in the repository’s `.gitattributes`;
+this prevents Git from interpreting compressed scan streams as text without changing any
+source bytes. The arXiv and Electronic Journal of Combinatorics items are open access;
+the Stanford technical report and PMC item are publicly posted.
 Retained for private research use.
 Consult the original publisher before redistributing.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

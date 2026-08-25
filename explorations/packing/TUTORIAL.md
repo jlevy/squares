@@ -146,6 +146,14 @@ not a theorem that class count equals the local dimension of the full packing pr
 Other records already use more classes—six at `n = 29`—and every proposed compression
 must be checked on its own contact structure.
 
+![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
+
+*The `n = 29` record is a useful larger-scale check: six orientation classes, 29
+squares, and deterministic reuse after the fixed 20-color sequence is exhausted.
+The retained source is reconstructed at 160 decimal digits and passes all 406 pair
+checks; that verifies this numerical construction without turning it into an exact
+certificate or an optimality proof.*
+
 ## 3. Cells, Basins, and Two Traps
 
 The project is most careful here, because both traps were walked into and both cost real

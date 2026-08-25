@@ -28,20 +28,25 @@ expressions remain available in SVG metadata without crowding the page.*
 *A different atlas object: the complete proved quotient space, with representative
 packings attached to its distinguished strata.*
 
+![The high-precision Kingbird packing of twenty-nine unit squares.](rendering/kingbird29-overview.svg)
+
+*A larger verified numerical construction that exercises all 20 fixed cool colors and
+their deterministic reuse without overstating the retained source as exact.*
+
 ## Add or Regenerate an Example
 
 From `explorations/packing`, inspect and rebuild the current set with:
 
 ```bash
-uv run --frozen python tools/render_packing_gallery.py --list
-uv run --frozen python tools/render_packing_gallery.py --update
-uv run --frozen python tools/render_packing_gallery.py --check
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --list
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --update
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --check
 ```
 
 To add a case, adapt its typed retained source to a `PackingFrame` or
 `PackingTrajectory`, add the render and manifest entry in
-[`tools/render_packing_gallery.py`](../tools/render_packing_gallery.py), regenerate, and
-embed the listed artifact in the corresponding `frontier/n-NNN.md` body.
+[`devtools/render_packing_gallery.py`](../devtools/render_packing_gallery.py),
+regenerate, and embed the listed artifact in the corresponding `frontier/n-NNN.md` body.
 The deterministic SVG gate checks the manifest, documentation links, safe SVG subset,
 and retained bytes together.
 

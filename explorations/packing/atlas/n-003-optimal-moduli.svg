@@ -3,7 +3,7 @@
   <title id="figure-title">Exact optimal configuration spaces for three unit squares in side 2</title>
   <desc id="figure-description">Two labelled 12-cycles quotient to one unlabelled four-cycle and then to the C-G-M interval. Packing glyphs show the corner, generic, and centred strata.</desc>
   <metadata>
-    <sqpack:profile version="3">
+    <sqpack:profile version="4">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="evidence">proved-optimum</sqpack:value>
       <sqpack:value name="source-id">exp-014-h-032-n3-optimal-moduli</sqpack:value>

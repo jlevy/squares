@@ -13,15 +13,21 @@ session:
     Close only the launch-path gaps needed for scientifically admissible basin events,
     then run and retain successively larger cells until the four-hour deadline, an
     empty admissible queue, or a declared stop condition fires.
-  entry_workflow: process-review
   workflow_phases:
   - workflow: process-review
+    recording: retrospective
     focus: process
     objective: Close only the evidence-contract gaps blocking admissible basin events.
     status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: BasinEvent/v3 and the confidence ladder made the first genuine basin cell admissible.
     evidence:
     - Tool-validation blocks through n=10 retain full poses, independent validity, and typed stops.
@@ -29,6 +35,7 @@ session:
     stop_reason: The launch-path review reached a checkpoint with BC-010 ready for research.
     next_action: Enter the research loop on the preregistered n=5 component question.
   - workflow: research-loop
+    recording: retrospective
     focus: correctness
     objective: Test H-023's exact fixed-angle and angle-sheet connectivity candidates.
     status: completed
@@ -37,12 +44,19 @@ session:
       The process review produced an admissible research cell, so the purpose changed
       from repairing the loop to testing H-023.
     budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: Exp-033 and exp-034 established an exact face and its angle-and-slide sheet.
     evidence:
     - Exp-033 proves one fixed-angle face and exp-034 embeds it in an angle-and-slide sheet.
     stop_reason: The declared sheet was proved, while full stationary connectivity remained open.
     next_action: Audit the proposed first-order checker before another measurement.
   - workflow: factual-review
+    recording: retrospective
     focus: correctness
     objective: Audit the exp-035 candidate instrument and the claims it could support.
     status: completed
@@ -51,6 +65,12 @@ session:
       Exp-034 narrowed the question to motion outside its sheet; the proposed checker
       required a correctness-only review before it could define the next experiment.
     budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: The review found D-194 and D-195, and the corrected instrument froze the right criterion.
     evidence:
     - One contact differential had been reused across slide strata.
@@ -58,12 +78,19 @@ session:
     stop_reason: Both defects were corrected before measurement and the criterion was unambiguous.
     next_action: Resume W6 and execute the frozen exp-035 criterion.
   - workflow: research-loop
+    recording: retrospective
     focus: correctness
     objective: Execute BC-010's corrected exact first-order tangent criterion.
     status: completed
     entered_by: evidence_checkpoint
     switch_reason: The factual review made the proposed instrument admissible for H-023.
     budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: Exp-035 established exact non-sheet first-order directions at all three strata.
     evidence:
     - Exp-035 certifies directions at both endpoints and one interior point in 0.28 wall-seconds.
@@ -71,6 +98,7 @@ session:
     stop_reason: The first-order criterion passed, while nonlinear realization remained unresolved.
     next_action: Stop W6 and frame the nonlinear question before running another experiment.
   - workflow: insight-iteration
+    recording: retrospective
     focus: insight
     objective: Form a falsifiable nonlinear-realization successor to exp-035.
     status: completed
@@ -79,15 +107,22 @@ session:
       Exp-035 answered the first-order question but not connectivity; another experiment
       requires a new mechanism, criterion, and refusal boundary.
     budget_minutes: 30
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: >-
       A source-bound second-order obstruction with two exhaustive owner-axis branches
-      and seven falsifiers was registered for exp-036.
+      and six falsifiers was registered for exp-036.
     evidence:
     - Exp-035 and BC-010 preserve the exact tangent result and the remaining nonlinear limitation.
     - Exp-036 froze the two branch contradictions, exact margins, source binding, controls, and refusal scope before target execution.
     stop_reason: The successor criterion was unambiguous and no target code had run.
     next_action: Resolve the shared-checkout provenance defect before scientific execution.
   - workflow: process-review
+    recording: retrospective
     focus: process
     objective: Resolve the shared-checkout provenance break before running exp-036.
     status: completed
@@ -96,6 +131,12 @@ session:
       The isolated checker commit landed on another active branch, so provenance and
       checkout discipline had to be restored before the registered round could run.
     budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: D-197 was recorded, the checker commit was moved to the campaign branch, and the other branch ref was restored without data loss.
     evidence:
     - The commit banner caught the wrong-branch checkpoint before push or target execution.
@@ -103,19 +144,27 @@ session:
     stop_reason: Repository provenance was restored and the frozen experiment was safe to execute.
     next_action: Enter W6 and run exp-036 under its registered criterion and caps.
   - workflow: research-loop
+    recording: retrospective
     focus: correctness
     objective: Test whether exp-035's displayed direction survives exact second order.
     status: completed
     entered_by: evidence_checkpoint
     switch_reason: The provenance repair was complete and exp-036's criterion, instrument, and budget were frozen.
     budget_minutes: 30
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: Exp-036 excluded the displayed direction from the true tangent cone in both possible nearby owner-axis branches.
     evidence:
     - The owner-4 excess is sqrt(2)/8 and the owner-3 gap is -1/4 with positive relative-angle margin sqrt(2)/2 - 1/4.
-    - All seven controls rejected and retained replay matched in 0.21 external wall-seconds.
+    - All six controls rejected and retained replay matched in 0.21 external wall-seconds.
     stop_reason: The criterion passed for the displayed direction; other non-sheet directions and component identity remain open.
     next_action: Enter W4 because the post-round strict handoff gate failed independently of the exact result.
   - workflow: process-review
+    recording: retrospective
     focus: process
     objective: Classify the post-exp-036 strict-gate failures and preserve independent blockers.
     status: completed
@@ -124,6 +173,12 @@ session:
       The research criterion passed, but a strict handoff gate failed; its cause had to
       be separated from the scientific verdict before either could move.
     budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: >-
       D-198's stale controls were repaired, the normal gate passed, and a bounded trace
       isolated the remaining deep-golden failure as a solver post-check rejection rather
@@ -132,27 +187,69 @@ session:
     - All 37 then-current negative controls and the 30-step normal gate passed after D-198.
     - The capped deep replay retained the independent D-126/D-162 failure and its 1e-10 all-row guard.
     stop_reason: The review produced one bounded correctness repair and kept the separate work-budget conversion out of scope.
-    next_action: Hand the solver-acceptance repair to a general-improvement phase.
-  - workflow: general-improvement
+    next_action: Hand the solver-acceptance repair to a bounded W2 correctness phase.
+  - workflow: factual-review
+    recording: retrospective
     focus: correctness
     objective: Repair the finitely capped deep-golden solver acceptance without weakening the all-row replay screen.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
-      W4 isolated an accepted code repair outside the six specialized workflows; the
-      scientific queue and the separate efficiency question remain unchanged.
+      W4 isolated a solver-acceptance defect, so W2 owned the evidence audit and its
+      bounded implementation without changing the scientific question.
     budget_minutes: 30
-    outcome: The review isolated the repair target; implementation has not yet produced a result.
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
+    outcome: >-
+      D-199 restored every n=10 ladder rung under both declared pool widths without
+      weakening the all-row screen; a separate n=4 status-4 solver failure remains.
     evidence:
-    - Think-yi6x owns first-versus-repaired LP receipts and the finite correction boundary.
-    - D-126's work-budget conversion remains separate, and research resumes independently at think-nm35.
-    stop_reason: null
+    - Retained n=10 receipts move the offender set from rows 49 and 66 to row 61 and then to empty under a four-call cap.
+    - Both pool widths retain the same n=4 seed-0 HiGHS status-4 failure, now recorded as D-203 under think-nr5w.
+    stop_reason: The n=10 defect was fixed and the distinct n=4 blocker was minimized to one bounded diagnostic slice.
+    next_action: Preserve the checkpoint while PR 24's workflow record is reviewed and integrated.
+  - workflow: process-review
+    recording: contemporaneous
+    focus: process
+    objective: Review and integrate PR 24's workflow entry points without losing the live scientific checkpoint.
+    status: stopped
+    entered_by: user_request
+    switch_reason: >-
+      The user froze research execution and requested that the stacked workflow PR be
+      reviewed, corrected, merged, and made resumable before the n=4 diagnosis continues.
+    budget_minutes: 60
+    started_at: '2026-08-24T22:46:44Z'
+    deadline_at: '2026-08-24T23:46:44Z'
+    expected_output: >-
+      One corrected merge on PR 22, a published finding-by-finding PR 24 review and
+      disposition, synchronized beads and defect log, and an explicit D-203 resume point.
+    validation_command: ./test.sh
+    kill_condition: >-
+      Stop this line if one 30-minute slice produces neither a replayable artifact nor a
+      minimized conflict; preserve the merge and re-screen the ready queue.
+    fallback: >-
+      Keep PR 22 at its last pushed checkpoint, record the exact unresolved conflict in
+      think-hie2, and leave every mathematical criterion and D-203 verdict unchanged.
+    outcome: >-
+      PR 24's useful workflow model was corrected, merged over the live checkpoint, and
+      validated without changing D-203, any mathematical verdict, or any research criterion.
+    evidence:
+    - The published PR 24 review maps R1 through R12 to one child bead and D-205 through D-216.
+    - The regenerated ledger derives workflow entry and separates contemporaneous from retrospective process statistics.
+    - The receipt-preserving full normal gate passes all 30 steps with 55 controls and 218 defects in 34.276 wall-seconds.
+    stop_reason: >-
+      The user-requested integration checkpoint is complete; stop this session on a
+      clean portable handoff before resuming the independent n=4 correctness diagnosis.
     next_action: >-
-      Run the bounded think-yi6x solver-acceptance slice before another deep golden retry.
-      Keep the D-126 work-budget conversion separate; the independent exact-research
-      queue resumes at think-nm35.
+      Open a new AgentSession/v2 under W2 factual-review with a Correctness focus, then
+      capture the n=4 seed-0 status-4 millisecond fixture under think-nr5w before another
+      deep golden retry.
   primary_bead: think-05hr
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 240
     max_cycles: 8
@@ -292,7 +389,7 @@ session:
     operator: d168_mechanical_check
     status: completed
     outcome: >-
-      The small-n lane replays exp-033 with nullities 0/1/0 and six passing controls.
+      The small-n lane replays exp-033 with nullities 0/1/0 and five passing controls.
     evidence: [focused small-n gate output]
     files: [test.sh]
     checks: [bash syntax, gate list, small-n optimal-moduli lane, git diff check]
@@ -305,7 +402,7 @@ session:
     status: completed
     outcome: >-
       Static checks pass, and the small-n lane replays exp-034's dimension-two
-      certificate, four boundary fixtures, and five controls in two seconds.
+      certificate, four boundary fixtures, and four controls in two seconds.
     evidence: [frozen static-check output, focused small-n gate output]
     files: [tools/check_n5_angle_sheet.py, test.sh]
     checks: [Ruff, BasedPyright, py_compile, bash syntax, focused gate, git diff check]
@@ -374,6 +471,8 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-018-h-021-n3-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   - campaign/series/series-000-smoke-and-calibration/results/exp-020-h-021-n5-basin-events.jsonl
@@ -391,6 +490,8 @@ session:
   - campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
   - campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
   - campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
+  - campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
+  - campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - campaign/schemas/agenda.schema.yaml
   - tools/basin_census.py
@@ -408,11 +509,15 @@ session:
   - tools/check_terminal_components.py
   - tools/check_n5_equal_side_face.py
   - tools/check_n5_angle_sheet.py
+  - tools/check_n5_tangent_cones.py
+  - tools/check_n5_second_order_obstruction.py
   checks:
   - Basin-event generation and replay pass for n=3, n=4, and n=5.
   - Every retained pose passes the independent floating-point geometry screen.
   - Historical v2 events state that D-165 blocks promotion; the v3 event derives its empty blocker list.
   - The portable runbook and session clocks pass Flowmark, schema, campaign-record, README, and synopsis checks.
+  - The corrected workflow integration passes all 55 negative controls in 11.12 wall-seconds.
+  - The full 30-step normal gate passes with 218 defects reconciled in 34.276 wall-seconds.
   - >-
     A diagnostic replay classified all sixteen formerly censored n=10 probes as
     post-check rejections on pair rows 66 or 77, with residuals from 1.00000008e-10 to
@@ -498,7 +603,7 @@ session:
   - The post-exp-030 full normal gate passes all thirty steps in 47 wall-seconds.
   - >-
     The source-bound n=10 entry point reproduces the published Göbel pose, binds its
-    source URL and SHA-256, retains deterministic perturbations, and rejects changed
+    source URL and retained fixture path, retains deterministic perturbations, and rejects changed
     source or start data. All 36 historical events still replay. A one-second real run
     reaches a valid optimal-side endpoint and retains a typed producer time stop.
   - >-
@@ -512,7 +617,7 @@ session:
   - >-
     Exp-032 completes BC-009 in 0.92 seconds of generation plus replay. The exact n=3
     interval remains one component across four geometric keys, two contact signatures,
-    and three strata; the exact n=4 quotient is one point; all eight false-policy
+    and three strata; the exact n=4 quotient is one point; all seven false-policy
     mutations fail and all 16 f64 observations remain unresolved.
   - >-
     The post-exp-032 normal gate passes all 30 steps in 34 wall-seconds: 37 negative
@@ -529,7 +634,7 @@ session:
   - >-
     Exp-034 meets its frozen criterion in 0.27 seconds of generation plus replay. The
     exp-033 face lies in an exact two-parameter angle-and-slide sheet of
-    orientation-indexed LP optima, and all five controls fail as required.
+    orientation-indexed LP optima, and all four controls fail as required.
   - >-
     The first post-exp-034 normal gate stops after 31 seconds because two synopsis
     mutation controls retained pre-D-186 numeric anchors. D-187 records the miss; the
@@ -564,7 +669,7 @@ session:
     Exp-035 meets its frozen criterion in 0.28 wall-seconds of generation plus replay.
     Both exact owner-axis systems retain both tied support rows at A, the interior, and
     B; one non-sheet direction makes every active derivative zero at each stratum. All
-    seven controls reject. This is first-order evidence only, so nonlinear realization
+    six controls reject. This is first-order evidence only, so nonlinear realization
     and stationary-component identity remain unresolved.
   - >-
     The exp-035 integration diff caught D-196 before commit: a context-poor status edit
@@ -582,12 +687,12 @@ session:
     ref is restored without data loss or new lease machinery.
   - >-
     Exp-036 freezes the two exact second-order branch contradictions, the positive
-    relative-angle cusp margin, source-topology binding, seven controls, and separate
+    relative-angle cusp margin, direct predecessor replay, six controls, and separate
     30-second generation and replay caps. Static checks pass; the target has not run.
   - >-
     Exp-036 meets its frozen criterion in 0.21 external wall-seconds. The owner-4 branch
     has exact excess coefficient sqrt(2)/8; the owner-3 branch has gap coefficient -1/4
-    and positive relative-angle margin sqrt(2)/2 - 1/4. All seven controls reject and
+    and positive relative-angle margin sqrt(2)/2 - 1/4. All six controls reject and
     retained replay is identical. Only exp-035's displayed direction is excluded.
   - >-
     The first post-exp-036 strict gate stops after 55 seconds with 28 of 30 steps green.
@@ -605,11 +710,50 @@ session:
     a wall-deadline stop, so converting D-126 to a deterministic work budget cannot by
     itself repair this gate. Think-yi6x owns first-versus-repaired LP receipts and a
     finitely capped correction that must preserve the 1e-10 all-row replay screen.
-  stop_reason: null
+  - >-
+    D-199 records the resolved n=10 mechanism. First-call offenders 49 and 66 move the
+    residual to previously clean row 61; a third conservative solve reaches zero
+    all-original-row residual. A senior numerical review approves the correction and
+    leaves only low-priority direct cumulative-RHS and portable-contract test hardening
+    under think-fx6r.
+  - >-
+    Serialized deep replays at PACK_JOBS=10 and PACK_JOBS=1 finish in 23.94 and 79.66
+    seconds. Both restore all seven convergence-ladder rungs, including n=10, but both
+    retain the same n=4 drift: 3/4 converged and one extra valid nonconverged endpoint at
+    side 2.0205018999. The committed golden is unchanged.
+  - >-
+    D-202 discards the first delegated one-worker replay because its final stdout and
+    exit status were lost; one parent-owned durable-session rerun retained the complete
+    receipt. A 13.70-second four-seed diagnostic then isolates the remaining n=4 failure
+    as seed 0 and a typed HiGHS status-4 Solve error after 3,404 LP solves. D-203 and
+    think-nr5w own the exact-cell diagnosis; no further deep retry is authorized first.
+  - >-
+    The first frozen-state normal gate passes 29 of 30 steps and 36 of 37 negative
+    controls. D-204 records the sole failure: the gate-aggregate mutation correctly
+    produces the authoritative 11-of-203 diagnostic, while its harness expectation
+    incorrectly names the deliberately mutated 10-of-203 value. The checkpoint remains
+    unpushed until the corrected final aggregate passes the complete normal gate. After
+    correction, all 37 controls fire and all 30 normal-gate steps pass in 42 wall-seconds
+    with 204 defects reconciled.
+  - >-
+    PR 24's focused integration validation discarded one parallel negative-control run
+    because its wrapper did not retain the live session identifier or final receipt.
+    D-217 records the D-202 recurrence; a direct 11.14-second rerun retains exit 0 and
+    confirms all 55 controls fire. D-218 adds the exp-035 and exp-036 artifacts, results,
+    and checkers that the session output inventory had omitted.
+  - >-
+    The corrected PR 24 integration passes the full 30-step normal gate in 34.276
+    wall-seconds with all 55 negative controls firing, all 36 engine commits checked,
+    nine AgentSession/v2 records validated, and 218 defects reconciled. The deep golden
+    remains intentionally unrun until think-nr5w captures the n=4 millisecond fixture.
+  stop_reason: >-
+    The workflow integration and portable handoff are complete. The user-requested
+    research freeze ends this session before the independent D-203 diagnosis resumes.
   next_action: >-
-    Run the bounded think-yi6x solver-acceptance slice before another deep golden retry.
-    Keep the D-126 work-budget conversion separate; the independent exact-research queue
-    resumes at think-nm35.
+    Open a new AgentSession/v2 under W2 factual-review with a Correctness focus. Capture
+    the n=4 seed-0 status-4 millisecond fixture under think-nr5w, then finish think-b3bm's
+    final-receipt runbook rehearsal and revalidate the strict launch path before new
+    basin-map rounds. Keep D-126 separate; the exact-research queue remains think-nm35.
 ---
 # Session 009 — Bounded Progress Before Scale
 

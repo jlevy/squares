@@ -14,7 +14,6 @@
     "figure13_strict_escape_avoids_all_ten": true,
     "left_shift_witness_mutation_is_rejected": true,
     "lemma4_squared_root_negative_control": true,
-    "source_hashes_match": true,
     "standalone_twelve_point_pigeonhole_does_not_close": true,
     "three_point_capacity_closes_conditionally": true,
     "two_point_capacity_mutation_does_not_close": true

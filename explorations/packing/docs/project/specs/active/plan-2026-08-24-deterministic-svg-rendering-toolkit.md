@@ -76,7 +76,8 @@ The repository already contains three useful SVG patterns.
 
 [`n-003-optimal-moduli.svg`](../../../../atlas/n-003-optimal-moduli.svg) is visually
 clear, self-contained, accessible at the document level, dark-mode aware, and rebuilt
-byte for byte by [`check_small_n_moduli.py`](../../../../tools/check_small_n_moduli.py).
+byte for byte by
+[`cases.small_n.optimal_moduli`](../../../../cases/small_n/optimal_moduli.py).
 Its renderer is one hard-coded function, however.
 Layout, theme, topology, labels, packing glyphs, and serialization are coupled, and it
 has no reusable packing view, precision policy, start/final comparison, or animation
@@ -370,6 +371,9 @@ quality”:
   final pair from experiment 031
 - `atlas/rendering/n5-exact-face-trajectory.svg`, the certified algebraic segment from
   experiment 033, with endpoint A, the exact midpoint, and endpoint B
+- `atlas/rendering/kingbird29-overview.svg`, the 160-digit reconstruction of the
+  29-square Kingbird witness, kept at verified-construction evidence rather than
+  upgraded to an exact certificate
 
 Each is reviewed at document thumbnail size, normal screen size, and print scale against
 the strongest local and online examples listed above.
@@ -378,10 +382,10 @@ the strongest local and online examples listed above.
 
 Animation is declarative and self-contained.
 Stable square IDs map frames to the same objects.
-Nested groups separate translation and rotation so the renderer can animate both without
-decomposing arbitrary matrices.
-The container and labels may change, but the viewport remains fixed to the union of all
-frames.
+The retained animation profile is deliberately translation-only: every square keeps the
+same angle and corner offsets, and the container side stays fixed across all frames.
+The renderer rejects rotation, shape-offset, or container-size changes instead of
+silently drawing them as translations.
 
 The renderer does not invent frames for retained or certified trajectory kinds.
 Retained trajectories use the supplied solver states; a certified adapter may supply
@@ -410,14 +414,14 @@ application.
 The package is deliberately flat enough that ownership stays obvious.
 Private helpers named below are part of the implementation map, not public API.
 
-#### `sqpack/render/__init__.py`
+#### `src/sqpack/render/__init__.py`
 
 - Re-export only `AnnotationLevel`, `EvidenceTier`, `Overlay`, `PackingFrame`,
   `PackingTrajectory`, `RenderSpec`, `TrajectoryKind`, `ViewLevel`, and
   `render_packing_svg`.
 - Define no behavior and import no repository storage schema.
 
-#### `sqpack/render/model.py`
+#### `src/sqpack/render/model.py`
 
 - Define `ScalarKind`, `EvidenceTier`, `ViewLevel`, `AnnotationLevel`, `Overlay`,
   `ContainerWall`, and `TrajectoryKind` as string enums with stable serialized values.
@@ -440,7 +444,7 @@ Private helpers named below are part of the implementation map, not public API.
   representations, and a proved-optimum label can only come from that input evidence
   tier. A binary64 source remains binary64 under `exact` annotation.
 
-#### `sqpack/render/numbers.py`
+#### `src/sqpack/render/numbers.py`
 
 - `scalar_from_float()`, `scalar_from_decimal()`, `scalar_from_fraction()`, and
   `scalar_from_exact()` are the only constructors that cross from repository numeric
@@ -450,12 +454,14 @@ Private helpers named below are part of the implementation map, not public API.
 - `format_svg_number()` emits plain ASCII decimal notation, normalizes negative zero,
   removes insignificant trailing zeros, and rejects exponent output outside the policy.
 - `format_visible_number()` applies only the label precision and returns the evidence-
-  appropriate relation marker (`=`, `~`, `<=`, or interval text) separately from the
-  digits.
+  appropriate relation marker separately from the digits.
+  A shortened certified-bound value is marked approximate; the adjacent evidence label
+  carries its upper-bound status, so decimal rounding cannot create a false inward
+  inequality.
 - `format_points()` and `format_values()` serialize sequences in input order.
 - No module-global decimal context is mutated.
 
-#### `sqpack/render/contacts.py`
+#### `src/sqpack/render/contacts.py`
 
 - `_same_point()`, `_cross()`, and `_point_on_segment()` implement exact point equality,
   collinearity, and closed-segment membership without division.
@@ -475,7 +481,7 @@ Private helpers named below are part of the implementation map, not public API.
   a zero-gap pair. Existing count fields remain unchanged; exact contact extraction
   consumes the indices only from a valid exact report over the same construction.
 
-#### `sqpack/render/svg.py`
+#### `src/sqpack/render/svg.py`
 
 - Define `SVG_NS`, `SQPACK_NS`, `svg_tag()`, `sqpack_tag()`, `element()`, and `sub()` on
   top of `xml.etree.ElementTree`.
@@ -503,7 +509,7 @@ Private helpers named below are part of the implementation map, not public API.
 There is no `scene.py`. `ElementTree` is the minimal scene representation, so a second
 node hierarchy would add conversion code without a second semantic contract.
 
-#### `sqpack/render/style.py`
+#### `src/sqpack/render/style.py`
 
 - Define frozen `Theme` and `LayoutMetrics` dataclasses.
 - Provide fixed `PAPER_THEME` first; add `MONOCHROME_THEME` and `SCREEN_DARK_THEME` only
@@ -525,7 +531,7 @@ node hierarchy would add conversion code without a second semantic contract.
 - `presentation_attributes()` materializes fill, stroke, opacity, font, and line weight
   on retained elements instead of depending on CSS custom properties.
 
-#### `sqpack/render/packing.py`
+#### `src/sqpack/render/packing.py`
 
 - `render_packing_svg()` is the public pure function.
   It validates the request, builds one tree, delegates optional motion, and returns
@@ -552,17 +558,16 @@ node hierarchy would add conversion code without a second semantic contract.
 - `_append_caption()` uses `format_visible_number()` and evidence tokens so typography
   cannot upgrade a claim.
 
-#### `sqpack/render/motion.py`
+#### `src/sqpack/render/motion.py`
 
 - `match_square_tracks()` returns square histories in final-frame order and rejects
   missing, duplicate, or reordered identities.
 - `keyframe_percentages()` normalizes logical frame times to deterministic percentages
   from zero through 100.
-- `unwrap_quarter_turn_angles()` chooses the shortest equivalent unit-square rotation
-  modulo `pi/2`, using a deterministic tie rule.
-- `square_keyframes()` and `container_keyframes()` produce deterministic CSS transform
-  keyframes for nested translation/rotation groups and the container within the fixed
-  union viewport.
+- `validate_translation_only_trajectory()` requires a constant container side, constant
+  angle, and constant centre-relative corner offsets for every square track.
+- `square_keyframes()` produces deterministic translation keyframes relative to the
+  final frame after that validation passes.
 - `append_square_motion()` and `append_container_motion()` set final-state transform
   attributes and stable CSS selectors; they do not emit SMIL nodes.
 - `append_motion_styles()` enables the one-pass animation only inside
@@ -574,7 +579,7 @@ node hierarchy would add conversion code without a second semantic contract.
   Illustrative endpoint interpolation is labeled on the root, caption, description, and
   metadata.
 
-#### `sqpack/packings/n5_equal_side_face.py`
+#### `cases/n5/face_model.py`
 
 - Define frozen `EqualSideFace` with the `Q(sqrt(2))` field, exact side, parameter
   bound, fixed centres, moving-square endpoint centres, and orientation classes already
@@ -583,64 +588,67 @@ node hierarchy would add conversion code without a second semantic contract.
   any rendering type.
 - `centres_at()` evaluates the affine face at an exact field parameter and rejects a
   parameter outside the certified interval.
-- `check_n5_equal_side_face.py` remains the independent certificate consumer, while the
+- `cases/n5/equal_side_face.py` remains the independent certificate consumer, while the
   rendering adapter becomes a second consumer of this domain fixture.
   Mathematical construction data therefore does not live in `sqpack.render`.
 
-#### `sqpack/render/adapters.py`
+#### `devtools/packing_render_adapters.py`
 
 - `frame_from_pose_arrays()` normalizes centre/angle arrays, calls the independent
   `sqpack.verify.corners_from_poses()` geometry door, and preserves the supplied scalar
   strings.
 - `frames_from_basin_event()` validates a `BasinEvent/v3` through an adapter-local
   schema boundary, derives the start’s enclosing side, and returns start/final frames
-  without importing `tools/basin_census.py`.
-- `frame_from_gobel10()` adapts `sqpack.packings.gobel10.pose()` as a numerical
+  without importing the basin-event producer.
+- `frame_from_gobel10()` adapts `cases.gobel10.packing.pose()` as a numerical
   construction with its retained source ID, URL, and digest.
-- `frame_from_trump11()` adapts `sqpack.packings.trump11.build()` from exact corner
+- `frame_from_trump11()` adapts `cases.trump11.packing.build()` from exact corner
   elements, recording number-field coefficient strings, the published side formula, and
   its exact contact inventory.
+- `frame_from_kingbird29()` reconstructs the retained Kingbird source at 160 decimal
+  digits, independently verifies all 406 pairs, and keeps verified-construction evidence
+  because the source is not an exact certificate.
 - `trajectory_from_n5_equal_side_face()` reconstructs endpoint A, the exact midpoint,
-  and endpoint B from `sqpack.packings.n5_equal_side_face`, then marks the trajectory as
-  a certified feasible path without owning the algebraic construction.
+  and endpoint B from `cases.n5.face_model`, then marks the trajectory as a certified
+  feasible path without owning the algebraic construction.
   Each exact frame receives its own contact inventory before projection.
 - `_enclosing_side()` and `_normalize_pose()` are adapter-only conversions shared by
   event and pose-array adapters; they do not become new verification functions.
 
 #### Existing files changed
 
-- `tools/check_small_n_moduli.py`: rename `svg_text()` to `render_n3_moduli_svg()` and
+- `cases/small_n/optimal_moduli.py`: rename `svg_text()` to `render_n3_moduli_svg()` and
   replace string-built XML with shared `svg.py` helpers, number formatting, and visual
   tokens. Keep quotient topology and its domain-specific layout in this tool; do not
   force graph views into `packing.py`. Its three packing glyphs use the same pure-black
   stroke and width for their container and inner squares.
-- `tools/check_n5_equal_side_face.py`: consume
-  `sqpack.packings.n5_equal_side_face.build_equal_side_face()` while keeping
-  feasibility, optimality, source alignment, and negative controls in the checker.
-- `tools/basin_census.py`: keep the storage contract and producer behavior unchanged.
-  Any duplicated pose-bound helper is removed only after the adapter has focused tests.
-- `test.sh`: add `step_svg_rendering()` and a `STEPS` entry.
-  The step runs the focused checker and byte-replays every retained SVG; it remains
-  read-only.
+- `cases/n5/equal_side_face.py`: consume `cases.n5.face_model.build_equal_side_face()`
+  while keeping feasibility, optimality, source alignment, and negative controls in the
+  checker.
+- `cases/campaign_smoke/basin_events.py`: keep the storage contract and producer
+  behavior unchanged. Any duplicated pose-bound helper is removed only after the adapter
+  has focused tests.
+- `src/sqpack/cli/validate.py`: add the `deterministic SVG rendering` step.
+  It runs the focused checker and byte-replays every retained SVG; it remains read-only.
 
 #### New tools and retained artifacts
 
-- `tools/render_packing_svg.py`: `parse_args()`, `build_source_parser()`,
+- `devtools/render_packing_svg.py`: `parse_args()`, `build_source_parser()`,
   `load_event()`, `load_builtin()`, `build_spec()`, and `main()`. Source selection uses
   explicit `event`, `builtin`, and `n5-face` subcommands.
   `load_event()` parses decimal tokens without an intermediate binary64 round-trip, and
   output always goes through `write_svg_atomic()`. `--contacts` is on by default and
   `--no-contacts` removes the overlay without discarding attached semantic features.
-- `tools/check_svg_rendering.py`: `build_fixtures()`, `run_model_controls()`,
+- `devtools/check_svg_rendering.py`: `build_fixtures()`, `run_model_controls()`,
   `run_number_controls()`, `run_xml_controls()`, `run_geometry_controls()`,
   `run_animation_controls()`, `run_determinism_matrix()`, `run_portability_controls()`,
   `run_gallery_controls()`, and `main()`.
-- `tools/render_packing_gallery.py`: `build_gallery_sources()`, `render_gallery()`,
+- `devtools/render_packing_gallery.py`: `build_gallery_sources()`, `render_gallery()`,
   `render_n3_moduli()`, `build_gallery_manifest()`, `build_gallery_metrics()`,
   `write_gallery()`, `check_gallery()`, and `main()`. The manifest joins artifacts to
   frontier cases, evidence, accessible copy, motion semantics, and exact regeneration
-  commands; aggregate update and check modes include all four artifacts.
-- Retain the three new files under `atlas/rendering/` named in the visual benchmark.
+  commands; aggregate update and check modes include all five artifacts.
+- Retain the four new files under `atlas/rendering/` named in the visual benchmark.
   The existing `atlas/n-003-optimal-moduli.svg` stays at its published path.
 - Retain `atlas/rendering/manifest.json` as the byte-checked discovery layer consumed by
   the frontier and atlas documentation.
@@ -705,7 +713,7 @@ svg = render_packing_svg(
 The CLI mirrors the same concepts rather than exposing style internals:
 
 ```bash
-uv run --frozen python tools/render_packing_svg.py \
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_svg \
   event result.jsonl --event-id EVENT_ID --view comparison \
   --annotations exact --output atlas/example.svg
 ```
@@ -739,7 +747,7 @@ begin in parallel after the shared typed contract is established.
 | `think-wt8n` | paper theme, overview, and comparison renderer | `think-5681`, `think-lo8v` |
 | `think-acxh` | explicit-source CLI and atomic output | `think-tkes`, `think-wt8n` |
 | `think-fceb` | exact `n = 3` quotient-map migration | `think-wt8n` |
-| `think-hzk5` | static safety, determinism, replay, and `test.sh` gate | `think-acxh`, `think-fceb` |
+| `think-hzk5` | static safety, determinism, replay, and repository validation gate | `think-acxh`, `think-fceb` |
 | `think-90ix` | certified and illustrative accessible trajectories | `think-hzk5` |
 | `think-ov1d` | typed square, contact, and active-feature overlays | `think-90ix` |
 | `think-c8n2` | benchmark gallery, metrics, and pinned-renderer decision | `think-acxh`, `think-fceb`, `think-90ix`, `think-ov1d` |
@@ -760,19 +768,21 @@ begin in parallel after the shared typed contract is established.
 - [x] Rebuild the `n = 3` SVG through the shared XML, numeric, and style spine while
   preserving its topology, stratum distinctions, semantic IDs, accessible description,
   and byte-replay gate.
-- [x] Add the focused checker to `test.sh` with mutation and fresh-process determinism
-  controls before retaining new fixtures.
+- [x] Add the focused checker to `packing-validate` with mutation and fresh-process
+  determinism controls before retaining new fixtures.
 
 ### Phase 2: Trajectories and Portable Animation
 
 - [x] Write failing checks for stable frame matching, unsupported-animation fallback,
   one-pass final state, reduced motion, invalid durations, mismatched square sets, and
-  explicit rejection of unmarked endpoint interpolation.
+  explicit rejection of unmarked endpoint interpolation, rotation, and container-size
+  changes.
 - [x] Implement the certified three-frame `n = 5` path first, then retained-frame CSS
   animation and the opt-in illustrative endpoint mode.
 - [x] Add contact and active-feature overlays that remain semantically typed across
   frames; never infer a contact from screen-space proximity.
-- [x] Retain the four-figure benchmark gallery and metrics.
+- [x] Retain the five-figure benchmark gallery and metrics, including the larger
+  high-precision `n = 29` construction.
   Each static SVG must remain smaller than its lossless reference PNG at the review
   viewport, with no external resource.
 - [x] Run the pinned-renderer availability spike and review the gallery in a nonbrowser
@@ -821,8 +831,8 @@ reordered trajectory, unmarked illustrative interpolation, and stale retained SV
 **Determinism tests.** Render the same fixture in fresh processes with shuffled input
 maps, different available locales and time zones, and different hash seeds.
 Compare bytes, not hashes computed by the same process.
-Regenerate every retained fixture in `test.sh` and byte-compare it with the committed
-artifact.
+Regenerate every retained fixture in the `packing-validate` SVG step and byte-compare it
+with the committed artifact.
 
 **Geometry tests.** Independently project every pose to its four corners and compare
 static polygon coordinates and trajectory transforms with the semantic model.
@@ -851,12 +861,13 @@ Screenshot comparison becomes a gate only after pinning the renderer and font in
 until then, retained SVG plus structured layout checks are the deterministic contract.
 
 **Performance and size.** Record observed serialization latency and uncompressed size
-for all four fixtures, but byte-replay only deterministic structural metrics.
+for all five fixtures, but byte-replay only deterministic structural metrics.
 Static rendering must remain negligible beside packing verification.
 The base SVG must remain smaller than its reference lossless PNG. Trajectory size must
 grow linearly with retained frame count and reuse style and shape definitions.
 
-The final implementation gate is the repository’s full `./test.sh`, focused Ruff and
+The final implementation gate is the repository’s full
+`uv run --frozen --all-extras --group dev packing-validate --strict`, focused Ruff and
 BasedPyright checks, deterministic fixture replay, and `make format-check`.
 
 ## Rollout Plan
@@ -891,6 +902,10 @@ known-answer semantics and all replay checks pass.
   renderer.
 - Candidate, verified construction, certified upper bound, and proved optimum are
   visibly and structurally distinct evidence states.
+- Abbreviated certified-bound values use approximation semantics; no rounded decimal is
+  placed after an inequality unless its outward direction is proved.
+- The current trajectory profile accepts translation-only, fixed-container frames and
+  rejects unsupported rotation, shape-offset, or container-size changes.
 - Every packing outline and its container share the same pure-black 1.25px stroke.
   Square assignment deterministically cycles through the fixed 20-color cool palette,
   which contains no yellow.
@@ -917,6 +932,8 @@ known-answer semantics and all replay checks pass.
   SVG generation dependency.
 - **Resolved:** use the exact `n = 5` equal-side face as the first animation fixture.
   Its endpoints, midpoint, feasibility, and evidence tier are already reproducible.
+- **Resolved:** keep the initial animation profile translation-only and reject other
+  frame changes until rotation and a union-viewport model are implemented and tested.
 - **Resolved:** extract contacts in exact source space, always attach them to exact
   frames, and make their 60%-opaque tempered-yellow display default-on but removable.
   Do not infer contact from decimal projections or pixels.

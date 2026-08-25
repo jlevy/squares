@@ -67,8 +67,8 @@ experiment:
 
 BC-008 is a known-answer tool control, not a landscape sample.
 Each start was a deterministic `1e-4` perturbation of the full Göbel pose reconstructed
-from Kingbird’s primary SVG and bound in the event by source URL and SHA-256. The
-proposer, quench, independent screen, event contract, and `1e-12` side criterion are
+from Kingbird’s primary SVG and identified by its retained fixture path and source URL.
+The proposer, quench, independent screen, event contract, and `1e-12` side criterion are
 frozen before these four outcomes were observed.
 
 All four events meet that criterion.

@@ -16,7 +16,7 @@
     "outside_tiling_vertex_rejected": true,
     "printed_g_080_full_cover_rejected": true,
     "printed_g_080_threshold_failure_certified": true,
-    "stale_record_source_rejected": true,
+    "source_path_drift_rejected": true,
     "weakened_capacity_rejected": true
   }
 }

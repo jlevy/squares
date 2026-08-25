@@ -12,15 +12,21 @@ session:
   goal: >-
     Produce one dependency-correct agenda, complete hypothesis portfolio, and honest
     go/no-go boundary for autonomous eight-hour and twenty-four-hour square-packing work.
-  entry_workflow: process-review
   workflow_phases:
   - workflow: process-review
     focus: process
+    recording: retrospective
     objective: Reconcile autonomous-agent readiness with admissible numeric execution.
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 240
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: One launch agenda now separates productive agent work from numeric readiness.
     evidence:
     - The registry expanded to 24 artifacts and the admissible numeric queue was stated as zero.

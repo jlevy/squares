@@ -13,15 +13,21 @@ session:
     Establish two exhaustive, replayable ground-truth cells for the landscape atlas:
     the full arbitrary-rotation n = 3 family with every quotient stratum, and the rigid
     n = 4 grid quotient, while binding both to the directly relevant primary literature.
-  entry_workflow: research-loop
   workflow_phases:
   - workflow: research-loop
     focus: insight
+    recording: retrospective
     objective: Classify and render the exact n=3 and n=4 optimal moduli controls.
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 180
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: Exp-014 and exp-015 exhaustively classified both declared sweep cells.
     evidence:
     - The n=3 quotient interval and n=4 quotient point replay in under one second.
@@ -69,10 +75,10 @@ session:
   - task: Archive and route all directly relevant primary hard-square configuration-space papers
     operator: archive_hard_square_configuration_literature
     status: completed
-    outcome: Archived Alpert et al. and Alvarado-Garduño–González with exact source hashes; verified that a candidate institutional Plakhta mirror contained a different paper and retained the publisher blocker.
+    outcome: Archived Alpert et al. and Alvarado-Garduño–González at stable repository paths; verified that a candidate institutional Plakhta mirror contained a different paper and retained the publisher blocker.
     evidence: [two official primary PDFs, byte-faithful raw extractions, rejected mirror identity]
     files: [resources/papers/alpert-bauer-kahle-macpherson-spendlove-2023-hard-squares-configuration-spaces.pdf, resources/papers/alvarado-garduno-gonzalez-2025-square-section-braid-groups.pdf]
-    checks: [official source provenance, PDF hashes, raw extraction preservation, claim routing]
+    checks: [official source provenance, retained source paths, raw extraction preservation, claim routing]
     uncertainty: Plakhta 2021 remains unavailable, so no novelty comparison is complete.
     elapsed_seconds: null
     elapsed_quality: unavailable

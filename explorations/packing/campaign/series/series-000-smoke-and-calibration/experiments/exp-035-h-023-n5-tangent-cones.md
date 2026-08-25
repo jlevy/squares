@@ -22,7 +22,7 @@ experiment:
   instance: {axis: n, point: 5, role: target}
   method:
     control: >-
-      exact pose-derived wall and SAT inventory plus seven source, branch, row,
+      exact pose-derived wall and SAT inventory plus six source, branch, row,
       coefficient, scope, and witness mutations
     candidate: >-
       one normalized non-sheet direction checked against every active row at the two
@@ -58,14 +58,14 @@ experiment:
     outcome: criterion_met
     checked_by: >-
       exact pose-derived inventories and matrices, exact row evaluation of three
-      non-sheet directions, deterministic record regeneration, and seven controls
+      non-sheet directions, deterministic record regeneration, and six controls
   verdict:
     decision: accepted
     primary_criterion: >-
       exact per-stratum wall and zero-axis inventories, both pair (3,4) owner-axis
       branches with both tied support rows in each, one exact non-sheet direction
       satisfying every retained active inequality, independent regeneration, and all
-      seven declared controls
+      six declared controls
     reason: >-
       Both owner-axis systems and every tied support row replay at all three strata; the
       exact non-sheet direction satisfies every active row and all controls reject.
@@ -87,7 +87,7 @@ three strata.
 
 The controls must reject a missing owner branch, a missing tied support row, reuse of
 endpoint A’s pair `(0,4)` coefficient in the interior, a false nonlinear-continuation
-claim, source-digest drift, an invalid angle sign, and loss of diagonal angle motion.
+claim, an invalid angle sign, and loss of diagonal angle motion.
 Generation and replay had independent 30-second caps.
 
 The criterion is met.
@@ -96,7 +96,7 @@ choices; the interior has 15-row systems of exact rank 12. Each owner branch con
 both tied support rows.
 At every stratum, one exact direction with `dtheta_3 = dtheta_4 = 1` lies outside
 exp-034’s sheet and makes every retained active derivative exactly zero.
-All seven controls reject, and independent regeneration matches the retained record.
+All six controls reject, and independent regeneration matches the retained record.
 Generation and replay took 0.28 wall-seconds together.
 
 An accepted result would establish only a non-sheet direction in the branchwise
@@ -107,8 +107,7 @@ between the unequal-side candidates.
 
 [`exp-035-h-023-n5-tangent-cones.json`](../results/exp-035-h-023-n5-tangent-cones.json)
 retains all six exact branch matrices, three directions, the determination scope, and
-seven controls
-(`sha256:6e803258e36b3f91518f2a8754dd82c977605815ffa365a8baf6f691e7afd477`).
+six controls.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

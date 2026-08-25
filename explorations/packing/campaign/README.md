@@ -1,7 +1,7 @@
-# The `s(n)` Search Campaign — W6 Runbook
+# The `s(n)` Research Campaign — W6 Runbook
 
-An [experiment loop](../../../.agents/skills/experiment-loop/SKILL.md) aimed at the
-search side of square packing.
+An [experiment loop](../../../.agents/skills/experiment-loop/SKILL.md) for the durable
+square-packing research program.
 This file owns W6, `research-loop`: the contract every experiment round runs under—the
 question, metric vector, accept rule, and budget.
 The [synopsis](../SYNOPSIS.md#workflow-entry-contracts) owns the six workflow entry
@@ -9,7 +9,7 @@ points and the distinction among campaign, series, session, experiment, round, a
 It is frozen while rounds are running — see
 [what a runner may not do](#what-a-runner-may-not-do).
 
-## The campaign question
+## The Current Search Objective
 
 **What is the structure of the `s(n)` landscape — how many basins, how rare is the
 record’s, and which proposers reach which — with records as corollaries rather than the
@@ -17,9 +17,12 @@ objective?**
 
 This is the
 [search-philosophy report’s](../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
-framing, adopted here: **the map is the deliverable.** The campaign’s original question
-— which strategies reach the standing best — is the special case that asks about one
-basin only, and it remains a sub-question rather than the goal.
+framing for the current search lane: **the map is the deliverable.** The campaign itself
+is broader: it also contains exact proof, validation, local-geometry, construction, and
+infrastructure questions under the same registry and evidence contract.
+Its original search question—which strategies reach the standing best—is the special
+case that asks about one basin only, and it remains a sub-question rather than the
+search goal.
 
 Note what this does *not* say.
 It does not say “beat Trump’s 1979 packing”.
@@ -81,14 +84,16 @@ Later ids carry campaign-native claims and explicit open questions.
 
 ## The Bounded Research Cycle
 
-The campaign keeps a broad portfolio, while one W6 phase runs one narrow slice at a
-time. Other workflows use the same discipline but leave different artifacts; their
-contracts live in the synopsis rather than in this experiment runbook.
+The campaign keeps a broad portfolio, while one W6 phase per independently tracked
+session runs one narrow slice at a time.
+Other workflows use the same discipline but leave different artifacts; their contracts
+live in the synopsis rather than in this experiment runbook.
 This distinction protects both creativity and completion: ideas are cheap to capture,
 but only a preregistered slice may consume the current clock.
-The phase declares `research-loop` and one of the packing program’s
+The phase declares `research-loop` and one primary focus from the packing program’s
 [four operating focuses](../README.md#operating-principles).
-A focus change starts a new phase even when the workflow remains W6.
+A focus change starts a new phase even when the workflow remains W6. The other three
+principles continue to constrain and contribute to the work.
 
 The protocol is agent-neutral.
 Its authoritative state is the repository: the hypothesis and idea board say what may be
@@ -104,10 +109,13 @@ An agent-session artifact may tighten these defaults before work starts.
 It may not relax them after seeing a result.
 A long numerical or proof computation keeps its separately preregistered round timebox,
 while the agent still checkpoints its supervision work on this cadence.
+The active phase records its expected output, validation command, kill condition,
+fallback, start, and deadline.
+Outcome and evidence are recorded only when it closes.
 
 | Clock | Default | Required outcome at the boundary |
 | --- | ---: | --- |
-| Orientation | 10 minutes | Name the workflow, focus, primary bead, question, output, validating command, kill condition, and fallback; otherwise record the ambiguity and switch |
+| Orientation | 10 minutes | Name the workflow, focus, primary bead, question, output, validation command, kill condition, fallback, start, and deadline; otherwise record the ambiguity and switch |
 | Evidence checkpoint | 20 minutes | Produce a passing check, minimized failure, retained measurement, source-bound derivation, or explicit blocked result; prose about continued investigation is not evidence |
 | Active slice | 30 minutes | Integrate a coherent checkpoint, or stop and preserve the partial work with its exact limitation; continuation requires a newly stated slice and clock |
 | Finalization reserve | 15 minutes | Stop new work before the session deadline; reconcile artifacts, defects, beads, generated views, commits, pushes, and the next action |
@@ -125,10 +133,12 @@ answer is negative or invalid.
 1. **Select.** Re-screen the portfolio and choose the highest-information ready action,
    not merely the most recent idea.
 2. **Declare.** Confirm the active workflow and record the focus, bead, question,
-   promised output, narrow validating command, wall budget, kill condition, and fallback
-   before acting.
+   promised output, narrow validation command, wall budget, kill condition, fallback,
+   start, and deadline before acting.
 3. **Execute.** Take the smallest action that can answer the question.
    Delegate independent mechanical work with a disjoint scope and the same clock.
+   The delegation inherits the coordinating phase unless it opens its own independently
+   tracked session.
 4. **Checkpoint.** At twenty minutes, preserve concrete evidence.
    A result may be positive, negative, invalid, or blocked; each advances the record if
    its evidence is replayable.
@@ -136,8 +146,8 @@ answer is negative or invalid.
    Never extend it merely because the answer feels close.
    A successor slice must state what new fact makes another bounded attempt worthwhile.
 6. **Record once.** Route an idea to the idea board or a new `H-NNN`, a measurement to
-   raw data and `exp-NNN`, an implementation task to its bead, and an actual error to
-   `defects.yaml` with its detector and regression.
+   raw data and `exp-NNN`, an implementation task to its bead and owning workflow, and
+   an actual error to `defects.yaml` with its detector and regression.
 7. **Commit and re-screen.** Regenerate owned views, run the narrowest sufficient gate,
    commit and push the checkpoint, then choose again from the now-current queue.
 
@@ -151,10 +161,15 @@ or outranks the queue under an explicit re-screen.
 At a slice boundary, either renew W6 under a newly stated question or close the phase.
 Close it before changing purpose or focus: record status, evidence, stop reason, and
 next action in the agent-session artifact.
-A correctness-only audit enters W2; generating a successor hypothesis enters W3;
-repairing the loop enters W4; and optimizing a measured bottleneck enters W5. A later W6
-phase starts only after the hypothesis, criterion, budget, and instrument are ready
-again.
+A promoted, novel, disputed, or otherwise high-risk claim receives an independent W2
+audit. A routine guarded result whose preregistered criterion and independent replay
+already decide its claim may proceed directly to W3 or another W6 slice.
+Generating a successor hypothesis enters W3; repairing the loop enters W4; and
+optimizing a measured bottleneck enters W5. Bounded implementation remains inside
+whichever workflow owns its promised output.
+A W6 phase may prepare its registered instrument under that contract, but measurement
+begins only after the hypothesis, criterion, budget, and instrument are ready and
+frozen.
 
 A user request may cause the same transition immediately, but it does not erase the
 phase already performed.
@@ -200,7 +215,7 @@ It stores stable cell IDs, priorities, budgets, prerequisites, beads, and promis
 evidence; the body carries the rationale.
 Hypotheses still own criteria, experiment artifacts still own measurements, `tbd` still
 owns work dependencies, and the active session still owns the clock.
-`campaign/runner.py` does not consume an agenda.
+`packing-campaign` does not consume an agenda.
 
 Update an agenda only at a checkpoint.
 A completed item means its bounded question has a retained answer, not that a basin map
@@ -345,7 +360,7 @@ into this claim” is a generated number rather than an impression.
 
 Two ways, and the difference is who is watching.
 
-### With the harness — [`runner.py`](runner.py)
+### With the harness — [`packing-campaign`](../src/sqpack/campaign/runner.py)
 
 Each step does one thing, the same way, always.
 An agent drives them; nothing here needs a human awake.
@@ -358,17 +373,17 @@ Use the
 [current readiness agenda](../docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md)
 for the exact 8-hour and 24-hour gate.
 
-```bash
+```shell
 cd explorations/packing
-./test.sh --strict                                   # must be clean before a night starts
-uv run --frozen python campaign/runner.py status              # queue, in-progress, last session
-uv run --frozen python campaign/runner.py preflight           # fire every guard and report
+uv run --frozen --group dev packing-validate --strict
+uv run --frozen packing-campaign status
+uv run --frozen packing-campaign preflight
 
-uv run --frozen python campaign/runner.py claim H-020         # -> exp-011
-uv run --frozen python campaign/runner.py execute exp-011     # run the declared command, archive it
-uv run --frozen python campaign/runner.py record  exp-011     # decide, write the round, commit
+uv run --frozen packing-campaign claim H-020
+uv run --frozen packing-campaign execute exp-011
+uv run --frozen packing-campaign record exp-011
 
-uv run --frozen python campaign/runner.py run --session-hours 8   # the middle three, over the queue
+uv run --frozen packing-campaign run --session-hours 8
 ```
 
 **State lives on disk, never between steps.** `claim` writes the stub, `execute` appends
@@ -376,8 +391,8 @@ to the archive beside it, `record` reads that archive back.
 So a step that fails loses nothing: fix what it named and re-run *that step*, not the
 session. `execute` truncates its archive first, so re-running it never double-counts.
 
-`runner.py release exp-011 --why "..."` gives up a round that died, recording it as
-`unresolved` rather than deleting it, and returns its hypothesis to the queue.
+`packing-campaign release exp-011 --why "..."` gives up a round that died, recording it
+as `unresolved` rather than deleting it, and returns its hypothesis to the queue.
 
 Two refusals worth knowing, because they are structural rather than advisory:
 
@@ -402,14 +417,15 @@ It must print JSON Lines carrying `best_side` and an `overlap` of exactly zero o
 result line, and exit 0. The seed’s result is the *minimum* `best_side` over its lines,
 so nothing has to agree about which line is the summary.
 
-Adding an experiment therefore never edits `runner.py`. Writing new experiment code is
-expected; writing new harness code per round is the error-prone step this removes,
-because it is code that runs once, at 3am, having never been exercised.
+Adding an experiment therefore never edits the campaign runner.
+Writing new experiment code is expected; writing new harness code per round is the
+error-prone step this removes, because it is code that runs once, at 3am, having never
+been exercised.
 
 #### Before the first night on a new machine
 
-```bash
-uv run --frozen python campaign/runner.py preflight
+```shell
+uv run --frozen packing-campaign preflight
 ```
 
 **The regime is part of the result.** `moves` is the budget unit and the engine is
@@ -420,10 +436,10 @@ machine you are actually on.
 
 ### Watched — by hand
 
-```bash
-./sqsearch/target/release/sqsearch --selftest   # gate; refuse to record if it fails
-./run_baseline.sh <archive.jsonl>               # or a strategy's own invocation
-./test.sh                                       # engine gate + record invariants + drift
+```shell
+./sqsearch/target/release/sqsearch --selftest
+uv run --frozen python -m cases.campaign_smoke.baseline_sweep <archive.jsonl>
+uv run --frozen --group dev packing-validate
 ```
 
 Then write the artifact into `series/<current>/experiments/`, lifting every number from
@@ -441,9 +457,9 @@ It removes the *waiting* from the rounds that are pure engine time, which is a s
 claim than it sounds and still the difference between one round a night and a queue
 draining while nobody is up.
 
-`ledger.py` needs PyYAML. `test.sh` picks an interpreter that has it, falling back to a
-pinned `uv run --frozen --with pyyaml==6.0.3 --with jsonschema==4.26.0 python3`; run it
-the same way if invoking `ledger.py` directly.
+Use `packing-ledger check` for a read-only campaign check and `packing-ledger render`
+after a reviewed artifact change.
+Both run in the locked uv environment and share the same invariant implementation.
 
 ## What a runner may not do
 
@@ -508,12 +524,13 @@ campaign/
     README.md            the series artifact: goal, instrument, why it exists
     experiments/         exp-NNN, one per round
     results/             raw JSONL from the engine
-  runner.py              harness steps: status, preflight, claim, execute, record, run
-  ledger.py              regenerates ledger.md and runs the whole-set checks
   ledger.md              generated; never hand-edited
   session-report.md      generated numeric-runner batch handoff; historical filename,
                          not a versioned session-NNN agent-session artifact
 ```
+
+The implementation lives in `src/sqpack/campaign/`; the durable campaign state stays in
+this directory.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

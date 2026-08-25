@@ -381,8 +381,8 @@ per-stage attribution remain open work on `think-xzew`.
 
 ### F-01 (P0): the runner can record data that its own overlap guard rejects
 
-[`read_lines`](../../../campaign/runner.py) writes each line to the archive at lines
-315–322 *before* parsing or checking it.
+[`read_lines`](../../../src/sqpack/campaign/runner.py) writes each line to the archive
+at lines 315–322 *before* parsing or checking it.
 `run` catches `GuardError` at lines 779–785 and then calls `record` unconditionally.
 More seriously, `record` rebuilds cells through `cells_from`, lines 393–412, which reads
 only `n`, `seed`, and `best_side`; it does not re-run any of the JSON, overlap,
@@ -412,13 +412,14 @@ scientific result rows from guard-invalid data.
 
 ### F-02 (P0): validity is a proposer assertion, not an independent measurement
 
-The command contract at [`campaign/runner.py:20–34`](../../../campaign/runner.py)
-requires only a scalar `overlap` or `best_overlap`. No pose is required.
+The command contract at
+[`campaign/runner.py:20–34`](../../../src/sqpack/campaign/runner.py) requires only a
+scalar `overlap` or `best_overlap`. No pose is required.
 The harness then checks exact equality to the value zero *reported by the same code that
 proposed the configuration*. It cannot recompute containment or separation.
 The PR’s own quench driver illustrates the loss:
-[`run_quench.py:78–120`](../../../run_quench.py) emits side, convergence, counts, and
-timings but omits `x`, `y`, and `theta`.
+[`run_quench.py:78–120`](../../../cases/campaign_smoke/quench_experiment.py) emits side,
+convergence, counts, and timings but omits `x`, `y`, and `theta`.
 
 The provenance fields repeat the same mistake.
 The claim stub hardcodes `selftest_passed: true` at `runner.py:221–240`; the terminal
@@ -441,8 +442,8 @@ is.
 
 ### F-03 (P0): the generic evaluator cannot evaluate the hypotheses it is meant to queue
 
-[`decide`](../../../campaign/runner.py) ignores `criterion.shape`, uses only a numeric
-`criterion.threshold` at line 438, and reduces every outcome to
+[`decide`](../../../src/sqpack/campaign/runner.py) ignores `criterion.shape`, uses only
+a numeric `criterion.threshold` at line 438, and reduces every outcome to
 `best_side - standing_best` at lines 457–470. That implements H-016/H-017/H-020 only.
 It does not implement:
 
@@ -490,9 +491,9 @@ Several smaller defects combine at the overnight boundary:
 - `release` regenerates the ledger but does not check regeneration or persist the
   release. The report can omit runnable-but-unrun work and does not implement the
   promised “what moved / what died” distinction.
-- [`ledger.py:298–303`](../../../campaign/ledger.py) drops a parsed timezone with
-  `.replace(tzinfo=None)` instead of converting it to UTC. A non-zero offset can make a
-  fresh lease stale or an expired lease live.
+- [`ledger.py:298–303`](../../../src/sqpack/campaign/ledger.py) drops a parsed timezone
+  with `.replace(tzinfo=None)` instead of converting it to UTC. A non-zero offset can
+  make a fresh lease stale or an expired lease live.
 
 **Required repair:** model claim, execution, validation, recording, persistence,
 release, and terminal states explicitly.
@@ -507,23 +508,25 @@ terminal error that cannot be reported as a scientific verdict.
 
 The geometric key does minimize over `D4`, and the shipped test checks that path.
 The contact certificate does not.
-At [`canonical.py:201–210`](../../../sqpack/canonical.py), angle classes are ranked by
-their folded representative angle.
+At [`canonical.py:201–210`](../../../src/sqpack/research/canonical.py), angle classes
+are ranked by their folded representative angle.
 Reflection sends `a -> pi/2 - a`, which reverses those ranks; a contact graph whose
 topology distinguishes the classes can therefore change certificate.
-The shipped D4 test at [`canonical_check.py:100–122`](../../../tools/canonical_check.py)
-compares only `.geometric`, so it misses this failure.
+The shipped D4 test at
+[`canonical_check.py:100–122`](../../../devtools/check_canonical.py) compares only
+`.geometric`, so it misses this failure.
 
 The angle classes used as node colours are themselves order-dependent.
-The greedy representative algorithm at [`quench.py:349–368`](../../../sqpack/quench.py)
-does not define a transitive equivalence relation near its tolerance.
+The greedy representative algorithm at
+[`quench.py:349–368`](../../../src/sqpack/research/quench.py) does not define a
+transitive equivalence relation near its tolerance.
 A relabelling can therefore change both the contact certificate and angle signature.
 
 Finally, the two-key policy is internally inconsistent.
 The module says a matching contact certificate resolves a quantization split, and
 `agrees_with` reports exactly that state.
-[`Atlas.add`](../../../sqpack/atlas.py), however, deduplicates only when the exact tuple
-`(geometric, contact)` matches.
+[`Atlas.add`](../../../src/sqpack/research/atlas.py), however, deduplicates only when
+the exact tuple `(geometric, contact)` matches.
 The demonstrated 2e-12 perturbation is stored twice.
 There is no disagreement ledger or later union operation.
 
@@ -560,8 +563,8 @@ screen most cases, but the slow path must have a bounded operating envelope.
 ### F-07 (P0): the atlas counts stopping points as basins and cannot reconstruct its claimed discovery curve
 
 The atlas class calls every row “one distinct local optimum,” but
-[`Atlas.add:82–116`](../../../sqpack/atlas.py) stores the endpoint even when
-`converged=False`. Its comments explicitly defend that choice.
+[`Atlas.add:82–116`](../../../src/sqpack/research/atlas.py) stores the endpoint even
+when `converged=False`. Its comments explicitly defend that choice.
 The observed result at `n = 5`—11 sweep-limit stops, one convergence, 12 rows, and no
 known optimum—is the consequence.
 The result counts termination artifacts rather than basins.
@@ -631,16 +634,17 @@ The correct theorem in this repository is:
 
 > Fixed angles **and one separating-axis cell** define a linear program.
 
-[`solve_to_fixed_point`](../../../sqpack/quench.py) instead starts from the cell chosen
-by the input centres, solves it, chooses another cell, and stops when a cell repeats or
-when the next cell is worse or infeasible.
+[`solve_to_fixed_point`](../../../src/sqpack/research/quench.py) instead starts from the
+cell chosen by the input centres, solves it, chooses another cell, and stops when a cell
+repeats or when the next cell is worse or infeasible.
 At lines 194–197 it returns the incumbent even though the re-read cell differs, so the
 result need not be a fixed point.
 Its docstring claims this removes path dependence; the same-theta counterexample proves
 otherwise.
 
-The D-015 regression at [`regression_test.py:80–105`](../../../tools/regression_test.py)
-checks deterministic repetition and a pure translation of one start.
+The D-015 regression at
+[`regression_test.py:80–105`](../../../devtools/check_regressions.py) checks
+deterministic repetition and a pure translation of one start.
 It never supplies distinct starting cells, so it cannot test the property it names.
 The file is not wired into `test.sh` in any case.
 
@@ -697,7 +701,7 @@ Benchmark multiple brackets and coupled directions on proved controls.
 
 ### F-11 (P1): the generic exact-arithmetic API does not enforce its completeness preconditions
 
-[`NumberField.__init__`](../../../sqpack/field.py) documents an irreducible minimal
+[`NumberField.__init__`](../../../src/sqpack/field.py) documents an irreducible minimal
 polynomial and an interval containing exactly one real root.
 The implementation checks only a sign change at the endpoints.
 A reducible polynomial can pass, after which a non-zero reduced representative can
@@ -873,9 +877,9 @@ blocker.
 
 ### F-16 (P0): the mathematical golden is not hermetic and asserts what it says it only records
 
-[`tools/golden_basins.py`](../../../tools/golden_basins.py) combines two different
-artifacts: an oracle-driven convergence ladder and an exact characterization snapshot of
-a few multistart draws.
+[`tools/golden_basins.py`](../../../devtools/check_golden_basins.py) combines two
+different artifacts: an oracle-driven convergence ladder and an exact characterization
+snapshot of a few multistart draws.
 The prose says discovery is “measured, never asserted,” but the whole rebuilt
 YAML—including which basins those draws found, their frequencies, and `found_optimum`—is
 compared byte for byte.
@@ -923,17 +927,18 @@ Non-converged endpoints remain observations, never certified basins.
 
 ### F-17 (P0): the fast gate removed the producer-level regression it claimed to preserve
 
-At PR head `c412b8c`, [`test.sh`](../../../test.sh) makes `--deep` and `--strict`
-independent flags. The handover specification invokes only `./test.sh --strict`, so its
-golden step calls `verify_stored()` rather than annealing, quenching, rebuilding the
-map, or independently checking a pose.
-That function can derive mathematical constraints on stored scalars, but a YAML row
-saying `valid: true` is not independent validation.
+At PR head `c412b8c`, [`test.sh`](../../../src/sqpack/cli/validate.py) makes `--deep`
+and `--strict` independent flags.
+The handover specification invokes only `./test.sh --strict`, so its golden step calls
+`verify_stored()` rather than annealing, quenching, rebuilding the map, or independently
+checking a pose.
+That function can derive mathematical constraints on stored scalars, but
+a YAML row saying `valid: true` is not independent validation.
 The file contains no pose with which the fast path could establish that claim.
 
-At the same time, [`tools/atlas_check.py`](../../../tools/atlas_check.py) replaced its
-real six-start `n=5` census with one cheap real `n=4` quench and five synthetic keys.
-All six offers were passed with `converged=True`; the check then asserted that the
+At the same time, [`tools/atlas_check.py`](../../../devtools/check_atlas.py) replaced
+its real six-start `n=5` census with one cheap real `n=4` quench and five synthetic
+keys. All six offers were passed with `converged=True`; the check then asserted that the
 non-convergence counter was zero and described this as testing that the store did not
 hide non-convergence.
 A branch that deletes or ignores the false path can pass that fixture.
@@ -969,8 +974,9 @@ The top square slides continuously while the optimum side remains fixed.
 Running the current canonicalizer at `t = 0.50, 0.75, 1.00, 1.25, 1.50` produced one
 contact certificate, `af4ca4659c8fc659a37907833f922899`, but three geometric keys; D4
 identifies `t` with `2-t` and does not identify the remaining continuum.
-Because [`Atlas.add`](../../../sqpack/atlas.py) merges only when both hashes agree, a
-finer geometric quantum creates more rows from the same connected optimal family.
+Because [`Atlas.add`](../../../src/sqpack/research/atlas.py) merges only when both
+hashes agree, a finer geometric quantum creates more rows from the same connected
+optimal family.
 
 This is not repaired by choosing the contact key instead.
 The family’s active contact graph is constant through its interior, but contact graphs
@@ -1021,9 +1027,9 @@ The atlas stores hashes and the same coarse descriptors.
 Neither artifact retains the pose, active constraints, termination reason, residuals, or
 a content-addressed observation from which the alternatives can be tested.
 Rediscovery is evidence about proposal mass, not a convergence certificate.
-Conversely, [`closed_form.py`](../../../sqpack/closed_form.py) searches only a finite
-family `(p + q sqrt(d))/r`; a match is a heuristic clue, and a miss says only that this
-family did not match.
+Conversely, [`closed_form.py`](../../../src/sqpack/research/closed_form.py) searches
+only a finite family `(p + q sqrt(d))/r`; a match is a heuristic clue, and a miss says
+only that this family did not match.
 
 **Required repair:** preserve every pose and active set, then replay each singleton
 through a preregistered precision and budget ladder.
@@ -1045,11 +1051,11 @@ not say that two terminal configurations whose sides differ by more than that ar
 different, or that two configurations whose sides differ by less are the same.
 The current system nevertheless makes that inference in three places:
 
-- [`canonical.py`](../../../sqpack/canonical.py) says its `1e-6` pose quantum is far
-  below every real basin distinction because real basins differ in side by `1e-3` or
-  more;
-- [`atlas.py`](../../../sqpack/atlas.py) calls the minimum scalar side gap the number
-  that determines whether two rows are resolvable; and
+- [`canonical.py`](../../../src/sqpack/research/canonical.py) says its `1e-6` pose
+  quantum is far below every real basin distinction because real basins differ in side
+  by `1e-3` or more;
+- [`atlas.py`](../../../src/sqpack/research/atlas.py) calls the minimum scalar side gap
+  the number that determines whether two rows are resolvable; and
 - [`atlas.schema.yaml`](../../../atlas/atlas.schema.yaml) gives `closest_pair` the same
   interpretation.
 
@@ -2545,6 +2551,12 @@ one classification error found in the integration draft:
 | D-196 | The exp-035 integration briefly changed D-034 instead of D-194; an id-scoped correction and complete defect diff caught the recurrence before commit |
 | D-197 | A concurrent checkout moved the isolated exp-036 checker commit to the engineering-plan branch; the commit banner caught it before push or execution, and both refs were restored without new lease machinery |
 | D-198 | The first post-exp-036 gate found two numeric negative-control anchors still targeting the pre-D-197 aggregates; both now target the final totals and all 37 controls fire |
+| D-199 | The first complete-set residual repair moved the n=10 violation from rows 49 and 66 to previously clean row 61; a capped re-observation loop now shrinks the feasible region without weakening the all-row screen |
+| D-200 | The synopsis gate-detection aggregate had advanced to nine while its duplicate id list still said eight and omitted D-198; the hand-maintained enumeration is removed |
+| D-201 | The D-199/D-200 edit advanced two mutation anchors without advancing their expected checker diagnostics; the record-audit lane caught the recurrence before commit |
+| D-202 | The first delegated pool-width-1 validation terminated without returning stdout or exit status; it was discarded and one durable-session rerun retained the complete receipt |
+| D-203 | Both pool widths isolate the remaining n=4 drift to seed 0 and a typed HiGHS status-4 Solve error, distinct from D-199’s repaired residual path |
+| D-204 | The gate-aggregate mutation expected a diagnostic naming its deliberately mutated count rather than the authoritative count; the first freeze gate caught the reversed expectation |
 
 The retained commit map is `a1009cb → b3ab594`, `f9d8bae → 7353a34`,
 `62c227c → 2c4cd0e`, and `7a5787c → 1210e07`; corrections land separately in `8611e85`,
@@ -2597,6 +2609,106 @@ after the repair LP, not a wall-deadline stop.
 Thus D-126’s deterministic work budget remains necessary but is not this correction;
 `think-yi6x` owns the narrower D-162 repair with first-versus-repaired receipts, finite
 solver caps, and unchanged all-row acceptance.
+The implemented D-199 repair re-observes every successful LP under a four-call cap.
+At n=10 the offender sets are `(49, 66)`, then `(61)`, then empty; both declared pool
+widths recover all seven known-answer ladder rungs without changing the screen or
+golden. The same replays leave n=4 at 3/4 converged.
+A bounded seed slice identifies a distinct D-203 cause: seed 0 receives a typed HiGHS
+status-4 Solve error.
+Therefore the n=10 correction stands, but `think-yi6x` and the strict gate remain open
+for n=4.
+
+## PR #24 workflow-entry-point disposition
+
+PR #24 adds a useful distinction between the four quality principles and six kinds of
+work. Its compact selector, ordered phase history, work-unit vocabulary, and legacy
+series warning are retained.
+The stacked head could not be incorporated verbatim: it predated D-199 through D-204,
+and its first AgentSession/v2 draft promised more resumability and historical precision
+than its schema recorded.
+
+The review was published on PR #24 before correction.
+Each finding has one child bead under `think-hie2`, and each actual error has a matching
+logbook entry:
+
+| Review | Defect | Bead | Disposition |
+| --- | --- | --- | --- |
+| R1 | D-205 | `think-j3io` | Preserve the 204-defect checkpoint, complete the D-199 phase, and keep `think-nr5w` as the next correctness slice |
+| R2 | D-206 | `think-84tp` | Make an active phase record its expected output, deciding command, kill condition, fallback, start, and deadline; reserve outcome and evidence for terminal facts |
+| R3 | D-207 | `think-7ehm` | Keep bounded implementation inside its owning workflow and let mechanical delegations inherit the coordinating phase |
+| R4 | D-208 | `think-bl42` | Define the campaign as the durable square-packing research program and basin cartography as its current search objective |
+| R5 | D-209 | `think-2m3b` | Reconcile `series-000` with exp-001 through exp-036 and state the first- and second-order H-023 boundaries |
+| R6 | D-210 | `think-o8wu` | Mark phases retrospective or contemporaneous and separate their process statistics |
+| R7 | D-211 | `think-h0wf` | Require W2 before material promotion, not after every routine guarded W6 round; allow an authorized bounded factual repair |
+| R8 | D-212 | `think-vcb7` | Treat focus as the primary emphasis while all four principles continue to constrain or contribute |
+| R9 | D-213 | `think-u7lr` | Derive workflow order and entry from one schema vocabulary rather than copying machine state |
+| R10 | D-214 | `think-4utf` | Enforce the declared soft-schema contract and envelope identities |
+| R11 | D-215 | `think-w40g` | Reject extra workflow rows, stale progress datelines, and malformed transition or clock branches with focused controls |
+| R12 | D-216 | `think-0gui` | Keep the generated session table compact and leave complete phase history in the linked source artifact |
+
+The focused landing gate then exposed D-217, a direct recurrence of D-202: a parallel
+wrapper returned while the negative-control command was live but failed to retain the
+session identifier needed for its terminal receipt.
+That result was discarded, the single check was rerun through a receipt-preserving path,
+`think-kjpl` records the landing incident, and the systemic final-receipt rehearsal
+remains open under `think-b3bm`.
+
+The same source-to-session reconciliation found D-218: session-009’s event history
+already contained exp-035 and exp-036, but its output inventory stopped at exp-034. The
+inventory now includes both experiment artifacts, both deterministic result records, and
+both exact checkers under `think-kts5`; neither H-023 verdict changed.
+
+This remains a record and orientation layer, not an unattended scheduler.
+The numerical launch no-go is unchanged: D-203 still blocks the strict small-`n`
+calibration path, and the exact next slice is the millisecond n=4 seed-0 status-4
+fixture under `think-nr5w`. The full legacy-series migration is deferred until a real
+series-level consumer needs it; experiment-level subject, instrument, regime, and
+provenance plus the explicit legacy warning already prevent unsafe pooling.
+
+## PR #22 Merge-Readiness Review: 2026-08-24
+
+**Scope:** PR #22 starting at pre-review head `0775c20` against current `main` at
+`277f060`, including all GitHub review surfaces, the 38-file diff, current packing
+beads, the normal gate, the H-023 exact claims, and the documented handoff contract.
+
+**Verdict:** the committed tree is a coherent, merge-ready checkpoint.
+The normal gate passes all 30 steps without skips, current `main` is the merge base, and
+the known strict failure is explicit and owned.
+[`conventions.md`](../../../conventions.md#10-what-the-gate-actually-enforces) now
+separates this preservation decision from launch certification: D-203 still makes the
+strict/deep gate red on the n=4 seed-0 HiGHS status-4 failure, so `think-nr5w` continues
+to block unattended execution and any claim that the regenerated golden is healthy.
+It does not block landing this reviewed checkpoint.
+
+The review found seven additional process and record defects.
+None changes an H-023 claim, threshold, tolerance, or golden:
+
+| Review | Defect | Bead | Disposition |
+| --- | --- | --- | --- |
+| MR1 | D-219 | `think-tqjr` | Replace BC-010’s superseded n=4/n=10 diagnosis with D-199’s restored n=10 path and D-203’s isolated n=4 failure |
+| MR2 | D-220 | `think-l1us` | Encode `think-nr5w` and `think-b3bm` before strict revalidation, then make `think-nm35` depend on that explicit transition |
+| MR3 | D-221 | `think-05hr` | Correct the live campaign bead from the superseded eight-hour horizon to the user-selected four-hour checkpoint |
+| MR4 | D-222 | `think-ysz2` | Stop and discard an unauthorized delegated strict run; require explicit command exclusions and wall ceilings on bounded audit delegations |
+| MR5 | D-223 | `think-r10n` | Replace the synopsis’s stale 37-second/37-control checkpoint with the final pre-commit review run’s 35-second receipt and 55-control coverage |
+| MR6 | D-224 | `think-fer4` | Discard a focused negative-control run made outside the gate-managed Python environment; retain the correctly replayed 55/55 result |
+| MR7 | D-225 | `think-l1us` | Correct MR2’s overconstraint: require a green normal gate and explicit limitations for checkpoint merge, while retaining the n=4, receipt, and work-budget defects as strict launch blockers |
+
+GitHub reports the current head mergeable with a clean merge state and no reviews,
+inline comments, issue comments, or hosted checks.
+The branch and remote head match, and current `main` is the merge base.
+Two independent pre-review normal gates pass in 69 and 91 wall-seconds; post-review runs
+pass in 31 and 35 wall-seconds.
+The current gate includes 55 negative controls, Python and Rust lint, BasedPyright,
+generated views, all 36 experiment commits, and nine AgentSession records.
+An independent derivation also confirms exp-036’s `sqrt(2)/8` owner-4 excess, `-1/4`
+owner-3 gap, positive relative-angle cusp margin, finite branch exhaustion, and narrow
+Bouligand-tangent scope.
+
+The older runner trust-boundary, identity, work-budget, and queue-pricing defects remain
+post-merge prerequisites for an unattended numerical campaign; they do not invalidate
+this historical and exact-research checkpoint.
+`think-nm35` is genuine follow-up research and belongs on a fresh branch after the merge
+gate, not in PR #22.
 
 ## Post-merge operating disposition
 

@@ -186,10 +186,10 @@ All from the `series-001 → series-000` / `H-00x → H-01x` renumber, all mecha
 
 - `campaign/ideas.md` → `series/001-smoke-n11/experiments/exp-001-baseline-sweep.md`
   (broken; the directory is `000-smoke-and-calibration`).
-- `campaign/ideas.md`, Open questions: “Registered as
-  `[H-004](hypotheses/H-004-basin-width.md)`” — broken link **and** stale claim: the
-  basin-width idea was renumbered to `H-018` (the board’s own row 7 says so), while
-  `H-004` is reserved for the standing review’s neighbor-transfer hypothesis.
+- `campaign/ideas.md`, Open questions: “Registered as H-004 at
+  `hypotheses/H-004-basin-width.md`” — broken link **and** stale claim: the basin-width
+  idea was renumbered to `H-018` (the board’s own row 7 says so), while `H-004` is
+  reserved for the standing review’s neighbor-transfer hypothesis.
   As written, the board asserts a reserved id is registered.
 - `run_baseline.sh` still writes `OUT=campaign/series/001-smoke-n11/results/…` — the
   next invocation of the runbook’s own “running one round” sequence would recreate the

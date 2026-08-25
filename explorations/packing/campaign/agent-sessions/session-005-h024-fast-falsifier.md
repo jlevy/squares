@@ -13,15 +13,21 @@ session:
     Complete one preregistered, independently checked, high-information research round
     on the new main-based branch and leave its instrument, source, raw result, verdict,
     successor, logbook entry, and execution cost durable.
-  entry_workflow: research-loop
   workflow_phases:
   - workflow: research-loop
     focus: insight
+    recording: retrospective
     objective: Run H-024's cheapest source-bound falsifier and retain every result.
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 45
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: Exp-012 found six orientation classes and refuted H-024 at its first stop cell.
     evidence:
     - The source witness reconstructs and passes the independent separating-axis guard.
@@ -71,7 +77,7 @@ session:
       multiplicities 15/1/9/1/2/1, confirmed SVG matrix order, and matched the final
       checker's 4.05464e-101 worst nominal penetration.
     evidence:
-    - Live primary SVG SHA-256 30c725b27e1b90ff0c9c238fb8923c3da6ce26e046cdd46d5c33a485bbec821c.
+    - Primary SVG URL and retained fixture path recorded with the 2026-08-24 retrieval.
     - Minimum class gap a-d is 0.296067318913687 degrees.
     - Smallest strict SAT separation is about 0.03617094266289048.
     files: []

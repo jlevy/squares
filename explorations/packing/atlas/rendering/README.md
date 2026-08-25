@@ -1,8 +1,8 @@
 # Deterministic SVG Gallery
 
 This directory retains the packing renderer’s document-oriented known answers.
-The SVG source is the golden artifact: `tools/check_svg_rendering.py --check` rebuilds
-each figure in fresh processes, validates the safe subset, and compares bytes.
+The SVG source is the golden artifact: `python -m devtools.check_svg_rendering --check`
+rebuilds each figure in fresh processes, validates the safe subset, and compares bytes.
 
 ## Gallery
 
@@ -42,15 +42,26 @@ dots in the same highlight color show point contacts.
 The figure carries certified-upper-bound evidence and does not call the open case
 solved.
 
+### `n = 29`: verified high-precision construction
+
+![The high-precision Kingbird packing of twenty-nine unit squares.](kingbird29-overview.svg)
+
+The retained source reconstructs 29 squares at 160 decimal digits and passes all 406
+separating-axis pair checks.
+This larger example exercises deterministic reuse of the 20-color sequence.
+It remains a verified numerical construction, not an exact certificate or an optimality
+proof.
+
 ## Visualization Levels
 
 The renderer exposes three optional levels through `RenderSpec` and
-`tools/render_packing_svg.py`:
+`devtools.render_packing_svg`:
 
 - `overview` draws one clean final packing and an evidence-qualified side label
 - `comparison` uses one shared geometric scale for the start and final frames
-- `trajectory` adds one-pass CSS motion while retaining the final frame as the
-  underlying static SVG
+- `trajectory` adds one-pass CSS translation while retaining the final frame as the
+  underlying static SVG; it rejects angle, shape-offset, or container-size changes that
+  the current motion profile cannot represent
 
 Annotations are independent of the view.
 `minimal` is suitable for ordinary documents, `numeric` adds projected values, and
@@ -77,9 +88,9 @@ List, regenerate, or byte-check the complete discoverable gallery from the explo
 root:
 
 ```bash
-uv run --frozen python tools/render_packing_gallery.py --list
-uv run --frozen python tools/render_packing_gallery.py --update
-uv run --frozen python tools/render_packing_gallery.py --check
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --list
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --update
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --check
 ```
 
 [`manifest.json`](manifest.json) is the stable discovery layer for documentation and
@@ -90,28 +101,28 @@ and contact support, accessible copy, and standalone generator command.
 Render the exact Trump construction:
 
 ```bash
-uv run --frozen python tools/render_packing_svg.py builtin trump11 \
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_svg builtin trump11 \
   --annotations exact --output atlas/trump11-exact.svg
 ```
 
 For the same geometry with no contact highlight:
 
 ```bash
-uv run --frozen python tools/render_packing_svg.py builtin trump11 \
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_svg builtin trump11 \
   --no-contacts --output atlas/trump11-geometry.svg
 ```
 
 Render a retained `BasinEvent/v3` without converting JSON decimals through binary64:
 
 ```bash
-uv run --frozen python tools/render_packing_svg.py event result.jsonl \
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_svg event result.jsonl \
   --event-id EVENT_ID --view comparison --output atlas/event-comparison.svg
 ```
 
 Render the certified five-square trajectory:
 
 ```bash
-uv run --frozen python tools/render_packing_svg.py n5-face \
+uv run --frozen --all-extras --group dev python -m devtools.render_packing_svg n5-face \
   --view trajectory --output atlas/n5-face.svg
 ```
 
@@ -120,30 +131,33 @@ nonzero before the atomic output boundary replaces a destination.
 
 ## Measurements and Portability Review
 
-Measurements on 2026-08-24 used Python 3.14.6 on macOS 26.5.2 arm64. Twenty in-process
-rebuilds of the three packing figures had a median total latency of 393.031 ms and a
-minimum of 378.257 ms; exact verification and contact extraction dominate this
-measurement. Timing is observed host evidence and is intentionally absent from
+Initial timing measurements on 2026-08-24 used Python 3.14.6 on macOS 26.5.2 arm64.
+Twenty in-process rebuilds of the original three packing figures had a median total
+latency of 393.031 ms and a minimum of 378.257 ms; exact verification and contact
+extraction dominate this measurement.
+Size and conversion measurements were refreshed for the five-figure gallery on
+2026-08-25. Timing is observed host evidence and is intentionally absent from
 `metrics.json`.
 
 | Figure | SVG bytes | Quick Look PNG bytes |
 | --- | ---: | ---: |
 | Exact `n = 3` moduli | 14,186 | 85,886 |
-| Trump `n = 11` overview | 30,732 | 81,896 |
+| Trump `n = 11` overview | 30,728 | 81,615 |
 | Göbel `n = 10` comparison | 17,753 | 38,131 |
-| Exact `n = 5` trajectory | 15,652 | 36,673 |
+| Exact `n = 5` trajectory | 15,648 | 36,774 |
+| Kingbird `n = 29` overview | 22,680 | 168,176 |
 
-Quick Look produced all four 900 px thumbnails, including the final-state rendering of
-the animated figure.
-Its square-thumbnail mode scales wide SVGs to fill and therefore crops the sides of the
-comparison and moduli figures; those thumbnails are conversion smoke tests, not layout
-evidence. A fit-preserving `sips` document conversion rendered the complete declared
-viewports at `1200×900`, `960×680`, `1280×680`, and `960×680`. The complete gallery was
-inspected at document and screen scale; the pure-black boundaries, cool fills,
-translucent clipped contact marks, labels, and final-state attributes survive a renderer
-that ignores CSS animation.
-The focused checker also proves that both comparison containers lie inside the declared
-viewport.
+Quick Look produced all five thumbnails, including the final-state rendering of the
+animated figure. Its square-thumbnail mode scales wide SVGs to fill and therefore crops
+the sides of the comparison and moduli figures; those thumbnails are conversion smoke
+tests, not layout evidence.
+A fit-preserving `sips` document conversion rendered the complete declared viewports at
+`1200×900`, `960×680`, `1280×680`, and `960×680`. The complete gallery was inspected at
+document and screen scale; the pure-black boundaries, cool fills, translucent clipped
+contact marks, labels, and final-state attributes survive a renderer that ignores CSS
+animation.
+The focused checker also proves that both comparison containers lie inside the
+declared viewport.
 
 Raster screenshots remain a manual QA aid, not a golden gate.
 No pinned `resvg` binary or pinned font bundle is present.

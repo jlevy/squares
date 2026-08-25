@@ -10,7 +10,7 @@ Each rule is marked **[checked]** when something fails on a violation, or
 **[convention]** when it rests on care alone.
 The distinction is the point: a rule nothing enforces is a rule that will drift, so the
 standing goal is to move rules from the second column to the first.
-`./test.sh` is what does the checking.
+`packing-validate` is the authoritative checking surface.
 
 ## 1. Identity
 
@@ -133,21 +133,35 @@ invalidate every artifact rather than the offending one
 
 ### Workflow, Focus, Phase, and Slice
 
-**Workflow names purpose and output; focus names the quality dimension.**
+**Workflow names purpose and output; focus names the primary quality emphasis.**
 [checked for agent sessions] The six numbered workflows and their full contracts live in
 [`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts).
-One session phase declares one workflow and one focus.
-`general-improvement` is the explicit fallback, not a label for mixed work.
+One independently tracked session phase declares one workflow and one primary focus; the
+other principles still constrain and may contribute to the work.
+`general-improvement` is reserved for genuine repository maintenance outside W1–W6, not
+a label for mixed or ordinary core work.
+
+**Implementation stays with its owning workflow.** [convention] Bounded research
+corrections stay in W1 or W2, idea probes in W3, process and checker repairs in W4,
+measured optimizations in W5, and registered instruments in W6 before measurement.
+There is no undefined implementation handoff.
 
 **A phase is contiguous; a slice is bounded.** [checked for phase history] Start a new
 phase when workflow or focus changes.
 A focus-only change repeats the workflow and is not a workflow switch.
 A slice is one time-bounded action inside the phase and need not produce an experiment.
+Mechanical delegations inherit the coordinating phase unless they open independently
+tracked sessions.
 
-**Transitions are recorded before the new work begins.** [checked] The first phase uses
-`session_start` and no switch reason.
-Later phases name a planned checkpoint, evidence checkpoint, or user request; close the
-old phase with its evidence and stop reason before entering the new one.
+**Current transitions are recorded before the new work begins.** [checked] A phase opens
+with its expected output, validation command, kill condition, fallback, start, and
+deadline. Its actual outcome and evidence are terminal fields.
+The first phase uses `session_start` and no switch reason; later phases name a planned
+checkpoint, evidence checkpoint, or user request, and close the old phase before
+entering the new one.
+Sessions 001–008 predate this convention.
+Their v2 workflows are retrospective reconstructions from retained evidence and are not
+preregistration evidence.
 
 ## 4. Evidence
 
@@ -226,7 +240,7 @@ tolerances, the metric vector and the control cells do not change mid-series.
 `sqsearch` owns move-loop energy.** [checked: differential test] `pair_depth` is a
 metric shaped for annealing, not a verdict, and a second implementation at that layer is
 fine—as long as it never gets to say what is valid.
-20,000 near-contact pairs are checked against the oracle on every run of `test.sh`.
+20,000 near-contact pairs are checked against the oracle on every full validation run.
 
 **Proposers propose and nothing else.** [convention] A proposer never quenches,
 canonicalizes, decides validity, or writes the atlas, so a new strategy cannot change
@@ -250,9 +264,16 @@ solved, the other is what a round is run on.
 [convention] The measurements behind this are in the
 [plan spec](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md#stack-and-boundaries--decided-by-measurement).
 
-**Dependencies are pinned, and nothing released in the last 14 days.** [convention]
-`test.sh` selects an interpreter that has what it needs, falling back to a pinned `uv`
-runner.
+**Python 3.14 is the sole supported runtime, and dependencies are locked.** [checked]
+`pyproject.toml`, `.python-version`, Ruff, BasedPyright, CI, and `uv.lock` express one
+runtime policy. Development commands run through the locked uv environment described in
+[`development.md`](development.md).
+
+**Code is segregated by maturity and consequence.** [checked] Maintained foundations,
+reusable research components, case-specific evidence, developer tooling, and tests live
+in separate module families.
+The dependency rules and E0–E3 expectations are defined in
+[`development.md`](development.md#code-maturity-and-placement).
 
 **Markdown is formatted by flowmark**, automatically on commit.
 [checked: hook] Exclusions are evidence-based, not precautionary, and each one states
@@ -266,9 +287,9 @@ Markdown link. This project has needed that twice.
 
 ## 10. What the Gate Actually Enforces
 
-`./test.sh` runs thirty read-only steps, concurrently, with the transcript replayed in
-declared order; `./test.sh --list` prints the authoritative step names, and the `STEPS`
-table in the script is the only place a step is registered.
+`packing-validate` runs thirty-one read-only steps concurrently and replays their output
+in declared order. `packing-validate --list` prints the authoritative names and tiers;
+the `STEPS` table in `src/sqpack/cli/validate.py` is the only registration point.
 What they enforce, grouped:
 
 **Mathematics, checked exactly where the claim is exact.** Exact verification of Trump’s
@@ -298,10 +319,12 @@ engine commit reachable, or annotated); the bead tree; and the skills mirrored b
 **Hygiene.** The lint floor (ruff, ruff-format and basedpyright on the Python; clippy
 pedantic and rustfmt on the Rust); the soundness perimeter (every component that emits a
 configuration is checked by `sqpack` through code it does not share); and the negative
-controls in `tools/controls.yaml`, each a mutation that must be caught.
+controls in `devtools/controls.yaml`, each a mutation that must be caught in a private
+source snapshot.
 
-A skipped check is recorded and re-listed at the end, `--strict` turns any skip into a
-failure, and “ALL CHECKS PASSED” is printed only when it is literally true.
+A skipped check is recorded and re-listed at the end.
+`--strict` enables deep golden regeneration and turns every skip into a failure; failed
+or incomplete strict surfaces always return nonzero.
 
 **Run the cheapest loop that answers the current question.** The research round is
 deliberately separate from the edit/test loop, so an eight-hour hypothesis never makes a
@@ -309,14 +332,21 @@ documentation correction take eight hours to validate:
 
 | Loop | Target latency | Use |
 | --- | ---: | --- |
-| Interactive | under about 2 seconds | Status, ledger and schema checks, exact-witness verification, engine self-test |
-| Focused | under about 60 seconds | One changed component and its named negative control (`./test.sh --only`) |
-| Checkpoint | about 2 minutes | Normal `./test.sh` before a commit, push, or cross-component handoff |
-| Deep handoff | about 5 minutes | `./test.sh --strict` before an unattended campaign, major handoff, or merge |
+| Interactive | under about 2 seconds | Pytest, ledger and schema checks, exact-witness verification, engine self-test |
+| Focused | under about 60 seconds | `packing-validate --fast` or `packing-validate --only TEXT` for one component and its controls |
+| Checkpoint | about 2 minutes | Normal `packing-validate` before a commit, push, cross-component handoff, or checkpoint merge |
+| Deep handoff | about 5 minutes | `packing-validate --strict` before an unattended campaign, a handoff that depends on regenerated producer output, or any claim that the strict/deep path is healthy |
 | Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
 
 These are working envelopes, not promises; repeated versioned benchmarks and warm/cold
 regimes remain tracked work.
+
+A checkpoint merge may retain a known strict/deep failure when the normal gate passes
+without skips, the exact failure and its limitation are recorded in the defect log and
+PR, and an open bead owns the repair.
+That merge preserves reviewed work; it does not certify the failed producer or authorize
+an unattended campaign.
+The strict gate remains mandatory before the deep handoff or launch that depends on it.
 
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.

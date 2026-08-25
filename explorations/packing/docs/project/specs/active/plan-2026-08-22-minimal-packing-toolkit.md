@@ -84,7 +84,7 @@ Four research documents lead here, and their conclusions constrain this design:
 
 What exists today: `sqpack` in Python — exact `ℚ(α)` arithmetic, a separating-axis
 verifier generic over the scalar type, Trump’s packing as a worked example, negative
-controls, and `test.sh` green.
+controls, and `packing-validate` green.
 It verifies `n = 11` in 0.35 s and is **the correctness oracle this spec builds
 against**, not something to replace.
 
@@ -263,6 +263,9 @@ proposers are comparable by construction.
 experiment artifacts, generated ledger, and whole-set invariant checks that the review’s
 round protocol calls for.
 Its experiment artifacts *are* the review’s “manifests”.
+The campaign is the durable square-packing research program across search, proof,
+validation, and infrastructure questions; basin cartography is its current search
+objective rather than the definition of the whole campaign.
 The review’s S0–S6 names are topical planning stages; actual series artifacts open only
 at a tooling or regime boundary that changes comparability.
 
@@ -286,11 +289,11 @@ sqpack.verify(pk, scalar="f64", tol=1e-9)  # fast and explicitly unsound
 ```python
 run = sqpack.search(n=12, seed=42, budget=...)  # deterministic in seed
 run.basins  # each with key, side, verdict
-sqpack.search(n=12, seed=42, workers=32).digest == run.digest  # must hold
+sqpack.search(n=12, seed=42, workers=32).basins == run.basins  # must hold
 ```
 
-The Python `sqpack.verify_packing(..., sign=...)` signature stays as-is so `test.sh`
-keeps passing unchanged.
+The Python `sqpack.verify_packing(..., sign=...)` signature stays as-is so
+`packing-validate` keeps passing unchanged.
 
 ## Implementation Plan
 
@@ -377,7 +380,8 @@ It is mostly *running* the previous phases.
 - [ ] Write results back into the frontier corpus and the research documents.
 
 **Done when:** the atlas exists for `n ≤ 10` with discovery curves attached, H-12 has a
-verdict, and the same seed reproduces the same basin digest on 1 worker and on 32.
+verdict, and the same seed reproduces the same complete basin records on 1 worker and on
+32\.
 
 ### Phase 4: Strategy proposers
 
@@ -431,7 +435,8 @@ So this phase begins by re-measuring, and builds only what the measurement names
   negative control already in `negative_control.py`, and on every corpus entry with
   exact algebraic data.
 
-- [ ] Extend `test.sh` with the differential test and the certificate round-trip.
+- [x] Extend `packing-validate` with the differential test and the certificate
+  round-trip.
 
 - [ ] **E1 — corpus re-verification.** Every analytically-optimized record, exactly,
   with filter rates per `n`. This is what the speed is *for*.
@@ -479,7 +484,7 @@ model into the atlas or the corpus without passing the exact layer.
 
 ## Testing Strategy
 
-The existing `test.sh` is the harness; these are additions to it.
+`packing-validate` is the current harness; these are registered steps within it.
 
 **Differential testing against the oracle.** The pure-Python verifier is the reference
 implementation. Every Rust verdict must match it on: Trump’s packing, all six
@@ -493,9 +498,9 @@ verifier rejects any overlap while a float verifier with any tolerance has a bli
 Rust must reproduce both halves, including the float verifier’s *failure*: a fast path
 that accidentally became sound would mean the test is not testing what it claims.
 
-**Determinism.** Same seed, 1 worker versus 32, bit-identical basin digest.
-Asserted, not assumed — this is the property that makes E4 publishable and it degrades
-silently.
+**Determinism.** Same seed, 1 worker versus 32, with bit-identical complete ordered
+outputs. Asserted, not assumed — this is the property that makes E4 publishable and it
+degrades silently.
 
 **Certificate round-trip.** Serialize, re-load, and re-check a certificate without the
 original packing object or the search that produced it.
@@ -527,12 +532,12 @@ Floors, from measurements already taken:
 
 Everything lands in `explorations/packing/`, alongside what is already there.
 The Python `sqpack` package keeps working throughout — Phase 1 adds a faster path and a
-richer return type without changing the existing signature, so `test.sh` passes at every
-commit.
+richer return type without changing the existing signature, so `packing-validate` passes
+at every commit.
 
 Rust is additive: `cargo` is not required to run the existing Python suite, and
-`test.sh` skips the Rust checks when no toolchain is present, in the same way it already
-skips the SymPy-dependent derivation.
+`packing-validate` skips the Rust checks when no toolchain is present, in the same way
+it skips the SymPy-dependent derivation.
 
 No deployment, no consumers outside this repository, no compatibility surface to
 maintain.
@@ -568,7 +573,7 @@ consume; version it from the start.
 
 **2026-08-23 (later) — the harness exists, and it changes what a phase item must ship.**
 
-`campaign/runner.py` now executes rounds unattended, and it reads a machine-readable
+`packing-campaign` now executes rounds unattended, and it reads a machine-readable
 `runner.command` recipe from each hypothesis rather than the prose `instrument` field.
 So a Phase item is not finished when its code works: it is finished when the hypothesis
 it unblocks carries a recipe and has `instrument_ready: true` flipped **in the same
@@ -615,8 +620,9 @@ implementation, and are corrected here rather than left to be discovered again:
   in the [postmortem](../../postmortems/postmortem-2026-08-23-soundness-class.md).
 
 And one addition to Phase 1’s definition of done: a new component joins the **soundness
-perimeter** ([`tools/perimeter_test.py`](../../../../tools/perimeter_test.py)) in the
-same change that introduces it.
+perimeter**
+([`devtools.check_soundness_perimeter`](../../../../devtools/check_soundness_perimeter.py))
+in the same change that introduces it.
 The quench did not, which is why D-014 was possible.
 
 **2026-08-23 (second revision) — Python first, compiled code where a profile says.**
@@ -688,7 +694,7 @@ Research documents this spec implements:
 Existing code and data this builds on:
 
 - [`explorations/packing/`](../../../../README.md) — the Python verifier, negative
-  controls, and `test.sh`.
+  controls, and `packing-validate`.
 - [`explorations/packing/frontier/`](../../../../frontier/README.md) — the per-`n`
   corpus and the datasets the experiments will write back into.
 

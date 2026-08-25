@@ -37,10 +37,12 @@ Four findings frame everything below.
 2. **The determinism engineering is the most valuable transferable asset**, more so than
    any single algorithm.
    A three-class determinism taxonomy, counter-based RNG keyed by logical work identity,
-   fixed-slot tile reductions, lint-enforced bans on platform `libm` and on `powi`, and
-   golden hashes coupled to semantic-surface versions together solve the problem a
-   massively parallel packing search actually has: making a GPU or many-core stochastic
-   search reproducible.
+   fixed-slot tile reductions, and lint-enforced bans on platform `libm` and on `powi`
+   address the problem a massively parallel packing search actually has: making a GPU or
+   many-core stochastic search reproducible.
+   FrankenSim also couples golden hashes to semantic-surface versions; that upstream
+   mechanism is described below, but the hashes themselves are not a pattern for this
+   repository.
 
 3. **The performance methodology is unusually disciplined and worth copying wholesale.**
    Measured machine axes rather than spec sheets, median plus interquartile dispersion
@@ -354,7 +356,7 @@ Two `xtask` checks encode the doctrine as enforcement rather than documentation:
   debug still produced the old value, so the sentinel’s verdict depended on the build
   profile.
 
-#### Golden hashes coupled to semantic surfaces
+#### Upstream golden coupling mechanism
 
 `golden-couplings.json` declares, for every golden hash, the file and constant that
 carry it, the upstream *semantic surfaces* it depends on, and the surface version it was
@@ -364,6 +366,12 @@ change that can move downstream bits.
 dependent golden that must be deliberately re-frozen.
 An upstream semantic change therefore *points at* its downstream goldens instead of
 surprising them.
+
+The dependency mapping is the useful idea.
+A digest of an expected file committed next to its checker adds no assurance here: Git
+already records the artifact, and a direct golden diff shows what changed.
+Local tests should compare complete outputs or semantic models and use explicit surface
+versions only when a dependency cannot otherwise be made clear.
 
 #### Execution
 
@@ -709,7 +717,8 @@ from FrankenSim is vendored there.
   from our own exact verifier in `explorations/packing/`, so the two implementations
   share inputs but no code.
 - `schedule_invariance.rs` draws 64 tiles × 32 values from `fs_rand` in sequential,
-  reversed and worker-interleaved order and folds each into a hash.
+  reversed and worker-interleaved order, sorts them by logical tile, and compares every
+  generated word directly.
 
 **Cross-checks.** The 14 pairs `fs-ivl` cannot settle were compared as a set against the
 14 zero-gap pairs from our exact verifier: identical.

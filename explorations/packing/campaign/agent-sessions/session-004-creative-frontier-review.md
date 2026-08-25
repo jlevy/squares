@@ -14,15 +14,21 @@ session:
     square-packing hypotheses and visualization steps whose smallest experiments can be
     executed, killed, or escalated without confusing algorithmic observations with
     mathematical landscape claims.
-  entry_workflow: insight-iteration
   workflow_phases:
   - workflow: insight-iteration
     focus: insight
+    recording: retrospective
     objective: Generate a broad but falsifiable mathematical and search frontier.
     status: completed
     entered_by: session_start
     switch_reason: null
-    budget_minutes: 360
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
     outcome: The portfolio expanded to 40 artifacts with typed objects, caps, and kill lines.
     evidence:
     - Twenty mechanism families were routed into a fast-first rotation.
@@ -108,8 +114,8 @@ session:
       Added the primary PDF, deterministic raw extraction, and archive index entry for
       Bašić and Slivková's direct piercing-number application.
     evidence:
-    - PDF SHA256 1b1d32e9e88710e27142bf600216bda34d1fa71b8191eaf87c35422908fb63c0.
-    - Raw extraction SHA256 5c2e912289b51e225082f10d05bb48c9305ff6f82e7bf495289b9f84666a7f13.
+    - Primary PDF retained at the recorded repository path.
+    - Deterministic raw extraction retained beside the PDF.
     files:
     - resources/papers/basic-slivkova-2018-optimal-piercing-square.pdf
     - resources/papers/basic-slivkova-2018-optimal-piercing-square.raw.md

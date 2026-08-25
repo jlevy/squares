@@ -3,7 +3,7 @@
   <title id="figure-title">Square packing</title>
   <desc id="figure-description">A square packing rendered with mathematical y coordinates upward.</desc>
   <metadata>
-    <sqpack:profile version="3">
+    <sqpack:profile version="4">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="annotations">minimal</sqpack:value>
       <sqpack:value name="evidence">candidate</sqpack:value>

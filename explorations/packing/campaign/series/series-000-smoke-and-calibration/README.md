@@ -45,8 +45,10 @@ prove all the machinery works end to end and establish every baseline metric, be
 strategy is tested.
 
 The record has outgrown that opening description.
-The latest branch retains 35 experiments here, including search baselines, exact proof
-determinations, event-contract controls, and the H-023 first-order sequence.
+The current record contains experiments `exp-001` through `exp-036`, including search
+baselines, exact proof determinations, event-contract controls, and the H-023
+first-order `exp-035` plus second-order `exp-036` sequence.
+Those records do not imply that full connectivity has been established.
 Those result shapes are not pooled or compared merely because they share `series-000`.
 Each experiment’s `subject`, method, regime, and provenance govern what comparison is
 legal; the frontmatter `instrument` records the series’ opening search instrument, not

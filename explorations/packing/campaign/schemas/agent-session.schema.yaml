@@ -10,12 +10,21 @@ $id: packing.squares:AgentSession/v2
 title: Agent session
 type: object
 additionalProperties: false
+$defs:
+  workflow:
+    enum:
+      - research-pass
+      - factual-review
+      - insight-iteration
+      - process-review
+      - efficiency-loop
+      - research-loop
+      - general-improvement
 required:
   - id
   - title
   - date
   - goal
-  - entry_workflow
   - workflow_phases
   - primary_bead
   - status
@@ -38,16 +47,6 @@ properties:
     type: string
     minLength: 1
     description: The measurable outcome this session is advancing.
-  entry_workflow:
-    enum:
-      - research-pass
-      - factual-review
-      - insight-iteration
-      - process-review
-      - efficiency-loop
-      - research-loop
-      - general-improvement
-    description: The workflow under which the session began; the first phase must agree.
   workflow_phases:
     type: array
     minItems: 1
@@ -60,28 +59,35 @@ properties:
       required:
         - workflow
         - focus
+        - recording
         - objective
         - status
         - entered_by
         - switch_reason
         - budget_minutes
+        - started_at
+        - deadline_at
+        - expected_output
+        - validation_command
+        - kill_condition
+        - fallback
         - outcome
         - evidence
         - stop_reason
         - next_action
       properties:
         workflow:
-          enum:
-            - research-pass
-            - factual-review
-            - insight-iteration
-            - process-review
-            - efficiency-loop
-            - research-loop
-            - general-improvement
+          $ref: "#/$defs/workflow"
         focus:
           enum: [correctness, process, insight, efficiency]
-          description: The one quality dimension optimized in this phase.
+          description: >-
+            The primary quality emphasis in this phase; the other principles still
+            constrain and may contribute to the work.
+        recording:
+          enum: [contemporaneous, retrospective]
+          description: >-
+            Whether the phase contract was declared before work began or reconstructed
+            from historical evidence during migration.
         objective: {type: string, minLength: 1}
         status: {enum: [in_progress, completed, stopped]}
         entered_by:
@@ -93,10 +99,33 @@ properties:
           type: [number, "null"]
           exclusiveMinimum: 0
           description: Declared phase budget; null only when a migrated historical record lacks one.
-        outcome: {type: string, minLength: 1}
+        started_at:
+          type: [string, "null"]
+          format: date-time
+          description: Offset-aware phase start; null only for retrospective terminal history.
+        deadline_at:
+          type: [string, "null"]
+          format: date-time
+          description: Offset-aware hard deadline; null only for retrospective terminal history.
+        expected_output:
+          type: [string, "null"]
+          minLength: 1
+          description: Replayable artifact the phase is declared to produce.
+        validation_command:
+          type: [string, "null"]
+          minLength: 1
+          description: Exact command that will validate the expected output.
+        kill_condition:
+          type: [string, "null"]
+          minLength: 1
+          description: Observable condition that stops this line before its deadline.
+        fallback:
+          type: [string, "null"]
+          minLength: 1
+          description: Bounded next action if validation fails or the phase is killed.
+        outcome: {type: [string, "null"], minLength: 1}
         evidence:
           type: array
-          minItems: 1
           items: {type: string, minLength: 1}
         stop_reason:
           type: [string, "null"]

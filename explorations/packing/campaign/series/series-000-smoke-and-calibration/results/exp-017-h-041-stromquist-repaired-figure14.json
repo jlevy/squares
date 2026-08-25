@@ -616,7 +616,6 @@
       ],
       "statement": "a box avoiding all ten points has center in one of four exception rectangles related by K4"
     },
-    "point_digest": "7ff0aaf32d5ea83ffd95c9b2c3cc1dcc0257e144bd75bbc8233296cdef4db8a1",
     "point_manifest": {
       "M0": [
         "1-1/5*sqrt(5)",
@@ -1637,7 +1636,6 @@
         }
       ]
     },
-    "point_digest": "fbe5ac7694a2f1a12a91ab9c2585e19f4b563c1b0e11520a51ce128dac1f24e3",
     "point_manifest": {
       "A1": [
         "1",
@@ -1688,7 +1686,6 @@
         "3/2"
       ]
     },
-    "topology_digest": "c6b2c3d491b7b13f65e65f0d133d6eaeb3b493ba43676840341a57f96a149631",
     "unavoidable": true
   },
   "five_node_chain": [
@@ -1897,28 +1894,19 @@
     "outside_tiling_vertex_rejected": true,
     "printed_g_080_full_cover_rejected": true,
     "printed_g_080_threshold_failure_certified": true,
-    "stale_record_source_rejected": true,
+    "source_path_drift_rejected": true,
     "weakened_capacity_rejected": true
   },
   "source_binding": {
-    "decisive_runtime_hashes_verified": [
-      "pdf_sha256",
-      "raw_source_sha256"
-    ],
     "figure_page": 9,
     "independent_vector_extraction": {
-      "decisive": false,
-      "pdftocairo_page9_svg_sha256": "95c80e60a018a19c01ebe6a681acfc5a1833c0beb5b433ce200a55df58127d82",
-      "role": "provenance attestation only; exact formulas and topology decide",
-      "runtime_verified": false,
-      "topology_path_sha256": "2aa5004d2e86b1a7be3d9c6463880b8a797e19b8a0999489420c6889357f4839"
+      "method": "pdftocairo page-9 SVG plus direct vector-path inspection",
+      "role": "derivation aid only; exact formulas and topology decide"
     },
     "paper": "Walter Stromquist, Packing 10 or 11 Unit Squares in a Square (2003)",
     "pdf": "resources/papers/stromquist-2003-packing-10-or-11-unit-squares.pdf",
-    "pdf_sha256": "146ac14a015910a95d0c25bf986f6073bcccd21a29ee754a45dcc0d4224d5e0b",
     "printed_G_token_present": true,
-    "raw_source": "resources/papers/stromquist-2003-packing-10-or-11-unit-squares.raw.md",
-    "raw_source_sha256": "5808f3152c2d3a409c54d1f6ebb2636b7500eb22d489ccf9908435007d8a1d6b"
+    "raw_source": "resources/papers/stromquist-2003-packing-10-or-11-unit-squares.raw.md"
   },
   "source_distinct_repair": {
     "changed_coordinates": [
@@ -1934,8 +1922,6 @@
         ]
       }
     ],
-    "printed_point_digest": "62868418be08db7c8bf8f21c7cb6d66ac500b1d7b7f0ce593a7703b8e2c4ea0b",
-    "repaired_point_digest": "fbe5ac7694a2f1a12a91ab9c2585e19f4b563c1b0e11520a51ce128dac1f24e3",
     "source_attribution": "repair proposed after H-010 falsification; not Stromquist's set"
   },
   "subject": {

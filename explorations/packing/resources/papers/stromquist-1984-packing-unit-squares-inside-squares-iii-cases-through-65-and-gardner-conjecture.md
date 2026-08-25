@@ -13,11 +13,9 @@
 **Source:** https://www.walterstromquist.com/papers/squares3.pdf
 **Archived:** 2026-08-24
 **Pages:** 13
-**PDF SHA-256:** `f2034705c8c35c2bd6eaf0c075a3c45fe84d1bc73e75b839af8fd5d406129878`
 **Raw OCR:** Tesseract 5.5.0 English OCR of 300 dpi page images, preserved without
 manual correction in
-`stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.raw.md`
-(`21ed36dfbcb4bd31afaace1ef4bba60a66583e42787d6eb1ca5de39d6dc2eb28`).
+`stromquist-1984-packing-unit-squares-inside-squares-iii-cases-through-65-and-gardner-conjecture.raw.md`.
 
 ## Results and Page Map
 

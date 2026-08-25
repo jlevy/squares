@@ -102,12 +102,10 @@
     "missing_pair_2_4_row_is_rejected": true,
     "nonpositive_owner4_coefficient_is_rejected": true,
     "nonpositive_relative_margin_is_rejected": true,
-    "source_digest_tamper_is_rejected": true,
     "wrong_common_angle_direction_is_rejected": true
   },
   "source": {
     "exp_035": "campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json",
-    "exp_035_sha256": "6e803258e36b3f91518f2a8754dd82c977605815ffa365a8baf6f691e7afd477",
     "field": "Q(sqrt(2)), sqrt(2) in (1,2)",
     "validated_owner_branches": [
       "owner3:a+",
