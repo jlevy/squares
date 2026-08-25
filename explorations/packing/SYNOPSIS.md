@@ -305,9 +305,13 @@ W7; historical phases are not relabelled after the fact.
 The latest terminal record is
 [session-014](campaign/agent-sessions/session-014-final-portfolio-rotation.md), which
 opened no later research round.
-The next agent should open one bounded W6 slice for agenda cell `BC-010` under
-`think-1s0h`, preregister one exact R4/R5 nonlinear-realization criterion, and retain an
-exact continuation, exact obstruction, or finite unresolved list.
+[Session 015](campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md) is now the
+active four-hour continuation.
+Its first bounded W6 slice owns agenda cell `BC-010` under `think-1s0h`: preregister one
+exact R4/R5 nonlinear-realization criterion, then retain an exact continuation, exact
+obstruction, or finite unresolved list.
+Its fresh-agent resume section records the read order, validation commands, clock,
+delegation boundary, and exact next action so no controller memory is required.
 The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
 remain later slices; D-239 is a separate W7 line.
 Do not start basin-frequency work or reinterpret exp-035 through exp-039 as a

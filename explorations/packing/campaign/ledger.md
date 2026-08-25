@@ -20,6 +20,7 @@
 | [session-012](agent-sessions/session-012-eight-hour-final-continuation.md) | completed | contemporaneous | `process-review` (correctness) | `process-review` (process) | 3 | think-gszk | Commit and push the local sign repair, then start a bounded successor session. |
 | [session-013](agent-sessions/session-013-generated-view-recurrence-checkpoint.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-gszk | Commit and push, update PR 34, then begin a new bounded research session. |
 | [session-014](agent-sessions/session-014-final-portfolio-rotation.md) | stopped | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 2 | think-gszk | From the pushed PR 34 head, open a new bounded session and preregister one BC-010 exact R4/R5 nonlinear-realization slice under think-1s0h; retain D-239 as a separate pipeline slice and do not begin basin-frequency work before component identity. |
+| [session-015](agent-sessions/session-015-four-hour-r4-r5-loop.md) | in_progress | contemporaneous | `process-review` (process) | `research-loop` (insight) | 2 | think-1s0h | Complete the active R4/R5 cycle for BC-010 under think-1s0h by 16:41:44-07:00, record its terminal evidence in this file and the owning scientific artifact, regenerate the ledger, then select one evidence-earned successor without starting basin-frequency work. |
 
 ### Workflow summary
 
@@ -30,9 +31,9 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 1 | 0 |
 | `factual-review` | 0 | 0 | 4 | 2 |
 | `insight-iteration` | 0 | 1 | 3 | 2 |
-| `process-review` | 2 | 4 | 8 | 6 |
+| `process-review` | 3 | 4 | 9 | 6 |
 | `efficiency-loop` | 1 | 0 | 1 | 0 |
-| `research-loop` | 1 | 4 | 4 | 7 |
+| `research-loop` | 1 | 4 | 5 | 7 |
 | `pipeline-improvement` | 1 | 0 | 8 | 0 |
 
 ## Experiment agendas

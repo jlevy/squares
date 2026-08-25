@@ -45,10 +45,10 @@ prove all the machinery works end to end and establish every baseline metric, be
 strategy is tested.
 
 The record has outgrown that opening description.
-The current record contains experiments `exp-001` through `exp-036`, including search
-baselines, exact proof determinations, event-contract controls, and the H-023
-first-order `exp-035` plus second-order `exp-036` sequence.
-Those records do not imply that full connectivity has been established.
+The current record contains experiments `exp-001` through `exp-039`, including search
+baselines, exact proof determinations, event-contract controls, and the H-023 sequence
+through the complete first-order inventory in `exp-038` and fixed-angle polytope paths
+in `exp-039`. Those records do not imply that full connectivity has been established.
 Those result shapes are not pooled or compared merely because they share `series-000`.
 Each experiment’s `subject`, method, regime, and provenance govern what comparison is
 legal; the frontmatter `instrument` records the series’ opening search instrument, not
@@ -109,7 +109,7 @@ subject and regime carry that evidence, not the S0 label.
 
 ## What This Series Cannot Claim
 
-The shared id does not establish that all 35 experiments used one executable instrument
+The shared id does not establish that all 39 experiments used one executable instrument
 or that unlike measurements are comparable.
 Screening in `f64` also cannot certify a record—Trump’s packing has 14 of its 55 pairs
 touching at exactly zero separation, which no floating-point check can decide.

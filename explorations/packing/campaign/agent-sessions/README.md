@@ -50,6 +50,51 @@ records, checks, commits, and handoff.
 An active session leaves `progress.after` null; the checker requires the completed value
 when the session closes.
 
+### Starting a Portable Four-Hour Session
+
+A four-hour session uses repository state as its complete control plane.
+A native goal, scheduled wakeup, or chat history may resume the work, but the session
+must remain runnable without any of them.
+
+Before opening the first phase, read the synopsis’s
+[current handoff](../../SYNOPSIS.md#current-handoff), the active campaign agenda, the
+owning hypothesis, and its bead.
+From the repository root, establish the baseline:
+
+```shell
+tbd prime
+uv run --directory explorations/packing --frozen packing-ledger check
+uv run --directory explorations/packing --frozen --all-extras --group dev \
+  packing-validate --fast --jobs 2 --inner-jobs 1
+uv run --directory explorations/packing --frozen packing-campaign status
+```
+
+Create the next sequential `session-NNN` artifact before target work starts.
+Record one absolute 240-minute deadline, at most eight phases, ten minutes for
+orientation, a twenty-minute evidence checkpoint, thirty minutes per work phase, and at
+least fifteen minutes for finalization.
+The last phase is `clock_role: finalization`; it reconciles artifacts, generated views,
+defects, beads, commits, and the next action rather than opening new research.
+
+For each work phase:
+
+1. Declare the workflow, focus, bounded objective, expected artifact, exact validation
+   command, kill condition, fallback, start, and deadline.
+2. Give read-only or disjoint implementation work to delegates under the same clock.
+   One coordinator owns shared records, experiment IDs, mathematical judgment, and
+   integration.
+3. Preserve a checkable result by minute twenty and stop or renew at minute thirty.
+   A renewal needs new retained evidence and a new phase contract.
+4. Update the owning scientific or engineering artifact, render and check generated
+   views, and record every negative, invalid, blocked, or partial result.
+
+Do not infer that the generic numerical runner is admissible because
+`packing-campaign preflight` passes.
+The synopsis and launch agenda own the scientific go/no-go decision.
+When they say **NO-GO**, run supervised exact or source-bound slices only; never fill
+the clock with an executable recipe whose validity, budget, or evidence contract remains
+blocked.
+
 Implementation is not a separate implied handoff.
 A bounded correction, checker repair, probe, optimization, or one-round research
 instrument stays inside W1–W6 according to the durable result it serves.
