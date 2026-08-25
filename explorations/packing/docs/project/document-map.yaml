@@ -67,6 +67,14 @@ documents:
     authority: record
     lifecycle: superseded
     superseded_by: campaign/ledger.md
+  - path: docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/reviews/review-2026-08-25-tutorial-soundness-iteration-2.md
+    role: review
+    authority: record
+    lifecycle: retained
   - path: docs/project/reviews/review-2026-08-25-pr34-soundness-review.md
     role: review
     authority: record

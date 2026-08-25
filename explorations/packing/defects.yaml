@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 327
+count: 335
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8384,3 +8384,212 @@ defects:
   regression: none
   bead: think-7456
   recorded_in: development.md
+- id: D-328
+  title: Concurrent-branch rounds were authored to a superseded experiment schema
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: two concurrent branches
+  severity: medium
+  status: fixed
+  what: >-
+    exp-038 and exp-039 landed on main declaring Experiment/v1 while the unmerged
+    tutorial branch had bumped the schema to v2, so the merged tree failed ledger
+    render on the contract mismatch.
+  consequence: >-
+    The merge could not regenerate the ledger until both rounds were migrated; a
+    schema bump on any unmerged branch invisibly forks the contract for rounds
+    authored concurrently elsewhere.
+  fix: >-
+    Migrated both rounds to Experiment/v2 in the merge (assurance verified, method
+    exact-algebraic), following the branch's own migration of every earlier round.
+  regression: >-
+    softschema contract enforcement fails loudly at render and gate time, which is
+    what caught it; no additional check is needed.
+  bead: think-clin
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
+- id: D-329
+  title: The tutorial's promotion example asserted an unattested separation value
+  date: '2026-08-25'
+  layer: record
+  class: soundness
+  direction: neutral
+  detected_by: review
+  latent_for: two tutorial reviews
+  severity: medium
+  status: fixed
+  what: >-
+    Tutorial section 5 presented "Step 2 decided a separation of 3.7e-12 was exactly
+    zero" as a worked fact; the figure appears in no artifact, and it entered with the
+    original tutorial commit.
+  consequence: >-
+    A teaching document modeled exactly the practice the directory forbids - a
+    specific measured-looking number with no source - and two review passes kept it.
+  fix: >-
+    Reworded the example to the attested solver-floor scale (1e-11 and below).
+  regression: >-
+    none automated; primary-source spot checks of narrative numbers remain review
+    work.
+  bead: think-mb6q
+  recorded_in: TUTORIAL.md
+- id: D-330
+  title: The tutorial identified the side floor with the feasibility tolerance
+  date: '2026-08-25'
+  layer: record
+  class: soundness
+  direction: neutral
+  detected_by: review
+  latent_for: two tutorial reviews
+  severity: medium
+  status: fixed
+  what: >-
+    Tutorial section 8 said the 1e-11 floor is HiGHS's feasibility tolerance pinned at
+    the strictest accepted value; the pinned tolerance is 1e-10, and 1e-11 is the
+    post-checked side-residual floor that tolerance produces.
+  consequence: >-
+    A reader citing or tightening the tolerance would use the wrong number, with the
+    mechanism inverted between a setting and its measured consequence.
+  fix: >-
+    Restated the mechanism with both numbers in section 8; section 9's vocabulary row
+    already had the causal direction right.
+  regression: none automated
+  bead: think-suzm
+  recorded_in: TUTORIAL.md
+- id: D-331
+  title: A benchmark ratio was relabeled across implementations
+  date: '2026-08-25'
+  layer: record
+  class: soundness
+  direction: neutral
+  detected_by: review
+  latent_for: two tutorial reviews
+  severity: low
+  status: fixed
+  what: >-
+    Tutorial section 5 called 177x and 578x "the exact-to-float ratio"; the source
+    benchmark measures compiled-over-pure-Python for the same exact multiplication at
+    degrees 8 and 62.
+  consequence: >-
+    The stated reason exact arithmetic stays out of the search loop rested on a
+    mislabeled measurement, and the cost table implied an integrated compiled backend
+    that section 11 says is deliberately unbuilt.
+  fix: >-
+    Reworded the sentence to the measured quantities and marked the compiled-backend
+    row benchmarked, not integrated.
+  regression: none automated
+  bead: think-6z2v
+  recorded_in: TUTORIAL.md
+- id: D-332
+  title: The tutorial overstated archive coverage of the record constructions
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: two tutorial reviews
+  severity: low
+  status: fixed
+  what: >-
+    Tutorial section 11 claimed every listed source is archived locally; no Trump 1979
+    or Bidwell 1998 document exists, Trump's 2023 writeup was not retrievable (the
+    archive README records the 403), and both records are documented through archived
+    survey and record-table captures.
+  consequence: >-
+    A reader auditing sources would search for archives that do not exist, and the
+    blanket claim overstated what the archive holds.
+  fix: >-
+    Qualified the claim with the two exceptions and pointed at where each record is
+    actually documented.
+  regression: >-
+    none automated; the archive README's acquisition table remains the inventory of
+    what was and was not retrieved.
+  bead: think-bqjd
+  recorded_in: TUTORIAL.md
+- id: D-333
+  title: The registry's rounds column drifted from the ledger under no stated rule
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: one landed session
+  severity: medium
+  status: fixed
+  what: >-
+    The synopsis hypothesis-registry Rounds and Effort columns were hand-maintained:
+    H-023 lagged exp-039 entirely, H-002 showed 4 rounds against the ledger's 5,
+    H-021 showed 0 against 14, and no consistent counting rule reproduced the shown
+    values; check_synopsis compared only the status column.
+  consequence: >-
+    The reading of the generated view silently disagreed with the view on the one
+    quantitative column readers scan, and each new round could re-open the gap.
+  fix: >-
+    Aligned the rows to the ledger's per-hypothesis totals, stated the rule in the
+    section intro, and extended check_synopsis to compare the rounds column row by
+    row.
+  regression: >-
+    devtools.check_synopsis rounds comparison, plus a controls.yaml cell that mutates
+    one row and expects the checker to name it.
+  bead: think-ojgc
+  recorded_in: SYNOPSIS.md
+- id: D-334
+  title: A hand-copied no-regression count drifted beside a sentence promising no drift
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: eight defect registrations
+  severity: low
+  status: fixed
+  recurrence_of: D-028
+  what: >-
+    The synopsis's defect narrative said ninety-eight fixes left no regression check
+    behind while the generated log counted 106, two sentences after asserting that the
+    surrounding claims are computed rather than written down.
+  consequence: >-
+    The stale copy understated the log's best recurrence predictor, in the direction
+    that makes the record look better disciplined than it is.
+  fix: >-
+    Removed the copied number and pointed the sentence at the computed count stated
+    once above it.
+  regression: >-
+    none automated for prose restatements; the computed aggregates around it stay
+    checker-enforced.
+  bead: think-aihj
+  recorded_in: SYNOPSIS.md
+- id: D-335
+  title: The tutorial's moduli figure went unexplained and its axis collided with the text
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: two tutorial reviews and one soundness iteration
+  severity: medium
+  status: fixed
+  what: >-
+    The F3(2) quotient-map figure in tutorial section 3 used six symbols the document
+    never defines (F3(2), S3, D4, lambda, the stratum letters, and the wall/axes/stab
+    counts) against section 10's promise to collect every symbol; its axis lambda in
+    [0,1/2] silently collided with the text's slider t in [1/2,3/2]; and the figure's
+    significance - the exact known-answer control behind exp-032's component-identity
+    gate and open question 1 - was never claimed, so it read as decoration.
+  consequence: >-
+    A reader meeting the figure cold could not connect it to the section's argument,
+    reconcile its parameter with the text's, or see why the twelve-state circles
+    matter; the section's strongest evidence carried none of its weight, and the
+    reader who raised it took it for an unexplained insertion.
+  fix: >-
+    A significance passage now defines F3(2), walks the two quotient stages as the
+    wrong identities they kill, states lambda = min(t - 1/2, 3/2 - t) with the t ~ 2-t
+    identification, and wires the figure to exp-032's seven rejected false policies
+    and section 8's open question 1; the notation card gains F3(2), S3/D4, and lambda
+    rows.
+  regression: >-
+    none automated; figure-symbol coverage against the notation card remains review
+    work.
+  bead: think-ao4o
+  recorded_in: TUTORIAL.md

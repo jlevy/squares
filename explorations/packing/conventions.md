@@ -230,7 +230,44 @@ Wall clock is reported alongside as a courtesy, never as the budget.
 
 **Two things compared at different budgets have not been compared.** [convention]
 
-## 5. Provenance
+## 5. Notation and Terminology
+
+**One document owns each vocabulary, and the rest are short forms.** [convention]
+[Assurance and method](#4-evidence) above are definitive here, and the schemas enforce
+them. Mathematical terminology is defined in [`SYNOPSIS.md`](SYNOPSIS.md#terminology);
+[`TUTORIAL.md`](TUTORIAL.md) §9 and [`README.md`](README.md)’s Essential Terms are short
+forms that may abbreviate but must not contradict it, and a term either appears in the
+synopsis or is marked local where it is used.
+Both restatements have drifted from it before.
+
+**Mathematical notation follows four rules.** [convention]
+
+- **A subscript `i` names one square; a bare letter is the whole `n`-vector.** So `θᵢ`
+  is one angle and `θ` is all `n` of them, and “fix the angles” means fix every `θᵢ`.
+- **`s(n)` is the optimal side and `s` is the decision variable** of a linear program.
+  They are not interchangeable: one is the answer, the other is what a solver moves.
+- **A `*` marks a distinguished value, not one fixed relation.** `a*` is a minimiser;
+  `s*` is the standing best for an `n`, which is *not* known to be a minimum in the open
+  cases. Never read `s*` as an optimum.
+- **A gap is qualified.** A **bound gap** is the distance between the best upper and
+  lower bounds for an `n`, a property of the problem.
+  A **search gap** is `best_side − standing_best`, signed, a property of one run.
+  Bare *gap* means the search gap, which is the sense the synopsis and the campaign
+  artifacts use; write the qualifier wherever both senses are in play.
+
+**The symbol table lives in [`TUTORIAL.md`](TUTORIAL.md) §10**, in the order a reader
+meets each symbol, and is the place to look up a letter.
+[convention] The rules above are what other documents must not violate; the table is how
+a newcomer learns them.
+
+**Neighbouring research reports predate these rules and are not being retrofitted.**
+[convention] The `n = 11` report writes `θ` for the shared class angle the tutorial
+calls `a`, `u_i` for a per-square half-angle parameter rather than a single primitive
+element, and `α` for two quantities unrelated to a field’s primitive element.
+Those documents are dated records; the tutorial’s notation card names the collisions so
+a reader crossing between them is warned.
+
+## 6. Provenance
 
 **Numbers are lifted from run data, never retyped.**
 [convention, spot-checked by review] The tables in a round’s body are derived from its
@@ -249,7 +286,7 @@ evidence that the commit was orphaned.
 a configuration is recomputed from that configuration, never read off an accumulator
 maintained across hundreds of millions of updates.
 
-## 6. Corrections
+## 7. Corrections
 
 **The record is corrected by addition, never rewritten.** [convention] A defective
 artifact gets a dated annotation stating what still stands and what does not.
@@ -266,7 +303,7 @@ fight forever.
 against the registry rather than regenerated: every `H-NNN` it names exists, and every
 registered hypothesis appears on it.
 
-## 7. Ownership
+## 8. Ownership
 
 **Once codified, the registry artifact is canonical.** [convention] The standing
 review’s register entry becomes historical.
@@ -278,7 +315,7 @@ H-002”, never “H-002 is confirmed”.
 **The runbook is frozen while rounds are running.** [convention] The accept rule, the
 tolerances, the metric vector and the control cells do not change mid-series.
 
-## 8. Layers That Must Not Blur
+## 9. Layers That Must Not Blur
 
 **`sqpack` owns validity.
 `sqsearch` owns move-loop energy.** [checked: differential test] `pair_depth` is a
@@ -302,7 +339,7 @@ order for each pair—and **instance cell**, never bare “cell”, for a positi
 The two are unrelated objects and the confusion is expensive: one is where the LP is
 solved, the other is what a round is run on.
 
-## 9. Code and Docs
+## 10. Code and Docs
 
 **Python first; accelerate what a profile says is slow, not what looks slow.**
 [convention] The measurements behind this are in the
@@ -331,7 +368,7 @@ Markdown link. This project has needed that twice.
 current authority from dated records and transient plans, checks local links, and
 generates the synopsis view.
 
-## 10. What the Gate Actually Enforces
+## 11. What the Gate Actually Enforces
 
 `packing-validate` runs its registered read-only steps concurrently and replays their
 output in declared order.
