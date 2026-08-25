@@ -93,7 +93,7 @@ session:
       Preregister a confirmatory exact n=5 tangent-inventory experiment that distinguishes
       the linear cone factorization, certified sheet directions, exp-036's narrow +W
       obstruction, and every nonlinear lift that remains unresolved.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       The discovery slice produced a finite exact cone and new straight-line candidates;
@@ -115,12 +115,52 @@ session:
     fallback: >-
       Preserve the reviewed proof skeleton, leave exp-037 unallocated, and rotate to a
       correctness review of the disputed +W/-W scope.
+    outcome: >-
+      Exp-037 is committed as a confirmatory, source-bound analytic inventory with ten
+      controls, independent 30-second caps, and an explicit refusal to classify -W,
+      W-plus-release lifts, true tangents, or stationary membership.
+    evidence:
+    - Commit c0a46f1 freezes exp-037 after the disclosed pilot and before target implementation.
+    - Softschema validates the Experiment/v1 artifact and packing-ledger reports 37 rounds.
+    stop_reason: The criterion, controls, budget, and scope were frozen in 3.2 minutes.
+    next_action: >-
+      Delegate the bounded mechanical instrument while independently reviewing its
+      proof obligations and preparing, but not registering, the continuation successor.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    objective: >-
+      Implement exp-037's exact analytic certificate as a fast source-bound checker with
+      its ten controls, without turning the 23-second pilot enumerator into permanent
+      gate cost.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The mathematical criterion is frozen; the next distinct task is a reusable,
+      high-throughput implementation before the confirmatory result is recorded.
+    budget_minutes: 30
+    started_at: '2026-08-25T00:52:26-07:00'
+    deadline_at: '2026-08-25T01:22:26-07:00'
+    expected_output: >-
+      A source-bound cases/n5 instrument and thin tools wrapper that regenerate all
+      exact certificates and controls in under 30 seconds, or a minimized implementation
+      blocker with partial code preserved.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --quiet python
+      tools/check_n5_tangent_inventory.py --record /tmp/exp-037-check.json
+    kill_condition: >-
+      Stop implementation at twenty-two minutes; reserve eight minutes for coordinator
+      review, exact source comparison, and a committed checkpoint.
+    fallback: >-
+      Preserve the smallest exact certificate helpers, record the timing or proof
+      blocker in think-nm35, and rotate without changing exp-037's criterion.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Allocate exp-037, disclose the exact pilot, and freeze the analytic certificate,
-      independent controls, 30-second caps, and first-order-only determination.
+      Dispatch one scoped implementer, one read-only soundness reviewer, and one
+      read-only continuation analyst; then integrate only the reviewed instrument.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -166,7 +206,10 @@ session:
     started_at: '2026-08-25T00:38:00-07:00'
     deadline_at: '2026-08-25T00:55:00-07:00'
     expected_output: Exact formulation, branch audit, and finite unresolved list.
-    validation_command: null
+    validation_command: >-
+      uv run --directory explorations/packing --frozen --quiet python
+      tools/check_n5_tangent_cones.py --replay
+      campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
     kill_condition: Return a finite blocker by 00:55 PT; do not edit shared files.
     fallback: Return source locations and the smallest unproved lemma.
     write_scope: [read-only]
@@ -193,7 +236,10 @@ session:
     started_at: '2026-08-25T00:38:00-07:00'
     deadline_at: '2026-08-25T00:55:00-07:00'
     expected_output: Replay contract, controls, runtime estimate, and refusal boundary.
-    validation_command: null
+    validation_command: >-
+      uv run --directory explorations/packing --frozen --quiet python
+      tools/check_n5_angle_sheet.py --replay
+      campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
     kill_condition: Return a finite blocker by 00:55 PT; do not edit shared files.
     fallback: Return the minimal active-set enumeration contract.
     write_scope: [read-only]
@@ -226,8 +272,87 @@ session:
     fallback: Return the exact lineality and one verified ray.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
+  - task: Implement the frozen exp-037 analytic checker and thin CLI wrapper.
+    operator: /root/n5_inventory_impl
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files:
+    - cases/n5/tangent_inventory.py
+    - tools/check_n5_tangent_inventory.py
+    checks: []
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Return scoped code and terminal receipt by 01:14 PT.
+    phase: 3
+    budget_minutes: 20
+    started_at: '2026-08-25T00:54:12-07:00'
+    deadline_at: '2026-08-25T01:14:12-07:00'
+    expected_output: Fast exact checker, ten controls, and capped /tmp record/replay.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --quiet python
+      tools/check_n5_tangent_inventory.py --record /tmp/exp-037-check.json
+    kill_condition: Stop at the deadline and preserve a minimized implementation blocker.
+    fallback: Return partial exact helpers without changing the frozen criterion.
+    write_scope:
+    - cases/n5/tangent_inventory.py
+    - tools/check_n5_tangent_inventory.py
+    excluded_commands: [git, tbd, packing-validate]
+  - task: Audit exp-037's frozen proof obligations and scope independently.
+    operator: /root/n5_inventory_soundness
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Return exact actionable findings by 01:14 PT.
+    phase: 3
+    budget_minutes: 20
+    started_at: '2026-08-25T00:54:12-07:00'
+    deadline_at: '2026-08-25T01:14:12-07:00'
+    expected_output: Read-only proof and scope audit against exact source geometry.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen --quiet python
+      tools/check_n5_tangent_cones.py --replay
+      campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
+    kill_condition: Stop at the deadline with the smallest unproved lemma.
+    fallback: Return source locations and any criterion ambiguity.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, packing-validate]
+  - task: Derive a successor criterion for four fixed-angle release continuations.
+    operator: /root/n5_continuation_criterion
+    status: in_progress
+    recording: contemporaneous
+    outcome: null
+    evidence: []
+    files: []
+    checks: []
+    uncertainty: null
+    elapsed_seconds: null
+    elapsed_quality: null
+    next_action: Return proof skeleton and exact interval bounds by 01:14 PT.
+    phase: 3
+    budget_minutes: 20
+    started_at: '2026-08-25T00:54:12-07:00'
+    deadline_at: '2026-08-25T01:14:12-07:00'
+    expected_output: Read-only exact formulas, controls, and unresolved stationary scope.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen --quiet python
+      tools/check_n5_angle_sheet.py --replay
+      campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
+    kill_condition: Stop at the deadline without registering or editing an experiment.
+    fallback: Return the strongest exact affine-gap lemma and remaining blocker.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, packing-validate]
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
   - PR 29
   checks:
@@ -243,10 +368,17 @@ session:
     packing-validate --jobs 2 --inner-jobs 1 — 31 of 31 steps, 51 tests, and 62
     controls passed in 121.19s
   - PR 29 validate passed in 2m19s; macos-portability passed in 4m55s
+  - >-
+    uvx --from softschema softschema validate
+    explorations/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
+    — valid
+  - >-
+    uv run --directory explorations/packing --frozen --all-extras --group dev
+    packing-ledger check — 37 rounds and 10 agent sessions valid
   stop_reason: null
   next_action: >-
-    Complete exp-037 preregistration under think-nm35 by 01:04:14-07:00, then delegate
-    bounded implementation while the coordinator reviews the proof.
+    Complete the bounded exp-037 instrument phase by 01:22:26-07:00, retain delegation
+    timings, and open a separate W6 phase before recording the confirmatory result.
 ---
 ## Session Boundary
 
