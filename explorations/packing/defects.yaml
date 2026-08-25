@@ -7263,3 +7263,53 @@ defects:
   recurrence_of: D-264
   bead: think-8lhm
   recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-283
+  title: A zero-step sqsearch regime can spin forever without spending its move budget
+  date: '2026-08-25'
+  layer: engine
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: since the move-budget loop was introduced
+  severity: high
+  status: outstanding
+  what: >-
+    run_chain and run_entry_chain check a positive move budget outside anneal, while an
+    anneal with steps=0 performs no moves. With the default unlimited restart cap, the
+    loop therefore never reaches either stopping condition; a finite cap still spins
+    through useless restarts.
+  consequence: >-
+    A malformed unattended recipe can occupy a worker indefinitely and produce no
+    terminal receipt, defeating the campaign's bounded-loop and timeout discipline.
+  fix: >-
+    none yet. Reject zero steps when the move budget is positive at the CLI boundary,
+    define zero-budget behavior explicitly, and exercise ordinary and basin-entry
+    refusal paths with bounded subprocess tests. Audit n=0 and chains=0 separately.
+  regression: none
+  bead: think-dprg
+  recorded_in: sqsearch/src/search.rs
+- id: D-284
+  title: A delegated float scout ran before the Trump support criterion was frozen
+  date: '2026-08-25'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated design task
+  severity: medium
+  status: fixed
+  what: >-
+    An order-8 delegate was asked for read-only criterion design without a target run,
+    but disclosed an unretained primitive-row deletion scout on branch 0 and then
+    proposed the scout-supported threshold of exactly 34 rows.
+  consequence: >-
+    Registering that threshold as if it were chosen before observation would turn a
+    pilot result into flattering confirmatory evidence and leave no replayable record
+    of the computation that influenced the claim.
+  fix: >-
+    Reject the 34-row threshold, disclose the primitive-row scout as pilot-only, and
+    freeze H-042 on the distinct unmeasured object of grouped geometric incidences.
+    The delegate's scope breach remains visible in the session receipt.
+  regression: none
+  bead: think-19nv
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md

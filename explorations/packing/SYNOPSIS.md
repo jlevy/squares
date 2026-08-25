@@ -81,7 +81,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and twenty-four blocked
+hypotheses, one open hypothesis, seven open questions, and twenty-five blocked
 hypotheses.
 Its active confidence ladder has completed the exact and event controls up to
 the first nontrivial identity question; the next scientific transition is from
@@ -1353,7 +1353,7 @@ reading the results below:
 
 ## The Hypothesis Registry
 
-Forty-one claims or open questions are codified as artifacts.
+Forty-two claims or open questions are codified as artifacts.
 The standing review’s complete H-001 through H-015 block is now in the registry; later
 ids carry campaign-native claims and seven explicit open questions.
 The [ledger](campaign/ledger.md) is generated from the artifacts and is the current
@@ -1402,6 +1402,7 @@ view; this section is the reading of it.
 | [H-039](campaign/hypotheses/H-039-s12-proof-frontier.md) | open question | Can the lower bound for `s(12)` be improved and ultimately closed at four? | 0 | — |
 | [H-040](campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | blocked | Active-cell neighbor walks beat multistart in new verified cells per LP solve | 0 | — |
 | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **confirmed** | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 1 | 90m agent, 0.70s wall |
+| [H-042](campaign/hypotheses/H-042-trump-incidence-rigidity-cores.md) | blocked | Every one of the 128 derivative-distinct fixed-side branches at Trump’s witness has a proper incidence rigidity core | 0 | — |
 
 ### Confirmed
 
@@ -1767,15 +1768,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 282 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 284 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 70 | asserted something false about the mathematics |
-| validity | 70 | was correct, but the measurement did not bear on the question |
+| validity | 71 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 105 | recorded something its own evidence contradicts |
-| robustness | 28 | did not finish, or finished only by luck |
+| robustness | 29 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -1784,7 +1785,7 @@ Two observations the log exists to make.
 where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught thirty-three defects in 282, and no soundness defect
+**The automated gate has caught thirty-three defects in 284, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -1795,6 +1796,7 @@ That is the pattern, not an exception: gates are good at the mechanical classes 
 never once caught the mathematics being wrong.
 
 The entries from D-030 onward sharpen the point rather than softening it.
+D-283 remains open in the current robustness inventory.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed
 green; D-032 and D-033 came from rehearsing recovery paths that had shipped unrun; D-034
 found the endpoint-isolation assumption; D-035 found destructive negative-control
@@ -1931,8 +1933,8 @@ and the other branch ref restored before push or target execution.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Ninety-three fixes left no regression check behind, and that list has already predicted
-a recurrence once. The
+Ninety-four fixes left no regression check behind, and that list has already predicted a
+recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
 relative to what they govern, a discovery treated as a defect until an independent layer
