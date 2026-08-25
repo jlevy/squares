@@ -1,12 +1,13 @@
 ---
 type: is
 id: is-01m0vcb6qqhf20a5mex14zss2b
-title: Pass the strict handoff gate and finalize PR 22
+title: Finalize PR 22 as a documented checkpoint merge
 kind: task
-status: open
+status: in_progress
 priority: 0
-version: 4
+version: 6
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+delegate: codex@spud10
 labels:
   - packing
   - pr22
@@ -15,11 +16,14 @@ dependencies:
   - type: blocks
     target: is-01m0tw0qq5g7tqsb040t3x57g4
 parent_id: is-01m0t3n7z9fj0p7wwt1kn4nzqk
+hold: null
+hold_until: null
 created_at: 2026-08-25T02:35:15.053Z
-updated_at: 2026-08-25T03:00:32.544Z
+updated_at: 2026-08-25T03:03:39.500Z
+started_at: 2026-08-25T03:03:39.500Z
 ---
-Own the final transition from the reviewed PR 22 checkpoint to a mergeable non-draft PR. After think-nr5w captures and resolves the n=4 seed-0 HiGHS status-4 fixture and think-b3bm establishes a receipt-preserving long-command path, run one parent-owned ./test.sh --strict to terminal exit with complete output and timing. Require all 30 steps, deep golden regeneration, and no skips. Recheck current main, every GitHub review/comment surface, PR description, clean worktree, remote head, and bead sync. Only then mark PR 22 ready; do not weaken a threshold, tolerance, golden, or mathematical verdict.
+Apply the repository's balanced gate distinction to PR 22. A checkpoint merge requires a complete normal ./test.sh pass, clean main compatibility, synchronized records and beads, an accurate PR description, and every known strict/deep failure explicitly owned. It does not certify the deep golden producer or authorize unattended execution. Preserve D-203/think-nr5w and the receipt/work-budget launch blockers for the next branch; update conventions and the standard review; pass the normal gate; push; recheck all GitHub surfaces; and mark PR 22 ready.
 
 ## Notes
 
-Merge-readiness review complete at pushed head f02fd516f6bd2dec85b0038a05f1d5ea7efc2b18. Normal ./test.sh passes all 30 steps in 33 wall-seconds with 55/55 negative controls; current main 277f060 is the merge base; GitHub reports CLEAN/MERGEABLE and no external comments or hosted checks. PR remains draft by design. The live title now describes the durable scope as 'checkpoint four-hour basin campaign and handoff'; the description opens with the exact strict-gate blocker and resume order. Do not mark ready until think-nr5w and think-b3bm close and one complete parent-owned ./test.sh --strict receipt passes without skips; then repeat the live-main/comment check.
+The prior description incorrectly made launch-only work think-nr5w and think-b3bm prerequisites for any merge. D-225 owns the correction: checkpoint merge readiness and unattended/deep launch readiness are distinct. Pushed head f02fd51 already passes the exact normal gate 30/30 in 33s with 55/55 negative controls and is CLEAN/MERGEABLE against current main. Update the durable policy and PR orientation, rerun the normal gate on the final commit, then close this bead and mark the PR ready. Do not close or weaken the launch blockers.
