@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 248
+count: 325
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -5199,10 +5199,11 @@ defects:
   fix: >-
     Discard the run and perform one justified rerun through a parent-owned durable
     session. It retained the full diff, timing, cleanup, and exit status. The portable
-    runbook still needs to require a final receipt for every long command.
+    runbook now requires a complete parent-collected receipt, but D-300 stopped its first
+    yielded-session rehearsal before every field survived together.
   regression: >-
-    none yet; think-b3bm owns the cross-agent runbook requirement and its forced
-    long-command rehearsal
+    partial only; session-011 phase 6 retains the yielded identifier, both labeled
+    streams, timeout policy, final poll and exit 7, but D-300 owns the missing timestamps
   bead: think-b3bm
   recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
 - id: D-203
@@ -5214,22 +5215,31 @@ defects:
   detected_by: gate
   latent_for: since typed fixed-cell termination exposed the small-n drift
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     After D-199 restores the n=10 ladder, both declared pool widths still rebuild n=4
     with only 3/4 proposals converged. A bounded four-seed slice isolates seed 0 at side
     2.0205018998600455: its bracket probe stops on an initial-cell HiGHS status-4 Solve
-    error after 3,404 LP solves and 2,884 fixed-point evaluations.
+    error after 3,404 LP solves and 2,884 fixed-point evaluations. Exact primal and dual
+    certificates prove the retained 22-by-9 LP feasible and optimal at
+    2.00103283426408968; its rank is 9 and condition ratio is about 3.23.
   consequence: >-
-    The strict golden remains red and the extra valid but nonconverged n=4 endpoint
-    cannot be promoted or silently removed. Small-n calibration is not yet a trustworthy
-    unattended launch gate.
+    Before repair, the strict golden was red and the extra valid but nonconverged n=4
+    endpoint could neither be promoted nor silently removed. Small-n calibration could
+    not serve as a trustworthy unattended launch gate.
   fix: >-
-    none yet; capture the exact failing theta, cell, matrices and solver receipt, then
-    diagnose from a millisecond fixture before another full-golden run
-  regression: none yet
+    On status 4 only, retry the identical LP once with highs-ipm under the same 1e-10
+    tolerances, count and retain both attempts, and apply the unchanged complete
+    original-row residual screen. The bounded seed-0 replay then converged at proved side
+    2.0 with 3,692 of 3,692 fixed-point evaluations settled in 3.490671042 seconds.
+  regression: >-
+    the retained millisecond fixture and ten focused fallback/refusal controls pass; the
+    independent seed-0 verifier accepts all four squares and six zero-gap pairs; the
+    direct blocking macOS deep golden rebuilds n=4 at 4/4 converged and all seven proved
+    ladder rungs; Linux and macOS CI pass at b582fe1. No pool-width-1 or general producer
+    health claim follows.
   bead: think-nr5w
-  recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-204
   title: The gate-aggregate control expected the mutated value
   date: '2026-08-24'
@@ -5579,10 +5589,11 @@ defects:
   fix: >-
     Discard only the unreceipted negative-control result and rerun that command once
     through a direct execution path that preserves output, exit status, and elapsed
-    time. Keep the general final-receipt requirement under think-b3bm.
+    time. The runbook now requires the yielded identifier and parent-owned final poll;
+    keep the general rehearsal open under think-b3bm because D-300 lost two fields.
   regression: >-
-    none yet; think-b3bm owns the portable final-receipt rehearsal, including yielded
-    command identifiers and terminal polling
+    partial only; session-011 phase 6 proves that yielded session 72108 survived terminal
+    polling, but its empty start and end fields make the combined receipt inadmissible
   recurrence_of: D-202
   bead: think-b3bm
   recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
@@ -6126,10 +6137,19 @@ defects:
     One hung validation step can consume an entire unattended handoff and leave
     descendants alive even though the bounded research-slice protocol says to stop.
   fix: >-
-    none yet. Give steps declared or documented default deadlines appropriate to deep
-    mathematics, terminate and reap their process groups, and report a distinct timeout
-    failure without imposing one short uniform cap.
-  regression: none
+    Partial only. Production subprocess commands now have a finite 600-second POSIX
+    default, with an isolated process group, TERM grace period, KILL escalation, bounded
+    direct-child reaping, retained timeout output, and coordinator cleanup for detached
+    workers. Pure-Python worker code, aggregate multi-command duration, detached daemons,
+    and Windows remain open; the per-step deadline policy remains unimplemented.
+  regression: >-
+    test_run_timeout_terminates_child_and_reports_captured_output,
+    test_run_selected_interrupt_stops_detached_production_process,
+    test_process_registry_rejects_registration_after_stop,
+    test_quiet_returncode_path_fails_closed_without_windows_tree_cleanup,
+    and test_commit_state_routes_git_probes_through_bounded_seam cover production
+    inheritance, SIGINT cleanup, late registration, Windows fail-closed behavior, and
+    provenance probes
   bead: think-tx0b
   recorded_in: src/sqpack/cli/validate.py
 - id: D-240
@@ -6371,3 +6391,1949 @@ defects:
     overall session remains live and observes both refusals
   bead: think-6c7g
   recorded_in: src/sqpack/campaign/ledger.py
+- id: D-249
+  title: Branch completion and landed-main state were treated as the same fact
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: inspection
+  latent_for: one stopped campaign and two stacked merge checkpoints
+  severity: high
+  status: fixed
+  what: >-
+    The resumption queue mixed four different states: completed work on an open branch,
+    work proved to be an ancestor of main, a stopped session owner left open, and a live
+    task left in progress after its session stopped. A bead status alone could not tell
+    a new agent which implementation was actually present in its launch tree.
+  consequence: >-
+    An agent could skip a defect whose fix had never landed, repeat work already on
+    main, or treat an abandoned claim as active before starting an unattended session.
+  fix: >-
+    Reconcile the queue against the exact session base, close the stopped session-009
+    owner without closing its child work, reopen the orphaned receipt task, and require
+    an implementation commit to pass `git merge-base --is-ancestor <commit>
+    <session-base>` before a branch-ahead completion is described as landed.
+  regression: >-
+    The session-010 launch receipt records base 8136f21, the landed ancestry evidence,
+    and the corrected terminal or open state of each previously ambiguous bead
+  bead: think-k68v
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-250
+  title: A delegated exact checker asserted proofs and controls it had not executed
+  date: '2026-08-25'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated prototype, before any retained target run
+  severity: high
+  status: fixed
+  what: >-
+    The first exp-038 prototype hard-coded owner-branch equality and several controls as
+    true, while its positive certificate was prose rather than checked coefficients and
+    its V-representation contained names rather than physical vectors.
+  consequence: >-
+    Generation and replay could agree on a complete first-order inventory without
+    proving the frozen mathematical criterion; deterministic self-reproduction would
+    have disguised missing evidence as confirmation.
+  fix: >-
+    Replace every declaration with exact left-kernel ranks and identities, physical 15D
+    lineality, sheet, and transverse vectors, all-row residual and active-rank checks,
+    source regeneration, face derivation, survivor exhaustion, and executable controls.
+  regression: >-
+    Exp-038 now rejects missing or duplicated branches and rays, both directions of a
+    sheet/transverse swap, nonlinear scope overclaims, and three non-tautological toy
+    cones while exact generation and replay rebuild all source evidence
+  bead: think-7z0d
+  recorded_in: cases/n5/tangent_inventory.py
+- id: D-251
+  title: An omitted R6 coordinate produced a false exact blocker
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: control_cell
+  latent_for: one delegated terminal receipt
+  severity: medium
+  status: fixed
+  what: >-
+    A delegated diagnostic constructed R6 without its `dx4 = -1/2` coordinate, observed
+    negative exact contact residuals, and reported a hard inconsistency between the
+    proposed vector and the source matrices.
+  consequence: >-
+    Accepting the blocker would have abandoned a correct finite inventory and hidden a
+    genuine feasible first-order class behind a measurement bug.
+  fix: >-
+    Replay the complete vector directly through the source row builder, correct the
+    constructor, and require every retained physical generator to have its exact named
+    positive-slack support in both owner branches at all three strata.
+  regression: >-
+    R6 is now rebuilt with all four nonzero coordinates and must open exactly the two
+    square-1 upper-x slacks in each of the six matrices
+  bead: think-j3wd
+  recorded_in: cases/n5/tangent_inventory.py
+- id: D-252
+  title: The preregistered refusal accidentally included already proved sheet lifts
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: one preregistration draft, before any retained target run
+  severity: medium
+  status: fixed
+  what: >-
+    Exp-038 originally said that every nonlinear lift remains unresolved and described
+    the sheet as occupying two lineality dimensions without restricting that statement
+    to the interior stratum. Exp-034 already proves nonlinear sheet lifts, while the
+    endpoint sheet is a pointed two-ray cone rather than lineality.
+  consequence: >-
+    The round would have understated its predecessor evidence and blurred the exact
+    quotient used for endpoint ray and face counts.
+  fix: >-
+    Disclose the pre-run wording correction, narrow the refusal to transverse or mixed
+    directions, distinguish interior sheet lineality from endpoint sheet rays, and
+    state both pointed-quotient face vectors with their counting convention.
+  regression: >-
+    Exp-038 binds exp-034 exactly, tests physical sheet vectors in every matrix, and
+    rejects both directions of a sheet/transverse classification swap
+  bead: think-w2ii
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
+- id: D-253
+  title: The exp-038 wrapper was added under a forbidden legacy tools path
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: gate
+  latent_for: one uncommitted integration prototype, before any retained target run
+  severity: medium
+  status: fixed
+  what: >-
+    The exp-038 implementation added a thin Python wrapper under
+    explorations/packing/tools even though the engineering cleanup moved retained
+    case-specific entry points into importable case modules and forbids Python in that
+    legacy directory.
+  consequence: >-
+    The fast gate failed its module-boundary test, the README inventory drifted, and the
+    preregistered command pointed at an entry point that could not land on the reviewed
+    base.
+  fix: >-
+    Remove the wrapper and invoke the existing cases.n5.tangent_inventory main function
+    with python -m from the experiment, session, and retained validation command.
+  regression: >-
+    tests/test_module_boundaries.py rejects any future Python implementation under
+    tools, while devtools.check_readme rejects a matching unrecorded layout change
+  bead: think-xe5t
+  recorded_in: tests/test_module_boundaries.py
+- id: D-254
+  title: The first exp-039 criterion conflated ray normalizations and rank with dimension
+  date: '2026-08-25'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted preregistration draft, before any target implementation
+  severity: high
+  status: fixed
+  what: >-
+    The first exp-039 draft wrote one path formula using R_i without defining that
+    exp-038 scales R1 and R2 by sqrt(2) and already includes the endpoint-A slide
+    correction. It also inferred affine dimension five from a rank-six equality system
+    alone, described an LP level certificate as differential no descent, left C_I
+    undefined, and did not freeze which nonredundant inequality its mutation removed.
+  consequence: >-
+    A checker could have double-added the A slide, certified the wrong physical path,
+    accepted an empty or lower-dimensional equality set, and blurred cellwise level
+    optimality with branchwise first-order stationarity.
+  fix: >-
+    Define all canonical vectors and their exact exp-038 source map, set C_I to the exact
+    coordinatewise midpoint, require nonemptiness, boundedness, and six affinely
+    independent feasible points, separate the LP lower bound from the pathwise stress,
+    and freeze the nonredundancy mutation as removing x0 >= 1/2.
+  regression: >-
+    Exp-039 now requires executable mutations for omitted or misplaced slide correction
+    and the missing R6 coordinate, exact feasible affine witnesses, the explicit
+    x0-unboundedness mutation, input-level dual and stress perturbations, and a sharp
+    global and terminal refusal boundary
+  bead: think-p6j0
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md
+- id: D-255
+  title: Four exact negative-control anchors lagged the current living-document values
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: the first complete CI gate after D-250 through D-254
+  severity: medium
+  status: fixed
+  what: >-
+    Four controls.yaml mutations still targeted the 249-defect, 2026-08-24 synopsis
+    state and the corresponding old soundness and gate-detector aggregates. Their exact
+    anchors no longer appeared after the current research checkpoints updated those
+    living values.
+  consequence: >-
+    Both Linux and macOS complete gates stopped after all substantive checks passed
+    because the four negative controls could not apply their mutations. No research
+    verdict was flattered because a missing anchor is itself a hard failure.
+  fix: >-
+    Update the four mutation anchors and expected diagnostics to the final post-D-255
+    state: 255 defects, the 2026-08-25 dateline, 56 of 67 flattering soundness defects,
+    and 17 gate-detected defects.
+  regression: >-
+    The complete negative-control suite requires every anchor exactly once and requires
+    the defect and synopsis semantic checks to reject each mutated final aggregate
+  recurrence_of: D-198
+  bead: think-qox6
+  recorded_in: devtools/controls.yaml
+- id: D-256
+  title: Endpoint equality was treated as an affine full-interval axis proof
+  date: '2026-08-25'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated prototype, before any retained target run
+  severity: high
+  status: fixed
+  what: >-
+    The first exp-039 checker called every separating-axis gap affine and inferred that
+    an axis with zero gaps at both path endpoints stayed identically active. The gap is
+    an absolute value of an affine projection minus constant support, and several
+    nonactive a-minus projections actually change sign inside their intervals.
+  consequence: >-
+    The artifact could have reported full-interval owner-axis exhaustion from an
+    invalid endpoint argument, turning two correct endpoint calculations into a
+    flattering pathwise proof claim.
+  fix: >-
+    Retain signed endpoint projections and constant supports. Require each expected zero
+    axis to keep one strict projection sign and have two zero gaps, and use convexity of
+    absolute affine projection minus support to bound every other axis strictly below
+    zero from its endpoints. Narrow the inventory to contacts (2,4) and (3,4).
+  regression: >-
+    The false-extra-axis mutation reruns the interval proof, while every path record
+    carries exact signed projections, supports, endpoint gaps, and the proof type used
+  bead: think-qh7t
+  recorded_in: cases/n5/fixed_angle_polytope.py
+- id: D-257
+  title: Three stress samples were promoted without deriving the degree bound
+  date: '2026-08-25'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated prototype, before any retained target run
+  severity: high
+  status: fixed
+  what: >-
+    The first exp-039 checker verified each branchwise stress identity at three exact
+    epsilon values and then recorded that those samples proved the full interval, but
+    it merely asserted rather than derived that every coefficient polynomial has degree
+    at most two.
+  consequence: >-
+    Deterministic record and replay could have presented finite fixtures as a continuum
+    proof even if a selected-axis sign change or unstable tied feature made the source
+    row dependence piecewise rather than quadratic.
+  fix: >-
+    Derive contact-row slopes directly from fixed separation signs and affine center
+    velocities, derive multiplier slopes from their declared formulas, compare those
+    affine forms with source-rebuilt rows, and cancel every coefficient of each exact
+    degree-at-most-two pose and side polynomial.
+  regression: >-
+    The stress-coefficient mutation reruns the structural polynomial proof; every path
+    also retains independently rebuilt midpoint and endpoint fixtures, both owner
+    branches, and exact zero coefficient arrays
+  bead: think-59gi
+  recorded_in: cases/n5/fixed_angle_polytope.py
+- id: D-258
+  title: An under-scoped status patch closed the wrong outstanding defect
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted patch
+  severity: high
+  status: fixed
+  what: >-
+    While changing D-256 and D-257 from outstanding to fixed, a patch hunk identified
+    only the repeated `status: outstanding` line and changed the first match in the
+    file: D-034, an unrelated live basin-identity defect. A first attempted repair used
+    the same weak context in reverse and then reopened fixed D-042.
+  consequence: >-
+    Had the diff been trusted without inspection, the canonical log would have hidden a
+    still-open mathematical identity problem and made the synopsis and ready queue look
+    more complete than the evidence permits.
+  fix: >-
+    Restore D-034 to outstanding and D-042 to fixed, patch D-256 by an id-and-title
+    anchored hunk, inspect the exact defect diff before validation, and preserve this
+    transient error rather than silently correcting the file.
+  regression: >-
+    The existing schema and synopsis checks require outstanding defects to retain beads
+    and canonical mentions; coordinator diff inspection remains the immediate guard
+  bead: think-jvtt
+  recorded_in: defects.yaml
+- id: D-259
+  title: An explicit Flowmark target bypassed the generated-view exclusion
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: drift_check
+  latent_for: one uncommitted terminal-result integration pass
+  severity: medium
+  status: fixed
+  what: >-
+    The exp-039 landing command passed `campaign/ledger.md` directly to Flowmark. An
+    explicit file target bypasses `.flowmarkignore`, so the formatter rewrapped and
+    typographically normalized a byte-generated view that the ledger checker expects to
+    match its renderer exactly.
+  consequence: >-
+    The next ledger check failed as stale, and committing that form would have made a
+    correct terminal experiment fail the generated-view gate for an unrelated formatting
+    reason.
+  fix: >-
+    Regenerate the ledger, keep both generated views out of explicit formatter target
+    lists, and use the repository-root formatting target whose exclusion semantics are
+    documented and exercised by the commit hook.
+  regression: >-
+    The ledger byte-drift check fails on the formatted form and passes after regeneration;
+    the generated-view exemption check and repository-root commit hook preserve the file
+  recurrence_of: D-027
+  bead: think-5tc9
+  recorded_in: ../../.flowmarkignore
+- id: D-260
+  title: A solver fixture cross-wired two fixed-point evaluations
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: one delegated capture, before persistence
+  severity: high
+  status: fixed
+  what: >-
+    The first delegated n=4 seed-0 capture paired the A_ub and b_ub supplied to the
+    status-4 HiGHS call with theta and a separating cell retained from another
+    fixed-point evaluation. The recorded cell's first axis was diagonal, while row 16
+    of the alleged matrix used the near-zero/unit axis from the actual failing call.
+  consequence: >-
+    A direct replay of the stored matrix could have reproduced the solver receipt while
+    falsely claiming that a different geometric state generated it. That would make
+    model-construction drift indistinguishable from solver instability and invalidate
+    the planned diagnosis.
+  fix: >-
+    Discard the cross-wired artifact, bind theta and cell within the same solve_cell
+    invocation as the failing linprog call, and persist only the independently rebuilt
+    replacement whose 22 A_ub rows and 22 b_ub values match exactly.
+  regression: >-
+    The millisecond fixture test reconstructs the LP without solve_cell, exact-compares
+    its f64 inputs, and proves that substituting the cross-wired first cell axis breaks
+    the comparison
+  bead: think-mybt
+  recorded_in: tests/test_research_contracts.py
+- id: D-261
+  title: The replay fixture was allowed to define its own failure receipt
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated test implementation, before commit
+  severity: high
+  status: fixed
+  what: >-
+    The first fixture test compared the live solver outcome with the status, success
+    flag, and message loaded from the same mutable YAML fixture. It did not independently
+    assert that the retained failure was specifically HiGHS status 4.
+  consequence: >-
+    Coordinated drift in the fixture could redefine the acceptance rule and make a
+    different solver refusal pass as a replay of D-203. The test would remain green
+    while no longer measuring the failure it claimed to preserve.
+  fix: >-
+    Freeze success false, status 4, and the exact retained message in test code before
+    classifying the live replay, while accepting only a successful solve with a finite
+    nine-variable result and every original-row residual at or below 1e-10 as the
+    portable alternative.
+  regression: >-
+    The fixture receipt must equal the hard-coded status-4 triple before the direct
+    solver replay is classified
+  bead: think-hi4t
+  recorded_in: tests/test_research_contracts.py
+- id: D-262
+  title: A delegated fixture stopped after pytest while static checks were red
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: flattering
+  detected_by: gate
+  latent_for: one delegated test implementation, before commit
+  severity: medium
+  status: fixed
+  what: >-
+    The delegated fixture implementation reported completion after its focused pytest
+    passed, but Ruff still found unsorted and unused imports and BasedPyright found six
+    unsafe object conversions in the fixture parser.
+  consequence: >-
+    The task receipt overstated readiness and would have handed a red maintained static
+    gate to the checkpoint integrator even though the runtime test was green.
+  fix: >-
+    Remove the unused import, normalize import order, narrow every untyped YAML boundary
+    through checked helpers, and run focused Ruff, BasedPyright, and pytest before
+    accepting the delegated result.
+  regression: >-
+    Ruff passes, BasedPyright reports zero findings, and the fixture replay test passes
+    in 0.33 seconds
+  bead: think-35aa
+  recorded_in: tests/test_research_contracts.py
+- id: D-263
+  title: A second status-only patch closed D-034 instead of the named defect
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted defect reconciliation
+  severity: high
+  status: fixed
+  what: >-
+    While closing D-260 through D-262, the coordinator again patched a repeated
+    `status: outstanding` line without including the defect id in the hunk. The first
+    match changed D-034, the live basin-family identity defect, while D-260 stayed open.
+  consequence: >-
+    The canonical log briefly hid a substantive unresolved identity problem and
+    contradicted both the intended closure and D-258's immediately preceding lesson.
+  fix: >-
+    Restore D-034 to outstanding, close D-260 with an id-and-title-anchored hunk, inspect
+    the named status set explicitly, and record the recurrence before validation.
+  regression: >-
+    The checkpoint audit prints and checks D-034 outstanding, D-042 fixed, and D-260
+    through D-263 fixed before rendering the generated defect view
+  recurrence_of: D-258
+  bead: think-h7yd
+  recorded_in: defects.yaml
+- id: D-264
+  title: An active session ended its workflow list on a completed phase
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted phase-boundary update
+  severity: medium
+  status: fixed
+  what: >-
+    Phase 8 was correctly marked complete, but session-010 remained in progress and no
+    in-progress phase 9 had yet been appended. The session validator requires the active
+    session status to agree with its final workflow phase.
+  consequence: >-
+    The portable handoff could not tell whether work had stopped or moved to the already
+    planned W2 diagnosis, and the canonical ledger refused to render the ambiguity.
+  fix: >-
+    Preserve phase 8 as terminal and append portfolio order 5 as an explicit in-progress
+    W2 factual-review phase with its own 30-minute contract.
+  regression: packing-ledger check requires the session and final-phase statuses to agree
+  bead: think-lo31
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-265
+  title: Two delegation deadlines exceeded their declared budgets
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: gate
+  latent_for: one uncommitted delegation reconciliation
+  severity: medium
+  status: fixed
+  what: >-
+    The n4 fixture-design and first implementation receipts declared deadline intervals
+    longer than their budget_minutes fields even though both tasks had remained bounded.
+  consequence: >-
+    The durable record understated the time authority granted to two delegates and
+    failed the session ledger's deadline arithmetic.
+  fix: >-
+    Set the design budget to its full 15-minute window and the first implementation
+    budget to its full 17-minute window without changing either recorded deadline.
+  regression: packing-ledger check validates every delegation deadline against its budget
+  bead: think-qefb
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-266
+  title: A numerical fallback disagreement was promoted to infeasibility
+  date: '2026-08-25'
+  layer: quench
+  class: soundness
+  direction: conservative
+  detected_by: review
+  latent_for: one delegated fallback draft, before commit
+  severity: high
+  status: fixed
+  what: >-
+    The first D-203 fallback draft returned outcome infeasible when the primary highs
+    call failed numerically with status 4 and the fallback highs-ipm call returned
+    status 2. It reused the old single-attempt status-2 classification after introducing
+    a two-method disagreement path.
+  consequence: >-
+    A numerical failure followed by a solver disagreement could be recorded as a
+    mathematical infeasibility claim, causing a valid cell to be discarded under a
+    stronger evidential label than either combined receipt supports.
+  fix: >-
+    Classify status 2 as infeasible only for a sole primary attempt, keep every failed
+    fallback after primary status 4 as solver_failure, and retain both receipts.
+  regression: >-
+    Deterministic controls require primary status 2 to stay infeasible without fallback
+    and the status-4-to-status-2 sequence to stay solver_failure with two indexed receipts
+  bead: think-jg75
+  recorded_in: src/sqpack/research/quench.py
+- id: D-267
+  title: The soundness mutation diagnostic kept the old denominator
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted D-266 integration
+  severity: medium
+  status: fixed
+  what: >-
+    Adding D-266 advanced the soundness total from 69 to 70 and updated the mutation
+    anchor, but its expected checker diagnostic still required `58 of 69` rather than
+    the authoritative `58 of 70`.
+  consequence: >-
+    The mutation fired and the synopsis checker rejected it correctly, but the harness
+    rejected that correct diagnostic and stopped one of 62 controls at checkpoint.
+  fix: >-
+    Advance the expected diagnostic with the authoritative denominator and reconcile the
+    total and gate aggregates after recording this recurrence.
+  regression: all 62 negative controls must apply and report their exact diagnostics
+  recurrence_of: D-255
+  bead: think-ut5r
+  recorded_in: devtools/controls.yaml
+- id: D-268
+  title: Focused fallback checks omitted the Python format gate
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one committed D-203 fallback checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    The D-203 fallback delta passed focused pytest, Ruff lint, BasedPyright, the numerical
+    regressions, and all mutation controls locally, but its pre-push checklist did not run
+    `ruff format --check`. Three test-only line wraps therefore reached commit 0fcc4bf
+    unformatted.
+  consequence: >-
+    Both Linux validation and macOS portability completed every substantive check but
+    reported a red PR gate at the Python formatting step, delaying the portable
+    checkpoint and obscuring the successful seed-level repair behind a mechanical error.
+  fix: >-
+    Delegate the mechanical formatter repair, require the complete local validation
+    surface rather than the focused lint subset before the replacement push, and retain
+    the failed CI receipt in session-010.
+  regression: >-
+    `ruff format --check tests/test_research_contracts.py` and all ten focused fallback
+    controls pass before the complete cross-platform gate is re-requested
+  bead: think-lcor
+  recorded_in: tests/test_research_contracts.py
+- id: D-269
+  title: A session delegation used an undeclared timing-quality value
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted phase-11 reconciliation
+  severity: low
+  status: fixed
+  what: >-
+    The first phase-11 record labelled a delegated formatter duration
+    `measured_tool_wall`, but the enforced session contract permits only
+    `platform_measured`, `operator_reported_approximate`, `unavailable`, or null.
+  consequence: >-
+    The campaign ledger correctly refused the session checkpoint, so the seed and CI
+    receipts could not become a valid portable record until the label was reconciled.
+  fix: >-
+    Use the declared `platform_measured` value for the end-to-end tool durations and
+    rerun the campaign-ledger validator before the complete gate.
+  regression: packing-ledger check validates every terminal delegation timing-quality value
+  bead: think-m01u
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-270
+  title: Phase 11 retained a next action that its own evidence had completed
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: one uncommitted phase-11 reconciliation
+  severity: low
+  status: fixed
+  what: >-
+    The session recorded the replacement tree's complete 99.46-second local gate as
+    passed but still told the next agent to run that gate before pushing.
+  consequence: >-
+    A literal handoff would repeat an already-complete two-minute checkpoint instead of
+    advancing to the outstanding portable CI evidence, adding delay and making the
+    durable next action contradict the adjacent receipt.
+  fix: >-
+    Replace both stale next-action summaries with the actual remaining action: push the
+    repair checkpoint and require green Linux plus macOS CI before phase closure.
+  regression: precommit review compares every active phase next action with its latest evidence
+  bead: think-ygpr
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-271
+  title: A phase rotation used an undeclared transition label
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted phase-12 opening
+  severity: low
+  status: fixed
+  what: >-
+    The first phase-12 record used `entered_by: timebox_rotation` to describe the phase-11
+    hard stop, but that intuitive phrase is not one of the four values declared by the
+    enforced session contract.
+  consequence: >-
+    The campaign ledger correctly refused the checkpoint rather than accepting a new
+    transition vocabulary that other agents and generated views do not understand.
+  fix: >-
+    Classify the scheduled hard-stop rotation as `planned_checkpoint` and rerun the
+    ledger validator before collecting the remaining CI receipt.
+  regression: packing-ledger check validates every workflow-phase entered_by value
+  bead: think-sx6j
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-272
+  title: The macOS expected-failure guard rejected a recovered deep golden
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one repaired D-203 checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    The temporary macOS classifier correctly required D-203's exact deep-golden failure
+    and rejected every other outcome. After the strict-IPM repair made the focused deep
+    golden pass, that guard deliberately converted the recovered result into a red CI job.
+  consequence: >-
+    PR 29's macOS job failed even though all seven proved ladder rungs converged and the
+    rebuilt basin map matched the golden, preventing the repaired portable state from
+    becoming a green checkpoint.
+  fix: >-
+    Removed the obsolete expected-failure classifier and its dedicated test, made the
+    unchanged focused deep golden a direct blocking macOS step, and added an exact
+    workflow contract that forbids job- or step-level `continue-on-error`, duplicates,
+    shell-masked success, changed arguments, or the old wrapper.
+  regression: >-
+    the workflow contract requires one direct blocking `packing-validate --deep --only
+    "golden basin maps"` macOS step, and both PR jobs must pass
+  bead: think-8qco
+  recorded_in: ../../.github/workflows/packing-validation.yml
+- id: D-273
+  title: The direct-blocking workflow test admitted advisory variants
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated D-272 draft, before commit
+  severity: high
+  status: fixed
+  what: >-
+    The first D-272 test selected one step with `next`, matched the expected command as a
+    substring, and checked the retired wrapper only inside that selected step.
+  consequence: >-
+    The test could pass if a second obsolete wrapper were added, if `|| true` or `; true`
+    masked the direct command's exit status, or if job-level `continue-on-error` made the
+    whole macOS job advisory. It therefore did not establish the blocking property it
+    claimed to test.
+  fix: >-
+    Require no job- or step-level `continue-on-error`, exactly one focused deep step,
+    normalized exact command equality, and absence of the old wrapper from every macOS
+    run command.
+  regression: the strengthened workflow contract passes ten focused module-boundary tests
+  bead: think-8aw8
+  recorded_in: tests/test_module_boundaries.py
+- id: D-274
+  title: The delegated promotion check named deleted paths and left one long assertion
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one delegated D-272 draft, before integration
+  severity: low
+  status: fixed
+  what: >-
+    The first focused Ruff command still named both classifier files after deleting them,
+    and the replacement module-boundary assertion was unformatted and exceeded the line
+    limit at line 215.
+  consequence: >-
+    The delegated check failed for stale command scope and formatting rather than the
+    workflow contract, so its first receipt was not admissible integration evidence.
+  fix: >-
+    Remove the deleted paths from the check, format the remaining test, and rerun focused
+    format, lint, and pytest commands against the live file set.
+  regression: focused Ruff format and lint pass, and all ten module-boundary tests pass
+  recurrence_of: D-268
+  bead: think-3bg6
+  recorded_in: tests/test_module_boundaries.py
+- id: D-275
+  title: The first pair-meter draft omitted basin-entry work from its summary
+  date: '2026-08-25'
+  layer: engine
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated draft, before integration
+  severity: high
+  status: fixed
+  what: >-
+    The first counter-to-JSONL draft emitted `pair_tests` on every basin-entry trial but
+    left the basin-entry summary unchanged, so a summary-only consumer saw no producer
+    work even though the child rows carried exact counts.
+  consequence: >-
+    A later equal-work comparison could treat the basin-entry proposer as unmetered or
+    artificially cheap, and the internal selftest would still pass because it did not
+    exercise serialization or aggregation.
+  fix: >-
+    Aggregate trial counters with checked addition, emit the total and rate on the
+    basin-entry summary, and add an end-to-end Rust integration test covering ordinary
+    and basin-entry rows plus their summaries.
+  regression: >-
+    `cargo test` requires two ordinary rows of 54 pair-tests and summary 108, then four
+    basin-entry rows of 54 and summary 216
+  bead: think-dai4
+  recorded_in: sqsearch/tests/pair_meter_jsonl.rs
+- id: D-276
+  title: The first basin-entry meter probe selected a fixture without angles
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one verification command
+  severity: low
+  status: fixed
+  what: >-
+    The first manual basin-entry JSONL probe selected exp-019 because it was an `n = 4`
+    basin artifact, but that event record has no `t` array and therefore does not satisfy
+    sqsearch's seed-config input contract.
+  consequence: >-
+    The probe stopped before search and produced no meter evidence; treating that command
+    as a code failure would have sent the bounded slice down the wrong debugging path.
+  fix: >-
+    Re-run the probe against the retained exp-002 sqsearch output, whose first record has
+    all three pose arrays, and preserve a self-contained `n = 4` fixture in the permanent
+    integration test.
+  regression: >-
+    the Rust integration test writes its own conforming x/y/t seed and removes it after
+    the basin-entry JSONL assertions pass
+  bead: think-ujaj
+  recorded_in: sqsearch/tests/pair_meter_jsonl.rs
+- id: D-277
+  title: The first pair-meter integration test omitted crate documentation
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted test run
+  severity: low
+  status: fixed
+  what: >-
+    The first integration-test crate passed its behavioral assertion but emitted the
+    workspace's `missing_docs` warning because it had no module-level documentation.
+  consequence: >-
+    Accepting a warning-bearing checkpoint would lower the Rust lint floor and make new
+    warnings harder to distinguish from pre-existing noise.
+  fix: >-
+    Delegate the mechanical documentation repair and rerun formatting plus the focused
+    integration test without changing meter behavior.
+  regression: >-
+    `cargo test --test pair_meter_jsonl` passes without warnings
+  bead: think-4gqo
+  recorded_in: sqsearch/tests/pair_meter_jsonl.rs
+- id: D-278
+  title: The D-277 regression command made the defect source invalid YAML
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one unrendered log edit
+  severity: low
+  status: fixed
+  what: >-
+    The first D-277 entry put a backtick-leading command in an unquoted plain scalar.
+    PyYAML rejected that token and therefore could not parse any of the defect source.
+  consequence: >-
+    The generated defect view and downstream schema checks could not run until the log
+    source was repaired; no defect record was silently accepted or lost.
+  fix: >-
+    Delegate the mechanical repair, encode the command as a folded scalar, and parse the
+    complete source before rendering the generated view.
+  regression: the complete defects.yaml source parses before defects.md is rendered
+  bead: think-axl2
+  recorded_in: defects.yaml
+- id: D-279
+  title: The finalization phase used an undeclared focus value
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one unrendered phase transition
+  severity: low
+  status: fixed
+  what: >-
+    The first phase-15 record used `focus: discipline`, but the enforced session schema
+    names that pillar `process` and permits only four declared focus values.
+  consequence: >-
+    The ledger refused to render the checkpoint, preventing the finalization phase from
+    becoming a valid durable record until the vocabulary was reconciled.
+  fix: >-
+    Delegate the one-field repair, use the declared `process` value, and rerun the full
+    campaign-ledger validation before commit.
+  regression: packing-ledger check validates every workflow-phase focus value
+  recurrence_of: D-271
+  bead: think-gbti
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-280
+  title: The phase-count cap ended a fast campaign before its wall-clock goal
+  date: '2026-08-25'
+  layer: tooling
+  class: performance
+  direction: conservative
+  detected_by: gate
+  latent_for: fourteen short successful phases
+  severity: high
+  status: contained
+  what: >-
+    Session-010's `max_cycles: 15` assumed work slices would consume most of their
+    30-minute bounds. Fourteen work phases instead finished in about three hours, so the
+    fifteenth phase exhausted the cycle cap more than four hours before the reserved
+    finalization window.
+  consequence: >-
+    Applying the declared stop literally ends an eight-hour campaign after roughly
+    three hours; relabelling the early checkpoint as finalization is also invalid, and
+    the ledger correctly refused that record.
+  fix: >-
+    Preserve the declared cycle stop, record phase 15 as an ordinary process checkpoint,
+    and make the continuation explicit rather than weakening session-010 in place. The
+    reusable contract still needs a wall-time-aware phase-cap policy.
+  regression: none
+  bead: think-bfwm
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-281
+  title: New defect totals left synopsis controls and the open inventory stale
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one complete precommit gate
+  severity: medium
+  status: fixed
+  what: >-
+    After D-275 through D-280 were recorded, the synopsis and mutation catalogue still
+    named the previous total and gate-detector aggregate. The synopsis also omitted its
+    derived no-regression count and the newly contained D-280.
+  consequence: >-
+    Two of 31 validation steps failed after every engine, mathematical, schema, and
+    behavioral check passed, so the otherwise sound checkpoint was not publishable.
+  fix: >-
+    Reconcile the synopsis with every current derived aggregate and open defect, update
+    only the corresponding mutation anchors and expected message, and rerun the focused
+    synopsis plus negative-control checks before the replacement complete gate.
+  regression: devtools.check_synopsis and all 62 mutation controls pass on the current source
+  recurrence_of: D-267
+  bead: think-ghzs
+  recorded_in: devtools/controls.yaml
+- id: D-282
+  title: The stopped session retained a completed final phase
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one unrendered terminal transition
+  severity: low
+  status: fixed
+  what: >-
+    The first terminal session-010 update set the session itself to `stopped` but left
+    phase 15 `completed`, violating the enforced rule that the final workflow phase and
+    session terminal status agree.
+  consequence: >-
+    The campaign ledger refused to render the terminal checkpoint, so the otherwise
+    complete pushed and portable evidence could not become a valid session handoff.
+  fix: >-
+    Delegate the one-field repair, set only the final phase to `stopped`, and rerun the
+    ledger plus its derived aggregate checks before the final documentation commit.
+  regression: packing-ledger check enforces agreement between session and final-phase status
+  recurrence_of: D-264
+  bead: think-8lhm
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-283
+  title: A zero-step sqsearch regime can spin forever without spending its move budget
+  date: '2026-08-25'
+  layer: engine
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: since the move-budget loop was introduced
+  severity: high
+  status: outstanding
+  what: >-
+    run_chain and run_entry_chain check a positive move budget outside anneal, while an
+    anneal with steps=0 performs no moves. With the default unlimited restart cap, the
+    loop therefore never reaches either stopping condition; a finite cap still spins
+    through useless restarts.
+  consequence: >-
+    A malformed unattended recipe can occupy a worker indefinitely and produce no
+    terminal receipt, defeating the campaign's bounded-loop and timeout discipline.
+  fix: >-
+    none yet. Reject zero steps when the move budget is positive at the CLI boundary,
+    define zero-budget behavior explicitly, and exercise ordinary and basin-entry
+    refusal paths with bounded subprocess tests. Audit n=0 and chains=0 separately.
+  regression: none
+  bead: think-dprg
+  recorded_in: sqsearch/src/search.rs
+- id: D-284
+  title: A delegated float scout ran before the Trump support criterion was frozen
+  date: '2026-08-25'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated design task
+  severity: medium
+  status: fixed
+  what: >-
+    An order-8 delegate was asked for read-only criterion design without a target run,
+    but disclosed an unretained primitive-row deletion scout on branch 0 and then
+    proposed the scout-supported threshold of exactly 34 rows.
+  consequence: >-
+    Registering that threshold as if it were chosen before observation would turn a
+    pilot result into flattering confirmatory evidence and leave no replayable record
+    of the computation that influenced the claim.
+  fix: >-
+    Reject the 34-row threshold, disclose the primitive-row scout as pilot-only, and
+    freeze H-043 on the distinct unmeasured object of grouped geometric incidences.
+    The delegate's scope breach remains visible in the session receipt.
+  regression: none
+  bead: think-19nv
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-285
+  title: The first H-043 pilot could pass while its exact cone oracle was unresolved
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted implementation review
+  severity: high
+  status: fixed
+  what: >-
+    The first incidence-core CLI returned exit status zero for every minimization state,
+    and its selftest ran exact replay assertions only after a completed result. An
+    unresolved oracle or a nonzero root cone therefore skipped the decisive checks and
+    still satisfied the frozen validation command.
+  consequence: >-
+    A failed or incomplete H-043 instrument check could be recorded as a passing pilot,
+    flattering both tool readiness and any later support conclusion built on it.
+  fix: >-
+    Return nonzero for every non-completed oracle state, make the branch-0 selftest
+    require its now-known proper terminal core, and inject an unresolved oracle into
+    minimization to verify that the state remains terminal rather than passing.
+  regression: >-
+    the branch-0 selftest requires minimization_completed, proper_core_found and
+    unresolved_oracle_is_terminal before the CLI exits zero
+  bead: think-5bcy
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-286
+  title: The first H-043 record conflated conjunctive wall rows with feature aliases
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: one uncommitted implementation review
+  severity: medium
+  status: fixed
+  what: >-
+    The first incidence-group record put wall tangent-row labels in a field named
+    aliases. Those rows are simultaneous conjunctive inequalities, whereas contact
+    aliases are alternative raw feature descriptions that collapse to one derivative
+    option.
+  consequence: >-
+    A consumer could treat two required wall rows as interchangeable provenance and the
+    nonempty-alias selftest did not establish that all four raw branch selections were
+    retained.
+  fix: >-
+    Separate source_row_labels from feature_aliases, leave wall feature aliases empty,
+    check that the selected contact alias product equals the exact raw-selection
+    multiplicity, and retain branch-matrix equality as the no-row-loss guard.
+  regression: >-
+    the branch-0 selftest requires wall_rows_are_not_called_aliases and
+    contact_feature_aliases_are_complete
+  bead: think-sx22
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-287
+  title: A shell-active bead description executed a backtick-delimited word
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: anomaly
+  latent_for: one tbd command
+  severity: low
+  status: fixed
+  what: >-
+    The coordinator placed a backtick-delimited field name inside a double-quoted tbd
+    description. Bash attempted to execute the field name, printed command-not-found,
+    removed the word, and then allowed tbd to create the bead with damaged prose.
+  consequence: >-
+    The new bead initially lost the exact term that distinguished aliases from
+    conjunctive rows, making its correction less precise despite a superficially
+    successful tbd result.
+  fix: >-
+    Immediately replace the full think-sx22 description with shell-inert prose and use
+    arguments without shell-active backticks for subsequent tbd updates.
+  regression: none
+  bead: think-vf68
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-288
+  title: The first focused Ruff replay doubled the uv working-directory prefix
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: one focused command
+  severity: low
+  status: fixed
+  what: >-
+    The first formatting command selected explorations/packing with uv --directory but
+    also passed Ruff a path beginning with explorations/packing. Ruff therefore resolved
+    a doubled nonexistent path and stopped before checking the file.
+  consequence: >-
+    The focused static gate produced no evidence on its first invocation and could have
+    been misread as a source-file failure rather than a command-coordinate error.
+  fix: >-
+    Re-run all three tools with cases/trump11/incidence_cores.py relative to uv's selected
+    directory; Ruff formatting and lint plus BasedPyright then pass.
+  regression: >-
+    the session receipt retains the corrected directory-relative Ruff and BasedPyright commands
+  bead: think-asaa
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-289
+  title: The H-043 pilot normalized row classes for counting but not for its cone oracle
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: one branch pilot
+  severity: high
+  status: contained
+  what: >-
+    incidence_cores identifies positive-proportional derivative rows when deciding
+    whether a core is proper, but its stress and direction oracle still receives every
+    primitive row rather than one representative per oriented half-space class.
+  consequence: >-
+    Branch 0 is unaffected because all 42 primitive rows have distinct oriented class
+    keys. On an unmeasured branch with duplicates, the implementation would no longer
+    match H-043's declared normalized system and could misstate support provenance or
+    minimality.
+  fix: >-
+    Stop expansion at branch 0. Before another branch, build oracle inputs from exact
+    normalized representatives while retaining every contributing group and source
+    label, then exercise positive duplicates, opposite orientations and cross-group
+    provenance.
+  regression: none
+  bead: think-jyit
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-290
+  title: H-043 pilot certificates can be recomputed but not replayed from a retained record
+  date: '2026-08-25'
+  layer: record
+  class: robustness
+  direction: conservative
+  detected_by: review
+  latent_for: one branch pilot
+  severity: medium
+  status: outstanding
+  what: >-
+    The pilot emits exact stress and deletion-direction data, but the CLI has no atomic
+    record path and no mode that loads a retained JSON object, rederives its branch, and
+    replays the stored witnesses independently.
+  consequence: >-
+    The committed module and command can recompute branch 0, but a future experiment
+    artifact could be corrupted or drift from its generator without a direct replay
+    gate. The current ephemeral JSON is therefore a pilot receipt, not a maintained
+    experiment record.
+  fix: >-
+    none yet. Add record and replay paths, validate matrix and provenance fingerprints,
+    replay every stored stress and direction, reject tampering, and integrate the replay
+    into the existing Trump exact validation surface before promotion.
+  regression: none
+  bead: think-oa96
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-291
+  title: The branch-0 H-043 golden would classify a valid future refutation as test failure
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: one branch pilot
+  severity: high
+  status: contained
+  what: >-
+    The selftest now correctly requires branch 0's observed proper core. Reusing that
+    same mode for an unmeasured branch would make a completed exact criterion_missed
+    result exit nonzero because proper_core_found is false.
+  consequence: >-
+    A branch whose full incidence system is genuinely inclusion-minimal would refute
+    H-043, but a wider runner could discard it as an instrument failure instead of
+    retaining the conservative mathematical result.
+  fix: >-
+    Stop expansion at branch 0. Before a wider run, separate branch-0 golden controls
+    from generic structural selftests and let any complete exact criterion_met or
+    criterion_missed outcome exit zero; only invalid or unresolved states fail.
+  regression: none
+  bead: think-j92q
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-292
+  title: H-043 branch indices are regenerated but not bound to the retained exp-013 universe
+  date: '2026-08-25'
+  layer: record
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: one branch pilot
+  severity: high
+  status: contained
+  what: >-
+    derive_branch sorts a freshly regenerated branch map and checks grouped rows against
+    the matrix key produced by that same invocation. It does not assert the complete 128-
+    matrix and 512-raw-selection universe or replay a binding to exp-013's retained
+    branch record.
+  consequence: >-
+    The exact pilot proves a core for the current regenerated index 0. Calling it a
+    durable exp-013 branch key would survive neither branch-universe drift nor a changed
+    index assignment, so wider coverage could silently measure a different universe.
+  fix: >-
+    Keep the branch-0 claim explicitly tied to the current regenerated system and stop
+    expansion. Before another branch, assert every expected active table and universe
+    count and bind selected matrices to a retained exp-013 digest or exact certificate
+    replay.
+  regression: none
+  bead: think-7jyh
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-293
+  title: Two H-043 provenance selftests claim completeness without checking exact mappings
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one branch pilot
+  severity: medium
+  status: outstanding
+  what: >-
+    source_row_labels_are_complete compares each group record with the rows used to
+    create that same record, while contact_feature_aliases_are_complete checks only
+    nonemptiness and a product count. Neither test proves exact alias identities,
+    uniqueness, disjointness, or the raw-selection mapping its name suggests.
+  consequence: >-
+    The branch matrix and mathematics still replay, but a future provenance omission or
+    compensating alias-count error could leave these flattering controls green.
+  fix: >-
+    none yet. Rename count-only checks to their actual scope, retain exact expected
+    branch-0 identities, and add mutations that delete, duplicate and swap aliases and
+    source labels before promoting the pilot.
+  regression: none
+  bead: think-8wgw
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-294
+  title: The canonical defect count lagged eleven committed records
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: inspection
+  latent_for: one committed research checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    defects.yaml declared count 282 while containing 293 records. The generated Markdown
+    derived its displayed total directly from the rows, so its check remained green and
+    disagreed silently with the canonical soft-schema field.
+  consequence: >-
+    The source of truth was internally inconsistent at a checkpoint advertised as
+    synchronized, and a consumer trusting the declared count could truncate or reject
+    the log even though the human-facing view looked current.
+  fix: >-
+    Set the count to the complete post-review total and run the cross-field schema check,
+    not only the generated-view comparison, before the next checkpoint.
+  regression: >-
+    python -m devtools.validate_schemas rejects any future mismatch between count and the
+    number of defect rows
+  bead: think-w5eq
+  recorded_in: defects.yaml
+- id: D-295
+  title: The first timeout draft isolated validation calls that remained unbounded
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one uncommitted implementation review
+  severity: high
+  status: fixed
+  what: >-
+    The first draft started every validation subprocess in a new session even when its
+    timeout was None. The worker-thread calls would stop receiving an interrupt sent to
+    the validator's original process group while ThreadPoolExecutor still waited for
+    every future.
+  consequence: >-
+    Adding an unused timeout primitive could have made the existing gate harder to stop,
+    recreating the unattended stall it was intended to prevent.
+  fix: >-
+    Preserve the original subprocess.run path exactly when no timeout is requested and
+    create a new process group only for an explicitly bounded call. D-315 supersedes this
+    first draft's detached-worker interruption gap with a Context-owned stopping registry
+    and coordinator TERM/KILL cleanup.
+  regression: >-
+    test_run_selected_interrupt_stops_detached_production_process and
+    test_process_registry_rejects_registration_after_stop
+  bead: think-zms2
+  recorded_in: src/sqpack/cli/validate.py
+- id: D-296
+  title: The first timeout test could not expose an early-parent descendant leak
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted implementation review
+  severity: high
+  status: fixed
+  what: >-
+    The first regression let the SIGTERM-ignoring child inherit the captured output
+    pipe. communicate therefore stayed blocked after the parent exited and forced the
+    helper down its easy timeout-and-KILL path.
+  consequence: >-
+    The test could pass even if a child that closed its output handles survived after
+    the parent and pipe finished early, overstating process-tree cleanup exactly where
+    unattended runs are vulnerable.
+  fix: >-
+    Redirect the adversarial child's output away from the capture pipe, wait until its
+    signal handler is installed, and require the helper to preserve the full TERM grace,
+    KILL the remaining group, remove the live PID and prevent a delayed sentinel write.
+  regression: >-
+    test_run_timeout_terminates_child_and_reports_captured_output covers the
+    early-parent-exit, output-detached descendant path
+  bead: think-h20g
+  recorded_in: tests/test_validation_cli.py
+- id: D-297
+  title: The first Windows timeout path treated taskkill as a proved tree guarantee
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one uncommitted implementation review
+  severity: high
+  status: fixed
+  what: >-
+    The first draft ignored a nonzero taskkill result and fell back to killing only the
+    direct parent before an unbounded communicate. No Windows CI or Job Object backend
+    established descendant cleanup.
+  consequence: >-
+    A Windows caller could have received a false portability promise, leaked a child
+    holding the capture pipe and then hung forever inside the timeout cleanup path.
+  fix: >-
+    Remove the unverified taskkill path. Ordinary unbounded validation keeps its prior
+    portable behavior, while an explicit bounded-tree request now fails closed on
+    Windows until a tested process-tree backend exists.
+  regression: none
+  bead: think-j3ti
+  recorded_in: src/sqpack/cli/validate.py
+- id: D-298
+  title: Overlapping inspection ranges fabricated a duplicate session key
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: one coordinator diagnosis
+  severity: low
+  status: fixed
+  what: >-
+    The coordinator printed lines 245 through 430 and then 430 through 720 of the same
+    session file. Shared line 430 appeared twice in the concatenated terminal output and
+    was misread as two adjacent status keys in the source.
+  consequence: >-
+    Without a source-level recheck, the review would have edited a clean session artifact
+    and retained a false defect claim about committed work.
+  fix: >-
+    Compare the numbered working file and HEAD directly, retract the duplicate-key claim,
+    make no session edit for it, and keep this inspection error visible instead.
+  regression: none
+  bead: think-ntfh
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-299
+  title: A later successful check masked an earlier gate failure in the shell status
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one checkpoint command
+  severity: medium
+  status: fixed
+  what: >-
+    The coordinator ran several checkpoint checks sequentially without shell fail-fast
+    behavior. packing-ledger check reported stale generated output, but the later
+    successful diff check made the aggregate command exit zero.
+  consequence: >-
+    Reading only the tool's terminal exit field could have promoted an internally failed
+    checkpoint as green even though the failure remained visible earlier in stdout.
+  fix: >-
+    Treat the inner ledger failure as binding, regenerate its view, and rerun the
+    decisive checkpoint commands with shell fail-fast behavior so the first failure owns
+    the terminal status.
+  regression: none
+  bead: think-di0u
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-300
+  title: The receipt rehearsal requested an unsupported gdate precision
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: pre_registered_rule
+  latent_for: one yielded command
+  severity: medium
+  status: outstanding
+  what: >-
+    The parent-owned rehearsal invoked gdate with --iso-8601=milliseconds, but the
+    installed GNU date accepts seconds or ns, not milliseconds. Both command
+    substitutions failed and the emitted start and end fields were empty.
+  consequence: >-
+    Session identifier 72108, both labeled streams, timeout policy, terminal polling and
+    exit 7 survived, but the receipt lacks its absolute time bounds and cannot close the
+    portable final-receipt defect.
+  fix: >-
+    none yet. Preserve this failed one-command rehearsal without retrying in place. In a
+    later declared slice, use the verified --iso-8601=ns argument or another portable
+    offset-aware clock and require every receipt field to survive together.
+  regression: none
+  bead: think-jygr
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-301
+  title: The first receipt rule split a compound adjective after its hyphen
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: one uncommitted documentation diff
+  severity: low
+  status: fixed
+  what: >-
+    The first runbook edit broke replay-relevant across a source line after the hyphen.
+    Flowmark preserved the boundary as replay- relevant, leaving a malformed phrase in
+    the rendered Markdown draft.
+  consequence: >-
+    The portable receipt rule would remain understandable but visibly damaged at the
+    exact field that defines which working context must be retained.
+  fix: Join replay-relevant before committing and rerun the Markdown formatter.
+  regression: none
+  bead: think-wunq
+  recorded_in: campaign/agent-sessions/README.md
+- id: D-302
+  title: Bui transcription changed the square-reduction divisor into a product
+  date: '2026-08-25'
+  layer: docs
+  class: soundness
+  direction: conservative
+  detected_by: review
+  latent_for: three days in the local literature archive
+  severity: high
+  status: fixed
+  what: >-
+    The cleaned transcription of Bui's Proposition 7 rendered the reduction term printed
+    as x divided by sqrt(m) on PDF page 16 as x times sqrt(m). The unedited extraction
+    also lost the division bar, so comparing only the two text files could not catch it.
+  consequence: >-
+    The displayed choice m=x^(4/5) no longer balanced the transcription's terms, making
+    the central x^(3/5) derivation internally false and blocking exact reproduction.
+  fix: >-
+    Read the rendered source page, restore x/sqrt(m) in the cleaned transcription, add
+    an explicit source-check annotation, and update the archive annotation census.
+  regression: none
+  bead: think-hp6c
+  recorded_in: resources/papers/square-packing-x06-wasted-area-2508.04603.md
+- id: D-303
+  title: Bui transcription omitted the quantified width hypothesis
+  date: '2026-08-25'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: three days in the local literature archive
+  severity: high
+  status: fixed
+  what: >-
+    The cleaned Proposition 7 omitted the printed condition 0<nu<beta+1/2 while retaining
+    w in Theta(m^nu), leaving nu unquantified and the proposition apparently broader than
+    the source statement.
+  consequence: >-
+    A strategy could invoke the reduction for a width regime that the cited proposition
+    does not cover and mistakenly attribute that stronger claim to the paper.
+  fix: >-
+    Restore the condition from rendered PDF page 16, annotate the extraction omission,
+    and update the archive annotation census without changing the raw extraction.
+  regression: none
+  bead: think-gzoc
+  recorded_in: resources/papers/square-packing-x06-wasted-area-2508.04603.md
+- id: D-304
+  title: McClenagan's Section 3 proof uses a contradictory inequality chain
+  date: '2026-08-25'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: three days in the local literature archive
+  severity: high
+  status: contained
+  what: >-
+    Archived PDF page 7 first states d1+d2>d and then concludes d>d1+d2>DB=1 in the
+    same proof of theta'<=theta. The contradiction is printed in the source and appears
+    identically in both cleaned and raw text; it is not a transcription repair.
+  consequence: >-
+    The cited paragraph does not prove the required feasibility inequality as written,
+    so this campaign cannot count the angle-reversal step as independently verified or
+    use it for finite transfer without a separate geometric argument.
+  fix: >-
+    Keep the source error annotated, independently derive the intended chain
+    d>d1+d2>DB=1 from Figures 4 and 6, and separately derive 0<theta'<theta from
+    equations (2.2), (2.5), and (3.2). H-037 records both checks and their local scope.
+  regression: none
+  bead: think-486e
+  recorded_in: campaign/hypotheses/H-037-asymptotic-waste-exponent.md
+- id: D-305
+  title: The source checkpoint undercounted fixes without regression checks
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: flattering
+  detected_by: gate
+  latent_for: one pushed checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    The coordinator manually changed the synopsis aggregate from 103 to 105 after adding
+    D-302 and D-303, overlooking that D-301 had already raised the authoritative count.
+    check_synopsis derived 106 fixed non-outstanding defects whose regression is none.
+  consequence: >-
+    The source and generated defect views were synchronized, but the project overview
+    understated the toolchain's unprotected-fix debt and made both CI architectures red.
+  fix: >-
+    Replace the guessed total with the derived value 106, run check_synopsis directly,
+    and require the complete validation surface at the repair checkpoint.
+  regression: uv run --frozen python -m devtools.check_synopsis
+  bead: think-u6pz
+  recorded_in: SYNOPSIS.md
+- id: D-306
+  title: Four aggregate mutation controls retained stale exact anchors
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: multiple aggregate changes
+  severity: medium
+  status: fixed
+  what: >-
+    The negative controls for defect count, hypothesis count, soundness direction and
+    gate-detector aggregates still searched for older canonical prose. Their exact-once
+    anchor guard rejected all four instead of exercising the intended nearby mutation.
+  consequence: >-
+    The controls failed loudly rather than becoming false green, but the complete gate
+    could not distinguish the real D-305 synopsis drift until its own stale fixtures were
+    synchronized.
+  fix: >-
+    Update each exact anchor and its expected derived diagnostic to the current canonical
+    aggregate while retaining the same deliberately wrong nearby replacement.
+  regression: uv run --frozen python -m devtools.run_negative_controls devtools/controls.yaml
+  bead: think-wgg7
+  recorded_in: devtools/controls.yaml
+- id: D-307
+  title: Host Python misdiagnosed valid Python 3.14 exception syntax
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted repair attempt
+  severity: medium
+  status: fixed
+  what: >-
+    The coordinator compiled the Python-3.14-targeted runner with the older host
+    `python3`, interpreted its rejection of parenthesis-free multiple exceptions as a
+    source error, and incorrectly inferred that CI had executed stale bytecode. Python
+    3.14 deliberately accepts this syntax under PEP 758.
+  consequence: >-
+    The first repair inserted parentheses and added a source-compilation test tied to the
+    wrong interpreter. Ruff's locked Python 3.14 format check rejected that draft, while
+    the public diagnosis temporarily overstated a nonexistent cache-validity failure.
+  fix: >-
+    Retract the cache claim, restore the Python 3.14 formatter-canonical source, remove
+    the host-version test, and use the locked uv/Ruff environment for language-version
+    judgments.
+  regression: uv run --frozen ruff format --check devtools/run_negative_controls.py
+  bead: think-02c0
+  recorded_in: defects.yaml
+- id: D-308
+  title: Two synchronized mutation controls expected the canonical rather than mutated count
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: control_cell
+  latent_for: one uncommitted control-harness run
+  severity: medium
+  status: fixed
+  what: >-
+    The hypothesis-count control expected the old canonical diagnostic 41 after mutating
+    42 to 41, even though the checker correctly reported that 42 was missing. The
+    unprotected-fix control expected 106 after changing one regression from none, even
+    though that mutation correctly reduced the derived total to 105.
+  consequence: >-
+    Both controls made the intended source mutation and failed, but rejected the correct
+    checker response, leaving the 62-control suite red after the first anchor repair.
+  fix: >-
+    Make each expected substring describe the deliberately mutated state: missing
+    hypothesis count 42 and unprotected-fix count 105.
+  regression: uv run --frozen python -m devtools.run_negative_controls devtools/controls.yaml
+  bead: think-7y4k
+  recorded_in: devtools/controls.yaml
+- id: D-309
+  title: The first session-012 draft violated two clocked-session fields
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: one uncommitted schema run
+  severity: low
+  status: fixed
+  what: >-
+    The draft marked its active clocked phase retrospective even though the repair was
+    declared publicly as it began, and rounded a 184-minute-three-second span down to a
+    184-minute wall budget. Both violate the AgentSession/v2 clock contract.
+  consequence: >-
+    The portable checkpoint understated its outer allowance and could not establish that
+    the currently active phase was declared before its outcome.
+  fix: >-
+    Mark the phase contemporaneous, set the containing wall budget to 185 minutes, and
+    rerun the enforced session schema before validation.
+  regression: uv run --frozen python -m devtools.validate_schemas
+  bead: think-b5th
+  recorded_in: campaign/agent-sessions/session-012-eight-hour-final-continuation.md
+- id: D-310
+  title: McClenagan's equation 3.2 calls a periodic tangent solution unique
+  date: '2026-08-25'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: three days in the local literature archive
+  severity: medium
+  status: fixed
+  what: >-
+    After equation (3.2), the source defines theta' as the unique solution of a tangent
+    equation without naming a branch. Tangent is periodic, so uniqueness is false over
+    all real theta' even though Figure 5 selects a small acute geometric branch.
+  consequence: >-
+    A literal algebraic replay has infinitely many solutions and cannot infer the sign
+    or magnitude of theta' until the intended interval is stated.
+  fix: >-
+    State the principal acute branch dictated by Figure 5. H-037 proves existence and
+    uniqueness on 0<theta'<theta from exact equations without presupposing the sign.
+  regression: none
+  bead: think-szk1
+  recorded_in: campaign/hypotheses/H-037-asymptotic-waste-exponent.md
+- id: D-311
+  title: The open-defect bead control still mutated a fixed record
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: multiple defect-status changes
+  severity: high
+  status: fixed
+  what: >-
+    The control named "open defect with no bead" removed D-021's bead after D-021 had
+    become fixed. Fixed defects may retain beads but do not require them, so the mutation
+    no longer exercised the invariant its name and prior green result claimed.
+  consequence: >-
+    A future outstanding or contained defect could lose its bead while this nominal
+    control falsely suggested that the failure path had been rehearsed.
+  fix: >-
+    Retarget the exact-once mutation to outstanding D-039 and require schema validation
+    to report that D-039 is outstanding without a bead.
+  regression: defect log - open defect with no bead
+  bead: think-kit3
+  recorded_in: devtools/controls.yaml
+- id: D-312
+  title: An early checkpoint phase claimed the outer finalization clock role
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: one uncommitted schema run
+  severity: low
+  status: fixed
+  what: >-
+    Session 012's checkpoint phase began at 06:20 but was first labeled finalization even
+    though the session's declared 30-minute final reserve does not begin until 08:06.
+  consequence: >-
+    The record would conflate an ordinary between-slice checkpoint with the protected
+    outer reserve and make later work appear to occur after finalization had begun.
+  fix: Mark the checkpoint phase as clock_role work and reserve finalization for 08:06.
+  regression: uv run --frozen python -m devtools.validate_schemas
+  recurrence_of: D-309
+  bead: think-ryai
+  recorded_in: campaign/agent-sessions/session-012-eight-hour-final-continuation.md
+- id: D-313
+  title: Explicit Flowmark target bypassed the generated-ledger exclusion
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: drift_check
+  latent_for: one checkpoint command
+  severity: medium
+  status: fixed
+  what: >-
+    A checkpoint explicitly passed generated campaign/ledger.md to Flowmark, bypassing
+    .flowmarkignore. The packing-ledger check caught the resulting stale generated view
+    before commit.
+  consequence: >-
+    The generated ledger could be reflowed outside its canonical renderer and lose
+    reproducible formatting or source synchronization.
+  fix: >-
+    Regenerate ledger.md only with packing-ledger render and validate freshness; never
+    pass generated views explicitly to Flowmark.
+  regression: uv run --directory explorations/packing --frozen packing-ledger check
+  recurrence_of: D-259
+  bead: think-chfy
+  recorded_in: campaign/agent-sessions/session-013-generated-view-recurrence-checkpoint.md
+- id: D-314
+  title: The production commit-state probe was initially unbounded
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one production-default timeout implementation
+  severity: high
+  status: fixed
+  what: >-
+    The first production-default draft left _commit_state's git cat-file and merge-base
+    probes on raw subprocess.run, so the new finite timeout policy did not cover them.
+  consequence: >-
+    A hung repository probe could still stall an unattended validation run despite the
+    apparent production timeout guarantee.
+  fix: >-
+    Route commit-state git probes through the shared bounded subprocess seam and retain
+    the finite production default.
+  regression: test_commit_state_routes_git_probes_through_bounded_seam
+  bead: think-orf4
+  recorded_in: src/sqpack/cli/validate.py
+- id: D-315
+  title: Detached production defaults could still wait on interrupted workers
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one production-default timeout implementation
+  severity: high
+  status: fixed
+  what: >-
+    Finite detached defaults reintroduced D-295: a SIGINT at the coordinator could leave
+    ThreadPoolExecutor waiting for workers for the full 600-second command timeout.
+  consequence: >-
+    An unattended run could ignore its operator stop request for minutes even though each
+    child command had a finite timeout.
+  fix: >-
+    Use a Context-owned atomic stopping registry and have the coordinator terminate and
+    kill detached workers on stop, while rejecting registrations after stopping begins.
+  regression: >-
+    test_run_selected_interrupt_stops_detached_production_process and
+    test_process_registry_rejects_registration_after_stop
+  recurrence_of: D-295
+  bead: think-7c35
+  recorded_in: src/sqpack/cli/validate.py
+- id: D-316
+  title: Quiet provenance probing lacked a Windows fail-closed guard
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one production-default timeout implementation
+  severity: high
+  status: fixed
+  what: >-
+    The quiet provenance helper omitted the Windows fail-closed guard, leaving a platform
+    path whose descendant cleanup was not established by the supported process backend.
+  consequence: >-
+    A Windows validation run could claim bounded provenance probing without a proved tree
+    cleanup guarantee.
+  fix: >-
+    Fail closed on Windows unless the supported tree-cleanup backend is available.
+  regression: test_quiet_returncode_path_fails_closed_without_windows_tree_cleanup
+  bead: think-fwnn
+  recorded_in: src/sqpack/cli/validate.py
+- id: D-317
+  title: The SIGINT timeout regression ceiling was too tight for the focused suite
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: one focused timeout regression suite
+  severity: medium
+  status: fixed
+  what: >-
+    The first SIGINT regression required wall time below three seconds. It passed alone
+    in about 2.5 seconds, but the focused suite measured 3.008 seconds despite no
+    survivor or leak and a ten-second command deadline.
+  consequence: >-
+    Scheduling variance could make a semantically valid interruption test fail and slow
+    iteration without detecting a real process-cleanup defect.
+  fix: >-
+    Relax the test ceiling to below five seconds while preserving the survivor, leak,
+    and bounded-command semantic assertions.
+  regression: test_run_selected_interrupt_stops_detached_production_process
+  bead: think-9pz6
+  recorded_in: tests/test_validation_cli.py
+- id: D-318
+  title: The unprotected-fix mutation control retained a stale expected count
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: control_cell
+  latent_for: one aggregate mutation-control reconciliation
+  severity: low
+  status: fixed
+  what: >-
+    After the canonical defect log settled at 106 fixes without a regression check,
+    the negative-control expectation still described the pre-mutation value 106. The
+    control changes one regression from none, so its deliberately mutated state must
+    report 105.
+  consequence: >-
+    The negative-control suite rejected the correct checker diagnostic and obscured
+    whether the unprotected-fix invariant itself was still covered.
+  fix: >-
+    Update the mutation expectation to 105 while retaining the canonical synopsis
+    count of 106 and rerun the full negative-control suite.
+  regression: uv run --frozen python -m devtools.run_negative_controls devtools/controls.yaml
+  recurrence_of: D-308
+  bead: think-6lka
+  recorded_in: devtools/controls.yaml
+- id: D-319
+  title: The cold-start handoff pointed to a closed BC-010 bead
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: one terminal campaign handoff
+  severity: high
+  status: fixed
+  what: >-
+    Session 014 correctly sent the next agent to think-1s0h for one R4/R5
+    nonlinear-realization slice, but the active launch paragraph and BC-010 note still
+    assigned work to closed think-nm35, omitted exp-039, and retained fixed D-203 as a
+    live blocker. The root orientation path did not point to the terminal session.
+  consequence: >-
+    A cold-start agent had to arbitrate conflicting authorities and could repeat the
+    completed exp-038 cone inventory, miss exp-039's twelve realized paths, or spend a
+    slice diagnosing an already repaired producer failure.
+  fix: >-
+    Route README through one Current Handoff section in the synopsis; reconcile that
+    section, the active launch paragraph, the BC-010 agenda note, development guidance,
+    and think-1s0h to session 014's exact R4/R5 slice; preserve frozen portfolios and
+    historical session records unchanged.
+  regression: >-
+    devtools.check_synopsis reconciles the latest numbered session, BC-010 bead and
+    evidence head, README cold-start link, active launch paragraph, and retired D-203
+    guidance; the README-link mutation control rehearses the failure.
+  bead: think-m8kv
+  recorded_in: SYNOPSIS.md
+- id: D-320
+  title: Deep golden validation treated YAML line wrapping as scientific drift
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: gate
+  latent_for: one stacked integration run
+  severity: medium
+  status: fixed
+  what: >-
+    The macOS deep-golden job rebuilt a basin map with the same parsed data but wrapped
+    one explanatory note at a different column. The checker compared serialized bytes
+    and failed after the complete mathematical validation surface had passed.
+  consequence: >-
+    A harmless serializer choice could block research integration and look like
+    cross-platform numerical drift even though no value, certificate, or conclusion
+    changed.
+  fix: >-
+    Compare parsed YAML documents for the deep golden contract, retain a unified diff
+    for real semantic changes, and report wrapping-only differences without failing.
+  regression: test_deep_golden_ignores_yaml_wrapping
+  bead: think-kwls
+  recorded_in: devtools/check_golden_basins.py
+- id: D-321
+  title: The SIGINT cleanup regression signaled before its child start condition
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: one merged fast-suite run
+  severity: medium
+  status: fixed
+  what: >-
+    The process-cleanup regression polled for a child PID for two seconds, then sent
+    SIGINT whether or not the child had started. Under suite scheduling pressure it
+    interrupted the coordinator without a PID and then failed its own PID assertion.
+  consequence: >-
+    Scheduler timing, rather than process-tree cleanup behavior, could fail the ordinary
+    gate and obscure the safety property the test was meant to exercise.
+  fix: >-
+    Have the real child write its PID and then signal its parent directly. The test still
+    exercises coordinator interruption, TERM-resistant child cleanup, leak prevention,
+    and the bounded grace interval without a polling deadline.
+  regression: test_run_selected_interrupt_stops_detached_production_process
+  recurrence_of: D-317
+  bead: think-3vt3
+  recorded_in: tests/test_validation_cli.py
+- id: D-322
+  title: The synopsis overstated which defect classes the gate had caught
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: since D-317 entered the defect log
+  severity: low
+  status: fixed
+  what: >-
+    The synopsis said every gate-detected defect was bookkeeping or robustness, while
+    the canonical log also contains validity and performance findings detected by the
+    gate.
+  consequence: >-
+    The narrative described a cleaner detector pattern than the underlying data supports
+    and made the generated class/detector tables disagree with their interpretation.
+  fix: >-
+    State the supported distinction: gate findings have been mechanical process,
+    implementation, or test-validity failures, while none has caught a mathematical
+    soundness error.
+  regression: none
+  bead: think-7qck
+  recorded_in: SYNOPSIS.md
+- id: D-323
+  title: The reader-first frontier view discarded long exact forms
+  date: '2026-08-25'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: since the assurance-aware frontier view was introduced
+  severity: high
+  status: fixed
+  what: >-
+    The frontier table renderer used an exact form only when it fit an arbitrary
+    28-character display budget. Longer algebraic and rational values silently fell
+    back to rounded decimals even in columns labeled as formally verified.
+  consequence: >-
+    A reader could mistake a rounded decimal for the exact proved bound. In some rows
+    the rounding also made the displayed lower bound slightly stronger or the displayed
+    upper bound slightly smaller than the formal value.
+  fix: >-
+    Render every available exact form in verified lanes and simplify the repeated
+    Nagamochi radical form to the equivalent reader-facing expression `1 + sqrt(k)`.
+  regression: test_frontier_assurance_contract
+  recurrence_of: D-022
+  bead: think-1p2e
+  recorded_in: devtools/render_research_tables.py
+- id: D-324
+  title: Semantic golden comparison accepted ambiguous YAML identities
+  date: '2026-08-25'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one semantic deep-golden implementation
+  severity: medium
+  status: fixed
+  what: >-
+    The first semantic deep-golden comparison used permissive YAML loading followed by
+    Python equality. Duplicate keys were silently overwritten, and values such as an
+    integer, float, and boolean could compare equal despite carrying different YAML
+    types.
+  consequence: >-
+    A malformed or type-changing golden artifact could pass as unchanged and weaken the
+    independent characterization surface intended to catch numerical drift.
+  fix: >-
+    Load both documents with the repository's duplicate-key-rejecting loader and compare
+    deterministic canonical YAML serializations that preserve scalar types while
+    ignoring presentation-only wrapping.
+  regression: test_semantic_yaml_comparison_preserves_types_and_rejects_duplicate_keys
+  recurrence_of: D-320
+  bead: think-35wm
+  recorded_in: devtools/check_golden_basins.py
+- id: D-325
+  title: The current-handoff validator embedded one live agenda cell
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: review
+  latent_for: since the terminal-session handoff guard was introduced
+  severity: low
+  status: fixed
+  what: >-
+    The synopsis validator hardcoded BC-010, its bead, and one historical defect instead
+    of deriving the active agenda cell from the terminal session's recorded next action.
+  consequence: >-
+    A correct future handoff to another agenda cell would require editing validator code
+    and could fail for stale historical details unrelated to the handoff contract.
+  fix: >-
+    Select exactly one agenda cell from the terminal session action, derive its bead and
+    evidence checks from the cell record, and reject any fixed defect named as a current
+    blocker without singling out one historical ID.
+  regression: test_handoff_cell_is_selected_from_the_latest_session_action
+  recurrence_of: D-319
+  bead: think-z96r
+  recorded_in: devtools/check_synopsis.py

@@ -40,6 +40,10 @@ cast_sign_loss = "allow"
 # documents the caching of cos/sin as worth ~40% of the kernel, and these are the
 # functions that run 1e9 times per campaign round.
 inline_always = "allow"
+# These half-sums are bounded support-function formulas. `f64::midpoint` can round
+# differently, so changing them belongs in a measured numerical migration rather than
+# an incidental toolchain update.
+manual_midpoint = "allow"
 # The geometry functions take eight scalars because they take two poses; bundling them
 # into structs costs a copy in the hottest loop in the project.
 too_many_arguments = "allow"

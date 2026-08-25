@@ -109,6 +109,13 @@ inherit the prompt’s scope and clock without a queued row; record its compact 
 receipt when it returns.
 Every terminal receipt retains recording provenance, owning phase, outcome, evidence,
 files, checks, uncertainty, next action, and elapsed wall time.
+The command itself becomes evidence only after its owning parent collects a terminal
+receipt keyed by the command or session identifier.
+Retain exact argv and any replay-relevant working directory or environment, offset-aware
+start and end times, elapsed wall time, exit code or terminating signal, stdout and
+stderr inline or at durable paths, the declared timeout result, and process cleanup or
+reaping. These fields bind after success, failure, timeout, yielding, or delegation;
+process disappearance is not a receipt.
 Queued and active rows leave terminal outcome, evidence, uncertainty, and elapsed
 quality null rather than inventing placeholders; the checker requires them when the row
 closes. Use frozen dependency commands; a read-only assignment does not authorize a

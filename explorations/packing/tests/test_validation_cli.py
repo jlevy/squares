@@ -6,6 +6,11 @@
 from __future__ import annotations
 
 import io
+import os
+import signal
+import subprocess
+import sys
+import time
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 
@@ -21,6 +26,223 @@ def _invoke(*arguments: str) -> tuple[int, str, str]:
     with redirect_stdout(stdout), redirect_stderr(stderr):
         status = main(list(arguments))
     return status, stdout.getvalue(), stderr.getvalue()
+
+
+def _process_is_running(pid: int) -> bool:
+    if os.name == "nt":
+        result = subprocess.run(
+            ("tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV", "/NH"),
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        return f'"{pid}"' in result.stdout
+    result = subprocess.run(
+        ("ps", "-o", "stat=", "-p", str(pid)),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    state = result.stdout.strip()
+    return result.returncode == 0 and bool(state) and not state.startswith("Z")
+
+
+@pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
+def test_run_timeout_terminates_child_and_reports_captured_output(tmp_path: Path) -> None:
+    child_pid_path = tmp_path / "child.pid"
+    child_ready_path = tmp_path / "child.ready"
+    leaked_path = tmp_path / "child-leaked"
+    child_script = "\n".join(
+        (
+            "import os",
+            "import signal",
+            "import time",
+            "from pathlib import Path",
+            "signal.signal(signal.SIGTERM, signal.SIG_IGN)",
+            f"Path({str(child_pid_path)!r}).write_text(str(os.getpid()), encoding='utf-8')",
+            f"Path({str(child_ready_path)!r}).write_text('ready', encoding='utf-8')",
+            "time.sleep(2)",
+            f"Path({str(leaked_path)!r}).write_text('leaked', encoding='utf-8')",
+            "time.sleep(30)",
+        )
+    )
+    parent_script = "\n".join(
+        (
+            "import subprocess",
+            "import sys",
+            "import time",
+            f"child_script = {child_script!r}",
+            "child = subprocess.Popen(",
+            "    [sys.executable, '-c', child_script],",
+            "    stdout=subprocess.DEVNULL,",
+            "    stderr=subprocess.DEVNULL,",
+            ")",
+            f"ready_path = __import__('pathlib').Path({str(child_ready_path)!r})",
+            "while not ready_path.exists():",
+            "    time.sleep(0.01)",
+            "print('parent captured output', flush=True)",
+            "time.sleep(30)",
+        )
+    )
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+
+    started = time.monotonic()
+    with pytest.raises(validate.StepFailureError) as captured:
+        validate._run(
+            context,
+            (sys.executable, "-c", parent_script),
+            cwd=tmp_path,
+            timeout_seconds=0.25,
+        )
+    elapsed = time.monotonic() - started
+
+    assert 1 <= elapsed < 3
+    assert "command timed out after 0.25 seconds" in str(captured.value)
+    assert "parent captured output" in str(captured.value)
+    child_pid = int(child_pid_path.read_text(encoding="utf-8"))
+    deadline = time.monotonic() + 1
+    while _process_is_running(child_pid) and time.monotonic() < deadline:
+        time.sleep(0.01)
+    assert not _process_is_running(child_pid)
+    time.sleep(1)
+    assert not leaked_path.exists()
+
+
+@pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
+def test_run_ordinary_action_inherits_context_timeout(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(validate, "ACTIVITY_MARKER", tmp_path / ".gate-running")
+    engine = tmp_path / "slow-engine"
+    engine.write_text(
+        f"#!{sys.executable}\nimport time\ntime.sleep(1)\n",
+        encoding="utf-8",
+    )
+    engine.chmod(0o755)
+    monkeypatch.setattr(validate, "ENGINE", engine)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+        timeout_seconds=0.05,
+    )
+    production_step = next(
+        step for step in validate.STEPS if step.name == "search engine (sqsearch)"
+    )
+    step = validate.Step(production_step.name, production_step.action)
+    summary = validate._run_selected([step], context, [])
+    assert summary.results[0].status == "failed"
+    assert "timed out after 0.05 seconds" in summary.results[0].reason
+
+
+@pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
+def test_run_selected_interrupt_stops_detached_production_process(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(validate, "ACTIVITY_MARKER", tmp_path / ".gate-running")
+    pid_path = tmp_path / "engine.pid"
+    leaked_path = tmp_path / "engine-leaked"
+    engine = tmp_path / "interrupt-engine"
+    engine.write_text(
+        "\n".join(
+            (
+                f"#!{sys.executable}",
+                "import os",
+                "import signal",
+                "import time",
+                "from pathlib import Path",
+                "signal.signal(signal.SIGTERM, signal.SIG_IGN)",
+                f"Path({str(pid_path)!r}).write_text(str(os.getpid()), encoding='utf-8')",
+                "os.kill(os.getppid(), signal.SIGINT)",
+                "time.sleep(2)",
+                f"Path({str(leaked_path)!r}).write_text('leaked', encoding='utf-8')",
+                "time.sleep(30)",
+            )
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    engine.chmod(0o755)
+    monkeypatch.setattr(validate, "ENGINE", engine)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+        timeout_seconds=10,
+    )
+    production_step = next(
+        step for step in validate.STEPS if step.name == "search engine (sqsearch)"
+    )
+    step = validate.Step(production_step.name, production_step.action)
+
+    started = time.monotonic()
+    with pytest.raises(KeyboardInterrupt):
+        validate._run_selected([step], context, [])
+    elapsed = time.monotonic() - started
+
+    assert 1 <= elapsed < 5
+    assert pid_path.exists()
+    pid = int(pid_path.read_text(encoding="utf-8"))
+    deadline = time.monotonic() + 1
+    while _process_is_running(pid) and time.monotonic() < deadline:
+        time.sleep(0.01)
+    assert not _process_is_running(pid)
+    time.sleep(1)
+    assert not leaked_path.exists()
+
+
+@pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
+def test_process_registry_rejects_registration_after_stop(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    signals: list[tuple[int, int]] = []
+    monkeypatch.setattr(validate, "PROCESS_TERMINATION_GRACE_SECONDS", 0)
+    monkeypatch.setattr(
+        validate.os,
+        "killpg",
+        lambda pid, sent_signal: signals.append((pid, sent_signal)),
+    )
+    registry = validate._ProcessRegistry()
+    registry.stop()
+
+    with pytest.raises(validate.StepFailureError, match="rejected new subprocess"):
+        registry.register(12345)
+    assert signals == [(12345, signal.SIGKILL)]
+
+
+@pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
+def test_run_explicit_smaller_timeout_wins() -> None:
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+        timeout_seconds=1,
+    )
+    with pytest.raises(validate.StepFailureError, match=r"timed out after 0\.05 seconds"):
+        validate._run(
+            context,
+            (sys.executable, "-c", "import time; time.sleep(1)"),
+            timeout_seconds=0.05,
+        )
+
+
+def test_timeout_override_requires_positive_finite_seconds() -> None:
+    for value in ("0", "-1", "nan", "inf", "not-a-number"):
+        status, _, stderr = _invoke("--timeout-seconds", value, "--list")
+        assert status == 2
+        assert "positive number of seconds" in stderr
 
 
 def test_list_is_read_only_and_exposes_fast_and_full_check_groups() -> None:
@@ -104,7 +326,81 @@ def test_existing_activity_marker_explains_safe_recovery(tmp_path: Path) -> None
 
 
 def test_missing_provenance_object_is_not_called_an_orphan() -> None:
-    assert validate._commit_state("0" * 40) == "missing"
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+    assert validate._commit_state(context, "0" * 40) == "missing"
+
+
+def test_commit_state_routes_git_probes_through_bounded_seam(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+    commands: list[tuple[str, ...]] = []
+    returncodes = iter((0, 0))
+
+    def capture(_context: validate.Context, command: tuple[str, ...]) -> int:
+        commands.append(command)
+        return next(returncodes)
+
+    monkeypatch.setattr(validate, "_run_returncode", capture)
+    assert validate._commit_state(context, "deadbee") == "reachable"
+    assert commands == [
+        ("git", "cat-file", "-e", "deadbee^{commit}"),
+        ("git", "merge-base", "--is-ancestor", "deadbee", "HEAD"),
+    ]
+
+
+def test_quiet_returncode_path_fails_closed_without_windows_tree_cleanup(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+    monkeypatch.setattr(validate.os, "name", "nt")
+    with pytest.raises(validate.StepFailureError, match="Windows support"):
+        validate._run_returncode(context, ("git", "--version"))
+
+
+def test_timeout_cli_override_wins_over_environment(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("PACKING_VALIDATE_TIMEOUT_SECONDS", "120")
+    observed: validate.Context | None = None
+
+    def capture(
+        selected: list[validate.Step], context: validate.Context, patterns: list[str]
+    ) -> validate.RunSummary:
+        del selected, patterns
+        nonlocal observed
+        observed = context
+        return validate.RunSummary([], 0, selected_count=0, total_count=0)
+
+    monkeypatch.setattr(validate, "_run_selected", capture)
+    assert _invoke("--timeout-seconds", "7")[0] == 0
+    assert observed is not None
+    assert observed.timeout_seconds == 7
+
+
+def test_invalid_timeout_environment_names_environment_variable(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("PACKING_VALIDATE_TIMEOUT_SECONDS", "0")
+    status, _, stderr = _invoke("--list")
+    assert status == 2
+    assert "PACKING_VALIDATE_TIMEOUT_SECONDS" in stderr
 
 
 def test_annotated_lost_provenance_object_is_reported_unavailable() -> None:

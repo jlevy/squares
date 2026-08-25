@@ -206,13 +206,24 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     mac_steps = _mapping(jobs["macos-portability"])["steps"]
     assert isinstance(mac_steps, list)
-    deep_probe = next(
+    mac_job = _mapping(jobs["macos-portability"])
+    assert "continue-on-error" not in mac_job
+    assert all("continue-on-error" not in _mapping(step) for step in mac_steps)
+    deep_probes = [
         _mapping(step)
         for step in mac_steps
-        if _mapping(step).get("name") == "Assert the known deep-golden portability gap"
+        if _mapping(step).get("name") == "Run the focused deep-golden portability check"
+    ]
+    assert len(deep_probes) == 1
+    deep_command = " ".join(str(deep_probes[0]["run"]).split())
+    assert deep_command == (
+        "uv run --frozen --all-extras --group dev packing-validate --deep "
+        '--only "golden basin maps" --jobs 1 --inner-jobs 1'
     )
-    assert "continue-on-error" not in deep_probe
-    assert "devtools.check_known_macos_golden_drift" in str(deep_probe["run"])
+    assert all(
+        "check_known_macos_golden_drift" not in str(_mapping(step).get("run", ""))
+        for step in mac_steps
+    )
 
 
 def test_devtools_use_public_package_interfaces() -> None:

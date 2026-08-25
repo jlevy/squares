@@ -16,6 +16,7 @@ Markdown formatter reflowing the surrounding prose.
 from __future__ import annotations
 
 import argparse
+import math
 import pathlib
 import re
 import sys
@@ -54,6 +55,11 @@ def fmt(x: object, nd: int = 6) -> str:
 
 def pretty(expr: str) -> str:
     """ASCII exact forms are the stored value; this is display only."""
+    nagamochi = re.fullmatch(r"sqrt\((\d+) - 2\*floor\(sqrt\((\d+)\)\) \+ 1\) \+ 1", expr)
+    if nagamochi is not None and nagamochi.group(1) == nagamochi.group(2):
+        n = int(nagamochi.group(1))
+        radicand = n - 2 * math.isqrt(n) + 1
+        return f"1 + √{radicand}"
     return re.sub(r"sqrt\((\d+)\)", r"√\1", expr)
 
 
@@ -131,9 +137,9 @@ ORIGIN_LABEL = {
 
 
 def compact_bound(bound: dict) -> str:
-    """Render one bound without discarding any declared decimal information."""
+    """Render the authoritative exact form when one is available."""
     exact = bound.get("exact_form")
-    if isinstance(exact, str) and len(exact) <= 28:
+    if isinstance(exact, str) and exact:
         return f"`{pretty(exact)}`"
     return f"`{bound['value']}`"
 

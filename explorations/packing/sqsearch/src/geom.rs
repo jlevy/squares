@@ -165,9 +165,18 @@ pub fn required_side(c: &Config) -> f64 {
 
 /// Total overlap depth over all pairs. Zero exactly when the packing is valid.
 pub fn total_overlap(c: &Config) -> f64 {
+    let mut pair_tests = 0;
+    total_overlap_metered(c, &mut pair_tests)
+}
+
+/// Total overlap together with an exact count of evaluated unordered pairs.
+pub fn total_overlap_metered(c: &Config, pair_tests: &mut u64) -> f64 {
     let mut total = 0.0;
     for i in 0..c.n {
         for j in (i + 1)..c.n {
+            *pair_tests = pair_tests
+                .checked_add(1)
+                .expect("pair-test counter overflow");
             total += pair_depth(
                 c.x[i], c.y[i], c.cos[i], c.sin[i], c.x[j], c.y[j], c.cos[j], c.sin[j],
             );
@@ -176,12 +185,23 @@ pub fn total_overlap(c: &Config) -> f64 {
     total
 }
 
-/// Overlap depth of square `k` against every other square, for a trial pose.
+/// Local overlap together with an exact count of evaluated unordered pairs.
 #[inline]
-pub fn local_overlap(c: &Config, k: usize, x: f64, y: f64, cos: f64, sin: f64) -> f64 {
+pub fn local_overlap_metered(
+    c: &Config,
+    k: usize,
+    x: f64,
+    y: f64,
+    cos: f64,
+    sin: f64,
+    pair_tests: &mut u64,
+) -> f64 {
     let mut total = 0.0;
     for j in 0..c.n {
         if j != k {
+            *pair_tests = pair_tests
+                .checked_add(1)
+                .expect("pair-test counter overflow");
             total += pair_depth(x, y, cos, sin, c.x[j], c.y[j], c.cos[j], c.sin[j]);
         }
     }

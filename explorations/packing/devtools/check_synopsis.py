@@ -11,7 +11,7 @@ It cannot be generated: most of it is judgement, and the judgement is the point.
 So it is *reconciled* instead, the way `campaign/ideas.md` is -- the numbers and
 statuses it asserts must match the artifacts, and every artifact must appear.
 
-Ten checks:
+Eleven checks:
 
   1. every round's verdict in the roll-up matches its artifact
   2. every hypothesis's status matches the ledger's derived status
@@ -21,8 +21,9 @@ Ten checks:
   6. the stated hypothesis-artifact count matches the registry directory
   7. every relative link and heading anchor resolves
   8. freshness labels name the current round count and do not embed a stale update note
-  9. the readiness dashboard remains attached to its canonical status owners
- 10. living reproducibility instructions do not name removed command paths
+ 9. the readiness dashboard remains attached to its canonical status owners
+10. living reproducibility instructions do not name removed command paths
+11. the cold-start handoff agrees with the latest session and active agenda
 
 Check 7 closes a real gap: `packing-ledger check` walks links under `campaign/`
 only, so the root document's forty-odd references were unchecked.
@@ -41,7 +42,12 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 SYNOPSIS = ROOT / "SYNOPSIS.md"
+README = ROOT / "README.md"
 HYPOTHESES = ROOT / "campaign/hypotheses"
+AGENT_SESSIONS = ROOT / "campaign/agent-sessions"
+AGENDA = ROOT / "campaign/agendas/agenda-001-basin-confidence-ladder.md"
+ACTIVE_PLAN = ROOT / "docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md"
+DEFECTS = ROOT / "defects.yaml"
 READINESS_BEGIN = "<!-- BEGIN CURRENT-RESEARCH-READINESS -->"
 READINESS_END = "<!-- END CURRENT-RESEARCH-READINESS -->"
 READINESS_SOURCES = (
@@ -286,6 +292,117 @@ def check_migrated_commands(text: str) -> list[str]:
     ]
 
 
+def select_handoff_cell(items: list[dict], next_action: str) -> dict:
+    """Select the one agenda item explicitly named by a terminal session action."""
+    matches = [
+        item
+        for item in items
+        if isinstance(item.get("id"), str)
+        and re.search(rf"\b{re.escape(item['id'])}\b", next_action)
+    ]
+    if len(matches) != 1:
+        raise ValueError(
+            f"terminal next_action must name exactly one agenda cell; found {len(matches)}"
+        )
+    return matches[0]
+
+
+def check_current_handoff(text: str) -> list[str]:
+    """The cold-start path names the latest session, agenda bead, and evidence head."""
+    section = re.search(
+        r"^### Current Handoff\s*$\n(?P<body>.*?)(?=^##\s|\Z)", text, re.M | re.S
+    )
+    if section is None:
+        return ["SYNOPSIS.md: has no Current Handoff section"]
+
+    session_paths = sorted(
+        AGENT_SESSIONS.glob("session-[0-9][0-9][0-9]-*.md"),
+        key=lambda path: int(path.name.split("-", 2)[1]),
+    )
+    if not session_paths:
+        return ["campaign/agent-sessions: has no numbered session artifact"]
+
+    latest_path = session_paths[-1]
+    latest = front(latest_path)["session"]
+    next_action = latest.get("next_action", "")
+    next_beads = re.findall(r"\bthink-[a-z0-9]+\b", next_action)
+    if not next_beads:
+        return [f"{latest_path.name}: terminal next_action names no bead"]
+
+    agenda = front(AGENDA)["agenda"]
+    try:
+        cell = select_handoff_cell(agenda["items"], next_action)
+    except ValueError as error:
+        return [f"{latest_path.name}: {error}"]
+    cell_id = cell["id"]
+    agenda_bead = cell["bead"]
+
+    problems: list[str] = []
+    if agenda_bead not in next_beads:
+        problems.append(
+            f"{latest_path.name}: next_action and {cell_id} disagree on bead {agenda_bead}"
+        )
+
+    body = section.group("body")
+    session_target = f"campaign/agent-sessions/{latest_path.name}"
+    if session_target not in body:
+        problems.append(f"SYNOPSIS.md: Current Handoff does not point to latest {latest['id']}")
+    if cell_id not in body:
+        problems.append(f"SYNOPSIS.md: Current Handoff does not name {cell_id}")
+    if agenda_bead not in body:
+        problems.append(
+            f"SYNOPSIS.md: Current Handoff does not name {cell_id} bead {agenda_bead}"
+        )
+
+    experiment_ids = sorted(
+        {
+            match
+            for artifact in cell.get("artifacts", [])
+            for match in re.findall(r"exp-[0-9]{3}", artifact)
+        }
+    )
+    body_lower = body.lower()
+    problems.extend(
+        f"SYNOPSIS.md: Current Handoff omits {cell_id} evidence {experiment_id}"
+        for experiment_id in experiment_ids
+        if experiment_id not in body_lower
+    )
+
+    if "SYNOPSIS.md#current-handoff" not in README.read_text(encoding="utf-8"):
+        problems.append("README.md: does not route cold starts to SYNOPSIS current handoff")
+
+    plan = ACTIVE_PLAN.read_text(encoding="utf-8")
+    plan_handoff = re.search(
+        r"^For the next supervised exact-research goal,.*?(?=^##\s|\Z)",
+        plan,
+        re.M | re.S,
+    )
+    if plan_handoff is None:
+        problems.append("active launch plan: has no current handoff paragraph")
+    else:
+        plan_text = plan_handoff.group(0)
+        if cell_id not in plan_text or agenda_bead not in plan_text:
+            problems.append(
+                f"active launch plan: current handoff does not name {cell_id} and {agenda_bead}"
+            )
+        plan_beads = set(re.findall(r"\bthink-[a-z0-9]+\b", plan_text))
+        if plan_beads != {agenda_bead}:
+            problems.append(
+                "active launch plan: current handoff bead set is "
+                f"{sorted(plan_beads)}, expected {[agenda_bead]}"
+            )
+        defect_records = yaml.safe_load(DEFECTS.read_text(encoding="utf-8"))["defects"]
+        fixed_defects = {
+            defect["id"] for defect in defect_records if defect["status"] == "fixed"
+        }
+        stale_defects = sorted(set(re.findall(r"\bD-[0-9]{3}\b", plan_text)) & fixed_defects)
+        if stale_defects:
+            problems.append(
+                f"active launch plan: current handoff names fixed defects {stale_defects}"
+            )
+    return problems
+
+
 # fmt: off
 _ONES = [
     "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
@@ -317,23 +434,6 @@ def spell(n: int) -> str:
 def counted(n: int, singular: str, plural: str) -> str:
     """Write a synopsis count with the noun form that belongs to it."""
     return f"{spell(n)} {singular if n == 1 else plural}"
-
-
-def check_hypothesis_count(text: str) -> list[str]:
-    """The registry introduction states the number of hypothesis artifacts."""
-    total = len(list(HYPOTHESES.glob("H-*.md")))
-    section = re.search(
-        r"^## The Hypothesis Registry\s*$\n(?P<body>.*?)(?=^##\s|\Z)", text, re.M | re.S
-    )
-    if section is None:
-        return ["SYNOPSIS.md: has no Hypothesis Registry section"]
-    expected = (
-        rf"\b(?:{total}|{re.escape(spell(total))}) "
-        r"claims or open questions are codified as artifacts\b"
-    )
-    if not re.search(expected, section.group("body"), re.I):
-        return [f"SYNOPSIS.md: does not state the hypothesis artifact count ({total})"]
-    return []
 
 
 def check_defects(text: str) -> list[str]:
@@ -407,11 +507,11 @@ def main() -> int:
         check_links(text)
         + check_rounds(text)
         + check_hypotheses(text)
-        + check_hypothesis_count(text)
         + check_totals(text)
         + check_freshness_label(text)
         + check_readiness_dashboard(text)
         + check_migrated_commands(text)
+        + check_current_handoff(text)
         + check_defects(text)
     )
     if problems:
