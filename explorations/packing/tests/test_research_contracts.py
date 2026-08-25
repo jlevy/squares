@@ -8,12 +8,23 @@ from pathlib import Path
 from typing import cast
 
 import numpy as np
+import pytest
 import yaml
-from scipy.optimize import linprog
+from scipy.optimize import OptimizeResult, linprog
 
+from sqpack.research import quench
 from sqpack.research.closed_form import recognise
 
 N4_STATUS4_FIXTURE = Path(__file__).parent / "fixtures/n4_seed0_highs_status4.yaml"
+Cell = list[tuple[int, int, float, float, float, float]]
+LPCall = tuple[
+    str,
+    np.ndarray,
+    np.ndarray,
+    np.ndarray,
+    list[tuple[float | None, float | None]],
+    dict[str, float],
+]
 
 
 def _unhex(value: str | None) -> float | None:
@@ -144,3 +155,246 @@ def test_n4_seed0_highs_failure_fixture_is_replayable() -> None:
     mutated[0]["ax"] = "0x1.0000000000000p-1"
     _, bad_a_ub, _, _ = _rebuild_n4_lp(data, mutated)
     assert not np.array_equal(bad_a_ub, a_ub)
+
+
+def _n4_fixture_cell(data: dict[str, object]) -> tuple[list[float], Cell]:
+    """Decode the captured cell without routing through cell selection."""
+    inputs = _mapping(data["input_hex"])
+    theta = [_hex_float(value) for value in _items(inputs["theta"])]
+    cell: Cell = []
+    for entry in _items(inputs["cell"]):
+        record = _mapping(entry)
+        cell.append(
+            (
+                _integer(record["i"]),
+                _integer(record["j"]),
+                _hex_float(record["ax"]),
+                _hex_float(record["ay"]),
+                _hex_float(record["h"]),
+                _hex_float(record["sign"]),
+            )
+        )
+    return theta, cell
+
+
+def _valid_n2_cell() -> tuple[list[float], Cell, np.ndarray]:
+    """A fixed horizontal two-square LP with a known feasible optimum."""
+    theta = [0.0, 0.0]
+    cell = [(0, 1, 1.0, 0.0, 1.0, -1.0)]
+    return theta, cell, np.array([2.0, 0.5, 1.5, 0.5, 0.5])
+
+
+def _result(*, status: int, success: bool, x: np.ndarray | None = None) -> OptimizeResult:
+    return OptimizeResult(
+        status=status,
+        success=success,
+        message=f"scripted status {status}",
+        x=x,
+    )
+
+
+def _assert_attempt_indices(result: quench.CellSolveResult) -> None:
+    assert [receipt.solver_call for receipt in result.attempt_receipts] == list(
+        range(1, len(result.attempt_receipts) + 1)
+    )
+
+
+def test_n4_status4_fixture_is_recovered_or_primary_optimal() -> None:
+    """The captured LP is portable: HiGHS or its scoped IPM fallback must certify it."""
+    data = _mapping(yaml.safe_load(N4_STATUS4_FIXTURE.read_text()))
+    theta, cell = _n4_fixture_cell(data)
+    _, a_ub, b_ub, _ = _rebuild_n4_lp(data)
+
+    result = quench.solve_cell(theta, cell, 4)
+
+    assert result.outcome == "optimal"
+    assert result.side is not None
+    candidate = np.array([result.side, *result.x, *result.y])
+    assert candidate.shape == (9,)
+    assert np.isfinite(candidate).all()
+    assert np.max(a_ub @ candidate - b_ub) <= quench.LP_FEASIBLE_EPS
+    assert result.solver_calls == len(result.attempt_receipts)
+    _assert_attempt_indices(result)
+    assert [receipt.method for receipt in result.attempt_receipts] in (
+        ["highs"],
+        ["highs", "highs-ipm"],
+    )
+    assert result.attempt_receipts[0].method == "highs"
+    if len(result.attempt_receipts) == 2:
+        primary, fallback = result.attempt_receipts
+        assert (primary.status, primary.success, fallback.method, fallback.success) == (
+            4,
+            False,
+            "highs-ipm",
+            True,
+        )
+
+
+def test_solve_cell_status4_uses_one_ipm_fallback(monkeypatch: pytest.MonkeyPatch) -> None:
+    theta, cell, solution = _valid_n2_cell()
+    calls: list[LPCall] = []
+
+    def scripted(
+        obj: np.ndarray,
+        *,
+        A_ub: np.ndarray,  # noqa: N803 - mirrors scipy.optimize.linprog's keyword
+        b_ub: np.ndarray,
+        bounds: list[tuple[float | None, float | None]],
+        method: str,
+        options: dict[str, float],
+    ) -> OptimizeResult:
+        calls.append(
+            (method, obj.copy(), A_ub.copy(), b_ub.copy(), list(bounds), dict(options))
+        )
+        return _result(status=4, success=False) if method == "highs" else _result(
+            status=0, success=True, x=solution
+        )
+
+    monkeypatch.setattr(quench, "linprog", scripted)
+
+    result = quench.solve_cell(theta, cell, 2)
+
+    assert result.outcome == "optimal"
+    assert [call[0] for call in calls] == ["highs", "highs-ipm"]
+    first, fallback = calls
+    assert np.array_equal(first[1], fallback[1])
+    assert np.array_equal(first[2], fallback[2])
+    assert np.array_equal(first[3], fallback[3])
+    assert first[4:] == fallback[4:]
+    assert [receipt.method for receipt in result.attempt_receipts] == [
+        call[0] for call in calls
+    ]
+    assert [(receipt.status, receipt.success) for receipt in result.attempt_receipts] == [
+        (4, False),
+        (0, True),
+    ]
+    assert result.solver_calls == 2
+    _assert_attempt_indices(result)
+    assert result.max_violation is not None and result.max_violation <= quench.LP_FEASIBLE_EPS
+
+
+def test_solve_cell_status4_ipm_failure_stays_typed(monkeypatch: pytest.MonkeyPatch) -> None:
+    theta, cell, _ = _valid_n2_cell()
+    calls: list[str] = []
+
+    def scripted(*_args: object, method: str, **_kwargs: object) -> OptimizeResult:
+        calls.append(method)
+        if method == "highs":
+            return _result(status=4, success=False)
+        return _result(status=1, success=False)
+
+    monkeypatch.setattr(quench, "linprog", scripted)
+
+    result = quench.solve_cell(theta, cell, 2)
+
+    assert result.outcome == "solver_failure"
+    assert calls == ["highs", "highs-ipm"]
+    assert [receipt.method for receipt in result.attempt_receipts] == calls
+    assert [(receipt.status, receipt.success) for receipt in result.attempt_receipts] == [
+        (4, False),
+        (1, False),
+    ]
+    assert result.solver_calls == 2
+    _assert_attempt_indices(result)
+
+
+def test_solve_cell_status4_ipm_status2_stays_solver_failure(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    theta, cell, _ = _valid_n2_cell()
+    calls: list[str] = []
+
+    def scripted(*_args: object, method: str, **_kwargs: object) -> OptimizeResult:
+        calls.append(method)
+        return _result(status=4, success=False) if method == "highs" else _result(
+            status=2, success=False
+        )
+
+    monkeypatch.setattr(quench, "linprog", scripted)
+
+    result = quench.solve_cell(theta, cell, 2)
+
+    assert result.outcome == "solver_failure"
+    assert calls == ["highs", "highs-ipm"]
+    assert [(receipt.status, receipt.success) for receipt in result.attempt_receipts] == [
+        (4, False),
+        (2, False),
+    ]
+    assert result.solver_calls == 2
+    _assert_attempt_indices(result)
+
+
+@pytest.mark.parametrize(
+    ("status", "outcome"),
+    [(1, "solver_failure"), (2, "infeasible")],
+)
+def test_solve_cell_non_status4_primary_failure_never_falls_back(
+    monkeypatch: pytest.MonkeyPatch,
+    status: int,
+    outcome: str,
+) -> None:
+    theta, cell, _ = _valid_n2_cell()
+    calls: list[str] = []
+
+    def scripted(*_args: object, method: str, **_kwargs: object) -> OptimizeResult:
+        calls.append(method)
+        return _result(status=status, success=False)
+
+    monkeypatch.setattr(quench, "linprog", scripted)
+
+    result = quench.solve_cell(theta, cell, 2)
+
+    assert result.outcome == outcome
+    assert calls == ["highs"]
+    assert [
+        (receipt.method, receipt.status, receipt.success)
+        for receipt in result.attempt_receipts
+    ] == [
+        ("highs", status, False),
+    ]
+    assert result.solver_calls == 1
+    _assert_attempt_indices(result)
+
+
+def test_solve_cell_nonfinite_successful_ipm_is_rejected(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    theta, cell, _ = _valid_n2_cell()
+
+    def scripted(*_args: object, method: str, **_kwargs: object) -> OptimizeResult:
+        if method == "highs":
+            return _result(status=4, success=False)
+        return _result(status=0, success=True, x=np.full(5, np.nan))
+
+    monkeypatch.setattr(quench, "linprog", scripted)
+
+    result = quench.solve_cell(theta, cell, 2)
+
+    assert result.outcome == "postcheck_rejection"
+    assert result.solver_calls == 2
+    assert [receipt.method for receipt in result.attempt_receipts] == ["highs", "highs-ipm"]
+    _assert_attempt_indices(result)
+
+
+def test_solve_cell_ipm_bad_residual_refuses_at_total_cap(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    theta, cell, _ = _valid_n2_cell()
+    calls: list[str] = []
+
+    def scripted(*_args: object, method: str, **_kwargs: object) -> OptimizeResult:
+        calls.append(method)
+        if method == "highs":
+            return _result(status=4, success=False)
+        return _result(status=0, success=True, x=np.zeros(5))
+
+    monkeypatch.setattr(quench, "linprog", scripted)
+
+    result = quench.solve_cell(theta, cell, 2)
+
+    assert result.outcome == "postcheck_rejection"
+    assert result.max_violation is not None and result.max_violation > quench.LP_FEASIBLE_EPS
+    assert calls == ["highs", "highs-ipm", "highs-ipm", "highs-ipm"]
+    assert [receipt.method for receipt in result.attempt_receipts] == calls
+    assert result.solver_calls == len(calls) == quench.MAX_RESIDUAL_SOLVER_CALLS
+    _assert_attempt_indices(result)

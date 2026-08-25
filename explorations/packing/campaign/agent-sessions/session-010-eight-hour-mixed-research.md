@@ -524,7 +524,7 @@ session:
       Implement the earned D-203 repair: retry only HiGHS status 4 with highs-ipm on the
       identical LP and tolerances, retain and count both attempts, and preserve the
       complete original-row residual screen and finite call cap.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Independent W2 review proved the LP sound and identified a method-specific
@@ -546,10 +546,61 @@ session:
     fallback: >-
       Retain the reviewed interface and smallest failing deterministic control, leave
       D-203 open, and rotate without a production change.
+    outcome: >-
+      Implemented one status-4-only strict-IPM fallback with explicit indexed receipts,
+      total-call accounting, method persistence through residual repairs, finite-result
+      refusal, and no threshold, cap, geometry, or golden change.
+    evidence:
+    - >-
+      The retained fixture now reaches the exact certified optimum and every original LP
+      row passes the unchanged 1e-10 screen.
+    - >-
+      Ten deterministic controls cover identical fallback inputs, recovery, two failure
+      modes, no-fallback primary failures, nonfinite success, bad residuals, and the
+      shared four-call cap.
+    - >-
+      All 60 pytest tests, all eight numerical regression groups, Ruff, and BasedPyright pass.
+    - >-
+      Independent review found and corrected D-266 before commit: status4 followed by
+      IPM status2 remains solver_failure rather than mathematical infeasibility.
+    stop_reason: >-
+      The exact authorized repair and its focused negative controls were complete and
+      independently reviewed inside the implementation budget without running a seed.
+    next_action: >-
+      Commit the two-file repair, then independently review the committed delta and run
+      only n=4 seed 0 as the first end-to-end validation.
+  - workflow: factual-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Review the committed D-203 fallback independently, confirm both CI platforms, and
+      run only the retained n=4 seed-0 path to decide whether the repair restores a
+      converged producer result without changing its value or screen.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Phase 10's source and deterministic controls are green and independently reviewed;
+      a bounded end-to-end seed replay is now the next evidentiary layer.
+    budget_minutes: 20
+    started_at: '2026-08-25T02:48:00-07:00'
+    deadline_at: '2026-08-25T03:08:00-07:00'
+    expected_output: >-
+      P0/P1 disposition of the committed fallback plus one seed-0 receipt with endpoint,
+      convergence, attempt counts, residual validity, and comparison to the retained
+      nonconverged endpoint; no full golden or other seed.
+    validation_command: >-
+      timeout 20 uv run --directory explorations/packing --frozen python -c
+      'run only census_starts(4,4)[0] through quench_bracket and print its typed receipt'
+    kill_condition: >-
+      Stop at the first review issue or after the one seed-0 call; never run another seed,
+      the golden, or a tolerance/value update in this phase.
+    fallback: >-
+      Keep D-203 and think-nr5w open with the exact committed control or seed-level blocker.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Delegate the mechanical fallback while reviewing attempt accounting.
+    next_action: Commit and push phase 10 before executing the single seed-0 replay.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -1305,6 +1356,86 @@ session:
     fallback: Return the first model mismatch or strongest solver-instability evidence.
     write_scope: [read-only]
     excluded_commands: [git, tbd, production edits, full golden]
+  - task: Implement the bounded status-4-to-IPM production fallback.
+    operator: /root/n4_ipm_fallback_impl
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Added explicit attempt receipts and a status-4-only strict-IPM retry inside the
+      existing four-call cap, then corrected D-266's mixed-method classification.
+    evidence:
+    - Every attempt shares the same LP inputs, tolerances, and complete residual screen.
+    - Successful IPM selection persists through later residual repairs.
+    files: [src/sqpack/research/quench.py]
+    checks: [Focused Ruff and BasedPyright.]
+    uncertainty: No seed or golden was run in the implementation phase.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Submit the two-file delta to committed review and one seed-0 validation.
+    phase: 10
+    budget_minutes: 19
+    started_at: '2026-08-25T02:40:00-07:00'
+    deadline_at: '2026-08-25T02:59:00-07:00'
+    expected_output: Minimal production fallback, attempt accounting, and static checks.
+    validation_command: Focused Ruff and BasedPyright under 30-second caps.
+    kill_condition: Stop by 02:59 without a seed, golden, tolerance, or cap change.
+    fallback: Retain the explicit interface and first deterministic blocker.
+    write_scope: [src/sqpack/research/quench.py]
+    excluded_commands: [git, tbd, tests, seed, full golden]
+  - task: Add deterministic fallback and refusal controls.
+    operator: /root/n4_ipm_fallback_tests
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Added actual-fixture recovery and nine deterministic classification, identity,
+      receipt, nonfinite, residual, and call-cap controls.
+    evidence:
+    - Ten focused tests pass in 0.34 seconds.
+    - Snapshots exact-compare c, A_ub, b_ub, bounds, and options across both methods.
+    files: [tests/test_research_contracts.py]
+    checks: [Focused pytest, Ruff, and BasedPyright.]
+    uncertainty: End-to-end quench convergence remained outside this phase.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preserve the focused controls and run one bounded seed only after commit.
+    phase: 10
+    budget_minutes: 19
+    started_at: '2026-08-25T02:40:00-07:00'
+    deadline_at: '2026-08-25T02:59:00-07:00'
+    expected_output: Portable actual fixture plus deterministic positive and negative controls.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --all-extras --group dev
+      pytest -q tests/test_research_contracts.py
+    kill_condition: Stop by 02:59 without production, fixture, seed, or golden edits.
+    fallback: Retain the smallest failing deterministic control.
+    write_scope: [tests/test_research_contracts.py]
+    excluded_commands: [git, tbd, production, fixture, seed, full golden]
+  - task: Audit fallback soundness, accounting, and legacy behavior.
+    operator: /root/n4_ipm_fallback_review
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Found D-266's P1 infeasibility promotion before commit, verified its correction,
+      and reported no remaining P0/P1 source finding.
+    evidence:
+    - The review checked method scope, exact inputs, call cap, receipts, method persistence, and refusal paths.
+    - Eight legacy regression groups pass after the correction.
+    files: []
+    checks: [Read-only source/test diff, focused pytest, and numerical regressions.]
+    uncertainty: Commit and cross-platform CI had not yet run on the production delta.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Accept the narrow source delta subject to committed CI and one seed replay.
+    phase: 10
+    budget_minutes: 19
+    started_at: '2026-08-25T02:40:00-07:00'
+    deadline_at: '2026-08-25T02:59:00-07:00'
+    expected_output: P0/P1 disposition and smallest corrections without shared writes.
+    validation_command: Read-only focused and legacy checks, each under 30 seconds.
+    kill_condition: Stop by 02:59 and report the first P1 without editing.
+    fallback: Block acceptance with the smallest failing invariant.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, production edits, seed, full golden]
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
@@ -1318,6 +1449,7 @@ session:
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
   - tests/fixtures/n4_seed0_highs_status4.yaml
   - tests/test_research_contracts.py
+  - src/sqpack/research/quench.py
   - defects.yaml
   - defects.md
   - SYNOPSIS.md
@@ -1373,10 +1505,17 @@ session:
     Phase-9 exact, numerical, and geometric reviews independently certify the retained
     n=4 LP and agree on a status-4-only strict-IPM fallback; PR 29's fixture checkpoint
     passes both Linux and macOS CI with no review comments.
+  - >-
+    Phase-10 fallback validation passes ten focused controls in 0.34 seconds, all 60
+    pytest tests in 2.80 seconds, eight numerical regression groups in 7.33 seconds,
+    Ruff, and BasedPyright; D-266 records the pre-commit P1 found by independent review.
+  - >-
+    The first phase-10 mutation run caught D-267's stale soundness-denominator diagnostic;
+    its corrected 70-defect expectation and all 62 controls pass before commit.
   stop_reason: null
   next_action: >-
-    Commit and push the terminal phase-9 diagnosis, then implement exactly one bounded
-    D-203 status-4-to-IPM fallback under phase 10 without running a seed or golden.
+    Commit and push the terminal phase-10 fallback, then independently review that
+    checkpoint and run only n=4 seed 0 under phase 11.
 ---
 ## Session Boundary
 

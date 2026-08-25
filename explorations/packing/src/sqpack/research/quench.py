@@ -97,6 +97,17 @@ class CellResidualReceipt:
 
 
 @dataclass
+class CellSolverAttemptReceipt:
+    """The solver-level receipt for one LP attempt, including failed attempts."""
+
+    solver_call: int
+    method: Literal["highs", "highs-ipm"]
+    status: int
+    success: bool
+    message: str
+
+
+@dataclass
 class CellSolveResult:
     """One LP outcome, retaining numerical failure separately from infeasibility."""
 
@@ -110,6 +121,7 @@ class CellSolveResult:
     max_violation_row: int | None = None
     max_violation_kind: Literal["containment", "pair"] | None = None
     solver_calls: int = 1
+    attempt_receipts: list[CellSolverAttemptReceipt] = field(default_factory=list)
     residual_receipts: list[CellResidualReceipt] = field(default_factory=list)
     # Compatibility summary of the first repair. The complete sequence is retained in
     # residual_receipts, including rows that become offending only after that repair.
@@ -252,27 +264,76 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
     a_ub = np.array(rows)
     b_ub = np.array(rhs)
 
-    def run_lp(active_rhs):
+    options = {
+        "primal_feasibility_tolerance": 1e-10,
+        "dual_feasibility_tolerance": 1e-10,
+    }
+    bounds = [(0, None)] + [(None, None)] * (2 * n)
+
+    def run_lp(active_rhs, method: Literal["highs", "highs-ipm"]):
         return linprog(
             obj,
             A_ub=a_ub,
             b_ub=active_rhs,
-            bounds=[(0, None)] + [(None, None)] * (2 * n),
-            method="highs",
-            options={
-                "primal_feasibility_tolerance": 1e-10,
-                "dual_feasibility_tolerance": 1e-10,
-            },
+            bounds=bounds,
+            method=method,
+            options=options,
         )
 
-    res = run_lp(b_ub)
+    solver_calls = 0
+    attempt_receipts: list[CellSolverAttemptReceipt] = []
+
+    def record_attempt(method: Literal["highs", "highs-ipm"], active_rhs):
+        nonlocal solver_calls
+        if solver_calls >= MAX_RESIDUAL_SOLVER_CALLS:
+            raise AssertionError("LP solver-call cap checked before an attempt")
+        result = run_lp(active_rhs, method)
+        solver_calls += 1
+        attempt_receipts.append(
+            CellSolverAttemptReceipt(
+                solver_call=solver_calls,
+                method=method,
+                status=int(result.status),
+                success=bool(result.success),
+                message=str(result.message),
+            )
+        )
+        return result
+
+    def solve_attempt(active_rhs, method: Literal["highs", "highs-ipm"]):
+        """Run one method, retrying only a HiGHS numerical failure with IPM."""
+        result = record_attempt(method, active_rhs)
+        if (
+            method == "highs"
+            and not result.success
+            and result.status == 4
+            and solver_calls < MAX_RESIDUAL_SOLVER_CALLS
+        ):
+            return record_attempt("highs-ipm", active_rhs), "highs-ipm"
+        return result, method
+
+    res, solver_method = solve_attempt(b_ub, "highs")
     if not res.success:
         return CellSolveResult(
-            outcome="infeasible" if res.status == 2 else "solver_failure",
+            outcome=(
+                "infeasible"
+                if res.status == 2 and len(attempt_receipts) == 1
+                else "solver_failure"
+            ),
             solver_status=int(res.status),
             detail=str(res.message),
+            solver_calls=solver_calls,
+            attempt_receipts=attempt_receipts,
         )
-    solver_calls = 1
+    v = np.asarray(res.x)
+    if v.shape != (nv,) or not np.isfinite(v).all():
+        return CellSolveResult(
+            outcome="postcheck_rejection",
+            solver_status=int(res.status),
+            detail="successful LP returned a non-finite or wrong-shape solution",
+            solver_calls=solver_calls,
+            attempt_receipts=attempt_receipts,
+        )
     residual_receipts: list[CellResidualReceipt] = []
     repair_rows: list[int] = []
     repair_margins: list[float] = []
@@ -315,8 +376,7 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
             repair_margins = margins
         for row, margin in zip(offending_rows, margins, strict=True):
             active_rhs[row] -= margin
-        repaired = run_lp(active_rhs)
-        solver_calls += 1
+        repaired, repaired_method = solve_attempt(active_rhs, solver_method)
         if not repaired.success:
             return CellSolveResult(
                 outcome="postcheck_rejection",
@@ -329,11 +389,27 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
                 max_violation_row=max_row,
                 max_violation_kind=max_kind,
                 solver_calls=solver_calls,
+                attempt_receipts=attempt_receipts,
                 residual_receipts=residual_receipts,
                 repair_rows=repair_rows,
                 repair_margins=repair_margins,
             )
-        res = repaired
+        repaired_v = np.asarray(repaired.x)
+        if repaired_v.shape != (nv,) or not np.isfinite(repaired_v).all():
+            return CellSolveResult(
+                outcome="postcheck_rejection",
+                solver_status=int(repaired.status),
+                detail="successful LP returned a non-finite or wrong-shape solution",
+                max_violation=max_violation,
+                max_violation_row=max_row,
+                max_violation_kind=max_kind,
+                solver_calls=solver_calls,
+                attempt_receipts=attempt_receipts,
+                residual_receipts=residual_receipts,
+                repair_rows=repair_rows,
+                repair_margins=repair_margins,
+            )
+        res, v, solver_method = repaired, repaired_v, repaired_method
     x, y = list(v[1 : 1 + n]), list(v[1 + n :])
     if max_violation > LP_FEASIBLE_EPS:
         return CellSolveResult(
@@ -350,6 +426,7 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
             max_violation_row=max_row,
             max_violation_kind=max_kind,
             solver_calls=solver_calls,
+            attempt_receipts=attempt_receipts,
             residual_receipts=residual_receipts,
             repair_rows=repair_rows,
             repair_margins=repair_margins,
@@ -365,6 +442,7 @@ def solve_cell(theta, cell, n: int) -> CellSolveResult:
         max_violation_row=max_row,
         max_violation_kind=max_kind,
         solver_calls=solver_calls,
+        attempt_receipts=attempt_receipts,
         residual_receipts=residual_receipts,
         repair_rows=repair_rows,
         repair_margins=repair_margins,

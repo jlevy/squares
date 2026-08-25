@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 265
+count: 267
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -5221,13 +5221,15 @@ defects:
     cannot be promoted or silently removed. Small-n calibration is not yet a trustworthy
     unattended launch gate.
   fix: >-
-    not implemented yet; on status 4 only, retry the identical LP once with highs-ipm
-    under the same 1e-10 tolerances, count and retain both solver attempts, and pass the
-    result through the unchanged complete original-row residual screen
+    implemented but not yet end-to-end verified; on status 4 only, retry the identical
+    LP once with highs-ipm under the same 1e-10 tolerances, count and retain both solver
+    attempts, and pass the result through the unchanged complete original-row residual
+    screen
   regression: >-
-    the retained millisecond fixture exact-rebuilds the LP and reproduces status 4;
-    focused fallback controls must cover IPM success, bad-residual refusal, dual failure,
-    and both-attempt accounting before another seed or golden run
+    the retained millisecond fixture recovers at the certified optimum; ten focused
+    controls cover identical fallback inputs, IPM success, nonfinite and bad-residual
+    refusal, sole-primary infeasibility, mixed-method failure, and complete attempt
+    accounting; one seed-0 end-to-end replay is still required before closure
   bead: think-nr5w
   recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-204
@@ -6839,3 +6841,54 @@ defects:
   regression: packing-ledger check validates every delegation deadline against its budget
   bead: think-qefb
   recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-266
+  title: A numerical fallback disagreement was promoted to infeasibility
+  date: '2026-08-25'
+  layer: quench
+  class: soundness
+  direction: conservative
+  detected_by: review
+  latent_for: one delegated fallback draft, before commit
+  severity: high
+  status: fixed
+  what: >-
+    The first D-203 fallback draft returned outcome infeasible when the primary highs
+    call failed numerically with status 4 and the fallback highs-ipm call returned
+    status 2. It reused the old single-attempt status-2 classification after introducing
+    a two-method disagreement path.
+  consequence: >-
+    A numerical failure followed by a solver disagreement could be recorded as a
+    mathematical infeasibility claim, causing a valid cell to be discarded under a
+    stronger evidential label than either combined receipt supports.
+  fix: >-
+    Classify status 2 as infeasible only for a sole primary attempt, keep every failed
+    fallback after primary status 4 as solver_failure, and retain both receipts.
+  regression: >-
+    Deterministic controls require primary status 2 to stay infeasible without fallback
+    and the status-4-to-status-2 sequence to stay solver_failure with two indexed receipts
+  bead: think-jg75
+  recorded_in: src/sqpack/research/quench.py
+- id: D-267
+  title: The soundness mutation diagnostic kept the old denominator
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted D-266 integration
+  severity: medium
+  status: fixed
+  what: >-
+    Adding D-266 advanced the soundness total from 69 to 70 and updated the mutation
+    anchor, but its expected checker diagnostic still required `58 of 69` rather than
+    the authoritative `58 of 70`.
+  consequence: >-
+    The mutation fired and the synopsis checker rejected it correctly, but the harness
+    rejected that correct diagnostic and stopped one of 62 controls at checkpoint.
+  fix: >-
+    Advance the expected diagnostic with the authoritative denominator and reconcile the
+    total and gate aggregates after recording this recurrence.
+  regression: all 62 negative controls must apply and report their exact diagnostics
+  recurrence_of: D-255
+  bead: think-ut5r
+  recorded_in: devtools/controls.yaml

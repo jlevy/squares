@@ -1758,27 +1758,27 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 265 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 267 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 69 | asserted something false about the mathematics |
+| soundness | 70 | asserted something false about the mathematics |
 | validity | 68 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 92 | recorded something its own evidence contradicts |
+| bookkeeping | 93 | recorded something its own evidence contradicts |
 | robustness | 28 | did not finish, or finished only by luck |
 | performance | 8 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Fifty-eight of the sixty-nine soundness defects pointed in the *flattering*
-direction**, where the error looks like a success.
+**Fifty-eight of the seventy soundness defects pointed in the *flattering* direction**,
+where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught twenty defects in 265, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught twenty-one defects in 267, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Every gate-detected entry is a bookkeeping or robustness defect, found by
 contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
@@ -2027,6 +2027,10 @@ zero duality gap. The failure is dual-simplex presolve/postsolve instability on 
 near-degenerate optimal face.
 Strict `highs-ipm` solves the identical LP with zero original-row residual; default
 tolerances and presolve-off simplex are rejected because their residuals exceed `1e-10`.
+[D-266](defects.md) records a soundness error caught in the first fallback draft: a
+primary status 4 followed by IPM status 2 was briefly promoted to mathematical
+infeasibility. The corrected classifier reserves infeasible for a sole primary status-2
+receipt and keeps every mixed-method failure numerical.
 [D-260](defects.md) through [D-262](defects.md) record and correct the fixture-capture
 hazards found before commit: a cross-wired geometric context, a receipt that initially
 defined its own acceptance, and a pytest-only completion claim while static checks were
