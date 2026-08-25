@@ -117,11 +117,9 @@ Trump’s upper bound.
 Generation and complete replay each took `0.35` wall seconds.
 All thirteen mutations passed.
 The retained result is
-[`exp-017-h-041-stromquist-repaired-figure14.json`](../results/exp-017-h-041-stromquist-repaired-figure14.json)
-(`sha256:9351a248866c5c2c3ae68b8d6486ca7bdb0c4327e03710faa6fb4ee459ce5722`). The replay
-summary is
-[`exp-017-h-041-stromquist-repaired-figure14-replay.json`](../results/exp-017-h-041-stromquist-repaired-figure14-replay.json)
-(`sha256:97b10d3647db8bbafb9191744466816e7f8f4f2ac2631a0add27390bec74e685`).
+[`exp-017-h-041-stromquist-repaired-figure14.json`](../results/exp-017-h-041-stromquist-repaired-figure14.json).
+The replay summary is
+[`exp-017-h-041-stromquist-repaired-figure14-replay.json`](../results/exp-017-h-041-stromquist-repaired-figure14-replay.json).
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

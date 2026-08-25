@@ -115,7 +115,7 @@ session:
     fallback: null
     outcome: >-
       A source-bound second-order obstruction with two exhaustive owner-axis branches
-      and seven falsifiers was registered for exp-036.
+      and six falsifiers was registered for exp-036.
     evidence:
     - Exp-035 and BC-010 preserve the exact tangent result and the remaining nonlinear limitation.
     - Exp-036 froze the two branch contradictions, exact margins, source binding, controls, and refusal scope before target execution.
@@ -160,7 +160,7 @@ session:
     outcome: Exp-036 excluded the displayed direction from the true tangent cone in both possible nearby owner-axis branches.
     evidence:
     - The owner-4 excess is sqrt(2)/8 and the owner-3 gap is -1/4 with positive relative-angle margin sqrt(2)/2 - 1/4.
-    - All seven controls rejected and retained replay matched in 0.21 external wall-seconds.
+    - All six controls rejected and retained replay matched in 0.21 external wall-seconds.
     stop_reason: The criterion passed for the displayed direction; other non-sheet directions and component identity remain open.
     next_action: Enter W4 because the post-round strict handoff gate failed independently of the exact result.
   - workflow: process-review
@@ -389,7 +389,7 @@ session:
     operator: d168_mechanical_check
     status: completed
     outcome: >-
-      The small-n lane replays exp-033 with nullities 0/1/0 and six passing controls.
+      The small-n lane replays exp-033 with nullities 0/1/0 and five passing controls.
     evidence: [focused small-n gate output]
     files: [test.sh]
     checks: [bash syntax, gate list, small-n optimal-moduli lane, git diff check]
@@ -402,7 +402,7 @@ session:
     status: completed
     outcome: >-
       Static checks pass, and the small-n lane replays exp-034's dimension-two
-      certificate, four boundary fixtures, and five controls in two seconds.
+      certificate, four boundary fixtures, and four controls in two seconds.
     evidence: [frozen static-check output, focused small-n gate output]
     files: [tools/check_n5_angle_sheet.py, test.sh]
     checks: [Ruff, BasedPyright, py_compile, bash syntax, focused gate, git diff check]
@@ -603,7 +603,7 @@ session:
   - The post-exp-030 full normal gate passes all thirty steps in 47 wall-seconds.
   - >-
     The source-bound n=10 entry point reproduces the published Göbel pose, binds its
-    source URL and SHA-256, retains deterministic perturbations, and rejects changed
+    source URL and retained fixture path, retains deterministic perturbations, and rejects changed
     source or start data. All 36 historical events still replay. A one-second real run
     reaches a valid optimal-side endpoint and retains a typed producer time stop.
   - >-
@@ -617,7 +617,7 @@ session:
   - >-
     Exp-032 completes BC-009 in 0.92 seconds of generation plus replay. The exact n=3
     interval remains one component across four geometric keys, two contact signatures,
-    and three strata; the exact n=4 quotient is one point; all eight false-policy
+    and three strata; the exact n=4 quotient is one point; all seven false-policy
     mutations fail and all 16 f64 observations remain unresolved.
   - >-
     The post-exp-032 normal gate passes all 30 steps in 34 wall-seconds: 37 negative
@@ -634,7 +634,7 @@ session:
   - >-
     Exp-034 meets its frozen criterion in 0.27 seconds of generation plus replay. The
     exp-033 face lies in an exact two-parameter angle-and-slide sheet of
-    orientation-indexed LP optima, and all five controls fail as required.
+    orientation-indexed LP optima, and all four controls fail as required.
   - >-
     The first post-exp-034 normal gate stops after 31 seconds because two synopsis
     mutation controls retained pre-D-186 numeric anchors. D-187 records the miss; the
@@ -669,7 +669,7 @@ session:
     Exp-035 meets its frozen criterion in 0.28 wall-seconds of generation plus replay.
     Both exact owner-axis systems retain both tied support rows at A, the interior, and
     B; one non-sheet direction makes every active derivative zero at each stratum. All
-    seven controls reject. This is first-order evidence only, so nonlinear realization
+    six controls reject. This is first-order evidence only, so nonlinear realization
     and stationary-component identity remain unresolved.
   - >-
     The exp-035 integration diff caught D-196 before commit: a context-poor status edit
@@ -687,12 +687,12 @@ session:
     ref is restored without data loss or new lease machinery.
   - >-
     Exp-036 freezes the two exact second-order branch contradictions, the positive
-    relative-angle cusp margin, source-topology binding, seven controls, and separate
+    relative-angle cusp margin, direct predecessor replay, six controls, and separate
     30-second generation and replay caps. Static checks pass; the target has not run.
   - >-
     Exp-036 meets its frozen criterion in 0.21 external wall-seconds. The owner-4 branch
     has exact excess coefficient sqrt(2)/8; the owner-3 branch has gap coefficient -1/4
-    and positive relative-angle margin sqrt(2)/2 - 1/4. All seven controls reject and
+    and positive relative-angle margin sqrt(2)/2 - 1/4. All six controls reject and
     retained replay is identical. Only exp-035's displayed direction is excluded.
   - >-
     The first post-exp-036 strict gate stops after 55 seconds with 28 of 30 steps green.

@@ -21,7 +21,7 @@ hypothesis:
     direction: at most 3
     threshold: 3
   instrument: >-
-    tools/check_kingbird_svg.py imports the retained primary SVG, reconstructs every
+    cases.kingbird29.verify_svg imports the retained primary SVG, reconstructs every
     square, replays its source equations, independently checks all pairs with
     sqpack.verify, and counts quarter-turn orientation classes under declared intervals.
   instrument_ready: true

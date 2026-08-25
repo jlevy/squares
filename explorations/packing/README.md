@@ -192,7 +192,7 @@ The slice protocol, clocks, result routing, budgets, and stop rules are the camp
 runbook’s [bounded research cycle](campaign/README.md#the-bounded-research-cycle); which
 validation loop to run at each step is
 [`conventions.md`](conventions.md#10-what-the-gate-actually-enforces).
-[`campaign/runner.py`](campaign/runner.py) stays the smaller tool that executes
+[`packing-campaign`](src/sqpack/campaign/runner.py) stays the smaller tool that executes
 already-preregistered numerical rounds, never a second project manager.
 
 ## Layout
@@ -204,6 +204,8 @@ explorations/packing/
 ├── SYNOPSIS.md             The technical root: results, status, and the experiment
 │                           roll-up. Read this after the tutorial.
 ├── conventions.md          Every rule this directory runs on, and which are checked
+├── development.md          Python 3.14 setup, maturity boundaries, validation loops,
+│                           CLI policy, and the refactoring workflow
 ├── docs/project/           Reports, reviews, specs, postmortems, and historical
 │                           handoffs; active specs and the campaign agenda own priority
 ├── docs/project/research/  The six research reports (see below)
@@ -214,42 +216,26 @@ explorations/packing/
 │                           See frontier/README.md.
 ├── golden/                 Stored calibration endpoint snapshots for small PROVED
 │                           cases. Mathematical oracle checks are distinct from the
-│                           provisional discovery rows. Rebuilt by tools/golden_basins.py
+│                           provisional discovery rows
 ├── atlas/                  Schema for endpoint observations and provisional summaries
 ├── resources/              Local archive of the primary literature: papers and web
 │                           sources, each kept as original, cleaned .md, and raw
 │                           extraction. See resources/README.md.
-├── sqpack/
-│   ├── field.py            exact arithmetic in Q(alpha): +, -, *, /, exact zero test,
-│   │                       exact sign by rational interval arithmetic with bisection
-│   ├── verify.py           separating-axis validity check, generic over the scalar
-│   │                       type; exact or float backend, optional grid bucketing
-│   ├── quench.py           LP-in-cell quench: solve the cell, search the angles,
-│   │                       produce a coordinatewise-stationary endpoint candidate
-│   ├── canonical.py        provisional endpoint keys: D4- and relabel-invariant
-│   │                       geometry plus a contact graph canonical up to isomorphism
-│   ├── atlas.py            provisional endpoint-observation store and merge logic
-│   ├── closed_form.py      recognise a side as (p + q*sqrt(d))/r, or decline;
-│   │                       recognition alone proves neither convergence nor optimality
-│   └── packings/trump11.py Walter Trump's 1979 packing of 11 unit squares, exactly
-├── derive_field.py         derives the number field from the published polynomial
-├── verify_trump11.py       verify the packing and report what it took
-├── negative_control.py     show the verifier rejects bad packings, and where float64
-│                           fails
-├── bench.py                exact vs approximate cost, and scaling with algebraic degree
-├── lp_cell.py              rebuild the fixed-angle cell as a linear program, through
-│                           constraint rows sqpack/quench.py does not share
-├── run_quench.py           quench annealer output, both angle methods
-├── run_basin_entry.sh      perturb a known packing and measure the return
+├── src/sqpack/             Maintained package; dependencies flow downward only
+│   ├── field.py            E3 exact arithmetic and sign certification
+│   ├── verify.py           E3 independent exact/float packing verification
+│   ├── research/           E2 quench, canonical identity, atlas, and recognition tools
+│   ├── campaign/           E3 campaign state machine and generated ledger
+│   └── cli/                Stable, self-documenting command entry points
+├── cases/                  E1 retained code scoped to a named n, source, theorem,
+│                           hypothesis, or campaign smoke experiment
+├── devtools/               Developer-only checkers, renderers, and mutation controls
+├── benchmarks/             Explicit performance probes, outside the runtime package
+├── tests/                  Fast behavior, command, and architecture contracts
+├── sqsearch/               Tier-1 screening annealer (Rust)
 ├── defects.yaml            the defect logbook: every bug and record defect found here
 ├── defects.schema.yaml     its contract, enforced in the gate
 ├── defects.md              generated from defects.yaml; never edited by hand
-├── differential_test.py    search energy against the validity oracle, on near contacts
-├── run_baseline.sh         the baseline annealer sweep a round is run from
-├── tools/                  checkers and generators: the soundness perimeter, the
-│                           negative controls, the generated views and their drift gates
-├── sqsearch/               tier-1 screening annealer (Rust)
-├── test.sh                 run everything and check the expected results
 └── frankensim-probe/       two experiments run against Jeffrey Emanuel's FrankenSim,
                             asking whether its certified-arithmetic and RNG layers help
                             here (see that directory's README)
@@ -334,7 +320,11 @@ It turns the six reports into seven phases and a bead tree, one epic per phase;
 `tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md`
 shows the work items and `tbd ready` the unblocked subset.
 
-The standing review,
+The implemented engineering reorganization and its evidence are recorded in
+[Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md).
+[`development.md`](development.md) is the maintained operating guide for that design.
+
+The current standing review,
 [review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md),
 is the historical source of the initial experiment method and `H-001`–`H-015` register.
 Once those claims were codified, their registry artifacts became authoritative; use the
@@ -355,23 +345,22 @@ separation, floating point can certify a strict inequality but not an equality, 
 every tolerance that accepts the true contacts also accepts overlaps smaller than
 itself. The argument in full, with what it cost when ignored, is
 [Why Exactness Is Not Optional](SYNOPSIS.md#why-exactness-is-not-optional).
-`negative_control.py` demonstrates both failure modes.
+`cases.trump11.verifier_limits` demonstrates both failure modes.
 
 ### Use
 
-```bash
-python3 verify_trump11.py     # exact verification of s(11) <= 3.877083590022814...
-python3 negative_control.py   # exact rejects any overlap; float64 has a blind spot
-python3 bench.py              # timings
-python3 derive_field.py       # re-derive the field (needs sympy)
-./test.sh                     # the whole gate: the above plus the corpus, the
-                              # lint floor, the controls, and every drift check
+```shell
+uv run --frozen python -m cases.trump11.verify_exact
+uv run --frozen python -m cases.trump11.verifier_limits
+uv run --frozen python -m benchmarks.exact_verification
+uv run --frozen python -m cases.trump11.derive_field
+uv run --frozen --group dev packing-validate
 ```
 
-Only `derive_field.py` needs a third-party package (SymPy).
+Only `cases.trump11.derive_field` needs the optional symbolic dependency (SymPy).
 The verifier itself is standard library only.
 
-`verify_trump11.py` output:
+`cases.trump11.verify_exact` output:
 
 ```
 VALID: 11 squares, 55 pairs tested
@@ -401,13 +390,15 @@ print(verify_packing(squares, side, sign=exact_sign))
 ```
 
 The work is in the first line: recovering the field means reading the published exact
-data by hand, once per packing, and `sqpack/packings/trump11.py` is the worked example.
+data by hand, once per packing, and
+[`cases/trump11/packing.py`](cases/trump11/packing.py) is the worked example.
 
 **The result is a proof only if the field metadata is right, and the constructor does
 not yet check that** ([D-053](defects.md), open): verify irreducibility and single-root
 isolation yourself before trusting a verdict on a field you supplied.
 The [synopsis](SYNOPSIS.md#what-is-built) carries the full caveat; the module docstrings
-in [`sqpack/`](sqpack/) carry the API, including the fast non-certifying float backend.
+in [`src/sqpack/`](src/sqpack/) carry the maintained APIs, including the fast
+non-certifying float backend.
 
 ### Scope
 

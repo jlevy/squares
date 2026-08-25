@@ -12,11 +12,9 @@
 **Source:** https://www.walterstromquist.com/papers/squares2.pdf
 **Archived:** 2026-08-24
 **Pages:** 15
-**PDF SHA-256:** `3b9a8af2c4c2842ae1557c325605ddb0514f58c1d5ab8f9428516ddf909337d2`
 **Raw OCR:** Tesseract 5.5.0 English OCR of 300 dpi page images, preserved without
 manual correction in
-`stromquist-1984-packing-unit-squares-inside-squares-ii-ten-unit-squares.raw.md`
-(`abb3d8992f255f96b9ec46b9650258d28b1fcd288d16a7843ee0a1f105c0fdd5`).
+`stromquist-1984-packing-unit-squares-inside-squares-ii-ten-unit-squares.raw.md`.
 
 ## Result and Page Map
 

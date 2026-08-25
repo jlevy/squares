@@ -193,9 +193,9 @@ agenda:
     hypotheses: [H-002, H-021]
     budget: four preregistered perturbations; 15s each; 90s command cap
     entry: >-
-      The source-bound `gobel10-svg-v1` entry point replays the published pose, source
-      digest, deterministic perturbation, full start, and independent validity without
-      changing the quench criterion.
+      The source-bound `gobel10-svg-v1` entry point replays the retained published pose,
+      deterministic perturbation, full start, and independent validity without changing
+      the quench criterion.
     exit: proved-value return and complete receipts, or a typed retained failure
     bead: think-ouf0
     depends_on: [BC-003]
@@ -206,8 +206,8 @@ agenda:
       every endpoint, settles all 6,631 evaluations, and returns within 2.221e-15 of the
       proved side. This validates a local known-answer control, not basin frequency.
     artifacts:
-    - sqpack/packings/gobel10.py
-    - tools/basin_census.py
+    - cases/gobel10/packing.py
+    - cases/campaign_smoke/basin_events.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
   - id: BC-009
@@ -224,14 +224,14 @@ agenda:
     budget: completed in exp-032; 10 agent-minutes and 0.92 seconds generation plus replay
     entry: exact-model assignment and ambiguity-preserving fallback committed
     exit: >-
-      Exact n=3 interval and n=4 point replay; eight key, stratum, sample, scope,
-      digest, and f64-assignment mutations fail; unsupported observations stay unresolved.
+      Exact n=3 interval and n=4 point replay; seven key, stratum, sample, scope, and
+      f64-assignment mutations fail; unsupported observations stay unresolved.
     bead: think-a2v6
     depends_on: [BC-001, BC-002]
     next_evidence: classifier contract, positive fixtures, and negative mutations
     parallel_group: identity
     artifacts:
-    - tools/check_terminal_components.py
+    - cases/small_n/terminal_components.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
   - id: BC-010
@@ -271,7 +271,7 @@ agenda:
       all six exact small-n records replayed. Think-1582 is closed; think-imav owns the
       next bounded nonlinear-realization slice. Its independent instrument is committed
       at `f2d2e53`; exp-036 freezes exact owner-4 and owner-3 obstruction margins, source
-      topology, seven mutations, and separate 30-second generation and replay caps.
+      topology, six mutations, and separate 30-second generation and replay caps.
       Exp-036 meets that criterion in 0.21 external wall-seconds: exact owner-4 and
       owner-3 contradictions exclude exp-035's displayed direction from the true
       Bouligand tangent at all three strata. This is not local isolation; other
@@ -286,16 +286,16 @@ agenda:
       red; the recorded failure does not block a checkpoint merge with a green normal
       gate.
     artifacts:
-    - tools/check_n5_equal_side_face.py
+    - cases/n5/equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
-    - tools/check_n5_angle_sheet.py
+    - cases/n5/angle_sheet.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
-    - tools/check_n5_tangent_cones.py
+    - cases/n5/tangent_cones.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
-    - tools/check_n5_second_order_obstruction.py
+    - cases/n5/second_order_obstruction.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json
   - id: BC-011

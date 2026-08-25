@@ -713,7 +713,7 @@ opening the data — and it is safe because the tables are rendered by
 `tools/render_tables.py`, which `test.sh` re-checks.
 Use the structured form to query or plot; use these tables to read.
 
-<!-- BEGIN GENERATED: frontier-open (tools/render_tables.py) -->
+<!-- BEGIN GENERATED: frontier-open (devtools.render_research_tables) -->
 
 | `n` | best known `s(n)` | how | deg | best proved lower bound | from | gap |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -787,7 +787,7 @@ Use the structured form to query or plot; use these tables to read.
 
 **The solved cases, for contrast.**
 
-<!-- BEGIN GENERATED: frontier-solved (tools/render_tables.py) -->
+<!-- BEGIN GENERATED: frontier-solved (devtools.render_research_tables) -->
 
 | `n` | `s(n)` | established by | source |
 | --- | --- | --- | --- |
@@ -906,7 +906,7 @@ has ever been obtained non-constructively: to show `s(n) ≤ a` somebody must ex
 packing. The strategies below are ordered roughly from human to machine, and the table
 records which are known to have produced records.
 
-<!-- BEGIN GENERATED: search-strategies (tools/render_tables.py) -->
+<!-- BEGIN GENERATED: search-strategies (devtools.render_research_tables) -->
 
 | # | Strategy | Family | Mechanism | Produced records? |
 | --- | --- | --- | --- | --- |
@@ -965,7 +965,7 @@ Lower bounds are where the mathematics lives, and the inventory is strikingly sh
 Almost every proved value of `s(n)` rests on one idea — unavoidable point sets — with
 successive papers refining rather than replacing it.
 
-<!-- BEGIN GENERATED: proof-strategies (tools/render_tables.py) -->
+<!-- BEGIN GENERATED: proof-strategies (devtools.render_research_tables) -->
 
 | # | Strategy | Family | Mechanism | Used on this problem? |
 | --- | --- | --- | --- | --- |
@@ -1833,8 +1833,8 @@ Every item in the proof lane above exists because of this.
   Math. Hungar.* **35** 281–290, and confirm what it proves and how; it holds published
   priority for three values and no summary of this field describes its method.
 - [x] ~~Obtain Stromquist’s 1984 Wagner Associates memoranda I–III~~ — **resolved**: all
-  three PDFs are linked from the author’s publication page and are archived with hashes,
-  raw OCR, and page-checked reading aids.
+  three PDFs are linked from the author’s publication page and are retained with raw OCR
+  and page-checked reading aids; Git records changes to those repository-owned files.
   Memorandum III’s detailed proof is restricted to `0°/45°`; its p. 10 unrestricted
   `2 + (4/5)√5` statement is only an assertion and does not repair the printed 2003
   Figure 14 cover.
@@ -1878,7 +1878,7 @@ Three sources recorded as unavailable turned out to be freely downloadable when
 re-tested; Markót was open access at PMC, Roth–Vaughan was supplied on request, and
 Stromquist’s memoranda were linked directly from the author’s publication page.
 
-<!-- BEGIN GENERATED: sources-recovered (tools/render_tables.py) -->
+<!-- BEGIN GENERATED: sources-recovered (devtools.render_research_tables) -->
 
 | Source | How it was recovered |
 | --- | --- |
@@ -1897,7 +1897,7 @@ Ordered by how much rests on them.
 `Obstacle` records the mechanism, not a guess: `paywall` means a landing page was served
 in place of the PDF on a re-test, not that access was assumed to be blocked.
 
-<!-- BEGIN GENERATED: sources-unretrieved (tools/render_tables.py) -->
+<!-- BEGIN GENERATED: sources-unretrieved (devtools.render_research_tables) -->
 
 | Source | Year | Where | Obstacle | What rests on it |
 | --- | --- | --- | --- | --- |

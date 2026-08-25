@@ -54,7 +54,7 @@ experiment:
     outcome: criterion_met
     checked_by: >-
       exact Q(sqrt(2)) regeneration, independent retained-record replay, sqpack exact
-      endpoint validity, exact Gaussian rank, an exact LP dual, and six controls
+      endpoint validity, exact Gaussian rank, an exact LP dual, and five controls
   verdict:
     decision: accepted
     primary_criterion: >-
@@ -75,7 +75,7 @@ The round accepted because one declared container quarter-turn and square relabe
 bind both floating-point source poses to exact endpoints, both endpoints verify as
 packings, the full exact segment stays in one fixed-angle separating cell, and an exact
 dual proves that cell cannot use a smaller side.
-Generation and independent regeneration agree, and all six declared controls pass.
+Generation and independent regeneration agree, and all five declared controls pass.
 
 Write `r = sqrt(2)` and `S = 1 + 5r/4`. After the D4 action and relabelling, four
 squares coincide exactly.
@@ -105,8 +105,7 @@ observed n = 5 rows form a complete census.
 
 [`exp-033-h-023-n5-equal-side-face.json`](../results/exp-033-h-023-n5-equal-side-face.json)
 retains the exact endpoints, source alignment, common-cell certificate, rank data,
-determination scope, and controls
-(`sha256:396bc4c168a6f44692b9b2eb93bb84437b555f556084b20b85605580bbceb6b6`).
+determination scope, and controls.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

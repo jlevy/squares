@@ -8,21 +8,21 @@
     "alpert_et_al_2023": {
       "derived_match": true,
       "evidence": "Table 1 (page 2622); no n=4 f-vector is tabulated",
-      "pdf_sha256": "74bd2006610543d710f885908a69a65fa7e3c13657a3a22e1a63c9f202a3b6b6",
-      "raw_sha256": "9b2e4092c1ce74caf3fe89d798ec4c0c000d943d83fd087dfe9a3dd7b003be60",
+      "pdf": "resources/papers/alpert-bauer-kahle-macpherson-spendlove-2023-hard-squares-configuration-spaces.pdf",
       "reported_betti": [
         24,
         0
       ],
       "reported_f_vector": null,
-      "scope": "ordered axis-parallel C(n;2,2), not arbitrary rotations or the D4 quotient"
+      "scope": "ordered axis-parallel C(n;2,2), not arbitrary rotations or the D4 quotient",
+      "transcription": "resources/papers/alpert-bauer-kahle-macpherson-spendlove-2023-hard-squares-configuration-spaces.raw.md"
     },
     "alvarado_garduno_gonzalez_2025": {
       "derived_match": null,
-      "pdf_sha256": "f7f2845a2a7e579b65c56ac43b8e517a915f2fd89e6bcb3b0a7292e930d2f852",
-      "raw_sha256": "df9a79b00137e0fe678351a0682a237022182ce78b9882c7fbdd0c55ccf39ddd",
+      "pdf": "resources/papers/alvarado-garduno-gonzalez-2025-square-section-braid-groups.pdf",
       "reported_n3_type": "not used for this cell",
-      "scope": "unlabelled axis-parallel UC(pq-1,p x q) up to homotopy"
+      "scope": "unlabelled axis-parallel UC(pq-1,p x q) up to homotopy",
+      "transcription": "resources/papers/alvarado-garduno-gonzalez-2025-square-section-braid-groups.raw.md"
     },
     "novelty_scope": "none; literature comparison is incomplete while Plakhta remains unretrieved",
     "plakhta_2021": {

@@ -99,11 +99,11 @@ Five things, all in this branch, all with checks:
 
 | Change | Guards |
 | --- | --- |
-| [`tools/perimeter_test.py`](../../../tools/perimeter_test.py) — every component that can emit a packing, checked by `sqpack` through code it does not share | D-014’s whole class |
+| [`devtools.check_soundness_perimeter`](../../../devtools/check_soundness_perimeter.py) — every component that can emit a packing, checked by `sqpack` through code it does not share | D-014’s whole class |
 | Post-check inside the quench: a solution violating its own constraints is rejected, not returned | D-014 |
 | Solver tolerance pinned at its floor (10⁻¹⁰), and the perimeter held to the same bound so they cannot drift | D-014, D-021 |
 | Tolerances scaled to the quantity they govern; the line search capped in iterations | D-019 |
-| [`tools/negctl.py`](../../../tools/negctl.py) + [`tools/controls.yaml`](../../../tools/controls.yaml) — the negative controls checked in and run, rather than performed once and described | the checking apparatus itself |
+| [`devtools.run_negative_controls`](../../../devtools/run_negative_controls.py) + [`devtools/controls.yaml`](../../../devtools/controls.yaml) — the negative controls checked in and run, rather than performed once and described | the checking apparatus itself |
 
 The perimeter was replayed against the original defect: handed the configuration that
 “beat” the record, it rejects it and names the overlapping pair.

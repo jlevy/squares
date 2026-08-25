@@ -51,7 +51,7 @@ experiment:
     checked_by: >-
       tools/check_small_n_moduli.py: the common exact orientation forcing, all 4096
       separation choices, 96 consistent zero-cells, 24 exact packing states, orbit and
-      stabilizer checks, source-hash comparison, six mutation controls, and a separate
+      stabilizer checks, scoped literature comparison, six mutation controls, and a separate
       complete semantic replay
   verdict:
     decision: accepted
@@ -82,8 +82,7 @@ instead of attributing the independently derived 24-state count to the source.
 Generation took 0.33 wall seconds and complete replay took 0.32 seconds.
 All six known-answer mutations passed.
 The retained result is
-[`exp-015-h-032-n4-optimal-moduli.json`](../results/exp-015-h-032-n4-optimal-moduli.json)
-(`sha256:6f605fc82c2f521168b7eafb9a8811557501720ee53b8e0eb9cdd93aeaf2db28`).
+[`exp-015-h-032-n4-optimal-moduli.json`](../results/exp-015-h-032-n4-optimal-moduli.json).
 
 A valid rotated or continuously moving side-2 configuration rejects the classification.
 An incomplete orientation argument, state enumeration, group action, or exact replay

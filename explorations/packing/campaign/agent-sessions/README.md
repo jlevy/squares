@@ -87,8 +87,9 @@ terminal evidence, and next action; `tbd` owns the queue; and commits own integr
 state.
 A platform goal or watchdog should read and enforce this record rather than become
 a second, private source of truth.
-These documents are records, not schedulers.
-[`runner.py`](../runner.py) remains the executor for preregistered numerical rounds.
+These documents are records, not schedulers, and
+[`packing-campaign`](../../src/sqpack/campaign/runner.py) remains the executor for
+preregistered numerical rounds.
 The generated `session-report.md` is a numeric-runner batch handoff with a historical
 filename; it is not a versioned `session-NNN` agent-session artifact.
 

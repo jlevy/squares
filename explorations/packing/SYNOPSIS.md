@@ -9,7 +9,7 @@ what it is doing next.
 
 > Every number here also appears in a schema-validated artifact in this directory, or is
 > reproducible by a command given in the text, and the artifact is authoritative where
-> the two differ. `tools/check_synopsis.py` enforces that in the gate.
+> the two differ. `devtools.check_synopsis` enforces that in the gate.
 
 ## The Program at a Glance
 
@@ -98,8 +98,9 @@ blockers from the [defect log](defects.md), and numeric go/no-go from the
 [launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md).
 Do not copy a ready bead, dated throughput, or a candidate mathematical verdict into
 this table. Reconcile the table with [What Is Built](#what-is-built) and
-[Where This Stands](#where-this-stands), then run `tools/check_synopsis.py`; the checker
-keeps the marked block attached to these canonical owners without freezing its wording.
+[Where This Stands](#where-this-stands), then run
+`uv run --frozen python -m devtools.check_synopsis`; the checker keeps the marked block
+attached to these canonical owners without freezing its wording.
 
 <!-- END CURRENT-RESEARCH-READINESS -->
 
@@ -146,10 +147,12 @@ Nothing here duplicates what another owns.
 | [Idea board](campaign/ideas.md) | The whole idea space on one page, including dead ends |
 | [Ledger](campaign/ledger.md) | Generated roll-up of session workflow phases, agendas, series, registry, rounds, and effort |
 
-The code that produces the numbers: [`sqpack/verify.py`](sqpack/verify.py) decides
-validity exactly, [`sqpack/quench.py`](sqpack/quench.py) is the LP-in-cell quench,
-[`lp_cell.py`](lp_cell.py) is a second, independent implementation of the quench’s
-linear program, and [`sqsearch/`](sqsearch/) is the screening annealer.
+The code that produces the numbers: [`sqpack.verify`](src/sqpack/verify.py) decides
+validity exactly, [`sqpack.research.quench`](src/sqpack/research/quench.py) is the
+LP-in-cell quench,
+[`cases.trump11.independent_lp_cell`](cases/trump11/independent_lp_cell.py) is a second,
+independent implementation of the quench’s linear program, and [`sqsearch/`](sqsearch/)
+is the screening annealer.
 
 ## Workflow Entry Contracts
 
@@ -247,7 +250,7 @@ has three values rather than two.
 
 | Status | Means |
 | --- | --- |
-| **built** | Exists, runs, and is exercised by `./test.sh` |
+| **built** | Exists, runs, and is exercised by `packing-validate` |
 | **built, not admissible** | Runs and produces output, but that output cannot yet support the claim it looks like it supports. The blocking defect is named |
 | **unbuilt** | Documented, tracked as a bead, and not implemented. No result may assume it |
 
@@ -259,11 +262,11 @@ here.
 
 | Component | What it does |
 | --- | --- |
-| [`sqpack/field.py`](sqpack/field.py) | Exact arithmetic in `ℚ(α)`: exact zero test, exact sign by rational interval bisection |
-| [`sqpack/verify.py`](sqpack/verify.py) | Separating-axis validity, generic over the scalar type—exact or `f64` from one predicate |
-| [`sqpack/packings/trump11.py`](sqpack/packings/trump11.py) | The `n = 11` witness, exactly, in `ℚ(u)` |
-| [`derive_field.py`](derive_field.py) | Re-derives the degree-8 field from the published polynomial, factors over `ℚ`, and selects the root by isolating interval |
-| [`negative_control.py`](negative_control.py) | Demonstrates both float failure modes against the same packing |
+| [`sqpack.field`](src/sqpack/field.py) | Exact arithmetic in `ℚ(α)`: exact zero test, exact sign by rational interval bisection |
+| [`sqpack.verify`](src/sqpack/verify.py) | Separating-axis validity, generic over the scalar type—exact or `f64` from one predicate |
+| [`cases.trump11.packing`](cases/trump11/packing.py) | The `n = 11` witness, exactly, in `ℚ(u)` |
+| [`cases.trump11.derive_field`](cases/trump11/derive_field.py) | Re-derives the degree-8 field from the published polynomial, factors over `ℚ`, and selects the root by isolating interval |
+| [`cases.trump11.verifier_limits`](cases/trump11/verifier_limits.py) | Demonstrates both float failure modes against the same packing |
 
 **One caveat, and it is critical.** [D-053](defects.md) is open: `NumberField` documents
 an irreducible minimal polynomial and an interval containing exactly one real root, but
@@ -275,9 +278,11 @@ lands.
 
 ### The refinement layer—built, with a floor
 
-[`sqpack/quench.py`](sqpack/quench.py) is the LP-in-cell quench with class bracketing,
-and [`lp_cell.py`](lp_cell.py) is an independent second formulation of the same feasible
-set. Both are built and agree to `4.4e-16` on Trump’s cell.
+[`sqpack.research.quench`](src/sqpack/research/quench.py) is the LP-in-cell quench with
+class bracketing, and
+[`cases.trump11.independent_lp_cell`](cases/trump11/independent_lp_cell.py) is an
+independent second formulation of the same feasible set.
+Both are built and agree to `4.4e-16` on Trump’s cell.
 
 Three named limits travel with every number they produce:
 
@@ -313,9 +318,9 @@ the layer with the fewest built parts.
 
 | Component | Runs | Why its output is not yet the thing it looks like |
 | --- | --- | --- |
-| [`sqpack/canonical.py`](sqpack/canonical.py) | yes | Tolerance grouping and exact hash pairs do not form a stable equivalence relation ([D-048](defects.md)); canonicalization is factorial on sparse symmetric endpoints ([D-049](defects.md)) |
-| [`sqpack/atlas.py`](sqpack/atlas.py) | yes | Promotes non-converged stopping points and cannot reconstruct discovery order ([D-050](defects.md)); frequencies merge without regime or identity provenance ([D-051](defects.md)) |
-| [`tools/basin_census.py`](tools/basin_census.py) | yes | An admissible `BasinEvent/v3` event certifies the producer contract and a terminal outcome, not a terminal component—identity stays blocked ([D-034](defects.md), [D-048](defects.md)). The twelve historical v2 poses remain inadmissible under the since-fixed [D-165](defects.md) |
+| [`sqpack.research.canonical`](src/sqpack/research/canonical.py) | yes | Tolerance grouping and exact hash pairs do not form a stable equivalence relation ([D-048](defects.md)); canonicalization is factorial on sparse symmetric endpoints ([D-049](defects.md)) |
+| [`sqpack.research.atlas`](src/sqpack/research/atlas.py) | yes | Promotes non-converged stopping points and cannot reconstruct discovery order ([D-050](defects.md)); frequencies merge without regime or identity provenance ([D-051](defects.md)) |
+| [`cases.campaign_smoke.basin_events`](cases/campaign_smoke/basin_events.py) | yes | An admissible `BasinEvent/v3` event certifies the producer contract and a terminal outcome, not a terminal component—identity stays blocked ([D-034](defects.md), [D-048](defects.md)). The twelve historical v2 poses remain inadmissible under the since-fixed [D-165](defects.md) |
 
 **`distinct_basins` is a count of endpoint keys, not of connected terminal components.**
 The exact `n = 3` sliding family shows one connected optimal set producing many keys, so
@@ -377,15 +382,15 @@ results, not only instruments.
 
 | Tool | What it establishes |
 | --- | --- |
-| [`tools/check_stromquist_theorem2.py`](tools/check_stromquist_theorem2.py) | The printed `n = 11` lower-bound proof is false as printed (exp-016) |
-| [`tools/check_stromquist_repair.py`](tools/check_stromquist_repair.py) | A source-distinct repair certifies `s(11) ≥ 2 + 4/√5` exactly (**T-4**, exp-017) |
-| [`tools/check_trump_tangent.py`](tools/check_trump_tangent.py) | Trump’s pose is locally isolated in the anchored chart (exp-013) |
-| [`tools/check_small_n_moduli.py`](tools/check_small_n_moduli.py) | Exact optimal configuration spaces at `n = 3, 4` (exp-014, exp-015) |
-| [`tools/check_n5_equal_side_face.py`](tools/check_n5_equal_side_face.py) | Two retained equal-side `n = 5` poses share one exact fixed-angle optimal face (exp-033) |
-| [`tools/check_n5_angle_sheet.py`](tools/check_n5_angle_sheet.py) | That face lies in an exact two-parameter angle-and-slide sheet of optima (exp-034) |
-| [`tools/check_n5_tangent_cones.py`](tools/check_n5_tangent_cones.py) | Complete active first-order systems admit one displayed non-sheet direction (exp-035) |
-| [`tools/check_n5_second_order_obstruction.py`](tools/check_n5_second_order_obstruction.py) | That displayed direction is excluded from the true Bouligand tangent cone (exp-036) |
-| [`tools/check_kingbird_svg.py`](tools/check_kingbird_svg.py) | High-precision (160-digit) numerical reconstruction of the `n = 29` record source, refuting H-024’s three-class claim. Not an exact optimality certificate—the retained SVG is numerical, and exp-012 says so (exp-012) |
+| [`cases.stromquist.printed_cover`](cases/stromquist/printed_cover.py) | The printed `n = 11` lower-bound proof is false as printed (exp-016) |
+| [`cases.stromquist.repaired_cover`](cases/stromquist/repaired_cover.py) | A source-distinct repair certifies `s(11) ≥ 2 + 4/√5` exactly (**T-4**, exp-017) |
+| [`cases.trump11.tangent_cones`](cases/trump11/tangent_cones.py) | Trump’s pose is locally isolated in the anchored chart (exp-013) |
+| [`cases.small_n.optimal_moduli`](cases/small_n/optimal_moduli.py) | Exact optimal configuration spaces at `n = 3, 4` (exp-014, exp-015) |
+| [`cases.n5.equal_side_face`](cases/n5/equal_side_face.py) | Two retained equal-side `n = 5` poses share one exact fixed-angle optimal face (exp-033) |
+| [`cases.n5.angle_sheet`](cases/n5/angle_sheet.py) | That face lies in an exact two-parameter angle-and-slide sheet of optima (exp-034) |
+| [`cases.n5.tangent_cones`](cases/n5/tangent_cones.py) | Complete active first-order systems admit one displayed non-sheet direction (exp-035) |
+| [`cases.n5.second_order_obstruction`](cases/n5/second_order_obstruction.py) | That displayed direction is excluded from the true Bouligand tangent cone (exp-036) |
+| [`cases.kingbird29.verify_svg`](cases/kingbird29/verify_svg.py) | High-precision (160-digit) numerical reconstruction of the `n = 29` record source, refuting H-024’s three-class claim. Not an exact optimality certificate—the retained SVG is numerical, and exp-012 says so (exp-012) |
 
 **Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
 LP duals as unavoidable-set generators, and any Lean formalization.
@@ -402,7 +407,7 @@ re-measuring and builds only what the profile names.
 
 ### Reading the gate
 
-`./test.sh` runs thirty steps.
+`packing-validate` runs thirty-one steps.
 A green gate means every *built* component behaves as its checks describe; it says
 nothing about the unbuilt ones, and it does not upgrade an inadmissible output.
 
@@ -553,8 +558,9 @@ so passing it says nothing about strategy at `n = 11`.
 **Quench.** Two senses, both in use, and they do not conflict.
 As a *map*, in Stillinger and Weber’s sense: the function sending a configuration to the
 local optimum a deterministic refinement carries it to.
-As a *component*, [`sqpack/quench.py`](sqpack/quench.py): this project’s implementation
-of that map—solve the LP in the current cell, move the angles, re-solve, until fixed.
+As a *component*, [`sqpack.research.quench`](src/sqpack/research/quench.py): this
+project’s implementation of that map—solve the LP in the current cell, move the angles,
+re-solve, until fixed.
 Say “the quench map” where the distinction matters.
 
 **Polish.** Refinement *within* the basin a configuration is already in—driving the side
@@ -728,8 +734,8 @@ carries one.
 
 **Soundness perimeter.** The rule that every component emitting a configuration is
 checked by `sqpack` through code it does not share, enforced by
-`tools/perimeter_test.py`. A component joins it in the same change that introduces
-it—not doing so is how [D-014](defects.md) was possible.
+`devtools.check_soundness_perimeter`. A component joins it in the same change that
+introduces it—not doing so is how [D-014](defects.md) was possible.
 
 ## The Problem
 
@@ -880,9 +886,9 @@ listed here so the dependencies of this program are explicit.
 | Id | Statement | Tier | Where it lives | Reproduce with |
 | --- | --- | --- | --- | --- |
 | **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **exact** | `sqpack` | `python3 verify_trump11.py` |
-| **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated at **polished** | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack/quench.py`](sqpack/quench.py) | `uv run --frozen python lp_cell.py` |
+| **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated at **polished** | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack.research.quench`](src/sqpack/research/quench.py) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
 | **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run --frozen python lp_cell.py` |
-| **T-4** | The source-distinct replacement `G=(.8,1.85) → G'=(.79,1.85)` restores the complete Figure 13 localization, A-triple forcing, repaired Figure 14 unavoidability, and `3+9` capacity chain, proving `s(11) ≥ 2 + 4/√5` | **exact** | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md), confirmed by [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | `uv run --frozen python tools/check_stromquist_repair.py --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json` |
+| **T-4** | The source-distinct replacement `G=(.8,1.85) → G'=(.79,1.85)` restores the complete Figure 13 localization, A-triple forcing, repaired Figure 14 unavoidability, and `3+9` capacity chain, proving `s(11) ≥ 2 + 4/√5` | **exact** | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md), confirmed by [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | `uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json` |
 
 **T-1** is also an independent check of the published record: the 33 digits on the
 *Squares in Squares* record page agree with the value computed here from the field.
@@ -1001,7 +1007,7 @@ at fixed angles, called it “the quench”, and retracted a correct finding whe
 
 **“Quench” names all three stages**—solve the cell, re-read the cell to a fixed point,
 refine the angles. The cell solve alone is one third of it and answers a different
-question. `tools/regression_test.py` pins this discrimination under D-029.
+question. `devtools.check_regressions` pins this discrimination under D-029.
 
 ### Two implementations, on purpose
 
@@ -1010,8 +1016,8 @@ forms:
 
 | Implementation | Separation rows per pair | Total rows at `n = 11` |
 | --- | --- | --- |
-| [`sqpack/quench.py`](sqpack/quench.py) | 1, from projected half-extents | small |
-| [`lp_cell.py`](lp_cell.py) | 16, one per ordered corner pair | 1,056 = 16 × (11 + 55) |
+| [`sqpack.research.quench`](src/sqpack/research/quench.py) | 1, from projected half-extents | small |
+| [`cases.trump11.independent_lp_cell`](cases/trump11/independent_lp_cell.py) | 16, one per ordered corner pair | 1,056 = 16 × (11 + 55) |
 
 Both are correct formulations of the same feasible set, and neither shares
 constraint-assembly code with the other.
@@ -1203,8 +1209,8 @@ distinct terminal component.
 cd explorations/packing
 python3 verify_trump11.py       # T-1: exact verification over Q(u)
 uv run --frozen python lp_cell.py        # T-2 and T-3, through independent constraint rows
-uv run --frozen python run_quench.py     # the campaign's own quench, both angle methods
-./test.sh                       # all of the above, plus every other gate
+uv run --frozen python -m cases.campaign_smoke.quench_experiment
+uv run --frozen --group dev packing-validate
 ```
 
 `lp_cell.py` asserts every figure quoted above, including agreement with `H-019`’s
@@ -1536,11 +1542,11 @@ archive beside it.
 | [exp-029](campaign/series/series-000-smoke-and-calibration/experiments/exp-029-h-021-n8-basin-event-v3.md) | 8 | positive control | H-021 | BasinEvent/v3 semantic replay | 4 retained/valid; 1 admissible; one typed unsettled stop and two time-budget stops | **baseline** |
 | [exp-030](campaign/series/series-000-smoke-and-calibration/experiments/exp-030-h-021-n9-basin-event-v3.md) | 9 | positive control | H-021 | BasinEvent/v3 semantic replay | 1 retained/valid typed time-budget stop; full command 21.36 s | **baseline** |
 | [exp-031](campaign/series/series-000-smoke-and-calibration/experiments/exp-031-h-002-n10-source-return.md) | 10 | positive control | H-002 | source-bound BasinEvent/v3 replay | 4/4 admissible; max proved-side error `2.221e-15` | **baseline** |
-| [exp-032](campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md) | 3 | positive control | H-021 | exact component-policy replay | one n=3 interval; one n=4 point; 8/8 false policies rejected | **baseline** |
-| [exp-033](campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md) | 5 | target | H-023 | exact fixed-angle face test | one segment; nullities `0/1/0`; six controls pass | **accepted** |
-| [exp-034](campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md) | 5 | target | H-023 | exact angle-and-slide sheet | dimension at least two; four fixtures and five controls pass | **accepted** |
-| [exp-035](campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md) | 5 | target | H-023 | exact full-angle active systems | non-sheet direction at A/interior/B; seven controls pass | **accepted** |
-| [exp-036](campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md) | 5 | target | H-023 | exact second-order branch obstruction | displayed direction excluded at A/interior/B; seven controls pass | **accepted** |
+| [exp-032](campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md) | 3 | positive control | H-021 | exact component-policy replay | one n=3 interval; one n=4 point; 7/7 false policies rejected | **baseline** |
+| [exp-033](campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md) | 5 | target | H-023 | exact fixed-angle face test | one segment; nullities `0/1/0`; five controls pass | **accepted** |
+| [exp-034](campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md) | 5 | target | H-023 | exact angle-and-slide sheet | dimension at least two; four fixtures and four controls pass | **accepted** |
+| [exp-035](campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md) | 5 | target | H-023 | exact full-angle active systems | non-sheet direction at A/interior/B; six controls pass | **accepted** |
+| [exp-036](campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md) | 5 | target | H-023 | exact second-order branch obstruction | displayed direction excluded at A/interior/B; six controls pass | **accepted** |
 
 ### Cost and provenance
 
@@ -1577,11 +1583,11 @@ archive beside it.
 | exp-029 | 4 seeds, 10 s each | 38.004 s | 5 m | criterion | `69c6008` |
 | exp-030 | 1 seed, 20 s | 20.062 s | 5 m | criterion | `56bf66c` |
 | exp-031 | 4 seeds, 15 s each | 10.337 s | 5 m | criterion | `dab797c` |
-| exp-032 | exact n=3/n=4 models + 8 mutations | 0.92 s | 10 m | criterion | `d3d4ace` |
-| exp-033 | one exact common-cell face + six controls | 0.24 s | 15 m | criterion | `26360f1` |
-| exp-034 | one exact parameter sheet + five controls | 0.27 s | 10 m | criterion | `329b848` |
-| exp-035 | six exact owner matrices + seven controls | 0.28 s | 20 m | criterion | `aa63cf4` |
-| exp-036 | two exact branch obstructions + seven controls | 0.21 s | 20 m | criterion | `f2d2e53` |
+| exp-032 | exact n=3/n=4 models + 7 mutations | 0.92 s | 10 m | criterion | `d3d4ace` |
+| exp-033 | one exact common-cell face + five controls | 0.24 s | 15 m | criterion | `26360f1` |
+| exp-034 | one exact parameter sheet + four controls | 0.27 s | 10 m | criterion | `329b848` |
+| exp-035 | six exact owner matrices + six controls | 0.28 s | 20 m | criterion | `aa63cf4` |
+| exp-036 | two exact branch obstructions + six controls | 0.21 s | 20 m | criterion | `f2d2e53` |
 
 ### What the 36 rounds jointly establish
 
@@ -1644,8 +1650,8 @@ Median one-event keying costs 0.001074 seconds versus 20.062 seconds of quench w
 canonicalization remains negligible at n=9. This one censored event is a performance
 control, not an n=9 landscape sample.
 The blind random-start size ladder stops after n=9. A source-bound n=10 entry point now
-reconstructs the published Göbel pose, binds its source digest, replays deterministic
-perturbations, and retains typed failure.
+reconstructs the published Göbel pose from the retained fixture, records its source URL,
+replays deterministic perturbations, and retains typed failure.
 A one-second smoke run reaches a valid endpoint at the proved side but times out before
 producer convergence.
 Exp-031 then converges on all four preregistered perturbations: every endpoint validates
@@ -1723,7 +1729,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 229 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 232 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -1731,8 +1737,8 @@ and checked in the gate.
 | soundness | 64 | asserted something false about the mathematics |
 | validity | 65 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 74 | recorded something its own evidence contradicts |
-| robustness | 19 | did not finish, or finished only by luck |
-| performance | 7 | worked, but cost far more than it should |
+| robustness | 21 | did not finish, or finished only by luck |
+| performance | 8 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -1740,7 +1746,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught twelve defects in 229, and no soundness defect ever.**
+**The automated gate has caught fourteen defects in 232, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1974,9 +1980,9 @@ stress analysis, not another rank count.
 No hour-scale lane is promoted without a known-answer response, independent validity,
 and a result that changes a decision.
 
-**The normal checkpoint is green; the strict unattended-handoff gate is not.** Recent
-exact-tree receipts pass all 30 fast-path steps in 33–35 wall-seconds, including seven
-exact small-`n` replays and all 55 negative controls.
+**The normal checkpoint is green; the strict unattended-handoff gate is not.** The
+engineering stack’s final post-merge run passes all 31 normal-gate steps in 82
+wall-seconds, including seven exact small-`n` replays and all 56 negative controls.
 The first deep regeneration reproduced one unsettled `n=4` proposal and an `n=10`
 `1.503e-10` pair-row residual.
 [D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders

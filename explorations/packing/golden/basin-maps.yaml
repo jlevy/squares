@@ -1,6 +1,6 @@
 golden:
-  note: Rebuilt by tools/golden_basins.py. Sides to 10 decimals, coarser than the polished tier's 1e-11
-    floor (D-021); sub-floor gaps are zero.
+  note: Rebuilt by devtools.check_golden_basins. Sides to 10 decimals, coarser than the polished tier's
+    1e-11 floor (D-021); sub-floor gaps are zero.
   how_to_read_a_basin_row: A row is a numerical endpoint-key cluster, not automatically a local optimum
     or connected basin. converged_frequency records only the quench terminator; a short closed form is
     supporting reconstruction evidence, not a convergence oracle. distinct_basins is therefore a row count.

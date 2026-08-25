@@ -24,7 +24,7 @@ hypothesis:
     metric: five independently replayed source, geometry, and finite-count implications
     direction: every implication, strict inequality, symmetry reduction, and boundary case reproduces the published proof
   instrument: >-
-    tools/check_stromquist_theorem2.py binds the printed source tuple, exactly replays
+    cases.stromquist.printed_cover binds the printed source tuple, exactly replays
     strict Figure 13 and Figure 14 escape witnesses, checks the conditional capacity
     logic, and regenerates retained evidence. A false Figure 14 node terminally rejects
     this conjunction; the checker does not claim a universal Figure 13 cover.
