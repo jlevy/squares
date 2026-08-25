@@ -159,7 +159,7 @@ Strict mode cannot be combined with a partial selection and fails on every skip.
 Every validation subprocess has a finite 600-second default deadline.
 Override it with `--timeout-seconds SECONDS` or `PACKING_VALIDATE_TIMEOUT_SECONDS`;
 values must be positive and finite, and an explicit smaller per-call timeout still wins.
-Mutation- control commands retain their 120-second default deadline and may declare a
+Mutation-control commands retain their 120-second default deadline and may declare a
 smaller `timeout_seconds` in `devtools/controls.yaml`. A timeout terminates and reaps
 the whole process group, including a child that ignores the first termination signal.
 Each command also gets an empty bytecode-cache root, so rapid same-size source mutations

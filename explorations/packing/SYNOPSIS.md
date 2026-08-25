@@ -1801,14 +1801,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 319 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 321 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 74 | asserted something false about the mathematics |
 | validity | 81 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 120 | recorded something its own evidence contradicts |
+| bookkeeping | 122 | recorded something its own evidence contradicts |
 | robustness | 35 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
@@ -1818,7 +1818,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty defects in 319, and no soundness defect ever.**
+**The automated gate has caught forty defects in 321, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1828,7 +1828,7 @@ contiguity, integration, mutation-anchor, reconciliation, or known-answer checks
 That is the pattern, not an exception: gates are good at the mechanical classes and have
 never once caught the mathematics being wrong.
 
-106 fixes left no regression check behind.
+107 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
@@ -1981,8 +1981,8 @@ mappings.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Ninety-eight fixes left no regression check behind, and that list has already predicted
-a recurrence once. The
+107 fixes left no regression check behind, and that list has already predicted many
+recurrences. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
 relative to what they govern, a discovery treated as a defect until an independent layer

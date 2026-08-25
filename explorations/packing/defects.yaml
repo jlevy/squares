@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 319
+count: 321
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8183,3 +8183,51 @@ defects:
     guidance; the README-link mutation control rehearses the failure.
   bead: think-m8kv
   recorded_in: SYNOPSIS.md
+- id: D-320
+  title: A second unprotected-fix aggregate escaped the single-match drift check
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one merged checkpoint
+  severity: medium
+  status: fixed
+  recurrence_of: D-305
+  what: >-
+    SYNOPSIS.md stated the unprotected-fix aggregate in two places. The D-305 repair
+    corrected the defect-log section to the derived 106, but a later postmortem
+    paragraph still said ninety-eight; check_synopsis accepted the document because its
+    pattern required only one matching occurrence, so the stale duplicate stayed green
+    through every gate and both CI architectures.
+  consequence: >-
+    The section that draws the postmortem's conclusions understated the unprotected-fix
+    debt by eight while the drift check reported the aggregate as reconciled.
+  fix: >-
+    Correct the stale sentence to the derived count and make check_synopsis validate
+    every occurrence of the aggregate phrase instead of accepting the first match.
+  regression: uv run --frozen python -m devtools.check_synopsis
+  bead: think-8mkk
+  recorded_in: SYNOPSIS.md
+- id: D-321
+  title: The timeout documentation split another compound adjective after its hyphen
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: one merged checkpoint
+  severity: low
+  status: fixed
+  recurrence_of: D-301
+  what: >-
+    The new production-timeout paragraph in development.md begins a sentence with
+    "Mutation- control commands", splitting the compound modifier the same way D-301
+    had just repaired in the session receipt rules.
+  consequence: >-
+    The sentence parses with a dangling "Mutation-" fragment; the timeout guidance
+    itself was unaffected.
+  fix: Rejoin the compound as "Mutation-control commands".
+  regression: none
+  bead: think-7456
+  recorded_in: development.md

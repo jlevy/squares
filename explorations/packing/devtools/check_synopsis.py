@@ -464,14 +464,17 @@ def check_defects(text: str) -> list[str]:
     # that predicts what comes back -- and it is the one that drifted: the synopsis said
     # "Six" while the generated view said seven, which is D-028 recurring in the document
     # D-028 was about. The same rule as the flattering-direction claim applies: derive it,
-    # do not assert it.
+    # do not assert it. Every occurrence must state the derived count, not just one:
+    # D-320 hid a stale duplicate behind a correct first statement for a full merge.
     unprotected = sum(
         1 for d in defects if d["regression"] == "none" and d["status"] != "outstanding"
     )
-    if not re.search(rf"\b({unprotected}|{spell(unprotected)}) fixes left no", text, re.I):
+    stated = re.findall(r"([\w-]+) fixes left no", text, re.I)
+    accepted = {str(unprotected), spell(unprotected).lower()}
+    if not stated or any(claim.lower() not in accepted for claim in stated):
         problems.append(
             f"SYNOPSIS.md: does not state the unprotected-fix count ({unprotected}) "
-            'in the form "<n> fixes left no regression check behind"'
+            'in the form "<n> fixes left no regression check behind" at every occurrence'
         )
 
     problems.extend(

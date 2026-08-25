@@ -72,9 +72,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 319", "count: 20"]
+  replace: ["count: 321", "count: 20"]
   run: python3 -m devtools.validate_schemas
-  expect: "count 20 != 319 entries"
+  expect: "count 20 != 321 entries"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -141,9 +141,9 @@ controls:
 
 - name: synopsis - gate detector aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["gate has caught forty defects in 319", "gate has caught thirty-nine defects in 319"]
+  replace: ["gate has caught forty defects in 321", "gate has caught thirty-nine defects in 321"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "gate-detector aggregate is not 40 of 319"
+  expect: "gate-detector aggregate is not 40 of 321"
 
 - name: synopsis - hypothesis-status aggregate drifting from the ledger
   file: SYNOPSIS.md
@@ -164,7 +164,7 @@ controls:
   replace: ["    to coincide with an in-progress round.\n  regression: none\n  bead: think-5zwm\n",
             "    to coincide with an in-progress round.\n  regression: 'a check that does not exist'\n  bead: think-5zwm\n"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "does not state the unprotected-fix count (105)"
+  expect: "does not state the unprotected-fix count (106)"
 
 - name: gate - strict handover skips deep golden regeneration
   file: src/sqpack/cli/validate.py
