@@ -16,7 +16,6 @@ experiment:
   subject:
     label: exact fixed-side nonlinear realization of the n = 5 R4 and R5 rays
     engine: n = 5 rotating-release checker 0.1.0
-    engine_commit: 199de54
     assurance: verified
     method: exact-algebraic
     host_system: macOS arm64, Apple M1 Pro
@@ -37,8 +36,6 @@ experiment:
     runs_per_condition: 1
     interleaved: false
     operator: openai-codex
-    commit: 199de54
-    dirty: false
     entry_point: explorations/packing/cases/n5/rotating_release_paths.py
     command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python -m
@@ -71,9 +68,10 @@ experiment:
       bind the six derivatives exactly to exp-038, including A's slide correction; prove
       every wall and pair feasible over the full interval by exact rational-polynomial
       signs with all owner and tied-feature cases present; pass independent exact
-      fixtures; regenerate positive stresses for both owner branches; replay identically;
-      reject every declared control; and refuse component, terminal, second-order, -W,
-      mixed-angle, basin, census, and unequal-side claims
+      fixtures; exhaust the exact zero-axis inventory; regenerate and cancel positive
+      stress identities for both owner branches; replay identically; reject all twenty
+      named controls; and refuse component, terminal, second-order, -W, mixed-angle,
+      basin, census, and unequal-side claims
     reason: >-
       The exact six-case criterion is frozen before target execution; no target result
       has yet been measured.
@@ -95,8 +93,9 @@ s = sigma 4u/(4+u^2)
 ```
 
 Thus its angle is represented algebraically without storing `atan`, while its angular
-derivative at zero is `sigma`. Move the centers affinely by the shared positional part
-of R4 and R5:
+derivative at zero is `sigma`. The checker must prove `c^2+s^2 = 1` identically and
+prove the exact feature-sign guards needed to keep every absolute-value branch fixed on
+the full interval. Move the centers affinely by the shared positional part of R4 and R5:
 
 ```text
 A:        dy0 = +u
@@ -120,25 +119,53 @@ For each of those six cases, the checker must:
   fixtures;
 - clear the positive denominator `4+u^2` and retain the finite numerator sign table;
 - prove independently checked exact packings at `u = delta/4` and `u = delta/2`;
+- prove that the full zero separating-axis inventory contains exactly `(0,4):owner4:a-`,
+  `(2,4):owner4:a+`, `(3,4):owner3:a+`, and `(3,4):owner4:a+` throughout each path, with
+  no missing or extra zero axis;
 - rebuild both active owner branches for contact `(3,4)`, retain both tied feature rows
-  in each branch, and cancel the exact stress identity with strictly positive
-  multipliers over the interval; and
+  in each branch, and cancel every exact coefficient of the resulting rational stress
+  identity with strictly positive multipliers over the interval; and
 - regenerate and replay the retained record identically.
 
 Two nonlinear margins are mandatory fixtures for the universal proof.
-Square 1’s selected upper-x and lower-y features acquire slack
+Square 1’s selected upper-x and lower-y features have slack
 
-`u^2(u+2)/(2(4+u^2)) > 0`,
+`u^2(u+2)/(2(4+u^2)) >= 0`,
 
-and contact `(1,4)` acquires owner-4 `a-` slack
+and contact `(1,4)` has owner-4 `a-` slack
 
-`r u^2/(4+u^2) > 0`.
+`r u^2/(4+u^2) >= 0`.
 
-The controls must reject a sign-label swap, a missing A slide or added B slide, a
-changed square-4 displacement, omission of either sign, stratum, owner branch, or tied
-feature, promotion of a sampled fixture to a universal proof, a perturbed numerator or
-stress multiplier, a false claim that either mandatory slack stays active, an overlong
-interior interval, and any forbidden scope promotion.
+Both are zero at `u = 0` and must be proved strictly positive for `0 < u <= delta/2`.
+For R5, the small nonlinear wall slack belongs to the `x-upper:-` and `y-lower:-`
+features while the `+` features open at first order; for R4 those roles reverse.
+The checker must retain that exact sign-to-feature map, including the other feature’s
+additional slack `4u/(4+u^2)`.
+
+The stress support and weights are frozen before measurement.
+Square 2’s four lower-wall rows have weight `r/4`, square 3’s two upper-wall rows have
+weight `r/2`, and contact `(2,4)` has weight one.
+On the owner-3 branch for contact `(3,4)`, the tied-row weights are
+
+```text
+w+ = 5/4 - r(1+u)/2
+w- = -1/4 + r(1+u)/2.
+```
+
+On the owner-4 branch both tied-row weights are `1/2`. The checker must prove each
+weight strictly positive, with owner-3 lower bound `r/2 - 1/4 > 0`; derive the rational
+numerator degree bound from the source rows, affine centers, and these affine weights;
+and cancel every pose-column numerator coefficient while retaining side coefficient `r`.
+Fixtures at finitely many `u` values are not this identity proof.
+
+Exactly twenty controls must reject: a non-unit orientation formula; an R4/R5 sign-label
+swap; a missing A slide; an added B slide; a changed square-1 center displacement; a
+changed square-4 displacement; a false R3/R6 midpoint identity; omission of R4; omission
+of R5; omission of one stratum; omission of one owner branch; omission of one tied
+feature; promotion of sampled fixtures to a universal proof; a perturbed sign numerator;
+a perturbed stress multiplier; a false claim that either mandatory slack remains active;
+an overlong interior interval; a missing zero axis; a false extra zero axis; and any
+forbidden scope promotion.
 Positive controls replay exp-039’s R3 and R6 paths through the independent exact packing
 checker.
 
@@ -152,8 +179,11 @@ or bound unequal-side clearance.
 Failure of this candidate path is not an obstruction to R4 or R5. If any exact sign or
 branch remains undecided at the phase deadline, the round must retain the finite case
 and numerator list and end unresolved.
-A true obstruction would require a separately preregistered exhaustive second-order-jet
-argument over every nearby owner and feature branch.
+A proved six-case feasible continuation is retained as its own determination even if the
+stronger stress determination remains unresolved; only both determinations together can
+accept this round.
+A true obstruction would require a separately preregistered exhaustive
+second-order-jet argument over every nearby owner and feature branch.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
