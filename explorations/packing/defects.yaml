@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 301
+count: 304
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -7746,3 +7746,73 @@ defects:
   regression: none
   bead: think-wunq
   recorded_in: campaign/agent-sessions/README.md
+- id: D-302
+  title: Bui transcription changed the square-reduction divisor into a product
+  date: '2026-08-25'
+  layer: docs
+  class: soundness
+  direction: conservative
+  detected_by: review
+  latent_for: three days in the local literature archive
+  severity: high
+  status: fixed
+  what: >-
+    The cleaned transcription of Bui's Proposition 7 rendered the reduction term printed
+    as x divided by sqrt(m) on PDF page 16 as x times sqrt(m). The unedited extraction
+    also lost the division bar, so comparing only the two text files could not catch it.
+  consequence: >-
+    The displayed choice m=x^(4/5) no longer balanced the transcription's terms, making
+    the central x^(3/5) derivation internally false and blocking exact reproduction.
+  fix: >-
+    Read the rendered source page, restore x/sqrt(m) in the cleaned transcription, add
+    an explicit source-check annotation, and update the archive annotation census.
+  regression: none
+  bead: think-hp6c
+  recorded_in: resources/papers/square-packing-x06-wasted-area-2508.04603.md
+- id: D-303
+  title: Bui transcription omitted the quantified width hypothesis
+  date: '2026-08-25'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: three days in the local literature archive
+  severity: high
+  status: fixed
+  what: >-
+    The cleaned Proposition 7 omitted the printed condition 0<nu<beta+1/2 while retaining
+    w in Theta(m^nu), leaving nu unquantified and the proposition apparently broader than
+    the source statement.
+  consequence: >-
+    A strategy could invoke the reduction for a width regime that the cited proposition
+    does not cover and mistakenly attribute that stronger claim to the paper.
+  fix: >-
+    Restore the condition from rendered PDF page 16, annotate the extraction omission,
+    and update the archive annotation census without changing the raw extraction.
+  regression: none
+  bead: think-gzoc
+  recorded_in: resources/papers/square-packing-x06-wasted-area-2508.04603.md
+- id: D-304
+  title: McClenagan's Section 3 proof uses a contradictory inequality chain
+  date: '2026-08-25'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: three days in the local literature archive
+  severity: high
+  status: contained
+  what: >-
+    Archived PDF page 7 first states d1+d2>d and then concludes d>d1+d2>DB=1 in the
+    same proof of theta'<=theta. The contradiction is printed in the source and appears
+    identically in both cleaned and raw text; it is not a transcription repair.
+  consequence: >-
+    The cited paragraph does not prove the required feasibility inequality as written,
+    so this campaign cannot count the angle-reversal step as independently verified or
+    use it for finite transfer without a separate geometric argument.
+  fix: >-
+    Annotate the source-level gap in the archive and H-037, prohibit reliance on the
+    step, and leave the intended inequality or geometric repair for independent audit.
+  regression: none
+  bead: think-486e
+  recorded_in: campaign/hypotheses/H-037-asymptotic-waste-exponent.md

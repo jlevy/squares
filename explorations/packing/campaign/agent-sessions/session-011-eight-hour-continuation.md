@@ -350,7 +350,7 @@ session:
       Execute frozen order 13 under think-ykt7: reproduce from the local primary source
       one O(x^(3/5)) construction primitive or error balance and identify the exact point
       where its asymptotic argument fails to transfer to a finite public-parent packing.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Order 12 retained its failed receipt control and stopped at D-300 without a retry;
@@ -371,12 +371,36 @@ session:
     fallback: >-
       Record the missing lemma or parameter relation under think-ykt7 and rotate to the
       first evidence-earned bounded successor without changing H-035 or H-037.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Inspect H-035, H-037 and their archived primary-source dependencies.
+    outcome: >-
+      Reproduced Bui's Proposition 7 balance exactly enough to recover m=x^(4/5) and
+      W(x)=O(x^(3/5)) for beta=nu=3/4 and epsilon=0. The source check exposed two
+      cleaned-transcription errors and a separate contradictory inequality in
+      McClenagan's printed Section 3 proof. No finite or new exponent claim is made.
+    evidence:
+    - >-
+      Rendered Bui PDF page 16 prints 0<nu<beta+1/2 and the reduction error
+      O(m^beta log^epsilon(m)+x/sqrt(m)); the cleaned archive had omitted the former and
+      changed the latter divisor into a product. D-302 and D-303 repair and disclose both.
+    - >-
+      Substitution beta=3/4 and epsilon=0 gives m=x^(4/5), m^(3/4)=x^(3/5), and
+      x/sqrt(m)=x^(3/5). H-037 distinguishes this checked algebra from a proof of the
+      source's stated reduction.
+    - >-
+      The first finite-transfer blocker is the absent independently verified public-parent
+      corpus above n=100. Effective constants, a finite x0, integer synchronization,
+      exact square counts and complete boundary accounting remain additional obligations.
+    - >-
+      Rendered McClenagan PDF page 7 itself prints d1+d2>d and then d>d1+d2>DB=1.
+      D-304 contains this source-level proof gap pending an independent geometric repair.
+    stop_reason: >-
+      The exact source-bound deliverable and first transfer boundary were retained at the
+      twenty-minute checkpoint; the wider finite construction and proof repair remain
+      separate bounded work.
+    next_action: >-
+      Commit this source-validation checkpoint, then rotate to the first dependency-ready
+      frozen successor without treating either construction as independently proved.
   primary_bead: think-gszk
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 270
     max_cycles: 48
@@ -399,7 +423,12 @@ session:
       emits exact search-side pair counts, but seeded equivalence, independent total
       reconciliation, overhead, pair-budget enforcement, and downstream summary
       retention remain unmeasured or unbuilt.
-    after: null
+    after: >-
+      Seven bounded cells landed across efficiency, insight, correctness, infrastructure,
+      process and source mathematics: the pair meter has exact equivalence controls, one
+      Trump branch has an exact but non-generalized core, validation has an opt-in timeout
+      primitive, receipt failure is retained, and the x^(3/5) source balance now replays
+      with three newly disclosed literature defects.
   delegations:
   - task: Design the smallest defensible unloaded-host A/B benchmark for the pair meter.
     operator: /root/meter_benchmark_design
@@ -644,6 +673,57 @@ session:
     elapsed_quality: unavailable
     next_action: Treat the first missing field as a failed control rather than rerunning it.
     phase: 6
+  - task: Reproduce Bui's Proposition 7 parameter balance from the local primary source.
+    operator: /root/asymptotic_balance_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Recovered the general exponent and logarithm balance and the beta=nu=3/4,
+      epsilon=0 specialization; distinguished the printed proposition from its omitted proof.
+    evidence:
+    - The source balance is m^beta(log m)^epsilon+x/sqrt(m), not x times sqrt(m).
+    files: []
+    checks: [Read-only cleaned, raw and PDF-bound mathematical analysis.]
+    uncertainty: The source states but does not prove the square-to-trapezoid reduction.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preserve the checked algebra in H-037 without promoting a finite claim.
+    phase: 7
+  - task: Identify the first exact boundary blocking finite transfer of the asymptotic constructions.
+    operator: /root/finite_transfer_boundary
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Found the absent verified parent corpus first, then enumerated the effective-constant,
+      synchronization, exact-count and boundary obligations hidden by asymptotic notation.
+    evidence:
+    - McClenagan PDF page 7 contains a contradictory inequality in the angle-reset proof.
+    files: []
+    checks: [Read-only hypothesis, source and frontier-scope analysis.]
+    uncertainty: The intended geometric inequality may be repairable but was not inferred.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Audit the source proof gap independently under think-486e.
+    phase: 7
+  - task: Apply the mechanically verified literature-archive transcription annotations.
+    operator: /root/archive_transcription_repairs
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Corrected and annotated two Bui extraction errors, disclosed McClenagan's source
+      contradiction, and synchronized both archive annotation counts without editing raw files.
+    evidence:
+    - The cleaned Bui and McClenagan files now point readers to the exact rendered PDF pages.
+    files:
+    - resources/README.md
+    - resources/papers/square-packing-x06-wasted-area-2508.04603.md
+    - resources/papers/mcclenagan-2026-optimally-packing-large-square.md
+    checks: [Mechanical diff review and git diff check.]
+    uncertainty: The McClenagan source contradiction remains unresolved rather than silently repaired.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Keep detailed timing reconstruction outside the live loop, using agent logs later.
+    phase: 7
   outputs:
   - campaign/agent-sessions/session-011-eight-hour-continuation.md
   - campaign/agent-sessions/README.md
@@ -653,6 +733,9 @@ session:
   - tests/test_validation_cli.py
   - defects.yaml
   - defects.md
+  - resources/README.md
+  - resources/papers/square-packing-x06-wasted-area-2508.04603.md
+  - resources/papers/mcclenagan-2026-optimally-packing-large-square.md
   checks:
   - PR 29 final head eb1473a passes Linux in 3m04s and macOS in 4m31s.
   - uv run --directory explorations/packing --frozen packing-ledger check
@@ -663,10 +746,15 @@ session:
   - >-
     Order 12 yielded session 72108 and recovered both streams plus exit 7, but D-300
     invalidates the receipt because both absolute timestamp fields are empty.
-  stop_reason: null
+  - >-
+    Order 13 reproduces Bui's beta=3/4 balance from rendered PDF page 16 and contains
+    McClenagan's contradictory Section 3 inequality under D-304.
+  stop_reason: >-
+    Session 011 closes at its order-13 twenty-minute checkpoint to preserve a clean
+    commit. The original campaign wall clock continues in a successor session.
   next_action: >-
-    Execute frozen order 13's source-bound asymptotic derivation; do not infer a finite
-    improvement, launch numerical search or resume the H-042 wider run.
+    Rotate after the order-13 checkpoint; do not infer a finite improvement, launch an
+    unbounded proof audit or resume the H-042 wider run.
 ---
 # Session 011 — Eight-Hour Portfolio Continuation
 

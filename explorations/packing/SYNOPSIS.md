@@ -1768,12 +1768,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 301 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 304 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 70 | asserted something false about the mathematics |
+| soundness | 73 | asserted something false about the mathematics |
 | validity | 78 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 112 | recorded something its own evidence contradicts |
 | robustness | 32 | did not finish, or finished only by luck |
@@ -1781,11 +1781,11 @@ and checked in the gate.
 
 Two observations the log exists to make.
 
-**Fifty-eight of the seventy soundness defects pointed in the *flattering* direction**,
+**Sixty of the seventy-three soundness defects pointed in the *flattering* direction**,
 where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught thirty-four defects in 301, and no soundness defect
+**The automated gate has caught thirty-four defects in 304, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -1795,10 +1795,12 @@ contiguity, integration, mutation-anchor, reconciliation, or known-answer checks
 That is the pattern, not an exception: gates are good at the mechanical classes and have
 never once caught the mathematics being wrong.
 
-103 fixes left no regression check behind.
+105 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
+[D-304](defects.md) contains a contradictory inequality in McClenagan’s printed Section
+3 proof; the campaign does not rely on that step pending an independent repair.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-283 remains open in the current robustness inventory.
