@@ -1,6 +1,6 @@
 # Research: Infrastructure for Square-Packing Exploration
 
-**Date:** 2026-08-22 (last updated 2026-08-22)
+**Date:** 2026-08-22 (last updated 2026-08-25)
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
 
@@ -11,20 +11,28 @@
 This document decides what to build.
 It synthesizes the two prior tooling studies —
 [algorithms and tooling](research-2026-08-22-square-packing-algorithms-and-tooling.md),
-which established that no purpose-built exact verifier exists and that the right
-architecture is a filtered exact-predicate kernel over a real algebraic number field,
-and
+which found no purpose-built exact verifier in the surveyed ecosystem and argued for a
+filtered exact-predicate kernel over a real algebraic number field, and
 [the FrankenSim study](research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md),
 which found most of the pieces of that architecture already built for a different
 purpose — and turns them into a concrete build order.
+
+**Current implementation note (2026-08-25).** The repository now ships the first
+purpose-built slice of that design: `Witness/v1`, exact rational and real-algebraic
+separating-axis checks, certified number-field preconditions, and a public
+`packing-witness` command.
+The broad filtered kernel, automatic source-corpus import, and a general interval
+existence certifier remain unbuilt.
+The design below is therefore a rationale and roadmap, not a claim that every described
+layer is still missing.
 
 The design principle is Alan Kay’s: **simple things should be simple, complex things
 should be possible.** For this project that has a precise reading.
 Simple is *“is this packing valid?”* — one call, no setup, and an answer before you have
 finished reading the line.
-Complex is *“run 65,536 annealing chains with reproducible randomness and exact-verify
-every basin that clears a threshold”* — which should be reachable by composing the same
-primitives, not by writing a second system.
+Complex is *“run 65,536 annealing chains with reproducible randomness and formally check
+every candidate that clears a threshold”* — which should be reachable by composing the
+same primitives, not by writing a second system.
 
 The single design decision that makes both work is that **the geometric predicate is
 written once and is generic over its scalar type.** If making a check exact requires a
@@ -238,7 +246,7 @@ Replacing it would be optimizing the wrong thing.
 **Use FLINT wherever arithmetic is in a loop.** Measured above at 177–578×, growing with
 degree. Two access routes:
 
-- `python-flint` (verified working here at 0.9.0) exposes `fmpq_poly` and `arb`, which
+- `python-flint` (confirmed working here at 0.9.0) exposes `fmpq_poly` and `arb`, which
   is everything the field layer needs.
   Note that **Calcium’s `ca_t` is not exposed** in 0.9.0 — `hasattr(flint, "ca")` is
   `False` — although FLINT’s generic-rings interface reaches it.
@@ -382,10 +390,9 @@ Items 1–3 are cheap and unlock everything else; 4–5 are the actual research 
 
 1. **L4 corpus parser, then L1 exact kernel, in that order.** The parser is agent-tier
    Python and turns the catalogue into data; the kernel makes that data checkable.
-   Together they deliver the first thing nobody has: every record independently
-   verified. *Acceptance:* `sqpack.verify(corpus["s(11)"])` is one line and returns a
-   decision, not a tolerance; and the same call works at degree 62 without a different
-   code path.
+   Together they aim to make every supported record independently auditable.
+   *Acceptance:* `sqpack.verify(corpus["s(11)"])` is one line and returns a decision,
+   not a tolerance; and the same call works at degree 62 without a different code path.
 2. **L0 in Rust, generic over `Scalar`, with the Python verifier kept as the oracle.**
    The existing pure-Python implementation becomes the differential-test reference:
    every Rust predicate result must match it on the whole corpus.
@@ -453,7 +460,7 @@ measurement; the prior studies’ own methodology sections cover their sources.
   Operands are **dense** random elements with rational coefficients, which is the honest
   case; an earlier sparse trial understated the pure-Python cost by an order of
   magnitude and is not reported.
-  Minimal polynomials are random with a verified sign-change interval, since arithmetic
+  Minimal polynomials are random with a checked sign-change interval, since arithmetic
   cost, not irreducibility, is what is being measured.
 - **Library availability.** `python-flint` 0.9.0 installed and checked directly:
   `fmpq_poly` and `arb` present, `ca` **absent** — the Calcium claim in this document is

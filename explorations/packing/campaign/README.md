@@ -38,9 +38,10 @@ informative”.
 
 ## Subject, and the instance axis
 
-The **subject** is the instrument and the precision the numbers were taken at.
-Never extrapolate across it: an `f64_screen` number and an `exact` number are different
-kinds of fact.
+The **subject** records the instrument, assurance, method, actual precision, tolerance,
+and arithmetic regime.
+Never extrapolate from a numerical result to a formal claim, or from one numerical
+regime to another.
 
 The **instance axis is `n`**, and the standing cells have different jobs:
 
@@ -48,7 +49,7 @@ The **instance axis is `n`**, and the standing cells have different jobs:
 | --- | --- | --- | --- |
 | 10 | **positive control** (machinery only) | `3 + 1/√2 = 3.70710678…`, proved | Known answer, and *not* the grid. But its mechanism is a 45° tilt, so passing it proves the machinery and says nothing about finding an oblique record — see the caveat below. |
 | 11 | **target** | `3.87708359002281…`, Trump 1979 | The smallest open case and a degree-8 side construction; exp-013 proves qualitative local isolation, while a radius and global optimality remain open. |
-| 12 | **open-case calibration** | `4`, the trivial grid | The 4×4 grid is the standing best, not a proved optimum. A valid lower side would be a discovery and must enter exact promotion. |
+| 12 | **open-case calibration** | `4`, the trivial grid | The 4×4 grid is the standing best, not a proved optimum. A numerically lower side would be a candidate and must enter formal promotion before it changes the verified frontier. |
 | 16 | **proved not-below control** | `4`, proved | A reported side below `4` is known to be invalid. This is the valid replacement for the old `n=12` guard. |
 | 17 | **mechanism-matched calibration** | `4.67553009360455`, Bidwell 1998, still open | The nearest case whose record uses genuinely *oblique* structure — the primary SVG records `0°`, `+39.80496°`, and `−36.62379°`, so two unequal non-trivial orientations against a grid frame. The only cell here that speaks to record-*finding* rather than machinery. |
 
@@ -77,78 +78,86 @@ One rule settles which is true:
 > **Once codified, the registry artifact is canonical.** The review’s register entry
 > becomes historical. Beads track build work, never scientific claims.
 
-So a claim’s criterion, tier, kill condition and status are read from the artifact and
-nowhere else; a bead may say “build the instrument for H-002” but never “H-002 is
-confirmed”. All fifteen entries from the standing review are now codified.
+So a claim’s criterion, required assurance, kill condition, and status are read from the
+artifact and nowhere else; a bead may say “build the instrument for H-002” but never
+“H-002 is confirmed”.
+All fifteen entries from the standing review are now codified.
 Later ids carry campaign-native claims and explicit open questions.
 
 ## The Bounded Research Cycle
 
-The campaign keeps a broad portfolio, while one W6 phase per independently tracked
-session runs one narrow slice at a time.
-Other workflows use the same discipline but leave different artifacts; their contracts
-live in the synopsis rather than in this experiment runbook.
+The campaign keeps a broad portfolio, while one W6 round addresses one narrow registered
+question at a time. Other workflows use the same discipline but leave different
+artifacts; their contracts live in the synopsis rather than in this experiment runbook.
 This distinction protects both creativity and completion: ideas are cheap to capture,
 but only a preregistered slice may consume the current clock.
-The phase declares `research-loop` and one primary focus from the packing program’s
+Routine work declares `research-loop`, its objective, expected artifact, and focused
+check where the round is already tracked.
+An escalated session phase also declares one primary focus from the packing program’s
 [four operating focuses](../README.md#operating-principles).
-A focus change starts a new phase even when the workflow remains W6. The other three
-principles continue to constrain and contribute to the work.
+A material focus change starts a new phase even when the workflow remains W6; a brief
+change of emphasis does not.
+The other three principles continue to constrain and contribute to the work.
 
 The protocol is agent-neutral.
 Its authoritative state is the repository: the hypothesis and idea board say what may be
 tried, `tbd` owns dependencies and tracked work, the active launch agenda freezes the
-executable portfolio when bead state is under reconciliation, and an
-[agent-session artifact](agent-sessions/README.md) says what this session is trying and
-when it stops. Experiments, defects, commits, and bead notes preserve what happened.
-Conversation history, a native goal, and a watchdog are useful controllers, but none is
-the only copy of a decision or result.
+executable portfolio when bead state is under reconciliation, and experiments, defects,
+commits, and bead notes preserve what happened.
+An [agent-session artifact](agent-sessions/README.md) records what the session is
+trying, when it stops, and its outer-loop recovery state only when the escalation
+criteria apply. Conversation history, a native goal, and a watchdog are useful
+controllers, but none is the only copy of a decision or result.
 
-### Default Clocks
+### Supervision Defaults for Escalated Sessions
 
-An active agent-session artifact also records one absolute start and deadline bounded by
-its wall budget; a new phase cannot reset them.
-Ordinary phases end before the finalization reserve; one explicitly designated final
+These clocks are defaults for long autonomous supervision, not requirements for a
+routine round or mathematical accept rules.
+An active agent-session artifact records one absolute start and deadline bounded by its
+wall budget; a new phase cannot reset them.
+Ordinary phases end before the finalization reserve, and one explicitly designated final
 phase may use that reserve for reconciliation.
-It may tighten these defaults before work starts.
-It may not relax them after seeing a result.
+Choose a cadence proportional to command cost, recovery cost, and uncertainty before the
+work starts. A checkpoint may change later supervision cadence prospectively when
+retained evidence shows the original cadence is unsuitable; it may never change a
+round’s hypothesis, criterion, regime, or scientific budget after seeing the result.
 A long numerical or proof computation keeps its separately preregistered round timebox,
 while the agent still checkpoints its supervision work on this cadence.
-The active phase records its expected output, validation command, kill condition,
-fallback, start, and deadline.
+An escalated active phase records its expected output, validation command, stopping
+condition, fallback, start, and deadline.
 Outcome and evidence are recorded only when it closes.
 
 | Clock | Default | Required outcome at the boundary |
 | --- | ---: | --- |
-| Orientation | 10 minutes | Name the workflow, focus, primary bead, question, output, validation command, kill condition, fallback, start, and deadline; otherwise record the ambiguity and switch |
+| Orientation | 10 minutes | Confirm the workflow, question, owning artifact, focused check, and the fuller session fields when escalation applies |
 | Evidence checkpoint | 20 minutes | Produce a passing check, minimized failure, retained measurement, source-bound derivation, or explicit blocked result; prose about continued investigation is not evidence |
 | Active slice | 30 minutes | Integrate a coherent checkpoint, or stop and preserve the partial work with its exact limitation; continuation requires a newly stated slice and clock |
 | Finalization reserve | 15 minutes | Stop new work before the session deadline; reconcile artifacts, defects, beads, generated views, commits, pushes, and the next action |
 | Research command | Declared per hypothesis | Terminate or return at its own wall-clock bound and retain its stopping reason and resumable state |
 
-A dirty worktree may span one active slice only.
-At the boundary, commit a coherent result; if the work is not coherent enough to commit,
-stash it with a descriptive name and put the exact reproducer, limitation, and next
-decision in the bead.
-Raw results that already answer a preregistered question are committed even when the
-answer is negative or invalid.
+A durable handoff must leave a coherent checkpoint.
+Commit coherent work; when interruption makes that impossible, preserve the partial
+state with its reproducer, limitation, and next decision in the owning bead or escalated
+session record. Raw results that already answer a preregistered question are committed
+even when the answer is negative or invalid.
 
 ### One Slice
 
 1. **Select.** Re-screen the portfolio and choose the highest-information ready action,
    not merely the most recent idea.
-2. **Declare.** Confirm the active workflow and record the focus, bead, question,
-   promised output, narrow validation command, wall budget, kill condition, fallback,
-   start, and deadline before acting.
+2. **Declare.** Confirm the workflow, question, promised artifact, narrow validation,
+   and scientific budget before acting.
+   Add focus, outer clock, stopping condition, and fallback when the session escalation
+   criteria apply.
 3. **Execute.** Take the smallest action that can answer the question.
    Delegate independent mechanical work with a disjoint scope and the same clock.
    The delegation inherits the coordinating phase unless it opens its own independently
    tracked session.
-4. **Checkpoint.** At twenty minutes, preserve concrete evidence.
+4. **Checkpoint.** At the declared evidence checkpoint, preserve concrete evidence.
    A result may be positive, negative, invalid, or blocked; each advances the record if
    its evidence is replayable.
-5. **Stop or renew.** At thirty minutes, integrate, stash, or abandon the slice.
-   Never extend it merely because the answer feels close.
+5. **Stop or renew.** At the declared slice boundary, integrate, preserve, or abandon
+   the slice. Never extend it merely because the answer feels close.
    A successor slice must state what new fact makes another bounded attempt worthwhile.
 6. **Record once.** Route an idea to the idea board or a new `H-NNN`, a measurement to
    raw data and `exp-NNN`, an implementation task to its bead and owning workflow, and
@@ -166,10 +175,12 @@ or outranks the queue under an explicit re-screen.
 At a slice boundary, either renew W6 under a newly stated question or close the phase.
 A renewal closes the old phase and opens another with a changed objective, a new clock,
 and the new evidence that earns another slice; workflow and focus may stay the same.
-Close the active phase before changing purpose or focus: record status, evidence, stop
-reason, and next action in the agent-session artifact.
-A promoted, novel, disputed, or otherwise high-risk claim receives an independent W2
-audit. A routine guarded result whose preregistered criterion and independent replay
+Close the active phase before changing purpose or material focus.
+Record status, evidence, stop reason, and next action in the agent-session artifact when
+one exists; otherwise use the experiment and owning bead without creating a duplicate
+record.
+A promoted, novel, disputed, or otherwise high-risk claim receives an independent
+W2 audit. A routine guarded result whose preregistered criterion and independent replay
 already decide its claim may proceed directly to W3 or another W6 slice.
 Generating a successor hypothesis enters W3; reviewing a process failure enters W4;
 optimizing a measured bottleneck enters W5; and building or repairing a reusable
@@ -185,17 +196,17 @@ The ordered phase history is the account of what the session actually did.
 
 ### Supervisors and Watchdogs
 
-A supervisor is optional; the bounded protocol is not.
+A supervisor and its default cadence are optional; the registered round contract is not.
 When available, use a native long-running goal to maintain the session objective and a
 periodic watchdog to inspect repository evidence.
 The watchdog checks elapsed wall time, the latest experiment or commit, the active bead,
 and the agent-session next action.
-After twenty minutes without evidence it requests a checkpoint; after thirty minutes it
-requires the current slice to stop or be restated.
+At the declared evidence checkpoint it requests concrete evidence; at the declared slice
+boundary it requires the current slice to stop or be restated.
 It never changes a hypothesis, criterion, threshold, or mathematical verdict.
 
-An agent without native goal or watchdog support follows the same rules with a monotonic
-clock and bounded command execution.
+An agent without native goal or watchdog support uses bounded command execution and the
+smallest retained state needed for recovery.
 A human, cron job, CI task, or small shell/Python supervisor may poll the same durable
 state. This makes the safety property portable: replacing Codex with Claude, another
 coding agent, or a human changes the driver, not the research contract.
@@ -231,33 +242,38 @@ or hypothesis is complete.
 The generated ledger shows agenda states alongside experiments so the next agent does
 not need conversation history to find the next ready cell.
 
-## The three tiers
+## Assurance and Method
 
-A number’s tier is recorded as `subject.precision`, and it decides what the number may
-claim.
+Every experiment records assurance separately from the method and arithmetic that
+produced it.
 
-| Tier | What it is | May claim |
+| Assurance | What it means | May claim |
 | --- | --- | --- |
-| `f64_screen` | [`sqsearch`](../sqsearch/) — annealing that minimises the enclosing side, ~40M moves/s | a candidate was proposed |
-| `polished` | **LP-in-cell quench** ([H-002](hypotheses/H-002-lp-in-cell-polish.md)) — fix angles and axis assignment, solve the cell’s linear program | a numerical endpoint candidate valued to solver precision; a candidate worth classifying and certifying |
-| `exact` | [`sqpack`](../README.md#exact-verification) — separating-axis over the packing’s own algebraic number field | **validity, and only here: a record** |
+| `numerically-checked` | A finite computation under the recorded method, precision, rounding, and tolerance | The scoped numerical outcome and a candidate for further work |
+| `verified` | An exact check, rigorous certificate, or complete proof with discharged preconditions | The scoped formal conclusion; `beat_record: true` only when a verified feasible witness beats the comparator |
 
-The middle tier is numerical polish, not exact certification.
-For fixed angles and a fixed separating-axis assignment, minimising `s` is a **linear
-program**, so the quench can reproduce the cell optimum to the floating-point solver’s
-precision. Exact value and terminal-component identity require separate evidence.
+Source reports live in the frontier’s `reported` lane rather than experiment assurance.
+Methods include `numerical-f64`, `numerical-multiprecision`, `interval-certified`,
+`exact-algebraic`, and the proof methods defined in the synopsis.
+A result records the precision actually used; neither a multiprecision library nor a
+small tolerance makes a calculation verified.
+
+**Polish is an operation, not an assurance class.** For fixed angles and a fixed
+separating-axis assignment, minimizing `s` is a linear program, so the quench can
+produce an endpoint candidate at the floating-point solver’s recorded precision.
+Exact value and terminal-component identity require separate evidence.
 That is what turns “where the annealer stopped” into “which cell this is” — the
 difference between a tolerance-dependent artifact of the cooling schedule and a
 discrete, nameable, exactly-valued object.
 Basin identity, the census, the atlas and every descriptor depend on it, which is why it
 is the registry’s top priority and not yet built.
 
-The tier boundary is not bureaucracy.
+The assurance boundary is mathematical, not administrative.
 A record packing has pairs touching at *exactly* zero separation — 14 of the 55 pairs in
 Trump’s — and no floating-point check can decide those: a tolerance loose enough to
 accept true contact is loose enough to accept a small overlap.
-That is the whole reason `sqpack` exists, and it is why `beat_record: true` may only be
-written at `precision: exact`.
+That is the reason `sqpack` exists, and it is why `beat_record: true` requires
+`assurance: verified`.
 
 ## The metric vector
 
@@ -266,19 +282,19 @@ Recorded on every round; the role says what each may conclude.
 
 | Metric | Role | Source |
 | --- | --- | --- |
-| `best_side` | **outcome** | smallest valid side found, `record` shape against the frontier’s standing best |
+| `best_side` | **outcome** | smallest numerically accepted or formally verified side found, with assurance carried by the subject |
 | `outcome` | **outcome** | `determination`: generic `criterion_met` / `criterion_missed`, or the search-specific `beat_record`, `reached_basin`, `near_miss`, `no_progress`, `invalid` |
 | `pair_tests` | cost | **the budget currency**; tiers S/M/L = `1e9`/`1e11`/`1e13`. Machine-independent, unlike wall clock |
 | `moves`, `seconds` | cost | engine summary; reported alongside as a courtesy |
-| `overlap` | **guard** | total penetration depth of the reported packing; a non-zero value at screen tier invalidates the run |
+| `overlap` | **guard** | numerical penetration depth under the declared screen arithmetic; a non-zero value invalidates the run but zero does not make it formal |
 | `selftest_passed` | **guard** | `sqsearch --selftest` before any run is recorded |
 | control cells | **guard** | `n=10` must land within `1e-2`; proved `n=16` must not go below `4` |
 | `restarts`, `accepted`, `moves_per_sec` | mechanism | engine summary |
 | spread of `best_side` across seeds | mechanism | five seeds per cell, always |
 
 `reached_basin` means `best_side − standing_best < 1e-4`. That is a **numerical proxy**
-for “found the right combinatorial class”, not a proof of it; confirming the class means
-comparing the contact graph, which is tier-2 work.
+for “found the right combinatorial class”, not a proof of it; confirming the class needs
+a separately scoped structural check or formal certificate.
 Rounds that claim `reached_basin` should say which they mean.
 
 ## The accept rule
@@ -291,8 +307,9 @@ A candidate strategy is **accepted** when all of:
    where the control does not.
 2. **Evidence.** Five seeds per cell minimum, median and min–max range both reported.
    Overlapping ranges mean *no detectable effect*, never “a small win”.
-3. **Validity.** Every reported configuration has `overlap == 0` at screen tier, and the
-   engine selftest passed in the same invocation.
+3. **Numerical guard.** Every reported configuration has `overlap == 0` under the
+   declared screen arithmetic, and the engine selftest passed in the same invocation.
+   This decides whether the numerical round is usable; it does not verify feasibility.
 4. **Guards.** The `n=10` positive control lands within `1e-2`; the proved `n=16`
    not-below control never reports a side under `4`; every stored pose passes an
    independent geometry check; and deliberately invalid fixtures are rejected in the
@@ -485,7 +502,7 @@ The ones specific to this campaign:
 
 - Do not change the accept rule, the tolerances, the metric vector, or the control
   cells.
-- Do not record `beat_record: true` at any precision below `exact`.
+- Do not record `beat_record: true` unless `assurance: verified`.
 - Do not edit `../frontier/` to match a search result.
   The frontier records the literature; a genuine improvement is a separate, deliberate,
   human-reviewed change.
@@ -520,7 +537,7 @@ The campaign is the *experiment record*; the toolkit that produces the numbers i
 specified in
 [plan-2026-08-22-minimal-packing-toolkit.md](../docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md),
 whose Phase 2 (the quench spine) is what makes basins nameable and this record’s
-`polished` tier real.
+numerical refinement record reproducible.
 The hypothesis registry here is the codified form of the
 [standing review’s register](../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register);
 `H-001`–`H-015` are its now-codified ids, and this campaign’s own claims start at

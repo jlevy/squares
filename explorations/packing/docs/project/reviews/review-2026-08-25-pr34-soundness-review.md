@@ -13,8 +13,9 @@
 This is a W2 factual-review pass: every mathematical claim the PR promotes was replayed
 or independently rederived, the new engineering was read and its tests run, and the
 record layer was audited against its own generated views.
-Findings carry stable IDs; the two defects found are recorded as D-320 and D-321 in
-`defects.yaml` and all six findings carry beads under epic `think-ymbi`.
+Findings carry stable IDs; the two defects found are recorded as D-326 and D-327 in
+`defects.yaml` (renumbered from D-320 and D-321 after the frontier contract landed
+`main`’s D-320 through D-325) and all six findings carry beads under epic `think-ymbi`.
 
 ## Verdict
 
@@ -23,11 +24,13 @@ discipline caught almost everything before this review did.
 What slipped through are two small bookkeeping defects — one of which is the log’s own
 most-recorded failure class recurring inside the sentence that warns about it.**
 
-The headline claims were verified, not read: the H-042 branch-0 certification reproduces
-exactly on an independent host, both Bui transcription repairs match the archived PDF,
-the McClenagan source contradiction is real and its repair is correct identity by
-identity, and the new subprocess-timeout primitive passes its 21 tests with the leak
-scenarios it claims to cover.
+The headline claims were independently checked, not read — and only the first is
+**verified** in this directory’s reserved sense: the H-042 branch-0 certification is an
+exact `ℚ(u)` certificate that replays exactly on an independent host; both Bui
+transcription repairs were compared line by line against the archived PDF; the
+McClenagan source contradiction is real and its repair was rederived identity by
+identity, then swept numerically; and the new subprocess-timeout primitive passes its 21
+tests with the leak scenarios it claims to cover.
 The full validation gate is green locally (32 of 32 steps) and CI is green on both
 architectures.
 
@@ -74,7 +77,7 @@ The H-037 balance reproduction is algebraically right: with `β = ν = 3/4` and 
 **McClenagan Section 3 repair (D-304, D-310, `07f3af3`).** The contradiction is
 confirmed in the archived PDF itself: page 7 prints `d₁ + d₂ > d` and
 `d > d₁ + d₂ > DB = 1` in one paragraph, so the flag “source error, not transcription
-error” is correct. The equation-only repair in H-037 was verified symbolically end to
+error” is correct. The equation-only repair in H-037 was rederived symbolically end to
 end: from (2.2), `tan((φ+θ)/2) = p/(2−p)`; with `ψ + θ = φ` (which does follow from
 substituting (2.2) into (2.5)), `tan(ψ/2) = p(1−p)/(2−p+p²)`; (3.2) gives
 `tan(ψ+θ′) = 2t/(1−t) = p(1−p)/(1−p+p²)`; and `p − tan(ψ+θ′) = p³/(1−p+p²) > 0` on
@@ -126,7 +129,7 @@ P0).
 Severities follow the review artifact format; F1 and F2 are fixed on this branch, F3–F6
 are tracked open.
 
-**F1 (Medium, fixed here — D-320, `think-8mkk`).** `SYNOPSIS.md` stated the
+**F1 (Medium, fixed here — D-326, `think-8mkk`).** `SYNOPSIS.md` stated the
 unprotected-fix aggregate twice, and the two disagreed: the defect-record section said
 106 (correct) while the postmortem paragraph still said “Ninety-eight” (`SYNOPSIS.md`
 line 1984 before this fix).
@@ -134,11 +137,12 @@ The D-305 regression could not catch it because the check accepted the document 
 *any* occurrence matched the derived count.
 This is D-305’s class recurring, in the flattering direction, inside the passage that
 draws the postmortem’s conclusions.
-**Fix (landed):** both statements now carry the derived count (107 after this branch’s
-two new entries), and `check_synopsis` validates *every* occurrence of the phrase; the
-mutation control’s expected message follows.
+**Fix (landed):** `check_synopsis` validates *every* occurrence of the phrase, with a
+behavior-level test covering the one-correct-one-stale case; on the reconciled tree the
+landed narrative keeps a single derived statement, and the count stands at 108 after
+this branch’s two entries.
 
-**F2 (Low, fixed here — D-321, `think-7456`).** `development.md` line 162 began a
+**F2 (Low, fixed here — D-327, `think-7456`).** `development.md` line 162 began a
 sentence “Mutation- control commands”, splitting the compound modifier — D-301’s exact
 class, introduced in the same PR that fixed D-301. **Fix (landed):** rejoined as
 “Mutation-control commands”.
@@ -204,8 +208,19 @@ Recorded so the addressing agent does not “fix” them:
 
 ## CI status
 
-Both PR checks green at head `e137bf9` (`validate` 3m23s, `macos-portability` 4m47s).
-Local full gate on this branch after the corrections: 32 of 32 steps pass.
+Both PR checks green at the review head `176ac2b` (its base at the time was `e137bf9`,
+the merged session-011 branch; `validate` 3m23s, `macos-portability` 4m47s). Those runs
+exercised the pre-reconciliation tree.
+
+## Integration disposition (2026-08-25, after the frontier contract landed)
+
+This dated record keeps its original findings; integration state is listed here rather
+than rewritten into them.
+`main` reconciled the research IDs and landed D-320 through D-325, so this review’s two
+entries were renumbered to D-326 and D-327 and every derived view regenerated.
+The BC-010 hardcoding suggestion below is resolved on current `main` by D-325. F3
+through F6 remain tracked open under epic `think-ymbi`. A fresh full local gate passes
+on the reconciled tree, and CI reruns on the merged head.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

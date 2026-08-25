@@ -1,7 +1,7 @@
 ---
 title: exp-034 — exact n = 5 angle-and-slide sheet
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,16 +10,21 @@ experiment:
   series: series-000
   title: Test whether the exp-033 face lies in an exact angle-and-slide optimal sheet
   date: '2026-08-24'
-  hypotheses: [H-023]
+  hypotheses:
+  - H-023
   tier: exploratory
   subject:
     label: exact two-parameter orientation-indexed LP optimal sheet through exp-033
     engine: n = 5 angle-sheet checker 0.1.0
     engine_commit: 329b848
-    precision: exact
+    assurance: verified
+    method: exact-algebraic
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 5, role: target}
+  instance:
+    axis: n
+    point: 5
+    role: target
   method:
     control: four exact boundary fixtures and four mutations of the sheet certificate
     candidate: one exact half-angle-and-slide family at the exp-033 optimal side
@@ -29,15 +34,11 @@ experiment:
     commit: 329b848
     dirty: false
     entry_point: explorations/packing/tools/check_n5_angle_sheet.py
-    command: >-
-      timeout 30 uv run --frozen --quiet python tools/check_n5_angle_sheet.py
-      --record campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
-      && timeout 30 uv run --frozen --quiet python tools/check_n5_angle_sheet.py
-      --replay campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
-    budget: >-
-      one 30-minute exact-geometry slice; separate 30-second generation and replay caps;
-      stop on an empty parameter strip, nonpositive residual margin, invalid boundary
-      fixture, failed exact dual, surviving mutation, or retained-record drift
+    command: timeout 30 uv run --frozen --quiet python tools/check_n5_angle_sheet.py --record campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
+      && timeout 30 uv run --frozen --quiet python tools/check_n5_angle_sheet.py --replay campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
+    budget: one 30-minute exact-geometry slice; separate 30-second generation and replay caps; stop
+      on an empty parameter strip, nonpositive residual margin, invalid boundary fixture, failed exact
+      dual, surviving mutation, or retained-record drift
     record: campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
   effort:
     timebox: 30m exact-geometry slice; 30s generation and 30s replay caps
@@ -46,22 +47,18 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: >-
-      Does the exp-033 exact segment lie inside a two-parameter feasible family at the
-      same exactly certified side when square 0 may rotate through a small interval?
+    question: Does the exp-033 exact segment lie inside a two-parameter feasible family at the same
+      exactly certified side when square 0 may rotate through a small interval?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      universal exact inequalities over Q(sqrt(2)), four independent exact boundary
-      fixtures, the unchanged LP dual, retained-record regeneration, and four controls
+    checked_by: universal exact inequalities over Q(sqrt(2)), four independent exact boundary fixtures,
+      the unchanged LP dual, retained-record regeneration, and four controls
   verdict:
     decision: accepted
-    primary_criterion: >-
-      exact universal half-angle inequalities, four valid boundary fixtures, the
+    primary_criterion: exact universal half-angle inequalities, four valid boundary fixtures, the
       unchanged exact LP dual, independent replay, and all four declared mutations
-    reason: >-
-      The full declared parameter strip is feasible at the exp-033 side, the exact dual
-      proves every orientation-indexed LP cell optimal, and generation and replay agree.
+    reason: The full declared parameter strip is feasible at the exp-033 side, the exact dual proves
+      every orientation-indexed LP cell optimal, and generation and replay agree.
     commit: 7c6fe96
 ---
 # exp-034 — an exact n = 5 angle-and-slide sheet

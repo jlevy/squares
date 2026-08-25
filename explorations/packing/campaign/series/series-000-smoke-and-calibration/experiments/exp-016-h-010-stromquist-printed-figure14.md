@@ -1,7 +1,7 @@
 ---
 title: exp-016 — Stromquist's printed Figure 14 set is avoidable
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,16 +10,21 @@ experiment:
   series: series-000
   title: Exact refutation of the printed Figure 14 unavoidability claim
   date: '2026-08-24'
-  hypotheses: [H-010]
+  hypotheses:
+  - H-010
   tier: confirmatory
   subject:
     label: Stromquist's printed twelve-point Figure 14 set at s = 2 + 4/sqrt(5)
     engine: Stromquist Theorem 2 exact checker 0.1.0
     engine_commit: 178fc6b
-    precision: exact
+    assurance: verified
+    method: exact-algebraic
     host_system: macOS arm64
     selftest_passed: true
-  instance: {axis: n, point: 11, role: calibration}
+  instance:
+    axis: n
+    point: 11
+    role: calibration
   method:
     control: source-bound printed tuples, strict open-box semantics, and capacity mutations
     candidate: exact algebraic strict box avoiding all twelve printed Figure 14 points
@@ -29,16 +34,12 @@ experiment:
     commit: 178fc6b
     dirty: false
     entry_point: explorations/packing/tools/check_stromquist_theorem2.py
-    command: >-
-      uv run --frozen python tools/check_stromquist_theorem2.py
-      --record campaign/series/series-000-smoke-and-calibration/results/exp-016-h-010-stromquist-printed-figure14.json
-      && uv run --frozen python tools/check_stromquist_theorem2.py
-      --replay campaign/series/series-000-smoke-and-calibration/results/exp-016-h-010-stromquist-printed-figure14.json
+    command: uv run --frozen python tools/check_stromquist_theorem2.py --record campaign/series/series-000-smoke-and-calibration/results/exp-016-h-010-stromquist-printed-figure14.json
+      && uv run --frozen python tools/check_stromquist_theorem2.py --replay campaign/series/series-000-smoke-and-calibration/results/exp-016-h-010-stromquist-printed-figure14.json
       > campaign/series/series-000-smoke-and-calibration/results/exp-016-h-010-stromquist-printed-figure14-replay.json
-    budget: >-
-      240 agent-minutes for source reconstruction, exact witness certification, and
-      adversarial replay; stop on one strict certified escape, a complete five-node
-      reproduction, or any unresolved source or exact-field boundary
+    budget: 240 agent-minutes for source reconstruction, exact witness certification, and adversarial
+      replay; stop on one strict certified escape, a complete five-node reproduction, or any unresolved
+      source or exact-field boundary
     record: campaign/series/series-000-smoke-and-calibration/results/exp-016-h-010-stromquist-printed-figure14.json
   effort:
     timebox: 240m
@@ -50,17 +51,14 @@ experiment:
     question: Does Stromquist's printed five-node Theorem 2 mechanism reproduce exactly?
     role: outcome
     outcome: criterion_missed
-    checked_by: >-
-      tools/check_stromquist_theorem2.py: retained source paths and exact point tuples, a strict
-      algebraic Figure 14 escape, independent containment and avoidance expressions,
-      corrected Lemma 4 root filtering, ten mutation controls, and deterministic
-      complete-record replay
+    checked_by: 'tools/check_stromquist_theorem2.py: retained source paths and exact point tuples,
+      a strict algebraic Figure 14 escape, independent containment and avoidance expressions, corrected
+      Lemma 4 root filtering, ten mutation controls, and deterministic complete-record replay'
   verdict:
     decision: rejected
     primary_criterion: all five source-faithful implications reproduce under exact replay
-    reason: >-
-      The printed Figure 14 set is avoidable, so node four and therefore the five-node
-      conjunction fail; this rejects the proof as printed, not the numerical lower bound.
+    reason: The printed Figure 14 set is avoidable, so node four and therefore the five-node conjunction
+      fail; this rejects the proof as printed, not the numerical lower bound.
     commit: 178fc6b
 ---
 # exp-016 — an exact escape from the printed Figure 14 set

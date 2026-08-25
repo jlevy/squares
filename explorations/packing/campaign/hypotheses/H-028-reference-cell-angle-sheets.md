@@ -25,7 +25,7 @@ hypothesis:
     For n = 11 vary the axis and tilted class angles; for n = 17 hold the axis class at
     zero and vary the two oblique classes. Solve the imported separating cell at every
     adaptive grid point, refine every candidate local minimum under at least two grid
-    offsets, label basis changes, and render the polished sheet.
+    offsets, label basis changes, and render the refined sheet.
   instrument_ready: false
   regime: one fixed imported cell and class assignment per n; plus or minus two degrees
   instance: {axis: n, point: 11}
@@ -44,7 +44,7 @@ hypothesis:
 ---
 # H-028 — the first honest two-dimensional local picture
 
-Every pixel names its cell, basis, and precision tier.
+Every pixel names its cell, basis, arithmetic method, actual precision, and tolerance.
 The map is a local mechanism instrument, not evidence that no other valley exists.
 
 <!-- This document follows common-doc-guidelines.md.

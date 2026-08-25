@@ -1,0 +1,139 @@
+softschema:
+  contract: packing.squares:DocumentMap/v1
+  schema: document-map.schema.yaml
+  status: enforced
+
+last_reviewed: '2026-08-25'
+scope: >
+  Durable Markdown owned by explorations/packing. Source-faithful archive content is
+  excluded because its role and lifecycle come from resources/README.md rather than
+  current project documentation rules.
+documents:
+  - {path: README.md, role: orientation, authority: definitive, lifecycle: maintained}
+  - {path: SYNOPSIS.md, role: technical-synthesis, authority: definitive, lifecycle: maintained}
+  - {path: TUTORIAL.md, role: tutorial, authority: supporting, lifecycle: maintained}
+  - {path: atlas/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: atlas/rendering/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: conventions.md, role: conventions, authority: definitive, lifecycle: maintained}
+  - {path: development.md, role: development-guide, authority: definitive, lifecycle: maintained}
+  - {path: campaign/README.md, role: runbook, authority: definitive, lifecycle: maintained}
+  - {path: campaign/agent-sessions/README.md, role: session-guide, authority: definitive, lifecycle: maintained}
+  - {path: campaign/ideas.md, role: registry, authority: definitive, lifecycle: maintained}
+  - {path: campaign/ledger.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: campaign/series/series-000-smoke-and-calibration/README.md, role: series-guide, authority: definitive, lifecycle: maintained}
+  - {path: frontier/README.md, role: frontier-guide, authority: definitive, lifecycle: maintained}
+  - {path: frontier/STATUS.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: resources/README.md, role: source-index, authority: definitive, lifecycle: maintained}
+  - {path: defects.md, role: generated-view, authority: generated, lifecycle: generated}
+  - {path: frankensim-probe/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-22-packing-11-unit-squares.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md, role: research-report, authority: supporting, lifecycle: maintained}
+  - path: docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: development.md
+  - path: docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: campaign/README.md
+  - path: docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
+  - path: docs/project/reviews/review-2026-08-23-response-to-pr15-review.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
+  - path: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
+  - path: docs/project/reviews/review-2026-08-23-tooling-layout.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: development.md
+  - path: docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md
+    role: review
+    authority: record
+    lifecycle: superseded
+    superseded_by: campaign/ledger.md
+  - path: docs/project/reviews/review-2026-08-25-pr34-soundness-review.md
+    role: review
+    authority: record
+    lifecycle: retained
+  - path: docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md
+    role: handoff
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
+  - path: docs/project/handoff-2026-08-23-quench-spine.md
+    role: handoff
+    authority: record
+    lifecycle: superseded
+    superseded_by: SYNOPSIS.md
+  - {path: docs/project/postmortems/postmortem-2026-08-23-soundness-class.md, role: postmortem, authority: supporting, lifecycle: maintained}
+  - {path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md, role: plan, authority: current, lifecycle: transient}
+  - path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
+    role: plan
+    authority: record
+    lifecycle: superseded
+    superseded_by: atlas/README.md
+  - path: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+    role: plan
+    authority: record
+    lifecycle: superseded
+    superseded_by: development.md
+collections:
+  - pattern: frontier/n-*.md
+    role: frontier-case
+    authority: definitive
+    lifecycle: maintained
+    contract: packing.squares:SquarePackingCase/v2
+    schema: frontier/square-packing-case.schema.yaml
+  - pattern: campaign/hypotheses/H-*.md
+    role: hypothesis-record
+    authority: definitive
+    lifecycle: maintained
+    contract: packing.squares:Hypothesis/v1
+    schema: campaign/schemas/hypothesis.schema.yaml
+  - pattern: campaign/series/*/experiments/exp-*.md
+    role: experiment-record
+    authority: record
+    lifecycle: retained
+    contract: packing.squares:Experiment/v2
+    schema: campaign/schemas/experiment.schema.yaml
+  - pattern: campaign/agent-sessions/session-*.md
+    role: session-record
+    authority: record
+    lifecycle: retained
+    contract: packing.squares:AgentSession/v2
+    schema: campaign/schemas/agent-session.schema.yaml
+  - pattern: campaign/agendas/agenda-*.md
+    role: agenda
+    authority: current
+    lifecycle: maintained
+    contract: packing.squares:ExperimentAgenda/v1
+    schema: campaign/schemas/agenda.schema.yaml
+  - pattern: campaign/explorations/X-*.md
+    role: exploration-report
+    authority: record
+    lifecycle: retained
+    contract: packing.squares:Exploration/v1
+    schema: campaign/schemas/exploration.schema.yaml
+exclusions:
+  - pattern: resources/papers/**/*.md
+    reason: Source-faithful transcriptions and raw extraction are governed by resources/README.md.
+  - pattern: resources/web/**/*.md
+    reason: Retained first-party and web-source content is archival evidence, not project prose.

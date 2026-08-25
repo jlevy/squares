@@ -1,7 +1,7 @@
 ---
 title: exp-022 — complete the four-seed n=3 BasinEvent/v3 calibration
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,16 +10,27 @@ experiment:
   series: series-000
   title: The remaining n=3 starts all produce admissible BasinEvent/v3 observations
   date: '2026-08-24'
-  hypotheses: [H-021]
+  hypotheses:
+  - H-021
   tier: exploratory
   subject:
     label: uniform independent starts followed by the audited Python bracket quench
     engine: basin_census.py BasinEvent/v3 and sqpack quench
     engine_commit: 8f20908
-    precision: f64_screen
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 3, role: positive_control}
+  instance:
+    axis: n
+    point: 3
+    role: positive_control
   method:
     candidate: three remaining independently addressable starts with complete receipts
     runs_per_condition: 3
@@ -28,10 +39,8 @@ experiment:
     commit: 8f20908
     dirty: false
     entry_point: explorations/packing/tools/basin_census.py
-    command: >-
-      timeout 60 uv run --frozen --quiet python tools/basin_census.py run --n 3
-      --seeds 0,2,3 --time-budget 10 --output
-      campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl
+    command: timeout 60 uv run --frozen --quiet python tools/basin_census.py run --n 3 --seeds 0,2,3
+      --time-budget 10 --output campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl
     budget: three seeds; 10 seconds per quench; 60-second process cap; stop on replay failure
     record: campaign/series/series-000-smoke-and-calibration/results/exp-022-h-021-n3-basin-event-v3-completion.jsonl
   effort:
@@ -41,21 +50,17 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: >-
-      Do the three remaining n=3 starts produce independently valid events with every
-      fixed-point evaluation retained and settled?
+    question: Do the three remaining n=3 starts produce independently valid events with every fixed-point
+      evaluation retained and settled?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      BasinEvent/v3 replay: 3/3 producer-converged, independently valid, admissible,
-      and balanced; 8,364/8,364 fixed-point evaluations settled
+    checked_by: 'BasinEvent/v3 replay: 3/3 producer-converged, independently valid, admissible, and
+      balanced; 8,364/8,364 fixed-point evaluations settled'
   verdict:
     decision: baseline
     primary_criterion: admissible terminal-event fraction for the remaining n=3 starts
-    reason: >-
-      All three events are admissible and replayable. Combined with exp-021, the fixed
-      four-seed n=3 block is 4/4 admissible; this still does not classify endpoint
-      components or decide H-021.
+    reason: All three events are admissible and replayable. Combined with exp-021, the fixed four-seed
+      n=3 block is 4/4 admissible; this still does not classify endpoint components or decide H-021.
     commit: 8f20908
 ---
 # exp-022 — complete the `n = 3` event calibration

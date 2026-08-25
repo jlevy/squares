@@ -39,10 +39,10 @@ hypothesis:
     Exp-035 proves that the complete branchwise first-order systems at both endpoints
     and one interior point admit an exact direction outside that sheet. Exp-036 excludes
     that particular direction from the true Bouligand tangent cone by exact second-order
-    obstructions in both possible nearby owner-axis branches. Exp-037 now certifies the
+    obstructions in both possible nearby owner-axis branches. Exp-038 now certifies the
     complete branchwise linearization-cone inventory: both owner branches coincide, the
     endpoint quotients have eight rays, and the interior quotients have six. These are
-    partial results, not a complete answer. Exp-038 proves that R1, R2, R3, and R6 have
+    partial results, not a complete answer. Exp-039 proves that R1, R2, R3, and R6 have
     exact fixed-angle continuations inside one connected five-dimensional cell-local
     LP-optimal position polytope, with positive first-order stresses on twelve declared
     path segments. It does not prove the whole polytope stationary or join A to B inside
@@ -83,13 +83,13 @@ owner-4 branch has exact excess coefficient `sqrt(2)/8`, and the owner-3 branch 
 coefficient `-1/4` with positive relative-angle cusp margin `sqrt(2)/2 - 1/4`.
 
 This is a strict linearized-versus-true-tangent gap for one direction, not a local
-isolation theorem. Exp-037 completes the branchwise linear inventory: the owner branches
+isolation theorem. Exp-038 completes the branchwise linear inventory: the owner branches
 coincide at first order, the endpoint quotients have eight rays, the interior quotients
 have six, and the common transverse cone has six rays with sole relation
 `R3 + R6 = R4 + R5`.
 
 That finite inventory does not prove that a transverse or mixed direction is a true
-tangent. Exp-038 supplies exact fixed-angle continuation for `R1`, `R2`, `R3`, and `R6`:
+tangent. Exp-039 supplies exact fixed-angle continuation for `R1`, `R2`, `R3`, and `R6`:
 their twelve A, interior, and B paths lie in one connected five-dimensional cell-local
 LP-optimal position polytope and carry positive branchwise first-order stresses.
 The stress is proved only on those paths, not throughout the polytope or on an A-to-B

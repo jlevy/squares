@@ -1,124 +1,38 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://github.com/jlevy/thinking-scratchpad/explorations/packing/frontier/square-packing-case.schema.yaml
+$id: packing.squares:SquarePackingCase/v2
 title: SquarePackingCase
-description: >
-  Everything known about s(n), the side of the smallest square holding n
-  non-overlapping unit squares, for one value of n. Structured facts only;
-  narrative belongs in the Markdown body.
+description: >-
+  Reported and formally supported bounds for one square-packing instance. Decimal
+  literals remain strings; evidence records carry assurance and replay details.
 type: object
 additionalProperties: false
-required: [n, status, upper_bound, lower_bound]
+required:
+  - n
+  - reported_status
+  - status
+  - source_reviewed
+  - reported_upper_bound
+  - verified_upper_bound
+  - reported_lower_bound
+  - verified_lower_bound
+  - evidence
+  - conflicts
+  - blockers
+  - resources
 properties:
-  n:
-    type: integer
-    minimum: 1
-    description: Number of unit squares to pack.
+  n: {type: integer, minimum: 1}
+  reported_status:
+    enum: [proved, open]
+    description: Literal mathematical status reported by the tracked source set.
   status:
     enum: [proved, open]
-    description: >
-      "proved" iff a published proof determines s(n) exactly, i.e. the lower
-      bound matches the best known packing.
-  gap:
-    type: [number, "null"]
-    description: upper_bound.value minus lower_bound.value; 0 when proved.
-  upper_bound:
-    type: object
-    additionalProperties: false
-    required: [value, method]
-    properties:
-      value:
-        type: number
-        description: Best known s(n) as a decimal, from the record catalogue.
-      value_str:
-        type: [string, "null"]
-        description: >
-          Full published decimal as a string, when more digits are recorded
-          than a float can carry.
-      exact_form:
-        type: [string, "null"]
-        description: Closed form when one exists, e.g. "3 + (1/2)*sqrt(2)".
-      algebraic_degree:
-        type: [integer, "null"]
-        minimum: 1
-        description: Degree of s(n) over Q, when the catalogue records a minimal polynomial.
-      minimal_polynomial:
-        type: [string, "null"]
-        description: Minimal polynomial of s(n) over Q, as published.
-      analytically_optimized:
-        type: [boolean, "null"]
-        description: >
-          Whether the record has an exact algebraic description. False means
-          the record is a refined numerical configuration only.
-      rigid:
-        type: [boolean, "null"]
-        description: Whether the catalogue flags the packing as rigid.
-      method:
-        enum:
-          - trivial_grid
-          - hand_construction
-          - diagonal_strip
-          - pattern_family
-          - extension
-          - composition
-          - simulated_annealing
-          - inflation_billiard
-          - unknown
-        description: How the best known packing was produced.
-      tilt_angles_deg:
-        type: [array, "null"]
-        items: {type: number}
-        description: Distinct square orientations in degrees; [0] for an axis-aligned grid.
-      found_by:
-        type: array
-        items: {type: string}
-        default: []
-      found_year:
-        type: [integer, "null"]
-      improved_by:
-        type: array
-        items: {type: string}
-        default: []
-      catalogue_pictured:
-        type: boolean
-        description: >
-          Whether the record catalogue pictures this n. False means the trivial
-          grid packing is still the best known.
-  lower_bound:
-    type: object
-    additionalProperties: false
-    required: [value, kind]
-    properties:
-      value:
-        type: number
-        description: Best proved lower bound on s(n).
-      exact_form:
-        type: [string, "null"]
-      kind:
-        enum:
-          - area
-          - perfect_square
-          - nagamochi
-          - monotonicity
-          - unavoidable_points
-          - counting
-        description: Which argument supplies this bound.
-      proved_by:
-        type: array
-        items: {type: string}
-        default: []
-      proved_year:
-        type: [integer, "null"]
-      source_key:
-        type: [string, "null"]
-        description: Citation key used in the research documents.
-      note:
-        type: [string, "null"]
-        description: One line on provenance, e.g. which n it is inherited from.
-  conjectured_optimum:
-    type: [string, "null"]
-    description: >
-      For open cases, the value the best known packing is conjectured to attain,
-      as "integer" or the decimal; null when there is no standing conjecture.
+    description: Proved only when verified upper and lower bounds match exactly.
+  source_reviewed: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
+  reported_upper_bound: {$ref: '#/$defs/reportedUpper'}
+  verified_upper_bound: {$ref: '#/$defs/verifiedBound'}
+  reported_lower_bound: {$ref: '#/$defs/reportedLower'}
+  verified_lower_bound: {$ref: '#/$defs/verifiedBound'}
+  conjectured_optimum: {type: [string, 'null']}
   priority_notes:
     type: array
     default: []
@@ -127,33 +41,126 @@ properties:
       additionalProperties: false
       required: [claim]
       properties:
-        claim: {type: string}
+        claim: {type: string, minLength: 1}
         claimed_by: {type: array, items: {type: string}, default: []}
-        published: {type: [string, "null"]}
-        year: {type: [integer, "null"]}
+        published: {type: [string, 'null']}
+        year: {type: [integer, 'null']}
+  evidence:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {type: string, pattern: '^E-[a-z0-9-]+$'}
+  conflicts:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required: [kind, detail, evidence]
+      properties:
+        kind: {enum: [source-disagreement, replay-failure, scope-ambiguity, stale-source]}
+        detail: {type: string, minLength: 1}
+        evidence:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          items: {type: string, pattern: '^E-[a-z0-9-]+$'}
+  blockers:
+    type: array
+    items: {$ref: '#/$defs/blocker'}
   resources:
     type: array
-    default: []
     items:
       type: object
       additionalProperties: false
       required: [key, role]
       properties:
-        key:
-          type: string
-          description: Citation key as used in the research documents.
+        key: {type: string, minLength: 1}
         role:
-          enum: [upper_bound, lower_bound, record_catalogue, survey, exact_solution, context]
-        local:
-          type: [string, "null"]
-          description: Path under resources/, without extension.
-        url:
-          type: [string, "null"]
-        retrieved:
-          type: [boolean, "null"]
-          description: Whether a local copy exists in the archive.
-  verified_here:
+          enum:
+            - upper-bound-report
+            - lower-bound-proof
+            - record-catalogue
+            - survey
+            - numerical-witness
+            - formal-certificate
+            - context
+        local: {type: [string, 'null']}
+        url: {type: [string, 'null']}
+        retrieved: {type: [boolean, 'null']}
+$defs:
+  evidenceRefs:
     type: array
-    default: []
-    items: {type: string}
-    description: Claims independently re-derived in this repository.
+    minItems: 1
+    uniqueItems: true
+    items: {type: string, pattern: '^E-[a-z0-9-]+$'}
+  verifiedBound:
+    type: object
+    additionalProperties: false
+    required: [value, exact_form, evidence]
+    properties:
+      value:
+        type: string
+        minLength: 1
+        description: Reader display literal; exact_form is authoritative when present.
+      exact_form: {type: [string, 'null']}
+      evidence: {$ref: '#/$defs/evidenceRefs'}
+  reportedUpper:
+    type: object
+    additionalProperties: false
+    required: [value, exact_form, construction_method, source_key, evidence]
+    properties:
+      value: {type: string, minLength: 1}
+      exact_form: {type: [string, 'null']}
+      algebraic_degree: {type: [integer, 'null'], minimum: 1}
+      minimal_polynomial: {type: [string, 'null']}
+      analytically_optimized: {type: [boolean, 'null']}
+      rigid: {type: [boolean, 'null']}
+      construction_method:
+        enum:
+          - trivial-grid
+          - hand-construction
+          - diagonal-strip
+          - pattern-family
+          - extension
+          - composition
+          - simulated-annealing
+          - inflation-billiard
+          - unknown
+      tilt_angles_deg:
+        type: [array, 'null']
+        items: {type: number}
+      found_by: {type: array, items: {type: string}, default: []}
+      found_year: {type: [integer, 'null']}
+      improved_by: {type: array, items: {type: string}, default: []}
+      catalogue_pictured: {type: boolean}
+      source_key: {type: string, minLength: 1}
+      source_date: {type: [string, 'null']}
+      retrieved_date: {type: [string, 'null']}
+      witnesses: {type: array, items: {type: string}, default: []}
+      evidence: {$ref: '#/$defs/evidenceRefs'}
+  reportedLower:
+    type: object
+    additionalProperties: false
+    required: [value, exact_form, kind, source_key, evidence]
+    properties:
+      value: {type: string, minLength: 1}
+      exact_form: {type: [string, 'null']}
+      kind:
+        enum: [area, perfect-square, nagamochi, monotonicity, unavoidable-points, counting]
+      proved_by: {type: array, items: {type: string}, default: []}
+      proved_year: {type: [integer, 'null']}
+      source_key: {type: [string, 'null']}
+      note: {type: [string, 'null']}
+      scope: {type: [string, 'null']}
+      evidence: {$ref: '#/$defs/evidenceRefs'}
+  blocker:
+    type: object
+    additionalProperties: false
+    required: [kind, detail]
+    properties:
+      kind: {enum: [source-evidence, importer, checker, field-precondition, mathematics]}
+      detail: {type: string, minLength: 1}
+      evidence:
+        type: array
+        uniqueItems: true
+        items: {type: string, pattern: '^E-[a-z0-9-]+$'}

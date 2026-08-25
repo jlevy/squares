@@ -1,7 +1,7 @@
 ---
 title: exp-006 — the LP-in-cell quench, on annealer output at n = 5, 10, 11
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,27 +10,40 @@ experiment:
   series: series-000
   title: The LP-in-cell quench applied to annealer output, and why its angle half stalls
   date: '2026-08-23'
-  hypotheses: [H-002]
+  hypotheses:
+  - H-002
   tier: exploratory
-  known_defects: [D-017]
+  known_defects:
+  - D-017
   subject:
     label: sqpack.quench (scipy HiGHS) over sqsearch output
-    engine: 'sqpack.quench 0.1.0 over sqsearch 0.1.0'
-    engine_commit: '8b450a1'
-    precision: polished
+    engine: sqpack.quench 0.1.0 over sqsearch 0.1.0
+    engine_commit: 8b450a1
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: Linux container, 8 cores (remote session)
     selftest_passed: true
-  instance: {axis: n, point: 11, role: target}
+  instance:
+    axis: n
+    point: 11
+    role: target
   method:
-    control: 'the annealer''s own best configuration, unpolished'
-    candidate: 'that configuration after the LP-in-cell quench (LP solve, cell re-read to a fixed point, finite-difference angle descent)'
+    control: the annealer's own best configuration, unpolished
+    candidate: that configuration after the LP-in-cell quench (LP solve, cell re-read to a fixed point,
+      finite-difference angle descent)
     runs_per_condition: 5
     interleaved: true
     operator: claude-opus-5
-    commit: '8b450a1'
+    commit: 8b450a1
     entry_point: explorations/packing/run_quench.py
-    command: 'python3 run_quench.py'
-    budget: '19 rounds, 20,135 LP solves, 72.8 s'
+    command: python3 run_quench.py
+    budget: 19 rounds, 20,135 LP solves, 72.8 s
     record: campaign/series/series-000-smoke-and-calibration/results/exp-006-lp-quench.jsonl
   effort:
     timebox: 2h
@@ -44,7 +57,7 @@ experiment:
     direction: lower
     score: 0.06999
     standing_best: 0.0
-    standing_best_source: 'frontier/n-011.md (Trump 1979), as the analytic target'
+    standing_best_source: frontier/n-011.md (Trump 1979), as the analytic target
     beat_record: false
     runs: 5
   - shape: conditions
@@ -52,57 +65,69 @@ experiment:
     role: outcome
     control_median: 0.08846
     candidate_median: 0.06999
-    control_range: [0.06440, 0.10020]
-    candidate_range: [0.04608, 0.08846]
+    control_range:
+    - 0.0644
+    - 0.1002
+    candidate_range:
+    - 0.04608
+    - 0.08846
     overlapping: true
   - shape: conditions
     metric: gap_to_analytic_n10
     role: outcome
     control_median: 0.005318
     candidate_median: 0.004507
-    control_range: [0.002166, 0.015130]
-    candidate_range: [0.000841, 0.013380]
+    control_range:
+    - 0.002166
+    - 0.01513
+    candidate_range:
+    - 0.000841
+    - 0.01338
     overlapping: true
   - shape: determination
-    question: 'does the quench refine annealer output to the analytic value within 1e-12'
+    question: does the quench refine annealer output to the analytic value within 1e-12
     role: outcome
     outcome: no_progress
-    checked_by: 'gap to the analytic optimum at n = 5, 10, 11; best quenched gap 2.3e-08 at n = 5, 8.4e-04 at n = 10, 4.6e-02 at n = 11'
+    checked_by: gap to the analytic optimum at n = 5, 10, 11; best quenched gap 2.3e-08 at n = 5,
+      8.4e-04 at n = 10, 4.6e-02 at n = 11
   - shape: record
     metric: single_cell_solve_at_exact_angles
     role: mechanism
     direction: lower
     score: 4.441e-16
     standing_best: 0.0
-    standing_best_source: 'frontier/n-011.md; the LP at Trump''s own angles'
+    standing_best_source: frontier/n-011.md; the LP at Trump's own angles
     beat_record: false
     runs: 1
   - shape: determination
-    question: 'does a class-constrained one-dimensional angle search reach the analytic value'
+    question: does a class-constrained one-dimensional angle search reach the analytic value
     role: mechanism
     outcome: reached_basin
-    checked_by: 'golden section on the shared tilt: theta error 3.3e-10 to 4.1e-10, gap 7.4e-12 to 2.2e-11, in 70 LP solves'
+    checked_by: 'golden section on the shared tilt: theta error 3.3e-10 to 4.1e-10, gap 7.4e-12 to
+      2.2e-11, in 70 LP solves'
   - shape: determination
-    question: 'is s(theta) smooth at the optimal angles'
+    question: is s(theta) smooth at the optimal angles
     role: mechanism
     outcome: no_progress
-    checked_by: 'one-sided slopes 0.175 and 0.384 at the optimal tilt; a kink, not a smooth minimum'
+    checked_by: one-sided slopes 0.175 and 0.384 at the optimal tilt; a kink, not a smooth minimum
   complexity:
     lines_changed: 322
-    new_dependencies: [scipy]
-    new_failure_modes: ['LP solver tolerance can exceed the quantity being measured; every solution is post-checked against its own constraints']
-    notes: 'Adds sqpack/quench.py and run_quench.py. No Rust; the spine is scipy and standard library, as the stack decision requires.'
+    new_dependencies:
+    - scipy
+    new_failure_modes:
+    - LP solver tolerance can exceed the quantity being measured; every solution is post-checked against
+      its own constraints
+    notes: Adds sqpack/quench.py and run_quench.py. No Rust; the spine is scipy and standard library,
+      as the stack decision requires.
   verdict:
     decision: rejected
     primary_criterion: gap_to_analytic
-    reason: >-
-      Refutes H-002 as stated: the quench does not refine annealer output to the
-      analytic value, improving the gap by only 1.1-1.3x because it is a LOCAL cell
-      optimiser and the tested starts remain far from the target construction. The
-      single-cell half stands (4.4e-16 at exact angles) and a class-constrained 1-D
-      angle search reaches 2e-11, so what fails is the free-angle descent - and H-019
-      says why. No terminal-component relation was measured.
-    commit: '8b450a1'
+    reason: 'Refutes H-002 as stated: the quench does not refine annealer output to the analytic value,
+      improving the gap by only 1.1-1.3x because it is a LOCAL cell optimiser and the tested starts
+      remain far from the target construction. The single-cell half stands (4.4e-16 at exact angles)
+      and a class-constrained 1-D angle search reaches 2e-11, so what fails is the free-angle descent
+      - and H-019 says why. No terminal-component relation was measured.'
+    commit: 8b450a1
 ---
 # exp-006 — the quench works, and does not do what the hypothesis said it would
 
@@ -136,9 +161,10 @@ was already there), `8.4e-04` at `n = 10`, and `4.6e-02` at `n = 11`.
 
 Two mechanism results explain the refutation and are worth more than it.
 
-**The single-cell half is exact, and independently reproduced.** Solving the cell at
-Trump’s own angles gives `s = 3.877083590022814` — `+4.4e-16` from the published value.
-The review’s result was verified here from scratch, and the LP formulation is not what
+**The fixed-cell formulation is exact; this solve is numerical and independently
+reproduced.** Solving the cell at Trump’s own angles gives `s = 3.877083590022814` —
+`+4.4e-16` from the published value.
+The review’s result was rederived here from scratch, and the LP formulation is not what
 fails.
 
 **A class-constrained angle search reaches the analytic value.** Constrain the eleven
@@ -147,8 +173,8 @@ shared tilt, and the answer arrives at `θ` error `3.3e-10` to `4.1e-10` and sid
 between `−7.4e-12` and `−2.2e-11`, in **70 LP solves** against the free descent’s 1,024.
 The negative sign is the solver’s noise floor, not a record: at a primal feasibility
 tolerance of `1e-10` a side is not resolvable below roughly `1e-11`, which is exactly
-where these land.
-Nothing here may claim anything about the record, and the tier says so.
+where these land. Nothing here may claim anything about the record; its assurance is
+`numerically-checked` under `numerical-f64`.
 
 ## What the prediction got wrong
 
@@ -161,8 +187,9 @@ At `n = 11`, the tested starts remain far from Trump’s construction after this
 procedure. Calling them the “wrong basin” would require a terminal-component relation
 that this round did not measure.
 At `n = 11` that is a 1.3× improvement on a gap of `8.8e-02`. The spine does not lift
-the burden of finding the right basin off the proposer; it makes the landing point exact
-and nameable, which is a different and still valuable thing.
+the burden of finding the right basin off the proposer; it makes the landing point
+numerically refined and reproducibly nameable, which is a different and still valuable
+thing.
 
 **Interpretation correction, 2026-08-24.** The original text called those endpoints the
 wrong basin. The scoped result is only that this local procedure did not take the tested
@@ -230,9 +257,9 @@ the bracketing variant reaches machine precision on both proved cells.
 
 ## Limits
 
-- `polished` tier: exact within a cell to *solver* precision, which this round measured
-  at roughly `1e-11`, not exact in the algebraic sense.
-  No claim here may be promoted without `sqpack.verify` over the packing’s own field.
+- Assurance is `numerically-checked`, method `numerical-f64`, with an observed floor of
+  roughly `1e-11`. No claim here may be promoted without a separate formal certificate
+  replayed by the exact verifier.
 - Five seeds per instance is enough to see the spread, not to claim an interval; the
   round is `exploratory`.
 - The class-constrained arm assumes the answer’s own structure (two angle classes), so

@@ -1,12 +1,12 @@
 ---
-title: H-042 — every Trump derivative branch has a proper incidence rigidity core
+title: H-043 — every Trump derivative branch has a proper incidence rigidity core
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
   envelope: hypothesis
   status: enforced
 hypothesis:
-  id: H-042
+  id: H-043
   kind: hypothesis
   claim: >-
     Every one of the 128 derivative-distinct fixed-side branches at Trump's exact
@@ -52,7 +52,7 @@ hypothesis:
     deletion on branch 0 before registration; it did not test grouped incidences, and
     its suggested 34-row threshold is excluded from this criterion.
 ---
-# H-042 — test whether Trump rigidity is incidence-redundant in every branch
+# H-043 — test whether Trump rigidity is incidence-redundant in every branch
 
 For one derivative branch `b`, let `G_b` contain the eleven active wall incidences and
 the fourteen active pair contacts with that branch’s selected separating feature.
@@ -86,7 +86,7 @@ It is not “the” core, a unique core, a minimum-cardinality core, or a census
 cores. Monotonicity makes one pass sufficient: once deleting a group produces a nonzero
 cone, later deletions cannot restore rigidity without that group.
 
-H-042 is accepted only if all 128 exp-013 matrix keys terminate with proper exact cores.
+H-043 is accepted only if all 128 exp-013 matrix keys terminate with proper exact cores.
 It is rejected if any branch’s complete normalized group system is exactly
 inclusion-minimal.
 A numerical proposal failure, timeout, branch drift, missing alias, or

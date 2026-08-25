@@ -1,0 +1,102 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:FrontierEvidenceSet/v1
+title: FrontierEvidenceSet
+description: Typed reports, numerical checks, proofs, and replay dispositions for the frontier.
+type: object
+additionalProperties: false
+required: [last_reviewed, evidence]
+properties:
+  last_reviewed: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
+  evidence:
+    type: array
+    items: {$ref: '#/$defs/evidence'}
+$defs:
+  scope:
+    oneOf:
+      - type: object
+        additionalProperties: false
+        required: [n_values]
+        properties:
+          n_values:
+            type: array
+            minItems: 1
+            uniqueItems: true
+            items: {type: integer, minimum: 1}
+      - type: object
+        additionalProperties: false
+        required: [n_min, n_max]
+        properties:
+          n_min: {type: integer, minimum: 1}
+          n_max: {type: integer, minimum: 1}
+  precision:
+    anyOf:
+      - const: unrecorded-historical
+      - type: object
+        additionalProperties: false
+        required: [rounding]
+        properties:
+          decimal_digits: {type: integer, minimum: 1}
+          binary_bits: {type: integer, minimum: 1}
+          rounding: {enum: [nearest, nearest-even, outward, source-defined]}
+        oneOf:
+          - required: [decimal_digits]
+          - required: [binary_bits]
+  blocker:
+    type: object
+    additionalProperties: false
+    required: [kind, detail]
+    properties:
+      kind: {enum: [source-evidence, importer, checker, field-precondition, mathematics]}
+      detail: {type: string, minLength: 1}
+  proof:
+    type: object
+    additionalProperties: false
+    required: [source, theorem, scope, pinpoints, assumptions]
+    properties:
+      source: {type: string, minLength: 1}
+      theorem: {type: string, minLength: 1}
+      scope: {type: string, minLength: 1}
+      pinpoints: {type: string, minLength: 1}
+      assumptions: {type: array, items: {type: string}}
+      audit_record: {type: string, minLength: 1}
+  evidence:
+    type: object
+    additionalProperties: false
+    required:
+      - id
+      - claim
+      - scope
+      - assurance
+      - performed_by
+      - relationship_to_generator
+      - replay_status
+      - limitations
+      - source_reviewed
+    properties:
+      id: {type: string, pattern: '^E-[a-z0-9-]+$'}
+      claim:
+        enum: [witness-feasibility, upper-bound, lower-bound, exact-value, witness-optimality, derived-structure]
+      scope: {$ref: '#/$defs/scope'}
+      assurance: {enum: [reported, numerically-checked, verified]}
+      method:
+        enum: [numerical-f64, numerical-multiprecision, interval-certified, exact-algebraic, published-proof, proof-audited, proof-assistant-checked]
+      reported_method:
+        enum: [numerical-f64, numerical-multiprecision, interval-certified, exact-algebraic, published-proof, proof-audited, proof-assistant-checked, source-unspecified]
+      performed_by:
+        enum: [source-author, independent-external, repository, unknown-historical]
+      relationship_to_generator:
+        enum: [generator, same-implementation, independent-implementation, not-applicable, unknown-historical]
+      origin:
+        enum: [external, independently-external, replayed-here, audited-here]
+      source_key: {type: string, minLength: 1}
+      precision: {$ref: '#/$defs/precision'}
+      tolerance: {type: string, minLength: 1}
+      certificate: {type: string, minLength: 1}
+      replay: {type: string, minLength: 1}
+      replay_status:
+        enum: [passed, failed, unsupported, public-certificate-missing, not-attempted]
+      proof: {$ref: '#/$defs/proof'}
+      limitations: {type: string, minLength: 1}
+      blocker: {$ref: '#/$defs/blocker'}
+      source_reviewed: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
+      migration_annotation: {type: string, minLength: 1}

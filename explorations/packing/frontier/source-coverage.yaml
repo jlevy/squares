@@ -1,0 +1,86 @@
+softschema:
+  contract: packing.squares:SourceCoverage/v1
+  schema: source-coverage.schema.yaml
+  status: enforced
+
+last_reviewed: '2026-08-25'
+coverage_scope: >
+  Current public upper-bound catalogues and first-party result releases known to this
+  project, plus the Schadt n=29 repository used as the witness-contract regression case.
+  Primary proof literature is tracked by evidence.yaml and source-availability.yaml
+  rather than duplicated here. This is a dated named-source claim, not a claim that a
+  web search has exhausted every possible source.
+case_corpus:
+  n_min: 1
+  n_max: 100
+  reader_view: frontier/STATUS.md
+sources:
+  - id: kingbird-current
+    title: Squares in Squares
+    role: current-catalogue
+    url: https://kingbird.myphotos.cc/packing/squares_in_squares.html
+    local: resources/web/kingbird-squares-in-squares.html
+    source_key: '[Kingbird]'
+    scope: {n_min: 1, n_max: 324}
+    reviewed: '2026-08-25'
+    source_date: null
+    disposition: baseline-current
+    replay_disposition: case-specific
+    represented_by: [frontier/n-001.md through frontier/n-100.md]
+    evidence: [E-kingbird-upper-register]
+    notes: >
+      The retained page was freshly retrieved and reparsed on the review date. It is
+      byte-identical to the prior retained capture. Its values supply the baseline
+      report; newer first-party releases can override individual cases. SVG geometry
+      has case-specific replay status and is not made formal by appearing here.
+  - id: unitsquare-release1
+    title: UnitSquare Results Release 1
+    role: first-party-release
+    url: https://hmbelvedere.com/
+    local: resources/web/unitsquare-release1-2026/results.json
+    source_key: '[UnitSquare 2026]'
+    scope: {n_values: [68, 69, 103, 105, 110, 131]}
+    reviewed: '2026-08-25'
+    source_date: '2026-07-29'
+    disposition: current-report
+    replay_disposition: public-certificate-missing
+    represented_by: [frontier/n-068.md, frontier/n-069.md, beyond_horizon_claims]
+    evidence: [E-unitsquare-release1-report]
+    notes: >
+      The release reports interval validation but does not publish its interval boxes,
+      governed receipts, or replayable checker. Its in-horizon values are reported, not
+      verified; four further claims are retained below without creating empty case files.
+  - id: schadt-n29-2025
+    title: Squares-packing S(29) — New Record
+    role: source-repository
+    url: https://github.com/BalthasarStrauss/Squares-packing_S-29-_New-Record
+    local: resources/web/schadt-s29-2025/
+    source_key: '[Schadt n=29 repository]'
+    scope: {n_values: [29]}
+    reviewed: '2026-08-25'
+    source_date: '2025-12-08'
+    disposition: superseded-covered
+    replay_disposition: numerically-checked-and-exact-relaxed
+    represented_by: [frontier/n-029.md, witnesses/schadt-n029-2025-decimal.yaml, witnesses/schadt-n029-2025-rational.yaml]
+    evidence: [E-n029-schadt-report, E-n029-schadt-numerical, E-n029-schadt-rational-upper]
+    notes: >
+      The source pose passes its declared 1e-100 numerical tolerance but has small
+      negative pair margins and its checker accepts incomplete input. The repository
+      also contains a slightly relaxed rational witness verified exactly by two local
+      implementations. Neither establishes optimality.
+selected_overrides:
+  - n: 68
+    source_id: unitsquare-release1
+    value: '8.803383074716108386903836683375989697670063329'
+    evidence: E-unitsquare-release1-report
+    reason: Newer first-party reported upper bound than the Kingbird baseline.
+  - n: 69
+    source_id: unitsquare-release1
+    value: '8.827205507815920656880680735618736931225314831'
+    evidence: E-unitsquare-release1-report
+    reason: Newer first-party reported upper bound than the Kingbird baseline.
+beyond_horizon_claims:
+  - {n: 103, source_id: unitsquare-release1, claim: upper-bound, value: '10.703790283762427', assurance: reported, disposition: tracked-outside-case-corpus}
+  - {n: 105, source_id: unitsquare-release1, claim: upper-bound, value: '10.807847913867976', assurance: reported, disposition: tracked-outside-case-corpus}
+  - {n: 110, source_id: unitsquare-release1, claim: upper-bound, value: '10.996797773597706', assurance: reported, disposition: tracked-outside-case-corpus}
+  - {n: 131, source_id: unitsquare-release1, claim: upper-bound, value: '11.956543108124773261501115489978287643498579738', assurance: reported, disposition: tracked-outside-case-corpus}

@@ -41,8 +41,9 @@ meaningful; it does not restate them.
 — ten findings (R-1…R-10) on what the toolkit documents were missing, a fifteen-entry
 hypothesis register with kill criteria and budget tiers, a run protocol, and a series
 plan S0–S6. Its main theoretical contribution is R-2: **for fixed angles, minimising `s`
-is a linear program**, verified by implementation — a 1,056-constraint LP at Trump’s
-angles reproduced `s(11)` to solver precision and every centre to `9e-16`.
+is a linear program**, numerically checked by an independent implementation — a
+1,056-constraint LP at Trump’s angles reproduced `s(11)` to solver precision and every
+centre to `9e-16`.
 
 **[A Search Philosophy for Square Packing](../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)**
 — the strategy layer.
@@ -88,3 +89,7 @@ them proves the machinery and says nothing about finding an oblique record.
 That correction is recorded in
 [series-000](../series/series-000-smoke-and-calibration/README.md), whose controls are
 now explicitly labelled machinery-validation.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

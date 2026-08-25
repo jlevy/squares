@@ -1,7 +1,7 @@
 ---
 title: exp-026 — four-seed n=6 BasinEvent/v3 tool validation
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,17 +10,29 @@ experiment:
   series: series-000
   title: Test complete BasinEvent/v3 receipts at the first proved side-3 case
   date: '2026-08-24'
-  hypotheses: [H-021]
+  hypotheses:
+  - H-021
   tier: exploratory
-  known_defects: [D-183]
+  known_defects:
+  - D-183
   subject:
     label: uniform independent starts followed by the audited Python bracket quench
     engine: basin_census.py BasinEvent/v3 and sqpack quench
     engine_commit: da6bac3
-    precision: f64_screen
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 6, role: positive_control}
+  instance:
+    axis: n
+    point: 6
+    role: positive_control
   method:
     candidate: four fixed independently addressable starts under the unchanged v3 regime
     runs_per_condition: 4
@@ -29,10 +41,8 @@ experiment:
     commit: da6bac3
     dirty: false
     entry_point: explorations/packing/tools/basin_census.py
-    command: >-
-      timeout 90 uv run --frozen --quiet python tools/basin_census.py run --n 6
-      --seeds 0-3 --time-budget 10 --output
-      campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
+    command: timeout 90 uv run --frozen --quiet python tools/basin_census.py run --n 6 --seeds 0-3
+      --time-budget 10 --output campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
     budget: four seeds; 10 seconds per quench; 90-second process cap; retain every stop
     record: campaign/series/series-000-smoke-and-calibration/results/exp-026-h-021-n6-basin-event-v3.jsonl
   effort:
@@ -42,21 +52,18 @@ experiment:
     stopped_by: error
   results:
   - shape: determination
-    question: >-
-      Under the unchanged v3 regime, do all four n=6 starts retain independently valid,
-      balanced events or a typed stop without censoring any fixed-point evaluation?
+    question: Under the unchanged v3 regime, do all four n=6 starts retain independently valid, balanced
+      events or a typed stop without censoring any fixed-point evaluation?
     role: outcome
     outcome: invalid
-    checked_by: >-
-      BasinEvent/v3 replay validates the three retained prefix events; the runtime
-      traceback shows seed 3 failed independent validation before it could be retained
+    checked_by: BasinEvent/v3 replay validates the three retained prefix events; the runtime traceback
+      shows seed 3 failed independent validation before it could be retained
   verdict:
     decision: blocked
     primary_criterion: complete independently replayable event outcome for every fixed seed
-    reason: >-
-      Seeds 0 through 2 replay as admissible, but seed 3 crashed at the retention
-      boundary after failing independent validity. D-183 blocks the cell and all larger
-      event slices until a separately preregistered replication retains that stop.
+    reason: Seeds 0 through 2 replay as admissible, but seed 3 crashed at the retention boundary after
+      failing independent validity. D-183 blocks the cell and all larger event slices until a separately
+      preregistered replication retains that stop.
     commit: da6bac3
 ---
 # exp-026 — the `n = 6` event validation exposes a retention failure
