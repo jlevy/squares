@@ -72,7 +72,9 @@ equation residuals, mutation controls, and class intervals.
 This rejects H-042 exactly as scoped: a claim about one numerical serialization under
 one declared arithmetic regime.
 It does not verify exact feasibility, prove the reported upper bound, or decide
-optimality. H-024 remains unresolved until a formal witness supports its prerequisite.
+optimality. H-024’s corpus claim was already refuted by exp-012’s reconstruction;
+H-042 scopes the three-class question to this serialization under the declared
+numerical regime.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

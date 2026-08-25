@@ -10,7 +10,7 @@
 ---
 
 > ⚠️ **Contains reconstructed passages.**
-> This transcription contains **1** annotated passage(s) where the PDF extraction was
+> This transcription contains **2** annotated passage(s) where the PDF extraction was
 > damaged and text or mathematics was reconstructed or marked unrecoverable. Search this
 > file for `GARBLED` and `NOTE` to find them.
 > **Any formula near an annotation must be checked against `mcclenagan-2026-optimally-packing-large-square.raw.md`**, which is the
@@ -173,6 +173,8 @@ $$\varepsilon' \ll \varepsilon + \theta. \tag{3.1}$$
 Next, pack a vertical stack $V'_0$ with $m'$ (an integer which is less than $m$ which we will fix later) squares against the vertical wall so that it touches $H'_0$. Choose some $\theta'$ such that we can fit another horizontal stack $H'_1$ with $m$ squares snugly against $H'_0$ so that it touches both $V'_0$ and a new inclined wall of angle $\theta'$ (we will prove the feasibility of such an arrangement shortly). Label the points on these stacks as in Figure 5.
 
 **Estimating $\theta'$.** First we prove that $\theta' \leq \theta$ by ensuring that there is enough room to pack $H'_1$ when $\theta' = \theta$ (if the horizontal stacks were too large we would be forced to choose $\theta' < \theta$). However, this is feasible if and only if the distance $d$ depicted in Figure 6 is greater than or equal to 1 (otherwise we would not be able to slide in the vertical stack $V'_0$). But, since $\varphi > \psi$, then $d_1 + d_2 > d$. Clearly, though, $d_1$ is greater than $DC$ in the first packing algorithm (see Figure 4) and $d_2$ is greater than $CB$. Thus, $d > d_1 + d_2 > DB = 1$, implying that $\theta' \leq \theta$.
+
+<!-- NOTE: The archived PDF p.7 itself prints both $d_1+d_2>d$ and $d>d_1+d_2$ in this chain; this is a source error, not a transcription error. An independent coordinate and equation check recorded in campaign/hypotheses/H-037-asymptotic-waste-exponent.md establishes the intended first inequality $d>d_1+d_2$ and repairs this local sign step only. -->
 
 > *[Figure 6: Demonstrating that $\theta' < \theta$. -- not extractable from PDF]*
 

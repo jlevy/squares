@@ -747,9 +747,9 @@ implicit prerequisite or a claimed capability.
 
 ## Rollout Plan
 
-Implementation lands as stacked PRs on the current square-packing stack.
-As lower PRs merge, the next PR rebases and retargets to the new stack tip without
-changing the ownership boundaries above:
+Implementation lands as successive PRs on the current square-packing stack.
+As lower PRs merge, the next PR merges the new stack tip and retargets without changing
+the ownership boundaries above:
 
 1. this plan and its bead map;
 2. the integrated vocabulary, schema, corpus, source-coverage, documentation-map,

@@ -159,18 +159,26 @@ Checks run concurrently, but their captured output is replayed in declared order
 workers.
 Strict mode cannot be combined with a partial selection and fails on every skip.
 
-Each mutation-control command has a 120-second default deadline and may declare a
+Every validation subprocess has a finite 600-second default deadline.
+Override it with `--timeout-seconds SECONDS` or `PACKING_VALIDATE_TIMEOUT_SECONDS`;
+values must be positive and finite, and an explicit smaller per-call timeout still wins.
+Mutation- control commands retain their 120-second default deadline and may declare a
 smaller `timeout_seconds` in `devtools/controls.yaml`. A timeout terminates and reaps
 the whole process group, including a child that ignores the first termination signal.
 Each command also gets an empty bytecode-cache root, so rapid same-size source mutations
 cannot execute a stale control from the preceding snapshot use.
 
+The validation deadline bounds subprocess commands on supported POSIX hosts.
+It does not bound pure-Python worker code, the total duration of a step that runs
+multiple commands, or detached daemons; Windows process-tree cleanup is not yet
+implemented. These limits are why a subprocess timeout is not, by itself, evidence that
+D-239 is resolved.
+
 CI executes the same locked full command on Linux and macOS from
 [`packing-validation.yml`](../../.github/workflows/packing-validation.yml).
-A focused macOS reconstruction temporarily asserts D-203’s exact known `n = 4` drift.
-The classifier fails CI if the reconstruction passes or fails differently, so a fix,
-crash, or new golden change cannot be hidden as an allowed failure.
-Remove that expected-failure contract when D-203 is resolved.
+The macOS job also runs the focused deep-golden step directly.
+D-203’s temporary expected-failure classifier was removed after the repaired producer
+passed on both architectures; the workflow test rejects its return.
 Never accept a rebuilt golden to make the probe green, and do not add a second CI-only
 implementation of either check.
 
