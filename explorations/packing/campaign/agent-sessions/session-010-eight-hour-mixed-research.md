@@ -301,7 +301,7 @@ session:
       Implement exp-038 as a fast source-bound exact checker with executable input
       mutations, without broadening the frozen mathematical criterion or adding a
       generic polyhedral framework.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The corrected exp-038 criterion is frozen; the next distinct task is its bounded
@@ -322,10 +322,63 @@ session:
     fallback: >-
       Preserve only source-bound exact helpers, record the first unproved criterion
       clause in think-oiv4, and rotate without changing exp-038.
+    outcome: >-
+      Commit 27b999e provides a source-bound exact checker for the five-dimensional
+      fixed-angle polytope, LP dual, twelve sharp paths, owner-axis exhaustion, positive
+      branchwise stress polynomials, independent packings, and all ten mutations. Two
+      flattering proof shortcuts found in review were corrected before any target run.
+    evidence:
+    - >-
+      Final independent verification reports source SHA-256
+      813411d0b66c5f161285785917bd163bc59cca90571ff0030b22d42a8e76c6cc,
+      2.17-second temporary generation, 2.10-second replay, and no remaining P0/P1 issue.
+    - >-
+      D-256 replaces invalid fixed-sign endpoint reasoning with fixed-projection zero-axis
+      and convex negative-axis certificates; D-257 replaces three-sample interpolation
+      with structurally derived exact polynomial cancellation.
+    - >-
+      Ruff, BasedPyright, schemas, synopsis reconciliation, ledger checking, and all 62
+      negative controls pass. The temporary target-shaped records remain outside the repository.
+    stop_reason: >-
+      The corrected instrument was independently reviewed, committed, and pushed in
+      25.2 minutes, leaving the required integration reserve. No retained confirmatory
+      result was generated in this W7 phase.
+    next_action: >-
+      Run the frozen exp-038 target exactly once from clean engine commit 27b999e in a
+      separate W6 phase, then replay and reconcile only claims the criterion warrants.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Run the frozen exp-038 confirmatory criterion exactly once from clean reviewed
+      engine commit 27b999e, replay the retained record, and update only the cell-local
+      LP-optimal-face and twelve pathwise first-order conclusions it establishes.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The W7 checker is reviewed, committed, pushed, and separated from target evidence
+      by a clean commit boundary; the next distinct task is the confirmatory measurement.
+    budget_minutes: 20
+    started_at: '2026-08-25T02:01:00-07:00'
+    deadline_at: '2026-08-25T02:21:00-07:00'
+    expected_output: >-
+      One retained exp-038 JSON record, identical replay, terminal experiment artifact,
+      focused validation entry, and bounded H-023, agenda, ledger, and synopsis updates.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --quiet python
+      -m cases.n5.fixed_angle_polytope --replay
+      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
+    kill_condition: >-
+      Stop on source drift, record/replay mismatch, any surviving control, an invalid
+      exact packing, or a requested conclusion outside the frozen refusal boundary.
+    fallback: >-
+      Leave exp-038 in progress, retain the clean instrument commit and exact blocker,
+      and rotate without changing its criterion or mathematical verdict.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Commit and push the corrected exp-038 preregistration before implementation.
+    next_action: Generate the one retained target record from clean commit 27b999e.
   primary_bead: think-3cbq
   status: in_progress
   budget:
