@@ -476,7 +476,8 @@ re-measuring and builds only what the profile names.
 
 ### Reading the gate
 
-`packing-validate` runs thirty-one steps.
+`packing-validate` runs the steps registered by its validation table;
+`packing-validate --list` prints the authoritative current inventory.
 A green gate means every *built* component behaves as its checks describe; it says
 nothing about the unbuilt ones, and it does not upgrade an inadmissible output.
 

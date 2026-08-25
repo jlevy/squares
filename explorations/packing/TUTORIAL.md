@@ -340,10 +340,13 @@ Never extrapolate across an assurance or arithmetic boundary.
 | `verified` | An exact check, rigorous interval certificate, or complete proof decides the claim and its preconditions |
 
 Methods are recorded separately.
-`numerical-f64` says exactly what arithmetic was used.
+The witness and machine-check tokens are `numerical-f64`, `numerical-multiprecision`,
+`interval-certified`, and `exact-algebraic`. Frontier proof evidence additionally uses
+`published-proof`, `proof-audited`, or `proof-assistant-checked`. `numerical-f64` says
+exactly what arithmetic was used.
 `numerical-multiprecision` must state the actual digits or bits and tolerance; it does
 not mean unlimited precision.
-Formal methods include exact algebraic replay, rigorous interval certification, and
+The formal tokens name exact algebraic replay, rigorous interval certification, or a
 scoped proof. A numerical result remains numerical at tolerance `1e-100`.
 
 `beat_record: true` requires `assurance: verified`. A negative numerical gap is a
@@ -430,10 +433,11 @@ what any result can claim.
 **The verification and experimental stack is built.** Exact `ℚ(α)` arithmetic with
 irreducibility and unique-root checks, rational and algebraic separating-axis
 verification, negative controls, the independently rebuilt LP, the numerical
-class-bracketing quench, the Rust screening annealer, and a thirty-one-step gate all
-exist. Formal results built on the proof instruments include the lower-bound
-falsification and repair, the optimal configuration spaces at `n = 3` and `n = 4`, and
-the local-isolation theorem for Trump’s pose.
+class-bracketing quench, the Rust screening annealer, and the registered repository gate
+all exist. `packing-validate --list` is the authoritative inventory.
+Formal results built on the proof instruments include the lower-bound falsification and
+repair, the optimal configuration spaces at `n = 3` and `n = 4`, and the local-isolation
+theorem for Trump’s pose.
 The quench and annealer remain numerical instruments; listing them here does not promote
 their outputs to verified.
 
@@ -610,7 +614,7 @@ Assurance and method follow [§5](#5-algebra-versus-numerics).
 | [Trump’s pose is locally isolated](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries |
 | The one-dimensional class-angle optimum is a corner, with one-sided slopes of `0.1747` and `0.384` per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails |
 | The exact optimal configuration spaces at [`n = 3`](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | verified (`exact-algebraic`) | Only those two moduli spaces are classified here; the optimal side values at `n = 5` and `n = 6` are proved, but their optimal configuration spaces are not classified here |
-| Refinement is not the current bottleneck: the same refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | numerically checked (floating LP) | The solver floor is about `1e-11` in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
+| Refinement is not the current bottleneck: the same floating-point LP refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | numerically checked (`numerical-f64`) | The solver floor is about `1e-11` in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
 
 ### Open
 
@@ -676,7 +680,7 @@ Everything below is used narrowly here.
 | **angle class** | a set of squares constrained to share one angle |
 | **gap** | always `best_side − standing_best`, signed |
 | **standing best** | the best side ever published for that `n`—an upper bound, not known to be optimal in the open cases |
-| **assurance** | `reported`, `numerically checked`, or `verified`; method, actual precision, tolerance, and origin stay separate |
+| **assurance** | `reported`, `numerically-checked`, or `verified`; method, actual precision, tolerance, and origin stay separate |
 | **atlas** / **census** | the deduplicated store of endpoints, and an enumeration run to saturation |
 
 ## 10. Where to Go Next
