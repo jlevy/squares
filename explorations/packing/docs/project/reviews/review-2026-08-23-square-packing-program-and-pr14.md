@@ -2665,6 +2665,51 @@ fixture under `think-nr5w`. The full legacy-series migration is deferred until a
 series-level consumer needs it; experiment-level subject, instrument, regime, and
 provenance plus the explicit legacy warning already prevent unsafe pooling.
 
+## PR #22 Merge-Readiness Review: 2026-08-24
+
+**Scope:** PR #22 starting at pre-review head `0775c20` against current `main` at
+`277f060`, including all GitHub review surfaces, the 38-file diff, current packing
+beads, the normal gate, the H-023 exact claims, and the documented handoff contract.
+
+**Verdict:** the committed tree is a coherent checkpoint, but the PR is not yet
+merge-ready under the repository’s current rule.
+The normal gate passes all 30 steps, but
+[`conventions.md`](../../../conventions.md#10-what-the-gate-actually-enforces) requires
+`./test.sh --strict` before a merge or deep handoff.
+D-203 still makes that gate red on the n=4 seed-0 HiGHS status-4 failure.
+Keep the PR draft until `think-nr5w` resolves the millisecond fixture, `think-b3bm`
+provides the declared receipt path, and one complete strict run passes under
+`think-l1us`.
+
+The review found six additional process and record defects.
+None changes an H-023 claim, threshold, tolerance, or golden:
+
+| Review | Defect | Bead | Disposition |
+| --- | --- | --- | --- |
+| MR1 | D-219 | `think-tqjr` | Replace BC-010’s superseded n=4/n=10 diagnosis with D-199’s restored n=10 path and D-203’s isolated n=4 failure |
+| MR2 | D-220 | `think-l1us` | Encode `think-nr5w` and `think-b3bm` before strict revalidation, then make `think-nm35` depend on that explicit transition |
+| MR3 | D-221 | `think-05hr` | Correct the live campaign bead from the superseded eight-hour horizon to the user-selected four-hour checkpoint |
+| MR4 | D-222 | `think-ysz2` | Stop and discard an unauthorized delegated strict run; require explicit command exclusions and wall ceilings on bounded audit delegations |
+| MR5 | D-223 | `think-r10n` | Replace the synopsis’s stale 37-second/37-control checkpoint with the final pre-commit review run’s 35-second receipt and 55-control coverage |
+| MR6 | D-224 | `think-fer4` | Discard a focused negative-control run made outside the gate-managed Python environment; retain the correctly replayed 55/55 result |
+
+GitHub reports the current head mergeable with a clean merge state and no reviews,
+inline comments, issue comments, or hosted checks.
+The branch and remote head match, and current `main` is the merge base.
+Two independent pre-review normal gates pass in 69 and 91 wall-seconds; post-review runs
+pass in 31 and 35 wall-seconds.
+The current gate includes 55 negative controls, Python and Rust lint, BasedPyright,
+generated views, all 36 experiment commits, and nine AgentSession records.
+An independent derivation also confirms exp-036’s `sqrt(2)/8` owner-4 excess, `-1/4`
+owner-3 gap, positive relative-angle cusp margin, finite branch exhaustion, and narrow
+Bouligand-tangent scope.
+
+The older runner trust-boundary, identity, work-budget, and queue-pricing defects remain
+post-merge prerequisites for an unattended numerical campaign; they do not invalidate
+this historical and exact-research checkpoint.
+`think-nm35` is genuine follow-up research and belongs on a fresh branch after the merge
+gate, not in PR #22.
+
 ## Post-merge operating disposition
 
 PR #14 has merged and is now the stable prototype base.

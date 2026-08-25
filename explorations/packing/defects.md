@@ -2,15 +2,15 @@
 
 # Defect log
 
-221 defects recorded across the packing toolchain.
+227 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **64 soundness defects** — the system asserting something false about the mathematics. 53 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **78 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202).
-- **27 are still open** (outstanding or contained), every one carrying a bead.
+- **84 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202).
+- **28 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 15 | a cell of the sweep whose answer is known in advance |
-| `review` | 143 | a human or agent reading the work against a checklist |
-| `anomaly` | 9 | a result that made no sense, chased down |
+| `review` | 147 | a human or agent reading the work against a checklist |
+| `anomaly` | 11 | a result that made no sense, chased down |
 | `inspection` | 24 | reading the code or the design with intent |
 | `drift_check` | 13 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 14 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 14 of 221, and none of the 64 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 14 of 227, and none of the 64 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,18 +34,18 @@ The line worth reading twice: **the automated gate caught 14 of 221, and none of
 | engine | 9 |
 | quench | 20 |
 | verifier | 4 |
-| record | 56 |
+| record | 61 |
 | tooling | 54 |
-| docs | 78 |
+| docs | 79 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
 | soundness | 64 |
-| validity | 62 |
-| bookkeeping | 67 |
-| robustness | 20 |
+| validity | 63 |
+| bookkeeping | 71 |
+| robustness | 21 |
 | performance | 8 |
 
 ## Fixed, but nothing stops it coming back
@@ -133,6 +133,12 @@ This is the actionable list.
 | D-212 | The workflow prose turned a primary focus into an exclusive focus | docs |
 | D-216 | Full phase histories made the generated orientation table unboundedly wide | tooling |
 | D-218 | Session-009's output inventory stopped before exp-035 and exp-036 | record |
+| D-219 | The BC-010 agenda retained a superseded two-size solver diagnosis | record |
+| D-220 | The durable resume order was not encoded in the ready-work graph | record |
+| D-221 | The campaign bead retained the superseded eight-hour horizon | record |
+| D-222 | A delegated read-only audit launched an explicitly excluded deep gate | record |
+| D-223 | The synopsis retained superseded normal-gate timing and control counts | docs |
+| D-224 | A focused negative-control replay omitted the gate-managed Python environment | record |
 
 ## Still open
 
@@ -165,6 +171,7 @@ This is the actionable list.
 | D-202 | contained | medium | A delegated long-running validation lost its final receipt | `think-b3bm` |
 | D-203 | outstanding | high | The n=4 seed-0 quench ends on a HiGHS solve error | `think-nr5w` |
 | D-217 | contained | medium | A parallel validation wrapper discarded a live command receipt | `think-b3bm` |
+| D-222 | contained | medium | A delegated read-only audit launched an explicitly excluded deep gate | `think-ysz2` |
 
 ## Every defect
 
@@ -388,6 +395,12 @@ This is the actionable list.
 | [D-216](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | performance | neutral | `review` | low | fixed | Full phase histories made the generated orientation table unboundedly wide |
 | [D-217](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `anomaly` | medium | contained | A parallel validation wrapper discarded a live command receipt |
 | [D-218](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `inspection` | medium | fixed | Session-009's output inventory stopped before exp-035 and exp-036 |
-| [D-219](../../.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | robustness | conservative | `gate` | medium | fixed | CI discarded the history required by its own provenance gate |
-| [D-220](../../.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | performance | neutral | `inspection` | low | fixed | The uv cache key prefixed its working directory twice |
-| [D-221](tests/test_module_boundaries.py) | 2026-08-24 | tooling | robustness | conservative | `gate` | low | fixed | The workflow regression assumed every YAML key was a string |
+| [D-219](campaign/agendas/agenda-001-basin-confidence-ladder.md) | 2026-08-24 | record | bookkeeping | conservative | `review` | medium | fixed | The BC-010 agenda retained a superseded two-size solver diagnosis |
+| [D-220](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | bookkeeping | flattering | `review` | high | fixed | The durable resume order was not encoded in the ready-work graph |
+| [D-221](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | bookkeeping | neutral | `review` | medium | fixed | The campaign bead retained the superseded eight-hour horizon |
+| [D-222](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | robustness | conservative | `anomaly` | medium | contained | A delegated read-only audit launched an explicitly excluded deep gate |
+| [D-223](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping | neutral | `review` | medium | fixed | The synopsis retained superseded normal-gate timing and control counts |
+| [D-224](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | validity | conservative | `anomaly` | medium | fixed | A focused negative-control replay omitted the gate-managed Python environment |
+| [D-225](../../.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | robustness | conservative | `gate` | medium | fixed | CI discarded the history required by its own provenance gate |
+| [D-226](../../.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | performance | neutral | `inspection` | low | fixed | The uv cache key prefixed its working directory twice |
+| [D-227](tests/test_module_boundaries.py) | 2026-08-24 | tooling | robustness | conservative | `gate` | low | fixed | The workflow regression assumed every YAML key was a string |

@@ -278,10 +278,11 @@ agenda:
       non-sheet directions remain unclassified. D-197 records and repairs the
       intervening shared-workspace branch race without adding a lease or worktree
       protocol. Think-imav is complete; think-nm35 owns the next remaining-cone slice.
-      The 30-step normal gate passes in 37 wall-seconds. Strict deep regeneration remains
-      blocked by the already outstanding D-126/D-162 golden behavior: an isolated
-      one-worker run reproduces the n=4 and n=10 drift in 109 seconds. No tolerance or
-      golden record was changed.
+      D-199's capped cumulative residual repair restores n=10 and all seven ladder rungs
+      at `PACK_JOBS=10` and `PACK_JOBS=1`. Only n=4 seed 0 remains: a typed HiGHS
+      status-4 Solve error under D-203 and `think-nr5w`. The committed golden is
+      unchanged, and no further full-golden retry is authorized before the millisecond
+      fixture is captured. The strict merge and handoff gate remains red.
     artifacts:
     - cases/n5/equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
