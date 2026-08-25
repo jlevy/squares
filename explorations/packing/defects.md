@@ -2,7 +2,7 @@
 
 # Defect log
 
-304 defects recorded across the packing toolchain.
+309 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -17,15 +17,15 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | Detector | Count | What it is |
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
-| `control_cell` | 17 | a cell of the sweep whose answer is known in advance |
+| `control_cell` | 18 | a cell of the sweep whose answer is known in advance |
 | `review` | 191 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
 | `inspection` | 31 | reading the code or the design with intent |
 | `drift_check` | 15 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 34 | the automated test suite |
+| `gate` | 38 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 34 of 304, and none of the 73 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 38 of 309, and none of the 73 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,17 +34,17 @@ The line worth reading twice: **the automated gate caught 34 of 304, and none of
 | engine | 11 |
 | quench | 21 |
 | verifier | 4 |
-| record | 90 |
-| tooling | 91 |
-| docs | 87 |
+| record | 91 |
+| tooling | 94 |
+| docs | 88 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
 | soundness | 73 |
-| validity | 78 |
-| bookkeeping | 112 |
+| validity | 79 |
+| bookkeeping | 116 |
 | robustness | 32 |
 | performance | 9 |
 
@@ -511,3 +511,8 @@ This is the actionable list.
 | [D-302](resources/papers/square-packing-x06-wasted-area-2508.04603.md) | 2026-08-25 | docs | soundness | conservative | `review` | high | fixed | Bui transcription changed the square-reduction divisor into a product |
 | [D-303](resources/papers/square-packing-x06-wasted-area-2508.04603.md) | 2026-08-25 | docs | soundness | flattering | `review` | high | fixed | Bui transcription omitted the quantified width hypothesis |
 | [D-304](campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | 2026-08-25 | docs | soundness | flattering | `review` | high | contained | McClenagan's Section 3 proof uses a contradictory inequality chain |
+| [D-305](SYNOPSIS.md) | 2026-08-25 | docs | bookkeeping | flattering | `gate` | medium | fixed | The source checkpoint undercounted fixes without regression checks |
+| [D-306](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | neutral | `gate` | medium | fixed | Four aggregate mutation controls retained stale exact anchors |
+| [D-307](defects.yaml) | 2026-08-25 | tooling | validity | conservative | `gate` | medium | fixed | Host Python misdiagnosed valid Python 3.14 exception syntax |
+| [D-308](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | neutral | `control_cell` | medium | fixed | Two synchronized mutation controls expected the canonical rather than mutated count |
+| [D-309](campaign/agent-sessions/session-012-eight-hour-final-continuation.md) | 2026-08-25 | record | bookkeeping | neutral | `gate` | low | fixed | The first session-012 draft violated two clocked-session fields |

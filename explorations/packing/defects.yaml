@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 304
+count: 309
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -7816,3 +7816,123 @@ defects:
   regression: none
   bead: think-486e
   recorded_in: campaign/hypotheses/H-037-asymptotic-waste-exponent.md
+- id: D-305
+  title: The source checkpoint undercounted fixes without regression checks
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: flattering
+  detected_by: gate
+  latent_for: one pushed checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    The coordinator manually changed the synopsis aggregate from 103 to 105 after adding
+    D-302 and D-303, overlooking that D-301 had already raised the authoritative count.
+    check_synopsis derived 106 fixed non-outstanding defects whose regression is none.
+  consequence: >-
+    The source and generated defect views were synchronized, but the project overview
+    understated the toolchain's unprotected-fix debt and made both CI architectures red.
+  fix: >-
+    Replace the guessed total with the derived value 106, run check_synopsis directly,
+    and require the complete validation surface at the repair checkpoint.
+  regression: uv run --frozen python -m devtools.check_synopsis
+  bead: think-u6pz
+  recorded_in: SYNOPSIS.md
+- id: D-306
+  title: Four aggregate mutation controls retained stale exact anchors
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: multiple aggregate changes
+  severity: medium
+  status: fixed
+  what: >-
+    The negative controls for defect count, hypothesis count, soundness direction and
+    gate-detector aggregates still searched for older canonical prose. Their exact-once
+    anchor guard rejected all four instead of exercising the intended nearby mutation.
+  consequence: >-
+    The controls failed loudly rather than becoming false green, but the complete gate
+    could not distinguish the real D-305 synopsis drift until its own stale fixtures were
+    synchronized.
+  fix: >-
+    Update each exact anchor and its expected derived diagnostic to the current canonical
+    aggregate while retaining the same deliberately wrong nearby replacement.
+  regression: uv run --frozen python -m devtools.run_negative_controls devtools/controls.yaml
+  bead: think-wgg7
+  recorded_in: devtools/controls.yaml
+- id: D-307
+  title: Host Python misdiagnosed valid Python 3.14 exception syntax
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted repair attempt
+  severity: medium
+  status: fixed
+  what: >-
+    The coordinator compiled the Python-3.14-targeted runner with the older host
+    `python3`, interpreted its rejection of parenthesis-free multiple exceptions as a
+    source error, and incorrectly inferred that CI had executed stale bytecode. Python
+    3.14 deliberately accepts this syntax under PEP 758.
+  consequence: >-
+    The first repair inserted parentheses and added a source-compilation test tied to the
+    wrong interpreter. Ruff's locked Python 3.14 format check rejected that draft, while
+    the public diagnosis temporarily overstated a nonexistent cache-validity failure.
+  fix: >-
+    Retract the cache claim, restore the Python 3.14 formatter-canonical source, remove
+    the host-version test, and use the locked uv/Ruff environment for language-version
+    judgments.
+  regression: uv run --frozen ruff format --check devtools/run_negative_controls.py
+  bead: think-02c0
+  recorded_in: defects.yaml
+- id: D-308
+  title: Two synchronized mutation controls expected the canonical rather than mutated count
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: control_cell
+  latent_for: one uncommitted control-harness run
+  severity: medium
+  status: fixed
+  what: >-
+    The hypothesis-count control expected the old canonical diagnostic 41 after mutating
+    42 to 41, even though the checker correctly reported that 42 was missing. The
+    unprotected-fix control expected 106 after changing one regression from none, even
+    though that mutation correctly reduced the derived total to 105.
+  consequence: >-
+    Both controls made the intended source mutation and failed, but rejected the correct
+    checker response, leaving the 62-control suite red after the first anchor repair.
+  fix: >-
+    Make each expected substring describe the deliberately mutated state: missing
+    hypothesis count 42 and unprotected-fix count 105.
+  regression: uv run --frozen python -m devtools.run_negative_controls devtools/controls.yaml
+  bead: think-7y4k
+  recorded_in: devtools/controls.yaml
+- id: D-309
+  title: The first session-012 draft violated two clocked-session fields
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: one uncommitted schema run
+  severity: low
+  status: fixed
+  what: >-
+    The draft marked its active clocked phase retrospective even though the repair was
+    declared publicly as it began, and rounded a 184-minute-three-second span down to a
+    184-minute wall budget. Both violate the AgentSession/v2 clock contract.
+  consequence: >-
+    The portable checkpoint understated its outer allowance and could not establish that
+    the currently active phase was declared before its outcome.
+  fix: >-
+    Mark the phase contemporaneous, set the containing wall budget to 185 minutes, and
+    rerun the enforced session schema before validation.
+  regression: uv run --frozen python -m devtools.validate_schemas
+  bead: think-b5th
+  recorded_in: campaign/agent-sessions/session-012-eight-hour-final-continuation.md
