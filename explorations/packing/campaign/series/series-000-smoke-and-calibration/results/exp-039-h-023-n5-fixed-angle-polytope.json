@@ -15916,11 +15916,11 @@
         }
       },
       "interior_and_B_slide_correction": "none",
-      "matches_exp_037": true
+      "matches_exp_038": true
     },
     "exact_regeneration_matches": true,
     "exp_033": "campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json",
     "exp_034": "campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json",
-    "exp_037": "campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json"
+    "exp_038": "campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-tangent-inventory.json"
   }
 }

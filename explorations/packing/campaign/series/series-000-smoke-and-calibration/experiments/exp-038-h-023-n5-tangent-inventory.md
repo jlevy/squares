@@ -1,12 +1,12 @@
 ---
-title: exp-037 — exact n = 5 tangent-cone inventory
+title: exp-038 — exact n = 5 tangent-cone inventory
 softschema:
   contract: packing.squares:Experiment/v1
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
 experiment:
-  id: exp-037
+  id: exp-038
   series: series-000
   title: Certify the complete first-order cone along the exp-033 face
   date: '2026-08-25'
@@ -38,15 +38,15 @@ experiment:
     command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
       -m cases.n5.tangent_inventory --record
-      campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
+      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-tangent-inventory.json
       && timeout 30 uv run --directory explorations/packing --frozen --quiet python
       -m cases.n5.tangent_inventory --replay
-      campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
+      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-tangent-inventory.json
     budget: >-
       one 30-minute implementation and measurement slice; separate 30-second generation
       and replay caps; stop on source drift, incomplete branch coverage, a failed exact
       certificate, a surviving control, a nonlinear overclaim, or retained-record drift
-    record: campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
+    record: campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-tangent-inventory.json
   results:
   - shape: determination
     question: >-
@@ -80,7 +80,7 @@ experiment:
       verdict remains limited to branchwise linearization cones.
     commit: b8d0104
 ---
-# exp-037 — accepted exact n = 5 tangent-cone inventory
+# exp-038 — accepted exact n = 5 tangent-cone inventory
 
 Exp-035 retained one non-sheet vector but did not enumerate its branchwise cones.
 An exact active-set pilot has now supplied discovery evidence: each endpoint branch has

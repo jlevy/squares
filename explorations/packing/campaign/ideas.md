@@ -175,7 +175,7 @@ families remain untried.
 | 42 | Improve the lower bound for `s(12)` and ultimately decide whether `s(12)=4` | registered | [H-039](hypotheses/H-039-s12-proof-frontier.md) | proof frontier | Exp-016/017 now calibrate failure and success of the forcing architecture; CEGIS can alternate candidate resources with continuous escape witnesses |
 | 43 | Walk adjacent active LP cells instead of resampling cell volume | registered | [H-040](hypotheses/H-040-active-cell-neighbor-walk.md) | piecewise-linear geometry | Compare new verified cells per LP solve at `n=5,10`; a cell is not automatically a component or basin |
 | 44 | Repair Stromquist’s printed Figure 14 set without changing the proof architecture | confirmed | [H-041](hypotheses/H-041-repaired-stromquist-point-set.md) | [exp-017](series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | Moving only `G.x` from `.8` to `.79` yields a complete exact five-node certificate and independently restores the stated lower bound |
-| 45 | Extract proper incidence-minimal rigidity cores from every Trump derivative branch | registered | [H-042](hypotheses/H-042-trump-incidence-rigidity-cores.md) | successor to exp-013 | Exact grouped wall/contact cores test whether every fixed-side branch contains structural first-order redundancy; they do not supply a radius or global theorem |
+| 45 | Extract proper incidence-minimal rigidity cores from every Trump derivative branch | registered | [H-043](hypotheses/H-043-trump-incidence-rigidity-cores.md) | successor to exp-013 | Exact grouped wall/contact cores test whether every fixed-side branch contains structural first-order redundancy; they do not supply a radius or global theorem |
 
 ## Open questions
 
