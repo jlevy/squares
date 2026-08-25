@@ -84,6 +84,13 @@ common-cell polytope.
 This is discovery evidence only.
 The round is confirmatory and must rebuild the result from the exact source models.
 
+After the preregistration commit and before any target measurement, read-only review
+found two remaining ambiguities in the same criterion defect recorded as D-254: `C_I`
+was not explicitly defined, and the nonredundancy mutation did not name its input.
+The text now fixes `C_I = (C_A + C_B)/2` coordinatewise and fixes that mutation as
+removing `x0 >= 1/2`. No dimension, interval, multiplier, acceptance count, or verdict
+threshold changed.
+
 Write `r = sqrt(2)`, `L = 1 + 5r/4`, and `a = x4`. The proposed polytope fixes
 
 `x2 = y2 = 1/2`, `x3 = y3 = 1 + 3r/4`, and `x4 + y4 = 2 + r/2`,
@@ -131,7 +138,8 @@ interior and B vectors named `R3` and `R6` are canonical, while its stored A vec
 `Ri+s`. This source map prevents a scale change or double-added slide from passing as
 the declared continuation.
 
-Let `delta = 3r/2 - 2`. For `i` in `{1,2,3,6}`, the declared paths are
+Let `delta = 3r/2 - 2` and define `C_I = (C_A + C_B)/2` coordinatewise.
+For `i` in `{1,2,3,6}`, the declared paths are
 
 ```text
 C_A,i(epsilon) = C_A + epsilon (Ri + s)
@@ -170,10 +178,11 @@ prove stress on the rest of the polytope or second-order local minimality.
 
 The ten controls mutate proof inputs and rerun the proof.
 They reject: an omitted A slide correction; an added B slide correction; `R6` without
-`dx4 = -1/2`; an overlong interior path; removal of a proved nonredundant inequality; a
-perturbed LP-dual coefficient; a perturbed owner-3 stress multiplier; a missing owner
-branch; a false zero-axis claim; and any promotion to local minimum, quench terminal, or
-maximal stationary component.
+`dx4 = -1/2`; an overlong interior path; removal of the proved nonredundant inequality
+`x0 >= 1/2`, which admits the exact unbounded ray `x0 -> x0 - t`; a perturbed LP-dual
+coefficient; a perturbed owner-3 stress multiplier; a missing owner branch; a false
+zero-axis claim; and any promotion to local minimum, quench terminal, or maximal
+stationary component.
 
 An accepted result would certify one fixed-orientation labelled separating cell’s
 connected five-dimensional LP-optimal face and first-order stationarity along the twelve
