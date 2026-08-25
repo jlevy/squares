@@ -542,7 +542,8 @@ Never extrapolate across an assurance or arithmetic boundary.
 | `numerically-checked` | A finite calculation checked the scoped predicates under an explicit method, precision, rounding, and tolerance |
 | `verified` | An exact check, rigorous interval certificate, or complete proof decides the claim and its preconditions |
 
-The **method** is recorded separately, and there are four:
+The **method** is recorded separately.
+Witness and machine-check evidence uses four tokens:
 
 | Method | What it is |
 | --- | --- |
@@ -554,7 +555,9 @@ The **method** is recorded separately, and there are four:
 The first two are numerical and the last two are formal, and no amount of the first buys
 the second: **a numerical result remains numerical at tolerance `1e-100`.** Actual
 precision, rounding, and tolerance are recorded alongside the method rather than implied
-by it.
+by it. Frontier proof evidence uses three further tokens—`published-proof`,
+`proof-audited`, and `proof-assistant-checked`—for claims whose warrant is an argument
+rather than a computation.
 
 `beat_record: true` requires `assurance: verified`. A negative numerical gap is a
 candidate or solver error, never a formal discovery—a rule that caught a critical defect
@@ -640,8 +643,8 @@ what any result can claim.
 **The verification and experimental stack is built.** Exact `ℚ(α)` arithmetic with
 irreducibility and unique-root checks, rational and algebraic separating-axis
 verification, negative controls, the independently rebuilt LP, the numerical
-class-bracketing quench, the Rust screening annealer, and the validation gate all exist,
-and the gate runs in one to two minutes.
+class-bracketing quench, the Rust screening annealer, and the registered repository gate
+all exist. `packing-validate --list` is the authoritative inventory.
 Formal results built on the proof instruments include the lower-bound falsification and
 repair, the optimal configuration spaces at `n = 3` and `n = 4`, and the local-isolation
 theorem for Trump’s pose.
@@ -822,7 +825,7 @@ Assurance and method follow [§5](#5-algebra-versus-numerics).
 | [Trump’s pose is locally isolated](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries |
 | The one-dimensional class-angle optimum is a corner, with one-sided slopes of `0.1747` and `0.384` per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails |
 | The exact optimal configuration spaces at [`n = 3`](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | verified (`exact-algebraic`) | Only those two moduli spaces are classified here; the optimal side values at `n = 5` and `n = 6` are proved, but their optimal configuration spaces are not classified here |
-| Refinement is not the current bottleneck: the same refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | numerically checked (`numerical-f64`) | The solver floor is about `1e-11` in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
+| Refinement is not the current bottleneck: the same floating-point LP refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | numerically checked (`numerical-f64`) | The solver floor is about `1e-11` in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
 
 ### Open
 

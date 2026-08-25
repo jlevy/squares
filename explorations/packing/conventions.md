@@ -329,9 +329,10 @@ generates the synopsis view.
 
 ## 10. What the Gate Actually Enforces
 
-`packing-validate` runs thirty-one read-only steps concurrently and replays their output
-in declared order. `packing-validate --list` prints the authoritative names and tiers;
-the `STEPS` table in `src/sqpack/cli/validate.py` is the only registration point.
+`packing-validate` runs its registered read-only steps concurrently and replays their
+output in declared order.
+`packing-validate --list` prints the authoritative names and tiers; the `STEPS` table in
+`src/sqpack/cli/validate.py` is the only registration point.
 What they enforce, grouped:
 
 **Mathematics, checked exactly where the claim is formal.** Exact verification of the
