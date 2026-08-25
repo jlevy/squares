@@ -66,9 +66,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 225", "count: 20"]
+  replace: ["count: 229", "count: 20"]
   run: python3 tools/validate_schemas.py
-  expect: "count 20 != 225"
+  expect: "count 20 != 229"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -129,9 +129,23 @@ controls:
 
 - name: synopsis - gate detector aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["gate has caught twelve defects in 225", "gate has caught eleven defects in 225"]
+  replace: ["gate has caught twelve defects in 229", "gate has caught eleven defects in 229"]
   run: uv run --frozen --quiet python tools/check_synopsis.py
-  expect: "gate-detector aggregate is not 12 of 225"
+  expect: "gate-detector aggregate is not 12 of 229"
+
+- name: synopsis - hypothesis-status aggregate drifting from the ledger
+  file: SYNOPSIS.md
+  replace: ["derives three confirmed hypotheses", "derives two confirmed hypotheses"]
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "hypothesis-status aggregate does not match campaign/ledger.md"
+
+- name: synopsis - readiness dashboard detached from a canonical owner
+  file: SYNOPSIS.md
+  replace:
+    - "[Where This Stands](#where-this-stands), then run"
+    - "[Where This Stands](#what-is-built), then run"
+  run: uv run --frozen --quiet python tools/check_synopsis.py
+  expect: "readiness dashboard is detached from canonical source '#where-this-stands'"
 
 - name: synopsis - unprotected-fix count drifting from the log
   file: defects.yaml
