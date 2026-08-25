@@ -5,7 +5,7 @@ title: Make the square-packing frontier transparent, complete, and reusable
 kind: epic
 status: open
 priority: 1
-version: 28
+version: 29
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
@@ -32,8 +32,9 @@ child_order_hints:
   - is-01m0vd6xfaz5p8ccnq6xrnr5x5
   - is-01m0vhjwpg55jj6jt0g96qpr87
   - is-01m0vx6yv2a8qzeehw1ce6h5en
+  - is-01m0vyec8k6gbtc795ya5z228x
 created_at: 2026-08-24T22:36:47.654Z
-updated_at: 2026-08-25T07:30:01.679Z
+updated_at: 2026-08-25T07:51:33.394Z
 ---
 Cross-cutting redesign of the square-packing frontier, assurance model, validation toolkit, and contributor workflow. Reusable framework implementation uses W7 pipeline-improvement rather than W4 process review or the general-improvement fallback: it balances mathematical soundness, reader and agent clarity, operational discipline, and research efficiency. Make current status effortless to inspect; distinguish published mathematical status, local numerical checks, and exact formal certification; keep public-source coverage explicit and current; and provide general entry points for importing, viewing, checking, and promoting witnesses. Add no metadata, gate, table, hash, or work item without a named failure or reader need. Acceptance: one obvious path answers what is known for each n and why; verified always means exact formal assurance; numerical claims state their actual method and limits; historical unknowns are preserved rather than invented; source and tooling gaps are visible; and the workflow catches consequential errors without ritual or tracker spam.
 
