@@ -50,3 +50,12 @@ def test_deep_golden_ignores_yaml_wrapping(
     output = capsys.readouterr().out
     assert "parsed golden content is identical" in output
     assert "GOLDEN BASIN CHECKS PASSED" in output
+
+
+def test_semantic_yaml_comparison_preserves_types_and_rejects_duplicate_keys() -> None:
+    """Only presentation differences may disappear from the deep golden diff."""
+    assert check_golden_basins.canonical_yaml("value: 1\n") != (
+        check_golden_basins.canonical_yaml("value: 1.0\n")
+    )
+    with pytest.raises(yaml.constructor.ConstructorError, match="duplicate key 'value'"):
+        check_golden_basins.canonical_yaml("value: 1\nvalue: 1\n")

@@ -276,6 +276,24 @@ def main() -> int:
     assert compact_bound({"value": "5.93383346267692", "exact_form": None}) == (
         "`5.93383346267692`"
     )
+    assert (
+        compact_bound(
+            {
+                "value": "5.472135955",
+                "exact_form": "sqrt(29 - 2*floor(sqrt(29)) + 1) + 1",
+            }
+        )
+        == "`1 + √20`"
+    )
+    assert (
+        compact_bound(
+            {
+                "value": "5.93388579986236485799813026",
+                "exact_form": ("296694289993118242899906513/50000000000000000000000000"),
+            }
+        )
+        == "`296694289993118242899906513/50000000000000000000000000`"
+    )
     assert same_bound(
         {"value": "3.87708359002281", "exact_form": None},
         {"value": "3.87708359002281417", "exact_form": "root(P, interval)"},

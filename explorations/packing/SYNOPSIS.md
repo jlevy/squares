@@ -304,9 +304,9 @@ W7; historical phases are not relabelled after the fact.
 The latest terminal record is
 [session-014](campaign/agent-sessions/session-014-final-portfolio-rotation.md), which
 opened no later research round.
-The next agent should open one bounded W6 slice under `think-1s0h`, preregister one
-exact R4/R5 nonlinear-realization criterion, and retain an exact continuation, exact
-obstruction, or finite unresolved list.
+The next agent should open one bounded W6 slice for agenda cell `BC-010` under
+`think-1s0h`, preregister one exact R4/R5 nonlinear-realization criterion, and retain an
+exact continuation, exact obstruction, or finite unresolved list.
 The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
 remain later slices; D-239 is a separate W7 line.
 Do not start basin-frequency work or reinterpret exp-035 through exp-039 as a
@@ -1924,24 +1924,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 322 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 325 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 74 | asserted something false about the mathematics |
+| soundness | 76 | asserted something false about the mathematics |
 | validity | 82 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 121 | recorded something its own evidence contradicts |
-| robustness | 36 | did not finish, or finished only by luck |
+| robustness | 37 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Sixty-one of the seventy-four soundness defects pointed in the *flattering*
+**Sixty-three of the seventy-six soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-two defects in 322, and no soundness defect
+**The automated gate has caught forty-two defects in 325, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
