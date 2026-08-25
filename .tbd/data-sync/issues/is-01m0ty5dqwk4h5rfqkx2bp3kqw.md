@@ -5,18 +5,21 @@ title: Preserve final receipts from delegated long-running commands
 kind: bug
 status: open
 priority: 1
-version: 5
+version: 8
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+delegate: codex-root
 labels:
   - packing
   - process
 dependencies: []
 parent_id: is-01m0t3n7z9fj0p7wwt1kn4nzqk
+child_order_hints:
+  - is-01m0wcppfdp4hmb9g7gjwey1qr
 created_at: 2026-08-24T22:27:25.563Z
-updated_at: 2026-08-25T07:19:12.541Z
+updated_at: 2026-08-25T12:02:21.537Z
 ---
 The serialized PACK_JOBS=1 deep-golden validation completed before its 180-second cap, but the delegated execution path returned neither stdout/stderr nor exit status. The run is inadmissible. Record as D-202; rerun once through a parent-owned durable session that preserves output, exit status, timing, and process cleanup. Update the portable runbook so long commands must retain a final receipt rather than infer completion from process disappearance.
 
 ## Notes
 
-The first delegated PACK_JOBS=1 command finished before 180s but returned no stdout or exit status, so it was discarded. One parent-owned durable-session rerun retained full output, real/user/sys timing and exit=1 at 79.66s. Repository runbook policy still needs the same final-receipt requirement before this bead closes.
+Session-011 order 12 added the portable parent-owned terminal-receipt rule and ran exactly one <=5s yielded command. Session 72108 and chunks 13aa02/4262fe retained both labeled streams, final exit 7, the 5s TERM/1s KILL policy, final polling and cleanup. D-300/think-jygr remains open because gdate rejected --iso-8601=milliseconds and emitted empty start/end fields; elapsed wall is not reconstructed. The phase stopped without retry, so D-202 and D-217 remain contained and this bead stays open.
