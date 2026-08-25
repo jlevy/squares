@@ -2665,17 +2665,16 @@ provenance plus the explicit legacy warning already prevent unsafe pooling.
 `277f060`, including all GitHub review surfaces, the 38-file diff, current packing
 beads, the normal gate, the H-023 exact claims, and the documented handoff contract.
 
-**Verdict:** the committed tree is a coherent checkpoint, but the PR is not yet
-merge-ready under the repository’s current rule.
-The normal gate passes all 30 steps, but
-[`conventions.md`](../../../conventions.md#10-what-the-gate-actually-enforces) requires
-`./test.sh --strict` before a merge or deep handoff.
-D-203 still makes that gate red on the n=4 seed-0 HiGHS status-4 failure.
-Keep the PR draft until `think-nr5w` resolves the millisecond fixture, `think-b3bm`
-provides the declared receipt path, and one complete strict run passes under
-`think-l1us`.
+**Verdict:** the committed tree is a coherent, merge-ready checkpoint.
+The normal gate passes all 30 steps without skips, current `main` is the merge base, and
+the known strict failure is explicit and owned.
+[`conventions.md`](../../../conventions.md#10-what-the-gate-actually-enforces) now
+separates this preservation decision from launch certification: D-203 still makes the
+strict/deep gate red on the n=4 seed-0 HiGHS status-4 failure, so `think-nr5w` continues
+to block unattended execution and any claim that the regenerated golden is healthy.
+It does not block landing this reviewed checkpoint.
 
-The review found six additional process and record defects.
+The review found seven additional process and record defects.
 None changes an H-023 claim, threshold, tolerance, or golden:
 
 | Review | Defect | Bead | Disposition |
@@ -2686,6 +2685,7 @@ None changes an H-023 claim, threshold, tolerance, or golden:
 | MR4 | D-222 | `think-ysz2` | Stop and discard an unauthorized delegated strict run; require explicit command exclusions and wall ceilings on bounded audit delegations |
 | MR5 | D-223 | `think-r10n` | Replace the synopsis’s stale 37-second/37-control checkpoint with the final pre-commit review run’s 35-second receipt and 55-control coverage |
 | MR6 | D-224 | `think-fer4` | Discard a focused negative-control run made outside the gate-managed Python environment; retain the correctly replayed 55/55 result |
+| MR7 | D-225 | `think-l1us` | Correct MR2’s overconstraint: require a green normal gate and explicit limitations for checkpoint merge, while retaining the n=4, receipt, and work-budget defects as strict launch blockers |
 
 GitHub reports the current head mergeable with a clean merge state and no reviews,
 inline comments, issue comments, or hosted checks.

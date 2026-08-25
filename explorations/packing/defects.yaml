@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 224
+count: 225
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -5751,3 +5751,31 @@ defects:
   regression: none
   bead: think-fer4
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-225
+  title: Checkpoint merge readiness was conflated with unattended launch readiness
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: the final PR 22 merge-readiness decision
+  severity: high
+  status: fixed
+  what: >-
+    The validation ladder required the strict deep-regeneration gate before every merge,
+    and the PR 22 review therefore treated the known n=4 producer failure and a portable
+    long-command receipt improvement as blockers for landing an otherwise green,
+    documented checkpoint.
+  consequence: >-
+    A launch-safety measurement was applied to a narrower preservation decision. This
+    prevented reviewed exact mathematics, process records, and a normal-gate-clean tree
+    from landing without making the failed deep producer any safer.
+  fix: >-
+    Require the normal no-skip gate, explicit defect ownership, and accurate limitations
+    for a checkpoint merge. Keep the strict gate mandatory before unattended execution,
+    a handoff that depends on regenerated producer output, or any claim that the deep
+    path is healthy. Remove think-nr5w and think-b3bm as merge dependencies without
+    closing or weakening either launch blocker.
+  regression: none
+  bead: think-l1us
+  recorded_in: conventions.md

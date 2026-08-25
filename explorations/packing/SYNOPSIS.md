@@ -1670,13 +1670,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 224 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 225 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 64 | asserted something false about the mathematics |
-| validity | 63 | was correct, but the measurement did not bear on the question |
+| validity | 64 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 71 | recorded something its own evidence contradicts |
 | robustness | 19 | did not finish, or finished only by luck |
 | performance | 7 | worked, but cost far more than it should |
@@ -1687,7 +1687,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught twelve defects in 224, and no soundness defect ever.**
+**The automated gate has caught twelve defects in 225, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1834,7 +1834,7 @@ and the other branch ref restored before push or target execution.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Eighty-four fixes left no regression check behind, and that list has already predicted a
+Eighty-five fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
@@ -1917,9 +1917,9 @@ stress analysis, not another rank count.
 No hour-scale lane is promoted without a known-answer response, independent validity,
 and a result that changes a decision.
 
-**The normal checkpoint is green; the strict unattended-handoff gate is not.** The merge
-review’s final pre-commit run passes all 30 fast-path steps in 35 wall-seconds,
-including seven exact small-`n` replays and all 55 negative controls.
+**The normal checkpoint is green; the strict unattended-handoff gate is not.** Recent
+exact-tree receipts pass all 30 fast-path steps in 33–35 wall-seconds, including seven
+exact small-`n` replays and all 55 negative controls.
 The first deep regeneration reproduced one unsettled `n=4` proposal and an `n=10`
 `1.503e-10` pair-row residual.
 [D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders
@@ -1928,6 +1928,9 @@ zero all-original-row residual.
 All seven ladder rungs now converge at pool widths 10 and 1. [D-203](defects.md)
 isolates the remaining n=4 seed-0 stop as a distinct HiGHS status-4 Solve error; the
 golden remains red at 3/4 n=4 proposals.
+[D-225](defects.md) keeps that strict/deep failure as a blocker for unattended launch
+and any claim that the producer is healthy, but not for a checkpoint merge whose normal
+gate passes and whose limitations remain explicit.
 [D-202](defects.md) separately keeps final-receipt capture open after one delegated long
 command terminated without returning its output; the evidentiary rerun used a durable
 parent-owned session.
