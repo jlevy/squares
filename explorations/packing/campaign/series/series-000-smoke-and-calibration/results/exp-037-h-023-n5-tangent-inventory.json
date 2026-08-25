@@ -1,0 +1,6076 @@
+{
+  "contract": "packing.squares:N5TangentInventory/v1",
+  "controls": {
+    "dropped_transverse_generator_rejected": true,
+    "duplicated_owner_record_rejected": true,
+    "lineality_separates_from_pointed_generator": true,
+    "minus_W_claim_rejected": true,
+    "missing_owner_record_rejected": true,
+    "nonlinear_lift_claim_rejected": true,
+    "orthant_has_declared_rays": true,
+    "rigid_cone_has_no_pointed_ray": true,
+    "sheet_as_transverse_rejected": true,
+    "transverse_as_sheet_rejected": true
+  },
+  "determination": {
+    "claim": "the six exact branchwise linearization cones have the retained complete V-representations and both owner branches coincide at first order",
+    "outcome": "criterion_met",
+    "scope": "first-order branchwise linearizations only; transverse and mixed Bouligand status, terminal membership, component identity, basin mass, and unequal-side clearance remain unresolved; exp-034 separately supplies its declared sheet lifts"
+  },
+  "face_vectors": {
+    "convention": "entry k counts k-dimensional faces of the pointed quotient by lineality, including its apex and whole quotient and excluding the empty face",
+    "endpoint_dimensions_0_through_7": [
+      1,
+      8,
+      26,
+      45,
+      45,
+      26,
+      8,
+      1
+    ],
+    "transverse_dimensions_0_through_5": [
+      1,
+      6,
+      13,
+      13,
+      6,
+      1
+    ]
+  },
+  "owner_branch_v_representations": [
+    {
+      "owner3_equals_owner4": true,
+      "pointed_quotient_ray_count": 8,
+      "proof": "both exact matrices have the displayed complete left-kernel factorization, lineality basis, sheet data, and physical generators",
+      "stratum": "A"
+    },
+    {
+      "owner3_equals_owner4": true,
+      "pointed_quotient_ray_count": 6,
+      "proof": "both exact matrices have the displayed complete left-kernel factorization, lineality basis, sheet data, and physical generators",
+      "stratum": "interior"
+    },
+    {
+      "owner3_equals_owner4": true,
+      "pointed_quotient_ray_count": 8,
+      "proof": "both exact matrices have the displayed complete left-kernel factorization, lineality basis, sheet data, and physical generators",
+      "stratum": "B"
+    }
+  ],
+  "schema_version": 1,
+  "scope_refusals": {
+    "minus_W_covered": false,
+    "nonlinear_transverse_lift_continued": false,
+    "plus_W_excluded_by_exp_036": true,
+    "statement": "-W and every transverse or mixed-direction nonlinear lift remain unresolved; exp-034 supplies the declared sheet lifts"
+  },
+  "six_matrices": [
+    {
+      "lineality_basis": {
+        "W": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "3/4"
+            ],
+            [
+              "2",
+              "-3/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ]
+          ],
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      },
+      "lineality_dimension": 1,
+      "owner": "owner3:a+",
+      "pointed_quotient_ray_count": 8,
+      "positive_left_kernel_certificate": {
+        "certificate_rank": 3,
+        "forced_zero_slacks": [
+          "contact:2-4:owner4:a+",
+          "contact:3-4:owner3:a+:square4-feature+1",
+          "contact:3-4:owner3:a+:square4-feature-1",
+          "wall:2:x-lower:+",
+          "wall:2:x-lower:-",
+          "wall:2:y-lower:+",
+          "wall:2:y-lower:-",
+          "wall:3:x-upper",
+          "wall:3:y-upper"
+        ],
+        "left_kernel_dimension": 3,
+        "left_kernel_exhausted": true,
+        "positive_identities": [
+          {
+            "contact:2-4:owner4:a+": [
+              "4/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature+1": [
+              "-3/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/4",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "25/28",
+              "2/7"
+            ],
+            "wall:2:y-lower:+": [
+              "25/28",
+              "2/7"
+            ],
+            "wall:2:y-lower:-": [
+              "1/4",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "8/7",
+              "2/7"
+            ],
+            "wall:3:y-upper": [
+              "8/7",
+              "2/7"
+            ]
+          },
+          {
+            "contact:2-4:owner4:a+": [
+              "4/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature+1": [
+              "-3/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/2",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "9/14",
+              "2/7"
+            ],
+            "wall:2:y-lower:+": [
+              "9/14",
+              "2/7"
+            ],
+            "wall:2:y-lower:-": [
+              "1/2",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "8/7",
+              "2/7"
+            ],
+            "wall:3:y-upper": [
+              "8/7",
+              "2/7"
+            ]
+          }
+        ],
+        "surviving_relation": {
+          "wall:1:x-upper:+": [
+            "1",
+            "0"
+          ],
+          "wall:1:x-upper:-": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:+": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:-": [
+            "1",
+            "0"
+          ]
+        }
+      },
+      "rank": 14,
+      "row_count": 17,
+      "rows": [
+        "wall:0:x-lower:+",
+        "wall:0:x-lower:-",
+        "wall:1:x-upper:+",
+        "wall:1:x-upper:-",
+        "wall:1:y-lower:+",
+        "wall:1:y-lower:-",
+        "wall:2:x-lower:+",
+        "wall:2:x-lower:-",
+        "wall:2:y-lower:+",
+        "wall:2:y-lower:-",
+        "wall:3:x-upper",
+        "wall:3:y-upper",
+        "contact:0-4:owner4:a-",
+        "contact:1-4:owner4:a-",
+        "contact:2-4:owner4:a+",
+        "contact:3-4:owner3:a+:square4-feature+1",
+        "contact:3-4:owner3:a+:square4-feature-1"
+      ],
+      "sheet": {
+        "kind": "pointed_cone",
+        "rays": {
+          "sheet_angle_negative": {
+            "coordinates_low_degree_first": [
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_slacks": {
+              "wall:0:x-lower:-": [
+                "1",
+                "0"
+              ]
+            },
+            "tight_active_rank": 13,
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          },
+          "sheet_angle_positive": {
+            "coordinates_low_degree_first": [
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_slacks": {
+              "wall:0:x-lower:+": [
+                "1",
+                "0"
+              ]
+            },
+            "tight_active_rank": 13,
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          }
+        }
+      },
+      "stratum": "A",
+      "transverse_rays": {
+        "R1": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "-1/2"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:1-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R2": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:0-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R3": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R4": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R5": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R6": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      }
+    },
+    {
+      "lineality_basis": {
+        "W": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "3/4"
+            ],
+            [
+              "2",
+              "-3/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ]
+          ],
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      },
+      "lineality_dimension": 1,
+      "owner": "owner4:a+",
+      "pointed_quotient_ray_count": 8,
+      "positive_left_kernel_certificate": {
+        "certificate_rank": 3,
+        "forced_zero_slacks": [
+          "contact:2-4:owner4:a+",
+          "contact:3-4:owner4:a+:square3-feature+1",
+          "contact:3-4:owner4:a+:square3-feature-1",
+          "wall:2:x-lower:+",
+          "wall:2:x-lower:-",
+          "wall:2:y-lower:+",
+          "wall:2:y-lower:-",
+          "wall:3:x-upper",
+          "wall:3:y-upper"
+        ],
+        "left_kernel_dimension": 3,
+        "left_kernel_exhausted": true,
+        "positive_identities": [
+          {
+            "contact:2-4:owner4:a+": [
+              "2",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature+1": [
+              "1",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/4",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "-1/4",
+              "1"
+            ],
+            "wall:2:y-lower:+": [
+              "-1/4",
+              "1"
+            ],
+            "wall:2:y-lower:-": [
+              "1/4",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "0",
+              "1"
+            ],
+            "wall:3:y-upper": [
+              "0",
+              "1"
+            ]
+          },
+          {
+            "contact:2-4:owner4:a+": [
+              "2",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature+1": [
+              "1",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/2",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "-1/2",
+              "1"
+            ],
+            "wall:2:y-lower:+": [
+              "-1/2",
+              "1"
+            ],
+            "wall:2:y-lower:-": [
+              "1/2",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "0",
+              "1"
+            ],
+            "wall:3:y-upper": [
+              "0",
+              "1"
+            ]
+          }
+        ],
+        "surviving_relation": {
+          "wall:1:x-upper:+": [
+            "1",
+            "0"
+          ],
+          "wall:1:x-upper:-": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:+": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:-": [
+            "1",
+            "0"
+          ]
+        }
+      },
+      "rank": 14,
+      "row_count": 17,
+      "rows": [
+        "wall:0:x-lower:+",
+        "wall:0:x-lower:-",
+        "wall:1:x-upper:+",
+        "wall:1:x-upper:-",
+        "wall:1:y-lower:+",
+        "wall:1:y-lower:-",
+        "wall:2:x-lower:+",
+        "wall:2:x-lower:-",
+        "wall:2:y-lower:+",
+        "wall:2:y-lower:-",
+        "wall:3:x-upper",
+        "wall:3:y-upper",
+        "contact:0-4:owner4:a-",
+        "contact:1-4:owner4:a-",
+        "contact:2-4:owner4:a+",
+        "contact:3-4:owner4:a+:square3-feature+1",
+        "contact:3-4:owner4:a+:square3-feature-1"
+      ],
+      "sheet": {
+        "kind": "pointed_cone",
+        "rays": {
+          "sheet_angle_negative": {
+            "coordinates_low_degree_first": [
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_slacks": {
+              "wall:0:x-lower:-": [
+                "1",
+                "0"
+              ]
+            },
+            "tight_active_rank": 13,
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          },
+          "sheet_angle_positive": {
+            "coordinates_low_degree_first": [
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_slacks": {
+              "wall:0:x-lower:+": [
+                "1",
+                "0"
+              ]
+            },
+            "tight_active_rank": 13,
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          }
+        }
+      },
+      "stratum": "A",
+      "transverse_rays": {
+        "R1": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "-1/2"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:1-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R2": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:0-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R3": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R4": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R5": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R6": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      }
+    },
+    {
+      "lineality_basis": {
+        "W": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "3/4"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ]
+          ],
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "sheet_angle": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "sheet_slide": {
+          "coordinates_low_degree_first": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      },
+      "lineality_dimension": 3,
+      "owner": "owner3:a+",
+      "pointed_quotient_ray_count": 6,
+      "positive_left_kernel_certificate": {
+        "certificate_rank": 3,
+        "forced_zero_slacks": [
+          "contact:2-4:owner4:a+",
+          "contact:3-4:owner3:a+:square4-feature+1",
+          "contact:3-4:owner3:a+:square4-feature-1",
+          "wall:2:x-lower:+",
+          "wall:2:x-lower:-",
+          "wall:2:y-lower:+",
+          "wall:2:y-lower:-",
+          "wall:3:x-upper",
+          "wall:3:y-upper"
+        ],
+        "left_kernel_dimension": 3,
+        "left_kernel_exhausted": true,
+        "positive_identities": [
+          {
+            "contact:2-4:owner4:a+": [
+              "4/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature+1": [
+              "-3/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/4",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "25/28",
+              "2/7"
+            ],
+            "wall:2:y-lower:+": [
+              "25/28",
+              "2/7"
+            ],
+            "wall:2:y-lower:-": [
+              "1/4",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "8/7",
+              "2/7"
+            ],
+            "wall:3:y-upper": [
+              "8/7",
+              "2/7"
+            ]
+          },
+          {
+            "contact:2-4:owner4:a+": [
+              "4/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature+1": [
+              "-3/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/2",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "9/14",
+              "2/7"
+            ],
+            "wall:2:y-lower:+": [
+              "9/14",
+              "2/7"
+            ],
+            "wall:2:y-lower:-": [
+              "1/2",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "8/7",
+              "2/7"
+            ],
+            "wall:3:y-upper": [
+              "8/7",
+              "2/7"
+            ]
+          }
+        ],
+        "surviving_relation": {
+          "wall:1:x-upper:+": [
+            "1",
+            "0"
+          ],
+          "wall:1:x-upper:-": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:+": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:-": [
+            "1",
+            "0"
+          ]
+        }
+      },
+      "rank": 12,
+      "row_count": 15,
+      "rows": [
+        "wall:1:x-upper:+",
+        "wall:1:x-upper:-",
+        "wall:1:y-lower:+",
+        "wall:1:y-lower:-",
+        "wall:2:x-lower:+",
+        "wall:2:x-lower:-",
+        "wall:2:y-lower:+",
+        "wall:2:y-lower:-",
+        "wall:3:x-upper",
+        "wall:3:y-upper",
+        "contact:0-4:owner4:a-",
+        "contact:1-4:owner4:a-",
+        "contact:2-4:owner4:a+",
+        "contact:3-4:owner3:a+:square4-feature+1",
+        "contact:3-4:owner3:a+:square4-feature-1"
+      ],
+      "sheet": {
+        "basis": {
+          "sheet_angle": {
+            "coordinates_low_degree_first": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          },
+          "sheet_slide": {
+            "coordinates_low_degree_first": [
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          }
+        },
+        "kind": "lineality_space"
+      },
+      "stratum": "interior",
+      "transverse_rays": {
+        "R1": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "-1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "-1/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:1-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R2": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "-1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:0-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R3": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R4": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R5": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R6": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      }
+    },
+    {
+      "lineality_basis": {
+        "W": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "3/4"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ]
+          ],
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "sheet_angle": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "sheet_slide": {
+          "coordinates_low_degree_first": [
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      },
+      "lineality_dimension": 3,
+      "owner": "owner4:a+",
+      "pointed_quotient_ray_count": 6,
+      "positive_left_kernel_certificate": {
+        "certificate_rank": 3,
+        "forced_zero_slacks": [
+          "contact:2-4:owner4:a+",
+          "contact:3-4:owner4:a+:square3-feature+1",
+          "contact:3-4:owner4:a+:square3-feature-1",
+          "wall:2:x-lower:+",
+          "wall:2:x-lower:-",
+          "wall:2:y-lower:+",
+          "wall:2:y-lower:-",
+          "wall:3:x-upper",
+          "wall:3:y-upper"
+        ],
+        "left_kernel_dimension": 3,
+        "left_kernel_exhausted": true,
+        "positive_identities": [
+          {
+            "contact:2-4:owner4:a+": [
+              "2",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature+1": [
+              "1",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/4",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "-1/4",
+              "1"
+            ],
+            "wall:2:y-lower:+": [
+              "-1/4",
+              "1"
+            ],
+            "wall:2:y-lower:-": [
+              "1/4",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "0",
+              "1"
+            ],
+            "wall:3:y-upper": [
+              "0",
+              "1"
+            ]
+          },
+          {
+            "contact:2-4:owner4:a+": [
+              "2",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature+1": [
+              "1",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/2",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "-1/2",
+              "1"
+            ],
+            "wall:2:y-lower:+": [
+              "-1/2",
+              "1"
+            ],
+            "wall:2:y-lower:-": [
+              "1/2",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "0",
+              "1"
+            ],
+            "wall:3:y-upper": [
+              "0",
+              "1"
+            ]
+          }
+        ],
+        "surviving_relation": {
+          "wall:1:x-upper:+": [
+            "1",
+            "0"
+          ],
+          "wall:1:x-upper:-": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:+": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:-": [
+            "1",
+            "0"
+          ]
+        }
+      },
+      "rank": 12,
+      "row_count": 15,
+      "rows": [
+        "wall:1:x-upper:+",
+        "wall:1:x-upper:-",
+        "wall:1:y-lower:+",
+        "wall:1:y-lower:-",
+        "wall:2:x-lower:+",
+        "wall:2:x-lower:-",
+        "wall:2:y-lower:+",
+        "wall:2:y-lower:-",
+        "wall:3:x-upper",
+        "wall:3:y-upper",
+        "contact:0-4:owner4:a-",
+        "contact:1-4:owner4:a-",
+        "contact:2-4:owner4:a+",
+        "contact:3-4:owner4:a+:square3-feature+1",
+        "contact:3-4:owner4:a+:square3-feature-1"
+      ],
+      "sheet": {
+        "basis": {
+          "sheet_angle": {
+            "coordinates_low_degree_first": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          },
+          "sheet_slide": {
+            "coordinates_low_degree_first": [
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          }
+        },
+        "kind": "lineality_space"
+      },
+      "stratum": "interior",
+      "transverse_rays": {
+        "R1": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "-1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "-1/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:1-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R2": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "-1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:0-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R3": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R4": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R5": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R6": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 11,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      }
+    },
+    {
+      "lineality_basis": {
+        "W": {
+          "coordinates_low_degree_first": [
+            [
+              "2",
+              "-3/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "3/4"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ]
+          ],
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      },
+      "lineality_dimension": 1,
+      "owner": "owner3:a+",
+      "pointed_quotient_ray_count": 8,
+      "positive_left_kernel_certificate": {
+        "certificate_rank": 3,
+        "forced_zero_slacks": [
+          "contact:2-4:owner4:a+",
+          "contact:3-4:owner3:a+:square4-feature+1",
+          "contact:3-4:owner3:a+:square4-feature-1",
+          "wall:2:x-lower:+",
+          "wall:2:x-lower:-",
+          "wall:2:y-lower:+",
+          "wall:2:y-lower:-",
+          "wall:3:x-upper",
+          "wall:3:y-upper"
+        ],
+        "left_kernel_dimension": 3,
+        "left_kernel_exhausted": true,
+        "positive_identities": [
+          {
+            "contact:2-4:owner4:a+": [
+              "4/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature+1": [
+              "-3/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/4",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "25/28",
+              "2/7"
+            ],
+            "wall:2:y-lower:+": [
+              "25/28",
+              "2/7"
+            ],
+            "wall:2:y-lower:-": [
+              "1/4",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "8/7",
+              "2/7"
+            ],
+            "wall:3:y-upper": [
+              "8/7",
+              "2/7"
+            ]
+          },
+          {
+            "contact:2-4:owner4:a+": [
+              "4/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature+1": [
+              "-3/7",
+              "8/7"
+            ],
+            "contact:3-4:owner3:a+:square4-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/2",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "9/14",
+              "2/7"
+            ],
+            "wall:2:y-lower:+": [
+              "9/14",
+              "2/7"
+            ],
+            "wall:2:y-lower:-": [
+              "1/2",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "8/7",
+              "2/7"
+            ],
+            "wall:3:y-upper": [
+              "8/7",
+              "2/7"
+            ]
+          }
+        ],
+        "surviving_relation": {
+          "wall:1:x-upper:+": [
+            "1",
+            "0"
+          ],
+          "wall:1:x-upper:-": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:+": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:-": [
+            "1",
+            "0"
+          ]
+        }
+      },
+      "rank": 14,
+      "row_count": 17,
+      "rows": [
+        "wall:0:y-upper:+",
+        "wall:0:y-upper:-",
+        "wall:1:x-upper:+",
+        "wall:1:x-upper:-",
+        "wall:1:y-lower:+",
+        "wall:1:y-lower:-",
+        "wall:2:x-lower:+",
+        "wall:2:x-lower:-",
+        "wall:2:y-lower:+",
+        "wall:2:y-lower:-",
+        "wall:3:x-upper",
+        "wall:3:y-upper",
+        "contact:0-4:owner4:a-",
+        "contact:1-4:owner4:a-",
+        "contact:2-4:owner4:a+",
+        "contact:3-4:owner3:a+:square4-feature+1",
+        "contact:3-4:owner3:a+:square4-feature-1"
+      ],
+      "sheet": {
+        "kind": "pointed_cone",
+        "rays": {
+          "sheet_angle_negative": {
+            "coordinates_low_degree_first": [
+              [
+                "-1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_slacks": {
+              "wall:0:y-upper:-": [
+                "1",
+                "0"
+              ]
+            },
+            "tight_active_rank": 13,
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          },
+          "sheet_angle_positive": {
+            "coordinates_low_degree_first": [
+              [
+                "-1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_slacks": {
+              "wall:0:y-upper:+": [
+                "1",
+                "0"
+              ]
+            },
+            "tight_active_rank": 13,
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          }
+        }
+      },
+      "stratum": "B",
+      "transverse_rays": {
+        "R1": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "-1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "-1/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:1-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R2": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "-1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:0-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R3": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R4": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R5": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R6": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      }
+    },
+    {
+      "lineality_basis": {
+        "W": {
+          "coordinates_low_degree_first": [
+            [
+              "2",
+              "-3/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "3/4"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ]
+          ],
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      },
+      "lineality_dimension": 1,
+      "owner": "owner4:a+",
+      "pointed_quotient_ray_count": 8,
+      "positive_left_kernel_certificate": {
+        "certificate_rank": 3,
+        "forced_zero_slacks": [
+          "contact:2-4:owner4:a+",
+          "contact:3-4:owner4:a+:square3-feature+1",
+          "contact:3-4:owner4:a+:square3-feature-1",
+          "wall:2:x-lower:+",
+          "wall:2:x-lower:-",
+          "wall:2:y-lower:+",
+          "wall:2:y-lower:-",
+          "wall:3:x-upper",
+          "wall:3:y-upper"
+        ],
+        "left_kernel_dimension": 3,
+        "left_kernel_exhausted": true,
+        "positive_identities": [
+          {
+            "contact:2-4:owner4:a+": [
+              "2",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature+1": [
+              "1",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/4",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "-1/4",
+              "1"
+            ],
+            "wall:2:y-lower:+": [
+              "-1/4",
+              "1"
+            ],
+            "wall:2:y-lower:-": [
+              "1/4",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "0",
+              "1"
+            ],
+            "wall:3:y-upper": [
+              "0",
+              "1"
+            ]
+          },
+          {
+            "contact:2-4:owner4:a+": [
+              "2",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature+1": [
+              "1",
+              "0"
+            ],
+            "contact:3-4:owner4:a+:square3-feature-1": [
+              "1",
+              "0"
+            ],
+            "wall:2:x-lower:+": [
+              "1/2",
+              "0"
+            ],
+            "wall:2:x-lower:-": [
+              "-1/2",
+              "1"
+            ],
+            "wall:2:y-lower:+": [
+              "-1/2",
+              "1"
+            ],
+            "wall:2:y-lower:-": [
+              "1/2",
+              "0"
+            ],
+            "wall:3:x-upper": [
+              "0",
+              "1"
+            ],
+            "wall:3:y-upper": [
+              "0",
+              "1"
+            ]
+          }
+        ],
+        "surviving_relation": {
+          "wall:1:x-upper:+": [
+            "1",
+            "0"
+          ],
+          "wall:1:x-upper:-": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:+": [
+            "-1",
+            "0"
+          ],
+          "wall:1:y-lower:-": [
+            "1",
+            "0"
+          ]
+        }
+      },
+      "rank": 14,
+      "row_count": 17,
+      "rows": [
+        "wall:0:y-upper:+",
+        "wall:0:y-upper:-",
+        "wall:1:x-upper:+",
+        "wall:1:x-upper:-",
+        "wall:1:y-lower:+",
+        "wall:1:y-lower:-",
+        "wall:2:x-lower:+",
+        "wall:2:x-lower:-",
+        "wall:2:y-lower:+",
+        "wall:2:y-lower:-",
+        "wall:3:x-upper",
+        "wall:3:y-upper",
+        "contact:0-4:owner4:a-",
+        "contact:1-4:owner4:a-",
+        "contact:2-4:owner4:a+",
+        "contact:3-4:owner4:a+:square3-feature+1",
+        "contact:3-4:owner4:a+:square3-feature-1"
+      ],
+      "sheet": {
+        "kind": "pointed_cone",
+        "rays": {
+          "sheet_angle_negative": {
+            "coordinates_low_degree_first": [
+              [
+                "-1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_slacks": {
+              "wall:0:y-upper:-": [
+                "1",
+                "0"
+              ]
+            },
+            "tight_active_rank": 13,
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          },
+          "sheet_angle_positive": {
+            "coordinates_low_degree_first": [
+              [
+                "-1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "-1/2",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_slacks": {
+              "wall:0:y-upper:+": [
+                "1",
+                "0"
+              ]
+            },
+            "tight_active_rank": 13,
+            "variables": [
+              "dx0",
+              "dx1",
+              "dx2",
+              "dx3",
+              "dx4",
+              "dy0",
+              "dy1",
+              "dy2",
+              "dy3",
+              "dy4",
+              "dtheta0",
+              "dtheta1",
+              "dtheta2",
+              "dtheta3",
+              "dtheta4"
+            ]
+          }
+        }
+      },
+      "stratum": "B",
+      "transverse_rays": {
+        "R1": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "-1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "-1/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "1/2"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:1-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R2": {
+          "coordinates_low_degree_first": [
+            [
+              "0",
+              "-1"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "contact:0-4:owner4:a-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R3": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R4": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R5": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:y-lower:+": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        },
+        "R6": {
+          "coordinates_low_degree_first": [
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "-1",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "-1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "1/2",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ],
+            [
+              "0",
+              "0"
+            ]
+          ],
+          "positive_slacks": {
+            "wall:1:x-upper:+": [
+              "1",
+              "0"
+            ],
+            "wall:1:x-upper:-": [
+              "1",
+              "0"
+            ]
+          },
+          "tight_active_rank": 13,
+          "variables": [
+            "dx0",
+            "dx1",
+            "dx2",
+            "dx3",
+            "dx4",
+            "dy0",
+            "dy1",
+            "dy2",
+            "dy3",
+            "dy4",
+            "dtheta0",
+            "dtheta1",
+            "dtheta2",
+            "dtheta3",
+            "dtheta4"
+          ]
+        }
+      }
+    }
+  ],
+  "source": {
+    "builders": "cases/n5/tangent_cones.py",
+    "exp_034": "campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json",
+    "exp_035": "campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json",
+    "exp_036": "campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json",
+    "field": "Q(sqrt(2))"
+  },
+  "transverse_cone": {
+    "ray_names": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6"
+    ],
+    "slack_relation": "X- + Y+ = X+ + Y-",
+    "sole_relation": "R3 + R6 = R4 + R5",
+    "structure": "R_+^2 times the cone over a quadrilateral"
+  }
+}

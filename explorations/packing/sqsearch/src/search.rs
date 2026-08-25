@@ -25,7 +25,7 @@
 //! campaign the hypotheses are search strategies and this struct is the surface
 //! they act on.
 
-use crate::geom::{local_overlap, required_side, total_overlap, Config};
+use crate::geom::{local_overlap_metered, required_side, total_overlap_metered, Config};
 use crate::rng::Rng;
 
 /// A candidate is screened as valid when total overlap is below this. It is a
@@ -81,6 +81,7 @@ pub struct Outcome {
     pub restarts: u64,
     pub moves: u64,
     pub accepted: u64,
+    pub pair_tests: u64,
 }
 
 /// Scatter `n` squares at random poses inside a box of side `s0`.
@@ -103,6 +104,7 @@ fn anneal(
     best_overlap: &mut f64,
     moves: &mut u64,
     accepted: &mut u64,
+    pair_tests: &mut u64,
 ) {
     let cooling = (p.t_cold / p.t_hot).powf(1.0 / p.steps.max(1) as f64);
     let ramp = (p.lambda1 / p.lambda0).powf(1.0 / p.steps.max(1) as f64);
@@ -110,7 +112,7 @@ fn anneal(
     let mut lambda = p.lambda0;
 
     let mut side = required_side(c);
-    let mut overlap = total_overlap(c);
+    let mut overlap = total_overlap_metered(c, pair_tests);
     let mut energy = side + lambda * overlap;
 
     // The starting configuration is itself a candidate. Without this the best is only
@@ -152,8 +154,8 @@ fn anneal(
         // term needs the whole configuration, so apply the move, score, and roll
         // back if rejected. At n=11 the side scan is 11 operations against 10
         // pair tests, so this is cheaper than tracking extremes incrementally.
-        let old_local = local_overlap(c, k, ox, oy, ocos, osin);
-        let new_local = local_overlap(c, k, nx, ny, ncos, nsin);
+        let old_local = local_overlap_metered(c, k, ox, oy, ocos, osin, pair_tests);
+        let new_local = local_overlap_metered(c, k, nx, ny, ncos, nsin, pair_tests);
         c.x[k] = nx;
         c.y[k] = ny;
         c.t[k] = nt;
@@ -201,7 +203,7 @@ pub fn run_chain(n: usize, seed: u64, chain: u64, p: &Params, budget_moves: u64)
     let mut best = grid.clone();
     let mut best_side = s0;
     let mut best_overlap = 0.0;
-    let (mut moves, mut accepted, mut restarts) = (0u64, 0u64, 0u64);
+    let (mut moves, mut accepted, mut restarts, mut pair_tests) = (0u64, 0u64, 0u64, 0u64);
 
     let mut c = Config::new(n);
     while moves < budget_moves && restarts < p.max_restarts {
@@ -220,6 +222,7 @@ pub fn run_chain(n: usize, seed: u64, chain: u64, p: &Params, budget_moves: u64)
             &mut best_overlap,
             &mut moves,
             &mut accepted,
+            &mut pair_tests,
         );
     }
 
@@ -228,7 +231,7 @@ pub fn run_chain(n: usize, seed: u64, chain: u64, p: &Params, budget_moves: u64)
     // times per chain, so cancellation error is at the plausible scale of FEASIBLE_EPS
     // itself -- and it can drift either way, silently recording a real overlap or
     // silently refusing a genuine one. The guard has to be a measurement, not a memory.
-    let best_overlap = total_overlap(&best);
+    let best_overlap = total_overlap_metered(&best, &mut pair_tests);
 
     Outcome {
         best_side,
@@ -237,6 +240,7 @@ pub fn run_chain(n: usize, seed: u64, chain: u64, p: &Params, budget_moves: u64)
         restarts,
         moves,
         accepted,
+        pair_tests,
     }
 }
 
@@ -318,7 +322,7 @@ pub fn run_entry_chain(
     let mut best = seed_cfg.clone();
     let mut best_side = f64::INFINITY;
     let mut best_overlap = 0.0;
-    let (mut moves, mut accepted, mut restarts) = (0u64, 0u64, 0u64);
+    let (mut moves, mut accepted, mut restarts, mut pair_tests) = (0u64, 0u64, 0u64, 0u64);
 
     let mut c = Config::new(n);
     while moves < budget_moves && restarts < p.max_restarts {
@@ -333,10 +337,11 @@ pub fn run_entry_chain(
             &mut best_overlap,
             &mut moves,
             &mut accepted,
+            &mut pair_tests,
         );
     }
 
-    let best_overlap = total_overlap(&best);
+    let best_overlap = total_overlap_metered(&best, &mut pair_tests);
     Outcome {
         best_side,
         best,
@@ -344,5 +349,6 @@ pub fn run_entry_chain(
         restarts,
         moves,
         accepted,
+        pair_tests,
     }
 }

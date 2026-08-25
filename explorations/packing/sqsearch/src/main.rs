@@ -117,13 +117,18 @@ fn main() {
     let mut best_chain = 0u64;
     let mut best_config = &outcomes[0].1.best;
     let mut best_overlap = f64::NAN;
-    let (mut moves, mut anneals) = (0u64, 0u64);
+    let (mut moves, mut anneals, mut pair_tests) = (0u64, 0u64, 0u64);
     for (chain, o) in &outcomes {
-        moves += o.moves;
-        anneals += o.restarts;
+        moves = moves.checked_add(o.moves).expect("move total overflow");
+        anneals = anneals
+            .checked_add(o.restarts)
+            .expect("anneal total overflow");
+        pair_tests = pair_tests
+            .checked_add(o.pair_tests)
+            .expect("pair-test total overflow");
         println!(
             "{{\"kind\":\"chain\",\"n\":{},\"seed\":{},\"chain\":{},\"best_side\":{:.17e},\
-             \"overlap\":{:.3e},\"moves\":{},\"restarts\":{},\"accepted\":{},{}}}",
+             \"overlap\":{:.3e},\"moves\":{},\"restarts\":{},\"accepted\":{},\"pair_tests\":{},{}}}",
             n,
             seed,
             chain,
@@ -132,6 +137,7 @@ fn main() {
             o.moves,
             o.restarts,
             o.accepted,
+            o.pair_tests,
             json_config(&o.best)
         );
         if o.best_side < best_side {
@@ -146,8 +152,9 @@ fn main() {
         "{{\"kind\":\"summary\",\"n\":{n},\"seed\":{seed},\"chains\":{chains},\
 \"best_side\":{best_side:.17e},\"best_chain\":{best_chain},\"moves\":{moves},\
 \"anneals\":{anneals},\"seconds\":{elapsed:.3},\"moves_per_sec\":{rate:.0},\
-\"best_overlap\":{overlap:.3e},{config},\"params\":{params}}}",
+\"pair_tests\":{pair_tests},\"pair_tests_per_sec\":{pair_rate:.0},\"best_overlap\":{overlap:.3e},{config},\"params\":{params}}}",
         rate = moves as f64 / elapsed,
+        pair_rate = pair_tests as f64 / elapsed,
         overlap = best_overlap,
         config = json_config(best_config),
         params = json_params(&p),
@@ -257,6 +264,7 @@ fn basin_entry(args: &[String]) {
     );
 
     let started = std::time::Instant::now();
+    let mut pair_tests = 0u64;
     for token in eps_list.split(',') {
         let eps: f64 = token.trim().parse().expect("bad --eps value");
         // Floored at t_cold: eps = 0 is a legitimate cell (the instrument check that
@@ -276,6 +284,9 @@ fn basin_entry(args: &[String]) {
             })
             .collect();
         for (trial, o, dev) in &outcomes {
+            pair_tests = pair_tests
+                .checked_add(o.pair_tests)
+                .expect("pair-test total overflow");
             // A chain that never reached a feasible configuration has no landing
             // point. Its stored `best` is still the seed, so reporting a deviation
             // would record a perfect return for a trial that in fact failed -- the
@@ -292,7 +303,7 @@ fn basin_entry(args: &[String]) {
             println!(
                 "{{\"kind\":\"entry\",\"n\":{},\"eps\":{:.3e},\"trial\":{},\"seed\":{},\
 \"t_hot\":{:.3e},\"feasible\":{},\"best_side\":{},\"seed_side\":{:.17e},\"side_gap\":{},\
-\"max_dev\":{},\"overlap\":{:.3e},\"moves\":{},\"restarts\":{}}}",
+\"max_dev\":{},\"overlap\":{:.3e},\"moves\":{},\"restarts\":{},\"pair_tests\":{}}}",
                 seed_cfg.n,
                 eps,
                 trial,
@@ -305,14 +316,23 @@ fn basin_entry(args: &[String]) {
                 dev_s,
                 o.best_overlap,
                 o.moves,
-                o.restarts
+                o.restarts,
+                o.pair_tests
             );
         }
     }
+    let elapsed = started.elapsed().as_secs_f64();
     println!(
         "{{\"kind\":\"summary\",\"mode\":\"basin-entry\",\"n\":{},\"seed\":{},\"trials_per_eps\":{},\
-\"eps\":\"{}\",\"seconds\":{:.3},\"params\":{}}}",
-        seed_cfg.n, seed, trials, eps_list, started.elapsed().as_secs_f64(), json_params(&p)
+\"eps\":\"{}\",\"seconds\":{:.3},\"pair_tests\":{},\"pair_tests_per_sec\":{:.0},\"params\":{}}}",
+        seed_cfg.n,
+        seed,
+        trials,
+        eps_list,
+        elapsed,
+        pair_tests,
+        pair_tests as f64 / elapsed,
+        json_params(&p)
     );
 }
 
@@ -411,6 +431,29 @@ fn selftest() {
         "chain reproducible from (seed, chain)",
         a.best_side == b.best_side,
         &format!("{:.17e}", a.best_side),
+        &mut failures,
+    );
+    let meter_p = Params {
+        steps: 3,
+        max_restarts: 2,
+        ..Default::default()
+    };
+    let meter_chain = search::run_chain(4, 7, 0, &meter_p, 6);
+    let (meter_seed, _) = geom::Config::grid(4);
+    let meter_entry = search::run_entry_chain(&meter_seed, 7, 0, &meter_p, 6, 1e-4);
+    let pair_expected = 2 * (4 * 3 / 2) + 6 * 2 * 3 + 4 * 3 / 2;
+    report(
+        "pair-test meter covers ordinary and basin-entry search",
+        meter_chain.moves == 6
+            && meter_chain.restarts == 2
+            && meter_chain.pair_tests == pair_expected
+            && meter_entry.moves == 6
+            && meter_entry.restarts == 2
+            && meter_entry.pair_tests == pair_expected,
+        &format!(
+            "ordinary {}, entry {}, expected {}",
+            meter_chain.pair_tests, meter_entry.pair_tests, pair_expected
+        ),
         &mut failures,
     );
 

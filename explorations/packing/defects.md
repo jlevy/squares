@@ -2,14 +2,14 @@
 
 # Defect log
 
-248 defects recorded across the packing toolchain.
+282 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **65 soundness defects** — the system asserting something false about the mathematics. 54 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **92 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242).
+- **70 soundness defects** — the system asserting something false about the mathematics. 58 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **93 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264).
 - **28 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -17,36 +17,36 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | Detector | Count | What it is |
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
-| `control_cell` | 15 | a cell of the sweep whose answer is known in advance |
-| `review` | 161 | a human or agent reading the work against a checklist |
+| `control_cell` | 17 | a cell of the sweep whose answer is known in advance |
+| `review` | 173 | a human or agent reading the work against a checklist |
 | `anomaly` | 11 | a result that made no sense, chased down |
-| `inspection` | 29 | reading the code or the design with intent |
-| `drift_check` | 14 | a generated view disagreeing with its source |
+| `inspection` | 30 | reading the code or the design with intent |
+| `drift_check` | 15 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 15 | the automated test suite |
+| `gate` | 33 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 15 of 248, and none of the 65 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 33 of 282, and none of the 70 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
 | Layer | Count |
 | --- | ---: |
-| engine | 9 |
-| quench | 20 |
+| engine | 10 |
+| quench | 21 |
 | verifier | 4 |
-| record | 68 |
-| tooling | 64 |
+| record | 83 |
+| tooling | 81 |
 | docs | 83 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 65 |
-| validity | 65 |
-| bookkeeping | 83 |
-| robustness | 27 |
-| performance | 8 |
+| soundness | 70 |
+| validity | 70 |
+| bookkeeping | 105 |
+| robustness | 28 |
+| performance | 9 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -147,6 +147,7 @@ This is the actionable list.
 | D-238 | The synopsis called quench endpoints discrete basins with a well-defined census | docs |
 | D-243 | The autonomous-loop instruction contradicted its upstream launch blocker | docs |
 | D-247 | A delegated follow-up again rewrote the dependency lock outside its scope | tooling |
+| D-280 | The phase-count cap ended a fast campaign before its wall-clock goal | tooling |
 
 ## Still open
 
@@ -176,10 +177,10 @@ This is the actionable list.
 | D-139 | contained | high | H-032 omitted directly relevant hard-square configuration-space literature | `think-izep` |
 | D-162 | outstanding | high | The small-n golden convergence labels hid unsettled fixed-cell evaluations | `think-wbra` |
 | D-202 | contained | medium | A delegated long-running validation lost its final receipt | `think-b3bm` |
-| D-203 | outstanding | high | The n=4 seed-0 quench ends on a HiGHS solve error | `think-nr5w` |
 | D-217 | contained | medium | A parallel validation wrapper discarded a live command receipt | `think-b3bm` |
 | D-222 | contained | medium | A delegated read-only audit launched an explicitly excluded deep gate | `think-ysz2` |
 | D-239 | outstanding | medium | Validation steps have no outer deadline or process-group cleanup | `think-tx0b` |
+| D-280 | contained | high | The phase-count cap ended a fast campaign before its wall-clock goal | `think-bfwm` |
 
 ## Every defect
 
@@ -387,7 +388,7 @@ This is the actionable list.
 | [D-200](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping | conservative | `inspection` | medium | fixed | The synopsis gate-defect enumeration omitted D-198 |
 | [D-201](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `review` | medium | fixed | Two mutation controls retained pre-integration expected diagnostics |
 | [D-202](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `anomaly` | medium | contained | A delegated long-running validation lost its final receipt |
-| [D-203](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | quench | robustness | conservative | `gate` | high | outstanding | The n=4 seed-0 quench ends on a HiGHS solve error |
+| [D-203](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-24 | quench | robustness | conservative | `gate` | high | fixed | The n=4 seed-0 quench ends on a HiGHS solve error |
 | [D-204](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The gate-aggregate control expected the mutated value |
 | [D-205](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `review` | high | fixed | The stacked workflow PR retained a superseded scientific checkpoint |
 | [D-206](campaign/schemas/agent-session.schema.yaml) | 2026-08-24 | record | robustness | flattering | `review` | high | fixed | The phase schema could not express the resumable contract promised by the docs |
@@ -433,3 +434,37 @@ This is the actionable list.
 | [D-246](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | medium | fixed | Reserve enforcement crashed on a malformed contemporaneous phase clock |
 | [D-247](uv.lock) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | A delegated follow-up again rewrote the dependency lock outside its scope |
 | [D-248](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | high | fixed | Active slice deadlines were recorded but not enforced after expiry |
+| [D-249](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-25 | record | bookkeeping | flattering | `inspection` | high | fixed | Branch completion and landed-main state were treated as the same fact |
+| [D-250](cases/n5/tangent_inventory.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | A delegated exact checker asserted proofs and controls it had not executed |
+| [D-251](cases/n5/tangent_inventory.py) | 2026-08-25 | tooling | validity | conservative | `control_cell` | medium | fixed | An omitted R6 coordinate produced a false exact blocker |
+| [D-252](campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | medium | fixed | The preregistered refusal accidentally included already proved sheet lifts |
+| [D-253](tests/test_module_boundaries.py) | 2026-08-25 | tooling | robustness | neutral | `gate` | medium | fixed | The exp-037 wrapper was added under a forbidden legacy tools path |
+| [D-254](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md) | 2026-08-25 | record | soundness | flattering | `review` | high | fixed | The first exp-038 criterion conflated ray normalizations and rank with dimension |
+| [D-255](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Four exact negative-control anchors lagged the current living-document values |
+| [D-256](cases/n5/fixed_angle_polytope.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | Endpoint equality was treated as an affine full-interval axis proof |
+| [D-257](cases/n5/fixed_angle_polytope.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | Three stress samples were promoted without deriving the degree bound |
+| [D-258](defects.yaml) | 2026-08-25 | record | bookkeeping | flattering | `review` | high | fixed | An under-scoped status patch closed the wrong outstanding defect |
+| [D-259](../../.flowmarkignore) | 2026-08-25 | record | bookkeeping | conservative | `drift_check` | medium | fixed | An explicit Flowmark target bypassed the generated-view exclusion |
+| [D-260](tests/test_research_contracts.py) | 2026-08-25 | tooling | validity | flattering | `control_cell` | high | fixed | A solver fixture cross-wired two fixed-point evaluations |
+| [D-261](tests/test_research_contracts.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The replay fixture was allowed to define its own failure receipt |
+| [D-262](tests/test_research_contracts.py) | 2026-08-25 | tooling | bookkeeping | flattering | `gate` | medium | fixed | A delegated fixture stopped after pytest while static checks were red |
+| [D-263](defects.yaml) | 2026-08-25 | record | bookkeeping | flattering | `review` | high | fixed | A second status-only patch closed D-034 instead of the named defect |
+| [D-264](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | medium | fixed | An active session ended its workflow list on a completed phase |
+| [D-265](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | flattering | `gate` | medium | fixed | Two delegation deadlines exceeded their declared budgets |
+| [D-266](src/sqpack/research/quench.py) | 2026-08-25 | quench | soundness | conservative | `review` | high | fixed | A numerical fallback disagreement was promoted to infeasibility |
+| [D-267](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The soundness mutation diagnostic kept the old denominator |
+| [D-268](tests/test_research_contracts.py) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Focused fallback checks omitted the Python format gate |
+| [D-269](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | A session delegation used an undeclared timing-quality value |
+| [D-270](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | low | fixed | Phase 11 retained a next action that its own evidence had completed |
+| [D-271](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | A phase rotation used an undeclared transition label |
+| [D-272](../../.github/workflows/packing-validation.yml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The macOS expected-failure guard rejected a recovered deep golden |
+| [D-273](tests/test_module_boundaries.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The direct-blocking workflow test admitted advisory variants |
+| [D-274](tests/test_module_boundaries.py) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The delegated promotion check named deleted paths and left one long assertion |
+| [D-275](sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | engine | validity | flattering | `review` | high | fixed | The first pair-meter draft omitted basin-entry work from its summary |
+| [D-276](sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The first basin-entry meter probe selected a fixture without angles |
+| [D-277](sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The first pair-meter integration test omitted crate documentation |
+| [D-278](defects.yaml) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The D-277 regression command made the defect source invalid YAML |
+| [D-279](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The finalization phase used an undeclared focus value |
+| [D-280](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | tooling | performance | conservative | `gate` | high | contained | The phase-count cap ended a fast campaign before its wall-clock goal |
+| [D-281](devtools/controls.yaml) | 2026-08-25 | record | bookkeeping | conservative | `gate` | medium | fixed | New defect totals left synopsis controls and the open inventory stale |
+| [D-282](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The stopped session retained a completed final phase |

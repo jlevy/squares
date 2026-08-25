@@ -322,6 +322,20 @@ def _small_n(context: Context) -> str:
             "--replay",
             str(RESULTS / "exp-036-h-023-n5-second-order-obstruction.json"),
         ),
+        (
+            sys.executable,
+            "-m",
+            "cases.n5.tangent_inventory",
+            "--replay",
+            str(RESULTS / "exp-037-h-023-n5-tangent-inventory.json"),
+        ),
+        (
+            sys.executable,
+            "-m",
+            "cases.n5.fixed_angle_polytope",
+            "--replay",
+            str(RESULTS / "exp-038-h-023-n5-fixed-angle-polytope.json"),
+        ),
     )
     return _commands(context, commands)
 

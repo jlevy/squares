@@ -72,9 +72,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 248", "count: 20"]
+  replace: ["count: 282", "count: 20"]
   run: python3 -m devtools.validate_schemas
-  expect: "count 20 != 248"
+  expect: "count 20 != 282 entries"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -113,7 +113,7 @@ controls:
 
 - name: synopsis - dateline duplicates volatile campaign progress
   file: SYNOPSIS.md
-  replace: ["**Date:** 2026-08-24", "**Date:** 2026-08-24, after 36 rounds"]
+  replace: ["**Date:** 2026-08-25", "**Date:** 2026-08-25, after 36 rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "Date dateline repeats campaign progress"
 
@@ -129,15 +129,15 @@ controls:
 
 - name: synopsis - soundness direction aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["Fifty-four of the sixty-five soundness defects", "Fifty-three of the sixty-five soundness defects"]
+  replace: ["Fifty-eight of the seventy soundness defects", "Fifty-seven of the seventy soundness defects"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "soundness-direction aggregate is not 54 of 65"
+  expect: "soundness-direction aggregate is not 58 of 70"
 
 - name: synopsis - gate detector aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["gate has caught fifteen defects in 248", "gate has caught fourteen defects in 248"]
+  replace: ["gate has caught thirty-three defects in 282", "gate has caught thirty-two defects in 282"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "gate-detector aggregate is not 15 of 248"
+  expect: "gate-detector aggregate is not 33 of 282"
 
 - name: synopsis - hypothesis-status aggregate drifting from the ledger
   file: SYNOPSIS.md
