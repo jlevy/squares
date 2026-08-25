@@ -3,9 +3,9 @@ type: is
 id: is-01m0vnq7t0x9ydha20bpdxmjzk
 title: Review post-engineering main for packing research readiness
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 10
+version: 11
 labels:
   - packing
   - review
@@ -20,7 +20,11 @@ child_order_hints:
   - is-01m0vp9p0kxnxydpaxc4ykt1tt
   - is-01m0vpakbh6fy8p18cxsmtydgd
 created_at: 2026-08-25T05:19:06.559Z
-updated_at: 2026-08-25T05:38:19.796Z
+updated_at: 2026-08-25T05:40:15.357Z
+closed_at: 2026-08-25T05:40:15.342Z
+close_reason: Reviewed merged PR 23/27 main end to end, fixed and logged D-233 through D-238, preserved D-239 as engineering follow-up think-tx0b, passed the full 31-step gate, pushed commit 0fe6ba8, and opened PR 28 with the supervised-research/no-go boundary documented.
+resolution: null
+duplicate_of: null
 ---
 Audit merged PR #23 and the post-PR-27 main tree for engineering correctness, validation health, research-loop executability, and consistency among README, SYNOPSIS, development guide, campaign runbook, launch plan, agenda, ledger, defects, and beads. Apply bounded corrections, log every defect, and leave a clean checkpoint for the next research phase.
 
