@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 309
+count: 313
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -434,7 +434,7 @@ defects:
   detected_by: inspection
   latent_for: 'found while fixing D-014'
   severity: medium
-  status: contained
+  status: fixed
   what: >-
     The post-check accepts constraint violations up to 1e-9 and HiGHS will not go
     tighter than 1e-10, so a polished side can be wrong by roughly 1e-11. Eight recorded
@@ -7811,8 +7811,9 @@ defects:
     so this campaign cannot count the angle-reversal step as independently verified or
     use it for finite transfer without a separate geometric argument.
   fix: >-
-    Annotate the source-level gap in the archive and H-037, prohibit reliance on the
-    step, and leave the intended inequality or geometric repair for independent audit.
+    Keep the source error annotated, independently derive the intended chain
+    d>d1+d2>DB=1 from Figures 4 and 6, and separately derive 0<theta'<theta from
+    equations (2.2), (2.5), and (3.2). H-037 records both checks and their local scope.
   regression: none
   bead: think-486e
   recorded_in: campaign/hypotheses/H-037-asymptotic-waste-exponent.md
@@ -7936,3 +7937,94 @@ defects:
   regression: uv run --frozen python -m devtools.validate_schemas
   bead: think-b5th
   recorded_in: campaign/agent-sessions/session-012-eight-hour-final-continuation.md
+- id: D-310
+  title: McClenagan's equation 3.2 calls a periodic tangent solution unique
+  date: '2026-08-25'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: three days in the local literature archive
+  severity: medium
+  status: fixed
+  what: >-
+    After equation (3.2), the source defines theta' as the unique solution of a tangent
+    equation without naming a branch. Tangent is periodic, so uniqueness is false over
+    all real theta' even though Figure 5 selects a small acute geometric branch.
+  consequence: >-
+    A literal algebraic replay has infinitely many solutions and cannot infer the sign
+    or magnitude of theta' until the intended interval is stated.
+  fix: >-
+    State the principal acute branch dictated by Figure 5. H-037 proves existence and
+    uniqueness on 0<theta'<theta from exact equations without presupposing the sign.
+  regression: none
+  bead: think-szk1
+  recorded_in: campaign/hypotheses/H-037-asymptotic-waste-exponent.md
+- id: D-311
+  title: The open-defect bead control still mutated a fixed record
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: multiple defect-status changes
+  severity: high
+  status: fixed
+  what: >-
+    The control named "open defect with no bead" removed D-021's bead after D-021 had
+    become fixed. Fixed defects may retain beads but do not require them, so the mutation
+    no longer exercised the invariant its name and prior green result claimed.
+  consequence: >-
+    A future outstanding or contained defect could lose its bead while this nominal
+    control falsely suggested that the failure path had been rehearsed.
+  fix: >-
+    Retarget the exact-once mutation to outstanding D-039 and require schema validation
+    to report that D-039 is outstanding without a bead.
+  regression: defect log - open defect with no bead
+  bead: think-kit3
+  recorded_in: devtools/controls.yaml
+- id: D-312
+  title: An early checkpoint phase claimed the outer finalization clock role
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: one uncommitted schema run
+  severity: low
+  status: fixed
+  what: >-
+    Session 012's checkpoint phase began at 06:20 but was first labeled finalization even
+    though the session's declared 30-minute final reserve does not begin until 08:06.
+  consequence: >-
+    The record would conflate an ordinary between-slice checkpoint with the protected
+    outer reserve and make later work appear to occur after finalization had begun.
+  fix: Mark the checkpoint phase as clock_role work and reserve finalization for 08:06.
+  regression: uv run --frozen python -m devtools.validate_schemas
+  recurrence_of: D-309
+  bead: think-ryai
+  recorded_in: campaign/agent-sessions/session-012-eight-hour-final-continuation.md
+- id: D-313
+  title: Explicit Flowmark target bypassed the generated-ledger exclusion
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: drift_check
+  latent_for: one checkpoint command
+  severity: medium
+  status: fixed
+  what: >-
+    A checkpoint explicitly passed generated campaign/ledger.md to Flowmark, bypassing
+    .flowmarkignore. The packing-ledger check caught the resulting stale generated view
+    before commit.
+  consequence: >-
+    The generated ledger could be reflowed outside its canonical renderer and lose
+    reproducible formatting or source synchronization.
+  fix: >-
+    Regenerate ledger.md only with packing-ledger render and validate freshness; never
+    pass generated views explicitly to Flowmark.
+  regression: uv run --directory explorations/packing --frozen packing-ledger check
+  recurrence_of: D-259
+  bead: think-chfy
+  recorded_in: campaign/agent-sessions/session-013-generated-view-recurrence-checkpoint.md

@@ -76,12 +76,55 @@ count, or complete boundary and rounding accounting for the residual stacks.
 Those are the missing finite-constructor obligations; the $x^{3/5}$ exponent alone does
 not discharge them.
 
-McClenagan’s independent construction cannot yet serve as an unchecked shortcut.
-Its Section 3 proof of $\theta'\leq\theta$ prints $d_1+d_2>d$ and then $d>d_1+d_2>DB=1$
-in the same paragraph.
-The contradiction is present in the archived PDF itself, not introduced by extraction.
-Until the geometry is independently repaired, this campaign treats that step as an open
-source-level proof gap and makes no finite or asymptotic inference from it.
+## Local repair of McClenagan’s sign step
+
+McClenagan’s Section 3 proof of $\theta'\leq\theta$ prints $d_1+d_2>d$ and then
+$d>d_1+d_2>DB=1$ in the same paragraph.
+The contradiction is present in the
+[archived PDF](../../resources/papers/mcclenagan-2026-optimally-packing-large-square.pdf),
+not introduced by extraction.
+Figures 4 and 6 and equations (2.1), (2.2), (2.5), and (3.2) nevertheless give two
+independent local repairs.
+
+For the diagrammatic repair, let $D(a)$ be the Figure 6 clearance when the horizontal
+stacks have inclination $a$. Resolving the horizontal displacements gives
+
+$$ D(a)=\cos a-\sin a+\sin a+\cos a\tan\theta=(1+\tan\theta)\cos a. $$
+
+Thus $d=D(\psi)>D(\varphi)=d_1+d_2$ because $0<\psi<\varphi<\pi/2$. Moreover,
+
+$$ d_1=\cos\varphi-\sin\varphi>DC, \qquad
+d_2=\frac{\sin(\varphi+\theta)}{\cos\theta}>CB, $$
+
+where the first inequality follows from (2.1)--(2.2), and the second uses
+$CB=DB-DC=\sin(\varphi+\theta)$. The intended chain is therefore
+
+$$ d>d_1+d_2>DC+CB=DB=1. $$
+
+The equation-only check does not use Figure 6. Substituting (2.2) into (2.5) gives
+$\tan(\psi+\theta)=\tan\varphi$, hence $\psi+\theta=\varphi$ on the acute geometric
+branch. Put $p=\tan\varphi$ and $t=\tan(\psi/2)$. Equation (2.2) then gives
+
+$$ t=\frac{p(1-p)}{2-p+p^2}. $$
+
+On the principal branch dictated by Figure 5, equation (3.2) becomes
+
+$$ \tan(\psi+\theta')=\frac{2t}{1-t} =\frac{p(1-p)}{1-p+p^2}. $$
+
+For $0<p<1$, this quantity is strictly between $\tan\psi$ and $p$, with
+
+$$ \tan(\psi+\theta')-\tan\psi=\sec\psi-1>0, \qquad
+p-\tan(\psi+\theta')=\frac{p^3}{1-p+p^2}>0. $$
+
+Monotonicity of tangent on the acute branch proves $0<\theta'<\theta$. The mean value
+theorem and $\sec^2 a\geq1$ give $0<\theta-\theta'\leq
+p-\tan(\psi+\theta')=O(p^3)=O(\varphi^3)$. The paper’s unqualified phrase “unique
+solution” is not globally true because tangent is periodic; uniqueness here means the
+principal acute solution fixed by the geometry.
+
+This repairs only the contradictory feasibility/sign step.
+It is not an independent audit of the full construction and does not discharge H-035’s
+finite-transfer obligations.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

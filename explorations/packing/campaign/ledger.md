@@ -17,7 +17,8 @@
 | [session-009](agent-sessions/session-009-autonomous-basin-map.md) | stopped | mixed | `process-review` (process) | `process-review` (process) | 10 | think-05hr | Open a new AgentSession/v2 under W2 factual-review with a Correctness focus. Capture the n=4 seed-0 status-4 millisecond fixture under think-nr5w, then finish think-b3bm's final-receipt runbook rehearsal and revalidate the strict launch path before new basin-map rounds. Keep D-126 separate; the exact-research queue remains think-nm35. |
 | [session-010](agent-sessions/session-010-eight-hour-mixed-research.md) | stopped | contemporaneous | `research-loop` (insight) | `process-review` (process) | 15 | think-3cbq | Continue the original wall-clock objective in a new bounded session from the final PR 29 head. Run frozen order 7 under think-b4jc: require identical seeded outputs, independently recomputed pair totals, and unloaded-host overhead before retaining the meter; then route the first unmetered quench adapter without changing a criterion. |
 | [session-011](agent-sessions/session-011-eight-hour-continuation.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `research-pass` (insight) | 7 | think-gszk | Rotate after the order-13 checkpoint; do not infer a finite improvement, launch an unbounded proof audit or resume the H-042 wider run. |
-| [session-012](agent-sessions/session-012-eight-hour-final-continuation.md) | in_progress | contemporaneous | `process-review` (correctness) | `factual-review` (correctness) | 2 | think-gszk | Execute phase 2's bounded McClenagan geometry audit under think-486e. |
+| [session-012](agent-sessions/session-012-eight-hour-final-continuation.md) | completed | contemporaneous | `process-review` (correctness) | `process-review` (process) | 3 | think-gszk | Commit and push the local sign repair, then start a bounded successor session. |
+| [session-013](agent-sessions/session-013-generated-view-recurrence-checkpoint.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-gszk | Commit and push, update PR 34, then begin a new bounded research session. |
 
 ### Workflow summary
 
@@ -28,7 +29,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 1 | 0 |
 | `factual-review` | 0 | 0 | 4 | 2 |
 | `insight-iteration` | 0 | 1 | 3 | 2 |
-| `process-review` | 1 | 4 | 5 | 6 |
+| `process-review` | 2 | 4 | 7 | 6 |
 | `efficiency-loop` | 1 | 0 | 1 | 0 |
 | `research-loop` | 1 | 4 | 4 | 7 |
 | `pipeline-improvement` | 0 | 0 | 7 | 0 |

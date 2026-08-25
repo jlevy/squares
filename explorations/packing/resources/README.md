@@ -73,7 +73,7 @@ them opens with a ⚠️ banner giving the count.
 | `arslanov-improved-packings-n-n-1` | 1 | One orientation-constraint formula unrecoverable; its numeric value is preserved. |
 | `bentz-2010-optimal-packings-13-and-46` | 1 | Corollary 7: segments reconstructed **and an inequality direction changed** (`2√2−2 > b` in raw vs `b > 2√2−2` here). Direction UNVERIFIED. The leading claim — intersection length ≥ `2√2−2 ≈ 0.828` — is unambiguous in the raw and unaffected. |
 | `kearney-shiu-2002-efficient-packing-unit-squares` | 1 | One chain of inequalities in Theorem 2’s proof not reconstructed; the conclusion is stated. |
-| `mcclenagan-2026-optimally-packing-large-square` | 2 | One exponent `(3−√3)/2` reconstructed from fragments, flagged as possibly wrong; plus a source-level contradictory chain in Section 3. Independently corroborated elsewhere, so the research doc does not rely on this file for it. |
+| `mcclenagan-2026-optimally-packing-large-square` | 2 | One exponent `(3−√3)/2` reconstructed from fragments, flagged as possibly wrong; plus a source-level contradictory chain in Section 3. H-037 gives an independent local repair of the chain; it does not certify the full theorem. |
 
 Files not listed carry no annotations.
 Note that resolving `(cid:NN)` ligature artifacts, running headers and page numbers is

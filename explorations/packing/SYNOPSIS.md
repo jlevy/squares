@@ -1768,24 +1768,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 309 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 313 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 73 | asserted something false about the mathematics |
-| validity | 79 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 116 | recorded something its own evidence contradicts |
+| soundness | 74 | asserted something false about the mathematics |
+| validity | 80 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 118 | recorded something its own evidence contradicts |
 | robustness | 32 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Sixty of the seventy-three soundness defects pointed in the *flattering* direction**,
-where the error looks like a success.
+**Sixty-one of the seventy-four soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught thirty-eight defects in 309, and no soundness defect
+**The automated gate has caught thirty-nine defects in 313, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -1795,12 +1795,13 @@ contiguity, integration, mutation-anchor, reconciliation, or known-answer checks
 That is the pattern, not an exception: gates are good at the mechanical classes and have
 never once caught the mathematics being wrong.
 
-106 fixes left no regression check behind.
+107 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
-[D-304](defects.md) contains a contradictory inequality in McClenagan’s printed Section
-3 proof; the campaign does not rely on that step pending an independent repair.
+[D-304](defects.md) records a contradictory inequality in McClenagan’s printed Section 3
+proof. H-037 repairs that local sign step independently from both the figures and the
+source equations; it does not certify the remaining construction.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-283 remains open in the current robustness inventory.
