@@ -5,7 +5,7 @@ title: Reconcile the parallel research stack with the frontier assurance framewo
 kind: epic
 status: in_progress
 priority: 0
-version: 8
+version: 13
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
@@ -18,8 +18,13 @@ child_order_hints:
   - is-01m0wqyhbewrv51618f7s0tne0
   - is-01m0wqyhnttmv40agfac8g69jf
   - is-01m0wr07k9y92zmjm65se7s1y3
+  - is-01m0wvepjcbwah2r9xyxecdydc
+  - is-01m0wxh5s1baeq5styy849k96x
+  - is-01m0wydjj6dvp281nqkwhanmxp
+  - is-01m0wypgrdq63wm2xtdxvvktnt
+  - is-01m0wywkf33gyxjz4b2q039e7n
 created_at: 2026-08-25T15:16:36.212Z
-updated_at: 2026-08-25T15:35:21.869Z
+updated_at: 2026-08-25T17:18:33.953Z
 ---
 Integrate PRs 29 and 34 with PRs 26 and 31 without losing their exact mathematical results or weakening the new assurance contract. Treat PR31 vocabulary, schemas, frontier/evidence lanes, workflow entry points, document map, and hash/process policy as authoritative; port the research stack's exact n=5 results, Trump branch pilot, source audits, solver repair, pair meter, bounded validation work, defects, and handoffs into that framework. Resolve parallel ID allocation, regenerate derived views, preserve historical raw results, distinguish exact/formal conclusions from numerical checks and partial pilots, and land a coherent green stack with proportional rather than ceremonial controls.
 
