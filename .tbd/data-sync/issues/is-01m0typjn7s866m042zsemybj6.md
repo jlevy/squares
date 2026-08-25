@@ -5,7 +5,7 @@ title: Make the square-packing frontier transparent, complete, and reusable
 kind: epic
 status: open
 priority: 1
-version: 23
+version: 25
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
@@ -30,11 +30,12 @@ child_order_hints:
   - is-01m0v06qf4hksmdqc2rga0vr4x
   - is-01m0v06yyh15pkz846vsgxj1wc
   - is-01m0vd6xfaz5p8ccnq6xrnr5x5
+  - is-01m0vhjwpg55jj6jt0g96qpr87
 created_at: 2026-08-24T22:36:47.654Z
-updated_at: 2026-08-25T03:12:01.562Z
+updated_at: 2026-08-25T04:06:59.966Z
 ---
 Cross-cutting redesign of the square-packing frontier, assurance model, validation toolkit, and contributor workflow. This work uses the explicit general-improvement fallback rather than W4: it balances mathematical soundness, reader and agent clarity, operational discipline, and research efficiency. Make current status effortless to inspect; distinguish published mathematical status, local numerical checks, and exact formal certification; keep public-source coverage explicit and current; and provide general entry points for importing, viewing, checking, and promoting witnesses. Add no metadata, gate, table, hash, or work item without a named failure or reader need. Acceptance: one obvious path answers what is known for each n and why; verified always means exact formal assurance; numerical claims state their actual method and limits; historical unknowns are preserved rather than invented; source and tooling gaps are visible; and the workflow catches consequential errors without ritual or tracker spam.
 
 ## Notes
 
-2026-08-24: governing plan added at explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md. The epic is classified as cross-cutting general-improvement under the top-level square-packing research epic, not W4 process review. PR #26 owner review is fully addressed on rebased head a9a2992 through remediation parent think-p2hh and R1-R10 children; disposition is issuecomment-5404553556. Fifteen implementation children remain open. think-6lln owns documentation mapping and scoped common-doc migration; think-rsxe owns generic algebraic field soundness.
+2026-08-24: governing plan added at explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md. This is a cross-cutting general-improvement under think-xkqu, not W4. PR #26 owner review is fully addressed and the plan is rebased on f49b3c4 at head 3d299d5. Hash cleanup think-4fcn is complete in commit e4bf837 on PR #23 and must be integrated or equivalently replayed in this stack. Fifteen implementation children remain open after adding think-my5u for the campaign/session/phase/experiment/round/run vocabulary. think-6lln owns documentation mapping and scoped common-doc migration; think-rsxe owns generic algebraic field soundness.
