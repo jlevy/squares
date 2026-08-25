@@ -3,9 +3,9 @@ type: is
 id: is-01m0vxe4ntpat4xcagtf04c37z
 title: "[epic] TUTORIAL pedagogical review: notation, LP exposition, and references"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 12
+version: 14
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies: []
@@ -18,8 +18,13 @@ child_order_hints:
   - is-01m0vxv0f1v7nqpeq5a2kfwjwq
   - is-01m0vxwz54jtrrk1xvg7z3fc46
   - is-01m0vz75fav40ygkba88fajt0p
+  - is-01m0w07k24sv5nc6hzacmc6tjt
 created_at: 2026-08-25T07:33:57.050Z
-updated_at: 2026-08-25T08:07:08.625Z
+updated_at: 2026-08-25T08:29:53.249Z
+closed_at: 2026-08-25T08:29:53.249Z
+close_reason: All eight child beads implemented in TUTORIAL.md (82c68dc). Findings are recorded in docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md, which stays as the durable record of what was found and why. think-4b9m remains open outside this epic for the SYNOPSIS and conventions gate-step-count drift.
+resolution: null
+duplicate_of: null
 ---
 Reader-driven review of `explorations/packing/TUTORIAL.md`, raised while reading it as
 the intended newcomer audience.

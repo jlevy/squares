@@ -3,9 +3,9 @@ type: is
 id: is-01m0vxmhjdsq7rdy94g9pxx3nx
 title: "TUTORIAL: add a precision section—which arithmetic regime to use where, and what it costs"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 4
+version: 6
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies:
@@ -13,7 +13,11 @@ dependencies:
     target: is-01m0vxns5mzy4axt8mdrhaachj
 parent_id: is-01m0vxe4ntpat4xcagtf04c37z
 created_at: 2026-08-25T07:37:26.861Z
-updated_at: 2026-08-25T08:01:34.451Z
+updated_at: 2026-08-25T08:29:43.768Z
+closed_at: 2026-08-25T08:29:43.768Z
+close_reason: "Implemented in TUTORIAL.md on claude/packing-tutorial-review-r2p25t (82c68dc), on top of the SVG toolkit and the #31 frontier-assurance branch. Notation card (new §10) and vocabulary card rebuilt; the LP written out with an on-ramp; the quench's two loops described with the path-dependence reason; precision costs, latency budgets and the 1e-11 cause added; the primitive element theorem answered; §11 further reading and arithmetic inventory added; assurance and method tokens aligned to witnesses/witness.schema.yaml; accuracy fixes applied. TR-2 needed no work — #31 had already replaced the superseded absolute. The restated gate step count was removed rather than corrected, so it cannot drift a fourth time; the status-document half stays open as think-4b9m."
+resolution: null
+duplicate_of: null
 ---
 §5 argues that exactness is not optional and describes the `ℚ(α)` machinery, but it
 never tells a reader *what precision to work at*, how the regimes relate to hardware, or
@@ -98,3 +102,29 @@ decide, what each costs, and the rule for which to use where—screen in `f64`, 
 `f64`, decide in `ℚ(α)`, and never let a number cross a tier boundary.
 Numbers stay owned by `SYNOPSIS.md` and the infrastructure report; the tutorial cites
 them.
+
+## Notes
+
+Scope NARROWED by PR #31. Its "Assurance, method, and precision" section resolves the
+classification half of this bead, and does it better than the bead proposed: assurance
+is separated from method and from actual precision/tolerance, and it states outright
+that "A numerical result remains numerical at tolerance 1e-100" — which was this bead's
+third regime, arbitrary-precision floating point, the one the tutorial used to collapse
+into "exact".
+
+REMAINING scope, three parts:
+1. Costs are still absent. No figure in the document, so a reader cannot answer "what
+   precision should I work at" for their own task. The table in the bead body stands
+   (57 ns / 2,726 ns / 215.5 us / 1.2 us / 13 ms / 0.35 s), as does the
+   exact-to-float ratio growing with degree (177x at 8, 578x at 62) and the three
+   latency tiers.
+2. The 1e-11 floor still has no cause. §8 item 5 now reads "What a floating LP result
+   means below 1e-11" and says only that the solver has a noise floor there. It is
+   HiGHS's feasibility tolerance pinned at 1e-10 (D-021), five orders above machine
+   epsilon.
+3. The "one predicate, three scalar types" fact went missing rather than getting
+   explained: #31 replaced §6's "generic over its scalar type" with "rational and
+   algebraic separating-axis verification", so the claim is gone and the reason for it
+   still is not stated.
+
+The token-consistency fallout of the same migration is think-po3b, not this bead.
