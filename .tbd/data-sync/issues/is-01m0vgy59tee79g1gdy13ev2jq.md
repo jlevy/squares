@@ -5,7 +5,7 @@ title: Replace fragmentary packing script tests with Tryscript golden sessions
 kind: task
 status: open
 priority: 1
-version: 1
+version: 2
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
@@ -15,7 +15,7 @@ labels:
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-25T03:55:30.489Z
-updated_at: 2026-08-25T03:55:30.489Z
+updated_at: 2026-08-25T04:15:42.506Z
 ---
 The maintained packing command surfaces are not currently tested as complete command sessions.
 
@@ -40,3 +40,7 @@ Acceptance:
 - Help and error sessions compare complete output and exact exit codes, including stdout/stderr routing.
 - An intentional stable-output change makes CI fail with a readable session diff; `--update` regenerates only the affected golden for review.
 - No broad pattern masks a stable field, no surgical extraction substitutes for complete state, and no checksum is introduced for repository-owned goldens.
+
+## Notes
+
+2026-08-24: PR #23 formal review R9 independently confirms the current test smell: test_validation_cli runs a full frontier gate step inside pytest and monkeypatches the production ACTIVITY_MARKER global. Per the user's explicit scope decision, the golden-script testing migration remains a follow-up rather than a PR #23 change. R9 is deferred to this bead; implementation should replace fragment assertions and unsupported marker patching with Tryscript process-level sessions plus focused pure-function tests for internal frontier logic.
