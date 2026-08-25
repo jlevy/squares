@@ -42,9 +42,13 @@ hypothesis:
     obstructions in both possible nearby owner-axis branches. Exp-037 now certifies the
     complete branchwise linearization-cone inventory: both owner branches coincide, the
     endpoint quotients have eight rays, and the interior quotients have six. These are
-    partial results, not a complete answer. Nonlinear realization of the transverse and
-    mixed directions, the full nonsmooth stationary component, and the unequal-side
-    clearance questions remain open.
+    partial results, not a complete answer. Exp-038 proves that R1, R2, R3, and R6 have
+    exact fixed-angle continuations inside one connected five-dimensional cell-local
+    LP-optimal position polytope, with positive first-order stresses on twelve declared
+    path segments. It does not prove the whole polytope stationary or join A to B inside
+    the stationary set. Nonlinear realization of the remaining transverse and mixed
+    directions, the full nonsmooth stationary component, and the unequal-side clearance
+    questions remain open.
 ---
 # H-023 — resolve the first ambiguous census cell
 
@@ -85,8 +89,13 @@ have six, and the common transverse cone has six rays with sole relation
 `R3 + R6 = R4 + R5`.
 
 That finite inventory does not prove that a transverse or mixed direction is a true
-tangent. Certified continuation, deterministic quench selection, the complete stationary
-component, and unequal-side minimax-clearance bounds remain open.
+tangent. Exp-038 supplies exact fixed-angle continuation for `R1`, `R2`, `R3`, and `R6`:
+their twelve A, interior, and B paths lie in one connected five-dimensional cell-local
+LP-optimal position polytope and carry positive branchwise first-order stresses.
+The stress is proved only on those paths, not throughout the polytope or on an A-to-B
+connector. The remaining release classes, mixed-angle realization, deterministic quench
+selection, the complete stationary component, and unequal-side minimax-clearance bounds
+remain open.
 
 This is the focused control for H-021 and the practical precursor to H-011.
 

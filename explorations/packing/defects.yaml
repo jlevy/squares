@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 258
+count: 259
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -6649,3 +6649,32 @@ defects:
     and canonical mentions; coordinator diff inspection remains the immediate guard
   bead: think-jvtt
   recorded_in: defects.yaml
+- id: D-259
+  title: An explicit Flowmark target bypassed the generated-view exclusion
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: drift_check
+  latent_for: one uncommitted terminal-result integration pass
+  severity: medium
+  status: fixed
+  what: >-
+    The exp-038 landing command passed `campaign/ledger.md` directly to Flowmark. An
+    explicit file target bypasses `.flowmarkignore`, so the formatter rewrapped and
+    typographically normalized a byte-generated view that the ledger checker expects to
+    match its renderer exactly.
+  consequence: >-
+    The next ledger check failed as stale, and committing that form would have made a
+    correct terminal experiment fail the generated-view gate for an unrelated formatting
+    reason.
+  fix: >-
+    Regenerate the ledger, keep both generated views out of explicit formatter target
+    lists, and use the repository-root formatting target whose exclusion semantics are
+    documented and exercised by the commit hook.
+  regression: >-
+    The ledger byte-drift check fails on the formatted form and passes after regeneration;
+    the generated-view exemption check and repository-root commit hook preserve the file
+  recurrence_of: D-027
+  bead: think-5tc9
+  recorded_in: ../../.flowmarkignore

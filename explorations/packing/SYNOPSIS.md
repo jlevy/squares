@@ -398,6 +398,7 @@ results, not only instruments.
 | [`cases.n5.tangent_cones`](cases/n5/tangent_cones.py) | Complete active first-order systems admit one displayed non-sheet direction (exp-035) |
 | [`cases.n5.second_order_obstruction`](cases/n5/second_order_obstruction.py) | That displayed direction is excluded from the true Bouligand tangent cone (exp-036) |
 | [`cases.n5.tangent_inventory`](cases/n5/tangent_inventory.py) | Both owner branches have the same complete first-order V-representation at A, the interior, and B (exp-037) |
+| [`cases.n5.fixed_angle_polytope`](cases/n5/fixed_angle_polytope.py) | Four release classes have exact paths in one connected five-dimensional cell-local LP-optimal position polytope, with positive pathwise first-order stresses (exp-038) |
 | [`cases.kingbird29.verify_svg`](cases/kingbird29/verify_svg.py) | High-precision (160-digit) numerical reconstruction of the `n = 29` record source, refuting H-024’s three-class claim. Not an exact optimality certificate—the retained SVG is numerical, and exp-012 says so (exp-012) |
 
 **Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
@@ -1508,7 +1509,7 @@ Transverse and mixed nonlinear realization remains open.
 
 There are 38 rounds registered in `series-000`: 37 terminal rounds and the preregistered
 exp-038 confirmatory run.
-They record 898 agent-minutes and 28.2 wall-minutes so far.
+They record 918 agent-minutes and 28.3 wall-minutes so far.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1565,7 +1566,7 @@ archive beside it.
 | [exp-035](campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md) | 5 | target | H-023 | exact full-angle active systems | non-sheet direction at A/interior/B; six controls pass | **accepted** |
 | [exp-036](campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md) | 5 | target | H-023 | exact second-order branch obstruction | displayed direction excluded at A/interior/B; six controls pass | **accepted** |
 | [exp-037](campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md) | 5 | target | H-023 | exact branchwise linearization-cone inventory | identical owner branches; endpoint/interior rays `8/6/8`; ten controls pass | **accepted** |
-| [exp-038](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md) | 5 | target | H-023 | exact fixed-angle optimal-position polytope | preregistered; retained target run not yet executed | **in-progress** |
+| [exp-038](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md) | 5 | target | H-023 | exact fixed-angle optimal-position polytope | dimension 5; 12 sharp paths; ten controls pass | **accepted** |
 
 ### Cost and provenance
 
@@ -1608,7 +1609,7 @@ archive beside it.
 | exp-035 | six exact owner matrices + six controls | 0.28 s | 20 m | criterion | `aa63cf4` |
 | exp-036 | two exact branch obstructions + six controls | 0.21 s | 20 m | criterion | `f2d2e53` |
 | exp-037 | six exact matrices + ten controls | 1.06 s | 30 m | criterion | `b8d0104` |
-| exp-038 | one exact polytope + ten controls | — | — | in progress | — |
+| exp-038 | one exact polytope + ten controls | 4.047 s | 20 m | criterion | `27b999e` |
 
 ### What the 38 rounds jointly establish
 
@@ -1638,8 +1639,13 @@ nearby pair `(3,4)` owner-axis branches have exact second-order obstruction marg
 Exp-037 then certifies the complete first-order inventory and both pointed-quotient face
 vectors. This strict linearized-versus-true-tangent gap and finite inventory do not
 classify transverse or mixed nonlinear realization or assign a component.
-Exp-023 reaches proved side 2 on three of four n=4 starts and preserves the fourth
-event’s post-check rejection.
+Exp-038 exactly continues four release classes through twelve sharp fixed-angle paths in
+one connected five-dimensional cell-local LP-optimal position polytope.
+Both owner branches carry positive structurally derived first-order stresses on those
+paths. This does not make every point of the polytope stationary, certify an A-to-B
+stationary path, classify R4, R5, -W, or mixed-angle directions, or assign a terminal
+component. Exp-023 reaches proved side 2 on three of four n=4 starts and preserves the
+fourth event’s post-check rejection.
 That stop exposed D-171: two rows were already outside the screen before an argmax-only
 retry. Exp-024 applies one complete offending-set retry and reaches side 2 on all four
 starts, with 14,301 of 14,301 evaluations settled and all four events admissible.
@@ -1752,14 +1758,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 258 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 259 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 69 | asserted something false about the mathematics |
 | validity | 66 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 87 | recorded something its own evidence contradicts |
+| bookkeeping | 88 | recorded something its own evidence contradicts |
 | robustness | 28 | did not finish, or finished only by luck |
 | performance | 8 | worked, but cost far more than it should |
 
@@ -1769,7 +1775,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventeen defects in 258, and no soundness defect
+**The automated gate has caught seventeen defects in 259, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

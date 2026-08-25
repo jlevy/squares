@@ -15,9 +15,10 @@ experiment:
   subject:
     label: exact fixed-angle common-cell optimal-position polytope at n = 5
     engine: n = 5 fixed-angle polytope checker 0.1.0
+    engine_commit: 27b999e
     precision: exact
     host_system: macOS arm64, Apple M1 Pro
-    selftest_passed: false
+    selftest_passed: true
   instance: {axis: n, point: 5, role: target}
   method:
     control: >-
@@ -31,6 +32,8 @@ experiment:
     runs_per_condition: 1
     interleaved: false
     operator: openai-codex
+    commit: 27b999e
+    dirty: false
     entry_point: explorations/packing/cases/n5/fixed_angle_polytope.py
     command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
@@ -44,8 +47,6 @@ experiment:
       and replay caps; stop on source drift, an inequivalent eliminated domain, a failed
       exact packing, a nonpositive stress, a surviving control, or retained-record drift
     record: campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
-  lease:
-    expires: '2026-08-25T09:30:00Z'
   results:
   - shape: determination
     question: >-
@@ -53,10 +54,18 @@ experiment:
       five-dimensional common-cell polytope of exact side-optimal positions, and do their
       declared paths have positive branchwise first-order no-descent stresses?
     role: outcome
-    outcome: no_progress
-    checked_by: preregistered but not yet run
+    outcome: criterion_met
+    checked_by: >-
+      exact source regeneration, bidirectional domain elimination, affine witnesses,
+      LP dual, structural stress-polynomial cancellation, independent exact packings,
+      deterministic retained replay, independent result review, and ten controls
+  effort:
+    timebox: 20m confirmatory slice; separate 30s generation and replay caps
+    wall_seconds: 4.04748
+    agent_minutes: 20
+    stopped_by: criterion
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: >-
       bind exp-033, exp-034, and exp-037 exactly, including the canonical-ray
       normalization; prove that all 30 common-cell inequalities are equivalent to the
@@ -70,11 +79,15 @@ experiment:
       second-order, quench-terminal, maximal-component, R4, R5, -W, mixed-angle, basin,
       census, and unequal-side claims
     reason: >-
-      The exact formulas were discovered independently after exp-037. This confirmatory
-      criterion and its refusal boundary are frozen before target implementation or a
-      retained result.
+      The 30-row common cell is exactly equivalent to the bounded five-coordinate
+      system, six feasible witnesses prove affine dimension five, and the exact LP dual
+      fixes side 1+5sqrt(2)/4 throughout the cell. All twelve declared sharp paths pass
+      independent exact packing checks and both owner branches have structurally derived
+      positive stress-polynomial identities. Replay is identical and all ten controls
+      reject. The verdict remains cell-local and pathwise first-order only.
+    commit: 27b999e
 ---
-# exp-038 — preregistered fixed-angle optimal-position polytope
+# exp-038 — accepted fixed-angle optimal-position polytope
 
 Exp-037 certifies the complete branchwise linearization-cone inventory but makes no
 nonlinear continuation claim.
@@ -213,6 +226,35 @@ rest of the polytope, global fixed-angle optima, `R4`, `R5`, `-W`, a mixed-angle
 direction, second-order local minimality, the maximal stationary component,
 deterministic quench selection, basin mass, census completeness, or unequal-side
 clearance.
+
+## Result
+
+The frozen criterion is met.
+The common fixed-angle cell has one bounded five-dimensional LP-optimal position face at
+side `1 + 5sqrt(2)/4`. Its affine hull has the slide and canonical `R1`, `R2`, `R3`, and
+`R6` vectors as independent directions, and the declared paths remain inside this one
+convex, hence connected, polytope.
+Six exact feasible points prove the dimension; the 30 source rows and 13 eliminated
+inequalities imply each other exactly; and a rank-six dual certificate proves the
+cellwise side lower bound.
+
+All twelve declared A, interior, and B path segments have their stated sharp intervals
+and unique limiting wall.
+Their endpoint and strict-interior fixtures independently verify as packings.
+On both owner branches, structurally derived degree-at-most-two stress polynomials
+cancel coefficient by coefficient and retain strictly positive multipliers, with owner-3
+lower bound `sqrt(2)/2 - 1/4`. Generation and identical replay took 2.02310 and 2.02438
+wall-seconds, respectively, and all ten controls rejected.
+
+This does not prove that A and B are connected inside the full stationary set.
+It also does not classify other points of the polytope, global fixed-angle or
+unrestricted optimality, second-order local minimality, terminality, the maximal
+stationary component, `R4`, `R5`, `-W`, mixed-angle directions, basin mass, census
+completeness, or unequal-side clearance.
+
+[`exp-038-h-023-n5-fixed-angle-polytope.json`](../results/exp-038-h-023-n5-fixed-angle-polytope.json)
+retains the exact domain, dual, source maps, paths, packing fixtures, owner-axis proofs,
+stress coefficient arrays, scope refusals, and ten controls.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

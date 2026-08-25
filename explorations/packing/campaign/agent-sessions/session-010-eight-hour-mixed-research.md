@@ -354,7 +354,7 @@ session:
       Run the frozen exp-038 confirmatory criterion exactly once from clean reviewed
       engine commit 27b999e, replay the retained record, and update only the cell-local
       LP-optimal-face and twelve pathwise first-order conclusions it establishes.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The W7 checker is reviewed, committed, pushed, and separated from target evidence
@@ -375,10 +375,63 @@ session:
     fallback: >-
       Leave exp-038 in progress, retain the clean instrument commit and exact blocker,
       and rotate without changing its criterion or mathematical verdict.
+    outcome: >-
+      Exp-038 met its frozen criterion from clean checker commit 27b999e. One labelled
+      fixed-orientation cell contains a connected five-dimensional LP-optimal position
+      polytope, and all twelve declared R1, R2, R3, and R6 paths have exact positive
+      branchwise first-order stresses.
+    evidence:
+    - Exact retained generation and identical replay completed in 2.02310 and 2.02438 seconds.
+    - >-
+      A 130-second independent final audit checked all 30-to-13 row implications, six
+      affine witnesses, the rank-six dual, 12 sharp paths, 24 exact packing fixtures, 24
+      structural stress-polynomial certificates, both owner branches, axis exhaustion,
+      all ten controls, and every refusal with no P0/P1 finding.
+    - >-
+      The maintained small-n exact-model step now includes exp-038 and passes in 4.65
+      wall seconds. H-023 and BC-010 remain open because whole-polytope stationarity,
+      component identity, and unequal-side clearance were not proved.
+    stop_reason: >-
+      The criterion was met, independently audited, and reconciled in under ten minutes.
+      The result stops at cell-local LP optimality and pathwise first-order stationarity.
+    next_action: >-
+      Preserve the terminal result, then follow frozen portfolio order 4: capture the
+      n=4 seed-0 HiGHS status-4 failure as a millisecond fixture under think-nr5w.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Capture the exact n=4 seed-0 HiGHS status-4 solve failure—theta, separating cell,
+      LP inputs, solver status, and replay—as a millisecond fixture before attempting a
+      diagnosis or repair.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      Exp-038 is terminal and independently reviewed. The frozen portfolio's next
+      dependency-ready row is order 4 under think-nr5w, which blocks a trustworthy deep
+      known-answer gate.
+    budget_minutes: 30
+    started_at: '2026-08-25T02:10:00-07:00'
+    deadline_at: '2026-08-25T02:40:00-07:00'
+    expected_output: >-
+      One deterministic millisecond fixture retaining the exact failing solver input and
+      status, plus a repair only if its cause is already isolated; otherwise the smallest
+      replayable blocker.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --all-extras --group dev
+      pytest -q tests/test_research_contracts.py -k n4_seed0_highs_failure
+    kill_condition: >-
+      Stop implementation at twenty minutes and reserve ten minutes for fixture replay,
+      defect and bead reconciliation, commit, and push. Never run the full golden, widen
+      a tolerance, or change the committed map in this slice.
+    fallback: >-
+      Retain the first exact theta, cell, LP arrays, and typed solver receipt that still
+      reproduce; leave diagnosis and repair to portfolio order 5.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Generate the one retained target record from clean commit 27b999e.
+    next_action: Reproduce seed 0 only and intercept the first status-4 LP call.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -891,12 +944,72 @@ session:
     fallback: Report the exact failed command and file hash.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
+  - task: Add exp-038 to the maintained small-n exact-model validation step.
+    operator: /root/exp038_validation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Added the terminal replay immediately after exp-037; the focused step passes all
+      eight exact small-n and local-geometry records in 4.65 wall seconds.
+    evidence:
+    - The delegated focused command reported exp-038 criterion_met with 12 paths and ten controls.
+    files: [src/sqpack/cli/validate.py]
+    checks:
+    - packing-validate --only 'small-n exact models and local geometry' --jobs 1 --inner-jobs 1.
+    uncertainty: Delegation wall time was not exposed; its validation step took 4.43 seconds.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain the validation registry change with the terminal result.
+    phase: 7
+    budget_minutes: 10
+    started_at: '2026-08-25T02:02:00-07:00'
+    deadline_at: '2026-08-25T02:12:00-07:00'
+    expected_output: One registry entry and focused replay receipt.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --all-extras --group dev
+      packing-validate --only 'small-n exact models and local geometry' --jobs 1 --inner-jobs 1
+    kill_condition: Return the first failing record without editing any other file.
+    fallback: Report the exact missing module or result path.
+    write_scope: [src/sqpack/cli/validate.py]
+    excluded_commands: [git, tbd, campaign edits]
+  - task: Audit the terminal exp-038 record against every frozen clause and refusal.
+    operator: /root/exp038_soundness
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Exact regeneration matched the 372,281-byte retained result and the audit found no
+      P0/P1 issue or promoted global, terminal, component, basin, census, or clearance claim.
+    evidence:
+    - Retained JSON SHA-256 is 92c799932baaa94318979df433b882950977cc8299ca7b3c9b19db1ff65ee42b.
+    - Exact replay took 2.22 measured wall seconds and softschema passed.
+    files: []
+    checks:
+    - Exact retained replay, softschema validation, and clause-by-clause read-only review.
+    uncertainty: None inside the frozen criterion; all explicit refusal clauses remain unresolved.
+    elapsed_seconds: 130
+    elapsed_quality: platform_measured
+    next_action: Accept exp-038 at its narrow cell-local and pathwise first-order scope.
+    phase: 7
+    budget_minutes: 12
+    started_at: '2026-08-25T02:03:49-07:00'
+    deadline_at: '2026-08-25T02:15:49-07:00'
+    expected_output: P0/P1 disposition, exact replay, and scope audit.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --quiet python
+      -m cases.n5.fixed_angle_polytope --replay
+      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
+    kill_condition: Return the first failed frozen clause without editing shared files.
+    fallback: Block acceptance and report the smallest mismatching certificate.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, packing-validate]
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
+  - campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
   - cases/n5/fixed_angle_polytope.py
+  - src/sqpack/cli/validate.py
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
@@ -937,10 +1050,14 @@ session:
     Exp-038 softschema validates after an independent criterion audit corrected its
     canonical ray map, affine-dimension witness, LP-level statement, executable
     mutations, and refusal boundary; D-254 records the pre-run draft error.
+  - >-
+    Exp-038 generation/replay passed in 2.02310/2.02438 seconds; a 130-second independent
+    final audit found no P0/P1 issue, and the maintained small-n exact-model step passed
+    in 4.65 seconds with exp-038 included.
   stop_reason: null
   next_action: >-
-    Commit and push the corrected exp-038 preregistration, then implement its exact
-    checker by 02:05:11-07:00 without recording a target result in the mutable phase.
+    Commit and push the terminal exp-038 result, then capture the n=4 seed-0 status-4 LP
+    call as a millisecond fixture under think-nr5w by 02:40:00-07:00.
 ---
 ## Session Boundary
 

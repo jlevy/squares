@@ -252,9 +252,9 @@ agenda:
     bead: think-1s0h
     depends_on: [BC-003, BC-009]
     next_evidence: >-
-      certify the discovered five-dimensional fixed-angle optimal-position polytope,
-      then test the remaining angle and mixed classes without inferring terminality from
-      the completed linear inventory
+      test R4, R5, -W, mixed-angle realization, and stationary continuation beyond the
+      twelve exp-038 paths without inferring whole-polytope terminality from their
+      positive first-order stresses
     parallel_group: identity
     note: >-
       This is the first genuine basin-structure experiment in the ladder. Exp-033
@@ -280,6 +280,12 @@ agenda:
       branches coincide, endpoint quotients have eight rays, the interior quotients have
       six, both face vectors are derived, and all ten controls pass. This is not local
       isolation; transverse and mixed nonlinear realization remains unclassified.
+      Exp-038 then certifies the discovered connected five-dimensional fixed-angle
+      cell-local LP-optimal position polytope from engine commit `27b999e`. Exact
+      structural stresses cover twelve R1, R2, R3, and R6 paths, independent packings and
+      ten controls pass, and D-256/D-257 preserve the proof shortcuts removed before the
+      retained run. The rest of the polytope is not thereby stationary, so BC-010 remains
+      ready.
       D-197 records and repairs the
       intervening shared-workspace branch race without adding a lease or worktree
       protocol. Think-imav is complete; think-nm35 owns the next remaining-cone slice.
@@ -306,6 +312,9 @@ agenda:
     - cases/n5/tangent_inventory.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
+    - cases/n5/fixed_angle_polytope.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness
