@@ -58,6 +58,23 @@ failed.
   `n = 11` and `n = 12` require.
 - **A proof of anything.** The proof lane gets a *hook*, not an attempt.
 
+## Ownership Boundary
+
+This specification owns the search spine, quench, basin identity, atlas runtime, and
+low-level verifier implementation.
+The [frontier assurance plan](plan-2026-08-24-frontier-assurance-and-verification.md)
+owns the public witness interchange, evidence schemas, user-facing
+`inspect`/`check`/`verify`/`promote` semantics, and the general exact-or-interval
+witness promotion path.
+
+The plans reuse, rather than duplicate, implementation beads.
+`think-0md2` owns the certificate type, `think-kmwb` owns exact corpus re-verification,
+and `think-2lyb` owns the unavoidable-set `PoseBox` proof hook here.
+The frontier plan consumes those outputs through its public witness, assurance, and
+promotion contracts.
+Phase 6’s `PoseBox` hook does not also own interval existence certification for an
+imported packing.
+
 ## Background
 
 Four research documents lead here, and their conclusions constrain this design:
@@ -607,8 +624,11 @@ implementation, and are corrected here rather than left to be discovered again:
   returned a packing violating its own separation constraint, and so a side below the
   standing record ([D-014](../../../../defects.md)). Pinned at the solver’s floor the
   residual is about `1e-11` in the side ([D-021](../../../../defects.md), open).
-  The `polished` tier means *exact within a cell to solver precision*; algebraic
-  exactness stays with `sqpack`, and every promotion must route through it.
+  The historical `polished` tier meant only a finite-precision LP endpoint inside a
+  fixed cell; calling that “exact within a cell” was misleading.
+  Algebraic exactness stays with `sqpack`, every promotion must route through a formal
+  verifier, and the frontier assurance plan retires the tier name from current
+  structured records.
 - **The polish step does not produce rational output.** The review’s R-2 says it does;
   `scipy`/HiGHS returns floats.
   Rational output needs an exact rational LP, which is unbuilt and tracked

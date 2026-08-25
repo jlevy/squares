@@ -15,21 +15,22 @@ author: Codex, for the project maintainers
 
 Make the square-packing frontier effortless to read without weakening its mathematical
 standards. A reader should be able to open one generated view and see, for every `n` in
-the declared coverage range:
+the declared case-corpus range:
 
-- the best result reported by the public sources we track;
-- the best upper bound that has actually been certified;
-- the best proved lower bound;
+- the best upper and lower bounds reported by the public sources we track;
+- the best upper and lower bounds supported by exact formal evidence;
 - whether the optimum is proved;
-- what was checked, by whom, with which method, precision, tolerance, certificate, and
-  replay command; and
+- whether each formal result comes from a published proof or certificate, an independent
+  external check, or a check replayed or audited here;
+- what was numerically checked, by whom, with which arithmetic, precision, and
+  tolerance; and
 - any source conflict, missing evidence, unsupported importer, or stale review.
 
 This distinction determines what the frontier can claim.
-A published numerical record and a certified upper bound are both useful, but they are
-not the same claim.
-The frontier will retain both instead of promoting one into the other
-through optimistic wording.
+A published numerical record and a formally verified upper bound are both useful, but
+they are not the same claim.
+The frontier will retain both instead of promoting one into the other through optimistic
+wording.
 
 This plan also makes the verification toolkit reusable.
 A full-geometry witness in a supported interchange format should be viewable and
@@ -49,7 +50,7 @@ No normal workflow may need to cite this file.
   evidence whose assumptions have been discharged.
 - Call every finite-precision calculation **numerically checked**. A tolerance of
   `1e-100` is still numerical evidence, not verification.
-- Separate a public record claim from a certified upper bound, and separate feasible
+- Separate a public record claim from a verified upper bound, and separate feasible
   placement from global optimality.
 - Record the assurance, method, origin, independence, precision, tolerance, certificate,
   and replay status as separate facts rather than compressing them into a tier name.
@@ -68,6 +69,8 @@ No normal workflow may need to cite this file.
 - Keep the six workflow entry points and the campaign/session/experiment vocabulary
   consistent across the README, synopsis, campaign runbook, conventions, schemas, and
   artifacts.
+- Keep this redesign under the explicit `general-improvement` fallback: it changes the
+  assurance, data, documentation, and tooling framework and is not a W4 process review.
 
 ## Non-Goals
 
@@ -126,11 +129,10 @@ The audit that produced this plan found four concrete boundary cases.
    arbitrary caller cannot yet treat the generic algebraic path as an unconditional
    verifier.
 4. A July 2026 public source reports interval-verified improvements at several `n`,
-   including `68` and `69`, while the current Kingbird page retains older values.
-   The public result page found during this review does not expose the claimed interval
-   certificate and checker in a replayable form.
-   The conflict belongs in the frontier as an external report pending source and replay
-   adjudication, not as either silence or a local verification.
+   including `68` and `69`. The current `n = 68` and `n = 69` cases already retain those
+   values and state that they have not been verified here; what is missing is typed
+   evidence, a conflict or replay disposition, and access to the claimed certificate and
+   checker. The result remains an external report pending source and replay adjudication.
 
 Together, these cases identify the dimensions the general contract must represent.
 
@@ -138,22 +140,29 @@ Together, these cases identify the dimensions the general contract must represen
 
 ### Approach
 
-Use one claim register with two reader-facing frontier columns.
+Use one claim register with reported and verified lanes on both sides of the bound.
 
-**Reported best** is the strongest current upper-bound claim found in the declared
-source coverage. It preserves the source’s literal value, wording, witness, and claimed
-method without endorsing them.
+**Reported upper bound** and **reported lower bound** preserve the strongest literal
+claims found in the declared source coverage: value, wording, witness or theorem,
+claimed method, and source.
+They do not endorse the claim.
 
-**Certified upper bound** is the best placement whose feasibility has been verified
+**Verified upper bound** and **verified lower bound** require exact formal evidence
 under this plan’s definition.
-It may equal the reported best, trail it slightly, or be only the exact grid
-construction.
-A certified upper bound is never absent: the trivial grid supplies a formal
-fallback for every finite `n`.
+A verified upper bound may equal the reported record, trail it, or be only the exact
+grid construction. The grid fallback is one parametric theorem evidence
+record—`s(n) ≤ ⌈√n⌉` for all finite `n`—referenced by each case rather than 100 copied
+witness files.
 
-The proved lower bound remains separate.
-A case is `proved` only when a verified lower bound and a certified upper bound meet
-exactly. A feasible packing proves an upper bound only.
+A case is `proved` only when verified lower and upper bounds meet exactly.
+A published proof may supply external verified evidence when the complete argument,
+statement, scope, and assumptions are inspectable.
+Its basis is shown as `published-proof`; it is not presented as audited here.
+A local proof audit or certificate replay adds a separate repository evidence record
+instead of overwriting the external one.
+A citation that merely reports a theorem stays reported.
+
+A feasible packing proves an upper bound only.
 It does not prove that the packing is globally optimal.
 
 Each displayed value points to typed evidence.
@@ -162,13 +171,21 @@ assurance state.
 
 ### Controlled Vocabulary
 
-The project uses these assurance states:
+The project uses these assurance states.
+`verified` has one mathematical meaning and several explicitly displayed origins; it
+never means merely checked with small numerical error.
 
-| Assurance | Meaning | May bare “verified” be used? |
+| Assurance | Meaning | Formal verification? |
 | --- | --- | --- |
 | `reported` | A named source states the claim; this record has not established it independently | No |
 | `numerically-checked` | A finite calculation checked the stated inequalities under explicit arithmetic, precision, and tolerance | No |
-| `verified` | An exact check, rigorous certificate, or complete audited proof decides the claim and every precondition is discharged | Yes |
+| `verified` | An exact check, rigorous certificate, or complete mathematical proof decides the claim and every precondition is discharged | Yes |
+
+The structured assurance value is `verified`; reader-facing displays also name its
+origin, for example “published proof—not audited here,” “external certificate,”
+“replayed here,” or “audited here.”
+This qualification distinguishes trust and reproducibility without weakening the
+mathematical meaning of verified.
 
 The arithmetic or certification method is a separate field:
 
@@ -178,6 +195,7 @@ The arithmetic or certification method is a separate field:
 | `numerical-multiprecision` | implementation, actual decimal or bit precision, rounding policy, and tolerance | `numerically-checked` |
 | `interval-certified` | outward-rounding implementation, input boxes, certificate, and replay command | `verified` |
 | `exact-algebraic` | exact input representation, field or rational preconditions, certificate, and replay command | `verified` |
+| `published-proof` | complete proof source, theorem statement, scope, pinpoints, and assumptions | external `verified` |
 | `proof-audited` | theorem statement, scope, source pinpoints, assumptions, and independent proof audit | `verified` |
 | `proof-assistant-checked` | proof object, theorem statement, kernel/toolchain, and replay command | `verified`, with the stronger mechanism named |
 
@@ -195,8 +213,9 @@ required inequalities or existence statement for an entire enclosure.
 A decimal point evaluation remains numerical evidence regardless of its digit count.
 
 Exact rational inputs use `exact-algebraic` as the degree-one case.
-`proof-audited` is for a complete mathematical argument, not for a citation that merely
-reports a theorem.
+`published-proof` records the formal mathematical basis without implying a local audit;
+`proof-audited` requires an independent audit record.
+Neither applies to a citation that merely reports a theorem.
 
 “Exact” must name its object: exact coordinates, exact predicate evaluation, exact
 bound, or exact proof step.
@@ -211,8 +230,8 @@ Every evidence record names the claim it bears on:
 | `witness-feasibility` | The supplied placement contains `n` non-overlapping unit squares | Best known status or optimality |
 | `upper-bound` | `s(n) ≤ u`, normally derived from verified witness feasibility | A matching lower bound |
 | `lower-bound` | `s(n) ≥ l` under the theorem’s stated scope | A construction at `l` |
-| `exact-value` | Verified upper and lower bounds coincide exactly | Uniqueness or rigidity unless separately proved |
-| `optimality` | No smaller container is possible | Uniqueness or a particular mechanism |
+| `exact-value` | Verified upper and lower bounds coincide exactly, establishing `s(n)` | Uniqueness or rigidity unless separately proved |
+| `witness-optimality` | A separately verified feasible witness attains an already verified exact value | Uniqueness or the mechanism that forces the value |
 | `derived-structure` | A named property such as orientation-class count or contact graph | Feasibility unless that is an explicit prerequisite |
 
 Derived claims cite their prerequisites.
@@ -248,11 +267,18 @@ dimensions. In particular:
   this repository;
 - `relationship_to_generator` says whether the checker shares the generator,
   implementation, or input derivation;
-- `precision` and `tolerance` are required for every numerical method and forbidden as
-  substitutes for assurance;
+- `precision` and `tolerance` are required for every new numerical record and forbidden
+  as substitutes for assurance;
+- a migrated historical record may use the literal `unrecorded-historical` only when a
+  dated migration annotation says that the archived run did not retain the value; known
+  values such as D-021’s `1e-11` solver floor are copied only where the source record
+  supports them;
 - a formal artifact is required for `verified` evidence: machine methods require a
-  certificate and replay command, while `proof-audited` requires the proof source,
-  theorem scope, pinpoints, assumptions, and audit record;
+  certificate and replay command, `published-proof` requires the complete proof source,
+  theorem scope, pinpoints, and assumptions, and `proof-audited` additionally requires
+  the audit record;
+- every display of verified evidence identifies its origin as external, independently
+  external, replayed here, or audited here;
 - `replay_status` distinguishes `passed`, `failed`, `unsupported`,
   `public-certificate-missing`, and `not-attempted`; and
 - a blocker names `source-evidence`, `importer`, `checker`, `field-precondition`, or
@@ -264,35 +290,43 @@ It becomes external `verified` evidence only when the formal object and its assu
 are inspectable. A successful local replay adds a separate repository `verified` record;
 it does not overwrite the external provenance.
 
+The campaign invariant survives the v2 migration: `beat_record: true` requires
+`assurance: verified`. A numerically checked candidate may record that it improves a
+numerical comparator, but it cannot become the formal frontier record through that flag.
+
 ### Frontier Case Contract
 
-`SquarePackingCase/v2` replaces the ambiguous v1 fields with four explicit sections:
+`SquarePackingCase/v2` replaces the ambiguous v1 fields with five explicit sections:
 
-1. `reported_best`: literal value, source, source date, retrieval date, method of
-   discovery, witness references, and evidence summary;
-2. `certified_upper_bound`: exact value or outward-rounded bound, certificate evidence
-   reference, and derivation from a witness;
-3. `proved_lower_bound`: exact value or rigorous bound, theorem scope, source, and
-   evidence reference; and
-4. `evidence`: typed checks and verification records, plus conflicts and unresolved
-   replay blockers.
+1. `reported_upper_bound`: literal value, source date, retrieval date, claimed method,
+   witness references, and evidence summary;
+2. `verified_upper_bound`: exact value or outward-rounded bound, formal evidence
+   reference, and derivation from a verified witness-feasibility claim;
+3. `reported_lower_bound`: literal value, theorem claim, source, and stated scope;
+4. `verified_lower_bound`: exact value or rigorous bound, proof or certificate evidence
+   reference, theorem scope, and verification origin; and
+5. `evidence`: typed reports, numerical checks, and formal verification records, plus
+   conflicts and unresolved replay blockers.
 
 Decimal values that carry identity or precision remain strings.
 Machine numeric fields are derived conveniences, never the authoritative representation.
-The schema rejects:
+The contract rejects—through the schema where expressible and the semantic checker for
+cross-field rules, following the existing softschema split:
 
 - `status: proved` without matching verified bounds;
 - a numerical method paired with `assurance: verified`;
 - a verified record without the formal artifact required by its method;
-- numerical evidence without its actual precision and tolerance;
+- new numerical evidence without its actual precision and tolerance, or historical
+  unknowns without the required dated migration annotation;
 - `exact_solution` on a serialized numerical witness;
-- an upper-bound implication from a derived-structure check; and
+- an upper-bound implication from a derived-structure check;
+- `beat_record: true` without `assurance: verified`; and
 - a claim that local tooling reproduced external evidence when only the same source
   program was rerun.
 
-The generated frontier view shows the reported and certified values side by side.
-It also shows a compact assurance badge, last source review, and unresolved conflict or
-tool gap. Detail stays on the per-`n` page.
+The generated frontier view shows reported and verified upper and lower bounds side by
+side. It also shows verification origin, last source review, and any unresolved conflict
+or tool gap. Detail stays on the per-`n` page.
 
 ### External Replay Outcomes
 
@@ -352,16 +386,21 @@ web. The frontier records:
 - the source registries and first-party result pages reviewed;
 - the `n` range each source covers;
 - the last successful review date and source revision or page date when available;
-- the largest `n` in the declared frontier horizon;
-- missing local source material, conflicting values, and unresolved newer claims; and
-- a bead for every uncovered or disputed item.
+- the case-corpus horizon, initially and explicitly `1 <= n <= 100`;
+- relevant claims beyond that horizon in the source-coverage inventory; and
+- missing local source material, conflicting values, and unresolved newer claims.
 
-Completion requires a case for every `n` in the declared horizon and every result found
-in the named primary-source set.
-The audit determines and records the horizon rather than assuming the current `n ≤ 100`
-directory is complete.
-The known Kingbird catalogue already reaches at least `n = 324`, so a horizon that stops
-at 100 needs an explicit scope label until the extension lands.
+Completion requires a case for every `n` through 100 and a disposition for every result
+found in the named primary-source set.
+A beyond-horizon result can live in the coverage inventory until extending the case
+corpus has a reader or research use; the known Kingbird range through at least `n = 324`
+does not by itself justify 224 mostly empty case files.
+
+Coverage state belongs in validated data.
+Beads track actionable work units—one source sweep, one conflict class, or one tooling
+blocker—not every `n` whose state is already represented in that data.
+This keeps omissions visible without turning the issue tracker into a second frontier
+database.
 
 Search-engine discovery can suggest sources, but promotion uses first-party pages,
 papers, repositories, or author-supplied data.
@@ -375,18 +414,29 @@ first-party document retained in this repository.
 An additional SHA beside that file does not strengthen the mathematical claim and will
 be removed.
 
-A digest remains only when it performs a named function, such as:
+A digest remains only when it performs a named mechanical function, such as:
 
 - comparing two independently retrieved byte streams across a real trust boundary;
-- providing a stable content identity for deduplication or an append-only event; or
-- protecting completeness or cache correctness for a generated artifact.
+- providing a stable content identity for deduplication or an append-only event;
+- protecting completeness or cache correctness for a generated artifact; or
+- detecting that a checker’s embedded hand transcription no longer matches corrected
+  archived source bytes.
 
 The field or nearby documentation names that function.
 “Provenance” alone is not a sufficient reason.
-Checks that merely bind one Git-tracked source file to a hard-coded copy of its current
-hash are removed, along with process tables that exist only to record those hashes.
+Reader-facing digest restatements and checks that merely bind one Git-tracked source
+file to itself are removed, along with process tables that exist only to record those
+hashes. Where a replay checker duplicates source data in code, parsing the retained
+source is preferred.
+Until that duplication can be removed, an expected-source digest may remain as a
+narrowly documented staleness guard.
+It is never mathematical evidence.
 
-### Process Discipline
+### Workflow and Process Discipline
+
+This plan is a `general-improvement` framework redesign, not a W4 process review.
+It changes mathematical assurance, data contracts, reader surfaces, tools, and only the
+process needed to keep those parts coherent.
 
 The six workflow entry points remain W1 research pass, W2 factual review, W3 insight
 iteration, W4 process review, W5 efficiency loop, and W6 research loop.
@@ -411,13 +461,19 @@ Process additions must answer two questions: what failure does this prevent, and
 artifact or check demonstrates that benefit?
 If neither answer is concrete, do not add the process.
 Repetition alone does not justify a schema field, digest, table, or gate.
+When a consequential rule is broken and nothing detects it, add the smallest useful
+check that would prevent the recurrence.
+There is no standing goal to mechanize every written convention.
 
 ### Durable Documentation Map
 
-The implementation adds one validated documentation map under `docs/project/`. It maps
-each durable prose document to its role, authority, lifecycle, and supersession target
-when applicable. It lists the small set of standalone project documents individually and
-covers homogeneous artifact directories through their governing schema.
+The implementation adds one validated `DocumentMap/v1` source under `docs/project/`. It
+maps each durable prose document to its role, authority, lifecycle, and supersession
+target when applicable.
+It lists the small set of standalone project documents individually and covers
+homogeneous artifact directories through their governing schema.
+The synopsis renders its document table from that source; there is no second
+hand-maintained map.
 
 The map prevents two practical failures: agents entering through a historical review as
 if it were current policy, and a current claim living only in a transient spec or
@@ -428,7 +484,7 @@ documents.
 | Surface | Durable authority after implementation | Required migration |
 | --- | --- | --- |
 | `README.md` | core assurance rules, compact workflow selector, reader entry points | state “verified” and “numerically checked” rules; link the current frontier and synopsis |
-| `SYNOPSIS.md` | full terminology, capability/gap ladder, verification process, workflow transitions, current technical state | replace tier language; explain reported versus certified frontiers and formal-promotion limits |
+| `SYNOPSIS.md` | full terminology, capability/gap ladder, verification process, workflow transitions, current technical state | replace tier language; explain reported versus verified frontiers and merge the capability ladder into “What Is Built” |
 | `TUTORIAL.md` | first-use path through the tools and record | update examples to use inspect, check, and verify with their exact meanings |
 | `conventions.md` | ids, schemas, field rules, and objective checks | remove “every convention becomes a check”; retain only checks with a named benefit |
 | `frontier/README.md` | frontier semantics, coverage scope, reader and contributor workflows | document v2 case/evidence contracts, source conflicts, replay outcomes, and generated views |
@@ -436,16 +492,25 @@ documents.
 | `campaign/README.md` | W6 mechanics | adopt the assurance/method split without duplicating synopsis definitions |
 | campaign schemas and artifacts | typed historical and current research record | migrate precision fields and annotate unsupported historical verdicts without rewriting raw results |
 | `resources/README.md` and source indexes | source retention and reconstruction policy | remove redundant checksum requirements; state the real trust-boundary exceptions |
-| research reports | current evidence syntheses or explicitly superseded analyses | audit every mathematical and tooling claim; link corrections and capability status |
+| research reports | current evidence syntheses or explicitly superseded analyses | map lifecycle; correct assurance claims and link corrections or capability status without blanket restyling |
 | reviews, handoffs, postmortems, and active plans | dated historical or transient records | map lifecycle; correct dangerous current-sounding claims in place or add explicit supersession notes |
 | probe and component READMEs, including `frankensim-probe/README.md` | local component scope and reproducible use | map lifecycle and audit every assurance or capability claim |
-| `AGENTS.md` and contributor-facing instructions | agent entry discipline | require common-doc review and the authoritative assurance vocabulary for durable edits |
+| packing-local contributor instructions | agent entry discipline | require common-doc review and the authoritative assurance vocabulary without editing tbd-managed root `AGENTS.md` directly |
 
-All durable Markdown edits follow the common documentation guidelines.
-Objective parts are automated: footer presence, local-link validity, complete
-document-map coverage, schema conformance, generated-view freshness, and forbidden
-current vocabulary.
-Editorial review covers meaning, reader order, tone, and duplication.
+Every durable document is mapped and receives the common-doc footer and applicable
+lifecycle information.
+The definitive reader and operator surfaces—README, SYNOPSIS, TUTORIAL, conventions, and
+the frontier, campaign, and resources READMEs—receive the full editorial pass during
+Phase 1. Historical reviews, handoffs, postmortems, reports, and plans receive targeted
+assurance corrections and supersession notes; broader editing rides along when
+substantive work touches them.
+
+Objective checks cover footer presence, local-link validity, complete document-map
+coverage, schema conformance, and generated-view freshness.
+Terminology lint targets retired current machine tokens such as structured `polished`
+and `f64_screen`, `role: exact_solution`, and “approximately verified.”
+Legitimate semantic uses of “exact,” “verified,” or historical “polish” remain an
+editorial question, not a global word-lint.
 
 Historical quotations or raw source text may contain old terms.
 A validator exception must be scoped to an explicitly marked quotation or archival path,
@@ -455,7 +520,8 @@ never to a whole current document.
 
 The implementation introduces or revises these contracts:
 
-- `packing.squares:SquarePackingCase/v2` for reported and certified bounds;
+- `packing.squares:SquarePackingCase/v2` for reported and verified upper and lower
+  bounds;
 - `packing.squares:FrontierEvidence/v1` for typed evidence and replay status;
 - `packing.squares:Witness/v1` for center/rotation or corner geometry with explicit
   units, coordinate convention, literal values, and source references;
@@ -466,6 +532,12 @@ The implementation introduces or revises these contracts:
 
 The exact file split is an implementation choice.
 The logical contracts and validation rules are not.
+
+New structured artifacts use v2 from the change that lands the v2 validator.
+Existing v1 artifacts may remain only on a dated migration allowlist while Phase 1 is in
+progress; Phase 1 cannot complete until current v1 artifacts are migrated and the
+validator rejects new or unlisted v1 input.
+Raw historical source material is not rewritten.
 
 One public command family accepts a witness and can:
 
@@ -492,6 +564,18 @@ tbd list --spec plan-2026-08-24-frontier-assurance-and-verification.md --pretty
 
 The spec does not duplicate mutable bead statuses.
 
+This plan owns the public witness interchange, evidence contracts, `inspect`/`check`/
+`verify`/`promote` semantics, and the general exact-or-interval promotion path.
+The [minimal packing toolkit plan](plan-2026-08-22-minimal-packing-toolkit.md) owns
+search, quench, basin identity, atlas runtime, and the low-level verifier
+implementation.
+The work is shared rather than duplicated: toolkit bead `think-0md2` owns
+the certificate type, `think-kmwb` owns exact corpus re-verification, and `think-2lyb`
+owns the unavoidable-set `PoseBox` proof hook.
+This plan consumes those outputs through `think-q7d0` (public witness path),
+`think-75ll` (promotion and typed outcomes), and `think-rsxe` (generic algebraic
+preconditions).
+
 ### Phase 1: Establish the Contract and Migrate the Current Record
 
 - [ ] Land the controlled vocabulary and logical implications in README, synopsis,
@@ -499,20 +583,27 @@ The spec does not duplicate mutable bead statuses.
   resource policy.
 - [ ] Add the v2 case, evidence, experiment, witness, and document-map contracts with
   cross-record semantic validation.
-- [ ] Generate a reader-first frontier table with reported best, certified upper bound,
-  proved lower bound, status, assurance, conflict, and freshness.
-- [ ] Migrate all current `n = 1..100` cases and every current campaign artifact to the
-  new fields; preserve raw measurements and use named defects or revision notes for
-  invalid historical conclusions.
+- [ ] Generate a reader-first frontier table with reported and verified upper and lower
+  bounds, verification origin, status, conflict, and freshness.
+- [ ] Script the v1-to-v2 migration of all current `n = 1..100` cases, compare it with a
+  fresh source reparse, and direct human or agent scrutiny to cases with local evidence,
+  conflicts, or `verified_here` entries rather than hand-transcribing 100 files.
+- [ ] Migrate current campaign artifacts without rewriting raw measurements.
+  Preserve unrecorded historical precision or tolerance explicitly and use named defects
+  or revision notes for invalid historical conclusions.
 - [ ] Correct the `n = 29` source roles and wording.
   Exp-012 remains a 160-digit numerical check; H-024 becomes unresolved under its
   original exact prerequisite or is superseded by a precisely numerical successor claim.
-- [ ] Audit every bare “verified,” “exact,” “proof,” “polished,” `f64_screen`, and
-  tolerance claim in the packing tree.
-- [ ] Remove redundant Git-source hashes and retain only digests with a documented
-  functional purpose.
-- [ ] Add the durable documentation map and complete a common-doc editorial pass over
-  every definitive doc, research report, review, handoff, postmortem, and active plan.
+- [ ] Audit assurance claims in current prose.
+  Automate retired structured tokens and exact deprecated phrases; review contextual
+  mathematical words editorially.
+- [ ] Remove reader-facing Git-source digests.
+  Retain, replace, or remove each embedded-transcription staleness pin according to its
+  named failure and document every retained pin.
+- [ ] Add the durable documentation map, generate the synopsis view from it, and map
+  every project document.
+  Complete the full common-doc pass on definitive docs; apply lifecycle labels and
+  targeted assurance corrections to historical or transient docs.
 
 **Done when:** all existing structured artifacts validate under the new schemas; no
 current prose blurs numerical and formal evidence; every project doc has an authority
@@ -521,10 +612,12 @@ and local checks support.
 
 ### Phase 2: Complete Source Coverage and the Reusable Replay Path
 
-- [ ] Audit the named primary-source set, record conflicts and review dates, determine
-  the current horizon, and create a case for every `n` through that horizon.
+- [ ] Audit the named primary-source set and record conflicts and review dates.
+  Keep the case corpus complete through the declared `n = 100` horizon and record
+  relevant beyond-horizon claims in the source inventory.
 - [ ] Adjudicate the July 2026 `n = 68` and `n = 69` claims and any other newer results;
-  do not promote an inaccessible certificate.
+  do not promote an inaccessible certificate or expose held-out child geometry before
+  preregistered H-030 is settled or versioned.
 - [ ] Build the witness interchange format, source adapters, viewer, and independent
   numerical checks for `numerical-f64` and `numerical-multiprecision`.
 - [ ] Attempt local replay for every external full-geometry witness in scope and record
@@ -544,8 +637,8 @@ inspected and numerically checked without case-specific verifier code.
 
 - [ ] Implement and independently test an outward-rounded interval-certificate path for
   suitable contact systems.
-- [ ] Attempt formal promotion of the highest-value uncertified records, retaining exact
-  certificates, slightly relaxed certified bounds, or typed blockers.
+- [ ] Attempt formal promotion of the highest-value unverified records, retaining exact
+  certificates, slightly relaxed verified bounds, or typed blockers.
 - [ ] Add small independent certificate checkers and negative controls for containment,
   overlap, field metadata, interval rounding, incomplete input, and false optimality
   promotion.
@@ -565,12 +658,16 @@ transient spec.
 
 - Every frontier case, evidence record, witness, experiment, and documentation-map entry
   validates against its declared contract.
-- Every `n` in the declared horizon occurs exactly once.
-- `proved` requires exact equality between verified lower and certified upper bounds.
-- Every numerical record declares method, actual precision, and tolerance.
+- Every `n` through the declared case-corpus horizon occurs exactly once; beyond-horizon
+  source claims have an inventory disposition without requiring empty case files.
+- `proved` requires exact equality between verified lower and verified upper bounds.
+- Every new numerical record declares method, actual precision, and tolerance; a
+  historical unknown carries the sentinel and dated migration annotation.
 - Every verified record declares a supported formal method and its required formal
-  artifact: either a machine certificate and replay command or a fully scoped proof and
-  independent audit record.
+  artifact: a machine certificate and replay command, a complete published proof, or a
+  fully scoped proof plus independent audit record.
+  Its origin is visible.
+- `beat_record: true` requires `assurance: verified`.
 - Every result and certificate reference resolves; every generated table is current.
 - Every durable project document is mapped; raw archival paths are explicitly excluded.
 
@@ -599,14 +696,14 @@ transient spec.
 - The built-in Trump `n = 11` witness remains verified because its field assumptions are
   discharged; arbitrary generic fields do not inherit that status.
 - A reported external interval result without a public certificate stays reported.
-- An exact trivial-grid witness gives every case a certified fallback upper bound.
+- One parametric exact grid theorem gives every case a verified fallback upper bound.
 
 ### Documentation Review
 
-The objective gate checks footer, mapping, links, forbidden live terminology, and
-generated content.
-The editorial pass then applies the common documentation guidelines to
-every durable Markdown file changed or reclassified, with special attention to:
+The objective gate checks footer, mapping, links, retired machine tokens, and generated
+content. It does not word-lint legitimate mathematical uses of “exact” or “verified.”
+The editorial pass then applies the common documentation guidelines to every durable
+Markdown file changed or reclassified, with special attention to:
 
 - reader-first conclusions before mechanism;
 - one authoritative home per rule;
@@ -627,11 +724,14 @@ gate.
 
 ## Rollout Plan
 
-Implementation lands as a stack above the current workflow-entry-points PR:
+Implementation lands as successive PRs on the current square-packing stack.
+As lower PRs merge, the next PR rebases and retargets to the new stack tip without
+changing the ownership boundaries above:
 
 1. this plan and its bead map;
 2. vocabulary, schema, definitive-doc, and current-corpus migration;
-3. source-horizon expansion, full document/research audit, and generic witness replay;
+3. source-coverage inventory, targeted document and research assurance audit, and
+   generic witness replay;
 4. exact/interval promotion tooling and continuous semantic gates.
 
 Each PR is internally consistent and passes the full existing test suite.
