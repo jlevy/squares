@@ -25,7 +25,7 @@ session:
     objective: >-
       Enumerate the remaining exact n=5 non-sheet tangent directions branch by branch,
       modulo the certified exp-034 angle-and-slide sheet and the exp-036 obstruction.
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 30
@@ -46,7 +46,11 @@ session:
     fallback: >-
       Preserve the finite partial inventory, leave think-nm35 open, and rotate to order
       8's W3 criterion work under think-kfb4.
-    outcome: null
+    outcome: >-
+      Three independent exact pilots reduced both owner branches to the same first-order
+      cone: endpoint quotients have eight rays, the interior quotient has six, and
+      removing the two one-sided endpoint sheet rays leaves one common six-ray
+      transverse cone with an explicit positive-certificate proof skeleton.
     evidence:
     - >-
       An unregistered exact-arithmetic pilot enumerated every rank-(r-1) active-row
@@ -65,11 +69,58 @@ session:
       angle sign of square 1, and both tied x-upper rows of square 1. Exp-036 separately
       handles the common-angle equality-kernel direction; nonlinear realizability of
       these six quotient classes remains unresolved.
+    - >-
+      Independent exact left-kernel probes found positive certificates that force nine
+      slacks to zero and leave R_+^2 times the cone over a quadrilateral, with face
+      vector (1,6,13,13,6,1). A coordinator replay checked one certificate exactly in
+      all six source matrices.
+    - >-
+      A separate geometry pilot found exact fixed-angle straight-line continuations for
+      four no-angle generators at all three strata, including 12 exact epsilon=1/1000
+      fixtures. This is discovery evidence pending a frozen retained checker, and it
+      proves feasibility rather than terminal or stationary membership.
+    stop_reason: >-
+      The finite discovery inventory and proof skeleton were retained before the
+      deadline; a new phase is required to preregister its confirmatory criterion.
+    next_action: >-
+      Freeze exp-037's exact cone-factorization criterion and refusal scope before any
+      retained target run.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Preregister a confirmatory exact n=5 tangent-inventory experiment that distinguishes
+      the linear cone factorization, certified sheet directions, exp-036's narrow +W
+      obstruction, and every nonlinear lift that remains unresolved.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The discovery slice produced a finite exact cone and new straight-line candidates;
+      experiment-loop discipline requires a frozen criterion before implementation or a
+      retained verdict.
+    budget_minutes: 15
+    started_at: '2026-08-25T00:49:14-07:00'
+    deadline_at: '2026-08-25T01:04:14-07:00'
+    expected_output: >-
+      A valid exp-037 experiment artifact binding exact sources, acceptance checks,
+      mutations, runtime caps, and a scope that does not classify -W or W-plus-release
+      mixtures.
+    validation_command: >-
+      uvx --from softschema softschema validate
+      explorations/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
+    kill_condition: >-
+      Stop at fifteen minutes with a criterion note in think-nm35 if source bindings,
+      acceptance checks, or the nonlinear refusal boundary are still ambiguous.
+    fallback: >-
+      Preserve the reviewed proof skeleton, leave exp-037 unallocated, and rotate to a
+      correctness review of the disputed +W/-W scope.
+    outcome: null
+    evidence: []
     stop_reason: null
     next_action: >-
-      Independently audit the branch model and completeness lemma, then freeze a
-      replayable exact-ray criterion before implementing or running the confirmatory
-      inventory.
+      Allocate exp-037, disclose the exact pilot, and freeze the analytic certificate,
+      independent controls, 30-second caps, and first-order-only determination.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -92,7 +143,89 @@ session:
       Zero session-010 slices executed; checkpoint 9762f93 is based on main 8136f21,
       passes 31 of 31 normal-gate steps locally, and passes Linux plus macOS CI on PR 29.
     after: null
-  delegations: []
+  delegations:
+  - task: Independently audit the exp-035 branch matrices and derive exact cone certificates.
+    operator: /root/n5_cone_code_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Proved exact positive left-kernel certificates for both owners, the six-ray
+      factorization, and the transverse and endpoint face vectors.
+    evidence:
+    - Exact row-label-to-coefficient certificates were checked over Q(sqrt(2)) in all six matrices.
+    - The common transverse face vector is (1,6,13,13,6,1).
+    files: []
+    checks:
+    - Read-only exact SymPy rank, augmented-rank, and left-kernel probes.
+    uncertainty: Nonlinear realizability and a geometry rebuild were outside the task.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Use the explicit certificates in exp-037's frozen acceptance rule.
+    phase: 1
+    budget_minutes: 17
+    started_at: '2026-08-25T00:38:00-07:00'
+    deadline_at: '2026-08-25T00:55:00-07:00'
+    expected_output: Exact formulation, branch audit, and finite unresolved list.
+    validation_command: null
+    kill_condition: Return a finite blocker by 00:55 PT; do not edit shared files.
+    fallback: Return source locations and the smallest unproved lemma.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, packing-validate]
+  - task: Design the smallest replayable exact tangent-inventory instrument and controls.
+    operator: /root/n5_inventory_instrument
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Specified a source-bound v1 record, exact active-set completeness argument, nine
+      independent controls, 30-second caps, and the required nonlinear refusal scope.
+    evidence:
+    - An in-memory exact pilot checked 12,250 active subsets in about 23 computation seconds.
+    - Both owner branches produced identical exact V-signatures.
+    files: []
+    checks:
+    - Read-only exact active-set enumeration over all six source matrices.
+    uncertainty: End-to-end task wall time was not exposed; 23 seconds covers enumeration only.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Delegate bounded implementation only after exp-037 is preregistered.
+    phase: 1
+    budget_minutes: 17
+    started_at: '2026-08-25T00:38:00-07:00'
+    deadline_at: '2026-08-25T00:55:00-07:00'
+    expected_output: Replay contract, controls, runtime estimate, and refusal boundary.
+    validation_command: null
+    kill_condition: Return a finite blocker by 00:55 PT; do not edit shared files.
+    fallback: Return the minimal active-set enumeration contract.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, packing-validate]
+  - task: Independently derive the n=5 quotient geometry and test the simplest continuations.
+    operator: /root/n5_math_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Confirmed the cone factorization and found four no-angle generators with genuine
+      local fixed-side straight-line continuations; terminal membership remains open.
+    evidence:
+    - Exact ranks, positive dependence, six generators, and the sole ray relation were derived independently.
+    - Twelve epsilon=1/1000 exact fixtures passed in 0.4 seconds.
+    files: []
+    checks:
+    - Read-only exact Q(sqrt(2)) matrix probes and exact-sign packing verification.
+    uncertainty: >-
+      Exp-036 covers only +W; -W, angle rays, W mixtures, and stationary membership are unresolved.
+    elapsed_seconds: 720
+    elapsed_quality: operator_reported_approximate
+    next_action: Preregister the inventory before retaining the four continuation results.
+    phase: 1
+    budget_minutes: 17
+    started_at: '2026-08-25T00:38:00-07:00'
+    deadline_at: '2026-08-25T00:55:00-07:00'
+    expected_output: Independent exact derivation and smallest nonlinear next step.
+    validation_command: null
+    kill_condition: Return a finite blocker by 00:55 PT; do not edit shared files.
+    fallback: Return the exact lineality and one verified ray.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, packing-validate]
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
@@ -112,8 +245,8 @@ session:
   - PR 29 validate passed in 2m19s; macos-portability passed in 4m55s
   stop_reason: null
   next_action: >-
-    Execute the first exact n=5 inventory slice under think-nm35 and close, renew, or
-    rotate the phase no later than 01:06:03-07:00.
+    Complete exp-037 preregistration under think-nm35 by 01:04:14-07:00, then delegate
+    bounded implementation while the coordinator reviews the proof.
 ---
 ## Session Boundary
 
