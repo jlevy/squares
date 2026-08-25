@@ -3,9 +3,9 @@ type: is
 id: is-01m0wqyhbewrv51618f7s0tne0
 title: Integrate research validation and generated artifacts without brittle anchors
 kind: task
-status: open
+status: in_progress
 priority: 0
-version: 2
+version: 3
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies:
@@ -13,6 +13,6 @@ dependencies:
     target: is-01m0wr07k9y92zmjm65se7s1y3
 parent_id: is-01m0wqx97nb22qwx8v47hrpfqk
 created_at: 2026-08-25T15:17:17.293Z
-updated_at: 2026-08-25T15:18:12.840Z
+updated_at: 2026-08-25T16:42:10.160Z
 ---
 Combine the PR34 bounded subprocess runner and PR29 exact replays, HiGHS repair, and pair meter with PR31's source coverage, witness verification, documentation checks, and 32-step validation table. Audit auto-merged code paths rather than trusting Git. Regenerate ledger, synopsis-owned counts, defect view, source coverage, gallery, and controls from final sources; prefer semantic invariants and --list over duplicated step/count literals. Run focused exact replays, negative controls, full validation on Linux/macOS, and ensure no built component is promoted by a green gate beyond its declared scope.
