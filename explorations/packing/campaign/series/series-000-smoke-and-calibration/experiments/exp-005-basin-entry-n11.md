@@ -1,7 +1,7 @@
 ---
 title: exp-005 — basin entry at n = 11, from inside Trump's packing
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,26 +10,38 @@ experiment:
   series: series-000
   title: Basin entry at n = 11, perturbing outward from Trump's exact packing
   date: '2026-08-23'
-  hypotheses: [H-018]
+  hypotheses:
+  - H-018
   tier: exploratory
   subject:
     label: sqsearch local quench and stock schedule, seeded from the exact packing
     engine: sqsearch 0.1.0
-    engine_commit: '41b3e18'
-    precision: f64_screen
+    engine_commit: 41b3e18
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: Linux container, 8 cores (remote session)
     selftest_passed: true
-  instance: {axis: n, point: 11, role: target}
+  instance:
+    axis: n
+    point: 11
+    role: target
   method:
     control: 'eps = 0: the unperturbed seed, which must return unchanged'
-    candidate: 'uniform perturbation of every pose by eps, then anneal; three arms'
+    candidate: uniform perturbation of every pose by eps, then anneal; three arms
     runs_per_condition: 40
     interleaved: false
     operator: claude-opus-5
-    commit: '41b3e18'
+    commit: 41b3e18
     entry_point: explorations/packing/run_basin_entry.sh
-    command: 'sqsearch --basin-entry --seed-config <trump11.json> --eps 0,1e-5,1e-4,1e-3,1e-2,1e-1 --trials 40, over three arms'
-    budget: '720 trials, 77.1 s engine wall'
+    command: sqsearch --basin-entry --seed-config <trump11.json> --eps 0,1e-5,1e-4,1e-3,1e-2,1e-1
+      --trials 40, over three arms
+    budget: 720 trials, 77.1 s engine wall
     record: campaign/series/series-000-smoke-and-calibration/results/exp-005-basin-entry.jsonl
   effort:
     timebox: 90m
@@ -38,25 +50,35 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: 'does the search return to within 1e-6 of Trump''s configuration in at least half of runs at eps = 1e-3'
+    question: does the search return to within 1e-6 of Trump's configuration in at least half of runs
+      at eps = 1e-3
     role: outcome
     outcome: no_progress
-    checked_by: 'max_dev against the seed, both configurations normalised to their bounding box; 0 of 40 trials in every arm'
+    checked_by: max_dev against the seed, both configurations normalised to their bounding box; 0
+      of 40 trials in every arm
   - shape: conditions
     metric: max_dev_at_eps_1e-3
     role: outcome
     control_median: 0.0
     candidate_median: 0.002322
-    control_range: [0.0, 0.0]
-    candidate_range: [1.216e-05, 8.731e-02]
+    control_range:
+    - 0.0
+    - 0.0
+    candidate_range:
+    - 1.216e-05
+    - 0.08731
     overlapping: false
   - shape: conditions
     metric: max_dev_over_eps_ratio_by_effort
     role: mechanism
     control_median: 11.13
     candidate_median: 4.93
-    control_range: [11.13, 11.13]
-    candidate_range: [4.93, 4.93]
+    control_range:
+    - 11.13
+    - 11.13
+    candidate_range:
+    - 4.93
+    - 4.93
     overlapping: false
   - shape: record
     metric: best_side_gap_at_eps_1e-5
@@ -64,28 +86,29 @@ experiment:
     direction: lower
     score: 1.413e-10
     standing_best: 0.0
-    standing_best_source: 'frontier/n-011.md (Trump 1979), as the seed itself'
+    standing_best_source: frontier/n-011.md (Trump 1979), as the seed itself
     beat_record: false
     runs: 40
   - shape: determination
-    question: 'does the campaign''s stock schedule (t_hot = 0.25) hold the basin when started inside it'
+    question: does the campaign's stock schedule (t_hot = 0.25) hold the basin when started inside
+      it
     role: outcome
     outcome: no_progress
-    checked_by: 'hot arm, median max_dev 2.2-2.7 at every eps including 1e-5; median side gap 0.23-0.27'
+    checked_by: hot arm, median max_dev 2.2-2.7 at every eps including 1e-5; median side gap 0.23-0.27
   complexity:
     lines_changed: 232
     new_dependencies: []
-    new_failure_modes: ['seed export is a one-way door out of the exact field; nothing downstream may certify']
-    notes: 'Adds --basin-entry to the engine, tools/export_trump11.py, and run_basin_entry.sh.'
+    new_failure_modes:
+    - seed export is a one-way door out of the exact field; nothing downstream may certify
+    notes: Adds --basin-entry to the engine, tools/export_trump11.py, and run_basin_entry.sh.
   verdict:
     decision: rejected
     primary_criterion: max_dev
-    reason: >-
-      Refutes H-018 as stated - 0 of 40 trials return within 1e-6 at eps = 1e-3 in any
-      arm - but the shape of the failure is the result: the return distance scales
-      linearly with eps with no threshold, and halves when the effort is multiplied by
-      ten, so what was measured is the refiner's convergence rate, not a basin wall.
-    commit: '41b3e18'
+    reason: 'Refutes H-018 as stated - 0 of 40 trials return within 1e-6 at eps = 1e-3 in any arm
+      - but the shape of the failure is the result: the return distance scales linearly with eps with
+      no threshold, and halves when the effort is multiplied by ten, so what was measured is the refiner''s
+      convergence rate, not a basin wall.'
+    commit: 41b3e18
 ---
 # exp-005 — basin entry at `n = 11`
 

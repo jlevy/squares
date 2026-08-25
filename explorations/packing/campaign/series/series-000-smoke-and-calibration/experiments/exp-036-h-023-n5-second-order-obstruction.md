@@ -1,7 +1,7 @@
 ---
 title: exp-036 — exact n = 5 second-order obstruction
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,40 +10,39 @@ experiment:
   series: series-000
   title: Test whether exp-035's displayed direction survives second order
   date: '2026-08-24'
-  hypotheses: [H-023]
+  hypotheses:
+  - H-023
   tier: exploratory
   subject:
     label: exact second-order feasibility of the exp-035 common-angle direction
     engine: n = 5 second-order obstruction checker 0.1.0
     engine_commit: f2d2e53
-    precision: exact
+    assurance: verified
+    method: exact-algebraic
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 5, role: target}
+  instance:
+    axis: n
+    point: 5
+    role: target
   method:
-    control: >-
-      exact semantic predecessor binding plus six source, direction, branch, row,
-      coefficient, margin, and scope mutations
-    candidate: >-
-      one asymptotic inequality certificate for each of the only two nearby pair (3,4)
-      owner-axis branches at all three exp-035 strata
+    control: exact semantic predecessor binding plus six source, direction, branch, row, coefficient,
+      margin, and scope mutations
+    candidate: one asymptotic inequality certificate for each of the only two nearby pair (3,4) owner-axis
+      branches at all three exp-035 strata
     runs_per_condition: 1
     interleaved: false
     operator: openai-codex
     commit: f2d2e53
     dirty: false
     entry_point: explorations/packing/tools/check_n5_second_order_obstruction.py
-    command: >-
-      timeout 30 uv run --frozen --quiet python
-      tools/check_n5_second_order_obstruction.py --record
+    command: timeout 30 uv run --frozen --quiet python tools/check_n5_second_order_obstruction.py
+      --record campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json
+      && timeout 30 uv run --frozen --quiet python tools/check_n5_second_order_obstruction.py --replay
       campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json
-      && timeout 30 uv run --frozen --quiet python
-      tools/check_n5_second_order_obstruction.py --replay
-      campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json
-    budget: >-
-      one 30-minute exact-geometry slice; separate 30-second generation and replay caps;
-      stop on source drift, a missing active row or owner branch, a nonpositive exact
-      obstruction margin, a surviving mutation, or retained-record drift
+    budget: one 30-minute exact-geometry slice; separate 30-second generation and replay caps; stop
+      on source drift, a missing active row or owner branch, a nonpositive exact obstruction margin,
+      a surviving mutation, or retained-record drift
     record: campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json
   effort:
     timebox: 30m exact-geometry slice; 30s generation and 30s replay caps
@@ -52,23 +51,19 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: >-
-      Is the normalized common-angle direction retained by exp-035 excluded from the
-      true fixed-side Bouligand tangent cone at endpoint A, the interior, and endpoint B?
+    question: Is the normalized common-angle direction retained by exp-035 excluded from the true
+      fixed-side Bouligand tangent cone at endpoint A, the interior, and endpoint B?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      exact Q(sqrt(2)) coefficient derivation, source-bound branch exhaustion,
-      deterministic record regeneration, and six declared controls
+    checked_by: exact Q(sqrt(2)) coefficient derivation, source-bound branch exhaustion, deterministic
+      record regeneration, and six declared controls
   verdict:
     decision: accepted
-    primary_criterion: >-
-      bind every required exp-035 wall and SAT branch; derive exact positive owner-4
-      excess, negative owner-3 gap, and positive relative-angle cusp margin; exhaust the
-      two nearby owner axes; replay independently; and reject all six controls
-    reason: >-
-      Both possible nearby owner-axis branches have a strict exact second-order
-      obstruction, all six controls reject, and retained replay is identical.
+    primary_criterion: bind every required exp-035 wall and SAT branch; derive exact positive owner-4
+      excess, negative owner-3 gap, and positive relative-angle cusp margin; exhaust the two nearby
+      owner axes; replay independently; and reject all six controls
+    reason: Both possible nearby owner-axis branches have a strict exact second-order obstruction,
+      all six controls reject, and retained replay is identical.
     commit: a54c838
 ---
 # exp-036 — exact n = 5 second-order obstruction

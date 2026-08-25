@@ -1,6 +1,6 @@
 # Research: Packing 11 Unit Squares in a Square
 
-**Date:** 2026-08-22 (last updated 2026-08-22, expanded with strategy catalogues)
+**Date:** 2026-08-22 (last updated 2026-08-25)
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
 
@@ -32,8 +32,8 @@ This document records everything that could be established about the problem of 
 11 unit squares into the smallest possible enclosing square.
 It is written to support *full technical understanding* of the problem and its
 literature, not to introduce the topic pedagogically.
-Claims are separated by evidential status: proved, computationally verified, best known,
-or asserted-but-unverified.
+Claims are separated by assurance: reported, numerically checked, or formally verified.
+Method, precision, tolerance, and verification origin remain separate.
 
 The motivating observation is that `n = 11` is the smallest case of a natural,
 easily-stated geometry problem that remains **unsolved** after nearly fifty years.
@@ -171,7 +171,8 @@ which is a root of the degree-8 polynomial
 s⁸ − 20s⁷ + 178s⁶ − 842s⁵ + 1923s⁴ − 496s³ − 6754s² + 12420s − 6865 = 0
 ```
 
-*Independently verified during this research* (see [Methodology](#methodology)):
+*Independently checked during this research* (see [Methodology](#methodology)). The
+irreducibility and real-root count are exact; the decimal substitution is numerical:
 
 - The polynomial is **irreducible over ℚ**. The conjectured `s(11)` is therefore an
   algebraic number of degree exactly 8.
@@ -190,9 +191,10 @@ problem.
 
 #### The exact construction: contact equations, coordinates, and closed form
 
-The full defining data of Trump’s packing is recoverable, and was reconstructed and
-independently re-verified during this research from **[Ellsworth SVG]** — the annotated
-source of the `n = 11` diagram in David Ellsworth’s catalogue, archived locally at
+The full defining data of Trump’s packing is recoverable.
+It was reconstructed from **[Ellsworth SVG]** and is now replayed by the repository’s
+exact algebraic verifier — the annotated source of the `n = 11` diagram in David
+Ellsworth’s catalogue, archived locally at
 `explorations/packing/resources/papers/kingbird-square-11-provenance.svg`.
 
 **Composition.** The eleven squares split as **six axis-aligned and five tilted**. The
@@ -246,10 +248,10 @@ plus one messy transcendental constraint, whose joint elimination is degree 8.
 | `v₁` | `cos a − sin a` | `0.118782607549453467521102077399075` |
 | `v₂` | `(s−1)·csc a − r₁ − (3+u₁)·cot a` | `0.547441432087314221163298461396782` |
 
-*Verified independently in this research at 40-digit precision:* both contact equations
-hold with residuals below `10⁻³²`; the closed form for `s` reproduces the published
-value to the same precision; all five derived constants match their closed forms; and
-`sec a` satisfies the degree-8 polynomial above with residual `≈ 3 × 10⁻³³`.
+*Numerically checked independently in this research at 40-digit precision:* both contact
+equations hold with residuals below `10⁻³²`; the closed form for `s` reproduces the
+published value to the same precision; all five derived constants match their closed
+forms; and `sec a` satisfies the degree-8 polynomial above with residual `≈ 3 × 10⁻³³`.
 
 **History of the exact solution — distinct from the packing itself.** This deserves
 separating, because conflating the two is the source of the “Gensane–Ryckelynck improved
@@ -464,7 +466,7 @@ functions of `s` and square roots.
 The bound one can prove is therefore naturally an algebraic number of low degree.
 Both lower-bound constants claimed in this paper — the proved `3 + ½√2` and the
 currently repair-pending `2 + 4/√5` — are degree-2 algebraic numbers.
-The conjectured `s(11)` is degree **8** (verified above).
+The conjectured `s(11)` is degree **8** (verified above by exact irreducibility).
 There is no evident way for a finite unavoidable-point configuration with low-degree
 coordinates to certify a degree-8 threshold.
 This is, in our assessment, the structural reason the method stalls well short of
@@ -715,7 +717,7 @@ Use the structured form to query or plot; use these tables to read.
 
 <!-- BEGIN GENERATED: frontier-open (devtools.render_research_tables) -->
 
-| `n` | best known `s(n)` | how | deg | best proved lower bound | from | gap |
+| `n` | best reported `s(n)` | how | deg | reported lower bound | from | gap |
 | --- | --- | --- | --- | --- | --- | --- |
 | 11 | 3.87708359 | hand | 8 | 3.788854 | unavoidable points | 0.0882 |
 | 12 | 4 | grid | — | 3.788854 | monotone from `s(11)` | 0.2111 |
@@ -789,43 +791,43 @@ Use the structured form to query or plot; use these tables to read.
 
 <!-- BEGIN GENERATED: frontier-solved (devtools.render_research_tables) -->
 
-| `n` | `s(n)` | established by | source |
-| --- | --- | --- | --- |
-| 1 | `1` | perfect square | classical |
-| 2 | `2` | elementary | classical |
-| 3 | `2` | elementary | classical |
-| 4 | `2` | perfect square | classical |
-| 5 | `2 + (1/2)√2` | unavoidable points | Frits Göbel (1979) |
-| 6 | `3` | unavoidable points | Michael Kearney, Peter Shiu (2002) |
-| 7 | `3` | unavoidable points | Said El Moumni (1999) |
-| 8 | `3` | unavoidable points | Said El Moumni (1999) |
-| 9 | `3` | perfect square | classical |
-| 10 | `3 + (1/2)√2` | unavoidable points | Walter Stromquist (2003) |
-| 13 | `4` | unavoidable points | Wolfram Bentz (2010) |
-| 14 | `4` | unavoidable points | Erich Friedman (2009) |
-| 15 | `4` | unavoidable points | Said El Moumni (1999) |
-| 16 | `4` | perfect square | classical |
-| 22 | `5` | unavoidable points | Wolfram Bentz (2016) |
-| 23 | `5` | Nagamochi | Hiroshi Nagamochi (2005) |
-| 24 | `5` | unavoidable points | Erich Friedman (1999) |
-| 25 | `5` | perfect square | classical |
-| 33 | `6` | unavoidable points | Wolfram Bentz (2016) |
-| 34 | `6` | Nagamochi | Hiroshi Nagamochi (2005) |
-| 35 | `6` | unavoidable points | Erich Friedman (1999) |
-| 36 | `6` | perfect square | classical |
-| 46 | `7` | unavoidable points | Wolfram Bentz (2010) |
-| 47 | `7` | Nagamochi | Hiroshi Nagamochi (2005) |
-| 48 | `7` | Nagamochi | Hiroshi Nagamochi (2005) |
-| 49 | `7` | perfect square | classical |
-| 62 | `8` | Nagamochi | Hiroshi Nagamochi (2005) |
-| 63 | `8` | Nagamochi | Hiroshi Nagamochi (2005) |
-| 64 | `8` | perfect square | classical |
-| 79 | `9` | Nagamochi | Hiroshi Nagamochi (2005) |
-| 80 | `9` | Nagamochi | Hiroshi Nagamochi (2005) |
-| 81 | `9` | perfect square | classical |
-| 98 | `10` | Nagamochi | Hiroshi Nagamochi (2005) |
-| 99 | `10` | Nagamochi | Hiroshi Nagamochi (2005) |
-| 100 | `10` | perfect square | classical |
+| `n` | reported `s(n)` | reported basis | source | formal lane |
+| --- | --- | --- | --- | --- |
+| 1 | `1` | perfect square | classical | proved |
+| 2 | `2` | elementary | classical | proved |
+| 3 | `2` | elementary | classical | proved |
+| 4 | `2` | perfect square | classical | proved |
+| 5 | `2 + (1/2)√2` | unavoidable points | Frits Göbel (1979) | proved |
+| 6 | `3` | unavoidable points | Michael Kearney, Peter Shiu (2002) | proved |
+| 7 | `3` | unavoidable points | Said El Moumni (1999) | proved |
+| 8 | `3` | unavoidable points | Said El Moumni (1999) | proved |
+| 9 | `3` | perfect square | classical | proved |
+| 10 | `3 + (1/2)√2` | unavoidable points | Walter Stromquist (2003) | proved |
+| 13 | `4` | unavoidable points | Wolfram Bentz (2010) | proved |
+| 14 | `4` | unavoidable points | Erich Friedman (2009) | proved |
+| 15 | `4` | unavoidable points | Said El Moumni (1999) | proved |
+| 16 | `4` | perfect square | classical | proved |
+| 22 | `5` | unavoidable points | Wolfram Bentz (2016) | proved |
+| 23 | `5` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 24 | `5` | unavoidable points | Erich Friedman (1999) | proved |
+| 25 | `5` | perfect square | classical | proved |
+| 33 | `6` | unavoidable points | Wolfram Bentz (2016) | proved |
+| 34 | `6` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 35 | `6` | unavoidable points | Erich Friedman (1999) | proved |
+| 36 | `6` | perfect square | classical | proved |
+| 46 | `7` | unavoidable points | Wolfram Bentz (2010) | proved |
+| 47 | `7` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 48 | `7` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 49 | `7` | perfect square | classical | proved |
+| 62 | `8` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 63 | `8` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 64 | `8` | perfect square | classical | proved |
+| 79 | `9` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 80 | `9` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 81 | `9` | perfect square | classical | proved |
+| 98 | `10` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 99 | `10` | Nagamochi | Hiroshi Nagamochi (2005) | proved |
+| 100 | `10` | perfect square | classical | proved |
 
 <!-- END GENERATED: frontier-solved -->
 
@@ -1270,8 +1272,8 @@ real root `z₀` of a polynomial *irreducible over* `ℚ(√2)`:
 80z⁸ − 128√2·z⁷ − 32z⁶ + 144√2·z⁵ + 72z⁴ − 112√2·z³ + 40z² − 12√2·z − 7
 ```
 
-*Verified in this research:* this polynomial has exactly two real roots, and the
-relevant one is
+*Verified here by exact real-root counting:* this polynomial has exactly two real roots,
+and the relevant one is
 
 ```
 z₀ = 0.99646642997738577107…,   arccos z₀ = 4.81806270967028353…°
@@ -1290,8 +1292,8 @@ Their “crucial relation”, obtained from the distance between two dashed side
 figure, is a compact expression of the form `s = √2·4z/(2 + 5z − z')` as printed; the
 displayed fraction does not survive PDF extraction unambiguously and the reconstruction
 above does not reproduce `s(11)` under any normalization tried here, so **it should be
-read from the PDF before being relied on** — the polynomial and the angle, which are
-verified above, are the load-bearing results.
+read from the PDF before being relied on** — the polynomial and angle checks above are
+the load-bearing results.
 And at `n = 17` they report `s₁₇ = 4.6755300960455` from a four-equation degree-7 system
 in `cos θ₁, cos θ₂, sin θ₁, sin θ₂`, remarking that Friedman’s rounded `4.6755` “seems
 to be false”; the current catalogue value is `4.67553009360455…`, so the two agree only
@@ -1336,7 +1338,7 @@ Their 1940 paper, “The dissection of rectangles into squares” (*Duke Math.
 J.* **7**, 312–340), reformulated the geometry as an electrical network, via what is now
 called a **Smith diagram**.
 
-The correspondence, verified against **[squaring.net BSST]**, is exact:
+The correspondence, checked against **[squaring.net BSST]**, is exact:
 
 | Circuit object | Geometric object |
 | --- | --- |
@@ -1392,7 +1394,7 @@ There is a fourth objection, and it is decisive on its own.
 coefficients have rational solutions; that rationality is exactly why the Trinity Four
 could scale their dissections to integers, and it is the source of the method’s power.
 But the conjectured `s(11)` is a root of an *irreducible degree-8* polynomial over ℚ
-(verified in this research).
+(verified here by exact polynomial arithmetic).
 A technique whose output is always rational cannot, even in principle, produce an
 irrational algebraic number of degree 8. This is not a matter of the method being
 unwieldy here — it is provably the wrong codomain.
@@ -1594,7 +1596,7 @@ These are frequently conflated with the present problem in casual sources:
 
 3. **Algebraic degree is the likely obstruction.** Every solved case has `s(n)` of
    degree ≤ 2 over ℚ. The conjectured `s(11)` is a root of an irreducible degree-8
-   polynomial (verified in this research).
+   polynomial (verified here by exact polynomial arithmetic).
    Unavoidable-point arguments certify thresholds built from unit distances and
    container coordinates, which naturally produce low-degree constants.
    Closing the `n = 11` gap by that method would require certifying a degree-8 threshold
@@ -1810,14 +1812,15 @@ Every item in the proof lane above exists because of this.
   Nothing was retracted; the secondary literature mis-described an exact-solution result
   as a record improvement.
 - [x] ~~Obtain the exact coordinates of all 11 squares~~ — **resolved**: extracted from
-  the catalogue SVG source and re-verified at 40-digit precision.
+  the catalogue SVG source, numerically cross-checked at 40-digit precision, and
+  replayed by the exact algebraic verifier.
   See
   [The exact construction](#the-exact-construction-contact-equations-coordinates-and-closed-form).
 - [x] ~~Retrieve the Gensane–Ryckelynck primary text~~ — **resolved**: Springer serves
   the PDF openly; retrieved, read, archived, and its `n = 11` section is now quoted
   directly above rather than through Ellsworth’s annotations.
-  Their published polynomial and its `45°`-offset angle were independently verified
-  here.
+  Their published polynomial was checked with exact polynomial arithmetic and its
+  `45°`-offset angle was numerically cross-checked here.
 - [x] ~~Locate Nagamochi (2005)~~ — **resolved**: open access as *Packing Unit Squares
   in a Rectangle*, *Electron.
   J. Combin.* **12** #R37. Archived; its general lower bound is now recorded and used
@@ -1862,7 +1865,7 @@ Every item in the proof lane above exists because of this.
 - [ ] Did Gensane–Ryckelynck’s inflation algorithm ever explore contact classes for
   `n = 11` other than Trump’s, and is that enumeration recorded anywhere?
 - [ ] Confirm whether Packomania covers squares-in-squares records or is circle-focused;
-  it was listed in the source briefing but not verified here.
+  it was listed in the source briefing but not checked here.
 
 ## Source Availability
 
@@ -1973,7 +1976,7 @@ now resolves to the Stanford technical report CS-TR-75-483, which is live.
 
 **Second research pass (same day).** The strategy catalogues, the squared-square
 section, and the Kirchhoff transferability assessment were added in a second pass.
-The Smith-diagram correspondence was verified line by line against squaring.net’s
+The Smith-diagram correspondence was checked line by line against squaring.net’s
 exposition rather than reproduced from memory or from the briefing; the priority
 question (Sprague vs.
 the Trinity Four) was checked separately and the briefing’s attribution corrected.
@@ -1987,20 +1990,19 @@ that no strand is lost, and this pass executed the highest-priority beads.
 It produced the exact construction data, resolved the Gensane–Ryckelynck question from
 the catalogue’s own cited provenance, and overturned this document’s earlier claim that
 rigorous interval branch-and-bound was untried.
-All contact equations and derived constants were re-verified at 40-digit precision with
-mpmath; residuals are below `10⁻³²` throughout.
+All contact equations and derived constants were numerically checked at 40-digit
+precision with mpmath; residuals are below `10⁻³²` throughout.
 
 **Fourth pass — technical review and remediation (same day).** The document was reviewed
-end to end against its own archive, every substantive claim class was re-verified, and
-the findings were applied here rather than kept in a separate review document.
+end to end against its own archive, every substantive claim class was rechecked, and the
+findings were applied here rather than kept in a separate review document.
 What that pass changed:
 
-- **Re-verified independently** (SymPy and mpmath, 50 digits): the degree-8 polynomial’s
-  irreducibility and real roots; mutual consistency of the three degree-8 polynomials
-  for `s`, `sec a` and `tan(a/2)` by resultant elimination; both contact equations; the
-  closed form; the tilt angle; all five derived constants (residuals below `10⁻⁴⁷`); and
-  the Stromquist constants.
-  All held. The packaged verifier’s `test.sh` was re-run and passed.
+- **Rechecked independently** with exact SymPy polynomial operations and 50-digit mpmath
+  arithmetic: irreducibility, real-root counts, and resultant eliminations were exact;
+  the contact equations, closed form, tilt angle, derived constants, and Stromquist
+  constants were numerical checks with residuals below `10⁻⁴⁷`. All held.
+  The current exact replay is `uv run --frozen python -m cases.trump11.verify_exact`.
 - **Retrieved two sources previously recorded as unavailable.** Springer serves the
   **[Gensane–Ryckelynck 2005]** PDF openly at its `/content/pdf/` URL — the earlier pass
   had fetched the article landing page and concluded paywalled.
@@ -2014,8 +2016,8 @@ What that pass changed:
   paper: the 14-equation Maple elimination, the polynomial over `ℚ(√2)`, and the fact
   that their claimed “improvement” at `n = 11` is a sharpening of the recorded *number*
   for Trump’s configuration, not a better packing.
-  Their published root was verified here to be `cos(45° − a)`, which explains why the
-  formula does not look like one for `s(11)`.
+  Their published root was numerically checked here to be `cos(45° − a)`, which explains
+  why the formula does not look like one for `s(11)`.
 - **Corrected five substantive errors**, each recorded in
   [Corrections to Common Summaries](#corrections-to-common-summaries): the Roth–Vaughan
   formula and its attribution, the Kearney–Shiu exponent, the two-stage structure of

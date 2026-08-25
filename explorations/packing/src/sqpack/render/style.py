@@ -78,7 +78,7 @@ def color_for_square(index: int, theme: Theme = PAPER_THEME) -> str:
 def evidence_style(evidence: EvidenceTier) -> tuple[str, str, str]:
     return {
         EvidenceTier.CANDIDATE: ("candidate", "8 5", "?"),
-        EvidenceTier.VERIFIED_CONSTRUCTION: ("verified construction", "none", "V"),
+        EvidenceTier.NUMERICALLY_CHECKED: ("numerically checked", "none", "N"),
         EvidenceTier.CERTIFIED_UPPER_BOUND: ("certified upper bound", "3 3", "U"),
         EvidenceTier.PROVED_OPTIMUM: ("proved optimum", "none", "P"),
     }[evidence]

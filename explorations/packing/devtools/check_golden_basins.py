@@ -9,11 +9,11 @@
 
 A golden whose expected values are *whatever the code produced last time* is a
 characterization test. It catches regressions and cannot tell you the code was ever
-right — and against this project's actual failure history, where five of seven soundness
-defects pointed in the flattering direction, a golden captured from a wrong run is a
-wrong answer with a checksum on it. [D-030](../defects.md) is the live example: twelve
-interrupted descents recorded as twelve basins, with every structural invariant green.
-A golden taken that morning would have frozen the bug.
+right — and most recorded soundness defects in this project pointed in the flattering
+direction. A golden captured from a wrong run is a wrong answer with a checksum on it.
+[D-030](../defects.md) is the live example: twelve interrupted descents recorded as
+twelve basins, with every structural invariant green. A golden taken that morning would
+have frozen the bug.
 
 So the committed file is the *diff surface*, and the assertions underneath it are
 grounded in things that were true before this code existed:
@@ -25,8 +25,8 @@ grounded in things that were true before this code existed:
   [`sqpack.research.closed_form`](../src/sqpack/research/closed_form.py).
 * **Independent validity.** Every endpoint is re-checked by `sqpack.verify`, through
   code the quench does not share (rule **R1**).
-* **Reproducibility.** Fixed seeds, so the same map twice. The committed file is the
-  assertion.
+* **Reproducibility.** Fixed seeds, so the same map twice. Parsed content is the
+  characterization surface; serializer wrapping is not.
 
 The proved bound and independent validity checks are what a characterization golden
 cannot do. Closed-form matching is supporting metadata.
@@ -49,8 +49,8 @@ Asserting the second is how a gate starts failing for reasons nobody can act on.
 
 ## Stable and unstable fields
 
-Sides are recorded to **10 decimals**, coarser than the `polished` tier's own `1e-11`
-noise floor ([D-021](../defects.md)); gaps within that floor are recorded as zero.
+Sides are recorded to **10 decimals**, coarser than the numerical LP endpoint's measured
+`1e-11` noise floor ([D-021](../defects.md)); gaps within that floor are recorded as zero.
 The previous 12-decimal serialization was finer than the declared floor and could fail
 on a difference the tier itself says is not meaningful. Wall times, hostnames and dates
 are not recorded at all — an unstable field that is normalised is still a field somebody
@@ -79,6 +79,7 @@ from sqpack.research.closed_form import ClosedForm, recognise
 from sqpack.research.quench import quench_bracket
 from sqpack.verify import corners_from_poses, float_sign, verify_packing
 from sqpack.workers import worker_count
+from sqpack.yamlio import load_yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 GOLDEN = ROOT / "golden" / "basin-maps.yaml"
@@ -111,13 +112,19 @@ ORACLE_TOL = 1e-10
 TIER_FLOOR = 1e-11
 
 
+def canonical_yaml(text: str) -> str:
+    """Normalize YAML presentation while retaining scalar types and key uniqueness."""
+    return yaml.safe_dump(load_yaml(text), allow_unicode=True, sort_keys=True)
+
+
 def proved_side(n: int) -> tuple[float, str] | None:
     """The proved `s(n)`, read from `frontier/` rather than retyped."""
     text = (ROOT / "frontier" / f"n-{n:03d}.md").read_text()
-    d = yaml.safe_load(text.split("---\n")[1])["packing"]
+    d = load_yaml(text.split("---\n")[1])["packing"]
     if d["status"] != "proved":
         return None
-    return float(d["upper_bound"]["value"]), d["upper_bound"].get("exact_form") or ""
+    upper = d["verified_upper_bound"]
+    return float(upper["value"]), upper.get("exact_form") or ""
 
 
 def form_key(form: ClosedForm | None) -> tuple[int, int, int, int] | None:
@@ -336,7 +343,7 @@ def build() -> tuple[dict, list[str]]:
     return {
         "golden": {
             "note": "Rebuilt by devtools.check_golden_basins. Sides to 10 decimals, coarser "
-            "than the polished tier's 1e-11 floor (D-021); sub-floor gaps are zero.",
+            "than the numerical LP endpoint's 1e-11 floor (D-021); sub-floor gaps are zero.",
             "how_to_read_a_basin_row": (
                 "A row is a numerical endpoint-key cluster, not automatically a local "
                 "optimum or connected basin. converged_frequency records only the "
@@ -380,7 +387,7 @@ def verify_stored() -> tuple[dict, list[str]]:
     """
     if not GOLDEN.exists():
         return {}, [f"no golden at {GOLDEN.relative_to(ROOT)}; run with --update"]
-    doc = yaml.safe_load(GOLDEN.read_text())
+    doc = load_yaml(GOLDEN.read_text())
     problems: list[str] = []
     # Stored sides were rounded for cross-platform stability. Re-recognise them at half
     # one serialized unit (plus a small float cushion), while deep generation still
@@ -541,14 +548,17 @@ def main() -> int:
     if not GOLDEN.exists():
         print(f"\nno golden at {GOLDEN.relative_to(ROOT)}; run with --update", file=sys.stderr)
         return 1
-    if GOLDEN.read_text() != rendered:
+    committed = GOLDEN.read_text()
+    if canonical_yaml(committed) != canonical_yaml(rendered):
         print("\nGOLDEN DRIFT — the map changed. Review the diff before accepting:")
         diff = difflib.unified_diff(
-            GOLDEN.read_text().splitlines(), rendered.splitlines(), "golden", "rebuilt", n=2
+            committed.splitlines(), rendered.splitlines(), "golden", "rebuilt", n=2
         )
         for line in list(diff)[:60]:
             print(f"  {line}")
         problems.append("the rebuilt map differs from the committed golden")
+    elif committed != rendered:
+        print("\n  note: YAML wrapping differs, but the parsed golden content is identical")
 
     if problems:
         print("\nORACLE FAILURES:")

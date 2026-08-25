@@ -1,6 +1,6 @@
 # Research: A Search Philosophy for Square Packing
 
-**Date:** 2026-08-23 (last updated 2026-08-23)
+**Date:** 2026-08-23 (last updated 2026-08-25)
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
 
@@ -9,7 +9,7 @@
 ## Overview
 
 The five prior reports establish what is known about `s(n)`, how packings are computed
-and verified, and what infrastructure to build.
+and checked, and what infrastructure to build.
 The
 [standing review](../reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md)
 adds the experimental method: a hypothesis register with kill criteria, a run protocol,
@@ -32,12 +32,13 @@ attraction under the current proposer has been established as a general implicat
 H-012 exists to measure the latter under a declared regime.
 If that measurement supports the thesis, the response is not merely a faster random
 walk. It is, in order: treat the set of local optima as the object of study — a **basin
-atlas** built over the exact LP-quench map the review already validated; steer search by
-**structural diversity under the true objective** rather than by reshaping the loss; put
-the LLM at the **structural layer**, where it reads verified maps and writes constructor
-programs, never coordinates; approach the hard instance along **relaxation ladders** —
-families of easier problems connected to it by continuation; and calibrate on instances
-that share the record’s **mechanism**, not merely its difficulty.
+atlas** built over the declared fixed-cell LP-quench map the review already validated;
+steer search by **structural diversity under the true objective** rather than by
+reshaping the loss; put the LLM at the **structural layer**, where it reads validated
+maps and writes constructor programs, never coordinates; approach the hard instance
+along **relaxation ladders** — families of easier problems connected to it by
+continuation; and calibrate on instances that share the record’s **mechanism**, not
+merely its difficulty.
 On this view the map is the deliverable and records are corollaries — which is also the
 posture under which a search program produces publishable artifacts even in the likely
 case that no record falls.
@@ -123,9 +124,10 @@ that outcome is deliberately made cheap to reach.
 
 ### The provisional quench map: endpoint keys are not yet terminal components
 
-The review’s verified result (R-2) supplies the tool this whole approach stands on.
-Fix each square’s angle and, for each pair, which candidate axis separates it, and
-minimizing `s` becomes a **linear program**; the configuration space partitions into
+The review’s established structural result (R-2) supplies the tool this whole approach
+stands on.
+Fix each square’s angle and, for each pair, which candidate axis separates it,
+and minimizing `s` becomes a **linear program**; the configuration space partitions into
 combinatorial *cells*, and solving the cell’s LP takes any float configuration to a
 floating-point optimum of its cell at the solver’s precision.
 At Trump’s angles this reproduced `s(11)` and every centre to machine precision.
@@ -133,8 +135,8 @@ At Trump’s angles this reproduced `s(11)` and every centre to machine precisio
 That resembles the **inherent-structure decomposition** of Stillinger and Weber — a
 quench map sending configurations toward terminal structures — but two qualifications
 are load-bearing here.
-The current LP solve is floating-point at the polished tier, not an exact certificate,
-and terminal structures need not be discrete.
+The current LP solve uses binary64 arithmetic and is only numerically checked, not
+formally verified; terminal structures also need not be discrete.
 At `n=3`, the side-2 optimum contains a connected sliding family: centres `(1/2,1/2)`,
 `(3/2,1/2)`, and `(t,3/2)` for `t in [1/2,3/2]`. One further caveat the same build
 produced: a quench whose angle search merges nearby angles returns the optimum of a
@@ -156,13 +158,13 @@ Two consequences frame everything downstream:
 1. **Each fixed separating-axis cell exposes a lower-dimensional continuous problem.**
    Trump’s packing uses one non-trivial tilt and the `s(17)` record uses two, but those
    two cases do not establish that record packings generally have few raw orientation
-   classes. Exp-012 reconstructed the primary `n = 29` SVG and verified six classes,
-   refuting the registered three-class bound.
+   classes. Exp-012 reconstructed the primary `n = 29` SVG and numerically checked six
+   classes, refuting the registered three-class bound.
    The useful question is effective angular dimension— rank, algebraic dependence, or
    compressibility—rather than a universal class count.
 2. **Declared landscape views can become statistical questions.** Under a versioned
    proposer, quench, and terminal-component relation: how much component support was
-   observed; what unseen mass remains; what polished or exact side evidence each
+   observed; what unseen mass remains; what numerical or formal side evidence each
    component carries; and which cells are adjacent.
    These are conditional census questions with uncertainty — see H-11.
 
@@ -223,15 +225,16 @@ Our target, concretely: an **atlas** with one record per resolved terminal compo
 
 - both endpoint keys (geometric and structural), together with component-identity
   evidence, per the review’s R-1 and D-034;
-- the polished side and, where separately certified, the exact side and algebraic
-  degree;
+- the numerically refined side and, where separately certified, the exact side and
+  algebraic degree;
 - hit frequency under a versioned proposer `P`, quench `Q`, and terminal equivalence `E`
   (an empirical probability conditional on `P/Q/E`, not an intrinsic volume);
 - the contact graph and angle signature;
 - symmetry group of the packing;
-- typed neighbor evidence: verified continuous paths with their maximum required side,
-  giving upper bounds on minimax clearance; certified nonconnection below a side level,
-  when available; and separately labelled algorithmic transitions under named kernels.
+- typed neighbor evidence: rigorously certified continuous paths with their maximum
+  required side, giving upper bounds on minimax clearance; certified nonconnection below
+  a side level, when available; and separately labelled algorithmic transitions under
+  named kernels.
 
 The atlas pays four ways.
 It is **steering data** — the review’s H-3 (rarity versus contact count) becomes a
@@ -285,7 +288,7 @@ The atlas makes both implementable, since canonical keys and descriptors are exa
 what its records carry.
 
 The intelligence, and the risk, concentrate in **descriptor design**. Descriptors must
-be computed from verified canonical data (not from raw float state), must be axes of
+be computed from validated canonical data (not from raw float state), must be axes of
 *mechanism* — distinct-tilt-class count, oblique-core size, boundary versus interior
 contact split, gap topology — and must be used in combinations that separate the grid
 funnel from oblique and record-like structures (tilt-class count × contact class, at
@@ -300,22 +303,23 @@ Continuous fine-tuning of 34 coupled coordinates is where a language model contr
 least; discrete structure, analogy across instances, and program-writing are where it
 contributes most. Three roles, in dependency order:
 
-1. **Atlas reading.** Qualitative analysis over the verified per-basin descriptors: what
-   mechanisms recur where; what is conspicuously absent at `n = 11` relative to its
+1. **Atlas reading.** Qualitative analysis over the validated per-basin descriptors:
+   what mechanisms recur where; what is conspicuously absent at `n = 11` relative to its
    neighbors; which descriptor cells are empty and whether emptiness looks structural or
    just unexplored. The output is candidate structures and moves — and because every
-   candidate can be instantiated, LP-polished, and exactly verified, the model’s
-   opinions convert immediately into machine-testable hypotheses rather than prose.
+   candidate can be instantiated, numerically refined, and then submitted for separate
+   formal verification, the model’s opinions convert immediately into machine-testable
+   hypotheses rather than prose.
 2. **Constructor induction** (the FunSearch shape).
    Search over a small DSL of packing constructors — lay a grid block, insert an oblique
    core of `k` squares at angle `θ`, straighten a row, splice two records — whose
-   semantics *end in LP polish plus exact verification*. The model proposes programs;
-   the evaluator is exact; the model is thereby forced away from the two things it is
-   bad at (writing optimizers, emitting coordinates) and toward the thing it is good at
-   (compositional structure).
-   The record catalogue’s own annotations — “extends the `s(17)`…”, “two copies of the
-   `s(50)`…”, “with 2 squares removed and 8 straightened” — read as a starter corpus for
-   exactly this grammar.
+   semantics *end in numerical refinement plus a separate formal-verification attempt*.
+   The model proposes programs; the evaluator checks them under the declared assurance;
+   the model is thereby forced away from the two things it is bad at (writing
+   optimizers, emitting coordinates) and toward the thing it is good at (compositional
+   structure). The record catalogue’s own annotations — “extends the `s(17)`…”, “two
+   copies of the `s(50)`…”, “with 2 squares removed and 8 straightened” — read as a
+   starter corpus for exactly this grammar.
 3. **Cross-`n` transfer.** Mechanisms, not coordinates, moved between instances — the
    field’s dominant productive move (R-6/H-4), done deliberately with the atlas as the
    source of mechanisms.
@@ -324,12 +328,11 @@ The discipline that makes any of this safe is already house policy, and it has a
 parable: the **phantom `10⁻¹⁰⁰`** — two published secondary sources agreeing on an
 explicit constant that the primary paper does not contain.
 Consensus among fluent texts is not evidence, and a model generates fluent text cheaply.
-So: nothing enters a prompt that has not been machine-verified, and nothing leaves a
-model into the atlas or the corpus without passing the exact layer.
-The reason this rule is *affordable* is the same LP-quench exactness as everywhere else
-— verification of a proposed structure costs milliseconds, so the model can be wrong at
-high frequency and still be useful.
-The LLM lanes therefore wait on the atlas existing (there must be something verified to
+So: nothing enters a prompt that has not been machine-checked, and nothing leaves a
+model into the atlas or the corpus without a declared machine check and assurance label.
+Cheap numerical checks keep this rule affordable; formal promotion remains a separate
+step, so the model can be wrong at high frequency and still be useful.
+The LLM lanes therefore wait on the atlas existing (there must be validated material to
 read); the DSL can be designed on paper in parallel.
 
 ### Relaxation ladders: continuation from easy problems into the hard one
@@ -436,12 +439,12 @@ the strategy that turns the residue into the asset.
   mechanism-descriptors replaces loss-shaping; single-scalar descriptors are hackable
   (the grid maximizes contact count), so descriptors come in separating combinations.
 - **The model proposes structure; the LP disposes.** Atlas reading, constructor DSLs,
-  and cross-`n` transfer put the LLM where it is strong, and exact verification makes
-  its error rate affordable.
-  Nothing unverified enters a prompt; nothing unverified leaves one into the corpus.
+  and cross-`n` transfer put the LLM where it is strong, and cheap checking makes its
+  error rate affordable.
+  Nothing unchecked enters a prompt; nothing unchecked leaves one into the corpus.
 - **Continuation can turn rare-event search into path-following.** Its numerical branch
-  events are recordable algorithmic observations; its verified paths feed clearance
-  upper bounds to the atlas.
+  events are recordable algorithmic observations; its rigorously certified paths feed
+  clearance upper bounds to the atlas.
   Neither becomes topology for free.
 - **Calibrate on mechanism, not difficulty.** Passing `n = 5, 10` proves the machinery;
   only oblique targets — `s(17)`, inflated `n = 11`, basin-entry tests — prove the
@@ -464,8 +467,8 @@ the strategy that turns the residue into the asset.
    discipline as `frontier/`), so QD archive keys, atlas identities, and any generated
    tables cannot drift apart.
 4. **Sequence the LLM lanes behind the first atlas artifact.** Reading requires
-   something verified to read; the constructor DSL is designable on paper in parallel;
-   both inherit the grounding rule as stated.
+   validated material; the constructor DSL is designable on paper in parallel; both
+   inherit the grounding rule as stated.
 5. **Keep the premise inversion honest.** If H-12 finds record basins are *not* rare,
    most of this document’s program stands down in favor of raw throughput — and that
    verdict is reachable in the cheapest tier.
@@ -475,12 +478,12 @@ the strategy that turns the residue into the asset.
 
 Written 2026-08-23 as the capture of a design discussion held against the PR #4 branch;
 no new computations were run for this document.
-Internal grounding, all previously verified in this repository: the LP-in-cell
-verification and canonical-identity design (standing review, R-1/R-2); the exact
-verifier’s contact counts for Trump’s packing (14 zero-gap pairs, 20 boundary
-coordinates); Ellsworth’s `s(51)` basin statistics as recorded in the infrastructure
-synthesis; the record catalogue’s neighbor-extension annotations; the `m² − 3` gap
-analysis in the frontier corpus; the phantom-constant correction in the main report.
+Internal grounding, all previously checked in this repository: the LP-in-cell derivation
+and canonical-identity design (standing review, R-1/R-2); the exact verifier’s contact
+counts for Trump’s packing (14 zero-gap pairs, 20 boundary coordinates); Ellsworth’s
+`s(51)` basin statistics as recorded in the infrastructure synthesis; the record
+catalogue’s neighbor-extension annotations; the `m² − 3` gap analysis in the frontier
+corpus; the phantom-constant correction in the main report.
 
 External precedents are standard, load-bearing results *of their own fields* (inherent
 structures, disconnectivity graphs, the LJ₃₈ double funnel, novelty search, MAP-Elites,

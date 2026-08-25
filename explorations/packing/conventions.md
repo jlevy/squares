@@ -8,8 +8,10 @@ Read this before adding an artifact, workflow phase, round, series, or tool.
 
 Each rule is marked **[checked]** when something fails on a violation, or
 **[convention]** when it rests on care alone.
-The distinction is the point: a rule nothing enforces is a rule that will drift, so the
-standing goal is to move rules from the second column to the first.
+The distinction is the point, but it is not a mandate to mechanize every sentence.
+A check must protect a named mathematical, reproducibility, navigation, or operational
+benefit and must be cheaper to maintain than the failure it prevents.
+If that case is not concrete, keep the convention in prose or remove it.
 `packing-validate` is the authoritative checking surface.
 
 ## 1. Identity
@@ -126,6 +128,14 @@ finding in its own sources.
 ledger, the checker.
 [convention] Everything else is prose.
 
+**Add process only for a named benefit.** [convention] A new field, table, digest, or
+gate states the failure it prevents and the artifact or check that demonstrates the
+benefit. Repetition and the appearance of formality are not reasons.
+Git already tracks repository-owned source bytes; a second checksum beside the file adds
+no evidence. [`development.md`](development.md#hashes-and-repository-owned-artifacts)
+owns the narrow exceptions for real trust boundaries, deduplication, event identity, and
+cache correctness.
+
 **Cross-field rules live in the checker, not the schema.** [checked] softschema 0.6.2
 rejects `allOf` object composition under `status: enforced`, so a conditional would
 invalidate every artifact rather than the offending one
@@ -136,10 +146,18 @@ invalidate every artifact rather than the offending one
 **Workflow names purpose and output; focus names the primary quality emphasis.**
 [checked for agent sessions] The seven numbered workflows and their full contracts live
 in [`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts).
-One independently tracked session phase declares one workflow and one primary focus; the
-other principles still constrain and may contribute to the work.
+Routine work declares its workflow, objective, artifact, and focused check where the
+work is already tracked.
+It does not create a session artifact merely to duplicate those facts.
 `general-improvement` is reserved for genuine repository maintenance outside W1–W7 and
 the packing pipeline, not a label for mixed or ordinary core work.
+
+**Session records are an escalation, not the default.** [checked once present] Use
+`AgentSession/v2` for multi-phase work, long autonomous supervision, independently
+tracked delegation, expensive experiment or proof supervision, or a consequential
+recovery handoff.
+Once opened, one phase declares one workflow and one primary focus; the
+other principles still constrain and may contribute to the work.
 
 **Implementation stays with its owning workflow.** [convention] Bounded research
 corrections stay in W1 or W2, idea probes in W3, process and checker repairs in W4,
@@ -153,12 +171,13 @@ phase when workflow, focus, or the bounded slice objective changes.
 A focus-only change repeats the workflow and is not a workflow switch.
 A renewed slice may repeat workflow and focus only after closing the prior phase and
 stating a changed objective and renewal reason.
-A slice is one time-bounded action and need not produce an experiment.
+A momentary change of emphasis is not a phase.
+A slice is one time-bounded action inside the phase and need not produce an experiment.
 Mechanical delegations inherit the coordinating phase unless they open independently
 tracked sessions.
 
-**Current transitions are recorded before the new work begins.** [checked] A phase opens
-with its expected output, validation command, kill condition, fallback, start, and
+**Versioned transitions are recorded before the new work begins.** [checked] A phase
+opens with its expected output, validation command, kill condition, fallback, start, and
 deadline. Its actual outcome and evidence are terminal fields.
 The first phase uses `session_start` and no switch reason; later phases name a planned
 checkpoint, evidence checkpoint, or user request, and close the old phase before
@@ -169,21 +188,36 @@ preregistration evidence.
 
 ## 4. Evidence
 
-**Three tiers, and each says what a number may claim.**
-[checked: recorded in `subject.precision`]
+**Assurance, method, and arithmetic are separate.**
+[checked: schemas and semantic validation]
 
-| Tier | Instrument | May claim |
+| Assurance | Meaning | Formal? |
 | --- | --- | --- |
-| `f64_screen` | `sqsearch` | a candidate was proposed |
-| `polished` | LP-in-cell quench | a numerical endpoint candidate, valued to solver precision |
-| `exact` | `sqpack` over ℚ(α) | validity—and only here, a record |
+| `reported` | A named source states the claim; the frontier has not established it independently | no |
+| `numerically-checked` | A finite calculation checked the declared predicates under explicit arithmetic, precision, rounding, and tolerance | no |
+| `verified` | An exact check, rigorous certificate, or complete proof decides the claim and its preconditions | yes |
 
-**`beat_record: true` may only be written at `precision: exact`.** [convention] A record
-packing has pairs touching at exactly zero separation; no floating-point check can
-decide those.
+Methods name how the result was obtained: `numerical-f64`, `numerical-multiprecision`,
+`interval-certified`, `exact-algebraic`, `published-proof`, `proof-audited`, or
+`proof-assistant-checked`. Every numerical result records the precision actually used
+and its tolerance. A multiprecision library does not make a result arbitrarily precise,
+and a tolerance of `1e-100` is still numerical.
 
-**Claims are separated by evidential status**—proved, computationally verified, best
-known, or asserted-but-unverified—and citations sit near the claims they support.
+**`beat_record: true` requires `assurance: verified`.** [checked] Campaign semantic
+validation rejects a numerical record flag.
+A numerically checked candidate may be compared with a reported value in prose, but it
+cannot enter the formal frontier lane.
+A verified feasible witness proves an upper bound only; optimality requires a matching
+verified lower bound.
+
+**Verification origin remains visible.** [checked: evidence contract] External proof,
+independent external certificate, repository replay, and repository audit are separate
+facts. Running the source generator’s own checker is useful evidence but does not become
+an independent implementation.
+
+**Claims are separated by assurance**—reported, numerically checked, or formally
+verified—and citations sit near the claims they support.
+“Verified” is reserved for the formal level.
 [convention]
 
 **Budgets are in pair-tests**, tiers S/M/L = `1e9`/`1e11`/`1e13`. [convention]
@@ -255,10 +289,10 @@ what a basin means.
 **The vocabulary is fixed, and controlled collisions are explicit.** [convention]
 [`SYNOPSIS.md`](SYNOPSIS.md#terminology) defines every term this directory uses in a
 narrow sense—campaign, session, experiment, round, run, quench, basin, polish,
-exploration, gap, tier, pair-test and the rest—and those definitions apply in artifacts,
-beads and reviews.
-Write **packing exploration** for the project directory, **exploration
-report** for `X-NNN`, and bare **exploration** for reaching another basin.
+exploration, gap, assurance, method, pair-test and the rest—and those definitions apply
+in artifacts, beads and reviews.
+Write **packing exploration** for the project directory, **exploration report** for
+`X-NNN`, and bare **exploration** for reaching another basin.
 Write **cell** alone for a cell of configuration space—a choice of separating axis and
 order for each pair—and **instance cell**, never bare “cell”, for a position in a sweep.
 The two are unrelated objects and the confusion is expensive: one is where the LP is
@@ -289,24 +323,29 @@ its measured reason in [`.flowmarkignore`](../../.flowmarkignore).
 Markdown link. This project has needed that twice.
 
 **Docs follow the common documentation guidelines** and carry the footer.
-[convention]
+[checked: document map] The map covers every durable project document, distinguishes
+current authority from dated records and transient plans, checks local links, and
+generates the synopsis view.
 
 ## 10. What the Gate Actually Enforces
 
-`packing-validate` runs thirty-one read-only steps concurrently and replays their output
-in declared order. `packing-validate --list` prints the authoritative names and tiers;
-the `STEPS` table in `src/sqpack/cli/validate.py` is the only registration point.
+`packing-validate` runs its registered read-only steps concurrently and replays their
+output in declared order.
+`packing-validate --list` prints the authoritative names and tiers; the `STEPS` table in
+`src/sqpack/cli/validate.py` is the only registration point.
 What they enforce, grouped:
 
-**Mathematics, checked exactly where the claim is exact.** Exact verification of Trump’s
-packing and the negative control showing why float cannot do it; the degree-8 field
-re-derived independently (where sympy is installed); the fixed-angle cell rebuilt as a
-linear program through independent constraint rows and solved back to Trump’s packing;
-Trump’s exact branchwise linearized cones (exp-013); the H-041 repaired-cover exact
-certificate and the H-010 printed-cover exact rejection (exp-016, exp-017); the exact
-`n = 3, 4` optimal moduli (exp-014, exp-015); the exact terminal-component controls and
-`n = 5` local-geometry results through exp-036; and the golden basin maps, whose
-proved-case rows are checked against mathematics rather than against a stored snapshot.
+**Mathematics, checked exactly where the claim is formal.** Exact verification of the
+Trump, Göbel, and retained rational `n = 29` witnesses, including an independent
+rational checker; negative controls showing why finite precision cannot certify a
+contact; field irreducibility and unique-root isolation; the degree-8 field re-derived
+independently (where sympy is installed); the fixed-angle cell rebuilt as a linear
+program through independent constraint rows and solved back to Trump’s packing; Trump’s
+exact branchwise linearized cones (exp-013); the H-041 repaired-cover exact certificate
+and the H-010 printed-cover exact rejection (exp-016, exp-017); the exact `n = 3, 4`
+optimal moduli (exp-014, exp-015); the exact terminal-component controls and `n = 5`
+local-geometry results through exp-036; and the golden basin maps, whose proved-case
+rows are checked against mathematics rather than against a stored snapshot.
 
 **Instruments.** `sqsearch --selftest` (geometry against a naive reference, determinism,
 the `s(5)` positive control, the recomputed-overlap guard); the differential test
@@ -314,14 +353,15 @@ between search energy and the validity oracle; the basin atlas store invariants;
 basin event record and its replay; basin identity; and the historical regressions each
 earlier defect fix left behind.
 
-**The record.** Frontier corpus structure and its soft-schema validation; generated
-tables in sync with the frontier data; both strategy catalogues; the defect log (schema,
-contiguous ids, open defects carrying beads, links resolving, the generated view in
-sync); `SYNOPSIS.md` and `README.md` reconciled against the artifacts and the directory;
-the campaign record (schema validation, id uniqueness, dangling references, verdict
-rules, idea-board reconciliation, ledger freshness); provenance (every round’s recorded
-engine commit reachable, or annotated); the bead tree; and the skills mirrored between
-`.agents` and `.claude`.
+**The record.** Frontier corpus structure, its reported/formal separation, source
+coverage, and soft-schema validation; generated status and research tables in sync with
+the frontier data; both strategy catalogues; the document map and local links; the
+defect log (schema, contiguous ids, open defects carrying beads, links resolving, the
+generated view in sync); `SYNOPSIS.md` and `README.md` reconciled against the artifacts
+and the directory; the campaign record (schema validation, id uniqueness, dangling
+references, verdict rules, idea-board reconciliation, ledger freshness); provenance
+(every round’s recorded engine commit reachable, or annotated); the bead tree; and the
+skills mirrored between `.agents` and `.claude`.
 
 **Hygiene.** The lint floor (ruff, ruff-format and basedpyright on the Python; clippy
 pedantic and rustfmt on the Rust); the soundness perimeter (every component that emits a

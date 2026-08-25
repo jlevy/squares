@@ -1,6 +1,6 @@
 # Agent Sessions
 
-These are the durable handoffs for the outer autonomous work loop.
+These are escalation artifacts for the outer autonomous work loop.
 An agent session is one bounded interval of orchestrated work, not a campaign, series,
 experiment, or solver run.
 The [synopsis](../../SYNOPSIS.md#work-units-and-records) owns those definitions; the
@@ -16,11 +16,25 @@ Session records complement, and do not replace, the scientific record:
   delegated work, evidence, stopping reason, and exact next action; its entry workflow
   is derived from the first phase.
 
+Do not open a session record for a routine single-purpose edit, a short review, or one
+registered round whose hypothesis, experiment, result, and bead already provide the
+needed state.
+In those cases, declare the workflow, bounded objective, intended artifact,
+and focused check in the place already tracking the work.
+
 ## Starting a Session
 
-Each independently tracked session has one integration bead and one active workflow
-phase. Several sessions may exist concurrently; each keeps its own phase and clock.
-Before work starts, record:
+Open a versioned session when at least one of these conditions holds:
+
+- the work will cross multiple workflow or material-focus phases;
+- it will run autonomously beyond an ordinary checkpoint;
+- it coordinates delegates that need independently recoverable state;
+- it supervises an expensive experiment or proof search; or
+- interruption would otherwise lose a consequential decision or exact next action.
+
+Each such session has one integration bead and one active workflow phase.
+Several may exist concurrently; each keeps its own phase and clock.
+Before escalated work starts, record:
 
 - the overall session goal, offset-aware start and hard deadline, wall budget, cycle
   cap, finalization reserve, and stop conditions;
@@ -57,7 +71,8 @@ Start a new phase whenever the workflow, focus, or bounded slice objective chang
 A focus-only change repeats the workflow name; it is a phase boundary, not a workflow
 switch. A renewed slice may repeat workflow and focus only after the prior phase closes,
 and its changed objective and switch reason must state what new evidence earns another
-clock. Focus is the primary quality emphasis; the other three operating principles still
+clock. Momentary changes of emphasis do not create phases.
+Focus is the primary quality emphasis; the other three operating principles still
 constrain and may contribute to the phase.
 Later phases say whether they began at a planned checkpoint, evidence checkpoint, or
 user request, and state the reason.
@@ -83,6 +98,7 @@ phase audits and implements D-199 without relabeling that repair as research.
 ## Delegation and Control
 
 The parent agent owns shared-file integration.
+A delegated task should have a bounded, preferably disjoint write scope.
 A delegation that may cross a checkpoint or run a long or side-effecting command gets a
 durable queued or active row before it runs.
 That row records `recording: contemporaneous`, phase, wall budget, expected output,
@@ -111,12 +127,13 @@ a delegate declares another workflow only when it opens its own independently tr
 session.
 
 The controller may be a coding agent, a native long-running goal, an external watchdog,
-or a human. The repository contract is portable across them: the session records the
-objective, expected output, validation, kill condition, fallback, start, deadline,
-terminal evidence, and next action; `tbd` owns the queue; and commits own integrated
-state.
-A platform goal or watchdog should read and enforce this record rather than become
-a second, private source of truth.
+or a human.
+When escalation applies, the repository contract is portable across them: the
+session records the objective, expected output, validation, kill condition, fallback,
+start, deadline, terminal evidence, and next action; `tbd` owns the queue; and commits
+own integrated state.
+A platform goal or watchdog should read and enforce this record rather than become a
+second, private source of truth.
 These documents are records, not schedulers, and
 [`packing-campaign`](../../src/sqpack/campaign/runner.py) remains the executor for
 preregistered numerical rounds.

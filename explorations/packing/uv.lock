@@ -2,6 +2,31 @@ version = 1
 revision = 3
 requires-python = "==3.14.*"
 
+[options]
+exclude-newer = "0001-01-01T00:00:00Z" # This has no effect and is included for backwards compatibility when using relative exclude-newer values.
+exclude-newer-span = "P7D"
+
+[options.exclude-newer-package]
+flowmark-rs = "2100-01-01T08:00:00Z"
+kash-media = "2100-01-01T08:00:00Z"
+deep-transcribe = "2100-01-01T08:00:00Z"
+flowmark = "2100-01-01T08:00:00Z"
+chopdiff = "2100-01-01T08:00:00Z"
+kash-docs = "2100-01-01T08:00:00Z"
+softschema = "2100-01-01T08:00:00Z"
+flexdoc = "2100-01-01T08:00:00Z"
+kpress = "2100-01-01T08:00:00Z"
+sidematter-format = "2100-01-01T08:00:00Z"
+tminify = "2100-01-01T08:00:00Z"
+clideps = "2100-01-01T08:00:00Z"
+pprose = "2100-01-01T08:00:00Z"
+prettyfmt = "2100-01-01T08:00:00Z"
+metabrowser = "2100-01-01T08:00:00Z"
+frontmatter-format = "2100-01-01T08:00:00Z"
+kash-shell = "2100-01-01T08:00:00Z"
+strif = "2100-01-01T08:00:00Z"
+funlog = "2100-01-01T08:00:00Z"
+
 [[package]]
 name = "attrs"
 version = "26.1.0"
@@ -303,6 +328,7 @@ version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "jsonschema" },
+    { name = "mpmath" },
     { name = "numpy" },
     { name = "pyyaml" },
     { name = "scipy" },
@@ -325,6 +351,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "jsonschema", specifier = ">=4.26.0" },
+    { name = "mpmath", specifier = ">=1.3.0" },
     { name = "numpy", specifier = ">=2.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "scipy", specifier = ">=1.14" },

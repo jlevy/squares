@@ -1,7 +1,7 @@
 ---
 title: exp-024 — four-seed n=4 BasinEvent/v3 repair replication
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,16 +10,27 @@ experiment:
   series: series-000
   title: The repaired n=4 block produces four admissible BasinEvent/v3 observations
   date: '2026-08-24'
-  hypotheses: [H-021]
+  hypotheses:
+  - H-021
   tier: exploratory
   subject:
     label: uniform independent starts followed by the audited Python bracket quench
     engine: basin_census.py BasinEvent/v3 and sqpack quench
     engine_commit: f15d036
-    precision: f64_screen
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 4, role: positive_control}
+  instance:
+    axis: n
+    point: 4
+    role: positive_control
   method:
     candidate: four independently addressable starts after the D-171 bounded repair
     runs_per_condition: 4
@@ -28,10 +39,8 @@ experiment:
     commit: f15d036
     dirty: false
     entry_point: explorations/packing/tools/basin_census.py
-    command: >-
-      timeout 60 uv run --frozen --quiet python tools/basin_census.py run --n 4
-      --seeds 0-3 --time-budget 10 --output
-      campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
+    command: timeout 60 uv run --frozen --quiet python tools/basin_census.py run --n 4 --seeds 0-3
+      --time-budget 10 --output campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
     budget: four seeds; 10 seconds per quench; 60-second process cap; retain every stop
     record: campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl
   effort:
@@ -41,21 +50,18 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: >-
-      After the preregistered D-171 repair, do all four n=4 positive-control starts
-      produce independently valid, admissible BasinEvent/v3 terminal observations?
+    question: After the preregistered D-171 repair, do all four n=4 positive-control starts produce
+      independently valid, admissible BasinEvent/v3 terminal observations?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      BasinEvent/v3 replay: 4/4 producer-converged, independently valid, admissible,
-      and balanced; 14,301/14,301 fixed-point evaluations settled
+    checked_by: 'BasinEvent/v3 replay: 4/4 producer-converged, independently valid, admissible, and
+      balanced; 14,301/14,301 fixed-point evaluations settled'
   verdict:
     decision: baseline
     primary_criterion: admissible terminal-event fraction at the n=4 positive control
-    reason: >-
-      All four events reach proved side 2 and replay as admissible. This confirms the
-      bounded numerical repair and completes the event-level control cell; it does not
-      classify endpoint components or decide H-021.
+    reason: All four events reach proved side 2 and replay as admissible. This confirms the bounded
+      numerical repair and completes the event-level control cell; it does not classify endpoint components
+      or decide H-021.
     commit: f15d036
 ---
 # exp-024 — the repaired `n = 4` event calibration is complete

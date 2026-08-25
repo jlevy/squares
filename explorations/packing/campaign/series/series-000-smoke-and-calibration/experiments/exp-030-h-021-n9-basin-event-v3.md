@@ -1,7 +1,7 @@
 ---
 title: exp-030 — one-seed n=9 BasinEvent/v3 performance validation
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,17 +10,29 @@ experiment:
   series: series-000
   title: Time one complete BasinEvent/v3 path at n=9
   date: '2026-08-24'
-  hypotheses: [H-021]
+  hypotheses:
+  - H-021
   tier: exploratory
-  known_defects: [D-126]
+  known_defects:
+  - D-126
   subject:
     label: one uniform independent start followed by the audited Python bracket quench
     engine: basin_census.py BasinEvent/v3 and sqpack quench
     engine_commit: 56bf66c
-    precision: f64_screen
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 9, role: positive_control}
+  instance:
+    axis: n
+    point: 9
+    role: positive_control
   method:
     candidate: one fixed independently addressable start under the unchanged v3 regime
     runs_per_condition: 1
@@ -29,10 +41,8 @@ experiment:
     commit: 56bf66c
     dirty: false
     entry_point: explorations/packing/tools/basin_census.py
-    command: >-
-      timeout 60 uv run --frozen --quiet python tools/basin_census.py run --n 9
-      --seeds 0 --time-budget 20 --output
-      campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
+    command: timeout 60 uv run --frozen --quiet python tools/basin_census.py run --n 9 --seeds 0 --time-budget
+      20 --output campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
     budget: one seed; 20-second quench; 60-second process cap; retain every stop
     record: campaign/series/series-000-smoke-and-calibration/results/exp-030-h-021-n9-basin-event-v3.jsonl
   effort:
@@ -42,22 +52,19 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: >-
-      Does one n=9 start traverse generation, quench, independent validation, keying,
-      retention, and replay inside the declared performance stop?
+    question: Does one n=9 start traverse generation, quench, independent validation, keying, retention,
+      and replay inside the declared performance stop?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      BasinEvent/v3 replay: 1/1 independently valid event retained; the event is a
-      typed 20-second time-budget stop with 5,845/5,845 evaluations settled; complete
-      command wall 21.36 seconds
+    checked_by: 'BasinEvent/v3 replay: 1/1 independently valid event retained; the event is a typed
+      20-second time-budget stop with 5,845/5,845 evaluations settled; complete command wall 21.36
+      seconds'
   verdict:
     decision: baseline
     primary_criterion: one complete independently replayable event with attributed stage cost
-    reason: >-
-      The complete event path stays below the 30-second profile trigger and retains its
-      nonconverged outcome without censorship. D-126 bars frequency or deterministic-work
-      claims, and no additional n=9 samples are authorized by this performance cell.
+    reason: The complete event path stays below the 30-second profile trigger and retains its nonconverged
+      outcome without censorship. D-126 bars frequency or deterministic-work claims, and no additional
+      n=9 samples are authorized by this performance cell.
     commit: 56bf66c
 ---
 # exp-030 — the `n = 9` performance cell is complete

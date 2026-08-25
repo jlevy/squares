@@ -45,7 +45,7 @@ is.
 | **E0 scratch** | Untracked scratch space or the repository `attic/` | Optimize for learning. Do not import it or cite it as evidence. Delete it or promote it when the investigation ends. |
 | **E1 retained case code** | `cases/<case>/` | Scope the code to a named `n`, source, theorem, hypothesis, or experiment. State its evidence limits and retain enough input and output for replay. General APIs are optional. |
 | **E2 reusable research code** | `src/sqpack/research/` and shared helpers such as `workers.py` | Serve multiple research loops through typed contracts, deterministic tests, explicit errors, and case-free policy. Optimize only from representative measurements. |
-| **E3 trust and persistence code** | `src/sqpack/field.py`, `verify.py`, `src/sqpack/campaign/`, and `src/sqpack/cli/` | Meet E2 expectations plus independent or mutation checks, tested failures, atomic durable writes, and fail-fast persisted-format handling. Campaign and CLI modules are repository applications, not general library APIs. |
+| **E3 trust and persistence code** | `src/sqpack/field.py`, `verify.py`, `witness.py`, `src/sqpack/campaign/`, and `src/sqpack/cli/` | Meet E2 expectations plus independent or mutation checks, tested failures, atomic durable writes, and fail-fast persisted-format handling. Campaign and CLI modules are repository applications, not general library APIs. |
 
 Developer infrastructure has its own explicit locations:
 
@@ -75,7 +75,7 @@ inventories those string edges as well as Python imports.
 A case may consume a maintained API; the maintained API may not grow a Trump-, Göbel-,
 checkpoint-, or single-`n` exception to accommodate it.
 
-The three installed commands operate on repository-owned state, so they require a valid
+The four installed commands operate on repository-owned state, so they require a valid
 `explorations/packing/` checkout.
 Source and editable installs locate that checkout directly; a non-editable installation
 can use the current checkout or set `PACKING_PROJECT_ROOT` explicitly.
@@ -97,6 +97,7 @@ The installed commands are:
 | `packing-validate` | Read-only project validation, focused selection, and machine-readable summaries |
 | `packing-campaign` | State-machine operations for preregistered numerical rounds |
 | `packing-ledger` | Check campaign invariants and freshness, or atomically render the generated ledger |
+| `packing-witness` | Inspect, numerically check, or formally verify a portable packing witness without changing it |
 
 Run `COMMAND --help` before using a command in automation.
 A maintained CLI must parse arguments before doing work, keep data on stdout and
@@ -106,8 +107,10 @@ Names should say what the command does without directory context.
 
 Use these verbs consistently:
 
-- `check` reads and compares without changing durable state;
-- `verify` establishes a named correctness claim;
+- `check` reads and compares without changing durable state; for a packing witness it
+  reports numerical assurance and the actual arithmetic, precision, and tolerance;
+- `verify` is reserved for a formal decision from exact arithmetic, a rigorous
+  certificate, or a complete proof;
 - `replay` validates retained output without rerunning the producer;
 - `render` regenerates a derived view atomically;
 - `run` performs the declared experiment or workflow;
@@ -306,19 +309,16 @@ metrics. Line count, abstraction count, and test count are not performance measu
 ## Governing Guidelines
 
 This guide applies the repository guidelines rather than copying them.
-For details, see:
+Load the current text on demand with `tbd guidelines <name>`; generated `.tbd/docs`
+copies are local working state and are not durable link targets.
+The applicable names are:
 
-- [General engineering agent principles](../../.tbd/docs/guidelines/general-eng-agent-principles.md)
-- [General coding rules](../../.tbd/docs/guidelines/general-coding-rules.md)
-- [TDD](../../.tbd/docs/guidelines/general-tdd-guidelines.md) and
-  [testing rules](../../.tbd/docs/guidelines/general-testing-rules.md)
-- [Python rules](../../.tbd/docs/guidelines/python-rules.md),
-  [modern Python](../../.tbd/docs/guidelines/python-modern-guidelines.md), and
-  [Python CLI patterns](../../.tbd/docs/guidelines/python-cli-patterns.md)
-- [Error handling](../../.tbd/docs/guidelines/error-handling-rules.md) and
-  [backward compatibility](../../.tbd/docs/guidelines/backward-compatibility-rules.md)
-- [Golden testing](../../.tbd/docs/guidelines/golden-testing-guidelines.md)
-- [Documentation guidelines](../../.tbd/docs/guidelines/common-doc-guidelines.md)
+- `general-eng-agent-principles` and `general-coding-rules`;
+- `general-tdd-guidelines` and `general-testing-rules`;
+- `python-rules`, `python-modern-guidelines`, and `python-cli-patterns`;
+- `error-handling-rules` and `backward-compatibility-rules`;
+- `golden-testing-guidelines`; and
+- `common-doc-guidelines`.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

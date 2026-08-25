@@ -1,5 +1,9 @@
 # Review: The Mathematical Frontier, Its Gaps, and How to Search It Fast
 
+> **Lifecycle:** Superseded for current guidance by the
+> [synopsis](../../../SYNOPSIS.md).
+> Retained as a dated review record.
+
 **Date:** 2026-08-23
 
 **Authors:** Claude and Codex agents, for joshuadlevy@gmail.com
@@ -193,7 +197,7 @@ objective.
 That distinction leaves three valid uses:
 
 1. **Replayable cell certificate.** Retain primal feasibility, dual feasibility, and the
-   primal-dual gap for every polished cell.
+   primal-dual gap for every numerically refined LP cell.
    With rational trigonometric data this can be exact; with algebraic data it needs the
    corresponding number field or intervals.
 2. **Generalized angle screen.** Parametric-LP one-sided derivatives can test particular
@@ -629,8 +633,8 @@ unlabeled cell switches are not a global landscape.
 **Two efficiency investments carry mathematical payoff, not just speed.** The
 canonicalizer’s `n = 7 → 9` jump (81×) will dominate any census and is already tracked
 (D-049, `think-xzew`); fix before H-011 scales.
-An **exact LP over the coefficient field** removes the `1e-11` polished floor (D-021)
-inside a declared cell and makes G-2’s certificate replayable.
+An **exact LP over the coefficient field** removes the `1e-11` numerical LP floor
+(D-021) inside a declared cell and makes G-2’s certificate replayable.
 Rational sine/cosine constructions such as a 3-4-5 tilt reduce to `ℚ`; Trump’s algebraic
 coefficients require `Q(u)` or intervals.
 This is one interface with multiple mathematical payoffs, not a claim that every record

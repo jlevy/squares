@@ -282,7 +282,7 @@ agenda:
       isolation; transverse and mixed nonlinear realization remains unclassified.
       Exp-039 then certifies the discovered connected five-dimensional fixed-angle
       cell-local LP-optimal position polytope from engine commit `27b999e`. Exact
-      structural stresses cover twelve R1, R2, R3, and R6 paths, independent packings and
+      structural stresses cover twelve R1, R2, R3, and R6 paths, separate exact packing fixtures and
       ten controls pass, and D-256/D-257 preserve the proof shortcuts removed before the
       retained run. The rest of the polytope is not thereby stationary, so BC-010 remains
       ready.
@@ -406,7 +406,8 @@ agenda:
 This is the mutable priority surface for one series of experiment loops.
 It is neither a second hypothesis registry nor an executable runner queue.
 The hypotheses say what could be true, experiment artifacts say what was measured, beads
-own unfinished work, and the current agent-session artifact owns the active clock.
+own unfinished work, and an escalated agent-session artifact owns the active outer clock
+when durable supervision state is needed.
 This agenda says which bounded cell should be attempted next and why.
 
 The three purposes prevent calibration from being mistaken for discovery:

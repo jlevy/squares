@@ -16,16 +16,21 @@ Markdown formatter reflowing the surrounding prose.
 from __future__ import annotations
 
 import argparse
+import math
 import pathlib
 import re
 import sys
+from decimal import Decimal
 
 import yaml
 from strif import atomic_output_file
 
+from sqpack.assurance import bounds_agree_at_declared_precision
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
 MAIN = ROOT / "docs/project/research/research-2026-08-22-packing-11-unit-squares.md"
+STATUS = FRONTIER / "STATUS.md"
 
 BEGIN = "<!-- BEGIN GENERATED: %s (devtools.render_research_tables) -->"
 END = "<!-- END GENERATED: %s -->"
@@ -39,45 +44,55 @@ def load_cases() -> list[dict]:
     return out
 
 
-def fmt(x: float, nd: int = 6) -> str:
-    return f"{x:.{nd}f}".rstrip("0").rstrip(".")
+def load_evidence() -> dict[str, dict]:
+    document = yaml.safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))
+    return {record["id"]: record for record in document["evidence"]}
+
+
+def fmt(x: object, nd: int = 6) -> str:
+    return f"{Decimal(str(x)):.{nd}f}".rstrip("0").rstrip(".")
 
 
 def pretty(expr: str) -> str:
     """ASCII exact forms are the stored value; this is display only."""
+    nagamochi = re.fullmatch(r"sqrt\((\d+) - 2\*floor\(sqrt\((\d+)\)\) \+ 1\) \+ 1", expr)
+    if nagamochi is not None and nagamochi.group(1) == nagamochi.group(2):
+        n = int(nagamochi.group(1))
+        radicand = n - 2 * math.isqrt(n) + 1
+        return f"1 + √{radicand}"
     return re.sub(r"sqrt\((\d+)\)", r"√\1", expr)
 
 
 LB_LABEL = {
     "area": "area `√n`",
-    "perfect_square": "perfect square",
+    "perfect-square": "perfect square",
     "nagamochi": "Nagamochi",
     "monotonicity": "monotone",
-    "unavoidable_points": "unavoidable points",
+    "unavoidable-points": "unavoidable points",
     "counting": "elementary",
 }
 UB_LABEL = {
-    "trivial_grid": "grid",
-    "hand_construction": "hand",
-    "diagonal_strip": "strip",
-    "pattern_family": "family",
+    "trivial-grid": "grid",
+    "hand-construction": "hand",
+    "diagonal-strip": "strip",
+    "pattern-family": "family",
     "extension": "extension",
     "composition": "composition",
-    "simulated_annealing": "annealing",
-    "inflation_billiard": "billiard",
+    "simulated-annealing": "annealing",
+    "inflation-billiard": "billiard",
     "unknown": "—",
 }
 
 
 def table_frontier(cases: list[dict]) -> list[str]:
     rows = [
-        "| `n` | best known `s(n)` | how | deg | best proved lower bound | from | gap |",
+        "| `n` | best reported `s(n)` | how | deg | reported lower bound | from | gap |",
         "| --- | --- | --- | --- | --- | --- | --- |",
     ]
     for c in cases:
-        if c["status"] != "open":
+        if c["reported_status"] != "open":
             continue
-        ub, lb = c["upper_bound"], c["lower_bound"]
+        ub, lb = c["reported_upper_bound"], c["reported_lower_bound"]
         val = (
             ub["exact_form"] if (ub["exact_form"] and not ub["exact_form"].isdigit()) else None
         )
@@ -89,23 +104,124 @@ def table_frontier(cases: list[dict]) -> list[str]:
             if m:
                 src = f"monotone from `s({m.group(1)})`"
         rows.append(
-            f"| {c['n']} | {shown} | {UB_LABEL[ub['method']]} | {deg} | "
-            f"{fmt(lb['value'])} | {src} | {fmt(c['gap'], 4)} |"
+            f"| {c['n']} | {shown} | {UB_LABEL[ub['construction_method']]} | {deg} | "
+            f"{fmt(lb['value'])} | {src} | "
+            f"{fmt(Decimal(ub['value']) - Decimal(lb['value']), 4)} |"
         )
     return rows
 
 
 def table_solved(cases: list[dict]) -> list[str]:
-    rows = ["| `n` | `s(n)` | established by | source |", "| --- | --- | --- | --- |"]
+    rows = [
+        "| `n` | reported `s(n)` | reported basis | source | formal lane |",
+        "| --- | --- | --- | --- | --- |",
+    ]
     for c in cases:
-        if c["status"] != "proved":
+        if c["reported_status"] != "proved":
             continue
-        ub, lb = c["upper_bound"], c["lower_bound"]
+        ub, lb = c["reported_upper_bound"], c["reported_lower_bound"]
         val = pretty(ub["exact_form"]) if ub["exact_form"] else fmt(ub["value"], 8)
         who = ", ".join(lb["proved_by"]) if lb["proved_by"] else "classical"
         yr = f" ({lb['proved_year']})" if lb["proved_year"] else ""
-        rows.append(f"| {c['n']} | `{val}` | {LB_LABEL[lb['kind']]} | {who}{yr} |")
+        formal = "proved" if c["status"] == "proved" else "proof audit pending"
+        rows.append(f"| {c['n']} | `{val}` | {LB_LABEL[lb['kind']]} | {who}{yr} | {formal} |")
     return rows
+
+
+ORIGIN_LABEL = {
+    "external": "external proof",
+    "independently-external": "independent external",
+    "replayed-here": "replayed here",
+    "audited-here": "audited here",
+}
+
+
+def compact_bound(bound: dict) -> str:
+    """Render the authoritative exact form when one is available."""
+    exact = bound.get("exact_form")
+    if isinstance(exact, str) and exact:
+        return f"`{pretty(exact)}`"
+    return f"`{bound['value']}`"
+
+
+def verification_origins(case: dict, evidence: dict[str, dict]) -> str:
+    refs = [
+        *case["verified_upper_bound"]["evidence"],
+        *case["verified_lower_bound"]["evidence"],
+    ]
+    origins = [evidence[ref].get("origin") for ref in refs]
+    labels = [ORIGIN_LABEL[origin] for origin in origins if origin in ORIGIN_LABEL]
+    return ", ".join(dict.fromkeys(labels)) or "—"
+
+
+def same_bound(left: dict, right: dict) -> bool:
+    """Delegate the shared assurance-level representation comparison."""
+    return bounds_agree_at_declared_precision(left, right)
+
+
+def case_disposition(case: dict) -> str:
+    notes = []
+    if not same_bound(case["reported_upper_bound"], case["verified_upper_bound"]):
+        notes.append("formal upper trails report")
+    if not same_bound(case["reported_lower_bound"], case["verified_lower_bound"]):
+        notes.append("formal lower differs from report")
+    if case["reported_status"] != case["status"]:
+        notes.append("proof audit pending")
+    if case["conflicts"]:
+        notes.append(f"{len(case['conflicts'])} conflict")
+    return "; ".join(notes) or "—"
+
+
+def render_status(cases: list[dict], evidence: dict[str, dict]) -> str:
+    rows = [
+        (
+            "<!-- GENERATED by devtools.render_research_tables from frontier/n-*.md and "
+            "evidence.yaml. Do not edit by hand. -->"
+        ),
+        "",
+        "# Current Square-Packing Frontier",
+        "",
+        (
+            "This is the reader-first view of every tracked case through `n = 100`. "
+            "Reported columns preserve what the declared public sources say. Verified "
+            "columns contain only exact formal bounds: a complete proof, an exact "
+            "algebraic replay, or a rigorous certificate. A finite-precision result is "
+            "*numerically checked* and does not enter a verified column, even at "
+            "extremely small tolerance."
+        ),
+        "",
+        (
+            "Follow the `n` link for full provenance, numerical evidence, conflicts, "
+            "and blockers. See [the frontier guide](README.md) for the contract and "
+            "[`evidence.yaml`](evidence.yaml) for the typed evidence register."
+        ),
+        "",
+        (
+            "| `n` | reported upper | verified upper | reported lower | verified lower | "
+            "formal status | verification origin | gap or conflict | reviewed |"
+        ),
+        "| ---: | --- | --- | --- | --- | --- | --- | --- | --- |",
+    ]
+    for case in cases:
+        n = case["n"]
+        rows.append(
+            f"| [`{n}`](n-{n:03d}.md) | {compact_bound(case['reported_upper_bound'])} | "
+            f"{compact_bound(case['verified_upper_bound'])} | "
+            f"{compact_bound(case['reported_lower_bound'])} | "
+            f"{compact_bound(case['verified_lower_bound'])} | {case['status']} | "
+            f"{verification_origins(case, evidence)} | {case_disposition(case)} | "
+            f"{case['source_reviewed']} |"
+        )
+    rows.extend(
+        [
+            "",
+            "<!-- This document follows common-doc-guidelines.md.",
+            "See github.com/jlevy/practical-prose and review guidelines before editing.",
+            "-->",
+            "",
+        ]
+    )
+    return "\n".join(rows)
 
 
 def table_strategies(kind: str) -> list[str]:
@@ -211,7 +327,9 @@ def main() -> int:
     ap.add_argument("--check", action="store_true")
     args = ap.parse_args()
     cases = load_cases()
+    evidence = load_evidence()
     rendered = tables(cases)
+    status = render_status(cases, evidence)
     text = MAIN.read_text(encoding="utf-8")
     missing = [n for n in rendered if (BEGIN % n) not in text]
     if missing:
@@ -230,8 +348,16 @@ def main() -> int:
                 file=sys.stderr,
             )
             return 1
+        if not STATUS.exists() or STATUS.read_text(encoding="utf-8") != status:
+            print(
+                "STALE (re-run `python -m devtools.render_research_tables`): "
+                "frontier/STATUS.md",
+                file=sys.stderr,
+            )
+            return 1
         print(
-            f"  {len(rendered)} generated tables match frontier/ "
+            f"  {len(rendered)} generated report tables and frontier/STATUS.md match "
+            f"frontier/ "
             f"({sum(len(r) - 2 for r in rendered.values())} data rows)"
         )
         return 0
@@ -239,7 +365,9 @@ def main() -> int:
         text = splice(text, n, rows)
     with atomic_output_file(MAIN) as temporary:
         temporary.write_text(text, encoding="utf-8")
-    print(f"rendered {len(rendered)} tables into {MAIN.name}")
+    with atomic_output_file(STATUS) as temporary:
+        temporary.write_text(status, encoding="utf-8")
+    print(f"rendered {len(rendered)} report tables and {STATUS.relative_to(ROOT)}")
     return 0
 
 

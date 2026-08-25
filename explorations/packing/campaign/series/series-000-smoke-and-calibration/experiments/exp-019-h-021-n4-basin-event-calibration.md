@@ -1,7 +1,7 @@
 ---
 title: exp-019 — replayable n=4 basin stopping events
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,17 +10,29 @@ experiment:
   series: series-000
   title: The first n=4 full-pose event block remains promotion-blocked
   date: '2026-08-24'
-  hypotheses: [H-021]
+  hypotheses:
+  - H-021
   tier: exploratory
-  known_defects: [D-165]
+  known_defects:
+  - D-165
   subject:
     label: uniform independent starts followed by the Python bracket quench
     engine: basin_census.py BasinEvent/v2 and sqpack quench
     engine_commit: ee3acc1
-    precision: f64_screen
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 4, role: positive_control}
+  instance:
+    axis: n
+    point: 4
+    role: positive_control
   method:
     candidate: four independently addressable uniform starts with full-pose retention
     runs_per_condition: 4
@@ -29,10 +41,8 @@ experiment:
     commit: 16829c9
     dirty: false
     entry_point: explorations/packing/tools/basin_census.py
-    command: >-
-      timeout 60 uv run --frozen --quiet python tools/basin_census.py run --n 4
-      --seeds 0-3 --time-budget 10 --output
-      campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
+    command: timeout 60 uv run --frozen --quiet python tools/basin_census.py run --n 4 --seeds 0-3
+      --time-budget 10 --output campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
     budget: four seeds; 10 seconds per quench; 60-second process cap; stop on replay failure
     record: campaign/series/series-000-smoke-and-calibration/results/exp-019-h-021-n4-basin-events.jsonl
   effort:
@@ -42,20 +52,17 @@ experiment:
     stopped_by: dependency
   results:
   - shape: determination
-    question: >-
-      Does the current quench produce scientifically admissible terminal events for all
-      four n=4 positive-control starts?
+    question: Does the current quench produce scientifically admissible terminal events for all four
+      n=4 positive-control starts?
     role: outcome
     outcome: invalid
-    checked_by: >-
-      BasinEvent/v2 replay: 4/4 poses independently valid, 2/4 producer-converged, 0/4
-      scientifically admissible because D-165 leaves initial probe failures unaccounted
+    checked_by: 'BasinEvent/v2 replay: 4/4 poses independently valid, 2/4 producer-converged, 0/4
+      scientifically admissible because D-165 leaves initial probe failures unaccounted'
   verdict:
     decision: blocked
     primary_criterion: scientifically admissible terminal-event fraction
-    reason: >-
-      The block retains two exact side-2 endpoints and two explicit cell-cycle stops,
-      but D-165 makes all four ineligible for terminal-component classification.
+    reason: The block retains two exact side-2 endpoints and two explicit cell-cycle stops, but D-165
+      makes all four ineligible for terminal-component classification.
     commit: 16829c9
 ---
 # exp-019 — the first bounded `n=4` event block

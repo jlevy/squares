@@ -126,9 +126,10 @@ convergence tolerance must be *reachable* at the scale of its argument.
 Both failures this session were this rule, unwritten.
 
 **R3 — A claim that would be a discovery is treated as a defect until an independent
-layer agrees.** This already existed as the tier discipline and it is what saved us.
-Strengthen it from a convention someone reads into a check something runs: the perimeter
-now refuses the configuration, so the flattering number never reaches the record.
+layer agrees.** This already existed as the assurance discipline and it is what saved
+us. Strengthen it from a convention someone reads into a check something runs: the
+perimeter now refuses the configuration, so the flattering number never reaches the
+record.
 
 **R4 — A new component inherits the perimeter, not just the conventions.** The gap was
 not that the quench was written carelessly; it was that it was written *outside* the
@@ -138,12 +139,12 @@ change.
 
 ## What remains true and unfixable
 
-The polished tier has a floor.
-A floating-point LP guarantees feasibility only to 10⁻¹⁰, so a polished side can be
-wrong at about 10⁻¹¹, and eight recorded rounds sit at exactly that scale with small
-negative gaps to the analytic value.
-That is contained by the tier system — nothing below `exact` may claim a record — and it
-is [D-021](../../../defects.md), left open deliberately rather than papered over.
+Floating-point LP refinement has a floor.
+With the configured feasibility tolerance, a returned side can be wrong at about 10⁻¹¹,
+and eight recorded rounds sit at exactly that scale with small negative gaps to the
+analytic value. That is contained by the assurance contract: numerical results may not
+claim a record. The limitation is [D-021](../../../defects.md), left open deliberately
+rather than papered over.
 Removing it needs exact rational arithmetic in the LP, which is a real project and is
 tracked (`think-hg3u`).
 

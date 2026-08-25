@@ -59,9 +59,9 @@
     {
       "alt": "High-precision reconstruction of the Kingbird packing of twenty-nine unit squares using the deterministic cool palette.",
       "artifact": "atlas/rendering/kingbird29-overview.svg",
-      "caption": "The retained source reconstructs all 29 squares at 160 decimal digits and passes all 406 separating-axis pair checks; this is a verified numerical construction, not an exact certificate.",
+      "caption": "The retained roughly 100-digit source is evaluated at 160 decimal digits of working precision and tolerance 1e-80, and passes all 406 separating-axis pair checks; this is a numerically checked construction, not an exact certificate.",
       "contacts": false,
-      "evidence": "verified-construction",
+      "evidence": "numerically-checked",
       "frontier_case": "frontier/n-029.md",
       "generator": "uv run --frozen --all-extras --group dev python -m devtools.render_packing_svg builtin kingbird29 --output atlas/rendering/kingbird29-overview.svg",
       "id": "n29-kingbird-overview",
@@ -72,6 +72,6 @@
     }
   ],
   "gallery_generator": "uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --update",
-  "renderer_version": "4",
+  "renderer_version": "5",
   "schema_version": 2
 }

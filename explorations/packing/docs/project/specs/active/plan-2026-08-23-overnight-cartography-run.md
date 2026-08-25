@@ -112,8 +112,8 @@ evidence, bead, and dependencies.
 This document continues to own broad launch readiness and the portfolio below.
 The ladder owns the frequently revised order of concrete cells.
 `SYNOPSIS.md` owns current knowledge, hypotheses own claims, experiments own
-measurements, beads own unfinished work, and the agent-session artifact owns one bounded
-clock per independently tracked session.
+measurements, beads own unfinished work, and an escalated agent-session artifact owns
+the bounded outer clock when durable supervision or recovery state is needed.
 None is a duplicate runner queue.
 
 Outside the dated frozen portfolio below, do not copy the current ready item into this
@@ -309,9 +309,10 @@ launch prerequisite; do not wait beyond its declared slice.
    Only the coordinator may reconcile `tbd ready` at a checkpoint, and only after the
    landed-versus-branch-ahead bookkeeping in `think-k68v` is current.
    Choose the workflow whose output matches the item, then one primary focus.
-2. Open or renew the session phase with its expected output, validation command, kill
-   condition, fallback, start, and deadline.
-   Record outcome and evidence when it closes.
+2. Record the bounded objective, intended artifact, and focused check where the work is
+   already tracked. Open or renew a versioned session phase only when the work crosses
+   the escalation threshold; then add its focus, clock, stopping condition, fallback,
+   outcome, and evidence.
 3. Delegate bounded mechanical work—formatting, lint repair, data extraction, repeated
    checks—while the primary agent owns mathematical and integration judgment.
    These slices inherit the coordinating phase unless they open independently tracked
@@ -351,10 +352,11 @@ No unwatched numeric cell starts until every applicable line is true.
 - [ ] The hypothesis and exact cell are registered before execution.
 - [ ] The evaluator is typed for the hypothesis’s criterion; positive and negative
   fixtures have been watched passing and failing.
-- [ ] The command archives full poses or content-addressed pose artifacts.
+- [ ] The command archives full poses or stable paths to immutable retained pose
+  artifacts.
 - [ ] A separate verifier recomputes containment and non-overlap from the archived pose.
-- [ ] The actual engine selftest, binary digest, source revision, dirty state, host,
-  seeds, and budget are recorded.
+- [ ] The actual engine selftest, source revision, dirty state, host, seeds, and budget
+  are recorded.
 - [x] D-132 distinguishes a settled fixed cell from a rejected transition or iteration
   cap and prevents outer convergence when the inner solve did not settle.
 - [ ] Prerequisites are satisfied; an instrument-ready flag changes only with the

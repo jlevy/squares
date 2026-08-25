@@ -42,15 +42,16 @@ dots in the same highlight color show point contacts.
 The figure carries certified-upper-bound evidence and does not call the open case
 solved.
 
-### `n = 29`: verified high-precision construction
+### `n = 29`: numerically checked high-precision construction
 
 ![The high-precision Kingbird packing of twenty-nine unit squares.](kingbird29-overview.svg)
 
-The retained source reconstructs 29 squares at 160 decimal digits and passes all 406
-separating-axis pair checks.
+The retained roughly 100-digit source reconstructs 29 squares.
+It is evaluated at 160 decimal digits of working precision and tolerance `1e-80`, and
+passes all 406 separating-axis pair checks.
 This larger example exercises deterministic reuse of the 20-color sequence.
-It remains a verified numerical construction, not an exact certificate or an optimality
-proof.
+It remains a numerically checked construction, not a formal verification, exact
+certificate, or optimality proof.
 
 ## Visualization Levels
 
@@ -97,6 +98,8 @@ uv run --frozen --all-extras --group dev python -m devtools.render_packing_galle
 future atlas consumers.
 It records each example’s artifact, matching frontier case, evidence tier, view, motion
 and contact support, accessible copy, and standalone generator command.
+Each rendered file also carries the check kind, method, result, and—when numerical—the
+arithmetic, actual precision, rounding, and tolerance in namespaced metadata.
 
 Render the exact Trump construction:
 

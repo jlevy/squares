@@ -30,8 +30,10 @@ packings attached to its distinguished strata.*
 
 ![The high-precision Kingbird packing of twenty-nine unit squares.](rendering/kingbird29-overview.svg)
 
-*A larger verified numerical construction that exercises all 20 fixed cool colors and
-their deterministic reuse without overstating the retained source as exact.*
+*A larger construction whose roughly 100-digit source is numerically checked at 160
+decimal digits of working precision and tolerance `1e-80`. It exercises all 20 fixed
+cool colors and their deterministic reuse without overstating the retained source as
+verified or exact.*
 
 ## Add or Regenerate an Example
 

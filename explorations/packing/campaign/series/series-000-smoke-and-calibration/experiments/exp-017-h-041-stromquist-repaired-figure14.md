@@ -1,7 +1,7 @@
 ---
 title: exp-017 — one-coordinate repair certifies Stromquist's lower bound
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,61 +10,58 @@ experiment:
   series: series-000
   title: Exact certificate for the repaired Stromquist five-node mechanism
   date: '2026-08-24'
-  hypotheses: [H-041]
+  hypotheses:
+  - H-041
   tier: confirmatory
   subject:
     label: source-distinct repaired Figure 14 point set at s = 2 + 4/sqrt(5)
     engine: Stromquist repaired-cover exact checker 0.1.0
     engine_commit: c6d036b
-    precision: exact
+    assurance: verified
+    method: exact-algebraic
     host_system: macOS arm64
     selftest_passed: true
-  instance: {axis: n, point: 11, role: calibration}
+  instance:
+    axis: n
+    point: 11
+    role: calibration
   method:
-    control: >-
-      exp-016's exact printed-set escape, the printed G=.8 threshold failure, and
-      source, tiling, boundary, sign, capacity, and duplicate-record mutations
-    candidate: >-
-      replace only G=(4/5,37/20) by G'=(79/100,37/20), then certify the complete
-      Figure 13 localization, A-triple forcing, repaired Figure 14 cover, and 3+9 count
+    control: exp-016's exact printed-set escape, the printed G=.8 threshold failure, and source, tiling,
+      boundary, sign, capacity, and duplicate-record mutations
+    candidate: replace only G=(4/5,37/20) by G'=(79/100,37/20), then certify the complete Figure 13
+      localization, A-triple forcing, repaired Figure 14 cover, and 3+9 count
     runs_per_condition: 1
     interleaved: false
     operator: openai-codex
     commit: c6d036b
     dirty: false
     entry_point: explorations/packing/tools/check_stromquist_repair.py
-    command: >-
-      uv run --frozen python tools/check_stromquist_repair.py
-      --record campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
-      && uv run --frozen python tools/check_stromquist_repair.py
-      --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
+    command: uv run --frozen python tools/check_stromquist_repair.py --record campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
+      && uv run --frozen python tools/check_stromquist_repair.py --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
       > campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14-replay.json
-    budget: >-
-      180 agent-minutes; stop on one uncovered center-space cell, one failed exact lemma
-      premise or boundary, one source-scope mismatch, or a complete replayed five-node
-      certificate
+    budget: 180 agent-minutes; stop on one uncovered center-space cell, one failed exact lemma premise
+      or boundary, one source-scope mismatch, or a complete replayed five-node certificate
     record: campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
   effort:
     timebox: 180m
-    wall_seconds: 0.70
+    wall_seconds: 0.7
     agent_minutes: 90
     stopped_by: criterion
   results:
   - shape: determination
-    question: Does moving only Figure 14 point G.x from .8 to .79 restore the complete lower-bound mechanism?
+    question: Does moving only Figure 14 point G.x from .8 to .79 restore the complete lower-bound
+      mechanism?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      tools/check_stromquist_repair.py: exact source binding; complete Figure 13 and
-      repaired Figure 14 cell complexes; exact lemma, root, sign, boundary, and capacity
-      certificates; thirteen mutation controls; and deterministic complete-record replay
+    checked_by: 'tools/check_stromquist_repair.py: exact source binding; complete Figure 13 and repaired
+      Figure 14 cell complexes; exact lemma, root, sign, boundary, and capacity certificates; thirteen
+      mutation controls; and deterministic complete-record replay'
   verdict:
     decision: accepted
-    primary_criterion: every node of the source-distinct repaired five-node implication chain certifies exactly
-    reason: >-
-      The one-coordinate repair closes the unique failed outer cell while preserving a
-      complete exact cover, so eleven freely oriented unit squares require side at least
-      2 + 4/sqrt(5).
+    primary_criterion: every node of the source-distinct repaired five-node implication chain certifies
+      exactly
+    reason: The one-coordinate repair closes the unique failed outer cell while preserving a complete
+      exact cover, so eleven freely oriented unit squares require side at least 2 + 4/sqrt(5).
     commit: c6d036b
 ---
 # exp-017 — an exact repaired certificate for the `n = 11` lower bound

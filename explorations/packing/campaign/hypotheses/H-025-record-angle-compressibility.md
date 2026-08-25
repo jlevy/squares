@@ -18,22 +18,22 @@ hypothesis:
   strategy_refs: ['search:1', 'search:6', 'search:17']
   criterion:
     shape: conditions
-    metric: fraction of the preregistered verified record corpus meeting the three-class refit loss bound
+    metric: fraction of the preregistered formally supported record corpus meeting the three-class refit loss bound
     direction: at least 0.8
     threshold: 0.8
   instrument: >-
     Freeze eligible source URLs, retrieval dates, and retained fixtures before fitting;
-    import and independently verify every eligible full pose or count it unresolved in
+    import and formally verify every eligible full pose or count it unresolved in
     the denominator. Cluster folded orientations under a preregistered loss, reoptimize
     centers and class angles with the common spine, and independently verify every
     refit. Report the whole loss distribution, unresolved fraction, and n = 29
-    separately.
+    separately. Numerical-only source geometry remains outside the formal corpus.
   instrument_ready: false
   regime: public full-geometry record corpus frozen before fitting; n <= 100; 1e-4 side-loss threshold
-  instance: {axis: corpus, point: verified-records-n-le-100}
+  instance: {axis: corpus, point: formally-supported-records-n-le-100}
   priority: 2
   cost_estimate: tier S on n = 17 and 29; tier M only after the geometry importer is checked
-  prereqs: [verified geometry corpus]
+  prereqs: [formally supported geometry corpus]
   replication: true
   registered: '2026-08-24'
   notes: >-

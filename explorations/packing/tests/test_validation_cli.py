@@ -10,7 +10,6 @@ import os
 import signal
 import subprocess
 import sys
-import threading
 import time
 from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
@@ -162,6 +161,7 @@ def test_run_selected_interrupt_stops_detached_production_process(
                 "from pathlib import Path",
                 "signal.signal(signal.SIGTERM, signal.SIG_IGN)",
                 f"Path({str(pid_path)!r}).write_text(str(os.getpid()), encoding='utf-8')",
+                "os.kill(os.getppid(), signal.SIGINT)",
                 "time.sleep(2)",
                 f"Path({str(leaked_path)!r}).write_text('leaked', encoding='utf-8')",
                 "time.sleep(30)",
@@ -185,19 +185,10 @@ def test_run_selected_interrupt_stops_detached_production_process(
     )
     step = validate.Step(production_step.name, production_step.action)
 
-    def interrupt_after_start() -> None:
-        deadline = time.monotonic() + 2
-        while not pid_path.exists() and time.monotonic() < deadline:
-            time.sleep(0.01)
-        os.kill(os.getpid(), signal.SIGINT)
-
-    interrupter = threading.Thread(target=interrupt_after_start, daemon=True)
     started = time.monotonic()
-    interrupter.start()
     with pytest.raises(KeyboardInterrupt):
         validate._run_selected([step], context, [])
     elapsed = time.monotonic() - started
-    interrupter.join(timeout=1)
 
     assert 1 <= elapsed < 5
     assert pid_path.exists()
@@ -470,4 +461,5 @@ def test_frontier_contract_accepts_the_declared_schema_metadata(
 
     assert status == 0
     assert stderr == ""
-    assert "100 artifacts, n = 1..100, 35 proved, 65 open" in stdout
+    assert "100 artifacts, n = 1..100; formal lane: 35 proved, 65 open" in stdout
+    assert "reported lane: 35 proved, 65 open" in stdout

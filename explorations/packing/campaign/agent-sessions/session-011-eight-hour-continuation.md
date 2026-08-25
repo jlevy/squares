@@ -51,15 +51,12 @@ session:
       the timing block, so no overhead estimate or retention claim is made.
     evidence:
     - >-
-      Archived release builds of baseline 2eda548 and meter a9330d6 had SHA-256
-      7b7a53240fc17aa2591c7aa23451b8d67b049b858d1aea8d54473a12415cf080 and
-      c4fd53263d7269fe6151d481354469d676506c548328ddb0c521f1ef38502711;
-      the shipping Rust tree was identical to a9330d6.
+      Separate release builds of baseline commit 2eda548 and meter commit a9330d6 were
+      compared; the shipping Rust tree was identical to a9330d6.
     - >-
       At n=11, seed 1, one thread, 80 restarts and 32,000,000 moves, baseline and
       meter JSONL were byte-identical after deleting only seconds, moves_per_sec,
-      pair_tests and pair_tests_per_sec. Both canonical streams had SHA-256
-      fc9317ff338237ebb32f1518a5a7dc5d8958cc180b21e72569c19e762b7f276d.
+      pair_tests and pair_tests_per_sec.
     - >-
       The n=11 chain and summary each reported 640,004,455 pair tests, equal to
       (80+1)C(11,2)+2(32,000,000)(10). Ordinary and basin-entry n=4 controls reported
@@ -161,10 +158,9 @@ session:
       branch of 128 and does not decide H-043.
     evidence:
     - >-
-      The independently rerun frozen command completed in 14 wall-seconds; its JSON had
-      SHA-256 57003de86269f77c0b3ac7e9f519e1f3fd9698a2a60275750a7c81d0f547b09c
-      and exact branch-matrix key
-      175969ebbf7530322b5c6bd88d506ae67057ad25457f450e69258e0521e4096f.
+      The independently rerun frozen command completed in 14 wall-seconds and selected
+      branch index 0 under the regenerated ordering. D-292 keeps binding that index to
+      the retained exp-013 branch universe explicitly open.
     - >-
       The final 24-group system has exact rank 33, a strictly positive exact stress with
       zero residual, and 24 exact normalized nonzero witnesses, one after deleting each

@@ -27,6 +27,8 @@ def _rejects(function, *args, **kwargs) -> bool:
 
 def run_model_controls() -> dict[str, bool]:
     from sqpack.render.model import (
+        CheckKind,
+        CheckSummary,
         ContactFeature,
         ContainerWall,
         EvidenceTier,
@@ -34,7 +36,6 @@ def run_model_controls() -> dict[str, bool]:
         Point2,
         RigidPose,
         SquareGeometry,
-        VerificationSummary,
         validate_frame,
     )
     from sqpack.render.numbers import scalar_from_exact, scalar_from_float
@@ -45,11 +46,39 @@ def run_model_controls() -> dict[str, bool]:
         for x, y in ((0.0, 0.0), (1.0, 0.0), (1.0, 1.0), (0.0, 1.0))
     )
     square = SquareGeometry("square-0", corners, RigidPose(corners[0], scalar_from_float(0.0)))
-    verified = VerificationSummary(valid=True, method="exact", detail="known-answer")
-    frame = PackingFrame(scalar, (square,), EvidenceTier.VERIFIED_CONSTRUCTION, verified)
+    numerical_check = CheckSummary(
+        passed=True,
+        kind=CheckKind.NUMERICAL,
+        method="numerical-f64",
+        arithmetic="IEEE 754 binary64",
+        precision="53 binary bits",
+        rounding="nearest ties-to-even",
+        tolerance="1e-12",
+        detail="known-answer",
+    )
+    frame = PackingFrame(
+        scalar,
+        (square,),
+        EvidenceTier.NUMERICALLY_CHECKED,
+        numerical_check,
+    )
     validate_frame(frame)
     exact_zero = scalar_from_exact("0", Decimal(0))
     exact_one = scalar_from_exact("1", Decimal(1))
+    exact_corners = tuple(
+        Point2(
+            exact_one if x else exact_zero,
+            exact_one if y else exact_zero,
+        )
+        for x, y in ((0, 0), (1, 0), (1, 1), (0, 1))
+    )
+    exact_square = SquareGeometry("square-0", exact_corners)
+    formal_check = CheckSummary(
+        passed=True,
+        kind=CheckKind.FORMAL,
+        method="exact-algebraic",
+        detail="known-answer",
+    )
     exact_point = Point2(exact_zero, exact_one)
     wall_contact = ContactFeature(
         "contact-wall-square-0-left",
@@ -57,7 +86,13 @@ def run_model_controls() -> dict[str, bool]:
         ("square-0",),
         wall=ContainerWall.LEFT,
     )
-    contact_frame = replace(frame, features=(wall_contact,))
+    contact_frame = PackingFrame(
+        exact_one,
+        (exact_square,),
+        EvidenceTier.CERTIFIED_UPPER_BOUND,
+        formal_check,
+        features=(wall_contact,),
+    )
     validate_frame(contact_frame)
     return {
         "duplicate_ids_rejected": _rejects(
@@ -67,8 +102,12 @@ def run_model_controls() -> dict[str, bool]:
             validate_frame,
             replace(frame, squares=(replace(square, square_id="square-1"), square)),
         ),
-        "unverified_evidence_rejected": _rejects(
-            validate_frame, replace(frame, verification=replace(verified, valid=False))
+        "failed_check_rejected": _rejects(
+            validate_frame, replace(frame, check=replace(numerical_check, passed=False))
+        ),
+        "numerical_check_cannot_support_formal_evidence": _rejects(
+            validate_frame,
+            replace(frame, evidence=EvidenceTier.CERTIFIED_UPPER_BOUND),
         ),
         "binary64_contact_rejected": _rejects(
             validate_frame,
@@ -95,7 +134,7 @@ def run_model_controls() -> dict[str, bool]:
         ),
         "uncertified_contact_rejected": _rejects(
             validate_frame,
-            replace(contact_frame, evidence=EvidenceTier.CANDIDATE, verification=None),
+            replace(contact_frame, evidence=EvidenceTier.CANDIDATE, check=None),
         ),
     }
 
@@ -737,6 +776,12 @@ def run_gallery_controls() -> dict[str, bool]:
         for node in kingbird_root.iter()
         if node.attrib.get("data-feature") == "square-fill"
     ]
+    kingbird_metadata = {
+        node.attrib["name"]: node.text or ""
+        for node in kingbird_root.iter()
+        if node.tag.endswith("}value") and "name" in node.attrib
+    }
+    kingbird_manifest = by_id["n29-kingbird-overview"]
     gallery_artifacts = {path.resolve() for path in artifacts}
     return {
         "gallery_has_five_known_answers": len(examples) == 5,
@@ -765,6 +810,23 @@ def run_gallery_controls() -> dict[str, bool]:
         "kingbird_uses_palette_in_stable_index_order": len(kingbird_fills) == 29
         and kingbird_fills
         == [SQUARE_FILL_PALETTE[index % len(SQUARE_FILL_PALETTE)] for index in range(29)],
+        "kingbird_is_numerically_checked_not_verified": (
+            kingbird_manifest["evidence"] == "numerically-checked"
+            and "verified" not in kingbird_manifest["caption"].lower()
+            and kingbird_metadata.get("evidence") == "numerically-checked"
+        ),
+        "kingbird_numerical_check_metadata_is_complete": all(
+            kingbird_metadata.get(field)
+            for field in (
+                "check-method",
+                "check-arithmetic",
+                "check-precision",
+                "check-rounding",
+                "check-tolerance",
+            )
+        )
+        and kingbird_metadata.get("check-kind") == "numerical"
+        and kingbird_metadata.get("check-result") == "passed",
         "all_inline_svg_targets_exist": bool(inline_svg_targets)
         and all(path.is_file() for path in inline_svg_targets),
         "all_inline_svg_targets_are_current_gallery_artifacts": set(inline_svg_targets)

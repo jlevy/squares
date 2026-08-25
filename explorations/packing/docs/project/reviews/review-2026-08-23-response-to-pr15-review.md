@@ -1,5 +1,9 @@
 # Response to the PR #15 Review: what it got right, one thing it got wrong, and what is missing
 
+> **Lifecycle:** Superseded for current guidance by the
+> [synopsis](../../../SYNOPSIS.md).
+> Retained as a dated response record.
+
 **Date:** 2026-08-23
 
 **Author:** Claude (agent)

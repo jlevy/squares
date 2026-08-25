@@ -1,10 +1,13 @@
 # Handoff: Basin Identity and the Integrated PR Reviews
 
+> **Lifecycle:** Superseded for current guidance by the [synopsis](../../SYNOPSIS.md).
+> Retained as a dated handoff.
+
 **Date:** 2026-08-23
 
 **Author:** Claude and Codex agents
 
-**Status:** Current after PR #16 was reviewed and absorbed into PR #15
+**Status:** Historical after PR #16 was reviewed and absorbed into PR #15
 
 This handoff covers the atlas, basin identity, and the independent response to the
 standing program review.
