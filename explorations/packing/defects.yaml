@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 248
+count: 249
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -6365,3 +6365,31 @@ defects:
     overall session remains live and observes both refusals
   bead: think-6c7g
   recorded_in: src/sqpack/campaign/ledger.py
+- id: D-249
+  title: Branch completion and landed-main state were treated as the same fact
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: inspection
+  latent_for: one stopped campaign and two stacked merge checkpoints
+  severity: high
+  status: fixed
+  what: >-
+    The resumption queue mixed four different states: completed work on an open branch,
+    work proved to be an ancestor of main, a stopped session owner left open, and a live
+    task left in progress after its session stopped. A bead status alone could not tell
+    a new agent which implementation was actually present in its launch tree.
+  consequence: >-
+    An agent could skip a defect whose fix had never landed, repeat work already on
+    main, or treat an abandoned claim as active before starting an unattended session.
+  fix: >-
+    Reconcile the queue against the exact session base, close the stopped session-009
+    owner without closing its child work, reopen the orphaned receipt task, and require
+    an implementation commit to pass `git merge-base --is-ancestor <commit>
+    <session-base>` before a branch-ahead completion is described as landed.
+  regression: >-
+    The session-010 launch receipt records base 8136f21, the landed ancestry evidence,
+    and the corrected terminal or open state of each previously ambiguous bead
+  bead: think-k68v
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md

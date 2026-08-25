@@ -179,8 +179,9 @@ The operating documents divide ownership rather than repeat one another:
 ## The Autonomous Work Loop
 
 The outer loop is a portable repository protocol, not a feature of one agent platform.
-The `tbd` queue owns dependencies and tracked work; the active launch agenda freezes an
-explicit portfolio whenever landed-versus-branch-ahead bead state is not yet reconciled.
+The `tbd` queue owns dependencies and tracked work; the active launch agenda records the
+dated landed-versus-branch-ahead reconciliation and freezes an explicit portfolio for
+the active session. Raw `tbd ready` output is not itself a session queue.
 An [agent-session artifact](campaign/agent-sessions/README.md) owns the current workflow
 phase, primary focus, objective, clocks, and delegation evidence; commits and research
 artifacts own the results.
@@ -325,9 +326,9 @@ The implementation plan for the first experiments, meaning search, verify and it
 It turns the six reports into seven phases and a bead tree, one epic per phase;
 `tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md`
 shows the work items.
-Use `tbd ready` as the unblocked subset only after the active launch agenda has
-reconciled landed and branch-ahead bead state; the current eight-hour portfolio is
-frozen in that agenda.
+Use `tbd ready` only as an input to a coordinator checkpoint after proving claimed
+implementation commits are ancestors of the session base; the current eight-hour
+portfolio is frozen in the active launch agenda.
 
 The implemented engineering reorganization and its evidence are recorded in
 [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md).

@@ -2,7 +2,7 @@
 
 # Defect log
 
-248 defects recorded across the packing toolchain.
+249 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `control_cell` | 15 | a cell of the sweep whose answer is known in advance |
 | `review` | 161 | a human or agent reading the work against a checklist |
 | `anomaly` | 11 | a result that made no sense, chased down |
-| `inspection` | 29 | reading the code or the design with intent |
+| `inspection` | 30 | reading the code or the design with intent |
 | `drift_check` | 14 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 15 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 15 of 248, and none of the 65 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 15 of 249, and none of the 65 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 15 of 248, and none of
 | engine | 9 |
 | quench | 20 |
 | verifier | 4 |
-| record | 68 |
+| record | 69 |
 | tooling | 64 |
 | docs | 83 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 15 of 248, and none of
 | --- | ---: |
 | soundness | 65 |
 | validity | 65 |
-| bookkeeping | 83 |
+| bookkeeping | 84 |
 | robustness | 27 |
 | performance | 8 |
 
@@ -433,3 +433,4 @@ This is the actionable list.
 | [D-246](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | medium | fixed | Reserve enforcement crashed on a malformed contemporaneous phase clock |
 | [D-247](uv.lock) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | A delegated follow-up again rewrote the dependency lock outside its scope |
 | [D-248](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | high | fixed | Active slice deadlines were recorded but not enforced after expiry |
+| [D-249](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-25 | record | bookkeeping | flattering | `inspection` | high | fixed | Branch completion and landed-main state were treated as the same fact |

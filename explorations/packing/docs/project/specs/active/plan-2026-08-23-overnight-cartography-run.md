@@ -126,20 +126,41 @@ landscape.
 
 ## Frozen Eight-Hour Agent Portfolio
 
-This is the launch queue for `think-3cbq`, the planned `session-010`. It is frozen
-because `think-k68v` shows that the live bead graph still mixes landed, branch-ahead,
-stopped, and stale claims; agents must not drain raw `tbd ready` tonight.
+This is the launch queue for `think-3cbq`, the planned `session-010`. It remains frozen
+after the dated reconciliation below because raw `tbd ready` is a dependency view, not
+an unattended-session agenda.
 The coordinator may re-screen this list at a checkpoint, but may not invent another task
 merely to keep the session busy.
 
 The outer agent campaign is a **conditional go** from one clean, pushed commit whose
 normal gate is green.
-It does not start until `think-jqkv` records the user-selected final upstream PR as
-merged, the exact resulting `main` commit is integrated, conflicts are resolved, and the
-post-integration normal gate passes.
+PR 26 may be integrated at a bounded phase boundary if its live head is fully reviewed,
+mergeable, and green; it does not delay the launch.
+PR 25 is outside this session.
 The generic numerical runner, `packing-campaign run`, remains a **no-go**. So do
 delegated strict or deep gates: D-239 lacks outer validation deadlines, and D-202/D-217
 show that a finished delegated command can still lose its terminal receipt.
+
+### Launch-Base Reconciliation — 2026-08-25
+
+The session branch starts from `8136f21`, the merge of PR 28 into `main`. The queue was
+reconciled against that tree before the session clock opened:
+
+- `think-l1us` is closed and PR 22’s merge commit `1244634` is an ancestor of the base;
+- `think-cns0` is closed and its process-timeout implementation commit `ecf5b29` is an
+  ancestor of the base through merged PR 23;
+- stopped session-009 owner `think-05hr` is closed without closing its independent child
+  work; and
+- `think-b3bm` is open and unclaimed rather than inheriting the stopped session’s
+  `in_progress` state.
+
+The focused launch gate passed 15 of 31 selected steps in 13.17 wall-seconds.
+The normal gate then passed all 31 steps in 121.19 wall-seconds, including 51 behavioral
+tests and 62 mutation controls.
+
+Before treating any future branch-ahead implementation as landed, record its commit and
+run `git merge-base --is-ancestor <implementation-commit> <session-base>`. Exit zero is
+the landed-state evidence; a closed bead or passing branch is not.
 
 Open `session-010` with an offset-aware start and deadline exactly eight hours apart,
 `wall_minutes: 480`, `max_cycles: 15`, and `finalization_minutes: 45`. Every ordinary
@@ -279,9 +300,10 @@ Endpoint hashes or continuation-branch dendrograms are never labelled feasible t
 
 ## The autonomous agent loop
 
-This loop is queued but blocked on `think-jqkv`: do not open `session-010` or execute
-the frozen portfolio until the final upstream PR is merged, its resulting `main` commit
-is integrated, and the post-integration normal gate passes.
+This loop may open after the launch-base reconciliation and the focused plus normal
+launch checks pass.
+PR 26 is a bounded integration opportunity at a phase boundary, not a
+launch prerequisite; do not wait beyond its declared slice.
 
 1. Execute the active session’s frozen portfolio.
    Only the coordinator may reconcile `tbd ready` at a checkpoint, and only after the
