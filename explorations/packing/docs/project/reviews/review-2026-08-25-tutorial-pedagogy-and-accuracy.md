@@ -12,6 +12,14 @@ proposal and leaves the wording open.
 [`SYNOPSIS.md`](../../../SYNOPSIS.md) remains authoritative for every result, status,
 count, and verdict, and nothing here proposes moving status prose into the tutorial.
 
+**Basis:** re-verified after merging the deterministic SVG rendering toolkit.
+That merge added four figures to the tutorial — Trump’s `n = 11` packing, the `n = 29`
+Kingbird reconstruction, the Göbel `n = 10` source-return comparison, and the exact
+`n = 3` quotient map — and changed no prose.
+All four image paths resolve.
+Every finding below was re-checked against the merged text; only TR-1 changed, and it
+got worse.
+
 The tutorial declares its audience as “anyone arriving at this directory without a
 background in the problem.”
 This review reads it as that person, records where the document stops being followable,
@@ -55,18 +63,34 @@ a rigidity proof, and the lower-bound repair is correctly not attributed to Stro
 
 ## Accuracy
 
-### TR-1. The gate has thirty-one steps, not thirty
+### TR-1. The gate has thirty-two steps, and three documents disagree
 
 §6 says “a thirty-step gate all exist, and the whole gate runs in one to two minutes.”
 
-[`SYNOPSIS.md`](../../../SYNOPSIS.md) (“Reading the gate”) and
-[`conventions.md`](../../../conventions.md) §10 both say `packing-validate` runs
-**thirty-one** steps, and the recorded checkpoint is “all 31 normal-gate steps in 103.91
-wall-seconds.”
+The `STEPS` tuple in `src/sqpack/cli/validate.py` — which
+[`conventions.md`](../../../conventions.md) §10 names as “the only registration point” —
+now holds **thirty-two** entries.
+The SVG rendering merge added `deterministic SVG rendering` as step 7 without updating
+either prose count:
 
-The timing is right; the count is one low.
-Worth considering whether the tutorial should carry the number at all, since it is
-exactly the kind of value the document’s own preamble says it does not own.
+| Source | Says |
+| --- | ---: |
+| `TUTORIAL.md` §6 | thirty |
+| [`SYNOPSIS.md`](../../../SYNOPSIS.md) (“Reading the gate”) | thirty-one |
+| [`conventions.md`](../../../conventions.md) §10 | thirty-one |
+| `STEPS` in `src/sqpack/cli/validate.py` | **thirty-two** |
+
+The tutorial is two low; the synopsis and conventions are each one low, and that half is
+outside this review’s scope — it is upstream drift introduced by the merge, not a
+tutorial finding, and is filed separately.
+The timing claim is unaffected.
+
+This is the argument for the tutorial not carrying the number at all.
+A count that three documents restate is a count that will drift again, and the
+document’s own preamble says it does not own values of this kind.
+Note that the gate has a `synopsis agrees with the artifacts` step, and it did not catch
+this — consistent with the repository’s own finding that no soundness defect in the log
+was caught by the gate.
 
 ### TR-2. “None recovered from a search output” is superseded
 
@@ -134,6 +158,11 @@ dismiss as a degenerate toy — three squares, side 2, an obvious slack square.
 The `n = 5` sheet is the same phenomenon at a size that is not obviously trivial, and it
 is where the project is actually working now.
 §6’s account of what is built and §8’s account of what is open are both shaped by it.
+
+The SVG merge sharpens this rather than settling it.
+Trap 2 now carries a figure — the exact `n = 3` quotient map — so the toy case gained a
+picture while the non-toy case still has no mention, and the retained
+`n5-exact-face-trajectory.svg` that would illustrate it appears in `SYNOPSIS.md` only.
 
 ### TR-6. Minimum versus infimum, deliberately or not
 
@@ -537,6 +566,50 @@ deciding whether to trust or reuse it, and which the document never answers:
 The last point earns its place: a reader will assume a project doing exact algebra
 depends on a CAS, and it does not.
 
+### TR-14. §9’s vocabulary card has no stated discipline
+
+§9 says “[`SYNOPSIS.md`](../../../SYNOPSIS.md#terminology) is the authority; this is the
+short form.” It has fourteen rows chosen by no stated rule, and the omissions are not
+marginal terms.
+
+**Six terms are used in the body and absent from the card**, with body occurrence
+counts:
+
+| Term | Uses | Where it matters |
+| --- | ---: | --- |
+| **proposer** | 6 | §8’s open item 2 is “whether record packings are rare **under a named proposer**”; §7’s strategy argument turns on it |
+| **rigidity** | 5 | §3 and §4 both scope claims by it, and the synopsis defines it carefully because contact counts are *not* it |
+| **refiner** | 3 | The other half of the proposer/refiner pair, named separately in the synopsis “because the measurement that matters is which one is failing” |
+| **descriptor** | 3 | §7’s steering section is built on it, and it is one of the four cartography deliverables |
+| **polish failure** / **exploration failure** | 1 each | §3 introduces them as “the campaign’s central diagnostic”, and the synopsis carries a “Not used here” entry warning against the near-miss coinages |
+| **quench map** | 1 | The synopsis says “Say ‘the quench map’ where the distinction matters”; the card’s single `quench` row merges the map and the component |
+
+**Four rows drift from the declared authority.** `gap` is defined as
+`best_side − standing_best` while §1’s own table uses `gap` for upper bound minus lower
+bound, so the card contradicts the document it sits in (also TR-8). `atlas / census`
+compounds two different deliverables with two different statuses into one row, and drops
+the caveat the synopsis attaches to both — code exists, and it stores endpoint keys that
+are not certified terminal components, which is the point §6 spends a paragraph making.
+`exploration` is one of the three words the synopsis marks as carrying controlled
+multiple senses — with `cell` and `quench` — and the card flags `cell` correctly,
+`quench` partially, and `exploration` not at all.
+`terminal component` is defined through “terminal set”, which has no row.
+
+**And the order is unstated.** The card opens in dependency order — configuration, cell,
+quench, basin — then drifts, so `angle class` lands after `corner` though the corner is
+a property of the class-angle objective.
+
+On `basin` in particular: it is present, as the compound row **basin / point-basin**.
+But at 26 body occurrences it is the document’s most-used technical term, and the card
+defines it through `quench` and then defines `polish` and `exploration` through it —
+circular for the first reader the card exists to serve.
+
+**Proposal.** Give the card a coverage rule and apply it; state an order and hold it;
+split `atlas` from `census` while keeping the genuine synonym pairs
+`basin / point-basin` and `corner / kink`; flag the three controlled-sense words with
+their write-this-form rule; and say what the card does not cover, since symbols belong
+in the notation table from TR-8 and the synopsis remains complete.
+
 ## Bead Map
 
 The epic is `think-ysoj`. Every finding above lands on exactly one bead.
@@ -550,10 +623,16 @@ The epic is `think-ysoj`. Every finding above lands on exactly one bead.
 | `think-i22v` | TR-11 | task |
 | `think-g5o3` | TR-12 | task, after `think-8hdt` |
 | `think-i3wv` | TR-13 | task, after `think-ejgd` and `think-i22v` |
+| `think-sofa` | TR-14 | task, after `think-8hdt` |
 
-The dependencies are notation-first on purpose: TR-9 and TR-12 both need symbols that
-TR-8 defines, and TR-13’s reference groups follow from what TR-9 and TR-11 decide to
-explain.
+The dependencies are notation-first on purpose: TR-9, TR-12, and TR-14 all need terms or
+symbols that TR-8 fixes, and TR-13’s reference groups follow from what TR-9 and TR-11
+decide to explain.
+
+One half of TR-1 is out of scope here and carries its own bead outside the epic: the
+synopsis and conventions both say thirty-one where the code now has thirty-two, which is
+drift in the status documents rather than in the tutorial.
+That is `think-4b9m`.
 
 ## What This Review Does Not Do
 
