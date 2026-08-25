@@ -109,6 +109,13 @@ could be traced to a primary artifact:
   no-regression-fix count by hand (“ninety-eight” against the generated 106) two
   sentences after promising the neighbouring claims cannot drift.
   The copied number is gone; the computed count is stated once.
+- **SR-8** (D-329, `think-d2ah`, found by the macOS portability gate after the merge) —
+  the branch’s assurance-vocabulary migration reworded the golden basin-map note in the
+  writer and hand-edited `golden/basin-maps.yaml` to match, at a wrap column the
+  writer’s `yaml.safe_dump(width=100)` does not produce; the branch predated the deep
+  byte-equality gate, so the drift surfaced only when the merge united them.
+  The committed golden is round-tripped through the writer’s exact dump call, data
+  untouched.
 
 **Precision, no defect entry.**
 
@@ -127,7 +134,8 @@ could be traced to a primary artifact:
 Epic `think-2xex` owns this iteration.
 Merge-phase findings: `think-16qn`, `think-clin`, `think-0emo`. Tutorial-pass findings:
 `think-mb6q`, `think-suzm`, `think-6z2v`, `think-bqjd`, `think-ojgc`, `think-aihj`.
-Defects D-320 through D-328 are registered with these beads and are all fixed on this
+Post-push CI finding: `think-d2ah`.
+Defects D-320 through D-329 are registered with these beads and are all fixed on this
 branch.
 
 <!-- This document follows common-doc-guidelines.md.

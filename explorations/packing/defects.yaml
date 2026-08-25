@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 328
+count: 329
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8419,3 +8419,32 @@ defects:
     checker-enforced.
   bead: think-aihj
   recorded_in: SYNOPSIS.md
+- id: D-329
+  title: The golden basin map was hand-edited out of byte agreement with its writer
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: one review branch, until the merge united it with the byte gate
+  severity: medium
+  status: fixed
+  what: >-
+    The tutorial branch's assurance-vocabulary migration reworded the golden note in
+    check_golden_basins.py and hand-edited golden/basin-maps.yaml to match, wrapping
+    the note at a different column than the writer's yaml.safe_dump(width=100)
+    produces; the branch predated the deep byte-equality gate, so nothing objected
+    until the merge brought the gate and the macOS portability job failed on a
+    wrap-only diff.
+  consequence: >-
+    The portability gate reported golden drift with no data change anywhere, and a
+    reader of the failure had to separate a serialization artifact from a real
+    endpoint difference.
+  fix: >-
+    Round-trip the committed golden through the writer's exact dump call, refreshing
+    the serialization with the data untouched; hand edits to generated snapshots go
+    through the generator.
+  regression: >-
+    the deep golden byte-equality gate itself, now active on this branch's lineage.
+  bead: think-d2ah
+  recorded_in: golden/basin-maps.yaml
