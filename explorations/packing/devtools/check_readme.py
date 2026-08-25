@@ -20,7 +20,7 @@ Five checks:
    lists six; both must match what is in `docs/project/research/`.
 4. **The defect summary is derived.** README may state whether the gate has caught a
    soundness defect, but may not repeat a numeric aggregate owned by `defects.yaml`.
-5. **The work model agrees.** README and SYNOPSIS must expose the same six numbered
+5. **The work model agrees.** README and SYNOPSIS must expose the same seven numbered
    workflow entry points, the agent-session schema must be able to record them, and the
    synopsis must define the work units those workflows produce.
 
@@ -62,6 +62,8 @@ WORK_UNITS = (
 
 # Tooling that is not part of what the directory *is*: caches, lockfiles, build config.
 NOT_CONTENT = {"uv.lock", "pyproject.toml", "__pycache__", ".venv"}
+CACHE_PARTS = {"__pycache__", ".pytest_cache", ".ruff_cache", ".venv"}
+IGNORED_FILES = {".DS_Store"}
 
 _SPELLED = {
     1: "one",
@@ -85,6 +87,26 @@ def layout_tree(text: str) -> str | None:
     return None
 
 
+def meaningful_top_level_entries(root: Path) -> set[str]:
+    """Entries with durable content, excluding cache-only migration remnants."""
+    entries: set[str] = set()
+    for entry in root.iterdir():
+        if entry.name.startswith(".") or entry.name in NOT_CONTENT:
+            continue
+        if entry.is_file():
+            if entry.name not in IGNORED_FILES:
+                entries.add(entry.name)
+            continue
+        if any(
+            path.is_file()
+            and path.name not in IGNORED_FILES
+            and not CACHE_PARTS.intersection(path.relative_to(entry).parts)
+            for path in entry.rglob("*")
+        ):
+            entries.add(entry.name)
+    return entries
+
+
 def check_layout(text: str) -> list[str]:
     """Every top-level entry is drawn, and every drawn path exists."""
     tree = layout_tree(text)
@@ -100,11 +122,7 @@ def check_layout(text: str) -> list[str]:
     drawn_top = {name.strip("/").split("/")[0] for name in top}
     drawn_any = drawn_top | {name.strip("/") for name in top + nested}
 
-    on_disk = {
-        e.name
-        for e in ROOT.iterdir()
-        if not e.name.startswith(".") and e.name not in NOT_CONTENT
-    }
+    on_disk = meaningful_top_level_entries(ROOT)
 
     problems = [
         f"README.md: {missing} exists but the layout tree does not show it"
@@ -205,9 +223,9 @@ def check_work_model(text: str) -> list[str]:
     expected_rows = [
         (f"W{index}", workflow) for index, workflow in enumerate(numbered_workflows, start=1)
     ]
-    if len(numbered_workflows) != 6 or not fallback:
+    if len(numbered_workflows) != 7 or not fallback:
         problems.append(
-            "agent-session.schema.yaml: workflow enum must contain six numbered "
+            "agent-session.schema.yaml: workflow enum must contain seven numbered "
             "workflows followed by one fallback"
         )
     for label, rows in (

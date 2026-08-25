@@ -178,22 +178,27 @@ The generated ledger summarizes both entry workflows and later switches.
 | W4 | `process-review` | Artifacts, beads, logs, checks, and a reconstructability or discipline question | Inspect ownership, handoffs, refusals, and controls; do not substitute process polish for a scientific result | Review findings, beads, and narrowly scoped contract or checker changes | W5 for a measured bottleneck or the next workflow that owns the result |
 | W5 | `efficiency-loop` | A measured baseline, profile, target metric, and equivalence or validity guard | Improve time, cost, or throughput under the same regime; never relax correctness or provenance to win | Benchmark record, change or rejection, measured delta, and preserved guards | W6 when the research bottleneck moves; W4 if the process contract is wrong |
 | W6 | `research-loop` | A registered hypothesis, fixed criterion, regime, budget, stop rule, and instrument contract | Build or repair the bounded instrument, freeze it before measurement, then use creative effort inside the registered scope to execute the smallest fair test; never change the criterion, suppress a failure, or improvise a replacement hypothesis mid-round | Frozen instrument, `exp-NNN`, raw data or proof record, verdict, regenerated views, and the next bounded question | W2 before promoted or high-risk claims; otherwise W3 or another W6 slice |
+| W7 | `pipeline-improvement` | Named packing-research consumers, the smallest reusable capability or cleanup they need, controls or an independent oracle, a budget, and expected comparability impact | Add, strengthen, simplify, or repair only the bounded packing pipeline surface; do not collect a target verdict while it is mutable, optimize an unchanged implementation without a W5 baseline, or generalize beyond named consumers | Code, entry point or refactor; replayable positive and negative controls; exact validation command; cost and complexity receipt; evidence limits; and a readiness or retained-blocker decision | W2 before a new or materially changed trust boundary reaches W6; W5 if measured throughput remains the blocker; otherwise W6 |
 
 Implementation is an action inside the workflow that owns its promised result, not an
 undefined handoff: W1 and W2 can make bounded research corrections, W3 can implement a
 bounded exploratory derivation or visualization without spending an undeclared
-experiment budget, W4 can repair an accepted process or checker defect, W5 can implement
-a measured optimization, and W6 can build or repair its registered instrument before
-measurement. `general-improvement` remains only for genuine repository maintenance whose
-output fits none of W1–W6. It must not hide core work or a session alternating among
-research, review, and infrastructure; those are separate phases.
+experiment budget, W4 can make a narrow accepted process correction, W5 can implement a
+measured optimization, and W6 can build a one-round instrument that freezes before
+measurement. W7 owns reusable packing-pipeline capabilities, targeted refactors,
+robustness, visualization infrastructure, and cleanup for named consumers.
+`general-improvement` remains only for repository maintenance outside the packing
+pipeline whose output fits none of W1–W7. It must not hide core work or a session
+alternating among research, review, and infrastructure; those are separate phases.
 
 ### Switching Workflows in One Session
 
 One phase is active at a time per independently tracked session.
-Start a new phase when its purpose or focus changes.
+Start a new phase when its purpose, focus, or bounded slice objective changes.
 A focus-only change repeats the workflow name and is a phase boundary, not a workflow
-switch. An orchestrator may switch at a planned checkpoint, after a concrete evidence
+switch. A renewed slice may repeat both workflow and focus, but it must close the prior
+slice, change the objective, and state the new fact that justifies another clock.
+An orchestrator may switch or renew at a planned checkpoint, after a concrete evidence
 checkpoint, on a user request, or because the active premise was falsified.
 It closes the old phase first with status, evidence, stop reason, and next action; then
 it declares the new workflow, primary focus, objective, expected output, validation,
@@ -210,11 +215,11 @@ The normal research cadence is not a mandate to traverse every workflow:
 ```
 W1 research-pass ──> W2 factual-review ──> W3 insight-iteration
                                                │
-                                               v
-W5 efficiency-loop <── W4 process-review    W6 research-loop
-        │                                      │
-        └──────── measured capability ─────────┘
-                  promoted/high-risk W6 result ──> W2 ──> W3
+                         missing reusable tool v
+W4 process-review ──> W7 pipeline-improvement ──> W2 ──> W6 research-loop
+        │                    │                              │
+        └─ accepted repair ──┘        W5 efficiency-loop ──┘
+                         promoted/high-risk result ──> W2 ──> W3
 ```
 
 At any checkpoint, the human operator may choose the next phase, narrow the question, or
@@ -238,8 +243,9 @@ then excluded the displayed direction from the true tangent cone without classif
 other non-sheet directions.
 When the post-round strict gate failed, W4 separated stale controls from an independent
 deep-golden solver rejection.
-The bounded solver implementation that followed belongs to the process-repair workflow
-that isolated it; it is not research and does not need a general-work catchall.
+That bounded solver repair was recorded under the owning review phase before W7 existed.
+Future packing-pipeline repairs whose promised output is the implementation itself enter
+W7; historical phases are not relabelled after the fact.
 The scientific queue remains separate.
 At no point may exp-035 or exp-036 be reinterpreted as a connectivity proof.
 
@@ -790,7 +796,8 @@ zero merely because a computed residual is small.
 A tolerance-based f64 verifier therefore needs a tolerance to accept Trump’s rounded
 algebraic contacts, and that tolerance is a blind spot that also accepts overlaps
 smaller than itself; setting it to zero rejects this true packing instead.
-Both failure modes are demonstrated by `negative_control.py`.
+Both failure modes are demonstrated by
+[`cases.trump11.verifier_limits`](cases/trump11/verifier_limits.py).
 
 The fix is representational rather than numerical: express the configuration in the real
 algebraic number field it actually lives in, where equality is decidable.
@@ -885,9 +892,9 @@ listed here so the dependencies of this program are explicit.
 
 | Id | Statement | Tier | Where it lives | Reproduce with |
 | --- | --- | --- | --- | --- |
-| **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **exact** | `sqpack` | `python3 verify_trump11.py` |
+| **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **exact** | `sqpack` | `uv run --frozen python -m cases.trump11.verify_exact` |
 | **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated at **polished** | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack.research.quench`](src/sqpack/research/quench.py) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
-| **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run --frozen python lp_cell.py` |
+| **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
 | **T-4** | The source-distinct replacement `G=(.8,1.85) → G'=(.79,1.85)` restores the complete Figure 13 localization, A-triple forcing, repaired Figure 14 unavoidability, and `3+9` capacity chain, proving `s(11) ≥ 2 + 4/√5` | **exact** | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md), confirmed by [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | `uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json` |
 
 **T-1** is also an independent check of the published record: the 33 digits on the
@@ -1028,8 +1035,9 @@ against its own constraint rows.
 
 ### The instance: Trump’s cell
 
-`lp_cell.py` reads the cell off `sqpack`’s exact certificate—eleven angles and
-fifty-five axis choices, and nothing else—rebuilds the LP from scratch, and solves it.
+`cases.trump11.independent_lp_cell` reads the cell off `sqpack`’s exact
+certificate—eleven angles and fifty-five axis choices, and nothing else—rebuilds the LP
+from scratch, and solves it.
 **The centres are never given to the solver.** They are what it must reconstruct.
 
 ```
@@ -1187,12 +1195,13 @@ distinct terminal component.
 
 - **The refiner is an LP solve per cell**, at solver precision, and it is built.
   That is the campaign’s middle tier, and it is real.
-- **Basins become nameable.** A local minimum stops being tolerance-dependent and
-  becomes a discrete object with a side length good to `≈1e-11`, which is what makes a
-  census, an atlas, and basin statistics well defined.
-  Basin identity must not inherit the search’s knobs—a quench that merges nearby angles
-  would make “basin” depend on the merge tolerance ([D-020](defects.md)), fixed by a
-  free-angle pass that certifies the landing point.
+- **Terminal endpoint observations become inspectable.** The free-angle pass removes one
+  merge-tolerance artifact and returns a pose with side length good to `≈1e-11`, so
+  retained endpoints can be compared and replayed.
+  It does not make local minima discrete or define component identity: the exact `n = 3`
+  continuum proves that one connected stationary family can produce many endpoint keys.
+  A census, atlas, or basin statistic remains inadmissible until the component relation
+  is resolved ([D-020](defects.md), [D-034](defects.md)).
 - **The search space factorises** into a small continuous part (the angles) and a
   combinatorial part (the cell), which is the premise of
   [H-001](campaign/hypotheses/H-001-angle-class-reduction.md)—now with a concrete prior,
@@ -1207,15 +1216,15 @@ distinct terminal component.
 
 ```bash
 cd explorations/packing
-python3 verify_trump11.py       # T-1: exact verification over Q(u)
-uv run --frozen python lp_cell.py        # T-2 and T-3, through independent constraint rows
+uv run --frozen python -m cases.trump11.verify_exact
+uv run --frozen python -m cases.trump11.independent_lp_cell
 uv run --frozen python -m cases.campaign_smoke.quench_experiment
 uv run --frozen --group dev packing-validate
 ```
 
-`lp_cell.py` asserts every figure quoted above, including agreement with `H-019`’s
-registered slopes, so a change that breaks one fails the gate rather than silently
-editing the record.
+`cases.trump11.independent_lp_cell` asserts every figure quoted above, including
+agreement with `H-019`’s registered slopes, so a change that breaks one fails the gate
+rather than silently editing the record.
 
 ## The Program So Far
 
@@ -1729,24 +1738,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 232 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 248 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 64 | asserted something false about the mathematics |
+| soundness | 65 | asserted something false about the mathematics |
 | validity | 65 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 74 | recorded something its own evidence contradicts |
-| robustness | 21 | did not finish, or finished only by luck |
+| bookkeeping | 83 | recorded something its own evidence contradicts |
+| robustness | 27 | did not finish, or finished only by luck |
 | performance | 8 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Fifty-three of the sixty-four soundness defects pointed in the *flattering*
+**Fifty-four of the sixty-five soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fourteen defects in 232, and no soundness defect ever.**
+**The automated gate has caught fifteen defects in 248, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1893,8 +1902,8 @@ and the other branch ref restored before push or target execution.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Eighty-seven fixes left no regression check behind, and that list has already predicted
-a recurrence once. The
+Ninety-two fixes left no regression check behind, and that list has already predicted a
+recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
 relative to what they govern, a discovery treated as a defect until an independent layer
@@ -1980,11 +1989,11 @@ stress analysis, not another rank count.
 No hour-scale lane is promoted without a known-answer response, independent validity,
 and a result that changes a decision.
 
-**The normal checkpoint is green; the strict unattended-handoff gate is not.** The
-engineering stack’s final post-merge run passes all 31 normal-gate steps in 82
-wall-seconds, including seven exact small-`n` replays and all 56 negative controls.
-The first deep regeneration reproduced one unsettled `n=4` proposal and an `n=10`
-`1.503e-10` pair-row residual.
+**The normal checkpoint is green; the strict unattended-handoff gate is not.** The W7
+and frozen-queue checkpoint passes all 31 normal-gate steps in 103.91 wall-seconds,
+including seven exact small-`n` replays, 51 pytest contracts, and all 62 mutation
+controls. The first deep regeneration reproduced one unsettled `n=4` proposal and an
+`n=10` `1.503e-10` pair-row residual.
 [D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders
 49 and 66 exposes previously clean row 61, which a third conservative call settles with
 zero all-original-row residual.
@@ -2022,10 +2031,17 @@ rational special case alone is not a universal remedy.
 mutates bounded private source snapshots, so a killed control can abandon only temporary
 data and cannot leave deliberate sabotage in the checkout.
 
-**Checker timeouts remain open.** [D-129](defects.md): a stuck negative-control command
-can still stall the gate and leave a shell descendant alive.
-This is operational robustness, not a live-source isolation risk; `think-cns0` owns
-bounded process-group cleanup.
+**Mutation-control timeouts are bounded.** [D-129](defects.md) is fixed: each control
+has a finite deadline, runs in its own process group, and is terminated and reaped after
+TERM and then KILL if necessary.
+This closes that specific gate-stall path; the unattended numerical runner still has the
+separate launch requirements above.
+
+**The outer validation command is not yet time-bounded.** [D-239](defects.md) records
+that proof, solver, Cargo and other checker subprocesses still have no per-step deadline
+or process-group cleanup.
+This does not block the next supervised exact slice, but a strict gate is not itself a
+safe unattended watchdog until that follow-up lands.
 
 **One open defect makes quench evidence load-dependent.** [D-126](defects.md): the
 scientific work budget is still wall-clock time, so contention changes the number of LP

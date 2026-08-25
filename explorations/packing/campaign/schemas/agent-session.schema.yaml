@@ -19,6 +19,7 @@ $defs:
       - process-review
       - efficiency-loop
       - research-loop
+      - pipeline-improvement
       - general-improvement
 required:
   - id
@@ -43,6 +44,14 @@ properties:
     description: Stable, sequential, and never reused.
   title: {type: string, minLength: 1}
   date: {type: string, description: ISO date on which the session started.}
+  started_at:
+    type: string
+    format: date-time
+    description: Optional offset-aware instant at which this session began.
+  deadline_at:
+    type: string
+    format: date-time
+    description: Optional offset-aware hard deadline for this session.
   goal:
     type: string
     minLength: 1
@@ -51,8 +60,8 @@ properties:
     type: array
     minItems: 1
     description: >-
-      Ordered, contiguous phases. Start a new phase when the workflow or focus changes;
-      the checker enforces explicit transitions and terminal state.
+      Ordered, contiguous phases. Start a new phase when the workflow, focus, or bounded
+      objective changes; the checker enforces explicit transitions and terminal state.
     items:
       type: object
       additionalProperties: false
@@ -88,6 +97,11 @@ properties:
           description: >-
             Whether the phase contract was declared before work began or reconstructed
             from historical evidence during migration.
+        clock_role:
+          enum: [work, finalization]
+          description: >-
+            Required by the checker in a clocked session; finalization is the final
+            reserve phase.
         objective: {type: string, minLength: 1}
         status: {enum: [in_progress, completed, stopped]}
         entered_by:
@@ -171,7 +185,10 @@ properties:
     properties:
       metric: {type: string, minLength: 1}
       before: {type: string, minLength: 1}
-      after: {type: string, minLength: 1}
+      after:
+        type: [string, "null"]
+        minLength: 1
+        description: Null only while the session is active; nonempty at terminal state.
   delegations:
     type: array
     items:
@@ -193,25 +210,49 @@ properties:
         task: {type: string, minLength: 1}
         operator: {type: string, minLength: 1}
         status: {enum: [queued, in_progress, completed, blocked, canceled]}
-        outcome: {type: string, minLength: 1}
+        recording:
+          enum: [contemporaneous, retrospective]
+          description: Required for delegations in a clocked session.
+        outcome: {type: [string, "null"], minLength: 1}
         evidence:
-          type: array
+          type: [array, "null"]
           items: {type: string, minLength: 1}
         files:
-          type: array
+          type: [array, "null"]
           items: {type: string, minLength: 1}
         checks:
-          type: array
+          type: [array, "null"]
           items: {type: string, minLength: 1}
-        uncertainty: {type: string, minLength: 1}
+        uncertainty: {type: [string, "null"], minLength: 1}
         elapsed_seconds:
           type: [number, "null"]
           minimum: 0
           description: Measured or explicitly approximate wall time; null when unavailable.
         elapsed_quality:
-          enum: [platform_measured, operator_reported_approximate, unavailable]
+          enum: [platform_measured, operator_reported_approximate, unavailable, null]
           description: Makes timing precision explicit instead of giving estimates false precision.
         next_action: {type: string, minLength: 1}
+        phase:
+          type: [integer, "null"]
+          minimum: 1
+          description: One-based workflow phase inherited by this delegation.
+        budget_minutes: {type: [number, "null"], exclusiveMinimum: 0}
+        started_at: {type: [string, "null"], format: date-time}
+        deadline_at: {type: [string, "null"], format: date-time}
+        expected_output: {type: [string, "null"], minLength: 1}
+        validation_command: {type: [string, "null"], minLength: 1}
+        kill_condition: {type: [string, "null"], minLength: 1}
+        fallback: {type: [string, "null"], minLength: 1}
+        write_scope:
+          type: [array, "null"]
+          minItems: 1
+          uniqueItems: true
+          items: {type: string, minLength: 1}
+        excluded_commands:
+          type: [array, "null"]
+          minItems: 1
+          uniqueItems: true
+          items: {type: string, minLength: 1}
   outputs:
     type: array
     items: {type: string, minLength: 1}

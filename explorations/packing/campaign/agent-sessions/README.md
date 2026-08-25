@@ -4,7 +4,7 @@ These are the durable handoffs for the outer autonomous work loop.
 An agent session is one bounded interval of orchestrated work, not a campaign, series,
 experiment, or solver run.
 The [synopsis](../../SYNOPSIS.md#work-units-and-records) owns those definitions; the
-[workflow contracts](../../SYNOPSIS.md#workflow-entry-contracts) own W1–W6.
+[workflow contracts](../../SYNOPSIS.md#workflow-entry-contracts) own W1–W7.
 
 Session records complement, and do not replace, the scientific record:
 
@@ -22,16 +22,25 @@ Each independently tracked session has one integration bead and one active workf
 phase. Several sessions may exist concurrently; each keeps its own phase and clock.
 Before work starts, record:
 
-- the overall session goal, wall budget, and stop conditions;
-- the first phase’s workflow, chosen from W1–W6, with `general-improvement` reserved for
+- the overall session goal, offset-aware start and hard deadline, wall budget, cycle
+  cap, finalization reserve, and stop conditions;
+- the first phase’s workflow, chosen from W1–W7, with `general-improvement` reserved for
   genuine repository maintenance outside those workflows;
-- the phase’s primary focus, objective, expected output, validation command, kill
-  condition, fallback, start, and deadline; and
+- the phase’s primary focus, objective, clock role, expected output, validation command,
+  kill condition, fallback, start, and deadline; and
 - the next action if the phase succeeds, stops, or blocks.
 
+In a clocked session, ordinary `work` phases must end before the finalization reserve.
+The final phase may instead declare `clock_role: finalization` and use that reserve for
+records, checks, commits, and handoff.
+An active session leaves `progress.after` null; the checker requires the completed value
+when the session closes.
+
 Implementation is not a separate implied handoff.
-A bounded correction, checker repair, probe, optimization, or research instrument stays
-inside W1–W6 according to the durable result it serves.
+A bounded correction, checker repair, probe, optimization, or one-round research
+instrument stays inside W1–W6 according to the durable result it serves.
+W7 owns reusable packing-pipeline capabilities, targeted refactors, robustness,
+visualization infrastructure, and cleanup for named research consumers.
 The phase records actual outcome and evidence only when it closes.
 
 The first phase uses `entered_by: session_start`, has no `switch_reason`, and defines
@@ -44,10 +53,11 @@ precision.
 
 ## Switching Phases
 
-Start a new phase whenever the workflow or focus changes.
+Start a new phase whenever the workflow, focus, or bounded slice objective changes.
 A focus-only change repeats the workflow name; it is a phase boundary, not a workflow
-switch.
-Focus is the primary quality emphasis; the other three operating principles still
+switch. A renewed slice may repeat workflow and focus only after the prior phase closes,
+and its changed objective and switch reason must state what new evidence earns another
+clock. Focus is the primary quality emphasis; the other three operating principles still
 constrain and may contribute to the phase.
 Later phases say whether they began at a planned checkpoint, evidence checkpoint, or
 user request, and state the reason.
@@ -73,9 +83,22 @@ phase audits and implements D-199 without relabeling that repair as research.
 ## Delegation and Control
 
 The parent agent owns shared-file integration.
-A delegated task should have a bounded, preferably disjoint write scope and return the
-same compact contract represented in the frontmatter: outcome, evidence, files, checks,
-uncertainty, next action, and elapsed wall time.
+A delegation that may cross a checkpoint or run a long or side-effecting command gets a
+durable queued or active row before it runs.
+That row records `recording: contemporaneous`, phase, wall budget, expected output,
+validation command, kill condition, fallback, write scope, excluded long commands,
+start, and deadline.
+A short read-only or mechanical task that begins and returns inside one parent slice may
+inherit the prompt’s scope and clock without a queued row; record its compact terminal
+receipt when it returns.
+Every terminal receipt retains recording provenance, owning phase, outcome, evidence,
+files, checks, uncertainty, next action, and elapsed wall time.
+Queued and active rows leave terminal outcome, evidence, uncertainty, and elapsed
+quality null rather than inventing placeholders; the checker requires them when the row
+closes. Use frozen dependency commands; a read-only assignment does not authorize a
+lockfile or other tracked side effect.
+Until the outer validation timeout and durable-receipt blockers close, the coordinator
+retains every long command and delegates explicitly exclude strict or deep gates.
 Formatting, lint repair, extraction, and repeated checks inherit the coordinating phase;
 a delegate declares another workflow only when it opens its own independently tracked
 session.

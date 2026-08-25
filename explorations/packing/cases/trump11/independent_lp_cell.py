@@ -17,7 +17,7 @@ It then holds the cell fixed and sweeps the one free angle, which turns the
 34-dimensional problem into a one-dimensional one and shows where its minimum
 sits and what shape it has.
 
-    uv run python lp_cell.py
+    uv run --frozen python -m cases.trump11.independent_lp_cell
 
 Everything printed is asserted, so this doubles as a gate.
 """

@@ -5,8 +5,33 @@ from __future__ import annotations
 import shlex
 import sys
 import time
+from pathlib import Path
 
-from devtools.run_negative_controls import run_control_command
+import pytest
+
+from devtools.run_negative_controls import resolve_control_target, run_control_command
+
+
+def test_control_targets_cannot_escape_the_private_snapshot(tmp_path: Path) -> None:
+    tree = tmp_path / "snapshot"
+    work = tree / "explorations" / "packing"
+    work.mkdir(parents=True)
+    repository_file = tree / ".flowmarkignore"
+    repository_file.write_text("inside", encoding="utf-8")
+    outside = tmp_path / "outside.txt"
+    outside.write_text("outside", encoding="utf-8")
+    (work / "outside-link").symlink_to(outside)
+
+    assert resolve_control_target("../../.flowmarkignore", tree=tree, work=work) == (
+        repository_file
+    )
+
+    for escaped in (str(outside), "../../../outside.txt", "outside-link"):
+        with pytest.raises(ValueError, match="escapes private snapshot"):
+            resolve_control_target(escaped, tree=tree, work=work)
+
+    with pytest.raises(ValueError, match="not a regular file"):
+        resolve_control_target("../..", tree=tree, work=work)
 
 
 def test_timeout_reaps_a_child_that_ignores_termination() -> None:

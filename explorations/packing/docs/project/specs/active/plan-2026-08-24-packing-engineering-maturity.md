@@ -7,7 +7,7 @@ status: implemented
 ---
 # Packing Engineering Maturity and Research-Loop Scalability
 
-**Status:** Implemented in the stacked engineering-cleanup change above PR #22.
+**Status:** Implemented and merged through PR #23.
 
 **Workflow entry:** `general-improvement`
 
@@ -72,9 +72,6 @@ The latter became a failing test before its command boundary was corrected.
 | `tests/` | Refactor safety | Fast behavioral, CLI, arithmetic/verifier, validation-command, and architecture contracts. |
 | `sqsearch/` | Maintained Rust | Tier-1 screening annealer, still independently checked against Python validity. |
 
-There are 14 maintained package modules, 29 case modules, 15 developer-tool modules, and
-six explicit pytest files.
-Empty package markers are included in those module counts.
 The architecture test enforces these dependency rules:
 
 1. top-level foundations do not import research, campaign, cases, or devtools;
@@ -133,7 +130,7 @@ The initial behavior contracts cover:
 - module placement and one-way imports;
 - command help being read-only for campaign and case programs;
 - validation selection, worker errors, strict-mode constraints, and tier discovery;
-- the current 56 mutation controls, including the validation command itself.
+- the full mutation-control suite, including the validation command itself.
 
 The validation command retains the independent proof scripts, property checks, replay,
 schemas, goldens, differential checks, and Rust checks instead of duplicating them as
@@ -211,16 +208,16 @@ does not accept their rebuilt output.
 CI does not carry a separate test recipe.
 
 The first clean remote run and its workflow contract test found three integration
-defects (D219–D221). Both jobs now fetch complete history because the full gate verifies
-36 historical engine commits, and the uv cache dependency glob is correctly relative to
-the action’s packing working directory.
+defects (D-226–D-228). Both jobs now fetch complete history because the full gate
+verifies 36 historical engine commits, and the uv cache dependency glob is correctly
+relative to the action’s packing working directory.
 The workflow parser also treats YAML 1.1’s boolean interpretation of `on` explicitly.
 A pytest architecture contract parses both jobs and enforces those settings.
 
 The final rebase onto PR #22’s workflow-entry change retained the new resumable campaign
 session contract and migrated its commands to the maturity-separated module paths.
-It also expanded the private-snapshot suite from 38 baseline controls to 56 current
-controls; all fire against the rebased tree.
+It also expanded the private-snapshot suite from 38 baseline controls to 58 controls on
+the merged tree; all fire against the rebased tree.
 
 [`development.md`](../../../../development.md) now documents setup, E0–E3 placement,
 dependency flow, commands, CLI semantics, quality tools, red-green-refactor practice,
@@ -254,15 +251,16 @@ The change is complete when all of the following are green on the final tree:
 - [x] Ruff and BasedPyright report zero warnings.
 - [x] Fast pytest contracts and the missing-collection negative control pass.
 - [x] `packing-validate` replaces `test.sh` and its own failure paths are tested.
-- [x] The 56 mutation controls target current paths and fire in isolated snapshots.
+- [x] The 58 mutation controls target current paths and fire in isolated snapshots.
 - [x] All application-like Bash entry points have Python replacements.
 - [x] Campaign and generated-view writes use explicit atomic boundaries where a complete
   replacement is the contract.
 - [x] CI runs the locked full validation command on Python 3.14.
 - [x] README, synopsis, campaign record, generated views, and code references agree with
   the new layout.
-- [x] Final full local `packing-validate` transcript is green on the latest PR #22 base:
-  all 31 steps passed in 82.01 seconds.
+- [x] The post-merge readiness review passed all 31 local `packing-validate` steps in
+  113.31 seconds with 36 pytest contracts, 58 mutation controls, and the reconciled
+  239-defect record.
 - [x] Stacked PR checks are green on implementation commit `8f53f8e`: Linux validation
   passed in 2 minutes 48 seconds and macOS portability passed in 5 minutes 10 seconds.
 

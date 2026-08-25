@@ -4,7 +4,7 @@ An [experiment loop](../../../.agents/skills/experiment-loop/SKILL.md) for the d
 square-packing research program.
 This file owns W6, `research-loop`: the contract every experiment round runs under—the
 question, metric vector, accept rule, and budget.
-The [synopsis](../SYNOPSIS.md#workflow-entry-contracts) owns the six workflow entry
+The [synopsis](../SYNOPSIS.md#workflow-entry-contracts) owns the seven workflow entry
 points and the distinction among campaign, series, session, experiment, round, and run.
 It is frozen while rounds are running — see
 [what a runner may not do](#what-a-runner-may-not-do).
@@ -97,15 +97,20 @@ principles continue to constrain and contribute to the work.
 
 The protocol is agent-neutral.
 Its authoritative state is the repository: the hypothesis and idea board say what may be
-tried, `tbd` says what is ready, an [agent-session artifact](agent-sessions/README.md)
-says what this session is trying and when it stops, and experiments, defects, commits,
-and bead notes preserve what happened.
+tried, `tbd` owns dependencies and tracked work, the active launch agenda freezes the
+executable portfolio when bead state is under reconciliation, and an
+[agent-session artifact](agent-sessions/README.md) says what this session is trying and
+when it stops. Experiments, defects, commits, and bead notes preserve what happened.
 Conversation history, a native goal, and a watchdog are useful controllers, but none is
 the only copy of a decision or result.
 
 ### Default Clocks
 
-An agent-session artifact may tighten these defaults before work starts.
+An active agent-session artifact also records one absolute start and deadline bounded by
+its wall budget; a new phase cannot reset them.
+Ordinary phases end before the finalization reserve; one explicitly designated final
+phase may use that reserve for reconciliation.
+It may tighten these defaults before work starts.
 It may not relax them after seeing a result.
 A long numerical or proof computation keeps its separately preregistered round timebox,
 while the agent still checkpoints its supervision work on this cadence.
@@ -159,17 +164,20 @@ or outranks the queue under an explicit re-screen.
 ### Workflow Checkpoints
 
 At a slice boundary, either renew W6 under a newly stated question or close the phase.
-Close it before changing purpose or focus: record status, evidence, stop reason, and
-next action in the agent-session artifact.
+A renewal closes the old phase and opens another with a changed objective, a new clock,
+and the new evidence that earns another slice; workflow and focus may stay the same.
+Close the active phase before changing purpose or focus: record status, evidence, stop
+reason, and next action in the agent-session artifact.
 A promoted, novel, disputed, or otherwise high-risk claim receives an independent W2
 audit. A routine guarded result whose preregistered criterion and independent replay
 already decide its claim may proceed directly to W3 or another W6 slice.
-Generating a successor hypothesis enters W3; repairing the loop enters W4; and
-optimizing a measured bottleneck enters W5. Bounded implementation remains inside
-whichever workflow owns its promised output.
-A W6 phase may prepare its registered instrument under that contract, but measurement
-begins only after the hypothesis, criterion, budget, and instrument are ready and
-frozen.
+Generating a successor hypothesis enters W3; reviewing a process failure enters W4;
+optimizing a measured bottleneck enters W5; and building or repairing a reusable
+packing-pipeline capability enters W7. A W6 phase may prepare an instrument specific to
+its registered round, but measurement begins only after the hypothesis, criterion,
+budget, and instrument are ready and frozen.
+A missing cross-round capability or a material change to a shared trust boundary stops
+W6 and hands off to W7, then W2 when independent review is required.
 
 A user request may cause the same transition immediately, but it does not erase the
 phase already performed.
@@ -372,6 +380,8 @@ validity, lifecycle recovery, durable reports, and per-cell queue pricing remain
 Use the
 [current readiness agenda](../docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md)
 for the exact 8-hour and 24-hour gate.
+The H-020/exp-011 identifiers below are a historical lifecycle example, not a
+copy-pastable ready round; `status` and the confidence ladder own the live queue.
 
 ```shell
 cd explorations/packing

@@ -411,6 +411,36 @@ def check(
         if status in {"completed", "stopped"} and not reason:
             problems.append(f"{name}: terminal session has no stop_reason")
 
+        session_started = offset_timestamp(session.get("started_at"))
+        session_deadline = offset_timestamp(session.get("deadline_at"))
+        if status == "in_progress":
+            if session_started is None:
+                problems.append(f"{name}: in-progress session needs an offset-aware started_at")
+            if session_deadline is None:
+                problems.append(
+                    f"{name}: in-progress session needs an offset-aware deadline_at"
+                )
+        if session.get("started_at") is not None and session_started is None:
+            problems.append(f"{name}: started_at is not an offset-aware ISO timestamp")
+        if session.get("deadline_at") is not None and session_deadline is None:
+            problems.append(f"{name}: deadline_at is not an offset-aware ISO timestamp")
+        if session_started is not None and session_deadline is not None:
+            if session_deadline <= session_started:
+                problems.append(f"{name}: deadline_at is not after started_at")
+            elif (session_deadline - session_started).total_seconds() > (
+                session.get("budget", {}).get("wall_minutes", 0) * 60
+            ):
+                problems.append(f"{name}: deadline_at exceeds budget.wall_minutes")
+        clocked = session_started is not None and session_deadline is not None
+        current = now if now.tzinfo is not None else now.replace(tzinfo=dt.UTC)
+        if (
+            status == "in_progress"
+            and clocked
+            and session_deadline is not None
+            and session_deadline <= current
+        ):
+            problems.append(f"{name}: in-progress session deadline_at has passed")
+
         phases = session.get("workflow_phases") or []
         if not phases:
             problems.append(f"{name}: session has no workflow phase history")
@@ -426,16 +456,22 @@ def check(
                 phase_status = phase.get("status")
                 phase_reason = phase.get("stop_reason")
                 recording = phase.get("recording")
+                clock_role = phase.get("clock_role")
+                if clocked and recording != "contemporaneous":
+                    problems.append(
+                        f"{name}: clocked workflow phase {number} must be contemporaneous"
+                    )
                 if index and phase.get("entered_by") == "session_start":
                     problems.append(f"{name}: workflow phase {number} reuses session_start")
                 if index and not phase.get("switch_reason"):
                     problems.append(f"{name}: workflow phase {number} has no switch_reason")
                 if index and all(
                     phase.get(field) == phases[index - 1].get(field)
-                    for field in ("workflow", "focus")
+                    for field in ("workflow", "focus", "objective")
                 ):
                     problems.append(
-                        f"{name}: workflow phase {number} changes neither workflow nor focus"
+                        f"{name}: workflow phase {number} changes neither workflow, "
+                        "focus, nor objective"
                     )
                 if recording == "retrospective" and phase_status == "in_progress":
                     problems.append(
@@ -443,6 +479,11 @@ def check(
                         "contemporaneously recorded"
                     )
                 if recording == "contemporaneous":
+                    if clocked and clock_role is None:
+                        problems.append(
+                            f"{name}: clocked contemporaneous workflow phase {number} "
+                            "has no clock_role"
+                        )
                     for field in (
                         "budget_minutes",
                         "started_at",
@@ -475,6 +516,76 @@ def check(
                             f"{name}: workflow phase {number} deadline_at is not "
                             "after started_at"
                         )
+                    if (
+                        phase_status == "in_progress"
+                        and deadline is not None
+                        and deadline <= current
+                    ):
+                        problems.append(
+                            f"{name}: in-progress workflow phase {number} deadline_at "
+                            "has passed"
+                        )
+                    phase_budget = phase.get("budget_minutes")
+                    if (
+                        started is not None
+                        and deadline is not None
+                        and phase_budget is not None
+                        and (deadline - started).total_seconds() > phase_budget * 60
+                    ):
+                        problems.append(
+                            f"{name}: contemporaneous workflow phase {number} "
+                            "deadline_at exceeds budget_minutes"
+                        )
+                    if (
+                        session_started is not None
+                        and started is not None
+                        and started < session_started
+                    ):
+                        problems.append(
+                            f"{name}: contemporaneous workflow phase {number} "
+                            "starts before the session"
+                        )
+                    if (
+                        session_deadline is not None
+                        and deadline is not None
+                        and deadline > session_deadline
+                    ):
+                        problems.append(
+                            f"{name}: contemporaneous workflow phase {number} "
+                            "deadline_at exceeds session deadline"
+                        )
+                    reserve_start = (
+                        session_deadline
+                        - dt.timedelta(
+                            minutes=session.get("budget", {}).get("finalization_minutes", 0)
+                        )
+                        if session_deadline is not None
+                        else None
+                    )
+                    if (
+                        clock_role == "work"
+                        and reserve_start is not None
+                        and deadline is not None
+                        and deadline > reserve_start
+                    ):
+                        problems.append(
+                            f"{name}: workflow phase {number} work deadline enters "
+                            "finalization reserve"
+                        )
+                    if clock_role == "finalization":
+                        if index != len(phases) - 1:
+                            problems.append(
+                                f"{name}: finalization workflow phase {number} must be final"
+                            )
+                        if (
+                            reserve_start is not None
+                            and started is not None
+                            and started < reserve_start
+                        ):
+                            problems.append(
+                                f"{name}: finalization workflow phase {number} starts "
+                                "before reserve"
+                            )
                 if phase_status == "in_progress" and phase_reason is not None:
                     problems.append(
                         f"{name}: in-progress workflow phase {number} has stop_reason"
@@ -496,11 +607,128 @@ def check(
                     problems.append(f"{name}: only the final workflow phase may be in_progress")
             if phases[-1].get("status") != status:
                 problems.append(f"{name}: session status does not match final workflow phase")
+            if status in {"completed", "stopped"} and session.get("progress", {}).get(
+                "after"
+            ) in (None, ""):
+                problems.append(f"{name}: terminal session needs nonempty progress.after")
+            contemporaneous = [
+                phase for phase in phases if phase.get("recording") == "contemporaneous"
+            ]
+            max_cycles = session.get("budget", {}).get("max_cycles")
+            if max_cycles is not None and len(contemporaneous) > max_cycles:
+                problems.append(
+                    f"{name}: contemporaneous workflow phases exceed budget.max_cycles"
+                )
         for delegation in session.get("delegations") or []:
+            delegation_status = delegation.get("status")
+            delegation_recording = delegation.get("recording")
+            if clocked and delegation_recording is None:
+                problems.append(f"{name}: clocked delegation has no recording")
+            if (
+                delegation_status in {"queued", "in_progress"}
+                and delegation_recording != "contemporaneous"
+            ):
+                problems.append(f"{name}: active delegation must be contemporaneous")
             elapsed = delegation.get("elapsed_seconds")
             quality = delegation.get("elapsed_quality")
-            if (quality == "unavailable") != (elapsed is None):
+            if quality is None and elapsed is not None:
+                problems.append(f"{name}: delegation elapsed value has no quality")
+            elif quality is not None and (quality == "unavailable") != (elapsed is None):
                 problems.append(f"{name}: delegation elapsed value and quality disagree")
+            if delegation_status in {"queued", "in_progress"}:
+                for field in (
+                    "phase",
+                    "budget_minutes",
+                    "expected_output",
+                    "validation_command",
+                    "kill_condition",
+                    "fallback",
+                    "write_scope",
+                    "excluded_commands",
+                ):
+                    value = delegation.get(field)
+                    if value is None or (isinstance(value, (str, list)) and not value):
+                        problems.append(
+                            f"{name}: {delegation_status} delegation has no {field}"
+                        )
+                validation_command = delegation.get("validation_command") or ""
+                if "uv run" in validation_command and "--frozen" not in validation_command:
+                    problems.append(
+                        f"{name}: {delegation_status} delegation has an unfrozen uv command"
+                    )
+                phase_number = delegation.get("phase")
+                if isinstance(phase_number, int) and not 1 <= phase_number <= len(phases):
+                    problems.append(
+                        f"{name}: {delegation_status} delegation references unknown "
+                        f"workflow phase {phase_number}"
+                    )
+            delegation_started = offset_timestamp(delegation.get("started_at"))
+            delegation_deadline = offset_timestamp(delegation.get("deadline_at"))
+            if delegation_status == "in_progress" and (
+                delegation_started is None or delegation_deadline is None
+            ):
+                problems.append(
+                    f"{name}: in-progress delegation needs offset-aware started_at "
+                    "and deadline_at"
+                )
+            if (
+                delegation_status == "in_progress"
+                and delegation_deadline is not None
+                and delegation_deadline <= current
+            ):
+                problems.append(f"{name}: in-progress delegation deadline_at has passed")
+            if delegation.get("started_at") is not None and delegation_started is None:
+                problems.append(f"{name}: delegation started_at is not offset-aware")
+            if delegation.get("deadline_at") is not None and delegation_deadline is None:
+                problems.append(f"{name}: delegation deadline_at is not offset-aware")
+            if delegation_started is not None and delegation_deadline is not None:
+                if delegation_deadline <= delegation_started:
+                    problems.append(f"{name}: delegation deadline_at is not after started_at")
+                delegation_budget = delegation.get("budget_minutes")
+                if (
+                    delegation_budget is not None
+                    and (delegation_deadline - delegation_started).total_seconds()
+                    > delegation_budget * 60
+                ):
+                    problems.append(f"{name}: delegation deadline_at exceeds budget_minutes")
+                if session_deadline is not None and delegation_deadline > session_deadline:
+                    problems.append(f"{name}: delegation deadline_at exceeds session deadline")
+                phase_number = delegation.get("phase")
+                if isinstance(phase_number, int) and 1 <= phase_number <= len(phases):
+                    phase_deadline = offset_timestamp(
+                        phases[phase_number - 1].get("deadline_at")
+                    )
+                    if phase_deadline is not None and delegation_deadline > phase_deadline:
+                        problems.append(
+                            f"{name}: delegation deadline_at exceeds workflow phase "
+                            f"{phase_number} deadline"
+                        )
+            if delegation_status in {"completed", "blocked", "canceled"} and (
+                delegation_recording == "contemporaneous" or clocked
+            ):
+                for field in (
+                    "phase",
+                    "outcome",
+                    "evidence",
+                    "files",
+                    "checks",
+                    "uncertainty",
+                    "elapsed_quality",
+                ):
+                    value = delegation.get(field)
+                    missing = value is None or (
+                        field not in {"files", "checks"}
+                        and isinstance(value, (str, list))
+                        and not value
+                    )
+                    if missing:
+                        problems.append(f"{name}: terminal delegation has no {field}")
+                phase_number = delegation.get("phase")
+                if isinstance(phase_number, int) and not 1 <= phase_number <= len(phases):
+                    problems.append(
+                        f"{name}: terminal delegation references unknown workflow "
+                        f"phase {phase_number}"
+                    )
 
     problems += naming(series, explorations, hypotheses, experiments, sessions, agendas=agendas)
     problems += dead_links()
