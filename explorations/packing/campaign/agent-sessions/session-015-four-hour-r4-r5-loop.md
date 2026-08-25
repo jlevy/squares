@@ -90,13 +90,20 @@ session:
       think-1s0h; close the phase as blocked or stopped and rotate to an independent
       source-bound W1, W2, W3, W5, or W7 slice from the documented portfolio.
     outcome: null
-    evidence: []
+    evidence:
+    - >-
+      Exp-040 froze the six-case acceptance criterion at a36ab73; independent
+      pre-measurement audit then blocked execution until the corrected closed-interval,
+      stress, zero-axis, control-count, and run-provenance guards were pushed at 409f1c8.
+    - >-
+      Three disjoint read-only derivations supplied a shared rational half-angle path,
+      an independent R5 construction, the complete owner-feature perimeter, controls,
+      and the unresolved fallback.
     stop_reason: null
     next_action: >-
-      Under think-1s0h and BC-010, read the R4/R5 generators and exp-039 path
-      construction, freeze the smallest exact criterion before running target code, and
-      delegate disjoint derivation and independent-review tasks while the coordinator
-      owns shared records and verdicts.
+      Implement and independently review the frozen exp-040 six-case criterion without
+      changing its interval, branches, acceptance rule, or claim limits; retain the
+      finite first undecided numerator if the phase deadline arrives first.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -177,6 +184,106 @@ session:
     elapsed_quality: unavailable
     next_action: Delegate disjoint R4 derivation, R5 derivation, and soundness review in phase 2.
     phase: 1
+  - task: Derive an exact nonlinear R4 candidate and its finite proof obligations.
+    operator: /root/r4_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Derived an affine-center rational half-angle path whose zero derivative is the
+      canonical R4 representative at A, the midpoint, and B, together with exact wall
+      and contact slacks, the twelve owner-feature cells, controls, and an unresolved
+      fallback.
+    evidence:
+    - The center path is the pointwise midpoint of exp-039's accepted R3 and R6 paths.
+    - Two mandatory nonlinear slacks have explicit positive rational formulas.
+    files: []
+    checks:
+    - Read-only exact derivation from exp-038 and exp-039 source maps.
+    uncertainty: The universal finite numerator table and executable checker remain to be built.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Implement only the frozen shared R4/R5 checker module.
+    phase: 2
+  - task: Independently derive a nonlinear R5 candidate and stress continuation.
+    operator: /root/r5_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Derived a second exact R5 construction, its universal gap table, and a positive
+      two-owner stress continuation, independently confirming that R5 has a plausible
+      exact realization rather than an evident second-order obstruction.
+    evidence:
+    - Exact endpoint fixtures passed at all three strata in the delegate's discovery run.
+    - An overlong interior path failed the expected square-0 wall control.
+    files: []
+    checks:
+    - Read-only derivation plus non-retained discovery fixtures.
+    uncertainty: >-
+      The alternative equality-preserving path is discovery evidence only; exp-040
+      freezes the simpler shared affine-center path and must prove R5 directly.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Audit the frozen implementation's controls without substituting fixtures for proof.
+    phase: 2
+  - task: Audit the narrowest sound R4/R5 criterion and forbidden inferences.
+    operator: /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Approved one conjunctive two-sign by three-stratum experiment provided that each
+      case has an exact universal feasibility proof, direct source binding, both owner
+      branches, independent fixtures, and its own disposition.
+    evidence:
+    - The audit supplied an explicit no-overclaim boundary and required unresolved routing.
+    files: []
+    checks:
+    - Read-only comparison of H-023, exp-038, exp-039, the synopsis, and source code.
+    uncertainty: An accepted path remains pathwise evidence, not an A-to-B stationary connector.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Audit exp-040 before retained target measurement.
+    phase: 2
+  - task: Audit the frozen exp-040 criterion before target measurement.
+    operator: /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Blocked measurement on three criterion defects: strict inequalities that failed at
+      the closed interval's base point, an underfrozen stress and zero-axis gate, and
+      prospective clean-run commit fields. The corrected criterion was pushed before
+      target execution.
+    evidence:
+    - >-
+      Commit 409f1c8 distinguishes base-point equality from positive-u slack, freezes
+      exact weights and coefficient cancellation, requires the complete zero-axis
+      inventory and twenty named controls, and removes prospective run provenance.
+    files: []
+    checks:
+    - exp-040 validates against Experiment/v2 after the correction.
+    uncertainty: The checker still has to execute every corrected guard.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Measure only the corrected criterion at 409f1c8.
+    phase: 2
+  - task: Derive the executable control matrix and retained invariants for exp-040.
+    operator: /root/r5_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Produced label-level invariants for all six paths, universal rational sign
+      certificates, fixtures, zero axes, owner stresses, replay, and an anti-sampling
+      polynomial that passes the natural fixtures but fails inside the interval.
+    evidence:
+    - The test plan distinguishes the R4 and R5 tied wall-feature labels exactly.
+    - Twelve target and twelve R3/R6 positive-control fixtures have precomputed exact counts.
+    files: []
+    checks:
+    - Read-only exact probes only; no target gate or retained record ran.
+    uncertainty: The implementation must turn the test plan into executable rejection controls.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Review the generated record against exact label and coefficient equality.
+    phase: 2
   outputs:
   - campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md
   - campaign/agent-sessions/README.md
@@ -184,6 +291,7 @@ session:
   - campaign/ledger.md
   - SYNOPSIS.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md
   checks:
   - >-
     softschema validate campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md
@@ -193,6 +301,8 @@ session:
   - >-
     packing-validate --fast --jobs 2 --inner-jobs 1 passed all 15 selected steps and
     89 tests in 24.28 seconds.
+  - exp-040 validates against Experiment/v2 before target execution.
+  - packing-ledger check recognizes 40 rounds with exp-040 in progress.
   stop_reason: null
   next_action: >-
     Complete the active R4/R5 cycle for BC-010 under think-1s0h by
