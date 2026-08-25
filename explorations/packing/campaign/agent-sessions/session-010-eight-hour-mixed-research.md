@@ -684,7 +684,7 @@ session:
       Resolve D-272 by deleting only the obsolete macOS expected-failure classifier and
       making its unchanged focused deep-golden command a direct blocking workflow step,
       with a deterministic workflow contract and no golden or numerical change.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       The portable probe itself passed; only the temporary guard that was designed to
@@ -708,8 +708,8 @@ session:
     outcome: >-
       The obsolete classifier and its dedicated test are removed; macOS now runs the
       identical focused deep command directly and blockingly. Independent review found
-      and resolved D-273's advisory-variant gap, with no remaining P0/P1 in the delta;
-      D-272 and D-203 still await fresh portable CI.
+      and resolved D-273's advisory-variant gap, and fresh Linux plus macOS CI are green.
+      D-272 and the narrowly scoped D-203 are fixed.
     evidence:
     - >-
       The workflow has exactly one focused deep step, no job- or step-level
@@ -724,8 +724,50 @@ session:
     - >-
       The normal complete gate passes all 31 steps in 97.68 wall-seconds, including 59
       behavioral tests and all 62 mutation controls.
+    - >-
+      PR 29 head b582fe1 passes Linux validation in 3m12s and macOS portability in
+      4m32s, including the direct blocking focused deep golden.
+    stop_reason: >-
+      The exact workflow promotion, strengthened control, independent review, complete
+      local gate, and both portable CI receipts were complete inside the phase budget.
+    next_action: >-
+      Close only D-272 and D-203, retain broader producer-health work, and begin frozen
+      order 6 pair-test metering.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    objective: >-
+      Execute frozen order 6: reconcile think-b4jc with think-krqi, define one exact
+      pair-test counting contract across current search paths, and land the smallest
+      counter-to-JSONL vertical slice or identify the first unmetered move path.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The D-203/D-272 correctness line is portably green and closed; the frozen queue now
+      advances to its first independent efficiency capability without another solver
+      or golden continuation.
+    budget_minutes: 30
+    started_at: '2026-08-25T03:23:08-07:00'
+    deadline_at: '2026-08-25T03:53:08-07:00'
+    expected_output: >-
+      One exact pair-test counting contract and the smallest counter-to-JSONL vertical
+      slice, or a durable interface decision naming the first path that cannot yet be
+      counted identically.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --all-extras --group dev
+      pytest -q
+    kill_condition: >-
+      Stop implementation at twenty minutes and reserve ten for review and checkpoint;
+      do not substitute moves or wall time, change a search criterion, or begin order 7
+      unless exact seeded counter equality is available.
+    fallback: >-
+      Retain the interface decision and first unmetered path, leave think-b4jc open, and
+      route the next session phase to frozen order 13.
+    outcome: null
+    evidence: []
     stop_reason: null
-    next_action: Commit and push the reviewed D-272 promotion, then await both fresh CI jobs.
+    next_action: Reconcile the two metering beads and inspect the current event/search interfaces.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -1766,10 +1808,13 @@ session:
   - >-
     The final D-272 tree passes all 31 normal validation steps in 97.68 wall-seconds,
     including 59 behavioral tests, 62 mutation controls, and 274 synchronized defects.
+  - >-
+    PR 29 head b582fe1 passes Linux validation in 3m12s and macOS portability in 4m32s;
+    the latter includes the direct blocking focused deep golden.
   stop_reason: null
   next_action: >-
-    Commit and push the final D-272 delta, then require both fresh CI jobs before
-    closing D-272 or D-203.
+    Close only D-272 and D-203, retain broader producer-health work, and execute frozen
+    order 6 pair-test metering under phase 14.
 ---
 ## Session Boundary
 

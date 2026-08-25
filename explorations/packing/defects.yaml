@@ -5208,7 +5208,7 @@ defects:
   detected_by: gate
   latent_for: since typed fixed-cell termination exposed the small-n drift
   severity: high
-  status: outstanding
+  status: fixed
   what: >-
     After D-199 restores the n=10 ladder, both declared pool widths still rebuild n=4
     with only 3/4 proposals converged. A bounded four-seed slice isolates seed 0 at side
@@ -5217,19 +5217,20 @@ defects:
     certificates prove the retained 22-by-9 LP feasible and optimal at
     2.00103283426408968; its rank is 9 and condition ratio is about 3.23.
   consequence: >-
-    The strict golden remains red and the extra valid but nonconverged n=4 endpoint
-    cannot be promoted or silently removed. Small-n calibration is not yet a trustworthy
-    unattended launch gate.
+    Before repair, the strict golden was red and the extra valid but nonconverged n=4
+    endpoint could neither be promoted nor silently removed. Small-n calibration could
+    not serve as a trustworthy unattended launch gate.
   fix: >-
-    implemented but not yet end-to-end verified; on status 4 only, retry the identical
-    LP once with highs-ipm under the same 1e-10 tolerances, count and retain both solver
-    attempts, and pass the result through the unchanged complete original-row residual
-    screen
+    On status 4 only, retry the identical LP once with highs-ipm under the same 1e-10
+    tolerances, count and retain both attempts, and apply the unchanged complete
+    original-row residual screen. The bounded seed-0 replay then converged at proved side
+    2.0 with 3,692 of 3,692 fixed-point evaluations settled in 3.490671042 seconds.
   regression: >-
-    the retained millisecond fixture recovers at the certified optimum; ten focused
-    controls cover identical fallback inputs, IPM success, nonfinite and bad-residual
-    refusal, sole-primary infeasibility, mixed-method failure, and complete attempt
-    accounting; one seed-0 end-to-end replay is still required before closure
+    the retained millisecond fixture and ten focused fallback/refusal controls pass; the
+    independent seed-0 verifier accepts all four squares and six zero-gap pairs; the
+    direct blocking macOS deep golden rebuilds n=4 at 4/4 converged and all seven proved
+    ladder rungs; Linux and macOS CI pass at b582fe1. No pool-width-1 or general producer
+    health claim follows.
   bead: think-nr5w
   recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-204
@@ -6998,7 +6999,7 @@ defects:
   detected_by: gate
   latent_for: one repaired D-203 checkpoint
   severity: medium
-  status: outstanding
+  status: fixed
   what: >-
     The temporary macOS classifier correctly required D-203's exact deep-golden failure
     and rejected every other outcome. After the strict-IPM repair made the focused deep
@@ -7008,9 +7009,10 @@ defects:
     rebuilt basin map matched the golden, preventing the repaired portable state from
     becoming a green checkpoint.
   fix: >-
-    Remove the obsolete expected-failure classifier and its dedicated tests, run the
-    focused deep golden directly as a blocking macOS step, and retain a workflow control
-    that forbids `continue-on-error` or the old wrapper.
+    Removed the obsolete expected-failure classifier and its dedicated test, made the
+    unchanged focused deep golden a direct blocking macOS step, and added an exact
+    workflow contract that forbids job- or step-level `continue-on-error`, duplicates,
+    shell-masked success, changed arguments, or the old wrapper.
   regression: >-
     the workflow contract requires one direct blocking `packing-validate --deep --only
     "golden basin maps"` macOS step, and both PR jobs must pass

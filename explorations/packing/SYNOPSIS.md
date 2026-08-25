@@ -2010,30 +2010,34 @@ stress analysis, not another rank count.
 No hour-scale lane is promoted without a known-answer response, independent validity,
 and a result that changes a decision.
 
-**The normal checkpoint is green; the strict unattended-handoff gate is not.** The W7
-and frozen-queue checkpoint passes all 31 normal-gate steps in 103.91 wall-seconds,
-including seven exact small-`n` replays, 51 pytest contracts, and all 62 mutation
-controls. The first deep regeneration reproduced one unsettled `n=4` proposal and an
-`n=10` `1.503e-10` pair-row residual.
+**The normal checkpoint and blocking macOS deep golden are green; broader unattended
+launch is not yet authorized.** The current tree passes all 31 normal-gate steps in
+97.68 wall-seconds, including seven exact small-`n` replays, 59 pytest contracts, and
+all 62 mutation controls.
+The first deep regeneration had reproduced one unsettled `n=4` proposal and an `n=10`
+`1.503e-10` pair-row residual.
 [D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders
 49 and 66 exposes previously clean row 61, which a third conservative call settles with
 zero all-original-row residual.
 All seven ladder rungs now converge at pool widths 10 and 1. [D-203](defects.md)
-isolates the remaining n=4 seed-0 stop as a distinct HiGHS status-4 Solve error; the
-golden remains red at 3/4 n=4 proposals.
+isolated the remaining n=4 seed-0 stop as a distinct HiGHS status-4 Solve error.
 Its retained LP is not malformed or globally ill-conditioned: independent exact
 primal/dual certificates prove the finite optimum `2.00103283426408968`, rank 9, and
 zero duality gap. The failure is dual-simplex presolve/postsolve instability on a thin
 near-degenerate optimal face.
 Strict `highs-ipm` solves the identical LP with zero original-row residual; default
 tolerances and presolve-off simplex are rejected because their residuals exceed `1e-10`.
-[D-272](defects.md) keeps the portable checkpoint red for one narrower reason: the
-temporary macOS expected-failure classifier correctly rejects the now-passing focused
-deep golden until that unchanged command is promoted to a direct blocking CI step.
-[D-266](defects.md) records a soundness error caught in the first fallback draft: a
-primary status 4 followed by IPM status 2 was briefly promoted to mathematical
-infeasibility. The corrected classifier reserves infeasible for a sole primary status-2
-receipt and keeps every mixed-method failure numerical.
+The status-4-only fallback keeps the same LP, tolerances, four-call cap, and all-row
+screen. The bounded seed-0 replay reaches proved side 2 with all 3,692 fixed-point
+evaluations settled; the independent verifier accepts every square and pair.
+The direct blocking macOS deep golden then rebuilds `n=4` at 4/4 converged and passes
+all seven proved ladder rungs.
+[D-272](defects.md) records the removal of the temporary expected-failure wrapper after
+that recovery, with Linux and macOS green at `b582fe1`. [D-266](defects.md) records a
+soundness error caught in the first fallback draft: a primary status 4 followed by IPM
+status 2 was briefly promoted to mathematical infeasibility.
+The corrected classifier reserves infeasible for a sole primary status-2 receipt and
+keeps every mixed-method failure numerical.
 [D-260](defects.md) through [D-262](defects.md) record and correct the fixture-capture
 hazards found before commit: a cross-wired geometric context, a receipt that initially
 defined its own acceptance, and a pytest-only completion claim while static checks were
@@ -2043,9 +2047,10 @@ solve whose original-row residuals remain at or below `1e-10`. [D-263](defects.m
 records a coordinator recurrence during that reconciliation: a status-only patch again
 touched D-034 instead of the named new defect.
 The exact named-status audit restored D-034 and closed only D-260 through D-263.
-[D-225](defects.md) keeps that strict/deep failure as a blocker for unattended launch
-and any claim that the producer is healthy, but not for a checkpoint merge whose normal
-gate passes and whose limitations remain explicit.
+[D-225](defects.md) preserves the decision boundary: a normal no-skip gate and owned
+limitations suffice for a checkpoint merge, while unattended execution requires fresh
+strict/deep evidence.
+It does not turn this repaired small-`n` result into a general producer-health claim.
 [D-202](defects.md) separately keeps final-receipt capture open after one delegated long
 command terminated without returning its output; the evidentiary rerun used a durable
 parent-owned session.
@@ -2056,9 +2061,10 @@ portable yielded-command and terminal-polling rehearsal.
 review: an explicitly excluded strict run was terminated by exact process group, its
 partial output discarded, and `think-ysz2` owns explicit command and wall ceilings for
 future bounded delegations.
-The research result does not depend on that path, but an unattended numerical campaign
-remains blocked until D-203 is fixed, the quench budget is work-based, and the golden
-known-answer response is stable.
+The repaired small-`n` path no longer blocks the campaign, but unattended numerical work
+still lacks a reproducible work-based quench budget ([D-126](defects.md)), outer
+deadlines and process-group cleanup for every validation step ([D-239](defects.md)), and
+portable terminal-receipt discipline for delegated long commands ([D-202](defects.md)).
 
 **One open measurement defect constrains timing forecasts.** [D-101](defects.md): the
 historical exp-007/008 round-level wall times disagree with retained per-call durations.
