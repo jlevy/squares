@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 259
+count: 265
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -6678,3 +6678,158 @@ defects:
   recurrence_of: D-027
   bead: think-5tc9
   recorded_in: ../../.flowmarkignore
+- id: D-260
+  title: A solver fixture cross-wired two fixed-point evaluations
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: control_cell
+  latent_for: one delegated capture, before persistence
+  severity: high
+  status: fixed
+  what: >-
+    The first delegated n=4 seed-0 capture paired the A_ub and b_ub supplied to the
+    status-4 HiGHS call with theta and a separating cell retained from another
+    fixed-point evaluation. The recorded cell's first axis was diagonal, while row 16
+    of the alleged matrix used the near-zero/unit axis from the actual failing call.
+  consequence: >-
+    A direct replay of the stored matrix could have reproduced the solver receipt while
+    falsely claiming that a different geometric state generated it. That would make
+    model-construction drift indistinguishable from solver instability and invalidate
+    the planned diagnosis.
+  fix: >-
+    Discard the cross-wired artifact, bind theta and cell within the same solve_cell
+    invocation as the failing linprog call, and persist only the independently rebuilt
+    replacement whose 22 A_ub rows and 22 b_ub values match exactly.
+  regression: >-
+    The millisecond fixture test reconstructs the LP without solve_cell, exact-compares
+    its f64 inputs, and proves that substituting the cross-wired first cell axis breaks
+    the comparison
+  bead: think-mybt
+  recorded_in: tests/test_research_contracts.py
+- id: D-261
+  title: The replay fixture was allowed to define its own failure receipt
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated test implementation, before commit
+  severity: high
+  status: fixed
+  what: >-
+    The first fixture test compared the live solver outcome with the status, success
+    flag, and message loaded from the same mutable YAML fixture. It did not independently
+    assert that the retained failure was specifically HiGHS status 4.
+  consequence: >-
+    Coordinated drift in the fixture could redefine the acceptance rule and make a
+    different solver refusal pass as a replay of D-203. The test would remain green
+    while no longer measuring the failure it claimed to preserve.
+  fix: >-
+    Freeze success false, status 4, and the exact retained message in test code before
+    classifying the live replay, while accepting only a successful solve with a finite
+    nine-variable result and every original-row residual at or below 1e-10 as the
+    portable alternative.
+  regression: >-
+    The fixture receipt must equal the hard-coded status-4 triple before the direct
+    solver replay is classified
+  bead: think-hi4t
+  recorded_in: tests/test_research_contracts.py
+- id: D-262
+  title: A delegated fixture stopped after pytest while static checks were red
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: flattering
+  detected_by: gate
+  latent_for: one delegated test implementation, before commit
+  severity: medium
+  status: fixed
+  what: >-
+    The delegated fixture implementation reported completion after its focused pytest
+    passed, but Ruff still found unsorted and unused imports and BasedPyright found six
+    unsafe object conversions in the fixture parser.
+  consequence: >-
+    The task receipt overstated readiness and would have handed a red maintained static
+    gate to the checkpoint integrator even though the runtime test was green.
+  fix: >-
+    Remove the unused import, normalize import order, narrow every untyped YAML boundary
+    through checked helpers, and run focused Ruff, BasedPyright, and pytest before
+    accepting the delegated result.
+  regression: >-
+    Ruff passes, BasedPyright reports zero findings, and the fixture replay test passes
+    in 0.33 seconds
+  bead: think-35aa
+  recorded_in: tests/test_research_contracts.py
+- id: D-263
+  title: A second status-only patch closed D-034 instead of the named defect
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted defect reconciliation
+  severity: high
+  status: fixed
+  what: >-
+    While closing D-260 through D-262, the coordinator again patched a repeated
+    `status: outstanding` line without including the defect id in the hunk. The first
+    match changed D-034, the live basin-family identity defect, while D-260 stayed open.
+  consequence: >-
+    The canonical log briefly hid a substantive unresolved identity problem and
+    contradicted both the intended closure and D-258's immediately preceding lesson.
+  fix: >-
+    Restore D-034 to outstanding, close D-260 with an id-and-title-anchored hunk, inspect
+    the named status set explicitly, and record the recurrence before validation.
+  regression: >-
+    The checkpoint audit prints and checks D-034 outstanding, D-042 fixed, and D-260
+    through D-263 fixed before rendering the generated defect view
+  recurrence_of: D-258
+  bead: think-h7yd
+  recorded_in: defects.yaml
+- id: D-264
+  title: An active session ended its workflow list on a completed phase
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted phase-boundary update
+  severity: medium
+  status: fixed
+  what: >-
+    Phase 8 was correctly marked complete, but session-010 remained in progress and no
+    in-progress phase 9 had yet been appended. The session validator requires the active
+    session status to agree with its final workflow phase.
+  consequence: >-
+    The portable handoff could not tell whether work had stopped or moved to the already
+    planned W2 diagnosis, and the canonical ledger refused to render the ambiguity.
+  fix: >-
+    Preserve phase 8 as terminal and append portfolio order 5 as an explicit in-progress
+    W2 factual-review phase with its own 30-minute contract.
+  regression: packing-ledger check requires the session and final-phase statuses to agree
+  bead: think-lo31
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-265
+  title: Two delegation deadlines exceeded their declared budgets
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: gate
+  latent_for: one uncommitted delegation reconciliation
+  severity: medium
+  status: fixed
+  what: >-
+    The n4 fixture-design and first implementation receipts declared deadline intervals
+    longer than their budget_minutes fields even though both tasks had remained bounded.
+  consequence: >-
+    The durable record understated the time authority granted to two delegates and
+    failed the session ledger's deadline arithmetic.
+  fix: >-
+    Set the design budget to its full 15-minute window and the first implementation
+    budget to its full 17-minute window without changing either recorded deadline.
+  regression: packing-ledger check validates every delegation deadline against its budget
+  bead: think-qefb
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md

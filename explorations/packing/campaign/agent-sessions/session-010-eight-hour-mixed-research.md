@@ -405,7 +405,7 @@ session:
       Capture the exact n=4 seed-0 HiGHS status-4 solve failure—theta, separating cell,
       LP inputs, solver status, and replay—as a millisecond fixture before attempting a
       diagnosis or repair.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       Exp-038 is terminal and independently reviewed. The frozen portfolio's next
@@ -428,10 +428,68 @@ session:
     fallback: >-
       Retain the first exact theta, cell, LP arrays, and typed solver receipt that still
       reproduce; leave diagnosis and repair to portfolio order 5.
+    outcome: >-
+      Retained one exact same-call n=4 seed-0 fixture that reconstructs every LP input,
+      rejects a cross-wired geometric context, and replays the status-4 call in 0.33
+      seconds without running the golden or changing any tolerance or map value.
+    evidence:
+    - >-
+      Seed 0 reproduced in 2.77 seconds and failed only at fixed-point evaluation 2,884
+      and LP call 3,404; the direct fixture replay returns the retained HiGHS status 4.
+    - >-
+      The fixture binds incoming theta and centres, the six-row separating cell, exact
+      f64 objective/A_ub/b_ub/bounds/options, and NumPy/SciPy/platform provenance from
+      one solve_cell invocation.
+    - >-
+      Independent reconstruction exact-matches all 22 A_ub rows and all 22 b_ub values;
+      mutating the first cell axis rejects the cross-wired context caught as D-260.
+    - >-
+      The test hard-codes the status-4 receipt and admits a platform-dependent successful
+      replay only when its nine variables are finite and all original-row residuals are
+      at or below the unchanged 1e-10 screen.
+    - >-
+      D-260 through D-263 preserve the cross-wired capture, self-defining receipt,
+      pytest-only completion, and repeated status-patch errors caught before commit.
+    stop_reason: >-
+      The fallback deliverable was complete and independently replayable inside the
+      implementation budget; diagnosis is a distinct W2 phase under the frozen order.
+    next_action: >-
+      Commit and push the fixture checkpoint, then independently diagnose the exact LP
+      under portfolio order 5 without inferring solver health from one retry.
+  - workflow: factual-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Independently diagnose the retained n=4 seed-0 LP: distinguish a malformed or
+      ill-conditioned model from a platform-dependent HiGHS failure, and decide whether
+      exactly one bounded W7 repair is earned.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      Portfolio order 4 produced the required exact millisecond fixture without changing
+      the solver or golden, so order 5's independent factual review is now unblocked.
+    budget_minutes: 30
+    started_at: '2026-08-25T02:31:00-07:00'
+    deadline_at: '2026-08-25T03:01:00-07:00'
+    expected_output: >-
+      One source-independent diagnosis using the retained exact LP, numerical condition
+      and feasibility evidence, and alternate-solver or rescaling controls; then a
+      repair/no-repair decision with explicit uncertainty.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --all-extras --group dev
+      pytest -q tests/test_research_contracts.py -k n4_seed0_highs_failure
+    kill_condition: >-
+      At twenty minutes retain the strongest exact or numerical discriminator found; at
+      thirty minutes stop without editing production, changing a tolerance, running the
+      golden, or inferring solver health from one passing retry.
+    fallback: >-
+      Keep D-203 and think-nr5w open, record the diagnosis as unresolved and route any
+      load-dependent solver question to portfolio order 12.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Reproduce seed 0 only and intercept the first status-4 LP call.
+    next_action: Review the exact fixture independently before authorizing any repair.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -1002,6 +1060,113 @@ session:
     fallback: Block acceptance and report the smallest mismatching certificate.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
+  - task: Reproduce and trace only the n=4 seed-0 status-4 failure.
+    operator: /root/n4_failure_trace
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Reproduced the exact endpoint and counters in 2.77 seconds, located the failure at
+      fixed-point evaluation 2,884 / LP call 3,404, and independently rebuilt its 22-row
+      LP with zero f64 difference.
+    evidence:
+    - The corrected same-evaluation receipt is /tmp/n4_status4_consistent.json.
+    - Direct capture and independent reconstruction report exact A_ub and b_ub equality.
+    files: []
+    checks:
+    - One seed-0 quench under a 20-second process cap and one independent LP reconstruction.
+    uncertainty: The temp receipt was input to review; the repository fixture owns persistence.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Persist only the independently reconstructed same-call receipt.
+    phase: 8
+    budget_minutes: 15
+    started_at: '2026-08-25T02:10:00-07:00'
+    deadline_at: '2026-08-25T02:25:00-07:00'
+    expected_output: Exact theta, centres, cell, LP inputs, counters, and missing diagnostic.
+    validation_command: One independently rebuilt array-equality probe.
+    kill_condition: Stop at the first exact status-4 call; never run another seed or golden.
+    fallback: Return the endpoint and smallest datum still missing.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, full golden]
+  - task: Design the smallest portable status-4 replay fixture and controls.
+    operator: /root/n4_fixture_design
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Specified exact hex persistence, same-call context binding, independent LP rebuild,
+      direct solver classification, original-row replay, and a structural mutation.
+    evidence:
+    - The design separated a solver receipt from a full quench or basin-map golden.
+    files: []
+    checks: [Read-only quench and existing direct-fixture inspection.]
+    uncertainty: Cross-platform libm and solver outcomes required explicit test treatment.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Implement only the bounded fixture and focused contract.
+    phase: 8
+    budget_minutes: 15
+    started_at: '2026-08-25T02:10:00-07:00'
+    deadline_at: '2026-08-25T02:25:00-07:00'
+    expected_output: Fixture fields, replay classification, mutation, and exact command.
+    validation_command: null
+    kill_condition: Return a design only; do not edit shared files.
+    fallback: Preserve theta, cell, matrices, and receipt without diagnosing.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, full golden]
+  - task: Capture and package the n=4 status-4 fixture mechanically.
+    operator: /root/n4_fixture_impl
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      The first temp capture cross-wired two evaluations and was rejected; a corrected
+      same-call temp receipt was produced, but this delegate did not persist the fixture.
+    evidence:
+    - D-260 records the stale diagonal cell paired with the actual near-axis LP matrix.
+    - /tmp/n4_status4_samecall.json corrected the context before any repository write.
+    files: []
+    checks: [Coordinator structural comparison of cell axes with A_ub separation rows.]
+    uncertainty: The delegated task stopped before its requested repository artifact and test.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Reassign persistence from the verified same-call receipt.
+    phase: 8
+    budget_minutes: 17
+    started_at: '2026-08-25T02:13:00-07:00'
+    deadline_at: '2026-08-25T02:30:00-07:00'
+    expected_output: Exact YAML fixture and focused replay test.
+    validation_command: null
+    kill_condition: Never persist a receipt that fails independent reconstruction.
+    fallback: Leave a same-call temp receipt for reassignment.
+    write_scope: [tests/fixtures/n4_seed0_highs_status4.yaml, tests/test_research_contracts.py]
+    excluded_commands: [git, tbd, production edits, full golden]
+  - task: Persist, test, and statically validate the corrected n=4 fixture.
+    operator: /root/n4_fixture_finish
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Added the exact fixture and independent millisecond replay, then repaired the
+      self-defining receipt and static-check failures found by coordinator review.
+    evidence:
+    - Focused pytest passes one replay in 0.33 seconds.
+    - Ruff passes and BasedPyright reports zero findings.
+    files: [tests/fixtures/n4_seed0_highs_status4.yaml, tests/test_research_contracts.py]
+    checks: [Focused Ruff, BasedPyright, pytest, and git diff check.]
+    uncertainty: Linux CI must confirm exact containment reconstruction portability.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Commit the reviewed fixture; leave mathematical diagnosis to W2.
+    phase: 8
+    budget_minutes: 12
+    started_at: '2026-08-25T02:19:00-07:00'
+    deadline_at: '2026-08-25T02:30:00-07:00'
+    expected_output: Two-file fixture/test implementation with all focused gates green.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --all-extras --group dev
+      pytest -q tests/test_research_contracts.py -k n4_seed0_highs_failure
+    kill_condition: Stop before 02:30 with the first replayable artifact and exact blocker.
+    fallback: Retain fixture and rebuild control even if live HiGHS succeeds portably.
+    write_scope: [tests/fixtures/n4_seed0_highs_status4.yaml, tests/test_research_contracts.py]
+    excluded_commands: [git, tbd, production edits, full golden]
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
@@ -1013,6 +1178,11 @@ session:
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+  - tests/fixtures/n4_seed0_highs_status4.yaml
+  - tests/test_research_contracts.py
+  - defects.yaml
+  - defects.md
+  - SYNOPSIS.md
   - PR 29
   checks:
   - git merge-base --is-ancestor 1244634 8136f21
@@ -1054,10 +1224,17 @@ session:
     Exp-038 generation/replay passed in 2.02310/2.02438 seconds; a 130-second independent
     final audit found no P0/P1 issue, and the maintained small-n exact-model step passed
     in 4.65 seconds with exp-038 included.
+  - >-
+    The n=4 seed-0 exact fixture rebuild and direct replay pass in 0.33 seconds; focused
+    Ruff passes and BasedPyright reports zero findings.
+  - >-
+    Phase-8 checkpoint reconciliation passes packing-ledger check with 38 rounds and ten
+    sessions, synopsis and 265-defect generated-view checks, and all 62 mutation controls;
+    D-264 and D-265 preserve the two session-record failures caught on the first check.
   stop_reason: null
   next_action: >-
-    Commit and push the terminal exp-038 result, then capture the n=4 seed-0 status-4 LP
-    call as a millisecond fixture under think-nr5w by 02:40:00-07:00.
+    Commit and push the terminal phase-8 fixture checkpoint, then open portfolio order
+    5 as an independent W2 diagnosis of D-203 under think-nr5w.
 ---
 ## Session Boundary
 

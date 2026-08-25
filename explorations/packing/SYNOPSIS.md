@@ -1758,14 +1758,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 259 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 265 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 69 | asserted something false about the mathematics |
-| validity | 66 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 88 | recorded something its own evidence contradicts |
+| validity | 68 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 92 | recorded something its own evidence contradicts |
 | robustness | 28 | did not finish, or finished only by luck |
 | performance | 8 | worked, but cost far more than it should |
 
@@ -1775,10 +1775,10 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught seventeen defects in 259, and no soundness defect
-ever.** Every soundness failure was found by a control cell whose answer was known in
-advance, a rule written down before the measurement, a generated view contradicting its
-source, or someone reading carefully.
+**The automated gate has caught twenty defects in 265, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Every gate-detected entry is a bookkeeping or robustness defect, found by
 contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
@@ -2021,6 +2021,15 @@ zero all-original-row residual.
 All seven ladder rungs now converge at pool widths 10 and 1. [D-203](defects.md)
 isolates the remaining n=4 seed-0 stop as a distinct HiGHS status-4 Solve error; the
 golden remains red at 3/4 n=4 proposals.
+[D-260](defects.md) through [D-262](defects.md) record and correct the fixture-capture
+hazards found before commit: a cross-wired geometric context, a receipt that initially
+defined its own acceptance, and a pytest-only completion claim while static checks were
+red. The retained millisecond fixture now exact-rebuilds all LP inputs, rejects the
+cross-wire mutation, and either reproduces status 4 or admits only a finite successful
+solve whose original-row residuals remain at or below `1e-10`. [D-263](defects.md)
+records a coordinator recurrence during that reconciliation: a status-only patch again
+touched D-034 instead of the named new defect.
+The exact named-status audit restored D-034 and closed only D-260 through D-263.
 [D-225](defects.md) keeps that strict/deep failure as a blocker for unattended launch
 and any claim that the producer is healthy, but not for a checkpoint merge whose normal
 gate passes and whose limitations remain explicit.
