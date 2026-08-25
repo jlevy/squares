@@ -30,9 +30,11 @@ uv run --frozen --all-extras --group dev packing-validate --fast
 
 The version command must report Python 3.14.7. Do not run a bare `pip install`, commit a
 second requirements file, or rely on packages from a global interpreter.
-Change dependencies in `pyproject.toml`, regenerate `uv.lock`, and commit both files
-together. Use `uv sync --frozen --all-extras --group dev` in CI and when reproducing the
-locked development environment; the explicit development group prevents an ambient uv
+Use uv 0.12 or newer to bootstrap the pinned interpreter; uv 0.8.17 cannot install
+CPython 3.14.7 on Linux and reports `No download found for cpython-3.14.7`. Change
+dependencies in `pyproject.toml`, regenerate `uv.lock`, and commit both files together.
+Use `uv sync --frozen --all-extras --group dev` in CI and when reproducing the locked
+development environment; the explicit development group prevents an ambient uv
 configuration from omitting the test and quality tools.
 
 ## Code Maturity and Placement

@@ -436,6 +436,20 @@ def counted(n: int, singular: str, plural: str) -> str:
     return f"{spell(n)} {singular if n == 1 else plural}"
 
 
+def check_unprotected_fix_claims(text: str, expected: int) -> list[str]:
+    """Require every unprotected-fix claim to state the derived count."""
+    stated = re.findall(r"([\w-]+) fixes left no", text, re.I)
+    accepted = {str(expected), spell(expected).lower()}
+    if stated and all(claim.lower() in accepted for claim in stated):
+        return []
+    return [
+        (
+            f"SYNOPSIS.md: does not state the unprotected-fix count ({expected}) "
+            'in the form "<n> fixes left no regression check behind" at every occurrence'
+        )
+    ]
+
+
 def check_defects(text: str) -> list[str]:
     """The defect count and per-class counts match the dataset."""
     data = yaml.safe_load((ROOT / "defects.yaml").read_text())
@@ -484,17 +498,11 @@ def check_defects(text: str) -> list[str]:
     # "Six" while the generated view said seven, which is D-028 recurring in the document
     # D-028 was about. The same rule as the flattering-direction claim applies: derive it,
     # do not assert it. Every occurrence must state the derived count, not just one:
-    # D-320 hid a stale duplicate behind a correct first statement for a full merge.
+    # D-326 hid a stale duplicate behind a correct first statement for a full merge.
     unprotected = sum(
         1 for d in defects if d["regression"] == "none" and d["status"] != "outstanding"
     )
-    stated = re.findall(r"([\w-]+) fixes left no", text, re.I)
-    accepted = {str(unprotected), spell(unprotected).lower()}
-    if not stated or any(claim.lower() not in accepted for claim in stated):
-        problems.append(
-            f"SYNOPSIS.md: does not state the unprotected-fix count ({unprotected}) "
-            'in the form "<n> fixes left no regression check behind" at every occurrence'
-        )
+    problems.extend(check_unprotected_fix_claims(text, unprotected))
 
     problems.extend(
         f"SYNOPSIS.md: open defect {d['id']} is not mentioned"

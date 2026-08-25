@@ -220,6 +220,47 @@ def test_process_registry_rejects_registration_after_stop(
     assert signals == [(12345, signal.SIGKILL)]
 
 
+def test_process_registry_stop_returns_without_an_empty_grace_sleep(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    sleeps: list[float] = []
+    monkeypatch.setattr(validate.time, "sleep", sleeps.append)
+
+    validate._ProcessRegistry().stop()
+
+    assert sleeps == []
+
+
+@pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
+def test_run_drains_rejected_process_output(monkeypatch: pytest.MonkeyPatch) -> None:
+    class RejectedProcess:
+        pid = 12345
+        stdout = io.StringIO()
+        returncode = -signal.SIGKILL
+        communicated = False
+
+        def communicate(self, *, timeout: float) -> tuple[str, None]:
+            assert timeout == validate.PROCESS_TERMINATION_GRACE_SECONDS
+            self.communicated = True
+            return "", None
+
+    process = RejectedProcess()
+    monkeypatch.setattr(validate.subprocess, "Popen", lambda *_args, **_kwargs: process)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+    context.processes.stop()
+
+    with pytest.raises(validate.StepFailureError, match="rejected new subprocess"):
+        validate._run(context, (sys.executable, "-c", "pass"))
+
+    assert process.communicated
+
+
 @pytest.mark.skipif(os.name == "nt", reason="bounded tree mode fails closed on Windows")
 def test_run_explicit_smaller_timeout_wins() -> None:
     context = validate.Context(
@@ -239,9 +280,10 @@ def test_run_explicit_smaller_timeout_wins() -> None:
 
 
 def test_timeout_override_requires_positive_finite_seconds() -> None:
-    for value in ("0", "-1", "nan", "inf", "not-a-number"):
+    for value in ("", "0", "-1", "nan", "inf", "not-a-number"):
         status, _, stderr = _invoke("--timeout-seconds", value, "--list")
         assert status == 2
+        assert "--timeout-seconds" in stderr
         assert "positive number of seconds" in stderr
 
 
