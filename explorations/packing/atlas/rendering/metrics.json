@@ -1,7 +1,7 @@
 {
   "fixtures": {
     "gobel10-source-return-comparison.svg": {
-      "bytes": 17753,
+      "bytes": 18069,
       "elements": 62,
       "renderer_version": "4",
       "viewBox": "0 0 1280 680"

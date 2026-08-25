@@ -596,7 +596,9 @@ node hierarchy would add conversion code without a second semantic contract.
 
 - `frame_from_pose_arrays()` normalizes centre/angle arrays, calls the independent
   `sqpack.verify.corners_from_poses()` geometry door, and preserves the supplied scalar
-  strings.
+  strings. Its presentation corners are separately projected with fixed-precision
+  `mpmath` trigonometry so retained SVG bytes do not inherit platform-libm last-bit
+  differences.
 - `frames_from_basin_event()` validates a `BasinEvent/v3` through an adapter-local
   schema boundary, derives the start’s enclosing side, and returns start/final frames
   without importing the basin-event producer.

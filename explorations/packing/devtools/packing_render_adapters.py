@@ -31,6 +31,7 @@ from sqpack.verify import corners_from_poses, exact_sign, verify_packing
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 KINGBIRD29_SOURCE = PROJECT_ROOT / "resources/papers/kingbird-square-29-provenance.svg"
+POSE_PROJECTION_DIGITS = 48
 
 
 def _field_source(value: FieldElement) -> str:
@@ -70,6 +71,43 @@ def _normalize_pose(values: Sequence[float | Decimal | str], label: str) -> tupl
     return tuple(scalars)
 
 
+def _deterministic_pose_corners(xs, ys, angles):
+    """Project pose geometry without inheriting platform-libm last-bit differences."""
+
+    def decimal_text(value) -> str:
+        return str(
+            mp.nstr(
+                value,
+                POSE_PROJECTION_DIGITS,
+                strip_zeros=False,
+                min_fixed=-100,
+                max_fixed=100,
+            )
+        )
+
+    squares = []
+    with mp.workdps(POSE_PROJECTION_DIGITS + 16):
+        for cx_source, cy_source, angle_source in zip(xs, ys, angles, strict=True):
+            cx = mp.mpf(cx_source.source)
+            cy = mp.mpf(cy_source.source)
+            angle = mp.mpf(angle_source.source)
+            cosine, sine = mp.cos(angle), mp.sin(angle)
+            ux, uy = cosine / 2, sine / 2
+            vx, vy = -sine / 2, cosine / 2
+            squares.append(
+                tuple(
+                    (decimal_text(x), decimal_text(y))
+                    for x, y in (
+                        (cx - ux - vx, cy - uy - vy),
+                        (cx + ux - vx, cy + uy - vy),
+                        (cx + ux + vx, cy + uy + vy),
+                        (cx - ux + vx, cy - uy + vy),
+                    )
+                )
+            )
+    return tuple(squares)
+
+
 def frame_from_pose_arrays(
     side: float | Decimal | str,
     x: Sequence[float | Decimal | str],
@@ -90,15 +128,27 @@ def frame_from_pose_arrays(
         _normalize_pose(y, "y"),
         _normalize_pose(theta, "theta"),
     )
+    # Cross-check the fixed-precision presentation projection against the repository's
+    # independent binary64 pose-to-corner door, but do not serialize platform-libm
+    # last bits from that door.
     float_corners = corners_from_poses(
         [float(value.projected) for value in xs],
         [float(value.projected) for value in ys],
         [float(value.projected) for value in angles],
     )
+    projected_corners = _deterministic_pose_corners(xs, ys, angles)
+    projection_tolerance = Decimal("1e-12")
+    if any(
+        abs(Decimal(repr(float_value)) - Decimal(projected_value)) > projection_tolerance
+        for float_square, projected_square in zip(float_corners, projected_corners, strict=True)
+        for float_corner, projected_corner in zip(float_square, projected_square, strict=True)
+        for float_value, projected_value in zip(float_corner, projected_corner, strict=True)
+    ):
+        raise ValueError("fixed-precision pose projection disagrees with geometry door")
     squares = []
-    for index, corners in enumerate(float_corners):
+    for index, corners in enumerate(projected_corners):
         points = tuple(
-            Point2(scalar_from_float(px), scalar_from_float(py)) for px, py in corners
+            Point2(scalar_from_decimal(px), scalar_from_decimal(py)) for px, py in corners
         )
         squares.append(
             SquareGeometry(

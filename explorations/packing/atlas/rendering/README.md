@@ -143,7 +143,7 @@ Size and conversion measurements were refreshed for the five-figure gallery on
 | --- | ---: | ---: |
 | Exact `n = 3` moduli | 14,186 | 85,886 |
 | Trump `n = 11` overview | 30,728 | 81,615 |
-| Göbel `n = 10` comparison | 17,753 | 38,131 |
+| Göbel `n = 10` comparison | 18,069 | 38,131 |
 | Exact `n = 5` trajectory | 15,648 | 36,774 |
 | Kingbird `n = 29` overview | 22,680 | 168,176 |
 
