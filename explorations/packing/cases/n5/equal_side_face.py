@@ -23,6 +23,7 @@ from typing import cast
 
 from strif import atomic_output_file
 
+from cases.n5.face_model import build_equal_side_face, centres_at
 from sqpack.field import FieldElement, NumberField
 from sqpack.verify import exact_sign, verify_packing
 
@@ -106,31 +107,38 @@ def require_number(value: object, label: str) -> float:
 
 def make_field() -> NumberField:
     """Return Q(sqrt(2)) with an exact isolating interval."""
-    return NumberField([1, 0, -2], (1, 2))
+    return build_equal_side_face().field
 
 
 def exact_data(field: NumberField) -> dict[str, object]:
     """Construct the two aligned endpoints and the exact path parameter."""
-    q = field.rational
-    r = field.alpha
-    side = q(1) + 5 * r / 4
-    delta = 3 * r / 2 - 2
-    fixed = [
-        (q(0), q(0)),
-        (q(1) / 2 + 5 * r / 4, q(1) / 2),
-        (q(1) / 2, q(1) / 2),
-        (q(1) + 3 * r / 4, q(1) + 3 * r / 4),
-        (q(1) / 2 + 5 * r / 8, q(3) / 2 - r / 8),
-    ]
-    endpoint_a = [
-        (q(1) / 2, q(5) / 2 - r / 4),
-        *fixed[1:],
-    ]
-    endpoint_b = [
-        (q(1) / 2 + delta, q(5) / 2 - r / 4 + delta),
-        *fixed[1:],
-    ]
-    return {"side": side, "delta": delta, "a": endpoint_a, "b": endpoint_b}
+    face = build_equal_side_face()
+    if field is not face.field:
+        face = type(face)(
+            field,
+            field.rational(1) + 5 * field.alpha / 4,
+            3 * field.alpha / 2 - 2,
+            (
+                (field.rational(1) / 2 + 5 * field.alpha / 4, field.rational(1) / 2),
+                (field.rational(1) / 2, field.rational(1) / 2),
+                (
+                    field.rational(1) + 3 * field.alpha / 4,
+                    field.rational(1) + 3 * field.alpha / 4,
+                ),
+                (
+                    field.rational(1) / 2 + 5 * field.alpha / 8,
+                    field.rational(3) / 2 - field.alpha / 8,
+                ),
+            ),
+            (field.rational(1) / 2, field.rational(5) / 2 - field.alpha / 4),
+            ("axis", "axis", "axis", "diagonal", "diagonal"),
+        )
+    return {
+        "side": face.side,
+        "delta": face.delta,
+        "a": list(centres_at(face, field.zero)),
+        "b": list(centres_at(face, face.delta)),
+    }
 
 
 def angle_distance(value: float, target: float) -> float:

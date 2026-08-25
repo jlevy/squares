@@ -228,6 +228,13 @@ controller, not permission to blur contracts.
 
 ### The Current `n = 5` Handoff
 
+![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
+
+*The retained SVG animates endpoint A through the exact midpoint to endpoint B when
+motion is enabled. Its translucent tempered-yellow contact marks describe the certified
+final frame and appear only when the motion reaches that frame.
+Reduced-motion and non-CSS viewers receive endpoint B as a complete static figure.*
+
 The H-023 line shows why the distinction matters.
 Session 004 used W3 to turn an ambiguous terminal-family observation into the
 falsifiable connectivity hypothesis.
@@ -762,6 +769,13 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 | Best known packing (upper bound) | `3.87708359002281417730789706010096…` | Walter Trump, 1979 |
 | Best certified lower bound | `2 + 4/√5 = 3.788854382…` | exp-017 exact source-distinct repair; value stated by Stromquist 2003, whose printed proof has gap D-152 |
 | Published gap | `0.088229208023` | the fourth-smallest open gap at `n ≤ 100` in this corpus |
+
+![Walter Trump’s exact eleven-square packing.](atlas/rendering/trump11-overview.svg)
+
+*The upper-bound endpoint of the interval: a certified degree-8 construction, still
+separated from the independently certified lower bound.
+Translucent tempered-yellow segments and dots are exact edge and point contacts, not
+tolerance-based visual guesses.*
 
 The current audit found an explicit strict box avoiding all twelve printed Figure 14
 points, so the paper’s unavoidability subclaim is false as printed
@@ -1512,6 +1526,13 @@ checkers.
 No record-search round has been run at the `exact` tier, so **no result below claims a
 new record**. Exp-012 is an exploratory reconstruction of a published record witness;
 its six-class determination does not certify that witness as exact or optimal.
+
+![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
+
+*The retained `n = 29` witness is reconstructed at 160 decimal digits and passes all 406
+pair checks. The figure therefore says “verified construction,” not “exact” or “proved
+optimum.” Its 29 squares also exercise deterministic reuse of the fixed 20-color cool
+palette.*
 
 ### Roll-up
 

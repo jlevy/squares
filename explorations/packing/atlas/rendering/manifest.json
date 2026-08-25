@@ -1,0 +1,77 @@
+{
+  "examples": [
+    {
+      "alt": "Exact quotient map for the optimal configurations of three unit squares in a square of side two.",
+      "artifact": "atlas/n-003-optimal-moduli.svg",
+      "caption": "Two labelled cycles reduce to one quotient interval, with representative packings at its distinguished strata.",
+      "contacts": false,
+      "evidence": "proved-optimum",
+      "frontier_case": "frontier/n-003.md",
+      "generator": "uv run --frozen --all-extras --group dev python -m cases.small_n.optimal_moduli --n 3 --record campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json --svg atlas/n-003-optimal-moduli.svg",
+      "id": "n3-optimal-moduli",
+      "motion": false,
+      "n": 3,
+      "title": "Exact optimal configuration space for three squares",
+      "view": "moduli"
+    },
+    {
+      "alt": "Final packing on the certified exact feasible trajectory for five unit squares, with certified contacts highlighted in translucent tempered yellow.",
+      "artifact": "atlas/rendering/n5-exact-face-trajectory.svg",
+      "caption": "The animated export follows endpoint A, the exact midpoint, and endpoint B; translucent tempered-yellow marks show endpoint B's certified contacts, and reduced-motion and non-CSS viewers show that final endpoint.",
+      "contacts": true,
+      "evidence": "certified-upper-bound",
+      "frontier_case": "frontier/n-005.md",
+      "generator": "uv run --frozen --all-extras --group dev python -m devtools.render_packing_svg n5-face --view trajectory --output atlas/rendering/n5-exact-face-trajectory.svg",
+      "id": "n5-exact-face-trajectory",
+      "motion": true,
+      "n": 5,
+      "title": "Certified exact five-square trajectory",
+      "view": "trajectory"
+    },
+    {
+      "alt": "Side-by-side comparison of a perturbed G\u00f6bel ten-square packing and its returned endpoint.",
+      "artifact": "atlas/rendering/gobel10-source-return-comparison.svg",
+      "caption": "A retained numerical source perturbation and the endpoint returned by the deterministic quench share one geometric scale.",
+      "contacts": false,
+      "evidence": "candidate",
+      "frontier_case": "frontier/n-010.md",
+      "generator": "uv run --frozen --all-extras --group dev python -m devtools.render_packing_svg event campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl --event-id 1bf0f489a5f82333801d4157419d404a865350409c72563679f08dcdb297c7a9 --view comparison --output atlas/rendering/gobel10-source-return-comparison.svg",
+      "id": "n10-source-return-comparison",
+      "motion": false,
+      "n": 10,
+      "title": "G\u00f6bel source-return comparison",
+      "view": "comparison"
+    },
+    {
+      "alt": "Walter Trump exact packing of eleven unit squares, with edge and point contacts highlighted in translucent tempered yellow.",
+      "artifact": "atlas/rendering/trump11-overview.svg",
+      "caption": "Six axis-aligned squares surround a five-square block tilted at an algebraic angle near 40.18 degrees; translucent tempered-yellow segments and dots show contacts certified in the same number field.",
+      "contacts": true,
+      "evidence": "certified-upper-bound",
+      "frontier_case": "frontier/n-011.md",
+      "generator": "uv run --frozen --all-extras --group dev python -m devtools.render_packing_svg builtin trump11 --output atlas/rendering/trump11-overview.svg",
+      "id": "n11-trump-overview",
+      "motion": false,
+      "n": 11,
+      "title": "Trump exact packing overview",
+      "view": "overview"
+    },
+    {
+      "alt": "High-precision reconstruction of the Kingbird packing of twenty-nine unit squares using the deterministic cool palette.",
+      "artifact": "atlas/rendering/kingbird29-overview.svg",
+      "caption": "The retained source reconstructs all 29 squares at 160 decimal digits and passes all 406 separating-axis pair checks; this is a verified numerical construction, not an exact certificate.",
+      "contacts": false,
+      "evidence": "verified-construction",
+      "frontier_case": "frontier/n-029.md",
+      "generator": "uv run --frozen --all-extras --group dev python -m devtools.render_packing_svg builtin kingbird29 --output atlas/rendering/kingbird29-overview.svg",
+      "id": "n29-kingbird-overview",
+      "motion": false,
+      "n": 29,
+      "title": "Kingbird high-precision packing overview",
+      "view": "overview"
+    }
+  ],
+  "gallery_generator": "uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --update",
+  "renderer_version": "4",
+  "schema_version": 2
+}
