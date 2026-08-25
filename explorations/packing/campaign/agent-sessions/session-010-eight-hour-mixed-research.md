@@ -83,7 +83,7 @@ session:
       The finite discovery inventory and proof skeleton were retained before the
       deadline; a new phase is required to preregister its confirmatory criterion.
     next_action: >-
-      Freeze exp-037's exact cone-factorization criterion and refusal scope before any
+      Freeze exp-038's exact cone-factorization criterion and refusal scope before any
       retained target run.
   - workflow: insight-iteration
     recording: contemporaneous
@@ -103,24 +103,24 @@ session:
     started_at: '2026-08-25T00:49:14-07:00'
     deadline_at: '2026-08-25T01:04:14-07:00'
     expected_output: >-
-      A valid exp-037 experiment artifact binding exact sources, acceptance checks,
+      A valid exp-038 experiment artifact binding exact sources, acceptance checks,
       mutations, runtime caps, and a scope that does not classify -W or W-plus-release
       mixtures.
     validation_command: >-
       uvx --from softschema softschema validate
-      explorations/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
+      explorations/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
     kill_condition: >-
       Stop at fifteen minutes with a criterion note in think-nm35 if source bindings,
       acceptance checks, or the nonlinear refusal boundary are still ambiguous.
     fallback: >-
-      Preserve the reviewed proof skeleton, leave exp-037 unallocated, and rotate to a
+      Preserve the reviewed proof skeleton, leave exp-038 unallocated, and rotate to a
       correctness review of the disputed +W/-W scope.
     outcome: >-
-      Exp-037 is committed as a confirmatory, source-bound analytic inventory with ten
+      Exp-038 is committed as a confirmatory, source-bound analytic inventory with ten
       controls, independent 30-second caps, and an explicit refusal to classify -W,
       W-plus-release lifts, true tangents, or stationary membership.
     evidence:
-    - Commit c0a46f1 freezes exp-037 after the disclosed pilot and before target implementation.
+    - Commit c0a46f1 freezes exp-038 after the disclosed pilot and before target implementation.
     - Softschema validates the Experiment/v1 artifact and packing-ledger reports 37 rounds.
     stop_reason: The criterion, controls, budget, and scope were frozen in 3.2 minutes.
     next_action: >-
@@ -131,7 +131,7 @@ session:
     clock_role: work
     focus: efficiency
     objective: >-
-      Implement exp-037's exact analytic certificate as a fast source-bound checker with
+      Implement exp-038's exact analytic certificate as a fast source-bound checker with
       its ten controls, without turning the 23-second pilot enumerator into permanent
       gate cost.
     status: completed
@@ -148,13 +148,13 @@ session:
       blocker with partial code preserved.
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      -m cases.n5.tangent_inventory --record /tmp/exp-037-check.json
+      -m cases.n5.tangent_inventory --record /tmp/exp-038-check.json
     kill_condition: >-
       Stop implementation at twenty-two minutes; reserve eight minutes for coordinator
       review, exact source comparison, and a committed checkpoint.
     fallback: >-
       Preserve the smallest exact certificate helpers, record the timing or proof
-      blocker in think-nm35, and rotate without changing exp-037's criterion.
+      blocker in think-nm35, and rotate without changing exp-038's criterion.
     outcome: >-
       A source-bound exact checker now rebuilds all six tangent matrices, proves the
       complete left-kernel and forced-slack certificates, checks physical generators
@@ -187,13 +187,13 @@ session:
       phase.
     next_action: >-
       Commit the reviewed instrument, then open a distinct W6 research-loop phase and
-      generate the retained exp-037 result from that clean engine commit.
+      generate the retained exp-038 result from that clean engine commit.
   - workflow: research-loop
     recording: contemporaneous
     clock_role: work
     focus: correctness
     objective: >-
-      Run the frozen exp-037 confirmatory criterion exactly once from the clean reviewed
+      Run the frozen exp-038 confirmatory criterion exactly once from the clean reviewed
       engine commit, replay its retained record, and update only conclusions warranted
       by the first-order linearization-cone evidence.
     status: completed
@@ -205,21 +205,21 @@ session:
     started_at: '2026-08-25T01:15:06-07:00'
     deadline_at: '2026-08-25T01:35:06-07:00'
     expected_output: >-
-      A retained exp-037 JSON record, identical replay, terminal experiment artifact,
+      A retained exp-038 JSON record, identical replay, terminal experiment artifact,
       focused validation entry, and bounded updates to H-023 and the active agenda.
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
       -m cases.n5.tangent_inventory --replay
-      campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
+      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-tangent-inventory.json
     kill_condition: >-
       Stop at twenty minutes on any source drift, record/replay mismatch, surviving
       control, or documentation ambiguity; preserve the exact blocker without changing
       the frozen criterion.
     fallback: >-
-      Leave exp-037 in progress, retain the clean instrument commit and temporary
+      Leave exp-038 in progress, retain the clean instrument commit and temporary
       diagnostic only, and rotate to the next dependency-ready portfolio row.
     outcome: >-
-      Exp-037 met its frozen confirmatory criterion from clean engine commit b8d0104.
+      Exp-038 met its frozen confirmatory criterion from clean engine commit b8d0104.
       The retained record and replay agree exactly, both owner branches have the same
       complete V-representation at every stratum, the endpoint and interior quotient ray
       counts are 8/6/8, both face vectors are derived, and all ten controls pass.
@@ -231,7 +231,7 @@ session:
       transverse supports, owner equality, ray relation, and face vectors with no P0 or
       P1 finding.
     - >-
-      The focused small-n validation step replays exp-037 with its seven predecessors in
+      The focused small-n validation step replays exp-038 with its seven predecessors in
       3.07 wall seconds; experiment and hypothesis soft schemas, ledger, and synopsis
       reconciliation pass.
     stop_reason: >-
@@ -239,7 +239,7 @@ session:
       deadline. The conclusion stops at complete branchwise first-order linearization
       cones and does not classify nonlinear realization or terminal components.
     next_action: >-
-      Commit and push the terminal exp-037 artifact, then preregister the independently
+      Commit and push the terminal exp-038 artifact, then preregister the independently
       derived five-dimensional fixed-angle optimal-position polytope as a successor.
   - workflow: insight-iteration
     recording: contemporaneous
@@ -253,28 +253,28 @@ session:
     status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
-      Exp-037 closes the finite first-order inventory and the continuation analyst found
+      Exp-038 closes the finite first-order inventory and the continuation analyst found
       a stronger exact polytope target; experiment-loop discipline requires a separate
       criterion before its proof is retained as a campaign verdict.
     budget_minutes: 15
     started_at: '2026-08-25T01:25:36-07:00'
     deadline_at: '2026-08-25T01:40:36-07:00'
     expected_output: >-
-      A valid preregistered exp-038 artifact with exact source bindings, affine-hull and
+      A valid preregistered exp-039 artifact with exact source bindings, affine-hull and
       dual-stress checks, mutations, runtime caps, and explicit nonlinear and terminal
       refusal boundaries.
     validation_command: >-
       uvx --from softschema softschema validate
-      explorations/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
+      explorations/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md
     kill_condition: >-
       Stop at fifteen minutes if the global common-cell domain, dual identity, or claim
       boundary cannot be stated exactly; preserve the proof skeleton in think-oiv4
       without allocating or running the experiment.
     fallback: >-
       Retain only the twelve exact straight-path interval formulas and rotate to the
-      separate -W obstruction bead; do not weaken exp-038 into an ambiguous criterion.
+      separate -W obstruction bead; do not weaken exp-039 into an ambiguous criterion.
     outcome: >-
-      Exp-038 is preregistered as a confirmatory exact test of one labelled
+      Exp-039 is preregistered as a confirmatory exact test of one labelled
       fixed-orientation cell's five-dimensional LP-optimal face and twelve pathwise
       first-order stresses. Its criterion binds canonical ray normalization, exact
       domain equivalence, affine witnesses, sharp intervals, owner branches, active
@@ -285,26 +285,26 @@ session:
       normalization, a rank-only dimension inference, and a conflation of LP level
       optimality with differential no descent before commit or target execution.
     - >-
-      The corrected artifact defines all five canonical vectors and their exp-037 source
+      The corrected artifact defines all five canonical vectors and their exp-038 source
       map, requires six affinely independent feasible points, and confines the stress to
       the twelve declared path segments. D-254 preserves the error and correction.
     - Softschema validates the corrected Experiment/v1 artifact.
     stop_reason: The corrected criterion and refusal boundary were frozen within the 15-minute slice.
     next_action: >-
-      Commit and push exp-038 before target implementation, then build the bounded exact
+      Commit and push exp-039 before target implementation, then build the bounded exact
       instrument in a distinct W7 phase.
   - workflow: pipeline-improvement
     recording: contemporaneous
     clock_role: work
     focus: efficiency
     objective: >-
-      Implement exp-038 as a fast source-bound exact checker with executable input
+      Implement exp-039 as a fast source-bound exact checker with executable input
       mutations, without broadening the frozen mathematical criterion or adding a
       generic polyhedral framework.
     status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
-      The corrected exp-038 criterion is frozen; the next distinct task is its bounded
+      The corrected exp-039 criterion is frozen; the next distinct task is its bounded
       reusable instrument before any retained target measurement.
     budget_minutes: 30
     started_at: '2026-08-25T01:35:11-07:00'
@@ -315,13 +315,13 @@ session:
       blocker with no target verdict.
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      -m cases.n5.fixed_angle_polytope --record /tmp/exp-038-check.json
+      -m cases.n5.fixed_angle_polytope --record /tmp/exp-039-check.json
     kill_condition: >-
       Stop implementation at twenty-two minutes and reserve eight minutes for review,
       exact replay, defect recording, and a committed checkpoint.
     fallback: >-
       Preserve only source-bound exact helpers, record the first unproved criterion
-      clause in think-oiv4, and rotate without changing exp-038.
+      clause in think-oiv4, and rotate without changing exp-039.
     outcome: >-
       Commit 27b999e provides a source-bound exact checker for the five-dimensional
       fixed-angle polytope, LP dual, twelve sharp paths, owner-axis exhaustion, positive
@@ -344,14 +344,14 @@ session:
       25.2 minutes, leaving the required integration reserve. No retained confirmatory
       result was generated in this W7 phase.
     next_action: >-
-      Run the frozen exp-038 target exactly once from clean engine commit 27b999e in a
+      Run the frozen exp-039 target exactly once from clean engine commit 27b999e in a
       separate W6 phase, then replay and reconcile only claims the criterion warrants.
   - workflow: research-loop
     recording: contemporaneous
     clock_role: work
     focus: correctness
     objective: >-
-      Run the frozen exp-038 confirmatory criterion exactly once from clean reviewed
+      Run the frozen exp-039 confirmatory criterion exactly once from clean reviewed
       engine commit 27b999e, replay the retained record, and update only the cell-local
       LP-optimal-face and twelve pathwise first-order conclusions it establishes.
     status: completed
@@ -363,20 +363,20 @@ session:
     started_at: '2026-08-25T02:01:00-07:00'
     deadline_at: '2026-08-25T02:21:00-07:00'
     expected_output: >-
-      One retained exp-038 JSON record, identical replay, terminal experiment artifact,
+      One retained exp-039 JSON record, identical replay, terminal experiment artifact,
       focused validation entry, and bounded H-023, agenda, ledger, and synopsis updates.
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
       -m cases.n5.fixed_angle_polytope --replay
-      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
+      campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
     kill_condition: >-
       Stop on source drift, record/replay mismatch, any surviving control, an invalid
       exact packing, or a requested conclusion outside the frozen refusal boundary.
     fallback: >-
-      Leave exp-038 in progress, retain the clean instrument commit and exact blocker,
+      Leave exp-039 in progress, retain the clean instrument commit and exact blocker,
       and rotate without changing its criterion or mathematical verdict.
     outcome: >-
-      Exp-038 met its frozen criterion from clean checker commit 27b999e. One labelled
+      Exp-039 met its frozen criterion from clean checker commit 27b999e. One labelled
       fixed-orientation cell contains a connected five-dimensional LP-optimal position
       polytope, and all twelve declared R1, R2, R3, and R6 paths have exact positive
       branchwise first-order stresses.
@@ -388,7 +388,7 @@ session:
       structural stress-polynomial certificates, both owner branches, axis exhaustion,
       all ten controls, and every refusal with no P0/P1 finding.
     - >-
-      The maintained small-n exact-model step now includes exp-038 and passes in 4.65
+      The maintained small-n exact-model step now includes exp-039 and passes in 4.65
       wall seconds. H-023 and BC-010 remain open because whole-polytope stationarity,
       component identity, and unequal-side clearance were not proved.
     stop_reason: >-
@@ -408,7 +408,7 @@ session:
     status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
-      Exp-038 is terminal and independently reviewed. The frozen portfolio's next
+      Exp-039 is terminal and independently reviewed. The frozen portfolio's next
       dependency-ready row is order 4 under think-nr5w, which blocks a trustworthy deep
       known-answer gate.
     budget_minutes: 30
@@ -892,7 +892,7 @@ session:
     uncertainty: Nonlinear realizability and a geometry rebuild were outside the task.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Use the explicit certificates in exp-037's frozen acceptance rule.
+    next_action: Use the explicit certificates in exp-038's frozen acceptance rule.
     phase: 1
     budget_minutes: 17
     started_at: '2026-08-25T00:38:00-07:00'
@@ -922,7 +922,7 @@ session:
     uncertainty: End-to-end task wall time was not exposed; 23 seconds covers enumeration only.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Delegate bounded implementation only after exp-037 is preregistered.
+    next_action: Delegate bounded implementation only after exp-038 is preregistered.
     phase: 1
     budget_minutes: 17
     started_at: '2026-08-25T00:38:00-07:00'
@@ -964,7 +964,7 @@ session:
     fallback: Return the exact lineality and one verified ray.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
-  - task: Implement the frozen exp-037 analytic checker and thin CLI wrapper.
+  - task: Implement the frozen exp-038 analytic checker and thin CLI wrapper.
     operator: /root/n5_inventory_impl
     status: completed
     recording: contemporaneous
@@ -994,13 +994,13 @@ session:
     expected_output: Fast exact checker, ten controls, and capped /tmp record/replay.
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      -m cases.n5.tangent_inventory --record /tmp/exp-037-check.json
+      -m cases.n5.tangent_inventory --record /tmp/exp-038-check.json
     kill_condition: Stop at the deadline and preserve a minimized implementation blocker.
     fallback: Return partial exact helpers without changing the frozen criterion.
     write_scope:
     - cases/n5/tangent_inventory.py
     excluded_commands: [git, tbd, packing-validate]
-  - task: Audit exp-037's frozen proof obligations and scope independently.
+  - task: Audit exp-038's frozen proof obligations and scope independently.
     operator: /root/n5_inventory_soundness
     status: completed
     recording: contemporaneous
@@ -1013,7 +1013,7 @@ session:
       Independently checked exact ranks, nullities, left-kernel exhaustion, forced
       slacks, physical generators, owner equality, face vectors, source regeneration,
       ten controls, and the +W/-W scope boundary.
-    - The P1 record defect was corrected visibly in exp-037 and logged as D-252.
+    - The P1 record defect was corrected visibly in exp-038 and logged as D-252.
     files: []
     checks:
     - Read-only exact source and integrated-checker audit; no files edited.
@@ -1022,7 +1022,7 @@ session:
       realizability, local minimality, quench terminality, or basin mass.
     elapsed_seconds: 909
     elapsed_quality: platform_measured
-    next_action: Run exp-037 only after the preregistration amendment and checker are committed.
+    next_action: Run exp-038 only after the preregistration amendment and checker are committed.
     phase: 3
     budget_minutes: 20
     started_at: '2026-08-25T00:54:12-07:00'
@@ -1062,7 +1062,7 @@ session:
       second-order behavior, R4, R5, -W, mixed lifts, and terminal membership remain open.
     elapsed_seconds: 610
     elapsed_quality: operator_reported_approximate
-    next_action: Preregister the five-dimensional position-polytope certificate after exp-037.
+    next_action: Preregister the five-dimensional position-polytope certificate after exp-038.
     phase: 3
     budget_minutes: 20
     started_at: '2026-08-25T00:54:12-07:00'
@@ -1076,15 +1076,15 @@ session:
     fallback: Return the strongest exact affine-gap lemma and remaining blocker.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
-  - task: Run a clean focused verification of the integrated exp-037 instrument.
-    operator: /root/exp037_verify
+  - task: Run a clean focused verification of the integrated exp-038 instrument.
+    operator: /root/exp038_verify
     status: completed
     recording: contemporaneous
     outcome: >-
       Independently ran the bounded formatting, lint, type, exact generation, replay,
       control, and diff checks without editing the shared worktree; every check passed.
     evidence:
-    - Exact generation wrote /tmp/exp-037-verify.json in 2.00 wall seconds.
+    - Exact generation wrote /tmp/exp-038-verify.json in 2.00 wall seconds.
     - Exact replay completed in 1.01 wall seconds with all ten controls true.
     files: []
     checks:
@@ -1105,13 +1105,13 @@ session:
     expected_output: Focused pass/fail results and exact checker wall times.
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      -m cases.n5.tangent_inventory --replay /tmp/exp-037-verify.json
+      -m cases.n5.tangent_inventory --replay /tmp/exp-038-verify.json
     kill_condition: Stop within five minutes without editing shared files.
     fallback: Return the first failing command and its complete diagnostic.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
   - task: Identify the approved post-cleanup entry point and reconciliation commands.
-    operator: /root/exp037_integration_paths
+    operator: /root/exp038_integration_paths
     status: completed
     recording: contemporaneous
     outcome: >-
@@ -1140,8 +1140,8 @@ session:
     fallback: Return the rejecting test and nearest accepted sibling pattern.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
-  - task: Independently audit the retained exp-037 result against its frozen criterion.
-    operator: /root/exp037_result_audit
+  - task: Independently audit the retained exp-038 result against its frozen criterion.
+    operator: /root/exp038_result_audit
     status: completed
     recording: contemporaneous
     outcome: >-
@@ -1164,7 +1164,7 @@ session:
       census completeness, and unequal-side clearance remain unresolved.
     elapsed_seconds: 143
     elapsed_quality: platform_measured
-    next_action: Keep the successor continuation evidence outside exp-037.
+    next_action: Keep the successor continuation evidence outside exp-038.
     phase: 4
     budget_minutes: 8
     started_at: '2026-08-25T01:22:00-07:00'
@@ -1173,13 +1173,13 @@ session:
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
       -m cases.n5.tangent_inventory --replay
-      campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
+      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-tangent-inventory.json
     kill_condition: Stop within eight minutes with the first exact discrepancy.
     fallback: Return the smallest failing certificate or unproved criterion clause.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
-  - task: Map the minimal terminal landing surface for exp-037.
-    operator: /root/exp037_landing_map
+  - task: Map the minimal terminal landing surface for exp-038.
+    operator: /root/exp038_landing_map
     status: completed
     recording: contemporaneous
     outcome: >-
@@ -1205,8 +1205,8 @@ session:
     fallback: Return the exp-036 pattern and validation-registry insertion point.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
-  - task: Audit the proposed exp-038 polytope and stress criterion before commit.
-    operator: /root/exp038_criterion_audit
+  - task: Audit the proposed exp-039 polytope and stress criterion before commit.
+    operator: /root/exp039_criterion_audit
     status: completed
     recording: contemporaneous
     outcome: >-
@@ -1215,12 +1215,12 @@ session:
       conflation of an LP side-level certificate with differential no descent.
     evidence:
     - >-
-      Supplied the five canonical vectors, their exact exp-037 source scaling and slide
+      Supplied the five canonical vectors, their exact exp-038 source scaling and slide
       map, the six-feasible-point dimension requirement, a coefficient-wise stress
       criterion, ten input-level mutations, and a sharp cell-local refusal boundary.
     files: []
     checks:
-    - Read-only exact criterion audit against exp-033, exp-034, exp-037, and session evidence.
+    - Read-only exact criterion audit against exp-033, exp-034, exp-038, and session evidence.
     uncertainty: >-
       No target implementation or retained result was inspected; this disposition is
       limited to the preregistration contract.
@@ -1237,8 +1237,8 @@ session:
     fallback: Return the first ambiguous normalization or overclaim.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
-  - task: Implement the frozen exp-038 exact checker without running the retained target.
-    operator: /root/exp038_impl
+  - task: Implement the frozen exp-039 exact checker without running the retained target.
+    operator: /root/exp039_impl
     status: completed
     recording: contemporaneous
     outcome: >-
@@ -1264,13 +1264,13 @@ session:
     expected_output: One source-bound exact case module or a minimized blocker.
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      -m cases.n5.fixed_angle_polytope --record /tmp/exp-038-check.json
+      -m cases.n5.fixed_angle_polytope --record /tmp/exp-039-check.json
     kill_condition: Stop implementation at the phase's twenty-two-minute reserve boundary.
     fallback: Return the smallest source-bound helper and first unproved criterion clause.
     write_scope: [cases/n5/fixed_angle_polytope.py]
     excluded_commands: [git, tbd, packing-validate]
-  - task: Audit the first exp-038 checker against the frozen mathematical criterion.
-    operator: /root/exp038_soundness
+  - task: Audit the first exp-039 checker against the frozen mathematical criterion.
+    operator: /root/exp039_soundness
     status: completed
     recording: contemporaneous
     outcome: >-
@@ -1303,8 +1303,8 @@ session:
     fallback: Record the smallest unproved criterion clause and block target execution.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
-  - task: Repair the two reviewed exp-038 continuum-proof mechanisms.
-    operator: /root/exp038_impl
+  - task: Repair the two reviewed exp-039 continuum-proof mechanisms.
+    operator: /root/exp039_impl
     status: completed
     recording: contemporaneous
     outcome: >-
@@ -1329,13 +1329,13 @@ session:
     expected_output: Two corrected executable proof mechanisms or the exact remaining blocker.
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      -m cases.n5.fixed_angle_polytope --record /tmp/exp-038-corrected-final.json
+      -m cases.n5.fixed_angle_polytope --record /tmp/exp-039-corrected-final.json
     kill_condition: Stop at the phase implementation cutoff and return partial evidence.
     fallback: Preserve the first corrected mechanism and leave the target blocked.
     write_scope: [cases/n5/fixed_angle_polytope.py]
     excluded_commands: [git, tbd, packing-validate]
-  - task: Independently verify the original and corrected exp-038 checker builds.
-    operator: /root/exp038_verify
+  - task: Independently verify the original and corrected exp-039 checker builds.
+    operator: /root/exp039_verify
     status: completed
     recording: contemporaneous
     outcome: >-
@@ -1360,20 +1360,20 @@ session:
     expected_output: Independent mechanical and P0/P1 disposition of the final source.
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      -m cases.n5.fixed_angle_polytope --replay /tmp/exp038-fixed-angle-verify-final-20260825.json
+      -m cases.n5.fixed_angle_polytope --replay /tmp/exp039-fixed-angle-verify-final-20260825.json
     kill_condition: Return the first failed check without editing shared files.
     fallback: Report the exact failed command and file hash.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
-  - task: Add exp-038 to the maintained small-n exact-model validation step.
-    operator: /root/exp038_validation
+  - task: Add exp-039 to the maintained small-n exact-model validation step.
+    operator: /root/exp039_validation
     status: completed
     recording: contemporaneous
     outcome: >-
-      Added the terminal replay immediately after exp-037; the focused step passes all
+      Added the terminal replay immediately after exp-038; the focused step passes all
       eight exact small-n and local-geometry records in 4.65 wall seconds.
     evidence:
-    - The delegated focused command reported exp-038 criterion_met with 12 paths and ten controls.
+    - The delegated focused command reported exp-039 criterion_met with 12 paths and ten controls.
     files: [src/sqpack/cli/validate.py]
     checks:
     - packing-validate --only 'small-n exact models and local geometry' --jobs 1 --inner-jobs 1.
@@ -1393,8 +1393,8 @@ session:
     fallback: Report the exact missing module or result path.
     write_scope: [src/sqpack/cli/validate.py]
     excluded_commands: [git, tbd, campaign edits]
-  - task: Audit the terminal exp-038 record against every frozen clause and refusal.
-    operator: /root/exp038_soundness
+  - task: Audit the terminal exp-039 record against every frozen clause and refusal.
+    operator: /root/exp039_soundness
     status: completed
     recording: contemporaneous
     outcome: >-
@@ -1409,7 +1409,7 @@ session:
     uncertainty: None inside the frozen criterion; all explicit refusal clauses remain unresolved.
     elapsed_seconds: 130
     elapsed_quality: platform_measured
-    next_action: Accept exp-038 at its narrow cell-local and pathwise first-order scope.
+    next_action: Accept exp-039 at its narrow cell-local and pathwise first-order scope.
     phase: 7
     budget_minutes: 12
     started_at: '2026-08-25T02:03:49-07:00'
@@ -1418,7 +1418,7 @@ session:
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
       -m cases.n5.fixed_angle_polytope --replay
-      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
+      campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
     kill_condition: Return the first failed frozen clause without editing shared files.
     fallback: Block acceptance and report the smallest mismatching certificate.
     write_scope: [read-only]
@@ -1962,10 +1962,10 @@ session:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - campaign/ledger.md
   - ../../.github/workflows/packing-validation.yml
-  - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
-  - campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
-  - campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
-  - campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
+  - campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-tangent-inventory.json
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md
+  - campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
   - cases/n5/fixed_angle_polytope.py
   - src/sqpack/cli/validate.py
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
@@ -1999,13 +1999,13 @@ session:
   - PR 29 validate passed in 2m19s; macos-portability passed in 4m55s
   - >-
     uvx --from softschema softschema validate
-    explorations/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
+    explorations/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
     — valid
   - >-
     uv run --directory explorations/packing --frozen --all-extras --group dev
     packing-ledger check — 37 rounds and 10 agent sessions valid
   - >-
-    Focused exp-037 verification: ruff format and lint passed, basedpyright reported zero
+    Focused exp-038 verification: ruff format and lint passed, basedpyright reported zero
     findings, generation completed in 2.00 wall seconds, replay completed in 1.01 wall
     seconds, and all ten controls passed.
   - >-
@@ -2013,17 +2013,17 @@ session:
     cases.n5.tangent_inventory, all ten module-boundary tests, README reconciliation,
     synopsis reconciliation, and campaign-ledger checks pass.
   - >-
-    Exp-037 generation/replay passed in 0.534/0.526 seconds; an independent exact audit
+    Exp-038 generation/replay passed in 0.534/0.526 seconds; an independent exact audit
     found no P0/P1 issue, and the maintained small-n validation step passed in 3.07
-    seconds with exp-037 included.
+    seconds with exp-038 included.
   - >-
-    Exp-038 softschema validates after an independent criterion audit corrected its
+    Exp-039 softschema validates after an independent criterion audit corrected its
     canonical ray map, affine-dimension witness, LP-level statement, executable
     mutations, and refusal boundary; D-254 records the pre-run draft error.
   - >-
-    Exp-038 generation/replay passed in 2.02310/2.02438 seconds; a 130-second independent
+    Exp-039 generation/replay passed in 2.02310/2.02438 seconds; a 130-second independent
     final audit found no P0/P1 issue, and the maintained small-n exact-model step passed
-    in 4.65 seconds with exp-038 included.
+    in 4.65 seconds with exp-039 included.
   - >-
     The n=4 seed-0 exact fixture rebuild and direct replay pass in 0.33 seconds; focused
     Ruff passes and BasedPyright reports zero findings.

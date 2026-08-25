@@ -104,12 +104,12 @@ session:
       Preserve the narrowest unresolved definition under think-kfb4 and rotate to the
       first dependency-ready frozen portfolio row without allocating an experiment id.
     outcome: >-
-      Registered H-042 on the unmeasured grouped-incidence object: every one of the 128
+      Registered H-043 on the unmeasured grouped-incidence object: every one of the 128
       exact branches must admit a proper group-minimal wall/contact core. Primitive-row,
       grouped-incidence, common-support and stress-circuit questions are now separated.
     evidence:
     - >-
-      H-042 freezes the quantifiers as for every branch there exists a branch-specific
+      H-043 freezes the quantifiers as for every branch there exists a branch-specific
       core; each of 11 wall and 14 contact groups keeps its simultaneous rows atomic.
     - >-
       Acceptance requires an exact rank-33 strictly positive stress for each final core
@@ -135,7 +135,7 @@ session:
     status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
-      H-042 now has a frozen, unmeasured and executable criterion, satisfying order 8's
+      H-043 now has a frozen, unmeasured and executable criterion, satisfying order 8's
       gate for one bounded research implementation slice.
     budget_minutes: 30
     started_at: '2026-08-25T04:23:30-07:00'
@@ -143,22 +143,22 @@ session:
     expected_output: >-
       A reusable exact cone oracle plus one branch's proper group-minimal core, exact
       zero certificate and every retained-group deletion witness, or the first exact
-      unresolved oracle state with no H-042 verdict.
+      unresolved oracle state with no H-043 verdict.
     validation_command: >-
       uv run --directory explorations/packing --frozen python -m
       cases.trump11.incidence_cores --branch 0 --selftest
     kill_condition: >-
       Stop implementation at twenty minutes or on one unresolved exact oracle, branch-
-      provenance mismatch, command overrun, or need to weaken H-042; do not launch the
+      provenance mismatch, command overrun, or need to weaken H-043; do not launch the
       full 128-branch target before the pilot receipt.
     fallback: >-
-      Retain the smallest exact subset/oracle blocker under think-kfb4, leave H-042
+      Retain the smallest exact subset/oracle blocker under think-kfb4, leave H-043
       blocked, and rotate to the next frozen workflow without allocating an experiment id.
     outcome: >-
       Added the exact grouped-incidence oracle and completed the authorized branch-0
       pilot. Its proper core deletes contact 4-5, retains 24 incidences and 40 oriented
       row classes, and has exact zero and every-group deletion certificates. This is one
-      branch of 128 and does not decide H-042.
+      branch of 128 and does not decide H-043.
     evidence:
     - >-
       The independently rerun frozen command completed in 14 wall-seconds; its JSON had
@@ -187,7 +187,7 @@ session:
     objective: >-
       Execute frozen order 10 under think-kfb4: independently audit the branch-0 core's
       exact minimality, complete matrix scope, grouped-incidence semantics and refusal
-      behavior without extending the result to H-042's other 127 branches.
+      behavior without extending the result to H-043's other 127 branches.
     status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
@@ -199,7 +199,7 @@ session:
     expected_output: >-
       An independent accept, repair or reject disposition for branch 0, with exact
       witness and provenance checks and a bounded decision about whether any wider run
-      is earned; no exp-NNN because the universal H-042 criterion remains unresolved.
+      is earned; no exp-NNN because the universal H-043 criterion remains unresolved.
     validation_command: >-
       uv run --directory explorations/packing --frozen python -m
       cases.trump11.incidence_cores --branch 0 --selftest
@@ -208,11 +208,11 @@ session:
       refusal, or claim-scope leak; do not repair inside W2, allocate an experiment id,
       or run another branch.
     fallback: >-
-      Preserve the smallest counterexample or review blocker, leave H-042 blocked, and
+      Preserve the smallest counterexample or review blocker, leave H-043 blocked, and
       rotate to frozen order 11 without a wider target.
     outcome: >-
       Independently accepted the regenerated branch-0 mathematical certificate and its
-      group-minimality proof. H-042 remains blocked at 1/128: D-289 through D-293 stop
+      group-minimality proof. H-043 remains blocked at 1/128: D-289 through D-293 stop
       wider execution until normalized oracle inputs, durable exp-013 binding, replay,
       valid negative-outcome semantics and exact provenance controls land.
     evidence:
@@ -243,7 +243,7 @@ session:
     status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
-      Order 10 accepted one branch but prohibited wider H-042 execution; the frozen
+      Order 10 accepted one branch but prohibited wider H-043 execution; the frozen
       portfolio now rotates from mathematical review to autonomous-run robustness.
     budget_minutes: 30
     started_at: '2026-08-25T04:38:34-07:00'
@@ -490,7 +490,7 @@ session:
     files: []
     checks: [Read-only mathematical derivation plus an unauthorized unretained float scout.]
     uncertainty: >-
-      The numerical threshold is pilot-contaminated and excluded from H-042; no result
+      The numerical threshold is pilot-contaminated and excluded from H-043; no result
       from the scout is scientific evidence.
     elapsed_seconds: null
     elapsed_quality: unavailable
@@ -547,7 +547,7 @@ session:
     elapsed_quality: unavailable
     next_action: Require independent fail-closed, provenance and minimality review.
     phase: 3
-  - task: Design exact controls and audit the first H-042 implementation scope.
+  - task: Design exact controls and audit the first H-043 implementation scope.
     operator: /root/trump_support_scope_audit
     status: completed
     recording: contemporaneous
@@ -563,7 +563,7 @@ session:
     elapsed_quality: unavailable
     next_action: Repair the two narrow issues and keep branch-matrix equality as the scope guard.
     phase: 3
-  - task: Run focused mechanical lint and static checks on the H-042 pilot module.
+  - task: Run focused mechanical lint and static checks on the H-043 pilot module.
     operator: /root/incidence_core_lint
     status: completed
     recording: contemporaneous
@@ -577,7 +577,7 @@ session:
     elapsed_quality: unavailable
     next_action: Keep mathematical validation separate from mechanical lint.
     phase: 3
-  - task: Re-audit the final branch-0 H-042 code and receipt against the earlier scope findings.
+  - task: Re-audit the final branch-0 H-043 code and receipt against the earlier scope findings.
     operator: /root/trump_support_scope_audit
     status: completed
     recording: contemporaneous
@@ -591,7 +591,7 @@ session:
     uncertainty: The complete exp-013 universe is not yet bound by the pilot CLI.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Accept only branch 0 and keep H-042 unresolved at 1/128.
+    next_action: Accept only branch 0 and keep H-043 unresolved at 1/128.
     phase: 4
   - task: Independently verify branch-0 cone logic, minimality, scope and fail-closed behavior.
     operator: /root/incidence_core_exact_audit
@@ -607,7 +607,7 @@ session:
     uncertainty: Current output proves regenerated index 0, not a drift-proof exp-013 key.
     elapsed_seconds: null
     elapsed_quality: unavailable
-    next_action: Track D-292/D-293 and stop the H-042 expansion.
+    next_action: Track D-292/D-293 and stop the H-043 expansion.
     phase: 4
   - task: Inventory the packing validation subprocess seams and current diagnostics.
     operator: /root/validation_subprocess_inventory
@@ -727,7 +727,7 @@ session:
   outputs:
   - campaign/agent-sessions/session-011-eight-hour-continuation.md
   - campaign/agent-sessions/README.md
-  - campaign/hypotheses/H-042-trump-incidence-rigidity-cores.md
+  - campaign/hypotheses/H-043-trump-incidence-rigidity-cores.md
   - cases/trump11/incidence_cores.py
   - src/sqpack/cli/validate.py
   - tests/test_validation_cli.py
@@ -754,7 +754,7 @@ session:
     commit. The original campaign wall clock continues in a successor session.
   next_action: >-
     Rotate after the order-13 checkpoint; do not infer a finite improvement, launch an
-    unbounded proof audit or resume the H-042 wider run.
+    unbounded proof audit or resume the H-043 wider run.
 ---
 # Session 011 — Eight-Hour Portfolio Continuation
 

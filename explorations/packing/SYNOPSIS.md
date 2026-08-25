@@ -240,9 +240,9 @@ W6 resumed only after the corrected criterion was frozen; exp-035 then proved
 exact first-order directions outside the sheet without proving nonlinear realization.
 W3 turned that limitation into exp-036’s registered second-order obstruction, and W6
 then excluded the displayed direction from the true tangent cone.
-Exp-037 now certifies the complete branchwise linearization-cone inventory and leaves
+Exp-038 now certifies the complete branchwise linearization-cone inventory and leaves
 transverse and mixed nonlinear realization open.
-Exp-038 then certifies one connected five-dimensional fixed-angle cell-local LP-optimal
+Exp-039 then certifies one connected five-dimensional fixed-angle cell-local LP-optimal
 position polytope and twelve exact paths in release classes R1, R2, R3, and R6. Its
 positive pathwise first-order stresses do not make the whole polytope stationary or
 classify a terminal component.
@@ -259,7 +259,7 @@ exact R4/R5 nonlinear-realization criterion, and retain an exact continuation, e
 obstruction, or finite unresolved list.
 The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
 remain later slices; D-239 is a separate W7 line.
-Do not start basin-frequency work or reinterpret exp-035 through exp-038 as a
+Do not start basin-frequency work or reinterpret exp-035 through exp-039 as a
 connectivity proof.
 
 ## What Is Built
@@ -415,8 +415,8 @@ results, not only instruments.
 | [`cases.n5.angle_sheet`](cases/n5/angle_sheet.py) | That face lies in an exact two-parameter angle-and-slide sheet of optima (exp-034) |
 | [`cases.n5.tangent_cones`](cases/n5/tangent_cones.py) | Complete active first-order systems admit one displayed non-sheet direction (exp-035) |
 | [`cases.n5.second_order_obstruction`](cases/n5/second_order_obstruction.py) | That displayed direction is excluded from the true Bouligand tangent cone (exp-036) |
-| [`cases.n5.tangent_inventory`](cases/n5/tangent_inventory.py) | Both owner branches have the same complete first-order V-representation at A, the interior, and B (exp-037) |
-| [`cases.n5.fixed_angle_polytope`](cases/n5/fixed_angle_polytope.py) | Four release classes have exact paths in one connected five-dimensional cell-local LP-optimal position polytope, with positive pathwise first-order stresses (exp-038) |
+| [`cases.n5.tangent_inventory`](cases/n5/tangent_inventory.py) | Both owner branches have the same complete first-order V-representation at A, the interior, and B (exp-038) |
+| [`cases.n5.fixed_angle_polytope`](cases/n5/fixed_angle_polytope.py) | Four release classes have exact paths in one connected five-dimensional cell-local LP-optimal position polytope, with positive pathwise first-order stresses (exp-039) |
 | [`cases.kingbird29.verify_svg`](cases/kingbird29/verify_svg.py) | High-precision (160-digit) numerical reconstruction of the `n = 29` record source, refuting H-024’s three-class claim. Not an exact optimality certificate—the retained SVG is numerical, and exp-012 says so (exp-012) |
 
 **Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
@@ -645,7 +645,7 @@ Exp-035 derives the full active first-order systems at both endpoints and one in
 point; every owner branch admits one exact direction outside that sheet.
 Exp-036 proves that displayed direction is not a true Bouligand tangent: both possible
 nearby owner axes have strict exact second-order obstructions.
-Exp-037 certifies the complete branchwise linearization inventory: endpoint quotients
+Exp-038 certifies the complete branchwise linearization inventory: endpoint quotients
 have eight rays, interior quotients have six, and both owner branches coincide.
 Transverse and mixed nonlinear realization remains unclassified.
 This is not a local-isolation theorem, a proof of a five-dimensional family, or a
@@ -1414,7 +1414,7 @@ view; this section is the reading of it.
 | [H-039](campaign/hypotheses/H-039-s12-proof-frontier.md) | open question | Can the lower bound for `s(12)` be improved and ultimately closed at four? | 0 | — |
 | [H-040](campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | blocked | Active-cell neighbor walks beat multistart in new verified cells per LP solve | 0 | — |
 | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **confirmed** | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 1 | 90m agent, 0.70s wall |
-| [H-042](campaign/hypotheses/H-042-trump-incidence-rigidity-cores.md) | blocked | Every one of the 128 derivative-distinct fixed-side branches at Trump’s witness has a proper incidence rigidity core | 0 | — |
+| [H-043](campaign/hypotheses/H-043-trump-incidence-rigidity-cores.md) | blocked | Every one of the 128 derivative-distinct fixed-side branches at Trump’s witness has a proper incidence rigidity core | 0 | — |
 
 ### Confirmed
 
@@ -1522,7 +1522,7 @@ Exp-035 derives the complete active first-order systems at both endpoints and on
 interior point and finds an exact direction outside that sheet in every owner branch;
 exp-036 excludes that displayed direction from the true Bouligand tangent cone by exact
 second-order inequalities in both owner branches.
-Exp-037 completes the first-order inventory with identical owner-branch
+Exp-038 completes the first-order inventory with identical owner-branch
 V-representations, eight endpoint quotient rays, six interior quotient rays, and both
 derived face vectors.
 Transverse and mixed nonlinear realization remains open.
@@ -1530,7 +1530,7 @@ Transverse and mixed nonlinear realization remains open.
 ## Experiments Conducted
 
 There are 38 rounds registered in `series-000`: 37 terminal rounds and the preregistered
-exp-038 confirmatory run.
+exp-039 confirmatory run.
 They record 918 agent-minutes and 28.3 wall-minutes so far.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
@@ -1587,8 +1587,8 @@ archive beside it.
 | [exp-034](campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md) | 5 | target | H-023 | exact angle-and-slide sheet | dimension at least two; four fixtures and four controls pass | **accepted** |
 | [exp-035](campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md) | 5 | target | H-023 | exact full-angle active systems | non-sheet direction at A/interior/B; six controls pass | **accepted** |
 | [exp-036](campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md) | 5 | target | H-023 | exact second-order branch obstruction | displayed direction excluded at A/interior/B; six controls pass | **accepted** |
-| [exp-037](campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md) | 5 | target | H-023 | exact branchwise linearization-cone inventory | identical owner branches; endpoint/interior rays `8/6/8`; ten controls pass | **accepted** |
-| [exp-038](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md) | 5 | target | H-023 | exact fixed-angle optimal-position polytope | dimension 5; 12 sharp paths; ten controls pass | **accepted** |
+| [exp-038](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md) | 5 | target | H-023 | exact branchwise linearization-cone inventory | identical owner branches; endpoint/interior rays `8/6/8`; ten controls pass | **accepted** |
+| [exp-039](campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md) | 5 | target | H-023 | exact fixed-angle optimal-position polytope | dimension 5; 12 sharp paths; ten controls pass | **accepted** |
 
 ### Cost and provenance
 
@@ -1630,8 +1630,8 @@ archive beside it.
 | exp-034 | one exact parameter sheet + four controls | 0.27 s | 10 m | criterion | `329b848` |
 | exp-035 | six exact owner matrices + six controls | 0.28 s | 20 m | criterion | `aa63cf4` |
 | exp-036 | two exact branch obstructions + six controls | 0.21 s | 20 m | criterion | `f2d2e53` |
-| exp-037 | six exact matrices + ten controls | 1.06 s | 30 m | criterion | `b8d0104` |
-| exp-038 | one exact polytope + ten controls | 4.047 s | 20 m | criterion | `27b999e` |
+| exp-038 | six exact matrices + ten controls | 1.06 s | 30 m | criterion | `b8d0104` |
+| exp-039 | one exact polytope + ten controls | 4.047 s | 20 m | criterion | `27b999e` |
 
 ### What the 38 rounds jointly establish
 
@@ -1658,10 +1658,10 @@ Exp-035 then retains six exact active-system matrices across A, the interior, an
 verifies a non-sheet direction against every row.
 Exp-036 proves that displayed direction cannot be a nonlinear path tangent: the only two
 nearby pair `(3,4)` owner-axis branches have exact second-order obstruction margins.
-Exp-037 then certifies the complete first-order inventory and both pointed-quotient face
+Exp-038 then certifies the complete first-order inventory and both pointed-quotient face
 vectors. This strict linearized-versus-true-tangent gap and finite inventory do not
 classify transverse or mixed nonlinear realization or assign a component.
-Exp-038 exactly continues four release classes through twelve sharp fixed-angle paths in
+Exp-039 exactly continues four release classes through twelve sharp fixed-angle paths in
 one connected five-dimensional cell-local LP-optimal position polytope.
 Both owner branches carry positive structurally derived first-order stresses on those
 paths. This does not make every point of the polytope stationary, certify an A-to-B
@@ -1950,7 +1950,7 @@ briefly changed D-034 instead of D-194. D-197 records the concurrent checkout ca
 the exp-036 commit banner; the isolated checker commit was moved to the campaign branch
 and the other branch ref restored before push or target execution.
 
-D-289 through D-293 record the H-042 pilot’s remaining validity, robustness, and
+D-289 through D-293 record the H-043 pilot’s remaining validity, robustness, and
 provenance gaps. D-289 covers row-class normalization in the cone oracle; D-290 keeps
 certificate replay open; D-291 covers the branch-0 golden’s treatment of valid future
 refutations; D-292 keeps regenerated branch indices bound to the retained exp-013
@@ -2039,7 +2039,7 @@ seconds of generation plus replay.
 Exp-034 through exp-036 then certify an exact angle-and-slide sheet, a non-sheet
 first-order direction, and an exact second-order obstruction to that displayed direction
 in 0.76 further wall-seconds.
-Exp-037 adds the complete branchwise first-order inventory in 1.06 wall-seconds.
+Exp-038 adds the complete branchwise first-order inventory in 1.06 wall-seconds.
 Next certify the discovered fixed-angle optimal-position polytope, test transverse and
 mixed nonlinear realization, bound clearance between the unequal-side rows, and hide the
 UnitSquare `n = 68,69` children for the first parent-surgery test.

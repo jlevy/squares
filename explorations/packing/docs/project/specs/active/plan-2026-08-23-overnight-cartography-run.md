@@ -335,7 +335,7 @@ For the next supervised exact-research goal, follow
 [session-014](../../../../campaign/agent-sessions/session-014-final-portfolio-rotation.md)
 and take `think-1s0h` through one preregistered BC-010 exact R4/R5 nonlinear-realization
 slice. Retain an exact continuation, exact obstruction, or finite unresolved list.
-Exp-037 completed the branchwise cone inventory, and exp-038 covers R1, R2, R3, and R6
+Exp-038 completed the branchwise cone inventory, and exp-039 covers R1, R2, R3, and R6
 only; `-W`, mixed-angle realization, the whole stationary component, and unequal-side
 clearance remain later slices.
 New numerical map rounds remain behind BC-010. D-239 is a separate W7 robustness line,

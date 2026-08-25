@@ -1,12 +1,12 @@
 ---
-title: exp-038 — exact n = 5 fixed-angle optimal-position polytope
+title: exp-039 — exact n = 5 fixed-angle optimal-position polytope
 softschema:
   contract: packing.squares:Experiment/v1
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
 experiment:
-  id: exp-038
+  id: exp-039
   series: series-000
   title: Certify the five-dimensional fixed-angle face containing four release classes
   date: '2026-08-25'
@@ -22,7 +22,7 @@ experiment:
   instance: {axis: n, point: 5, role: target}
   method:
     control: >-
-      exact exp-033, exp-034, and exp-037 semantic bindings; independent exact packing
+      exact exp-033, exp-034, and exp-038 semantic bindings; independent exact packing
       verification; and ten normalization, transport, interval, inequality, dual,
       stress, branch, active-axis, and overclaim mutations
     candidate: >-
@@ -38,15 +38,15 @@ experiment:
     command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
       -m cases.n5.fixed_angle_polytope --record
-      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
+      campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
       && timeout 30 uv run --directory explorations/packing --frozen --quiet python
       -m cases.n5.fixed_angle_polytope --replay
-      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
+      campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
     budget: >-
       one 30-minute implementation and measurement slice; separate 30-second generation
       and replay caps; stop on source drift, an inequivalent eliminated domain, a failed
       exact packing, a nonpositive stress, a surviving control, or retained-record drift
-    record: campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
+    record: campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
   results:
   - shape: determination
     question: >-
@@ -67,7 +67,7 @@ experiment:
   verdict:
     decision: accepted
     primary_criterion: >-
-      bind exp-033, exp-034, and exp-037 exactly, including the canonical-ray
+      bind exp-033, exp-034, and exp-038 exactly, including the canonical-ray
       normalization; prove that all 30 common-cell inequalities are equivalent to the
       declared bounded five-coordinate polytope; prove its affine dimension is five
       using six affinely independent feasible points and prove its LP dual fixes side
@@ -87,9 +87,9 @@ experiment:
       reject. The verdict remains cell-local and pathwise first-order only.
     commit: 27b999e
 ---
-# exp-038 — accepted fixed-angle optimal-position polytope
+# exp-039 — accepted fixed-angle optimal-position polytope
 
-Exp-037 certifies the complete branchwise linearization-cone inventory but makes no
+Exp-038 certifies the complete branchwise linearization-cone inventory but makes no
 nonlinear continuation claim.
 A separate exact derivation found a stronger fixed-angle candidate than twelve isolated
 fixtures: four release classes appear to lie in one five-dimensional connected
@@ -152,7 +152,7 @@ R3: dx0 = -1, dy1 = 1, dx4 = -1/2, dy4 = 1/2
 R6: dx0 = -1, dx1 = -1, dx4 = -1/2, dy4 = 1/2
 ```
 
-The checker must bind these to exp-037 explicitly.
+The checker must bind these to exp-038 explicitly.
 Its stored interior and B vectors named `R1` and `R2` are `r` times the canonical
 vectors, while its stored A vectors are `r(Ri+s)` for `i` in `{1,2}`. Its stored
 interior and B vectors named `R3` and `R6` are canonical, while its stored A vectors are
@@ -252,7 +252,7 @@ unrestricted optimality, second-order local minimality, terminality, the maximal
 stationary component, `R4`, `R5`, `-W`, mixed-angle directions, basin mass, census
 completeness, or unequal-side clearance.
 
-[`exp-038-h-023-n5-fixed-angle-polytope.json`](../results/exp-038-h-023-n5-fixed-angle-polytope.json)
+[`exp-039-h-023-n5-fixed-angle-polytope.json`](../results/exp-039-h-023-n5-fixed-angle-polytope.json)
 retains the exact domain, dual, source maps, paths, packing fixtures, owner-axis proofs,
 stress coefficient arrays, scope refusals, and ten controls.
 

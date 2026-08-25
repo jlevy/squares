@@ -6424,7 +6424,7 @@ defects:
   severity: high
   status: fixed
   what: >-
-    The first exp-037 prototype hard-coded owner-branch equality and several controls as
+    The first exp-038 prototype hard-coded owner-branch equality and several controls as
     true, while its positive certificate was prose rather than checked coefficients and
     its V-representation contained names rather than physical vectors.
   consequence: >-
@@ -6436,7 +6436,7 @@ defects:
     lineality, sheet, and transverse vectors, all-row residual and active-rank checks,
     source regeneration, face derivation, survivor exhaustion, and executable controls.
   regression: >-
-    Exp-037 now rejects missing or duplicated branches and rays, both directions of a
+    Exp-038 now rejects missing or duplicated branches and rays, both directions of a
     sheet/transverse swap, nonlinear scope overclaims, and three non-tautological toy
     cones while exact generation and replay rebuild all source evidence
   bead: think-7z0d
@@ -6478,7 +6478,7 @@ defects:
   severity: medium
   status: fixed
   what: >-
-    Exp-037 originally said that every nonlinear lift remains unresolved and described
+    Exp-038 originally said that every nonlinear lift remains unresolved and described
     the sheet as occupying two lineality dimensions without restricting that statement
     to the interior stratum. Exp-034 already proves nonlinear sheet lifts, while the
     endpoint sheet is a pointed two-ray cone rather than lineality.
@@ -6490,12 +6490,12 @@ defects:
     directions, distinguish interior sheet lineality from endpoint sheet rays, and
     state both pointed-quotient face vectors with their counting convention.
   regression: >-
-    Exp-037 binds exp-034 exactly, tests physical sheet vectors in every matrix, and
+    Exp-038 binds exp-034 exactly, tests physical sheet vectors in every matrix, and
     rejects both directions of a sheet/transverse classification swap
   bead: think-w2ii
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
 - id: D-253
-  title: The exp-037 wrapper was added under a forbidden legacy tools path
+  title: The exp-038 wrapper was added under a forbidden legacy tools path
   date: '2026-08-25'
   layer: tooling
   class: robustness
@@ -6505,7 +6505,7 @@ defects:
   severity: medium
   status: fixed
   what: >-
-    The exp-037 implementation added a thin Python wrapper under
+    The exp-038 implementation added a thin Python wrapper under
     explorations/packing/tools even though the engineering cleanup moved retained
     case-specific entry points into importable case modules and forbids Python in that
     legacy directory.
@@ -6522,7 +6522,7 @@ defects:
   bead: think-xe5t
   recorded_in: tests/test_module_boundaries.py
 - id: D-254
-  title: The first exp-038 criterion conflated ray normalizations and rank with dimension
+  title: The first exp-039 criterion conflated ray normalizations and rank with dimension
   date: '2026-08-25'
   layer: record
   class: soundness
@@ -6532,8 +6532,8 @@ defects:
   severity: high
   status: fixed
   what: >-
-    The first exp-038 draft wrote one path formula using R_i without defining that
-    exp-037 scales R1 and R2 by sqrt(2) and already includes the endpoint-A slide
+    The first exp-039 draft wrote one path formula using R_i without defining that
+    exp-038 scales R1 and R2 by sqrt(2) and already includes the endpoint-A slide
     correction. It also inferred affine dimension five from a rank-six equality system
     alone, described an LP level certificate as differential no descent, left C_I
     undefined, and did not freeze which nonredundant inequality its mutation removed.
@@ -6542,17 +6542,17 @@ defects:
     accepted an empty or lower-dimensional equality set, and blurred cellwise level
     optimality with branchwise first-order stationarity.
   fix: >-
-    Define all canonical vectors and their exact exp-037 source map, set C_I to the exact
+    Define all canonical vectors and their exact exp-038 source map, set C_I to the exact
     coordinatewise midpoint, require nonemptiness, boundedness, and six affinely
     independent feasible points, separate the LP lower bound from the pathwise stress,
     and freeze the nonredundancy mutation as removing x0 >= 1/2.
   regression: >-
-    Exp-038 now requires executable mutations for omitted or misplaced slide correction
+    Exp-039 now requires executable mutations for omitted or misplaced slide correction
     and the missing R6 coordinate, exact feasible affine witnesses, the explicit
     x0-unboundedness mutation, input-level dual and stress perturbations, and a sharp
     global and terminal refusal boundary
   bead: think-p6j0
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md
 - id: D-255
   title: Four exact negative-control anchors lagged the current living-document values
   date: '2026-08-25'
@@ -6593,7 +6593,7 @@ defects:
   severity: high
   status: fixed
   what: >-
-    The first exp-038 checker called every separating-axis gap affine and inferred that
+    The first exp-039 checker called every separating-axis gap affine and inferred that
     an axis with zero gaps at both path endpoints stayed identically active. The gap is
     an absolute value of an affine projection minus constant support, and several
     nonactive a-minus projections actually change sign inside their intervals.
@@ -6622,7 +6622,7 @@ defects:
   severity: high
   status: fixed
   what: >-
-    The first exp-038 checker verified each branchwise stress identity at three exact
+    The first exp-039 checker verified each branchwise stress identity at three exact
     epsilon values and then recorded that those samples proved the full interval, but
     it merely asserted rather than derived that every coefficient polynomial has degree
     at most two.
@@ -6680,7 +6680,7 @@ defects:
   severity: medium
   status: fixed
   what: >-
-    The exp-038 landing command passed `campaign/ledger.md` directly to Flowmark. An
+    The exp-039 landing command passed `campaign/ledger.md` directly to Flowmark. An
     explicit file target bypasses `.flowmarkignore`, so the formatter rewrapped and
     typographically normalized a byte-generated view that the ledger checker expects to
     match its renderer exactly.
@@ -7319,13 +7319,13 @@ defects:
     of the computation that influenced the claim.
   fix: >-
     Reject the 34-row threshold, disclose the primitive-row scout as pilot-only, and
-    freeze H-042 on the distinct unmeasured object of grouped geometric incidences.
+    freeze H-043 on the distinct unmeasured object of grouped geometric incidences.
     The delegate's scope breach remains visible in the session receipt.
   regression: none
   bead: think-19nv
   recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
 - id: D-285
-  title: The first H-042 pilot could pass while its exact cone oracle was unresolved
+  title: The first H-043 pilot could pass while its exact cone oracle was unresolved
   date: '2026-08-25'
   layer: tooling
   class: validity
@@ -7340,7 +7340,7 @@ defects:
     unresolved oracle or a nonzero root cone therefore skipped the decisive checks and
     still satisfied the frozen validation command.
   consequence: >-
-    A failed or incomplete H-042 instrument check could be recorded as a passing pilot,
+    A failed or incomplete H-043 instrument check could be recorded as a passing pilot,
     flattering both tool readiness and any later support conclusion built on it.
   fix: >-
     Return nonzero for every non-completed oracle state, make the branch-0 selftest
@@ -7352,7 +7352,7 @@ defects:
   bead: think-5bcy
   recorded_in: cases/trump11/incidence_cores.py
 - id: D-286
-  title: The first H-042 record conflated conjunctive wall rows with feature aliases
+  title: The first H-043 record conflated conjunctive wall rows with feature aliases
   date: '2026-08-25'
   layer: record
   class: bookkeeping
@@ -7428,7 +7428,7 @@ defects:
   bead: think-asaa
   recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
 - id: D-289
-  title: The H-042 pilot normalized row classes for counting but not for its cone oracle
+  title: The H-043 pilot normalized row classes for counting but not for its cone oracle
   date: '2026-08-25'
   layer: tooling
   class: validity
@@ -7444,7 +7444,7 @@ defects:
   consequence: >-
     Branch 0 is unaffected because all 42 primitive rows have distinct oriented class
     keys. On an unmeasured branch with duplicates, the implementation would no longer
-    match H-042's declared normalized system and could misstate support provenance or
+    match H-043's declared normalized system and could misstate support provenance or
     minimality.
   fix: >-
     Stop expansion at branch 0. Before another branch, build oracle inputs from exact
@@ -7455,7 +7455,7 @@ defects:
   bead: think-jyit
   recorded_in: cases/trump11/incidence_cores.py
 - id: D-290
-  title: H-042 pilot certificates can be recomputed but not replayed from a retained record
+  title: H-043 pilot certificates can be recomputed but not replayed from a retained record
   date: '2026-08-25'
   layer: record
   class: robustness
@@ -7481,7 +7481,7 @@ defects:
   bead: think-oa96
   recorded_in: cases/trump11/incidence_cores.py
 - id: D-291
-  title: The branch-0 H-042 golden would classify a valid future refutation as test failure
+  title: The branch-0 H-043 golden would classify a valid future refutation as test failure
   date: '2026-08-25'
   layer: tooling
   class: validity
@@ -7496,7 +7496,7 @@ defects:
     result exit nonzero because proper_core_found is false.
   consequence: >-
     A branch whose full incidence system is genuinely inclusion-minimal would refute
-    H-042, but a wider runner could discard it as an instrument failure instead of
+    H-043, but a wider runner could discard it as an instrument failure instead of
     retaining the conservative mathematical result.
   fix: >-
     Stop expansion at branch 0. Before a wider run, separate branch-0 golden controls
@@ -7506,7 +7506,7 @@ defects:
   bead: think-j92q
   recorded_in: cases/trump11/incidence_cores.py
 - id: D-292
-  title: H-042 branch indices are regenerated but not bound to the retained exp-013 universe
+  title: H-043 branch indices are regenerated but not bound to the retained exp-013 universe
   date: '2026-08-25'
   layer: record
   class: validity
@@ -7533,7 +7533,7 @@ defects:
   bead: think-7jyh
   recorded_in: cases/trump11/incidence_cores.py
 - id: D-293
-  title: Two H-042 provenance selftests claim completeness without checking exact mappings
+  title: Two H-043 provenance selftests claim completeness without checking exact mappings
   date: '2026-08-25'
   layer: tooling
   class: validity
@@ -8166,11 +8166,11 @@ defects:
   what: >-
     Session 014 correctly sent the next agent to think-1s0h for one R4/R5
     nonlinear-realization slice, but the active launch paragraph and BC-010 note still
-    assigned work to closed think-nm35, omitted exp-038, and retained fixed D-203 as a
+    assigned work to closed think-nm35, omitted exp-039, and retained fixed D-203 as a
     live blocker. The root orientation path did not point to the terminal session.
   consequence: >-
     A cold-start agent had to arbitrate conflicting authorities and could repeat the
-    completed exp-037 cone inventory, miss exp-038's twelve realized paths, or spend a
+    completed exp-038 cone inventory, miss exp-039's twelve realized paths, or spend a
     slice diagnosing an already repaired producer failure.
   fix: >-
     Route README through one Current Handoff section in the synopsis; reconcile that

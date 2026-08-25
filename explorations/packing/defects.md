@@ -150,9 +150,9 @@ This is the actionable list.
 | D-280 | The phase-count cap ended a fast campaign before its wall-clock goal | tooling |
 | D-284 | A delegated float scout ran before the Trump support criterion was frozen | record |
 | D-287 | A shell-active bead description executed a backtick-delimited word | record |
-| D-289 | The H-042 pilot normalized row classes for counting but not for its cone oracle | tooling |
-| D-291 | The branch-0 H-042 golden would classify a valid future refutation as test failure | tooling |
-| D-292 | H-042 branch indices are regenerated but not bound to the retained exp-013 universe | record |
+| D-289 | The H-043 pilot normalized row classes for counting but not for its cone oracle | tooling |
+| D-291 | The branch-0 H-043 golden would classify a valid future refutation as test failure | tooling |
+| D-292 | H-043 branch indices are regenerated but not bound to the retained exp-013 universe | record |
 | D-297 | The first Windows timeout path treated taskkill as a proved tree guarantee | tooling |
 | D-298 | Overlapping inspection ranges fabricated a duplicate session key | tooling |
 | D-299 | A later successful check masked an earlier gate failure in the shell status | tooling |
@@ -194,11 +194,11 @@ This is the actionable list.
 | D-239 | outstanding | medium | Validation steps have no outer deadline or process-group cleanup | `think-tx0b` |
 | D-280 | contained | high | The phase-count cap ended a fast campaign before its wall-clock goal | `think-bfwm` |
 | D-283 | outstanding | high | A zero-step sqsearch regime can spin forever without spending its move budget | `think-dprg` |
-| D-289 | contained | high | The H-042 pilot normalized row classes for counting but not for its cone oracle | `think-jyit` |
-| D-290 | outstanding | medium | H-042 pilot certificates can be recomputed but not replayed from a retained record | `think-oa96` |
-| D-291 | contained | high | The branch-0 H-042 golden would classify a valid future refutation as test failure | `think-j92q` |
-| D-292 | contained | high | H-042 branch indices are regenerated but not bound to the retained exp-013 universe | `think-7jyh` |
-| D-293 | outstanding | medium | Two H-042 provenance selftests claim completeness without checking exact mappings | `think-8wgw` |
+| D-289 | contained | high | The H-043 pilot normalized row classes for counting but not for its cone oracle | `think-jyit` |
+| D-290 | outstanding | medium | H-043 pilot certificates can be recomputed but not replayed from a retained record | `think-oa96` |
+| D-291 | contained | high | The branch-0 H-043 golden would classify a valid future refutation as test failure | `think-j92q` |
+| D-292 | contained | high | H-043 branch indices are regenerated but not bound to the retained exp-013 universe | `think-7jyh` |
+| D-293 | outstanding | medium | Two H-043 provenance selftests claim completeness without checking exact mappings | `think-8wgw` |
 | D-300 | outstanding | medium | The receipt rehearsal requested an unsupported gdate precision | `think-jygr` |
 | D-304 | contained | high | McClenagan's Section 3 proof uses a contradictory inequality chain | `think-486e` |
 
@@ -457,9 +457,9 @@ This is the actionable list.
 | [D-249](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-25 | record | bookkeeping | flattering | `inspection` | high | fixed | Branch completion and landed-main state were treated as the same fact |
 | [D-250](cases/n5/tangent_inventory.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | A delegated exact checker asserted proofs and controls it had not executed |
 | [D-251](cases/n5/tangent_inventory.py) | 2026-08-25 | tooling | validity | conservative | `control_cell` | medium | fixed | An omitted R6 coordinate produced a false exact blocker |
-| [D-252](campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | medium | fixed | The preregistered refusal accidentally included already proved sheet lifts |
-| [D-253](tests/test_module_boundaries.py) | 2026-08-25 | tooling | robustness | neutral | `gate` | medium | fixed | The exp-037 wrapper was added under a forbidden legacy tools path |
-| [D-254](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md) | 2026-08-25 | record | soundness | flattering | `review` | high | fixed | The first exp-038 criterion conflated ray normalizations and rank with dimension |
+| [D-252](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | medium | fixed | The preregistered refusal accidentally included already proved sheet lifts |
+| [D-253](tests/test_module_boundaries.py) | 2026-08-25 | tooling | robustness | neutral | `gate` | medium | fixed | The exp-038 wrapper was added under a forbidden legacy tools path |
+| [D-254](campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md) | 2026-08-25 | record | soundness | flattering | `review` | high | fixed | The first exp-039 criterion conflated ray normalizations and rank with dimension |
 | [D-255](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Four exact negative-control anchors lagged the current living-document values |
 | [D-256](cases/n5/fixed_angle_polytope.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | Endpoint equality was treated as an affine full-interval axis proof |
 | [D-257](cases/n5/fixed_angle_polytope.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | Three stress samples were promoted without deriving the degree bound |
@@ -490,15 +490,15 @@ This is the actionable list.
 | [D-282](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The stopped session retained a completed final phase |
 | [D-283](sqsearch/src/search.rs) | 2026-08-25 | engine | robustness | neutral | `review` | high | outstanding | A zero-step sqsearch regime can spin forever without spending its move budget |
 | [D-284](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | record | validity | flattering | `review` | medium | fixed | A delegated float scout ran before the Trump support criterion was frozen |
-| [D-285](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The first H-042 pilot could pass while its exact cone oracle was unresolved |
-| [D-286](cases/trump11/incidence_cores.py) | 2026-08-25 | record | bookkeeping | neutral | `review` | medium | fixed | The first H-042 record conflated conjunctive wall rows with feature aliases |
+| [D-285](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The first H-043 pilot could pass while its exact cone oracle was unresolved |
+| [D-286](cases/trump11/incidence_cores.py) | 2026-08-25 | record | bookkeeping | neutral | `review` | medium | fixed | The first H-043 record conflated conjunctive wall rows with feature aliases |
 | [D-287](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | record | bookkeeping | neutral | `anomaly` | low | fixed | A shell-active bead description executed a backtick-delimited word |
 | [D-288](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | tooling | bookkeeping | neutral | `gate` | low | fixed | The first focused Ruff replay doubled the uv working-directory prefix |
-| [D-289](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | neutral | `review` | high | contained | The H-042 pilot normalized row classes for counting but not for its cone oracle |
-| [D-290](cases/trump11/incidence_cores.py) | 2026-08-25 | record | robustness | conservative | `review` | medium | outstanding | H-042 pilot certificates can be recomputed but not replayed from a retained record |
-| [D-291](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | conservative | `review` | high | contained | The branch-0 H-042 golden would classify a valid future refutation as test failure |
-| [D-292](cases/trump11/incidence_cores.py) | 2026-08-25 | record | validity | neutral | `review` | high | contained | H-042 branch indices are regenerated but not bound to the retained exp-013 universe |
-| [D-293](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | flattering | `review` | medium | outstanding | Two H-042 provenance selftests claim completeness without checking exact mappings |
+| [D-289](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | neutral | `review` | high | contained | The H-043 pilot normalized row classes for counting but not for its cone oracle |
+| [D-290](cases/trump11/incidence_cores.py) | 2026-08-25 | record | robustness | conservative | `review` | medium | outstanding | H-043 pilot certificates can be recomputed but not replayed from a retained record |
+| [D-291](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | conservative | `review` | high | contained | The branch-0 H-043 golden would classify a valid future refutation as test failure |
+| [D-292](cases/trump11/incidence_cores.py) | 2026-08-25 | record | validity | neutral | `review` | high | contained | H-043 branch indices are regenerated but not bound to the retained exp-013 universe |
+| [D-293](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | flattering | `review` | medium | outstanding | Two H-043 provenance selftests claim completeness without checking exact mappings |
 | [D-294](defects.yaml) | 2026-08-25 | record | bookkeeping | neutral | `inspection` | medium | fixed | The canonical defect count lagged eleven committed records |
 | [D-295](src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | The first timeout draft isolated validation calls that remained unbounded |
 | [D-296](tests/test_validation_cli.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The first timeout test could not expose an early-parent descendant leak |
