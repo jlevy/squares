@@ -19,6 +19,7 @@
 | [session-011](agent-sessions/session-011-eight-hour-continuation.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `research-pass` (insight) | 7 | think-gszk | Rotate after the order-13 checkpoint; do not infer a finite improvement, launch an unbounded proof audit or resume the H-042 wider run. |
 | [session-012](agent-sessions/session-012-eight-hour-final-continuation.md) | completed | contemporaneous | `process-review` (correctness) | `process-review` (process) | 3 | think-gszk | Commit and push the local sign repair, then start a bounded successor session. |
 | [session-013](agent-sessions/session-013-generated-view-recurrence-checkpoint.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-gszk | Commit and push, update PR 34, then begin a new bounded research session. |
+| [session-014](agent-sessions/session-014-final-portfolio-rotation.md) | in_progress | contemporaneous | `pipeline-improvement` (efficiency) | `pipeline-improvement` (efficiency) | 1 | think-gszk | Complete phase 1 by 07:27:09, then rotate once before finalization. |
 
 ### Workflow summary
 
@@ -32,7 +33,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 2 | 4 | 7 | 6 |
 | `efficiency-loop` | 1 | 0 | 1 | 0 |
 | `research-loop` | 1 | 4 | 4 | 7 |
-| `pipeline-improvement` | 0 | 0 | 7 | 0 |
+| `pipeline-improvement` | 1 | 0 | 8 | 0 |
 
 ## Experiment agendas
 
