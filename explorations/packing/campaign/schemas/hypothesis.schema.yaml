@@ -126,7 +126,7 @@ properties:
     description: >-
       The machine-runnable form of `instrument`, and the field that makes a hypothesis
       eligible for unattended execution. `instrument` is prose for a human; this is what
-      campaign/runner.py reads. A hypothesis WITHOUT this block is never run unattended -
+      packing-campaign reads. A hypothesis WITHOUT this block is never run unattended -
       the runner reports it as needing an operator rather than guessing an invocation.
     properties:
       command:

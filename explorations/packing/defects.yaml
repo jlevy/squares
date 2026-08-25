@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 232
+count: 248
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3155,7 +3155,7 @@ defects:
   detected_by: review
   latent_for: since the negative-control harness was introduced
   severity: medium
-  status: outstanding
+  status: fixed
   what: >-
     Source snapshots prevent a killed negative control from corrupting the checkout,
     but each checker still runs without a deadline and a shell child can outlive the
@@ -3165,10 +3165,12 @@ defects:
     temporary descendants consuming resources even though the scientific tree remains
     safe.
   fix: >-
-    none yet. Give each control a declared or documented default timeout, launch it in
-    a process group, terminate and reap the group on timeout or interruption, and
-    rehearse a child that ignores the first termination signal.
-  regression: none
+    Give every control a finite default or declared deadline, launch its command in a
+    new process group, and terminate and reap the whole group with TERM followed by KILL
+    on timeout or interruption.
+  regression: >-
+    tests/test_negative_controls.py launches a child that ignores TERM and requires the
+    harness to time out, kill and reap it before returning a failure.
   bead: think-cns0
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 - id: D-130
@@ -5954,3 +5956,412 @@ defects:
   regression: none
   bead: think-yjll
   recorded_in: defects.yaml
+- id: D-233
+  title: README layout validation treated ignored migration caches as project content
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: gate
+  latent_for: the first validation run in a long-lived checkout after PR 23
+  severity: medium
+  status: fixed
+  what: >-
+    The README checker inventoried every top-level filesystem entry, so cache-only
+    remnants under the deleted tools and sqpack directories made the fast gate demand
+    that README document paths which no longer existed in the committed project.
+  consequence: >-
+    Existing agent checkouts failed the canonical gate while clean CI passed, making
+    the same merged tree appear healthy or broken according to local cache history.
+  fix: >-
+    Inventory entries only when they contain durable files, ignoring known cache paths
+    without requiring Git metadata so private mutation snapshots still exercise the
+    checker.
+  regression: >-
+    test_readme_inventory_ignores_cache_only_legacy_directories retains a visible source
+    directory and excludes a removed directory containing only bytecode cache.
+  bead: think-wliu
+  recorded_in: devtools/check_readme.py
+- id: D-234
+  title: The implemented engineering plan carried stale inventory and defect references
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: the final integration commits of PR 23
+  severity: medium
+  status: fixed
+  what: >-
+    The plan froze early module, test and mutation-control counts after later integration
+    added files and controls, and attributed the CI history, cache and YAML-parser fixes
+    to D-219 through D-221 instead of their actual D-226 through D-228 records.
+  consequence: >-
+    A reader auditing the implemented refactor received a false inventory and was sent
+    to three unrelated defects for its CI evidence.
+  fix: >-
+    Remove volatile module and test counts, reconcile the final mutation-control
+    evidence, cite D-226 through D-228, and state that the work merged through PR 23.
+  regression: none
+  bead: think-c538
+  recorded_in: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+- id: D-235
+  title: Current reproducibility instructions still named deleted command paths
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: the merge of PR 23
+  severity: high
+  status: fixed
+  what: >-
+    The living synopsis, frontier record and maintained research reports still directed
+    readers to test.sh, verify_trump11.py, lp_cell.py, negative_control.py and
+    tools/render_tables.py after the refactor removed or relocated them.
+  consequence: >-
+    The project claimed its main exact results were reproducible while the commands
+    printed at the point of use failed immediately.
+  fix: >-
+    Point current instructions to packing-validate and the migrated cases and devtools
+    modules while leaving historical experiment, session and review provenance intact.
+  regression: >-
+    devtools.check_synopsis rejects the removed operational paths from the living
+    synopsis, and the canonical packing-validate command exercises their replacements.
+  bead: think-gk2b
+  recorded_in: SYNOPSIS.md
+- id: D-236
+  title: A completed timeout fix remained outstanding in the defect and launch records
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: the final integration commits of PR 23
+  severity: high
+  status: fixed
+  what: >-
+    D-129 still said fix none, the generated log and synopsis repeated it as open, and
+    the launch checklist remained unchecked after the bounded process-group cleanup and
+    its TERM-ignoring-child test had landed and think-cns0 had closed.
+  consequence: >-
+    The authoritative status surfaces contradicted shipped and tested behavior, leaving
+    a completed infrastructure gate looking like an unattended-launch blocker.
+  fix: >-
+    Reconcile D-129 to fixed with its actual implementation and regression, regenerate
+    the log, update the synopsis, and check the matching launch requirement.
+  regression: none
+  bead: think-gwl3
+  recorded_in: defects.yaml
+- id: D-237
+  title: Mutation-control target paths could escape their private snapshot
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: inspection
+  latent_for: since private mutation snapshots were introduced
+  severity: high
+  status: fixed
+  what: >-
+    The harness resolved the file path supplied by controls.yaml and read and rewrote it
+    without proving that an absolute path, parent traversal or symlink still landed
+    inside the private snapshot.
+  consequence: >-
+    A typo or later control edit could deliberately corrupt and then restore a real
+    checkout or unrelated external file, invalidating the isolation guarantee.
+  fix: >-
+    Resolve every existing target before reading it and reject any result outside the
+    private snapshot root, including absolute, traversal and symlink escapes.
+  regression: >-
+    test_control_targets_cannot_escape_the_private_snapshot exercises all three escape
+    forms and the legitimate repository-root .flowmarkignore target.
+  bead: think-cdhq
+  recorded_in: devtools/run_negative_controls.py
+- id: D-238
+  title: The synopsis called quench endpoints discrete basins with a well-defined census
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: after the exact n = 3 continuum was established
+  severity: high
+  status: fixed
+  what: >-
+    One benefits list said a free-angle quench makes a local minimum a discrete object
+    and thereby makes basin identity, census and atlas statistics well defined. The
+    exact n = 3 stationary continuum proves that one connected component can emit many
+    endpoint keys, and the same synopsis correctly marks identity blocked under D-034.
+  consequence: >-
+    The false statement promoted provisional endpoint observations into admissible
+    components and could authorize precisely the census that BC-010 still blocks.
+  fix: >-
+    State only that terminal endpoint observations become inspectable and replayable,
+    while component identity and every census-derived claim remain inadmissible.
+  regression: none
+  bead: think-1pf9
+  recorded_in: SYNOPSIS.md
+- id: D-239
+  title: Validation steps have no outer deadline or process-group cleanup
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: inspection
+  latent_for: since packing-validate replaced the shell gate
+  severity: medium
+  status: outstanding
+  what: >-
+    packing-validate bounds mutation-control children but launches its other proof,
+    solver, Cargo and checker subprocesses without a deadline, then waits for every
+    future to finish.
+  consequence: >-
+    One hung validation step can consume an entire unattended handoff and leave
+    descendants alive even though the bounded research-slice protocol says to stop.
+  fix: >-
+    none yet. Give steps declared or documented default deadlines appropriate to deep
+    mathematics, terminate and reap their process groups, and report a distinct timeout
+    failure without imposing one short uniform cap.
+  regression: none
+  bead: think-tx0b
+  recorded_in: src/sqpack/cli/validate.py
+- id: D-240
+  title: The autonomous-session wall budget could be reset indefinitely
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: since AgentSession/v2 introduced phase clocks
+  severity: high
+  status: fixed
+  what: >-
+    Agent sessions recorded wall_minutes and per-phase deadlines but no absolute session
+    start or deadline. Renewing a phase could therefore reset the only enforced clock,
+    and max_cycles was rendered but never checked. The first attempted correction still
+    allowed an active session to remain in progress after its absolute deadline and an
+    ordinary phase to consume the finalization reserve.
+  consequence: >-
+    A nominal eight-hour campaign could continue indefinitely through individually
+    valid thirty-minute phases, defeating the stop rule intended to keep autonomous
+    work out of rabbit holes.
+  fix: >-
+    Give active sessions offset-aware start and deadline fields, bind their span to
+    wall_minutes, reject an expired active session, distinguish ordinary work from the
+    designated finalization phase, bound ordinary work by the reserve boundary, and
+    enforce max_cycles.
+  regression: >-
+    Focused contract tests and mutation controls reject a missing or expired active
+    session clock, a deadline beyond the wall budget, reserve encroachment, and excess
+    contemporaneous phases
+  bead: think-hm0x
+  recorded_in: src/sqpack/campaign/ledger.py
+- id: D-241
+  title: The session checker rejected a legitimate renewed slice
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: since workflow phases and thirty-minute slice renewal were combined
+  severity: high
+  status: fixed
+  what: >-
+    The runbook required a fresh objective and clock when a thirty-minute slice renewed,
+    but the session checker rejected adjacent phases whenever workflow and focus were
+    unchanged. The artifact could not preserve two successive bounded slices in the
+    same lane without inventing a workflow or focus change.
+  consequence: >-
+    An agent had to overwrite the earlier clock, mislabel the work, or stop a productive
+    line even when concrete evidence justified one more bounded slice.
+  fix: >-
+    Permit adjacent phases with the same workflow and focus only when the objective
+    changes, while retaining the required switch reason and terminal evidence for the
+    prior slice.
+  regression: >-
+    A mutation that repeats workflow, focus, and objective is rejected as an unrecorded
+    renewal
+  bead: think-hm0x
+  recorded_in: src/sqpack/campaign/ledger.py
+- id: D-242
+  title: A delegated focused check rewrote the dependency lock outside its scope
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: inspection
+  latent_for: one delegated session-contract validation
+  severity: medium
+  status: fixed
+  what: >-
+    A delegate scoped to the agent-session schema, checker and tests invoked uv without
+    --frozen. The host policy inserted exclude-newer options into tracked uv.lock even
+    though dependency resolution and the lockfile were outside the task's write scope.
+  consequence: >-
+    Accepting the side effect would mix an unreviewed host-dependent dependency decision
+    into a process-contract change and dirty a checkpoint that was otherwise unrelated
+    to dependencies.
+  fix: >-
+    Restore uv.lock byte-for-byte, require delegated tasks to declare exact validation
+    commands, write scope and excluded commands before launch, and require frozen uv
+    commands for repository validation.
+  regression: >-
+    The active-delegation checker refuses a queued task without its bounded command and
+    write contract; the runbook keeps lockfile changes outside read-only validation
+  recurrence_of: D-232
+  bead: think-ysz2
+  recorded_in: campaign/agent-sessions/README.md
+- id: D-243
+  title: The autonomous-loop instruction contradicted its upstream launch blocker
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one frozen eight-hour portfolio draft
+  severity: high
+  status: fixed
+  what: >-
+    The launch boundary correctly stopped session-010 until the user-selected upstream
+    PR was merged and integrated, but the later autonomous-loop section still said that
+    the loop could run now.
+  consequence: >-
+    An agent entering through the procedural section could start the frozen portfolio
+    before its explicit integration prerequisite, making a supposedly stable base
+    branch-dependent.
+  fix: >-
+    State at the loop entry that the portfolio is queued but blocked on think-jqkv and
+    that only the bounded procedure, not the campaign, is ready to execute.
+  regression: none
+  bead: think-6c7g
+  recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-244
+  title: A completed delegation could shed provenance and pass an incomplete receipt
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one delegation-contract revision
+  severity: high
+  status: fixed
+  what: >-
+    Terminal receipt checks ran only when the optional phase field remained present and
+    did not require files or checks. A newly completed delegation could omit phase and
+    indistinguishably adopt the weaker historical shape.
+  consequence: >-
+    The session could claim a bounded delegated task had closed without retaining its
+    owning phase or complete return contract, hiding an unverified or out-of-scope
+    result.
+  fix: >-
+    Record delegation provenance explicitly, require active delegations to be
+    contemporaneous, and require every terminal delegation in a clocked session to
+    retain its phase and complete terminal receipt even if the provenance marker is
+    later removed.
+  regression: >-
+    Focused contract tests remove the phase and each receipt field from a terminal
+    contemporaneous delegation and observe checker refusal
+  bead: think-6c7g
+  recorded_in: campaign/schemas/agent-session.schema.yaml
+- id: D-245
+  title: A newly opened agent session had to invent completed progress
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: since AgentSession/v2 made progress.after unconditionally nonempty
+  severity: medium
+  status: fixed
+  what: >-
+    The session schema required progress.after to be a nonempty string even while the
+    session and its first phase were still in progress.
+  consequence: >-
+    Opening the required durable checkpoint before work meant fabricating a result,
+    copying the baseline into the result field, or postponing the record until after
+    chat-only work had already begun.
+  fix: >-
+    Permit progress.after to remain null while the session is active and require a
+    nonempty terminal value in the whole-session checker.
+  regression: >-
+    Focused schema and checker tests accept null active progress and reject null
+    terminal progress
+  bead: think-6c7g
+  recorded_in: campaign/schemas/agent-session.schema.yaml
+- id: D-246
+  title: Reserve enforcement crashed on a malformed contemporaneous phase clock
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one uncommitted finalization-role correction
+  severity: medium
+  status: fixed
+  what: >-
+    The first reserve-boundary correction compared a parsed phase start or deadline to
+    the reserve boundary without first checking that timestamp parsing succeeded.
+  consequence: >-
+    A missing, naive, or malformed timestamp in a clocked contemporaneous phase could
+    crash the ledger checker instead of returning the actionable validation problems it
+    had already accumulated.
+  fix: >-
+    Guard reserve comparisons on successfully parsed timestamps and preserve the
+    ordinary missing-or-non-offset timestamp diagnostics.
+  regression: >-
+    A focused contract test supplies a malformed work-phase deadline and observes a
+    deterministic checker refusal rather than an exception
+  bead: think-6c7g
+  recorded_in: src/sqpack/campaign/ledger.py
+- id: D-247
+  title: A delegated follow-up again rewrote the dependency lock outside its scope
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: inspection
+  latent_for: one bounded follow-up task
+  severity: medium
+  status: fixed
+  what: >-
+    While correcting the session-clock contract, a delegated follow-up again inserted
+    host exclude-newer options into uv.lock even though its task was restricted to the
+    schema and checker and its requested checks were explicitly frozen.
+  consequence: >-
+    The branch acquired an unrelated host-dependent dependency change during a
+    correctness repair. It would have polluted the checkpoint if the coordinator had
+    trusted the delegated file list without inspecting git status.
+  fix: >-
+    Interrupt the bounded follow-up, remove the exact lockfile delta, retain only its
+    reviewed schema and checker changes, and keep coordinator-owned status inspection
+    as the cheap integration boundary.
+  regression: none
+  recurrence_of: D-242
+  bead: think-6c7g
+  recorded_in: uv.lock
+- id: D-248
+  title: Active slice deadlines were recorded but not enforced after expiry
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: one session-clock implementation
+  severity: high
+  status: fixed
+  what: >-
+    The checker rejected an expired overall session but did not compare the active
+    workflow phase or in-progress delegation deadline with the current time.
+  consequence: >-
+    A session could remain inside its eight-hour envelope while one nominally
+    thirty-minute slice or bounded delegate ran indefinitely, recreating the rabbit-hole
+    failure the phase clocks were meant to prevent.
+  fix: >-
+    Reject an in-progress phase or delegation at and after its recorded deadline while
+    leaving terminal historical records unchanged.
+  regression: >-
+    One focused contract test advances the clock past both active deadlines while the
+    overall session remains live and observes both refusals
+  bead: think-6c7g
+  recorded_in: src/sqpack/campaign/ledger.py

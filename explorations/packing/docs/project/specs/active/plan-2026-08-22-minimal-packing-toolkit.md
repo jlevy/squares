@@ -432,8 +432,8 @@ So this phase begins by re-measuring, and builds only what the measurement names
 - [ ] PyO3 bindings: `load`, `verify`, `Packing`, `Certificate`.
 
 - [ ] Differential test: Rust versus the Python oracle on Trump’s packing, on every
-  negative control already in `negative_control.py`, and on every corpus entry with
-  exact algebraic data.
+  negative control already in `cases.trump11.verifier_limits`, and on every corpus entry
+  with exact algebraic data.
 
 - [x] Extend `packing-validate` with the differential test and the certificate
   round-trip.
@@ -488,8 +488,8 @@ model into the atlas or the corpus without passing the exact layer.
 
 **Differential testing against the oracle.** The pure-Python verifier is the reference
 implementation. Every Rust verdict must match it on: Trump’s packing, all six
-perturbation magnitudes in `negative_control.py` (down to `δ = 10⁻¹⁰⁰`), and every
-corpus entry carrying exact algebraic data.
+perturbation magnitudes in `cases.trump11.verifier_limits` (down to `δ = 10⁻¹⁰⁰`), and
+every corpus entry carrying exact algebraic data.
 This is what stops the fast path from being the wrong path — the failure mode that
 matters most here.
 

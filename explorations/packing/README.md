@@ -22,7 +22,7 @@ It is a certified upper bound, not a proof of optimality.*
 
 Work is organized at three levels.
 Four **operating principles** define what quality means and which concerns may veto
-promotion. Six **workflow entry points** define the purpose and durable output of one
+promotion. Seven **workflow entry points** define the purpose and durable output of one
 phase of work. A bounded **slice** is the smallest action taken inside that phase.
 Keeping these levels separate lets an agent emphasize one dimension without silently
 changing the kind of work it promised to do.
@@ -65,23 +65,27 @@ The full entry, exit, and transition contracts live in the
 | W4 | `process-review` | Work is hard to reconstruct or the discipline itself needs review | Process findings, beads, and narrowly scoped contract or check changes | W5 or the next owning workflow |
 | W5 | `efficiency-loop` | A measured bottleneck limits useful iterations | A baseline, profile, equivalence-safe change, and measured decision | W6 |
 | W6 | `research-loop` | A registered hypothesis has a fixed criterion, regime, budget, and instrument contract | A frozen instrument and one or more `exp-NNN` records, raw evidence, verdicts, and a current ledger | W2 for promoted or high-risk claims; otherwise W3 or another W6 slice |
+| W7 | `pipeline-improvement` | A named packing-pipeline surface or research consumer needs a new, stronger, simpler, or repaired capability | A bounded implementation or refactor, executable controls, explicit evidence limits, cost receipt, and readiness decision; no scientific verdict | W2 before a materially changed trust boundary reaches W6; otherwise W5 or W6 |
 
 Bounded implementation stays inside the workflow that owns its promised result: W1 or W2
 may correct research prose, W3 may implement a bounded exploratory derivation or
 visualization without spending an undeclared experiment budget, W4 may repair a process
-contract, W5 may implement a measured speedup, and W6 may build or repair the instrument
-for its registered round before measurement begins.
+contract, W5 may implement a measured speedup, and W6 may build a one-round instrument
+that freezes before measurement.
+W7 owns the implementation itself when the promised result is a packing-pipeline
+capability, targeted refactor, robustness repair, visualization surface, or cleanup for
+a named pipeline surface or research consumer.
 Use `general-improvement` only for genuine repository maintenance whose output belongs
-to none of W1–W6. It is not a core-work catchall or permission to mix several purposes
-without checkpoints.
+outside the packing pipeline and fits none of W1–W7. It is not a core-work catchall or
+permission to mix several purposes without checkpoints.
 
 One workflow phase is active at a time in each independently tracked agent session.
 It declares a workflow, one primary focus, an objective, expected output, validating
 command, kill condition, fallback, start, and deadline.
 Other principles still constrain the work.
 Actual outcome and evidence are recorded when the phase closes.
-Start a new phase when the workflow or focus changes; a focus-only change may repeat the
-same workflow and is not a workflow switch.
+Start a new phase when the workflow, focus, or bounded slice objective changes; a
+focus-only change may repeat the same workflow and is not a workflow switch.
 Switch only at a planned or evidence checkpoint, on a user request, or when the active
 premise is falsified.
 Close the prior phase with its evidence, stop reason, and next action before opening the
@@ -101,7 +105,8 @@ W3 insight iteration ──> H-NNN ──> W6 research loop ──> exp-NNN + ra
 ```
 
 W1 keeps the research record complete enough to orient the loop.
-W4 improves its discipline, and W5 removes measured bottlenecks.
+W4 improves its discipline, W5 removes measured bottlenecks, and W7 improves named
+pipeline surfaces or supplies capabilities that research cells lack.
 W6 itself does not change a criterion, repair the process, or invent a replacement
 hypothesis mid-round.
 It executes the preregistered question under a declared budget, records every outcome,
@@ -180,8 +185,9 @@ The operating documents divide ownership rather than repeat one another:
 ## The Autonomous Work Loop
 
 The outer loop is a portable repository protocol, not a feature of one agent platform.
-The `tbd` queue owns ready work; an
-[agent-session artifact](campaign/agent-sessions/README.md) owns the current workflow
+The `tbd` queue owns dependencies and tracked work; the active launch agenda freezes an
+explicit portfolio whenever landed-versus-branch-ahead bead state is not yet reconciled.
+An [agent-session artifact](campaign/agent-sessions/README.md) owns the current workflow
 phase, primary focus, objective, clocks, and delegation evidence; commits and research
 artifacts own the results.
 Changing agents changes the driver, not the work.
@@ -189,11 +195,11 @@ Mechanical delegations inherit that phase unless they open independently tracked
 sessions.
 
 Breadth lives in [`campaign/ideas.md`](campaign/ideas.md), the hypothesis registry, and
-the bead queue. At session entry, declare the workflow, primary focus, expected output,
-validation command, kill condition, fallback, start, and deadline; narrowness then lives
-in one slice at a time, with hard clocks.
-At a checkpoint, close the phase before changing purpose or focus so the ledger can
-summarize what kinds of work actually occurred.
+the bead queue. At session entry, declare one absolute session start and deadline, then
+the workflow, primary focus, expected output, validation command, kill condition,
+fallback, phase start, and phase deadline; narrowness lives in one slice at a time, with
+hard clocks. At a checkpoint, close the phase before changing purpose or focus so the
+ledger can summarize what kinds of work actually occurred.
 The slice protocol, clocks, result routing, budgets, and stop rules are the campaign
 runbook’s [bounded research cycle](campaign/README.md#the-bounded-research-cycle); which
 validation loop to run at each step is
@@ -388,7 +394,10 @@ The implementation plan for the first experiments, meaning search, verify and it
 [plan-2026-08-22-minimal-packing-toolkit.md](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md).
 It turns the six reports into seven phases and a bead tree, one epic per phase;
 `tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md`
-shows the work items and `tbd ready` the unblocked subset.
+shows the work items.
+Use `tbd ready` as the unblocked subset only after the active launch agenda has
+reconciled landed and branch-ahead bead state; the current eight-hour portfolio is
+frozen in that agenda.
 
 The implemented engineering reorganization and its evidence are recorded in
 [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md).

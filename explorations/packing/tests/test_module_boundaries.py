@@ -13,6 +13,7 @@ from typing import cast
 import pytest
 import yaml
 
+from devtools.check_readme import meaningful_top_level_entries
 from sqpack.project import ProjectLayoutError, require_project_root
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -149,6 +150,19 @@ def test_no_bash_or_shell_entry_points_remain() -> None:
         if not any(part.startswith(".") for part in path.relative_to(PROJECT_ROOT).parts)
     ]
     assert [path.relative_to(PROJECT_ROOT) for path in scripts] == []
+
+
+def test_readme_inventory_ignores_cache_only_legacy_directories(tmp_path: Path) -> None:
+    repository = tmp_path / "repository"
+    repository.mkdir()
+    (repository / "README.md").write_text("# Example\n", encoding="utf-8")
+    (repository / "current").mkdir()
+    (repository / "current" / "module.py").write_text("", encoding="utf-8")
+    cache = repository / "tools" / "__pycache__"
+    cache.mkdir(parents=True)
+    (cache / "removed.cpython-314.pyc").write_bytes(b"ignored")
+
+    assert meaningful_top_level_entries(repository) == {"README.md", "current"}
 
 
 def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -> None:
