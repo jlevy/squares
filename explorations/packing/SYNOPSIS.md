@@ -1670,15 +1670,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 218 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 224 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 64 | asserted something false about the mathematics |
-| validity | 62 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 67 | recorded something its own evidence contradicts |
-| robustness | 18 | did not finish, or finished only by luck |
+| validity | 63 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 71 | recorded something its own evidence contradicts |
+| robustness | 19 | did not finish, or finished only by luck |
 | performance | 7 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -1687,7 +1687,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught twelve defects in 218, and no soundness defect ever.**
+**The automated gate has caught twelve defects in 224, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1834,8 +1834,8 @@ and the other branch ref restored before push or target execution.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Seventy-eight fixes left no regression check behind, and that list has already predicted
-a recurrence once. The
+Eighty-four fixes left no regression check behind, and that list has already predicted a
+recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
 relative to what they govern, a discovery treated as a defect until an independent layer
@@ -1917,9 +1917,9 @@ stress analysis, not another rank count.
 No hour-scale lane is promoted without a known-answer response, independent validity,
 and a result that changes a decision.
 
-**The normal checkpoint is green; the strict unattended-handoff gate is not.** All 30
-fast-path steps pass in 37 wall-seconds, including seven exact small-`n` replays and all
-37 negative controls.
+**The normal checkpoint is green; the strict unattended-handoff gate is not.** The merge
+review’s final pre-commit run passes all 30 fast-path steps in 35 wall-seconds,
+including seven exact small-`n` replays and all 55 negative controls.
 The first deep regeneration reproduced one unsettled `n=4` proposal and an `n=10`
 `1.503e-10` pair-row residual.
 [D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders
@@ -1934,6 +1934,10 @@ parent-owned session.
 [D-217](defects.md) is the same failure in a local parallel validation wrapper: its
 unreceipted result was discarded and rerun directly, while `think-b3bm` still owns the
 portable yielded-command and terminal-polling rehearsal.
+[D-222](defects.md) records a separate audit-scope violation caught during this merge
+review: an explicitly excluded strict run was terminated by exact process group, its
+partial output discarded, and `think-ysz2` owns explicit command and wall ceilings for
+future bounded delegations.
 The research result does not depend on that path, but an unattended numerical campaign
 remains blocked until D-203 is fixed, the quench budget is work-based, and the golden
 known-answer response is stable.

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 218
+count: 224
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -5603,3 +5603,151 @@ defects:
   regression: none
   bead: think-kts5
   recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+- id: D-219
+  title: The BC-010 agenda retained a superseded two-size solver diagnosis
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: the D-199 and D-203 checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    The current BC-010 note still said both n=4 and n=10 drifted under D-126/D-162
+    after D-199 restored n=10 at both declared pool widths and D-203 isolated the
+    remaining n=4 failure to seed 0 and a typed HiGHS status-4 Solve error.
+  consequence: >-
+    An agent following the mutable agenda could repeat the resolved n=10 diagnosis or
+    treat the n=4 solver failure as the older residual-repair defect, wasting the next
+    bounded slice and obscuring which gate remained red.
+  fix: >-
+    Replace only the stale diagnosis with the D-199/D-203 evidence, preserve the
+    unchanged golden and no-retry precondition, and state that the strict merge and
+    handoff gate remains red.
+  regression: none
+  bead: think-tqjr
+  recorded_in: campaign/agendas/agenda-001-basin-confidence-ladder.md
+- id: D-220
+  title: The durable resume order was not encoded in the ready-work graph
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: the PR 24 integration handoff
+  severity: high
+  status: fixed
+  what: >-
+    Session 009 and the generated ledger required think-nr5w, then think-b3bm, then a
+    strict revalidation before think-nm35, but think-nm35 had no dependencies and
+    appeared immediately in the tbd ready queue.
+  consequence: >-
+    An autonomous agent using the declared source of ready work could start genuine
+    research before the known solver and receipt prerequisites, contradicting the
+    portable handoff while every document still looked correct in isolation.
+  fix: >-
+    Add one PR-22 finalization bead blocked by think-nr5w and think-b3bm; make
+    think-nm35 depend on that bead so the strict revalidation is an explicit transition
+    rather than prose-only ordering.
+  regression: none
+  bead: think-l1us
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-221
+  title: The campaign bead retained the superseded eight-hour horizon
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: the four-hour campaign
+  severity: medium
+  status: fixed
+  what: >-
+    The live AgentSession and PR used the user-selected four-hour checkpoint, but the
+    parent campaign bead still named and described an eight-hour goal.
+  consequence: >-
+    Agents orienting from tbd could apply the wrong wall horizon even though the
+    session artifact and branch name carried the current campaign duration.
+  fix: >-
+    Change the bead title, objective, and wall-budget clause to four hours while
+    retaining the historical notes and the general eight- and twenty-four-hour launch
+    readiness plan.
+  regression: none
+  bead: think-05hr
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-222
+  title: A delegated read-only audit launched an explicitly excluded deep gate
+  date: '2026-08-24'
+  layer: record
+  class: robustness
+  direction: conservative
+  detected_by: anomaly
+  latent_for: one PR 22 merge-readiness audit
+  severity: medium
+  status: contained
+  what: >-
+    A delegated audit was asked for read-only inspection while the parent phase excluded
+    the strict/deep gate, but the task did not restate a command or wall-time ceiling.
+    The reviewer launched ./test.sh --strict in an isolated temporary tree.
+  consequence: >-
+    The unauthorized branch consumed about two minutes and could have continued into
+    the known n=4 blocker, recreating the unbounded delegated loop the campaign was
+    designed to prevent. Its partial output could not count as merge evidence.
+  fix: >-
+    The coordinator identified process group 95566, sent TERM to that exact group,
+    verified that no descendants remained, and discarded the partial result. Future
+    delegated audit contracts must name excluded long commands and a wall ceiling;
+    long-gate authorization and terminal receipts remain coordinator-owned.
+  regression: none
+  bead: think-ysz2
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
+- id: D-223
+  title: The synopsis retained superseded normal-gate timing and control counts
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: the PR 22 merge-readiness checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    The mutable current-status paragraph still reported a 37-second normal gate with 37
+    negative controls after the live merge review measured 55 controls and obtained
+    independent 69- and 91-second receipts on the pre-review tree.
+  consequence: >-
+    The stale timing overstated current checkpoint throughput while the stale control
+    count understated coverage, so an agent could neither price the loop nor understand
+    the evidence represented by the current gate receipt from the synopsis alone.
+  fix: >-
+    Replace the superseded metrics only in the current checkpoint paragraph with the
+    final pre-commit review run's 35-second receipt and current control count. Preserve
+    the earlier independently observed receipts in the merge-review evidence.
+  regression: none
+  bead: think-r10n
+  recorded_in: SYNOPSIS.md
+- id: D-224
+  title: A focused negative-control replay omitted the gate-managed Python environment
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: conservative
+  detected_by: anomaly
+  latent_for: one PR 22 merge-readiness measurement
+  severity: medium
+  status: fixed
+  what: >-
+    The reviewer invoked tools/negctl.py with an absolute virtualenv interpreter but did
+    not expose that environment on PATH. Its private snapshots therefore resolved their
+    configured python3 commands to a dependency-incomplete system interpreter and 42 of
+    55 controls returned irrelevant import tracebacks.
+  consequence: >-
+    Treating that transcript as a product result would falsely report widespread guard
+    failures and could block a clean checkpoint for an environmental measurement error.
+  fix: >-
+    Discard the invalid transcript and rerun through the same pinned uv environment that
+    test.sh selects. All 55 negative controls then fired as expected in 13 wall-seconds.
+  regression: none
+  bead: think-fer4
+  recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
