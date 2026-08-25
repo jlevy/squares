@@ -5,14 +5,14 @@ title: Make the square-packing frontier transparent, complete, and reusable
 kind: epic
 status: open
 priority: 1
-version: 19
+version: 21
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
   - review
-  - focus-process
+  - framework
 dependencies: []
-parent_id: is-01m0r7q3zk8x6cg4e30d149698
+parent_id: is-01m0n6nyzx5pnark7xve1dy52x
 child_order_hints:
   - is-01m0tyqg1a378tyc20by1hwxxq
   - is-01m0tyqgf98qcvjycr6101bs6r
@@ -30,10 +30,11 @@ child_order_hints:
   - is-01m0tz96g5svy9h1j9ntejmze9
   - is-01m0v06qf4hksmdqc2rga0vr4x
   - is-01m0v06yyh15pkz846vsgxj1wc
+  - is-01m0vd6xfaz5p8ccnq6xrnr5x5
 created_at: 2026-08-24T22:36:47.654Z
-updated_at: 2026-08-24T23:11:07.832Z
+updated_at: 2026-08-25T02:50:23.081Z
 ---
-Holistic improvement program for the square-packing reader and contributor journey. Make the current record frontier effortless to inspect; distinguish provenance and reproducibility from numerical and formal assurance; keep public-source coverage auditable and current; and provide general, validated entry points for importing, viewing, and checking new witnesses without tailoring the system to one n=29 example. Add no process or metadata without a named reader, correctness, or maintenance benefit. All implementation lands as stacked PRs. Acceptance: one obvious path answers what is known for each n and at what evidence level; the frontier remains schema- and drift-validated; terminology does not imply rigor it has not earned; source-coverage gaps are explicit and dated; and a documented toolkit path can assess supported external witnesses with honest failure modes.
+Cross-cutting redesign of the square-packing frontier, assurance model, validation toolkit, and contributor workflow. This is the explicit fallback work unit rather than a W1-W6 process-review session: it balances mathematical soundness, reader and agent clarity, operational discipline, and research efficiency. Make current status effortless to inspect; distinguish published mathematical status, local numerical checks, and exact formal certification; keep public-source coverage explicit and current; and provide general entry points for importing, viewing, checking, and promoting witnesses. Add no metadata, gate, table, hash, or work item without a named failure or reader need. Acceptance: one obvious path answers what is known for each n and why; verified always means exact formal assurance; numerical claims state their actual method and limits; historical unknowns are preserved rather than invented; source and tooling gaps are visible; and the workflow catches consequential errors without ritual or tracker spam.
 
 ## Notes
 
