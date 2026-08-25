@@ -325,6 +325,7 @@
     "labelled_and_unlabelled_source_scopes_are_separate": true,
     "lowered_slider_overlap_is_rejected": true,
     "nonaxis_center_boundary_equality_is_rejected": true,
+    "packing_glyphs_use_pure_black_boundaries": true,
     "stale_svg_is_rejected": true,
     "unreduced_display_parameter_is_rejected": true
   },

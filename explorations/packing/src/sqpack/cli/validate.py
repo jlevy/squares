@@ -466,6 +466,12 @@ def _small_n(context: Context) -> str:
     return _commands(context, commands)
 
 
+def _svg_rendering(context: Context) -> str:
+    output = _module(context, "devtools.check_svg_rendering", "--check")
+    _require_text(output, "SVG RENDERING CHECKS PASSED")
+    return output
+
+
 def _negative_controls(context: Context) -> str:
     return _module(context, "devtools.run_negative_controls", "devtools/controls.yaml")
 
@@ -833,6 +839,7 @@ STEPS: tuple[Step, ...] = (
     Step("basin event record and replay", _basin_events),
     Step("historical regressions", _historical_regressions),
     Step("small-n exact models and local geometry", _small_n),
+    Step("deterministic SVG rendering", _svg_rendering),
     Step("negative controls", _negative_controls),
     Step("fixed-angle cell is an LP, rebuilt independently", _independent_lp),
     Step("fast behavioral tests", _fast_tests, fast=True),
