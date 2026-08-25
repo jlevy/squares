@@ -5,7 +5,7 @@ title: Make the square-packing frontier transparent, complete, and reusable
 kind: epic
 status: open
 priority: 1
-version: 34
+version: 35
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
@@ -38,10 +38,10 @@ child_order_hints:
   - is-01m0vz9s4ffb2vcf7hx5xeacg8
   - is-01m0wqx97nb22qwx8v47hrpfqk
 created_at: 2026-08-24T22:36:47.654Z
-updated_at: 2026-08-25T15:16:36.212Z
+updated_at: 2026-08-25T18:49:36.801Z
 ---
 Cross-cutting redesign of the square-packing frontier, assurance model, validation toolkit, and contributor workflow. Reusable framework implementation uses W7 pipeline-improvement rather than W4 process review or the general-improvement fallback: it balances mathematical soundness, reader and agent clarity, operational discipline, and research efficiency. Make current status effortless to inspect; distinguish published mathematical status, local numerical checks, and exact formal certification; keep public-source coverage explicit and current; and provide general entry points for importing, viewing, checking, and promoting witnesses. Add no metadata, gate, table, hash, or work item without a named failure or reader need. Acceptance: one obvious path answers what is known for each n and why; verified always means exact formal assurance; numerical claims state their actual method and limits; historical unknowns are preserved rather than invented; source and tooling gaps are visible; and the workflow catches consequential errors without ritual or tracker spam.
 
 ## Notes
 
-2026-08-25 final PR checkpoint: PR #31 is pushed at 85422bb atop refreshed plan PR #26 and current main through merged SVG PR #25. The ordinary 32-step gate passes locally and on Linux/macOS CI (64 tests, 62 negative controls, 83 SVG controls, 100 frontier cases, 13 datasets, 229 mapped docs). The direct PR review had four consistency findings; all were tracked under think-h5bp, fixed, closed, and answered on the PR. All framework children are closed except think-75ll: robust rational promotion is built and demonstrated at n=29, while the genuinely generic outward-rounded interval-existence bridge remains future work. D-203/think-nr5w remains a separate preexisting strict/deep campaign-launch blocker; CI asserts its exact macOS failure signature. No redundant reader-facing source hashes were added.
+2026-08-25 landed checkpoint: PR #39 merged into PR #31, and PR #31 merged into main through explicit merge commits. The fetched main tree is identical to the reviewed and CI-tested reconciliation tree. The ordinary 32-surface gate passes locally and on Linux/macOS CI with 85 behavioral tests, 62 mutation controls, 83 SVG controls, 20,000 differential cases, 100 frontier cases, 13 datasets, 237 mapped durable docs, and 325 defect records. The assurance framework, workflow entry points, terminology, source coverage, reusable witness tooling, exact rational n=29 promotion, parallel research reconciliation, definitive docs, and PR review are complete. No redundant reader-facing source hash was added. The only open child is think-75ll: the exact rational robustification path is built, while a generic outward-rounded interval-existence bridge for suitable contact systems remains future work and is not guaranteed for arbitrary floating-point poses.
