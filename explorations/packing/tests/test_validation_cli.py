@@ -107,6 +107,21 @@ def test_missing_provenance_object_is_not_called_an_orphan() -> None:
     assert validate._commit_state("0" * 40) == "missing"
 
 
+def test_annotated_lost_provenance_object_is_reported_unavailable() -> None:
+    line = validate._provenance_line(
+        "exp-001.md",
+        "d6a1057",
+        "## Annotation\n`engine_commit: d6a1057` is unreachable after a rebase.",
+        "missing",
+    )
+
+    assert "UNAVAILABLE" in line
+    assert "ORPHANED" not in line
+
+    with pytest.raises(validate.StepFailureError, match="fetch complete history"):
+        validate._provenance_line("unannotated.md", "deadbee", "", "missing")
+
+
 def test_basin_event_archives_are_discovered_from_their_contract(tmp_path: Path) -> None:
     (tmp_path / "baseline.jsonl").write_text('{"kind": "result"}\n', encoding="utf-8")
     (tmp_path / "events-v2.jsonl").write_text(

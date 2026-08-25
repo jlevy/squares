@@ -43,6 +43,8 @@ TOP_TIMING_COUNT = 8
 SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 
+type CommitState = Literal["reachable", "orphaned", "missing"]
+
 
 class UsageError(ValueError):
     """The requested validation surface is internally inconsistent."""
@@ -578,7 +580,7 @@ def _differential(context: Context) -> str:
     return _module(context, "devtools.check_search_differential", "20000")
 
 
-def _commit_state(commit: str) -> Literal["reachable", "orphaned", "missing"]:
+def _commit_state(commit: str) -> CommitState:
     available = subprocess.run(
         ("git", "cat-file", "-e", f"{commit}^{{commit}}"),
         cwd=PROJECT_ROOT,
@@ -603,6 +605,24 @@ def _commit_state(commit: str) -> Literal["reachable", "orphaned", "missing"]:
     return "reachable" if ancestry.returncode == 0 else "orphaned"
 
 
+def _provenance_line(name: str, commit: str, text: str, state: CommitState) -> str:
+    annotation = text.split("## Annotation", 1)[1] if "## Annotation" in text else ""
+    loss_is_annotated = commit in annotation and "unreachable" in annotation.lower()
+    if state == "reachable":
+        return f"  ok          {name} -> {commit}"
+    if state == "missing":
+        if loss_is_annotated:
+            return f"  UNAVAILABLE {name} -> {commit} (historical loss is annotated)"
+        raise StepFailureError(
+            f"{name}: engine commit {commit} is unavailable in local history; "
+            "fetch complete history (`git fetch --unshallow` for a shallow clone, "
+            "otherwise `git fetch --all`) and rerun"
+        )
+    if not loss_is_annotated:
+        raise StepFailureError(f"{name}: orphaned engine commit has no explicit annotation")
+    return f"  ORPHANED    {name} -> {commit} (historical loss is annotated)"
+
+
 def _provenance(context: Context) -> str:
     del context
     lines: list[str] = []
@@ -621,18 +641,7 @@ def _provenance(context: Context) -> str:
             raise StepFailureError(f"invalid {path.name} engine_commit: {raw}")
         checked += 1
         state = _commit_state(commit)
-        if state == "missing":
-            raise StepFailureError(
-                f"{path.name}: engine commit {commit} is unavailable in local history; "
-                "fetch complete history (`git fetch --unshallow` for a shallow clone, "
-                "otherwise `git fetch --all`) and rerun"
-            )
-        if state == "reachable":
-            lines.append(f"  ok       {path.name} -> {commit}")
-        else:
-            lines.append(f"  ORPHANED {path.name} -> {commit} (must carry an annotation)")
-            if "## Annotation" not in text:
-                raise StepFailureError(f"{path.name}: orphaned engine commit has no annotation")
+        lines.append(_provenance_line(path.name, commit, text, state))
     if checked != declared:
         raise StepFailureError(f"checked {checked} of {declared} declared engine commits")
     lines.append(f"  checked all {checked} declared engine commits")
