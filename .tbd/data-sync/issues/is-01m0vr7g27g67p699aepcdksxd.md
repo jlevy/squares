@@ -5,7 +5,7 @@ title: "Run session-010: eight-hour mixed pipeline and mathematical portfolio"
 kind: epic
 status: in_progress
 priority: 0
-version: 14
+version: 15
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -26,7 +26,8 @@ child_order_hints:
   - is-01m0w56abhg68342kennddmgb2
   - is-01m0w5htenwyzd0egsv7fbm1ax
   - is-01m0w5qa2g87nyxtp01hej80k8
+  - is-01m0w5y2nq7vy6y33253r89jdv
 created_at: 2026-08-25T06:02:56.442Z
-updated_at: 2026-08-25T09:58:46.096Z
+updated_at: 2026-08-25T10:02:27.884Z
 ---
 Execute the frozen eight-hour portfolio in the launch agenda from one clean green commit. One coordinator owns the session clock, criteria, shared records, long commands, integration, commits, and re-screening. Interleave W6 mathematical research, W7 pipeline improvements, W2 correctness audits, W3 insight capture, and W4 process checkpoints; every slice is 30 minutes or less with evidence at 20 minutes, no third consecutive slice on one line, and a 45-minute finalization reserve. Do not run packing-campaign, delegated strict/deep gates, or raw tbd-ready draining. Acceptance: session-010 records its absolute eight-hour clock, every phase/delegation contract and terminal receipt, bounded positive/negative/blocked artifacts, defects, synchronized beads, a pushed final checkpoint, and exact next action.
