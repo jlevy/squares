@@ -3,9 +3,9 @@ type: is
 id: is-01m0t3n7z9fj0p7wwt1kn4nzqk
 title: Execute and document the 4-hour autonomous basin-map campaign
 kind: task
-status: closed
+status: open
 priority: 0
-version: 47
+version: 48
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
@@ -35,9 +35,9 @@ child_order_hints:
 hold: null
 hold_until: null
 created_at: 2026-08-24T14:44:12.384Z
-updated_at: 2026-08-25T07:19:23.931Z
-closed_at: 2026-08-25T07:19:23.930Z
-close_reason: Session-009 is durably stopped and its four-hour campaign ownership is superseded by session-010. Open child research and defect beads remain independently actionable; this closure claims no completion of those children.
+updated_at: 2026-08-25T07:20:39.108Z
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
@@ -46,3 +46,5 @@ Own the 2026-08-24 four-hour goal from launch audit through durable results. Acc
 ## Notes
 
 2026-08-24 checkpoint 5ab8dab pushed to PR #19. PR #20 is merged after an 11-finding semantic review (D-172..D-182); all child beads and think-tfbc are closed. The normal 30-step gate passed in 27s; 182 defects, 24 rounds, 9 sessions, 1 agenda reconcile.\n\n2026-08-24 BC-003 through BC-007 are complete through the bounded n=9 performance cell. BC-008 source-bound n=10 returns pass: exp-031 has 4/4 converged, independently valid events within 2.221e-15 of the proved side and 6,631/6,631 settled evaluations.\n\n2026-08-24 BC-009 is complete via exp-032: exact n=3/n=4 component known answers replay in 0.92s, eight false-policy mutations fail, and all 16 f64 observations remain unresolved.\n\n2026-08-24 first BC-010 slice complete via exp-033: the equal-side n=5 pair shares one exact fixed-angle optimal face with nullities 0/1/0. The 33-round campaign and full 30-step gate reconcile in 30s. BC-010 remains ready for one bounded angle-varying stationary-continuation slice; no census sampling is authorized.
+
+Reopened: The final-receipt defect think-b3bm remains open, so the owning autonomous-campaign task is not complete. Reopened to preserve truthful hierarchy after tbd sync surfaced the inconsistency.
