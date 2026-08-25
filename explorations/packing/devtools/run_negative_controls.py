@@ -226,10 +226,28 @@ def clone_tree(dest: Path) -> None:
         link.symlink_to(source)
 
 
+def resolve_control_target(control_file: object, *, tree: Path, work: Path) -> Path:
+    """Resolve one mutation target without allowing it to leave the private snapshot."""
+    if not isinstance(control_file, str) or not control_file:
+        raise ValueError("control file must be a non-empty path string")
+    try:
+        target = (work / control_file).resolve(strict=True)
+    except OSError as error:
+        raise ValueError(f"control target does not exist: {control_file!r}") from error
+    if not target.is_relative_to(tree.resolve()):
+        raise ValueError(f"control target escapes private snapshot: {control_file!r}")
+    if not target.is_file():
+        raise ValueError(f"control target is not a regular file: {control_file!r}")
+    return target
+
+
 def run_one(c: dict, tree: Path) -> tuple[bool, str]:
     """Apply the mutation inside `tree`, run the command there, restore. (passed, why)."""
     work = tree / HERE
-    target = (work / c["file"]).resolve()
+    try:
+        target = resolve_control_target(c.get("file"), tree=tree, work=work)
+    except ValueError as error:
+        return False, str(error)
     original = target.read_bytes()
     old, new = c["replace"]
     try:

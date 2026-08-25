@@ -3,7 +3,7 @@
 #
 # Homogeneous rows, no per-row narrative, so this is plain YAML rather than one
 # artifact per source -- see README.md on format choice. The Markdown table in
-# the research document is generated from this file by ../tools/render_tables.py.
+# the research document is generated from this file by python -m devtools.render_research_tables.
 #
 # RE-TEST RATHER THAN INHERIT. A "not retrievable" verdict is a negative search
 # result. This list has now been wrong six times: Gensane-Ryckelynck, Nagamochi
