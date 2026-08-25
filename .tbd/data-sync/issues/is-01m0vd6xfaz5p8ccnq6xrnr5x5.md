@@ -5,7 +5,7 @@ title: "Address PR #26 review as one coherent frontier-framework redesign"
 kind: task
 status: closed
 priority: 1
-version: 13
+version: 14
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
@@ -25,10 +25,10 @@ child_order_hints:
   - is-01m0vd89yyx9fsfm43e6eyvrt2
   - is-01m0vd8a83becbsfz0fnbraxk3
 created_at: 2026-08-25T02:50:23.081Z
-updated_at: 2026-08-25T03:10:52.891Z
+updated_at: 2026-08-25T03:11:11.499Z
 closed_at: 2026-08-25T03:10:52.890Z
 close_reason: "All R1-R10 findings and S1-S10 suggestions have explicit dispositions, the coherent framework redesign is committed and pushed on a9a2992, PR #26 is clean and mergeable on the current stack base, all 30 local steps pass, and the disposition map is posted."
 resolution: null
 duplicate_of: null
 ---
-Own the complete disposition of the owner review at https://github.com/jlevy/thinking-scratchpad/pull/26#issuecomment-5404371128. Map R1-R10 one-to-one as child bugs and attach S1-S10 to the finding that owns the same design decision. Revise the framework holistically around mathematical correctness, transparent evidence, efficient research, and only benefit-named process. Repair the published validation defect, run the full gate from the resulting head, reply with a per-finding disposition map, and close only after the PR is pushed and green.
+Own the complete disposition of the owner review at https://github.com/jlevy/thinking-scratchpad/pull/26#issuecomment-5404371128. Map R1-R10 one-to-one as child bugs and attach S1-S10 to the finding that owns the same design decision. Revise the framework holistically around mathematical correctness, transparent evidence, efficient research, and only benefit-named process. Adjudicate the published validation claim and correct the actual diagnostic defect if the premise does not reproduce. Run the full gate from the resulting head, reply with a per-finding disposition map, and close only after the PR is pushed and clean.
