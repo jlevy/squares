@@ -7313,3 +7313,236 @@ defects:
   regression: none
   bead: think-19nv
   recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-285
+  title: The first H-042 pilot could pass while its exact cone oracle was unresolved
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted implementation review
+  severity: high
+  status: fixed
+  what: >-
+    The first incidence-core CLI returned exit status zero for every minimization state,
+    and its selftest ran exact replay assertions only after a completed result. An
+    unresolved oracle or a nonzero root cone therefore skipped the decisive checks and
+    still satisfied the frozen validation command.
+  consequence: >-
+    A failed or incomplete H-042 instrument check could be recorded as a passing pilot,
+    flattering both tool readiness and any later support conclusion built on it.
+  fix: >-
+    Return nonzero for every non-completed oracle state, make the branch-0 selftest
+    require its now-known proper terminal core, and inject an unresolved oracle into
+    minimization to verify that the state remains terminal rather than passing.
+  regression: >-
+    the branch-0 selftest requires minimization_completed, proper_core_found and
+    unresolved_oracle_is_terminal before the CLI exits zero
+  bead: think-5bcy
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-286
+  title: The first H-042 record conflated conjunctive wall rows with feature aliases
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: one uncommitted implementation review
+  severity: medium
+  status: fixed
+  what: >-
+    The first incidence-group record put wall tangent-row labels in a field named
+    aliases. Those rows are simultaneous conjunctive inequalities, whereas contact
+    aliases are alternative raw feature descriptions that collapse to one derivative
+    option.
+  consequence: >-
+    A consumer could treat two required wall rows as interchangeable provenance and the
+    nonempty-alias selftest did not establish that all four raw branch selections were
+    retained.
+  fix: >-
+    Separate source_row_labels from feature_aliases, leave wall feature aliases empty,
+    check that the selected contact alias product equals the exact raw-selection
+    multiplicity, and retain branch-matrix equality as the no-row-loss guard.
+  regression: >-
+    the branch-0 selftest requires wall_rows_are_not_called_aliases and
+    contact_feature_aliases_are_complete
+  bead: think-sx22
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-287
+  title: A shell-active bead description executed a backtick-delimited word
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: anomaly
+  latent_for: one tbd command
+  severity: low
+  status: fixed
+  what: >-
+    The coordinator placed a backtick-delimited field name inside a double-quoted tbd
+    description. Bash attempted to execute the field name, printed command-not-found,
+    removed the word, and then allowed tbd to create the bead with damaged prose.
+  consequence: >-
+    The new bead initially lost the exact term that distinguished aliases from
+    conjunctive rows, making its correction less precise despite a superficially
+    successful tbd result.
+  fix: >-
+    Immediately replace the full think-sx22 description with shell-inert prose and use
+    arguments without shell-active backticks for subsequent tbd updates.
+  regression: none
+  bead: think-vf68
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-288
+  title: The first focused Ruff replay doubled the uv working-directory prefix
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: gate
+  latent_for: one focused command
+  severity: low
+  status: fixed
+  what: >-
+    The first formatting command selected explorations/packing with uv --directory but
+    also passed Ruff a path beginning with explorations/packing. Ruff therefore resolved
+    a doubled nonexistent path and stopped before checking the file.
+  consequence: >-
+    The focused static gate produced no evidence on its first invocation and could have
+    been misread as a source-file failure rather than a command-coordinate error.
+  fix: >-
+    Re-run all three tools with cases/trump11/incidence_cores.py relative to uv's selected
+    directory; Ruff formatting and lint plus BasedPyright then pass.
+  regression: >-
+    the session receipt retains the corrected directory-relative Ruff and BasedPyright commands
+  bead: think-asaa
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-289
+  title: The H-042 pilot normalized row classes for counting but not for its cone oracle
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: one branch pilot
+  severity: high
+  status: contained
+  what: >-
+    incidence_cores identifies positive-proportional derivative rows when deciding
+    whether a core is proper, but its stress and direction oracle still receives every
+    primitive row rather than one representative per oriented half-space class.
+  consequence: >-
+    Branch 0 is unaffected because all 42 primitive rows have distinct oriented class
+    keys. On an unmeasured branch with duplicates, the implementation would no longer
+    match H-042's declared normalized system and could misstate support provenance or
+    minimality.
+  fix: >-
+    Stop expansion at branch 0. Before another branch, build oracle inputs from exact
+    normalized representatives while retaining every contributing group and source
+    label, then exercise positive duplicates, opposite orientations and cross-group
+    provenance.
+  regression: none
+  bead: think-jyit
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-290
+  title: H-042 pilot certificates can be recomputed but not replayed from a retained record
+  date: '2026-08-25'
+  layer: record
+  class: robustness
+  direction: conservative
+  detected_by: review
+  latent_for: one branch pilot
+  severity: medium
+  status: outstanding
+  what: >-
+    The pilot emits exact stress and deletion-direction data, but the CLI has no atomic
+    record path and no mode that loads a retained JSON object, rederives its branch, and
+    replays the stored witnesses independently.
+  consequence: >-
+    The committed module and command can recompute branch 0, but a future experiment
+    artifact could be corrupted or drift from its generator without a direct replay
+    gate. The current ephemeral JSON is therefore a pilot receipt, not a maintained
+    experiment record.
+  fix: >-
+    none yet. Add record and replay paths, validate matrix and provenance fingerprints,
+    replay every stored stress and direction, reject tampering, and integrate the replay
+    into the existing Trump exact validation surface before promotion.
+  regression: none
+  bead: think-oa96
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-291
+  title: The branch-0 H-042 golden would classify a valid future refutation as test failure
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: review
+  latent_for: one branch pilot
+  severity: high
+  status: contained
+  what: >-
+    The selftest now correctly requires branch 0's observed proper core. Reusing that
+    same mode for an unmeasured branch would make a completed exact criterion_missed
+    result exit nonzero because proper_core_found is false.
+  consequence: >-
+    A branch whose full incidence system is genuinely inclusion-minimal would refute
+    H-042, but a wider runner could discard it as an instrument failure instead of
+    retaining the conservative mathematical result.
+  fix: >-
+    Stop expansion at branch 0. Before a wider run, separate branch-0 golden controls
+    from generic structural selftests and let any complete exact criterion_met or
+    criterion_missed outcome exit zero; only invalid or unresolved states fail.
+  regression: none
+  bead: think-j92q
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-292
+  title: H-042 branch indices are regenerated but not bound to the retained exp-013 universe
+  date: '2026-08-25'
+  layer: record
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: one branch pilot
+  severity: high
+  status: contained
+  what: >-
+    derive_branch sorts a freshly regenerated branch map and checks grouped rows against
+    the matrix key produced by that same invocation. It does not assert the complete 128-
+    matrix and 512-raw-selection universe or replay a binding to exp-013's retained
+    branch record.
+  consequence: >-
+    The exact pilot proves a core for the current regenerated index 0. Calling it a
+    durable exp-013 branch key would survive neither branch-universe drift nor a changed
+    index assignment, so wider coverage could silently measure a different universe.
+  fix: >-
+    Keep the branch-0 claim explicitly tied to the current regenerated system and stop
+    expansion. Before another branch, assert every expected active table and universe
+    count and bind selected matrices to a retained exp-013 digest or exact certificate
+    replay.
+  regression: none
+  bead: think-7jyh
+  recorded_in: cases/trump11/incidence_cores.py
+- id: D-293
+  title: Two H-042 provenance selftests claim completeness without checking exact mappings
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one branch pilot
+  severity: medium
+  status: outstanding
+  what: >-
+    source_row_labels_are_complete compares each group record with the rows used to
+    create that same record, while contact_feature_aliases_are_complete checks only
+    nonemptiness and a product count. Neither test proves exact alias identities,
+    uniqueness, disjointness, or the raw-selection mapping its name suggests.
+  consequence: >-
+    The branch matrix and mathematics still replay, but a future provenance omission or
+    compensating alias-count error could leave these flattering controls green.
+  fix: >-
+    none yet. Rename count-only checks to their actual scope, retain exact expected
+    branch-0 identities, and add mutations that delete, duplicate and swap aliases and
+    source labels before promoting the pilot.
+  regression: none
+  bead: think-8wgw
+  recorded_in: cases/trump11/incidence_cores.py

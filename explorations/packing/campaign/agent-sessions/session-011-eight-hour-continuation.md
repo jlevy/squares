@@ -132,7 +132,7 @@ session:
       Execute frozen order 9 under think-kfb4: implement the smallest exact grouped-
       incidence support oracle and retain complete support-deletion evidence for one
       branch, expanding only to eight representative branches if the pilot is bounded.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       H-042 now has a frozen, unmeasured and executable criterion, satisfying order 8's
@@ -154,10 +154,118 @@ session:
     fallback: >-
       Retain the smallest exact subset/oracle blocker under think-kfb4, leave H-042
       blocked, and rotate to the next frozen workflow without allocating an experiment id.
+    outcome: >-
+      Added the exact grouped-incidence oracle and completed the authorized branch-0
+      pilot. Its proper core deletes contact 4-5, retains 24 incidences and 40 oriented
+      row classes, and has exact zero and every-group deletion certificates. This is one
+      branch of 128 and does not decide H-042.
+    evidence:
+    - >-
+      The independently rerun frozen command completed in 14 wall-seconds; its JSON had
+      SHA-256 57003de86269f77c0b3ac7e9f519e1f3fd9698a2a60275750a7c81d0f547b09c
+      and exact branch-matrix key
+      175969ebbf7530322b5c6bd88d506ae67057ad25457f450e69258e0521e4096f.
+    - >-
+      The final 24-group system has exact rank 33, a strictly positive exact stress with
+      zero residual, and 24 exact normalized nonzero witnesses, one after deleting each
+      retained whole incidence. Removing pair 4-5 removes two of 42 oriented row classes.
+    - >-
+      Sixteen selftests pass, including positive-proportional normalization, opposite-
+      orientation separation, exact raw alias multiplicity, unresolved-oracle refusal,
+      final stress replay and every final deletion replay.
+    - >-
+      Ruff formatting and lint plus BasedPyright pass on the new module. D-285 and D-286
+      record and repair the fail-open and provenance bugs found before commit.
+    stop_reason: >-
+      The one-branch pilot and exact terminal receipt landed within the bounded slice;
+      the predeclared full-target prohibition stopped expansion before independent audit.
+    next_action: Run frozen order 10 as an independent branch-0 mathematical and scope audit.
+  - workflow: factual-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Execute frozen order 10 under think-kfb4: independently audit the branch-0 core's
+      exact minimality, complete matrix scope, grouped-incidence semantics and refusal
+      behavior without extending the result to H-042's other 127 branches.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Order 9 produced a reviewable exact branch-0 result, activating the portfolio's
+      independent correctness disposition before any wider support run.
+    budget_minutes: 30
+    started_at: '2026-08-25T04:32:54-07:00'
+    deadline_at: '2026-08-25T05:02:54-07:00'
+    expected_output: >-
+      An independent accept, repair or reject disposition for branch 0, with exact
+      witness and provenance checks and a bounded decision about whether any wider run
+      is earned; no exp-NNN because the universal H-042 criterion remains unresolved.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen python -m
+      cases.trump11.incidence_cores --branch 0 --selftest
+    kill_condition: >-
+      Stop at twenty minutes on one witness mismatch, missing row/group, unresolved
+      refusal, or claim-scope leak; do not repair inside W2, allocate an experiment id,
+      or run another branch.
+    fallback: >-
+      Preserve the smallest counterexample or review blocker, leave H-042 blocked, and
+      rotate to frozen order 11 without a wider target.
+    outcome: >-
+      Independently accepted the regenerated branch-0 mathematical certificate and its
+      group-minimality proof. H-042 remains blocked at 1/128: D-289 through D-293 stop
+      wider execution until normalized oracle inputs, durable exp-013 binding, replay,
+      valid negative-outcome semantics and exact provenance controls land.
+    evidence:
+    - >-
+      Two read-only audits independently verified the rank-33 positive-stress argument,
+      monotone greedy deletion logic, atomic group removal, oriented normalization and
+      all 24 exact deletion directions for the 40-class core.
+    - >-
+      The accepted scope is only the current regenerated branch index 0. The code does
+      not yet fail closed on exp-013's complete 128-matrix/512-raw-selection universe,
+      so no durable exp-013 key or cross-branch coverage is claimed.
+    - >-
+      D-290 records the missing retained-record replay. D-291 preserves a valid future
+      criterion miss as science rather than a golden failure; D-293 records two
+      provenance checks whose names exceed their actual count-only evidence.
+    stop_reason: >-
+      Branch 0 survived exact review, but the first pre-expansion validity boundary was
+      reached. The wider target is prohibited until the recorded blockers are repaired.
+    next_action: Checkpoint the branch-0 pilot and rotate to frozen order 11.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    objective: >-
+      Execute frozen order 11 under think-tx0b: add one reusable timeout and process-
+      group termination primitive to the packing validation CLI with one focused failure
+      test, without retrofitting every deep step.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Order 10 accepted one branch but prohibited wider H-042 execution; the frozen
+      portfolio now rotates from mathematical review to autonomous-run robustness.
+    budget_minutes: 30
+    started_at: '2026-08-25T04:38:34-07:00'
+    deadline_at: '2026-08-25T05:08:34-07:00'
+    expected_output: >-
+      One coherent cross-platform subprocess timeout primitive that reaps its process
+      group and one focused validation-CLI failure test, or a minimized incompatibility
+      preserving the current behavior.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_validation_cli.py
+    kill_condition: >-
+      Stop implementation at twenty minutes, on one platform-specific uncertainty,
+      inability to prove child cleanup, command overrun, or need to convert every deep
+      validation step; retain only the first coherent primitive.
+    fallback: >-
+      Preserve the smallest timeout or process-group blocker under think-tx0b and rotate
+      to frozen order 12 without changing existing step criteria or durations.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Delegate disjoint algorithm, provenance and test seams; coordinator freezes integration.
+    next_action: Checkpoint phase 3-4 first, then delegate implementation and adversarial test review.
   primary_bead: think-gszk
   status: in_progress
   budget:
@@ -285,16 +393,95 @@ session:
     elapsed_quality: unavailable
     next_action: Register the grouped-incidence claim and keep every group atomic.
     phase: 2
+  - task: Implement the exact one-branch grouped-incidence core instrument.
+    operator: /root/trump_support_algorithm
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Added a deterministic 25-group greedy oracle with exact stresses and directions;
+      branch 0 removes pair 4-5 and ends at a proper 24-group, 40-row-class core.
+    evidence:
+    - The delegated branch-0 run completed in about 13.5 seconds with exact replay.
+    files: [cases/trump11/incidence_cores.py]
+    checks: [Branch-0 selftest only; no 128-branch target.]
+    uncertainty: The result covers one labeled derivative branch only.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Require independent fail-closed, provenance and minimality review.
+    phase: 3
+  - task: Design exact controls and audit the first H-042 implementation scope.
+    operator: /root/trump_support_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Found D-285's fail-open selftest and D-286's alias/conjunct conflation; froze the
+      branch-0 group counts, selection, raw multiplicity and exact replay obligations.
+    evidence:
+    - The first WIP could pass unresolved; its wall alias field named simultaneous rows as alternatives.
+    files: []
+    checks: [Read-only final-criterion and WIP source audit.]
+    uncertainty: A complete raw-corner provenance refactor remains outside this pilot.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Repair the two narrow issues and keep branch-matrix equality as the scope guard.
+    phase: 3
+  - task: Run focused mechanical lint and static checks on the H-042 pilot module.
+    operator: /root/incidence_core_lint
+    status: completed
+    recording: contemporaneous
+    outcome: The first delegated check found no Ruff or BasedPyright issue before review fixes.
+    evidence:
+    - Focused Ruff format/check and BasedPyright passed with zero warnings.
+    files: []
+    checks: [Ruff check, Ruff format check, BasedPyright.]
+    uncertainty: The later provenance edit was rerun by the coordinator through the same checks.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Keep mathematical validation separate from mechanical lint.
+    phase: 3
+  - task: Re-audit the final branch-0 H-042 code and receipt against the earlier scope findings.
+    operator: /root/trump_support_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted branch 0's mathematics and confirmed D-285/D-286 repairs; identified the
+      normalized-oracle, replay and generic negative-outcome blockers before expansion.
+    evidence:
+    - Branch 0 has 42 distinct classes, so primitive-versus-normalized oracle input is equivalent there.
+    files: []
+    checks: [Read-only final source and exact JSON receipt audit.]
+    uncertainty: The complete exp-013 universe is not yet bound by the pilot CLI.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Accept only branch 0 and keep H-042 unresolved at 1/128.
+    phase: 4
+  - task: Independently verify branch-0 cone logic, minimality, scope and fail-closed behavior.
+    operator: /root/incidence_core_exact_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted the exact branch-0 core but required repair before wider execution because
+      branch indices are not retained-exp-013 keys and two provenance controls overclaim.
+    evidence:
+    - Positive stress plus rank, and all final-core-minus-group directions, replay exactly.
+    files: []
+    checks: [Independent read-only mathematical, source and receipt review.]
+    uncertainty: Current output proves regenerated index 0, not a drift-proof exp-013 key.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Track D-292/D-293 and stop the H-042 expansion.
+    phase: 4
   outputs:
   - campaign/agent-sessions/session-011-eight-hour-continuation.md
   - campaign/hypotheses/H-042-trump-incidence-rigidity-cores.md
+  - cases/trump11/incidence_cores.py
   checks:
   - PR 29 final head eb1473a passes Linux in 3m04s and macOS in 4m31s.
   - uv run --directory explorations/packing --frozen packing-ledger check
   stop_reason: null
   next_action: >-
-    Execute only the frozen H-042 one-branch pilot, retain an exact terminal oracle
-    receipt, and expand to eight representative branches only if the pilot stays bounded.
+    Checkpoint and push the accepted branch-0 pilot, then implement only order 11's
+    bounded validation timeout primitive; do not resume the H-042 wider run.
 ---
 # Session 011 — Eight-Hour Portfolio Continuation
 

@@ -2,15 +2,15 @@
 
 # Defect log
 
-284 defects recorded across the packing toolchain.
+293 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **70 soundness defects** — the system asserting something false about the mathematics. 58 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **94 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264).
-- **29 are still open** (outstanding or contained), every one carrying a bead.
+- **98 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267, D-282 repeats D-264).
+- **34 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 17 | a cell of the sweep whose answer is known in advance |
-| `review` | 175 | a human or agent reading the work against a checklist |
-| `anomaly` | 11 | a result that made no sense, chased down |
+| `review` | 182 | a human or agent reading the work against a checklist |
+| `anomaly` | 12 | a result that made no sense, chased down |
 | `inspection` | 30 | reading the code or the design with intent |
 | `drift_check` | 15 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 33 | the automated test suite |
+| `gate` | 34 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 33 of 284, and none of the 70 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 34 of 293, and none of the 70 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,8 +34,8 @@ The line worth reading twice: **the automated gate caught 33 of 284, and none of
 | engine | 11 |
 | quench | 21 |
 | verifier | 4 |
-| record | 84 |
-| tooling | 81 |
+| record | 88 |
+| tooling | 86 |
 | docs | 83 |
 
 ## By kind
@@ -43,9 +43,9 @@ The line worth reading twice: **the automated gate caught 33 of 284, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 70 |
-| validity | 71 |
-| bookkeeping | 105 |
-| robustness | 29 |
+| validity | 76 |
+| bookkeeping | 108 |
+| robustness | 30 |
 | performance | 9 |
 
 ## Fixed, but nothing stops it coming back
@@ -149,6 +149,10 @@ This is the actionable list.
 | D-247 | A delegated follow-up again rewrote the dependency lock outside its scope | tooling |
 | D-280 | The phase-count cap ended a fast campaign before its wall-clock goal | tooling |
 | D-284 | A delegated float scout ran before the Trump support criterion was frozen | record |
+| D-287 | A shell-active bead description executed a backtick-delimited word | record |
+| D-289 | The H-042 pilot normalized row classes for counting but not for its cone oracle | tooling |
+| D-291 | The branch-0 H-042 golden would classify a valid future refutation as test failure | tooling |
+| D-292 | H-042 branch indices are regenerated but not bound to the retained exp-013 universe | record |
 
 ## Still open
 
@@ -183,6 +187,11 @@ This is the actionable list.
 | D-239 | outstanding | medium | Validation steps have no outer deadline or process-group cleanup | `think-tx0b` |
 | D-280 | contained | high | The phase-count cap ended a fast campaign before its wall-clock goal | `think-bfwm` |
 | D-283 | outstanding | high | A zero-step sqsearch regime can spin forever without spending its move budget | `think-dprg` |
+| D-289 | contained | high | The H-042 pilot normalized row classes for counting but not for its cone oracle | `think-jyit` |
+| D-290 | outstanding | medium | H-042 pilot certificates can be recomputed but not replayed from a retained record | `think-oa96` |
+| D-291 | contained | high | The branch-0 H-042 golden would classify a valid future refutation as test failure | `think-j92q` |
+| D-292 | contained | high | H-042 branch indices are regenerated but not bound to the retained exp-013 universe | `think-7jyh` |
+| D-293 | outstanding | medium | Two H-042 provenance selftests claim completeness without checking exact mappings | `think-8wgw` |
 
 ## Every defect
 
@@ -472,3 +481,12 @@ This is the actionable list.
 | [D-282](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The stopped session retained a completed final phase |
 | [D-283](sqsearch/src/search.rs) | 2026-08-25 | engine | robustness | neutral | `review` | high | outstanding | A zero-step sqsearch regime can spin forever without spending its move budget |
 | [D-284](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | record | validity | flattering | `review` | medium | fixed | A delegated float scout ran before the Trump support criterion was frozen |
+| [D-285](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The first H-042 pilot could pass while its exact cone oracle was unresolved |
+| [D-286](cases/trump11/incidence_cores.py) | 2026-08-25 | record | bookkeeping | neutral | `review` | medium | fixed | The first H-042 record conflated conjunctive wall rows with feature aliases |
+| [D-287](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | record | bookkeeping | neutral | `anomaly` | low | fixed | A shell-active bead description executed a backtick-delimited word |
+| [D-288](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | tooling | bookkeeping | neutral | `gate` | low | fixed | The first focused Ruff replay doubled the uv working-directory prefix |
+| [D-289](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | neutral | `review` | high | contained | The H-042 pilot normalized row classes for counting but not for its cone oracle |
+| [D-290](cases/trump11/incidence_cores.py) | 2026-08-25 | record | robustness | conservative | `review` | medium | outstanding | H-042 pilot certificates can be recomputed but not replayed from a retained record |
+| [D-291](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | conservative | `review` | high | contained | The branch-0 H-042 golden would classify a valid future refutation as test failure |
+| [D-292](cases/trump11/incidence_cores.py) | 2026-08-25 | record | validity | neutral | `review` | high | contained | H-042 branch indices are regenerated but not bound to the retained exp-013 universe |
+| [D-293](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | flattering | `review` | medium | outstanding | Two H-042 provenance selftests claim completeness without checking exact mappings |

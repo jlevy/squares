@@ -1768,15 +1768,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 284 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 293 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 70 | asserted something false about the mathematics |
-| validity | 71 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 105 | recorded something its own evidence contradicts |
-| robustness | 29 | did not finish, or finished only by luck |
+| validity | 76 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 108 | recorded something its own evidence contradicts |
+| robustness | 30 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -1785,7 +1785,7 @@ Two observations the log exists to make.
 where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught thirty-three defects in 284, and no soundness defect
+**The automated gate has caught thirty-four defects in 293, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -1930,11 +1930,18 @@ briefly changed D-034 instead of D-194. D-197 records the concurrent checkout ca
 the exp-036 commit banner; the isolated checker commit was moved to the campaign branch
 and the other branch ref restored before push or target execution.
 
+D-289 through D-293 record the H-042 pilot’s remaining validity, robustness, and
+provenance gaps. D-289 covers row-class normalization in the cone oracle; D-290 keeps
+certificate replay open; D-291 covers the branch-0 golden’s treatment of valid future
+refutations; D-292 keeps regenerated branch indices bound to the retained exp-013
+universe; and D-293 keeps provenance self-tests from claiming completeness without exact
+mappings.
+
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Ninety-four fixes left no regression check behind, and that list has already predicted a
-recurrence once. The
+Ninety-eight fixes left no regression check behind, and that list has already predicted
+a recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
 relative to what they govern, a discovery treated as a defect until an independent layer

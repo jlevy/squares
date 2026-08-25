@@ -16,7 +16,7 @@
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | retrospective | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-ciwv | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
 | [session-009](agent-sessions/session-009-autonomous-basin-map.md) | stopped | mixed | `process-review` (process) | `process-review` (process) | 10 | think-05hr | Open a new AgentSession/v2 under W2 factual-review with a Correctness focus. Capture the n=4 seed-0 status-4 millisecond fixture under think-nr5w, then finish think-b3bm's final-receipt runbook rehearsal and revalidate the strict launch path before new basin-map rounds. Keep D-126 separate; the exact-research queue remains think-nm35. |
 | [session-010](agent-sessions/session-010-eight-hour-mixed-research.md) | stopped | contemporaneous | `research-loop` (insight) | `process-review` (process) | 15 | think-3cbq | Continue the original wall-clock objective in a new bounded session from the final PR 29 head. Run frozen order 7 under think-b4jc: require identical seeded outputs, independently recomputed pair totals, and unloaded-host overhead before retaining the meter; then route the first unmetered quench adapter without changing a criterion. |
-| [session-011](agent-sessions/session-011-eight-hour-continuation.md) | in_progress | contemporaneous | `efficiency-loop` (efficiency) | `research-loop` (insight) | 3 | think-gszk | Execute only the frozen H-042 one-branch pilot, retain an exact terminal oracle receipt, and expand to eight representative branches only if the pilot stays bounded. |
+| [session-011](agent-sessions/session-011-eight-hour-continuation.md) | in_progress | contemporaneous | `efficiency-loop` (efficiency) | `pipeline-improvement` (efficiency) | 5 | think-gszk | Checkpoint and push the accepted branch-0 pilot, then implement only order 11's bounded validation timeout primitive; do not resume the H-042 wider run. |
 
 ### Workflow summary
 
@@ -24,12 +24,12 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
-| `factual-review` | 0 | 0 | 2 | 2 |
+| `factual-review` | 0 | 0 | 3 | 2 |
 | `insight-iteration` | 0 | 1 | 3 | 2 |
 | `process-review` | 0 | 4 | 3 | 6 |
 | `efficiency-loop` | 1 | 0 | 1 | 0 |
 | `research-loop` | 1 | 4 | 4 | 7 |
-| `pipeline-improvement` | 0 | 0 | 6 | 0 |
+| `pipeline-improvement` | 0 | 0 | 7 | 0 |
 
 ## Experiment agendas
 
