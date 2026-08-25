@@ -103,7 +103,7 @@ read, run, and moved as one unit.
   best known, or asserted-but-unverified — and cite primary sources near the claims they
   support.
 - **Independently tracked packing work declares its entry point.** The coordinating
-  agent chooses W1–W6 (or `general-improvement` only for genuine repository maintenance
+  agent chooses W1–W7 (or `general-improvement` only for genuine repository maintenance
   outside those workflows) from
   [`explorations/packing/README.md`](explorations/packing/README.md#workflow-entry-points)
   before beginning a session or a genuine workflow phase.

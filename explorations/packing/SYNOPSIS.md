@@ -178,22 +178,27 @@ The generated ledger summarizes both entry workflows and later switches.
 | W4 | `process-review` | Artifacts, beads, logs, checks, and a reconstructability or discipline question | Inspect ownership, handoffs, refusals, and controls; do not substitute process polish for a scientific result | Review findings, beads, and narrowly scoped contract or checker changes | W5 for a measured bottleneck or the next workflow that owns the result |
 | W5 | `efficiency-loop` | A measured baseline, profile, target metric, and equivalence or validity guard | Improve time, cost, or throughput under the same regime; never relax correctness or provenance to win | Benchmark record, change or rejection, measured delta, and preserved guards | W6 when the research bottleneck moves; W4 if the process contract is wrong |
 | W6 | `research-loop` | A registered hypothesis, fixed criterion, regime, budget, stop rule, and instrument contract | Build or repair the bounded instrument, freeze it before measurement, then use creative effort inside the registered scope to execute the smallest fair test; never change the criterion, suppress a failure, or improvise a replacement hypothesis mid-round | Frozen instrument, `exp-NNN`, raw data or proof record, verdict, regenerated views, and the next bounded question | W2 before promoted or high-risk claims; otherwise W3 or another W6 slice |
+| W7 | `pipeline-improvement` | Named packing-research consumers, the smallest reusable capability or cleanup they need, controls or an independent oracle, a budget, and expected comparability impact | Add, strengthen, simplify, or repair only the bounded packing pipeline surface; do not collect a target verdict while it is mutable, optimize an unchanged implementation without a W5 baseline, or generalize beyond named consumers | Code, entry point or refactor; replayable positive and negative controls; exact validation command; cost and complexity receipt; evidence limits; and a readiness or retained-blocker decision | W2 before a new or materially changed trust boundary reaches W6; W5 if measured throughput remains the blocker; otherwise W6 |
 
 Implementation is an action inside the workflow that owns its promised result, not an
 undefined handoff: W1 and W2 can make bounded research corrections, W3 can implement a
 bounded exploratory derivation or visualization without spending an undeclared
-experiment budget, W4 can repair an accepted process or checker defect, W5 can implement
-a measured optimization, and W6 can build or repair its registered instrument before
-measurement. `general-improvement` remains only for genuine repository maintenance whose
-output fits none of W1–W6. It must not hide core work or a session alternating among
-research, review, and infrastructure; those are separate phases.
+experiment budget, W4 can make a narrow accepted process correction, W5 can implement a
+measured optimization, and W6 can build a one-round instrument that freezes before
+measurement. W7 owns reusable packing-pipeline capabilities, targeted refactors,
+robustness, visualization infrastructure, and cleanup for named consumers.
+`general-improvement` remains only for repository maintenance outside the packing
+pipeline whose output fits none of W1–W7. It must not hide core work or a session
+alternating among research, review, and infrastructure; those are separate phases.
 
 ### Switching Workflows in One Session
 
 One phase is active at a time per independently tracked session.
-Start a new phase when its purpose or focus changes.
+Start a new phase when its purpose, focus, or bounded slice objective changes.
 A focus-only change repeats the workflow name and is a phase boundary, not a workflow
-switch. An orchestrator may switch at a planned checkpoint, after a concrete evidence
+switch. A renewed slice may repeat both workflow and focus, but it must close the prior
+slice, change the objective, and state the new fact that justifies another clock.
+An orchestrator may switch or renew at a planned checkpoint, after a concrete evidence
 checkpoint, on a user request, or because the active premise was falsified.
 It closes the old phase first with status, evidence, stop reason, and next action; then
 it declares the new workflow, primary focus, objective, expected output, validation,
@@ -210,11 +215,11 @@ The normal research cadence is not a mandate to traverse every workflow:
 ```
 W1 research-pass ──> W2 factual-review ──> W3 insight-iteration
                                                │
-                                               v
-W5 efficiency-loop <── W4 process-review    W6 research-loop
-        │                                      │
-        └──────── measured capability ─────────┘
-                  promoted/high-risk W6 result ──> W2 ──> W3
+                         missing reusable tool v
+W4 process-review ──> W7 pipeline-improvement ──> W2 ──> W6 research-loop
+        │                    │                              │
+        └─ accepted repair ──┘        W5 efficiency-loop ──┘
+                         promoted/high-risk result ──> W2 ──> W3
 ```
 
 At any checkpoint, the human operator may choose the next phase, narrow the question, or
@@ -238,8 +243,9 @@ then excluded the displayed direction from the true tangent cone without classif
 other non-sheet directions.
 When the post-round strict gate failed, W4 separated stale controls from an independent
 deep-golden solver rejection.
-The bounded solver implementation that followed belongs to the process-repair workflow
-that isolated it; it is not research and does not need a general-work catchall.
+That bounded solver repair was recorded under the owning review phase before W7 existed.
+Future packing-pipeline repairs whose promised output is the implementation itself enter
+W7; historical phases are not relabelled after the fact.
 The scientific queue remains separate.
 At no point may exp-035 or exp-036 be reinterpreted as a connectivity proof.
 
@@ -1732,15 +1738,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 239 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 248 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 65 | asserted something false about the mathematics |
 | validity | 65 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 77 | recorded something its own evidence contradicts |
-| robustness | 24 | did not finish, or finished only by luck |
+| bookkeeping | 83 | recorded something its own evidence contradicts |
+| robustness | 27 | did not finish, or finished only by luck |
 | performance | 8 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -1749,7 +1755,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fifteen defects in 239, and no soundness defect ever.**
+**The automated gate has caught fifteen defects in 248, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1896,7 +1902,7 @@ and the other branch ref restored before push or target execution.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Ninety fixes left no regression check behind, and that list has already predicted a
+Ninety-two fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
@@ -1983,11 +1989,11 @@ stress analysis, not another rank count.
 No hour-scale lane is promoted without a known-answer response, independent validity,
 and a result that changes a decision.
 
-**The normal checkpoint is green; the strict unattended-handoff gate is not.** The
-post-engineering readiness review passes all 31 normal-gate steps in 113.31
-wall-seconds, including seven exact small-`n` replays, 36 pytest contracts, and all 58
-mutation controls. The first deep regeneration reproduced one unsettled `n=4` proposal
-and an `n=10` `1.503e-10` pair-row residual.
+**The normal checkpoint is green; the strict unattended-handoff gate is not.** The W7
+and frozen-queue checkpoint passes all 31 normal-gate steps in 103.91 wall-seconds,
+including seven exact small-`n` replays, 51 pytest contracts, and all 62 mutation
+controls. The first deep regeneration reproduced one unsettled `n=4` proposal and an
+`n=10` `1.503e-10` pair-row residual.
 [D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders
 49 and 66 exposes previously clean row 61, which a third conservative call settles with
 zero all-original-row residual.

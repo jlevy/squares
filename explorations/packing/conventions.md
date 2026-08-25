@@ -134,22 +134,26 @@ invalidate every artifact rather than the offending one
 ### Workflow, Focus, Phase, and Slice
 
 **Workflow names purpose and output; focus names the primary quality emphasis.**
-[checked for agent sessions] The six numbered workflows and their full contracts live in
-[`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts).
+[checked for agent sessions] The seven numbered workflows and their full contracts live
+in [`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts).
 One independently tracked session phase declares one workflow and one primary focus; the
 other principles still constrain and may contribute to the work.
-`general-improvement` is reserved for genuine repository maintenance outside W1–W6, not
-a label for mixed or ordinary core work.
+`general-improvement` is reserved for genuine repository maintenance outside W1–W7 and
+the packing pipeline, not a label for mixed or ordinary core work.
 
 **Implementation stays with its owning workflow.** [convention] Bounded research
 corrections stay in W1 or W2, idea probes in W3, process and checker repairs in W4,
-measured optimizations in W5, and registered instruments in W6 before measurement.
-There is no undefined implementation handoff.
+measured optimizations in W5, one-round registered instruments in W6 before measurement,
+and reusable packing-pipeline capabilities, targeted refactors, robustness,
+visualization infrastructure, and cleanup in W7. There is no undefined implementation
+handoff.
 
 **A phase is contiguous; a slice is bounded.** [checked for phase history] Start a new
-phase when workflow or focus changes.
+phase when workflow, focus, or the bounded slice objective changes.
 A focus-only change repeats the workflow and is not a workflow switch.
-A slice is one time-bounded action inside the phase and need not produce an experiment.
+A renewed slice may repeat workflow and focus only after closing the prior phase and
+stating a changed objective and renewal reason.
+A slice is one time-bounded action and need not produce an experiment.
 Mechanical delegations inherit the coordinating phase unless they open independently
 tracked sessions.
 

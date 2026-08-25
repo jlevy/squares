@@ -20,7 +20,7 @@ Five checks:
    lists six; both must match what is in `docs/project/research/`.
 4. **The defect summary is derived.** README may state whether the gate has caught a
    soundness defect, but may not repeat a numeric aggregate owned by `defects.yaml`.
-5. **The work model agrees.** README and SYNOPSIS must expose the same six numbered
+5. **The work model agrees.** README and SYNOPSIS must expose the same seven numbered
    workflow entry points, the agent-session schema must be able to record them, and the
    synopsis must define the work units those workflows produce.
 
@@ -223,9 +223,9 @@ def check_work_model(text: str) -> list[str]:
     expected_rows = [
         (f"W{index}", workflow) for index, workflow in enumerate(numbered_workflows, start=1)
     ]
-    if len(numbered_workflows) != 6 or not fallback:
+    if len(numbered_workflows) != 7 or not fallback:
         problems.append(
-            "agent-session.schema.yaml: workflow enum must contain six numbered "
+            "agent-session.schema.yaml: workflow enum must contain seven numbered "
             "workflows followed by one fallback"
         )
     for label, rows in (

@@ -2,14 +2,14 @@
 
 # Defect log
 
-239 defects recorded across the packing toolchain.
+248 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **65 soundness defects** — the system asserting something false about the mathematics. 54 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **90 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028).
+- **92 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242).
 - **28 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 15 | a cell of the sweep whose answer is known in advance |
-| `review` | 154 | a human or agent reading the work against a checklist |
+| `review` | 161 | a human or agent reading the work against a checklist |
 | `anomaly` | 11 | a result that made no sense, chased down |
-| `inspection` | 27 | reading the code or the design with intent |
+| `inspection` | 29 | reading the code or the design with intent |
 | `drift_check` | 14 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 15 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 15 of 239, and none of the 65 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 15 of 248, and none of the 65 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,9 +34,9 @@ The line worth reading twice: **the automated gate caught 15 of 239, and none of
 | engine | 9 |
 | quench | 20 |
 | verifier | 4 |
-| record | 65 |
-| tooling | 59 |
-| docs | 82 |
+| record | 68 |
+| tooling | 64 |
+| docs | 83 |
 
 ## By kind
 
@@ -44,8 +44,8 @@ The line worth reading twice: **the automated gate caught 15 of 239, and none of
 | --- | ---: |
 | soundness | 65 |
 | validity | 65 |
-| bookkeeping | 77 |
-| robustness | 24 |
+| bookkeeping | 83 |
+| robustness | 27 |
 | performance | 8 |
 
 ## Fixed, but nothing stops it coming back
@@ -145,6 +145,8 @@ This is the actionable list.
 | D-234 | The implemented engineering plan carried stale inventory and defect references | docs |
 | D-236 | A completed timeout fix remained outstanding in the defect and launch records | record |
 | D-238 | The synopsis called quench endpoints discrete basins with a well-defined census | docs |
+| D-243 | The autonomous-loop instruction contradicted its upstream launch blocker | docs |
+| D-247 | A delegated follow-up again rewrote the dependency lock outside its scope | tooling |
 
 ## Still open
 
@@ -422,3 +424,12 @@ This is the actionable list.
 | [D-237](devtools/run_negative_controls.py) | 2026-08-24 | tooling | robustness | neutral | `inspection` | high | fixed | Mutation-control target paths could escape their private snapshot |
 | [D-238](SYNOPSIS.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The synopsis called quench endpoints discrete basins with a well-defined census |
 | [D-239](src/sqpack/cli/validate.py) | 2026-08-24 | tooling | robustness | neutral | `inspection` | medium | outstanding | Validation steps have no outer deadline or process-group cleanup |
+| [D-240](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | high | fixed | The autonomous-session wall budget could be reset indefinitely |
+| [D-241](src/sqpack/campaign/ledger.py) | 2026-08-24 | record | bookkeeping | conservative | `review` | high | fixed | The session checker rejected a legitimate renewed slice |
+| [D-242](campaign/agent-sessions/README.md) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | A delegated focused check rewrote the dependency lock outside its scope |
+| [D-243](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | docs | bookkeeping | flattering | `review` | high | fixed | The autonomous-loop instruction contradicted its upstream launch blocker |
+| [D-244](campaign/schemas/agent-session.schema.yaml) | 2026-08-24 | record | bookkeeping | flattering | `review` | high | fixed | A completed delegation could shed provenance and pass an incomplete receipt |
+| [D-245](campaign/schemas/agent-session.schema.yaml) | 2026-08-24 | record | bookkeeping | neutral | `review` | medium | fixed | A newly opened agent session had to invent completed progress |
+| [D-246](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | medium | fixed | Reserve enforcement crashed on a malformed contemporaneous phase clock |
+| [D-247](uv.lock) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | A delegated follow-up again rewrote the dependency lock outside its scope |
+| [D-248](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | high | fixed | Active slice deadlines were recorded but not enforced after expiry |

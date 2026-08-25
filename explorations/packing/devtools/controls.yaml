@@ -72,9 +72,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 239", "count: 20"]
+  replace: ["count: 248", "count: 20"]
   run: python3 -m devtools.validate_schemas
-  expect: "count 20 != 239"
+  expect: "count 20 != 248"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -90,13 +90,13 @@ controls:
   run: python3 -m devtools.check_readme
   expect: "README.md: workflow table is"
 
-- name: README - undeclared seventh workflow is not ignored
+- name: README - undeclared eighth workflow is not ignored
   file: README.md
   replace:
-    - "| W6 | `research-loop` |"
+    - "| W7 | `pipeline-improvement` |"
     - |-
-      | W6 | `research-loop` |
-      | W7 | `rogue-loop` |
+      | W7 | `pipeline-improvement` |
+      | W8 | `rogue-loop` |
   run: python3 -m devtools.check_readme
   expect: "README.md: workflow table is"
 
@@ -135,9 +135,9 @@ controls:
 
 - name: synopsis - gate detector aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["gate has caught fifteen defects in 239", "gate has caught fourteen defects in 239"]
+  replace: ["gate has caught fifteen defects in 248", "gate has caught fourteen defects in 248"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "gate-detector aggregate is not 15 of 239"
+  expect: "gate-detector aggregate is not 15 of 248"
 
 - name: synopsis - hypothesis-status aggregate drifting from the ledger
   file: SYNOPSIS.md
@@ -349,13 +349,13 @@ controls:
   run: python3 -m sqpack.campaign.ledger check
   expect: "workflow phase 4 has no switch_reason"
 
-- name: campaign - later workflow phase must change workflow or focus
+- name: campaign - renewed workflow phase must change workflow, focus, or objective
   file: campaign/agent-sessions/session-009-autonomous-basin-map.md
   replace:
     - "  - workflow: research-loop\n    recording: retrospective\n    focus: correctness\n    objective: Test H-023's exact fixed-angle and angle-sheet connectivity candidates."
-    - "  - workflow: process-review\n    recording: retrospective\n    focus: process\n    objective: Test H-023's exact fixed-angle and angle-sheet connectivity candidates."
+    - "  - workflow: process-review\n    recording: retrospective\n    focus: process\n    objective: Close only the evidence-contract gaps blocking admissible basin events."
   run: python3 -m sqpack.campaign.ledger check
-  expect: "workflow phase 2 changes neither workflow nor focus"
+  expect: "workflow phase 2 changes neither workflow, focus, nor objective"
 
 - name: campaign - active workflow phase must be contemporaneously recorded
   file: campaign/agent-sessions/session-009-autonomous-basin-map.md
@@ -380,6 +380,38 @@ controls:
     - "    deadline_at: '2026-08-24T22:45:44Z'"
   run: python3 -m sqpack.campaign.ledger check
   expect: "workflow phase 10 deadline_at is not after started_at"
+
+- name: campaign - active session needs one absolute wall clock
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "  primary_bead: think-05hr\n  status: stopped"
+    - "  primary_bead: think-05hr\n  status: in_progress"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "in-progress session needs an offset-aware started_at"
+
+- name: campaign - session deadline cannot reset the wall budget
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "  date: '2026-08-24'\n  goal: >-"
+    - "  date: '2026-08-24'\n  started_at: '2026-08-24T16:00:00Z'\n  deadline_at: '2026-08-24T21:00:01Z'\n  goal: >-"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "deadline_at exceeds budget.wall_minutes"
+
+- name: campaign - a clocked session cannot relabel historical phases as live
+  file: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  replace:
+    - "  date: '2026-08-24'\n  goal: >-"
+    - "  date: '2026-08-24'\n  started_at: '2026-08-24T19:00:00Z'\n  deadline_at: '2026-08-24T23:00:00Z'\n  goal: >-"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "clocked workflow phase 1 must be contemporaneous"
+
+- name: campaign - queued delegation requires bounded task contract
+  file: campaign/agent-sessions/session-001-pr15-review-reset.md
+  replace:
+    - "    operator: recover_pre_reset_snapshot\n    status: completed"
+    - "    operator: recover_pre_reset_snapshot\n    status: queued"
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "queued delegation has no budget_minutes"
 
 - name: campaign - approximate delegation time labeled unavailable
   file: campaign/agent-sessions/session-001-pr15-review-reset.md

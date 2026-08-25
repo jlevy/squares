@@ -69,13 +69,16 @@ atlas, ambiguity graph, discovery curve, and continuation tree, while the resear
 decides which views expose mechanisms rather than decorate a report.
 
 A focus is a quality dimension, not a workflow.
-Before taking work, choose W1–W6 from the
+Before taking work, choose W1–W7 from the
 [workflow entry contracts](../../../../SYNOPSIS.md#workflow-entry-contracts), then
 declare the primary focus inside that phase.
 A focus-only change starts another phase under the same workflow; a changed purpose
 starts a different workflow.
-Bounded implementation remains inside whichever workflow owns its promised result;
-`general-improvement` is only for genuine repository maintenance outside W1–W6.
+W7, `pipeline-improvement`, owns reusable packing-pipeline capabilities, targeted
+refactors, robustness, visualization infrastructure, and cleanup for named research
+consumers. W6 retains only instruments specific to one registered round that freeze
+before measurement. `general-improvement` is only for genuine repository maintenance
+outside W1–W7 and the packing pipeline.
 
 ## Measured checkpoint — 2026-08-24
 
@@ -84,12 +87,12 @@ The campaign ledger owns cumulative round and effort totals.
 
 | Item | Current fact | Consequence |
 | --- | --- | --- |
-| Scientific registry | 40 artifacts: H-001 through H-040, including seven explicit open questions | The census spine now sits beside local geometry, construction, exact-value, algebraic and asymptotic lanes |
-| Recorded campaign | [Generated ledger](../../../../campaign/ledger.md#effort): 15 terminal rounds, 422 agent-minutes, 24.0 wall-minutes at this checkpoint | The loop remains overwhelmingly agent-bound |
+| Scientific registry | 41 artifacts: H-001 through H-041, including seven explicit open questions | The census spine now sits beside local geometry, construction, exact-value, algebraic and asymptotic lanes |
+| Recorded campaign | [Generated ledger](../../../../campaign/ledger.md#effort): 36 terminal rounds, 868 agent-minutes, 28.2 wall-minutes at this checkpoint | The loop remains overwhelmingly agent-bound |
 | Operational runner queue | one H-017 cell, five seeds, recipe timebox 8h | “Queue nonempty” is not an overnight-readiness test |
 | Estimated H-017 runtime | 2.80h at 39.7M moves/s locally; 7.46h at the recorded 14.9M moves/s cloud rate | Target-host calibration is mandatory |
 | Fast checks | status 0.22–0.24s; preflight 0.12s; ledger 0.23s; schemas 1.60s; engine selftest 1.43s | Orientation and focused feedback are already cheap |
-| Strict/deep gate | 40s after exp-015 on the recorded development host | Keep cheap focused checks in the inner loop; remeasure before optimizing the gate again |
+| Normal gate | 31 steps in 103.91s at the W7 and frozen-queue checkpoint, including 51 pytest contracts and 62 mutation controls | Green checkpoint evidence; not permission to run the red deep producer unattended |
 | Canonicalizer | 0.098s at `n=7`, 7.91s at `n=9` in one audit | Likely census bottleneck; confirm under `think-xzew` before redesign |
 
 The existing preflight is useful but not a launch decision.
@@ -113,12 +116,83 @@ measurements, beads own unfinished work, and the agent-session artifact owns one
 clock per independently tracked session.
 None is a duplicate runner queue.
 
-Do not copy the current ready item into this plan.
-The agenda frontmatter and generated ledger own that volatile state; this plan owns the
-launch boundary.
-The dependency ladder keeps tool validation, measurement validation, and
-research distinct, so a clean program execution cannot silently become evidence about
-the landscape.
+Outside the dated frozen portfolio below, do not copy the current ready item into this
+plan.
+The agenda frontmatter and generated ledger own that volatile state; this plan owns
+the launch boundary.
+The dependency ladder keeps tool validation, measurement validation, and research
+distinct, so a clean program execution cannot silently become evidence about the
+landscape.
+
+## Frozen Eight-Hour Agent Portfolio
+
+This is the launch queue for `think-3cbq`, the planned `session-010`. It is frozen
+because `think-k68v` shows that the live bead graph still mixes landed, branch-ahead,
+stopped, and stale claims; agents must not drain raw `tbd ready` tonight.
+The coordinator may re-screen this list at a checkpoint, but may not invent another task
+merely to keep the session busy.
+
+The outer agent campaign is a **conditional go** from one clean, pushed commit whose
+normal gate is green.
+It does not start until `think-jqkv` records the user-selected final upstream PR as
+merged, the exact resulting `main` commit is integrated, conflicts are resolved, and the
+post-integration normal gate passes.
+The generic numerical runner, `packing-campaign run`, remains a **no-go**. So do
+delegated strict or deep gates: D-239 lacks outer validation deadlines, and D-202/D-217
+show that a finished delegated command can still lose its terminal receipt.
+
+Open `session-010` with an offset-aware start and deadline exactly eight hours apart,
+`wall_minutes: 480`, `max_cycles: 15`, and `finalization_minutes: 45`. Every ordinary
+slice declares `clock_role: work`, ends before the reserve, and retains the runbook’s
+ten-minute orientation, twenty-minute evidence checkpoint, and thirty-minute hard stop.
+Order 15 is the sole `clock_role: finalization` phase.
+No line receives a third consecutive slice.
+A continuation closes its old phase and names the new evidence, changed objective, and
+fresh clock that earn another attempt.
+
+One coordinator owns the registry freeze, shared campaign artifacts, defect log,
+workflow transitions, long commands, integration, commits, and final receipts.
+A delegate gets one task and at most thirty minutes.
+A task that may cross the twenty-minute checkpoint or run a process receives the full
+durable contract: disjoint write scope, exact frozen validation command, kill condition,
+fallback, and explicit command exclusions.
+A shorter read-only derivation may inherit the phase and return one compact terminal
+receipt without first creating a queued row.
+It never chooses its own successor, changes branches, allocates an experiment id, edits
+the registry during W6 measurement, or runs a strict/deep gate.
+Disjoint read-only derivations and code probes may overlap; gates, timing measurements,
+and shared-record writes may not.
+
+| Order | Workflow and focus | Bead | Maximum | Durable exit | Kill line and frozen fallback |
+| ---: | --- | --- | ---: | --- | --- |
+| 1 | W4 `process-review` / Process | `think-k68v`, then `think-3cbq` | 1 slice | Reconciled landed-versus-branch-ahead claims, one active `session-010`, and a clean base receipt from `packing-ledger check` plus `packing-validate --fast` | If ownership is still ambiguous at thirty minutes, freeze writes and allow only the source-bound W1 fallback |
+| 2 | W6 `research-loop` / Insight | `think-nm35` | 1 slice | Exact branchwise ray or face inventory for the remaining `n=5` cones modulo exp-034, or a finite unresolved list; validate through `small-n exact models and local geometry` | Stop at thirty minutes without a component, census, or unequal-side claim; fall back to order 8 |
+| 3 | W2 `factual-review` / Correctness | `think-nm35` | 1 slice, only after order 2 yields a candidate result | Independent branch-coverage and claim-scope disposition, with mutations or a defect where the checker can flatter | Any omitted branch or non-independent replay keeps BC-010 ready; do not repair inside W2 and continue at order 4 |
+| 4 | W7 `pipeline-improvement` / Correctness | `think-nr5w` | 1 slice | Millisecond `n=4`, seed-0 fixture retaining theta, cell, solver inputs, status, and replay—or the exact input still missing | No fixture by twenty minutes means retain the smallest input and stop; never launch a full-golden retry, change tolerance, or update the golden |
+| 5 | W2 `factual-review` / Correctness | `think-nr5w` | 1 slice, only after order 4 yields a fixture or repair | Independent diagnosis and a decision whether one more W7 repair is earned; no solver-health claim from one passing retry | A non-replayable or load-dependent diagnosis remains open and routes to order 12 |
+| 6 | W7 `pipeline-improvement` / Efficiency | `think-b4jc`, reconciled with `think-krqi` | 1 slice | One exact pair-test counting contract and the smallest counter-to-JSONL vertical slice, or the first unmetered move path | If equal work cannot be defined identically across current paths, retain the interface decision and use order 13; do not substitute moves or wall time |
+| 7 | W5 `efficiency-loop` / Efficiency | `think-b4jc` | 1 slice, only if order 6 lands a counter | Seeded-output equivalence, counter equality against independent totals, and measured overhead under an unloaded host | Any seeded drift, unexplained count, or competing load rejects the change; preserve the baseline and continue at order 8 |
+| 8 | W3 `insight-iteration` / Insight | `think-kfb4` | 1 slice | One falsifiable successor covering only inclusion-minimal Trump rigidity supports, or an explicit open question if no exact criterion survives | Do not combine the radius, support, and side-stability questions; freeze no experiment until one criterion exists |
+| 9 | W6 `research-loop` / Insight | `think-kfb4` | 1 slice, only after order 8 registers a criterion | Exact support-deletion data for every reached branch, complete or explicitly partial, replayed through `Trump exact branchwise linearized cones` | At twenty minutes without exhaustive deletion, retain partial supports and stop unresolved; no interval-radius or global-optimality detour |
+| 10 | W2 `factual-review` / Correctness | `think-kfb4` | 1 slice, only after order 9 yields a result | Independent minimality and branch-scope disposition; an `exp-NNN` only if the frozen criterion is actually resolved | One unsupported branch or nonminimal certificate keeps the question unresolved and routes to order 11 |
+| 11 | W7 `pipeline-improvement` / Efficiency | `think-tx0b` | 1 slice | One timeout/process-group primitive and focused failure test in `tests/test_validation_cli.py`, or a minimized incompatibility | Do not retrofit every deep step in one slice; stop with the first coherent primitive or blocker |
+| 12 | W4 `process-review` / Process | `think-b3bm` | 1 slice | One short parent-owned rehearsal preserving argv, start/end, exit or signal, output paths, timeout, cleanup, and the portable runbook rule | If any receipt field disappears, retain that failure and leave the bead open; no long or deep command |
+| 13 | W1 `research-pass` / Insight | `think-ykt7` | 1 slice | Source-bound reproduction of one `O(x^(3/5))` primitive or error balance, with the exact boundary where finite transfer fails | If the local primary source is insufficient, record the gap and stop; no unsupported asymptotic or finite-instance claim |
+| 14 | Evidence-earned continuation / owning workflow and focus | One of orders 2, 4, 6, 8–9, 11, or 13 | 1 slice | One bounded successor justified by the predecessor’s retained evidence | No new evidence, no continuation; never become a third consecutive slice |
+| 15 | W4 `process-review` / Process | `think-3cbq` | 45 minutes | All writers stopped; artifacts, ledger, defects, beads, commits, push, normal-gate receipt, terminal session report, and exact next action reconciled | The first gate failure gets one focused diagnosis only; otherwise preserve the last green checkpoint and stop at the eight-hour deadline |
+
+Orders are priority, not permission to wait on a blocked predecessor.
+At each checkpoint, claim any dependency-ready row while preserving the listed order;
+skip a conditional audit when its producer returned no reviewable artifact.
+The source-bound W1 row is the universal no-write fallback.
+H-017 is not fallback work, and a numeric recipe that is merely executable is not
+scientifically admissible.
+
+The portfolio deliberately exercises all four dimensions without imposing equal-time
+quotas: W2 may veto claims, W4 makes the night reconstructible, W3/W6 protect creative
+mathematical depth, and W5/W7 improve measured throughput and capability.
+Parallel delegates increase work completed inside the wall budget; they never extend the
+deadline or weaken the finalization reserve.
 
 ## The scientific portfolio
 
@@ -205,24 +279,29 @@ Endpoint hashes or continuation-branch dendrograms are never labelled feasible t
 
 ## The autonomous agent loop
 
-This loop can run now under a persistent goal.
+This loop is queued but blocked on `think-jqkv`: do not open `session-010` or execute
+the frozen portfolio until the final upstream PR is merged, its resulting `main` commit
+is integrated, and the post-integration normal gate passes.
 
-1. Read `tbd ready`; choose the workflow whose output matches the item, then one primary
-   focus.
+1. Execute the active session’s frozen portfolio.
+   Only the coordinator may reconcile `tbd ready` at a checkpoint, and only after the
+   landed-versus-branch-ahead bookkeeping in `think-k68v` is current.
+   Choose the workflow whose output matches the item, then one primary focus.
 2. Open or renew the session phase with its expected output, validation command, kill
    condition, fallback, start, and deadline.
    Record outcome and evidence when it closes.
 3. Delegate bounded mechanical work—formatting, lint repair, data extraction, repeated
    checks—while the primary agent owns mathematical and integration judgment.
    These slices inherit the coordinating phase unless they open independently tracked
-   sessions.
+   sessions. Each delegation declares a wall budget, exact frozen validation command,
+   kill condition, fallback, write scope, deadline, and excluded long commands.
 4. Work in the smallest loop that bears on the change: source inspection, focused check,
    then the normal gate only at a real checkpoint.
 5. Record any actual error in `defects.yaml` by its substantive class and link an open
    bead when work remains.
 6. Update the hypothesis, experiment, or session artifact that owns the result; do not
    leave a conclusion in chat or a bead description alone.
-7. Commit and push a bounded checkpoint, then re-read the ready queue.
+7. Commit and push a bounded checkpoint, then re-screen the frozen portfolio.
    Close the phase before switching workflow or focus when the evidence demands a
    handoff.
 
