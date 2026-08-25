@@ -987,7 +987,7 @@ oblique records as a class
 ## Theoretical Results
 
 Results state their assurance and basis rather than compressing both into a tier name.
-`verified` below is formal; numerical rows say `numerically checked` and name their
+`verified` below is formal; numerical rows say `numerically-checked` and name their
 method.
 A mathematical proof may be external, locally audited, or replayed here, and that
 origin remains visible in the frontier evidence.

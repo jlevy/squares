@@ -737,6 +737,61 @@ Out of scope here; recorded on `think-segx`.
 **No document links to the tutorial’s section anchors**, only to the file, so
 renumbering to §12 broke nothing.
 
+## Notation Ownership, 2026-08-25
+
+Settles where the vocabulary lives, which the correctness pass deferred.
+
+**Half of it was already settled.** `conventions.md` §4 already owns assurance and
+method as a definitive, schema-enforced registry, and the tutorial and README already
+defer to it correctly.
+Only *mathematical* notation and terminology were homeless.
+
+**The split adopted.** `conventions.md` gains a Notation and Terminology section holding
+the **rules**; `SYNOPSIS.md#terminology` keeps the **definitions**; the tutorial keeps
+the **teaching forms**, its §9 vocabulary card and §10 symbol table.
+Conventions is the document other documents must not violate, and it now says so: a term
+either appears in the synopsis or is marked local where it is used.
+
+Four notation rules are written down: the subscript convention, the `s(n)`-versus-`s`
+distinction, what a `*` marks, and that a gap is qualified.
+The neighbouring research reports are explicitly exempted as dated records rather than
+retrofitted, with their collisions named.
+
+**The `gap` question, decided.** Bare *gap* means the **search gap**, which is what the
+synopsis and every campaign artifact already mean by it, so nothing had to be rewritten.
+The qualifier is required only where both senses are in play—which in practice is the
+tutorial’s §1, where the bound gap appears in a table beside search gaps everywhere
+else.
+
+### One error this surfaced
+
+The rework wrote “a `*` marks a minimiser throughout this document”, and then used `s*`
+for the standing best.
+That is not merely inconsistent—reading `s*` as a minimiser would assert that Trump’s
+packing is optimal, which is the open question the whole document is about.
+Both the rule and the symbol row now say a `*` marks a distinguished value, and `s*`
+carries the explicit warning.
+
+`SYNOPSIS.md` also carried the `numerically checked` misspelling in its own Theoretical
+Results preamble, so all three documents had it.
+Corrected.
+
+### Mechanical enforcement, considered and declined
+
+The bead asked what could become machine-checked, since enforcement is the reason to put
+a rule in conventions.
+`check_documentation` already has a `RETIRED_PHRASES` scan, and adding the backticked
+wrong spelling to it would have caught every instance of this defect.
+
+It is the wrong instrument.
+A phrase scan cannot distinguish *use* from *mention*, and the first document it would
+reject is this one—the review that records the defect has to quote the wrong spelling to
+describe it. A checker that fails on its own bug report trains people to work around it.
+
+What would work is a check that reads the schema enums and flags backticked near-misses
+outside a declared quoting context, which is a real instrument and not a one-line
+addition. Recorded rather than built.
+
 ## Bead Map
 
 The epic is `think-ysoj`. Every finding above lands on exactly one bead.
@@ -752,6 +807,8 @@ The epic is `think-ysoj`. Every finding above lands on exactly one bead.
 | `think-i3wv` | TR-13 | task, after `think-ejgd` and `think-i22v` |
 | `think-sofa` | TR-14 | task, after `think-8hdt` |
 | `think-po3b` | TR-15 | bug, after `think-8hdt` |
+| `think-pv5m` | W2 correctness pass | task |
+| `think-segx` | notation ownership | task, after `think-pv5m` |
 
 The dependencies are notation-first on purpose: TR-9, TR-12, and TR-14 all need terms or
 symbols that TR-8 fixes, and TR-13’s reference groups follow from what TR-9 and TR-11

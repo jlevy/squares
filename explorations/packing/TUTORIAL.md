@@ -221,9 +221,12 @@ each value. That defines a function of one real variable,
 ```
 
 so `φ: [0, π/2) → ℝ`, and it is the entire problem restricted to this cell.
-Write `a*` for the angle that minimises it—the `*` marks a minimiser throughout this
-document. A 2,001-point scan of `[38°, 42°]` puts the minimum one grid step from
-`a* ≈ 40.18°`, Trump’s published tilt.
+Write `a*` for the angle that minimises it.
+A `*` marks a distinguished value of a symbol rather than one fixed relation: `a*` is a
+minimiser, and `s*` in [§7](#7-how-the-search-is-approached-and-why) is the standing
+best for an `n`, which is not known to be a minimum in the open cases.
+A 2,001-point scan of `[38°, 42°]` puts the minimum one grid step from `a* ≈ 40.18°`,
+Trump’s published tilt.
 
 Trump’s angle is not an input to that computation.
 It is **the argument that minimises a one-dimensional function anyone can plot.** In
@@ -945,9 +948,9 @@ A subscript `i` always picks out one square; a bare letter is the whole `n`-vect
 | `ν` | unit `ℝ²` | A separating axis; `ν_ij` is the one a cell assigns to the pair `(i, j)` |
 | `C(n,2)` | integer | The number of unordered pairs of squares |
 | `a` | real | The angle shared by one angle class; at `n = 11`, the tilt of Trump’s five-square block |
-| `a*` | real | The value of `a` minimising `φ`. A `*` marks a minimiser throughout |
+| `a*` | real | The value of `a` minimising `φ` |
 | `φ` | `[0, π/2) → ℝ` | The optimal side of a fixed cell as a function of its one free class angle |
-| `s*` | real | The standing-best side for an `n`, used as the base of an inflation ladder `s* + δ` |
+| `s*` | real | The standing-best side for an `n`, used as the base of an inflation ladder `s* + δ`. Not a minimiser: whether it equals `s(n)` is the open question |
 | `t` | real | The slider parameter of the `n = 3` terminal family |
 | `α` | algebraic | A primitive element: the single number generating a packing’s field `ℚ(α)` |
 | `μ` | polynomial | The minimal polynomial of `α`; `deg μ` is the field’s degree |

@@ -232,7 +232,7 @@ material focus so the ledger can summarize what kinds of work actually occurred.
 The slice protocol, clocks, result routing, budgets, and stop rules are the campaign
 runbook’s [bounded research cycle](campaign/README.md#the-bounded-research-cycle); which
 validation loop to run at each step is
-[`conventions.md`](conventions.md#10-what-the-gate-actually-enforces).
+[`conventions.md`](conventions.md#11-what-the-gate-actually-enforces).
 [`packing-campaign`](src/sqpack/campaign/runner.py) stays the smaller tool that executes
 already-preregistered numerical rounds, never a second project manager.
 
