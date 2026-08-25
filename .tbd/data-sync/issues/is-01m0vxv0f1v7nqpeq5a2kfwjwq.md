@@ -5,12 +5,13 @@ title: "TUTORIAL: explain why one primitive element always suffices, and what fi
 kind: task
 status: open
 priority: 1
-version: 1
+version: 3
+spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies: []
 parent_id: is-01m0vxe4ntpat4xcagtf04c37z
 created_at: 2026-08-25T07:40:58.720Z
-updated_at: 2026-08-25T07:40:58.720Z
+updated_at: 2026-08-25T08:01:35.811Z
 ---
 §5 works entirely through Trump's packing, where the field is `ℚ(u)` with one primitive
 element of degree 8. Nothing says whether "one `α`" is a fact about square packings, a

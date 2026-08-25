@@ -5,16 +5,19 @@ title: "TUTORIAL notation: define every symbol, fix collisions, and introduce th
 kind: task
 status: open
 priority: 1
-version: 4
+version: 7
+spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m0vxhwqe5yfntb1697t5rk15
   - type: blocks
     target: is-01m0vxv0f1v7nqpeq5a2kfwjwq
+  - type: blocks
+    target: is-01m0vz75fav40ygkba88fajt0p
 parent_id: is-01m0vxe4ntpat4xcagtf04c37z
 created_at: 2026-08-25T07:35:31.866Z
-updated_at: 2026-08-25T07:40:58.720Z
+updated_at: 2026-08-25T08:05:05.642Z
 ---
 The tutorial has no symbol table, and a reader meets each symbol where it is first used.
 Audit of every backticked symbol in `TUTORIAL.md`, by first-use line.

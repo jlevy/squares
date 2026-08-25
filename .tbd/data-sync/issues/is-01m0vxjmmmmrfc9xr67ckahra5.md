@@ -5,12 +5,13 @@ title: "TUTORIAL: say what the quench map actually is—one algorithm, not a fam
 kind: task
 status: open
 priority: 1
-version: 2
+version: 4
+spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies: []
 parent_id: is-01m0vxe4ntpat4xcagtf04c37z
 created_at: 2026-08-25T07:36:24.468Z
-updated_at: 2026-08-25T07:40:23.833Z
+updated_at: 2026-08-25T08:01:33.249Z
 ---
 §3 spends most of its length on what the quench is *not*—not a fixed-angle solve
 (Trap 1), not a component classifier (Trap 2)—and gives the map itself one line:
