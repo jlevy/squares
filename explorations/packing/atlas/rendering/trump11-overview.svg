@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:sqpack="https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1" width="960" height="680" viewBox="0 0 960 680" role="img" aria-labelledby="figure-title figure-description" data-static-fallback="final">
+  <title id="figure-title">Square packing</title>
+  <desc id="figure-description">A square packing rendered with mathematical y coordinates upward.</desc>
+  <metadata>
+    <sqpack:profile version="4">
+      <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
+      <sqpack:value name="annotations">minimal</sqpack:value>
+      <sqpack:value name="evidence">certified-upper-bound</sqpack:value>
+      <sqpack:value name="source-id">trump11-exact-q-u</sqpack:value>
+      <sqpack:value name="source-url" />
+      <sqpack:value name="view">overview</sqpack:value>
+    </sqpack:profile>
+  </metadata>
+  <rect width="960" height="680" fill="#ffffff" />
+  <g id="panel-0" data-panel="Trump n=11">
+    <g id="panel-0-fills" data-layer="fills">
+      <polygon data-feature="square-fill" data-square="square-00" points="36,571.9999999999999999999999998 174.2482444741012096770558292,571.9999999999999999999999998 174.2482444741012096770558292,433.7517555258987903229441706 36,433.7517555258987903229441706" fill="#378c3f" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-01" points="433.7517555258987903229441707,571.9999999999999999999999998 571.9999999999999999999999999,571.9999999999999999999999998 571.9999999999999999999999999,433.7517555258987903229441706 433.7517555258987903229441707,433.7517555258987903229441706" fill="#00aeee" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-02" points="316.9976187500726019601504957,174.2482444741012096770558292 455.2458632241738116372063249,174.2482444741012096770558292 455.2458632241738116372063249,36 316.9976187500726019601504957,36" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-03" points="36,174.2482444741012096770558292 174.2482444741012096770558292,174.2482444741012096770558292 174.2482444741012096770558292,36 36,36" fill="#00b393" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-04" points="174.2482444741012096770558292,174.2482444741012096770558292 312.4964889482024193541116584,174.2482444741012096770558292 312.4964889482024193541116584,36 174.2482444741012096770558292,36" fill="#3d63be" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-05" points="36,312.4964889482024193541116584 174.2482444741012096770558292,312.4964889482024193541116584 174.2482444741012096770558292,174.2482444741012096770558292 36,174.2482444741012096770558292" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-06" points="203.6761241695345890955586471,468.5972249785157420538328984 309.2977101789161800297084415,379.3971259369022140919773722 220.0976111373026520678529153,273.7755399275206231578275779 114.4760251279210611337031209,362.975638969134151119683104" fill="#877deb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-07" points="295.5035110517975806458883415,571.9999999999999999999999998 401.1250970611791715800381359,482.7999009583864720381444737 311.9249980195656436181826097,377.1783149490048811039946792 206.3034120101840526840328153,466.3784139906184090658502055" fill="#9fce85" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-08" points="298.7022898210838199702915584,366.8511185371989955850784568 404.3238758304654109044413528,277.6510194955854676232229307 315.1237767888518829425858266,172.0294334862038766890731362 209.5021907794702920084360322,261.2295325278174046509286623" fill="#0096b1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-09" points="390.5296767033468115206212528,470.2538935586832535312455582 496.1512627127284024547710472,381.053794517069725569390032 406.951163671114874492915521,275.4322085076881346352402377 301.3295776617332835587657266,364.6323075493016625970957638" fill="#854888" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-10" points="466.3784139906184090658502054,345.799848211700643238009829 571.9999999999999999999999999,256.5997491700871152761543029 482.7999009583864720381444737,150.9781631607055243420045084 377.1783149490048811039946793,240.1782622023190523038600346" fill="#83c4ff" fill-opacity="1.0" stroke="none" />
+    </g>
+    <defs data-contact-clip-policy="participating-square-union">
+      <polygon id="panel-0-contact-clip-shape-square-00" data-feature="contact-clip-shape" data-square="square-00" points="36,571.9999999999999999999999998 174.2482444741012096770558292,571.9999999999999999999999998 174.2482444741012096770558292,433.7517555258987903229441706 36,433.7517555258987903229441706" />
+      <polygon id="panel-0-contact-clip-shape-square-01" data-feature="contact-clip-shape" data-square="square-01" points="433.7517555258987903229441707,571.9999999999999999999999998 571.9999999999999999999999999,571.9999999999999999999999998 571.9999999999999999999999999,433.7517555258987903229441706 433.7517555258987903229441707,433.7517555258987903229441706" />
+      <polygon id="panel-0-contact-clip-shape-square-02" data-feature="contact-clip-shape" data-square="square-02" points="316.9976187500726019601504957,174.2482444741012096770558292 455.2458632241738116372063249,174.2482444741012096770558292 455.2458632241738116372063249,36 316.9976187500726019601504957,36" />
+      <polygon id="panel-0-contact-clip-shape-square-03" data-feature="contact-clip-shape" data-square="square-03" points="36,174.2482444741012096770558292 174.2482444741012096770558292,174.2482444741012096770558292 174.2482444741012096770558292,36 36,36" />
+      <polygon id="panel-0-contact-clip-shape-square-04" data-feature="contact-clip-shape" data-square="square-04" points="174.2482444741012096770558292,174.2482444741012096770558292 312.4964889482024193541116584,174.2482444741012096770558292 312.4964889482024193541116584,36 174.2482444741012096770558292,36" />
+      <polygon id="panel-0-contact-clip-shape-square-05" data-feature="contact-clip-shape" data-square="square-05" points="36,312.4964889482024193541116584 174.2482444741012096770558292,312.4964889482024193541116584 174.2482444741012096770558292,174.2482444741012096770558292 36,174.2482444741012096770558292" />
+      <polygon id="panel-0-contact-clip-shape-square-06" data-feature="contact-clip-shape" data-square="square-06" points="203.6761241695345890955586471,468.5972249785157420538328984 309.2977101789161800297084415,379.3971259369022140919773722 220.0976111373026520678529153,273.7755399275206231578275779 114.4760251279210611337031209,362.975638969134151119683104" />
+      <polygon id="panel-0-contact-clip-shape-square-07" data-feature="contact-clip-shape" data-square="square-07" points="295.5035110517975806458883415,571.9999999999999999999999998 401.1250970611791715800381359,482.7999009583864720381444737 311.9249980195656436181826097,377.1783149490048811039946792 206.3034120101840526840328153,466.3784139906184090658502055" />
+      <polygon id="panel-0-contact-clip-shape-square-08" data-feature="contact-clip-shape" data-square="square-08" points="298.7022898210838199702915584,366.8511185371989955850784568 404.3238758304654109044413528,277.6510194955854676232229307 315.1237767888518829425858266,172.0294334862038766890731362 209.5021907794702920084360322,261.2295325278174046509286623" />
+      <polygon id="panel-0-contact-clip-shape-square-09" data-feature="contact-clip-shape" data-square="square-09" points="390.5296767033468115206212528,470.2538935586832535312455582 496.1512627127284024547710472,381.053794517069725569390032 406.951163671114874492915521,275.4322085076881346352402377 301.3295776617332835587657266,364.6323075493016625970957638" />
+      <polygon id="panel-0-contact-clip-shape-square-10" data-feature="contact-clip-shape" data-square="square-10" points="466.3784139906184090658502054,345.799848211700643238009829 571.9999999999999999999999999,256.5997491700871152761543029 482.7999009583864720381444737,150.9781631607055243420045084 377.1783149490048811039946793,240.1782622023190523038600346" />
+      <clipPath id="panel-0-clip-contact-pair-square-00-square-06" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-00 square-06">
+        <use href="#panel-0-contact-clip-shape-square-00" data-clip-square="square-00" />
+        <use href="#panel-0-contact-clip-shape-square-06" data-clip-square="square-06" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-01-square-09" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-01 square-09">
+        <use href="#panel-0-contact-clip-shape-square-01" data-clip-square="square-01" />
+        <use href="#panel-0-contact-clip-shape-square-09" data-clip-square="square-09" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-02-square-08" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-02 square-08">
+        <use href="#panel-0-contact-clip-shape-square-02" data-clip-square="square-02" />
+        <use href="#panel-0-contact-clip-shape-square-08" data-clip-square="square-08" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-02-square-10" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-02 square-10">
+        <use href="#panel-0-contact-clip-shape-square-02" data-clip-square="square-02" />
+        <use href="#panel-0-contact-clip-shape-square-10" data-clip-square="square-10" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-03-square-04" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-03 square-04">
+        <use href="#panel-0-contact-clip-shape-square-03" data-clip-square="square-03" />
+        <use href="#panel-0-contact-clip-shape-square-04" data-clip-square="square-04" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-03-square-05" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-03 square-05">
+        <use href="#panel-0-contact-clip-shape-square-03" data-clip-square="square-03" />
+        <use href="#panel-0-contact-clip-shape-square-05" data-clip-square="square-05" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-04-square-05" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-04 square-05">
+        <use href="#panel-0-contact-clip-shape-square-04" data-clip-square="square-04" />
+        <use href="#panel-0-contact-clip-shape-square-05" data-clip-square="square-05" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-04-square-08" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-04 square-08">
+        <use href="#panel-0-contact-clip-shape-square-04" data-clip-square="square-04" />
+        <use href="#panel-0-contact-clip-shape-square-08" data-clip-square="square-08" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-05-square-06" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-05 square-06">
+        <use href="#panel-0-contact-clip-shape-square-05" data-clip-square="square-05" />
+        <use href="#panel-0-contact-clip-shape-square-06" data-clip-square="square-06" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-06-square-07" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-06 square-07">
+        <use href="#panel-0-contact-clip-shape-square-06" data-clip-square="square-06" />
+        <use href="#panel-0-contact-clip-shape-square-07" data-clip-square="square-07" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-06-square-08" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-06 square-08">
+        <use href="#panel-0-contact-clip-shape-square-06" data-clip-square="square-06" />
+        <use href="#panel-0-contact-clip-shape-square-08" data-clip-square="square-08" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-07-square-09" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-07 square-09">
+        <use href="#panel-0-contact-clip-shape-square-07" data-clip-square="square-07" />
+        <use href="#panel-0-contact-clip-shape-square-09" data-clip-square="square-09" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-08-square-09" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-08 square-09">
+        <use href="#panel-0-contact-clip-shape-square-08" data-clip-square="square-08" />
+        <use href="#panel-0-contact-clip-shape-square-09" data-clip-square="square-09" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-pair-square-09-square-10" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-09 square-10">
+        <use href="#panel-0-contact-clip-shape-square-09" data-clip-square="square-09" />
+        <use href="#panel-0-contact-clip-shape-square-10" data-clip-square="square-10" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-wall-square-00-bottom" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-00">
+        <use href="#panel-0-contact-clip-shape-square-00" data-clip-square="square-00" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-wall-square-00-left" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-00">
+        <use href="#panel-0-contact-clip-shape-square-00" data-clip-square="square-00" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-wall-square-01-bottom" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-01">
+        <use href="#panel-0-contact-clip-shape-square-01" data-clip-square="square-01" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-wall-square-01-right" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-01">
+        <use href="#panel-0-contact-clip-shape-square-01" data-clip-square="square-01" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-wall-square-02-top" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-02">
+        <use href="#panel-0-contact-clip-shape-square-02" data-clip-square="square-02" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-wall-square-03-left" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-03">
+        <use href="#panel-0-contact-clip-shape-square-03" data-clip-square="square-03" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-wall-square-03-top" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-03">
+        <use href="#panel-0-contact-clip-shape-square-03" data-clip-square="square-03" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-wall-square-04-top" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-04">
+        <use href="#panel-0-contact-clip-shape-square-04" data-clip-square="square-04" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-wall-square-05-left" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-05">
+        <use href="#panel-0-contact-clip-shape-square-05" data-clip-square="square-05" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-wall-square-07-bottom" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-07">
+        <use href="#panel-0-contact-clip-shape-square-07" data-clip-square="square-07" />
+      </clipPath>
+      <clipPath id="panel-0-clip-contact-wall-square-10-right" clipPathUnits="userSpaceOnUse" data-feature="contact-clip" data-squares="square-10">
+        <use href="#panel-0-contact-clip-shape-square-10" data-clip-square="square-10" />
+      </clipPath>
+    </defs>
+    <g id="panel-0-contacts" data-layer="contacts" data-overlay="contacts">
+      <circle id="panel-0-contact-pair-square-00-square-06" data-squares="square-00 square-06" clip-path="url(#panel-0-clip-contact-pair-square-00-square-06)" cx="174.2482444741012096770558292" cy="433.7517555258987903229441706" r="5.5" fill="#e3c64a" fill-opacity="0.6" data-feature="contact-point" />
+      <circle id="panel-0-contact-pair-square-01-square-09" data-squares="square-01 square-09" clip-path="url(#panel-0-clip-contact-pair-square-01-square-09)" cx="433.7517555258987903229441707" cy="433.7517555258987903229441706" r="5.5" fill="#e3c64a" fill-opacity="0.6" data-feature="contact-point" />
+      <circle id="panel-0-contact-pair-square-02-square-08" data-squares="square-02 square-08" clip-path="url(#panel-0-clip-contact-pair-square-02-square-08)" cx="316.9976187500726019601504957" cy="174.2482444741012096770558292" r="5.5" fill="#e3c64a" fill-opacity="0.6" data-feature="contact-point" />
+      <circle id="panel-0-contact-pair-square-02-square-10" data-squares="square-02 square-10" clip-path="url(#panel-0-clip-contact-pair-square-02-square-10)" cx="455.2458632241738116372063249" cy="174.2482444741012096770558292" r="5.5" fill="#e3c64a" fill-opacity="0.6" data-feature="contact-point" />
+      <line id="panel-0-contact-pair-square-03-square-04" data-squares="square-03 square-04" clip-path="url(#panel-0-clip-contact-pair-square-03-square-04)" x1="174.2482444741012096770558292" y1="174.2482444741012096770558292" x2="174.2482444741012096770558292" y2="36" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-pair-square-03-square-05" data-squares="square-03 square-05" clip-path="url(#panel-0-clip-contact-pair-square-03-square-05)" x1="36" y1="174.2482444741012096770558292" x2="174.2482444741012096770558292" y2="174.2482444741012096770558292" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <circle id="panel-0-contact-pair-square-04-square-05" data-squares="square-04 square-05" clip-path="url(#panel-0-clip-contact-pair-square-04-square-05)" cx="174.2482444741012096770558292" cy="174.2482444741012096770558292" r="5.5" fill="#e3c64a" fill-opacity="0.6" data-feature="contact-point" />
+      <circle id="panel-0-contact-pair-square-04-square-08" data-squares="square-04 square-08" clip-path="url(#panel-0-clip-contact-pair-square-04-square-08)" cx="312.4964889482024193541116584" cy="174.2482444741012096770558292" r="5.5" fill="#e3c64a" fill-opacity="0.6" data-feature="contact-point" />
+      <circle id="panel-0-contact-pair-square-05-square-06" data-squares="square-05 square-06" clip-path="url(#panel-0-clip-contact-pair-square-05-square-06)" cx="174.2482444741012096770558292" cy="312.4964889482024193541116584" r="5.5" fill="#e3c64a" fill-opacity="0.6" data-feature="contact-point" />
+      <line id="panel-0-contact-pair-square-06-square-07" data-squares="square-06 square-07" clip-path="url(#panel-0-clip-contact-pair-square-06-square-07)" x1="206.3034120101840526840328153" y1="466.3784139906184090658502055" x2="309.2977101789161800297084415" y2="379.3971259369022140919773722" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-pair-square-06-square-08" data-squares="square-06 square-08" clip-path="url(#panel-0-clip-contact-pair-square-06-square-08)" x1="298.7022898210838199702915584" y1="366.8511185371989955850784568" x2="220.0976111373026520678529153" y2="273.7755399275206231578275779" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-pair-square-07-square-09" data-squares="square-07 square-09" clip-path="url(#panel-0-clip-contact-pair-square-07-square-09)" x1="311.9249980195656436181826097" y1="377.1783149490048811039946792" x2="390.5296767033468115206212528" y2="470.2538935586832535312455582" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-pair-square-08-square-09" data-squares="square-08 square-09" clip-path="url(#panel-0-clip-contact-pair-square-08-square-09)" x1="301.3295776617332835587657266" y1="364.6323075493016625970957638" x2="404.3238758304654109044413528" y2="277.6510194955854676232229307" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-pair-square-09-square-10" data-squares="square-09 square-10" clip-path="url(#panel-0-clip-contact-pair-square-09-square-10)" x1="406.951163671114874492915521" y1="275.4322085076881346352402377" x2="466.3784139906184090658502054" y2="345.799848211700643238009829" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-wall-square-00-bottom" data-squares="square-00" clip-path="url(#panel-0-clip-contact-wall-square-00-bottom)" data-wall="bottom" x1="36" y1="571.9999999999999999999999998" x2="174.2482444741012096770558292" y2="571.9999999999999999999999998" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-wall-square-00-left" data-squares="square-00" clip-path="url(#panel-0-clip-contact-wall-square-00-left)" data-wall="left" x1="36" y1="571.9999999999999999999999998" x2="36" y2="433.7517555258987903229441706" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-wall-square-01-bottom" data-squares="square-01" clip-path="url(#panel-0-clip-contact-wall-square-01-bottom)" data-wall="bottom" x1="433.7517555258987903229441707" y1="571.9999999999999999999999998" x2="571.9999999999999999999999999" y2="571.9999999999999999999999998" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-wall-square-01-right" data-squares="square-01" clip-path="url(#panel-0-clip-contact-wall-square-01-right)" data-wall="right" x1="571.9999999999999999999999999" y1="571.9999999999999999999999998" x2="571.9999999999999999999999999" y2="433.7517555258987903229441706" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-wall-square-02-top" data-squares="square-02" clip-path="url(#panel-0-clip-contact-wall-square-02-top)" data-wall="top" x1="316.9976187500726019601504957" y1="36" x2="455.2458632241738116372063249" y2="36" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-wall-square-03-left" data-squares="square-03" clip-path="url(#panel-0-clip-contact-wall-square-03-left)" data-wall="left" x1="36" y1="174.2482444741012096770558292" x2="36" y2="36" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-wall-square-03-top" data-squares="square-03" clip-path="url(#panel-0-clip-contact-wall-square-03-top)" data-wall="top" x1="36" y1="36" x2="174.2482444741012096770558292" y2="36" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-wall-square-04-top" data-squares="square-04" clip-path="url(#panel-0-clip-contact-wall-square-04-top)" data-wall="top" x1="174.2482444741012096770558292" y1="36" x2="312.4964889482024193541116584" y2="36" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <line id="panel-0-contact-wall-square-05-left" data-squares="square-05" clip-path="url(#panel-0-clip-contact-wall-square-05-left)" data-wall="left" x1="36" y1="312.4964889482024193541116584" x2="36" y2="174.2482444741012096770558292" stroke="#e3c64a" stroke-opacity="0.6" stroke-width="9" stroke-linecap="round" vector-effect="non-scaling-stroke" data-feature="contact-segment" />
+      <circle id="panel-0-contact-wall-square-07-bottom" data-squares="square-07" clip-path="url(#panel-0-clip-contact-wall-square-07-bottom)" data-wall="bottom" cx="295.5035110517975806458883415" cy="571.9999999999999999999999998" r="5.5" fill="#e3c64a" fill-opacity="0.6" data-feature="contact-point" />
+      <circle id="panel-0-contact-wall-square-10-right" data-squares="square-10" clip-path="url(#panel-0-clip-contact-wall-square-10-right)" data-wall="right" cx="571.9999999999999999999999999" cy="256.5997491700871152761543029" r="5.5" fill="#e3c64a" fill-opacity="0.6" data-feature="contact-point" />
+    </g>
+    <g id="panel-0-outlines" data-layer="outlines">
+      <polygon data-feature="square-outline" data-square="square-00" points="36,571.9999999999999999999999998 174.2482444741012096770558292,571.9999999999999999999999998 174.2482444741012096770558292,433.7517555258987903229441706 36,433.7517555258987903229441706" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-01" points="433.7517555258987903229441707,571.9999999999999999999999998 571.9999999999999999999999999,571.9999999999999999999999998 571.9999999999999999999999999,433.7517555258987903229441706 433.7517555258987903229441707,433.7517555258987903229441706" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-02" points="316.9976187500726019601504957,174.2482444741012096770558292 455.2458632241738116372063249,174.2482444741012096770558292 455.2458632241738116372063249,36 316.9976187500726019601504957,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-03" points="36,174.2482444741012096770558292 174.2482444741012096770558292,174.2482444741012096770558292 174.2482444741012096770558292,36 36,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-04" points="174.2482444741012096770558292,174.2482444741012096770558292 312.4964889482024193541116584,174.2482444741012096770558292 312.4964889482024193541116584,36 174.2482444741012096770558292,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-05" points="36,312.4964889482024193541116584 174.2482444741012096770558292,312.4964889482024193541116584 174.2482444741012096770558292,174.2482444741012096770558292 36,174.2482444741012096770558292" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-06" points="203.6761241695345890955586471,468.5972249785157420538328984 309.2977101789161800297084415,379.3971259369022140919773722 220.0976111373026520678529153,273.7755399275206231578275779 114.4760251279210611337031209,362.975638969134151119683104" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-07" points="295.5035110517975806458883415,571.9999999999999999999999998 401.1250970611791715800381359,482.7999009583864720381444737 311.9249980195656436181826097,377.1783149490048811039946792 206.3034120101840526840328153,466.3784139906184090658502055" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-08" points="298.7022898210838199702915584,366.8511185371989955850784568 404.3238758304654109044413528,277.6510194955854676232229307 315.1237767888518829425858266,172.0294334862038766890731362 209.5021907794702920084360322,261.2295325278174046509286623" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-09" points="390.5296767033468115206212528,470.2538935586832535312455582 496.1512627127284024547710472,381.053794517069725569390032 406.951163671114874492915521,275.4322085076881346352402377 301.3295776617332835587657266,364.6323075493016625970957638" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-10" points="466.3784139906184090658502054,345.799848211700643238009829 571.9999999999999999999999999,256.5997491700871152761543029 482.7999009583864720381444737,150.9781631607055243420045084 377.1783149490048811039946793,240.1782622023190523038600346" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <rect data-feature="container-outline" x="36" y="36" width="535.9999999999999999999999999" height="535.9999999999999999999999999" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+    </g>
+  </g>
+  <text x="36" y="602" font-size="18" font-family="system-ui, sans-serif" fill="#17202a" data-evidence="certified-upper-bound" stroke-dasharray="3 3">U Trump n=11: side ~ 3.87708359 (certified upper bound)</text>
+</svg>
