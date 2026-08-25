@@ -3,15 +3,19 @@ type: is
 id: is-01m0vz9s4ffb2vcf7hx5xeacg8
 title: SYNOPSIS and conventions say thirty-one gate steps; validate.py now registers thirty-two
 kind: bug
-status: in_progress
+status: closed
 priority: 2
-version: 4
+version: 5
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
 parent_id: is-01m0w0c7yd4nabyntb3137stwm
 created_at: 2026-08-25T08:06:31.310Z
-updated_at: 2026-08-25T08:26:30.245Z
+updated_at: 2026-08-25T08:26:58.050Z
+closed_at: 2026-08-25T08:26:58.049Z
+close_reason: "Fixed PR #31 finding 1 by removing three duplicated live gate counts and pointing readers to packing-validate --list, the existing authoritative inventory. The dated 31-step checkpoint remains unchanged as a historical measurement."
+resolution: null
+duplicate_of: null
 ---
 The deterministic SVG rendering merge added `Step("deterministic SVG rendering",
 _svg_rendering)` to the `STEPS` tuple in `src/sqpack/cli/validate.py`, which now holds
