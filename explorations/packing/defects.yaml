@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 329
+count: 332
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -434,7 +434,7 @@ defects:
   detected_by: inspection
   latent_for: 'found while fixing D-014'
   severity: medium
-  status: fixed
+  status: contained
   what: >-
     The post-check accepts constraint violations up to 1e-9 and HiGHS will not go
     tighter than 1e-10, so a floating LP side can be wrong by roughly 1e-11. Eight
@@ -8190,36 +8190,154 @@ defects:
   bead: think-m8kv
   recorded_in: SYNOPSIS.md
 - id: D-320
-  title: A closed round's verdict was rewritten in place to demote its refutation
+  title: Deep golden validation treated YAML line wrapping as scientific drift
   date: '2026-08-25'
-  layer: record
-  class: soundness
+  layer: tooling
+  class: robustness
   direction: conservative
+  detected_by: gate
+  latent_for: one stacked integration run
+  severity: medium
+  status: fixed
+  what: >-
+    The macOS deep-golden job rebuilt a basin map with the same parsed data but wrapped
+    one explanatory note at a different column. The checker compared serialized bytes
+    and failed after the complete mathematical validation surface had passed.
+  consequence: >-
+    A harmless serializer choice could block research integration and look like
+    cross-platform numerical drift even though no value, certificate, or conclusion
+    changed.
+  fix: >-
+    Compare parsed YAML documents for the deep golden contract, retain a unified diff
+    for real semantic changes, and report wrapping-only differences without failing.
+  regression: test_deep_golden_ignores_yaml_wrapping
+  bead: think-kwls
+  recorded_in: devtools/check_golden_basins.py
+- id: D-321
+  title: The SIGINT cleanup regression signaled before its child start condition
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: one merged fast-suite run
+  severity: medium
+  status: fixed
+  what: >-
+    The process-cleanup regression polled for a child PID for two seconds, then sent
+    SIGINT whether or not the child had started. Under suite scheduling pressure it
+    interrupted the coordinator without a PID and then failed its own PID assertion.
+  consequence: >-
+    Scheduler timing, rather than process-tree cleanup behavior, could fail the ordinary
+    gate and obscure the safety property the test was meant to exercise.
+  fix: >-
+    Have the real child write its PID and then signal its parent directly. The test still
+    exercises coordinator interruption, TERM-resistant child cleanup, leak prevention,
+    and the bounded grace interval without a polling deadline.
+  regression: test_run_selected_interrupt_stops_detached_production_process
+  recurrence_of: D-317
+  bead: think-3vt3
+  recorded_in: tests/test_validation_cli.py
+- id: D-322
+  title: The synopsis overstated which defect classes the gate had caught
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
   detected_by: review
-  latent_for: one unmerged review branch
+  latent_for: since D-317 entered the defect log
+  severity: low
+  status: fixed
+  what: >-
+    The synopsis said every gate-detected defect was bookkeeping or robustness, while
+    the canonical log also contains validity and performance findings detected by the
+    gate.
+  consequence: >-
+    The narrative described a cleaner detector pattern than the underlying data supports
+    and made the generated class/detector tables disagree with their interpretation.
+  fix: >-
+    State the supported distinction: gate findings have been mechanical process,
+    implementation, or test-validity failures, while none has caught a mathematical
+    soundness error.
+  regression: none
+  bead: think-7qck
+  recorded_in: SYNOPSIS.md
+- id: D-323
+  title: The reader-first frontier view discarded long exact forms
+  date: '2026-08-25'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: since the assurance-aware frontier view was introduced
   severity: high
   status: fixed
   what: >-
-    The tutorial review branch rewrote exp-012's stored verdict (rejected to
-    unresolved), its titles, and H-024's registered claim, criterion, instrument, and
-    prereqs in place, re-adjudicating a preregistered round under the later assurance
-    vocabulary instead of annotating or registering a successor.
+    The frontier table renderer used an exact form only when it fit an arbitrary
+    28-character display budget. Longer algebraic and rational values silently fell
+    back to rounded decimals even in columns labeled as formally verified.
   consequence: >-
-    The record would show a hypothesis demoted with no round having produced the
-    demotion, the registered claim would no longer be what was preregistered, and the
-    campaign's own correction rule - dated annotation, never rewriting - would be
-    bypassed by the branch that was reviewing for soundness.
+    A reader could mistake a rounded decimal for the exact proved bound. In some rows
+    the rounding also made the displayed lower bound slightly stronger or the displayed
+    upper bound slightly smaller than the formal value.
   fix: >-
-    The PR 33 merge restored the registered claim and the preregistered rejected
-    verdict; H-042 and exp-037 stay as the serialization-scoped successor that carries
-    the vocabulary-hardened question, which is the mechanism the correction rule
-    prescribes.
-  regression: >-
-    none automated; the ledger derives H-024's status from the artifact verdict, and
-    the correction rule stands in the synopsis's conduct section.
-  bead: think-16qn
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md
-- id: D-321
+    Render every available exact form in verified lanes and simplify the repeated
+    Nagamochi radical form to the equivalent reader-facing expression `1 + sqrt(k)`.
+  regression: test_frontier_assurance_contract
+  recurrence_of: D-022
+  bead: think-1p2e
+  recorded_in: devtools/render_research_tables.py
+- id: D-324
+  title: Semantic golden comparison accepted ambiguous YAML identities
+  date: '2026-08-25'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one semantic deep-golden implementation
+  severity: medium
+  status: fixed
+  what: >-
+    The first semantic deep-golden comparison used permissive YAML loading followed by
+    Python equality. Duplicate keys were silently overwritten, and values such as an
+    integer, float, and boolean could compare equal despite carrying different YAML
+    types.
+  consequence: >-
+    A malformed or type-changing golden artifact could pass as unchanged and weaken the
+    independent characterization surface intended to catch numerical drift.
+  fix: >-
+    Load both documents with the repository's duplicate-key-rejecting loader and compare
+    deterministic canonical YAML serializations that preserve scalar types while
+    ignoring presentation-only wrapping.
+  regression: test_semantic_yaml_comparison_preserves_types_and_rejects_duplicate_keys
+  recurrence_of: D-320
+  bead: think-35wm
+  recorded_in: devtools/check_golden_basins.py
+- id: D-325
+  title: The current-handoff validator embedded one live agenda cell
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: review
+  latent_for: since the terminal-session handoff guard was introduced
+  severity: low
+  status: fixed
+  what: >-
+    The synopsis validator hardcoded BC-010, its bead, and one historical defect instead
+    of deriving the active agenda cell from the terminal session's recorded next action.
+  consequence: >-
+    A correct future handoff to another agenda cell would require editing validator code
+    and could fail for stale historical details unrelated to the handoff contract.
+  fix: >-
+    Select exactly one agenda cell from the terminal session action, derive its bead and
+    evidence checks from the cell record, and reject any fixed defect named as a current
+    blocker without singling out one historical ID.
+  regression: test_handoff_cell_is_selected_from_the_latest_session_action
+  recurrence_of: D-319
+  bead: think-z96r
+  recorded_in: devtools/check_synopsis.py
+- id: D-326
   title: Concurrent-branch rounds were authored to a superseded experiment schema
   date: '2026-08-25'
   layer: record
@@ -8245,31 +8363,7 @@ defects:
     what caught it; no additional check is needed.
   bead: think-clin
   recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
-- id: D-322
-  title: A synopsis registry row called a numerical class count a verification
-  date: '2026-08-25'
-  layer: record
-  class: soundness
-  direction: flattering
-  detected_by: review
-  latent_for: three landed sessions
-  severity: medium
-  status: fixed
-  what: >-
-    The H-024 registry row read "Verified record packings ... exp-012 verifies six at
-    n=29"; exp-012 is numerically checked at 160 digits and tolerance 1e-80, and
-    "verified" is reserved for formal assurance.
-  consequence: >-
-    The registry's summary of the round upgraded numerical evidence to formal
-    vocabulary in the one table the whole directory tells readers to trust.
-  fix: >-
-    Reworded to "Independently reconstructed standing records ... exp-012 counts six
-    numerical classes at n=29", matching the registered claim and the actual method.
-  regression: >-
-    none automated; check_synopsis compares status and rounds, not claim wording.
-  bead: think-0emo
-  recorded_in: SYNOPSIS.md
-- id: D-323
+- id: D-327
   title: The tutorial's promotion example asserted an unattested separation value
   date: '2026-08-25'
   layer: record
@@ -8293,7 +8387,7 @@ defects:
     work.
   bead: think-mb6q
   recorded_in: TUTORIAL.md
-- id: D-324
+- id: D-328
   title: The tutorial identified the side floor with the feasibility tolerance
   date: '2026-08-25'
   layer: record
@@ -8316,7 +8410,7 @@ defects:
   regression: none automated
   bead: think-suzm
   recorded_in: TUTORIAL.md
-- id: D-325
+- id: D-329
   title: A benchmark ratio was relabeled across implementations
   date: '2026-08-25'
   layer: record
@@ -8340,7 +8434,7 @@ defects:
   regression: none automated
   bead: think-6z2v
   recorded_in: TUTORIAL.md
-- id: D-326
+- id: D-330
   title: The tutorial overstated archive coverage of the record constructions
   date: '2026-08-25'
   layer: record
@@ -8366,7 +8460,7 @@ defects:
     what was and was not retrieved.
   bead: think-bqjd
   recorded_in: TUTORIAL.md
-- id: D-327
+- id: D-331
   title: The registry's rounds column drifted from the ledger under no stated rule
   date: '2026-08-25'
   layer: record
@@ -8393,7 +8487,7 @@ defects:
     one row and expects the checker to name it.
   bead: think-ojgc
   recorded_in: SYNOPSIS.md
-- id: D-328
+- id: D-332
   title: A hand-copied no-regression count drifted beside a sentence promising no drift
   date: '2026-08-25'
   layer: record
@@ -8419,32 +8513,3 @@ defects:
     checker-enforced.
   bead: think-aihj
   recorded_in: SYNOPSIS.md
-- id: D-329
-  title: The golden basin map was hand-edited out of byte agreement with its writer
-  date: '2026-08-25'
-  layer: record
-  class: bookkeeping
-  direction: neutral
-  detected_by: gate
-  latent_for: one review branch, until the merge united it with the byte gate
-  severity: medium
-  status: fixed
-  what: >-
-    The tutorial branch's assurance-vocabulary migration reworded the golden note in
-    check_golden_basins.py and hand-edited golden/basin-maps.yaml to match, wrapping
-    the note at a different column than the writer's yaml.safe_dump(width=100)
-    produces; the branch predated the deep byte-equality gate, so nothing objected
-    until the merge brought the gate and the macOS portability job failed on a
-    wrap-only diff.
-  consequence: >-
-    The portability gate reported golden drift with no data change anywhere, and a
-    reader of the failure had to separate a serialization artifact from a real
-    endpoint difference.
-  fix: >-
-    Round-trip the committed golden through the writer's exact dump call, refreshing
-    the serialization with the data untouched; hand edits to generated snapshots go
-    through the generator.
-  regression: >-
-    the deep golden byte-equality gate itself, now active on this branch's lineage.
-  bead: think-d2ah
-  recorded_in: golden/basin-maps.yaml

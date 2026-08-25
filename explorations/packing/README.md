@@ -218,9 +218,8 @@ The operating documents divide ownership rather than repeat one another:
 ## The Autonomous Work Loop
 
 The outer loop is a portable repository protocol, not a feature of one agent platform.
-The `tbd` queue owns dependencies and tracked work; the active launch agenda records the
-dated landed-versus-branch-ahead reconciliation and freezes an explicit portfolio for
-the active session. Raw `tbd ready` output is not itself a session queue.
+The `tbd` queue owns dependencies and ready work; the active launch agenda freezes an
+explicit portfolio whenever landed-versus-branch-ahead bead state is not yet reconciled.
 Commits and research artifacts own results, and a versioned
 [agent-session artifact](campaign/agent-sessions/README.md) owns phase, clock, and
 recovery state only when the escalation criteria apply.

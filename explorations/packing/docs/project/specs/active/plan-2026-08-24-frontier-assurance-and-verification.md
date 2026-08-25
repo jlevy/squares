@@ -258,7 +258,7 @@ precision:
   decimal_digits: 160
   rounding: nearest
 tolerance: "1e-80"
-replay: uv run --frozen python -m cases.kingbird29.verify_svg
+replay: uv run --frozen python -m cases.kingbird29.verify_svg resources/papers/kingbird-square-29-provenance.svg
 replay_status: passed
 limitations: Does not certify exact feasibility or optimality.
 ```
@@ -739,11 +739,13 @@ uv run --frozen --group dev packing-validate --strict
 New focused checks join these commands rather than creating an undocumented parallel
 gate.
 
-The 2026-08-25 implementation checkpoint passes the ordinary full gate: 58 mutation
-controls, 47 fast behavioral tests, the exact witness replays, all 100 frontier cases,
-13 structured datasets, 226 mapped durable documents, and the 20,000-pair differential
-check. The generic interval-existence certificate remains planned work rather than an
-implicit prerequisite or a claimed capability.
+The 2026-08-25 implementation checkpoint passes the ordinary full gate, including its
+behavioral tests, exact witness replays, complete frontier, structured datasets,
+document map, mutation controls, and 20,000-pair differential check.
+The validation command and generated views own their live inventory; this transient plan
+does not copy counts that change whenever a document or focused check is added.
+The generic interval-existence certificate remains planned work rather than an implicit
+prerequisite or a claimed capability.
 
 ## Rollout Plan
 

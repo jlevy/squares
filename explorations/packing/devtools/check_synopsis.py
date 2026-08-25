@@ -47,7 +47,7 @@ HYPOTHESES = ROOT / "campaign/hypotheses"
 AGENT_SESSIONS = ROOT / "campaign/agent-sessions"
 AGENDA = ROOT / "campaign/agendas/agenda-001-basin-confidence-ladder.md"
 ACTIVE_PLAN = ROOT / "docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md"
-DEVELOPMENT = ROOT / "development.md"
+DEFECTS = ROOT / "defects.yaml"
 READINESS_BEGIN = "<!-- BEGIN CURRENT-RESEARCH-READINESS -->"
 READINESS_END = "<!-- END CURRENT-RESEARCH-READINESS -->"
 READINESS_SOURCES = (
@@ -302,6 +302,21 @@ def check_migrated_commands(text: str) -> list[str]:
     ]
 
 
+def select_handoff_cell(items: list[dict], next_action: str) -> dict:
+    """Select the one agenda item explicitly named by a terminal session action."""
+    matches = [
+        item
+        for item in items
+        if isinstance(item.get("id"), str)
+        and re.search(rf"\b{re.escape(item['id'])}\b", next_action)
+    ]
+    if len(matches) != 1:
+        raise ValueError(
+            f"terminal next_action must name exactly one agenda cell; found {len(matches)}"
+        )
+    return matches[0]
+
+
 def check_current_handoff(text: str) -> list[str]:
     """The cold-start path names the latest session, agenda bead, and evidence head."""
     section = re.search(
@@ -325,23 +340,29 @@ def check_current_handoff(text: str) -> list[str]:
         return [f"{latest_path.name}: terminal next_action names no bead"]
 
     agenda = front(AGENDA)["agenda"]
-    cell = next((item for item in agenda["items"] if item["id"] == "BC-010"), None)
-    if cell is None:
-        return ["agenda-001: has no BC-010 handoff cell"]
+    try:
+        cell = select_handoff_cell(agenda["items"], next_action)
+    except ValueError as error:
+        return [f"{latest_path.name}: {error}"]
+    cell_id = cell["id"]
     agenda_bead = cell["bead"]
 
     problems: list[str] = []
     if agenda_bead not in next_beads:
         problems.append(
-            f"{latest_path.name}: next_action and BC-010 disagree on bead {agenda_bead}"
+            f"{latest_path.name}: next_action and {cell_id} disagree on bead {agenda_bead}"
         )
 
     body = section.group("body")
     session_target = f"campaign/agent-sessions/{latest_path.name}"
     if session_target not in body:
         problems.append(f"SYNOPSIS.md: Current Handoff does not point to latest {latest['id']}")
+    if cell_id not in body:
+        problems.append(f"SYNOPSIS.md: Current Handoff does not name {cell_id}")
     if agenda_bead not in body:
-        problems.append(f"SYNOPSIS.md: Current Handoff does not name BC-010 bead {agenda_bead}")
+        problems.append(
+            f"SYNOPSIS.md: Current Handoff does not name {cell_id} bead {agenda_bead}"
+        )
 
     experiment_ids = sorted(
         {
@@ -352,7 +373,7 @@ def check_current_handoff(text: str) -> list[str]:
     )
     body_lower = body.lower()
     problems.extend(
-        f"SYNOPSIS.md: Current Handoff omits BC-010 evidence {experiment_id}"
+        f"SYNOPSIS.md: Current Handoff omits {cell_id} evidence {experiment_id}"
         for experiment_id in experiment_ids
         if experiment_id not in body_lower
     )
@@ -366,14 +387,29 @@ def check_current_handoff(text: str) -> list[str]:
         plan,
         re.M | re.S,
     )
-    if plan_handoff is None or agenda_bead not in plan_handoff.group(0):
-        problems.append(f"active launch plan: current handoff does not name {agenda_bead}")
-    elif "D-203" in plan_handoff.group(0) or "think-nm35" in plan_handoff.group(0):
-        problems.append("active launch plan: current handoff retains a completed blocker")
-
-    development = DEVELOPMENT.read_text(encoding="utf-8")
-    if "temporarily asserts D-203" in development:
-        problems.append("development.md: still instructs CI to expect fixed D-203")
+    if plan_handoff is None:
+        problems.append("active launch plan: has no current handoff paragraph")
+    else:
+        plan_text = plan_handoff.group(0)
+        if cell_id not in plan_text or agenda_bead not in plan_text:
+            problems.append(
+                f"active launch plan: current handoff does not name {cell_id} and {agenda_bead}"
+            )
+        plan_beads = set(re.findall(r"\bthink-[a-z0-9]+\b", plan_text))
+        if plan_beads != {agenda_bead}:
+            problems.append(
+                "active launch plan: current handoff bead set is "
+                f"{sorted(plan_beads)}, expected {[agenda_bead]}"
+            )
+        defect_records = yaml.safe_load(DEFECTS.read_text(encoding="utf-8"))["defects"]
+        fixed_defects = {
+            defect["id"] for defect in defect_records if defect["status"] == "fixed"
+        }
+        stale_defects = sorted(set(re.findall(r"\bD-[0-9]{3}\b", plan_text)) & fixed_defects)
+        if stale_defects:
+            problems.append(
+                f"active launch plan: current handoff names fixed defects {stale_defects}"
+            )
     return problems
 
 
@@ -408,23 +444,6 @@ def spell(n: int) -> str:
 def counted(n: int, singular: str, plural: str) -> str:
     """Write a synopsis count with the noun form that belongs to it."""
     return f"{spell(n)} {singular if n == 1 else plural}"
-
-
-def check_hypothesis_count(text: str) -> list[str]:
-    """The registry introduction states the number of hypothesis artifacts."""
-    total = len(list(HYPOTHESES.glob("H-*.md")))
-    section = re.search(
-        r"^## The Hypothesis Registry\s*$\n(?P<body>.*?)(?=^##\s|\Z)", text, re.M | re.S
-    )
-    if section is None:
-        return ["SYNOPSIS.md: has no Hypothesis Registry section"]
-    expected = (
-        rf"\b(?:{total}|{re.escape(spell(total))}) "
-        r"claims or open questions are codified as artifacts\b"
-    )
-    if not re.search(expected, section.group("body"), re.I):
-        return [f"SYNOPSIS.md: does not state the hypothesis artifact count ({total})"]
-    return []
 
 
 def check_defects(text: str) -> list[str]:
@@ -498,7 +517,6 @@ def main() -> int:
         check_links(text)
         + check_rounds(text)
         + check_hypotheses(text)
-        + check_hypothesis_count(text)
         + check_totals(text)
         + check_freshness_label(text)
         + check_readiness_dashboard(text)

@@ -23,23 +23,29 @@ checking the tutorial’s `n = 29` material at all.
 
 ## The Merge, and Two Dispositions It Forced
 
-**H-024 stays refuted; the branch’s in-place demotion is reverted** (D-320,
-`think-16qn`). The tutorial branch had rewritten exp-012’s stored verdict (`rejected` →
-`unresolved`), its titles, and H-024’s registered claim, criterion, instrument, and
-prereqs, re-adjudicating a closed preregistered round under the later assurance
-vocabulary. The round was sound under its own preregistered terms, and the synopsis’s
-conduct rule states the correct mechanism: *a defective artifact is corrected by dated
-annotation rather than rewriting*. The branch had in fact already built that mechanism —
-H-042 and exp-037 are the serialization-scoped successor under the hardened vocabulary —
-so the merge keeps both: H-024 refuted on exp-012’s reconstruction, H-042 refuted on
-exp-037’s 160-digit replay, and the registered texts as registered.
+**H-024’s disposition changed hands twice, and the landed record now owns it**
+(`think-16qn`, `think-0emo`). The tutorial branch had rewritten exp-012’s stored verdict
+(`rejected` → `unresolved`) and H-024’s registered claim in place, applying the later
+assurance vocabulary to a closed preregistered round.
+This review’s first merge reverted that in-place re-adjudication, on the conduct rule
+that *a defective artifact is corrected by dated annotation rather than rewriting* and
+because the then-landed `main` said refuted.
+The frontier-assurance contract
+([#31](https://github.com/jlevy/thinking-scratchpad/pull/31)) then merged carrying the
+demotion as a considered part of its design — its plan names the Kingbird evidence as
+overstated — with exp-012 rewritten to cross-reference H-042 as the narrower numerical
+successor. The second merge therefore adopts the landed disposition: H-024 unresolved
+pending a formal witness, exp-012 unresolved, H-042 refuted on exp-037’s 160-digit
+replay. The process concern — closed rounds edited in place rather than annotated — is
+recorded here rather than as a defect entry, since the landed record has made the
+rewrite its deliberate form.
 
-**The concurrent schema fork is repaired forward** (D-321, `think-clin`). `main`’s
-exp-038 and exp-039 were authored to `Experiment/v1` after this branch had shipped v2;
-the merged ledger could not render until both were migrated (`assurance: verified`,
-`method: exact-algebraic`), following the branch’s own migration of every earlier round.
-The merged record unions cleanly afterwards: 39 rounds, 933 agent-minutes, 43 hypothesis
-artifacts, seven refuted, twenty-five blocked.
+**The concurrent schema fork was repaired forward twice, identically** (D-326,
+`think-clin`). `main`’s exp-038 and exp-039 were authored to `Experiment/v1` after this
+branch had shipped v2; this branch’s first merge migrated both (`assurance: verified`,
+`method: exact-algebraic`), and #31’s own merge into `main` applied the same migration
+independently. The merged record unions cleanly: 39 rounds, 933 agent-minutes, 43
+hypothesis artifacts.
 
 ## What Holds
 
@@ -81,41 +87,43 @@ could be traced to a primary artifact:
 
 **Accuracy.**
 
-- **SR-1** (D-322, `think-0emo`) — the merged synopsis’s H-024 row read “Verified record
-  packings … exp-012 verifies six”, upgrading a 160-digit numerical count to the
+- **SR-1** (`think-0emo`, superseded) — an interim synopsis H-024 row read “Verified
+  record packings … exp-012 verifies six”, upgrading a 160-digit numerical count to the
   reserved formal term.
-  Reworded to the registered claim and the actual method.
-- **SR-2** (D-323, `think-mb6q`) — §5’s promotion example asserted a separation of
+  The row was reworded during the first merge; #31’s landed registry row replaced it
+  entirely, and no defect entry remains.
+- **SR-2** (D-327, `think-mb6q`) — §5’s promotion example asserted a separation of
   `3.7e-12` that exists in no artifact (it entered with the original tutorial commit and
   survived two reviews).
   Reworded to the attested solver-floor scale.
-- **SR-3** (D-324, `think-suzm`) — §8 called the `1e-11` floor “HiGHS’s own feasibility
+- **SR-3** (D-328, `think-suzm`) — §8 called the `1e-11` floor “HiGHS’s own feasibility
   tolerance, pinned at the strictest value it accepts”.
   The pinned tolerance is `1e-10`; `1e-11` is the post-checked side residual it
   produces. Restated with both numbers.
-- **SR-4** (D-325, `think-6z2v`) — §5 labelled `177×`/`578×` “the exact-to-float ratio”;
+- **SR-4** (D-329, `think-6z2v`) — §5 labelled `177×`/`578×` “the exact-to-float ratio”;
   the source measures compiled-over-pure-Python for the same exact multiplication.
   Reworded, and the compiled-backend table row now says *benchmarked; not integrated*,
   agreeing with §11.
-- **SR-5** (D-326, `think-bqjd`) — §11 claimed every cited source is archived locally;
+- **SR-5** (D-330, `think-bqjd`) — §11 claimed every cited source is archived locally;
   no Trump 1979 or Bidwell 1998 document exists (the archive README records the failed
   Trump retrieval). The claim now names the two exceptions.
-- **SR-6** (D-327, `think-ojgc`) — the synopsis registry’s Rounds column was
+- **SR-6** (D-331, `think-ojgc`) — the synopsis registry’s Rounds column was
   hand-maintained under no reproducible rule (H-023 lagged exp-039; H-002 showed 4
   against the ledger’s 5; H-021 showed 0 against 14). Rows aligned to the ledger’s
   totals, the rule stated inline, `check_synopsis` extended to compare the column, and a
   negative control added.
-- **SR-7** (D-328, `think-aihj`, recurrence of D-028) — the synopsis restated the
+- **SR-7** (D-332, `think-aihj`, recurrence of D-028) — the synopsis restated the
   no-regression-fix count by hand (“ninety-eight” against the generated 106) two
   sentences after promising the neighbouring claims cannot drift.
-  The copied number is gone; the computed count is stated once.
-- **SR-8** (D-329, `think-d2ah`, found by the macOS portability gate after the merge) —
-  the branch’s assurance-vocabulary migration reworded the golden basin-map note in the
-  writer and hand-edited `golden/basin-maps.yaml` to match, at a wrap column the
-  writer’s `yaml.safe_dump(width=100)` does not produce; the branch predated the deep
-  byte-equality gate, so the drift surfaced only when the merge united them.
-  The committed golden is round-tripped through the writer’s exact dump call, data
-  untouched.
+  The copied number is gone; #31’s landed narrative removes the aggregate restatement
+  the same way.
+- **SR-8** (`think-d2ah`, superseded) — the assurance-vocabulary migration had
+  hand-edited the golden basin-map note out of byte agreement with its writer, which
+  failed the macOS deep gate on a wrap-only diff.
+  This review round-tripped the golden through the writer’s dump call; #31 then landed
+  its own registration of the same phenomenon (D-320) with a semantic golden comparison
+  that closes the wrap class outright, so no separate entry remains and `think-57x3`’s
+  durability proposal is resolved by that landed fix.
 
 **Precision, no defect entry.**
 
@@ -134,8 +142,12 @@ could be traced to a primary artifact:
 Epic `think-2xex` owns this iteration.
 Merge-phase findings: `think-16qn`, `think-clin`, `think-0emo`. Tutorial-pass findings:
 `think-mb6q`, `think-suzm`, `think-6z2v`, `think-bqjd`, `think-ojgc`, `think-aihj`.
-Post-push CI finding: `think-d2ah`.
-Defects D-320 through D-329 are registered with these beads and are all fixed on this
+Post-push CI finding: `think-d2ah`; durability follow-up `think-57x3`, resolved by #31’s
+semantic golden comparison.
+After #31 landed with its own D-320 through D-325, this review’s surviving entries were
+renumbered to D-326 through D-332; the three superseded ones (the H-024 restoration, the
+H-024 row rewording, and the golden serialization) carry no entries.
+Defects D-326 through D-332 are registered with these beads and are all fixed on this
 branch.
 
 <!-- This document follows common-doc-guidelines.md.

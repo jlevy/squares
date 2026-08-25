@@ -11,6 +11,7 @@ import json
 import math
 import pathlib
 import re
+import shlex
 import sys
 from decimal import Decimal
 
@@ -68,6 +69,30 @@ def scope_contains(scope: dict, n: int) -> bool:
     return scope["n_min"] <= n <= scope["n_max"]
 
 
+def replay_input_errors(evidence: list[dict]) -> list[str]:
+    """Require case-specific replays to name their retained source explicitly."""
+    errors: list[str] = []
+    module = "cases.kingbird29.verify_svg"
+    for entry in evidence:
+        replay = entry.get("replay")
+        if not isinstance(replay, str) or module not in replay:
+            continue
+        tokens = shlex.split(replay)
+        try:
+            module_index = tokens.index(module)
+        except ValueError:
+            errors.append(f"{entry['id']}: malformed {module} replay command")
+            continue
+        arguments = tokens[module_index + 1 :]
+        if not arguments or arguments[0].startswith("-"):
+            errors.append(f"{entry['id']}: {module} replay omits its retained SVG input")
+            continue
+        source = ROOT / arguments[0]
+        if not source.is_file():
+            errors.append(f"{entry['id']}: replay input does not exist: {arguments[0]}")
+    return errors
+
+
 def main() -> int:
     coverage = yaml.safe_load(COVERAGE.read_text(encoding="utf-8"))
     n_min = coverage["case_corpus"]["n_min"]
@@ -90,9 +115,11 @@ def main() -> int:
     )
 
     evidence_document = yaml.safe_load(EVIDENCE.read_text(encoding="utf-8"))
-    evidence_ids = [entry["id"] for entry in evidence_document["evidence"]]
+    evidence = evidence_document["evidence"]
+    evidence_ids = [entry["id"] for entry in evidence]
     if len(evidence_ids) != len(set(evidence_ids)):
         errors.append("frontier evidence ids are not unique")
+    errors.extend(replay_input_errors(evidence))
     evidence_id_set = set(evidence_ids)
     for source in coverage["sources"]:
         errors.extend(

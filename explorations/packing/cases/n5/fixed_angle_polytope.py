@@ -976,7 +976,7 @@ def path_certificates(field: NumberField, inputs: ProofInputs) -> list[dict[str,
                     field, centres, cast(FieldElement, face.exact_data(field)["side"])
                 )
                 if report["valid"] is not True:
-                    raise ValueError("an independent exact path packing is invalid")
+                    raise ValueError("a separately checked exact path packing is invalid")
                 fixtures.append({"name": fixture_name, "epsilon": encode(epsilon), **report})
 
             axes = active_axis_certificate(field, start_centres, end_centres, inputs)
@@ -1074,7 +1074,7 @@ def validate_result(result: dict[str, object]) -> None:
         != 2
         for path in paths
     ):
-        raise ValueError("a path lacks independent exact packing fixtures")
+        raise ValueError("a path lacks separately checked exact packing fixtures")
     scope = require_dict(result.get("scope_refusals"), "scope refusals")
     if (
         set(require_list(scope.get("refused_claims"), "refused claims")) != set(REFUSED_CLAIMS)

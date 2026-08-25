@@ -83,10 +83,10 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
-The generated ledger currently derives three confirmed hypotheses, seven refuted
+The generated ledger currently derives three confirmed hypotheses, six refuted
 hypotheses, one open hypothesis, seven open questions, and twenty-five blocked
-hypotheses.
-Its active confidence ladder has completed the exact and event controls up to
+hypotheses. One additional hypothesis is unresolved because its formal prerequisite is
+missing. Its active confidence ladder has completed the exact and event controls up to
 the first nontrivial identity question; the next scientific transition is from
 specialized `n = 5` local geometry to a defensible component relation, not to a larger
 raw census.
@@ -306,9 +306,9 @@ W7; historical phases are not relabelled after the fact.
 The latest terminal record is
 [session-014](campaign/agent-sessions/session-014-final-portfolio-rotation.md), which
 opened no later research round.
-The next agent should open one bounded W6 slice under `think-1s0h`, preregister one
-exact R4/R5 nonlinear-realization criterion, and retain an exact continuation, exact
-obstruction, or finite unresolved list.
+The next agent should open one bounded W6 slice for agenda cell `BC-010` under
+`think-1s0h`, preregister one exact R4/R5 nonlinear-realization criterion, and retain an
+exact continuation, exact obstruction, or finite unresolved list.
 The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
 remain later slices; D-239 is a separate W7 line.
 Do not start basin-frequency work or reinterpret exp-035 through exp-039 as a
@@ -482,7 +482,7 @@ not only instruments.
 | [`cases.n5.second_order_obstruction`](cases/n5/second_order_obstruction.py) | That displayed direction is excluded from the true Bouligand tangent cone (exp-036) |
 | [`cases.n5.tangent_inventory`](cases/n5/tangent_inventory.py) | Both owner branches have the same complete first-order V-representation at A, the interior, and B (exp-038) |
 | [`cases.n5.fixed_angle_polytope`](cases/n5/fixed_angle_polytope.py) | Four release classes have exact paths in one connected five-dimensional cell-local LP-optimal position polytope, with positive pathwise first-order stresses (exp-039) |
-| [`cases.kingbird29.verify_svg`](cases/kingbird29/verify_svg.py) | High-precision (160-digit) numerical reconstruction of the `n = 29` record source: six orientation classes, refuting H-024’s three-class claim (exp-012) and H-042’s serialization-scoped variant (exp-037). Not an exact feasibility or optimality certificate—the retained SVG is numerical |
+| [`cases.kingbird29.verify_svg`](cases/kingbird29/verify_svg.py) | A 160-digit numerical reconstruction of the `n = 29` SVG, rejecting H-042’s serialization-scoped three-class claim (exp-037). H-024’s formal prerequisite remains unresolved; the SVG is not a formal feasibility or optimality certificate |
 
 **Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
 LP duals as unavoidable-set generators, and any Lean formalization.
@@ -1500,9 +1500,9 @@ reading the results below:
 
 ## The Hypothesis Registry
 
-Forty-three claims or open questions are codified as artifacts.
+Each claim or open question is codified as an artifact.
 The standing review’s complete H-001 through H-015 block is now in the registry; later
-ids carry campaign-native claims and seven explicit open questions.
+ids carry campaign-native claims and explicit open questions.
 The [ledger](campaign/ledger.md) is generated from the artifacts and is the current
 view; this section is the reading of it.
 Rounds and effort below repeat the ledger’s per-hypothesis totals, which count every
@@ -1532,9 +1532,9 @@ round that names the hypothesis, control roles included.
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 14 | 106m agent, 4.0m wall |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, and known sheet lifts? | 6 | 115m agent, 6.11s wall |
-| [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | **refuted** | Independently reconstructed standing records through `n=30` use at most three angle classes; exp-012 counts six numerical classes at `n=29` | 1 | 12m agent, 0.158s wall |
-| [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 6 | 115m agent, 6.11s wall |
+| [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | unresolved | Formally supported record packings through `n=30` use at most three angle classes; the retained `n=29` SVG has no formal witness | 1 | 12m agent, 0.158s wall |
+| [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of reported record configurations are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
 | [H-027](campaign/hypotheses/H-027-record-angle-cones.md) | blocked | The imported `n=11,17` record cells have positive class-angle directional cones | 0 | — |
 | [H-028](campaign/hypotheses/H-028-reference-cell-angle-sheets.md) | blocked | Each published point is the sole refined local minimum on its declared reference-cell angle sheet, with a boundary margin | 0 | — |
@@ -1667,9 +1667,8 @@ Transverse and mixed nonlinear realization remains open.
 
 ## Experiments Conducted
 
-There are 39 rounds registered in `series-000`: 38 terminal rounds and the preregistered
-exp-039 confirmatory run.
-They record 933 agent-minutes and 28.3 wall-minutes so far.
+There are 39 terminal rounds registered in `series-000`. They record 933 agent-minutes
+and 28.3 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1709,7 +1708,7 @@ archive beside it.
 | [exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 11 | target | H-002 | quench 0.2.0 | `6.999e-02 → 6.2894e-02` | rejected |
 | [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 11 | target | H-019 | quench 0.2.0 | slopes `0.1747` / `0.3841`, ratio `2.198` | **accepted** |
 | [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | reported `5.0` on all five binary64 search seeds, gap `+3.245e-01` | rejected |
-| [exp-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | 29 | target | H-024 | SVG reconstruction + SAT | six classes; minimum class gap `0.296067°` | **rejected** |
+| [exp-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | 29 | target | H-024 | SVG reconstruction + SAT | six classes numerically; formal prerequisite missing | **unresolved** |
 | [exp-013](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | 11 | target | H-026 | exact branchwise linearization | 128/128 exact zero-cone certificates | **accepted** |
 | [exp-014](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) | 3 | positive control | H-032 | exact configuration space | two labelled circles → one quotient interval | **accepted** |
 | [exp-015](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | 4 | positive control | H-032 | exact configuration space | 24 labelled points → one quotient point | **accepted** |
@@ -1929,34 +1928,34 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 329 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 332 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 79 | asserted something false about the mathematics |
-| validity | 81 | was correct, but the measurement did not bear on the question |
+| validity | 82 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 125 | recorded something its own evidence contradicts |
-| robustness | 35 | did not finish, or finished only by luck |
+| robustness | 37 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Sixty-two of the seventy-nine soundness defects pointed in the *flattering*
+**Sixty-three of the seventy-nine soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-two defects in 329, and no soundness defect
+**The automated gate has caught forty-three defects in 332, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. Every gate-detected entry is a bookkeeping or robustness defect, found by
-contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
-That is the pattern, not an exception: gates are good at the mechanical classes and have
-never once caught the mathematics being wrong.
+*surprised*. Gate-detected entries here are mechanical process, implementation, or
+test-validity failures, found by contiguity, integration, mutation-anchor,
+reconciliation, or known-answer checks.
+The supported distinction is that the gate has never caught the mathematics being wrong.
 
-106 fixes left no regression check behind.
+107 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
@@ -2106,23 +2105,20 @@ refutations; D-292 keeps regenerated branch indices bound to the retained exp-01
 universe; and D-293 keeps provenance self-tests from claiming completeness without exact
 mappings.
 
-Both claims are computed from `defects.yaml` rather than written down, so neither can
-drift from the log it describes ([D-028](defects.md)).
-
-The fixes that left no regression check behind—counted in the short version above—have
-already predicted a recurrence once.
-The [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on
-D-014 turns this into four rules—oracle coverage through unshared code, tolerances
-stated relative to what they govern, a discovery treated as a defect until an
-independent layer agrees, and new components inheriting the perimeter—that apply to code
-not yet written.
+The generated defect view owns the aggregate counts; this narrative retains the causal
+history. The
+[postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
+turns this into four rules—oracle coverage through unshared code, tolerances stated
+relative to what they govern, a discovery treated as a defect until an independent layer
+agrees, and new components inheriting the perimeter—that apply to code not yet written.
 
 ## Where This Stands
 
 The middle tier is built and works within the explicit boundaries above.
 Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s
 slopes to three decimals.
-Polish is solved on both proved instance cells to machine precision.
+Floating-point LP refinement reaches its declared solver floor on both proved instance
+cells.
 The current hypothesis-status aggregate is reconciled from the generated ledger in
 [Current research readiness](#current-research-readiness), and the campaign has a defect
 log that has already predicted a recurrence.

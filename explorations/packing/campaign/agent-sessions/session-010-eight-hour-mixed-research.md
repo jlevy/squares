@@ -311,7 +311,7 @@ session:
     deadline_at: '2026-08-25T02:05:11-07:00'
     expected_output: >-
       A cases/n5 exact checker that rebuilds the polytope, paths, duals, stresses,
-      independent packings, and ten mutations in under 30 seconds, or a minimized exact
+      separate exact packing fixtures, and ten mutations in under 30 seconds, or a minimized exact
       blocker with no target verdict.
     validation_command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
@@ -325,13 +325,13 @@ session:
     outcome: >-
       Commit 27b999e provides a source-bound exact checker for the five-dimensional
       fixed-angle polytope, LP dual, twelve sharp paths, owner-axis exhaustion, positive
-      branchwise stress polynomials, independent packings, and all ten mutations. Two
+      branchwise stress polynomials, separate exact packing fixtures, and all ten mutations. Two
       flattering proof shortcuts found in review were corrected before any target run.
     evidence:
     - >-
-      Final independent verification reports source SHA-256
-      813411d0b66c5f161285785917bd163bc59cca90571ff0030b22d42a8e76c6cc,
-      2.17-second temporary generation, 2.10-second replay, and no remaining P0/P1 issue.
+      Final independent review reports 2.17-second temporary generation,
+      2.10-second replay, byte-identical regenerated output, and no remaining P0/P1
+      issue.
     - >-
       D-256 replaces invalid fixed-sign endpoint reasoning with fixed-projection zero-axis
       and convex negative-axis certificates; D-257 replaces three-sample interpolation
@@ -1342,10 +1342,10 @@ session:
       The final 48,371-byte source passed Ruff, BasedPyright, exact temporary generation,
       replay, and proof-mechanism inspection with no remaining P0 or P1 finding.
     evidence:
-    - Final source SHA-256 is 813411d0b66c5f161285785917bd163bc59cca90571ff0030b22d42a8e76c6cc.
+    - The final source passed the independently rerun static and exact checks.
     - >-
       Final generation took 2.17 wall seconds and replay 2.10 seconds; the 372,281-byte
-      temporary JSON had SHA-256 92c799932baaa94318979df433b882950977cc8299ca7b3c9b19db1ff65ee42b.
+      temporary JSON replayed byte-for-byte identically.
     files: []
     checks:
     - Ruff format and lint checks, BasedPyright, exact record, replay, and read-only proof review.
@@ -1362,7 +1362,7 @@ session:
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
       -m cases.n5.fixed_angle_polytope --replay /tmp/exp039-fixed-angle-verify-final-20260825.json
     kill_condition: Return the first failed check without editing shared files.
-    fallback: Report the exact failed command and file hash.
+    fallback: Report the exact failed command, path, and first differing value.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
   - task: Add exp-039 to the maintained small-n exact-model validation step.
@@ -1401,7 +1401,7 @@ session:
       Exact regeneration matched the 372,281-byte retained result and the audit found no
       P0/P1 issue or promoted global, terminal, component, basin, census, or clearance claim.
     evidence:
-    - Retained JSON SHA-256 is 92c799932baaa94318979df433b882950977cc8299ca7b3c9b19db1ff65ee42b.
+    - The retained JSON regenerated and replayed byte-for-byte identically.
     - Exact replay took 2.22 measured wall seconds and softschema passed.
     files: []
     checks:
