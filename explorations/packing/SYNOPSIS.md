@@ -73,7 +73,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Exact witness verification | Certify the bundled Trump witness and other independently isolated algebraic inputs | The generic `NumberField` path needs a root-count certificate before accepting third-party field metadata ([D-053](defects.md)) | [Exact layer](#the-exact-layerbuilt) |
 | Numerical refinement | Polish and compare fixed-cell controls above the measured solver floor | A stopped quench is neither certified stationary nor comparable by wall-clock budget under load | [Refinement layer](#the-refinement-layerbuilt-with-a-floor) and [D-021, D-052, D-126](defects.md) |
 | Exact local geometry and proof | Run the specialized small-`n`, Trump, and Stromquist checkers; this is the most productive mathematical lane so far | There is no generic proof-synthesis or interval branch-and-bound pipeline | [Proof lane](#the-proof-lanebuilt-and-producing-theorems) |
-| Proposal and search | Use the stock annealer for calibration and candidate generation | The proposer interface, equal-work pair-test meter, and mechanism-diverse proposers are unbuilt | [Proposer layer](#the-proposer-layerone-instrument-and-the-interface-is-unbuilt) |
+| Proposal and search | Use the stock annealer for calibration and candidate generation; its two search paths emit exact pair-test work | Pair-budget enforcement, the proposer interface, campaign-wide aggregation, and mechanism-diverse proposers are unbuilt | [Proposer layer](#the-proposer-layerone-instrument-and-the-interface-is-unbuilt) |
 | Event capture and replay | Retain and independently replay watched control events | A valid terminal event is an observation, not a connected terminal component | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | Basin identity, census, and atlas | Use exact `n = 3` and `n = 4` models as identity controls | Component counting is not admissible until the `n = 5` ambiguity is bounded and the classifier is validated successively | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | Numerical-to-exact promotion | Reuse the dedicated `n = 5` fixed-angle proof of concept | No general command turns a retained floating pose into an exact witness or an explicit rejection | [Promotion pipeline](#the-promotion-pipelineunbuilt-and-it-is-the-largest-structural-gap) |
@@ -311,8 +311,14 @@ Uniform multistart draws exist inside the census and the checkers, with the cens
 declaring its regime; the proposer *interface*—the contract that would make two
 proposers comparable—is unbuilt.
 
+The stock annealer now counts and emits every search-side pair evaluation, including
+restart initialization, both local scans per move, and final retained-pose screening.
+Its CLI still enforces move budgets, and the first downstream quench adapter discards
+the all-chain summary, so this is a meter seam rather than an equal-work proposer
+interface.
+
 **Unbuilt, and each is a registered hypothesis with nothing behind it yet:** the
-proposer interface itself, the pair-test **meter** (so no two proposers have ever been
+proposer interface and pair-budget enforcement (so no two proposers have ever been
 compared at equal budget), δ-continuation, angle-class search *as a search*,
 neighbour-transfer seeding, MAP-Elites retention, and billiard/inflation.
 
@@ -723,7 +729,10 @@ symmetry—used to steer search toward diversity rather than toward loss.
 *Unbuilt, and every steering strategy waits on them.*
 
 **Meter.** The instrument that counts pair-tests, so two proposers can be compared at
-equal budget. *Unbuilt, so no two proposers have been compared at equal budget.*
+equal budget.
+*The stock annealer’s search paths are metered; pair-budget enforcement and
+campaign-wide stage receipts are unbuilt, so no two proposers have been compared at
+equal budget.*
 
 ### Identifiers and Control Records
 
@@ -1758,16 +1767,16 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 274 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 281 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 70 | asserted something false about the mathematics |
-| validity | 69 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 99 | recorded something its own evidence contradicts |
+| validity | 70 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 104 | recorded something its own evidence contradicts |
 | robustness | 28 | did not finish, or finished only by luck |
-| performance | 8 | worked, but cost far more than it should |
+| performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -1775,7 +1784,7 @@ Two observations the log exists to make.
 where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught twenty-six defects in 274, and no soundness defect
+**The automated gate has caught thirty-two defects in 281, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -1922,8 +1931,8 @@ and the other branch ref restored before push or target execution.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Ninety-two fixes left no regression check behind, and that list has already predicted a
-recurrence once. The
+Ninety-three fixes left no regression check behind, and that list has already predicted
+a recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
 relative to what they govern, a discovery treated as a defect until an independent layer
@@ -2065,6 +2074,8 @@ The repaired small-`n` path no longer blocks the campaign, but unattended numeri
 still lacks a reproducible work-based quench budget ([D-126](defects.md)), outer
 deadlines and process-group cleanup for every validation step ([D-239](defects.md)), and
 portable terminal-receipt discipline for delegated long commands ([D-202](defects.md)).
+[D-280](defects.md) records the phase-count cap exhausting the fast campaign early; its
+continuation remains open.
 
 **One open measurement defect constrains timing forecasts.** [D-101](defects.md): the
 historical exp-007/008 round-level wall times disagree with retained per-call durations.

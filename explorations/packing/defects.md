@@ -2,15 +2,15 @@
 
 # Defect log
 
-274 defects recorded across the packing toolchain.
+281 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **70 soundness defects** — the system asserting something false about the mathematics. 58 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **92 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268).
-- **27 are still open** (outstanding or contained), every one carrying a bead.
+- **93 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242, D-255 repeats D-198, D-259 repeats D-027, D-263 repeats D-258, D-267 repeats D-255, D-274 repeats D-268, D-279 repeats D-271, D-281 repeats D-267).
+- **28 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
 
@@ -18,24 +18,24 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 17 | a cell of the sweep whose answer is known in advance |
-| `review` | 172 | a human or agent reading the work against a checklist |
+| `review` | 173 | a human or agent reading the work against a checklist |
 | `anomaly` | 11 | a result that made no sense, chased down |
 | `inspection` | 30 | reading the code or the design with intent |
 | `drift_check` | 15 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 26 | the automated test suite |
+| `gate` | 32 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 26 of 274, and none of the 70 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 32 of 281, and none of the 70 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
 | Layer | Count |
 | --- | ---: |
-| engine | 9 |
+| engine | 10 |
 | quench | 21 |
 | verifier | 4 |
-| record | 79 |
-| tooling | 78 |
+| record | 82 |
+| tooling | 81 |
 | docs | 83 |
 
 ## By kind
@@ -43,10 +43,10 @@ The line worth reading twice: **the automated gate caught 26 of 274, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 70 |
-| validity | 69 |
-| bookkeeping | 99 |
+| validity | 70 |
+| bookkeeping | 104 |
 | robustness | 28 |
-| performance | 8 |
+| performance | 9 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -147,6 +147,7 @@ This is the actionable list.
 | D-238 | The synopsis called quench endpoints discrete basins with a well-defined census | docs |
 | D-243 | The autonomous-loop instruction contradicted its upstream launch blocker | docs |
 | D-247 | A delegated follow-up again rewrote the dependency lock outside its scope | tooling |
+| D-280 | The phase-count cap ended a fast campaign before its wall-clock goal | tooling |
 
 ## Still open
 
@@ -179,6 +180,7 @@ This is the actionable list.
 | D-217 | contained | medium | A parallel validation wrapper discarded a live command receipt | `think-b3bm` |
 | D-222 | contained | medium | A delegated read-only audit launched an explicitly excluded deep gate | `think-ysz2` |
 | D-239 | outstanding | medium | Validation steps have no outer deadline or process-group cleanup | `think-tx0b` |
+| D-280 | contained | high | The phase-count cap ended a fast campaign before its wall-clock goal | `think-bfwm` |
 
 ## Every defect
 
@@ -458,3 +460,10 @@ This is the actionable list.
 | [D-272](../../.github/workflows/packing-validation.yml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The macOS expected-failure guard rejected a recovered deep golden |
 | [D-273](tests/test_module_boundaries.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The direct-blocking workflow test admitted advisory variants |
 | [D-274](tests/test_module_boundaries.py) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The delegated promotion check named deleted paths and left one long assertion |
+| [D-275](sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | engine | validity | flattering | `review` | high | fixed | The first pair-meter draft omitted basin-entry work from its summary |
+| [D-276](sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The first basin-entry meter probe selected a fixture without angles |
+| [D-277](sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The first pair-meter integration test omitted crate documentation |
+| [D-278](defects.yaml) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The D-277 regression command made the defect source invalid YAML |
+| [D-279](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The finalization phase used an undeclared focus value |
+| [D-280](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | tooling | performance | conservative | `gate` | high | contained | The phase-count cap ended a fast campaign before its wall-clock goal |
+| [D-281](devtools/controls.yaml) | 2026-08-25 | record | bookkeeping | conservative | `gate` | medium | fixed | New defect totals left synopsis controls and the open inventory stale |

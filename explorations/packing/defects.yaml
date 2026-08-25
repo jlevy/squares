@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 274
+count: 281
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -7067,3 +7067,175 @@ defects:
   recurrence_of: D-268
   bead: think-3bg6
   recorded_in: tests/test_module_boundaries.py
+- id: D-275
+  title: The first pair-meter draft omitted basin-entry work from its summary
+  date: '2026-08-25'
+  layer: engine
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated draft, before integration
+  severity: high
+  status: fixed
+  what: >-
+    The first counter-to-JSONL draft emitted `pair_tests` on every basin-entry trial but
+    left the basin-entry summary unchanged, so a summary-only consumer saw no producer
+    work even though the child rows carried exact counts.
+  consequence: >-
+    A later equal-work comparison could treat the basin-entry proposer as unmetered or
+    artificially cheap, and the internal selftest would still pass because it did not
+    exercise serialization or aggregation.
+  fix: >-
+    Aggregate trial counters with checked addition, emit the total and rate on the
+    basin-entry summary, and add an end-to-end Rust integration test covering ordinary
+    and basin-entry rows plus their summaries.
+  regression: >-
+    `cargo test` requires two ordinary rows of 54 pair-tests and summary 108, then four
+    basin-entry rows of 54 and summary 216
+  bead: think-dai4
+  recorded_in: sqsearch/tests/pair_meter_jsonl.rs
+- id: D-276
+  title: The first basin-entry meter probe selected a fixture without angles
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one verification command
+  severity: low
+  status: fixed
+  what: >-
+    The first manual basin-entry JSONL probe selected exp-019 because it was an `n = 4`
+    basin artifact, but that event record has no `t` array and therefore does not satisfy
+    sqsearch's seed-config input contract.
+  consequence: >-
+    The probe stopped before search and produced no meter evidence; treating that command
+    as a code failure would have sent the bounded slice down the wrong debugging path.
+  fix: >-
+    Re-run the probe against the retained exp-002 sqsearch output, whose first record has
+    all three pose arrays, and preserve a self-contained `n = 4` fixture in the permanent
+    integration test.
+  regression: >-
+    the Rust integration test writes its own conforming x/y/t seed and removes it after
+    the basin-entry JSONL assertions pass
+  bead: think-ujaj
+  recorded_in: sqsearch/tests/pair_meter_jsonl.rs
+- id: D-277
+  title: The first pair-meter integration test omitted crate documentation
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted test run
+  severity: low
+  status: fixed
+  what: >-
+    The first integration-test crate passed its behavioral assertion but emitted the
+    workspace's `missing_docs` warning because it had no module-level documentation.
+  consequence: >-
+    Accepting a warning-bearing checkpoint would lower the Rust lint floor and make new
+    warnings harder to distinguish from pre-existing noise.
+  fix: >-
+    Delegate the mechanical documentation repair and rerun formatting plus the focused
+    integration test without changing meter behavior.
+  regression: >-
+    `cargo test --test pair_meter_jsonl` passes without warnings
+  bead: think-4gqo
+  recorded_in: sqsearch/tests/pair_meter_jsonl.rs
+- id: D-278
+  title: The D-277 regression command made the defect source invalid YAML
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one unrendered log edit
+  severity: low
+  status: fixed
+  what: >-
+    The first D-277 entry put a backtick-leading command in an unquoted plain scalar.
+    PyYAML rejected that token and therefore could not parse any of the defect source.
+  consequence: >-
+    The generated defect view and downstream schema checks could not run until the log
+    source was repaired; no defect record was silently accepted or lost.
+  fix: >-
+    Delegate the mechanical repair, encode the command as a folded scalar, and parse the
+    complete source before rendering the generated view.
+  regression: the complete defects.yaml source parses before defects.md is rendered
+  bead: think-axl2
+  recorded_in: defects.yaml
+- id: D-279
+  title: The finalization phase used an undeclared focus value
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one unrendered phase transition
+  severity: low
+  status: fixed
+  what: >-
+    The first phase-15 record used `focus: discipline`, but the enforced session schema
+    names that pillar `process` and permits only four declared focus values.
+  consequence: >-
+    The ledger refused to render the checkpoint, preventing the finalization phase from
+    becoming a valid durable record until the vocabulary was reconciled.
+  fix: >-
+    Delegate the one-field repair, use the declared `process` value, and rerun the full
+    campaign-ledger validation before commit.
+  regression: packing-ledger check validates every workflow-phase focus value
+  recurrence_of: D-271
+  bead: think-gbti
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-280
+  title: The phase-count cap ended a fast campaign before its wall-clock goal
+  date: '2026-08-25'
+  layer: tooling
+  class: performance
+  direction: conservative
+  detected_by: gate
+  latent_for: fourteen short successful phases
+  severity: high
+  status: contained
+  what: >-
+    Session-010's `max_cycles: 15` assumed work slices would consume most of their
+    30-minute bounds. Fourteen work phases instead finished in about three hours, so the
+    fifteenth phase exhausted the cycle cap more than four hours before the reserved
+    finalization window.
+  consequence: >-
+    Applying the declared stop literally ends an eight-hour campaign after roughly
+    three hours; relabelling the early checkpoint as finalization is also invalid, and
+    the ledger correctly refused that record.
+  fix: >-
+    Preserve the declared cycle stop, record phase 15 as an ordinary process checkpoint,
+    and make the continuation explicit rather than weakening session-010 in place. The
+    reusable contract still needs a wall-time-aware phase-cap policy.
+  regression: none
+  bead: think-bfwm
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-281
+  title: New defect totals left synopsis controls and the open inventory stale
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one complete precommit gate
+  severity: medium
+  status: fixed
+  what: >-
+    After D-275 through D-280 were recorded, the synopsis and mutation catalogue still
+    named the previous total and gate-detector aggregate. The synopsis also omitted its
+    derived no-regression count and the newly contained D-280.
+  consequence: >-
+    Two of 31 validation steps failed after every engine, mathematical, schema, and
+    behavioral check passed, so the otherwise sound checkpoint was not publishable.
+  fix: >-
+    Reconcile the synopsis with every current derived aggregate and open defect, update
+    only the corresponding mutation anchors and expected message, and rerun the focused
+    synopsis plus negative-control checks before the replacement complete gate.
+  regression: devtools.check_synopsis and all 62 mutation controls pass on the current source
+  recurrence_of: D-267
+  bead: think-ghzs
+  recorded_in: devtools/controls.yaml

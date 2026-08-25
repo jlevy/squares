@@ -741,7 +741,7 @@ session:
       Execute frozen order 6: reconcile think-b4jc with think-krqi, define one exact
       pair-test counting contract across current search paths, and land the smallest
       counter-to-JSONL vertical slice or identify the first unmetered move path.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The D-203/D-272 correctness line is portably green and closed; the frozen queue now
@@ -764,10 +764,65 @@ session:
     fallback: >-
       Retain the interface decision and first unmetered path, leave think-b4jc open, and
       route the next session phase to frozen order 13.
+    outcome: >-
+      Both sqsearch producer paths now count one pair test per actual unordered-pair
+      depth evaluation, return the exact count, and emit per-outcome plus summary JSONL.
+      The move-budget CLI is unchanged. The broad meter bead remains open because
+      pair-budget enforcement and the first downstream summary-preserving adapter are
+      not built.
+    evidence:
+    - >-
+      The exact count is `restarts*C(n,2) + 2*moves*(n-1) + C(n,2)` for both ordinary
+      and basin-entry Outcomes; the shared selftest observes 54 on both bounded paths.
+    - >-
+      The end-to-end integration test observes two ordinary rows of 54 and summary 108,
+      then four basin-entry rows of 54 and summary 216.
+    - >-
+      Independent review found D-275's missing basin-entry summary before integration;
+      checked aggregation and the serialization regression now cover it.
+    - >-
+      The meter excludes the basin-entry command's fixed seed diagnostic and independent
+      verifier work. Those remain separate stage receipts rather than proposer budget.
+    stop_reason: >-
+      The exact Rust counter-to-JSONL seam, both-path control, independent review, and
+      durable scope boundary were complete before the implementation stop.
+    next_action: >-
+      Enter the reserved finalization phase: render records, run the normal gate, commit,
+      push, synchronize beads, refresh PR 29, and preserve the first unmetered adapter.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: work
+    focus: process
+    objective: >-
+      Checkpoint session-010 without opening another research line: reconcile generated
+      records and beads, run the declared validation surface, publish one clean
+      checkpoint, inspect PR comments and CI, and hand off the exact continuation.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      Fourteen bounded work phases completed early enough to exhaust the phase-count
+      limit long before the wall-clock reserve. The fifteenth and final permitted phase
+      preserves a portable stop rather than silently weakening either bound.
+    budget_minutes: 45
+    started_at: '2026-08-25T03:40:09-07:00'
+    deadline_at: '2026-08-25T04:25:09-07:00'
+    expected_output: >-
+      One pushed green commit, synchronized defects and beads, current PR metadata and
+      review state, and a durable next action naming pair-budget enforcement plus the
+      first unmetered adapter.
+    validation_command: >-
+      timeout 180 uv run --directory explorations/packing --frozen --all-extras --group
+      dev packing-validate --jobs 2 --inner-jobs 1
+    kill_condition: >-
+      Do not start new research or change a criterion; if the normal gate cannot finish
+      by 04:10, preserve its first minimized blocker and publish the last green scope.
+    fallback: >-
+      Commit the smallest independently green meter seam and record any broader gate
+      failure without absorbing unrelated repair.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Reconcile the two metering beads and inspect the current event/search interfaces.
+    next_action: Render defects and ledger, then run the normal gate.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -1707,6 +1762,156 @@ session:
     elapsed_quality: unavailable
     next_action: Accept the narrow delta subject to normal local and portable CI gates.
     phase: 13
+  - task: Inventory every production pair-evaluation path and derive the exact work formula.
+    operator: /root/pair_meter_engine_inventory
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Located the shared full and local overlap kernels, distinguished search work from
+      diagnostics, and derived the per-Outcome counter formula without repository writes.
+    evidence:
+    - One full scan per restart, two local scans per move, and one final full scan.
+    files: []
+    checks: [Read-only Rust call-graph inspection.]
+    uncertainty: Downstream campaign adapters were outside this inventory.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Implement a caller-owned counter without atomics or derived production values.
+    phase: 14
+  - task: Reconcile narrow meter emission with the broad budget-migration bead.
+    operator: /root/n4_ipm_fallback_impl
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Confirmed think-krqi can close after exact JSONL emission while think-b4jc remains
+      open for budget enforcement, tiers, schemas, adapters, and comparisons.
+    evidence:
+    - The first downstream unmetered adapter discards the all-chain sqsearch summary.
+    files: []
+    checks: [Read-only bead, spec, and campaign-contract reconciliation.]
+    uncertainty: No pair-budget CLI or adapter implementation was attempted.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Close only the narrow missing-emission bead after a green checkpoint.
+    phase: 14
+  - task: Audit the JSONL and BasinEvent schema boundary for the first meter seam.
+    operator: /root/n4_ipm_fallback_review
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Kept the slice additive and Rust-only, excluded fixed setup and verifier receipts,
+      and prohibited an in-place BasinEvent/v3 contract change.
+    evidence:
+    - Historical missing counters remain unknown rather than zero.
+    - BasinEvent verification pairs are endpoint-oracle work, not proposer effort.
+    files: []
+    checks: [Read-only JSONL consumer and exact-schema inspection.]
+    uncertainty: A future event-wide meter requires stage-namespaced v4 receipts.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Emit per-Outcome and summary fields without changing retained v3 events.
+    phase: 14
+  - task: Implement the exact Rust pair counter and initial JSONL seam.
+    operator: /root/pair_meter_impl
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Added caller-owned counters to both search paths and emitted ordinary and
+      basin-entry work without changing move budgets, geometry, RNG order, or criteria.
+    evidence:
+    - Cargo check passed; the shared selftest passed in about 23 seconds.
+    files:
+    - sqsearch/src/geom.rs
+    - sqsearch/src/search.rs
+    - sqsearch/src/main.rs
+    checks: [Cargo format, check, and selftest.]
+    uncertainty: The initial basin-entry summary omission was found during integration review.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Add checked summary aggregation and an end-to-end output control.
+    phase: 14
+  - task: Independently review the complete pair-meter diff and output boundary.
+    operator: /root/pair_meter_diff_review
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Found D-275's missing basin-entry summary and stale durable docs; verified the
+      corrected formula, overflow refusal, and unchanged numerical evaluation order.
+    evidence:
+    - No remaining geometry, RNG, or result-order change was identified.
+    files: []
+    checks: [Read-only source, output, consumer, and documentation review.]
+    uncertainty: The broad pair-budget migration remains outside this slice.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Require persistent serialization controls and narrow truthful docs.
+    phase: 14
+  - task: Remove the missing-docs warning from the pair-meter integration test.
+    operator: /root/pair_meter_lint_fix
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Added only the test-crate documentation line; focused formatting and the one
+      integration test pass without changing behavior.
+    evidence:
+    - One of one pair-meter integration tests passed after the mechanical repair.
+    files: [sqsearch/tests/pair_meter_jsonl.rs]
+    checks: [Cargo format and focused cargo test.]
+    uncertainty: The complete repository gate remained for finalization.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Run the complete normal checkpoint gate.
+    phase: 14
+  - task: Repair the invalid phase-15 focus enum caught by the ledger.
+    operator: /root/session_focus_fix
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Changed only the finalization phase focus from the prose pillar name `discipline`
+      to the schema's declared `process` value.
+    evidence:
+    - The first ledger render refused the undeclared value before producing a view.
+    files: [campaign/agent-sessions/session-010-eight-hour-mixed-research.md]
+    checks: [Campaign-ledger schema validation.]
+    uncertainty: The complete ledger still needed rerendering with D-279 recorded.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Rerender the defect view and campaign ledger.
+    phase: 15
+  - task: Repair the invalid D-277 YAML scalar caught by the defect renderer.
+    operator: /root/defect_yaml_fix
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Re-encoded only D-277's backtick-leading regression command as a folded scalar;
+      the complete defect source parses again.
+    evidence:
+    - The first renderer invocation refused the invalid YAML before changing defects.md.
+    files: [defects.yaml]
+    checks: [Complete YAML parse and defect renderer.]
+    uncertainty: The complete repository gate remained for the final checkpoint.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Render the 279-defect view and run the normal validation surface.
+    phase: 15
+  - task: Reconcile defect-derived synopsis text and mutation anchors after the gate.
+    operator: /root/aggregate_drift_fix
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Updated only the current defect total, gate-detector aggregate, no-regression
+      count, D-280 open-defect note, and the mutations that guard those facts.
+    evidence:
+    - >-
+      The first complete gate passed every substantive engine and mathematical check but
+      refused two record steps because D-281's aggregate follow-ons were stale.
+    files: [SYNOPSIS.md, devtools/controls.yaml]
+    checks: [Focused synopsis reconciliation and all negative controls.]
+    uncertainty: The replacement complete gate remains required before commit.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Render 281 defects and rerun the complete normal gate.
+    phase: 15
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - campaign/ledger.md
@@ -1723,6 +1928,10 @@ session:
   - tests/fixtures/n4_seed0_highs_status4.yaml
   - tests/test_research_contracts.py
   - tests/test_module_boundaries.py
+  - sqsearch/src/geom.rs
+  - sqsearch/src/search.rs
+  - sqsearch/src/main.rs
+  - sqsearch/tests/pair_meter_jsonl.rs
   - src/sqpack/research/quench.py
   - defects.yaml
   - defects.md
