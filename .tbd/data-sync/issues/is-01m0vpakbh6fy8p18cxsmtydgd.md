@@ -5,7 +5,7 @@ title: Bound packing validation steps and reap timed-out process groups
 kind: bug
 status: in_progress
 priority: 1
-version: 12
+version: 13
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 delegate: codex-root
 labels: []
@@ -20,10 +20,10 @@ child_order_hints:
   - is-01m0wmfncxtt2ffk5b9pdtf504
   - is-01m0wmn0zw88qedq2hjv6asdxs
 created_at: 2026-08-25T05:29:40.976Z
-updated_at: 2026-08-25T14:19:39.899Z
+updated_at: 2026-08-25T14:30:32.217Z
 ---
 packing-validate launches proof, solver, Cargo, and checker subprocesses without per-step deadlines or process-group cleanup; _run_selected waits for every future. A hung step can consume an entire unattended handoff despite mutation controls now being bounded. Add configurable per-step/default deadlines suitable for deep mathematics, group termination/reaping, timed-out diagnostics and focused failure tests. This is a follow-up robustness blocker for unattended use, not for the next supervised exact slice.
 
 ## Notes
 
-Session-014 phase 1 began 06:57:09 PT with a 07:27:09 hard deadline. Add a declared finite default for every production validation subprocess at the existing command seam, plus one ordinary-action timeout control and docs. Stop implementation at 20 minutes; do not replace ThreadPoolExecutor, run strict/deep validation, or claim pure-Python worker/Windows tree bounds.
+Session-014 completed the first production policy slice: every subprocess launched through the captured or quiet command seam now has a finite configurable 600-second POSIX default, smaller explicit caps win, and coordinator interruption terminates registered process groups while late registration fails closed. Focused evidence: 21 validation CLI tests, Ruff, and BasedPyright pass; D-314 through D-317 record the defects found before checkpoint. Keep this bead in progress: pure-Python worker hangs, aggregate duration across multi-command steps, detached daemons, and Windows process trees remain outside the policy. Resume only as a separately declared bounded pipeline slice; do not present the strict gate as a complete watchdog.
