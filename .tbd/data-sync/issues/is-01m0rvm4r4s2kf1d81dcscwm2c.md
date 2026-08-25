@@ -5,7 +5,7 @@ title: Advance the asymptotic waste and finite-transfer lane
 kind: task
 status: in_progress
 priority: 2
-version: 9
+version: 10
 spec_path: explorations/packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md
 delegate: codex-root
 labels:
@@ -22,10 +22,10 @@ child_order_hints:
   - is-01m0wer5thdeaa90gg0mapcwbw
   - is-01m0wex08arey717p4dfe7v7zp
 created_at: 2026-08-24T03:04:33.283Z
-updated_at: 2026-08-25T12:39:09.833Z
+updated_at: 2026-08-25T13:47:58.379Z
 ---
 Carry H-035/H-037 as a distinct paper-mathematics lane. Reproduce the 2025-26 O(x^(3/5)) primitives and error balances, test finite public-parent transfer with independently verified geometry, and retain synchronization/boundary-overhead failures. Finite improvements do not decide the exponent.
 
 ## Notes
 
-Session-011 order 13 checkpoint landed: H-037 reproduces Bui Proposition 7's balance, including beta=nu=3/4 and epsilon=0 giving m=x^(4/5) and x^(3/5). D-302/D-303 correct two cleaned-transcription errors. First finite H-035 blocker is the absent independently verified parent corpus above n=100, followed by effective constants, finite x0, integer synchronization, exact counts and boundary accounting. D-304/think-486e contains McClenagan PDF p.7's contradictory inequality pending independent geometry; make no finite or exponent inference from it.
+Session-011 reproduced Bui Proposition 7's beta=nu=3/4 balance and identified the finite-transfer blockers. Session-012 then repaired McClenagan Section 3's local sign step two independent ways: coordinates give d>d1+d2>DB=1, and equations (2.2), (2.5), and (3.2) give 0<theta'<theta on the principal acute branch. D-304 is fixed locally and D-310 records the source's missing branch qualification. Remaining: no full McClenagan theorem audit, no independently verified parent corpus above n=100, no effective constants/finite x0, and no integer synchronization, exact-count, or boundary-overhead discharge for H-035.
