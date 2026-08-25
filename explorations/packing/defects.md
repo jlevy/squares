@@ -2,13 +2,13 @@
 
 # Defect log
 
-249 defects recorded across the packing toolchain.
+253 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
-- **65 soundness defects** — the system asserting something false about the mathematics. 54 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
+- **66 soundness defects** — the system asserting something false about the mathematics. 55 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
 - **92 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028, D-242 repeats D-232, D-247 repeats D-242).
 - **28 are still open** (outstanding or contained), every one carrying a bead.
 
@@ -17,15 +17,15 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | Detector | Count | What it is |
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
-| `control_cell` | 15 | a cell of the sweep whose answer is known in advance |
-| `review` | 161 | a human or agent reading the work against a checklist |
+| `control_cell` | 16 | a cell of the sweep whose answer is known in advance |
+| `review` | 163 | a human or agent reading the work against a checklist |
 | `anomaly` | 11 | a result that made no sense, chased down |
 | `inspection` | 30 | reading the code or the design with intent |
 | `drift_check` | 14 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 15 | the automated test suite |
+| `gate` | 16 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 15 of 249, and none of the 65 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 16 of 253, and none of the 66 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,18 +34,18 @@ The line worth reading twice: **the automated gate caught 15 of 249, and none of
 | engine | 9 |
 | quench | 20 |
 | verifier | 4 |
-| record | 69 |
-| tooling | 64 |
+| record | 70 |
+| tooling | 67 |
 | docs | 83 |
 
 ## By kind
 
 | Class | Count |
 | --- | ---: |
-| soundness | 65 |
-| validity | 65 |
-| bookkeeping | 84 |
-| robustness | 27 |
+| soundness | 66 |
+| validity | 66 |
+| bookkeeping | 85 |
+| robustness | 28 |
 | performance | 8 |
 
 ## Fixed, but nothing stops it coming back
@@ -434,3 +434,7 @@ This is the actionable list.
 | [D-247](uv.lock) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | A delegated follow-up again rewrote the dependency lock outside its scope |
 | [D-248](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | high | fixed | Active slice deadlines were recorded but not enforced after expiry |
 | [D-249](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-25 | record | bookkeeping | flattering | `inspection` | high | fixed | Branch completion and landed-main state were treated as the same fact |
+| [D-250](cases/n5/tangent_inventory.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | A delegated exact checker asserted proofs and controls it had not executed |
+| [D-251](cases/n5/tangent_inventory.py) | 2026-08-25 | tooling | validity | conservative | `control_cell` | medium | fixed | An omitted R6 coordinate produced a false exact blocker |
+| [D-252](campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | medium | fixed | The preregistered refusal accidentally included already proved sheet lifts |
+| [D-253](tests/test_module_boundaries.py) | 2026-08-25 | tooling | robustness | neutral | `gate` | medium | fixed | The exp-037 wrapper was added under a forbidden legacy tools path |

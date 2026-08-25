@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 249
+count: 253
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -6393,3 +6393,111 @@ defects:
     and the corrected terminal or open state of each previously ambiguous bead
   bead: think-k68v
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+- id: D-250
+  title: A delegated exact checker asserted proofs and controls it had not executed
+  date: '2026-08-25'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated prototype, before any retained target run
+  severity: high
+  status: fixed
+  what: >-
+    The first exp-037 prototype hard-coded owner-branch equality and several controls as
+    true, while its positive certificate was prose rather than checked coefficients and
+    its V-representation contained names rather than physical vectors.
+  consequence: >-
+    Generation and replay could agree on a complete first-order inventory without
+    proving the frozen mathematical criterion; deterministic self-reproduction would
+    have disguised missing evidence as confirmation.
+  fix: >-
+    Replace every declaration with exact left-kernel ranks and identities, physical 15D
+    lineality, sheet, and transverse vectors, all-row residual and active-rank checks,
+    source regeneration, face derivation, survivor exhaustion, and executable controls.
+  regression: >-
+    Exp-037 now rejects missing or duplicated branches and rays, both directions of a
+    sheet/transverse swap, nonlinear scope overclaims, and three non-tautological toy
+    cones while exact generation and replay rebuild all source evidence
+  bead: think-7z0d
+  recorded_in: cases/n5/tangent_inventory.py
+- id: D-251
+  title: An omitted R6 coordinate produced a false exact blocker
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: control_cell
+  latent_for: one delegated terminal receipt
+  severity: medium
+  status: fixed
+  what: >-
+    A delegated diagnostic constructed R6 without its `dx4 = -1/2` coordinate, observed
+    negative exact contact residuals, and reported a hard inconsistency between the
+    proposed vector and the source matrices.
+  consequence: >-
+    Accepting the blocker would have abandoned a correct finite inventory and hidden a
+    genuine feasible first-order class behind a measurement bug.
+  fix: >-
+    Replay the complete vector directly through the source row builder, correct the
+    constructor, and require every retained physical generator to have its exact named
+    positive-slack support in both owner branches at all three strata.
+  regression: >-
+    R6 is now rebuilt with all four nonzero coordinates and must open exactly the two
+    square-1 upper-x slacks in each of the six matrices
+  bead: think-j3wd
+  recorded_in: cases/n5/tangent_inventory.py
+- id: D-252
+  title: The preregistered refusal accidentally included already proved sheet lifts
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: one preregistration draft, before any retained target run
+  severity: medium
+  status: fixed
+  what: >-
+    Exp-037 originally said that every nonlinear lift remains unresolved and described
+    the sheet as occupying two lineality dimensions without restricting that statement
+    to the interior stratum. Exp-034 already proves nonlinear sheet lifts, while the
+    endpoint sheet is a pointed two-ray cone rather than lineality.
+  consequence: >-
+    The round would have understated its predecessor evidence and blurred the exact
+    quotient used for endpoint ray and face counts.
+  fix: >-
+    Disclose the pre-run wording correction, narrow the refusal to transverse or mixed
+    directions, distinguish interior sheet lineality from endpoint sheet rays, and
+    state both pointed-quotient face vectors with their counting convention.
+  regression: >-
+    Exp-037 binds exp-034 exactly, tests physical sheet vectors in every matrix, and
+    rejects both directions of a sheet/transverse classification swap
+  bead: think-w2ii
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
+- id: D-253
+  title: The exp-037 wrapper was added under a forbidden legacy tools path
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: gate
+  latent_for: one uncommitted integration prototype, before any retained target run
+  severity: medium
+  status: fixed
+  what: >-
+    The exp-037 implementation added a thin Python wrapper under
+    explorations/packing/tools even though the engineering cleanup moved retained
+    case-specific entry points into importable case modules and forbids Python in that
+    legacy directory.
+  consequence: >-
+    The fast gate failed its module-boundary test, the README inventory drifted, and the
+    preregistered command pointed at an entry point that could not land on the reviewed
+    base.
+  fix: >-
+    Remove the wrapper and invoke the existing cases.n5.tangent_inventory main function
+    with python -m from the experiment, session, and retained validation command.
+  regression: >-
+    tests/test_module_boundaries.py rejects any future Python implementation under
+    tools, while devtools.check_readme rejects a matching unrecorded layout change
+  bead: think-xe5t
+  recorded_in: tests/test_module_boundaries.py

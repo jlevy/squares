@@ -31,13 +31,13 @@ experiment:
     runs_per_condition: 1
     interleaved: false
     operator: openai-codex
-    entry_point: explorations/packing/tools/check_n5_tangent_inventory.py
+    entry_point: explorations/packing/cases/n5/tangent_inventory.py
     command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      tools/check_n5_tangent_inventory.py --record
+      -m cases.n5.tangent_inventory --record
       campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
       && timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      tools/check_n5_tangent_inventory.py --replay
+      -m cases.n5.tangent_inventory --replay
       campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
     budget: >-
       one 30-minute implementation and measurement slice; separate 30-second generation
@@ -49,7 +49,7 @@ experiment:
   results:
   - shape: determination
     question: >-
-      What is the complete branchwise first-order fixed-side cone at A, one interior
+      What is the complete branchwise fixed-side linearization cone at A, one interior
       point, and B after identifying the certified exp-034 sheet without treating
       exp-036's one obstructed orientation as a quotient symmetry?
     role: outcome
@@ -61,8 +61,9 @@ experiment:
       rebuild all six exact source matrices; certify their ranks, lineality, and complete
       positive left-kernel relations; prove that both owner branches have the same exact
       V-representation; identify the exp-034 sheet analytically; retain six transverse
-      generators and their sole relation and face vector; replay identically; reject all
-      ten controls; and leave -W and every nonlinear lift unresolved
+      generators, their sole relation, and both pointed-quotient face vectors; replay
+      identically; reject all ten controls; and leave -W and every transverse or mixed
+      nonlinear lift unresolved
     reason: >-
       The confirmatory analytic criterion and its refusal boundary are frozen after an
       explicitly disclosed active-set pilot and before target implementation or replay.
@@ -75,6 +76,13 @@ eight pointed quotient rays, each interior branch has six, and the two owner-axi
 branches have the same candidate V-representation.
 The pilot fixed the proposed counts, so this round is confirmatory and uses a different,
 analytic completeness certificate.
+
+The original preregistration sentence said that “every nonlinear lift” remains
+unresolved. That was too broad because exp-034 already supplies the declared nonlinear
+sheet lifts.
+Before any retained target run, the scope was corrected to “every transverse
+or mixed-direction nonlinear lift.”
+The acceptance counts and mathematical threshold did not change.
 
 Let `A` be one retained active-row matrix and `z = A v` its nonnegative slack vector.
 Acceptance requires exact positive left-kernel certificates that force these nine rows
@@ -105,8 +113,15 @@ The exp-034 sheet is an independent analytic oracle.
 At the interior its tangent space is spanned by `dx0 = dy0 = 1` and `dtheta0 = 1`. At A
 its one-sided rays are `(dx0,dy0,dtheta0) = (1/2,1/2,+1)` and `(1/2,1/2,-1)`; at B their
 first two coordinates are `(-1/2,-1/2)`. Acceptance requires eight endpoint quotient
-rays—two sheet and six transverse—and six interior transverse quotient rays, with the
-sheet occupying two lineality dimensions.
+rays—two sheet and six transverse—and six interior transverse quotient rays.
+At the interior, the sheet occupies two of the three lineality dimensions.
+At each endpoint, only `W` is lineality and the sheet is the pointed cone on its two
+one-sided rays; the slide direction is their positive sum, not a quotient symmetry.
+
+The checker must derive the pointed transverse quotient face vector `(1,6,13,13,6,1)`
+and the pointed endpoint quotient face vector `(1,8,26,45,45,26,8,1)`. Entry `k` counts
+`k`-dimensional faces of the pointed quotient, including its apex and whole cone and
+excluding the empty face.
 
 The ten controls require a known rigid cone to have no pointed ray, a known orthant to
 have its declared rays, and a cone with lineality to separate its kernel and pointed
@@ -115,11 +130,11 @@ transverse generator, either direction of a sheet/transverse label swap, a claim
 exp-036 covers `-W`, and a claim that any transverse lift has already been continued
 nonlinearly.
 
-An accepted result would be a complete first-order generator and face inventory only.
-Exp-036 excludes the displayed `+W` orientation; it does not exclude `-W`, all of the
-linearized lineality, or a direction `R_i + lambda W + s` with sheet motion `s`.
-Extreme-ray checks also do not classify face interiors of the true Bouligand cone.
-This round therefore cannot establish terminal or stationary membership, local
+An accepted result would be a complete branchwise linearization-cone generator and face
+inventory only. Exp-036 excludes the displayed `+W` orientation; it does not exclude
+`-W`, all of the linearized lineality, or a direction `R_i + lambda W + s` with sheet
+motion `s`. Extreme-ray checks also do not classify face interiors of the true Bouligand
+cone. This round therefore cannot establish terminal or stationary membership, local
 isolation, component identity, basin mass, census completeness, or unequal-side
 clearance.
 
