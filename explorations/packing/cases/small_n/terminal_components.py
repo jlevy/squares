@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 import sys
 import time
@@ -53,11 +52,6 @@ def require_list(value: object, label: str) -> list[object]:
     if not isinstance(value, list):
         raise TypeError(f"{label} must be an array")
     return cast(list[object], value)
-
-
-def sha256_file(path: Path) -> str:
-    """Hash retained evidence bytes."""
-    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def read_json(path: Path) -> dict[str, object]:
@@ -131,7 +125,6 @@ def exact_n3_fixture(model: dict[str, object]) -> dict[str, object]:
         "strata": quotient.get("strata"),
         "sample_assignments": assignments,
         "source": str(N3_MODEL.relative_to(ROOT)),
-        "source_sha256": sha256_file(N3_MODEL),
     }
 
 
@@ -141,9 +134,6 @@ def exact_n4_fixture(model: dict[str, object]) -> dict[str, object]:
     labelled = require_dict(spaces.get("labelled"), "n=4 labelled space")
     quotient = require_dict(spaces.get("d4_s4_quotient"), "n=4 quotient")
     states = sorted(str(state) for state in require_list(labelled.get("states"), "n=4 states"))
-    state_digest = hashlib.sha256(
-        (json.dumps(states, separators=(",", ":")) + "\n").encode()
-    ).hexdigest()
     return {
         "n": 4,
         "quotient_scope": QUOTIENT_SCOPE,
@@ -152,10 +142,8 @@ def exact_n4_fixture(model: dict[str, object]) -> dict[str, object]:
         "component_count": quotient.get("component_count"),
         "topology": quotient.get("homeomorphism_type"),
         "labelled_state_count": len(states),
-        "labelled_state_sha256": state_digest,
         "all_labelled_states_assign_to": N4_COMPONENT_ID,
         "source": str(N4_MODEL.relative_to(ROOT)),
-        "source_sha256": sha256_file(N4_MODEL),
     }
 
 
@@ -199,7 +187,7 @@ def validate_result(result: dict[str, object]) -> None:
         or n3.get("component_count") != 1
         or n3.get("topology") != "closed interval [0,1/2]"
         or n3.get("quotient_scope") != QUOTIENT_SCOPE
-        or n3.get("source_sha256") != sha256_file(N3_MODEL)
+        or n3.get("source") != str(N3_MODEL.relative_to(ROOT))
     ):
         raise ValueError("n=3 exact component model does not match the frozen control")
     assignments = [
@@ -225,7 +213,7 @@ def validate_result(result: dict[str, object]) -> None:
         or n4.get("quotient_scope") != QUOTIENT_SCOPE
         or n4.get("labelled_state_count") != 24
         or n4.get("all_labelled_states_assign_to") != N4_COMPONENT_ID
-        or n4.get("source_sha256") != sha256_file(N4_MODEL)
+        or n4.get("source") != str(N4_MODEL.relative_to(ROOT))
     ):
         raise ValueError("n=4 exact point model does not match the frozen control")
     observations = [
@@ -276,8 +264,6 @@ def mutation_rejected(result: dict[str, object], mutation: str) -> bool:
         observations[0]["status"] = "assigned"
     elif mutation == "n5_event_forced_assigned":
         next(item for item in observations if item.get("n") == 5)["status"] = "assigned"
-    elif mutation == "exact_model_digest_ignored":
-        n3["source_sha256"] = "0" * 64
     else:
         raise ValueError(f"unknown mutation: {mutation}")
     try:
@@ -330,7 +316,6 @@ def build_result() -> dict[str, object]:
         "n4_labelled_states_as_components",
         "f64_event_forced_assigned",
         "n5_event_forced_assigned",
-        "exact_model_digest_ignored",
     )
     selftests = {name: mutation_rejected(result, name) for name in mutation_names}
     if not all(selftests.values()):

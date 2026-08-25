@@ -66,7 +66,7 @@ session:
       an exact strict escape, and reconstructed the complete repaired face routing.
     evidence: [primary PDF page 9 vector paths, exact radical witness, exact face and edge inventory]
     files: []
-    checks: [source hashes, K4 orbit, strict open-box margins, Lemma 4 sign filter, planar cover incidence]
+    checks: [retained source paths, K4 orbit, strict open-box margins, Lemma 4 sign filter, planar cover incidence]
     uncertainty: The source-distinct repair has not undergone external peer review.
     elapsed_seconds: null
     elapsed_quality: unavailable

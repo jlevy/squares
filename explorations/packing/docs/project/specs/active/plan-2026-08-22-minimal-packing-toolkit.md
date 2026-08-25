@@ -289,7 +289,7 @@ sqpack.verify(pk, scalar="f64", tol=1e-9)  # fast and explicitly unsound
 ```python
 run = sqpack.search(n=12, seed=42, budget=...)  # deterministic in seed
 run.basins  # each with key, side, verdict
-sqpack.search(n=12, seed=42, workers=32).digest == run.digest  # must hold
+sqpack.search(n=12, seed=42, workers=32).basins == run.basins  # must hold
 ```
 
 The Python `sqpack.verify_packing(..., sign=...)` signature stays as-is so
@@ -380,7 +380,8 @@ It is mostly *running* the previous phases.
 - [ ] Write results back into the frontier corpus and the research documents.
 
 **Done when:** the atlas exists for `n ≤ 10` with discovery curves attached, H-12 has a
-verdict, and the same seed reproduces the same basin digest on 1 worker and on 32.
+verdict, and the same seed reproduces the same complete basin records on 1 worker and on
+32\.
 
 ### Phase 4: Strategy proposers
 
@@ -497,9 +498,9 @@ verifier rejects any overlap while a float verifier with any tolerance has a bli
 Rust must reproduce both halves, including the float verifier’s *failure*: a fast path
 that accidentally became sound would mean the test is not testing what it claims.
 
-**Determinism.** Same seed, 1 worker versus 32, bit-identical basin digest.
-Asserted, not assumed — this is the property that makes E4 publishable and it degrades
-silently.
+**Determinism.** Same seed, 1 worker versus 32, with bit-identical complete ordered
+outputs. Asserted, not assumed — this is the property that makes E4 publishable and it
+degrades silently.
 
 **Certificate round-trip.** Serialize, re-load, and re-check a certificate without the
 original packing object or the search that produced it.

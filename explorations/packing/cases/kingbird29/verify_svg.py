@@ -14,7 +14,6 @@ declared tolerance far below the separation between its angle classes.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
 import time
@@ -39,11 +38,7 @@ ZERO_TOLERANCE = mp.mpf("1e-80")
 ANGLE_MATCH_TOLERANCE_DEGREES = mp.mpf("1e-70")
 ANGLE_INTERVAL_RADIUS_DEGREES = mp.mpf("1e-90")
 
-# The upstream response retrieved on 2026-08-24 used CRLF and no terminal newline.
-# The checked-in mirror is text-normalised to LF, so both identities are retained.
 UPSTREAM_URL = "https://kingbird.myphotos.cc/packing/square-29.svg"
-UPSTREAM_SHA256 = "30c725b27e1b90ff0c9c238fb8923c3da6ce26e046cdd46d5c33a485bbec821c"
-NORMALISED_SHA256 = "d25d36f87a75066b13fb9f88c67b9feb2d99eaa6e9a310295dcbf3591b6b3726"
 
 
 def identity():
@@ -493,14 +488,6 @@ def build_result(source: Path) -> dict:
     started = time.monotonic()
     mp.mp.dps = DECIMAL_DIGITS
     raw, entities, side, squares = materialise_svg(source)
-    source_sha256 = hashlib.sha256(raw).hexdigest()
-    if (
-        source.name == "kingbird-square-29-provenance.svg"
-        and source_sha256 != NORMALISED_SHA256
-    ):
-        raise ValueError(
-            f"retained n=29 source hash changed: {source_sha256} != {NORMALISED_SHA256}"
-        )
     selftests = run_selftests(squares, side)
     report = verify_packing(squares, side, sign=sign)
     if not report.valid:
@@ -521,9 +508,7 @@ def build_result(source: Path) -> dict:
             "path": source.as_posix(),
             "url": UPSTREAM_URL,
             "retrieved": "2026-08-24",
-            "upstream_sha256": UPSTREAM_SHA256,
             "normalisation": "CRLF converted to LF and one terminal newline added",
-            "retained_sha256": source_sha256,
             "retained_bytes": len(raw),
         },
         "precision": {

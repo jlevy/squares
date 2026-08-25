@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 import math
 import tempfile
@@ -34,18 +33,6 @@ PDF = ROOT / "resources/papers/stromquist-2003-packing-10-or-11-unit-squares.pdf
 RAW_SOURCE = ROOT / ("resources/papers/stromquist-2003-packing-10-or-11-unit-squares.raw.md")
 
 SCHEMA_VERSION = 1
-PDF_SHA256 = "146ac14a015910a95d0c25bf986f6073bcccd21a29ee754a45dcc0d4224d5e0b"
-RAW_SOURCE_SHA256 = "5808f3152c2d3a409c54d1f6ebb2636b7500eb22d489ccf9908435007d8a1d6b"
-PAGE_9_SVG_SHA256 = "95c80e60a018a19c01ebe6a681acfc5a1833c0beb5b433ce200a55df58127d82"
-PAGE_9_TOPOLOGY_PATH_SHA256 = "2aa5004d2e86b1a7be3d9c6463880b8a797e19b8a0999489420c6889357f4839"
-FIGURE13_POINT_SHA256 = "7ff0aaf32d5ea83ffd95c9b2c3cc1dcc0257e144bd75bbc8233296cdef4db8a1"
-PRINTED_FIGURE14_POINT_SHA256 = (
-    "62868418be08db7c8bf8f21c7cb6d66ac500b1d7b7f0ce593a7703b8e2c4ea0b"
-)
-REPAIRED_FIGURE14_POINT_SHA256 = (
-    "fbe5ac7694a2f1a12a91ab9c2585e19f4b563c1b0e11520a51ce128dac1f24e3"
-)
-FIGURE14_TOPOLOGY_SHA256 = "c6b2c3d491b7b13f65e65f0d133d6eaeb3b493ba43676840341a57f96a149631"
 SQRT_BOUND_SCALE = 10**24
 
 
@@ -199,21 +186,8 @@ def fraction_text(value: Fraction) -> str:
     )
 
 
-def sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def canonical_digest(value: object) -> str:
-    payload = json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
-    return hashlib.sha256(payload).hexdigest()
-
-
 def point_record(value: Point) -> list[str]:
     return [coordinate.text() for coordinate in value]
-
-
-def points_digest(points: dict[str, Point]) -> str:
-    return canonical_digest({name: point_record(points[name]) for name in sorted(points)})
 
 
 def add_points(left: Point, right: Point) -> Point:
@@ -1008,9 +982,6 @@ def figure13_certificate() -> dict[str, object]:
         for face in corner_rectangles
     ):
         raise ValueError("a Figure 13 Lemma 1 corner rectangle exceeds unit side")
-    point_digest = points_digest(source_points)
-    if point_digest != FIGURE13_POINT_SHA256:
-        raise ValueError("Figure 13 exact point manifest digest drifted")
     triangle_mesh_summary: dict[str, object] = {
         "all_edges_at_most_one": True,
     }
@@ -1018,7 +989,6 @@ def figure13_certificate() -> dict[str, object]:
         "point_manifest": {
             name: point_record(source_points[name]) for name in sorted(source_points)
         },
-        "point_digest": point_digest,
         "source_seed_names": ["P0", "P1", "M0", "M1"],
         "symmetry": validate_k4_actions(K4_ACTIONS),
         "quarter_turn_counterexample": {
@@ -1462,11 +1432,6 @@ def figure14_certificate(g_x: Fraction) -> dict[str, object]:
         FIGURE14_BOUNDARY,
         expected_faces=13,
     )
-    topology_digest = canonical_digest(
-        {"boundary": FIGURE14_BOUNDARY, "faces": FIGURE14_TRIANGLES}
-    )
-    if topology_digest != FIGURE14_TOPOLOGY_SHA256:
-        raise ValueError("Figure 14 vector-path topology digest drifted")
     full_tiling = validate_square_tiling(points, outer + FIGURE14_TRIANGLES, expected_faces=26)
     if len(outer) != 13:
         raise ValueError("Figure 14 outer face inventory drifted")
@@ -1486,18 +1451,12 @@ def figure14_certificate(g_x: Fraction) -> dict[str, object]:
         validate_lemma4_placement(placement, points)
         for placement in figure14_lemma4_placements(g_x)
     ]
-    point_digest = points_digest(source_points)
-    expected_point_digest = {
-        Fraction(4, 5): PRINTED_FIGURE14_POINT_SHA256,
-        Fraction(79, 100): REPAIRED_FIGURE14_POINT_SHA256,
-    }.get(g_x)
-    if expected_point_digest is None or point_digest != expected_point_digest:
-        raise ValueError("Figure 14 exact point manifest digest drifted")
+    if g_x not in {Fraction(4, 5), Fraction(79, 100)}:
+        raise ValueError("Figure 14 uses an undeclared G coordinate")
     return {
         "point_manifest": {
             name: point_record(source_points[name]) for name in sorted(source_points)
         },
-        "point_digest": point_digest,
         "outer_cover": {
             "lemma1_corner_rectangles": [list(face) for face in corner_faces],
             "lemma3_bottom_rectangle": lemma3,
@@ -1512,7 +1471,6 @@ def figure14_certificate(g_x: Fraction) -> dict[str, object]:
             },
         },
         "central_mesh": mesh,
-        "topology_digest": topology_digest,
         "full_tiling": full_tiling,
         "boundary_closure": lemma2_boundary_closure(mesh),
         "unavoidable": True,
@@ -1539,44 +1497,26 @@ def source_distinct_delta() -> dict[str, object]:
         }
     ]:
         raise ValueError("H-041 is not the preregistered one-coordinate source delta")
-    if points_digest(printed) != PRINTED_FIGURE14_POINT_SHA256:
-        raise ValueError("printed Figure 14 point digest drifted")
-    if points_digest(repaired) != REPAIRED_FIGURE14_POINT_SHA256:
-        raise ValueError("repaired Figure 14 point digest drifted")
     return {
-        "printed_point_digest": points_digest(printed),
-        "repaired_point_digest": points_digest(repaired),
         "changed_coordinates": changes,
         "source_attribution": "repair proposed after H-010 falsification; not Stromquist's set",
     }
 
 
 def source_binding() -> dict[str, object]:
-    pdf_hash = sha256(PDF)
-    raw_hash = sha256(RAW_SOURCE)
-    if pdf_hash != PDF_SHA256:
-        raise ValueError(f"Stromquist PDF hash drifted: {pdf_hash}")
-    if raw_hash != RAW_SOURCE_SHA256:
-        raise ValueError(f"Stromquist raw-source hash drifted: {raw_hash}")
-    raw_text = RAW_SOURCE.read_text()
+    raw_text = RAW_SOURCE.read_text(encoding="utf-8")
     if "G = (.8, 1.85)" not in raw_text:
         raise ValueError("bound source no longer contains the printed Figure 14 G coordinate")
     return {
         "paper": "Walter Stromquist, Packing 10 or 11 Unit Squares in a Square (2003)",
         "pdf": str(PDF.relative_to(ROOT)),
-        "pdf_sha256": pdf_hash,
         "raw_source": str(RAW_SOURCE.relative_to(ROOT)),
-        "raw_source_sha256": raw_hash,
         "figure_page": 9,
         "independent_vector_extraction": {
-            "pdftocairo_page9_svg_sha256": PAGE_9_SVG_SHA256,
-            "topology_path_sha256": PAGE_9_TOPOLOGY_PATH_SHA256,
-            "role": "provenance attestation only; exact formulas and topology decide",
-            "runtime_verified": False,
-            "decisive": False,
+            "method": "pdftocairo page-9 SVG plus direct vector-path inspection",
+            "role": "derivation aid only; exact formulas and topology decide",
         },
         "printed_G_token_present": True,
-        "decisive_runtime_hashes_verified": ["pdf_sha256", "raw_source_sha256"],
     }
 
 
@@ -1639,8 +1579,9 @@ def validate_record_invariants(record: dict[str, object]) -> None:
     if not isinstance(binding, dict):
         raise TypeError("record source binding is malformed")
     if (
-        binding.get("pdf_sha256") != PDF_SHA256
-        or binding.get("raw_source_sha256") != RAW_SOURCE_SHA256
+        binding.get("pdf") != str(PDF.relative_to(ROOT))
+        or binding.get("raw_source") != str(RAW_SOURCE.relative_to(ROOT))
+        or binding.get("printed_G_token_present") is not True
     ):
         raise ValueError("record source binding is stale")
     nodes = record.get("five_node_chain")
@@ -1692,7 +1633,7 @@ def run_selftests(core_record: dict[str, object]) -> dict[str, bool]:
     stale_binding = stale["source_binding"]
     if not isinstance(stale_binding, dict):
         raise TypeError("internal stale-record fixture is malformed")
-    stale_binding["pdf_sha256"] = "0" * 64
+    stale_binding["pdf"] = "resources/papers/missing-stromquist-source.pdf"
     duplicate_record = copy.deepcopy(core_record)
     duplicate_nodes = duplicate_record["five_node_chain"]
     if not isinstance(duplicate_nodes, list):
@@ -1758,7 +1699,7 @@ def run_selftests(core_record: dict[str, object]) -> dict[str, bool]:
         "duplicate_record_node_rejected": _raises_expected_error(
             lambda: validate_record_invariants(duplicate_record)
         ),
-        "stale_record_source_rejected": _raises_expected_error(
+        "source_path_drift_rejected": _raises_expected_error(
             lambda: validate_record_invariants(stale)
         ),
     }

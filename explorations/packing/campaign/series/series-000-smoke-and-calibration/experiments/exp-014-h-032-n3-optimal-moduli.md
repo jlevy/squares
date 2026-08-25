@@ -54,7 +54,7 @@ experiment:
     checked_by: >-
       tools/check_small_n_moduli.py: exact orientation forcing, 64 separation
       disjuncts, 24 consistent one-cells, independent exact packing samples, complete
-      quotient/stabilizer tables, source-hash comparisons, nine mutation controls, and
+      quotient/stabilizer tables, scoped literature comparisons, nine mutation controls, and
       byte-identical semantic and SVG replay
   verdict:
     decision: accepted
@@ -120,16 +120,16 @@ Four quotient samples have distinct geometric keys; the three non-corner samples
 one contact certificate and the corner sample differs.
 The labelled counts agree with Alpert et al.
 (2023), and the unlabelled circle agrees with the applicable homotopy statement of
-Alvarado-Garduño and González (2025). Their source bytes and scopes are hash-bound in
-the result. Plakhta (2021) remains unavailable, so this round makes no novelty claim.
+Alvarado-Garduño and González (2025). The result names the retained source paths and
+keeps their scopes separate.
+Plakhta (2021) remains unavailable, so this round makes no novelty claim.
 
 Generation took 0.32 wall seconds and a separate full rebuild plus byte comparison took
 0.31 seconds. All nine known-answer mutations passed.
 The deterministic map is
 [`n-003-optimal-moduli.svg`](../../../../atlas/n-003-optimal-moduli.svg).
 The retained result is
-[`exp-014-h-032-n3-optimal-moduli.json`](../results/exp-014-h-032-n3-optimal-moduli.json)
-(`sha256:bc126e5bb13d4788a598c5145b754687cf2d2734344a37705e6d84c4373626bf`).
+[`exp-014-h-032-n3-optimal-moduli.json`](../results/exp-014-h-032-n3-optimal-moduli.json).
 
 This answers only the `n = 3` cell of H-032. It does not classify larger containers or
 `n >= 5`.

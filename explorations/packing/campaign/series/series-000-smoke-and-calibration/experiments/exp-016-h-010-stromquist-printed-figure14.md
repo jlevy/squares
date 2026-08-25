@@ -51,9 +51,9 @@ experiment:
     role: outcome
     outcome: criterion_missed
     checked_by: >-
-      tools/check_stromquist_theorem2.py: exact source hashes and point tuples, a strict
+      tools/check_stromquist_theorem2.py: retained source paths and exact point tuples, a strict
       algebraic Figure 14 escape, independent containment and avoidance expressions,
-      corrected Lemma 4 root filtering, eleven mutation controls, and deterministic
+      corrected Lemma 4 root filtering, ten mutation controls, and deterministic
       complete-record replay
   verdict:
     decision: rejected
@@ -90,13 +90,11 @@ The Figure 13 escape in the record is constructive evidence, not a universal
 localization certificate; node four already refutes the registered conjunction.
 
 Generation took `0.33` wall seconds and complete deterministic replay took `0.22`
-seconds. All eleven mutations passed.
+seconds. All ten mutations passed.
 The retained result is
-[`exp-016-h-010-stromquist-printed-figure14.json`](../results/exp-016-h-010-stromquist-printed-figure14.json)
-(`sha256:e43d965128a178263667b404772b1e56cb11b801278d2ade529235a023043785`). The replay
-summary is
-[`exp-016-h-010-stromquist-printed-figure14-replay.json`](../results/exp-016-h-010-stromquist-printed-figure14-replay.json)
-(`sha256:601874851bce92c8506c8b92737c84e0468ce8f98785278bed987c126d45ce6e`).
+[`exp-016-h-010-stromquist-printed-figure14.json`](../results/exp-016-h-010-stromquist-printed-figure14.json).
+The replay summary is
+[`exp-016-h-010-stromquist-printed-figure14-replay.json`](../results/exp-016-h-010-stromquist-printed-figure14-replay.json).
 
 This result invalidates Stromquist’s published proof as printed.
 It does **not** refute the lower bound `s(11) >= 2 + 4/sqrt(5)`: a nearby point-set

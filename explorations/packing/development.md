@@ -208,6 +208,18 @@ Include boundary values and failure paths.
 A bug fix gets a test that fails for the old defect.
 A new guard gets a negative control showing that the named corruption reaches it.
 
+## Hashes and Repository-Owned Artifacts
+
+Git is the integrity boundary for repository-owned sources, golden files, and retained
+results. Compare their complete content or regenerate and compare their semantic model;
+do not add SHA-256 fields or checksum controls for files committed beside the checker.
+
+A cryptographic checksum is justified only when it is compared with an independently
+supplied value across a real trust boundary.
+The nearby code or documentation must name that boundary and the failure the comparison
+detects. Compact content identities used for deduplication, append-only event ids, or
+cache correctness are not integrity claims and must name that separate function.
+
 Pytest collection is explicit in `pyproject.toml`; `tests/conftest.py` fails if the
 configured test directory disappears.
 Domain programs are named by what they check, not with `_test.py`, so pytest cannot

@@ -35,12 +35,12 @@ inputs.
 ## `schedule_invariance.rs` — is a counter-based stream schedule-independent?
 
 Draws 64 tiles × 32 values from `fs_rand`’s Philox stream in sequential, reversed, and
-worker-interleaved order, and folds each into a hash.
+worker-interleaved order, sorts them by logical tile, and compares every generated word.
 
-Result: all three hashes identical; `Stream::at(index)` matches the sequential prefix;
-seeking to index 2^63 costs the same as index 0. This is the property a parallel packing
-search needs — the answer is a function of `(seed, kernel, tile, index)`, never of which
-thread ran when.
+Result: all three complete outputs are identical; `Stream::at(index)` matches the
+sequential prefix; seeking to index 2^63 costs the same as index 0. This is the property
+a parallel packing search needs — the answer is a function of
+`(seed, kernel, tile, index)`, never of which thread ran when.
 
 ## Licence
 

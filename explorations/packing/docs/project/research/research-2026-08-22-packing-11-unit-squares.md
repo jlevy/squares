@@ -1833,8 +1833,8 @@ Every item in the proof lane above exists because of this.
   Math. Hungar.* **35** 281–290, and confirm what it proves and how; it holds published
   priority for three values and no summary of this field describes its method.
 - [x] ~~Obtain Stromquist’s 1984 Wagner Associates memoranda I–III~~ — **resolved**: all
-  three PDFs are linked from the author’s publication page and are archived with hashes,
-  raw OCR, and page-checked reading aids.
+  three PDFs are linked from the author’s publication page and are retained with raw OCR
+  and page-checked reading aids; Git records changes to those repository-owned files.
   Memorandum III’s detailed proof is restricted to `0°/45°`; its p. 10 unrestricted
   `2 + (4/5)√5` statement is only an assertion and does not repair the printed 2003
   Figure 14 cover.

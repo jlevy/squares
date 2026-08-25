@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 import math
 import sys
@@ -103,10 +102,6 @@ def require_number(value: object, label: str) -> float:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise TypeError(f"{label} must be a number")
     return float(value)
-
-
-def sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def make_field() -> NumberField:
@@ -475,7 +470,6 @@ def build_result() -> dict[str, object]:
         "contract": "packing.squares:N5EqualSideFace/v1",
         "sources": {
             "golden": str(GOLDEN.relative_to(ROOT)),
-            "golden_sha256": sha256_file(GOLDEN),
             "recovery_regime": "golden census Random(1005), seeds 2 and 5, quench_bracket",
             "recovery_engine_commit": "9dbbd24",
         },
@@ -508,8 +502,6 @@ def build_result() -> dict[str, object]:
         "full_segment_feasible_by_convexity"
     ] = False
     wrong_action = source_alignment(data, use_quarter_turn=False)
-    wrong_digest = copy.deepcopy(result)
-    require_dict(wrong_digest["sources"], "wrong-digest sources")["golden_sha256"] = "0" * 64
     invalid_endpoint = copy.deepcopy(result)
     require_dict(
         require_dict(invalid_endpoint["exact_model"], "invalid model")["endpoint_a_validity"],
@@ -523,7 +515,6 @@ def build_result() -> dict[str, object]:
         "missing_path_certificate_is_rejected": False,
         "invalid_endpoint_is_rejected": False,
         "wrong_source_D4_action_is_rejected": wrong_action["matches"] is False,
-        "source_digest_tamper_is_rejected": False,
     }
     try:
         validate_result(shifted)
@@ -533,10 +524,6 @@ def build_result() -> dict[str, object]:
         validate_result(invalid_endpoint)
     except ValueError:
         selftests["invalid_endpoint_is_rejected"] = True
-    try:
-        require_same_result(wrong_digest, result)
-    except ValueError:
-        selftests["source_digest_tamper_is_rejected"] = True
     if not all(selftests.values()):
         raise ValueError(f"n=5 equal-side selftests failed: {selftests}")
     result["selftests"] = selftests

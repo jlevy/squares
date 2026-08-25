@@ -179,7 +179,6 @@
     "invalid_endpoint_is_rejected": true,
     "missing_path_certificate_is_rejected": true,
     "shared_contact_key_alone_is_not_the_certificate": true,
-    "source_digest_tamper_is_rejected": true,
     "wrong_source_D4_action_is_rejected": true
   },
   "source_alignment": {
@@ -206,7 +205,6 @@
   },
   "sources": {
     "golden": "golden/basin-maps.yaml",
-    "golden_sha256": "051841b61a33c1ccf1d799b2da839619407ff418019740227f662c8ff5d3eb44",
     "recovery_engine_commit": "9dbbd24",
     "recovery_regime": "golden census Random(1005), seeds 2 and 5, quench_bracket"
   }

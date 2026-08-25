@@ -235,12 +235,13 @@ checking surface.
 - Internal module and command paths: coordinated migration; no compatibility layer.
 - External Python consumers: none identified.
 - Server, plugin, database, and persisted client APIs: not applicable.
-- Campaign, atlas, event, and certificate formats: versioned and fail-fast; unchanged by
-  this work.
-- Source-bound exact records: the golden producer-label migration changed one source
-  digest, so the exp-033 through exp-036 chain was replayed in order and refreshed.
-  The four reviewed diffs contain only each record’s immediate source SHA-256;
-  mathematical payloads and self-tests are unchanged.
+- Campaign, atlas, event, and certificate formats are repository-owned and fail-fast.
+  Producers, retained records, and replay checks migrate atomically in this work; there
+  is no external persisted-client compatibility promise.
+- Exact-record dependencies are declared by path and replay their semantic predecessors
+  directly. Exp-033 through exp-036 were replayed in order after the golden producer
+  migration. Their determinations are unchanged; redundant source-checksum fields and
+  controls were removed because Git already owns internal artifact integrity.
 - Historical experiment prose: retained when the old filename is part of the historical
   record; active entry points and reproducibility commands use the new paths.
 

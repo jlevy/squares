@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 import sys
 import time
@@ -58,10 +57,6 @@ def require_list(value: object, label: str) -> list[object]:
     if not isinstance(value, list):
         raise TypeError(f"{label} must be a list")
     return value
-
-
-def sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def encode(value: FieldElement) -> list[str]:
@@ -281,7 +276,6 @@ def build_result() -> dict[str, object]:
         "contract": "packing.squares:N5AngleSheet/v1",
         "source": {
             "exp_033": str(EXP033.relative_to(ROOT)),
-            "exp_033_sha256": sha256_file(EXP033),
         },
         "sheet_certificate": uniform_sheet_certificate(field),
         "boundary_fixtures": fixtures,
@@ -305,23 +299,16 @@ def build_result() -> dict[str, object]:
     signed_error = exact_fixture(field, sign=-1, endpoint="signed-error")
     bad_dual = copy.deepcopy(result)
     require_dict(bad_dual["uniform_dual"], "bad dual")["uniform_over_sheet"] = False
-    bad_digest = copy.deepcopy(result)
-    require_dict(bad_digest["source"], "bad source")["exp_033_sha256"] = "0" * 64
     selftests = {
         "excessive_angle_is_rejected": too_wide["valid"] is False,
         "unshrunk_left_endpoint_is_rejected": unshrunk["valid"] is False,
         "signed_instead_of_absolute_support_is_rejected": signed_error["valid"] is False,
         "uniform_dual_drift_is_rejected": False,
-        "source_digest_tamper_is_rejected": False,
     }
     try:
         validate_result(bad_dual)
     except ValueError:
         selftests["uniform_dual_drift_is_rejected"] = True
-    try:
-        require_same_result(bad_digest, result)
-    except ValueError:
-        selftests["source_digest_tamper_is_rejected"] = True
     if not all(selftests.values()):
         raise ValueError(f"n=5 angle-sheet selftests failed: {selftests}")
     result["selftests"] = selftests

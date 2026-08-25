@@ -11,7 +11,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 import sys
 import time
@@ -66,10 +65,6 @@ def require_list(value: object, label: str) -> list[object]:
     if not isinstance(value, list):
         raise TypeError(f"{label} must be a list")
     return value
-
-
-def sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def encode(value: FieldElement) -> list[str]:
@@ -269,8 +264,6 @@ def validate_result(result: dict[str, object]) -> None:
     if result.get("schema_version") != SCHEMA_VERSION:
         raise ValueError("obstruction schema version drifted")
     source = require_dict(result.get("source"), "source")
-    if source.get("exp_035_sha256") != sha256_file(EXP035):
-        raise ValueError("exp-035 source digest is stale")
     if source.get("exp_035") != str(EXP035.relative_to(ROOT)):
         raise ValueError("exp-035 source path drifted")
 
@@ -324,7 +317,6 @@ def build_result() -> dict[str, object]:
         "contract": "packing.squares:N5SecondOrderObstruction/v1",
         "source": {
             "exp_035": str(EXP035.relative_to(ROOT)),
-            "exp_035_sha256": sha256_file(EXP035),
             "validated_strata": [item["name"] for item in source_strata],
             "validated_owner_branches": list(OWNER_BRANCHES),
             "field": "Q(sqrt(2)), sqrt(2) in (1,2)",
@@ -345,9 +337,6 @@ def build_result() -> dict[str, object]:
         },
     }
     validate_result(result)
-
-    def tamper_source(candidate: dict[str, object]) -> None:
-        require_dict(candidate["source"], "source")["exp_035_sha256"] = "0" * 64
 
     def tamper_owner4(candidate: dict[str, object]) -> None:
         constants = require_dict(
@@ -404,7 +393,6 @@ def build_result() -> dict[str, object]:
         return False
 
     selftests = {
-        "source_digest_tamper_is_rejected": mutation_rejected(result, tamper_source),
         "wrong_common_angle_direction_is_rejected": source_mutation_rejected(
             source_wrong_direction
         ),

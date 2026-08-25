@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import itertools
 import json
 import sys
@@ -102,10 +101,6 @@ def require_list(value: object, label: str) -> list[object]:
     if not isinstance(value, list):
         raise TypeError(f"{label} must be a list")
     return value
-
-
-def sha256_file(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def x(index: int) -> int:
@@ -465,13 +460,6 @@ def encode(value: FieldElement) -> list[str]:
     return [str(coefficient) for coefficient in value.coeffs]
 
 
-def matrix_digest(rows: tuple[LinearRow, ...]) -> str:
-    payload = [encode_row(item) for item in rows]
-    return hashlib.sha256(
-        json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
-    ).hexdigest()
-
-
 def encode_row(item: LinearRow) -> dict[str, object]:
     return {
         "label": item.label,
@@ -529,11 +517,10 @@ def build_stratum(field: NumberField, stratum: str) -> dict[str, object]:
                 "row_count": len(rows),
                 "exact_equality_rank": rank,
                 "equality_kernel_nullity": VARIABLE_COUNT - rank,
-                "matrix_sha256": matrix_digest(rows),
                 "inequalities": [encode_row(item) for item in rows],
             }
         )
-    if len({branch["matrix_sha256"] for branch in branches}) != 2:
+    if branches[0]["inequalities"] == branches[1]["inequalities"]:
         raise ValueError("the two owner-axis branches are not one-to-one")
     return {
         "name": stratum,
@@ -590,7 +577,7 @@ def validate_result(result: dict[str, object]) -> None:
         branches = require_list(record.get("branches"), "branches")
         if len(branches) != len(EXPECTED_CONTACT_BRANCHES):
             raise ValueError("a stratum does not retain both owner-axis branches")
-        matrix_digests: set[str] = set()
+        retained_matrices: list[list[object]] = []
         for expected_branch, branch_item in zip(
             EXPECTED_CONTACT_BRANCHES, branches, strict=True
         ):
@@ -623,14 +610,8 @@ def validate_result(result: dict[str, object]) -> None:
             expected_owner = expected_branch.split(":", maxsplit=1)[0]
             if any(f":{expected_owner}:" not in label for label in contact_3_4_labels):
                 raise ValueError("a tied support row belongs to the wrong owner axis")
-            retained_digest = branch.get("matrix_sha256")
-            calculated_digest = hashlib.sha256(
-                json.dumps(inequalities, sort_keys=True, separators=(",", ":")).encode()
-            ).hexdigest()
-            if retained_digest != calculated_digest:
-                raise ValueError("a retained branch matrix digest is stale")
-            matrix_digests.add(calculated_digest)
-        if len(matrix_digests) != 2:
+            retained_matrices.append(inequalities)
+        if retained_matrices[0] == retained_matrices[1]:
             raise ValueError("the two owner-axis matrices are not one-to-one")
         direction = require_dict(record.get("non_sheet_direction"), "direction")
         if (
@@ -658,7 +639,6 @@ def build_result() -> dict[str, object]:
         "contract": "packing.squares:N5TangentCones/v1",
         "source": {
             "exp_034": str(EXP034.relative_to(ROOT)),
-            "exp_034_sha256": sha256_file(EXP034),
             "field": "Q(sqrt(2)), sqrt(2) in (1,2)",
         },
         "active_inventory": geometry_inventory(field),
@@ -707,15 +687,10 @@ def build_result() -> dict[str, object]:
     retained_rows.pop()
     first_branch["tied_support_row_count"] = 1
     first_branch["row_count"] = len(retained_rows)
-    first_branch["matrix_sha256"] = hashlib.sha256(
-        json.dumps(retained_rows, sort_keys=True, separators=(",", ":")).encode()
-    ).hexdigest()
     false_continuation = copy.deepcopy(result)
     require_dict(false_continuation["nonlinear_continuation"], "continuation")["status"] = (
         "proved"
     )
-    tampered_source = copy.deepcopy(result)
-    require_dict(tampered_source["source"], "source")["exp_034_sha256"] = "0" * 64
     wrong = witness(field, "interior")
     wrong[theta(4)] = -field.one
     interior_centres = centres_for_stratum(field, "interior")
@@ -741,7 +716,6 @@ def build_result() -> dict[str, object]:
         "missing_tied_support_row_is_rejected": False,
         "stale_endpoint_contact_row_is_rejected": stale_a_row_rejected,
         "first_order_evidence_cannot_claim_continuation": False,
-        "source_digest_tamper_is_rejected": False,
         "wrong_angle_sign_violates_an_active_row": wrong_direction_rejected,
         "non_sheet_direction_has_diagonal_angle_motion": True,
     }
@@ -757,10 +731,6 @@ def build_result() -> dict[str, object]:
         validate_result(false_continuation)
     except ValueError:
         selftests["first_order_evidence_cannot_claim_continuation"] = True
-    try:
-        require_same_result(tampered_source, result)
-    except ValueError:
-        selftests["source_digest_tamper_is_rejected"] = True
     if not all(selftests.values()):
         raise ValueError(f"n=5 tangent-cone selftests failed: {selftests}")
     result["selftests"] = selftests

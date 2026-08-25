@@ -130,11 +130,9 @@ No novelty claim is made without a separate literature comparison.
 
 [`exp-013-h-026-trump-tangent.json`](../results/exp-013-h-026-trump-tangent.json)
 retains the active inventory, every branch mapping and certificate, the determination
-scope, and all known-answer controls
-(`sha256:b70fe9806c9d54efb6cde45c99e4a8c7ff179e4bfb03c81eaf68040c181cb8d6`).
+scope, and all known-answer controls.
 [`exp-013-h-026-trump-tangent-replay.json`](../results/exp-013-h-026-trump-tangent-replay.json)
-retains the separate replay summary
-(`sha256:d20b0fccab5487d66fda4b409829dcea837450b0704bb0da3a469ee18678ad68`).
+retains the separate replay summary.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

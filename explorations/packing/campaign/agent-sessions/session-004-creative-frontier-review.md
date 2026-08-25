@@ -114,8 +114,8 @@ session:
       Added the primary PDF, deterministic raw extraction, and archive index entry for
       Bašić and Slivková's direct piercing-number application.
     evidence:
-    - PDF SHA256 1b1d32e9e88710e27142bf600216bda34d1fa71b8191eaf87c35422908fb63c0.
-    - Raw extraction SHA256 5c2e912289b51e225082f10d05bb48c9305ff6f82e7bf495289b9f84666a7f13.
+    - Primary PDF retained at the recorded repository path.
+    - Deterministic raw extraction retained beside the PDF.
     files:
     - resources/papers/basic-slivkova-2018-optimal-piercing-square.pdf
     - resources/papers/basic-slivkova-2018-optimal-piercing-square.raw.md

@@ -12,7 +12,7 @@ from typing import TypedDict
 
 SOURCE_ID = "gobel10-svg-v1"
 SOURCE_URL = "https://kingbird.myphotos.cc/packing/square-10.svg"
-SOURCE_SHA256 = "445eb5ec3196637373958c2bdef6133e8af7df407a92838c32c88f286b21e169"
+SOURCE_FIXTURE = "cases/gobel10/packing.py"
 
 
 class Pose(TypedDict):

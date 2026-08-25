@@ -17,7 +17,6 @@ summary.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import itertools
 import json
 import sys
@@ -52,10 +51,6 @@ N4_RAW_BRANCHES = 4096
 N4_CONSISTENT_BRANCHES = 96
 N4_LABELLED_STATES = 24
 N4_BRANCHES_PER_STATE = 4
-ALPERT_PDF_SHA256 = "74bd2006610543d710f885908a69a65fa7e3c13657a3a22e1a63c9f202a3b6b6"
-ALPERT_RAW_SHA256 = "9b2e4092c1ce74caf3fe89d798ec4c0c000d943d83fd087dfe9a3dd7b003be60"
-ALVARADO_PDF_SHA256 = "f7f2845a2a7e579b65c56ac43b8e517a915f2fd89e6bcb3b0a7292e930d2f852"
-ALVARADO_RAW_SHA256 = "df9a79b00137e0fe678351a0682a237022182ce78b9882c7fbdd0c55ccf39ddd"
 ALPERT_PDF = ROOT / (
     "resources/papers/"
     "alpert-bauer-kahle-macpherson-spendlove-2023-hard-squares-configuration-spaces.pdf"
@@ -131,11 +126,6 @@ def fraction_text(value: Fraction) -> str:
         if value.denominator == 1
         else f"{value.numerator}/{value.denominator}"
     )
-
-
-def sha256(path: Path) -> str:
-    """Hash a persisted external source at the archive trust boundary."""
-    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def state_id(state: State) -> str:
@@ -446,20 +436,6 @@ def literature_record(
     unlabelled_betti: list[int] | None = None,
 ) -> dict[str, object]:
     """Bind the result to the retrieved primary sources without extending their scope."""
-    hashes = {
-        "alpert_pdf": sha256(ALPERT_PDF),
-        "alpert_raw": sha256(ALPERT_RAW),
-        "alvarado_pdf": sha256(ALVARADO_PDF),
-        "alvarado_raw": sha256(ALVARADO_RAW),
-    }
-    expected_hashes = {
-        "alpert_pdf": ALPERT_PDF_SHA256,
-        "alpert_raw": ALPERT_RAW_SHA256,
-        "alvarado_pdf": ALVARADO_PDF_SHA256,
-        "alvarado_raw": ALVARADO_RAW_SHA256,
-    }
-    if hashes != expected_hashes:
-        raise ValueError(f"archived primary-source hash drift: {hashes}")
     if n == 3:
         alpert_betti = [2, 2]
         alpert_f_vector: list[int] | None = [24, 24]
@@ -473,8 +449,8 @@ def literature_record(
     return {
         "alpert_et_al_2023": {
             "scope": "ordered axis-parallel C(n;2,2), not arbitrary rotations or the D4 quotient",
-            "pdf_sha256": hashes["alpert_pdf"],
-            "raw_sha256": hashes["alpert_raw"],
+            "pdf": str(ALPERT_PDF.relative_to(ROOT)),
+            "transcription": str(ALPERT_RAW.relative_to(ROOT)),
             "reported_betti": alpert_betti,
             "reported_f_vector": alpert_f_vector,
             "derived_match": labelled_betti == alpert_betti
@@ -483,8 +459,8 @@ def literature_record(
         },
         "alvarado_garduno_gonzalez_2025": {
             "scope": "unlabelled axis-parallel UC(pq-1,p x q) up to homotopy",
-            "pdf_sha256": hashes["alvarado_pdf"],
-            "raw_sha256": hashes["alvarado_raw"],
+            "pdf": str(ALVARADO_PDF.relative_to(ROOT)),
+            "transcription": str(ALVARADO_RAW.relative_to(ROOT)),
             "reported_n3_type": "wedge of one circle" if n == 3 else "not used for this cell",
             "derived_match": alvarado_match,
         },
@@ -509,6 +485,11 @@ def require_literature_matches(
         not isinstance(alvarado, dict) or alvarado.get("derived_match") is not True
     ):
         raise ValueError("unlabelled Alvarado-Garduno-Gonzalez comparison failed")
+
+
+def rendered_svg_matches(retained: str, regenerated: str) -> bool:
+    """Compare the complete rendered artifact directly."""
+    return retained == regenerated
 
 
 def build_n3_model() -> dict[str, object]:
@@ -875,7 +856,6 @@ def run_n3_selftests(model: dict[str, object], svg: str) -> dict[str, bool]:
         raise ValueError("n=3 literature record is malformed")
     alpert = literature.get("alpert_et_al_2023")
     alvarado = literature.get("alvarado_garduno_gonzalez_2025")
-    original_svg_hash = hashlib.sha256(svg.encode()).hexdigest()
     return {
         "deleted_family_edge_is_rejected": removed["betti"] != [2, 2],
         "collapsed_label_components_are_rejected": bridged["component_count"] != 2,
@@ -894,8 +874,7 @@ def run_n3_selftests(model: dict[str, object], svg: str) -> dict[str, bool]:
         and alpert.get("derived_match") is True
         and isinstance(alvarado, dict)
         and alvarado.get("derived_match") is True,
-        "stale_svg_is_rejected": original_svg_hash
-        != hashlib.sha256((svg + " ").encode()).hexdigest(),
+        "stale_svg_is_rejected": not rendered_svg_matches(svg + " ", svg),
     }
 
 
@@ -949,7 +928,6 @@ def build_result(n: int) -> tuple[dict[str, object], str | None]:
     if svg is not None:
         model["artifacts"] = {
             "svg": "atlas/n-003-optimal-moduli.svg",
-            "svg_sha256": hashlib.sha256(svg.encode()).hexdigest(),
         }
     return model, svg
 
@@ -969,7 +947,9 @@ def replay_record(record_path: Path, svg_path: Path | None, n: int) -> dict[str,
     if n == 3:
         if svg_path is None:
             raise ValueError("n=3 replay requires --check-svg")
-        if expected_svg is None or svg_path.read_text(encoding="utf-8") != expected_svg:
+        if expected_svg is None or not rendered_svg_matches(
+            svg_path.read_text(encoding="utf-8"), expected_svg
+        ):
             raise ValueError("retained n=3 SVG differs from the deterministic render")
     elif svg_path is not None:
         raise ValueError("n=4 has no SVG; omit --check-svg")

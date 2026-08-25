@@ -52,7 +52,7 @@ experiment:
     outcome: criterion_met
     checked_by: >-
       deterministic regeneration from exp-014 and exp-015, separate retained-record
-      replay, exact quotient membership, and eight false-policy mutation controls
+      replay, exact quotient membership, and seven false-policy mutation controls
   verdict:
     decision: baseline
     primary_criterion: exact known answers plus all declared false-policy mutations
@@ -77,7 +77,7 @@ Without sufficient evidence, the only valid output is `unresolved`.
 The retained generation took 0.50 wall-seconds and the independent rebuild and replay
 took 0.42 seconds. Both report one `n = 3` quotient component across two contact
 signatures, one `n = 4` quotient component, 16 unresolved floating-point observations,
-and eight of eight rejected false-policy mutations.
+and seven of seven rejected false-policy mutations.
 
 ## Preregistered acceptance rule
 

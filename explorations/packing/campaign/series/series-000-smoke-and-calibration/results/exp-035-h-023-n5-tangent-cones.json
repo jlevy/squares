@@ -83,13 +83,11 @@
     "missing_owner_axis_branch_is_rejected": true,
     "missing_tied_support_row_is_rejected": true,
     "non_sheet_direction_has_diagonal_angle_motion": true,
-    "source_digest_tamper_is_rejected": true,
     "stale_endpoint_contact_row_is_rejected": true,
     "wrong_angle_sign_violates_an_active_row": true
   },
   "source": {
     "exp_034": "campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json",
-    "exp_034_sha256": "884d9323a4959afe7d420a0032d4cb5a0d8c40f87b19f5cb251808021d4a9e54",
     "field": "Q(sqrt(2)), sqrt(2) in (1,2)"
   },
   "strata": [
@@ -1300,7 +1298,6 @@
               "sense": ">= 0"
             }
           ],
-          "matrix_sha256": "2ee03c2f1e706d786e5d1f9820909d5c88000b9c5aa39269c4f5331d37d3b6b0",
           "row_count": 17,
           "selected_contact_3_4_owner_axis": "owner3:a+",
           "tied_support_row_count": 2
@@ -2432,7 +2429,6 @@
               "sense": ">= 0"
             }
           ],
-          "matrix_sha256": "2037e5531c9f35aa6b2acaf08789cf3971923bc05f20eb8ded40cdc1eb9fe022",
           "row_count": 17,
           "selected_contact_3_4_owner_axis": "owner4:a+",
           "tied_support_row_count": 2
@@ -3594,7 +3590,6 @@
               "sense": ">= 0"
             }
           ],
-          "matrix_sha256": "a1b0d21101b447e15303b94c620e0af17d81a2909bf12d77737192e9eace6b3c",
           "row_count": 15,
           "selected_contact_3_4_owner_axis": "owner3:a+",
           "tied_support_row_count": 2
@@ -4594,7 +4589,6 @@
               "sense": ">= 0"
             }
           ],
-          "matrix_sha256": "7f809dcc4a0c6e1fba7007b666a548282ffb00a3573366ddb79bae51cb1ea9b7",
           "row_count": 15,
           "selected_contact_3_4_owner_axis": "owner4:a+",
           "tied_support_row_count": 2
@@ -5896,7 +5890,6 @@
               "sense": ">= 0"
             }
           ],
-          "matrix_sha256": "6ead7723ae035e43aefb17e010ee19980f3a5143ac90fc778d2d0b2e741ad963",
           "row_count": 17,
           "selected_contact_3_4_owner_axis": "owner3:a+",
           "tied_support_row_count": 2
@@ -7028,7 +7021,6 @@
               "sense": ">= 0"
             }
           ],
-          "matrix_sha256": "ad8353c9ca4c91265210498bf17a383446d4d22dc84ab57390d290aec7921a3f",
           "row_count": 17,
           "selected_contact_3_4_owner_axis": "owner4:a+",
           "tied_support_row_count": 2

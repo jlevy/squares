@@ -16,7 +16,6 @@ decides the result.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import itertools
 import json
 import math
@@ -139,14 +138,10 @@ def row_key(row: LinearRow) -> tuple:
     return tuple(scalar_key(value) for value in row.coefficients)
 
 
-def matrix_digest(rows: tuple[LinearRow, ...]) -> str:
-    payload = repr(tuple(sorted(row_key(row) for row in rows))).encode()
-    return hashlib.sha256(payload).hexdigest()
+def matrix_key(rows: tuple[LinearRow, ...]) -> tuple:
+    """Return the complete exact row data used to deduplicate branch matrices."""
 
-
-def ordered_matrix_digest(rows: tuple[LinearRow, ...]) -> str:
-    payload = repr(tuple(row_key(row) for row in rows)).encode()
-    return hashlib.sha256(payload).hexdigest()
+    return tuple(sorted(row_key(row) for row in rows))
 
 
 def unique_rows(rows: list[LinearRow]) -> tuple[LinearRow, ...]:
@@ -621,18 +616,20 @@ def field_metadata_selftest() -> dict[str, bool]:
     }
 
 
-def index_complete_records(records: list[dict], branch_groups: dict[str, dict]) -> dict:
+def index_complete_records(records: list[dict], branch_groups: dict[tuple, dict]) -> dict:
     if len(records) != len(branch_groups):
         raise ValueError("record count does not match the derived matrix count")
-    records_by_digest: dict[str, dict] = {}
+    records_by_branch: dict[int, dict] = {}
     for branch_record in records:
-        digest = branch_record["matrix_sha256"]
-        if digest in records_by_digest:
-            raise ValueError(f"record duplicates branch matrix: {digest}")
-        records_by_digest[digest] = branch_record
-    if set(records_by_digest) != set(branch_groups):
-        raise ValueError("recorded branch digests are not the complete derived matrix set")
-    return records_by_digest
+        branch = branch_record.get("branch")
+        if type(branch) is not int or not 0 <= branch < len(branch_groups):
+            raise ValueError("record has an invalid branch index")
+        if branch in records_by_branch:
+            raise ValueError(f"record duplicates branch index: {branch}")
+        records_by_branch[branch] = branch_record
+    if set(records_by_branch) != set(range(len(branch_groups))):
+        raise ValueError("recorded branch indices do not cover the derived matrix set")
+    return records_by_branch
 
 
 def run_selftests(
@@ -681,8 +678,8 @@ def run_selftests(
         raise AssertionError("known flexible wall-omission control failed")
     try:
         index_complete_records(
-            [{"matrix_sha256": "a"}, {"matrix_sha256": "a"}],
-            {"a": {}, "b": {}},
+            [{"branch": 0}, {"branch": 0}],
+            {(((1, 1),),): {}, (((2, 1),),): {}},
         )
     except ValueError:
         duplicate_rejected = True
@@ -701,16 +698,16 @@ def run_selftests(
 
 def enumerate_branch_groups(
     walls: tuple[LinearRow, ...], contacts: tuple[Contact, ...]
-) -> dict[str, dict]:
-    branch_groups: dict[str, dict] = {}
+) -> dict[tuple, dict]:
+    branch_groups: dict[tuple, dict] = {}
     for selection in itertools.product(*(range(len(contact.options)) for contact in contacts)):
         selected = [
             contact.options[index] for contact, index in zip(contacts, selection, strict=True)
         ]
         rows = tuple(itertools.chain(walls, *(option.rows for option in selected)))
-        digest = matrix_digest(rows)
+        key = matrix_key(rows)
         group = branch_groups.setdefault(
-            digest,
+            key,
             {
                 "rows": rows,
                 "selections": [],
@@ -803,7 +800,7 @@ def build_result() -> dict:
         raise ValueError("the derivative-to-raw branch multiplicities do not sum to 512")
 
     branch_records = []
-    for branch_index, (digest, group) in enumerate(sorted(branch_groups.items())):
+    for branch_index, (_key, group) in enumerate(sorted(branch_groups.items())):
         rows = group["rows"]
         certificate = positive_stress_certificate(rows, field)
         if certificate is None:
@@ -811,8 +808,6 @@ def build_result() -> dict:
             branch_records.append(
                 {
                     "branch": branch_index,
-                    "matrix_sha256": digest,
-                    "ordered_matrix_sha256": ordered_matrix_digest(rows),
                     "row_count": len(rows),
                     "derivative_selection_count": len(group["selections"]),
                     "derivative_selections": [
@@ -829,8 +824,6 @@ def build_result() -> dict:
         branch_records.append(
             {
                 "branch": branch_index,
-                "matrix_sha256": digest,
-                "ordered_matrix_sha256": ordered_matrix_digest(rows),
                 "row_count": len(rows),
                 "derivative_selection_count": len(group["selections"]),
                 "derivative_selections": [list(selection) for selection in group["selections"]],
@@ -949,7 +942,7 @@ def replay_result(record: dict) -> dict:
     records = record["branches"]["records"]
     if len(records) != EXPECTED_REDUCED_BRANCHES or len(branch_groups) != len(records):
         raise ValueError("record does not cover all 128 derivative-distinct matrices")
-    records_by_digest = index_complete_records(records, branch_groups)
+    records_by_branch = index_complete_records(records, branch_groups)
     if record["branches"]["raw_count"] != EXPECTED_RAW_BRANCHES:
         raise ValueError("record does not retain all 512 raw nonlinear branches")
     if (
@@ -997,13 +990,11 @@ def replay_result(record: dict) -> dict:
     replayed_certificates = 0
     replayed_directions = 0
     replayed_unresolved = 0
-    for branch_index, (digest, group) in enumerate(sorted(branch_groups.items())):
-        branch_record = records_by_digest[digest]
+    for branch_index, (_key, group) in enumerate(sorted(branch_groups.items())):
+        branch_record = records_by_branch[branch_index]
         rows = group["rows"]
         if branch_record["branch"] != branch_index:
             raise ValueError("recorded branch numbering drifted")
-        if branch_record["ordered_matrix_sha256"] != ordered_matrix_digest(rows):
-            raise ValueError("certificate row order drifted")
         if len(rows) != EXPECTED_BRANCH_ROWS or branch_record["row_count"] != len(rows):
             raise ValueError("recorded branch row count drifted")
         if branch_record["raw_selection_count"] != group["raw_selection_count"]:

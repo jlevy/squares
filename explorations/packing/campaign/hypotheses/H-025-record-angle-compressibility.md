@@ -22,11 +22,12 @@ hypothesis:
     direction: at least 0.8
     threshold: 0.8
   instrument: >-
-    Freeze eligible source URLs and hashes before fitting; import and independently
-    verify every eligible full pose or count it unresolved in the denominator. Cluster
-    folded orientations under a preregistered loss, reoptimize centers and class angles
-    with the common spine, and independently verify every refit. Report the whole loss
-    distribution, unresolved fraction, and n = 29 separately.
+    Freeze eligible source URLs, retrieval dates, and retained fixtures before fitting;
+    import and independently verify every eligible full pose or count it unresolved in
+    the denominator. Cluster folded orientations under a preregistered loss, reoptimize
+    centers and class angles with the common spine, and independently verify every
+    refit. Report the whole loss distribution, unresolved fraction, and n = 29
+    separately.
   instrument_ready: false
   regime: public full-geometry record corpus frozen before fitting; n <= 100; 1e-4 side-loss threshold
   instance: {axis: corpus, point: verified-records-n-le-100}

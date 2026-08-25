@@ -35,10 +35,10 @@ import yaml
 from strif import atomic_output_file
 
 from cases.gobel10.packing import (
-    SOURCE_ID as GOBEL10_SOURCE_ID,
+    SOURCE_FIXTURE as GOBEL10_SOURCE_FIXTURE,
 )
 from cases.gobel10.packing import (
-    SOURCE_SHA256 as GOBEL10_SOURCE_SHA256,
+    SOURCE_ID as GOBEL10_SOURCE_ID,
 )
 from cases.gobel10.packing import (
     SOURCE_URL as GOBEL10_SOURCE_URL,
@@ -153,8 +153,8 @@ def make_regime(
         "quench_time_budget_seconds": time_budget,
         "oracle_tolerance": ORACLE_TOL,
         "source_id": GOBEL10_SOURCE_ID,
+        "source_fixture": GOBEL10_SOURCE_FIXTURE,
         "source_url": GOBEL10_SOURCE_URL,
-        "source_sha256": GOBEL10_SOURCE_SHA256,
         "perturbation_scale": scale,
     }
 
@@ -187,16 +187,16 @@ def start_from_regime(
     elif regime_id == SOURCE_REGIME:
         expected_fields = common | {
             "source_id",
+            "source_fixture",
             "source_url",
-            "source_sha256",
             "perturbation_scale",
         }
         if set(regime) != expected_fields:
             raise EventError("source-perturbation regime has the wrong fields")
         if (
             regime["source_id"] != GOBEL10_SOURCE_ID
+            or regime["source_fixture"] != GOBEL10_SOURCE_FIXTURE
             or regime["source_url"] != GOBEL10_SOURCE_URL
-            or regime["source_sha256"] != GOBEL10_SOURCE_SHA256
         ):
             raise EventError("source-perturbation regime is not bound to the Göbel fixture")
         scale = regime["perturbation_scale"]
@@ -727,14 +727,14 @@ def selftest() -> None:
         if read_events(path) != [source_event]:
             raise EventError("source-bound event did not replay")
         tampered_source = json.loads(canonical_json(source_event))
-        tampered_source["regime"]["source_sha256"] = "0" * 64
+        tampered_source["regime"]["source_fixture"] = "cases/gobel10/missing.py"
         write_events(path, [tampered_source])
         try:
             read_events(path)
         except EventError:
             pass
         else:
-            raise EventError("source-bound event accepted a changed source digest")
+            raise EventError("source-bound event accepted a changed source fixture")
         tampered_start = json.loads(canonical_json(source_event))
         tampered_start["start"]["x"][0] += 1e-6
         write_events(path, [tampered_start])

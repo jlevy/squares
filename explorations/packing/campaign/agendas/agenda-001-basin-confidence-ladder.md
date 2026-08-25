@@ -193,9 +193,9 @@ agenda:
     hypotheses: [H-002, H-021]
     budget: four preregistered perturbations; 15s each; 90s command cap
     entry: >-
-      The source-bound `gobel10-svg-v1` entry point replays the published pose, source
-      digest, deterministic perturbation, full start, and independent validity without
-      changing the quench criterion.
+      The source-bound `gobel10-svg-v1` entry point replays the retained published pose,
+      deterministic perturbation, full start, and independent validity without changing
+      the quench criterion.
     exit: proved-value return and complete receipts, or a typed retained failure
     bead: think-ouf0
     depends_on: [BC-003]
@@ -224,8 +224,8 @@ agenda:
     budget: completed in exp-032; 10 agent-minutes and 0.92 seconds generation plus replay
     entry: exact-model assignment and ambiguity-preserving fallback committed
     exit: >-
-      Exact n=3 interval and n=4 point replay; eight key, stratum, sample, scope,
-      digest, and f64-assignment mutations fail; unsupported observations stay unresolved.
+      Exact n=3 interval and n=4 point replay; seven key, stratum, sample, scope, and
+      f64-assignment mutations fail; unsupported observations stay unresolved.
     bead: think-a2v6
     depends_on: [BC-001, BC-002]
     next_evidence: classifier contract, positive fixtures, and negative mutations
@@ -271,7 +271,7 @@ agenda:
       all six exact small-n records replayed. Think-1582 is closed; think-imav owns the
       next bounded nonlinear-realization slice. Its independent instrument is committed
       at `f2d2e53`; exp-036 freezes exact owner-4 and owner-3 obstruction margins, source
-      topology, seven mutations, and separate 30-second generation and replay caps.
+      topology, six mutations, and separate 30-second generation and replay caps.
       Exp-036 meets that criterion in 0.21 external wall-seconds: exact owner-4 and
       owner-3 contradictions exclude exp-035's displayed direction from the true
       Bouligand tangent at all three strata. This is not local isolation; other
