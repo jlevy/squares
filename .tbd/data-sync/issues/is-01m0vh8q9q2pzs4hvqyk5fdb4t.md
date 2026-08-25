@@ -1,19 +1,23 @@
 ---
 type: is
 id: is-01m0vh8q9q2pzs4hvqyk5fdb4t
-title: Use common borders and certified contact marks in packing SVGs
+title: Use fixed visual tokens and certified contact marks in packing SVGs
 kind: feature
-status: in_progress
+status: closed
 priority: 1
-version: 5
+version: 7
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels: []
 dependencies: []
 created_at: 2026-08-25T04:01:16.590Z
-updated_at: 2026-08-25T04:41:22.426Z
-closed_at: null
-close_reason: null
+updated_at: 2026-08-25T06:40:13.590Z
+closed_at: 2026-08-25T06:40:13.589Z
+close_reason: Implemented and committed the fixed cool palette, pure-black boundary system, clipped certified contact marks, updated docs/spec, regenerated gallery, and 73-control/full-gate validation in daca22e.
 resolution: null
 duplicate_of: null
 ---
-Preserve the existing square fill palette, replace misleading white square strokes with the same dark border used by the container, and add typed certified contact geometry. Plan and implement robust point and segment contact extraction outside the renderer, make display optional while attaching known contacts by default, enable it for retained examples if visually clear, update CLI/docs/spec, regenerate the gallery, and validate exact/contact semantics and document rendering.
+Centralize the approved document style as fixed constants: a deterministic 20-color cool square palette, opaque pure-black 1.25px container and square outlines, and tempered-yellow #e3c64a contact segments/dots at 60% opacity with 9px segment width and 5.5px point radius. Keep fills, contacts, and outlines in explicit order; clip every contact mark to the union of its exact participating square interiors; preserve optional contact display, exact semantic annotations, deterministic generation, CLI/docs/atlas integration, retained examples, and structural/visual regression controls.
+
+## Notes
+
+Implementation and documentation are complete in the working tree. SVG rendering checker passes 72 controls; Ruff and BasedPyright pass; ./test.sh passes all 31 repository steps; make format-check passes; retained SVGs and manifest/metrics were regenerated and visually inspected. No commit was created per the user instruction, so this bead remains in_progress until commit/closure is authorized.
