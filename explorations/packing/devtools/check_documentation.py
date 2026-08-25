@@ -15,6 +15,7 @@ from devtools.render_document_map import MAP, ROOT, SYNOPSIS, expected_synopsis,
 
 FOOTER = "This document follows common-doc-guidelines.md."
 IGNORED_PARTS = {".pytest_cache", ".venv", "__pycache__"}
+REPOSITORY_ROOT = ROOT.parents[1]
 RETIRED_PHRASES = (
     "approximately verified",
     "numerical-arbitrary-precision",
@@ -48,6 +49,15 @@ def _slugs(text: str) -> set[str]:
     return slugs
 
 
+def _is_ephemeral_local_target(path: Path) -> bool:
+    """Reject links whose apparent validity depends on untracked tbd working state."""
+    try:
+        relative = path.relative_to(REPOSITORY_ROOT)
+    except ValueError:
+        return False
+    return relative.parts[:2] == (".tbd", "docs")
+
+
 def _link_problems(path: Path) -> list[str]:
     text = path.read_text(encoding="utf-8")
     problems: list[str] = []
@@ -60,6 +70,8 @@ def _link_problems(path: Path) -> list[str]:
         label = path.relative_to(ROOT).as_posix()
         if not resolved.exists():
             problems.append(f"{label}: dead link -> {target}")
+        elif _is_ephemeral_local_target(resolved):
+            problems.append(f"{label}: ephemeral local-state link -> {target}")
         elif (
             fragment
             and resolved.suffix == ".md"

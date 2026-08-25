@@ -301,19 +301,16 @@ metrics. Line count, abstraction count, and test count are not performance measu
 ## Governing Guidelines
 
 This guide applies the repository guidelines rather than copying them.
-For details, see:
+Load the current text on demand with `tbd guidelines <name>`; generated `.tbd/docs`
+copies are local working state and are not durable link targets.
+The applicable names are:
 
-- [General engineering agent principles](../../.tbd/docs/guidelines/general-eng-agent-principles.md)
-- [General coding rules](../../.tbd/docs/guidelines/general-coding-rules.md)
-- [TDD](../../.tbd/docs/guidelines/general-tdd-guidelines.md) and
-  [testing rules](../../.tbd/docs/guidelines/general-testing-rules.md)
-- [Python rules](../../.tbd/docs/guidelines/python-rules.md),
-  [modern Python](../../.tbd/docs/guidelines/python-modern-guidelines.md), and
-  [Python CLI patterns](../../.tbd/docs/guidelines/python-cli-patterns.md)
-- [Error handling](../../.tbd/docs/guidelines/error-handling-rules.md) and
-  [backward compatibility](../../.tbd/docs/guidelines/backward-compatibility-rules.md)
-- [Golden testing](../../.tbd/docs/guidelines/golden-testing-guidelines.md)
-- [Documentation guidelines](../../.tbd/docs/guidelines/common-doc-guidelines.md)
+- `general-eng-agent-principles` and `general-coding-rules`;
+- `general-tdd-guidelines` and `general-testing-rules`;
+- `python-rules`, `python-modern-guidelines`, and `python-cli-patterns`;
+- `error-handling-rules` and `backward-compatibility-rules`;
+- `golden-testing-guidelines`; and
+- `common-doc-guidelines`.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
