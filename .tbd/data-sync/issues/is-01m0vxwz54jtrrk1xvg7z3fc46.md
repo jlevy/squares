@@ -1,17 +1,21 @@
 ---
 type: is
 id: is-01m0vxwz54jtrrk1xvg7z3fc46
-title: "TUTORIAL accuracy drift: five claims that no longer match SYNOPSIS or the record"
+title: "TUTORIAL accuracy drift: six claims that no longer match the record (TR-1, TR-3..TR-7)"
 kind: bug
-status: open
+status: closed
 priority: 1
-version: 3
+version: 6
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies: []
 parent_id: is-01m0vxe4ntpat4xcagtf04c37z
 created_at: 2026-08-25T07:42:02.915Z
-updated_at: 2026-08-25T08:01:29.590Z
+updated_at: 2026-08-25T08:29:43.784Z
+closed_at: 2026-08-25T08:29:43.784Z
+close_reason: "Implemented in TUTORIAL.md on claude/packing-tutorial-review-r2p25t (82c68dc), on top of the SVG toolkit and the #31 frontier-assurance branch. Notation card (new §10) and vocabulary card rebuilt; the LP written out with an on-ramp; the quench's two loops described with the path-dependence reason; precision costs, latency budgets and the 1e-11 cause added; the primitive element theorem answered; §11 further reading and arithmetic inventory added; assurance and method tokens aligned to witnesses/witness.schema.yaml; accuracy fixes applied. TR-2 needed no work — #31 had already replaced the superseded absolute. The restated gate step count was removed rather than corrected, so it cannot drift a fourth time; the status-document half stays open as think-4b9m."
+resolution: null
+duplicate_of: null
 ---
 Checked every number, count, and attribution in `TUTORIAL.md` against
 [`SYNOPSIS.md`](SYNOPSIS.md), [`conventions.md`](conventions.md), the experiment
@@ -94,3 +98,27 @@ not obviously trivial, and it is the case where the project is actually working.
 - **Unattributed record.** §1 and §7 give `n = 17`'s `4.6755` with no source, while
   Trump's `n = 11` value is attributed in the same table. It is Bidwell 1998, per
   `SYNOPSIS.md`'s lay-of-the-land table.
+
+## Notes
+
+Re-verified after merging PR #31 (frontier assurance and witness checks).
+
+RESOLVED BY #31 — drop from scope:
+- TR-2, "none recovered from a search output". The paragraph was replaced with
+  "Reported-value recovery remains unbuilt and may be mathematically contingent", which
+  states the real limit without the absolute that exp-033 had falsified.
+
+REVISED — TR-1 got worse, not better:
+- #31 moved §6 from "thirty-step gate" to "thirty-one-step gate", landing on SYNOPSIS's
+  already-stale value. `STEPS` in src/sqpack/cli/validate.py has 32 entries; the
+  `deterministic SVG rendering` step arrived with the SVG toolkit and no prose count
+  moved with it. TUTORIAL, SYNOPSIS and conventions now all say thirty-one and all
+  three disagree with the code, so the count reads as settled and is not.
+  Raised on #31 as item 1; the status-document half is think-4b9m.
+
+UNCHANGED and still present, verified against the merged text:
+- TR-3 §4 credits the annealer column as descent's baseline
+- TR-4 §2 drops "interiors" from the separating-axis statement
+- TR-5 exp-033..036 still unmentioned
+- TR-6 minimum versus infimum
+- TR-7 n=17's 4.6755 unattributed (Bidwell 1998)

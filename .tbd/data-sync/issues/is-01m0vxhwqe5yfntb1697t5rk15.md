@@ -3,9 +3,9 @@ type: is
 id: is-01m0vxhwqe5yfntb1697t5rk15
 title: "TUTORIAL: write the linear program explicitly and add LP background"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 4
+version: 5
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies:
@@ -13,7 +13,11 @@ dependencies:
     target: is-01m0vxns5mzy4axt8mdrhaachj
 parent_id: is-01m0vxe4ntpat4xcagtf04c37z
 created_at: 2026-08-25T07:35:59.982Z
-updated_at: 2026-08-25T08:01:31.984Z
+updated_at: 2026-08-25T08:29:43.761Z
+closed_at: 2026-08-25T08:29:43.761Z
+close_reason: "Implemented in TUTORIAL.md on claude/packing-tutorial-review-r2p25t (82c68dc), on top of the SVG toolkit and the #31 frontier-assurance branch. Notation card (new §10) and vocabulary card rebuilt; the LP written out with an on-ramp; the quench's two loops described with the path-dependence reason; precision costs, latency budgets and the 1e-11 cause added; the primitive element theorem answered; §11 further reading and arithmetic inventory added; assurance and method tokens aligned to witnesses/witness.schema.yaml; accuracy fixes applied. TR-2 needed no work — #31 had already replaced the superseded absolute. The restated gate step count was removed rather than corrected, so it cannot drift a fourth time; the status-document half stays open as think-4b9m."
+resolution: null
+duplicate_of: null
 ---
 The cell decomposition (**T-2**) is the tutorial's central structural claim, and §2
 presents it as four bullet points plus an assertion. Two things are missing: the program
