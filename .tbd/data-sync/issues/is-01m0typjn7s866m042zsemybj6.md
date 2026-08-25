@@ -5,7 +5,7 @@ title: Make the square-packing frontier transparent, complete, and reusable
 kind: epic
 status: open
 priority: 1
-version: 26
+version: 27
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
@@ -32,10 +32,10 @@ child_order_hints:
   - is-01m0vd6xfaz5p8ccnq6xrnr5x5
   - is-01m0vhjwpg55jj6jt0g96qpr87
 created_at: 2026-08-24T22:36:47.654Z
-updated_at: 2026-08-25T07:18:04.488Z
+updated_at: 2026-08-25T07:22:33.388Z
 ---
 Cross-cutting redesign of the square-packing frontier, assurance model, validation toolkit, and contributor workflow. Reusable framework implementation uses W7 pipeline-improvement rather than W4 process review or the general-improvement fallback: it balances mathematical soundness, reader and agent clarity, operational discipline, and research efficiency. Make current status effortless to inspect; distinguish published mathematical status, local numerical checks, and exact formal certification; keep public-source coverage explicit and current; and provide general entry points for importing, viewing, checking, and promoting witnesses. Add no metadata, gate, table, hash, or work item without a named failure or reader need. Acceptance: one obvious path answers what is known for each n and why; verified always means exact formal assurance; numerical claims state their actual method and limits; historical unknowns are preserved rather than invented; source and tooling gaps are visible; and the workflow catches consequential errors without ritual or tracker spam.
 
 ## Notes
 
-2026-08-24: governing plan added at explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md. This is a cross-cutting general-improvement under think-xkqu, not W4. PR #26 owner review is fully addressed and the plan is rebased on f49b3c4 at head 3d299d5. Hash cleanup think-4fcn is complete in commit e4bf837 on PR #23 and must be integrated or equivalently replayed in this stack. Fifteen implementation children remain open after adding think-my5u for the campaign/session/phase/experiment/round/run vocabulary. think-6lln owns documentation mapping and scoped common-doc migration; think-rsxe owns generic algebraic field soundness.
+2026-08-25 implementation checkpoint: SquarePackingCase/v2 and Experiment/v2 migrations, typed evidence and source coverage, generated frontier status, Witness/v1 inspect/check/verify/promote tools, exact rational promotion, strict YAML loading, number-field preconditions, n=29 and UnitSquare reviews, document map/common-doc checks, workflow entry contracts, and terminology cleanup are built. No reader-facing source hashes were added; retained source-supplied hashes are archival data only. The generic outward-rounded interval-existence promotion path remains open under think-75ll. Final ordinary validation is being rerun after repairing unrelated open-child/closed-parent bead inconsistencies surfaced by tbd sync.
