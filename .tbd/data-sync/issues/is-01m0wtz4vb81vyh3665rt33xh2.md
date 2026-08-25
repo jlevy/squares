@@ -3,9 +3,9 @@ type: is
 id: is-01m0wtz4vb81vyh3665rt33xh2
 title: "Soundness review of PR 34 (session-011 continuation): findings and follow-ups"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 7
+version: 10
 labels: []
 dependencies: []
 child_order_hints:
@@ -15,7 +15,12 @@ child_order_hints:
   - is-01m0wtzveg0hz3sawh36m7nekh
   - is-01m0wtzvzf88stpgg69rt5mmqa
   - is-01m0wtzwga47nj7bskexzbd0hn
+  - is-01m0x4c75pqtywfdr4cfnzzvhp
 created_at: 2026-08-25T16:10:02.986Z
-updated_at: 2026-08-25T16:10:27.209Z
+updated_at: 2026-08-25T19:11:23.877Z
+closed_at: 2026-08-25T19:11:23.876Z
+close_reason: "All six factual-review findings and the PR #37 integration review are fixed, documented, tested, merged with current main, and ready for fresh CI."
+resolution: null
+duplicate_of: null
 ---
-Epic for the 2026-08-25 independent soundness review of PR 34 (codex/packing-session-011-continuation, merged as b74b73e). Review doc: explorations/packing/docs/project/reviews/review-2026-08-25-pr34-soundness-review.md. Verified sound: H-042 branch-0 certification (independent replay reproduced criterion_met, core pair:4-5, 24 groups, 42->40 classes, 22s), cone-oracle mathematics, Bui Prop 7 transcription repairs D-302/D-303 against the archived PDF, McClenagan D-304/D-310 repair (symbolic + numeric), bounded-timeout primitive and its 21 tests, full gate green locally, CI green both architectures. Findings tracked as child beads; defects D-320 and D-321 recorded in defects.yaml.
+Epic for the 2026-08-25 independent W2 factual review of PR 34 (session-011 continuation, merged as b74b73e). The retained review record is explorations/packing/docs/project/reviews/review-2026-08-25-pr34-soundness-review.md. Exact H-043 branch-0 certification independently replayed criterion_met with core pair:4-5 removed, 24 retained groups, 42 to 40 oriented classes, and all self-tests true. Bui Proposition 7 repairs were checked against the archived PDF; the McClenagan repair was rederived symbolically and numerically checked across its stated domain; the bounded-timeout primitive and focused tests pass. Findings F1-F6 are closed. The two recorded defects integrated as D-326 and D-327 after merge-time ID reconciliation.
