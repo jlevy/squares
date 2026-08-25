@@ -31,7 +31,7 @@ import sys
 from pathlib import Path
 
 from sqpack.research.canonical import (
-    _certificate,  # pyright: ignore[reportPrivateUsage]
+    canonical_graph_certificate,
     canonical_key,
 )
 from sqpack.research.quench import quench_bracket
@@ -101,9 +101,9 @@ def main() -> int:
     # records only the individualized colours, its original node attributes disappear
     # and an all-equal graph collides with one having a distinguished vertex.
     triangle = [{1, 2}, {0, 2}, {0, 1}]
-    uniform = _certificate([0, 0, 0], triangle)
-    marked = _certificate([0, 0, 1], triangle)
-    relabelled_marked = _certificate([1, 0, 0], triangle)
+    uniform = canonical_graph_certificate([0, 0, 0], triangle)
+    marked = canonical_graph_certificate([0, 0, 1], triangle)
+    relabelled_marked = canonical_graph_certificate([1, 0, 0], triangle)
     passed &= check(
         "certificate retains node attributes after individualization",
         ok=uniform != marked and marked == relabelled_marked,

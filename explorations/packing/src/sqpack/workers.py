@@ -28,7 +28,7 @@ def worker_count(units: int) -> int:
         try:
             available = int(requested)
         except ValueError:
-            available = os.cpu_count() or 4
+            available = os.process_cpu_count() or 4
     else:
-        available = os.cpu_count() or 4
+        available = os.process_cpu_count() or 4
     return max(1, min(units, available))

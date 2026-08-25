@@ -181,7 +181,7 @@ def _refine(colours: list[int], adjacency: list[set[int]]) -> list[int]:
         colours = new
 
 
-def _certificate(
+def canonical_graph_certificate(
     colours: list[int], adjacency: list[set[int]], original_colours: list[int] | None = None
 ) -> str:
     """Canonical form by individualization-refinement.
@@ -217,7 +217,7 @@ def _certificate(
 
     smallest = min(ambiguous, key=len)
     return min(
-        _certificate(
+        canonical_graph_certificate(
             [c * 2 + (v == pick) for v, c in enumerate(colours)],
             adjacency,
             original_colours,
@@ -256,7 +256,7 @@ def _contact_certificate_one(
     walls = _boundary_touches(x, y, theta, side, tol)
     initial = [(angle_of[v], walls[v], len(adjacency[v])) for v in range(n)]
     ranks = {a: i for i, a in enumerate(sorted(set(initial)))}
-    digest = _certificate([ranks[a] for a in initial], adjacency).encode()
+    digest = canonical_graph_certificate([ranks[a] for a in initial], adjacency).encode()
     return hashlib.blake2b(digest, digest_size=16).hexdigest()
 
 

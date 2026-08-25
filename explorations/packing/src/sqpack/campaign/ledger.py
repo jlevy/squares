@@ -35,7 +35,10 @@ import yaml
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
-ROOT = Path(__file__).resolve().parents[3] / "campaign"
+from sqpack.project import ProjectLayoutError, configured_project_root, require_project_root
+
+PROJECT_ROOT = configured_project_root()
+ROOT = PROJECT_ROOT / "campaign"
 LEDGER = ROOT / "ledger.md"
 IDEAS = ROOT / "ideas.md"
 SESSION_SCHEMA = ROOT / "schemas/agent-session.schema.yaml"
@@ -804,6 +807,11 @@ def _parser() -> argparse.ArgumentParser:
 def main(arguments: list[str] | None = None) -> int:
     """Validate campaign records and check or render their generated ledger."""
     options = _parser().parse_args(arguments)
+    try:
+        require_project_root(PROJECT_ROOT)
+    except ProjectLayoutError as error:
+        print(f"packing-ledger: error: {error}", file=sys.stderr)
+        return 2
     now = dt.datetime.now(dt.UTC).replace(tzinfo=None)
     series = load(ROOT / "series", "series", "*/README.md")
     explorations = load(ROOT / "explorations", "exploration")

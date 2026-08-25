@@ -13,20 +13,22 @@ Do not turn a one-off investigation into a framework without a second real consu
 
 ## Supported Environment
 
-Python **3.14 is the only supported Python version**. The package metadata, uv lock,
-Ruff, BasedPyright, CI, and `.python-version` all enforce that same policy.
-macOS and Linux are supported development hosts; CI runs the full gate on both.
-The Rust search engine uses the stable Cargo toolchain.
+Python **3.14 is the only supported minor version**. Local development and CI pin the
+interpreter to **3.14.7** through `.python-version` and the workflow.
+Package metadata, Ruff, and BasedPyright express the broader `3.14`-only compatibility
+boundary; `uv.lock` pins dependencies, not the interpreter.
+macOS and Linux are supported development hosts, and CI runs the ordinary full gate on
+both. The Rust search engine uses the stable Cargo toolchain.
 
 From this directory:
 
 ```shell
 uv sync --frozen --all-extras --group dev
-uv run --frozen --group dev python --version
-uv run --frozen --group dev packing-validate --fast
+uv run --frozen --all-extras --group dev python --version
+uv run --frozen --all-extras --group dev packing-validate --fast
 ```
 
-The version command must report Python 3.14. Do not run a bare `pip install`, commit a
+The version command must report Python 3.14.7. Do not run a bare `pip install`, commit a
 second requirements file, or rely on packages from a global interpreter.
 Change dependencies in `pyproject.toml`, regenerate `uv.lock`, and commit both files
 together. Use `uv sync --frozen --all-extras --group dev` in CI and when reproducing the
@@ -43,7 +45,7 @@ is.
 | **E0 scratch** | Untracked scratch space or the repository `attic/` | Optimize for learning. Do not import it or cite it as evidence. Delete it or promote it when the investigation ends. |
 | **E1 retained case code** | `cases/<case>/` | Scope the code to a named `n`, source, theorem, hypothesis, or experiment. State its evidence limits and retain enough input and output for replay. General APIs are optional. |
 | **E2 reusable research code** | `src/sqpack/research/` and shared helpers such as `workers.py` | Serve multiple research loops through typed contracts, deterministic tests, explicit errors, and case-free policy. Optimize only from representative measurements. |
-| **E3 trust and persistence code** | `src/sqpack/field.py`, `verify.py`, `campaign/`, and `cli/` | Meet E2 expectations plus independent or mutation checks, tested failures, atomic durable writes, and fail-fast persisted-format handling. |
+| **E3 trust and persistence code** | `src/sqpack/field.py`, `verify.py`, `src/sqpack/campaign/`, and `src/sqpack/cli/` | Meet E2 expectations plus independent or mutation checks, tested failures, atomic durable writes, and fail-fast persisted-format handling. Campaign and CLI modules are repository applications, not general library APIs. |
 
 Developer infrastructure has its own explicit locations:
 
@@ -60,15 +62,25 @@ Dependencies flow toward more foundational code:
 
 ```text
 cases/ and devtools/ ──> sqpack.research ──> sqpack foundations
-          cli/ ────────> process boundaries, never imported case implementations
-      campaign/ ───────> foundations; never cases/ or devtools/
+      campaign app ────> foundations and retained campaign state
+           CLI app ────> foundations and named cases/devtools subprocesses
 ```
 
 `tests/test_module_boundaries.py` enforces the important edges and rejects Python left
 in the old top-level, `tools/`, `campaign/`, or `sqpack/` implementation locations.
-Maintained package code must never import `cases` or `devtools`. A case may consume a
-maintained API; the maintained API may not grow a Trump-, Göbel-, checkpoint-, or
-single-`n` exception to accommodate it.
+Reusable foundations, research modules, and campaign code may not import or name a
+process dependency on `cases` or `devtools`. The outer validation CLI intentionally
+starts named case and developer-tool modules in subprocesses; the architecture test
+inventories those string edges as well as Python imports.
+A case may consume a maintained API; the maintained API may not grow a Trump-, Göbel-,
+checkpoint-, or single-`n` exception to accommodate it.
+
+The three installed commands operate on repository-owned state, so they require a valid
+`explorations/packing/` checkout.
+Source and editable installs locate that checkout directly; a non-editable installation
+can use the current checkout or set `PACKING_PROJECT_ROOT` explicitly.
+A missing or malformed project root is a hard, actionable error.
+Importing reusable `sqpack` modules does not require repository state.
 
 Promote E1 code only after identifying a shared contract and a second real consumer.
 Copying ten clear lines twice is often cheaper than inventing an abstraction whose
@@ -111,25 +123,25 @@ Choose the smallest loop that protects the change:
 
 ```shell
 # Discover the available contracts.
-uv run --frozen --group dev packing-validate --list
+uv run --frozen --all-extras --group dev packing-validate --list
 
 # Fast edit loop: pytest plus Python quality, schemas, exact witness, and cheap drift.
-uv run --frozen --group dev packing-validate --fast
+uv run --frozen --all-extras --group dev packing-validate --fast
 
 # One named component. --only is repeatable and matches displayed step names.
-uv run --frozen --group dev packing-validate --only "basin identity"
+uv run --frozen --all-extras --group dev packing-validate --only "basin identity"
 
 # Full integration checkpoint used locally and in CI.
-uv run --frozen --group dev packing-validate
+uv run --frozen --all-extras --group dev packing-validate
 
 # Rebuild expensive mathematical golden producers while comparing read-only.
-uv run --frozen --group dev packing-validate --deep
+uv run --frozen --all-extras --group dev packing-validate --deep
 
 # Merge or unattended-session handoff: deep checks and no skipped surface.
-uv run --frozen --group dev packing-validate --strict
+uv run --frozen --all-extras --group dev packing-validate --strict
 
 # Structured result for agents and automation.
-uv run --frozen --group dev packing-validate --format json
+uv run --frozen --all-extras --group dev packing-validate --format json
 ```
 
 The default command runs the complete ordinary surface: fast pytest contracts, Python
@@ -152,27 +164,32 @@ cannot execute a stale control from the preceding snapshot use.
 
 CI executes the same locked full command on Linux and macOS from
 [`packing-validation.yml`](../../.github/workflows/packing-validation.yml).
-A focused deep-golden reconstruction on macOS remains a visible non-blocking diagnostic
-while `think-sk15`, `think-lwao`, and `think-u97a` own its known numerical instability.
-Never accept a rebuilt golden to make that probe green.
-Do not add a second CI-only implementation of either check.
+A focused macOS reconstruction temporarily asserts D-203’s exact known `n = 4` drift.
+The classifier fails CI if the reconstruction passes or fails differently, so a fix,
+crash, or new golden change cannot be hidden as an allowed failure.
+Remove that expected-failure contract when D-203 is resolved.
+Never accept a rebuilt golden to make the probe green, and do not add a second CI-only
+implementation of either check.
 
 ## Focused Quality Commands
 
 Use direct tools when their output is the point of the edit:
 
 ```shell
-uv run --frozen --group dev pytest -q
-uv run --frozen --group dev ruff check .
-uv run --frozen --group dev ruff format --check .
-uv run --frozen --group dev basedpyright
+uv run --frozen --all-extras --group dev pytest -q
+uv run --frozen --all-extras --group dev ruff check .
+uv run --frozen --all-extras --group dev ruff format --check .
+uv run --frozen --all-extras --group dev basedpyright
 
 cargo test --locked --manifest-path sqsearch/Cargo.toml
 cargo clippy --locked --release --all-targets --manifest-path sqsearch/Cargo.toml -- -D warnings
 cargo fmt --manifest-path sqsearch/Cargo.toml --check
 ```
 
-Ruff and BasedPyright must report zero warnings for E2 and E3 code.
+Ruff must be clean. BasedPyright runs in standard mode and must report zero diagnostics
+across maintained and retained Python.
+Its documented exclusions cover dynamically shaped YAML, JSON, and third-party
+scientific-library boundaries; this project does not claim strict-mode coverage.
 A per-file exception must name the narrow reason beside the configuration; never exempt
 a maintained module from a rule family for convenience.
 Use modern Python 3.14 syntax, absolute imports, `Path`, precise public-boundary types,

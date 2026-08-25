@@ -3,15 +3,23 @@
 from __future__ import annotations
 
 import ast
+import os
+import re
+import subprocess
+import sys
 from pathlib import Path
 from typing import cast
 
+import pytest
 import yaml
+
+from sqpack.project import ProjectLayoutError, require_project_root
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REPOSITORY_ROOT = PROJECT_ROOT.parents[1]
 SOURCE_ROOT = PROJECT_ROOT / "src" / "sqpack"
 VALIDATION_WORKFLOW = REPOSITORY_ROOT / ".github" / "workflows" / "packing-validation.yml"
+PYTHON_VERSION = PROJECT_ROOT / ".python-version"
 
 
 def _mapping(value: object) -> dict[str, object]:
@@ -40,6 +48,18 @@ def _assert_imports_exclude(paths: list[Path], forbidden: tuple[str, ...]) -> No
     assert violations == []
 
 
+def _process_module_references(path: Path) -> set[str]:
+    """Literal Python modules named across a subprocess boundary."""
+    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    return {
+        value
+        for node in ast.walk(tree)
+        if isinstance(node, ast.Constant)
+        and isinstance((value := node.value), str)
+        and re.fullmatch(r"(?:cases|devtools)(?:\.[a-zA-Z_][a-zA-Z0-9_]*)+", value)
+    }
+
+
 def test_code_is_segregated_by_maturity_and_dependencies_flow_one_way() -> None:
     required = [
         SOURCE_ROOT,
@@ -63,6 +83,52 @@ def test_code_is_segregated_by_maturity_and_dependencies_flow_one_way() -> None:
     _assert_imports_exclude(research, ("sqpack.campaign", "cases", "devtools"))
     _assert_imports_exclude(campaign, ("cases", "devtools"))
     _assert_imports_exclude(cli, ("cases", "devtools"))
+
+    assert {
+        reference
+        for path in reusable + research + campaign
+        for reference in _process_module_references(path)
+    } == set()
+    cli_process_edges = {
+        reference for path in cli for reference in _process_module_references(path)
+    }
+    assert any(reference.startswith("cases.") for reference in cli_process_edges)
+    assert any(reference.startswith("devtools.") for reference in cli_process_edges)
+
+
+def test_repository_applications_fail_clearly_without_a_project_checkout(
+    tmp_path: Path,
+) -> None:
+    with pytest.raises(ProjectLayoutError, match="PACKING_PROJECT_ROOT"):
+        require_project_root(tmp_path)
+
+
+@pytest.mark.parametrize(
+    ("module", "arguments"),
+    [
+        ("sqpack.cli.validate", ["--list"]),
+        ("sqpack.campaign.runner", ["status"]),
+        ("sqpack.campaign.ledger", ["check"]),
+    ],
+)
+def test_repository_application_entrypoints_reject_an_invalid_explicit_root(
+    tmp_path: Path, module: str, arguments: list[str]
+) -> None:
+    environment = os.environ.copy()
+    environment["PACKING_PROJECT_ROOT"] = str(tmp_path)
+
+    completed = subprocess.run(
+        [sys.executable, "-m", module, *arguments],
+        cwd=tmp_path,
+        env=environment,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert completed.returncode != 0
+    assert "packing project checkout not found" in completed.stderr
+    assert "PACKING_PROJECT_ROOT" in completed.stderr
 
 
 def test_no_python_implementation_remains_in_ambiguous_legacy_locations() -> None:
@@ -89,6 +155,8 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     document: object = yaml.safe_load(VALIDATION_WORKFLOW.read_text(encoding="utf-8"))
     jobs = _mapping(_mapping(document)["jobs"])
 
+    assert PYTHON_VERSION.read_text(encoding="utf-8").strip() == "3.14.7"
+
     for job_name in ("validate", "macos-portability"):
         raw_steps = _mapping(jobs[job_name])["steps"]
         assert isinstance(raw_steps, list)
@@ -105,5 +173,44 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
             if str(step.get("uses", "")).startswith("astral-sh/setup-uv@")
         )
         setup_options = _mapping(setup_uv["with"])
+        assert setup_options["python-version"] == "3.14.7"
         assert setup_options["working-directory"] == "explorations/packing"
         assert setup_options["cache-dependency-glob"] == "uv.lock"
+
+        environment_commands = [
+            str(step["run"])
+            for step in steps
+            if isinstance(step.get("run"), str)
+            and str(step["run"]).startswith(("uv sync", "uv run"))
+        ]
+        assert environment_commands
+        assert all("--all-extras" in command for command in environment_commands)
+
+    triggers = _mapping(_mapping(document)["on"])
+    assert "workflow_dispatch" in triggers
+
+    mac_steps = _mapping(jobs["macos-portability"])["steps"]
+    assert isinstance(mac_steps, list)
+    deep_probe = next(
+        _mapping(step)
+        for step in mac_steps
+        if _mapping(step).get("name") == "Assert the known deep-golden portability gap"
+    )
+    assert "continue-on-error" not in deep_probe
+    assert "devtools.check_known_macos_golden_drift" in str(deep_probe["run"])
+
+
+def test_devtools_use_public_package_interfaces() -> None:
+    violations: list[str] = []
+    path = PROJECT_ROOT / "devtools" / "check_canonical.py"
+    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.ImportFrom) or not node.module:
+            continue
+        if node.module.startswith("sqpack"):
+            violations.extend(
+                f"{path.relative_to(PROJECT_ROOT)} imports {alias.name}"
+                for alias in node.names
+                if alias.name.startswith("_")
+            )
+    assert violations == []

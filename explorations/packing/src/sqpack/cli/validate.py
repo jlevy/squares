@@ -26,7 +26,13 @@ from typing import Literal, Never, override
 
 import yaml
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
+from sqpack.project import (
+    ProjectLayoutError,
+    configured_project_root,
+    require_project_root,
+)
+
+PROJECT_ROOT = configured_project_root()
 REPOSITORY_ROOT = PROJECT_ROOT.parents[1]
 ENGINE = PROJECT_ROOT / "sqsearch/target/release/sqsearch"
 RESULTS = Path("campaign/series/series-000-smoke-and-calibration/results")
@@ -34,6 +40,8 @@ ACTIVITY_MARKER = PROJECT_ROOT / ".gate-running"
 DEFAULT_CPU_COUNT = 4
 INNER_JOB_DIVISOR = 3
 TOP_TIMING_COUNT = 8
+SUPPORTED_PYTHON = (3, 14)
+BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 
 
 class UsageError(ValueError):
@@ -218,25 +226,35 @@ def _basin_atlas(context: Context) -> str:
     return _module(context, "devtools.check_atlas")
 
 
+def _basin_event_archives(results: Path) -> list[Path]:
+    """Discover retained event journals by their versioned record contract."""
+    archives: list[Path] = []
+    for path in sorted(results.glob("*.jsonl")):
+        first_line = next(
+            (line for line in path.read_text().splitlines() if line.strip()), None
+        )
+        if first_line is None:
+            continue
+        try:
+            first_record = json.loads(first_line)
+        except json.JSONDecodeError as error:
+            message = f"cannot classify malformed result archive {path}"
+            raise StepFailureError(message) from error
+        contract = first_record.get("contract") if isinstance(first_record, dict) else None
+        if isinstance(contract, str) and contract.startswith(BASIN_EVENT_CONTRACT_PREFIX):
+            archives.append(path)
+    return archives
+
+
 def _basin_events(context: Context) -> str:
     module = "cases.campaign_smoke.basin_events"
-    archives = (
-        "exp-018-h-021-n3-basin-events.jsonl",
-        "exp-021-h-021-n3-basin-event-v3.jsonl",
-        "exp-022-h-021-n3-basin-event-v3-completion.jsonl",
-        "exp-023-h-021-n4-basin-event-v3.jsonl",
-        "exp-024-h-021-n4-basin-event-v3-repair.jsonl",
-        "exp-025-h-021-n5-basin-event-v3.jsonl",
-        "exp-026-h-021-n6-basin-event-v3.jsonl",
-        "exp-027-h-021-n6-basin-event-v3-retention.jsonl",
-        "exp-028-h-021-n7-basin-event-v3.jsonl",
-        "exp-029-h-021-n8-basin-event-v3.jsonl",
-        "exp-030-h-021-n9-basin-event-v3.jsonl",
-        "exp-031-h-002-n10-source-return.jsonl",
-    )
+    archives = _basin_event_archives(PROJECT_ROOT / RESULTS)
+    if not archives:
+        raise StepFailureError(f"no basin-event archives found below {RESULTS}")
     outputs = [_module(context, module, "--selftest")]
     outputs.extend(
-        _module(context, module, "replay", str(RESULTS / archive)) for archive in archives
+        _module(context, module, "replay", str(archive.relative_to(PROJECT_ROOT)))
+        for archive in archives
     )
     return "\n".join(outputs)
 
@@ -453,8 +471,18 @@ def _frontier_corpus(context: Context) -> str:
             open_count += 1
             nagamochi_count += packing["lower_bound"]["kind"] == "nagamochi"
         values.add(n)
-    if values != set(range(1, 101)) or (open_count, nagamochi_count) != (65, 63):
-        raise StepFailureError("frontier coverage or documented corpus counts drifted")
+    expected_values = set(range(1, 101))
+    if values != expected_values:
+        missing = sorted(expected_values - values)
+        extra = sorted(values - expected_values)
+        raise StepFailureError(
+            f"frontier n coverage drifted: missing {missing}, unexpected {extra}"
+        )
+    if (open_count, nagamochi_count) != (65, 63):
+        raise StepFailureError(
+            "frontier corpus counts drifted: expected 65 open and 63 Nagamochi-bounded; "
+            f"observed {open_count} open and {nagamochi_count} Nagamochi-bounded"
+        )
 
     kingbird = _module(
         context,
@@ -488,14 +516,24 @@ def _strategy_catalogues(_context: Context) -> str:
         path = PROJECT_ROOT / "frontier" / f"{kind}-strategies.yaml"
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
         strategies = data["strategies"]
-        if (
-            data["kind"] != kind
-            or data["count"] != len(strategies)
-            or len(strategies) != expected
-        ):
-            raise StepFailureError(f"{kind}: expected {expected} strategies")
-        if [item["id"] for item in strategies] != list(range(1, expected + 1)):
-            raise StepFailureError(f"{kind}: ids are not contiguous")
+        observed_kind = data.get("kind")
+        if observed_kind != kind:
+            raise StepFailureError(
+                f"{kind} catalogue: expected kind {kind!r}, observed {observed_kind!r}"
+            )
+        declared_count = data.get("count")
+        observed_count = len(strategies)
+        if declared_count != observed_count or observed_count != expected:
+            raise StepFailureError(
+                f"{kind} catalogue: expected {expected} strategies; "
+                f"declared {declared_count!r}, observed {observed_count} records"
+            )
+        observed_ids = [item["id"] for item in strategies]
+        expected_ids = list(range(1, expected + 1))
+        if observed_ids != expected_ids:
+            raise StepFailureError(
+                f"{kind} catalogue: expected ids {expected_ids}, observed {observed_ids}"
+            )
         families = set(data["families"])
         for item in strategies:
             required = (item[field_name], item["name"], item["mechanism"], item["note"])
@@ -540,6 +578,31 @@ def _differential(context: Context) -> str:
     return _module(context, "devtools.check_search_differential", "20000")
 
 
+def _commit_state(commit: str) -> Literal["reachable", "orphaned", "missing"]:
+    available = subprocess.run(
+        ("git", "cat-file", "-e", f"{commit}^{{commit}}"),
+        cwd=PROJECT_ROOT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    if available.returncode != 0:
+        return "missing"
+    ancestry = subprocess.run(
+        ("git", "merge-base", "--is-ancestor", commit, "HEAD"),
+        cwd=PROJECT_ROOT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    if ancestry.returncode not in {0, 1}:
+        raise StepFailureError(
+            f"git could not compare engine commit {commit} with HEAD "
+            f"(exit {ancestry.returncode})"
+        )
+    return "reachable" if ancestry.returncode == 0 else "orphaned"
+
+
 def _provenance(context: Context) -> str:
     del context
     lines: list[str] = []
@@ -557,17 +620,14 @@ def _provenance(context: Context) -> str:
         if re.fullmatch(r"[0-9a-fA-F]{7,40}", commit) is None:
             raise StepFailureError(f"invalid {path.name} engine_commit: {raw}")
         checked += 1
-        reachable = (
-            subprocess.run(
-                ("git", "merge-base", "--is-ancestor", commit, "HEAD"),
-                cwd=PROJECT_ROOT,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-                check=False,
-            ).returncode
-            == 0
-        )
-        if reachable:
+        state = _commit_state(commit)
+        if state == "missing":
+            raise StepFailureError(
+                f"{path.name}: engine commit {commit} is unavailable in local history; "
+                "fetch complete history (`git fetch --unshallow` for a shallow clone, "
+                "otherwise `git fetch --all`) and rerun"
+            )
+        if state == "reachable":
             lines.append(f"  ok       {path.name} -> {commit}")
         else:
             lines.append(f"  ORPHANED {path.name} -> {commit} (must carry an annotation)")
@@ -604,7 +664,7 @@ STEPS: tuple[Step, ...] = (
     Step("H-041 Stromquist repaired-cover exact certificate", _stromquist_repair),
     Step("H-010 Stromquist printed-cover exact rejection", _stromquist_rejection),
     Step("exact verification", _exact_verification, fast=True),
-    Step("negative control", _verifier_limits, fast=True),
+    Step("verifier perturbation limits", _verifier_limits, fast=True),
     Step("frontier corpus", _frontier_corpus),
     Step("generated tables in sync with frontier/", _generated_tables, fast=True),
     Step("strategy catalogues", _strategy_catalogues, fast=True),
@@ -699,25 +759,25 @@ def _build_engine(context: Context, selected: Sequence[Step]) -> str:
 
 
 @contextmanager
-def _validation_activity() -> Iterator[None]:
+def _validation_activity(marker: Path) -> Iterator[None]:
     try:
-        ACTIVITY_MARKER.mkdir()
+        marker.mkdir()
     except FileExistsError as error:
         raise StepFailureError(
-            "validation marker already exists at "
-            f"{ACTIVITY_MARKER}; another gate may be running"
+            f"validation marker already exists at {marker}; another gate may be running. "
+            f"Wait for it, or delete {marker.name} if a crash left it behind."
         ) from error
     try:
         yield
     finally:
-        ACTIVITY_MARKER.rmdir()
+        marker.rmdir()
 
 
 def _run_selected(
     selected: Sequence[Step], context: Context, patterns: list[str]
 ) -> RunSummary:
     started = time.perf_counter()
-    with _validation_activity():
+    with _validation_activity(ACTIVITY_MARKER):
         setup_output = _build_engine(context, selected)
         by_name: dict[str, StepResult] = {}
         with ThreadPoolExecutor(max_workers=context.jobs) as pool:
@@ -736,6 +796,12 @@ def _run_selected(
         total_count=len(STEPS),
         partial_pattern=patterns,
     )
+
+
+def _summary_status(summary: RunSummary, *, strict: bool) -> int:
+    failed = any(result.status == "failed" for result in summary.results)
+    skipped = any(result.status == "skipped" for result in summary.results)
+    return 1 if failed or (strict and skipped) else 0
 
 
 def _render_text(summary: RunSummary, *, strict: bool) -> int:
@@ -762,17 +828,18 @@ def _render_text(summary: RunSummary, *, strict: bool) -> int:
     skipped = [result for result in summary.results if result.status == "skipped"]
     print()
     if failed:
-        print(f"{len(failed)} STEPS FAILED:")
+        noun = "STEP" if len(failed) == 1 else "STEPS"
+        print(f"{len(failed)} {noun} FAILED:")
         for result in failed:
             print(f"  - {result.name}")
-        return 1
+        return _summary_status(summary, strict=strict)
     if skipped:
         print(f"VALIDATION COMPLETED, BUT {len(skipped)} CHECKS WERE SKIPPED:")
         for result in skipped:
             print(f"  - {result.name}: {result.reason}")
         if strict:
             print("strict mode: a skipped check is not a passed check", file=sys.stderr)
-            return 1
+            return _summary_status(summary, strict=strict)
     if summary.selected_count != summary.total_count:
         qualifier = (
             f"--only {summary.partial_pattern!r}" if summary.partial_pattern else "--fast"
@@ -783,7 +850,7 @@ def _render_text(summary: RunSummary, *, strict: bool) -> int:
         )
     else:
         print("ALL CHECKS PASSED")
-    return 0
+    return _summary_status(summary, strict=strict)
 
 
 def _parser() -> ArgumentParser:
@@ -820,15 +887,13 @@ def _parser() -> ArgumentParser:
     return parser
 
 
-def _validate_invocation(*, strict: bool, deep: bool, only: list[str], fast: bool) -> None:
+def _validate_invocation(*, strict: bool, only: list[str], fast: bool) -> None:
     if strict and (only or fast):
         raise UsageError("--strict cannot be combined with --only or --fast")
-    if strict and not deep:
-        raise StepFailureError("strict mode did not enable deep validation")
 
 
 def _validate_runtime() -> None:
-    if sys.version_info[:2] != (3, 14):
+    if sys.version_info[:2] != SUPPORTED_PYTHON:
         raise UsageError(f"Python 3.14 is required, running {sys.version.split()[0]}")
 
 
@@ -839,12 +904,12 @@ def main(arguments: list[str] | None = None) -> int:
         namespace = parser.parse_args(arguments)
         strict = namespace.strict or _environment_flag("PACKING_VALIDATE_STRICT")
         deep = namespace.deep or _environment_flag("PACKING_VALIDATE_DEEP") or strict
-        _validate_invocation(strict=strict, deep=deep, only=namespace.only, fast=namespace.fast)
+        _validate_invocation(strict=strict, only=namespace.only, fast=namespace.fast)
         jobs_value = namespace.jobs or os.environ.get("PACKING_VALIDATE_JOBS")
         jobs = (
             _positive_integer("--jobs", jobs_value)
             if jobs_value is not None
-            else (os.cpu_count() or DEFAULT_CPU_COUNT)
+            else (os.process_cpu_count() or DEFAULT_CPU_COUNT)
         )
         inner_value = namespace.inner_jobs or os.environ.get("PACKING_VALIDATE_INNER_JOBS")
         inner_jobs = (
@@ -853,15 +918,16 @@ def main(arguments: list[str] | None = None) -> int:
             else max(1, jobs // INNER_JOB_DIVISOR)
         )
         _validate_runtime()
+        require_project_root(PROJECT_ROOT)
+        selected = _select_steps(only=namespace.only, fast=namespace.fast)
         if namespace.list:
-            records = [{"name": step.name, "tags": step.tags} for step in STEPS]
+            records = [{"name": step.name, "tags": step.tags} for step in selected]
             if namespace.format == "json":
                 print(json.dumps(records, indent=2))
             else:
-                for step in STEPS:
+                for step in selected:
                     print(f"{step.name} [{step.tags}]")
             return 0
-        selected = _select_steps(only=namespace.only, fast=namespace.fast)
         environment = os.environ.copy()
         environment["PACK_JOBS"] = str(inner_jobs)
         context = Context(
@@ -877,15 +943,13 @@ def main(arguments: list[str] | None = None) -> int:
             stream = sys.stdout if error.status == 0 else sys.stderr
             print(error.message, end="", file=stream)
         return error.status
-    except (UsageError, StepFailureError) as error:
+    except (UsageError, StepFailureError, ProjectLayoutError) as error:
         print(f"packing-validate: error: {error}", file=sys.stderr)
-        return 2 if isinstance(error, UsageError) else 1
+        return 2 if isinstance(error, (UsageError, ProjectLayoutError)) else 1
 
     if namespace.format == "json":
         print(json.dumps(asdict(summary), indent=2))
-        failed = any(result.status == "failed" for result in summary.results)
-        skipped = any(result.status == "skipped" for result in summary.results)
-        return 1 if failed or (strict and skipped) else 0
+        return _summary_status(summary, strict=strict)
     return _render_text(summary, strict=strict)
 
 

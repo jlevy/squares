@@ -38,7 +38,7 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/sqpack"]
 
-# --- Lint -------------------------------------------------------------------
+# Lint
 #
 # The floor is deliberately high. This directory's whole argument is that a
 # tolerance nobody checks becomes a blind spot, and the same is true of a lint
@@ -110,6 +110,8 @@ ignore = [
 "src/sqpack/campaign/ledger.py" = ["PERF401"]
 "devtools/render_defects.py" = ["PERF401"]
 "devtools/render_research_tables.py" = ["PERF401"]
+# CLI behavior tests exercise small internal orchestration seams without making them APIs.
+"tests/test_validation_cli.py" = ["SLF001"]
 
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
@@ -120,7 +122,7 @@ known-first-party = ["cases", "devtools", "sqpack"]
 [tool.ruff.format]
 docstring-code-format = true
 
-# --- Types ------------------------------------------------------------------
+# Types
 
 [tool.basedpyright]
 include = ["src/sqpack", "cases", "devtools", "benchmarks", "tests"]
@@ -132,14 +134,26 @@ reportUnusedImport = "error"
 reportUnusedVariable = "error"
 reportDuplicateImport = "error"
 reportPrivateUsage = "warning"
+# Ruff's ISC family owns this duplicate lexical check and avoids two diagnostics.
 reportImplicitStringConcatenation = "none"
+# Several numerical dependencies do not publish complete type information; boundary
+# behavior is covered by schema, replay, and scientific-contract tests.
 reportMissingTypeStubs = "none"
+# YAML and JSON enter through dynamically shaped library APIs. Callers validate their
+# envelopes before use; reporting every inbound Any would obscure those real boundaries.
 reportAny = "none"
+# Campaign and retained-case records deliberately use Any where the persisted schema,
+# rather than a Python class hierarchy, owns the shape.
 reportExplicitAny = "none"
+# PyYAML and jsonschema expose members through dynamic values after validation.
 reportUnknownMemberType = "none"
+# Dynamic records cross helper calls only after their owning schema or guard accepts them.
 reportUnknownArgumentType = "none"
+# Loaded scientific records are narrowed by contract checks instead of generated models.
 reportUnknownVariableType = "none"
+# Generic schema and renderer callbacks accept record shapes owned outside Python typing.
 reportUnknownParameterType = "none"
+# Small local helper classes in executable checks need no redundant attribute annotations.
 reportUnannotatedClassAttribute = "none"
 
 [tool.pytest.ini_options]

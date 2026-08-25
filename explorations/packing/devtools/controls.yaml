@@ -151,7 +151,7 @@ controls:
   replace:
     - 'deep = namespace.deep or _environment_flag("PACKING_VALIDATE_DEEP") or strict'
     - 'deep = namespace.deep or _environment_flag("PACKING_VALIDATE_DEEP") or False'
-  run: python3 -m sqpack.cli.validate --strict
+  run: uv run --frozen --quiet pytest -q tests/test_validation_cli.py -k strict_mode_enables_deep
   expect: "strict mode did not enable deep validation"
 
 - name: gate - historical regression failure is not masked by later probes
@@ -459,7 +459,7 @@ controls:
 
 - name: canonical - the contact certificate agrees with everything
   file: src/sqpack/research/canonical.py
-  replace: ["    digest = _certificate([ranks[a] for a in initial], adjacency).encode()",
+  replace: ["    digest = canonical_graph_certificate([ranks[a] for a in initial], adjacency).encode()",
             "    digest = b'constant'"]
   run: uv run --frozen --quiet python -m devtools.check_canonical
   expect: "FAIL  a different arrangement keys differently"

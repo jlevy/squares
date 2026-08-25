@@ -1,6 +1,7 @@
 name: Packing validation
 
-on:
+"on":
+  workflow_dispatch: {}
   pull_request:
     paths:
       - ".agents/skills/experiment-loop/**"
@@ -38,7 +39,7 @@ jobs:
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
-          python-version: "3.14"
+          python-version: "3.14.7"
           working-directory: explorations/packing
           enable-cache: true
           cache-dependency-glob: uv.lock
@@ -47,7 +48,9 @@ jobs:
         run: uv sync --frozen --all-extras --group dev
 
       - name: Run the complete packing validation surface
-        run: uv run --frozen --group dev packing-validate --jobs 2 --inner-jobs 1
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --jobs 2 --inner-jobs 1
 
   macos-portability:
     runs-on: macos-latest
@@ -64,7 +67,7 @@ jobs:
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
-          python-version: "3.14"
+          python-version: "3.14.7"
           working-directory: explorations/packing
           enable-cache: true
           cache-dependency-glob: uv.lock
@@ -73,14 +76,13 @@ jobs:
         run: uv sync --frozen --all-extras --group dev
 
       - name: Run the complete packing validation surface on a second architecture
-        run: uv run --frozen --group dev packing-validate --jobs 2 --inner-jobs 1
-
-      # The deep reconstruction currently exposes the known numerical-instability
-      # contracts in think-sk15, think-lwao, and think-u97a. Keep the signal visible
-      # without making an unrelated structural PR accept or conceal a changed golden.
-      - name: Probe the known deep-golden portability gap
-        id: deep-golden
-        continue-on-error: true
         run: >-
-          uv run --frozen --group dev packing-validate --deep
-          --only "golden basin maps" --jobs 1 --inner-jobs 1
+          uv run --frozen --all-extras --group dev
+          packing-validate --jobs 2 --inner-jobs 1
+
+      # D-203 owns this exact expected failure. The classifier fails on a changed
+      # error and on a pass, which means neither outcome can disappear into CI noise.
+      - name: Assert the known deep-golden portability gap
+        run: >-
+          uv run --frozen --all-extras --group dev python
+          -m devtools.check_known_macos_golden_drift

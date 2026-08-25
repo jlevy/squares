@@ -41,6 +41,10 @@ def main(arguments: list[str] | None = None) -> int:
     options = parser.parse_args(arguments)
     _positive(parser, "--chains", options.chains)
     _positive(parser, "--budget-moves", options.budget_moves)
+    for instance in options.instances:
+        _positive(parser, "each instance", instance)
+    for seed in options.seeds:
+        _positive(parser, "each seed", seed)
     if not options.engine.is_file():
         parser.error(
             f"sqsearch executable not found at {options.engine}; "
@@ -54,9 +58,7 @@ def main(arguments: list[str] | None = None) -> int:
         temporary.open("w", encoding="utf-8") as archive,
     ):
         for instance in options.instances:
-            _positive(parser, "each instance", instance)
             for seed in options.seeds:
-                _positive(parser, "each seed", seed)
                 completed = subprocess.run(
                     [
                         options.engine,

@@ -67,12 +67,17 @@ from typing import Any
 import yaml
 from strif import atomic_output_file
 
-ROOT = Path(__file__).resolve().parents[3]
+from sqpack.project import ProjectLayoutError, configured_project_root, require_project_root
+
+ROOT = configured_project_root()
 CAMPAIGN = ROOT / "campaign"
 SERIES = CAMPAIGN / "series"
 REPORT = CAMPAIGN / "session-report.md"
 EXECUTION_METADATA = "campaign_runner_execution"
 EXECUTION_TIME_DECIMAL_PLACES = 6
+CAMPAIGN_ENTRY_POINT = (
+    f"{__spec__.name if __spec__ is not None else 'sqpack.campaign.runner'}:main"
+)
 
 # campaign/README.md, "The metric vector": a gap under 1e-4. A numerical proxy for the
 # combinatorial class, never evidence of it.
@@ -94,6 +99,10 @@ class RefusalError(Exception):
     """Something the harness may not decide. Ends the step for a human."""
 
 
+class GateRunningError(RefusalError):
+    """The validation gate owns resources required by a campaign command."""
+
+
 GATE_MARKER = ROOT / ".gate-running"
 
 
@@ -101,17 +110,18 @@ def now() -> datetime:
     return datetime.now(UTC)
 
 
-def refuse_if_gate_running() -> None:
+def refuse_if_gate_running(marker: Path | None = None) -> None:
     """The gate and the harness must never overlap.
 
     Full validation can rebuild the shared search engine and saturate the same CPUs used
     to measure a campaign round. Separating the two keeps performance receipts
     interpretable and prevents a campaign from executing against a changing binary.
     """
-    if GATE_MARKER.exists():
-        raise RefusalError(
+    active_marker = GATE_MARKER if marker is None else marker
+    if active_marker.exists():
+        raise GateRunningError(
             "packing-validate is running and shares the engine and compute budget. "
-            f"Wait for it, or delete {GATE_MARKER.name} if a crash left it behind."
+            f"Wait for it, or delete {active_marker.name} if a crash left it behind."
         )
 
 
@@ -135,12 +145,18 @@ def regenerate() -> subprocess.CompletedProcess[str]:
 
 
 def git(*args: str) -> str:
-    return subprocess.run(
+    completed = subprocess.run(
         ["git", *args], cwd=ROOT, capture_output=True, text=True, check=False
-    ).stdout.strip()
+    )
+    if completed.returncode:
+        detail = completed.stderr.strip() or completed.stdout.strip() or "no diagnostic"
+        raise RefusalError(
+            f"{shlex.join(['git', *args])} failed with exit {completed.returncode}: {detail}"
+        )
+    return completed.stdout.strip()
 
 
-# --- reading the record -------------------------------------------------------------
+# Reading the record
 
 
 def all_rounds() -> list[tuple[Path, dict[str, Any]]]:
@@ -185,7 +201,7 @@ def hypothesis(hid: str) -> dict[str, Any]:
     raise RefusalError(f"no registry artifact for {hid}")
 
 
-# --- STEP: queue ----------------------------------------------------------------------
+# Step: queue
 
 
 def queue(
@@ -230,7 +246,7 @@ def queue(
     return runnable, skipped
 
 
-# --- STEP: claim ------------------------------------------------------------------------
+# Step: claim
 
 STUB = """---
 title: {eid} — {hid} (in progress)
@@ -382,7 +398,7 @@ def artifact_fields_from_execution(execution: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-# --- STEP: execute, and the contract it enforces --------------------------------------
+# Step: execute and enforce its contract
 
 
 def validated_record(line: str, *, allow_execution_metadata: bool = False) -> dict[str, Any]:
@@ -507,7 +523,7 @@ def execute(eid: str) -> None:
             )
 
 
-# --- STEP: record -- guard, decide, write, regenerate, commit -------------------------
+# Step: record, guard, decide, write, regenerate, and commit
 
 
 @dataclass
@@ -679,7 +695,7 @@ def record(eid: str, *, operator: str) -> str:
                 "interleaved": False, "operator": operator,
                 "commit": artifact_execution["method_commit"],
                 "dirty": artifact_execution["dirty"],
-                "entry_point": "explorations/packing/src/sqpack/campaign/runner.py",
+                "entry_point": CAMPAIGN_ENTRY_POINT,
                 "command": recipe["command"], "record": str(archive.relative_to(ROOT)),
             },
             "effort": {"timebox": recipe["timebox"],
@@ -834,7 +850,7 @@ starts from nothing — no budget was spent that a later round can resume from.
     print(f"{eid} released; {hid} returns to the queue")
 
 
-# --- STEP: status and preflight --------------------------------------------------------
+# Step: status and preflight
 
 
 def duration(timebox: str) -> float:
@@ -971,9 +987,12 @@ def preflight() -> int:
             try:
                 action()
                 refused, detail = False, "the command ran"
-            except RefusalError as exc:
-                refused = "packing-validate is running" in str(exc)
+            except GateRunningError as exc:
+                refused = True
                 detail = str(exc)
+            except RefusalError as exc:
+                refused = False
+                detail = f"wrong refusal type: {exc}"
             checks.append((label, refused, detail))
     finally:
         if created_gate_marker:
@@ -1033,7 +1052,7 @@ def preflight() -> int:
     return 0 if ok else 1
 
 
-# --- run: the three middle steps, in a loop -------------------------------------------
+# Run the three middle steps in a loop
 
 
 def run(operator: str, hours: float) -> int:
@@ -1145,6 +1164,7 @@ def main(arguments: list[str] | None = None) -> int:
     options = parser.parse_args(arguments)
 
     try:
+        require_project_root(ROOT)
         if options.step in {"status", "queue"}:
             show_status()
         elif options.step == "preflight":
@@ -1159,7 +1179,7 @@ def main(arguments: list[str] | None = None) -> int:
             release(options.target, options.why)
         elif options.step == "run":
             return run(options.operator, options.session_hours)
-    except (RefusalError, GuardError) as error:
+    except (RefusalError, GuardError, ProjectLayoutError) as error:
         print(f"REFUSED: {error}", file=sys.stderr)
         return 1
     return 0
