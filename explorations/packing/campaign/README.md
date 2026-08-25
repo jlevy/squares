@@ -310,8 +310,14 @@ direction: it may decline a marginal win and must not accept one.
 been compared. The currency is **pair-tests**, not wall clock and not moves: it is
 machine-independent and comparable across proposers whose move semantics differ, which
 matters as soon as δ-continuation and archive-based search sit beside annealing.
-`sqsearch` currently reports moves only; emitting a pair-test counter is a tracked work
-item.
+`sqsearch` now emits exact search-path `pair_tests` on every ordinary chain, basin-entry
+trial, and summary. The count is one `pair_depth` evaluation of one unordered square
+pair: one full scan per restart, both local scans per move, and one final
+retained-configuration scan.
+It excludes the basin-entry command’s one-time seed diagnostic and independent
+verification work, which are setup and verifier receipts, not proposer budget.
+Budget enforcement, campaign adapters, and cross-proposer comparisons are still
+move-denominated, so no equal-pair-budget comparison is yet admissible.
 
 ## Budget and stop conditions
 

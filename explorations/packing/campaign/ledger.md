@@ -15,6 +15,11 @@
 | [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | retrospective | `research-loop` (insight) | `research-loop` (insight) | 1 | think-n82j | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | retrospective | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-ciwv | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
 | [session-009](agent-sessions/session-009-autonomous-basin-map.md) | stopped | mixed | `process-review` (process) | `process-review` (process) | 10 | think-05hr | Open a new AgentSession/v2 under W2 factual-review with a Correctness focus. Capture the n=4 seed-0 status-4 millisecond fixture under think-nr5w, then finish think-b3bm's final-receipt runbook rehearsal and revalidate the strict launch path before new basin-map rounds. Keep D-126 separate; the exact-research queue remains think-nm35. |
+| [session-010](agent-sessions/session-010-eight-hour-mixed-research.md) | stopped | contemporaneous | `research-loop` (insight) | `process-review` (process) | 15 | think-3cbq | Continue the original wall-clock objective in a new bounded session from the final PR 29 head. Run frozen order 7 under think-b4jc: require identical seeded outputs, independently recomputed pair totals, and unloaded-host overhead before retaining the meter; then route the first unmetered quench adapter without changing a criterion. |
+| [session-011](agent-sessions/session-011-eight-hour-continuation.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `research-pass` (insight) | 7 | think-gszk | Rotate after the order-13 checkpoint; do not infer a finite improvement, launch an unbounded proof audit or resume the H-043 wider run. |
+| [session-012](agent-sessions/session-012-eight-hour-final-continuation.md) | completed | contemporaneous | `process-review` (correctness) | `process-review` (process) | 3 | think-gszk | Commit and push the local sign repair, then start a bounded successor session. |
+| [session-013](agent-sessions/session-013-generated-view-recurrence-checkpoint.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-gszk | Commit and push, update PR 34, then begin a new bounded research session. |
+| [session-014](agent-sessions/session-014-final-portfolio-rotation.md) | stopped | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 2 | think-gszk | From the pushed PR 34 head, open a new bounded session and preregister one BC-010 exact R4/R5 nonlinear-realization slice under think-1s0h; retain D-239 as a separate pipeline slice and do not begin basin-frequency work before component identity. |
 
 ### Workflow summary
 
@@ -22,10 +27,13 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
-| `factual-review` | 0 | 0 | 0 | 2 |
-| `insight-iteration` | 0 | 1 | 0 | 2 |
-| `process-review` | 0 | 4 | 1 | 6 |
-| `research-loop` | 0 | 4 | 0 | 7 |
+| `research-pass` | 0 | 0 | 1 | 0 |
+| `factual-review` | 0 | 0 | 4 | 2 |
+| `insight-iteration` | 0 | 1 | 3 | 2 |
+| `process-review` | 2 | 4 | 8 | 6 |
+| `efficiency-loop` | 1 | 0 | 1 | 0 |
+| `research-loop` | 1 | 4 | 4 | 7 |
+| `pipeline-improvement` | 1 | 0 | 8 | 0 |
 
 ## Experiment agendas
 
@@ -44,7 +52,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | BC-007 | tool_validation | 9 | complete | 2 | think-xzew | retained event plus canonicalization share of wall time |
 | BC-008 | tool_validation | 10 | complete | 1 | think-ouf0 | permanent exp-031 semantic replay in the focused and normal gates |
 | BC-009 | measurement_validation | 3, 4 | complete | 0 | think-a2v6 | classifier contract, positive fixtures, and negative mutations |
-| BC-010 | research | 5 | ready | 0 | think-1s0h | enumerate the other wall-release and SAT-branch cone directions before attempting any further nonlinear continuation or local-isolation claim |
+| BC-010 | research | 5 | ready | 0 | think-1s0h | test R4, R5, -W, mixed-angle realization, and stationary continuation beyond the twelve exp-039 paths without inferring whole-polytope terminality from their positive first-order stresses |
 | BC-011 | measurement_validation | 5, 6, 7, 8 | blocked | 1 | think-0yo9 | ambiguity-preserving classified event archive through the first failed or n=8 cell |
 | BC-012 | research | 5, 6, 7, 8 | blocked | 1 | think-ogv7 | discovery curves, held-out predictions, uncertainty, and stop verdict |
 | BC-013 | measurement_validation | 9, 10 | blocked | 2 | think-xzew | component discoveries per wall-second and per pair-test with profile |
@@ -55,7 +63,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 36 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 38 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -83,7 +91,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
 | H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6* 7* 8* | 14 | 106m agent + 4.0m wall |
 | H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
-| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 4 | 65m agent + 1s wall |
+| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 6 | 115m agent + 6s wall |
 | H-024 | refuted | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
 | H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
 | H-026 | confirmed | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 | 100m agent + 57s wall |
@@ -102,6 +110,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | H-039 | open question | proof | Can a checked extension of Stromquist's conditional forcing or another |  | 0 |  |
 | H-040 | blocked | search | After a known-answer n = 5 control, pivoting across one active separat | n: 5 10 | 0 |  |
 | H-041 | confirmed | proof | At s = 2 + 4/sqrt(5), replacing the printed Figure 14 point G = (4/5,  | n: 11* | 1 | 90m agent + 1s wall |
+| H-043 | blocked | proof | Every one of the 128 derivative-distinct fixed-side branches at Trump' | derivative_branch: all-128-exp-013-matrices | 0 |  |
 
 ## Rounds
 
@@ -128,7 +137,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-020 | series-000 | 5 | openai-codex | H-021 | The block retains two repeated side values and full poses, but it finds no proved optimum and D-165 makes all four events ineligible for component classification. |
 | exp-026 | series-000 | 6 | openai-codex | H-021 | Seeds 0 through 2 replay as admissible, but seed 3 crashed at the retention boundary after failing independent validity. D-183 blocks the cell and all larger event slices until a separately preregistered replication retains that stop. |
 
-### accepted (12)
+### accepted (14)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
@@ -144,6 +153,8 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-034 | series-000 | 5 | openai-codex | H-023 | The full declared parameter strip is feasible at the exp-033 side, the exact dual proves every orientation-indexed LP cell optimal, and generation and replay agree. |
 | exp-035 | series-000 | 5 | openai-codex | H-023 | Both owner-axis systems and every tied support row replay at all three strata; the exact non-sheet direction satisfies every active row and all controls reject. |
 | exp-036 | series-000 | 5 | openai-codex | H-023 | Both possible nearby owner-axis branches have a strict exact second-order obstruction, all six controls reject, and retained replay is identical. |
+| exp-038 | series-000 | 5 | openai-codex | H-023 | All six source matrices have the preregistered complete V-representation, both owner branches coincide at first order, both pointed-quotient face vectors are derived, replay is identical, and all ten controls reject their mutations. The verdict remains limited to branchwise linearization cones. |
+| exp-039 | series-000 | 5 | openai-codex | H-023 | The 30-row common cell is exactly equivalent to the bounded five-coordinate system, six feasible witnesses prove affine dimension five, and the exact LP dual fixes side 1+5sqrt(2)/4 throughout the cell. All twelve declared sharp paths pass independent exact packing checks and both owner branches have structurally derived positive stress-polynomial identities. Replay is identical and all ten controls reject. The verdict remains cell-local and pathwise first-order only. |
 
 ### baseline (11)
 
@@ -171,7 +182,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 ## Effort
 
-36 rounds, 868 agent-minutes, 28.2 wall-minutes.
+38 rounds, 918 agent-minutes, 28.3 wall-minutes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
