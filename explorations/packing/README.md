@@ -17,7 +17,7 @@ Roughly `0.088` in side length remains between that bound and the 1979 construct
 ![Walter Trump’s exact eleven-square packing inside its enclosing square.](atlas/rendering/trump11-overview.svg)
 
 *Walter Trump’s 1979 construction: six axis-aligned squares around a five-square oblique
-block. Dark-red segments and dots mark exact edge and point contacts.
+block. Translucent tempered-yellow segments and dots mark exact edge and point contacts.
 It is a certified upper bound, not a proof of optimality.*
 
 Work is organized at three levels.
@@ -267,10 +267,15 @@ Its caption and metadata distinguish candidates, verified constructions, certifi
 bounds, and proved optima; typography cannot upgrade a numerical candidate.
 Exact annotations retain algebraic or rational source expressions in SVG comments and
 namespaced metadata while using stable high-precision decimal projections for geometry.
-The container and every packed square use the same dark boundary, so a contact cannot
-look like a white gap.
-Exact-source adapters attach certified contact geometry: dark-red segments show shared
-boundary intervals, and dark-red dots show point contacts.
+The container and every packed square use the same thin pure-black boundary, so a
+contact cannot look like a white gap.
+The deterministic 20-color cool palette gives the first eleven square IDs deliberately
+separated hues and values, then reuses the fixed sequence for larger packings.
+Exact-source adapters attach certified contact geometry: 60%-opaque tempered-yellow
+segments show shared boundary intervals, and dots in the same reserved highlight color
+show point contacts.
+Each mark is clipped to its participating square interiors and sits above the square
+fills and below the black outlines.
 This layer is shown by default, can be removed with `--no-contacts`, and is never
 guessed for numerical candidate poses.
 

@@ -15,9 +15,9 @@
       "view": "moduli"
     },
     {
-      "alt": "Final packing on the certified exact feasible trajectory for five unit squares, with exact contacts marked in dark red.",
+      "alt": "Final packing on the certified exact feasible trajectory for five unit squares, with certified contacts highlighted in translucent tempered yellow.",
       "artifact": "atlas/rendering/n5-exact-face-trajectory.svg",
-      "caption": "The animated export follows endpoint A, the exact midpoint, and endpoint B; dark-red marks show endpoint B's certified contacts, and reduced-motion and non-CSS viewers show that final endpoint.",
+      "caption": "The animated export follows endpoint A, the exact midpoint, and endpoint B; translucent tempered-yellow marks show endpoint B's certified contacts, and reduced-motion and non-CSS viewers show that final endpoint.",
       "contacts": true,
       "evidence": "certified-upper-bound",
       "frontier_case": "frontier/n-005.md",
@@ -43,9 +43,9 @@
       "view": "comparison"
     },
     {
-      "alt": "Walter Trump exact packing of eleven unit squares, with edge and point contacts marked in dark red.",
+      "alt": "Walter Trump exact packing of eleven unit squares, with edge and point contacts highlighted in translucent tempered yellow.",
       "artifact": "atlas/rendering/trump11-overview.svg",
-      "caption": "Six axis-aligned squares surround a five-square block tilted at an algebraic angle near 40.18 degrees; dark-red segments and dots show contacts certified in the same number field.",
+      "caption": "Six axis-aligned squares surround a five-square block tilted at an algebraic angle near 40.18 degrees; translucent tempered-yellow segments and dots show contacts certified in the same number field.",
       "contacts": true,
       "evidence": "certified-upper-bound",
       "frontier_case": "frontier/n-011.md",
@@ -58,6 +58,6 @@
     }
   ],
   "gallery_generator": "uv run --frozen python tools/render_packing_gallery.py --update",
-  "renderer_version": "2",
+  "renderer_version": "3",
   "schema_version": 2
 }

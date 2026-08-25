@@ -16,6 +16,7 @@ from sqpack.render.model import (
     RenderSpec,
     ScalarKind,
     ScalarSource,
+    SquareGeometry,
     ViewLevel,
     validate_render_request,
 )
@@ -26,14 +27,18 @@ from sqpack.render.motion import (
 )
 from sqpack.render.numbers import format_points, format_svg_number, format_visible_number
 from sqpack.render.style import (
+    CONTACT_CLIP_POLICY,
+    CONTACT_HIGHLIGHT_OPACITY,
     LAYOUT,
     PAPER_THEME,
+    SQUARE_FILL_OPACITY,
     color_for_square,
     evidence_style,
     presentation_attributes,
 )
 from sqpack.render.svg import (
     append_exact_comment,
+    append_local_use,
     append_metadata,
     append_title_desc,
     element,
@@ -89,6 +94,7 @@ def _append_container(
         group,
         "rect",
         {
+            "data-feature": "container-outline",
             "x": format_svg_number(x),
             "y": format_svg_number(y),
             "width": format_svg_number(side * scale),
@@ -102,7 +108,9 @@ def _append_container(
     )
 
 
-def _append_square_id(group: ET.Element, square, projected: tuple[Point2, ...]) -> None:
+def _append_square_id(
+    group: ET.Element, square: SquareGeometry, projected: tuple[Point2, ...]
+) -> None:
     cx = sum((point.x.projected for point in projected), Decimal(0)) / 4
     cy = sum((point.y.projected for point in projected), Decimal(0)) / 4
     sub(
@@ -118,30 +126,47 @@ def _append_square_id(group: ET.Element, square, projected: tuple[Point2, ...]) 
     ).text = square.label or square.square_id
 
 
-def _append_static_square(
+def _append_square_fill(
     group: ET.Element,
-    square,
+    square: SquareGeometry,
     index: int,
     *,
-    side: Decimal,
-    x: Decimal,
-    y: Decimal,
-    scale: Decimal,
-    show_id: bool,
+    projected: tuple[Point2, ...],
     motion: bool,
 ) -> None:
-    projected = tuple(
-        _project_point(point, side=side, x=x, y=y, scale=scale) for point in square.corners
-    )
     node = sub(
         group,
         "polygon",
         {
+            "data-feature": "square-fill",
+            "data-square": square.square_id,
             "points": format_points(projected),
-            "fill-opacity": "0.72",
+            "fill": color_for_square(index),
+            "fill-opacity": str(SQUARE_FILL_OPACITY),
+            "stroke": "none",
+        },
+    )
+    if motion:
+        append_square_motion(node, square.square_id)
+
+
+def _append_square_outline(
+    group: ET.Element,
+    square: SquareGeometry,
+    *,
+    projected: tuple[Point2, ...],
+    motion: bool,
+) -> None:
+    node = sub(
+        group,
+        "polygon",
+        {
+            "data-feature": "square-outline",
+            "data-square": square.square_id,
+            "points": format_points(projected),
             "stroke-linejoin": "round",
             **presentation_attributes(
-                fill=color_for_square(index),
+                fill="none",
                 stroke=PAPER_THEME.container,
                 width=LAYOUT.stroke_width,
             ),
@@ -149,8 +174,6 @@ def _append_static_square(
     )
     if motion:
         append_square_motion(node, square.square_id)
-    if show_id:
-        _append_square_id(group, square, projected)
 
 
 def _append_contact_overlay(
@@ -162,6 +185,7 @@ def _append_contact_overlay(
     y: Decimal,
     scale: Decimal,
     panel_index: int,
+    projected_squares: dict[str, tuple[Point2, ...]],
     motion: bool,
 ) -> None:
     contacts = tuple(
@@ -169,10 +193,55 @@ def _append_contact_overlay(
     )
     if not contacts:
         return
+    clip_ids: dict[str, str] = {}
+    clip_definitions = sub(
+        group,
+        "defs",
+        {"data-contact-clip-policy": CONTACT_CLIP_POLICY},
+    )
+    clip_shape_ids: dict[str, str] = {}
+    for square_id in sorted(
+        {square_id for feature in contacts for square_id in feature.square_ids}
+    ):
+        shape_id = f"panel-{panel_index}-contact-clip-shape-{square_id}"
+        clip_shape_ids[square_id] = shape_id
+        sub(
+            clip_definitions,
+            "polygon",
+            {
+                "id": shape_id,
+                "data-feature": "contact-clip-shape",
+                "data-square": square_id,
+                "points": format_points(projected_squares[square_id]),
+            },
+        )
+    for feature in contacts:
+        clip_id = f"panel-{panel_index}-clip-{feature.feature_id}"
+        clip_ids[feature.feature_id] = clip_id
+        clip = sub(
+            clip_definitions,
+            "clipPath",
+            {
+                "id": clip_id,
+                "clipPathUnits": "userSpaceOnUse",
+                "data-feature": "contact-clip",
+                "data-squares": " ".join(feature.square_ids),
+            },
+        )
+        for square_id in feature.square_ids:
+            append_local_use(
+                clip,
+                f"#{clip_shape_ids[square_id]}",
+                **{"data-clip-square": square_id},
+            )
     overlay = sub(
         group,
         "g",
-        {"id": f"panel-{panel_index}-contacts", "data-overlay": "contacts"},
+        {
+            "id": f"panel-{panel_index}-contacts",
+            "data-layer": "contacts",
+            "data-overlay": "contacts",
+        },
     )
     if motion:
         append_final_overlay_motion(overlay)
@@ -181,6 +250,7 @@ def _append_contact_overlay(
         attributes = {
             "id": f"panel-{panel_index}-{feature.feature_id}",
             "data-squares": " ".join(feature.square_ids),
+            "clip-path": f"url(#{clip_ids[feature.feature_id]})",
         }
         if feature.wall is not None:
             attributes["data-wall"] = feature.wall.value
@@ -194,6 +264,7 @@ def _append_contact_overlay(
                     "cy": format_svg_number(start.y),
                     "r": str(LAYOUT.contact_point_radius),
                     "fill": PAPER_THEME.contact,
+                    "fill-opacity": str(CONTACT_HIGHLIGHT_OPACITY),
                     "data-feature": "contact-point",
                 },
             )
@@ -209,6 +280,7 @@ def _append_contact_overlay(
                 "x2": format_svg_number(end.x),
                 "y2": format_svg_number(end.y),
                 "stroke": PAPER_THEME.contact,
+                "stroke-opacity": str(CONTACT_HIGHLIGHT_OPACITY),
                 "stroke-width": str(LAYOUT.contact_stroke_width),
                 "stroke-linecap": "round",
                 "vector-effect": "non-scaling-stroke",
@@ -277,8 +349,19 @@ def _append_packing_panel(
     group = sub(root, "g", {"id": f"panel-{panel_index}", "data-panel": frame.label})
     if spec.annotations is AnnotationLevel.EXACT:
         append_exact_comment(group, f"container side: {frame.container_side.source}")
-    _append_container(group, x=left, y=top, side=frame.container_side.projected, scale=scale)
+    projected_squares: list[tuple[SquareGeometry, int, tuple[Point2, ...]]] = []
     for index, square in enumerate(frame.squares):
+        projected = tuple(
+            _project_point(
+                point,
+                side=frame.container_side.projected,
+                x=left,
+                y=top,
+                scale=scale,
+            )
+            for point in square.corners
+        )
+        projected_squares.append((square, index, projected))
         if spec.annotations is AnnotationLevel.EXACT:
             pose_text = ""
             if square.pose is not None:
@@ -292,17 +375,6 @@ def _append_packing_panel(
                 + "; ".join(f"({point.x.source}, {point.y.source})" for point in square.corners)
                 + pose_text,
             )
-        _append_static_square(
-            group,
-            square,
-            index,
-            side=frame.container_side.projected,
-            x=left,
-            y=top,
-            scale=scale,
-            show_id=Overlay.SQUARE_IDS in spec.overlays,
-            motion=motion,
-        )
     if spec.annotations is AnnotationLevel.EXACT:
         for feature in frame.features:
             if not isinstance(feature, ContactFeature):
@@ -311,6 +383,19 @@ def _append_packing_panel(
             if feature.end is not None:
                 geometry += f" to ({feature.end.x.source}, {feature.end.y.source})"
             append_exact_comment(group, f"{feature.feature_id}: {geometry}")
+    fills = sub(
+        group,
+        "g",
+        {"id": f"panel-{panel_index}-fills", "data-layer": "fills"},
+    )
+    for square, index, projected in projected_squares:
+        _append_square_fill(
+            fills,
+            square,
+            index,
+            projected=projected,
+            motion=motion,
+        )
     if Overlay.CONTACTS in spec.overlays:
         _append_contact_overlay(
             group,
@@ -320,8 +405,38 @@ def _append_packing_panel(
             y=top,
             scale=scale,
             panel_index=panel_index,
+            projected_squares={
+                square.square_id: projected for square, _index, projected in projected_squares
+            },
             motion=motion,
         )
+    outlines = sub(
+        group,
+        "g",
+        {"id": f"panel-{panel_index}-outlines", "data-layer": "outlines"},
+    )
+    for square, _index, projected in projected_squares:
+        _append_square_outline(
+            outlines,
+            square,
+            projected=projected,
+            motion=motion,
+        )
+    _append_container(
+        outlines,
+        x=left,
+        y=top,
+        side=frame.container_side.projected,
+        scale=scale,
+    )
+    if Overlay.SQUARE_IDS in spec.overlays:
+        labels = sub(
+            group,
+            "g",
+            {"id": f"panel-{panel_index}-labels", "data-layer": "labels"},
+        )
+        for square, _index, projected in projected_squares:
+            _append_square_id(labels, square, projected)
     if Overlay.ACTIVE_FEATURES in spec.overlays:
         _append_feature_overlay(
             group, frame, side=frame.container_side.projected, x=left, y=top, scale=scale

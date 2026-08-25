@@ -19,8 +19,9 @@ shared SVG spine.
 
 ![The final frame of the certified exact five-square trajectory.](n5-exact-face-trajectory.svg)
 
-The animated export follows endpoint A, the exact midpoint, and endpoint B. Its dark-red
-contact layer describes endpoint B and is revealed only when the motion arrives there.
+The animated export follows endpoint A, the exact midpoint, and endpoint B. Its
+translucent tempered-yellow contact layer describes endpoint B and is revealed only when
+the motion arrives there.
 Reduced-motion and non-CSS viewers show endpoint B directly.
 
 ### `n = 10`: numerical comparison
@@ -36,9 +37,10 @@ The source event is candidate evidence, not an optimality certificate.
 ![Walter Trump’s exact packing of eleven unit squares.](trump11-overview.svg)
 
 Six axis-aligned squares surround a five-square block tilted at an algebraic angle near
-`40.18°`. Dark-red segments show positive-length edge contacts, and dark-red dots show
-point contacts. The figure carries certified-upper-bound evidence and does not call the
-open case solved.
+`40.18°`. Translucent tempered-yellow segments show positive-length edge contacts, and
+dots in the same highlight color show point contacts.
+The figure carries certified-upper-bound evidence and does not call the open case
+solved.
 
 ## Visualization Levels
 
@@ -55,13 +57,19 @@ Annotations are independent of the view.
 `exact` retains source expressions in namespaced metadata and adjacent XML comments.
 A binary64 source remains identified as binary64 even in an exact-annotation export.
 
-The existing six-color fill sequence is unchanged.
-Every square and the container use the same dark stroke, so touching shapes no longer
-appear separated by white seams.
-Exact adapters attach certified point and segment contacts in the source number field;
-the renderer shows them by default and never infers them from pixels or a numerical
-tolerance. Remove only the visual layer with `--no-contacts`. The contact data remains
-available to another `RenderSpec` or an atlas consumer.
+The fixed 20-color fill sequence spans green, cyan, blue, indigo, and violet.
+Its first eleven entries are high-separation anchors for the Trump example; later
+entries add deterministic light and dark companions, and assignment repeats by stable
+square index. Every square and the container use the same 1.25px pure-black stroke, so
+touching shapes do not appear separated by white seams.
+Tempered yellow `#e3c64a` is reserved for contact highlights and is not part of the
+square palette. The 9px segments and 5.5px-radius dots use 60% opacity, are clipped to
+the union of their participating square interiors, and sit above the fills and below the
+black outlines. Exact adapters attach certified point and segment contacts in the source
+number field; the renderer shows them by default and never infers them from pixels or a
+numerical tolerance.
+Remove only the visual layer with `--no-contacts`. The contact data remains available to
+another `RenderSpec` or an atlas consumer.
 
 ## Command-Line Use
 
@@ -86,7 +94,7 @@ uv run --frozen python tools/render_packing_svg.py builtin trump11 \
   --annotations exact --output atlas/trump11-exact.svg
 ```
 
-For the same geometry with no dark-red overlay:
+For the same geometry with no contact highlight:
 
 ```bash
 uv run --frozen python tools/render_packing_svg.py builtin trump11 \
@@ -113,17 +121,17 @@ nonzero before the atomic output boundary replaces a destination.
 ## Measurements and Portability Review
 
 Measurements on 2026-08-24 used Python 3.14.6 on macOS 26.5.2 arm64. Twenty in-process
-rebuilds of the three packing figures had a median total latency of 460.500 ms and a
-minimum of 391.738 ms; exact verification and contact extraction dominate this
+rebuilds of the three packing figures had a median total latency of 393.031 ms and a
+minimum of 378.257 ms; exact verification and contact extraction dominate this
 measurement. Timing is observed host evidence and is intentionally absent from
 `metrics.json`.
 
 | Figure | SVG bytes | Quick Look PNG bytes |
 | --- | ---: | ---: |
-| Exact `n = 3` moduli | 14,186 | 85,906 |
-| Trump `n = 11` overview | 12,769 | 76,038 |
-| Göbel `n = 10` comparison | 9,583 | 38,930 |
-| Exact `n = 5` trajectory | 7,842 | 37,176 |
+| Exact `n = 3` moduli | 14,186 | 85,886 |
+| Trump `n = 11` overview | 30,732 | 81,896 |
+| Göbel `n = 10` comparison | 17,753 | 38,131 |
+| Exact `n = 5` trajectory | 15,652 | 36,673 |
 
 Quick Look produced all four 900 px thumbnails, including the final-state rendering of
 the animated figure.
@@ -131,9 +139,9 @@ Its square-thumbnail mode scales wide SVGs to fill and therefore crops the sides
 comparison and moduli figures; those thumbnails are conversion smoke tests, not layout
 evidence. A fit-preserving `sips` document conversion rendered the complete declared
 viewports at `1200×900`, `960×680`, `1280×680`, and `960×680`. The complete gallery was
-inspected at document and screen scale; the shared dark boundaries, unchanged fills,
-dark-red contact marks, labels, and final-state attributes survive a renderer that
-ignores CSS animation.
+inspected at document and screen scale; the pure-black boundaries, cool fills,
+translucent clipped contact marks, labels, and final-state attributes survive a renderer
+that ignores CSS animation.
 The focused checker also proves that both comparison containers lie inside the declared
 viewport.
 

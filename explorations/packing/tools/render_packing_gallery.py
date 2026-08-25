@@ -157,11 +157,13 @@ def build_gallery_manifest() -> GalleryManifest:
                 "title": "Certified exact five-square trajectory",
                 "alt": (
                     "Final packing on the certified exact feasible trajectory for five "
-                    "unit squares, with exact contacts marked in dark red."
+                    "unit squares, with certified contacts highlighted in translucent "
+                    "tempered yellow."
                 ),
                 "caption": (
                     "The animated export follows endpoint A, the exact midpoint, and "
-                    "endpoint B; dark-red marks show endpoint B's certified contacts, "
+                    "endpoint B; translucent tempered-yellow marks show endpoint B's "
+                    "certified contacts, "
                     "and reduced-motion and non-CSS viewers show that final endpoint."
                 ),
                 "artifact": "atlas/rendering/n5-exact-face-trajectory.svg",
@@ -208,12 +210,13 @@ def build_gallery_manifest() -> GalleryManifest:
                 "title": "Trump exact packing overview",
                 "alt": (
                     "Walter Trump exact packing of eleven unit squares, with edge and "
-                    "point contacts marked in dark red."
+                    "point contacts highlighted in translucent tempered yellow."
                 ),
                 "caption": (
                     "Six axis-aligned squares surround a five-square block tilted at an "
-                    "algebraic angle near 40.18 degrees; dark-red segments and dots "
-                    "show contacts certified in the same number field."
+                    "algebraic angle near 40.18 degrees; translucent tempered-yellow "
+                    "segments and dots show contacts certified in the same number "
+                    "field."
                 ),
                 "artifact": "atlas/rendering/trump11-overview.svg",
                 "frontier_case": "frontier/n-011.md",

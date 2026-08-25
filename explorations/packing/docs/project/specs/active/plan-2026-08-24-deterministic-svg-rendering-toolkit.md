@@ -4,7 +4,7 @@
 
 **Author:** Codex (agent), for the repository owner
 
-**Status:** Implemented, including the contact visualization extension
+**Status:** Implemented, including the contact visualization and compositing extension
 
 ## Overview
 
@@ -30,9 +30,10 @@ not a proof that every pixel is exact.
   input map order.
 - Make the base figure compact, legible in print and on screen, self-contained, and safe
   to embed in Markdown, HTML, office documents, and reports.
-- Use the same dark boundary stroke for the container and every packed square so a white
-  separator cannot make an exact contact look like a gap.
-  Preserve the existing square fill palette.
+- Use the same pure-black boundary stroke for the container and every packed square so a
+  white separator cannot make an exact contact look like a gap.
+  Use a fixed, deterministic 20-color palette confined to cool green, cyan, blue,
+  indigo, and violet hues.
 - Support three progressive view levels: final overview, start/final comparison, and
   optional trajectory animation.
 - Preserve numerical provenance without clutter: visible summary labels when requested,
@@ -44,8 +45,12 @@ not a proof that every pixel is exact.
   by typography.
 - Attach exact contact geometry whenever an adapter still has access to a certified
   algebraic construction.
-  Render it as an optional dark-red overlay: segments for positive-length edge contacts
-  and dots for point-to-edge, corner, or wall contacts.
+  Render it as an optional 60%-opaque tempered-yellow highlight: segments for
+  positive-length edge contacts and dots for point-to-edge, corner, or wall contacts.
+  Place highlights above square fills and below pure-black boundaries, and reserve
+  yellow for contact highlighting rather than square identity.
+  Clip each mark to the union of its participating square interiors so the wider
+  highlight cannot spill into unrelated empty space.
 - Reuse the exact `n = 3` quotient map as a known-answer control and make later atlas
   views use the same rendering spine.
 - Keep the core renderer in the Python standard library unless a measured visual or
@@ -237,7 +242,8 @@ Contact extraction belongs between an exact construction and its rendering adapt
 It must not run on projected SVG coordinates, screen distance, or a display tolerance.
 The first implementation consumes the repository’s `FieldElement` packings used by the
 Trump `n = 11` and certified `n = 5` adapters; numerical `BasinEvent` and Göbel pose
-arrays carry no red marks unless a later source supplies an independent certificate.
+arrays carry no contact highlights unless a later source supplies an independent
+certificate.
 
 The extractor uses only exact addition, subtraction, multiplication, and sign tests:
 
@@ -268,6 +274,41 @@ The exact adapters always attach this inventory because retaining semantic conta
 has no visual cost. Display remains a `RenderSpec` choice.
 The paper profile defaults to showing available contacts; approximate frames remain
 visually unmarked rather than presenting tolerance-based guesses as facts.
+
+#### Contact Compositing and Mark Design
+
+Contact geometry and contact display remain separate decisions.
+Exact adapters attach the sorted point and segment inventory on every certified frame.
+A render can omit the visual group without deleting those semantic features or their
+exact annotations.
+
+Each packing panel uses three explicit geometry passes in document order:
+
+1. **Fills.** Emit each square once with the color selected by stable square index from
+   the fixed 20-color cool palette and no stroke.
+2. **Contacts.** Project certified contact points and segments through the same panel
+   transform as the squares.
+   Emit them in one optional panel-scoped group using the `#e3c64a` tempered-yellow
+   contact token at 60% opacity.
+   Clip every mark to the union of the exact projected polygons for the squares named by
+   that contact.
+3. **Outlines.** Re-emit the square boundaries and container boundary with `fill="none"`
+   and an opaque `#000000` 1.25px stroke.
+
+This ordering is part of the retained SVG contract, not a renderer accident.
+The 9px contact stroke is wider than the black outline, so a shared-edge highlight
+remains visible on both sides of the authoritative boundary while the black centerline
+stays unobscured. A point contact uses the same yellow token and a 5.5px radius, leaving
+a visible halo around the black corner or edge.
+Participant-union clipping contains the wide marks inside the squares that establish the
+contact. The outline pass contains no fill, and the fill pass contains no stroke, so
+antialiasing cannot create a second gray or white seam.
+
+Yellow is reserved for contact highlights in this profile.
+It is not added to `SQUARE_FILL_PALETTE`. That tuple contains 20 fixed cool colors, and
+`color_for_square()` selects `palette[index % 20]` without hashes or mutable state.
+Pure black is reserved for packing geometry boundaries; the softer ink token may still
+be used for text.
 
 ### Deterministic Serialization
 
@@ -303,10 +344,13 @@ continues to use the readable serializer.
 The base theme is a fixed paper theme: neutral background, high-contrast boundary and
 text, restrained colorblind-safe square colors, consistent line weights, generous
 padding, and no shadows, filters, gradients, or decorative motion.
-The existing blue, orange, green, coral, teal, and mauve fill sequence remains
-unchanged. Container and square polygons use the same near-black stroke and width.
-Certified contact segments and points use one dark red that remains distinct from the
-coral fill and near-black boundary in color and monochrome review.
+The 20 square colors form a deterministic cool sequence across green, cyan, blue,
+indigo, and violet. The first 11 entries maximize visible separation in the Trump
+overview; the remaining entries broaden the reusable atlas sequence.
+Container and square outlines use the same opaque pure-black 1.25px stroke.
+Certified contact segments and points use 60%-opaque tempered yellow `#e3c64a`, placed
+below the black outline and above the fills and clipped to their participant-square
+union. Yellow is not a square color in this profile.
 Square identity is also available through labels and stable order, so color is not the
 only encoding.
 
@@ -355,7 +399,7 @@ Engines that ignore CSS or do not affirmatively expose a no-preference setting t
 show the final useful result without motion.
 Contact geometry in a trajectory describes the final frame only.
 The underlying static SVG shows it, while the no-preference animation hides the contact
-group until the final keyframe so stationary red marks never appear to describe an
+group until the final keyframe so stationary contact marks never appear to describe an
 earlier moving pose.
 Every trajectory also has a separately reproducible `comparison` export.
 Scrubbing, playback controls, and interactive editing belong to the later atlas
@@ -466,9 +510,16 @@ node hierarchy would add conversion code without a second semantic contract.
   after the same contrast and fixture checks exist.
 - `color_for_square()` hashes no data: it assigns the stable palette by validated square
   order, with labels available as the noncolor identity channel.
-- `PAPER_THEME.palette` remains byte-for-byte unchanged.
-  `PAPER_THEME.container` is the stroke for both the container and every packed square;
-  `PAPER_THEME.contact` is the dark-red contact token.
+- Keep every approved presentation value explicit in one module: `SQUARE_FILL_PALETTE`,
+  `SQUARE_FILL_OPACITY`, `PACKING_BOUNDARY_COLOR`, `PACKING_BOUNDARY_WIDTH`,
+  `CONTACT_HIGHLIGHT_COLOR`, `CONTACT_HIGHLIGHT_OPACITY`,
+  `CONTACT_HIGHLIGHT_STROKE_WIDTH`, `CONTACT_HIGHLIGHT_POINT_RADIUS`, and
+  `CONTACT_CLIP_POLICY`. `PAPER_THEME` and `LayoutMetrics` derive from those constants
+  instead of repeating literals.
+- `PAPER_THEME.container` is the stroke for both the container and every packed square;
+  it is pure black rather than the softer text ink.
+  `PAPER_THEME.contact` is the reserved tempered-yellow contact token and never enters
+  the square palette.
 - `evidence_style()` maps every evidence tier to one label, stroke pattern, and icon
   token; callers cannot supply arbitrary claim text.
 - `presentation_attributes()` materializes fill, stroke, opacity, font, and line weight
@@ -487,10 +538,15 @@ node hierarchy would add conversion code without a second semantic contract.
   panels and a fixed union viewport for trajectory output.
 - `_project_point()` maps mathematical coordinates into panel coordinates with the
   explicit upward mathematical `y` convention.
-- `_append_packing_panel()`, `_append_container()`, `_append_static_square()`, and
-  `_append_square_id()` emit the base packing glyph.
-- `_append_contact_overlay()` emits dark-red `<line>` nodes for segments and `<circle>`
-  nodes for points inside one panel-scoped group.
+- `_append_packing_panel()` projects each square once, then emits stable `fills`,
+  `contacts`, and `outlines` groups in that order before labels and other annotations.
+- `_append_square_fill()` emits one stroke-free colored polygon; `_append_container()`
+  and `_append_square_outline()` emit the final pure-black outline pass; and
+  `_append_square_id()` emits optional labels above all geometry.
+- `_append_contact_overlay()` emits tempered-yellow `<line>` nodes for segments and
+  `<circle>` nodes for points inside one panel-scoped group between the fill and outline
+  passes. It defines each participating projected square once, then gives every mark a
+  stable user-space clip path composed of local `<use>` references to those shapes.
   `_append_feature_overlay()` handles other typed features.
   Neither infers contact or activity from projected screen distance.
 - `_append_caption()` uses `format_visible_number()` and evidence tokens so typography
@@ -556,8 +612,8 @@ node hierarchy would add conversion code without a second semantic contract.
 - `tools/check_small_n_moduli.py`: rename `svg_text()` to `render_n3_moduli_svg()` and
   replace string-built XML with shared `svg.py` helpers, number formatting, and visual
   tokens. Keep quotient topology and its domain-specific layout in this tool; do not
-  force graph views into `packing.py`. Its three packing glyphs use the same dark stroke
-  and width for their container and inner squares.
+  force graph views into `packing.py`. Its three packing glyphs use the same pure-black
+  stroke and width for their container and inner squares.
 - `tools/check_n5_equal_side_face.py`: consume
   `sqpack.packings.n5_equal_side_face.build_equal_side_face()` while keeping
   feasibility, optimality, source alignment, and negative controls in the checker.
@@ -688,7 +744,7 @@ begin in parallel after the shared typed contract is established.
 | `think-ov1d` | typed square, contact, and active-feature overlays | `think-90ix` |
 | `think-c8n2` | benchmark gallery, metrics, and pinned-renderer decision | `think-acxh`, `think-fceb`, `think-90ix`, `think-ov1d` |
 | `think-f46b` | documentation, spec reconciliation, and full final gate | `think-hzk5`, `think-90ix`, `think-ov1d`, `think-c8n2` |
-| `think-ogiq` | common dark borders and exact point/segment contact visualization | — |
+| `think-ogiq` | pure-black borders and exact point/segment contact visualization | — |
 
 ### Phase 1: Deterministic Static Spine
 
@@ -731,18 +787,25 @@ begin in parallel after the shared typed contract is established.
 
 ### Phase 3: Boundary and Contact Semantics
 
-- [x] Add failing controls proving that container and square strokes share one dark
-  token while the six existing fill colors remain unchanged.
+- [x] Add failing controls proving that container and square strokes share one
+  pure-black token while deterministic square assignment uses the approved 20-color cool
+  palette and never uses the reserved yellow.
 - [x] Add exact known-answer controls for a wall-edge segment, wall-point contact,
   square-edge segment, square point-to-edge contact, strict separation, deduplication,
   and rejection of inconsistent contact geometry.
 - [x] Implement exact source-space contact extraction and attach it in the Trump and
   `n = 5` adapters; leave numerical candidate sources unmarked.
-- [x] Render contact segments and points in dark red by default, preserve an explicit
-  no-contact export, and keep final-frame contacts hidden until a trajectory ends.
+- [x] Render contact segments and points by default, preserve an explicit no-contact
+  export, and keep final-frame contacts hidden until a trajectory ends.
+- [x] Reserve tempered yellow `#e3c64a` for contacts and emit geometry in explicit
+  fill/contact/outline order, with 60% contact opacity and opaque pure-black boundaries
+  in the top pass.
+- [x] Clip each contact mark to the exact projected union of its participating squares,
+  using stable local definitions and references rather than duplicating polygon geometry
+  for every mark.
 - [x] Regenerate and inspect all retained figures at document scale.
   Confirm that black shared borders show touching geometry without false white gaps and
-  that the contact overlay remains readable without changing the fill palette.
+  that the clipped contact overlay remains readable across the fixed cool palette.
 - [x] Run focused lint, type, determinism, safe-SVG, CLI, and byte-replay checks
   followed by the full repository gate; update the gallery measurements and
   documentation.
@@ -828,12 +891,15 @@ known-answer semantics and all replay checks pass.
   renderer.
 - Candidate, verified construction, certified upper bound, and proved optimum are
   visibly and structurally distinct evidence states.
-- Every packing polygon and its container share the same dark stroke while the existing
-  six-color fill palette is unchanged.
+- Every packing outline and its container share the same pure-black 1.25px stroke.
+  Square assignment deterministically cycles through the fixed 20-color cool palette,
+  which contains no yellow.
 - Exact Trump and `n = 5` frames retain stable point/segment contact features; numerical
   candidate frames retain none.
   Contact display defaults on, can be disabled explicitly, and never marks a trajectory
   before its final frame.
+  Every point and segment is 60%-opaque tempered yellow and is clipped to the union of
+  the exact participant-square polygons.
 - The benchmark gallery passes thumbnail, screen, print, monochrome, reduced-motion, and
   nonbrowser-renderer review.
 - Static fixtures beat their lossless PNG references in file size, and measurements are
@@ -852,8 +918,14 @@ known-answer semantics and all replay checks pass.
 - **Resolved:** use the exact `n = 5` equal-side face as the first animation fixture.
   Its endpoints, midpoint, feasibility, and evidence tier are already reproducible.
 - **Resolved:** extract contacts in exact source space, always attach them to exact
-  frames, and make their dark-red display default-on but removable.
+  frames, and make their 60%-opaque tempered-yellow display default-on but removable.
   Do not infer contact from decimal projections or pixels.
+- **Resolved:** render fills, contacts, and outlines as separate ordered passes.
+  Keep contact marks below pure-black boundaries, reserve yellow for highlights, and use
+  a deterministic 20-color cool palette for square identity.
+- **Resolved:** clip wide contact marks to the union of their participating square
+  interiors. Define projected square clip shapes once per panel and reuse them through
+  stable fragment-only `<use>` references.
 - **Deferred with an explicit gate:** add MathJax paths only if the gallery demonstrates
   that Unicode labels plus exact metadata are materially worse for a recurring formula.
 - **Deferred with an explicit gate:** add raster screenshot comparisons only if `resvg`,

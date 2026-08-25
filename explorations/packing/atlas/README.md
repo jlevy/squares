@@ -20,8 +20,8 @@ candidate to a certificate or make a conjectured minimum proved by drawing it cl
 ![Walter Trump’s exact packing of eleven unit squares.](rendering/trump11-overview.svg)
 
 *A final-state overview for the smallest open case.
-Dark-red marks expose its exact contact structure; exact source expressions remain
-available in SVG metadata without crowding the page.*
+Translucent tempered-yellow marks expose its exact contact structure; exact source
+expressions remain available in SVG metadata without crowding the page.*
 
 ![The exact quotient map of optimal configurations for three unit squares.](n-003-optimal-moduli.svg)
 

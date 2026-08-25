@@ -1,7 +1,7 @@
 {
   "artifacts": {
     "svg": "atlas/n-003-optimal-moduli.svg",
-    "svg_sha256": "a2ad52b471cc694fcbc9d7c74bb6141e71c2d926d25ee612689b5deeb9c31cbc"
+    "svg_sha256": "306235b9adbb6d790a0fa440ae8055370719292ff656d8d7fc8d082804db539d"
   },
   "determination": {
     "claim": "F_3(2) is two labelled circles; its S3 quotient is a circle and its D4 x S3 quotient is a closed interval",
@@ -326,7 +326,7 @@
     "labelled_and_unlabelled_source_scopes_are_separate": true,
     "lowered_slider_overlap_is_rejected": true,
     "nonaxis_center_boundary_equality_is_rejected": true,
-    "packing_glyphs_share_dark_boundaries": true,
+    "packing_glyphs_use_pure_black_boundaries": true,
     "stale_svg_is_rejected": true,
     "unreduced_display_parameter_is_rejected": true
   },

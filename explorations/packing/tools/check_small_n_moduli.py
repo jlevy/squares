@@ -36,6 +36,7 @@ sys.path.insert(0, str(ROOT))
 
 from sqpack.canonical import canonical_key
 from sqpack.render.numbers import format_svg_number
+from sqpack.render.style import PACKING_BOUNDARY_COLOR
 from sqpack.render.svg import append_metadata, serialize_svg, svg_tag
 from sqpack.verify import verify_packing
 
@@ -813,7 +814,7 @@ def render_n3_moduli_svg(model: dict[str, object]) -> str:
             f'<g id="packing-{fraction_text(parameter).replace("/", "-")}" transform="translate({board_x},{board_y})">'
         )
         lines.append(
-            f'<rect x="0" y="0" width="{GLYPH_BOARD_SIZE}" height="{GLYPH_BOARD_SIZE}" fill="none" stroke="var(--ink)" stroke-width="3"/>'
+            f'<rect x="0" y="0" width="{GLYPH_BOARD_SIZE}" height="{GLYPH_BOARD_SIZE}" fill="none" stroke="{PACKING_BOUNDARY_COLOR}" stroke-width="3"/>'
         )
         for square, (x, y) in enumerate(n3_positions(parameter)):
             svg_x = format_svg_number(x.numerator * GLYPH_SQUARE_SIZE / x.denominator)
@@ -822,7 +823,7 @@ def render_n3_moduli_svg(model: dict[str, object]) -> str:
                 flipped.numerator * GLYPH_SQUARE_SIZE / flipped.denominator
             )
             lines.append(
-                f'<rect x="{svg_x}" y="{svg_y}" width="{GLYPH_SQUARE_SIZE}" height="{GLYPH_SQUARE_SIZE}" fill="var(--sq{square + 1})" fill-opacity="0.78" stroke="var(--ink)" stroke-width="3"/>'
+                f'<rect x="{svg_x}" y="{svg_y}" width="{GLYPH_SQUARE_SIZE}" height="{GLYPH_SQUARE_SIZE}" fill="var(--sq{square + 1})" fill-opacity="0.78" stroke="{PACKING_BOUNDARY_COLOR}" stroke-width="3"/>'
             )
         lines.append("</g>")
         lines.append(
@@ -971,9 +972,10 @@ def run_n3_selftests(model: dict[str, object], svg: str) -> dict[str, bool]:
         and alvarado.get("derived_match") is True,
         "stale_svg_is_rejected": original_svg_hash
         != hashlib.sha256((svg + " ").encode()).hexdigest(),
-        "packing_glyphs_share_dark_boundaries": len(packing_rectangles) == 12
+        "packing_glyphs_use_pure_black_boundaries": len(packing_rectangles) == 12
         and all(
-            node.attrib.get("stroke") == "#17202a" and node.attrib.get("stroke-width") == "3"
+            node.attrib.get("stroke") == PACKING_BOUNDARY_COLOR
+            and node.attrib.get("stroke-width") == "3"
             for node in packing_rectangles
         ),
     }

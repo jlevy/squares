@@ -265,6 +265,8 @@ def run_xml_controls() -> dict[str, bool]:
         "style",
         {"data-sqpack-style": MOTION_MARKER},
     ).text = "@media (prefers-reduced-motion: no-preference){rect{fill:none}}"
+    external_clip = element("svg")
+    sub(external_clip, "rect", {"clip-path": "url(https://example.com/shape.svg#clip)"})
     return {
         "comment_round_trip": "<!--x = 1/3-->" in text,
         "invalid_comment_rejected": _rejects(append_exact_comment, root, "bad -- comment"),
@@ -274,6 +276,7 @@ def run_xml_controls() -> dict[str, bool]:
         "local_use_accepted": append_local_use(root, "#shape").attrib["href"] == "#shape",
         "foreign_namespace_rejected": _rejects(validate_safe_tree, foreign_namespace),
         "arbitrary_marked_css_rejected": _rejects(validate_safe_tree, arbitrary_css),
+        "external_presentation_url_rejected": _rejects(validate_safe_tree, external_clip),
     }
 
 
@@ -289,7 +292,19 @@ def run_geometry_controls() -> dict[str, bool]:
     )
     from sqpack.render.adapters import frame_from_gobel10, frame_from_trump11
     from sqpack.render.model import ActiveFeature
-    from sqpack.render.style import LAYOUT, PAPER_THEME, evidence_style
+    from sqpack.render.style import (
+        CONTACT_CLIP_POLICY,
+        CONTACT_HIGHLIGHT_COLOR,
+        CONTACT_HIGHLIGHT_OPACITY,
+        CONTACT_HIGHLIGHT_POINT_RADIUS,
+        CONTACT_HIGHLIGHT_STROKE_WIDTH,
+        LAYOUT,
+        PACKING_BOUNDARY_COLOR,
+        PACKING_BOUNDARY_WIDTH,
+        PAPER_THEME,
+        SQUARE_FILL_PALETTE,
+        evidence_style,
+    )
 
     overview = render_packing_svg(frame_from_trump11(), spec=RenderSpec())
     trump = frame_from_trump11()
@@ -304,7 +319,11 @@ def run_geometry_controls() -> dict[str, bool]:
         Decimal(value) for value in comparison_root.attrib["viewBox"].split()
     )
     panel_containers = [
-        next(child for child in panel if child.tag.endswith("}rect"))
+        next(
+            child
+            for child in panel.iter()
+            if child.attrib.get("data-feature") == "container-outline"
+        )
         for panel in comparison_root.iter()
         if "data-panel" in panel.attrib
     ]
@@ -312,16 +331,93 @@ def run_geometry_controls() -> dict[str, bool]:
     overview_panel = next(
         node for node in overview_root.iter() if node.attrib.get("data-panel") == "Trump n=11"
     )
-    overview_container = next(child for child in overview_panel if child.tag.endswith("}rect"))
-    overview_squares = [child for child in overview_panel if child.tag.endswith("}polygon")]
-    expected_palette = (
-        "#4c78a8",
-        "#f58518",
-        "#54a24b",
-        "#e45756",
-        "#72b7b2",
-        "#b279a2",
+    overview_layers = [
+        child for child in overview_panel if child.attrib.get("data-layer") is not None
+    ]
+    overview_fills = next(
+        child for child in overview_layers if child.attrib["data-layer"] == "fills"
     )
+    overview_contacts = next(
+        child for child in overview_layers if child.attrib["data-layer"] == "contacts"
+    )
+    overview_outlines = next(
+        child for child in overview_layers if child.attrib["data-layer"] == "outlines"
+    )
+    overview_container = next(
+        child
+        for child in overview_outlines
+        if child.attrib.get("data-feature") == "container-outline"
+    )
+    overview_squares = [
+        child for child in overview_fills if child.attrib.get("data-feature") == "square-fill"
+    ]
+    overview_square_outlines = [
+        child
+        for child in overview_outlines
+        if child.attrib.get("data-feature") == "square-outline"
+    ]
+    overview_contact_marks = [
+        child
+        for child in overview_contacts
+        if child.attrib.get("data-feature", "").startswith("contact-")
+    ]
+    overview_contact_clips = {
+        child.attrib["id"]: child
+        for child in overview_panel.iter()
+        if child.attrib.get("data-feature") == "contact-clip"
+    }
+    overview_contact_clip_shapes = {
+        child.attrib["id"]: child
+        for child in overview_panel.iter()
+        if child.attrib.get("data-feature") == "contact-clip-shape"
+    }
+    overview_fills_by_id = {square.attrib["data-square"]: square for square in overview_squares}
+    expected_palette = (
+        "#378c3f",
+        "#00aeee",
+        "#c1a0fb",
+        "#00b393",
+        "#3d63be",
+        "#78d7d6",
+        "#877deb",
+        "#9fce85",
+        "#0096b1",
+        "#854888",
+        "#83c4ff",
+        "#3bb360",
+        "#008376",
+        "#7acfe9",
+        "#0079bf",
+        "#86a2ff",
+        "#865eb1",
+        "#7fd6b1",
+        "#00afb9",
+        "#c18dd8",
+    )
+
+    def contact_clip_matches_participants(mark) -> bool:
+        reference = mark.attrib.get("clip-path", "")
+        if not reference.startswith("url(#") or not reference.endswith(")"):
+            return False
+        clip = overview_contact_clips.get(reference[5:-1])
+        if clip is None or clip.attrib.get("clipPathUnits") != "userSpaceOnUse":
+            return False
+        participants = tuple(mark.attrib["data-squares"].split())
+        uses = tuple(clip)
+        return (
+            clip.attrib.get("data-squares") == mark.attrib["data-squares"]
+            and tuple(use.attrib.get("data-clip-square") for use in uses) == participants
+            and all(
+                overview_contact_clip_shapes[use.attrib["href"][1:]].attrib.get("points")
+                == overview_fills_by_id[square_id].attrib["points"]
+                and overview_contact_clip_shapes[use.attrib["href"][1:]].attrib.get(
+                    "data-square"
+                )
+                == square_id
+                for square_id, use in zip(participants, uses, strict=True)
+            )
+        )
+
     point = trump.squares[0].corners[0]
     featured = replace(
         trump,
@@ -364,22 +460,61 @@ def run_geometry_controls() -> dict[str, bool]:
             <= viewport_height
             for container in panel_containers
         ),
-        "rendered_square_fill_palette_is_unchanged": tuple(
-            square.attrib["fill"] for square in overview_squares
-        )
+        "rendered_square_fill_palette_is_selected_cool_set": expected_palette
+        == SQUARE_FILL_PALETTE
+        and tuple(square.attrib["fill"] for square in overview_squares)
         == tuple(
             expected_palette[index % len(expected_palette)]
             for index in range(len(overview_squares))
         ),
-        "container_and_squares_share_dark_border": all(
-            square.attrib["stroke"]
-            == overview_container.attrib["stroke"]
-            == PAPER_THEME.container
+        "packing_outlines_are_thin_opaque_pure_black": PAPER_THEME.container
+        == PACKING_BOUNDARY_COLOR
+        == "#000000"
+        and LAYOUT.stroke_width == PACKING_BOUNDARY_WIDTH == 1.25
+        and overview_container.attrib["stroke"] == PACKING_BOUNDARY_COLOR
+        and overview_container.attrib["fill"] == "none"
+        and len(overview_square_outlines) == len(overview_squares)
+        and all(
+            square.attrib["stroke"] == PACKING_BOUNDARY_COLOR
+            and square.attrib["fill"] == "none"
             and square.attrib["stroke-width"]
             == overview_container.attrib["stroke-width"]
             == str(LAYOUT.stroke_width)
-            for square in overview_squares
+            for square in overview_square_outlines
         ),
+        "contact_highlight_is_reserved_tempered_yellow": PAPER_THEME.contact
+        == CONTACT_HIGHLIGHT_COLOR
+        == "#e3c64a"
+        and PAPER_THEME.contact not in expected_palette
+        and all(
+            mark.attrib.get("fill") == PAPER_THEME.contact
+            or mark.attrib.get("stroke") == PAPER_THEME.contact
+            for mark in overview_contact_marks
+        ),
+        "contact_highlights_use_selected_opacity_and_size": CONTACT_HIGHLIGHT_OPACITY == 0.6
+        and LAYOUT.contact_stroke_width == CONTACT_HIGHLIGHT_STROKE_WIDTH == 9
+        and LAYOUT.contact_point_radius == CONTACT_HIGHLIGHT_POINT_RADIUS == 5.5
+        and all(
+            (
+                mark.attrib.get("stroke-opacity") == str(CONTACT_HIGHLIGHT_OPACITY)
+                and mark.attrib.get("stroke-width") == str(CONTACT_HIGHLIGHT_STROKE_WIDTH)
+            )
+            if mark.attrib["data-feature"] == "contact-segment"
+            else (
+                mark.attrib.get("fill-opacity") == str(CONTACT_HIGHLIGHT_OPACITY)
+                and mark.attrib.get("r") == str(CONTACT_HIGHLIGHT_POINT_RADIUS)
+            )
+            for mark in overview_contact_marks
+        ),
+        "contact_highlights_are_clipped_to_participating_squares": CONTACT_CLIP_POLICY
+        == "participating-square-union"
+        and len(overview_contact_clips) == len(overview_contact_marks)
+        and all(contact_clip_matches_participants(mark) for mark in overview_contact_marks),
+        "contact_highlights_are_between_fills_and_outlines": [
+            layer.attrib["data-layer"] for layer in overview_layers
+        ]
+        == ["fills", "contacts", "outlines"]
+        and all(square.attrib["stroke"] == "none" for square in overview_squares),
         "certified_contacts_render_by_default": 'data-feature="contact-segment"' in overview
         and 'data-feature="contact-point"' in overview,
         "contact_overlay_can_be_removed": 'data-feature="contact-'
@@ -483,7 +618,10 @@ def run_portability_controls() -> dict[str, bool]:
         "no_external_features": all(
             token not in text
             for text in texts
-            for token in ("<!DOCTYPE", "<script", "foreignObject", "xlink:", "@import", "url(")
+            for token in ("<!DOCTYPE", "<script", "foreignObject", "xlink:", "@import")
+        ),
+        "presentation_urls_are_local_fragments": all(
+            re.search(r"url\((?!#[A-Za-z][A-Za-z0-9_.-]*\))", text) is None for text in texts
         ),
     }
 
