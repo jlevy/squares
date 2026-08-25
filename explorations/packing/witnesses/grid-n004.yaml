@@ -1,0 +1,33 @@
+softschema:
+  contract: packing.squares:Witness/v1
+  schema: witness.schema.yaml
+  envelope: witness
+  status: enforced
+witness:
+  id: W-grid-n004
+  n: 4
+  side: '2'
+  square_size: '1'
+  representation: corners
+  scalar:
+    kind: rational
+  coordinates:
+    origin: lower-left
+    axes: x-right-y-up
+    angle_unit: not-applicable
+  squares:
+    - id: 1
+      corners: [['0', '0'], ['1', '0'], ['1', '1'], ['0', '1']]
+    - id: 2
+      corners: [['1', '0'], ['2', '0'], ['2', '1'], ['1', '1']]
+    - id: 3
+      corners: [['0', '1'], ['1', '1'], ['1', '2'], ['0', '2']]
+    - id: 4
+      corners: [['1', '1'], ['2', '1'], ['2', '2'], ['1', '2']]
+  claim:
+    assurance: verified
+    method: exact-algebraic
+    limitations: Establishes this feasible upper-bound witness, not uniqueness.
+  certificate:
+    kind: exact-rational-sat
+    replay: uv run --frozen packing-witness verify witnesses/grid-n004.yaml

@@ -106,14 +106,14 @@ controls:
 # why the count is now derived and why it gets a control.
 - name: synopsis - hypothesis artifact count drifting from the registry
   file: SYNOPSIS.md
-  replace: ["Forty-one claims or open questions are codified as artifacts.",
-            "Forty claims or open questions are codified as artifacts."]
+  replace: ["Forty-two claims or open questions are codified as artifacts.",
+            "Forty-one claims or open questions are codified as artifacts."]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "does not state the hypothesis artifact count (41)"
+  expect: "does not state the hypothesis artifact count (42)"
 
 - name: synopsis - dateline duplicates volatile campaign progress
   file: SYNOPSIS.md
-  replace: ["**Date:** 2026-08-24", "**Date:** 2026-08-24, after 36 rounds"]
+  replace: ["**Date:** 2026-08-25", "**Date:** 2026-08-25, after 37 rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "Date dateline repeats campaign progress"
 
@@ -212,7 +212,7 @@ controls:
 
 - name: campaign - one round naming two hypotheses
   file: campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md
-  replace: ["  hypotheses: [H-019]", "  hypotheses: [H-019, H-002]"]
+  replace: ["  hypotheses:\n  - H-019", "  hypotheses:\n  - H-019\n  - H-002"]
   run: python3 -m sqpack.campaign.ledger check
   expect: "is too long"
 
@@ -230,8 +230,8 @@ controls:
 
 - name: campaign - open instance mislabeled as a known-answer control
   file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
-  replace: ["instance: {axis: n, point: 12, role: calibration}",
-            "instance: {axis: n, point: 12, role: negative_control}"]
+  replace: ["  instance:\n    axis: n\n    point: 12\n    role: calibration",
+            "  instance:\n    axis: n\n    point: 12\n    role: negative_control"]
   run: python3 -m sqpack.campaign.ledger check
   expect: "control role negative_control requires a proved instance"
 
@@ -445,15 +445,17 @@ controls:
   # Mutate a digit the table actually SHOWS. The rendered cell carries 8 significant
   # digits, so a change at the 14th is invisible to it and the check is right not to
   # fire -- which this control asserted the wrong way round on its first attempt.
-  replace: ["    value: 3.87708359002281", "    value: 3.88708359002281"]
+  replace: ["    value: '3.87708359002281'", "    value: '3.88708359002281'"]
   run: python3 -m devtools.render_research_tables --check
   expect: "STALE (re-run `python -m devtools.render_research_tables`)"
 
-- name: frontier - numeric value and its display string disagreeing
+- name: frontier - non-verified evidence promoted into the verified lane
   file: frontier/n-011.md
-  replace: ["    value_str: '3.87708359002281'", "    value_str: '3.87708359002282'"]
+  replace:
+    - "  verified_upper_bound:\n    value: '3.87708359002281417730789706010096'\n    exact_form: root(P_trump11, 3.87708359002281417730789706010096)\n    evidence:\n    - E-n011-trump-upper"
+    - "  verified_upper_bound:\n    value: '3.87708359002281417730789706010096'\n    exact_form: root(P_trump11, 3.87708359002281417730789706010096)\n    evidence:\n    - E-kingbird-upper-register"
   run: python3 -m devtools.validate_schemas
-  expect: "value_str disagrees with value"
+  expect: "evidence E-kingbird-upper-register is not verified"
 
 - name: generated view left un-exempt from the Markdown formatter
   file: ../../.flowmarkignore

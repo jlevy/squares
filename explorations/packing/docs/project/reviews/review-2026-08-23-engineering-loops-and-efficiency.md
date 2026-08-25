@@ -1,5 +1,9 @@
 # Review: Loop Speed, Iteration Cost, and What Actually Gates the Research (PR #17)
 
+> **Lifecycle:** Superseded for current guidance by
+> [`development.md`](../../../development.md).
+> Retained as a dated review record.
+
 **Date:** 2026-08-23
 
 **Author:** Claude (agent), for joshuadlevy@gmail.com

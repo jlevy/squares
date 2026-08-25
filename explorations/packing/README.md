@@ -41,14 +41,41 @@ None can stand in for another, and each has a preeminent goal:
 | Principle | Agent focus | Preeminent goal |
 | --- | --- | --- |
 | **Correctness** | Soundness | Formal validation checkable by third parties, and cross-validation of every claim and report against known research—accurate surveys of prior work included |
-| **Process** | Discipline | Operational discipline: results delivered efficiently, priorities balanced, and every piece of work traceable to what happened and when |
+| **Process** | Discipline | The minimum effective structure needed to keep consequential decisions, evidence, and handoffs reconstructible without slowing routine work |
 | **Insight** | Creativity | Extreme freedom to understand the problem creatively and to form a wide range of hypotheses, using all available information and tooling |
 | **Efficiency** | Infrastructure | Iteration on every layer of the stack, as fast as possible, through efficient algorithms and systems engineering |
 
 Balance carries one asymmetry.
-Correctness and process hold vetoes—no claim is promoted past its evidence, and no round
-counts if it cannot be reconstructed—while insight is never blocked from proposing, and
-efficiency may never relax either control to go faster.
+Correctness is non-negotiable: no claim is promoted past its evidence, however costly
+the required proof or check may be.
+Process is proportional infrastructure, not a second mathematical standard.
+Missing evidence may block promotion when it makes a consequential result impossible to
+audit or replay; a preferred form, table, clock, or checkpoint may not block useful work
+merely because it looks more disciplined.
+Insight remains free to propose, and efficiency may simplify process but never weaken
+the assurance required by a claim.
+
+### Assurance in One Minute
+
+**Verified means formal.** Use it only when an exact check, rigorous interval
+certificate, or complete mathematical proof decides the claim and its preconditions.
+Every finite-precision calculation is **numerically checked**, whether it uses binary64,
+30 decimal digits, or a tolerance of `1e-100`. A named source claim that has not crossed
+either boundary is **reported**.
+
+Assurance and method are separate facts.
+Numerical methods record the arithmetic actually used, its precision, rounding, and
+tolerance; “arbitrary precision” describes a library capability, not a result.
+Formal methods name an exact representation, replayable interval certificate, or scoped
+proof. Displays also distinguish an external proof or certificate from evidence replayed
+or audited by this repository.
+
+A verified feasible witness proves an upper bound.
+It does not prove global optimality; that requires a matching verified lower bound.
+The reader-first [frontier status](frontier/STATUS.md) therefore shows reported and
+verified upper and lower bounds side by side.
+The [synopsis](SYNOPSIS.md#assurance-methods-and-claims) owns the full vocabulary,
+logical consequences, and current tool gaps.
 
 ### Workflow Entry Points
 
@@ -56,6 +83,7 @@ Choose the workflow whose promised output matches the work, then choose the oper
 focus that will judge it.
 The full entry, exit, and transition contracts live in the
 [synopsis](SYNOPSIS.md#workflow-entry-contracts).
+Workflow selection is a routing decision, not a form to complete.
 
 | ID | Workflow | Enter when | Durable result | Usual handoff |
 | --- | --- | --- | --- | --- |
@@ -79,17 +107,19 @@ Use `general-improvement` only for genuine repository maintenance whose output b
 outside the packing pipeline and fits none of W1–W7. It is not a core-work catchall or
 permission to mix several purposes without checkpoints.
 
-One workflow phase is active at a time in each independently tracked agent session.
-It declares a workflow, one primary focus, an objective, expected output, validating
-command, kill condition, fallback, start, and deadline.
-Other principles still constrain the work.
-Actual outcome and evidence are recorded when the phase closes.
-Start a new phase when the workflow, focus, or bounded slice objective changes; a
-focus-only change may repeat the same workflow and is not a workflow switch.
-Switch only at a planned or evidence checkpoint, on a user request, or when the active
-premise is falsified.
-Close the prior phase with its evidence, stop reason, and next action before opening the
-next.
+For routine single-purpose work, record only the workflow, the bounded objective or
+question, the intended artifact, and the focused check.
+A bead, working note, or conversation can carry that declaration; do not create a
+session artifact just to restate it.
+
+Escalate to a versioned [agent-session artifact](campaign/agent-sessions/README.md) when
+work will cross multiple workflow or material-focus phases, run autonomously beyond an
+ordinary checkpoint, coordinate independently tracked delegates, supervise an expensive
+experiment or proof search, or need durable recovery and handoff state.
+Only then does each phase carry the full objective, output, validation, clock, stop,
+fallback, outcome, and evidence contract.
+Record material switches at a planned or evidence checkpoint, on a user request, or when
+the active premise is falsified; momentary changes of emphasis are not new phases.
 
 ### W6: The Research Loop
 
@@ -147,7 +177,7 @@ full definitions:
 | `X-NNN` | An exploration report: the recorded idea source hypotheses are mined from |
 | `exp-NNN` | One experiment: the durable artifact for one research round, which may aggregate several raw runs |
 | `series-NNN` | One campaign tooling regime; experiments also record their narrower subject and provenance |
-| `session-NNN` | One agent session: entry workflow, ordered phase history, budget, evidence, stop reason, and handoff |
+| `session-NNN` | One escalated agent-session record: entry workflow, ordered phase history, budget, evidence, stop reason, and handoff |
 | `agenda-NNN` | One mutable coordination queue ordering bounded cells by dependency and readiness |
 | `BC-NNN` | One cell in an agenda’s priority queue, currently the basin-map confidence ladder |
 | `D-NNN` | One defect: what went wrong, what caught it, and what now stops it recurring |
@@ -165,10 +195,10 @@ The eight words a reader meets everywhere here, in one line each;
 | **cell** | A choice of separating axis and order for every pair of squares; at fixed angles, one cell is one linear program |
 | **quench** | The deterministic refinement carrying a configuration to a local optimum |
 | **basin** | For a fixed deterministic quench, the preimage of one returned pose; this point-basin can split one connected terminal component |
-| **polish** vs **exploration** | Refining within the basin you are in, versus reaching a different one |
+| **local refinement** vs **exploration** | Improving within the basin you are in, versus reaching a different one; neither term says anything about formal assurance |
 | **standing best** | The best side ever published for that `n`—an upper bound, not known optimal in open cases |
 | **gap** | `best_side − standing_best`, always signed |
-| **evidence tier** | What a number may claim: `f64_screen`, `polished`, or `exact`—and a record only at `exact` |
+| **assurance** | `reported`, `numerically checked`, or `verified`; only the last is formal, and method, precision, tolerance, and origin are recorded separately |
 
 The operating documents divide ownership rather than repeat one another:
 
@@ -185,21 +215,20 @@ The operating documents divide ownership rather than repeat one another:
 ## The Autonomous Work Loop
 
 The outer loop is a portable repository protocol, not a feature of one agent platform.
-The `tbd` queue owns dependencies and tracked work; the active launch agenda freezes an
+The `tbd` queue owns dependencies and ready work; the active launch agenda freezes an
 explicit portfolio whenever landed-versus-branch-ahead bead state is not yet reconciled.
-An [agent-session artifact](campaign/agent-sessions/README.md) owns the current workflow
-phase, primary focus, objective, clocks, and delegation evidence; commits and research
-artifacts own the results.
+Commits and research artifacts own results, and a versioned
+[agent-session artifact](campaign/agent-sessions/README.md) owns phase, clock, and
+recovery state only when the escalation criteria apply.
 Changing agents changes the driver, not the work.
-Mechanical delegations inherit that phase unless they open independently tracked
-sessions.
+Mechanical delegations inherit the coordinating workflow unless they need independently
+recoverable session state.
 
 Breadth lives in [`campaign/ideas.md`](campaign/ideas.md), the hypothesis registry, and
-the bead queue. At session entry, declare one absolute session start and deadline, then
-the workflow, primary focus, expected output, validation command, kill condition,
-fallback, phase start, and phase deadline; narrowness lives in one slice at a time, with
-hard clocks. At a checkpoint, close the phase before changing purpose or focus so the
-ledger can summarize what kinds of work actually occurred.
+the bead queue. Routine entry uses the four-fact declaration above; escalated sessions
+add their full phase and clock contract.
+At a checkpoint in a versioned session, close the phase before changing purpose or
+material focus so the ledger can summarize what kinds of work actually occurred.
 The slice protocol, clocks, result routing, budgets, and stop rules are the campaign
 runbook’s [bounded research cycle](campaign/README.md#the-bounded-research-cycle); which
 validation loop to run at each step is
@@ -224,8 +253,11 @@ explorations/packing/
 ├── campaign/               The experiment record: hypothesis registry, series, rounds,
 │                           and a generated ledger. See campaign/README.md.
 ├── frontier/               What is known about s(n) for every n <= 100: one
-│                           schema-validated artifact per case, plus editorial.
+│                           schema-validated reported/formal claim register per case,
+│                           plus the generated reader-first STATUS.md.
 │                           See frontier/README.md.
+├── witnesses/              Generic Witness/v1 interchange, controls, and retained
+│                           decimal and exact rational examples
 ├── golden/                 Stored calibration endpoint snapshots for small PROVED
 │                           cases. Mathematical oracle checks are distinct from the
 │                           provisional discovery rows
@@ -236,7 +268,7 @@ explorations/packing/
 │                           extraction. See resources/README.md.
 ├── src/sqpack/             Maintained package; dependencies flow downward only
 │   ├── field.py            E3 exact arithmetic and sign certification
-│   ├── verify.py           E3 independent exact/float packing verification
+│   ├── verify.py           E3 shared exact and numerical packing predicates
 │   ├── render/             E2 deterministic SVG model, safe serializer, visual
 │   │                       tokens, static views, exact overlays, and CSS motion
 │   ├── research/           E2 quench, canonical identity, atlas, and recognition tools
@@ -277,13 +309,16 @@ it as a candidate rather than silently promoting it to an exact proof artifact.*
 
 *The larger `n = 29` example exercises the full 20-color sequence and deterministic
 reuse on 29 squares.
-It is reconstructed at 160 decimal digits and passes all 406 pairwise separating-axis
-checks, so the renderer calls it a verified construction—not an exact certificate or a
-proof of global optimality.*
+Its roughly 100-digit source is evaluated at 160 decimal digits of working precision and
+passes all 406 pairwise separating-axis checks at tolerance `1e-80`, so the renderer
+calls it numerically checked—not verified, exact, or a proof of global optimality.*
 
 The renderer preserves the input’s evidence tier.
-Its caption and metadata distinguish candidates, verified constructions, certified upper
-bounds, and proved optima; typography cannot upgrade a numerical candidate.
+Its caption and metadata distinguish candidates, numerically checked constructions,
+certified upper bounds, and proved optima; typography cannot upgrade a numerical check
+to formal verification.
+Numerically checked figures retain the arithmetic, actual precision, rounding,
+tolerance, method, and outcome in SVG metadata.
 Exact annotations retain algebraic or rational source expressions in SVG comments and
 namespaced metadata while using stable high-precision decimal projections for geometry.
 The container and every packed square use the same thin pure-black boundary, so a
@@ -344,7 +379,7 @@ before, and copied aggregates repeatedly went stale.
 
 [`conventions.md`](conventions.md) is the definitive registry of every convention and
 naming this directory runs on: the id scheme across all layers, file naming, artifact
-discipline, the evidence tiers and what each may claim, provenance, corrections, and
+discipline, the assurance levels and what each may claim, provenance, corrections, and
 which rules are machine-checked versus which rest on care.
 Read it before adding an artifact, a round, or a tool.
 
@@ -373,14 +408,17 @@ proved lower bound for every `n ≤ 100` with provenance and per-case editorial,
 [`frontier/`](frontier/README.md) as soft-schema artifacts rather than as a table inside
 a report, so it can be validated and queried.
 
-Claims in the reports are separated by evidential status (proved, computationally
-verified, best known, or asserted-but-unverified) and every citation resolves both to a
-full reference and to a local copy in [`resources/`](resources/README.md).
+Claims in the reports distinguish formal proof or verification, finite numerical checks,
+and source reports. Every citation resolves both to a full reference and to a local copy
+in [`resources/`](resources/README.md).
 
-The reports have been through a full technical review (2026-08-22): every substantive
-claim re-checked against the archived primary sources, the central algebra re-derived
-independently at 50-digit precision, and the findings applied to the documents
-themselves. Corrections this produced are recorded in the `n = 11` report’s
+The reports went through a full technical review on 2026-08-22: substantive claims were
+re-checked against the then-current primary-source archive and the central algebra was
+re-derived independently at 50-digit precision.
+The named frontier source set was refreshed again on 2026-08-25; its scope and replay
+dispositions live in [`frontier/source-coverage.yaml`](frontier/source-coverage.yaml),
+so neither date is presented as an exhaustive web claim.
+Corrections from the technical review are recorded in the `n = 11` report’s
 [Corrections to Common Summaries](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#corrections-to-common-summaries),
 its remaining gaps in
 [Open Questions](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#open-questions),
@@ -416,8 +454,10 @@ backed by two independent implementations.
 
 ## Exact Verification
 
-Record packings are published as high-precision decimals, and there is no public tool
-that checks one **exactly**. `sqpack` is that check.
+`sqpack` can formally verify complete rational witnesses and algebraic witnesses whose
+field preconditions it certifies.
+It can also inspect and numerically check decimal witnesses without upgrading their
+assurance.
 
 Why precision is not enough: a record packing has squares touching at exactly zero
 separation, floating point can certify a strict inequality but not an equality, and
@@ -429,7 +469,14 @@ itself. The argument in full, with what it cost when ignored, is
 ### Use
 
 ```shell
+uv run --frozen packing-witness inspect witnesses/schadt-n029-2025-decimal.yaml
+uv run --frozen packing-witness check witnesses/schadt-n029-2025-decimal.yaml \
+  --method numerical-multiprecision --precision 300 --tolerance 1e-100
+uv run --frozen packing-witness verify witnesses/schadt-n029-2025-rational.yaml
+
 uv run --frozen python -m cases.trump11.verify_exact
+uv run --frozen python -m cases.gobel5.verify_exact
+uv run --frozen python -m cases.gobel10.verify_exact
 uv run --frozen python -m cases.trump11.verifier_limits
 uv run --frozen python -m benchmarks.exact_verification
 uv run --frozen python -m cases.trump11.derive_field
@@ -437,7 +484,14 @@ uv run --frozen --group dev packing-validate
 ```
 
 Only `cases.trump11.derive_field` needs the optional symbolic dependency (SymPy).
-The verifier itself is standard library only.
+
+The Schadt source pose passes its declared 300-digit check at tolerance `1e-100`; that
+is numerical evidence, not a verified record.
+The retained rational witness is a separate, slightly relaxed construction produced by
+robust rational promotion and verified exactly by the public tool and an independent
+checker. It proves `s(29) ≤ 5.93388579986236485799813026`, not the tighter reported
+record and not optimality.
+See [`n-029.md`](frontier/n-029.md) for the complete disposition.
 
 `cases.trump11.verify_exact` output:
 
@@ -457,7 +511,12 @@ record page, so this is also an independent check of that record.
 
 ### Verifying Another Packing
 
-Supply the corners in an exact field and call `verify_packing`:
+Use [`Witness/v1`](witnesses/witness.schema.yaml) for supported rational, algebraic, or
+decimal center/basis, center/angle, and corner data.
+Source adapters should stop at that interchange boundary; `packing-witness inspect`,
+`check`, and `verify` then provide the shared behavior.
+
+Library callers can also supply corners in an exact field and call `verify_packing`:
 
 ```python
 from sqpack.field import NumberField
@@ -468,16 +527,22 @@ squares = [...]  # 11 x 4 corners of FieldElements
 print(verify_packing(squares, side, sign=exact_sign))
 ```
 
-The work is in the first line: recovering the field means reading the published exact
-data by hand, once per packing, and
-[`cases/trump11/packing.py`](cases/trump11/packing.py) is the worked example.
+The constructor rejects a reducible polynomial or an interval that does not isolate one
+real root. It uses exact finite-field irreducibility when that certificate exists, a
+complete factor-exclusion check for supported monic integer quartics, and exact Sturm
+root counting. Inputs outside those certified paths fail closed.
+Recovering a correct field and exact geometry from arbitrary decimal input remains the
+hard step; [`cases/trump11/packing.py`](cases/trump11/packing.py) is the worked
+algebraic example. Robust rational promotion is built for suitable decimal center-angle
+poses and may need an explicit side relaxation.
+Generic interval-existence certification at the reported value is not built and may fail
+even after it is built when the contact system is singular, ambiguous, or
+ill-conditioned.
 
-**The result is a proof only if the field metadata is right, and the constructor does
-not yet check that** ([D-053](defects.md), open): verify irreducibility and single-root
-isolation yourself before trusting a verdict on a field you supplied.
-The [synopsis](SYNOPSIS.md#what-is-built) carries the full caveat; the module docstrings
-in [`src/sqpack/`](src/sqpack/) carry the maintained APIs, including the fast
-non-certifying float backend.
+The [synopsis](SYNOPSIS.md#verification-capability-ladder) classifies each path as
+built, buildable engineering, or mathematically contingent.
+The module docstrings in [`src/sqpack/`](src/sqpack/) carry the maintained APIs,
+including the non-certifying numerical backends.
 
 ### Scope
 

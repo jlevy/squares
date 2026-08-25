@@ -1,0 +1,26 @@
+softschema:
+  contract: packing.squares:Witness/v1
+  schema: witness.schema.yaml
+  envelope: witness
+  status: enforced
+witness:
+  id: W-overlap-negative-control
+  n: 2
+  side: '2'
+  square_size: '1'
+  representation: corners
+  scalar:
+    kind: rational
+  coordinates:
+    origin: lower-left
+    axes: x-right-y-up
+    angle_unit: not-applicable
+  squares:
+    - id: 1
+      corners: [['0', '0'], ['1', '0'], ['1', '1'], ['0', '1']]
+    - id: 2
+      corners: [['1/2', '0'], ['3/2', '0'], ['3/2', '1'], ['1/2', '1']]
+  claim:
+    assurance: reported
+    method: exact-algebraic
+    limitations: Deliberately invalid mutation control; never frontier evidence.

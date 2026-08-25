@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Validate every soft-schema artifact in frontier/ against its declared schema.
+"""Validate every enforced packing soft-schema artifact against its declared schema.
 
 Two profiles are in use and they need different handling:
 
 - `frontmatter-md` (the 100 `n-NNN.md` cases). The softschema CLI validates
   these directly: `uvx softschema@latest validate n-011.md`.
-- `pure-yaml` (the four dataset files). The spec defines this profile, but
+- `pure-yaml` (frontier datasets, defects, and witness interchange files). The spec
+  defines this profile, but
   softschema 0.6.1's CLI rejects any file without frontmatter
   ("missing --contract because the document has no YAML frontmatter"), so the
   CLI cannot enforce them today. Declaring `status: enforced` on a file nothing
@@ -27,20 +28,23 @@ import sys
 import yaml
 from jsonschema import Draft202012Validator
 
+from devtools.check_basic_bounds import check_case_basic_bounds
+from sqpack.assurance import check_case_semantics, check_evidence_semantics
+from sqpack.yamlio import load_yaml
+
 FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
+WITNESSES = FRONTIER.parent / "witnesses"
+DOCUMENT_MAP = FRONTIER.parent / "docs" / "project" / "document-map.yaml"
 
 
 def load_schema(name: str) -> dict:
-    return yaml.safe_load((FRONTIER / name).read_text(encoding="utf-8"))
+    return load_yaml((FRONTIER / name).read_text(encoding="utf-8"))
 
 
 def payload_and_meta(path: pathlib.Path) -> tuple[dict, dict]:
     """Return (payload, softschema metadata) for either profile."""
     text = path.read_text(encoding="utf-8")
-    if path.suffix == ".md":
-        doc = yaml.safe_load(text.split("---\n")[1])
-    else:
-        doc = yaml.safe_load(text)
+    doc = load_yaml(text.split("---\n")[1]) if path.suffix == ".md" else load_yaml(text)
     meta = doc.get("softschema")
     if meta is None:
         raise ValueError("no softschema metadata block")
@@ -53,7 +57,10 @@ def payload_and_meta(path: pathlib.Path) -> tuple[dict, dict]:
 
 def check(path: pathlib.Path) -> list[str]:
     errs: list[str] = []
-    payload, meta = payload_and_meta(path)
+    try:
+        payload, meta = payload_and_meta(path)
+    except (ValueError, yaml.YAMLError) as error:
+        return [f"invalid or ambiguous YAML: {error}"]
     errs.extend(
         f"softschema.{key} missing"
         for key in ("contract", "schema", "status")
@@ -69,7 +76,7 @@ def check(path: pathlib.Path) -> list[str]:
     schema_path = (path.parent / meta["schema"]).resolve()
     if not schema_path.exists():
         return [*errs, f"declared schema not found: {meta['schema']}"]
-    v = Draft202012Validator(yaml.safe_load(schema_path.read_text(encoding="utf-8")))
+    v = Draft202012Validator(load_yaml(schema_path.read_text(encoding="utf-8")))
     for e in sorted(v.iter_errors(payload), key=lambda e: list(e.path)):
         loc = "/".join(str(x) for x in e.path) or "<root>"
         errs.append(f"{loc}: {e.message}")
@@ -109,21 +116,27 @@ def cross_checks() -> list[str]:
         for b in a["lower_bounds"]
         if b["confidence"] == "reconstructed" and not b.get("note")
     )
-    # `value` is what the tables render; `value_str` is the display duplicate beside it.
-    # Nothing compared them until a negative control tried to make the drift check fire
-    # by editing `value_str` and it did not (defect D-022): the two could disagree in
-    # silence, and the artifact would carry a number the report never shows.
+    evidence_document = yaml.safe_load((FRONTIER / "evidence.yaml").read_text(encoding="utf-8"))
+    evidence_records = evidence_document["evidence"]
+    evidence_ids = [record["id"] for record in evidence_records]
+    duplicate_evidence = {item for item in evidence_ids if evidence_ids.count(item) > 1}
+    if duplicate_evidence:
+        errs.append(f"evidence: duplicate ids: {sorted(duplicate_evidence)}")
+    evidence_by_id = {record["id"]: record for record in evidence_records}
+    for record in evidence_records:
+        errs.extend(check_evidence_semantics(record))
+
+    case_numbers: list[int] = []
     for case in sorted(FRONTIER.glob("n-*.md")):
         doc = yaml.safe_load(case.read_text(encoding="utf-8").split("---\n")[1])
-        for key in ("upper_bound", "lower_bound"):
-            bound = doc["packing"].get(key) or {}
-            if bound.get("value_str") is None or bound.get("value") is None:
-                continue
-            if float(bound["value_str"]) != float(bound["value"]):
-                errs.append(
-                    f"{case.name}: {key}.value_str disagrees with value "
-                    f"({bound['value_str']} vs {bound['value']})"
-                )
+        packing = doc["packing"]
+        case_numbers.append(packing["n"])
+        errs.extend(
+            f"{case.name}: {error}" for error in check_case_semantics(packing, evidence_by_id)
+        )
+        errs.extend(f"{case.name}: {error}" for error in check_case_basic_bounds(packing))
+    if case_numbers != list(range(1, 101)):
+        errs.append("frontier cases are not exactly n=1..100 in filename order")
 
     sa = yaml.safe_load((FRONTIER / "source-availability.yaml").read_text(encoding="utf-8"))
     keys = [s["key"] for s in sa["recovered"]] + [s["key"] for s in sa["unretrieved"]]
@@ -188,6 +201,10 @@ def main() -> int:
     md = sorted(FRONTIER.glob("n-*.md"))
     datasets = sorted(p for p in FRONTIER.glob("*.yaml") if not p.name.endswith(".schema.yaml"))
     datasets += [FRONTIER.parent / "defects.yaml"]
+    datasets += sorted(
+        path for path in WITNESSES.glob("*.yaml") if not path.name.endswith(".schema.yaml")
+    )
+    datasets.append(DOCUMENT_MAP)
     if not md or not datasets:
         print("frontier/ artifacts not found", file=sys.stderr)
         return 2

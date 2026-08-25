@@ -68,3 +68,7 @@ where the difficulty lives, but is not evidence that an unguided method could fi
 `n = 11`. The sweep is what keeps that honest: it must also hold at `n = 5` and
 `n = 10`, then pass the oblique `n = 17` calibration before its `n = 11` result is used
 strategically.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

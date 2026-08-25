@@ -251,7 +251,7 @@ def queue(
 STUB = """---
 title: {eid} — {hid} (in progress)
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -265,7 +265,11 @@ experiment:
   subject:
     label: unattended runner
     engine: {engine}
-    precision: f64_screen
+    assurance: numerically-checked
+    method: numerical-f64
+    precision: {{binary_bits: 53, rounding: nearest-even}}
+    tolerance: '0 (engine-reported overlap must equal zero)'
+    migration_annotation: null
     selftest_passed: true
   instance: {{axis: n, point: {cell}}}
   method: {{operator: {operator}}}
@@ -673,7 +677,7 @@ def record(eid: str, *, operator: str) -> str:
     fm = {
         "title": f"{eid} — {hid} at n = {cell_list}",
         "softschema": {
-            "contract": "packing.squares:Experiment/v1",
+            "contract": "packing.squares:Experiment/v2",
             "schema": "../../../schemas/experiment.schema.yaml",
             "envelope": "experiment", "status": "enforced",
         },
@@ -686,7 +690,10 @@ def record(eid: str, *, operator: str) -> str:
                 "engine": Path(shlex.split(recipe["command"])[0]).name,
                 "label": recipe["command"],
                 "engine_commit": artifact_execution["engine_commit"],
-                "precision": "f64_screen",
+                "assurance": "numerically-checked",
+                "method": "numerical-f64",
+                "precision": {"binary_bits": 53, "rounding": "nearest-even"},
+                "tolerance": "0 (engine-reported overlap must equal zero)",
                 "host_system": socket.gethostname(), "selftest_passed": True,
             },
             "instance": {"axis": "n", "point": cells[0].n if cells else recipe["cells"][0]},
@@ -826,7 +833,7 @@ def release(eid: str, why: str) -> None:
     fm = {
         "title": f"{eid} — {hid} (released)",
         "softschema": {
-            "contract": "packing.squares:Experiment/v1",
+            "contract": "packing.squares:Experiment/v2",
             "schema": "../../../schemas/experiment.schema.yaml",
             "envelope": "experiment",
             "status": "enforced",

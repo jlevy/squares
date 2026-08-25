@@ -40,9 +40,9 @@ not a proof that every pixel is exact.
   full-precision source decimals and exact expressions in metadata, and concise XML
   comments beside the elements they describe.
 - Keep claim status visible.
-  A renderer must distinguish a candidate, a numerically verified packing, a certified
-  upper bound, and a proved optimum; it must not turn a solver endpoint into a “minimum”
-  by typography.
+  A renderer must distinguish a candidate, a numerically checked packing, a formally
+  certified upper bound, and a proved optimum; it must not turn a solver endpoint into a
+  “minimum” by typography.
 - Attach exact contact geometry whenever an adapter still has access to a certified
   algebraic construction.
   Render it as an optional 60%-opaque tempered-yellow highlight: segments for
@@ -182,15 +182,18 @@ The renderer consumes immutable typed values rather than raw dictionaries:
   corners, plus an optional rigid pose.
   Static output always uses the corners; trajectory output additionally requires a pose
   for every square in every frame.
-- **`VerificationSummary`** stores the verifier name, result, and counts without
-  rerunning or upgrading the verifier’s claim.
+- **`CheckSummary`** stores whether a numerical or formal check passed, its method, and
+  its details. Numerical evidence also requires the arithmetic, actual precision,
+  rounding, and tolerance.
+  The explicit check kind prevents a finite numerical check from supporting a formal
+  evidence tier.
 - **`ContactFeature`** stores one exact point or a nondegenerate exact segment, the one
   or two square IDs involved, and an optional container-wall identity.
   A point has no `end`; a segment has distinct `start` and `end` points.
   Contact coordinates must be rational or algebraic sources rather than binary64 or free
   decimal projections.
 - **`PackingFrame`** stores the container side, square sequence, source record key,
-  frame label, objective, evidence tier, verification summary, and inert provenance.
+  frame label, objective, evidence tier, check summary, and inert provenance.
 - **`PackingTrajectory`** stores ordered frames and a declared trajectory kind: retained
   solver states, certified feasible path, or illustrative endpoint interpolation.
 - **`RenderSpec`** stores the view, annotations, overlays, fixed theme, viewport,
@@ -372,8 +375,8 @@ quality”:
 - `atlas/rendering/n5-exact-face-trajectory.svg`, the certified algebraic segment from
   experiment 033, with endpoint A, the exact midpoint, and endpoint B
 - `atlas/rendering/kingbird29-overview.svg`, the 160-digit reconstruction of the
-  29-square Kingbird witness, kept at verified-construction evidence rather than
-  upgraded to an exact certificate
+  29-square Kingbird witness, kept at numerically-checked evidence rather than upgraded
+  to an exact certificate
 
 Each is reviewed at document thumbnail size, normal screen size, and print scale against
 the strongest local and online examples listed above.
@@ -423,10 +426,11 @@ Private helpers named below are part of the implementation map, not public API.
 
 #### `src/sqpack/render/model.py`
 
-- Define `ScalarKind`, `EvidenceTier`, `ViewLevel`, `AnnotationLevel`, `Overlay`,
-  `ContainerWall`, and `TrajectoryKind` as string enums with stable serialized values.
+- Define `ScalarKind`, `EvidenceTier`, `CheckKind`, `ViewLevel`, `AnnotationLevel`,
+  `Overlay`, `ContainerWall`, and `TrajectoryKind` as string enums with stable
+  serialized values.
 - Define frozen dataclasses `ScalarSource`, `Point2`, `RigidPose`, `SquareGeometry`,
-  `VerificationSummary`, `ContactFeature`, `PackingFrame`, `PackingTrajectory`, and
+  `CheckSummary`, `ContactFeature`, `PackingFrame`, `PackingTrajectory`, and
   `RenderSpec`.
 - `validate_scalar_source()` rejects empty source strings, non-finite projections,
   invalid precision, and an exact kind with no exact source.
@@ -434,8 +438,7 @@ Private helpers named below are part of the implementation map, not public API.
   order, distinct adjacent projected points, and a finite optional pose.
 - `validate_frame()` requires a positive container side, a non-empty square sequence,
   unique square IDs, deterministic square and feature order, valid contact participants,
-  exact contact coordinates, nondegenerate segments, and evidence/verification
-  consistency.
+  exact contact coordinates, nondegenerate segments, and evidence/check consistency.
 - `validate_trajectory()` requires at least two frames, one square-ID set and order,
   monotonically increasing logical frame times, motion poses, and a trajectory-kind
   claim consistent with frame evidence.
@@ -603,13 +606,14 @@ node hierarchy would add conversion code without a second semantic contract.
   schema boundary, derives the start’s enclosing side, and returns start/final frames
   without importing the basin-event producer.
 - `frame_from_gobel10()` adapts `cases.gobel10.packing.pose()` as a numerical
-  construction with its retained source ID, URL, and digest.
+  construction with its retained source ID and URL.
 - `frame_from_trump11()` adapts `cases.trump11.packing.build()` from exact corner
   elements, recording number-field coefficient strings, the published side formula, and
   its exact contact inventory.
-- `frame_from_kingbird29()` reconstructs the retained Kingbird source at 160 decimal
-  digits, independently verifies all 406 pairs, and keeps verified-construction evidence
-  because the source is not an exact certificate.
+- `frame_from_kingbird29()` evaluates the roughly 100-digit retained Kingbird source at
+  160 decimal digits of working precision, independently checks all 406 pairs at the
+  declared `1e-80` tolerance, and keeps numerically-checked evidence because the source
+  is not an exact certificate.
 - `trajectory_from_n5_equal_side_face()` reconstructs endpoint A, the exact midpoint,
   and endpoint B from `cases.n5.face_model`, then marks the trajectory as a certified
   feasible path without owning the algebraic construction.
@@ -839,8 +843,8 @@ with the committed artifact.
 **Geometry tests.** Independently project every pose to its four corners and compare
 static polygon coordinates and trajectory transforms with the semantic model.
 Run the existing verifier on each retained packing frame.
-Animation does not grant validity to intermediate frames; only input frames with
-verification evidence receive a verified label.
+Animation does not grant validity to intermediate frames; only input frames with a
+successful check receive a label allowed by that check’s numerical or formal kind.
 Exercise exact contact extraction against hand-sized point and segment fixtures, then
 check the Trump pair-contact count against its verifier report.
 Assert that candidate pose arrays never acquire contacts through a visual tolerance.
@@ -902,8 +906,8 @@ known-answer semantics and all replay checks pass.
   Provenance URLs may appear only as inert metadata or text.
 - The `n = 3` topology and strata remain unchanged and byte-replay through the new
   renderer.
-- Candidate, verified construction, certified upper bound, and proved optimum are
-  visibly and structurally distinct evidence states.
+- Candidate, numerically checked construction, formally certified upper bound, and
+  proved optimum are visibly and structurally distinct evidence states.
 - Abbreviated certified-bound values use approximation semantics; no rounded decimal is
   placed after an inequality unless its outward direction is proved.
 - The current trajectory profile accepts translation-only, fixed-container frames and

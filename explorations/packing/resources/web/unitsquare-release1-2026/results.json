@@ -1,0 +1,109 @@
+{
+  "schema": "unitsquare.results.release.v1",
+  "title": "Six improved upper bounds for packing congruent unit squares",
+  "release": 1,
+  "published": "2026-07-29",
+  "creator": "UnitSquare Project",
+  "claim_type": "improved_upper_bound_from_cited_public_parent",
+  "optimality_claimed": false,
+  "clean_room_discovery_claimed": false,
+  "verification": {
+    "formal": "arbitrary-precision interval arithmetic with outward rounding",
+    "numerical": "300-digit decimal recomputation at zero tolerance",
+    "independent": "Thomas Schadt's published check.py, unmodified"
+  },
+  "references": [
+    {
+      "id": "ellsworth-squares-in-squares",
+      "citation": "David Ellsworth, Squares in Squares, high-precision public table and SVG presentation, based on the original compilation by Erich Friedman.",
+      "url": "https://kingbird.myphotos.cc/packing/squares_in_squares.html",
+      "accessed": "2026-07-29"
+    },
+    {
+      "id": "schadt-checker",
+      "citation": "Thomas Schadt, Squares-packing S(29) — New Record, public high-precision packing and Python checker.",
+      "url": "https://github.com/BalthasarStrauss/Squares-packing_S-29-_New-Record",
+      "license": "MIT"
+    }
+  ],
+  "results": [
+    {
+      "n": 68,
+      "offered_side": "8.803383074716108386903836683375989697670063329",
+      "cited_parent_side": "8.80345993651653",
+      "absolute_reduction": "0.0000768618004216131",
+      "verification": "PROVEN_VALID",
+      "lane": "A",
+      "svg": "packings/n068.svg",
+      "svg_sha256": "d7385d6ce1b5a959d06893c94f3c0355f17175bd68608db6f012ca309854ed66",
+      "record_sha256": "b44aac1accc9a4d5b92f96077aaaaecb88b99faaef24870b3dd7f4507070f9d8",
+      "parent_url": "https://kingbird.myphotos.cc/packing/square-68.svg",
+      "parent_sha256": "558fbdddfeb0b2f8752b88e172d2776544beb4d2a7122189ef77c1e1c5ebdc6d"
+    },
+    {
+      "n": 69,
+      "offered_side": "8.827205507815920656880680735618736931225314831",
+      "cited_parent_side": "8.82721205592900",
+      "absolute_reduction": "0.000006548113079343119",
+      "verification": "PROVEN_VALID",
+      "lane": "A",
+      "svg": "packings/n069.svg",
+      "svg_sha256": "b32aa37d37b07248ac92e683bbfd9be7ca6eb6aafa35a35e46a2484467afee41",
+      "record_sha256": "04af1825f36d4ec70c0372b3dabf0bb5871025e2ee37563fc6242c4ac2af253d",
+      "parent_url": "https://kingbird.myphotos.cc/packing/square-69.svg",
+      "parent_sha256": "0333814c7b43ddc7db549a54771de117f8a6b7b3db0f89c12fe035115546fd08"
+    },
+    {
+      "n": 103,
+      "offered_side": "10.703790283762427",
+      "cited_parent_side": "10.70383477210707",
+      "absolute_reduction": "0.000044488344643",
+      "verification": "PROVEN_VALID",
+      "lane": "A",
+      "svg": "packings/n103.svg",
+      "svg_sha256": "4bb43826fa9e9ef5f904b1a7a5b45fd622bf02d894699a9462d3f026c53e63b2",
+      "record_sha256": "acd3e73babb0d38b3d32d07b015c32b456413e4e0c4164099044053e28423471",
+      "parent_url": "https://kingbird.myphotos.cc/packing/square-103.svg",
+      "parent_sha256": "cd8c2611ccfcff50a6a59c38f8cbc5ec863f4c9b59d8417d40e787206ceedfca"
+    },
+    {
+      "n": 105,
+      "offered_side": "10.807847913867976",
+      "cited_parent_side": "10.80789399144854",
+      "absolute_reduction": "0.000046077580564",
+      "verification": "PROVEN_VALID",
+      "lane": "A",
+      "svg": "packings/n105.svg",
+      "svg_sha256": "c42fcba9c73b7feaa3ea2f892b1293a14da6c7f7d7ddd8b03ae47877e5f4f9e0",
+      "record_sha256": "21c3be5b5d63922c5ebf2d27ffb8849893ea1cfb45412abb86ff9f4703a98d57",
+      "parent_url": "https://kingbird.myphotos.cc/packing/square-105.svg",
+      "parent_sha256": "71a3dac5743f89d4fee7819ba42879cf2d4e88a1b81c4d382a14e6de7cd2770e"
+    },
+    {
+      "n": 110,
+      "offered_side": "10.996797773597706",
+      "cited_parent_side": "10.99683777797875",
+      "absolute_reduction": "0.000040004381052",
+      "verification": "PROVEN_VALID",
+      "lane": "A",
+      "svg": "packings/n110.svg",
+      "svg_sha256": "d650681ea297cd5ff972aadfbd0a21908d40a4970181bc8af9e5dedcfdc12fc9",
+      "record_sha256": "a131538110d1b3970681936b339d4e3407ddbc1c35df98a6f034af20c6e10bfb",
+      "parent_url": "https://kingbird.myphotos.cc/packing/square-110.svg",
+      "parent_sha256": "48087c7f0b09b88277b2e242ea27c10f5ee13bd2518d3c1158f586078d03dcf0"
+    },
+    {
+      "n": 131,
+      "offered_side": "11.956543108124773261501115489978287643498579738",
+      "cited_parent_side": "11.95654869347733",
+      "absolute_reduction": "0.0000055853525567384986",
+      "verification": "PROVEN_VALID",
+      "lane": "A",
+      "svg": "packings/n131.svg",
+      "svg_sha256": "a92619568eda15cad4d5bb07a7c1c38622609f080dab9d22b8ca4c677b31ae4a",
+      "record_sha256": "300ff41f8424e6b7a55d999d73250249e604dce6057791d5d524132148a19d94",
+      "parent_url": "https://kingbird.myphotos.cc/packing/square-131.svg",
+      "parent_sha256": "30993ee5893c2f1c3507e0702f913e7377160096dda9b277f8c9842e8bc602d6"
+    }
+  ]
+}

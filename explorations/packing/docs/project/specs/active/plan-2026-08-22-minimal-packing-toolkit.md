@@ -336,10 +336,10 @@ The review’s H-2 is its own register’s top priority for this reason.
 
 - [x] **`quench`: LP-in-cell.** Fix angles and each pair’s separating axis; solve the
   cell’s linear program.
-  The single-cell half is already verified — a 1,056-constraint LP at Trump’s angles
-  reproduced `s(11)` to solver precision and every centre to `9e-16`. What remains is
-  the *loop*: angle moves between LP solves, behaviour at cell boundaries, and
-  termination at a genuine cell-optimum.
+  The single-cell half is already numerically cross-checked — a 1,056-constraint LP at
+  Trump’s angles reproduced `s(11)` to solver precision and every centre to `9e-16`.
+  What remains is the *loop*: angle moves between LP solves, behaviour at cell
+  boundaries, and termination at a genuine cell-optimum.
 - [ ] **`canonicalize`: basin identity, two-level.** Geometric key (`D₄` and square
   relabelling, quantized, hashed) as the fast path; contact graph up to isomorphism as
   ground truth.

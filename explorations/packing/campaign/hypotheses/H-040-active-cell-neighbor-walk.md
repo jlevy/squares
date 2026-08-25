@@ -10,19 +10,19 @@ hypothesis:
   kind: hypothesis
   claim: >-
     After a known-answer n = 5 control, pivoting across one active separating or wall
-    feature at a time discovers at least twice as many new independently verified
+    feature at a time discovers at least twice as many new independently validated
     canonical active cells per LP solve as matched random-coordinate multistart at n = 10.
   lane: search
   derived_from: [X-002]
   strategy_refs: ['search:15', 'search:17', 'search:18']
   criterion:
     shape: paired
-    metric: new independently verified canonical active cells per LP solve
+    metric: new independently validated canonical active cells per LP solve
     direction: neighbor walk at least two times matched multistart
     threshold: 2
   instrument: >-
     Define a complete active-cell signature, enumerate one-feature pivots from each
-    retained cell, solve and independently verify the neighboring cell, and compare
+    retained cell, solve and independently validate the neighboring cell, and compare
     paired budgets with random-coordinate proposals. Report invalid pivots, duplicates,
     side distribution, and cell-signature sensitivity separately from terminal-component
     counts.

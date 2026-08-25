@@ -5,11 +5,12 @@ author: Codex, for the project maintainers
 ---
 # Feature: Frontier Assurance and Verification
 
-**Date:** 2026-08-24 (last updated 2026-08-24)
+**Date:** 2026-08-24 (last updated 2026-08-25)
 
 **Author:** Codex, for the project maintainers
 
-**Status:** Draft
+**Status:** Core implementation validated by the ordinary full gate; general
+interval-existence promotion remains open
 
 ## Overview
 
@@ -124,10 +125,12 @@ The audit that produced this plan found four concrete boundary cases.
    That supports a numerical structural observation, not exact feasibility or
    optimality. Its current `exact_solution` resource role and the “verified orientation
    classes” heading overstate the evidence.
-3. The generic `NumberField` path does not itself establish irreducibility or unique
-   root isolation. The built-in Trump `n = 11` path discharges those assumptions, but an
-   arbitrary caller cannot yet treat the generic algebraic path as an unconditional
-   verifier.
+3. The pre-change generic `NumberField` path did not itself establish irreducibility or
+   unique root isolation.
+   The implementation now requires an exact irreducible finite-field reduction or a
+   complete supported-quartic factor-exclusion certificate, plus exact Sturm isolation.
+   Unsupported declarations fail closed rather than inheriting verification from the
+   built-in Trump `n = 11` path.
 4. A July 2026 public source reports interval-verified improvements at several `n`,
    including `68` and `69`. The current `n = 68` and `n = 69` cases already retain those
    values and state that they have not been verified here; what is missing is typed
@@ -253,9 +256,9 @@ relationship_to_generator: independent-implementation
 source_key: "[Kingbird n=29 SVG]"
 precision:
   decimal_digits: 160
+  rounding: nearest
 tolerance: "1e-80"
-certificate: null
-replay: uv run --frozen python tools/check_kingbird_svg.py
+replay: uv run --frozen python -m cases.kingbird29.verify_svg
 replay_status: passed
 limitations: Does not certify exact feasibility or optimality.
 ```
@@ -269,6 +272,8 @@ dimensions. In particular:
   implementation, or input derivation;
 - `precision` and `tolerance` are required for every new numerical record and forbidden
   as substitutes for assurance;
+- method-specific fields are omitted when they do not apply; null placeholders do not
+  add information;
 - a migrated historical record may use the literal `unrecorded-historical` only when a
   dated migration annotation says that the archived run did not retain the value; known
   values such as D-021’s `1e-11` solver floor are copied only where the source record
@@ -354,7 +359,7 @@ At the time of this plan:
 | Recompute containment and pair margins from supported decimal poses | built, numerical only | expose through the generic witness path and require precision/tolerance |
 | Verify rational witness data exactly | substantially built | add interchange, certificate output, and controls |
 | Verify the built-in Trump algebraic witness | built and sound for that named witness | retain independent field and root checks |
-| Verify arbitrary `NumberField` input | built with an unenforced precondition | reject unless irreducibility and unique root isolation are certified |
+| Verify supported `NumberField` input | built and sound for accepted declarations | require a modular or complete supported-quartic irreducibility certificate plus exact unique-root isolation; reject unsupported declarations |
 | Import arbitrary center/angle or corner witnesses | partially built, source-specific | define one interchange format and thin adapters |
 | Prove a nearby relaxed upper bound from a robust numerical pose | buildable engineering for many poses | rationalize rotations and coordinates, add explicit safety margin, verify exactly |
 | Certify existence near a contact solution at the reported value | mathematically contingent | interval Newton/Krawczyk or algebraic root isolation with outward rounding |
@@ -414,13 +419,14 @@ first-party document retained in this repository.
 An additional SHA beside that file does not strengthen the mathematical claim and will
 be removed.
 
-A digest remains only when it performs a named mechanical function, such as:
+A digest remains only when it performs a named mechanical function already used by a
+consumer, such as:
 
 - comparing two independently retrieved byte streams across a real trust boundary;
-- providing a stable content identity for deduplication or an append-only event;
-- protecting completeness or cache correctness for a generated artifact; or
-- detecting that a checker’s embedded hand transcription no longer matches corrected
-  archived source bytes.
+- providing the stable identity that an existing deduplication or append-only event
+  consumer actually indexes; or
+- carrying a dependency checksum supplied by a lockfile across the package-download
+  trust boundary.
 
 The field or nearby documentation names that function.
 “Provenance” alone is not a sufficient reason.
@@ -428,9 +434,9 @@ Reader-facing digest restatements and checks that merely bind one Git-tracked so
 file to itself are removed, along with process tables that exist only to record those
 hashes. Where a replay checker duplicates source data in code, parsing the retained
 source is preferred.
-Until that duplication can be removed, an expected-source digest may remain as a
-narrowly documented staleness guard.
-It is never mathematical evidence.
+No implementation-owned source digest is retained by this change.
+Hashes embedded in an unedited first-party source snapshot remain source content; this
+repository neither repeats nor consumes them as mathematical evidence.
 
 ### Workflow and Process Discipline
 
@@ -440,9 +446,18 @@ process needed to keep those parts coherent.
 
 The six workflow entry points remain W1 research pass, W2 factual review, W3 insight
 iteration, W4 process review, W5 efficiency loop, and W6 research loop.
-An orchestrator may switch workflows inside one agent session, but each switch starts a
-declared phase with its own focus, output, clock, and stopping condition.
-The generated session and ledger views summarize the phase history.
+For routine single-purpose work, choosing an entry point is a lightweight routing
+decision: record the workflow, objective, intended artifact, and focused check where the
+work is already tracked.
+Do not create a second artifact merely to restate those facts.
+
+Escalate to `AgentSession/v2` only for multi-phase work, long autonomous supervision,
+independently tracked coordination, expensive experiment or proof supervision, or a
+consequential recovery handoff.
+An orchestrator may then switch workflows inside that session; each material switch
+starts a declared phase with its own focus, output, clock, and stopping condition.
+The generated session and ledger views summarize those escalated histories, not every
+routine task.
 
 The work-unit meanings remain:
 
@@ -461,6 +476,8 @@ Process additions must answer two questions: what failure does this prevent, and
 artifact or check demonstrates that benefit?
 If neither answer is concrete, do not add the process.
 Repetition alone does not justify a schema field, digest, table, or gate.
+Correctness requirements do not become optional when they are expensive, but process
+controls remain proportional to consequence, recovery cost, and demonstrated failure.
 When a consequential rule is broken and nothing detects it, add the smallest useful
 check that would prevent the recurrence.
 There is no standing goal to mechanize every written convention.
@@ -578,29 +595,29 @@ preconditions).
 
 ### Phase 1: Establish the Contract and Migrate the Current Record
 
-- [ ] Land the controlled vocabulary and logical implications in README, synopsis,
+- [x] Land the controlled vocabulary and logical implications in README, synopsis,
   tutorial, conventions, frontier README, campaign runbook, component READMEs, and
   resource policy.
-- [ ] Add the v2 case, evidence, experiment, witness, and document-map contracts with
+- [x] Add the v2 case, evidence, experiment, witness, and document-map contracts with
   cross-record semantic validation.
-- [ ] Generate a reader-first frontier table with reported and verified upper and lower
+- [x] Generate a reader-first frontier table with reported and verified upper and lower
   bounds, verification origin, status, conflict, and freshness.
-- [ ] Script the v1-to-v2 migration of all current `n = 1..100` cases, compare it with a
+- [x] Script the v1-to-v2 migration of all current `n = 1..100` cases, compare it with a
   fresh source reparse, and direct human or agent scrutiny to cases with local evidence,
   conflicts, or `verified_here` entries rather than hand-transcribing 100 files.
-- [ ] Migrate current campaign artifacts without rewriting raw measurements.
+- [x] Migrate current campaign artifacts without rewriting raw measurements.
   Preserve unrecorded historical precision or tolerance explicitly and use named defects
   or revision notes for invalid historical conclusions.
-- [ ] Correct the `n = 29` source roles and wording.
+- [x] Correct the `n = 29` source roles and wording.
   Exp-012 remains a 160-digit numerical check; H-024 becomes unresolved under its
   original exact prerequisite or is superseded by a precisely numerical successor claim.
-- [ ] Audit assurance claims in current prose.
+- [x] Audit assurance claims in current prose.
   Automate retired structured tokens and exact deprecated phrases; review contextual
   mathematical words editorially.
-- [ ] Remove reader-facing Git-source digests.
+- [x] Remove reader-facing Git-source digests.
   Retain, replace, or remove each embedded-transcription staleness pin according to its
   named failure and document every retained pin.
-- [ ] Add the durable documentation map, generate the synopsis view from it, and map
+- [x] Add the durable documentation map, generate the synopsis view from it, and map
   every project document.
   Complete the full common-doc pass on definitive docs; apply lifecycle labels and
   targeted assurance corrections to historical or transient docs.
@@ -612,21 +629,21 @@ and local checks support.
 
 ### Phase 2: Complete Source Coverage and the Reusable Replay Path
 
-- [ ] Audit the named primary-source set and record conflicts and review dates.
+- [x] Audit the named primary-source set and record conflicts and review dates.
   Keep the case corpus complete through the declared `n = 100` horizon and record
   relevant beyond-horizon claims in the source inventory.
-- [ ] Adjudicate the July 2026 `n = 68` and `n = 69` claims and any other newer results;
+- [x] Adjudicate the July 2026 `n = 68` and `n = 69` claims and any other newer results;
   do not promote an inaccessible certificate or expose held-out child geometry before
   preregistered H-030 is settled or versioned.
-- [ ] Build the witness interchange format, source adapters, viewer, and independent
+- [x] Build the witness interchange format, source adapters, viewer, and independent
   numerical checks for `numerical-f64` and `numerical-multiprecision`.
-- [ ] Attempt local replay for every external full-geometry witness in scope and record
+- [x] Attempt local replay for every external full-geometry witness in scope and record
   one of the defined dispositions.
-- [ ] Make rational and algebraic verification emit replayable certificates, and close
+- [x] Make rational and algebraic verification emit replayable certificates, and close
   the generic number-field precondition gap before calling that path verified.
-- [ ] Add exact rational robustification for suitable numerical poses, with any side
+- [x] Add exact rational robustification for suitable numerical poses, with any side
   relaxation explicit in the resulting bound.
-- [ ] Keep the source archive and frontier linked without duplicating file hashes or
+- [x] Keep the source archive and frontier linked without duplicating file hashes or
   silently editing source-faithful material.
 
 **Done when:** every result in the declared source set and horizon is represented, every
@@ -637,12 +654,12 @@ inspected and numerically checked without case-specific verifier code.
 
 - [ ] Implement and independently test an outward-rounded interval-certificate path for
   suitable contact systems.
-- [ ] Attempt formal promotion of the highest-value unverified records, retaining exact
+- [x] Attempt formal promotion of the highest-value unverified records, retaining exact
   certificates, slightly relaxed verified bounds, or typed blockers.
 - [ ] Add small independent certificate checkers and negative controls for containment,
   overlap, field metadata, interval rounding, incomplete input, and false optimality
   promotion.
-- [ ] Make schema, semantic, generated-view, document-map, terminology, and link checks
+- [x] Make schema, semantic, generated-view, document-map, terminology, and link checks
   part of the normal packing validation path at the cheapest useful cadence.
 - [ ] Re-run the complete claim and common-doc audit after migrations, then move this
   plan out of `active/` once every durable rule has an authoritative home.
@@ -711,28 +728,34 @@ Markdown file changed or reclassified, with special attention to:
 - no ceremonial tables, hashes, or fields without a named use; and
 - preservation of source-faithful and historical evidence.
 
-The existing baseline remains green:
+The current focused and complete gates are:
 
 ```bash
-uv run --frozen python tools/validate_schemas.py
-uv run --frozen python tools/render_tables.py --check
-./test.sh
+uv run --frozen --group dev packing-validate --fast
+uv run --frozen --group dev packing-validate
+uv run --frozen --group dev packing-validate --strict
 ```
 
 New focused checks join these commands rather than creating an undocumented parallel
 gate.
 
+The 2026-08-25 implementation checkpoint passes the ordinary full gate: 58 mutation
+controls, 47 fast behavioral tests, the exact witness replays, all 100 frontier cases,
+13 structured datasets, 226 mapped durable documents, and the 20,000-pair differential
+check. The generic interval-existence certificate remains planned work rather than an
+implicit prerequisite or a claimed capability.
+
 ## Rollout Plan
 
-Implementation lands as successive PRs on the current square-packing stack.
+Implementation lands as stacked PRs on the current square-packing stack.
 As lower PRs merge, the next PR rebases and retargets to the new stack tip without
 changing the ownership boundaries above:
 
 1. this plan and its bead map;
-2. vocabulary, schema, definitive-doc, and current-corpus migration;
-3. source-coverage inventory, targeted document and research assurance audit, and
-   generic witness replay;
-4. exact/interval promotion tooling and continuous semantic gates.
+2. the integrated vocabulary, schema, corpus, source-coverage, documentation-map,
+   witness, exact-promotion, and semantic-gate implementation;
+3. a later interval-existence implementation only after its certificate format and
+   independent trusted core are reviewed.
 
 Each PR is internally consistent and passes the full existing test suite.
 A schema migration and the artifacts it governs land together; the repository never has

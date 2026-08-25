@@ -391,7 +391,8 @@ agenda:
 This is the mutable priority surface for one series of experiment loops.
 It is neither a second hypothesis registry nor an executable runner queue.
 The hypotheses say what could be true, experiment artifacts say what was measured, beads
-own unfinished work, and the current agent-session artifact owns the active clock.
+own unfinished work, and an escalated agent-session artifact owns the active outer clock
+when durable supervision state is needed.
 This agenda says which bounded cell should be attempted next and why.
 
 The three purposes prevent calibration from being mistaken for discovery:

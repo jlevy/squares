@@ -55,7 +55,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 36 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 37 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -84,7 +84,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6* 7* 8* | 14 | 106m agent + 4.0m wall |
 | H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
 | H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 4 | 65m agent + 1s wall |
-| H-024 | refuted | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
+| H-024 | unresolved | search | Every formally supported standing-record packing at n <= 30 uses at mo | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
 | H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
 | H-026 | confirmed | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 | 100m agent + 57s wall |
 | H-027 | blocked | search | In the imported reference contact cells at n = 11 and n = 17, the mini | n: 11 17 | 0 |  |
@@ -95,13 +95,14 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | H-032 | open question | proof | What are the connected components, dimensions, active strata, and symm | n: 3* 4* 5 6 | 2 | 35m agent + 1s wall |
 | H-033 | open question | proof | Can Bentz's moving unavoidable-resource method or a strict generalizat |  | 0 |  |
 | H-034 | blocked | proof | For the family U_s of all open unit-square poses contained in a square |  | 0 |  |
-| H-035 | blocked | search | A finite, independently verified instantiation of the stack, strip, or |  | 0 |  |
+| H-035 | blocked | search | A finite, independently and formally verified instantiation of the sta |  | 0 |  |
 | H-036 | blocked | proof | If every n = 11 square orientation modulo quarter turns lies within 0. |  | 0 |  |
 | H-037 | open question | proof | Can the gap between W(x) not in o(x^(1/2)) and W(x) = O(x^(3/5)) be na |  | 0 |  |
 | H-038 | open question | proof | Which algebraic number fields, minimal-polynomial degrees, Galois grou |  | 0 |  |
 | H-039 | open question | proof | Can a checked extension of Stromquist's conditional forcing or another |  | 0 |  |
 | H-040 | blocked | search | After a known-answer n = 5 control, pivoting across one active separat | n: 5 10 | 0 |  |
 | H-041 | confirmed | proof | At s = 2 + 4/sqrt(5), replacing the printed Figure 14 point G = (4/5,  | n: 11* | 1 | 90m agent + 1s wall |
+| H-042 | refuted | search | The retained Kingbird n = 29 SVG serialization has at most three orien | n: 29* | 1 | 15m agent + 0s wall |
 
 ## Rounds
 
@@ -116,8 +117,14 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-006 | series-000 | 11 | claude-opus-5 | H-002 | Refutes H-002 as stated: the quench does not refine annealer output to the analytic value, improving the gap by only 1.1-1.3x because it is a LOCAL cell optimiser and the tested starts remain far from the target construction. The single-cell half stands (4.4e-16 at exact angles) and a class-constrained 1-D angle search reaches 2e-11, so what fails is the free-angle descent - and H-019 says why. No terminal-component relation was measured. |
 | exp-009 | series-000 | 11 | claude-opus-5 | H-002 | Refutes H-002 on this cell: the median gap improves only from 8.85e-02 to 6.29e-02, against machine precision at n = 5 and n = 10. The tested starts remain far from the target after this local procedure; no terminal-component relation was measured. |
 | exp-011 | series-000 | 17 | claude-opus-5 | H-020 | The criterion was measured and missed: n=17 +3.245e-01, against the 1e-04 H-020 declared. The claim is refuted for these cells and this regime. |
-| exp-012 | series-000 | 29 | openai-codex | H-024 | The reconstructed, numerically valid n = 29 witness has six unambiguous orientation classes, exceeding H-024's preregistered upper bound of three and refuting the universal corpus claim at its first stop cell. |
 | exp-016 | series-000 | 11 | openai-codex | H-010 | The printed Figure 14 set is avoidable, so node four and therefore the five-node conjunction fail; this rejects the proof as printed, not the numerical lower bound. |
+| exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
+
+### unresolved (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-012 | series-000 | 29 | openai-codex | H-024 | The 160-digit numerical reconstruction has six well-separated classes, but the public serialization supplies no formal feasibility certificate, so it does not satisfy H-024's original prerequisite. |
 
 ### blocked (4)
 
@@ -171,7 +178,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 ## Effort
 
-36 rounds, 868 agent-minutes, 28.2 wall-minutes.
+37 rounds, 883 agent-minutes, 28.2 wall-minutes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

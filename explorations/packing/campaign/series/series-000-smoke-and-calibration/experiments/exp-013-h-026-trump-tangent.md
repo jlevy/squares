@@ -1,7 +1,7 @@
 ---
 title: exp-013 — all Trump branchwise linearized cones are zero
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,16 +10,21 @@ experiment:
   series: series-000
   title: Exact certificates confirm H-026 and locally isolate Trump’s pose
   date: '2026-08-24'
-  hypotheses: [H-026]
+  hypotheses:
+  - H-026
   tier: exploratory
   subject:
     label: exact branchwise fixed-side linearized cones of the Trump n=11 witness
     engine: trump linearized-cone checker 0.1.0
     engine_commit: faba023
-    precision: exact
+    assurance: verified
+    method: exact-algebraic
     host_system: macOS arm64
     selftest_passed: true
-  instance: {axis: n, point: 11, role: target}
+  instance:
+    axis: n
+    point: 11
+    role: target
   method:
     candidate: every locally active one-sided SAT/support branch at the exact witness
     runs_per_condition: 1
@@ -28,16 +33,12 @@ experiment:
     commit: faba023
     dirty: false
     entry_point: explorations/packing/tools/check_trump_tangent.py
-    command: >-
-      uv run --frozen python tools/check_trump_tangent.py
-      --record campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json
-      && uv run --frozen python tools/check_trump_tangent.py
-      --replay campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json
+    command: uv run --frozen python tools/check_trump_tangent.py --record campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json
+      && uv run --frozen python tools/check_trump_tangent.py --replay campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json
       > campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent-replay.json
-    budget: >-
-      180 agent-minutes; enumerate the exact active table and every unique feature
-      branch; stop on one exact nonzero linearized direction, complete zero-cone
-      certificates, or any branch-completeness or coefficient-replay failure
+    budget: 180 agent-minutes; enumerate the exact active table and every unique feature branch; stop
+      on one exact nonzero linearized direction, complete zero-cone certificates, or any branch-completeness
+      or coefficient-replay failure
     record: campaign/series/series-000-smoke-and-calibration/results/exp-013-h-026-trump-tangent.json
   effort:
     timebox: 180m
@@ -46,22 +47,20 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: >-
-      Does any complete branchwise one-sided linearized cone at Trump’s exact fixed-side
-      pose contain a nonzero direction?
+    question: Does any complete branchwise one-sided linearized cone at Trump’s exact fixed-side pose
+      contain a nonzero direction?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      tools/check_trump_tangent.py: 512 raw feature selections reduce to 128 exact
-      42-row matrices; every matrix has exact rank 33 and a strictly positive Q(u)
-      stress with exact zero residual; a separate replay validates all 128 records
+    checked_by: 'tools/check_trump_tangent.py: 512 raw feature selections reduce to 128 exact 42-row
+      matrices; every matrix has exact rank 33 and a strictly positive Q(u) stress with exact zero
+      residual; a separate replay validates all 128 records'
   verdict:
     decision: accepted
-    primary_criterion: exact feasibility of a normalized nonzero direction in any complete branchwise linearized cone
-    reason: >-
-      No nonzero linearized direction survives. All 128 derivative-distinct matrices
-      have exact zero-cone certificates, covering all 512 raw nonlinear feature
-      selections with zero unresolved branches.
+    primary_criterion: exact feasibility of a normalized nonzero direction in any complete branchwise
+      linearized cone
+    reason: No nonzero linearized direction survives. All 128 derivative-distinct matrices have exact
+      zero-cone certificates, covering all 512 raw nonlinear feature selections with zero unresolved
+      branches.
     commit: faba023
 ---
 # exp-013 — exact branch certificates locally isolate Trump’s pose

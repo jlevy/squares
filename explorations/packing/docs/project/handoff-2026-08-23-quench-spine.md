@@ -1,5 +1,8 @@
 # Handoff: Where the Square-Packing Loop Stands
 
+> **Lifecycle:** Superseded for current guidance by the [synopsis](../../SYNOPSIS.md).
+> Retained as a dated handoff.
+
 **Date:** 2026-08-23
 
 **Author:** Claude (agent)
@@ -109,9 +112,9 @@ whole cartography programme rests on, deliberately made cheap to kill.
 
 ## Six things that will save you a day
 
-1. **Nothing below the `exact` tier may claim a record.** The `polished` tier has a
-   measured floor of about `1e-11`; several recorded rounds sit on it with small
-   *negative* gaps to the analytic value.
+1. **Nothing below formal assurance may claim a record.** The then-current `polished`
+   label meant a finite-precision LP endpoint with a measured floor of about `1e-11`;
+   several recorded rounds sit on it with small *negative* gaps to the analytic value.
    That is solver noise, not a discovery ([D-021](../../defects.md), open on purpose).
 2. **A screen-tier run below the standing best is a promotion trigger, not a record.**
    Treat it as a defect candidate until an independent verifier agrees, but do not

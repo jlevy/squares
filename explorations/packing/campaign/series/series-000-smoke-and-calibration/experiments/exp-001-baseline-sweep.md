@@ -1,7 +1,7 @@
 ---
 title: exp-001 — baseline sweep of the stock annealer at n = 10, 11, 12
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,27 +10,41 @@ experiment:
   series: series-000
   title: Baseline sweep of the stock annealer at n = 10, 11, 12
   date: '2026-08-22'
-  hypotheses: [H-016]
+  hypotheses:
+  - H-016
   tier: exploratory
-  known_defects: [D-010]
+  known_defects:
+  - D-010
   subject:
     label: stock sqsearch annealer, default parameters
     engine: sqsearch 0.1.0
-    engine_commit: 'd6a1057'
-    precision: f64_screen
+    engine_commit: d6a1057
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: Apple M1 Pro, 8 performance + 2 efficiency cores, 32 GB
     selftest_passed: true
-  instance: {axis: n, point: 11, role: target}
+  instance:
+    axis: n
+    point: 11
+    role: target
   method:
-    control: 'the trivial ceil(sqrt(n)) grid, which every chain starts from'
-    candidate: 'sqsearch defaults: steps 400000, t_hot 0.25, t_cold 1e-9, lambda 2 -> 1e6, p_rotate 0.35, p_reseed 0.5'
+    control: the trivial ceil(sqrt(n)) grid, which every chain starts from
+    candidate: 'sqsearch defaults: steps 400000, t_hot 0.25, t_cold 1e-9, lambda 2 -> 1e6, p_rotate
+      0.35, p_reseed 0.5'
     runs_per_condition: 5
     interleaved: false
     operator: claude-opus-5
-    commit: 'd6a1057'
+    commit: d6a1057
     entry_point: explorations/packing/run_baseline.sh
-    command: 'sqsearch --n N --seed S --chains 8 --budget-moves 100000000, for N in 10 11 12 and S in 1..5'
-    budget: '12,000,000,000 moves total, 302.4 s wall'
+    command: sqsearch --n N --seed S --chains 8 --budget-moves 100000000, for N in 10 11 12 and S
+      in 1..5
+    budget: 12,000,000,000 moves total, 302.4 s wall
     record: campaign/series/series-000-smoke-and-calibration/results/exp-001-baseline.jsonl
   effort:
     wall_seconds: 302.4
@@ -42,63 +56,67 @@ experiment:
     direction: lower
     score: 3.7075262000644953
     standing_best: 3.7071067811865475
-    standing_best_source: 'frontier/n-010.md (proved, 3 + 1/sqrt(2))'
+    standing_best_source: frontier/n-010.md (proved, 3 + 1/sqrt(2))
     beat_record: false
     runs: 5
   - shape: determination
-    question: 'does the stock annealer reach the standing best at n = 10'
+    question: does the stock annealer reach the standing best at n = 10
     role: outcome
     outcome: near_miss
-    checked_by: 'sqsearch overlap guard (overlap == 0 on every reported packing); scored against frontier/n-010.md'
+    checked_by: sqsearch overlap guard (overlap == 0 on every reported packing); scored against frontier/n-010.md
   - shape: record
     metric: best_side
     role: outcome
     direction: lower
     score: 3.9144165418191186
     standing_best: 3.877083590022814
-    standing_best_source: 'frontier/n-011.md (Trump 1979)'
+    standing_best_source: frontier/n-011.md (Trump 1979)
     beat_record: false
     runs: 5
   - shape: determination
-    question: 'does the stock annealer reach the standing best at n = 11'
+    question: does the stock annealer reach the standing best at n = 11
     role: outcome
     outcome: near_miss
-    checked_by: 'sqsearch overlap guard (overlap == 0 on every reported packing); scored against frontier/n-011.md'
+    checked_by: sqsearch overlap guard (overlap == 0 on every reported packing); scored against frontier/n-011.md
   - shape: record
     metric: best_side
     role: outcome
     direction: lower
     score: 4.0
     standing_best: 4.0
-    standing_best_source: 'frontier/n-012.md (trivial 4x4 grid)'
+    standing_best_source: frontier/n-012.md (trivial 4x4 grid)
     beat_record: false
     runs: 5
   - shape: determination
-    question: 'does the stock annealer reach the standing best at n = 12'
+    question: does the stock annealer reach the standing best at n = 12
     role: outcome
     outcome: reached_basin
-    checked_by: 'sqsearch overlap guard (overlap == 0 on every reported packing); scored against frontier/n-012.md'
+    checked_by: sqsearch overlap guard (overlap == 0 on every reported packing); scored against frontier/n-012.md
   - shape: conditions
     metric: best_side_n11_across_seeds
     role: mechanism
     control_median: 3.927939617731721
     candidate_median: 3.927939617731721
-    control_range: [3.9144165418191186, 3.9361125018580427]
-    candidate_range: [3.9144165418191186, 3.9361125018580427]
+    control_range:
+    - 3.9144165418191186
+    - 3.9361125018580427
+    candidate_range:
+    - 3.9144165418191186
+    - 3.9361125018580427
     overlapping: true
   complexity:
     lines_changed: 0
-    new_dependencies: [rayon 1.12]
+    new_dependencies:
+    - rayon 1.12
     new_failure_modes: []
-    notes: 'Baseline round; the engine is the change, and it is recorded as the subject.'
+    notes: Baseline round; the engine is the change, and it is recorded as the subject.
   verdict:
     decision: rejected
     primary_criterion: best_side
-    reason: >-
-      Refutes H-016: the annealer is within 1e-4 of the standing best only at n = 12,
-      missing by 4.19e-04 at n = 10 and by 3.73e-02 at n = 11. Also serves as the
-      series baseline, since method.control is the trivial grid every chain starts from.
-    commit: 'd6a1057'
+    reason: 'Refutes H-016: the annealer is within 1e-4 of the standing best only at n = 12, missing
+      by 4.19e-04 at n = 10 and by 3.73e-02 at n = 11. Also serves as the series baseline, since method.control
+      is the trivial grid every chain starts from.'
+    commit: d6a1057
 ---
 # exp-001 — baseline sweep
 
