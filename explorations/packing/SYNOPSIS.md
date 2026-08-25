@@ -163,6 +163,7 @@ case or experiment separately.
 | [Review: The Tooling Layout, and What It Would Take to Clean Up](docs/project/reviews/review-2026-08-23-tooling-layout.md) | dated review record | record | superseded | [Packing Development Guide](development.md) |
 | [Review: The Toolkit Docs and the First Experiment Series](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | dated review record | record | superseded | [Experiment ledger](campaign/ledger.md) |
 | [Review: `TUTORIAL.md`, Read as Its Declared Audience](docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md) | dated review record | record | retained | — |
+| [Review: `TUTORIAL.md` Soundness, Iteration 2, on the Merged Record](docs/project/reviews/review-2026-08-25-tutorial-soundness-iteration-2.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
@@ -1504,11 +1505,13 @@ The standing review’s complete H-001 through H-015 block is now in the registr
 ids carry campaign-native claims and seven explicit open questions.
 The [ledger](campaign/ledger.md) is generated from the artifacts and is the current
 view; this section is the reading of it.
+Rounds and effort below repeat the ledger’s per-hypothesis totals, which count every
+round that names the hypothesis, control roles included.
 
 | Id | Status | Claim, in short | Rounds | Effort |
 | --- | --- | --- | --- | --- |
 | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) | **confirmed** | Trump’s tested shared-tilt slice has a corner at the published optimum | 1 | 10m agent |
-| [H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 4 | 190m agent, 4.9m wall |
+| [H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 5 | 195m agent, 5.1m wall |
 | [H-016](campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md) | **refuted** | The stock annealer reaches the standing best on every instance cell | 4 | 10.2m wall |
 | [H-018](campaign/hypotheses/H-018-basin-entry.md) | **refuted** as stated | Perturbed starts return to Trump’s packing at least half the time | 1 | 75m agent, 1.3m wall |
 | [H-020](campaign/hypotheses/H-020-oblique-record-finding-n17.md) | **refuted** | The annealer reaches the standing best at `n = 17`, the nearest oblique record | 1 | 6.6m wall |
@@ -1527,9 +1530,9 @@ view; this section is the reading of it.
 | [H-014](campaign/hypotheses/H-014-superdisk-continuation.md) | blocked | Superdisk continuation imports new square components | 0 | — |
 | [H-015](campaign/hypotheses/H-015-map-elites-illumination.md) | blocked | MAP-Elites improves certified component discovery rate | 0 | — |
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
-| [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 0 | — |
+| [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 14 | 106m agent, 4.0m wall |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, and known sheet lifts? | 5 | 95m agent, 2.06s wall |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, and known sheet lifts? | 6 | 115m agent, 6.11s wall |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | **refuted** | Independently reconstructed standing records through `n=30` use at most three angle classes; exp-012 counts six numerical classes at `n=29` | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
@@ -1926,27 +1929,27 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 319 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 328 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 74 | asserted something false about the mathematics |
+| soundness | 79 | asserted something false about the mathematics |
 | validity | 81 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 120 | recorded something its own evidence contradicts |
+| bookkeeping | 124 | recorded something its own evidence contradicts |
 | robustness | 35 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Sixty-one of the seventy-four soundness defects pointed in the *flattering*
+**Sixty-two of the seventy-nine soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty defects in 319, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught forty-one defects in 328, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Every gate-detected entry is a bookkeeping or robustness defect, found by
 contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
@@ -2106,12 +2109,13 @@ mappings.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Ninety-eight fixes left no regression check behind, and that list has already predicted
-a recurrence once. The
-[postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
-turns this into four rules—oracle coverage through unshared code, tolerances stated
-relative to what they govern, a discovery treated as a defect until an independent layer
-agrees, and new components inheriting the perimeter—that apply to code not yet written.
+The fixes that left no regression check behind—counted in the short version above—have
+already predicted a recurrence once.
+The [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on
+D-014 turns this into four rules—oracle coverage through unshared code, tolerances
+stated relative to what they govern, a discovery treated as a defect until an
+independent layer agrees, and new components inheriting the perimeter—that apply to code
+not yet written.
 
 ## Where This Stands
 

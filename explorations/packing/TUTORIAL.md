@@ -234,8 +234,8 @@ this particular structured cell, the centres remain LP variables and only one no
 angle parameter remains.
 This is evidence that angle-class models can compress record cells dramatically; it is
 not a theorem that class count equals the local dimension of the full packing problem.
-Other records already use more classes—six at `n = 29`—and every proposed compression
-must be checked on its own contact structure.
+Other records already use more classes—six, numerically, at `n = 29`—and every proposed
+compression must be checked on its own contact structure.
 
 ![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
 
@@ -403,6 +403,8 @@ angle classes**—a method that tolerates non-smoothness—and changing nothing 
 `n = 5` from descent’s `3.2e-08` to `2.2e-15`, and `n = 10` from `4.5e-03` to `1.3e-15`.
 Measured from the annealer output both quenches start from, that is `3.4e-08` and
 `5.3e-03` respectively.
+All four figures are medians over the five tested seeds; the worst `n = 5` seed stays at
+`6.2e-08`.
 
 **What it did not buy.** Nothing at `n = 11`, where the same substitution moves the
 annealer’s `8.8e-02` only to `6.3e-02`. And it is *not* a theorem that derivative-free
@@ -464,15 +466,16 @@ expensive, and knowing the shape of the cost is what lets you decide:
 | Separating-axis pair test, `f64`, compiled | 57 ns |
 | The same test, Python float backend | 2,726 ns |
 | One `ℚ(α)` multiplication at degree 8, the `n = 11` field, pure Python | 215.5 µs |
-| The same, with a compiled bignum backend | 1.2 µs |
+| The same, with a compiled bignum backend (benchmarked; not integrated) | 1.2 µs |
 | One `ℚ(α)` multiplication at degree 62 | 13 ms |
 | Complete exact verification of Trump’s packing, all 55 pairs | 0.35 s |
 
 Two readings. **Exactness is free where it is used**: a whole exact verification costs
 less than a second, against seconds for a single agent turn, so optimising it is
-optimising noise. **And the cost is not flat**: the exact-to-float ratio grows with
-algebraic degree—177× at degree 8, 578× at degree 62—so exact arithmetic is most
-expensive exactly where the problem is hardest.
+optimising noise. **And the cost is not flat**: one exact multiplication climbs from
+`215.5 µs` at degree 8 to `13 ms` at degree 62 in pure Python, and even the compiled
+backend’s advantage over pure Python grows with degree—`177×` at 8, `578×` at 62—so
+exact arithmetic is most expensive exactly where the problem is hardest.
 That is the standing reason it stays out of the search loop.
 
 The useful frame is three budgets rather than one.
@@ -625,7 +628,8 @@ algebra can solve and the complete packing can be independently rechecked.
 
 **The two guesses, and why they matter more than the algebra.**
 
-- *The contact structure.* Step 2 decided a separation of `3.7e-12` was exactly zero.
+- *The contact structure.* Step 2 decided that a residual separation at the solver
+  floor—`1e-11` and below—is exactly zero.
   It might not be. Nothing in steps 3–5 rechecks this, so the reconstruction must be
   re-verified independently—numerical proximity does not guarantee algebraic
   correctness.
@@ -871,9 +875,10 @@ would do better.
 The upper bound is a construction nobody has beaten; the lower bound is now certified
 here but is not claimed to be sharp.
 
-**5. What a floating LP result means below `1e-11`.** The floor is HiGHS’s own
-feasibility tolerance, pinned at the strictest value it accepts, and it sits about five
-orders above `f64` machine epsilon—it is a property of the solver, not of the hardware.
+**5. What a floating LP result means below `1e-11`.** The floor comes from HiGHS’s own
+feasibility tolerance—pinned at `1e-10`, the strictest value it accepts—under which
+post-checked side residuals bottom out near `1e-11`, about five orders above `f64`
+machine epsilon: a property of the solver, not of the hardware.
 Many rounds sit on it, and no comparison finer than the floor is admissible.
 The general fix is an exact LP over certified rational or algebraic coefficients; a
 purely rational LP applies only when the fixed-angle cell has rational coefficients.
@@ -931,8 +936,8 @@ Three words carry controlled multiple senses, and the rule for each is given wit
 
 Symbols, in the order the document introduces them.
 A subscript `i` always picks out one square; a bare letter is the whole `n`-vector.
-`i` and `j` index squares, `k` and `l` index the four corners of one square, and the
-index letters themselves are not listed below.
+`i` and `j` index squares and have no row below; `k` and `l`, which index the four
+corners of one square, get one because they appear inside `oᵢₖ`.
 
 | Symbol | Type | Means |
 | --- | --- | --- |
@@ -1014,7 +1019,12 @@ Doye, Miller and Wales on the 38-atom Lennard-Jones cluster, the double-funnel p
 the rarity premise rests on.
 
 **The problem’s own literature.** Every source below is archived locally under
-[`resources/`](resources/README.md) and is greppable:
+[`resources/`](resources/README.md) and is greppable, with two exceptions: the two
+record constructions survive through the archived survey and record-table captures
+rather than papers of their own.
+Trump’s 1979 packing is documented there and by this directory’s exact certificate—his
+2023 writeup was not retrievable, which the archive README records—and Bidwell’s 1998
+record likewise:
 
 - Stromquist (2003), *Packing 10 or 11 unit squares in a square*—the `s(10)` proof, the
   `s(11)` lower-bound value, and the `0°`/`45°` class bound
