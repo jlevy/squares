@@ -145,9 +145,9 @@ Merge-phase findings: `think-16qn`, `think-clin`, `think-0emo`. Tutorial-pass fi
 Post-push CI finding: `think-d2ah`; durability follow-up `think-57x3`, resolved by #31’s
 semantic golden comparison.
 After #31 landed with D-320 through D-325 and the PR 37 review with D-326 and D-327,
-this review’s surviving entries were renumbered again to D-328 through D-334 after the
-PR 37 review landed main’s D-326 and D-327; the three superseded ones (the H-024
-restoration, the H-024 row rewording, and the golden serialization) carry no entries.
+this review’s surviving entries were renumbered again to D-328 through D-334; the three
+superseded ones (the H-024 restoration, the H-024 row rewording, and the golden
+serialization) carry no entries.
 Defects D-328 through D-334 are registered with these beads and are all fixed on this
 branch.
 
