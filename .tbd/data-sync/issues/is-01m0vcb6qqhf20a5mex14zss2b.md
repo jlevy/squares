@@ -5,7 +5,7 @@ title: Finalize PR 22 as a documented checkpoint merge
 kind: task
 status: in_progress
 priority: 0
-version: 6
+version: 7
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: codex@spud10
 labels:
@@ -19,11 +19,11 @@ parent_id: is-01m0t3n7z9fj0p7wwt1kn4nzqk
 hold: null
 hold_until: null
 created_at: 2026-08-25T02:35:15.053Z
-updated_at: 2026-08-25T03:03:39.500Z
+updated_at: 2026-08-25T03:14:04.273Z
 started_at: 2026-08-25T03:03:39.500Z
 ---
 Apply the repository's balanced gate distinction to PR 22. A checkpoint merge requires a complete normal ./test.sh pass, clean main compatibility, synchronized records and beads, an accurate PR description, and every known strict/deep failure explicitly owned. It does not certify the deep golden producer or authorize unattended execution. Preserve D-203/think-nr5w and the receipt/work-budget launch blockers for the next branch; update conventions and the standard review; pass the normal gate; push; recheck all GitHub surfaces; and mark PR 22 ready.
 
 ## Notes
 
-The prior description incorrectly made launch-only work think-nr5w and think-b3bm prerequisites for any merge. D-225 owns the correction: checkpoint merge readiness and unattended/deep launch readiness are distinct. Pushed head f02fd51 already passes the exact normal gate 30/30 in 33s with 55/55 negative controls and is CLEAN/MERGEABLE against current main. Update the durable policy and PR orientation, rerun the normal gate on the final commit, then close this bead and mark the PR ready. Do not close or weaken the launch blockers.
+D-225 now defines the balanced checkpoint/launch split. Final pushed head f49b3c4 passes the exact normal gate 30/30 without skips in 35s with 55/55 negative controls; current main 277f060 is the merge base; GitHub reports CLEAN/MERGEABLE; title, body, standard review, defect log, conventions, agenda, synopsis, correction comment, and beads agree. D-199/n=10 is implemented and pushed. D-203/n=4 is diagnosed but not implemented and remains an unattended/deep-launch blocker with receipt/work-budget work. Only the GitHub draft flag remains: GraphQL quota is exhausted until 2026-08-24 20:24:42 PDT and the in-app browser is logged out. Do not create an authentication detour; mark ready after reset, recheck state, then close.
