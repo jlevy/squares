@@ -282,7 +282,9 @@ agenda:
       at `PACK_JOBS=10` and `PACK_JOBS=1`. Only n=4 seed 0 remains: a typed HiGHS
       status-4 Solve error under D-203 and `think-nr5w`. The committed golden is
       unchanged, and no further full-golden retry is authorized before the millisecond
-      fixture is captured. The strict merge and handoff gate remains red.
+      fixture is captured. The strict unattended-launch and deep-handoff gate remains
+      red; the recorded failure does not block a checkpoint merge with a green normal
+      gate.
     artifacts:
     - cases/n5/equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md

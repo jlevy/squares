@@ -334,12 +334,19 @@ documentation correction take eight hours to validate:
 | --- | ---: | --- |
 | Interactive | under about 2 seconds | Pytest, ledger and schema checks, exact-witness verification, engine self-test |
 | Focused | under about 60 seconds | `packing-validate --fast` or `packing-validate --only TEXT` for one component and its controls |
-| Checkpoint | about 2 minutes | Normal `packing-validate` before a commit, push, or cross-component handoff |
-| Deep handoff | about 5 minutes | `packing-validate --strict` before an unattended campaign, major handoff, or merge |
+| Checkpoint | about 2 minutes | Normal `packing-validate` before a commit, push, cross-component handoff, or checkpoint merge |
+| Deep handoff | about 5 minutes | `packing-validate --strict` before an unattended campaign, a handoff that depends on regenerated producer output, or any claim that the strict/deep path is healthy |
 | Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
 
 These are working envelopes, not promises; repeated versioned benchmarks and warm/cold
 regimes remain tracked work.
+
+A checkpoint merge may retain a known strict/deep failure when the normal gate passes
+without skips, the exact failure and its limitation are recorded in the defect log and
+PR, and an open bead owns the repair.
+That merge preserves reviewed work; it does not certify the failed producer or authorize
+an unattended campaign.
+The strict gate remains mandatory before the deep handoff or launch that depends on it.
 
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.
