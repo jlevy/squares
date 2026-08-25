@@ -64,7 +64,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 39 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 40 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -92,7 +92,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
 | H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6* 7* 8* | 14 | 106m agent + 4.0m wall |
 | H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
-| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 6 | 115m agent + 6s wall |
+| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 7 | 115m agent + 6s wall |
 | H-024 | unresolved | search | Every formally supported standing-record packing at n <= 30 uses at mo | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
 | H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
 | H-026 | confirmed | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 | 100m agent + 57s wall |
@@ -180,6 +180,12 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-040 | series-000 | 5 | openai-codex | H-023 | The exact six-case criterion is frozen before target execution; no target result has yet been measured. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -190,7 +196,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 ## Effort
 
-39 rounds, 933 agent-minutes, 28.3 wall-minutes.
+40 rounds, 933 agent-minutes, 28.3 wall-minutes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
