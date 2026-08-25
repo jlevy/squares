@@ -15,7 +15,7 @@
 | [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | retrospective | `research-loop` (insight) | `research-loop` (insight) | 1 | think-n82j | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | retrospective | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-ciwv | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
 | [session-009](agent-sessions/session-009-autonomous-basin-map.md) | stopped | mixed | `process-review` (process) | `process-review` (process) | 10 | think-05hr | Open a new AgentSession/v2 under W2 factual-review with a Correctness focus. Capture the n=4 seed-0 status-4 millisecond fixture under think-nr5w, then finish think-b3bm's final-receipt runbook rehearsal and revalidate the strict launch path before new basin-map rounds. Keep D-126 separate; the exact-research queue remains think-nm35. |
-| [session-010](agent-sessions/session-010-eight-hour-mixed-research.md) | in_progress | contemporaneous | `research-loop` (insight) | `insight-iteration` (insight) | 5 | think-3cbq | Commit and push terminal exp-037, then preregister the five-dimensional fixed-angle optimal-position polytope successor by 01:40:36-07:00. |
+| [session-010](agent-sessions/session-010-eight-hour-mixed-research.md) | in_progress | contemporaneous | `research-loop` (insight) | `pipeline-improvement` (efficiency) | 6 | think-3cbq | Commit and push the corrected exp-038 preregistration, then implement its exact checker by 02:05:11-07:00 without recording a target result in the mutable phase. |
 
 ### Workflow summary
 
@@ -27,7 +27,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 0 | 1 | 2 | 2 |
 | `process-review` | 0 | 4 | 1 | 6 |
 | `research-loop` | 1 | 4 | 2 | 7 |
-| `pipeline-improvement` | 0 | 0 | 1 | 0 |
+| `pipeline-improvement` | 0 | 0 | 2 | 0 |
 
 ## Experiment agendas
 
@@ -57,7 +57,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 37 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 38 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -85,7 +85,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
 | H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6* 7* 8* | 14 | 106m agent + 4.0m wall |
 | H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
-| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 5 | 95m agent + 2s wall |
+| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 6 | 95m agent + 2s wall |
 | H-024 | refuted | search | Every independently reconstructed standing-record packing at n <= 30 u | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
 | H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
 | H-026 | confirmed | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 | 100m agent + 57s wall |
@@ -164,6 +164,12 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-038 | series-000 | 5 | openai-codex | H-023 | The exact formulas were discovered independently after exp-037. This confirmatory criterion and its refusal boundary are frozen before target implementation or a retained result. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -174,7 +180,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 ## Effort
 
-37 rounds, 898 agent-minutes, 28.2 wall-minutes.
+38 rounds, 898 agent-minutes, 28.2 wall-minutes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

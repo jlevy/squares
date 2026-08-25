@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 253
+count: 254
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -6501,3 +6501,32 @@ defects:
     tools, while devtools.check_readme rejects a matching unrecorded layout change
   bead: think-xe5t
   recorded_in: tests/test_module_boundaries.py
+- id: D-254
+  title: The first exp-038 criterion conflated ray normalizations and rank with dimension
+  date: '2026-08-25'
+  layer: record
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted preregistration draft, before any target implementation
+  severity: high
+  status: fixed
+  what: >-
+    The first exp-038 draft wrote one path formula using R_i without defining that
+    exp-037 scales R1 and R2 by sqrt(2) and already includes the endpoint-A slide
+    correction. It also inferred affine dimension five from a rank-six equality system
+    alone and described an LP level certificate as differential no descent.
+  consequence: >-
+    A checker could have double-added the A slide, certified the wrong physical path,
+    accepted an empty or lower-dimensional equality set, and blurred cellwise level
+    optimality with branchwise first-order stationarity.
+  fix: >-
+    Define all canonical vectors and their exact exp-037 source map, require nonemptiness,
+    boundedness, and six affinely independent feasible points, and separate the LP lower
+    bound from the stress identity along the twelve declared path segments.
+  regression: >-
+    Exp-038 now requires executable mutations for omitted or misplaced slide correction
+    and the missing R6 coordinate, exact feasible affine witnesses, input-level dual and
+    stress perturbations, and a sharp global and terminal refusal boundary
+  bead: think-p6j0
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md

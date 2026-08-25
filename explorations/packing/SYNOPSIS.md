@@ -1506,8 +1506,9 @@ Transverse and mixed nonlinear realization remains open.
 
 ## Experiments Conducted
 
-There are 37 terminal rounds registered in `series-000`. They record 898 agent-minutes
-and 28.2 wall-minutes.
+There are 38 rounds registered in `series-000`: 37 terminal rounds and the preregistered
+exp-038 confirmatory run.
+They record 898 agent-minutes and 28.2 wall-minutes so far.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1564,6 +1565,7 @@ archive beside it.
 | [exp-035](campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md) | 5 | target | H-023 | exact full-angle active systems | non-sheet direction at A/interior/B; six controls pass | **accepted** |
 | [exp-036](campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md) | 5 | target | H-023 | exact second-order branch obstruction | displayed direction excluded at A/interior/B; six controls pass | **accepted** |
 | [exp-037](campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md) | 5 | target | H-023 | exact branchwise linearization-cone inventory | identical owner branches; endpoint/interior rays `8/6/8`; ten controls pass | **accepted** |
+| [exp-038](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md) | 5 | target | H-023 | exact fixed-angle optimal-position polytope | preregistered; retained target run not yet executed | **in-progress** |
 
 ### Cost and provenance
 
@@ -1606,8 +1608,9 @@ archive beside it.
 | exp-035 | six exact owner matrices + six controls | 0.28 s | 20 m | criterion | `aa63cf4` |
 | exp-036 | two exact branch obstructions + six controls | 0.21 s | 20 m | criterion | `f2d2e53` |
 | exp-037 | six exact matrices + ten controls | 1.06 s | 30 m | criterion | `b8d0104` |
+| exp-038 | one exact polytope + ten controls | — | — | in progress | — |
 
-### What the 37 rounds jointly establish
+### What the 38 rounds jointly establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only
@@ -1749,12 +1752,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 253 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 254 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 66 | asserted something false about the mathematics |
+| soundness | 67 | asserted something false about the mathematics |
 | validity | 66 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 85 | recorded something its own evidence contradicts |
 | robustness | 28 | did not finish, or finished only by luck |
@@ -1762,11 +1765,11 @@ and checked in the gate.
 
 Two observations the log exists to make.
 
-**Fifty-five of the sixty-six soundness defects pointed in the *flattering* direction**,
-where the error looks like a success.
+**Fifty-six of the sixty-seven soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixteen defects in 253, and no soundness defect ever.**
+**The automated gate has caught sixteen defects in 254, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.

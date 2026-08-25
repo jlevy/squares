@@ -250,7 +250,7 @@ session:
       successor criterion: certify the connected five-dimensional fixed-angle
       optimal-position polytope and its first-order no-descent stress without conflating
       it with -W, mixed-angle lifts, quench terminality, or component identity.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Exp-037 closes the finite first-order inventory and the continuation analyst found
@@ -273,10 +273,59 @@ session:
     fallback: >-
       Retain only the twelve exact straight-path interval formulas and rotate to the
       separate -W obstruction bead; do not weaken exp-038 into an ambiguous criterion.
+    outcome: >-
+      Exp-038 is preregistered as a confirmatory exact test of one labelled
+      fixed-orientation cell's five-dimensional LP-optimal face and twelve pathwise
+      first-order stresses. Its criterion binds canonical ray normalization, exact
+      domain equivalence, affine witnesses, sharp intervals, owner branches, active
+      axes, and ten executable mutations while refusing all component-level claims.
+    evidence:
+    - >-
+      Independent criterion review caught an ambiguous stratum-dependent R1/R2
+      normalization, a rank-only dimension inference, and a conflation of LP level
+      optimality with differential no descent before commit or target execution.
+    - >-
+      The corrected artifact defines all five canonical vectors and their exp-037 source
+      map, requires six affinely independent feasible points, and confines the stress to
+      the twelve declared path segments. D-254 preserves the error and correction.
+    - Softschema validates the corrected Experiment/v1 artifact.
+    stop_reason: The corrected criterion and refusal boundary were frozen within the 15-minute slice.
+    next_action: >-
+      Commit and push exp-038 before target implementation, then build the bounded exact
+      instrument in a distinct W7 phase.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    objective: >-
+      Implement exp-038 as a fast source-bound exact checker with executable input
+      mutations, without broadening the frozen mathematical criterion or adding a
+      generic polyhedral framework.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The corrected exp-038 criterion is frozen; the next distinct task is its bounded
+      reusable instrument before any retained target measurement.
+    budget_minutes: 30
+    started_at: '2026-08-25T01:35:11-07:00'
+    deadline_at: '2026-08-25T02:05:11-07:00'
+    expected_output: >-
+      A cases/n5 exact checker that rebuilds the polytope, paths, duals, stresses,
+      independent packings, and ten mutations in under 30 seconds, or a minimized exact
+      blocker with no target verdict.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --quiet python
+      -m cases.n5.fixed_angle_polytope --record /tmp/exp-038-check.json
+    kill_condition: >-
+      Stop implementation at twenty-two minutes and reserve eight minutes for review,
+      exact replay, defect recording, and a committed checkpoint.
+    fallback: >-
+      Preserve only source-bound exact helpers, record the first unproved criterion
+      clause in think-oiv4, and rotate without changing exp-038.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Commit and push exp-037 before creating the exp-038 artifact.
+    next_action: Commit and push the corrected exp-038 preregistration before implementation.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -629,10 +678,43 @@ session:
     fallback: Return the exp-036 pattern and validation-registry insertion point.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
+  - task: Audit the proposed exp-038 polytope and stress criterion before commit.
+    operator: /root/exp038_criterion_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Caught three required corrections before target implementation: undefined
+      stratum-dependent ray normalization, a rank-only dimension inference, and a
+      conflation of an LP side-level certificate with differential no descent.
+    evidence:
+    - >-
+      Supplied the five canonical vectors, their exact exp-037 source scaling and slide
+      map, the six-feasible-point dimension requirement, a coefficient-wise stress
+      criterion, ten input-level mutations, and a sharp cell-local refusal boundary.
+    files: []
+    checks:
+    - Read-only exact criterion audit against exp-033, exp-034, exp-037, and session evidence.
+    uncertainty: >-
+      No target implementation or retained result was inspected; this disposition is
+      limited to the preregistration contract.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Implement only the corrected frozen criterion; D-254 preserves the draft error.
+    phase: 5
+    budget_minutes: 7
+    started_at: '2026-08-25T01:27:51-07:00'
+    deadline_at: '2026-08-25T01:34:51-07:00'
+    expected_output: Exact acceptance clauses, executable mutations, and refusal boundary.
+    validation_command: null
+    kill_condition: Return within seven minutes without editing or running the target.
+    fallback: Return the first ambiguous normalization or overclaim.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, packing-validate]
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
@@ -669,10 +751,14 @@ session:
     Exp-037 generation/replay passed in 0.534/0.526 seconds; an independent exact audit
     found no P0/P1 issue, and the maintained small-n validation step passed in 3.07
     seconds with exp-037 included.
+  - >-
+    Exp-038 softschema validates after an independent criterion audit corrected its
+    canonical ray map, affine-dimension witness, LP-level statement, executable
+    mutations, and refusal boundary; D-254 records the pre-run draft error.
   stop_reason: null
   next_action: >-
-    Commit and push terminal exp-037, then preregister the five-dimensional fixed-angle
-    optimal-position polytope successor by 01:40:36-07:00.
+    Commit and push the corrected exp-038 preregistration, then implement its exact
+    checker by 02:05:11-07:00 without recording a target result in the mutable phase.
 ---
 ## Session Boundary
 
