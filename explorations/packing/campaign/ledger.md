@@ -15,6 +15,7 @@
 | [session-007](agent-sessions/session-007-h032-small-n-moduli.md) | completed | retrospective | `research-loop` (insight) | `research-loop` (insight) | 1 | think-n82j | Keep the n = 3 and n = 4 replays in the gate, then define the complete n = 5 labelled component relation before attempting the next H-032 cell. |
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | retrospective | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-ciwv | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
 | [session-009](agent-sessions/session-009-autonomous-basin-map.md) | stopped | mixed | `process-review` (process) | `process-review` (process) | 10 | think-05hr | Open a new AgentSession/v2 under W2 factual-review with a Correctness focus. Capture the n=4 seed-0 status-4 millisecond fixture under think-nr5w, then finish think-b3bm's final-receipt runbook rehearsal and revalidate the strict launch path before new basin-map rounds. Keep D-126 separate; the exact-research queue remains think-nm35. |
+| [session-010](agent-sessions/session-010-eight-hour-mixed-research.md) | in_progress | contemporaneous | `research-loop` (insight) | `research-loop` (insight) | 1 | think-3cbq | Execute the first exact n=5 inventory slice under think-nm35 and close, renew, or rotate the phase no later than 01:06:03-07:00. |
 
 ### Workflow summary
 
@@ -25,7 +26,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `factual-review` | 0 | 0 | 0 | 2 |
 | `insight-iteration` | 0 | 1 | 0 | 2 |
 | `process-review` | 0 | 4 | 1 | 6 |
-| `research-loop` | 0 | 4 | 0 | 7 |
+| `research-loop` | 1 | 4 | 1 | 7 |
 
 ## Experiment agendas
 
