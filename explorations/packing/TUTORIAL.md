@@ -931,13 +931,15 @@ Three words carry controlled multiple senses, and the rule for each is given wit
 
 Symbols, in the order the document introduces them.
 A subscript `i` always picks out one square; a bare letter is the whole `n`-vector.
+`i` and `j` index squares, `k` and `l` index the four corners of one square, and the
+index letters themselves are not listed below.
 
 | Symbol | Type | Means |
 | --- | --- | --- |
 | `n` | integer | How many unit squares are being packed |
 | `s(n)` | real | The optimal side: the smallest container that fits `n` unit squares |
 | `m` | integer | A perfect-square root, in `s(m²) = m` |
-| `k` | integer | A corner index, `1…4`, in `oᵢₖ` |
+| `k`, `l` | integer | Corner indices, `1…4`, as in `oᵢₖ` and `oⱼₗ` |
 | `s` | real, variable | The container side being minimised. Distinct from `s(n)`, which is the answer; `s` is what the program solves for |
 | `(xᵢ, yᵢ)` | `ℝ²` per square | The centre of square `i` |
 | `x`, `y` | `ℝⁿ` each | All `n` centre coordinates |
