@@ -203,7 +203,9 @@ Every archived record re-derives its own reported side from its own coordinates.
 
 **A recorded commit must be an ancestor of the branch being merged.** [convention]
 `exp-001` violates this—its commit was orphaned by a rebase—and carries an annotation
-saying so.
+saying so. The reachability gate requires full Git history.
+A shallow checkout that does not contain the recorded commit is uncheckable, not
+evidence that the commit was orphaned.
 
 **Guards are recomputed, not remembered.** [checked: selftest] The overlap reported for
 a configuration is recomputed from that configuration, never read off an accumulator
