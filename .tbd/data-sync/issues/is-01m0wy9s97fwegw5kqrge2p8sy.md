@@ -5,7 +5,7 @@ title: PR 33 tutorial soundness review, iteration 2
 kind: epic
 status: closed
 priority: 2
-version: 13
+version: 14
 labels: []
 dependencies: []
 child_order_hints:
@@ -19,8 +19,9 @@ child_order_hints:
   - is-01m0wz3nx8ggn5gs6zqkdrhtxs
   - is-01m0wz8zstp9gnwdeg0t1bah5a
   - is-01m0x1fjh0c344f8dv35r4mb85
+  - is-01m0xhv089yqrzkse4hdngcxcm
 created_at: 2026-08-25T17:08:17.300Z
-updated_at: 2026-08-25T18:03:52.735Z
+updated_at: 2026-08-25T22:49:44.439Z
 closed_at: 2026-08-25T17:50:24.552Z
 close_reason: "Iteration 2 complete: merge with main reconciled (H-024/H-042 disposition, schema migration), nine findings fixed as D-320..D-328, review doc registered, full gate green, pushed to the PR 33 branch at 0b38f70."
 resolution: null
