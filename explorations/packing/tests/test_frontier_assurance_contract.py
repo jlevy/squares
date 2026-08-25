@@ -34,7 +34,10 @@ def numerical_evidence() -> dict[str, object]:
         "source_key": "[Kingbird n=29 SVG]",
         "precision": {"decimal_digits": 160, "rounding": "nearest"},
         "tolerance": "1e-80",
-        "replay": "uv run --frozen python -m cases.kingbird29.verify_svg",
+        "replay": (
+            "uv run --frozen python -m cases.kingbird29.verify_svg "
+            "resources/papers/kingbird-square-29-provenance.svg"
+        ),
         "replay_status": "passed",
         "limitations": "Does not certify exact feasibility or optimality.",
         "blocker": {"kind": "mathematics", "detail": "No formal existence certificate."},

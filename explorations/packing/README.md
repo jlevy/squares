@@ -32,6 +32,9 @@ and contribute to the phase.
 **New here?** [`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the
 objects are, why the approach is shaped the way it is, and what is established versus
 open. Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program.
+To resume work rather than only understand it, continue to the synopsis’s
+[current handoff](SYNOPSIS.md#current-handoff); it names the terminal session, owning
+bead, and exact next bounded slice.
 
 ## Operating Principles
 
@@ -433,9 +436,9 @@ The implementation plan for the first experiments, meaning search, verify and it
 It turns the six reports into seven phases and a bead tree, one epic per phase;
 `tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md`
 shows the work items.
-Use `tbd ready` as the unblocked subset only after the active launch agenda has
-reconciled landed and branch-ahead bead state; the current eight-hour portfolio is
-frozen in that agenda.
+Use `tbd ready` only as an input to a coordinator checkpoint after proving claimed
+implementation commits are ancestors of the session base; the current eight-hour
+portfolio is frozen in the active launch agenda.
 
 The implemented engineering reorganization and its evidence are recorded in
 [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md).

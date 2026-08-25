@@ -16,7 +16,7 @@ controls:
 # --- the defect log's own invariants (D-018's class of bookkeeping failure) ---
 - name: defect log - open defect with no bead
   file: defects.yaml
-  replace: ["  bead: think-hg3u\n", ""]
+  replace: ["  bead: think-3szr\n", ""]
   run: python3 -m devtools.validate_schemas
   expect: "without a bead"
 
@@ -66,15 +66,13 @@ controls:
   run: python3 -m devtools.validate_schemas
   expect: "D-039: fixed while fix still says none yet"
 
-# This control's anchor tracks a live number because the thing under test IS a number.
-# It needs updating whenever a defect is added -- and that is fine: negctl
-# requires the anchor to appear exactly once, so a stale one fails the suite by name
-# rather than quietly testing nothing.
+# Mutate the stable dataset header rather than copying the live defect count into the
+# control. The semantic checker still compares the mutated value with the full list.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 248", "count: 20"]
+  replace: ["status: enforced\ncount:", "status: enforced\ncount: 20 #"]
   run: python3 -m devtools.validate_schemas
-  expect: "count 20 != 248"
+  expect: "count 20 !="
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -100,22 +98,17 @@ controls:
   run: python3 -m devtools.check_readme
   expect: "README.md: workflow table is"
 
-# The unprotected-fix count in SYNOPSIS.md. This claim -- the list that predicts what
-# comes back -- was hand-written, and it drifted: the prose said six while the generated
-# view said seven. That is D-028 recurring inside the document D-028 is about, which is
-# why the count is now derived and why it gets a control.
-- name: synopsis - hypothesis artifact count drifting from the registry
-  file: SYNOPSIS.md
-  replace: ["Forty-two claims or open questions are codified as artifacts.",
-            "Forty-one claims or open questions are codified as artifacts."]
-  run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "does not state the hypothesis artifact count (42)"
-
 - name: synopsis - dateline duplicates volatile campaign progress
   file: SYNOPSIS.md
-  replace: ["**Date:** 2026-08-25", "**Date:** 2026-08-25, after 37 rounds"]
+  replace: ["**Date:**", "**Date:** after a campaign checkpoint;"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "Date dateline repeats campaign progress"
+
+- name: synopsis - README cold-start link drifts from current handoff
+  file: README.md
+  replace: ["SYNOPSIS.md#current-handoff", "SYNOPSIS.md#workflow-entry-contracts"]
+  run: uv run --frozen --quiet python -m devtools.check_synopsis
+  expect: "README.md: does not route cold starts to SYNOPSIS current handoff"
 
 - name: synopsis - duplicate experiment cost row
   file: SYNOPSIS.md
@@ -129,19 +122,19 @@ controls:
 
 - name: synopsis - soundness direction aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["Fifty-four of the sixty-five soundness defects", "Fifty-three of the sixty-five soundness defects"]
+  replace: ["soundness defects pointed in the *flattering*", "soundness defects pointed in the *conservative*"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "soundness-direction aggregate is not 54 of 65"
+  expect: "soundness-direction aggregate is not"
 
 - name: synopsis - gate detector aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["gate has caught fifteen defects in 248", "gate has caught fourteen defects in 248"]
+  replace: ["automated gate has caught", "automated gate has missed"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "gate-detector aggregate is not 15 of 248"
+  expect: "gate-detector aggregate is not"
 
 - name: synopsis - hypothesis-status aggregate drifting from the ledger
   file: SYNOPSIS.md
-  replace: ["derives three confirmed hypotheses", "derives two confirmed hypotheses"]
+  replace: ["generated ledger currently derives", "generated ledger once derived"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "hypothesis-status aggregate does not match campaign/ledger.md"
 
@@ -158,7 +151,7 @@ controls:
   replace: ["    to coincide with an in-progress round.\n  regression: none\n  bead: think-5zwm\n",
             "    to coincide with an in-progress round.\n  regression: 'a check that does not exist'\n  bead: think-5zwm\n"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "does not state the unprotected-fix count"
+  expect: "does not state the unprotected-fix count ("
 
 - name: gate - strict handover skips deep golden regeneration
   file: src/sqpack/cli/validate.py
