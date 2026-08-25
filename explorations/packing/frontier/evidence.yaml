@@ -267,6 +267,7 @@ evidence:
     performed_by: repository
     relationship_to_generator: independent-implementation
     origin: replayed-here
+    novelty: apparently-novel
     source_key: '[Stromquist 2003]'
     certificate: campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
     replay: uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json

@@ -2,7 +2,7 @@
 
 # Defect log
 
-335 defects recorded across the packing toolchain.
+336 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 20 | a cell of the sweep whose answer is known in advance |
-| `review` | 209 | a human or agent reading the work against a checklist |
+| `review` | 210 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
 | `inspection` | 31 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 43 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 43 of 335, and none of the 79 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 43 of 336, and none of the 79 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -36,7 +36,7 @@ The line worth reading twice: **the automated gate caught 43 of 335, and none of
 | verifier | 4 |
 | record | 101 |
 | tooling | 104 |
-| docs | 94 |
+| docs | 95 |
 
 ## By kind
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 43 of 335, and none of
 | --- | ---: |
 | soundness | 79 |
 | validity | 82 |
-| bookkeeping | 128 |
+| bookkeeping | 129 |
 | robustness | 37 |
 | performance | 9 |
 
@@ -543,6 +543,7 @@ This is the actionable list.
 | [D-333](SYNOPSIS.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | medium | fixed | The registry's rounds column drifted from the ledger under no stated rule |
 | [D-334](SYNOPSIS.md) | 2026-08-25 | record | bookkeeping | flattering | `review` | low | fixed | A hand-copied no-regression count drifted beside a sentence promising no drift |
 | [D-335](TUTORIAL.md) | 2026-08-25 | docs | bookkeeping | neutral | `review` | medium | fixed | The tutorial's moduli figure went unexplained and its axis collided with the text |
+| [D-336](frontier/frontier-evidence.schema.yaml) | 2026-08-25 | docs | bookkeeping | flattering | `review` | medium | fixed | Verified claims carried no provenance axis, blurring confirmations and new results |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

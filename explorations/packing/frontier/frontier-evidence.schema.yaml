@@ -88,6 +88,15 @@ $defs:
         enum: [generator, same-implementation, independent-implementation, not-applicable, unknown-historical]
       origin:
         enum: [external, independently-external, replayed-here, audited-here]
+      # Novelty is separate from assurance and origin. apparently-novel means first
+      # established here and, to the best of this project's knowledge from the archived
+      # corpus and reviewed sources, not previously published -- a statement about the
+      # search performed, never an assertion of priority. confirmed-novel is reserved
+      # for a claim whose priority has been independently established; no entry carries
+      # it yet. Absent means no novelty claim: a confirmation, an external result, or
+      # work the record deliberately declines to call new.
+      novelty:
+        enum: [apparently-novel, confirmed-novel]
       source_key: {type: string, minLength: 1}
       precision: {$ref: '#/$defs/precision'}
       tolerance: {type: string, minLength: 1}

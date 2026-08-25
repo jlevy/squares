@@ -558,6 +558,16 @@ Running the generator’s own checker is not an independent implementation.
 A page that says “interval verified” but publishes no certificate or replayable checker
 stays reported with a `public-certificate-missing` blocker.
 
+Novelty is a further separate fact.
+An evidence record may carry `novelty: apparently-novel`: the result was first
+established here and, to the best of this project’s knowledge from the archived corpus
+and reviewed sources, has not been previously published.
+That is a statement about the search performed, never an assertion of priority;
+`confirmed-novel` is reserved for a claim whose priority has been independently
+established, and no entry carries it yet.
+An entry without the field makes no novelty claim—it is a confirmation, an external
+result, or work the record deliberately declines to call new.
+
 Every formal conclusion names its object:
 
 | Claim | Verification establishes | It does not establish |
@@ -1019,6 +1029,12 @@ Results state their assurance and basis rather than compressing both into a tier
 method.
 A mathematical proof may be external, locally audited, or replayed here, and that
 origin remains visible in the frontier evidence.
+The results themselves carry the same distinction: T-1 confirms a published
+construction, T-2 is elementary and proved in place, and T-3 and T-4 are **apparently
+novel**—first established here and, to the best of this project’s knowledge, not
+previously published; computer-assisted and not externally peer-reviewed.
+[Assurance, Methods, and Claims](#assurance-methods-and-claims) defines the
+qualification.
 
 ### Results relied on from the literature
 
@@ -1046,10 +1062,10 @@ listed here so the dependencies of this program are explicit.
 
 | Id | Statement | Assurance or basis | Where it lives | Reproduce with |
 | --- | --- | --- | --- | --- |
-| **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **verified** (`exact-algebraic`, replayed here) | `sqpack` | `uv run --frozen python -m cases.trump11.verify_exact` |
+| **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **verified** (`exact-algebraic`; a published construction, confirmed here) | `sqpack` | `uv run --frozen python -m cases.trump11.verify_exact` |
 | **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated numerically | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack.research.quench`](src/sqpack/research/quench.py) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
 | **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **numerically checked** (`numerical-f64`) | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
-| **T-4** | The source-distinct replacement `G=(.8,1.85) → G'=(.79,1.85)` restores the complete Figure 13 localization, A-triple forcing, repaired Figure 14 unavoidability, and `3+9` capacity chain, proving `s(11) ≥ 2 + 4/√5` | **verified** (`exact-algebraic`, replayed here) | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md), confirmed by [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | `uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json` |
+| **T-4** | The source-distinct replacement `G=(.8,1.85) → G'=(.79,1.85)` restores the complete Figure 13 localization, A-triple forcing, repaired Figure 14 unavoidability, and `3+9` capacity chain, proving `s(11) ≥ 2 + 4/√5` | **verified** (`exact-algebraic`; apparently novel here, not externally peer-reviewed) | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md), confirmed by [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | `uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json` |
 
 **T-1** is also an independent check of the published record: the 33 digits on the
 *Squares in Squares* record page agree with the value computed here from the field.
@@ -1058,6 +1074,16 @@ exact contacts.
 
 **T-2** originated in the standing review as observation R-2 and has now been
 implemented twice, independently—see below for why that matters.
+
+**Apparently novel here**, in the qualified sense above: the falsification of
+Stromquist’s printed Figure 14 argument and the source-distinct repaired certificate for
+`s(11) ≥ 2 + 4/√5` (exp-016, exp-017); the corner at Trump’s cell (T-3, exp-010); the
+local-isolation theorem for Trump’s pose (exp-013); and the exact `n = 5`
+terminal-family chain—shared optimal face, two-parameter sheet, second-order
+obstruction, complete first-order inventory, and connected position polytope (exp-033
+through exp-039). The `n = 3` and `n = 4` quotient classifications are established here
+with no novelty claim: the published hard-squares computations cover their labelled and
+unlabelled pieces, and the record declines to call the quotient refinements new.
 **T-3** was found while building the quench, registered as `H-019` *before* the round
 that observed it was recorded, and confirmed as its own round.
 Under the directory’s ownership rule the registry artifact decides both; the `T-` ids
@@ -1929,14 +1955,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 335 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 336 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 79 | asserted something false about the mathematics |
 | validity | 82 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 128 | recorded something its own evidence contradicts |
+| bookkeeping | 129 | recorded something its own evidence contradicts |
 | robustness | 37 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
@@ -1946,7 +1972,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-three defects in 335, and no soundness defect
+**The automated gate has caught forty-three defects in 336, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

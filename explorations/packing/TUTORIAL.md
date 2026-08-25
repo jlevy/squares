@@ -692,9 +692,10 @@ class-bracketing quench, the Rust screening annealer, and the registered reposit
 all exist. `packing-validate --list` is the authoritative inventory.
 Formal results built on the proof instruments include the lower-bound falsification and
 repair, the optimal configuration spaces at `n = 3` and `n = 4`, and the local-isolation
-theorem for Trump’s pose.
-The quench and annealer remain numerical instruments; listing them here does not promote
-their outputs to verified.
+theorem for Trump’s pose—this project’s results rather than published theorems, with
+[§8](#8-what-is-known-and-what-is-not) marking which claims confirm the literature and
+which are new here. The quench and annealer remain numerical instruments; listing them
+here does not promote their outputs to verified.
 
 **The generic witness boundary and robust rational promotion are built.** One
 `Witness/v1` file can be inspected, numerically checked, or exactly verified without
@@ -858,18 +859,26 @@ structure-versus-rarity laws, and the denominator for any coverage claim.
 What has been established, with the exact limit of each claim, and then what is
 genuinely open, ranked by how much of the program rests on it.
 Assurance and method follow [§5](#5-algebra-versus-numerics).
+Provenance is a separate fact from assurance, so each row states it.
+A published result checked here is a **confirmation**. A result first established here
+is **apparently novel**—new to the best of this project’s knowledge from the archived
+corpus, an assessment of the search done rather than an assertion of priority—and no
+external referee has reviewed it, however strong its formal assurance.
+The synopsis’s
+[Assurance, Methods, and Claims](SYNOPSIS.md#assurance-methods-and-claims) owns the
+definition and the one-place list of apparently novel results.
 
 ### Established
 
 | Result | Assurance or basis | What it does *not* say |
 | --- | --- | --- |
 | Fixing the angles and every pair’s separating axis makes minimising `s` a linear program | proved | Nothing about *which* cell is best; that choice is the combinatorial hard part |
-| Trump’s 1979 packing is valid, over `ℚ(u)` of degree 8, with 14 pairs at exactly zero separation | verified (`exact-algebraic`) | Nothing about optimality; it is an upper bound |
+| Trump’s 1979 packing is valid, over `ℚ(u)` of degree 8, with 14 pairs at exactly zero separation | verified (`exact-algebraic`); a published construction, confirmed here | Nothing about optimality; it is an upper bound |
 | [`s(11) ≥ 2 + 4/√5`](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | verified (`exact-algebraic`) | Not attributed to Stromquist, not externally peer-reviewed, and it does not close the gap to Trump |
-| [Stromquist’s *printed* 2003 argument fails](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side `10001/10000` fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies |
-| [Trump’s pose is locally isolated](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries |
-| The one-dimensional class-angle optimum is a corner, with one-sided slopes of `0.1747` and `0.384` per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails |
-| The exact optimal configuration spaces at [`n = 3`](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | verified (`exact-algebraic`) | Only those two moduli spaces are classified here; the optimal side values at `n = 5` and `n = 6` are proved, but their optimal configuration spaces are not classified here |
+| [Stromquist’s *printed* 2003 argument fails](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side `10001/10000` fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies. This project’s finding, like the repair beside it |
+| [Trump’s pose is locally isolated](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries. Apparently novel here, not externally peer-reviewed |
+| The one-dimensional class-angle optimum is a corner, with one-sided slopes of `0.1747` and `0.384` per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails. This project’s measurement |
+| The exact optimal configuration spaces at [`n = 3`](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | verified (`exact-algebraic`) | Only those two moduli spaces are classified here; the optimal side values at `n = 5` and `n = 6` are proved, but their optimal configuration spaces are not classified here. The labelled and unlabelled `n = 3` pieces agree with published computations; the rotation exclusion and full quotients are established here, with no novelty claim |
 | Refinement is not the current bottleneck: the same floating-point LP refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | numerically checked (`numerical-f64`) | The solver floor is about `1e-11` in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
 
 ### Open
