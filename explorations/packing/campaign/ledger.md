@@ -16,6 +16,10 @@
 | [session-008](agent-sessions/session-008-stromquist-falsification-and-repair.md) | completed | retrospective | `research-loop` (correctness) | `research-loop` (correctness) | 1 | think-ciwv | Preserve both fast proof controls, register any coordinate-minimization question as a successor, and move the main proof rotation to H-039's first fixed-threshold n=12 certificate candidate. |
 | [session-009](agent-sessions/session-009-autonomous-basin-map.md) | stopped | mixed | `process-review` (process) | `process-review` (process) | 10 | think-05hr | Open a new AgentSession/v2 under W2 factual-review with a Correctness focus. Capture the n=4 seed-0 status-4 millisecond fixture under think-nr5w, then finish think-b3bm's final-receipt runbook rehearsal and revalidate the strict launch path before new basin-map rounds. Keep D-126 separate; the exact-research queue remains think-nm35. |
 | [session-010](agent-sessions/session-010-eight-hour-mixed-research.md) | stopped | contemporaneous | `research-loop` (insight) | `process-review` (process) | 15 | think-3cbq | Continue the original wall-clock objective in a new bounded session from the final PR 29 head. Run frozen order 7 under think-b4jc: require identical seeded outputs, independently recomputed pair totals, and unloaded-host overhead before retaining the meter; then route the first unmetered quench adapter without changing a criterion. |
+| [session-011](agent-sessions/session-011-eight-hour-continuation.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `research-pass` (insight) | 7 | think-gszk | Rotate after the order-13 checkpoint; do not infer a finite improvement, launch an unbounded proof audit or resume the H-042 wider run. |
+| [session-012](agent-sessions/session-012-eight-hour-final-continuation.md) | completed | contemporaneous | `process-review` (correctness) | `process-review` (process) | 3 | think-gszk | Commit and push the local sign repair, then start a bounded successor session. |
+| [session-013](agent-sessions/session-013-generated-view-recurrence-checkpoint.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-gszk | Commit and push, update PR 34, then begin a new bounded research session. |
+| [session-014](agent-sessions/session-014-final-portfolio-rotation.md) | stopped | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 2 | think-gszk | From the pushed PR 34 head, open a new bounded session and preregister one BC-010 exact R4/R5 nonlinear-realization slice under think-1s0h; retain D-239 as a separate pipeline slice and do not begin basin-frequency work before component identity. |
 
 ### Workflow summary
 
@@ -23,11 +27,13 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
-| `factual-review` | 0 | 0 | 2 | 2 |
-| `insight-iteration` | 0 | 1 | 2 | 2 |
-| `process-review` | 0 | 4 | 3 | 6 |
-| `research-loop` | 1 | 4 | 3 | 7 |
-| `pipeline-improvement` | 0 | 0 | 6 | 0 |
+| `research-pass` | 0 | 0 | 1 | 0 |
+| `factual-review` | 0 | 0 | 4 | 2 |
+| `insight-iteration` | 0 | 1 | 3 | 2 |
+| `process-review` | 2 | 4 | 8 | 6 |
+| `efficiency-loop` | 1 | 0 | 1 | 0 |
+| `research-loop` | 1 | 4 | 4 | 7 |
+| `pipeline-improvement` | 1 | 0 | 8 | 0 |
 
 ## Experiment agendas
 
@@ -104,6 +110,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | H-039 | open question | proof | Can a checked extension of Stromquist's conditional forcing or another |  | 0 |  |
 | H-040 | blocked | search | After a known-answer n = 5 control, pivoting across one active separat | n: 5 10 | 0 |  |
 | H-041 | confirmed | proof | At s = 2 + 4/sqrt(5), replacing the printed Figure 14 point G = (4/5,  | n: 11* | 1 | 90m agent + 1s wall |
+| H-042 | blocked | proof | Every one of the 128 derivative-distinct fixed-side branches at Trump' | derivative_branch: all-128-exp-013-matrices | 0 |  |
 
 ## Rounds
 

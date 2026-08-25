@@ -43,6 +43,10 @@ approaching Trump’s pose.
 
 What remains is quantitative and global: certify an explicit isolation radius, study
 stability under perturbing the container side, and exclude distant contact classes.
+The first structural successor is [H-042](H-042-trump-incidence-rigidity-cores.md),
+which asks the narrower fixed-side question of whether every derivative branch has a
+proper group-minimal wall/contact core.
+Its answer does not settle any of those quantitative or global questions.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

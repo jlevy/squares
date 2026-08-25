@@ -81,7 +81,7 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and twenty-four blocked
+hypotheses, one open hypothesis, seven open questions, and twenty-five blocked
 hypotheses.
 Its active confidence ladder has completed the exact and event controls up to
 the first nontrivial identity question; the next scientific transition is from
@@ -226,7 +226,7 @@ At any checkpoint, the human operator may choose the next phase, narrow the ques
 stop. Long autonomous sessions use the same rule; autonomy changes the duration and
 controller, not permission to blur contracts.
 
-### The Current `n = 5` Handoff
+### Current Handoff
 
 ![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
 
@@ -249,13 +249,25 @@ W3 turned that limitation into exp-036’s registered second-order obstruction, 
 then excluded the displayed direction from the true tangent cone.
 Exp-037 now certifies the complete branchwise linearization-cone inventory and leaves
 transverse and mixed nonlinear realization open.
+Exp-038 then certifies one connected five-dimensional fixed-angle cell-local LP-optimal
+position polytope and twelve exact paths in release classes R1, R2, R3, and R6. Its
+positive pathwise first-order stresses do not make the whole polytope stationary or
+classify a terminal component.
 When the post-round strict gate failed, W4 separated stale controls from an independent
 deep-golden solver rejection.
 That bounded solver repair was recorded under the owning review phase before W7 existed.
 Future packing-pipeline repairs whose promised output is the implementation itself enter
 W7; historical phases are not relabelled after the fact.
-The scientific queue remains separate.
-At no point may exp-035 through exp-037 be reinterpreted as a connectivity proof.
+The latest terminal record is
+[session-014](campaign/agent-sessions/session-014-final-portfolio-rotation.md), which
+opened no later research round.
+The next agent should open one bounded W6 slice under `think-1s0h`, preregister one
+exact R4/R5 nonlinear-realization criterion, and retain an exact continuation, exact
+obstruction, or finite unresolved list.
+The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
+remain later slices; D-239 is a separate W7 line.
+Do not start basin-frequency work or reinterpret exp-035 through exp-038 as a
+connectivity proof.
 
 ## What Is Built
 
@@ -1367,7 +1379,7 @@ reading the results below:
 
 ## The Hypothesis Registry
 
-Forty-one claims or open questions are codified as artifacts.
+Forty-two claims or open questions are codified as artifacts.
 The standing review’s complete H-001 through H-015 block is now in the registry; later
 ids carry campaign-native claims and seven explicit open questions.
 The [ledger](campaign/ledger.md) is generated from the artifacts and is the current
@@ -1416,6 +1428,7 @@ view; this section is the reading of it.
 | [H-039](campaign/hypotheses/H-039-s12-proof-frontier.md) | open question | Can the lower bound for `s(12)` be improved and ultimately closed at four? | 0 | — |
 | [H-040](campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | blocked | Active-cell neighbor walks beat multistart in new verified cells per LP solve | 0 | — |
 | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **confirmed** | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 1 | 90m agent, 0.70s wall |
+| [H-042](campaign/hypotheses/H-042-trump-incidence-rigidity-cores.md) | blocked | Every one of the 128 derivative-distinct fixed-side branches at Trump’s witness has a proper incidence rigidity core | 0 | — |
 
 ### Confirmed
 
@@ -1788,34 +1801,43 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 282 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 319 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 70 | asserted something false about the mathematics |
-| validity | 70 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 105 | recorded something its own evidence contradicts |
-| robustness | 28 | did not finish, or finished only by luck |
+| soundness | 74 | asserted something false about the mathematics |
+| validity | 81 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 120 | recorded something its own evidence contradicts |
+| robustness | 35 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Fifty-eight of the seventy soundness defects pointed in the *flattering* direction**,
-where the error looks like a success.
+**Sixty-one of the seventy-four soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught thirty-three defects in 282, and no soundness defect
-ever.** Every soundness failure was found by a control cell whose answer was known in
-advance, a rule written down before the measurement, a generated view contradicting its
-source, or someone reading carefully.
+**The automated gate has caught forty defects in 319, and no soundness defect ever.**
+Every soundness failure was found by a control cell whose answer was known in advance, a
+rule written down before the measurement, a generated view contradicting its source, or
+someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Every gate-detected entry is a bookkeeping or robustness defect, found by
 contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
 That is the pattern, not an exception: gates are good at the mechanical classes and have
 never once caught the mathematics being wrong.
 
+106 fixes left no regression check behind.
+[D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
+and exit survived, but invalid `gdate` precision left the start and end fields empty, so
+[D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
+[D-304](defects.md) records a contradictory inequality in McClenagan’s printed Section 3
+proof. H-037 repairs that local sign step independently from both the figures and the
+source equations; it does not certify the remaining construction.
+
 The entries from D-030 onward sharpen the point rather than softening it.
+D-283 remains open in the current robustness inventory.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed
 green; D-032 and D-033 came from rehearsing recovery paths that had shipped unrun; D-034
 found the endpoint-isolation assumption; D-035 found destructive negative-control
@@ -1949,10 +1971,17 @@ briefly changed D-034 instead of D-194. D-197 records the concurrent checkout ca
 the exp-036 commit banner; the isolated checker commit was moved to the campaign branch
 and the other branch ref restored before push or target execution.
 
+D-289 through D-293 record the H-042 pilot’s remaining validity, robustness, and
+provenance gaps. D-289 covers row-class normalization in the cone oracle; D-290 keeps
+certificate replay open; D-291 covers the branch-0 golden’s treatment of valid future
+refutations; D-292 keeps regenerated branch indices bound to the retained exp-013
+universe; and D-293 keeps provenance self-tests from claiming completeness without exact
+mappings.
+
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Ninety-three fixes left no regression check behind, and that list has already predicted
+Ninety-eight fixes left no regression check behind, and that list has already predicted
 a recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
@@ -2092,11 +2121,11 @@ review: an explicitly excluded strict run was terminated by exact process group,
 partial output discarded, and `think-ysz2` owns explicit command and wall ceilings for
 future bounded delegations.
 The repaired small-`n` path no longer blocks the campaign, but unattended numerical work
-still lacks a reproducible work-based quench budget ([D-126](defects.md)), outer
-deadlines and process-group cleanup for every validation step ([D-239](defects.md)), and
-portable terminal-receipt discipline for delegated long commands ([D-202](defects.md)).
-[D-280](defects.md) records the phase-count cap exhausting the fast campaign early; its
-continuation remains open.
+still lacks a reproducible work-based quench budget ([D-126](defects.md)), a bound
+around pure-Python validation workers and the aggregate duration of multi-command steps
+([D-239](defects.md)), and portable terminal-receipt discipline for delegated long
+commands ([D-202](defects.md)). [D-280](defects.md) records the phase-count cap
+exhausting the fast campaign early; its continuation remains open.
 
 **One open measurement defect constrains timing forecasts.** [D-101](defects.md): the
 historical exp-007/008 round-level wall times disagree with retained per-call durations.
@@ -2118,11 +2147,14 @@ TERM and then KILL if necessary.
 This closes that specific gate-stall path; the unattended numerical runner still has the
 separate launch requirements above.
 
-**The outer validation command is not yet time-bounded.** [D-239](defects.md) records
-that proof, solver, Cargo and other checker subprocesses still have no per-step deadline
-or process-group cleanup.
-This does not block the next supervised exact slice, but a strict gate is not itself a
-safe unattended watchdog until that follow-up lands.
+**Validation subprocesses now have finite POSIX deadlines.** The shared captured-command
+path and quiet Git provenance probes use a 600-second production default, configurable
+by CLI or environment, and retain smaller call-site caps.
+Timeout and coordinator interruption terminate and reap the registered process groups.
+[D-239](defects.md) remains open because pure-Python worker code, aggregate
+multi-command duration, detached daemons, and Windows process-tree cleanup are not
+bounded by that policy.
+A strict gate therefore still needs an independent outer watchdog for unattended use.
 
 **One open defect makes quench evidence load-dependent.** [D-126](defects.md): the
 scientific work budget is still wall-clock time, so contention changes the number of LP

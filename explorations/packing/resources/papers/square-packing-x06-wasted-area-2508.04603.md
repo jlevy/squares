@@ -10,7 +10,7 @@
 ---
 
 > ⚠️ **Contains reconstructed passages.**
-> This transcription contains **3** annotated passage(s) where the PDF extraction was
+> This transcription contains **5** annotated passage(s) where the PDF extraction was
 > damaged and text or mathematics was reconstructed or marked unrecoverable. Search this
 > file for `GARBLED` and `NOTE` to find them.
 > **Any formula near an annotation must be checked against `square-packing-x06-wasted-area-2508.04603.raw.md`**, which is the
@@ -383,11 +383,11 @@ We will state a proposition which describes a packing method that allows one to 
 
 Define $W_{\beta,\epsilon}(x) = x^{\frac{2\beta}{2\beta+1}} \log^{\frac{\epsilon}{2\beta+1}} x$. We would like to note that $\frac{2\beta}{2\beta+1}$ is the harmonic mean of $\frac{1}{2}$ and $\beta$.
 
-**Proposition 7.** If there exists real $\frac{1}{2} < \beta < 1$, real $\epsilon$ such that for all real $m$, for all $w \in \Theta(m^\nu)$ the right trapezoid with height $m$, smaller base $w$, larger base $w + \Theta(\sqrt{m})$ can be packed with wasted area $O(m^\beta \log^\epsilon m)$, then $W(x) \in O(W_{\beta,\epsilon}(x))$.
+**Proposition 7.** If there exists real $\frac{1}{2} < \beta < 1$, real $0 < \nu < \beta + \frac{1}{2}$, real $\epsilon$ such that for all real $m$, for all $w \in \Theta(m^\nu)$ the right trapezoid with height $m$, smaller base $w$, larger base $w + \Theta(\sqrt{m})$ can be packed with wasted area $O(m^\beta \log^\epsilon m)$, then $W(x) \in O(W_{\beta,\epsilon}(x))$. <!-- GARBLED/NOTE: The cleaned extraction omitted the printed condition $0 < \nu < \beta + \frac{1}{2}$; archived PDF p.16 verifies it. -->
 
 This trapezoid is roughly the same as a "type 2" shape in [2, 3], except that we make the constant factor implicit rather than explicit.
 
-The wasted area is $O(m^\beta \log^\epsilon m + x\sqrt{m})$. By selecting $m = (x\log^{-\epsilon} x)^{\frac{2}{2\beta+1}}$, the quantity above is minimized, being $O(x^{\frac{2\beta}{2\beta+1}} \log^{\frac{\epsilon}{2\beta+1}} x) = W_{\beta,\epsilon}(x)$.
+The wasted area is $O(m^\beta \log^\epsilon m + x/\sqrt{m})$. <!-- GARBLED/NOTE: The cleaned extraction lost the division bar in the reduction term; archived PDF p.16 verifies $x/\sqrt{m}$. --> By selecting $m = (x\log^{-\epsilon} x)^{\frac{2}{2\beta+1}}$, the quantity above is minimized, being $O(x^{\frac{2\beta}{2\beta+1}} \log^{\frac{\epsilon}{2\beta+1}} x) = W_{\beta,\epsilon}(x)$.
 
 Note that $\nu$ cannot be too large otherwise it may happen that $m^\nu > x$.
 

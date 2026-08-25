@@ -32,6 +32,9 @@ and contribute to the phase.
 **New here?** [`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the
 objects are, why the approach is shaped the way it is, and what is established versus
 open. Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program.
+To resume work rather than only understand it, continue to the synopsis’s
+[current handoff](SYNOPSIS.md#current-handoff); it names the terminal session, owning
+bead, and exact next bounded slice.
 
 ## Operating Principles
 

@@ -16,7 +16,7 @@ controls:
 # --- the defect log's own invariants (D-018's class of bookkeeping failure) ---
 - name: defect log - open defect with no bead
   file: defects.yaml
-  replace: ["  bead: think-hg3u\n", ""]
+  replace: ["  bead: think-3szr\n", ""]
   run: python3 -m devtools.validate_schemas
   expect: "without a bead"
 
@@ -72,9 +72,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 282", "count: 20"]
+  replace: ["count: 319", "count: 20"]
   run: python3 -m devtools.validate_schemas
-  expect: "count 20 != 282 entries"
+  expect: "count 20 != 319 entries"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -106,16 +106,22 @@ controls:
 # why the count is now derived and why it gets a control.
 - name: synopsis - hypothesis artifact count drifting from the registry
   file: SYNOPSIS.md
-  replace: ["Forty-one claims or open questions are codified as artifacts.",
-            "Forty claims or open questions are codified as artifacts."]
+  replace: ["Forty-two claims or open questions are codified as artifacts.",
+            "Forty-one claims or open questions are codified as artifacts."]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "does not state the hypothesis artifact count (41)"
+  expect: "does not state the hypothesis artifact count (42)"
 
 - name: synopsis - dateline duplicates volatile campaign progress
   file: SYNOPSIS.md
   replace: ["**Date:** 2026-08-25", "**Date:** 2026-08-25, after 36 rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "Date dateline repeats campaign progress"
+
+- name: synopsis - README cold-start link drifts from current handoff
+  file: README.md
+  replace: ["SYNOPSIS.md#current-handoff", "SYNOPSIS.md#workflow-entry-contracts"]
+  run: uv run --frozen --quiet python -m devtools.check_synopsis
+  expect: "README.md: does not route cold starts to SYNOPSIS current handoff"
 
 - name: synopsis - duplicate experiment cost row
   file: SYNOPSIS.md
@@ -129,15 +135,15 @@ controls:
 
 - name: synopsis - soundness direction aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["Fifty-eight of the seventy soundness defects", "Fifty-seven of the seventy soundness defects"]
+  replace: ["Sixty-one of the seventy-four soundness defects", "Sixty of the seventy-four soundness defects"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "soundness-direction aggregate is not 58 of 70"
+  expect: "soundness-direction aggregate is not 61 of 74"
 
 - name: synopsis - gate detector aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["gate has caught thirty-three defects in 282", "gate has caught thirty-two defects in 282"]
+  replace: ["gate has caught forty defects in 319", "gate has caught thirty-nine defects in 319"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "gate-detector aggregate is not 33 of 282"
+  expect: "gate-detector aggregate is not 40 of 319"
 
 - name: synopsis - hypothesis-status aggregate drifting from the ledger
   file: SYNOPSIS.md
@@ -158,7 +164,7 @@ controls:
   replace: ["    to coincide with an in-progress round.\n  regression: none\n  bead: think-5zwm\n",
             "    to coincide with an in-progress round.\n  regression: 'a check that does not exist'\n  bead: think-5zwm\n"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "does not state the unprotected-fix count"
+  expect: "does not state the unprotected-fix count (105)"
 
 - name: gate - strict handover skips deep golden regeneration
   file: src/sqpack/cli/validate.py
