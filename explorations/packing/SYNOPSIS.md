@@ -1768,15 +1768,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 293 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 301 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 70 | asserted something false about the mathematics |
-| validity | 76 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 108 | recorded something its own evidence contradicts |
-| robustness | 30 | did not finish, or finished only by luck |
+| validity | 78 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 112 | recorded something its own evidence contradicts |
+| robustness | 32 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -1785,7 +1785,7 @@ Two observations the log exists to make.
 where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught thirty-four defects in 293, and no soundness defect
+**The automated gate has caught thirty-four defects in 301, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -1794,6 +1794,11 @@ Gates confirm what you already thought to check; these were found by devices bui
 contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
 That is the pattern, not an exception: gates are good at the mechanical classes and have
 never once caught the mathematics being wrong.
+
+103 fixes left no regression check behind.
+[D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
+and exit survived, but invalid `gdate` precision left the start and end fields empty, so
+[D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-283 remains open in the current robustness inventory.

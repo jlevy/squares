@@ -296,7 +296,7 @@ session:
       and retain its exact argv, start and end, exit or signal, output location or inline
       capture, timeout and cleanup result; put the portable terminal-receipt rule in the
       agent-session runbook.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: >-
       Order 11 retained the narrow timeout primitive and froze its unsupported boundary;
@@ -316,10 +316,65 @@ session:
     fallback: >-
       Record the exact missing field under think-b3bm, preserve the command evidence that
       did return, and rotate to frozen order 13 without claiming portable receipt closure.
+    outcome: >-
+      Added the portable parent-owned terminal-receipt rule, then ran the one authorized
+      yielded command. Its session identifier, both labeled output streams, timeout
+      policy, final poll and nonzero exit survived, but the start and end timestamps did
+      not: the installed GNU date rejected the requested milliseconds precision. The
+      receipt is retained as a failed control and think-b3bm remains open.
+    evidence:
+    - >-
+      From the repository root, the target argv was /opt/homebrew/bin/timeout
+      --signal=TERM --kill-after=1s 5s /bin/bash -c followed by a script that printed
+      receipt_stdout=ready, slept one second, printed
+      receipt_stderr=expected failure, and exited 7. No special environment was set.
+    - >-
+      The first parent call yielded session 72108 and chunk 13aa02 after 0.251862291
+      tool-seconds with the timestamp diagnostic and stdout line. Terminal poll chunk
+      4262fe returned exit 7, the stderr line, the second timestamp diagnostic and no
+      continuing session handle.
+    - >-
+      The declared five-second TERM timeout and one-second KILL grace did not fire; the
+      command exited normally with no signal and was reaped by the final poll. Output is
+      retained inline here. Both absolute timestamp fields were empty and elapsed wall
+      time is therefore unavailable rather than reconstructed.
+    stop_reason: >-
+      D-300 triggered the predeclared stop at the first missing receipt field. The phase
+      does not retry its one-command rehearsal or claim that D-202/D-217 are fixed.
+    next_action: Leave think-b3bm and think-jygr open and rotate to frozen order 13.
+  - workflow: research-pass
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Execute frozen order 13 under think-ykt7: reproduce from the local primary source
+      one O(x^(3/5)) construction primitive or error balance and identify the exact point
+      where its asymptotic argument fails to transfer to a finite public-parent packing.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Order 12 retained its failed receipt control and stopped at D-300 without a retry;
+      the frozen portfolio now rotates to the source-bound mathematical fallback.
+    budget_minutes: 30
+    started_at: '2026-08-25T05:01:00-07:00'
+    deadline_at: '2026-08-25T05:31:00-07:00'
+    expected_output: >-
+      One cited, algebraically checked derivation in H-037 or a durable note naming the
+      first unavailable source lemma, with no finite-instance or exponent claim beyond
+      what the source proves.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop at twenty minutes if the local primary source does not state enough to
+      reproduce one balance exactly; do not browse into an open-ended literature audit,
+      infer a finite improvement, or launch numerical search.
+    fallback: >-
+      Record the missing lemma or parameter relation under think-ykt7 and rotate to the
+      first evidence-earned bounded successor without changing H-035 or H-037.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Rehearse one deliberately nonzero command with a five-second parent deadline.
+    next_action: Inspect H-035, H-037 and their archived primary-source dependencies.
   primary_bead: think-gszk
   status: in_progress
   budget:
@@ -573,8 +628,25 @@ session:
     elapsed_quality: unavailable
     next_action: Retain the narrow claim and leave D-239 outstanding.
     phase: 5
+  - task: Audit the portable terminal-receipt contract against D-202 and D-217.
+    operator: /root/receipt_contract_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Confirmed the minimum parent-owned fields and required one yielded identifier plus
+      terminal poll; advised leaving think-b3bm open unless every field survived together.
+    evidence:
+    - The audit distinguished a terminal receipt from process disappearance and telemetry.
+    files: []
+    checks: [Read-only runbook, schema, defect and session-contract review.]
+    uncertainty: The audit did not execute or edit the rehearsal.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Treat the first missing field as a failed control rather than rerunning it.
+    phase: 6
   outputs:
   - campaign/agent-sessions/session-011-eight-hour-continuation.md
+  - campaign/agent-sessions/README.md
   - campaign/hypotheses/H-042-trump-incidence-rigidity-cores.md
   - cases/trump11/incidence_cores.py
   - src/sqpack/cli/validate.py
@@ -588,10 +660,13 @@ session:
     uv run --directory explorations/packing --frozen pytest -q
     tests/test_validation_cli.py passes 12 tests in 2.83 seconds.
   - Focused Ruff and BasedPyright pass on the timeout primitive and its test.
+  - >-
+    Order 12 yielded session 72108 and recovered both streams plus exit 7, but D-300
+    invalidates the receipt because both absolute timestamp fields are empty.
   stop_reason: null
   next_action: >-
-    Execute frozen order 12's short parent-owned terminal-receipt rehearsal; do not run a
-    strict, deep or numerical command and do not resume the H-042 wider run.
+    Execute frozen order 13's source-bound asymptotic derivation; do not infer a finite
+    improvement, launch numerical search or resume the H-042 wider run.
 ---
 # Session 011 — Eight-Hour Portfolio Continuation
 

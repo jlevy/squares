@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 299
+count: 301
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -5193,10 +5193,11 @@ defects:
   fix: >-
     Discard the run and perform one justified rerun through a parent-owned durable
     session. It retained the full diff, timing, cleanup, and exit status. The portable
-    runbook still needs to require a final receipt for every long command.
+    runbook now requires a complete parent-collected receipt, but D-300 stopped its first
+    yielded-session rehearsal before every field survived together.
   regression: >-
-    none yet; think-b3bm owns the cross-agent runbook requirement and its forced
-    long-command rehearsal
+    partial only; session-011 phase 6 retains the yielded identifier, both labeled
+    streams, timeout policy, final poll and exit 7, but D-300 owns the missing timestamps
   bead: think-b3bm
   recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
 - id: D-203
@@ -5582,10 +5583,11 @@ defects:
   fix: >-
     Discard only the unreceipted negative-control result and rerun that command once
     through a direct execution path that preserves output, exit status, and elapsed
-    time. Keep the general final-receipt requirement under think-b3bm.
+    time. The runbook now requires the yielded identifier and parent-owned final poll;
+    keep the general rehearsal open under think-b3bm because D-300 lost two fields.
   regression: >-
-    none yet; think-b3bm owns the portable final-receipt rehearsal, including yielded
-    command identifiers and terminal polling
+    partial only; session-011 phase 6 proves that yielded session 72108 survived terminal
+    polling, but its empty start and end fields make the combined receipt inadmissible
   recurrence_of: D-202
   bead: think-b3bm
   recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
@@ -7698,3 +7700,49 @@ defects:
   regression: none
   bead: think-di0u
   recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-300
+  title: The receipt rehearsal requested an unsupported gdate precision
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: pre_registered_rule
+  latent_for: one yielded command
+  severity: medium
+  status: outstanding
+  what: >-
+    The parent-owned rehearsal invoked gdate with --iso-8601=milliseconds, but the
+    installed GNU date accepts seconds or ns, not milliseconds. Both command
+    substitutions failed and the emitted start and end fields were empty.
+  consequence: >-
+    Session identifier 72108, both labeled streams, timeout policy, terminal polling and
+    exit 7 survived, but the receipt lacks its absolute time bounds and cannot close the
+    portable final-receipt defect.
+  fix: >-
+    none yet. Preserve this failed one-command rehearsal without retrying in place. In a
+    later declared slice, use the verified --iso-8601=ns argument or another portable
+    offset-aware clock and require every receipt field to survive together.
+  regression: none
+  bead: think-jygr
+  recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
+- id: D-301
+  title: The first receipt rule split a compound adjective after its hyphen
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: one uncommitted documentation diff
+  severity: low
+  status: fixed
+  what: >-
+    The first runbook edit broke replay-relevant across a source line after the hyphen.
+    Flowmark preserved the boundary as replay- relevant, leaving a malformed phrase in
+    the rendered Markdown draft.
+  consequence: >-
+    The portable receipt rule would remain understandable but visibly damaged at the
+    exact field that defines which working context must be retained.
+  fix: Join replay-relevant before committing and rerun the Markdown formatter.
+  regression: none
+  bead: think-wunq
+  recorded_in: campaign/agent-sessions/README.md
