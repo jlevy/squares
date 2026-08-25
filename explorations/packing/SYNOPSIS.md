@@ -790,7 +790,8 @@ zero merely because a computed residual is small.
 A tolerance-based f64 verifier therefore needs a tolerance to accept Trump’s rounded
 algebraic contacts, and that tolerance is a blind spot that also accepts overlaps
 smaller than itself; setting it to zero rejects this true packing instead.
-Both failure modes are demonstrated by `negative_control.py`.
+Both failure modes are demonstrated by
+[`cases.trump11.verifier_limits`](cases/trump11/verifier_limits.py).
 
 The fix is representational rather than numerical: express the configuration in the real
 algebraic number field it actually lives in, where equality is decidable.
@@ -885,9 +886,9 @@ listed here so the dependencies of this program are explicit.
 
 | Id | Statement | Tier | Where it lives | Reproduce with |
 | --- | --- | --- | --- | --- |
-| **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **exact** | `sqpack` | `python3 verify_trump11.py` |
+| **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **exact** | `sqpack` | `uv run --frozen python -m cases.trump11.verify_exact` |
 | **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated at **polished** | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack.research.quench`](src/sqpack/research/quench.py) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
-| **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run --frozen python lp_cell.py` |
+| **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
 | **T-4** | The source-distinct replacement `G=(.8,1.85) → G'=(.79,1.85)` restores the complete Figure 13 localization, A-triple forcing, repaired Figure 14 unavoidability, and `3+9` capacity chain, proving `s(11) ≥ 2 + 4/√5` | **exact** | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md), confirmed by [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | `uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json` |
 
 **T-1** is also an independent check of the published record: the 33 digits on the
@@ -1028,8 +1029,9 @@ against its own constraint rows.
 
 ### The instance: Trump’s cell
 
-`lp_cell.py` reads the cell off `sqpack`’s exact certificate—eleven angles and
-fifty-five axis choices, and nothing else—rebuilds the LP from scratch, and solves it.
+`cases.trump11.independent_lp_cell` reads the cell off `sqpack`’s exact
+certificate—eleven angles and fifty-five axis choices, and nothing else—rebuilds the LP
+from scratch, and solves it.
 **The centres are never given to the solver.** They are what it must reconstruct.
 
 ```
@@ -1187,12 +1189,13 @@ distinct terminal component.
 
 - **The refiner is an LP solve per cell**, at solver precision, and it is built.
   That is the campaign’s middle tier, and it is real.
-- **Basins become nameable.** A local minimum stops being tolerance-dependent and
-  becomes a discrete object with a side length good to `≈1e-11`, which is what makes a
-  census, an atlas, and basin statistics well defined.
-  Basin identity must not inherit the search’s knobs—a quench that merges nearby angles
-  would make “basin” depend on the merge tolerance ([D-020](defects.md)), fixed by a
-  free-angle pass that certifies the landing point.
+- **Terminal endpoint observations become inspectable.** The free-angle pass removes one
+  merge-tolerance artifact and returns a pose with side length good to `≈1e-11`, so
+  retained endpoints can be compared and replayed.
+  It does not make local minima discrete or define component identity: the exact `n = 3`
+  continuum proves that one connected stationary family can produce many endpoint keys.
+  A census, atlas, or basin statistic remains inadmissible until the component relation
+  is resolved ([D-020](defects.md), [D-034](defects.md)).
 - **The search space factorises** into a small continuous part (the angles) and a
   combinatorial part (the cell), which is the premise of
   [H-001](campaign/hypotheses/H-001-angle-class-reduction.md)—now with a concrete prior,
@@ -1207,15 +1210,15 @@ distinct terminal component.
 
 ```bash
 cd explorations/packing
-python3 verify_trump11.py       # T-1: exact verification over Q(u)
-uv run --frozen python lp_cell.py        # T-2 and T-3, through independent constraint rows
+uv run --frozen python -m cases.trump11.verify_exact
+uv run --frozen python -m cases.trump11.independent_lp_cell
 uv run --frozen python -m cases.campaign_smoke.quench_experiment
 uv run --frozen --group dev packing-validate
 ```
 
-`lp_cell.py` asserts every figure quoted above, including agreement with `H-019`’s
-registered slopes, so a change that breaks one fails the gate rather than silently
-editing the record.
+`cases.trump11.independent_lp_cell` asserts every figure quoted above, including
+agreement with `H-019`’s registered slopes, so a change that breaks one fails the gate
+rather than silently editing the record.
 
 ## The Program So Far
 
@@ -1729,24 +1732,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 232 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 239 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 64 | asserted something false about the mathematics |
+| soundness | 65 | asserted something false about the mathematics |
 | validity | 65 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 74 | recorded something its own evidence contradicts |
-| robustness | 21 | did not finish, or finished only by luck |
+| bookkeeping | 77 | recorded something its own evidence contradicts |
+| robustness | 24 | did not finish, or finished only by luck |
 | performance | 8 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Fifty-three of the sixty-four soundness defects pointed in the *flattering*
+**Fifty-four of the sixty-five soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught fourteen defects in 232, and no soundness defect ever.**
+**The automated gate has caught fifteen defects in 239, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
@@ -1893,8 +1896,8 @@ and the other branch ref restored before push or target execution.
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Eighty-seven fixes left no regression check behind, and that list has already predicted
-a recurrence once. The
+Ninety fixes left no regression check behind, and that list has already predicted a
+recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
 relative to what they govern, a discovery treated as a defect until an independent layer
@@ -1981,10 +1984,10 @@ No hour-scale lane is promoted without a known-answer response, independent vali
 and a result that changes a decision.
 
 **The normal checkpoint is green; the strict unattended-handoff gate is not.** The
-engineering stack’s final post-merge run passes all 31 normal-gate steps in 82
-wall-seconds, including seven exact small-`n` replays and all 56 negative controls.
-The first deep regeneration reproduced one unsettled `n=4` proposal and an `n=10`
-`1.503e-10` pair-row residual.
+post-engineering readiness review passes all 31 normal-gate steps in 113.31
+wall-seconds, including seven exact small-`n` replays, 36 pytest contracts, and all 58
+mutation controls. The first deep regeneration reproduced one unsettled `n=4` proposal
+and an `n=10` `1.503e-10` pair-row residual.
 [D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders
 49 and 66 exposes previously clean row 61, which a third conservative call settles with
 zero all-original-row residual.
@@ -2022,10 +2025,17 @@ rational special case alone is not a universal remedy.
 mutates bounded private source snapshots, so a killed control can abandon only temporary
 data and cannot leave deliberate sabotage in the checkout.
 
-**Checker timeouts remain open.** [D-129](defects.md): a stuck negative-control command
-can still stall the gate and leave a shell descendant alive.
-This is operational robustness, not a live-source isolation risk; `think-cns0` owns
-bounded process-group cleanup.
+**Mutation-control timeouts are bounded.** [D-129](defects.md) is fixed: each control
+has a finite deadline, runs in its own process group, and is terminated and reaped after
+TERM and then KILL if necessary.
+This closes that specific gate-stall path; the unattended numerical runner still has the
+separate launch requirements above.
+
+**The outer validation command is not yet time-bounded.** [D-239](defects.md) records
+that proof, solver, Cargo and other checker subprocesses still have no per-step deadline
+or process-group cleanup.
+This does not block the next supervised exact slice, but a strict gate is not itself a
+safe unattended watchdog until that follow-up lands.
 
 **One open defect makes quench evidence load-dependent.** [D-126](defects.md): the
 scientific work budget is still wall-clock time, so contention changes the number of LP

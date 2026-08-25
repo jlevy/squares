@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 232
+count: 239
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -3155,7 +3155,7 @@ defects:
   detected_by: review
   latent_for: since the negative-control harness was introduced
   severity: medium
-  status: outstanding
+  status: fixed
   what: >-
     Source snapshots prevent a killed negative control from corrupting the checkout,
     but each checker still runs without a deadline and a shell child can outlive the
@@ -3165,10 +3165,12 @@ defects:
     temporary descendants consuming resources even though the scientific tree remains
     safe.
   fix: >-
-    none yet. Give each control a declared or documented default timeout, launch it in
-    a process group, terminate and reap the group on timeout or interruption, and
-    rehearse a child that ignores the first termination signal.
-  regression: none
+    Give every control a finite default or declared deadline, launch its command in a
+    new process group, and terminate and reap the whole group with TERM followed by KILL
+    on timeout or interruption.
+  regression: >-
+    tests/test_negative_controls.py launches a child that ignores TERM and requires the
+    harness to time out, kill and reap it before returning a failure.
   bead: think-cns0
   recorded_in: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 - id: D-130
@@ -5954,3 +5956,173 @@ defects:
   regression: none
   bead: think-yjll
   recorded_in: defects.yaml
+- id: D-233
+  title: README layout validation treated ignored migration caches as project content
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: gate
+  latent_for: the first validation run in a long-lived checkout after PR 23
+  severity: medium
+  status: fixed
+  what: >-
+    The README checker inventoried every top-level filesystem entry, so cache-only
+    remnants under the deleted tools and sqpack directories made the fast gate demand
+    that README document paths which no longer existed in the committed project.
+  consequence: >-
+    Existing agent checkouts failed the canonical gate while clean CI passed, making
+    the same merged tree appear healthy or broken according to local cache history.
+  fix: >-
+    Inventory entries only when they contain durable files, ignoring known cache paths
+    without requiring Git metadata so private mutation snapshots still exercise the
+    checker.
+  regression: >-
+    test_readme_inventory_ignores_cache_only_legacy_directories retains a visible source
+    directory and excludes a removed directory containing only bytecode cache.
+  bead: think-wliu
+  recorded_in: devtools/check_readme.py
+- id: D-234
+  title: The implemented engineering plan carried stale inventory and defect references
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: the final integration commits of PR 23
+  severity: medium
+  status: fixed
+  what: >-
+    The plan froze early module, test and mutation-control counts after later integration
+    added files and controls, and attributed the CI history, cache and YAML-parser fixes
+    to D-219 through D-221 instead of their actual D-226 through D-228 records.
+  consequence: >-
+    A reader auditing the implemented refactor received a false inventory and was sent
+    to three unrelated defects for its CI evidence.
+  fix: >-
+    Remove volatile module and test counts, reconcile the final mutation-control
+    evidence, cite D-226 through D-228, and state that the work merged through PR 23.
+  regression: none
+  bead: think-c538
+  recorded_in: docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
+- id: D-235
+  title: Current reproducibility instructions still named deleted command paths
+  date: '2026-08-24'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: the merge of PR 23
+  severity: high
+  status: fixed
+  what: >-
+    The living synopsis, frontier record and maintained research reports still directed
+    readers to test.sh, verify_trump11.py, lp_cell.py, negative_control.py and
+    tools/render_tables.py after the refactor removed or relocated them.
+  consequence: >-
+    The project claimed its main exact results were reproducible while the commands
+    printed at the point of use failed immediately.
+  fix: >-
+    Point current instructions to packing-validate and the migrated cases and devtools
+    modules while leaving historical experiment, session and review provenance intact.
+  regression: >-
+    devtools.check_synopsis rejects the removed operational paths from the living
+    synopsis, and the canonical packing-validate command exercises their replacements.
+  bead: think-gk2b
+  recorded_in: SYNOPSIS.md
+- id: D-236
+  title: A completed timeout fix remained outstanding in the defect and launch records
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: the final integration commits of PR 23
+  severity: high
+  status: fixed
+  what: >-
+    D-129 still said fix none, the generated log and synopsis repeated it as open, and
+    the launch checklist remained unchecked after the bounded process-group cleanup and
+    its TERM-ignoring-child test had landed and think-cns0 had closed.
+  consequence: >-
+    The authoritative status surfaces contradicted shipped and tested behavior, leaving
+    a completed infrastructure gate looking like an unattended-launch blocker.
+  fix: >-
+    Reconcile D-129 to fixed with its actual implementation and regression, regenerate
+    the log, update the synopsis, and check the matching launch requirement.
+  regression: none
+  bead: think-gwl3
+  recorded_in: defects.yaml
+- id: D-237
+  title: Mutation-control target paths could escape their private snapshot
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: inspection
+  latent_for: since private mutation snapshots were introduced
+  severity: high
+  status: fixed
+  what: >-
+    The harness resolved the file path supplied by controls.yaml and read and rewrote it
+    without proving that an absolute path, parent traversal or symlink still landed
+    inside the private snapshot.
+  consequence: >-
+    A typo or later control edit could deliberately corrupt and then restore a real
+    checkout or unrelated external file, invalidating the isolation guarantee.
+  fix: >-
+    Resolve every existing target before reading it and reject any result outside the
+    private snapshot root, including absolute, traversal and symlink escapes.
+  regression: >-
+    test_control_targets_cannot_escape_the_private_snapshot exercises all three escape
+    forms and the legitimate repository-root .flowmarkignore target.
+  bead: think-cdhq
+  recorded_in: devtools/run_negative_controls.py
+- id: D-238
+  title: The synopsis called quench endpoints discrete basins with a well-defined census
+  date: '2026-08-24'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: after the exact n = 3 continuum was established
+  severity: high
+  status: fixed
+  what: >-
+    One benefits list said a free-angle quench makes a local minimum a discrete object
+    and thereby makes basin identity, census and atlas statistics well defined. The
+    exact n = 3 stationary continuum proves that one connected component can emit many
+    endpoint keys, and the same synopsis correctly marks identity blocked under D-034.
+  consequence: >-
+    The false statement promoted provisional endpoint observations into admissible
+    components and could authorize precisely the census that BC-010 still blocks.
+  fix: >-
+    State only that terminal endpoint observations become inspectable and replayable,
+    while component identity and every census-derived claim remain inadmissible.
+  regression: none
+  bead: think-1pf9
+  recorded_in: SYNOPSIS.md
+- id: D-239
+  title: Validation steps have no outer deadline or process-group cleanup
+  date: '2026-08-24'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: inspection
+  latent_for: since packing-validate replaced the shell gate
+  severity: medium
+  status: outstanding
+  what: >-
+    packing-validate bounds mutation-control children but launches its other proof,
+    solver, Cargo and checker subprocesses without a deadline, then waits for every
+    future to finish.
+  consequence: >-
+    One hung validation step can consume an entire unattended handoff and leave
+    descendants alive even though the bounded research-slice protocol says to stop.
+  fix: >-
+    none yet. Give steps declared or documented default deadlines appropriate to deep
+    mathematics, terminate and reap their process groups, and report a distinct timeout
+    failure without imposing one short uniform cap.
+  regression: none
+  bead: think-tx0b
+  recorded_in: src/sqpack/cli/validate.py

@@ -372,6 +372,8 @@ validity, lifecycle recovery, durable reports, and per-cell queue pricing remain
 Use the
 [current readiness agenda](../docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md)
 for the exact 8-hour and 24-hour gate.
+The H-020/exp-011 identifiers below are a historical lifecycle example, not a
+copy-pastable ready round; `status` and the confidence ladder own the live queue.
 
 ```shell
 cd explorations/packing

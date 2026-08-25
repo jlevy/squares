@@ -979,8 +979,8 @@ tuned C would achieve.
 
 **Reproducibility.** The verifier, the reference packing, the field derivation, the
 negative controls, and the benchmarks are packaged in
-[`explorations/packing/`](../../../README.md); `./test.sh` there re-runs everything and
-asserts the results quoted above.
+[`explorations/packing/`](../../../README.md); `packing-validate` there reruns the full
+validation surface and asserts the results quoted above.
 The verifier is standard library only; only the derivation script needs SymPy.
 
 **Record-page statistics** (184 pictured packings, 47 mentioning simulated annealing, 32

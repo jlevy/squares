@@ -11,7 +11,7 @@ It cannot be generated: most of it is judgement, and the judgement is the point.
 So it is *reconciled* instead, the way `campaign/ideas.md` is -- the numbers and
 statuses it asserts must match the artifacts, and every artifact must appear.
 
-Nine checks:
+Ten checks:
 
   1. every round's verdict in the roll-up matches its artifact
   2. every hypothesis's status matches the ledger's derived status
@@ -22,6 +22,7 @@ Nine checks:
   7. every relative link and heading anchor resolves
   8. freshness labels name the current round count and do not embed a stale update note
   9. the readiness dashboard remains attached to its canonical status owners
+ 10. living reproducibility instructions do not name removed command paths
 
 Check 7 closes a real gap: `packing-ledger check` walks links under `campaign/`
 only, so the root document's forty-odd references were unchecked.
@@ -269,6 +270,22 @@ def check_readiness_dashboard(text: str) -> list[str]:
     ]
 
 
+def check_migrated_commands(text: str) -> list[str]:
+    """Living instructions must use the maintained module and command surfaces."""
+    obsolete = {
+        r"negative_control\.py": "cases.trump11.verifier_limits",
+        r"verify_trump11\.py": "cases.trump11.verify_exact",
+        r"(?<!independent_)lp_cell\.py": "cases.trump11.independent_lp_cell",
+        r"test\.sh": "packing-validate",
+        r"tools/render_tables\.py": "devtools.render_research_tables",
+    }
+    return [
+        f"SYNOPSIS.md: removed command path matches {pattern!r}; use {replacement}"
+        for pattern, replacement in obsolete.items()
+        if re.search(pattern, text)
+    ]
+
+
 # fmt: off
 _ONES = [
     "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
@@ -394,6 +411,7 @@ def main() -> int:
         + check_totals(text)
         + check_freshness_label(text)
         + check_readiness_dashboard(text)
+        + check_migrated_commands(text)
         + check_defects(text)
     )
     if problems:

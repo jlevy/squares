@@ -298,7 +298,8 @@ re-derived independently (where sympy is installed); the fixed-angle cell rebuil
 linear program through independent constraint rows and solved back to Trump’s packing;
 Trump’s exact branchwise linearized cones (exp-013); the H-041 repaired-cover exact
 certificate and the H-010 printed-cover exact rejection (exp-016, exp-017); the exact
-`n = 3, 4` optimal moduli (exp-014, exp-015); and the golden basin maps, whose
+`n = 3, 4` optimal moduli (exp-014, exp-015); the exact terminal-component controls and
+`n = 5` local-geometry results through exp-036; and the golden basin maps, whose
 proved-case rows are checked against mathematics rather than against a stored snapshot.
 
 **Instruments.** `sqsearch --selftest` (geometry against a naive reference, determinism,

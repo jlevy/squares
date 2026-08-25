@@ -29,6 +29,12 @@ make format          # format all Markdown
 make format-check    # report drift without writing
 ```
 
+Packing-specific Python, Rust, and research validation is documented in
+[`explorations/packing/development.md`](explorations/packing/development.md).
+From that directory, use
+`uv run --frozen --all-extras --group dev packing-validate --fast` while editing and the
+full `packing-validate` command at a research or merge checkpoint.
+
 ### Markdown formatting
 
 **Flowmark owns all Markdown here.** Do not add Prettier, Biome, or dprint Markdown

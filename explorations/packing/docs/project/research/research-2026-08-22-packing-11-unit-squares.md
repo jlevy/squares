@@ -710,7 +710,7 @@ live as one schema-validated artifact per `n` with provenance, links into the lo
 archive, and an editorial note on each case.
 The duplication is deliberate — this report should be readable end to end without
 opening the data — and it is safe because the tables are rendered by
-`tools/render_tables.py`, which `test.sh` re-checks.
+`devtools.render_research_tables`, which `packing-validate` rechecks.
 Use the structured form to query or plot; use these tables to read.
 
 <!-- BEGIN GENERATED: frontier-open (devtools.render_research_tables) -->

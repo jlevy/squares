@@ -658,7 +658,7 @@ STEPS: tuple[Step, ...] = (
     Step("basin atlas", _basin_atlas),
     Step("basin event record and replay", _basin_events),
     Step("historical regressions", _historical_regressions),
-    Step("small-n optimal moduli", _small_n),
+    Step("small-n exact models and local geometry", _small_n),
     Step("negative controls", _negative_controls),
     Step("fixed-angle cell is an LP, rebuilt independently", _independent_lp),
     Step("fast behavioral tests", _fast_tests, fast=True),

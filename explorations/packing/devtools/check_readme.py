@@ -62,6 +62,8 @@ WORK_UNITS = (
 
 # Tooling that is not part of what the directory *is*: caches, lockfiles, build config.
 NOT_CONTENT = {"uv.lock", "pyproject.toml", "__pycache__", ".venv"}
+CACHE_PARTS = {"__pycache__", ".pytest_cache", ".ruff_cache", ".venv"}
+IGNORED_FILES = {".DS_Store"}
 
 _SPELLED = {
     1: "one",
@@ -85,6 +87,26 @@ def layout_tree(text: str) -> str | None:
     return None
 
 
+def meaningful_top_level_entries(root: Path) -> set[str]:
+    """Entries with durable content, excluding cache-only migration remnants."""
+    entries: set[str] = set()
+    for entry in root.iterdir():
+        if entry.name.startswith(".") or entry.name in NOT_CONTENT:
+            continue
+        if entry.is_file():
+            if entry.name not in IGNORED_FILES:
+                entries.add(entry.name)
+            continue
+        if any(
+            path.is_file()
+            and path.name not in IGNORED_FILES
+            and not CACHE_PARTS.intersection(path.relative_to(entry).parts)
+            for path in entry.rglob("*")
+        ):
+            entries.add(entry.name)
+    return entries
+
+
 def check_layout(text: str) -> list[str]:
     """Every top-level entry is drawn, and every drawn path exists."""
     tree = layout_tree(text)
@@ -100,11 +122,7 @@ def check_layout(text: str) -> list[str]:
     drawn_top = {name.strip("/").split("/")[0] for name in top}
     drawn_any = drawn_top | {name.strip("/") for name in top + nested}
 
-    on_disk = {
-        e.name
-        for e in ROOT.iterdir()
-        if not e.name.startswith(".") and e.name not in NOT_CONTENT
-    }
+    on_disk = meaningful_top_level_entries(ROOT)
 
     problems = [
         f"README.md: {missing} exists but the layout tree does not show it"

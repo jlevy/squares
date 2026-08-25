@@ -230,10 +230,11 @@ Send promoted, novel, disputed, or otherwise high-risk claims through W2 before 
 move forward. A routine W6 result whose preregistered guards and independent replay
 already decide its stated criterion need not open a ceremonial review phase.
 
-For an eight-hour goal, take the first dependency-ready slice of H-023/H-021 and carry
-it to a retained measurement or explicit blocker.
-For a twenty-four-hour goal, continue through the classifier/event/evaluator contract
-and one supervised H-011 cell.
+For the next supervised exact-research goal, take `think-nm35`, the remaining BC-010
+`n = 5` cone-classification slice, to a retained determination or finite unresolved
+list. New numerical map rounds remain behind BC-010, D-203’s `n = 4` fixture diagnosis,
+and the final-receipt rehearsal; do not skip those gates merely because a runner recipe
+is operationally available.
 Do not fill the time with H-017 merely because it is executable.
 
 ## The numeric runner launch gate
@@ -249,7 +250,7 @@ No unwatched numeric cell starts until every applicable line is true.
 - [ ] A separate verifier recomputes containment and non-overlap from the archived pose.
 - [ ] The actual engine selftest, binary digest, source revision, dirty state, host,
   seeds, and budget are recorded.
-- [ ] D-132 distinguishes a settled fixed cell from a rejected transition or iteration
+- [x] D-132 distinguishes a settled fixed cell from a rejected transition or iteration
   cap and prevents outer convergence when the inner solve did not settle.
 - [ ] Prerequisites are satisfied; an instrument-ready flag changes only with the
   implementation that makes it true.
@@ -266,9 +267,11 @@ No unwatched numeric cell starts until every applicable line is true.
   seed or thirty minutes, terminal artifacts, releases, and the final report.
 - [x] D-035 cannot leave a deliberate negative-control mutation: controls write only
   bounded private source snapshots.
-- [ ] D-129 bounds each checker, terminates and reaps its process group on timeout or
+- [x] D-129 bounds each checker, terminates and reaps its process group on timeout or
   interruption, and retains the failure.
   No hostile isolation is required.
+- [ ] D-239 gives every outer validation step an appropriate deadline and reaps its
+  process group, so strict preflight cannot become an unbounded wait.
 
 ### Rehearsal and capacity
 
