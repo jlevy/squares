@@ -9,18 +9,30 @@ way it is, and what the research has and has not established.
 Every result, status, count and verdict lives in [`SYNOPSIS.md`](SYNOPSIS.md), which is
 authoritative wherever the two appear to differ.
 
+**Assumes:** no background in the problem.
+Four outside ideas do real work here—linear programming in
+[§2](#2-the-configuration-space), algebraic number fields in
+[§5](#5-algebra-versus-numerics), and certified numerics and symbolic elimination in the
+same section.
+Each is introduced where it is first needed, and [§11](#11-further-reading)
+says where to learn it properly.
+[§10](#10-a-notation-card) collects every symbol on one page.
+
 ## 1. The Problem
 
 `s(n)` is the side of the smallest square that contains `n` non-overlapping unit
-squares, each free to translate **and rotate**.
+squares, each free to translate **and rotate**. Smallest is exact rather than
+approximate: the set of achievable sides is closed, so the infimum is attained and a
+best packing exists ([Martin 2000](#11-further-reading)).
 
 Two bounds are immediate:
 
 - **Area:** `s(n) ≥ √n`, because `n` unit squares have area `n`.
 - **Grid:** `s(n) ≤ ⌈√n⌉`, by the axis-aligned grid packing.
 
-At `n = 11` those give `3.3166… ≤ s(11) ≤ 4`, and the whole subject lives in that gap.
-For a perfect square `s(m²) = m` and there is nothing to say about the side value.
+At `n = 11` those give `3.3166… ≤ s(11) ≤ 4`, and the whole subject lives in that
+interval. For a perfect square `s(k²) = k`, since the two bounds meet, and there is
+nothing to say about the side value.
 Some of the most interesting cases lie just above a perfect square, where improving on
 the next grid side can require tilted structure.
 
@@ -61,7 +73,15 @@ structurally unlike the small proved tilted cases at `n = 5` and `n = 10`. Every
 | --- | --- | --- |
 | best known packing (upper bound) | `3.87708359002281417730789706010096…` | Trump 1979, a construction |
 | best lower bound | `2 + 4/√5 = 3.788854382…` | see the note below |
-| gap | `0.088229208023` | open since 2003 |
+| bound gap | `0.088229208023` | open since 2003 |
+
+Two different quantities get called a gap in this subject, and this document keeps them
+apart. The **bound gap** above is the distance between the best upper and lower bounds,
+which is what remains unknown about `s(11)`. A **search gap** is
+`best_side − standing best`, the signed distance from one packing this project found to
+the best one anybody has published, and it is what [§3](#3-cells-basins-and-two-traps)
+onward measures. The first is a property of the problem; the second is a property of a
+run.
 
 **The lower bound carries a story this project produced.** Stromquist’s 2003 Theorem 2
 is the published source, and this repository found that its printed proof is **false as
@@ -81,8 +101,17 @@ believe.**
 
 ## 2. The Configuration Space
 
-A configuration is a centre `(xᵢ, yᵢ)` and an angle `θᵢ ∈ [0, π/2)` for each square,
-plus the container side `s`. That is `3n + 1` real coordinates—**34 at `n = 11`**.
+A **configuration** places every square and fixes the container.
+Square `i` has a centre `(xᵢ, yᵢ) ∈ ℝ²` and an angle `θᵢ ∈ [0, π/2)`, and the container
+has side `s`. Angles stop at `π/2` because a unit square is unchanged by a quarter turn,
+so larger angles name poses already counted.
+
+Throughout, a subscript `i` picks out one square and a bare letter is the whole
+`n`-vector: `θ = (θ₁, …, θₙ)` is all `n` angles at once, and `x` and `y` are the `n`
+centre coordinates each.
+So “fix the angles” always means fix all `n` of them.
+Counting scalars, a configuration is `3n + 1` real numbers—**34 at `n = 11`**.
+[§10](#10-a-notation-card) collects every symbol used in this document.
 
 Read naively this is a 34-dimensional nonconvex problem with `C(11,2) = 55` disjunctive
 constraints, and it is not obvious where to push.
@@ -91,33 +120,75 @@ decomposition.
 
 ### The cell decomposition
 
-Two convex polygons are disjoint exactly when some line separates them, and for polygons
-it suffices to test lines parallel to their edges.
-A square has two distinct edge normals, so each pair of squares has four candidate axes,
-plus a choice of which square lies on the low side.
+Two convex polygons have **disjoint interiors** exactly when some line separates them,
+weakly—touching is allowed, and the separating line may run along the shared edge.
+For polygons it suffices to test lines parallel to their edges.
+A square has two distinct edge normals, since opposite edges are parallel, so each pair
+of squares has four candidate axes, and for each axis a choice of which square lies on
+the low side.
 
 > A **cell** of configuration space is a choice, for each of the `C(n,2)` pairs, of one
 > candidate separating axis together with an order.
 > A configuration *lies in* a cell when those choices genuinely separate those pairs in
 > that order.
 
+Four axes times two orders is eight choices per pair, so there are at most `8^C(n,2)`
+cells—about `4.7 × 10⁴⁹` at `n = 11`. Most are empty, because the choices must be
+jointly realisable by an actual configuration, but even as a crude bound the number says
+what kind of difficulty the discrete half carries.
+
 Now fix the angle vector `θ` **and** fix a cell.
+Write `Rᵢ` for rotation by `θᵢ`, so the four corners of square `i` are
+`(xᵢ, yᵢ) + Rᵢ·(±½, ±½)`, and write `oᵢₖ ∈ ℝ²` for those four corner offsets, `k = 1…4`.
 Four things become true at once:
 
-1. Once `θᵢ` is fixed, the corner offsets are **constants**, so every corner is an
-   affine function of the centre alone.
-2. Containment, `0 ≤ xᵢ + oᵢₖ,ₓ ≤ s`, is **linear**—and note `s` appears here, and only
-   here, as a variable.
+1. Once `θᵢ` is fixed, the offsets `oᵢₖ` are **constants**, so every corner is an affine
+   function of the centre alone.
+2. Containment is **linear**: each corner satisfies `0 ≤ xᵢ + oᵢₖ,ₓ ≤ s` and
+   `0 ≤ yᵢ + oᵢₖ,ᵧ ≤ s`, writing `oᵢₖ,ₓ` and `oᵢₖ,ᵧ` for the two components of `oᵢₖ`.
+   Note `s` appears here, and only here, as a variable.
 3. Separation along a *fixed* axis is a **linear** inequality.
+   For axis `ν` and the order `i` before `j`, every corner of `i` projects at or before
+   every corner of `j`: `⟨ν, (xᵢ,yᵢ) + oᵢₖ⟩ ≤ ⟨ν, (xⱼ,yⱼ) + oⱼₗ⟩` for all `k, l`.
+   Because the cell fixes both `ν` and the order, there is no absolute value and no case
+   split left.
 4. The objective is `s` itself, which is **linear**.
 
-So minimising `s` over a fixed cell at fixed angles is a **linear program** in the
-`2n + 1` variables `(x₁…xₙ, y₁…yₙ, s)`. That is the result the synopsis calls **T-2**.
+So the whole problem, restricted to one cell at fixed angles, is
+
+```
+minimise    s
+over        x₁…xₙ, y₁…yₙ, s          (2n + 1 variables; 23 at n = 11)
+subject to  0 ≤ xᵢ + oᵢₖ,ₓ ≤ s       for every square i and corner k
+            0 ≤ yᵢ + oᵢₖ,ᵧ ≤ s
+            ⟨ν_ij, (xᵢ,yᵢ) + oᵢₖ⟩ ≤ ⟨ν_ij, (xⱼ,yⱼ) + oⱼₗ⟩   for every pair (i,j)
+```
+
+with every `oᵢₖ` and every axis `ν_ij` a constant, determined by `θ` and the cell.
+That is the result the synopsis calls **T-2**.
+
+**Why that is good news.** A **linear program** minimises a linear objective over linear
+inequalities. Its feasible region is a polyhedron, an optimum is always attained at a
+vertex, and the whole class is solvable in polynomial time and very fast in practice—the
+solves here take about `1.28 ms`. Two further properties matter later.
+The set of constraints holding with equality at the optimum is its **active set**, and
+the corresponding **optimal basis** is the subset of them the solver uses to pin the
+vertex down; [§4](#4-the-corner) turns entirely on what happens when that basis changes.
+And a linear program can be solved *exactly* over rational coefficients, which is why
+the floating-point floor in [§5](#5-algebra-versus-numerics) is a limit of the
+implementation rather than of the mathematics.
+[§11](#11-further-reading) points to a proper treatment.
 
 **All the nonconvexity has been pushed into exactly two places**: the trigonometric
 dependence of the offsets and axes on the angles, and the *discrete* choice of cell.
 That factorisation—a small continuous part times a large combinatorial part—is the
 premise underneath almost everything else here.
+
+Writing the program down is a modelling choice, not a canonical object.
+The same feasible set is expressed with one separation row per pair in
+`sqpack.research.quench` and with sixteen—one per ordered corner pair—in
+`cases.trump11.independent_lp_cell`, which is `1,056 = 16 × (11 + 55)` rows at `n = 11`.
+Both are correct, and they share no constraint-assembly code, which is the point.
 
 The check that makes it concrete: read the cell off the exact certificate for the best
 known `n = 11` packing (eleven angles and fifty-five axis choices, and nothing else),
@@ -127,15 +198,23 @@ It returns the published side to `4.4e-16` and every centre to `1.3e-15`.
 
 ### Thirty-four dimensions become one
 
-Trump’s packing uses only **two distinct angles**: `0°` on six squares and `a*` on five.
-Hold the cell fixed, vary that single free angle, and you get a function
+An **angle class** is a set of squares constrained to share one angle.
+Trump’s packing uses only **two**: six squares at `0°`, and five sharing a single
+oblique angle. Call that shared angle `a`, so the full angle vector is
+`θ = (0, 0, 0, 0, 0, 0, a, a, a, a, a)` up to relabelling—one free number in place of
+eleven.
+
+Hold the cell fixed, vary `a`, and solve the linear program of the previous section at
+each value. That defines a function of one real variable,
 
 ```
-φ(a) = the LP optimum of Trump's cell with the five tilted squares at angle a
+φ(a) = the optimal side s of Trump's cell, with the five tilted squares at angle a
 ```
 
-which is the entire problem, restricted to this cell, in **one** variable.
-A scan of `[38°, 42°]` puts its minimum one grid step from `a*`.
+so `φ: [0, π/2) → ℝ`, and it is the entire problem restricted to this cell.
+Write `a*` for the angle that minimises it—the `*` marks a minimiser throughout this
+document. A 2,001-point scan of `[38°, 42°]` puts the minimum one grid step from
+`a* ≈ 40.18°`, Trump’s published tilt.
 
 Trump’s angle is not an input to that computation.
 It is **the argument that minimises a one-dimensional function anyone can plot.** In
@@ -168,8 +247,41 @@ A **basin**, or **point-basin** where the distinction matters, is the preimage o
 returned pose. The atlas ultimately wants a coarser, mathematically stable relation on
 connected terminal components; the current point keys do not yet provide it.
 
-This project’s quench is three stages: **solve the LP in the current cell → re-read the
-cell and re-solve to a fixed point → move the angles → repeat.**
+A quench map is a general notion; this project uses one particular algorithm, and the
+specifics matter for what follows.
+It has two nested loops, not one.
+
+**The inner loop makes the side a function of the angles.** Given a pose, the cell is
+*read off it*: for each pair, take the candidate axis of greatest separation, together
+with the sign saying which square is low.
+That cell defines the linear program of [§2](#2-the-configuration-space), which is
+solved in the `2n + 1` centre-and-side variables.
+But the solution may lie in a *different* cell from the one it was solved in, so its
+value is an upper bound that depends on where the caller started.
+That path dependence would make `s(θ)` ill-defined and leave any angle search optimising
+a moving target. So the loop re-reads the cell from the solution and re-solves until the
+cell it reads back is the cell it was given—a **cell fixed point**. It can also stop
+unsettled, with a typed reason, and an unsettled result is exploratory data rather than
+a converged endpoint.
+
+**The outer loop moves the angles.** It works one angle class at a time, minimising each
+by golden-section bracketing inside a window that narrows only when a whole sweep fails
+to improve.
+No derivative is used—deliberately, for the reason [§4](#4-the-corner) gives.
+A final optional pass brackets each of the `n` angles individually, to test whether a
+class-converged pose is genuinely stationary or an artifact of the tolerance that
+decided which angles count as one class.
+The sweeps stop when none improves, or a tolerance, sweep cap, or wall-clock budget is
+reached.
+
+So: **read the cell, solve to a cell fixed point, bracket the angle classes, repeat.**
+
+The knobs are real—a class-merge tolerance, a window schedule, budgets—and that is
+exactly why a basin defined by this map inherits them.
+It is also why the free-angle pass exists.
+Note too that changing the refiner changes the map, and therefore changes what “basin”
+refers to: swapping angle descent for class bracketing, which [§4](#4-the-corner) does,
+is a different quench and a different decomposition.
 
 Two derived words carry the project’s central diagnostic:
 
@@ -228,6 +340,17 @@ certificate (the wall endpoints carry a different one).
 a bag of endpoint coordinates: a continuum of labelled poses becomes one quotient
 interval with distinguished strata.*
 
+`n = 3` is small enough to look like a curiosity, so it is worth knowing the same
+phenomenon has been pinned down at a size that is not obviously degenerate.
+At `n = 5`, two retained poses with different coordinate keys turn out—after one
+symmetry action and relabelling—to share a single exact optimal face of one fixed-angle
+cell, and that face sits inside an exact two-parameter sheet of optima.
+The first-order analysis there admits one direction leaving the sheet, and a
+second-order argument then excludes that direction from the true tangent cone.
+The remaining directions are unclassified, so this is not a connectivity proof; it is
+the strongest exact statement the project has about how sampled endpoints at one open
+size actually relate.
+
 The project’s term for this is a **terminal family**, and its definition is deliberately
 strict: local dimension is the nullity of the appropriate independent active-constraint
 Jacobian, after quotienting symmetries and accounting for inequalities and stratum
@@ -265,14 +388,16 @@ angle crosses `a*`.
 
 **What it bought.** Replacing smooth descent with a **bracketing search over merged
 angle classes**—a method that tolerates non-smoothness—and changing nothing else took
-`n = 5` from `3.4e-08` to `2.2e-15` and `n = 10` from `5.3e-03` to `1.3e-15`.
+`n = 5` from descent’s `3.2e-08` to `2.2e-15`, and `n = 10` from `4.5e-03` to `1.3e-15`.
+Measured from the annealer output both quenches start from, that is `3.4e-08` and
+`5.3e-03` respectively.
 
-**What it did not buy.** Nothing at `n = 11`, which moved only `8.8e-02 → 6.3e-02`. And
-it is *not* a theorem that derivative-free methods must fail: Powell and Nelder–Mead did
-worse than descent on the tested starts, in this implementation, which is
-method-selection evidence and not an impossibility result.
-The kink also lives on a one-dimensional slice, so it is **not** by itself a rigidity
-proof for the full packing.
+**What it did not buy.** Nothing at `n = 11`, where the same substitution moves the
+annealer’s `8.8e-02` only to `6.3e-02`. And it is *not* a theorem that derivative-free
+methods must fail: Powell and Nelder–Mead did worse than descent on the tested starts,
+in this implementation, which is method-selection evidence and not an impossibility
+result. The kink also lives on a one-dimensional slice, so it is **not** by itself a
+rigidity proof for the full packing.
 
 This chain—a measurement, a mechanism, a prediction, and a method built on the
 prediction that works—is the campaign operating as designed, and it is the single best
@@ -310,24 +435,102 @@ equality system, not a contact tolerance.
 The fix is therefore **representational rather than numerical**: work in the real
 algebraic number field the packing actually lives in, where equality is decidable.
 
+**One predicate, four scalar types.** That fix is affordable because of a property of
+the geometry: every quantity the separating-axis test evaluates is a *polynomial* in the
+configuration variables—four candidate axes, eight dot products per axis, no divisions
+and no square roots.
+So a single implementation is correct over `f64`, over intervals, and over an exact
+field; only the scalar type and the sign decision change.
+The verifier here is written once and instantiated at each, which is why “work exactly”
+is a choice about where to spend time rather than a second codebase.
+
+**What it costs, and therefore where to spend it.** Exactness is not uniformly
+expensive, and knowing the shape of the cost is what lets you decide:
+
+| Operation | Cost |
+| --- | --- |
+| Separating-axis pair test, `f64`, compiled | 57 ns |
+| The same test, Python float backend | 2,726 ns |
+| One `ℚ(α)` multiplication at degree 8, the `n = 11` field, pure Python | 215.5 µs |
+| The same, with a compiled bignum backend | 1.2 µs |
+| One `ℚ(α)` multiplication at degree 62 | 13 ms |
+| Complete exact verification of Trump’s packing, all 55 pairs | 0.35 s |
+
+Two readings. **Exactness is free where it is used**: a whole exact verification costs
+less than a second, against seconds for a single agent turn, so optimising it is
+optimising noise. **And the cost is not flat**: the exact-to-float ratio grows with
+algebraic degree—177× at degree 8, 578× at degree 62—so exact arithmetic is most
+expensive exactly where the problem is hardest.
+That is the standing reason it stays out of the search loop.
+
+The useful frame is three budgets rather than one.
+An *agent* tier at 1–10 s per operation, where a proof or a verification lives and
+nothing needs optimising; an *interactive* tier at 10 ms–1 s; and an *inner loop* at 10
+ns–1 µs executed `1e9`–`1e12` times, which is `f64` and always will be.
+Screen in floating point, refine in floating point, decide in the number field.
+
 ### The number field
 
-1. **Recover the field.** Put the configuration in `ℚ(α)` for one primitive element with
-   a known minimal polynomial and an isolating interval for the intended real root.
-2. **Represent** elements as polynomials of degree `< deg m` with rational coefficients,
-   reduced modulo `m`. Arithmetic is exact.
-3. **Decide equality exactly**—`β = 0` iff its reduced representative is the zero
-   polynomial. *This is where touching contacts get certified.*
-4. **Decide sign exactly**—evaluate on the isolating interval with rational interval
-   arithmetic, bisecting when the enclosure straddles zero.
-   This terminates because `deg β < deg m` and `β ≢ 0` force `β(α) ≠ 0`.
+A **real algebraic number field** `ℚ(α)` is what you get by adjoining one real algebraic
+number `α` to the rationals.
+The procedure:
+
+1. **Recover the field.** Put the configuration in `ℚ(α)` for a single **primitive
+   element** `α`, with a known minimal polynomial `μ` and an isolating interval that
+   contains the intended real root of `μ` and no other.
+2. **Represent** elements as polynomials in `α` of degree `< deg μ` with rational
+   coefficients, reduced modulo `μ`. Arithmetic is exact.
+3. **Decide equality exactly.** For an element `β`, `β = 0` exactly when its reduced
+   representative is the zero polynomial.
+   *This is where touching contacts get certified.*
+4. **Decide sign exactly**—evaluate that representative on the isolating interval with
+   rational interval arithmetic, bisecting when the enclosure straddles zero.
+   This terminates because a nonzero representative of degree `< deg μ` cannot vanish at
+   `α`, since `μ` is the minimal polynomial.
 5. **Run separation and containment** using only those two decisions.
    No floating point appears anywhere.
 
-For Trump’s packing the field is `ℚ(u)` with `u = tan(a/2)`, degree 8. A useful
+For Trump’s packing the field is `ℚ(u)` with `u = tan(a/2)`, of degree 8. A useful
 subtlety: `cos a`, `sin a`, `tan(a/2)` and `s` are all algebraic, but **the angle `a`
 itself, in radians, is transcendental** by Lindemann–Weierstrass.
 The algebra lives in the trigonometric values, never in the angle.
+
+### How many roots does a packing need?
+
+Step 1 says “a single primitive element” as though one always suffices.
+It does, and the reason is worth stating, because the obvious guess—that a configuration
+with `3n + 1` algebraic coordinates might need many—is wrong.
+
+**One, always.** By the primitive element theorem every finite extension of `ℚ` is
+simple, since characteristic zero makes every finite extension separable.
+So however many algebraic coordinates a packing has, each with its own degree, there is
+a single `α` whose powers express all of them, and every coordinate becomes a polynomial
+in `α` with rational coefficients.
+Only one *root* of `μ` is the intended one, which is why an isolating interval is part
+of the field data rather than an optimisation.
+
+**Of what degree, though, is not bounded.** The theorem gives no bound; the degree is
+whatever the active contact system forces after elimination.
+It is 8 for Trump’s `n = 11` packing, and reaches 62 elsewhere in the record table.
+It is not a function of `n`: at a Pythagorean tilt such as `arctan(3/4)` every
+coordinate is rational and the degree is 1. Which fields and degrees actually occur, and
+how they follow from the contact mechanism, is an open question in the registry rather
+than something known.
+
+**And the guarantee is not pointwise.** The optimal *side* is algebraic: the half-angle
+substitution `u = tan(θ/2)` turns `cos θ` and `sin θ` into rational functions of `u`, so
+validity defines a semialgebraic set over `ℚ` with no transcendental functions anywhere,
+and the set of achievable sides is a projection of it.
+An individual optimal *configuration* need not be.
+Where the optimum is a positive-dimensional family, the family is cut out by polynomials
+but a point on it carries a free parameter: the `n = 3` sliding family in
+[§3](#3-cells-basins-and-two-traps) is `(t, 3/2)` for `t ∈ [1/2, 3/2]`, and `t` may be
+transcendental.
+
+So “recover the field” is well posed for a **rigid** optimum, whose active constraints
+pin it down, and ill posed for an arbitrary point on a family.
+That is the same distinction [§3](#3-cells-basins-and-two-traps) draws between a
+point-basin and a terminal component, arrived at from the algebraic side.
 
 ### Assurance, method, and precision
 
@@ -339,12 +542,19 @@ Never extrapolate across an assurance or arithmetic boundary.
 | `numerically-checked` | A finite calculation checked the scoped predicates under an explicit method, precision, rounding, and tolerance |
 | `verified` | An exact check, rigorous interval certificate, or complete proof decides the claim and its preconditions |
 
-Methods are recorded separately.
-`numerical-f64` says exactly what arithmetic was used.
-`numerical-multiprecision` must state the actual digits or bits and tolerance; it does
-not mean unlimited precision.
-Formal methods include exact algebraic replay, rigorous interval certification, and
-scoped proof. A numerical result remains numerical at tolerance `1e-100`.
+The **method** is recorded separately, and there are four:
+
+| Method | What it is |
+| --- | --- |
+| `numerical-f64` | Hardware floating point; says exactly what arithmetic was used |
+| `numerical-multiprecision` | Higher precision, which must state the actual digits or bits and the tolerance—it does not mean unlimited precision |
+| `interval-certified` | Rigorous interval arithmetic, which can certify a strict inequality |
+| `exact-algebraic` | Exact replay in the packing’s own number field, where equality is decidable |
+
+The first two are numerical and the last two are formal, and no amount of the first buys
+the second: **a numerical result remains numerical at tolerance `1e-100`.** Actual
+precision, rounding, and tolerance are recorded alongside the method rather than implied
+by it.
 
 `beat_record: true` requires `assurance: verified`. A negative numerical gap is a
 candidate or solver error, never a formal discovery—a rule that caught a critical defect
@@ -430,10 +640,11 @@ what any result can claim.
 **The verification and experimental stack is built.** Exact `ℚ(α)` arithmetic with
 irreducibility and unique-root checks, rational and algebraic separating-axis
 verification, negative controls, the independently rebuilt LP, the numerical
-class-bracketing quench, the Rust screening annealer, and a thirty-one-step gate all
-exist. Formal results built on the proof instruments include the lower-bound
-falsification and repair, the optimal configuration spaces at `n = 3` and `n = 4`, and
-the local-isolation theorem for Trump’s pose.
+class-bracketing quench, the Rust screening annealer, and the validation gate all exist,
+and the gate runs in one to two minutes.
+Formal results built on the proof instruments include the lower-bound falsification and
+repair, the optimal configuration spaces at `n = 3` and `n = 4`, and the local-isolation
+theorem for Trump’s pose.
 The quench and annealer remain numerical instruments; listing them here does not promote
 their outputs to verified.
 
@@ -583,9 +794,10 @@ bifurcations), and basin-entry tests that separate “search cannot find the reg
 The result that most sharpened this: the annealer, pointed at `n = 17`, reported `5.0`—
 the trivial grid—on every one of five binary64 screening seeds
 ([exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md)),
-against a record of `4.6755`. Because that miss is at a second, independent cell whose
-record needs oblique structure, the failure is not specific to `n = 11`; whether it
-covers every oblique target is an inference the registry states as such, not a theorem.
+against Bidwell’s 1998 record of `4.6755`. Because that miss is at a second, independent
+cell whose record needs oblique structure, the failure is not specific to `n = 11`;
+whether it covers every oblique target is an inference the registry states as such, not
+a theorem.
 
 ### Near-misses are the data
 
@@ -610,7 +822,7 @@ Assurance and method follow [§5](#5-algebra-versus-numerics).
 | [Trump’s pose is locally isolated](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries |
 | The one-dimensional class-angle optimum is a corner, with one-sided slopes of `0.1747` and `0.384` per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails |
 | The exact optimal configuration spaces at [`n = 3`](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | verified (`exact-algebraic`) | Only those two moduli spaces are classified here; the optimal side values at `n = 5` and `n = 6` are proved, but their optimal configuration spaces are not classified here |
-| Refinement is not the current bottleneck: the same refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | numerically checked (floating LP) | The solver floor is about `1e-11` in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
+| Refinement is not the current bottleneck: the same refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | numerically checked (`numerical-f64`) | The solver floor is about `1e-11` in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
 
 ### Open
 
@@ -640,8 +852,10 @@ would do better.
 The upper bound is a construction nobody has beaten; the lower bound is now certified
 here but is not claimed to be sharp.
 
-**5. What a floating LP result means below `1e-11`.** The solver has a noise floor
-there, many rounds sit on it, and no comparison finer than the floor is admissible.
+**5. What a floating LP result means below `1e-11`.** The floor is the LP solver’s own
+feasibility tolerance, pinned at the strictest value it accepts, and it sits about five
+orders above `f64` machine epsilon—it is a property of the solver, not of the hardware.
+Many rounds sit on it, and no comparison finer than the floor is admissible.
 The general fix is an exact LP over certified rational or algebraic coefficients; a
 purely rational LP applies only when the fixed-angle cell has rational coefficients.
 That solver is unbuilt.
@@ -659,27 +873,152 @@ task whose tractability is established.
 
 ## 9. A Vocabulary Card
 
-Everything below is used narrowly here.
-[`SYNOPSIS.md`](SYNOPSIS.md#terminology) is the authority; this is the short form.
+Every word below is used narrowly here, and each earns a row by being one a general
+reader would otherwise read loosely.
+Symbols are in [§10](#10-a-notation-card); [`SYNOPSIS.md`](SYNOPSIS.md#terminology) is
+the authority and is complete, and this is the short form.
+The order is by dependency, so it reads top to bottom.
+
+Three words carry controlled multiple senses, and the rule for each is given with it.
 
 | Term | Means |
 | --- | --- |
-| **configuration** | `3n + 1` coordinates: a centre and angle per square, plus the side |
-| **cell** | a choice of separating axis and order for every pair. Always the configuration-space object; a sweep position is an *instance cell* |
-| **quench** | the map from a configuration to the local optimum a refinement carries it to—and this project’s implementation of it. Includes the angle half |
-| **basin / point-basin** | the preimage of one pose returned by a specific deterministic quench; well defined but too fine when one terminal component is a family |
-| **terminal component** | a connected component of the terminal set, the intended atlas object; current endpoint keys do not certify it |
-| **terminal family** | a local-optimal terminal set that is not an isolated point |
-| **polish** | refinement within the basin you are in |
-| **exploration** | reaching a different basin |
-| **corner** / **kink** | a point where one-sided derivatives differ, so the derivative fails to exist rather than becoming large |
-| **angle class** | a set of squares constrained to share one angle |
-| **gap** | always `best_side − standing_best`, signed |
-| **standing best** | the best side ever published for that `n`—an upper bound, not known to be optimal in the open cases |
-| **assurance** | `reported`, `numerically checked`, or `verified`; method, actual precision, tolerance, and origin stay separate |
-| **atlas** / **census** | the deduplicated store of endpoints, and an enumeration run to saturation |
+| **configuration** | A placement of all `n` squares plus the container: `3n + 1` coordinates |
+| **cell** | A choice of separating axis and order for every pair. Always the configuration-space object; write *instance cell* for a sweep position, never bare “cell” |
+| **quench** | The map sending a configuration to the local optimum a deterministic refinement carries it to, and this project’s implementation of it. Write *quench map* where the distinction matters. Includes the angle half |
+| **basin** / **point-basin** | The set of configurations one quench carries to a single returned pose. Defined relative to that quench, so a different refiner gives a different decomposition; too fine when one terminal component is a family |
+| **polish** | Refinement within the basin you are in. This is what the quench does, and all it does |
+| **exploration** | Reaching a different basin. Write *packing exploration* for this project directory and *exploration report* for an `X-NNN` artifact |
+| **polish failure** / **exploration failure** | The two ways a search gap can decompose: a gap the refiner closes, versus one that survives it. Which one a number is cannot be read off the number |
+| **proposer** / **refiner** | The two halves of the search loop—what emits candidates, and what improves them. Named apart because the measurement that matters is which is failing |
+| **terminal set** | The configurations a quench can return: the local optima of the problem |
+| **terminal component** | A connected component of the terminal set, the intended atlas object; current endpoint keys do not certify it |
+| **terminal family** | A terminal component that is not an isolated point |
+| **rigidity** | No non-trivial feasible local motion, under a declared quotient. Contact counts are evidence for it, never a proof of it |
+| **corner** / **kink** | A point where one-sided derivatives differ, so the derivative fails to exist rather than becoming large |
+| **angle class** | A set of squares constrained to share one angle |
+| **descriptor** | A structural coordinate of a packing—contacts, angle classes, symmetry—used to steer search toward diversity rather than toward loss |
+| **bound gap** | The distance between the best known upper and lower bounds for an `n`; a property of the problem |
+| **search gap** | `best_side − standing best`, signed; a property of one run |
+| **standing best** | The best side ever published for that `n`—an upper bound, not known to be optimal in the open cases |
+| **assurance** | `reported`, `numerically-checked`, or `verified`; method, actual precision, tolerance, and origin stay separate |
+| **atlas** | The deduplicated store of endpoints for an `n`. Code exists; it stores endpoint keys, which are not certified terminal components |
+| **census** | An enumeration of an `n`’s basins run to saturation. Code exists; saturation is unreachable while the counted object is undefined |
 
-## 10. Where to Go Next
+## 10. A Notation Card
+
+Symbols, in the order the document introduces them.
+A subscript `i` always picks out one square; a bare letter is the whole `n`-vector.
+
+| Symbol | Type | Means |
+| --- | --- | --- |
+| `n` | integer | How many unit squares are being packed |
+| `s(n)` | real | The optimal side: the smallest container that fits `n` unit squares |
+| `k` | integer | A perfect-square root, in `s(k²) = k`; also a corner index `1…4` in `oᵢₖ` |
+| `s` | real, variable | The container side being minimised. Distinct from `s(n)`, which is the answer; `s` is what the program solves for |
+| `(xᵢ, yᵢ)` | `ℝ²` per square | The centre of square `i` |
+| `x`, `y` | `ℝⁿ` each | All `n` centre coordinates |
+| `θᵢ` | `[0, π/2)` | The angle of square `i` |
+| `θ` | `ℝⁿ` | The angle vector `(θ₁, …, θₙ)`—all `n` angles at once |
+| `Rᵢ` | `2×2` matrix | Rotation by `θᵢ` |
+| `oᵢₖ` | `ℝ²` | Corner offset: corner `k` of square `i` sits at `(xᵢ, yᵢ) + oᵢₖ`. Constant once `θᵢ` is fixed. `oᵢₖ,ₓ` and `oᵢₖ,ᵧ` are its components |
+| `ν` | unit `ℝ²` | A separating axis; `ν_ij` is the one a cell assigns to the pair `(i, j)` |
+| `C(n,2)` | integer | The number of unordered pairs of squares |
+| `a` | real | The angle shared by one angle class; at `n = 11`, the tilt of Trump’s five-square block |
+| `a*` | real | The value of `a` minimising `φ`. A `*` marks a minimiser throughout |
+| `φ` | `[0, π/2) → ℝ` | The optimal side of a fixed cell as a function of its one free class angle |
+| `s*` | real | The standing-best side for an `n`, used as the base of an inflation ladder `s* + δ` |
+| `t` | real | The slider parameter of the `n = 3` terminal family |
+| `α` | algebraic | A primitive element: the single number generating a packing’s field `ℚ(α)` |
+| `μ` | polynomial | The minimal polynomial of `α`; `deg μ` is the field’s degree |
+| `β` | element of `ℚ(α)` | An arbitrary field element, represented by a polynomial in `α` of degree `< deg μ` |
+| `u` | algebraic | The primitive element for Trump’s packing, `u = tan(a/2)`, of degree 8 |
+| `δ` | real | Slack in a container-inflation ladder |
+| `p` | real | The exponent of a superdisk relaxation |
+
+Two collisions are worth naming because they come from outside this document.
+Smale’s **α-theory**, in [§5](#5-algebra-versus-numerics), has nothing to do with the
+primitive element `α`. And the neighbouring research reports use `θ` for what this
+document calls `a`, and `u_i` for a per-square half-angle parameter rather than a single
+primitive element.
+
+## 11. Further Reading
+
+The concepts this document leans on, and where to learn each properly.
+Nothing here is required to follow the argument; it is what to read when a step feels
+asserted rather than explained.
+
+**Linear programming** ([§2](#2-the-configuration-space)). Any standard
+treatment—Chvátal’s *Linear Programming*, or Boyd and Vandenberghe’s *Convex
+Optimization* for the wider setting.
+What matters here is the geometry of the feasible polyhedron, the notion of a basis and
+of degeneracy, and duality; [§4](#4-the-corner)’s mechanism is a change of optimal basis
+and is hard to read without it.
+
+**Real algebraic number fields** ([§5](#5-algebra-versus-numerics)). Cohen’s *A Course
+in Computational Algebraic Number Theory* covers primitive elements, minimal
+polynomials, and real root isolation.
+The primitive element theorem itself is in any graduate algebra text.
+
+**Certified and interval numerics** ([§5](#5-algebra-versus-numerics)). Moore, Kearfott
+and Cloud’s *Introduction to Interval Analysis* for the arithmetic; Rump’s surveys for
+interval-Newton and Krawczyk; Smale’s α-theory for the existence-and-uniqueness style of
+certificate the same section mentions.
+
+**Symbolic elimination** ([§5](#5-algebra-versus-numerics)). Cox, Little and O'Shea's
+*Ideals, Varieties, and Algorithms* for Gröbner bases, lexicographic order, and
+resultants—the tools that turn a contact system into a minimal polynomial.
+
+**Integer relation** ([§5](#5-algebra-versus-numerics)). The PSLQ and LLL algorithms,
+and specifically what they do and do not prove: they find a relation, which is evidence,
+and never a proof that the relation is exact.
+
+**Optimality conditions** ([§5](#5-algebra-versus-numerics)). Lagrange multipliers in
+the classical case, Fritz-John and KKT for inequalities.
+The relevant fact is that a local extremum on a constraint manifold forces a rank drop,
+which is what supplies the missing equations in determinant form.
+
+**Energy landscapes** ([§7](#7-how-the-search-is-approached-and-why)). Stillinger and
+Weber’s inherent-structure decomposition, which the quench map is borrowed from; and
+Doye, Miller and Wales on the 38-atom Lennard-Jones cluster, the double-funnel precedent
+the rarity premise rests on.
+
+**The problem’s own literature.** Every source below is archived locally under
+[`resources/`](resources/README.md) and is greppable:
+
+- Stromquist (2003), *Packing 10 or 11 unit squares in a square*—the `s(10)` proof, the
+  `s(11)` lower-bound value, and the `0°`/`45°` class bound
+- Trump (1979), the `n = 11` construction that is still the standing upper bound
+- Friedman, *Packing Unit Squares in Squares: A Survey and New Results* (DS7)—the survey
+  the frontier corpus is checked against
+- Erdős and Graham (1975), the asymptotic waste line of work
+- Nagamochi (2005), the general lower bound covering most open cases in the corpus
+- Bidwell (1998), the `n = 17` record, the nearest genuinely oblique one
+- Montanher et al. (2018), the only rigorous computer-assisted optimality proof for
+  rotatable unit squares in any container—three squares in a circle
+- Martin (2000), the compactness results behind “the infimum is attained”
+
+### What does the arithmetic here
+
+Worth knowing, since a project doing exact algebra might be assumed to depend on a
+computer algebra system, and this one does not.
+
+- **Exact `ℚ(α)` arithmetic is hand-rolled and standard library only.** Elements are
+  polynomials with exact rational coefficients reduced modulo the minimal polynomial;
+  equality is a zero-representative test and sign is rational-interval bisection.
+  No floating point appears in either decision.
+- **A computer algebra system is optional and marginal**, used in one place to re-derive
+  a constant the verifier already carries.
+- **The linear programs go through a standard float LP solver**, whose feasibility
+  tolerance is the origin of the floor discussed in
+  [§8](#8-what-is-known-and-what-is-not).
+- **The screening annealer is compiled**, for the reasons in
+  [§5](#5-algebra-versus-numerics)’s cost table.
+- **Named but deliberately unbuilt:** a compiled bignum backend for the algebraic
+  scalar, a dedicated Gröbner engine for elimination, and any proof-assistant
+  formalisation.
+
+## 12. Where to Go Next
 
 | If you want | Read |
 | --- | --- |
