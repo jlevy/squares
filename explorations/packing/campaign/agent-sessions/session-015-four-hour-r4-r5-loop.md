@@ -144,12 +144,21 @@ session:
       rotate to an independent source-bound portfolio cell; do not reopen exp-040 or
       infer an obstruction.
     outcome: null
-    evidence: []
+    evidence:
+    - >-
+      Exp-041 froze the exact two-determination, twenty-semantic-control correction
+      criterion at e26fae9 before the retained checker changed; it validates as the
+      campaign's forty-first round.
+    - >-
+      A fresh-checkout audit reconstructed the live handoff without chat or controller
+      state and identified branch identity, stale-clock routing, cycle accounting, and
+      checkpoint commands as the remaining portability gaps; those instructions now
+      live in the project runbook and this session.
     stop_reason: null
     next_action: >-
-      Under think-1s0h and BC-010, preregister exp-041 from exp-040's five exact blockers
-      before editing the draft checker, then assign disjoint implementation and review
-      scopes against that successor criterion.
+      Finish the disjoint exp-041 checker correction, run only bounded temporary
+      generation and replay, and obtain independent review against the committed
+      criterion before any retained target result is accepted.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -386,6 +395,47 @@ session:
     elapsed_quality: unavailable
     next_action: Require exp-041 to exercise the real proof path for every semantic control.
     phase: 2
+  - task: Reconstruct session 015 from a fresh checkout with no controller memory.
+    operator: /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Confirmed that the scientific handoff, owner, clocks, guards, and controller
+      boundary were discoverable, then identified missing branch identity,
+      stale-deadline routing, cycle accounting, and exact checkpoint commands.
+    evidence:
+    - >-
+      The audit started at explorations/packing/README.md and used only repository and
+      bead state; its findings were applied to the generic session runbook and this
+      session's Fresh-Agent Resume section.
+    files: []
+    checks:
+    - Read-only reconstruction from the packing README through the active handoff.
+    uncertainty: >-
+      The control-plane documentation is currently published on the recorded feature
+      branch, not the repository's default branch.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Re-run the portability audit after the final session checkpoint.
+    phase: 3
+  - task: Adversarially audit exp-041's preregistered acceptance perimeter.
+    operator: /root/r5_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Produced separate feasibility and stress decisions, an exact twenty-mutation
+      contract through production proof paths, a forbidden-claim set, and loopholes that
+      an implementation review must reject.
+    evidence:
+    - The review was delivered after exp-041 froze and before retained target measurement.
+    files: []
+    checks:
+    - Read-only criterion and checker audit; no target result executed.
+    uncertainty: The corrected implementation still needs an independent post-change audit.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Compare the corrected checker and temporary record with the frozen criterion.
+    phase: 3
   outputs:
   - campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md
   - campaign/agent-sessions/README.md
@@ -394,6 +444,7 @@ session:
   - SYNOPSIS.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-041-h-023-n5-rotating-release-proof-perimeter.md
   - cases/n5/rotating_release_paths.py
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
@@ -408,14 +459,15 @@ session:
     89 tests in 24.28 seconds.
   - exp-040 validates against Experiment/v2 before target execution.
   - packing-ledger check recognizes 40 rounds with exp-040 in progress.
+  - exp-041 validates as round 41 after preregistration at e26fae9.
   - ruff check passes for cases/n5/rotating_release_paths.py.
   - basedpyright reports zero errors and zero warnings for the draft checker.
   stop_reason: null
   next_action: >-
-    In the active correctness cycle for BC-010 under think-1s0h, preregister exp-041
-    from exp-040's five exact blockers before editing the retained draft checker; close
-    the cycle by 17:06:30-07:00 with reviewed evidence or a smaller finite unresolved
-    list, and do not start basin-frequency work.
+    In the active correctness cycle for BC-010 under think-1s0h, finish and independently
+    audit the exp-041 checker correction; close the cycle by 17:06:30-07:00 with reviewed
+    retained evidence or a smaller finite unresolved list, and do not start
+    basin-frequency work.
 ---
 # Session 015 — Four-Hour R4/R5 Research Loop
 
@@ -424,6 +476,27 @@ The repository is the only source of operating state; chat history, Codex memori
 native goals, and scheduled wakeups are replaceable controllers.
 
 ## Fresh-Agent Resume
+
+### Checkout identity
+
+The live control plane is on remote branch
+`origin/codex/packing-4h-research-loop-2026-08-25`; the latest durable preregistration
+checkpoint at this handoff is `e26fae9`. A fresh clone must fetch and switch to that
+branch before following this section:
+
+```shell
+git fetch origin codex/packing-4h-research-loop-2026-08-25
+git switch codex/packing-4h-research-loop-2026-08-25 2>/dev/null || \
+  git switch --track -c codex/packing-4h-research-loop-2026-08-25 \
+  origin/codex/packing-4h-research-loop-2026-08-25
+git pull --ff-only
+git rev-parse --verify HEAD
+```
+
+If this branch is already checked out in another worktree, create a worktree from the
+remote branch instead of forcing or detaching that checkout.
+The session file and its upstream commit supersede the checkpoint hash after each
+documented push.
 
 An agent joining with only this checkout should read, in order:
 
@@ -440,13 +513,27 @@ An agent joining with only this checkout should read, in order:
 From the repository root, verify the handoff before writing:
 
 ```shell
+tbd prime
+date -Iseconds
+git status --short --branch
 tbd show think-1s0h --max-lines 260
 uv run --directory explorations/packing --frozen packing-ledger check
 uv run --directory explorations/packing --frozen --all-extras --group dev \
   packing-validate --fast --jobs 2 --inner-jobs 1
+uv run --directory explorations/packing --frozen packing-campaign status
 ```
 
 Continue only the active phase.
+This handoff is in wall-clock cycle slot 2 and workflow phase 3; an early
+evidence-checkpoint switch accounts for the different numbers.
+Before writing, compare the current time with the phase deadline `17:06:30-07:00`,
+finalization start `19:38:26-07:00`, and session deadline `20:08:26-07:00` using the
+four-state resume table in the
+[agent-session runbook](README.md#starting-a-portable-four-hour-session).
+An expired phase is terminalized from retained evidence before a successor opens.
+At or after finalization start, no new research opens; at or after the session deadline,
+only terminal records, validation, commit, push, bead sync, and the next handoff remain.
+
 The coordinator owns the session file, hypothesis and experiment records, agenda,
 ledger, defects, beads, commits, and verdicts.
 Delegates receive disjoint code or read-only scopes and may not run strict or deep
@@ -458,6 +545,21 @@ The optional app heartbeat is named `Square packing four-hour loop` and carries 
 it is not part of the scientific state and may be absent.
 An agent resuming without it follows the active phase and clocks above, preserves one
 checkpoint per slice, and starts finalization at the recorded absolute time.
+
+### Session 015 checkpoint and handoff
+
+Run the active phase’s `validation_command`, then use the generic
+[portable checkpoint sequence](README.md#starting-a-portable-four-hour-session).
+For this phase, validate exp-041 and the session explicitly, render and check the
+ledger, run `devtools.check_synopsis`, inspect the diff and status, and stage only
+reviewed packing files.
+After pushing, update the checkpoint hash above, add the retained outcome and exact next
+action to `think-1s0h`, and run `tbd sync`.
+
+The heartbeat, native goal, chat history, and any local Codex memory are never evidence
+that these steps ran.
+The pushed commit, validated repository artifacts, retained raw result when one exists,
+and synced bead note are the evidence.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

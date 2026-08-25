@@ -70,11 +70,16 @@ uv run --directory explorations/packing --frozen packing-campaign status
 ```
 
 Create the next sequential `session-NNN` artifact before target work starts.
-Record one absolute 240-minute deadline, at most eight phases, ten minutes for
-orientation, a twenty-minute evidence checkpoint, thirty minutes per work phase, and at
-least fifteen minutes for finalization.
-The last phase is `clock_role: finalization`; it reconciles artifacts, generated views,
-defects, beads, commits, and the next action rather than opening new research.
+Record one absolute 240-minute deadline, at most eight 30-minute wall-clock cycle slots,
+ten minutes for orientation, a twenty-minute evidence checkpoint, thirty minutes per
+work phase, and at least fifteen minutes for finalization.
+Cycle slots account for wall time; workflow phases account for material changes of
+purpose or focus.
+An early evidence-triggered phase switch does not create more wall time
+or consume an extra cycle slot.
+Record the current slot and phase together in the session body whenever their numbers
+differ. The last phase is `clock_role: finalization`; it reconciles artifacts, generated
+views, defects, beads, commits, and the next action rather than opening new research.
 
 For each work phase:
 
@@ -87,6 +92,42 @@ For each work phase:
    A renewal needs new retained evidence and a new phase contract.
 4. Update the owning scientific or engineering artifact, render and check generated
    views, and record every negative, invalid, blocked, or partial result.
+
+On resume, compare the current offset-aware time with the active phase deadline,
+finalization start, and session deadline before writing:
+
+| Clock state | Required action |
+| --- | --- |
+| Before the active phase deadline | Continue only its frozen objective and guards. |
+| At or after the active phase deadline, before finalization | Terminalize that phase from retained evidence before opening a successor; never extend its lease or criterion retroactively. |
+| At or after finalization start, before the session deadline | Open or continue only a `finalization` phase; do not start new research. |
+| At or after the session deadline | Terminalize the session from existing evidence, validate, commit, push, sync the bead, and leave an exact next action; do not perform more target work. |
+
+Each session’s fresh-agent section records its live branch and durable checkpoint.
+A portable checkpoint runs the session’s exact focused validation and then, from the
+repository root, uses this sequence:
+
+```shell
+uvx --from flowmark-rs==0.3.2 flowmark --auto <edited-markdown-files>
+uv run --directory explorations/packing --frozen softschema validate \
+  <edited-session-hypothesis-and-experiment-files>
+uv run --directory explorations/packing --frozen packing-ledger render
+uv run --directory explorations/packing --frozen packing-ledger check
+uv run --directory explorations/packing --frozen python -m devtools.check_synopsis
+git diff --check
+git status --short --branch
+git add <explicit-reviewed-files>
+git commit -m "<conventional-commit-message>"
+git push
+tbd note <owning-bead> "<checkpoint evidence and exact next action>"
+tbd sync
+```
+
+Do not use `git add -A` in a shared checkout.
+The coordinator substitutes the phase’s recorded validation command for
+`<focused-validation>` before the sequence and inspects every staged path before
+committing. A session checkpoint is durable only when its commit is on the recorded
+remote branch and the session’s next action identifies any remaining work.
 
 Do not infer that the generic numerical runner is admissible because
 `packing-campaign preflight` passes.
