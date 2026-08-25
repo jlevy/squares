@@ -597,10 +597,32 @@ session:
       the golden, or a tolerance/value update in this phase.
     fallback: >-
       Keep D-203 and think-nr5w open with the exact committed control or seed-level blocker.
-    outcome: null
-    evidence: []
+    outcome: >-
+      The one authorized seed-0 replay now converges at the proved side 2 with every
+      fixed-point evaluation settled and an independently valid packing; phase closure
+      awaits replacement cross-platform CI after D-268's test-format failure.
+    evidence:
+    - >-
+      The seed-0 quench returned side 2.0, converged true, 4,293 LP solves, 38 angle
+      steps, one cell change, and 3,692 of 3,692 fixed-point evaluations settled in
+      3.490671042 wall-seconds.
+    - >-
+      The independent float-sign verifier accepted all four squares, sixteen container
+      contacts, and all six zero-gap square pairs at the unchanged 1e-10 screen.
+    - >-
+      Committed review found no remaining P0/P1 issue and limits the conclusion to this
+      seed: no other seed, full golden, pool-width, or unattended-health claim follows.
+    - >-
+      PR 29's Linux and macOS jobs completed every substantive validation step but both
+      failed `ruff format --check` on three test-only line wraps; D-268 records the
+      delegated mechanical repair.
+    - >-
+      After the repair, the complete 31-step local gate passed in 99.46 wall-seconds,
+      including all 60 behavioral tests and all 62 mutation controls.
     stop_reason: null
-    next_action: Commit and push phase 10 before executing the single seed-0 replay.
+    next_action: >-
+      Push the D-268 checkpoint and require green Linux plus macOS CI before closing
+      this phase or D-203.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -1436,8 +1458,75 @@ session:
     fallback: Block acceptance with the smallest failing invariant.
     write_scope: [read-only]
     excluded_commands: [git, tbd, production edits, seed, full golden]
+  - task: Inspect the committed PR checkpoint and every review surface.
+    operator: /root/n4_ipm_fallback_tests
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Found both PR 29 jobs red solely on Python formatting, no review comments or
+      reviews, a mergeable non-draft head, and a stale checkpoint description.
+    evidence:
+    - Run 32834138152 failed `ruff format --check` on tests/test_research_contracts.py.
+    files: []
+    checks: [gh PR state, checks, issue comments, review comments, and reviews.]
+    uncertainty: GitHub's merge-state label was unstable only because required checks were red.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Repair formatting, rerun the complete gate, and refresh the PR body.
+    phase: 11
+  - task: Audit D-203, D-225, synopsis wording, and the frozen successor slice.
+    operator: /root/n4_ipm_fallback_review
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Confirmed that the seed receipt can close only D-203 after green CI, that D-225 is
+      a fixed decision-boundary defect rather than a live health owner, and that order 6
+      pair-test metering is next.
+    evidence:
+    - Exact anchors and narrow replacement wording were returned without repository writes.
+    files: []
+    checks: [Read-only defect, synopsis, session, and frozen-portfolio review.]
+    uncertainty: No full golden or additional producer path was reviewed.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preserve the narrow seed claim and route full strict health separately.
+    phase: 11
+  - task: Reconcile D-203 and successor bead ownership against the seed receipt.
+    operator: /root/n4_ipm_fallback_impl
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Confirmed think-nr5w may close only with the seed receipt, its parent stays open,
+      think-l1us stays closed, and think-b4jc is the dependency-ready order-6 successor.
+    evidence:
+    - Bead acceptance text was compared directly with phase 11 and the frozen portfolio.
+    files: []
+    checks: [Read-only tbd show and session reconciliation.]
+    uncertainty: Parent pool-width and n=10 acceptance remain unmeasured in this phase.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Close only think-nr5w after portable green evidence.
+    phase: 11
+  - task: Apply the mechanical Python formatting repair caught by CI.
+    operator: /root/n4_ipm_fallback_tests
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Reformatted only tests/test_research_contracts.py; the file format check and all
+      ten focused fallback controls pass.
+    evidence:
+    - Ruff reformatted one file in 0.125 end-to-end seconds.
+    - Ten focused tests passed in 0.51 test seconds and 0.913 end-to-end seconds.
+    files: [tests/test_research_contracts.py]
+    checks: [Ruff format check and focused pytest.]
+    uncertainty: The complete local and cross-platform gates still need to run.
+    elapsed_seconds: 1.038
+    elapsed_quality: platform_measured
+    next_action: Record D-268 and run the complete validation surface before push.
+    phase: 11
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+  - campaign/ledger.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
@@ -1452,6 +1541,7 @@ session:
   - src/sqpack/research/quench.py
   - defects.yaml
   - defects.md
+  - devtools/controls.yaml
   - SYNOPSIS.md
   - PR 29
   checks:
@@ -1512,10 +1602,21 @@ session:
   - >-
     The first phase-10 mutation run caught D-267's stale soundness-denominator diagnostic;
     its corrected 70-defect expectation and all 62 controls pass before commit.
+  - >-
+    The one phase-11 seed-0 replay converged at side 2.0 in 3.490671042 seconds with
+    4,293 LP solves and 3,692 of 3,692 fixed-point evaluations settled; the independent
+    verifier accepted all four squares and six zero-gap pairs at 1e-10.
+  - >-
+    PR 29 run 32834138152 completed every substantive Linux and macOS check but failed
+    the Python formatting floor; D-268 and think-lcor preserve the delegated repair.
+  - >-
+    The replacement tree passes all 31 complete local validation steps in 99.46
+    wall-seconds, including 60 behavioral tests, 62 mutation controls, 269 synchronized
+    defects, and the campaign ledger.
   stop_reason: null
   next_action: >-
-    Commit and push the terminal phase-10 fallback, then independently review that
-    checkpoint and run only n=4 seed 0 under phase 11.
+    Push the D-268 repair checkpoint and require green Linux plus macOS CI before
+    closing phase 11 and D-203.
 ---
 ## Session Boundary
 

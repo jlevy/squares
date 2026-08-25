@@ -2,7 +2,7 @@
 
 # Defect log
 
-267 defects recorded across the packing toolchain.
+270 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 17 | a cell of the sweep whose answer is known in advance |
-| `review` | 170 | a human or agent reading the work against a checklist |
+| `review` | 171 | a human or agent reading the work against a checklist |
 | `anomaly` | 11 | a result that made no sense, chased down |
 | `inspection` | 30 | reading the code or the design with intent |
 | `drift_check` | 15 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
-| `gate` | 21 | the automated test suite |
+| `gate` | 23 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 21 of 267, and none of the 70 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 23 of 270, and none of the 70 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,8 +34,8 @@ The line worth reading twice: **the automated gate caught 21 of 267, and none of
 | engine | 9 |
 | quench | 21 |
 | verifier | 4 |
-| record | 76 |
-| tooling | 74 |
+| record | 78 |
+| tooling | 75 |
 | docs | 83 |
 
 ## By kind
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 21 of 267, and none of
 | --- | ---: |
 | soundness | 70 |
 | validity | 68 |
-| bookkeeping | 93 |
+| bookkeeping | 96 |
 | robustness | 28 |
 | performance | 8 |
 
@@ -452,3 +452,6 @@ This is the actionable list.
 | [D-265](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | flattering | `gate` | medium | fixed | Two delegation deadlines exceeded their declared budgets |
 | [D-266](src/sqpack/research/quench.py) | 2026-08-25 | quench | soundness | conservative | `review` | high | fixed | A numerical fallback disagreement was promoted to infeasibility |
 | [D-267](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The soundness mutation diagnostic kept the old denominator |
+| [D-268](tests/test_research_contracts.py) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Focused fallback checks omitted the Python format gate |
+| [D-269](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | A session delegation used an undeclared timing-quality value |
+| [D-270](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | low | fixed | Phase 11 retained a next action that its own evidence had completed |

@@ -246,8 +246,10 @@ def test_solve_cell_status4_uses_one_ipm_fallback(monkeypatch: pytest.MonkeyPatc
         calls.append(
             (method, obj.copy(), A_ub.copy(), b_ub.copy(), list(bounds), dict(options))
         )
-        return _result(status=4, success=False) if method == "highs" else _result(
-            status=0, success=True, x=solution
+        return (
+            _result(status=4, success=False)
+            if method == "highs"
+            else _result(status=0, success=True, x=solution)
         )
 
     monkeypatch.setattr(quench, "linprog", scripted)
@@ -306,8 +308,10 @@ def test_solve_cell_status4_ipm_status2_stays_solver_failure(
 
     def scripted(*_args: object, method: str, **_kwargs: object) -> OptimizeResult:
         calls.append(method)
-        return _result(status=4, success=False) if method == "highs" else _result(
-            status=2, success=False
+        return (
+            _result(status=4, success=False)
+            if method == "highs"
+            else _result(status=2, success=False)
         )
 
     monkeypatch.setattr(quench, "linprog", scripted)
@@ -347,8 +351,7 @@ def test_solve_cell_non_status4_primary_failure_never_falls_back(
     assert result.outcome == outcome
     assert calls == ["highs"]
     assert [
-        (receipt.method, receipt.status, receipt.success)
-        for receipt in result.attempt_receipts
+        (receipt.method, receipt.status, receipt.success) for receipt in result.attempt_receipts
     ] == [
         ("highs", status, False),
     ]

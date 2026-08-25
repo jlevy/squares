@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 267
+count: 270
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -6892,3 +6892,77 @@ defects:
   recurrence_of: D-255
   bead: think-ut5r
   recorded_in: devtools/controls.yaml
+- id: D-268
+  title: Focused fallback checks omitted the Python format gate
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one committed D-203 fallback checkpoint
+  severity: medium
+  status: fixed
+  what: >-
+    The D-203 fallback delta passed focused pytest, Ruff lint, BasedPyright, the numerical
+    regressions, and all mutation controls locally, but its pre-push checklist did not run
+    `ruff format --check`. Three test-only line wraps therefore reached commit 0fcc4bf
+    unformatted.
+  consequence: >-
+    Both Linux validation and macOS portability completed every substantive check but
+    reported a red PR gate at the Python formatting step, delaying the portable
+    checkpoint and obscuring the successful seed-level repair behind a mechanical error.
+  fix: >-
+    Delegate the mechanical formatter repair, require the complete local validation
+    surface rather than the focused lint subset before the replacement push, and retain
+    the failed CI receipt in session-010.
+  regression: >-
+    `ruff format --check tests/test_research_contracts.py` and all ten focused fallback
+    controls pass before the complete cross-platform gate is re-requested
+  bead: think-lcor
+  recorded_in: tests/test_research_contracts.py
+- id: D-269
+  title: A session delegation used an undeclared timing-quality value
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one uncommitted phase-11 reconciliation
+  severity: low
+  status: fixed
+  what: >-
+    The first phase-11 record labelled a delegated formatter duration
+    `measured_tool_wall`, but the enforced session contract permits only
+    `platform_measured`, `operator_reported_approximate`, `unavailable`, or null.
+  consequence: >-
+    The campaign ledger correctly refused the session checkpoint, so the seed and CI
+    receipts could not become a valid portable record until the label was reconciled.
+  fix: >-
+    Use the declared `platform_measured` value for the end-to-end tool durations and
+    rerun the campaign-ledger validator before the complete gate.
+  regression: packing-ledger check validates every terminal delegation timing-quality value
+  bead: think-m01u
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
+- id: D-270
+  title: Phase 11 retained a next action that its own evidence had completed
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: one uncommitted phase-11 reconciliation
+  severity: low
+  status: fixed
+  what: >-
+    The session recorded the replacement tree's complete 99.46-second local gate as
+    passed but still told the next agent to run that gate before pushing.
+  consequence: >-
+    A literal handoff would repeat an already-complete two-minute checkpoint instead of
+    advancing to the outstanding portable CI evidence, adding delay and making the
+    durable next action contradict the adjacent receipt.
+  fix: >-
+    Replace both stale next-action summaries with the actual remaining action: push the
+    repair checkpoint and require green Linux plus macOS CI before phase closure.
+  regression: precommit review compares every active phase next action with its latest evidence
+  bead: think-ygpr
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
