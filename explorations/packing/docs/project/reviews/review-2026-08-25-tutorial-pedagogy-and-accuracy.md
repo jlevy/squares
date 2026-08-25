@@ -12,13 +12,17 @@ proposal and leaves the wording open.
 [`SYNOPSIS.md`](../../../SYNOPSIS.md) remains authoritative for every result, status,
 count, and verdict, and nothing here proposes moving status prose into the tutorial.
 
-**Basis:** re-verified after merging the deterministic SVG rendering toolkit.
-That merge added four figures to the tutorial — Trump’s `n = 11` packing, the `n = 29`
-Kingbird reconstruction, the Göbel `n = 10` source-return comparison, and the exact
-`n = 3` quotient map — and changed no prose.
-All four image paths resolve.
-Every finding below was re-checked against the merged text; only TR-1 changed, and it
-got worse.
+**Basis:** re-verified twice — after merging the deterministic SVG rendering toolkit,
+and again after merging the frontier-assurance and witness branch of
+[#31](https://github.com/jlevy/thinking-scratchpad/pull/31). The SVG merge added four
+figures and changed no prose; all four image paths resolve.
+The #31 merge rewrote §5, §6, §8, and §9, replacing the three evidence tiers with an
+assurance/method/precision split.
+Every finding below was re-checked against the merged text.
+**TR-2 is resolved** by #31 and is retained struck through rather than deleted, so the
+record shows what the branch fixed.
+TR-1 and TR-11 are revised.
+TR-15 is new, raised by the migration itself.
 
 The tutorial declares its audience as “anyone arriving at this directory without a
 background in the problem.”
@@ -63,49 +67,55 @@ a rigidity proof, and the lower-bound repair is correctly not attributed to Stro
 
 ## Accuracy
 
-### TR-1. The gate has thirty-two steps, and three documents disagree
+### TR-1. The gate has thirty-two steps, and every document says thirty-one
 
-§6 says “a thirty-step gate all exist, and the whole gate runs in one to two minutes.”
+§6 now says “a thirty-one-step gate all exist.”
+#31 moved this line from “thirty”, so it was touched — it just landed on the synopsis’s
+already-stale value rather than the code’s.
 
 The `STEPS` tuple in `src/sqpack/cli/validate.py` — which
 [`conventions.md`](../../../conventions.md) §10 names as “the only registration point” —
-now holds **thirty-two** entries.
-The SVG rendering merge added `deterministic SVG rendering` as step 7 without updating
-either prose count:
+holds **thirty-two** entries.
+The `deterministic SVG rendering` step arrived with the SVG toolkit and no prose count
+moved with it:
 
 | Source | Says |
 | --- | ---: |
-| `TUTORIAL.md` §6 | thirty |
+| `TUTORIAL.md` §6 | thirty-one |
 | [`SYNOPSIS.md`](../../../SYNOPSIS.md) (“Reading the gate”) | thirty-one |
 | [`conventions.md`](../../../conventions.md) §10 | thirty-one |
 | `STEPS` in `src/sqpack/cli/validate.py` | **thirty-two** |
 
-The tutorial is two low; the synopsis and conventions are each one low, and that half is
-outside this review’s scope — it is upstream drift introduced by the merge, not a
-tutorial finding, and is filed separately.
-The timing claim is unaffected.
+Now that all three agree with each other and disagree with the code, the count reads as
+settled and is not. `SYNOPSIS.md`’s “all 31 normal-gate steps in 103.91 wall-seconds” is
+a different kind of statement — a recorded checkpoint measurement — and should be left
+alone rather than edited to 32.
 
 This is the argument for the tutorial not carrying the number at all.
-A count that three documents restate is a count that will drift again, and the
-document’s own preamble says it does not own values of this kind.
-Note that the gate has a `synopsis agrees with the artifacts` step, and it did not catch
-this — consistent with the repository’s own finding that no soundness defect in the log
-was caught by the gate.
+A count restated in three documents is a count that will drift again, and the document’s
+own preamble says it does not own values of this kind.
+The gate has a `synopsis agrees with the artifacts` step and it did not catch this,
+consistent with the repository’s own finding that no soundness defect in the log was
+caught by the gate.
 
-### TR-2. “None recovered from a search output” is superseded
+Raised on
+[#31](https://github.com/jlevy/thinking-scratchpad/pull/31#issuecomment-5407514755) as
+item 1, and tracked for the status documents as `think-4b9m`.
 
-§6 says every exact configuration in the repository “was authored from published data or
-derived analytically, none recovered from a search output.”
+### TR-2. ~~“None recovered from a search output” is superseded~~ — resolved by #31
 
-[`SYNOPSIS.md`](../../../SYNOPSIS.md) now says `exact` **almost always** means checking
-something already known exactly, and names the exception: exp-033’s pair of exact
-`n = 5` endpoints, recovered from retained *search* poses at their shared nonoptimal
-side, through a dedicated single-instance checker rather than a general tool.
+**Resolved.** The sentence is gone.
+§6 previously said every exact configuration “was authored from published data or
+derived analytically, none recovered from a search output”, which exp-033 had already
+falsified.
 
-The paragraph’s headline claim — that there is no general executable path from a
-numerical candidate to an exact result — is unaffected and remains correct.
-The absolute sentence beneath it is not, and it is the sentence a careful reader will
-quote back.
+#31 replaced that whole paragraph with **“Reported-value recovery remains unbuilt and
+may be mathematically contingent,”** which states the real limit — the tool cannot infer
+a contact model, certify existence near a contact solution, or recover a general
+algebraic witness at the reported value — without the absolute that was wrong.
+It also names the typed `checker-not-built` gap the command returns.
+
+Retained here rather than deleted so the record shows what the branch fixed.
 
 ### TR-3. §4 credits the wrong baseline column
 
@@ -397,39 +407,26 @@ budget. The tension is real and already resolved in the record:
 for merge-tolerance artifacts.
 Saying so turns an apparent contradiction into the point being made.
 
-### TR-11. Precision is argued but never dimensioned
+### TR-11. Precision is now named but still not dimensioned
 
-§5 argues that exactness is not optional and describes the `ℚ(α)` machinery, but never
-says what precision to work at, how the regimes relate to hardware, or what each costs.
-§5’s evidence-tier table names `f64_screen`, `polished`, and `exact` without saying what
-arithmetic sits behind each.
+**Substantially addressed by #31, and the remainder is narrower.**
 
-**Four regimes, not two.** The document reads as float versus exact.
-There are four, and the third is the one that goes missing:
+The original finding was that §5 argued for exactness without saying what precision to
+work at, how the regimes relate to hardware, or what each costs, and that it collapsed
+arbitrary-precision floating point into “exact”.
+#31’s **Assurance, method, and precision** section fixes the classification half, and
+does it better than this review proposed: assurance (`reported`, `numerically-checked`,
+`verified`) is separated from method (`numerical-f64`, `numerical-multiprecision`,
+`interval-certified`, `exact-algebraic`) and from actual precision and tolerance, with
+the decisive sentence stated outright — **“A numerical result remains numerical at
+tolerance `1e-100`.”** The `numerical-multiprecision` gloss adds that it “must state the
+actual digits or bits and tolerance; it does not mean unlimited precision.”
 
-1. Hardware `f64`, machine epsilon `2.2e-16` — screening and search.
-2. `f64` with an error bound, or outward-rounded intervals — proves strict separation
-   when the enclosure clears zero, never equality.
-   §5 covers this well.
-3. **Arbitrary-precision floating point.** §5 already relies on it — high-precision
-   Newton before integer relation, and `cases.kingbird29.verify_svg` is a 160-digit
-   reconstruction — but never names it as a distinct regime, and so never says the thing
-   that matters: more digits is still not exactness.
-   §5’s own “a degree-8 relation holding to 500 digits is overwhelming evidence and zero
-   proof” is exactly this point, made without the category that would generalise it.
-4. Exact `ℚ(α)`, where equality is decidable, and the only tier permitted to say
-   *record*.
+Three parts of the finding survive.
 
-**The architectural fact that makes exactness affordable is missing.** Every quantity
-the separating-axis test evaluates is a polynomial in the configuration variables — four
-candidate axes, eight dot products per axis, no divisions and no square roots — so one
-implementation is correct over `f64`, over intervals, and over an exact field, with only
-the scalar type changing.
-That is why `verify_packing(..., sign=exact_sign)` and `sign=float_sign(1e-9)` share one
-predicate. §6 calls the verifier “generic over its scalar type” without ever saying why
-that genericity is available.
-
-**The costs are measured and absent.**
+**The costs are still absent.** The document says which arithmetic decides what, and
+never what any of it costs, so a reader cannot answer “what precision should I work at”
+for their own task:
 
 | Operation | Cost |
 | --- | --- |
@@ -445,25 +442,35 @@ Exactness is free where it is used — 0.35 s against a model turn of seconds, s
 optimising it is optimising noise.
 And the cost is not uniform: the exact-to-float ratio grows with algebraic degree, 177×
 at degree 8 and 578× at degree 62, so exact arithmetic is worst exactly where the
-problem is hardest. That is the standing constraint against ever putting it inside a
-search loop. The three latency tiers from the infrastructure report — agent (1–10 s,
-genuinely free), interactive (10 ms – 1 s), inner loop (10 ns – 1 µs executed
-`1e9`–`1e12` times) — are the frame that makes this a decision rather than a table.
+problem is hardest. That is the standing constraint against putting it inside a search
+loop. The three latency tiers from the infrastructure report — agent (1–10 s, genuinely
+free), interactive (10 ms – 1 s), inner loop (10 ns – 1 µs executed `1e9`–`1e12` times)
+— are the frame that makes this a decision rather than a table.
 
-**The `1e-11` floor invites a wrong reading.** §5 and §8 give the `polished` tier “a
-floor of about `1e-11` in the side” with no cause.
+**The `1e-11` floor still has no cause.** §8’s open item 5, now “What a floating LP
+result means below `1e-11`”, says only that “the solver has a noise floor there”.
 A reader who knows `f64` will assume machine epsilon and be wrong by five orders.
 It is the LP solver’s feasibility tolerance, pinned at HiGHS’s strictest `1e-10`
 ([D-021](../../../defects.md)); at the default `1e-7` the solver returned a packing
 violating its own separation constraint by `9.876e-08`, and so a side below Trump’s
 ([D-014](../../../defects.md)). The quench nonetheless reaches `1.33e-15` at `n = 10`,
-so the floor is what the tier *guarantees*, not what runs achieve — which §8 says
-correctly and §5 does not.
+so the floor is what the method *guarantees*, not what runs achieve.
+
+**One architectural fact went missing rather than getting explained.** Every quantity
+the separating-axis test evaluates is a polynomial in the configuration variables — four
+candidate axes, eight dot products per axis, no divisions and no square roots — so one
+implementation is correct over `f64`, over intervals, and over an exact field, with only
+the scalar type changing.
+§6 used to call the verifier “generic over its scalar type” without saying why that was
+available; #31 replaced the phrase with “rational and algebraic separating-axis
+verification”, so the claim is gone and the reason still is not there.
+It is worth one sentence, because it is why “work exactly” is an affordable policy
+rather than a rewrite.
 
 **And one open item is a consequence, not a separate complaint.** §8’s item 6 — the same
 seed reaching a different endpoint under a different toolchain — follows from operating
-a degenerate linear program in `f64`. It reads as unrelated engineering trouble where it
-is placed.
+a degenerate linear program in `f64`, and reads as unrelated engineering trouble where
+it is placed.
 
 ### TR-12. How many polynomial roots a solution needs is never addressed
 
@@ -610,13 +617,53 @@ split `atlas` from `census` while keeping the genuine synonym pairs
 their write-this-form rule; and say what the card does not cover, since symbols belong
 in the notation table from TR-8 and the synopsis remains complete.
 
+### TR-15. The assurance vocabulary is adopted but not yet self-consistent
+
+#31 migrated the tutorial off `f64_screen` / `polished` / `exact` and onto the
+assurance/method/precision split, and the migration is complete — no tier language
+survives anywhere in the document.
+Three token-level inconsistencies came with it.
+All three are also raised on
+[#31](https://github.com/jlevy/thinking-scratchpad/pull/31#issuecomment-5407514755),
+where they originated; they are recorded here because they are `TUTORIAL.md` edits
+whichever branch makes them.
+
+The canonical values are the schema enums in `witnesses/witness.schema.yaml`: assurance
+is `reported | numerically-checked | verified`, and method is
+`numerical-f64 | numerical-multiprecision | interval-certified | exact-algebraic`.
+
+- **§9’s card drops the hyphen.** The vocabulary card renders the middle assurance value
+  as `` `numerically checked` ``, while §5’s table and the schema both use
+  `numerically-checked`. The two neighbours in the same cell are exact enum values, so
+  the middle one reads as one too.
+- **§8 mixes registers inside one table.** The corner row is annotated
+  `numerically checked (`numerical-f64`)` and the row directly below it is
+  `numerically checked (floating LP)`. `floating LP` is not one of the four method
+  values.
+- **Two method tokens are used before being introduced.** §5 tokenizes only
+  `numerical-f64` and `numerical-multiprecision`, then describes the formal side in
+  prose — “exact algebraic replay, rigorous interval certification, and scoped proof”.
+  §8 then uses `` `exact-algebraic` `` five times as a token, and `interval-certified`
+  exists in the schema without appearing at all.
+  Listing all four values in §5 makes the table self-contained and removes a fresh
+  instance of the TR-8 problem.
+
+Two things I checked here and withdrew, recorded so they are not re-raised: §6’s “The
+retained Schadt `n = 29` decimal pose is numerically checked at 300 digits and tolerance
+`1e-100`” is correct — `E-n029-schadt-numerical` in `frontier/evidence.yaml` carries
+`assurance: numerically-checked`, `performed_by: repository`, and
+`replay_status: passed` at exactly those parameters, distinct from the source’s
+`E-n029-schadt-report`. And the three `n = 29` side values that look divergent across
+`frontier/n-029.md` and the witness are three different objects, the last deliberately
+weaker.
+
 ## Bead Map
 
 The epic is `think-ysoj`. Every finding above lands on exactly one bead.
 
 | Bead | Covers | Kind |
 | --- | --- | --- |
-| `think-czye` | TR-1 … TR-7 | bug |
+| `think-czye` | TR-1, TR-3 … TR-7 (TR-2 resolved by #31) | bug |
 | `think-8hdt` | TR-8 | task |
 | `think-ejgd` | TR-9 | task, after `think-8hdt` |
 | `think-ap15` | TR-10 | task |
@@ -624,6 +671,7 @@ The epic is `think-ysoj`. Every finding above lands on exactly one bead.
 | `think-g5o3` | TR-12 | task, after `think-8hdt` |
 | `think-i3wv` | TR-13 | task, after `think-ejgd` and `think-i22v` |
 | `think-sofa` | TR-14 | task, after `think-8hdt` |
+| `think-po3b` | TR-15 | bug, after `think-8hdt` |
 
 The dependencies are notation-first on purpose: TR-9, TR-12, and TR-14 all need terms or
 symbols that TR-8 fixes, and TR-13’s reference groups follow from what TR-9 and TR-11
