@@ -5,7 +5,7 @@ title: "Run session-011: continue the eight-hour portfolio after the cycle cap"
 kind: epic
 status: in_progress
 priority: 0
-version: 14
+version: 15
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: codex-root
 labels: []
@@ -21,8 +21,9 @@ child_order_hints:
   - is-01m0wf5p870apvjey5dq3z1q7a
   - is-01m0whrrq5zf4jgb25zxfrxa63
   - is-01m0wjyxhrzxbq2a9fz33795kt
+  - is-01m0wmxr6ffn9vgxfm1b3v0rr6
 created_at: 2026-08-25T11:01:28.432Z
-updated_at: 2026-08-25T13:59:18.222Z
+updated_at: 2026-08-25T14:24:25.806Z
 ---
 Continue the original session-010 wall-clock research objective from the final green PR 29 head without weakening its terminal record. Use a wall-time-dominant bounded contract that cannot exhaust merely because successful slices finish early. First frozen cell is order 7 under think-b4jc: verify seeded-output equivalence, independently recompute pair-test totals, and measure unloaded-host overhead; reject on any drift, unexplained count, or competing load. Then preserve the first unmetered adapter and continue the diverse frozen portfolio with 20/30-minute evidence stops, frequent pushed checkpoints, defect logging, bead sync, PR review monitoring, and retrospective agent-loop statistics.
 
