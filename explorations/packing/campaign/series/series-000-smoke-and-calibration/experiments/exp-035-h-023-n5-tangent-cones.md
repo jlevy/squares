@@ -1,7 +1,7 @@
 ---
 title: exp-035 — exact n = 5 full-angle tangent cones
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,38 +10,37 @@ experiment:
   series: series-000
   title: Test the complete active first-order cones along the exp-033 face
   date: '2026-08-24'
-  hypotheses: [H-023]
+  hypotheses:
+  - H-023
   tier: exploratory
   subject:
     label: exact per-stratum full-angle active systems along the exp-033 face
     engine: n = 5 tangent-cone checker 0.2.0
     engine_commit: aa63cf4
-    precision: exact
+    assurance: verified
+    method: exact-algebraic
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 5, role: target}
+  instance:
+    axis: n
+    point: 5
+    role: target
   method:
-    control: >-
-      exact pose-derived wall and SAT inventory plus six source, branch, row,
-      coefficient, scope, and witness mutations
-    candidate: >-
-      one normalized non-sheet direction checked against every active row at the two
-      endpoints and one exact interior point
+    control: exact pose-derived wall and SAT inventory plus six source, branch, row, coefficient,
+      scope, and witness mutations
+    candidate: one normalized non-sheet direction checked against every active row at the two endpoints
+      and one exact interior point
     runs_per_condition: 1
     interleaved: false
     operator: openai-codex
     commit: aa63cf4
     dirty: false
     entry_point: explorations/packing/tools/check_n5_tangent_cones.py
-    command: >-
-      timeout 30 uv run --frozen --quiet python tools/check_n5_tangent_cones.py
-      --record campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
-      && timeout 30 uv run --frozen --quiet python tools/check_n5_tangent_cones.py
-      --replay campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
-    budget: >-
-      one 30-minute exact-geometry slice; separate 30-second generation and replay caps;
-      stop on any active-inventory drift, missing owner axis, missing tied support row,
-      stale stratum coefficient, invalid witness, surviving mutation, or replay drift
+    command: timeout 30 uv run --frozen --quiet python tools/check_n5_tangent_cones.py --record campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
+      && timeout 30 uv run --frozen --quiet python tools/check_n5_tangent_cones.py --replay campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
+    budget: one 30-minute exact-geometry slice; separate 30-second generation and replay caps; stop
+      on any active-inventory drift, missing owner axis, missing tied support row, stale stratum coefficient,
+      invalid witness, surviving mutation, or replay drift
     record: campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
   effort:
     timebox: 30m exact-geometry slice; 30s generation and 30s replay caps
@@ -50,25 +49,20 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: >-
-      At the two endpoints and an exact interior point of the exp-033 face, does the
-      complete active full-angle linearization admit a normalized direction outside
-      exp-034's angle-and-slide sheet?
+    question: At the two endpoints and an exact interior point of the exp-033 face, does the complete
+      active full-angle linearization admit a normalized direction outside exp-034's angle-and-slide
+      sheet?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      exact pose-derived inventories and matrices, exact row evaluation of three
-      non-sheet directions, deterministic record regeneration, and six controls
+    checked_by: exact pose-derived inventories and matrices, exact row evaluation of three non-sheet
+      directions, deterministic record regeneration, and six controls
   verdict:
     decision: accepted
-    primary_criterion: >-
-      exact per-stratum wall and zero-axis inventories, both pair (3,4) owner-axis
-      branches with both tied support rows in each, one exact non-sheet direction
-      satisfying every retained active inequality, independent regeneration, and all
-      six declared controls
-    reason: >-
-      Both owner-axis systems and every tied support row replay at all three strata; the
-      exact non-sheet direction satisfies every active row and all controls reject.
+    primary_criterion: exact per-stratum wall and zero-axis inventories, both pair (3,4) owner-axis
+      branches with both tied support rows in each, one exact non-sheet direction satisfying every
+      retained active inequality, independent regeneration, and all six declared controls
+    reason: Both owner-axis systems and every tied support row replay at all three strata; the exact
+      non-sheet direction satisfies every active row and all controls reject.
     commit: 26411ae
 ---
 # exp-035 — exact n = 5 full-angle tangent cones

@@ -89,3 +89,9 @@ explorations/packing/campaign/ledger.md
 # The gate now enforces this list rather than trusting it: `packing-validate` fails if a file
 # carrying the generated-by banner is not named here.
 explorations/packing/defects.md
+
+# STATUS.md is the complete reader view generated from the validated case and evidence
+# records by devtools.render_research_tables. `packing-validate` compares it byte-for-byte
+# with a fresh render; allowing Flowmark to rewrite its 100-row table would create two
+# competing owners for the same file.
+explorations/packing/frontier/STATUS.md

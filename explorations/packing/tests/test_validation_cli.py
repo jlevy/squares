@@ -165,4 +165,5 @@ def test_frontier_contract_accepts_the_declared_schema_metadata(
 
     assert status == 0
     assert stderr == ""
-    assert "100 artifacts, n = 1..100, 35 proved, 65 open" in stdout
+    assert "100 artifacts, n = 1..100; formal lane: 35 proved, 65 open" in stdout
+    assert "reported lane: 35 proved, 65 open" in stdout

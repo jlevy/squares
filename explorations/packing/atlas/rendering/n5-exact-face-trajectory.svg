@@ -3,9 +3,13 @@
   <title id="figure-title">Square packing</title>
   <desc id="figure-description">A square packing rendered with mathematical y coordinates upward.</desc>
   <metadata>
-    <sqpack:profile version="4">
+    <sqpack:profile version="5">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="annotations">minimal</sqpack:value>
+      <sqpack:value name="check-detail">exact Q(sqrt(2)) equal-side face</sqpack:value>
+      <sqpack:value name="check-kind">formal</sqpack:value>
+      <sqpack:value name="check-method">exact-algebraic</sqpack:value>
+      <sqpack:value name="check-result">passed</sqpack:value>
       <sqpack:value name="evidence">certified-upper-bound</sqpack:value>
       <sqpack:value name="source-id">exp-033-h-023-equal-side-face</sqpack:value>
       <sqpack:value name="source-url" />

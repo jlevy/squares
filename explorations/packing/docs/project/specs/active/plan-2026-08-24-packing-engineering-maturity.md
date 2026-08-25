@@ -7,6 +7,10 @@ status: implemented
 ---
 # Packing Engineering Maturity and Research-Loop Scalability
 
+> **Lifecycle:** Superseded for current guidance by
+> [`development.md`](../../../../development.md).
+> Retained as the implementation record.
+
 **Status:** Implemented and merged through PR #23.
 
 **Workflow entry:** `general-improvement`
@@ -30,7 +34,7 @@ programs have Python command surfaces, full validation runs in CI, and
 
 This was executed as one bounded engineering tranche, not left as a future roadmap.
 It changes organization and infrastructure without changing mathematical claims,
-experiment outcomes, evidence tiers, or search policy.
+experiment outcomes, assurance semantics, or search policy.
 
 The governing decision is **assurance proportional to reuse and consequence**. Shared
 mechanisms and trust boundaries receive stable contracts and strong tests.

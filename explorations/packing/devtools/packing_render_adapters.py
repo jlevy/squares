@@ -17,6 +17,8 @@ from cases.trump11 import packing as trump11
 from sqpack.field import FieldElement
 from sqpack.render.contacts import contact_features_from_exact
 from sqpack.render.model import (
+    CheckKind,
+    CheckSummary,
     EvidenceTier,
     PackingFrame,
     PackingTrajectory,
@@ -24,7 +26,6 @@ from sqpack.render.model import (
     RigidPose,
     SquareGeometry,
     TrajectoryKind,
-    VerificationSummary,
 )
 from sqpack.render.numbers import scalar_from_decimal, scalar_from_exact, scalar_from_float
 from sqpack.verify import corners_from_poses, exact_sign, verify_packing
@@ -117,7 +118,7 @@ def frame_from_pose_arrays(
     label: str = "final",
     logical_time: Decimal = Decimal(0),
     evidence: EvidenceTier = EvidenceTier.CANDIDATE,
-    verification: VerificationSummary | None = None,
+    check: CheckSummary | None = None,
     source_id: str = "pose-arrays",
     source_url: str = "",
 ) -> PackingFrame:
@@ -165,7 +166,7 @@ def frame_from_pose_arrays(
         side_scalar,
         tuple(squares),
         evidence,
-        verification,
+        check,
         label,
         logical_time,
         source_id,
@@ -205,10 +206,11 @@ def frames_from_basin_event(event: dict[str, object]) -> tuple[PackingFrame, Pac
         else "BasinEvent/v3"
     )
     verification_record = event.get("verification")
-    verification = None
+    check = None
     if isinstance(verification_record, dict) and verification_record.get("valid") is True:
-        verification = VerificationSummary(
-            valid=True,
+        check = CheckSummary(
+            passed=True,
+            kind=CheckKind.NUMERICAL,
             method=str(verification_record.get("oracle", "numerical")),
             detail="retained BasinEvent/v3 endpoint",
         )
@@ -229,7 +231,7 @@ def frames_from_basin_event(event: dict[str, object]) -> tuple[PackingFrame, Pac
         label="returned endpoint",
         logical_time=Decimal(1),
         evidence=EvidenceTier.CANDIDATE,
-        verification=verification,
+        check=check,
         source_id=source_id,
         source_url=source_url,
     )
@@ -269,8 +271,11 @@ def frame_from_trump11() -> PackingFrame:
         _field_scalar(side),
         tuple(geometries),
         EvidenceTier.CERTIFIED_UPPER_BOUND,
-        VerificationSummary(
-            report.valid, "exact-number-field", "all pair and boundary predicates"
+        CheckSummary(
+            passed=report.valid,
+            kind=CheckKind.FORMAL,
+            method="exact-algebraic",
+            detail="exact number-field pair and boundary predicates",
         ),
         "Trump n=11",
         source_id="trump11-exact-q-u",
@@ -303,11 +308,19 @@ def frame_from_kingbird29() -> PackingFrame:
     return PackingFrame(
         side_scalar,
         geometries,
-        EvidenceTier.VERIFIED_CONSTRUCTION,
-        VerificationSummary(
-            valid=True,
-            method="160-digit-source-reconstruction",
-            detail="all 406 separating-axis pair checks; not an exact certificate",
+        EvidenceTier.NUMERICALLY_CHECKED,
+        CheckSummary(
+            passed=True,
+            kind=CheckKind.NUMERICAL,
+            method="numerical-multiprecision",
+            arithmetic="mpmath",
+            precision=f"{kingbird29.DECIMAL_DIGITS} decimal digits of working precision",
+            rounding="nearest",
+            tolerance=kingbird29.decimal_string(kingbird29.ZERO_TOLERANCE, 5),
+            detail=(
+                "roughly 100-digit source; all 406 separating-axis pair checks; "
+                "not an exact certificate"
+            ),
         ),
         "Kingbird n=29",
         source_id="kingbird-square-29-provenance-svg",
@@ -371,7 +384,12 @@ def trajectory_from_n5_equal_side_face() -> PackingTrajectory:
                 _field_scalar(face.side),
                 tuple(geometries),
                 EvidenceTier.CERTIFIED_UPPER_BOUND,
-                VerificationSummary(report.valid, "exact-q-sqrt2", "certified equal-side face"),
+                CheckSummary(
+                    passed=report.valid,
+                    kind=CheckKind.FORMAL,
+                    method="exact-algebraic",
+                    detail="exact Q(sqrt(2)) equal-side face",
+                ),
                 ("endpoint A", "exact midpoint", "endpoint B")[index],
                 Decimal(index) / 2,
                 "exp-033-h-023-equal-side-face",

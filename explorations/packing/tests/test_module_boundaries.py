@@ -108,6 +108,7 @@ def test_repository_applications_fail_clearly_without_a_project_checkout(
     ("module", "arguments"),
     [
         ("sqpack.cli.validate", ["--list"]),
+        ("sqpack.cli.witness", ["inspect", "missing.yaml"]),
         ("sqpack.campaign.runner", ["status"]),
         ("sqpack.campaign.ledger", ["check"]),
     ],

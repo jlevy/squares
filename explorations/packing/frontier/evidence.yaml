@@ -1,0 +1,385 @@
+softschema:
+  contract: packing.squares:FrontierEvidenceSet/v1
+  schema: frontier-evidence.schema.yaml
+  status: enforced
+last_reviewed: '2026-08-25'
+evidence:
+  - id: E-kingbird-upper-register
+    claim: upper-bound
+    scope: {n_min: 1, n_max: 100}
+    assurance: reported
+    reported_method: source-unspecified
+    performed_by: source-author
+    relationship_to_generator: generator
+    source_key: '[Kingbird]'
+    replay_status: not-attempted
+    limitations: A catalogue report does not establish feasibility or optimality.
+    source_reviewed: '2026-08-24'
+
+  - id: E-unitsquare-release1-report
+    claim: upper-bound
+    scope: {n_values: [68, 69, 103, 105, 110, 131]}
+    assurance: reported
+    reported_method: interval-certified
+    performed_by: source-author
+    relationship_to_generator: same-implementation
+    source_key: '[UnitSquare 2026]'
+    replay_status: public-certificate-missing
+    limitations: The release reports outward-rounded interval validation, but publishes no interval boxes, receipt, or checker that can replay that claim.
+    blocker:
+      kind: source-evidence
+      detail: Obtain the claimed interval certificate and its replay instructions from the source before treating these bounds as externally verified.
+    source_reviewed: '2026-08-25'
+
+  - id: E-basic-grid-upper
+    claim: upper-bound
+    scope: {n_min: 1, n_max: 100}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    certificate: frontier/n-*.md verified_upper_bound fields
+    replay: uv run --frozen python -m devtools.check_basic_bounds
+    replay_status: passed
+    limitations: Establishes the integer grid fallback, not any tighter reported packing.
+    source_reviewed: '2026-08-24'
+
+  - id: E-basic-area-lower
+    claim: lower-bound
+    scope: {n_min: 1, n_max: 100}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    certificate: frontier/n-*.md verified_lower_bound fields
+    replay: uv run --frozen python -m devtools.check_basic_bounds
+    replay_status: passed
+    limitations: Uses only area and is weaker than the recorded theorem for most cases.
+    source_reviewed: '2026-08-24'
+
+  - id: E-nagamochi-lower
+    claim: lower-bound
+    scope: {n_min: 4, n_max: 100}
+    assurance: verified
+    method: published-proof
+    performed_by: source-author
+    relationship_to_generator: not-applicable
+    origin: external
+    source_key: '[Nagamochi 2005]'
+    replay_status: not-attempted
+    proof:
+      source: resources/papers/nagamochi-2005-packing-unit-squares-in-a-rectangle.pdf
+      theorem: Theorem 2
+      scope: Every integer N at least 4; exact values for N in {m^2, m^2-1, m^2-2}.
+      pinpoints: Theorem 2 on printed pages 1-2; derivation from Theorem 1 in Section 2.
+      assumptions:
+        - Unit squares may rotate inside an open square container.
+        - The square-packing side function is the paper's s(N).
+    limitations: External published proof; its arithmetic is not independently replayed here.
+    source_reviewed: '2026-08-24'
+
+  - id: E-migrated-lower-report
+    claim: lower-bound
+    scope: {n_min: 1, n_max: 100}
+    assurance: reported
+    reported_method: published-proof
+    performed_by: unknown-historical
+    relationship_to_generator: unknown-historical
+    replay_status: not-attempted
+    limitations: Preserves a v1 source claim pending case-specific proof audit.
+    blocker:
+      kind: source-evidence
+      detail: The migration has not yet established a complete formal object for this claim.
+    source_reviewed: '2026-08-24'
+    migration_annotation: '2026-08-24: migrated without upgrading the v1 proof claim.'
+
+  - id: E-side2-center-lower
+    claim: lower-bound
+    scope: {n_values: [2, 3]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    certificate: campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
+    replay: uv run --frozen python -m cases.small_n.optimal_moduli --n 3 --replay campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json --check-svg atlas/n-003-optimal-moduli.svg
+    replay_status: passed
+    limitations: Proves the side-2 lower bound for at least two squares; it does not classify larger containers.
+    source_reviewed: '2026-08-25'
+
+  - id: E-n005-gobel-upper
+    claim: upper-bound
+    scope: {n_values: [5]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Kingbird n=5 SVG]'
+    certificate: cases/gobel5/packing.py
+    replay: uv run --frozen python -m cases.gobel5.verify_exact
+    replay_status: passed
+    limitations: Verifies the exact construction and upper bound, not optimality by itself.
+    source_reviewed: '2026-08-25'
+
+  - id: E-n005-gobel-proof
+    claim: lower-bound
+    scope: {n_values: [5]}
+    assurance: verified
+    method: published-proof
+    performed_by: source-author
+    relationship_to_generator: not-applicable
+    origin: external
+    source_key: '[Göbel 1979]'
+    replay_status: not-attempted
+    proof:
+      source: resources/papers/gobel-1979-geometrical-packing-and-covering-problems.pdf
+      theorem: Proposition 1, z*(5) = 2 + sqrt(2)/2
+      scope: Five pairwise interior-disjoint unit squares in an enclosing square, with arbitrary rotations.
+      pinpoints: Printed pages 180-181, Proposition 1, Figure 2, and its three-case proof outline.
+      assumptions:
+        - Packings permit arbitrary orientations and boundary contact.
+        - The epsilon argument proves every strict smaller side impossible and passes to the infimum.
+    limitations: The source calls this an outline and omits routine analytic calculations; not independently audited here.
+    source_reviewed: '2026-08-25'
+
+  - id: E-n006-kearney-shiu-proof
+    claim: lower-bound
+    scope: {n_values: [6]}
+    assurance: verified
+    method: published-proof
+    performed_by: source-author
+    relationship_to_generator: not-applicable
+    origin: external
+    source_key: '[Kearney–Shiu 2002]'
+    replay_status: not-attempted
+    proof:
+      source: resources/papers/kearney-shiu-2002-efficient-packing-unit-squares.pdf
+      theorem: Theorem 1, s(6) = 3
+      scope: Six pairwise interior-disjoint unit squares in a square, with arbitrary rotations.
+      pinpoints: Section 3, Proof of Theorem 1; prerequisite dual unavoidable lattices and Lemmas 1-3 in Section 2.
+      assumptions:
+        - Packings permit arbitrary orientations and boundary contact.
+        - The paper's shrinking argument converts its open-box statement to unit-square lower bounds.
+    limitations: Complete external published proof; not independently audited here.
+    source_reviewed: '2026-08-25'
+
+  - id: E-n010-gobel-upper
+    claim: upper-bound
+    scope: {n_values: [10]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Kingbird]'
+    certificate: cases/gobel10/exact.py
+    replay: uv run --frozen python -m cases.gobel10.verify_exact
+    replay_status: passed
+    limitations: Verifies the exact construction and upper bound, not optimality by itself.
+    source_reviewed: '2026-08-25'
+
+  - id: E-n010-stromquist-proof
+    claim: lower-bound
+    scope: {n_values: [10]}
+    assurance: verified
+    method: published-proof
+    performed_by: source-author
+    relationship_to_generator: not-applicable
+    origin: external
+    source_key: '[Stromquist 2003]'
+    replay_status: not-attempted
+    proof:
+      source: resources/papers/stromquist-2003-packing-10-or-11-unit-squares.pdf
+      theorem: Theorem 1, s(10) = 3 + sqrt(1/2)
+      scope: Ten pairwise nonintersecting boxes in a square, yielding the unrestricted unit-square lower bound.
+      pinpoints: Theorem 1 and its proof in Section 3, Figures 8-12; the source's known Figure 14 defect concerns Theorem 2, not this proof.
+      assumptions:
+        - Packings permit arbitrary orientations and boundary contact.
+        - The paper's open-box formulation and limiting argument apply to unit squares.
+    limitations: Complete external published proof; not independently audited here.
+    source_reviewed: '2026-08-25'
+
+  - id: E-bentz-2010-proof
+    claim: lower-bound
+    scope: {n_values: [13, 46]}
+    assurance: verified
+    method: published-proof
+    performed_by: source-author
+    relationship_to_generator: not-applicable
+    origin: external
+    source_key: '[Bentz 2010]'
+    replay_status: not-attempted
+    proof:
+      source: resources/papers/bentz-2010-optimal-packings-13-and-46.pdf
+      theorem: Theorems 8 and 9, establishing s(46) = 7 and s(13) = 4
+      scope: Unrestricted packings of 46 or 13 unit squares in a square.
+      pinpoints: Theorem 8 and proof in Section 2; Theorem 9 and proof throughout Section 3.
+      assumptions:
+        - Packings permit arbitrary orientations and boundary contact.
+        - The nonavoidance lemmas in Section 1 apply to the case-specific point systems.
+    limitations: Complete external published proofs; not independently audited here.
+    source_reviewed: '2026-08-25'
+
+  - id: E-bentz-2016-proof
+    claim: lower-bound
+    scope: {n_values: [22, 33]}
+    assurance: verified
+    method: published-proof
+    performed_by: source-author
+    relationship_to_generator: not-applicable
+    origin: external
+    source_key: '[Bentz 2016]'
+    replay_status: not-attempted
+    proof:
+      source: resources/papers/bentz-2016-optimal-packings-22-and-33.pdf
+      theorem: Theorems 9 and 11 with Corollaries 10 and 12, establishing s(33) = 6 and s(22) = 5
+      scope: Unrestricted packings of 33 or 22 unit squares in a square.
+      pinpoints: Theorem 9 and Corollary 10 in Section 3; Theorem 11 and Corollary 12 in Section 4.
+      assumptions:
+        - Packings permit arbitrary orientations and boundary contact.
+        - The continuous unavoidable-set result in Theorem 8 applies to the displayed systems.
+    limitations: Complete external published proofs; not independently audited here.
+    source_reviewed: '2026-08-25'
+
+  - id: E-n011-trump-upper
+    claim: upper-bound
+    scope: {n_values: [11]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Ellsworth SVG]'
+    certificate: cases/trump11/packing.py
+    replay: uv run --frozen python -m cases.trump11.verify_exact
+    replay_status: passed
+    limitations: Verifies this algebraic witness and upper bound, not global optimality.
+    source_reviewed: '2026-08-24'
+
+  - id: E-n011-repaired-lower
+    claim: lower-bound
+    scope: {n_values: [11]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Stromquist 2003]'
+    certificate: campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
+    replay: uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
+    replay_status: passed
+    limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.
+    source_reviewed: '2026-08-24'
+
+  - id: E-n012-monotonicity-lower
+    claim: lower-bound
+    scope: {n_values: [12]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Stromquist 2003]'
+    certificate: E-n011-repaired-lower and monotonicity of s(n)
+    replay: uv run --frozen python -m devtools.check_basic_bounds
+    replay_status: passed
+    limitations: Inherits only the verified n=11 lower bound; it does not prove s(12)=4.
+    source_reviewed: '2026-08-24'
+
+  - id: E-n029-kingbird-report
+    claim: upper-bound
+    scope: {n_values: [29]}
+    assurance: reported
+    reported_method: numerical-multiprecision
+    performed_by: source-author
+    relationship_to_generator: generator
+    source_key: '[Kingbird n=29 SVG]'
+    replay_status: public-certificate-missing
+    limitations: The public SVG serializes a FindRoot result and supplies no formal certificate.
+    blocker:
+      kind: source-evidence
+      detail: No outward-rounded interval or exact algebraic certificate is public.
+    source_reviewed: '2026-08-24'
+
+  - id: E-n029-kingbird-numerical
+    claim: witness-feasibility
+    scope: {n_values: [29]}
+    assurance: numerically-checked
+    method: numerical-multiprecision
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    source_key: '[Kingbird n=29 SVG]'
+    precision: {decimal_digits: 160, rounding: nearest}
+    tolerance: '1e-80'
+    replay: uv run --frozen python -m cases.kingbird29.verify_svg
+    replay_status: passed
+    limitations: Does not certify exact feasibility, the reported side, or optimality.
+    blocker:
+      kind: mathematics
+      detail: A formal existence or exact-coordinate certificate has not been constructed.
+    source_reviewed: '2026-08-24'
+
+  - id: E-n029-orientation-classes
+    claim: derived-structure
+    scope: {n_values: [29]}
+    assurance: numerically-checked
+    method: numerical-multiprecision
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    source_key: '[Kingbird n=29 SVG]'
+    precision: {decimal_digits: 160, rounding: nearest}
+    tolerance: '1e-80'
+    replay: uv run --frozen python -m cases.kingbird29.verify_svg
+    replay_status: passed
+    limitations: The class count is numerical and does not imply exact witness feasibility.
+    blocker:
+      kind: mathematics
+      detail: The orientation identities have not been promoted to exact algebraic relations.
+    source_reviewed: '2026-08-24'
+
+  - id: E-n029-schadt-report
+    claim: upper-bound
+    scope: {n_values: [29]}
+    assurance: reported
+    reported_method: numerical-multiprecision
+    performed_by: source-author
+    relationship_to_generator: generator
+    source_key: '[Schadt n=29 repository]'
+    precision: {decimal_digits: 300, rounding: source-defined}
+    tolerance: '1e-100'
+    replay_status: not-attempted
+    limitations: The source checker accepts an epsilon overlap and does not enforce that all 29 squares are present.
+    source_reviewed: '2026-08-25'
+
+  - id: E-n029-schadt-numerical
+    claim: witness-feasibility
+    scope: {n_values: [29]}
+    assurance: numerically-checked
+    method: numerical-multiprecision
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    source_key: '[Schadt n=29 repository]'
+    precision: {decimal_digits: 300, rounding: nearest}
+    tolerance: '1e-100'
+    replay: uv run --frozen packing-witness check witnesses/schadt-n029-2025-decimal.yaml --method numerical-multiprecision --precision 300 --tolerance 1e-100
+    replay_status: passed
+    limitations: Thirteen best pair gaps are negative; the worst is about -8.81e-102 and is accepted only by the declared tolerance.
+    source_reviewed: '2026-08-25'
+
+  - id: E-n029-schadt-rational-upper
+    claim: upper-bound
+    scope: {n_values: [29]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    source_key: '[Schadt n=29 repository]'
+    certificate: witnesses/schadt-n029-2025-rational.yaml
+    replay: uv run --frozen python -m devtools.check_rational_witness_independent witnesses/schadt-n029-2025-rational.yaml
+    replay_status: passed
+    limitations: Proves a rational construction at a side about 4.94e-11 larger than the source decimal; it does not certify the source pose exactly or prove optimality.
+    source_reviewed: '2026-08-25'

@@ -8,7 +8,7 @@
 #   - replace `determination.outcome`'s description with the campaign's enum
 # Keep additionalProperties: false everywhere. A typo that validates is a lie waiting.
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: packing.squares:Experiment/v1
+$id: packing.squares:Experiment/v2
 title: Experiment
 type: object
 additionalProperties: false
@@ -51,18 +51,53 @@ properties:
     type: object
     additionalProperties: false
     description: What decides what a result means. Never extrapolate across these.
-    required: [label, engine, precision]
+    required:
+      - label
+      - engine
+      - assurance
+      - method
     properties:
       label: {type: string}
       engine: {type: string, description: 'Instrument and version, e.g. "sqsearch 0.1.0".'}
       engine_commit: {type: string}
-      precision:
-        enum: [f64_screen, polished, exact]
+      assurance:
+        enum: [numerically-checked, verified]
         description: >-
-          Which tier produced the number. f64_screen may never claim a record --
-          a record packing has pairs touching at exactly zero separation, and no
-          floating-point check can decide those. Only `exact` (sqpack over the
-          packing's own number field) certifies.
+          What the round establishes. Finite-precision calculations are always
+          numerically-checked; verified requires a formal method and discharged
+          preconditions.
+      method:
+        enum:
+          - numerical-f64
+          - numerical-multiprecision
+          - interval-certified
+          - exact-algebraic
+          - published-proof
+          - proof-audited
+          - proof-assistant-checked
+        description: Arithmetic or certification method, independent of assurance.
+      precision:
+        anyOf:
+          - type: object
+            additionalProperties: false
+            required: [rounding]
+            properties:
+              decimal_digits: {type: integer, minimum: 1}
+              binary_bits: {type: integer, minimum: 1}
+              rounding: {type: string, minLength: 1}
+            anyOf:
+              - required: [decimal_digits]
+              - required: [binary_bits]
+          - const: unrecorded-historical
+        description: Actual arithmetic used, not a library's theoretical capability.
+      tolerance:
+        type: string
+        minLength: 1
+        description: Numeric acceptance tolerance, or unrecorded-historical after migration.
+      migration_annotation:
+        type: string
+        minLength: 1
+        description: Dated explanation required when a historical numeric detail was not retained.
       host_system: {type: string}
       selftest_passed: {type: boolean, description: Whether the engine gate ran and passed.}
   instance:
@@ -289,5 +324,5 @@ $defs:
           a preregistered determination outside the search-specific basin vocabulary.
           reached_basin means within the declared tolerance of the standing best;
           near_miss means better than the trivial grid but not in the basin;
-          beat_record may only be recorded at precision `exact`.
+          beat_record may only be recorded when subject.assurance is `verified`.
       checked_by: {type: string, description: The independent checker that makes it real.}

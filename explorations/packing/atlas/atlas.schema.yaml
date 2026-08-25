@@ -83,9 +83,10 @@ properties:
           type: number
           exclusiveMinimum: 0
           description: >-
-            Best side seen for this basin, at the `polished` tier -- exact within a cell
-            to solver precision, floor about 1e-11. NEVER `exact`: promotion routes
-            through sqpack.verify, and only that may claim a record.
+            Best finite-precision side seen for this endpoint key. The current producer
+            uses binary64 LP solves with a measured scalar floor of about 1e-11. This
+            is numerical evidence, never an exact value; formal promotion requires an
+            exact witness or rigorous certificate.
         angle_signature:
           type: array
           items: {type: integer, minimum: 1}

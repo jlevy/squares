@@ -1,5 +1,5 @@
 ---
-title: H-002 — LP-in-cell polish is exact and sufficient
+title: H-002 — LP-in-cell refinement is sufficient
 softschema:
   contract: packing.squares:Hypothesis/v1
   schema: ../schemas/hypothesis.schema.yaml
@@ -42,7 +42,7 @@ hypothesis:
     best (exp-009). This supports a local polishing and diagnostic role, not global
     convergence or a unique basin identity.
 ---
-# H-002 — LP-in-cell polish is exact and sufficient
+# H-002 — LP-in-cell refinement is sufficient
 
 The original universal claim is **refuted**. The implemented quench is valuable in a
 narrower role: it gives a numerical local refinement and shows when a tested start
@@ -61,7 +61,7 @@ For these tested starts, the contrast distinguishes a residual the quench can re
 from one it cannot; it does not prove that the latter start lies in a different basin or
 establish a global landscape partition.
 
-## The result this rests on is already verified
+## The structural reduction is exact; the solve is numerical
 
 For fixed angles, and with each pair’s separating axis fixed, minimising `s` is a
 **linear program**: corners are affine in centres, the separating-axis conditions are
@@ -73,8 +73,8 @@ The fixed-cell solve was independently reproduced in
 [exp-006](../series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md):
 at the supplied angles of the standing `n = 11` packing it returns a side within
 `4.4e-16` of the reference.
-This is a solver-precision numerical result for that supplied cell, not an algebraic
-certificate or evidence that all starts with those angles reach that cell.
+This is a binary64 numerical result for that supplied cell, not an algebraic certificate
+or evidence that all starts with those angles reach that cell.
 
 ## Why this campaign needs it specifically
 

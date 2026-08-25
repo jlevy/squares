@@ -49,8 +49,8 @@ Asserting the second is how a gate starts failing for reasons nobody can act on.
 
 ## Stable and unstable fields
 
-Sides are recorded to **10 decimals**, coarser than the `polished` tier's own `1e-11`
-noise floor ([D-021](../defects.md)); gaps within that floor are recorded as zero.
+Sides are recorded to **10 decimals**, coarser than the numerical LP endpoint's measured
+`1e-11` noise floor ([D-021](../defects.md)); gaps within that floor are recorded as zero.
 The previous 12-decimal serialization was finer than the declared floor and could fail
 on a difference the tier itself says is not meaningful. Wall times, hostnames and dates
 are not recorded at all — an unstable field that is normalised is still a field somebody
@@ -117,7 +117,8 @@ def proved_side(n: int) -> tuple[float, str] | None:
     d = yaml.safe_load(text.split("---\n")[1])["packing"]
     if d["status"] != "proved":
         return None
-    return float(d["upper_bound"]["value"]), d["upper_bound"].get("exact_form") or ""
+    upper = d["verified_upper_bound"]
+    return float(upper["value"]), upper.get("exact_form") or ""
 
 
 def form_key(form: ClosedForm | None) -> tuple[int, int, int, int] | None:
@@ -336,7 +337,7 @@ def build() -> tuple[dict, list[str]]:
     return {
         "golden": {
             "note": "Rebuilt by devtools.check_golden_basins. Sides to 10 decimals, coarser "
-            "than the polished tier's 1e-11 floor (D-021); sub-floor gaps are zero.",
+            "than the numerical LP endpoint's 1e-11 floor (D-021); sub-floor gaps are zero.",
             "how_to_read_a_basin_row": (
                 "A row is a numerical endpoint-key cluster, not automatically a local "
                 "optimum or connected basin. converged_frequency records only the "

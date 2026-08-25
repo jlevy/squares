@@ -426,7 +426,7 @@ defects:
   recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
   bead: think-0zs9
 - id: D-021
-  title: The polished tier has a noise floor, and eight rounds sit on it
+  title: Floating LP refinement has a noise floor, and eight rounds sit on it
   date: '2026-08-23'
   layer: quench
   class: soundness
@@ -437,8 +437,9 @@ defects:
   status: contained
   what: >-
     The post-check accepts constraint violations up to 1e-9 and HiGHS will not go
-    tighter than 1e-10, so a polished side can be wrong by roughly 1e-11. Eight recorded
-    rounds carry small negative gaps to the analytic value at exactly that scale.
+    tighter than 1e-10, so a floating LP side can be wrong by roughly 1e-11. Eight
+    recorded rounds carry small negative gaps to the analytic value at exactly that
+    scale.
   consequence: >-
     Any improvement claimed below about 1e-11 at this tier is meaningless, and a
     negative gap reads as beating the record if the tier is dropped from the sentence.
@@ -446,10 +447,10 @@ defects:
     The post-check bound is now exactly the solver's own guarantee (1e-10) rather than
     an arbitrary 1e-9, which is the tightest defensible value and a tenfold improvement.
     Below that the floor is irreducible with a floating-point LP, so it is contained
-    rather than removed: the tier system forbids a record claim below `exact`, and
-    tools/perimeter_test.py holds every emitting component to the same bound so the two
-    cannot drift apart.
-  regression: 'the perimeter test, at the same bound; the precision tier is required on every round and beat_record is writable only at exact'
+    rather than removed: the assurance contract forbids a numerical result from carrying
+    `beat_record: true`, and the soundness-perimeter check holds every emitting component
+    to the same bound so the two cannot drift apart.
+  regression: 'the soundness perimeter at the same bound; every round carries assurance and method, and beat_record requires verified assurance'
   recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
   bead: think-hg3u
 - id: D-022
@@ -975,7 +976,7 @@ defects:
   severity: high
   status: fixed
   what: >-
-    `sqpack.closed_form` described matching a polished side to one of a short list of
+    `sqpack.closed_form` described matching a finite-precision LP side to one of a short list of
     known constants as an oracle that said whether a quench had converged to a known
     optimum. It also justified a 1e-12 match by multiplying an optimizer's tolerance by
     an assumed uniform random-coincidence probability. Optimizer outputs are correlated,
@@ -1372,7 +1373,7 @@ defects:
   direction: neutral
   detected_by: review
   severity: critical
-  status: outstanding
+  status: fixed
   what: >-
     NumberField documents an irreducible minimal polynomial and an interval containing
     exactly one real root but checks only an endpoint sign change. For
@@ -1383,11 +1384,16 @@ defects:
     unsound exact comparisons. The built-in Trump witness remains independently checked;
     the generic trust boundary does not.
   fix: >-
-    none yet. Verify primitive squarefree irreducibility and exactly one interval root
-    with a Sturm sequence, or require independently checked proof-carrying field
-    metadata; resource-bound every sign decision.
-  regression: none
-  bead: think-zcx4
+    NumberField now rejects unsupported metadata before constructing the quotient. It
+    requires an exact modular irreducibility certificate for the primitive polynomial
+    and uses a Sturm sequence to prove that the open isolating interval contains exactly
+    one real root. The degree-one rational case is explicit rather than bypassing the
+    precondition boundary.
+  regression: >-
+    tests/test_field_preconditions.py rejects reducible polynomials, intervals containing
+    zero or multiple roots, and endpoint roots; the normal exact-verification gate
+    replays the accepted rational and algebraic controls.
+  bead: think-rsxe
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 - id: D-054
   title: Move budgets overshoot and final-best records cannot support trajectory claims

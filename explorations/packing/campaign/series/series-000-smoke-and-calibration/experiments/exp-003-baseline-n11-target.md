@@ -1,7 +1,7 @@
 ---
 title: exp-003 — reproducible baseline at n = 11 (target)
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,26 +10,38 @@ experiment:
   series: series-000
   title: Reproducible baseline at n = 11
   date: '2026-08-23'
-  hypotheses: [H-016]
+  hypotheses:
+  - H-016
   tier: exploratory
   subject:
     label: stock sqsearch annealer, default parameters, corrected archive
     engine: sqsearch 0.1.0
-    engine_commit: '1e70bc8'
-    precision: f64_screen
+    engine_commit: 1e70bc8
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: Apple M1 Pro, 8 performance + 2 efficiency cores, 32 GB
     selftest_passed: true
-  instance: {axis: n, point: 11, role: target}
+  instance:
+    axis: n
+    point: 11
+    role: target
   method:
-    control: 'the trivial ceil(sqrt(n)) grid, which every chain starts from'
-    candidate: 'sqsearch defaults: steps 400000, t_hot 0.25, t_cold 1e-9, lambda 2 -> 1e6, p_rotate 0.35, p_reseed 0.5'
+    control: the trivial ceil(sqrt(n)) grid, which every chain starts from
+    candidate: 'sqsearch defaults: steps 400000, t_hot 0.25, t_cold 1e-9, lambda 2 -> 1e6, p_rotate
+      0.35, p_reseed 0.5'
     runs_per_condition: 5
     interleaved: false
     operator: claude-opus-5
-    commit: '1e70bc8'
+    commit: 1e70bc8
     entry_point: explorations/packing/run_baseline.sh
-    command: 'sqsearch --n 11 --seed S --chains 8 --budget-moves 100000000, for S in 1..5'
-    budget: '4,000,000,000 moves, 107.2 s wall'
+    command: sqsearch --n 11 --seed S --chains 8 --budget-moves 100000000, for S in 1..5
+    budget: 4,000,000,000 moves, 107.2 s wall
     record: campaign/series/series-000-smoke-and-calibration/results/exp-003-baseline-n11-target.jsonl
   effort:
     wall_seconds: 107.2
@@ -41,33 +53,38 @@ experiment:
     direction: lower
     score: 3.9144165418191186
     standing_best: 3.877083590022814
-    standing_best_source: 'frontier/n-011.md (Trump 1979)'
+    standing_best_source: frontier/n-011.md (Trump 1979)
     beat_record: false
     runs: 5
   - shape: determination
-    question: 'does the stock annealer reach the standing best at n = 11'
+    question: does the stock annealer reach the standing best at n = 11
     role: outcome
     outcome: near_miss
-    checked_by: 'overlap recomputed from each stored configuration (max 0.0e+00); every archived record re-derives its own reported side'
+    checked_by: overlap recomputed from each stored configuration (max 0.0e+00); every archived record
+      re-derives its own reported side
   - shape: conditions
     metric: best_side_across_seeds
     role: mechanism
     control_median: 3.927939617731721
     candidate_median: 3.927939617731721
-    control_range: [3.9144165418191186, 3.9361125018580427]
-    candidate_range: [3.9144165418191186, 3.9361125018580427]
+    control_range:
+    - 3.9144165418191186
+    - 3.9361125018580427
+    candidate_range:
+    - 3.9144165418191186
+    - 3.9361125018580427
     overlapping: true
   complexity:
     lines_changed: 0
     new_dependencies: []
     new_failure_modes: []
-    notes: 'Replication of exp-001 on a corrected instrument and archive.'
+    notes: Replication of exp-001 on a corrected instrument and archive.
   verdict:
     decision: rejected
     primary_criterion: best_side
-    reason: >-
-      On this cell the annealer misses the standing best by +3.733e-02, outside the 1e-4 H-016 declared, so the claim is refuted here.
-    commit: '1e70bc8'
+    reason: On this cell the annealer misses the standing best by +3.733e-02, outside the 1e-4 H-016
+      declared, so the claim is refuted here.
+    commit: 1e70bc8
 ---
 # exp-003 — reproducible baseline at n = 11
 

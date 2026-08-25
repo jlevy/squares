@@ -1,10 +1,14 @@
 # Review: The Tooling Layout, and What It Would Take to Clean Up
 
+> **Lifecycle:** Superseded for current guidance by
+> [`development.md`](../../../development.md).
+> Retained as a dated review record.
+
 **Date:** 2026-08-23
 
 **Author:** Claude (agent)
 
-**Status:** Current — a map, not a plan of record.
+**Status:** Historical — a map, not a plan of record.
 Nothing here is scheduled.
 
 The scripts under `explorations/packing/` accumulated one experiment at a time, and it

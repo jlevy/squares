@@ -16,13 +16,13 @@ hypothesis:
   strategy_refs: ['search:6', 'search:8']
   criterion:
     shape: record
-    metric: independently verified container side for 97 unit squares
+    metric: independently and exactly verified container side for 97 unit squares
     direction: below 10
     threshold: 10
   instrument: >-
     Not yet built. First derive the boundary synchronization equations analytically;
     only if they remain feasible, encode the resulting construction family and pass its
-    candidate through the independent verifier.
+    candidate through the exact witness verifier.
   instrument_ready: false
   regime: exact construction first; targeted numerical search only after analytic triage
   instance: {axis: n, point: 97}

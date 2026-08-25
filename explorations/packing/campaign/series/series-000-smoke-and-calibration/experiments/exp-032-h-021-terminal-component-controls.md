@@ -1,7 +1,7 @@
 ---
 title: exp-032 — exact terminal-component known-answer controls
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,16 +10,21 @@ experiment:
   series: series-000
   title: Test the exact n = 3 and n = 4 terminal-component policy
   date: '2026-08-24'
-  hypotheses: [H-021]
+  hypotheses:
+  - H-021
   tier: confirmatory
   subject:
     label: exact n = 3 connected interval with n = 4 isolated-point guard
     engine: terminal-component known-answer checker 0.1.0
     engine_commit: d3d4ace
-    precision: exact
+    assurance: verified
+    method: exact-algebraic
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 3, role: positive_control}
+  instance:
+    axis: n
+    point: 3
+    role: positive_control
   method:
     control: complete exact exp-014 and exp-015 quotient models
     candidate: evidence-gated component assignment with ambiguity-preserving fallback
@@ -29,14 +34,11 @@ experiment:
     commit: d3d4ace
     dirty: false
     entry_point: explorations/packing/tools/check_terminal_components.py
-    command: >-
-      timeout 30 uv run --frozen --quiet python tools/check_terminal_components.py
-      --record campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
-      && timeout 30 uv run --frozen --quiet python tools/check_terminal_components.py
-      --replay campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
-    budget: >-
-      one 30-minute implementation slice; 30-second generation cap; 30-second separate
-      replay cap; stop on any exact-model drift, false assignment, or failed mutation
+    command: timeout 30 uv run --frozen --quiet python tools/check_terminal_components.py --record
+      campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
+      && timeout 30 uv run --frozen --quiet python tools/check_terminal_components.py --replay campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
+    budget: one 30-minute implementation slice; 30-second generation cap; 30-second separate replay
+      cap; stop on any exact-model drift, false assignment, or failed mutation
     record: campaign/series/series-000-smoke-and-calibration/results/exp-032-h-021-terminal-component-controls.json
   effort:
     timebox: 30m implementation; 30s generation and 30s replay caps
@@ -45,20 +47,17 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: >-
-      Does the frozen policy recover the exact n = 3 quotient interval and n = 4
-      quotient point without treating keys, contact strata, or samples as components?
+    question: Does the frozen policy recover the exact n = 3 quotient interval and n = 4 quotient
+      point without treating keys, contact strata, or samples as components?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      deterministic regeneration from exp-014 and exp-015, separate retained-record
-      replay, exact quotient membership, and seven false-policy mutation controls
+    checked_by: deterministic regeneration from exp-014 and exp-015, separate retained-record replay,
+      exact quotient membership, and seven false-policy mutation controls
   verdict:
     decision: baseline
     primary_criterion: exact known answers plus all declared false-policy mutations
-    reason: >-
-      The exact connected and isolated controls pass, every declared conflation fails,
-      and all unsupported floating-point observations remain unresolved.
+    reason: The exact connected and isolated controls pass, every declared conflation fails, and all
+      unsupported floating-point observations remain unresolved.
     commit: 93baf5c
 ---
 # exp-032 — exact component controls pass

@@ -1,10 +1,14 @@
 # Review: PR #14 and the Executable Square-Packing Research Program
 
+> **Lifecycle:** Superseded for current guidance by the
+> [synopsis](../../../SYNOPSIS.md).
+> Retained as a dated review record.
+
 **Date:** 2026-08-23
 
 **Author:** Codex (agent)
 
-**Status:** Current; deep mathematical-strategy delta complete
+**Status:** Historical record; deep mathematical-strategy delta complete
 
 **Reviewed:** [PR #14](https://github.com/jlevy/thinking-scratchpad/pull/14), initially
 at `fa538931b20fef0f51dffedb9e4d7071603b7790`, reassessed as its branch and description
@@ -359,9 +363,9 @@ per-stage attribution remain open work on `think-xzew`.
 
 ## What is sound and should be retained
 
-- **The evidence tiers are the right backbone.** `f64_screen`, `polished`, and `exact`,
-  with record claims reserved for the exact tier, is the correct policy.
-  The repair is to enforce that policy at the artifact boundary.
+- **The evidence tiers were the right backbone.** The then-current `f64_screen`,
+  `polished`, and `exact` labels with record claims reserved for the exact tier, is the
+  correct policy. The repair is to enforce that policy at the artifact boundary.
 - **Fixed angles plus a fixed separating cell is an LP.** The independent 1,056-row
   Trump reconstruction supports this.
   The error is the extra leap from “one cell is an LP” to “fixed angles define one LP
@@ -796,7 +800,7 @@ for association, with held-out `n`, but no causal implication should be presumed
 
 H-011 promises a “near-complete atlas” with “exact side lengths.”
 A discovery curve that looks flat does not establish near-completeness when the support
-is unknown, and the atlas stores polished floats, not exact reconstructions.
+is unknown, and the atlas stores finite-precision floats, not exact reconstructions.
 It also does not persist the curve.
 The sweep is `n=5…10`.
 

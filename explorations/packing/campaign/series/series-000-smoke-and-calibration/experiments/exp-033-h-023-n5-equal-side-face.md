@@ -1,7 +1,7 @@
 ---
 title: exp-033 — exact n = 5 equal-side fixed-angle face
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,16 +10,21 @@ experiment:
   series: series-000
   title: Test whether the equal-side n = 5 golden rows share one exact LP face
   date: '2026-08-24'
-  hypotheses: [H-023]
+  hypotheses:
+  - H-023
   tier: exploratory
   subject:
     label: exact fixed-angle common-cell connection between golden seeds 2 and 5
     engine: n = 5 equal-side face checker 0.1.0
     engine_commit: 26360f1
-    precision: exact
+    assurance: verified
+    method: exact-algebraic
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 5, role: target}
+  instance:
+    axis: n
+    point: 5
+    role: target
   method:
     control: independently valid exact endpoints and mutations that break the path
     candidate: one exact side-constant segment in a common fixed-angle separating cell
@@ -29,15 +34,12 @@ experiment:
     commit: 26360f1
     dirty: false
     entry_point: explorations/packing/tools/check_n5_equal_side_face.py
-    command: >-
-      timeout 30 uv run --frozen --quiet python tools/check_n5_equal_side_face.py
-      --record campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
-      && timeout 30 uv run --frozen --quiet python tools/check_n5_equal_side_face.py
-      --replay campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
-    budget: >-
-      one 30-minute local-geometry slice; separate 30-second generation and replay caps;
-      stop on source mismatch, invalid endpoint, failed exact dual, wrong rank/nullity,
-      mutation survivor, or retained-record drift
+    command: timeout 30 uv run --frozen --quiet python tools/check_n5_equal_side_face.py --record
+      campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
+      && timeout 30 uv run --frozen --quiet python tools/check_n5_equal_side_face.py --replay campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
+    budget: one 30-minute local-geometry slice; separate 30-second generation and replay caps; stop
+      on source mismatch, invalid endpoint, failed exact dual, wrong rank/nullity, mutation survivor,
+      or retained-record drift
     record: campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
   effort:
     timebox: 30m local-geometry slice; 30s generation and 30s replay caps
@@ -46,23 +48,18 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: >-
-      After a declared D4 action and relabelling, do the two equal-side n = 5 golden
-      rows lie on one exact feasible segment whose common fixed-angle cell has the same
-      exact optimal side?
+    question: After a declared D4 action and relabelling, do the two equal-side n = 5 golden rows
+      lie on one exact feasible segment whose common fixed-angle cell has the same exact optimal side?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      exact Q(sqrt(2)) regeneration, independent retained-record replay, sqpack exact
-      endpoint validity, exact Gaussian rank, an exact LP dual, and five controls
+    checked_by: exact Q(sqrt(2)) regeneration, independent retained-record replay, sqpack exact endpoint
+      validity, exact Gaussian rank, an exact LP dual, and five controls
   verdict:
     decision: accepted
-    primary_criterion: >-
-      exact source alignment, endpoint validity, full-segment feasibility, LP dual,
+    primary_criterion: exact source alignment, endpoint validity, full-segment feasibility, LP dual,
       endpoint/interior rank-nullity, independent replay, and all declared mutations
-    reason: >-
-      The source poses match two exact valid endpoints, their whole declared segment is
-      feasible and optimal in one fixed-angle cell, and the exact nullities are 0/1/0.
+    reason: The source poses match two exact valid endpoints, their whole declared segment is feasible
+      and optimal in one fixed-angle cell, and the exact nullities are 0/1/0.
     commit: 07a7f96
 ---
 # exp-033 — the equal-side n = 5 pair shares an exact optimal face

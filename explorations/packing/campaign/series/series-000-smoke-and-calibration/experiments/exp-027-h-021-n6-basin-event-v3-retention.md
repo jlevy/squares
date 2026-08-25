@@ -1,7 +1,7 @@
 ---
 title: exp-027 — n=6 BasinEvent/v3 invalid-stop retention replication
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,17 +10,30 @@ experiment:
   series: series-000
   title: Replicate the n=6 block while retaining the independent-validity stop
   date: '2026-08-24'
-  hypotheses: [H-021]
+  hypotheses:
+  - H-021
   tier: exploratory
-  known_defects: [D-126, D-183]
+  known_defects:
+  - D-126
+  - D-183
   subject:
     label: uniform independent starts followed by the audited Python bracket quench
     engine: basin_census.py BasinEvent/v3 and sqpack quench
     engine_commit: a3be8e4
-    precision: f64_screen
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 6, role: positive_control}
+  instance:
+    axis: n
+    point: 6
+    role: positive_control
   method:
     candidate: four fixed starts after the D-183 invalid-event retention repair
     runs_per_condition: 4
@@ -29,10 +42,8 @@ experiment:
     commit: a3be8e4
     dirty: false
     entry_point: explorations/packing/tools/basin_census.py
-    command: >-
-      timeout 90 uv run --frozen --quiet python tools/basin_census.py run --n 6
-      --seeds 0-3 --time-budget 10 --output
-      campaign/series/series-000-smoke-and-calibration/results/exp-027-h-021-n6-basin-event-v3-retention.jsonl
+    command: timeout 90 uv run --frozen --quiet python tools/basin_census.py run --n 6 --seeds 0-3
+      --time-budget 10 --output campaign/series/series-000-smoke-and-calibration/results/exp-027-h-021-n6-basin-event-v3-retention.jsonl
     budget: four seeds; 10 seconds per quench; 90-second process cap; retain every stop
     record: campaign/series/series-000-smoke-and-calibration/results/exp-027-h-021-n6-basin-event-v3-retention.jsonl
   effort:
@@ -42,23 +53,19 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: >-
-      Does the repaired run retain all four n=6 outcomes, including an independently
-      invalid endpoint as a replayable non-admissible event with an exact blocker?
+    question: Does the repaired run retain all four n=6 outcomes, including an independently invalid
+      endpoint as a replayable non-admissible event with an exact blocker?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      BasinEvent/v3 replay: 4/4 outcomes retained and independently valid; 3/4
-      producer-converged and admissible; seed 3 is a typed time-budget stop; all 18,462
-      fixed-point evaluations settled
+    checked_by: 'BasinEvent/v3 replay: 4/4 outcomes retained and independently valid; 3/4 producer-converged
+      and admissible; seed 3 is a typed time-budget stop; all 18,462 fixed-point evaluations settled'
   verdict:
     decision: baseline
     primary_criterion: four replayable outcomes with validity and admissibility derived from evidence
-    reason: >-
-      The complete block is retained and replays. Seed 3 does not reproduce the prior
-      invalid endpoint; it remains visibly non-admissible for producer non-convergence.
-      The deterministic invalid-event regression closes D-183, while D-126 explains why
-      a wall-clock-limited seed need not reproduce one endpoint.
+    reason: The complete block is retained and replays. Seed 3 does not reproduce the prior invalid
+      endpoint; it remains visibly non-admissible for producer non-convergence. The deterministic
+      invalid-event regression closes D-183, while D-126 explains why a wall-clock-limited seed need
+      not reproduce one endpoint.
     commit: a3be8e4
 ---
 # exp-027 — the `n = 6` retention replication is complete

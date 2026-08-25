@@ -1,5 +1,9 @@
 # Review: The Toolkit Docs and the First Experiment Series
 
+> **Lifecycle:** Superseded for current results by the
+> [generated campaign ledger](../../../campaign/ledger.md).
+> Retained as a dated review record.
+
 **Date:** 2026-08-23
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
@@ -102,12 +106,12 @@ structural fact none of the five reports states:
 > All the nonconvexity of this problem lives in the angles and in the combinatorial
 > choice of cell.
 
-**Verified numerically in this review**, not just by inspection: fixing the eleven
-angles at Trump’s values and fixing each pair’s separating axis from the exact
-certificate yields a 1,056-constraint LP whose optimum is `s = 3.877083590023` — equal
-to the reference value at solver precision (difference below `10⁻¹²`) — and whose
-solution recovers all eleven centres to `9 × 10⁻¹⁶`. The cell containing Trump’s
-packing, solved as an LP, *is* Trump’s packing.
+**Numerically checked in this review**, not just by inspection: fixing the eleven angles
+at Trump’s values and fixing each pair’s separating axis from the exact certificate
+yields a 1,056-constraint LP whose optimum is `s = 3.877083590023` — equal to the
+reference value at solver precision (difference below `10⁻¹²`) — and whose solution
+recovers all eleven centres to `9 × 10⁻¹⁶`. The cell containing Trump’s packing, solved
+as an LP, *is* Trump’s packing.
 
 Consequences, in increasing order of ambition:
 

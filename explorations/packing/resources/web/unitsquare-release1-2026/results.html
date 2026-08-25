@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#f3f0e8">
+    <title>Six improved upper bounds | UnitSquare Results</title>
+    <meta
+      name="description"
+      content="Six verified constructions improving cited public upper bounds for packing congruent unit squares."
+    >
+    <meta name="author" content="UnitSquare Project">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Six improved upper bounds">
+    <meta
+      property="og:description"
+      content="Verified constructions for n = 68, 69, 103, 105, 110, and 131."
+    >
+    <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Dataset",
+        "name": "Six improved upper bounds for packing congruent unit squares",
+        "description": "Six interval-verified constructions improving public upper bounds for packing n congruent unit squares in a square.",
+        "datePublished": "2026-07-29",
+        "creator": {"@type": "Organization", "name": "UnitSquare Project"},
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "isBasedOn": "https://kingbird.myphotos.cc/packing/squares_in_squares.html",
+        "distribution": [
+          {
+            "@type": "DataDownload",
+            "encodingFormat": "application/json",
+            "contentUrl": "data/results.json"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <main id="top">
+      <header class="site-header">
+        <a class="wordmark" href="#top" aria-label="UnitSquare Results home">
+          <span aria-hidden="true" class="wordmark-mark">
+            <i></i><i></i><i></i><i></i>
+          </span>
+          <span>UnitSquare Results</span>
+        </a>
+        <nav aria-label="Primary navigation">
+          <a href="#results">Results</a>
+        </nav>
+        <span class="release">Release 1 · 29 July 2026</span>
+      </header>
+
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="kicker">Computational geometry · explicit constructions</p>
+          <h1 id="hero-title">Six improved<br>upper bounds.</h1>
+          <p class="deck">
+            New certified constructions for packing congruent unit squares inside
+            a square, at <em>n</em> = 68, 69, 103, 105, 110, and 131.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#results">View the constructions</a>
+            <a class="button" href="data/results.json" download>Download results JSON</a>
+          </div>
+        </div>
+
+        <aside class="claim-card" aria-label="Scope of the result">
+          <p class="card-label">Claim, precisely</p>
+          <p class="claim-number">6</p>
+          <h2>strictly smaller containers</h2>
+          <p>
+            Each displayed geometry is valid at the stated side length and is
+            strictly smaller than its cited public parent.
+          </p>
+          <dl>
+            <div>
+              <dt>Claim type</dt>
+              <dd>Improved upper bound</dd>
+            </div>
+            <div>
+              <dt>Search lane</dt>
+              <dd>Public-parent derived</dd>
+            </div>
+            <div>
+              <dt>Optimality claim</dt>
+              <dd>None</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="definition" aria-labelledby="definition-title">
+        <p class="section-number">01</p>
+        <div>
+          <p class="eyebrow">The problem</p>
+          <h2 id="definition-title">How small can the containing square be?</h2>
+        </div>
+        <div class="definition-copy">
+          <p class="formula">
+            <i>s</i>(<i>n</i>) = least side length that can contain <i>n</i>
+            non-overlapping unit squares
+          </p>
+          <p>
+            A valid construction with side <i>L</i> establishes
+            <i>s</i>(<i>n</i>) ≤ <i>L</i>. It does not, by itself, prove that
+            <i>L</i> is optimal. This release makes construction claims only.
+          </p>
+        </div>
+      </section>
+
+      <section class="results-section" id="results" aria-labelledby="results-title">
+        <div class="section-heading">
+          <p class="section-number">02</p>
+          <div>
+            <p class="eyebrow">The results</p>
+            <h2 id="results-title">Six explicit packings.</h2>
+            <p>
+              Open any figure to inspect or download the complete SVG geometry.
+              Side lengths below are the interval-validated offered sides.
+            </p>
+          </div>
+        </div>
+
+        <div class="result-grid">
+          <article class="result-card">
+            <a class="packing-frame" href="packings/n068.svg" aria-label="Open full SVG for n equals 68">
+              <img src="packings/n068.svg" alt="Certified packing of 68 congruent unit squares" width="1100" height="1180">
+            </a>
+            <div class="result-content">
+              <div class="result-title">
+                <p><i>n</i> = 68</p>
+                <span>Interval verified</span>
+              </div>
+              <dl class="measurements">
+                <div><dt>Our construction</dt><dd><code>8.803383074716108386903836683375989697670063329</code></dd></div>
+                <div><dt>Cited parent</dt><dd><code>8.80345993651653</code></dd></div>
+                <div><dt>Absolute reduction</dt><dd><code>0.0000768618004216131</code></dd></div>
+              </dl>
+              <p class="lineage"><span>Source contributors</span>Sigvart Brendberg · Thomas Schadt · David Ellsworth</p>
+              <div class="result-links">
+                <a href="packings/n068.svg" download>Our SVG ↓</a>
+                <a href="https://kingbird.myphotos.cc/packing/square-68.svg" target="_blank" rel="noreferrer">Parent SVG via Ellsworth ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="result-card">
+            <a class="packing-frame" href="packings/n069.svg" aria-label="Open full SVG for n equals 69">
+              <img src="packings/n069.svg" alt="Certified packing of 69 congruent unit squares" width="1100" height="1180">
+            </a>
+            <div class="result-content">
+              <div class="result-title">
+                <p><i>n</i> = 69</p>
+                <span>Interval verified</span>
+              </div>
+              <dl class="measurements">
+                <div><dt>Our construction</dt><dd><code>8.827205507815920656880680735618736931225314831</code></dd></div>
+                <div><dt>Cited parent</dt><dd><code>8.82721205592900</code></dd></div>
+                <div><dt>Absolute reduction</dt><dd><code>0.000006548113079343119</code></dd></div>
+              </dl>
+              <p class="lineage"><span>Source contributors</span>Maurizio Morandi · David W. Cantrell</p>
+              <div class="result-links">
+                <a href="packings/n069.svg" download>Our SVG ↓</a>
+                <a href="https://kingbird.myphotos.cc/packing/square-69.svg" target="_blank" rel="noreferrer">Parent SVG via Ellsworth ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="result-card">
+            <a class="packing-frame" href="packings/n103.svg" aria-label="Open full SVG for n equals 103">
+              <img src="packings/n103.svg" alt="Certified packing of 103 congruent unit squares" width="1100" height="1180" loading="lazy">
+            </a>
+            <div class="result-content">
+              <div class="result-title">
+                <p><i>n</i> = 103</p>
+                <span>Interval verified</span>
+              </div>
+              <dl class="measurements">
+                <div><dt>Our construction</dt><dd><code>10.703790283762427</code></dd></div>
+                <div><dt>Cited parent</dt><dd><code>10.70383477210707</code></dd></div>
+                <div><dt>Absolute reduction</dt><dd><code>0.000044488344643</code></dd></div>
+              </dl>
+              <p class="lineage"><span>Source contributors</span>Thomas Schadt · David Ellsworth</p>
+              <div class="result-links">
+                <a href="packings/n103.svg" download>Our SVG ↓</a>
+                <a href="https://kingbird.myphotos.cc/packing/square-103.svg" target="_blank" rel="noreferrer">Parent SVG via Ellsworth ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="result-card">
+            <a class="packing-frame" href="packings/n105.svg" aria-label="Open full SVG for n equals 105">
+              <img src="packings/n105.svg" alt="Certified packing of 105 congruent unit squares" width="1100" height="1180" loading="lazy">
+            </a>
+            <div class="result-content">
+              <div class="result-title">
+                <p><i>n</i> = 105</p>
+                <span>Interval verified</span>
+              </div>
+              <dl class="measurements">
+                <div><dt>Our construction</dt><dd><code>10.807847913867976</code></dd></div>
+                <div><dt>Cited parent</dt><dd><code>10.80789399144854</code></dd></div>
+                <div><dt>Absolute reduction</dt><dd><code>0.000046077580564</code></dd></div>
+              </dl>
+              <p class="lineage"><span>Source contributors</span>Thomas Schadt · David Ellsworth</p>
+              <div class="result-links">
+                <a href="packings/n105.svg" download>Our SVG ↓</a>
+                <a href="https://kingbird.myphotos.cc/packing/square-105.svg" target="_blank" rel="noreferrer">Parent SVG via Ellsworth ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="result-card">
+            <a class="packing-frame" href="packings/n110.svg" aria-label="Open full SVG for n equals 110">
+              <img src="packings/n110.svg" alt="Certified packing of 110 congruent unit squares" width="1100" height="1180" loading="lazy">
+            </a>
+            <div class="result-content">
+              <div class="result-title">
+                <p><i>n</i> = 110</p>
+                <span>Interval verified</span>
+              </div>
+              <dl class="measurements">
+                <div><dt>Our construction</dt><dd><code>10.996797773597706</code></dd></div>
+                <div><dt>Cited parent</dt><dd><code>10.99683777797875</code></dd></div>
+                <div><dt>Absolute reduction</dt><dd><code>0.000040004381052</code></dd></div>
+              </dl>
+              <p class="lineage"><span>Source contributors</span>David W. Cantrell · David Ellsworth</p>
+              <div class="result-links">
+                <a href="packings/n110.svg" download>Our SVG ↓</a>
+                <a href="https://kingbird.myphotos.cc/packing/square-110.svg" target="_blank" rel="noreferrer">Parent SVG via Ellsworth ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="result-card">
+            <a class="packing-frame" href="packings/n131.svg" aria-label="Open full SVG for n equals 131">
+              <img src="packings/n131.svg" alt="Certified packing of 131 congruent unit squares" width="1100" height="1180" loading="lazy">
+            </a>
+            <div class="result-content">
+              <div class="result-title">
+                <p><i>n</i> = 131</p>
+                <span>Interval verified</span>
+              </div>
+              <dl class="measurements">
+                <div><dt>Our construction</dt><dd><code>11.956543108124773261501115489978287643498579738</code></dd></div>
+                <div><dt>Cited parent</dt><dd><code>11.95654869347733</code></dd></div>
+                <div><dt>Absolute reduction</dt><dd><code>0.0000055853525567384986</code></dd></div>
+              </dl>
+              <p class="lineage"><span>Source contributors</span>Károly Hajba · David Ellsworth</p>
+              <div class="result-links">
+                <a href="packings/n131.svg" download>Our SVG ↓</a>
+                <a href="https://kingbird.myphotos.cc/packing/square-131.svg" target="_blank" rel="noreferrer">Parent SVG via Ellsworth ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,5 +1,9 @@
 # Review: The Experiment Loop, the Campaign, and the Consolidation (PR #5)
 
+> **Lifecycle:** Superseded for current guidance by the
+> [campaign runbook](../../../campaign/README.md).
+> Retained as a dated review record.
+
 **Date:** 2026-08-23
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
@@ -71,10 +75,11 @@ failing at review time.
   makes the register cheap and results comparable.
   The reviewed documents implied this; the PR is the first place it is stated as a build
   order, and the revised Phases 2–7 are in genuine dependency order.
-- **The tier discipline is exactly right.** `f64_screen` / `polished` / `exact`, with
-  `beat_record: true` writable only at `exact` and the frontier editable only by a
-  deliberate human-reviewed change, encodes the repository’s central lesson (14 zero-gap
-  pairs; no float check can certify) as *process*, not just prose.
+- **The tier discipline was directionally right.** The then-current `f64_screen` /
+  `polished` / `exact` labels, with `beat_record: true` writable only at `exact` and the
+  frontier editable only by a deliberate human-reviewed change, encodes the repository’s
+  central lesson (14 zero-gap pairs; no float check can certify) as *process*, not just
+  prose.
 - **The controls mostly earned their keep.** The `n = 10` positive control killed two
   broken search formulations; the inert `--budget-moves` defect was caught by its own
   tell (results worsening at larger declared budget).
@@ -303,8 +308,9 @@ Within it, the highest-information next steps, cheapest first:
 1. **H-018 today** — instrument-ready, minutes of compute, and its result reshapes
    everything after it (a basin-width number for Trump’s cell, from inside).
 2. **H-002, the quench** — `scipy`-only, unblocks basin identity, the atlas, H-011,
-   H-012, and the `polished` tier that exp-001’s own polish-vs-exploration distinction
-   showed is urgent. The single-cell LP is verified; the loop is the work.
+   H-012, and the then-current `polished` label that exp-001’s own polish-vs-exploration
+   distinction showed is urgent.
+   The single-cell LP is verified; the loop is the work.
 3. **H-011 → H-012** — the census and the premise test, exactly as Phase 5 orders them.
 4. Only then strategy proposers (Phase 4), compared through one pipeline.
 

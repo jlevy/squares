@@ -1,7 +1,7 @@
 ---
 title: exp-010 — the angle objective is a corner, not a basin floor
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,26 +10,38 @@ experiment:
   series: series-000
   title: One-sided derivatives of the LP-in-cell optimum at Trump's tilt
   date: '2026-08-23'
-  hypotheses: [H-019]
+  hypotheses:
+  - H-019
   tier: exploratory
   subject:
     label: sqpack.quench single-cell fixed point, probed either side of the optimal tilt
-    engine: 'sqpack.quench 0.2.0'
-    engine_commit: '8b450a1'
-    precision: polished
+    engine: sqpack.quench 0.2.0
+    engine_commit: 8b450a1
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: Linux container, 8 cores (remote session)
     selftest_passed: true
-  instance: {axis: n, point: 11, role: target}
+  instance:
+    axis: n
+    point: 11
+    role: target
   method:
     control: 'delta = 0: the exact tilt, where the cell solve must reproduce the published side'
-    candidate: 'the shared tilt of all five tilted squares displaced by delta, centres re-optimised by LP'
+    candidate: the shared tilt of all five tilted squares displaced by delta, centres re-optimised
+      by LP
     runs_per_condition: 1
     interleaved: false
     operator: claude-opus-5
-    commit: '8b450a1'
+    commit: 8b450a1
     entry_point: explorations/packing/sqpack/quench.py
-    command: 'solve_to_fixed_point over delta in +/-{1e-6 .. 1e-2}, tilted squares moved together'
-    budget: '11 probes'
+    command: solve_to_fixed_point over delta in +/-{1e-6 .. 1e-2}, tilted squares moved together
+    budget: 11 probes
     record: campaign/series/series-000-smoke-and-calibration/results/exp-010-angle-kink.jsonl
   effort:
     timebox: 15m
@@ -42,38 +54,42 @@ experiment:
     role: outcome
     control_median: 0.1747
     candidate_median: 0.3841
-    control_range: [0.1747, 0.1748]
-    candidate_range: [0.3840, 0.3846]
+    control_range:
+    - 0.1747
+    - 0.1748
+    candidate_range:
+    - 0.384
+    - 0.3846
     overlapping: false
   - shape: determination
-    question: 'do the two one-sided derivatives of s at the optimal tilt differ'
+    question: do the two one-sided derivatives of s at the optimal tilt differ
     role: outcome
     outcome: reached_basin
-    checked_by: 'left slope 0.1747, right slope 0.3841, ratio 2.198, over five decades of delta on each side'
+    checked_by: left slope 0.1747, right slope 0.3841, ratio 2.198, over five decades of delta on
+      each side
   - shape: record
     metric: excess_at_exact_tilt
     role: guard
     direction: lower
     score: 1.742e-10
     standing_best: 0.0
-    standing_best_source: 'frontier/n-011.md (Trump 1979)'
+    standing_best_source: frontier/n-011.md (Trump 1979)
     beat_record: false
     runs: 1
   complexity:
     lines_changed: 0
     new_dependencies: []
     new_failure_modes: []
-    notes: 'Pure measurement; no instrument change. First observed during exp-006 and re-run here as its own round, since it tests a different claim.'
+    notes: Pure measurement; no instrument change. First observed during exp-006 and re-run here as
+      its own round, since it tests a different claim.
   verdict:
     decision: accepted
     primary_criterion: one_sided_slope_of_s_at_optimal_tilt
-    reason: >-
-      Confirms H-019: the one-sided slopes are 0.1747 and 0.3841, a ratio of 2.198 that
-      is stable over five decades on each side, so the optimum of s(theta) is a corner
-      rather than a smooth minimum on this shared-tilt slice. A smooth local model is
-      misspecified at that point; this round does not establish a general convergence
-      impossibility.
-    commit: '8b450a1'
+    reason: 'Confirms H-019: the one-sided slopes are 0.1747 and 0.3841, a ratio of 2.198 that is
+      stable over five decades on each side, so the optimum of s(theta) is a corner rather than a
+      smooth minimum on this shared-tilt slice. A smooth local model is misspecified at that point;
+      this round does not establish a general convergence impossibility.'
+    commit: 8b450a1
 ---
 # exp-010 — the corner
 

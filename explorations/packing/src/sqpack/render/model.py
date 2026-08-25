@@ -16,9 +16,14 @@ class ScalarKind(StrEnum):
 
 class EvidenceTier(StrEnum):
     CANDIDATE = "candidate"
-    VERIFIED_CONSTRUCTION = "verified-construction"
+    NUMERICALLY_CHECKED = "numerically-checked"
     CERTIFIED_UPPER_BOUND = "certified-upper-bound"
     PROVED_OPTIMUM = "proved-optimum"
+
+
+class CheckKind(StrEnum):
+    NUMERICAL = "numerical"
+    FORMAL = "formal"
 
 
 class ViewLevel(StrEnum):
@@ -82,9 +87,14 @@ class SquareGeometry:
 
 
 @dataclass(frozen=True)
-class VerificationSummary:
-    valid: bool
+class CheckSummary:
+    passed: bool
+    kind: CheckKind
     method: str
+    arithmetic: str = ""
+    precision: str = ""
+    rounding: str = ""
+    tolerance: str = ""
     detail: str = ""
 
 
@@ -111,7 +121,7 @@ class PackingFrame:
     container_side: ScalarSource
     squares: tuple[SquareGeometry, ...]
     evidence: EvidenceTier = EvidenceTier.CANDIDATE
-    verification: VerificationSummary | None = None
+    check: CheckSummary | None = None
     label: str = "final"
     logical_time: Decimal = Decimal(0)
     source_id: str = ""
@@ -186,7 +196,9 @@ def validate_frame(frame: PackingFrame) -> None:
     feature_ids = [feature.feature_id for feature in frame.features]
     if len(feature_ids) != len(set(feature_ids)) or feature_ids != sorted(feature_ids):
         raise ValueError("feature IDs must be unique and stable")
-    verified = frame.verification is not None and frame.verification.valid
+    check = frame.check
+    check_passed = check is not None and check.passed
+    formally_checked = check_passed and check is not None and check.kind is CheckKind.FORMAL
     for feature in frame.features:
         if not feature.feature_id.strip():
             raise ValueError("feature ID must be non-empty")
@@ -207,8 +219,8 @@ def validate_frame(frame: PackingFrame) -> None:
             feature.start.y.projected,
         ) == (feature.end.x.projected, feature.end.y.projected):
             raise ValueError("contact segment must be nondegenerate")
-        if not verified:
-            raise ValueError("contact features require successful verification")
+        if not formally_checked:
+            raise ValueError("contact features require a successful formal check")
         if len(feature.square_ids) != len(set(feature.square_ids)):
             raise ValueError("contact square IDs must be unique")
         if feature.square_ids != tuple(sorted(feature.square_ids)):
@@ -218,8 +230,41 @@ def validate_frame(frame: PackingFrame) -> None:
         expected_participants = 1 if feature.wall is not None else 2
         if len(feature.square_ids) != expected_participants:
             raise ValueError("contact participants do not match its geometry")
-    if frame.evidence is not EvidenceTier.CANDIDATE and not verified:
-        raise ValueError("non-candidate evidence requires successful verification")
+    if frame.evidence is EvidenceTier.NUMERICALLY_CHECKED and (
+        not check_passed or check is None or check.kind is not CheckKind.NUMERICAL
+    ):
+        raise ValueError("numerically checked evidence requires a successful numerical check")
+    if frame.evidence is EvidenceTier.NUMERICALLY_CHECKED and check is not None:
+        missing = [
+            field_name
+            for field_name in ("arithmetic", "precision", "rounding", "tolerance")
+            if not getattr(check, field_name).strip()
+        ]
+        if missing:
+            raise ValueError("numerically checked evidence requires " + ", ".join(missing))
+    if frame.evidence in {
+        EvidenceTier.CERTIFIED_UPPER_BOUND,
+        EvidenceTier.PROVED_OPTIMUM,
+    }:
+        if not formally_checked:
+            raise ValueError("formal evidence requires a successful formal check")
+        if check is not None and any(
+            getattr(check, field_name).strip()
+            for field_name in ("precision", "rounding", "tolerance")
+        ):
+            raise ValueError("formal evidence must not use precision or tolerance as assurance")
+        formal_sources = [frame.container_side]
+        formal_sources.extend(
+            value
+            for square in frame.squares
+            for point in square.corners
+            for value in (point.x, point.y)
+        )
+        if any(
+            value.kind not in {ScalarKind.RATIONAL, ScalarKind.EXACT}
+            for value in formal_sources
+        ):
+            raise ValueError("formal evidence requires rational or exact geometry sources")
     if not frame.logical_time.is_finite():
         raise ValueError("logical frame time must be finite")
 
