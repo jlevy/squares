@@ -124,6 +124,14 @@ could be traced to a primary artifact:
   its own registration of the same phenomenon (D-320) with a semantic golden comparison
   that closes the wrap class outright, so no separate entry remains and `think-57x3`’s
   durability proposal is resolved by that landed fix.
+- **SR-9** (D-335, `think-ao4o`, raised by the user reading the figure cold) — §3’s
+  `F₃(2)` quotient-map figure used six symbols the document never defines, its `λ` axis
+  silently collided with the text’s slider `t`, and its significance — the exact
+  known-answer control behind exp-032’s component-identity gate and §8’s open question 1
+  — was never claimed, so the section’s strongest evidence read as decoration.
+  A significance passage now walks each quotient stage as the wrong identity it kills,
+  states `λ = min(t − 1/2, 3/2 − t)`, and wires the figure to exp-032’s seven rejected
+  false policies; the notation card gains `F₃(2)`, `S₃`/`D₄`, and `λ` rows.
 
 **Precision, no defect entry.**
 
@@ -142,13 +150,13 @@ could be traced to a primary artifact:
 Epic `think-2xex` owns this iteration.
 Merge-phase findings: `think-16qn`, `think-clin`, `think-0emo`. Tutorial-pass findings:
 `think-mb6q`, `think-suzm`, `think-6z2v`, `think-bqjd`, `think-ojgc`, `think-aihj`.
-Post-push CI finding: `think-d2ah`; durability follow-up `think-57x3`, resolved by #31’s
-semantic golden comparison.
+Post-push CI finding: `think-d2ah`; post-ready finding `think-ao4o`; durability
+follow-up `think-57x3`, resolved by #31’s semantic golden comparison.
 After #31 landed with D-320 through D-325 and the PR 37 review with D-326 and D-327,
 this review’s surviving entries were renumbered again to D-328 through D-334; the three
 superseded ones (the H-024 restoration, the H-024 row rewording, and the golden
 serialization) carry no entries.
-Defects D-328 through D-334 are registered with these beads and are all fixed on this
+Defects D-328 through D-335 are registered with these beads and are all fixed on this
 branch.
 
 <!-- This document follows common-doc-guidelines.md.

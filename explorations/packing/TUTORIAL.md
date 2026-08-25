@@ -346,11 +346,36 @@ mimics a real discovery—distinct coordinates, distinct keys, two rows in the s
 the side agrees exactly and, along the family’s open stratum, so does the contact
 certificate (the wall endpoints carry a different one).
 
+The object that survives this trap has been computed exactly, and the figure below is
+its map. `F₃(2)` is the space of *all* packings of three unit squares in the side-2
+container—and since `s(3) = 2` is proved, that is the complete optimum space, not a
+sample of it. With the squares labelled, the space is two disjoint circles, each a cycle
+through twelve discrete states, cross-checked against the published hard-squares
+computation of the same space.
+Forgetting the labels—quotienting by the symmetric group `S₃`—merges the two circles
+into one: relabelling was separating configurations the mathematics does not
+distinguish. Quotienting also by the container’s eight symmetries `D₄` folds that circle
+to the closed interval `λ ∈ [0, 1/2]`, where `λ = min(t − 1/2, 3/2 − t)` is the slider
+parameter above with the reflection `t ↔ 2 − t` divided out.
+Three strata remain: the corner pose at `λ = 0`, the generic slide, and the centred pose
+at `λ = 1/2`.
+
 ![The exact quotient map of optimal configurations for three unit squares.](atlas/n-003-optimal-moduli.svg)
 
-*The exact `n = 3` control shows why a terminal family cannot be represented honestly as
-a bag of endpoint coordinates: a continuum of labelled poses becomes one quotient
-interval with distinguished strata.*
+*Each quotient stage kills one wrong identity—relabellings and container symmetries are
+not new basins—and the interval kills the rest: four exact sample poses with four
+distinct geometric keys, two contact signatures, and three strata are one connected
+component.*
+
+That is why this object is a permanent known-answer control rather than an illustration.
+A frozen component-assignment policy is accepted only if it recovers this interval, and
+the `n = 4` quotient point, exactly while rejecting every shortcut:
+[exp-032](campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md)
+proposed geometric keys, contact signatures, finite samples, labelled states, and
+floating-point matches as component identities, and all seven such mutations were
+refused. Passing that gate is what admitted the bounded `n = 5` connectivity work below,
+and this map is the only exact ground truth behind open question 1 in
+[§8](#8-what-is-known-and-what-is-not).
 
 `n = 3` is small enough to look like a curiosity, so it is worth knowing the same
 phenomenon has been pinned down at a size that is not obviously degenerate.
@@ -959,6 +984,9 @@ corners of one square, get one because they appear inside `oᵢₖ`.
 | `φ` | `[0, π/2) → ℝ` | The optimal side of a fixed cell as a function of its one free class angle |
 | `s*` | real | The standing-best side for an `n`, used as the base of an inflation ladder `s* + δ`. Not a minimiser: whether it equals `s(n)` is the open question |
 | `t` | real | The slider parameter of the `n = 3` terminal family |
+| `F₃(2)` | space | All packings of three unit squares in the side-2 container—the complete `n = 3` optimum space |
+| `S₃`, `D₄` | groups | The six relabellings of three squares, and the eight symmetries of the square container |
+| `λ` | `[0, 1/2]` | The `n = 3` family’s coordinate after both quotients: `λ = min(t − 1/2, 3/2 − t)` |
 | `α` | algebraic | A primitive element: the single number generating a packing’s field `ℚ(α)` |
 | `μ` | polynomial | The minimal polynomial of `α`; `deg μ` is the field’s degree |
 | `β` | element of `ℚ(α)` | An arbitrary field element, represented by a polynomial in `α` of degree `< deg μ` |

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 334
+count: 335
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8560,3 +8560,36 @@ defects:
     checker-enforced.
   bead: think-aihj
   recorded_in: SYNOPSIS.md
+- id: D-335
+  title: The tutorial's moduli figure went unexplained and its axis collided with the text
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: two tutorial reviews and one soundness iteration
+  severity: medium
+  status: fixed
+  what: >-
+    The F3(2) quotient-map figure in tutorial section 3 used six symbols the document
+    never defines (F3(2), S3, D4, lambda, the stratum letters, and the wall/axes/stab
+    counts) against section 10's promise to collect every symbol; its axis lambda in
+    [0,1/2] silently collided with the text's slider t in [1/2,3/2]; and the figure's
+    significance - the exact known-answer control behind exp-032's component-identity
+    gate and open question 1 - was never claimed, so it read as decoration.
+  consequence: >-
+    A reader meeting the figure cold could not connect it to the section's argument,
+    reconcile its parameter with the text's, or see why the twelve-state circles
+    matter; the section's strongest evidence carried none of its weight, and the
+    reader who raised it took it for an unexplained insertion.
+  fix: >-
+    A significance passage now defines F3(2), walks the two quotient stages as the
+    wrong identities they kill, states lambda = min(t - 1/2, 3/2 - t) with the t ~ 2-t
+    identification, and wires the figure to exp-032's seven rejected false policies
+    and section 8's open question 1; the notation card gains F3(2), S3/D4, and lambda
+    rows.
+  regression: >-
+    none automated; figure-symbol coverage against the notation card remains review
+    work.
+  bead: think-ao4o
+  recorded_in: TUTORIAL.md
