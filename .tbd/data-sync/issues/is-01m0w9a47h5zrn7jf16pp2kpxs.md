@@ -5,7 +5,7 @@ title: "Run session-011: continue the eight-hour portfolio after the cycle cap"
 kind: epic
 status: in_progress
 priority: 0
-version: 13
+version: 14
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: codex-root
 labels: []
@@ -22,10 +22,10 @@ child_order_hints:
   - is-01m0whrrq5zf4jgb25zxfrxa63
   - is-01m0wjyxhrzxbq2a9fz33795kt
 created_at: 2026-08-25T11:01:28.432Z
-updated_at: 2026-08-25T13:50:06.904Z
+updated_at: 2026-08-25T13:59:18.222Z
 ---
 Continue the original session-010 wall-clock research objective from the final green PR 29 head without weakening its terminal record. Use a wall-time-dominant bounded contract that cannot exhaust merely because successful slices finish early. First frozen cell is order 7 under think-b4jc: verify seeded-output equivalence, independently recompute pair-test totals, and measure unloaded-host overhead; reject on any drift, unexplained count, or competing load. Then preserve the first unmetered adapter and continue the diverse frozen portfolio with 20/30-minute evidence stops, frequent pushed checkpoints, defect logging, bead sync, PR review monitoring, and retrospective agent-loop statistics.
 
 ## Notes
 
-PR 34 checkpoint 5d8320b freezes H-042 after order-7 meter correctness passed and timing stopped on host load. Orders 8-10 then registered the grouped-incidence criterion, built and independently accepted one exact regenerated branch-0 pilot, and stopped the wider run at five recorded validity/durability blockers; H-042 is 1/128 unresolved and has no experiment id. D-283 tracks zero-step search nontermination; D-284 through D-293 preserve criterion contamination, pilot bugs, command mistakes, and expansion boundaries. Phase 5 rotates to frozen order 11 under think-tx0b for one bounded validation timeout/process-group primitive. The 08:06 final reserve and 20/30-minute bounds remain binding.
+PR 34 head 07f3af3 is the green 14-cell checkpoint. Session-014 preserves the original 08:36:03 deadline: bounded D-239 production subprocess timeout policy through 07:27, at most one evidence-earned research slice through 07:57, then protected finalization from 08:06. Detailed subagent timing remains deferred to log extraction.
