@@ -387,7 +387,7 @@ This is the actionable list.
 | [D-200](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping | conservative | `inspection` | medium | fixed | The synopsis gate-defect enumeration omitted D-198 |
 | [D-201](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `review` | medium | fixed | Two mutation controls retained pre-integration expected diagnostics |
 | [D-202](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `anomaly` | medium | contained | A delegated long-running validation lost its final receipt |
-| [D-203](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | quench | robustness | conservative | `gate` | high | outstanding | The n=4 seed-0 quench ends on a HiGHS solve error |
+| [D-203](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-24 | quench | robustness | conservative | `gate` | high | outstanding | The n=4 seed-0 quench ends on a HiGHS solve error |
 | [D-204](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The gate-aggregate control expected the mutated value |
 | [D-205](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `review` | high | fixed | The stacked workflow PR retained a superseded scientific checkpoint |
 | [D-206](campaign/schemas/agent-session.schema.yaml) | 2026-08-24 | record | robustness | flattering | `review` | high | fixed | The phase schema could not express the resumable contract promised by the docs |

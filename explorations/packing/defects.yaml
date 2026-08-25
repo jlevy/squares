@@ -5213,17 +5213,23 @@ defects:
     After D-199 restores the n=10 ladder, both declared pool widths still rebuild n=4
     with only 3/4 proposals converged. A bounded four-seed slice isolates seed 0 at side
     2.0205018998600455: its bracket probe stops on an initial-cell HiGHS status-4 Solve
-    error after 3,404 LP solves and 2,884 fixed-point evaluations.
+    error after 3,404 LP solves and 2,884 fixed-point evaluations. Exact primal and dual
+    certificates prove the retained 22-by-9 LP feasible and optimal at
+    2.00103283426408968; its rank is 9 and condition ratio is about 3.23.
   consequence: >-
     The strict golden remains red and the extra valid but nonconverged n=4 endpoint
     cannot be promoted or silently removed. Small-n calibration is not yet a trustworthy
     unattended launch gate.
   fix: >-
-    none yet; capture the exact failing theta, cell, matrices and solver receipt, then
-    diagnose from a millisecond fixture before another full-golden run
-  regression: none yet
+    not implemented yet; on status 4 only, retry the identical LP once with highs-ipm
+    under the same 1e-10 tolerances, count and retain both solver attempts, and pass the
+    result through the unchanged complete original-row residual screen
+  regression: >-
+    the retained millisecond fixture exact-rebuilds the LP and reproduces status 4;
+    focused fallback controls must cover IPM success, bad-residual refusal, dual failure,
+    and both-attempt accounting before another seed or golden run
   bead: think-nr5w
-  recorded_in: campaign/agent-sessions/session-009-autonomous-basin-map.md
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md
 - id: D-204
   title: The gate-aggregate control expected the mutated value
   date: '2026-08-24'

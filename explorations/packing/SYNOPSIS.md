@@ -2021,6 +2021,12 @@ zero all-original-row residual.
 All seven ladder rungs now converge at pool widths 10 and 1. [D-203](defects.md)
 isolates the remaining n=4 seed-0 stop as a distinct HiGHS status-4 Solve error; the
 golden remains red at 3/4 n=4 proposals.
+Its retained LP is not malformed or globally ill-conditioned: independent exact
+primal/dual certificates prove the finite optimum `2.00103283426408968`, rank 9, and
+zero duality gap. The failure is dual-simplex presolve/postsolve instability on a thin
+near-degenerate optimal face.
+Strict `highs-ipm` solves the identical LP with zero original-row residual; default
+tolerances and presolve-off simplex are rejected because their residuals exceed `1e-10`.
 [D-260](defects.md) through [D-262](defects.md) record and correct the fixture-capture
 hazards found before commit: a cross-wired geometric context, a receipt that initially
 defined its own acceptance, and a pytest-only completion claim while static checks were

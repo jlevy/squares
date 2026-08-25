@@ -464,7 +464,7 @@ session:
       Independently diagnose the retained n=4 seed-0 LP: distinguish a malformed or
       ill-conditioned model from a platform-dependent HiGHS failure, and decide whether
       exactly one bounded W7 repair is earned.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       Portfolio order 4 produced the required exact millisecond fixture without changing
@@ -486,10 +486,70 @@ session:
     fallback: >-
       Keep D-203 and think-nr5w open, record the diagnosis as unresolved and route any
       load-dependent solver question to portfolio order 12.
+    outcome: >-
+      Three independent reviews and a coordinator replay agree that D-203 is a HiGHS
+      dual-simplex presolve/postsolve failure on a sound near-degenerate LP, and that one
+      status-4-only strict-IPM fallback is scientifically earned.
+    evidence:
+    - >-
+      Exact arithmetic gives a primal and dual optimum at 2.00103283426408968 with zero
+      gap; A has rank 9 and condition ratio 3.23, while one active basis has condition
+      ratio 6.92.
+    - >-
+      The optimal face is only about 1.09e-9 by 8.98e-11 and has 27 near-active optimal
+      bases. HiGHS ignores six 9.63e-16 coefficients, presolves 22-by-9 to 4-by-3, then
+      dual-simplex postsolve exposes two violations totaling 2.08982e-9 and aborts.
+    - >-
+      Strict highs/highs-ds reproduced status 4 in 13 of 13 calls. Default tolerances
+      and presolve-off simplex were rejected because original-row residuals reached
+      1.09e-9 and 3.30e-8.
+    - >-
+      Strict highs-ipm solves the identical LP and tolerances at the exact certified
+      objective with zero or 2.22e-16 original-row residual; no geometry, threshold, or
+      golden change is justified.
+    - >-
+      Both solver attempts must remain explicit and counted; otherwise the recovered
+      numerical failure would disappear from cost and provenance receipts.
+    stop_reason: >-
+      Exact certificates, independent geometric reconstruction, and repeated method
+      controls converged on one narrow diagnosis and repair before the phase deadline.
+    next_action: >-
+      Implement one status-4-only highs-ipm retry with unchanged inputs and screen,
+      explicit attempt receipts, and the existing four-call cap.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Implement the earned D-203 repair: retry only HiGHS status 4 with highs-ipm on the
+      identical LP and tolerances, retain and count both attempts, and preserve the
+      complete original-row residual screen and finite call cap.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Independent W2 review proved the LP sound and identified a method-specific
+      postsolve failure; exactly one bounded W7 repair is now authorized.
+    budget_minutes: 30
+    started_at: '2026-08-25T02:39:00-07:00'
+    deadline_at: '2026-08-25T03:09:00-07:00'
+    expected_output: >-
+      A minimal solve_cell fallback with explicit method/status receipts, actual fixture
+      recovery, deterministic status4-to-IPM and dual-failure controls, bad-residual
+      refusal, and no change to LP_FEASIBLE_EPS or the golden.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --all-extras --group dev
+      pytest -q tests/test_research_contracts.py -k n4_seed0_highs_failure
+    kill_condition: >-
+      Stop implementation at twenty minutes and reserve ten for review and checkpoint;
+      do not run seed 0 or the golden, broaden fallback beyond status 4, increase the
+      four-call cap, or accept any result outside the unchanged original-row screen.
+    fallback: >-
+      Retain the reviewed interface and smallest failing deterministic control, leave
+      D-203 open, and rotate without a production change.
     outcome: null
     evidence: []
     stop_reason: null
-    next_action: Review the exact fixture independently before authorizing any repair.
+    next_action: Delegate the mechanical fallback while reviewing attempt accounting.
   primary_bead: think-3cbq
   status: in_progress
   budget:
@@ -1167,6 +1227,84 @@ session:
     fallback: Retain fixture and rebuild control even if live HiGHS succeeds portably.
     write_scope: [tests/fixtures/n4_seed0_highs_status4.yaml, tests/test_research_contracts.py]
     excluded_commands: [git, tbd, production edits, full golden]
+  - task: Prove or refute structural feasibility of the retained n=4 LP.
+    operator: /root/n4_lp_exact_diagnosis
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Produced exact primal and dual certificates with zero gap, isolated the thin
+      optimal face and HiGHS postsolve failure, and recommended one strict-IPM fallback.
+    evidence:
+    - Exact optimum is 2.00103283426408967985015251557; A rank is 9 and condition ratio is 3.23.
+    - The active face is about 1.09e-9 by 8.98e-11 with two exact zero dual multipliers.
+    files: []
+    checks: [Exact rational basis and dual certificate, bounded HiGHS method probes.]
+    uncertainty: The proposed production attempt receipt and call accounting were not implemented.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Authorize only the status-4 strict-IPM fallback with explicit receipts.
+    phase: 9
+    budget_minutes: 17
+    started_at: '2026-08-25T02:33:00-07:00'
+    deadline_at: '2026-08-25T02:50:00-07:00'
+    expected_output: Exact feasibility, rank, duality, conditioning, and repair disposition.
+    validation_command: Independent exact A/B reconstruction and basis solve.
+    kill_condition: Stop by 02:50 without repository edits or a golden run.
+    fallback: Return the strongest exact discriminator and unresolved alternatives.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, production edits, full golden]
+  - task: Compare bounded direct HiGHS methods on the exact retained LP.
+    operator: /root/n4_highs_behavior
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Reproduced strict status 4 in 13 of 13 calls, rejected two false-success
+      alternatives by the original-row screen, and found strict IPM cleanly feasible.
+    evidence:
+    - Default and presolve-off simplex residuals were 1.09e-9 and 3.30e-8.
+    - Strict IPM residuals were zero with presolve and 2.22e-16 without it.
+    files: []
+    checks: [Fresh-process repetition, method, presolve, tolerance, and scaling table.]
+    uncertainty: Only the pinned SciPy/HiGHS build and retained LP were measured.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Reject tolerance relaxation and use one unchanged strict-IPM retry.
+    phase: 9
+    budget_minutes: 17
+    started_at: '2026-08-25T02:33:00-07:00'
+    deadline_at: '2026-08-25T02:50:00-07:00'
+    expected_output: Repeated method receipts, complete residuals, and repair recommendation.
+    validation_command: Direct fixture LP calls, each under ten seconds.
+    kill_condition: Stop by 02:50 without quench, golden, or repository writes.
+    fallback: Preserve the first reproducible method discriminator.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, production edits, full golden]
+  - task: Rebuild the geometric model and independently audit the status-4 cause.
+    operator: /root/n4_model_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Rebuilt all 22 rows and six SAT choices exactly, proved incoming and IPM witnesses
+      packing-valid, and independently agreed on the narrow strict-IPM fallback.
+    evidence:
+    - Every h recomputed bit-exactly and every stored cell axis/sign is the true maximizer.
+    - A sparse dual has stationarity residual about 1e-18 and duality gap 4.44e-16.
+    files: []
+    checks: [Independent SAT replay, active-basis solve, dual, and HiGHS method probes.]
+    uncertainty: The seven-minute audit did not inspect a production repair because W2 forbade edits.
+    elapsed_seconds: 420
+    elapsed_quality: operator_reported_approximate
+    next_action: Implement and independently review the smallest earned W7 change.
+    phase: 9
+    budget_minutes: 17
+    started_at: '2026-08-25T02:33:00-07:00'
+    deadline_at: '2026-08-25T02:50:00-07:00'
+    expected_output: Geometric validity, independent certificate, and repair disposition.
+    validation_command: Independent 22-row/SAT rebuild and exact or high-precision basis checks.
+    kill_condition: Stop by 02:50 without repository edits, golden, or tolerance changes.
+    fallback: Return the first model mismatch or strongest solver-instability evidence.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, production edits, full golden]
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
@@ -1231,10 +1369,14 @@ session:
     Phase-8 checkpoint reconciliation passes packing-ledger check with 38 rounds and ten
     sessions, synopsis and 265-defect generated-view checks, and all 62 mutation controls;
     D-264 and D-265 preserve the two session-record failures caught on the first check.
+  - >-
+    Phase-9 exact, numerical, and geometric reviews independently certify the retained
+    n=4 LP and agree on a status-4-only strict-IPM fallback; PR 29's fixture checkpoint
+    passes both Linux and macOS CI with no review comments.
   stop_reason: null
   next_action: >-
-    Commit and push the terminal phase-8 fixture checkpoint, then open portfolio order
-    5 as an independent W2 diagnosis of D-203 under think-nr5w.
+    Commit and push the terminal phase-9 diagnosis, then implement exactly one bounded
+    D-203 status-4-to-IPM fallback under phase 10 without running a seed or golden.
 ---
 ## Session Boundary
 
