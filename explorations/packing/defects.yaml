@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 254
+count: 255
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -6530,3 +6530,32 @@ defects:
     stress perturbations, and a sharp global and terminal refusal boundary
   bead: think-p6j0
   recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
+- id: D-255
+  title: Four exact negative-control anchors lagged the current living-document values
+  date: '2026-08-25'
+  layer: tooling
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: the first complete CI gate after D-250 through D-254
+  severity: medium
+  status: fixed
+  what: >-
+    Four controls.yaml mutations still targeted the 249-defect, 2026-08-24 synopsis
+    state and the corresponding old soundness and gate-detector aggregates. Their exact
+    anchors no longer appeared after the current research checkpoints updated those
+    living values.
+  consequence: >-
+    Both Linux and macOS complete gates stopped after all substantive checks passed
+    because the four negative controls could not apply their mutations. No research
+    verdict was flattered because a missing anchor is itself a hard failure.
+  fix: >-
+    Update the four mutation anchors and expected diagnostics to the final post-D-255
+    state: 255 defects, the 2026-08-25 dateline, 56 of 67 flattering soundness defects,
+    and 17 gate-detected defects.
+  regression: >-
+    The complete negative-control suite requires every anchor exactly once and requires
+    the defect and synopsis semantic checks to reject each mutated final aggregate
+  recurrence_of: D-198
+  bead: think-qox6
+  recorded_in: devtools/controls.yaml

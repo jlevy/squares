@@ -1752,14 +1752,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 254 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 255 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 67 | asserted something false about the mathematics |
 | validity | 66 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 85 | recorded something its own evidence contradicts |
+| bookkeeping | 86 | recorded something its own evidence contradicts |
 | robustness | 28 | did not finish, or finished only by luck |
 | performance | 8 | worked, but cost far more than it should |
 
@@ -1769,10 +1769,10 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught sixteen defects in 254, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught seventeen defects in 255, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
 *surprised*. Every gate-detected entry is a bookkeeping or robustness defect, found by
 contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
