@@ -3,13 +3,15 @@ type: is
 id: is-01m0vz9s4ffb2vcf7hx5xeacg8
 title: SYNOPSIS and conventions say thirty-one gate steps; validate.py now registers thirty-two
 kind: bug
-status: open
+status: in_progress
 priority: 2
-version: 1
+version: 4
+spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies: []
+parent_id: is-01m0w0c7yd4nabyntb3137stwm
 created_at: 2026-08-25T08:06:31.310Z
-updated_at: 2026-08-25T08:06:31.310Z
+updated_at: 2026-08-25T08:26:30.245Z
 ---
 The deterministic SVG rendering merge added `Step("deterministic SVG rendering",
 _svg_rendering)` to the `STEPS` tuple in `src/sqpack/cli/validate.py`, which now holds
@@ -44,3 +46,7 @@ Two questions worth deciding together with the fix:
 Not a soundness defect — nothing mathematical depends on it — but it is exactly the
 shape of record drift the defect log exists to track, so it may warrant a `D-NNN` rather
 than only a bead. That call belongs with whoever fixes it.
+
+## Notes
+
+PR #31 review finding 1 at TUTORIAL.md:433, SYNOPSIS.md:479, and conventions.md:332 confirms the live gate count drift after the SVG merge. Prefer removing duplicated live counts and pointing to packing-validate --list; leave the dated 31-step checkpoint unchanged.
