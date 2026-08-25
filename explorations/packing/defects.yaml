@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 281
+count: 282
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -7239,3 +7239,27 @@ defects:
   recurrence_of: D-267
   bead: think-ghzs
   recorded_in: devtools/controls.yaml
+- id: D-282
+  title: The stopped session retained a completed final phase
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: gate
+  latent_for: one unrendered terminal transition
+  severity: low
+  status: fixed
+  what: >-
+    The first terminal session-010 update set the session itself to `stopped` but left
+    phase 15 `completed`, violating the enforced rule that the final workflow phase and
+    session terminal status agree.
+  consequence: >-
+    The campaign ledger refused to render the terminal checkpoint, so the otherwise
+    complete pushed and portable evidence could not become a valid session handoff.
+  fix: >-
+    Delegate the one-field repair, set only the final phase to `stopped`, and rerun the
+    ledger plus its derived aggregate checks before the final documentation commit.
+  regression: packing-ledger check enforces agreement between session and final-phase status
+  recurrence_of: D-264
+  bead: think-8lhm
+  recorded_in: campaign/agent-sessions/session-010-eight-hour-mixed-research.md

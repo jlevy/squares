@@ -797,7 +797,7 @@ session:
       Checkpoint session-010 without opening another research line: reconcile generated
       records and beads, run the declared validation surface, publish one clean
       checkpoint, inspect PR comments and CI, and hand off the exact continuation.
-    status: in_progress
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: >-
       Fourteen bounded work phases completed early enough to exhaust the phase-count
@@ -819,12 +819,35 @@ session:
     fallback: >-
       Commit the smallest independently green meter seam and record any broader gate
       failure without absorbing unrelated repair.
-    outcome: null
-    evidence: []
-    stop_reason: null
-    next_action: Render defects and ledger, then run the normal gate.
+    outcome: >-
+      Published green checkpoint a9330d6 on PR 29 with the exact meter seam, all
+      generated records, synchronized narrow closures, current PR metadata, and no
+      outstanding review comment. The broad budget migration and D-280 remain open.
+    evidence:
+    - >-
+      The replacement normal gate passes all 31 steps in 99.08 wall-seconds, including
+      59 behavioral tests, Rust selftest and lint, 62 mutation controls, 281 defects,
+      and the campaign ledger.
+    - >-
+      The first complete gate passed every substantive engine and mathematical check;
+      D-281 records its two stale derived-record steps and their focused repair.
+    - >-
+      PR 29 head a9330d6 passes Linux validation in 3m09s and macOS portability in
+      4m53s, including the direct blocking deep golden.
+    - >-
+      The session records 43 completed delegations: six in phase 14 and four in phase
+      15; nine carry measured elapsed seconds and 33 remain honestly unavailable for
+      retrospective agent-log recovery.
+    - PR 29 has no issue comment, inline review comment, or submitted review.
+    stop_reason: >-
+      The fifteenth phase published a portable checkpoint after the declared cycle cap
+      became binding; no new research line was opened inside the checkpoint phase.
+    next_action: >-
+      Start an explicit successor session from the final PR head. Its first frozen cell
+      is order 7: seeded-output equivalence, independent counter totals, and unloaded-host
+      meter overhead; then preserve the first unmetered adapter under think-b4jc.
   primary_bead: think-3cbq
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 480
     max_cycles: 15
@@ -844,7 +867,14 @@ session:
     before: >-
       Zero session-010 slices executed; checkpoint 9762f93 is based on main 8136f21,
       passes 31 of 31 normal-gate steps locally, and passes Linux plus macOS CI on PR 29.
-    after: null
+    after: >-
+      Fourteen bounded work phases produced two exact n=5 local-geometry artifacts, a
+      portable status-4-only n=4 strict-IPM recovery, a direct blocking macOS golden,
+      and an exact pair-test counter-to-JSONL seam for both sqsearch producer paths.
+      The final checkpoint passes every local and portable gate. No basin census,
+      equal-work proposer comparison, or unattended numeric launch is claimed: move
+      budgets and the first downstream adapter remain open, and D-280 records that the
+      cycle cap stopped this session well before its eight-hour wall-clock target.
   delegations:
   - task: Independently audit the exp-035 branch matrices and derive exact cone certificates.
     operator: /root/n5_cone_code_audit
@@ -1912,6 +1942,22 @@ session:
     elapsed_quality: unavailable
     next_action: Render 281 defects and rerun the complete normal gate.
     phase: 15
+  - task: Align the stopped session with its terminal workflow-phase status.
+    operator: /root/terminal_phase_status_fix
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Changed only phase 15 from `completed` to `stopped`; all fourteen preceding phase
+      statuses and every evidentiary field remain unchanged.
+    evidence:
+    - The ledger refused the mismatched terminal state before rendering a valid view.
+    files: [campaign/agent-sessions/session-010-eight-hour-mixed-research.md]
+    checks: [Campaign-ledger terminal-status invariant.]
+    uncertainty: The final aggregate and generated views still needed rerendering.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Render 282 defects and the terminal campaign ledger, then commit.
+    phase: 15
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - campaign/ledger.md
@@ -2020,10 +2066,26 @@ session:
   - >-
     PR 29 head b582fe1 passes Linux validation in 3m12s and macOS portability in 4m32s;
     the latter includes the direct blocking focused deep golden.
-  stop_reason: null
+  - >-
+    The exact pair meter selftest observes 54 evaluations on both bounded producer paths;
+    the end-to-end JSONL test observes ordinary summary 108 and basin-entry summary 216.
+  - >-
+    The replacement normal gate passes all 31 steps in 99.08 wall-seconds with 59 tests,
+    62 mutation controls, 281 defects, and every generated view synchronized.
+  - >-
+    PR 29 head a9330d6 passes Linux validation in 3m09s and macOS portability in 4m53s;
+    there are no PR comments or reviews.
+  stop_reason: >-
+    The declared stop condition "Fifteen contemporaneous phases have opened" became
+    binding at 03:40 PT, more than four hours before the finalization reserve because
+    successful slices finished much faster than their upper bounds. Session-010 stops
+    at its green checkpoint rather than weakening that rule in place; D-280 owns the
+    reusable policy defect.
   next_action: >-
-    Close only D-272 and D-203, retain broader producer-health work, and execute frozen
-    order 6 pair-test metering under phase 14.
+    Continue the original wall-clock objective in a new bounded session from the final
+    PR 29 head. Run frozen order 7 under think-b4jc: require identical seeded outputs,
+    independently recomputed pair totals, and unloaded-host overhead before retaining
+    the meter; then route the first unmetered quench adapter without changing a criterion.
 ---
 ## Session Boundary
 
@@ -2031,6 +2093,9 @@ The generic numerical runner and delegated strict or deep gates remain disabled.
 PR 26 may be integrated only at a bounded phase boundary if its independently owned live
 head is ready; PR 25 is outside this session.
 The frozen portfolio, not raw `tbd ready`, owns the work order.
+Session-010 stopped because its cycle cap bound early, not because the eight-hour
+research objective or dependency-ready queue was exhausted.
+D-280 and the exact next cell above make the continuation explicit.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
