@@ -57,6 +57,7 @@ class Report:
     touching_pairs: int = 0
     strict_pairs: int = 0
     pairs_tested: int = 0
+    touching_pair_indices: list[tuple[int, int]] = _dc_field(default_factory=list)
     failures: list = _dc_field(default_factory=list)
 
     def __str__(self) -> str:
@@ -212,6 +213,7 @@ def verify_packing(
             report.failures.append(("overlap", f"squares {i} and {j} overlap"))
         elif verdict == 0:
             report.touching_pairs += 1
+            report.touching_pair_indices.append((i, j))
         else:
             report.strict_pairs += 1
 

@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from sqpack.render import AnnotationLevel, RenderSpec, ViewLevel, render_packing_svg
+from sqpack.render import AnnotationLevel, Overlay, RenderSpec, ViewLevel, render_packing_svg
 from sqpack.render.adapters import (
     frame_from_gobel10,
     frame_from_trump11,
@@ -30,6 +30,12 @@ def _add_render_options(parser: argparse.ArgumentParser) -> None:
         "--annotations",
         choices=[value.value for value in AnnotationLevel],
         default="minimal",
+    )
+    parser.add_argument(
+        "--contacts",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="show certified exact contacts when the source provides them (default: on)",
     )
     parser.add_argument("--output", type=Path, required=True)
 
@@ -73,7 +79,12 @@ def load_builtin(name: str):
 
 
 def build_spec(args: argparse.Namespace) -> RenderSpec:
-    return RenderSpec(view=ViewLevel(args.view), annotations=AnnotationLevel(args.annotations))
+    overlays = frozenset({Overlay.CONTACTS}) if args.contacts else frozenset()
+    return RenderSpec(
+        view=ViewLevel(args.view),
+        annotations=AnnotationLevel(args.annotations),
+        overlays=overlays,
+    )
 
 
 def main() -> int:

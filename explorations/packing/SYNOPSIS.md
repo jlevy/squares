@@ -157,8 +157,9 @@ controller, not permission to blur contracts.
 ![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
 
 *The retained SVG animates endpoint A through the exact midpoint to endpoint B when
-motion is enabled. Reduced-motion and non-CSS viewers receive endpoint B as a complete
-static figure.*
+motion is enabled. Its dark-red contact marks describe the certified final frame and
+appear only when the motion reaches that frame.
+Reduced-motion and non-CSS viewers receive endpoint B as a complete static figure.*
 
 The H-023 line shows why the distinction matters.
 Session 004 used W3 to turn an ambiguous terminal-family observation into the
@@ -687,7 +688,9 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 ![Walter Trump’s exact eleven-square packing.](atlas/rendering/trump11-overview.svg)
 
 *The upper-bound endpoint of the interval: a certified degree-8 construction, still
-separated from the independently certified lower bound.*
+separated from the independently certified lower bound.
+Dark-red segments and dots are exact edge and point contacts, not tolerance-based visual
+guesses.*
 
 The current audit found an explicit strict box avoiding all twelve printed Figure 14
 points, so the paper’s unavoidability subclaim is false as printed

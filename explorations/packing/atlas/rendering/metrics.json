@@ -3,25 +3,25 @@
     "gobel10-source-return-comparison.svg": {
       "bytes": 9583,
       "elements": 38,
-      "renderer_version": "1",
+      "renderer_version": "2",
       "viewBox": "0 0 1280 680"
     },
     "n-003-optimal-moduli.svg": {
-      "bytes": 14204,
+      "bytes": 14186,
       "elements": 111,
-      "renderer_version": "1",
+      "renderer_version": "2",
       "viewBox": "0 0 1200 900"
     },
     "n5-exact-face-trajectory.svg": {
-      "bytes": 4631,
-      "elements": 23,
-      "renderer_version": "1",
+      "bytes": 7842,
+      "elements": 35,
+      "renderer_version": "2",
       "viewBox": "0 0 960 680"
     },
     "trump11-overview.svg": {
-      "bytes": 5411,
-      "elements": 26,
-      "renderer_version": "1",
+      "bytes": 12769,
+      "elements": 52,
+      "renderer_version": "2",
       "viewBox": "0 0 960 680"
     }
   },

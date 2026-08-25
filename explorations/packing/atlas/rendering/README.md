@@ -19,8 +19,9 @@ shared SVG spine.
 
 ![The final frame of the certified exact five-square trajectory.](n5-exact-face-trajectory.svg)
 
-The animated export follows endpoint A, the exact midpoint, and endpoint B.
-Reduced-motion and non-CSS viewers show endpoint B.
+The animated export follows endpoint A, the exact midpoint, and endpoint B. Its dark-red
+contact layer describes endpoint B and is revealed only when the motion arrives there.
+Reduced-motion and non-CSS viewers show endpoint B directly.
 
 ### `n = 10`: numerical comparison
 
@@ -35,8 +36,9 @@ The source event is candidate evidence, not an optimality certificate.
 ![Walter Trump’s exact packing of eleven unit squares.](trump11-overview.svg)
 
 Six axis-aligned squares surround a five-square block tilted at an algebraic angle near
-`40.18°`. The figure carries certified-upper-bound evidence and does not call the open
-case solved.
+`40.18°`. Dark-red segments show positive-length edge contacts, and dark-red dots show
+point contacts. The figure carries certified-upper-bound evidence and does not call the
+open case solved.
 
 ## Visualization Levels
 
@@ -53,6 +55,14 @@ Annotations are independent of the view.
 `exact` retains source expressions in namespaced metadata and adjacent XML comments.
 A binary64 source remains identified as binary64 even in an exact-annotation export.
 
+The existing six-color fill sequence is unchanged.
+Every square and the container use the same dark stroke, so touching shapes no longer
+appear separated by white seams.
+Exact adapters attach certified point and segment contacts in the source number field;
+the renderer shows them by default and never infers them from pixels or a numerical
+tolerance. Remove only the visual layer with `--no-contacts`. The contact data remains
+available to another `RenderSpec` or an atlas consumer.
+
 ## Command-Line Use
 
 List, regenerate, or byte-check the complete discoverable gallery from the exploration
@@ -67,13 +77,20 @@ uv run --frozen python tools/render_packing_gallery.py --check
 [`manifest.json`](manifest.json) is the stable discovery layer for documentation and
 future atlas consumers.
 It records each example’s artifact, matching frontier case, evidence tier, view, motion
-support, accessible copy, and standalone generator command.
+and contact support, accessible copy, and standalone generator command.
 
 Render the exact Trump construction:
 
 ```bash
 uv run --frozen python tools/render_packing_svg.py builtin trump11 \
   --annotations exact --output atlas/trump11-exact.svg
+```
+
+For the same geometry with no dark-red overlay:
+
+```bash
+uv run --frozen python tools/render_packing_svg.py builtin trump11 \
+  --no-contacts --output atlas/trump11-geometry.svg
 ```
 
 Render a retained `BasinEvent/v3` without converting JSON decimals through binary64:
@@ -96,16 +113,17 @@ nonzero before the atomic output boundary replaces a destination.
 ## Measurements and Portability Review
 
 Measurements on 2026-08-24 used Python 3.14.6 on macOS 26.5.2 arm64. Twenty in-process
-rebuilds of the three packing figures had a median total latency of 195.259 ms and a
-minimum of 174.090 ms; the exact number-field fixtures dominate this measurement.
-Timing is observed host evidence and is intentionally absent from `metrics.json`.
+rebuilds of the three packing figures had a median total latency of 460.500 ms and a
+minimum of 391.738 ms; exact verification and contact extraction dominate this
+measurement. Timing is observed host evidence and is intentionally absent from
+`metrics.json`.
 
 | Figure | SVG bytes | Quick Look PNG bytes |
 | --- | ---: | ---: |
-| Exact `n = 3` moduli | 14,204 | 85,892 |
-| Trump `n = 11` overview | 5,411 | 60,563 |
-| Göbel `n = 10` comparison | 9,583 | 37,754 |
-| Exact `n = 5` trajectory | 4,631 | 36,361 |
+| Exact `n = 3` moduli | 14,186 | 85,906 |
+| Trump `n = 11` overview | 12,769 | 76,038 |
+| Göbel `n = 10` comparison | 9,583 | 38,930 |
+| Exact `n = 5` trajectory | 7,842 | 37,176 |
 
 Quick Look produced all four 900 px thumbnails, including the final-state rendering of
 the animated figure.
@@ -113,8 +131,9 @@ Its square-thumbnail mode scales wide SVGs to fill and therefore crops the sides
 comparison and moduli figures; those thumbnails are conversion smoke tests, not layout
 evidence. A fit-preserving `sips` document conversion rendered the complete declared
 viewports at `1200×900`, `960×680`, `1280×680`, and `960×680`. The complete gallery was
-inspected at document and screen scale; the explicit fills, strokes, labels, and
-final-state attributes survive a renderer that ignores CSS animation.
+inspected at document and screen scale; the shared dark boundaries, unchanged fills,
+dark-red contact marks, labels, and final-state attributes survive a renderer that
+ignores CSS animation.
 The focused checker also proves that both comparison containers lie inside the declared
 viewport.
 

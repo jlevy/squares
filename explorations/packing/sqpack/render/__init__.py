@@ -2,6 +2,7 @@
 
 from sqpack.render.model import (
     AnnotationLevel,
+    ContainerWall,
     EvidenceTier,
     Overlay,
     PackingFrame,
@@ -13,6 +14,7 @@ from sqpack.render.model import (
 
 __all__ = [
     "AnnotationLevel",
+    "ContainerWall",
     "EvidenceTier",
     "Overlay",
     "PackingFrame",

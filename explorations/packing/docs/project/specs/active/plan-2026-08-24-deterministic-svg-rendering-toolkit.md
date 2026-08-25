@@ -4,7 +4,7 @@
 
 **Author:** Codex (agent), for the repository owner
 
-**Status:** Implemented
+**Status:** Implemented, including the contact visualization extension
 
 ## Overview
 
@@ -30,6 +30,9 @@ not a proof that every pixel is exact.
   input map order.
 - Make the base figure compact, legible in print and on screen, self-contained, and safe
   to embed in Markdown, HTML, office documents, and reports.
+- Use the same dark boundary stroke for the container and every packed square so a white
+  separator cannot make an exact contact look like a gap.
+  Preserve the existing square fill palette.
 - Support three progressive view levels: final overview, start/final comparison, and
   optional trajectory animation.
 - Preserve numerical provenance without clutter: visible summary labels when requested,
@@ -39,6 +42,10 @@ not a proof that every pixel is exact.
   A renderer must distinguish a candidate, a numerically verified packing, a certified
   upper bound, and a proved optimum; it must not turn a solver endpoint into a “minimum”
   by typography.
+- Attach exact contact geometry whenever an adapter still has access to a certified
+  algebraic construction.
+  Render it as an optional dark-red overlay: segments for positive-length edge contacts
+  and dots for point-to-edge, corner, or wall contacts.
 - Reuse the exact `n = 3` quotient map as a known-answer control and make later atlas
   views use the same rendering spine.
 - Keep the core renderer in the Python standard library unless a measured visual or
@@ -147,6 +154,10 @@ static comparison without animation.
 
 Additional overlays such as square IDs, contacts, residuals, or active constraints are
 flags within an annotation profile, not new view levels.
+Certified contacts are enabled by default when a frame carries them; callers can remove
+`Overlay.CONTACTS`, and the CLI exposes `--no-contacts`, for a geometry-only export.
+That choice removes graphical marks only: an `exact` annotation export still retains the
+attached contact coordinates in XML comments.
 
 ### Semantic Input Model
 
@@ -167,6 +178,11 @@ The renderer consumes immutable typed values rather than raw dictionaries:
   for every square in every frame.
 - **`VerificationSummary`** stores the verifier name, result, and counts without
   rerunning or upgrading the verifier’s claim.
+- **`ContactFeature`** stores one exact point or a nondegenerate exact segment, the one
+  or two square IDs involved, and an optional container-wall identity.
+  A point has no `end`; a segment has distinct `start` and `end` points.
+  Contact coordinates must be rational or algebraic sources rather than binary64 or free
+  decimal projections.
 - **`PackingFrame`** stores the container side, square sequence, source record key,
   frame label, objective, evidence tier, verification summary, and inert provenance.
 - **`PackingTrajectory`** stores ordered frames and a declared trajectory kind: retained
@@ -215,6 +231,44 @@ recommends higher precision for transformations.
 Validation and exact claims therefore trace to the source record and verifier, never to
 a reparse of rendered pixels.
 
+### Certified Contact Geometry
+
+Contact extraction belongs between an exact construction and its rendering adapter.
+It must not run on projected SVG coordinates, screen distance, or a display tolerance.
+The first implementation consumes the repository’s `FieldElement` packings used by the
+Trump `n = 11` and certified `n = 5` adapters; numerical `BasinEvent` and Göbel pose
+arrays carry no red marks unless a later source supplies an independent certificate.
+
+The extractor uses only exact addition, subtraction, multiplication, and sign tests:
+
+1. Require a valid packing report and stable square IDs before extracting anything.
+2. For each square and each container wall, classify exact-zero vertex coordinates.
+   One vertex produces a point contact.
+   Two adjacent vertices produce one edge segment, without redundant endpoint dots.
+3. Have the exact verifier retain the stable pair indices whose best separation is
+   exactly zero. Validate the retained count and index ordering, then inspect only those
+   pairs. Reusing the verifier’s classification avoids a second quadratic SAT sweep.
+4. Intersect the two polygon boundaries by testing edge endpoints against closed edge
+   segments. Collinearity is an exact cross-product zero; membership uses the sign of
+   `(p-a)·(p-b)` and needs no division.
+   A shared positive-length interval becomes one segment.
+   Otherwise the unique shared endpoint becomes one point.
+5. Reject a reported touching pair with no boundary intersection, two disjoint contact
+   points, a zero-length segment, or an unknown square/wall reference.
+   Deduplicate exact points and orientation-equivalent segments, then sort stable
+   feature IDs before constructing the frame.
+
+This endpoint-on-segment algorithm is sufficient for two valid convex polygons with
+disjoint interiors: a noncollinear edge crossing would imply an overlap, while a
+positive-length boundary intersection is necessarily collinear.
+It avoids the division and root-selection problems of a generic line-line intersection
+and keeps every emitted coordinate in the source number field.
+
+The exact adapters always attach this inventory because retaining semantic contact data
+has no visual cost. Display remains a `RenderSpec` choice.
+The paper profile defaults to showing available contacts; approximate frames remain
+visually unmarked rather than presenting tolerance-based guesses as facts.
+
 ### Deterministic Serialization
 
 The serializer has one canonical output policy:
@@ -249,6 +303,10 @@ continues to use the readable serializer.
 The base theme is a fixed paper theme: neutral background, high-contrast boundary and
 text, restrained colorblind-safe square colors, consistent line weights, generous
 padding, and no shadows, filters, gradients, or decorative motion.
+The existing blue, orange, green, coral, teal, and mauve fill sequence remains
+unchanged. Container and square polygons use the same near-black stroke and width.
+Certified contact segments and points use one dark red that remains distinct from the
+coral fill and near-black boundary in color and monochrome review.
 Square identity is also available through labels and stable order, so color is not the
 only encoding.
 
@@ -295,6 +353,10 @@ Generated CSS keyframes override them only inside
 forwards fill whose final keyframe equals the underlying transform.
 Engines that ignore CSS or do not affirmatively expose a no-preference setting therefore
 show the final useful result without motion.
+Contact geometry in a trajectory describes the final frame only.
+The underlying static SVG shows it, while the no-preference animation hides the contact
+group until the final keyframe so stationary red marks never appear to describe an
+earlier moving pose.
 Every trajectory also has a separately reproducible `comparison` export.
 Scrubbing, playback controls, and interactive editing belong to the later atlas
 application.
@@ -313,16 +375,19 @@ Private helpers named below are part of the implementation map, not public API.
 
 #### `sqpack/render/model.py`
 
-- Define `ScalarKind`, `EvidenceTier`, `ViewLevel`, `AnnotationLevel`, `Overlay`, and
-  `TrajectoryKind` as string enums with stable serialized values.
+- Define `ScalarKind`, `EvidenceTier`, `ViewLevel`, `AnnotationLevel`, `Overlay`,
+  `ContainerWall`, and `TrajectoryKind` as string enums with stable serialized values.
 - Define frozen dataclasses `ScalarSource`, `Point2`, `RigidPose`, `SquareGeometry`,
-  `VerificationSummary`, `PackingFrame`, `PackingTrajectory`, and `RenderSpec`.
+  `VerificationSummary`, `ContactFeature`, `PackingFrame`, `PackingTrajectory`, and
+  `RenderSpec`.
 - `validate_scalar_source()` rejects empty source strings, non-finite projections,
   invalid precision, and an exact kind with no exact source.
 - `validate_square_geometry()` requires a non-empty stable ID, four corners in boundary
   order, distinct adjacent projected points, and a finite optional pose.
 - `validate_frame()` requires a positive container side, a non-empty square sequence,
-  unique square IDs, deterministic square order, and evidence/verification consistency.
+  unique square IDs, deterministic square and feature order, valid contact participants,
+  exact contact coordinates, nondegenerate segments, and evidence/verification
+  consistency.
 - `validate_trajectory()` requires at least two frames, one square-ID set and order,
   monotonically increasing logical frame times, motion poses, and a trajectory-kind
   claim consistent with frame evidence.
@@ -345,6 +410,26 @@ Private helpers named below are part of the implementation map, not public API.
   digits.
 - `format_points()` and `format_values()` serialize sequences in input order.
 - No module-global decimal context is mutated.
+
+#### `sqpack/render/contacts.py`
+
+- `_same_point()`, `_cross()`, and `_point_on_segment()` implement exact point equality,
+  collinearity, and closed-segment membership without division.
+- `_pair_contact_geometry()` returns one exact point or segment for a pair already
+  classified as touching and rejects geometry inconsistent with that exact SAT result.
+- `_wall_contact_geometry()` classifies one square against one named container wall and
+  replaces two adjacent zero vertices with one segment.
+- `contact_features_from_exact()` enumerates exact wall and pair contacts, converts
+  their source coordinates through the adapter’s scalar function, assigns stable IDs,
+  and returns a sorted immutable feature tuple.
+- The module accepts the current algebraic `FieldElement` construction boundary.
+  It does not expose a tolerance and does not consume `Point2` projections.
+
+#### `sqpack/verify.py`
+
+- `Report.touching_pair_indices` retains the stable indices when the verifier classifies
+  a zero-gap pair. Existing count fields remain unchanged; exact contact extraction
+  consumes the indices only from a valid exact report over the same construction.
 
 #### `sqpack/render/svg.py`
 
@@ -381,6 +466,9 @@ node hierarchy would add conversion code without a second semantic contract.
   after the same contrast and fixture checks exist.
 - `color_for_square()` hashes no data: it assigns the stable palette by validated square
   order, with labels available as the noncolor identity channel.
+- `PAPER_THEME.palette` remains byte-for-byte unchanged.
+  `PAPER_THEME.container` is the stroke for both the container and every packed square;
+  `PAPER_THEME.contact` is the dark-red contact token.
 - `evidence_style()` maps every evidence tier to one label, stroke pattern, and icon
   token; callers cannot supply arbitrary claim text.
 - `presentation_attributes()` materializes fill, stroke, opacity, font, and line weight
@@ -401,8 +489,10 @@ node hierarchy would add conversion code without a second semantic contract.
   explicit upward mathematical `y` convention.
 - `_append_packing_panel()`, `_append_container()`, `_append_static_square()`, and
   `_append_square_id()` emit the base packing glyph.
-- `_append_contact_overlay()` and `_append_feature_overlay()` draw only typed input
-  features; neither infers contact or activity from projected screen distance.
+- `_append_contact_overlay()` emits dark-red `<line>` nodes for segments and `<circle>`
+  nodes for points inside one panel-scoped group.
+  `_append_feature_overlay()` handles other typed features.
+  Neither infers contact or activity from projected screen distance.
 - `_append_caption()` uses `format_visible_number()` and evidence tokens so typography
   cannot upgrade a claim.
 
@@ -422,6 +512,8 @@ node hierarchy would add conversion code without a second semantic contract.
 - `append_motion_styles()` enables the one-pass animation only inside
   `prefers-reduced-motion: no-preference`, leaving final underlying attributes visible
   everywhere else.
+- `append_final_overlay_motion()` and the renderer-owned CSS grammar hide a final-only
+  contact group during active motion and reveal it at the final keyframe.
 - No function synthesizes intermediate evidence.
   Illustrative endpoint interpolation is labeled on the root, caption, description, and
   metadata.
@@ -450,10 +542,12 @@ node hierarchy would add conversion code without a second semantic contract.
 - `frame_from_gobel10()` adapts `sqpack.packings.gobel10.pose()` as a numerical
   construction with its retained source ID, URL, and digest.
 - `frame_from_trump11()` adapts `sqpack.packings.trump11.build()` from exact corner
-  elements, recording number-field coefficient strings and the published side formula.
+  elements, recording number-field coefficient strings, the published side formula, and
+  its exact contact inventory.
 - `trajectory_from_n5_equal_side_face()` reconstructs endpoint A, the exact midpoint,
   and endpoint B from `sqpack.packings.n5_equal_side_face`, then marks the trajectory as
   a certified feasible path without owning the algebraic construction.
+  Each exact frame receives its own contact inventory before projection.
 - `_enclosing_side()` and `_normalize_pose()` are adapter-only conversions shared by
   event and pose-array adapters; they do not become new verification functions.
 
@@ -462,7 +556,8 @@ node hierarchy would add conversion code without a second semantic contract.
 - `tools/check_small_n_moduli.py`: rename `svg_text()` to `render_n3_moduli_svg()` and
   replace string-built XML with shared `svg.py` helpers, number formatting, and visual
   tokens. Keep quotient topology and its domain-specific layout in this tool; do not
-  force graph views into `packing.py`.
+  force graph views into `packing.py`. Its three packing glyphs use the same dark stroke
+  and width for their container and inner squares.
 - `tools/check_n5_equal_side_face.py`: consume
   `sqpack.packings.n5_equal_side_face.build_equal_side_face()` while keeping
   feasibility, optimality, source alignment, and negative controls in the checker.
@@ -478,7 +573,8 @@ node hierarchy would add conversion code without a second semantic contract.
   `load_event()`, `load_builtin()`, `build_spec()`, and `main()`. Source selection uses
   explicit `event`, `builtin`, and `n5-face` subcommands.
   `load_event()` parses decimal tokens without an intermediate binary64 round-trip, and
-  output always goes through `write_svg_atomic()`.
+  output always goes through `write_svg_atomic()`. `--contacts` is on by default and
+  `--no-contacts` removes the overlay without discarding attached semantic features.
 - `tools/check_svg_rendering.py`: `build_fixtures()`, `run_model_controls()`,
   `run_number_controls()`, `run_xml_controls()`, `run_geometry_controls()`,
   `run_animation_controls()`, `run_determinism_matrix()`, `run_portability_controls()`,
@@ -592,6 +688,7 @@ begin in parallel after the shared typed contract is established.
 | `think-ov1d` | typed square, contact, and active-feature overlays | `think-90ix` |
 | `think-c8n2` | benchmark gallery, metrics, and pinned-renderer decision | `think-acxh`, `think-fceb`, `think-90ix`, `think-ov1d` |
 | `think-f46b` | documentation, spec reconciliation, and full final gate | `think-hzk5`, `think-90ix`, `think-ov1d`, `think-c8n2` |
+| `think-ogiq` | common dark borders and exact point/segment contact visualization | — |
 
 ### Phase 1: Deterministic Static Spine
 
@@ -623,14 +720,32 @@ begin in parallel after the shared typed contract is established.
   Each static SVG must remain smaller than its lossless reference PNG at the review
   viewport, with no external resource.
 - [x] Run the pinned-renderer availability spike and review the gallery in a nonbrowser
-  nonbrowser document renderer at thumbnail, screen, print, monochrome, and reduced-
-  motion settings. Promote raster screenshots to a gate only if renderer and font inputs
-  are fully pinned.
+  document renderer at thumbnail, screen, print, monochrome, and reduced- motion
+  settings. Promote raster screenshots to a gate only if renderer and font inputs are
+  fully pinned.
 - [x] Decide from the gallery whether complex visible formulas justify a separate pinned
   MathJax-to-path adapter.
   Keep it optional and retain text alternatives if added.
 - [x] Document the library and CLI and expose the static export seam to the later
   basin-atlas work.
+
+### Phase 3: Boundary and Contact Semantics
+
+- [x] Add failing controls proving that container and square strokes share one dark
+  token while the six existing fill colors remain unchanged.
+- [x] Add exact known-answer controls for a wall-edge segment, wall-point contact,
+  square-edge segment, square point-to-edge contact, strict separation, deduplication,
+  and rejection of inconsistent contact geometry.
+- [x] Implement exact source-space contact extraction and attach it in the Trump and
+  `n = 5` adapters; leave numerical candidate sources unmarked.
+- [x] Render contact segments and points in dark red by default, preserve an explicit
+  no-contact export, and keep final-frame contacts hidden until a trajectory ends.
+- [x] Regenerate and inspect all retained figures at document scale.
+  Confirm that black shared borders show touching geometry without false white gaps and
+  that the contact overlay remains readable without changing the fill palette.
+- [x] Run focused lint, type, determinism, safe-SVG, CLI, and byte-replay checks
+  followed by the full repository gate; update the gallery measurements and
+  documentation.
 
 ## Testing Strategy
 
@@ -651,6 +766,9 @@ static polygon coordinates and trajectory transforms with the semantic model.
 Run the existing verifier on each retained packing frame.
 Animation does not grant validity to intermediate frames; only input frames with
 verification evidence receive a verified label.
+Exercise exact contact extraction against hand-sized point and segment fixtures, then
+check the Trump pair-contact count against its verifier report.
+Assert that candidate pose arrays never acquire contacts through a visual tolerance.
 
 **Known-answer control.** The `n = 3` quotient map must retain its two labelled
 12-cycles, unlabelled four-cycle, `D4 x S3` interval, three packing glyphs, and distinct
@@ -710,6 +828,12 @@ known-answer semantics and all replay checks pass.
   renderer.
 - Candidate, verified construction, certified upper bound, and proved optimum are
   visibly and structurally distinct evidence states.
+- Every packing polygon and its container share the same dark stroke while the existing
+  six-color fill palette is unchanged.
+- Exact Trump and `n = 5` frames retain stable point/segment contact features; numerical
+  candidate frames retain none.
+  Contact display defaults on, can be disabled explicitly, and never marks a trajectory
+  before its final frame.
 - The benchmark gallery passes thumbnail, screen, print, monochrome, reduced-motion, and
   nonbrowser-renderer review.
 - Static fixtures beat their lossless PNG references in file size, and measurements are
@@ -727,6 +851,9 @@ known-answer semantics and all replay checks pass.
   SVG generation dependency.
 - **Resolved:** use the exact `n = 5` equal-side face as the first animation fixture.
   Its endpoints, midpoint, feasibility, and evidence tier are already reproducible.
+- **Resolved:** extract contacts in exact source space, always attach them to exact
+  frames, and make their dark-red display default-on but removable.
+  Do not infer contact from decimal projections or pixels.
 - **Deferred with an explicit gate:** add MathJax paths only if the gallery demonstrates
   that Unicode labels plus exact metadata are materially worse for a recurring formula.
 - **Deferred with an explicit gate:** add raster screenshot comparisons only if `resvg`,

@@ -3,7 +3,7 @@
   <title id="figure-title">Exact optimal configuration spaces for three unit squares in side 2</title>
   <desc id="figure-description">Two labelled 12-cycles quotient to one unlabelled four-cycle and then to the C-G-M interval. Packing glyphs show the corner, generic, and centred strata.</desc>
   <metadata>
-    <sqpack:profile version="1">
+    <sqpack:profile version="2">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="evidence">proved-optimum</sqpack:value>
       <sqpack:value name="source-id">exp-014-h-032-n3-optimal-moduli</sqpack:value>
@@ -97,23 +97,23 @@
   <text x="1020" y="630" text-anchor="middle" class="small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">walls 5 · axes 3 · stab 2</text>
   <g id="packing-0" transform="translate(120,675)">
     <rect x="0" y="0" width="120" height="120" fill="none" stroke="#17202a" stroke-width="3" />
-    <rect x="0" y="60" width="60" height="60" fill="#0f766e" fill-opacity="0.78" stroke="#ffffff" stroke-width="1.5" />
-    <rect x="60" y="60" width="60" height="60" fill="#be123c" fill-opacity="0.78" stroke="#ffffff" stroke-width="1.5" />
-    <rect x="0" y="0" width="60" height="60" fill="#7c3aed" fill-opacity="0.78" stroke="#ffffff" stroke-width="1.5" />
+    <rect x="0" y="60" width="60" height="60" fill="#0f766e" fill-opacity="0.78" stroke="#17202a" stroke-width="3" />
+    <rect x="60" y="60" width="60" height="60" fill="#be123c" fill-opacity="0.78" stroke="#17202a" stroke-width="3" />
+    <rect x="0" y="0" width="60" height="60" fill="#7c3aed" fill-opacity="0.78" stroke="#17202a" stroke-width="3" />
   </g>
   <text x="180" y="820" text-anchor="middle" class="small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">λ=0 · corner/L</text>
   <g id="packing-1-4" transform="translate(540,675)">
     <rect x="0" y="0" width="120" height="120" fill="none" stroke="#17202a" stroke-width="3" />
-    <rect x="0" y="60" width="60" height="60" fill="#0f766e" fill-opacity="0.78" stroke="#ffffff" stroke-width="1.5" />
-    <rect x="60" y="60" width="60" height="60" fill="#be123c" fill-opacity="0.78" stroke="#ffffff" stroke-width="1.5" />
-    <rect x="15" y="0" width="60" height="60" fill="#7c3aed" fill-opacity="0.78" stroke="#ffffff" stroke-width="1.5" />
+    <rect x="0" y="60" width="60" height="60" fill="#0f766e" fill-opacity="0.78" stroke="#17202a" stroke-width="3" />
+    <rect x="60" y="60" width="60" height="60" fill="#be123c" fill-opacity="0.78" stroke="#17202a" stroke-width="3" />
+    <rect x="15" y="0" width="60" height="60" fill="#7c3aed" fill-opacity="0.78" stroke="#17202a" stroke-width="3" />
   </g>
   <text x="600" y="820" text-anchor="middle" class="small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">λ=1/4 · generic</text>
   <g id="packing-1-2" transform="translate(960,675)">
     <rect x="0" y="0" width="120" height="120" fill="none" stroke="#17202a" stroke-width="3" />
-    <rect x="0" y="60" width="60" height="60" fill="#0f766e" fill-opacity="0.78" stroke="#ffffff" stroke-width="1.5" />
-    <rect x="60" y="60" width="60" height="60" fill="#be123c" fill-opacity="0.78" stroke="#ffffff" stroke-width="1.5" />
-    <rect x="30" y="0" width="60" height="60" fill="#7c3aed" fill-opacity="0.78" stroke="#ffffff" stroke-width="1.5" />
+    <rect x="0" y="60" width="60" height="60" fill="#0f766e" fill-opacity="0.78" stroke="#17202a" stroke-width="3" />
+    <rect x="60" y="60" width="60" height="60" fill="#be123c" fill-opacity="0.78" stroke="#17202a" stroke-width="3" />
+    <rect x="30" y="0" width="60" height="60" fill="#7c3aed" fill-opacity="0.78" stroke="#17202a" stroke-width="3" />
   </g>
   <text x="1020" y="820" text-anchor="middle" class="small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">λ=1/2 · centred</text>
   <text x="70" y="842" class="muted small" font-family="ui-sans-serif, system-ui, sans-serif" fill="#17202a" font-size="12">C and M are zero-dimensional orbit strata. Only C changes the active signature; M is singular because its stabilizer jumps.</text>

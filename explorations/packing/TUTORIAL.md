@@ -27,8 +27,10 @@ the next grid side can require tilted structure.
 ![Walter Trump’s exact packing of eleven unit squares.](atlas/rendering/trump11-overview.svg)
 
 *The best-known `n = 11` construction.
-Six squares are axis-aligned; five form an oblique block tilted by about `40.18°`. The
-picture certifies a construction, not its global optimality.*
+Six squares are axis-aligned; five form an oblique block tilted by about `40.18°`.
+Dark-red segments mark shared edge intervals and dark-red dots mark point contacts, all
+computed in the construction’s exact number field.
+The picture certifies a construction, not its global optimality.*
 
 Three features make this different from most optimization problems.
 

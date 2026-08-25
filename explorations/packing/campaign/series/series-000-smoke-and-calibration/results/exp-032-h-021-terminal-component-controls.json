@@ -51,7 +51,7 @@
         }
       ],
       "source": "campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json",
-      "source_sha256": "4b0fb3a32aa8a8f751477b2f9b08fc987c7ec5ee8cf6d0a68f0764ca4dd646dd",
+      "source_sha256": "d661e30eb2017cdfb1be8517a037c33474b93768414afeafff5a99a508b9acc0",
       "strata": [
         {
           "active_sat_axes": 4,

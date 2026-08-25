@@ -10,6 +10,7 @@ from fractions import Fraction
 from sqpack.field import FieldElement
 from sqpack.packings import gobel10, trump11
 from sqpack.packings.n5_equal_side_face import build_equal_side_face, centres_at
+from sqpack.render.contacts import contact_features_from_exact
 from sqpack.render.model import (
     EvidenceTier,
     PackingFrame,
@@ -198,6 +199,14 @@ def frame_from_trump11() -> PackingFrame:
     for index, corners in enumerate(squares):
         points = tuple(Point2(_field_scalar(x), _field_scalar(y)) for x, y in corners)
         geometries.append(SquareGeometry(f"square-{index:02d}", points, label=str(index + 1)))
+    square_ids = tuple(geometry.square_id for geometry in geometries)
+    features = contact_features_from_exact(
+        squares,
+        side,
+        square_ids=square_ids,
+        scalar=_field_scalar,
+        report=report,
+    )
     return PackingFrame(
         _field_scalar(side),
         tuple(geometries),
@@ -207,6 +216,7 @@ def frame_from_trump11() -> PackingFrame:
         ),
         "Trump n=11",
         source_id="trump11-exact-q-u",
+        features=features,
     )
 
 
@@ -253,6 +263,14 @@ def trajectory_from_n5_equal_side_face() -> PackingTrajectory:
                     str(square_index + 1),
                 )
             )
+        square_ids = tuple(geometry.square_id for geometry in geometries)
+        features = contact_features_from_exact(
+            exact_squares,
+            face.side,
+            square_ids=square_ids,
+            scalar=_field_scalar,
+            report=report,
+        )
         frames.append(
             PackingFrame(
                 _field_scalar(face.side),
@@ -262,6 +280,7 @@ def trajectory_from_n5_equal_side_face() -> PackingTrajectory:
                 ("endpoint A", "exact midpoint", "endpoint B")[index],
                 Decimal(index) / 2,
                 "exp-033-h-023-equal-side-face",
+                features=features,
             )
         )
     return PackingTrajectory(

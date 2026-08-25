@@ -7,8 +7,8 @@ It has two deliberately separate layers:
   observations and provisional summaries.
 - [`rendering/`](rendering/README.md) is the deterministic gallery of explanatory SVGs.
   Its [`manifest.json`](rendering/manifest.json) maps each rendered artifact to a
-  frontier case, evidence tier, view, motion semantics, accessible copy, and exact
-  generator command.
+  frontier case, evidence tier, view, motion and contact semantics, accessible copy, and
+  exact generator command.
 
 The separation matters.
 An atlas row is scientific data; a figure is a presentation of typed source data.
@@ -19,8 +19,9 @@ candidate to a certificate or make a conjectured minimum proved by drawing it cl
 
 ![Walter Trump’s exact packing of eleven unit squares.](rendering/trump11-overview.svg)
 
-*A minimal final-state overview for the smallest open case.
-Exact source expressions remain available in SVG metadata without crowding the page.*
+*A final-state overview for the smallest open case.
+Dark-red marks expose its exact contact structure; exact source expressions remain
+available in SVG metadata without crowding the page.*
 
 ![The exact quotient map of optimal configurations for three unit squares.](n-003-optimal-moduli.svg)
 

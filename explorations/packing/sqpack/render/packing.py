@@ -19,7 +19,11 @@ from sqpack.render.model import (
     ViewLevel,
     validate_render_request,
 )
-from sqpack.render.motion import append_motion_styles, append_square_motion
+from sqpack.render.motion import (
+    append_final_overlay_motion,
+    append_motion_styles,
+    append_square_motion,
+)
 from sqpack.render.numbers import format_points, format_svg_number, format_visible_number
 from sqpack.render.style import (
     LAYOUT,
@@ -89,7 +93,11 @@ def _append_container(
             "y": format_svg_number(y),
             "width": format_svg_number(side * scale),
             "height": format_svg_number(side * scale),
-            **presentation_attributes(fill="none", stroke=PAPER_THEME.container, width=3),
+            **presentation_attributes(
+                fill="none",
+                stroke=PAPER_THEME.container,
+                width=LAYOUT.stroke_width,
+            ),
         },
     )
 
@@ -132,7 +140,11 @@ def _append_static_square(
             "points": format_points(projected),
             "fill-opacity": "0.72",
             "stroke-linejoin": "round",
-            **presentation_attributes(fill=color_for_square(index), stroke="#ffffff", width=2),
+            **presentation_attributes(
+                fill=color_for_square(index),
+                stroke=PAPER_THEME.container,
+                width=LAYOUT.stroke_width,
+            ),
         },
     )
     if motion:
@@ -149,23 +161,60 @@ def _append_contact_overlay(
     x: Decimal,
     y: Decimal,
     scale: Decimal,
+    panel_index: int,
+    motion: bool,
 ) -> None:
-    for feature in frame.features:
-        if isinstance(feature, ContactFeature):
-            point = _project_point(feature.point, side=side, x=x, y=y, scale=scale)
+    contacts = tuple(
+        feature for feature in frame.features if isinstance(feature, ContactFeature)
+    )
+    if not contacts:
+        return
+    overlay = sub(
+        group,
+        "g",
+        {"id": f"panel-{panel_index}-contacts", "data-overlay": "contacts"},
+    )
+    if motion:
+        append_final_overlay_motion(overlay)
+    for feature in contacts:
+        start = _project_point(feature.start, side=side, x=x, y=y, scale=scale)
+        attributes = {
+            "id": f"panel-{panel_index}-{feature.feature_id}",
+            "data-squares": " ".join(feature.square_ids),
+        }
+        if feature.wall is not None:
+            attributes["data-wall"] = feature.wall.value
+        if feature.end is None:
             sub(
-                group,
+                overlay,
                 "circle",
                 {
-                    "id": feature.feature_id,
-                    "cx": format_svg_number(point.x),
-                    "cy": format_svg_number(point.y),
-                    "r": "5",
-                    "fill": PAPER_THEME.ink,
-                    "data-feature": "contact",
-                    "data-squares": " ".join(feature.square_ids),
+                    **attributes,
+                    "cx": format_svg_number(start.x),
+                    "cy": format_svg_number(start.y),
+                    "r": str(LAYOUT.contact_point_radius),
+                    "fill": PAPER_THEME.contact,
+                    "data-feature": "contact-point",
                 },
             )
+            continue
+        end = _project_point(feature.end, side=side, x=x, y=y, scale=scale)
+        sub(
+            overlay,
+            "line",
+            {
+                **attributes,
+                "x1": format_svg_number(start.x),
+                "y1": format_svg_number(start.y),
+                "x2": format_svg_number(end.x),
+                "y2": format_svg_number(end.y),
+                "stroke": PAPER_THEME.contact,
+                "stroke-width": str(LAYOUT.contact_stroke_width),
+                "stroke-linecap": "round",
+                "vector-effect": "non-scaling-stroke",
+                "data-feature": "contact-segment",
+            },
+        )
 
 
 def _append_feature_overlay(
@@ -254,9 +303,24 @@ def _append_packing_panel(
             show_id=Overlay.SQUARE_IDS in spec.overlays,
             motion=motion,
         )
+    if spec.annotations is AnnotationLevel.EXACT:
+        for feature in frame.features:
+            if not isinstance(feature, ContactFeature):
+                continue
+            geometry = f"({feature.start.x.source}, {feature.start.y.source})"
+            if feature.end is not None:
+                geometry += f" to ({feature.end.x.source}, {feature.end.y.source})"
+            append_exact_comment(group, f"{feature.feature_id}: {geometry}")
     if Overlay.CONTACTS in spec.overlays:
         _append_contact_overlay(
-            group, frame, side=frame.container_side.projected, x=left, y=top, scale=scale
+            group,
+            frame,
+            side=frame.container_side.projected,
+            x=left,
+            y=top,
+            scale=scale,
+            panel_index=panel_index,
+            motion=motion,
         )
     if Overlay.ACTIVE_FEATURES in spec.overlays:
         _append_feature_overlay(
@@ -324,7 +388,15 @@ def build_packing_document(
         )
     if spec.view is ViewLevel.TRAJECTORY and trajectory is not None:
         append_motion_styles(
-            root, trajectory, scale=scales[0], duration_seconds=spec.duration_seconds
+            root,
+            trajectory,
+            scale=scales[0],
+            duration_seconds=spec.duration_seconds,
+            reveal_final_overlay=Overlay.CONTACTS in spec.overlays
+            and any(
+                isinstance(feature, ContactFeature)
+                for feature in trajectory.frames[-1].features
+            ),
         )
     return root
 

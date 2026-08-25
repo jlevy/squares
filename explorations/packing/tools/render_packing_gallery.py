@@ -63,6 +63,7 @@ class GalleryExample(TypedDict):
     view: str
     evidence: str
     motion: bool
+    contacts: bool
     generator: str
 
 
@@ -121,7 +122,7 @@ def render_n3_moduli() -> str:
 def build_gallery_manifest() -> GalleryManifest:
     gallery_command = "uv run --frozen python tools/render_packing_gallery.py --update"
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "renderer_version": RENDERER_VERSION,
         "gallery_generator": gallery_command,
         "examples": [
@@ -142,6 +143,7 @@ def build_gallery_manifest() -> GalleryManifest:
                 "view": "moduli",
                 "evidence": "proved-optimum",
                 "motion": False,
+                "contacts": False,
                 "generator": (
                     "uv run --frozen python tools/check_small_n_moduli.py --n 3 "
                     "--record campaign/series/series-000-smoke-and-calibration/results/"
@@ -155,17 +157,19 @@ def build_gallery_manifest() -> GalleryManifest:
                 "title": "Certified exact five-square trajectory",
                 "alt": (
                     "Final packing on the certified exact feasible trajectory for five "
-                    "unit squares."
+                    "unit squares, with exact contacts marked in dark red."
                 ),
                 "caption": (
                     "The animated export follows endpoint A, the exact midpoint, and "
-                    "endpoint B; reduced-motion and non-CSS viewers show endpoint B."
+                    "endpoint B; dark-red marks show endpoint B's certified contacts, "
+                    "and reduced-motion and non-CSS viewers show that final endpoint."
                 ),
                 "artifact": "atlas/rendering/n5-exact-face-trajectory.svg",
                 "frontier_case": "frontier/n-005.md",
                 "view": "trajectory",
                 "evidence": "certified-upper-bound",
                 "motion": True,
+                "contacts": True,
                 "generator": (
                     "uv run --frozen python tools/render_packing_svg.py n5-face "
                     "--view trajectory --output "
@@ -189,6 +193,7 @@ def build_gallery_manifest() -> GalleryManifest:
                 "view": "comparison",
                 "evidence": "candidate",
                 "motion": False,
+                "contacts": False,
                 "generator": (
                     "uv run --frozen python tools/render_packing_svg.py event "
                     "campaign/series/series-000-smoke-and-calibration/results/"
@@ -202,17 +207,20 @@ def build_gallery_manifest() -> GalleryManifest:
                 "n": 11,
                 "title": "Trump exact packing overview",
                 "alt": (
-                    "Walter Trump exact packing of eleven unit squares in its enclosing square."
+                    "Walter Trump exact packing of eleven unit squares, with edge and "
+                    "point contacts marked in dark red."
                 ),
                 "caption": (
                     "Six axis-aligned squares surround a five-square block tilted at an "
-                    "algebraic angle near 40.18 degrees."
+                    "algebraic angle near 40.18 degrees; dark-red segments and dots "
+                    "show contacts certified in the same number field."
                 ),
                 "artifact": "atlas/rendering/trump11-overview.svg",
                 "frontier_case": "frontier/n-011.md",
                 "view": "overview",
                 "evidence": "certified-upper-bound",
                 "motion": False,
+                "contacts": True,
                 "generator": (
                     "uv run --frozen python tools/render_packing_svg.py builtin trump11 "
                     "--output atlas/rendering/trump11-overview.svg"

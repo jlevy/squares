@@ -4,6 +4,7 @@
       "alt": "Exact quotient map for the optimal configurations of three unit squares in a square of side two.",
       "artifact": "atlas/n-003-optimal-moduli.svg",
       "caption": "Two labelled cycles reduce to one quotient interval, with representative packings at its distinguished strata.",
+      "contacts": false,
       "evidence": "proved-optimum",
       "frontier_case": "frontier/n-003.md",
       "generator": "uv run --frozen python tools/check_small_n_moduli.py --n 3 --record campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json --svg atlas/n-003-optimal-moduli.svg",
@@ -14,9 +15,10 @@
       "view": "moduli"
     },
     {
-      "alt": "Final packing on the certified exact feasible trajectory for five unit squares.",
+      "alt": "Final packing on the certified exact feasible trajectory for five unit squares, with exact contacts marked in dark red.",
       "artifact": "atlas/rendering/n5-exact-face-trajectory.svg",
-      "caption": "The animated export follows endpoint A, the exact midpoint, and endpoint B; reduced-motion and non-CSS viewers show endpoint B.",
+      "caption": "The animated export follows endpoint A, the exact midpoint, and endpoint B; dark-red marks show endpoint B's certified contacts, and reduced-motion and non-CSS viewers show that final endpoint.",
+      "contacts": true,
       "evidence": "certified-upper-bound",
       "frontier_case": "frontier/n-005.md",
       "generator": "uv run --frozen python tools/render_packing_svg.py n5-face --view trajectory --output atlas/rendering/n5-exact-face-trajectory.svg",
@@ -30,6 +32,7 @@
       "alt": "Side-by-side comparison of a perturbed G\u00f6bel ten-square packing and its returned endpoint.",
       "artifact": "atlas/rendering/gobel10-source-return-comparison.svg",
       "caption": "A retained numerical source perturbation and the endpoint returned by the deterministic quench share one geometric scale.",
+      "contacts": false,
       "evidence": "candidate",
       "frontier_case": "frontier/n-010.md",
       "generator": "uv run --frozen python tools/render_packing_svg.py event campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl --event-id 15867299fb34b2cc5347ff12e855659f25b0647a6b7cfa495b45a7681cf50f60 --view comparison --output atlas/rendering/gobel10-source-return-comparison.svg",
@@ -40,9 +43,10 @@
       "view": "comparison"
     },
     {
-      "alt": "Walter Trump exact packing of eleven unit squares in its enclosing square.",
+      "alt": "Walter Trump exact packing of eleven unit squares, with edge and point contacts marked in dark red.",
       "artifact": "atlas/rendering/trump11-overview.svg",
-      "caption": "Six axis-aligned squares surround a five-square block tilted at an algebraic angle near 40.18 degrees.",
+      "caption": "Six axis-aligned squares surround a five-square block tilted at an algebraic angle near 40.18 degrees; dark-red segments and dots show contacts certified in the same number field.",
+      "contacts": true,
       "evidence": "certified-upper-bound",
       "frontier_case": "frontier/n-011.md",
       "generator": "uv run --frozen python tools/render_packing_svg.py builtin trump11 --output atlas/rendering/trump11-overview.svg",
@@ -54,6 +58,6 @@
     }
   ],
   "gallery_generator": "uv run --frozen python tools/render_packing_gallery.py --update",
-  "renderer_version": "1",
-  "schema_version": 1
+  "renderer_version": "2",
+  "schema_version": 2
 }

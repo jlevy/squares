@@ -39,6 +39,13 @@ class Overlay(StrEnum):
     ACTIVE_FEATURES = "active-features"
 
 
+class ContainerWall(StrEnum):
+    LEFT = "left"
+    RIGHT = "right"
+    BOTTOM = "bottom"
+    TOP = "top"
+
+
 class TrajectoryKind(StrEnum):
     RETAINED = "retained"
     CERTIFIED = "certified"
@@ -84,8 +91,10 @@ class VerificationSummary:
 @dataclass(frozen=True)
 class ContactFeature:
     feature_id: str
-    point: Point2
-    square_ids: tuple[str, str]
+    start: Point2
+    square_ids: tuple[str, ...]
+    end: Point2 | None = None
+    wall: ContainerWall | None = None
     label: str = "contact"
 
 
@@ -122,7 +131,7 @@ class PackingTrajectory:
 class RenderSpec:
     view: ViewLevel = ViewLevel.OVERVIEW
     annotations: AnnotationLevel = AnnotationLevel.MINIMAL
-    overlays: frozenset[Overlay] = field(default_factory=frozenset)
+    overlays: frozenset[Overlay] = field(default_factory=lambda: frozenset({Overlay.CONTACTS}))
     title: str = "Square packing"
     description: str = "A square packing rendered with mathematical y coordinates upward."
     duration_seconds: Decimal = Decimal("4")
@@ -177,16 +186,38 @@ def validate_frame(frame: PackingFrame) -> None:
     feature_ids = [feature.feature_id for feature in frame.features]
     if len(feature_ids) != len(set(feature_ids)) or feature_ids != sorted(feature_ids):
         raise ValueError("feature IDs must be unique and stable")
+    verified = frame.verification is not None and frame.verification.valid
     for feature in frame.features:
         if not feature.feature_id.strip():
             raise ValueError("feature ID must be non-empty")
-        validate_scalar_source(feature.point.x)
-        validate_scalar_source(feature.point.y)
-        if isinstance(feature, ContactFeature) and any(
-            square_id not in ids for square_id in feature.square_ids
-        ):
+        if isinstance(feature, ActiveFeature):
+            validate_scalar_source(feature.point.x)
+            validate_scalar_source(feature.point.y)
+            continue
+        contact_points = (
+            (feature.start,) if feature.end is None else (feature.start, feature.end)
+        )
+        for point in contact_points:
+            for value in (point.x, point.y):
+                validate_scalar_source(value)
+                if value.kind not in (ScalarKind.RATIONAL, ScalarKind.EXACT):
+                    raise ValueError("contact coordinates must have exact sources")
+        if feature.end is not None and (
+            feature.start.x.projected,
+            feature.start.y.projected,
+        ) == (feature.end.x.projected, feature.end.y.projected):
+            raise ValueError("contact segment must be nondegenerate")
+        if not verified:
+            raise ValueError("contact features require successful verification")
+        if len(feature.square_ids) != len(set(feature.square_ids)):
+            raise ValueError("contact square IDs must be unique")
+        if feature.square_ids != tuple(sorted(feature.square_ids)):
+            raise ValueError("contact square IDs must be stable")
+        if any(square_id not in ids for square_id in feature.square_ids):
             raise ValueError("contact feature references an unknown square")
-    verified = frame.verification is not None and frame.verification.valid
+        expected_participants = 1 if feature.wall is not None else 2
+        if len(feature.square_ids) != expected_participants:
+            raise ValueError("contact participants do not match its geometry")
     if frame.evidence is not EvidenceTier.CANDIDATE and not verified:
         raise ValueError("non-candidate evidence requires successful verification")
     if not frame.logical_time.is_finite():
@@ -245,6 +276,16 @@ def validate_render_request(
             for frame in frames
             for square in frame.squares
             for point in square.corners
+            for value in (point.x, point.y)
+        ]
+        values += [
+            value
+            for frame in frames
+            for feature in frame.features
+            if isinstance(feature, ContactFeature)
+            for point in (
+                (feature.start,) if feature.end is None else (feature.start, feature.end)
+            )
             for value in (point.x, point.y)
         ]
         if any(value.kind is ScalarKind.EXACT and not value.exact_source for value in values):

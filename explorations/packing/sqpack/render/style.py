@@ -14,6 +14,7 @@ class Theme:
     ink: str
     muted: str
     container: str
+    contact: str
     palette: tuple[str, ...]
 
 
@@ -23,6 +24,8 @@ class LayoutMetrics:
     caption_height: int = 72
     panel_gap: int = 32
     stroke_width: int = 3
+    contact_stroke_width: int = 6
+    contact_point_radius: float = 5.5
 
 
 PAPER_THEME = Theme(
@@ -31,6 +34,7 @@ PAPER_THEME = Theme(
     ink="#17202a",
     muted="#5c6673",
     container="#263238",
+    contact="#8b1e1e",
     palette=("#4c78a8", "#f58518", "#54a24b", "#e45756", "#72b7b2", "#b279a2"),
 )
 LAYOUT = LayoutMetrics()

@@ -17,7 +17,8 @@ Roughly `0.088` in side length remains between that bound and the 1979 construct
 ![Walter Trump’s exact eleven-square packing inside its enclosing square.](atlas/rendering/trump11-overview.svg)
 
 *Walter Trump’s 1979 construction: six axis-aligned squares around a five-square oblique
-block. It is a certified upper bound, not a proof of optimality.*
+block. Dark-red segments and dots mark exact edge and point contacts.
+It is a certified upper bound, not a proof of optimality.*
 
 Work is organized at three levels.
 Four **operating principles** define what quality means and which concerns may veto
@@ -266,6 +267,12 @@ Its caption and metadata distinguish candidates, verified constructions, certifi
 bounds, and proved optima; typography cannot upgrade a numerical candidate.
 Exact annotations retain algebraic or rational source expressions in SVG comments and
 namespaced metadata while using stable high-precision decimal projections for geometry.
+The container and every packed square use the same dark boundary, so a contact cannot
+look like a white gap.
+Exact-source adapters attach certified contact geometry: dark-red segments show shared
+boundary intervals, and dark-red dots show point contacts.
+This layer is shown by default, can be removed with `--no-contacts`, and is never
+guessed for numerical candidate poses.
 
 See the [SVG gallery README](atlas/rendering/README.md) for API and CLI examples,
 retained fixtures, byte sizes, portability review, and the raster-golden decision.

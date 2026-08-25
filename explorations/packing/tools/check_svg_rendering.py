@@ -28,6 +28,8 @@ def _rejects(function, *args, **kwargs) -> bool:
 
 def run_model_controls() -> dict[str, bool]:
     from sqpack.render.model import (
+        ContactFeature,
+        ContainerWall,
         EvidenceTier,
         PackingFrame,
         Point2,
@@ -36,7 +38,7 @@ def run_model_controls() -> dict[str, bool]:
         VerificationSummary,
         validate_frame,
     )
-    from sqpack.render.numbers import scalar_from_float
+    from sqpack.render.numbers import scalar_from_exact, scalar_from_float
 
     scalar = scalar_from_float(1.0)
     corners = tuple(
@@ -47,6 +49,17 @@ def run_model_controls() -> dict[str, bool]:
     verified = VerificationSummary(valid=True, method="exact", detail="known-answer")
     frame = PackingFrame(scalar, (square,), EvidenceTier.VERIFIED_CONSTRUCTION, verified)
     validate_frame(frame)
+    exact_zero = scalar_from_exact("0", Decimal(0))
+    exact_one = scalar_from_exact("1", Decimal(1))
+    exact_point = Point2(exact_zero, exact_one)
+    wall_contact = ContactFeature(
+        "contact-wall-square-0-left",
+        exact_point,
+        ("square-0",),
+        wall=ContainerWall.LEFT,
+    )
+    contact_frame = replace(frame, features=(wall_contact,))
+    validate_frame(contact_frame)
     return {
         "duplicate_ids_rejected": _rejects(
             validate_frame, replace(frame, squares=(square, square))
@@ -57,6 +70,33 @@ def run_model_controls() -> dict[str, bool]:
         ),
         "unverified_evidence_rejected": _rejects(
             validate_frame, replace(frame, verification=replace(verified, valid=False))
+        ),
+        "binary64_contact_rejected": _rejects(
+            validate_frame,
+            replace(
+                frame,
+                features=(
+                    replace(
+                        wall_contact,
+                        start=Point2(scalar_from_float(0.0), scalar_from_float(1.0)),
+                    ),
+                ),
+            ),
+        ),
+        "degenerate_contact_segment_rejected": _rejects(
+            validate_frame,
+            replace(contact_frame, features=(replace(wall_contact, end=exact_point),)),
+        ),
+        "bad_wall_participants_rejected": _rejects(
+            validate_frame,
+            replace(
+                contact_frame,
+                features=(replace(wall_contact, square_ids=("square-0", "square-1")),),
+            ),
+        ),
+        "uncertified_contact_rejected": _rejects(
+            validate_frame,
+            replace(contact_frame, evidence=EvidenceTier.CANDIDATE, verification=None),
         ),
     }
 
@@ -80,6 +120,105 @@ def run_number_controls() -> dict[str, bool]:
         "nonfinite_rejected": _rejects(scalar_from_float, math.inf),
         "precision_is_local": project_decimal(precise, 24)
         == Decimal("3.87708359002281417730790"),
+    }
+
+
+def run_contact_controls() -> dict[str, bool]:
+    from sqpack.packings import trump11
+    from sqpack.packings.n5_equal_side_face import build_equal_side_face
+    from sqpack.render.adapters import frame_from_gobel10, frame_from_trump11
+    from sqpack.render.contacts import contact_features_from_exact
+    from sqpack.render.model import ContactFeature, ContainerWall
+    from sqpack.render.numbers import scalar_from_exact
+    from sqpack.verify import Report, exact_sign, verify_packing
+
+    face = build_equal_side_face()
+    q, root = face.field.rational, face.field.alpha
+
+    def project(value):
+        return scalar_from_exact(repr(value), Decimal(repr(float(value))))
+
+    def contacts(squares, side):
+        report = verify_packing(squares, side, sign=exact_sign)
+        if not report.valid:
+            raise ValueError("contact control fixture is not a valid packing")
+        return contact_features_from_exact(
+            squares,
+            side,
+            square_ids=tuple(f"square-{index:02d}" for index in range(len(squares))),
+            scalar=project,
+            report=report,
+        )
+
+    edge_a = ((q(0), q(0)), (q(1), q(0)), (q(1), q(1)), (q(0), q(1)))
+    edge_b = ((q(1), q(0)), (q(2), q(0)), (q(2), q(1)), (q(1), q(1)))
+    edge_features = contacts((edge_a, edge_b), q(2))
+    edge_pairs = [feature for feature in edge_features if feature.wall is None]
+
+    point_a = ((q(0), q(1)), (q(1), q(1)), (q(1), q(2)), (q(0), q(2)))
+    point_b = (
+        (q(1), q(3) / 2),
+        (q(1) + root / 2, q(3) / 2 - root / 2),
+        (q(1) + root, q(3) / 2),
+        (q(1) + root / 2, q(3) / 2 + root / 2),
+    )
+    point_features = contacts((point_a, point_b), q(3))
+    point_pairs = [feature for feature in point_features if feature.wall is None]
+
+    wall_point_square = (
+        (q(0), q(3) / 2),
+        (root / 2, q(3) / 2 - root / 2),
+        (root, q(3) / 2),
+        (root / 2, q(3) / 2 + root / 2),
+    )
+    wall_point_features = contacts((wall_point_square,), q(3))
+
+    strict_b = ((q(2), q(0)), (q(3), q(0)), (q(3), q(1)), (q(2), q(1)))
+    strict_features = contacts((edge_a, strict_b), q(3))
+    inconsistent_report = Report(
+        valid=True,
+        n=2,
+        container_contacts=8,
+        touching_pairs=1,
+        pairs_tested=1,
+        touching_pair_indices=[(0, 1)],
+    )
+
+    exact_squares, side, _field = trump11.build()
+    trump_report = verify_packing(exact_squares, side, sign=exact_sign)
+    trump = frame_from_trump11()
+    trump_pairs = [
+        feature
+        for feature in trump.features
+        if isinstance(feature, ContactFeature) and feature.wall is None
+    ]
+    return {
+        "wall_edge_is_one_segment": sum(
+            feature.wall is ContainerWall.LEFT and feature.end is not None
+            for feature in edge_features
+        )
+        == 1,
+        "square_edge_is_one_segment": len(edge_pairs) == 1 and edge_pairs[0].end is not None,
+        "point_to_edge_is_one_dot": len(point_pairs) == 1 and point_pairs[0].end is None,
+        "wall_point_is_one_dot": len(wall_point_features) == 1
+        and wall_point_features[0].wall is ContainerWall.LEFT
+        and wall_point_features[0].end is None,
+        "strict_pair_has_no_contact": not any(
+            feature.wall is None for feature in strict_features
+        ),
+        "shared_edge_endpoints_are_deduplicated": len(edge_pairs) == 1,
+        "inconsistent_pair_geometry_rejected": _rejects(
+            contact_features_from_exact,
+            (edge_a, strict_b),
+            q(3),
+            square_ids=("square-00", "square-01"),
+            scalar=project,
+            report=inconsistent_report,
+        ),
+        "contact_ids_are_stable": [feature.feature_id for feature in edge_features]
+        == sorted(feature.feature_id for feature in edge_features),
+        "trump_pair_contacts_match_verifier": len(trump_pairs) == trump_report.touching_pairs,
+        "candidate_pose_arrays_have_no_contacts": frame_from_gobel10().features == (),
     }
 
 
@@ -149,8 +288,8 @@ def run_geometry_controls() -> dict[str, bool]:
         render_packing_svg,
     )
     from sqpack.render.adapters import frame_from_gobel10, frame_from_trump11
-    from sqpack.render.model import ActiveFeature, ContactFeature
-    from sqpack.render.style import evidence_style
+    from sqpack.render.model import ActiveFeature
+    from sqpack.render.style import LAYOUT, PAPER_THEME, evidence_style
 
     overview = render_packing_svg(frame_from_trump11(), spec=RenderSpec())
     trump = frame_from_trump11()
@@ -169,12 +308,26 @@ def run_geometry_controls() -> dict[str, bool]:
         for panel in comparison_root.iter()
         if "data-panel" in panel.attrib
     ]
-    point = start.squares[0].corners[0]
+    overview_root = ET.fromstring(overview)
+    overview_panel = next(
+        node for node in overview_root.iter() if node.attrib.get("data-panel") == "Trump n=11"
+    )
+    overview_container = next(child for child in overview_panel if child.tag.endswith("}rect"))
+    overview_squares = [child for child in overview_panel if child.tag.endswith("}polygon")]
+    expected_palette = (
+        "#4c78a8",
+        "#f58518",
+        "#54a24b",
+        "#e45756",
+        "#72b7b2",
+        "#b279a2",
+    )
+    point = trump.squares[0].corners[0]
     featured = replace(
-        start,
+        trump,
         features=(
-            ActiveFeature("feature-0", point, "active wall", "square-00"),
-            ContactFeature("feature-1", point, ("square-00", "square-01")),
+            ActiveFeature("active-feature-0", point, "active wall", "square-00"),
+            *trump.features,
         ),
     )
     overlay = render_packing_svg(
@@ -184,6 +337,16 @@ def run_geometry_controls() -> dict[str, bool]:
     event_start, _event_final = build_fixtures()["gobel10-source-return-comparison.svg"]
     exact_text = render_packing_svg(
         event_start, spec=RenderSpec(annotations=AnnotationLevel.EXACT)
+    )
+    exact_contact_text = render_packing_svg(
+        trump, spec=RenderSpec(annotations=AnnotationLevel.EXACT)
+    )
+    hidden_exact_contact_text = render_packing_svg(
+        trump,
+        spec=RenderSpec(
+            annotations=AnnotationLevel.EXACT,
+            overlays=frozenset(),
+        ),
     )
     event_pose = event_start.squares[0].pose
     if event_pose is None:
@@ -201,12 +364,38 @@ def run_geometry_controls() -> dict[str, bool]:
             <= viewport_height
             for container in panel_containers
         ),
-        "typed_overlays_render": overlay.count('data-feature="') == 2,
+        "rendered_square_fill_palette_is_unchanged": tuple(
+            square.attrib["fill"] for square in overview_squares
+        )
+        == tuple(
+            expected_palette[index % len(expected_palette)]
+            for index in range(len(overview_squares))
+        ),
+        "container_and_squares_share_dark_border": all(
+            square.attrib["stroke"]
+            == overview_container.attrib["stroke"]
+            == PAPER_THEME.container
+            and square.attrib["stroke-width"]
+            == overview_container.attrib["stroke-width"]
+            == str(LAYOUT.stroke_width)
+            for square in overview_squares
+        ),
+        "certified_contacts_render_by_default": 'data-feature="contact-segment"' in overview
+        and 'data-feature="contact-point"' in overview,
+        "contact_overlay_can_be_removed": 'data-feature="contact-'
+        not in render_packing_svg(trump, spec=RenderSpec(overlays=frozenset())),
+        "typed_overlays_render": 'data-feature="active-feature"' in overlay
+        and 'data-feature="contact-' in overlay,
         "evidence_tokens_are_distinct": len(
             {evidence_style(tier) for tier in type(start.evidence)}
         )
         == 4,
         "decimal_source_round_trips": source_x in exact_text,
+        "exact_contact_comments_round_trip": "<!--contact-pair-" in exact_contact_text
+        and " to (" in exact_contact_text,
+        "hidden_contact_annotations_are_retained": "<!--contact-pair-"
+        in hidden_exact_contact_text
+        and 'data-feature="contact-' not in hidden_exact_contact_text,
         "exact_projection_is_high_precision": str(trump.container_side.projected).startswith(
             "3.877083590022814177307897"
         ),
@@ -238,6 +427,9 @@ def run_animation_controls() -> dict[str, bool]:
         "motion_is_reduced_motion_scoped": "prefers-reduced-motion: no-preference" in text,
         "no_smil": "<animate" not in text,
         "final_state_is_underlying": 'data-static-fallback="final"' in text,
+        "final_contacts_reveal_at_trajectory_end": 'class="motion-final-overlay"' in text
+        and "opacity:0" in text
+        and "step-end" in text,
         "mismatched_tracks_rejected": _rejects(
             render_packing_svg,
             trajectory.frames[-1],
@@ -334,6 +526,15 @@ def run_gallery_controls() -> dict[str, bool]:
             example["generator"].startswith("uv run --frozen python tools/")
             for example in examples
         ),
+        "gallery_contact_flags_match_exact_sources": {
+            example["id"]: example["contacts"] for example in examples
+        }
+        == {
+            "n3-optimal-moduli": False,
+            "n5-exact-face-trajectory": True,
+            "n10-source-return-comparison": False,
+            "n11-trump-overview": True,
+        },
         "frontier_cases_embed_gallery_artifacts": all(
             embeds(example["frontier_case"], example["artifact"]) for example in examples
         ),
@@ -365,7 +566,7 @@ def main() -> int:
     if args.probe:
         sys.stdout.write(_rendered_fixtures()[args.probe])
         return 0
-    controls = {**run_model_controls(), **run_number_controls()}
+    controls = {**run_model_controls(), **run_number_controls(), **run_contact_controls()}
     if not args.model_numbers:
         controls |= run_xml_controls()
         controls |= run_geometry_controls()

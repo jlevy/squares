@@ -822,7 +822,7 @@ def render_n3_moduli_svg(model: dict[str, object]) -> str:
                 flipped.numerator * GLYPH_SQUARE_SIZE / flipped.denominator
             )
             lines.append(
-                f'<rect x="{svg_x}" y="{svg_y}" width="{GLYPH_SQUARE_SIZE}" height="{GLYPH_SQUARE_SIZE}" fill="var(--sq{square + 1})" fill-opacity="0.78" stroke="var(--panel)" stroke-width="1.5"/>'
+                f'<rect x="{svg_x}" y="{svg_y}" width="{GLYPH_SQUARE_SIZE}" height="{GLYPH_SQUARE_SIZE}" fill="var(--sq{square + 1})" fill-opacity="0.78" stroke="var(--ink)" stroke-width="3"/>'
             )
         lines.append("</g>")
         lines.append(
@@ -943,6 +943,14 @@ def run_n3_selftests(model: dict[str, object], svg: str) -> dict[str, bool]:
     alpert = literature.get("alpert_et_al_2023")
     alvarado = literature.get("alvarado_garduno_gonzalez_2025")
     original_svg_hash = hashlib.sha256(svg.encode()).hexdigest()
+    root = ET.fromstring(svg)
+    packing_rectangles = [
+        node
+        for group in root
+        if group.tag == svg_tag("g") and group.attrib.get("id", "").startswith("packing-")
+        for node in group
+        if node.tag == svg_tag("rect")
+    ]
     return {
         "deleted_family_edge_is_rejected": removed["betti"] != [2, 2],
         "collapsed_label_components_are_rejected": bridged["component_count"] != 2,
@@ -963,6 +971,11 @@ def run_n3_selftests(model: dict[str, object], svg: str) -> dict[str, bool]:
         and alvarado.get("derived_match") is True,
         "stale_svg_is_rejected": original_svg_hash
         != hashlib.sha256((svg + " ").encode()).hexdigest(),
+        "packing_glyphs_share_dark_boundaries": len(packing_rectangles) == 12
+        and all(
+            node.attrib.get("stroke") == "#17202a" and node.attrib.get("stroke-width") == "3"
+            for node in packing_rectangles
+        ),
     }
 
 

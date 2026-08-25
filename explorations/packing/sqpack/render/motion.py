@@ -73,12 +73,17 @@ def append_container_motion(node: ET.Element) -> None:
     node.set("class", "motion-container")
 
 
+def append_final_overlay_motion(node: ET.Element) -> None:
+    node.set("class", "motion-final-overlay")
+
+
 def append_motion_styles(
     root: ET.Element,
     trajectory: PackingTrajectory,
     *,
     scale: Decimal,
     duration_seconds: Decimal,
+    reveal_final_overlay: bool = False,
 ) -> None:
     rules = []
     for index, track in enumerate(match_square_tracks(trajectory)):
@@ -88,6 +93,12 @@ def append_motion_styles(
         rules.append(
             f".motion-{square_id}{{animation:{animation} "
             f"{format_svg_number(duration_seconds)}s ease-in-out 1 forwards}}"
+        )
+    if reveal_final_overlay:
+        rules.append("@keyframes sqpack-final-overlay{0%{opacity:0}100%{opacity:1}}")
+        rules.append(
+            ".motion-final-overlay{animation:sqpack-final-overlay "
+            f"{format_svg_number(duration_seconds)}s step-end 1 forwards}}"
         )
     css = "@media (prefers-reduced-motion: no-preference){" + "".join(rules) + "}"
     style = sub(root, "style", {"data-sqpack-style": MOTION_MARKER})

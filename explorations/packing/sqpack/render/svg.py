@@ -11,7 +11,7 @@ from strif import atomic_output_file
 
 SVG_NS = "http://www.w3.org/2000/svg"
 SQPACK_NS = "https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1"
-RENDERER_VERSION = "1"
+RENDERER_VERSION = "2"
 XML_DECLARATION = '<?xml version="1.0" encoding="UTF-8"?>\n'
 MOTION_MARKER = "sqpack-motion-v1"
 MOTION_MEDIA_PREFIX = "@media (prefers-reduced-motion: no-preference){"
@@ -121,8 +121,17 @@ def _validate_motion_css(css: str) -> None:
         r"\.motion-[A-Za-z0-9_.-]+\{animation:sqpack-[A-Za-z0-9_.-]+ "
         r"[0-9.]+s ease-in-out 1 forwards\}"
     )
+    final_overlay_keyframes = re.compile(
+        r"@keyframes sqpack-final-overlay\{0%\{opacity:0\}100%\{opacity:1\}\}"
+    )
+    final_overlay_animation = re.compile(
+        r"\.motion-final-overlay\{animation:sqpack-final-overlay "
+        r"[0-9.]+s step-end 1 forwards\}"
+    )
     remainder = keyframes.sub("", body)
     remainder = animations.sub("", remainder)
+    remainder = final_overlay_keyframes.sub("", remainder)
+    remainder = final_overlay_animation.sub("", remainder)
     if remainder:
         raise ValueError("motion CSS lies outside the renderer grammar")
 
