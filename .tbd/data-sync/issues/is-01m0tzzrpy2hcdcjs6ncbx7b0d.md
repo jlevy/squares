@@ -5,7 +5,7 @@ title: "Spec: deterministic SVG rendering toolkit"
 kind: epic
 status: closed
 priority: 1
-version: 18
+version: 21
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
@@ -26,8 +26,11 @@ child_order_hints:
   - is-01m0v0ztwy527bxhn4wr64xbka
   - is-01m0v102z22dxytc6atqpnszdz
   - is-01m0v10ekmcac6c3v3wm9qtsda
+  - is-01m0vwd7kt9wnndsb4jtzzvpeg
+  - is-01m0vwd8ej4f7j45jk54mqmtxx
+  - is-01m0vwd9a6sb0a92f46srt46q7
 created_at: 2026-08-24T22:59:17.342Z
-updated_at: 2026-08-25T03:00:05.501Z
+updated_at: 2026-08-25T07:16:00.450Z
 closed_at: 2026-08-25T03:00:05.499Z
 close_reason: "All implementation children are complete in PR #25; the full 31-step packing gate, 33 focused SVG controls, Ruff, BasedPyright, Flowmark, and artifact replay pass."
 resolution: null
