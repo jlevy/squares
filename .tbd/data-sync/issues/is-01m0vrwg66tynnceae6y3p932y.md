@@ -5,18 +5,20 @@ title: Review and land the final upstream packing PR before session-010
 kind: task
 status: in_progress
 priority: 0
-version: 4
+version: 7
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - packing
   - upstream
-dependencies:
-  - type: blocks
-    target: is-01m0vr7g27g67p699aepcdksxd
+dependencies: []
 parent_id: is-01m0vr7g27g67p699aepcdksxd
 child_order_hints:
   - is-01m0vwd6hwb3h06d6pznbbjd7p
 created_at: 2026-08-25T06:14:24.709Z
-updated_at: 2026-08-25T07:15:57.612Z
+updated_at: 2026-08-25T07:19:13.546Z
 ---
-Hard launch prerequisite requested by the user. Identify the intended final upstream PR, review its mathematical and engineering claims, reconcile overlap with PR 28 and the W7/eight-hour agenda, land it on main, fetch the resulting main, rebase or merge that exact commit into the research branch, resolve conflicts without dropping either side, and rerun focused plus normal validation. Current open candidates discovered by REST are PR 26 (frontier assurance, base main, 3 docs) and PR 25 (deterministic SVG toolkit, stacked on the old workflow branch, 37 files); do not assume which is intended until the target is explicit. Acceptance: named PR merged, exact main SHA recorded, branch clean and pushed on that SHA, conflicts and review dispositions durable, and session-010 still stopped.
+Optional bounded integration checkpoint for PR 26 before or during session-010. Another agent owns the live PR head. At a phase boundary, recheck its current head, review dispositions, mergeability, and hosted checks; merge and integrate it only if fully ready inside the bounded checkpoint. Do not delay tonight's research loop by hours. PR 25 visualization work is explicitly not a blocker and is outside this task. Acceptance: either PR 26 is merged and its exact main SHA integrated with a green focused/normal receipt, or the checkpoint records why it was deferred while session-010 continues from its last green base.
+
+## Notes
+
+2026-08-25 user override: no longer blocks session-010. PR 26 is being updated by another agent in parallel; root monitors at phase boundaries. PR 25 is explicitly nonblocking and ignored for tonight.
