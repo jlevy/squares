@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 228
+count: 232
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -5850,3 +5850,107 @@ defects:
     The same test parses the real workflow through the corrected helper before checking
     both checkout and cache configurations.
   recorded_in: tests/test_module_boundaries.py
+- id: D-229
+  title: The synopsis hypothesis-status aggregate drifted behind the generated ledger
+  date: '2026-08-24'
+  layer: record
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: several experiment rounds
+  severity: medium
+  status: fixed
+  what: >-
+    The current-status summary still said one hypothesis was confirmed and four were
+    refuted after the generated ledger derived three confirmed and six refuted
+    hypotheses.
+  consequence: >-
+    A reader starting from the synopsis received an obsolete program-level result count
+    even though every individual hypothesis row and its ledger-derived status was
+    current.
+  fix: >-
+    Move the complete status aggregate into the top readiness dashboard, derive its
+    expected wording from the ledger in devtools/check_synopsis.py, and remove the
+    duplicate stale count from the closing summary.
+  regression: devtools/check_synopsis.py derives and checks all five status aggregates
+  recurrence_of: D-028
+  bead: think-qzik
+  recorded_in: SYNOPSIS.md
+- id: D-230
+  title: Top-level synopsis claims exceeded the scope of the detailed lane evidence
+  date: '2026-08-24'
+  layer: record
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: the post-PR-22 program overview
+  severity: high
+  status: fixed
+  what: >-
+    The program-at-a-glance capability described exact verification generically despite
+    D-053's unsound third-party field path. The closing status also called proposal and
+    basin rarity bottlenecks for the whole program even though BC-010 makes identity the
+    immediate cartography gate and the proof, construction, exact-value, and asymptotic
+    lanes are independent.
+  consequence: >-
+    A reader could route an uncertified external number field through a bounded verifier
+    or deprioritize productive independent mathematics because a lane-specific limitation
+    was presented as a program-wide one.
+  fix: >-
+    Scope exact verification to bundled or independently isolated fields, proposal to
+    record-finding, and rarity to the cartography thesis. Add a top-level readiness table
+    that states the safe use and named boundary of each layer and links to its owner.
+  regression: none
+  bead: think-47fc
+  recorded_in: SYNOPSIS.md
+- id: D-231
+  title: The synopsis checker omitted hypotheses with multiword statuses
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: drift_check
+  latent_for: every open-question artifact in the current registry
+  severity: high
+  status: fixed
+  what: >-
+    check_synopsis.py parsed a ledger status with a single non-whitespace token followed
+    immediately by a table delimiter. Rows whose status was open question did not match
+    at all, so seven hypotheses were absent from both the status comparison and the new
+    aggregate.
+  consequence: >-
+    The checker could report that the synopsis agreed with the ledger while multiword
+    status rows were missing or mislabeled, and its first aggregate calculation reported
+    zero open questions.
+  fix: >-
+    Parse the complete status cell up to the table delimiter, strip it, and require the
+    synopsis aggregate to state the ledger-derived open-question count.
+  regression: >-
+    devtools/check_synopsis.py checks the seven ledger-derived open-question rows and
+    aggregate.
+  bead: think-kbmb
+  recorded_in: devtools/check_synopsis.py
+- id: D-232
+  title: An unfrozen lint command rewrote the packing dependency lockfile
+  date: '2026-08-24'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: inspection
+  latent_for: one pre-commit validation pass
+  severity: medium
+  status: fixed
+  what: >-
+    Running uv run for Ruff and BasedPyright without --frozen re-resolved uv.lock under
+    the host's global exclude-newer policy. The resulting unrelated diff added host
+    options, downgraded Ruff and nodejs-wheel-binaries, and changed SciPy resolution.
+  consequence: >-
+    Committing the validation side effect would have mixed an unreviewed dependency
+    downgrade into a synopsis-only branch and made the project lock depend on one
+    agent's host policy.
+  fix: >-
+    Restore uv.lock byte-for-byte from the branch base and run subsequent validation
+    through the existing project environment or uv --frozen paths.
+  regression: none
+  bead: think-yjll
+  recorded_in: defects.yaml

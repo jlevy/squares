@@ -11,7 +11,7 @@ It cannot be generated: most of it is judgement, and the judgement is the point.
 So it is *reconciled* instead, the way `campaign/ideas.md` is -- the numbers and
 statuses it asserts must match the artifacts, and every artifact must appear.
 
-Eight checks:
+Nine checks:
 
   1. every round's verdict in the roll-up matches its artifact
   2. every hypothesis's status matches the ledger's derived status
@@ -21,6 +21,7 @@ Eight checks:
   6. the stated hypothesis-artifact count matches the registry directory
   7. every relative link and heading anchor resolves
   8. freshness labels name the current round count and do not embed a stale update note
+  9. the readiness dashboard remains attached to its canonical status owners
 
 Check 7 closes a real gap: `packing-ledger check` walks links under `campaign/`
 only, so the root document's forty-odd references were unchecked.
@@ -40,6 +41,16 @@ import yaml
 ROOT = Path(__file__).resolve().parent.parent
 SYNOPSIS = ROOT / "SYNOPSIS.md"
 HYPOTHESES = ROOT / "campaign/hypotheses"
+READINESS_BEGIN = "<!-- BEGIN CURRENT-RESEARCH-READINESS -->"
+READINESS_END = "<!-- END CURRENT-RESEARCH-READINESS -->"
+READINESS_SOURCES = (
+    "campaign/ledger.md",
+    "campaign/agendas/agenda-001-basin-confidence-ladder.md",
+    "defects.md",
+    "docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md",
+    "#what-is-built",
+    "#where-this-stands",
+)
 
 
 def front(path: Path) -> dict:
@@ -139,7 +150,10 @@ def check_hypotheses(text: str) -> list[str]:
     The ledger's own freshness is already checked by `packing-ledger check`.
     """
     ledger = (ROOT / "campaign" / "ledger.md").read_text()
-    derived = dict(re.findall(r"^\| (H-\d{3}) \| (\S+) \|", ledger, re.M))
+    derived = {
+        hid: status.strip()
+        for hid, status in re.findall(r"^\| (H-\d{3}) \| ([^|]+) \|", ledger, re.M)
+    }
     if not derived:
         return ["campaign/ledger.md: no registry table to check against"]
 
@@ -157,6 +171,21 @@ def check_hypotheses(text: str) -> list[str]:
             problems.append(
                 f"SYNOPSIS.md: {hid} shown as '{shown[hid].strip()}', ledger says '{status}'"
             )
+
+    counts = Counter(derived.values())
+    expected_summary = (
+        "The generated ledger currently derives "
+        f"{counted(counts['confirmed'], 'confirmed hypothesis', 'confirmed hypotheses')}, "
+        f"{counted(counts['refuted'], 'refuted hypothesis', 'refuted hypotheses')}, "
+        f"{counted(counts['open'], 'open hypothesis', 'open hypotheses')}, "
+        f"{counted(counts['open question'], 'open question', 'open questions')}, and "
+        f"{counted(counts['blocked'], 'blocked hypothesis', 'blocked hypotheses')}."
+    )
+    if expected_summary.lower() not in re.sub(r"\s+", " ", text).lower():
+        problems.append(
+            "SYNOPSIS.md: hypothesis-status aggregate does not match campaign/ledger.md; "
+            f"expected '{expected_summary}'"
+        )
     return problems
 
 
@@ -216,6 +245,30 @@ def check_freshness_label(text: str) -> list[str]:
     return []
 
 
+def check_readiness_dashboard(text: str) -> list[str]:
+    """The top-level readiness view exists once and links to canonical status owners."""
+    begin_count = text.count(READINESS_BEGIN)
+    end_count = text.count(READINESS_END)
+    if begin_count != 1 or end_count != 1:
+        message = (
+            "SYNOPSIS.md: readiness dashboard needs exactly one ordered marker pair "
+            f"(found {begin_count} begin, {end_count} end)"
+        )
+        return [message]
+
+    begin = text.index(READINESS_BEGIN)
+    end = text.index(READINESS_END)
+    if begin >= end:
+        return ["SYNOPSIS.md: readiness dashboard markers are reversed"]
+
+    block = text[begin:end]
+    return [
+        f"SYNOPSIS.md: readiness dashboard is detached from canonical source '{source}'"
+        for source in READINESS_SOURCES
+        if source not in block
+    ]
+
+
 # fmt: off
 _ONES = [
     "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
@@ -242,6 +295,11 @@ def spell(n: int) -> str:
         return _ONES[n]
     tens, ones = divmod(n, 10)
     return _TENS[tens] if ones == 0 else f"{_TENS[tens]}-{_ONES[ones]}"
+
+
+def counted(n: int, singular: str, plural: str) -> str:
+    """Write a synopsis count with the noun form that belongs to it."""
+    return f"{spell(n)} {singular if n == 1 else plural}"
 
 
 def check_hypothesis_count(text: str) -> list[str]:
@@ -335,6 +393,7 @@ def main() -> int:
         + check_hypothesis_count(text)
         + check_totals(text)
         + check_freshness_label(text)
+        + check_readiness_dashboard(text)
         + check_defects(text)
     )
     if problems:

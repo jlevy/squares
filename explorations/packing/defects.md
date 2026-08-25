@@ -2,14 +2,14 @@
 
 # Defect log
 
-228 defects recorded across the packing toolchain.
+232 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
 ## The short version
 
 - **64 soundness defects** — the system asserting something false about the mathematics. 53 of them pointed in the *flattering* direction, which is the dangerous one: the error looks like success.
-- **85 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202).
+- **87 fixes left no regression check behind.** That list is the best predictor of what comes back — and it already has, once (D-017 repeats D-010, D-029 repeats D-023, D-062 repeats D-042, D-065 repeats D-028, D-066 repeats D-042, D-072 repeats D-035, D-075 repeats D-059, D-076 repeats D-034, D-077 repeats D-028, D-078 repeats D-041, D-079 repeats D-063, D-082 repeats D-057, D-085 repeats D-058, D-094 repeats D-084, D-098 repeats D-083, D-104 repeats D-052, D-113 repeats D-100, D-115 repeats D-097, D-117 repeats D-104, D-138 repeats D-006, D-140 repeats D-093, D-148 repeats D-091, D-150 repeats D-086, D-155 repeats D-059, D-160 repeats D-145, D-162 repeats D-030, D-163 repeats D-004, D-164 repeats D-014, D-165 repeats D-132, D-166 repeats D-044, D-168 repeats D-132, D-169 repeats D-014, D-170 repeats D-039, D-171 repeats D-164, D-172 repeats D-029, D-180 repeats D-086, D-181 repeats D-034, D-187 repeats D-185, D-188 repeats D-018, D-189 repeats D-181, D-196 repeats D-160, D-198 repeats D-187, D-201 repeats D-198, D-204 repeats D-201, D-217 repeats D-202, D-229 repeats D-028).
 - **28 are still open** (outstanding or contained), every one carrying a bead.
 
 ## What caught them
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 2 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 15 | a cell of the sweep whose answer is known in advance |
-| `review` | 148 | a human or agent reading the work against a checklist |
+| `review` | 150 | a human or agent reading the work against a checklist |
 | `anomaly` | 11 | a result that made no sense, chased down |
-| `inspection` | 24 | reading the code or the design with intent |
-| `drift_check` | 13 | a generated view disagreeing with its source |
+| `inspection` | 25 | reading the code or the design with intent |
+| `drift_check` | 14 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 14 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 14 of 228, and none of the 64 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 14 of 232, and none of the 64 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,8 +34,8 @@ The line worth reading twice: **the automated gate caught 14 of 228, and none of
 | engine | 9 |
 | quench | 20 |
 | verifier | 4 |
-| record | 62 |
-| tooling | 54 |
+| record | 64 |
+| tooling | 56 |
 | docs | 79 |
 
 ## By kind
@@ -43,8 +43,8 @@ The line worth reading twice: **the automated gate caught 14 of 228, and none of
 | Class | Count |
 | --- | ---: |
 | soundness | 64 |
-| validity | 64 |
-| bookkeeping | 71 |
+| validity | 65 |
+| bookkeeping | 74 |
 | robustness | 21 |
 | performance | 8 |
 
@@ -140,6 +140,8 @@ This is the actionable list.
 | D-223 | The synopsis retained superseded normal-gate timing and control counts | docs |
 | D-224 | A focused negative-control replay omitted the gate-managed Python environment | record |
 | D-225 | Checkpoint merge readiness was conflated with unattended launch readiness | record |
+| D-230 | Top-level synopsis claims exceeded the scope of the detailed lane evidence | record |
+| D-232 | An unfrozen lint command rewrote the packing dependency lockfile | tooling |
 
 ## Still open
 
@@ -406,3 +408,7 @@ This is the actionable list.
 | [D-226](../../.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | robustness | conservative | `gate` | medium | fixed | CI discarded the history required by its own provenance gate |
 | [D-227](../../.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | performance | neutral | `inspection` | low | fixed | The uv cache key prefixed its working directory twice |
 | [D-228](tests/test_module_boundaries.py) | 2026-08-24 | tooling | robustness | conservative | `gate` | low | fixed | The workflow regression assumed every YAML key was a string |
+| [D-229](SYNOPSIS.md) | 2026-08-24 | record | bookkeeping | neutral | `review` | medium | fixed | The synopsis hypothesis-status aggregate drifted behind the generated ledger |
+| [D-230](SYNOPSIS.md) | 2026-08-24 | record | validity | flattering | `review` | high | fixed | Top-level synopsis claims exceeded the scope of the detailed lane evidence |
+| [D-231](devtools/check_synopsis.py) | 2026-08-24 | tooling | bookkeeping | neutral | `drift_check` | high | fixed | The synopsis checker omitted hypotheses with multiword statuses |
+| [D-232](defects.yaml) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | An unfrozen lint command rewrote the packing dependency lockfile |
