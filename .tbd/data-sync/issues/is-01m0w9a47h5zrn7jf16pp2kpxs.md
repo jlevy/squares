@@ -5,7 +5,7 @@ title: "Run session-011: continue the eight-hour portfolio after the cycle cap"
 kind: epic
 status: closed
 priority: 0
-version: 17
+version: 18
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: codex-root
 labels: []
@@ -23,7 +23,7 @@ child_order_hints:
   - is-01m0wjyxhrzxbq2a9fz33795kt
   - is-01m0wmxr6ffn9vgxfm1b3v0rr6
 created_at: 2026-08-25T11:01:28.432Z
-updated_at: 2026-08-25T14:30:32.717Z
+updated_at: 2026-08-25T14:31:47.711Z
 closed_at: 2026-08-25T14:30:32.716Z
 close_reason: The eight-hour continuation ran through the user's stop request and ended with a durable terminal session, synchronized defects and beads, and a green fast-gate checkpoint. The planned final research rotation was not opened; think-1s0h owns the exact resume slice.
 resolution: null
@@ -33,4 +33,4 @@ Continue the original session-010 wall-clock research objective from the final g
 
 ## Notes
 
-Session-011 through session-014 preserve the continuation campaign. The latest mathematical checkpoint is 07f3af3: 14 retained research cells, local McClenagan sign repair, Bui exponent-balance verification, one exact Trump branch core, and no new packing record or complete basin map. Session-014 stopped at the user's eight-hour review request after landing the production subprocess timeout slice and a green bounded fast gate: 15 of 31 selected steps, 69 tests, 62 mutation controls, 318 defects, 714 beads, and 14 sessions in 18.54 seconds. No final research cell was opened. Exact resume: open a new session from PR 34 HEAD and preregister one BC-010 exact R4/R5 nonlinear-realization slice under think-1s0h; keep component identity unresolved and D-239 separate. Detailed agent timing remains deferred to think-u9r5.
+Session-011 through session-014 preserve the continuation campaign. The latest mathematical checkpoint is 07f3af3: 14 retained research cells, local McClenagan sign repair, Bui exponent-balance verification, one exact Trump branch core, and no new packing record or complete basin map. Session-014 stopped at the user's eight-hour review request after landing the production subprocess timeout slice and a green final bounded fast gate: 15 of 31 selected steps, 69 tests, 62 mutation controls, 318 defects, 714 beads, and 14 sessions in 18.40 seconds. The current focused timeout suite is 21 of 21 in 8.77 seconds. No final research cell was opened. Exact resume: open a new session from PR 34 HEAD and preregister one BC-010 exact R4/R5 nonlinear-realization slice under think-1s0h; keep component identity unresolved and D-239 separate. Detailed agent timing remains deferred to think-u9r5.
