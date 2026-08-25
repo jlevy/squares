@@ -210,8 +210,10 @@ def minimize_groups(groups: tuple[IncidenceGroup, ...], field, *, oracle=cone_or
     }
 
 
-def build_result(branch: int, *, selftest: bool) -> dict:
-    field, groups, branch_group, representative = derive_branch(branch)
+def structural_checks(
+    field, groups: tuple[IncidenceGroup, ...], branch_group: dict
+) -> dict[str, bool]:
+    """Check branch structure without running the expensive exact minimization."""
     wall_groups = tuple(group for group in groups if group.kind == "wall")
     pair_groups = tuple(group for group in groups if group.kind == "pair")
     primitive_rows = flatten(groups)
@@ -225,7 +227,7 @@ def build_result(branch: int, *, selftest: bool) -> dict:
         "orientation-control",
         tuple(-coefficient for coefficient in normalization_control.coefficients),
     )
-    checks = {
+    return {
         "wall_incidence_count_is_11": len(wall_groups) == 11,
         "pair_contact_count_is_14": len(pair_groups) == 14,
         "group_count_is_25": len(groups) == 25,
@@ -263,6 +265,12 @@ def build_result(branch: int, *, selftest: bool) -> dict:
             == "unresolved"
         ),
     }
+
+
+def build_result(branch: int, *, selftest: bool) -> dict:
+    field, groups, branch_group, representative = derive_branch(branch)
+    primitive_rows = flatten(groups)
+    checks = structural_checks(field, groups, branch_group)
     if selftest and not all(checks.values()):
         raise AssertionError(f"incidence-core structural selftest failed: {checks}")
 

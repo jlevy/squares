@@ -30,9 +30,11 @@ uv run --frozen --all-extras --group dev packing-validate --fast
 
 The version command must report Python 3.14.7. Do not run a bare `pip install`, commit a
 second requirements file, or rely on packages from a global interpreter.
-Change dependencies in `pyproject.toml`, regenerate `uv.lock`, and commit both files
-together. Use `uv sync --frozen --all-extras --group dev` in CI and when reproducing the
-locked development environment; the explicit development group prevents an ambient uv
+Use uv 0.12 or newer to bootstrap the pinned interpreter; uv 0.8.17 cannot install
+CPython 3.14.7 on Linux and reports `No download found for cpython-3.14.7`. Change
+dependencies in `pyproject.toml`, regenerate `uv.lock`, and commit both files together.
+Use `uv sync --frozen --all-extras --group dev` in CI and when reproducing the locked
+development environment; the explicit development group prevents an ambient uv
 configuration from omitting the test and quality tools.
 
 ## Code Maturity and Placement
@@ -162,7 +164,7 @@ Strict mode cannot be combined with a partial selection and fails on every skip.
 Every validation subprocess has a finite 600-second default deadline.
 Override it with `--timeout-seconds SECONDS` or `PACKING_VALIDATE_TIMEOUT_SECONDS`;
 values must be positive and finite, and an explicit smaller per-call timeout still wins.
-Mutation- control commands retain their 120-second default deadline and may declare a
+Mutation-control commands retain their 120-second default deadline and may declare a
 smaller `timeout_seconds` in `devtools/controls.yaml`. A timeout terminates and reaps
 the whole process group, including a child that ignores the first termination signal.
 Each command also gets an empty bytecode-cache root, so rapid same-size source mutations
