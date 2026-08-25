@@ -3,9 +3,9 @@ type: is
 id: is-01m0tzzrpy2hcdcjs6ncbx7b0d
 title: "Spec: deterministic SVG rendering toolkit"
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 17
+version: 18
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels:
   - packing
@@ -27,7 +27,11 @@ child_order_hints:
   - is-01m0v102z22dxytc6atqpnszdz
   - is-01m0v10ekmcac6c3v3wm9qtsda
 created_at: 2026-08-24T22:59:17.342Z
-updated_at: 2026-08-24T23:27:10.176Z
+updated_at: 2026-08-25T03:00:05.501Z
+closed_at: 2026-08-25T03:00:05.499Z
+close_reason: "All implementation children are complete in PR #25; the full 31-step packing gate, 33 focused SVG controls, Ruff, BasedPyright, Flowmark, and artifact replay pass."
+resolution: null
+duplicate_of: null
 ---
 Implement the plan's zero-dependency deterministic SVG spine, progressive overview/comparison/trajectory views, exact metadata and comments, known-answer n=3 migration, and portability checks. Acceptance is the spec's full criteria: byte-repeatable fixtures, honest evidence labels, safe self-contained SVG, useful static fallbacks, measured size/render cost, and a green repository gate.
 

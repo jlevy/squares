@@ -5,7 +5,7 @@ title: Audit all frontier cases under a strict source-and-assurance contract
 kind: task
 status: open
 priority: 1
-version: 6
+version: 8
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels: []
 dependencies:
@@ -13,6 +13,6 @@ dependencies:
     target: is-01m0tyqhc5tesckqkhvs406tjj
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-24T22:46:57.796Z
-updated_at: 2026-08-24T23:04:03.352Z
+updated_at: 2026-08-25T02:58:06.398Z
 ---
-Review n=1..100 row by row against primary sources, then coordinate extension through the declared source horizon. Separate reported best from certified upper bound; record attribution, geometry, claim type, assurance (reported, numerically-checked, verified), method (numerical-f64, numerical-multiprecision, interval-certified, exact-algebraic, proof-audited, proof-assistant-checked), actor, independence, formal artifact, replay, actual precision and tolerance, conflicts, blockers, and last source review. Migrate verified_here to typed evidence. No hash counts as mathematical evidence.
+Script the v1-to-v2 migration and fresh-source reparse for all n=1..100 cases, then scrutinize the cases with local evidence, conflicts, or verified_here entries instead of hand-transcribing 100 rows. Separate reported and verified upper and lower bounds; record claim type, formal basis, origin, independence, arithmetic, actual precision and tolerance, replay, conflicts, blockers, and source-review date. A complete published proof can be external verified evidence without implying audit here; a mere citation stays reported. Record beyond-horizon claims in the coverage inventory.

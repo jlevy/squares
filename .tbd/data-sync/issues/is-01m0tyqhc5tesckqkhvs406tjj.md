@@ -5,15 +5,14 @@ title: Make current frontier status one validated reader-first entry point
 kind: feature
 status: open
 priority: 1
-version: 4
+version: 6
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
   - frontier
-  - focus-process
 dependencies: []
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-24T22:37:19.109Z
-updated_at: 2026-08-24T23:03:47.998Z
+updated_at: 2026-08-25T02:58:04.946Z
 ---
-A newcomer should be able to see the reported best, certified upper bound, proved lower bound, proof/open status, assurance, source conflict, and last source review for every covered n from one obvious generated view, then follow links to structured evidence. Give every n an exact grid fallback and avoid duplicating hand-maintained facts.
+Give newcomers one generated view of reported and verified upper and lower bounds, mathematical status, verification origin, source conflict, and last source review for every n through the explicit n<=100 case horizon. Link every value to typed evidence. Reference one parametric exact grid theorem as the verified fallback instead of duplicating witness files, and generate the SYNOPSIS document/frontier views from their authoritative structured sources.

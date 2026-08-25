@@ -5,15 +5,14 @@ title: Define auditable public-source coverage and freshness
 kind: task
 status: open
 priority: 1
-version: 4
+version: 6
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
 labels:
   - packing
   - research
-  - focus-process
 dependencies: []
 parent_id: is-01m0typjn7s866m042zsemybj6
 created_at: 2026-08-24T22:37:19.405Z
-updated_at: 2026-08-24T23:03:48.291Z
+updated_at: 2026-08-25T02:58:05.187Z
 ---
-Replace an impossible blanket completeness claim with an auditable source census: named authoritative and discovery sources, source ranges, dated reviews, reconciled discrepancies, explicit unavailable material, and a refresh trigger. Determine the current frontier horizon rather than assuming n<=100, then ensure every n through it is represented, reconciling the existing past-n=100 corpus bead think-ezcx. The process must expose what was not checked and must not confuse source collection with factual validation.
+Maintain an auditable source census: named primary and discovery sources, source ranges, dated reviews, discrepancies, unavailable material, and refresh triggers. Keep the case corpus explicitly complete for n<=100; record relevant beyond-horizon claims in validated coverage data. Track one bead per actionable source sweep, conflict class, or tooling blocker rather than per n. Treat think-ezcx as conditional horizon expansion, not a prerequisite for honest current coverage. Source collection never substitutes for factual or formal validation.
