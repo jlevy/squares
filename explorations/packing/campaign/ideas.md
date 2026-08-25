@@ -89,8 +89,8 @@ cheaply if it is wrong.
 
 **The building block everything waits on** is
 [H-002](hypotheses/H-002-lp-in-cell-polish.md): for fixed angles, minimising `s` is a
-linear program, already verified against Trump’s packing to `9e-16`. It turns “where the
-annealer stopped” into “which cell this is”, which makes endpoint candidates
+linear program, already numerically checked against Trump’s packing to `9e-16`. It turns
+“where the annealer stopped” into “which cell this is”, which makes endpoint candidates
 reproducible and numerically polishable.
 Component identity, countability, and exact value require separate evidence.
 
@@ -143,7 +143,8 @@ families remain untried.
 | # | Idea | Status | H | From | Why it might work, or not |
 | --- | --- | --- | --- | --- | --- |
 | 11 | Angle-class two-level search | registered | [H-001](hypotheses/H-001-angle-class-reduction.md) | [X-001](explorations/X-001-standing-review-and-search-philosophy.md) | Algorithmic paired comparison; the corpus-wide angle-count claim is separate |
-| 11a | Verified records through `n=30` use at most three angle classes | **refuted** by six verified classes at `n=29` | [H-024](hypotheses/H-024-record-angle-class-count.md), [exp-012](series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | split from review H-1 | Literal class count was too brittle; the useful successor is H-025’s effective angular compression at bounded side loss |
+| 11a | Formally supported records through `n=30` use at most three angle classes | **unresolved**; the `n=29` serialization lacks a formal feasibility certificate | [H-024](hypotheses/H-024-record-angle-class-count.md), [exp-012](series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | split from review H-1 | Six numerical classes do not satisfy the registered formal-witness prerequisite |
+| 11b | The retained `n=29` serialization has at most three numerical angle classes under its declared arithmetic | **numerically rejected** by six classes | [H-042](hypotheses/H-042-n29-numerical-angle-classes.md), [exp-037](series/series-000-smoke-and-calibration/experiments/exp-037-h-042-n29-numerical-angle-classes.md) | successor to H-024 | Preserves the useful observation without upgrading numerical feasibility to formal support |
 | 12 | δ-continuation: fixed-side projection while walking `δ` down | registered | [H-013](hypotheses/H-013-delta-continuation.md) | review H-13 | A verified path gives an upper bound on minimax clearance; numerical branch coalescence is not a feasible-component merge certificate |
 | 13 | MAP-Elites over mechanism descriptors | registered | [H-015](hypotheses/H-015-map-elites-illumination.md) | review H-15 | Keeps the loss, changes what is retained. Descriptors are frozen before comparison |
 | 14 | Neighbor-transfer seeding from `n ± 1` records | registered | [H-004](hypotheses/H-004-neighbor-transfer-seeding.md) | review H-4 | Corrected to an equal-budget `n=11` comparison; the original `n=12` side-4 target was vacuous |
@@ -152,7 +153,7 @@ families remain untried.
 | 17 | Same annealer, 100× the budget | registered | [H-017](hypotheses/H-017-budget-scaling.md) | this campaign | Park behind a short budget-response ladder; one long run cannot distinguish a flat response from a threshold crossing |
 | 18 | Billiard / inflation | raw |  | `search:11` | Produced records at `n = 29, 37`; δ-continuation is its principled cousin |
 | 19 | Constructor DSL proposed by an LLM, evaluated by LP + exact check | raw |  | strategy doc | Sequenced behind the first atlas artifact — there must be something verified to read |
-| 33 | Effective orientation compression: few fitted class angles retain nearly all record quality even when raw classes are numerous | registered; promoted after H-024 refutation | [H-025](hypotheses/H-025-record-angle-compressibility.md) | successor to H-024 | Exp-012’s six-class `n=29` witness kills a universal raw count, not a quantitative refit criterion |
+| 33 | Effective orientation compression: few fitted class angles retain nearly all record quality even when raw classes are numerous | registered; promoted after the six-class numerical observation | [H-025](hypotheses/H-025-record-angle-compressibility.md) | successor to H-024 | Exp-012’s serialized `n=29` geometry has six numerical classes; a quantitative refit criterion is less brittle |
 | 34 | Public-parent surgery reproduces held-out 2026 UnitSquare improvements before chasing unseen records | registered | [H-030](hypotheses/H-030-public-parent-surgery.md) | [depth review G-10](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | Known parent/child geometries turn construction grammar into a falsifiable methods test |
 | 36 | Finite instances of current asymptotic stack/trapezoid primitives improve a public parent | registered | [H-035](hypotheses/H-035-asymptotic-primitive-finite-transfer.md) | [depth review G-9](../docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | Bridges active 2025–26 theory to finite records without pretending finite success improves an exponent |
 
@@ -175,7 +176,7 @@ families remain untried.
 | 42 | Improve the lower bound for `s(12)` and ultimately decide whether `s(12)=4` | registered | [H-039](hypotheses/H-039-s12-proof-frontier.md) | proof frontier | Exp-016/017 now calibrate failure and success of the forcing architecture; CEGIS can alternate candidate resources with continuous escape witnesses |
 | 43 | Walk adjacent active LP cells instead of resampling cell volume | registered | [H-040](hypotheses/H-040-active-cell-neighbor-walk.md) | piecewise-linear geometry | Compare new verified cells per LP solve at `n=5,10`; a cell is not automatically a component or basin |
 | 44 | Repair Stromquist’s printed Figure 14 set without changing the proof architecture | confirmed | [H-041](hypotheses/H-041-repaired-stromquist-point-set.md) | [exp-017](series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | Moving only `G.x` from `.8` to `.79` yields a complete exact five-node certificate and independently restores the stated lower bound |
-| 45 | Extract proper incidence-minimal rigidity cores from every Trump derivative branch | registered | [H-042](hypotheses/H-042-trump-incidence-rigidity-cores.md) | successor to exp-013 | Exact grouped wall/contact cores test whether every fixed-side branch contains structural first-order redundancy; they do not supply a radius or global theorem |
+| 45 | Extract proper incidence-minimal rigidity cores from every Trump derivative branch | registered | [H-043](hypotheses/H-043-trump-incidence-rigidity-cores.md) | successor to exp-013 | Exact grouped wall/contact cores test whether every fixed-side branch contains structural first-order redundancy; they do not supply a radius or global theorem |
 
 ## Open questions
 

@@ -20,12 +20,12 @@ produce stores that combine by summing frequencies, with no reconciliation.
 
 ## What a row does and does not claim
 
-`side` is at the tier the quench produced, which is `polished` — exact within a cell to
-solver precision, with a scalar side-error floor of about `1e-11`
-([D-021](../defects.md)). `closest_pair` records only the smallest side gap. It cannot
+`side` is a binary64 LP endpoint with a measured scalar side-error floor of about
+`1e-11` ([D-021](../defects.md)). It is numerically checked, not exact.
+`closest_pair` records only the smallest side gap. It cannot
 decide endpoint or basin identity: distinct configurations may have equal sides, and a
 connected terminal component may contain many geometric keys. Nothing here is entitled
-to the word `exact`; promotion routes through `sqpack.verify`.
+to formal assurance; promotion requires an exact witness or rigorous certificate.
 """
 
 from __future__ import annotations

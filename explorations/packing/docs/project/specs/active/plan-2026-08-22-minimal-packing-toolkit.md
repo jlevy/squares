@@ -58,6 +58,23 @@ failed.
   `n = 11` and `n = 12` require.
 - **A proof of anything.** The proof lane gets a *hook*, not an attempt.
 
+## Ownership Boundary
+
+This specification owns the search spine, quench, basin identity, atlas runtime, and
+low-level verifier implementation.
+The [frontier assurance plan](plan-2026-08-24-frontier-assurance-and-verification.md)
+owns the public witness interchange, evidence schemas, user-facing
+`inspect`/`check`/`verify`/`promote` semantics, and the general exact-or-interval
+witness promotion path.
+
+The plans reuse, rather than duplicate, implementation beads.
+`think-0md2` owns the certificate type, `think-kmwb` owns exact corpus re-verification,
+and `think-2lyb` owns the unavoidable-set `PoseBox` proof hook here.
+The frontier plan consumes those outputs through its public witness, assurance, and
+promotion contracts.
+Phase 6’s `PoseBox` hook does not also own interval existence certification for an
+imported packing.
+
 ## Background
 
 Four research documents lead here, and their conclusions constrain this design:
@@ -319,10 +336,10 @@ The review’s H-2 is its own register’s top priority for this reason.
 
 - [x] **`quench`: LP-in-cell.** Fix angles and each pair’s separating axis; solve the
   cell’s linear program.
-  The single-cell half is already verified — a 1,056-constraint LP at Trump’s angles
-  reproduced `s(11)` to solver precision and every centre to `9e-16`. What remains is
-  the *loop*: angle moves between LP solves, behaviour at cell boundaries, and
-  termination at a genuine cell-optimum.
+  The single-cell half is already numerically cross-checked — a 1,056-constraint LP at
+  Trump’s angles reproduced `s(11)` to solver precision and every centre to `9e-16`.
+  What remains is the *loop*: angle moves between LP solves, behaviour at cell
+  boundaries, and termination at a genuine cell-optimum.
 - [ ] **`canonicalize`: basin identity, two-level.** Geometric key (`D₄` and square
   relabelling, quantized, hashed) as the fast path; contact graph up to isomorphism as
   ground truth.
@@ -607,8 +624,11 @@ implementation, and are corrected here rather than left to be discovered again:
   returned a packing violating its own separation constraint, and so a side below the
   standing record ([D-014](../../../../defects.md)). Pinned at the solver’s floor the
   residual is about `1e-11` in the side ([D-021](../../../../defects.md), open).
-  The `polished` tier means *exact within a cell to solver precision*; algebraic
-  exactness stays with `sqpack`, and every promotion must route through it.
+  The historical `polished` tier meant only a finite-precision LP endpoint inside a
+  fixed cell; calling that “exact within a cell” was misleading.
+  Algebraic exactness stays with `sqpack`, every promotion must route through a formal
+  verifier, and the frontier assurance plan retires the tier name from current
+  structured records.
 - **The polish step does not produce rational output.** The review’s R-2 says it does;
   `scipy`/HiGHS returns floats.
   Rational output needs an exact rational LP, which is unbuilt and tracked

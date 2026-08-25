@@ -453,14 +453,14 @@ def _small_n(context: Context) -> str:
             "-m",
             "cases.n5.tangent_inventory",
             "--replay",
-            str(RESULTS / "exp-037-h-023-n5-tangent-inventory.json"),
+            str(RESULTS / "exp-038-h-023-n5-tangent-inventory.json"),
         ),
         (
             sys.executable,
             "-m",
             "cases.n5.fixed_angle_polytope",
             "--replay",
-            str(RESULTS / "exp-038-h-023-n5-fixed-angle-polytope.json"),
+            str(RESULTS / "exp-039-h-023-n5-fixed-angle-polytope.json"),
         ),
     )
     return _commands(context, commands)
@@ -502,7 +502,13 @@ def _canonical_identity(context: Context) -> str:
 
 
 def _schemas(context: Context) -> str:
-    return _module(context, "devtools.validate_schemas")
+    return _commands(
+        context,
+        (
+            (sys.executable, "-m", "devtools.validate_schemas"),
+            (sys.executable, "-m", "devtools.check_source_coverage"),
+        ),
+    )
 
 
 def _derivation(context: Context) -> str:
@@ -562,7 +568,27 @@ def _stromquist_rejection(context: Context) -> str:
 
 
 def _exact_verification(context: Context) -> str:
-    output = _module(context, "cases.trump11.verify_exact")
+    output = _commands(
+        context,
+        (
+            (sys.executable, "-m", "cases.trump11.verify_exact"),
+            (sys.executable, "-m", "cases.gobel5.verify_exact"),
+            (sys.executable, "-m", "cases.gobel10.verify_exact"),
+            (
+                sys.executable,
+                "-m",
+                "sqpack.cli.witness",
+                "verify",
+                "witnesses/schadt-n029-2025-rational.yaml",
+            ),
+            (
+                sys.executable,
+                "-m",
+                "devtools.check_rational_witness_independent",
+                "witnesses/schadt-n029-2025-rational.yaml",
+            ),
+        ),
+    )
     _require_text(
         output,
         "VALID: 11 squares, 55 pairs tested",
@@ -570,6 +596,10 @@ def _exact_verification(context: Context) -> str:
         "20 corner coordinates exactly on the boundary",
         "P(s) == 0 for the published degree-8 polynomial: True",
         "s = 3.87708359002281417730789706010096",
+        "VALID: 5 squares, 10 pairs tested",
+        "VALID: 10 squares, 45 pairs tested",
+        "VERIFIED\n  id: W-schadt-n029-2025-decimal-rational",
+        "VERIFIED: 29 squares, 406 pairs",
     )
     return output
 
@@ -589,14 +619,15 @@ def _frontier_corpus(context: Context) -> str:
     if len(files) != 100:
         raise StepFailureError(f"expected 100 frontier artifacts, found {len(files)}")
     values: set[int] = set()
-    open_count = 0
+    formal_open = 0
+    reported_open = 0
     nagamochi_count = 0
     for path in files:
         data = yaml.safe_load(path.read_text(encoding="utf-8").split("---\n")[1])
         softschema = data["softschema"]
         packing = data["packing"]
         if softschema != {
-            "contract": "packing.squares:SquarePackingCase/v1",
+            "contract": "packing.squares:SquarePackingCase/v2",
             "schema": "square-packing-case.schema.yaml",
             "envelope": "packing",
             "status": "enforced",
@@ -609,15 +640,12 @@ def _frontier_corpus(context: Context) -> str:
             raise StepFailureError(
                 f"inconsistent frontier identity: {path.relative_to(PROJECT_ROOT)}"
             )
-        if packing["upper_bound"]["value"] < packing["lower_bound"]["value"] - 1e-9:
-            raise StepFailureError(f"negative frontier gap: {path.relative_to(PROJECT_ROOT)}")
-        if packing["status"] == "proved" and abs(packing["gap"]) >= 1e-9:
-            raise StepFailureError(
-                f"proved frontier case retains a gap: {path.relative_to(PROJECT_ROOT)}"
-            )
         if packing["status"] == "open":
-            open_count += 1
-            nagamochi_count += packing["lower_bound"]["kind"] == "nagamochi"
+            formal_open += 1
+            nagamochi_count += (
+                "E-nagamochi-lower" in packing["verified_lower_bound"]["evidence"]
+            )
+        reported_open += packing["reported_status"] == "open"
         values.add(n)
     expected_values = set(range(1, 101))
     if values != expected_values:
@@ -626,10 +654,11 @@ def _frontier_corpus(context: Context) -> str:
         raise StepFailureError(
             f"frontier n coverage drifted: missing {missing}, unexpected {extra}"
         )
-    if (open_count, nagamochi_count) != (65, 63):
+    if (formal_open, reported_open, nagamochi_count) != (65, 65, 63):
         raise StepFailureError(
-            "frontier corpus counts drifted: expected 65 open and 63 Nagamochi-bounded; "
-            f"observed {open_count} open and {nagamochi_count} Nagamochi-bounded"
+            "frontier corpus counts drifted: expected 65 formal-open, 65 reported-open, "
+            f"and 63 Nagamochi-bounded; observed {formal_open}, {reported_open}, "
+            f"and {nagamochi_count}"
         )
 
     kingbird = _module(
@@ -648,9 +677,12 @@ def _frontier_corpus(context: Context) -> str:
     ):
         raise StepFailureError("the Kingbird n=29 replay contract changed")
     return (
-        f"  100 artifacts, n = 1..100, {100 - open_count} proved, {open_count} open\n"
-        f"  {nagamochi_count} of {open_count} open cases bounded below by Nagamochi's theorem\n"
-        "  n=29 source: 29 squares, 406 pairs, six classes, source equations replayed"
+        f"  100 artifacts, n = 1..100; formal lane: {100 - formal_open} proved, "
+        f"{formal_open} open\n"
+        f"  reported lane: {100 - reported_open} proved, {reported_open} open; "
+        f"{nagamochi_count} formal-open cases use Nagamochi\n"
+        "  n=29 source numerically checked: 29 squares, 406 pairs, six classes\n"
+        "  named-source reconciliation is enforced by soft-schema validation"
     )
 
 
@@ -711,7 +743,13 @@ def _skills_mirrored(context: Context) -> str:
 
 
 def _synopsis(context: Context) -> str:
-    return _module(context, "devtools.check_synopsis")
+    return _commands(
+        context,
+        (
+            (sys.executable, "-m", "devtools.check_documentation"),
+            (sys.executable, "-m", "devtools.check_synopsis"),
+        ),
+    )
 
 
 def _readme(context: Context) -> str:

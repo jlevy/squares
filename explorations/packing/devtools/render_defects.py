@@ -177,7 +177,13 @@ def render(d: dict) -> str:
             f"| {x['severity']} | {x['status']} "
             f"| {x['title']} |"
         )
-    out.append("")
+    out += [
+        "",
+        "<!-- This document follows common-doc-guidelines.md.",
+        "See github.com/jlevy/practical-prose and review guidelines before editing.",
+        "-->",
+        "",
+    ]
     return "\n".join(out)
 
 

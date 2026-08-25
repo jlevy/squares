@@ -23,7 +23,7 @@ hypothesis:
     Not yet complete. Retain every float-accepted endpoint from the event archive and
     batch it through an independently implemented interval or exact verification path.
   instrument_ready: false
-  regime: verifier version, precision tier, and screen tolerance recorded per endpoint
+  regime: checker version, arithmetic method, actual precision, and tolerance recorded per endpoint
   instance: {axis: n, point: 11}
   sweep: {axis: n, points: [5, 6, 7, 8, 9, 10, 11, 12, 17]}
   priority: 1

@@ -1,7 +1,7 @@
 ---
 title: exp-031 — source-bound n=10 known-answer return
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,17 +10,29 @@ experiment:
   series: series-000
   title: Test four source-bound returns to the proved n=10 side
   date: '2026-08-24'
-  hypotheses: [H-002]
+  hypotheses:
+  - H-002
   tier: exploratory
-  known_defects: [D-126]
+  known_defects:
+  - D-126
   subject:
     label: deterministic perturbations of the published Göbel n=10 packing
     engine: basin_census.py BasinEvent/v3 and sqpack quench
     engine_commit: dab797c
-    precision: f64_screen
+    assurance: numerically-checked
+    method: numerical-f64
+    precision:
+      binary_bits: 53
+      rounding: nearest-even
+    tolerance: unrecorded-historical
+    migration_annotation: '2026-08-25: the v1 artifact identified float64 arithmetic but did not retain
+      one experiment-wide acceptance tolerance.'
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 10, role: positive_control}
+  instance:
+    axis: n
+    point: 10
+    role: positive_control
   method:
     candidate: four fixed perturbations of source fixture gobel10-svg-v1 at scale 1e-4
     runs_per_condition: 4
@@ -29,11 +41,8 @@ experiment:
     commit: dab797c
     dirty: false
     entry_point: explorations/packing/tools/basin_census.py
-    command: >-
-      timeout 90 uv run --frozen --quiet python tools/basin_census.py run --n 10
-      --seeds 0-3 --time-budget 15 --start-source gobel10-svg-v1
-      --perturbation-scale 1e-4 --output
-      campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
+    command: timeout 90 uv run --frozen --quiet python tools/basin_census.py run --n 10 --seeds 0-3
+      --time-budget 15 --start-source gobel10-svg-v1 --perturbation-scale 1e-4 --output campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
     budget: four seeds; 15 seconds per quench; 90-second process cap; retain every stop
     record: campaign/series/series-000-smoke-and-calibration/results/exp-031-h-002-n10-source-return.jsonl
   effort:
@@ -43,24 +52,20 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: >-
-      Do all four declared source perturbations converge to independently valid n=10
-      endpoints within 1e-12 of the proved side, with complete balanced receipts?
+    question: Do all four declared source perturbations converge to independently valid n=10 endpoints
+      within 1e-12 of the proved side, with complete balanced receipts?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      BasinEvent/v3 replay: 4/4 producer-converged, independently valid, admissible,
-      and balanced; maximum analytic-side error 2.220446049250313e-15;
-      6,631/6,631 fixed-point evaluations settled
+    checked_by: 'BasinEvent/v3 replay: 4/4 producer-converged, independently valid, admissible, and
+      balanced; maximum analytic-side error 2.220446049250313e-15; 6,631/6,631 fixed-point evaluations
+      settled'
   verdict:
     decision: baseline
-    primary_criterion: >-
-      Four of four retained events are producer-converged, scientifically admissible,
+    primary_criterion: Four of four retained events are producer-converged, scientifically admissible,
       independently valid, fully accounted, and within 1e-12 of 3 + sqrt(2)/2.
-    reason: >-
-      All four source perturbations satisfy every declared condition and return to the
-      proved side within floating-point precision. This confirms the narrow known-answer
-      control without reopening H-002's refuted universal claim.
+    reason: All four source perturbations satisfy every declared condition and return to the proved
+      side within floating-point precision. This confirms the narrow known-answer control without
+      reopening H-002's refuted universal claim.
     commit: 29d99b1
 ---
 # exp-031 — the `n = 10` source-return control passes

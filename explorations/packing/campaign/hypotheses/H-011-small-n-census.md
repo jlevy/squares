@@ -62,3 +62,7 @@ against ground truth before it is pointed at `n = 11`.
 This is the cheapest strategic item in the registry: it runs on the existing Python plus
 the LP that the standing review already validated, so it needs no Rust and no new
 engine.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

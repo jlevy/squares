@@ -1,7 +1,7 @@
 ---
 title: exp-014 — exact n = 3 optimal moduli form a quotient interval
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
@@ -10,16 +10,21 @@ experiment:
   series: series-000
   title: Exact classification of the full n = 3 optimal configuration space
   date: '2026-08-24'
-  hypotheses: [H-032]
+  hypotheses:
+  - H-032
   tier: confirmatory
   subject:
     label: full physical configuration space of three unit squares in side 2
     engine: exact small-n moduli checker 0.1.0
     engine_commit: 257cb0d
-    precision: exact
+    assurance: verified
+    method: exact-algebraic
     host_system: macOS arm64
     selftest_passed: true
-  instance: {axis: n, point: 3, role: positive_control}
+  instance:
+    axis: n
+    point: 3
+    role: positive_control
   method:
     control: Friedman central-point lemma plus the archived hard-square configuration-space literature
     candidate: exhaustive arbitrary-orientation classification and D4 x S3 orbit stratification
@@ -29,17 +34,13 @@ experiment:
     commit: 257cb0d
     dirty: false
     entry_point: explorations/packing/tools/check_small_n_moduli.py
-    command: >-
-      uv run --frozen python tools/check_small_n_moduli.py --n 3
-      --record campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
-      --svg atlas/n-003-optimal-moduli.svg && uv run --frozen python
-      tools/check_small_n_moduli.py --n 3 --replay
-      campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
+    command: uv run --frozen python tools/check_small_n_moduli.py --n 3 --record campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
+      --svg atlas/n-003-optimal-moduli.svg && uv run --frozen python tools/check_small_n_moduli.py
+      --n 3 --replay campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
       --check-svg atlas/n-003-optimal-moduli.svg
-    budget: >-
-      120 agent-minutes; stop on one valid genuinely rotated side-2 configuration, any
-      mismatch in the labelled or quotient cell complexes, a source-premise failure,
-      or a complete exact classification with deterministic record and SVG replay
+    budget: 120 agent-minutes; stop on one valid genuinely rotated side-2 configuration, any mismatch
+      in the labelled or quotient cell complexes, a source-premise failure, or a complete exact classification
+      with deterministic record and SVG replay
     record: campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
   effort:
     timebox: 120m
@@ -48,21 +49,19 @@ experiment:
     stopped_by: criterion
   results:
   - shape: determination
-    question: What is the full physical side-2 configuration space at n = 3 and its S3 and D4 x S3 quotients?
+    question: What is the full physical side-2 configuration space at n = 3 and its S3 and D4 x S3
+      quotients?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      tools/check_small_n_moduli.py: exact orientation forcing, 64 separation
-      disjuncts, 24 consistent one-cells, independent exact packing samples, complete
-      quotient/stabilizer tables, scoped literature comparisons, nine mutation controls, and
-      byte-identical semantic and SVG replay
+    checked_by: 'tools/check_small_n_moduli.py: exact orientation forcing, 64 separation disjuncts,
+      24 consistent one-cells, independent exact packing samples, complete quotient/stabilizer tables,
+      scoped literature comparisons, nine mutation controls, and byte-identical semantic and SVG replay'
   verdict:
     decision: accepted
     primary_criterion: exhaustive exact classification of F_3(2) and its S3 and D4 x S3 quotients
-    reason: >-
-      F_3(2) is two labelled 12-cycles; its S3 quotient is one four-cycle and its
-      D4 x S3 quotient is the interval [0,1/2], with every physical configuration
-      axis-aligned and all three quotient strata replayed exactly.
+    reason: F_3(2) is two labelled 12-cycles; its S3 quotient is one four-cycle and its D4 x S3 quotient
+      is the interval [0,1/2], with every physical configuration axis-aligned and all three quotient
+      strata replayed exactly.
     commit: 257cb0d
 ---
 # exp-014 — the complete optimal moduli space at n = 3

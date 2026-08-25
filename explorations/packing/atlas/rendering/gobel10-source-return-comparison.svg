@@ -3,9 +3,13 @@
   <title id="figure-title">Square packing</title>
   <desc id="figure-description">A square packing rendered with mathematical y coordinates upward.</desc>
   <metadata>
-    <sqpack:profile version="4">
+    <sqpack:profile version="5">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="annotations">minimal</sqpack:value>
+      <sqpack:value name="check-detail">retained BasinEvent/v3 endpoint</sqpack:value>
+      <sqpack:value name="check-kind">numerical</sqpack:value>
+      <sqpack:value name="check-method">sqpack.verify/f64-tol-1e-10</sqpack:value>
+      <sqpack:value name="check-result">passed</sqpack:value>
       <sqpack:value name="evidence">candidate</sqpack:value>
       <sqpack:value name="source-id">gobel10-svg-v1</sqpack:value>
       <sqpack:value name="source-url">https://kingbird.myphotos.cc/packing/square-10.svg</sqpack:value>

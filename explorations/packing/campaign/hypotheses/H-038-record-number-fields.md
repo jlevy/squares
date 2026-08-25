@@ -16,17 +16,17 @@ hypothesis:
   derived_from: [X-002]
   strategy_refs: ['search:17', 'search:18', 'proof:15']
   instrument: >-
-    Import and independently verify full witnesses before assigning algebraic metadata.
+    Import and formally verify full witnesses before assigning algebraic metadata.
     Derive the exact polynomial system of each declared active cell, eliminate to the
     side and angle variables, factor over the rationals, and compute field invariants
     with replayable computer-algebra receipts. Never inherit a polynomial from a
     superseded side row.
   instrument_ready: false
   regime: independently reconstructed algebraic record witnesses with active-cell certificates
-  instance: {axis: corpus, point: verified-algebraic-records}
+  instance: {axis: corpus, point: formally-verified-algebraic-records}
   priority: 2
   cost_estimate: tier S for one known-answer field; agent-days for a checked corpus table
-  prereqs: [verified geometry corpus, exact active-cell extraction]
+  prereqs: [formally supported geometry corpus, exact active-cell extraction]
   replication: true
   registered: '2026-08-24'
   notes: >-
@@ -37,7 +37,7 @@ hypothesis:
 ---
 # H-038 — let the exact witness choose its field
 
-This lane asks what the algebra is after the geometry is fixed and verified.
+This lane asks what the algebra is after the geometry is fixed and formally verified.
 It does not infer a construction from a decimal side value or use algebraic degree as a
 proxy for rigidity. A failed simple pattern is retained as a counterexample to the
 proposed taxonomy.

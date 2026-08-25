@@ -1,0 +1,30 @@
+softschema:
+  contract: packing.squares:Witness/v1
+  schema: witness.schema.yaml
+  envelope: witness
+  status: enforced
+witness:
+  id: W-rotated-n001-sqrt2
+  n: 1
+  side: ['0', '1']
+  square_size: '1'
+  representation: center-basis
+  scalar:
+    kind: algebraic-number-field
+    minimal_polynomial: ['1', '0', '-2']
+    isolating_interval: ['1', '2']
+  coordinates:
+    origin: lower-left
+    axes: x-right-y-up
+    angle_unit: not-applicable
+  squares:
+    - id: 1
+      center: [['0', '1/2'], ['0', '1/2']]
+      basis: [['0', '1/2'], ['0', '1/2']]
+  claim:
+    assurance: verified
+    method: exact-algebraic
+    limitations: Establishes one exact rotated feasible witness, not an optimality result.
+  certificate:
+    kind: exact-algebraic-sat
+    replay: uv run --frozen packing-witness verify witnesses/rotated-n001-sqrt2.yaml

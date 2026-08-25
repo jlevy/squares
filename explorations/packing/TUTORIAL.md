@@ -148,11 +148,12 @@ must be checked on its own contact structure.
 
 ![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
 
-*The `n = 29` record is a useful larger-scale check: six orientation classes, 29
-squares, and deterministic reuse after the fixed 20-color sequence is exhausted.
-The retained source is reconstructed at 160 decimal digits and passes all 406 pair
-checks; that verifies this numerical construction without turning it into an exact
-certificate or an optimality proof.*
+*The reported `n = 29` record is a useful larger-scale check: six orientation classes,
+29 squares, and deterministic reuse after the fixed 20-color sequence is exhausted.
+The retained roughly 100-digit source is evaluated at 160 decimal digits of working
+precision and passes all 406 pair checks at tolerance `1e-80`; that numerically checks
+the construction without verifying it or turning it into an exact certificate or an
+optimality proof.*
 
 ## 3. Cells, Basins, and Two Traps
 
@@ -328,20 +329,31 @@ subtlety: `cos a`, `sin a`, `tan(a/2)` and `s` are all algebraic, but **the angl
 itself, in radians, is transcendental** by Lindemann–Weierstrass.
 The algebra lives in the trigonometric values, never in the angle.
 
-### The three evidence tiers
+### Assurance, method, and precision
 
-The rule is **never extrapolate across a tier boundary**.
+Never extrapolate across an assurance or arithmetic boundary.
 
-| Tier | What it means |
+| Assurance | What it means |
 | --- | --- |
-| `f64_screen` | a candidate was proposed |
-| `polished` | a quench endpoint valued to solver precision—a floor of about `1e-11` in the side |
-| `exact` | validity decided over the packing’s own number field |
+| `reported` | A named source states the claim; this project has not established it independently |
+| `numerically-checked` | A finite calculation checked the scoped predicates under an explicit method, precision, rounding, and tolerance |
+| `verified` | An exact check, rigorous interval certificate, or complete proof decides the claim and its preconditions |
 
-**A record may be claimed only at `exact`.** A negative gap below that tier is solver
-noise, never a discovery—a rule that has already caught a critical defect, when a loose
-LP tolerance returned a packing violating its own separation constraint and so a side
-below the standing record.
+Methods are recorded separately.
+The witness and machine-check tokens are `numerical-f64`, `numerical-multiprecision`,
+`interval-certified`, and `exact-algebraic`. Frontier proof evidence additionally uses
+`published-proof`, `proof-audited`, or `proof-assistant-checked`. `numerical-f64` says
+exactly what arithmetic was used.
+`numerical-multiprecision` must state the actual digits or bits and tolerance; it does
+not mean unlimited precision.
+The formal tokens name exact algebraic replay, rigorous interval certification, or a
+scoped proof. A numerical result remains numerical at tolerance `1e-100`.
+
+`beat_record: true` requires `assurance: verified`. A negative numerical gap is a
+candidate or solver error, never a formal discovery—a rule that caught a critical defect
+when a loose LP tolerance returned a packing violating its own separation constraint.
+Even a verified feasible witness establishes only an upper bound; optimality needs a
+matching verified lower bound.
 
 ### From a numeric solution to an exact one
 
@@ -402,6 +414,13 @@ They do not identify the contact structure or recover a number field by themselv
 A complete promotion still needs those discrete and algebraic claims bound to the
 certified root.
 
+There is also a robust route that does not identify the source pose exactly: replace
+decimal centers and rotations by exact rational data, add an explicit side relaxation,
+and verify the resulting construction.
+This can prove a slightly weaker upper bound when the numerical pose has enough
+geometric slack. It does not certify the original decimal coordinates or preserve the
+reported value.
+
 How much of that pipeline exists here decides what the word “exact” can mean in this
 directory, and the answer is in [§6](#6-what-is-built-and-what-is-not).
 
@@ -411,23 +430,38 @@ The synopsis owns the authoritative status; this is its shape.
 A documented method here is not necessarily an available one, and the difference decides
 what any result can claim.
 
-**The verification and experimental stack is real.** Exact `ℚ(α)` arithmetic, the
-separating-axis verifier generic over its scalar type, the negative controls, the
-independently rebuilt LP, the numerical class-bracketing quench, the Rust screening
-annealer, and a thirty-step gate all exist, and the whole gate runs in one to two
-minutes. Exact results built on the proof instruments include the lower-bound
-falsification and repair, the optimal configuration spaces at `n = 3` and `n = 4`, and
-the local-isolation theorem for Trump’s pose.
+**The verification and experimental stack is built.** Exact `ℚ(α)` arithmetic with
+irreducibility and unique-root checks, rational and algebraic separating-axis
+verification, negative controls, the independently rebuilt LP, the numerical
+class-bracketing quench, the Rust screening annealer, and the registered repository gate
+all exist. `packing-validate --list` is the authoritative inventory.
+Formal results built on the proof instruments include the lower-bound falsification and
+repair, the optimal configuration spaces at `n = 3` and `n = 4`, and the local-isolation
+theorem for Trump’s pose.
 The quench and annealer remain numerical instruments; listing them here does not promote
-their outputs to `exact`.
+their outputs to verified.
 
-**The recovery half is not built.** There is **no executable path from a numerical
-candidate to a reconstructible exact result**. Every exact configuration in the
-repository—Trump’s packing, the `n = 3` and `n = 4` optimal families—was authored from
-published data or derived analytically, none recovered from a search output.
-Steps 2 through 6 of the pipeline above exist as a tracked, unbuilt work item.
-Until they exist, “verify exactly” means *check something already known exactly*, not
-*promote something we found*.
+**The generic witness boundary and robust rational promotion are built.** One
+`Witness/v1` file can be inspected, numerically checked, or exactly verified without
+case-specific geometry code.
+The retained Schadt `n = 29` decimal pose is numerically checked at 300 digits and
+tolerance `1e-100`; a separate robustification produces a slightly larger rational
+packing that two exact implementations verify.
+
+```shell
+uv run --frozen packing-witness inspect witnesses/schadt-n029-2025-decimal.yaml
+uv run --frozen packing-witness check witnesses/schadt-n029-2025-decimal.yaml \
+  --method numerical-multiprecision --precision 300 --tolerance 1e-100
+uv run --frozen packing-witness verify witnesses/schadt-n029-2025-rational.yaml
+```
+
+**Reported-value recovery remains unbuilt and may be mathematically contingent.** The
+tool does not yet infer a contact model, certify existence near a contact solution, or
+recover a general algebraic witness at the reported value.
+A generic interval-existence checker is an understood engineering direction, but
+singular, ambiguous, or ill-conditioned contact systems may still defeat it.
+The command returns the typed `checker-not-built` gap today rather than pretending every
+decimal pose is promotable.
 
 **Three instruments run, but only their narrow event claims are admissible.** The
 endpoint store, canonical identity keys, and census all execute.
@@ -437,9 +471,9 @@ They cannot certify that two endpoints belong to different connected terminal
 components, so counting rows in the store is still not counting basins.
 The synopsis names the identity and census blockers.
 
-Every capability here is in one of three states: *built*, *built but not admissible*, or
-*documented and unbuilt*. The three are genuinely different, and the synopsis marks
-them.
+The synopsis’s
+[verification capability ladder](SYNOPSIS.md#verification-capability-ladder) separates
+built and sound paths, buildable engineering, and mathematically contingent steps.
 
 ## 7. How the Search Is Approached, and Why
 
@@ -551,7 +585,7 @@ bifurcations), and basin-entry tests that separate “search cannot find the reg
 “the refiner cannot hold it”—two failures with identical symptoms and different fixes.
 
 The result that most sharpened this: the annealer, pointed at `n = 17`, reported `5.0`—
-the trivial grid—on every one of five f64-screen seeds
+the trivial grid—on every one of five binary64 screening seeds
 ([exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md)),
 against a record of `4.6755`. Because that miss is at a second, independent cell whose
 record needs oblique structure, the failure is not specific to `n = 11`; whether it
@@ -567,20 +601,20 @@ structure-versus-rarity laws, and the denominator for any coverage claim.
 
 What has been established, with the exact limit of each claim, and then what is
 genuinely open, ranked by how much of the program rests on it.
-Evidence tiers are the ones in [§5](#5-algebra-versus-numerics).
+Assurance and method follow [§5](#5-algebra-versus-numerics).
 
 ### Established
 
-| Result | Tier | What it does *not* say |
+| Result | Assurance or basis | What it does *not* say |
 | --- | --- | --- |
 | Fixing the angles and every pair’s separating axis makes minimising `s` a linear program | proved | Nothing about *which* cell is best; that choice is the combinatorial hard part |
-| Trump’s 1979 packing is valid, over `ℚ(u)` of degree 8, with 14 pairs at exactly zero separation | exact | Nothing about optimality; it is an upper bound |
-| [`s(11) ≥ 2 + 4/√5`](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | exact | Not attributed to Stromquist, not externally peer-reviewed, and it does not close the gap to Trump |
-| [Stromquist’s *printed* 2003 argument fails](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side `10001/10000` fits the claimed container and avoids all twelve printed Figure 14 points | exact | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies |
-| [Trump’s pose is locally isolated](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | exact | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries |
-| The one-dimensional class-angle optimum is a corner, with one-sided slopes of `0.1747` and `0.384` per radian | verified (f64) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails |
-| The exact optimal configuration spaces at [`n = 3`](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | exact | Only those two moduli spaces are classified here; the optimal side values at `n = 5` and `n = 6` are proved, but their optimal configuration spaces are not classified here |
-| Refinement is not the current bottleneck: the same refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | polished | The tier guarantees only `≈1e-11` in the side, so read the residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
+| Trump’s 1979 packing is valid, over `ℚ(u)` of degree 8, with 14 pairs at exactly zero separation | verified (`exact-algebraic`) | Nothing about optimality; it is an upper bound |
+| [`s(11) ≥ 2 + 4/√5`](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | verified (`exact-algebraic`) | Not attributed to Stromquist, not externally peer-reviewed, and it does not close the gap to Trump |
+| [Stromquist’s *printed* 2003 argument fails](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side `10001/10000` fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies |
+| [Trump’s pose is locally isolated](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries |
+| The one-dimensional class-angle optimum is a corner, with one-sided slopes of `0.1747` and `0.384` per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails |
+| The exact optimal configuration spaces at [`n = 3`](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | verified (`exact-algebraic`) | Only those two moduli spaces are classified here; the optimal side values at `n = 5` and `n = 6` are proved, but their optimal configuration spaces are not classified here |
+| Refinement is not the current bottleneck: the same floating-point LP refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | numerically checked (`numerical-f64`) | The solver floor is about `1e-11` in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
 
 ### Open
 
@@ -610,11 +644,11 @@ would do better.
 The upper bound is a construction nobody has beaten; the lower bound is now certified
 here but is not claimed to be sharp.
 
-**5. What a `polished` number means below `1e-11`.** The float LP solver has a noise
-floor there, many rounds sit on it, and no comparison finer than the floor is
-admissible. The general fix is an exact LP over certified rational or algebraic
-coefficients; a purely rational LP applies only when the fixed-angle cell has rational
-coefficients. That solver is unbuilt.
+**5. What a floating LP result means below `1e-11`.** The solver has a noise floor
+there, many rounds sit on it, and no comparison finer than the floor is admissible.
+The general fix is an exact LP over certified rational or algebraic coefficients; a
+purely rational LP applies only when the fixed-angle cell has rational coefficients.
+That solver is unbuilt.
 
 **6. Whether endpoint results reproduce across machines.** Endpoint identity depends on
 floating-point behaviour in a degenerate linear program, and the same seed can reach a
@@ -646,7 +680,7 @@ Everything below is used narrowly here.
 | **angle class** | a set of squares constrained to share one angle |
 | **gap** | always `best_side − standing_best`, signed |
 | **standing best** | the best side ever published for that `n`—an upper bound, not known to be optimal in the open cases |
-| **evidence tier** | `f64_screen`, `polished`, `exact`—what a number is permitted to claim |
+| **assurance** | `reported`, `numerically-checked`, or `verified`; method, actual precision, tolerance, and origin stay separate |
 | **atlas** / **census** | the deduplicated store of endpoints, and an enumeration run to saturation |
 
 ## 10. Where to Go Next

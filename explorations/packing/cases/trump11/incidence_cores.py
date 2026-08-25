@@ -11,7 +11,6 @@ stress or direction, but a proposal affects the result only after exact replay i
 from __future__ import annotations
 
 import argparse
-import hashlib
 import itertools
 import json
 import math
@@ -31,12 +30,6 @@ class IncidenceGroup:
     feature_label: str
     feature_aliases: tuple[str, ...]
     rows: tuple[tangent_cones.LinearRow, ...]
-
-
-def exact_key_fingerprint(key: tuple) -> str:
-    """Return a stable compact identifier for canonical exact coefficient data."""
-
-    return hashlib.sha256(repr(key).encode()).hexdigest()
 
 
 def oriented_row_class_key(row: tangent_cones.LinearRow) -> tuple:
@@ -69,20 +62,11 @@ def group_record(group: IncidenceGroup) -> dict:
         "feature_aliases": list(group.feature_aliases),
         "row_count": len(group.rows),
         "source_row_labels": [row.label for row in group.rows],
-        "oriented_row_class_sha256": [
-            exact_key_fingerprint(oriented_row_class_key(row)) for row in group.rows
-        ],
     }
 
 
 def flatten(groups: tuple[IncidenceGroup, ...]) -> tuple[tangent_cones.LinearRow, ...]:
     return tuple(itertools.chain.from_iterable(group.rows for group in groups))
-
-
-def matrix_fingerprint(matrix_key: tuple) -> str:
-    """Return a compact stable identifier for exact low-degree coefficient data."""
-
-    return exact_key_fingerprint(matrix_key)
 
 
 def derive_branch(branch: int):
@@ -141,7 +125,7 @@ def derive_branch(branch: int):
     grouped_rows = flatten(tuple(groups))
     if tangent_cones.matrix_key(grouped_rows) != matrix_key:
         raise AssertionError("grouped incidence rows do not reproduce the branch matrix")
-    return field, tuple(groups), matrix_key, branch_group, representative
+    return field, tuple(groups), branch_group, representative
 
 
 def cone_oracle(rows, field) -> dict:
@@ -227,7 +211,7 @@ def minimize_groups(groups: tuple[IncidenceGroup, ...], field, *, oracle=cone_or
 
 
 def build_result(branch: int, *, selftest: bool) -> dict:
-    field, groups, matrix_key, branch_group, representative = derive_branch(branch)
+    field, groups, branch_group, representative = derive_branch(branch)
     wall_groups = tuple(group for group in groups if group.kind == "wall")
     pair_groups = tuple(group for group in groups if group.kind == "pair")
     primitive_rows = flatten(groups)
@@ -291,9 +275,6 @@ def build_result(branch: int, *, selftest: bool) -> dict:
     proper = minimization["status"] == "completed" and bool(removed_classes)
     minimization["root_oriented_row_class_count"] = len(root_classes)
     minimization["core_oriented_row_class_count"] = len(core_classes)
-    minimization["removed_oriented_row_class_sha256"] = sorted(
-        exact_key_fingerprint(key) for key in removed_classes
-    )
     minimization["proper"] = proper
     if selftest:
         completed = minimization["status"] == "completed"
@@ -337,7 +318,6 @@ def build_result(branch: int, *, selftest: bool) -> dict:
         },
         "branch": {
             "index": branch,
-            "matrix_key_sha256": matrix_fingerprint(matrix_key),
             "representative_selection": list(representative),
             "derivative_selections": [
                 list(selection) for selection in branch_group["selections"]

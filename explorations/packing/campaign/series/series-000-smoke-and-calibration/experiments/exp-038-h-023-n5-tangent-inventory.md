@@ -1,64 +1,59 @@
 ---
-title: exp-037 — exact n = 5 tangent-cone inventory
+title: exp-038 — exact n = 5 tangent-cone inventory
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
 experiment:
-  id: exp-037
+  id: exp-038
   series: series-000
   title: Certify the complete first-order cone along the exp-033 face
   date: '2026-08-25'
-  hypotheses: [H-023]
+  hypotheses:
+  - H-023
   tier: confirmatory
   subject:
     label: exact branchwise fixed-side tangent-cone factorization at n = 5
     engine: n = 5 tangent-inventory checker 0.1.0
     engine_commit: b8d0104
-    precision: exact
+    assurance: verified
+    method: exact-algebraic
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 5, role: target}
+  instance:
+    axis: n
+    point: 5
+    role: target
   method:
-    control: >-
-      exact exp-034 through exp-036 semantic bindings, an independent analytic sheet
-      oracle, and ten rigid, flexible, lineality, branch, ray, classification, and scope
-      controls
-    candidate: >-
-      positive exact left-kernel certificates, exhausted left-kernel rank, explicit
-      lineality and sheet bases, and a six-generator transverse-cone factorization for
-      each of the six stratum and owner-axis matrices
+    control: exact exp-034 through exp-036 semantic bindings, an independent analytic sheet oracle,
+      and ten rigid, flexible, lineality, branch, ray, classification, and scope controls
+    candidate: positive exact left-kernel certificates, exhausted left-kernel rank, explicit lineality
+      and sheet bases, and a six-generator transverse-cone factorization for each of the six stratum
+      and owner-axis matrices
     runs_per_condition: 1
     interleaved: false
     operator: openai-codex
     commit: b8d0104
     dirty: false
     entry_point: explorations/packing/cases/n5/tangent_inventory.py
-    command: >-
-      timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      -m cases.n5.tangent_inventory --record
-      campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
-      && timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      -m cases.n5.tangent_inventory --replay
-      campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
-    budget: >-
-      one 30-minute implementation and measurement slice; separate 30-second generation
-      and replay caps; stop on source drift, incomplete branch coverage, a failed exact
-      certificate, a surviving control, a nonlinear overclaim, or retained-record drift
-    record: campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
+    command: timeout 30 uv run --directory explorations/packing --frozen --quiet python -m cases.n5.tangent_inventory
+      --record campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-tangent-inventory.json
+      && timeout 30 uv run --directory explorations/packing --frozen --quiet python -m cases.n5.tangent_inventory
+      --replay campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-tangent-inventory.json
+    budget: one 30-minute implementation and measurement slice; separate 30-second generation and
+      replay caps; stop on source drift, incomplete branch coverage, a failed exact certificate, a
+      surviving control, a nonlinear overclaim, or retained-record drift
+    record: campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-tangent-inventory.json
   results:
   - shape: determination
-    question: >-
-      What is the complete branchwise fixed-side linearization cone at A, one interior
-      point, and B after identifying the certified exp-034 sheet without treating
-      exp-036's one obstructed orientation as a quotient symmetry?
+    question: What is the complete branchwise fixed-side linearization cone at A, one interior point,
+      and B after identifying the certified exp-034 sheet without treating exp-036's one obstructed
+      orientation as a quotient symmetry?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      exact Q(sqrt(2)) left-kernel exhaustion, physical generator and source checks,
-      deterministic record regeneration, independent result review, and ten declared
-      controls
+    checked_by: exact Q(sqrt(2)) left-kernel exhaustion, physical generator and source checks, deterministic
+      record regeneration, independent result review, and ten declared controls
   effort:
     timebox: 30m exact-inventory slice; 30s generation and 30s replay caps
     wall_seconds: 1.06
@@ -66,21 +61,18 @@ experiment:
     stopped_by: criterion
   verdict:
     decision: accepted
-    primary_criterion: >-
-      rebuild all six exact source matrices; certify their ranks, lineality, and complete
-      positive left-kernel relations; prove that both owner branches have the same exact
-      V-representation; identify the exp-034 sheet analytically; retain six transverse
-      generators, their sole relation, and both pointed-quotient face vectors; replay
-      identically; reject all ten controls; and leave -W and every transverse or mixed
-      nonlinear lift unresolved
-    reason: >-
-      All six source matrices have the preregistered complete V-representation, both
-      owner branches coincide at first order, both pointed-quotient face vectors are
-      derived, replay is identical, and all ten controls reject their mutations. The
-      verdict remains limited to branchwise linearization cones.
+    primary_criterion: rebuild all six exact source matrices; certify their ranks, lineality, and
+      complete positive left-kernel relations; prove that both owner branches have the same exact
+      V-representation; identify the exp-034 sheet analytically; retain six transverse generators,
+      their sole relation, and both pointed-quotient face vectors; replay identically; reject all
+      ten controls; and leave -W and every transverse or mixed nonlinear lift unresolved
+    reason: All six source matrices have the preregistered complete V-representation, both owner branches
+      coincide at first order, both pointed-quotient face vectors are derived, replay is identical,
+      and all ten controls reject their mutations. The verdict remains limited to branchwise linearization
+      cones.
     commit: b8d0104
 ---
-# exp-037 — accepted exact n = 5 tangent-cone inventory
+# exp-038 — accepted exact n = 5 tangent-cone inventory
 
 Exp-035 retained one non-sheet vector but did not enumerate its branchwise cones.
 An exact active-set pilot has now supplied discovery evidence: each endpoint branch has

@@ -1,6 +1,6 @@
 # Research: FrankenSim and the Franken Constellation as a Rust Toolkit for Square Packing
 
-**Date:** 2026-08-22 (last updated 2026-08-22)
+**Date:** 2026-08-22 (last updated 2026-08-25)
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
 
@@ -20,10 +20,13 @@ It follows two earlier documents: `research-2026-08-22-packing-11-unit-squares.m
 mathematics of `s(11)`) and
 `research-2026-08-22-square-packing-algorithms-and-tooling.md` (the algorithms and
 tooling for search and exact verification).
-The second of those concluded that no purpose-built exact verifier exists and that the
-right architecture is a filtered exact-predicate kernel over a real algebraic number
-field. FrankenSim turns out to contain most of the pieces of exactly that architecture,
-built for a different purpose.
+The second of those found no purpose-built exact verifier in the surveyed ecosystem and
+argued for a filtered exact-predicate kernel over a real algebraic number field.
+FrankenSim turns out to contain most of the pieces of exactly that architecture, built
+for a different purpose.
+As of 2026-08-25, this repository implements an initial purpose-built `Witness/v1`
+checker for rational and real-algebraic packings; the filtered kernel and general
+interval-certification path discussed here remain prospective.
 
 Four findings frame everything below.
 
@@ -52,7 +55,7 @@ Four findings frame everything below.
 
 4. **The repository does not build from its own documented quick start**, and its own
    scorecard reports zero ledgered run records and zero external validation datasets.
-   Both facts are verified below.
+   Both facts are checked below.
    This is a machine for making honest claims that has not yet made many validated ones
    — which is roughly what its authors say about it.
 
@@ -182,7 +185,7 @@ The suites are substantive, not smoke tests: `fs-ivl` alone runs a containment f
 battery, a directed-rounding audit, an exact-predicate corpus, a Taylor-model battery,
 and an error-free-transform bridge casebook.
 `fs-alloc` ships 11 `compile_fail` doctests proving that arena allocations cannot escape
-their scope — lifetime enforcement verified as a test rather than asserted in prose.
+their scope — lifetime enforcement is tested rather than asserted in prose.
 
 **Known-red tests are on the record.** `suite-known-red.json` lists exactly four
 deliberately failing tests, all in `fs-ledger`, all blocked on one upstream
@@ -416,7 +419,7 @@ identity, never run jitter”.
 #### How performance claims are made
 
 There is no criterion dependency, no `[[bench]]` target, and no `benches/` directory
-anywhere in FrankenSim (verified: zero matches across every manifest).
+anywhere in FrankenSim (checked: zero matches across every manifest).
 Performance is instead an evidence problem handled by `fs-roofline`:
 
 - **Machine axes are measured, never taken from spec sheets** — bandwidth from a
@@ -462,7 +465,7 @@ the normal ecosystem freely.
 | `fs-alloc` | 128-byte-aligned scope arenas, hugepage policy, sharded pools | medium. Standard technique, unusually well documented |
 | `fs-simd` | tiered dispatch resolved once, scalar reference, capsule discipline | medium |
 | `fs-query` | certified convex separation by Frank-Wolfe on the Minkowski difference, with a `[lo, hi]` bracket where both bounds stay valid under early stop and a `separation_proven` flag | medium. 3-D and support-function based; SAT is simpler and exact for our 2-D squares, but the *contract shape* is worth copying |
-| `fs-evidence` | `Evidence<T>`/`Certified<T>` with conservative composition | medium. The right way to type a “verified/unverified” result |
+| `fs-evidence` | `Evidence<T>`/`Certified<T>` with conservative composition | medium. The right way to type assurance-bearing results |
 | `fs-detaudit` | worker-matrix bit-identity audits with first-divergence localization, cross-ISA divergence classification | medium-high for a parallel search |
 | `fs-propcheck` | in-house property testing with integrated shrinking; failures print a case seed that replays exactly | medium |
 | `fs-ascent`, `fs-bo`, `fs-opt` | L-BFGS with strong Wolfe, trust-region Newton-Krylov; Gaussian-process Bayesian optimization; a typed optimization problem IR over manifold variables | medium |

@@ -76,3 +76,7 @@ exercises, because both proved cases are 45° mechanisms.
 A successor may reuse the perturbation fixtures only after it declares a terminal-
 component relation and an independently checked convergence condition.
 H-002’s fixed- cell LP result alone does not supply either one.
+
+<!-- This document follows common-doc-guidelines.md.
+See github.com/jlevy/practical-prose and review guidelines before editing.
+-->

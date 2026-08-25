@@ -475,6 +475,23 @@ def build_packing_document(
         "source-url": final.source_url,
         "view": spec.view.value,
     }
+    if final.check is not None:
+        records |= {
+            "check-kind": final.check.kind.value,
+            "check-method": final.check.method,
+            "check-result": "passed" if final.check.passed else "failed",
+        }
+        records |= {
+            f"check-{name}": value
+            for name, value in (
+                ("arithmetic", final.check.arithmetic),
+                ("precision", final.check.precision),
+                ("rounding", final.check.rounding),
+                ("tolerance", final.check.tolerance),
+                ("detail", final.check.detail),
+            )
+            if value
+        }
     if trajectory is not None:
         records |= {
             "trajectory-kind": trajectory.kind.value,

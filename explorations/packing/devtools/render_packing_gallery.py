@@ -247,14 +247,15 @@ def build_gallery_manifest() -> GalleryManifest:
                     "unit squares using the deterministic cool palette."
                 ),
                 "caption": (
-                    "The retained source reconstructs all 29 squares at 160 decimal "
-                    "digits and passes all 406 separating-axis pair checks; this is a "
-                    "verified numerical construction, not an exact certificate."
+                    "The retained roughly 100-digit source is evaluated at 160 decimal "
+                    "digits of working precision and tolerance 1e-80, and passes all "
+                    "406 separating-axis pair checks; this is a numerically checked "
+                    "construction, not an exact certificate."
                 ),
                 "artifact": "atlas/rendering/kingbird29-overview.svg",
                 "frontier_case": "frontier/n-029.md",
                 "view": "overview",
-                "evidence": "verified-construction",
+                "evidence": "numerically-checked",
                 "motion": False,
                 "contacts": False,
                 "generator": (

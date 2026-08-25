@@ -1,64 +1,61 @@
 ---
-title: exp-038 — exact n = 5 fixed-angle optimal-position polytope
+title: exp-039 — exact n = 5 fixed-angle optimal-position polytope
 softschema:
-  contract: packing.squares:Experiment/v1
+  contract: packing.squares:Experiment/v2
   schema: ../../../schemas/experiment.schema.yaml
   envelope: experiment
   status: enforced
 experiment:
-  id: exp-038
+  id: exp-039
   series: series-000
   title: Certify the five-dimensional fixed-angle face containing four release classes
   date: '2026-08-25'
-  hypotheses: [H-023]
+  hypotheses:
+  - H-023
   tier: confirmatory
   subject:
     label: exact fixed-angle common-cell optimal-position polytope at n = 5
     engine: n = 5 fixed-angle polytope checker 0.1.0
     engine_commit: 27b999e
-    precision: exact
+    assurance: verified
+    method: exact-algebraic
     host_system: macOS arm64, Apple M1 Pro
     selftest_passed: true
-  instance: {axis: n, point: 5, role: target}
+  instance:
+    axis: n
+    point: 5
+    role: target
   method:
-    control: >-
-      exact exp-033, exp-034, and exp-037 semantic bindings; independent exact packing
-      verification; and ten normalization, transport, interval, inequality, dual,
+    control: exact exp-033, exp-034, and exp-038 semantic bindings; separate exact packing checks
+      over generated fixtures; and ten normalization, transport, interval, inequality, dual,
       stress, branch, active-axis, and overclaim mutations
-    candidate: >-
-      exact elimination of the 30-row common cell to a five-coordinate polytope, a
-      rank-six fixed-angle LP dual support, twelve affine release paths, and positive
-      owner-branch first-order stresses along those paths
+    candidate: exact elimination of the 30-row common cell to a five-coordinate polytope, a rank-six
+      fixed-angle LP dual support, twelve affine release paths, and positive owner-branch first-order
+      stresses along those paths
     runs_per_condition: 1
     interleaved: false
     operator: openai-codex
     commit: 27b999e
     dirty: false
     entry_point: explorations/packing/cases/n5/fixed_angle_polytope.py
-    command: >-
-      timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      -m cases.n5.fixed_angle_polytope --record
-      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
-      && timeout 30 uv run --directory explorations/packing --frozen --quiet python
-      -m cases.n5.fixed_angle_polytope --replay
-      campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
-    budget: >-
-      one 30-minute implementation and measurement slice; separate 30-second generation
-      and replay caps; stop on source drift, an inequivalent eliminated domain, a failed
-      exact packing, a nonpositive stress, a surviving control, or retained-record drift
-    record: campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-fixed-angle-polytope.json
+    command: timeout 30 uv run --directory explorations/packing --frozen --quiet python -m cases.n5.fixed_angle_polytope
+      --record campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
+      && timeout 30 uv run --directory explorations/packing --frozen --quiet python -m cases.n5.fixed_angle_polytope
+      --replay campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
+    budget: one 30-minute implementation and measurement slice; separate 30-second generation and
+      replay caps; stop on source drift, an inequivalent eliminated domain, a failed exact packing,
+      a nonpositive stress, a surviving control, or retained-record drift
+    record: campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
   results:
   - shape: determination
-    question: >-
-      Do the four fixed-angle release classes R1, R2, R3, and R6 lie in one connected
-      five-dimensional common-cell polytope of exact side-optimal positions, and do their
-      declared paths have positive branchwise first-order no-descent stresses?
+    question: Do the four fixed-angle release classes R1, R2, R3, and R6 lie in one connected five-dimensional
+      common-cell polytope of exact side-optimal positions, and do their declared paths have positive
+      branchwise first-order no-descent stresses?
     role: outcome
     outcome: criterion_met
-    checked_by: >-
-      exact source regeneration, bidirectional domain elimination, affine witnesses,
-      LP dual, structural stress-polynomial cancellation, independent exact packings,
-      deterministic retained replay, independent result review, and ten controls
+    checked_by: exact source regeneration, bidirectional domain elimination, affine witnesses, LP
+      dual, structural stress-polynomial cancellation, separate exact fixture checks, deterministic
+      retained replay, independent result review, and ten controls
   effort:
     timebox: 20m confirmatory slice; separate 30s generation and replay caps
     wall_seconds: 4.04748
@@ -66,30 +63,26 @@ experiment:
     stopped_by: criterion
   verdict:
     decision: accepted
-    primary_criterion: >-
-      bind exp-033, exp-034, and exp-037 exactly, including the canonical-ray
-      normalization; prove that all 30 common-cell inequalities are equivalent to the
-      declared bounded five-coordinate polytope; prove its affine dimension is five
-      using six affinely independent feasible points and prove its LP dual fixes side
-      1+5sqrt(2)/4; retain the twelve exact R1, R2, R3, and R6 paths with sharp
-      stratum-specific intervals; independently verify endpoint and interior packings;
-      rebuild every active owner branch and tied row and prove both branchwise stress
-      identities, strict multiplier positivity, and active-axis exhaustion along every
-      path; replay identically; reject all ten executable controls; and refuse global,
-      second-order, quench-terminal, maximal-component, R4, R5, -W, mixed-angle, basin,
-      census, and unequal-side claims
-    reason: >-
-      The 30-row common cell is exactly equivalent to the bounded five-coordinate
-      system, six feasible witnesses prove affine dimension five, and the exact LP dual
-      fixes side 1+5sqrt(2)/4 throughout the cell. All twelve declared sharp paths pass
-      independent exact packing checks and both owner branches have structurally derived
-      positive stress-polynomial identities. Replay is identical and all ten controls
-      reject. The verdict remains cell-local and pathwise first-order only.
+    primary_criterion: bind exp-033, exp-034, and exp-038 exactly, including the canonical-ray normalization;
+      prove that all 30 common-cell inequalities are equivalent to the declared bounded five-coordinate
+      polytope; prove its affine dimension is five using six affinely independent feasible points
+      and prove its LP dual fixes side 1+5sqrt(2)/4; retain the twelve exact R1, R2, R3, and R6 paths
+      with sharp stratum-specific intervals; separately check endpoint and interior packings;
+      rebuild every active owner branch and tied row and prove both branchwise stress identities,
+      strict multiplier positivity, and active-axis exhaustion along every path; replay identically;
+      reject all ten executable controls; and refuse global, second-order, quench-terminal, maximal-component,
+      R4, R5, -W, mixed-angle, basin, census, and unequal-side claims
+    reason: The 30-row common cell is exactly equivalent to the bounded five-coordinate system, six
+      feasible witnesses prove affine dimension five, and the exact LP dual fixes side 1+5sqrt(2)/4
+      throughout the cell. All twelve declared sharp paths pass separate exact packing checks and
+      both owner branches have structurally derived positive stress-polynomial identities. Replay
+      is identical and all ten controls reject. The verdict remains cell-local and pathwise first-order
+      only.
     commit: 27b999e
 ---
-# exp-038 — accepted fixed-angle optimal-position polytope
+# exp-039 — accepted fixed-angle optimal-position polytope
 
-Exp-037 certifies the complete branchwise linearization-cone inventory but makes no
+Exp-038 certifies the complete branchwise linearization-cone inventory but makes no
 nonlinear continuation claim.
 A separate exact derivation found a stronger fixed-angle candidate than twelve isolated
 fixtures: four release classes appear to lie in one five-dimensional connected
@@ -152,7 +145,7 @@ R3: dx0 = -1, dy1 = 1, dx4 = -1/2, dy4 = 1/2
 R6: dx0 = -1, dx1 = -1, dx4 = -1/2, dy4 = 1/2
 ```
 
-The checker must bind these to exp-037 explicitly.
+The checker must bind these to exp-038 explicitly.
 Its stored interior and B vectors named `R1` and `R2` are `r` times the canonical
 vectors, while its stored A vectors are `r(Ri+s)` for `i` in `{1,2}`. Its stored
 interior and B vectors named `R3` and `R6` are canonical, while its stored A vectors are
@@ -173,10 +166,12 @@ at A, the interior, and B, respectively, by evaluating every common-cell row.
 It must identify square 0’s upper-y wall as the unique limiting row at A and square 0’s
 lower-x wall as the unique limiting row at the interior and B, and prove that the named
 row is violated immediately beyond each endpoint.
-Endpoint and strict-interior fixtures must also pass the independent exact packing
-verifier.
-At every retained path point, both active owner branches and every tied feature
-row must be rebuilt from source.
+Endpoint and strict-interior fixtures must also pass a separate exact packing check.
+That check is independent of the polytope and path derivation, but it shares the
+repository’s `NumberField` implementation and common `n = 5` geometry primitives; it is
+not a second implementation of the entire exact stack.
+At every retained path point, both active owner branches and every tied feature row must
+be rebuilt from source.
 For contacts `(2,4)` and `(3,4)`, expected zero axes must have a strict fixed signed
 projection and zero gap at both endpoints, which makes their absolute-value gaps affine
 and identically zero.
@@ -240,7 +235,7 @@ cellwise side lower bound.
 
 All twelve declared A, interior, and B path segments have their stated sharp intervals
 and unique limiting wall.
-Their endpoint and strict-interior fixtures independently verify as packings.
+Their endpoint and strict-interior fixtures pass the separate exact packing check.
 On both owner branches, structurally derived degree-at-most-two stress polynomials
 cancel coefficient by coefficient and retain strictly positive multipliers, with owner-3
 lower bound `sqrt(2)/2 - 1/4`. Generation and identical replay took 2.02310 and 2.02438
@@ -252,7 +247,7 @@ unrestricted optimality, second-order local minimality, terminality, the maximal
 stationary component, `R4`, `R5`, `-W`, mixed-angle directions, basin mass, census
 completeness, or unequal-side clearance.
 
-[`exp-038-h-023-n5-fixed-angle-polytope.json`](../results/exp-038-h-023-n5-fixed-angle-polytope.json)
+[`exp-039-h-023-n5-fixed-angle-polytope.json`](../results/exp-039-h-023-n5-fixed-angle-polytope.json)
 retains the exact domain, dual, source maps, paths, packing fixtures, owner-axis proofs,
 stress coefficient arrays, scope refusals, and ten controls.
 

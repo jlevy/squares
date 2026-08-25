@@ -1,0 +1,84 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:DocumentMap/v1
+title: DocumentMap
+description: Navigation, authority, and lifecycle for durable packing documentation.
+type: object
+additionalProperties: false
+required: [last_reviewed, scope, documents, collections, exclusions]
+properties:
+  last_reviewed: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
+  scope: {type: string, minLength: 1}
+  documents:
+    type: array
+    minItems: 1
+    items: {$ref: '#/$defs/document'}
+  collections:
+    type: array
+    minItems: 1
+    items: {$ref: '#/$defs/collection'}
+  exclusions:
+    type: array
+    items:
+      type: object
+      additionalProperties: false
+      required: [pattern, reason]
+      properties:
+        pattern: {type: string, minLength: 1}
+        reason: {type: string, minLength: 1}
+$defs:
+  role:
+    enum:
+      - orientation
+      - technical-synthesis
+      - tutorial
+      - conventions
+      - development-guide
+      - runbook
+      - session-guide
+      - series-guide
+      - registry
+      - generated-view
+      - frontier-guide
+      - source-index
+      - research-report
+      - review
+      - plan
+      - handoff
+      - postmortem
+      - component-guide
+      - frontier-case
+      - hypothesis-record
+      - experiment-record
+      - session-record
+      - agenda
+      - exploration-report
+  authority:
+    enum: [definitive, current, supporting, record, generated]
+    description: >-
+      Definitive owns a rule; current owns mutable synthesis or coordination;
+      supporting supplies context; record owns a dated event; generated is a read-only
+      view whose named source is authoritative.
+  lifecycle:
+    enum: [maintained, generated, retained, transient, superseded]
+  document:
+    type: object
+    additionalProperties: false
+    required: [path, role, authority, lifecycle]
+    properties:
+      path: {type: string, pattern: '^[^*]+\.md$'}
+      role: {$ref: '#/$defs/role'}
+      authority: {$ref: '#/$defs/authority'}
+      lifecycle: {$ref: '#/$defs/lifecycle'}
+      superseded_by: {type: string, pattern: '^[^*]+\.md$'}
+  collection:
+    type: object
+    additionalProperties: false
+    required: [pattern, role, authority, lifecycle, contract, schema]
+    properties:
+      pattern: {type: string, minLength: 1}
+      role: {$ref: '#/$defs/role'}
+      authority: {$ref: '#/$defs/authority'}
+      lifecycle: {$ref: '#/$defs/lifecycle'}
+      contract: {type: string, minLength: 1}
+      schema: {type: string, minLength: 1}
+      superseded_by: {type: string, pattern: '^[^*]+\.md$'}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Certify the exact fixed-angle n=5 optimal-position polytope from exp-038.
+"""Certify the exact fixed-angle n=5 optimal-position polytope from exp-039.
 
 The result is deliberately cell-local.  It proves an LP-optimal five-dimensional
 position face and first-order stresses on twelve named paths, not global optimality,
@@ -27,7 +27,7 @@ SCHEMA_VERSION = 1
 RESULTS = ROOT / "campaign/series/series-000-smoke-and-calibration/results"
 EXP033 = RESULTS / "exp-033-h-023-n5-equal-side-face.json"
 EXP034 = RESULTS / "exp-034-h-023-n5-angle-sheet.json"
-EXP037 = RESULTS / "exp-037-h-023-n5-tangent-inventory.json"
+EXP038 = RESULTS / "exp-038-h-023-n5-tangent-inventory.json"
 CLASSES = ("R1", "R2", "R3", "R6")
 STRATA = ("A", "interior", "B")
 OWNERS = ("owner3:a+", "owner4:a+")
@@ -439,8 +439,8 @@ def source_bindings(field: NumberField, inputs: ProofInputs) -> dict[str, object
     face.require_same_result(retained_033, face.build_result())
     retained_034 = require_dict(json.loads(EXP034.read_text(encoding="utf-8")), "exp-034")
     angle_sheet.require_same_result(retained_034, angle_sheet.build_result())
-    retained_037 = require_dict(json.loads(EXP037.read_text(encoding="utf-8")), "exp-037")
-    tangent_inventory.require_same(retained_037, tangent_inventory.build_result())
+    retained_038 = require_dict(json.loads(EXP038.read_text(encoding="utf-8")), "exp-038")
+    tangent_inventory.require_same(retained_038, tangent_inventory.build_result())
     centres_a = tangent_cones.centres_for_stratum(field, "A")
     centres_b = tangent_cones.centres_for_stratum(field, "B")
     centres_i = tangent_cones.centres_for_stratum(field, "interior")
@@ -453,7 +453,7 @@ def source_bindings(field: NumberField, inputs: ProofInputs) -> dict[str, object
     return {
         "exp_033": str(EXP033.relative_to(ROOT)),
         "exp_034": str(EXP034.relative_to(ROOT)),
-        "exp_037": str(EXP037.relative_to(ROOT)),
+        "exp_038": str(EXP038.relative_to(ROOT)),
         "exact_regeneration_matches": True,
         "C_I_equals_exact_midpoint_of_C_A_and_C_B": True,
         "canonical_normalization": normalization,
@@ -472,7 +472,7 @@ def canonical_binding(field: NumberField, inputs: ProofInputs) -> dict[str, obje
                 expected = [r * value for value in expected]
             if stored[name] != expected:
                 raise ValueError(
-                    f"exp-037 canonical normalization drifted for {stratum} {name}"
+                    f"exp-038 canonical normalization drifted for {stratum} {name}"
                 )
     if any(
         canonical["R6"][index] != value
@@ -491,7 +491,7 @@ def canonical_binding(field: NumberField, inputs: ProofInputs) -> dict[str, obje
         "R1_R2_source_scale": "sqrt(2)",
         "A_slide_correction": "sqrt(2)*s for stored R1/R2; s for stored R3/R6",
         "interior_and_B_slide_correction": "none",
-        "matches_exp_037": True,
+        "matches_exp_038": True,
     }
 
 
@@ -976,7 +976,7 @@ def path_certificates(field: NumberField, inputs: ProofInputs) -> list[dict[str,
                     field, centres, cast(FieldElement, face.exact_data(field)["side"])
                 )
                 if report["valid"] is not True:
-                    raise ValueError("an independent exact path packing is invalid")
+                    raise ValueError("a separately checked exact path packing is invalid")
                 fixtures.append({"name": fixture_name, "epsilon": encode(epsilon), **report})
 
             axes = active_axis_certificate(field, start_centres, end_centres, inputs)
@@ -1074,7 +1074,7 @@ def validate_result(result: dict[str, object]) -> None:
         != 2
         for path in paths
     ):
-        raise ValueError("a path lacks independent exact packing fixtures")
+        raise ValueError("a path lacks separately checked exact packing fixtures")
     scope = require_dict(result.get("scope_refusals"), "scope refusals")
     if (
         set(require_list(scope.get("refused_claims"), "refused claims")) != set(REFUSED_CLAIMS)
@@ -1083,7 +1083,7 @@ def validate_result(result: dict[str, object]) -> None:
         raise ValueError("the frozen refusal boundary drifted")
     determination = require_dict(result.get("determination"), "determination")
     if determination.get("outcome") != "criterion_met":
-        raise ValueError("the exp-038 criterion was not met")
+        raise ValueError("the exp-039 criterion was not met")
 
 
 def mutation_rejected(field: NumberField, inputs: ProofInputs) -> bool:
@@ -1163,7 +1163,7 @@ def write_json_atomic(path: Path, value: dict[str, object]) -> None:
 
 def require_same(retained: object, regenerated: dict[str, object]) -> None:
     if retained != regenerated:
-        raise ValueError("retained exp-038 record differs from exact regeneration")
+        raise ValueError("retained exp-039 record differs from exact regeneration")
 
 
 def parse_args() -> argparse.Namespace:

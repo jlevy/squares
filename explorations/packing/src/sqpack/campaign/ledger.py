@@ -35,6 +35,7 @@ import yaml
 from jsonschema import Draft202012Validator
 from strif import atomic_output_file
 
+from sqpack.assurance import check_experiment_semantics
 from sqpack.project import ProjectLayoutError, configured_project_root, require_project_root
 
 PROJECT_ROOT = configured_project_root()
@@ -323,6 +324,9 @@ def check(
     # `status: enforced` -- see the note in experiment.schema.yaml. They live here.
     for experiment in experiments:
         name = experiment["_path"].name
+        problems.extend(
+            f"{name}: {problem}" for problem in check_experiment_semantics(experiment)
+        )
         verdict = experiment.get("verdict") or {}
         decision = verdict.get("decision")
         instance = experiment.get("instance") or {}

@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 321
+count: 325
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -426,7 +426,7 @@ defects:
   recorded_in: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
   bead: think-0zs9
 - id: D-021
-  title: The polished tier has a noise floor, and eight rounds sit on it
+  title: Floating LP refinement has a noise floor, and eight rounds sit on it
   date: '2026-08-23'
   layer: quench
   class: soundness
@@ -434,11 +434,12 @@ defects:
   detected_by: inspection
   latent_for: 'found while fixing D-014'
   severity: medium
-  status: fixed
+  status: contained
   what: >-
     The post-check accepts constraint violations up to 1e-9 and HiGHS will not go
-    tighter than 1e-10, so a polished side can be wrong by roughly 1e-11. Eight recorded
-    rounds carry small negative gaps to the analytic value at exactly that scale.
+    tighter than 1e-10, so a floating LP side can be wrong by roughly 1e-11. Eight
+    recorded rounds carry small negative gaps to the analytic value at exactly that
+    scale.
   consequence: >-
     Any improvement claimed below about 1e-11 at this tier is meaningless, and a
     negative gap reads as beating the record if the tier is dropped from the sentence.
@@ -446,10 +447,10 @@ defects:
     The post-check bound is now exactly the solver's own guarantee (1e-10) rather than
     an arbitrary 1e-9, which is the tightest defensible value and a tenfold improvement.
     Below that the floor is irreducible with a floating-point LP, so it is contained
-    rather than removed: the tier system forbids a record claim below `exact`, and
-    tools/perimeter_test.py holds every emitting component to the same bound so the two
-    cannot drift apart.
-  regression: 'the perimeter test, at the same bound; the precision tier is required on every round and beat_record is writable only at exact'
+    rather than removed: the assurance contract forbids a numerical result from carrying
+    `beat_record: true`, and the soundness-perimeter check holds every emitting component
+    to the same bound so the two cannot drift apart.
+  regression: 'the soundness perimeter at the same bound; every round carries assurance and method, and beat_record requires verified assurance'
   recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md
   bead: think-hg3u
 - id: D-022
@@ -975,7 +976,7 @@ defects:
   severity: high
   status: fixed
   what: >-
-    `sqpack.closed_form` described matching a polished side to one of a short list of
+    `sqpack.closed_form` described matching a finite-precision LP side to one of a short list of
     known constants as an oracle that said whether a quench had converged to a known
     optimum. It also justified a 1e-12 match by multiplying an optimizer's tolerance by
     an assumed uniform random-coincidence probability. Optimizer outputs are correlated,
@@ -1372,7 +1373,7 @@ defects:
   direction: neutral
   detected_by: review
   severity: critical
-  status: outstanding
+  status: fixed
   what: >-
     NumberField documents an irreducible minimal polynomial and an interval containing
     exactly one real root but checks only an endpoint sign change. For
@@ -1383,11 +1384,16 @@ defects:
     unsound exact comparisons. The built-in Trump witness remains independently checked;
     the generic trust boundary does not.
   fix: >-
-    none yet. Verify primitive squarefree irreducibility and exactly one interval root
-    with a Sturm sequence, or require independently checked proof-carrying field
-    metadata; resource-bound every sign decision.
-  regression: none
-  bead: think-zcx4
+    NumberField now rejects unsupported metadata before constructing the quotient. It
+    requires an exact modular irreducibility certificate for the primitive polynomial
+    and uses a Sturm sequence to prove that the open isolating interval contains exactly
+    one real root. The degree-one rational case is explicit rather than bypassing the
+    precondition boundary.
+  regression: >-
+    tests/test_field_preconditions.py rejects reducible polynomials, intervals containing
+    zero or multiple roots, and endpoint roots; the normal exact-verification gate
+    replays the accepted rational and algebraic controls.
+  bead: think-rsxe
   recorded_in: docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 - id: D-054
   title: Move budgets overshoot and final-best records cannot support trajectory claims
@@ -6424,7 +6430,7 @@ defects:
   severity: high
   status: fixed
   what: >-
-    The first exp-037 prototype hard-coded owner-branch equality and several controls as
+    The first exp-038 prototype hard-coded owner-branch equality and several controls as
     true, while its positive certificate was prose rather than checked coefficients and
     its V-representation contained names rather than physical vectors.
   consequence: >-
@@ -6436,7 +6442,7 @@ defects:
     lineality, sheet, and transverse vectors, all-row residual and active-rank checks,
     source regeneration, face derivation, survivor exhaustion, and executable controls.
   regression: >-
-    Exp-037 now rejects missing or duplicated branches and rays, both directions of a
+    Exp-038 now rejects missing or duplicated branches and rays, both directions of a
     sheet/transverse swap, nonlinear scope overclaims, and three non-tautological toy
     cones while exact generation and replay rebuild all source evidence
   bead: think-7z0d
@@ -6478,7 +6484,7 @@ defects:
   severity: medium
   status: fixed
   what: >-
-    Exp-037 originally said that every nonlinear lift remains unresolved and described
+    Exp-038 originally said that every nonlinear lift remains unresolved and described
     the sheet as occupying two lineality dimensions without restricting that statement
     to the interior stratum. Exp-034 already proves nonlinear sheet lifts, while the
     endpoint sheet is a pointed two-ray cone rather than lineality.
@@ -6490,12 +6496,12 @@ defects:
     directions, distinguish interior sheet lineality from endpoint sheet rays, and
     state both pointed-quotient face vectors with their counting convention.
   regression: >-
-    Exp-037 binds exp-034 exactly, tests physical sheet vectors in every matrix, and
+    Exp-038 binds exp-034 exactly, tests physical sheet vectors in every matrix, and
     rejects both directions of a sheet/transverse classification swap
   bead: think-w2ii
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md
 - id: D-253
-  title: The exp-037 wrapper was added under a forbidden legacy tools path
+  title: The exp-038 wrapper was added under a forbidden legacy tools path
   date: '2026-08-25'
   layer: tooling
   class: robustness
@@ -6505,7 +6511,7 @@ defects:
   severity: medium
   status: fixed
   what: >-
-    The exp-037 implementation added a thin Python wrapper under
+    The exp-038 implementation added a thin Python wrapper under
     explorations/packing/tools even though the engineering cleanup moved retained
     case-specific entry points into importable case modules and forbids Python in that
     legacy directory.
@@ -6522,7 +6528,7 @@ defects:
   bead: think-xe5t
   recorded_in: tests/test_module_boundaries.py
 - id: D-254
-  title: The first exp-038 criterion conflated ray normalizations and rank with dimension
+  title: The first exp-039 criterion conflated ray normalizations and rank with dimension
   date: '2026-08-25'
   layer: record
   class: soundness
@@ -6532,8 +6538,8 @@ defects:
   severity: high
   status: fixed
   what: >-
-    The first exp-038 draft wrote one path formula using R_i without defining that
-    exp-037 scales R1 and R2 by sqrt(2) and already includes the endpoint-A slide
+    The first exp-039 draft wrote one path formula using R_i without defining that
+    exp-038 scales R1 and R2 by sqrt(2) and already includes the endpoint-A slide
     correction. It also inferred affine dimension five from a rank-six equality system
     alone, described an LP level certificate as differential no descent, left C_I
     undefined, and did not freeze which nonredundant inequality its mutation removed.
@@ -6542,17 +6548,17 @@ defects:
     accepted an empty or lower-dimensional equality set, and blurred cellwise level
     optimality with branchwise first-order stationarity.
   fix: >-
-    Define all canonical vectors and their exact exp-037 source map, set C_I to the exact
+    Define all canonical vectors and their exact exp-038 source map, set C_I to the exact
     coordinatewise midpoint, require nonemptiness, boundedness, and six affinely
     independent feasible points, separate the LP lower bound from the pathwise stress,
     and freeze the nonredundancy mutation as removing x0 >= 1/2.
   regression: >-
-    Exp-038 now requires executable mutations for omitted or misplaced slide correction
+    Exp-039 now requires executable mutations for omitted or misplaced slide correction
     and the missing R6 coordinate, exact feasible affine witnesses, the explicit
     x0-unboundedness mutation, input-level dual and stress perturbations, and a sharp
     global and terminal refusal boundary
   bead: think-p6j0
-  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
+  recorded_in: campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md
 - id: D-255
   title: Four exact negative-control anchors lagged the current living-document values
   date: '2026-08-25'
@@ -6593,7 +6599,7 @@ defects:
   severity: high
   status: fixed
   what: >-
-    The first exp-038 checker called every separating-axis gap affine and inferred that
+    The first exp-039 checker called every separating-axis gap affine and inferred that
     an axis with zero gaps at both path endpoints stayed identically active. The gap is
     an absolute value of an affine projection minus constant support, and several
     nonactive a-minus projections actually change sign inside their intervals.
@@ -6622,7 +6628,7 @@ defects:
   severity: high
   status: fixed
   what: >-
-    The first exp-038 checker verified each branchwise stress identity at three exact
+    The first exp-039 checker verified each branchwise stress identity at three exact
     epsilon values and then recorded that those samples proved the full interval, but
     it merely asserted rather than derived that every coefficient polynomial has degree
     at most two.
@@ -6680,7 +6686,7 @@ defects:
   severity: medium
   status: fixed
   what: >-
-    The exp-038 landing command passed `campaign/ledger.md` directly to Flowmark. An
+    The exp-039 landing command passed `campaign/ledger.md` directly to Flowmark. An
     explicit file target bypasses `.flowmarkignore`, so the formatter rewrapped and
     typographically normalized a byte-generated view that the ledger checker expects to
     match its renderer exactly.
@@ -7319,13 +7325,13 @@ defects:
     of the computation that influenced the claim.
   fix: >-
     Reject the 34-row threshold, disclose the primitive-row scout as pilot-only, and
-    freeze H-042 on the distinct unmeasured object of grouped geometric incidences.
+    freeze H-043 on the distinct unmeasured object of grouped geometric incidences.
     The delegate's scope breach remains visible in the session receipt.
   regression: none
   bead: think-19nv
   recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
 - id: D-285
-  title: The first H-042 pilot could pass while its exact cone oracle was unresolved
+  title: The first H-043 pilot could pass while its exact cone oracle was unresolved
   date: '2026-08-25'
   layer: tooling
   class: validity
@@ -7340,7 +7346,7 @@ defects:
     unresolved oracle or a nonzero root cone therefore skipped the decisive checks and
     still satisfied the frozen validation command.
   consequence: >-
-    A failed or incomplete H-042 instrument check could be recorded as a passing pilot,
+    A failed or incomplete H-043 instrument check could be recorded as a passing pilot,
     flattering both tool readiness and any later support conclusion built on it.
   fix: >-
     Return nonzero for every non-completed oracle state, make the branch-0 selftest
@@ -7352,7 +7358,7 @@ defects:
   bead: think-5bcy
   recorded_in: cases/trump11/incidence_cores.py
 - id: D-286
-  title: The first H-042 record conflated conjunctive wall rows with feature aliases
+  title: The first H-043 record conflated conjunctive wall rows with feature aliases
   date: '2026-08-25'
   layer: record
   class: bookkeeping
@@ -7428,7 +7434,7 @@ defects:
   bead: think-asaa
   recorded_in: campaign/agent-sessions/session-011-eight-hour-continuation.md
 - id: D-289
-  title: The H-042 pilot normalized row classes for counting but not for its cone oracle
+  title: The H-043 pilot normalized row classes for counting but not for its cone oracle
   date: '2026-08-25'
   layer: tooling
   class: validity
@@ -7444,7 +7450,7 @@ defects:
   consequence: >-
     Branch 0 is unaffected because all 42 primitive rows have distinct oriented class
     keys. On an unmeasured branch with duplicates, the implementation would no longer
-    match H-042's declared normalized system and could misstate support provenance or
+    match H-043's declared normalized system and could misstate support provenance or
     minimality.
   fix: >-
     Stop expansion at branch 0. Before another branch, build oracle inputs from exact
@@ -7455,7 +7461,7 @@ defects:
   bead: think-jyit
   recorded_in: cases/trump11/incidence_cores.py
 - id: D-290
-  title: H-042 pilot certificates can be recomputed but not replayed from a retained record
+  title: H-043 pilot certificates can be recomputed but not replayed from a retained record
   date: '2026-08-25'
   layer: record
   class: robustness
@@ -7481,7 +7487,7 @@ defects:
   bead: think-oa96
   recorded_in: cases/trump11/incidence_cores.py
 - id: D-291
-  title: The branch-0 H-042 golden would classify a valid future refutation as test failure
+  title: The branch-0 H-043 golden would classify a valid future refutation as test failure
   date: '2026-08-25'
   layer: tooling
   class: validity
@@ -7496,7 +7502,7 @@ defects:
     result exit nonzero because proper_core_found is false.
   consequence: >-
     A branch whose full incidence system is genuinely inclusion-minimal would refute
-    H-042, but a wider runner could discard it as an instrument failure instead of
+    H-043, but a wider runner could discard it as an instrument failure instead of
     retaining the conservative mathematical result.
   fix: >-
     Stop expansion at branch 0. Before a wider run, separate branch-0 golden controls
@@ -7506,7 +7512,7 @@ defects:
   bead: think-j92q
   recorded_in: cases/trump11/incidence_cores.py
 - id: D-292
-  title: H-042 branch indices are regenerated but not bound to the retained exp-013 universe
+  title: H-043 branch indices are regenerated but not bound to the retained exp-013 universe
   date: '2026-08-25'
   layer: record
   class: validity
@@ -7533,7 +7539,7 @@ defects:
   bead: think-7jyh
   recorded_in: cases/trump11/incidence_cores.py
 - id: D-293
-  title: Two H-042 provenance selftests claim completeness without checking exact mappings
+  title: Two H-043 provenance selftests claim completeness without checking exact mappings
   date: '2026-08-25'
   layer: tooling
   class: validity
@@ -8166,11 +8172,11 @@ defects:
   what: >-
     Session 014 correctly sent the next agent to think-1s0h for one R4/R5
     nonlinear-realization slice, but the active launch paragraph and BC-010 note still
-    assigned work to closed think-nm35, omitted exp-038, and retained fixed D-203 as a
+    assigned work to closed think-nm35, omitted exp-039, and retained fixed D-203 as a
     live blocker. The root orientation path did not point to the terminal session.
   consequence: >-
     A cold-start agent had to arbitrate conflicting authorities and could repeat the
-    completed exp-037 cone inventory, miss exp-038's twelve realized paths, or spend a
+    completed exp-038 cone inventory, miss exp-039's twelve realized paths, or spend a
     slice diagnosing an already repaired producer failure.
   fix: >-
     Route README through one Current Handoff section in the synopsis; reconcile that
@@ -8184,50 +8190,150 @@ defects:
   bead: think-m8kv
   recorded_in: SYNOPSIS.md
 - id: D-320
-  title: A second unprotected-fix aggregate escaped the single-match drift check
+  title: Deep golden validation treated YAML line wrapping as scientific drift
   date: '2026-08-25'
-  layer: docs
-  class: bookkeeping
-  direction: flattering
-  detected_by: review
-  latent_for: one merged checkpoint
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: gate
+  latent_for: one stacked integration run
   severity: medium
   status: fixed
-  recurrence_of: D-305
   what: >-
-    SYNOPSIS.md stated the unprotected-fix aggregate in two places. The D-305 repair
-    corrected the defect-log section to the derived 106, but a later postmortem
-    paragraph still said ninety-eight; check_synopsis accepted the document because its
-    pattern required only one matching occurrence, so the stale duplicate stayed green
-    through every gate and both CI architectures.
+    The macOS deep-golden job rebuilt a basin map with the same parsed data but wrapped
+    one explanatory note at a different column. The checker compared serialized bytes
+    and failed after the complete mathematical validation surface had passed.
   consequence: >-
-    The section that draws the postmortem's conclusions understated the unprotected-fix
-    debt by eight while the drift check reported the aggregate as reconciled.
+    A harmless serializer choice could block research integration and look like
+    cross-platform numerical drift even though no value, certificate, or conclusion
+    changed.
   fix: >-
-    Correct the stale sentence to the derived count and make check_synopsis validate
-    every occurrence of the aggregate phrase instead of accepting the first match.
-  regression: uv run --frozen python -m devtools.check_synopsis
-  bead: think-8mkk
-  recorded_in: SYNOPSIS.md
+    Compare parsed YAML documents for the deep golden contract, retain a unified diff
+    for real semantic changes, and report wrapping-only differences without failing.
+  regression: test_deep_golden_ignores_yaml_wrapping
+  bead: think-kwls
+  recorded_in: devtools/check_golden_basins.py
 - id: D-321
-  title: The timeout documentation split another compound adjective after its hyphen
+  title: The SIGINT cleanup regression signaled before its child start condition
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: one merged fast-suite run
+  severity: medium
+  status: fixed
+  what: >-
+    The process-cleanup regression polled for a child PID for two seconds, then sent
+    SIGINT whether or not the child had started. Under suite scheduling pressure it
+    interrupted the coordinator without a PID and then failed its own PID assertion.
+  consequence: >-
+    Scheduler timing, rather than process-tree cleanup behavior, could fail the ordinary
+    gate and obscure the safety property the test was meant to exercise.
+  fix: >-
+    Have the real child write its PID and then signal its parent directly. The test still
+    exercises coordinator interruption, TERM-resistant child cleanup, leak prevention,
+    and the bounded grace interval without a polling deadline.
+  regression: test_run_selected_interrupt_stops_detached_production_process
+  recurrence_of: D-317
+  bead: think-3vt3
+  recorded_in: tests/test_validation_cli.py
+- id: D-322
+  title: The synopsis overstated which defect classes the gate had caught
   date: '2026-08-25'
   layer: docs
   class: bookkeeping
   direction: neutral
   detected_by: review
-  latent_for: one merged checkpoint
+  latent_for: since D-317 entered the defect log
   severity: low
   status: fixed
-  recurrence_of: D-301
   what: >-
-    The new production-timeout paragraph in development.md begins a sentence with
-    "Mutation- control commands", splitting the compound modifier the same way D-301
-    had just repaired in the session receipt rules.
+    The synopsis said every gate-detected defect was bookkeeping or robustness, while
+    the canonical log also contains validity and performance findings detected by the
+    gate.
   consequence: >-
-    The sentence parses with a dangling "Mutation-" fragment; the timeout guidance
-    itself was unaffected.
-  fix: Rejoin the compound as "Mutation-control commands".
+    The narrative described a cleaner detector pattern than the underlying data supports
+    and made the generated class/detector tables disagree with their interpretation.
+  fix: >-
+    State the supported distinction: gate findings have been mechanical process,
+    implementation, or test-validity failures, while none has caught a mathematical
+    soundness error.
   regression: none
-  bead: think-7456
-  recorded_in: development.md
+  bead: think-7qck
+  recorded_in: SYNOPSIS.md
+- id: D-323
+  title: The reader-first frontier view discarded long exact forms
+  date: '2026-08-25'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: since the assurance-aware frontier view was introduced
+  severity: high
+  status: fixed
+  what: >-
+    The frontier table renderer used an exact form only when it fit an arbitrary
+    28-character display budget. Longer algebraic and rational values silently fell
+    back to rounded decimals even in columns labeled as formally verified.
+  consequence: >-
+    A reader could mistake a rounded decimal for the exact proved bound. In some rows
+    the rounding also made the displayed lower bound slightly stronger or the displayed
+    upper bound slightly smaller than the formal value.
+  fix: >-
+    Render every available exact form in verified lanes and simplify the repeated
+    Nagamochi radical form to the equivalent reader-facing expression `1 + sqrt(k)`.
+  regression: test_frontier_assurance_contract
+  recurrence_of: D-022
+  bead: think-1p2e
+  recorded_in: devtools/render_research_tables.py
+- id: D-324
+  title: Semantic golden comparison accepted ambiguous YAML identities
+  date: '2026-08-25'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one semantic deep-golden implementation
+  severity: medium
+  status: fixed
+  what: >-
+    The first semantic deep-golden comparison used permissive YAML loading followed by
+    Python equality. Duplicate keys were silently overwritten, and values such as an
+    integer, float, and boolean could compare equal despite carrying different YAML
+    types.
+  consequence: >-
+    A malformed or type-changing golden artifact could pass as unchanged and weaken the
+    independent characterization surface intended to catch numerical drift.
+  fix: >-
+    Load both documents with the repository's duplicate-key-rejecting loader and compare
+    deterministic canonical YAML serializations that preserve scalar types while
+    ignoring presentation-only wrapping.
+  regression: test_semantic_yaml_comparison_preserves_types_and_rejects_duplicate_keys
+  recurrence_of: D-320
+  bead: think-35wm
+  recorded_in: devtools/check_golden_basins.py
+- id: D-325
+  title: The current-handoff validator embedded one live agenda cell
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: review
+  latent_for: since the terminal-session handoff guard was introduced
+  severity: low
+  status: fixed
+  what: >-
+    The synopsis validator hardcoded BC-010, its bead, and one historical defect instead
+    of deriving the active agenda cell from the terminal session's recorded next action.
+  consequence: >-
+    A correct future handoff to another agenda cell would require editing validator code
+    and could fail for stale historical details unrelated to the handoff contract.
+  fix: >-
+    Select exactly one agenda cell from the terminal session action, derive its bead and
+    evidence checks from the cell record, and reject any fixed defect named as a current
+    blocker without singling out one historical ID.
+  regression: test_handoff_cell_is_selected_from_the_latest_session_action
+  recurrence_of: D-319
+  bead: think-z96r
+  recorded_in: devtools/check_synopsis.py

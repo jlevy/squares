@@ -1,7 +1,7 @@
-"""LP-in-cell quench: turn a float configuration into a named, exactly-valued basin.
+"""LP-in-cell quench: turn a float configuration into a named endpoint candidate.
 
 The structural fact this rests on, established in the standing review (R-2) and
-verified against Trump's packing to `9e-16`:
+numerically checked against Trump's packing to `9e-16`:
 
 > For fixed angles, and a fixed choice of which axis separates each pair, minimising
 > the enclosing side is a LINEAR PROGRAM.
@@ -12,14 +12,13 @@ separating-axis condition is one linear inequality, containment is linear, and t
 objective is linear. All the nonconvexity of the problem lives in the angles and in
 the combinatorial choice of cell.
 
-So a quench is: pick the cell the configuration is in, solve it exactly, step the
-angles downhill, repeat. The endpoint is a genuine cell-optimum rather than wherever
-an annealer happened to get tired -- which is what makes "basin" mean anything, and
-what the census, the atlas and every descriptor are built on.
+So a quench is: pick the cell the configuration is in, solve it numerically, step the
+angles downhill, and repeat. The endpoint is a reproducible fixed-cell candidate rather
+than wherever an annealer happened to stop. It still needs convergence, component, and
+formal evidence before stronger claims are justified.
 
-This module is `f64` throughout and SCREENS: the LP optimum is exact within its cell
-to solver precision, not exact in the algebraic sense. Certification remains
-`sqpack.verify` over the packing's own number field.
+This module is `f64` throughout and SCREENS: the LP endpoint is finite-precision, not
+exact. Formal promotion uses an exact witness or rigorous certificate.
 """
 
 from __future__ import annotations
@@ -180,7 +179,7 @@ def choose_cell(
     `solve_cell` uses it for the containment rows, where the axis is a container edge
     rather than a square's own normal and the identity does not apply.
 
-    Verified equivalent over 17k random rows at n in {5, 10, 11, 17}: identical axis and
+    Numerically cross-checked over 17k random rows at n in {5, 10, 11, 17}: identical axis and
     sign choices, `h` agreeing to 1 ulp.
     """
     n = len(x)
@@ -678,7 +677,7 @@ def quench(  # noqa: PLR0911 - each scientific stop condition returns its eviden
     piecewise-linear-ish and non-smooth at cell boundaries, so a step that fails is
     halved rather than trusted, and the loop stops when the step can no longer buy
     anything. That is the part of H-002 that was untested -- the single-cell solve was
-    already verified.
+    already numerically cross-checked.
     """
     x, y, theta = list(x), list(y), list(theta)
     n = len(x)

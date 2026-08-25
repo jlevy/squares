@@ -66,15 +66,13 @@ controls:
   run: python3 -m devtools.validate_schemas
   expect: "D-039: fixed while fix still says none yet"
 
-# This control's anchor tracks a live number because the thing under test IS a number.
-# It needs updating whenever a defect is added -- and that is fine: negctl
-# requires the anchor to appear exactly once, so a stale one fails the suite by name
-# rather than quietly testing nothing.
+# Mutate the stable dataset header rather than copying the live defect count into the
+# control. The semantic checker still compares the mutated value with the full list.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 321", "count: 20"]
+  replace: ["status: enforced\ncount:", "status: enforced\ncount: 20 #"]
   run: python3 -m devtools.validate_schemas
-  expect: "count 20 != 321 entries"
+  expect: "count 20 !="
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -100,20 +98,9 @@ controls:
   run: python3 -m devtools.check_readme
   expect: "README.md: workflow table is"
 
-# The unprotected-fix count in SYNOPSIS.md. This claim -- the list that predicts what
-# comes back -- was hand-written, and it drifted: the prose said six while the generated
-# view said seven. That is D-028 recurring inside the document D-028 is about, which is
-# why the count is now derived and why it gets a control.
-- name: synopsis - hypothesis artifact count drifting from the registry
-  file: SYNOPSIS.md
-  replace: ["Forty-two claims or open questions are codified as artifacts.",
-            "Forty-one claims or open questions are codified as artifacts."]
-  run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "does not state the hypothesis artifact count (42)"
-
 - name: synopsis - dateline duplicates volatile campaign progress
   file: SYNOPSIS.md
-  replace: ["**Date:** 2026-08-25", "**Date:** 2026-08-25, after 36 rounds"]
+  replace: ["**Date:**", "**Date:** after a campaign checkpoint;"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "Date dateline repeats campaign progress"
 
@@ -135,19 +122,19 @@ controls:
 
 - name: synopsis - soundness direction aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["Sixty-one of the seventy-four soundness defects", "Sixty of the seventy-four soundness defects"]
+  replace: ["soundness defects pointed in the *flattering*", "soundness defects pointed in the *conservative*"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "soundness-direction aggregate is not 61 of 74"
+  expect: "soundness-direction aggregate is not"
 
 - name: synopsis - gate detector aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["gate has caught forty defects in 321", "gate has caught thirty-nine defects in 321"]
+  replace: ["automated gate has caught", "automated gate has missed"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "gate-detector aggregate is not 40 of 321"
+  expect: "gate-detector aggregate is not"
 
 - name: synopsis - hypothesis-status aggregate drifting from the ledger
   file: SYNOPSIS.md
-  replace: ["derives three confirmed hypotheses", "derives two confirmed hypotheses"]
+  replace: ["generated ledger currently derives", "generated ledger once derived"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "hypothesis-status aggregate does not match campaign/ledger.md"
 
@@ -164,7 +151,7 @@ controls:
   replace: ["    to coincide with an in-progress round.\n  regression: none\n  bead: think-5zwm\n",
             "    to coincide with an in-progress round.\n  regression: 'a check that does not exist'\n  bead: think-5zwm\n"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "does not state the unprotected-fix count (106)"
+  expect: "does not state the unprotected-fix count ("
 
 - name: gate - strict handover skips deep golden regeneration
   file: src/sqpack/cli/validate.py
@@ -218,7 +205,7 @@ controls:
 
 - name: campaign - one round naming two hypotheses
   file: campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md
-  replace: ["  hypotheses: [H-019]", "  hypotheses: [H-019, H-002]"]
+  replace: ["  hypotheses:\n  - H-019", "  hypotheses:\n  - H-019\n  - H-002"]
   run: python3 -m sqpack.campaign.ledger check
   expect: "is too long"
 
@@ -236,8 +223,8 @@ controls:
 
 - name: campaign - open instance mislabeled as a known-answer control
   file: campaign/series/series-000-smoke-and-calibration/experiments/exp-004-baseline-n12-negative-control.md
-  replace: ["instance: {axis: n, point: 12, role: calibration}",
-            "instance: {axis: n, point: 12, role: negative_control}"]
+  replace: ["  instance:\n    axis: n\n    point: 12\n    role: calibration",
+            "  instance:\n    axis: n\n    point: 12\n    role: negative_control"]
   run: python3 -m sqpack.campaign.ledger check
   expect: "control role negative_control requires a proved instance"
 
@@ -451,15 +438,17 @@ controls:
   # Mutate a digit the table actually SHOWS. The rendered cell carries 8 significant
   # digits, so a change at the 14th is invisible to it and the check is right not to
   # fire -- which this control asserted the wrong way round on its first attempt.
-  replace: ["    value: 3.87708359002281", "    value: 3.88708359002281"]
+  replace: ["    value: '3.87708359002281'", "    value: '3.88708359002281'"]
   run: python3 -m devtools.render_research_tables --check
   expect: "STALE (re-run `python -m devtools.render_research_tables`)"
 
-- name: frontier - numeric value and its display string disagreeing
+- name: frontier - non-verified evidence promoted into the verified lane
   file: frontier/n-011.md
-  replace: ["    value_str: '3.87708359002281'", "    value_str: '3.87708359002282'"]
+  replace:
+    - "  verified_upper_bound:\n    value: '3.87708359002281417730789706010096'\n    exact_form: root(P_trump11, 3.87708359002281417730789706010096)\n    evidence:\n    - E-n011-trump-upper"
+    - "  verified_upper_bound:\n    value: '3.87708359002281417730789706010096'\n    exact_form: root(P_trump11, 3.87708359002281417730789706010096)\n    evidence:\n    - E-kingbird-upper-register"
   run: python3 -m devtools.validate_schemas
-  expect: "value_str disagrees with value"
+  expect: "evidence E-kingbird-upper-register is not verified"
 
 - name: generated view left un-exempt from the Markdown formatter
   file: ../../.flowmarkignore

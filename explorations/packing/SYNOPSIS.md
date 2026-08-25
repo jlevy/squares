@@ -20,24 +20,25 @@ The motivating case is `n = 11`, the smallest instance nobody has solved.
 This project works under four independent principles, defined at the top level in
 [`README.md`](README.md#operating-principles): **Correctness** (Soundness) owns
 mathematical truth and may veto promotion; **Process** (Discipline) owns reproducible
-research operations and may veto an unreconstructable run; **Insight** (Creativity) owns
-hypotheses and strategy but cannot certify them; and **Efficiency** (Infrastructure)
-owns stable, measured throughput without relaxing Correctness or Process controls.
+research operations and adds only the controls needed to preserve consequential evidence
+and handoffs; **Insight** (Creativity) owns hypotheses and strategy but cannot certify
+them; and **Efficiency** (Infrastructure) owns stable, measured throughput without
+relaxing mathematical assurance.
 These are quality dimensions, not session types.
-An agent declares one primary focus inside one workflow phase, while the other
-principles continue to constrain and contribute to the work, then hands explicit
-artifacts to the next phase.
+Routine work chooses a workflow and bounded output; a versioned multi-phase session also
+declares one primary focus per phase while the other principles continue to constrain
+and contribute to the work.
 
 Those principles govern four capabilities built so far:
 
-1. **Know the frontier.** A schema-validated record of the best known packing and the
-   best proved lower bound for every `n ≤ 100`, with provenance, plus a local archive of
-   the primary literature.
-2. **Verify exact witnesses under certified fields.** A separating-axis verifier that
-   decides validity over the packing’s algebraic number field, so a configuration with
-   contacts at *exactly* zero separation can be certified rather than guessed at.
-   The bundled fields are independently isolated; the generic third-party field path is
-   not yet sound.
+1. **Know the frontier.** A schema-validated reported and formal claim register for
+   every `n ≤ 100`, reconciled against a dated named-source inventory, with a generated
+   reader-first status view and a local archive of the primary literature.
+2. **Inspect, check, and verify witnesses.** One interchange accepts supported decimal,
+   rational, and algebraic geometry.
+   Decimal data can be inspected or numerically checked under explicit arithmetic;
+   rational and certified algebraic witnesses can be verified exactly, including field
+   irreducibility and unique-root preconditions.
 3. **Search, under an experiment contract.** A hypothesis registry with kill criteria
    written before the run, a metric vector, an accept rule, a declared timebox, and a
    ledger generated from the artifacts rather than typed.
@@ -45,11 +46,13 @@ Those principles govern four capabilities built so far:
    experiment record, because most soundness failures found so far pointed in the
    *flattering* direction and none was caught by the automated gate.
 
-Capability 2 is narrower than it sounds and the difference matters: this directory can
-**check** a packing whose exact algebraic description it is given, and cannot yet
-**produce** that description from a packing it found.
-[What Is Built](#what-is-built) states, component by component, what runs, what runs but
-cannot support the claim it appears to, and what is documented and unbuilt.
+Capability 2 has two promotion boundaries.
+Robust rational promotion is built for suitable decimal center-angle poses and may prove
+a slightly weaker upper bound by making its side relaxation explicit.
+A generic path that infers contacts and certifies an exact solution at the reported
+value is not built and may not succeed for singular, ambiguous, or ill-conditioned
+systems. [What Is Built](#what-is-built) states, component by component, what runs, what
+its output may claim, and what remains engineering or mathematics.
 Read it before citing any capability here.
 
 ### Current research readiness
@@ -69,21 +72,21 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | --- | --- | --- | --- |
 | Research record and process | Reconstruct hypotheses, experiments, sessions, effort, and known failures | A closed bead or plausible output is not evidence until the artifact, landed tree, and generated views agree | [Ledger](campaign/ledger.md), [defect log](defects.md), and [confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | Agent loop and throughput | Run bounded phases with declared clocks, checkpoint each result, and select the next dependency-ready bead | Portable recovery and final receipts remain incomplete; wall-clock budgets do not define equal scientific work under load | [Campaign runbook](campaign/README.md), [launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-autonomous-agent-loop), and [D-126](defects.md) |
-| Frontier and literature | Establish best-known values and proved bounds with provenance through `n = 100` | The corpus records values and sources, not an executable geometry witness for every record | [`frontier/`](frontier/README.md) and [`resources/`](resources/README.md) |
-| Exact witness verification | Certify the bundled Trump witness and other independently isolated algebraic inputs | The generic `NumberField` path needs a root-count certificate before accepting third-party field metadata ([D-053](defects.md)) | [Exact layer](#the-exact-layerbuilt) |
+| Frontier and literature | Read reported and verified bounds side by side through `n = 100`; reconcile the named public sources and retain conflicts | Most reported records still lack a public formal witness; dated named-source coverage is not universal web completeness | [`frontier/STATUS.md`](frontier/STATUS.md), [`frontier/`](frontier/README.md), and [`resources/`](resources/README.md) |
+| Witness inspection and verification | Inspect or numerically check supported decimal geometry; verify rational and certified algebraic witnesses exactly | Interval-certificate replay is represented by the contract but no generic interval checker is built | [Exact layer](#the-exact-layerbuilt) and [capability ladder](#verification-capability-ladder) |
 | Numerical refinement | Polish and compare fixed-cell controls above the measured solver floor | A stopped quench is neither certified stationary nor comparable by wall-clock budget under load | [Refinement layer](#the-refinement-layerbuilt-with-a-floor) and [D-021, D-052, D-126](defects.md) |
 | Exact local geometry and proof | Run the specialized small-`n`, Trump, and Stromquist checkers; this is the most productive mathematical lane so far | There is no generic proof-synthesis or interval branch-and-bound pipeline | [Proof lane](#the-proof-lanebuilt-and-producing-theorems) |
 | Proposal and search | Use the stock annealer for calibration and candidate generation; its two search paths emit exact pair-test work | Pair-budget enforcement, the proposer interface, campaign-wide aggregation, and mechanism-diverse proposers are unbuilt | [Proposer layer](#the-proposer-layerone-instrument-and-the-interface-is-unbuilt) |
 | Event capture and replay | Retain and independently replay watched control events | A valid terminal event is an observation, not a connected terminal component | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | Basin identity, census, and atlas | Use exact `n = 3` and `n = 4` models as identity controls | Component counting is not admissible until the `n = 5` ambiguity is bounded and the classifier is validated successively | [Map layer](#the-map-layerbuilt-not-admissible) and [confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) |
-| Numerical-to-exact promotion | Reuse the dedicated `n = 5` fixed-angle proof of concept | No general command turns a retained floating pose into an exact witness or an explicit rejection | [Promotion pipeline](#the-promotion-pipelineunbuilt-and-it-is-the-largest-structural-gap) |
+| Numerical-to-formal promotion | Robustify suitable decimal center-angle poses into explicitly relaxed rational witnesses and receive typed failures | The robust path may weaken the bound; contact inference and existence certification at the reported value remain unbuilt and mathematically contingent | [Promotion pipeline](#the-promotion-pipelinepartly-built-with-a-formal-value-gap) |
 | Visualization | Inspect the exact `n = 3` moduli SVG and design evidence-typed views from retained artifacts | The scalable basin atlas and the first `n = 5` ambiguity view are unbuilt; endpoint rows must not be pictured as components | [Visualization ladder](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder) |
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
 hypotheses, one open hypothesis, seven open questions, and twenty-five blocked
-hypotheses.
-Its active confidence ladder has completed the exact and event controls up to
+hypotheses. One additional hypothesis is unresolved because its formal prerequisite is
+missing. Its active confidence ladder has completed the exact and event controls up to
 the first nontrivial identity question; the next scientific transition is from
 specialized `n = 5` local geometry to a defensible component relation, not to a larger
 raw census.
@@ -117,35 +120,64 @@ The argument for it, and the measurement registered to kill it if it is wrong, a
 slice, experiment, round, and run—and the mathematical terms used narrowly here.
 Those definitions apply in the campaign artifacts and the beads too, not only here.
 
-### Document map
+### Document Map
 
-Each document owns one thing.
-Nothing here duplicates what another owns.
+The validated [document map](docs/project/document-map.yaml) distinguishes current rules
+and synthesis from supporting research, dated records, generated views, and transient
+plans. Follow the replacement link instead of using a superseded review or handoff for
+current status. Collection rows cover homogeneous typed artifacts without listing every
+case or experiment separately.
 
-| Document | Owns |
-| --- | --- |
-| [`TUTORIAL.md`](TUTORIAL.md) | The conceptual on-ramp for a newcomer: the objects, why the approach is shaped this way, and what is established versus open. Owns no status—it defers here for all of it |
-| **This synopsis** | The state of the program, full workflow contracts, work-unit vocabulary, and roll-up of rounds |
-| [Historical quench-spine handoff](docs/project/handoff-2026-08-23-quench-spine.md) | A superseded 2026-08-23 checkpoint retained as provenance. Do not use it for current priority; use the basin confidence ladder and launch agenda |
-| [`README.md`](README.md) | The four-principle operating charter, compact workflow selector, directory orientation, and index of the six research reports |
-| [`conventions.md`](conventions.md) | The definitive registry of every convention, id class, and naming rule, and which are machine-checked |
-| [`defects.md`](defects.md) | Every bug and record defect, what caught it, and what now stops it recurring |
-| [Soundness postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | Why D-014 was possible, and rules R1–R4 that apply to code not yet written |
-| [`frontier/`](frontier/README.md) | What is known about `s(n)` for every `n ≤ 100`, one artifact per case |
-| [`resources/`](resources/README.md) | The primary literature, local and greppable |
-| [Packing 11 Unit Squares](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | The mathematics of `s(11)`: what is proved, what is conjectured, why the proof technique stalls |
-| [Algorithms and Tooling](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | How packings are found, refined to exact form, and verified |
-| [FrankenSim as a Rust Toolkit](docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md) | First-hand study of one Rust framework as a source of parts |
-| [Infrastructure for Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | The build order, the language boundary, what not to build |
-| [Lean for Packing Proofs](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where a proof assistant fits, and what it would be pointed at first |
-| [A Search Philosophy](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | The strategy layer: why pointing should beat scaling |
-| [Standing review](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | Historical source of the experimental method and initial `H-001`–`H-015` register; the codified registry owns current claims |
-| [Plan spec](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | The seven build phases, and a revision note recording what building the quench corrected |
-| [Campaign runbook](campaign/README.md) | W6 mechanics: the contract every experiment round runs under, frozen while rounds run |
-| [Agent sessions](campaign/agent-sessions/README.md) | The v2 session contract: entry workflow, ordered phase history, clocks, evidence, stop reason, and handoff |
-| [Basin confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) | Mutable order of bounded experiment cells and their readiness; it does not own claims or current program prose |
-| [Idea board](campaign/ideas.md) | The whole idea space on one page, including dead ends |
-| [Ledger](campaign/ledger.md) | Generated roll-up of session workflow phases, agendas, series, registry, rounds, and effort |
+<!-- BEGIN GENERATED: document-map (devtools.render_document_map) -->
+
+| Document or collection | Role | Authority | Lifecycle | Current replacement |
+| --- | --- | --- | --- | --- |
+| [Square Packing](README.md) | reader orientation | definitive | maintained | — |
+| [Synopsis: The `s(n)` Program](SYNOPSIS.md) | current technical state and terminology | definitive | maintained | — |
+| [Tutorial: Square Packing from First Principles](TUTORIAL.md) | first-principles tutorial | supporting | maintained | — |
+| [Packing Atlas](atlas/README.md) | component scope and use | supporting | maintained | — |
+| [Deterministic SVG Gallery](atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
+| [Conventions for `explorations/packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
+| [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
+| [The `s(n)` Research Campaign — W6 Runbook](campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
+| [Agent Sessions](campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
+| [Idea board — the `s(n)` search campaign](campaign/ideas.md) | hand-maintained registry | definitive | maintained | — |
+| [Experiment ledger](campaign/ledger.md) | generated status view | generated | generated | — |
+| [series-000 (S0) — smoke and calibration](campaign/series/series-000-smoke-and-calibration/README.md) | series scope and comparability | definitive | maintained | — |
+| [Frontier: What Is Known About `s(n)`, Case by Case](frontier/README.md) | frontier semantics and contribution path | definitive | maintained | — |
+| [Current Square-Packing Frontier](frontier/STATUS.md) | generated status view | generated | generated | — |
+| [Research Resources: Square Packing](resources/README.md) | source retention and archive policy | definitive | maintained | — |
+| [Defect log](defects.md) | generated status view | generated | generated | — |
+| [FrankenSim probes](frankensim-probe/README.md) | component scope and use | supporting | maintained | — |
+| [Research: FrankenSim and the Franken Constellation as a Rust Toolkit for Square Packing](docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md) | research synthesis | supporting | maintained | — |
+| [Research: Infrastructure for Square-Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | research synthesis | supporting | maintained | — |
+| [Research: Lean for Square-Packing Proofs and Validation](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | research synthesis | supporting | maintained | — |
+| [Research: Packing 11 Unit Squares in a Square](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | research synthesis | supporting | maintained | — |
+| [Research: Algorithms and Tooling for Square Packing](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | research synthesis | supporting | maintained | — |
+| [Research: A Search Philosophy for Square Packing](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | research synthesis | supporting | maintained | — |
+| [Review: Loop Speed, Iteration Cost, and What Actually Gates the Research (PR #17)](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | dated review record | record | superseded | [Packing Development Guide](development.md) |
+| [Review: The Experiment Loop, the Campaign, and the Consolidation (PR #5)](docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md) | dated review record | record | superseded | [The `s(n)` Research Campaign — W6 Runbook](campaign/README.md) |
+| [Review: The Mathematical Frontier, Its Gaps, and How to Search It Fast](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | dated review record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
+| [Response to the PR #15 Review: what it got right, one thing it got wrong, and what is missing](docs/project/reviews/review-2026-08-23-response-to-pr15-review.md) | dated review record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
+| [Review: PR #14 and the Executable Square-Packing Research Program](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | dated review record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
+| [Review: The Tooling Layout, and What It Would Take to Clean Up](docs/project/reviews/review-2026-08-23-tooling-layout.md) | dated review record | record | superseded | [Packing Development Guide](development.md) |
+| [Review: The Toolkit Docs and the First Experiment Series](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | dated review record | record | superseded | [Experiment ledger](campaign/ledger.md) |
+| [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
+| [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
+| [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
+| [Feature: Minimal Packing Toolkit](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | implementation plan | current | transient | — |
+| [Feature: Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | implementation plan | current | transient | — |
+| [Feature: Frontier Assurance and Verification](docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md) | implementation plan | current | transient | — |
+| [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](atlas/README.md) |
+| [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
+| `frontier/n-*.md` | typed case claim register | definitive | maintained | — |
+| `campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
+| `campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
+| `campaign/agent-sessions/session-*.md` | typed session record | record | retained | — |
+| `campaign/agendas/agenda-*.md` | mutable coordination agenda | current | maintained | — |
+| `campaign/explorations/X-*.md` | typed idea provenance | record | retained | — |
+
+<!-- END GENERATED: document-map -->
 
 The code that produces the numbers: [`sqpack.verify`](src/sqpack/verify.py) decides
 validity exactly, [`sqpack.research.quench`](src/sqpack/research/quench.py) is the
@@ -163,12 +195,22 @@ W6 may run under a Correctness focus while an exact certificate is checked, then
 another W6 phase under Insight when the same registered question needs a creative
 construction. The focus changed; the workflow did not.
 
-Every phase begins by recording its workflow and primary focus; objective and required
-inputs; expected durable output and validation command; kill condition and fallback; and
-start and deadline. Actual outcome and evidence are terminal fields recorded when the
-phase closes, not placeholders invented when it opens.
-The session artifact records the ordered history.
-The generated ledger summarizes both entry workflows and later switches.
+Workflow selection should reduce context, not create paperwork.
+Routine single-purpose work records four facts where the work is already tracked: the
+workflow, bounded objective or question, intended artifact, and focused check.
+No `session-NNN` artifact is required.
+
+Use the fuller session contract only when the work crosses multiple workflow or
+material-focus phases, continues autonomously beyond an ordinary checkpoint, coordinates
+independently tracked delegates, supervises an expensive experiment or proof search, or
+needs durable recovery and handoff state.
+Each phase in that escalated record begins with its workflow and primary focus;
+objective and required inputs; expected durable output and validation command; stopping
+condition and fallback; and start and deadline.
+Actual outcome and evidence are terminal fields recorded when the phase closes, not
+placeholders invented when it opens.
+The generated ledger summarizes those versioned sessions; it is not a census of every
+routine task.
 
 | ID | Workflow | Enter with | Work boundary | Durable exit | Default handoff |
 | --- | --- | --- | --- | --- | --- |
@@ -193,11 +235,12 @@ alternating among research, review, and infrastructure; those are separate phase
 
 ### Switching Workflows in One Session
 
-One phase is active at a time per independently tracked session.
-Start a new phase when its purpose, focus, or bounded slice objective changes.
+One phase is active at a time per versioned agent session.
+Start a new phase when its purpose, primary focus, or bounded slice objective changes.
 A focus-only change repeats the workflow name and is a phase boundary, not a workflow
-switch. A renewed slice may repeat both workflow and focus, but it must close the prior
-slice, change the objective, and state the new fact that justifies another clock.
+switch. A momentary shift in emphasis is not a phase.
+A renewed slice may repeat both workflow and focus, but it must close the prior slice,
+change the objective, and state the new fact that justifies another clock.
 An orchestrator may switch or renew at a planned checkpoint, after a concrete evidence
 checkpoint, on a user request, or because the active premise was falsified.
 It closes the old phase first with status, evidence, stop reason, and next action; then
@@ -247,9 +290,9 @@ W6 resumed only after the corrected criterion was frozen; exp-035 then proved
 exact first-order directions outside the sheet without proving nonlinear realization.
 W3 turned that limitation into exp-036’s registered second-order obstruction, and W6
 then excluded the displayed direction from the true tangent cone.
-Exp-037 now certifies the complete branchwise linearization-cone inventory and leaves
+Exp-038 now certifies the complete branchwise linearization-cone inventory and leaves
 transverse and mixed nonlinear realization open.
-Exp-038 then certifies one connected five-dimensional fixed-angle cell-local LP-optimal
+Exp-039 then certifies one connected five-dimensional fixed-angle cell-local LP-optimal
 position polytope and twelve exact paths in release classes R1, R2, R3, and R6. Its
 positive pathwise first-order stresses do not make the whole polytope stationary or
 classify a terminal component.
@@ -261,12 +304,12 @@ W7; historical phases are not relabelled after the fact.
 The latest terminal record is
 [session-014](campaign/agent-sessions/session-014-final-portfolio-rotation.md), which
 opened no later research round.
-The next agent should open one bounded W6 slice under `think-1s0h`, preregister one
-exact R4/R5 nonlinear-realization criterion, and retain an exact continuation, exact
-obstruction, or finite unresolved list.
+The next agent should open one bounded W6 slice for agenda cell `BC-010` under
+`think-1s0h`, preregister one exact R4/R5 nonlinear-realization criterion, and retain an
+exact continuation, exact obstruction, or finite unresolved list.
 The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
 remain later slices; D-239 is a separate W7 line.
-Do not start basin-frequency work or reinterpret exp-035 through exp-038 as a
+Do not start basin-frequency work or reinterpret exp-035 through exp-039 as a
 connectivity proof.
 
 ## What Is Built
@@ -288,19 +331,23 @@ here.
 
 | Component | What it does |
 | --- | --- |
-| [`sqpack.field`](src/sqpack/field.py) | Exact arithmetic in `ℚ(α)`: exact zero test, exact sign by rational interval bisection |
-| [`sqpack.verify`](src/sqpack/verify.py) | Separating-axis validity, generic over the scalar type—exact or `f64` from one predicate |
+| [`sqpack.field`](src/sqpack/field.py) | Exact arithmetic in `ℚ(α)`: exact zero and sign, modular or complete supported-quartic irreducibility certificates, and Sturm certification that an interval isolates one real root |
+| [`sqpack.verify`](src/sqpack/verify.py) | Separating-axis validity generic over scalar type; exact predicates support verification and numerical predicates support checks |
+| [`sqpack.witness`](src/sqpack/witness.py) | `Witness/v1` loading, inspection, finite numerical checks, rational/algebraic verification, SVG rendering, and robust rational promotion |
 | [`cases.trump11.packing`](cases/trump11/packing.py) | The `n = 11` witness, exactly, in `ℚ(u)` |
+| [`cases.gobel5`](cases/gobel5/) and [`cases.gobel10`](cases/gobel10/) | Exact degree-two constructions and negative controls at `n = 5` and `n = 10` |
 | [`cases.trump11.derive_field`](cases/trump11/derive_field.py) | Re-derives the degree-8 field from the published polynomial, factors over `ℚ`, and selects the root by isolating interval |
 | [`cases.trump11.verifier_limits`](cases/trump11/verifier_limits.py) | Demonstrates both float failure modes against the same packing |
 
-**One caveat, and it is critical.** [D-053](defects.md) is open: `NumberField` documents
-an irreducible minimal polynomial and an interval containing exactly one real root, but
-checks only an endpoint sign change.
-The built-in `n = 11` witness is independently checked, so **T-1** is unaffected.
-The *generic* path—bring your own packing and your own field—is not yet sound, and no
-third-party field metadata should be trusted through it until a Sturm-sequence check
-lands.
+[D-053](defects.md) is fixed.
+`NumberField` now rejects reducible polynomials, intervals with zero or multiple roots,
+and endpoint roots before any sign decision.
+It uses an irreducible finite-field reduction when available and a complete
+factor-exclusion fallback for monic integer quartics; other inputs fail closed when
+neither supported certificate establishes irreducibility.
+Exact rational input is the explicit degree-one case.
+This makes supported generic algebraic input sound at the field boundary; it does not
+infer the correct field or exact geometry from an arbitrary decimal source.
 
 ### The refinement layer—built, with a floor
 
@@ -313,7 +360,7 @@ Both are built and agree to `4.4e-16` on Trump’s cell.
 Three named limits travel with every number they produce:
 
 - [D-021](defects.md)—the float LP solver has a noise floor of about `1e-11` in the
-  side. Nothing at the `polished` tier may claim a difference finer than that.
+  side. No numerical comparison may claim a difference finer than that floor.
   The general fix is an **exact LP over certified rational or algebraic coefficients,
   which is unbuilt**; it is purely rational only for rational-coefficient cells.
 - [D-052](defects.md)—coordinatewise stopping is not a certified local optimum.
@@ -366,51 +413,60 @@ quotient models may assign components, while unsupported numerical observations 
 unresolved. A scalable retained-pose classifier is still unbuilt, so steering strategies
 that depend on sampled component identity or descriptor distances remain unbuilt too.
 
-### The promotion pipeline—unbuilt, and it is the largest structural gap
+### The promotion pipeline—partly built, with a formal-value gap
 
-There is **no general executable path from a numerical candidate to a reconstructible
-exact result.** The repository can verify a packing whose exact algebraic description it
-is already given; it cannot, as a tool, produce that description from a packing it
-found. Exp-033 crossed the boundary once, narrowly: a dedicated checker bound two
-retained `n = 5` float poses to exact endpoints on one certified fixed-angle optimal
-face, with an exact dual proving that cell’s side minimal.
-One hand-built instance at fixed angles is a proof of concept, not the pipeline.
+The public `packing-witness promote` command implements **robust rational promotion**
+for suitable decimal center-angle poses.
+It rationalizes centers and rotations, tries an explicitly bounded dilation, writes
+every corner as a rational, and verifies the result exactly before emitting it.
+Failure is typed and leaves the source witness unchanged.
 
-Concretely, none of the following exists: corner–edge incidence classification from a
-polished pose (the quench records which *pairs* touch, not which corner meets which
-edge), contact-equation assembly, rank-closure of an underdetermined system,
-high-precision root-finding, algebraic recognition, interval uniqueness, or certificate
-emission. The tracked acceptance criterion is that, **starting only from archived
-floating poses**, one command recovers or explicitly rejects `n = 5, 10, 11, 17` and
-several rational-grid controls, and records recognition failures rather than guessing.
+The retained Schadt `n = 29` pose is the regression case.
+The source decimal geometry passes its declared 300-digit calculation at tolerance
+`1e-100`, with thirteen slightly negative best pair gaps hidden by that tolerance.
+Robust promotion produces a different, slightly relaxed rational packing at
+`296694289993118242899906513/50000000000000000000000000`, an increase of about
+`4.94e-11` in the container side.
+The generic exact verifier and a small independent rational checker both accept all 29
+squares and 406 pairs.
+This formally proves the weaker upper bound; it does not verify the original decimal
+pose, the tighter current Kingbird report, or global optimality.
 
-Two consequences bind every other lane:
+The **reported-value path** remains unbuilt.
+The project does not generically infer corner–edge incidences, assemble and close
+contact equations, recognize an algebraic field, or certify existence and uniqueness
+near a numerical root.
+An interval-Newton or Krawczyk checker is a buildable direction for suitable systems,
+but contact ambiguity, singularity, and ill-conditioning can make promotion
+mathematically contingent.
+The interval strategy therefore returns `checker-not-built` today rather than promising
+a conversion that may not exist.
 
-- **`exact` almost always means “checked something already known exactly”.** Trump’s
-  packing and the `n = 3` and `n = 4` optimal families were authored from published data
-  or derived analytically.
-  The one exception is exp-033’s pair of exact `n = 5` endpoints, recovered from
-  retained search poses at their shared nonoptimal side—through a dedicated
-  single-instance checker, not a general tool.
-- **No admissible endpoint exists at an open `n`, so the pipeline would have nothing new
-  to promote.** The early quench archives (exp-006 through exp-009) retain angles and a
-  contact *count* but not centres; the twelve historical v2 poses remain inadmissible
-  under the since-fixed [D-165](defects.md).
-  The latest complete `BasinEvent/v3` control blocks contain four admissible events at
-  `n = 3` (exp-021 and exp-022) and four at `n = 4` (exp-024); exp-023 preserves the
-  earlier three-of-four n=4 block that exposed D-171. They are all at proved values, so
-  they are known-answer material for the pipeline, not candidates.
-  Exp-025 adds four admissible nonoptimal `n = 5` events as a tool-path stress cell; it
-  does not promote their descriptors to components or record candidates.
+Exp-033 remains a distinct dedicated result: it bound two retained `n = 5` float poses
+to exact endpoints on one certified fixed-angle optimal face and supplied an exact dual
+for that cell. The early quench archives still lack complete centers, and current
+`BasinEvent/v3` controls are known-answer material rather than open-case record
+candidates. Most public frontier entries still record side values without an imported
+geometry witness.
 
-The record corpus has the same shape of gap: [`frontier/`](frontier/README.md) records
-each case’s **side value** algebra—minimal polynomials where they are published—and **no
-geometry**. An importer for the catalogue’s layouts is unbuilt.
+### Verification Capability Ladder
+
+| Capability | Current state | Boundary |
+| --- | --- | --- |
+| Inspect or render a supported witness | built and sound | Makes no assurance claim |
+| Check decimal geometry with binary64 or multiprecision | built, numerical only | Requires actual precision and tolerance; output is always numerically checked |
+| Verify rational witness geometry | built and sound | Proves feasibility and an upper bound, not optimality |
+| Verify algebraic-number-field geometry | built and sound for accepted metadata | Constructor proves irreducibility and one isolated real root; caller must still supply the correct field and geometry |
+| Import center-angle, center-basis, or corner data | built at `Witness/v1` | A source-specific adapter must resolve the source’s units and coordinate convention without guessing |
+| Robustify a suitable decimal center-angle pose | built | May require an explicit side increase and certifies the new rational pose only |
+| Certify existence at the reported value | buildable for suitable systems; checker unbuilt | Needs outward-rounded boxes and a well-posed contact system; not guaranteed to succeed |
+| Infer the correct contact model from arbitrary serialized geometry | mathematically contingent | Ambiguous near-contacts and underdetermined models must remain explicit failures |
+| Prove global optimality from a feasible witness | separate mathematics | Requires a matching verified lower bound; no generic witness conversion supplies it |
 
 ### The proof lane—built and producing theorems
 
-This is the lane that moved furthest in the most recent rounds: it now carries exact
-results, not only instruments.
+This is the lane that moved furthest in the recent rounds: it carries formal results,
+not only instruments.
 
 | Tool | What it establishes |
 | --- | --- |
@@ -422,9 +478,9 @@ results, not only instruments.
 | [`cases.n5.angle_sheet`](cases/n5/angle_sheet.py) | That face lies in an exact two-parameter angle-and-slide sheet of optima (exp-034) |
 | [`cases.n5.tangent_cones`](cases/n5/tangent_cones.py) | Complete active first-order systems admit one displayed non-sheet direction (exp-035) |
 | [`cases.n5.second_order_obstruction`](cases/n5/second_order_obstruction.py) | That displayed direction is excluded from the true Bouligand tangent cone (exp-036) |
-| [`cases.n5.tangent_inventory`](cases/n5/tangent_inventory.py) | Both owner branches have the same complete first-order V-representation at A, the interior, and B (exp-037) |
-| [`cases.n5.fixed_angle_polytope`](cases/n5/fixed_angle_polytope.py) | Four release classes have exact paths in one connected five-dimensional cell-local LP-optimal position polytope, with positive pathwise first-order stresses (exp-038) |
-| [`cases.kingbird29.verify_svg`](cases/kingbird29/verify_svg.py) | High-precision (160-digit) numerical reconstruction of the `n = 29` record source, refuting H-024’s three-class claim. Not an exact optimality certificate—the retained SVG is numerical, and exp-012 says so (exp-012) |
+| [`cases.n5.tangent_inventory`](cases/n5/tangent_inventory.py) | Both owner branches have the same complete first-order V-representation at A, the interior, and B (exp-038) |
+| [`cases.n5.fixed_angle_polytope`](cases/n5/fixed_angle_polytope.py) | Four release classes have exact paths in one connected five-dimensional cell-local LP-optimal position polytope, with positive pathwise first-order stresses (exp-039) |
+| [`cases.kingbird29.verify_svg`](cases/kingbird29/verify_svg.py) | A 160-digit numerical reconstruction of the `n = 29` SVG, rejecting H-042’s serialization-scoped three-class claim (exp-037). H-024’s formal prerequisite remains unresolved; the SVG is not a formal feasibility or optimality certificate |
 
 **Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
 LP duals as unavoidable-set generators, and any Lean formalization.
@@ -441,7 +497,8 @@ re-measuring and builds only what the profile names.
 
 ### Reading the gate
 
-`packing-validate` runs thirty-one steps.
+`packing-validate` runs the steps registered by its validation table;
+`packing-validate --list` prints the authoritative current inventory.
 A green gate means every *built* component behaves as its checks describe; it says
 nothing about the unbuilt ones, and it does not upgrade an inadmissible output.
 
@@ -458,6 +515,61 @@ artifacts, and the beads.
 Three carry controlled multiple senses—**exploration**, **cell**, and **quench**—and for
 each, the rule for which form to write is stated with the definition.
 Nothing below is a synonym for anything else below.
+
+### Assurance, Methods, and Claims
+
+**Verified means formal throughout this project.** An exact check, rigorous certificate,
+or complete proof must decide the scoped claim and discharge its preconditions.
+Every finite-precision calculation is **numerically checked**, regardless of its digit
+count or tolerance. A source statement not established through either path is
+**reported**.
+
+| Assurance | Meaning | Formal conclusion? |
+| --- | --- | --- |
+| `reported` | A named source states the claim; the record preserves it without endorsement | no |
+| `numerically-checked` | A finite calculation checked the declared predicates under recorded arithmetic, precision, rounding, and tolerance | no |
+| `verified` | An exact check, rigorous certificate, or complete proof decides the claim and all assumptions are discharged | yes |
+
+Assurance does not encode the method:
+
+| Method | Required record | Assurance it can support |
+| --- | --- | --- |
+| `numerical-f64` | implementation and tolerance; binary precision is 53 bits | `numerically-checked` |
+| `numerical-multiprecision` | implementation, actual decimal digits or binary bits, rounding, and tolerance | `numerically-checked` |
+| `interval-certified` | outward-rounding implementation, input boxes, certificate, and replay | `verified` |
+| `exact-algebraic` | rational or algebraic representation, field preconditions, certificate, and replay | `verified` |
+| `published-proof` | complete source, theorem, scope, pinpoints, and assumptions | external `verified` |
+| `proof-audited` | the published-proof record plus an independent audit | `verified` |
+| `proof-assistant-checked` | proof object, theorem statement, kernel and toolchain, and replay | `verified`, with the smaller trust kernel named |
+
+“Arbitrary precision” may describe a library; a result states the precision actually
+used. `numerical-multiprecision` at 30, 100, or 300 digits remains numerical, and a
+tolerance of `1e-100` remains a tolerance.
+Conversely, a rigorous interval certificate can be formal without listing one symbolic
+coordinate, because outward rounding proves the claim for every point in its enclosure.
+
+Reader views also name **origin** and **independence**. A complete published proof may
+be formally valid without a local audit.
+An external certificate and a repository replay remain separate evidence records.
+Running the generator’s own checker is not an independent implementation.
+A page that says “interval verified” but publishes no certificate or replayable checker
+stays reported with a `public-certificate-missing` blocker.
+
+Every formal conclusion names its object:
+
+| Claim | Verification establishes | It does not establish |
+| --- | --- | --- |
+| witness feasibility | The supplied placement contains `n` non-overlapping unit squares | best-known status or optimality |
+| upper bound | `s(n) ≤ u`, normally from a verified feasible witness | a matching lower bound |
+| lower bound | `s(n) ≥ l` under the proof’s stated scope | a construction at `l` |
+| exact value | verified upper and lower bounds coincide exactly | uniqueness or rigidity |
+| derived structure | the named property, such as an orientation-class count | feasibility unless that is an explicit prerequisite |
+
+Thus a verified feasible placement is a formal upper bound, not a verified record
+optimum. The frontier may call the optimum proved only when its verified lower and upper
+lanes meet. “Exact” should qualify the object—exact coordinates, predicate, bound, or
+proof step. An exact formulation passed to a floating solver still produces a numerical
+result.
 
 ### Work Units and Records
 
@@ -484,13 +596,14 @@ The open `series-000` predates strict application of this rule; its
 [series note](campaign/series/series-000-smoke-and-calibration/README.md#current-scope-and-safe-reading)
 states the safe reading, and `think-i08r` owns the persisted-record migration.
 
-**Agent session.** One bounded interval of orchestrated work under an overall goal,
-budget, and stop conditions.
-A session may contain several workflow phases and may produce zero, one, or many
-experiments. It is a handoff record, not a scientific measurement.
+**Agent session.** One bounded interval of orchestrated work.
+It may produce zero, one, or many experiments.
+Most routine sessions need no separate record; `session-NNN` is the versioned recovery
+and handoff artifact used when the escalation criteria apply, not a scientific
+measurement.
 
-**Workflow phase.** One contiguous interval inside an independently tracked session with
-one workflow, one primary focus, one objective, and one clock.
+**Workflow phase.** One contiguous interval inside a versioned agent session with one
+workflow, one primary focus, one objective, and one clock.
 A focus-only change starts another phase with the same workflow; a changed purpose
 starts a phase under a different workflow.
 
@@ -652,7 +765,7 @@ Exp-035 derives the full active first-order systems at both endpoints and one in
 point; every owner branch admits one exact direction outside that sheet.
 Exp-036 proves that displayed direction is not a true Bouligand tangent: both possible
 nearby owner axes have strict exact second-order obstructions.
-Exp-037 certifies the complete branchwise linearization inventory: endpoint quotients
+Exp-038 certifies the complete branchwise linearization inventory: endpoint quotients
 have eight rays, interior quotients have six, and both owner branches coincide.
 Transverse and mixed nonlinear realization remains unclassified.
 This is not a local-isolation theorem, a proof of a five-dimensional family, or a
@@ -670,7 +783,7 @@ plan.
 ### The measurements
 
 **Gap.** Always `best_side − standing_best`, in units of the container side, and always
-signed. A *negative* gap below the `exact` tier is solver noise, never a discovery.
+signed. A *negative* gap from a numerical method is solver noise, never a discovery.
 
 **Standing best.** The best side ever published for that `n`, read from
 [`frontier/`](frontier/README.md)—an upper bound, and for the open cases not known to be
@@ -696,13 +809,13 @@ A round claiming `reached_basin` must say which it means.
 Machine-independent, unlike wall clock or moves, which is why proposer comparisons are
 denominated in it. Tiers S/M/L are `1e9`/`1e11`/`1e13`.
 
-**Evidence tier.** What a number is permitted to claim, fixed by how it was produced:
-`f64_screen` (a candidate was proposed), `polished` (a quench endpoint candidate was
-valued to solver precision—a floor of about `1e-11` in the side, [D-021](defects.md)),
-`exact` (validity decided over the packing’s own number field).
-**`beat_record: true` may be written only at `exact`.** Never extrapolate across a tier
-boundary. The tiers are set out in full under
-[Theoretical Results](#theoretical-results).
+**Assurance.** What the evidence may conclude: reported, numerically checked, or
+verified. Assurance is separate from method, actual precision, tolerance, and origin.
+The full contract is under
+[Assurance, Methods, and Claims](#assurance-methods-and-claims).
+**`beat_record: true` requires verified assurance.** A floating LP endpoint is
+numerically checked and remains subject to the `1e-11` side floor in
+[D-021](defects.md).
 
 ### Not used here
 
@@ -841,8 +954,10 @@ Both failure modes are demonstrated by
 
 The fix is representational rather than numerical: express the configuration in the real
 algebraic number field it actually lives in, where equality is decidable.
-That is what `sqpack` does, and it is why the evidence tiers below make `exact` the only
-tier permitted to say **record**.
+That is what the exact `sqpack` path does.
+A rigorous outward-rounded interval certificate can also be formal; a finite point
+evaluation cannot. This is why the campaign permits `beat_record: true` only under
+verified assurance.
 
 This is not an abstract concern.
 The same failure reappeared *inside the refiner* eight rounds later: an LP solver at its
@@ -862,7 +977,7 @@ Where the program has spent effort, and what came of it.
 | **11** | **open** | `3.87708359…` (Trump 1979) | **target** | Exact verification over `ℚ(u)` (**T-1**); the cell decomposition (**T-2**), corner (**T-3**), and repaired lower-bound certificate (**T-4**); nine rounds. Search remains `≈ 6e-02` short, exp-013 proves Trump’s exact pose locally isolated, exp-016 rejects Stromquist’s printed proof, and exp-017 independently restores its numerical bound |
 | **12** | open; `4` believed optimal | `4` | **open-case calibration** | Two rounds. Returns exactly `4.0` on all five seeds, which is baseline evidence rather than a known-answer guard. Also where the search and proof lanes are planned to meet |
 | 16 | proved, `4` | `4` | proved not-below control | The valid replacement for the old `n=12` guard: any reported side below `4` is known to be invalid |
-| 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) reports `5.0`, the trivial `5×5` grid, on all five f64-screen seeds |
+| 17 | open | `4.67553009…` (Bidwell 1998) | mechanism-matched calibration | The nearest case whose record uses genuinely oblique structure—tilts of `0°`, `+39.80496°`, and `−36.62379°`. One round: [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) reports `5.0`, the trivial `5×5` grid, on all five binary64 screening seeds |
 | 61, 78, 97 | open, `m² − 3` | `8`, `9`, `10` (grids) | opportunistic slot | The narrowest gaps in the table. An analytic Cleemann-style attempt at `arctan(3/4)` is registered and **not yet made** |
 | 1–100 | 35 proved, 65 open | — | the corpus | One schema-validated artifact per case in [`frontier/`](frontier/README.md); 63 of the 65 open cases are bounded below by Nagamochi’s general theorem |
 
@@ -883,9 +998,9 @@ problem.
 instance cell testing record-*finding* rather than machinery, and it was the last one
 never run.
 [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md)
-ran it: the annealer reports `5.0` on all five f64-screen seeds—the trivial `5×5`
-grid—against Bidwell’s `4.67553`, a gap of `+0.324`. The retained final states do not
-leave the grid basin.
+ran it: the annealer reports `5.0` on all five binary64 screening seeds—the trivial
+`5×5` grid—against Bidwell’s `4.67553`, a gap of `+0.324`. The retained final states do
+not leave the grid basin.
 
 That scopes one failure at a second cell: this implementation, five seeds, and the
 registered `1e8` moves per chain did not reach Bidwell’s oblique record at `n = 17`. The
@@ -896,15 +1011,11 @@ oblique records as a class
 
 ## Theoretical Results
 
-Status is recorded on the same tiers the campaign uses for measurements, so a claim’s
-evidential standing is never ambiguous.
-
-| Tier | Meaning |
-| --- | --- |
-| **proved** | A mathematical argument, checkable by reading |
-| **exact** | Decided by exact arithmetic over the relevant number field; a proof, mechanised |
-| **polished** | An LP cell optimum at *solver* precision—about `1e-11` in the side, and no better ([D-021](defects.md), open) |
-| **verified (f64)** | Computed in floating point; strong evidence, not a proof |
+Results state their assurance and basis rather than compressing both into a tier name.
+`verified` below is formal; numerical rows say `numerically checked` and name their
+method.
+A mathematical proof may be external, locally audited, or replayed here, and that
+origin remains visible in the frontier evidence.
 
 ### Results relied on from the literature
 
@@ -930,17 +1041,17 @@ listed here so the dependencies of this program are explicit.
 
 ### Results established here
 
-| Id | Statement | Tier | Where it lives | Reproduce with |
+| Id | Statement | Assurance or basis | Where it lives | Reproduce with |
 | --- | --- | --- | --- | --- |
-| **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **exact** | `sqpack` | `uv run --frozen python -m cases.trump11.verify_exact` |
-| **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated at **polished** | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack.research.quench`](src/sqpack/research/quench.py) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
-| **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **verified (f64)** | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
-| **T-4** | The source-distinct replacement `G=(.8,1.85) → G'=(.79,1.85)` restores the complete Figure 13 localization, A-triple forcing, repaired Figure 14 unavoidability, and `3+9` capacity chain, proving `s(11) ≥ 2 + 4/√5` | **exact** | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md), confirmed by [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | `uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json` |
+| **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **verified** (`exact-algebraic`, replayed here) | `sqpack` | `uv run --frozen python -m cases.trump11.verify_exact` |
+| **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated numerically | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack.research.quench`](src/sqpack/research/quench.py) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
+| **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **numerically checked** (`numerical-f64`) | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
+| **T-4** | The source-distinct replacement `G=(.8,1.85) → G'=(.79,1.85)` restores the complete Figure 13 localization, A-triple forcing, repaired Figure 14 unavoidability, and `3+9` capacity chain, proving `s(11) ≥ 2 + 4/√5` | **verified** (`exact-algebraic`, replayed here) | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md), confirmed by [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | `uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json` |
 
 **T-1** is also an independent check of the published record: the 33 digits on the
 *Squares in Squares* record page agree with the value computed here from the field.
-No other public tool is known to check a record packing exactly, and the 14 zero-gap
-pairs are precisely the ones no floating-point verifier can decide.
+The 14 zero-gap pairs are precisely the ones a finite point evaluation cannot decide as
+exact contacts.
 
 **T-2** originated in the standing review as observation R-2 and has now been
 implemented twice, independently—see below for why that matters.
@@ -1116,8 +1227,13 @@ defect. Three corrections, recorded in the
   output; HiGHS returns floats.
   Exact output needs an exact LP over the cell’s certified rational or algebraic
   coefficients, which is unbuilt and tracked.
-- **The `polished` tier means exact within a cell to solver precision.** Algebraic
-  exactness stays with `sqpack`, and every promotion routes through it.
+- **A finite-precision LP endpoint remains a numerical result.** Earlier records called
+  this precision stage `polished`; that local label was retired because it says neither
+  which arithmetic ran nor what precision was achieved.
+  The method is `numerical-f64`, its actual tolerance and residual must be recorded, and
+  it is only numerically checked.
+  Formal promotion requires a separate exact or rigorous certificate that `sqpack` can
+  replay.
 
 ### Thirty-four dimensions become one
 
@@ -1356,11 +1472,14 @@ and is the campaign working as designed.
 The full contract is the [runbook](campaign/README.md); the parts that matter for
 reading the results below:
 
-- **Evidence tiers**, and a number’s tier decides what it may claim: `f64_screen` (a
-  candidate was proposed), `polished` (a quench endpoint candidate was valued to solver
-  precision), `exact` (validity, and only here a record).
-  Basin or terminal-component identity requires additional evidence beyond the tier
-  label. **`beat_record: true` may only be written at `exact`.**
+- **Assurance, method, and arithmetic are separate.** A result is `reported`,
+  `numerically-checked`, or `verified`; only the last is formal.
+  The method may be `numerical-f64`, `numerical-multiprecision`, `interval-certified`,
+  `exact-algebraic`, or a proof method.
+  Numerical results record the precision, rounding policy, tolerance, and observed
+  margins actually used.
+  Basin or terminal-component identity requires its own evidence.
+  **`beat_record: true` may only be written for a verified result.**
 - **Four instance cells with different jobs**: `n = 10` positive control, `n = 11`
   target, `n = 12` open-case calibration, `n = 17` mechanism-matched calibration.
   A guard breach rejects a round regardless of outcome, because it means the instrument
@@ -1379,9 +1498,9 @@ reading the results below:
 
 ## The Hypothesis Registry
 
-Forty-two claims or open questions are codified as artifacts.
+Each claim or open question is codified as an artifact.
 The standing review’s complete H-001 through H-015 block is now in the registry; later
-ids carry campaign-native claims and seven explicit open questions.
+ids carry campaign-native claims and explicit open questions.
 The [ledger](campaign/ledger.md) is generated from the artifacts and is the current
 view; this section is the reading of it.
 
@@ -1409,9 +1528,9 @@ view; this section is the reading of it.
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 0 | — |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, and known sheet lifts? | 5 | 95m agent, 2.06s wall |
-| [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | **refuted** | Verified record packings through `n=30` use at most three angle classes; exp-012 verifies six at `n=29` | 1 | 12m agent, 0.158s wall |
-| [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 6 | 115m agent, 6.11s wall |
+| [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | unresolved | Formally supported record packings through `n=30` use at most three angle classes; the retained `n=29` SVG has no formal witness | 1 | 12m agent, 0.158s wall |
+| [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of reported record configurations are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
 | [H-027](campaign/hypotheses/H-027-record-angle-cones.md) | blocked | The imported `n=11,17` record cells have positive class-angle directional cones | 0 | — |
 | [H-028](campaign/hypotheses/H-028-reference-cell-angle-sheets.md) | blocked | Each published point is the sole refined local minimum on its declared reference-cell angle sheet, with a boundary margin | 0 | — |
@@ -1426,9 +1545,10 @@ view; this section is the reading of it.
 | [H-037](campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | open question | What is the asymptotic waste exponent between `1/2` and `3/5`? | 0 | — |
 | [H-038](campaign/hypotheses/H-038-record-number-fields.md) | open question | Which exact fields and elimination mechanisms occur in verified records? | 0 | — |
 | [H-039](campaign/hypotheses/H-039-s12-proof-frontier.md) | open question | Can the lower bound for `s(12)` be improved and ultimately closed at four? | 0 | — |
-| [H-040](campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | blocked | Active-cell neighbor walks beat multistart in new verified cells per LP solve | 0 | — |
+| [H-040](campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | blocked | Active-cell neighbor walks beat multistart in new validated cells per LP solve | 0 | — |
 | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **confirmed** | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 1 | 90m agent, 0.70s wall |
-| [H-042](campaign/hypotheses/H-042-trump-incidence-rigidity-cores.md) | blocked | Every one of the 128 derivative-distinct fixed-side branches at Trump’s witness has a proper incidence rigidity core | 0 | — |
+| [H-042](campaign/hypotheses/H-042-n29-numerical-angle-classes.md) | **refuted** | The retained `n=29` SVG serialization has at most three numerical angle classes under the declared 160-digit regime | 1 | 15m agent, 0.165s wall |
+| [H-043](campaign/hypotheses/H-043-trump-incidence-rigidity-cores.md) | blocked | Every one of the 128 derivative-distinct fixed-side branches at Trump’s witness has a proper incidence rigidity core | 0 | — |
 
 ### Confirmed
 
@@ -1536,16 +1656,15 @@ Exp-035 derives the complete active first-order systems at both endpoints and on
 interior point and finds an exact direction outside that sheet in every owner branch;
 exp-036 excludes that displayed direction from the true Bouligand tangent cone by exact
 second-order inequalities in both owner branches.
-Exp-037 completes the first-order inventory with identical owner-branch
+Exp-038 completes the first-order inventory with identical owner-branch
 V-representations, eight endpoint quotient rays, six interior quotient rays, and both
 derived face vectors.
 Transverse and mixed nonlinear realization remains open.
 
 ## Experiments Conducted
 
-There are 38 rounds registered in `series-000`: 37 terminal rounds and the preregistered
-exp-038 confirmatory run.
-They record 918 agent-minutes and 28.3 wall-minutes so far.
+There are 39 terminal rounds registered in `series-000`. They record 933 agent-minutes
+and 28.3 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1554,16 +1673,18 @@ certificate, the exact terminal-component known-answer checker, and the exact `n
 fixed-angle face, angle-sheet, full-angle tangent, and second-order obstruction
 checkers, plus the exact branchwise tangent-inventory checker.
 
-No record-search round has been run at the `exact` tier, so **no result below claims a
-new record**. Exp-012 is an exploratory reconstruction of a published record witness;
-its six-class determination does not certify that witness as exact or optimal.
+No record-search round has produced verified assurance, so **no result below claims a
+new record**. Exp-012 is an exploratory reconstruction of a published serialization and
+is unresolved against H-024’s formal prerequisite.
+Exp-037 separately rejects H-042’s numerical three-class claim; neither result certifies
+the source geometry or optimality.
 
 ![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
 
-*The retained `n = 29` witness is reconstructed at 160 decimal digits and passes all 406
-pair checks. The figure therefore says “verified construction,” not “exact” or “proved
-optimum.” Its 29 squares also exercise deterministic reuse of the fixed 20-color cool
-palette.*
+*The roughly 100-digit retained `n = 29` witness is evaluated at 160 decimal digits of
+working precision and passes all 406 pair checks at tolerance `1e-80`. The figure
+therefore says “numerically checked,” not “verified,” “exact,” or “proved optimum.”
+Its 29 squares also exercise deterministic reuse of the fixed 20-color cool palette.*
 
 ### Roll-up
 
@@ -1582,8 +1703,8 @@ archive beside it.
 | [exp-008](campaign/series/series-000-smoke-and-calibration/experiments/exp-008-quench-bracket-n10.md) | 10 | positive control | H-002 | quench 0.2.0 | `4.507e-03 → 1.3323e-15` | **accepted** |
 | [exp-009](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 11 | target | H-002 | quench 0.2.0 | `6.999e-02 → 6.2894e-02` | rejected |
 | [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 11 | target | H-019 | quench 0.2.0 | slopes `0.1747` / `0.3841`, ratio `2.198` | **accepted** |
-| [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | reported `5.0` on all five f64-screen seeds, gap `+3.245e-01` | rejected |
-| [exp-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | 29 | target | H-024 | SVG reconstruction + SAT | six classes; minimum class gap `0.296067°` | **rejected** |
+| [exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md) | 17 | mechanism-matched | H-020 | annealer | reported `5.0` on all five binary64 search seeds, gap `+3.245e-01` | rejected |
+| [exp-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-012-h-024-n29-angle-classes.md) | 29 | target | H-024 | SVG reconstruction + SAT | six classes numerically; formal prerequisite missing | **unresolved** |
 | [exp-013](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md) | 11 | target | H-026 | exact branchwise linearization | 128/128 exact zero-cone certificates | **accepted** |
 | [exp-014](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) | 3 | positive control | H-032 | exact configuration space | two labelled circles → one quotient interval | **accepted** |
 | [exp-015](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | 4 | positive control | H-032 | exact configuration space | 24 labelled points → one quotient point | **accepted** |
@@ -1608,8 +1729,9 @@ archive beside it.
 | [exp-034](campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md) | 5 | target | H-023 | exact angle-and-slide sheet | dimension at least two; four fixtures and four controls pass | **accepted** |
 | [exp-035](campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md) | 5 | target | H-023 | exact full-angle active systems | non-sheet direction at A/interior/B; six controls pass | **accepted** |
 | [exp-036](campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md) | 5 | target | H-023 | exact second-order branch obstruction | displayed direction excluded at A/interior/B; six controls pass | **accepted** |
-| [exp-037](campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md) | 5 | target | H-023 | exact branchwise linearization-cone inventory | identical owner branches; endpoint/interior rays `8/6/8`; ten controls pass | **accepted** |
-| [exp-038](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md) | 5 | target | H-023 | exact fixed-angle optimal-position polytope | dimension 5; 12 sharp paths; ten controls pass | **accepted** |
+| [exp-037](campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-042-n29-numerical-angle-classes.md) | 29 | target | H-042 | multiprecision SVG reconstruction | six classes; minimum class gap `0.296067°` | **rejected** |
+| [exp-038](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md) | 5 | target | H-023 | exact branchwise linearization-cone inventory | identical owner branches; endpoint/interior rays `8/6/8`; ten controls pass | **accepted** |
+| [exp-039](campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md) | 5 | target | H-023 | exact fixed-angle optimal-position polytope | dimension 5; 12 sharp paths; ten controls pass | **accepted** |
 
 ### Cost and provenance
 
@@ -1651,10 +1773,11 @@ archive beside it.
 | exp-034 | one exact parameter sheet + four controls | 0.27 s | 10 m | criterion | `329b848` |
 | exp-035 | six exact owner matrices + six controls | 0.28 s | 20 m | criterion | `aa63cf4` |
 | exp-036 | two exact branch obstructions + six controls | 0.21 s | 20 m | criterion | `f2d2e53` |
-| exp-037 | six exact matrices + ten controls | 1.06 s | 30 m | criterion | `b8d0104` |
-| exp-038 | one exact polytope + ten controls | 4.047 s | 20 m | criterion | `27b999e` |
+| exp-037 | one SVG, 406 pairs | 0.165 s | 15 m | criterion | `5384209` |
+| exp-038 | six exact matrices + ten controls | 1.06 s | 30 m | criterion | `b8d0104` |
+| exp-039 | one exact polytope + ten controls | 4.047 s | 20 m | criterion | `27b999e` |
 
-### What the 38 rounds jointly establish
+### What the 39 rounds jointly establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only
@@ -1679,10 +1802,10 @@ Exp-035 then retains six exact active-system matrices across A, the interior, an
 verifies a non-sheet direction against every row.
 Exp-036 proves that displayed direction cannot be a nonlinear path tangent: the only two
 nearby pair `(3,4)` owner-axis branches have exact second-order obstruction margins.
-Exp-037 then certifies the complete first-order inventory and both pointed-quotient face
+Exp-038 then certifies the complete first-order inventory and both pointed-quotient face
 vectors. This strict linearized-versus-true-tangent gap and finite inventory do not
 classify transverse or mixed nonlinear realization or assign a component.
-Exp-038 exactly continues four release classes through twelve sharp fixed-angle paths in
+Exp-039 exactly continues four release classes through twelve sharp fixed-angle paths in
 one connected five-dimensional cell-local LP-optimal position polytope.
 Both owner branches carry positive structurally derived first-order stresses on those
 paths. This does not make every point of the polytope stationary, certify an A-to-B
@@ -1793,40 +1916,40 @@ table above.
   because the first fix left no regression check).
   Their numbers stand; the ledger’s sweep coverage misreported them until the successor
   rounds split the cells.
-- **[D-021](defects.md) is contained.** The `polished` tier has a noise floor of about
-  `1e-11` in the side, and eight rounds sit on it.
-  Nothing at that tier may claim a difference smaller than the floor.
+- **[D-021](defects.md) is contained.** Floating-point LP refinement has a noise floor
+  of about `1e-11` in the side, and eight rounds sit on it.
+  Those numerical results may not claim a difference smaller than the floor.
 
 ## The Defect Record
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 321 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 325 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 74 | asserted something false about the mathematics |
-| validity | 81 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 122 | recorded something its own evidence contradicts |
-| robustness | 35 | did not finish, or finished only by luck |
+| soundness | 76 | asserted something false about the mathematics |
+| validity | 82 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 121 | recorded something its own evidence contradicts |
+| robustness | 37 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Sixty-one of the seventy-four soundness defects pointed in the *flattering*
+**Sixty-three of the seventy-six soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty defects in 321, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught forty-two defects in 325, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. Every gate-detected entry is a bookkeeping or robustness defect, found by
-contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
-That is the pattern, not an exception: gates are good at the mechanical classes and have
-never once caught the mathematics being wrong.
+*surprised*. Gate-detected entries here are mechanical process, implementation, or
+test-validity failures, found by contiguity, integration, mutation-anchor,
+reconciliation, or known-answer checks.
+The supported distinction is that the gate has never caught the mathematics being wrong.
 
 107 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
@@ -1854,11 +1977,11 @@ validity open; D-045 tracks criterion-specific evaluators; D-046 tracks the inco
 runner state machine; D-047 closes contact-key reflection; D-048 retains unstable
 tolerance/equality semantics; D-049 tracks factorial canonicalization; D-050 and D-051
 separate observation promotion from regime-safe merging; D-052 narrows quench
-stationarity; D-053 protects the generic exact-field boundary; D-054 separates budgets
-and final-best records from trajectory claims; D-055 and D-056 correct the angle and
-`m²-3` theorems; D-057 scopes H-020; D-058 reconciles the local handover; D-059 keeps
-the golden oracle/characterization split open; D-060 restores producer-level strict
-checks; and D-061 preserves evidence for unrecognised endpoints.
+stationarity; D-053 now enforces the generic exact-field preconditions; D-054 separates
+budgets and final-best records from trajectory claims; D-055 and D-056 correct the angle
+and `m²-3` theorems; D-057 scopes H-020; D-058 reconciles the local handover; D-059
+keeps the golden oracle/characterization split open; D-060 restores producer-level
+strict checks; and D-061 preserves evidence for unrecognised endpoints.
 D-062 catches the executable `n=12` rejection that survived the first D-042 correction;
 D-063 removes a false contrapositive from the rigidity premise; and D-064 keeps a
 read-only runner preflight executable inside the gate that mutation-tests it without
@@ -1904,14 +2027,14 @@ scientific budgeting, stale review status, the missing targeted edit loop, unbou
 checker children, and a nonunique mutation-control anchor, followed by a lint floor that
 accepted type-checker warnings and a fixed-cell solver that does not expose whether it
 settled or hit its cap ([D-132](defects.md)), then the search-only determination
-vocabulary that could not record the H-024 result, the omitted `n=29` source provenance
-that the falsifier exposed, the roll-up’s obsolete blanket claim about exploratory
-record evidence, the distinction between a branch linearization and a true Bouligand
-motion, and a certificate replay that did not require one-to-one branch coverage.
-The next tranche, D-139 through D-171, records the missing hard-square topology
-literature, a stale closed-family contact claim, exact-moduli integration errors,
-Stromquist source transcription and proof-chain mistakes, stale campaign effort, the
-paper’s extraneous Lemma 4 root, and the escaping Figure 14 box.
+vocabulary that could not represent H-024’s missing formal prerequisite, the omitted
+`n=29` source provenance that the falsifier exposed, the roll-up’s obsolete blanket
+claim about exploratory record evidence, the distinction between a branch linearization
+and a true Bouligand motion, and a certificate replay that did not require one-to-one
+branch coverage. The next tranche, D-139 through D-171, records the missing hard-square
+topology literature, a stale closed-family contact claim, exact-moduli integration
+errors, Stromquist source transcription and proof-chain mistakes, stale campaign effort,
+the paper’s extraneous Lemma 4 root, and the escaping Figure 14 box.
 D-153 records that the three 1984 memoranda were directly hosted while the source ledger
 called them unavailable; D-154 and D-155 close exact-field metadata and cross-platform
 record gaps in the first uncommitted H-010 checker.
@@ -1971,18 +2094,15 @@ briefly changed D-034 instead of D-194. D-197 records the concurrent checkout ca
 the exp-036 commit banner; the isolated checker commit was moved to the campaign branch
 and the other branch ref restored before push or target execution.
 
-D-289 through D-293 record the H-042 pilot’s remaining validity, robustness, and
+D-289 through D-293 record the H-043 pilot’s remaining validity, robustness, and
 provenance gaps. D-289 covers row-class normalization in the cone oracle; D-290 keeps
 certificate replay open; D-291 covers the branch-0 golden’s treatment of valid future
 refutations; D-292 keeps regenerated branch indices bound to the retained exp-013
 universe; and D-293 keeps provenance self-tests from claiming completeness without exact
 mappings.
 
-Both claims are computed from `defects.yaml` rather than written down, so neither can
-drift from the log it describes ([D-028](defects.md)).
-
-107 fixes left no regression check behind, and that list has already predicted many
-recurrences. The
+The generated defect view owns the aggregate counts; this narrative retains the causal
+history. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
 relative to what they govern, a discovery treated as a defect until an independent layer
@@ -1993,7 +2113,8 @@ agrees, and new components inheriting the perimeter—that apply to code not yet
 The middle tier is built and works within the explicit boundaries above.
 Two instruments now agree on the cell decomposition to `4.4e-16` and on the corner’s
 slopes to three decimals.
-Polish is solved on both proved instance cells to machine precision.
+Floating-point LP refinement reaches its declared solver floor on both proved instance
+cells.
 The current hypothesis-status aggregate is reconciled from the generated ledger in
 [Current research readiness](#current-research-readiness), and the campaign has a defect
 log that has already predicted a recurrence.
@@ -2052,15 +2173,16 @@ omission. Two primary hard-square configuration-space papers are now archived; t
 Plakhta paper remains explicitly publisher-blocked, so no novelty language is permitted
 until its scope is checked from a lawful primary copy.
 
-**The first fast rotation is cheap and high-information.** Exp-012 refuted H-024,
-exp-013 confirmed H-026 and locally isolated Trump’s pose, and exp-014/015 solved the
-exact `n=3,4` quotient controls in 1.28 wall seconds.
+**The first fast rotation is cheap and high-information.** Exp-012 exposed that H-024’s
+formal prerequisite was missing, while exp-037 separately rejected the corresponding
+numerical claim H-042. Exp-013 confirmed H-026 and locally isolated Trump’s pose, and
+exp-014/015 solved the exact `n=3,4` quotient controls in 1.28 wall seconds.
 Exp-033 then certified the `n = 5` equal-side pair’s exact fixed-angle face in 0.24 wall
 seconds of generation plus replay.
 Exp-034 through exp-036 then certify an exact angle-and-slide sheet, a non-sheet
 first-order direction, and an exact second-order obstruction to that displayed direction
 in 0.76 further wall-seconds.
-Exp-037 adds the complete branchwise first-order inventory in 1.06 wall-seconds.
+Exp-038 adds the complete branchwise first-order inventory in 1.06 wall-seconds.
 Next certify the discovered fixed-angle optimal-position polytope, test transverse and
 mixed nonlinear realization, bound clearance between the unequal-side rows, and hide the
 UnitSquare `n = 68,69` children for the first parent-surgery test.
@@ -2132,10 +2254,10 @@ historical exp-007/008 round-level wall times disagree with retained per-call du
 Price the first maps from raw calls or a current receipt until those aggregates are
 reconstructed.
 
-**One contained defect constrains every polished number.** [D-021](defects.md): the
-solver floor is about `1e-11` in the side, so the `polished` tier cannot resolve finer.
-The general fix is an exact LP over certified rational or algebraic coefficients; the
-rational special case alone is not a universal remedy.
+**One contained defect constrains every floating-point LP result.** [D-021](defects.md):
+the solver floor is about `1e-11` in the side, so this numerical method cannot resolve
+finer. The general fix is an exact LP over certified rational or algebraic coefficients;
+the rational special case alone is not a universal remedy.
 
 **The destructive negative-control path is closed.** [D-035](defects.md): `negctl` now
 mutates bounded private source snapshots, so a killed control can abandon only temporary

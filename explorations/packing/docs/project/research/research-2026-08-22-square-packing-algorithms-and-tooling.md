@@ -1,6 +1,6 @@
 # Research: Algorithms and Tooling for Square Packing
 
-**Date:** 2026-08-22 (last updated 2026-08-24)
+**Date:** 2026-08-22 (last updated 2026-08-25)
 
 **Author:** Claude (agent), for samanthadrakova@gmail.com
 
@@ -829,18 +829,20 @@ The state of proofs, stated completely (which the commonly cited summaries are n
    needle-like these optima are — and they exist only because one person chose to
    publish them.
 
-6. **The record data format is a liability.** Exact algebraic descriptions exist for
-   most packings but are embedded as Mathematica expressions in XML comments inside
-   SVGs, with no schema, no coordinate list, and no machine-readable link between a
-   packing and its minimal polynomial.
-   Independent verification is possible — this document does it for `n = 11` — but
-   requires reverse-engineering the layout by hand, once per packing.
+6. **The source record data format remains a liability.** Exact algebraic descriptions
+   exist for most packings but are embedded as Mathematica expressions in XML comments
+   inside SVGs, with no schema, no coordinate list, and no machine-readable link between
+   a packing and its minimal polynomial.
+   This repository’s `Witness/v1` supplies a clean interchange and exact checker once a
+   packing has been normalized, but importing much of the SVG corpus still requires
+   case-specific source interpretation.
 
-7. **Nothing about this problem has been formalised, and there is nothing yet to
-   formalise.** The proof assistants are ready (Flyspeck, and the Lean sphere-packing
-   project finishing dimensions 8 and 24 in 2026); the verified interval arithmetic is
-   ready (`Coq.Interval`, Isabelle `approximation`). What is missing is an informal
-   computer-assisted proof of any square-packing case to serve as the target.
+7. **Proof-assistant formalization remains open, but there are now concrete targets.**
+   The proof assistants are ready (Flyspeck, and the Lean sphere-packing project
+   finishing dimensions 8 and 24 in 2026), as is proof-producing interval arithmetic
+   (`Coq.Interval`, Isabelle `approximation`). This repository now has exact algebraic
+   upper-bound witnesses and exp-017’s exact lower-bound certificate.
+   Neither has been encoded in a proof assistant.
 
 ## Comparison Matrix
 
@@ -849,7 +851,7 @@ Tooling by task, with the honest verdict for this specific problem.
 | Task | Best open-source option | Best option overall | Gap |
 | --- | --- | --- | --- |
 | Approximate validity check | SAT written directly, or `jagua-rs` | same | none; microseconds per pair, and linear in `n` once bucketed |
-| Exact validity check | CGAL exact kernels + `msolve`/FLINT, assembled by hand | same | **no purpose-built tool exists** |
+| Exact validity check | this repository’s `Witness/v1` checker for rational and supported real-algebraic witnesses | CGAL exact kernels + `msolve`/FLINT for broader systems | automatic corpus import and general interval-to-existence certification remain open |
 | Record search | none | Schadt/Ellsworth GPU annealer (closed) | **no open equivalent** |
 | General search | SCIP 10 + Farkas non-overlap | FICO Xpress, Gurobi | competitive only to `n ≈ 16` |
 | Nesting-style search | `jagua-rs` + `sparrow`, `packingsolver` | same | wrong objective and tolerance regime |
@@ -868,16 +870,13 @@ language boundary. Read that document for *what to build first*; read this secti
 For anyone wanting to work on this computationally, in rough order of value per unit of
 effort:
 
-1. **Publish an exact verifier and a machine-readable record corpus.** Parse the SVG
-   layouts into `(x, y, θ)` triples with their algebraic definitions, store the minimal
-   polynomial of `s` alongside, and ship a checker that runs the SAT predicate in `Q(α)`
-   with a filtered kernel.
-   This is a few hundred lines on top of CGAL or FLINT, it makes every record
-   independently auditable for the first time, and it would clear the 32-packing
-   analytic backlog’s verification half.
-   [`explorations/packing/`](../../../README.md) is a working single-packing version;
-   the missing pieces are a parser for the SVG corpus and a filtered kernel in place of
-   pure-Python rationals.
+1. **Complete the exact corpus pipeline.** Normalize the remaining SVG layouts into
+   `Witness/v1` with their algebraic definitions and minimal polynomials, then extend
+   the checker with a filtered kernel and interval-existence certificates where direct
+   exact reconstruction is unavailable.
+   The current repository covers rational and supported single-generator real-algebraic
+   witnesses; source import and promotion at the exact reported values remain the
+   missing halves.
 2. **Build an open GPU annealer on `jagua-rs`.** The collision-detection engineering —
    the part that is genuinely hard to get both fast and correct — is already solved
    there, under MPL-2.0, with continuous rotation support.
