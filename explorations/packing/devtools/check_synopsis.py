@@ -436,23 +436,18 @@ def counted(n: int, singular: str, plural: str) -> str:
     return f"{spell(n)} {singular if n == 1 else plural}"
 
 
-def check_unprotected_statements(text: str, unprotected: int) -> list[str]:
-    """Every unprotected-fix statement must carry the derived count, not just one.
-
-    Pure so it can be regression-tested behaviorally: a document with one correct and
-    one stale statement must fail, which the former single-match implementation
-    accepted (D-326).
-    """
+def check_unprotected_fix_claims(text: str, expected: int) -> list[str]:
+    """Require every unprotected-fix claim to state the derived count."""
     stated = re.findall(r"([\w-]+) fixes left no", text, re.I)
-    accepted = {str(unprotected), spell(unprotected).lower()}
-    if not stated or any(claim.lower() not in accepted for claim in stated):
-        return [
-            (
-                f"SYNOPSIS.md: does not state the unprotected-fix count ({unprotected}) "
-                'in the form "<n> fixes left no regression check behind" at every occurrence'
-            )
-        ]
-    return []
+    accepted = {str(expected), spell(expected).lower()}
+    if stated and all(claim.lower() in accepted for claim in stated):
+        return []
+    return [
+        (
+            f"SYNOPSIS.md: does not state the unprotected-fix count ({expected}) "
+            'in the form "<n> fixes left no regression check behind" at every occurrence'
+        )
+    ]
 
 
 def check_defects(text: str) -> list[str]:
@@ -507,7 +502,7 @@ def check_defects(text: str) -> list[str]:
     unprotected = sum(
         1 for d in defects if d["regression"] == "none" and d["status"] != "outstanding"
     )
-    problems.extend(check_unprotected_statements(text, unprotected))
+    problems.extend(check_unprotected_fix_claims(text, unprotected))
 
     problems.extend(
         f"SYNOPSIS.md: open defect {d['id']} is not mentioned"

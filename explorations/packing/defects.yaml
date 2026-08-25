@@ -8352,17 +8352,16 @@ defects:
     SYNOPSIS.md stated the unprotected-fix aggregate in two places. The D-305 repair
     corrected the defect-log section to the derived 106, but a later postmortem
     paragraph still said ninety-eight; check_synopsis accepted the document because its
-    pattern required only one matching occurrence, so the stale duplicate stayed green
-    through every gate and both CI architectures.
+    pattern required only one matching occurrence.
   consequence: >-
-    The section that draws the postmortem's conclusions understated the unprotected-fix
-    debt by eight while the drift check reported the aggregate as reconciled.
+    The postmortem conclusion understated the unprotected-fix debt by eight while the
+    drift check reported the aggregate as reconciled.
   fix: >-
-    Correct the stale sentence to the derived count and make check_synopsis validate
+    Remove the duplicate from the maintained synopsis and make check_synopsis validate
     every occurrence of the aggregate phrase instead of accepting the first match.
-  regression: uv run --frozen python -m devtools.check_synopsis
+  regression: test_unprotected_fix_claims_rejects_stale_duplicate
   bead: think-8mkk
-  recorded_in: SYNOPSIS.md
+  recorded_in: devtools/check_synopsis.py
 - id: D-327
   title: The timeout documentation split another compound adjective after its hyphen
   date: '2026-08-25'
@@ -8375,11 +8374,11 @@ defects:
   status: fixed
   recurrence_of: D-301
   what: >-
-    The new production-timeout paragraph in development.md begins a sentence with
+    The production-timeout paragraph in development.md began a sentence with
     "Mutation- control commands", splitting the compound modifier the same way D-301
     had just repaired in the session receipt rules.
   consequence: >-
-    The sentence parses with a dangling "Mutation-" fragment; the timeout guidance
+    The sentence parsed with a dangling "Mutation-" fragment; the timeout guidance
     itself was unaffected.
   fix: Rejoin the compound as "Mutation-control commands".
   regression: none
