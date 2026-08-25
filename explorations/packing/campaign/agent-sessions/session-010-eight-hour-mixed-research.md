@@ -47,12 +47,29 @@ session:
       Preserve the finite partial inventory, leave think-nm35 open, and rotate to order
       8's W3 criterion work under think-kfb4.
     outcome: null
-    evidence: []
+    evidence:
+    - >-
+      An unregistered exact-arithmetic pilot enumerated every rank-(r-1) active-row
+      subset of each branch matrix and normalized candidate rays by their exact A*v
+      signatures. It found 824 full-rank candidate subsets per endpoint branch and 632
+      per interior branch before feasibility filtering; this is retained as discovery
+      evidence, not a confirmatory verdict.
+    - >-
+      The pilot reduced both owner-axis branches to eight quotient-ray signatures at A,
+      six at the interior stratum, and eight at B. The two extra rays at each endpoint
+      are exactly the two boundary tangents of exp-034's certified sheet; the same six
+      release signatures remain outside the sheet at all three strata.
+    - >-
+      The six pilot release signatures are contact 1-4 alone, contact 0-4 alone, both
+      tied y-lower rows of square 1, one matched x-upper/y-lower feature pair for each
+      angle sign of square 1, and both tied x-upper rows of square 1. Exp-036 separately
+      handles the common-angle equality-kernel direction; nonlinear realizability of
+      these six quotient classes remains unresolved.
     stop_reason: null
     next_action: >-
-      Inspect the exp-034 through exp-036 instruments, enumerate the quotient cones at
-      A, one interior stratum, and B, and retain exact branch evidence before the
-      twenty-minute checkpoint.
+      Independently audit the branch model and completeness lemma, then freeze a
+      replayable exact-ray criterion before implementing or running the confirmatory
+      inventory.
   primary_bead: think-3cbq
   status: in_progress
   budget:
