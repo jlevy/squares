@@ -5,7 +5,7 @@ title: Preserve final receipts from delegated long-running commands
 kind: bug
 status: open
 priority: 1
-version: 8
+version: 9
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 delegate: codex-root
 labels:
@@ -15,8 +15,9 @@ dependencies: []
 parent_id: is-01m0t3n7z9fj0p7wwt1kn4nzqk
 child_order_hints:
   - is-01m0wcppfdp4hmb9g7gjwey1qr
+  - is-01m0wcy2mq7vfj1adqjvn3jy27
 created_at: 2026-08-24T22:27:25.563Z
-updated_at: 2026-08-25T12:02:21.537Z
+updated_at: 2026-08-25T12:04:47.894Z
 ---
 The serialized PACK_JOBS=1 deep-golden validation completed before its 180-second cap, but the delegated execution path returned neither stdout/stderr nor exit status. The run is inadmissible. Record as D-202; rerun once through a parent-owned durable session that preserves output, exit status, timing, and process cleanup. Update the portable runbook so long commands must retain a final receipt rather than infer completion from process disappearance.
 
