@@ -71,9 +71,9 @@ Numerical methods record the arithmetic actually used, its precision, rounding, 
 tolerance; “arbitrary precision” describes a library capability, not a result.
 Formal methods name an exact representation, replayable interval certificate, or scoped
 proof. Displays also distinguish an external proof or certificate from evidence replayed
-or audited by this repository, and an **apparently-novel** marker qualifies results
-first established here—new to the best of this project’s knowledge, never an assertion
-of priority.
+or audited by this repository, and a **novelty** marker records whose result it is:
+common knowledge, previously published, or apparently novel—new to the best of this
+project’s knowledge, never an assertion of priority.
 
 A verified feasible witness proves an upper bound.
 It does not prove global optimality; that requires a matching verified lower bound.
@@ -203,7 +203,7 @@ The eight words a reader meets everywhere here, in one line each;
 | **polish** vs **exploration** | Refining within the basin you are in, versus reaching a different one; neither term says anything about formal assurance |
 | **standing best** | The best side ever published for that `n`—an upper bound, not known optimal in open cases |
 | **gap** | `best_side − standing_best`, always signed |
-| **assurance** | `reported`, `numerically-checked`, or `verified`; only the last is formal, and method, precision, tolerance, origin, and any apparently-novel qualification are recorded separately |
+| **assurance** | `reported`, `numerically-checked`, or `verified`; only the last is formal, and method, precision, tolerance, origin, and any novelty qualification are recorded separately |
 
 The operating documents divide ownership rather than repeat one another:
 

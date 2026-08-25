@@ -558,15 +558,21 @@ Running the generator’s own checker is not an independent implementation.
 A page that says “interval verified” but publishes no certificate or replayable checker
 stays reported with a `public-certificate-missing` blocker.
 
-Novelty is a further separate fact.
-An evidence record may carry `novelty: apparently-novel`: the result was first
-established here and, to the best of this project’s knowledge from the archived corpus
-and reviewed sources, has not been previously published.
-That is a statement about the search performed, never an assertion of priority;
-`confirmed-novel` is reserved for a claim whose priority has been independently
-established, and no entry carries it yet.
-An entry without the field makes no novelty claim—it is a confirmation, an external
-result, or work the record deliberately declines to call new.
+Novelty—whose result this is—is a further separate fact.
+Its values differ in what they oblige, which is why each is recorded explicitly rather
+than inferred from an absence:
+
+| Novelty | Meaning | What it obliges |
+| --- | --- | --- |
+| `common-knowledge` | Elementary or folklore, like the area and grid bounds; nobody claims it | No citation is owed |
+| `previously-published` | A named prior source established it; this entry reports, confirms, or replays it | Must name `source_key`; any public attributable artifact counts—paper, preprint, record table, or repository |
+| `apparently-novel` | First established here and, to the best of this project’s knowledge from the archived corpus and the sources reviewed, not previously published | Must carry `source_reviewed`, dating the assessment. A statement about the search performed, never an assertion of priority |
+| `confirmed-novel` | Priority independently established | Reserved; no entry carries it yet |
+
+An entry without the field makes no novelty statement: not yet assessed, or the record
+declines one, as exp-014 does for the quotient refinements.
+Absence never means “not novel”.
+`check_evidence_semantics` enforces the two obligations a machine can check.
 
 Every formal conclusion names its object:
 
@@ -1081,9 +1087,12 @@ Stromquist’s printed Figure 14 argument and the source-distinct repaired certi
 local-isolation theorem for Trump’s pose (exp-013); and the exact `n = 5`
 terminal-family chain—shared optimal face, two-parameter sheet, second-order
 obstruction, complete first-order inventory, and connected position polytope (exp-033
-through exp-039). The `n = 3` and `n = 4` quotient classifications are established here
-with no novelty claim: the published hard-squares computations cover their labelled and
-unlabelled pieces, and the record declines to call the quotient refinements new.
+through exp-039); and the verified relaxed rational witness at `n = 29`
+(E-n029-schadt-rational-upper), a new construction proving a slightly weaker bound than
+the reported record.
+The `n = 3` and `n = 4` quotient classifications are established here with no novelty
+claim: the published hard-squares computations cover their labelled and unlabelled
+pieces, and the record declines to call the quotient refinements new.
 **T-3** was found while building the quench, registered as `H-019` *before* the round
 that observed it was recorded, and confirmed as its own round.
 Under the directory’s ownership rule the registry artifact decides both; the `T-` ids

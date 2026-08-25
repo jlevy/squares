@@ -860,10 +860,12 @@ What has been established, with the exact limit of each claim, and then what is
 genuinely open, ranked by how much of the program rests on it.
 Assurance and method follow [§5](#5-algebra-versus-numerics).
 Provenance is a separate fact from assurance, so each row states it.
-A published result checked here is a **confirmation**. A result first established here
-is **apparently novel**—new to the best of this project’s knowledge from the archived
-corpus, an assessment of the search done rather than an assertion of priority—and no
-external referee has reviewed it, however strong its formal assurance.
+A published result checked here is a **confirmation**; the evidence register separates
+those (`previously-published`) from elementary facts nobody claims (`common-knowledge`).
+A result first established here is **apparently novel**—new to the best of this
+project’s knowledge from the archived corpus, an assessment of the search done rather
+than an assertion of priority—and no external referee has reviewed it, however strong
+its formal assurance.
 The synopsis’s
 [Assurance, Methods, and Claims](SYNOPSIS.md#assurance-methods-and-claims) owns the
 definition and the one-place list of apparently novel results.

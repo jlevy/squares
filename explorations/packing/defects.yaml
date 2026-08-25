@@ -8615,15 +8615,19 @@ defects:
     and unreviewed, or miss that the program's strongest claims are its own; the record
     read as more externally established than it is.
   fix: >-
-    A novelty axis separate from assurance: the evidence schema gains novelty
-    [apparently-novel, confirmed-novel] with apparently-novel defined as first
-    established here and new to the best of this project's knowledge, never a priority
-    assertion; E-n011-repaired-lower is tagged; the synopsis defines the term, splits
-    the T-1/T-4 tags, and rolls up the apparently-novel results in one place; the
-    tutorial's section-8 rows and section-6 list state provenance; the README names
-    the marker.
+    A novelty axis separate from assurance, whose values differ in what they oblige:
+    common-knowledge owes no citation, previously-published must name its source_key,
+    apparently-novel must carry a dated source_reviewed and asserts only what the
+    search found rather than priority, and confirmed-novel is reserved. An absent
+    field means not yet assessed, never "not novel". The register is tagged three
+    common-knowledge, fifteen previously-published, two apparently-novel, and two
+    left absent; check_evidence_semantics enforces the two machine-checkable
+    obligations; the synopsis carries the vocabulary table, the split T-1/T-4 tags,
+    and the one-place rollup of apparently-novel results; the tutorial's section-8
+    rows and section-6 list state provenance; the README names the axis.
   regression: >-
-    schema validation enforces the enum; prose provenance coverage remains review
-    work.
+    check_evidence_semantics rejects an attribution with no source and a novelty
+    claim with no dated review, with a controls.yaml cell for each; schema validation
+    enforces the enum. Prose provenance coverage remains review work.
   bead: think-bhjz
   recorded_in: frontier/frontier-evidence.schema.yaml

@@ -10,6 +10,7 @@ evidence:
     assurance: reported
     reported_method: source-unspecified
     performed_by: source-author
+    novelty: previously-published
     relationship_to_generator: generator
     source_key: '[Kingbird]'
     replay_status: not-attempted
@@ -22,6 +23,7 @@ evidence:
     assurance: reported
     reported_method: interval-certified
     performed_by: source-author
+    novelty: previously-published
     relationship_to_generator: same-implementation
     source_key: '[UnitSquare 2026]'
     replay_status: public-certificate-missing
@@ -37,6 +39,7 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
+    novelty: common-knowledge
     relationship_to_generator: independent-implementation
     origin: replayed-here
     certificate: frontier/n-*.md verified_upper_bound fields
@@ -51,6 +54,7 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
+    novelty: common-knowledge
     relationship_to_generator: independent-implementation
     origin: replayed-here
     certificate: frontier/n-*.md verified_lower_bound fields
@@ -65,6 +69,7 @@ evidence:
     assurance: verified
     method: published-proof
     performed_by: source-author
+    novelty: previously-published
     relationship_to_generator: not-applicable
     origin: external
     source_key: '[Nagamochi 2005]'
@@ -101,6 +106,7 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
+    novelty: common-knowledge
     relationship_to_generator: independent-implementation
     origin: replayed-here
     certificate: campaign/series/series-000-smoke-and-calibration/results/exp-014-h-032-n3-optimal-moduli.json
@@ -115,6 +121,7 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
+    novelty: previously-published
     relationship_to_generator: independent-implementation
     origin: replayed-here
     source_key: '[Kingbird n=5 SVG]'
@@ -130,6 +137,7 @@ evidence:
     assurance: verified
     method: published-proof
     performed_by: source-author
+    novelty: previously-published
     relationship_to_generator: not-applicable
     origin: external
     source_key: '[Göbel 1979]'
@@ -151,6 +159,7 @@ evidence:
     assurance: verified
     method: published-proof
     performed_by: source-author
+    novelty: previously-published
     relationship_to_generator: not-applicable
     origin: external
     source_key: '[Kearney–Shiu 2002]'
@@ -172,6 +181,7 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
+    novelty: previously-published
     relationship_to_generator: independent-implementation
     origin: replayed-here
     source_key: '[Kingbird]'
@@ -187,6 +197,7 @@ evidence:
     assurance: verified
     method: published-proof
     performed_by: source-author
+    novelty: previously-published
     relationship_to_generator: not-applicable
     origin: external
     source_key: '[Stromquist 2003]'
@@ -208,6 +219,7 @@ evidence:
     assurance: verified
     method: published-proof
     performed_by: source-author
+    novelty: previously-published
     relationship_to_generator: not-applicable
     origin: external
     source_key: '[Bentz 2010]'
@@ -229,6 +241,7 @@ evidence:
     assurance: verified
     method: published-proof
     performed_by: source-author
+    novelty: previously-published
     relationship_to_generator: not-applicable
     origin: external
     source_key: '[Bentz 2016]'
@@ -250,6 +263,7 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
+    novelty: previously-published
     relationship_to_generator: independent-implementation
     origin: replayed-here
     source_key: '[Ellsworth SVG]'
@@ -265,9 +279,9 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
+    novelty: apparently-novel
     relationship_to_generator: independent-implementation
     origin: replayed-here
-    novelty: apparently-novel
     source_key: '[Stromquist 2003]'
     certificate: campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
     replay: uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json
@@ -281,6 +295,7 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
+    novelty: previously-published
     relationship_to_generator: independent-implementation
     origin: replayed-here
     source_key: '[Stromquist 2003]'
@@ -296,6 +311,7 @@ evidence:
     assurance: reported
     reported_method: numerical-multiprecision
     performed_by: source-author
+    novelty: previously-published
     relationship_to_generator: generator
     source_key: '[Kingbird n=29 SVG]'
     replay_status: public-certificate-missing
@@ -347,6 +363,7 @@ evidence:
     assurance: reported
     reported_method: numerical-multiprecision
     performed_by: source-author
+    novelty: previously-published
     relationship_to_generator: generator
     source_key: '[Schadt n=29 repository]'
     precision: {decimal_digits: 300, rounding: source-defined}
@@ -361,6 +378,7 @@ evidence:
     assurance: numerically-checked
     method: numerical-multiprecision
     performed_by: repository
+    novelty: previously-published
     relationship_to_generator: independent-implementation
     source_key: '[Schadt n=29 repository]'
     precision: {decimal_digits: 300, rounding: nearest}
@@ -376,6 +394,7 @@ evidence:
     assurance: verified
     method: exact-algebraic
     performed_by: repository
+    novelty: apparently-novel
     relationship_to_generator: independent-implementation
     origin: replayed-here
     source_key: '[Schadt n=29 repository]'
