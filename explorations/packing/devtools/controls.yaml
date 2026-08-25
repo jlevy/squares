@@ -72,9 +72,9 @@ controls:
 # rather than quietly testing nothing.
 - name: defect log - count disagreeing with the list
   file: defects.yaml
-  replace: ["count: 255", "count: 20"]
+  replace: ["count: 258", "count: 20"]
   run: python3 -m devtools.validate_schemas
-  expect: "count 20 != 255"
+  expect: "count 20 != 258"
 
 - name: README - repeated numeric gate-defect aggregate
   file: README.md
@@ -129,15 +129,15 @@ controls:
 
 - name: synopsis - soundness direction aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["Fifty-six of the sixty-seven soundness defects", "Fifty-five of the sixty-seven soundness defects"]
+  replace: ["Fifty-eight of the sixty-nine soundness defects", "Fifty-seven of the sixty-nine soundness defects"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "soundness-direction aggregate is not 56 of 67"
+  expect: "soundness-direction aggregate is not 58 of 69"
 
 - name: synopsis - gate detector aggregate drifting from the log
   file: SYNOPSIS.md
-  replace: ["gate has caught seventeen defects in 255", "gate has caught sixteen defects in 255"]
+  replace: ["gate has caught seventeen defects in 258", "gate has caught sixteen defects in 258"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "gate-detector aggregate is not 17 of 255"
+  expect: "gate-detector aggregate is not 17 of 258"
 
 - name: synopsis - hypothesis-status aggregate drifting from the ledger
   file: SYNOPSIS.md

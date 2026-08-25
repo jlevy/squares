@@ -91,6 +91,14 @@ The text now fixes `C_I = (C_A + C_B)/2` coordinatewise and fixes that mutation 
 removing `x0 >= 1/2`. No dimension, interval, multiplier, acceptance count, or verdict
 threshold changed.
 
+Implementation review before any retained target measurement then found two invalid
+proof shortcuts, recorded as D-256 and D-257. Endpoint equality alone does not make an
+absolute-value separating gap affine, and three exact stress samples do not establish an
+interval identity until the polynomial degree bound is derived.
+The criterion now requires the checker to establish both premises explicitly.
+This correction changes no candidate formula, interval, multiplier, acceptance count, or
+verdict threshold.
+
 Write `r = sqrt(2)`, `L = 1 + 5r/4`, and `a = x4`. The proposed polytope fixes
 
 `x2 = y2 = 1/2`, `x3 = y3 = 1 + 3r/4`, and `x4 + y4 = 2 + r/2`,
@@ -156,6 +164,12 @@ Endpoint and strict-interior fixtures must also pass the independent exact packi
 verifier.
 At every retained path point, both active owner branches and every tied feature
 row must be rebuilt from source.
+For contacts `(2,4)` and `(3,4)`, expected zero axes must have a strict fixed signed
+projection and zero gap at both endpoints, which makes their absolute-value gaps affine
+and identically zero.
+Every other owner-axis gap must be strictly negative at both endpoints; convexity of an
+absolute value of an affine projection then proves strict negativity throughout the
+interval. No global zero-axis inventory is claimed.
 
 Along the four declared path classes, the checker must rebuild the positive owner-branch
 stress.
@@ -175,6 +189,13 @@ exhaustion of the zero separating axes for contacts `(2,4)` and `(3,4)`. In part
 both owner-3 multipliers must have the exact uniform lower bound `r/2 - 1/4 > 0`. This
 proves first-order no descent along the twelve declared path segments only; it does not
 prove stress on the rest of the polytope or second-order local minimality.
+The full-interval identity must derive its degree bound from affine centers, fixed
+signed selected-axis projections, stable tied-feature labels, affine contact-row
+coefficients, and affine multipliers.
+The checker must form and cancel every exact coefficient of the resulting
+degree-at-most-two pose and side polynomials.
+Three exact epsilon samples may remain independent fixtures, but are not themselves the
+continuum proof.
 
 The ten controls mutate proof inputs and rerun the proof.
 They reject: an omitted A slide correction; an added B slide correction; `R6` without

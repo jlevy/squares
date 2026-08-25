@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 255
+count: 258
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -6562,3 +6562,90 @@ defects:
   recurrence_of: D-198
   bead: think-qox6
   recorded_in: devtools/controls.yaml
+- id: D-256
+  title: Endpoint equality was treated as an affine full-interval axis proof
+  date: '2026-08-25'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated prototype, before any retained target run
+  severity: high
+  status: fixed
+  what: >-
+    The first exp-038 checker called every separating-axis gap affine and inferred that
+    an axis with zero gaps at both path endpoints stayed identically active. The gap is
+    an absolute value of an affine projection minus constant support, and several
+    nonactive a-minus projections actually change sign inside their intervals.
+  consequence: >-
+    The artifact could have reported full-interval owner-axis exhaustion from an
+    invalid endpoint argument, turning two correct endpoint calculations into a
+    flattering pathwise proof claim.
+  fix: >-
+    Retain signed endpoint projections and constant supports. Require each expected zero
+    axis to keep one strict projection sign and have two zero gaps, and use convexity of
+    absolute affine projection minus support to bound every other axis strictly below
+    zero from its endpoints. Narrow the inventory to contacts (2,4) and (3,4).
+  regression: >-
+    The false-extra-axis mutation reruns the interval proof, while every path record
+    carries exact signed projections, supports, endpoint gaps, and the proof type used
+  bead: think-qh7t
+  recorded_in: cases/n5/fixed_angle_polytope.py
+- id: D-257
+  title: Three stress samples were promoted without deriving the degree bound
+  date: '2026-08-25'
+  layer: tooling
+  class: soundness
+  direction: flattering
+  detected_by: review
+  latent_for: one delegated prototype, before any retained target run
+  severity: high
+  status: fixed
+  what: >-
+    The first exp-038 checker verified each branchwise stress identity at three exact
+    epsilon values and then recorded that those samples proved the full interval, but
+    it merely asserted rather than derived that every coefficient polynomial has degree
+    at most two.
+  consequence: >-
+    Deterministic record and replay could have presented finite fixtures as a continuum
+    proof even if a selected-axis sign change or unstable tied feature made the source
+    row dependence piecewise rather than quadratic.
+  fix: >-
+    Derive contact-row slopes directly from fixed separation signs and affine center
+    velocities, derive multiplier slopes from their declared formulas, compare those
+    affine forms with source-rebuilt rows, and cancel every coefficient of each exact
+    degree-at-most-two pose and side polynomial.
+  regression: >-
+    The stress-coefficient mutation reruns the structural polynomial proof; every path
+    also retains independently rebuilt midpoint and endpoint fixtures, both owner
+    branches, and exact zero coefficient arrays
+  bead: think-59gi
+  recorded_in: cases/n5/fixed_angle_polytope.py
+- id: D-258
+  title: An under-scoped status patch closed the wrong outstanding defect
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: one uncommitted patch
+  severity: high
+  status: fixed
+  what: >-
+    While changing D-256 and D-257 from outstanding to fixed, a patch hunk identified
+    only the repeated `status: outstanding` line and changed the first match in the
+    file: D-034, an unrelated live basin-identity defect. A first attempted repair used
+    the same weak context in reverse and then reopened fixed D-042.
+  consequence: >-
+    Had the diff been trusted without inspection, the canonical log would have hidden a
+    still-open mathematical identity problem and made the synopsis and ready queue look
+    more complete than the evidence permits.
+  fix: >-
+    Restore D-034 to outstanding and D-042 to fixed, patch D-256 by an id-and-title
+    anchored hunk, inspect the exact defect diff before validation, and preserve this
+    transient error rather than silently correcting the file.
+  regression: >-
+    The existing schema and synopsis checks require outstanding defects to retain beads
+    and canonical mentions; coordinator diff inspection remains the immediate guard
+  bead: think-jvtt
+  recorded_in: defects.yaml

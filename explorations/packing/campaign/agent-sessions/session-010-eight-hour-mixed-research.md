@@ -710,11 +710,140 @@ session:
     fallback: Return the first ambiguous normalization or overclaim.
     write_scope: [read-only]
     excluded_commands: [git, tbd, packing-validate]
+  - task: Implement the frozen exp-038 exact checker without running the retained target.
+    operator: /root/exp038_impl
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Built the source-bound polytope, dual, path, packing, owner-axis, stress, and
+      ten-mutation checker in one allowed file; temporary record and replay completed in
+      about 1.5 seconds each.
+    evidence:
+    - The implementation turn ran for 563 measured seconds and edited only the declared case module.
+    - Ruff, BasedPyright, and separately capped temporary generation and replay passed.
+    files: [cases/n5/fixed_angle_polytope.py]
+    checks:
+    - Temporary exact record and byte-identical replay under separate 30-second caps.
+    uncertainty: >-
+      This first receipt preceded independent mathematical review and created no retained
+      target result.
+    elapsed_seconds: 563
+    elapsed_quality: platform_measured
+    next_action: Submit the file to read-only soundness and mechanical review.
+    phase: 6
+    budget_minutes: 22
+    started_at: '2026-08-25T01:37:25-07:00'
+    deadline_at: '2026-08-25T01:57:11-07:00'
+    expected_output: One source-bound exact case module or a minimized blocker.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --quiet python
+      -m cases.n5.fixed_angle_polytope --record /tmp/exp-038-check.json
+    kill_condition: Stop implementation at the phase's twenty-two-minute reserve boundary.
+    fallback: Return the smallest source-bound helper and first unproved criterion clause.
+    write_scope: [cases/n5/fixed_angle_polytope.py]
+    excluded_commands: [git, tbd, packing-validate]
+  - task: Audit the first exp-038 checker against the frozen mathematical criterion.
+    operator: /root/exp038_soundness
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Reconfirmed the domain, dual, twelve path intervals, 36 exact packing fixtures,
+      stress formulas, source regeneration, and mutations, but rejected two flattering
+      continuum-proof shortcuts before target execution.
+    evidence:
+    - >-
+      D-256 records the invalid inference from zero endpoint gaps to an affine
+      full-interval axis identity; a-minus projections supply an exact sign-changing
+      counterexample to the recorded fixed-sign premise.
+    - >-
+      D-257 records the asserted rather than derived stress-polynomial degree bound.
+    files: []
+    checks:
+    - Read-only exact algebra and final source inspection.
+    uncertainty: >-
+      Agent wall time was operator-estimated at about seventeen minutes rather than
+      measured by the delegation surface.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Correct both proof mechanisms before any retained target run.
+    phase: 6
+    budget_minutes: 20
+    started_at: '2026-08-25T01:35:11-07:00'
+    deadline_at: '2026-08-25T01:55:11-07:00'
+    expected_output: Exact disposition of every frozen proof clause and first P0/P1 finding.
+    validation_command: null
+    kill_condition: Return the first invalid proof inference before the phase reserve.
+    fallback: Record the smallest unproved criterion clause and block target execution.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, packing-validate]
+  - task: Repair the two reviewed exp-038 continuum-proof mechanisms.
+    operator: /root/exp038_impl
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Replaced the axis shortcut with fixed-sign zero-axis and convex negative-axis
+      certificates, then derived and cancelled exact structural stress polynomials.
+    evidence:
+    - The correction turn completed in 239 measured seconds before the implementation cutoff.
+    - >-
+      Source midpoint and endpoint rebuilds now check structurally derived row and
+      multiplier slopes; finite stress samples remain fixtures only.
+    files: [cases/n5/fixed_angle_polytope.py]
+    checks:
+    - Ruff, BasedPyright, and separately capped temporary exact record and replay passed.
+    uncertainty: No retained target result was generated.
+    elapsed_seconds: 239
+    elapsed_quality: platform_measured
+    next_action: Obtain a final independent read-only review and checkpoint the instrument.
+    phase: 6
+    budget_minutes: 7
+    started_at: '2026-08-25T01:50:19-07:00'
+    deadline_at: '2026-08-25T01:57:11-07:00'
+    expected_output: Two corrected executable proof mechanisms or the exact remaining blocker.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --quiet python
+      -m cases.n5.fixed_angle_polytope --record /tmp/exp-038-corrected-final.json
+    kill_condition: Stop at the phase implementation cutoff and return partial evidence.
+    fallback: Preserve the first corrected mechanism and leave the target blocked.
+    write_scope: [cases/n5/fixed_angle_polytope.py]
+    excluded_commands: [git, tbd, packing-validate]
+  - task: Independently verify the original and corrected exp-038 checker builds.
+    operator: /root/exp038_verify
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      The final 48,371-byte source passed Ruff, BasedPyright, exact temporary generation,
+      replay, and proof-mechanism inspection with no remaining P0 or P1 finding.
+    evidence:
+    - Final source SHA-256 is 813411d0b66c5f161285785917bd163bc59cca90571ff0030b22d42a8e76c6cc.
+    - >-
+      Final generation took 2.17 wall seconds and replay 2.10 seconds; the 372,281-byte
+      temporary JSON had SHA-256 92c799932baaa94318979df433b882950977cc8299ca7b3c9b19db1ff65ee42b.
+    files: []
+    checks:
+    - Ruff format and lint checks, BasedPyright, exact record, replay, and read-only proof review.
+    uncertainty: Delegation wall time was not exposed; individual command times were retained.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Commit the reviewed instrument without the temporary result.
+    phase: 6
+    budget_minutes: 14
+    started_at: '2026-08-25T01:46:48-07:00'
+    deadline_at: '2026-08-25T02:00:00-07:00'
+    expected_output: Independent mechanical and P0/P1 disposition of the final source.
+    validation_command: >-
+      timeout 30 uv run --directory explorations/packing --frozen --quiet python
+      -m cases.n5.fixed_angle_polytope --replay /tmp/exp038-fixed-angle-verify-final-20260825.json
+    kill_condition: Return the first failed check without editing shared files.
+    fallback: Report the exact failed command and file hash.
+    write_scope: [read-only]
+    excluded_commands: [git, tbd, packing-validate]
   outputs:
   - campaign/agent-sessions/session-010-eight-hour-mixed-research.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-023-n5-tangent-inventory.md
   - campaign/series/series-000-smoke-and-calibration/results/exp-037-h-023-n5-tangent-inventory.json
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
+  - cases/n5/fixed_angle_polytope.py
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
