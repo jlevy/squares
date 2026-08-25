@@ -5,12 +5,12 @@ title: Use fixed visual tokens and certified contact marks in packing SVGs
 kind: feature
 status: closed
 priority: 1
-version: 7
+version: 8
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
 labels: []
 dependencies: []
 created_at: 2026-08-25T04:01:16.590Z
-updated_at: 2026-08-25T06:40:13.590Z
+updated_at: 2026-08-25T06:40:26.519Z
 closed_at: 2026-08-25T06:40:13.589Z
 close_reason: Implemented and committed the fixed cool palette, pure-black boundary system, clipped certified contact marks, updated docs/spec, regenerated gallery, and 73-control/full-gate validation in daca22e.
 resolution: null
@@ -20,4 +20,4 @@ Centralize the approved document style as fixed constants: a deterministic 20-co
 
 ## Notes
 
-Implementation and documentation are complete in the working tree. SVG rendering checker passes 72 controls; Ruff and BasedPyright pass; ./test.sh passes all 31 repository steps; make format-check passes; retained SVGs and manifest/metrics were regenerated and visually inspected. No commit was created per the user instruction, so this bead remains in_progress until commit/closure is authorized.
+Implemented in commit daca22e and pushed on codex/packing-svg-rendering-toolkit. SVG rendering checker passes 73 controls; Ruff and BasedPyright pass; ./test.sh passes all 31 repository steps; make format-check passes; retained SVGs and manifest/metrics were regenerated and visually inspected at 900px and 2400px.
