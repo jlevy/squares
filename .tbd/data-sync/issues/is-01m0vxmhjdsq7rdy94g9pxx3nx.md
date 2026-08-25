@@ -5,14 +5,15 @@ title: "TUTORIAL: add a precision section—which arithmetic regime to use where
 kind: task
 status: open
 priority: 1
-version: 2
+version: 4
+spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m0vxns5mzy4axt8mdrhaachj
 parent_id: is-01m0vxe4ntpat4xcagtf04c37z
 created_at: 2026-08-25T07:37:26.861Z
-updated_at: 2026-08-25T07:38:07.412Z
+updated_at: 2026-08-25T08:01:34.451Z
 ---
 §5 argues that exactness is not optional and describes the `ℚ(α)` machinery, but it
 never tells a reader *what precision to work at*, how the regimes relate to hardware, or

@@ -5,12 +5,13 @@ title: "TUTORIAL: add a prerequisites-and-further-reading section, plus what act
 kind: task
 status: open
 priority: 1
-version: 1
+version: 3
+spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies: []
 parent_id: is-01m0vxe4ntpat4xcagtf04c37z
 created_at: 2026-08-25T07:38:07.412Z
-updated_at: 2026-08-25T07:38:07.412Z
+updated_at: 2026-08-25T08:01:36.926Z
 ---
 The tutorial declares its audience as "anyone arriving at this directory without a
 background in the problem", then uses linear programming, primitive elements and minimal

@@ -5,12 +5,13 @@ title: "TUTORIAL accuracy drift: five claims that no longer match SYNOPSIS or th
 kind: bug
 status: open
 priority: 1
-version: 1
+version: 3
+spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies: []
 parent_id: is-01m0vxe4ntpat4xcagtf04c37z
 created_at: 2026-08-25T07:42:02.915Z
-updated_at: 2026-08-25T07:42:02.915Z
+updated_at: 2026-08-25T08:01:29.590Z
 ---
 Checked every number, count, and attribution in `TUTORIAL.md` against
 [`SYNOPSIS.md`](SYNOPSIS.md), [`conventions.md`](conventions.md), the experiment

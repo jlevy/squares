@@ -5,14 +5,15 @@ title: "TUTORIAL: write the linear program explicitly and add LP background"
 kind: task
 status: open
 priority: 1
-version: 2
+version: 4
+spec_path: explorations/packing/docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md
 labels: []
 dependencies:
   - type: blocks
     target: is-01m0vxns5mzy4axt8mdrhaachj
 parent_id: is-01m0vxe4ntpat4xcagtf04c37z
 created_at: 2026-08-25T07:35:59.982Z
-updated_at: 2026-08-25T07:38:07.412Z
+updated_at: 2026-08-25T08:01:31.984Z
 ---
 The cell decomposition (**T-2**) is the tutorial's central structural claim, and §2
 presents it as four bullet points plus an assertion. Two things are missing: the program
