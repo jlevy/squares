@@ -48,7 +48,12 @@ hypothesis:
     path segments. It does not prove the whole polytope stationary or join A to B inside
     the stationary set. Nonlinear realization of the remaining transverse and mixed
     directions, the full nonsmooth stationary component, and the unequal-side clearance
-    questions remain open.
+    questions remain open. Exp-040 preregistered a shared exact rotating path for R4 and
+    R5 but stopped unresolved before retained measurement: temporary generation and
+    replay passed, while independent review retained five exact proof-perimeter gaps in
+    axis strictness, multiplier positivity, tied-feature derivation, partial-result
+    routing, and semantic controls. Its draft checker is a resume point, not an R4/R5
+    result.
 ---
 # H-023 — resolve the first ambiguous census cell
 
@@ -96,6 +101,11 @@ The stress is proved only on those paths, not throughout the polytope or on an A
 connector. The remaining release classes, mixed-angle realization, deterministic quench
 selection, the complete stationary component, and unequal-side minimax-clearance bounds
 remain open.
+
+Exp-040 preserves a candidate rational half-angle path and a finite correction list, but
+no retained result JSON or obstruction.
+The active session-015 successor must close that list under a new preregistered round
+before R4 or R5 can be called realized.
 
 This is the focused control for H-021 and the practical precursor to H-011.
 

@@ -290,10 +290,13 @@ agenda:
       adding a lease or worktree protocol. Think-imav and think-nm35 are complete:
       exp-038 supplied the remaining-cone inventory, and exp-039 supplied the twelve
       R1, R2, R3, and R6 paths. Think-1s0h now owns one preregistered exact R4/R5
-      nonlinear-realization slice. The `-W`, mixed-angle, whole-stationary-component,
-      and unequal-side-clearance questions remain later bounded slices. The repaired
-      D-199/D-203 solver path no longer orders this scientific cell, and D-239 remains a
-      separate W7 robustness line.
+      nonlinear-realization slice. Exp-040 stopped that first slice unresolved before
+      retained measurement after independent review retained five finite proof-perimeter
+      gaps; its rotating-path checker is a draft resume point, not an R4/R5 result. The
+      active session-015 successor must preregister and close those gaps. The `-W`,
+      mixed-angle, whole-stationary-component, and unequal-side-clearance questions
+      remain later bounded slices. The repaired D-199/D-203 solver path no longer orders
+      this scientific cell, and D-239 remains a separate W7 robustness line.
     artifacts:
     - cases/n5/equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
@@ -313,6 +316,8 @@ agenda:
     - cases/n5/fixed_angle_polytope.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
+    - cases/n5/rotating_release_paths.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

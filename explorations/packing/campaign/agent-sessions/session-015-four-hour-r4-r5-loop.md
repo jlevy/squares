@@ -65,7 +65,7 @@ session:
       Preregister and test one exact R4/R5 nonlinear-realization criterion for H-023,
       using exp-038's complete cone inventory and exp-039's fixed-angle polytope without
       inferring whole-component stationarity or basin identity.
-    status: in_progress
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: >-
       The portable session contract, fresh-agent launch instructions, and current
@@ -89,7 +89,12 @@ session:
       Retain the exact R4/R5 equations, branch list, and first undecided condition under
       think-1s0h; close the phase as blocked or stopped and rotate to an independent
       source-bound W1, W2, W3, W5, or W7 slice from the documented portfolio.
-    outcome: null
+    outcome: >-
+      Exp-040 stopped unresolved before retained measurement. Its draft checker passes
+      bounded temporary generation and replay for six cases and twenty controls, but
+      independent review retained five finite proof-perimeter blockers: pointwise versus
+      pathwise zero axes, multiplier positivity, derived tied-feature identities,
+      split feasibility and stress determinations, and genuinely semantic exact controls.
     evidence:
     - >-
       Exp-040 froze the six-case acceptance criterion at a36ab73; independent
@@ -99,11 +104,52 @@ session:
       Three disjoint read-only derivations supplied a shared rational half-angle path,
       an independent R5 construction, the complete owner-feature perimeter, controls,
       and the unresolved fallback.
+    stop_reason: >-
+      The independent-review guard fired before the phase deadline; the criterion was
+      not weakened, no result JSON was accepted, and candidate-path failure was not
+      promoted to an R4/R5 obstruction.
+    next_action: >-
+      Preregister a successor round that closes the five exact exp-040 blockers, then
+      revise the retained draft checker without changing the path or claim boundary.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Convert exp-040's independently audited draft into a successor round with exact
+      base-point and open-interval axis inventories, multiplier positivity, derived tied
+      wall features, split feasibility and stress results, and twenty semantic controls.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Exp-040 reached a finite audited blocker list early enough to stop cleanly and open
+      the next bounded correction slice without changing the scientific target.
+    budget_minutes: 30
+    started_at: '2026-08-25T16:36:30-07:00'
+    deadline_at: '2026-08-25T17:06:30-07:00'
+    expected_output: >-
+      A preregistered successor experiment and either a reviewed exact six-case result or
+      a smaller finite blocker list, with deterministic replay and no lost partial
+      feasibility result.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen --all-extras --group dev
+      packing-validate --only "small-n exact models and local geometry" --only
+      "soft-schema validation" --only "campaign record" --jobs 2 --inner-jobs 1
+    kill_condition: >-
+      Stop at the twenty-minute checkpoint without a successor criterion, on any
+      surviving sentinel control, missing exact axis or feature identity, unproved
+      multiplier bound, conflated partial verdict, or at the thirty-minute deadline.
+    fallback: >-
+      Terminalize the successor unresolved with the smaller exact blocker list and
+      rotate to an independent source-bound portfolio cell; do not reopen exp-040 or
+      infer an obstruction.
+    outcome: null
+    evidence: []
     stop_reason: null
     next_action: >-
-      Implement and independently review the frozen exp-040 six-case criterion without
-      changing its interval, branches, acceptance rule, or claim limits; retain the
-      finite first undecided numerator if the phase deadline arrives first.
+      Under think-1s0h and BC-010, preregister exp-041 from exp-040's five exact blockers
+      before editing the draft checker, then assign disjoint implementation and review
+      scopes against that successor criterion.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -284,6 +330,62 @@ session:
     elapsed_quality: unavailable
     next_action: Review the generated record against exact label and coefficient equality.
     phase: 2
+  - task: Implement the corrected exp-040 checker in one disjoint code file.
+    operator: /root/r4_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Built a deterministic 711-line draft checker with six cases, universal sign
+      tables, exact fixtures, owner-axis records, stress identities, twenty controls,
+      source replay, and atomic record/replay without writing a retained result.
+    evidence:
+    - Temporary generation and identical replay each completed in about six seconds.
+    files:
+    - cases/n5/rotating_release_paths.py
+    checks:
+    - Bounded module-local temporary generation and replay only.
+    uncertainty: Independent review found five proof-perimeter gaps before acceptance.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preserve the draft as exp-041's correction starting point.
+    phase: 2
+  - task: Independently audit the completed exp-040 proof perimeter.
+    operator: /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Rejected acceptance because pathwise and base-point zero axes were conflated,
+      stress positivity was not proved, tied wall features were hard-coded, partial
+      feasibility was not separable, and the exact control key set was not enforced.
+    evidence:
+    - Bounded temporary generation and replay passed but did not discharge the frozen criterion.
+    files: []
+    checks:
+    - Read-only code review plus bounded temporary generation and replay.
+    uncertainty: The exact path remains a candidate; the audit neither refutes nor accepts it.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Turn the five blockers into exp-041's frozen correction criterion.
+    phase: 2
+  - task: Audit exp-040's executable controls and retained invariants.
+    operator: /root/r5_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Confirmed deterministic regeneration and the six-case tables, but found that the
+      anti-sampling control bypassed the universal prover, several mutations were
+      sentinels, denominator positivity was prose-only, and strict feature and stress
+      claims were asserted rather than derived.
+    evidence:
+    - The actual Bernstein prover rejects the sample-deceptive polynomial when invoked directly.
+    files: []
+    checks:
+    - Read-only executable-control probes against the uncommitted draft.
+    uncertainty: The control machinery is reusable after the semantic mutations are wired through it.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Require exp-041 to exercise the real proof path for every semantic control.
+    phase: 2
   outputs:
   - campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md
   - campaign/agent-sessions/README.md
@@ -292,6 +394,9 @@ session:
   - SYNOPSIS.md
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md
+  - cases/n5/rotating_release_paths.py
+  - campaign/hypotheses/H-023-n5-terminal-connectivity.md
+  - campaign/agendas/agenda-001-basin-confidence-ladder.md
   checks:
   - >-
     softschema validate campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md
@@ -303,12 +408,14 @@ session:
     89 tests in 24.28 seconds.
   - exp-040 validates against Experiment/v2 before target execution.
   - packing-ledger check recognizes 40 rounds with exp-040 in progress.
+  - ruff check passes for cases/n5/rotating_release_paths.py.
+  - basedpyright reports zero errors and zero warnings for the draft checker.
   stop_reason: null
   next_action: >-
-    Complete the active R4/R5 cycle for BC-010 under think-1s0h by
-    16:41:44-07:00, record its terminal evidence in this file and the owning scientific
-    artifact, regenerate the ledger, then select one evidence-earned successor without
-    starting basin-frequency work.
+    In the active correctness cycle for BC-010 under think-1s0h, preregister exp-041
+    from exp-040's five exact blockers before editing the retained draft checker; close
+    the cycle by 17:06:30-07:00 with reviewed evidence or a smaller finite unresolved
+    list, and do not start basin-frequency work.
 ---
 # Session 015 — Four-Hour R4/R5 Research Loop
 

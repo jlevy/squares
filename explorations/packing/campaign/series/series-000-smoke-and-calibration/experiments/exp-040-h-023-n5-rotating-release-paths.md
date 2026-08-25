@@ -50,9 +50,6 @@ experiment:
       feature, wall, or pair, one undecided exact numerator, a failed control, scope
       promotion, or retained-record drift
     record: campaign/series/series-000-smoke-and-calibration/results/exp-040-h-023-n5-rotating-release-paths.json
-  lease:
-    expires: '2026-08-25T23:41:44Z'
-    host: local
   results:
   - shape: determination
     question: >-
@@ -60,10 +57,34 @@ experiment:
       representatives at A, the registered midpoint, and B, and do those six paths
       retain positive branchwise first-order no-descent stresses?
     role: outcome
+    outcome: invalid
+    checked_by: independent proof-perimeter review after bounded temporary generation and replay
+  - shape: determination
+    question: >-
+      Did the draft checker independently establish the six feasible Bouligand
+      continuations even if its stronger stress claim remained unresolved?
+    role: mechanism
     outcome: no_progress
-    checked_by: Target execution has not started; this result is a preregistration placeholder.
+    checked_by: >-
+      independent review found that open-interval strictness and tied-feature identities
+      were asserted rather than derived, so no partial feasibility verdict was retained
+  effort:
+    timebox: 30m criterion, implementation, and independent-review slice
+    wall_seconds: 12
+    agent_minutes: 30
+    stopped_by: guard
+  complexity:
+    lines_changed: 711
+    new_dependencies: []
+    new_failure_modes:
+    - an identically-zero path axis can be confused with an axis active only at the base point
+    - stress cancellation can pass without proving every multiplier stays positive
+    - hard-coded feature labels can survive without a regenerated tied-feature identity
+    notes: >-
+      The draft checker is retained as the resume point, but no campaign result JSON was
+      accepted because the independent guard fired before retained measurement.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: >-
       bind the six derivatives exactly to exp-038, including A's slide correction; prove
       every wall and pair feasible over the full interval by exact rational-polynomial
@@ -73,8 +94,14 @@ experiment:
       named controls; and refuse component, terminal, second-order, -W, mixed-angle,
       basin, census, and unequal-side claims
     reason: >-
-      The exact six-case criterion is frozen before target execution; no target result
-      has yet been measured.
+      Temporary generation and replay passed, but independent review found five finite
+      proof-perimeter gaps before any retained target result was accepted.
+    reopen_when: >-
+      A successor round derives pointwise and identically-zero axis inventories,
+      full-interval multiplier positivity, tied wall-feature numerators, true semantic
+      controls including the anti-sampling polynomial, and separate feasibility and
+      stress determinations.
+    resume_from: explorations/packing/cases/n5/rotating_release_paths.py
 ---
 # exp-040 — preregistered exact R4/R5 rotating release paths
 
@@ -184,6 +211,31 @@ stronger stress determination remains unresolved; only both determinations toget
 accept this round.
 A true obstruction would require a separately preregistered exhaustive
 second-order-jet argument over every nearby owner and feature branch.
+
+## Checkpoint result
+
+The 30-minute slice stopped on its independent-review guard.
+The draft checker generated six cases and twenty passing control booleans in about six
+seconds, then replayed the temporary record identically in about six seconds.
+That is implementation progress, not an accepted scientific result.
+
+Two independent reviews retained five finite blockers:
+
+1. Distinguish the four axes that are identically zero along each path from the five
+   axes active at `u = 0`; prove every other residual strictly positive on the
+   appropriate open or closed interval.
+2. Prove and retain every stress multiplier’s full-interval positivity, not just the
+   exact coefficient cancellation.
+3. Derive both tied square-1 wall-feature numerators and their sign-to-label map instead
+   of storing the expected labels as constants.
+4. Split feasibility and stress certificates so a future proved Bouligand continuation
+   survives even if the stress extension does not.
+5. Make the exact twenty-control key set a guard and replace sentinel failures with
+   semantic mutations, including the sample-deceptive polynomial passed through the same
+   universal prover; also retain the exact positive-denominator certificate.
+
+No retained result JSON was written, no obstruction was inferred, and none of the
+forbidden component, terminal, basin, census, or unequal-side claims changed.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
