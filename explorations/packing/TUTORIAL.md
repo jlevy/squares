@@ -24,6 +24,16 @@ For a perfect square `s(m²) = m` and there is nothing to say about the side val
 Some of the most interesting cases lie just above a perfect square, where improving on
 the next grid side can require tilted structure.
 
+![Walter Trump’s exact packing of eleven unit squares.](atlas/rendering/trump11-overview.svg)
+
+*The best-known `n = 11` construction.
+Six squares are axis-aligned; five form an oblique block tilted by about `40.18°`.
+Translucent tempered-yellow segments mark shared edge intervals and dots in the same
+reserved highlight color mark point contacts, all computed in the construction’s exact
+number field. The marks are clipped to their participating squares, and thin pure-black
+outlines remain visible above them.
+The picture certifies a construction, not its global optimality.*
+
 Three features make this different from most optimization problems.
 
 **Touching is legal, and good packings touch constantly.** Disjointness is required of
@@ -136,6 +146,14 @@ not a theorem that class count equals the local dimension of the full packing pr
 Other records already use more classes—six at `n = 29`—and every proposed compression
 must be checked on its own contact structure.
 
+![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
+
+*The `n = 29` record is a useful larger-scale check: six orientation classes, 29
+squares, and deterministic reuse after the fixed 20-color sequence is exhausted.
+The retained source is reconstructed at 160 decimal digits and passes all 406 pair
+checks; that verifies this numerical construction without turning it into an exact
+certificate or an optimality proof.*
+
 ## 3. Cells, Basins, and Two Traps
 
 The project is most careful here, because both traps were walked into and both cost real
@@ -184,6 +202,11 @@ finding** when it stalled ([D-029](defects.md)). On one `n = 10` start: the anne
 output and the fixed-angle solve agree to every digit at `+5.6440e-04`, and the full
 quench with its angle half reaches `+4.4409e-16`.
 
+![A perturbed Göbel ten-square source beside its quench endpoint.](atlas/rendering/gobel10-source-return-comparison.svg)
+
+*The shared-scale comparison makes the source-return test visible: the start is close
+but not settled, while the full quench returns to the proved-side geometry.*
+
 ### Trap 2—a point-basin need not be a terminal component
 
 A deterministic quench still returns an individual pose.
@@ -197,6 +220,12 @@ The quench lands wherever in the flat region it happened to enter, and every sym
 mimics a real discovery—distinct coordinates, distinct keys, two rows in the store—while
 the side agrees exactly and, along the family’s open stratum, so does the contact
 certificate (the wall endpoints carry a different one).
+
+![The exact quotient map of optimal configurations for three unit squares.](atlas/n-003-optimal-moduli.svg)
+
+*The exact `n = 3` control shows why a terminal family cannot be represented honestly as
+a bag of endpoint coordinates: a continuum of labelled poses becomes one quotient
+interval with distinguished strata.*
 
 The project’s term for this is a **terminal family**, and its definition is deliberately
 strict: local dimension is the nullity of the appropriate independent active-constraint

@@ -110,6 +110,7 @@ ignore = [
 "src/sqpack/campaign/ledger.py" = ["PERF401"]
 "devtools/render_defects.py" = ["PERF401"]
 "devtools/render_research_tables.py" = ["PERF401"]
+"devtools/check_svg_rendering.py" = ["PLC0415"]
 # CLI behavior tests exercise small internal orchestration seams without making them APIs.
 "tests/test_validation_cli.py" = ["SLF001"]
 
