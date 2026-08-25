@@ -542,14 +542,17 @@ def main() -> int:
     if not GOLDEN.exists():
         print(f"\nno golden at {GOLDEN.relative_to(ROOT)}; run with --update", file=sys.stderr)
         return 1
-    if GOLDEN.read_text() != rendered:
+    committed = GOLDEN.read_text()
+    if yaml.safe_load(committed) != yaml.safe_load(rendered):
         print("\nGOLDEN DRIFT — the map changed. Review the diff before accepting:")
         diff = difflib.unified_diff(
-            GOLDEN.read_text().splitlines(), rendered.splitlines(), "golden", "rebuilt", n=2
+            committed.splitlines(), rendered.splitlines(), "golden", "rebuilt", n=2
         )
         for line in list(diff)[:60]:
             print(f"  {line}")
         problems.append("the rebuilt map differs from the committed golden")
+    elif committed != rendered:
+        print("\n  note: YAML wrapping differs, but the parsed golden content is identical")
 
     if problems:
         print("\nORACLE FAILURES:")

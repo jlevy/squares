@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 319
+count: 322
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8188,4 +8188,77 @@ defects:
     evidence head, README cold-start link, active launch paragraph, and retired D-203
     guidance; the README-link mutation control rehearses the failure.
   bead: think-m8kv
+  recorded_in: SYNOPSIS.md
+- id: D-320
+  title: Deep golden validation treated YAML line wrapping as scientific drift
+  date: '2026-08-25'
+  layer: tooling
+  class: robustness
+  direction: conservative
+  detected_by: gate
+  latent_for: one stacked integration run
+  severity: medium
+  status: fixed
+  what: >-
+    The macOS deep-golden job rebuilt a basin map with the same parsed data but wrapped
+    one explanatory note at a different column. The checker compared serialized bytes
+    and failed after the complete mathematical validation surface had passed.
+  consequence: >-
+    A harmless serializer choice could block research integration and look like
+    cross-platform numerical drift even though no value, certificate, or conclusion
+    changed.
+  fix: >-
+    Compare parsed YAML documents for the deep golden contract, retain a unified diff
+    for real semantic changes, and report wrapping-only differences without failing.
+  regression: test_deep_golden_ignores_yaml_wrapping
+  bead: think-kwls
+  recorded_in: devtools/check_golden_basins.py
+- id: D-321
+  title: The SIGINT cleanup regression signaled before its child start condition
+  date: '2026-08-25'
+  layer: tooling
+  class: validity
+  direction: conservative
+  detected_by: gate
+  latent_for: one merged fast-suite run
+  severity: medium
+  status: fixed
+  what: >-
+    The process-cleanup regression polled for a child PID for two seconds, then sent
+    SIGINT whether or not the child had started. Under suite scheduling pressure it
+    interrupted the coordinator without a PID and then failed its own PID assertion.
+  consequence: >-
+    Scheduler timing, rather than process-tree cleanup behavior, could fail the ordinary
+    gate and obscure the safety property the test was meant to exercise.
+  fix: >-
+    Have the real child write its PID and then signal its parent directly. The test still
+    exercises coordinator interruption, TERM-resistant child cleanup, leak prevention,
+    and the bounded grace interval without a polling deadline.
+  regression: test_run_selected_interrupt_stops_detached_production_process
+  recurrence_of: D-317
+  bead: think-3vt3
+  recorded_in: tests/test_validation_cli.py
+- id: D-322
+  title: The synopsis overstated which defect classes the gate had caught
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: since D-317 entered the defect log
+  severity: low
+  status: fixed
+  what: >-
+    The synopsis said every gate-detected defect was bookkeeping or robustness, while
+    the canonical log also contains validity and performance findings detected by the
+    gate.
+  consequence: >-
+    The narrative described a cleaner detector pattern than the underlying data supports
+    and made the generated class/detector tables disagree with their interpretation.
+  fix: >-
+    State the supported distinction: gate findings have been mechanical process,
+    implementation, or test-validity failures, while none has caught a mathematical
+    soundness error.
+  regression: none
+  bead: think-7qck
   recorded_in: SYNOPSIS.md

@@ -1924,15 +1924,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 319 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 322 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 74 | asserted something false about the mathematics |
-| validity | 81 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 120 | recorded something its own evidence contradicts |
-| robustness | 35 | did not finish, or finished only by luck |
+| validity | 82 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 121 | recorded something its own evidence contradicts |
+| robustness | 36 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -1941,17 +1941,17 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty defects in 319, and no soundness defect ever.**
-Every soundness failure was found by a control cell whose answer was known in advance, a
-rule written down before the measurement, a generated view contradicting its source, or
-someone reading carefully.
+**The automated gate has caught forty-two defects in 322, and no soundness defect
+ever.** Every soundness failure was found by a control cell whose answer was known in
+advance, a rule written down before the measurement, a generated view contradicting its
+source, or someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. Every gate-detected entry is a bookkeeping or robustness defect, found by
-contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
-That is the pattern, not an exception: gates are good at the mechanical classes and have
-never once caught the mathematics being wrong.
+*surprised*. Gate-detected entries here are mechanical process, implementation, or
+test-validity failures, found by contiguity, integration, mutation-anchor,
+reconciliation, or known-answer checks.
+The supported distinction is that the gate has never caught the mathematics being wrong.
 
-106 fixes left no regression check behind.
+107 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,
 and exit survived, but invalid `gdate` precision left the start and end fields empty, so
 [D-202](defects.md), [D-217](defects.md), and `think-b3bm` remain open.
