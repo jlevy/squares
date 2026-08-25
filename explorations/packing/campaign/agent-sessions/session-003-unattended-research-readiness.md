@@ -1,7 +1,7 @@
 ---
 title: session-003 — establish unattended research readiness agenda
 softschema:
-  contract: packing.squares:AgentSession/v1
+  contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
@@ -12,7 +12,27 @@ session:
   goal: >-
     Produce one dependency-correct agenda, complete hypothesis portfolio, and honest
     go/no-go boundary for autonomous eight-hour and twenty-four-hour square-packing work.
-  focus: process
+  workflow_phases:
+  - workflow: process-review
+    focus: process
+    recording: retrospective
+    objective: Reconcile autonomous-agent readiness with admissible numeric execution.
+    status: completed
+    entered_by: session_start
+    switch_reason: null
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
+    outcome: One launch agenda now separates productive agent work from numeric readiness.
+    evidence:
+    - The registry expanded to 24 artifacts and the admissible numeric queue was stated as zero.
+    - Eight-hour and twenty-four-hour launches received explicit capacity and lifecycle gates.
+    stop_reason: The queue, blockers, and launch boundary were durably separated.
+    next_action: Repair the narrow lifecycle before any unattended numeric launch.
   primary_bead: think-1sxv
   status: completed
   budget:

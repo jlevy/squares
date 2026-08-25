@@ -252,16 +252,39 @@ agenda:
     bead: think-1s0h
     depends_on: [BC-003, BC-009]
     next_evidence: >-
-      complete wall-release and SAT-branch feasible cones, followed by certified
-      continuation beyond exp-034's declared sheet
+      enumerate the other wall-release and SAT-branch cone directions before attempting
+      any further nonlinear continuation or local-isolation claim
     parallel_group: identity
     note: >-
       This is the first genuine basin-structure experiment in the ladder. Exp-033
       proves one exact fixed-angle optimal face, and exp-034 proves it lies in an exact
       two-parameter angle-and-slide sheet. Full nonsmooth stationary connectivity and
       unequal-side minimax clearance remain later bounded slices, so BC-010 stays ready
-      rather than complete. The exp-035 candidate checker is paused on think-1582 at
-      commit 8aa0cbb; it is statically clean but neither preregistered nor run.
+      rather than complete. After PR 19 merged, the campaign resumed on a fresh branch
+      with a four-hour horizon. Pre-measurement review found D-194 and D-195 in the
+      exp-035 candidate checker: one contact differential was reused across slide
+      strata, and tied support rows were treated as alternatives. The corrected
+      instrument is committed at `aa63cf4`; exp-035 froze the
+      two-owner, tied-row-conjunction criterion before execution and then met it in
+      0.28 wall-seconds. All three declared strata admit an exact non-sheet linearized
+      direction. The post-run normal gate passes all 30 steps in 70 wall-seconds with
+      all six exact small-n records replayed. Think-1582 is closed; think-imav owns the
+      next bounded nonlinear-realization slice. Its independent instrument is committed
+      at `f2d2e53`; exp-036 freezes exact owner-4 and owner-3 obstruction margins, source
+      topology, seven mutations, and separate 30-second generation and replay caps.
+      Exp-036 meets that criterion in 0.21 external wall-seconds: exact owner-4 and
+      owner-3 contradictions exclude exp-035's displayed direction from the true
+      Bouligand tangent at all three strata. This is not local isolation; other
+      non-sheet directions remain unclassified. D-197 records and repairs the
+      intervening shared-workspace branch race without adding a lease or worktree
+      protocol. Think-imav is complete; think-nm35 owns the next remaining-cone slice.
+      D-199's capped cumulative residual repair restores n=10 and all seven ladder rungs
+      at `PACK_JOBS=10` and `PACK_JOBS=1`. Only n=4 seed 0 remains: a typed HiGHS
+      status-4 Solve error under D-203 and `think-nr5w`. The committed golden is
+      unchanged, and no further full-golden retry is authorized before the millisecond
+      fixture is captured. The strict unattended-launch and deep-handoff gate remains
+      red; the recorded failure does not block a checkpoint merge with a green normal
+      gate.
     artifacts:
     - tools/check_n5_equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
@@ -270,6 +293,11 @@ agenda:
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
     - tools/check_n5_tangent_cones.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
+    - tools/check_n5_second_order_obstruction.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

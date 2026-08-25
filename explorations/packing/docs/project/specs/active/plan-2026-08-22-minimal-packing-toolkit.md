@@ -259,10 +259,15 @@ the atlas — so a new strategy cannot accidentally change what a basin means, a
 proposers are comparable by construction.
 
 **The experiment-loop harness** (already landed, see
-[`campaign/`](../../../../campaign/README.md)): the hypothesis registry, series, run
-artifacts, generated ledger, and whole-set invariant checks that the review’s run
-protocol calls for. Its run artifacts *are* the review’s “manifests”; its series are
-S0–S6.
+[`campaign/`](../../../../campaign/README.md)): the hypothesis registry, series,
+experiment artifacts, generated ledger, and whole-set invariant checks that the review’s
+round protocol calls for.
+Its experiment artifacts *are* the review’s “manifests”.
+The campaign is the durable square-packing research program across search, proof,
+validation, and infrastructure questions; basin cartography is its current search
+objective rather than the definition of the whole campaign.
+The review’s S0–S6 names are topical planning stages; actual series artifacts open only
+at a tooling or regime boundary that changes comparability.
 
 ### API Changes
 

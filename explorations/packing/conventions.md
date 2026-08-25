@@ -4,7 +4,7 @@
 another document restates an id or naming convention, this one wins.
 Changing program status remains owned by `SYNOPSIS.md`, and schemas and source artifacts
 remain authoritative for their own fields and evidence.
-Read this before adding an artifact, a round, a series, or a tool.
+Read this before adding an artifact, workflow phase, round, series, or tool.
 
 Each rule is marked **[checked]** when something fails on a violation, or
 **[convention]** when it rests on care alone.
@@ -21,7 +21,7 @@ The prefix says what kind of thing it is.
 | --- | --- | --- | --- |
 | Campaign | contract namespace | the directory | `packing.squares` |
 | Series | `series-NNN` | campaign | `series-000` |
-| Round (experiment) | `exp-NNN` | **campaign, not series** | `exp-003` |
+| Experiment | `exp-NNN` | **campaign, not series** | `exp-003` |
 | Hypothesis | `H-NNN` | campaign, spans series | `H-016` |
 | Exploration report | `X-NNN` | campaign | `X-001` |
 | Agent session | `session-NNN` | campaign | `session-001` |
@@ -35,31 +35,46 @@ The prefix says what kind of thing it is.
 | Review finding | `R-N`, `F-NN` | the review document that declares them | `R-2`, `F-07` |
 | Basin (planned) | canonical key, plus a `B-NNN` alias | campaign, spans series | — |
 
-**Rounds do not restart at `exp-001` in each series, and this is deliberate.** A series
-is a directory and a field, not a namespace.
-`exp-003` names one round forever, wherever it lives, which is what makes cross-series
-references work—and they are common: a series’ `carries_forward` names rounds from an
-earlier one, a hypothesis aggregates rounds across all of them, and the atlas will cite
-the round that discovered a basin.
+**Experiment ids do not restart at `exp-001` in each series, and this is deliberate.** A
+series is a directory and a field, not a namespace.
+`exp-003` names one experiment record forever, wherever it lives, which is what makes
+cross-series references work—and they are common: a series’ `carries_forward` names
+rounds from an earlier one, a hypothesis aggregates rounds across all of them, and the
+atlas will cite the round that discovered a basin.
 Per-series numbering would make every one of those a compound key, and a bare `exp-001`
 in prose would be ambiguous.
 
-The series is never lost, because the round records it in a `series:` field and lives in
-that series’ directory.
+The series is never lost, because the experiment records it in a `series:` field and
+lives in that series’ directory.
+
+`series-000` predates strict application of this boundary and now contains heterogeneous
+calibration and exact-determination work.
+Its
+[series note](campaign/series/series-000-smoke-and-calibration/README.md#current-scope-and-safe-reading)
+states the safe reading; `think-i08r` owns the all-at-once record migration.
+Do not use that legacy container as the template for opening another series.
+
+One experiment artifact records one round of research.
+Use **round** for the performed work or its sequence position and **experiment** for the
+durable `exp-NNN` record.
+A lower-level **run** is one command invocation or seed trial; one experiment may
+aggregate many runs.
+Agent sessions have their own `session-NNN` ids and may produce zero or many
+experiments.
 
 **Cardinality**, so the shape of the record is unambiguous:
 
 | Relation | Cardinality |
 | --- | --- |
-| round → series | exactly one |
-| round → hypotheses | **exactly one** under the current contract; the field remains an array for format compatibility |
-| hypothesis → rounds | zero or more—sweep cells and replications |
+| experiment → series | exactly one |
+| experiment → hypotheses | **exactly one** under the current contract; the field remains an array for format compatibility |
+| hypothesis → experiments | zero or more—sweep cells and replications |
 | hypothesis → exploration reports | zero or more (`derived_from`) |
 | hypothesis → strategies | zero or more (`strategy_refs`) |
 
 So `exp-` does **not** map one-to-one onto `H-`: one hypothesis may aggregate many
-rounds. Four rounds currently reference `H-016`: one historical three-cell round and its
-three per-cell replacements.
+experiments. Four experiments currently reference `H-016`: one historical three-cell
+round and its three per-cell replacements.
 A round does not apply its one verdict to several hypotheses.
 
 **Ids are never reused, and never renumbered except on merge collision.**
@@ -67,11 +82,9 @@ A round does not apply its one verdict to several hypotheses.
 and the change is recorded as an annotation on the affected artifacts, never as a silent
 edit.
 
-**Reserved ids.** [checked] `H-003`–`H-010` and `H-013`–`H-015` are held for entries
-that exist as prose in the
-[standing review’s register](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register)
-but are not codified here yet.
-They are declared in a `reserved-ids` comment on the idea board.
+**Reserved ids.** [checked] No hypothesis ids are currently reserved.
+A future reservation is declared in a `reserved-ids` comment on the idea board and names
+a claim that exists upstream but is not yet codified.
 A reserved id may be *named* but not *linked*, and a reservation that has been fulfilled
 is flagged stale.
 
@@ -117,6 +130,38 @@ ledger, the checker.
 rejects `allOf` object composition under `status: enforced`, so a conditional would
 invalidate every artifact rather than the offending one
 ([jlevy/softschema#41](https://github.com/jlevy/softschema/issues/41)).
+
+### Workflow, Focus, Phase, and Slice
+
+**Workflow names purpose and output; focus names the primary quality emphasis.**
+[checked for agent sessions] The six numbered workflows and their full contracts live in
+[`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts).
+One independently tracked session phase declares one workflow and one primary focus; the
+other principles still constrain and may contribute to the work.
+`general-improvement` is reserved for genuine repository maintenance outside W1–W6, not
+a label for mixed or ordinary core work.
+
+**Implementation stays with its owning workflow.** [convention] Bounded research
+corrections stay in W1 or W2, idea probes in W3, process and checker repairs in W4,
+measured optimizations in W5, and registered instruments in W6 before measurement.
+There is no undefined implementation handoff.
+
+**A phase is contiguous; a slice is bounded.** [checked for phase history] Start a new
+phase when workflow or focus changes.
+A focus-only change repeats the workflow and is not a workflow switch.
+A slice is one time-bounded action inside the phase and need not produce an experiment.
+Mechanical delegations inherit the coordinating phase unless they open independently
+tracked sessions.
+
+**Current transitions are recorded before the new work begins.** [checked] A phase opens
+with its expected output, validation command, kill condition, fallback, start, and
+deadline. Its actual outcome and evidence are terminal fields.
+The first phase uses `session_start` and no switch reason; later phases name a planned
+checkpoint, evidence checkpoint, or user request, and close the old phase before
+entering the new one.
+Sessions 001–008 predate this convention.
+Their v2 workflows are retrospective reconstructions from retained evidence and are not
+preregistration evidence.
 
 ## 4. Evidence
 
@@ -201,13 +246,15 @@ fine—as long as it never gets to say what is valid.
 canonicalizes, decides validity, or writes the atlas, so a new strategy cannot change
 what a basin means.
 
-**The vocabulary is fixed, and one word is overloaded.** [convention]
+**The vocabulary is fixed, and controlled collisions are explicit.** [convention]
 [`SYNOPSIS.md`](SYNOPSIS.md#terminology) defines every term this directory uses in a
-narrow sense—quench, basin, polish, exploration, gap, tier, pair-test and the rest—and
-those definitions are the ones that apply in artifacts, beads and reviews.
-The one collision worth memorising: **“cell” alone always means a cell of configuration
-space**—a choice of separating axis and order for each pair—and a position in the sweep
-is an **“instance cell”**, never a bare “cell”.
+narrow sense—campaign, session, experiment, round, run, quench, basin, polish,
+exploration, gap, tier, pair-test and the rest—and those definitions apply in artifacts,
+beads and reviews.
+Write **packing exploration** for the project directory, **exploration
+report** for `X-NNN`, and bare **exploration** for reaching another basin.
+Write **cell** alone for a cell of configuration space—a choice of separating axis and
+order for each pair—and **instance cell**, never bare “cell”, for a position in a sweep.
 The two are unrelated objects and the confusion is expensive: one is where the LP is
 solved, the other is what a round is run on.
 
@@ -278,12 +325,19 @@ documentation correction take eight hours to validate:
 | --- | ---: | --- |
 | Interactive | under about 2 seconds | Status, ledger and schema checks, exact-witness verification, engine self-test |
 | Focused | under about 60 seconds | One changed component and its named negative control (`./test.sh --only`) |
-| Checkpoint | about 2 minutes | Normal `./test.sh` before a commit, push, or cross-component handoff |
-| Deep handoff | about 5 minutes | `./test.sh --strict` before an unattended campaign, major handoff, or merge |
+| Checkpoint | about 2 minutes | Normal `./test.sh` before a commit, push, cross-component handoff, or checkpoint merge |
+| Deep handoff | about 5 minutes | `./test.sh --strict` before an unattended campaign, a handoff that depends on regenerated producer output, or any claim that the strict/deep path is healthy |
 | Research round | preregistered per hypothesis | Candidate generation or proof search under its own declared timebox |
 
 These are working envelopes, not promises; repeated versioned benchmarks and warm/cold
 regimes remain tracked work.
+
+A checkpoint merge may retain a known strict/deep failure when the normal gate passes
+without skips, the exact failure and its limitation are recorded in the defect log and
+PR, and an open bead owns the repair.
+That merge preserves reviewed work; it does not certify the failed producer or authorize
+an unattended campaign.
+The strict gate remains mandatory before the deep handoff or launch that depends on it.
 
 Everything else on this page is convention, and convention is what drifts.
 When a rule here is broken and nothing catches it, the fix is a check, not a reminder.

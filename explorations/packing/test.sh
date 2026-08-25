@@ -383,6 +383,10 @@ step_small_n_moduli() {
     --replay campaign/series/series-000-smoke-and-calibration/results/exp-033-h-023-n5-equal-side-face.json
   $PY tools/check_n5_angle_sheet.py \
     --replay campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json
+  $PY tools/check_n5_tangent_cones.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json
+  $PY tools/check_n5_second_order_obstruction.py \
+    --replay campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json
 }
 
 step_negative_controls() {

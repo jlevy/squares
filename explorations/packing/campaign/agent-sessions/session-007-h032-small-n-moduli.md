@@ -1,7 +1,7 @@
 ---
 title: session-007 — H-032 exact small-n moduli controls
 softschema:
-  contract: packing.squares:AgentSession/v1
+  contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
@@ -13,7 +13,27 @@ session:
     Establish two exhaustive, replayable ground-truth cells for the landscape atlas:
     the full arbitrary-rotation n = 3 family with every quotient stratum, and the rigid
     n = 4 grid quotient, while binding both to the directly relevant primary literature.
-  focus: insight
+  workflow_phases:
+  - workflow: research-loop
+    focus: insight
+    recording: retrospective
+    objective: Classify and render the exact n=3 and n=4 optimal moduli controls.
+    status: completed
+    entered_by: session_start
+    switch_reason: null
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
+    outcome: Exp-014 and exp-015 exhaustively classified both declared sweep cells.
+    evidence:
+    - The n=3 quotient interval and n=4 quotient point replay in under one second.
+    - The deterministic SVG and 15 mutation controls preserve the declared distinctions.
+    stop_reason: Both preregistered cells met their exhaustive exact criteria.
+    next_action: Define the complete n=5 component relation before extending H-032.
   primary_bead: think-n82j
   status: completed
   budget:

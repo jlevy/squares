@@ -1,6 +1,6 @@
 # Synopsis: The `s(n)` Program
 
-**Date:** 2026-08-24 (last updated after terminal `series-000` round 15)
+**Date:** 2026-08-24
 
 **Status:** Living document, revised whenever a result lands.
 
@@ -11,7 +11,7 @@ what it is doing next.
 > reproducible by a command given in the text, and the artifact is authoritative where
 > the two differ. `tools/check_synopsis.py` enforces that in the gate.
 
-## Overview
+## The Program at a Glance
 
 `s(n)` is the side of the smallest square that contains `n` non-overlapping unit
 squares, which may be rotated freely.
@@ -23,8 +23,10 @@ mathematical truth and may veto promotion; **Process** (Discipline) owns reprodu
 research operations and may veto an unreconstructable run; **Insight** (Creativity) owns
 hypotheses and strategy but cannot certify them; and **Efficiency** (Infrastructure)
 owns stable, measured throughput without relaxing Correctness or Process controls.
-An agent normally focuses on one dimension at a time and hands explicit artifacts to the
-next.
+These are quality dimensions, not session types.
+An agent declares one primary focus inside one workflow phase, while the other
+principles continue to constrain and contribute to the work, then hands explicit
+artifacts to the next phase.
 
 Those principles govern four capabilities built so far:
 
@@ -57,9 +59,8 @@ The argument for it, and the measurement registered to kill it if it is wrong, a
 [Theoretical Results](#theoretical-results) and
 [The Hypothesis Registry](#the-hypothesis-registry) below.
 
-[Terminology](#terminology) below fixes the sense of every word this project uses
-narrowly—quench, basin, polish, exploration, gap, tier—and disambiguates the one word
-used for two different things.
+[Terminology](#terminology) below fixes both the work units—campaign, session, phase,
+slice, experiment, round, and run—and the mathematical terms used narrowly here.
 Those definitions apply in the campaign artifacts and the beads too, not only here.
 
 ### Document map
@@ -70,9 +71,9 @@ Nothing here duplicates what another owns.
 | Document | Owns |
 | --- | --- |
 | [`TUTORIAL.md`](TUTORIAL.md) | The conceptual on-ramp for a newcomer: the objects, why the approach is shaped this way, and what is established versus open. Owns no status—it defers here for all of it |
-| **This synopsis** | The state of the program: results, their status, the roll-up of rounds |
+| **This synopsis** | The state of the program, full workflow contracts, work-unit vocabulary, and roll-up of rounds |
 | [Historical quench-spine handoff](docs/project/handoff-2026-08-23-quench-spine.md) | A superseded 2026-08-23 checkpoint retained as provenance. Do not use it for current priority; use the basin confidence ladder and launch agenda |
-| [`README.md`](README.md) | The four-principle operating charter, what is in the directory, how to run it, and the index of the six research reports |
+| [`README.md`](README.md) | The four-principle operating charter, compact workflow selector, directory orientation, and index of the six research reports |
 | [`conventions.md`](conventions.md) | The definitive registry of every convention, id class, and naming rule, and which are machine-checked |
 | [`defects.md`](defects.md) | Every bug and record defect, what caught it, and what now stops it recurring |
 | [Soundness postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | Why D-014 was possible, and rules R1–R4 that apply to code not yet written |
@@ -84,16 +85,107 @@ Nothing here duplicates what another owns.
 | [Infrastructure for Packing Exploration](docs/project/research/research-2026-08-22-infrastructure-for-packing-exploration.md) | The build order, the language boundary, what not to build |
 | [Lean for Packing Proofs](docs/project/research/research-2026-08-22-lean-for-packing-proofs-and-validation.md) | Where a proof assistant fits, and what it would be pointed at first |
 | [A Search Philosophy](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | The strategy layer: why pointing should beat scaling |
-| [Standing review](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | The experimental method, and the register `H-001`–`H-015` in prose |
+| [Standing review](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | Historical source of the experimental method and initial `H-001`–`H-015` register; the codified registry owns current claims |
 | [Plan spec](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | The seven build phases, and a revision note recording what building the quench corrected |
-| [Campaign runbook](campaign/README.md) | The contract every round runs under, frozen while rounds run |
+| [Campaign runbook](campaign/README.md) | W6 mechanics: the contract every experiment round runs under, frozen while rounds run |
+| [Agent sessions](campaign/agent-sessions/README.md) | The v2 session contract: entry workflow, ordered phase history, clocks, evidence, stop reason, and handoff |
+| [Basin confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) | Mutable order of bounded experiment cells and their readiness; it does not own claims or current program prose |
 | [Idea board](campaign/ideas.md) | The whole idea space on one page, including dead ends |
-| [Ledger](campaign/ledger.md) | Generated roll-up of series, registry, rounds and effort |
+| [Ledger](campaign/ledger.md) | Generated roll-up of session workflow phases, agendas, series, registry, rounds, and effort |
 
 The code that produces the numbers: [`sqpack/verify.py`](sqpack/verify.py) decides
 validity exactly, [`sqpack/quench.py`](sqpack/quench.py) is the LP-in-cell quench,
 [`lp_cell.py`](lp_cell.py) is a second, independent implementation of the quench’s
 linear program, and [`sqsearch/`](sqsearch/) is the screening annealer.
+
+## Workflow Entry Contracts
+
+A workflow is the purpose-and-output contract for one contiguous phase of agent work.
+It is independent of the operating focus: a focus identifies the phase’s primary quality
+emphasis, not the only principle that applies.
+W6 may run under a Correctness focus while an exact certificate is checked, then enter
+another W6 phase under Insight when the same registered question needs a creative
+construction. The focus changed; the workflow did not.
+
+Every phase begins by recording its workflow and primary focus; objective and required
+inputs; expected durable output and validation command; kill condition and fallback; and
+start and deadline. Actual outcome and evidence are terminal fields recorded when the
+phase closes, not placeholders invented when it opens.
+The session artifact records the ordered history.
+The generated ledger summarizes both entry workflows and later switches.
+
+| ID | Workflow | Enter with | Work boundary | Durable exit | Default handoff |
+| --- | --- | --- | --- | --- | --- |
+| W1 | `research-pass` | A bounded question, source corpus, and identified coverage gap | Establish and source the state of knowledge; do not turn untested connections into campaign verdicts | Corrected or enriched research docs, source notes, explicit conflicts, and unresolved gaps | W2 audits the claims; W3 may mine supported gaps |
+| W2 | `factual-review` | A fixed artifact set, its sources, and the claims to audit | Correctness only; read-only by default, but an authorized review may apply an obvious bounded correction whose evidence and scope are unchanged; do not invent successor theory or redesign the process inside the review | Claim-by-claim dispositions, authorized corrections, or defects with exact evidence | Required before promoted, novel, disputed, or high-risk claims; otherwise W3 for new hypotheses or W4 for a process failure |
+| W3 | `insight-iteration` | Current synopsis, idea board, ledger, negative results, and a sharp frontier | Generate explanations and hypotheses freely; do not certify them or spend an undeclared experiment budget | `X-NNN` reports and candidate `H-NNN` items with mechanism, falsifier, expected information, and limits | Codification, then W6 |
+| W4 | `process-review` | Artifacts, beads, logs, checks, and a reconstructability or discipline question | Inspect ownership, handoffs, refusals, and controls; do not substitute process polish for a scientific result | Review findings, beads, and narrowly scoped contract or checker changes | W5 for a measured bottleneck or the next workflow that owns the result |
+| W5 | `efficiency-loop` | A measured baseline, profile, target metric, and equivalence or validity guard | Improve time, cost, or throughput under the same regime; never relax correctness or provenance to win | Benchmark record, change or rejection, measured delta, and preserved guards | W6 when the research bottleneck moves; W4 if the process contract is wrong |
+| W6 | `research-loop` | A registered hypothesis, fixed criterion, regime, budget, stop rule, and instrument contract | Build or repair the bounded instrument, freeze it before measurement, then use creative effort inside the registered scope to execute the smallest fair test; never change the criterion, suppress a failure, or improvise a replacement hypothesis mid-round | Frozen instrument, `exp-NNN`, raw data or proof record, verdict, regenerated views, and the next bounded question | W2 before promoted or high-risk claims; otherwise W3 or another W6 slice |
+
+Implementation is an action inside the workflow that owns its promised result, not an
+undefined handoff: W1 and W2 can make bounded research corrections, W3 can implement a
+bounded exploratory derivation or visualization without spending an undeclared
+experiment budget, W4 can repair an accepted process or checker defect, W5 can implement
+a measured optimization, and W6 can build or repair its registered instrument before
+measurement. `general-improvement` remains only for genuine repository maintenance whose
+output fits none of W1–W6. It must not hide core work or a session alternating among
+research, review, and infrastructure; those are separate phases.
+
+### Switching Workflows in One Session
+
+One phase is active at a time per independently tracked session.
+Start a new phase when its purpose or focus changes.
+A focus-only change repeats the workflow name and is a phase boundary, not a workflow
+switch. An orchestrator may switch at a planned checkpoint, after a concrete evidence
+checkpoint, on a user request, or because the active premise was falsified.
+It closes the old phase first with status, evidence, stop reason, and next action; then
+it declares the new workflow, primary focus, objective, expected output, validation,
+kill condition, fallback, start, and deadline.
+It does not relabel mixed work after the fact.
+
+Sessions 001–008 predate this workflow vocabulary.
+Their v2 phase rows are explicit retrospective reconstructions from the durable session
+record, not evidence that those workflows, focuses, clocks, or transitions were declared
+contemporaneously. Current and future phases are declared before work begins.
+
+The normal research cadence is not a mandate to traverse every workflow:
+
+```
+W1 research-pass ──> W2 factual-review ──> W3 insight-iteration
+                                               │
+                                               v
+W5 efficiency-loop <── W4 process-review    W6 research-loop
+        │                                      │
+        └──────── measured capability ─────────┘
+                  promoted/high-risk W6 result ──> W2 ──> W3
+```
+
+At any checkpoint, the human operator may choose the next phase, narrow the question, or
+stop. Long autonomous sessions use the same rule; autonomy changes the duration and
+controller, not permission to blur contracts.
+
+### The Current `n = 5` Handoff
+
+The H-023 line shows why the distinction matters.
+Session 004 used W3 to turn an ambiguous terminal-family observation into the
+falsifiable connectivity hypothesis.
+Session 009 first used W4 to make basin events and exact identity controls admissible.
+W6 then produced exp-033’s exact fixed-angle face and exp-034’s angle-and-slide sheet.
+A W2 instrument review found D-194 and D-195 before the next measurement, preventing a
+reused contact differential and an invalid alternative-row interpretation from entering
+the result.
+W6 resumed only after the corrected criterion was frozen; exp-035 then proved
+exact first-order directions outside the sheet without proving nonlinear realization.
+W3 turned that limitation into exp-036’s registered second-order obstruction, and W6
+then excluded the displayed direction from the true tangent cone without classifying the
+other non-sheet directions.
+When the post-round strict gate failed, W4 separated stale controls from an independent
+deep-golden solver rejection.
+The bounded solver implementation that followed belongs to the process-repair workflow
+that isolated it; it is not research and does not need a general-work catchall.
+The scientific queue remains separate.
+At no point may exp-035 or exp-036 be reinterpreted as a connectivity proof.
 
 ## What Is Built
 
@@ -236,6 +328,10 @@ results, not only instruments.
 | [`tools/check_stromquist_repair.py`](tools/check_stromquist_repair.py) | A source-distinct repair certifies `s(11) ≥ 2 + 4/√5` exactly (**T-4**, exp-017) |
 | [`tools/check_trump_tangent.py`](tools/check_trump_tangent.py) | Trump’s pose is locally isolated in the anchored chart (exp-013) |
 | [`tools/check_small_n_moduli.py`](tools/check_small_n_moduli.py) | Exact optimal configuration spaces at `n = 3, 4` (exp-014, exp-015) |
+| [`tools/check_n5_equal_side_face.py`](tools/check_n5_equal_side_face.py) | Two retained equal-side `n = 5` poses share one exact fixed-angle optimal face (exp-033) |
+| [`tools/check_n5_angle_sheet.py`](tools/check_n5_angle_sheet.py) | That face lies in an exact two-parameter angle-and-slide sheet of optima (exp-034) |
+| [`tools/check_n5_tangent_cones.py`](tools/check_n5_tangent_cones.py) | Complete active first-order systems admit one displayed non-sheet direction (exp-035) |
+| [`tools/check_n5_second_order_obstruction.py`](tools/check_n5_second_order_obstruction.py) | That displayed direction is excluded from the true Bouligand tangent cone (exp-036) |
 | [`tools/check_kingbird_svg.py`](tools/check_kingbird_svg.py) | High-precision (160-digit) numerical reconstruction of the `n = 29` record source, refuting H-024’s three-class claim. Not an exact optimality certificate—the retained SVG is numerical, and exp-012 says so (exp-012) |
 
 **Unbuilt on this lane:** the `PoseBox` scalar and the interval branch-and-bound hook,
@@ -267,9 +363,91 @@ characterization is open work ([D-059](defects.md)).
 
 These words are used in a narrow sense throughout this directory, the campaign
 artifacts, and the beads.
-Two of them carry more than one sense—**cell** and **quench**—and for each, the rule for
-which to write is stated with the definition.
+Three carry controlled multiple senses—**exploration**, **cell**, and **quench**—and for
+each, the rule for which form to write is stated with the definition.
 Nothing below is a synonym for anything else below.
+
+### Work Units and Records
+
+**Packing exploration.** The complete self-contained project at `explorations/packing/`:
+research documents, sources, code, tests, plans, and campaign record.
+Write the full phrase when this directory is meant.
+Bare *exploration* retains the mathematical meaning under
+[The Operations](#the-operations).
+
+**Campaign.** The durable, multi-session square-packing research program under one
+registry, evidence contract, and generated record.
+This campaign lives in `campaign/` and contains bounded search, proof, validation, and
+infrastructure questions.
+Basin cartography is its current search objective, not the definition of the whole
+program.
+A campaign can span many series and agent sessions; neither is a synonym for it.
+
+**Series.** One campaign-wide tooling generation and comparability boundary.
+Open a new series when an instrument or regime change makes earlier conclusions unsafe
+to compare or carry forward.
+Each experiment still records its narrower subject, instrument, and provenance, so
+sharing a series does not make unlike result shapes comparable.
+The open `series-000` predates strict application of this rule; its
+[series note](campaign/series/series-000-smoke-and-calibration/README.md#current-scope-and-safe-reading)
+states the safe reading, and `think-i08r` owns the persisted-record migration.
+
+**Agent session.** One bounded interval of orchestrated work under an overall goal,
+budget, and stop conditions.
+A session may contain several workflow phases and may produce zero, one, or many
+experiments. It is a handoff record, not a scientific measurement.
+
+**Workflow phase.** One contiguous interval inside an independently tracked session with
+one workflow, one primary focus, one objective, and one clock.
+A focus-only change starts another phase with the same workflow; a changed purpose
+starts a phase under a different workflow.
+
+**Focus.** The primary quality dimension emphasized during a phase: correctness,
+process, insight, or efficiency.
+The other principles still constrain and may contribute to the work.
+Focus answers *what quality is being privileged*, while workflow answers *what kind of
+result the phase promises*.
+
+**Slice.** The smallest time-bounded action inside a phase.
+It ends at a concrete evidence checkpoint and may be renewed only by stating the next
+bounded question. A slice is not automatically an experiment; source inspection, a
+checker repair, or one proof derivation can each be a slice.
+A delegated mechanical slice inherits the coordinating phase unless it opens its own
+independently tracked session.
+
+**Hypothesis.** One registered claim stated so it could be wrong, with a criterion,
+regime, and instrument.
+It persists across sessions and series and may be tested by several experiments.
+An open question that cannot yet carry a falsifiable criterion is recorded honestly as
+such.
+
+**Experiment.** One durable `exp-NNN` artifact recording one preregistered research
+round in exactly one series.
+It contains the method, typed results, effort, verdict, and links to raw evidence.
+An experiment can aggregate several lower-level runs and is not an agent session.
+
+**Round.** The bounded research work recorded by one experiment.
+Use *round* for the act or its place in a sequence and *experiment* for the durable
+`exp-NNN` record. They are one-to-one in this campaign; neither means one solver
+invocation.
+
+**Run.** One invocation or trial of a tool, solver, or proof checker.
+Several seeds or conditions can produce several runs inside one experiment.
+`runner.py run` is a command name that sequences experiments; it does not change this
+definition.
+
+**Result.** One typed observation inside an experiment—a record score, categorical
+determination, paired comparison, or condition comparison.
+The verdict applies the preregistered rule to the results; it is not another result
+shape.
+
+**Ledger.** A generated view over session, agenda, series, hypothesis, experiment, and
+effort artifacts. It summarizes authoritative sources and is never edited by hand.
+
+**Exploration report.** One free-form `X-NNN` idea record from which hypotheses may be
+mined. Write the full phrase for the artifact.
+It is distinct from both the packing exploration directory and the basin-exploration
+operation below.
 
 ### The objects
 
@@ -330,9 +508,10 @@ Say “the quench map” where the distinction matters.
 down to the local optimum without changing which local optimum that is.
 This is what the quench does, and all it does.
 
-**Exploration.** Reaching a different basin.
+**Exploration**—without a qualifier, the operation of reaching a different basin.
 No amount of polish performs it, and nothing currently in the toolkit does it reliably
-at `n = 11`.
+at `n = 11`. Write **packing exploration** for the project directory and **exploration
+report** for an `X-NNN` artifact.
 
 **Proposer** and **refiner**. The two halves of the loop, named separately because the
 measurement that matters is which one is failing.
@@ -376,8 +555,14 @@ share one exact connected fixed-angle LP optimal face.
 Its fixed-side active nullity is one in the interior and zero at the two boundary
 strata. Exp-034 proves that face lies in a two-parameter angle-and-slide sheet of
 orientation-indexed LP optima.
-This is not a proof of a five-dimensional family or of the complete nonsmooth stationary
-component ([D-034](defects.md), [D-041](defects.md)).
+Exp-035 derives the full active first-order systems at both endpoints and one interior
+point; every owner branch admits one exact direction outside that sheet.
+Exp-036 proves that displayed direction is not a true Bouligand tangent: both possible
+nearby owner axes have strict exact second-order obstructions.
+Other non-sheet directions remain unclassified.
+This is not a local-isolation theorem, a proof of a five-dimensional family, or a
+classification of the complete nonsmooth stationary component ([D-034](defects.md),
+[D-041](defects.md)).
 
 **This distinction should have existed from the first day.** “Rigidity” was treated as
 an informal visual property of the target while the census silently assumed every
@@ -470,19 +655,21 @@ symmetry—used to steer search toward diversity rather than toward loss.
 **Meter.** The instrument that counts pair-tests, so two proposers can be compared at
 equal budget. *Unbuilt, so no two proposers have been compared at equal budget.*
 
-### The record
+### Identifiers and Control Records
 
-**Round.** One executed experiment against exactly one registered hypothesis under the
-current contract, with a declared timebox and a pre-registered accept rule, recorded as
-a schema-validated artifact plus its declared result or archive.
-The hypothesis field remains an array for format compatibility; one verdict is never
+Round and series are defined once under
+[Work Units and Records](#work-units-and-records).
+Under the current experiment contract, every round tests exactly one registered
+hypothesis. The field remains an array for format compatibility; one verdict is never
 applied to several claims.
-**Series.** An ordered group of rounds sharing a runbook; only one may be open at a
-time. **Agenda.** A mutable priority queue of cells (`BC-001`, …) ordering upcoming work
-by dependency and readiness, rendered into the ledger.
-A coordination artifact, not a second hypothesis registry and not a scheduler.
+
+**Agenda.** A mutable priority queue of cells (`BC-001`, …) ordering upcoming work by
+dependency and readiness, rendered into the ledger.
+It is a coordination artifact, not a second hypothesis registry and not a scheduler.
+
 **Defect.** One record in [`defects.yaml`](defects.yaml)—what went wrong, what caught
 it, and what now stops it recurring—rendered to [`defects.md`](defects.md).
+
 **Bead.** One tracked work item (`think-xxxx`) in the `tbd` queue; every open defect
 carries one.
 
@@ -1114,7 +1301,7 @@ view; this section is the reading of it.
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 0 | — |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question; one exact 2D sheet solved | How are the observed `n=5` endpoint candidates connected? | 2 | 25m agent, 0.51s wall |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question; one exact 2D sheet and one obstructed tangent direction | How are the observed `n=5` endpoint candidates connected? | 4 | 65m agent, 1.00s wall |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | **refuted** | Verified record packings through `n=30` use at most three angle classes; exp-012 verifies six at `n=29` | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of verified records are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
@@ -1236,17 +1423,23 @@ Exp-033 completes the first bounded BC-010 `n = 5` connectivity slice: the equal
 pair shares one exact fixed-angle optimal face.
 Exp-034 embeds that face in an exact two-parameter angle-and-slide sheet, but complete
 stationary identity and the unequal-side rows remain open.
+Exp-035 derives the complete active first-order systems at both endpoints and one
+interior point and finds an exact direction outside that sheet in every owner branch;
+exp-036 excludes that displayed direction from the true Bouligand tangent cone by exact
+second-order inequalities in both owner branches.
+Other non-sheet directions remain open.
 
 ## Experiments Conducted
 
-There are 34 terminal rounds registered in `series-000`. They record 828 agent-minutes
+There are 36 terminal rounds registered in `series-000`. They record 868 agent-minutes
 and 28.2 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
 checker, the exact Stromquist printed-set falsifier, and the exact repaired-cover
 certificate, the exact terminal-component known-answer checker, and the exact `n = 5`
-fixed-angle face and angle-sheet checkers.
+fixed-angle face, angle-sheet, full-angle tangent, and second-order obstruction
+checkers.
 
 No record-search round has been run at the `exact` tier, so **no result below claims a
 new record**. Exp-012 is an exploratory reconstruction of a published record witness;
@@ -1293,6 +1486,8 @@ archive beside it.
 | [exp-032](campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md) | 3 | positive control | H-021 | exact component-policy replay | one n=3 interval; one n=4 point; 8/8 false policies rejected | **baseline** |
 | [exp-033](campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md) | 5 | target | H-023 | exact fixed-angle face test | one segment; nullities `0/1/0`; six controls pass | **accepted** |
 | [exp-034](campaign/series/series-000-smoke-and-calibration/experiments/exp-034-h-023-n5-angle-sheet.md) | 5 | target | H-023 | exact angle-and-slide sheet | dimension at least two; four fixtures and five controls pass | **accepted** |
+| [exp-035](campaign/series/series-000-smoke-and-calibration/experiments/exp-035-h-023-n5-tangent-cones.md) | 5 | target | H-023 | exact full-angle active systems | non-sheet direction at A/interior/B; seven controls pass | **accepted** |
+| [exp-036](campaign/series/series-000-smoke-and-calibration/experiments/exp-036-h-023-n5-second-order-obstruction.md) | 5 | target | H-023 | exact second-order branch obstruction | displayed direction excluded at A/interior/B; seven controls pass | **accepted** |
 
 ### Cost and provenance
 
@@ -1332,8 +1527,10 @@ archive beside it.
 | exp-032 | exact n=3/n=4 models + 8 mutations | 0.92 s | 10 m | criterion | `d3d4ace` |
 | exp-033 | one exact common-cell face + six controls | 0.24 s | 15 m | criterion | `26360f1` |
 | exp-034 | one exact parameter sheet + five controls | 0.27 s | 10 m | criterion | `329b848` |
+| exp-035 | six exact owner matrices + seven controls | 0.28 s | 20 m | criterion | `aa63cf4` |
+| exp-036 | two exact branch obstructions + seven controls | 0.21 s | 20 m | criterion | `f2d2e53` |
 
-### What the 34 rounds jointly establish
+### What the 36 rounds jointly establish
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only
@@ -1353,8 +1550,14 @@ component-membership witness.
 Exp-033 adds the first exact relation between sampled `n = 5` source poses: after one D4
 action and relabelling, two different golden keys share a one-dimensional fixed-angle
 optimal face at side `1 + 5sqrt(2)/4`. It does not assign a full terminal component.
-Exp-023 reaches proved side 2 on three of four n=4 starts and preserves the fourth
-event’s post-check rejection.
+Exp-034 embeds that face in an exact two-parameter angle-and-slide sheet.
+Exp-035 then retains six exact active-system matrices across A, the interior, and B and
+verifies a non-sheet direction against every row.
+Exp-036 proves that displayed direction cannot be a nonlinear path tangent: the only two
+nearby pair `(3,4)` owner-axis branches have exact second-order obstruction margins.
+This strict linearized-versus-true-tangent gap does not classify the other directions or
+assign a component. Exp-023 reaches proved side 2 on three of four n=4 starts and
+preserves the fourth event’s post-check rejection.
 That stop exposed D-171: two rows were already outside the screen before an argmax-only
 retry. Exp-024 applies one complete offending-set retry and reaches side 2 on all four
 starts, with 14,301 of 14,301 evaluations settled and all four events admissible.
@@ -1467,34 +1670,32 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 193 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 225 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 62 | asserted something false about the mathematics |
-| validity | 57 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 54 | recorded something its own evidence contradicts |
-| robustness | 15 | did not finish, or finished only by luck |
-| performance | 5 | worked, but cost far more than it should |
+| soundness | 64 | asserted something false about the mathematics |
+| validity | 64 | was correct, but the measurement did not bear on the question |
+| bookkeeping | 71 | recorded something its own evidence contradicts |
+| robustness | 19 | did not finish, or finished only by luck |
+| performance | 7 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Fifty-one of the sixty-two soundness defects pointed in the *flattering* direction**,
-where the error looks like a success.
+**Fifty-three of the sixty-four soundness defects pointed in the *flattering*
+direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught eight defects in 193, and no soundness defect ever.**
+**The automated gate has caught twelve defects in 225, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.
 Gates confirm what you already thought to check; these were found by devices built to be
-*surprised*. The eight the gate did catch ([D-024](defects.md), [D-064](defects.md),
-[D-106](defects.md), [D-107](defects.md), [D-125](defects.md), [D-130](defects.md), and
-[D-163](defects.md), and [D-187](defects.md)) are bookkeeping or robustness defects,
-found by contiguity, integration, mutation-anchor, and reconciliation checks—which is
-the pattern, not an exception: gates are good at the mechanical classes and have never
-once caught the mathematics being wrong.
+*surprised*. Every gate-detected entry is a bookkeeping or robustness defect, found by
+contiguity, integration, mutation-anchor, reconciliation, or known-answer checks.
+That is the pattern, not an exception: gates are good at the mechanical classes and have
+never once caught the mathematics being wrong.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-030 and D-031 were caught by proved control cells while structural store checks stayed
@@ -1621,11 +1822,19 @@ D-171 records why the former argmax-only repair left one n=4 event unsettled: ro
 and 21 already violated the screen together.
 The complete offending-set retry closes the exact regression, and exp-024 completes the
 n=4 v3 block at 4/4 admissible without weakening the screen.
+D-194 and D-195 record two pre-measurement corrections to exp-035: pair `(0,4)` is
+regenerated at each slide stratum, and pair `(3,4)` has two owner-axis branches whose
+tied support rows are conjunctive within each branch.
+The frozen controls now execute and both defects are fixed.
+D-196 records the integration recurrence caught before commit when a context-poor edit
+briefly changed D-034 instead of D-194. D-197 records the concurrent checkout caught by
+the exp-036 commit banner; the isolated checker commit was moved to the campaign branch
+and the other branch ref restored before push or target execution.
 
 Both claims are computed from `defects.yaml` rather than written down, so neither can
 drift from the log it describes ([D-028](defects.md)).
 
-Seventy-one fixes left no regression check behind, and that list has already predicted a
+Eighty-five fixes left no regression check behind, and that list has already predicted a
 recurrence once. The
 [postmortem](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) on D-014
 turns this into four rules—oracle coverage through unshared code, tolerances stated
@@ -1668,9 +1877,10 @@ An exact dual proves optimality within that cell, while active fixed-side nullit
 changes from zero at each endpoint to one in the interior.
 Exp-034 proves that exact face lies in a two-parameter angle-and-slide sheet of
 orientation-indexed LP optima.
-The complete wall-release and separating-axis cone plus certified continuation must
-still decide the full component; the unequal-side rows still need minimax-clearance
-bounds.
+Exp-035 derives both owner-axis first-order systems at the two endpoints and one
+interior point and verifies one exact non-sheet direction in each.
+Certified nonlinear continuation must still decide whether that direction is a true
+motion in the full component; the unequal-side rows still need minimax-clearance bounds.
 
 So `distinct_basins` currently counts family members, the discovery curve cannot
 plateau, and H-011’s saturation criterion is unreachable until the definition is fixed.
@@ -1696,13 +1906,44 @@ exp-013 confirmed H-026 and locally isolated Trump’s pose, and exp-014/015 sol
 exact `n=3,4` quotient controls in 1.28 wall seconds.
 Exp-033 then certified the `n = 5` equal-side pair’s exact fixed-angle face in 0.24 wall
 seconds of generation plus replay.
-Next test angle-varying stationarity along that face, bound clearance between the
+Exp-034 through exp-036 then certify an exact angle-and-slide sheet, a non-sheet
+first-order direction, and an exact second-order obstruction to that displayed direction
+in 0.76 further wall-seconds.
+Next classify the remaining non-sheet directions, bound clearance between the
 unequal-side rows, and hide the UnitSquare `n = 68,69` children for the first
 parent-surgery test.
 The quantitative Trump successor is an explicit isolation radius or minimal-support
 stress analysis, not another rank count.
 No hour-scale lane is promoted without a known-answer response, independent validity,
 and a result that changes a decision.
+
+**The normal checkpoint is green; the strict unattended-handoff gate is not.** Recent
+exact-tree receipts pass all 30 fast-path steps in 33–35 wall-seconds, including seven
+exact small-`n` replays and all 55 negative controls.
+The first deep regeneration reproduced one unsettled `n=4` proposal and an `n=10`
+`1.503e-10` pair-row residual.
+[D-199](defects.md) identifies and fixes the n=10 cause: repairing first-call offenders
+49 and 66 exposes previously clean row 61, which a third conservative call settles with
+zero all-original-row residual.
+All seven ladder rungs now converge at pool widths 10 and 1. [D-203](defects.md)
+isolates the remaining n=4 seed-0 stop as a distinct HiGHS status-4 Solve error; the
+golden remains red at 3/4 n=4 proposals.
+[D-225](defects.md) keeps that strict/deep failure as a blocker for unattended launch
+and any claim that the producer is healthy, but not for a checkpoint merge whose normal
+gate passes and whose limitations remain explicit.
+[D-202](defects.md) separately keeps final-receipt capture open after one delegated long
+command terminated without returning its output; the evidentiary rerun used a durable
+parent-owned session.
+[D-217](defects.md) is the same failure in a local parallel validation wrapper: its
+unreceipted result was discarded and rerun directly, while `think-b3bm` still owns the
+portable yielded-command and terminal-polling rehearsal.
+[D-222](defects.md) records a separate audit-scope violation caught during this merge
+review: an explicitly excluded strict run was terminated by exact process group, its
+partial output discarded, and `think-ysz2` owns explicit command and wall ceilings for
+future bounded delegations.
+The research result does not depend on that path, but an unattended numerical campaign
+remains blocked until D-203 is fixed, the quench budget is work-based, and the golden
+known-answer response is stable.
 
 **One open measurement defect constrains timing forecasts.** [D-101](defects.md): the
 historical exp-007/008 round-level wall times disagree with retained per-call durations.

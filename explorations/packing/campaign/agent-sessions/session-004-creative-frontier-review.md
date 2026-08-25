@@ -1,7 +1,7 @@
 ---
 title: session-004 — deep mathematical-frontier and basin-map review
 softschema:
-  contract: packing.squares:AgentSession/v1
+  contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
@@ -14,7 +14,27 @@ session:
     square-packing hypotheses and visualization steps whose smallest experiments can be
     executed, killed, or escalated without confusing algorithmic observations with
     mathematical landscape claims.
-  focus: insight
+  workflow_phases:
+  - workflow: insight-iteration
+    focus: insight
+    recording: retrospective
+    objective: Generate a broad but falsifiable mathematical and search frontier.
+    status: completed
+    entered_by: session_start
+    switch_reason: null
+    budget_minutes: null
+    started_at: null
+    deadline_at: null
+    expected_output: null
+    validation_command: null
+    kill_condition: null
+    fallback: null
+    outcome: The portfolio expanded to 40 artifacts with typed objects, caps, and kill lines.
+    evidence:
+    - Twenty mechanism families were routed into a fast-first rotation.
+    - Basin views were separated by evidence type from glyphs to certified clearance.
+    stop_reason: The broad review had yielded a codified, bounded hypothesis portfolio.
+    next_action: Hand the smallest high-information candidates to research-loop sessions.
   primary_bead: think-7gu0
   status: completed
   budget:

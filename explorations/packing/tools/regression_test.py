@@ -334,7 +334,8 @@ def check_cell_solve_failure_is_typed() -> str | None:  # noqa: PLR0911
         or rejected.max_violation is None
         or rejected.max_violation_row != 8
         or rejected.max_violation_kind != "pair"
-        or rejected.solver_calls != 2
+        or rejected.solver_calls != quench_module.MAX_RESIDUAL_SOLVER_CALLS
+        or len(rejected.residual_receipts) != quench_module.MAX_RESIDUAL_SOLVER_CALLS
     ):
         return f"D-164: numerical residual rejection lost its cause or row: {rejected!r}"
 
@@ -351,8 +352,31 @@ def check_cell_solve_failure_is_typed() -> str | None:  # noqa: PLR0911
         or accepted.solver_calls != 2
         or accepted.repair_rows != [8]
         or len(accepted.repair_margins) != 1
+        or [receipt.offending_rows for receipt in accepted.residual_receipts] != [(8,), ()]
     ):
         return f"D-164: bounded one-retry repair was not retained: {accepted!r}"
+
+    newly_offending = SimpleNamespace(
+        success=True,
+        status=0,
+        message="synthetic new-row optimum",
+        x=[2.0, 1.5 + 1.2e-10, 0.5, 0.5, 0.5],
+    )
+    with patch.object(
+        quench_module,
+        "linprog",
+        side_effect=[violating, newly_offending, repaired],
+    ):
+        cascaded = quench_module.solve_cell([0.0, 0.0], cell, 2)
+    if (
+        cascaded.outcome != "optimal"
+        or cascaded.solver_calls != 3
+        or [receipt.offending_rows for receipt in cascaded.residual_receipts]
+        != [(8,), (1,), ()]
+        or cascaded.max_violation is None
+        or cascaded.max_violation > quench_module.LP_FEASIBLE_EPS
+    ):
+        return f"D-199: a row exposed by the first repair was not repaired: {cascaded!r}"
 
     infeasible = SimpleNamespace(success=False, status=2, message="synthetic infeasible")
     with patch.object(quench_module, "linprog", return_value=infeasible):
@@ -427,10 +451,85 @@ def check_cell_solve_failure_is_typed() -> str | None:  # noqa: PLR0911
         or tied.max_violation > quench_module.LP_FEASIBLE_EPS
     ):
         return f"D-171: tied offending rows did not share one bounded repair: {tied!r}"
+
+    # Retained n=10 seed-14 ladder cell that exposed D-199. The first solve violates
+    # rows 49 and 66; their repair shifts solver-scale residual to previously clean row
+    # 61. Re-observing and tightening that row must accept under the unchanged all-row
+    # screen. This direct cell replay costs milliseconds; it replaces a blind 109-second
+    # deep-golden retry as the diagnostic control.
+    n10_theta = [
+        0.8040123494998975,
+        -7.263096240823372e-10,
+        -7.263096240823372e-10,
+        -7.263096240823372e-10,
+        -7.263096240823372e-10,
+        -7.263096240823372e-10,
+        -7.263096240823372e-10,
+        0.7601925633609738,
+        -7.263096240823372e-10,
+        0.8114266576034375,
+    ]
+    n10_cell = [
+        (0, 1, -0.720145739884132, 0.6938228256022831, 1.2069842827336483, 1.0),
+        (0, 2, 1.0, -7.263096240823372e-10, 1.2069842827336483, -1.0),
+        (0, 3, 7.263096240823372e-10, 1.0, 1.2069842827336483, -1.0),
+        (0, 4, -0.720145739884132, 0.6938228256022831, 1.2069842827336483, 1.0),
+        (0, 5, -0.720145739884132, 0.6938228256022831, 1.2069842827336483, -1.0),
+        (0, 6, -0.720145739884132, 0.6938228256022831, 1.2069842827336483, -1.0),
+        (0, 7, 0.7247033362741131, 0.6890610091952452, 1.0214229153373688, -1.0),
+        (0, 8, 0.6938228256022831, 0.720145739884132, 1.2069842827336483, 1.0),
+        (0, 9, 0.6938228256022831, 0.720145739884132, 1.0036933771587326, -1.0),
+        (1, 2, 1.0, -7.263096240823372e-10, 1.0, -1.0),
+        (1, 3, 7.263096240823372e-10, 1.0, 1.0, -1.0),
+        (1, 4, 1.0, -7.263096240823372e-10, 1.0, -1.0),
+        (1, 5, 7.263096240823372e-10, 1.0, 1.0, -1.0),
+        (1, 6, 7.263096240823372e-10, 1.0, 1.0, -1.0),
+        (1, 7, 7.263096240823372e-10, 1.0, 1.2068821727476227, -1.0),
+        (1, 8, 1.0, -7.263096240823372e-10, 1.0, 1.0),
+        (1, 9, 7.263096240823372e-10, 1.0, 1.2068672684570778, -1.0),
+        (2, 3, 1.0, -7.263096240823372e-10, 1.0, 1.0),
+        (2, 4, 7.263096240823372e-10, 1.0, 1.0, 1.0),
+        (2, 5, 1.0, -7.263096240823372e-10, 1.0, 1.0),
+        (2, 6, 1.0, -7.263096240823372e-10, 1.0, 1.0),
+        (2, 7, 7.263096240823372e-10, 1.0, 1.2068821727476227, -1.0),
+        (2, 8, 1.0, -7.263096240823372e-10, 1.0, 1.0),
+        (2, 9, -0.7252701151288633, 0.6884644218120246, 1.2068672684570778, -1.0),
+        (3, 4, 7.263096240823372e-10, 1.0, 1.0, 1.0),
+        (3, 5, 1.0, -7.263096240823372e-10, 1.0, 1.0),
+        (3, 6, 1.0, -7.263096240823372e-10, 1.0, 1.0),
+        (3, 7, 1.0, -7.263096240823372e-10, 1.2068821727476227, -1.0),
+        (3, 8, 7.263096240823372e-10, 1.0, 1.0, 1.0),
+        (3, 9, -0.7252701151288633, 0.6884644218120246, 1.2068672684570778, 1.0),
+        (4, 5, 1.0, -7.263096240823372e-10, 1.0, 1.0),
+        (4, 6, 1.0, -7.263096240823372e-10, 1.0, 1.0),
+        (4, 7, 7.263096240823372e-10, 1.0, 1.2068821727476227, -1.0),
+        (4, 8, 1.0, -7.263096240823372e-10, 1.0, 1.0),
+        (4, 9, -0.7252701151288633, 0.6884644218120246, 1.2068672684570778, -1.0),
+        (5, 6, 7.263096240823372e-10, 1.0, 1.0, 1.0),
+        (5, 7, 1.0, -7.263096240823372e-10, 1.2068821727476227, -1.0),
+        (5, 8, 7.263096240823372e-10, 1.0, 1.0, 1.0),
+        (5, 9, -0.7252701151288633, 0.6884644218120246, 1.2068672684570778, 1.0),
+        (6, 7, 1.0, -7.263096240823372e-10, 1.2068821727476227, -1.0),
+        (6, 8, 7.263096240823372e-10, 1.0, 1.0, 1.0),
+        (6, 9, 1.0, -7.263096240823372e-10, 1.2068672684570778, -1.0),
+        (7, 8, 0.7247033362741131, 0.6890610091952452, 1.2068821727476227, 1.0),
+        (7, 9, 0.7247033362741131, 0.6890610091952452, 1.0249497518540158, 1.0),
+        (8, 9, 0.6884644218120246, 0.7252701151288633, 1.2068672684570778, -1.0),
+    ]
+    shifted = quench_module.solve_cell(n10_theta, n10_cell, 10)
+    if (
+        shifted.outcome != "optimal"
+        or shifted.solver_calls != 3
+        or [receipt.offending_rows for receipt in shifted.residual_receipts]
+        != [(49, 66), (61,), ()]
+        or shifted.max_violation is None
+        or shifted.max_violation > quench_module.LP_FEASIBLE_EPS
+    ):
+        return f"D-199: retained n=10 moving-residual cell did not settle: {shifted!r}"
     return None
 
 
-# Named at module level so a process pool can pickle them by reference. The five are
+# Named at module level so a process pool can pickle them by reference. The eight are
 # independent -- each builds its own fixture and reads nothing the others write -- and
 # each is seconds of LP solving, so running them serially made this file the gate's
 # second-longest step for no reason. `pool.map` preserves submission order, so the
@@ -460,7 +559,8 @@ def main() -> int:
         return 1
     print(
         f"  {len(CHECKS)} regression checks pass "
-        "(D-002, D-015, D-016, D-019, D-029, D-036, D-132, D-164, D-168, D-169, D-171)"
+        "(D-002, D-015, D-016, D-019, D-029, D-036, D-132, D-164, D-168, D-169, "
+        "D-171, D-199)"
     )
     return 0
 

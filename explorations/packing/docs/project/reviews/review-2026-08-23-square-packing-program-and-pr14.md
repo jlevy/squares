@@ -2540,21 +2540,169 @@ one classification error found in the integration draft:
 | D-191 | Mechanical controls do not certify mathematics, and conventions own ids and naming rather than overriding schemas, evidence, or current status |
 | D-192 | A stacked documentation PR is compared with the current head, not only its configured base, before living status is incorporated |
 | D-193 | D-189 is recorded as a validity/scope omission rather than falsely inflating the soundness class |
+| D-194 | The exp-035 candidate must derive pair (0,4) separately at every slide stratum rather than reuse endpoint A’s differential |
+| D-195 | Pair (3,4) has two owner-axis branches, each requiring both tied support inequalities; the tied rows are not four alternatives |
+| D-196 | The exp-035 integration briefly changed D-034 instead of D-194; an id-scoped correction and complete defect diff caught the recurrence before commit |
+| D-197 | A concurrent checkout moved the isolated exp-036 checker commit to the engineering-plan branch; the commit banner caught it before push or execution, and both refs were restored without new lease machinery |
+| D-198 | The first post-exp-036 gate found two numeric negative-control anchors still targeting the pre-D-197 aggregates; both now target the final totals and all 37 controls fire |
+| D-199 | The first complete-set residual repair moved the n=10 violation from rows 49 and 66 to previously clean row 61; a capped re-observation loop now shrinks the feasible region without weakening the all-row screen |
+| D-200 | The synopsis gate-detection aggregate had advanced to nine while its duplicate id list still said eight and omitted D-198; the hand-maintained enumeration is removed |
+| D-201 | The D-199/D-200 edit advanced two mutation anchors without advancing their expected checker diagnostics; the record-audit lane caught the recurrence before commit |
+| D-202 | The first delegated pool-width-1 validation terminated without returning stdout or exit status; it was discarded and one durable-session rerun retained the complete receipt |
+| D-203 | Both pool widths isolate the remaining n=4 drift to seed 0 and a typed HiGHS status-4 Solve error, distinct from D-199’s repaired residual path |
+| D-204 | The gate-aggregate mutation expected a diagnostic naming its deliberately mutated count rather than the authoritative count; the first freeze gate caught the reversed expectation |
 
 The retained commit map is `a1009cb → b3ab594`, `f9d8bae → 7353a34`,
 `62c227c → 2c4cd0e`, and `7a5787c → 1210e07`; corrections land separately in `8611e85`,
 with this late-head reconciliation following it.
 
-The paused exp-035 orientation remains separate and explicit: its candidate checker is
-committed at `8aa0cbb`, but it has not been preregistered or scientifically executed and
-supports no result. `think-1582` owns that continuation; `think-4rk3` and its four
-children own only this documentation-stack review, correction, and validation.
+The exp-035 orientation remained separate until its criterion was frozen.
+Review after PR 19 merged found D-194 and D-195 before measurement.
+The corrected checker at `aa63cf4` derives each slide-stratum contact row and represents
+pair `(3,4)` as two owner-axis branches with both tied support rows in each.
+Exp-035 then met its frozen criterion: six exact matrices across A, the interior, and B
+admit one exact direction outside exp-034’s sheet, and all seven controls reject.
+Exp-036 then tested that displayed direction under a separately frozen criterion.
+The owner-4 branch requires an exact positive side excess with coefficient `sqrt(2)/8`;
+the owner-3 branch has exact upper-minus-lower coefficient `-1/4`, and its
+relative-angle cusp has positive margin `sqrt(2)/2 - 1/4`. Those two branches exhaust
+every nearby feasible subsequence, so the vector is not a true Bouligand tangent at A,
+the interior, or B. All seven controls reject and retained replay is identical in 0.21
+external wall-seconds.
+This is one strict linearized-versus-true-tangent gap, not local isolation or a
+classification of the other non-sheet directions.
+
+`think-1582` is closed by the first-order result; `think-imav` closes with the narrow
+second-order obstruction, while `think-5hh9` and `think-s41l` own the fixed
+pre-measurement defects.
+`think-4rk3` and its four children own only the completed documentation-stack review,
+correction, and validation.
 
 On the final integrated head, the normal gate passes all 30 steps in 38 wall-seconds:
 all 37 negative controls fire, 12 basin archives replay 40 events, all five exact
 small-`n` records replay, all 34 declared engine commits are reachable apart from the
 explicitly annotated exp-001 orphan, and the 34-round, nine-session, one-agenda campaign
 reconciles with 193 defect records.
+
+The next four-hour-campaign checkpoint adds exp-035 without broadening its claim.
+The normal gate passes all 30 steps in 70 wall-seconds: all 37 negative controls fire,
+12 basin archives replay 40 events, all six exact small-`n` records replay, all 35
+declared engine commits are reachable apart from the annotated exp-001 orphan, and the
+35-round, nine-session, one-agenda campaign reconciles with 196 defect records.
+
+The exp-036 checkpoint adds the seventh exact small-`n` replay and a 36th declared
+engine commit. Its 30-step normal gate passes in 37 wall-seconds with all 37 negative
+controls firing and 198 defects reconciled.
+The strict deep gate is not green: its first run exposed D-198 and the already
+outstanding D-126/D-162 golden drift.
+D-198 is fixed; an isolated one-worker deep regeneration still reports `n=4` at 3/4
+converged and stops `n=10` on pair-row 61 at residual `1.503e-10` after 109 seconds.
+That blocker is retained without changing the `1e-10` screen or the committed golden.
+A bounded source trace shows that the observed n=10 stop is a typed post-check rejection
+after the repair LP, not a wall-deadline stop.
+Thus D-126’s deterministic work budget remains necessary but is not this correction;
+`think-yi6x` owns the narrower D-162 repair with first-versus-repaired receipts, finite
+solver caps, and unchanged all-row acceptance.
+The implemented D-199 repair re-observes every successful LP under a four-call cap.
+At n=10 the offender sets are `(49, 66)`, then `(61)`, then empty; both declared pool
+widths recover all seven known-answer ladder rungs without changing the screen or
+golden. The same replays leave n=4 at 3/4 converged.
+A bounded seed slice identifies a distinct D-203 cause: seed 0 receives a typed HiGHS
+status-4 Solve error.
+Therefore the n=10 correction stands, but `think-yi6x` and the strict gate remain open
+for n=4.
+
+## PR #24 workflow-entry-point disposition
+
+PR #24 adds a useful distinction between the four quality principles and six kinds of
+work. Its compact selector, ordered phase history, work-unit vocabulary, and legacy
+series warning are retained.
+The stacked head could not be incorporated verbatim: it predated D-199 through D-204,
+and its first AgentSession/v2 draft promised more resumability and historical precision
+than its schema recorded.
+
+The review was published on PR #24 before correction.
+Each finding has one child bead under `think-hie2`, and each actual error has a matching
+logbook entry:
+
+| Review | Defect | Bead | Disposition |
+| --- | --- | --- | --- |
+| R1 | D-205 | `think-j3io` | Preserve the 204-defect checkpoint, complete the D-199 phase, and keep `think-nr5w` as the next correctness slice |
+| R2 | D-206 | `think-84tp` | Make an active phase record its expected output, deciding command, kill condition, fallback, start, and deadline; reserve outcome and evidence for terminal facts |
+| R3 | D-207 | `think-7ehm` | Keep bounded implementation inside its owning workflow and let mechanical delegations inherit the coordinating phase |
+| R4 | D-208 | `think-bl42` | Define the campaign as the durable square-packing research program and basin cartography as its current search objective |
+| R5 | D-209 | `think-2m3b` | Reconcile `series-000` with exp-001 through exp-036 and state the first- and second-order H-023 boundaries |
+| R6 | D-210 | `think-o8wu` | Mark phases retrospective or contemporaneous and separate their process statistics |
+| R7 | D-211 | `think-h0wf` | Require W2 before material promotion, not after every routine guarded W6 round; allow an authorized bounded factual repair |
+| R8 | D-212 | `think-vcb7` | Treat focus as the primary emphasis while all four principles continue to constrain or contribute |
+| R9 | D-213 | `think-u7lr` | Derive workflow order and entry from one schema vocabulary rather than copying machine state |
+| R10 | D-214 | `think-4utf` | Enforce the declared soft-schema contract and envelope identities |
+| R11 | D-215 | `think-w40g` | Reject extra workflow rows, stale progress datelines, and malformed transition or clock branches with focused controls |
+| R12 | D-216 | `think-0gui` | Keep the generated session table compact and leave complete phase history in the linked source artifact |
+
+The focused landing gate then exposed D-217, a direct recurrence of D-202: a parallel
+wrapper returned while the negative-control command was live but failed to retain the
+session identifier needed for its terminal receipt.
+That result was discarded, the single check was rerun through a receipt-preserving path,
+`think-kjpl` records the landing incident, and the systemic final-receipt rehearsal
+remains open under `think-b3bm`.
+
+The same source-to-session reconciliation found D-218: session-009’s event history
+already contained exp-035 and exp-036, but its output inventory stopped at exp-034. The
+inventory now includes both experiment artifacts, both deterministic result records, and
+both exact checkers under `think-kts5`; neither H-023 verdict changed.
+
+This remains a record and orientation layer, not an unattended scheduler.
+The numerical launch no-go is unchanged: D-203 still blocks the strict small-`n`
+calibration path, and the exact next slice is the millisecond n=4 seed-0 status-4
+fixture under `think-nr5w`. The full legacy-series migration is deferred until a real
+series-level consumer needs it; experiment-level subject, instrument, regime, and
+provenance plus the explicit legacy warning already prevent unsafe pooling.
+
+## PR #22 Merge-Readiness Review: 2026-08-24
+
+**Scope:** PR #22 starting at pre-review head `0775c20` against current `main` at
+`277f060`, including all GitHub review surfaces, the 38-file diff, current packing
+beads, the normal gate, the H-023 exact claims, and the documented handoff contract.
+
+**Verdict:** the committed tree is a coherent, merge-ready checkpoint.
+The normal gate passes all 30 steps without skips, current `main` is the merge base, and
+the known strict failure is explicit and owned.
+[`conventions.md`](../../../conventions.md#10-what-the-gate-actually-enforces) now
+separates this preservation decision from launch certification: D-203 still makes the
+strict/deep gate red on the n=4 seed-0 HiGHS status-4 failure, so `think-nr5w` continues
+to block unattended execution and any claim that the regenerated golden is healthy.
+It does not block landing this reviewed checkpoint.
+
+The review found seven additional process and record defects.
+None changes an H-023 claim, threshold, tolerance, or golden:
+
+| Review | Defect | Bead | Disposition |
+| --- | --- | --- | --- |
+| MR1 | D-219 | `think-tqjr` | Replace BC-010’s superseded n=4/n=10 diagnosis with D-199’s restored n=10 path and D-203’s isolated n=4 failure |
+| MR2 | D-220 | `think-l1us` | Encode `think-nr5w` and `think-b3bm` before strict revalidation, then make `think-nm35` depend on that explicit transition |
+| MR3 | D-221 | `think-05hr` | Correct the live campaign bead from the superseded eight-hour horizon to the user-selected four-hour checkpoint |
+| MR4 | D-222 | `think-ysz2` | Stop and discard an unauthorized delegated strict run; require explicit command exclusions and wall ceilings on bounded audit delegations |
+| MR5 | D-223 | `think-r10n` | Replace the synopsis’s stale 37-second/37-control checkpoint with the final pre-commit review run’s 35-second receipt and 55-control coverage |
+| MR6 | D-224 | `think-fer4` | Discard a focused negative-control run made outside the gate-managed Python environment; retain the correctly replayed 55/55 result |
+| MR7 | D-225 | `think-l1us` | Correct MR2’s overconstraint: require a green normal gate and explicit limitations for checkpoint merge, while retaining the n=4, receipt, and work-budget defects as strict launch blockers |
+
+GitHub reports the current head mergeable with a clean merge state and no reviews,
+inline comments, issue comments, or hosted checks.
+The branch and remote head match, and current `main` is the merge base.
+Two independent pre-review normal gates pass in 69 and 91 wall-seconds; post-review runs
+pass in 31 and 35 wall-seconds.
+The current gate includes 55 negative controls, Python and Rust lint, BasedPyright,
+generated views, all 36 experiment commits, and nine AgentSession records.
+An independent derivation also confirms exp-036’s `sqrt(2)/8` owner-4 excess, `-1/4`
+owner-3 gap, positive relative-angle cusp margin, finite branch exhaustion, and narrow
+Bouligand-tangent scope.
+
+The older runner trust-boundary, identity, work-budget, and queue-pricing defects remain
+post-merge prerequisites for an unattended numerical campaign; they do not invalidate
+this historical and exact-research checkpoint.
+`think-nm35` is genuine follow-up research and belongs on a fresh branch after the merge
+gate, not in PR #22.
 
 ## Post-merge operating disposition
 
