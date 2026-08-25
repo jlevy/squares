@@ -5,7 +5,7 @@ title: Certify the five-dimensional fixed-angle n5 optimal-position polytope
 kind: task
 status: in_progress
 priority: 1
-version: 3
+version: 6
 spec_path: explorations/packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-fixed-angle-polytope.md
 labels:
   - packing
@@ -15,7 +15,13 @@ dependencies: []
 parent_id: is-01m0r3zv2hh2jj64rb8mhqbtre
 child_order_hints:
   - is-01m0w0wq0eb6dk42dtaee7h2xy
+  - is-01m0w1smaswpm335vd33tcrnnj
+  - is-01m0w1smncwkj357mjr0aj8dz0
 created_at: 2026-08-25T07:53:26.764Z
-updated_at: 2026-08-25T08:34:20.302Z
+updated_at: 2026-08-25T09:00:05.933Z
 ---
 After exp-037, preregister and certify the stronger object containing the four no-angle release continuations: the connected five-dimensional common-cell fixed-angle optimal-position polytope, its exact affine hull, sharp straight-ray intervals, and positive branchwise first-order no-descent stress. Distinguish fixed-side feasibility, cellwise optimality, and first-order stationarity from second-order local minimality, quench terminality, maximal component identity, R4/R5, -W, and mixed-angle lifts.
+
+## Notes
+
+Checkpoint 2026-08-25 02:00 PDT: exp-038 preregistered; exact checker implemented and independently verified but no retained target result yet. D-256/D-257 caught and fixed before target; final temporary record/replay 2.17/2.10s, 12 paths, 10 controls, source SHA-256 813411d0b66c5f161285785917bd163bc59cca90571ff0030b22d42a8e76c6cc. Next: commit clean instrument, open a separate W6 phase, then run the frozen target once from that commit.
