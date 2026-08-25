@@ -226,7 +226,7 @@ At any checkpoint, the human operator may choose the next phase, narrow the ques
 stop. Long autonomous sessions use the same rule; autonomy changes the duration and
 controller, not permission to blur contracts.
 
-### The Current `n = 5` Handoff
+### Current Handoff
 
 The H-023 line shows why the distinction matters.
 Session 004 used W3 to turn an ambiguous terminal-family observation into the
@@ -242,13 +242,25 @@ W3 turned that limitation into exp-036’s registered second-order obstruction, 
 then excluded the displayed direction from the true tangent cone.
 Exp-037 now certifies the complete branchwise linearization-cone inventory and leaves
 transverse and mixed nonlinear realization open.
+Exp-038 then certifies one connected five-dimensional fixed-angle cell-local LP-optimal
+position polytope and twelve exact paths in release classes R1, R2, R3, and R6. Its
+positive pathwise first-order stresses do not make the whole polytope stationary or
+classify a terminal component.
 When the post-round strict gate failed, W4 separated stale controls from an independent
 deep-golden solver rejection.
 That bounded solver repair was recorded under the owning review phase before W7 existed.
 Future packing-pipeline repairs whose promised output is the implementation itself enter
 W7; historical phases are not relabelled after the fact.
-The scientific queue remains separate.
-At no point may exp-035 through exp-037 be reinterpreted as a connectivity proof.
+The latest terminal record is
+[session-014](campaign/agent-sessions/session-014-final-portfolio-rotation.md), which
+opened no later research round.
+The next agent should open one bounded W6 slice under `think-1s0h`, preregister one
+exact R4/R5 nonlinear-realization criterion, and retain an exact continuation, exact
+obstruction, or finite unresolved list.
+The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
+remain later slices; D-239 is a separate W7 line.
+Do not start basin-frequency work or reinterpret exp-035 through exp-038 as a
+connectivity proof.
 
 ## What Is Built
 
@@ -1768,14 +1780,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 318 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 319 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 74 | asserted something false about the mathematics |
 | validity | 81 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 119 | recorded something its own evidence contradicts |
+| bookkeeping | 120 | recorded something its own evidence contradicts |
 | robustness | 35 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
@@ -1785,7 +1797,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty defects in 318, and no soundness defect ever.**
+**The automated gate has caught forty defects in 319, and no soundness defect ever.**
 Every soundness failure was found by a control cell whose answer was known in advance, a
 rule written down before the measurement, a generated view contradicting its source, or
 someone reading carefully.

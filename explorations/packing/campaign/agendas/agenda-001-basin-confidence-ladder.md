@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-001
   title: Validate the basin stack before scaling genuine landscape research
-  updated: '2026-08-24'
+  updated: '2026-08-25'
   status: active
   objective: >-
     Build confidence from exact and proved controls upward, distinguish failures of our
@@ -286,16 +286,14 @@ agenda:
       ten controls pass, and D-256/D-257 preserve the proof shortcuts removed before the
       retained run. The rest of the polytope is not thereby stationary, so BC-010 remains
       ready.
-      D-197 records and repairs the
-      intervening shared-workspace branch race without adding a lease or worktree
-      protocol. Think-imav is complete; think-nm35 owns the next remaining-cone slice.
-      D-199's capped cumulative residual repair restores n=10 and all seven ladder rungs
-      at `PACK_JOBS=10` and `PACK_JOBS=1`. Only n=4 seed 0 remains: a typed HiGHS
-      status-4 Solve error under D-203 and `think-nr5w`. The committed golden is
-      unchanged, and no further full-golden retry is authorized before the millisecond
-      fixture is captured. The strict unattended-launch and deep-handoff gate remains
-      red; the recorded failure does not block a checkpoint merge with a green normal
-      gate.
+      D-197 records and repairs the intervening shared-workspace branch race without
+      adding a lease or worktree protocol. Think-imav and think-nm35 are complete:
+      exp-037 supplied the remaining-cone inventory, and exp-038 supplied the twelve
+      R1, R2, R3, and R6 paths. Think-1s0h now owns one preregistered exact R4/R5
+      nonlinear-realization slice. The `-W`, mixed-angle, whole-stationary-component,
+      and unequal-side-clearance questions remain later bounded slices. The repaired
+      D-199/D-203 solver path no longer orders this scientific cell, and D-239 remains a
+      separate W7 robustness line.
     artifacts:
     - cases/n5/equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md

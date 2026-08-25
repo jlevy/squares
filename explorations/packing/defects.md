@@ -2,7 +2,7 @@
 
 # Defect log
 
-318 defects recorded across the packing toolchain.
+319 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -18,14 +18,14 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | --- | ---: | --- |
 | `pre_registered_rule` | 3 | a rule written down before the measurement, e.g. “beating the record means you have a bug” |
 | `control_cell` | 20 | a cell of the sweep whose answer is known in advance |
-| `review` | 195 | a human or agent reading the work against a checklist |
+| `review` | 196 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
 | `inspection` | 31 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 40 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 40 of 318, and none of the 74 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 40 of 319, and none of the 74 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -34,7 +34,7 @@ The line worth reading twice: **the automated gate caught 40 of 318, and none of
 | engine | 11 |
 | quench | 21 |
 | verifier | 4 |
-| record | 93 |
+| record | 94 |
 | tooling | 100 |
 | docs | 89 |
 
@@ -44,7 +44,7 @@ The line worth reading twice: **the automated gate caught 40 of 318, and none of
 | --- | ---: |
 | soundness | 74 |
 | validity | 81 |
-| bookkeeping | 119 |
+| bookkeeping | 120 |
 | robustness | 35 |
 | performance | 9 |
 
@@ -524,3 +524,4 @@ This is the actionable list.
 | [D-316](src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | Quiet provenance probing lacked a Windows fail-closed guard |
 | [D-317](tests/test_validation_cli.py) | 2026-08-25 | tooling | validity | conservative | `gate` | medium | fixed | The SIGINT timeout regression ceiling was too tight for the focused suite |
 | [D-318](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | conservative | `control_cell` | low | fixed | The unprotected-fix mutation control retained a stale expected count |
+| [D-319](SYNOPSIS.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | high | fixed | The cold-start handoff pointed to a closed BC-010 bead |

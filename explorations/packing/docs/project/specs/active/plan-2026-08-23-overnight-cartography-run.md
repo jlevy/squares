@@ -331,11 +331,15 @@ Send promoted, novel, disputed, or otherwise high-risk claims through W2 before 
 move forward. A routine W6 result whose preregistered guards and independent replay
 already decide its stated criterion need not open a ceremonial review phase.
 
-For the next supervised exact-research goal, take `think-nm35`, the remaining BC-010
-`n = 5` cone-classification slice, to a retained determination or finite unresolved
-list. New numerical map rounds remain behind BC-010, D-203’s `n = 4` fixture diagnosis,
-and the final-receipt rehearsal; do not skip those gates merely because a runner recipe
-is operationally available.
+For the next supervised exact-research goal, follow
+[session-014](../../../../campaign/agent-sessions/session-014-final-portfolio-rotation.md)
+and take `think-1s0h` through one preregistered BC-010 exact R4/R5 nonlinear-realization
+slice. Retain an exact continuation, exact obstruction, or finite unresolved list.
+Exp-037 completed the branchwise cone inventory, and exp-038 covers R1, R2, R3, and R6
+only; `-W`, mixed-angle realization, the whole stationary component, and unequal-side
+clearance remain later slices.
+New numerical map rounds remain behind BC-010. D-239 is a separate W7 robustness line,
+not a reason to enlarge this W6 slice.
 Do not fill the time with H-017 merely because it is executable.
 
 ## The numeric runner launch gate

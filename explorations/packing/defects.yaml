@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 318
+count: 319
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8153,3 +8153,33 @@ defects:
   recurrence_of: D-308
   bead: think-6lka
   recorded_in: devtools/controls.yaml
+- id: D-319
+  title: The cold-start handoff pointed to a closed BC-010 bead
+  date: '2026-08-25'
+  layer: record
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: one terminal campaign handoff
+  severity: high
+  status: fixed
+  what: >-
+    Session 014 correctly sent the next agent to think-1s0h for one R4/R5
+    nonlinear-realization slice, but the active launch paragraph and BC-010 note still
+    assigned work to closed think-nm35, omitted exp-038, and retained fixed D-203 as a
+    live blocker. The root orientation path did not point to the terminal session.
+  consequence: >-
+    A cold-start agent had to arbitrate conflicting authorities and could repeat the
+    completed exp-037 cone inventory, miss exp-038's twelve realized paths, or spend a
+    slice diagnosing an already repaired producer failure.
+  fix: >-
+    Route README through one Current Handoff section in the synopsis; reconcile that
+    section, the active launch paragraph, the BC-010 agenda note, development guidance,
+    and think-1s0h to session 014's exact R4/R5 slice; preserve frozen portfolios and
+    historical session records unchanged.
+  regression: >-
+    devtools.check_synopsis reconciles the latest numbered session, BC-010 bead and
+    evidence head, README cold-start link, active launch paragraph, and retired D-203
+    guidance; the README-link mutation control rehearses the failure.
+  bead: think-m8kv
+  recorded_in: SYNOPSIS.md

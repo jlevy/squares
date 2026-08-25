@@ -173,10 +173,9 @@ D-239 is resolved.
 
 CI executes the same locked full command on Linux and macOS from
 [`packing-validation.yml`](../../.github/workflows/packing-validation.yml).
-A focused macOS reconstruction temporarily asserts D-203’s exact known `n = 4` drift.
-The classifier fails CI if the reconstruction passes or fails differently, so a fix,
-crash, or new golden change cannot be hidden as an allowed failure.
-Remove that expected-failure contract when D-203 is resolved.
+The macOS job also runs the focused deep-golden step directly.
+D-203’s temporary expected-failure classifier was removed after the repaired producer
+passed on both architectures; the workflow test rejects its return.
 Never accept a rebuilt golden to make the probe green, and do not add a second CI-only
 implementation of either check.
 
