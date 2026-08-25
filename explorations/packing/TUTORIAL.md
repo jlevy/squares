@@ -179,6 +179,15 @@ the floating-point floor in [§5](#5-algebra-versus-numerics) is a limit of the
 implementation rather than of the mathematics.
 [§11](#11-further-reading) points to a proper treatment.
 
+The solver this project actually calls is **HiGHS**, an open-source high-performance
+linear and mixed-integer optimizer, reached through SciPy.
+It works in floating point, so it does not return the exact optimum of the cell it is
+given—it returns one within a declared **feasibility tolerance**, the margin by which a
+returned solution is allowed to violate its own constraints.
+That tolerance is where the floor in [§8](#8-what-is-known-and-what-is-not) comes from,
+and setting it too loosely once produced a packing that violated its own separation
+constraint, and so a side below the standing record.
+
 **All the nonconvexity has been pushed into exactly two places**: the trigonometric
 dependence of the offsets and axes on the angles, and the *discrete* choice of cell.
 That factorisation—a small continuous part times a large combinatorial part—is the
@@ -855,7 +864,7 @@ would do better.
 The upper bound is a construction nobody has beaten; the lower bound is now certified
 here but is not claimed to be sharp.
 
-**5. What a floating LP result means below `1e-11`.** The floor is the LP solver’s own
+**5. What a floating LP result means below `1e-11`.** The floor is HiGHS’s own
 feasibility tolerance, pinned at the strictest value it accepts, and it sits about five
 orders above `f64` machine epsilon—it is a property of the solver, not of the hardware.
 Many rounds sit on it, and no comparison finer than the floor is admissible.
@@ -904,6 +913,7 @@ Three words carry controlled multiple senses, and the rule for each is given wit
 | **bound gap** | The distance between the best known upper and lower bounds for an `n`; a property of the problem |
 | **search gap** | `best_side − standing best`, signed; a property of one run |
 | **standing best** | The best side ever published for that `n`—an upper bound, not known to be optimal in the open cases |
+| **feasibility tolerance** | The margin by which HiGHS may let a returned solution violate its own constraints. Pinned at the strictest value it accepts, and the origin of the `1e-11` floor—a property of the solver, not of the hardware |
 | **assurance** | `reported`, `numerically-checked`, or `verified`; method, actual precision, tolerance, and origin stay separate |
 | **atlas** | The deduplicated store of endpoints for an `n`. Code exists; it stores endpoint keys, which are not certified terminal components |
 | **census** | An enumeration of an `n`’s basins run to saturation. Code exists; saturation is unreachable while the counted object is undefined |
@@ -1012,7 +1022,7 @@ computer algebra system, and this one does not.
   No floating point appears in either decision.
 - **A computer algebra system is optional and marginal**, used in one place to re-derive
   a constant the verifier already carries.
-- **The linear programs go through a standard float LP solver**, whose feasibility
+- **The linear programs go through HiGHS**, called from SciPy, whose feasibility
   tolerance is the origin of the floor discussed in
   [§8](#8-what-is-known-and-what-is-not).
 - **The screening annealer is compiled**, for the reasons in
