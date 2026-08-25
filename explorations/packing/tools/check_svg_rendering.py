@@ -4,9 +4,9 @@
 from __future__ import annotations
 
 import argparse
-import json
 import math
 import os
+import re
 import subprocess
 import sys
 from dataclasses import replace
@@ -84,23 +84,16 @@ def run_number_controls() -> dict[str, bool]:
 
 
 def build_fixtures():
-    from sqpack.render.adapters import (
-        frame_from_trump11,
-        frames_from_basin_event,
-        trajectory_from_n5_equal_side_face,
-    )
+    from render_packing_gallery import build_gallery_sources
 
-    event_path = ROOT / (
-        "campaign/series/series-000-smoke-and-calibration/results/"
-        "exp-031-h-002-n10-source-return.jsonl"
-    )
-    event = json.loads(
-        event_path.read_text(encoding="utf-8").splitlines()[0], parse_float=Decimal
-    )
+    sources = build_gallery_sources()
     return {
-        "trump11-overview.svg": frame_from_trump11(),
-        "gobel10-source-return-comparison.svg": frames_from_basin_event(event),
-        "n5-exact-face-trajectory.svg": trajectory_from_n5_equal_side_face(),
+        "trump11-overview.svg": sources.trump11,
+        "gobel10-source-return-comparison.svg": (
+            sources.gobel10_start,
+            sources.gobel10_final,
+        ),
+        "n5-exact-face-trajectory.svg": sources.n5_trajectory,
     }
 
 
@@ -146,6 +139,8 @@ def run_xml_controls() -> dict[str, bool]:
 
 
 def run_geometry_controls() -> dict[str, bool]:
+    from xml.etree import ElementTree as ET
+
     from sqpack.render import (
         AnnotationLevel,
         Overlay,
@@ -165,6 +160,15 @@ def run_geometry_controls() -> dict[str, bool]:
         start=start,
         spec=RenderSpec(view=ViewLevel.COMPARISON),
     )
+    comparison_root = ET.fromstring(comparison)
+    _min_x, _min_y, viewport_width, viewport_height = (
+        Decimal(value) for value in comparison_root.attrib["viewBox"].split()
+    )
+    panel_containers = [
+        next(child for child in panel if child.tag.endswith("}rect"))
+        for panel in comparison_root.iter()
+        if "data-panel" in panel.attrib
+    ]
     point = start.squares[0].corners[0]
     featured = replace(
         start,
@@ -188,6 +192,15 @@ def run_geometry_controls() -> dict[str, bool]:
     return {
         "overview_is_svg": overview.startswith("<?xml") and "<polygon" in overview,
         "comparison_has_two_panels": comparison.count('data-panel="') == 2,
+        "comparison_panels_fit_viewport": all(
+            Decimal(container.attrib["x"]) >= 0
+            and Decimal(container.attrib["y"]) >= 0
+            and Decimal(container.attrib["x"]) + Decimal(container.attrib["width"])
+            <= viewport_width
+            and Decimal(container.attrib["y"]) + Decimal(container.attrib["height"])
+            <= viewport_height
+            for container in panel_containers
+        ),
         "typed_overlays_render": overlay.count('data-feature="') == 2,
         "evidence_tokens_are_distinct": len(
             {evidence_style(tier) for tier in type(start.evidence)}
@@ -241,24 +254,9 @@ def run_animation_controls() -> dict[str, bool]:
 
 
 def _rendered_fixtures() -> dict[str, str]:
-    from sqpack.render import RenderSpec, ViewLevel, render_packing_svg
+    from render_packing_gallery import render_gallery
 
-    fixtures = build_fixtures()
-    trajectory = fixtures["n5-exact-face-trajectory.svg"]
-    start, final = fixtures["gobel10-source-return-comparison.svg"]
-    return {
-        "trump11-overview.svg": render_packing_svg(fixtures["trump11-overview.svg"]),
-        "gobel10-source-return-comparison.svg": render_packing_svg(
-            final,
-            start=start,
-            spec=RenderSpec(view=ViewLevel.COMPARISON),
-        ),
-        "n5-exact-face-trajectory.svg": render_packing_svg(
-            trajectory.frames[-1],
-            trajectory=trajectory,
-            spec=RenderSpec(view=ViewLevel.TRAJECTORY),
-        ),
-    }
+    return render_gallery()
 
 
 def run_determinism_matrix() -> dict[str, bool]:
@@ -298,26 +296,58 @@ def run_portability_controls() -> dict[str, bool]:
     }
 
 
-def _metrics(rendered: dict[str, str]) -> dict[str, object]:
-    from xml.etree import ElementTree as ET
+def run_gallery_controls() -> dict[str, bool]:
+    from render_packing_gallery import build_gallery_manifest
 
-    from sqpack.render.svg import RENDERER_VERSION
+    manifest = build_gallery_manifest()
+    examples = manifest["examples"]
+    ids = [example["id"] for example in examples]
+    cases = [ROOT / example["frontier_case"] for example in examples]
+    artifacts = [ROOT / example["artifact"] for example in examples]
 
-    records = {}
-    for name, text in sorted(rendered.items()):
-        root = ET.fromstring(text)
-        records[name] = {
-            "bytes": len(text.encode()),
-            "elements": sum(1 for _ in root.iter()),
-            "renderer_version": RENDERER_VERSION,
-            "viewBox": root.attrib["viewBox"],
-        }
-    return {"schema_version": 1, "fixtures": records}
+    def embeds(document: str, artifact: str) -> bool:
+        document_path = ROOT / document
+        relative = os.path.relpath(ROOT / artifact, document_path.parent)
+        text = document_path.read_text(encoding="utf-8")
+        pattern = rf"!\[[^\]]+\]\({re.escape(relative)}\)"
+        return re.search(pattern, text) is not None
 
-
-def replay_fixture(path: Path, text: str) -> None:
-    if path.read_text(encoding="utf-8") != text:
-        raise ValueError(f"retained SVG differs from deterministic render: {path}")
+    by_id = {example["id"]: example for example in examples}
+    surface_expectations = {
+        "README.md": ("n10-source-return-comparison", "n11-trump-overview"),
+        "TUTORIAL.md": (
+            "n3-optimal-moduli",
+            "n10-source-return-comparison",
+            "n11-trump-overview",
+        ),
+        "SYNOPSIS.md": ("n5-exact-face-trajectory", "n11-trump-overview"),
+        "atlas/README.md": ("n3-optimal-moduli", "n11-trump-overview"),
+    }
+    return {
+        "gallery_has_four_known_answers": len(examples) == 4,
+        "gallery_ids_are_unique": len(ids) == len(set(ids)),
+        "gallery_covers_expected_n": [example["n"] for example in examples] == [3, 5, 10, 11],
+        "frontier_cases_exist": all(path.is_file() for path in cases),
+        "gallery_artifacts_exist": all(path.is_file() for path in artifacts),
+        "gallery_alt_text_is_nonempty": all(example["alt"].strip() for example in examples),
+        "gallery_commands_are_explicit": all(
+            example["generator"].startswith("uv run --frozen python tools/")
+            for example in examples
+        ),
+        "frontier_cases_embed_gallery_artifacts": all(
+            embeds(example["frontier_case"], example["artifact"]) for example in examples
+        ),
+        "gallery_readme_embeds_every_artifact": all(
+            embeds("atlas/rendering/README.md", example["artifact"]) for example in examples
+        ),
+        "exposition_surfaces_embed_expected_examples": all(
+            embeds(document, by_id[example_id]["artifact"])
+            for document, example_ids in surface_expectations.items()
+            for example_id in example_ids
+        ),
+        "atlas_documents_manifest": "[`manifest.json`](rendering/manifest.json)"
+        in (ROOT / "atlas/README.md").read_text(encoding="utf-8"),
+    }
 
 
 def parse_args() -> argparse.Namespace:
@@ -342,23 +372,15 @@ def main() -> int:
         controls |= run_animation_controls()
         controls |= run_determinism_matrix()
         controls |= run_portability_controls()
-        rendered = _rendered_fixtures()
-        atlas = ROOT / "atlas/rendering"
-        metrics_text = json.dumps(_metrics(rendered), indent=2, sort_keys=True) + "\n"
+        controls |= run_gallery_controls()
         if args.update:
-            from strif import atomic_output_file
+            from render_packing_gallery import write_gallery
 
-            from sqpack.render.svg import write_svg_atomic
-
-            for name, text in rendered.items():
-                write_svg_atomic(atlas / name, text)
-            with atomic_output_file(atlas / "metrics.json", make_parents=True) as temporary:
-                temporary.write_text(metrics_text, encoding="utf-8")
+            write_gallery()
         elif args.check:
-            for name, text in rendered.items():
-                replay_fixture(atlas / name, text)
-            if (atlas / "metrics.json").read_text(encoding="utf-8") != metrics_text:
-                raise ValueError("retained SVG metrics differ from deterministic render")
+            from render_packing_gallery import check_gallery
+
+            check_gallery()
     failed = [name for name, passed in controls.items() if not passed]
     if failed:
         raise ValueError(f"SVG rendering controls failed: {failed}")

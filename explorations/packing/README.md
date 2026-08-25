@@ -14,6 +14,11 @@ finds an exact gap in the printed proof;
 certifies a source-distinct repair of the same inequality.
 Roughly `0.088` in side length remains between that bound and the 1979 construction.
 
+![Walter Trump’s exact eleven-square packing inside its enclosing square.](atlas/rendering/trump11-overview.svg)
+
+*Walter Trump’s 1979 construction: six axis-aligned squares around a five-square oblique
+block. It is a certified upper bound, not a proof of optimality.*
+
 Work is organized at three levels.
 Four **operating principles** define what quality means and which concerns may veto
 promotion. Six **workflow entry points** define the purpose and durable output of one
@@ -197,7 +202,8 @@ explorations/packing/
 ├── golden/                 Stored calibration endpoint snapshots for small PROVED
 │                           cases. Mathematical oracle checks are distinct from the
 │                           provisional discovery rows. Rebuilt by tools/golden_basins.py
-├── atlas/                  Schema for endpoint observations and provisional summaries
+├── atlas/                  Endpoint-observation schema and deterministic example
+│                           gallery. See atlas/README.md.
 ├── resources/              Local archive of the primary literature: papers and web
 │                           sources, each kept as original, cleaned .md, and raw
 │                           extraction. See resources/README.md.
@@ -249,6 +255,12 @@ Comparison and trajectory views are opt-in; animation is enabled only inside a
 `prefers-reduced-motion: no-preference` media query, so unsupported or reduced-motion
 renderers show the useful final packing.
 
+![A perturbed Göbel ten-square packing beside the endpoint returned by the quench.](atlas/rendering/gobel10-source-return-comparison.svg)
+
+*The comparison view holds both panels to one geometric scale.
+This retained `n = 10` event is a numerical source-return control, so the figure labels
+it as a candidate rather than silently promoting it to an exact proof artifact.*
+
 The renderer preserves the input’s evidence tier.
 Its caption and metadata distinguish candidates, verified constructions, certified upper
 bounds, and proved optima; typography cannot upgrade a numerical candidate.
@@ -257,6 +269,17 @@ namespaced metadata while using stable high-precision decimal projections for ge
 
 See the [SVG gallery README](atlas/rendering/README.md) for API and CLI examples,
 retained fixtures, byte sizes, portability review, and the raster-golden decision.
+The [gallery manifest](atlas/rendering/manifest.json) joins each artifact to its
+frontier case, evidence tier, view level, motion support, alt text, and exact
+regeneration command.
+From this directory:
+
+```bash
+uv run --frozen python tools/render_packing_gallery.py --list
+uv run --frozen python tools/render_packing_gallery.py --update
+uv run --frozen python tools/render_packing_gallery.py --check
+```
+
 The focused read-only gate is:
 
 ```bash

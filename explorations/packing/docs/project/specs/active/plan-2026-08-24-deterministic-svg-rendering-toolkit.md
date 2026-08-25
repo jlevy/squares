@@ -4,7 +4,7 @@
 
 **Author:** Codex (agent), for the repository owner
 
-**Status:** Draft
+**Status:** Implemented
 
 ## Overview
 
@@ -482,9 +482,16 @@ node hierarchy would add conversion code without a second semantic contract.
 - `tools/check_svg_rendering.py`: `build_fixtures()`, `run_model_controls()`,
   `run_number_controls()`, `run_xml_controls()`, `run_geometry_controls()`,
   `run_animation_controls()`, `run_determinism_matrix()`, `run_portability_controls()`,
-  `replay_fixture()`, and `main()`.
+  `run_gallery_controls()`, and `main()`.
+- `tools/render_packing_gallery.py`: `build_gallery_sources()`, `render_gallery()`,
+  `render_n3_moduli()`, `build_gallery_manifest()`, `build_gallery_metrics()`,
+  `write_gallery()`, `check_gallery()`, and `main()`. The manifest joins artifacts to
+  frontier cases, evidence, accessible copy, motion semantics, and exact regeneration
+  commands; aggregate update and check modes include all four artifacts.
 - Retain the three new files under `atlas/rendering/` named in the visual benchmark.
   The existing `atlas/n-003-optimal-moduli.svg` stays at its published path.
+- Retain `atlas/rendering/manifest.json` as the byte-checked discovery layer consumed by
+  the frontier and atlas documentation.
 - Record deterministic fixture byte size, element count, renderer version, viewport, and
   optional pinned PNG size in `atlas/rendering/metrics.json`; it is regenerated and
   compared byte for byte by the checker.
