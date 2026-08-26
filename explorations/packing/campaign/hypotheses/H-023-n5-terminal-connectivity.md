@@ -53,7 +53,11 @@ hypothesis:
     replay passed, while independent review retained five exact proof-perimeter gaps in
     axis strictness, multiplier positivity, tied-feature derivation, partial-result
     routing, and semantic controls. Its draft checker is a resume point, not an R4/R5
-    result.
+    result. Exp-041 then rejects a stricter proof-perimeter criterion because
+    `0-3:owner3:a-` is zero only at the positive path endpoint. That exact root does not
+    harm the separately certified pair separator or refute path feasibility. A successor
+    must distinguish base, open-interval, and positive-endpoint zero inventories and
+    close three remaining control and partial-result guards.
 ---
 # H-023 — resolve the first ambiguous census cell
 

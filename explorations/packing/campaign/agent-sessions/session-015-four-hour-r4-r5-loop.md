@@ -119,7 +119,7 @@ session:
       Convert exp-040's independently audited draft into a successor round with exact
       base-point and open-interval axis inventories, multiplier positivity, derived tied
       wall features, split feasibility and stress results, and twenty semantic controls.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: >-
       Exp-040 reached a finite audited blocker list early enough to stop cleanly and open
@@ -143,7 +143,13 @@ session:
       Terminalize the successor unresolved with the smaller exact blocker list and
       rotate to an independent source-bound portfolio cell; do not reopen exp-040 or
       infer an obstruction.
-    outcome: null
+    outcome: >-
+      Exp-041 rejected its frozen complete-zero-inventory criterion on one exact
+      endpoint-only root. The retained checker closes denominator positivity, separates
+      base and persistent axes, derives wall features, proves multiplier bounds, and
+      splits result shapes, but its common endpoint failure still shadows mutation
+      reasons, tied-feature omission remains a sentinel, and partial dispositions still
+      abort together.
     evidence:
     - >-
       Exp-041 froze the exact two-determination, twenty-semantic-control correction
@@ -154,11 +160,61 @@ session:
       state and identified branch identity, stale-clock routing, cycle accounting, and
       checkpoint commands as the remaining portability gaps; those instructions now
       live in the project runbook and this session.
+    - >-
+      Exact generation stopped in 3.234 seconds without writing a result: for
+      U=3sqrt(2)/4-1, axis 0-3:owner3:a- factors as
+      (sqrt(2)/2)(u^2+4)^2(u-U), so it is endpoint-only zero and does not harm the
+      separately proved pair separator.
+    - >-
+      Two independent post-change audits agreed that exp-041's criterion is missed, not
+      that path feasibility, an R4/R5 ray, or H-023 is refuted.
+    stop_reason: >-
+      The frozen four-axis pointwise inventory is false at u=U, and the post-change
+      control audit found surviving mutation-reason, tied-row, and partial-disposition
+      guards; no retained target result or replay was accepted.
+    next_action: >-
+      Preregister exp-042 with separate base, open-interval, and endpoint inventories,
+      mutation-specific refusal reasons, a production tied-row omission, and operational
+      feasibility/stress separation before changing the retained checker again.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Correct exp-041's endpoint inventory and finish the three audited control and
+      partial-result guards without changing the six candidate paths, then determine
+      feasibility and stress independently.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Exp-041 produced a new exact endpoint-only axis and a smaller implementation
+      blocker list before its deadline, earning one successor correction slice.
+    budget_minutes: 30
+    started_at: '2026-08-25T16:58:09-07:00'
+    deadline_at: '2026-08-25T17:28:09-07:00'
+    expected_output: >-
+      A preregistered exp-042 and either independently reviewed feasibility and stress
+      determinations for six cases or a still smaller exact blocker list with no lost
+      partial result.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen --all-extras --group dev
+      packing-validate --only "small-n exact models and local geometry" --only
+      "soft-schema validation" --only "campaign record" --jobs 2 --inner-jobs 1
+    kill_condition: >-
+      Stop at the twenty-minute checkpoint without a frozen successor, on a baseline
+      that does not pass before mutations, one refusal with the wrong reason, a sentinel
+      tied-row control, coupled feasibility and stress failure, an unreviewed endpoint
+      inventory, or at the thirty-minute deadline.
+    fallback: >-
+      Terminalize exp-042 unresolved with exact residuals and guard failures; rotate to
+      a separately admissible source-bound portfolio cell without inferring an R4/R5
+      obstruction.
+    outcome: null
+    evidence: []
     stop_reason: null
     next_action: >-
-      Finish the disjoint exp-041 checker correction, run only bounded temporary
-      generation and replay, and obtain independent review against the committed
-      criterion before any retained target result is accepted.
+      Under think-1s0h and BC-010, preregister exp-042 from exp-041's exact endpoint root
+      and three surviving instrument guards before editing rotating_release_paths.py.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -436,6 +492,68 @@ session:
     elapsed_quality: unavailable
     next_action: Compare the corrected checker and temporary record with the frozen criterion.
     phase: 3
+  - task: Implement exp-041's frozen proof-perimeter corrections in one code file.
+    operator: /root/r4_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Added exact denominator, axis, feature, multiplier, split-record, and control-key
+      machinery, then stopped target generation on an exact endpoint-only zero instead
+      of weakening the frozen criterion.
+    evidence:
+    - >-
+      The exact residual for 0-3:owner3:a- factors as
+      (sqrt(2)/2)(u^2+4)^2(u-U), with U=3sqrt(2)/4-1.
+    files:
+    - cases/n5/rotating_release_paths.py
+    checks:
+    - Ruff passed.
+    - BasedPyright reported zero errors and zero warnings.
+    - Bounded temporary generation stopped after 3.234 seconds and wrote no result.
+    uncertainty: Three control and partial-disposition guards still need correction.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preserve the checker for exp-042; do not relax the endpoint guard in exp-041.
+    phase: 3
+  - task: Independently classify exp-041's endpoint residual and zero inventory.
+    operator: /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Confirmed five base zeros, four open-interval zeros, five positive-endpoint zeros,
+      and six labels in the closed-path union; the endpoint-only axis is nonseparating
+      before U and does not hurt feasibility.
+    evidence:
+    - The raw gap after positive-denominator clearing is (sqrt(2)/2)(u-U).
+    files: []
+    checks:
+    - Independent exact algebra and geometry-scope review.
+    uncertainty: Other endpoint-only axes remain to be exhaustively classified by a successor.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preregister the endpoint inventory before changing its production proof.
+    phase: 3
+  - task: Audit exp-041's corrected control and partial-result implementation.
+    operator: /root/r5_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Found that the common endpoint failure can shadow mutation reasons, tied-feature
+      omission remains a direct sentinel, and separate JSON shapes still abort together
+      and hard-code success.
+    evidence:
+    - >-
+      Midpoint, anti-sampling, numerator, and stress mutations reach production
+      expressions, but the reasonless exception catcher cannot prove intended failure
+      reasons while the baseline itself fails.
+    files: []
+    checks:
+    - Independent read-only post-change code audit against exp-041.
+    uncertainty: None of the three remaining guards is a mathematical path obstruction.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Require a passing baseline and exact failure id for every exp-042 mutation.
+    phase: 3
   outputs:
   - campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md
   - campaign/agent-sessions/README.md
@@ -464,10 +582,10 @@ session:
   - basedpyright reports zero errors and zero warnings for the draft checker.
   stop_reason: null
   next_action: >-
-    In the active correctness cycle for BC-010 under think-1s0h, finish and independently
-    audit the exp-041 checker correction; close the cycle by 17:06:30-07:00 with reviewed
-    retained evidence or a smaller finite unresolved list, and do not start
-    basin-frequency work.
+    In the active correctness cycle for BC-010 under think-1s0h, preregister exp-042 from
+    exp-041's exact endpoint-only axis and three remaining instrument guards before any
+    further checker edit; close by 17:28:09-07:00 with reviewed evidence or a smaller
+    finite list, and do not start basin-frequency work.
 ---
 # Session 015 — Four-Hour R4/R5 Research Loop
 

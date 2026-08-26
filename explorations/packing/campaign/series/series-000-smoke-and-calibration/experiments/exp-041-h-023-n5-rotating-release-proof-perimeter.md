@@ -51,9 +51,6 @@ experiment:
       one surviving proof-perimeter blocker, missing semantic control, source drift,
       replay drift, scope promotion, or the phase deadline
     record: campaign/series/series-000-smoke-and-calibration/results/exp-041-h-023-n5-rotating-release-proof-perimeter.json
-  lease:
-    expires: '2026-08-26T00:06:30Z'
-    host: spud10.local
   results:
   - shape: determination
     question: >-
@@ -61,7 +58,9 @@ experiment:
       including distinct base-point and pathwise zero-axis inventories and derived tied
       wall-feature identities?
     role: outcome
-    outcome: no_progress
+    outcome: criterion_missed
+    checked_by: >-
+      exact production-path generation plus two independent algebra and proof-perimeter audits
   - shape: determination
     question: >-
       Do both owner branches on all six paths have exact coefficient-cancelling
@@ -69,25 +68,39 @@ experiment:
       over the full interval?
     role: mechanism
     outcome: no_progress
+    checked_by: not measured after the feasibility inventory criterion was exactly falsified
+  effort:
+    timebox: one 30-minute correction, measurement, and independent-review slice
+    wall_seconds: 3.234
+    agent_minutes: 20
+    stopped_by: criterion
   complexity:
-    lines_changed: 0
+    lines_changed: 398
     new_dependencies: []
     new_failure_modes:
     - a semantic control can accidentally test a sentinel instead of the production proof path
     - a combined verdict can discard a valid feasibility result when only stress remains unresolved
     notes: >-
-      Preregistered before changing the exp-040 draft checker. No target result may be
-      retained unless an independent review confirms every conjunct below.
+      The corrected checker is retained as the successor starting point, but no result
+      JSON was written because exact generation falsified the frozen endpoint inventory
+      before replay.
   verdict:
-    decision: in-progress
+    decision: rejected
     primary_criterion: >-
       accept only if the exact feasibility and exact positive-stress determinations both
       meet their separately retained criteria for all six cases, the exact twenty-key
       semantic control set and positive controls pass through production proof paths,
       retained generation replays identically, and every forbidden inference is refused
     reason: >-
-      The successor criterion is frozen before the retained draft checker changes or a
-      target result is measured.
+      The frozen complete-zero-inventory clause is false: one additional owner axis is
+      zero only at the positive endpoint, while independent control review also found
+      mutation-reason and partial-disposition guards that remain unfinished.
+    reopen_when: >-
+      A successor preregisters separate base, open-interval, and positive-endpoint zero
+      inventories, checks mutation-specific refusal reasons after a passing baseline,
+      drops a tied source row through production construction, and retains feasibility
+      even when stress aborts.
+    resume_from: explorations/packing/cases/n5/rotating_release_paths.py
 ---
 # exp-041 — exact R4/R5 rotating-release proof perimeter
 
@@ -190,6 +203,42 @@ classify a terminal or second-order local minimum, identify a maximal component,
 `-W` or any mixed-angle direction, determine quench selection or basin mass, complete a
 census, or bound unequal-side clearance.
 Candidate failure is not an R4/R5 obstruction.
+
+## Checkpoint result
+
+The production-path generation stopped in `3.234` seconds before writing a result JSON.
+For `r = sqrt(2)` and `U = 3r/4 - 1`, the nonpersistent axis `0-3:owner3:a-` has cleared
+residual
+
+```text
+(r/2)(u^2+4)^2(u-U).
+```
+
+It is negative for `0 <= u < U` and zero at `U`. After sign normalization it is strictly
+positive only on `[0,U)`, not the frozen closed interval.
+This axis is nonseparating before the endpoint, and another certified axis separates
+pair `(0,3)`, so the root does not refute path feasibility.
+It refutes the frozen assertion that the four persistent axes are the complete pointwise
+zero inventory for every `0 < u <= U`. The exact pointwise inventories are five base
+zeros, four zeros on `0 < u < U`, and five zeros at `U`; the closed-path union has six
+labels because the base-only and endpoint-only axes differ.
+
+Independent control review found three remaining instrument issues after this exact
+criterion miss:
+
+1. a reasonless exception catcher can let the common endpoint failure make unrelated
+   mutations appear rejected before their intended invariant runs;
+2. the tied-feature omission still raises directly instead of dropping one production
+   source row; and
+3. feasibility and stress have separate data shapes, but one exception still aborts the
+   combined builder and both determinations are hard-coded to `criterion_met` on
+   success.
+
+The round therefore rejects its frozen proof-perimeter criterion only.
+It does not reject either candidate path, establish an R4/R5 obstruction, or change
+H-023. The corrected denominator, axis, feature, multiplier, and split-record code
+remains the starting point for a separately preregistered successor with an
+endpoint-only inventory and mutation-specific failure guards.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

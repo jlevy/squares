@@ -45,11 +45,14 @@ prove all the machinery works end to end and establish every baseline metric, be
 strategy is tested.
 
 The record has outgrown that opening description.
-The current record contains experiments `exp-001` through `exp-040`, including search
+The current record contains experiments `exp-001` through `exp-041`, including search
 baselines, exact proof determinations, event-contract controls, and the H-023 sequence
 through the complete first-order inventory in `exp-038` and fixed-angle polytope paths
 in `exp-039`. Exp-040 retains an unresolved rotating-path checker and its finite
-independent-review blockers; it is not an accepted R4/R5 result.
+independent-review blockers.
+Exp-041 rejects a stricter proof-perimeter criterion on an exact endpoint-only zero axis
+while retaining the candidate paths and path-feasibility question.
+Neither is an accepted R4/R5 result.
 Those records do not imply that full connectivity has been established.
 Those result shapes are not pooled or compared merely because they share `series-000`.
 Each experiment’s `subject`, method, regime, and provenance govern what comparison is
@@ -111,7 +114,7 @@ subject and regime carry that evidence, not the S0 label.
 
 ## What This Series Cannot Claim
 
-The shared id does not establish that all 40 experiments used one executable instrument
+The shared id does not establish that all 41 experiments used one executable instrument
 or that unlike measurements are comparable.
 Screening in `f64` also cannot certify a record—Trump’s packing has 14 of its 55 pairs
 touching at exactly zero separation, which no floating-point check can decide.

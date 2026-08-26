@@ -119,7 +119,7 @@ git status --short --branch
 git add <explicit-reviewed-files>
 git commit -m "<conventional-commit-message>"
 git push
-tbd note <owning-bead> "<checkpoint evidence and exact next action>"
+tbd update <owning-bead> --notes "<checkpoint evidence and exact next action>"
 tbd sync
 ```
 

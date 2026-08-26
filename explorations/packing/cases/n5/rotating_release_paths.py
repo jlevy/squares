@@ -40,6 +40,40 @@ REFUSED_CLAIMS = (
     "census_completeness",
     "unequal_side_clearance",
 )
+CONTROL_KEYS = frozenset(
+    {
+        "non_unit_orientation_rejected",
+        "sign_label_swap_rejected",
+        "missing_A_slide_rejected",
+        "added_B_slide_rejected",
+        "changed_square1_displacement_rejected",
+        "changed_square4_displacement_rejected",
+        "false_midpoint_identity_rejected",
+        "missing_R4_rejected",
+        "missing_R5_rejected",
+        "missing_stratum_rejected",
+        "missing_owner_rejected",
+        "missing_tied_feature_rejected",
+        "sampled_only_rejected",
+        "perturbed_numerator_rejected",
+        "perturbed_stress_rejected",
+        "false_active_slack_rejected",
+        "overlong_interior_interval_rejected",
+        "missing_zero_axis_rejected",
+        "extra_zero_axis_rejected",
+        "scope_promotion_rejected",
+    }
+)
+BASE_ZERO_AXES = frozenset(
+    {
+        "0-4:owner4:a-",
+        "1-4:owner4:a-",
+        "2-4:owner4:a+",
+        "3-4:owner3:a+",
+        "3-4:owner4:a+",
+    }
+)
+PATH_ZERO_AXES = BASE_ZERO_AXES - {"1-4:owner4:a-"}
 
 
 @dataclass(frozen=True)
@@ -55,15 +89,15 @@ class ProofInputs:
     add_b_slide: bool = False
     dx4_numerator: int = -1
     dx1_numerator: int = -1
-    false_midpoint: bool = False
+    midpoint_shift_numerator: int = 0
     orientation_unit_shift: int = 0
-    sampled_only: bool = False
+    bad_sign_probe: bool = False
     numerator_shift: int = 0
     stress_shift: int = 0
     false_active_slack: bool = False
     interior_interval_multiplier: int = 1
-    missing_zero_axis: str | None = None
-    extra_zero_axis: str | None = None
+    removed_base_zero_axis: str | None = None
+    added_path_zero_axis: str | None = None
     promoted_claim: str | None = None
 
 
@@ -174,6 +208,56 @@ def certify_nonnegative(
     )
 
 
+def minimum_exact(values: list[FieldElement]) -> FieldElement:
+    result = values[0]
+    for value in values[1:]:
+        if (value - result).sign() < 0:
+            result = value
+    return result
+
+
+def certify_strict_positive(
+    coefficients: list[FieldElement], field: NumberField, depth: int = 0
+) -> tuple[int, FieldElement]:
+    if all(value.sign() > 0 for value in coefficients):
+        return 1, minimum_exact(coefficients)
+    if depth >= MAX_BERNSTEIN_DEPTH:
+        raise ValueError("a strict residual remains uncertified at the subdivision limit")
+    left, right = subdivide_bernstein(coefficients, field)
+    left_count, left_bound = certify_strict_positive(left, field, depth + 1)
+    right_count, right_bound = certify_strict_positive(right, field, depth + 1)
+    return left_count + right_count, minimum_exact([left_bound, right_bound])
+
+
+def strict_polynomial_certificate(
+    field: NumberField, polynomial: Poly, interval_end: FieldElement
+) -> dict[str, object]:
+    coefficients = bernstein_coefficients(field, polynomial, interval_end)
+    pieces, lower_bound = certify_strict_positive(coefficients, field)
+    return {
+        "coefficients_low_degree_first": [encode(value) for value in polynomial],
+        "bernstein_subinterval_count": pieces,
+        "bernstein_lower_bound": encode(lower_bound),
+        "strictly_positive_on_closed_interval": True,
+    }
+
+
+def denominator_certificate(
+    field: NumberField, interval_end: FieldElement
+) -> dict[str, object]:
+    q = field.rational
+    denominator = (q(4), q(0), q(1))
+    excess = poly_add(field, denominator, (q(-4),))
+    certify_nonnegative(bernstein_coefficients(field, excess, interval_end), field)
+    return {
+        "polynomial": "4+u^2",
+        "coefficients_low_degree_first": [encode(value) for value in denominator],
+        "exact_lower_bound": encode(q(4)),
+        "excess_over_lower_bound_nonnegative": True,
+        "strictly_positive_on_closed_interval": True,
+    }
+
+
 def position_direction(
     field: NumberField, stratum: str, inputs: ProofInputs
 ) -> list[FieldElement]:
@@ -183,6 +267,7 @@ def position_direction(
     result[tangent_cones.x(4)] = field.rational(inputs.dx4_numerator) / 2
     result[tangent_cones.y(4)] = -result[tangent_cones.x(4)]
     result[tangent_cones.x(1)] = field.rational(inputs.dx1_numerator) / 2
+    result[tangent_cones.x(2)] += field.rational(inputs.midpoint_shift_numerator) / 1000
     if stratum == "A" and not inputs.add_a_slide:
         result[tangent_cones.x(0)] -= field.one
         result[tangent_cones.y(0)] -= field.one
@@ -255,6 +340,80 @@ def square1_support_numerator(
     raise ValueError("the common cell contains an unknown square-1 support axis")
 
 
+def square1_wall_feature_certificate(  # noqa: PLR0917 -- frozen case inputs
+    field: NumberField,
+    stratum: str,
+    direction: list[FieldElement],
+    sigma: int,
+    interval_end: FieldElement,
+    inputs: ProofInputs,
+) -> dict[str, object]:
+    q = field.rational
+    starts = tangent_cones.centres_for_stratum(field, stratum)
+    denominator = tuple(q(value) for value in DENOMINATOR)
+    centre_x = affine_numerator(field, starts[1][0], direction[tangent_cones.x(1)])
+    centre_y = affine_numerator(field, starts[1][1], direction[tangent_cones.y(1)])
+    side = cast(FieldElement, face.exact_data(field)["side"])
+    cosine = (q(4), q(0), -q(1))
+    sine = (q(0), q(4 * sigma))
+    records: list[dict[str, object]] = []
+    derived_small_labels: list[str] = []
+    for wall, clearance in (
+        (
+            "x-upper",
+            poly_add(field, poly_scale(denominator, side), poly_scale(centre_x, -q(1))),
+        ),
+        ("y-lower", centre_y),
+    ):
+        wall_records: list[tuple[int, Poly]] = []
+        for label_sign in (-1, 1):
+            feature_support = poly_scale(
+                poly_add(field, cosine, poly_scale(sine, q(-label_sign))), q(1) / 2
+            )
+            numerator = poly_add(field, clearance, poly_scale(feature_support, -q(1)))
+            first_nonzero = next(
+                index
+                for index, coefficient in enumerate(numerator)
+                if not coefficient.is_zero()
+            )
+            residual = numerator[first_nonzero:]
+            strict = strict_polynomial_certificate(field, residual, interval_end)
+            wall_records.append((label_sign, numerator))
+            records.append(
+                {
+                    "label": f"wall:1:{wall}:{'+' if label_sign > 0 else '-'}",
+                    "numerator_coefficients_low_degree_first": [
+                        encode(value) for value in numerator
+                    ],
+                    "maximal_base_factor_power": first_nonzero,
+                    "residual": strict,
+                }
+            )
+        selected_sign, selected = max(
+            wall_records,
+            key=lambda item: next(
+                index for index, coefficient in enumerate(item[1]) if not coefficient.is_zero()
+            ),
+        )
+        declared_sigma = -sigma if inputs.sign_label_swap else sigma
+        if selected_sign != -declared_sigma:
+            raise ValueError("the derived R4/R5 tied wall-feature label map drifted")
+        selected_residual = selected[2:]
+        if poly_scale(selected_residual, q(2)) != (q(2), q(1)):
+            raise ValueError("the selected wall feature lacks primitive residual u+2")
+        other = next(numerator for label, numerator in wall_records if label != selected_sign)
+        if poly_add(field, other, poly_scale(selected, -q(1))) != (q(0), q(4)):
+            raise ValueError("the other tied wall feature does not add exact 4u slack")
+        derived_small_labels.append(f"wall:1:{wall}:{'+' if selected_sign > 0 else '-'}")
+    return {
+        "derived_features": records,
+        "derived_small_slack_labels": derived_small_labels,
+        "selected_primitive_residual": "u+2",
+        "other_feature_additional_slack": "4u/(4+u^2)",
+        "strict_only_for_u_positive": True,
+    }
+
+
 def universal_sign_table(
     field: NumberField,
     stratum: str,
@@ -262,8 +421,6 @@ def universal_sign_table(
     interval_end: FieldElement,
     inputs: ProofInputs,
 ) -> list[dict[str, object]]:
-    if inputs.sampled_only:
-        raise ValueError("sampled fixtures cannot replace the universal sign proof")
     q = field.rational
     side = cast(FieldElement, face.exact_data(field)["side"])
     starts = tangent_cones.centres_for_stratum(field, stratum)
@@ -362,6 +519,19 @@ def universal_sign_table(
             f"pair:{first}-{second}",
             poly_add(field, separation, *(poly_scale(value, -q(1)) for value in supports)),
         )
+    if inputs.bad_sign_probe:
+        bad = poly_mul(
+            field,
+            (-interval_end / 2, q(1)),
+            (-interval_end, q(1)),
+        )
+        samples = [
+            poly_value(field, bad, value)
+            for value in (q(0), interval_end / 2, interval_end)
+        ]
+        if any(value.sign() < 0 for value in samples):
+            raise ValueError("the anti-sampling probe does not pass its declared samples")
+        retain("control:p_bad", bad)
     if len(records) != 30:
         raise ValueError("the universal table does not contain twenty walls and ten pairs")
     return records
@@ -434,7 +604,8 @@ def zero_axis_exhaustion(  # noqa: PLR0917 -- mirrors the frozen case inputs
     ]
     axes = [axis_numerators(field, index, sigma) for index in range(5)]
     gaps: list[dict[str, object]] = []
-    zero_axes: set[str] = set()
+    base_zero_axes: set[str] = set()
+    path_zero_axes: set[str] = set()
     for first in range(5):
         for second in range(first + 1, 5):
             displacement = (
@@ -467,8 +638,14 @@ def zero_axis_exhaustion(  # noqa: PLR0917 -- mirrors the frozen case inputs
                     gap = poly_add(field, separation, poly_scale(support_poly, -q(1)))
                     label = f"{first}-{second}:owner{owner}:{axis_name}"
                     is_zero = all(value.is_zero() for value in gap)
+                    base_zero = gap[0].is_zero()
+                    residual_sign: int | None = None
+                    if base_zero:
+                        base_zero_axes.add(label)
                     if is_zero:
-                        zero_axes.add(label)
+                        path_zero_axes.add(label)
+                        first_nonzero: int | None = None
+                        residual_certificate: dict[str, object] | None = None
                     else:
                         first_nonzero = next(
                             index
@@ -476,37 +653,49 @@ def zero_axis_exhaustion(  # noqa: PLR0917 -- mirrors the frozen case inputs
                             if not coefficient.is_zero()
                         )
                         residual = gap[first_nonzero:]
-                        signed_residual = exact_absolute_poly(field, residual, interval_end)
-                        if poly_value(field, signed_residual, field.zero).sign() <= 0:
-                            raise ValueError(
-                                "a nonzero owner-axis gap lacks an open-interval margin"
+                        residual_sign = residual[0].sign()
+                        if residual_sign == 0:
+                            raise ValueError("a maximal base factor left a zero residual")
+                        signed_residual = poly_scale(residual, q(residual_sign))
+                        try:
+                            residual_certificate = strict_polynomial_certificate(
+                                field, signed_residual, interval_end
                             )
+                        except ValueError as error:
+                            raise ValueError(
+                                f"owner-axis {label} lacks a strict residual certificate: "
+                                f"{[encode(value) for value in residual]}"
+                            ) from error
                     gaps.append(
                         {
                             "label": label,
                             "gap_numerator_coefficients_low_degree_first": [
                                 encode(value) for value in gap
                             ],
+                            "zero_at_base": base_zero,
                             "identically_zero": is_zero,
+                            "maximal_base_factor_power": first_nonzero,
+                            "residual_sign": residual_sign,
+                            "strict_residual": residual_certificate,
                         }
                     )
-    expected = {
-        "0-4:owner4:a-",
-        "2-4:owner4:a+",
-        "3-4:owner3:a+",
-        "3-4:owner4:a+",
-    }
-    if inputs.missing_zero_axis is not None:
-        expected.remove(inputs.missing_zero_axis)
-    if inputs.extra_zero_axis is not None:
-        expected.add(inputs.extra_zero_axis)
-    if zero_axes != expected:
-        raise ValueError("the exact zero separating-axis inventory drifted")
+    declared_base = set(BASE_ZERO_AXES)
+    declared_path = set(PATH_ZERO_AXES)
+    if inputs.removed_base_zero_axis is not None:
+        declared_base.remove(inputs.removed_base_zero_axis)
+    if inputs.added_path_zero_axis is not None:
+        declared_path.add(inputs.added_path_zero_axis)
+    if base_zero_axes != declared_base:
+        raise ValueError("the exact base-point zero-axis inventory drifted")
+    if path_zero_axes != declared_path:
+        raise ValueError("the exact pathwise zero-axis inventory drifted")
     if len(gaps) != 40:
         raise ValueError("the owner-axis inventory is not the expected forty cases")
     return {
-        "expected_zero_axes": sorted(expected),
-        "exact_zero_axes": sorted(zero_axes),
+        "declared_base_zero_axes": sorted(declared_base),
+        "exact_base_zero_axes": sorted(base_zero_axes),
+        "declared_pathwise_zero_axes": sorted(declared_path),
+        "exact_pathwise_zero_axes": sorted(path_zero_axes),
         "all_forty_owner_axes": gaps,
         "exhausted": True,
     }
@@ -552,7 +741,7 @@ def branch_stresses(
         owner3_wplus_shift_numerator=inputs.stress_shift,
         owners=inputs.owners,
     )
-    return [
+    identities = [
         fixed_angle_polytope.stress_polynomial_certificate(
             field,
             stratum,
@@ -564,6 +753,54 @@ def branch_stresses(
         )
         for owner in inputs.owners
     ]
+    q = field.rational
+    r = field.alpha
+    for identity in identities:
+        labels = cast(list[str], identity["stable_tied_row_labels"])
+        owner = labels[-1].split(":")[2]
+        owner_name = "owner3:a+" if owner == "owner3" else "owner4:a+"
+        weight_polynomials: list[Poly] = []
+        for label in labels:
+            if label.startswith("wall:2:"):
+                weight_polynomials.append((r / 4,))
+            elif label.startswith("wall:3:"):
+                weight_polynomials.append((r / 2,))
+            elif label.startswith("contact:2-4:"):
+                weight_polynomials.append((q(1),))
+            elif owner_name == "owner3:a+" and label.endswith("feature+1"):
+                weight_polynomials.append(
+                    (q(5) / 4 - r / 2 + q(inputs.stress_shift) / 1000, -r / 2)
+                )
+            elif owner_name == "owner3:a+":
+                weight_polynomials.append((-q(1) / 4 + r / 2, r / 2))
+            else:
+                weight_polynomials.append((q(1) / 2,))
+        bounds: list[dict[str, object]] = []
+        for label, polynomial in zip(
+            labels, weight_polynomials, strict=True
+        ):
+            start = poly_value(field, polynomial, q(0))
+            end = poly_value(field, polynomial, interval_end)
+            lower = start if (start - end).sign() <= 0 else end
+            if lower.sign() <= 0:
+                raise ValueError(
+                    "a full-interval stress multiplier lower bound is not positive"
+                )
+            excess = poly_add(field, polynomial, (-lower,))
+            certify_nonnegative(bernstein_coefficients(field, excess, interval_end), field)
+            bounds.append(
+                {
+                    "row_label": label,
+                    "affine_coefficients_low_degree_first": [
+                        encode(value) for value in polynomial
+                    ],
+                    "exact_full_interval_lower_bound": encode(lower),
+                    "strictly_positive_on_full_interval": True,
+                }
+            )
+        identity["multiplier_lower_bounds"] = bounds
+        identity["all_multipliers_strictly_positive_on_full_interval"] = True
+    return identities
 
 
 def sign_guards(field: NumberField, interval_end: FieldElement) -> dict[str, dict[str, object]]:
@@ -610,7 +847,7 @@ def positive_path_controls(field: NumberField) -> list[dict[str, object]]:
     return records
 
 
-def case_certificate(
+def feasibility_case_certificate(
     field: NumberField,
     class_name: str,
     sigma: int,
@@ -631,7 +868,7 @@ def case_certificate(
     if derivative != expected:
         raise ValueError("the rotating derivative does not match its exp-038 representative")
     midpoint = [(left + right) / 2 for left, right in zip(rays["R3"], rays["R6"], strict=True)]
-    if inputs.false_midpoint or direction != midpoint:
+    if direction != midpoint:
         raise ValueError("the center path is not the exp-039 R3/R6 midpoint")
     denominator = (q(4), q(0), q(1))
     cosine = (q(4), q(0), -q(1))
@@ -645,21 +882,12 @@ def case_certificate(
     if any(not value.is_zero() for value in unit_identity):
         raise ValueError("the rational half-angle orientation is not exactly unit")
     table = universal_sign_table(field, stratum, direction, interval_end, inputs)
-    mandatory = {item["label"]: item for item in table}
-    wall = require_dict(mandatory["wall:1:x-upper"], "mandatory wall slack")
-    pair = require_dict(mandatory["pair:1-4"], "mandatory pair slack")
-    expected_wall = (q(0), q(0), q(1), q(1) / 2)
-    expected_pair = (q(0), q(0), field.alpha)
-    if [encode(value) for value in expected_wall] != wall[
-        "numerator_coefficients_low_degree_first"
-    ]:
-        raise ValueError("the mandatory rotating wall margin drifted")
-    if [encode(value) for value in expected_pair] != pair[
-        "numerator_coefficients_low_degree_first"
-    ]:
-        raise ValueError("the mandatory contact-1-4 margin drifted")
+    zero_axes = zero_axis_exhaustion(field, stratum, direction, sigma, interval_end, inputs)
     if inputs.false_active_slack:
-        raise ValueError("a mandatory positive slack was falsely promoted to active")
+        claimed_path_axes = set(cast(list[str], zero_axes["exact_pathwise_zero_axes"]))
+        claimed_path_axes.add("1-4:owner4:a-")
+        if claimed_path_axes != PATH_ZERO_AXES:
+            raise ValueError("the base-only contact was falsely claimed pathwise active")
     return {
         "class": class_name,
         "sigma": sigma,
@@ -667,6 +895,7 @@ def case_certificate(
         "interval": {"lower": encode(q(0)), "upper": encode(interval_end)},
         "derivative": tangent_inventory.encode_vector(derivative),
         "center_path_is_R3_R6_midpoint": True,
+        "denominator_certificate": denominator_certificate(field, interval_end),
         "half_angle_sign_guards": sign_guards(field, interval_end),
         "unit_orientation_identity": {
             "identity": "(4-u^2)^2+(4u)^2=(4+u^2)^2",
@@ -683,19 +912,10 @@ def case_certificate(
             "owner3:a+": ["square4-feature+1", "square4-feature-1"],
             "owner4:a+": ["square3-feature+1", "square3-feature-1"],
         },
-        "zero_axis_exhaustion": zero_axis_exhaustion(
+        "zero_axis_exhaustion": zero_axes,
+        "derived_wall_features": square1_wall_feature_certificate(
             field, stratum, direction, sigma, interval_end, inputs
         ),
-        "mandatory_feature_slacks": {
-            "small_slack_features": (
-                ["wall:1:x-upper:+", "wall:1:y-lower:+"]
-                if sigma < 0
-                else ["wall:1:x-upper:-", "wall:1:y-lower:-"]
-            ),
-            "other_features_additional_numerator": [encode(q(0)), encode(q(4))],
-            "strict_only_for_u_positive": True,
-        },
-        "stress_identities": branch_stresses(field, stratum, direction, interval_end, inputs),
     }
 
 
@@ -706,14 +926,34 @@ def proof_core(field: NumberField, inputs: ProofInputs) -> dict[str, object]:
         raise ValueError("all three strata are required")
     if inputs.promoted_claim is not None:
         raise ValueError("the requested claim lies outside the frozen scope")
-    cases = [
-        case_certificate(field, class_name, sigma, stratum, inputs)
+    feasibility_cases = [
+        feasibility_case_certificate(field, class_name, sigma, stratum, inputs)
         for class_name, sigma in inputs.signs
         for stratum in inputs.strata
     ]
-    if len(cases) != 6:
+    if len(feasibility_cases) != 6:
         raise ValueError("the rotating path inventory is not exactly six cases")
-    return {"cases": cases, "case_count": 6, "criterion_met": True}
+    stress_cases = []
+    for class_name, sigma in inputs.signs:
+        for stratum in inputs.strata:
+            direction = position_direction(field, stratum, inputs)
+            interval_end = (3 * field.alpha / 2 - 2) / 2
+            if stratum == "interior":
+                interval_end *= inputs.interior_interval_multiplier
+            stress_cases.append(
+                {
+                    "class": class_name,
+                    "sigma": sigma,
+                    "stratum": stratum,
+                    "owner_identities": branch_stresses(
+                        field, stratum, direction, interval_end, inputs
+                    ),
+                }
+            )
+    return {
+        "feasibility": {"cases": feasibility_cases, "case_count": 6, "criterion_met": True},
+        "stress": {"cases": stress_cases, "case_count": 6, "criterion_met": True},
+    }
 
 
 def mutation_rejected(field: NumberField, inputs: ProofInputs) -> bool:
@@ -733,22 +973,31 @@ def controls(field: NumberField) -> dict[str, bool]:
         "added_B_slide_rejected": replace(base, add_b_slide=True),
         "changed_square1_displacement_rejected": replace(base, dx1_numerator=0),
         "changed_square4_displacement_rejected": replace(base, dx4_numerator=0),
-        "false_midpoint_identity_rejected": replace(base, false_midpoint=True),
+        "false_midpoint_identity_rejected": replace(base, midpoint_shift_numerator=1),
         "missing_R4_rejected": replace(base, signs=(SIGNS[1],)),
         "missing_R5_rejected": replace(base, signs=(SIGNS[0],)),
         "missing_stratum_rejected": replace(base, strata=STRATA[:2]),
         "missing_owner_rejected": replace(base, owners=(OWNERS[0],)),
         "missing_tied_feature_rejected": replace(base, include_all_tied_features=False),
-        "sampled_only_rejected": replace(base, sampled_only=True),
-        "perturbed_numerator_rejected": replace(base, numerator_shift=1),
+        "sampled_only_rejected": replace(base, bad_sign_probe=True),
+        "perturbed_numerator_rejected": replace(base, numerator_shift=-1),
         "perturbed_stress_rejected": replace(base, stress_shift=1),
         "false_active_slack_rejected": replace(base, false_active_slack=True),
         "overlong_interior_interval_rejected": replace(base, interior_interval_multiplier=2),
-        "missing_zero_axis_rejected": replace(base, missing_zero_axis="0-4:owner4:a-"),
-        "extra_zero_axis_rejected": replace(base, extra_zero_axis="1-4:owner4:a-"),
+        "missing_zero_axis_rejected": replace(
+            base, removed_base_zero_axis="0-4:owner4:a-"
+        ),
+        "extra_zero_axis_rejected": replace(
+            base, added_path_zero_axis="1-4:owner4:a-"
+        ),
         "scope_promotion_rejected": replace(base, promoted_claim="terminal"),
     }
-    return {name: mutation_rejected(field, mutation) for name, mutation in mutations.items()}
+    if set(mutations) != CONTROL_KEYS or len(mutations) != 20:
+        raise ValueError("the exact twenty-key semantic control contract drifted")
+    result = {name: mutation_rejected(field, mutation) for name, mutation in mutations.items()}
+    if set(result) != CONTROL_KEYS:
+        raise ValueError("the executed semantic control keys drifted")
+    return result
 
 
 def build_result() -> dict[str, object]:
@@ -758,15 +1007,22 @@ def build_result() -> dict[str, object]:
         "contract": "packing.squares:N5RotatingReleasePaths/v1",
         "field": "Q(sqrt(2)), sqrt(2) in (1,2)",
         "sources": source_bindings(field),
-        "certificate": proof_core(field, ProofInputs()),
+        "certificates": proof_core(field, ProofInputs()),
         "positive_controls": positive_path_controls(field),
         "scope_refusals": {"refused_claims": list(REFUSED_CLAIMS), "all_refused": True},
-        "determination": {
-            "outcome": "criterion_met",
-            "claim": (
-                "six explicit R4/R5 paths are feasible and carry positive first-order stresses"
-            ),
-            "scope": "six pathwise Bouligand tangents and first-order no descent only",
+        "determinations": {
+            "feasibility": {
+                "outcome": "criterion_met",
+                "claim": "six explicit R4/R5 paths are feasible Bouligand tangents",
+            },
+            "stress": {
+                "outcome": "criterion_met",
+                "claim": "both owner branches have positive pathwise first-order stresses",
+            },
+            "round": {
+                "outcome": "criterion_met",
+                "scope": "six pathwise Bouligand tangents and first-order no descent only",
+            },
         },
     }
     result["controls"] = controls(field)

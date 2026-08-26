@@ -293,7 +293,11 @@ agenda:
       nonlinear-realization slice. Exp-040 stopped that first slice unresolved before
       retained measurement after independent review retained five finite proof-perimeter
       gaps; its rotating-path checker is a draft resume point, not an R4/R5 result. The
-      active session-015 successor must preregister and close those gaps. The `-W`,
+      first successor, exp-041, rejects its complete-zero-inventory criterion on the
+      exact endpoint-only axis `0-3:owner3:a-`; the root does not refute path feasibility.
+      Active session-015 must preregister the corrected endpoint inventory, exact
+      mutation reasons, production tied-row omission, and operational partial-result
+      separation before the checker changes again. The `-W`,
       mixed-angle, whole-stationary-component, and unequal-side-clearance questions
       remain later bounded slices. The repaired D-199/D-203 solver path no longer orders
       this scientific cell, and D-239 remains a separate W7 robustness line.
@@ -318,6 +322,7 @@ agenda:
     - campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
     - cases/n5/rotating_release_paths.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-041-h-023-n5-rotating-release-proof-perimeter.md
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness
