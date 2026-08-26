@@ -302,32 +302,35 @@ deep-golden solver rejection.
 That bounded solver repair was recorded under the owning review phase before W7 existed.
 Future packing-pipeline repairs whose promised output is the implementation itself enter
 W7; historical phases are not relabelled after the fact.
-The latest terminal record is
-[session-014](campaign/agent-sessions/session-014-final-portfolio-rotation.md), which
-opened no later research round.
-[Session 015](campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md) is now the
-active four-hour continuation.
-Its first bounded W6 slice stopped exp-040 unresolved before retained measurement after
-independent review found five finite proof-perimeter gaps in the draft R4/R5 checker.
-The active session still owns `BC-010` under `think-1s0h`. Exp-041 froze the exact
-five-blocker correction at `e26fae9`, then rejected its complete-zero-inventory
-criterion on a new endpoint-only axis without refuting path feasibility.
-Exp-042 corrects that endpoint inventory and meets the full frozen criterion from engine
-commit `2980fdc`: six R4/R5 paths, both owner stresses, and twenty semantic controls
-pass retained generation and replay.
+The current line is owned by `BC-010` under `think-1s0h`.
+[Session 015](campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md) is terminal
+after reaching its declared eight-phase cap, and
+[session 016](campaign/agent-sessions/session-016-final-hour-continuation.md) carries
+the last hour and finalization reserve without extending an expired phase or relying on
+controller memory.
+Session 015’s first bounded W6 slice stopped exp-040 unresolved before
+retained measurement after independent review found five finite proof-perimeter gaps in
+the draft R4/R5 checker.
+Exp-041 froze the exact five-blocker correction at `e26fae9`, then rejected its
+complete-zero-inventory criterion on a new endpoint-only axis without refuting path
+feasibility.
+Exp-042 corrects that endpoint inventory and meets the full frozen criterion
+from engine commit `2980fdc`: six R4/R5 paths, both owner stresses, and twenty semantic
+controls pass retained generation and replay.
 The result is pathwise first-order only.
 Exp-043 then stops its pure `-W` test before retained measurement: the draft checker is
 a resume point, but it does not yet derive production rowwise second-order constants,
 consume a full exp-034 acceleration witness, or mechanically route the two-scale proof.
-The following W7 phase now provides a case-free exact-jet helper and six source-bound
-tests, including complete first-order row key and gradient equality over all six n=5
-matrices.
-The helper deliberately refuses branch completeness, non-t^2 scale routing, and
-obstruction. Exp-044 now freezes that separate case-level integration before the pure
-`-W` draft changes. Its fresh-agent resume section records the read order, validation
-commands, clock, delegation boundary, and exact next action so no controller memory is
-required. The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance
-questions remain later slices; D-239 is a separate W7 line.
+The following W7 phases provide a case-free exact-jet helper, complete production row
+builders for all six source matrices, normalized nine-row stress evaluation with every
+correction column retained, and a formula-derived exp-034 sheet control across both
+owner inventories. Focused tests and independent review accept that substrate at
+checkpoint `8ee367b` while refusing branch completeness, scale routing, and obstruction.
+Exp-044 freezes the separate case-level integration but is terminal unresolved with no
+target run or result JSON. Session 016’s fresh-agent section now owns the branch, read
+order, clocks, validation, and exact scale-and-mutation design action, so no controller
+memory is required. The `-W`, mixed-angle, whole-stationary-component, and unequal-side-
+clearance questions remain later slices; D-239 is a separate W7 line.
 Do not start basin-frequency work or reinterpret exp-035 through exp-040 as a
 connectivity proof.
 

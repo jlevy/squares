@@ -25,7 +25,7 @@ session:
       Make the four-hour loop resumable from repository state alone, reconcile the live
       handoff and numeric no-go boundary, and open one validated session record with an
       exact first research phase.
-    status: completed
+    status: stopped
     entered_by: session_start
     switch_reason: null
     budget_minutes: 10
@@ -433,7 +433,7 @@ session:
       Build the smallest reusable exact evaluator that applies the production nine-row
       stress weights to minus_w_row_jets, retains full row substitutions and correction
       cancellation, and checks the exp-034 sheet path, without deciding pure -W.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: >-
       Exp-044 stopped with a reviewed production row builder but an incomplete
@@ -447,7 +447,8 @@ session:
       source-bound algebraic blocker that a fresh agent can resume from the repository.
     validation_command: >-
       uv run --directory explorations/packing --frozen --all-extras --group dev pytest
-      -q tests/test_exact_jets.py tests/test_minus_w_row_jets.py && uv run --directory
+      -q tests/test_exact_jets.py tests/test_minus_w_row_jets.py
+      tests/test_minus_w_stress.py tests/test_minus_w_sheet.py && uv run --directory
       explorations/packing --frozen ruff check cases/n5 src/sqpack/research && uv run
       --directory explorations/packing --frozen basedpyright cases/n5
       src/sqpack/research && git diff --check
@@ -459,17 +460,28 @@ session:
       Retain the exact stress weights, first failing weighted jet identity, complete
       sheet path vector, and missing test as a W7 design handoff; do not open a target
       experiment or infer pure -W.
-    outcome: null
+    outcome: >-
+      The reusable evaluator now derives the normalized nine-row stress from production
+      row jets, retains every row substitution and correction column, and derives the
+      positive exp-034 left-boundary sheet path from its rational formula across both
+      complete owner inventories. It makes no scale or scientific disposition.
     evidence:
     - >-
       The accepted production builder supplies the exact row jets and source validation
       needed by this evaluator without importing any remembered coefficient.
-    stop_reason: null
+    - >-
+      Checkpoint 8ee367b adds four source-and-test files; 29 combined helper, builder,
+      stress, and sheet tests pass, and the final independent audit accepts the W7
+      boundary after blocking shortcut sheet coefficients and unnormalized weights.
+    stop_reason: >-
+      The exact stress and sheet unit closed before the deadline, and this eighth
+      contemporaneous phase reached the declared session cycle cap. Scale routing,
+      production mutations, and every target disposition remain outside this phase.
     next_action: >-
-      Delegate disjoint stress-evaluator implementation and read-only sheet/control
-      review, then require independent post-change acceptance before publishing.
+      Use the final pre-finalization slice to derive and review the remaining exact
+      scale-routing and mutation contract without executing a target.
   primary_bead: think-1s0h
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 240
     max_cycles: 8
@@ -491,7 +503,12 @@ session:
       supplies twelve exact R1, R2, R3, and R6 fixed-angle paths. R4, R5, -W,
       mixed-angle realization, whole-component stationarity, and unequal-side clearance
       remain open; BC-010 is ready and all numerical census work remains blocked behind it.
-    after: null
+    after: >-
+      Exp-042 exactly realizes all six frozen R4/R5 paths. Exp-043 and exp-044 are
+      terminal unresolved with no retained pure -W result, while reusable exact jets,
+      production row builders, normalized stresses, and an exp-034 sheet evaluator now
+      pass focused tests and independent review. Scale routing, target mutations, and
+      every pure -W disposition remain open.
   delegations:
   - task: Identify the current workflow, scientific handoff, and exact four-hour campaign question.
     operator: /root/workflow_orientation
@@ -972,6 +989,53 @@ session:
     elapsed_quality: unavailable
     next_action: Build those remaining parts as reusable W7 instrumentation before any successor.
     phase: 7
+  - task: Implement the normalized exact nine-row stress evaluator and focused tests.
+    operator: /root/r4_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Added a production-row stress evaluator that derives all weights from source
+      geometry, retains row and combined Taylor data, and proves exact correction
+      cancellation without choosing a direction, scale, or disposition.
+    evidence:
+    - >-
+      An independent audit first rejected a normalization gap; the repaired evaluator
+      checks every production weight identity and a uniform-rescaling control now fails.
+    files:
+    - cases/n5/minus_w_stress.py
+    - tests/test_minus_w_stress.py
+    checks:
+    - Eight focused tests pass in 132.71 seconds.
+    - Ruff and BasedPyright pass; independent post-change review accepts the helper boundary.
+    uncertainty: Scale routing, target mutations, and scientific dispositions remain absent.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Reuse this evaluator only through a separately frozen target instrument.
+    phase: 8
+  - task: Implement the exact exp-034 sheet evaluator and independently audit both helpers.
+    operator: /root/r5_derivation and /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Derived the positive left-boundary path from the exp-034 rational half-angle
+      formula, evaluated both complete 17-row owner inventories, and applied the exact
+      first-decisive-coefficient compatibility rule.
+    evidence:
+    - >-
+      Independent review first rejected copied path coefficients, then accepted the
+      rational jet derivation, wrong-normalization control, bad-correction control, and
+      normalized stress repair.
+    files:
+    - cases/n5/minus_w_sheet.py
+    - tests/test_minus_w_sheet.py
+    checks:
+    - Twelve combined stress-and-sheet tests pass independently in 131.28 seconds.
+    - Ruff, formatting, BasedPyright, and git diff checks pass with no diagnostics.
+    uncertainty: No scale router, sentinel suite, or target verdict was added.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Freeze the remaining scale and mutation design before target implementation.
+    phase: 8
   outputs:
   - campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md
   - campaign/agent-sessions/README.md
@@ -990,6 +1054,10 @@ session:
   - tests/test_exact_jets.py
   - cases/n5/minus_w_row_jets.py
   - tests/test_minus_w_row_jets.py
+  - cases/n5/minus_w_stress.py
+  - tests/test_minus_w_stress.py
+  - cases/n5/minus_w_sheet.py
+  - tests/test_minus_w_sheet.py
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
@@ -1023,11 +1091,22 @@ session:
     and BasedPyright are clean, and independent review accepts all six source inventories,
     a production center-angle Hessian, second-order tied branching, and the non-scientific
     API boundary.
-  stop_reason: null
+  - >-
+    Twenty-nine combined exact-helper, production-row, normalized-stress, and sheet
+    tests pass in 179.19 seconds; final Ruff and BasedPyright checks are clean.
+  - >-
+    Independent post-change review accepts the exact nine-row support and normalization,
+    all correction columns, rational exp-034 derivation, both complete owner inventories,
+    real input mutations, and the absence of target or scale claims.
+  stop_reason: >-
+    The eighth contemporaneous workflow phase reached the declared cycle cap after
+    publishing the accepted stress-and-sheet substrate. The remaining hour moves to an
+    explicit continuation session rather than weakening this session's cap or extending
+    a phase lease.
   next_action: >-
-    Under think-1s0h and BC-010 in the active W7 correctness phase, build and
-    independently review the reusable exact weighted-stress and exp-034 sheet evaluators by
-    19:13:20-07:00; do not open a target result or basin-frequency work.
+    Continue under think-1s0h in session-016: derive and independently review the
+    remaining exact scale-routing and production-mutation contract before the fixed
+    finalization reserve; do not open a target result or basin-frequency work.
 ---
 # Session 015 — Four-Hour R4/R5 Research Loop
 
@@ -1040,9 +1119,9 @@ native goals, and scheduled wakeups are replaceable controllers.
 ### Checkout identity
 
 The live control plane is on remote branch
-`origin/codex/packing-4h-research-loop-2026-08-25`; the latest published production-row
-builder checkpoint at this handoff is `a5a4ef0`. A fresh clone must fetch and switch to
-that branch before following this section:
+`origin/codex/packing-4h-research-loop-2026-08-25`; the latest published reusable-helper
+checkpoint at this handoff is `8ee367b`. A fresh clone must fetch and switch to that
+branch before following this section:
 
 ```shell
 git fetch origin codex/packing-4h-research-loop-2026-08-25
@@ -1070,13 +1149,15 @@ An agent joining with only this checkout should read, in order:
    phase.
 5. The terminal
    [`exp-044` guard result](../series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md)
-   for the accepted row-builder evidence and the exact stress, sheet, scale, mutation,
-   and disposition work that remains.
+   for the accepted row-builder evidence and the exact scale, mutation, and disposition
+   work that remains.
 6. The terminal
    [`exp-043` predecessor](../series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md)
    for the instrument defects that exp-044 must address without promoting its result.
-7. [`minus_w_row_jets.py`](../../cases/n5/minus_w_row_jets.py) and its
-   [focused tests](../../tests/test_minus_w_row_jets.py) for the active W7 substrate.
+7. [`minus_w_row_jets.py`](../../cases/n5/minus_w_row_jets.py),
+   [`minus_w_stress.py`](../../cases/n5/minus_w_stress.py),
+   [`minus_w_sheet.py`](../../cases/n5/minus_w_sheet.py), and their focused tests for
+   the accepted W7 substrate.
 8. The owning bead, `think-1s0h`, for dependency state rather than scientific verdicts.
 
 From the repository root, verify the handoff before writing:
@@ -1093,17 +1174,12 @@ uv run --directory explorations/packing --frozen packing-campaign status
 ```
 
 Continue only the active phase.
-This handoff is in wall-clock cycle slot 6 and workflow phase 8; early
-evidence-checkpoint switches account for the different numbers.
-Treat exp-044 as terminal and edit only the reusable weighted-stress and exp-034 sheet
-evaluators in the active W7 phase; do not run the target or infer pure `-W`. Before
-writing, compare the current time with the phase deadline `19:13:20-07:00`, finalization
-start `19:38:26-07:00`, and session deadline `20:08:26-07:00` using the four-state
-resume table in the
-[agent-session runbook](README.md#starting-a-portable-four-hour-session).
-An expired phase is terminalized from retained evidence before a successor opens.
-At or after finalization start, no new research opens; at or after the session deadline,
-only terminal records, validation, commit, push, bead sync, and the next handoff remain.
+Session 015 is terminal because its eighth contemporaneous phase reached the declared
+cycle cap after the reusable-helper checkpoint.
+Continue only through [`session-016`](session-016-final-hour-continuation.md), which
+owns the remaining work and finalization clocks.
+Treat exp-044 as terminal, do not run the target, and do not infer pure `-W` from any
+helper behavior.
 
 The coordinator owns the session file, hypothesis and experiment records, agenda,
 ledger, defects, beads, commits, and verdicts.
