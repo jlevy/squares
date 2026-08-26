@@ -459,6 +459,23 @@ controls:
   run: python3 -m devtools.validate_schemas
   expect: "evidence E-kingbird-upper-register is not verified"
 
+# Each novelty value owes different evidence (D-336). Attributing a result without
+# naming the source, and claiming one is new without dating the review it was assessed
+# against, are the two failures a machine can catch, so both get a control.
+- name: frontier - attributed evidence dropping its source
+  file: frontier/evidence.yaml
+  replace: ["    novelty: previously-published\n    relationship_to_generator: independent-implementation\n    origin: replayed-here\n    source_key: '[Ellsworth SVG]'\n",
+            "    novelty: previously-published\n    relationship_to_generator: independent-implementation\n    origin: replayed-here\n"]
+  run: python3 -m devtools.validate_schemas
+  expect: "previously-published evidence must name its source_key"
+
+- name: frontier - novelty claimed without a dated source review
+  file: frontier/evidence.yaml
+  replace: ["    novelty: apparently-novel\n    relationship_to_generator: independent-implementation\n    origin: replayed-here\n    source_key: '[Stromquist 2003]'\n    certificate: campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay: uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay_status: passed\n    limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.\n    source_reviewed: '2026-08-24'\n",
+            "    novelty: apparently-novel\n    relationship_to_generator: independent-implementation\n    origin: replayed-here\n    source_key: '[Stromquist 2003]'\n    certificate: campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay: uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json\n    replay_status: passed\n    limitations: Proves the lower bound with a source-distinct repair; it does not repair the printed source proof.\n"]
+  run: python3 -m devtools.validate_schemas
+  expect: "apparently-novel evidence requires a dated source_reviewed"
+
 - name: generated view left un-exempt from the Markdown formatter
   file: ../../.flowmarkignore
   replace: ["explorations/packing/defects.md\n", ""]

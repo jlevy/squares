@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 335
+count: 336
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8593,3 +8593,41 @@ defects:
     work.
   bead: think-ao4o
   recorded_in: TUTORIAL.md
+- id: D-336
+  title: Verified claims carried no provenance axis, blurring confirmations and new results
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: since the assurance vocabulary landed
+  severity: medium
+  status: fixed
+  what: >-
+    The tutorial's section-8 table marked the local-isolation theorem, the corner
+    measurement, and the moduli classification with bare assurance tags while only the
+    lower-bound row flagged peer-review status, and the synopsis wore the identical
+    "verified (exact-algebraic, replayed here)" tag on T-1, a published construction
+    confirmed here, and T-4, the project's own repair; nothing in the schema or
+    vocabulary could say whose result a claim is.
+  consequence: >-
+    A reader could take "verified" as external confirmation for results that are new
+    and unreviewed, or miss that the program's strongest claims are its own; the record
+    read as more externally established than it is.
+  fix: >-
+    A novelty axis separate from assurance, whose values differ in what they oblige:
+    common-knowledge owes no citation, previously-published must name its source_key,
+    apparently-novel must carry a dated source_reviewed and asserts only what the
+    search found rather than priority, and confirmed-novel is reserved. An absent
+    field means not yet assessed, never "not novel". The register is tagged three
+    common-knowledge, fifteen previously-published, two apparently-novel, and two
+    left absent; check_evidence_semantics enforces the two machine-checkable
+    obligations; the synopsis carries the vocabulary table, the split T-1/T-4 tags,
+    and the one-place rollup of apparently-novel results; the tutorial's section-8
+    rows and section-6 list state provenance; the README names the axis.
+  regression: >-
+    check_evidence_semantics rejects an attribution with no source and a novelty
+    claim with no dated review, with a controls.yaml cell for each; schema validation
+    enforces the enum. Prose provenance coverage remains review work.
+  bead: think-bhjz
+  recorded_in: frontier/frontier-evidence.schema.yaml
