@@ -5,11 +5,11 @@ author: Codex, for the project maintainer
 ---
 # Feature: Generalized Square-Packing Motion Lab
 
-**Date:** 2026-08-25 (last updated 2026-08-25)
+**Date:** 2026-08-25 (last updated 2026-08-26)
 
 **Author:** Codex (agent), for the repository maintainer
 
-**Status:** Draft for implementation
+**Status:** Phase 1 implementation in progress
 
 **Workflow:** W7 pipeline improvement
 
@@ -395,6 +395,24 @@ Standalone exact artifacts inline their scenario data, CSS, and JavaScript and k
 same-origin loopback requests.
 
 ## Implementation Plan
+
+### Bead Map
+
+`think-23td` is the implementation epic.
+The first seven children implement and validate Phase 1. `think-mn9j` is paused because
+this plan requires a separate semantic decision before persistent constraints become
+implementation work.
+
+| Bead | Deliverable | Blocked by | Status |
+| --- | --- | --- | --- |
+| `think-9yz7` | Shared scenario, pose-frame, request, event, and trace contracts | — | Complete |
+| `think-2f8m` | Zero-behavior-change quench trace observation | `think-9yz7` | Ready |
+| `think-no7o` | Shared shell, compact theme, and exact `n = 5` migration | `think-9yz7` | Ready |
+| `think-5t0r` | Setup-only snap geometry and editor-group reducer | `think-9yz7` | Ready |
+| `think-la6m` | Loopback free-quench service and deterministic replay | `think-9yz7`, `think-2f8m` | Blocked |
+| `think-0l1y` | Free-quench editor and phase-aware trace playback | `think-no7o`, `think-5t0r`, `think-la6m` | Blocked |
+| `think-kcdq` | Known-answer, browser, accessibility, documentation, and full validation | `think-0l1y` | Blocked |
+| `think-mn9j` | Phase 2 semantic gate for persistent contacts and rigid groups | `think-kcdq`; paused | Paused |
 
 ### Phase 1: Shared Shell and Setup-Only Snap-and-Quench
 
