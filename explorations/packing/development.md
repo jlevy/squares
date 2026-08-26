@@ -184,7 +184,9 @@ On pull requests,
 The fast behavioral step excludes only the four modules declared with the
 `exhaustive_exact` marker; the workflow contract checks that exact module set.
 The measured local PR command runs 101 tests, deselects 30 exhaustive exact tests, and
-finishes in 27.38 seconds.
+finishes in 27.38–33.85 seconds.
+The first hosted pull-request run finished end to end in 46 seconds, including a
+37-second Linux job and two-second aggregate.
 
 Pushes to `main`, manual dispatches, and the weekly schedule run the complete locked
 command on Linux and macOS. The macOS integration job also runs the focused deep-golden

@@ -352,11 +352,32 @@ The same 101-test core passed alone in 15.26 seconds.
 This receipt does not count as a clean full-gate sample, but it confirms both selected
 halves and reinforces that exact row-jet reuse is the next integration-speed target.
 
-This is one local sample, not the ten-run hosted acceptance sample.
-The next receipt must measure setup, work, aggregator, and end-to-end time on the pushed
-revision. If hosted setup keeps the first PR signal above one minute, the next smallest
-action is to split lint and behavioral work into two required jobs before adding the
-larger exact or control matrices.
+A one-worker retry avoided the constrained host’s concurrent temporary-space peak and
+passed all 33 complete-gate steps in 533.42 seconds.
+Exhaustive exact tests used 231.55 seconds, controls used 83.63 seconds, and soundness
+used 38.17 seconds. This serial receipt proves the complete integration surface; it is
+not the default worker layout or a pull-request latency target.
+
+The first hosted result, run `32941767003` at commit `ccc1bb5`, passed in 46 seconds end
+to end:
+
+| Hosted PR component | Seconds |
+| --- | ---: |
+| Workflow end to end | 46 |
+| Linux `validate` job | 37 |
+| Checkout, setup, and locked sync inside the job | 11 |
+| Required fast-validation step | 24 |
+| `packing-required` job | 2 |
+| macOS portability | skipped |
+
+The preceding revision required 310 seconds for Linux and 601 seconds for the macOS
+tail. The first spike sample therefore reduces the Linux job by 88.1% and the PR tail by
+92.3%. It meets the 60-second target, but the ten-run p50/p95 acceptance sample remains
+open under `think-l7hi`.
+
+If later hosted samples exceed one minute because of work rather than queueing, the next
+smallest action is to split lint and behavioral work into two required jobs before
+adding the larger exact or control matrices.
 
 Go only if full discovery still contains 131 tests, fast exclusion equals the checked-in
 slow-node manifest, every required item appears once, ten warm runs meet the 60/75

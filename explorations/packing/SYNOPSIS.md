@@ -318,9 +318,9 @@ measured planning refinement.
 corrects the Codex timing instrument, freezes both named task trees, and replaces
 estimated delay attribution with native per-turn rollups by model and thinking level.
 [Session 020](campaign/agent-sessions/session-020-fast-pr-lane-spike.md) acts on that
-baseline: the local required surface finishes in 27.38 seconds, exhaustive exact work
-and complete macOS move to direct integration events, and two-worker controls save 58.22
-seconds on the full branch.
+baseline: the first hosted required surface finishes in 46 seconds, exhaustive exact
+work and complete macOS move to direct integration events, and two-worker controls save
+58.22 seconds on the full branch.
 These W5 sessions measure and improve the research and validation loops but do not
 supersede session 016’s scientific handoff or authorize exp-045 implementation.
 Session 015’s first bounded W6 slice stopped exp-040 unresolved before retained

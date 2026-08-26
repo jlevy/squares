@@ -80,7 +80,7 @@ session:
     objective: >-
       Publish the tested fast-lane spike with its complete selection proof, resource
       limitation, plan receipt, bead state, and hosted pull-request timing.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       The implementation and local benchmarks completed the work objective; unused
@@ -103,14 +103,30 @@ session:
     fallback: >-
       Preserve the exact green checkpoint and resource failure, keep the spike open,
       push only reviewed non-conflicting work, and hand off hosted measurement.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Commit ccc1bb5 is pushed on PR 41. The first hosted required path passes in 46
+      seconds with macOS skipped, and a one-worker local retry passes the complete
+      integration surface despite the constrained host.
+    evidence:
+    - >-
+      GitHub Actions run 32941767003 passed in 46 seconds end to end: validate used 37
+      seconds, the required step used 24 seconds, packing-required used 2 seconds, and
+      macOS portability was skipped.
+    - >-
+      The one-worker complete gate passed all 33 steps in 533.42 seconds, including 101
+      core tests, 30 exhaustive exact tests, and all 62 controls.
+    - >-
+      Thirty-eight focused contracts, repository-wide Ruff and BasedPyright, session
+      schema, generated ledger, synopsis, and tbd sync are clean.
+    stop_reason: >-
+      The implementation, complete assurance proof, hosted sub-minute result, durable
+      records, bead state, commit, and remote branch are reconciled before the fixed
+      deadline.
     next_action: >-
-      Format and validate the records, review the patch, commit, sync, push, and wait
-      for the pull-request checks.
+      Close the bounded spike, retain the remaining hosted samples under think-l7hi,
+      and proceed to exact row-jet reuse under think-kdil.
   primary_bead: think-b784
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 70
     max_cycles: 2
@@ -127,7 +143,10 @@ session:
     before: >-
       PR 41 required Linux for 5m10s and duplicate full/deep macOS for 10m01s; local
       behavioral tests used 241.96 seconds and one-worker controls used 167.23 seconds.
-    after: null
+    after: >-
+      PR 41 run 32941767003 passes in 46 seconds end to end: Linux validate is 37
+      seconds, its required step is 24 seconds, the aggregate is 2 seconds, and macOS
+      is outside the pull-request critical path. Complete integration passes separately.
   delegations: []
   outputs:
   - .github/workflows/packing-validation.yml
@@ -149,13 +168,15 @@ session:
   - The clean fast gate passes in 33.85 seconds; a prior clean sample used 27.38 seconds.
   - Full test collection is the disjoint union of 101 core and 30 exhaustive exact tests.
   - All 62 controls pass at two workers in 100.32 seconds.
-  - >-
-    All 30 exhaustive exact tests pass in the complete run; its concurrent core branch
-    hit host ENOSPC, then all 101 core tests passed alone.
-  stop_reason: null
+  - The complete one-worker gate passes all thirty-three steps in 533.42 seconds.
+  - Hosted run 32941767003 passes end to end in 46 seconds.
+  stop_reason: >-
+    The fast lane, full assurance surface, hosted receipt, records, bead state, commit,
+    and pushed PR are complete within the fixed session budget.
   next_action: >-
-    Preserve BC-010 under think-1s0h as the sole scientific handoff. Complete
-    think-b784, then continue the remaining matrix work under think-l7hi.
+    Preserve BC-010 under think-1s0h as the sole scientific handoff. Collect the
+    remaining hosted acceptance samples under think-l7hi and implement exact row-jet
+    reuse under think-kdil; add larger matrices only if measured tails require them.
 ---
 # Session 020 — Fast Pull-Request Lane Spike
 
