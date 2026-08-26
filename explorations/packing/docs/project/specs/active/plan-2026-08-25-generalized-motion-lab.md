@@ -406,10 +406,10 @@ implementation work.
 | Bead | Deliverable | Blocked by | Status |
 | --- | --- | --- | --- |
 | `think-9yz7` | Shared scenario, pose-frame, request, event, and trace contracts | — | Complete |
-| `think-2f8m` | Zero-behavior-change quench trace observation | `think-9yz7` | Ready |
+| `think-2f8m` | Zero-behavior-change quench trace observation | `think-9yz7` | Complete |
 | `think-no7o` | Shared shell, compact theme, and exact `n = 5` migration | `think-9yz7` | Ready |
 | `think-5t0r` | Setup-only snap geometry and editor-group reducer | `think-9yz7` | Ready |
-| `think-la6m` | Loopback free-quench service and deterministic replay | `think-9yz7`, `think-2f8m` | Blocked |
+| `think-la6m` | Loopback free-quench service and deterministic replay | `think-9yz7`, `think-2f8m` | Ready |
 | `think-0l1y` | Free-quench editor and phase-aware trace playback | `think-no7o`, `think-5t0r`, `think-la6m` | Blocked |
 | `think-kcdq` | Known-answer, browser, accessibility, documentation, and full validation | `think-0l1y` | Blocked |
 | `think-mn9j` | Phase 2 semantic gate for persistent contacts and rigid groups | `think-kcdq`; paused | Paused |

@@ -105,6 +105,7 @@ class TimelineEventKind(StrEnum):
 class ProbeOutcome(StrEnum):
     """Disposition of a numerical probe already made by the solver."""
 
+    EVALUATED = "evaluated"
     ACCEPTED = "accepted"
     REJECTED = "rejected"
     UNSETTLED = "unsettled"
