@@ -94,6 +94,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md, role: plan, authority: current, lifecycle: transient}
   - path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
     role: plan
     authority: record
