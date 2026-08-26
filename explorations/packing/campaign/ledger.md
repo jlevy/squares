@@ -21,7 +21,7 @@
 | [session-013](agent-sessions/session-013-generated-view-recurrence-checkpoint.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-gszk | Commit and push, update PR 34, then begin a new bounded research session. |
 | [session-014](agent-sessions/session-014-final-portfolio-rotation.md) | stopped | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 2 | think-gszk | From the pushed PR 34 head, open a new bounded session and preregister one BC-010 exact R4/R5 nonlinear-realization slice under think-1s0h; retain D-239 as a separate pipeline slice and do not begin basin-frequency work before component identity. |
 | [session-015](agent-sessions/session-015-four-hour-r4-r5-loop.md) | stopped | contemporaneous | `process-review` (process) | `pipeline-improvement` (correctness) | 8 | think-1s0h | Continue under think-1s0h in session-016: derive and independently review the remaining exact scale-routing and production-mutation contract before the fixed finalization reserve; do not open a target result or basin-frequency work. |
-| [session-016](agent-sessions/session-016-final-hour-continuation.md) | in_progress | contemporaneous | `pipeline-improvement` (insight) | `pipeline-improvement` (insight) | 1 | think-1s0h | Under think-1s0h and BC-010, finish only the active W7 scale-and-mutation design phase, then enter finalization at 19:38:08-07:00. |
+| [session-016](agent-sessions/session-016-final-hour-continuation.md) | in_progress | contemporaneous | `pipeline-improvement` (insight) | `process-review` (process) | 2 | think-1s0h | Under think-1s0h and BC-010, finish only the active finalization phase and publish the exact exp-045 preregistration handoff; do not begin implementation or target work. |
 
 ### Workflow summary
 
@@ -32,7 +32,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 1 | 0 |
 | `factual-review` | 0 | 0 | 4 | 2 |
 | `insight-iteration` | 0 | 1 | 3 | 2 |
-| `process-review` | 3 | 4 | 9 | 6 |
+| `process-review` | 3 | 4 | 10 | 6 |
 | `efficiency-loop` | 1 | 0 | 1 | 0 |
 | `research-loop` | 1 | 4 | 9 | 7 |
 | `pipeline-improvement` | 2 | 0 | 11 | 0 |

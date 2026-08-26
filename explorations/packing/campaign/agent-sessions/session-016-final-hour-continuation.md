@@ -24,7 +24,7 @@ session:
       Derive a finite exact scale-routing and production-mutation design for the
       remaining exp-044 instrument boundary, using the accepted row, stress, and sheet
       helpers without implementing or measuring a pure -W target.
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 30
@@ -44,7 +44,11 @@ session:
     fallback: >-
       Retain the unresolved scale branches, unguarded mutation, and exact next test in
       this session; begin finalization at its fixed absolute start without target work.
-    outcome: null
+    outcome: >-
+      The retained design now fixes an exact three-stratum by five-scale owner-3
+      inventory, formal-real bounded algebra, source-derived unbounded cusp identities,
+      all twelve production mutation seams, thirteen keyed refusals, and exact successor
+      artifact paths without running a target.
     evidence:
     - >-
       Published checkpoint 8ee367b provides the accepted row, normalized-stress, and
@@ -55,10 +59,52 @@ session:
     - >-
       Independent mutation and scope audits retain the twelve production entry points,
       identify the missing guards, and accept exp-044 as coherent but terminal.
+    stop_reason: >-
+      The design and repository-only resume path passed independent review before the
+      phase deadline and were published at checkpoint 027349b.
+    next_action: >-
+      Enter finalization, reconcile every durable record and generated view, run the full
+      validation checkpoint, and publish the terminal handoff.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: finalization
+    focus: process
+    objective: >-
+      Reconcile session 016, the synopsis, ledger, bead, validation receipts, commits,
+      and exact successor action into one clean pushed terminal checkpoint.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The W7 design slice closed with independent repository-only acceptance at its
+      fixed boundary; the remaining thirty minutes were reserved for finalization.
+    budget_minutes: 30
+    started_at: '2026-08-25T19:38:08-07:00'
+    deadline_at: '2026-08-25T20:08:08-07:00'
+    expected_output: >-
+      A terminal schema-valid session, fresh generated views, full validation receipt,
+      clean pushed branch, synced owning bead, and one exact successor action.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen --all-extras --group dev
+      packing-validate --jobs 2 --inner-jobs 1
+    kill_condition: >-
+      Stop on target execution, a new research artifact, stale generated output, three
+      consecutive validation failures, uncommitted user work, or the session deadline.
+    fallback: >-
+      Preserve the last validated commit, exact failing command and output, terminal
+      session state, and one repair action; do not weaken a gate or resume research.
+    outcome: null
+    evidence:
+    - >-
+      Checkpoint 027349b is clean and pushed; independent memoryless review accepts the
+      branch identity, read order, clocks, design inventory, and successor paths.
+    - >-
+      The full packing-validate gate passes all thirty-two steps in 437.71 wall-seconds,
+      including 119 behavioral tests, 62 negative controls, exact-model replays, Rust
+      checks, provenance, schemas, campaign records, and synopsis reconciliation.
     stop_reason: null
     next_action: >-
-      Apply the repository-only portability audit, validate and publish the retained
-      design, and stop for finalization no later than 19:38:08-07:00.
+      Run the full gate, update terminal receipts and repository pointers, commit and
+      push, sync think-1s0h, and stop by 20:08:08-07:00.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -142,6 +188,8 @@ session:
     phase: 1
   outputs:
   - campaign/agent-sessions/session-016-final-hour-continuation.md
+  - SYNOPSIS.md
+  - campaign/ledger.md
   checks:
   - Session 015 stopped at its declared eight-phase cap with checkpoint 8ee367b pushed.
   - >-
@@ -150,10 +198,16 @@ session:
   - >-
     Softschema, generated-ledger freshness, campaign-record validation, and git diff
     checks pass with sixteen sessions and forty-four rounds.
+  - >-
+    packing-validate --fast passes all fifteen selected steps and 119 tests in 208.99
+    wall-seconds after the retained design checkpoint.
+  - >-
+    The full packing-validate checkpoint passes all thirty-two steps in 437.71
+    wall-seconds; its behavioral suite reports 119 passed in 352.11 seconds.
   stop_reason: null
   next_action: >-
-    Under think-1s0h and BC-010, finish only the active W7 scale-and-mutation design
-    phase, then enter finalization at 19:38:08-07:00.
+    Under think-1s0h and BC-010, finish only the active finalization phase and publish
+    the exact exp-045 preregistration handoff; do not begin implementation or target work.
 ---
 # Session 016 — Final-Hour Exact-Instrument Continuation
 
@@ -165,8 +219,8 @@ that cap or relying on a controller’s private memory.
 ## Fresh-Agent Resume
 
 The authoritative branch is `origin/codex/packing-4h-research-loop-2026-08-25`;
-checkpoint `f35e60b` contains the latest retained design, while `8ee367b` is the
-accepted helper-substrate checkpoint.
+checkpoint `027349b` contains the latest accepted memoryless design, while `8ee367b` is
+the accepted helper-substrate checkpoint.
 Fetch and switch to that branch, then read:
 
 1. [`session-015`](session-015-four-hour-r4-r5-loop.md) for the complete prior phase and
