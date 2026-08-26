@@ -928,9 +928,9 @@ native goals, and scheduled wakeups are replaceable controllers.
 ### Checkout identity
 
 The live control plane is on remote branch
-`origin/codex/packing-4h-research-loop-2026-08-25`; the latest clean engine checkpoint
-at this handoff is `2980fdc`. A fresh clone must fetch and switch to that branch before
-following this section:
+`origin/codex/packing-4h-research-loop-2026-08-25`; the latest published W7 and
+preregistration checkpoint at this handoff is `31e0abe`. A fresh clone must fetch and
+switch to that branch before following this section:
 
 ```shell
 git fetch origin codex/packing-4h-research-loop-2026-08-25
@@ -956,10 +956,13 @@ An agent joining with only this checkout should read, in order:
 4. [`agenda-001`](../agendas/agenda-001-basin-confidence-ladder.md) at `BC-010`,
    [`H-023`](../hypotheses/H-023-n5-terminal-connectivity.md), and this session’s active
    phase.
-5. The frozen
-   [`exp-043` criterion](../series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md)
-   for the exact source, outcome, control, disposition, and refusal boundary.
-6. The owning bead, `think-1s0h`, for dependency state rather than scientific verdicts.
+5. The active frozen
+   [`exp-044` criterion](../series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md)
+   for the exact source, outcome, control, disposition, mutation, and refusal boundary.
+6. The terminal
+   [`exp-043` predecessor](../series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md)
+   for the instrument defects that exp-044 must address without promoting its result.
+7. The owning bead, `think-1s0h`, for dependency state rather than scientific verdicts.
 
 From the repository root, verify the handoff before writing:
 
@@ -977,6 +980,8 @@ uv run --directory explorations/packing --frozen packing-campaign status
 Continue only the active phase.
 This handoff is in wall-clock cycle slot 5 and workflow phase 7; early
 evidence-checkpoint switches account for the different numbers.
+Treat the exp-044 criterion as frozen: edit only the pure-`-W` case integration needed
+to meet it, and audit the result without changing the criterion.
 Before writing, compare the current time with the phase deadline `18:49:44-07:00`,
 finalization start `19:38:26-07:00`, and session deadline `20:08:26-07:00` using the
 four-state resume table in the
@@ -1001,9 +1006,9 @@ checkpoint per slice, and starts finalization at the recorded absolute time.
 
 Run the active phase’s `validation_command`, then use the generic
 [portable checkpoint sequence](README.md#starting-a-portable-four-hour-session).
-For this phase, validate exp-042, exp-043 when it exists, and the session explicitly;
-render and check the ledger, run `devtools.check_synopsis`, inspect the diff and status,
-and stage only reviewed packing files.
+For this phase, validate retained exp-042, terminal exp-043, active exp-044, and the
+session explicitly; render and check the ledger, run `devtools.check_synopsis`, inspect
+the diff and status, and stage only reviewed packing files.
 After pushing, update the checkpoint hash above, add the retained outcome and exact next
 action to `think-1s0h`, and run `tbd sync`.
 

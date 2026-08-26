@@ -28,8 +28,10 @@ experiment:
     control: >-
       exact exp-034, exp-035, exp-036, and exp-038 regeneration; accepted exact-jet
       helper; complete six-case source rows; full center-angle-correction jets; weighted
-      rowwise curvature; an exact sheet witness; explicit owner-3 scale routing; twelve
-      typed production mutations; deterministic replay; and thirteen scope refusals
+      rowwise curvature; independent target dispositions; an exact sheet witness; a
+      fixed exp-036 positive fixture; explicit owner-3 scale routing with a symbolic real
+      bounded limit; twelve typed production mutations; deterministic replay; and
+      thirteen individually keyed scope refusals
     candidate: >-
       exp-043's canonical complete-vector -W candidate, reimplemented through the
       accepted case-free exact-jet layer without copying exp-036 coefficients or
@@ -48,8 +50,9 @@ experiment:
     budget: >-
       one 30-minute criterion, integration, measurement, and review slice ending
       2026-08-25T18:49:44-07:00; stop on one helper bypass, missing row, unweighted
-      curvature, invalid sheet witness, asserted scale case, coupled disposition, wrong
-      mutation identifier, replay drift, scope promotion, or the phase deadline
+      curvature, invalid sheet witness, sampled bounded-scale limit, asserted scale case,
+      coupled disposition, wrong mutation identifier, replay drift, scope promotion, or
+      the phase deadline
     record: campaign/series/series-000-smoke-and-calibration/results/exp-044-h-023-n5-minus-w-row-jets.json
   lease:
     expires: '2026-08-26T01:49:44Z'
@@ -80,15 +83,17 @@ experiment:
   verdict:
     decision: in-progress
     primary_criterion: >-
-      accept only if all six source cases build every production wall and selected SAT
-      feature through exact_jets, full -W and arbitrary quadratic corrections reproduce
-      the source first-order rows, positive Farkas weights cancel every correction column
-      and combine actual rowwise quadratic terms into strict contradictions, an exp-034
-      sheet jet supplies a checked compatible correction across its complete expected row
-      set, owner 3 mechanically exhausts bounded and unbounded abs(delta)/t^2 scales,
-      obstruction and sign-symmetry dispositions remain independent, twelve typed
-      production mutations match their expected identifiers, thirteen broader claims are
-      refused, and retained generation replays identically
+      accept the instrument independently of the target outcome only if all six source
+      cases build every production wall and selected SAT feature through exact_jets, full
+      -W and arbitrary quadratic corrections reproduce the source first-order rows,
+      positive Farkas weights are applied to actual row jets, an exp-034 sheet jet and a
+      fixed exp-036 positive fixture pass, owner 3 mechanically exhausts bounded symbolic-real
+      and unbounded abs(delta)/t^2 scales, twelve typed production mutations match only
+      their expected identifiers, thirteen broader claims have individual refusal records,
+      and retained generation replays identically; then report obstruction as met only if
+      every case and scale route has a strict contradiction, missed if one complete owner
+      branch has a compatible correction, or unresolved if none is compatible but one
+      valid exact branch or scale remains undecided, with sign symmetry reported independently
     reason: >-
       The W7 exact-jet substrate closes exp-043's reusable algebraic blocker; the
       case-level scientific criterion is frozen separately before integration.
@@ -120,44 +125,102 @@ without weighting the derived quadratic terms, invalidates the run.
 
 The exp-034 positive sheet-angle curve must supply its exact full center, angle, and
 quadratic-correction jet to the same row builder.
-A compatible result requires the complete expected label set and exact nonnegative
-second-order values.
+A compatible result requires the exact 17-row A label set for each owner: the twelve
+wall labels `wall:0:x-lower:+`, `wall:0:x-lower:-`, `wall:1:x-upper:+`,
+`wall:1:x-upper:-`, `wall:1:y-lower:+`, `wall:1:y-lower:-`, `wall:2:x-lower:+`,
+`wall:2:x-lower:-`, `wall:2:y-lower:+`, `wall:2:y-lower:-`, `wall:3:x-upper`, and
+`wall:3:y-upper`; fixed contacts `contact:0-4:owner4:a-`, `contact:1-4:owner4:a-`, and
+`contact:2-4:owner4:a+`; and both tied rows for the selected owner, either
+`contact:3-4:owner3:a+:square4-feature+1` and `contact:3-4:owner3:a+:square4-feature-1`
+or `contact:3-4:owner4:a+:square3-feature+1` and
+`contact:3-4:owner4:a+:square3-feature-1`. Derive the 15-velocity and 15-correction
+sheet jet from exp-034’s rational formula.
+Its normalized nonzero velocity entries are `dx0=dy0=1/2` and `dtheta0=1`; its
+normalized nonzero quadratic-correction entries are `dx0=dy0=-1/4`. For every expected
+active row, compatibility is lexicographic: the linear coefficient is positive, or it is
+zero and the quadratic coefficient is nonnegative.
+A quadratic coefficient need not be nonnegative when the linear coefficient is positive.
 An accepted flag, finite fixture, empty row set, or unchecked stored acceleration is
 insufficient.
 
 ## Frozen owner-3 scale routing and dispositions
 
 The owner-3 proof must split every subsequence with `delta=o(t)` into two exhaustive
-cases after passing to a subsequence:
+cases after passing to sign-stable subsequences:
 
-- bounded `abs(delta)/t^2`, handled by the exact tied row jets with the limiting signed
-  quadratic correction retained; and
-- unbounded `abs(delta)/t^2`, handled by a separately derived exact positive cusp
-  margin.
+- bounded `rho=abs(delta)/t^2`, where a further subsequence has `delta/t^2 -> beta` for
+  an arbitrary symbolic real `beta`; the checker must retain `beta` as a correction
+  coordinate and either prove that the positive weighted coefficient of `beta`, together
+  with all fifteen ordinary correction columns, is identically zero or prove the branch
+  inequalities for every real `beta`; and
+- unbounded `rho`, where a further subsequence has `rho -> infinity` and constant
+  `sign(delta)`; the checker must derive both strict feature-branch cusp coefficients
+  from production rows, divide by `abs(delta)`, and establish the contradiction sign for
+  each sign branch.
 
-The scale split, its exhaustiveness, and the sign in each branch must be executable
-data, not prose or booleans.
-A complete exact compatible branch makes the obstruction outcome `criterion_missed`; an
-undecided exact scale or correction leaves it `unresolved`. Source, row, witness,
-control, or replay failures invalidate the run and yield no scientific disposition.
-The sign-symmetry mechanism is retained independently and never gates a valid
-obstruction outcome.
+Every production row uses the sense `gap >= 0`. In the bounded case, a positive weighted
+combination contradicts feasibility only when its correction gradient, including the
+symbolic `beta` coefficient, is zero and its velocity curvature is strictly negative.
+In the unbounded case, the coefficient after normalization by `abs(delta)` must be
+strictly negative for each sign branch.
+A Boolean bounded/unbounded label, a sampled or `FieldElement`-restricted `beta`, or a
+stored cusp constant is insufficient.
+
+Instrument validity is independent of the target disposition.
+The obstruction outcome is `criterion_met` only when all six cases and every required
+scale route have strict contradictions; it is `criterion_missed` when at least one
+complete owner branch has a compatible correction; it is `unresolved` when none is
+compatible but at least one valid exact branch, correction, or scale route remains
+undecided.
+Source, row, witness, control, or replay failures invalidate the run and yield
+no scientific disposition.
+The sign-symmetry mechanism has its own `criterion_met` or `criterion_missed` outcome
+and never gates a valid obstruction outcome.
+A genuine baseline coefficient mismatch is a valid mechanism miss, not an instrument
+failure.
 
 ## Frozen controls and refusals
 
-Run a valid baseline with a met obstruction outcome before exactly twelve production
-mutations. Their stable failure identifiers cover partial W negation, missing stratum,
-missing owner, missing tied row, omitted center-axis cross term, ignored quadratic
-correction, wrong absolute branch, copied curvature, perturbed weighted curvature,
-invalid sheet witness, omitted scale case, and scope promotion.
-A post-result mutation, sentinel, broad exception catcher, empty-set success, or
-mechanism mismatch cannot pass.
+Run an instrument-valid target baseline, whatever its valid obstruction disposition, and
+a fixed exp-036 `+W` positive fixture that must reach a met obstruction through the same
+production builder before running exactly twelve mutations.
+Each mutation enters before certificate construction, re-enters the same builder and
+validator, and passes only by matching its sole frozen failure identifier:
 
-Retain the same thirteen distinct refusals recorded by the exp-043 draft: mixed
-`R_i+lambda W+s`, other mixed and transverse directions, whole-polytope and
-whole-component classification, A-to-B connection, isolation, terminality, quench
-selection, basin mass, census completeness, unequal-side clearance, and any pure `-W`
-obstruction inferred from checker failure.
+1. retain one `+W` center entry while negating the other fourteen input coordinates ->
+   `source.minus_w`;
+2. remove `interior` in source binding -> `source.strata`;
+3. remove `owner4:a+` from the case inventory -> `source.owner_exhaustion`;
+4. remove one actual tied row and its weight -> `source.tied_rows`;
+5. omit one nonzero center-angle entry from an actual product Hessian before row
+   substitution -> `jet.center_axis_cross`;
+6. replace a supplied nonzero correction by zero in the shared substitution path ->
+   `jet.correction_unused`;
+7. flip one strict nonzero SAT feature sign supplied to `exact_jets` ->
+   `jet.absolute_branch`;
+8. run the zero-correction builder at `W` and `2W`, then replace the required scaled
+   curvature by a copied fixed value before homogeneity validation ->
+   `jet.curvature_homogeneity`;
+9. perturb one production weight before applying it to row jets ->
+   `certificate.weighted_curvature`;
+10. change the exact sheet correction from `dx0=dy0=-1/4` to `-1/2`, making the tight
+    x-lower row negative -> `control.sheet_witness`;
+11. remove one actual bounded or unbounded scale handler ->
+    `certificate.scale_exhaustion`; and
+12. promote mixed-direction or component scope -> `scope.overclaim`.
+
+A post-result mutation, sentinel, broad exception catcher, empty-set success, or a
+mutation that claims success merely because the unmutated sign-symmetry mechanism missed
+cannot pass.
+A genuine unmutated mechanism mismatch remains a valid independent mechanism
+disposition.
+
+Retain exact key-set equality with these thirteen exp-043 refusals, each as its own
+refusal record rather than one combined Boolean: `Ri_plus_lambda_W_plus_s`,
+`other_mixed_direction`, `other_transverse_direction`, `whole_polytope_classification`,
+`whole_stationary_component`, `A_to_B_stationary_connection`, `local_isolation`,
+`terminality`, `quench_selection`, `basin_mass`, `census_completeness`,
+`unequal_side_clearance`, and `minus_W_obstruction_from_candidate_failure`.
 
 Acceptance would exclude only canonical pure `-W` at the three registered poses.
 It would not resolve any refused claim.
