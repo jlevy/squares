@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" data-contract="packing.squares:MotionLab/v1">
+<html lang="en" data-contract="packing.squares:MotionLab/v1"
+  data-shell-contract="packing.squares:MotionLabShell/v1">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,75 +8,425 @@
     content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline';
       img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
   <title>n=5 square-packing motion lab</title>
-  <style>
-:root {
+  <style>:root {
   color-scheme: light;
-  --paper: #f7f6f2;
-  --panel: #ffffff;
-  --ink: #171717;
-  --muted: #5d615f;
-  --line: #d9d8d2;
-  --accent: #087f8c;
-  --contact: #b19610;
-  --danger: #b42318;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bg: hsl(215 0% 100%);
+  --panel: hsl(220 20% 97%);
+  --border: hsl(215 15% 87%);
+  --text: hsl(215 20% 10%);
+  --muted: hsl(215 9% 43%);
+  --accent: hsl(220 82% 55%);
+  --danger: hsl(0 64% 46%);
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-size-title: 18px;
+  --font-size-body: 14px;
+  --font-size-small: 12px;
+  --weight-medium: 500;
+  --weight-strong: 650;
+  --radius: 6px;
+  --motion-fast-duration: 150ms;
+  --transition-fast: var(--motion-fast-duration) ease;
+  --packing-boundary: #000000;
+  --contact: #e3c64a;
+  --square-00: #378c3f;
+  --square-01: #00aeee;
+  --square-02: #c1a0fb;
+  --square-03: #00b393;
+  --square-04: #3d63be;
+  --square-05: #78d7d6;
+  --square-06: #877deb;
+  --square-07: #9fce85;
+  --square-08: #0096b1;
+  --square-09: #854888;
+  --square-10: #83c4ff;
+  --square-11: #3bb360;
+  --square-12: #008376;
+  --square-13: #7acfe9;
+  --square-14: #0079bf;
+  --square-15: #86a2ff;
+  --square-16: #865eb1;
+  --square-17: #7fd6b1;
+  --square-18: #00afb9;
+  --square-19: #c18dd8;
+  font-family: var(--sans);
 }
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--paper); color: var(--ink); }
-header, main { width: min(1240px, calc(100% - 32px)); margin-inline: auto; }
-header { padding: 34px 0 18px; }
-h1 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.5rem); letter-spacing: -.035em; }
-.lede { max-width: 78ch; margin: 10px 0 0; color: var(--muted); line-height: 1.55; }
-.controls, .stage-card, .readout { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; }
-.controls { display: flex; flex-wrap: wrap; gap: 14px; align-items: end; padding: 16px; margin-bottom: 16px; }
-.control { display: grid; gap: 6px; min-width: 140px; }
-.control.parameter { flex: 1 1 260px; }
-label, .control-label { color: var(--muted); font-size: .82rem; font-weight: 700; letter-spacing: .02em; }
-select, button, input[type="range"] { font: inherit; }
-select, button { min-height: 44px; border: 1px solid #aaa9a3; border-radius: 10px; background: #fff; color: var(--ink); padding: 0 12px; }
-button { cursor: pointer; font-weight: 700; }
-button.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
-button:disabled { cursor: not-allowed; opacity: .45; }
-button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid #70c6cf; outline-offset: 2px; }
-.toggle-row { display: flex; flex-wrap: wrap; gap: 8px 14px; width: 100%; padding-top: 2px; }
-.toggle-row > .control-label { flex: 0 0 100%; }
-.toggle-row label { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; color: var(--ink); font-weight: 600; }
-.lab-grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(280px, .85fr); gap: 16px; align-items: start; }
-.stage-card { overflow: hidden; }
-#motion-stage { display: block; width: 100%; height: auto; }
-.stage-background { fill: #fbfaf7; }
-.container { fill: #fff; stroke: #000; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-.square { fill-opacity: .76; stroke: #000; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-.ghost-square { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-dasharray: 8 5; vector-effect: non-scaling-stroke; }
-.trail { stroke: #6b6f6d; stroke-width: 1.5; stroke-dasharray: 2 5; vector-effect: non-scaling-stroke; }
-.tangent { stroke: var(--accent); stroke-width: 2.2; stroke-dasharray: 7 5; vector-effect: non-scaling-stroke; }
-.contact-link { stroke: var(--contact); stroke-width: 8; stroke-opacity: .62; vector-effect: non-scaling-stroke; }
-.contact-link.opening { stroke-dasharray: 9 6; }
-.contact-link.closing { stroke-dasharray: 2 5; stroke-width: 10; }
-.square-label { fill: #000; font-size: 14px; font-weight: 800; text-anchor: middle; dominant-baseline: middle; paint-order: stroke; stroke: #fff; stroke-width: 3px; }
-.obstruction-title { fill: #fff; font-size: 17px; font-weight: 900; paint-order: stroke; stroke: var(--danger); stroke-width: 5px; }
-.obstruction-subtitle { fill: #fff; font-size: 12px; font-weight: 800; paint-order: stroke; stroke: var(--danger); stroke-width: 4px; }
-.figure-key { display: flex; flex-wrap: wrap; gap: 12px 20px; margin: 0; padding: 14px 18px 17px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
-.key { display: inline-flex; align-items: center; gap: 8px; }
-.swatch { width: 28px; height: 0; border-top: 3px solid #000; }
-.swatch.ghost { border-color: var(--accent); border-top-style: dashed; }
-.swatch.contact { border-color: var(--contact); border-width: 7px; opacity: .65; }
-.readout { padding: 18px; }
-.readout h2 { margin: 0 0 14px; font-size: 1.15rem; }
-.status-grid { display: grid; gap: 12px; margin: 0; }
-.status-grid div { padding-bottom: 11px; border-bottom: 1px solid #ecebe6; }
-.status-grid div:last-child { border-bottom: 0; }
-dt { color: var(--muted); font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .055em; }
-dd { margin: 4px 0 0; line-height: 1.45; }
-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; overflow-wrap: anywhere; }
-.claim { margin: 16px 0 0; padding: 12px 14px; background: #eff7f7; border-left: 4px solid var(--accent); border-radius: 8px; line-height: 1.5; }
-.claim.obstructed { background: #fff0ee; border-color: var(--danger); }
-.branch { margin-top: 16px; padding: 13px; border: 1px solid #e1b0aa; border-radius: 10px; background: #fff8f7; }
-.branch p { margin: 6px 0; line-height: 1.45; }
-.fine-print { margin: 14px 0 0; color: var(--muted); font-size: .82rem; line-height: 1.45; }
-.noscript-notice { margin: 0 0 16px; padding: 12px 14px; border: 2px solid var(--danger); border-radius: 10px; background: #fff; line-height: 1.5; }
-@media (max-width: 860px) { .lab-grid { grid-template-columns: 1fr; } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: var(--font-size-body);
+  line-height: 1.5;
+}
+
+header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+
+header,
+main {
+  width: min(1240px, 100%);
+  margin-inline: auto;
+}
+
+main {
+  padding: 16px 20px 28px;
+}
+
+h1 {
+  margin: 0;
+  font-size: var(--font-size-title);
+  font-weight: var(--weight-strong);
+  letter-spacing: -0.01em;
+}
+
+.lede {
+  max-width: 88ch;
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: var(--font-size-small);
+}
+
+.controls,
+.stage-card,
+.readout {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 12px;
+  padding: 10px;
+  background: var(--panel);
+}
+
+.control {
+  display: grid;
+  min-width: 132px;
+  gap: 4px;
+}
+
+.control.parameter {
+  flex: 1 1 260px;
+}
+
+label,
+.control-label {
+  color: var(--muted);
+  font-size: var(--font-size-small);
+  font-weight: var(--weight-medium);
+}
+
+select,
+button,
+input {
+  font: inherit;
+}
+
+select,
+button {
+  min-height: 32px;
+  padding: 4px 9px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+button {
+  cursor: pointer;
+  font-weight: var(--weight-medium);
+}
+
+button.primary {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+}
+
+button:hover,
+select:hover {
+  border-color: var(--muted);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.toggle-row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 5px 14px;
+}
+
+.toggle-row > .control-label {
+  flex: 0 0 100%;
+}
+
+.toggle-row label {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  gap: 5px;
+  color: var(--text);
+}
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.85fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.stage-card {
+  overflow: hidden;
+}
+
+#motion-stage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.stage-background {
+  fill: var(--panel);
+}
+
+.container {
+  fill: var(--bg);
+  stroke: var(--packing-boundary);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.square {
+  fill-opacity: 0.76;
+  stroke: var(--packing-boundary);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.ghost-square {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.2;
+  stroke-dasharray: 8 5;
+  vector-effect: non-scaling-stroke;
+}
+
+.trail {
+  stroke: var(--muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 5;
+  vector-effect: non-scaling-stroke;
+}
+
+.tangent {
+  stroke: var(--accent);
+  stroke-width: 2.2;
+  stroke-dasharray: 7 5;
+  vector-effect: non-scaling-stroke;
+}
+
+.contact-link {
+  stroke: var(--contact);
+  stroke-width: 8;
+  stroke-opacity: 0.62;
+  vector-effect: non-scaling-stroke;
+}
+
+.contact-link.opening {
+  stroke-dasharray: 9 6;
+}
+
+.contact-link.closing {
+  stroke-width: 10;
+  stroke-dasharray: 2 5;
+}
+
+.square-label {
+  fill: var(--packing-boundary);
+  font-size: 14px;
+  font-weight: var(--weight-strong);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3px;
+}
+
+.obstruction-title,
+.obstruction-subtitle {
+  fill: var(--bg);
+  font-weight: var(--weight-strong);
+  paint-order: stroke;
+  stroke: var(--danger);
+}
+
+.obstruction-title {
+  font-size: 17px;
+  stroke-width: 5px;
+}
+
+.obstruction-subtitle {
+  font-size: 12px;
+  stroke-width: 4px;
+}
+
+.figure-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 0;
+  padding: 10px 12px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: var(--font-size-small);
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.swatch {
+  width: 26px;
+  height: 0;
+  border-top: 3px solid var(--packing-boundary);
+}
+
+.swatch.ghost {
+  border-color: var(--accent);
+  border-top-style: dashed;
+}
+
+.swatch.contact {
+  border-width: 7px;
+  border-color: var(--contact);
+  opacity: 0.65;
+}
+
+.readout {
+  padding: 12px;
+}
+
+.readout h2 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.status-grid {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.status-grid div {
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--border);
+}
+
+.status-grid div:last-child {
+  border-bottom: 0;
+}
+
+dt {
+  color: var(--muted);
+  font-size: var(--font-size-small);
+  font-weight: var(--weight-strong);
+}
+
+dd {
+  margin: 2px 0 0;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+}
+
+.claim,
+.branch,
+.noscript-notice {
+  border-radius: var(--radius);
+}
+
+.claim {
+  margin: 12px 0 0;
+  padding: 9px 10px;
+  border-left: 3px solid var(--accent);
+  background: var(--panel);
+}
+
+.claim.obstructed {
+  border-color: var(--danger);
+}
+
+.branch {
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.branch p {
+  margin: 5px 0;
+}
+
+.fine-print {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: var(--font-size-small);
+}
+
+.noscript-notice {
+  margin: 0 0 12px;
+  padding: 10px;
+  border: 2px solid var(--danger);
+}
+
+@media (max-width: 860px) {
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
 </style>
   <noscript><style>
     .controls, .readout, #live-region { display: none !important; }
@@ -151,7 +502,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .
             <line x1="0" y1="0" x2="0" y2="8" stroke="#b42318" stroke-width="2" />
           </pattern>
         </defs>
-        <rect class="stage-background" width="760" height="620" rx="18" />
+        <rect class="stage-background" width="760" height="620" rx="6" />
         <g id="math-plane" transform="translate(42 564) scale(185 -185)">
           <rect id="container" class="container" x="0" y="0" width="2.7677669529663688110021109052"
             height="2.7677669529663688110021109052" />
@@ -163,7 +514,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .
         </g>
         <g id="label-layer" aria-hidden="true"><text id="label-0" class="square-label" x="134.5" y="171.90737725975569">0</text><text id="label-1" class="square-label" x="461.536886298778265" y="476.5">1</text><text id="label-2" class="square-label" x="134.5" y="476.5">2</text><text id="label-3" class="square-label" x="423.222131779266959" y="187.777868220733041">3</text><text id="label-4" class="square-label" x="298.018443149389114" y="324.203688629877845">4</text></g>
         <g id="obstruction-badge" display="none">
-          <rect x="583" y="44" width="134" height="82" rx="12"
+          <rect x="583" y="44" width="134" height="82" rx="6"
             fill="url(#obstruction-hatch)" stroke="#b42318" stroke-width="2" />
           <text x="650" y="80" text-anchor="middle" class="obstruction-title">+W blocked</text>
           <text x="650" y="103" text-anchor="middle" class="obstruction-subtitle">at second order</text>
@@ -202,6 +553,112 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .
     </div>
     <p id="live-region" class="fine-print" role="status" aria-live="polite"></p>
   </main>
+  <script id="scenario-registry" type="application/json">{
+  "contract": "packing.squares:MotionLabShell/v1",
+  "default_scenario": "exact-n5",
+  "scenarios": [
+    {
+      "capabilities": [
+        "playback",
+        "scrub"
+      ],
+      "contract": "packing.squares:MotionLabScenario/v1",
+      "initial_frame": {
+        "container_side": 2.767766952966369,
+        "contract": "packing.squares:MotionLabFrame/v1",
+        "evidence": {
+          "claim": "Display projection of one exact full-interval R4/R5 path; it is not a global-optimality claim.",
+          "source": "campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json",
+          "status": "exact-certified-path"
+        },
+        "frame_kind": "exact-path",
+        "overlays": [
+          {
+            "kind": "contact",
+            "label": "source-backed contact 0-4",
+            "points": [],
+            "square_ids": [
+              0,
+              4
+            ]
+          },
+          {
+            "kind": "contact",
+            "label": "source-backed contact 1-4",
+            "points": [],
+            "square_ids": [
+              1,
+              4
+            ]
+          },
+          {
+            "kind": "contact",
+            "label": "source-backed contact 2-4",
+            "points": [],
+            "square_ids": [
+              2,
+              4
+            ]
+          },
+          {
+            "kind": "contact",
+            "label": "source-backed contact 3-4",
+            "points": [],
+            "square_ids": [
+              3,
+              4
+            ]
+          }
+        ],
+        "phase": "analytic-path",
+        "scenario_id": "exact-n5",
+        "schema_version": 1,
+        "squares": [
+          {
+            "palette_index": 0,
+            "square_id": 0,
+            "theta": 0.0,
+            "x": 0.5,
+            "y": 2.146446609406726
+          },
+          {
+            "palette_index": 1,
+            "square_id": 1,
+            "theta": 0.0,
+            "x": 2.267766952966369,
+            "y": 0.5
+          },
+          {
+            "palette_index": 2,
+            "square_id": 2,
+            "theta": 0.0,
+            "x": 0.5,
+            "y": 0.5
+          },
+          {
+            "palette_index": 3,
+            "square_id": 3,
+            "theta": 0.7853981633974483,
+            "x": 2.0606601717798214,
+            "y": 2.0606601717798214
+          },
+          {
+            "palette_index": 4,
+            "square_id": 4,
+            "theta": 0.7853981633974483,
+            "x": 1.3838834764831844,
+            "y": 1.323223304703363
+          }
+        ]
+      },
+      "runner": "analytic",
+      "scenario_id": "exact-n5",
+      "schema_version": 1,
+      "title": "n=5 square-packing motion lab"
+    }
+  ],
+  "schema_version": 1
+}</script>
   <script id="motion-data" type="application/json">{
   "contract": "packing.squares:MotionLab/v1",
   "default_scene": "R4:A",
@@ -3356,8 +3813,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .
   },
   "title": "n=5 square-packing motion lab"
 }</script>
-  <script>
-"use strict";
+  <script>"use strict";
 function scalar(value) { return Number(value.decimal); }
 function baseAngle(square) { return Number(square.orientation.radians || 0); }
 
@@ -3377,7 +3833,6 @@ function posesAt(scene, progress, tangent) {
     return { id: square.id, x, y, angle };
   });
 }
-
 function phaseAt(scene, progress) {
   if (scene.mode === "second-order-obstruction" || progress === 0) return "base";
   if (progress === 1) return "endpoint";
@@ -3419,8 +3874,17 @@ function stageDescriptionText(scene, progress) {
     + `exact pose; dashed squares, when enabled, show the first-order tangent predictor. `
     + `Active contact pairs: ${contacts}.`;
 }
-
 const byId = (id) => document.getElementById(id);
+const scenarioRegistry = JSON.parse(byId("scenario-registry").textContent);
+const scenarioDefinition = scenarioRegistry.scenarios.find(
+  (scenario) => scenario.scenario_id === scenarioRegistry.default_scenario,
+);
+if (!scenarioDefinition) {
+  throw new Error("Motion Lab default scenario is missing from its registry");
+}
+function scenarioHasCapability(capability) {
+  return scenarioDefinition.capabilities.includes(capability);
+}
 const manifest = JSON.parse(byId("motion-data").textContent);
 const scenes = new Map(manifest.scenes.map((scene) => [scene.id, scene]));
 const motionSelect = byId("motion-select");
@@ -3442,6 +3906,9 @@ const durationMilliseconds = 5000;
 let animationFrame = null;
 let animationStart = null;
 let animationOrigin = 0;
+
+playButton.hidden = !scenarioHasCapability("playback");
+progressInput.disabled = !scenarioHasCapability("scrub");
 
 function currentScene() { return scenes.get(`${motionSelect.value}:${stratumSelect.value}`); }
 function currentProgress() { return Number(progressInput.value) / Number(progressInput.max); }
