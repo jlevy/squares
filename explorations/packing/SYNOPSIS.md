@@ -311,9 +311,11 @@ after reaching its declared eight-phase cap, and
 completed final-hour continuation; it preserved the original deadline without extending
 an expired phase or relying on controller memory.
 [Session 017](campaign/agent-sessions/session-017-research-loop-efficiency.md) is the
-later W5 efficiency record.
-It measures the research and validation loops but does not supersede session 016’s
-scientific handoff or authorize exp-045 implementation.
+initial W5 efficiency record, and
+[session 018](campaign/agent-sessions/session-018-efficiency-plan-refinement.md) is its
+measured planning refinement.
+They measure and prioritize the research and validation loops but do not supersede
+session 016’s scientific handoff or authorize exp-045 implementation.
 Session 015’s first bounded W6 slice stopped exp-040 unresolved before retained
 measurement after independent review found five finite proof-perimeter gaps in the draft
 R4/R5 checker. Exp-041 froze the exact five-blocker correction at `e26fae9`, then
