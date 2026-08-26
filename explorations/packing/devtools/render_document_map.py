@@ -25,6 +25,7 @@ ROLE_LABELS = {
     "development-guide": "engineering and validation rules",
     "runbook": "W6 experiment mechanics",
     "session-guide": "escalated session and recovery contract",
+    "research-loop-logbook": "reader-facing research-run summaries",
     "series-guide": "series scope and comparability",
     "registry": "hand-maintained registry",
     "generated-view": "generated status view",
@@ -40,6 +41,7 @@ ROLE_LABELS = {
     "hypothesis-record": "typed hypothesis record",
     "experiment-record": "typed experiment record",
     "session-record": "typed session record",
+    "research-loop-run-record": "typed research-run synopsis",
     "agenda": "mutable coordination agenda",
     "exploration-report": "typed idea provenance",
 }

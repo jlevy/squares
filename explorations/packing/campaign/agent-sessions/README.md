@@ -16,6 +16,12 @@ Session records complement, and do not replace, the scientific record:
   delegated work, evidence, stopping reason, and exact next action; its entry workflow
   is derived from the first phase.
 
+After all source sessions for one user-level run become terminal, the
+[research loop logbook](../research-loop-logbook/README.md) joins their checked counts,
+scientific results, relevant defect ids, pipeline changes, validation, and next action
+into one ground-up synopsis.
+The source sessions remain authoritative for phase detail.
+
 Do not open a session record for a routine single-purpose edit, a short review, or one
 registered round whose hypothesis, experiment, result, and bead already provide the
 needed state.

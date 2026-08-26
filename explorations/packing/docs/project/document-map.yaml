@@ -18,6 +18,7 @@ documents:
   - {path: development.md, role: development-guide, authority: definitive, lifecycle: maintained}
   - {path: campaign/README.md, role: runbook, authority: definitive, lifecycle: maintained}
   - {path: campaign/agent-sessions/README.md, role: session-guide, authority: definitive, lifecycle: maintained}
+  - {path: campaign/research-loop-logbook/README.md, role: research-loop-logbook, authority: definitive, lifecycle: maintained}
   - {path: campaign/ideas.md, role: registry, authority: definitive, lifecycle: maintained}
   - {path: campaign/ledger.md, role: generated-view, authority: generated, lifecycle: generated}
   - {path: campaign/series/series-000-smoke-and-calibration/README.md, role: series-guide, authority: definitive, lifecycle: maintained}
@@ -120,6 +121,12 @@ collections:
     lifecycle: retained
     contract: packing.squares:AgentSession/v2
     schema: campaign/schemas/agent-session.schema.yaml
+  - pattern: campaign/research-loop-logbook/run-*.md
+    role: research-loop-run-record
+    authority: record
+    lifecycle: retained
+    contract: packing.squares:ResearchLoopLogEntry/v1
+    schema: campaign/schemas/research-loop-log-entry.schema.yaml
   - pattern: campaign/agendas/agenda-*.md
     role: agenda
     authority: current

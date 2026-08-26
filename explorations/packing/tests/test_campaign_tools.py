@@ -80,6 +80,7 @@ def _bounded_session(*, max_cycles: int, active: bool = False) -> dict[str, obje
             "max_cycles": max_cycles,
             "finalization_minutes": 10,
         },
+        "primary_bead": "think-test",
         "progress": {
             "metric": "bounded contract checks",
             "before": "No retained receipt.",
@@ -116,6 +117,60 @@ def _session_problems(
     )
 
 
+def _logbook_entry(path: Path) -> dict[str, object]:
+    """Minimal run synopsis whose rollup matches `_bounded_session`."""
+    sections = "\n\n".join(
+        f"## {heading}\n\nRecorded." for heading in ledger.REQUIRED_LOGBOOK_SECTIONS
+    )
+    path.write_text(
+        f"---\nplaceholder: true\n---\n\n# Test run\n\n{sections}\n", encoding="utf-8"
+    )
+    return {
+        "id": "run-001",
+        "_path": path,
+        "source_sessions": ["session-999"],
+        "primary_bead": "think-test",
+        "timebox": {
+            "target_wall_minutes": 60,
+            "cycle_minutes": 30,
+            "planned_cycle_slots": 2,
+        },
+        "rollup": {
+            "session_count": 1,
+            "phase_count": 2,
+            "workflow_counts": {"process-review": 2},
+            "phase_status_counts": {"completed": 1, "stopped": 1},
+            "focus_counts": {"process": 2},
+            "clock_role_counts": {"work": 2},
+            "delegation_count": 0,
+            "delegation_status_counts": {},
+            "experiment_decision_counts": {},
+        },
+        "experiments": [],
+        "defect_log": {"new_ids": [], "relevant_ids": []},
+        "pipeline_changes": [],
+    }
+
+
+def _logbook_problems(
+    monkeypatch: pytest.MonkeyPatch,
+    entry: dict[str, object],
+) -> list[str]:
+    """Run logbook reconciliation without unrelated repository link state."""
+    monkeypatch.setattr(ledger, "dead_links", list)
+    monkeypatch.setattr(ledger, "board_ids", _empty_board_ids)
+    return ledger.check(
+        [],
+        [],
+        [],
+        [],
+        [_bounded_session(max_cycles=2)],
+        agendas=[],
+        now=dt.datetime(2026, 8, 24, tzinfo=dt.UTC),
+        logbook_entries=[entry],
+    )
+
+
 def test_gate_refusal_has_a_specific_type_and_recovery_message(tmp_path: Path) -> None:
     marker = tmp_path / ".gate-running"
     marker.touch()
@@ -143,6 +198,35 @@ def test_agent_session_rejects_more_contemporaneous_phases_than_max_cycles(
     assert (
         "session-999-contract-test.md: contemporaneous workflow phases exceed budget.max_cycles"
     ) in problems
+
+
+def test_research_loop_logbook_rejects_phase_rollup_drift(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    entry = _logbook_entry(tmp_path / "run-001-contract-test.md")
+    rollup = cast(dict[str, object], entry["rollup"])
+    rollup["phase_count"] = 1
+
+    problems = _logbook_problems(monkeypatch, entry)
+
+    assert "run-001-contract-test.md: rollup.phase_count is 1, expected 2" in problems
+
+
+def test_research_loop_logbook_requires_the_reader_first_sections(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    entry = _logbook_entry(tmp_path / "run-001-contract-test.md")
+    path = cast(Path, entry["_path"])
+    path.write_text(
+        path.read_text(encoding="utf-8").replace("## What Did Not Work\n", ""),
+        encoding="utf-8",
+    )
+
+    problems = _logbook_problems(monkeypatch, entry)
+
+    assert (
+        "run-001-contract-test.md: needs exactly one '## What Did Not Work' section" in problems
+    )
 
 
 def test_active_delegation_rejects_unfrozen_uv_validation(

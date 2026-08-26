@@ -2,6 +2,14 @@
 
 # Experiment ledger
 
+## Research loop logbook
+
+Each entry summarizes one user-level research window. Cycle slots are wall-clock units; phases are recorded changes of purpose or focus.
+
+| run | date | status | cycle slots | sessions | phases | workflows | experiment verdicts | next action |
+| --- | --- | --- | ---: | ---: | ---: | --- | --- | --- |
+| [run-001](research-loop-logbook/run-001-2026-08-25-four-hour-r4-r5.md) | 2026-08-25 | completed | 8 x 30m | 2 | 10 | `process-review` 2, `research-loop` 5, `pipeline-improvement` 3 | accepted 1, rejected 1, unresolved 3 | Under think-1s0h and BC-010, preregister exactly campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md; obtain independent criterion acceptance before implementing minus_w_scale.py or running any pure minus-W target. |
+
 ## Agent sessions
 
 | id | status | recording | entry | current | count | primary bead | next action |

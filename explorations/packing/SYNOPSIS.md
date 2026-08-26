@@ -141,6 +141,7 @@ case or experiment separately.
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
 | [Agent Sessions](campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
+| [Research Loop Logbook](campaign/research-loop-logbook/README.md) | reader-facing research-run summaries | definitive | maintained | — |
 | [Idea board — the `s(n)` search campaign](campaign/ideas.md) | hand-maintained registry | definitive | maintained | — |
 | [Experiment ledger](campaign/ledger.md) | generated status view | generated | generated | — |
 | [series-000 (S0) — smoke and calibration](campaign/series/series-000-smoke-and-calibration/README.md) | series scope and comparability | definitive | maintained | — |
@@ -175,6 +176,7 @@ case or experiment separately.
 | `campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
 | `campaign/agent-sessions/session-*.md` | typed session record | record | retained | — |
+| `campaign/research-loop-logbook/run-*.md` | typed research-run synopsis | record | retained | — |
 | `campaign/agendas/agenda-*.md` | mutable coordination agenda | current | maintained | — |
 | `campaign/explorations/X-*.md` | typed idea provenance | record | retained | — |
 
