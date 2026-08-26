@@ -39,6 +39,10 @@ The document SVG renderer and its script-free safety profile remain unchanged.
 See the
 [motion-lab spike record](../../docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md)
 for the data contract, evidence boundary, tests, and known limits.
+The
+[generalized Motion Lab plan](../../docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md)
+defines the shared scenario shell, setup-only snapping, numerical quench trace, and
+compact visual system for the next implementation.
 
 ### `n = 10`: numerical comparison
 
