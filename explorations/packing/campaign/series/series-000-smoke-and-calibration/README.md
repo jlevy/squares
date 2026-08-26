@@ -54,8 +54,9 @@ Exp-041 rejects a stricter proof-perimeter criterion on an exact endpoint-only z
 while retaining the candidate paths and path-feasibility question.
 Exp-042 is the accepted endpoint-aware successor: it certifies six explicit R4/R5 paths
 and positive pathwise first-order stresses with twenty semantic controls and retained
-replay. Exp-043 freezes the next exact pure `-W` second-order test before its checker
-exists. Those records do not imply that full connectivity has been established.
+replay. Exp-043 stops unresolved before retained measurement: its draft checker passes
+temporary checks, but independent review finds five finite second-order instrument
+defects. Those records do not imply that full connectivity has been established.
 Those result shapes are not pooled or compared merely because they share `series-000`.
 Each experiment’s `subject`, method, regime, and provenance govern what comparison is
 legal; the frontmatter `instrument` records the series’ opening search instrument, not

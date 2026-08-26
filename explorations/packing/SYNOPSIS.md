@@ -316,7 +316,9 @@ Exp-042 corrects that endpoint inventory and meets the full frozen criterion fro
 commit `2980fdc`: six R4/R5 paths, both owner stresses, and twenty semantic controls
 pass retained generation and replay.
 The result is pathwise first-order only.
-Exp-043 freezes the successor pure `-W` second-order test before its checker exists.
+Exp-043 then stops its pure `-W` test before retained measurement: the draft checker is
+a resume point, but it does not yet derive production rowwise second-order constants,
+consume a full exp-034 acceleration witness, or mechanically route the two-scale proof.
 Its fresh-agent resume section records the read order, validation commands, clock,
 delegation boundary, and exact next action so no controller memory is required.
 The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
@@ -1747,7 +1749,7 @@ archive beside it.
 | [exp-040](campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md) | 5 | target | H-023 | exact rotating-path draft | five audited proof gaps; no retained result | **unresolved** |
 | [exp-041](campaign/series/series-000-smoke-and-calibration/experiments/exp-041-h-023-n5-rotating-release-proof-perimeter.md) | 5 | target | H-023 | exact rotating-path proof perimeter | endpoint-only axis falsifies complete zero inventory | **rejected** |
 | [exp-042](campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md) | 5 | target | H-023 | endpoint-aware exact rotating paths | 6 paths; 6 stresses; 20 controls pass | **accepted** |
-| [exp-043](campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md) | 5 | target | H-023 | exact pure -W second-order test | criterion frozen before checker implementation | **in-progress** |
+| [exp-043](campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md) | 5 | target | H-023 | exact pure -W second-order test | five instrument blockers; no retained result | **unresolved** |
 
 ### Cost and provenance
 
@@ -1795,11 +1797,11 @@ archive beside it.
 | exp-040 | 30m criterion, implementation, and review slice | 12.0 s | 30 m | guard | — |
 | exp-041 | one 30-minute correction, measurement, and review slice | 3.234 s | 20 m | criterion | — |
 | exp-042 | one 30-minute correction, measurement, and review slice | 26.17 s | 28 m | criterion | `2980fdc` |
-| exp-043 | one 30-minute preregistration, implementation, measurement, and review slice | — | — | — | — |
+| exp-043 | one 30-minute preregistration, implementation, and review slice | 3.071 s | 20 m | guard | — |
 
 ### What the 43 rounds jointly establish
 
-The 43 rounds use 1011 agent-minutes and 29.0 wall-minutes under the campaign’s retained
+The 43 rounds use 1031 agent-minutes and 29.1 wall-minutes under the campaign’s retained
 effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through

@@ -299,9 +299,11 @@ agenda:
       feasibility and stress determinations from engine commit `2980fdc`: all six R4/R5
       cases and twenty semantic controls pass retained generation and replay. This is
       pathwise first-order evidence, not an exhaustive release-class result or
-      stationary connection. Exp-043 freezes the next bounded pure `-W` second-order
-      criterion before its checker exists. Mixed-angle, whole-stationary-component, and
-      unequal-side-clearance questions remain later bounded slices. The repaired
+      stationary connection. Exp-043 stops its pure `-W` test before retained
+      measurement on five exact instrument defects in rowwise second-order jets,
+      weighted curvature, the sheet witness, and scale routing. Pure `-W`, mixed-angle,
+      whole-stationary-component, and unequal-side-clearance questions remain later
+      bounded slices. The repaired
       D-199/D-203 solver path no longer orders
       this scientific cell, and D-239 remains a separate W7 robustness line.
     artifacts:
@@ -329,6 +331,7 @@ agenda:
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md
+    - cases/n5/minus_w_obstruction.py
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

@@ -63,9 +63,9 @@ hypothesis:
     all twenty semantic controls reject. This is six-path nonlinear realization, not an
     A-to-B stationary connection or exhaustive realization. The `-W`, mixed-direction,
     whole-component, and unequal-side questions remain open.
-    Exp-043 is the preregistered next slice: it tests only whether the canonical pure
-    -W direction has a branch-exhaustive sign-reversed second-order obstruction at the
-    three registered poses.
+    Exp-043 stops before retained measurement because its draft evaluator does not
+    derive rowwise second-order constants from full jets or check its exp-034
+    acceleration witness. It leaves pure -W unresolved with a finite instrument list.
 ---
 # H-023 — resolve the first ambiguous census cell
 
@@ -123,10 +123,14 @@ R4 and R5 therefore have six explicit pathwise realizations at A, the midpoint, 
 The result neither exhausts those release classes nor supplies a stationary connector
 between A and B.
 
-Exp-043 now freezes a separate exact test of canonical pure `-W`. Its criterion must
-bind and negate the complete exp-038 vector, exhaust both owner branches and tied rows,
-and avoid falsely obstructing exp-039’s realized R3 path.
-Mixed directions remain out of scope regardless of the pure-direction verdict.
+Exp-043 freezes a separate exact test of canonical pure `-W`, then stops at independent
+review before retained measurement.
+Its draft makes the predicted coefficients sign-even by construction instead of deriving
+rowwise nonlinear wall and SAT constants, and its sheet control does not consume a
+checked acceleration witness.
+The retained finite successor list is an exact truncated-series row engine, full jets,
+weighted rowwise curvature, a production sheet witness, and mechanical two-scale
+routing. Pure `-W` and mixed directions remain unresolved.
 
 This is the focused control for H-021 and the practical precursor to H-011.
 

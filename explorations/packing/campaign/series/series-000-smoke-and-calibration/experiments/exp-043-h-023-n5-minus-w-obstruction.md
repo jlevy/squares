@@ -52,9 +52,6 @@ experiment:
       realized ray, an unclassified coefficient, replay drift, scope promotion, or the
       phase deadline
     record: campaign/series/series-000-smoke-and-calibration/results/exp-043-h-023-n5-minus-w-obstruction.json
-  lease:
-    expires: '2026-08-26T00:59:27Z'
-    host: spud10.local
   results:
   - shape: determination
     question: >-
@@ -62,25 +59,35 @@ experiment:
       tangent cone at A, the source stratum labelled interior, and B by an exact
       acceleration-independent second-order contradiction in every nearby owner branch?
     role: outcome
-    outcome: no_progress
+    outcome: invalid
+    checked_by: >-
+      two independent post-change audits after bounded temporary generation and replay
   - shape: determination
     question: >-
       Do the derived -W contradictions equal exp-036's exact +W coefficients in every
       stratum-owner case?
     role: mechanism
     outcome: no_progress
+    checked_by: >-
+      the sign-symmetry result was not measured because the draft evaluator made it true
+      by construction instead of deriving rowwise second-order constants
+  effort:
+    timebox: one 30-minute preregistration, implementation, and independent-review slice
+    wall_seconds: 3.071
+    agent_minutes: 20
+    stopped_by: guard
   complexity:
-    lines_changed: 0
+    lines_changed: 596
     new_dependencies: []
     new_failure_modes:
     - a sign-even width expansion can hide sign-odd center or separating-axis terms
     - an obstruction helper can falsely reject a known realized release direction
     notes: >-
-      Preregistered after exp-042 accepted six explicit R4/R5 paths and before the
-      pure -W checker exists. The result may settle only the canonical pure direction at
-      the three registered poses.
+      The draft checker is retained as a resume point, but no campaign result JSON was
+      accepted because independent review found that its green temporary run did not
+      execute the frozen second-order instrument.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: >-
       accept only if the checker derives -W by exact negation of exp-038's stored W,
       proves it first-order tight at all three source strata, exhausts both nearby owner
@@ -91,9 +98,17 @@ experiment:
       equality of -W and +W coefficients is retained as a separate mechanism result and
       is not required for an accepted obstruction verdict
     reason: >-
-      Pure -W is the smallest remaining exact nonlinear-realization cell after exp-042;
-      its sign-reversed second-order criterion is frozen before implementation or target
-      execution.
+      Temporary generation and replay passed, but independent review found that the
+      evaluator ignored center velocities in its second-order constants, combined no
+      production rowwise curvatures, supplied no checked sheet acceleration witness, and
+      asserted rather than proved the owner-3 two-scale routing. No target result was
+      retained and no -W disposition follows.
+    reopen_when: >-
+      A successor builds a shared exact truncated-series wall and SAT engine, feeds full
+      center, angle, and acceleration jets for plus or minus W and the exp-034 sheet
+      curve through it, retains rowwise second-order constants and their weighted sum,
+      and mechanically routes the delta=o(t) scale split and scientific dispositions.
+    resume_from: explorations/packing/cases/n5/minus_w_obstruction.py
 ---
 # exp-043 — exact pure -W second-order test
 
@@ -204,6 +219,27 @@ It would not classify `R_i + lambda W + s`, any other mixed or transverse direct
 whole polytope or stationary component, an A-to-B stationary connection, local isolation
 or terminality, quench selection, basin mass, census completeness, or unequal-side
 clearance. Candidate-checker failure is not a `-W` obstruction.
+
+## Guard result
+
+The scientific instrument guard fired before retained target measurement.
+Temporary generation completed in 1.709 seconds and replay in 1.362 seconds, but those
+green runs do not meet the frozen criterion.
+Two independent reviews found five finite defects:
+
+- the evaluator has no production rowwise second-order wall or SAT jets;
+- center velocities enter only first-order checks, while hand-written angle-squared
+  formulas make `+W` and `-W` certificates identical by construction;
+- the positive Farkas weights cancel linear correction columns but are never applied to
+  derived rowwise nonlinear constants;
+- the exp-034 control does not feed a full exact center, angle, and acceleration witness
+  through the shared evaluator; and
+- the owner-3 `delta=o(t)` two-scale argument is asserted rather than mechanically
+  routed.
+
+No campaign result JSON was written.
+This round is unresolved and retains no scientific disposition for pure `-W`,
+coefficient sign symmetry, mixed directions, connectivity, or any broader H-023 claim.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

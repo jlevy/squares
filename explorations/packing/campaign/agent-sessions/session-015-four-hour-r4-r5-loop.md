@@ -250,7 +250,7 @@ session:
       Preregister and test whether the canonical pure -W direction has the exact
       sign-reversed second-order obstruction at A, the registered midpoint, and B,
       without inferring anything about mixed directions or whole-component stationarity.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: >-
       Exp-042 met the six-path R4/R5 criterion and closed that finite correction line;
@@ -276,7 +276,11 @@ session:
       Terminalize the exact branch, sign, or source blocker without calling candidate
       failure an obstruction; rotate to a separately admissible source-bound cell and
       leave mixed directions, connectivity, and component identity open.
-    outcome: null
+    outcome: >-
+      Exp-043 stopped unresolved before retained measurement. Its draft checker passes
+      temporary record and replay, but two independent audits found that the apparent
+      obstruction is not connected to production rowwise second-order constants or a
+      checked exp-034 acceleration witness.
     evidence:
     - >-
       Exp-042 accepted six R4/R5 paths and explicitly refused pure -W, mixed-direction,
@@ -285,11 +289,64 @@ session:
       Independent portfolio review selected a six-case sign-reversed exp-036 test with
       exact owner branches, a realized-ray anti-overobstruction control, typed mutations,
       and a strict refusal boundary as the smallest next question.
+    - >-
+      Independent exact derivation confirms the expected sign-even coefficients, but the
+      implementation guard found five finite instrument defects before target execution.
+    - >-
+      Temporary generation passed in 1.709 seconds and replay in 1.362 seconds; no
+      campaign result JSON was written because those checks did not exercise the frozen
+      scientific instrument.
+    stop_reason: >-
+      The independent-review guard fired on missing production rowwise second-order
+      jets, unused center terms and sheet acceleration, unweighted nonlinear constants,
+      and asserted two-scale routing. Candidate-checker failure was not promoted to a
+      pure -W obstruction.
+    next_action: >-
+      Under think-1s0h, preregister a successor instrument round whose first output is a
+      shared exact truncated-series wall and SAT row engine with full jets, rowwise
+      constants, weighted acceleration elimination, an exp-034 witness, and explicit
+      scale routing.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Build and independently test the smallest shared exact truncated-series wall and
+      SAT row kernel needed to repair exp-043's five instrument defects, without making
+      or measuring a pure -W scientific claim.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Exp-043's post-change guard showed that the missing deliverable is reusable proof
+      instrumentation rather than another candidate formula; this phase therefore enters
+      W7 before any successor scientific round is preregistered.
+    budget_minutes: 30
+    started_at: '2026-08-25T17:53:07-07:00'
+    deadline_at: '2026-08-25T18:23:07-07:00'
+    expected_output: >-
+      A source-bound exact row-jet API and tests that derive wall and SAT coefficients
+      from full center, angle, and acceleration jets, or a smaller finite design blocker
+      that a successor agent can implement without relying on chat memory.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen ruff check cases/n5 && uv run
+      --directory explorations/packing --frozen basedpyright cases/n5 && git diff --check
+    kill_condition: >-
+      Stop if the API hard-codes exp-036 coefficients, omits center-angle cross terms,
+      samples instead of deriving exact coefficients, conflates wall and owner-feature
+      branches, changes exp-043's frozen criterion, or reaches the phase deadline.
+    fallback: >-
+      Retain the exact jet variables, row expansion contract, missing branch cases, and
+      first failing algebraic identity as a W7 design artifact; leave exp-043 unresolved
+      and open no target measurement.
+    outcome: null
+    evidence:
+    - >-
+      Both post-change audits agree on the same five instrument defects and reject the
+      superficially green temporary exp-043 run.
     stop_reason: null
     next_action: >-
-      Treat exp-043 in this checkpoint as frozen; implement only
-      cases/n5/minus_w_obstruction.py, then review and measure without changing the
-      criterion.
+      Derive the row-jet contract independently, freeze its production tests, and edit
+      only a shared helper plus tests before reconnecting the exp-043 draft.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -720,6 +777,7 @@ session:
   - campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md
   - cases/n5/rotating_release_paths.py
+  - cases/n5/minus_w_obstruction.py
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   checks:
@@ -746,10 +804,9 @@ session:
   - Independent soundness and portability audits accept exp-043's frozen criterion and handoff.
   stop_reason: null
   next_action: >-
-    In the active insight cycle for BC-010 under think-1s0h, treat exp-043 in this
-    checkpoint as frozen and implement only cases/n5/minus_w_obstruction.py; close by
-    17:59:27-07:00 with reviewed evidence or a finite exact blocker list, and do not
-    start basin-frequency work.
+    Under think-1s0h and BC-010 in the active W7 correctness phase, build and audit the
+    shared exact truncated-series wall and SAT row kernel by 18:23:07-07:00; keep exp-043
+    unresolved and do not retain a pure -W result or start basin-frequency work.
 ---
 # Session 015 — Four-Hour R4/R5 Research Loop
 
@@ -809,9 +866,9 @@ uv run --directory explorations/packing --frozen packing-campaign status
 ```
 
 Continue only the active phase.
-This handoff is in wall-clock cycle slot 3 and workflow phase 5; early
+This handoff is in wall-clock cycle slot 4 and workflow phase 6; early
 evidence-checkpoint switches account for the different numbers.
-Before writing, compare the current time with the phase deadline `17:59:27-07:00`,
+Before writing, compare the current time with the phase deadline `18:23:07-07:00`,
 finalization start `19:38:26-07:00`, and session deadline `20:08:26-07:00` using the
 four-state resume table in the
 [agent-session runbook](README.md#starting-a-portable-four-hour-session).
