@@ -410,6 +410,9 @@ group until the final keyframe so stationary contact marks never appear to descr
 earlier moving pose.
 Every trajectory also has a separately reproducible `comparison` export.
 Scrubbing, playback controls, and interactive editing belong to the later atlas
+application. The retained [`n = 5` motion-lab spike](spike-2026-08-25-n5-motion-lab.md)
+tests that boundary as a separate self-contained HTML+SVG artifact.
+It does not widen this renderer’s safe SVG grammar or complete the broader atlas
 application.
 
 ### File and Function Map

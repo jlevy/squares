@@ -24,6 +24,22 @@ translucent tempered-yellow contact layer describes endpoint B and is revealed o
 the motion arrives there.
 Reduced-motion and non-CSS viewers show endpoint B directly.
 
+### `n = 5`: interactive motion lab
+
+[Open the self-contained motion lab](n5-motion-lab.html).
+
+The HTML+SVG spike exposes the six certified `(R4, R5) × (A, interior, B)` paths from
+experiment 042 and the displayed `+W` direction obstructed by experiment 036. It has a
+parameter scrubber, one-pass playback for certified paths, source-declared contact-graph
+states, center trails, first-order predictors, and owner-branch obstruction readouts.
+
+This file is an interactive research artifact, not a safe publication SVG. Dashed
+geometry is a tangent predictor; in the `+W` view it is explicitly not a feasible path.
+The document SVG renderer and its script-free safety profile remain unchanged.
+See the
+[motion-lab spike record](../../docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md)
+for the data contract, evidence boundary, tests, and known limits.
+
 ### `n = 10`: numerical comparison
 
 ![A perturbed Göbel ten-square source beside its returned quench endpoint.](gobel10-source-return-comparison.svg)
@@ -127,6 +143,18 @@ Render the certified five-square trajectory:
 ```bash
 uv run --frozen --all-extras --group dev python -m devtools.render_packing_svg n5-face \
   --view trajectory --output atlas/n5-face.svg
+```
+
+Regenerate or byte-check the interactive motion lab:
+
+```bash
+uv run --frozen --all-extras --group dev python \
+  -m devtools.render_packing_motion_lab \
+  --output atlas/rendering/n5-motion-lab.html
+
+uv run --frozen --all-extras --group dev python \
+  -m devtools.render_packing_motion_lab \
+  --output atlas/rendering/n5-motion-lab.html --check
 ```
 
 Invalid source selection, evidence, geometry, comments, references, or motion exits

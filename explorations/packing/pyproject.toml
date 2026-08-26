@@ -25,6 +25,8 @@ symbolic = ["sympy>=1.13"]
 [dependency-groups]
 dev = [
     "basedpyright>=1.31",
+    # The motion-lab contract tests execute the exact JavaScript shipped to browsers.
+    "nodejs-wheel-binaries>=24.16.0",
     "pytest>=8.3",
     "ruff>=0.14",
     # Only derive_field.py uses SymPy, and only to re-derive a constant the verifier

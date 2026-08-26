@@ -104,6 +104,10 @@ documents:
     authority: record
     lifecycle: superseded
     superseded_by: development.md
+  - path: docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md
+    role: plan
+    authority: record
+    lifecycle: retained
 collections:
   - pattern: frontier/n-*.md
     role: frontier-case

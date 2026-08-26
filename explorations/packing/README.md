@@ -352,6 +352,14 @@ uv run --frozen --all-extras --group dev python -m devtools.render_packing_galle
 uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --check
 ```
 
+The [interactive `n = 5` motion lab](atlas/rendering/n5-motion-lab.html) is a separate
+HTML+SVG research artifact.
+It reuses the exact R4/R5 and `+W` case functions while leaving the publication
+renderer’s script-free SVG contract unchanged.
+Its [spike record](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md)
+documents the manifest, evidence labels, regeneration command, tests, and unfinished
+visual QA.
+
 The focused read-only gate is:
 
 ```bash

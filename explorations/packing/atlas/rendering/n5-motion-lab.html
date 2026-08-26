@@ -1,0 +1,3635 @@
+<!doctype html>
+<html lang="en" data-contract="packing.squares:MotionLab/v1">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline';
+      img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <title>n=5 square-packing motion lab</title>
+  <style>
+:root {
+  color-scheme: light;
+  --paper: #f7f6f2;
+  --panel: #ffffff;
+  --ink: #171717;
+  --muted: #5d615f;
+  --line: #d9d8d2;
+  --accent: #087f8c;
+  --contact: #b19610;
+  --danger: #b42318;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); }
+header, main { width: min(1240px, calc(100% - 32px)); margin-inline: auto; }
+header { padding: 34px 0 18px; }
+h1 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.5rem); letter-spacing: -.035em; }
+.lede { max-width: 78ch; margin: 10px 0 0; color: var(--muted); line-height: 1.55; }
+.controls, .stage-card, .readout { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; }
+.controls { display: flex; flex-wrap: wrap; gap: 14px; align-items: end; padding: 16px; margin-bottom: 16px; }
+.control { display: grid; gap: 6px; min-width: 140px; }
+.control.parameter { flex: 1 1 260px; }
+label, .control-label { color: var(--muted); font-size: .82rem; font-weight: 700; letter-spacing: .02em; }
+select, button, input[type="range"] { font: inherit; }
+select, button { min-height: 44px; border: 1px solid #aaa9a3; border-radius: 10px; background: #fff; color: var(--ink); padding: 0 12px; }
+button { cursor: pointer; font-weight: 700; }
+button.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+button:disabled { cursor: not-allowed; opacity: .45; }
+button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid #70c6cf; outline-offset: 2px; }
+.toggle-row { display: flex; flex-wrap: wrap; gap: 8px 14px; width: 100%; padding-top: 2px; }
+.toggle-row > .control-label { flex: 0 0 100%; }
+.toggle-row label { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; color: var(--ink); font-weight: 600; }
+.lab-grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(280px, .85fr); gap: 16px; align-items: start; }
+.stage-card { overflow: hidden; }
+#motion-stage { display: block; width: 100%; height: auto; }
+.stage-background { fill: #fbfaf7; }
+.container { fill: #fff; stroke: #000; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.square { fill-opacity: .76; stroke: #000; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.ghost-square { fill: none; stroke: var(--accent); stroke-width: 2.2; stroke-dasharray: 8 5; vector-effect: non-scaling-stroke; }
+.trail { stroke: #6b6f6d; stroke-width: 1.5; stroke-dasharray: 2 5; vector-effect: non-scaling-stroke; }
+.tangent { stroke: var(--accent); stroke-width: 2.2; stroke-dasharray: 7 5; vector-effect: non-scaling-stroke; }
+.contact-link { stroke: var(--contact); stroke-width: 8; stroke-opacity: .62; vector-effect: non-scaling-stroke; }
+.contact-link.opening { stroke-dasharray: 9 6; }
+.contact-link.closing { stroke-dasharray: 2 5; stroke-width: 10; }
+.square-label { fill: #000; font-size: 14px; font-weight: 800; text-anchor: middle; dominant-baseline: middle; paint-order: stroke; stroke: #fff; stroke-width: 3px; }
+.obstruction-title { fill: #fff; font-size: 17px; font-weight: 900; paint-order: stroke; stroke: var(--danger); stroke-width: 5px; }
+.obstruction-subtitle { fill: #fff; font-size: 12px; font-weight: 800; paint-order: stroke; stroke: var(--danger); stroke-width: 4px; }
+.figure-key { display: flex; flex-wrap: wrap; gap: 12px 20px; margin: 0; padding: 14px 18px 17px; border-top: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+.key { display: inline-flex; align-items: center; gap: 8px; }
+.swatch { width: 28px; height: 0; border-top: 3px solid #000; }
+.swatch.ghost { border-color: var(--accent); border-top-style: dashed; }
+.swatch.contact { border-color: var(--contact); border-width: 7px; opacity: .65; }
+.readout { padding: 18px; }
+.readout h2 { margin: 0 0 14px; font-size: 1.15rem; }
+.status-grid { display: grid; gap: 12px; margin: 0; }
+.status-grid div { padding-bottom: 11px; border-bottom: 1px solid #ecebe6; }
+.status-grid div:last-child { border-bottom: 0; }
+dt { color: var(--muted); font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .055em; }
+dd { margin: 4px 0 0; line-height: 1.45; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .88em; overflow-wrap: anywhere; }
+.claim { margin: 16px 0 0; padding: 12px 14px; background: #eff7f7; border-left: 4px solid var(--accent); border-radius: 8px; line-height: 1.5; }
+.claim.obstructed { background: #fff0ee; border-color: var(--danger); }
+.branch { margin-top: 16px; padding: 13px; border: 1px solid #e1b0aa; border-radius: 10px; background: #fff8f7; }
+.branch p { margin: 6px 0; line-height: 1.45; }
+.fine-print { margin: 14px 0 0; color: var(--muted); font-size: .82rem; line-height: 1.45; }
+.noscript-notice { margin: 0 0 16px; padding: 12px 14px; border: 2px solid var(--danger); border-radius: 10px; background: #fff; line-height: 1.5; }
+@media (max-width: 860px) { .lab-grid { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+</style>
+  <noscript><style>
+    .controls, .readout, #live-region { display: none !important; }
+    .lab-grid { display: block !important; }
+    .stage-card { max-width: 760px; margin-inline: auto; }
+  </style></noscript>
+</head>
+<body>
+  <header>
+    <h1>n=5 square-packing motion lab</h1>
+    <p class="lede">Scrub six exact R4/R5 release paths or inspect the obstructed +W
+      first-order ghost. Solid geometry, dashed predictors, contact-graph edges, and
+      evidence labels are kept distinct so the picture cannot silently upgrade a claim.</p>
+  </header>
+  <main>
+    <noscript><p class="noscript-notice">JavaScript is disabled. The static figure shows
+      the R4/A base packing and its source-backed base contact graph. Use the retained
+      publication SVGs for a script-free document artifact.</p></noscript>
+    <section class="controls" aria-label="Motion controls">
+      <div class="control">
+        <label for="motion-select">Motion</label>
+        <select id="motion-select">
+          <option value="R4">R4 certified path</option>
+          <option value="R5">R5 certified path</option>
+          <option value="plus-W">+W obstruction</option>
+        </select>
+      </div>
+      <div class="control">
+        <label for="stratum-select">Base stratum</label>
+        <select id="stratum-select">
+          <option value="A">A</option>
+          <option value="interior">Interior</option>
+          <option value="B">B</option>
+        </select>
+      </div>
+      <div class="control">
+        <label for="owner-select">Obstruction branch</label>
+        <select id="owner-select" disabled>
+          <option value="owner-4">Owner 4</option>
+          <option value="owner-3">Owner 3</option>
+        </select>
+      </div>
+      <button id="play-button" class="primary" type="button">Play</button>
+      <button id="restart-button" type="button">Restart</button>
+      <div class="control parameter">
+        <label for="parameter-input">Path position</label>
+        <input id="parameter-input" type="range" min="0" max="1000" value="0" step="1"
+          aria-valuetext="0% of interval; u = 0.0000000" />
+      </div>
+      <div class="toggle-row" role="group" aria-labelledby="overlays-label">
+        <span id="overlays-label" class="control-label">Overlays</span>
+        <label><input id="ids-toggle" type="checkbox" checked /> Square IDs</label>
+        <label><input id="contacts-toggle" type="checkbox" checked /> Contact graph</label>
+        <label><input id="trails-toggle" type="checkbox" checked /> Center trails</label>
+        <label><input id="tangent-toggle" type="checkbox" checked /> Tangent predictor</label>
+      </div>
+    </section>
+    <div class="lab-grid">
+      <section class="stage-card" aria-label="Motion visualization">
+        <svg id="motion-stage" viewBox="0 0 760 620" role="img"
+          aria-labelledby="stage-title stage-description">
+        <title id="stage-title">Five-square motion scene</title>
+        <desc id="stage-description">Five unit squares in a fixed square container. Solid
+          shapes are source-backed geometry; dashed shapes show a first-order predictor.
+          Base contact pairs are 0–4, 1–4, 2–4, and 3–4.</desc>
+        <defs>
+          <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#087f8c" />
+          </marker>
+          <pattern id="obstruction-hatch" width="8" height="8" patternUnits="userSpaceOnUse"
+            patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#b42318" stroke-width="2" />
+          </pattern>
+        </defs>
+        <rect class="stage-background" width="760" height="620" rx="18" />
+        <g id="math-plane" transform="translate(42 564) scale(185 -185)">
+          <rect id="container" class="container" x="0" y="0" width="2.7677669529663688110021109052"
+            height="2.7677669529663688110021109052" />
+          <g id="trail-layer" aria-hidden="true"><line id="trail-0" class="trail" data-square="0" display="none" /><line id="trail-1" class="trail" data-square="1" display="none" /><line id="trail-2" class="trail" data-square="2" display="none" /><line id="trail-3" class="trail" data-square="3" display="none" /><line id="trail-4" class="trail" data-square="4" display="none" /></g>
+          <g id="contact-layer" aria-hidden="true"><line id="contact-0-3" class="contact-link closing" data-pair="0-3" x1="0.5" y1="2.146446609406726" x2="2.0606601717798214" y2="2.0606601717798214" display="none" /><line id="contact-0-4" class="contact-link persistent" data-pair="0-4" x1="0.5" y1="2.146446609406726" x2="1.3838834764831844" y2="1.323223304703363" /><line id="contact-1-4" class="contact-link opening" data-pair="1-4" x1="2.267766952966369" y1="0.5" x2="1.3838834764831844" y2="1.323223304703363" /><line id="contact-2-4" class="contact-link persistent" data-pair="2-4" x1="0.5" y1="0.5" x2="1.3838834764831844" y2="1.323223304703363" /><line id="contact-3-4" class="contact-link persistent" data-pair="3-4" x1="2.0606601717798214" y1="2.0606601717798214" x2="1.3838834764831844" y2="1.323223304703363" /></g>
+          <g id="ghost-layer" aria-hidden="true"><g id="ghost-0" data-square="0" transform="translate(0.5 2.146446609406726) rotate(0)" display="none"><rect class="ghost-square" x="-.5" y="-.5" width="1" height="1" /></g><g id="ghost-1" data-square="1" transform="translate(2.267766952966369 0.5) rotate(0)" display="none"><rect class="ghost-square" x="-.5" y="-.5" width="1" height="1" /></g><g id="ghost-2" data-square="2" transform="translate(0.5 0.5) rotate(0)" display="none"><rect class="ghost-square" x="-.5" y="-.5" width="1" height="1" /></g><g id="ghost-3" data-square="3" transform="translate(2.0606601717798214 2.0606601717798214) rotate(45)" display="none"><rect class="ghost-square" x="-.5" y="-.5" width="1" height="1" /></g><g id="ghost-4" data-square="4" transform="translate(1.3838834764831844 1.323223304703363) rotate(45)" display="none"><rect class="ghost-square" x="-.5" y="-.5" width="1" height="1" /></g></g>
+          <g id="square-layer"><g id="square-0" data-square="0" transform="translate(0.5 2.146446609406726) rotate(0)"><rect class="square" x="-.5" y="-.5" width="1" height="1" fill="#378c3f" /></g><g id="square-1" data-square="1" transform="translate(2.267766952966369 0.5) rotate(0)"><rect class="square" x="-.5" y="-.5" width="1" height="1" fill="#00aeee" /></g><g id="square-2" data-square="2" transform="translate(0.5 0.5) rotate(0)"><rect class="square" x="-.5" y="-.5" width="1" height="1" fill="#c1a0fb" /></g><g id="square-3" data-square="3" transform="translate(2.0606601717798214 2.0606601717798214) rotate(45)"><rect class="square" x="-.5" y="-.5" width="1" height="1" fill="#00b393" /></g><g id="square-4" data-square="4" transform="translate(1.3838834764831844 1.323223304703363) rotate(45)"><rect class="square" x="-.5" y="-.5" width="1" height="1" fill="#3d63be" /></g></g>
+          <g id="tangent-layer" aria-hidden="true"><line id="tangent-0" class="tangent" data-square="0" marker-end="url(#arrowhead)" display="none" /><line id="tangent-1" class="tangent" data-square="1" marker-end="url(#arrowhead)" display="none" /><line id="tangent-2" class="tangent" data-square="2" marker-end="url(#arrowhead)" display="none" /><line id="tangent-3" class="tangent" data-square="3" marker-end="url(#arrowhead)" display="none" /><line id="tangent-4" class="tangent" data-square="4" marker-end="url(#arrowhead)" display="none" /></g>
+        </g>
+        <g id="label-layer" aria-hidden="true"><text id="label-0" class="square-label" x="134.5" y="171.90737725975569">0</text><text id="label-1" class="square-label" x="461.536886298778265" y="476.5">1</text><text id="label-2" class="square-label" x="134.5" y="476.5">2</text><text id="label-3" class="square-label" x="423.222131779266959" y="187.777868220733041">3</text><text id="label-4" class="square-label" x="298.018443149389114" y="324.203688629877845">4</text></g>
+        <g id="obstruction-badge" display="none">
+          <rect x="583" y="44" width="134" height="82" rx="12"
+            fill="url(#obstruction-hatch)" stroke="#b42318" stroke-width="2" />
+          <text x="650" y="80" text-anchor="middle" class="obstruction-title">+W blocked</text>
+          <text x="650" y="103" text-anchor="middle" class="obstruction-subtitle">at second order</text>
+        </g>
+      </svg>
+        <p class="figure-key">
+          <span class="key"><span class="swatch"></span> source-backed pose</span>
+          <span class="key"><span class="swatch ghost"></span> first-order predictor</span>
+          <span class="key"><span class="swatch contact"></span> contact-graph relation</span>
+        </p>
+      </section>
+      <aside class="readout" aria-labelledby="readout-title">
+        <h2 id="readout-title">Scene evidence</h2>
+        <dl class="status-grid">
+          <div><dt>Scene</dt><dd id="scene-value">R4 at A</dd></div>
+          <div><dt>Parameter</dt><dd><code id="parameter-name">u</code> =
+            <code id="parameter-value">0.0000000</code></dd></div>
+          <div><dt>Orientation</dt><dd id="angle-value"></dd></div>
+          <div><dt>Contacts</dt><dd id="contacts-value"></dd></div>
+          <div><dt>Evidence</dt><dd id="evidence-value"></dd></div>
+          <div><dt>Source record</dt><dd><code id="source-value">campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json</code></dd></div>
+        </dl>
+        <p id="claim-value" class="claim"></p>
+        <section id="branch-panel" class="branch" hidden aria-label="Second-order branch">
+          <strong id="branch-title"></strong>
+          <p><code id="branch-formula"></code></p>
+          <p id="branch-value"></p>
+          <p id="branch-note"></p>
+        </section>
+        <p class="fine-print">Contact marks are graph edges between square centers, not
+          Euclidean gap segments. The exact contact inventory comes from <code>campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json</code>.
+          The +W direction comes from exp-035, and its contradiction comes from
+          <code>campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json</code>.</p>
+        <p id="motion-note" class="fine-print"></p>
+      </aside>
+    </div>
+    <p id="live-region" class="fine-print" role="status" aria-live="polite"></p>
+  </main>
+  <script id="motion-data" type="application/json">{
+  "contract": "packing.squares:MotionLab/v1",
+  "default_scene": "R4:A",
+  "field": {
+    "basis": [
+      "1",
+      "sqrt(2)"
+    ],
+    "exact_encoding": "coefficients_low_degree_first",
+    "name": "Q(sqrt(2))"
+  },
+  "scenes": [
+    {
+      "class": "R4",
+      "contacts": {
+        "base": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "endpoint": [
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "open_interval": [
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      "container_side": {
+        "coefficients_low_degree_first": [
+          "1",
+          "5/4"
+        ],
+        "decimal": "2.7677669529663688110021109052"
+      },
+      "evidence": {
+        "claim": "Display projection of one exact full-interval R4/R5 path; it is not a global-optimality claim.",
+        "source_experiment": "exp-042",
+        "source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json",
+        "status": "exact-universal-feasible-path"
+      },
+      "formulas": {
+        "centres": "c_i(u)=c_i(0)+u*d_i",
+        "orientation": "square 1: cos(theta)=(4-u^2)/(4+u^2), sin(theta)=4*sigma*u/(4+u^2)"
+      },
+      "id": "R4:A",
+      "mode": "certified-path",
+      "parameter": {
+        "lower": {
+          "coefficients_low_degree_first": [
+            "0",
+            "0"
+          ],
+          "decimal": "0"
+        },
+        "meaning": "rational half-angle parameter, not physical time",
+        "name": "u",
+        "upper": {
+          "coefficients_low_degree_first": [
+            "-1",
+            "3/4"
+          ],
+          "decimal": "0.0606601717798212866012665431"
+        }
+      },
+      "sigma": -1,
+      "squares": [
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1",
+                "0"
+              ],
+              "decimal": "1"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "5/2",
+                "-1/4"
+              ],
+              "decimal": "2.1464466094067262377995778189"
+            }
+          },
+          "fill": "#378c3f",
+          "id": 0,
+          "label": "0",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-00"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "-1",
+              "0"
+            ],
+            "decimal": "-1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#00aeee",
+          "id": 1,
+          "label": "1",
+          "orientation": {
+            "angle": "2*atan(sigma*u/2)",
+            "cosine": "(4-u^2)/(4+u^2)",
+            "kind": "rational-half-angle",
+            "sigma": -1,
+            "sine": "-4u/(4+u^2)"
+          },
+          "stable_id": "square-01"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#c1a0fb",
+          "id": 2,
+          "label": "2",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-02"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            }
+          },
+          "fill": "#00b393",
+          "id": 3,
+          "label": "3",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-03"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/8"
+              ],
+              "decimal": "1.3838834764831844055010554526"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "-1/8"
+              ],
+              "decimal": "1.32322330470336311889978890947"
+            }
+          },
+          "fill": "#3d63be",
+          "id": 4,
+          "label": "4",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-04"
+        }
+      ],
+      "stratum": "A"
+    },
+    {
+      "class": "R4",
+      "contacts": {
+        "base": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "endpoint": [
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "open_interval": [
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      "container_side": {
+        "coefficients_low_degree_first": [
+          "1",
+          "5/4"
+        ],
+        "decimal": "2.7677669529663688110021109052"
+      },
+      "evidence": {
+        "claim": "Display projection of one exact full-interval R4/R5 path; it is not a global-optimality claim.",
+        "source_experiment": "exp-042",
+        "source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json",
+        "status": "exact-universal-feasible-path"
+      },
+      "formulas": {
+        "centres": "c_i(u)=c_i(0)+u*d_i",
+        "orientation": "square 1: cos(theta)=(4-u^2)/(4+u^2), sin(theta)=4*sigma*u/(4+u^2)"
+      },
+      "id": "R4:interior",
+      "mode": "certified-path",
+      "parameter": {
+        "lower": {
+          "coefficients_low_degree_first": [
+            "0",
+            "0"
+          ],
+          "decimal": "0"
+        },
+        "meaning": "rational half-angle parameter, not physical time",
+        "name": "u",
+        "upper": {
+          "coefficients_low_degree_first": [
+            "-1",
+            "3/4"
+          ],
+          "decimal": "0.0606601717798212866012665431"
+        }
+      },
+      "sigma": -1,
+      "squares": [
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1",
+                "0"
+              ],
+              "decimal": "-1"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "3/4"
+              ],
+              "decimal": "0.5606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "1/2"
+              ],
+              "decimal": "2.207106781186547524400844362"
+            }
+          },
+          "fill": "#378c3f",
+          "id": 0,
+          "label": "0",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-00"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "-1",
+              "0"
+            ],
+            "decimal": "-1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#00aeee",
+          "id": 1,
+          "label": "1",
+          "orientation": {
+            "angle": "2*atan(sigma*u/2)",
+            "cosine": "(4-u^2)/(4+u^2)",
+            "kind": "rational-half-angle",
+            "sigma": -1,
+            "sine": "-4u/(4+u^2)"
+          },
+          "stable_id": "square-01"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#c1a0fb",
+          "id": 2,
+          "label": "2",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-02"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            }
+          },
+          "fill": "#00b393",
+          "id": 3,
+          "label": "3",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-03"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/8"
+              ],
+              "decimal": "1.3838834764831844055010554526"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "-1/8"
+              ],
+              "decimal": "1.32322330470336311889978890947"
+            }
+          },
+          "fill": "#3d63be",
+          "id": 4,
+          "label": "4",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-04"
+        }
+      ],
+      "stratum": "interior"
+    },
+    {
+      "class": "R4",
+      "contacts": {
+        "base": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "endpoint": [
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "open_interval": [
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      "container_side": {
+        "coefficients_low_degree_first": [
+          "1",
+          "5/4"
+        ],
+        "decimal": "2.7677669529663688110021109052"
+      },
+      "evidence": {
+        "claim": "Display projection of one exact full-interval R4/R5 path; it is not a global-optimality claim.",
+        "source_experiment": "exp-042",
+        "source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json",
+        "status": "exact-universal-feasible-path"
+      },
+      "formulas": {
+        "centres": "c_i(u)=c_i(0)+u*d_i",
+        "orientation": "square 1: cos(theta)=(4-u^2)/(4+u^2), sin(theta)=4*sigma*u/(4+u^2)"
+      },
+      "id": "R4:B",
+      "mode": "certified-path",
+      "parameter": {
+        "lower": {
+          "coefficients_low_degree_first": [
+            "0",
+            "0"
+          ],
+          "decimal": "0"
+        },
+        "meaning": "rational half-angle parameter, not physical time",
+        "name": "u",
+        "upper": {
+          "coefficients_low_degree_first": [
+            "-1",
+            "3/4"
+          ],
+          "decimal": "0.0606601717798212866012665431"
+        }
+      },
+      "sigma": -1,
+      "squares": [
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1",
+                "0"
+              ],
+              "decimal": "-1"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-3/2",
+                "3/2"
+              ],
+              "decimal": "0.621320343559642573202533086"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            }
+          },
+          "fill": "#378c3f",
+          "id": 0,
+          "label": "0",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-00"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "-1",
+              "0"
+            ],
+            "decimal": "-1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#00aeee",
+          "id": 1,
+          "label": "1",
+          "orientation": {
+            "angle": "2*atan(sigma*u/2)",
+            "cosine": "(4-u^2)/(4+u^2)",
+            "kind": "rational-half-angle",
+            "sigma": -1,
+            "sine": "-4u/(4+u^2)"
+          },
+          "stable_id": "square-01"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#c1a0fb",
+          "id": 2,
+          "label": "2",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-02"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            }
+          },
+          "fill": "#00b393",
+          "id": 3,
+          "label": "3",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-03"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/8"
+              ],
+              "decimal": "1.3838834764831844055010554526"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "-1/8"
+              ],
+              "decimal": "1.32322330470336311889978890947"
+            }
+          },
+          "fill": "#3d63be",
+          "id": 4,
+          "label": "4",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-04"
+        }
+      ],
+      "stratum": "B"
+    },
+    {
+      "class": "R5",
+      "contacts": {
+        "base": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "endpoint": [
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "open_interval": [
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      "container_side": {
+        "coefficients_low_degree_first": [
+          "1",
+          "5/4"
+        ],
+        "decimal": "2.7677669529663688110021109052"
+      },
+      "evidence": {
+        "claim": "Display projection of one exact full-interval R4/R5 path; it is not a global-optimality claim.",
+        "source_experiment": "exp-042",
+        "source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json",
+        "status": "exact-universal-feasible-path"
+      },
+      "formulas": {
+        "centres": "c_i(u)=c_i(0)+u*d_i",
+        "orientation": "square 1: cos(theta)=(4-u^2)/(4+u^2), sin(theta)=4*sigma*u/(4+u^2)"
+      },
+      "id": "R5:A",
+      "mode": "certified-path",
+      "parameter": {
+        "lower": {
+          "coefficients_low_degree_first": [
+            "0",
+            "0"
+          ],
+          "decimal": "0"
+        },
+        "meaning": "rational half-angle parameter, not physical time",
+        "name": "u",
+        "upper": {
+          "coefficients_low_degree_first": [
+            "-1",
+            "3/4"
+          ],
+          "decimal": "0.0606601717798212866012665431"
+        }
+      },
+      "sigma": 1,
+      "squares": [
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1",
+                "0"
+              ],
+              "decimal": "1"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "5/2",
+                "-1/4"
+              ],
+              "decimal": "2.1464466094067262377995778189"
+            }
+          },
+          "fill": "#378c3f",
+          "id": 0,
+          "label": "0",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-00"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "1",
+              "0"
+            ],
+            "decimal": "1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#00aeee",
+          "id": 1,
+          "label": "1",
+          "orientation": {
+            "angle": "2*atan(sigma*u/2)",
+            "cosine": "(4-u^2)/(4+u^2)",
+            "kind": "rational-half-angle",
+            "sigma": 1,
+            "sine": "4u/(4+u^2)"
+          },
+          "stable_id": "square-01"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#c1a0fb",
+          "id": 2,
+          "label": "2",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-02"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            }
+          },
+          "fill": "#00b393",
+          "id": 3,
+          "label": "3",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-03"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/8"
+              ],
+              "decimal": "1.3838834764831844055010554526"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "-1/8"
+              ],
+              "decimal": "1.32322330470336311889978890947"
+            }
+          },
+          "fill": "#3d63be",
+          "id": 4,
+          "label": "4",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-04"
+        }
+      ],
+      "stratum": "A"
+    },
+    {
+      "class": "R5",
+      "contacts": {
+        "base": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "endpoint": [
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "open_interval": [
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      "container_side": {
+        "coefficients_low_degree_first": [
+          "1",
+          "5/4"
+        ],
+        "decimal": "2.7677669529663688110021109052"
+      },
+      "evidence": {
+        "claim": "Display projection of one exact full-interval R4/R5 path; it is not a global-optimality claim.",
+        "source_experiment": "exp-042",
+        "source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json",
+        "status": "exact-universal-feasible-path"
+      },
+      "formulas": {
+        "centres": "c_i(u)=c_i(0)+u*d_i",
+        "orientation": "square 1: cos(theta)=(4-u^2)/(4+u^2), sin(theta)=4*sigma*u/(4+u^2)"
+      },
+      "id": "R5:interior",
+      "mode": "certified-path",
+      "parameter": {
+        "lower": {
+          "coefficients_low_degree_first": [
+            "0",
+            "0"
+          ],
+          "decimal": "0"
+        },
+        "meaning": "rational half-angle parameter, not physical time",
+        "name": "u",
+        "upper": {
+          "coefficients_low_degree_first": [
+            "-1",
+            "3/4"
+          ],
+          "decimal": "0.0606601717798212866012665431"
+        }
+      },
+      "sigma": 1,
+      "squares": [
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1",
+                "0"
+              ],
+              "decimal": "-1"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "3/4"
+              ],
+              "decimal": "0.5606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "1/2"
+              ],
+              "decimal": "2.207106781186547524400844362"
+            }
+          },
+          "fill": "#378c3f",
+          "id": 0,
+          "label": "0",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-00"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "1",
+              "0"
+            ],
+            "decimal": "1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#00aeee",
+          "id": 1,
+          "label": "1",
+          "orientation": {
+            "angle": "2*atan(sigma*u/2)",
+            "cosine": "(4-u^2)/(4+u^2)",
+            "kind": "rational-half-angle",
+            "sigma": 1,
+            "sine": "4u/(4+u^2)"
+          },
+          "stable_id": "square-01"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#c1a0fb",
+          "id": 2,
+          "label": "2",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-02"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            }
+          },
+          "fill": "#00b393",
+          "id": 3,
+          "label": "3",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-03"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/8"
+              ],
+              "decimal": "1.3838834764831844055010554526"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "-1/8"
+              ],
+              "decimal": "1.32322330470336311889978890947"
+            }
+          },
+          "fill": "#3d63be",
+          "id": 4,
+          "label": "4",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-04"
+        }
+      ],
+      "stratum": "interior"
+    },
+    {
+      "class": "R5",
+      "contacts": {
+        "base": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "endpoint": [
+          [
+            0,
+            3
+          ],
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "open_interval": [
+          [
+            0,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ]
+      },
+      "container_side": {
+        "coefficients_low_degree_first": [
+          "1",
+          "5/4"
+        ],
+        "decimal": "2.7677669529663688110021109052"
+      },
+      "evidence": {
+        "claim": "Display projection of one exact full-interval R4/R5 path; it is not a global-optimality claim.",
+        "source_experiment": "exp-042",
+        "source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json",
+        "status": "exact-universal-feasible-path"
+      },
+      "formulas": {
+        "centres": "c_i(u)=c_i(0)+u*d_i",
+        "orientation": "square 1: cos(theta)=(4-u^2)/(4+u^2), sin(theta)=4*sigma*u/(4+u^2)"
+      },
+      "id": "R5:B",
+      "mode": "certified-path",
+      "parameter": {
+        "lower": {
+          "coefficients_low_degree_first": [
+            "0",
+            "0"
+          ],
+          "decimal": "0"
+        },
+        "meaning": "rational half-angle parameter, not physical time",
+        "name": "u",
+        "upper": {
+          "coefficients_low_degree_first": [
+            "-1",
+            "3/4"
+          ],
+          "decimal": "0.0606601717798212866012665431"
+        }
+      },
+      "sigma": 1,
+      "squares": [
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1",
+                "0"
+              ],
+              "decimal": "-1"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-3/2",
+                "3/2"
+              ],
+              "decimal": "0.621320343559642573202533086"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            }
+          },
+          "fill": "#378c3f",
+          "id": 0,
+          "label": "0",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-00"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "1",
+              "0"
+            ],
+            "decimal": "1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#00aeee",
+          "id": 1,
+          "label": "1",
+          "orientation": {
+            "angle": "2*atan(sigma*u/2)",
+            "cosine": "(4-u^2)/(4+u^2)",
+            "kind": "rational-half-angle",
+            "sigma": 1,
+            "sine": "4u/(4+u^2)"
+          },
+          "stable_id": "square-01"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#c1a0fb",
+          "id": 2,
+          "label": "2",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-02"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            }
+          },
+          "fill": "#00b393",
+          "id": 3,
+          "label": "3",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-03"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "0"
+              ],
+              "decimal": "-0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/8"
+              ],
+              "decimal": "1.3838834764831844055010554526"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "-1/8"
+              ],
+              "decimal": "1.32322330470336311889978890947"
+            }
+          },
+          "fill": "#3d63be",
+          "id": 4,
+          "label": "4",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-04"
+        }
+      ],
+      "stratum": "B"
+    },
+    {
+      "branches": {
+        "owner-3": {
+          "coefficient": {
+            "coefficients_low_degree_first": [
+              "-1/4",
+              "0"
+            ],
+            "decimal": "-0.25"
+          },
+          "formula": "common-angle: -(1/4)t^2 + o(t^2)",
+          "label": "owner 3",
+          "note": "The full branch also subtracts margin*|theta_3-theta_4|; the displayed +W ghost has theta_3=theta_4.",
+          "quantity": "necessary upper-bound minus lower-bound residual",
+          "sign": "negative contradiction"
+        },
+        "owner-4": {
+          "coefficient": {
+            "coefficients_low_degree_first": [
+              "0",
+              "1/8"
+            ],
+            "decimal": "0.17677669529663688110021109052"
+          },
+          "formula": "(sqrt(2)/8)t^2 + o(t^2)",
+          "label": "owner 4",
+          "note": "Retained common-angle owner-4 contradiction.",
+          "quantity": "required extra side",
+          "sign": "positive contradiction"
+        }
+      },
+      "class": "+W",
+      "contacts": {
+        "base": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "meaning": "base graph only; no feasible contact evolution is certified"
+      },
+      "container_side": {
+        "coefficients_low_degree_first": [
+          "1",
+          "5/4"
+        ],
+        "decimal": "2.7677669529663688110021109052"
+      },
+      "evidence": {
+        "claim": "The dashed pose is only the first-order +W extrapolation. The retained proof rules out every second-order repair for this direction.",
+        "geometry_source_experiment": "exp-035",
+        "geometry_source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json",
+        "source_experiment": "exp-036",
+        "source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json",
+        "status": "branch-exhaustive-second-order-obstruction"
+      },
+      "id": "plus-W:A",
+      "mode": "second-order-obstruction",
+      "parameter": {
+        "lower": {
+          "coefficients_low_degree_first": [
+            "0",
+            "0"
+          ],
+          "decimal": "0"
+        },
+        "meaning": "display scale for a first-order ghost, not a feasible path interval",
+        "name": "t",
+        "upper": {
+          "coefficients_low_degree_first": [
+            "-1",
+            "3/4"
+          ],
+          "decimal": "0.0606601717798212866012665431"
+        }
+      },
+      "squares": [
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "2",
+                "-3/2"
+              ],
+              "decimal": "-0.121320343559642573202533086"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "5/2",
+                "-1/4"
+              ],
+              "decimal": "2.1464466094067262377995778189"
+            }
+          },
+          "fill": "#378c3f",
+          "id": 0,
+          "label": "0",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-00"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#00aeee",
+          "id": 1,
+          "label": "1",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-01"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#c1a0fb",
+          "id": 2,
+          "label": "2",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-02"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "1",
+              "0"
+            ],
+            "decimal": "1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            }
+          },
+          "fill": "#00b393",
+          "id": 3,
+          "label": "3",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-03"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "1",
+              "0"
+            ],
+            "decimal": "1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1",
+                "3/4"
+              ],
+              "decimal": "0.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/8"
+              ],
+              "decimal": "1.3838834764831844055010554526"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "-1/8"
+              ],
+              "decimal": "1.32322330470336311889978890947"
+            }
+          },
+          "fill": "#3d63be",
+          "id": 4,
+          "label": "4",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-04"
+        }
+      ],
+      "stratum": "A"
+    },
+    {
+      "branches": {
+        "owner-3": {
+          "coefficient": {
+            "coefficients_low_degree_first": [
+              "-1/4",
+              "0"
+            ],
+            "decimal": "-0.25"
+          },
+          "formula": "common-angle: -(1/4)t^2 + o(t^2)",
+          "label": "owner 3",
+          "note": "The full branch also subtracts margin*|theta_3-theta_4|; the displayed +W ghost has theta_3=theta_4.",
+          "quantity": "necessary upper-bound minus lower-bound residual",
+          "sign": "negative contradiction"
+        },
+        "owner-4": {
+          "coefficient": {
+            "coefficients_low_degree_first": [
+              "0",
+              "1/8"
+            ],
+            "decimal": "0.17677669529663688110021109052"
+          },
+          "formula": "(sqrt(2)/8)t^2 + o(t^2)",
+          "label": "owner 4",
+          "note": "Retained common-angle owner-4 contradiction.",
+          "quantity": "required extra side",
+          "sign": "positive contradiction"
+        }
+      },
+      "class": "+W",
+      "contacts": {
+        "base": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "meaning": "base graph only; no feasible contact evolution is certified"
+      },
+      "container_side": {
+        "coefficients_low_degree_first": [
+          "1",
+          "5/4"
+        ],
+        "decimal": "2.7677669529663688110021109052"
+      },
+      "evidence": {
+        "claim": "The dashed pose is only the first-order +W extrapolation. The retained proof rules out every second-order repair for this direction.",
+        "geometry_source_experiment": "exp-035",
+        "geometry_source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json",
+        "source_experiment": "exp-036",
+        "source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json",
+        "status": "branch-exhaustive-second-order-obstruction"
+      },
+      "id": "plus-W:interior",
+      "mode": "second-order-obstruction",
+      "parameter": {
+        "lower": {
+          "coefficients_low_degree_first": [
+            "0",
+            "0"
+          ],
+          "decimal": "0"
+        },
+        "meaning": "display scale for a first-order ghost, not a feasible path interval",
+        "name": "t",
+        "upper": {
+          "coefficients_low_degree_first": [
+            "-1",
+            "3/4"
+          ],
+          "decimal": "0.0606601717798212866012665431"
+        }
+      },
+      "squares": [
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1/2",
+                "3/4"
+              ],
+              "decimal": "0.5606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "1/2"
+              ],
+              "decimal": "2.207106781186547524400844362"
+            }
+          },
+          "fill": "#378c3f",
+          "id": 0,
+          "label": "0",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-00"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#00aeee",
+          "id": 1,
+          "label": "1",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-01"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#c1a0fb",
+          "id": 2,
+          "label": "2",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-02"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "1",
+              "0"
+            ],
+            "decimal": "1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            }
+          },
+          "fill": "#00b393",
+          "id": 3,
+          "label": "3",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-03"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "1",
+              "0"
+            ],
+            "decimal": "1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1",
+                "3/4"
+              ],
+              "decimal": "0.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/8"
+              ],
+              "decimal": "1.3838834764831844055010554526"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "-1/8"
+              ],
+              "decimal": "1.32322330470336311889978890947"
+            }
+          },
+          "fill": "#3d63be",
+          "id": 4,
+          "label": "4",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-04"
+        }
+      ],
+      "stratum": "interior"
+    },
+    {
+      "branches": {
+        "owner-3": {
+          "coefficient": {
+            "coefficients_low_degree_first": [
+              "-1/4",
+              "0"
+            ],
+            "decimal": "-0.25"
+          },
+          "formula": "common-angle: -(1/4)t^2 + o(t^2)",
+          "label": "owner 3",
+          "note": "The full branch also subtracts margin*|theta_3-theta_4|; the displayed +W ghost has theta_3=theta_4.",
+          "quantity": "necessary upper-bound minus lower-bound residual",
+          "sign": "negative contradiction"
+        },
+        "owner-4": {
+          "coefficient": {
+            "coefficients_low_degree_first": [
+              "0",
+              "1/8"
+            ],
+            "decimal": "0.17677669529663688110021109052"
+          },
+          "formula": "(sqrt(2)/8)t^2 + o(t^2)",
+          "label": "owner 4",
+          "note": "Retained common-angle owner-4 contradiction.",
+          "quantity": "required extra side",
+          "sign": "positive contradiction"
+        }
+      },
+      "class": "+W",
+      "contacts": {
+        "base": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "meaning": "base graph only; no feasible contact evolution is certified"
+      },
+      "container_side": {
+        "coefficients_low_degree_first": [
+          "1",
+          "5/4"
+        ],
+        "decimal": "2.7677669529663688110021109052"
+      },
+      "evidence": {
+        "claim": "The dashed pose is only the first-order +W extrapolation. The retained proof rules out every second-order repair for this direction.",
+        "geometry_source_experiment": "exp-035",
+        "geometry_source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json",
+        "source_experiment": "exp-036",
+        "source_record": "campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json",
+        "status": "branch-exhaustive-second-order-obstruction"
+      },
+      "id": "plus-W:B",
+      "mode": "second-order-obstruction",
+      "parameter": {
+        "lower": {
+          "coefficients_low_degree_first": [
+            "0",
+            "0"
+          ],
+          "decimal": "0"
+        },
+        "meaning": "display scale for a first-order ghost, not a feasible path interval",
+        "name": "t",
+        "upper": {
+          "coefficients_low_degree_first": [
+            "-1",
+            "3/4"
+          ],
+          "decimal": "0.0606601717798212866012665431"
+        }
+      },
+      "squares": [
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "2",
+                "-3/2"
+              ],
+              "decimal": "-0.121320343559642573202533086"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-3/2",
+                "3/2"
+              ],
+              "decimal": "0.621320343559642573202533086"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            }
+          },
+          "fill": "#378c3f",
+          "id": 0,
+          "label": "0",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-00"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/4"
+              ],
+              "decimal": "2.2677669529663688110021109052"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#00aeee",
+          "id": 1,
+          "label": "1",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-01"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "0",
+              "0"
+            ],
+            "decimal": "0"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "0"
+              ],
+              "decimal": "0.5"
+            }
+          },
+          "fill": "#c1a0fb",
+          "id": 2,
+          "label": "2",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0",
+            "source": "0"
+          },
+          "stable_id": "square-02"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "1",
+              "0"
+            ],
+            "decimal": "1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "1",
+                "3/4"
+              ],
+              "decimal": "2.0606601717798212866012665431"
+            }
+          },
+          "fill": "#00b393",
+          "id": 3,
+          "label": "3",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-03"
+        },
+        {
+          "angle_derivative_at_zero": {
+            "coefficients_low_degree_first": [
+              "1",
+              "0"
+            ],
+            "decimal": "1"
+          },
+          "centre_derivative": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "-1",
+                "3/4"
+              ],
+              "decimal": "0.0606601717798212866012665431"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "0",
+                "0"
+              ],
+              "decimal": "0"
+            }
+          },
+          "centre_start": {
+            "x": {
+              "coefficients_low_degree_first": [
+                "1/2",
+                "5/8"
+              ],
+              "decimal": "1.3838834764831844055010554526"
+            },
+            "y": {
+              "coefficients_low_degree_first": [
+                "3/2",
+                "-1/8"
+              ],
+              "decimal": "1.32322330470336311889978890947"
+            }
+          },
+          "fill": "#3d63be",
+          "id": 4,
+          "label": "4",
+          "orientation": {
+            "kind": "fixed",
+            "radians": "0.785398163397448279",
+            "source": "pi/4"
+          },
+          "stable_id": "square-04"
+        }
+      ],
+      "stratum": "B"
+    }
+  ],
+  "schema_version": 1,
+  "scope_refusals": [
+    "A_to_B_stationary_connection",
+    "whole_polytope_classification",
+    "whole_component_stationarity",
+    "terminal_or_second_order_local_minimum",
+    "maximal_stationary_component",
+    "minus_W_or_mixed_direction",
+    "quench_selection_or_basin_mass",
+    "census_completeness",
+    "unequal_side_clearance",
+    "exhaustive_nonlinear_R4_R5_realization",
+    "R4_R5_obstruction_from_candidate_failure"
+  ],
+  "source_records": {
+    "exp-035": "campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json",
+    "exp-036": "campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json",
+    "exp-042": "campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json"
+  },
+  "theme": {
+    "background": "#ffffff",
+    "contact": "#e3c64a",
+    "container": "#000000",
+    "ink": "#17202a"
+  },
+  "title": "n=5 square-packing motion lab"
+}</script>
+  <script>
+"use strict";
+function scalar(value) { return Number(value.decimal); }
+function baseAngle(square) { return Number(square.orientation.radians || 0); }
+
+function posesAt(scene, progress, tangent) {
+  const extent = scalar(scene.parameter.upper);
+  const parameter = extent * progress;
+  return scene.squares.map((square) => {
+    const x = scalar(square.centre_start.x) + parameter * scalar(square.centre_derivative.x);
+    const y = scalar(square.centre_start.y) + parameter * scalar(square.centre_derivative.y);
+    const velocity = scalar(square.angle_derivative_at_zero);
+    let angle = baseAngle(square);
+    if (scene.mode === "certified-path" && square.orientation.kind === "rational-half-angle") {
+      angle = tangent ? scene.sigma * parameter : 2 * Math.atan(scene.sigma * parameter / 2);
+    } else if (scene.mode === "second-order-obstruction" && tangent) {
+      angle += velocity * parameter;
+    }
+    return { id: square.id, x, y, angle };
+  });
+}
+
+function phaseAt(scene, progress) {
+  if (scene.mode === "second-order-obstruction" || progress === 0) return "base";
+  if (progress === 1) return "endpoint";
+  return "open_interval";
+}
+
+function sceneControlState(scene) {
+  const certifiedPath = scene.mode === "certified-path";
+  return {
+    ownerDisabled: certifiedPath,
+    playDisabled: !certifiedPath,
+    branchHidden: certifiedPath,
+  };
+}
+
+function normalizedPercent(progress) {
+  return (progress * 100).toFixed(1).replace(/\.0$/, "");
+}
+
+function parameterValueText(scene, progress) {
+  const value = scalar(scene.parameter.upper) * progress;
+  return `${normalizedPercent(progress)}% of interval; ${scene.parameter.name} = ${value.toFixed(7)}`;
+}
+
+function stageDescriptionText(scene, progress) {
+  const percent = normalizedPercent(progress);
+  const phase = phaseAt(scene, progress);
+  const contacts = (scene.contacts[phase] || [])
+    .map((pair) => `${pair[0]}–${pair[1]}`)
+    .join(", ");
+  if (scene.mode === "second-order-obstruction") {
+    return `Five unit squares in a fixed square container, showing +W at ${scene.stratum}. `
+      + `The solid packing stays at its base pose; the dashed first-order predictor is `
+      + `shown at ${percent}% of the display scale and is obstructed at second order. `
+      + `Base contact pairs: ${contacts}.`;
+  }
+  return `Five unit squares in a fixed square container, showing ${scene.class} at `
+    + `${scene.stratum}, ${percent}% through the certified path. Solid squares show the `
+    + `exact pose; dashed squares, when enabled, show the first-order tangent predictor. `
+    + `Active contact pairs: ${contacts}.`;
+}
+
+const byId = (id) => document.getElementById(id);
+const manifest = JSON.parse(byId("motion-data").textContent);
+const scenes = new Map(manifest.scenes.map((scene) => [scene.id, scene]));
+const motionSelect = byId("motion-select");
+const stratumSelect = byId("stratum-select");
+const ownerSelect = byId("owner-select");
+const progressInput = byId("parameter-input");
+const playButton = byId("play-button");
+const restartButton = byId("restart-button");
+const idsToggle = byId("ids-toggle");
+const contactsToggle = byId("contacts-toggle");
+const trailsToggle = byId("trails-toggle");
+const tangentToggle = byId("tangent-toggle");
+const liveRegion = byId("live-region");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const left = 42;
+const bottom = 564;
+const scale = 185;
+const durationMilliseconds = 5000;
+let animationFrame = null;
+let animationStart = null;
+let animationOrigin = 0;
+
+function currentScene() { return scenes.get(`${motionSelect.value}:${stratumSelect.value}`); }
+function currentProgress() { return Number(progressInput.value) / Number(progressInput.max); }
+function transform(pose) {
+  return `translate(${pose.x} ${pose.y}) rotate(${pose.angle * 180 / Math.PI})`;
+}
+function screenPoint(pose) { return [left + scale * pose.x, bottom - scale * pose.y]; }
+
+function pairKey(pair) { return `${pair[0]}-${pair[1]}`; }
+function contactLabel(pair) { return `${pair[0]}–${pair[1]}`; }
+
+function setLine(line, first, second) {
+  line.setAttribute("x1", first.x);
+  line.setAttribute("y1", first.y);
+  line.setAttribute("x2", second.x);
+  line.setAttribute("y2", second.y);
+}
+
+function setShown(element, shown) {
+  if (shown) element.removeAttribute("display");
+  else element.setAttribute("display", "none");
+}
+
+function updateGeometry(scene, progress) {
+  const obstruction = scene.mode === "second-order-obstruction";
+  const actual = posesAt(scene, obstruction ? 0 : progress, false);
+  const base = posesAt(scene, 0, false);
+  const predictor = posesAt(scene, progress, true);
+  const endpoint = posesAt(scene, 1, true);
+  const extent = scalar(scene.parameter.upper);
+  actual.forEach((pose, index) => {
+    const square = byId(`square-${pose.id}`);
+    square.setAttribute("transform", transform(pose));
+    const ghost = byId(`ghost-${pose.id}`);
+    ghost.setAttribute("transform", transform(predictor[index]));
+    setShown(ghost, tangentToggle.checked && progress > 0);
+    const label = byId(`label-${pose.id}`);
+    const labelPoint = screenPoint(pose);
+    label.setAttribute("x", labelPoint[0]);
+    label.setAttribute("y", labelPoint[1] + 5);
+    setShown(label, idsToggle.checked);
+    const trail = byId(`trail-${pose.id}`);
+    setLine(trail, base[index], endpoint[index]);
+    const centreMoves = base[index].x !== endpoint[index].x || base[index].y !== endpoint[index].y;
+    setShown(trail, trailsToggle.checked && centreMoves);
+    const tangent = byId(`tangent-${pose.id}`);
+    const start = base[index];
+    const arrowEnd = {
+      x: start.x + scalar(scene.squares[index].centre_derivative.x) * extent * .72,
+      y: start.y + scalar(scene.squares[index].centre_derivative.y) * extent * .72,
+    };
+    setLine(tangent, start, arrowEnd);
+    setShown(
+      tangent,
+      tangentToggle.checked && (start.x !== arrowEnd.x || start.y !== arrowEnd.y),
+    );
+  });
+  setShown(byId("obstruction-badge"), obstruction);
+  updateContacts(scene, progress, actual);
+}
+
+function updateContacts(scene, progress, poses) {
+  const phase = phaseAt(scene, progress);
+  const active = new Set((scene.contacts[phase] || []).map(pairKey));
+  const persistent = new Set(["0-4", "2-4", "3-4"]);
+  const obstruction = scene.mode === "second-order-obstruction";
+  for (const key of ["0-3", "0-4", "1-4", "2-4", "3-4"]) {
+    const line = byId(`contact-${key}`);
+    const [first, second] = key.split("-").map(Number);
+    setLine(line, poses[first], poses[second]);
+    setShown(line, contactsToggle.checked && active.has(key));
+    const stateClass = obstruction
+      ? "base-only"
+      : persistent.has(key)
+        ? "persistent"
+        : key === "1-4"
+          ? "opening"
+          : "closing";
+    line.setAttribute("class", `contact-link ${stateClass}`);
+  }
+  const labels = (scene.contacts[phase] || []).map(contactLabel).join(", ");
+  const event = obstruction
+    ? "Base graph only; no feasible contact evolution is certified"
+    : phase === "base"
+      ? "1–4 opens immediately"
+      : phase === "endpoint"
+        ? "0–3 closes here"
+        : "1–4 is open; 0–3 has not closed";
+  byId("contacts-value").textContent = `${labels}. ${event}.`;
+}
+
+function updateReadout(scene, progress) {
+  const value = scalar(scene.parameter.upper) * progress;
+  progressInput.setAttribute("aria-valuetext", parameterValueText(scene, progress));
+  byId("stage-description").textContent = stageDescriptionText(scene, progress);
+  byId("scene-value").textContent = `${scene.class} at ${scene.stratum}`;
+  byId("parameter-name").textContent = scene.parameter.name;
+  byId("parameter-value").textContent = value.toFixed(7);
+  byId("evidence-value").textContent = scene.evidence.status.replaceAll("-", " ");
+  byId("source-value").textContent = scene.evidence.source_record;
+  if (scene.evidence.geometry_source_record) {
+    byId("source-value").textContent += `; ghost geometry: ${scene.evidence.geometry_source_record}`;
+  }
+  byId("claim-value").textContent = scene.evidence.claim;
+  byId("claim-value").classList.toggle("obstructed", scene.mode === "second-order-obstruction");
+  const controls = sceneControlState(scene);
+  const rotating = controls.ownerDisabled;
+  const angle = rotating ? 2 * Math.atan(scene.sigma * value / 2) * 180 / Math.PI : value * 180 / Math.PI;
+  byId("angle-value").textContent = rotating
+    ? `${angle.toFixed(5)}° on square 1; θ=2 atan(σu/2)`
+    : `${angle.toFixed(5)}° linear ghost on squares 3 and 4`;
+  ownerSelect.disabled = controls.ownerDisabled;
+  playButton.disabled = controls.playDisabled;
+  byId("branch-panel").hidden = controls.branchHidden;
+  if (!rotating) {
+    const branch = scene.branches[ownerSelect.value];
+    const amount = scalar(branch.coefficient) * value * value;
+    byId("branch-title").textContent = `${branch.label}: ${branch.quantity}`;
+    byId("branch-formula").textContent = branch.formula;
+    byId("branch-value").textContent = `displayed quadratic term: ${amount.toExponential(5)}`;
+    byId("branch-note").textContent = branch.note;
+  }
+  byId("motion-note").textContent = reduceMotion
+    ? "Reduced-motion preference detected: the lab starts paused; manual scrubbing remains available."
+    : "The lab starts paused and runs one pass only after Play is pressed.";
+}
+
+function update() {
+  const scene = currentScene();
+  const progress = currentProgress();
+  updateGeometry(scene, progress);
+  updateReadout(scene, progress);
+}
+
+function stopPlayback() {
+  if (animationFrame !== null) cancelAnimationFrame(animationFrame);
+  animationFrame = null;
+  animationStart = null;
+  playButton.textContent = "Play";
+}
+
+function tick(timestamp) {
+  if (animationStart === null) animationStart = timestamp;
+  const elapsed = (timestamp - animationStart) / durationMilliseconds;
+  const next = Math.min(1, animationOrigin + elapsed);
+  progressInput.value = String(Math.round(next * Number(progressInput.max)));
+  update();
+  if (next >= 1) {
+    stopPlayback();
+    liveRegion.textContent = "Certified path reached its endpoint.";
+    return;
+  }
+  animationFrame = requestAnimationFrame(tick);
+}
+
+function startPlayback() {
+  if (currentScene().mode !== "certified-path") return;
+  if (currentProgress() >= 1) progressInput.value = "0";
+  animationOrigin = currentProgress();
+  animationStart = null;
+  playButton.textContent = "Pause";
+  liveRegion.textContent = "Certified path playback started.";
+  animationFrame = requestAnimationFrame(tick);
+}
+
+playButton.addEventListener("click", () => {
+  if (animationFrame === null) startPlayback(); else stopPlayback();
+});
+restartButton.addEventListener("click", () => {
+  stopPlayback();
+  progressInput.value = "0";
+  update();
+  liveRegion.textContent = "Scene returned to its base configuration.";
+});
+progressInput.addEventListener("input", () => { stopPlayback(); update(); });
+for (const select of [motionSelect, stratumSelect]) {
+  select.addEventListener("change", () => {
+    stopPlayback();
+    progressInput.value = "0";
+    update();
+    liveRegion.textContent = `${currentScene().class} ${currentScene().stratum} scene selected.`;
+  });
+}
+ownerSelect.addEventListener("change", update);
+for (const toggle of [idsToggle, contactsToggle, trailsToggle, tangentToggle]) {
+  toggle.addEventListener("change", update);
+}
+update();
+</script>
+</body>
+</html>
