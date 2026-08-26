@@ -14,7 +14,7 @@ statuses it asserts must match the artifacts, and every artifact must appear.
 Eleven checks:
 
   1. every round's verdict in the roll-up matches its artifact
-  2. every hypothesis's status matches the ledger's derived status
+  2. every hypothesis's status and round count match the ledger's derived values
   3. the round count and effort totals match the ledger
   4. the defect count and per-class counts match `defects.yaml`
   5. no round, hypothesis or open defect is silently missing from the synopsis
@@ -163,12 +163,14 @@ def check_hypotheses(text: str) -> list[str]:
     }
     if not derived:
         return ["campaign/ledger.md: no registry table to check against"]
+    derived_rounds = dict(re.findall(r"^\| (H-\d{3}) \|(?:[^|]*\|){4} (\d+) \|", ledger, re.M))
 
     shown = dict(
         re.findall(
             r"\[(H-\d{3})\]\([^)]+\) \| \*{0,2}([a-z ]+?)\*{0,2}(?: as stated)? \|", text
         )
     )
+    shown_rounds = dict(re.findall(r"\[(H-\d{3})\]\([^)]+\) \|(?:[^|]*\|){2} (\d+) \|", text))
 
     problems = []
     for hid, status in sorted(derived.items()):
@@ -177,6 +179,14 @@ def check_hypotheses(text: str) -> list[str]:
         elif shown[hid].strip() != status:
             problems.append(
                 f"SYNOPSIS.md: {hid} shown as '{shown[hid].strip()}', ledger says '{status}'"
+            )
+        # The registry table repeats the ledger's per-hypothesis totals verbatim, so a
+        # round landed without touching this table is drift, not a counting convention
+        # (H-023 silently lagged exp-039 this way).
+        elif hid in shown_rounds and shown_rounds[hid] != derived_rounds.get(hid):
+            problems.append(
+                f"SYNOPSIS.md: {hid} shows {shown_rounds[hid]} rounds, "
+                f"ledger counts {derived_rounds.get(hid)}"
             )
 
     counts = Counter(derived.values())

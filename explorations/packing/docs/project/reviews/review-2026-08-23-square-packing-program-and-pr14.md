@@ -2678,7 +2678,7 @@ beads, the normal gate, the H-023 exact claims, and the documented handoff contr
 **Verdict:** the committed tree is a coherent, merge-ready checkpoint.
 The normal gate passes all 30 steps without skips, current `main` is the merge base, and
 the known strict failure is explicit and owned.
-[`conventions.md`](../../../conventions.md#10-what-the-gate-actually-enforces) now
+[`conventions.md`](../../../conventions.md#11-what-the-gate-actually-enforces) now
 separates this preservation decision from launch certification: D-203 still makes the
 strict/deep gate red on the n=4 seed-0 HiGHS status-4 failure, so `think-nr5w` continues
 to block unattended execution and any claim that the regenerated golden is healthy.

@@ -104,6 +104,15 @@ controls:
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "Date dateline repeats campaign progress"
 
+# The registry table repeats the ledger's per-hypothesis totals verbatim. H-023
+# silently lagged exp-039 this way (D-333), so the rounds column is now compared
+# row by row and this control rehearses one row going stale.
+- name: synopsis - registry rounds column lagging the ledger
+  file: SYNOPSIS.md
+  replace: ["classifiable | 14 | 106m agent", "classifiable | 13 | 106m agent"]
+  run: uv run --frozen --quiet python -m devtools.check_synopsis
+  expect: "H-021 shows 13 rounds, ledger counts 14"
+
 - name: synopsis - README cold-start link drifts from current handoff
   file: README.md
   replace: ["SYNOPSIS.md#current-handoff", "SYNOPSIS.md#workflow-entry-contracts"]

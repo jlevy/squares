@@ -199,10 +199,10 @@ The eight words a reader meets everywhere here, in one line each;
 | **cell** | A choice of separating axis and order for every pair of squares; at fixed angles, one cell is one linear program |
 | **quench** | The deterministic refinement carrying a configuration to a local optimum |
 | **basin** | For a fixed deterministic quench, the preimage of one returned pose; this point-basin can split one connected terminal component |
-| **local refinement** vs **exploration** | Improving within the basin you are in, versus reaching a different one; neither term says anything about formal assurance |
+| **polish** vs **exploration** | Refining within the basin you are in, versus reaching a different one; neither term says anything about formal assurance |
 | **standing best** | The best side ever published for that `n`—an upper bound, not known optimal in open cases |
 | **gap** | `best_side − standing_best`, always signed |
-| **assurance** | `reported`, `numerically checked`, or `verified`; only the last is formal, and method, precision, tolerance, and origin are recorded separately |
+| **assurance** | `reported`, `numerically-checked`, or `verified`; only the last is formal, and method, precision, tolerance, and origin are recorded separately |
 
 The operating documents divide ownership rather than repeat one another:
 
@@ -236,7 +236,7 @@ material focus so the ledger can summarize what kinds of work actually occurred.
 The slice protocol, clocks, result routing, budgets, and stop rules are the campaign
 runbook’s [bounded research cycle](campaign/README.md#the-bounded-research-cycle); which
 validation loop to run at each step is
-[`conventions.md`](conventions.md#10-what-the-gate-actually-enforces).
+[`conventions.md`](conventions.md#11-what-the-gate-actually-enforces).
 [`packing-campaign`](src/sqpack/campaign/runner.py) stays the smaller tool that executes
 already-preregistered numerical rounds, never a second project manager.
 
