@@ -308,6 +308,45 @@ owns it.
 Gate wall time, solver throughput, pair tests, and time-to-retained-result are useful
 metrics. Line count, abstraction count, and test count are not performance measures.
 
+### Codex research-loop rollups
+
+Use the recursive JSONL scanner when a clocked research session is slow, after a
+material validation-surface change, and as an input to a recurring W5 efficiency sample:
+
+```shell
+uv run --frozen python -m devtools.codex_log_rollup \
+  --sessions-root ~/.codex/sessions \
+  --root-id <codex-task-id> \
+  --format markdown
+```
+
+Repeat `--root-id` to compare task trees, use `--format json` for the stable
+`CodexEfficiencyRollup/v1` contract, and add `--include-turns` only when the full turn
+tree is needed. The scanner follows descendant task ids, removes inherited history from
+current and legacy subagent logs, correlates command polling with its originating
+command when the log permits it, and keeps parent active time, recursive agent-time,
+active union, and parallel overlap separate.
+
+Interpret the timing bounds literally.
+The response envelope is active client time after explicit tools and compaction; it is
+an upper bound that still includes API latency, dispatch, suspension, and uninstrumented
+gaps. Explicit `Reasoning` and `AgentMessage` item timing is a lower-bound model stream
+and is unavailable in older logs.
+Do not call either measure provider-side inference latency.
+An incomplete live turn ends at its last event, so its totals are lower bounds.
+
+The scanner excludes prompt, message, and reasoning prose from its output, but the
+result is not automatically safe to publish: JSON includes local log paths, task ids,
+agent paths, token totals, and shortened normalized command excerpts.
+Review and reduce a report before retaining it in the repository.
+Store compact dated findings and comparison receipts, not raw Codex JSONL or complete
+private command histories.
+
+The session schema continues to represent an efficiency session through
+`workflow_phases[].workflow: efficiency-loop` and `focus: efficiency`. Recursive timing
+belongs in a linked review or versioned scanner artifact because its cardinality and
+privacy boundary do not fit the concise session handoff.
+
 ## Governing Guidelines
 
 This guide applies the repository guidelines rather than copying them.
