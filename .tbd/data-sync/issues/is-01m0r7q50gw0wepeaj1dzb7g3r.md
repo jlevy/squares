@@ -5,7 +5,7 @@ title: "Efficiency (Infrastructure): trustworthy experimental throughput"
 kind: epic
 status: in_progress
 priority: 1
-version: 22
+version: 27
 spec_path: explorations/packing/docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md
 labels:
   - packing
@@ -29,8 +29,13 @@ child_order_hints:
   - is-01m0rdh1dqae5btgsgfyc6qry5
   - is-01m0rdh1q6djg0e4xpv04ty41j
   - is-01m0rfbfrwtexvw63m42ngkx6g
+  - is-01m0y07emtayze7xgbcccjwmxs
+  - is-01m0y081bfavkgmmjsq9qx6aeq
+  - is-01m0y08230ny51wne2jxtnd5nf
+  - is-01m0y083cqkdjbbzfjxc5j7wpd
+  - is-01m0y084pe9mhsa5h5fmfvvh76
 created_at: 2026-08-23T21:16:40.335Z
-updated_at: 2026-08-24T00:16:10.387Z
+updated_at: 2026-08-26T03:01:35.053Z
 ---
 Owns stable executors, profiling, batching, parallelism, caching, reproducible environments, observability, and measured agent-loop latency. This lane accelerates already specified work without weakening correctness or process controls. It hands versioned artifacts and benchmark evidence to Soundness and Process.
 
