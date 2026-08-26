@@ -313,8 +313,8 @@ The active successor slice still owns `BC-010` under `think-1s0h`. Exp-041 froze
 exact five-blocker correction at `e26fae9` before the draft instrument changed, then
 rejected its complete-zero-inventory criterion on a new endpoint-only axis without
 refuting path feasibility.
-The active slice must preregister that endpoint inventory and three remaining control
-and partial-result guards before changing the checker again.
+Exp-042 now freezes that endpoint inventory and the three remaining control and
+partial-result guards before the checker changes again.
 Its fresh-agent resume section records the read order, validation commands, clock,
 delegation boundary, and exact next action so no controller memory is required.
 The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
@@ -1744,6 +1744,7 @@ archive beside it.
 | [exp-039](campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md) | 5 | target | H-023 | exact fixed-angle optimal-position polytope | dimension 5; 12 sharp paths; ten controls pass | **accepted** |
 | [exp-040](campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md) | 5 | target | H-023 | exact rotating-path draft | five audited proof gaps; no retained result | **unresolved** |
 | [exp-041](campaign/series/series-000-smoke-and-calibration/experiments/exp-041-h-023-n5-rotating-release-proof-perimeter.md) | 5 | target | H-023 | exact rotating-path proof perimeter | endpoint-only axis falsifies complete zero inventory | **rejected** |
+| [exp-042](campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md) | 5 | target | H-023 | endpoint-aware exact rotating paths | criterion frozen before checker correction | **in-progress** |
 
 ### Cost and provenance
 
@@ -1790,11 +1791,12 @@ archive beside it.
 | exp-039 | one exact polytope + ten controls | 4.047 s | 20 m | criterion | `27b999e` |
 | exp-040 | 30m criterion, implementation, and review slice | 12.0 s | 30 m | guard | — |
 | exp-041 | one 30-minute correction, measurement, and review slice | 3.234 s | 20 m | criterion | — |
+| exp-042 | one 30-minute preregistration, correction, measurement, and review slice | — | — | — | — |
 
-### What the 41 rounds jointly establish
+### What the 42 rounds jointly establish
 
-The 41 rounds used 983 agent-minutes and 28.6 wall-minutes under the campaign’s retained
-effort accounting.
+The 42 rounds use 983 agent-minutes and 28.6 wall-minutes under the campaign’s retained
+effort accounting; exp-042 is in progress and adds no terminal effort receipt yet.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only

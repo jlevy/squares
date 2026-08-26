@@ -210,11 +210,21 @@ session:
       a separately admissible source-bound portfolio cell without inferring an R4/R5
       obstruction.
     outcome: null
-    evidence: []
+    evidence:
+    - >-
+      A 240-polynomial read-only exhaustion found identical zero sets in all six cases:
+      five base zeros, four open-interval zeros, five endpoint zeros, no isolated
+      interior roots, one base-only multiplicity-two axis, and one endpoint-only
+      multiplicity-one axis.
+    - >-
+      Exp-042 freezes those case-indexed inventories, maximal factors at both boundaries,
+      typed mutation-specific failures after a passing baseline, a production tied-row
+      omission, and operationally separate feasibility and stress results before further
+      checker edits.
     stop_reason: null
     next_action: >-
-      Under think-1s0h and BC-010, preregister exp-042 from exp-041's exact endpoint root
-      and three surviving instrument guards before editing rotating_release_paths.py.
+      Commit and push exp-042's validated preregistration, then assign disjoint checker
+      implementation and post-change audits against that frozen criterion.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -563,6 +573,7 @@ session:
   - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-041-h-023-n5-rotating-release-proof-perimeter.md
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md
   - cases/n5/rotating_release_paths.py
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
@@ -582,9 +593,9 @@ session:
   - basedpyright reports zero errors and zero warnings for the draft checker.
   stop_reason: null
   next_action: >-
-    In the active correctness cycle for BC-010 under think-1s0h, preregister exp-042 from
-    exp-041's exact endpoint-only axis and three remaining instrument guards before any
-    further checker edit; close by 17:28:09-07:00 with reviewed evidence or a smaller
+    In the active correctness cycle for BC-010 under think-1s0h, commit and push the
+    validated exp-042 criterion before further checker edits, then implement and
+    independently audit it; close by 17:28:09-07:00 with reviewed evidence or a smaller
     finite list, and do not start basin-frequency work.
 ---
 # Session 015 — Four-Hour R4/R5 Research Loop

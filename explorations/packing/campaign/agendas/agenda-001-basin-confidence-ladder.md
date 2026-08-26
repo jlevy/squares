@@ -297,7 +297,8 @@ agenda:
       exact endpoint-only axis `0-3:owner3:a-`; the root does not refute path feasibility.
       Active session-015 must preregister the corrected endpoint inventory, exact
       mutation reasons, production tied-row omission, and operational partial-result
-      separation before the checker changes again. The `-W`,
+      separation before the checker changes again. Exp-042 now freezes that criterion
+      and remains in progress. The `-W`,
       mixed-angle, whole-stationary-component, and unequal-side-clearance questions
       remain later bounded slices. The repaired D-199/D-203 solver path no longer orders
       this scientific cell, and D-239 remains a separate W7 robustness line.
@@ -323,6 +324,7 @@ agenda:
     - cases/n5/rotating_release_paths.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-041-h-023-n5-rotating-release-proof-perimeter.md
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

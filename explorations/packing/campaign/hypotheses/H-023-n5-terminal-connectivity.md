@@ -57,7 +57,8 @@ hypothesis:
     `0-3:owner3:a-` is zero only at the positive path endpoint. That exact root does not
     harm the separately certified pair separator or refute path feasibility. A successor
     must distinguish base, open-interval, and positive-endpoint zero inventories and
-    close three remaining control and partial-result guards.
+    close three remaining control and partial-result guards. Exp-042 preregisters that
+    endpoint-aware criterion; it has no result yet.
 ---
 # H-023 — resolve the first ambiguous census cell
 
