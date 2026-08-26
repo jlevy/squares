@@ -17,8 +17,10 @@ Python **3.14 is the only supported minor version**. Local development and CI pi
 interpreter to **3.14.7** through `.python-version` and the workflow.
 Package metadata, Ruff, and BasedPyright express the broader `3.14`-only compatibility
 boundary; `uv.lock` pins dependencies, not the interpreter.
-macOS and Linux are supported development hosts, and CI runs the ordinary full gate on
-both. The Rust search engine uses the stable Cargo toolchain.
+macOS and Linux are supported development hosts.
+Pull requests run the bounded Linux fast surface; integration events run the ordinary
+full gate on both hosts.
+The Rust search engine uses the stable Cargo toolchain.
 
 From this directory:
 
@@ -176,11 +178,20 @@ multiple commands, or detached daemons; Windows process-tree cleanup is not yet
 implemented. These limits are why a subprocess timeout is not, by itself, evidence that
 D-239 is resolved.
 
-CI executes the same locked full command on Linux and macOS from
-[`packing-validation.yml`](../../.github/workflows/packing-validation.yml).
-The macOS job also runs the focused deep-golden step directly.
-D-203’s temporary expected-failure classifier was removed after the repaired producer
-passed on both architectures; the workflow test rejects its return.
+On pull requests,
+[`packing-validation.yml`](../../.github/workflows/packing-validation.yml) runs
+`packing-validate --fast` on Linux and reports the stable `packing-required` aggregate.
+The fast behavioral step excludes only the four modules declared with the
+`exhaustive_exact` marker; the workflow contract checks that exact module set.
+The measured local PR command runs 101 tests, deselects 30 exhaustive exact tests, and
+finishes in 27.38 seconds.
+
+Pushes to `main`, manual dispatches, and the weekly schedule run the complete locked
+command on Linux and macOS. The macOS integration job also runs the focused deep-golden
+step directly. The default validator runs the 101-test core and 30-test exhaustive exact
+branches as separate direct steps and runs all negative controls with their dedicated
+two-worker setting. D-203’s temporary expected-failure classifier was removed after the
+repaired producer passed on both architectures; the workflow test rejects its return.
 Never accept a rebuilt golden to make the probe green, and do not add a second CI-only
 implementation of either check.
 

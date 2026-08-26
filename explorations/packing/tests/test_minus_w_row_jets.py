@@ -7,6 +7,8 @@ import pytest
 from cases.n5 import equal_side_face as face
 from cases.n5 import minus_w_row_jets, tangent_cones, tangent_inventory
 
+pytestmark = pytest.mark.exhaustive_exact
+
 
 @pytest.mark.parametrize(
     ("stratum", "expected_count"),

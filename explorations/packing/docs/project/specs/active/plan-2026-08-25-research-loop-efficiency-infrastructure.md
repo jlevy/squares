@@ -301,7 +301,7 @@ Ranks 3–5 may run as disjoint spikes, but they do not delay the one-minute CI 
 
 3. Make `packing-validate --fast` run `pytest tests -m 'not exhaustive_exact'`.
 
-4. Leave default and full discovery unchanged at all 124 tests.
+4. Leave default and full discovery unchanged at all 131 current tests.
 
 5. Keep negative-runner unit tests, workflow contracts, selection manifests, schemas,
    lint, and cheap scientific smoke checks required.
@@ -316,7 +316,49 @@ Expected immediate effect: behavioral pytest falls from 251 seconds to about 15�
 seconds. The required validation step should finish within 35 seconds and the warm
 workflow within 45–60 seconds.
 
-Go only if full discovery still contains 124 tests, fast exclusion equals the checked-in
+### Spike 0 Implementation Receipt
+
+Session 020 implemented the bounded version under `think-b784`:
+
+- pull requests run the Linux fast validator and report `packing-required`;
+
+- pushes to `main`, manual dispatches, and the weekly schedule retain complete Linux,
+  complete macOS, exhaustive exact tests, all controls, and the macOS deep golden;
+
+- exactly four measured slow modules declare `exhaustive_exact`;
+
+- full pytest collects 131 tests, while the fast selection runs 101 and deselects the
+  same 30 exhaustive exact tests; and
+
+- the full negative-control step uses its measured two-worker knee.
+
+The first local required command finished in 32.90 wall-seconds.
+Its only failures were the expected stale synopsis and generated ledger caused by
+opening session 020. After those records were reconciled, the same command passed in
+27.38 seconds; its 101-test behavioral branch used 13.39 seconds, Python quality used
+11.92 seconds, schemas used 9.83 seconds, and bead validation used 9.61 seconds.
+Those branches overlap under the two-worker outer scheduler.
+
+The direct two-worker control step passed all 62 controls in 100.32 seconds, versus the
+158.54-second one-worker baseline.
+This removes 58.22 seconds from the integration branch without changing the PR lane or
+mutation inventory.
+
+The corrected complete gate proved the deferred side of the partition: all 30 exhaustive
+exact tests passed in 254.16 seconds.
+The concurrent core branch then stopped on `Errno 28` because the macOS host had only
+359 MiB free; it was not a test assertion failure.
+The same 101-test core passed alone in 15.26 seconds.
+This receipt does not count as a clean full-gate sample, but it confirms both selected
+halves and reinforces that exact row-jet reuse is the next integration-speed target.
+
+This is one local sample, not the ten-run hosted acceptance sample.
+The next receipt must measure setup, work, aggregator, and end-to-end time on the pushed
+revision. If hosted setup keeps the first PR signal above one minute, the next smallest
+action is to split lint and behavioral work into two required jobs before adding the
+larger exact or control matrices.
+
+Go only if full discovery still contains 131 tests, fast exclusion equals the checked-in
 slow-node manifest, every required item appears once, ten warm runs meet the 60/75
 second p50/p95 budget, and full integration surfaces remain direct failures.
 Stop if a test disappears from both surfaces or if the required lane exceeds 90 seconds
@@ -544,14 +586,18 @@ gap.
 - [x] Profile 24 CI runs, current exact tests, negative-control worker counts, and both
   named Codex loops (`think-vcr4`).
 
-- [ ] Land the fast required lane, marker manifest, and aggregator (`think-l7hi`).
+- [x] Implement and locally validate the fast required lane, exact-module marker
+  contract, and aggregator (`think-b784` under `think-l7hi`).
 
 - [ ] Land GitHub Actions matrices and union/disjoint tests (`think-l7hi` and
   `think-rthe`).
 
 - [ ] Land immutable row-jet reuse and before/after receipts (`think-kdil`).
 
-- [ ] Land dedicated two-worker full controls and four CI shards (`think-rthe`).
+- [x] Give the full negative-control step its measured dedicated two-worker setting
+  (`think-b784` under `think-rthe`).
+
+- [ ] Land four deterministic negative-control CI shards (`think-rthe`).
 
 - [ ] Land canonical validation receipts and sentinel (`think-3mkx`).
 

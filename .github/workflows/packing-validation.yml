@@ -2,6 +2,8 @@ name: Packing validation
 
 "on":
   workflow_dispatch: {}
+  schedule:
+    - cron: "17 8 * * 6"
   pull_request:
     paths:
       - ".agents/skills/experiment-loop/**"
@@ -47,12 +49,30 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
-      - name: Run the complete packing validation surface
+      - name: Run the required pull-request surface
+        if: "github.event_name == 'pull_request'"
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --fast --jobs 2 --inner-jobs 1
+
+      - name: Run the complete integration surface
+        if: "github.event_name != 'pull_request'"
         run: >-
           uv run --frozen --all-extras --group dev
           packing-validate --jobs 2 --inner-jobs 1
 
+  packing-required:
+    if: "always() && github.event_name == 'pull_request'"
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every pull-request prerequisite
+        env:
+          VALIDATE_RESULT: ${{ needs.validate.result }}
+        run: test "$VALIDATE_RESULT" = "success"
+
   macos-portability:
+    if: "github.event_name != 'pull_request'"
     runs-on: macos-latest
     defaults:
       run:

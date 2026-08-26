@@ -25,6 +25,7 @@
 | [session-017](agent-sessions/session-017-research-loop-efficiency.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-ma71 | Preserve BC-010 under think-1s0h as the sole scientific handoff and preregister its named exp-045 successor before scientific implementation or target work. Separately, begin W5 implementation with think-l7hi timing artifacts and the required Linux fast lane while think-rthe profiles identical-result negative-control concurrency. |
 | [session-018](agent-sessions/session-018-efficiency-plan-refinement.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-vcr4 | Preserve BC-010 under think-1s0h as the sole scientific handoff. Implement think-l7hi first: land the fast required lane, stable aggregator, and Linux job matrix; then execute think-rthe and think-kdil from their measured spike contracts. |
 | [session-019](agent-sessions/session-019-native-timing-correction-spike.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-lpum | Preserve BC-010 under think-1s0h as the sole scientific handoff. Implement think-l7hi's one-minute required CI lane first, then think-kdil's exact row-inventory reuse from the measured plan. |
+| [session-020](agent-sessions/session-020-fast-pr-lane-spike.md) | in_progress | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-b784 | Preserve BC-010 under think-1s0h as the sole scientific handoff. Complete think-b784, then continue the remaining matrix work under think-l7hi. |
 
 ### Workflow summary
 
@@ -36,7 +37,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `factual-review` | 0 | 0 | 4 | 2 |
 | `insight-iteration` | 0 | 1 | 3 | 2 |
 | `process-review` | 3 | 4 | 10 | 6 |
-| `efficiency-loop` | 4 | 0 | 7 | 0 |
+| `efficiency-loop` | 5 | 0 | 9 | 0 |
 | `research-loop` | 1 | 4 | 9 | 7 |
 | `pipeline-improvement` | 2 | 0 | 11 | 0 |
 

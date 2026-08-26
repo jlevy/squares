@@ -18,6 +18,8 @@ from sqpack.research.exact_jets import (
     wall_gap,
 )
 
+pytestmark = pytest.mark.exhaustive_exact
+
 type JetVector = tuple[SecondOrderJet, ...]
 
 

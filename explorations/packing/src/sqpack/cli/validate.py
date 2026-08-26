@@ -42,6 +42,7 @@ RESULTS = Path("campaign/series/series-000-smoke-and-calibration/results")
 ACTIVITY_MARKER = PROJECT_ROOT / ".gate-running"
 DEFAULT_CPU_COUNT = 4
 INNER_JOB_DIVISOR = 3
+NEGATIVE_CONTROL_WORKERS = 2
 TOP_TIMING_COUNT = 8
 SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
@@ -326,7 +327,33 @@ def _optional_tool(context: Context, name: str) -> str:
 
 
 def _fast_tests(context: Context) -> str:
-    return _run(context, (sys.executable, "-m", "pytest", "-q", "tests"))
+    return _run(
+        context,
+        (
+            sys.executable,
+            "-m",
+            "pytest",
+            "-q",
+            "tests",
+            "-m",
+            "not exhaustive_exact",
+        ),
+    )
+
+
+def _exhaustive_exact_tests(context: Context) -> str:
+    return _run(
+        context,
+        (
+            sys.executable,
+            "-m",
+            "pytest",
+            "-q",
+            "tests",
+            "-m",
+            "exhaustive_exact",
+        ),
+    )
 
 
 def _soundness_perimeter(context: Context) -> str:
@@ -484,7 +511,13 @@ def _svg_rendering(context: Context) -> str:
 
 
 def _negative_controls(context: Context) -> str:
-    return _module(context, "devtools.run_negative_controls", "devtools/controls.yaml")
+    return _module(
+        context,
+        "devtools.run_negative_controls",
+        "devtools/controls.yaml",
+        "-j",
+        str(NEGATIVE_CONTROL_WORKERS),
+    )
 
 
 def _independent_lp(context: Context) -> str:
@@ -892,6 +925,7 @@ STEPS: tuple[Step, ...] = (
     Step("negative controls", _negative_controls),
     Step("fixed-angle cell is an LP, rebuilt independently", _independent_lp),
     Step("fast behavioral tests", _fast_tests, fast=True),
+    Step("exhaustive exact behavioral tests", _exhaustive_exact_tests),
     Step("bead tree", _bead_tree, fast=True),
     Step("golden basin maps (proved cases, checked against mathematics)", _golden_basins),
     Step("basin identity", _canonical_identity),
