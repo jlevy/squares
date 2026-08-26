@@ -53,9 +53,13 @@ REQUIRED_LOGBOOK_SECTIONS = (
     "What Worked",
     "What Did Not Work",
     "Pipeline Changes",
-    "Defect Logbook",
+    "Defects Affecting This Run",
     "Validation",
     "Claim Boundary and Next Action",
+)
+REQUIRED_LOGBOOK_RESULT_SECTIONS = (
+    "New Scientific Results From This Run",
+    "Prior Retained Results Used or Rechecked",
 )
 DOC_FOOTER = [
     "<!-- This document follows common-doc-guidelines.md.",
@@ -293,13 +297,13 @@ def check_logbook_entries(logbook_entries, sessions, experiments) -> list[str]:
             )
 
         declared_decisions = []
-        seen_experiments = set()
-        for result in entry["experiments"]:
+        seen_new_round_results = set()
+        for result in entry["new_round_results"]:
             experiment_id = result["id"]
-            if experiment_id in seen_experiments:
-                problems.append(f"{name}: repeats experiment {experiment_id}")
+            if experiment_id in seen_new_round_results:
+                problems.append(f"{name}: repeats new round result {experiment_id}")
                 continue
-            seen_experiments.add(experiment_id)
+            seen_new_round_results.add(experiment_id)
             declared_decisions.append(result["decision"])
             experiment = experiments_by_id.get(experiment_id)
             if experiment is None:
@@ -312,15 +316,33 @@ def check_logbook_entries(logbook_entries, sessions, experiments) -> list[str]:
                     f"expected {actual_decision!r}"
                 )
         decision_counts = _counts(declared_decisions)
-        if rollup["experiment_decision_counts"] != decision_counts:
+        if rollup["new_round_decision_counts"] != decision_counts:
             problems.append(
-                f"{name}: rollup.experiment_decision_counts is "
-                f"{rollup['experiment_decision_counts']!r}, expected {decision_counts!r}"
+                f"{name}: rollup.new_round_decision_counts is "
+                f"{rollup['new_round_decision_counts']!r}, expected {decision_counts!r}"
             )
 
-        defect_log = entry["defect_log"]
-        new_defects = set(defect_log["new_ids"])
-        relevant_defects = set(defect_log["relevant_ids"])
+        seen_prior_results = set()
+        for result in entry["prior_retained_results"]:
+            experiment_id = result["id"]
+            if experiment_id in seen_prior_results:
+                problems.append(f"{name}: repeats prior result {experiment_id}")
+                continue
+            seen_prior_results.add(experiment_id)
+            if experiment_id in seen_new_round_results:
+                problems.append(
+                    f"{name}: {experiment_id} is both a new round result and a prior result"
+                )
+            if experiment_id not in experiments_by_id:
+                problems.append(f"{name}: references unknown prior result {experiment_id}")
+            if result["use"] == "rechecked" and not result.get("recheck_evidence"):
+                problems.append(
+                    f"{name}: rechecked prior result {experiment_id} has no recheck_evidence"
+                )
+
+        defects = entry["defects"]
+        new_defects = set(defects["opened_in_run"])
+        relevant_defects = set(defects["preexisting_relevant"])
         overlap = sorted(new_defects & relevant_defects)
         if overlap:
             problems.append(f"{name}: defect ids are both new and relevant {overlap}")
@@ -346,6 +368,9 @@ def check_logbook_entries(logbook_entries, sessions, experiments) -> list[str]:
         for section in REQUIRED_LOGBOOK_SECTIONS:
             if body.count(f"## {section}\n") != 1:
                 problems.append(f"{name}: needs exactly one '## {section}' section")
+        for section in REQUIRED_LOGBOOK_RESULT_SECTIONS:
+            if body.count(f"### {section}\n") != 1:
+                problems.append(f"{name}: needs exactly one '### {section}' subsection")
 
     for session_id, entry_ids in sorted(summaries_by_session.items()):
         if len(entry_ids) > 1:
@@ -1011,9 +1036,9 @@ def render(
             "",
             (
                 "| run | date | status | cycle slots | sessions | phases | workflows "
-                "| experiment verdicts | next action |"
+                "| new-round verdicts | prior retained results | next action |"
             ),
-            "| --- | --- | --- | ---: | ---: | ---: | --- | --- | --- |",
+            "| --- | --- | --- | ---: | ---: | ---: | --- | --- | ---: | --- |",
         ]
         for entry in sorted(logbook_entries, key=lambda item: item["id"]):
             path = entry["_path"].relative_to(ROOT).as_posix()
@@ -1024,14 +1049,14 @@ def render(
             )
             decisions = ", ".join(
                 f"{decision} {count}"
-                for decision, count in rollup["experiment_decision_counts"].items()
+                for decision, count in rollup["new_round_decision_counts"].items()
             )
             next_action = entry["next_action"].replace("\n", " ").strip()
             lines.append(
                 f"| [{entry['id']}]({path}) | {entry['date']} | {entry['status']} "
                 f"| {timebox['planned_cycle_slots']} x {timebox['cycle_minutes']:g}m "
                 f"| {rollup['session_count']} | {rollup['phase_count']} | {workflows} "
-                f"| {decisions} | {next_action} |"
+                f"| {decisions} | {len(entry['prior_retained_results'])} | {next_action} |"
             )
         lines.append("")
 

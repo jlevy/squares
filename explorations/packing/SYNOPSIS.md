@@ -1595,7 +1595,7 @@ round that names the hypothesis, control roles included.
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 14 | 106m agent, 4.0m wall |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 6 | 115m agent, 6.11s wall |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 11 | 243m agent, 2.5m wall |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | unresolved | Formally supported record packings through `n=30` use at most three angle classes; the retained `n=29` SVG has no formal witness | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of reported record configurations are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
@@ -1730,8 +1730,8 @@ Transverse and mixed nonlinear realization remains open.
 
 ## Experiments Conducted
 
-There are 39 terminal rounds registered in `series-000`. They record 933 agent-minutes
-and 28.3 wall-minutes.
+There are 44 terminal rounds registered in `series-000`. They record 1061 agent-minutes
+and 30.7 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1742,9 +1742,10 @@ checkers, plus the exact branchwise tangent-inventory checker.
 
 No record-search round has produced verified assurance, so **no result below claims a
 new record**. Exp-012 is an exploratory reconstruction of a published record witness;
-its six-class determination refutes H-024 without certifying that witness as exact or
-optimal. Exp-037 separately rejects H-042’s serialization-scoped three-class claim;
-neither round certifies the source geometry or optimality.
+its six-class determination leaves H-024 unresolved because the source has no formal
+feasibility certificate.
+Exp-037 separately rejects H-042’s serialization-scoped three-class claim.
+Neither round certifies the source geometry or optimality.
 
 ![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
 
@@ -2004,14 +2005,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 336 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 337 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 79 | asserted something false about the mathematics |
 | validity | 82 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 129 | recorded something its own evidence contradicts |
+| bookkeeping | 130 | recorded something its own evidence contradicts |
 | robustness | 37 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
@@ -2021,7 +2022,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-three defects in 336, and no soundness defect
+**The automated gate has caught forty-three defects in 337, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

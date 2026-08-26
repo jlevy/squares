@@ -5,6 +5,8 @@ from __future__ import annotations
 import pytest
 
 from devtools.check_synopsis import (
+    check_experiment_scope_claims,
+    check_round_effort_claims,
     check_unprotected_fix_claims,
     select_handoff_cell,
 )
@@ -29,3 +31,25 @@ def test_unprotected_fix_claims_rejects_stale_duplicate() -> None:
     problems = check_unprotected_fix_claims(stale_duplicate, 108)
     assert len(problems) == 1
     assert "(108)" in problems[0]
+
+
+def test_round_effort_claims_reject_stale_duplicate() -> None:
+    current = (
+        "There are 44 terminal rounds registered in `series-000`. "
+        "They record 1061 agent-minutes and 30.7 wall-minutes."
+    )
+    stale_duplicate = (
+        f"{current}\n\nThere are 39 terminal rounds registered in `series-000`. "
+        "They record 933 agent-minutes and 28.3 wall-minutes."
+    )
+
+    assert check_round_effort_claims(current, "44", "1061", "30.7") == []
+    assert check_round_effort_claims(stale_duplicate, "44", "1061", "30.7")
+
+
+def test_experiment_scope_claims_preserve_h024_prerequisite() -> None:
+    current = "Exp-012 leaves H-024 unresolved because its formal prerequisite is unmet."
+    promoted = "Exp-012 numerically reconstructs the source and refutes H-024."
+
+    assert check_experiment_scope_claims(current) == []
+    assert check_experiment_scope_claims(promoted)

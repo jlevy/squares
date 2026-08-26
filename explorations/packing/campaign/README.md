@@ -14,6 +14,9 @@ user-level run a reader-first synopsis.
 Experiment artifacts remain the authoritative positive and negative scientific result
 record, agent sessions retain phase history, and `defects.yaml` remains the separate
 toolchain-defect log.
+The logbook also separates new round results from prior retained results used by the
+run; neither category implies the separate novelty assessment owned by
+`frontier/evidence.yaml`.
 
 ## The Current Search Objective
 

@@ -119,11 +119,18 @@ def _session_problems(
 
 def _logbook_entry(path: Path) -> dict[str, object]:
     """Minimal run synopsis whose rollup matches `_bounded_session`."""
-    sections = "\n\n".join(
-        f"## {heading}\n\nRecorded." for heading in ledger.REQUIRED_LOGBOOK_SECTIONS
-    )
+    sections = []
+    for heading in ledger.REQUIRED_LOGBOOK_SECTIONS:
+        section = f"## {heading}\n\nRecorded."
+        if heading == "Results":
+            section += "\n\n" + "\n\n".join(
+                f"### {subheading}\n\nRecorded."
+                for subheading in ledger.REQUIRED_LOGBOOK_RESULT_SECTIONS
+            )
+        sections.append(section)
     path.write_text(
-        f"---\nplaceholder: true\n---\n\n# Test run\n\n{sections}\n", encoding="utf-8"
+        f"---\nplaceholder: true\n---\n\n# Test run\n\n{'\n\n'.join(sections)}\n",
+        encoding="utf-8",
     )
     return {
         "id": "run-001",
@@ -144,10 +151,11 @@ def _logbook_entry(path: Path) -> dict[str, object]:
             "clock_role_counts": {"work": 2},
             "delegation_count": 0,
             "delegation_status_counts": {},
-            "experiment_decision_counts": {},
+            "new_round_decision_counts": {},
         },
-        "experiments": [],
-        "defect_log": {"new_ids": [], "relevant_ids": []},
+        "new_round_results": [],
+        "prior_retained_results": [],
+        "defects": {"opened_in_run": [], "preexisting_relevant": []},
         "pipeline_changes": [],
     }
 
@@ -226,6 +234,64 @@ def test_research_loop_logbook_requires_the_reader_first_sections(
 
     assert (
         "run-001-contract-test.md: needs exactly one '## What Did Not Work' section" in problems
+    )
+
+
+def test_research_loop_logbook_validates_prior_retained_result_ids(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    entry = _logbook_entry(tmp_path / "run-001-contract-test.md")
+    prior_results = cast(list[dict[str, object]], entry["prior_retained_results"])
+    prior_results.append(
+        {
+            "id": "exp-999",
+            "use": "control",
+            "summary": "A prior control result.",
+        }
+    )
+
+    problems = _logbook_problems(monkeypatch, entry)
+
+    assert "run-001-contract-test.md: references unknown prior result exp-999" in problems
+
+
+def test_research_loop_logbook_requires_evidence_for_rechecked_results(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    entry = _logbook_entry(tmp_path / "run-001-contract-test.md")
+    prior_results = cast(list[dict[str, object]], entry["prior_retained_results"])
+    prior_results.append(
+        {
+            "id": "exp-999",
+            "use": "rechecked",
+            "summary": "A prior result was said to be rechecked.",
+        }
+    )
+
+    problems = _logbook_problems(monkeypatch, entry)
+
+    assert (
+        "run-001-contract-test.md: rechecked prior result exp-999 has no recheck_evidence"
+        in problems
+    )
+
+
+def test_research_loop_logbook_rejects_new_and_prior_overlap(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    entry = _logbook_entry(tmp_path / "run-001-contract-test.md")
+    new_results = cast(list[dict[str, object]], entry["new_round_results"])
+    new_results.append({"id": "exp-999", "decision": "accepted", "summary": "A new result."})
+    rollup = cast(dict[str, object], entry["rollup"])
+    rollup["new_round_decision_counts"] = {"accepted": 1}
+    prior_results = cast(list[dict[str, object]], entry["prior_retained_results"])
+    prior_results.append({"id": "exp-999", "use": "control", "summary": "A prior control."})
+
+    problems = _logbook_problems(monkeypatch, entry)
+
+    assert (
+        "run-001-contract-test.md: exp-999 is both a new round result and a prior result"
+        in problems
     )
 
 

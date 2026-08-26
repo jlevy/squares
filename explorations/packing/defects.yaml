@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 336
+count: 337
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8631,3 +8631,36 @@ defects:
     enforces the enum. Prose provenance coverage remains review work.
   bead: think-bhjz
   recorded_in: frontier/frontier-evidence.schema.yaml
+- id: D-337
+  title: An upstream merge restored stale synopsis totals and an incorrect H-024 disposition
+  date: '2026-08-25'
+  layer: docs
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: one merge
+  severity: medium
+  status: fixed
+  what: >-
+    Merging the tutorial and provenance work into the completed research branch restored
+    three stale statements in the living synopsis: H-023 showed six rounds instead of
+    eleven, the campaign paragraph showed 39 rounds and old effort totals instead of 44,
+    and exp-012 was said to refute H-024 even though both canonical artifacts preserve
+    the unmet formal prerequisite and unresolved disposition.
+  consequence: >-
+    The reader-first synthesis disagreed with the generated ledger and experiment
+    records. Two errors understated completed work, while the third overstated a
+    scientific conclusion; the mixed direction made the merged narrative internally
+    inconsistent rather than uniformly flattering or conservative.
+  fix: >-
+    Reconciled H-023 and the campaign aggregate with the generated ledger, restored
+    H-024's unresolved boundary, and left dated historical checkpoint counts unchanged.
+    Extended the synopsis checker and negative controls so every narrative campaign
+    aggregate is compared with the ledger and exp-012 cannot be promoted past H-024's
+    formal prerequisite.
+  regression: >-
+    check_round_effort_claims and check_experiment_scope_claims, with one controls.yaml
+    mutation for each; the existing per-hypothesis round-count check covers H-023.
+  recurrence_of: D-107
+  bead: think-mu50
+  recorded_in: SYNOPSIS.md

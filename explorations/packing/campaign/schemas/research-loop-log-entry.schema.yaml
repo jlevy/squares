@@ -20,8 +20,9 @@ required:
   - source_commit
   - timebox
   - rollup
-  - experiments
-  - defect_log
+  - new_round_results
+  - prior_retained_results
+  - defects
   - pipeline_changes
   - validation
   - next_action
@@ -71,7 +72,7 @@ properties:
       - clock_role_counts
       - delegation_count
       - delegation_status_counts
-      - experiment_decision_counts
+      - new_round_decision_counts
     properties:
       session_count: {type: integer, minimum: 1}
       phase_count: {type: integer, minimum: 1}
@@ -81,8 +82,8 @@ properties:
       clock_role_counts: {$ref: "#/$defs/clock_role_counts"}
       delegation_count: {type: integer, minimum: 0}
       delegation_status_counts: {$ref: "#/$defs/delegation_status_counts"}
-      experiment_decision_counts: {$ref: "#/$defs/experiment_decision_counts"}
-  experiments:
+      new_round_decision_counts: {$ref: "#/$defs/experiment_decision_counts"}
+  new_round_results:
     type: array
     uniqueItems: true
     items:
@@ -93,16 +94,31 @@ properties:
         id: {type: string, pattern: "^exp-[0-9]{3}$"}
         decision: {$ref: "#/$defs/experiment_decision"}
         summary: {type: string, minLength: 1}
-  defect_log:
+  prior_retained_results:
+    type: array
+    uniqueItems: true
+    items:
+      type: object
+      additionalProperties: false
+      required: [id, use, summary]
+      properties:
+        id: {type: string, pattern: "^exp-[0-9]{3}$"}
+        use: {enum: [prerequisite, control, rechecked, context]}
+        summary: {type: string, minLength: 1}
+        recheck_evidence:
+          type: string
+          minLength: 1
+          description: Required by the campaign checker when use is rechecked.
+  defects:
     type: object
     additionalProperties: false
-    required: [new_ids, relevant_ids, note]
+    required: [opened_in_run, preexisting_relevant, note]
     properties:
-      new_ids:
+      opened_in_run:
         type: array
         uniqueItems: true
         items: {type: string, pattern: "^D-[0-9]{3}$"}
-      relevant_ids:
+      preexisting_relevant:
         type: array
         uniqueItems: true
         items: {type: string, pattern: "^D-[0-9]{3}$"}
