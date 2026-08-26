@@ -45,9 +45,21 @@ prove all the machinery works end to end and establish every baseline metric, be
 strategy is tested.
 
 The record has outgrown that opening description.
-The current record contains experiments `exp-001` through `exp-036`, including search
-baselines, exact proof determinations, event-contract controls, and the H-023
-first-order `exp-035` plus second-order `exp-036` sequence.
+The current record contains experiments `exp-001` through `exp-044`, including search
+baselines, exact proof determinations, event-contract controls, and the H-023 sequence
+through the complete first-order inventory in `exp-038` and fixed-angle polytope paths
+in `exp-039`. Exp-040 retains an unresolved rotating-path checker and its finite
+independent-review blockers.
+Exp-041 rejects a stricter proof-perimeter criterion on an exact endpoint-only zero axis
+while retaining the candidate paths and path-feasibility question.
+Exp-042 is the accepted endpoint-aware successor: it certifies six explicit R4/R5 paths
+and positive pathwise first-order stresses with twenty semantic controls and retained
+replay. Exp-043 stops unresolved before retained measurement: its draft checker passes
+temporary checks, but independent review finds five finite second-order instrument
+defects. The W7 exact-jet repair now passes source-bound tests.
+Exp-044 stops unresolved without target measurement after freezing its case-level
+criterion and adding a reviewed production row-jet builder; weighted stress, sheet,
+scale, mutation, and disposition integration remain open.
 Those records do not imply that full connectivity has been established.
 Those result shapes are not pooled or compared merely because they share `series-000`.
 Each experiment’s `subject`, method, regime, and provenance govern what comparison is
@@ -109,7 +121,7 @@ subject and regime carry that evidence, not the S0 label.
 
 ## What This Series Cannot Claim
 
-The shared id does not establish that all 35 experiments used one executable instrument
+The shared id does not establish that all 42 experiments used one executable instrument
 or that unlike measurements are comparable.
 Screening in `f64` also cannot certify a record—Trump’s packing has 14 of its 55 pairs
 touching at exactly zero separation, which no floating-point check can decide.

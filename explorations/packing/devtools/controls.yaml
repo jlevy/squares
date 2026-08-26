@@ -113,6 +113,18 @@ controls:
   run: uv run --frozen --quiet python -m devtools.check_synopsis
   expect: "H-021 shows 13 rounds, ledger counts 14"
 
+- name: synopsis - narrative round aggregate lagging the ledger
+  file: SYNOPSIS.md
+  replace: ["There are 44 terminal rounds", "There are 39 terminal rounds"]
+  run: uv run --frozen --quiet python -m devtools.check_synopsis
+  expect: "terminal-round aggregate is not 44 rounds"
+
+- name: synopsis - numerical result promoted past a formal prerequisite
+  file: SYNOPSIS.md
+  replace: ["leaves H-024 unresolved", "refutes H-024"]
+  run: uv run --frozen --quiet python -m devtools.check_synopsis
+  expect: "exp-012 must leave H-024 unresolved"
+
 - name: synopsis - README cold-start link drifts from current handoff
   file: README.md
   replace: ["SYNOPSIS.md#current-handoff", "SYNOPSIS.md#workflow-entry-contracts"]

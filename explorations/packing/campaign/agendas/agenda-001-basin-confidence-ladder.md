@@ -252,9 +252,9 @@ agenda:
     bead: think-1s0h
     depends_on: [BC-003, BC-009]
     next_evidence: >-
-      test R4, R5, -W, mixed-angle realization, and stationary continuation beyond the
-      twelve exp-039 paths without inferring whole-polytope terminality from their
-      positive first-order stresses
+      test -W, mixed-angle realization, and stationary continuation beyond the twelve
+      exp-039 and six exp-042 paths without inferring whole-polytope terminality from
+      their positive first-order stresses
     parallel_group: identity
     note: >-
       This is the first genuine basin-structure experiment in the ladder. Exp-033
@@ -290,10 +290,27 @@ agenda:
       adding a lease or worktree protocol. Think-imav and think-nm35 are complete:
       exp-038 supplied the remaining-cone inventory, and exp-039 supplied the twelve
       R1, R2, R3, and R6 paths. Think-1s0h now owns one preregistered exact R4/R5
-      nonlinear-realization slice. The `-W`, mixed-angle, whole-stationary-component,
-      and unequal-side-clearance questions remain later bounded slices. The repaired
-      D-199/D-203 solver path no longer orders this scientific cell, and D-239 remains a
-      separate W7 robustness line.
+      nonlinear-realization slice. Exp-040 stopped that first slice unresolved before
+      retained measurement after independent review retained five finite proof-perimeter
+      gaps; its rotating-path checker is a draft resume point, not an R4/R5 result. The
+      first successor, exp-041, rejects its complete-zero-inventory criterion on the
+      exact endpoint-only axis `0-3:owner3:a-`; the root does not refute path feasibility.
+      Exp-042 accepts the corrected endpoint inventory and operationally separate
+      feasibility and stress determinations from engine commit `2980fdc`: all six R4/R5
+      cases and twenty semantic controls pass retained generation and replay. This is
+      pathwise first-order evidence, not an exhaustive release-class result or
+      stationary connection. Exp-043 stops its pure `-W` test before retained
+      measurement on five exact instrument defects in rowwise second-order jets,
+      weighted curvature, the sheet witness, and scale routing. Pure `-W`, mixed-angle,
+      whole-stationary-component, and unequal-side-clearance questions remain later
+      bounded slices. The following W7 phase adds a case-free exact-jet helper whose six
+      tests bind the complete n=5 first-order row inventory, but it refuses branch,
+      scale, and obstruction conclusions; exp-044 must preregister that case-level
+      integration separately. Exp-044 now freezes the rowwise curvature, sheet-witness,
+      scale-routing, disposition, control, and refusal criterion before the case draft
+      changes. The repaired
+      D-199/D-203 solver path no longer orders
+      this scientific cell, and D-239 remains a separate W7 robustness line.
     artifacts:
     - cases/n5/equal_side_face.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-033-h-023-n5-equal-side-face.md
@@ -313,6 +330,16 @@ agenda:
     - cases/n5/fixed_angle_polytope.py
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md
     - campaign/series/series-000-smoke-and-calibration/results/exp-039-h-023-n5-fixed-angle-polytope.json
+    - cases/n5/rotating_release_paths.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-041-h-023-n5-rotating-release-proof-perimeter.md
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md
+    - cases/n5/minus_w_obstruction.py
+    - src/sqpack/research/exact_jets.py
+    - tests/test_exact_jets.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

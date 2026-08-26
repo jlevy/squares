@@ -9,6 +9,15 @@ points and the distinction among campaign, series, session, experiment, round, a
 It is frozen while rounds are running — see
 [what a runner may not do](#what-a-runner-may-not-do).
 
+The [research loop logbook](research-loop-logbook/README.md) gives each bounded
+user-level run a reader-first synopsis.
+Experiment artifacts remain the authoritative positive and negative scientific result
+record, agent sessions retain phase history, and `defects.yaml` remains the separate
+toolchain-defect log.
+The logbook also separates new round results from prior retained results used by the
+run; neither category implies the separate novelty assessment owned by
+`frontier/evidence.yaml`.
+
 ## The Current Search Objective
 
 **What is the structure of the `s(n)` landscape — how many basins, how rare is the

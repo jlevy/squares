@@ -33,8 +33,9 @@ and contribute to the phase.
 objects are, why the approach is shaped the way it is, and what is established versus
 open. Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program.
 To resume work rather than only understand it, continue to the synopsis’s
-[current handoff](SYNOPSIS.md#current-handoff); it names the terminal session, owning
-bead, and exact next bounded slice.
+[current handoff](SYNOPSIS.md#current-handoff); it names the active session when one
+exists, otherwise the latest terminal session, together with the owning bead and exact
+next bounded slice.
 
 ## Operating Principles
 

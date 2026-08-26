@@ -332,10 +332,10 @@ Send promoted, novel, disputed, or otherwise high-risk claims through W2 before 
 move forward. A routine W6 result whose preregistered guards and independent replay
 already decide its stated criterion need not open a ceremonial review phase.
 
-For the next supervised exact-research goal, follow
-[session-014](../../../../campaign/agent-sessions/session-014-final-portfolio-rotation.md)
-and take `think-1s0h` through one preregistered BC-010 exact R4/R5 nonlinear-realization
-slice. Retain an exact continuation, exact obstruction, or finite unresolved list.
+For the next supervised exact-research goal, use
+[session-015](../../../../campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md).
+It takes `think-1s0h` through one preregistered BC-010 exact R4/R5 nonlinear-realization
+slice, retaining an exact continuation, exact obstruction, or finite unresolved list.
 Exp-038 completed the branchwise cone inventory, and exp-039 covers R1, R2, R3, and R6
 only; `-W`, mixed-angle realization, the whole stationary component, and unequal-side
 clearance remain later slices.

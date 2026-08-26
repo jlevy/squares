@@ -141,6 +141,7 @@ case or experiment separately.
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
 | [Agent Sessions](campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
+| [Research Loop Logbook](campaign/research-loop-logbook/README.md) | reader-facing research-run summaries | definitive | maintained | — |
 | [Idea board — the `s(n)` search campaign](campaign/ideas.md) | hand-maintained registry | definitive | maintained | — |
 | [Experiment ledger](campaign/ledger.md) | generated status view | generated | generated | — |
 | [series-000 (S0) — smoke and calibration](campaign/series/series-000-smoke-and-calibration/README.md) | series scope and comparability | definitive | maintained | — |
@@ -177,6 +178,7 @@ case or experiment separately.
 | `campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
 | `campaign/agent-sessions/session-*.md` | typed session record | record | retained | — |
+| `campaign/research-loop-logbook/run-*.md` | typed research-run synopsis | record | retained | — |
 | `campaign/agendas/agenda-*.md` | mutable coordination agenda | current | maintained | — |
 | `campaign/explorations/X-*.md` | typed idea provenance | record | retained | — |
 
@@ -304,15 +306,40 @@ deep-golden solver rejection.
 That bounded solver repair was recorded under the owning review phase before W7 existed.
 Future packing-pipeline repairs whose promised output is the implementation itself enter
 W7; historical phases are not relabelled after the fact.
-The latest terminal record is
-[session-014](campaign/agent-sessions/session-014-final-portfolio-rotation.md), which
-opened no later research round.
-The next agent should open one bounded W6 slice for agenda cell `BC-010` under
-`think-1s0h`, preregister one exact R4/R5 nonlinear-realization criterion, and retain an
-exact continuation, exact obstruction, or finite unresolved list.
+The current line is owned by `BC-010` under `think-1s0h`.
+[Session 015](campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md) is terminal
+after reaching its declared eight-phase cap, and
+[session 016](campaign/agent-sessions/session-016-final-hour-continuation.md) is the
+completed final-hour continuation; it preserved the original deadline without extending
+an expired phase or relying on controller memory.
+Session 015’s first bounded W6 slice stopped exp-040 unresolved before retained
+measurement after independent review found five finite proof-perimeter gaps in the draft
+R4/R5 checker. Exp-041 froze the exact five-blocker correction at `e26fae9`, then
+rejected its complete-zero-inventory criterion on a new endpoint-only axis without
+refuting path feasibility.
+Exp-042 corrects that endpoint inventory and meets the full frozen criterion from engine
+commit `2980fdc`: six R4/R5 paths, both owner stresses, and twenty semantic controls
+pass retained generation and replay.
+The result is pathwise first-order only.
+Exp-043 then stops its pure `-W` test before retained measurement: the draft checker is
+a resume point, but it does not yet derive production rowwise second-order constants,
+consume a full exp-034 acceleration witness, or mechanically route the two-scale proof.
+The following W7 phases provide a case-free exact-jet helper, complete production row
+builders for all six source matrices, normalized nine-row stress evaluation with every
+correction column retained, and a formula-derived exp-034 sheet control across both
+owner inventories. Focused tests and independent review accept that substrate at
+checkpoint `8ee367b` while refusing branch completeness, scale routing, and obstruction.
+Exp-044 freezes the separate case-level integration but is terminal unresolved with no
+target run or result JSON. The published checkpoints separate helper substrate
+`8ee367b`, accepted memoryless design `027349b`, and full-gate pre-terminal state
+`3629bf4`. Session 016’s terminal handoff owns the branch, read order, validation, exact
+fifteen-record scale inventory, mutation map, and successor artifact paths, so no
+controller memory is required.
+The sole next action is to preregister the named exp-045 successor under `BC-010` before
+implementation or target work.
 The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
 remain later slices; D-239 is a separate W7 line.
-Do not start basin-frequency work or reinterpret exp-035 through exp-039 as a
+Do not start basin-frequency work or reinterpret exp-035 through exp-040 as a
 connectivity proof.
 
 ## What Is Built
@@ -1568,7 +1595,7 @@ round that names the hypothesis, control roles included.
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 14 | 106m agent, 4.0m wall |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 6 | 115m agent, 6.11s wall |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 11 | 243m agent, 2.5m wall |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | unresolved | Formally supported record packings through `n=30` use at most three angle classes; the retained `n=29` SVG has no formal witness | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of reported record configurations are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
@@ -1703,8 +1730,8 @@ Transverse and mixed nonlinear realization remains open.
 
 ## Experiments Conducted
 
-There are 39 terminal rounds registered in `series-000`. They record 933 agent-minutes
-and 28.3 wall-minutes.
+There are 44 terminal rounds registered in `series-000`. They record 1061 agent-minutes
+and 30.7 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1715,9 +1742,10 @@ checkers, plus the exact branchwise tangent-inventory checker.
 
 No record-search round has produced verified assurance, so **no result below claims a
 new record**. Exp-012 is an exploratory reconstruction of a published record witness;
-its six-class determination refutes H-024 without certifying that witness as exact or
-optimal. Exp-037 separately rejects H-042’s serialization-scoped three-class claim;
-neither round certifies the source geometry or optimality.
+its six-class determination leaves H-024 unresolved because the source has no formal
+feasibility certificate.
+Exp-037 separately rejects H-042’s serialization-scoped three-class claim.
+Neither round certifies the source geometry or optimality.
 
 ![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
 
@@ -1772,6 +1800,11 @@ archive beside it.
 | [exp-037](campaign/series/series-000-smoke-and-calibration/experiments/exp-037-h-042-n29-numerical-angle-classes.md) | 29 | target | H-042 | multiprecision SVG reconstruction | six classes; minimum class gap `0.296067°` | **rejected** |
 | [exp-038](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md) | 5 | target | H-023 | exact branchwise linearization-cone inventory | identical owner branches; endpoint/interior rays `8/6/8`; ten controls pass | **accepted** |
 | [exp-039](campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md) | 5 | target | H-023 | exact fixed-angle optimal-position polytope | dimension 5; 12 sharp paths; ten controls pass | **accepted** |
+| [exp-040](campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md) | 5 | target | H-023 | exact rotating-path draft | five audited proof gaps; no retained result | **unresolved** |
+| [exp-041](campaign/series/series-000-smoke-and-calibration/experiments/exp-041-h-023-n5-rotating-release-proof-perimeter.md) | 5 | target | H-023 | exact rotating-path proof perimeter | endpoint-only axis falsifies complete zero inventory | **rejected** |
+| [exp-042](campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md) | 5 | target | H-023 | endpoint-aware exact rotating paths | 6 paths; 6 stresses; 20 controls pass | **accepted** |
+| [exp-043](campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md) | 5 | target | H-023 | exact pure -W second-order test | five instrument blockers; no retained result | **unresolved** |
+| [exp-044](campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md) | 5 | target | H-023 | exact pure -W row-jet test | reviewed row builder; no retained target | **unresolved** |
 
 ### Cost and provenance
 
@@ -1816,8 +1849,16 @@ archive beside it.
 | exp-037 | one SVG, 406 pairs | 0.165 s | 15 m | criterion | `5384209` |
 | exp-038 | six exact matrices + ten controls | 1.06 s | 30 m | criterion | `b8d0104` |
 | exp-039 | one exact polytope + ten controls | 4.047 s | 20 m | criterion | `27b999e` |
+| exp-040 | 30m criterion, implementation, and review slice | 12.0 s | 30 m | guard | — |
+| exp-041 | one 30-minute correction, measurement, and review slice | 3.234 s | 20 m | criterion | — |
+| exp-042 | one 30-minute correction, measurement, and review slice | 26.17 s | 28 m | criterion | `2980fdc` |
+| exp-043 | one 30-minute preregistration, implementation, and review slice | 3.071 s | 20 m | guard | — |
+| exp-044 | one 30-minute criterion, integration, and review slice | 100.41 s | 30 m | guard | `a5a4ef0` (row builder only) |
 
-### What the 39 rounds jointly establish
+### What the 44 rounds jointly establish
+
+The 44 rounds use 1061 agent-minutes and 30.7 wall-minutes under the campaign’s retained
+effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
 `n = 8` plus one bounded `n = 9` performance event; exact component controls pass only
@@ -1964,14 +2005,14 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 336 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 337 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 79 | asserted something false about the mathematics |
 | validity | 82 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 129 | recorded something its own evidence contradicts |
+| bookkeeping | 130 | recorded something its own evidence contradicts |
 | robustness | 37 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
@@ -1981,7 +2022,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-three defects in 336, and no soundness defect
+**The automated gate has caught forty-three defects in 337, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

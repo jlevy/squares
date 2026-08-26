@@ -42,7 +42,25 @@ PROJECT_ROOT = configured_project_root()
 ROOT = PROJECT_ROOT / "campaign"
 LEDGER = ROOT / "ledger.md"
 IDEAS = ROOT / "ideas.md"
+DEFECTS = PROJECT_ROOT / "defects.yaml"
 SESSION_SCHEMA = ROOT / "schemas/agent-session.schema.yaml"
+REQUIRED_LOGBOOK_SECTIONS = (
+    "Context",
+    "Outcome",
+    "Run Rollup",
+    "Phase History",
+    "Results",
+    "What Worked",
+    "What Did Not Work",
+    "Pipeline Changes",
+    "Defects Affecting This Run",
+    "Validation",
+    "Claim Boundary and Next Action",
+)
+REQUIRED_LOGBOOK_RESULT_SECTIONS = (
+    "New Scientific Results From This Run",
+    "Prior Retained Results Used or Rechecked",
+)
 DOC_FOOTER = [
     "<!-- This document follows common-doc-guidelines.md.",
     "See github.com/jlevy/practical-prose and review guidelines before editing.",
@@ -168,10 +186,27 @@ def board_ids() -> tuple[set[str], set[str]] | None:
     return set(re.findall(r"\bH-[0-9]{3}\b", text)), reserved
 
 
-def naming(series, explorations, hypotheses, experiments, sessions, *, agendas) -> list[str]:
+def naming(
+    series,
+    explorations,
+    hypotheses,
+    experiments,
+    sessions,
+    *,
+    agendas,
+    logbook_entries,
+) -> list[str]:
     """Ids in filenames agree with ids in frontmatter, and slugs are kebab-case."""
     problems = []
-    for items in (series, explorations, hypotheses, experiments, sessions, agendas):
+    for items in (
+        series,
+        explorations,
+        hypotheses,
+        experiments,
+        sessions,
+        agendas,
+        logbook_entries,
+    ):
         for item in items:
             path = item["_path"]
             # A series is named by its directory; everything else by its own filename.
@@ -183,6 +218,163 @@ def naming(series, explorations, hypotheses, experiments, sessions, *, agendas) 
             slug = stem[len(claimed) + 1 :]
             if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+)*", slug):
                 problems.append(f"{stem}: slug {slug!r} is not kebab-case")
+    return problems
+
+
+def _counts(values) -> dict[str, int]:
+    """Return only observed values, matching the sparse count objects in the schema."""
+    return {str(key): count for key, count in Counter(values).items() if count}
+
+
+def check_logbook_entries(logbook_entries, sessions, experiments) -> list[str]:
+    """Reconcile reader-facing run summaries with their authoritative records."""
+    problems = []
+    sessions_by_id = {session["id"]: session for session in sessions}
+    experiments_by_id = {experiment["id"]: experiment for experiment in experiments}
+    defect_ids = {
+        defect["id"]
+        for defect in yaml.safe_load(DEFECTS.read_text(encoding="utf-8"))["defects"]
+    }
+    summaries_by_session: dict[str, list[str]] = defaultdict(list)
+
+    for entry in logbook_entries:
+        name = entry["_path"].name
+        source_ids = entry["source_sessions"]
+        for session_id in source_ids:
+            summaries_by_session[session_id].append(entry["id"])
+        unknown_sessions = sorted(set(source_ids) - sessions_by_id.keys())
+        if unknown_sessions:
+            problems.append(f"{name}: unknown source sessions {unknown_sessions}")
+            continue
+        source_sessions = [sessions_by_id[session_id] for session_id in source_ids]
+        active_sessions = [
+            session["id"]
+            for session in source_sessions
+            if session.get("status") == "in_progress"
+        ]
+        if active_sessions:
+            problems.append(f"{name}: source sessions are still active {active_sessions}")
+        source_beads = {session.get("primary_bead") for session in source_sessions}
+        if source_beads != {entry["primary_bead"]}:
+            problems.append(
+                f"{name}: primary_bead is {entry['primary_bead']!r}, "
+                f"but source sessions use {sorted(source_beads)}"
+            )
+
+        phases = [
+            phase for session in source_sessions for phase in session.get("workflow_phases", [])
+        ]
+        delegations = [
+            delegation
+            for session in source_sessions
+            for delegation in session.get("delegations", [])
+        ]
+        rollup = entry["rollup"]
+        expected = {
+            "session_count": len(source_sessions),
+            "phase_count": len(phases),
+            "workflow_counts": _counts(phase.get("workflow") for phase in phases),
+            "phase_status_counts": _counts(phase.get("status") for phase in phases),
+            "focus_counts": _counts(phase.get("focus") for phase in phases),
+            "clock_role_counts": _counts(phase.get("clock_role") for phase in phases),
+            "delegation_count": len(delegations),
+            "delegation_status_counts": _counts(
+                delegation.get("status") for delegation in delegations
+            ),
+        }
+        for field, value in expected.items():
+            if rollup.get(field) != value:
+                problems.append(
+                    f"{name}: rollup.{field} is {rollup.get(field)!r}, expected {value!r}"
+                )
+
+        timebox = entry["timebox"]
+        planned_minutes = timebox["cycle_minutes"] * timebox["planned_cycle_slots"]
+        if abs(planned_minutes - timebox["target_wall_minutes"]) > 1e-9:
+            problems.append(
+                f"{name}: planned cycle slots total {planned_minutes:g} minutes, "
+                f"not target_wall_minutes {timebox['target_wall_minutes']:g}"
+            )
+
+        declared_decisions = []
+        seen_new_round_results = set()
+        for result in entry["new_round_results"]:
+            experiment_id = result["id"]
+            if experiment_id in seen_new_round_results:
+                problems.append(f"{name}: repeats new round result {experiment_id}")
+                continue
+            seen_new_round_results.add(experiment_id)
+            declared_decisions.append(result["decision"])
+            experiment = experiments_by_id.get(experiment_id)
+            if experiment is None:
+                problems.append(f"{name}: references unknown experiment {experiment_id}")
+                continue
+            actual_decision = (experiment.get("verdict") or {}).get("decision")
+            if result["decision"] != actual_decision:
+                problems.append(
+                    f"{name}: {experiment_id} decision is {result['decision']!r}, "
+                    f"expected {actual_decision!r}"
+                )
+        decision_counts = _counts(declared_decisions)
+        if rollup["new_round_decision_counts"] != decision_counts:
+            problems.append(
+                f"{name}: rollup.new_round_decision_counts is "
+                f"{rollup['new_round_decision_counts']!r}, expected {decision_counts!r}"
+            )
+
+        seen_prior_results = set()
+        for result in entry["prior_retained_results"]:
+            experiment_id = result["id"]
+            if experiment_id in seen_prior_results:
+                problems.append(f"{name}: repeats prior result {experiment_id}")
+                continue
+            seen_prior_results.add(experiment_id)
+            if experiment_id in seen_new_round_results:
+                problems.append(
+                    f"{name}: {experiment_id} is both a new round result and a prior result"
+                )
+            if experiment_id not in experiments_by_id:
+                problems.append(f"{name}: references unknown prior result {experiment_id}")
+            if result["use"] == "rechecked" and not result.get("recheck_evidence"):
+                problems.append(
+                    f"{name}: rechecked prior result {experiment_id} has no recheck_evidence"
+                )
+
+        defects = entry["defects"]
+        new_defects = set(defects["opened_in_run"])
+        relevant_defects = set(defects["preexisting_relevant"])
+        overlap = sorted(new_defects & relevant_defects)
+        if overlap:
+            problems.append(f"{name}: defect ids are both new and relevant {overlap}")
+        unknown_defects = sorted((new_defects | relevant_defects) - defect_ids)
+        if unknown_defects:
+            problems.append(f"{name}: references unknown defects {unknown_defects}")
+
+        change_names = [change["name"] for change in entry["pipeline_changes"]]
+        duplicate_changes = sorted(
+            name for name, count in Counter(change_names).items() if count > 1
+        )
+        if duplicate_changes:
+            problems.append(f"{name}: duplicate pipeline changes {duplicate_changes}")
+        for change in entry["pipeline_changes"]:
+            for relative_path in change["paths"]:
+                if not (PROJECT_ROOT / relative_path).exists():
+                    problems.append(
+                        f"{name}: pipeline change {change['name']} references missing "
+                        f"path {relative_path}"
+                    )
+
+        body = entry["_path"].read_text(encoding="utf-8").split("---\n", 2)[2]
+        for section in REQUIRED_LOGBOOK_SECTIONS:
+            if body.count(f"## {section}\n") != 1:
+                problems.append(f"{name}: needs exactly one '## {section}' section")
+        for section in REQUIRED_LOGBOOK_RESULT_SECTIONS:
+            if body.count(f"### {section}\n") != 1:
+                problems.append(f"{name}: needs exactly one '### {section}' subsection")
+
+    for session_id, entry_ids in sorted(summaries_by_session.items()):
+        if len(entry_ids) > 1:
+            problems.append(f"{session_id}: summarized by multiple logbook entries {entry_ids}")
     return problems
 
 
@@ -206,9 +398,18 @@ def dead_links() -> list[str]:
 
 
 def check(
-    series, explorations, hypotheses, experiments, sessions, *, agendas, now: dt.datetime
+    series,
+    explorations,
+    hypotheses,
+    experiments,
+    sessions,
+    *,
+    agendas,
+    now: dt.datetime,
+    logbook_entries=None,
 ) -> list[str]:
     """Whole-set invariants. Per-artifact validation cannot see any of these."""
+    logbook_entries = logbook_entries or []
     problems = []
 
     for label, items in (
@@ -218,6 +419,7 @@ def check(
         ("experiment", experiments),
         ("session", sessions),
         ("agenda", agendas),
+        ("logbook entry", logbook_entries),
     ):
         seen = defaultdict(list)
         for item in items:
@@ -734,7 +936,16 @@ def check(
                         f"phase {phase_number}"
                     )
 
-    problems += naming(series, explorations, hypotheses, experiments, sessions, agendas=agendas)
+    problems += check_logbook_entries(logbook_entries, sessions, experiments)
+    problems += naming(
+        series,
+        explorations,
+        hypotheses,
+        experiments,
+        sessions,
+        agendas=agendas,
+        logbook_entries=logbook_entries,
+    )
     problems += dead_links()
 
     return problems
@@ -796,13 +1007,58 @@ def spent(rounds: list[dict]) -> str:
     return " + ".join(parts)
 
 
-def render(series, explorations, hypotheses, experiments, sessions, *, agendas) -> str:
+def render(
+    series,
+    explorations,
+    hypotheses,
+    experiments,
+    sessions,
+    *,
+    agendas,
+    logbook_entries=None,
+) -> str:
+    logbook_entries = logbook_entries or []
     by_hypothesis = defaultdict(list)
     for experiment in experiments:
         for hypothesis_id in experiment.get("hypotheses") or []:
             by_hypothesis[hypothesis_id].append(experiment)
 
     lines = [BANNER, "", "# Experiment ledger", ""]
+
+    if logbook_entries:
+        lines += [
+            "## Research loop logbook",
+            "",
+            (
+                "Each entry summarizes one user-level research window. Cycle slots are "
+                "wall-clock units; phases are recorded changes of purpose or focus."
+            ),
+            "",
+            (
+                "| run | date | status | cycle slots | sessions | phases | workflows "
+                "| new-round verdicts | prior retained results | next action |"
+            ),
+            "| --- | --- | --- | ---: | ---: | ---: | --- | --- | ---: | --- |",
+        ]
+        for entry in sorted(logbook_entries, key=lambda item: item["id"]):
+            path = entry["_path"].relative_to(ROOT).as_posix()
+            timebox = entry["timebox"]
+            rollup = entry["rollup"]
+            workflows = ", ".join(
+                f"`{workflow}` {count}" for workflow, count in rollup["workflow_counts"].items()
+            )
+            decisions = ", ".join(
+                f"{decision} {count}"
+                for decision, count in rollup["new_round_decision_counts"].items()
+            )
+            next_action = entry["next_action"].replace("\n", " ").strip()
+            lines.append(
+                f"| [{entry['id']}]({path}) | {entry['date']} | {entry['status']} "
+                f"| {timebox['planned_cycle_slots']} x {timebox['cycle_minutes']:g}m "
+                f"| {rollup['session_count']} | {rollup['phase_count']} | {workflows} "
+                f"| {decisions} | {len(entry['prior_retained_results'])} | {next_action} |"
+            )
+        lines.append("")
 
     if sessions:
         lines += [
@@ -1051,14 +1307,30 @@ def main(arguments: list[str] | None = None) -> int:
     experiments = load(ROOT / "series", "experiment", "*/experiments/*.md")
     sessions = load(ROOT / "agent-sessions", "session", "session-*.md")
     agendas = load(ROOT / "agendas", "agenda", "agenda-*.md")
+    logbook_entries = load(ROOT / "research-loop-logbook", "logbook_entry", "run-*.md")
 
     problems = check(
-        series, explorations, hypotheses, experiments, sessions, agendas=agendas, now=now
+        series,
+        explorations,
+        hypotheses,
+        experiments,
+        sessions,
+        agendas=agendas,
+        now=now,
+        logbook_entries=logbook_entries,
     )
     for problem in problems:
         print(f"FAIL {problem}", file=sys.stderr)
 
-    rendered = render(series, explorations, hypotheses, experiments, sessions, agendas=agendas)
+    rendered = render(
+        series,
+        explorations,
+        hypotheses,
+        experiments,
+        sessions,
+        agendas=agendas,
+        logbook_entries=logbook_entries,
+    )
     if options.action == "check":
         current = LEDGER.read_text() if LEDGER.exists() else ""
         if current != rendered:
@@ -1075,7 +1347,8 @@ def main(arguments: list[str] | None = None) -> int:
     print(
         f"OK {len(series)} series, {len(explorations)} reports, "
         f"{len(hypotheses)} hypotheses, {len(experiments)} rounds, "
-        f"{len(sessions)} agent {session_label}, {len(agendas)} agendas"
+        f"{len(sessions)} agent {session_label}, {len(agendas)} agendas, "
+        f"{len(logbook_entries)} logbook entries"
     )
     return 0
 

@@ -48,7 +48,24 @@ hypothesis:
     path segments. It does not prove the whole polytope stationary or join A to B inside
     the stationary set. Nonlinear realization of the remaining transverse and mixed
     directions, the full nonsmooth stationary component, and the unequal-side clearance
-    questions remain open.
+    questions remain open. Exp-040 preregistered a shared exact rotating path for R4 and
+    R5 but stopped unresolved before retained measurement: temporary generation and
+    replay passed, while independent review retained five exact proof-perimeter gaps in
+    axis strictness, multiplier positivity, tied-feature derivation, partial-result
+    routing, and semantic controls. Its draft checker is a resume point, not an R4/R5
+    result. Exp-041 then rejects a stricter proof-perimeter criterion because
+    `0-3:owner3:a-` is zero only at the positive path endpoint. That exact root does not
+    harm the separately certified pair separator or refute path feasibility. A successor
+    must distinguish base, open-interval, and positive-endpoint zero inventories and
+    close three remaining control and partial-result guards. Exp-042 meets that
+    endpoint-aware criterion: all six R4/R5 paths have exact universal feasibility and
+    positive first-order stress certificates, retained generation and replay agree, and
+    all twenty semantic controls reject. This is six-path nonlinear realization, not an
+    A-to-B stationary connection or exhaustive realization. The `-W`, mixed-direction,
+    whole-component, and unequal-side questions remain open.
+    Exp-043 stops before retained measurement because its draft evaluator does not
+    derive rowwise second-order constants from full jets or check its exp-034
+    acceleration witness. It leaves pure -W unresolved with a finite instrument list.
 ---
 # H-023 — resolve the first ambiguous census cell
 
@@ -96,6 +113,35 @@ The stress is proved only on those paths, not throughout the polytope or on an A
 connector. The remaining release classes, mixed-angle realization, deterministic quench
 selection, the complete stationary component, and unequal-side minimax-clearance bounds
 remain open.
+
+Exp-040 preserves the original candidate and exp-041 records the exact endpoint defect
+in its first correction criterion.
+Exp-042 closes that finite list without changing the six paths: its case-indexed
+endpoint inventory, both exact owner stresses, twenty typed semantic controls, and
+deterministic retained replay pass.
+R4 and R5 therefore have six explicit pathwise realizations at A, the midpoint, and B.
+The result neither exhausts those release classes nor supplies a stationary connector
+between A and B.
+
+Exp-043 freezes a separate exact test of canonical pure `-W`, then stops at independent
+review before retained measurement.
+Its draft makes the predicted coefficients sign-even by construction instead of deriving
+rowwise nonlinear wall and SAT constants, and its sheet control does not consume a
+checked acceleration witness.
+The retained finite successor list is an exact truncated-series row engine, full jets,
+weighted rowwise curvature, a production sheet witness, and mechanical two-scale
+routing. Pure `-W` and mixed directions remain unresolved.
+
+The following W7 phase now supplies the case-free exact-jet layer and source-bound
+first-order row tests.
+It derives exact wall and SAT values, gradients, Hessians, path coefficients, and
+weighted combinations, but deliberately makes no branch-completeness, scale-routing, or
+obstruction claim. A separately preregistered exp-044 must add those case-level
+obligations before pure `-W` can be measured again.
+
+Exp-044 now freezes that case-level integration: every production row must flow through
+the accepted jet helper, the sheet witness must be checked, and the bounded/unbounded
+owner-3 scale cases must be executable before a retained pure `-W` disposition exists.
 
 This is the focused control for H-021 and the practical precursor to H-011.
 

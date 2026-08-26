@@ -35,6 +35,7 @@ $defs:
       - development-guide
       - runbook
       - session-guide
+      - research-loop-logbook
       - series-guide
       - registry
       - generated-view
@@ -50,6 +51,7 @@ $defs:
       - hypothesis-record
       - experiment-record
       - session-record
+      - research-loop-run-record
       - agenda
       - exploration-report
   authority:
