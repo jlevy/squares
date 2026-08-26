@@ -114,6 +114,8 @@ def test_general_lab_is_deterministic_shared_scenario_ui() -> None:
     assert "connect-src 'self'" in first
     assert "phase-fixed-angle-lp" in first
     assert "probe-square" in first
+    assert "(prefers-reduced-motion: reduce)" in first
+    assert "Reduced-motion mode advanced one retained event" in first
     assert '"scenario_id": "free-quench"' in first
     assert 'fetch("http' not in first
     assert '<script src="http' not in first and '<link href="http' not in first

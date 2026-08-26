@@ -2,7 +2,7 @@
 
 # Defect log
 
-337 defects recorded across the packing toolchain.
+338 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
 Source of truth is [`defects.yaml`](defects.yaml).
 
@@ -20,12 +20,12 @@ Source of truth is [`defects.yaml`](defects.yaml).
 | `control_cell` | 20 | a cell of the sweep whose answer is known in advance |
 | `review` | 211 | a human or agent reading the work against a checklist |
 | `anomaly` | 12 | a result that made no sense, chased down |
-| `inspection` | 31 | reading the code or the design with intent |
+| `inspection` | 32 | reading the code or the design with intent |
 | `drift_check` | 16 | a generated view disagreeing with its source |
 | `design` | 1 | caught while designing, before it reached data |
 | `gate` | 43 | the automated test suite |
 
-The line worth reading twice: **the automated gate caught 43 of 337, and none of the 79 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
+The line worth reading twice: **the automated gate caught 43 of 338, and none of the 79 soundness defects.** Gates confirm what you already thought to check. The rest were found by a device built to be *surprised* — a control cell, a pre-registered rule, a generated view contradicting itself — or by someone reading carefully.
 
 ## Where they arise
 
@@ -35,7 +35,7 @@ The line worth reading twice: **the automated gate caught 43 of 337, and none of
 | quench | 21 |
 | verifier | 4 |
 | record | 101 |
-| tooling | 104 |
+| tooling | 105 |
 | docs | 96 |
 
 ## By kind
@@ -46,7 +46,7 @@ The line worth reading twice: **the automated gate caught 43 of 337, and none of
 | validity | 82 |
 | bookkeeping | 130 |
 | robustness | 37 |
-| performance | 9 |
+| performance | 10 |
 
 ## Fixed, but nothing stops it coming back
 
@@ -545,6 +545,7 @@ This is the actionable list.
 | [D-335](TUTORIAL.md) | 2026-08-25 | docs | bookkeeping | neutral | `review` | medium | fixed | The tutorial's moduli figure went unexplained and its axis collided with the text |
 | [D-336](frontier/frontier-evidence.schema.yaml) | 2026-08-25 | docs | bookkeeping | flattering | `review` | medium | fixed | Verified claims carried no provenance axis, blurring confirmations and new results |
 | [D-337](SYNOPSIS.md) | 2026-08-25 | docs | bookkeeping | neutral | `review` | medium | fixed | An upstream merge restored stale synopsis totals and an incorrect H-024 disposition |
+| [D-338](src/sqpack/motion_lab/assets/free-quench.js) | 2026-08-26 | tooling | performance | neutral | `inspection` | medium | fixed | Raw quench traces expanded into thousands of timeline controls |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

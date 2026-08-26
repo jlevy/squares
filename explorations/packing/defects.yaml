@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 337
+count: 338
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8664,3 +8664,32 @@ defects:
   recurrence_of: D-107
   bead: think-mu50
   recorded_in: SYNOPSIS.md
+- id: D-338
+  title: Raw quench traces expanded into thousands of timeline controls
+  date: '2026-08-26'
+  layer: tooling
+  class: performance
+  direction: neutral
+  detected_by: inspection
+  latent_for: one live browser pass before the interactive lab was committed
+  severity: medium
+  status: fixed
+  what: >-
+    The first free-quench timeline created one DOM button for every retained solver
+    event. A four-sweep n=5 browser run produced 2,651 controls even though only a small
+    neighborhood could be visible, making the accessibility tree and playback sequence
+    far larger than the visual task required.
+  consequence: >-
+    Ordinary runs became noisy and expensive to inspect, and larger traces could make
+    the browser or accessibility tooling unresponsive without adding scientific
+    evidence.
+  fix: >-
+    Retained every event in the canonical trace and slider while rendering a moving
+    41-event window. Autoplay now uses a bounded ordinary sample that always preserves
+    setup, accepted rotations, cell changes, and the terminal stop.
+  regression: >-
+    test_motion_lab_interactive exercises the pure playback-index and timeline-window
+    reducers on a 2,651-event trace; browser QA confirmed a 769-event run renders only
+    42 list nodes while every event remains reachable.
+  bead: think-0l1y
+  recorded_in: src/sqpack/motion_lab/assets/free-quench.js

@@ -8,6 +8,8 @@ import threading
 from pathlib import Path
 from typing import cast
 
+import pytest
+
 from cases.campaign_smoke.basin_events import deterministic_start as campaign_start
 from devtools.serve_packing_motion_lab import (
     LOOPBACK_HOST,
@@ -21,8 +23,12 @@ from sqpack.motion_lab.scenarios.free_quench import (
     deterministic_editor_start,
     free_quench_scenario,
 )
+from sqpack.verify import corners_from_poses, float_sign, verify_packing
 
 TEST_TIME_BUDGET_SECONDS = 10.0
+ROOT = Path(__file__).parents[1]
+KNOWN_REQUEST = ROOT / "atlas/rendering/free-quench-n1-request.json"
+KNOWN_TRACE = ROOT / "atlas/rendering/free-quench-n1-trace.json"
 
 
 def _request() -> QuenchRequest:
@@ -62,6 +68,24 @@ def test_trace_save_and_replay_are_byte_deterministic(tmp_path: Path) -> None:
     assert canonical_json(first) == canonical_json(second)
     assert output.read_text(encoding="utf-8") == canonical_json(first)
     assert replayed == first
+
+
+def test_retained_trace_replays_and_its_endpoint_passes_the_independent_oracle() -> None:
+    request = json.loads(KNOWN_REQUEST.read_text(encoding="utf-8"))
+    trace = build_quench_trace(request)
+    retained = KNOWN_TRACE.read_text(encoding="utf-8")
+
+    assert retained == canonical_json(trace)
+    assert replay_trace(KNOWN_TRACE) == trace
+    assert len(trace.events) == 144
+    assert trace.result.side == pytest.approx(1.138209210409642, abs=1e-15)
+    assert trace.result.theta == pytest.approx((0.15000000000000052,), abs=1e-15)
+    report = verify_packing(
+        corners_from_poses(trace.result.x, trace.result.y, trace.result.theta),
+        trace.result.side,
+        float_sign(1e-9),
+    )
+    assert report.valid, report
 
 
 def test_http_service_binds_loopback_and_returns_typed_success_and_failure() -> None:

@@ -24,25 +24,114 @@ translucent tempered-yellow contact layer describes endpoint B and is revealed o
 the motion arrives there.
 Reduced-motion and non-CSS viewers show endpoint B directly.
 
-### `n = 5`: interactive motion lab
+### General Motion Lab: setup and free quench
+
+The served Motion Lab turns the numerical quench into an inspectable local experiment.
+Choose a square count, starting container side, and seed; drag the resulting unit
+squares; use setup-only snapping to assemble temporary chunks; and then release those
+chunks into an unconstrained quench.
+
+From the exploration root, start the loopback service and open the lab in the default
+browser:
+
+```bash
+uv run --frozen --all-extras --group dev python \
+  -m devtools.serve_packing_motion_lab serve --open
+```
+
+The service prints its URL, normally `http://127.0.0.1:8765/`. It binds only to IPv4
+loopback and makes no remote request.
+The exact `n = 5` scenario is also available from the Scenario control and at
+`http://127.0.0.1:8765/exact-n5`.
+
+#### Setup and run workflow
+
+1. Set **Squares**, **Starting side**, and **Seed**, then choose **New pose**.
+   **Randomize all** changes all three fields while retaining the resulting seed for
+   replay.
+2. Drag one square to translate its current temporary chunk.
+   Release it near a square edge, square vertex, or container wall to apply the nearest
+   valid snap. Shift-drag rotates the entire chunk about its center; the rotation buttons
+   and `Q` / `E` keys provide the same operation.
+3. Read the Geometry row before running.
+   Red dashed boundaries identify overlaps or squares outside the container; the editor
+   reports these states instead of silently repairing them.
+4. Choose **Release + run quench**. This discards every temporary group and sends only
+   the container side, square centers, angles, solver choice, and numerical budgets.
+   Setup snapping is a placement aid, not an optimizer constraint.
+5. Step, scrub, or play the returned trace.
+   Download saves the exact canonical response bytes, including the request needed for
+   replay.
+
+The timeline uses one visual grammar across numerical runs:
+
+| Phase | Geometry | Meaning |
+| --- | --- | --- |
+| Setup released | Ordinary solid squares | The editor pose after all temporary-group metadata was discarded |
+| Fixed-angle LP | Blue solid boundaries | Translation and container-side optimization with angles fixed |
+| Angular probe | Violet dashed ghosts over the last accepted solid pose | A tested angle state; it has not replaced the accepted packing |
+| Rejected probe | Red short-dashed ghosts | A tested angle state that the solver rejected |
+| Accepted rotation | Green solid boundaries | A probe promoted to the accepted numerical state |
+| Cell change | Amber label and timeline mark | The active separating-axis assignment changed |
+| Stop | Neutral solid state | The retained terminal state and its stopping reason |
+
+Smooth motion between retained endpoints is illustrative.
+The numbered endpoints and downloaded trace are the numerical record.
+A large run may retain thousands of low-level events, so the visible timeline is a
+41-event moving window and autoplay targets a 160-event sample while preserving setup,
+accepted rotations, cell changes, and stop events.
+The slider, Previous and Next controls, downloaded trace, and replay command still reach
+every retained event.
+
+#### Service and evidence boundaries
+
+Phase 1 accepts at most 20 squares, 1,000 sweeps, and a 300-second numerical budget.
+The request parser rejects unknown fields, duplicate JSON keys, editor groups, contact
+locks, and other undeclared constraints.
+It returns typed JSON errors rather than treating malformed input as a numerical result.
+The browser and command-line paths call the same request validator and trace adapter.
+
+An editor start may overlap or leave the container, and a quench may stop at a sweep or
+time budget without converging.
+Those are visible outcomes, not successful packings.
+Any promising endpoint is only a numerical candidate until it is exported, independently
+checked, and promoted through the campaign’s ordinary evidence rules.
+Persistent rigid chunks, contact locks, hinges, and soft magnetic penalties are not
+implemented; the active plan keeps them behind a separate Phase 2 semantic decision.
+
+The shared implementation lives in these repository-owned components:
+
+| Component | Owner |
+| --- | --- |
+| Scenario, frame, request, event, and trace records | `src/sqpack/motion_lab/contracts.py` |
+| Temporary-group and snap geometry | `src/sqpack/motion_lab/snap.py` |
+| Read-only quench observation and phase projection | `src/sqpack/motion_lab/trace.py` |
+| Shared palette, compact theme, and browser reducers | `src/sqpack/motion_lab/assets/` |
+| Live HTML profile and loopback adapter | `devtools/render_general_motion_lab.py` and `devtools/serve_packing_motion_lab.py` |
+
+The
+[generalized Motion Lab plan](../../docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md)
+owns the contracts, evidence grammar, Phase 1 acceptance criteria, and explicit Phase 2
+gate.
+
+### `n = 5`: exact interactive scenario
 
 [Open the self-contained motion lab](n5-motion-lab.html).
 
-The HTML+SVG spike exposes the six certified `(R4, R5) × (A, interior, B)` paths from
-experiment 042 and the displayed `+W` direction obstructed by experiment 036. It has a
-parameter scrubber, one-pass playback for certified paths, source-declared contact-graph
-states, center trails, first-order predictors, and owner-branch obstruction readouts.
+The self-contained HTML+SVG artifact exposes the six certified
+`(R4, R5) × (A, interior, B)` paths from experiment 042 and the displayed `+W` direction
+obstructed by experiment 036. It has a parameter scrubber, one-pass playback for
+certified paths, source-declared contact-graph states, center trails, first-order
+predictors, and owner-branch obstruction readouts.
 
 This file is an interactive research artifact, not a safe publication SVG. Dashed
 geometry is a tangent predictor; in the `+W` view it is explicitly not a feasible path.
 The document SVG renderer and its script-free safety profile remain unchanged.
 See the
 [motion-lab spike record](../../docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md)
-for the data contract, evidence boundary, tests, and known limits.
-The
-[generalized Motion Lab plan](../../docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md)
-defines the shared scenario shell, setup-only snapping, numerical quench trace, and
-compact visual system for the next implementation.
+for its analytic data contract, evidence boundary, tests, and known limits.
+The shared shell retains this artifact as the offline compatibility control; it still
+has `connect-src 'none'` and does not require the loopback service.
 
 ### `n = 10`: numerical comparison
 
@@ -160,6 +249,38 @@ uv run --frozen --all-extras --group dev python \
   -m devtools.render_packing_motion_lab \
   --output atlas/rendering/n5-motion-lab.html --check
 ```
+
+Run a saved numerical request, then replay the canonical trace byte for byte:
+
+```bash
+uv run --frozen --all-extras --group dev python \
+  -m devtools.serve_packing_motion_lab run \
+  --request request.json --output trace.json
+
+uv run --frozen --all-extras --group dev python \
+  -m devtools.serve_packing_motion_lab replay trace.json
+```
+
+The retained small known answer exercises setup release, fixed-angle LP states, angular
+probes, one accepted rotation, and a sweep-limit stop:
+
+```bash
+uv run --frozen --all-extras --group dev python \
+  -m devtools.serve_packing_motion_lab replay \
+  atlas/rendering/free-quench-n1-trace.json
+```
+
+[`free-quench-n1-request.json`](free-quench-n1-request.json) is the input;
+[`free-quench-n1-trace.json`](free-quench-n1-trace.json) is the 144-event canonical
+output. The focused test regenerates the trace, compares its bytes, asserts its declared
+endpoint, and checks that endpoint through the independent separating-axis verifier.
+This fixture is a transport and presentation control, not a new packing result.
+
+Byte-identical replay requires the same locked numerical environment and a request that
+stops deterministically, as the retained sweep-limited fixture does.
+An arbitrary request that reaches its wall-clock budget can legitimately replay to a
+different cutoff on a materially different machine; the strict replay command reports
+that drift instead of hiding it.
 
 Invalid source selection, evidence, geometry, comments, references, or motion exits
 nonzero before the atomic output boundary replaces a destination.
