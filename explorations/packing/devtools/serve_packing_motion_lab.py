@@ -11,14 +11,23 @@ from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Never
+from urllib.parse import parse_qs, urlsplit
 
 from strif import atomic_output_file
 
+from devtools.render_general_motion_lab import (
+    DEFAULT_SEED,
+    DEFAULT_SIDE,
+    DEFAULT_SQUARE_COUNT,
+    render_general_motion_lab,
+)
+from devtools.render_packing_motion_lab import render_motion_lab
 from sqpack.motion_lab.contracts import (
     QuenchTrace,
     canonical_json,
     quench_request_from_record,
 )
+from sqpack.motion_lab.scenarios.free_quench import free_quench_scenario
 from sqpack.motion_lab.trace import trace_quench_bracket
 
 LOOPBACK_HOST = "127.0.0.1"
@@ -26,6 +35,15 @@ DEFAULT_PORT = 8765
 MAX_REQUEST_BYTES = 1_000_000
 ERROR_CONTRACT = "packing.squares:MotionLabError/v1"
 STATUS_CONTRACT = "packing.squares:MotionLabService/v1"
+LIVE_CONTENT_SECURITY_POLICY = (
+    "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; "
+    "img-src data:; connect-src 'self'; object-src 'none'; base-uri 'none'; "
+    "form-action 'none'; frame-ancestors 'none'"
+)
+EXACT_CONTENT_SECURITY_POLICY = LIVE_CONTENT_SECURITY_POLICY.replace(
+    "connect-src 'self'", "connect-src 'none'"
+)
+DATA_CONTENT_SECURITY_POLICY = "default-src 'none'; frame-ancestors 'none'"
 
 
 class HttpInputError(ValueError):
@@ -99,6 +117,25 @@ def _error_record(code: str, message: str) -> dict[str, object]:
     }
 
 
+def _free_scenario_parameters(query: str) -> tuple[int, int, float]:
+    parameters = parse_qs(query, keep_blank_values=True)
+    unknown = sorted(set(parameters) - {"n", "seed", "side"})
+    if unknown:
+        raise ValueError(f"unknown scenario query field(s): {', '.join(unknown)}")
+    for name, values in parameters.items():
+        if len(values) != 1:
+            raise ValueError(f"scenario query field {name!r} must occur exactly once")
+        if not values[0]:
+            raise ValueError(f"scenario query field {name!r} must not be empty")
+    try:
+        n = int(parameters.get("n", [str(DEFAULT_SQUARE_COUNT)])[0])
+        seed = int(parameters.get("seed", [str(DEFAULT_SEED)])[0])
+        side = float(parameters.get("side", [str(DEFAULT_SIDE)])[0])
+    except ValueError as error:
+        raise ValueError("n and seed must be integers; side must be a number") from error
+    return n, seed, side
+
+
 class MotionLabRequestHandler(BaseHTTPRequestHandler):
     """Same-origin HTTP adapter around the typed request and trace operations."""
 
@@ -110,15 +147,14 @@ class MotionLabRequestHandler(BaseHTTPRequestHandler):
         body: bytes,
         *,
         content_type: str,
+        content_security_policy: str = DATA_CONTENT_SECURITY_POLICY,
     ) -> None:
         self.send_response(status)
         self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
         self.send_header("X-Content-Type-Options", "nosniff")
-        self.send_header(
-            "Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'"
-        )
+        self.send_header("Content-Security-Policy", content_security_policy)
         self.end_headers()
         self.wfile.write(body)
 
@@ -166,7 +202,8 @@ class MotionLabRequestHandler(BaseHTTPRequestHandler):
         return _load_json_bytes(self.rfile.read(length))
 
     def do_GET(self) -> None:
-        if self.path == "/api/status":
+        target = urlsplit(self.path)
+        if target.path == "/api/status" and not target.query:
             self._send_json(
                 HTTPStatus.OK,
                 {
@@ -174,18 +211,41 @@ class MotionLabRequestHandler(BaseHTTPRequestHandler):
                     "schema_version": 1,
                     "status": "ready",
                     "quench_endpoint": "/api/quench",
+                    "scenario_endpoint": "/api/scenario/free-quench",
                     "network_scope": "loopback-only",
                 },
             )
             return
-        if self.path == "/":
-            body = (
-                b'<!doctype html><html lang="en"><meta charset="utf-8">'
-                b"<title>Square-packing Motion Lab service</title>"
-                b"<body><h1>Square-packing Motion Lab service</h1>"
-                b"<p>The numerical API is ready at <code>/api/quench</code>.</p></body></html>"
+        try:
+            if target.path == "/":
+                n, seed, side = _free_scenario_parameters(target.query)
+                self._send_bytes(
+                    HTTPStatus.OK,
+                    render_general_motion_lab(n=n, seed=seed, side=side).encode(),
+                    content_type="text/html; charset=utf-8",
+                    content_security_policy=LIVE_CONTENT_SECURITY_POLICY,
+                )
+                return
+            if target.path == "/exact-n5" and not target.query:
+                self._send_bytes(
+                    HTTPStatus.OK,
+                    render_motion_lab().encode(),
+                    content_type="text/html; charset=utf-8",
+                    content_security_policy=EXACT_CONTENT_SECURITY_POLICY,
+                )
+                return
+            if target.path == "/api/scenario/free-quench":
+                n, seed, side = _free_scenario_parameters(target.query)
+                self._send_json(
+                    HTTPStatus.OK,
+                    free_quench_scenario(n=n, seed=seed, side=side).to_record(),
+                )
+                return
+        except (TypeError, ValueError) as error:
+            self._send_json(
+                HTTPStatus.BAD_REQUEST,
+                _error_record("invalid-scenario", str(error)),
             )
-            self._send_bytes(HTTPStatus.OK, body, content_type="text/html; charset=utf-8")
             return
         self._send_json(
             HTTPStatus.NOT_FOUND,

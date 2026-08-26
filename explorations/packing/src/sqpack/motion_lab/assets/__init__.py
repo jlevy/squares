@@ -10,7 +10,15 @@ from sqpack.render.style import (
     SQUARE_FILL_PALETTE,
 )
 
-_ASSET_NAMES = frozenset({"exact-n5-model.js", "motion-lab.css", "motion-lab.js"})
+_ASSET_NAMES = frozenset(
+    {
+        "exact-n5-model.js",
+        "free-quench-model.js",
+        "free-quench.js",
+        "motion-lab.css",
+        "motion-lab.js",
+    }
+)
 _PACKING_TOKEN_MARKER = "  /* PACKING_RENDER_TOKENS */"
 
 

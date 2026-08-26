@@ -410,29 +410,29 @@ implementation work.
 | `think-no7o` | Shared shell, compact theme, and exact `n = 5` migration | `think-9yz7` | Complete |
 | `think-5t0r` | Setup-only snap geometry and editor-group reducer | `think-9yz7` | Complete |
 | `think-la6m` | Loopback free-quench service and deterministic replay | `think-9yz7`, `think-2f8m` | Complete |
-| `think-0l1y` | Free-quench editor and phase-aware trace playback | `think-no7o`, `think-5t0r`, `think-la6m` | Ready |
-| `think-kcdq` | Known-answer, browser, accessibility, documentation, and full validation | `think-0l1y` | Blocked |
+| `think-0l1y` | Free-quench editor and phase-aware trace playback | `think-no7o`, `think-5t0r`, `think-la6m` | Complete |
+| `think-kcdq` | Known-answer, browser, accessibility, documentation, and full validation | `think-0l1y` | Ready |
 | `think-mn9j` | Phase 2 semantic gate for persistent contacts and rigid groups | `think-kcdq`; paused | Paused |
 
 ### Phase 1: Shared Shell and Setup-Only Snap-and-Quench
 
-- [ ] Extract shared pose, scenario, timeline, stage, controls, evidence, and theme code
+- [x] Extract shared pose, scenario, timeline, stage, controls, evidence, and theme code
   from the current spike without changing its mathematical claims.
-- [ ] Generate the stable exact `n = 5` artifact through the shared shell and retain its
+- [x] Generate the stable exact `n = 5` artifact through the shared shell and retain its
   analytic formula and Python/JavaScript parity controls.
-- [ ] Add the free-quench scenario with seeded random starts and direct pose editing.
-- [ ] Implement deterministic setup-only snapping, temporary editor groups, group
+- [x] Add the free-quench scenario with seeded random starts and direct pose editing.
+- [x] Implement deterministic setup-only snapping, temporary editor groups, group
   translation, Shift-drag/handle rotation, keyboard equivalents, reset, and a snapping
   toggle.
-- [ ] Release all group metadata at run start and reject constraint fields at the Phase
+- [x] Release all group metadata at run start and reject constraint fields at the Phase
   1 service boundary.
-- [ ] Add zero-behavior-change trace observation to the existing quench and serialize
+- [x] Add zero-behavior-change trace observation to the existing quench and serialize
   typed phase events.
-- [ ] Render LP, angular-search, cell-change, accepted, rejected, and stop events with
+- [x] Render LP, angular-search, cell-change, accepted, rejected, and stop events with
   the phase grammar in this plan.
-- [ ] Add the compact shared visual theme using the existing packing palette and the
+- [x] Add the compact shared visual theme using the existing packing palette and the
   documented `tbd web` token subset.
-- [ ] Save or download a deterministic run request and trace so another agent can replay
+- [x] Save or download a deterministic run request and trace so another agent can replay
   a reported behavior without local memory.
 - [ ] Document the serve, regenerate, replay, and validation commands in the rendering
   README.
