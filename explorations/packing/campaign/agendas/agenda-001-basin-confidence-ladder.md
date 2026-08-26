@@ -252,9 +252,9 @@ agenda:
     bead: think-1s0h
     depends_on: [BC-003, BC-009]
     next_evidence: >-
-      test R4, R5, -W, mixed-angle realization, and stationary continuation beyond the
-      twelve exp-039 paths without inferring whole-polytope terminality from their
-      positive first-order stresses
+      test -W, mixed-angle realization, and stationary continuation beyond the twelve
+      exp-039 and six exp-042 paths without inferring whole-polytope terminality from
+      their positive first-order stresses
     parallel_group: identity
     note: >-
       This is the first genuine basin-structure experiment in the ladder. Exp-033
@@ -295,12 +295,14 @@ agenda:
       gaps; its rotating-path checker is a draft resume point, not an R4/R5 result. The
       first successor, exp-041, rejects its complete-zero-inventory criterion on the
       exact endpoint-only axis `0-3:owner3:a-`; the root does not refute path feasibility.
-      Active session-015 must preregister the corrected endpoint inventory, exact
-      mutation reasons, production tied-row omission, and operational partial-result
-      separation before the checker changes again. Exp-042 now freezes that criterion
-      and remains in progress. The `-W`,
-      mixed-angle, whole-stationary-component, and unequal-side-clearance questions
-      remain later bounded slices. The repaired D-199/D-203 solver path no longer orders
+      Exp-042 accepts the corrected endpoint inventory and operationally separate
+      feasibility and stress determinations from engine commit `2980fdc`: all six R4/R5
+      cases and twenty semantic controls pass retained generation and replay. This is
+      pathwise first-order evidence, not an exhaustive release-class result or
+      stationary connection. Exp-043 freezes the next bounded pure `-W` second-order
+      criterion before its checker exists. Mixed-angle, whole-stationary-component, and
+      unequal-side-clearance questions remain later bounded slices. The repaired
+      D-199/D-203 solver path no longer orders
       this scientific cell, and D-239 remains a separate W7 robustness line.
     artifacts:
     - cases/n5/equal_side_face.py
@@ -325,6 +327,8 @@ agenda:
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-041-h-023-n5-rotating-release-proof-perimeter.md
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md
+    - campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

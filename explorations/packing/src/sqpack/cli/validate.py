@@ -466,6 +466,13 @@ def _small_n(context: Context) -> str:
             "--replay",
             str(RESULTS / "exp-039-h-023-n5-fixed-angle-polytope.json"),
         ),
+        (
+            sys.executable,
+            "-m",
+            "cases.n5.rotating_release_paths",
+            "--replay",
+            str(RESULTS / "exp-042-h-023-n5-endpoint-aware-rotating-paths.json"),
+        ),
     )
     return _commands(context, commands)
 

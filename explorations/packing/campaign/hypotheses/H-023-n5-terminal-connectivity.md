@@ -57,8 +57,15 @@ hypothesis:
     `0-3:owner3:a-` is zero only at the positive path endpoint. That exact root does not
     harm the separately certified pair separator or refute path feasibility. A successor
     must distinguish base, open-interval, and positive-endpoint zero inventories and
-    close three remaining control and partial-result guards. Exp-042 preregisters that
-    endpoint-aware criterion; it has no result yet.
+    close three remaining control and partial-result guards. Exp-042 meets that
+    endpoint-aware criterion: all six R4/R5 paths have exact universal feasibility and
+    positive first-order stress certificates, retained generation and replay agree, and
+    all twenty semantic controls reject. This is six-path nonlinear realization, not an
+    A-to-B stationary connection or exhaustive realization. The `-W`, mixed-direction,
+    whole-component, and unequal-side questions remain open.
+    Exp-043 is the preregistered next slice: it tests only whether the canonical pure
+    -W direction has a branch-exhaustive sign-reversed second-order obstruction at the
+    three registered poses.
 ---
 # H-023 — resolve the first ambiguous census cell
 
@@ -107,10 +114,19 @@ connector. The remaining release classes, mixed-angle realization, deterministic
 selection, the complete stationary component, and unequal-side minimax-clearance bounds
 remain open.
 
-Exp-040 preserves a candidate rational half-angle path and a finite correction list, but
-no retained result JSON or obstruction.
-The active session-015 successor must close that list under a new preregistered round
-before R4 or R5 can be called realized.
+Exp-040 preserves the original candidate and exp-041 records the exact endpoint defect
+in its first correction criterion.
+Exp-042 closes that finite list without changing the six paths: its case-indexed
+endpoint inventory, both exact owner stresses, twenty typed semantic controls, and
+deterministic retained replay pass.
+R4 and R5 therefore have six explicit pathwise realizations at A, the midpoint, and B.
+The result neither exhausts those release classes nor supplies a stationary connector
+between A and B.
+
+Exp-043 now freezes a separate exact test of canonical pure `-W`. Its criterion must
+bind and negate the complete exp-038 vector, exhaust both owner branches and tied rows,
+and avoid falsely obstructing exp-039’s realized R3 path.
+Mixed directions remain out of scope regardless of the pure-direction verdict.
 
 This is the focused control for H-021 and the practical precursor to H-011.
 

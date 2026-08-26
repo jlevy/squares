@@ -16,10 +16,11 @@ experiment:
   subject:
     label: exact fixed-side nonlinear realization of the n = 5 R4 and R5 rays
     engine: n = 5 rotating-release checker 0.3.0
+    engine_commit: 2980fdc
     assurance: verified
     method: exact-algebraic
     host_system: macOS arm64, Apple M1 Pro
-    selftest_passed: false
+    selftest_passed: true
   instance:
     axis: n
     point: 5
@@ -38,6 +39,8 @@ experiment:
     runs_per_condition: 1
     interleaved: false
     operator: openai-codex
+    commit: 2980fdc
+    dirty: false
     entry_point: explorations/packing/cases/n5/rotating_release_paths.py
     command: >-
       timeout 30 uv run --directory explorations/packing --frozen --quiet python -m
@@ -53,24 +56,33 @@ experiment:
       sentinel tied-row control, coupled partial results, replay drift, scope promotion,
       or the phase deadline
     record: campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json
-  lease:
-    expires: '2026-08-26T00:28:09Z'
-    host: spud10.local
   results:
   - shape: determination
     question: >-
       Do all six unchanged R4/R5 paths have exact universal feasibility certificates
       with complete base, open-interval, and positive-endpoint zero-axis inventories?
     role: outcome
-    outcome: no_progress
+    outcome: criterion_met
+    checked_by: >-
+      exact retained generation and replay, case-indexed exhaustion of 240 owner-axis
+      polynomials, independent endpoint-inventory review, and twenty semantic controls
   - shape: determination
     question: >-
       Do both owner branches on all six paths have independently executable exact
       positive first-order stress certificates that cannot erase a feasibility result?
     role: mechanism
-    outcome: no_progress
+    outcome: criterion_met
+    checked_by: >-
+      exact retained generation and replay, independent owner-system and partial-result
+      review, coefficient cancellation on both branches in six cases, and a stress-only
+      mutation that preserved the successful feasibility result
+  effort:
+    timebox: one 30-minute correction, measurement, and independent-review slice
+    wall_seconds: 26.17
+    agent_minutes: 28
+    stopped_by: criterion
   complexity:
-    lines_changed: 0
+    lines_changed: 516
     new_dependencies: []
     new_failure_modes:
     - an endpoint factor can be lost by treating all nonpersistent axes as closed-interval strict
@@ -78,9 +90,10 @@ experiment:
     notes: >-
       Preregistered after exp-041's terminal endpoint result and before any further
       checker edit. The exact path, interval, sources, stresses, and claim boundary remain
-      unchanged.
+      unchanged. The retained checker correction and both measurements ran from clean
+      engine commit 2980fdc.
   verdict:
-    decision: in-progress
+    decision: accepted
     primary_criterion: >-
       accept only if independently executed feasibility and stress determinations both
       meet their exact six-case criteria, the endpoint-aware inventories and root
@@ -89,10 +102,15 @@ experiment:
       control retains successful feasibility, positive controls pass, replay is
       identical, and every forbidden inference is refused
     reason: >-
-      The endpoint-aware successor and its three instrument guards are frozen before the
-      retained checker changes again.
+      All six unchanged paths have exact universal feasibility certificates with the
+      frozen base, open-interval, and endpoint inventories, and both owner branches have
+      exact positive first-order stress certificates. Generation and replay agree, all
+      twenty production-path controls reject with their expected identifiers, and the
+      stress-only control retains feasibility while making the combined verdict
+      unresolved. The result is pathwise only and refuses every broader H-023 claim.
+    commit: 2980fdc
 ---
-# exp-042 — endpoint-aware exact R4/R5 rotating paths
+# exp-042 — accepted endpoint-aware exact R4/R5 rotating paths
 
 Exp-041 found that one nonpersistent owner axis becomes zero exactly at the positive
 endpoint of every frozen path.
@@ -181,6 +199,30 @@ stationarity, terminal or second-order local minimality, maximal component ident
 exhaustive nonlinear R4/R5 realization, `-W` or mixed-direction realization, quench
 selection, basin mass, census completeness, or unequal-side clearance.
 Candidate failure remains distinct from an R4/R5 obstruction.
+
+## Result
+
+The frozen criterion is met.
+Retained generation completed in 12.67 seconds and exact replay completed in 13.50
+seconds. All six `(R4, R5) x (A, midpoint, B)` feasibility certificates and all six
+two-owner stress certificates pass, and all twenty semantic controls reject with their
+preregistered failure identifiers.
+
+Every case has five base zeros, four persistent open-interval zeros, and five positive
+endpoint zeros. The base-only `(1,4)` axis has multiplicity two; the endpoint-only
+`0-3:owner3:a-` axis has multiplicity one and cleared factor
+`(sqrt(2)/2)(u^2+4)^2(u-U)`. The stress-only control keeps feasibility `criterion_met`,
+records `stress.pose_identity`, and leaves the combined determination unresolved.
+
+This certifies six explicit feasible Bouligand tangents with positive pathwise
+first-order no-descent stresses.
+It does not promote any of the refused connection, component, second-order, `-W`,
+mixed-direction, quench, basin, census, or unequal-side claims.
+
+The retained
+[`exp-042-h-023-n5-endpoint-aware-rotating-paths.json`](../results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json)
+contains the case certificates, determinations, controls, refusal set, and replayable
+source receipt.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

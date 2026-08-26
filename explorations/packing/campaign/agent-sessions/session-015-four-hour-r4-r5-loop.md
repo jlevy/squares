@@ -184,7 +184,7 @@ session:
       Correct exp-041's endpoint inventory and finish the three audited control and
       partial-result guards without changing the six candidate paths, then determine
       feasibility and stress independently.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Exp-041 produced a new exact endpoint-only axis and a smaller implementation
@@ -209,7 +209,12 @@ session:
       Terminalize exp-042 unresolved with exact residuals and guard failures; rotate to
       a separately admissible source-bound portfolio cell without inferring an R4/R5
       obstruction.
-    outcome: null
+    outcome: >-
+      Exp-042 meets its frozen endpoint-aware feasibility and positive first-order
+      stress criteria in all six R4/R5 cases. Retained generation and replay agree, all
+      twenty semantic controls reject with exact identifiers, and a stress-only failure
+      retains the successful feasibility result and leaves the combined verdict
+      unresolved.
     evidence:
     - >-
       A 240-polynomial read-only exhaustion found identical zero sets in all six cases:
@@ -221,10 +226,70 @@ session:
       typed mutation-specific failures after a passing baseline, a production tied-row
       omission, and operationally separate feasibility and stress results before further
       checker edits.
+    - >-
+      The checker was committed cleanly at 2980fdc before retained measurement; exact
+      generation passed in 12.67 seconds and replay passed in 13.50 seconds with six
+      feasibility cases, six stress cases, and twenty passing controls.
+    - >-
+      Independent implementation and scope audits accept the production tied-row
+      removal, actual midpoint path mutation, partial-result preservation, exact
+      endpoint inventory, and complete refusal set.
+    stop_reason: >-
+      The preregistered criterion was met before the phase deadline, so the correction
+      slice closes without weakening any guard or promoting the result beyond six
+      explicit paths.
+    next_action: >-
+      Integrate exp-042 replay into the documented exact-model gate, publish the retained
+      record and terminal metadata, then re-screen the remaining -W, mixed-direction,
+      whole-stationarity, and unequal-side cells before opening the next bounded phase.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Preregister and test whether the canonical pure -W direction has the exact
+      sign-reversed second-order obstruction at A, the registered midpoint, and B,
+      without inferring anything about mixed directions or whole-component stationarity.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Exp-042 met the six-path R4/R5 criterion and closed that finite correction line;
+      repository re-screening selects pure -W as the narrowest still-open exact
+      nonlinear-realization cell that fits one cycle.
+    budget_minutes: 30
+    started_at: '2026-08-25T17:29:27-07:00'
+    deadline_at: '2026-08-25T17:59:27-07:00'
+    expected_output: >-
+      A frozen exp-043 criterion and either exact branch-exhaustive pure -W obstruction,
+      an exact compatible branch that misses the sign-symmetry hypothesis, or a finite
+      unresolved branch list with replay and anti-overobstruction controls.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen --all-extras --group dev
+      packing-validate --only "small-n exact models and local geometry" --only
+      "soft-schema validation" --only "campaign record" --jobs 2 --inner-jobs 1
+    kill_condition: >-
+      Stop at the twenty-minute checkpoint without a frozen criterion, on incomplete
+      owner-branch or tied-row exhaustion, if a known realized direction is falsely
+      obstructed, on source drift, scope promotion, retained replay drift, or at the
+      thirty-minute deadline.
+    fallback: >-
+      Terminalize the exact branch, sign, or source blocker without calling candidate
+      failure an obstruction; rotate to a separately admissible source-bound cell and
+      leave mixed directions, connectivity, and component identity open.
+    outcome: null
+    evidence:
+    - >-
+      Exp-042 accepted six R4/R5 paths and explicitly refused pure -W, mixed-direction,
+      whole-component, connection, second-order, and unequal-side claims.
+    - >-
+      Independent portfolio review selected a six-case sign-reversed exp-036 test with
+      exact owner branches, a realized-ray anti-overobstruction control, typed mutations,
+      and a strict refusal boundary as the smallest next question.
     stop_reason: null
     next_action: >-
-      Commit and push exp-042's validated preregistration, then assign disjoint checker
-      implementation and post-change audits against that frozen criterion.
+      Treat exp-043 in this checkpoint as frozen; implement only
+      cases/n5/minus_w_obstruction.py, then review and measure without changing the
+      criterion.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -564,6 +629,84 @@ session:
     elapsed_quality: unavailable
     next_action: Require a passing baseline and exact failure id for every exp-042 mutation.
     phase: 3
+  - task: Implement exp-042's frozen endpoint-aware proof and semantic controls.
+    operator: /root/r4_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Corrected the production tied-row removal, actual midpoint-path mutation, typed
+      stress failures, partial-result serialization, and complete refusal set in the
+      single authorized checker module.
+    evidence:
+    - Clean engine commit 2980fdc contains the reviewed checker before retained measurement.
+    files:
+    - cases/n5/rotating_release_paths.py
+    checks:
+    - Temporary generation and replay passed six cases and twenty controls.
+    - Ruff and BasedPyright passed with no diagnostics.
+    uncertainty: The retained target still required coordinator execution from the clean commit.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Run the retained target only after independent semantic and scope acceptance.
+    phase: 4
+  - task: Independently audit exp-042's implementation and refusal boundary.
+    operator: /root/r5_derivation and /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Both audits accepted the production-path controls, operationally separate
+      determinations, endpoint inventory, and complete refusal set after initial blockers
+      were repaired.
+    evidence:
+    - The semantic audit verified baseline-first execution and all twenty exact failure identifiers.
+    - The scope audit verified the eleven forbidden claims and no R4/R5 obstruction inference.
+    files: []
+    checks:
+    - Independent read-only post-change audits; neither ran the retained target.
+    uncertainty: None within the frozen six-path claim.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain generation and replay from clean engine commit 2980fdc.
+    phase: 4
+  - task: Re-screen the H-023 frontier and derive the canonical pure -W coefficients.
+    operator: /root/r5_derivation and /root/r4_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Selected pure -W as the smallest remaining exact cell and independently derived
+      sign-even owner-4, owner-3, and cusp coefficients at all three source strata.
+    evidence:
+    - >-
+      The derivation gives sqrt(2)/8 owner-4 excess, 1/4 owner-3 obstruction, and
+      sqrt(2)/2-1/4 cusp margin for both common-angle signs.
+    files: []
+    checks:
+    - Read-only exact source and algebra review; no retained exp-043 target executed.
+    uncertainty: The derivation is not a result until the preregistered production checker passes.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Implement the reviewed exp-043 criterion without changing it.
+    phase: 5
+  - task: Audit exp-043's preregistration for soundness and portable resumption.
+    operator: /root/r5_derivation and /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      The audits forced universal correction elimination, independent outcome and
+      mechanism dispositions, production mutations, a realized-curve oracle, explicit
+      invalid routing, direct fresh-agent criterion linkage, and the midpoint-to-interior
+      source mapping before implementation.
+    evidence:
+    - The portability audit accepts the corrected repository-only handoff.
+    - The final soundness re-audit is required before this checkpoint is published.
+    files: []
+    checks:
+    - Read-only criterion and fresh-checkout audits; no target execution.
+    uncertainty: None before implementation; both final preregistration audits accept.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Publish only after the final preregistration audit accepts.
+    phase: 5
   outputs:
   - campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md
   - campaign/agent-sessions/README.md
@@ -574,6 +717,8 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-040-h-023-n5-rotating-release-paths.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-041-h-023-n5-rotating-release-proof-perimeter.md
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md
+  - campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md
   - cases/n5/rotating_release_paths.py
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
@@ -581,7 +726,7 @@ session:
   - >-
     softschema validate campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md
     passed.
-  - packing-ledger check passed with 15 sessions and 39 retained rounds.
+  - packing-ledger check passed with 15 sessions and 43 retained rounds.
   - python -m devtools.check_synopsis passed.
   - >-
     packing-validate --fast --jobs 2 --inner-jobs 1 passed all 15 selected steps and
@@ -591,12 +736,20 @@ session:
   - exp-041 validates as round 41 after preregistration at e26fae9.
   - ruff check passes for cases/n5/rotating_release_paths.py.
   - basedpyright reports zero errors and zero warnings for the draft checker.
+  - >-
+    Exp-042 retained generation and replay pass from clean engine commit 2980fdc with
+    six feasibility cases, six stress cases, and twenty semantic controls.
+  - >-
+    The focused small-n exact, soft-schema, and campaign-record gate passes all three
+    selected steps in 26.23 wall-seconds and now replays exp-042 by default.
+  - Exp-043 validates as round 43 before its checker exists.
+  - Independent soundness and portability audits accept exp-043's frozen criterion and handoff.
   stop_reason: null
   next_action: >-
-    In the active correctness cycle for BC-010 under think-1s0h, commit and push the
-    validated exp-042 criterion before further checker edits, then implement and
-    independently audit it; close by 17:28:09-07:00 with reviewed evidence or a smaller
-    finite list, and do not start basin-frequency work.
+    In the active insight cycle for BC-010 under think-1s0h, treat exp-043 in this
+    checkpoint as frozen and implement only cases/n5/minus_w_obstruction.py; close by
+    17:59:27-07:00 with reviewed evidence or a finite exact blocker list, and do not
+    start basin-frequency work.
 ---
 # Session 015 — Four-Hour R4/R5 Research Loop
 
@@ -609,9 +762,9 @@ native goals, and scheduled wakeups are replaceable controllers.
 ### Checkout identity
 
 The live control plane is on remote branch
-`origin/codex/packing-4h-research-loop-2026-08-25`; the latest durable preregistration
-checkpoint at this handoff is `e26fae9`. A fresh clone must fetch and switch to that
-branch before following this section:
+`origin/codex/packing-4h-research-loop-2026-08-25`; the latest clean engine checkpoint
+at this handoff is `2980fdc`. A fresh clone must fetch and switch to that branch before
+following this section:
 
 ```shell
 git fetch origin codex/packing-4h-research-loop-2026-08-25
@@ -637,7 +790,10 @@ An agent joining with only this checkout should read, in order:
 4. [`agenda-001`](../agendas/agenda-001-basin-confidence-ladder.md) at `BC-010`,
    [`H-023`](../hypotheses/H-023-n5-terminal-connectivity.md), and this session’s active
    phase.
-5. The owning bead, `think-1s0h`, for dependency state rather than scientific verdicts.
+5. The frozen
+   [`exp-043` criterion](../series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md)
+   for the exact source, outcome, control, disposition, and refusal boundary.
+6. The owning bead, `think-1s0h`, for dependency state rather than scientific verdicts.
 
 From the repository root, verify the handoff before writing:
 
@@ -653,9 +809,9 @@ uv run --directory explorations/packing --frozen packing-campaign status
 ```
 
 Continue only the active phase.
-This handoff is in wall-clock cycle slot 2 and workflow phase 3; an early
-evidence-checkpoint switch accounts for the different numbers.
-Before writing, compare the current time with the phase deadline `17:06:30-07:00`,
+This handoff is in wall-clock cycle slot 3 and workflow phase 5; early
+evidence-checkpoint switches account for the different numbers.
+Before writing, compare the current time with the phase deadline `17:59:27-07:00`,
 finalization start `19:38:26-07:00`, and session deadline `20:08:26-07:00` using the
 four-state resume table in the
 [agent-session runbook](README.md#starting-a-portable-four-hour-session).
@@ -679,9 +835,9 @@ checkpoint per slice, and starts finalization at the recorded absolute time.
 
 Run the active phase’s `validation_command`, then use the generic
 [portable checkpoint sequence](README.md#starting-a-portable-four-hour-session).
-For this phase, validate exp-041 and the session explicitly, render and check the
-ledger, run `devtools.check_synopsis`, inspect the diff and status, and stage only
-reviewed packing files.
+For this phase, validate exp-042, exp-043 when it exists, and the session explicitly;
+render and check the ledger, run `devtools.check_synopsis`, inspect the diff and status,
+and stage only reviewed packing files.
 After pushing, update the checkpoint hash above, add the retained outcome and exact next
 action to `think-1s0h`, and run `tbd sync`.
 

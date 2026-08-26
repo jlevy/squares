@@ -45,16 +45,17 @@ prove all the machinery works end to end and establish every baseline metric, be
 strategy is tested.
 
 The record has outgrown that opening description.
-The current record contains experiments `exp-001` through `exp-042`, including search
+The current record contains experiments `exp-001` through `exp-043`, including search
 baselines, exact proof determinations, event-contract controls, and the H-023 sequence
 through the complete first-order inventory in `exp-038` and fixed-angle polytope paths
 in `exp-039`. Exp-040 retains an unresolved rotating-path checker and its finite
 independent-review blockers.
 Exp-041 rejects a stricter proof-perimeter criterion on an exact endpoint-only zero axis
 while retaining the candidate paths and path-feasibility question.
-Neither is an accepted R4/R5 result.
-Exp-042 is the in-progress endpoint-aware successor; its criterion is frozen but it has
-no result yet. Those records do not imply that full connectivity has been established.
+Exp-042 is the accepted endpoint-aware successor: it certifies six explicit R4/R5 paths
+and positive pathwise first-order stresses with twenty semantic controls and retained
+replay. Exp-043 freezes the next exact pure `-W` second-order test before its checker
+exists. Those records do not imply that full connectivity has been established.
 Those result shapes are not pooled or compared merely because they share `series-000`.
 Each experiment’s `subject`, method, regime, and provenance govern what comparison is
 legal; the frontmatter `instrument` records the series’ opening search instrument, not
