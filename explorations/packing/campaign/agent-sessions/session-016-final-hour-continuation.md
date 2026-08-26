@@ -72,7 +72,7 @@ session:
     objective: >-
       Reconcile session 016, the synopsis, ledger, bead, validation receipts, commits,
       and exact successor action into one clean pushed terminal checkpoint.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The W7 design slice closed with independent repository-only acceptance at its
@@ -92,7 +92,10 @@ session:
     fallback: >-
       Preserve the last validated commit, exact failing command and output, terminal
       session state, and one repair action; do not weaken a gate or resume research.
-    outcome: null
+    outcome: >-
+      Finalization reconciled the session, synopsis, generated ledger, owning bead, and
+      branch; the full thirty-two-step gate passed, and no target, new experiment, or
+      implementation artifact opened.
     evidence:
     - >-
       Checkpoint 027349b is clean and pushed; independent memoryless review accepts the
@@ -101,12 +104,14 @@ session:
       The full packing-validate gate passes all thirty-two steps in 437.71 wall-seconds,
       including 119 behavioral tests, 62 negative controls, exact-model replays, Rust
       checks, provenance, schemas, campaign records, and synopsis reconciliation.
-    stop_reason: null
+    stop_reason: >-
+      The declared finalization output completed within the fixed 20:08:08 boundary and
+      no kill condition fired.
     next_action: >-
-      Run the full gate, update terminal receipts and repository pointers, commit and
-      push, sync think-1s0h, and stop by 20:08:08-07:00.
+      Under think-1s0h and BC-010, preregister the exact exp-045 successor before any
+      scale-router implementation or target run.
   primary_bead: think-1s0h
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 60
     max_cycles: 2
@@ -124,7 +129,11 @@ session:
       Exact production row jets, normalized nine-row stresses, and the exp-034 positive
       sheet control are accepted. Scale routing, production mutations, and all target
       dispositions remain open; exp-044 is terminal with no result JSON.
-    after: null
+    after: >-
+      The repository freezes an exact A/interior/B by five-scale owner-3 inventory, all
+      twelve pre-certificate mutation seams, thirteen keyed refusals, and exact successor
+      paths. Implementation and every pure -W or H-023 disposition remain open; exp-044
+      is terminal with no target run or result JSON.
   delegations:
   - task: Derive the exact finite owner-3 scale-routing contract from production helpers.
     operator: /root/r4_derivation
@@ -204,10 +213,16 @@ session:
   - >-
     The full packing-validate checkpoint passes all thirty-two steps in 437.71
     wall-seconds; its behavioral suite reports 119 passed in 352.11 seconds.
-  stop_reason: null
+  stop_reason: >-
+    The two-phase continuation goal completed within budget: the memoryless design was
+    accepted at 027349b and the full gate was retained at 3629bf4 without opening
+    exp-045, target implementation, or a result.
   next_action: >-
-    Under think-1s0h and BC-010, finish only the active finalization phase and publish
-    the exact exp-045 preregistration handoff; do not begin implementation or target work.
+    Under think-1s0h and BC-010, preregister exactly
+    campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md;
+    only after independent criterion acceptance implement cases/n5/minus_w_scale.py and
+    tests/test_minus_w_scale.py, then replace the old obstruction draft and add its
+    focused test. Do not run the target first.
 ---
 # Session 016 — Final-Hour Exact-Instrument Continuation
 
@@ -216,11 +231,15 @@ stress, and sheet helpers.
 This explicit continuation preserves the original four-hour deadline without weakening
 that cap or relying on a controller’s private memory.
 
-## Fresh-Agent Resume
+## Fresh-Agent Handoff
+
+This session is terminal and must not be resumed.
+Start a new bounded session for the exact successor action below.
 
 The authoritative branch is `origin/codex/packing-4h-research-loop-2026-08-25`;
-checkpoint `027349b` contains the latest accepted memoryless design, while `8ee367b` is
-the accepted helper-substrate checkpoint.
+checkpoint `3629bf4` contains the full-gate pre-terminal state, `027349b` contains the
+accepted memoryless design, and `8ee367b` is the helper-substrate checkpoint.
+The terminal commit containing this session supersedes all three for handoff state.
 Fetch and switch to that branch, then read:
 
 1. [`session-015`](session-015-four-hour-r4-r5-loop.md) for the complete prior phase and
@@ -250,10 +269,10 @@ tbd show think-1s0h --max-lines 260
 uv run --directory explorations/packing --frozen packing-ledger check
 ```
 
-Before 19:38:08-07:00, continue only the declared scale-and-mutation design.
-At or after 19:38:08-07:00, open or continue only the finalization phase.
-At or after 20:08:08-07:00, stop all substantive work and preserve the terminal records,
-validation receipt, pushed commit, synced bead note, and exact next action.
+The historical work phase ended at 19:38:08-07:00 and finalization ended by
+20:08:08-07:00. Do not reopen either phase.
+Verify the terminal branch and start the exact exp-045 preregistration in a new bounded
+session only when authorized to continue.
 
 Do not run a pure `-W` target, create a result JSON, infer an obstruction, or launch the
 generic numerical campaign.

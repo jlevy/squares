@@ -305,18 +305,17 @@ W7; historical phases are not relabelled after the fact.
 The current line is owned by `BC-010` under `think-1s0h`.
 [Session 015](campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md) is terminal
 after reaching its declared eight-phase cap, and
-[session 016](campaign/agent-sessions/session-016-final-hour-continuation.md) carries
-the last hour and finalization reserve without extending an expired phase or relying on
-controller memory.
-Session 015’s first bounded W6 slice stopped exp-040 unresolved before
-retained measurement after independent review found five finite proof-perimeter gaps in
-the draft R4/R5 checker.
-Exp-041 froze the exact five-blocker correction at `e26fae9`, then rejected its
-complete-zero-inventory criterion on a new endpoint-only axis without refuting path
-feasibility.
-Exp-042 corrects that endpoint inventory and meets the full frozen criterion
-from engine commit `2980fdc`: six R4/R5 paths, both owner stresses, and twenty semantic
-controls pass retained generation and replay.
+[session 016](campaign/agent-sessions/session-016-final-hour-continuation.md) is the
+completed final-hour continuation; it preserved the original deadline without extending
+an expired phase or relying on controller memory.
+Session 015’s first bounded W6 slice stopped exp-040 unresolved before retained
+measurement after independent review found five finite proof-perimeter gaps in the draft
+R4/R5 checker. Exp-041 froze the exact five-blocker correction at `e26fae9`, then
+rejected its complete-zero-inventory criterion on a new endpoint-only axis without
+refuting path feasibility.
+Exp-042 corrects that endpoint inventory and meets the full frozen criterion from engine
+commit `2980fdc`: six R4/R5 paths, both owner stresses, and twenty semantic controls
+pass retained generation and replay.
 The result is pathwise first-order only.
 Exp-043 then stops its pure `-W` test before retained measurement: the draft checker is
 a resume point, but it does not yet derive production rowwise second-order constants,
@@ -327,9 +326,13 @@ correction column retained, and a formula-derived exp-034 sheet control across b
 owner inventories. Focused tests and independent review accept that substrate at
 checkpoint `8ee367b` while refusing branch completeness, scale routing, and obstruction.
 Exp-044 freezes the separate case-level integration but is terminal unresolved with no
-target run or result JSON. Session 016’s latest design checkpoint `f35e60b` owns the
-branch, read order, clocks, validation, exact fifteen-record scale inventory, mutation
-map, and successor artifact paths, so no controller memory is required.
+target run or result JSON. The published checkpoints separate helper substrate
+`8ee367b`, accepted memoryless design `027349b`, and full-gate pre-terminal state
+`3629bf4`. Session 016’s terminal handoff owns the branch, read order, validation, exact
+fifteen-record scale inventory, mutation map, and successor artifact paths, so no
+controller memory is required.
+The sole next action is to preregister the named exp-045 successor under `BC-010` before
+implementation or target work.
 The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
 remain later slices; D-239 is a separate W7 line.
 Do not start basin-frequency work or reinterpret exp-035 through exp-040 as a
