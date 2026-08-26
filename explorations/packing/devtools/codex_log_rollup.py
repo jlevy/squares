@@ -647,9 +647,7 @@ def _parse_session(
         # replayed parent turns do not. Keep only the former so near-zero-time
         # token snapshots cannot inflate the child's model totals.
         owned_turn_ids = {context.turn_id for context in contexts}
-        task_windows = [
-            task for task in task_windows if task.turn_id in owned_turn_ids
-        ]
+        task_windows = [task for task in task_windows if task.turn_id in owned_turn_ids]
     tokens.sort(key=lambda item: item.at_ms)
     streams.sort(key=lambda item: (item.start_ms, item.item_type))
     if not commands:

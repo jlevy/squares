@@ -163,12 +163,14 @@ case or experiment separately.
 | [Review: The Tooling Layout, and What It Would Take to Clean Up](docs/project/reviews/review-2026-08-23-tooling-layout.md) | dated review record | record | superseded | [Packing Development Guide](development.md) |
 | [Review: The Toolkit Docs and the First Experiment Series](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | dated review record | record | superseded | [Experiment ledger](campaign/ledger.md) |
 | [Review: Soundness of the Session-011 Continuation (PR #34)](docs/project/reviews/review-2026-08-25-pr34-soundness-review.md) | dated review record | record | retained | — |
+| [Review: Square Packing Research-Loop Efficiency](docs/project/reviews/review-2026-08-25-research-loop-efficiency.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
 | [Feature: Minimal Packing Toolkit](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | implementation plan | current | transient | — |
 | [Feature: Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | implementation plan | current | transient | — |
 | [Feature: Frontier Assurance and Verification](docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md) | implementation plan | current | transient | — |
+| [Feature: Research-Loop Efficiency Infrastructure](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md) | implementation plan | current | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
 | `frontier/n-*.md` | typed case claim register | definitive | maintained | — |
@@ -308,6 +310,10 @@ after reaching its declared eight-phase cap, and
 [session 016](campaign/agent-sessions/session-016-final-hour-continuation.md) is the
 completed final-hour continuation; it preserved the original deadline without extending
 an expired phase or relying on controller memory.
+[Session 017](campaign/agent-sessions/session-017-research-loop-efficiency.md) is the
+later W5 efficiency record.
+It measures the research and validation loops but does not supersede session 016’s
+scientific handoff or authorize exp-045 implementation.
 Session 015’s first bounded W6 slice stopped exp-040 unresolved before retained
 measurement after independent review found five finite proof-perimeter gaps in the draft
 R4/R5 checker. Exp-041 froze the exact five-blocker correction at `e26fae9`, then

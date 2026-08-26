@@ -263,6 +263,13 @@ The largest parent commands were:
 | Two largest exact inline diagnostics | 2 | 1m54.136s | 58.343s |
 | Combined exact pytest and fast gate | 1 | 56.376s | 56.376s |
 
+Session 017’s terminal gate on the loop-2-based branch passed in 284.29 wall-seconds.
+Fast behavioral tests consumed 213.97 seconds and negative controls 138.04 seconds; the
+outer scheduler overlapped them, so their sum is not the gate wall time.
+That branch contains 62 controls, while representative CI run 32912699602 contains 65.
+The two receipts confirm the bottleneck but are not a strict before/after comparison;
+revision and exact control inventory must travel with every benchmark.
+
 The exact group contains 17 tests.
 Repeated construction through `owner_row_jets()` and `active_row_jets()`, dense exact
 15×15 Hessians, and repeated field/symmetry validation are the first profiling targets.
@@ -377,6 +384,14 @@ AgentSession/v2 can record this session correctly as W5 `efficiency-loop` with f
 `efficiency`. It intentionally represents type through ordered workflow phases rather
 than a separate free-form session-type field.
 That is sufficient to make sessions classifiable and visible in the generated ledger.
+
+One repository check currently assumes the numerically latest session always owns the
+scientific cold-start handoff, even when the latest session is a non-scientific W5
+cycle.
+Session 017 must therefore repeat the unchanged `BC-010` / `think-1s0h` scientific
+next action while separately naming its Efficiency backlog.
+The duplication is harmless but shows that session logging and scientific handoff
+selection are coupled more tightly than the general framework description suggests.
 
 The session schema cannot encode thousands of model responses, recursive task trees,
 overlapping agent-seconds, command excerpts, or token histories without becoming a
