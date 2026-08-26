@@ -303,7 +303,12 @@ agenda:
       measurement on five exact instrument defects in rowwise second-order jets,
       weighted curvature, the sheet witness, and scale routing. Pure `-W`, mixed-angle,
       whole-stationary-component, and unequal-side-clearance questions remain later
-      bounded slices. The repaired
+      bounded slices. The following W7 phase adds a case-free exact-jet helper whose six
+      tests bind the complete n=5 first-order row inventory, but it refuses branch,
+      scale, and obstruction conclusions; exp-044 must preregister that case-level
+      integration separately. Exp-044 now freezes the rowwise curvature, sheet-witness,
+      scale-routing, disposition, control, and refusal criterion before the case draft
+      changes. The repaired
       D-199/D-203 solver path no longer orders
       this scientific cell, and D-239 remains a separate W7 robustness line.
     artifacts:
@@ -332,6 +337,9 @@ agenda:
     - campaign/series/series-000-smoke-and-calibration/results/exp-042-h-023-n5-endpoint-aware-rotating-paths.json
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md
     - cases/n5/minus_w_obstruction.py
+    - src/sqpack/research/exact_jets.py
+    - tests/test_exact_jets.py
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md
   - id: BC-011
     purpose: measurement_validation
     owner_focus: correctness

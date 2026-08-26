@@ -45,7 +45,7 @@ prove all the machinery works end to end and establish every baseline metric, be
 strategy is tested.
 
 The record has outgrown that opening description.
-The current record contains experiments `exp-001` through `exp-043`, including search
+The current record contains experiments `exp-001` through `exp-044`, including search
 baselines, exact proof determinations, event-contract controls, and the H-023 sequence
 through the complete first-order inventory in `exp-038` and fixed-angle polytope paths
 in `exp-039`. Exp-040 retains an unresolved rotating-path checker and its finite
@@ -56,7 +56,9 @@ Exp-042 is the accepted endpoint-aware successor: it certifies six explicit R4/R
 and positive pathwise first-order stresses with twenty semantic controls and retained
 replay. Exp-043 stops unresolved before retained measurement: its draft checker passes
 temporary checks, but independent review finds five finite second-order instrument
-defects. Those records do not imply that full connectivity has been established.
+defects. The W7 exact-jet repair now passes source-bound tests, and exp-044 freezes its
+case-level pure `-W` successor before integration.
+Those records do not imply that full connectivity has been established.
 Those result shapes are not pooled or compared merely because they share `series-000`.
 Each experiment’s `subject`, method, regime, and provenance govern what comparison is
 legal; the frontmatter `instrument` records the series’ opening search instrument, not

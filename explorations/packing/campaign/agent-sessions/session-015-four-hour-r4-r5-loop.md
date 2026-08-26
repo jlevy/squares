@@ -314,7 +314,7 @@ session:
       Build and independently test the smallest shared exact truncated-series wall and
       SAT row kernel needed to repair exp-043's five instrument defects, without making
       or measuring a pure -W scientific claim.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Exp-043's post-change guard showed that the missing deliverable is reusable proof
@@ -338,15 +338,74 @@ session:
       Retain the exact jet variables, row expansion contract, missing branch cases, and
       first failing algebraic identity as a W7 design artifact; leave exp-043 unresolved
       and open no target measurement.
-    outcome: null
+    outcome: >-
+      Added one case-free exact second-order jet helper and source-bound behavior tests.
+      The helper derives exact values, gradients, Hessians, path coefficients, explicit
+      wall and SAT feature branches, and weighted combinations without making a
+      scientific verdict.
     evidence:
     - >-
       Both post-change audits agree on the same five instrument defects and reject the
       superficially green temporary exp-043 run.
+    - >-
+      Six focused tests cover exact cross terms, rotation, path convention, strict and
+      tied branch signs, wall and SAT gaps, weighted correction cancellation, and the
+      complete A/interior/B by two-owner n=5 first-order row inventory.
+    - >-
+      The full fast gate passes 15 selected steps and 95 tests; independent post-change
+      review accepts the helper's case-free API, exact algebra, source binding, and
+      refusal boundary.
+    stop_reason: >-
+      The bounded W7 helper and its production-semantic test contract are complete; the
+      next promised output changes back from instrumentation to a preregistered
+      scientific successor.
+    next_action: >-
+      Under think-1s0h and BC-010, preregister exp-044 before connecting the accepted
+      exact-jet helper to a pure -W case evaluator; keep non-t^2 scale routing and every
+      exp-043 refusal as explicit case-level obligations.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Preregister and test an exp-044 pure -W successor that consumes the accepted exact
+      row-jet helper, derives weighted rowwise curvature from full jets, checks an exact
+      sheet witness, and routes the owner-3 two-scale argument mechanically.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The W7 helper and source-bound tests now close the reusable algebraic blocker, so
+      the promised output changes back to a case-level scientific determination under
+      a new frozen criterion rather than reopening exp-043.
+    budget_minutes: 30
+    started_at: '2026-08-25T18:19:44-07:00'
+    deadline_at: '2026-08-25T18:49:44-07:00'
+    expected_output: >-
+      A preregistered exp-044 and either an independently reviewed pure -W disposition,
+      a valid exact compatible branch, or a smaller finite row, witness, or scale-routing
+      blocker with no retained result on invalid instrumentation.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen --all-extras --group dev
+      packing-validate --only "small-n exact models and local geometry" --only
+      "soft-schema validation" --only "campaign record" --jobs 2 --inner-jobs 1
+    kill_condition: >-
+      Stop if any second-order constant bypasses exact_jets, a Farkas check cancels only
+      first-order rows, the sheet witness omits an expected row, the scale router is an
+      asserted string, a scientific miss becomes a validity exception, a control hits a
+      sentinel, the scope expands, or the phase deadline arrives.
+    fallback: >-
+      Terminalize exp-044 invalid or unresolved with the first exact missing row,
+      witness, scale, or disposition identity; retain no target JSON and make no pure -W
+      inference from checker failure.
+    outcome: null
+    evidence:
+    - >-
+      The accepted exact-jet helper derives full value, gradient, Hessian, and path
+      coefficients and matches all six source first-order row inventories exactly.
     stop_reason: null
     next_action: >-
-      Derive the row-jet contract independently, freeze its production tests, and edit
-      only a shared helper plus tests before reconnecting the exp-043 draft.
+      Freeze exp-044 before editing the exp-043 draft; delegate disjoint case-jet
+      construction, scale-router review, and post-change scientific audit.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -764,6 +823,50 @@ session:
     elapsed_quality: unavailable
     next_action: Publish only after the final preregistration audit accepts.
     phase: 5
+  - task: Design the smallest exact second-order row-jet contract after exp-043's guard failure.
+    operator: /root/r4_derivation, /root/r5_derivation, and /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Three independent designs converged on exact value-gradient-Hessian jets, explicit
+      feature signs, wall and SAT gap builders, unambiguous quadratic-correction path
+      substitution, weighted combinations, and a strict verdict-free scope.
+    evidence:
+    - Repository inventory found no reusable Hessian or second-order automatic-differentiation utility.
+    - The design freezes seven shortcut-catching test classes and a non-t^2 refusal boundary.
+    files: []
+    checks:
+    - Read-only exact-primitive, module-boundary, and predecessor-code inspection.
+    uncertainty: Exp-043 still needs separate branch, scale, Farkas, and witness integration.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Implement the case-free helper and source-bound tests in disjoint files.
+    phase: 6
+  - task: Implement and independently audit the exact-jet helper and source-bound tests.
+    operator: /root/r4_derivation, /root/r5_derivation, and /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Implemented the case-free helper and six behavior tests, repaired strict branch
+      sign validation and complete n=5 row-inventory binding after the first audit, and
+      obtained final independent acceptance.
+    evidence:
+    - Six focused tests pass, including complete key and gradient equality for all six n=5 matrices.
+    - The fast gate passes 15 selected steps and 95 tests.
+    files:
+    - src/sqpack/research/exact_jets.py
+    - tests/test_exact_jets.py
+    checks:
+    - Ruff lint and format checks pass.
+    - BasedPyright reports zero errors and zero warnings.
+    - Independent post-change integration audit accepts the API and refusal boundary.
+    uncertainty: >-
+      The helper intentionally does not enumerate feasible subsequences, route
+      delta=o(t) scales, or prove an obstruction.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preregister a separate exp-044 case-level integration criterion.
+    phase: 6
   outputs:
   - campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md
   - campaign/agent-sessions/README.md
@@ -778,6 +881,9 @@ session:
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md
   - cases/n5/rotating_release_paths.py
   - cases/n5/minus_w_obstruction.py
+  - src/sqpack/research/exact_jets.py
+  - tests/test_exact_jets.py
+  - campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
   checks:
@@ -802,11 +908,14 @@ session:
     selected steps in 26.23 wall-seconds and now replays exp-042 by default.
   - Exp-043 validates as round 43 before its checker exists.
   - Independent soundness and portability audits accept exp-043's frozen criterion and handoff.
+  - >-
+    Six exact-jet tests and the full fast gate pass; Ruff and BasedPyright are clean, and
+    independent review accepts the W7 helper while refusing any exp-043 promotion.
   stop_reason: null
   next_action: >-
-    Under think-1s0h and BC-010 in the active W7 correctness phase, build and audit the
-    shared exact truncated-series wall and SAT row kernel by 18:23:07-07:00; keep exp-043
-    unresolved and do not retain a pure -W result or start basin-frequency work.
+    Under think-1s0h and BC-010 in the active research correctness phase, freeze exp-044
+    before editing the pure -W draft and close by 18:49:44-07:00 with reviewed evidence
+    or a finite exact blocker; do not start basin-frequency work.
 ---
 # Session 015 — Four-Hour R4/R5 Research Loop
 
@@ -866,9 +975,9 @@ uv run --directory explorations/packing --frozen packing-campaign status
 ```
 
 Continue only the active phase.
-This handoff is in wall-clock cycle slot 4 and workflow phase 6; early
+This handoff is in wall-clock cycle slot 5 and workflow phase 7; early
 evidence-checkpoint switches account for the different numbers.
-Before writing, compare the current time with the phase deadline `18:23:07-07:00`,
+Before writing, compare the current time with the phase deadline `18:49:44-07:00`,
 finalization start `19:38:26-07:00`, and session deadline `20:08:26-07:00` using the
 four-state resume table in the
 [agent-session runbook](README.md#starting-a-portable-four-hour-session).

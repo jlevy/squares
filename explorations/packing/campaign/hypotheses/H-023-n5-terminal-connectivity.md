@@ -132,6 +132,17 @@ The retained finite successor list is an exact truncated-series row engine, full
 weighted rowwise curvature, a production sheet witness, and mechanical two-scale
 routing. Pure `-W` and mixed directions remain unresolved.
 
+The following W7 phase now supplies the case-free exact-jet layer and source-bound
+first-order row tests.
+It derives exact wall and SAT values, gradients, Hessians, path coefficients, and
+weighted combinations, but deliberately makes no branch-completeness, scale-routing, or
+obstruction claim. A separately preregistered exp-044 must add those case-level
+obligations before pure `-W` can be measured again.
+
+Exp-044 now freezes that case-level integration: every production row must flow through
+the accepted jet helper, the sheet witness must be checked, and the bounded/unbounded
+owner-3 scale cases must be executable before a retained pure `-W` disposition exists.
+
 This is the focused control for H-021 and the practical precursor to H-011.
 
 <!-- This document follows common-doc-guidelines.md.
