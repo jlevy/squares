@@ -4,18 +4,19 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import statistics
 import sys
 from collections import defaultdict
 from collections.abc import Iterable, Sequence
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from itertools import pairwise
 from pathlib import Path
 from typing import Any
 
-ROLLUP_SCHEMA = "CodexEfficiencyRollup/v1"
+ROLLUP_SCHEMA = "CodexEfficiencyRollup/v2"
 UNKNOWN_MODEL = "unknown"
 UNKNOWN_THINKING_LEVEL = "unknown"
 DISPLAY_COMMAND_LIMIT = 140
@@ -62,6 +63,8 @@ class TaskWindow:
     end_ms: float
     completed: bool
     state: str
+    client_duration_ms: float | None = None
+    client_time_to_first_token_ms: float | None = None
 
 
 @dataclass(frozen=True)
@@ -118,6 +121,10 @@ class ModelAccumulator:
     cached_input_tokens: int = 0
     output_tokens: int = 0
     reasoning_output_tokens: int = 0
+    completed_turn_count: int = 0
+    native_duration_samples_ms: list[float] = field(default_factory=list)
+    native_interval_samples_ms: list[float] = field(default_factory=list)
+    first_token_samples_ms: list[float] = field(default_factory=list)
 
 
 @dataclass
@@ -138,6 +145,9 @@ class ParsedSession:
     explicit_intervals: list[Interval]
     commands: list[CommandEvent]
     compaction_event_count: int
+    compaction_item_count: int
+    legacy_compaction_event_count: int
+    excluded_legacy_replay_task_count: int
 
 
 @dataclass(frozen=True)
@@ -166,8 +176,21 @@ def _timestamp_ms(value: str) -> float:
     )
 
 
+def _utc_now() -> str:
+    return datetime.now(UTC).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+
+
 def _seconds(milliseconds: float) -> float:
     return round(milliseconds / MILLISECONDS_PER_SECOND, 3)
+
+
+def _nonnegative_milliseconds(value: Any) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, int | float):
+        return None
+    milliseconds = float(value)
+    if not math.isfinite(milliseconds) or milliseconds < 0:
+        return None
+    return milliseconds
 
 
 def _merged_ranges(intervals: Iterable[tuple[float, float]]) -> list[tuple[float, float]]:
@@ -196,6 +219,14 @@ def _intersection_measure(
         for start, end in intervals
         if start < end_ms and end > start_ms
     )
+
+
+def _native_duration_matches_interval(task: TaskWindow) -> bool:
+    if task.client_duration_ms is None:
+        return True
+    interval_ms = max(0.0, task.end_ms - task.start_ms)
+    tolerance_ms = max(1_000.0, 0.05 * max(interval_ms, task.client_duration_ms))
+    return abs(task.client_duration_ms - interval_ms) <= tolerance_ms
 
 
 def _partition_intervals(
@@ -479,6 +510,7 @@ def _parse_session(
     agent_path: str | None,
     source_kind: str,
     history_start_ordinal: int | None,
+    cutoff_ms: float,
 ) -> ParsedSession:
     contexts: list[TurnContext] = []
     tokens: list[TokenEvent] = []
@@ -490,7 +522,9 @@ def _parse_session(
     pending_calls: dict[str, PendingToolCall] = {}
     legacy_commands: list[LegacyCommand] = []
     running_commands: dict[str, str] = {}
-    compaction_event_count = 0
+    compaction_item_count = 0
+    legacy_compaction_event_times_ms: list[float] = []
+    excluded_legacy_replay_task_count = 0
     snapshot_at = ""
     snapshot_ms = 0.0
     legacy_history_start_line = (
@@ -522,6 +556,8 @@ def _parse_session(
             if not isinstance(timestamp, str):
                 continue
             at_ms = _timestamp_ms(timestamp)
+            if at_ms > cutoff_ms:
+                continue
             if at_ms >= snapshot_ms:
                 snapshot_at = timestamp
                 snapshot_ms = at_ms
@@ -567,14 +603,23 @@ def _parse_session(
                             end_ms=at_ms,
                             completed=True,
                             state="completed",
+                            client_duration_ms=_nonnegative_milliseconds(
+                                payload.get("duration_ms")
+                            ),
+                            client_time_to_first_token_ms=_nonnegative_milliseconds(
+                                payload.get("time_to_first_token_ms")
+                            ),
                         )
                     )
                 elif event_type == "token_count":
                     tokens.append(TokenEvent(at_ms, _usage(payload)))
                 elif event_type == "context_compacted":
-                    compaction_event_count += 1
+                    legacy_compaction_event_times_ms.append(at_ms)
                 elif event_type == "item_completed":
                     _parse_completed_item(payload, streams, intervals, commands)
+                    item = payload.get("item")
+                    if isinstance(item, dict) and item.get("type") == "ContextCompaction":
+                        compaction_item_count += 1
                 continue
 
             if record_type == "response_item":
@@ -647,11 +692,22 @@ def _parse_session(
         # replayed parent turns do not. Keep only the former so near-zero-time
         # token snapshots cannot inflate the child's model totals.
         owned_turn_ids = {context.turn_id for context in contexts}
-        task_windows = [task for task in task_windows if task.turn_id in owned_turn_ids]
+        candidates = [task for task in task_windows if task.turn_id in owned_turn_ids]
+        task_windows = [task for task in candidates if _native_duration_matches_interval(task)]
+        excluded_legacy_replay_task_count = len(candidates) - len(task_windows)
     tokens.sort(key=lambda item: item.at_ms)
     streams.sort(key=lambda item: (item.start_ms, item.item_type))
     if not commands:
         commands = _legacy_command_events(legacy_commands, task_windows)
+    compaction_intervals = [
+        interval for interval in intervals if interval.category == "compaction"
+    ]
+    unmatched_legacy_compactions = sum(
+        not any(
+            interval.start_ms <= at_ms <= interval.end_ms for interval in compaction_intervals
+        )
+        for at_ms in legacy_compaction_event_times_ms
+    )
     return ParsedSession(
         session_id=session_id,
         path=path,
@@ -666,7 +722,10 @@ def _parse_session(
         streams=streams,
         explicit_intervals=intervals,
         commands=commands,
-        compaction_event_count=compaction_event_count,
+        compaction_event_count=compaction_item_count + unmatched_legacy_compactions,
+        compaction_item_count=compaction_item_count,
+        legacy_compaction_event_count=len(legacy_compaction_event_times_ms),
+        excluded_legacy_replay_task_count=excluded_legacy_replay_task_count,
     )
 
 
@@ -773,6 +832,17 @@ def _model_accumulators(
 ) -> dict[tuple[str, str], ModelAccumulator]:
     accumulators: dict[tuple[str, str], ModelAccumulator] = defaultdict(ModelAccumulator)
     for task in tasks:
+        task_context = _context_for(parsed.contexts, task.turn_id, task.start_ms)
+        task_accumulator = accumulators[_model_key(task_context)]
+        if task.completed:
+            task_accumulator.completed_turn_count += 1
+        if task.client_duration_ms is not None:
+            task_accumulator.native_duration_samples_ms.append(task.client_duration_ms)
+            task_accumulator.native_interval_samples_ms.append(
+                max(0.0, task.end_ms - task.start_ms)
+            )
+        if task.client_time_to_first_token_ms is not None:
+            task_accumulator.first_token_samples_ms.append(task.client_time_to_first_token_ms)
         task_contexts = [
             context for context in parsed.contexts if context.turn_id == task.turn_id
         ]
@@ -836,6 +906,91 @@ def _quantile(values: Sequence[float], fraction: float) -> float:
     return ordered[lower] * (1 - weight) + ordered[upper] * weight
 
 
+def _timing_distribution(samples_ms: Sequence[float]) -> dict[str, int | float]:
+    if not samples_ms:
+        return {
+            "count": 0,
+            "total": 0.0,
+            "min": 0.0,
+            "p50": 0.0,
+            "p95": 0.0,
+            "max": 0.0,
+        }
+    return {
+        "count": len(samples_ms),
+        "total": _seconds(sum(samples_ms)),
+        "min": _seconds(min(samples_ms)),
+        "p50": _seconds(statistics.median(samples_ms)),
+        "p95": _seconds(_quantile(samples_ms, 0.95)),
+        "max": _seconds(max(samples_ms)),
+    }
+
+
+def _native_turn_timing(
+    completed_turn_count: int,
+    duration_samples_ms: Sequence[float],
+    matching_interval_samples_ms: Sequence[float],
+    first_token_samples_ms: Sequence[float],
+) -> dict[str, Any]:
+    duration_count = len(duration_samples_ms)
+    first_token_count = len(first_token_samples_ms)
+    denominator = completed_turn_count or 1
+    return {
+        "completed_turn_count": completed_turn_count,
+        "duration_available_count": duration_count,
+        "time_to_first_token_available_count": first_token_count,
+        "duration_coverage": round(duration_count / denominator, 3),
+        "time_to_first_token_coverage": round(first_token_count / denominator, 3),
+        "reported_duration_seconds": _timing_distribution(duration_samples_ms),
+        "time_to_first_token_seconds": _timing_distribution(first_token_samples_ms),
+        "matching_interval_seconds": _seconds(sum(matching_interval_samples_ms)),
+        "reported_minus_interval_seconds": _seconds(
+            sum(duration_samples_ms) - sum(matching_interval_samples_ms)
+        ),
+        "_duration_samples_ms": list(duration_samples_ms),
+        "_matching_interval_samples_ms": list(matching_interval_samples_ms),
+        "_first_token_samples_ms": list(first_token_samples_ms),
+    }
+
+
+def _native_turn_timing_for_tasks(tasks: Sequence[TaskWindow]) -> dict[str, Any]:
+    duration_tasks = [task for task in tasks if task.client_duration_ms is not None]
+    return _native_turn_timing(
+        completed_turn_count=sum(task.completed for task in tasks),
+        duration_samples_ms=[
+            task.client_duration_ms
+            for task in duration_tasks
+            if task.client_duration_ms is not None
+        ],
+        matching_interval_samples_ms=[
+            max(0.0, task.end_ms - task.start_ms) for task in duration_tasks
+        ],
+        first_token_samples_ms=[
+            task.client_time_to_first_token_ms
+            for task in tasks
+            if task.client_time_to_first_token_ms is not None
+        ],
+    )
+
+
+def _merge_native_turn_timings(summaries: Iterable[dict[str, Any]]) -> dict[str, Any]:
+    completed_turn_count = 0
+    durations: list[float] = []
+    intervals: list[float] = []
+    first_tokens: list[float] = []
+    for summary in summaries:
+        completed_turn_count += int(summary["completed_turn_count"])
+        durations.extend(float(value) for value in summary["_duration_samples_ms"])
+        intervals.extend(float(value) for value in summary["_matching_interval_samples_ms"])
+        first_tokens.extend(float(value) for value in summary["_first_token_samples_ms"])
+    return _native_turn_timing(
+        completed_turn_count,
+        durations,
+        intervals,
+        first_tokens,
+    )
+
+
 def _serialized_models(
     accumulators: dict[tuple[str, str], ModelAccumulator],
 ) -> list[dict[str, Any]]:
@@ -843,6 +998,7 @@ def _serialized_models(
     for (model, thinking_level), accumulator in sorted(accumulators.items()):
         latencies = accumulator.latencies_ms
         timed_stream_ms = accumulator.streamed_reasoning_ms + accumulator.streamed_message_ms
+        first_token_ms = sum(accumulator.first_token_samples_ms)
         serialized.append(
             {
                 "model": model,
@@ -854,6 +1010,19 @@ def _serialized_models(
                 "timed_message_seconds": _seconds(accumulator.streamed_message_ms),
                 "unattributed_response_seconds": _seconds(
                     max(0.0, accumulator.response_envelope_ms - timed_stream_ms)
+                ),
+                "recorded_first_token_wait_seconds": _seconds(first_token_ms),
+                "residual_response_seconds": _seconds(
+                    max(
+                        0.0,
+                        accumulator.response_envelope_ms - timed_stream_ms - first_token_ms,
+                    )
+                ),
+                "native_turn_timing": _native_turn_timing(
+                    accumulator.completed_turn_count,
+                    accumulator.native_duration_samples_ms,
+                    accumulator.native_interval_samples_ms,
+                    accumulator.first_token_samples_ms,
                 ),
                 "stream_timing_available": accumulator.stream_item_count > 0,
                 "response_interval_seconds": {
@@ -877,7 +1046,7 @@ def _top_commands(commands: Sequence[CommandEvent]) -> list[dict[str, Any]]:
     grouped: dict[str, list[CommandEvent]] = defaultdict(list)
     for command in commands:
         grouped[command.normalized].append(command)
-    rows = [
+    rows: list[dict[str, Any]] = [
         {
             "category": entries[0].category,
             "display": entries[0].display,
@@ -926,6 +1095,7 @@ def _own_summary(parsed: ParsedSession) -> dict[str, Any]:
     timed_stream_ms = sum(
         (model.streamed_reasoning_ms + model.streamed_message_ms) for model in models.values()
     )
+    first_token_ms = sum(task.client_time_to_first_token_ms or 0.0 for task in parsed.tasks)
     turns = [
         _turn_summary(parsed, task, partitioned)
         for task in sorted(parsed.tasks, key=lambda item: item.start_ms)
@@ -947,6 +1117,11 @@ def _own_summary(parsed: ParsedSession) -> dict[str, Any]:
         "unattributed_response_seconds": _seconds(
             max(0.0, response_envelope_ms - timed_stream_ms)
         ),
+        "recorded_first_token_wait_seconds": _seconds(first_token_ms),
+        "residual_response_seconds": _seconds(
+            max(0.0, response_envelope_ms - timed_stream_ms - first_token_ms)
+        ),
+        "native_turn_timing": _native_turn_timing_for_tasks(parsed.tasks),
         "stream_timing_available": any(
             model.stream_item_count > 0 for model in models.values()
         ),
@@ -957,6 +1132,9 @@ def _own_summary(parsed: ParsedSession) -> dict[str, Any]:
         },
         "compaction_seconds": _seconds(_range_measure(partitioned.get("compaction", []))),
         "compaction_event_count": parsed.compaction_event_count,
+        "compaction_item_count": parsed.compaction_item_count,
+        "legacy_compaction_event_count": parsed.legacy_compaction_event_count,
+        "excluded_legacy_replay_task_count": (parsed.excluded_legacy_replay_task_count),
         "models": _serialized_models(models),
         "turns": turns,
         "command_categories": _command_categories(parsed.commands),
@@ -986,6 +1164,7 @@ def _turn_summary(
     timed_stream_ms = sum(
         (model.streamed_reasoning_ms + model.streamed_message_ms) for model in models.values()
     )
+    first_token_ms = task.client_time_to_first_token_ms or 0.0
     return {
         "turn_id": task.turn_id,
         "completed": task.completed,
@@ -995,6 +1174,18 @@ def _turn_summary(
         "timed_model_stream_seconds": _seconds(timed_stream_ms),
         "unattributed_response_seconds": _seconds(
             max(0.0, response_envelope_ms - timed_stream_ms)
+        ),
+        "recorded_first_token_wait_seconds": _seconds(first_token_ms),
+        "residual_response_seconds": _seconds(
+            max(0.0, response_envelope_ms - timed_stream_ms - first_token_ms)
+        ),
+        "client_duration_seconds": (
+            _seconds(task.client_duration_ms) if task.client_duration_ms is not None else None
+        ),
+        "client_time_to_first_token_seconds": (
+            _seconds(task.client_time_to_first_token_ms)
+            if task.client_time_to_first_token_ms is not None
+            else None
         ),
         "stream_timing_available": any(
             model.stream_item_count > 0 for model in models.values()
@@ -1025,6 +1216,17 @@ def _merge_model_rows(rows: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
             float(row["timed_message_seconds"]) * MILLISECONDS_PER_SECOND
         )
         accumulator.stream_item_count += int(bool(row["stream_timing_available"]))
+        native_timing = row["native_turn_timing"]
+        accumulator.completed_turn_count += int(native_timing["completed_turn_count"])
+        accumulator.native_duration_samples_ms.extend(
+            float(value) for value in native_timing["_duration_samples_ms"]
+        )
+        accumulator.native_interval_samples_ms.extend(
+            float(value) for value in native_timing["_matching_interval_samples_ms"]
+        )
+        accumulator.first_token_samples_ms.extend(
+            float(value) for value in native_timing["_first_token_samples_ms"]
+        )
         tokens = row["tokens"]
         accumulator.input_tokens += int(tokens["input"])
         accumulator.cached_input_tokens += int(tokens["cached_input"])
@@ -1095,8 +1297,31 @@ def _build_node(
             ),
             3,
         ),
+        "recorded_first_token_wait_seconds": round(
+            float(own["recorded_first_token_wait_seconds"])
+            + sum(
+                float(child["subtree"]["recorded_first_token_wait_seconds"])
+                for child in children
+            ),
+            3,
+        ),
+        "residual_response_seconds": round(
+            float(own["residual_response_seconds"])
+            + sum(float(child["subtree"]["residual_response_seconds"]) for child in children),
+            3,
+        ),
+        "native_turn_timing": _merge_native_turn_timings(
+            [own["native_turn_timing"]]
+            + [child["subtree"]["native_turn_timing"] for child in children]
+        ),
         "compaction_event_count": int(own["compaction_event_count"])
         + sum(int(child["subtree"]["compaction_event_count"]) for child in children),
+        "compaction_item_count": int(own["compaction_item_count"])
+        + sum(int(child["subtree"]["compaction_item_count"]) for child in children),
+        "legacy_compaction_event_count": int(own["legacy_compaction_event_count"])
+        + sum(int(child["subtree"]["legacy_compaction_event_count"]) for child in children),
+        "excluded_legacy_replay_task_count": int(own["excluded_legacy_replay_task_count"])
+        + sum(int(child["subtree"]["excluded_legacy_replay_task_count"]) for child in children),
         "models": _merge_model_rows(model_rows),
     }
     return {
@@ -1112,9 +1337,20 @@ def _build_node(
     }
 
 
-def build_rollup(sessions_root: Path, root_ids: Sequence[str]) -> dict[str, Any]:
+def build_rollup(
+    sessions_root: Path,
+    root_ids: Sequence[str],
+    *,
+    through: str | None = None,
+) -> dict[str, Any]:
     """Build a recursive, deterministic rollup for the requested Codex task ids."""
 
+    scan_started_at = _utc_now()
+    cutoff_at = through or scan_started_at
+    try:
+        cutoff_ms = _timestamp_ms(cutoff_at)
+    except ValueError as error:
+        raise ValueError(f"invalid --through timestamp: {cutoff_at}") from error
     discovered = _discover_sessions(sessions_root)
     missing = sorted(set(root_ids) - discovered.keys())
     if missing:
@@ -1129,7 +1365,7 @@ def build_rollup(sessions_root: Path, root_ids: Sequence[str]) -> dict[str, Any]
             if parent_id in relevant and session_id not in relevant:
                 relevant.add(session_id)
                 changed = True
-    parsed_by_id = {
+    all_parsed_by_id = {
         session_id: _parse_session(
             discovered[session_id][0],
             session_id=session_id,
@@ -1137,8 +1373,14 @@ def build_rollup(sessions_root: Path, root_ids: Sequence[str]) -> dict[str, Any]
             agent_path=discovered[session_id][2],
             source_kind=discovered[session_id][3],
             history_start_ordinal=discovered[session_id][4],
+            cutoff_ms=cutoff_ms,
         )
         for session_id in sorted(relevant)
+    }
+    parsed_by_id = {
+        session_id: parsed
+        for session_id, parsed in all_parsed_by_id.items()
+        if parsed.snapshot_at or session_id in root_ids
     }
     children_by_parent: dict[str, list[str]] = defaultdict(list)
     for session_id, parsed in parsed_by_id.items():
@@ -1156,6 +1398,9 @@ def build_rollup(sessions_root: Path, root_ids: Sequence[str]) -> dict[str, Any]
     )
     return {
         "schema": ROLLUP_SCHEMA,
+        "scan_started_at": scan_started_at,
+        "scan_completed_at": _utc_now(),
+        "cutoff_at": cutoff_at,
         "snapshot_at": snapshot_at,
         "sessions_root": str(sessions_root),
         "semantics": {
@@ -1171,7 +1416,33 @@ def build_rollup(sessions_root: Path, root_ids: Sequence[str]) -> dict[str, Any]
             ),
             "unattributed_response_seconds": (
                 "Response-envelope time not covered by timed model-stream items. Do not assign "
-                "it wholly to model inference."
+                "it wholly to model inference. This compatibility field still includes the "
+                "recorded first-token wait."
+            ),
+            "recorded_first_token_wait_seconds": (
+                "Sum of client-observed time_to_first_token_ms values on completed turns. "
+                "This measures only the first response in each turn and is not a server-phase "
+                "breakdown."
+            ),
+            "residual_response_seconds": (
+                "Response-envelope time left after explicit Reasoning and AgentMessage item "
+                "timing and recorded first-token wait are removed. It can include later model "
+                "startup, API and client latency, and uninstrumented or suspended gaps."
+            ),
+            "native_turn_timing": (
+                "Coverage and distributions from task_complete.duration_ms and "
+                "task_complete.time_to_first_token_ms. Event timestamps remain the basis for "
+                "overlap-safe interval accounting."
+            ),
+            "excluded_legacy_replay_task_count": (
+                "Legacy subagent task records excluded because a client-reported duration "
+                "differed from the local event interval by more than max(1 second, 5%). Such "
+                "records are compressed parent-history replays, not child execution."
+            ),
+            "compaction_event_count": (
+                "Count of current ContextCompaction item records plus legacy "
+                "context_compacted events that do not coincide with a timed item. "
+                "Source-specific item and legacy record counts are also reported."
             ),
             "model_response_count": (
                 "Count of token-usage response events. This is the most stable client-log "
@@ -1187,8 +1458,9 @@ def build_rollup(sessions_root: Path, root_ids: Sequence[str]) -> dict[str, Any]
                 "double counting."
             ),
             "live_logs": (
-                "An incomplete task ends at its last recorded event, so a live snapshot is a "
-                "lower bound."
+                "The scan-start time is the default cutoff, or --through supplies an explicit "
+                "cutoff. An incomplete task ends at its last included event, so a live "
+                "snapshot is a lower bound."
             ),
         },
         "roots": roots,
@@ -1197,8 +1469,21 @@ def build_rollup(sessions_root: Path, root_ids: Sequence[str]) -> dict[str, Any]
 
 def _remove_private_fields(node: dict[str, Any]) -> None:
     node.pop("_active_ranges", None)
+    for summary in (node["own"], node["subtree"]):
+        _remove_private_timing_fields(summary["native_turn_timing"])
+        for model in summary["models"]:
+            _remove_private_timing_fields(model["native_turn_timing"])
     for child in node["children"]:
         _remove_private_fields(child)
+
+
+def _remove_private_timing_fields(timing: dict[str, Any]) -> None:
+    for key in (
+        "_duration_samples_ms",
+        "_matching_interval_samples_ms",
+        "_first_token_samples_ms",
+    ):
+        timing.pop(key, None)
 
 
 def _format_duration(seconds: float) -> str:
@@ -1211,6 +1496,11 @@ def _format_duration(seconds: float) -> str:
         remainder = round(seconds % SECONDS_PER_MINUTE)
         return f"{minutes}m {remainder}s"
     return f"{seconds:.1f}s"
+
+
+def _format_native_duration(row: dict[str, Any], statistic: str = "total") -> str:
+    seconds = float(row["native_turn_timing"]["reported_duration_seconds"][statistic])
+    return _format_duration(seconds)
 
 
 def _render_tree(
@@ -1228,7 +1518,10 @@ def _render_tree(
             f"{prefix}- `{node['session_id']}`{path}{marker}: "
             f"{_format_duration(own['active_seconds'])} active; "
             f"{_format_duration(own['response_envelope_seconds'])} response envelope; "
-            f"{_format_duration(own['timed_model_stream_seconds'])} timed model stream"
+            f"{_format_duration(own['recorded_first_token_wait_seconds'])} "
+            "first-token wait; "
+            f"{_format_duration(own['timed_model_stream_seconds'])} timed model stream; "
+            f"{_format_duration(own['residual_response_seconds'])} residual response"
         )
     ]
     if include_turns:
@@ -1244,8 +1537,12 @@ def _render_tree(
                     f"`{model['thinking_level']}`: "
                     f"{model['model_response_count']} responses; "
                     f"{_format_duration(model['response_envelope_seconds'])} envelope; "
+                    f"{_format_duration(model['recorded_first_token_wait_seconds'])} "
+                    "first-token wait; "
                     f"{_format_duration(model['timed_model_stream_seconds'])} "
                     "timed stream; "
+                    f"{_format_native_duration(model)} "
+                    "native turn duration; "
                     f"{model['tokens']['reasoning_output']} reasoning tokens"
                 )
                 for model in turn["models"]
@@ -1256,7 +1553,11 @@ def _render_tree(
                 f"{prefix}  - `{model['model']}` / `{model['thinking_level']}`: "
                 f"{model['model_response_count']} responses; "
                 f"{_format_duration(model['response_envelope_seconds'])} envelope; "
+                f"{_format_duration(model['recorded_first_token_wait_seconds'])} "
+                "first-token wait; "
                 f"{_format_duration(model['timed_model_stream_seconds'])} timed stream; "
+                f"{_format_native_duration(model)} "
+                "native turn duration; "
                 f"{model['tokens']['reasoning_output']} reasoning tokens"
             )
             for model in own["models"]
@@ -1272,10 +1573,13 @@ def render_markdown(rollup: dict[str, Any], *, include_turns: bool = False) -> s
     lines = [
         "# Codex Efficiency Rollup",
         "",
+        f"**Cutoff:** {rollup['cutoff_at']}",
+        "",
         f"**Log snapshot:** {rollup['snapshot_at']}",
         "",
         "The response envelope is active client time after explicit tools and context",
         "compaction are removed; it is an upper bound, not server inference latency.",
+        "Native first-token wait covers only the first response in each completed turn.",
         "Timed model streaming is a lower bound and is unavailable in some legacy logs.",
         "Parent wall time and recursive agent-time are reported separately because child",
         "agents can overlap.",
@@ -1304,6 +1608,23 @@ def render_markdown(rollup: dict[str, Any], *, include_turns: bool = False) -> s
                     f"{_format_duration(root['own']['timed_model_stream_seconds'])} |"
                 ),
                 (
+                    "| Parent recorded first-token wait | "
+                    f"{_format_duration(root['own']['recorded_first_token_wait_seconds'])} |"
+                ),
+                (
+                    "| Parent residual response | "
+                    f"{_format_duration(root['own']['residual_response_seconds'])} |"
+                ),
+                (
+                    "| Parent native completed-turn duration | "
+                    f"{_format_native_duration(root['own'])} |"
+                ),
+                (
+                    "| Parent native duration coverage | "
+                    f"{root['own']['native_turn_timing']['duration_available_count']} / "
+                    f"{root['own']['native_turn_timing']['completed_turn_count']} |"
+                ),
+                (
                     "| Recursive agent-time | "
                     f"{_format_duration(subtree['agent_active_seconds'])} |"
                 ),
@@ -1315,10 +1636,14 @@ def render_markdown(rollup: dict[str, Any], *, include_turns: bool = False) -> s
                 f"| Sessions | {subtree['session_count']} |",
                 "",
                 (
-                    "| Model | Thinking | Responses | Response envelope | Timed stream | "
-                    "Input | Cached input | Output | Reasoning output |"
+                    "| Model | Thinking | Responses | Native turn duration | Turn p50 | "
+                    "Response envelope | First-token wait | Timed stream | Residual | Input | "
+                    "Cached input | Output | Reasoning output |"
                 ),
-                "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+                (
+                    "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | "
+                    "---: | ---: | ---: | ---: |"
+                ),
             ]
         )
         for model in subtree["models"]:
@@ -1326,8 +1651,12 @@ def render_markdown(rollup: dict[str, Any], *, include_turns: bool = False) -> s
             lines.append(
                 f"| `{model['model']}` | `{model['thinking_level']}` | "
                 f"{model['model_response_count']} | "
+                f"{_format_native_duration(model)} | "
+                f"{_format_native_duration(model, 'p50')} | "
                 f"{_format_duration(model['response_envelope_seconds'])} | "
+                f"{_format_duration(model['recorded_first_token_wait_seconds'])} | "
                 f"{_format_duration(model['timed_model_stream_seconds'])} | "
+                f"{_format_duration(model['residual_response_seconds'])} | "
                 f"{tokens['input']} | {tokens['cached_input']} | {tokens['output']} | "
                 f"{tokens['reasoning_output']} |"
             )
@@ -1385,6 +1714,13 @@ def _parser() -> argparse.ArgumentParser:
         help="Output format (default: markdown).",
     )
     parser.add_argument(
+        "--through",
+        help=(
+            "Include records at or before this ISO-8601 timestamp. By default the scan-start "
+            "time freezes live logs."
+        ),
+    )
+    parser.add_argument(
         "--include-turns",
         action="store_true",
         help="Include every turn below each session in Markdown output.",
@@ -1397,7 +1733,11 @@ def main(arguments: Sequence[str] | None = None) -> int:
 
     options = _parser().parse_args(arguments)
     try:
-        rollup = build_rollup(options.sessions_root, options.root_id)
+        rollup = build_rollup(
+            options.sessions_root,
+            options.root_id,
+            through=options.through,
+        )
     except ValueError as error:
         print(f"error: {error}", file=sys.stderr)
         return 2

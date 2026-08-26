@@ -113,6 +113,10 @@ Linux must be split and optimized too.
 
 Before the loop-2 exact additions, hosted Linux pytest had a 10.44-second p50 and a
 13.60-second p95. The current PR took 251.26 seconds, a 24× regression.
+The native-timing correction spike independently reproduced the local bottleneck: its
+clean full gate took 327.66 wall-seconds, including 241.96 seconds of behavioral tests
+and 167.23 seconds of negative controls running on overlapping branches of the outer
+scheduler.
 
 | Test group | Tests | Seconds | Share |
 | --- | ---: | ---: | ---: |
@@ -164,102 +168,115 @@ This is the next target if sharding leaves a long tail.
 
 ### Codex Research-Loop Time
 
-The rollups come from `CodexEfficiencyRollup/v1`. Response envelope is not provider
-inference latency. It includes dispatch, suspension, and gaps without explicit log
-events. Timed model stream is the lower bound exposed by `Reasoning` and `AgentMessage`
-event timing.
+The corrected scanner emits `CodexEfficiencyRollup/v2`. It uses event timestamps for
+overlap-safe accounting and reads native `task_complete.duration_ms` and
+`time_to_first_token_ms` for completed-turn coverage and distributions.
+It also counts current `ContextCompaction` items, excludes duration-inconsistent
+compressed legacy replays, and freezes live trees at scan start or an explicit
+`--through` cutoff.
+
+Response envelope is still not provider inference latency.
+It is active time after explicit tools and compaction are removed.
+Timed `Reasoning` and `AgentMessage` items are a lower bound; first-token wait measures
+only the first response in each completed turn; residual response can include later
+model starts, API and client latency, orchestration, suspension, and uninstrumented
+gaps.
 
 #### Research Loop 2 Frozen Snapshot
 
-Root `01a03b2a-d50b-7582-8d78-be6d8ebb461d` was sampled at `2026-08-26T03:42:41.980Z`:
+Root `01a03b2a-d50b-7582-8d78-be6d8ebb461d` is frozen through
+`2026-08-26T05:05:06.988Z`:
 
 ```text
-parent active — 4h33m02s
-├── response envelope — 2h28m34s (54.4%)
-│   ├── timed model stream — 49m37s
-│   └── unattributed response time — 1h38m57s
-├── delegated-agent wait — 1h20m33s (29.5%)
-│   ├── overlapped by active child work — 1h03m12s
-│   └── no child active — 17m41s
-├── commands — 36m16s (13.3%)
-├── compaction — 7m10s (2.6%)
-└── other explicit tools — 29s
+parent active — 5h45m37s
+├── response envelope — 3h05m46s (53.75%)
+│   ├── timed reasoning/message stream — 1h08m56s (19.94% of active)
+│   ├── recorded first-token wait — 57.6s (0.28% of active)
+│   └── residual response — 1h55m53s (33.53% of active)
+├── delegated-agent wait — 1h24m15s (24.38%)
+├── commands — 1h05m55s (19.07%)
+├── compaction — 9m04s (2.62%)
+└── other explicit tools — 37.5s
 
-recursive tree — 10 sessions
-├── recursive agent-time — 9h11m11s
-├── active union — 4h33m19s
-└── concurrency overlap — 4h37m52s
+recursive tree — 14 sessions
+├── recursive agent-time — 11h01m38s
+├── active union — 5h45m37s
+└── concurrency overlap — 5h16m01s
 ```
 
-The task used `gpt-5.6-sol/xhigh` for all 1,832 response events.
-Its recursive response envelope was 6h19m12s and its timed model stream was 3h03m54s. It
-recorded 235,313,516 input tokens, 229,095,936 cached input tokens, 807,418 output
-tokens, and 298,261 reasoning tokens.
-Input caching was 97.4%; context reloading is not the first target.
+All 87 completed recursive turns have native duration and first-token fields.
+Their reported duration totals 10h17m37s; p50 is 3m00.586s, p95 is 14m19.252s, and the
+maximum is 2h06m30.237s. The native total differs from the matching event intervals by
+only 274 milliseconds.
 
-The first orientation fan-out was efficient: 11m22s of agent work completed in a 4m40s
-active tail, saving about 6m41s versus serial execution.
-The later broad trio was not balanced:
+| Model | Thinking | Completed turns | Responses | Response envelope | First token | Timed stream | Residual |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `gpt-5.6-sol` | xhigh | 83 | 1,981 | 6h43m50s | 7m35s | 3h16m36s | 3h19m39s |
+| `gpt-5.6-sol` | max | 4 | 232 | 44m38s | 25.8s | 27m27s | 16m45s |
 
-| Delegate | Active time | Turns |
-| --- | ---: | ---: |
-| R4 | 98m35s | 18 |
-| R5 | 80m25s | 24 |
-| Scope | 78m07s | 25 |
+The recursive tree records 2,213 response events, 288,786,067 input tokens, 280,945,664
+cached input tokens, 1,002,754 output tokens, and 370,981 reasoning-output tokens.
+The explicit stream comprises 3h23m48s of reasoning items and 20m14s of message items.
+The 8m01s total first-token wait is 1.8% of recursive response envelope, so first-token
+latency is not the main target.
 
-Together they used 257m07s of agent-time over a 140m26s active union.
-There were 65 follow-up calls and 25 messages.
-The last delegate finished 41 minutes after R4 and 42 minutes after R5. More broad
-agents would increase integration load; shorter, revision-pinned leaf tasks are the
-useful form of additional parallelism.
+The first orientation fan-out was effective: 11m22s of agent work completed in a 4m40s
+tail.
+The long R4, R5, and scope trio used 257m07s of agent-time, required 65 follow-ups,
+left 86m35s with no long child active, and ended with a 41–42-minute single-agent tail.
+The next delegation experiment therefore uses revision-pinned leaf waves with at most
+one corrective follow-up, not another broad agent.
 
-Repeated validation is also measurable:
-
-| Repeated logical surface | Runs | Command seconds |
-| --- | ---: | ---: |
-| Full gate | 2 | 755.94 |
-| Standard fast gate | 4 | 552.13 |
-| Exact row group | 3 | 435.26 |
-
-These totals require a canonical key because equivalent calls sometimes differ only by
-`--directory` spelling.
+Parent command categories identify 2,493.13 seconds of validation and pytest work, 63.0%
+of all command time, plus one 492.11-second CI wait.
+Category names are substring heuristics; exact normalized commands establish at least
+two ordinary full gates totaling 755.94 seconds, four standard fast gates across parent
+and children totaling 552.13 seconds, and three exact-row test runs totaling 435.26
+seconds. Canonical revision/surface fingerprints are required before automatic
+deduplication.
 
 #### Research Loop 1 Old
 
-Root `01a02fc2-081b-72b1-999a-cd5550629c0c` recorded:
+Root `01a02fc2-081b-72b1-999a-cd5550629c0c` is terminal at `2026-08-25T15:22:28.182Z`:
 
 | Measure | Value |
 | --- | ---: |
 | Parent wall envelope | 45h28m27s |
 | Parent active | 37h02m09s |
 | Parent inactive | 8h26m18s |
-| Parent response envelope | 31h24m25s |
-| Parent commands | 3h08m46s |
-| Parent delegated-agent waits | 2h23m25s |
+| Parent response envelope | 31h24m25s (84.8% of active) |
+| Parent first-token wait | 4m17s (0.23% of response envelope) |
+| Parent commands | 3h08m46s (8.5% of active) |
+| Parent delegated-agent waits | 2h23m25s (6.5% of active) |
 | Recursive sessions | 139 |
 | Recursive agent-time | 57h07m47s |
 | Active union | 37h02m09s |
 | Concurrency overlap | 20h05m37s |
-| Turns | 390: 27 parent, 363 child |
-| Compactions | 96: 77 parent |
+| Completed turns | 375; native duration and first-token coverage 100% |
+| Compactions | 96 legacy events; duration unavailable |
 
-It recorded 12,889 response events, 1,604,316,923 input tokens, 1,561,282,816 cached
-input tokens, 5,658,089 output tokens, and 2,071,303 reasoning tokens.
-Cached inputs were 97.3%.
+The scanner rejected one compressed parent-history replay from a legacy child.
+Its client duration was 14,051.726 seconds while its local replay interval was 86
+milliseconds. After exclusion, recursive reported duration differs from matching event
+intervals by 1.101 seconds rather than 14,052.827 seconds.
 
-| Model | Thinking | Response events | Response envelope |
-| --- | --- | ---: | ---: |
-| `gpt-5.6-sol` | max | 9,907 | 42h06m |
-| `gpt-5.6-sol` | xhigh | 1,168 | 4h06m27s |
-| `gpt-5.6-sol` | high | 191 | 52m40s |
-| `gpt-5.6-terra` | low | 849 | 1h40m02s |
-| `gpt-5.6-terra` | medium | 199 | 26m46s |
-| `gpt-5.6-luna` | low | 557 | 1h03m05s |
-| `gpt-5.6-luna` | medium/max | 18 | 2m17s |
+Loop 1 has no explicit stream-item timing.
+Its 12,869 response events record 1,601,149,478 input tokens, 1,558,305,024 cached input
+tokens, 5,650,164 output tokens, and 2,068,192 reasoning-output tokens.
 
-`gpt-5.6-sol` accounts for 87.4% of response events and 93.6% of response envelope.
-Historical assignments are confounded by task role, so they do not prove that a lower
-model would complete the same work faster or with the same correction rate.
+| Model | Thinking | Responses | Response envelope | First-token wait |
+| --- | --- | ---: | ---: | ---: |
+| `gpt-5.6-sol` | max | 9,887 | 42h06m00s | 12m58s |
+| `gpt-5.6-sol` | xhigh | 1,168 | 4h06m27s | 2m36s |
+| `gpt-5.6-sol` | high | 191 | 52m40s | 50.0s |
+| `gpt-5.6-terra` | low | 849 | 1h40m02s | 8m56s |
+| `gpt-5.6-terra` | medium | 199 | 26m46s | 1m10s |
+| `gpt-5.6-luna` | low | 557 | 1h03m05s | 3m00s |
+| `gpt-5.6-luna` | medium/max | 18 | 2m17s | 15.3s |
+
+Historical model assignments are confounded by task role.
+They motivate the paired mechanical-routing experiment but do not prove that a lower
+model or thinking level would complete matched work faster at the same correction rate.
 
 ## Ranked Implementation Queue
 
@@ -468,7 +485,7 @@ uv run --frozen python -m devtools.packing_efficiency report \
   --local-receipt <path>
 ```
 
-The command consumes `CodexEfficiencyRollup/v1`, adds normalized command keys and
+The command consumes `CodexEfficiencyRollup/v2`, adds normalized command keys and
 critical-path versus overlap attribution, fetches GitHub queue/job/step timings, reads
 local validation receipts, emits versioned JSON plus Markdown, compares p50 and p95 with
 the prior fixed-revision sample, and opens or renews W5 work for a 20% regression or
@@ -520,6 +537,9 @@ gap.
 ## Implementation Checklist
 
 - [x] Deliver the recursive Codex scanner and initial loop review (`think-ma71`).
+
+- [x] Correct native timing, frozen cutoffs, compaction counts, and legacy replay
+  ownership (`think-lpum`, `think-p0bs`, and `think-oi60`).
 
 - [x] Profile 24 CI runs, current exact tests, negative-control worker counts, and both
   named Codex loops (`think-vcr4`).

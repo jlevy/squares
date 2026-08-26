@@ -26,29 +26,33 @@ The largest step is the 65-control mutation surface, forced to one inner worker 
 hosts.
 
 CI is not the only critical-path problem.
-The active loop-2 branch has no pull request and therefore no GitHub Actions wait.
-That task still spent 7m18s on one local full gate, 3m53s across two local fast gates,
-and 7m15s across three focused exact row-jet test invocations by the reviewed snapshot.
-The exact-test group alone took 103–181 seconds per invocation.
+By the corrected frozen loop-2 snapshot, the parent had spent 1h05m55s in commands,
+including at least 41m33s of validation and pytest work, and 8m12s waiting for CI. Exact
+row-jet groups took 103–181 seconds per invocation, while two ordinary local full gates
+totaled 12m36s.
 
 Model and orchestration time are also material, but the logs do not support a single
 honest “LLM latency” number.
-Loop 2 exposes 2h48m26s of timed model streaming across its recursive task tree and a
-further 2h58m43s of response-envelope time that cannot be assigned solely to inference.
-Loop 1 is a legacy log: it exposes a 50h17m17s recursive response envelope but no
-explicit stream timing.
+Loop 2 exposes 3h44m03s of timed model streaming across its recursive task tree and a
+further 3h36m24s of residual response time that cannot be assigned solely to inference.
+Recorded first-token wait is only 8m01s. Loop 1 is a legacy log: it exposes a 50h17m17s
+recursive response envelope but no explicit stream timing.
 Any optimization plan that labels either entire envelope as provider inference would
 overstate the evidence.
 
 The implementation order is:
 
 1. emit comparable timing artifacts and establish a required Linux PR fast lane;
+
 2. profile and parallelize the negative-control bottleneck under the existing mutation
    and restoration contract;
+
 3. move macOS from a duplicate every-PR full gate to a blocking selected portability
    lane on integration, scheduled, manual, and portability-sensitive triggers;
+
 4. remove repeated exact symbolic row-jet construction under exact equivalence and
    invalidation tests; and
+
 5. use the recursive Codex rollup for recurring W5 reviews of model allocation, context
    reload, delegate tails, local gates, and CI together.
 
@@ -59,10 +63,11 @@ The corresponding staged design is the
 
 [`codex_log_rollup.py`](../../../devtools/codex_log_rollup.py) reads Codex JSONL by root
 task id, discovers descendants, removes inherited subagent history, and emits the
-versioned `CodexEfficiencyRollup/v1` JSON contract or a compact Markdown tree.
-Synthetic fixtures cover current and legacy history, live and interrupted turns,
-model/thinking splits, token totals, stream bounds, command polling, and recursive
-overlap.
+versioned `CodexEfficiencyRollup/v2` JSON contract or a compact Markdown tree.
+Synthetic fixtures cover native duration and first-token fields, missing and invalid
+telemetry, frozen live cutoffs, current and legacy compaction, compressed legacy replay,
+live and interrupted turns, model/thinking splits, token totals, command polling, and
+recursive overlap.
 
 The clocks are intentionally different:
 
@@ -74,18 +79,23 @@ The clocks are intentionally different:
 | Parallel overlap | Recursive agent-time minus active union |
 | Response envelope | Active client time after explicit tools and compaction; an upper bound, not server inference latency |
 | Timed model stream | Lower bound from explicit `Reasoning` and `AgentMessage` item timing |
-| Unattributed response | Response envelope outside those timed stream items |
+| Recorded first-token wait | Sum of native `time_to_first_token_ms` for the first response of completed turns |
+| Residual response | Envelope outside timed stream and recorded first-token wait; not provider inference |
+| Native turn duration | Client `duration_ms`; reconciled to the matching event interval and never used for overlap |
 
 The scanner counts token-usage events as the most stable client-log proxy for model
 responses. That count is not a provider request counter.
 Legacy response intervals can include client suspension, dispatch, and uninstrumented
 gaps. A live turn ends at its last event and is therefore a lower bound.
+Scan start is the default cutoff; `--through` makes a live sample reproducible.
 
-The first implementation found and removed one legacy replay artifact before these
-figures were accepted: three child logs contained 101 compressed parent responses and
-14,641,508 input tokens after the best legacy history marker.
-Those replayed turns lacked the child-owned `turn_context` and are now excluded by a
-regression-tested ownership rule.
+The v2 correction found a replay that survived the first ownership rule because it had a
+copied `turn_context`. Its client duration was 14,051.726 seconds while the local replay
+interval was 86 milliseconds.
+Legacy subagent turns with a native-duration drift greater than max(1 second, 5%) are
+now excluded and counted.
+Loop 1’s recursive native duration then reconciles to its matching intervals within
+1.101 seconds.
 
 ## Loop 1: Full Historical Rollup
 
@@ -99,6 +109,7 @@ complete and one interrupted.
 | Wall envelope | 45h28m26.916s | Includes 8h26m17.517s between active turns |
 | Active time | 37h02m09.399s | Critical-path denominator |
 | Response envelope | 31h24m24.746s | 84.8% of active time; legacy stream timing unavailable |
+| Recorded first-token wait | 4m16.530s | 0.23% of response envelope |
 | Commands | 3h08m46.361s | 8.5% of active time |
 | Delegate waits | 2h23m24.870s | 6.5% of active time; some delegates ran concurrently |
 | Other explicit tools | 5m33.422s | Agent control, extension, file change, and MCP |
@@ -146,7 +157,7 @@ recovery harder to distinguish from useful reasoning.
 
 ### Model and thinking rollup
 
-The recursive tree recorded 12,889 token-accounted responses and a 50h17m16.858s
+The recursive tree recorded 12,869 token-accounted responses and a 50h17m16.858s
 response envelope. The tree has no explicit model-stream timing, so the envelope column
 is the only available client-side upper bound.
 
@@ -159,8 +170,8 @@ is the only available client-side upper bound.
 | `gpt-5.6-terra` | `medium` | 199 | 26m46.328s | 11,198,153 | 10,672,384 | 72,230 | 13,898 |
 | `gpt-5.6-sol` | `high` | 191 | 52m39.624s | 13,612,896 | 12,673,280 | 94,510 | 41,723 |
 | `gpt-5.6-sol` | `xhigh` | 1,168 | 4h06m26.535s | 151,069,065 | 145,196,160 | 503,920 | 194,758 |
-| `gpt-5.6-sol` | `max` | 9,907 | 42h06m00.075s | 1,327,678,859 | 1,297,181,312 | 4,605,652 | 1,741,424 |
-| **Total** |  | **12,889** | **50h17m16.858s** | **1,604,316,923** | **1,561,282,816** | **5,658,089** | **2,071,303** |
+| `gpt-5.6-sol` | `max` | 9,887 | 42h06m00.075s | 1,324,511,414 | 1,294,203,520 | 4,597,727 | 1,738,313 |
+| **Total** |  | **12,869** | **50h17m16.858s** | **1,601,149,478** | **1,558,305,024** | **5,650,164** | **2,068,192** |
 
 The root itself used only `gpt-5.6-sol`: 7,772 `max` responses and 597 `xhigh`
 responses. The recursive table shows that cheaper settings were used for some bounded
@@ -200,85 +211,94 @@ inside the response envelope and cannot be timed independently from this log for
 
 ## Loop 2: Live Research Rollup
 
-This baseline freezes the live tree at `2026-08-26T02:52:45.919Z`. The root had two
-complete turns and one live turn, so later work is intentionally absent.
+This baseline freezes the live tree through `2026-08-26T05:05:06.988Z`. The root had ten
+complete turns and one live turn, so later records are intentionally absent.
 
 ### Parent critical path
 
 | Parent clock | Time | Note |
 | --- | ---: | --- |
-| Active time | 3h48m27.006s | Live lower bound |
-| Response envelope | 2h05m00.179s | Upper-bound client response time |
-| Timed model stream | 38m07.764s | Explicit lower bound |
-| Unattributed response | 1h26m52.415s | Must not be labeled model inference |
-| Delegate waits | 1h08m30.478s | Most delegates overlap other active work |
-| Commands | 29m57.422s | Local validation and exact probes dominate |
-| Context compaction | 4m33.160s | Timed compaction interval |
-| Other explicit tools | 25.767s | Agent control, extension, file change, and MCP |
+| Wall envelope | 6h00m48.180s | Includes 15m10.864s between active turns |
+| Active time | 5h45m37.316s | Live lower bound and share denominator |
+| Response envelope | 3h05m46.166s | 53.75%; upper-bound client response time |
+| Timed reasoning and message stream | 1h08m55.964s | 19.94%; explicit lower bound |
+| Recorded first-token wait | 57.566s | 0.28%; first response of ten completed turns |
+| Residual response | 1h55m52.636s | 33.53%; must not be labeled model inference |
+| Delegate waits | 1h24m14.954s | 24.38%; much overlaps child work |
+| Commands | 1h05m54.949s | 19.07%; validation and CI dominate |
+| Context compaction | 9m03.713s | 2.62%; nine timed current-format items |
+| Other explicit tools | 37.534s | Agent control, extension, file change, and MCP |
 
 ### Recursive task and model tree
 
-All seven sessions used `gpt-5.6-sol/xhigh`.
+The recursive tree contains fourteen sessions:
 
 ```text
-root                                  3h48m27s active; 875 responses
-├── /root/workflow_orientation           3m00s active;  23 responses
-├── /root/tooling_orientation             3m50s active;  20 responses
-├── /root/frontier_orientation            4m32s active;  24 responses
-├── /root/r4_derivation                 1h38m35s active; 295 responses
-├── /root/r5_derivation                 1h20m25s active; 201 responses
-└── /root/r4_r5_scope_audit             1h17m30s active; 230 responses
-
-recursive agent-time                  8h16m19s
-active union                          3h48m27s
-parallel overlap                      4h27m52s
+parent active                         5h45m37s
+├── recursive agent-time             11h01m38s
+├── active union                       5h45m37s
+└── parallel overlap                   5h16m01s
 ```
 
-The tree recorded 1,668 responses, 213,736,812 input tokens, 208,243,712 cached input
-tokens, 735,081 output tokens, and 272,394 reasoning-output tokens.
-Its 5h47m08.677s response envelope splits into 2h48m26.055s of timed model stream and
-2h58m42.622s unattributed.
+All 87 completed recursive turns contain native duration and first-token fields.
+Their reported duration totals 10h17m36.872s, differs from matching event intervals by
+274 milliseconds, has a 3m00.586s p50 and 14m19.252s p95, and reaches 2h06m30.237s at
+the maximum.
 
-The 4h27m52s overlap shows why parent `agent_wait` cannot be treated as pure waste.
+| Model | Thinking | Turns | Responses | Response envelope | First token | Reasoning | Message | Residual |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| `gpt-5.6-sol` | `xhigh` | 83 | 1,981 | 6h43m49.749s | 7m34.859s | 2h58m49.460s | 17m46.222s | 3h19m39.208s |
+| `gpt-5.6-sol` | `max` | 4 | 232 | 44m37.693s | 25.779s | 24m58.986s | 2m28.254s | 16m44.674s |
+
+The tree records 2,213 response events, 288,786,067 input tokens, 280,945,664 cached
+input tokens, 1,002,754 output tokens, and 370,981 reasoning-output tokens.
+Native first-token wait is only 1.8% of the 7h28m27.442s recursive response envelope.
+The larger targets are 3h44m02.922s of explicit stream work and 3h36m23.882s of residual
+response time.
+
+The 5h16m01s overlap shows why parent `agent_wait` cannot be treated as pure waste.
 The three long audits ran concurrently and delivered distinct derivation, mutation, and
 scope checks. The optimization target is idle tails, duplicate integration, and repeated
 orientation, not independent review itself.
 
-The active task repeatedly reloads large workflow, skill, and handoff contracts after
-continuations. Token caching makes that cheaper than an uncached prompt, but it does not
-remove client latency, context management, or the model work needed to reconstruct the
-active slice. A compact freshness-checked resume packet is therefore a measured W5
-candidate.
+The orientation trio reduced 11m22s of agent work to a 4m40s tail.
+The broad R4, R5, and scope trio used 257m07s of agent-time, received 65 follow-ups and
+25 messages, left 86m35s with no long child active, and ended with a 41–42-minute
+single-agent tail. More broad agents would add integration work; the next test uses
+bounded leaf waves.
 
 ### Local command bottlenecks
 
-The largest parent commands were:
+The largest exact parent commands were:
 
 | Command class | Invocations | Total | Maximum |
 | --- | ---: | ---: | ---: |
-| Full `packing-validate --jobs 2 --inner-jobs 1` | 1 | 7m17.813s | 7m17.813s |
+| Full `packing-validate --jobs 2 --inner-jobs 1` | 2 | 12m35.939s | 7m17.813s |
+| CI wait | 1 | 8m12.106s | 8m12.106s |
 | Exact row-jet pytest group | 2 | 5m31.946s | 3m00.993s |
-| Fast `packing-validate` | 2 | 3m53.285s | 3m29.045s |
+| Standard fast gate across parent and children | 4 | 9m12.127s | 4m53.372s |
 | Reordered exact pytest group | 1 | 1m43.314s | 1m43.314s |
 | Two largest exact inline diagnostics | 2 | 1m54.136s | 58.343s |
-| Combined exact pytest and fast gate | 1 | 56.376s | 56.376s |
 
 Session 017’s terminal gate on the loop-2-based branch passed in 284.29 wall-seconds.
 Fast behavioral tests consumed 213.97 seconds and negative controls 138.04 seconds; the
 outer scheduler overlapped them, so their sum is not the gate wall time.
-That branch contains 62 controls, while representative CI run 32912699602 contains 65.
-The two receipts confirm the bottleneck but are not a strict before/after comparison;
-revision and exact control inventory must travel with every benchmark.
+The session-019 correction spike produced a second clean current-branch receipt: 327.66
+wall-seconds, with 241.96 seconds in behavioral tests, 167.23 seconds in negative
+controls, 41.60 seconds in the soundness perimeter, and 22.93 seconds in historical
+regressions. That branch contains 62 controls, while representative CI run 32912699602
+contains 65. The two receipts confirm the bottleneck but are not a strict before/after
+comparison; revision and exact control inventory must travel with every benchmark.
 
 The exact group contains 17 tests.
 Repeated construction through `owner_row_jets()` and `active_row_jets()`, dense exact
 15×15 Hessians, and repeated field/symmetry validation are the first profiling targets.
 That diagnosis is a code-path hypothesis, not yet an accepted optimization.
 
-The loop-2 branch has no pull request as of this review.
-No GitHub Actions run or CI-watch interval appears on its critical path.
-CI still matters because every eventual integration pays the same slow workflow and
-because local full and fast commands execute much of the identical surface.
+Command categories are substring heuristics and may classify a composite command by an
+embedded tool name. The exact totals above come from normalized commands.
+Equivalent calls with different `--directory` spelling remain separate until the
+revision-keyed surface fingerprint in `think-3mkx` lands.
 
 ## CI Baseline
 
@@ -286,53 +306,39 @@ The workflow in `.github/workflows/packing-validation.yml` runs on every packing
 request and push to `main`. It starts two jobs:
 
 - Linux runs the complete ordinary gate with `--jobs 2 --inner-jobs 1`.
+
 - macOS repeats that complete gate with the same worker settings, then directly runs the
   focused deep golden.
 
-Across the latest twelve successful runs at the review snapshot, end-to-end duration
-was:
+Across the latest 24 successful workflows through run `32926510669`, end-to-end time
+ranges from 290 to 440 seconds, with 346-second p50 and 430-second p95. Linux job p50 is
+250.5 seconds; macOS job p50 is 342.5 seconds.
+Queue p50 is three seconds on each host, so the executed work dominates.
 
-```text
-4:50, 4:52, 4:53, 5:00, 5:19, 5:45,
-5:58, 6:12, 6:15, 6:34, 7:02, 7:10
-```
-
-The median is 5m51.5s. Hosted-runner timing should be trended and budgeted, not turned
-into a brittle functional assertion.
-
-[Run 32912699602](https://github.com/jlevy/thinking-scratchpad/actions/runs/32912699602)
-is the representative step-level receipt:
+Run `32926510669` records:
 
 | Job or step | Time |
 | --- | ---: |
-| Linux job | 4m37s |
-| Linux validation step | 4m27s |
-| macOS job | 4m46s |
-| macOS full validation | 3m11s |
-| macOS focused deep golden | 1m16s |
+| Linux job | 378s |
+| Linux full validation | 366.21s |
+| Linux pytest | 251.26s |
+| Linux negative controls | 158.84s |
+| Linux soundness perimeter | 53.88s |
+| macOS job | 436s |
+| macOS duplicate full validation | 318.28s |
+| macOS focused deep golden | 95.89s |
 
-The Linux validator reported 266.24 seconds total.
+Linux and macOS spent 684.49 runner-seconds repeating the ordinary gate, and macOS then
+spent another 95.89 seconds on deep golden.
+Removing macOS alone would leave the 378-second Linux result.
 
-| Linux validation step | Time |
-| --- | ---: |
-| Negative controls | 183.81s |
-| Soundness perimeter | 53.63s |
-| Historical regressions | 29.73s |
-| Deterministic SVG | 19.28s |
-| Python quality | 19.00s |
-| Trump cones | 16.00s |
-| Pytest | 13.38s |
-| Schema validation | 11.64s |
-
-The macOS full gate spent 134.63 seconds on negative controls, 32.11 seconds on the
-soundness perimeter, 19.00 seconds on historical regressions, 14.91 seconds on SVG,
-12.21 seconds on pytest, 11.88 seconds on Trump cones, 11.75 seconds on Python quality,
-and 8.74 seconds on schemas.
-
-The mutation runner already supports a thread pool through `PACK_JOBS`, but CI forces
-`--inner-jobs 1`. All 65 controls therefore traverse private snapshots serially on both
-architectures. This is the largest high-confidence performance opportunity because the
-accepted contract can be compared control-for-control under candidate worker settings.
+The current exact additions are the new Linux bottleneck.
+Hosted Linux pytest rose from a 10.44-second historical p50 to 251.26 seconds.
+A local profile assigns 212.53 seconds to thirty exact tests and only 14.95 seconds to
+the other ninety-four.
+Negative controls take 158.54 seconds at one worker, 98.17 at two, and 90.19 at four;
+two workers are the local efficiency knee, while job-level shards are required for the
+one-minute path.
 
 The current macOS lane has caught real problems.
 D-272 and D-273 show why a portability lane must remain direct and blocking whenever it
@@ -345,7 +351,7 @@ duplication of every platform-neutral check on every pull request.
 
 | Priority | Change | Evidence | Preserved guard | Acceptance target |
 | --- | --- | --- | --- | --- |
-| P0 | Required Linux PR fast lane with structured timing | Successful CI p50 5m51.5s; every PR waits for two full jobs | Fast surface, workflow-contract tests, visible later full assurance | Warm p50 ≤60s, p95 ≤90s |
+| P0 | Required Linux PR fast lane with structured timing | Successful CI p50 346s and p95 430s; every PR waits for two full jobs | Fast surface, workflow-contract tests, visible later full assurance | Warm p50 ≤60s, p95 ≤75s |
 | P0 | Profile and parallelize negative controls | 183.81s Linux and 134.63s macOS; CI forces one worker | Exact 65 ids, mutations, diagnostics, restoration, stable output, timeouts | Reproducible same-result reduction sufficient for full Linux p50 ≤90s |
 | P0 | Selected blocking macOS portability lane | Duplicate full gate plus 76s deep check on every PR | Direct failure when invoked; `main`, scheduled, manual, and explicit portability triggers | Remove macOS from unrelated PR critical path without losing integration evidence |
 | P0 | Profile and reuse exact row-jet construction | Focused group repeats at 103–181s; exact probes at 20–58s | Exact rows, gradients, Hessians, field/symmetry failures, stresses, scales | At least 5× repeated-edit speedup after cold and invalidation checks |
@@ -362,10 +368,13 @@ faster for local, integration, and scheduled use.
 
 A recurring W5 sample should consume, not duplicate, these sources:
 
-1. `CodexEfficiencyRollup/v1` for named root tasks and their recursive descendants;
+1. `CodexEfficiencyRollup/v2` for named root tasks and their recursive descendants;
+
 2. structured `packing-validate` JSON with revision, platform, selected surface,
    workers, per-step seconds, and total seconds;
+
 3. GitHub workflow/job timing artifacts for recent comparable runs; and
+
 4. declared soft budgets and change from the prior median.
 
 Run it after a clocked research session, after a material gate-surface change, and on a
@@ -401,9 +410,13 @@ The scanner JSON and this dated review are linked evidence instead.
 Current Codex logs also do not provide:
 
 - complete server-side inference latency;
+
 - explicit stream timing for legacy tasks;
+
 - an originating command for every orphaned legacy poll;
+
 - a reliable duration for every legacy compaction; or
+
 - a repository-native recurring scheduler and CI timing-history schema.
 
 These limits constrain the labels used in this review.
@@ -417,6 +430,7 @@ From `explorations/packing/`:
 ```shell
 uv run --frozen python -m devtools.codex_log_rollup \
   --sessions-root ~/.codex/sessions \
+  --through 2026-08-26T05:05:06.988Z \
   --root-id 01a02fc2-081b-72b1-999a-cd5550629c0c \
   --root-id 01a03b2a-d50b-7582-8d78-be6d8ebb461d \
   --format markdown

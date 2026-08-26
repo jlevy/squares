@@ -203,6 +203,7 @@ def test_rollup_subtracts_tools_and_groups_model_responses_by_model_and_effort(
                 started_at=1_000,
                 completed_at=1_010,
                 duration_ms=10_000,
+                time_to_first_token_ms=1_000,
             ),
         ],
     )
@@ -216,7 +217,35 @@ def test_rollup_subtracts_tools_and_groups_model_responses_by_model_and_effort(
     assert own["tool_seconds_by_category"] == {"command": 2.0}
     assert own["response_envelope_seconds"] == 8.0
     assert own["timed_model_stream_seconds"] == 5.0
+    assert result["schema"] == "CodexEfficiencyRollup/v2"
     assert own["unattributed_response_seconds"] == 3.0
+    assert own["recorded_first_token_wait_seconds"] == 1.0
+    assert own["residual_response_seconds"] == 2.0
+    assert own["native_turn_timing"] == {
+        "completed_turn_count": 1,
+        "duration_available_count": 1,
+        "time_to_first_token_available_count": 1,
+        "duration_coverage": 1.0,
+        "time_to_first_token_coverage": 1.0,
+        "reported_duration_seconds": {
+            "count": 1,
+            "total": 10.0,
+            "min": 10.0,
+            "p50": 10.0,
+            "p95": 10.0,
+            "max": 10.0,
+        },
+        "time_to_first_token_seconds": {
+            "count": 1,
+            "total": 1.0,
+            "min": 1.0,
+            "p50": 1.0,
+            "p95": 1.0,
+            "max": 1.0,
+        },
+        "matching_interval_seconds": 10.0,
+        "reported_minus_interval_seconds": 0.0,
+    }
     assert model["model"] == "gpt-test"
     assert model["thinking_level"] == "high"
     assert model["model_response_count"] == 2
@@ -225,6 +254,9 @@ def test_rollup_subtracts_tools_and_groups_model_responses_by_model_and_effort(
     assert model["timed_message_seconds"] == 2.0
     assert model["timed_model_stream_seconds"] == 5.0
     assert model["unattributed_response_seconds"] == 3.0
+    assert model["recorded_first_token_wait_seconds"] == 1.0
+    assert model["residual_response_seconds"] == 2.0
+    assert model["native_turn_timing"]["reported_duration_seconds"]["total"] == 10.0
     assert model["stream_timing_available"] is True
     assert model["tokens"] == {
         "input": 220,
@@ -236,7 +268,8 @@ def test_rollup_subtracts_tools_and_groups_model_responses_by_model_and_effort(
     assert own["top_commands"][0]["category"] == "pytest"
     assert own["top_commands"][0]["total_seconds"] == 2.0
     markdown = render_markdown(result)
-    assert "8.0s envelope; 5.0s timed stream" in markdown
+    assert "8.0s envelope; 1.0s first-token wait; 5.0s timed stream" in markdown
+    assert "10.0s native turn duration" in markdown
 
 
 def test_rollup_builds_recursive_tree_and_keeps_agent_time_out_of_parent_wall(
@@ -276,6 +309,7 @@ def test_rollup_builds_recursive_tree_and_keeps_agent_time_out_of_parent_wall(
                 started_at=2_000,
                 completed_at=2_010,
                 duration_ms=10_000,
+                time_to_first_token_ms=1_000,
             ),
         ],
     )
@@ -340,6 +374,7 @@ def test_rollup_builds_recursive_tree_and_keeps_agent_time_out_of_parent_wall(
                 started_at=2_002,
                 completed_at=2_008,
                 duration_ms=6_000,
+                time_to_first_token_ms=500,
             )
             | {"ordinal": 6},
         ],
@@ -355,6 +390,16 @@ def test_rollup_builds_recursive_tree_and_keeps_agent_time_out_of_parent_wall(
     assert root["subtree"]["elapsed_envelope_seconds"] == 10.0
     assert root["subtree"]["active_union_seconds"] == 10.0
     assert root["subtree"]["parallel_overlap_seconds"] == 6.0
+    assert root["subtree"]["recorded_first_token_wait_seconds"] == 1.5
+    assert root["subtree"]["residual_response_seconds"] == 14.5
+    assert root["subtree"]["native_turn_timing"]["reported_duration_seconds"] == {
+        "count": 2,
+        "total": 16.0,
+        "min": 6.0,
+        "p50": 8.0,
+        "p95": 9.8,
+        "max": 10.0,
+    }
     assert [
         (entry["model"], entry["thinking_level"]) for entry in root["subtree"]["models"]
     ] == [("gpt-child", "medium"), ("gpt-parent", "xhigh")]
@@ -449,6 +494,202 @@ def test_rollup_marks_live_task_at_last_recorded_event(tmp_path: Path) -> None:
     assert own["snapshot_at"] == "2026-08-25T00:00:03.000Z"
 
 
+def test_rollup_freezes_a_live_tree_at_an_explicit_cutoff(tmp_path: Path) -> None:
+    root_id = "00000000-0000-0000-0000-000000000023"
+    child_id = "00000000-0000-0000-0000-000000000024"
+    turn_id = "turn-live"
+    _write_log(
+        tmp_path / "root.jsonl",
+        [
+            _session_meta(root_id, timestamp="2026-08-25T00:00:00.000Z"),
+            _event(
+                "2026-08-25T00:00:00.000Z",
+                "task_started",
+                turn_id=turn_id,
+            ),
+            _turn_context(
+                turn_id,
+                timestamp="2026-08-25T00:00:00.000Z",
+                model="gpt-live",
+                effort="low",
+            ),
+            _token_count(
+                timestamp="2026-08-25T00:00:03.000Z",
+                input_tokens=5,
+                cached_tokens=0,
+                output_tokens=1,
+                reasoning_tokens=0,
+            ),
+            _token_count(
+                timestamp="2026-08-25T00:00:08.000Z",
+                input_tokens=500,
+                cached_tokens=0,
+                output_tokens=100,
+                reasoning_tokens=50,
+            ),
+            _event(
+                "2026-08-25T00:00:10.000Z",
+                "task_complete",
+                turn_id=turn_id,
+                duration_ms=10_000,
+                time_to_first_token_ms=1_000,
+            ),
+        ],
+    )
+    _write_log(
+        tmp_path / "future-child.jsonl",
+        [
+            _session_meta(
+                child_id,
+                timestamp="2026-08-25T00:00:07.000Z",
+                parent_id=root_id,
+                agent_path="/root/future",
+            ),
+        ],
+    )
+
+    result = build_rollup(
+        tmp_path,
+        [root_id],
+        through="2026-08-25T00:00:05.000Z",
+    )
+    root = result["roots"][0]
+
+    assert result["cutoff_at"] == "2026-08-25T00:00:05.000Z"
+    assert result["snapshot_at"] == "2026-08-25T00:00:03.000Z"
+    assert root["own"]["active_seconds"] == 3.0
+    assert root["own"]["models"][0]["tokens"]["input"] == 5
+    assert root["children"] == []
+
+
+def test_rollup_treats_missing_or_invalid_native_timing_as_unavailable(
+    tmp_path: Path,
+) -> None:
+    root_id = "00000000-0000-0000-0000-000000000025"
+    _write_log(
+        tmp_path / "compatibility.jsonl",
+        [
+            _session_meta(root_id, timestamp="2026-08-25T00:00:00.000Z"),
+            _event(
+                "2026-08-25T00:00:00.000Z",
+                "task_started",
+                turn_id="turn-missing",
+            ),
+            _turn_context(
+                "turn-missing",
+                timestamp="2026-08-25T00:00:00.000Z",
+                model="gpt-test",
+                effort="medium",
+            ),
+            _event(
+                "2026-08-25T00:00:01.000Z",
+                "task_complete",
+                turn_id="turn-missing",
+            ),
+            _event(
+                "2026-08-25T00:00:01.000Z",
+                "task_started",
+                turn_id="turn-invalid",
+            ),
+            _turn_context(
+                "turn-invalid",
+                timestamp="2026-08-25T00:00:01.000Z",
+                model="gpt-test",
+                effort="medium",
+            ),
+            _event(
+                "2026-08-25T00:00:02.000Z",
+                "task_complete",
+                turn_id="turn-invalid",
+                duration_ms=-1,
+                time_to_first_token_ms="not-a-number",
+            ),
+            _event(
+                "2026-08-25T00:00:02.000Z",
+                "task_started",
+                turn_id="turn-native",
+            ),
+            _turn_context(
+                "turn-native",
+                timestamp="2026-08-25T00:00:02.000Z",
+                model="gpt-test",
+                effort="medium",
+            ),
+            _event(
+                "2026-08-25T00:00:04.000Z",
+                "task_complete",
+                turn_id="turn-native",
+                duration_ms=2_000,
+                time_to_first_token_ms=250,
+            ),
+        ],
+    )
+
+    own = build_rollup(tmp_path, [root_id])["roots"][0]["own"]
+
+    assert own["native_turn_timing"]["completed_turn_count"] == 3
+    assert own["native_turn_timing"]["duration_available_count"] == 1
+    assert own["native_turn_timing"]["time_to_first_token_available_count"] == 1
+    assert own["native_turn_timing"]["duration_coverage"] == 0.333
+    assert own["native_turn_timing"]["time_to_first_token_coverage"] == 0.333
+    assert [turn["client_duration_seconds"] for turn in own["turns"]] == [
+        None,
+        None,
+        2.0,
+    ]
+    assert [turn["client_time_to_first_token_seconds"] for turn in own["turns"]] == [
+        None,
+        None,
+        0.25,
+    ]
+
+
+def test_rollup_counts_current_compaction_items_without_double_counting_legacy_events(
+    tmp_path: Path,
+) -> None:
+    root_id = "00000000-0000-0000-0000-000000000027"
+    turn_id = "turn-compaction"
+    _write_log(
+        tmp_path / "compaction.jsonl",
+        [
+            _session_meta(root_id, timestamp="2026-08-25T00:00:00.000Z"),
+            _event(
+                "2026-08-25T00:00:00.000Z",
+                "task_started",
+                turn_id=turn_id,
+            ),
+            _turn_context(
+                turn_id,
+                timestamp="2026-08-25T00:00:00.000Z",
+                model="gpt-test",
+                effort="high",
+            ),
+            _item(
+                "ContextCompaction",
+                timestamp="2026-08-25T00:00:04.000Z",
+                turn_id=turn_id,
+                started_ms=1_787_616_002_000,
+                completed_ms=1_787_616_004_000,
+            ),
+            _event("2026-08-25T00:00:04.000Z", "context_compacted"),
+            _event(
+                "2026-08-25T00:00:10.000Z",
+                "task_complete",
+                turn_id=turn_id,
+                duration_ms=10_000,
+                time_to_first_token_ms=1_000,
+            ),
+        ],
+    )
+
+    own = build_rollup(tmp_path, [root_id])["roots"][0]["own"]
+
+    assert own["compaction_seconds"] == 2.0
+    assert own["compaction_item_count"] == 1
+    assert own["legacy_compaction_event_count"] == 1
+    assert own["compaction_event_count"] == 1
+
+
 def test_legacy_subagent_skips_replayed_history_and_recovers_command_timing(
     tmp_path: Path,
 ) -> None:
@@ -495,6 +736,12 @@ def test_legacy_subagent_skips_replayed_history_and_recovers_command_timing(
                 "task_started",
                 turn_id="compressed-replay-turn",
             ),
+            _turn_context(
+                "compressed-replay-turn",
+                timestamp="2026-08-25T00:00:02.006Z",
+                model="gpt-parent-replay",
+                effort="max",
+            ),
             _token_count(
                 timestamp="2026-08-25T00:00:02.007Z",
                 input_tokens=1_000_000,
@@ -506,6 +753,8 @@ def test_legacy_subagent_skips_replayed_history_and_recovers_command_timing(
                 "2026-08-25T00:00:02.008Z",
                 "task_complete",
                 turn_id="compressed-replay-turn",
+                duration_ms=1_000_000,
+                time_to_first_token_ms=5_000,
             ),
             _event("2026-08-25T00:00:02.009Z", "thread_settings_applied"),
             _event(
@@ -577,6 +826,7 @@ def test_legacy_subagent_skips_replayed_history_and_recovers_command_timing(
     child = build_rollup(tmp_path, [root_id])["roots"][0]["children"][0]
 
     assert child["own"]["task_count"] == 1
+    assert child["own"]["excluded_legacy_replay_task_count"] == 1
     assert child["own"]["active_seconds"] == 6.0
     assert child["own"]["models"][0]["tokens"]["input"] == 20
     assert child["own"]["stream_timing_available"] is False

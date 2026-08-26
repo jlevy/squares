@@ -314,6 +314,9 @@ an expired phase or relying on controller memory.
 initial W5 efficiency record, and
 [session 018](campaign/agent-sessions/session-018-efficiency-plan-refinement.md) is its
 measured planning refinement.
+[Session 019](campaign/agent-sessions/session-019-native-timing-correction-spike.md)
+corrects the Codex timing instrument, freezes both named task trees, and replaces
+estimated delay attribution with native per-turn rollups by model and thinking level.
 They measure and prioritize the research and validation loops but do not supersede
 session 016’s scientific handoff or authorize exp-045 implementation.
 Session 015’s first bounded W6 slice stopped exp-040 unresolved before retained
