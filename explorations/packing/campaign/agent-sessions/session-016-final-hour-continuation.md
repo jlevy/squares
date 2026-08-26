@@ -49,10 +49,16 @@ session:
     - >-
       Published checkpoint 8ee367b provides the accepted row, normalized-stress, and
       formula-derived sheet substrate from which the remaining contract can be audited.
+    - >-
+      Independent scale derivation identifies three bounded symbolic-beta records and
+      two unbounded sign records, with exact tied-row gradient and cusp identities.
+    - >-
+      Independent mutation and scope audits retain the twelve production entry points,
+      identify the missing guards, and accept exp-044 as coherent but terminal.
     stop_reason: null
     next_action: >-
       Delegate independent scale and mutation analyses, reconcile their finite contract,
-      and stop for finalization no later than 19:38:26-07:00.
+      and stop for finalization no later than 19:38:08-07:00.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -73,11 +79,77 @@ session:
       sheet control are accepted. Scale routing, production mutations, and all target
       dispositions remain open; exp-044 is terminal with no result JSON.
     after: null
-  delegations: []
+  delegations:
+  - task: Derive the exact finite owner-3 scale-routing contract from production helpers.
+    operator: /root/r4_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Derived the exact five-record split, formal-real bounded representation, all
+      fifteen ordinary cancellation columns, and two source-derived unbounded cusp
+      coefficients without a target disposition.
+    evidence:
+    - >-
+      The tied production gradients give b_plus=1/4-alpha/2 and
+      b_minus=5/4-alpha/2 under d_beta=e_theta3.
+    files: []
+    checks:
+    - Read-only source, row-jet, stress, and exp-044 reconciliation.
+    uncertainty: A successor must freeze the record keys before implementation.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Implement only after a successor preregisters the retained record contract.
+    phase: 1
+  - task: Map all frozen mutations and refusals to real production guards.
+    operator: /root/r5_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Mapped all twelve identifiers to production entry points, separated covered,
+      partial, and missing guards, and rejected sentinel, post-result, and broad-catch
+      controls in the predecessor draft.
+    evidence:
+    - >-
+      Five production guards are missing; the other seams still need exact typed driver
+      translation and fresh certificate receipts.
+    files: []
+    checks:
+    - Read-only mutation-by-mutation audit against exp-044 and current helper tests.
+    uncertainty: No target-level integration driver exists yet.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Use the retained table as the successor's preregistered control contract.
+    phase: 1
+  - task: Audit the scale and mutation boundary for soundness and implementability.
+    operator: /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted exp-044's criterion as coherent and implementable from repository state,
+      while requiring a new monotonic experiment because exp-044 is terminal.
+    evidence:
+    - >-
+      The accepted row, stress, and sheet helpers are sufficient substrate; the old
+      obstruction draft remains inadmissible because it hand-builds formulas, copies
+      predecessor constants, asserts scale exhaustion, and has only eight controls.
+    files: []
+    checks:
+    - Independent read-only ACCEPT with a finite implementation and evidence list.
+    uncertainty: No scientific target or disposition was evaluated.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Require post-change review before any successor target run.
+    phase: 1
   outputs:
   - campaign/agent-sessions/session-016-final-hour-continuation.md
   checks:
   - Session 015 stopped at its declared eight-phase cap with checkpoint 8ee367b pushed.
+  - >-
+    A read-only exact diagnostic reproduces the two owner-3 tied-row theta3 gradients
+    `1/4-alpha/2` and `5/4-alpha/2` from production jets.
+  - >-
+    Softschema, generated-ledger freshness, campaign-record validation, and git diff
+    checks pass with sixteen sessions and forty-four rounds.
   stop_reason: null
   next_action: >-
     Under think-1s0h and BC-010, finish only the active W7 scale-and-mutation design
@@ -132,6 +204,105 @@ Do not run a pure `-W` target, create a result JSON, infer an obstruction, or la
 generic numerical campaign.
 A native goal, heartbeat, chat history, or Codex memory may wake an agent, but none is
 part of the scientific state.
+
+## Retained W7 Design
+
+This section is an implementation handoff, not a result or an amendment to exp-044.
+Exp-044 remains terminal unresolved.
+A successor criterion must freeze the names and failure identifiers below before target
+implementation or measurement.
+
+### Five exact owner-3 scale records
+
+Use `delta = theta3 - theta4`, pass to a sign-stable subsequence, and represent the
+bounded limit symbolically.
+The exact record set is:
+
+| Key | Regime | Production tied row |
+| --- | --- | --- |
+| `bounded_beta_negative` | `abs(delta)/t^2` bounded and `beta < 0` | `contact:3-4:owner3:a+:square4-feature-1` |
+| `bounded_beta_zero` | `abs(delta)/t^2` bounded and `beta = 0` | both tied rows |
+| `bounded_beta_positive` | `abs(delta)/t^2` bounded and `beta > 0` | `contact:3-4:owner3:a+:square4-feature+1` |
+| `unbounded_delta_negative` | `abs(delta)/t^2 -> infinity` and `delta < 0` | `contact:3-4:owner3:a+:square4-feature-1` |
+| `unbounded_delta_positive` | `abs(delta)/t^2 -> infinity` and `delta > 0` | `contact:3-4:owner3:a+:square4-feature+1` |
+
+The bounded record uses a formal affine real, never a sampled value or a `FieldElement`
+stand-in:
+
+```text
+P(a, beta) = C + sum(G_j * a_j, j=0..14) + B * beta
+B = G dot d_beta
+d_beta = e_theta3
+```
+
+The canonical section has `dtheta3 - dtheta4 = 1`. Retain all fifteen `G_j`, derive them
+from the normalized production stress, and require every `G_j` and `B` to be exact zero
+before checking the sign of `C`. This proves the statement for arbitrary real `beta`;
+sampling negative, zero, and positive field values does not.
+
+For the unbounded records, derive the following values from source centers and the two
+production tied-row gradients:
+
+```text
+tau = (p4 - p2) dot (-alpha/2, alpha/2) = alpha/2 - 3/4
+b_plus  = grad(g_plus)  dot d_beta = 1/4 - alpha/2
+b_minus = grad(g_minus) dot d_beta = 5/4 - alpha/2
+h = (b_minus - b_plus)/2 = 1/2
+kappa_positive = b_plus = -(h + tau) < 0
+kappa_negative = -b_minus = -(h - tau) < 0
+```
+
+The router must verify these identities from the current row jets, not store their
+right-hand constants.
+It then retains the formal bounded polynomial, the two tied labels and gradients, the
+source-derived `tau`, the two exact cusp coefficients, and exact five-key equality.
+Each unbounded record also retains nuisance-column cancellation and the limits
+`t^2/abs(delta) -> 0`, `t*abs(delta)/abs(delta) -> 0`, and `delta^2/abs(delta) -> 0`.
+Its return type contains proof data only; it does not choose an obstruction,
+sign-symmetry, or H-023 disposition.
+
+### Mutation-to-production-guard map
+
+Every control changes an input before rebuilding a fresh certificate.
+A driver may map a helper failure to the frozen identifier only by matching the exact
+exception type and specific message; a broad exception catcher, altered completed
+result, or sentinel flag is invalid.
+
+| Frozen identifier | Current coverage | Required production entry and guard |
+| --- | --- | --- |
+| `source.minus_w` | Partial | Apply one indexed coordinate override before exact equality with all fifteen coordinates of regenerated `-W`. |
+| `source.strata` | Partial | Require exact `A`, `interior`, and `B` key equality before any case certificate. |
+| `source.owner_exhaustion` | Partial | Require both owners and exact six-case key equality before disposition. |
+| `source.tied_rows` | Partial | Remove one actual row after `owner_row_jets` and before weights; translate only the named missing-label inventory failure. |
+| `jet.center_axis_cross` | Missing | Mutate one designated nonzero symmetric center-angle Hessian entry before substitution and validate that production entry independently. |
+| `jet.correction_unused` | Missing | Keep declared and applied corrections separate; verify every row equals `gradient dot declared_correction + velocity_curvature`. |
+| `jet.absolute_branch` | Partial | Override one strict nonzero SAT feature sign before `sat_gap`; require its existing exact sign-disagreement failure. |
+| `jet.curvature_homogeneity` | Missing | Evaluate zero-correction `W` and `2W` through production stress and require a nonzero `C(2W) = 4 C(W)` before certificate construction. |
+| `certificate.weighted_curvature` | Covered | Perturb one real weight through `weight_adjustments` and translate only the exact combined-gradient-cancellation failure. |
+| `control.sheet_witness` | Covered by helper, missing driver | Require the good formula-derived path to pass first; run the `-1/2` correction through the same 17-row evaluator and retain its named negative tight row. |
+| `certificate.scale_exhaustion` | Missing | Delete one real handler from the exact five-key map and reject before any case disposition. |
+| `scope.overclaim` | Missing | Insert a mixed or component claim into the actual emitted claim map and reject by exact allowed-key and refusal-record validation. |
+
+The thirteen refusal names from exp-044 must be dictionary keys, each with its own
+`status: refused` record and claim-specific reason.
+A list plus `all_refused: true` does not satisfy that contract.
+The exp-036 `+W` fixture must also run through the same source, row, stress, scale, and
+validation path and reach its required positive-control outcome; asserted source
+metadata is not a fixture.
+
+### Successor implementation order
+
+1. Preregister a successor that freezes the five scale keys, formal-real record shape,
+   exact helper-to-identifier mappings, thirteen refusal-record shapes, and valid
+   baseline disposition routing.
+2. Add one top-level instrument input type and case builder.
+   Mutation seams live on those source inputs or production intermediates, never on
+   completed certificates.
+3. Implement the scale router and the five missing production guards above with focused
+   negative controls.
+4. Run a valid baseline of any scientific disposition and the same-builder exp-036
+   positive fixture before the twelve mutations.
+5. Obtain independent post-change acceptance before any target command or result JSON.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
