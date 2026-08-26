@@ -3,9 +3,9 @@ type: is
 id: is-01m0y2vvd18pd978cxrnt4h72g
 title: "Spike: rank Square Packing CI and research-loop bottlenecks"
 kind: task
-status: in_progress
+status: closed
 priority: 0
-version: 3
+version: 4
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md
 labels:
   - packing
@@ -14,7 +14,11 @@ labels:
 dependencies: []
 parent_id: is-01m0r7q50gw0wepeaj1dzb7g3r
 created_at: 2026-08-26T03:47:18.048Z
-updated_at: 2026-08-26T04:13:48.129Z
+updated_at: 2026-08-26T04:34:59.178Z
+closed_at: 2026-08-26T04:34:59.177Z
+close_reason: "Completed the data-driven W5 spike: profiled 24 CI runs, current exact tests and controls, both Codex loop trees, model/thinking allocation, repeated validation, and delegated tails; rewrote the active plan with one-minute CI topology, concrete implementation spikes, and numeric acceptance thresholds in pushed PR 41."
+resolution: null
+duplicate_of: null
 ---
 Use CodexEfficiencyRollup/v1, recent GitHub Actions receipts, pytest duration profiling, and negative-control worker-count samples to rewrite the active W5 plan with measured cost shares, concrete spike commands, expected seconds saved, equivalence guards, stop/go thresholds, and sub-agent routing experiments. This spike changes documentation and tracking only; production speedups remain in their existing implementation beads.
 
