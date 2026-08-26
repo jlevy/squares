@@ -57,8 +57,8 @@ session:
       identify the missing guards, and accept exp-044 as coherent but terminal.
     stop_reason: null
     next_action: >-
-      Delegate independent scale and mutation analyses, reconcile their finite contract,
-      and stop for finalization no later than 19:38:08-07:00.
+      Apply the repository-only portability audit, validate and publish the retained
+      design, and stop for finalization no later than 19:38:08-07:00.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -165,7 +165,8 @@ that cap or relying on a controller’s private memory.
 ## Fresh-Agent Resume
 
 The authoritative branch is `origin/codex/packing-4h-research-loop-2026-08-25`;
-checkpoint `8ee367b` contains the accepted helper implementation.
+checkpoint `f35e60b` contains the latest retained design, while `8ee367b` is the
+accepted helper-substrate checkpoint.
 Fetch and switch to that branch, then read:
 
 1. [`session-015`](session-015-four-hour-r4-r5-loop.md) for the complete prior phase and
@@ -218,13 +219,20 @@ Use `delta = theta3 - theta4`, pass to a sign-stable subsequence, and represent 
 bounded limit symbolically.
 The exact record set is:
 
-| Key | Regime | Production tied row |
+| Key | Regime | Sign-decisive tied row |
 | --- | --- | --- |
 | `bounded_beta_negative` | `abs(delta)/t^2` bounded and `beta < 0` | `contact:3-4:owner3:a+:square4-feature-1` |
 | `bounded_beta_zero` | `abs(delta)/t^2` bounded and `beta = 0` | both tied rows |
 | `bounded_beta_positive` | `abs(delta)/t^2` bounded and `beta > 0` | `contact:3-4:owner3:a+:square4-feature+1` |
 | `unbounded_delta_negative` | `abs(delta)/t^2 -> infinity` and `delta < 0` | `contact:3-4:owner3:a+:square4-feature-1` |
 | `unbounded_delta_positive` | `abs(delta)/t^2 -> infinity` and `delta > 0` | `contact:3-4:owner3:a+:square4-feature+1` |
+
+Require this exact five-key set separately for each `A`, `interior`, and `B` owner-3
+stratum, for an exact fifteen-record Cartesian inventory.
+Every record retains the full normalized nine-row stress, including both tied rows and
+both weights.
+The last column identifies only the row whose cusp coefficient decides that
+sign case; it never removes the other tied row.
 
 The bounded record uses a formal affine real, never a sampled value or a `FieldElement`
 stand-in:
@@ -292,16 +300,21 @@ metadata is not a fixture.
 
 ### Successor implementation order
 
-1. Preregister a successor that freezes the five scale keys, formal-real record shape,
-   exact helper-to-identifier mappings, thirteen refusal-record shapes, and valid
-   baseline disposition routing.
-2. Add one top-level instrument input type and case builder.
-   Mutation seams live on those source inputs or production intermediates, never on
-   completed certificates.
-3. Implement the scale router and the five missing production guards above with focused
-   negative controls.
-4. Run a valid baseline of any scientific disposition and the same-builder exp-036
-   positive fixture before the twelve mutations.
+1. Preregister
+   `campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md`
+   before implementation.
+   It freezes the five scale keys, formal-real record shape, exact helper-to-identifier
+   mappings, thirteen refusal-record shapes, and valid baseline disposition routing.
+2. Implement the scale-only proof data in `cases/n5/minus_w_scale.py` and
+   `tests/test_minus_w_scale.py`.
+3. Replace the hand-formula draft in
+   [`minus_w_obstruction.py`](../../cases/n5/minus_w_obstruction.py) with a case builder
+   that consumes the accepted helpers and scale router; add
+   `tests/test_minus_w_obstruction.py`. Mutation seams live on source inputs or
+   production intermediates, never on completed certificates.
+4. Implement the missing production guards and partial seams above with focused negative
+   controls. Run a valid baseline of any scientific disposition and the same-builder
+   exp-036 positive fixture before the twelve mutations.
 5. Obtain independent post-change acceptance before any target command or result JSON.
 
 <!-- This document follows common-doc-guidelines.md.

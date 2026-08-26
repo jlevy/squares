@@ -327,10 +327,11 @@ correction column retained, and a formula-derived exp-034 sheet control across b
 owner inventories. Focused tests and independent review accept that substrate at
 checkpoint `8ee367b` while refusing branch completeness, scale routing, and obstruction.
 Exp-044 freezes the separate case-level integration but is terminal unresolved with no
-target run or result JSON. Session 016’s fresh-agent section now owns the branch, read
-order, clocks, validation, and exact scale-and-mutation design action, so no controller
-memory is required. The `-W`, mixed-angle, whole-stationary-component, and unequal-side-
-clearance questions remain later slices; D-239 is a separate W7 line.
+target run or result JSON. Session 016’s latest design checkpoint `f35e60b` owns the
+branch, read order, clocks, validation, exact fifteen-record scale inventory, mutation
+map, and successor artifact paths, so no controller memory is required.
+The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
+remain later slices; D-239 is a separate W7 line.
 Do not start basin-frequency work or reinterpret exp-035 through exp-040 as a
 connectivity proof.
 
