@@ -371,7 +371,7 @@ session:
       Preregister and test an exp-044 pure -W successor that consumes the accepted exact
       row-jet helper, derives weighted rowwise curvature from full jets, checks an exact
       sheet witness, and routes the owner-3 two-scale argument mechanically.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: >-
       The W7 helper and source-bound tests now close the reusable algebraic blocker, so
@@ -397,15 +397,77 @@ session:
       Terminalize exp-044 invalid or unresolved with the first exact missing row,
       witness, scale, or disposition identity; retain no target JSON and make no pure -W
       inference from checker failure.
-    outcome: null
+    outcome: >-
+      Exp-044's corrected criterion and fresh-agent handoff passed two independent
+      audits. A new helper-only production builder now derives all A, interior, and B
+      wall and SAT row jets for both owners and validates their exact source gradients,
+      but the scientific instrument stopped before stress, sheet, scale, mutation, or
+      target evaluation and retained no result.
     evidence:
     - >-
       The accepted exact-jet helper derives full value, gradient, Hessian, and path
       coefficients and matches all six source first-order row inventories exactly.
+    - >-
+      Corrected preregistration checkpoint b609711 freezes independent valid
+      dispositions, symbolic-real and unbounded scale routing, exact sheet labels and
+      jets, twelve production mutations, thirteen refusal records, and repository-only
+      resume instructions before any target-code edit.
+    - >-
+      Production-builder checkpoint a5a4ef0 adds 268 lines in two new files; 17 focused
+      helper-and-builder tests pass in 100.41 seconds, Ruff and BasedPyright are clean,
+      and independent live review accepts the nonlinear branch guard and refusal
+      boundary.
+    stop_reason: >-
+      The evidence checkpoint showed that the complete frozen exp-044 instrument would
+      not fit the remaining slice without weakening its stress, sheet, scale, mutation,
+      or disposition contract. No target command or result JSON ran, and builder success
+      was not promoted to a pure -W result.
+    next_action: >-
+      In a separate W7 phase, build and review the reusable weighted stress and sheet
+      evaluators on top of minus_w_row_jets without opening a target result.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Build the smallest reusable exact evaluator that applies the production nine-row
+      stress weights to minus_w_row_jets, retains full row substitutions and correction
+      cancellation, and checks the exp-034 sheet path, without deciding pure -W.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Exp-044 stopped with a reviewed production row builder but an incomplete
+      scientific instrument; the next independently testable unit is reusable W7 proof
+      instrumentation rather than another target round.
+    budget_minutes: 30
+    started_at: '2026-08-25T18:43:20-07:00'
+    deadline_at: '2026-08-25T19:13:20-07:00'
+    expected_output: >-
+      A reviewed exact stress-and-sheet evaluator with focused tests, or a finite
+      source-bound algebraic blocker that a fresh agent can resume from the repository.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen --all-extras --group dev pytest
+      -q tests/test_exact_jets.py tests/test_minus_w_row_jets.py && uv run --directory
+      explorations/packing --frozen ruff check cases/n5 src/sqpack/research && uv run
+      --directory explorations/packing --frozen basedpyright cases/n5
+      src/sqpack/research && git diff --check
+    kill_condition: >-
+      Stop on one copied exp-036 coefficient, unweighted row constant, missing correction
+      column, sheet shortcut, target disposition, scale assertion, helper-boundary
+      overclaim, or the phase deadline.
+    fallback: >-
+      Retain the exact stress weights, first failing weighted jet identity, complete
+      sheet path vector, and missing test as a W7 design handoff; do not open a target
+      experiment or infer pure -W.
+    outcome: null
+    evidence:
+    - >-
+      The accepted production builder supplies the exact row jets and source validation
+      needed by this evaluator without importing any remembered coefficient.
     stop_reason: null
     next_action: >-
-      Freeze exp-044 before editing the exp-043 draft; delegate disjoint case-jet
-      construction, scale-router review, and post-change scientific audit.
+      Delegate disjoint stress-evaluator implementation and read-only sheet/control
+      review, then require independent post-change acceptance before publishing.
   primary_bead: think-1s0h
   status: in_progress
   budget:
@@ -867,6 +929,49 @@ session:
     elapsed_quality: unavailable
     next_action: Preregister a separate exp-044 case-level integration criterion.
     phase: 6
+  - task: Audit exp-044's corrected criterion and repository-only handoff before target work.
+    operator: /root/r5_derivation and /root/r4_r5_scope_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Both audits accepted the independent validity and scientific dispositions,
+      symbolic-real and unbounded scale split, exact sheet contract, twelve
+      pre-certificate mutations, thirteen individual refusal records, helper boundary,
+      branch checkpoint, read order, absolute clocks, and checkpoint sequence.
+    evidence:
+    - Preregistration correction b609711 was pushed before any target-code edit.
+    files: []
+    checks:
+    - Read-only scientific and fresh-checkout audits; no target command ran.
+    uncertainty: The complete case-level instrument still had to be implemented and reviewed.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Build only reviewed production-row infrastructure inside the remaining slice.
+    phase: 7
+  - task: Implement and independently audit the exact n=5 production row-jet builder.
+    operator: /root/r4_derivation and /root/r5_derivation
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Added a helper-only builder for all active wall and SAT jets, exact owner selection,
+      source-key and gradient validation, duplicate and invalid-input refusals, and
+      second-order tied-feature branching without opening a target result.
+    evidence:
+    - Production-builder checkpoint a5a4ef0 contains only the new module and focused tests.
+    - Independent live audit blocked and then accepted the Hessian-aware branch guard.
+    files:
+    - cases/n5/minus_w_row_jets.py
+    - tests/test_minus_w_row_jets.py
+    checks:
+    - Seventeen focused helper-and-builder tests pass in 100.41 seconds.
+    - Ruff and BasedPyright pass with no diagnostics; git diff check is clean.
+    uncertainty: >-
+      Weighted stress substitution, the sheet evaluator, non-t-squared scale routing,
+      mutations, and scientific dispositions remain unimplemented.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Build those remaining parts as reusable W7 instrumentation before any successor.
+    phase: 7
   outputs:
   - campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md
   - campaign/agent-sessions/README.md
@@ -883,6 +988,8 @@ session:
   - cases/n5/minus_w_obstruction.py
   - src/sqpack/research/exact_jets.py
   - tests/test_exact_jets.py
+  - cases/n5/minus_w_row_jets.py
+  - tests/test_minus_w_row_jets.py
   - campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md
   - campaign/hypotheses/H-023-n5-terminal-connectivity.md
   - campaign/agendas/agenda-001-basin-confidence-ladder.md
@@ -911,11 +1018,16 @@ session:
   - >-
     Six exact-jet tests and the full fast gate pass; Ruff and BasedPyright are clean, and
     independent review accepts the W7 helper while refusing any exp-043 promotion.
+  - >-
+    Seventeen focused helper-and-production-builder tests pass in 100.41 seconds; Ruff
+    and BasedPyright are clean, and independent review accepts all six source inventories,
+    a production center-angle Hessian, second-order tied branching, and the non-scientific
+    API boundary.
   stop_reason: null
   next_action: >-
-    Under think-1s0h and BC-010 in the active research correctness phase, freeze exp-044
-    before editing the pure -W draft and close by 18:49:44-07:00 with reviewed evidence
-    or a finite exact blocker; do not start basin-frequency work.
+    Under think-1s0h and BC-010 in the active W7 correctness phase, build and
+    independently review the reusable exact weighted-stress and exp-034 sheet evaluators by
+    19:13:20-07:00; do not open a target result or basin-frequency work.
 ---
 # Session 015 — Four-Hour R4/R5 Research Loop
 
@@ -928,9 +1040,9 @@ native goals, and scheduled wakeups are replaceable controllers.
 ### Checkout identity
 
 The live control plane is on remote branch
-`origin/codex/packing-4h-research-loop-2026-08-25`; the latest published W7 and
-preregistration checkpoint at this handoff is `31e0abe`. A fresh clone must fetch and
-switch to that branch before following this section:
+`origin/codex/packing-4h-research-loop-2026-08-25`; the latest published production-row
+builder checkpoint at this handoff is `a5a4ef0`. A fresh clone must fetch and switch to
+that branch before following this section:
 
 ```shell
 git fetch origin codex/packing-4h-research-loop-2026-08-25
@@ -956,13 +1068,16 @@ An agent joining with only this checkout should read, in order:
 4. [`agenda-001`](../agendas/agenda-001-basin-confidence-ladder.md) at `BC-010`,
    [`H-023`](../hypotheses/H-023-n5-terminal-connectivity.md), and this session’s active
    phase.
-5. The active frozen
-   [`exp-044` criterion](../series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md)
-   for the exact source, outcome, control, disposition, mutation, and refusal boundary.
+5. The terminal
+   [`exp-044` guard result](../series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md)
+   for the accepted row-builder evidence and the exact stress, sheet, scale, mutation,
+   and disposition work that remains.
 6. The terminal
    [`exp-043` predecessor](../series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md)
    for the instrument defects that exp-044 must address without promoting its result.
-7. The owning bead, `think-1s0h`, for dependency state rather than scientific verdicts.
+7. [`minus_w_row_jets.py`](../../cases/n5/minus_w_row_jets.py) and its
+   [focused tests](../../tests/test_minus_w_row_jets.py) for the active W7 substrate.
+8. The owning bead, `think-1s0h`, for dependency state rather than scientific verdicts.
 
 From the repository root, verify the handoff before writing:
 
@@ -978,13 +1093,13 @@ uv run --directory explorations/packing --frozen packing-campaign status
 ```
 
 Continue only the active phase.
-This handoff is in wall-clock cycle slot 5 and workflow phase 7; early
+This handoff is in wall-clock cycle slot 6 and workflow phase 8; early
 evidence-checkpoint switches account for the different numbers.
-Treat the exp-044 criterion as frozen: edit only the pure-`-W` case integration needed
-to meet it, and audit the result without changing the criterion.
-Before writing, compare the current time with the phase deadline `18:49:44-07:00`,
-finalization start `19:38:26-07:00`, and session deadline `20:08:26-07:00` using the
-four-state resume table in the
+Treat exp-044 as terminal and edit only the reusable weighted-stress and exp-034 sheet
+evaluators in the active W7 phase; do not run the target or infer pure `-W`. Before
+writing, compare the current time with the phase deadline `19:13:20-07:00`, finalization
+start `19:38:26-07:00`, and session deadline `20:08:26-07:00` using the four-state
+resume table in the
 [agent-session runbook](README.md#starting-a-portable-four-hour-session).
 An expired phase is terminalized from retained evidence before a successor opens.
 At or after finalization start, no new research opens; at or after the session deadline,
@@ -1006,7 +1121,7 @@ checkpoint per slice, and starts finalization at the recorded absolute time.
 
 Run the active phase’s `validation_command`, then use the generic
 [portable checkpoint sequence](README.md#starting-a-portable-four-hour-session).
-For this phase, validate retained exp-042, terminal exp-043, active exp-044, and the
+For this phase, validate retained exp-042, terminal exp-043, terminal exp-044, and the
 session explicitly; render and check the ledger, run `devtools.check_synopsis`, inspect
 the diff and status, and stage only reviewed packing files.
 After pushing, update the checkpoint hash above, add the retained outcome and exact next

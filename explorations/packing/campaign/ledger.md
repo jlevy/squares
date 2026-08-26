@@ -20,7 +20,7 @@
 | [session-012](agent-sessions/session-012-eight-hour-final-continuation.md) | completed | contemporaneous | `process-review` (correctness) | `process-review` (process) | 3 | think-gszk | Commit and push the local sign repair, then start a bounded successor session. |
 | [session-013](agent-sessions/session-013-generated-view-recurrence-checkpoint.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-gszk | Commit and push, update PR 34, then begin a new bounded research session. |
 | [session-014](agent-sessions/session-014-final-portfolio-rotation.md) | stopped | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 2 | think-gszk | From the pushed PR 34 head, open a new bounded session and preregister one BC-010 exact R4/R5 nonlinear-realization slice under think-1s0h; retain D-239 as a separate pipeline slice and do not begin basin-frequency work before component identity. |
-| [session-015](agent-sessions/session-015-four-hour-r4-r5-loop.md) | in_progress | contemporaneous | `process-review` (process) | `research-loop` (correctness) | 7 | think-1s0h | Under think-1s0h and BC-010 in the active research correctness phase, freeze exp-044 before editing the pure -W draft and close by 18:49:44-07:00 with reviewed evidence or a finite exact blocker; do not start basin-frequency work. |
+| [session-015](agent-sessions/session-015-four-hour-r4-r5-loop.md) | in_progress | contemporaneous | `process-review` (process) | `pipeline-improvement` (correctness) | 8 | think-1s0h | Under think-1s0h and BC-010 in the active W7 correctness phase, build and independently review the reusable exact weighted-stress and exp-034 sheet evaluators by 19:13:20-07:00; do not open a target result or basin-frequency work. |
 
 ### Workflow summary
 
@@ -34,7 +34,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 3 | 4 | 9 | 6 |
 | `efficiency-loop` | 1 | 0 | 1 | 0 |
 | `research-loop` | 1 | 4 | 9 | 7 |
-| `pipeline-improvement` | 1 | 0 | 9 | 0 |
+| `pipeline-improvement` | 1 | 0 | 10 | 0 |
 
 ## Experiment agendas
 
@@ -92,7 +92,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
 | H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6* 7* 8* | 14 | 106m agent + 4.0m wall |
 | H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
-| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 11 | 213m agent + 51s wall |
+| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 11 | 243m agent + 2.5m wall |
 | H-024 | unresolved | search | Every formally supported standing-record packing at n <= 30 uses at mo | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
 | H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
 | H-026 | confirmed | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 | 100m agent + 57s wall |
@@ -131,13 +131,14 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-037 | series-000 | 29 | openai-codex | H-042 | The retained serialization has six numerical orientation classes, with minimum class gap 0.296067 degrees against a 1e-90 degree interval radius. |
 | exp-041 | series-000 | 5 | openai-codex | H-023 | The frozen complete-zero-inventory clause is false: one additional owner axis is zero only at the positive endpoint, while independent control review also found mutation-reason and partial-disposition guards that remain unfinished. |
 
-### unresolved (3)
+### unresolved (4)
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
 | exp-012 | series-000 | 29 | openai-codex | H-024 | The 160-digit numerical reconstruction has six well-separated classes, but the public serialization supplies no formal feasibility certificate, so it does not satisfy H-024's original prerequisite. |
 | exp-040 | series-000 | 5 | openai-codex | H-023 | Temporary generation and replay passed, but independent review found five finite proof-perimeter gaps before any retained target result was accepted. |
 | exp-043 | series-000 | 5 | openai-codex | H-023 | Temporary generation and replay passed, but independent review found that the evaluator ignored center velocities in its second-order constants, combined no production rowwise curvatures, supplied no checked sheet acceleration witness, and asserted rather than proved the owner-3 two-scale routing. No target result was retained and no -W disposition follows. |
+| exp-044 | series-000 | 5 | openai-codex | H-023 | The criterion and fresh-agent handoff passed two independent audits, and a new production builder now constructs all six exact owner-row inventories through the accepted helper. The slice stopped before weighted row substitution, the exp-034 sheet evaluator, symbolic-real and unbounded scale routing, twelve mutations, or independent target dispositions were complete. No result JSON was written and no pure -W inference follows. |
 
 ### blocked (4)
 
@@ -184,12 +185,6 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
-### in-progress (1)
-
-| id | series | instance | operator | hypotheses | reason |
-| --- | --- | --- | --- | --- | --- |
-| exp-044 | series-000 | 5 | openai-codex | H-023 | The W7 exact-jet substrate closes exp-043's reusable algebraic blocker; the case-level scientific criterion is frozen separately before integration. |
-
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -200,7 +195,7 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 ## Effort
 
-44 rounds, 1031 agent-minutes, 29.1 wall-minutes.
+44 rounds, 1061 agent-minutes, 30.7 wall-minutes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

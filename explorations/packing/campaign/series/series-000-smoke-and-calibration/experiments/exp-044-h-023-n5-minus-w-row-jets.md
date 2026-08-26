@@ -54,24 +54,32 @@ experiment:
       coupled disposition, wrong mutation identifier, replay drift, scope promotion, or
       the phase deadline
     record: campaign/series/series-000-smoke-and-calibration/results/exp-044-h-023-n5-minus-w-row-jets.json
-  lease:
-    expires: '2026-08-26T01:49:44Z'
-    host: spud10.local
   results:
   - shape: determination
     question: >-
       Is canonical pure -W excluded at A, interior, and B by exact acceleration-independent
       production-row contradictions in both nearby owner branches?
     role: outcome
-    outcome: no_progress
+    outcome: invalid
+    checked_by: >-
+      two independent preregistration audits and one independent production-row-builder
+      audit; no retained target run was opened
   - shape: determination
     question: >-
       Do the independently derived -W row-jet curvatures equal the accepted exp-036 +W
       coefficients in every case?
     role: mechanism
     outcome: no_progress
+    checked_by: >-
+      no sign-symmetry target was measured because the complete weighted stress, sheet,
+      scale, mutation, and disposition instrument was not ready inside the frozen slice
+  effort:
+    timebox: one 30-minute criterion, integration, and independent-review slice
+    wall_seconds: 100.41
+    agent_minutes: 30
+    stopped_by: guard
   complexity:
-    lines_changed: 0
+    lines_changed: 268
     new_dependencies: []
     new_failure_modes:
     - a correct generic jet can still be connected to an incomplete case-level row inventory
@@ -81,7 +89,7 @@ experiment:
       case-free exact-jet helper passed source-bound tests, but before the pure -W draft
       is edited again.
   verdict:
-    decision: in-progress
+    decision: unresolved
     primary_criterion: >-
       accept the instrument independently of the target outcome only if all six source
       cases build every production wall and selected SAT feature through exact_jets, full
@@ -95,8 +103,18 @@ experiment:
       branch has a compatible correction, or unresolved if none is compatible but one
       valid exact branch or scale remains undecided, with sign symmetry reported independently
     reason: >-
-      The W7 exact-jet substrate closes exp-043's reusable algebraic blocker; the
-      case-level scientific criterion is frozen separately before integration.
+      The criterion and fresh-agent handoff passed two independent audits, and a new
+      production builder now constructs all six exact owner-row inventories through the
+      accepted helper. The slice stopped before weighted row substitution, the exp-034
+      sheet evaluator, symbolic-real and unbounded scale routing, twelve mutations, or
+      independent target dispositions were complete. No result JSON was written and no
+      pure -W inference follows.
+    reopen_when: >-
+      A successor separately reviews a production stress evaluator that applies the
+      exact nine-row weights to these row jets, checks the exp-034 sheet path, implements
+      all five owner-3 scale records, and wires every frozen mutation and refusal before
+      preregistering a new scientific target.
+    resume_from: explorations/packing/cases/n5/minus_w_row_jets.py
 ---
 # exp-044 — exact pure -W row-jet test
 
@@ -225,6 +243,25 @@ refusal record rather than one combined Boolean: `Ri_plus_lambda_W_plus_s`,
 Acceptance would exclude only canonical pure `-W` at the three registered poses.
 It would not resolve any refused claim.
 Candidate or instrument failure remains distinct from a pure-direction obstruction.
+
+## Guard result
+
+The criterion and the repository-only resume path passed two independent audits before
+target work opened. The bounded implementation slice then added a production row-jet
+builder that derives every active wall and SAT feature through `exact_jets`, exposes
+both tied owner alternatives, and validates exact labels and gradients against all six
+authoritative source matrices.
+Its 17 focused helper-and-builder tests pass, including a nonzero production
+center-angle Hessian and the second-order tied-feature branch guard; Ruff and
+BasedPyright are clean.
+
+The full scientific instrument did not fit the frozen slice.
+No weighted stress evaluator, exp-034 sheet-path evaluator, symbolic-real or unbounded
+scale router, twelve-mutation suite, independent obstruction disposition, retained
+generation, or replay was run.
+No campaign result JSON was written.
+This round is unresolved and provides no disposition for pure `-W`, sign symmetry, mixed
+directions, connectivity, or any broader H-023 claim.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

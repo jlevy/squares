@@ -56,8 +56,10 @@ Exp-042 is the accepted endpoint-aware successor: it certifies six explicit R4/R
 and positive pathwise first-order stresses with twenty semantic controls and retained
 replay. Exp-043 stops unresolved before retained measurement: its draft checker passes
 temporary checks, but independent review finds five finite second-order instrument
-defects. The W7 exact-jet repair now passes source-bound tests, and exp-044 freezes its
-case-level pure `-W` successor before integration.
+defects. The W7 exact-jet repair now passes source-bound tests.
+Exp-044 stops unresolved without target measurement after freezing its case-level
+criterion and adding a reviewed production row-jet builder; weighted stress, sheet,
+scale, mutation, and disposition integration remain open.
 Those records do not imply that full connectivity has been established.
 Those result shapes are not pooled or compared merely because they share `series-000`.
 Each experiment’s `subject`, method, regime, and provenance govern what comparison is
