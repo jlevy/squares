@@ -1,0 +1,316 @@
+softschema:
+  contract: packing.squares:Witness/v1
+  schema: ../witness.schema.yaml
+  envelope: witness
+  status: enforced
+witness:
+  id: W-known-best-n052
+  n: 52
+  side: '7.7071067811865475244008443621'
+  square_size: '1'
+  representation: center-angle
+  scalar:
+    kind: decimal
+  coordinates:
+    origin: lower-left
+    axes: x-right-y-up
+    angle_unit: degrees
+  squares:
+  - id: 1
+    center:
+    - '0.5'
+    - '7.2071067811865475244008443621'
+    angle: '0'
+  - id: 2
+    center:
+    - '1.5'
+    - '7.2071067811865475244008443621'
+    angle: '0'
+  - id: 3
+    center:
+    - '2.5'
+    - '7.2071067811865475244008443621'
+    angle: '0'
+  - id: 4
+    center:
+    - '3.5'
+    - '7.2071067811865475244008443621'
+    angle: '0'
+  - id: 5
+    center:
+    - '4.5'
+    - '7.2071067811865475244008443621'
+    angle: '0'
+  - id: 6
+    center:
+    - '5.5'
+    - '7.2071067811865475244008443621'
+    angle: '0'
+  - id: 7
+    center:
+    - '0.5'
+    - '6.2071067811865475244008443621'
+    angle: '0'
+  - id: 8
+    center:
+    - '1.5'
+    - '6.2071067811865475244008443621'
+    angle: '0'
+  - id: 9
+    center:
+    - '2.5'
+    - '6.2071067811865475244008443621'
+    angle: '0'
+  - id: 10
+    center:
+    - '3.5'
+    - '6.2071067811865475244008443621'
+    angle: '0'
+  - id: 11
+    center:
+    - '4.5'
+    - '6.2071067811865475244008443621'
+    angle: '0'
+  - id: 12
+    center:
+    - '0.5'
+    - '5.2071067811865475244008443621'
+    angle: '0'
+  - id: 13
+    center:
+    - '1.5'
+    - '5.2071067811865475244008443621'
+    angle: '0'
+  - id: 14
+    center:
+    - '2.5'
+    - '5.2071067811865475244008443621'
+    angle: '0'
+  - id: 15
+    center:
+    - '3.5'
+    - '5.2071067811865475244008443621'
+    angle: '0'
+  - id: 16
+    center:
+    - '0.5'
+    - '4.2071067811865475244008443621'
+    angle: '0'
+  - id: 17
+    center:
+    - '1.5'
+    - '4.2071067811865475244008443621'
+    angle: '0'
+  - id: 18
+    center:
+    - '2.5'
+    - '4.2071067811865475244008443621'
+    angle: '0'
+  - id: 19
+    center:
+    - '0.5'
+    - '3.2071067811865475244008443621'
+    angle: '0'
+  - id: 20
+    center:
+    - '1.5'
+    - '3.2071067811865475244008443621'
+    angle: '0'
+  - id: 21
+    center:
+    - '0.5'
+    - '2.2071067811865475244008443621'
+    angle: '0'
+  - id: 22
+    center:
+    - '7.2071067811865475244008443621'
+    - '7.2071067811865475244008443621'
+    angle: '0'
+  - id: 23
+    center:
+    - '7.2071067811865475244008443621'
+    - '0.5'
+    angle: '0'
+  - id: 24
+    center:
+    - '6.2071067811865475244008443621'
+    - '0.5'
+    angle: '0'
+  - id: 25
+    center:
+    - '5.2071067811865475244008443621'
+    - '0.5'
+    angle: '0'
+  - id: 26
+    center:
+    - '4.2071067811865475244008443621'
+    - '0.5'
+    angle: '0'
+  - id: 27
+    center:
+    - '3.2071067811865475244008443621'
+    - '0.5'
+    angle: '0'
+  - id: 28
+    center:
+    - '2.2071067811865475244008443621'
+    - '0.5'
+    angle: '0'
+  - id: 29
+    center:
+    - '7.2071067811865475244008443621'
+    - '1.5'
+    angle: '0'
+  - id: 30
+    center:
+    - '6.2071067811865475244008443621'
+    - '1.5'
+    angle: '0'
+  - id: 31
+    center:
+    - '5.2071067811865475244008443621'
+    - '1.5'
+    angle: '0'
+  - id: 32
+    center:
+    - '4.2071067811865475244008443621'
+    - '1.5'
+    angle: '0'
+  - id: 33
+    center:
+    - '3.2071067811865475244008443621'
+    - '1.5'
+    angle: '0'
+  - id: 34
+    center:
+    - '7.2071067811865475244008443621'
+    - '2.5'
+    angle: '0'
+  - id: 35
+    center:
+    - '6.2071067811865475244008443621'
+    - '2.5'
+    angle: '0'
+  - id: 36
+    center:
+    - '5.2071067811865475244008443621'
+    - '2.5'
+    angle: '0'
+  - id: 37
+    center:
+    - '4.2071067811865475244008443621'
+    - '2.5'
+    angle: '0'
+  - id: 38
+    center:
+    - '7.2071067811865475244008443621'
+    - '3.5'
+    angle: '0'
+  - id: 39
+    center:
+    - '6.2071067811865475244008443621'
+    - '3.5'
+    angle: '0'
+  - id: 40
+    center:
+    - '5.2071067811865475244008443621'
+    - '3.5'
+    angle: '0'
+  - id: 41
+    center:
+    - '7.2071067811865475244008443621'
+    - '4.5'
+    angle: '0'
+  - id: 42
+    center:
+    - '6.2071067811865475244008443621'
+    - '4.5'
+    angle: '0'
+  - id: 43
+    center:
+    - '7.2071067811865475244008443621'
+    - '5.5'
+    angle: '0'
+  - id: 44
+    center:
+    - '0.5'
+    - '0.5'
+    angle: '0'
+  - id: 45
+    center:
+    - '6.328427124746190097603377448419396157139343750753896146353359475981464956924214077700775068655283145'
+    - '6.328427124746190097603377448414547117854507813065422109765019606986098717693160558275581301491462359'
+    angle: '45.0'
+  - id: 46
+    center:
+    - '5.621320343559642573202533086314547117854507813065422109765019606986098717693160558275581301491462359'
+    - '5.621320343559642573202533086309698078569671875376948073176679737990732478462107038850387534327641573'
+    angle: '45.0'
+  - id: 47
+    center:
+    - '4.914213562373095048801688724209698078569671875376948073176679737990732478462107038850387534327641573'
+    - '4.914213562373095048801688724204849039284835937688474036588339868995366239231053519425193767163820786'
+    angle: '45.0'
+  - id: 48
+    center:
+    - '4.207106781186547524400844362104849039284835937688474036588339868995366239231053519425193767163820786'
+    - '4.2071067811865475244008443621'
+    angle: '45.0'
+  - id: 49
+    center:
+    - '3.5'
+    - '3.499999999999999999999999999995150960715164062311525963411660131004633760768946480574806232836179214'
+    angle: '45.0'
+  - id: 50
+    center:
+    - '2.792893218813452475599155637895150960715164062311525963411660131004633760768946480574806232836179214'
+    - '2.792893218813452475599155637890301921430328124623051926823320262009267521537892961149612465672358427'
+    angle: '45.0'
+  - id: 51
+    center:
+    - '2.085786437626904951198311275790301921430328124623051926823320262009267521537892961149612465672358427'
+    - '2.085786437626904951198311275785452882145492186934577890234980393013901282306839441724418698508537641'
+    angle: '45.0'
+  - id: 52
+    center:
+    - '1.378679656440357426797466913685452882145492186934577890234980393013901282306839441724418698508537641'
+    - '1.378679656440357426797466913680603842860656249246103853646640524018535043075785922299224931344716855'
+    angle: '45.0'
+  claim:
+    assurance: numerically-checked
+    method: numerical-multiprecision
+    precision:
+      decimal_digits: 120
+      rounding: nearest
+    tolerance: 1e-8
+    limitations: direct retained numerical center/angle facts. The source metadata supplies attribution
+      and provenance; the upstream SVG is not retained because no express redistribution terms were located.
+      This conservative retention policy is not a legal conclusion. The replayed finite-precision numerical
+      check establishes only tolerance-bounded feasibility of these retained facts, not exact geometry,
+      an exact certificate, or optimality.
+  source:
+    key: Kingbird derived numerical facts
+    path: resources/web/known-best-packings/sources.json
+    url: https://kingbird.myphotos.cc/packing/square-52.svg
+    retrieved: '2026-08-26'
+  certificate:
+    kind: numerical-feasibility-receipt
+    replay: uv run --frozen packing-witness check witnesses/known-best/n-052.yaml --method numerical-multiprecision
+      --precision 120 --tolerance 1e-8
+    result:
+      operation: check
+      id: W-known-best-n052
+      assurance: numerically-checked
+      method: numerical-multiprecision
+      precision:
+        decimal_digits: 120
+        rounding: nearest
+      tolerance: 1e-8
+      check_passed: true
+      n: 52
+      pairs_tested: 1326
+      minimum_containment_clearance: '0.0'
+      minimum_best_pair_gap: '0.0'
+      failures: []
+      limitations: Finite-precision evidence only. A small tolerance, including 1e-100, does not establish
+        exact feasibility or optimality.

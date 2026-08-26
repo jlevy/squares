@@ -37,6 +37,7 @@ from __future__ import annotations
 import re
 import sys
 from collections import Counter
+from collections.abc import Iterable
 from pathlib import Path
 
 import yaml
@@ -46,7 +47,7 @@ SYNOPSIS = ROOT / "SYNOPSIS.md"
 README = ROOT / "README.md"
 HYPOTHESES = ROOT / "campaign/hypotheses"
 AGENT_SESSIONS = ROOT / "campaign/agent-sessions"
-AGENDA = ROOT / "campaign/agendas/agenda-001-basin-confidence-ladder.md"
+AGENDAS = ROOT / "campaign/agendas"
 ACTIVE_PLAN = ROOT / "docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md"
 DEFECTS = ROOT / "defects.yaml"
 READINESS_BEGIN = "<!-- BEGIN CURRENT-RESEARCH-READINESS -->"
@@ -354,6 +355,11 @@ def select_handoff_cell(items: list[dict], next_action: str) -> dict:
     return matches[0]
 
 
+def load_agenda_items(paths: Iterable[Path]) -> list[dict]:
+    """Load agenda cells across every supplied mutable queue."""
+    return [item for path in sorted(paths) for item in front(path)["agenda"].get("items", [])]
+
+
 def check_current_handoff(text: str) -> list[str]:
     """The cold-start path names the latest session, agenda bead, and evidence head."""
     section = re.search(
@@ -376,9 +382,9 @@ def check_current_handoff(text: str) -> list[str]:
     if not next_beads:
         return [f"{latest_path.name}: terminal next_action names no bead"]
 
-    agenda = front(AGENDA)["agenda"]
+    agenda_items = load_agenda_items(AGENDAS.glob("agenda-*.md"))
     try:
-        cell = select_handoff_cell(agenda["items"], next_action)
+        cell = select_handoff_cell(agenda_items, next_action)
     except ValueError as error:
         return [f"{latest_path.name}: {error}"]
     cell_id = cell["id"]

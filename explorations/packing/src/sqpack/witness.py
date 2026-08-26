@@ -396,6 +396,20 @@ def inspect_witness(witness: Mapping[str, Any], *, digits: int = 50) -> dict[str
     }
 
 
+def materialize_witness(
+    witness: Mapping[str, Any], *, digits: int = 60
+) -> tuple[list[Square], Scalar]:
+    """Project a witness for inspection or rendering without upgrading its assurance.
+
+    This is the public presentation boundary for callers that need geometry rather than
+    the summary returned by :func:`inspect_witness`.  Formal callers must continue to
+    use :func:`exact_verify`; a high-precision projection is still only a projection.
+    """
+    if digits < 1:
+        raise WitnessError("malformed-option", "digits must be a positive integer")
+    return _approximate_materialize(witness, digits)
+
+
 def numerical_check(
     witness: Mapping[str, Any], *, method: str, precision: int, tolerance: str
 ) -> tuple[dict[str, Any], Report]:
@@ -686,12 +700,14 @@ def promote_rational(
     )
 
 
-def witness_document(witness: Mapping[str, Any]) -> str:
+def witness_document(witness: Mapping[str, Any], *, schema: str = "witness.schema.yaml") -> str:
     """Serialize one generated witness with its enforced soft-schema envelope."""
+    if not schema.strip():
+        raise WitnessError("malformed-option", "schema path must be non-empty")
     document = {
         "softschema": {
             "contract": "packing.squares:Witness/v1",
-            "schema": "witness.schema.yaml",
+            "schema": schema,
             "envelope": "witness",
             "status": "enforced",
         },

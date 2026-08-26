@@ -84,11 +84,11 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty blocked hypotheses. One additional hypothesis is unresolved because its formal prerequisite is
-missing. Its active confidence ladder has completed the exact and event controls up to
-the first nontrivial identity question; the next scientific transition is from
-specialized `n = 5` local geometry to a defensible component relation, not to a larger
-raw census.
+hypotheses, one open hypothesis, seven open questions, and thirty blocked hypotheses.
+One additional hypothesis is unresolved because its formal prerequisite is missing.
+Its active confidence ladder has completed the exact and event controls up to the first
+nontrivial identity question; the next scientific transition is from specialized `n = 5`
+local geometry to a defensible component relation, not to a larger raw census.
 
 #### Refresh rule
 
@@ -135,6 +135,8 @@ case or experiment separately.
 | [Synopsis: The `s(n)` Program](SYNOPSIS.md) | current technical state and terminology | definitive | maintained | — |
 | [Tutorial: Square Packing from First Principles](TUTORIAL.md) | first-principles tutorial | supporting | maintained | — |
 | [Packing Atlas](atlas/README.md) | component scope and use | supporting | maintained | — |
+| [Enumerated Contact-Scaffold Atlas](atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |
+| [Known-Best Packing Atlas, `n = 1..100`](atlas/known-best/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
 | [Conventions for `explorations/packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
@@ -165,6 +167,7 @@ case or experiment separately.
 | [Review: `TUTORIAL.md`, Read as Its Declared Audience](docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md) | dated review record | record | retained | — |
 | [Review: `TUTORIAL.md` Soundness, Iteration 2, on the Merged Record](docs/project/reviews/review-2026-08-25-tutorial-soundness-iteration-2.md) | dated review record | record | retained | — |
 | [Review: Soundness of the Session-011 Continuation (PR #34)](docs/project/reviews/review-2026-08-25-pr34-soundness-review.md) | dated review record | record | retained | — |
+| [Review: PR #44, Constructive Enumeration, and the Known-Best Atlas](docs/project/reviews/review-2026-08-26-pr44-constructive-enumeration-and-known-best-atlas.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
@@ -276,71 +279,37 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+[Open the house rendering of the retained 100-square witness.](atlas/known-best/rendering/n-100.svg)
+
+The renderer’s standing exact-motion control remains independently replayable:
+
 ![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
 
-*The retained SVG animates endpoint A through the exact midpoint to endpoint B when
-motion is enabled. Its translucent tempered-yellow contact marks describe the certified
-final frame and appear only when the motion reaches that frame.
-Reduced-motion and non-CSS viewers receive endpoint B as a complete static figure.*
+The current line is `BC-019` under `think-eyix`, recorded in
+[session 019](campaign/agent-sessions/session-019-pr45-strict-and-ci.md).
+Finish strict validation and the final-head cross-platform checkpoint before closing the
+retained PR review dispositions or returning to `ContactAssemblyGrammar/v1`’s next
+full-cell boundary.
 
-The H-023 line shows why the distinction matters.
-Session 004 used W3 to turn an ambiguous terminal-family observation into the
-falsifiable connectivity hypothesis.
-Session 009 first used W4 to make basin events and exact identity controls admissible.
-W6 then produced exp-033’s exact fixed-angle face and exp-034’s angle-and-slide sheet.
-A W2 instrument review found D-194 and D-195 before the next measurement, preventing a
-reused contact differential and an invalid alternative-row interpretation from entering
-the result.
-W6 resumed only after the corrected criterion was frozen; exp-035 then proved
-exact first-order directions outside the sheet without proving nonlinear realization.
-W3 turned that limitation into exp-036’s registered second-order obstruction, and W6
-then excluded the displayed direction from the true tangent cone.
-Exp-038 now certifies the complete branchwise linearization-cone inventory and leaves
-transverse and mixed nonlinear realization open.
-Exp-039 then certifies one connected five-dimensional fixed-angle cell-local LP-optimal
-position polytope and twelve exact paths in release classes R1, R2, R3, and R6. Its
-positive pathwise first-order stresses do not make the whole polytope stationary or
-classify a terminal component.
-When the post-round strict gate failed, W4 separated stale controls from an independent
-deep-golden solver rejection.
-That bounded solver repair was recorded under the owning review phase before W7 existed.
-Future packing-pipeline repairs whose promised output is the implementation itself enter
-W7; historical phases are not relabelled after the fact.
-The current line is owned by `BC-010` under `think-1s0h`.
-[Session 015](campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md) is terminal
-after reaching its declared eight-phase cap, and
-[session 016](campaign/agent-sessions/session-016-final-hour-continuation.md) is the
-completed final-hour continuation; it preserved the original deadline without extending
-an expired phase or relying on controller memory.
-Session 015’s first bounded W6 slice stopped exp-040 unresolved before retained
-measurement after independent review found five finite proof-perimeter gaps in the draft
-R4/R5 checker. Exp-041 froze the exact five-blocker correction at `e26fae9`, then
-rejected its complete-zero-inventory criterion on a new endpoint-only axis without
-refuting path feasibility.
-Exp-042 corrects that endpoint inventory and meets the full frozen criterion from engine
-commit `2980fdc`: six R4/R5 paths, both owner stresses, and twenty semantic controls
-pass retained generation and replay.
-The result is pathwise first-order only.
-Exp-043 then stops its pure `-W` test before retained measurement: the draft checker is
-a resume point, but it does not yet derive production rowwise second-order constants,
-consume a full exp-034 acceleration witness, or mechanically route the two-scale proof.
-The following W7 phases provide a case-free exact-jet helper, complete production row
-builders for all six source matrices, normalized nine-row stress evaluation with every
-correction column retained, and a formula-derived exp-034 sheet control across both
-owner inventories. Focused tests and independent review accept that substrate at
-checkpoint `8ee367b` while refusing branch completeness, scale routing, and obstruction.
-Exp-044 freezes the separate case-level integration but is terminal unresolved with no
-target run or result JSON. The published checkpoints separate helper substrate
-`8ee367b`, accepted memoryless design `027349b`, and full-gate pre-terminal state
-`3629bf4`. Session 016’s terminal handoff owns the branch, read order, validation, exact
-fifteen-record scale inventory, mutation map, and successor artifact paths, so no
-controller memory is required.
-The sole next action is to preregister the named exp-045 successor under `BC-010` before
-implementation or target work.
-The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
-remain later slices; D-239 is a separate W7 line.
-Do not start basin-frequency work or reinterpret exp-035 through exp-040 as a
-connectivity proof.
+All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
+house renderings. The source-complete corpus is calibration evidence, not an unseen
+holdout and not a new proof of optimality.
+The atlas source inventory retains attributed Kingbird-derived numerical facts but no
+raw Kingbird SVG because the review located no express redistribution terms; that
+conservative repository policy is not a legal conclusion.
+A broad same-angle contact census covers 1,780 of 1,860 non-grid squares, but the
+stricter bar/L/rectangle partition establishes 3 of 36 non-grid cases inside its narrow
+budget. Two cases are conclusively outside that budget, 23 have no partition in the
+registered candidate universe, and eight are search-capped and therefore indeterminate.
+Contact components also retain substantial internal sliding freedom, so component count
+alone is not a defensible chunk cost.
+
+The target-free contact-scaffold layer now retains 11,013 exact size-five signed-contact
+orbits as an abstract, no-geometry atlas.
+Its local realization prefilter rejects mixed angle classes before solving and still
+omits walls, non-edge separation, container fit, whole-packing feasibility, and
+optimality. The next scientific implementation boundary is CG-010’s full fixed-angle
+cell, not an H-044 verdict or an `n = 11` run on the inspected calibration corpus.
 
 ## What Is Built
 
@@ -2010,15 +1979,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 337 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 339 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 79 | asserted something false about the mathematics |
 | validity | 82 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 130 | recorded something its own evidence contradicts |
-| robustness | 37 | did not finish, or finished only by luck |
+| bookkeeping | 131 | recorded something its own evidence contradicts |
+| robustness | 38 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2027,7 +1996,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-three defects in 337, and no soundness defect
+**The automated gate has caught forty-five defects in 339, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2356,7 +2325,7 @@ This closes that specific gate-stall path; the unattended numerical runner still
 separate launch requirements above.
 
 **Validation subprocesses now have finite POSIX deadlines.** The shared captured-command
-path and quiet Git provenance probes use a 600-second production default, configurable
+path and quiet Git provenance probes use a 900-second production default, configurable
 by CLI or environment, and retain smaller call-site caps.
 Timeout and coordinator interruption terminate and reap the registered process groups.
 [D-239](defects.md) remains open because pure-Python worker code, aggregate

@@ -26,8 +26,9 @@ hypothesis:
     threshold: 1e-9
   instrument: >-
     The built cell-read LP quench driven over a declared class-angle grid on one
-    imported chunk arrangement, retaining the value, the active cell, and the chunk
-    membership at every step.
+    imported chunk arrangement, retaining the value, canonical active-cell label, and
+    chunk membership at every step, with declared tolerance hysteresis and duplicate
+    event suppression around degenerate boundaries.
   instrument_ready: false
   regime: >-
     numerical f64 LP under the measured 1e-11 solver floor; one imported arrangement at
@@ -53,7 +54,10 @@ hypothesis:
     along the path is what says whether the aligned predecessor and the record belong to
     one arrangement family or many. A negative result is equally useful and cheap. This
     is a numerical continuation record, never a component, connectivity, or tangent
-    claim; D-034 and the exp-035 through exp-042 chain own that vocabulary.
+    claim; D-034 and the exp-035 through exp-042 chain own that vocabulary. Review
+    amendment 2026-08-26: raw solver row sets are not stable cell identities. The sweep
+    instrument must canonicalize labels and boundary events before any cell-change count
+    is interpreted.
 ---
 # H-046 — the predecessor path, recorded step by step
 
@@ -85,10 +89,11 @@ The value curve alone would only re-measure
 already confirmed by
 [exp-010](../series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md).
 What is new is the sequence of active cells along the path.
-A path crossing few cells says the aligned predecessor and the record are near neighbors
-in arrangement space, and continuation is a cheap proposer.
-A path crossing many says the two are far apart combinatorially even though they look
-alike, and the “slight perturbation” framing is misleading about the search cost.
+A path crossing few canonical cell events says this continuation used few serialized
+arrangement changes and may be a cheap proposer.
+It does not by itself establish metric or topological nearness in arrangement space.
+A path crossing many gives direct evidence that the “slight perturbation” framing
+understates this continuation’s combinatorial work.
 
 Because the derivative jumps at `a*`, refinement at the minimum uses bracketing rather
 than any gradient method; the sweep supplies the bracket and the corner is expected, not

@@ -436,6 +436,26 @@ def test_timeout_cli_override_wins_over_environment(monkeypatch: pytest.MonkeyPa
     assert observed.timeout_seconds == 7
 
 
+def test_default_timeout_covers_the_measured_full_census(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.delenv("PACKING_VALIDATE_TIMEOUT_SECONDS", raising=False)
+    observed: validate.Context | None = None
+
+    def capture(
+        selected: list[validate.Step], context: validate.Context, patterns: list[str]
+    ) -> validate.RunSummary:
+        del selected, patterns
+        nonlocal observed
+        observed = context
+        return validate.RunSummary([], 0, selected_count=0, total_count=0)
+
+    monkeypatch.setattr(validate, "_run_selected", capture)
+    assert _invoke()[0] == 0
+    assert observed is not None
+    assert observed.timeout_seconds == 900
+
+
 def test_invalid_timeout_environment_names_environment_variable(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:

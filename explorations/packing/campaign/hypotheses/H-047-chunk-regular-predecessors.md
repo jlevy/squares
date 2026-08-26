@@ -13,7 +13,9 @@ hypothesis:
     a regularized predecessor - exact intra-chunk lattice contacts and the chunk angle
     snapped to its fitted class value - and then re-running the built class-bracketing
     quench from that predecessor returns a pose whose side is within 1e-6 of the source
-    pose's side, and does so for record and non-record source poses alike.
+    pose's side and whose centers and angles are pose-equivalent after container
+    symmetries and square relabeling, and does so for record and non-record source poses
+    alike.
   lane: search
   derived_from: [X-003]
   strategy_refs: ['search:12', 'search:17', 'search:20']
@@ -21,13 +23,16 @@ hypothesis:
     shape: paired
     metric: >-
       fraction of source poses whose regularized predecessor re-quenches to within 1e-6
-      of the source side, reported separately for record and non-record sources
+      of the source side and, after the best D4 container symmetry and square relabeling,
+      within 1e-5 in center coordinates and 1e-5 radians in angles modulo quarter turns;
+      reported separately for record and non-record sources
     direction: at least 0.70 overall, with the record and non-record rates reported apart
     threshold: 0.7
   instrument: >-
     The chunk-decomposition detector, a regularizer that snaps intra-chunk contacts to
     exact and chunk angles to their fitted class value, and the built cell-read
-    class-bracketing quench, with source and returned sides retained per pose.
+    class-bracketing quench, with complete source and returned poses retained and a
+    deterministic D4-and-relabeling equivalence matcher.
   instrument_ready: false
   regime: >-
     numerical f64 LP under the measured 1e-11 solver floor; imported record geometry
@@ -51,20 +56,24 @@ hypothesis:
     series-000 endpoints supply the average solutions that test it more honestly. A
     return within tolerance is a numerical statement about one refiner from one start;
     it is not a basin, component, or attraction claim, and D-052 still applies to every
-    stopped quench.
+    stopped quench. Review amendment 2026-08-26: the original side-only criterion could
+    establish objective recovery but not pose recovery or invertibility. Pose-equivalence
+    is now part of the criterion; any implementation must freeze the matching and tie
+    rules before the round.
 ---
 # H-047 — the predecessor as a coordinate system
 
 A chunk decomposition is only worth building a search on if it is **invertible enough**:
-if rounding a pose to its regular predecessor and letting the refiner run returns the
-pose, the predecessor carries the information the packing needs, and the combinatorial
-geometry of chunks is a legitimate coordinate system for search.
-If the round trip fails, the decomposition is a picture rather than a representation.
+if rounding a pose to its regular predecessor and letting the refiner run returns a
+pose-equivalent configuration, the predecessor carries the information the packing
+needs, and the combinatorial geometry of chunks is a legitimate coordinate system for
+search. If the round trip fails, the decomposition is a picture rather than a
+representation.
 
 The round trip is three steps: detect the chunks, **regularize** by snapping intra-chunk
 contacts to exact and each chunk’s angle to its fitted class value, then re-run the
 built class-bracketing quench from that regularized start and compare the returned side
-to the source.
+and pose to the source after container symmetry and square relabeling.
 
 ## Why non-record sources are in the sweep
 

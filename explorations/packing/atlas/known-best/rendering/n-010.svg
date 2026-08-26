@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:sqpack="https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1" width="960" height="680" viewBox="0 0 960 680" role="img" aria-labelledby="figure-title figure-description" data-static-fallback="final">
+  <title id="figure-title">Known-best packing of 10 unit squares</title>
+  <desc id="figure-description">The retained known-best n=10 construction, normalized to Witness/v1 and rendered with the repository's deterministic house renderer.</desc>
+  <metadata>
+    <sqpack:profile version="5">
+      <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
+      <sqpack:value name="annotations">minimal</sqpack:value>
+      <sqpack:value name="check-arithmetic">mpmath arbitrary precision</sqpack:value>
+      <sqpack:value name="check-detail">direct retained numerical center/angle facts. The source metadata supplies attribution and provenance; the upstream SVG is not retained because no express redistribution terms were located. This conservative retention policy is not a legal conclusion. The replayed finite-precision numerical check establishes only tolerance-bounded feasibility of these retained facts, not exact geometry, an exact certificate, or optimality.</sqpack:value>
+      <sqpack:value name="check-kind">numerical</sqpack:value>
+      <sqpack:value name="check-method">numerical-multiprecision</sqpack:value>
+      <sqpack:value name="check-precision">120 decimal digits</sqpack:value>
+      <sqpack:value name="check-result">passed</sqpack:value>
+      <sqpack:value name="check-rounding">nearest</sqpack:value>
+      <sqpack:value name="check-tolerance">1e-8</sqpack:value>
+      <sqpack:value name="evidence">numerically-checked</sqpack:value>
+      <sqpack:value name="source-id">W-known-best-n010</sqpack:value>
+      <sqpack:value name="source-url">https://kingbird.myphotos.cc/packing/square-10.svg</sqpack:value>
+      <sqpack:value name="view">overview</sqpack:value>
+    </sqpack:profile>
+  </metadata>
+  <rect width="960" height="680" fill="#ffffff" />
+  <g id="panel-0" data-panel="n=10 known best">
+    <g id="panel-0-fills" data-layer="fills">
+      <polygon data-feature="square-fill" data-square="square-001" points="36,180.5871488569424149318996967 180.5871488569424149318996967,180.5871488569424149318996967 180.5871488569424149318996967,36 36,36" fill="#378c3f" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-002" points="180.5871488569424149318996967,180.5871488569424149318996967 325.1742977138848298637993934,180.5871488569424149318996967 325.1742977138848298637993934,36 180.5871488569424149318996967,36" fill="#00aeee" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-003" points="36,325.1742977138848298637993934 180.5871488569424149318996967,325.1742977138848298637993934 180.5871488569424149318996967,180.5871488569424149318996967 36,180.5871488569424149318996967" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-004" points="427.4128511430575850681003033,180.5871488569424149318996967 572,180.5871488569424149318996967 572,36 427.4128511430575850681003033,36" fill="#00b393" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-005" points="427.4128511430575850681003033,572 572,572 572,427.4128511430575850681003033 427.4128511430575850681003033,427.4128511430575850681003033" fill="#3d63be" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-006" points="282.8257022861151701362006066,572 427.4128511430575850681003033,572 427.4128511430575850681003033,427.4128511430575850681003033 282.8257022861151701362006066,427.4128511430575850681003033" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-007" points="427.4128511430575850681003033,427.4128511430575850681003033 572,427.4128511430575850681003033 572,282.8257022861151701362006066 427.4128511430575850681003033,282.8257022861151701362006066" fill="#877deb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-008" points="36,572 180.5871488569424149318996967,572 180.5871488569424149318996967,427.4128511430575850681003033 36,427.4128511430575850681003033" fill="#9fce85" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-009" points="355.119276714586377602150455,355.119276714586377602150455 457.3578301437591328064513649,252.880723285413622397849545 355.119276714586377602150455,150.6421698562408671935486351 252.880723285413622397849545,252.880723285413622397849545" fill="#0096b1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-010" points="252.880723285413622397849545,457.3578301437591328064513649 355.119276714586377602150455,355.119276714586377602150455 252.880723285413622397849545,252.880723285413622397849545 150.6421698562408671935486351,355.119276714586377602150455" fill="#854888" fill-opacity="1.0" stroke="none" />
+    </g>
+    <g id="panel-0-outlines" data-layer="outlines">
+      <polygon data-feature="square-outline" data-square="square-001" points="36,180.5871488569424149318996967 180.5871488569424149318996967,180.5871488569424149318996967 180.5871488569424149318996967,36 36,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-002" points="180.5871488569424149318996967,180.5871488569424149318996967 325.1742977138848298637993934,180.5871488569424149318996967 325.1742977138848298637993934,36 180.5871488569424149318996967,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-003" points="36,325.1742977138848298637993934 180.5871488569424149318996967,325.1742977138848298637993934 180.5871488569424149318996967,180.5871488569424149318996967 36,180.5871488569424149318996967" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-004" points="427.4128511430575850681003033,180.5871488569424149318996967 572,180.5871488569424149318996967 572,36 427.4128511430575850681003033,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-005" points="427.4128511430575850681003033,572 572,572 572,427.4128511430575850681003033 427.4128511430575850681003033,427.4128511430575850681003033" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-006" points="282.8257022861151701362006066,572 427.4128511430575850681003033,572 427.4128511430575850681003033,427.4128511430575850681003033 282.8257022861151701362006066,427.4128511430575850681003033" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-007" points="427.4128511430575850681003033,427.4128511430575850681003033 572,427.4128511430575850681003033 572,282.8257022861151701362006066 427.4128511430575850681003033,282.8257022861151701362006066" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-008" points="36,572 180.5871488569424149318996967,572 180.5871488569424149318996967,427.4128511430575850681003033 36,427.4128511430575850681003033" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-009" points="355.119276714586377602150455,355.119276714586377602150455 457.3578301437591328064513649,252.880723285413622397849545 355.119276714586377602150455,150.6421698562408671935486351 252.880723285413622397849545,252.880723285413622397849545" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-010" points="252.880723285413622397849545,457.3578301437591328064513649 355.119276714586377602150455,355.119276714586377602150455 252.880723285413622397849545,252.880723285413622397849545 150.6421698562408671935486351,355.119276714586377602150455" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <rect data-feature="container-outline" x="36" y="36" width="536" height="536" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+    </g>
+  </g>
+  <text x="36" y="602" font-size="18" font-family="system-ui, sans-serif" fill="#17202a" data-evidence="numerically-checked" stroke-dasharray="none">N n=10 known best: side ~ 3.707106781 (numerically checked)</text>
+</svg>

@@ -94,13 +94,20 @@ PRUNE = frozenset(
         # refusal -- so the control would "fire" for the wrong reason and prove nothing.
         ROOT / ".gate-running",
         ROOT / ".venv",
+        # Large, generator-owned prospective outputs are replayed by their dedicated
+        # validation step and are never mutation targets. Copying 101 witnesses and 101
+        # renderings into every private worker would exceed the portable snapshot cap.
+        ROOT / "atlas/prospective/rendering",
         ROOT / "resources",
         ROOT / "sqsearch/target",
+        ROOT / "witnesses/prospective",
     }
 )
 LINK_BACK = (Path(".venv"), Path("sqsearch/target"))
 COPY_SEPARATELY = (ROOT / "resources/README.md", REPO / ".flowmarkignore")
-SNAPSHOT_MAX_BYTES = 32 * 1024 * 1024
+# Keep a bounded portable fallback with enough headroom for source, schemas, and
+# manifests after generator-owned prospective geometry is pruned above.
+SNAPSHOT_MAX_BYTES = 40 * 1024 * 1024
 DEFAULT_CONTROL_TIMEOUT_SECONDS = 120.0
 TERMINATION_GRACE_SECONDS = 1.0
 # Directories that must be walked into rather than bulk-copied, because something

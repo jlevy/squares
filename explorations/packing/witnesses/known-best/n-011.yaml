@@ -1,0 +1,111 @@
+softschema:
+  contract: packing.squares:Witness/v1
+  schema: ../witness.schema.yaml
+  envelope: witness
+  status: enforced
+witness:
+  id: W-known-best-n011
+  n: 11
+  side: '3.87708359002281417730789706010096'
+  square_size: '1'
+  representation: center-angle
+  scalar:
+    kind: decimal
+  coordinates:
+    origin: lower-left
+    axes: x-right-y-up
+    angle_unit: degrees
+  squares:
+  - id: 1
+    center:
+    - '0.5'
+    - '0.5'
+    angle: '0'
+  - id: 2
+    center:
+    - '0.5'
+    - '3.37708359002281417730789706010096'
+    angle: '0'
+  - id: 3
+    center:
+    - '3.37708359002281417730789706010096'
+    - '2.53255831434961478706261630031475'
+    angle: '0'
+  - id: 4
+    center:
+    - '2.37708359002281417730789706010096'
+    - '0.5'
+    angle: '0'
+  - id: 5
+    center:
+    - '3.37708359002281417730789706010096'
+    - '0.5'
+    angle: '0'
+  - id: 6
+    center:
+    - '3.37708359002281417730789706010096'
+    - '1.5'
+    angle: '0'
+  - id: 7
+    center:
+    - '1.452558173963657939783338090479076616258098301217729094520064182633513647191723545465119935510568384'
+    - '1.272253896043999730303252714746680848945844335702773557755966460269732217508771668219584179188872841'
+    angle: '49.8180627096702835347696576319394'
+  - id: 8
+    center:
+    - '0.7046081698617595010335614048226831334969859872819816035946171729145058837079528006762238374590254818'
+    - '1.936474893797540911068448098800500848103075572993786173172993205079993417049105043352742429172894246'
+    angle: '49.8180627096702835347696576319394'
+  - id: 9
+    center:
+    - '2.188524889695642472318671413144105905081543750753496046396015405072346237758562937082113806274419806'
+    - '1.959612827891781679731633979231137248375701901753622382390589435015807472117007635824773839622596658'
+    angle: '49.8180627096702835347696576319394'
+  - id: 10
+    center:
+    - '1.440574885593744033568894727487712422320431436817748555470568395353338474274792192293217708222876904'
+    - '2.623833825645322860496829363284957247532933139044634997807616179826068671657341010957932089606618062'
+    angle: '49.8180627096702835347696576319394'
+  - id: 11
+    center:
+    - '2.340796409710798979539977668019311270971821004193106287027776938513513570723032398888980630332744089'
+    - '3.172475420161054676274335655278280242278858085937097194265246804547030918128634239182147483284174269'
+    angle: '49.8180627096702835347696576319394'
+  claim:
+    assurance: numerically-checked
+    method: numerical-multiprecision
+    precision:
+      decimal_digits: 120
+      rounding: nearest
+    tolerance: 1e-8
+    limitations: direct retained numerical center/angle facts. The source metadata supplies attribution
+      and provenance; the upstream SVG is not retained because no express redistribution terms were located.
+      This conservative retention policy is not a legal conclusion. The replayed finite-precision numerical
+      check establishes only tolerance-bounded feasibility of these retained facts, not exact geometry,
+      an exact certificate, or optimality.
+  source:
+    key: Kingbird derived numerical facts
+    path: resources/web/known-best-packings/sources.json
+    url: https://kingbird.myphotos.cc/packing/square-11.svg
+    retrieved: '2026-08-26'
+  certificate:
+    kind: numerical-feasibility-receipt
+    replay: uv run --frozen packing-witness check witnesses/known-best/n-011.yaml --method numerical-multiprecision
+      --precision 120 --tolerance 1e-8
+    result:
+      operation: check
+      id: W-known-best-n011
+      assurance: numerically-checked
+      method: numerical-multiprecision
+      precision:
+        decimal_digits: 120
+        rounding: nearest
+      tolerance: 1e-8
+      check_passed: true
+      n: 11
+      pairs_tested: 55
+      minimum_containment_clearance: '0.0'
+      minimum_best_pair_gap: '5.354804268015589382354602831764060790849e-101'
+      failures: []
+      limitations: Finite-precision evidence only. A small tolerance, including 1e-100, does not establish
+        exact feasibility or optimality.

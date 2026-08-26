@@ -14,9 +14,16 @@ or the design rationale, which lives in
 
 ## Objective
 
-Build the tooling for stratified chunk enumeration on foundations that can carry its
-results, and import the record-geometry corpus every chunk measurement reads.
-The session’s success condition is **instruments and corpus that pass their own
+Build the reusable evidence and annotation layers that a constructive proposer needs,
+then price the next layer before implementing it.
+The first checkpoint is now complete: all known-best constructions for `n = 1..100` have
+retained provenance, normalized `Witness/v1` geometry, numerical or exact receipts, and
+deterministic house renderings.
+
+The remaining overnight objective is a deterministic chunk-partition contract and its
+controls, a contact-assembly grammar that fits the observed non-grid corpus, and a
+measured enumeration-feasibility map.
+The session’s success condition is **corpus and instruments that pass their own
 controls**, not a scientific verdict and emphatically not a record.
 
 ## Read First, in This Order
@@ -45,7 +52,7 @@ authoritative. Expected rough shape for this session:
 
 | Priority | Workflow | Use it for | Expected share |
 | --- | --- | --- | --- |
-| 1 | **W7** `pipeline-improvement` | The enumerator, glued rows, sweep driver, detector, corpus importer. The bulk of the night | ~60% |
+| 1 | **W7** `pipeline-improvement` | Corpus importer, partition certificates, detector, overlays, and enumeration accounting. The bulk of the night | ~60% |
 | 2 | **W5** `efficiency-loop` | Only if a measured bottleneck blocks iteration; bring a baseline and a profile, not a hunch | ~10% |
 | 3 | **W2** `factual-review` | Before any instrument’s output is trusted, and before any claim touches a hypothesis artifact | ~10% |
 | 4 | **W3** `insight-iteration` | Freeform chunk-and-quench exploration on the corpus once it exists; may implement bounded exploratory derivations and visualizations | ~15% |
@@ -64,64 +71,142 @@ independent review pass first.
 
 ## Queue, in Order
 
-Roughly eight hours of work, ordered by dependency.
-Cells inside one bracket are independent and may be reordered or run in parallel.
+The autonomous loop advances one bounded slice per continuation and writes a durable
+checkpoint before selecting the next slice.
+The order below is by dependency; a later continuation resumes at the first incomplete
+item rather than repeating completed work.
 
-**Hours 0-1 — start the corpus, it unblocks the most.** `BC-023` / `think-osm7`: import
-standing-record geometry for `n <= 100` from the archived catalogue into `Witness/v1`,
-with retained provenance and a numerical check per case.
-Populate `tilt_angles_deg` and the derived angle-class count in each frontier case
-artifact, replacing the nulls most of them carry.
-Typed absent-or-ambiguous failures are a legitimate output; guessing a coordinate
-convention is not.
+**Checkpoint A — known-best corpus and first descriptive census: complete.** `BC-023` /
+`think-osm7` now covers all `n = 1..100`: 64 canonical exact grids, 34 attributed
+Kingbird-derived numerical fact records with no retained raw SVG in this source
+inventory, and two explicitly rendering-derived UnitSquare normalizations.
+Every case has a witness, receipt, source record, frontier link, and house rendering.
+The first census keeps a narrow maximal-lattice view separate from a broader same-angle
+contact-assembly view.
 
-**Hours 1-3 — the two foundations, independent of each other.**
+**Checkpoint B — factual disposition of PR #44: complete.** The retained review accepts
+the proposer/refiner split and grammar-freeze principle, but identifies the
+chunk-count/angle-count conflation, the missing minimal-partition objective, the
+now-inspected calibration corpus, and conditional rather than automatic enumeration
+completeness.
 
-- `BC-016` / `think-zt29`: the degenerate-cell differential.
-  Aligned and glued strata are the most tie-rich linear programs this pipeline will ever
-  solve, and [D-059](../../../../defects.md) says endpoint identity there can be
-  toolchain-dependent.
-  Measure it before any ranking is trusted.
-  An instability finding blocks `BC-018` rather than being carried into it.
-- `BC-017` / `think-u97a`: price a stratum in counted LP solves end to end, so results
-  are comparable without reference to wall time ([D-126](../../../../defects.md)).
+**Checkpoint C — bounded lattice partition: complete as a calibration control.**
+`BC-019` now has an exact-cover splitter over contiguous bars, filled rectangles, and
+corner Ls inside maximal lattice components.
+It evaluates every allowed exact free-square count `F`, prefers a certificate inside the
+six-chunk budget, then minimizes `F` and chunk count `C`. Deterministic residual and
+minimum-remaining-values traversal ties select the certificate, and state-cap and
+candidate-universe limits remain typed.
+An earlier capped `F` slice does not erase a later existence certificate, but it leaves
+the retained certificate’s `F`/`C` minimality explicitly indeterminate.
+For an out-of-budget retained certificate, any capped `F` slice also leaves budget
+selection and `F`/`C` minimality indeterminate.
+It certifies all 64 grid-derived cases and 3 of 36 non-grid cases inside the
+six-chunk/two-free budget.
+Two non-grid cases are conclusively outside that budget, 23 have no partition in this
+universe, and eight are search-capped and therefore indeterminate after the 10,000-state
+limit. No H-044 verdict is emitted.
 
-**Hours 3-6 — the instruments.**
+The broader non-grid contact components retain 859 internal slide degrees under their
+normal equalities before overlap intervals and wall contacts are applied.
+That is the next design constraint: connectedness alone does not buy a rigid or
+low-dimensional enumeration object.
 
-- `BC-018` / `think-sfzh`, `think-vnm5`, `think-dh4b`: stage-1 enumerator, glued-chunk
-  equality rows, coarse class-angle sweep driver.
-  Calibrate against `n = 5` and `n = 10` proved optima and the `n = 16` not-below guard.
-- The chunk-decomposition detector for `BC-019` / `BC-024`, with the two-band adjacency
-  rule and free squares, per H-044.
+**Checkpoint D — contact-assembly grammar and finite labels: complete and factually
+accepted.** The draft grammar now charges internal slide degrees so one giant connected
+component cannot make coverage vacuous, while the lattice splitter remains an
+independent strict control.
+The first geometry-free implementation canonicalizes signed contact normals, wall
+colors, and caller-normalized semantic colors under square relabeling and all eight D4
+symmetries for scaffolds of at most five squares.
+It retains replayable orbit witnesses and typed candidate, emitted-label, and
+orbit-image caps. Exhaustive controls distinguish ordinary topology counts from the
+deliberately richer signed-contact quotient.
 
-**Hours 6-7.5 — first measurements and exploration.**
+The acceptance pass proved D4 composition and endpoint reversal independently, rather
+than relying only on self-consistent orbit labels.
+It also exposed two branch-level portability defects: the new handoff bypassed the
+renderer gallery, and retained census trigonometry depended on platform `libm` rounding.
+Both repairs preserve the registered census semantics and passed complete Linux and
+macOS validation before the later PR review.
 
-- `BC-024` / `think-kr1d`: the descriptive chunk taxonomy over the imported corpus.
-  What chunk shapes, sizes, tilted-chunk counts, and wall seatings actually recur.
-- W3 freeform: regularize a few poses, re-quench, watch what happens.
-  Notes and idea rows, no verdicts.
+**Checkpoint E — bounded local contact realization: complete and factually accepted.**
+The target-free assembly-frame prefilter fixes translation, enforces signed unit normal
+equalities and a declared positive tangential-overlap margin, canonicalizes and
+deduplicates labels before solving, distinguishes infeasible from solver-indeterminate,
+and stops at a typed LP-solve cap.
+It rejects wall-bearing labels and mixed fitted-angle classes before solving and makes
+no statement about non-edge separation, container fit, whole-packing feasibility, or
+optimality.
 
-**Hours 7.5-8 — finalization reserve.** Reconcile generated views, run the gate, write
-the session artifact and handoff, commit and push.
-Do not start new work in this window.
+The independent pass accepted those boundaries after mutating gauge, normal signs,
+overlap, wall and non-edge exclusions, solver statuses, duplicate labels, and solve-cap
+accounting. A concrete overlapping-non-edge counterexample confirms that a local receipt
+cannot be promoted to packing feasibility.
+
+**Checkpoint F — target-free enumeration price: complete through the bounded control.**
+The exact connected four-edge-color labeled counts for sizes 1 through 5 are `1`, `4`,
+`112`, `15,104`, and `9,684,224`. Exhaustive D4-by-relabeling canonicalization through
+size 4 reduces those rows to `1`, `1`, `7`, and `124` local LP solves; `1`, `1`, `4`,
+and `26` are locally feasible at the declared overlap margin, with no indeterminate
+solves. The raw size-five path would inspect at most `9,296,855,040` orbit images, far
+above its ten-million-image cap.
+Its independently checked isomorph-free replacement reduces 1,533,696 topology colorings
+to 11,013 abstract orbits and deliberately runs no size-five LP. These counts are
+target-free engineering evidence, not atlas coverage or packing feasibility.
+
+**Checkpoint G — descriptive contact overlays: complete and factually accepted.** The
+registered 1–100 census already retains wall seating, contact-graph topology, internal
+slide count, component membership, and edge residuals.
+A new renderer feature keeps those tolerance-qualified graph edges separate from exact
+certified contact loci.
+Five deterministic structural strata (`n = 11`, `28`, `40`, `68`, and `89`) now have
+house-rendered overlays with visible square IDs, centre-to-centre contact-graph edges,
+and centre-to-wall seating edges.
+The gallery is calibration evidence and emits no H-044 verdict.
+
+The independent review now rejects mismatched witnesses, unchecked geometry,
+over-tolerance residuals, invalid detector tolerances, and unstable feature order.
+Every SVG visibly states both registered tolerances and that its dashed graph edges are
+not exact contact geometry; all five representative renderings passed visual review.
+
+**Later infrastructure slices — complete.** The prospective source map covers
+`n = 101..324` without derived annotations or video coordinates.
+Its admitted seed is limited to exact grids and the four UnitSquare cases covered by the
+upstream dataset’s reuse terms; the Kingbird retention boundary is resolved separately
+in the source policy.
+
+The independently checked isomorph-free path reduces 1,533,696 size-five topology
+colorings to 11,013 abstract contact-scaffold orbits.
+The retained atlas contains no packing geometry, local-LP outcome, feasibility claim, or
+H-044 verdict. Full-cell realization remains unbuilt under CG-010; it must price
+partitions, angle assignments, wall seatings, non-edge axes, and symmetry orbits before
+any target-sized execution.
+
+**Finalization reserve.** Reconcile generated views, run the proportionate gate, update
+the session and research-loop records, commit, push, and leave the exact first
+unfinished slice. Do not start new target work in the reserve.
 
 Do **not** reach `BC-021` (the `n = 11` enumeration run) tonight.
-It is blocked on the grammar freeze and on the coverage measurement, and running it
-early would make
-[H-045](../../../../campaign/hypotheses/H-045-chunk-grammar-rediscovery.md)’s criterion
-vacuous.
+The corpus has now been inspected while designing the detector, so a later `n = 11` run
+is retrospective replay, not unseen rediscovery.
+A confirmatory proposer claim needs a prospectively frozen target after the grammar,
+split, and complexity controls are committed.
 
 ## The One Irreversible Decision
 
-The grammar freeze at `BC-018` is the point after which no design change may be made
-without invalidating H-045. If the night reaches that point, name the freeze commit in
-the session record. If it does not, say so plainly and leave the grammar open; an
-unfrozen grammar is a normal state, and a silently adjusted one is a defect.
+The annotation-contract freeze now precedes the grammar freeze.
+After a freeze, no change to source selection, tolerances, candidate shapes, split
+objective, symmetry rules, bounds, or enumeration order may be made without creating a
+new version and invalidating the corresponding prospective evaluation.
+Name every freeze commit in the session record.
+An open grammar is a normal state; a silently adjusted one is a defect.
 
 ## Guardrails
 
-- **A run that beats a record has a bug** until an independent exact layer says
-  otherwise. This pre-registered rule has already caught a critical defect here.
+- **A run that beats a standing record is suspect.** Replay it independently and require
+  formal or interval verification before making a record claim; a numerical improvement
+  alone does not update the frontier.
 - **`beat_record: true` requires `verified` assurance.** Numerical results stay
   numerical at any precision.
 - **The solver floor is about `1e-11` in the side** ([D-021](../../../../defects.md)).
@@ -130,6 +215,10 @@ unfrozen grammar is a normal state, and a silently adjusted one is a defect.
   ([D-052](../../../../defects.md)).
 - **Imported decimal geometry is `numerically-checked`, never `verified`.** Record the
   method, actual precision, rounding, and tolerance.
+- **A source rendering is evidence at its displayed precision only.** It does not replay
+  unavailable interval coordinates or another site’s assurance claim.
+- **Videos are visual cross-checks, not coordinate sources**, while retained vector
+  geometry exists. All project-facing atlas images use the house renderer.
 - **Unattended numerical execution stays NO-GO.** Every cell here is a bounded,
   deterministic, supervised slice; none needs the numeric runner.
 - **Do not start basin-frequency work**, and do not reinterpret the exp-035 through
@@ -140,18 +229,17 @@ unfrozen grammar is a normal state, and a silently adjusted one is a defect.
 
 ## Environment
 
-The pinned `uv` on this image cannot bootstrap CPython 3.14.7. Install a newer uv and
-invoke it as a module:
+Use the repository lock and the supported invocation from `development.md`:
 
 ```bash
-pip install --upgrade 'uv>=0.12'
 cd explorations/packing
-python3 -m uv run --frozen --all-extras --group dev packing-validate --fast
+uv run --frozen --all-extras --group dev packing-validate --fast
 ```
 
-The clone is shallow, so the provenance gate step fails on one unreachable historical
-engine commit until `git fetch --unshallow` runs.
-That failure is environmental and is not a defect in the tree.
+If a provenance step fails, retain the exact failure and inspect repository history
+before deciding whether the cause is environmental.
+Do not mutate global tooling or assume every checkout is shallow from a plan written on
+one host.
 
 ## What the Session Owes at the End
 

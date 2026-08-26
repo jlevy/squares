@@ -46,7 +46,7 @@ TOP_TIMING_COUNT = 8
 SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 PROCESS_TERMINATION_GRACE_SECONDS = 1.0
-DEFAULT_TIMEOUT_SECONDS = 600.0
+DEFAULT_TIMEOUT_SECONDS = 900.0
 
 
 class _ProcessRegistry:
@@ -483,6 +483,64 @@ def _svg_rendering(context: Context) -> str:
     return output
 
 
+def _known_best_atlas(context: Context) -> str:
+    output = _commands(
+        context,
+        (
+            (sys.executable, "-m", "devtools.build_known_best_atlas", "--check"),
+            (sys.executable, "-m", "devtools.census_known_best_chunks", "--check"),
+            (
+                sys.executable,
+                "-m",
+                "devtools.render_known_best_contact_overlays",
+                "--check",
+            ),
+            (
+                sys.executable,
+                "-m",
+                "devtools.profile_known_best_chunks",
+                "--check",
+            ),
+            (sys.executable, "-m", "devtools.price_contact_enumeration", "--check"),
+        ),
+    )
+    _require_text(
+        output,
+        "known-best atlas check passed: 100 sources/plans, witnesses, renders, and links",
+        "chunk census check passed: components, contacts, and bounded lattice partitions "
+        "for 100 records",
+        "known-best contact overlay check passed: 5 house-rendered calibration strata",
+        "known-best chunk evidence profile check passed: 36 non-grid calibration cases",
+        "contact enumeration pricing check passed",
+    )
+    return output
+
+
+def _prospective_atlas(context: Context) -> str:
+    output = _commands(
+        context,
+        (
+            (sys.executable, "-m", "devtools.map_prospective_sources", "--check"),
+            (sys.executable, "-m", "devtools.build_prospective_atlas", "--check"),
+        ),
+    )
+    _require_text(
+        output,
+        "prospective source map check passed: 224 cases, availability only",
+        "prospective atlas seed check passed: 101 witnesses and 101 house renderings",
+    )
+    return output
+
+
+def _contact_scaffold_atlas(context: Context) -> str:
+    output = _module(context, "devtools.build_contact_scaffold_atlas", "--check")
+    _require_text(
+        output,
+        "contact scaffold atlas check passed: 21 topologies, 11013 abstract orbits",
+    )
+    return output
+
+
 def _negative_controls(context: Context) -> str:
     return _module(context, "devtools.run_negative_controls", "devtools/controls.yaml")
 
@@ -889,6 +947,9 @@ STEPS: tuple[Step, ...] = (
     Step("historical regressions", _historical_regressions),
     Step("small-n exact models and local geometry", _small_n),
     Step("deterministic SVG rendering", _svg_rendering),
+    Step("known-best n=1..100 atlas", _known_best_atlas),
+    Step("prospective n=101..324 source map and safe seed", _prospective_atlas),
+    Step("abstract size-five contact-scaffold atlas", _contact_scaffold_atlas),
     Step("negative controls", _negative_controls),
     Step("fixed-angle cell is an LP, rebuilt independently", _independent_lp),
     Step("fast behavioral tests", _fast_tests, fast=True),
@@ -1136,7 +1197,7 @@ def _parser() -> ArgumentParser:
         "--timeout-seconds",
         metavar="SECONDS",
         help=(
-            "maximum time for each validation subprocess (default: 600; also "
+            "maximum time for each validation subprocess (default: 900; also "
             "PACKING_VALIDATE_TIMEOUT_SECONDS)"
         ),
     )

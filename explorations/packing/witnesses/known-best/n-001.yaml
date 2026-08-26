@@ -1,0 +1,39 @@
+softschema:
+  contract: packing.squares:Witness/v1
+  schema: ../witness.schema.yaml
+  envelope: witness
+  status: enforced
+witness:
+  id: W-known-best-n001
+  n: 1
+  side: '1'
+  square_size: '1'
+  representation: corners
+  scalar:
+    kind: rational
+  coordinates:
+    origin: lower-left
+    axes: x-right-y-up
+    angle_unit: not-applicable
+  squares:
+  - id: 1
+    corners:
+    - - '0'
+      - '0'
+    - - '1'
+      - '0'
+    - - '1'
+      - '1'
+    - - '0'
+      - '1'
+  claim:
+    assurance: verified
+    method: exact-algebraic
+    limitations: Verifies this known-best upper-bound construction, not uniqueness; optimality comes only
+      from the separately cited frontier lower bound.
+  source:
+    key: E-basic-grid-upper
+    path: frontier/n-001.md
+  certificate:
+    kind: exact-rational-sat
+    replay: uv run --frozen packing-witness verify witnesses/known-best/n-001.yaml
