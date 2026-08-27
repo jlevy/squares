@@ -118,6 +118,8 @@ read, run, and moved as one unit.
   [portable session guide](explorations/packing/campaign/agent-sessions/README.md#starting-a-portable-four-hour-session).
   Unless the user sets another cadence, target a coherent integration checkpoint within
   about four hours and cap each slice at 30 minutes.
+  Thirty minutes is a ceiling and review point, not a quota: close a smaller process,
+  review, efficiency, or implementation slice as soon as its bounded output is complete.
   At every boundary, compare measured command, coordinator, and sub-agent time with the
   remaining plan and replan only future slices.
   Use available sub-agents for independent read-only or disjoint-write work; the

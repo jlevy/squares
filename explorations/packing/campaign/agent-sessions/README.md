@@ -77,11 +77,14 @@ uv run --directory explorations/packing --frozen packing-campaign status
 
 Create the next sequential `session-NNN` artifact before target work starts.
 Record one absolute 240-minute deadline, at most eight 30-minute wall-clock cycle slots,
-ten minutes for orientation, a twenty-minute evidence checkpoint, thirty minutes per
-work phase, and at least fifteen minutes of protected finalization.
+ten minutes for orientation, a twenty-minute evidence checkpoint, up to thirty minutes
+per work phase, and at least fifteen minutes of protected finalization.
 No work, validation, publication/CI, or terminal-reconciliation slot may exceed 30
 minutes. If the finalization reserve is longer, split it into bounded slots inside the
 final workflow phase.
+The cap is an inventory point, not a quota.
+Close a short phase as soon as its bounded output is complete, and grant another slice
+only after re-screening measured progress and remaining value.
 Cycle slots account for wall time; workflow phases account for material changes of
 purpose or focus.
 An early evidence-triggered phase switch does not create more wall time
@@ -93,8 +96,8 @@ views, defects, beads, commits, and the next action rather than opening new rese
 Before target work, write a bounded slot plan through finalization.
 Each proposed slot names its objective, dependency or parallel lane, expected evidence,
 representative command cost, and defer or kill rule.
-Only the active slice is frozen; later slices are estimates that must be revised from
-measured elapsed time at each boundary.
+Only the active slice is frozen; later slices are maximum allocations that must be
+revised from measured elapsed time at each boundary.
 Apply the same boundary review to validation and finalization slots even when a shared
 purpose lets them remain inside one workflow phase.
 

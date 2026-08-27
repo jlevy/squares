@@ -114,7 +114,7 @@ agenda:
       A versioned contact-assembly contract with explicit sliding degrees of freedom,
       complexity cost, canonical ties, and per-record certificates or typed limitations.
       The inspected n=1..100 corpus receives no H-044 verdict.
-    bead: think-eyix
+    bead: think-6mcd
     depends_on: []
     next_evidence: >-
       CG-010 full fixed-angle cell controls with declared walls, one frozen separating

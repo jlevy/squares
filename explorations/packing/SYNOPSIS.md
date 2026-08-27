@@ -287,11 +287,14 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 ![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
 
-The current line is `BC-019` under `think-eyix`, recorded in
-[session 025](campaign/agent-sessions/session-025-pr45-performance-continuation.md).
-Finish strict validation and the final-head cross-platform checkpoint before closing the
-retained PR review dispositions or returning to `ContactAssemblyGrammar/v1`’s next
-full-cell boundary.
+PR 45 is merged and
+[session 025](campaign/agent-sessions/session-025-pr45-performance-continuation.md) is
+terminal. The current line is `BC-027` under `think-whwc`: reconcile the merged-main
+validation failure and restore a first-failure-safe green pipeline before starting the
+two-session
+[balanced ten-hour agenda](campaign/agendas/agenda-003-balanced-ten-hour-research-program.md).
+The first scientific mini-cycle is the `n = 5` H-023 successor under `BC-029`; the
+constructive successor is CG-010 under `BC-030` and `think-6mcd`.
 
 All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
 house renderings. The source-complete corpus is calibration evidence, not an unseen
