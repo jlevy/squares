@@ -19,9 +19,15 @@ from sqpack.render.model import (
 from sqpack.render.style import SQUARE_HUE_PALETTE
 
 SHADE_ADJACENCY_TOLERANCE = Decimal("0.002")
-FULL_SIDE_CONTACT_TOLERANCE = Decimal("0.002")
 ANGLE_WORKING_DIGITS = 60
 QUARTER_TURN_RADIANS = Decimal("1.57079632679489661923132169163975144209858469968755291048747")
+ANGLE_CLASS_CONTRACT = "tolerance-seeded; strict-full-side contacts merged"
+
+
+@dataclass(frozen=True)
+class SideContact:
+    contact_id: str
+    residual: Decimal
 
 
 @dataclass(frozen=True)
@@ -29,8 +35,12 @@ class SquareColor:
     fill: str
     hue_index: int
     shade_index: int
+    orientation_radians: Decimal
     angle_class: int | None
+    angle_class_residual_radians: Decimal | None
     contact_sides: int | None
+    full_side_contacts: tuple[str, ...]
+    maximum_contact_residual: Decimal | None
 
 
 def _hue_slots(count: int) -> tuple[int, ...]:
@@ -174,29 +184,58 @@ def _orientation_distance(left: Decimal, right: Decimal) -> Decimal:
     return min(difference, QUARTER_TURN_RADIANS - difference)
 
 
+def _orientation_representative(
+    orientations: tuple[Decimal, ...], members: tuple[int, ...] | list[int]
+) -> Decimal:
+    """Return a seam-safe mean orientation modulo one quarter turn."""
+    with localcontext() as context:
+        context.prec = ANGLE_WORKING_DIGITS
+        anchor = orientations[members[0]]
+        half_turn = QUARTER_TURN_RADIANS / 2
+        offsets: list[Decimal] = []
+        for member in members:
+            offset = orientations[member] - anchor
+            if offset > half_turn:
+                offset -= QUARTER_TURN_RADIANS
+            elif offset < -half_turn:
+                offset += QUARTER_TURN_RADIANS
+            offsets.append(offset)
+        representative = anchor + sum(offsets, Decimal(0)) / Decimal(len(offsets))
+        representative %= QUARTER_TURN_RADIANS
+        if representative < 0:
+            representative += QUARTER_TURN_RADIANS
+        return representative
+
+
 def _angle_classes(
-    frame: PackingFrame, *, tolerance: Decimal
-) -> tuple[tuple[tuple[int, ...], ...], tuple[Decimal, ...]]:
+    orientations: tuple[Decimal, ...], *, tolerance: Decimal
+) -> tuple[
+    tuple[tuple[int, ...], ...],
+    tuple[Decimal, ...],
+    tuple[Decimal, ...],
+]:
     classes: list[list[int]] = []
-    representatives: list[Decimal] = []
-    orientations: list[Decimal] = []
-    for index, square in enumerate(frame.squares):
-        orientation = _square_orientation(square)
-        orientations.append(orientation)
+    seed_representatives: list[Decimal] = []
+    for index, orientation in enumerate(orientations):
         matching = next(
             (
                 class_index
-                for class_index, representative in enumerate(representatives)
+                for class_index, representative in enumerate(seed_representatives)
                 if _orientation_distance(orientation, representative) <= tolerance
             ),
             None,
         )
         if matching is None:
-            representatives.append(orientation)
+            seed_representatives.append(orientation)
             classes.append([index])
         else:
             classes[matching].append(index)
-    return tuple(tuple(members) for members in classes), tuple(orientations)
+    frozen_classes = tuple(tuple(members) for members in classes)
+    return (
+        frozen_classes,
+        orientations,
+        tuple(_orientation_representative(orientations, members) for members in frozen_classes),
+    )
 
 
 def _center(square: SquareGeometry) -> tuple[Decimal, Decimal]:
@@ -234,52 +273,143 @@ def _edges(
     return tuple((points[index], points[(index + 1) % 4]) for index in range(4))
 
 
-def _points_close(left: tuple[Decimal, Decimal], right: tuple[Decimal, Decimal]) -> bool:
-    return all(
-        abs(left_coordinate - right_coordinate) <= FULL_SIDE_CONTACT_TOLERANCE
-        for left_coordinate, right_coordinate in zip(left, right, strict=True)
-    )
-
-
-def _edges_fully_flush(
+def _edge_match_residual(
     left: tuple[tuple[Decimal, Decimal], tuple[Decimal, Decimal]],
     right: tuple[tuple[Decimal, Decimal], tuple[Decimal, Decimal]],
-) -> bool:
-    return (_points_close(left[0], right[0]) and _points_close(left[1], right[1])) or (
-        _points_close(left[0], right[1]) and _points_close(left[1], right[0])
+) -> Decimal:
+    direct = max(
+        abs(left[endpoint][axis] - right[endpoint][axis])
+        for endpoint in range(2)
+        for axis in range(2)
     )
+    reverse = max(
+        abs(left[endpoint][axis] - right[1 - endpoint][axis])
+        for endpoint in range(2)
+        for axis in range(2)
+    )
+    return min(direct, reverse)
 
 
-def _edge_on_container_wall(
+def _edge_wall_candidates(
     edge: tuple[tuple[Decimal, Decimal], tuple[Decimal, Decimal]],
     *,
     container_side: Decimal,
-) -> bool:
-    return any(
-        all(abs(point[axis] - boundary) <= FULL_SIDE_CONTACT_TOLERANCE for point in edge)
-        for axis in (0, 1)
-        for boundary in (Decimal(0), container_side)
+) -> tuple[SideContact, ...]:
+    return tuple(
+        SideContact(
+            contact_id=f"wall-{name}",
+            residual=max(abs(point[axis] - boundary) for point in edge),
+        )
+        for name, axis, boundary in (
+            ("left", 0, Decimal(0)),
+            ("right", 0, container_side),
+            ("bottom", 1, Decimal(0)),
+            ("top", 1, container_side),
+        )
     )
 
 
-def _full_side_contact_counts(frame: PackingFrame) -> dict[int, int]:
+def _full_side_contacts(
+    frame: PackingFrame,
+    *,
+    orientations: tuple[Decimal, ...],
+    angle_tolerance: Decimal,
+    contact_tolerance: Decimal,
+) -> dict[int, tuple[SideContact, ...]]:
     square_edges = tuple(_edges(square) for square in frame.squares)
-    counts: dict[int, int] = {}
+    candidates: dict[int, list[list[SideContact]]] = {
+        index: [[] for _edge in edges] for index, edges in enumerate(square_edges)
+    }
     for square_index, edges in enumerate(square_edges):
-        count = 0
-        for edge in edges:
-            if _edge_on_container_wall(edge, container_side=frame.container_side.projected):
-                count += 1
-                continue
-            if any(
-                _edges_fully_flush(edge, other_edge)
-                for other_index, other_edges in enumerate(square_edges)
-                if other_index != square_index
-                for other_edge in other_edges
+        if _orientation_distance(orientations[square_index], Decimal(0)) > angle_tolerance:
+            continue
+        for edge_index, edge in enumerate(edges):
+            candidates[square_index][edge_index].extend(
+                contact
+                for contact in _edge_wall_candidates(
+                    edge, container_side=frame.container_side.projected
+                )
+                if contact.residual <= contact_tolerance
+            )
+    for left_index, left_edges in enumerate(square_edges):
+        for right_index in range(left_index + 1, len(square_edges)):
+            if (
+                _orientation_distance(orientations[left_index], orientations[right_index])
+                > angle_tolerance
             ):
-                count += 1
-        counts[square_index] = count
-    return counts
+                continue
+            for left_edge_index, left_edge in enumerate(left_edges):
+                for right_edge_index, right_edge in enumerate(square_edges[right_index]):
+                    residual = _edge_match_residual(left_edge, right_edge)
+                    if residual > contact_tolerance:
+                        continue
+                    candidates[left_index][left_edge_index].append(
+                        SideContact(frame.squares[right_index].square_id, residual)
+                    )
+                    candidates[right_index][right_edge_index].append(
+                        SideContact(frame.squares[left_index].square_id, residual)
+                    )
+    return {
+        square_index: tuple(
+            min(edge_candidates, key=lambda contact: (contact.residual, contact.contact_id))
+            for edge_candidates in edge_candidate_groups
+            if edge_candidates
+        )
+        for square_index, edge_candidate_groups in candidates.items()
+    }
+
+
+def _merge_contact_angle_classes(
+    classes: tuple[tuple[int, ...], ...],
+    *,
+    orientations: tuple[Decimal, ...],
+    contacts_by_square: dict[int, tuple[SideContact, ...]],
+    square_ids: tuple[str, ...],
+) -> tuple[tuple[tuple[int, ...], ...], tuple[Decimal, ...]]:
+    """Merge tolerance-seeded classes when full-side geometry proves alignment."""
+    class_by_square = {
+        square_index: class_index
+        for class_index, members in enumerate(classes)
+        for square_index in members
+    }
+    square_by_id = {square_id: index for index, square_id in enumerate(square_ids)}
+    parents = list(range(len(classes)))
+
+    def find(class_index: int) -> int:
+        while parents[class_index] != class_index:
+            parents[class_index] = parents[parents[class_index]]
+            class_index = parents[class_index]
+        return class_index
+
+    def union(left: int, right: int) -> None:
+        left_root = find(left)
+        right_root = find(right)
+        if left_root != right_root:
+            parents[max(left_root, right_root)] = min(left_root, right_root)
+
+    wall_class: int | None = None
+    for square_index, contacts in contacts_by_square.items():
+        square_class = class_by_square[square_index]
+        for contact in contacts:
+            if contact.contact_id.startswith("wall-"):
+                if wall_class is None:
+                    wall_class = square_class
+                else:
+                    union(wall_class, square_class)
+                continue
+            union(square_class, class_by_square[square_by_id[contact.contact_id]])
+
+    merged_by_root: dict[int, list[int]] = defaultdict(list)
+    for class_index, members in enumerate(classes):
+        merged_by_root[find(class_index)].extend(members)
+    merged_classes = tuple(
+        tuple(sorted(members))
+        for _root, members in sorted(merged_by_root.items(), key=lambda item: min(item[1]))
+    )
+    return (
+        merged_classes,
+        tuple(_orientation_representative(orientations, members) for members in merged_classes),
+    )
 
 
 def _positive_edge_neighbors(
@@ -416,17 +546,37 @@ def assign_square_colors(frame: PackingFrame, spec: RenderSpec) -> dict[str, Squ
     if not spec.angle_tolerance_radians.is_finite() or spec.angle_tolerance_radians <= 0:
         raise ValueError("color angle tolerance must be finite and positive")
     if (
+        not spec.full_side_contact_tolerance.is_finite()
+        or spec.full_side_contact_tolerance <= 0
+    ):
+        raise ValueError("full-side contact tolerance must be finite and positive")
+    if (
         not spec.shade_lightness_span.is_finite()
         or spec.shade_lightness_span < 0
         or spec.shade_lightness_span > Decimal("0.3")
     ):
         raise ValueError("color shade lightness span must be between 0 and 0.3")
 
+    orientations = tuple(_square_orientation(square) for square in frame.squares)
+    contacts_by_square = _full_side_contacts(
+        frame,
+        orientations=orientations,
+        angle_tolerance=spec.angle_tolerance_radians,
+        contact_tolerance=spec.full_side_contact_tolerance,
+    )
+
     angle_classes: tuple[tuple[int, ...], ...] = ()
     class_by_square: dict[int, int] = {}
+    representatives: tuple[Decimal, ...] = ()
     if spec.hue_scheme is HueScheme.ANGLE:
-        angle_classes, orientations = _angle_classes(
-            frame, tolerance=spec.angle_tolerance_radians
+        angle_classes, _, _ = _angle_classes(
+            orientations, tolerance=spec.angle_tolerance_radians
+        )
+        angle_classes, representatives = _merge_contact_angle_classes(
+            angle_classes,
+            orientations=orientations,
+            contacts_by_square=contacts_by_square,
+            square_ids=tuple(square.square_id for square in frame.squares),
         )
         class_by_square = {
             square_index: class_index
@@ -439,15 +589,15 @@ def assign_square_colors(frame: PackingFrame, spec: RenderSpec) -> dict[str, Squ
         }
         shade_groups = {index: list(members) for index, members in enumerate(angle_classes)}
     else:
-        orientations = tuple(_square_orientation(square) for square in frame.squares)
         hue_by_square = {index: index % spec.hue_count for index in range(len(frame.squares))}
         shade_groups = defaultdict(list)
         for index, hue in hue_by_square.items():
             shade_groups[hue].append(index)
 
-    contact_sides_by_square: dict[int, int] = {}
+    contact_sides_by_square = {
+        index: len(contacts) for index, contacts in contacts_by_square.items()
+    }
     if spec.shade_scheme is ShadeScheme.CONTACTS:
-        contact_sides_by_square = _full_side_contact_counts(frame)
         shade_by_square = {
             index: _contact_shade(contact_sides, shades_per_hue=spec.shades_per_hue)
             for index, contact_sides in contact_sides_by_square.items()
@@ -476,10 +626,26 @@ def assign_square_colors(frame: PackingFrame, spec: RenderSpec) -> dict[str, Squ
             fill=palette[hue_by_square[index]][shade_by_square[index]],
             hue_index=hue_by_square[index],
             shade_index=shade_by_square[index],
+            orientation_radians=orientations[index],
             angle_class=(
                 class_by_square[index] if spec.hue_scheme is HueScheme.ANGLE else None
             ),
-            contact_sides=contact_sides_by_square.get(index),
+            angle_class_residual_radians=(
+                _orientation_distance(
+                    orientations[index], representatives[class_by_square[index]]
+                )
+                if spec.hue_scheme is HueScheme.ANGLE
+                else None
+            ),
+            contact_sides=contact_sides_by_square[index],
+            full_side_contacts=tuple(
+                contact.contact_id for contact in contacts_by_square.get(index, ())
+            ),
+            maximum_contact_residual=(
+                max(contact.residual for contact in contacts_by_square[index])
+                if contacts_by_square.get(index)
+                else None
+            ),
         )
         for index, square in enumerate(frame.squares)
     }

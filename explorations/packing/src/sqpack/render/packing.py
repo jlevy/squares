@@ -5,7 +5,7 @@ from __future__ import annotations
 from decimal import Decimal
 from xml.etree import ElementTree as ET
 
-from sqpack.render.color import SquareColor, assign_square_colors
+from sqpack.render.color import ANGLE_CLASS_CONTRACT, SquareColor, assign_square_colors
 from sqpack.render.model import (
     ActiveFeature,
     AnnotationLevel,
@@ -147,6 +147,7 @@ def _append_square_fill(
             "data-square": square.square_id,
             "data-hue-index": str(color.hue_index),
             "data-shade-index": str(color.shade_index),
+            "data-orientation-radians": str(color.orientation_radians),
             "points": format_points(projected),
             "fill": color.fill,
             "fill-opacity": str(SQUARE_FILL_OPACITY),
@@ -155,8 +156,16 @@ def _append_square_fill(
     )
     if color.angle_class is not None:
         node.set("data-angle-class", str(color.angle_class))
+    if color.angle_class_residual_radians is not None:
+        node.set(
+            "data-angle-class-residual-radians",
+            str(color.angle_class_residual_radians),
+        )
     if color.contact_sides is not None:
         node.set("data-contact-sides", str(color.contact_sides))
+        node.set("data-full-side-contacts", " ".join(color.full_side_contacts))
+    if color.maximum_contact_residual is not None:
+        node.set("data-maximum-contact-residual", str(color.maximum_contact_residual))
     if motion:
         append_square_motion(node, square.square_id)
 
@@ -610,7 +619,9 @@ def build_packing_document(
     append_title_desc(root, spec.title, spec.description)
     records = {
         "annotations": spec.annotations.value,
+        "color-angle-class-contract": ANGLE_CLASS_CONTRACT,
         "color-angle-tolerance-radians": str(spec.angle_tolerance_radians),
+        "color-full-side-contact-tolerance": str(spec.full_side_contact_tolerance),
         "color-hue-count": str(spec.hue_count),
         "color-hue-scheme": spec.hue_scheme.value,
         "color-shade-scheme": spec.shade_scheme.value,

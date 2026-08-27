@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from decimal import Decimal
+from pathlib import Path
 
+from devtools.build_known_best_atlas import frame_from_witness
 from sqpack.render.color import assign_square_colors, square_fill_palette
 from sqpack.render.model import (
     HueScheme,
@@ -16,6 +18,9 @@ from sqpack.render.model import (
 )
 from sqpack.render.numbers import scalar_from_decimal
 from sqpack.render.style import SQUARE_FILL_PALETTE, SQUARE_HUE_PALETTE
+from sqpack.witness import load_witness
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def _point(x: Decimal | int | str, y: Decimal | int | str) -> Point2:
@@ -76,6 +81,13 @@ def test_default_contact_shading_maps_zero_through_four_flush_sides() -> None:
     assert colors["square-03"].contact_sides == 2
     assert colors["square-04"].contact_sides == 3
     assert colors["square-07"].contact_sides == 4
+    assert colors["square-07"].full_side_contacts == (
+        "square-10",
+        "square-09",
+        "square-11",
+        "square-08",
+    )
+    assert colors["square-07"].maximum_contact_residual == 0
     assert [colors[f"square-0{index}"].shade_index for index in range(1, 5)] == [
         4,
         3,
@@ -97,6 +109,36 @@ def test_partial_edge_overlap_does_not_count_as_a_flush_side() -> None:
     colors = assign_square_colors(frame, RenderSpec())
 
     assert {color.contact_sides for color in colors.values()} == {0}
+
+
+def test_n68_near_wall_rotations_are_not_full_side_contacts() -> None:
+    witness = load_witness(
+        ROOT / "witnesses/known-best/n-068.yaml",
+        fallback_schema=ROOT / "witness.schema.yaml",
+    )
+    colors = assign_square_colors(frame_from_witness(witness), RenderSpec())
+
+    assert colors["square-019"].hue_index != colors["square-001"].hue_index
+    assert colors["square-049"].hue_index != colors["square-050"].hue_index
+    assert colors["square-019"].contact_sides == 0
+    assert colors["square-049"].contact_sides == 0
+    assert colors["square-050"].contact_sides == 0
+    assert colors["square-019"].full_side_contacts == ()
+    assert colors["square-049"].full_side_contacts == ()
+    assert colors["square-050"].full_side_contacts == ()
+
+
+def test_full_side_contacts_join_numerically_split_angle_classes() -> None:
+    witness = load_witness(
+        ROOT / "witnesses/prospective/n-105.yaml",
+        fallback_schema=ROOT / "witness.schema.yaml",
+    )
+    colors = assign_square_colors(frame_from_witness(witness), RenderSpec())
+
+    assert "square-101" in colors["square-094"].full_side_contacts
+    assert "square-094" in colors["square-101"].full_side_contacts
+    assert colors["square-094"].angle_class == colors["square-101"].angle_class
+    assert colors["square-094"].hue_index == colors["square-101"].hue_index
 
 
 def test_contact_shading_scales_to_a_custom_shade_count() -> None:
@@ -145,6 +187,7 @@ def test_angle_hues_use_pose_precision_and_fold_quarter_turns() -> None:
 
     assert colors["square-01"].hue_index == colors["square-02"].hue_index
     assert colors["square-03"].hue_index != colors["square-01"].hue_index
+    assert colors["square-03"].angle_class_residual_radians == 0
     assert {color.shade_index for color in colors.values()} == {0}
 
 
@@ -202,6 +245,7 @@ def test_color_parameters_reject_nonpositive_values() -> None:
     for spec in (
         RenderSpec(hue_count=0),
         RenderSpec(shades_per_hue=0),
+        RenderSpec(full_side_contact_tolerance=Decimal(0)),
     ):
         try:
             assign_square_colors(_grid_frame(), spec)
@@ -227,3 +271,4 @@ def test_default_scheme_is_angle_with_contacts_and_five_shades() -> None:
     assert spec.shades_per_hue == 5
     assert spec.shade_lightness_span == Decimal("0.2")
     assert spec.angle_tolerance_radians == Decimal("1e-6")
+    assert spec.full_side_contact_tolerance == Decimal("2e-6")

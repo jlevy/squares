@@ -181,6 +181,7 @@ class RenderSpec:
     shades_per_hue: int = 5
     shade_lightness_span: Decimal = Decimal("0.2")
     angle_tolerance_radians: Decimal = Decimal("1e-6")
+    full_side_contact_tolerance: Decimal = Decimal("2e-6")
 
 
 def validate_scalar_source(value: ScalarSource) -> None:
@@ -389,6 +390,11 @@ def validate_render_request(
         raise ValueError("color shade lightness span must be between 0 and 0.3")
     if not spec.angle_tolerance_radians.is_finite() or spec.angle_tolerance_radians <= 0:
         raise ValueError("color angle tolerance must be finite and positive")
+    if (
+        not spec.full_side_contact_tolerance.is_finite()
+        or spec.full_side_contact_tolerance <= 0
+    ):
+        raise ValueError("full-side contact tolerance must be finite and positive")
     if spec.view is ViewLevel.COMPARISON:
         if start is None:
             raise ValueError("comparison view requires a start frame")

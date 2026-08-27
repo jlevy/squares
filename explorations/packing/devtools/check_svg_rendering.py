@@ -335,7 +335,7 @@ def run_geometry_controls() -> dict[str, bool]:
         ViewLevel,
         render_packing_svg,
     )
-    from sqpack.render.color import assign_square_colors
+    from sqpack.render.color import ANGLE_CLASS_CONTRACT, assign_square_colors
     from sqpack.render.model import ActiveFeature
     from sqpack.render.style import (
         CONTACT_CLIP_POLICY,
@@ -373,6 +373,11 @@ def run_geometry_controls() -> dict[str, bool]:
         if "data-panel" in panel.attrib
     ]
     overview_root = ET.fromstring(overview)
+    overview_metadata = {
+        node.attrib["name"]: node.text or ""
+        for node in overview_root.iter()
+        if node.tag.endswith("}value") and "name" in node.attrib
+    }
     overview_panel = next(
         node for node in overview_root.iter() if node.attrib.get("data-panel") == "Trump n=11"
     )
@@ -492,8 +497,29 @@ def run_geometry_controls() -> dict[str, bool]:
             == str(expected_colors[square.attrib["data-square"]].shade_index)
             and square.attrib["data-contact-sides"]
             == str(expected_colors[square.attrib["data-square"]].contact_sides)
+            and square.attrib["data-orientation-radians"]
+            == str(expected_colors[square.attrib["data-square"]].orientation_radians)
+            and square.attrib["data-angle-class-residual-radians"]
+            == str(expected_colors[square.attrib["data-square"]].angle_class_residual_radians)
+            and square.attrib["data-full-side-contacts"]
+            == " ".join(expected_colors[square.attrib["data-square"]].full_side_contacts)
+            and square.attrib.get("data-maximum-contact-residual")
+            == (
+                str(expected_colors[square.attrib["data-square"]].maximum_contact_residual)
+                if expected_colors[square.attrib["data-square"]].maximum_contact_residual
+                is not None
+                else None
+            )
             for square in overview_squares
         ),
+        "color_measurement_metadata_is_complete": overview_metadata.get(
+            "color-angle-class-contract"
+        )
+        == ANGLE_CLASS_CONTRACT
+        and overview_metadata.get("color-angle-tolerance-radians")
+        == str(RenderSpec().angle_tolerance_radians)
+        and overview_metadata.get("color-full-side-contact-tolerance")
+        == str(RenderSpec().full_side_contact_tolerance),
         "packing_outlines_are_thin_opaque_pure_black": PAPER_THEME.container
         == PACKING_BOUNDARY_COLOR
         == "#000000"

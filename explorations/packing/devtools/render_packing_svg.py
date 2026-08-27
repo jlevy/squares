@@ -64,6 +64,12 @@ def _add_render_options(parser: argparse.ArgumentParser) -> None:
         default=Decimal("0.2"),
         help="total HSL lightness span across each hue family (default: 0.2)",
     )
+    parser.add_argument(
+        "--full-side-tolerance",
+        type=Decimal,
+        default=Decimal("2e-6"),
+        help="maximum endpoint residual for a full-side contact (default: 2e-6)",
+    )
     parser.add_argument("--output", type=Path, required=True)
 
 
@@ -120,6 +126,7 @@ def build_spec(args: argparse.Namespace) -> RenderSpec:
         hue_count=args.hues,
         shades_per_hue=args.shades_per_hue,
         shade_lightness_span=args.shade_span,
+        full_side_contact_tolerance=args.full_side_tolerance,
     )
 
 
