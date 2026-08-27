@@ -5,17 +5,17 @@ title: Run the balanced ten-hour square-packing research agenda
 kind: feature
 status: in_progress
 priority: 0
-version: 6
+version: 7
 spec_path: explorations/packing/campaign/agendas/agenda-003-balanced-ten-hour-research-program.md
 labels:
   - packing
   - focus-process
 dependencies: []
 created_at: 2026-08-27T04:33:05.594Z
-updated_at: 2026-08-27T06:35:00.261Z
+updated_at: 2026-08-27T07:04:46.581Z
 ---
 Coordinate one mutable ten-hour research agenda across two five-hour source sessions. Begin by repairing observed pipeline failures, measure loop efficiency about every two hours, rotate across at least three independent scientific lanes, run W3 insight synthesis after material results, protect both finalization reserves, and leave one terminal logbook synthesis. This bead owns the user-level clock, agenda checkpoints, integration, and final handoff; scientific criteria and results remain with their existing H/experiment owners.
 
 ## Notes
 
-Session 026 completed BC-027 and preregistered exp-045. The scale-local W7 perimeter is now independently accepted: production-derived tied-route sign ownership, per-key handler semantic guards, typed sign-stable asymptotic premises, closed symbolic remainder witnesses, and bounded-route refusal of unbounded evidence. Ruff/BasedPyright pass; the full focused file is 10/10 in about 20 seconds after fail-fast reduced the zero-W mutation path from 14.37 to 4.90 seconds. No pure-W target or result exists; H-023 and all feasibility/component claims remain open. W3 selected the target-free three-stratum owner-4 proof-data control as the next <=30-minute slice. Full integration remains deferred below 4 GiB free space.
+Session 026 checkpoints: BC-027 is complete. Exp-045 remains a typed dependency blocker with no pure-W target or result: owner-3 scale, owner-4 proof data, and an explicit field-bound active-row inventory are independently accepted. Three paired runs reduced the combined +W owner controls from cold median 29.140s (28.172-32.735) to shared median 14.128s (14.041-17.631), with median paired reduction 49.9%; no global cache was added. The BC-029 mini-cycle rotated before extending the n=5 rabbit hole. Active phase is target-free BC-030/think-6mcd W1 shaping; no n=11 run or geometry/feasibility claim.

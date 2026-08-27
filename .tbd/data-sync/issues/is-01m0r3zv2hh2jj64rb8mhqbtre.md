@@ -5,7 +5,7 @@ title: Measure terminal flatness and connectivity before defining basin identity
 kind: bug
 status: in_progress
 priority: 0
-version: 37
+version: 38
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - focus-correctness
@@ -30,10 +30,10 @@ child_order_hints:
   - is-01m0vyhtzd0j8gnfwm5k040ff1
   - is-01m0y16d21crjnn9tqa0120way
 created_at: 2026-08-23T20:11:30.757Z
-updated_at: 2026-08-27T06:35:00.744Z
+updated_at: 2026-08-27T07:04:46.839Z
 ---
 D-034, blocking the census. Exact evidence: the n=3 side-2 sliding family is a connected positive-dimensional terminal set that one contact certificate and many geometric keys split into quantum-dependent rows. The n=5 golden adds an unresolved pair: equal side, short form, contact certificate, angle signature and contact count but different geometry. Those facts do not prove the n=5 rows are connected or establish a five-dimensional family; raw constraint counting is not a rank certificate. Acceptance: archive both n=5 poses and their active cells; compute the fixed-cell optimal-face rank/nullity from the active LP matrix and objective; compute the full pose/angle active-constraint Jacobian; continue every null direction with independent validity checks; test whether the two endpoints are path-connected across cell/contact strata; report certified dimension or unresolved bounds; and feed the evidence to think-0yo9 rather than choosing identity from side/contact hashes.
 
 ## Notes
 
-2026-08-26 session-026 checkpoint: exp-045 remains preregistered with empty results and instrument_ready false. The owner-3 scale helper now derives tied-feature sign ownership from the exact production projection, rejects semantic handler swaps, and retains typed unbounded-route premises with three closed symbolic reductions; bounded routes carry none. Three independent audits accept this proof-data boundary only. The target driver must still establish the actual sequence premises, integrate owner-4, controls, 12 mutations, 13 refusals, replay, and final review. The next target-free W7 slice is exact three-stratum owner-4 proof data on the positive-W control with a real zero-W mutation. No whole-component, connectivity, realization, feasibility, or H-023 disposition follows.
+Session 026 BC-029 terminal checkpoint for this mini-cycle: exp-045 remains in-progress with empty results and instrument_ready false. Accepted prerequisites are production-derived owner-3 scale routing, exact owner-4 proof data, and execution-scoped active-row reuse. The combined +W controls improved from cold median 29.140s to shared median 14.128s across three pairs. Remaining typed blockers are sheet-inventory binding, unified controls, actual target-route premise binding, remaining mutations/refusals, replacement driver, replay, and final audit. No pure-W, obstruction, feasibility, H-023, realization, component, or connectivity disposition follows.
