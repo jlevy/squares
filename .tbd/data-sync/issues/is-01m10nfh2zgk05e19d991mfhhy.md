@@ -3,9 +3,9 @@ type: is
 id: is-01m10nfh2zgk05e19d991mfhhy
 title: Polish the packing atlas presentation and map source coverage
 kind: epic
-status: in_progress
+status: closed
 priority: 1
-version: 11
+version: 12
 labels: []
 dependencies: []
 child_order_hints:
@@ -17,6 +17,10 @@ child_order_hints:
   - is-01m10qcsas8ap87gwndvf4wdpd
   - is-01m10s07vvs1p8d4012xngc3fr
 created_at: 2026-08-27T03:51:06.077Z
-updated_at: 2026-08-27T04:52:39.416Z
+updated_at: 2026-08-27T05:21:17.234Z
+closed_at: 2026-08-27T05:21:17.233Z
+close_reason: "All atlas presentation, color-documentation, source-coverage, integration, hardening, and merge-checkpoint children landed in merged PR #46."
+resolution: null
+duplicate_of: null
 ---
 Coordinate the visual and documentation cleanup for the stacked atlas PR: produce a polished complete n=1..100 composite in standalone SVG and GitHub-friendly PNG form; map n>100 availability with an explicit distinction between public-knowledge gaps and local acquisition, licensing, normalization, or rendering gaps; consolidate color-scheme prose into focused renderer documentation; replace confusing stale imagery; and finish with deterministic regeneration, visual QA, validation, and a clean exact-head PR.
