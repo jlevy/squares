@@ -366,7 +366,7 @@ session:
       Complete the scale-local proof perimeter by deriving route sign ownership from
       production geometry and validating the three unbounded remainder reductions from
       explicit asymptotic orders, without touching the target driver.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       W3 ranked the two scale-local obligations ahead of the broader driver mutations
@@ -389,12 +389,104 @@ session:
     fallback: >-
       Retain the first exact production or asymptotic modeling blocker and keep target
       W6 closed.
+    outcome: >-
+      Completed the scale-local proof perimeter without opening target execution.
+      Route ownership now comes from the exact production pose projection, every
+      handler is checked against the canonical semantics for its key, and each
+      unbounded route owns a typed signed premise set and three closed symbolic
+      reductions. Bounded routes retain neither unbounded premises nor remainder
+      witnesses.
+    evidence:
+    - The exact production projection is a pure theta3-minus-theta4 covector; zero and off-axis mutations fail before route construction.
+    - A real negative-route handler substituted under the positive key preserves inventory but fails the new per-key semantic guard.
+    - Six omitted-premise mutations, invalid sign, witness-rule drift, zero W, and handler deletion all fail at their declared boundaries.
+    - Ruff and BasedPyright pass; all 10 focused tests pass in 20.23 seconds, with fail-fast control rejection reducing the mutation call from 14.37 to 4.90 seconds.
+    - Three independent final audits accept only this scale-local W7 slice and keep target W6, pure-W disposition, H-023, feasibility, and whole-component claims closed.
+    stop_reason: The promised derivations, mutations, focused replay, and three independent audits are complete, so W7 closed in sixteen minutes.
+    next_action: >-
+      Use W3 to rank actual-sequence premise validation, owner-4 integration, shared
+      controls, and driver replacement before admitting another W7 slice.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Interpret the completed scale-local perimeter, inventory the remaining exp-045
+      dependencies, and choose the highest-information next slice without running the
+      pure-W target or widening the local claim boundary.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The scale contract is independently accepted and materially changes which driver
+      seams are now safe to build, so the experiment loop requires interpretation before
+      another implementation allocation.
+    budget_minutes: 10
+    started_at: '2026-08-26T23:32:00-07:00'
+    deadline_at: '2026-08-26T23:42:00-07:00'
+    expected_output: >-
+      One dependency-ordered next slice with an explicit control, mutation, kill
+      condition, and decision to continue exp-045 or rotate to another scientific lane.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop on target execution, copied coefficients, declared premises treated as
+      measured target facts, a slice larger than 30 minutes, or a claim beyond the six
+      registered owner models and exact local scale inventory.
+    fallback: >-
+      Retain the complete scale helper, record the first unresolved driver dependency,
+      and rotate to a dependency-ready agenda lane.
+    outcome: >-
+      Selected an owner-4 proof-data slice before unified controls or target-driver
+      replacement. The accepted stress evaluator already produces the exact nine-row
+      owner-4 combination and all fifteen cancelled correction coefficients, but no
+      retained helper exhausts the three strata or subjects its positive-W sign guard
+      to a real input mutation.
+    evidence:
+    - Actual-sequence premise establishment is target-dependent and therefore cannot precede the closed target admission gate.
+    - Unified sheet and positive-W controls depend on both owner branches, so owner-4 proof data is their smallest missing prerequisite.
+    - The slice can reuse the accepted production row and stress builders without modifying the 601-line exp-043 hand-formula driver.
+    stop_reason: The dependency order, smallest target-free seam, control, mutation, and non-claim boundary are explicit, so W3 closed in under three minutes.
+    next_action: >-
+      Build exact three-stratum owner-4 proof data on the positive-W control, including
+      a zero-W input mutation, then independently review it before any unified control
+      or target-driver slice.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Build the smallest target-free owner-4 proof-data helper over all three registered
+      strata, retaining the exact production stress, all correction coefficients, and
+      strict positive-W control sign without deciding pure -W.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      W3 found owner-4 exhaustion to be the missing prerequisite shared by unified
+      controls and the replacement driver, while target sequence premises remain
+      inadmissible until the driver gate opens.
+    budget_minutes: 30
+    started_at: '2026-08-26T23:34:00-07:00'
+    deadline_at: '2026-08-27T00:04:00-07:00'
+    expected_output: >-
+      Three exact owner-4 records with nine positive weighted rows, fifteen exactly
+      cancelled correction coordinates, strict negative positive-W curvature, complete
+      stratum exhaustion, and a real zero-W mutation that fails the sign guard.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_minus_w_owner4.py
+    kill_condition: >-
+      Stop on copied curvature or sign constants, fewer or more than three strata,
+      bypass of the production row/stress builders, pure-W target data, scientific
+      disposition, or the 30-minute boundary.
+    fallback: >-
+      Retain the first typed owner-4 provenance or cancellation blocker, keep target W6
+      closed, and rotate to the target-free BC-030 lane.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Add only the scale-local derivations and mutation checks, then request another
-      independent review before choosing a driver slice.
+      Define the minimal owner-4 record and production-backed positive control, write
+      the real zero-W mutation first, then request independent review.
   primary_bead: think-whwc
   status: in_progress
   budget:

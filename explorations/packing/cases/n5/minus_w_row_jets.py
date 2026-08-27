@@ -173,6 +173,19 @@ def active_row_jets(field: NumberField, stratum: str) -> RowJetMap:
     return generated
 
 
+def owner3_tied_feature_projection(field: NumberField, stratum: str) -> SecondOrderJet:
+    """Return the production projection whose sign selects owner 3's tied feature."""
+    if stratum not in tangent_cones.STRATA:
+        raise ValueError(f"unknown source stratum {stratum}")
+    _centers, frames, frame_names = _pose_jets(field, stratum)
+    owner_axis = frames[3][frame_names[3].index("a+")]
+    tied_generator = frames[4][frame_names[4].index("a-")]
+    projection = _dot(owner_axis, tied_generator)
+    if not projection.value.is_zero():
+        raise ValueError("owner-3 tied feature is not tied at the source pose")
+    return projection
+
+
 def owner_row_jets(field: NumberField, stratum: str, owner: str) -> RowJetMap:
     """Return one owner's complete rows after exact source-key and gradient validation."""
     if owner not in tangent_cones.EXPECTED_CONTACT_BRANCHES:

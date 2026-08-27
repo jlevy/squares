@@ -144,10 +144,13 @@ coefficients to be strictly negative.
 Retain nuisance-column cancellation and the three normalized remainder limits
 `t^2/abs(delta) -> 0`, `t*abs(delta)/abs(delta) -> 0`, and `delta^2/abs(delta) -> 0`.
 Stored expected constants are not proof data.
-The scale-only helper may retain those limits as named obligations, but target admission
-requires the driver to derive them from `t -> 0`, `delta = o(t)`, and
-`abs(delta)/t^2 -> infinity`. It must also derive the tied-row sign ownership from the
-production projection; handler labels alone are not a contradiction certificate.
+The scale-only helper retains typed symbolic reductions from explicit, sign-stable route
+premises and derives tied-row sign ownership from the production projection.
+This proves only what follows if those premises hold.
+Target admission still requires the driver to establish `t -> 0`, eventual `t > 0`,
+`delta = o(t)`, `abs(delta)/t^2 -> infinity`, eventual nonzero `delta`, and its stable
+sign for the actual route.
+Neither a handler label nor a declared route premise is a contradiction certificate.
 
 ## Frozen Outcomes
 

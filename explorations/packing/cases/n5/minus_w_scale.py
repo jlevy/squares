@@ -9,9 +9,11 @@ from __future__ import annotations
 
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
+from enum import StrEnum
 
-from cases.n5 import minus_w_stress, tangent_cones, tangent_inventory
+from cases.n5 import minus_w_row_jets, minus_w_stress, tangent_cones, tangent_inventory
 from sqpack.field import FieldElement, NumberField
+from sqpack.research.exact_jets import SecondOrderJet
 
 OWNER3 = "owner3:a+"
 BOUNDED_BETA_NEGATIVE = "bounded_beta_negative"
@@ -29,11 +31,38 @@ SCALE_KEYS = (
 EXPECTED_SCALE_KEYS = frozenset(SCALE_KEYS)
 TIED_PLUS_LABEL = "contact:3-4:owner3:a+:square4-feature+1"
 TIED_MINUS_LABEL = "contact:3-4:owner3:a+:square4-feature-1"
-NORMALIZED_REMAINDER_LIMITS = (
-    "t^2/abs(delta)->0",
-    "t*abs(delta)/abs(delta)->0",
-    "delta^2/abs(delta)->0",
-)
+
+
+class RemainderExpression(StrEnum):
+    """The closed inventory of normalized remainders."""
+
+    T_SQUARED_OVER_ABS_DELTA = "t^2/abs(delta)->0"
+    T_ABS_DELTA_OVER_ABS_DELTA = "t*abs(delta)/abs(delta)->0"
+    DELTA_SQUARED_OVER_ABS_DELTA = "delta^2/abs(delta)->0"
+
+
+class RemainderRule(StrEnum):
+    """The exact symbolic reduction used for a zero-limit witness."""
+
+    RECIPROCAL_DIVERGENT_RATIO = "reciprocal_divergent_ratio"
+    CANCEL_EVENTUALLY_NONZERO_ABS_DELTA = "cancel_eventually_nonzero_abs_delta"
+    ABS_DELTA_FROM_LITTLE_O = "abs_delta_from_little_o"
+
+
+class ScalePremise(StrEnum):
+    """Typed premises that a remainder rule may consume."""
+
+    T_TO_ZERO = "t_to_zero"
+    T_EVENTUALLY_POSITIVE = "t_eventually_positive"
+    DELTA_LITTLE_O_T = "delta_little_o_t"
+    ABS_DELTA_OVER_T_SQUARED_TO_POSITIVE_INFINITY = (
+        "abs_delta_over_t_squared_to_positive_infinity"
+    )
+    DELTA_EVENTUALLY_NONZERO = "delta_eventually_nonzero"
+    DELTA_SIGN_STABLE = "delta_sign_stable"
+
+
+NORMALIZED_REMAINDER_EXPRESSIONS = tuple(RemainderExpression)
 
 
 @dataclass(frozen=True)
@@ -45,6 +74,40 @@ class FormalBoundedAffine:
     beta_symbol: str
     beta_direction: tuple[FieldElement, ...]
     beta_coefficient: FieldElement
+
+
+@dataclass(frozen=True)
+class UnboundedRoutePremises:
+    """Premises declared by one sign-stable unbounded-delta route."""
+
+    t_to_zero: bool
+    t_eventually_positive: bool
+    delta_little_o_t: bool
+    abs_delta_over_t_squared_to_positive_infinity: bool
+    delta_eventually_nonzero: bool
+    delta_sign_stable: bool
+    delta_sign: int
+
+
+@dataclass(frozen=True)
+class AsymptoticLimitWitness:
+    """One checked symbolic reduction to a declared zero-limit premise."""
+
+    expression: RemainderExpression
+    rule: RemainderRule
+    premises: frozenset[ScalePremise]
+    delta_sign: int
+
+
+@dataclass(frozen=True)
+class RouteSignEvidence:
+    """Production projection and the tied labels selected by either delta sign."""
+
+    projection: SecondOrderJet
+    delta_direction: tuple[FieldElement, ...]
+    delta_coefficient: FieldElement
+    positive_delta_tied_label: str
+    negative_delta_tied_label: str
 
 
 @dataclass(frozen=True)
@@ -60,7 +123,6 @@ class UnboundedCuspData:
     kappa_positive: FieldElement
     kappa_negative: FieldElement
     nuisance_coefficients: tuple[FieldElement, ...]
-    normalized_remainder_limits: tuple[str, str, str]
 
 
 @dataclass(frozen=True)
@@ -71,6 +133,7 @@ class ScaleRouteSpec:
     beta_sign: int | None
     delta_sign: int | None
     decisive_tied_labels: tuple[str, ...]
+    unbounded_premises: UnboundedRoutePremises | None
 
 
 @dataclass(frozen=True)
@@ -80,32 +143,67 @@ class ScaleRecord:
     stratum: str
     key: str
     route: ScaleRouteSpec
+    route_sign_evidence: RouteSignEvidence
     stress: minus_w_stress.StressEvaluation
     bounded_affine: FormalBoundedAffine
     unbounded_cusp: UnboundedCuspData
+    normalized_remainder_limits: tuple[AsymptoticLimitWitness, ...]
 
 
-type ScaleHandler = Callable[[], ScaleRouteSpec]
+type ScaleHandler = Callable[[RouteSignEvidence], ScaleRouteSpec]
 
 
-def _bounded_negative() -> ScaleRouteSpec:
-    return ScaleRouteSpec("bounded", -1, None, (TIED_MINUS_LABEL,))
+def _bounded_negative(evidence: RouteSignEvidence) -> ScaleRouteSpec:
+    return ScaleRouteSpec("bounded", -1, None, (evidence.negative_delta_tied_label,), None)
 
 
-def _bounded_zero() -> ScaleRouteSpec:
-    return ScaleRouteSpec("bounded", 0, None, (TIED_PLUS_LABEL, TIED_MINUS_LABEL))
+def _bounded_zero(evidence: RouteSignEvidence) -> ScaleRouteSpec:
+    return ScaleRouteSpec(
+        "bounded",
+        0,
+        None,
+        (evidence.positive_delta_tied_label, evidence.negative_delta_tied_label),
+        None,
+    )
 
 
-def _bounded_positive() -> ScaleRouteSpec:
-    return ScaleRouteSpec("bounded", 1, None, (TIED_PLUS_LABEL,))
+def _bounded_positive(evidence: RouteSignEvidence) -> ScaleRouteSpec:
+    return ScaleRouteSpec("bounded", 1, None, (evidence.positive_delta_tied_label,), None)
 
 
-def _unbounded_negative() -> ScaleRouteSpec:
-    return ScaleRouteSpec("unbounded", None, -1, (TIED_MINUS_LABEL,))
+def unbounded_route_premises(delta_sign: int) -> UnboundedRoutePremises:
+    """Return the closed premise set owned by one unbounded sign route."""
+    if delta_sign not in (-1, 1):
+        raise ValueError(f"unbounded scale route has invalid delta sign {delta_sign}")
+    return UnboundedRoutePremises(
+        t_to_zero=True,
+        t_eventually_positive=True,
+        delta_little_o_t=True,
+        abs_delta_over_t_squared_to_positive_infinity=True,
+        delta_eventually_nonzero=True,
+        delta_sign_stable=True,
+        delta_sign=delta_sign,
+    )
 
 
-def _unbounded_positive() -> ScaleRouteSpec:
-    return ScaleRouteSpec("unbounded", None, 1, (TIED_PLUS_LABEL,))
+def _unbounded_negative(evidence: RouteSignEvidence) -> ScaleRouteSpec:
+    return ScaleRouteSpec(
+        "unbounded",
+        None,
+        -1,
+        (evidence.negative_delta_tied_label,),
+        unbounded_route_premises(-1),
+    )
+
+
+def _unbounded_positive(evidence: RouteSignEvidence) -> ScaleRouteSpec:
+    return ScaleRouteSpec(
+        "unbounded",
+        None,
+        1,
+        (evidence.positive_delta_tied_label,),
+        unbounded_route_premises(1),
+    )
 
 
 SCALE_HANDLERS: Mapping[str, ScaleHandler] = {
@@ -124,6 +222,146 @@ def _validated_handlers(handlers: Mapping[str, ScaleHandler]) -> Mapping[str, Sc
         extra = sorted(actual - EXPECTED_SCALE_KEYS)
         raise ValueError(f"scale handler inventory drifted; missing={missing}, extra={extra}")
     return handlers
+
+
+def validated_route_specs(
+    handlers: Mapping[str, ScaleHandler], evidence: RouteSignEvidence
+) -> Mapping[str, ScaleRouteSpec]:
+    """Run every handler and reject semantic drift behind a valid key inventory."""
+    selected = _validated_handlers(handlers)
+    actual = {key: selected[key](evidence) for key in SCALE_KEYS}
+    expected = {
+        BOUNDED_BETA_NEGATIVE: _bounded_negative(evidence),
+        BOUNDED_BETA_ZERO: _bounded_zero(evidence),
+        BOUNDED_BETA_POSITIVE: _bounded_positive(evidence),
+        UNBOUNDED_DELTA_NEGATIVE: _unbounded_negative(evidence),
+        UNBOUNDED_DELTA_POSITIVE: _unbounded_positive(evidence),
+    }
+    for key in SCALE_KEYS:
+        if actual[key] != expected[key]:
+            raise ValueError(f"scale handler semantics drifted; key={key}")
+    return actual
+
+
+def unbounded_remainder_witnesses(
+    premises: UnboundedRoutePremises,
+    *,
+    witness_overrides: Mapping[RemainderExpression, AsymptoticLimitWitness] | None = None,
+) -> tuple[AsymptoticLimitWitness, AsymptoticLimitWitness, AsymptoticLimitWitness]:
+    """Derive the three normalized zero limits from explicit scale premises."""
+    if premises.delta_sign not in (-1, 1):
+        raise ValueError(f"unbounded scale route has invalid delta sign {premises.delta_sign}")
+    availability = {
+        ScalePremise.T_TO_ZERO: premises.t_to_zero,
+        ScalePremise.T_EVENTUALLY_POSITIVE: premises.t_eventually_positive,
+        ScalePremise.DELTA_LITTLE_O_T: premises.delta_little_o_t,
+        ScalePremise.ABS_DELTA_OVER_T_SQUARED_TO_POSITIVE_INFINITY: (
+            premises.abs_delta_over_t_squared_to_positive_infinity
+        ),
+        ScalePremise.DELTA_EVENTUALLY_NONZERO: premises.delta_eventually_nonzero,
+        ScalePremise.DELTA_SIGN_STABLE: premises.delta_sign_stable,
+    }
+    missing = tuple(
+        sorted(premise.value for premise, present in availability.items() if not present)
+    )
+    if missing:
+        raise ValueError(f"unbounded scale assumption missing; premises={list(missing)}")
+    expected = (
+        AsymptoticLimitWitness(
+            expression=RemainderExpression.T_SQUARED_OVER_ABS_DELTA,
+            rule=RemainderRule.RECIPROCAL_DIVERGENT_RATIO,
+            premises=frozenset(
+                {
+                    ScalePremise.T_EVENTUALLY_POSITIVE,
+                    ScalePremise.DELTA_EVENTUALLY_NONZERO,
+                    ScalePremise.DELTA_SIGN_STABLE,
+                    ScalePremise.ABS_DELTA_OVER_T_SQUARED_TO_POSITIVE_INFINITY,
+                }
+            ),
+            delta_sign=premises.delta_sign,
+        ),
+        AsymptoticLimitWitness(
+            expression=RemainderExpression.T_ABS_DELTA_OVER_ABS_DELTA,
+            rule=RemainderRule.CANCEL_EVENTUALLY_NONZERO_ABS_DELTA,
+            premises=frozenset(
+                {
+                    ScalePremise.T_EVENTUALLY_POSITIVE,
+                    ScalePremise.DELTA_EVENTUALLY_NONZERO,
+                    ScalePremise.DELTA_SIGN_STABLE,
+                    ScalePremise.T_TO_ZERO,
+                }
+            ),
+            delta_sign=premises.delta_sign,
+        ),
+        AsymptoticLimitWitness(
+            expression=RemainderExpression.DELTA_SQUARED_OVER_ABS_DELTA,
+            rule=RemainderRule.ABS_DELTA_FROM_LITTLE_O,
+            premises=frozenset(
+                {
+                    ScalePremise.T_EVENTUALLY_POSITIVE,
+                    ScalePremise.DELTA_EVENTUALLY_NONZERO,
+                    ScalePremise.DELTA_SIGN_STABLE,
+                    ScalePremise.DELTA_LITTLE_O_T,
+                    ScalePremise.T_TO_ZERO,
+                }
+            ),
+            delta_sign=premises.delta_sign,
+        ),
+    )
+    overrides = witness_overrides or {}
+    actual = (
+        overrides.get(expected[0].expression, expected[0]),
+        overrides.get(expected[1].expression, expected[1]),
+        overrides.get(expected[2].expression, expected[2]),
+    )
+    if actual != expected:
+        changed = next(
+            witness.expression.value
+            for witness, wanted in zip(actual, expected, strict=True)
+            if witness != wanted
+        )
+        raise ValueError(f"unbounded remainder witness drifted; expression={changed}")
+    return actual
+
+
+def route_sign_evidence(
+    field: NumberField,
+    stratum: str,
+    stress: minus_w_stress.StressEvaluation,
+) -> RouteSignEvidence:
+    projection = minus_w_row_jets.owner3_tied_feature_projection(field, stratum)
+    delta_direction = tuple(
+        field.one if index == tangent_cones.theta(3) else field.zero
+        for index in range(tangent_cones.VARIABLE_COUNT)
+    )
+    delta_coefficient = sum(
+        (
+            coefficient * direction
+            for coefficient, direction in zip(projection.gradient, delta_direction, strict=True)
+        ),
+        field.zero,
+    )
+    if delta_coefficient.sign() == 0:
+        raise ValueError("owner-3 tied projection has no strict delta sign")
+    if projection.gradient[tangent_cones.theta(4)] != -delta_coefficient or any(
+        not coefficient.is_zero()
+        for index, coefficient in enumerate(projection.gradient)
+        if index not in {tangent_cones.theta(3), tangent_cones.theta(4)}
+    ):
+        raise ValueError("owner-3 tied projection is not a pure delta covector")
+    tied_labels = {row.label for row in stress.rows if row.label.startswith("contact:3-4:")}
+    positive_sign = delta_coefficient.sign()
+    positive_label = TIED_PLUS_LABEL if positive_sign > 0 else TIED_MINUS_LABEL
+    negative_label = TIED_MINUS_LABEL if positive_sign > 0 else TIED_PLUS_LABEL
+    if {positive_label, negative_label} != tied_labels:
+        raise ValueError("derived route labels drifted from production tied rows")
+    return RouteSignEvidence(
+        projection=projection,
+        delta_direction=delta_direction,
+        delta_coefficient=delta_coefficient,
+        positive_delta_tied_label=positive_label,
+        negative_delta_tied_label=negative_label,
+    )
 
 
 def _bounded_affine(
@@ -187,7 +425,6 @@ def _unbounded_cusp(
         kappa_positive=kappa_positive,
         kappa_negative=kappa_negative,
         nuisance_coefficients=nuisance,
-        normalized_remainder_limits=NORMALIZED_REMAINDER_LIMITS,
     )
 
 
@@ -206,17 +443,35 @@ def scale_records(
     stress = minus_w_stress.evaluate_stress(field, stratum, OWNER3, velocity, correction)
     bounded = _bounded_affine(field, stress)
     unbounded = _unbounded_cusp(field, stress)
-    return tuple(
-        ScaleRecord(
-            stratum=stratum,
-            key=key,
-            route=selected_handlers[key](),
-            stress=stress,
-            bounded_affine=bounded,
-            unbounded_cusp=unbounded,
+    sign_evidence = route_sign_evidence(field, stratum, stress)
+    routes = validated_route_specs(selected_handlers, sign_evidence)
+    records: list[ScaleRecord] = []
+    for key in SCALE_KEYS:
+        route = routes[key]
+        if route.family == "unbounded":
+            premises = route.unbounded_premises
+            if premises is None or premises.delta_sign != route.delta_sign:
+                raise ValueError(f"unbounded route premises drifted; key={key}")
+            limits = unbounded_remainder_witnesses(premises)
+        elif route.family == "bounded":
+            if route.unbounded_premises is not None:
+                raise ValueError(f"bounded route acquired unbounded premises; key={key}")
+            limits = ()
+        else:
+            raise ValueError(f"unknown scale route family; key={key}")
+        records.append(
+            ScaleRecord(
+                stratum=stratum,
+                key=key,
+                route=route,
+                route_sign_evidence=sign_evidence,
+                stress=stress,
+                bounded_affine=bounded,
+                unbounded_cusp=unbounded,
+                normalized_remainder_limits=limits,
+            )
         )
-        for key in SCALE_KEYS
-    )
+    return tuple(records)
 
 
 def positive_w_control_records(
@@ -227,22 +482,21 @@ def positive_w_control_records(
     """Exercise all fifteen scale records on exp-036's accepted positive-W control."""
     selected_handlers = _validated_handlers(handlers)
     correction = tuple(field.zero for _ in range(tangent_cones.VARIABLE_COUNT))
-    records = tuple(
-        record
-        for stratum in tangent_cones.STRATA
-        for record in scale_records(
+    records: list[ScaleRecord] = []
+    for stratum in tangent_cones.STRATA:
+        batch = scale_records(
             field,
             stratum,
             tuple(tangent_inventory.geometry_vectors(field, stratum)[0]["W"]),
             correction,
             handlers=selected_handlers,
         )
-    )
+        if any(record.bounded_affine.constant.sign() >= 0 for record in batch):
+            raise ValueError("positive-W control lost its strict production curvature")
+        records.extend(batch)
     expected = {
         (stratum, key) for stratum in tangent_cones.STRATA for key in EXPECTED_SCALE_KEYS
     }
     if {(record.stratum, record.key) for record in records} != expected or len(records) != 15:
         raise ValueError("three-stratum scale record inventory drifted")
-    if any(record.bounded_affine.constant.sign() >= 0 for record in records):
-        raise ValueError("positive-W control lost its strict production curvature")
-    return records
+    return tuple(records)
