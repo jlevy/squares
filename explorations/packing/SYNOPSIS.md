@@ -297,12 +297,16 @@ terminal first-session midpoint in the two-session
 stopped on an external provider usage limit after ten of eleven phases, and
 [session 028](campaign/agent-sessions/session-028-bc032-n29-promotion-inventory.md) is
 the terminal successor that executed its one unexecuted phase.
-The next bounded slice is `BC-032` under `think-75ll`: register Q-BC032-a and measure
-whether the `4.94e-11` relaxation in the verified `n = 29` rational upper bound is a
-property of the pose or an artifact of the promotion route.
-An `n = 29` interval round is not next, and its previously stated prerequisites were
-retired as not describing this repository.
-`BC-027` is complete.
+[Session 029](campaign/agent-sessions/session-029-finish-agenda-003-cycles.md) is the
+terminal successor and closed the remaining agenda-003 cells on measurement.
+Q-BC032-a is answered: the `4.94e-11` relaxation is an artifact of the promotion route,
+not a property of the pose, and six independently verified promotions beat the recorded
+baseline. `BC-028`’s trigger passed, so its inventory-reuse implementation is ready but
+sequenced behind exp-045. The next bounded slice is `BC-029` under `think-1s0h`: exp-045
+is blocked at execution admission because it declares twelve typed pre-certificate
+mutations while the instrument implements and enforces eight, and that gap must be
+closed by building the four missing controls rather than by amending the declared count
+downward. `BC-027` is complete.
 The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and `think-1s0h` is retained
 as a typed instrument blocker: exp-045 is preregistered and its scale, owner-4, and
 execution-scoped row-inventory controls are built, but no pure `-W` target or result

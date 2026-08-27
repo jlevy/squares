@@ -186,7 +186,7 @@ session:
       Decide whether exp-045's six declared execution-admission conditions actually hold,
       and either admit the pure minus-W target run under BC-029 or retain the first typed
       instrument blocker without weakening the admission bar.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       BC-032's registered question is answered, so the agenda rotates to its one ready
@@ -209,15 +209,33 @@ session:
     fallback: >-
       Retain the first unmet condition as a typed dependency blocker under think-1s0h and
       leave exp-045 preregistered and unexecuted.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      exp-045 is not admitted, and no target data was generated. Five of the six
+      conditions hold or are reachable, but condition three fails on a hard count: the
+      preregistration requires twelve typed pre-certificate mutations and the instrument
+      implements and enforces exactly eight. This is a valid BC-029 exit, whose declared
+      terminal states include a typed instrument blocker, so the cell closes without an
+      H-023 disposition and without weakening the admission bar.
+    evidence:
+    - 'Condition 1 holds: the driver imports and uses the accepted `angle_sheet`, `second_order_obstruction`, `tangent_cones` and `tangent_inventory` helpers through `build_result()`, not an exp-043 hand-formula path.'
+    - 'Condition 2 holds: the same builder wires in the exp-034 sheet control and the exp-036 positive obstruction, including an explicit guard that the exact exp-034 positive sheet-angle curve at A is not falsely obstructed.'
+    - "Condition 3 FAILS: `minus_w_obstruction` raises ProofInvariantError('control.keys') unless the mutation set is exactly its eight CONTROL_KEYS, against the twelve that exp-045's method.control and Execution Admission both declare."
+    - No second mutation set exists in the lane; `minus_w_scale.SCALE_KEYS` holds the five scale records, which at three strata give the separately declared fifteen scale records, and are not mutations.
+    - 'Condition 4 holds: REFUSED_CLAIMS contains exactly thirteen individually keyed, claim-specific refusals, matching the declared count.'
+    - Conditions 5 and 6 were not reached. Confirming record/replay agreement requires generating target data, which this slice's kill condition forbids on an incomplete instrument, and no independent post-change audit was performed.
+    - The declared validation command passed, 11 tests in 38.58 seconds, so the blocker is a missing control rather than a broken one.
+    stop_reason: >-
+      The first unmet admission condition is exact, countable and enforced by the
+      instrument itself, so the verdict needed no target run and the slice closed inside
+      its twenty-minute budget.
     next_action: >-
-      Check each of exp-045's six execution-admission conditions against the retained
-      helpers, mutation controls, refusal records and replay path before admitting any
-      target generation.
+      Build the four missing mutations and raise the enforced count to twelve under
+      think-oyn9, tracked against think-1s0h. Do not amend exp-045's declared twelve down
+      to the implemented eight: the criterion was frozen before implementation, and
+      matching it to the code after the fact is the post-hoc weakening this admission bar
+      exists to prevent.
   primary_bead: think-kdil
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 210
     slice_minutes: 30
@@ -235,16 +253,33 @@ session:
       The full gate is green at 3421481. BC-029 is the only ready research cell, BC-028 is
       tentative pending its trigger measurement, BC-032 carries the newly preregistered
       Q-BC032-a, and BC-033 stays blocked on unmet prerequisites.
-    after: null
+    after: >-
+      Three cells moved on evidence rather than opinion. BC-028's trigger passed and the
+      cell is ready with measured arithmetic and a named target, its implementation
+      deliberately sequenced behind exp-045. BC-032's Q-BC032-a is answered: the 4.94e-11
+      relaxation is route-dependent, six verified promotions beat the recorded baseline,
+      and the durable artifact's regeneration is queued rather than done silently.
+      BC-029 is blocked at execution admission on an exact, countable gap between twelve
+      declared mutations and eight implemented ones, which is one of its own declared
+      terminal exits. No H-023 disposition was made, no target data was generated, and no
+      claim widened.
   delegations: []
-  outputs: []
+  outputs:
+  - campaign/agendas/agenda-003-balanced-ten-hour-research-program.md
+  - campaign/agent-sessions/session-029-finish-agenda-003-cycles.md
   checks:
   - The full gate passed all 36 steps at 3421481 before this session opened.
   - The declared validation command was executed before being written into the contract, per think-ldy8.
-  stop_reason: null
+  stop_reason: >-
+    Every declared slice reached a terminal verdict inside its own budget, and the one
+    remaining research lane closed on a typed instrument blocker rather than on a result,
+    so there is no admitted work left in this agenda that does not first require building
+    a missing control.
   next_action: >-
-    Under BC-028 and think-kdil, measure the row-jet dominance trigger and record a
-    verdict either way.
+    Under BC-029 and think-1s0h, build exp-045's four missing pre-certificate mutations so
+    the enforced count matches the declared twelve, then re-run the admission check before
+    any target generation. The declared criterion is not to be amended down to the
+    implemented eight.
 ---
 # Session 029 — Finish the agenda-003 Research Cycles
 

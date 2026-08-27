@@ -333,14 +333,16 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 028](../../../../campaign/agent-sessions/session-028-bc032-n29-promotion-inventory.md).
-Session 027 stopped on an external provider usage limit after ten of eleven phases, and
-session 028 terminalized its one unexecuted phase.
-Open BC-032 under `think-75ll` as the next bounded driver: register Q-BC032-a and
-measure whether the `4.94e-11` relaxation in the verified `n = 29` rational upper bound
-is a property of the retained pose or an artifact of the promotion route.
-An `n = 29` interval round is not next, and its previously stated prerequisites were
-retired as not describing this repository.
+[session 029](../../../../campaign/agent-sessions/session-029-finish-agenda-003-cycles.md).
+Sessions 027 and 028 are terminal, and session 029 closed the remaining agenda-003 cells
+on measurement rather than opinion.
+Open BC-029 under `think-1s0h` as the next bounded driver: exp-045 is blocked at
+execution admission because it declares twelve typed pre-certificate mutations while the
+instrument implements and hard-enforces eight.
+Build the four missing controls so the enforced count matches the declared one, then
+re-run the admission check before any target generation.
+Do not amend the declared twelve down to the implemented eight; the criterion was frozen
+before implementation.
 The measured W5 inventory remains scheduled after that driver; BC-016 stays blocked on
 its retained-pose, glued-row, tie-label, and receipt-checker prerequisites.
 The first-failure pipeline cell is complete, and the active two-session

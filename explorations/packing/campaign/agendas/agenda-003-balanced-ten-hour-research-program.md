@@ -57,7 +57,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5]
-    state: tentative
+    state: ready
     priority: 0
     question: >-
       Does repeated exact row-jet construction consume enough of the next scientific
@@ -77,8 +77,14 @@ agenda:
     bead: think-kdil
     depends_on: []
     next_evidence: >-
-      checkpoint arithmetic for expected time saved in the remaining horizon, plus an
-      exact-output equivalence result if implementation is admitted
+      Trigger measured and passed in session 029. `active_row_jets` holds 93.0 percent of
+      the `exhaustive_exact` group's cumulative time; the dominant arm is
+      `evaluate_stress` to `owner_row_jets` at 57.6 percent of the group; and the reuse
+      mechanism already exists, costing 0.025 seconds per call inside the shared-inventory
+      test against 11.95 seconds on that arm. A five-fold reduction is worth about 136
+      seconds per run, roughly 42 percent of full-gate wall time. Implementation is
+      sequenced after exp-045, which is preregistered against a frozen instrument on this
+      same path, and still owes the declared exact-output equivalence result.
     note: >-
       The known-best atlas already improved from 743.07 to 123.93 seconds and complete
       strict validation from 1,589.65 to 372.24 seconds. Do not reopen the rejected
@@ -91,7 +97,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [5]
-    state: ready
+    state: blocked
     priority: 0
     question: >-
       Do the frozen minus-W scale routes and controls advance the n=5 terminal-family
@@ -109,8 +115,14 @@ agenda:
     bead: think-1s0h
     depends_on: []
     next_evidence: >-
-      exp-045 with a frozen criterion, the declared controls and scale routes, retained
-      raw evidence, an independent replay, and a scoped successor disposition
+      Blocked at execution admission by session 029, a declared terminal exit for this
+      cell. exp-045 requires twelve typed pre-certificate mutations; the instrument
+      implements and hard-enforces exactly eight, and no second mutation set exists in the
+      lane. The other admission conditions hold: thirteen keyed refusals are present, the
+      accepted helpers are used rather than an exp-043 hand-formula path, and the exp-034
+      sheet and exp-036 obstruction controls are wired into the same builder. Build the
+      four missing mutations under think-oyn9; do not amend the declared twelve down to
+      the implemented eight.
     artifacts:
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md
