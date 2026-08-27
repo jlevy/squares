@@ -5,17 +5,17 @@ title: Run the balanced ten-hour square-packing research agenda
 kind: feature
 status: in_progress
 priority: 0
-version: 8
+version: 9
 spec_path: explorations/packing/campaign/agendas/agenda-003-balanced-ten-hour-research-program.md
 labels:
   - packing
   - focus-process
 dependencies: []
 created_at: 2026-08-27T04:33:05.594Z
-updated_at: 2026-08-27T08:32:14.998Z
+updated_at: 2026-08-27T09:51:26.414Z
 ---
 Coordinate one mutable ten-hour research agenda across two five-hour source sessions. Begin by repairing observed pipeline failures, measure loop efficiency about every two hours, rotate across at least three independent scientific lanes, run W3 insight synthesis after material results, protect both finalization reserves, and leave one terminal logbook synthesis. This bead owns the user-level clock, agenda checkpoints, integration, and final handoff; scientific criteria and results remain with their existing H/experiment owners.
 
 ## Notes
 
-Session 026 checkpoints: BC-027 is complete. Exp-045 remains a typed dependency blocker with no pure-W target or result: owner-3 scale, owner-4 proof data, and an explicit field-bound active-row inventory are independently accepted. Three paired runs reduced the combined +W owner controls from cold median 29.140s (28.172-32.735) to shared median 14.128s (14.041-17.631), with median paired reduction 49.9%; no global cache was added. The BC-029 mini-cycle rotated before extending the n=5 rabbit hole. BC-030, BC-031, BC-032, and BC-034 have completed bounded slices; the active phase is their multi-program integration checkpoint with three audit repairs and proportional validation. No n=11 target run or geometry/feasibility claim has opened.
+Session 026 is terminal. BC-027 is complete; exp-045 remains a typed instrument blocker with no pure -W target or result; BC-030 is complete; BC-016 remains blocked under think-3yv8; the El Moumni n=7 replay remains blocked under think-trkj after D-344/D-345 while the exact source-distinct Case 1 control is retained. The second five-hour session begins only with target-free BC-017 under think-u97a, then rotates through source and promotion/asymptotic programs with W5 and W3 checkpoints. The standard experiment loop now preserves three-to-five bounded parallel lanes when capacity permits and treats hosted CI as asynchronous evidence rather than a polling phase. No n=11 target, geometry, feasibility, optimality, or whole-component claim opened.
