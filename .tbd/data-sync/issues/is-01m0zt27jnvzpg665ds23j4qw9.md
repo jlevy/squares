@@ -3,16 +3,20 @@ type: is
 id: is-01m0zt27jnvzpg665ds23j4qw9
 title: Standardize time-sliced experiment-loop startup guidance
 kind: task
-status: in_progress
+status: closed
 priority: 2
-version: 3
+version: 4
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md
 labels:
   - packing
 dependencies: []
 parent_id: is-01m0ypc5cd4z6ktb1vejj1td3n
 created_at: 2026-08-26T19:51:58.804Z
-updated_at: 2026-08-26T23:19:47.936Z
+updated_at: 2026-08-27T04:39:05.854Z
+closed_at: 2026-08-27T04:39:05.853Z
+close_reason: The standard startup guidance now requires a time-sliced plan, a roughly four-hour integration checkpoint by default, slices capped at 30 minutes with shorter phases encouraged, measured re-estimation, protected finalization, and independent sub-agent delegation. PR 45 is merged, so the parent hold is discharged.
+resolution: null
+duplicate_of: null
 ---
 Update the authoritative experiment-loop and agent-startup guidance so every new agent begins with an explicit bounded plan, works in slices of at most 30 minutes, targets an integration checkpoint around four hours, reassesses elapsed time and the remaining critical path at each boundary, and delegates genuinely independent work to sub-agents when slots are available. Keep the guidance general, concise, and compatible with existing W1-W7 workflow entry contracts; regenerate any dependent document map or synopsis views.
 
