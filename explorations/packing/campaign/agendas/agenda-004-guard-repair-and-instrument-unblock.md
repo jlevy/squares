@@ -23,8 +23,8 @@ agenda:
     state: ready
     priority: 1
     question: >-
-      Can every guard that stopped guarding be repaired in one pipeline slice, and can the
-      class of failure be closed rather than only its three instances?
+      Can the guards that stopped guarding be repaired, and the class of failure closed
+      rather than only its instances?
     hypotheses: []
     budget: one W7 pipeline-improvement slice of at most 45 minutes, plus one full gate
     entry: >-
@@ -40,12 +40,42 @@ agenda:
       under think-306i, decide whether to pin lefthook the way flowmark is pinned, and
       decide whether `controls.yaml` anchors that embed generated values should be derived
       rather than literal. The last item is the actual class defect: a literal anchor on a
-      number the checker itself moves is what silently disabled one of 76 controls.
+      number the checker itself moves is what silently disabled one of 76 controls. The
+      record-model joins moved to BC-041 so neither commitment carries six children.
     note: >-
       Three of the four bugs found on 2026-08-27 were guards that had stopped guarding,
       and none was visible to the `--fast` edit loop that broke them. Repairing them
       separately would repeat that: the point of one slice is that they land against one
       full-tier run.
+  - id: BC-041
+    purpose: tool_validation
+    owner_focus: process
+    instances: [5, 11, 29]
+    state: ready
+    priority: 2
+    question: >-
+      Can the record model's two unchecked joins be made machine-checkable, so that a
+      commitment's state and the work actually done against it cannot drift apart unseen?
+    hypotheses: []
+    budget: one W7 pipeline-improvement slice of at most 60 minutes, plus one full gate
+    entry: >-
+      the guard repairs under BC-035 have landed, or are known not to touch the same
+      checker surfaces
+    exit: >-
+      An invariant rejecting more than one live commitment per bead, and an optional
+      structured join from a workflow phase to the commitment it serves, or a typed reason
+      why either cannot be added without rewriting terminal records.
+    bead: think-hpf7
+    depends_on: []
+    next_evidence: >-
+      Three beads back more than one live commitment today, and `think-1s0h` is
+      simultaneously ready at BC-010 and blocked at BC-029 and BC-037. Separately, phases
+      carry no bead or commitment field, only 39 percent of phases name a commitment at
+      all, and the session-to-commitment link is recovered by regex over `next_action`
+      prose. Both fields must be optional so no terminal session record needs rewriting.
+    note: >-
+      Split out of BC-035 before work started, because six children under one commitment is
+      how `think-cja6` grew from two to four items in a single day.
   - id: BC-036
     purpose: tool_validation
     owner_focus: correctness
@@ -211,11 +241,67 @@ each has its own declared workflow entry and its own budget.
 | Commitment | Workflow | Bead | Why this workflow |
 | --- | --- | --- | --- |
 | BC-035 | W7 `pipeline-improvement` | think-cja6 | Repairs the checking machinery, not a claim about packings. |
+| BC-041 | W7 `pipeline-improvement` | think-hpf7 | Makes the record model’s joins checkable; process work on the machinery, not a claim. |
 | BC-036 | W7 `pipeline-improvement` | think-oyn9 | Builds a missing research instrument before it is used, which is instrument work rather than a measurement. |
 | BC-037 | W6 `research-loop` | think-1s0h | The only commitment here that asks a question about the packing landscape. |
 | BC-038 | W5 `efficiency-loop` | think-kdil | A measured bottleneck with a declared accept bar. |
 | BC-039 | W7 `pipeline-improvement` | think-uzmh | Regenerates a durable artifact through an existing gated route. |
 | BC-040 | W4 `process-review` | think-qibu | Reconstructability and merge discipline, not new evidence. |
+
+## Bounded blocks and checkpoints
+
+The agenda runs as four blocks of about five hours.
+Each ends at a terminal, verifiable state rather than mid-commitment, so a checkpoint
+can ask whether the agenda is worth continuing rather than only whether the current task
+is done.
+
+| Block | Commitments | Checkpoint question |
+| --- | --- | --- |
+| 1 | BC-036, BC-039 | Is the research arm alive? |
+| 2 | BC-037 | Does exp-045 produce a result? |
+| 3 | BC-035, BC-041 | Is the pipeline debt paid? |
+| 4 | BC-038, consolidation | Close out |
+
+BC-036 leads because it is both the gate and the largest binary unknown.
+Its risk is not difficulty but existence: four *genuinely distinct* pre-certificate
+failure modes may not be definable, in which case the declared twelve was aspirational,
+BC-037 and BC-038 never run, and the agenda collapses to its pipeline half.
+That answer is worth having in the first five hours rather than the second.
+BC-039 fills block 1 because it is independent of BC-036’s outcome.
+
+### Replan triggers
+
+- **Block 1.** If no fourth distinct failure mode can be honestly named, stop and record
+  that as the finding.
+  Do not amend exp-045’s declared twelve down to the implemented eight; the criterion
+  was frozen before implementation.
+- **Block 2.** Hard stop at the block boundary.
+  If exp-045 has not reached a terminal disposition, terminalize it `stopped` rather
+  than extending. A second typed blocker here is itself a signal about the `n = 5` lane
+  and should be surfaced, not pushed through.
+- **Block 3.** If fewer than four of BC-035’s and BC-041’s items close, split again
+  rather than extend.
+- **Any block.** Two consecutive blocks closing zero commitments stops the agenda for
+  replanning, not the block.
+
+### Health check at every boundary
+
+Completion alone is the wrong metric here.
+Across the recorded campaign, 68 percent of attributed effort has gone into commitments
+that never closed, and the three most-worked commitments are all still open.
+So each boundary measures rate, not just state:
+
+| Check | Healthy | Warning |
+| --- | --- | --- |
+| Commitments closed this block | at least one | none |
+| Attributed minutes per closure | at most 240 | above 360 |
+| Consecutive zero-closure blocks | none | two stops the agenda |
+| Full gate at block end | green | red carries into the next block |
+
+The last row is the one to hold hardest.
+On 2026-08-27 three separate generated-view drifts each stayed invisible until something
+forced a check, and every one would have been caught by a full-tier gate at the commit
+that introduced it rather than at merge.
 
 ## The one ordering constraint that matters
 
@@ -232,8 +318,9 @@ agenda-004 self-contained, which matters because `depends_on` resolves only with
 single agenda file.
 
 Nothing in this agenda widens a claim.
-Four of its six commitments repair or complete instruments, one regenerates an artifact
-inside an unchanged claim boundary, and only BC-037 can produce a scientific result.
+Five of its seven commitments repair or complete instruments, one regenerates an
+artifact inside an unchanged claim boundary, and only BC-037 can produce a scientific
+result.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
