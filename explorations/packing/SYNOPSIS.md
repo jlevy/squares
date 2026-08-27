@@ -300,10 +300,15 @@ stopped on an external provider usage limit after ten of eleven phases, and
 the terminal successor that executed its one unexecuted phase.
 [Session 029](campaign/agent-sessions/session-029-finish-agenda-003-cycles.md) closed
 the remaining agenda-003 commitments on measurement, and
-[session 030](campaign/agent-sessions/session-030-work-model-and-cell-collision.md) is
-the terminal successor: it re-glossed `BC` as *bounded commitment*, retiring a collision
-with the linear-programming sense of `cell`, and made the bead / commitment / phase
-layering explicit in the orientation docs.
+[session 030](campaign/agent-sessions/session-030-work-model-and-cell-collision.md)
+re-glossed `BC` as *bounded commitment*, retiring a collision with the
+linear-programming sense of `cell`, and made the bead / commitment / phase layering
+explicit in the orientation docs.
+[Session 031](campaign/agent-sessions/session-031-merge-main-and-land-pr48.md) is the
+terminal successor: it merged main and found the merged tree failing two gate steps the
+pre-merge tree passed, because the atlas SVG work pushed the negative-control mutation
+snapshot past its size cap.
+That is fixed and pinned, and the gate is green on the merged revision.
 Q-BC032-a is answered: the `4.94e-11` relaxation is an artifact of the promotion route,
 not a property of the pose, and six independently verified promotions beat the recorded
 baseline. `BC-028`’s trigger passed, so its inventory-reuse implementation is ready but

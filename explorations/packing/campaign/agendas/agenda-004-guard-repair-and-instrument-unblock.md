@@ -164,7 +164,7 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [5, 11, 29]
-    state: blocked
+    state: complete
     priority: 1
     question: >-
       Does the accumulated branch still pass a full gate once main is merged into it,
@@ -183,6 +183,10 @@ agenda:
       count or any generated aggregate moved in the merge, re-check `devtools/controls.yaml`
       anchors first: that is the exact rot that silently disabled the round-aggregate
       control.
+    artifacts:
+    - campaign/agent-sessions/session-031-merge-main-and-land-pr48.md
+    - devtools/run_negative_controls.py
+    - tests/test_negative_controls.py
     note: >-
       Deliberately not done inside session 029, because merging main rewrites files
       underneath the profile, gate timings, and control anchors that session recorded.

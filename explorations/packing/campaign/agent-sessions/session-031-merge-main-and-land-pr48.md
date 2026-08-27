@@ -24,7 +24,7 @@ session:
       Merge `origin/main`, resolve every conflict on evidence rather than on branch
       preference, regenerate the derived views, and require a green full gate on the
       merged tree before PR 48 leaves draft.
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 70
@@ -43,14 +43,25 @@ session:
     fallback: >-
       Leave the merge committed and PR 48 in draft with the first failing step named,
       rather than publishing an unverified merge.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Merged and verified. The merge itself was clean apart from two conflicts, but the
+      merged tree failed two gate steps that the pre-merge tree passed, which is exactly
+      the regression this commitment exists to catch. Repaired, and the gate is green on
+      the merged revision.
+    evidence:
+    - 'Two conflicts, both resolved toward main on evidence: main had terminalized session-025 with the exact pushed head bc58fdee13bada7ca4ce9798790a42f0e3d8ca5d, workflow run 33029773036 and per-lane timings, against a thinner local version that had dropped that specificity; ledger.md is generated and was regenerated rather than hand-resolved.'
+    - "Main's atlas SVG work pushed the negative-control mutation snapshot to 42,441,211 bytes against a 41,943,040 cap, failing both `negative controls` and `fast behavioral tests`; the pre-merge gate at 00927d2 had passed all 36 steps."
+    - '`atlas/known-best/rendering` and `atlas/known-best/contact-overlays` were added to PRUNE as the direct analogue of the already-pruned `atlas/prospective/rendering`: generated SVG output, covered by their own validation steps, named by no control. The two controls that do target `atlas/known-best/` reach small JSON files at its top level, which stay.'
+    - The snapshot is now 37,269,354 bytes with 4.46 MiB of headroom, and both new exclusions are pinned by assertions in `tests/test_negative_controls.py`.
+    - The merge commit initially carried a stale `ledger.md`, because the regeneration ran after `checkout --theirs` had staged main's copy; caught on the next status check and corrected in a follow-up commit.
+    stop_reason: >-
+      The merged tree reached a green full gate, so the branch is landable and the draft
+      state is the only remaining step.
     next_action: >-
-      Resolve the two conflicts, regenerate the ledger, then run the complete gate before
-      touching the pull request's draft state.
+      Under BC-036 and think-oyn9, build exp-045's four missing pre-certificate mutations
+      so the enforced count matches the declared twelve.
   primary_bead: think-qibu
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 90
     slice_minutes: 45
@@ -65,14 +76,25 @@ session:
       The branch is twenty commits ahead of main and six behind, with a green full gate
       taken before the merge. BC-040 was sequenced behind BC-035 so the merge would be
       tested against a guarded tree.
-    after: null
+    after: >-
+      The branch is merged with main and green on the merged revision, so PR 48 can land
+      from a verified base rather than from a pre-merge measurement. One regression was
+      found and fixed in the process. Everything else remains queued in agenda-004, with
+      BC-036 as the gating item.
   delegations: []
-  outputs: []
+  outputs:
+  - campaign/agendas/agenda-004-guard-repair-and-instrument-unblock.md
+  - campaign/agent-sessions/session-031-merge-main-and-land-pr48.md
+  - devtools/run_negative_controls.py
+  - tests/test_negative_controls.py
   checks:
   - The full gate passed all 36 steps at 00927d2 immediately before the merge.
-  stop_reason: null
+  stop_reason: >-
+    The merge is verified against a green full gate on the merged revision, and the one
+    regression it surfaced is fixed and pinned.
   next_action: >-
-    Under BC-040 and think-qibu, verify the merged tree and land PR 48.
+    Under BC-036 and think-oyn9, build exp-045's four missing pre-certificate mutations so
+    the enforced count matches the declared twelve.
 ---
 # Session 031 — Merge Main and Land PR 48
 
