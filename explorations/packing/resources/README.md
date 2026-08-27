@@ -27,17 +27,19 @@ Cleanup was done by language models, so the raw extraction is the fallback whene
 formula in a `.md` looks suspicious.
 
 **Transcription status, stated exactly.** The archive’s discipline is original + cleaned
-`.md` + faithful `.raw.md`, and ten entries currently fall short of it in ways worth
+`.md` + faithful `.raw.md`, and twelve entries currently fall short of it in ways worth
 naming rather than hiding:
 
 - `gensane-ryckelynck-2005-improved-dense-packings`,
   `nagamochi-2005-packing-unit-squares-in-a-rectangle`,
   `wang-dong-li-2016-new-result-packing-unit-squares` and
   `basic-slivkova-2018-optimal-piercing-square`,
-  `alpert-bauer-kahle-macpherson-spendlove-2023-hard-squares-configuration-spaces` and
-  `alvarado-garduno-gonzalez-2025-square-section-braid-groups` are **raw-only**: PDF and
-  faithful extraction, no cleaned transcription yet.
-  All six were read directly from the PDF, and the claims resting on them were checked
+  `alpert-bauer-kahle-macpherson-spendlove-2023-hard-squares-configuration-spaces`,
+  `alvarado-garduno-gonzalez-2025-square-section-braid-groups`,
+  `el-moumni-1999-optimal-packings-unit-squares`, and
+  `trump-2023-packing-11-unit-squares` are **raw-only**: PDF and faithful extraction, no
+  cleaned transcription yet.
+  All eight were read directly from the PDF, and the claims resting on them were checked
   there.
 - `roth-vaughan-1978-inefficiency-packing-squares` carries a **partial** cleaned
   transcription: abstract, introduction and Theorem, read from the rendered page image
@@ -69,7 +71,7 @@ them opens with a ⚠️ banner giving the count.
 | `compound-perfect-squared-squares-1303.0599` | 10 | Ten passages, nearly all **tables and matrices** scrambled by multi-column extraction. Do not cite its tables. |
 | `bentz-2016-optimal-packings-22-and-33` | 3 | Probable “Stromberg” → “Stromquist” correction and a reconstructed distance bound in Lemma 7. |
 | `friedman-ds7-packing-unit-squares-in-squares` | 3 | **The “Optimal?” column of Table 1 was INFERRED, not read** — the column exists in the original but its per-row values were lost, and the transcriber deduced them from the survey’s own theorems. Both appendix tables (53 and 29 rows) were likewise reassembled from interleaved extractions. The survey predates later results, so a blank means “not proved as of that revision”. **The research doc’s proof-status claims do not rest on this file** — they use Kingbird’s explicit “Proved by” attributions and the individual papers. |
-| `square-packing-x06-wasted-area-2508.04603` | 5 | Three cells of the Section 5 comparison table; plus two Section 5 repairs (the omitted $\nu$ condition in Proposition 7 and the lost division bar in the reduction waste term). Do not cite that table. |
+| `square-packing-x06-wasted-area-2508.04603` | 6 | Three cells of the Section 5 comparison table; two Section 5 repairs (the omitted $\nu$ condition in Proposition 7 and the lost division bar in the reduction waste term); and the omitted upper bound on Section 3.1’s replacement index. Do not cite that table. |
 | `arslanov-improved-packings-n-n-1` | 1 | One orientation-constraint formula unrecoverable; its numeric value is preserved. |
 | `bentz-2010-optimal-packings-13-and-46` | 1 | Corollary 7: segments reconstructed **and an inequality direction changed** (`2√2−2 > b` in raw vs `b > 2√2−2` here). Direction UNVERIFIED. The leading claim — intersection length ≥ `2√2−2 ≈ 0.828` — is unambiguous in the raw and unaffected. |
 | `kearney-shiu-2002-efficient-packing-unit-squares` | 1 | One chain of inequalities in Theorem 2’s proof not reconstructed; the conclusion is stated. |
@@ -151,6 +153,8 @@ Citation keys match those used in the research document.
 | **[Alpert et al. 2023]** | Homology of configuration spaces of hard squares in a rectangle | H. Alpert, U. Bauer, M. Kahle, R. MacPherson, K. Spendlove | 2023 | Algebraic & Geometric Topology 23, 2593–2626; arXiv:2010.14480 | `alpert-bauer-kahle-macpherson-spendlove-2023-hard-squares-configuration-spaces` |
 | **[Alvarado-Garduño–González 2025]** | Square-section braid groups and Higman–Neumann–Neumann extensions | O. Alvarado-Garduño, J. González | 2025 | arXiv:2510.17707 | `alvarado-garduno-gonzalez-2025-square-section-braid-groups` |
 | **[Roth–Vaughan 1978]** | Inefficiency in Packing Squares with Unit Squares | K. F. Roth, R. C. Vaughan | 1978 | JCTA 24, 170–186 | `roth-vaughan-1978-inefficiency-packing-squares` |
+| **[El Moumni 1999]** | Optimal Packings of Unit Squares in a Square | S. El Moumni | 1999 | Studia Sci. Math. Hungar. 35, 281–290 | `el-moumni-1999-optimal-packings-unit-squares` |
+| **[Trump 2023]** | Packing of 11 unit squares in a square with minimum size | W. Trump | 2023 | Author preprint | `trump-2023-packing-11-unit-squares` |
 
 ## Web sources
 
@@ -194,9 +198,11 @@ article landing page), Nagamochi (open access in the *Electronic Journal of
 Combinatorics*, and cited by its exact title in the archived DS7 reference list all
 along), and Wang–Dong–Li (arXiv).
 A “not retrievable” verdict is a negative search result, and this archive has now been
-wrong about it **six** times: Markót 2021 was open access at PMC the whole time, Roth &
-Vaughan (1978) was supplied on request, and Stromquist’s three memoranda were linked
-directly from the author’s publication page.
+wrong about it **eight** times.
+On 2026-08-27 the full El Moumni article was found inside the Hungarian Academy’s public
+volume scan and Trump’s 2023 note on the author’s own site.
+Earlier corrections include Markót 2021 at PMC, Roth & Vaughan (1978) supplied on
+request, and Stromquist’s three memoranda on the author’s publication page.
 Reading Roth–Vaughan produced two corrections to the published secondary literature.
 
 **The canonical list now lives in
@@ -207,8 +213,6 @@ The short version below is kept for readers of this archive.
 
 | Source | Obstacle |
 | --- | --- |
-| Trump, *Packing of 11 unit squares in a square with minimum size* (Mar 2023) | ResearchGate 403 |
-| El Moumni, *Optimal Packings of Unit Squares in a Square*, Studia Sci. Math. Hungar. 35 (1999) | Print-only; no digital copy located. Holds published priority for `s(7) = s(8) = 3` and `s(15) = 4`. |
 | Arslanov & Bui, *Note on “efficient packings of unit squares in a large square”*, DCG (2025) | Springer; not open access. |
 | Brooks, Smith, Stone & Tutte, *The dissection of rectangles into squares*, Duke Math. J. 7 (1940) | Project Euclid; not open access |
 | Gustafsson & Thulin (1980), *Ronden* | Swedish company periodical; Ellsworth notes he has not read it directly either |
@@ -217,6 +221,9 @@ The short version below is kept for readers of this archive.
 
 The original archive was retrieved on **2026-08-22** from the URLs recorded in each
 file’s metadata header.
+The El Moumni volume scan was retrieved on **2026-08-27** from the Hungarian Academy’s
+REAL-J repository; its article occupies PDF pages 287–296. Trump’s 2023 preprint was
+retrieved the same day from his public author page.
 The three Stromquist memoranda were retrieved on **2026-08-24** from the author’s
 [official publication page](https://www.walterstromquist.com/publications.html), which
 links the exact archived PDFs as `squares1.pdf`, `squares2.pdf`, and `squares3.pdf`. All

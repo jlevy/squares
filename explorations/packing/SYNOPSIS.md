@@ -288,11 +288,44 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 ![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
 
-The current line is `BC-019` under `think-eyix`, recorded in
-[session 025](campaign/agent-sessions/session-025-pr45-performance-continuation.md).
-Finish strict validation and the final-head cross-platform checkpoint before closing the
-retained PR review dispositions or returning to `ContactAssemblyGrammar/v1`’s next
-full-cell boundary.
+PR 45 is merged and
+[session 025](campaign/agent-sessions/session-025-pr45-performance-continuation.md) is
+terminal.
+[Session 026](campaign/agent-sessions/session-026-balanced-research-session-a.md) is the
+terminal first-session midpoint in the two-session
+[balanced ten-hour agenda](campaign/agendas/agenda-003-balanced-ten-hour-research-program.md).
+[Session 027](campaign/agent-sessions/session-027-balanced-research-session-b.md)
+stopped on an external provider usage limit after ten of eleven phases, and
+[session 028](campaign/agent-sessions/session-028-bc032-n29-promotion-inventory.md) is
+the terminal successor that executed its one unexecuted phase.
+[Session 029](campaign/agent-sessions/session-029-finish-agenda-003-cycles.md) closed
+the remaining agenda-003 commitments on measurement, and
+[session 030](campaign/agent-sessions/session-030-work-model-and-cell-collision.md)
+re-glossed `BC` as *bounded commitment*, retiring a collision with the
+linear-programming sense of `cell`, and made the bead / commitment / phase layering
+explicit in the orientation docs.
+[Session 031](campaign/agent-sessions/session-031-merge-main-and-land-pr48.md) is the
+terminal successor: it merged main and found the merged tree failing two gate steps the
+pre-merge tree passed, because the atlas SVG work pushed the negative-control mutation
+snapshot past its size cap.
+That is fixed and pinned, and the gate is green on the merged revision.
+Q-BC032-a is answered: the `4.94e-11` relaxation is an artifact of the promotion route,
+not a property of the pose, and six independently verified promotions beat the recorded
+baseline. `BC-028`’s trigger passed, so its inventory-reuse implementation is ready but
+sequenced behind exp-045. The outstanding work is now carried by
+[agenda-004](campaign/agendas/agenda-004-guard-repair-and-instrument-unblock.md), which
+gives each remaining item its own workflow entry.
+The next bounded slice is `BC-036` under `think-oyn9`: exp-045 is blocked at execution
+admission because it declares twelve typed pre-certificate mutations while the
+instrument implements and enforces eight, and that gap must be closed by building the
+four missing controls rather than by amending the declared count downward.
+`BC-027` is complete.
+The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and `think-1s0h` is retained
+as a typed instrument blocker: exp-045 is preregistered and its scale, owner-4, and
+execution-scoped row-inventory controls are built, but no pure `-W` target or result
+exists. CG-010 is structurally complete under `BC-030`; BC-016 is blocked under
+`think-3yv8` on retained poses, an executable glued row, symbolic tie labels, and a
+receipt checker, while BC-017 under `think-u97a` remains the ready constructive W7 lane.
 
 All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
 house renderings. The source-complete corpus is calibration evidence, not an unseen
@@ -311,8 +344,16 @@ The target-free contact-scaffold layer now retains 11,013 exact size-five signed
 orbits as an abstract, no-geometry atlas.
 Its local realization prefilter rejects mixed angle classes before solving and still
 omits walls, non-edge separation, container fit, whole-packing feasibility, and
-optimality. The next scientific implementation boundary is CG-010’s full fixed-angle
-cell, not an H-044 verdict or an `n = 11` run on the inspected calibration corpus.
+optimality. CG-010 now adds one separate literal axis-aligned three-square structural
+cell: all twelve wall decisions, every contact/non-edge pair and oriented axis, the 48
+D4-by-relabeling images, a replayable canonical witness, and separate candidate-domain
+and executed-work prices.
+It performs zero LP solves and contains no geometry.
+BC-016 prerequisite instrumentation remains blocked, so the next boundary is BC-017’s
+target-free tagged structural execution plan and derived accounting.
+Actual numerical compilation remains blocked on unfrozen open-wall, nonedge, and
+contact-overlap semantics.
+This is not an H-044 verdict or an `n = 11` run on the inspected calibration corpus.
 
 The H-023 line shows why the distinction matters.
 Session 004 used W3 to turn an ambiguous terminal-family observation into the
@@ -382,8 +423,11 @@ target run or result JSON. The published checkpoints separate helper substrate
 `3629bf4`. Session 016’s terminal handoff owns the branch, read order, validation, exact
 fifteen-record scale inventory, mutation map, and successor artifact paths, so no
 controller memory is required.
-The sole next action is to preregister the named exp-045 successor under `BC-010` before
-implementation or target work.
+Session 027’s active BC-017 slice under `think-u97a` builds the admitted target-free
+tagged structural plan and exact derived accounting.
+It retains `full-cell-execution-semantics-unfrozen` instead of compiling or running a
+numerical full-cell solver before returning to the scheduled W5 inventory.
+Exp-045 remains a typed instrument blocker with no pure `-W` target data.
 The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
 remain later slices; D-239 is a separate W7 line.
 Do not start basin-frequency work or reinterpret exp-035 through exp-040 as a
@@ -1642,7 +1686,7 @@ round that names the hypothesis, control roles included.
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 14 | 106m agent, 4.0m wall |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 11 | 243m agent, 2.5m wall |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 12 | 243m agent, 2.5m wall |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | unresolved | Formally supported record packings through `n=30` use at most three angle classes; the retained `n=29` SVG has no formal witness | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of reported record configurations are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
@@ -1782,7 +1826,7 @@ Transverse and mixed nonlinear realization remains open.
 
 ## Experiments Conducted
 
-There are 44 terminal rounds registered in `series-000`. They record 1061 agent-minutes
+There are 45 terminal rounds registered in `series-000`. They record 1061 agent-minutes
 and 30.7 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
@@ -1856,6 +1900,7 @@ archive beside it.
 | [exp-042](campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md) | 5 | target | H-023 | endpoint-aware exact rotating paths | 6 paths; 6 stresses; 20 controls pass | **accepted** |
 | [exp-043](campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md) | 5 | target | H-023 | exact pure -W second-order test | five instrument blockers; no retained result | **unresolved** |
 | [exp-044](campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md) | 5 | target | H-023 | exact pure -W row-jet test | reviewed row builder; no retained target | **unresolved** |
+| [exp-045](campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | preregistered; target blocked by incomplete instrument | **in-progress** |
 
 ### Cost and provenance
 
@@ -1905,10 +1950,11 @@ archive beside it.
 | exp-042 | one 30-minute correction, measurement, and review slice | 26.17 s | 28 m | criterion | `2980fdc` |
 | exp-043 | one 30-minute preregistration, implementation, and review slice | 3.071 s | 20 m | guard | — |
 | exp-044 | one 30-minute criterion, integration, and review slice | 100.41 s | 30 m | guard | `a5a4ef0` (row builder only) |
+| exp-045 | one 105-minute W3-W6-W7-W2-W3 ceiling | — | — | dependency | — |
 
-### What the 44 rounds jointly establish
+### What the 45 rounds jointly establish
 
-The 44 rounds use 1061 agent-minutes and 30.7 wall-minutes under the campaign’s retained
+The 45 rounds use 1061 agent-minutes and 30.7 wall-minutes under the campaign’s retained
 effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
@@ -2056,24 +2102,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 339 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 347 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 79 | asserted something false about the mathematics |
-| validity | 82 | was correct, but the measurement did not bear on the question |
+| soundness | 84 | asserted something false about the mathematics |
+| validity | 84 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 131 | recorded something its own evidence contradicts |
-| robustness | 38 | did not finish, or finished only by luck |
+| robustness | 39 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Sixty-three of the seventy-nine soundness defects pointed in the *flattering*
+**Sixty-seven of the eighty-four soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 339, and no soundness defect
+**The automated gate has caught forty-five defects in 347, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2090,6 +2136,17 @@ and exit survived, but invalid `gdate` precision left the start and end fields e
 [D-304](defects.md) records a contradictory inequality in McClenagan’s printed Section 3
 proof. H-037 repairs that local sign step independently from both the figures and the
 source equations; it does not certify the remaining construction.
+[D-343](defects.md) records Bui’s printed unbounded replacement instruction.
+H-037 keeps the source-forced finite range and replays the resulting exact square count;
+the geometric construction and its asymptotic theorem remain open.
+[D-344](defects.md), [D-345](defects.md), [D-346](defects.md), and [D-347](defects.md)
+record four independent gaps in El Moumni’s printed `n = 7` proof.
+The source-distinct Case 1 branch repair and Figure 4 coordinate prerequisite are exact,
+but the printed length remains defective, the cross-section names `o1` where its
+premises require `o4`, and the diameter display uses undefined `i` with only a
+separately tagged midpoint candidate.
+No surrounding incidence is verified, so the complete source-faithful replay stays
+blocked under `think-trkj`.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-283 remains open in the current robustness inventory.

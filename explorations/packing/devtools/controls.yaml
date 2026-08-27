@@ -115,9 +115,9 @@ controls:
 
 - name: synopsis - narrative round aggregate lagging the ledger
   file: SYNOPSIS.md
-  replace: ["There are 44 terminal rounds", "There are 39 terminal rounds"]
+  replace: ["There are 45 terminal rounds", "There are 39 terminal rounds"]
   run: uv run --frozen --quiet python -m devtools.check_synopsis
-  expect: "terminal-round aggregate is not 44 rounds"
+  expect: "terminal-round aggregate is not 45 rounds"
 
 - name: synopsis - numerical result promoted past a formal prerequisite
   file: SYNOPSIS.md
@@ -189,6 +189,20 @@ controls:
     - '    raise StepFailureError("forced historical regression failure")'
   run: python3 -m sqpack.cli.validate --only 'historical regressions'
   expect: "forced historical regression failure"
+
+- name: gate - multi-command step cannot swallow its first failure
+  file: src/sqpack/cli/validate.py
+  replace:
+    - '    outputs = [_run(context, command, cwd=cwd) for command in commands]'
+    - |2-
+          outputs: list[str] = []
+          for command in commands:
+              try:
+                  outputs.append(_run(context, command, cwd=cwd))
+              except StepFailureError:
+                  continue
+  run: uv run --frozen --quiet pytest -q tests/test_validation_cli.py -k multi_command_step_stops_at_first_failure
+  expect: "assert 0 == 1"
 
 - name: defect log - generated view left stale
   file: defects.yaml
@@ -542,3 +556,59 @@ controls:
             "    digest = b'constant'"]
   run: uv run --frozen --quiet python -m devtools.check_canonical
   expect: "FAIL  a different arrangement keys differently"
+
+# --- target-free structural full cells ---
+
+- name: full-cell - total wall decisions cannot be omitted
+  file: src/sqpack/contact_full_cell.py
+  replace: ["        if wall_keys != required_walls:\n", "        if False and wall_keys != required_walls:\n"]
+  run: uv run --frozen --group dev pytest -q tests/test_contact_full_cell.py::test_total_wall_and_pair_axis_inventories_refuse_omissions
+  expect: "DID NOT RAISE"
+
+- name: full-cell - every unordered pair needs one axis
+  file: src/sqpack/contact_full_cell.py
+  replace: ["            or sorted(contact_pairs + nonedge_pairs) != required_pairs\n", "            or False\n"]
+  run: uv run --frozen --group dev pytest -q tests/test_contact_full_cell.py::test_total_wall_and_pair_axis_inventories_refuse_omissions
+  expect: "DID NOT RAISE"
+
+- name: full-cell - duplicate pair axes are refused
+  file: src/sqpack/contact_full_cell.py
+  replace: ["        nonedges = tuple(sorted(self.nonedges))\n", "        nonedges = tuple(sorted(set(self.nonedges)))\n"]
+  run: uv run --frozen --group dev pytest -q tests/test_contact_full_cell.py::test_total_wall_and_pair_axis_inventories_refuse_omissions
+  expect: "DID NOT RAISE"
+
+- name: full-cell - D4 polarity transforms the positive endpoint
+  file: src/sqpack/contact_full_cell.py
+  replace:
+  - "    positive = mapped_positive if polarity > 0 else ({left, right} - {mapped_positive}).pop()\n"
+  - "    positive = mapped_positive\n"
+  run: uv run --frozen --group dev pytest -q tests/test_contact_full_cell.py::test_exact_d4_axis_action_toggles_the_positive_endpoint
+  expect: "test_exact_d4_axis_action_toggles_the_positive_endpoint"
+
+- name: full-cell - 47 images cannot complete a 48-image orbit
+  file: src/sqpack/contact_full_cell.py
+  replace: ["    if examined < required:\n", "    if False and examined < required:\n"]
+  run: uv run --frozen --group dev pytest -q tests/test_contact_full_cell.py::test_orbit_cap_returns_typed_partial_receipt_without_completed_price
+  expect: "assert 'canonical' == 'limit'"
+
+- name: full-cell - structural pricing executes no LP
+  file: src/sqpack/contact_full_cell.py
+  replace: ['            "lp_solves": 0,', '            "lp_solves": 1,']
+  run: uv run --frozen --group dev pytest -q tests/test_contact_full_cell.py::test_complete_literal_cell_has_joint_canonical_label_and_exact_price
+  expect: "lp_solves"
+
+- name: full-cell - structural control has no atlas reader
+  file: src/sqpack/contact_full_cell.py
+  replace:
+  - "    \"\"\"Derive candidate-domain and executed-work counts; accept no caller price.\"\"\"\n"
+  - "    \"\"\"Derive candidate-domain and executed-work counts; accept no caller price.\"\"\"\n    open(\"atlas/known-best/contact-enumeration-pricing.json\").read()\n"
+  run: uv run --frozen --group dev pytest -q tests/test_contact_full_cell.py::test_full_cell_module_has_no_calibration_or_geometry_reader
+  expect: "atlas/"
+
+- name: full-cell - generated control rejects a geometry channel
+  file: atlas/known-best/contact-full-cell-control.json
+  replace:
+  - '    "scope": "one literal axis-aligned three-square structural cell"'
+  - "    \"coordinates\": [[0, 0]],\n    \"scope\": \"one literal axis-aligned three-square structural cell\""
+  run: python3 -m devtools.validate_schemas
+  expect: "Additional properties are not allowed"

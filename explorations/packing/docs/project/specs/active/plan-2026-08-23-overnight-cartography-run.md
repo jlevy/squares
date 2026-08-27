@@ -333,20 +333,35 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 023](../../../../campaign/agent-sessions/session-023-pr45-merge-readiness.md).
-Under `BC-019` and `think-eyix`, finish the PR 45 merge-readiness review, strict local
-gate, and cross-platform checkpoint.
+[session 029](../../../../campaign/agent-sessions/session-029-finish-agenda-003-cycles.md).
+Sessions 027 and 028 are terminal, and session 029 closed the remaining agenda-003 cells
+on measurement rather than opinion.
+Open BC-036 under `think-oyn9` as the next bounded driver: exp-045 is blocked at
+execution admission because it declares twelve typed pre-certificate mutations while the
+instrument implements and hard-enforces eight.
+The remaining outstanding items each have their own workflow entry in agenda-004. Build
+the four missing controls so the enforced count matches the declared one, then re-run
+the admission check before any target generation.
+Do not amend the declared twelve down to the implemented eight; the criterion was frozen
+before implementation.
+The measured W5 inventory remains scheduled after that driver; BC-016 stays blocked on
+its retained-pose, glued-row, tie-label, and receipt-checker prerequisites.
+The first-failure pipeline cell is complete, and the active two-session
+[balanced ten-hour agenda](../../../../campaign/agendas/agenda-003-balanced-ten-hour-research-program.md)
+retains its actual clocks and full five-hour midpoint review.
 The completed target-free path retains 11,013 exact size-five signed-contact orbits with
 independent Burnside and differential controls.
 Those records contain no packing geometry or feasibility result, and the retained
 `n = 1..100` corpus remains calibration-only.
 
-The next scientific implementation boundary is CG-010: a full fixed-angle cell with
-declared walls and one frozen separating axis per non-edge pair.
-The existing local prefilter accepts only one fitted-angle class and rejects mixed
-classes before solving.
-Do not use target geometry to design that cell, emit an H-044 verdict, or start the
-`n = 11` enumeration run.
+CG-010 now retains one literal target-free structural fixed-angle cell with total wall
+decisions, an exhaustive contact/non-edge pair partition, one frozen oriented axis per
+pair, joint canonicalization, typed caps, and a derived work price.
+It executes zero LP solves and makes no geometry or feasibility claim.
+The existing local prefilter still accepts only one fitted-angle class and rejects mixed
+classes before solving; numerical row compilation and full-cell realization remain
+unbuilt. Do not use target geometry, emit an H-044 verdict, or start the `n = 11`
+enumeration run.
 
 ## The numeric runner launch gate
 

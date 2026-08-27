@@ -126,6 +126,77 @@ This repairs only the contradictory feasibility/sign step.
 It is not an independent audit of the full construction and does not discharge H-035’s
 finite-transfer obligations.
 
+## Exact count in Bui’s replacement grid
+
+Bui Section 3.1 starts with `m` columns of sloped squares and defines
+
+$$ i_j=\left\lceil (j-1)c\right\rceil+1, \qquad c=\frac{1-\Delta_1}{\Delta_2}>0. $$
+
+The modification paragraph says “for each $j\geq2$,” but the construction has only
+columns $1,\ldots,m$. The later range $3\leq j\leq m$, the row
+$T_{i_m,1},\ldots,T_{i_m,m-1},S_{i_m,m}$, and the named deletion of $S_{i_m,m}$ fix the
+intended finite range as $2\leq j\leq m$. Reading the phrase as unbounded would refer to
+nonexistent columns and eventually remove the square the source says remains.
+
+For a column $k<m$, put $j=k+1$. The modification removes $S_{r,k}$ at every $r\geq
+i_{k+1}$ and inserts $T_{r,k}$ with precisely the same row labels.
+After rows above $i_m$ are deleted, the retained labels in column $k$ are therefore
+
+$$ S_{r,k}\quad(1\leq r<i_{k+1}), \qquad T_{r,k}\quad(i_{k+1}\leq r\leq i_m). $$
+
+These disjoint integer intervals partition $1,\ldots,i_m$ because $c>0$ makes the
+sequence $i_j$ nondecreasing.
+Coincident thresholds affect different columns and create neither a gap nor a duplicate.
+Column $m$ is not replaced and retains $S_{1,m},\ldots,S_{i_m,m}$. Thus there is exactly
+one labelled square in every cell of the $i_m\times m$ index grid: $m i_m$ squares
+before the final deletion and $m i_m-1$ afterward.
+
+The case-local exact replay in `cases/asymptotic/bui_integer_count.py` checks the same
+partition for rational $c$, refuses the unbounded-range reading, and preserves the
+source’s named final square.
+This is only an integer-index and exact-count result for the stated primitive.
+It does not prove that the labelled squares exist geometrically, do not overlap, lie in
+the quadrilateral, achieve the waste estimate, transfer to a finite public parent, or
+establish Proposition 7 or the asymptotic exponent.
+
+## Exact local inequalities in Bui’s Proposition 6
+
+Bui Section 4.2 leaves Lemmas 3-5 to interval arithmetic and differentiation.
+They instead admit a short exact proof on the printed domains.
+For $0<z<1/8$, the elementary bound $\cos z>1-z^2/2$ gives
+
+$$ \cos z>\frac{127}{128}>\frac{100}{101}, \qquad
+\frac{127}{128}-\frac{100}{101}=\frac{27}{12928}>0. $$
+
+Also $\cos z<1$, so $1<\sec z<101/100$, proving Lemma 3.
+
+For Lemma 4 put $c=\cos\theta$. On $0<\theta<1/8$ we have $0<c<1$, so cancelling the
+strictly positive factor $(1-c)^2$ is valid.
+The claimed inequality becomes
+
+$$ 4c^3<(1+c)^2, $$
+
+and its exact difference factors as
+
+$$ (1+c)^2-4c^3=(1-c)(4c^2+3c+1)>0. $$
+
+For Lemma 5, cancelling the positive factor $1-c$ reduces the claim to
+
+$$ c^2>\frac{49}{100}(1+c). $$
+
+The difference is increasing once $c>49/200$. Since $c>127/128$, its value is bounded
+below by
+
+$$ \left(\frac{127}{128}\right)^2 -\frac{49}{100}\left(1+\frac{127}{128}\right)
+=\frac{677}{81920}>0. $$
+
+The exact rational replay in `cases/asymptotic/bui_local_inequalities.py` retains both
+margins, both cleared-denominator identities, and typed failures for strengthened
+constants or domains.
+This packet proves only the three local inequalities.
+It does not audit the Lemma 6 induction, Proposition 6’s geometry and recurrence,
+Proposition 7, an effective threshold, finite transfer, or the exponent.
+
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
 -->

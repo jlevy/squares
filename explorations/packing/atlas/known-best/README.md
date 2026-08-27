@@ -104,6 +104,15 @@ The isomorph-free size-5 path reduces 1,533,696 topology colorings to 11,013 exa
 orbits. Those abstract representatives are retained without geometry or local LP
 outcomes; the earlier 9,296,855,040-image raw path remains only a differential oracle.
 
+[`contact-full-cell-control.json`](contact-full-cell-control.json) is a separate
+literal, source-free structural control for CG-010. Its three-square axis-aligned L has
+eight available non-edge axis-and-order branches; the retained fixture selects one raw
+cell, checks all 48 D4-by-relabeling images, emits one canonical label, and performs
+zero LP solves. The artifact validates representation, canonicalization, typed caps, and
+work accounting only.
+It contains no centres, side, geometry, container-fit result, packing feasibility claim,
+or optimality claim.
+
 [`contact-overlays.json`](contact-overlays.json) indexes five deterministic visual
 strata from the registered descriptive census: `n = 11`, `28`, `40`, `68`, and `89`.
 Every SVG under [`contact-overlays/`](contact-overlays/) uses the same house renderer as

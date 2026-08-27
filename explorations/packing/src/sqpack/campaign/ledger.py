@@ -577,6 +577,8 @@ def check(
         # Effort is required on every terminal round. A record that cannot say what a
         # round cost, or why it stopped, can neither price the next one nor be resumed.
         if decision != "in-progress":
+            if not experiment.get("results"):
+                problems.append(f"{name}: terminal round without results")
             effort = experiment.get("effort") or {}
             if not effort:
                 problems.append(f"{name}: terminal round without an effort block")
@@ -602,11 +604,15 @@ def check(
         if not expires:
             problems.append(f"{name}: in-progress without a lease")
         # Leases may be written with or without a timezone; `now` here is naive UTC.
-        # Compare on a common footing rather than crashing, which is what an
-        # offset-aware lease used to do -- and it did it while a round was in progress,
-        # i.e. exactly when the gate most needs to still run.
-        elif dt.datetime.fromisoformat(expires).replace(tzinfo=None) < now:
-            problems.append(f"{name}: STALE CLAIM, lease expired {expires}")
+        # Interpret a naive lease as UTC and convert an aware lease before dropping its
+        # timezone. Merely removing an offset changes the instant and can expire a live
+        # west-of-UTC lease several hours early.
+        else:
+            parsed_expiry = dt.datetime.fromisoformat(expires)
+            if parsed_expiry.tzinfo is not None:
+                parsed_expiry = parsed_expiry.astimezone(dt.UTC).replace(tzinfo=None)
+            if parsed_expiry < now:
+                problems.append(f"{name}: STALE CLAIM, lease expired {expires}")
 
     for session in sessions:
         name = session["_path"].name
