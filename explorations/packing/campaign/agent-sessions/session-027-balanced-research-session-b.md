@@ -523,7 +523,7 @@ session:
       Select or reject one bounded BC-032 n=29 exact-or-interval promotion slice by
       inventorying the concrete witness, contact system, isolation boxes, certificate
       contract, and independent checker already present in the repository.
-    status: in_progress
+    status: stopped
     entered_by: planned_checkpoint
     switch_reason: >-
       The source program reached a durable blocked disposition, and the balanced agenda
@@ -544,15 +544,25 @@ session:
     fallback: >-
       Retain the exact missing prerequisite under think-75ll and enter W7 only for a
       source/contact/checker inventory or typed blocker, not a numerical solve.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Opened but never executed. The run ended 9.4 minutes into the slice, before the
+      first of the three declared read-only inventories began, so no n=29 source,
+      contact, isolation, or checker evidence exists and no exact-or-interval promotion
+      question was preregistered. The declared contract, kill conditions, and fallback
+      are unchanged and carry forward intact.
+    evidence:
+    - The last action of the run was the phase 10 closeout patch at 2026-08-27T04:01:24-07:00; no phase 11 command, read, or record followed it.
+    - The slice contract, kill conditions, and fallback were declared before the stop and are reusable without restatement.
+    stop_reason: >-
+      An external provider usage limit ended the run. This is an infrastructure event,
+      not a research disposition, and it decides nothing about BC-032.
     next_action: >-
-      Run three independent read-only inventories over the n=29 source witness,
-      contact/equation assets, and interval/checker infrastructure, then compare them
-      before admitting implementation.
+      Carry the unchanged contract into session 028 and run three independent read-only
+      inventories over the n=29 source witness, contact/equation assets, and
+      interval/checker infrastructure, then compare them before admitting
+      implementation.
   primary_bead: think-whwc
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 300
     max_cycles: 32
@@ -574,7 +584,16 @@ session:
       Session A is terminal with BC-027 and BC-030 complete, BC-016 and exp-045 typed as
       instrument blockers, and three ready Session B programs. BC-017 has a structural
       price but no truthful channel-sensitive execution receipt.
-    after: null
+    after: >-
+      Ten of eleven declared phases closed in 68.9 minutes of a 300-minute budget.
+      BC-017 gained a target-free `FullCellExecutionPlan/v1` structural compiler, an
+      exact tuple-level replay seam, a generator-owned durable control, and a closed
+      schema, while actual numerical compilation stayed blocked under
+      `full-cell-execution-semantics-unfrozen`. think-trkj gained an exact
+      source-distinct Figure 4 coordinate packet accepted by independent W2 review, plus
+      two newly separated contained source defects, D-346 and D-347, taking the log to
+      347. BC-032's n=29 promotion slice was opened and never executed. Neither BC-017,
+      BC-018, think-u97a, nor think-trkj is closed, and no scientific claim widened.
   delegations:
   - task: Audit the smallest target-free BC-017 production API and dependency direction.
     operator: exp045_readiness
@@ -796,10 +815,18 @@ session:
   - tests/test_contact_full_cell_execution.py
   checks:
   - Session 026 is terminal, its proportional local assurance is green, and its checkpoint is pushed from a clean worktree.
-  stop_reason: null
+  stop_reason: >-
+    An external provider usage limit ended the run at 2026-08-27T04:01:24-07:00 with ten
+    phases complete and the eleventh opened but unexecuted. The absolute session deadline
+    then passed while the run stayed blocked, so this record is terminalized rather than
+    extended: a wall-clock window that elapsed without work cannot honestly be renewed.
+    The closeout is retrospective, written by a later runner from the retained run
+    transcript and worktree state; every phase 1-10 contract and outcome above was
+    recorded contemporaneously by the original run and is unaltered except for two
+    out-of-vocabulary labels corrected to the schema's terms.
   next_action: >-
-    Under BC-017 and think-u97a, integrate the target-free structural plan into the
-    durable control while actual numerical compilation remains blocked.
+    Open session 028 under BC-032 and think-whwc, reclaim the expired exp-045 lease, and
+    execute phase 11's unchanged n=29 inventory contract on a fresh clock.
 ---
 # Session 027 — Balanced Research Program, Session B
 
