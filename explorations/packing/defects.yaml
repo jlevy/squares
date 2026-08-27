@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 345
+count: 347
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8852,10 +8852,10 @@ defects:
     control. Silently replacing the term would turn a plausible correction into an
     attributed result and conceal which later inequalities depend on it.
   fix: >-
-    Keep the printed route blocked. Coordinates reconstructed from the definitions give
-    the candidate `3 sqrt(2) - 4 - sqrt(2) epsilon`, which is positive and below one in
-    the stated range, but require a source-distinct derivation and independent audit
-    before using that correction in Cases 2 and 3.
+    Keep the printed route blocked. The exact source-distinct coordinate packet derives
+    `3 sqrt(2) - 4 - sqrt(2) epsilon` as positive and below one throughout the stated
+    range. This advances only the coordinate prerequisite and does not attribute the
+    correction to the source or establish any surrounding incidence or Case 2 claim.
   regression: >-
     test_printed_figure4_length_is_typed_source_blocker rejects the printed negative
     length before any Figure 4 route can be encoded.
@@ -8889,5 +8889,68 @@ defects:
     test_case1_repair_keeps_both_proposition_2_branches_exact and
     test_unbranched_source_substitution_rejects retain both branches and refuse the
     printed unbranched substitution with a Case-1-only conclusion.
+  bead: think-trkj
+  recorded_in: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
+- id: D-346
+  title: El Moumni's Figure 4 chord line passes through the wrong square center
+  date: '2026-08-27'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: inspection
+  latent_for: since the 1999 publication
+  severity: high
+  status: contained
+  what: >-
+    Theorem 1, Case 1 on printed page 287 assumes that the center `o4` of `C4` lies in
+    the named pentagon and gives both half-distance bounds from `o4` to `[a1,p]` and
+    `[a2,r]`. The next sentence instead draws the parallel line `Delta` through `o1`
+    before naming its intersections `p''` and `r''`. Center `o1` belongs to the earlier
+    square `C1`, not `C4`.
+  consequence: >-
+    The preceding distance bounds and claimed chord inequality `|p''r''| >= 1` concern
+    `C4` and do not transfer to a line through the unrelated center `o1`. The printed
+    exclusion of polygon `(p' p r r')` cannot be replayed verbatim; changing `o1` to
+    `o4` is plausible from context but is a source-distinct repair.
+  fix: >-
+    Keep the printed Cases 2 and 3 route blocked. Refuse `o1` as the chord-line center
+    and treat `o4` only as a candidate correction requiring an independent square-chord
+    argument. The current Figure 4 packet supplies no `C4` geometry, incidence, or
+    feasibility conclusion.
+  regression: >-
+    test_printed_figure4_line_center_is_typed_source_blocker rejects the printed `o1`
+    label before any `C4` chord or polygon-exclusion argument can be encoded.
+  bead: think-trkj
+  recorded_in: docs/project/research/research-2026-08-22-packing-11-unit-squares.md
+- id: D-347
+  title: El Moumni's Figure 4 diameter argument uses an undefined point i
+  date: '2026-08-27'
+  layer: docs
+  class: soundness
+  direction: flattering
+  detected_by: inspection
+  latent_for: since the 1999 publication
+  severity: high
+  status: contained
+  what: >-
+    Printed pages 287-288 say that bounding the diameter of pentagon
+    `(a a1 p' r' a2)` reduces to `|ir'| = |ip'| < sqrt(2)/2` and display a formula for
+    `|ip'|^2`, but neither the surrounding prose nor Figure 4 defines point `i`.
+  consequence: >-
+    A source-faithful replay cannot assign `i`, verify the equal-radius display, or infer
+    the pentagon diameter from the printed text alone. Silently taking `i` to be the
+    midpoint of `[a1,a2]` would turn a coordinate-derived candidate into an attributed
+    definition and overstate the Cases 2 and 3 route.
+  fix: >-
+    Retain the separately tagged candidate `i_candidate = (a1+a2)/2` only in the
+    source-distinct coordinate packet. Its zero midpoint residual, equal squared radii,
+    and strict squared-radius margin advance only the Figure 4 coordinate prerequisite;
+    every incidence, packed-square geometry, Case 2, feasibility, theorem, and n=11
+    claim remains closed.
+  regression: >-
+    test_figure4_coordinate_packet_has_literal_interior_oracle and
+    test_figure4_coordinate_packet_rejects_midpoint_mutation pin the literal candidate,
+    exact radius symmetry, and refusal of a midpoint-role swap without treating it as
+    source-defined.
   bead: think-trkj
   recorded_in: docs/project/research/research-2026-08-22-packing-11-unit-squares.md

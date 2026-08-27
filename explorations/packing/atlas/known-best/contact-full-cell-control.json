@@ -29,6 +29,21 @@
         "observed_kind": "full-cell-pair-inventory",
         "status": "passing"
       },
+      "execution-plan-forged-count": {
+        "observed_kind": "full-cell-work-count",
+        "status": "passing"
+      },
+      "execution-plan-omitted-row": {
+        "observed_kind": "full-cell-row-plan",
+        "status": "passing"
+      },
+      "execution-plan-replay": {
+        "status": "passing"
+      },
+      "execution-plan-role-swap": {
+        "observed_kind": "full-cell-row-plan",
+        "status": "passing"
+      },
       "mismatched-price-receipt": {
         "observed_kind": "full-cell-price-prerequisite",
         "status": "passing"
@@ -60,6 +75,89 @@
       }
     },
     "evidence_role": "target-free structural full-cell label and work price; no geometry, container fit, packing feasibility, or optimality claim",
+    "execution_plan": {
+      "canonical_label": "{\"angle_frame\":\"axis-aligned/v1\",\"angles\":[\"0\",\"0\",\"0\"],\"contacts\":[[0,1,0,\"u\",0],[0,2,0,\"v\",0]],\"contract\":\"packing.squares:FullFixedAngleCellLabel/v1\",\"nonedges\":[[1,2,1,\"u\",2]],\"parts\":[{\"kind\":\"free\",\"members\":[0]},{\"kind\":\"free\",\"members\":[1]},{\"kind\":\"free\",\"members\":[2]}],\"walls\":[[0,\"left\",false],[0,\"right\",true],[0,\"bottom\",false],[0,\"top\",true],[1,\"left\",false],[1,\"right\",false],[1,\"bottom\",false],[1,\"top\",true],[2,\"left\",false],[2,\"right\",true],[2,\"bottom\",false],[2,\"top\",false]]}",
+      "contract": "packing.squares:FullCellExecutionPlan/v1",
+      "evidence_role": "target-free structural row plan and derived work only; no numerical matrix, solver, geometry, feasibility, or optimality claim",
+      "promotion_boundary": "passing advances only BC-017 instrumentation readiness; actual LP execution, BC-017 completion, BC-018, think-u97a, BC-021, and target-sized execution remain closed",
+      "rows": [
+        {
+          "mode": "open-wall-inequality",
+          "row_id": "wall/0/left"
+        },
+        {
+          "mode": "seated-wall-equality",
+          "row_id": "wall/0/right"
+        },
+        {
+          "mode": "open-wall-inequality",
+          "row_id": "wall/0/bottom"
+        },
+        {
+          "mode": "seated-wall-equality",
+          "row_id": "wall/0/top"
+        },
+        {
+          "mode": "open-wall-inequality",
+          "row_id": "wall/1/left"
+        },
+        {
+          "mode": "open-wall-inequality",
+          "row_id": "wall/1/right"
+        },
+        {
+          "mode": "open-wall-inequality",
+          "row_id": "wall/1/bottom"
+        },
+        {
+          "mode": "seated-wall-equality",
+          "row_id": "wall/1/top"
+        },
+        {
+          "mode": "open-wall-inequality",
+          "row_id": "wall/2/left"
+        },
+        {
+          "mode": "seated-wall-equality",
+          "row_id": "wall/2/right"
+        },
+        {
+          "mode": "open-wall-inequality",
+          "row_id": "wall/2/bottom"
+        },
+        {
+          "mode": "open-wall-inequality",
+          "row_id": "wall/2/top"
+        },
+        {
+          "mode": "contact-equality",
+          "row_id": "pair/0/1/0/u/0"
+        },
+        {
+          "mode": "contact-equality",
+          "row_id": "pair/0/2/0/v/0"
+        },
+        {
+          "mode": "nonedge-inequality",
+          "row_id": "pair/1/2/1/u/2"
+        }
+      ],
+      "work": {
+        "axis_order_branches_examined": 1,
+        "canonical_cells_admitted": 1,
+        "contact_equalities": 2,
+        "duplicate_orbit_images": 0,
+        "lp_solver_attempts": 0,
+        "nonedge_inequalities": 1,
+        "orbit_images_examined": 48,
+        "pair_constraints_compiled": 3,
+        "pair_tests": 0,
+        "raw_cell_domain_size": 8,
+        "raw_cells_built": 1,
+        "unique_orbit_images": 48,
+        "wall_rows_compiled": 12
+      }
+    },
     "fixture": {
       "angle_frame": "axis-aligned/v1",
       "angles": [

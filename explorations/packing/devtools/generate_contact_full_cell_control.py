@@ -30,6 +30,12 @@ from sqpack.contact_full_cell import (
     replay_full_cell_witness,
     transform_full_cell,
 )
+from sqpack.contact_full_cell_execution import (
+    FullCellExecutionError,
+    FullCellExecutionPlan,
+    compile_full_cell_execution_plan,
+    replay_full_cell_execution_plan,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "atlas/known-best/contact-full-cell-control.json"
@@ -91,6 +97,16 @@ def _refusal(kind: str, operation: Callable[[], object]) -> dict[str, str]:
     raise AssertionError(f"mutation did not trigger {kind}")
 
 
+def _execution_refusal(kind: str, operation: Callable[[], object]) -> dict[str, str]:
+    try:
+        operation()
+    except FullCellExecutionError as error:
+        if error.kind != kind:
+            raise AssertionError(f"expected {kind}, got {error.kind}") from error
+        return {"status": "passing", "observed_kind": error.kind}
+    raise AssertionError(f"mutation did not trigger {kind}")
+
+
 def _fixture_document(cell: FullFixedAngleCell) -> dict[str, Any]:
     return {
         "angle_frame": cell.angle_frame,
@@ -102,7 +118,23 @@ def _fixture_document(cell: FullFixedAngleCell) -> dict[str, Any]:
     }
 
 
-def _positive_under_read_trap() -> tuple[FullFixedAngleCell, CanonicalFullCell, FullCellPrice]:
+def _execution_plan_document(plan: FullCellExecutionPlan) -> dict[str, Any]:
+    return {
+        "contract": plan.contract,
+        "evidence_role": plan.evidence_role,
+        "promotion_boundary": plan.promotion_boundary,
+        "canonical_label": plan.canonical_label,
+        "rows": [asdict(row) for row in plan.rows],
+        "work": asdict(plan.work),
+    }
+
+
+def _positive_under_read_trap() -> tuple[
+    FullFixedAngleCell,
+    CanonicalFullCell,
+    FullCellPrice,
+    FullCellExecutionPlan,
+]:
     with patch("builtins.open", side_effect=AssertionError("unexpected source read")):
         cell = literal_control_cell()
         canonical = canonicalize_full_cell(cell, limits=FullCellLimits(maximum_orbit_images=48))
@@ -111,12 +143,15 @@ def _positive_under_read_trap() -> tuple[FullFixedAngleCell, CanonicalFullCell, 
         if replay_full_cell_witness(cell, canonical.witness) != canonical.cell:
             raise AssertionError("the retained full-cell witness did not replay")
         price = price_full_cell(cell, canonical)
-    return cell, canonical, price
+        execution_plan = compile_full_cell_execution_plan(cell, canonical)
+        if replay_full_cell_execution_plan(cell, canonical, execution_plan) != execution_plan:
+            raise AssertionError("the retained full-cell execution plan did not replay")
+    return cell, canonical, price, execution_plan
 
 
 def expected_document() -> dict[str, Any]:
     """Build and independently exercise the byte-stable target-free control."""
-    cell, canonical, price = _positive_under_read_trap()
+    cell, canonical, price, execution_plan = _positive_under_read_trap()
 
     limited = canonicalize_full_cell(cell, limits=FullCellLimits(maximum_orbit_images=47))
     if limited.status != "limit":
@@ -154,6 +189,31 @@ def expected_document() -> dict[str, Any]:
     if other_canonical.status != "canonical":
         raise AssertionError("the mismatched-receipt mutation did not canonicalize")
 
+    contact_index = next(
+        index for index, row in enumerate(execution_plan.rows) if row.mode == "contact-equality"
+    )
+    nonedge_index = next(
+        index
+        for index, row in enumerate(execution_plan.rows)
+        if row.mode == "nonedge-inequality"
+    )
+    role_swapped_rows = list(execution_plan.rows)
+    role_swapped_rows[contact_index] = replace(
+        role_swapped_rows[contact_index], mode="nonedge-inequality"
+    )
+    role_swapped_rows[nonedge_index] = replace(
+        role_swapped_rows[nonedge_index], mode="contact-equality"
+    )
+    role_swapped_plan = replace(execution_plan, rows=tuple(role_swapped_rows))
+    if (
+        sum(row.mode == "contact-equality" for row in role_swapped_plan.rows)
+        != execution_plan.work.contact_equalities
+        or sum(row.mode == "nonedge-inequality" for row in role_swapped_plan.rows)
+        != execution_plan.work.nonedge_inequalities
+        or role_swapped_plan.work != execution_plan.work
+    ):
+        raise AssertionError("the execution-plan role swap changed aggregate work")
+
     controls = {
         "positive-completeness": {"status": "passing"},
         "omitted-wall": _refusal(
@@ -186,6 +246,30 @@ def expected_document() -> dict[str, Any]:
             "full-cell-price-prerequisite",
             lambda: price_full_cell(cell, other_canonical),
         ),
+        "execution-plan-replay": {"status": "passing"},
+        "execution-plan-omitted-row": _execution_refusal(
+            "full-cell-row-plan",
+            lambda: replay_full_cell_execution_plan(
+                cell,
+                canonical,
+                replace(execution_plan, rows=execution_plan.rows[:-1]),
+            ),
+        ),
+        "execution-plan-role-swap": _execution_refusal(
+            "full-cell-row-plan",
+            lambda: replay_full_cell_execution_plan(cell, canonical, role_swapped_plan),
+        ),
+        "execution-plan-forged-count": _execution_refusal(
+            "full-cell-work-count",
+            lambda: replay_full_cell_execution_plan(
+                cell,
+                canonical,
+                replace(
+                    execution_plan,
+                    work=replace(execution_plan.work, pair_tests=1),
+                ),
+            ),
+        ),
         "source-isolation": {
             "status": "passing",
             "source": "literal-source-free-n3-axis-aligned-L/v1",
@@ -217,6 +301,7 @@ def expected_document() -> dict[str, Any]:
                 - canonical.unique_image_count,
             },
             "price": asdict(price),
+            "execution_plan": _execution_plan_document(execution_plan),
             "caps": {"maximum_orbit_images": 48},
             "controls": controls,
             "promotion_boundary": PROMOTION_BOUNDARY,

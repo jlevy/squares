@@ -10,6 +10,7 @@ required:
 - fixture
 - canonical
 - price
+- execution_plan
 - caps
 - controls
 - promotion_boundary
@@ -164,6 +165,81 @@ properties:
           duplicate_orbit_images: {type: integer, minimum: 0, maximum: 47}
           canonical_cells_emitted: {const: 1}
           lp_solves: {const: 0}
+  execution_plan:
+    type: object
+    additionalProperties: false
+    required: [contract, evidence_role, promotion_boundary, canonical_label, rows, work]
+    properties:
+      contract: {const: 'packing.squares:FullCellExecutionPlan/v1'}
+      evidence_role:
+        const: >-
+          target-free structural row plan and derived work only; no numerical matrix,
+          solver, geometry, feasibility, or optimality claim
+      promotion_boundary:
+        const: >-
+          passing advances only BC-017 instrumentation readiness; actual LP execution,
+          BC-017 completion, BC-018, think-u97a, BC-021, and target-sized execution
+          remain closed
+      canonical_label: {type: string, minLength: 1}
+      rows:
+        type: array
+        minItems: 15
+        maxItems: 15
+        uniqueItems: true
+        items:
+          oneOf:
+          - $ref: '#/$defs/seatedWallExecutionRow'
+          - $ref: '#/$defs/openWallExecutionRow'
+          - $ref: '#/$defs/contactExecutionRow'
+          - $ref: '#/$defs/nonedgeExecutionRow'
+        allOf:
+        - contains:
+            $ref: '#/$defs/seatedWallExecutionRow'
+          minContains: 4
+          maxContains: 4
+        - contains:
+            $ref: '#/$defs/openWallExecutionRow'
+          minContains: 8
+          maxContains: 8
+        - contains:
+            $ref: '#/$defs/contactExecutionRow'
+          minContains: 2
+          maxContains: 2
+        - contains:
+            $ref: '#/$defs/nonedgeExecutionRow'
+          minContains: 1
+          maxContains: 1
+      work:
+        type: object
+        additionalProperties: false
+        required:
+        - raw_cell_domain_size
+        - raw_cells_built
+        - axis_order_branches_examined
+        - orbit_images_examined
+        - unique_orbit_images
+        - duplicate_orbit_images
+        - canonical_cells_admitted
+        - wall_rows_compiled
+        - contact_equalities
+        - nonedge_inequalities
+        - pair_constraints_compiled
+        - pair_tests
+        - lp_solver_attempts
+        properties:
+          raw_cell_domain_size: {const: 8}
+          raw_cells_built: {const: 1}
+          axis_order_branches_examined: {const: 1}
+          orbit_images_examined: {const: 48}
+          unique_orbit_images: {const: 48}
+          duplicate_orbit_images: {const: 0}
+          canonical_cells_admitted: {const: 1}
+          wall_rows_compiled: {const: 12}
+          contact_equalities: {const: 2}
+          nonedge_inequalities: {const: 1}
+          pair_constraints_compiled: {const: 3}
+          pair_tests: {const: 0}
+          lp_solver_attempts: {const: 0}
   caps:
     type: object
     additionalProperties: false
@@ -182,6 +258,10 @@ properties:
     - orbit-image-cap
     - mismatched-price-receipt
     - source-isolation
+    - execution-plan-replay
+    - execution-plan-omitted-row
+    - execution-plan-role-swap
+    - execution-plan-forged-count
     properties:
       positive-completeness: {$ref: '#/$defs/pass'}
       omitted-wall: {$ref: '#/$defs/wallRefusal'}
@@ -224,6 +304,10 @@ properties:
           status: {const: passing}
           source: {const: literal-source-free-n3-axis-aligned-L/v1}
           attempted_reads: {const: 0}
+      execution-plan-replay: {$ref: '#/$defs/pass'}
+      execution-plan-omitted-row: {$ref: '#/$defs/executionRowRefusal'}
+      execution-plan-role-swap: {$ref: '#/$defs/executionRowRefusal'}
+      execution-plan-forged-count: {$ref: '#/$defs/executionWorkRefusal'}
   promotion_boundary:
     const: >-
       passing authorizes only a BC-016 or BC-017 readiness decision; BC-021 and
@@ -266,3 +350,45 @@ $defs:
     properties:
       status: {const: passing}
       observed_kind: {const: full-cell-price-prerequisite}
+  seatedWallExecutionRow:
+    type: object
+    additionalProperties: false
+    required: [row_id, mode]
+    properties:
+      row_id: {type: string, pattern: '^wall/[0-2]/(left|right|bottom|top)$'}
+      mode: {const: seated-wall-equality}
+  openWallExecutionRow:
+    type: object
+    additionalProperties: false
+    required: [row_id, mode]
+    properties:
+      row_id: {type: string, pattern: '^wall/[0-2]/(left|right|bottom|top)$'}
+      mode: {const: open-wall-inequality}
+  contactExecutionRow:
+    type: object
+    additionalProperties: false
+    required: [row_id, mode]
+    properties:
+      row_id: {type: string, pattern: '^pair/[0-2]/[0-2]/[0-2]/(u|v)/[0-2]$'}
+      mode: {const: contact-equality}
+  nonedgeExecutionRow:
+    type: object
+    additionalProperties: false
+    required: [row_id, mode]
+    properties:
+      row_id: {type: string, pattern: '^pair/[0-2]/[0-2]/[0-2]/(u|v)/[0-2]$'}
+      mode: {const: nonedge-inequality}
+  executionRowRefusal:
+    type: object
+    additionalProperties: false
+    required: [status, observed_kind]
+    properties:
+      status: {const: passing}
+      observed_kind: {const: full-cell-row-plan}
+  executionWorkRefusal:
+    type: object
+    additionalProperties: false
+    required: [status, observed_kind]
+    properties:
+      status: {const: passing}
+      observed_kind: {const: full-cell-work-count}

@@ -573,7 +573,7 @@ Exact values of `s(n)` known as of this research:
 | 2, 3, 4 | 2 | Classical |
 | **5** | `2 + ½√2 ≈ 2.707107` | Göbel, via **[Friedman DS7]** |
 | 6 | 3 | **[Kearney–Shiu 2002]** — first *published* proof (see the priority ledger below) |
-| 7, 8 | 3 | **[El Moumni 1999]** — earliest located publication of the result, with the printed `n = 7` route blocked by D-344/D-345; independent later proofs include **[Friedman DS7]** and **[Kearney–Shiu 2002]** |
+| 7, 8 | 3 | **[El Moumni 1999]** — earliest located publication of the result, with the printed `n = 7` route blocked by D-344–D-347; independent later proofs include **[Friedman DS7]** and **[Kearney–Shiu 2002]** |
 | 9 | 3 | Trivial (`3²`) |
 | **10** | `3 + ½√2 ≈ 3.707107` | **[Stromquist 2003]**, Thm 1 |
 | **11** | **OPEN** — in `[3.788854, 3.877084]` | — |
@@ -630,7 +630,7 @@ The ledger, as best it can be reconstructed:
 
 | Result | Claimed by | Published proof or treatment |
 | --- | --- | --- |
-| `s(7) = s(8) = 3` | Bajmóczy, per Schrijver, per Göbel (unpublished) | **El Moumni (1999)**, *Studia Sci. Math. Hungar.* 35, 281–290 — earliest located publication; its printed `n = 7` route has D-344/D-345 |
+| `s(7) = s(8) = 3` | Bajmóczy, per Schrijver, per Göbel (unpublished) | **El Moumni (1999)**, *Studia Sci. Math. Hungar.* 35, 281–290 — earliest located publication; its printed `n = 7` route has D-344–D-347 |
 | `s(6) = 3` | Stromquist 1984 memoranda; also Trevor Green (2000, private) — neither published | **[Kearney–Shiu 2002]** |
 | `s(10) = 3 + ½√2` | Stromquist 1984 memoranda | **[Stromquist 2003]** |
 | `s(14) = s(15) = 4`, `s(24) = 5` | Stromquist “claimed to know how to prove” (1984) | **[Friedman DS7]**; `s(15)` also El Moumni (1999) |
@@ -657,7 +657,7 @@ here.
 This is a finite geometric proof pattern worth replaying independently; it does not
 supply a lower bound for `n = 11`.
 
-That replay is currently blocked by two defects in the printed `n = 7` route.
+That replay is currently blocked by four defects in the printed `n = 7` route.
 First, Proposition 2 proves `min(2(√2 - d), 1)`, but Theorem 1 substitutes `d = 1 - ε`
 and uses `B = 2√2 - 2 + 2ε` without the minimum.
 The omission matters on the nonempty interval `(3 - 2√2)/2 < ε ≤ (2 - √2)/6`. An
@@ -665,13 +665,19 @@ explicit source-distinct repair can retain both branches: the printed contradict
 applies when `B ≤ 1`, while `B > 1` gives three unit contributions in total available
 length `2 - 2ε < 2`. Second, printed page 287 states `|pr| = 2√2 - 4 - ε`, which is
 negative throughout the allowed domain.
-Coordinates reconstructed from Figure 4’s definitions instead give the plausible
-candidate `3√2 - 4 - √2ε`, but that is a source-distinct correction, not a
-transcription. [D-344](../../../defects.md) and [D-345](../../../defects.md) therefore
-block a complete source-faithful control; they do not overturn the independently
-established value or alter any `n = 11` claim.
-The Stromquist memoranda remain unpublished, but are now archived from the author’s own
-site. Memoranda I and II contain the detailed `n = 6` and `n = 10` proofs.
+An exact source-distinct coordinate packet now derives and replays `3√2 - 4 - √2ε`
+throughout the printed epsilon domain, but that is a repository correction, not printed
+text. Third, the same paragraph draws its cross-section line through `o1` although the
+premises concern `o4`. Fourth, the diameter display uses an undefined point `i`; the
+packet retains the midpoint of `[a1,a2]` only as a separately tagged source-distinct
+candidate that reproduces the display.
+[D-344](../../../defects.md) through [D-347](../../../defects.md) therefore block a
+complete source-faithful control.
+No center or line repair, triangle or polygon incidence, packed-square geometry, Case 2,
+feasibility or optimality, theorem verdict, or `n = 11` transfer was admitted.
+These defects do not overturn the independently established value or alter any `n = 11`
+claim. The Stromquist memoranda remain unpublished, but are now archived from the
+author’s own site. Memoranda I and II contain the detailed `n = 6` and `n = 10` proofs.
 Memorandum III proves the `0°/45°` `n = 11` bound and, on p. 10, asserts the
 unrestricted `2 + (4/5)√5` bound without giving its point set or proof.
 It therefore supplies no missing certificate or repair for the 2003 Figure 14 gap.
@@ -1566,7 +1572,7 @@ worth recording so they are not propagated.
 | *Our own earlier draft:* Kearney–Shiu prove `n_r ≤ 27r^{3/2} + O(r²)` | **Wrong — corrected** | The bound is `27r³/2 + O(r²)` — cubic in `r`, from `p(⌈3r/2⌉)` with `p(t) = 4t³ + 4t² + 3t + 1`. A misread fraction. |
 | *Our own earlier draft:* Stromquist’s Theorem 2 is “ten unavoidable points, eleven boxes, pigeonhole” | **Wrong — corrected** | The ten points are *not* unavoidable; the proof is two-stage and finishes with twelve points of which one box must contain **three**. Same for Theorem 3. See [What Stromquist actually proved](#what-stromquist-actually-proved-2003). |
 | *Our own earlier draft:* Gensane–Ryckelynck and Nagamochi could not be retrieved | **Wrong — corrected** | Both are freely available: Springer serves the Gensane–Ryckelynck PDF openly, and Nagamochi is open access in *Electron. J. Combin.* 12 #R37. Both are now in the local archive and read. |
-| *Our own earlier draft:* Kearney–Shiu gave the first published proof for `n = 6, 7, 8, 9` | **Partly wrong — corrected** | Their first is `s(6) = 3`. **El Moumni (1999)** is the earliest located publication asserting `s(7) = s(8) = 3` and `s(15) = 4`; its printed `n = 7` route has D-344/D-345, while later independent proofs establish the values. See the [priority ledger](#priority-claims-and-what-was-actually-published). |
+| *Our own earlier draft:* Kearney–Shiu gave the first published proof for `n = 6, 7, 8, 9` | **Partly wrong — corrected** | Their first is `s(6) = 3`. **El Moumni (1999)** is the earliest located publication asserting `s(7) = s(8) = 3` and `s(15) = 4`; its printed `n = 7` route has D-344–D-347, while later independent proofs establish the values. See the [priority ledger](#priority-claims-and-what-was-actually-published). |
 
 The third row is a useful caution: at least one automated summarizer produced
 self-contradictory arithmetic while citing a correct source.
@@ -1862,7 +1868,7 @@ Every item in the proof lane above exists because of this.
   Math. Hungar.* **35** 281–290~~ — **resolved**: the Hungarian Academy’s REAL-J archive
   serves the full volume.
   The retained article states `s(7) = 3` and `s(15) = 4` and presents center forcing,
-  line-intersection bounds, and finite symmetry cases; D-344 and D-345 block a
+  line-intersection bounds, and finite symmetry cases; D-344 through D-347 block a
   source-faithful replay of its printed `n = 7` route.
   The method is recorded here without transferring it to `n = 11`.
 - [x] ~~Obtain Stromquist’s 1984 Wagner Associates memoranda I–III~~ — **resolved**: all
@@ -2171,7 +2177,7 @@ explicitly bounded reading aids and unedited raw OCR.
   3–4, 281–290. [Institutional volume scan](https://real-j.mtak.hu/5478/), article at
   PDF pages 287–296; local `papers/el-moumni-1999-optimal-packings-unit-squares`. This
   is the earliest located publication asserting `s(7) = s(8) = 3` and `s(15) = 4`; D-344
-  and D-345 block a source-faithful replay of its printed `n = 7` route, while later
+  through D-347 block a source-faithful replay of its printed `n = 7` route, while later
   independent proofs establish the values.
 - **[Trump 2023]** — Walter Trump, “Packing of 11 unit squares in a square with minimum
   size.” [Author page](https://trump.de/square-packing/index.htm) · local

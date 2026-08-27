@@ -143,7 +143,8 @@ agenda:
     next_evidence: >-
       Under think-3yv8, build BC-016's missing retained poses, executable glued row,
       symbolic tied-axis label, and independent receipt checker before its differential;
-      alternatively take ready BC-017 through one bounded numerical full-cell driver
+      alternatively take ready BC-017 through one target-free tagged execution-plan
+      control while actual LP semantics remain blocked
     artifacts:
     - atlas/known-best/contact-full-cell-control.json
     - atlas/known-best/contact-full-cell-control.schema.yaml
@@ -171,11 +172,11 @@ agenda:
     bead: think-4o6l
     depends_on: []
     next_evidence: >-
-      Under think-trkj, retain an exact two-branch repair of Theorem 1 Case 1 and an
-      independently derived Figure 4 coordinate packet that either justifies or rejects
-      the candidate segment-length correction. D-344 and D-345 block a complete
-      source-faithful replay; the remaining acquisition queue continues under
-      think-4o6l.
+      Under think-trkj, the exact two-branch Case 1 repair and source-distinct Figure 4
+      coordinate prerequisite are accepted. Next specify and falsify one surrounding
+      center, chord, or polygon-incidence prerequisite, or retain its typed blocker and
+      rotate to an independent later proof route. D-344 through D-347 keep the printed
+      replay open; the remaining acquisition queue continues under think-4o6l.
     artifacts:
     - resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf
     - resources/papers/trump-2023-packing-11-unit-squares.pdf
@@ -311,8 +312,8 @@ BC-027 starts from observed state, in this order:
 | Program | Present head | Later sequence | Artifact owner |
 | --- | --- | --- | --- |
 | Basin identity and local geometry | `BC-029`: finish exp-045’s W7 driver and guards before any pure `-W` target | `BC-011` classifier calibration, `BC-012` coverage, `BC-013` work scaling, then `BC-014` only after its blockers clear | `agenda-001`, H-023, `series-000`, `think-1s0h` |
-| Constructive enumeration | BC-016 prerequisite instrumentation or ready BC-017 numerical full-cell driver | BC-016 differential; `BC-018` grammar freeze; `BC-025`, `BC-020`, and `BC-026`; target enumeration `BC-021`; exact restricted-class work `BC-022` last | `agenda-002`, X-003, `think-3yv8`, and the existing cell beads |
-| Sources and proof discovery | `think-trkj`: independently audit the D-344 Figure 4 repair; continue the acquisition queue under `think-4o6l` | Source-distinct method extraction, unavoidable-set checks, and one bounded proof question | source-availability ledger, research notes, `think-trkj`, `think-4o6l` |
+| Constructive enumeration | BC-016 prerequisite instrumentation or ready BC-017 target-free execution-plan control; actual LP semantics remain blocked | BC-016 differential; `BC-018` grammar freeze; `BC-025`, `BC-020`, and `BC-026`; target enumeration `BC-021`; exact restricted-class work `BC-022` last | `agenda-002`, X-003, `think-3yv8`, and the existing cell beads |
+| Sources and proof discovery | `think-trkj`: accepted source-distinct Figure 4 coordinate prerequisite; resolve the first undeclared center/incidence step or rotate to an independent proof route; continue the acquisition queue under `think-4o6l` | Source-distinct method extraction, unavoidable-set checks, and one bounded proof question | source-availability ledger, research notes, `think-trkj`, `think-4o6l` |
 | Numerical-to-formal promotion | `think-75ll`: freeze n=29 contact equations, isolation boxes, certificate type, and checker | Generic interval existence only after the selected system and checker are explicit | assurance plan, `think-75ll`; low-level certificate type remains `think-0md2` |
 | Proposer and search diversity | `BC-033`: interface and equal-work contract | Delta continuation, neighbour transfer, MAP-Elites, billiard/inflation, and packing surgery | proposer plan, `think-5vsz`, `think-u97a`, `think-w6on`, `think-g2ko` |
 | Asymptotic and finite transfer | `think-ykt7`: freeze Bui Lemma 6’s specialization and induction range | Full theorem audit, effective constants and finite x0, synchronization, boundary overhead, Proposition 7, and exponent | H-037 and `think-ykt7` |
@@ -360,10 +361,10 @@ measurement and the reason is recorded.
 
 | Run time | Minutes | Workflow | Cell | Bounded output |
 | --- | ---: | --- | --- | --- |
-| 5:00–5:15 | 15 | W3 insight-iteration | portfolio | Apply the midpoint decisions: keep BC-016 blocked, start ready BC-017, and freeze the two later source/proof screens without reopening completed BC-030 or source retrieval. |
-| 5:15–5:45 | 30 | W7 pipeline-improvement | BC-017 | Build the smallest numerical full-cell driver with exact candidate and executed-work accounting; no target geometry or search. |
-| 5:45–6:15 | 30 | W7 pipeline-improvement | BC-017 | Exercise the driver under equality, omitted-row, cap, and counted-work mutations; stop on the first price mismatch. |
-| 6:15–6:30 | 15 | W2 factual-review | BC-017 | Independently audit row completeness, workload counting, and the no-feasibility claim boundary. |
+| 5:00–5:15 | 15 | W3 insight-iteration | BC-017 | Record the entry result: no existing solver preserves every full-cell wall/contact/nonedge role. Freeze a target-free tagged execution-plan control; keep actual LP execution blocked until strict wall/nonedge and contact-overlap semantics are declared. |
+| 5:15–5:45 | 30 | W7 pipeline-improvement | BC-017 | Build the smallest `FullCellExecutionPlan/v1` plan-and-accounting seam on the source-free n=3 control. Derive every tagged row and counter; execute no real LP or sqsearch pair test and retain no geometry or feasibility field. |
+| 5:45–6:15 | 30 | W7 pipeline-improvement | BC-017 | Exercise the positive, seated-wall, contact/nonedge role-swap, forged-count, and deterministic-replay controls. Stop if a semantic mutation changes only metadata or any target, geometry, feasibility, or n=11 dependency appears. |
+| 6:15–6:30 | 15 | W2 factual-review | BC-017 | Independently audit per-key plan sensitivity and derived accounting. Keep BC-017 open for real n=5/n=10 counted execution and load equality; `think-u97a` separately remains open for stable n=4/n=10 quench outcomes and work across pool widths and load. |
 | 6:30–6:45 | 15 | W5 efficiency-loop | BC-028 | Measure Session B throughput and admit at most one bounded W5 substitution only if it repays the remaining clock. |
 | 6:45–7:05 | 20 | W1 research-pass | think-trkj | Reconstruct the D-344 Figure 4 coordinates and downstream dependencies independently from the retained scan; do not adopt the candidate correction yet. |
 | 7:05–7:35 | 30 | W7 pipeline-improvement | think-trkj | Encode a source-distinct coordinate packet or retain the first typed route blocker; keep Proposition 1 and full-Theorem-1 promotion closed. |

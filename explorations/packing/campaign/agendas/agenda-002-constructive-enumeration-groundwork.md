@@ -75,19 +75,36 @@ agenda:
       Can a stratum be priced in counted LP solves end to end, so enumeration results
       are comparable to each other and to the annealer without reference to wall time?
     hypotheses: []
-    budget: one bounded W7 slice
-    entry: the quench's existing solve path and the sqsearch pair-test meter
+    budget: two bounded W7 slices followed by one independent W2 audit
+    entry: >-
+      the completed source-free n=3 full-cell control, quench solver-attempt receipts,
+      and the sqsearch pair-test meter as separate accounting references; no complete
+      numerical full-cell semantics are yet frozen
     exit: >-
       Every enumerated stratum carries a retained LP-solve count and pair-test total;
       two runs under different host load produce identical counts.
     bead: think-u97a
     depends_on: []
-    next_evidence: identical retained counts across a loaded and unloaded host
+    next_evidence: >-
+      First retain a target-free tagged execution-plan receipt on the source-free n=3
+      control, with every wall and pair role visible and semantic-swap, forged-count,
+      and exact-replay controls. Then freeze the missing numerical semantics before any
+      real LP run. BC-017 completes only after real n=5 and n=10 executions retain
+      identical derived work and outcomes across declared pool widths and loaded and
+      unloaded host conditions.
     note: >-
-      D-126 makes wall-clock budgets load-dependent. A deterministic enumerator can
-      satisfy the work-unit rule by construction, which is why this is cheap here and
-      expensive everywhere else; doing it now also gives H-045 an admissible budget
-      currency before its first round rather than after.
+      D-126 makes wall-clock budgets load-dependent, but the target-free control exposes
+      an earlier instrumentation boundary. `solve_cell` counts actual retries while
+      collapsing seated-wall and contact/nonedge roles; `contact_realization` refuses
+      walls and omits nonedge separation; and sqsearch pair tests are dynamic overlap
+      tests, not compiled rows. The first slice therefore retains only a tagged
+      structural plan and derived accounting, with real LP attempts and sqsearch pair
+      tests both zero. This calibration-only tool evidence carries no coordinates, side,
+      geometry, feasibility, optimality, or n=11 target claim. BC-017 remains open until
+      the numerical semantics freeze and real n=5/n=10 counted executions agree across
+      pool width and host load. BC-018 separately still needs BC-016 plus the n=5, n=10,
+      and n=16 grammar controls. `think-u97a` separately requires stable n=4/n=10 quench
+      outcomes and work across pool widths and load.
   - id: BC-018
     purpose: tool_validation
     owner_focus: correctness
