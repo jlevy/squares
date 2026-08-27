@@ -1006,8 +1006,7 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 
 *The upper-bound endpoint of the interval: a certified degree-8 construction, still
 separated from the independently certified lower bound.
-Translucent tempered-yellow segments and dots are exact edge and point contacts, not
-tolerance-based visual guesses.*
+The segment and dot contact marks are exact, not tolerance-based visual guesses.*
 
 The current audit found an explicit strict box avoiding all twelve printed Figure 14
 points, so the paper’s unavoidability subclaim is false as printed

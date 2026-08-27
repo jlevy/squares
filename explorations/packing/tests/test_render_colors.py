@@ -6,6 +6,7 @@ import colorsys
 from decimal import Decimal
 from math import sqrt
 from pathlib import Path
+from xml.etree import ElementTree as ET
 
 from devtools.build_known_best_atlas import frame_from_witness
 from sqpack.render.color import assign_square_colors, square_fill_palette
@@ -23,6 +24,7 @@ from sqpack.render.style import SQUARE_FILL_PALETTE, SQUARE_HUE_PALETTE
 from sqpack.witness import load_witness
 
 ROOT = Path(__file__).resolve().parents[1]
+ATLAS = ROOT / "atlas"
 MINIMUM_BASE_HUE_SEPARATION_DEGREES = 15
 MINIMUM_BASE_OKLAB_DISTANCE = 0.035
 
@@ -294,6 +296,46 @@ def test_requested_palette_dimensions_are_unique_and_configurable() -> None:
         >= MINIMUM_BASE_OKLAB_DISTANCE
     )
     assert square_fill_palette(hue_count=7, shades_per_hue=3) != palette
+
+
+def test_every_indexed_atlas_fill_matches_its_declared_color_contract() -> None:
+    indexed_files = 0
+    indexed_fills = 0
+    palettes: dict[tuple[int, int, Decimal], tuple[tuple[str, ...], ...]] = {}
+    for path in sorted(ATLAS.rglob("*.svg")):
+        root = ET.fromstring(path.read_text(encoding="utf-8"))
+        fills = [
+            node for node in root.iter() if node.attrib.get("data-feature") == "square-fill"
+        ]
+        if not fills:
+            continue
+        indexed_files += 1
+        metadata = {
+            node.attrib["name"]: node.text or ""
+            for node in root.iter()
+            if node.tag.endswith("}value") and "name" in node.attrib
+        }
+        contract = (
+            int(metadata["color-hue-count"]),
+            int(metadata["color-shades-per-hue"]),
+            Decimal(metadata["color-shade-lightness-span"]),
+        )
+        palette = palettes.setdefault(
+            contract,
+            square_fill_palette(
+                hue_count=contract[0],
+                shades_per_hue=contract[1],
+                lightness_span=contract[2],
+            ),
+        )
+        for fill in fills:
+            hue_index = int(fill.attrib["data-hue-index"])
+            shade_index = int(fill.attrib["data-shade-index"])
+            assert fill.attrib["fill"] == palette[hue_index][shade_index], path
+        indexed_fills += len(fills)
+
+    assert indexed_files == 211
+    assert indexed_fills == 32017
 
 
 def test_color_parameters_reject_nonpositive_values() -> None:

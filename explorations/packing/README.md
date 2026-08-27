@@ -313,14 +313,12 @@ Numerically checked figures retain the arithmetic, actual precision, rounding,
 tolerance, method, and outcome in SVG metadata.
 Exact annotations retain algebraic or rational source expressions in SVG comments and
 namespaced metadata while using stable high-precision decimal projections for geometry.
-The container and every packed square use the same thin pure-black boundary, so a
-contact cannot look like a white gap.
-Exact-source adapters attach certified contact geometry: 60%-opaque tempered-yellow
-segments show shared boundary intervals, and dots in the same reserved highlight color
-show point contacts.
-Each mark is clipped to its participating square interiors and sits above the square
-fills and below the black outlines.
-This layer is shown by default, can be removed with `--no-contacts`, and is never
+The container and every packed square use the same boundary treatment, so contacts
+remain visually continuous.
+Exact-source adapters attach certified contact geometry: segments mark shared boundary
+intervals, and dots mark point contacts.
+Each mark is clipped to its participating square interiors.
+The contact layer is shown by default, can be removed with `--no-contacts`, and is never
 guessed for numerical candidate poses.
 
 See the [SVG gallery README](atlas/rendering/README.md) for the focused rendering
