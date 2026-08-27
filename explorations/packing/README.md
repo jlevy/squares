@@ -16,9 +16,13 @@ Roughly `0.088` in side length remains between that bound and the 1979 construct
 
 [![One hundred known-best square packings arranged from n equals one through one hundred.](atlas/known-best/known-best-1-100.png)](atlas/known-best/known-best-1-100.svg)
 
-*The retained `n = 1…100` atlas, with each packing normalized to its own container and
-its reported side upper bound shown below.
-Select the image for the standalone, zoomable SVG.*
+*The retained `n = 1…100` atlas, each packing normalized to its own container and
+labeled with its best known side upper bound.
+Badges mark the 35 side lengths proved optimal (`O`), and whether a side length is
+pinned exactly by a radical or a minimal polynomial (`=`) or is so far known only
+numerically (`≈`); `deg` gives the algebraic degree where one is recorded.
+Select the image for the standalone, zoomable SVG, or take the
+[print-ready PDF](atlas/known-best/known-best-1-100.pdf) (vector, 25 × 26.2 in).*
 
 Work is organized at three levels.
 Four **operating principles** define what quality means and which concerns may veto

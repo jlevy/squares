@@ -6,29 +6,31 @@ from dataclasses import dataclass
 
 from sqpack.render.model import EvidenceTier
 
-# The ordered families keep the prior palette's saturation/lightness character while
-# spacing base hues by one twentieth of the color wheel (within RGB rounding).
+# Base hues for the twenty angle families. Slot 0 is pinned to right angles and
+# slot 1 to 45 degree tilts, so those two carry most of the atlas and are chosen
+# to stay quiet under repetition. Hues are spread with a minimum separation so no
+# two families read as the same colour; see tests/test_render_colors.py.
 SQUARE_HUE_PALETTE = (
-    "#00b393",
-    "#884853",
-    "#a1ce85",
-    "#8986ff",
-    "#8a8c37",
-    "#008aee",
-    "#a0fbb4",
-    "#c17deb",
-    "#d8ad8d",
-    "#d67fc3",
-    "#7eb900",
-    "#3b5cb3",
-    "#8dff83",
-    "#795eb1",
-    "#b18000",
-    "#00a8bf",
-    "#008344",
-    "#d078d7",
-    "#be4d3d",
-    "#e97aaf",
+    "#1faa8e",
+    "#c3c45f",
+    "#aa5585",
+    "#166eac",
+    "#b3543b",
+    "#c9a13a",
+    "#23b4e8",
+    "#158655",
+    "#a7539d",
+    "#75951c",
+    "#c8691e",
+    "#1990a2",
+    "#714fad",
+    "#67b45c",
+    "#e26e82",
+    "#8286e9",
+    "#ce871b",
+    "#147e7c",
+    "#4571c9",
+    "#a86cc6",
 )
 SQUARE_FILL_PALETTE = SQUARE_HUE_PALETTE
 SQUARE_FILL_OPACITY = 1.0

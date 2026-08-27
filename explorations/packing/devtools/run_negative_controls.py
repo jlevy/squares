@@ -97,6 +97,12 @@ PRUNE = frozenset(
         # Large, generator-owned prospective outputs are replayed by their dedicated
         # validation step and are never mutation targets. Copying 101 witnesses and 101
         # renderings into every private worker would exceed the portable snapshot cap.
+        # The composite PNG and PDF are generated binary exports, each carrying a
+        # source receipt that build_known_best_atlas --check and
+        # render_composite_pdf --check replay. Neither is a meaningful mutation
+        # target, and together they are 0.8 MB of every private worker's snapshot.
+        ROOT / "atlas/known-best/known-best-1-100.pdf",
+        ROOT / "atlas/known-best/known-best-1-100.png",
         ROOT / "atlas/prospective/rendering",
         ROOT / "resources",
         ROOT / "sqsearch/target",

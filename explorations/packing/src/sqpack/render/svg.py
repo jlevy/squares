@@ -28,6 +28,7 @@ ALLOWED_ELEMENTS = {
     "circle",
     "path",
     "text",
+    "tspan",
     "defs",
     "clipPath",
     "marker",
@@ -185,10 +186,26 @@ def validate_safe_tree(root: ET.Element) -> None:
         raise ValueError("at most one motion style is supported")
 
 
+def _strip_indent_inside_text(document: ET.Element) -> None:
+    """Undo pretty-printing inside <text>.
+
+    SVG collapses whitespace in text content, so the newline and indent that
+    ``ET.indent`` inserts around a <tspan> would render as a stray space between
+    the runs. Indentation is presentational everywhere else, so it stays.
+    """
+    for node in document.iter(svg_tag("text")):
+        if node.text is not None and not node.text.strip():
+            node.text = None
+        for child in node:
+            if child.tail is not None and not child.tail.strip():
+                child.tail = None
+
+
 def serialize_svg(root: ET.Element) -> str:
     validate_safe_tree(root)
     document = copy.deepcopy(root)
     ET.indent(document, space="  ")
+    _strip_indent_inside_text(document)
     text = (
         XML_DECLARATION
         + ET.tostring(document, encoding="unicode", short_empty_elements=True)

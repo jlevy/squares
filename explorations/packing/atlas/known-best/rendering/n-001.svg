@@ -27,7 +27,7 @@
   <rect width="960" height="680" fill="#ffffff" />
   <g id="panel-0" data-panel="n=1 known best">
     <g id="panel-0-fills" data-layer="fills">
-      <polygon data-feature="square-fill" data-square="square-001" data-hue-index="0" data-shade-index="0" data-orientation-radians="0.0" points="36,572 572,572 572,36 36,36" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-angle-class-residual-radians="0E-59" data-contact-sides="4" data-full-side-contacts="wall-bottom wall-right wall-top wall-left" data-maximum-contact-residual="0" />
+      <polygon data-feature="square-fill" data-square="square-001" data-hue-index="0" data-shade-index="0" data-orientation-radians="0.0" points="36,572 572,572 572,36 36,36" fill="#257260" fill-opacity="1.0" stroke="none" data-angle-class="0" data-angle-class-residual-radians="0E-59" data-contact-sides="4" data-full-side-contacts="wall-bottom wall-right wall-top wall-left" data-maximum-contact-residual="0" />
     </g>
     <g id="panel-0-outlines" data-layer="outlines">
       <polygon data-feature="square-outline" data-square="square-001" points="36,572 572,572 572,36 36,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />

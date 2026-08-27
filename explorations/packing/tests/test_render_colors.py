@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
-import colorsys
 from decimal import Decimal
 from math import sqrt
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
 from devtools.build_known_best_atlas import frame_from_witness
-from sqpack.render.color import assign_square_colors, square_fill_palette
+from sqpack.render.color import assign_square_colors, hex_oklch, square_fill_palette
 from sqpack.render.model import (
     HueScheme,
     PackingFrame,
@@ -25,18 +24,19 @@ from sqpack.witness import load_witness
 
 ROOT = Path(__file__).resolve().parents[1]
 ATLAS = ROOT / "atlas"
-MINIMUM_BASE_HUE_SEPARATION_DEGREES = 15
+# Separation is measured in OkLCh, not HSL. HSL hue degrees are not
+# perceptually uniform, so they misreport how far apart two bases look: the
+# closest pair here sits 7.0 deg apart in HSL but 16.6 deg apart in OkLCh, with
+# an OkLab distance of 0.062. OkLab distance is the binding guard; the hue gap
+# additionally stops two families reading as shades of one colour.
+MINIMUM_BASE_HUE_SEPARATION_DEGREES = 14
 MINIMUM_BASE_OKLAB_DISTANCE = 0.035
+# A shade may drift slightly in hue from its base as the gamut clamps chroma.
+MAXIMUM_SHADE_HUE_DRIFT_DEGREES = 5.0
 
 
 def _point(x: Decimal | int | str, y: Decimal | int | str) -> Point2:
     return Point2(scalar_from_decimal(x), scalar_from_decimal(y))
-
-
-def _hue_degrees(fill: str) -> float:
-    red, green, blue = (int(fill[offset : offset + 2], 16) / 255 for offset in (1, 3, 5))
-    hue, _lightness, _saturation = colorsys.rgb_to_hls(red, green, blue)
-    return hue * 360
 
 
 def _oklab(fill: str) -> tuple[float, float, float]:
@@ -269,15 +269,23 @@ def test_requested_palette_dimensions_are_unique_and_configurable() -> None:
     assert len(palette) == 20
     assert all(len(family) == 5 for family in palette)
     assert len({fill for family in palette for fill in family}) == 100
-    assert tuple(family[2] for family in palette) == SQUARE_HUE_PALETTE
     assert set(SQUARE_HUE_PALETTE) == set(SQUARE_FILL_PALETTE)
     assert SQUARE_HUE_PALETTE[:4] == (
-        "#00b393",
-        "#884853",
-        "#a1ce85",
-        "#8986ff",
+        "#1faa8e",
+        "#c3c45f",
+        "#aa5585",
+        "#166eac",
     )
-    hues = tuple(_hue_degrees(fill) for fill in SQUARE_HUE_PALETTE)
+    # The base no longer sits mid-ramp: lightness is compressed toward the mid
+    # band and saturation climbs across the family, and the two pinned families
+    # are built in OkLCh. What must hold is that every shade still carries its
+    # base's hue.
+    for base, family in zip(SQUARE_HUE_PALETTE, palette, strict=True):
+        base_hue = hex_oklch(base)[2]
+        for fill in family:
+            drift = abs(hex_oklch(fill)[2] - base_hue)
+            assert min(drift, 360 - drift) <= MAXIMUM_SHADE_HUE_DRIFT_DEGREES, (base, fill)
+    hues = tuple(hex_oklch(fill)[2] for fill in SQUARE_HUE_PALETTE)
     assert (
         min(
             min(abs(left - right), 360 - abs(left - right))
@@ -369,3 +377,44 @@ def test_default_scheme_is_angle_with_contacts_and_five_shades() -> None:
     assert spec.shade_lightness_span == Decimal("0.2")
     assert spec.angle_tolerance_radians == Decimal("1e-6")
     assert spec.full_side_contact_tolerance == Decimal("2e-6")
+
+
+def _atlas_frames() -> list[PackingFrame]:
+    witnesses = sorted((ROOT / "witnesses/known-best").glob("n-*.yaml"))
+    return [frame_from_witness(load_witness(path)) for path in witnesses]
+
+
+def test_right_angles_and_diagonals_are_pinned_across_the_atlas() -> None:
+    """Right angles always take hue 0 and 45 degree tilts always take hue 1.
+
+    Orientation is stored modulo a quarter turn, so an axis-aligned class can be
+    represented just under 90 degrees rather than at 0; n=69's 42-square class is
+    exactly that case. The pin therefore compares modulo the seam.
+    """
+    spec = RenderSpec(overlays=frozenset())
+    right_angle_hues: set[int] = set()
+    diagonal_hues: set[int] = set()
+    for frame in _atlas_frames():
+        for color in assign_square_colors(frame, spec).values():
+            degrees = float(color.orientation_radians) * 180 / 3.141592653589793
+            offset = min(degrees, 90 - degrees)
+            if offset < 1e-4:
+                right_angle_hues.add(color.hue_index)
+            elif abs(degrees - 45) < 1e-4:
+                diagonal_hues.add(color.hue_index)
+    assert right_angle_hues == {0}
+    assert diagonal_hues == {1}
+
+
+def test_unpinned_classes_take_hues_by_descending_class_size() -> None:
+    """Everything past the two pinned angles is ordered by how many squares it holds."""
+    spec = RenderSpec(overlays=frozenset())
+    frame = frame_from_witness(load_witness(ROOT / "witnesses/known-best/n-068.yaml"))
+    colors = assign_square_colors(frame, spec)
+    sizes: dict[int, int] = {}
+    for color in colors.values():
+        sizes[color.hue_index] = sizes.get(color.hue_index, 0) + 1
+    unpinned = sorted((hue, count) for hue, count in sizes.items() if hue >= 2)
+    counts = [count for _hue, count in unpinned]
+    assert counts == sorted(counts, reverse=True), unpinned
+    assert min(hue for hue, _count in unpinned) == 2

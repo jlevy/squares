@@ -69,16 +69,19 @@ def test_comparison_reuses_hues_for_shared_angles_across_different_class_orders(
 
     start_hues, final_hues = _panel_hues(render_packing_svg(final, start=start, spec=spec))
 
-    assert list(start_hues.values()) == [3, 0, 4]
-    assert list(final_hues.values()) == [0, 1, 2]
+    # Hues 0 and 1 are reserved for right angles and 45 degree tilts. None of
+    # these frames carries either orientation, so every class is assigned from
+    # hue 2 upward and the reserved pair stays unused.
+    assert list(start_hues.values()) == [5, 2, 6]
+    assert list(final_hues.values()) == [2, 3, 4]
     assert start_hues["square-02"] == final_hues["square-01"]
 
     standalone = assign_square_colors(final, RenderSpec(shades_per_hue=1))
-    assert [color.hue_index for color in standalone.values()] == [0, 1, 2]
+    assert [color.hue_index for color in standalone.values()] == [2, 3, 4]
 
 
 def test_registry_reserves_an_exact_match_before_a_near_match() -> None:
     registry = AngleHueRegistry(20, Decimal("1e-6"))
 
-    assert registry.hues_for((Decimal("0.2"),)) == (0,)
-    assert registry.hues_for((Decimal("0.1999995"), Decimal("0.2"))) == (1, 0)
+    assert registry.hues_for((Decimal("0.2"),)) == (2,)
+    assert registry.hues_for((Decimal("0.1999995"), Decimal("0.2"))) == (3, 2)
