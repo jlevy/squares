@@ -36,7 +36,7 @@ session:
       checker, and accept rule, or the first typed source/contact/isolation/checker
       blocker that prevents an honest n=29 round.
     validation_command: >-
-      uv run --directory explorations/packing --frozen packing-validate --list-steps
+      uv run --directory explorations/packing --frozen packing-validate --list
     kill_condition: >-
       Stop on higher decimal precision plus tolerance, inferred contacts, unbounded
       generic interval work, record-improvement/rigidity/optimality language, generated

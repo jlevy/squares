@@ -536,7 +536,7 @@ session:
       checker, and accept rule, or the first typed source/contact/isolation/checker
       blocker that prevents an honest n=29 round.
     validation_command: >-
-      uv run --directory explorations/packing --frozen packing-validate --list-steps
+      uv run --directory explorations/packing --frozen packing-validate --list
     kill_condition: >-
       Stop on higher decimal precision plus tolerance, inferred contacts, unbounded
       generic interval work, record-improvement/rigidity/optimality language, generated
@@ -822,8 +822,10 @@ session:
     extended: a wall-clock window that elapsed without work cannot honestly be renewed.
     The closeout is retrospective, written by a later runner from the retained run
     transcript and worktree state; every phase 1-10 contract and outcome above was
-    recorded contemporaneously by the original run and is unaltered except for two
-    out-of-vocabulary labels corrected to the schema's terms.
+    recorded contemporaneously by the original run and is unaltered except for three
+    corrections: two out-of-vocabulary labels brought to the schema's terms, and phase
+    11's declared `validation_command`, which named a `--list-steps` flag that does not
+    exist and could never have run. That third correction is tracked as think-ldy8.
   next_action: >-
     Open session 028 under BC-032 and think-whwc, reclaim the expired exp-045 lease, and
     execute phase 11's unchanged n=29 inventory contract on a fresh clock.
