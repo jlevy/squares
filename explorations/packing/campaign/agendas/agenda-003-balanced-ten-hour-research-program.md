@@ -141,8 +141,9 @@ agenda:
     bead: think-6mcd
     depends_on: []
     next_evidence: >-
-      BC-016's bounded aligned/glued cross-toolchain differential under think-3yv8;
-      BC-017 remains ready after a numerical full-cell driver exists
+      Under think-3yv8, build BC-016's missing retained poses, executable glued row,
+      symbolic tied-axis label, and independent receipt checker before its differential;
+      alternatively take ready BC-017 through one bounded numerical full-cell driver
     artifacts:
     - atlas/known-best/contact-full-cell-control.json
     - atlas/known-best/contact-full-cell-control.schema.yaml
@@ -170,9 +171,11 @@ agenda:
     bead: think-4o6l
     depends_on: []
     next_evidence: >-
-      Replay El Moumni's finite n = 7 lower-bound argument under think-trkj before
-      treating it as an automated proof-lane control; the remaining acquisition queue
-      continues under think-4o6l.
+      Under think-trkj, retain an exact two-branch repair of Theorem 1 Case 1 and an
+      independently derived Figure 4 coordinate packet that either justifies or rejects
+      the candidate segment-length correction. D-344 and D-345 block a complete
+      source-faithful replay; the remaining acquisition queue continues under
+      think-4o6l.
     artifacts:
     - resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf
     - resources/papers/trump-2023-packing-11-unit-squares.pdf
@@ -307,12 +310,12 @@ BC-027 starts from observed state, in this order:
 
 | Program | Present head | Later sequence | Artifact owner |
 | --- | --- | --- | --- |
-| Basin identity and local geometry | `BC-029`: `BC-010` / H-023 / exp-045 | `BC-011` classifier calibration, `BC-012` coverage, `BC-013` work scaling, then `BC-014` only after its blockers clear | `agenda-001`, H-023, `series-000`, `think-1s0h` |
-| Constructive enumeration | `BC-030`: CG-010 target-free full cell | `BC-016` and `BC-017`; `BC-018` grammar freeze; `BC-025`, `BC-020`, and `BC-026`; target enumeration `BC-021`; exact restricted-class work `BC-022` last | `agenda-002`, X-003, `think-6mcd` and the existing cell beads |
-| Sources and proof discovery | `BC-031`: highest-value missing primary | Source-faithful method extraction, unavoidable-set checks, and one bounded proof question | source-availability ledger, research notes, `think-4o6l` |
-| Numerical-to-formal promotion | `BC-032`: smallest well-posed exact or interval boundary | Generic interval existence only after the selected system and checker are explicit | assurance plan, `think-75ll`; low-level certificate type remains `think-0md2` |
+| Basin identity and local geometry | `BC-029`: finish exp-045’s W7 driver and guards before any pure `-W` target | `BC-011` classifier calibration, `BC-012` coverage, `BC-013` work scaling, then `BC-014` only after its blockers clear | `agenda-001`, H-023, `series-000`, `think-1s0h` |
+| Constructive enumeration | BC-016 prerequisite instrumentation or ready BC-017 numerical full-cell driver | BC-016 differential; `BC-018` grammar freeze; `BC-025`, `BC-020`, and `BC-026`; target enumeration `BC-021`; exact restricted-class work `BC-022` last | `agenda-002`, X-003, `think-3yv8`, and the existing cell beads |
+| Sources and proof discovery | `think-trkj`: independently audit the D-344 Figure 4 repair; continue the acquisition queue under `think-4o6l` | Source-distinct method extraction, unavoidable-set checks, and one bounded proof question | source-availability ledger, research notes, `think-trkj`, `think-4o6l` |
+| Numerical-to-formal promotion | `think-75ll`: freeze n=29 contact equations, isolation boxes, certificate type, and checker | Generic interval existence only after the selected system and checker are explicit | assurance plan, `think-75ll`; low-level certificate type remains `think-0md2` |
 | Proposer and search diversity | `BC-033`: interface and equal-work contract | Delta continuation, neighbour transfer, MAP-Elites, billiard/inflation, and packing surgery | proposer plan, `think-5vsz`, `think-u97a`, `think-w6on`, `think-g2ko` |
-| Asymptotic and finite transfer | `BC-034`: smallest remaining proof obligation | Full theorem audit, effective constants and finite x0, synchronization, exact count, and boundary overhead | H-037 and `think-ykt7` |
+| Asymptotic and finite transfer | `think-ykt7`: freeze Bui Lemma 6’s specialization and induction range | Full theorem audit, effective constants and finite x0, synchronization, boundary overhead, Proposition 7, and exponent | H-037 and `think-ykt7` |
 
 The first ten-hour run must give bounded attention to at least three independent
 scientific programs.
@@ -357,21 +360,26 @@ measurement and the reason is recorded.
 
 | Run time | Minutes | Workflow | Cell | Bounded output |
 | --- | ---: | --- | --- | --- |
-| 5:00–5:30 | 30 | W7 pipeline-improvement | BC-030 | Freeze and implement the target-free full-cell label and price vector. |
-| 5:30–6:00 | 30 | W7 pipeline-improvement | BC-030 | Exercise one complete cell with positive and omitted-wall, omitted-axis, tie, cap, and source-isolation controls. |
-| 6:00–6:15 | 15 | W2 factual-review | BC-030 | Independently audit full-cell completeness and accidental calibration lookup. |
-| 6:15–6:30 | 15 | W3 insight-iteration | BC-030 | If a counterexample or cap structure is informative, shape the next grammar question; otherwise make the BC-016/017 readiness decision. |
-| 6:30–6:45 | 15 | W5 efficiency-loop | BC-028 | Measure the second session’s actual throughput and admit at most one bounded W5 substitution if it repays the remaining clock. |
-| 6:45–7:05 | 20 | W1 research-pass | BC-031 | Re-test the highest-value source route and retain the source or dated negative result. |
-| 7:05–7:25 | 20 | W3 insight-iteration | BC-031/032/034 | Choose the highest-information third program from source, promotion/proof, or asymptotic evidence. Name one falsifiable question. |
-| 7:25–7:55 | 30 | W6 or W7 | selected third program | Freeze a ready scientific round, or build the reusable instrument if the capability rather than the claim is still mutable. |
-| 7:55–8:25 | 30 | W6 or W7 | selected third program | Execute and replay the bounded evidence cell; preserve negative, invalid, blocked, and unresolved outcomes. |
-| 8:25–8:40 | 15 | W2 or W6 | selected third program | Audit material or high-risk output; otherwise use the time for guarded replay. |
-| 8:40–8:50 | 10 | W3 insight-iteration | selected third program | Record the mechanism update and successor disposition after a valid result. |
-| 8:50–9:05 | 15 | W5 efficiency-loop | BC-028 | Perform the final measured efficiency review and record what should change in the next agenda. |
-| 9:05–9:20 | 15 | W3 insight-iteration | portfolio | Compare information gained across programs and rank the next ready cells, including the blocked proposer lane. |
-| 9:20–9:30 | 10 | W1 or W3 | portfolio | Check the top successor’s evidence readiness; do not start work that cannot finish before finalization. |
+| 5:00–5:15 | 15 | W3 insight-iteration | portfolio | Apply the midpoint decisions: keep BC-016 blocked, start ready BC-017, and freeze the two later source/proof screens without reopening completed BC-030 or source retrieval. |
+| 5:15–5:45 | 30 | W7 pipeline-improvement | BC-017 | Build the smallest numerical full-cell driver with exact candidate and executed-work accounting; no target geometry or search. |
+| 5:45–6:15 | 30 | W7 pipeline-improvement | BC-017 | Exercise the driver under equality, omitted-row, cap, and counted-work mutations; stop on the first price mismatch. |
+| 6:15–6:30 | 15 | W2 factual-review | BC-017 | Independently audit row completeness, workload counting, and the no-feasibility claim boundary. |
+| 6:30–6:45 | 15 | W5 efficiency-loop | BC-028 | Measure Session B throughput and admit at most one bounded W5 substitution only if it repays the remaining clock. |
+| 6:45–7:05 | 20 | W1 research-pass | think-trkj | Reconstruct the D-344 Figure 4 coordinates and downstream dependencies independently from the retained scan; do not adopt the candidate correction yet. |
+| 7:05–7:35 | 30 | W7 pipeline-improvement | think-trkj | Encode a source-distinct coordinate packet or retain the first typed route blocker; keep Proposition 1 and full-Theorem-1 promotion closed. |
+| 7:35–7:50 | 15 | W2 factual-review | think-trkj | Audit the coordinate derivation, source labels, and every downstream use of the repaired segment length. |
+| 7:50–8:00 | 10 | W3 insight-iteration | think-trkj | Decide whether the n=7 proof packet advances, remains blocked, or should yield to a later independent proof route. |
+| 8:00–8:20 | 20 | W3 insight-iteration | BC-032/BC-034 | Select either the explicit n=29 interval-certificate preconditions or Bui Lemma 6 specialization by falsifiability and readiness. |
+| 8:20–8:50 | 30 | W7 or W6 | selected third program | Freeze the smallest exact, interval, or typed-blocker criterion and build only the required instrument. |
+| 8:50–9:05 | 15 | W2 or W6 | selected third program | Independently audit material output or perform guarded replay if the trust boundary did not change. |
+| 9:05–9:15 | 10 | W3 insight-iteration | selected third program | Record the mechanism update and successor disposition after a valid result. |
+| 9:15–9:30 | 15 | W5 efficiency-loop | BC-028 | Perform the final measured efficiency review and record what should change in the next agenda. |
 | 9:30–10:00 | 30 | finalization | BC-027 | Terminalize session B, reconcile and regenerate shared views, run proportional gates, commit and push, sync beads, and write one logbook synthesis. |
+
+The midpoint review dropped Session B’s original BC-030 implementation and source-
+retrieval rows because both completed in Session A. It substituted ready BC-017 for the
+blocked BC-016 differential and reserved separate source and promotion/asymptotic lanes,
+so the second half still spans at least three independent research programs.
 
 ## Midpoint and efficiency review
 
@@ -407,11 +415,16 @@ to W7, W1, or portfolio re-screening; they do not manufacture a scientific insig
 Use sub-agents for genuinely independent work that fits inside the active phase clock:
 read-only source retrieval, an independent criterion or mutation audit, or disjoint
 implementation with non-overlapping files.
+Keep three to five bounded lanes active when the queue and runtime capacity support
+them; do not invent duplicate work merely to occupy a slot.
 Every delegation has a 10–30-minute delivery boundary and returns evidence, uncertainty,
 and one next action.
 The coordinator owns agenda mutation, shared artifacts, IDs, experiment verdicts,
 integration, commits, pushes, and long or strict gates.
 Do not have two agents write the same generated or coordination artifact.
+Treat hosted CI as asynchronous evidence: dispatch it, continue independent local work,
+and inspect it only at a declared integration or finalization boundary rather than
+polling an unchanged run inside a research slice.
 
 ## Artifact and series routing
 

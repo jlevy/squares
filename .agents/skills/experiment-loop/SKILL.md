@@ -68,6 +68,14 @@ finalization.
 Identify independent read-only or disjoint-write work that available sub-agents can run
 in parallel. One coordinator owns shared records, integration, scientific judgment,
 commits, and external updates.
+When the queue and runtime capacity permit, keep three to five sub-agents on concrete,
+bounded work rather than serializing independent source, implementation, and audit
+lanes. Do not manufacture duplicate or speculative tasks just to fill a slot.
+
+Treat long CI as asynchronous evidence, not as a work phase.
+After dispatch, record the run and continue with independent local work; check CI only
+at a declared integration or finalization boundary, and never spend an iteration slice
+polling an unchanged run.
 
 At each slice boundary, compare measured command, coordinator, and delegated elapsed
 time with the original estimates and the remaining critical path.

@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-22 (last updated 2026-08-25)
 
-**Author:** Claude (agent), for samanthadrakova@gmail.com
+**Author:** Claude (agent), for mailto:samanthadrakova@gmail.com
 
 **Status:** Complete
 
@@ -573,7 +573,7 @@ Exact values of `s(n)` known as of this research:
 | 2, 3, 4 | 2 | Classical |
 | **5** | `2 + ½√2 ≈ 2.707107` | Göbel, via **[Friedman DS7]** |
 | 6 | 3 | **[Kearney–Shiu 2002]** — first *published* proof (see the priority ledger below) |
-| 7, 8 | 3 | **[El Moumni 1999]** — earliest published proof; also **[Friedman DS7]**, **[Kearney–Shiu 2002]** |
+| 7, 8 | 3 | **[El Moumni 1999]** — earliest located publication of the result, with the printed `n = 7` route blocked by D-344/D-345; independent later proofs include **[Friedman DS7]** and **[Kearney–Shiu 2002]** |
 | 9 | 3 | Trivial (`3²`) |
 | **10** | `3 + ½√2 ≈ 3.707107` | **[Stromquist 2003]**, Thm 1 |
 | **11** | **OPEN** — in `[3.788854, 3.877084]` | — |
@@ -628,31 +628,50 @@ and attributions in secondary sources are correspondingly unreliable.
 published results in this area.”
 The ledger, as best it can be reconstructed:
 
-| Result | Claimed by | Published proof |
+| Result | Claimed by | Published proof or treatment |
 | --- | --- | --- |
-| `s(7) = s(8) = 3` | Bajmóczy, per Schrijver, per Göbel (unpublished) | **El Moumni (1999)**, *Studia Sci. Math. Hungar.* 35, 281–290 — unnoticed for years |
+| `s(7) = s(8) = 3` | Bajmóczy, per Schrijver, per Göbel (unpublished) | **El Moumni (1999)**, *Studia Sci. Math. Hungar.* 35, 281–290 — earliest located publication; its printed `n = 7` route has D-344/D-345 |
 | `s(6) = 3` | Stromquist 1984 memoranda; also Trevor Green (2000, private) — neither published | **[Kearney–Shiu 2002]** |
 | `s(10) = 3 + ½√2` | Stromquist 1984 memoranda | **[Stromquist 2003]** |
 | `s(14) = s(15) = 4`, `s(24) = 5` | Stromquist “claimed to know how to prove” (1984) | **[Friedman DS7]**; `s(15)` also El Moumni (1999) |
 | `s(11) = 3.877084…` | conjectured since 1979; never claimed as proved | **none — open** |
 | `n = 11` packing | Trump 1979; independently rediscovered many times, incl. Gustafsson–Thulin 1980 | construction only |
 
-Two consequences. First, **El Moumni holds published priority for `s(7) = s(8) = 3` and
-`s(15) = 4`**, three years before Kearney–Shiu, and is absent from most summaries of
-this field including earlier drafts of this document; Kearney–Shiu’s genuine first is
-`s(6) = 3`. Second, Stromquist’s 1984 Daniel H. Wagner Associates memoranda I–III sit
-behind a remarkable share of the claim column.
+Two consequences. First, **El Moumni is the earliest located publication asserting
+`s(7) = s(8) = 3` and `s(15) = 4`**, three years before Kearney–Shiu, and is absent from
+most summaries of this field including earlier drafts of this document.
+The printed `n = 7` proof route is not locally verified; the values have independent
+later proofs, and Kearney–Shiu’s genuine first is `s(6) = 3`. Second, Stromquist’s 1984
+Daniel H. Wagner Associates memoranda I–III sit behind a remarkable share of the claim
+column.
 
-The recovered El Moumni paper also closes the method gap. Its `n = 7` proof divides a
-hypothetical square of side `3 - α` into a near-`3 × 3` grid, selects three packed
-squares that avoid four cross points, and forces their centres into five narrow middle
-regions. A parallel-line lemma lower-bounds the total length cut from any unit square;
-three symmetry cases then end in either a length contradiction or another forced
-square. For `n = 15`, the same line-intersection lemma yields a general lower bound,
-whose direct substitution gives `s(15) = 4`. This is a finite geometric proof pattern
-worth replaying independently; it does not supply a lower bound for `n = 11`.
-They remain unpublished, but are now archived from the author’s own site.
-Memoranda I and II contain the detailed `n = 6` and `n = 10` proofs.
+The recovered El Moumni paper reveals the intended method without closing the executable
+replay gap. Its `n = 7` route divides a hypothetical square of side `3 - α` into a
+near-`3 × 3` grid, selects three packed squares that avoid four cross points, and forces
+their centres into five narrow middle regions.
+A parallel-line lemma lower-bounds the total length cut from any unit square; three
+symmetry cases then end in either a length contradiction or another forced square.
+For `n = 15`, the paper applies the same line-intersection lemma to a general lower
+bound and states that direct substitution gives `s(15) = 4`; that route was not audited
+here.
+This is a finite geometric proof pattern worth replaying independently; it does not
+supply a lower bound for `n = 11`.
+
+That replay is currently blocked by two defects in the printed `n = 7` route.
+First, Proposition 2 proves `min(2(√2 - d), 1)`, but Theorem 1 substitutes `d = 1 - ε`
+and uses `B = 2√2 - 2 + 2ε` without the minimum.
+The omission matters on the nonempty interval `(3 - 2√2)/2 < ε ≤ (2 - √2)/6`. An
+explicit source-distinct repair can retain both branches: the printed contradiction
+applies when `B ≤ 1`, while `B > 1` gives three unit contributions in total available
+length `2 - 2ε < 2`. Second, printed page 287 states `|pr| = 2√2 - 4 - ε`, which is
+negative throughout the allowed domain.
+Coordinates reconstructed from Figure 4’s definitions instead give the plausible
+candidate `3√2 - 4 - √2ε`, but that is a source-distinct correction, not a
+transcription. [D-344](../../../defects.md) and [D-345](../../../defects.md) therefore
+block a complete source-faithful control; they do not overturn the independently
+established value or alter any `n = 11` claim.
+The Stromquist memoranda remain unpublished, but are now archived from the author’s own
+site. Memoranda I and II contain the detailed `n = 6` and `n = 10` proofs.
 Memorandum III proves the `0°/45°` `n = 11` bound and, on p. 10, asserts the
 unrestricted `2 + (4/5)√5` bound without giving its point set or proof.
 It therefore supplies no missing certificate or repair for the 2003 Figure 14 gap.
@@ -1318,10 +1337,10 @@ Gensane et al. in 2004” is, read carefully, correct: *refined*, not replaced.
 **A 2023 note.** Walter Trump’s “Packing of 11 unit squares in a square with minimum
 size” is publicly available from his author site and is retained in the local archive.
 It gives the incidence description, an implicit tilt equation and a degree-8 polynomial
-in `cos φ`, then calls the 1979 configuration absolutely rigid. It also states the
-necessary boundary plainly: any improvement would require an essentially different
-geometrical arrangement. This is a local-rigidity claim about that arrangement, not a
-global-optimality proof.
+in `cos φ`, then calls the 1979 configuration absolutely rigid.
+It also states the necessary boundary plainly: any improvement would require an
+essentially different geometrical arrangement.
+This is a local-rigidity claim about that arrangement, not a global-optimality proof.
 
 **Interpretation.** Nearly fifty years of search, including modern global-optimization
 methods, has failed to beat a configuration found by hand on a pocket calculator in
@@ -1547,7 +1566,7 @@ worth recording so they are not propagated.
 | *Our own earlier draft:* Kearney–Shiu prove `n_r ≤ 27r^{3/2} + O(r²)` | **Wrong — corrected** | The bound is `27r³/2 + O(r²)` — cubic in `r`, from `p(⌈3r/2⌉)` with `p(t) = 4t³ + 4t² + 3t + 1`. A misread fraction. |
 | *Our own earlier draft:* Stromquist’s Theorem 2 is “ten unavoidable points, eleven boxes, pigeonhole” | **Wrong — corrected** | The ten points are *not* unavoidable; the proof is two-stage and finishes with twelve points of which one box must contain **three**. Same for Theorem 3. See [What Stromquist actually proved](#what-stromquist-actually-proved-2003). |
 | *Our own earlier draft:* Gensane–Ryckelynck and Nagamochi could not be retrieved | **Wrong — corrected** | Both are freely available: Springer serves the Gensane–Ryckelynck PDF openly, and Nagamochi is open access in *Electron. J. Combin.* 12 #R37. Both are now in the local archive and read. |
-| *Our own earlier draft:* Kearney–Shiu gave the first published proof for `n = 6, 7, 8, 9` | **Partly wrong — corrected** | Their first is `s(6) = 3`. **El Moumni (1999)** holds published priority for `s(7) = s(8) = 3` and `s(15) = 4`. See the [priority ledger](#priority-claims-and-what-was-actually-published). |
+| *Our own earlier draft:* Kearney–Shiu gave the first published proof for `n = 6, 7, 8, 9` | **Partly wrong — corrected** | Their first is `s(6) = 3`. **El Moumni (1999)** is the earliest located publication asserting `s(7) = s(8) = 3` and `s(15) = 4`; its printed `n = 7` route has D-344/D-345, while later independent proofs establish the values. See the [priority ledger](#priority-claims-and-what-was-actually-published). |
 
 The third row is a useful caution: at least one automated summarizer produced
 self-contradictory arithmetic while citing a correct source.
@@ -1707,9 +1726,10 @@ covers two values of `n`. Any program should be weighted accordingly.
 ### Foundations: finish the archive and the survey
 
 1. **Retrieve the remaining primaries.** El Moumni (1999) and Trump (2023) are now
-   archived with source-faithful notes. The remaining priority routes are
-   Chung–Graham (2009 and 2020) and Arslanov–Bui (2025), each under the three-format
-   archive discipline in [`resources/`](../../../resources/README.md).
+   archived with source-faithful notes.
+   The remaining priority routes are Chung–Graham (2009 and 2020) and Arslanov–Bui
+   (2025), each under the three-format archive discipline in
+   [`resources/`](../../../resources/README.md).
 2. **Machine-readable record corpus.** A first version now exists:
    [`frontier/`](../../../frontier/README.md) carries one schema-validated artifact per
    `n ≤ 100`, built by parsing the catalogue’s *prose* for upper bounds and computing
@@ -1839,10 +1859,12 @@ Every item in the proof lane above exists because of this.
   constant the paper does not contain.
   See [the asymptotic section](#asymptotic-theory-and-why-it-does-not-help).
 - [x] ~~Obtain El Moumni (1999), *Studia Sci.
-  Math. Hungar.* **35** 281–290~~ — **resolved**: the Hungarian Academy's REAL-J
-  archive serves the full volume, and the retained article pages prove `s(7) = 3` and
-  `s(15) = 4` by center forcing, line-intersection lower bounds, and finite symmetry
-  cases. The method is recorded here without transferring it to `n = 11`.
+  Math. Hungar.* **35** 281–290~~ — **resolved**: the Hungarian Academy’s REAL-J archive
+  serves the full volume.
+  The retained article states `s(7) = 3` and `s(15) = 4` and presents center forcing,
+  line-intersection bounds, and finite symmetry cases; D-344 and D-345 block a
+  source-faithful replay of its printed `n = 7` route.
+  The method is recorded here without transferring it to `n = 11`.
 - [x] ~~Obtain Stromquist’s 1984 Wagner Associates memoranda I–III~~ — **resolved**: all
   three PDFs are linked from the author’s publication page and are retained with raw OCR
   and page-checked reading aids; Git records changes to those repository-owned files.
@@ -1850,10 +1872,10 @@ Every item in the proof lane above exists because of this.
   `2 + (4/5)√5` statement is only an assertion and does not repair the printed 2003
   Figure 14 cover.
 - [x] ~~Obtain the full text of the March 2023 “Packing of 11 unit squares in a square
-  with minimum size” note~~ — **resolved**: the author's site serves the public PDF.
-  ResearchGate's blocked route is no longer relevant. The note supports the incidence
-  description, the degree-8 angle relation, and local rigidity of that arrangement;
-  it does not prove global optimality.
+  with minimum size” note~~ — **resolved**: the author’s site serves the public PDF.
+  ResearchGate’s blocked route is no longer relevant.
+  The note supports the incidence description, the degree-8 angle relation, and local
+  rigidity of that arrangement; it does not prove global optimality.
 - [ ] Read the “crucial relation” of **[Gensane–Ryckelynck 2005]** off the PDF directly:
   its displayed fraction does not survive text extraction unambiguously, and the
   reconstruction attempted here does not reproduce `s(11)` under any normalization
@@ -1888,10 +1910,10 @@ tables below are generated from it.
 
 **Re-test this list rather than inheriting it.** A “not retrievable” verdict is a
 negative search result, and this document has now made that error eight times.
-The latest corrections are El Moumni’s article in a public Hungarian Academy volume
-scan and Trump’s note on his own site. Earlier corrections include Markót at PMC,
-Roth–Vaughan supplied on request, and Stromquist’s memoranda on the author’s publication
-page.
+The latest corrections are El Moumni’s article in a public Hungarian Academy volume scan
+and Trump’s note on his own site.
+Earlier corrections include Markót at PMC, Roth–Vaughan supplied on request, and
+Stromquist’s memoranda on the author’s publication page.
 
 <!-- BEGIN GENERATED: sources-recovered (devtools.render_research_tables) -->
 
@@ -1902,9 +1924,9 @@ page.
 | **[Gensane–Ryckelynck 2005]** Improved Dense Packings of Congruent Squares in a Square | Springer serves the PDF openly at its /content/pdf/ URL; the earlier attempt fetched the article landing page. |
 | **[Nagamochi 2005]** Packing Unit Squares in a Rectangle | Open access in Electron. J. Combin.; cited by exact title in the archived DS7 reference list all along. |
 | **[Wang–Dong–Li 2016]** A New Result on Packing Unit Squares into a Large Square | On arXiv. |
-| **[Stromquist 1984]** Packing Unit Squares Inside Squares, I-III | The author's official publication page at https://www.walterstromquist.com/publications.html links squares1.pdf, squares2.pdf and squares3.pdf directly; "unpublished" described their publication status, not their present-day retrievability. |
-| **[El Moumni 1999]** Optimal Packings of Unit Squares in a Square | The Hungarian Academy's REAL-J institutional repository publicly serves the complete published volume at https://real-j.mtak.hu/5478/; the article is PDF pages 287-296 (printed pages 281-290). The full source scan and faithful text extraction are retained locally. No article DOI was verified. |
-| **[Trump 2023]** Packing of 11 unit squares in a square with minimum size | Walter Trump's public author page at https://trump.de/square-packing/index.htm links the full PDF directly. The author copy and faithful text extraction are retained locally; ResearchGate's blocked download is no longer the acquisition route. |
+| **[Stromquist 1984]** Packing Unit Squares Inside Squares, I-III | The author’s official publication page at https://www.walterstromquist.com/publications.html links squares1.pdf, squares2.pdf and squares3.pdf directly; “unpublished” described their publication status, not their present-day retrievability. |
+| **[El Moumni 1999]** Optimal Packings of Unit Squares in a Square | The Hungarian Academy’s REAL-J institutional repository publicly serves the complete published volume at https://real-j.mtak.hu/5478/; the article is PDF pages 287-296 (printed pages 281-290). The full source scan and faithful text extraction are retained locally. No article DOI was verified. |
+| **[Trump 2023]** Packing of 11 unit squares in a square with minimum size | Walter Trump’s public author page at https://trump.de/square-packing/index.htm links the full PDF directly. The author copy and faithful text extraction are retained locally; ResearchGate’s blocked download is no longer the acquisition route. |
 
 <!-- END GENERATED: sources-recovered -->
 
@@ -1918,14 +1940,14 @@ in place of the PDF on a re-test, not that access was assumed to be blocked.
 
 | Source | Year | Where | Obstacle | What rests on it |
 | --- | --- | --- | --- | --- |
-| **[Arslanov–Bui 2025]** Note on "efficient packings of unit squares in a large square" | 2025 | Discrete Comput. Geom. | paywall | Current continuation of the Kearney-Shiu delta_n / n_r line. |
-| **[Plakhta 2021]** Configuration spaces of squares in a rectangle | 2021 | Algebraic & Geometric Topology 21, 1445-1478 | bot-blocked | H-032's literature routing for affine Morse-Bott analysis of square configuration spaces in a rectangle; it is context and method, not a classification of the exact optimal-moduli spaces asked there. |
+| **[Arslanov–Bui 2025]** Note on “efficient packings of unit squares in a large square” | 2025 | Discrete Comput. Geom. | paywall | Current continuation of the Kearney-Shiu delta_n / n_r line. |
+| **[Plakhta 2021]** Configuration spaces of squares in a rectangle | 2021 | Algebraic & Geometric Topology 21, 1445-1478 | bot-blocked | H-032’s literature routing for affine Morse-Bott analysis of square configuration spaces in a rectangle; it is context and method, not a classification of the exact optimal-moduli spaces asked there. |
 | **[Chung–Graham 2009]** Packing equal squares into a large square | 2009 | J. Combin. Theory Ser. A 116, 1167-1175 | paywall | The O(x^{(3+sqrt(2))/7} log x) step in the asymptotic chain. |
-| **[Chung–Graham 2020]** Efficient packings of unit squares in a large square | 2020 | Discrete Comput. Geom. | paywall | The claimed O(x^{3/5}) bound that McClenagan states "has an error in it". Reading it would let us describe the error rather than relay the claim. |
+| **[Chung–Graham 2020]** Efficient packings of unit squares in a large square | 2020 | Discrete Comput. Geom. | paywall | The claimed O(x^{3/5}) bound that McClenagan states “has an error in it”. Reading it would let us describe the error rather than relay the claim. |
 | **[Gardner 1979]** Mathematical Games | 1979 | Scientific American, Oct 1979 (also Nov 1979, Mar 1980, Nov 1980) | print only | Origin of the conjecture Stromquist settled. |
 | **[BSST 1940]** The dissection of rectangles into squares | 1940 | Duke Math. J. 7, 312-340 | paywall | The Smith-diagram correspondence, currently sourced to squaring.net -- an excellent specialist source but a secondary one. The rationality argument that makes the non-transferability section decisive does not depend on it. |
 | **[Markót 2004]** Optimal Packing of 28 Equal Circles in a Unit Square - The First Reliable Solution | 2004 | Numerical Algorithms | paywall | Calibration only. Its successor, Markót 2021, is archived and carries the same method at n = 31, 32, 33. |
-| **[Gustafsson–Thulin 1980]** Problem Ronden | 1980 | Ronden (Swedish periodical), Apr/Sep/Dec 1980 | obscure periodical | The independent 1980 rediscovery of Trump's packing. Priority is Trump's regardless; this would only settle the rediscovery's details. |
+| **[Gustafsson–Thulin 1980]** Problem Ronden | 1980 | Ronden (Swedish periodical), Apr/Sep/Dec 1980 | obscure periodical | The independent 1980 rediscovery of Trump’s packing. Priority is Trump’s regardless; this would only settle the rediscovery’s details. |
 | **[Hämäläinen 1980]** Correspondence, 20 April 1980 | 1980 | private correspondence | private correspondence | The optimal 45-degree packing of 11 squares realising the Theorem 3 bound. |
 
 <!-- END GENERATED: sources-unretrieved -->
@@ -1942,15 +1964,16 @@ Recovering Stromquist’s memoranda closes the largest provenance gap, but the m
 do not close the 2003 proof gap: Memo III asserts the unrestricted lower bound without
 the mechanism needed to check it.
 Exp-017 instead supplies an explicitly source-distinct exact repair.
-The highest-priority remaining acquisitions are Arslanov–Bui (2025) and the
-Chung–Graham 2009/2020 asymptotic papers.
-El Moumni (1999) and Trump (2023) are now retained; their source-faithful conclusions
-remain bounded to the published small-`n` proofs and one arrangement's local structure.
+The highest-priority remaining acquisitions are Arslanov–Bui (2025) and the Chung–Graham
+2009/2020 asymptotic papers.
+El Moumni (1999) and Trump (2023) are now retained; the claims visible in those sources
+remain bounded to the published small-`n` statements and one arrangement’s local
+structure.
 
 ## Methodology
 
-Research began on 2026-08-22 by web search and direct retrieval of primary sources,
-with a source-recovery update on 2026-08-27 and numerical or symbolic checks where the
+Research began on 2026-08-22 by web search and direct retrieval of primary sources, with
+a source-recovery update on 2026-08-27 and numerical or symbolic checks where the
 document makes such a claim.
 
 **Primary sources retrieved in full.** Stromquist’s 2003 paper was downloaded as PDF and
@@ -1976,7 +1999,7 @@ impossible constants.
 
 **Sources that could not be retrieved.** Several primaries remain unavailable through
 the routes checked, including the Chung–Graham papers, Arslanov–Bui (2025), the BSST
-1940 paper, Gardner's print column, and Hämäläinen's correspondence.
+1940 paper, Gardner’s print column, and Hämäläinen’s correspondence.
 Claims that still rest on secondary reporting are marked as such and flagged in
 [Open Questions](#open-questions).
 
@@ -2145,13 +2168,15 @@ explicitly bounded reading aids and unedited raw OCR.
   research recorded it as unlocated, which was wrong.
 - **[El Moumni 1999]** — Said El Moumni, “Optimal Packings of Unit Squares in a Square,”
   *Studia Sci. Math. Hungar.* **35** (1999), no.
-  3–4, 281–290. [Institutional volume scan](https://real-j.mtak.hu/5478/), article at PDF
-  pages 287–296; local `papers/el-moumni-1999-optimal-packings-unit-squares`. Proves
-  `s(7) = s(8) = 3` and `s(15) = 4` and holds published priority for those three values.
+  3–4, 281–290. [Institutional volume scan](https://real-j.mtak.hu/5478/), article at
+  PDF pages 287–296; local `papers/el-moumni-1999-optimal-packings-unit-squares`. This
+  is the earliest located publication asserting `s(7) = s(8) = 3` and `s(15) = 4`; D-344
+  and D-345 block a source-faithful replay of its printed `n = 7` route, while later
+  independent proofs establish the values.
 - **[Trump 2023]** — Walter Trump, “Packing of 11 unit squares in a square with minimum
   size.” [Author page](https://trump.de/square-packing/index.htm) · local
   `papers/trump-2023-packing-11-unit-squares`. The retained author copy describes the
-  displayed arrangement's local rigidity; it does not establish global optimality.
+  displayed arrangement’s local rigidity; it does not establish global optimality.
 - **[Gardner 1979]** — Martin Gardner, “Mathematical Games,” *Scientific American*,
   October 1979 (also Nov 1979, Mar 1980, Nov 1980). Origin of the conjecture.
   **[not retrieved]** — print.

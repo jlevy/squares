@@ -1538,7 +1538,7 @@ session:
       Commit and push the reconciled checkpoint, then measure the elapsed work,
       validation, recovery, and delegation costs since the last W5 inventory and choose
       the next research slice under BC-028 and think-kdil.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       The integration checkpoint is coherent and the campaign has accumulated more than
@@ -1559,14 +1559,362 @@ session:
     fallback: >-
       Record the first checkpoint blocker, preserve the measured timings, and allocate
       one bounded repair slice instead of opening new research.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Rejected another row-jet optimization slice because the remaining session has no
+      planned complete exact-group invocation and cannot repay its estimated build and
+      validation cost. Recovery, not scientific execution, was the dominant active
+      cost, so adopted an owner-aware changed-file preflight before one integration gate
+      and selector-only reruns after formatting-only repairs.
+    evidence:
+    - The 71-minute post-W5 window produced two primary sources, one n=11 robust-rational tool control giving only a nearby exact feasible upper bound, an exact Bui count, and exact Lemmas 3–5.
+    - Recovery consumed about 21 of the 29 integration minutes after a broad formatter and Bash-incompatible cleanup command.
+    - Three fast-gate attempts accumulated 284.05 command-seconds; two complete behavioral passes duplicated about 195 seconds.
+    - A 4.45-second narrow Ruff repair would have prevented the final 98-second failed gate; the owner-aware preflight repays on its first avoided failure.
+    - Recorded integration command parallelism reduced 260.30 serial seconds to 128.09 wall seconds; auditor and hosted-CI savings remain numerically unavailable.
+    stop_reason: >-
+      The optimization rejection, dominant cost, repayment arithmetic, and one
+      immediately profitable process correction are explicit, so W5 closed early.
     next_action: >-
-      Re-render and check the session record, explicitly stage and push the coherent
-      checkpoint, then inventory the last two hours before choosing the next lane.
+      Run the bounded BC-016 aligned/glued deterministic differential under think-3yv8,
+      then give any valid or typed-instability result an immediate W3 disposition.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Execute BC-016 as one target-free deterministic differential over the existing
+      aligned and glued proved controls, declared pool widths one and ten, and the
+      predeclared toolchain matrix, retaining endpoint and canonical active-cell
+      identity or the first typed instability.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      W5 rejected further performance work, BC-030 selected BC-016 as its highest-
+      information correctness successor, and the checkpoint is clean and pushed.
+    budget_minutes: 20
+    started_at: '2026-08-27T01:59:50-07:00'
+    deadline_at: '2026-08-27T02:19:50-07:00'
+    expected_output: >-
+      A retained target-free aligned-stratum differential with per-row endpoint and
+      canonical active-cell identity, or a typed blocker naming an unfrozen toolchain
+      matrix or unstable row.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_aligned_stratum_differential.py
+    kill_condition: >-
+      Stop after five minutes if the exact toolchain matrix cannot be recovered from
+      authoritative records; stop on the first endpoint or active-cell disagreement,
+      and do not improvise a toolchain, run n=11, search, or emit geometry, feasibility,
+      H-044, or H-045 claims.
+    fallback: >-
+      Record the missing matrix owner or first unstable row under think-3yv8, keep
+      BC-018 blocked, and move directly to W3 without extending the slice.
+    outcome: >-
+      Stopped with typed blocker `toolchain_matrix_unfrozen`. Pool widths one and ten
+      are declared, but no authoritative record names peer toolchain ids, runtime and
+      solver fingerprints, execution commands, or the aligned/glued rows each arm must
+      replay. No differential, code, n=11 run, or scientific verdict was produced.
+    evidence:
+    - The original BC-016 commit and every current agenda, spec, session, source, test, and CI record use only the undefined phrase `declared toolchains`.
+    - Production `highs-ipm` is a status-4-only fallback inside the SciPy/HiGHS path, not a declared peer arm.
+    - Linux and macOS CI jobs are supported environments, not a frozen portability matrix.
+    - Three independent audits agreed that guessing either comparison would change the experiment contract.
+    stop_reason: >-
+      The exact toolchain matrix was not recoverable within the five-minute entry cap,
+      so the predeclared kill condition fired before implementation.
+    next_action: >-
+      Use W3 to freeze the minimum matrix contract and route its ownership through the
+      open D-059 portability line before any future TDD comparator slice.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Interpret BC-016's entry blocker, freeze the smallest admissible peer-toolchain
+      declaration, assign its owner, and select the next bounded lane without pretending
+      a missing instrument is a scientific result.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      BC-016 stopped at entry because its toolchain matrix was never declared; W3 is
+      required before reordering the remaining final-hour portfolio.
+    budget_minutes: 10
+    started_at: '2026-08-27T02:03:09-07:00'
+    deadline_at: '2026-08-27T02:13:09-07:00'
+    expected_output: >-
+      A minimum matrix contract, explicit owner and blocker relation, and one next lane
+      that fits before the 02:48 finalization reserve.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop on any attempt to name unmeasured toolchains, treat pool width as a
+      toolchain, force the production fallback as a peer arm, or start another lane
+      before the blocker and ownership are durable.
+    fallback: >-
+      Keep BC-016 blocked under think-3yv8 and D-059, preserve BC-018 as blocked, and
+      enter finalization if no independent lane still fits the clock.
+    outcome: >-
+      Froze the smallest future comparison contract around the existing Linux and macOS
+      workflow routes, actual runtime fingerprints, pool widths one and ten, three named
+      target-free row ids, `LP_FEASIBLE_EPS`, and a symbolic complete tied-axis label.
+      The deeper inventory found that the named golden rows do not retain their input
+      poses, n=16 has only a value guard, terminal tie provenance is absent, and glued
+      rows are not executable, so BC-016 remains locally instrument-blocked. Its narrow
+      receipt stays under think-3yv8 while D-059/think-osyp keeps the broader stochastic
+      portability question.
+    evidence:
+    - All three independent reviews rejected forced `highs-ipm`, inferred pool-width semantics, or undeclared environment arms.
+    - The future receipt must cover every route-width-row product and independently recompute settlement, value guards, endpoint floor, and symbolic tie-set equality.
+    - The current golden retains n=5/n=10 scalar rows without poses or cells; no executable n=16 or glued-row input exists.
+    - BC-018 remains blocked, n=11 is removed from this target-free control, and no BC-016 execution or result is claimed.
+    stop_reason: >-
+      The missing contract is now narrow and owned, and the remaining local fixture and
+      label prerequisites are explicit; further BC-016 implementation does not fit this
+      final-hour rotation.
+    next_action: >-
+      Use the remaining pre-reserve research window for the independent El Moumni n=7
+      source-faithful proof-control lane under think-trkj.
+  - workflow: research-pass
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Reconstruct El Moumni's published n=7 lower-bound argument from the retained scan,
+      encode the smallest independently replayable Proposition 1, Proposition 2, and
+      three-case control, and require a threshold or case-route mutation to reject.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      BC-016 is typed instrument-blocked; source recovery made think-trkj the highest-
+      information independent lane that fits before the finalization reserve.
+    budget_minutes: 25
+    started_at: '2026-08-27T02:05:18-07:00'
+    deadline_at: '2026-08-27T02:30:18-07:00'
+    expected_output: >-
+      A source-faithful executable n=7 proof control with one adversarial rejection, or
+      a typed transcription blocker naming the first proposition or case that cannot be
+      independently reconstructed from the retained scan.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_el_moumni_n7_lower_bound.py
+    kill_condition: >-
+      Stop after ten minutes if the source's variables, strict inequalities, or case
+      routing cannot be transcribed without guesswork; do not substitute Friedman's
+      later proof, open n=15, or infer n=11, general unavoidable-set automation,
+      generated-scaffold feasibility, or new optimality results.
+    fallback: >-
+      Retain a proposition-level transcription packet and the first exact ambiguity
+      under think-trkj, without code or a mathematical verdict, then move to W3.
+    outcome: >-
+      Stopped with typed blocker `source_formula_blocked`. The retained scan prints an
+      impossible negative segment length in Cases 2 and 3 and drops Proposition 2's
+      minimum branch in Case 1. The latter has an exact two-branch repair; the former
+      has only a coordinate-derived candidate correction, so no code or theorem verdict
+      was admitted.
+    evidence:
+    - Printed page 287 states `|pr| = 2 sqrt(2) - 4 - epsilon`, which is negative over the entire allowed epsilon range.
+    - Figure 4's definitions independently yield the plausible but source-distinct candidate `3 sqrt(2) - 4 - sqrt(2) epsilon`.
+    - Proposition 2 proves `min(B, 1)`, while Theorem 1 uses `B` directly on a nonempty part of the stated epsilon domain where `B > 1`.
+    - Three independent audits agreed that neither correction may be silently attributed to the printed proof.
+    stop_reason: >-
+      The ten-minute transcription kill condition fired at the first source formula that
+      could not be replayed without an undeclared repair.
+    next_action: >-
+      Record both source defects, preregister the smallest repair packet, and leave the
+      full n=7 theorem replay blocked until the coordinate correction is independently
+      derived and audited.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Interpret the two El Moumni source defects, separate exact repair from conjectural
+      correction, and preregister the smallest future proof packet without manufacturing
+      a published-proof verdict.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The source-faithful replay stopped at two independent printed gaps, so W3 must
+      determine their information value and the next bounded control before finalization.
+    budget_minutes: 10
+    started_at: '2026-08-27T02:14:35-07:00'
+    deadline_at: '2026-08-27T02:24:35-07:00'
+    expected_output: >-
+      Two durable source-defect records, an exact source-distinct Case 1 branch repair, a typed
+      source-distinct Cases 2 and 3 repair criterion, and one bounded successor slice.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen python -m devtools.validate_schemas
+      && uv run --directory explorations/packing --frozen python -m devtools.check_synopsis
+    kill_condition: >-
+      Stop on any claim that the candidate segment formula is printed, that the complete
+      theorem is replayed, or that the n=7 result changes n=11, feasibility, generic
+      proof synthesis, or source priority.
+    fallback: >-
+      Keep think-trkj blocked on the first unverified dependency and enter finalization
+      with the exact source pages and formula disagreement retained.
+    outcome: >-
+      Separated the printed gaps into D-344 and D-345. The Proposition 2 minimum
+      omission admits an exact source-distinct two-branch Case 1 repair; the Figure 4 segment formula
+      remains a source-distinct candidate that requires an independent coordinate
+      derivation and downstream route audit. Selected only the exact source-distinct Case 1 packet and
+      a printed-formula rejection for the remaining pre-reserve W7 slice.
+    evidence:
+    - For `B <= 1`, the printed Case 1 inequality forces `6 sqrt(2) < 8`, contradicting `sqrt(2) > 4/3`.
+    - For `B > 1`, Proposition 2 contributes one on each of the three required terms, exceeding total line length `2 - 2 epsilon < 2`.
+    - The stated epsilon upper bound exceeds the branch threshold, so an unbranched substitution is not source-faithful.
+    - The candidate Figure 4 correction remains explicitly unadopted and cannot support a complete Theorem 1 verdict.
+    stop_reason: >-
+      The exact and conjectural obligations, claim boundary, and one bounded successor
+      are explicit, so W3 closed before its ten-minute ceiling.
+    next_action: >-
+      Build the exact Case 1 branch certificate and printed-negative-length mutation;
+      do not implement Proposition 1 or Cases 2 and 3.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Encode the exact source-distinct Case 1 minimum-branch repair and a mutation that
+      rejects the printed negative Figure 4 length, without claiming the full n=7 proof.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      W3 found one exact local repair that fits before the finalization reserve while
+      keeping the conjectural Cases 2 and 3 correction closed.
+    budget_minutes: 20
+    started_at: '2026-08-27T02:17:42-07:00'
+    deadline_at: '2026-08-27T02:37:42-07:00'
+    expected_output: >-
+      One exact Q(sqrt(2)) Case 1 certificate, typed rejection of the source's
+      unbranched substitution, and typed rejection of its negative segment formula.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_el_moumni7_case1.py
+    kill_condition: >-
+      Stop before 02:37:42 or on any need to infer diagram incidence, Proposition 1,
+      Cases 2 and 3, the full theorem, n=15, n=11, generic automation, geometry, or
+      packing feasibility.
+    fallback: >-
+      Retain the red test and exact missing invariant under think-trkj, then enter
+      finalization without widening the implementation.
+    outcome: >-
+      Added an exact Q(sqrt(2)) Case 1 certificate that preserves both Proposition 2
+      minimum branches, proves the source domain crosses their threshold, and refuses
+      both an unbranched substitution and a deleted contribution. Added a separate
+      typed refusal for the printed negative Figure 4 length; no Figure 4 repair or
+      full-theorem result was encoded.
+    evidence:
+    - The test-first run failed at import because the case module did not exist.
+    - Seven focused tests pass in 0.02 seconds, including the unbranched, deleted-contribution, printed-negative-length, and inexact-input controls.
+    - Focused Ruff and format checks pass, and BasedPyright reports zero errors or warnings.
+    - The certificate conclusion is explicitly `case-1-repair-only` and exposes no geometry or packing-feasibility result.
+    stop_reason: >-
+      The exact local repair and requested adversarial refusals are green, so W7 closed
+      eighteen minutes before its ceiling without opening Cases 2 and 3.
+    next_action: >-
+      Enter finalization, integrate the three independent audits, regenerate shared
+      views, run proportional checks, update think-trkj, and push the coherent midpoint.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: work
+    focus: process
+    objective: >-
+      Conduct the substantive midpoint review, integrate independent audits, regenerate
+      durable views, and prepare a coherent terminal checkpoint and explicit session-B
+      portfolio decision for the finalization reserve.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The bounded Case 1 repair is green and no additional scientific lane may start
+      before the 02:48:23 finalization reserve.
+    budget_minutes: 28.5667
+    started_at: '2026-08-27T02:19:49-07:00'
+    deadline_at: '2026-08-27T02:48:23-07:00'
+    expected_output: >-
+      Accepted independent audits, exact midpoint throughput and portfolio inventory,
+      current generated views and bead state, and a terminalization checklist that fits
+      the reserved final phase without waiting on hosted CI.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen python -m devtools.validate_schemas
+      && uv run --directory explorations/packing --frozen packing-ledger check
+      && uv run --directory explorations/packing --frozen python -m devtools.check_synopsis
+    kill_condition: >-
+      Stop on stale generated views, less than 4 GiB before a long gate, an audit
+      rejection, claim-boundary drift, or work outside the changed-file owner surface;
+      enter the finalization phase at the reserve boundary and do not wait on hosted CI.
+    fallback: >-
+      Preserve the first named blocker and carry it into finalization; do not open
+      session B or another research target until session A is coherent.
+    outcome: >-
+      Completed the substantive midpoint review: BC-027 is terminal, BC-029 remains a
+      typed instrument blocker, BC-030 is complete, and the source, promotion, and
+      asymptotic lanes all produced bounded exact controls or explicit blockers. Recut
+      Session B to start ready BC-017, retain three independent programs, and preserve
+      the final efficiency and synthesis checkpoints.
+    evidence:
+    - The known long and repeated integration commands account for at least 680.93 command-seconds; the longest command was the 268.79-second mutation catalogue.
+    - Two complete behavioral passes duplicated about 195 seconds inside three fast-gate attempts, and recovery from a broad formatter plus Bash-incompatible command consumed about 21 of 29 integration minutes.
+    - >-
+      Session A retained scientific or pipeline evidence in every two-hour interval:
+      BC-027 and exp-045 instrumentation, BC-030 plus source and exact controls, then
+      BC-016 and El Moumni blocker/repair packets.
+    - Session B sums to exactly 300 minutes, keeps every phase within 10–30 minutes, schedules W5 and post-result W3 reviews, and spans constructive, source, and promotion/asymptotic programs.
+    - Three parallel read-only audits accepted the terminal checklist, claim boundaries, and first BC-017 falsifier; free space remained above the 4 GiB long-gate floor.
+    - The standard experiment-loop guidance now requires three-to-five bounded lanes when capacity permits and treats unchanged hosted CI as asynchronous evidence rather than an iteration phase.
+    stop_reason: >-
+      The midpoint portfolio, performance inventory, independent audits, durable process
+      guidance, and Session B decision are complete at the reserved boundary.
+    next_action: >-
+      Enter the reserved finalization phase, reconcile generated views and bead state,
+      and publish the coherent Session A checkpoint without waiting on hosted CI.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: finalization
+    focus: process
+    objective: >-
+      Terminalize Session A, regenerate every dependent coordination view, run the
+      proportional changed-file assurance surface, sync beads, publish the checkpoint,
+      and leave an exact BC-017 Session B handoff.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The 02:48:23 finalization reserve has begun with the midpoint review and all three
+      independent preflight audits complete.
+    budget_minutes: 30
+    started_at: '2026-08-27T02:48:23-07:00'
+    deadline_at: '2026-08-27T03:18:23-07:00'
+    expected_output: >-
+      A terminal session, current ledger/defect/synopsis views, green focused checks,
+      synced beads, a pushed clean checkpoint, and a truthful Session B launch route.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen python -m devtools.validate_schemas
+      && uv run --directory explorations/packing --frozen packing-ledger check
+      && uv run --directory explorations/packing --frozen python -m devtools.check_synopsis
+    kill_condition: >-
+      Stop on a stale generated view, an active phase at terminal state, less than 4 GiB
+      before any long gate, claim drift, or an unrelated file; do not wait on hosted CI.
+    fallback: >-
+      Retain the first named blocker in a terminal stopped session and do not open
+      Session B until the checkpoint is coherent.
+    outcome: >-
+      Terminalized the midpoint record, reconciled the ledger, defects, source note,
+      agendas, and synopsis, retained the bounded El Moumni Case 1 control, and froze a
+      single target-free BC-017 launch route. The checkpoint used proportional local
+      assurance only and did not wait on hosted CI.
+    evidence:
+    - Seven exact El Moumni controls pass with Ruff, formatting, and BasedPyright green.
+    - All enforced campaign artifacts validate; the ledger, synopsis, research tables, and 345-defect generated view agree.
+    - Three selected coordination gate steps pass, and the changed-file diff has no whitespace errors or unrelated temporary output.
+    - The durable experiment-loop and agenda now preserve three-to-five bounded parallel lanes when capacity permits and asynchronous CI handling.
+    - Think-trkj and think-3yv8 retain their typed blockers; Session B is routed only to BC-017 under think-u97a.
+    stop_reason: >-
+      All terminal records, proportional checks, bead routes, and the next-session
+      boundary are coherent inside the finalization reserve.
+    next_action: >-
+      Open Session B with the fifteen-minute BC-017 W3 falsifier under think-u97a; do not
+      infer geometry, feasibility, or a broader quench fix from the execution receipt.
   primary_bead: think-whwc
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 300
     max_cycles: 48
@@ -1588,7 +1936,11 @@ session:
       Session 025 and the merged PR are terminal, but BC-027 still lacks a mutation
       control for the validation gate's misleading first-failure behavior; no scientific
       agenda cell may start until that boundary is green.
-    after: null
+    after: >-
+      Session A terminally completes BC-027, retains exp-045 as an instrument blocker,
+      completes the target-free BC-030 control, records bounded source and exact proof
+      controls under BC-031/032/034, and types BC-016's missing instrument. Session B is
+      recut to three programs and begins with BC-017 under think-u97a.
   delegations:
   - task: Independently audit the multi-command validation failure path and mutation boundary.
     operator: gate_failure_audit
@@ -1813,16 +2165,158 @@ session:
     elapsed_quality: unavailable
     next_action: Rank route-sign derivation and asymptotic validation before the remaining driver mutations.
     phase: 7
+  - task: Audit the retained El Moumni scan and exact transcription boundary.
+    operator: exp045_instrument_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Confirmed the printed negative Figure 4 length and the dropped Proposition 2
+      minimum branch, verified the exact source-distinct Case 1 repair, and accepted the
+      final qualified source wording after requiring the unaudited n=15 route to remain
+      source-attributed.
+    evidence:
+    - Printed page 287 literally gives the negative segment expression retained in D-344.
+    - The source epsilon domain crosses the B=1 threshold by exact positive width `(5 sqrt(2) - 7)/6`.
+    - The research note now labels both repairs source-distinct and treats publication priority as priority of the located statement, not a locally verified proof.
+    files:
+    - resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf
+    - docs/project/research/research-2026-08-22-packing-11-unit-squares.md
+    checks:
+    - Visual scan audit over printed pages 282 through 288 plus independent exact algebra.
+    uncertainty: The Figure 4 candidate correction and all downstream Cases 2 and 3 incidences remain unverified.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Keep think-trkj blocked until the source-distinct Figure 4 repair is independently derived and replayed.
+    phase: 38
+  - task: Audit the El Moumni Case 1 implementation and mutation scope.
+    operator: exp045_readiness
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted the exact Q(sqrt(2)) constants, both minimum branches, source-formula
+      refusal, mutations, and Case-1-only claim boundary without requesting a long gate.
+    evidence:
+    - The epsilon upper bound, B=1 threshold, positive branch gap, and low-branch contradiction margin match the source algebra exactly.
+    - The high branch compares three unit contributions with strict available length below two.
+    - Dropped-minimum, deleted-contribution, negative-length, and inexact-input mutations all exercise production helpers.
+    files:
+    - cases/small_n/el_moumni7.py
+    - tests/test_el_moumni7_case1.py
+    checks:
+    - Independent read-only exact-algebra and claim-scope audit.
+    uncertainty: Proposition 1, Figure 4 incidences, Cases 2 and 3, and the full theorem remain outside this accepted slice.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain the local control and do not promote it to a complete n=7 proof.
+    phase: 40
+  - task: Audit final agenda, defect, synopsis, and session consistency.
+    operator: exp045_record_review
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted the corrected BC-016 route identifiers and blocked state, current
+      agenda-003 portfolio, synopsis handoff, and D-344/D-345 metadata after identifying
+      and repairing two final remnants.
+    evidence:
+    - Agenda-002 now distinguishes blocked BC-016, ready BC-017/019/024, and complete BC-023.
+    - D-344 and D-345 are flattering source-inspection findings with actual focused regressions.
+    - Every newly added workflow phase uses a schema-allowed entry reason.
+    files:
+    - campaign/agendas/agenda-002-constructive-enumeration-groundwork.md
+    - campaign/agendas/agenda-003-balanced-ten-hour-research-program.md
+    - campaign/agent-sessions/session-026-balanced-research-session-a.md
+    - defects.yaml
+    - SYNOPSIS.md
+    checks:
+    - Independent read-only record and claim-boundary audit.
+    uncertainty: Generated views still require final render and check after terminalizing the session.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Render and validate the terminal session and generated views in the finalization reserve.
+    phase: 41
+  - task: Audit the exact Session A terminalization contract and proportional check order.
+    operator: exp045_readiness
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Confirmed that the remaining commit blockers are record-only: terminal phase and
+      session fields, current handoff wording, generated ledger reconciliation, and
+      proportional changed-file checks.
+    evidence:
+    - The scoped diff is clean, no temporary output remains, and no long or hosted CI gate is required.
+    - The final phase must begin no earlier than the reserved 02:48:23 offset-aware boundary.
+    files: []
+    checks:
+    - Read-only session-schema and generated-view contract audit.
+    uncertainty: The terminal receipts must still be written and rendered after the reserve begins.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Coordinator enters the reserved final phase and applies the audited terminal checklist.
+    phase: 41
+  - task: Re-audit claim boundaries and generated views before Session A terminalization.
+    operator: exp045_instrument_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted the current El Moumni, BC-016, defect, synopsis, and handoff wording with
+      no categorical promotion; only the ordinary active-to-terminal transition remains.
+    evidence:
+    - The n=7 Case 1 control remains source-distinct and local, and the Figure 4 repair remains unadopted.
+    - BC-016 remains blocked while target-free BC-017 under think-u97a is the sole next lane.
+    files: []
+    checks:
+    - Defect render check, synopsis check, ledger check, and diff check passed read-only.
+    uncertainty: The generated ledger and synopsis must be rerendered after the session status changes.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preserve every claim boundary while terminalizing and launching BC-017.
+    phase: 41
+  - task: Shape the first falsifiable BC-017 question without opening Session B early.
+    operator: exp045_record_review
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Defined a target-free execution-receipt seam that distinguishes wall, contact,
+      and nonedge rows and derives actual work counters without retaining geometry or a
+      feasibility result.
+    evidence:
+    - Existing realization and quench paths omit or collapse required full-cell semantics and cannot be wrapped as a truthful BC-017 receipt.
+    - The first slice can separately retain three compiled pair rows, zero dynamic pair tests, and actual injected LP attempts on the frozen n=3 control.
+    files: []
+    checks:
+    - Read-only comparison of the BC-017 bead, full-cell labeler, local realization, quench solver, and Session B agenda.
+    uncertainty: The first W3 slice must decide whether a complete tagged plan can remain target-free before implementation.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Open Session B with the fifteen-minute W3 falsifier before the bounded W7 receipt slice.
+    phase: 41
   outputs:
+  - ../../.agents/skills/experiment-loop/SKILL.md
+  - SYNOPSIS.md
+  - campaign/agendas/agenda-002-constructive-enumeration-groundwork.md
+  - campaign/agendas/agenda-003-balanced-ten-hour-research-program.md
   - campaign/agent-sessions/session-026-balanced-research-session-a.md
+  - campaign/ledger.md
+  - cases/small_n/el_moumni7.py
+  - defects.md
+  - defects.yaml
+  - docs/project/research/research-2026-08-22-packing-11-unit-squares.md
+  - docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
+  - tests/test_el_moumni7_case1.py
   checks:
   - Session launch had 4.8 GiB physical free space, above the frozen 4 GiB admission threshold.
   - Session 025 is terminal and the generated ledger records it as completed.
-  stop_reason: null
+  - Seven focused El Moumni tests pass in 0.02 seconds; Ruff and BasedPyright are green.
+  - The 345-defect view and six generated research tables match their source records.
+  - All enforced schemas, the campaign ledger, synopsis, README, and proportional coordination steps pass.
+  - Git diff and explicit changed-file inventory contain no whitespace error, temporary output, or unrelated owner surface.
+  stop_reason: >-
+    The first five-hour source session reached a coherent midpoint with its finalization
+    reserve protected; the second session may now begin from BC-017 without controller
+    memory.
   next_action: >-
-    Re-render and check the session record, explicitly stage and push the coherent
-    multi-program checkpoint, then complete the measured W5 inventory under BC-028 and
-    think-kdil before selecting another research lane.
+    Open BC-017 under think-u97a as Session B's first bounded constructive driver; do
+    not wait on hosted CI.
 ---
 # Session 026 — Balanced Research Program, Session A
 

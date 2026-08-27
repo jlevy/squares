@@ -39,7 +39,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-023](agent-sessions/session-023-pr45-merge-readiness.md) | completed | contemporaneous | `factual-review` (correctness) | `process-review` (correctness) | 8 | think-eyix | Under BC-019 and think-eyix, publish this draft checkpoint, open a fresh time-sliced continuation while free space remains at least 4 GiB, run strict validation with the measured timeout, watch both GitHub jobs, and disposition every review bead only after those receipts are green. |
 | [session-024](agent-sessions/session-024-pr45-strict-and-ci.md) | stopped | contemporaneous | `process-review` (correctness) | `process-review` (correctness) | 2 | think-eyix | Under BC-019 and think-eyix, review PR 41 for correctness, merge safety, and measured validation-loop speedup. If it lands on main, merge that exact main commit into this branch, rerun the focused gates and one complete strict receipt, then require both final-head GitHub jobs before closing review beads. |
 | [session-025](agent-sessions/session-025-pr45-performance-continuation.md) | completed | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 4 | think-eyix | Under BC-027 and think-whwc, reconcile the merged-main validation failure, the terminal session record, and generated views; then restore a first-failure-safe green pipeline before the next research session. |
-| [session-026](agent-sessions/session-026-balanced-research-session-a.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `efficiency-loop` (efficiency) | 35 | think-whwc | Re-render and check the session record, explicitly stage and push the coherent multi-program checkpoint, then complete the measured W5 inventory under BC-028 and think-kdil before selecting another research lane. |
+| [session-026](agent-sessions/session-026-balanced-research-session-a.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 42 | think-whwc | Open BC-017 under think-u97a as Session B's first bounded constructive driver; do not wait on hosted CI. |
 
 ### Workflow summary
 
@@ -47,13 +47,13 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
-| `research-pass` | 0 | 0 | 5 | 0 |
+| `research-pass` | 0 | 0 | 6 | 0 |
 | `factual-review` | 1 | 0 | 19 | 2 |
-| `insight-iteration` | 0 | 1 | 17 | 2 |
-| `process-review` | 4 | 4 | 31 | 6 |
+| `insight-iteration` | 0 | 1 | 19 | 2 |
+| `process-review` | 4 | 4 | 33 | 6 |
 | `efficiency-loop` | 6 | 0 | 14 | 0 |
 | `research-loop` | 1 | 4 | 10 | 7 |
-| `pipeline-improvement` | 5 | 0 | 35 | 0 |
+| `pipeline-improvement` | 5 | 0 | 37 | 0 |
 
 ## Experiment agendas
 
@@ -85,7 +85,7 @@ Status: **active**. Sequence the stratified chunk-enumeration program from X-003
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-016 | measurement_validation | 5, 10, 11, 16 | ready | 0 | think-3yv8 | retained aligned-stratum differential with per-row active-cell identity, attached to the D-059 record |
+| BC-016 | measurement_validation | 5, 10, 16 | blocked | 0 | think-3yv8 | retain the three named input poses and an executable glued row, implement the symbolic tied-axis label, independent receipt checker, and focused synthetic mutations locally; then emit and compare the two workflow-route receipts |
 | BC-017 | tool_validation | 5, 10 | ready | 1 | think-u97a | identical retained counts across a loaded and unloaded host |
 | BC-018 | tool_validation | 5, 10, 16 | blocked | 1 | think-sfzh | retained per-stratum ranking on the proved cells with the frozen grammar commit named in the record |
 | BC-019 | research | 11, 17, 18, 19, 28, 29 | ready | 2 | think-6mcd | independent review of CG-010's structural full-cell control and a BC-016 or BC-017 readiness decision; numerical row compilation remains unbuilt |
@@ -106,8 +106,8 @@ Status: **active**. Use one mutable ten-hour agenda, with a full five-hour midpo
 | BC-027 | tool_validation | 5, 10, 11, 16, 26 | complete | 0 | think-whwc | Completed in session 026: D-340 retains the historical cause, the CLI regression and mutation control prove first-failure propagation, and the four-step replacement integration surface passes. |
 | BC-028 | tool_validation | 5 | tentative | 0 | think-kdil | checkpoint arithmetic for expected time saved in the remaining horizon, plus an exact-output equivalence result if implementation is admitted |
 | BC-029 | research | 5 | ready | 0 | think-1s0h | exp-045 with a frozen criterion, the declared controls and scale routes, retained raw evidence, an independent replay, and a scoped successor disposition |
-| BC-030 | tool_validation | 5, 10, 11 | complete | 1 | think-6mcd | BC-016's bounded aligned/glued cross-toolchain differential under think-3yv8; BC-017 remains ready after a numerical full-cell driver exists |
-| BC-031 | measurement_validation | 11, 12 | complete | 1 | think-4o6l | Replay El Moumni's finite n = 7 lower-bound argument under think-trkj before treating it as an automated proof-lane control; the remaining acquisition queue continues under think-4o6l. |
+| BC-030 | tool_validation | 5, 10, 11 | complete | 1 | think-6mcd | Under think-3yv8, build BC-016's missing retained poses, executable glued row, symbolic tied-axis label, and independent receipt checker before its differential; alternatively take ready BC-017 through one bounded numerical full-cell driver |
+| BC-031 | measurement_validation | 11, 12 | complete | 1 | think-4o6l | Under think-trkj, retain an exact two-branch repair of Theorem 1 Case 1 and an independently derived Figure 4 coordinate packet that either justifies or rejects the candidate segment-length correction. D-344 and D-345 block a complete source-faithful replay; the remaining acquisition queue continues under think-4o6l. |
 | BC-032 | tool_validation | 11, 29 | complete | 2 | think-75ll | Before an n = 29 interval round, write its explicit contact equations, isolation boxes, outward-rounded certificate type, and independent checker. The completed n = 11 robust-rational control validates only the already-built exactification path at a relaxed side; it does not certify the source decimals, improve a record, establish rigidity, or prove optimality. |
 | BC-033 | tool_validation | 5, 10, 11 | blocked | 2 | think-5vsz | an interface decision linked to think-u97a and the equal-budget comparison harness |
 | BC-034 | research | 11, 100 | complete | 2 | think-ykt7 | Audit Bui Section 4.2's Lemma 6 recurrence only after its specialization, induction range, and strict bounds are frozen. The completed Section 3.1 index proof and Lemmas 3-5 packet discharge only exact count and three local inequalities; geometry, boundary overhead, effective constants, finite transfer, Proposition 7, and the exponent remain open. |
