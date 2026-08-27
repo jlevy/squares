@@ -323,6 +323,7 @@ def test_linear_combination_cancels_corrections_only_when_gradient_cancels() -> 
     assert mutated_second.quadratic - mutated_first.quadratic == q(12)
 
 
+@pytest.mark.exhaustive_exact
 def test_n5_wall_and_contact_gradients_match_authoritative_source_rows() -> None:
     field = NumberField((1, 0, -2), (1, 2))
     for stratum in tangent_cones.STRATA:

@@ -168,12 +168,14 @@ case or experiment separately.
 | [Review: `TUTORIAL.md` Soundness, Iteration 2, on the Merged Record](docs/project/reviews/review-2026-08-25-tutorial-soundness-iteration-2.md) | dated review record | record | retained | — |
 | [Review: Soundness of the Session-011 Continuation (PR #34)](docs/project/reviews/review-2026-08-25-pr34-soundness-review.md) | dated review record | record | retained | — |
 | [Review: PR #44, Constructive Enumeration, and the Known-Best Atlas](docs/project/reviews/review-2026-08-26-pr44-constructive-enumeration-and-known-best-atlas.md) | dated review record | record | retained | — |
+| [Review: Square Packing Research-Loop Efficiency](docs/project/reviews/review-2026-08-25-research-loop-efficiency.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
 | [Feature: Minimal Packing Toolkit](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | implementation plan | current | transient | — |
 | [Feature: Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | implementation plan | current | transient | — |
 | [Feature: Frontier Assurance and Verification](docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md) | implementation plan | current | transient | — |
+| [Feature: Research-Loop Efficiency Infrastructure](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md) | implementation plan | current | transient | — |
 | [Overnight Run: Constructive Enumeration Groundwork](docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md) | implementation plan | current | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
@@ -286,7 +288,7 @@ The renderer’s standing exact-motion control remains independently replayable:
 ![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
 
 The current line is `BC-019` under `think-eyix`, recorded in
-[session 024](campaign/agent-sessions/session-024-pr45-strict-and-ci.md).
+[session 025](campaign/agent-sessions/session-025-pr45-performance-continuation.md).
 Finish strict validation and the final-head cross-platform checkpoint before closing the
 retained PR review dispositions or returning to `ContactAssemblyGrammar/v1`’s next
 full-cell boundary.
@@ -310,6 +312,81 @@ Its local realization prefilter rejects mixed angle classes before solving and s
 omits walls, non-edge separation, container fit, whole-packing feasibility, and
 optimality. The next scientific implementation boundary is CG-010’s full fixed-angle
 cell, not an H-044 verdict or an `n = 11` run on the inspected calibration corpus.
+
+The H-023 line shows why the distinction matters.
+Session 004 used W3 to turn an ambiguous terminal-family observation into the
+falsifiable connectivity hypothesis.
+Session 009 first used W4 to make basin events and exact identity controls admissible.
+W6 then produced exp-033’s exact fixed-angle face and exp-034’s angle-and-slide sheet.
+A W2 instrument review found D-194 and D-195 before the next measurement, preventing a
+reused contact differential and an invalid alternative-row interpretation from entering
+the result.
+W6 resumed only after the corrected criterion was frozen; exp-035 then proved
+exact first-order directions outside the sheet without proving nonlinear realization.
+W3 turned that limitation into exp-036’s registered second-order obstruction, and W6
+then excluded the displayed direction from the true tangent cone.
+Exp-038 now certifies the complete branchwise linearization-cone inventory and leaves
+transverse and mixed nonlinear realization open.
+Exp-039 then certifies one connected five-dimensional fixed-angle cell-local LP-optimal
+position polytope and twelve exact paths in release classes R1, R2, R3, and R6. Its
+positive pathwise first-order stresses do not make the whole polytope stationary or
+classify a terminal component.
+When the post-round strict gate failed, W4 separated stale controls from an independent
+deep-golden solver rejection.
+That bounded solver repair was recorded under the owning review phase before W7 existed.
+Future packing-pipeline repairs whose promised output is the implementation itself enter
+W7; historical phases are not relabelled after the fact.
+The current line is owned by `BC-010` under `think-1s0h`.
+[Session 015](campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md) is terminal
+after reaching its declared eight-phase cap, and
+[session 016](campaign/agent-sessions/session-016-final-hour-continuation.md) is the
+completed final-hour continuation; it preserved the original deadline without extending
+an expired phase or relying on controller memory.
+[Session 017](campaign/agent-sessions/session-017-research-loop-efficiency.md) is the
+initial W5 efficiency record, and
+[session 018](campaign/agent-sessions/session-018-efficiency-plan-refinement.md) is its
+measured planning refinement.
+[Session 019](campaign/agent-sessions/session-019-native-timing-correction-spike.md)
+corrects the Codex timing instrument, freezes both named task trees, and replaces
+estimated delay attribution with native per-turn rollups by model and thinking level.
+[Session 020](campaign/agent-sessions/session-020-fast-pr-lane-spike.md) acts on that
+baseline: the first hosted required surface finishes in 46 seconds, exhaustive exact
+work and complete macOS move to direct integration events, and two-worker controls save
+58.22 seconds on the full branch.
+[Session 021](campaign/agent-sessions/session-021-pr41-performance-integration.md)
+updates that lane onto current main, restores cheap exact guards to required PR
+validation, preserves explicit worker caps, and targets PR 45’s measured census tail.
+These W5 sessions measure and improve the research and validation loops but do not
+supersede session 016’s scientific handoff or authorize exp-045 implementation.
+Session 015’s first bounded W6 slice stopped exp-040 unresolved before retained
+measurement after independent review found five finite proof-perimeter gaps in the draft
+R4/R5 checker. Exp-041 froze the exact five-blocker correction at `e26fae9`, then
+rejected its complete-zero-inventory criterion on a new endpoint-only axis without
+refuting path feasibility.
+Exp-042 corrects that endpoint inventory and meets the full frozen criterion from engine
+commit `2980fdc`: six R4/R5 paths, both owner stresses, and twenty semantic controls
+pass retained generation and replay.
+The result is pathwise first-order only.
+Exp-043 then stops its pure `-W` test before retained measurement: the draft checker is
+a resume point, but it does not yet derive production rowwise second-order constants,
+consume a full exp-034 acceleration witness, or mechanically route the two-scale proof.
+The following W7 phases provide a case-free exact-jet helper, complete production row
+builders for all six source matrices, normalized nine-row stress evaluation with every
+correction column retained, and a formula-derived exp-034 sheet control across both
+owner inventories. Focused tests and independent review accept that substrate at
+checkpoint `8ee367b` while refusing branch completeness, scale routing, and obstruction.
+Exp-044 freezes the separate case-level integration but is terminal unresolved with no
+target run or result JSON. The published checkpoints separate helper substrate
+`8ee367b`, accepted memoryless design `027349b`, and full-gate pre-terminal state
+`3629bf4`. Session 016’s terminal handoff owns the branch, read order, validation, exact
+fifteen-record scale inventory, mutation map, and successor artifact paths, so no
+controller memory is required.
+The sole next action is to preregister the named exp-045 successor under `BC-010` before
+implementation or target work.
+The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
+remain later slices; D-239 is a separate W7 line.
+Do not start basin-frequency work or reinterpret exp-035 through exp-040 as a
+connectivity proof.
 
 ## What Is Built
 

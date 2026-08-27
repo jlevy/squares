@@ -164,3 +164,6 @@ testpaths = ["tests"]
 pythonpath = ["."]
 python_files = ["test_*.py"]
 addopts = ["--strict-config", "--strict-markers"]
+markers = [
+  "exhaustive_exact: expensive exact-algebra tests retained by full and integration validation",
+]

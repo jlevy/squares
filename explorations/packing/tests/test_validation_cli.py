@@ -293,6 +293,7 @@ def test_list_is_read_only_and_exposes_fast_and_full_check_groups() -> None:
     assert status == 0
     assert stderr == ""
     assert "fast behavioral tests [fast]" in stdout
+    assert "exhaustive exact behavioral tests [full]" in stdout
     assert "soundness perimeter [full, engine]" in stdout
 
 
@@ -302,6 +303,7 @@ def test_list_applies_the_same_fast_and_name_filters_as_execution() -> None:
     assert status == 0
     assert stderr == ""
     assert "fast behavioral tests [fast]" in stdout
+    assert "exhaustive exact behavioral tests" not in stdout
     assert "soundness perimeter" not in stdout
 
     status, stdout, stderr = _invoke("--list", "--only", "negative control")
@@ -309,6 +311,103 @@ def test_list_applies_the_same_fast_and_name_filters_as_execution() -> None:
     assert status == 0
     assert stderr == ""
     assert stdout.splitlines() == ["negative controls [full]"]
+
+
+def test_fast_behavioral_step_excludes_exhaustive_exact_tests(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    observed: tuple[str, ...] | None = None
+
+    def capture(context: validate.Context, command: tuple[str, ...], **_kwargs: object) -> str:
+        del context
+        nonlocal observed
+        observed = command
+        return ""
+
+    monkeypatch.setattr(validate, "_run", capture)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+
+    validate._fast_tests(context)
+
+    assert observed == (
+        sys.executable,
+        "-m",
+        "pytest",
+        "-q",
+        "tests",
+        "-m",
+        "not exhaustive_exact",
+    )
+
+
+def test_full_exhaustive_behavioral_step_selects_only_exhaustive_exact_tests(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    observed: tuple[str, ...] | None = None
+
+    def capture(context: validate.Context, command: tuple[str, ...], **_kwargs: object) -> str:
+        del context
+        nonlocal observed
+        observed = command
+        return ""
+
+    monkeypatch.setattr(validate, "_run", capture)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=1,
+        environment=os.environ.copy(),
+    )
+
+    validate._exhaustive_exact_tests(context)
+
+    assert observed == (
+        sys.executable,
+        "-m",
+        "pytest",
+        "-q",
+        "tests",
+        "-m",
+        "exhaustive_exact",
+    )
+
+
+@pytest.mark.parametrize((("inner_jobs", "expected_workers")), ((1, "1"), (4, "2")))
+def test_full_negative_controls_respect_the_cap_and_measured_worker_count(
+    monkeypatch: pytest.MonkeyPatch,
+    inner_jobs: int,
+    expected_workers: str,
+) -> None:
+    observed: tuple[str, ...] | None = None
+
+    def capture(_context: validate.Context, module: str, *arguments: str) -> str:
+        nonlocal observed
+        observed = (module, *arguments)
+        return "controls passed"
+
+    monkeypatch.setattr(validate, "_module", capture)
+    context = validate.Context(
+        deep=False,
+        strict=False,
+        jobs=1,
+        inner_jobs=inner_jobs,
+        environment=os.environ.copy(),
+    )
+
+    assert validate._negative_controls(context) == "controls passed"
+    assert observed == (
+        "devtools.run_negative_controls",
+        "devtools/controls.yaml",
+        "-j",
+        expected_workers,
+    )
 
 
 def test_invalid_worker_count_and_unmatched_selection_are_actionable() -> None:
