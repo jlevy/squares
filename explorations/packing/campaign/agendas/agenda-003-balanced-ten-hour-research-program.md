@@ -8,7 +8,7 @@ softschema:
 agenda:
   id: agenda-003
   title: Repair the loop, then rotate across the highest-information research lanes
-  updated: '2026-08-26'
+  updated: '2026-08-27'
   status: active
   objective: >-
     Use one mutable ten-hour agenda, with a full five-hour midpoint review, to repair
@@ -121,7 +121,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 10, 11]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can CG-010 represent and price one complete target-free fixed-angle cell with
@@ -141,8 +141,12 @@ agenda:
     bead: think-6mcd
     depends_on: []
     next_evidence: >-
-      a versioned full-cell label and cost vector with declared walls, non-edge axes,
-      symmetry orbit, typed cap outcome, and independent mutation results
+      BC-016's bounded aligned/glued cross-toolchain differential under think-3yv8;
+      BC-017 remains ready after a numerical full-cell driver exists
+    artifacts:
+    - atlas/known-best/contact-full-cell-control.json
+    - atlas/known-best/contact-full-cell-control.schema.yaml
+    - src/sqpack/contact_full_cell.py
     note: >-
       The 11,013 size-five records are abstract scaffolds with no packing geometry,
       container fit, whole-packing feasibility, or optimality claim.
@@ -150,7 +154,7 @@ agenda:
     purpose: measurement_validation
     owner_focus: correctness
     instances: [11, 12]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can one high-value missing primary source be recovered or receive a dated,
@@ -166,13 +170,18 @@ agenda:
     bead: think-4o6l
     depends_on: []
     next_evidence: >-
-      an updated source-availability row and, only when warranted, one resulting proof
-      question or corrected priority
+      Replay El Moumni's finite n = 7 lower-bound argument under think-trkj before
+      treating it as an automated proof-lane control; the remaining acquisition queue
+      continues under think-4o6l.
+    artifacts:
+    - resources/papers/el-moumni-1999-optimal-packings-unit-squares.pdf
+    - resources/papers/trump-2023-packing-11-unit-squares.pdf
+    - frontier/source-availability.yaml
   - id: BC-032
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 29]
-    state: tentative
+    state: complete
     priority: 2
     question: >-
       What is the smallest well-posed numerical witness or contact system that can test
@@ -189,8 +198,14 @@ agenda:
     bead: think-75ll
     depends_on: []
     next_evidence: >-
-      one bounded promotion contract selected from the current exact and interval gap,
-      with an independent checker before any claim moves forward
+      Before an n = 29 interval round, write its explicit contact equations, isolation
+      boxes, outward-rounded certificate type, and independent checker. The completed
+      n = 11 robust-rational control validates only the already-built exactification
+      path at a relaxed side; it does not certify the source decimals, improve a record,
+      establish rigidity, or prove optimality.
+    artifacts:
+    - witnesses/known-best-n011-rational-control.yaml
+    - devtools/generate_known_best_n011_rational_control.py
   - id: BC-033
     purpose: tool_validation
     owner_focus: efficiency
@@ -219,7 +234,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11, 100]
-    state: ready
+    state: complete
     priority: 2
     question: >-
       Which finite-transfer or asymptotic-waste obligation now has enough source and
@@ -236,8 +251,15 @@ agenda:
     bead: think-ykt7
     depends_on: []
     next_evidence: >-
-      a source-faithful theorem fragment or finite-transfer calculation with every
-      constant, branch, synchronization, and boundary assumption explicit
+      Audit Bui Section 4.2's Lemma 6 recurrence only after its specialization,
+      induction range, and strict bounds are frozen. The completed Section 3.1 index
+      proof and Lemmas 3-5 packet discharge only exact count and three local
+      inequalities; geometry, boundary overhead, effective constants, finite transfer,
+      Proposition 7, and the exponent remain open.
+    artifacts:
+    - campaign/hypotheses/H-037-asymptotic-waste-exponent.md
+    - cases/asymptotic/bui_integer_count.py
+    - cases/asymptotic/bui_local_inequalities.py
 ---
 # Agenda 003 — Balanced Ten-Hour Research Program
 

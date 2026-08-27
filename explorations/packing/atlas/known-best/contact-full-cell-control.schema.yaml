@@ -1,0 +1,268 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ContactFullCellControl/v1
+title: Target-free structural full-cell control
+type: object
+additionalProperties: false
+required:
+- generated_by
+- scope
+- evidence_role
+- fixture
+- canonical
+- price
+- caps
+- controls
+- promotion_boundary
+properties:
+  generated_by: {const: python -m devtools.generate_contact_full_cell_control}
+  scope: {const: one literal axis-aligned three-square structural cell}
+  evidence_role:
+    const: >-
+      target-free structural full-cell label and work price; no geometry, container fit,
+      packing feasibility, or optimality claim
+  fixture:
+    type: object
+    additionalProperties: false
+    required: [angle_frame, angles, parts, walls, contacts, nonedges]
+    properties:
+      angle_frame: {const: axis-aligned/v1}
+      angles:
+        type: array
+        prefixItems: [{const: '0'}, {const: '0'}, {const: '0'}]
+        minItems: 3
+        maxItems: 3
+      parts:
+        type: array
+        minItems: 3
+        maxItems: 3
+        items:
+          type: object
+          additionalProperties: false
+          required: [kind, members]
+          properties:
+            kind: {const: free}
+            members:
+              type: array
+              minItems: 1
+              maxItems: 1
+              items: {type: integer, minimum: 0, maximum: 2}
+      walls:
+        type: array
+        minItems: 12
+        maxItems: 12
+        items:
+          type: object
+          additionalProperties: false
+          required: [square, wall, seated]
+          properties:
+            square: {type: integer, minimum: 0, maximum: 2}
+            wall: {enum: [left, right, bottom, top]}
+            seated: {type: boolean}
+      contacts:
+        type: array
+        minItems: 2
+        maxItems: 2
+        items: {$ref: '#/$defs/pairAxis'}
+      nonedges:
+        type: array
+        minItems: 1
+        maxItems: 1
+        items: {$ref: '#/$defs/pairAxis'}
+  canonical:
+    type: object
+    additionalProperties: false
+    required:
+    - contract
+    - label
+    - witness
+    - raw_image_count
+    - unique_image_count
+    - duplicate_image_count
+    properties:
+      contract: {const: 'packing.squares:FullFixedAngleCellLabel/v1'}
+      label: {type: string, minLength: 1}
+      witness:
+        type: object
+        additionalProperties: false
+        required: [symmetry, old_to_new]
+        properties:
+          symmetry:
+            enum:
+            - identity
+            - rotate-90
+            - rotate-180
+            - rotate-270
+            - reflect-x
+            - reflect-y
+            - reflect-diagonal
+            - reflect-antidiagonal
+          old_to_new:
+            type: array
+            minItems: 3
+            maxItems: 3
+            items: {type: integer, minimum: 0, maximum: 2}
+      raw_image_count: {const: 48}
+      unique_image_count: {type: integer, minimum: 1, maximum: 48}
+      duplicate_image_count: {type: integer, minimum: 0, maximum: 47}
+  price:
+    type: object
+    additionalProperties: false
+    required: [evidence_role, inventory, candidate_domains, executed_work]
+    properties:
+      evidence_role:
+        const: >-
+          target-free structural full-cell label and work price; no geometry, container
+          fit, packing feasibility, or optimality claim
+      inventory:
+        type: object
+        additionalProperties: false
+        required:
+        - squares
+        - angle_values
+        - wall_decisions
+        - seated_walls
+        - contact_pairs
+        - nonedge_pairs
+        properties:
+          squares: {const: 3}
+          angle_values: {const: 3}
+          wall_decisions: {const: 12}
+          seated_walls: {const: 4}
+          contact_pairs: {const: 2}
+          nonedge_pairs: {const: 1}
+      candidate_domains:
+        type: object
+        additionalProperties: false
+        required:
+        - partitions
+        - angle_assignments
+        - wall_seatings
+        - nonedge_axis_assignments
+        - raw_cells
+        properties:
+          partitions: {const: 1}
+          angle_assignments: {const: 1}
+          wall_seatings: {const: 1}
+          nonedge_axis_assignments: {const: 8}
+          raw_cells: {const: 8}
+      executed_work:
+        type: object
+        additionalProperties: false
+        required:
+        - raw_cells_built
+        - axis_order_branches_examined
+        - orbit_images_examined
+        - unique_orbit_images
+        - duplicate_orbit_images
+        - canonical_cells_emitted
+        - lp_solves
+        properties:
+          raw_cells_built: {const: 1}
+          axis_order_branches_examined: {const: 1}
+          orbit_images_examined: {const: 48}
+          unique_orbit_images: {type: integer, minimum: 1, maximum: 48}
+          duplicate_orbit_images: {type: integer, minimum: 0, maximum: 47}
+          canonical_cells_emitted: {const: 1}
+          lp_solves: {const: 0}
+  caps:
+    type: object
+    additionalProperties: false
+    required: [maximum_orbit_images]
+    properties:
+      maximum_orbit_images: {const: 48}
+  controls:
+    type: object
+    additionalProperties: false
+    required:
+    - positive-completeness
+    - omitted-wall
+    - omitted-pair-axis
+    - duplicate-pair-axis
+    - d4-negative-polarity
+    - orbit-image-cap
+    - mismatched-price-receipt
+    - source-isolation
+    properties:
+      positive-completeness: {$ref: '#/$defs/pass'}
+      omitted-wall: {$ref: '#/$defs/wallRefusal'}
+      omitted-pair-axis: {$ref: '#/$defs/pairRefusal'}
+      duplicate-pair-axis: {$ref: '#/$defs/pairRefusal'}
+      d4-negative-polarity:
+        type: object
+        additionalProperties: false
+        required: [status, cases_checked, negative_cases_checked, reversed_relabel_checked]
+        properties:
+          status: {const: passing}
+          cases_checked: {const: 16}
+          negative_cases_checked: {const: 8}
+          reversed_relabel_checked: {const: true}
+      orbit-image-cap:
+        type: object
+        additionalProperties: false
+        required:
+        - status
+        - observed_kind
+        - limit
+        - required_images
+        - examined_images
+        - canonical_cells_emitted
+        - lp_solves
+        properties:
+          status: {const: passing}
+          observed_kind: {const: orbit-image-cap}
+          limit: {const: 47}
+          required_images: {const: 48}
+          examined_images: {const: 47}
+          canonical_cells_emitted: {const: 0}
+          lp_solves: {const: 0}
+      mismatched-price-receipt: {$ref: '#/$defs/priceRefusal'}
+      source-isolation:
+        type: object
+        additionalProperties: false
+        required: [status, source, attempted_reads]
+        properties:
+          status: {const: passing}
+          source: {const: literal-source-free-n3-axis-aligned-L/v1}
+          attempted_reads: {const: 0}
+  promotion_boundary:
+    const: >-
+      passing authorizes only a BC-016 or BC-017 readiness decision; BC-021 and
+      target-sized execution remain closed
+$defs:
+  pairAxis:
+    type: object
+    additionalProperties: false
+    required: [left, right, owner, axis, positive]
+    properties:
+      left: {type: integer, minimum: 0, maximum: 2}
+      right: {type: integer, minimum: 0, maximum: 2}
+      owner: {type: integer, minimum: 0, maximum: 2}
+      axis: {enum: [u, v]}
+      positive: {type: integer, minimum: 0, maximum: 2}
+  pass:
+    type: object
+    additionalProperties: false
+    required: [status]
+    properties:
+      status: {const: passing}
+  wallRefusal:
+    type: object
+    additionalProperties: false
+    required: [status, observed_kind]
+    properties:
+      status: {const: passing}
+      observed_kind: {const: full-cell-wall-inventory}
+  pairRefusal:
+    type: object
+    additionalProperties: false
+    required: [status, observed_kind]
+    properties:
+      status: {const: passing}
+      observed_kind: {const: full-cell-pair-inventory}
+  priceRefusal:
+    type: object
+    additionalProperties: false
+    required: [status, observed_kind]
+    properties:
+      status: {const: passing}
+      observed_kind: {const: full-cell-price-prerequisite}

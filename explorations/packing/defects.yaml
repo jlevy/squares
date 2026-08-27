@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 342
+count: 343
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8804,3 +8804,31 @@ defects:
     live at 09:00 UTC and would fail under the previous tzinfo-removal behavior.
   bead: think-whwc
   recorded_in: src/sqpack/campaign/ledger.py
+- id: D-343
+  title: Bui's replacement instruction omitted its finite upper index bound
+  date: '2026-08-27'
+  layer: docs
+  class: soundness
+  direction: neutral
+  detected_by: review
+  latent_for: five days in the local literature archive
+  severity: medium
+  status: contained
+  what: >-
+    Bui Section 3.1 prints "for each j >= 2" when replacing squares in an initial grid
+    with only m columns. Read literally, the instruction eventually addresses
+    nonexistent columns and removes the final S_(i_m,m) that the paper later says is
+    still present.
+  consequence: >-
+    The exact square count cannot be replayed from the printed range without silently
+    supplying an upper bound, and an unbounded implementation would not preserve the
+    source's final-row description or named deletion.
+  fix: >-
+    Annotate the source wording and retain the intended range 2 <= j <= m, which is
+    forced by Lemma 2's range, the final T columns 1..m-1, and S_(i_m,m). H-037 proves
+    the resulting index partition while keeping all geometry and theorem claims open.
+  regression: >-
+    test_unbounded_j_wording_cannot_extend_past_the_m_columns requires the case-local
+    exact replay to reject a replacement endpoint other than m.
+  bead: think-ykt7
+  recorded_in: campaign/hypotheses/H-037-asymptotic-waste-exponent.md

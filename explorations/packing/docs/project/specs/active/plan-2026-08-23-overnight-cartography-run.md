@@ -334,8 +334,8 @@ already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
 [session 026](../../../../campaign/agent-sessions/session-026-balanced-research-session-a.md).
-Under `BC-029` and `think-1s0h`, independently accept and preregister exp-045 before
-scale implementation or target measurement.
+After its current integration checkpoint, run the measured W5 inventory under `BC-028`
+and `think-kdil` before selecting another 10–30-minute research lane.
 The first-failure pipeline cell is complete, and the active two-session
 [balanced ten-hour agenda](../../../../campaign/agendas/agenda-003-balanced-ten-hour-research-program.md)
 retains its actual clocks and full five-hour midpoint review.
@@ -344,12 +344,13 @@ independent Burnside and differential controls.
 Those records contain no packing geometry or feasibility result, and the retained
 `n = 1..100` corpus remains calibration-only.
 
-The next scientific implementation boundary is CG-010: a full fixed-angle cell with
-declared walls and one frozen separating axis per non-edge pair.
-The existing local prefilter accepts only one fitted-angle class and rejects mixed
-classes before solving.
-Do not use target geometry to design that cell, emit an H-044 verdict, or start the
-`n = 11` enumeration run.
+CG-010 now retains one literal target-free structural fixed-angle cell with total wall
+decisions, an exhaustive contact/non-edge pair partition, one frozen oriented axis per
+pair, joint canonicalization, typed caps, and a derived work price. It executes zero LP
+solves and makes no geometry or feasibility claim. The existing local prefilter still
+accepts only one fitted-angle class and rejects mixed classes before solving; numerical
+row compilation and full-cell realization remain unbuilt. Do not use target geometry,
+emit an H-044 verdict, or start the `n = 11` enumeration run.
 
 ## The numeric runner launch gate
 

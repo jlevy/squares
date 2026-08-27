@@ -117,8 +117,8 @@ agenda:
     bead: think-6mcd
     depends_on: []
     next_evidence: >-
-      CG-010 full fixed-angle cell controls with declared walls, one frozen separating
-      axis per non-edge, typed caps, and no target-sized execution
+      independent review of CG-010's structural full-cell control and a BC-016 or BC-017
+      readiness decision; numerical row compilation remains unbuilt
     parallel_group: corpus-measurement
     note: >-
       Independent of the enumerator: it reads geometry rather than searching. The first
@@ -127,9 +127,10 @@ agenda:
       partition, and eight are search-capped and therefore indeterminate. Broad contacts
       cover 1,780 of 1,860 non-grid squares. The versioned grammar, local uniform-angle
       prefilter, and 11,013-record abstract size-five atlas now represent and price
-      sliding contact scaffolds without claiming geometry or feasibility. CG-010's full
-      cell remains unbuilt. The 1-100 corpus was inspected during instrument repair and
-      is calibration-only.
+      sliding contact scaffolds without claiming geometry or feasibility. CG-010 now
+      retains one literal target-free structural label, joint orbit, derived price, and
+      typed mutations; numerical realization remains unbuilt. The 1-100 corpus was
+      inspected during instrument repair and is calibration-only.
   - id: BC-023
     purpose: tool_validation
     owner_focus: correctness

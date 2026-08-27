@@ -293,11 +293,11 @@ terminal.
 [Session 026](campaign/agent-sessions/session-026-balanced-research-session-a.md) is the
 active first five-hour source session in the two-session
 [balanced ten-hour agenda](campaign/agendas/agenda-003-balanced-ten-hour-research-program.md).
-`BC-027` is complete, and its current line is the `n = 5` H-023 successor under
-`BC-029`, `think-whwc`, and `think-1s0h`. Exp-045 is preregistered, but its pure `-W`
-target remains blocked while the scale helper and remaining production controls are
-built and independently reviewed.
-The constructive successor is CG-010 under `BC-030` and `think-6mcd`.
+`BC-027` is complete. The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and
+`think-1s0h` is retained as a typed instrument blocker: exp-045 is preregistered and its
+scale, owner-4, and execution-scoped row-inventory controls are built, but no pure `-W`
+target or result exists. CG-010 is structurally complete under `BC-030`; the next constructive
+correctness cell is BC-016 under `think-3yv8`, after the planned portfolio rotation.
 
 All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
 house renderings. The source-complete corpus is calibration evidence, not an unseen
@@ -316,8 +316,13 @@ The target-free contact-scaffold layer now retains 11,013 exact size-five signed
 orbits as an abstract, no-geometry atlas.
 Its local realization prefilter rejects mixed angle classes before solving and still
 omits walls, non-edge separation, container fit, whole-packing feasibility, and
-optimality. The next scientific implementation boundary is CG-010’s full fixed-angle
-cell, not an H-044 verdict or an `n = 11` run on the inspected calibration corpus.
+optimality. CG-010 now adds one separate literal axis-aligned three-square structural
+cell: all twelve wall decisions, every contact/non-edge pair and oriented axis, the 48
+D4-by-relabeling images, a replayable canonical witness, and separate candidate-domain
+and executed-work prices. It performs zero LP solves and contains no geometry. The next
+boundary is independent review plus a BC-016 or BC-017 readiness decision; numerical
+row compilation and realization remain unbuilt. This is not an H-044 verdict or an
+`n = 11` run on the inspected calibration corpus.
 
 The H-023 line shows why the distinction matters.
 Session 004 used W3 to turn an ambiguous terminal-family observation into the
@@ -387,9 +392,11 @@ target run or result JSON. The published checkpoints separate helper substrate
 `3629bf4`. Session 016’s terminal handoff owns the branch, read order, validation, exact
 fifteen-record scale inventory, mutation map, and successor artifact paths, so no
 controller memory is required.
-The sole next action is the preregistered exp-045 scale-only W7 slice under `BC-029` and
-`think-1s0h`. It runs first on the exp-036 positive control and creates no pure `-W`
-target data. The `-W`, mixed-angle, whole-stationary-component, and
+The sole next action after the current integration checkpoint is the measured W5
+inventory under `BC-028` and `think-kdil`. It will compare useful evidence produced with
+command, coordination, delegation, and repeated-gate time before selecting another
+10–30-minute research lane. Exp-045 remains a typed instrument blocker with no pure
+`-W` target data. The `-W`, mixed-angle, whole-stationary-component, and
 unequal-side-clearance questions remain later slices; D-239 is a separate W7 line.
 Do not start basin-frequency work or reinterpret exp-035 through exp-040 as a
 connectivity proof.
@@ -2064,12 +2071,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 342 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 343 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 79 | asserted something false about the mathematics |
+| soundness | 80 | asserted something false about the mathematics |
 | validity | 84 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 131 | recorded something its own evidence contradicts |
 | robustness | 39 | did not finish, or finished only by luck |
@@ -2077,11 +2084,11 @@ and checked in the gate.
 
 Two observations the log exists to make.
 
-**Sixty-three of the seventy-nine soundness defects pointed in the *flattering*
+**Sixty-three of the eighty soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 342, and no soundness defect
+**The automated gate has caught forty-five defects in 343, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2098,6 +2105,9 @@ and exit survived, but invalid `gdate` precision left the start and end fields e
 [D-304](defects.md) records a contradictory inequality in McClenagan’s printed Section 3
 proof. H-037 repairs that local sign step independently from both the figures and the
 source equations; it does not certify the remaining construction.
+[D-343](defects.md) records Bui’s printed unbounded replacement instruction. H-037 keeps
+the source-forced finite range and replays the resulting exact square count; the
+geometric construction and its asymptotic theorem remain open.
 
 The entries from D-030 onward sharpen the point rather than softening it.
 D-283 remains open in the current robustness inventory.

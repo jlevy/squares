@@ -1,0 +1,215 @@
+{
+  "control": {
+    "canonical": {
+      "contract": "packing.squares:FullFixedAngleCellLabel/v1",
+      "duplicate_image_count": 0,
+      "label": "{\"angle_frame\":\"axis-aligned/v1\",\"angles\":[\"0\",\"0\",\"0\"],\"contacts\":[[0,1,0,\"u\",0],[0,2,0,\"v\",0]],\"contract\":\"packing.squares:FullFixedAngleCellLabel/v1\",\"nonedges\":[[1,2,1,\"u\",2]],\"parts\":[{\"kind\":\"free\",\"members\":[0]},{\"kind\":\"free\",\"members\":[1]},{\"kind\":\"free\",\"members\":[2]}],\"walls\":[[0,\"left\",false],[0,\"right\",true],[0,\"bottom\",false],[0,\"top\",true],[1,\"left\",false],[1,\"right\",false],[1,\"bottom\",false],[1,\"top\",true],[2,\"left\",false],[2,\"right\",true],[2,\"bottom\",false],[2,\"top\",false]]}",
+      "raw_image_count": 48,
+      "unique_image_count": 48,
+      "witness": {
+        "old_to_new": [
+          0,
+          1,
+          2
+        ],
+        "symmetry": "rotate-180"
+      }
+    },
+    "caps": {
+      "maximum_orbit_images": 48
+    },
+    "controls": {
+      "d4-negative-polarity": {
+        "cases_checked": 16,
+        "negative_cases_checked": 8,
+        "reversed_relabel_checked": true,
+        "status": "passing"
+      },
+      "duplicate-pair-axis": {
+        "observed_kind": "full-cell-pair-inventory",
+        "status": "passing"
+      },
+      "mismatched-price-receipt": {
+        "observed_kind": "full-cell-price-prerequisite",
+        "status": "passing"
+      },
+      "omitted-pair-axis": {
+        "observed_kind": "full-cell-pair-inventory",
+        "status": "passing"
+      },
+      "omitted-wall": {
+        "observed_kind": "full-cell-wall-inventory",
+        "status": "passing"
+      },
+      "orbit-image-cap": {
+        "canonical_cells_emitted": 0,
+        "examined_images": 47,
+        "limit": 47,
+        "lp_solves": 0,
+        "observed_kind": "orbit-image-cap",
+        "required_images": 48,
+        "status": "passing"
+      },
+      "positive-completeness": {
+        "status": "passing"
+      },
+      "source-isolation": {
+        "attempted_reads": 0,
+        "source": "literal-source-free-n3-axis-aligned-L/v1",
+        "status": "passing"
+      }
+    },
+    "evidence_role": "target-free structural full-cell label and work price; no geometry, container fit, packing feasibility, or optimality claim",
+    "fixture": {
+      "angle_frame": "axis-aligned/v1",
+      "angles": [
+        "0",
+        "0",
+        "0"
+      ],
+      "contacts": [
+        {
+          "axis": "u",
+          "left": 0,
+          "owner": 0,
+          "positive": 1,
+          "right": 1
+        },
+        {
+          "axis": "v",
+          "left": 0,
+          "owner": 0,
+          "positive": 2,
+          "right": 2
+        }
+      ],
+      "nonedges": [
+        {
+          "axis": "u",
+          "left": 1,
+          "owner": 1,
+          "positive": 1,
+          "right": 2
+        }
+      ],
+      "parts": [
+        {
+          "kind": "free",
+          "members": [
+            0
+          ]
+        },
+        {
+          "kind": "free",
+          "members": [
+            1
+          ]
+        },
+        {
+          "kind": "free",
+          "members": [
+            2
+          ]
+        }
+      ],
+      "walls": [
+        {
+          "seated": true,
+          "square": 0,
+          "wall": "left"
+        },
+        {
+          "seated": false,
+          "square": 0,
+          "wall": "right"
+        },
+        {
+          "seated": true,
+          "square": 0,
+          "wall": "bottom"
+        },
+        {
+          "seated": false,
+          "square": 0,
+          "wall": "top"
+        },
+        {
+          "seated": false,
+          "square": 1,
+          "wall": "left"
+        },
+        {
+          "seated": false,
+          "square": 1,
+          "wall": "right"
+        },
+        {
+          "seated": true,
+          "square": 1,
+          "wall": "bottom"
+        },
+        {
+          "seated": false,
+          "square": 1,
+          "wall": "top"
+        },
+        {
+          "seated": true,
+          "square": 2,
+          "wall": "left"
+        },
+        {
+          "seated": false,
+          "square": 2,
+          "wall": "right"
+        },
+        {
+          "seated": false,
+          "square": 2,
+          "wall": "bottom"
+        },
+        {
+          "seated": false,
+          "square": 2,
+          "wall": "top"
+        }
+      ]
+    },
+    "generated_by": "python -m devtools.generate_contact_full_cell_control",
+    "price": {
+      "candidate_domains": {
+        "angle_assignments": 1,
+        "nonedge_axis_assignments": 8,
+        "partitions": 1,
+        "raw_cells": 8,
+        "wall_seatings": 1
+      },
+      "evidence_role": "target-free structural full-cell label and work price; no geometry, container fit, packing feasibility, or optimality claim",
+      "executed_work": {
+        "axis_order_branches_examined": 1,
+        "canonical_cells_emitted": 1,
+        "duplicate_orbit_images": 0,
+        "lp_solves": 0,
+        "orbit_images_examined": 48,
+        "raw_cells_built": 1,
+        "unique_orbit_images": 48
+      },
+      "inventory": {
+        "angle_values": 3,
+        "contact_pairs": 2,
+        "nonedge_pairs": 1,
+        "seated_walls": 4,
+        "squares": 3,
+        "wall_decisions": 12
+      }
+    },
+    "promotion_boundary": "passing authorizes only a BC-016 or BC-017 readiness decision; BC-021 and target-sized execution remain closed",
+    "scope": "one literal axis-aligned three-square structural cell"
+  },
+  "softschema": {
+    "contract": "packing.squares:ContactFullCellControl/v1",
+    "envelope": "control",
+    "schema": "contact-full-cell-control.schema.yaml",
+    "status": "enforced"
+  }
+}

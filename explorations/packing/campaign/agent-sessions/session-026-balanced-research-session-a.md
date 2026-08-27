@@ -688,7 +688,7 @@ session:
       Read and shape BC-030's target-free CG-010 control: one complete fixed-angle cell
       with declared walls, one frozen separating axis per non-edge, canonical ties,
       typed caps, and an exact pricing contract before target-sized enumeration.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       W3 retained BC-029 as a typed instrument blocker and selected the dependency-ready
@@ -708,17 +708,868 @@ session:
     fallback: >-
       Record the first missing grammar or pricing definition under think-6mcd and leave
       BC-030 ready without implementation.
+    outcome: >-
+      Accepted a separate full-cell layer as the only sound CG-010 seam. The existing
+      scaffold and local-realization contracts are useful precedents but cannot be
+      widened: they do not jointly own fixed angle values, total wall decisions, one
+      endpoint-local signed axis for every non-edge, or a full-label symmetry action.
+      Selected a literal axis-aligned three-square L as the minimum source-free control;
+      it exercises two contacts, one non-edge, declared walls, an axis tie, and all 48
+      D4-by-relabeling images without consulting any atlas geometry.
+    evidence:
+    - A mathematical configuration-space cell fixes one of four endpoint-local axes and one of two orders for every unordered square pair; contacts already supply that datum, so the full label must supply it exactly once for every non-edge.
+    - ContactScaffold/v1 carries semantic colors, signed global u/v contact edges, and sparse positive wall colors, while the local realizer explicitly rejects walls and omits non-edges and containment.
+    - Three independent audits agree that the scaffold, fixed-angle payload, total wall-state inventory, contacts, and non-edge axes must transform and canonicalize jointly; canonicalizing a scaffold first and appending axes would collapse distinct cells.
+    - The formulation-independent price vector must keep separate partition, angle-assignment, wall-seating, non-edge-axis, raw-cell, orbit-image, canonical-cell, duplicate, and LP-work fields rather than one scalar.
+    - The smallest fixture has three angle assignments, twelve total wall decisions, two contacts, one non-edge, eight raw choices for that non-edge axis and order, and 48 raw orbit images; these counts are derived from the literal fixture rather than the 1–100 calibration corpus or the 11,013 abstract scaffolds.
+    stop_reason: The source inventory, minimum control, missing contract, and W7 seam are explicit, so the research pass closed without implementation or target work.
+    next_action: >-
+      Run a short W3 slice to freeze which structural and solve obligations belong in
+      FullFixedAngleCellLabel/v1, then hand only that bounded contract to W7.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Convert the accepted BC-030 source inventory into the smallest falsifiable W7
+      contract, resolving the angle, wall-completeness, canonical-tie, price, and solve
+      boundaries without consulting target geometry.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      W1 found a sound new-module seam and a minimum three-square control; W3 must now
+      remove the remaining design ambiguity before implementation begins.
+    budget_minutes: 15
+    started_at: '2026-08-27T00:11:28-07:00'
+    deadline_at: '2026-08-27T00:26:28-07:00'
+    expected_output: >-
+      One frozen FullFixedAngleCellLabel/v1 handoff naming owned invariants, derived
+      costs, typed refusals and caps, the source-free positive fixture, and the exact
+      boundary between structural exercise and numerical realization.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop on a geometry-derived angle or axis, a sparse wall representation that makes
+      omission indistinguishable from a valid branch, a scaffold-only symmetry quotient,
+      target enumeration, or a feasibility or optimality claim.
+    fallback: >-
+      Retain the complete structural label and pricing control while leaving numerical
+      realization as a separately typed successor if its row semantics do not fit one
+      W7 slice.
+    outcome: >-
+      Froze the first W7 slice as structural representation and exact work accounting,
+      not another solver. FullFixedAngleCellLabel/v1 is deliberately an axis-aligned,
+      target-free control contract: it owns a complete square inventory, one literal
+      fixed angle per square, a total square-by-wall Boolean inventory, a disjoint and
+      exhaustive contact/non-edge pair partition, one endpoint-owned local axis and
+      order for every pair, and a joint D4-by-relabeling canonical witness. The first
+      artifact executes canonicalization and pricing only; numerical row compilation,
+      LP solving, centres, side, container-fit, feasibility, and optimality remain a
+      separately typed BC-016/017 successor.
+    evidence:
+    - The literal n=3 L control is the minimum object containing contacts, a non-edge, wall declarations, a non-edge axis tie, and a nontrivial D4-by-relabeling orbit; a five-square control adds cost without exposing another v1 invariant.
+    - Total wall decisions, rather than only positive seats, make an omitted declaration structurally distinguishable from a different valid wall branch.
+    - Each axis branch is encoded by its owning endpoint, local u/v line, and which endpoint is positive; equal-angle owner duplicates are normalized by a declared structural tie rule, never by solver coordinates or discovery order.
+    - >-
+      The price separates candidate-domain counts from executed work: one partition
+      domain, one angle assignment, one wall seating, eight raw axis-and-order branches
+      for the sole non-edge, one selected raw cell, 48 required orbit images, one emitted
+      canonical label, and zero LP solves in this slice.
+    - The first cap control is orbit-image 47 against 48 required images; omitted wall and omitted or duplicate pair-axis controls refuse before canonical completion, and a calibration-loader denial proves source isolation.
+    - One delegated review cited target-specific solver material despite the source-isolation boundary; no conclusion from that citation was used in the frozen contract.
+    stop_reason: The smallest behavior-first contract, claim firewall, costs, mutations, and explicit solver deferral are fixed, so W7 can begin without design discretion.
+    next_action: >-
+      Write the failing n=3 label, omission, joint-orbit, cap, price, and source-isolation
+      tests, then implement only the new target-free structural module needed to pass.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Implement and focus-test the frozen axis-aligned FullFixedAngleCellLabel/v1
+      structural contract, its joint symmetry action, exact price vector, and typed
+      refusal and orbit-cap paths.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      W3 removed the solver and mixed-angle ambiguity and left one behavior-first module
+      small enough for a single bounded W7 slice.
+    budget_minutes: 30
+    started_at: '2026-08-27T00:14:00-07:00'
+    deadline_at: '2026-08-27T00:44:00-07:00'
+    expected_output: >-
+      New source-free full-cell label and focused tests proving completeness, byte-stable
+      joint canonicalization and witness replay, exact derived pricing, typed cap and
+      omission refusals, and the no-geometry claim firewall.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_contact_full_cell.py
+    kill_condition: >-
+      Stop on mixed-angle support, LP construction or execution, target or atlas lookup,
+      a scaffold-only quotient, untyped truncation, or any geometry, fit, feasibility,
+      or optimality field or claim.
+    fallback: >-
+      Retain the failing tests and first unimplemented invariant under think-6mcd, then
+      renew W7 only after a 30-minute inventory.
+    outcome: >-
+      Added the isolated structural FullFixedAngleCellLabel/v1 module and a literal n=3
+      behavior suite. The implementation validates the complete square partition, all
+      square-wall Boolean decisions, and the exact contact/non-edge pair partition;
+      normalizes equal-frame endpoint-owner ties; transforms every field jointly under
+      D4 and square relabeling; retains a replayable canonical witness; returns a typed
+      partial receipt at the orbit cap; and derives candidate-domain counts separately
+      from executed work. It contains no file reader, target import, geometry, row
+      compiler, or solver path.
+    evidence:
+    - The initial test failed at import before the new module existed, establishing the behavior-first red state.
+    - All 24 focused tests pass in 0.14 seconds, including all sixteen D4 axis-sign cases, a relabeling that reverses stored endpoint order, all 48 source-image canonicalizations and witness replays, the 47/48 cap boundary, complete all-false wall inventory, mismatched-receipt refusal, and runtime file-read denial.
+    - Ruff passes on the new module and tests, and BasedPyright reports zero errors or warnings.
+    - The exact price distinguishes an eight-branch non-edge candidate domain from one selected raw cell and 48 executed orbit images; LP solves remain zero.
+    - Three delegated reviews accepted the source-free structural seam; one required the negative-polarity D4 table coverage, which was added before closure.
+    stop_reason: The complete first-slice contract and focused checks are green in under six minutes, so the phase closed rather than spending its remaining ceiling.
+    next_action: >-
+      Open a separate W7 integration slice for the durable control JSON/schema,
+      generator check mode, explicit mutation receipts, and stale CG-010 ownership fix.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Turn the green FullFixedAngleCellLabel/v1 core into a byte-stable generated
+      target-free control with a soft schema, check mode, independent mutation receipts,
+      and corrected durable ownership.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The source module finished well inside its ceiling; durable generation and mutation
+      evidence are separable integration work and receive their own inventory clock.
+    budget_minutes: 30
+    started_at: '2026-08-27T00:20:00-07:00'
+    deadline_at: '2026-08-27T00:50:00-07:00'
+    expected_output: >-
+      A schema-bound ContactFullCellControl/v1 JSON regenerated from the literal fixture,
+      a check-mode generator, mutation receipts for wall, pair-axis, D4, cap, price, and
+      source isolation boundaries, and no stale CG-010 handoff owner.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen python -m
+      devtools.generate_contact_full_cell_control --check
+    kill_condition: >-
+      Stop on target/corpus input, a generated geometry or feasibility field, caller-
+      supplied price data, a mutation that does not fire, or a scope expansion into LP
+      realization or mixed angles.
+    fallback: >-
+      Keep the core module and tests green, record the first integration blocker under
+      think-6mcd, and leave the durable artifact for a renewed W7 slice.
+    outcome: >-
+      Generated and registered ContactFullCellControl/v1 from the literal source-free
+      fixture. The enforced closed schema retains the full source and canonical labels,
+      witness, orbit counts, separated candidate-domain and executed-work prices, typed
+      mutation receipts, and the BC-021 promotion firewall. Check mode rebuilds the
+      document, reruns its controls, validates it, and compares bytes without writing.
+      CG-010's durable grammar owner is now think-6mcd and every live overview states
+      that only structural representation and pricing are built; numerical realization
+      remains unbuilt.
+    evidence:
+    - The artifact's one selected raw cell has eight available non-edge axis/order branches, 48 examined orbit images, one emitted canonical label, and zero LP solves.
+    - >-
+      Eight isolated negative controls fire in 7 seconds from one reusable 33.1 MiB
+      snapshot: total-wall omission, pair omission, duplicate axis, D4 polarity, 47/48
+      cap, nonzero LP work, an atlas reader, and a forbidden geometry channel.
+    - Twenty-seven focused module and artifact tests pass in 0.30 seconds; the generator check is byte-clean, Ruff passes, and BasedPyright reports zero errors or warnings.
+    - All 100 case artifacts and 224 pure-YAML datasets validate against their schemas, now including ContactFullCellControl/v1.
+    - The generated campaign ledger is current and reports 26 sessions and three agendas.
+    - Three independent integration audits accepted the structural-only boundary; their placement suggestions differed, and the existing target-free pricing precedent under atlas/known-best was retained with an explicit no-atlas-input guard.
+    stop_reason: The generated control, mutation catalogue, schema registration, validation step, durable ownership, and claim-safe documentation are green, so the integration slice closed before its deadline.
+    next_action: >-
+      Run an independent W2 audit of the actual implementation and generated bytes, then
+      make the BC-016 versus BC-017 readiness decision in W3.
+  - workflow: factual-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Independently audit the completed CG-010 structural implementation, generated
+      artifact, schema, mutation seams, source isolation, and claim boundary against the
+      frozen BC-030 exit without adding features.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      W7 produced a schema-bound control and mutation evidence; the agenda requires W2
+      before readiness can be promoted downstream.
+    budget_minutes: 15
+    started_at: '2026-08-27T00:34:00-07:00'
+    deadline_at: '2026-08-27T00:49:00-07:00'
+    expected_output: >-
+      Independent ACCEPT or concrete blocker findings for pair completeness, joint orbit
+      action and replay, exact price accounting, typed caps, generated-byte ownership,
+      source isolation, and no-geometry/no-feasibility claims.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_contact_full_cell.py tests/test_contact_full_cell_control.py
+    kill_condition: >-
+      Stop review immediately on any target input, incomplete pair or wall inventory,
+      non-joint symmetry action, untyped truncation, forged count, hidden file read, or
+      geometry, fit, feasibility, or optimality field.
+    fallback: >-
+      Return the first exact blocker to a renewed W7 slice and keep BC-030 ready rather
+      than promoting a partial structural control.
+    outcome: >-
+      Returned the implementation to W7 with two exact blockers. The production label
+      accepted Boolean and integral-float square IDs through Python equality, allowing
+      JSON false or 0.0 to masquerade as square zero. Independently, the schema allowed
+      arbitrary promotion-boundary prose and arbitrary mutation-refusal kinds, so a
+      target-authorizing sentence and packing-feasible refusal label both validated.
+    evidence:
+    - One reviewer constructed accepted WallDecision(False, ...) and OrientedPairAxis(False, ...), proving the production type hole rather than inferring it from annotations.
+    - A second reviewer made both claim-firewall mutations in memory and observed validation success.
+    - The price reviewer independently recomputed eight raw branches, one selected cell, 48 unique orbit images, zero duplicates, and zero LP solves, and found no blocker in orbit, price, mutation, or source-isolation behavior.
+    stop_reason: W2 found concrete production and schema counterexamples, so review stopped and returned their exact seams to W7.
+    next_action: >-
+      Reject non-integer and Boolean IDs in production, freeze exact promotion and
+      refusal constants in the schema, and add focused regressions before re-review.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Repair the two W2 blockers at their narrow production and schema boundaries and
+      add the exact adversarial regressions before rerunning review.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Independent W2 counterexamples showed that label identity and the promotion
+      firewall were not yet enforced by code and schema.
+    budget_minutes: 10
+    started_at: '2026-08-27T00:36:00-07:00'
+    deadline_at: '2026-08-27T00:46:00-07:00'
+    expected_output: >-
+      Exact non-Boolean integer identifier validation, nonempty-string part kinds, exact
+      schema constants for promotion and each refusal, and focused counterexample tests.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_contact_full_cell.py tests/test_contact_full_cell_control.py
+    kill_condition: >-
+      Stop if equality-based inventory checks still admit another JSON scalar type or if
+      any target-authorizing promotion sentence or wrong refusal kind validates.
+    fallback: >-
+      Keep BC-030 ready with the first surviving counterexample and do not resume W2.
+    outcome: >-
+      Added one exact square-ID predicate across parts, walls, and every pair-axis field,
+      rejected non-string part kinds, made the promotion boundary an exact schema
+      constant, and split wall, pair, and price refusal schemas into exact-kind records.
+    evidence:
+    - Thirty focused tests pass in 0.30 seconds, including Boolean and floating-point IDs, non-string kinds, a target-authorizing promotion mutation, and a packing-feasible refusal-kind mutation.
+    - Generator check mode remains byte-clean, Ruff passes, and BasedPyright reports zero errors or warnings.
+    stop_reason: Both witnessed counterexamples now fail at their owning boundaries, so the repair closed in under three minutes.
+    next_action: Ask the two finding reviewers to replay only their counterexamples.
+  - workflow: factual-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: Recheck only the two repaired W2 counterexamples and issue the final BC-030 implementation verdict.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: The exact repairs and focused regressions are green.
+    budget_minutes: 10
+    started_at: '2026-08-27T00:38:00-07:00'
+    deadline_at: '2026-08-27T00:48:00-07:00'
+    expected_output: Independent ACCEPT or one residual exact-ID or schema-firewall blocker.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_contact_full_cell.py tests/test_contact_full_cell_control.py
+    kill_condition: Stop if either original counterexample still passes or a repair weakens another frozen boundary.
+    fallback: Return the residual counterexample to W7 and keep BC-030 ready.
+    outcome: >-
+      ACCEPT. The original type reviewer verified exact non-Boolean integer checks at
+      every identifier boundary and passing Boolean, float, and kind regressions. The
+      original claim reviewer directly replayed the promotion mutation and all four
+      wrong refusal kinds; every mutation is now rejected. The independent price review
+      remained ACCEPT.
+    evidence:
+    - All three independent implementation reviews are ACCEPT after the two narrow repairs.
+    - >-
+      The proportional validation surface passed: 228 fast tests with 24 deselected,
+      all 224 pure-YAML datasets, and the complete known-best step including the
+      generated control.
+    - The three selected validation steps completed in 128.09 seconds wall time while documentation and re-review work continued in parallel.
+    stop_reason: Every W2 blocker is independently closed and the proportional integration surface is green.
+    next_action: Run W3 to disposition BC-030 and choose BC-016 or BC-017 without beginning target execution.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Explain what the structural control changes, close or retain BC-030, and select the
+      highest-information BC-016 or BC-017 successor without starting it.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The repaired CG-010 structural control has three independent ACCEPT verdicts and a
+      green proportional integration surface.
+    budget_minutes: 10
+    started_at: '2026-08-27T00:39:00-07:00'
+    deadline_at: '2026-08-27T00:49:00-07:00'
+    expected_output: >-
+      A terminal BC-030 disposition, explicit limits on what it authorizes, and one
+      ranked next constructive cell with entry evidence and a bounded first slice.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop on numerical row work, target geometry, n=11 execution, or treating the
+      structural control as a realized or feasible packing.
+    fallback: >-
+      Keep both downstream cells ready and rotate to the planned W5/third-program breadth
+      checkpoint if neither has a complete bounded entry contract.
+    outcome: >-
+      Completed BC-030 for its structural-only criterion. CG-010 proves that one literal
+      target-free fixed-angle cell can carry a complete partition, total wall decisions,
+      an exhaustive pair/axis inventory, a joint canonical orbit, typed caps, and an
+      exact work price with independent mutations. It does not compile LP rows, realize
+      geometry, or establish fit, feasibility, optimality, H-044/H-045, or target
+      coverage. Ranked BC-016 ahead of BC-017: the aligned/glued cross-toolchain
+      differential can test the existing solver's most degenerate correctness boundary
+      now, while end-to-end LP and pair-test accounting should follow once a numerical
+      full-cell driver exists.
+    evidence:
+    - BC-030 satisfies its positive, omitted-wall, omitted-axis, tie, cap, and accidental-input controls with three final independent ACCEPT verdicts.
+    - BC-016 already has its quench, proved n=5/n=10 controls, and n=16 guard; its next output is one bounded deterministic differential, not target search.
+    - BC-017 remains ready and gains a sharper boundary from CG-010's zero-LP receipt, but it cannot yet count end-to-end cell solves for a numerical driver that has not been built.
+    stop_reason: The BC-030 exit is met and the next constructive dependency is ranked; continuing implementation here would cross the numerical-realization boundary.
+    next_action: >-
+      Rotate through the scheduled W5 efficiency checkpoint and third-program breadth
+      pass; when constructive work resumes, open BC-016 under think-3yv8 before BC-017.
+  - workflow: efficiency-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    objective: >-
+      Measure the BC-030 edit, mutation, review, and proportional-integration loop and
+      admit no optimization unless it can repay during the remaining portfolio horizon.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-030 is terminal after multiple fast edit/review cycles, and the next agenda row
+      intentionally rotates programs rather than extending constructive implementation.
+    budget_minutes: 10
+    started_at: '2026-08-27T00:42:00-07:00'
+    deadline_at: '2026-08-27T00:52:00-07:00'
+    expected_output: >-
+      One measured continue/no-change decision naming command long poles, useful
+      concurrency, disk headroom, and the cheapest validation policy for the next lane.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-validate --list
+    kill_condition: >-
+      Do not optimize a subsecond focused loop, rerun the 128-second integration surface
+      without changed shared owners, or start a full gate below the final checkpoint.
+    fallback: >-
+      Retain the measured command split and rotate directly to BC-031 if no optimization
+      can repay before finalization.
+    outcome: >-
+      No performance change is warranted. BC-030's edit loop is subsecond, its eight
+      targeted mutations complete inside one 30-minute slice, and the 128.09-second
+      proportional integration surface ran in the background while W2 review and repair
+      continued. The long poles are appropriate checkpoint work, not per-edit work.
+      Retain focused tests plus one named mutation during edits, the eight-control subset
+      before review, and shared owner/schema/integration steps only at coherent
+      checkpoints.
+    evidence:
+    - Thirty focused module and artifact tests complete in 0.30 seconds; generator check and lint/type checks also return in about a second.
+    - The eight-control source-snapshot subset took 22.5 seconds in the independent review and reused one 33.1 MiB private tree.
+    - Known-best, 228 fast tests, and all schema artifacts ran concurrently in 128.09 seconds wall time; their individual accumulated times were 128.08, 96.37, and 35.85 seconds.
+    - Three reviewers worked in parallel with implementation and rechecked only their exact blockers, so no CI or review wait became idle coordinator time.
+    - Free space is 6.1 GiB, above the 4 GiB integration threshold but still too scarce for speculative duplicate gates.
+    stop_reason: No measured bottleneck in the remaining per-edit loop can repay an optimization slice, so W5 closed immediately and preserved the breadth rotation.
+    next_action: Open BC-031's bounded source-recovery pass and retain either one primary source or a dated reproducible negative result.
+  - workflow: research-pass
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Re-test the highest-value missing-primary routes, beginning with El Moumni 1999 and
+      Trump 2023, and retain either a primary source or a dated reproducible negative
+      result that names every checked route without defeating access controls.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-030 is terminal and the efficiency review preserved the planned third-program
+      breadth rotation rather than extending constructive implementation.
+    budget_minutes: 20
+    started_at: '2026-08-27T00:43:00-07:00'
+    deadline_at: '2026-08-27T01:03:00-07:00'
+    expected_output: >-
+      One recovered source with source-faithful notes, or one dated negative acquisition
+      receipt naming queries, repositories, identifiers, access outcome, and any change
+      to the proof or priority map.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen python -m
+      devtools.validate_schemas
+    kill_condition: >-
+      Stop on a login wall, paywall, robots/access-control bypass, unverifiable mirror,
+      secondary summary presented as primary text, or an acquisition that cannot be
+      archived under its reuse terms.
+    fallback: >-
+      Update the canonical source-availability row with a dated negative search result
+      and rotate without converting absence into a mathematical conclusion.
+    outcome: >-
+      Recovered both priority primaries without an access workaround. The Hungarian
+      Academy's REAL-J repository supplies El Moumni's full 1999 article inside the
+      published volume, and Walter Trump's author site supplies his full 2023 preprint.
+      Retained each PDF with faithful text extraction, corrected the availability map,
+      and preserved Trump's local-rigidity rather than global-optimality boundary.
+    evidence:
+    - Three independent searches agreed that the El Moumni article is on PDF pages 287-296 of REAL-J eprint 5478; no DOI was verified.
+    - The primary text proves s(7) = 3 through center forcing, a parallel-line intersection bound, and three finite symmetry cases; Proposition 3 yields s(15) = 4.
+    - Trump's public author page links an 851,569-byte PDF that gives the incidence description and degree-8 angle equation, while requiring an essentially different arrangement for any improvement.
+    - The canonical ledger now has eight recovered-source corrections and neither source remains in the unretrieved table.
+    stop_reason: Both promised priority sources were retained eight minutes into the 20-minute cap, leaving time for the required source-driven insight step.
+    next_action: >-
+      Convert the newly visible El Moumni method into one bounded, source-faithful replay
+      question without beginning implementation or widening it to n = 11.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Interpret the two recovered sources, correct the proof-priority map, and select
+      one smallest falsifiable follow-up rather than opening a transcription rabbit hole.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Both sources changed the availability record, and El Moumni supplies a proof
+      mechanism that the prior secondary-only record did not describe.
+    budget_minutes: 12
+    started_at: '2026-08-27T00:49:30-07:00'
+    deadline_at: '2026-08-27T01:01:30-07:00'
+    expected_output: >-
+      One source-faithful method summary, corrected priority, and one bounded replay
+      question with an explicit non-n=11 claim boundary.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen python -m
+      devtools.render_research_tables --check
+    kill_condition: >-
+      Stop before reconstructing any damaged formula, transcribing either paper in full,
+      or treating local rigidity or a published n = 7 proof as evidence for n = 11.
+    fallback: >-
+      Retain only the corrected source rows and record that no proof question survived
+      source-faithful narrowing.
+    outcome: >-
+      Preserved El Moumni's finite center-forcing and line-intersection pattern as the
+      next published lower-bound replay control, while leaving n = 11 and generic
+      unavoidable-set automation outside the result. Registered think-trkj beneath the
+      existing correctness prerequisite rather than displacing the broader agenda.
+    evidence:
+    - The durable research note now distinguishes the n = 7 three-case argument from the n = 15 general-bound substitution.
+    - think-trkj requires a source-faithful replay, an adversarial threshold or route perturbation, and independent comparison with the retained scan.
+    - The source table renderer is byte-current after removing both sources from the missing queue.
+    stop_reason: The method, priority change, and one bounded proof question are recorded; further transcription would exceed the insight purpose.
+    next_action: >-
+      Rotate to BC-032 and select the smallest existing numerical/contact system whose
+      promotion boundary can be checked or typed as blocked inside one bounded slice.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Reconcile current exact and interval ownership, inventory already-built witness
+      systems, and select the smallest well-posed BC-032 promotion contract before any
+      numerical or implementation work begins.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-031 is terminal and the balanced agenda now rotates from source recovery to the
+      numerical-to-formal promotion program.
+    budget_minutes: 20
+    started_at: '2026-08-27T00:51:30-07:00'
+    deadline_at: '2026-08-27T01:11:30-07:00'
+    expected_output: >-
+      One ranked inventory of existing candidate systems and a frozen exact, interval,
+      or typed-blocker criterion that fits a later 10-30-minute execution slice.
+    validation_command: >-
+      rg -n "interval|exactification|promotion|contact system" explorations/packing/src
+      explorations/packing/cases explorations/packing/tests
+    kill_condition: >-
+      Stop on an ambiguous contact set, singular system without a typed outcome,
+      tolerance-only acceptance, a generic interval framework proposal, or a target
+      whose checker cannot be independent within the remaining session.
+    fallback: >-
+      Record the smallest typed blocker and rotate to BC-034 without starting an
+      unbounded interval implementation.
+    outcome: >-
+      Selected the retained n = 11 decimal witness for one robust-rational
+      tool-validation control. It is the only in-scope system that already has a
+      complete generic exact verifier and a separate Fraction-only checker inside the
+      slice. Kingbird n = 29 remains inadmissible because its explicit six-equation
+      system has no outward-rounded certificate or independent checker; exact Trump
+      export and the n = 1 scalar interval control remain useful later calibrations.
+    evidence:
+    - The n = 11 input is a complete 11-square center-angle Witness/v1 artifact with all 55 pairs numerically checked.
+    - Generic rational promotion emits typed malformed-option, unsupported-input, and robustification-failed outcomes rather than relabeling the source.
+    - devtools.check_rational_witness_independent shares neither geometry nor verification code with the promotion path.
+    - The n = 29 interval path correctly remains checker-not-built; high decimal precision is not a substitute.
+    stop_reason: Three independent inventories converged on one bounded exact control or a larger interval blocker, so selection closed fourteen minutes early.
+    next_action: >-
+      Execute the frozen n = 11 robust-rational control at 36 digits and a 1e-8 cap,
+      retain its exact artifact only if both independent replays pass, and add cap,
+      completeness, overlap, and claim-boundary regressions.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Exercise the existing numerical-to-exact promotion path on the retained n = 11
+      witness and retain a replayable rational control without changing any frontier
+      claim.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      BC-032 selection found one exact path with a complete independent checker; the
+      interval alternatives exceed the bounded slice or remain typed blockers.
+    budget_minutes: 20
+    started_at: '2026-08-27T00:57:30-07:00'
+    deadline_at: '2026-08-27T01:17:30-07:00'
+    expected_output: >-
+      A generated n = 11 rational Witness/v1 control, exact generic and independent
+      replays, and focused mutations for zero cap, incomplete geometry, overlap, and
+      false claim widening.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_known_best_n011_rational_control.py
+    kill_condition: >-
+      Stop if the generated side does not lie strictly above the retained source side
+      and at most 1e-8 above it, either exact checker disagrees, any id or pair is
+      missing, a mutation passes, or the artifact claims source-decimal exactness,
+      record improvement, rigidity, or optimality.
+    fallback: >-
+      Delete the candidate artifact, retain the typed promotion failure and exact
+      parameter receipt, leave BC-032 open, and rotate to BC-034.
+    outcome: >-
+      Generated a byte-stable rational Witness/v1 control from the retained n = 11
+      decimal pose at 36 rational digits. Its exact side is strictly above the source
+      side by about 2.88e-31 and remains far below the declared 1e-8 relaxation cap.
+      Both the generic exact verifier and a separate Fraction-only checker accept all
+      11 ids and 55 pairs. Zero-cap, incomplete-list, overlap, stale-byte, and
+      claim-widening controls reject. This validates the existing robustification tool
+      at one input and establishes only a nearby exact feasible upper bound.
+    evidence:
+    - devtools.generate_known_best_n011_rational_control owns and byte-checks witnesses/known-best-n011-rational-control.yaml against the retained source and frozen parameters.
+    - The generic exact replay and independent checker both pass 11 squares and all 55 unordered pairs.
+    - Five focused tests enforce side relaxation, parameter receipt, complete ids, replay, typed zero-cap failure, overlap rejection, and the claim firewall.
+    - The exact-verification gate now replays the generator, generic verifier, and independent checker; its complete focused step passes in 1.20 seconds.
+    stop_reason: The generated artifact, two exact replays, five adversarial controls, and gate ownership are complete, so W7 closed in under seven minutes.
+    next_action: >-
+      Run the immediate W3 interpretation, leave generic interval existence and n = 29
+      certification under think-75ll, and rotate the active clock to BC-034.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Interpret what the accepted n = 11 tool control does and does not change, then
+      select one bounded BC-034 proof question without turning a passing calibration
+      into a scientific result.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      BC-032 produced valid exact tooling evidence, and the balanced agenda requires an
+      immediate interpretation before another program receives the clock.
+    budget_minutes: 10
+    started_at: '2026-08-27T01:04:00-07:00'
+    deadline_at: '2026-08-27T01:14:00-07:00'
+    expected_output: >-
+      One explicit non-result boundary for BC-032 and one falsifiable, source-owned
+      BC-034 question that fits a 10-30-minute research pass.
+    validation_command: >-
+      rg -n "H-037|finite transfer|effective|synchronization|boundary" campaign
+      docs/project/research docs/project/specs
+    kill_condition: >-
+      Stop before inferring source-decimal exactness, record improvement, rigidity,
+      optimality, an asymptotic exponent, or any finite-n consequence not already
+      supported by a primary source and an explicit derivation.
+    fallback: >-
+      Preserve the n = 29 typed checker blocker and use the remaining clock only to rank
+      BC-034's unresolved obligations.
+    outcome: >-
+      Kept BC-032 as a passing tool calibration with no scientific promotion and
+      selected Bui Section 3.1's exact replacement-grid count as BC-034's smallest new
+      proof obligation. Unlike a full theorem or effective-constant audit, the source
+      gives every index needed for an all-parameter bijection: c > 0,
+      i_j = ceil((j-1)c)+1, the S-to-T replacement threshold, truncation at i_m, and one
+      named final deletion. The balance-regression and Lemmas 3-5 controls remain
+      bounded successors; finite transfer stays blocked first by the absent verified
+      public-parent corpus above n = 100.
+    evidence:
+    - Three independent screens rejected effective x0, full Proposition 7, and finite transfer as too implicit for one bounded slice.
+    - The selected count question has a complete local primary source and a clear gap-or-duplicate falsifier with no numerical tolerance.
+    - Its allowed conclusion is exactly m*i_m cells before deleting S_(i_m,m), then m*i_m-1; it says nothing about nonoverlap or containment.
+    stop_reason: The next question, source inputs, acceptance rule, falsifier, and claim firewall are explicit, so W3 closed in seven minutes.
+    next_action: >-
+      Prove the all-parameter index bijection or retain the first counterexample or
+      missing range, without invoking the primitive's geometry.
+  - workflow: research-pass
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Prove or refute the exact square-count bookkeeping in Bui Section 3.1 for every
+      positive c and integer m at least 2, using only the stated replacement indices.
+    status: completed
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-034 screening identified a new exact-count obligation with complete local
+      inputs and a bounded all-parameter falsifier.
+    budget_minutes: 20
+    started_at: '2026-08-27T01:11:00-07:00'
+    deadline_at: '2026-08-27T01:31:00-07:00'
+    expected_output: >-
+      An index-level bijection proving exactly one retained S or T square per grid cell
+      through row i_m and column m, or one explicit gap, duplicate, or undefined range.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_bui_integer_count.py
+    kill_condition: >-
+      Stop if the argument needs a figure, floating-point sampling, nonoverlap,
+      containment, effective constants, or any unstated placement convention.
+    fallback: >-
+      Retain a typed source-index blocker, keep exact count open, and rotate to the
+      exact Lemmas 3-5 packet.
+    outcome: >-
+      Proved the exact index count after identifying one omitted source bound. For
+      c > 0, the thresholds i_j are nondecreasing; in every column k < m, retained S
+      rows below i_(k+1) and inserted T rows from i_(k+1) through i_m are disjoint and
+      exhaustive. Column m remains S. The intended replacement range is 2 <= j <= m,
+      so the primitive has exactly m*i_m labelled squares before deleting S_(i_m,m)
+      and m*i_m-1 afterward. D-343 records that the paper prints only j >= 2. The result
+      is combinatorial bookkeeping, not a geometric or asymptotic proof.
+    evidence:
+    - H-037 contains the all-real proof, the source-range inference, and explicit exclusions.
+    - The case-local Fraction replay validates the full coordinate inventory, independent S/T count formulas, and the actual named deletion.
+    - Eight focused tests cover 9,600 rational parameter instances, coincident thresholds, m = 2, invalid domains, exact threshold tuples, and the unbounded-range mutation.
+    - Ruff and BasedPyright are clean; three independent reviews accept the proof and gate placement, with one executable mutation gap repaired before closure.
+    stop_reason: The source defect, all-parameter proof, executable replay, adversarial controls, and independent audits are complete, so W1 closed in four minutes.
+    next_action: >-
+      Interpret which finite-transfer blocker moved, rank the exact Lemmas 3-5 packet,
+      and rotate away rather than expanding into a full theorem audit.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Explain what the exact-count proof changes in the finite-transfer map and choose
+      the next program or bounded successor without conflating bookkeeping with geometry.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      BC-034 produced a valid new proof fragment and therefore requires immediate W3
+      interpretation before any further source theorem work.
+    budget_minutes: 10
+    started_at: '2026-08-27T01:15:00-07:00'
+    deadline_at: '2026-08-27T01:25:00-07:00'
+    expected_output: >-
+      One updated blocker ordering, one falsifiable successor, and an explicit decision
+      to continue or rotate under the balanced portfolio rule.
+    validation_command: >-
+      rg -n "Exact count|finite-transfer|Lemma 3|Lemma 6|D-343" campaign resources
+      defects.yaml
+    kill_condition: >-
+      Stop before treating an exact label count as square existence, nonoverlap,
+      containment, a waste bound, a finite improvement, or an asymptotic theorem.
+    fallback: >-
+      Leave the broader lane open with exact count discharged and rotate to portfolio
+      review if no successor has a source-complete criterion.
+    outcome: >-
+      Removed exact square count from the primitive's blocker list but left geometry,
+      nonoverlap, containment, boundary accounting, effective constants, finite x0, and
+      the missing verified parent corpus untouched. The next source-complete obligation
+      is Bui Section 4.2's Lemmas 3-5: three local analytic inequalities with exact
+      rational margins and no figure dependency. A full Lemma 6 or Proposition 7 audit
+      remains too large. The portfolio has now screened constructive enumeration,
+      sources, promotion, and asymptotic transfer, so one more bounded BC-034 proof
+      packet does not violate the breadth rule.
+    evidence:
+    - The count proof changes one bookkeeping prerequisite only; it does not make H-035 instrument-ready.
+    - Lemmas 3-5 have explicit open domains and elementary reductions, while Lemma 6 additionally needs recurrence and specialization guards.
+    - The absent independently verified parent above n = 100 remains the first finite-record launch blocker regardless of the local proof packet.
+    stop_reason: The changed blocker order, exact next criterion, and portfolio decision are explicit, so W3 closed in under two minutes.
+    next_action: >-
+      Prove or refute Bui Lemmas 3-5 exactly, retain endpoint and sign mutations, and
+      stop before Lemma 6 unless a new slice is declared.
+  - workflow: research-pass
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Prove or refute Bui Section 4.2 Lemmas 3-5 as one exact local inequality packet
+      with every open-domain, cancellation, endpoint, and rational margin explicit.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The prior W3 ranked this as the smallest source-complete successor after the exact
+      count proof, and every other dependency-ready program has received a bounded screen.
+    budget_minutes: 20
+    started_at: '2026-08-27T01:17:00-07:00'
+    deadline_at: '2026-08-27T01:37:00-07:00'
+    expected_output: >-
+      Exact proofs of sec(z) < 1.01, the quartic trigonometric bound, and the 0.49
+      tangent-square lower bound on their stated domains, or one exact counterexample.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_bui_local_inequalities.py
+    kill_condition: >-
+      Stop on numerical tolerance, an unjustified sign cancellation, an endpoint leak,
+      a figure dependency, or any attempt to promote the packet to Proposition 6 or 7.
+    fallback: >-
+      Retain the first failed inequality or missing guard, leave Lemma 6 closed, and
+      rotate to checkpoint integration.
+    outcome: >-
+      Proved all three local inequalities exactly on the printed open domains. Lemma 3
+      follows from cos(z) > 127/128 > 100/101 with margin 27/12928. Lemma 4 reduces,
+      after positive cancellation and denominator clearing, to
+      (1-c)(4c^2+3c+1) > 0. Lemma 5's reduced polynomial is increasing above 49/200
+      and has exact lower margin 677/81920 at c = 127/128. The executable certificate
+      requires Fraction inputs, excludes zero explicitly, checks both cleared-
+      denominator identities, and refuses mutated bounds. No conclusion beyond these
+      three lemmas is promoted.
+    evidence:
+    - H-037 contains the exact reductions, sign guards, rational margins, and local-only claim boundary.
+    - Ten focused controls cover production coefficients, cleared polynomial identities, a weaker angle bound, a strengthened 1/2 coefficient, zero inclusion, nonpositive values, floats, NaN, and bool.
+    - Ruff and BasedPyright pass, and the combined count-plus-inequality suite passes 18 tests in 1.41 seconds.
+    - Independent audits found and then accepted repairs for exact input types, zero-endpoint exclusion, and the two trig-to-polynomial reduction seams.
+    stop_reason: The proof, exact replay, adversarial mutations, and post-repair audits are complete, so the bounded packet closed in six minutes.
+    next_action: >-
+      Run W3, keep Lemma 6 closed pending a fresh recurrence criterion, and decide
+      whether checkpoint integration now has higher value than another proof fragment.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Interpret the two accepted BC-034 proof fragments, rank the remaining recurrence
+      and finite-transfer blockers, and decide between one new lane or integration.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The exact Lemmas 3-5 packet is valid research evidence and requires immediate W3
+      interpretation before any Lemma 6 work.
+    budget_minutes: 10
+    started_at: '2026-08-27T01:23:00-07:00'
+    deadline_at: '2026-08-27T01:33:00-07:00'
+    expected_output: >-
+      An updated theorem-obligation order, one falsifiable successor, and an explicit
+      checkpoint-versus-continuation choice based on evidence and current diff size.
+    validation_command: >-
+      git diff --check && uv run --directory explorations/packing --frozen
+      packing-ledger check
+    kill_condition: >-
+      Stop before entering Lemma 6 without its specialization, induction range, strict
+      bounds, and source-local conclusion all frozen.
+    fallback: >-
+      Rotate to integration because two proof fragments and one new source defect now
+      form a coherent checkpoint.
+    outcome: >-
+      Ranked Bui Lemma 6's specialized recurrence and induction range as the next local
+      theorem obligation, followed by primitive geometry and complete boundary
+      accounting. Exact count and Lemmas 3-5 are now discharged, but the parent corpus,
+      effective constants, finite x0, and finite constructor remain unchanged. Chose a
+      coherent integration checkpoint before more research because the current diff now
+      spans four programs, two generated controls, two recovered primaries, one source
+      defect, and two new proof packets; carrying another proof slice would increase
+      reconciliation risk more than information value.
+    evidence:
+    - Lemma 6 now has accepted local prerequisites but still needs beta/gamma/omega specialization, induction range, and every strict bound frozen before work.
+    - The current checkpoint has fast focused coverage but its ledger, schema, generated views, and cross-program prose have not yet been reconciled together.
+    - Integration can run concurrently with independent review and does not require waiting on a long CI build.
+    stop_reason: The successor order and integration decision are explicit, so W3 closed in under two minutes without opening Lemma 6.
+    next_action: >-
+      Reconcile generated records, run proportional local gates, obtain three
+      independent diff audits, and commit/push the coherent checkpoint before continuing.
+  - workflow: factual-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Reconcile the multi-program checkpoint, regenerate every owned view, run the
+      smallest complete validation surfaces, and obtain independent claim and ownership
+      audits without waiting idly on long checks.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Two proof fragments complete BC-034 and the uncommitted checkpoint now crosses the
+      risk threshold for another research slice.
+    budget_minutes: 30
+    started_at: '2026-08-27T01:25:00-07:00'
+    deadline_at: '2026-08-27T01:55:00-07:00'
+    expected_output: >-
+      Byte-current generators and ledger, valid schemas, clean focused and selected
+      integration checks, three independent reviews, explicit staging, and a pushed
+      checkpoint or one typed blocker.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-validate --fast
+    kill_condition: >-
+      Stop on a claim-boundary contradiction, generated drift, schema failure, test
+      failure, free space below 4 GiB, or a check that cannot finish inside the slice;
+      move any long gate off the critical path rather than waiting.
+    fallback: >-
+      Commit nothing, record the first typed blocker, retain all focused green evidence,
+      and open a bounded repair slice.
+    outcome: >-
+      Reconciled the four completed program cells, recovered the intended tracked
+      checkpoint exactly from the local session transcript after a formatter and shell-
+      compatibility recovery error, regenerated every owned view, and cleared the
+      focused scientific, schema, exact, archive, and record surfaces. The first fast
+      gate exposed formatting drift in five new Python files; the files were formatted,
+      linted, and replayed through all 56 focused tests before the slice closed.
+    evidence:
+    - All 56 focused BC-030, BC-032, and BC-034 tests pass after the formatting repair.
+    - Both new generators are byte-current; 100 frontmatter artifacts and 225 YAML datasets validate.
+    - Seven selected integration steps pass, including exact verification, generated views, defect log, synopsis, README, and campaign record.
+    - The broader fast run passed 257 behavioral tests and every selected step except the formatting check that triggered the completed repair.
+    - Three independent audits accepted transcript recovery, raw-source byte identity, claim boundaries, and the proportional validation plan.
+    stop_reason: >-
+      The checkpoint is coherent and the only fast-gate failure was repaired within the
+      slice; no scientific or claim-boundary blocker remains.
+    next_action: >-
+      Run the post-repair lint selector and ledger check, then stage, commit, and push
+      this coherent checkpoint without waiting on a long CI build.
+  - workflow: efficiency-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    objective: >-
+      Commit and push the reconciled checkpoint, then measure the elapsed work,
+      validation, recovery, and delegation costs since the last W5 inventory and choose
+      the next research slice under BC-028 and think-kdil.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      The integration checkpoint is coherent and the campaign has accumulated more than
+      two hours of pipeline, proof, source-recovery, and coordination evidence since its
+      last measured inventory.
+    budget_minutes: 20
+    started_at: '2026-08-27T01:54:11-07:00'
+    deadline_at: '2026-08-27T02:14:11-07:00'
+    expected_output: >-
+      A pushed checkpoint plus one measured inventory naming the dominant active cost,
+      work avoided by parallel review, and the highest-information next slice.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop before any optimization unless measured remaining-horizon savings exceed its
+      implementation and validation cost; do not wait on CI or begin a scientific
+      target while the checkpoint remains unpushed.
+    fallback: >-
+      Record the first checkpoint blocker, preserve the measured timings, and allocate
+      one bounded repair slice instead of opening new research.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Read agenda 003, the constructive-enumeration spec, CG-010 owners, and current cell
-      enumerator code before proposing any artifact.
+      Re-render and check the session record, explicitly stage and push the coherent
+      checkpoint, then inventory the last two hours before choosing the next lane.
   primary_bead: think-whwc
   status: in_progress
   budget:
     wall_minutes: 300
-    max_cycles: 30
+    max_cycles: 48
     orientation_minutes: 10
     checkpoint_minutes: 20
     slice_minutes: 30
@@ -969,8 +1820,9 @@ session:
   - Session 025 is terminal and the generated ledger records it as completed.
   stop_reason: null
   next_action: >-
-    Under BC-029, think-whwc, and think-1s0h, interpret the accepted scale proof data
-    and select the next exact instrument obligation; do not run the pure -W target.
+    Re-render and check the session record, explicitly stage and push the coherent
+    multi-program checkpoint, then complete the measured W5 inventory under BC-028 and
+    think-kdil before selecting another research lane.
 ---
 # Session 026 — Balanced Research Program, Session A
 

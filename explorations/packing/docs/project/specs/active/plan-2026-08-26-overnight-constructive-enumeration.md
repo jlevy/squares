@@ -179,9 +179,12 @@ in the source policy.
 The independently checked isomorph-free path reduces 1,533,696 size-five topology
 colorings to 11,013 abstract contact-scaffold orbits.
 The retained atlas contains no packing geometry, local-LP outcome, feasibility claim, or
-H-044 verdict. Full-cell realization remains unbuilt under CG-010; it must price
-partitions, angle assignments, wall seatings, non-edge axes, and symmetry orbits before
-any target-sized execution.
+H-044 verdict. CG-010 now supplies a separate literal target-free structural full-cell
+control with a total wall inventory, an exhaustive pair partition, one frozen oriented
+axis per pair, a joint D4-by-relabeling label, and separated candidate-domain and
+executed-work prices. Its control examines one selected raw cell through 48 orbit images
+and performs zero LP solves. Numerical row compilation and realization remain unbuilt,
+and no target-sized execution is authorized.
 
 **Finalization reserve.** Reconcile generated views, run the proportionate gate, update
 the session and research-loop records, commit, push, and leave the exact first
