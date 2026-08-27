@@ -1,12 +1,12 @@
 ---
-title: session-018 — PR 45 merge readiness
+title: session-023 — PR 45 merge readiness
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-018
+  id: session-023
   title: Resolve the PR 45 review and reach a merge-ready checkpoint
   date: '2026-08-26'
   started_at: '2026-08-26T12:51:58-07:00'
@@ -562,7 +562,7 @@ session:
     next_action: Coordinator applies the exact durable and PR-body corrections.
     phase: 2
   outputs:
-  - campaign/agent-sessions/session-018-pr45-merge-readiness.md
+  - campaign/agent-sessions/session-023-pr45-merge-readiness.md
   - atlas/known-best/chunk-partitions.json
   - atlas/known-best/chunk-evidence-profile.json
   - atlas/known-best/evidence/non-grid-chunk-evidence-profile.svg
@@ -582,7 +582,7 @@ session:
     measured timeout, watch both GitHub jobs, and disposition every review bead only
     after those receipts are green.
 ---
-# Session 018 — PR 45 Merge Readiness
+# Session 023 — PR 45 Merge Readiness
 
 ## Four-Hour Slot Plan
 

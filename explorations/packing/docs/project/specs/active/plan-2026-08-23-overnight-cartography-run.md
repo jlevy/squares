@@ -333,7 +333,7 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 018](../../../../campaign/agent-sessions/session-018-pr45-merge-readiness.md).
+[session 023](../../../../campaign/agent-sessions/session-023-pr45-merge-readiness.md).
 Under `BC-019` and `think-eyix`, finish the PR 45 merge-readiness review, strict local
 gate, and cross-platform checkpoint.
 The completed target-free path retains 11,013 exact size-five signed-contact orbits with

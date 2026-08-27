@@ -18,6 +18,7 @@ type Axis = Literal["u", "v"]
 type Wall = Literal["left", "right", "bottom", "top"]
 type LimitKind = Literal["orbit-image-cap", "candidate-cap", "emitted-label-cap"]
 type ProposalLimitKind = Literal["coloring-space-cap", "emitted-scaffold-cap"]
+type _UniformEdgeKey = tuple[int, int, Axis, int]
 
 MAX_SCAFFOLD_SIZE = 5
 WALL_ORDER: dict[Wall, int] = {"left": 0, "right": 1, "bottom": 2, "top": 3}
@@ -501,6 +502,49 @@ def scaffold_orbit(
             )
 
 
+def _canonicalize_uniform_wall_free(
+    scaffold: ContactScaffold, *, required_images: int
+) -> CanonicalScaffold:
+    """Canonicalize the pricing slice without materializing every orbit scaffold."""
+    # Every image has identical uniform vertices, empty walls, and a fixed edge count.
+    # For the supported size <= 5, JSON label order therefore matches lexicographic order
+    # on these single-digit (left, right, normal, sign) edge tuples exactly.
+    size = len(scaffold.vertex_colors)
+    best: tuple[tuple[_UniformEdgeKey, ...], OrbitWitness] | None = None
+    unique: set[tuple[_UniformEdgeKey, ...]] = set()
+    for symmetry in D4_TRANSFORMS:
+        for old_to_new in permutations(range(size)):
+            edges: list[_UniformEdgeKey] = []
+            for edge in scaffold.edges:
+                normal, sign = _edge_color(symmetry, edge.normal, edge.sign)
+                left, right = old_to_new[edge.left], old_to_new[edge.right]
+                if left > right:
+                    left, right = right, left
+                    sign = -sign
+                edges.append((left, right, normal, sign))
+            key = tuple(sorted(edges))
+            unique.add(key)
+            witness = OrbitWitness(symmetry.name, old_to_new)
+            if best is None or key < best[0]:
+                best = key, witness
+    if best is None:
+        raise AssertionError("a nonempty scaffold has an empty symmetry orbit")
+    key, witness = best
+    canonical = ContactScaffold(
+        scaffold.vertex_colors,
+        tuple(ContactEdge(*edge) for edge in key),
+        scaffold.wall_contacts,
+    )
+    return CanonicalScaffold(
+        status="canonical",
+        canonical_label=scaffold_label(canonical),
+        scaffold=canonical,
+        witness=witness,
+        raw_image_count=required_images,
+        unique_image_count=len(unique),
+    )
+
+
 def canonicalize_scaffold(
     scaffold: ContactScaffold, *, maximum_orbit_images: int = 960
 ) -> CanonicalizationResult:
@@ -508,6 +552,12 @@ def canonicalize_scaffold(
     if maximum_orbit_images < 1:
         raise ScaffoldError("malformed-cap", "maximum_orbit_images must be positive")
     required = len(D4_TRANSFORMS) * math.factorial(len(scaffold.vertex_colors))
+    if (
+        maximum_orbit_images >= required
+        and not any(scaffold.wall_contacts)
+        and len(set(scaffold.vertex_colors)) == 1
+    ):
+        return _canonicalize_uniform_wall_free(scaffold, required_images=required)
     best: tuple[str, OrbitWitness, ContactScaffold] | None = None
     unique: set[str] = set()
     examined = 0

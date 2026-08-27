@@ -1,12 +1,12 @@
 ---
-title: session-017 — PR 44 review and known-best constructive atlas
+title: session-022 — PR 44 review and known-best constructive atlas
 softschema:
   contract: packing.squares:AgentSession/v2
   schema: ../schemas/agent-session.schema.yaml
   envelope: session
   status: enforced
 session:
-  id: session-017
+  id: session-022
   title: Review PR 44 and build the known-best constructive atlas
   date: '2026-08-26'
   started_at: '2026-08-26T02:55:00-07:00'
@@ -1983,7 +1983,7 @@ session:
       the 11,013-orbit abstract size-five atlas, the case-level evidence profile, and a
       direct stable-identity interface. The terminal review found five merge-readiness
       issues; their post-review correction, dependent regeneration, validation, and CI
-      receipts are owned by session 018 rather than backfilled into this closed clock.
+      receipts are owned by session 023 rather than backfilled into this closed clock.
   delegations: []
   outputs:
   - docs/project/reviews/review-2026-08-26-pr44-constructive-enumeration-and-known-best-atlas.md
@@ -1993,7 +1993,7 @@ session:
   - atlas/known-best/contact-assembly-grammar.yaml
   - witnesses/known-best/n-001.yaml
   - atlas/known-best/rendering/n-001.svg
-  - campaign/agent-sessions/session-017-pr44-known-best-atlas.md
+  - campaign/agent-sessions/session-022-pr44-known-best-atlas.md
   - src/sqpack/contact_assembly.py
   - src/sqpack/contact_realization.py
   - atlas/known-best/contact-enumeration-pricing.json
@@ -2040,10 +2040,10 @@ session:
     with a revise verdict. PR 45 remains draft while the five synced review findings are
     addressed.
   next_action: >-
-    Follow session 018 for the PR 45 merge-readiness result and final CI receipt. Keep
+    Follow session 023 for the PR 45 merge-readiness result and final CI receipt. Keep
     the atlas calibration-only and preserve the no-geometry/no-feasibility boundary.
 ---
-# Session 017 — PR 44 Review and Known-Best Constructive Atlas
+# Session 022 — PR 44 Review and Known-Best Constructive Atlas
 
 ## Pre-Session Evidence
 
@@ -2057,7 +2057,7 @@ contact-grammar phase at 02:55 and preserves the original 09:19 deadline.
 
 ## Post-Review Resolution
 
-[Session 018](session-018-pr45-merge-readiness.md) owns the corrective continuation and
+[Session 023](session-023-pr45-merge-readiness.md) owns the corrective continuation and
 its final strict and GitHub receipts.
 The earlier `2/8/23/3` distributions and local content digests in this session’s phase
 evidence are contemporaneous receipts from the reviewed heads, not current aggregate or

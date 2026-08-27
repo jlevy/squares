@@ -519,11 +519,17 @@ def _solve_partition(
     maximum_off_frame_chunks: int,
     maximum_states: int,
 ) -> tuple[_PartitionSolution | None, int, bool]:
-    by_square: list[list[int]] = [[] for _ in range(square_count)]
+    by_square_bits = [0 for _ in range(square_count)]
+    off_frame_bits = 0
     for candidate_index, candidate in enumerate(candidates):
+        candidate_bit = 1 << candidate_index
+        if candidate.off_frame:
+            off_frame_bits |= candidate_bit
         for square_index in range(square_count):
             if candidate.mask & (1 << square_index):
-                by_square[square_index].append(candidate_index)
+                by_square_bits[square_index] |= candidate_bit
+    all_candidate_bits = (1 << len(candidates)) - 1
+    all_square_bits = (1 << square_count) - 1
     maximum_candidate_size = max(
         (candidate.mask.bit_count() for candidate in candidates), default=1
     )
@@ -550,22 +556,29 @@ def _solve_partition(
 
         remaining_indices = [index for index in range(square_count) if remaining & (1 << index)]
 
-        def available(index: int) -> list[int]:
-            return [
-                candidate_index
-                for candidate_index in by_square[index]
-                if candidates[candidate_index].mask & remaining
-                == candidates[candidate_index].mask
-                and (not candidates[candidate_index].off_frame or off_frame_remaining > 0)
-            ]
+        # A candidate is contained in ``remaining`` exactly when it contains no removed
+        # square. Candidate-index bitsets preserve the original ascending traversal while
+        # avoiding a Python scan of every candidate list at every cached state.
+        removed = all_square_bits ^ remaining
+        ineligible_bits = 0
+        while removed:
+            square_bit = removed & -removed
+            ineligible_bits |= by_square_bits[square_bit.bit_length() - 1]
+            removed ^= square_bit
+        eligible_bits = all_candidate_bits & ~ineligible_bits
+        if off_frame_remaining <= 0:
+            eligible_bits &= ~off_frame_bits
 
         pivot = min(
             remaining_indices,
-            key=lambda index: (len(available(index)), index),
+            key=lambda index: ((by_square_bits[index] & eligible_bits).bit_count(), index),
         )
-        options = available(pivot)
+        options = by_square_bits[pivot] & eligible_bits
         best: _PartitionSolution | None = None
-        for candidate_index in options:
+        while options:
+            candidate_bit = options & -options
+            candidate_index = candidate_bit.bit_length() - 1
+            options ^= candidate_bit
             candidate = candidates[candidate_index]
             child = solve(
                 remaining ^ candidate.mask,
