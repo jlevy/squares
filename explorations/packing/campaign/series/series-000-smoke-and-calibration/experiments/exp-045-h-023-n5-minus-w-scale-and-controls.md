@@ -54,7 +54,7 @@ experiment:
       an incomplete instrument.
     record: campaign/series/series-000-smoke-and-calibration/results/exp-045-h-023-n5-minus-w-scale-and-controls.json
   lease:
-    expires: '2026-08-27T03:18:23-07:00'
+    expires: '2026-08-27T17:39:46-07:00'
     host: codex/packing-ten-hour-research-agenda
   results: []
   verdict:
