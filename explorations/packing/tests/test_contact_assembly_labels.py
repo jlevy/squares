@@ -3,8 +3,9 @@
 
 from __future__ import annotations
 
+import math
 from collections.abc import Iterator
-from itertools import combinations, permutations
+from itertools import combinations, islice, permutations
 
 import pytest
 
@@ -44,6 +45,40 @@ def _connected_graphs(size: int) -> Iterator[ContactScaffold]:
             )
         except ScaffoldError:
             continue
+
+
+def _signed_uniform_scaffolds(size: int) -> Iterator[ContactScaffold]:
+    pairs = tuple(combinations(range(size), 2))
+    colors = (("u", 1), ("u", -1), ("v", 1), ("v", -1))
+    for encoded in range(5 ** len(pairs)):
+        remainder = encoded
+        edges = []
+        for left, right in pairs:
+            state = remainder % 5
+            remainder //= 5
+            if state:
+                normal, sign = colors[state - 1]
+                edges.append(ContactEdge(left, right, normal, sign))
+        try:
+            yield ContactScaffold(("angle-a",) * size, tuple(edges), ((),) * size)
+        except ScaffoldError:
+            continue
+
+
+def _legacy_canonicalization(
+    scaffold: ContactScaffold,
+) -> tuple[str, ContactScaffold, OrbitWitness, int, int]:
+    best: tuple[str, ContactScaffold, OrbitWitness] | None = None
+    labels: set[str] = set()
+    examined = 0
+    for witness, image in scaffold_orbit(scaffold):
+        examined += 1
+        label = scaffold_label(image)
+        labels.add(label)
+        if best is None or label < best[0]:
+            best = label, image, witness
+    assert best is not None
+    return best[0], best[1], best[2], examined, len(labels)
 
 
 def _topology_label(scaffold: ContactScaffold) -> tuple[tuple[int, int], ...]:
@@ -161,6 +196,65 @@ def test_every_rich_d4_and_relabeling_image_has_one_label() -> None:
         replay = canonicalize_scaffold(image)
         assert isinstance(replay, CanonicalScaffold)
         assert replay.canonical_label == expected.canonical_label
+
+
+def test_uniform_wall_free_fast_path_matches_the_full_orbit_oracle() -> None:
+    sources = [scaffold for size in range(1, 4) for scaffold in _signed_uniform_scaffolds(size)]
+    for size in range(1, 5):
+        batch = enumerate_isomorph_free_scaffolds(
+            size,
+            maximum_colorings=2_000_000,
+            maximum_emitted_scaffolds=100_000,
+        )
+        assert batch.status == "completed"
+        sources.extend(batch.scaffolds)
+    assert len(sources) == 250
+
+    compared = 0
+    for source in sources:
+        reverse = tuple(reversed(range(len(source.vertex_colors))))
+        transformed = transform_scaffold(
+            source,
+            symmetry=D4_TRANSFORMS[1],
+            old_to_new=reverse,
+        )
+        for candidate in (source, transformed):
+            expected = _legacy_canonicalization(candidate)
+            actual = canonicalize_scaffold(candidate)
+            assert isinstance(actual, CanonicalScaffold)
+            assert (
+                actual.canonical_label,
+                actual.scaffold,
+                actual.witness,
+                actual.raw_image_count,
+                actual.unique_image_count,
+            ) == expected
+            assert replay_orbit_witness(candidate, actual.witness) == actual.scaffold
+            compared += 1
+    assert compared == 500
+
+
+def test_uniform_wall_free_partial_orbit_keeps_the_typed_legacy_boundary() -> None:
+    batch = enumerate_isomorph_free_scaffolds(
+        4,
+        maximum_colorings=5_760,
+        maximum_emitted_scaffolds=124,
+    )
+    source = batch.scaffolds[-1]
+    required = len(D4_TRANSFORMS) * math.factorial(4)
+    partial_labels = [
+        scaffold_label(image)
+        for _witness, image in islice(scaffold_orbit(source), required - 1)
+    ]
+
+    limited = canonicalize_scaffold(source, maximum_orbit_images=required - 1)
+    assert isinstance(limited, CanonicalizationLimit)
+    assert limited.required_images == required
+    assert limited.examined_images == required - 1
+    assert limited.partial_best_label == min(partial_labels)
+
+    complete = canonicalize_scaffold(source, maximum_orbit_images=required)
+    assert isinstance(complete, CanonicalScaffold)
 
 
 def test_d4_and_relabeling_actions_compose_independently() -> None:

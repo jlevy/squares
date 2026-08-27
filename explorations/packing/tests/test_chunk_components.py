@@ -213,6 +213,59 @@ def test_earlier_search_limit_does_not_promote_later_out_of_budget_partition(
     assert "proves in-budget existence" not in partition["limitation"]
 
 
+def test_partition_bitsets_preserve_off_frame_order_and_state_cap() -> None:
+    candidate_type = vars(chunks_module)["_PartitionCandidate"]
+    solve = vars(chunks_module)["_solve_partition"]
+
+    def candidate(key: str, mask: int, *, off_frame: bool = False):
+        return candidate_type(
+            key=key,
+            mask=mask,
+            members=(),
+            shape="bar",
+            angle_class=0,
+            angle_degrees=0.0,
+            off_frame=off_frame,
+            maximum_contact_residual=0.0,
+            contacts=(),
+        )
+
+    candidates = [
+        candidate("a", 0b0011, off_frame=True),
+        candidate("b", 0b1100),
+        candidate("c", 0b0101),
+        candidate("d", 0b1010),
+    ]
+
+    without_off_frame, states, hit_limit = solve(
+        candidates,
+        square_count=4,
+        exact_free_squares=0,
+        maximum_off_frame_chunks=0,
+        maximum_states=10,
+    )
+    assert without_off_frame is not None
+    assert (without_off_frame.candidates, states, hit_limit) == ((2, 3), 3, False)
+
+    with_off_frame, states, hit_limit = solve(
+        candidates,
+        square_count=4,
+        exact_free_squares=0,
+        maximum_off_frame_chunks=1,
+        maximum_states=10,
+    )
+    assert with_off_frame is not None
+    assert (with_off_frame.candidates, states, hit_limit) == ((0, 1), 3, False)
+
+    assert solve(
+        candidates,
+        square_count=4,
+        exact_free_squares=0,
+        maximum_off_frame_chunks=1,
+        maximum_states=2,
+    ) == (None, 3, True)
+
+
 def test_connected_angle_chain_is_not_mistaken_for_one_fitted_class() -> None:
     witness = {
         "id": "W-angle-chain-control",

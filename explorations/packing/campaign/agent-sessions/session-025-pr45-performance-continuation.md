@@ -66,7 +66,7 @@ session:
     objective: >-
       Independently review the bitset patch and remove the next largest repeated pure
       computations only when exact output, memory bounds, and hash policy remain unchanged.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       The first optimization passed equivalence and reduced the atlas step by 76.7
@@ -88,12 +88,59 @@ session:
     fallback: >-
       Keep only the validated bitset change, record pricing as the next bottleneck, and
       resume think-oo1p without another full performance cycle.
+    outcome: >-
+      Independently accepted the bitset solver, added its exact off-frame/state-cap
+      regression, and replaced pricing's 2.905-million-object complete-orbit path with a
+      normalized-edge comparison that retains the legacy path for every partial or richer orbit.
+    evidence:
+    - The old and bitset solvers matched on 39,348 randomized solution/state/cap cases.
+    - >-
+      Five hundred uniform wall-free canonicalizations matched the legacy full-orbit
+      label, scaffold, witness, raw-image count, and unique-image count exactly.
+    - Pricing retained-byte validation passed in 8.20 seconds, down from 56.45 seconds.
+    - >-
+      The isolated atlas step passed in 123.93 seconds, down from 743.07 seconds: a
+      6.00-fold speedup and 83.3 percent wall-time reduction.
+    - >-
+      A raw module-global lattice cache was rejected as unbounded; the bounded variant's
+      projected 10.2 percent gain was not stacked after the larger pricing result.
+    stop_reason: The second patch exceeded its benefit threshold and passed independent equivalence controls.
+    next_action: >-
+      Commit the two performance patches, re-audit the implemented PR 45 review
+      dispositions, and run the complete strict validator with PR 41's worker settings.
+  - workflow: process-review
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Package the independently reviewed performance changes, prove the five PR 45
+      review corrections remain implemented on merged main, and obtain one complete strict receipt.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Two bounded performance slices reduced the dominant atlas step by 83.3 percent;
+      correctness disposition and complete validation are now the critical path.
+    budget_minutes: 30
+    started_at: '2026-08-26T17:58:00-07:00'
+    deadline_at: '2026-08-26T18:28:00-07:00'
+    expected_output: >-
+      A clean performance commit, green focused contracts for think-oo1p, think-givb,
+      think-4axm, think-9jny, and think-rov3, and one complete strict receipt.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-validate --strict --jobs
+      2 --inner-jobs 2 --timeout-seconds 1200
+    kill_condition: >-
+      Stop on retained-output drift, a reopened review finding, a scientific claim
+      expansion, or one strict step that exhausts its 1,200-second cap.
+    fallback: >-
+      Preserve the performance commit and focused receipts, isolate the first strict
+      failure once, and leave all review beads open with its typed blocker.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Collect the three bounded reviews, implement at most one independently justified
-      follow-up, and replay the exact atlas step once.
+      Finalize the performance commit, run the review-focused contract set, then start
+      one complete strict validation with two outer and two inner workers.
   primary_bead: think-eyix
   status: in_progress
   budget:
@@ -138,15 +185,19 @@ session:
     phase: 1
   - task: Independently review the candidate-index bitset traversal.
     operator: bitset_review
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: >-
+      Found no production-path issue and confirmed identical candidate eligibility, MRV
+      ties, traversal order, cache states, residual ordering, off-frame handling, and caps.
+    evidence:
+    - Thirty-nine thousand three hundred forty-eight randomized cases matched the old solver exactly.
+    - Ten preexisting chunk-component regressions passed in 1.00 seconds.
     files: []
     checks: []
-    uncertainty: null
+    uncertainty: Private malformed masks outside square_count remain unsupported; production mask construction excludes them.
     elapsed_seconds: null
-    elapsed_quality: null
+    elapsed_quality: unavailable
     budget_minutes: 20
     started_at: '2026-08-26T17:44:54-07:00'
     deadline_at: '2026-08-26T18:04:54-07:00'
@@ -161,19 +212,23 @@ session:
     - git push
     - tbd
     - gh
-    next_action: Return a correctness disposition to the coordinator.
+    next_action: Coordinator retains the patch and adds the recommended direct state-cap regression.
     phase: 2
   - task: Profile the retained contact-enumeration pricing check.
     operator: pricing_perf
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: >-
+      Isolated 2.905 million materialized symmetry images in legacy n=4
+      canonicalization and prototyped an exact normalized-edge complete-orbit fast path.
+    evidence:
+    - The retained pricing document remained byte-identical.
+    - Prototype expected_document time fell from 56.45 seconds to 7.676 seconds.
     files: []
     checks: []
-    uncertainty: null
+    uncertainty: The optimization is intentionally unavailable to capped, mixed-color, or wall-bearing orbits.
     elapsed_seconds: null
-    elapsed_quality: null
+    elapsed_quality: unavailable
     budget_minutes: 25
     started_at: '2026-08-26T17:44:58-07:00'
     deadline_at: '2026-08-26T18:09:58-07:00'
@@ -188,19 +243,23 @@ session:
     - git push
     - tbd
     - gh
-    next_action: Return a bounded proposal to the coordinator.
+    next_action: Coordinator implements the fast path with a legacy-orbit differential and cap fallback test.
     phase: 2
   - task: Audit process-local memoization of lattice deltas.
     operator: lattice_cache
-    status: in_progress
+    status: completed
     recording: contemporaneous
-    outcome: null
-    evidence: []
+    outcome: >-
+      Rejected raw unbounded module caching and measured a safe 65,536-entry bounded
+      alternative without retained-output or hash-policy changes.
+    evidence:
+    - The bounded variant reduced the full census sequence from 96.524 to 78.898 seconds.
+    - It retained about 22 MiB beyond normal allocator retention on this host.
     files: []
     checks: []
-    uncertainty: null
+    uncertainty: The projected whole-atlas gain is only about 10.2 percent and was not replayed after the pricing patch.
     elapsed_seconds: null
-    elapsed_quality: null
+    elapsed_quality: unavailable
     budget_minutes: 20
     started_at: '2026-08-26T17:45:03-07:00'
     deadline_at: '2026-08-26T18:05:03-07:00'
@@ -215,7 +274,7 @@ session:
     - git push
     - tbd
     - gh
-    next_action: Return a safe-or-stop disposition to the coordinator.
+    next_action: Do not stack this marginal cache in the current performance cycle.
     phase: 2
   outputs:
   - campaign/agent-sessions/session-025-pr45-performance-continuation.md
@@ -226,11 +285,13 @@ session:
   - The landed main workflow passed Linux in 7 minutes 1 second and macOS in 6 minutes 25 seconds.
   - The byte-for-byte census check passes in 97.30 seconds.
   - The isolated known-best atlas step passes in 173.48 seconds, down from 743.07 seconds.
+  - Pricing retained-byte validation passes in 8.20 seconds, down from 56.45 seconds.
+  - The final isolated atlas step passes in 123.93 seconds, down from 743.07 seconds.
   stop_reason: null
   next_action: >-
-    Under BC-019, think-eyix, and think-4vni, finish the exact-main merge, implement and
-    independently validate the byte-preserving atlas bitset optimization, then resume
-    think-oo1p before the other review dispositions.
+    Under BC-019, think-eyix, and think-4vni, commit the independently reviewed
+    performance patches, confirm think-oo1p, think-givb, think-4axm, think-9jny, and
+    think-rov3 on the merged tree, then run one complete strict receipt.
 ---
 # Session 025 — PR 45 Performance Continuation
 

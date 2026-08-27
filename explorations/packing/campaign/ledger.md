@@ -38,7 +38,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-022](agent-sessions/session-022-pr44-known-best-atlas.md) | completed | contemporaneous | `pipeline-improvement` (insight) | `process-review` (process) | 32 | think-eyix | Follow session 023 for the PR 45 merge-readiness result and final CI receipt. Keep the atlas calibration-only and preserve the no-geometry/no-feasibility boundary. |
 | [session-023](agent-sessions/session-023-pr45-merge-readiness.md) | completed | contemporaneous | `factual-review` (correctness) | `process-review` (correctness) | 8 | think-eyix | Under BC-019 and think-eyix, publish this draft checkpoint, open a fresh time-sliced continuation while free space remains at least 4 GiB, run strict validation with the measured timeout, watch both GitHub jobs, and disposition every review bead only after those receipts are green. |
 | [session-024](agent-sessions/session-024-pr45-strict-and-ci.md) | stopped | contemporaneous | `process-review` (correctness) | `process-review` (correctness) | 2 | think-eyix | Under BC-019 and think-eyix, review PR 41 for correctness, merge safety, and measured validation-loop speedup. If it lands on main, merge that exact main commit into this branch, rerun the focused gates and one complete strict receipt, then require both final-head GitHub jobs before closing review beads. |
-| [session-025](agent-sessions/session-025-pr45-performance-continuation.md) | in_progress | contemporaneous | `pipeline-improvement` (efficiency) | `pipeline-improvement` (efficiency) | 2 | think-eyix | Under BC-019, think-eyix, and think-4vni, finish the exact-main merge, implement and independently validate the byte-preserving atlas bitset optimization, then resume think-oo1p before the other review dispositions. |
+| [session-025](agent-sessions/session-025-pr45-performance-continuation.md) | in_progress | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (correctness) | 3 | think-eyix | Under BC-019, think-eyix, and think-4vni, commit the independently reviewed performance patches, confirm think-oo1p, think-givb, think-4axm, think-9jny, and think-rov3 on the merged tree, then run one complete strict receipt. |
 
 ### Workflow summary
 
@@ -49,7 +49,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 1 | 0 |
 | `factual-review` | 1 | 0 | 15 | 2 |
 | `insight-iteration` | 0 | 1 | 5 | 2 |
-| `process-review` | 4 | 4 | 29 | 6 |
+| `process-review` | 4 | 4 | 30 | 6 |
 | `efficiency-loop` | 6 | 0 | 10 | 0 |
 | `research-loop` | 1 | 4 | 9 | 7 |
 | `pipeline-improvement` | 4 | 0 | 25 | 0 |
