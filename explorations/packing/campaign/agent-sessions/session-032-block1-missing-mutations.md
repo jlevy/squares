@@ -115,11 +115,18 @@ session:
       is not a binding constraint, and the relaxation has no minimum on this route, so the
       choice needed a non-numeric reason.
     - >-
-      That reason is a reproducibility defect. `frontier/n-029.md` described the artifact
-      as the output of "the generic promotion command", but the recorded witness carried
-      `rational_digits: 16` while the CLI default is 36. Running the documented command
-      did not reproduce the recorded artifact.
-    - Regenerating at the default closes that gap, and the twenty-orders-tighter bound is a side effect of the choice rather than its justification.
+      The reason first recorded here was too strong and is corrected. The artifact was not
+      irreproducible: `tests/test_witness_contract.py` regenerates it from explicit
+      parameters and asserts equality with the retained file, which is a proper pin. The
+      narrower and real defect was documentary, in that `frontier/n-029.md` described the
+      artifact as the output of "the generic promotion command" without naming the
+      non-default `--rational-digits 16` that produced it.
+    - >-
+      Regenerating at the CLI default makes that prose true and costs one line in the
+      contract test, whose pin moved from sixteen to thirty-six. The twenty-orders-tighter
+      bound is a side effect of the choice rather than its justification, and the choice
+      would not have been worth making on tightness alone.
+    - The overstatement was caught by the block-boundary gate rather than by review, which is the argument for running the full tier at every boundary rather than only before a merge.
     - 'Measured: 22,890 bytes at d=16 against 50,319 at d=36; relaxation 4.933898e-11 against 4.933884e-31, exactly 1e20 tighter.'
     - 'Both gated checker paths accept the regenerated witness, the independent exact checker over 29 squares and 406 pairs and the generic verifier, and the certificate metadata now records `rational_digits: 36` with its matching dilation.'
     - Six coordinated references were reconciled across the case record, the evidence limitations, the synopsis and two generated views; the terminal session records that quote the old figure were left as recorded.
@@ -161,6 +168,7 @@ session:
   - campaign/agent-sessions/session-032-block1-missing-mutations.md
   - frontier/evidence.yaml
   - frontier/n-029.md
+  - tests/test_witness_contract.py
   - witnesses/schadt-n029-2025-rational.yaml
   checks:
   - >-
