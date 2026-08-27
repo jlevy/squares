@@ -3,14 +3,18 @@ type: is
 id: is-01m12e2r7pke6vqym4pn8yxn7s
 title: Document the three-layer work model and retire the cell terminology collision
 kind: task
-status: open
+status: closed
 priority: 2
-version: 1
+version: 2
 labels:
   - packing
 dependencies: []
 created_at: 2026-08-27T20:20:16.238Z
-updated_at: 2026-08-27T20:20:16.238Z
+updated_at: 2026-08-27T20:23:29.773Z
+closed_at: 2026-08-27T20:23:29.757Z
+close_reason: Done in session 030 (commit 00927d2). BC re-glossed as 'bounded commitment' across 14 live occurrences; the 4 in terminal session records left as recorded. Work-unit map now carries the bead / commitment / phase layering with a comparison by lifetime, typing and falsifier. Four stale or misleading entries corrected. No identifier, schema pattern, test, or frozen evidence string touched. The third and fourth senses of 'cell' (instance-axis rows, experimental-design cells) are recorded in the session evidence but deliberately left as found.
+resolution: null
+duplicate_of: null
 ---
 BC expanded to 'bounded cell' while 'cell' independently names the linear-programming object at the centre of the enumeration work (235 cell identifiers in source; raw, canonical, active and full cells are four distinct technical objects). The README defined both, twenty lines apart.
 
