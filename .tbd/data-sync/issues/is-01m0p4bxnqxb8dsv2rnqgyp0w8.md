@@ -3,9 +3,9 @@ type: is
 id: is-01m0p4bxnqxb8dsv2rnqgyp0w8
 title: "H-010: reproduce the Stromquist falsifier triple"
 kind: task
-status: closed
+status: open
 priority: 1
-version: 14
+version: 15
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
@@ -20,7 +20,7 @@ child_order_hints:
   - is-01m0srsphtekzmgp8vrs05v8n5
   - is-01m0srspsyjecv6bdatrx8r5bx
 created_at: 2026-08-23T01:39:37.782Z
-updated_at: 2026-08-27T05:57:55.753Z
+updated_at: 2026-08-27T07:05:07.437Z
 closed_at: 2026-08-27T05:57:55.750Z
 close_reason: "Completed by terminal refutation: exp-016 found and replayed an explicit escape from the printed Figure 14 P12, so H-010's source-faithful conjunction is false on the printed set. The distinct possible G=.79 repair remains H-041/think-ciwv and is not merged into this result."
 resolution: null
