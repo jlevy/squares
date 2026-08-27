@@ -80,7 +80,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can exp-045's four missing pre-certificate mutations be built so the enforced count
@@ -102,6 +102,9 @@ agenda:
       Under no circumstances amend exp-045's declared twelve down to the implemented
       eight: the criterion was frozen before implementation, and matching it to the code
       afterwards is the post-hoc weakening the admission bar exists to prevent.
+    artifacts:
+    - cases/n5/minus_w_obstruction.py
+    - campaign/agent-sessions/session-032-block1-missing-mutations.md
     note: >-
       This commitment gates both remaining research lanes. exp-045 cannot run without it, and
       BC-038 must not touch the shared row-jet path while exp-045 is frozen, so BC-036 is
@@ -110,7 +113,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [5]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Do the frozen pure minus-W scale routes and controls advance the n = 5

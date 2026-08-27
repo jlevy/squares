@@ -24,7 +24,7 @@ session:
       Extend the `ProofInputs` mutation surface so four currently unreachable proof
       invariants each become reachable by one declared perturbation, and raise the
       enforced control count to twelve.
-    status: in_progress
+    status: completed
     entered_by: session_start
     switch_reason: null
     budget_minutes: 60
@@ -46,13 +46,67 @@ session:
       Retain whichever mutations are built with their exact coverage, leave the enforced
       count at its true value, and record the first invariant that cannot be reached by a
       declared perturbation.
+    outcome: >-
+      BC-036 is closed. The enforced pre-certificate mutation count is twelve, matching
+      exp-045's declared twelve, and all twelve controls fire on twelve distinct expected
+      failure identifiers. No frozen criterion was weakened and the declared twelve was
+      never amended.
+    evidence:
+    - 'Four `ProofInputs` fields were added, one per new control: `geometry_separation_offset`, `scale_single_weight`, `weight_scale_offset` and `tilt_direction`.'
+    - 'The shared identifier `certificate.acceleration_elimination` was split into `certificate.acceleration_correction` and `certificate.acceleration_farkas`, so each control matches only its own frozen identifier as the admission requires. This refines the failure vocabulary and changes nothing that is proved.'
+    - >-
+      Mode three needed a perturbation preserving the zero pose sum, because perturbing
+      any single weight trips the correction check first. Scaling every weight by a
+      positive factor preserves that sum by linearity while moving the side coefficient
+      off the exact alpha, which reaches the Farkas identity check and nothing else.
+    - 'Verified by direct call: twelve controls, twelve distinct expected identifiers, twelve passing, actual equal to expected in every case.'
+    - Thirty-seven related minus-W and n=5 tests pass in 270 seconds; focused Ruff, formatting and BasedPyright are clean.
+    - 'Admission conditions three and four now both hold: twelve mutations enforced against twelve declared, and thirteen keyed refusals against thirteen declared.'
+    - The retired identifier is referenced nowhere in code, tests, atlas records or schemas; the only mentions are in this session's own narrative describing the state before the split.
+    stop_reason: >-
+      The declared output is complete and independently exercised inside the slice budget,
+      and the two admission conditions this commitment owns are satisfied.
+    next_action: >-
+      Conditions five and six of exp-045's admission remain and belong to BC-037: retained
+      generation and replay must agree, and an independent post-change audit must accept
+      the complete instrument. Neither is target generation this commitment may perform.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Close BC-039 by regenerating the durable n=29 rational certificate at a deliberately
+      chosen `rational_digits`, with the choice argued rather than maximized.
+    status: in_progress
+    entered_by: planned_checkpoint
+    switch_reason: >-
+      BC-036 is closed, and BC-039 is the independent second half of block one that does
+      not depend on its outcome.
+    budget_minutes: 30
+    started_at: '2026-08-27T16:05:58-07:00'
+    deadline_at: '2026-08-27T16:35:58-07:00'
+    expected_output: >-
+      A regenerated witness whose certificate metadata, the `E-n029-schadt-rational-upper`
+      limitations text and both gated checker paths agree, with the chosen
+      `rational_digits` and its reason recorded.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen python -m
+      devtools.check_rational_witness_independent
+      witnesses/schadt-n029-2025-rational.yaml
+    kill_condition: >-
+      Stop on treating decimal precision as a certificate, on record-improvement,
+      rigidity or optimality language, on accepting a witness the independent checker did
+      not verify, or on maximizing `rational_digits` without arguing the tradeoff against
+      artifact size.
+    fallback: >-
+      Leave the recorded witness unchanged and retain the measured tradeoff, rather than
+      regenerating on an unargued parameter.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Add one `ProofInputs` field per new control, wire each to its expected failure
-      identifier, raise the count guard, and confirm every mutation still fails for its
-      own declared reason rather than an incidental one.
+      Measure the artifact-size tradeoff across the candidate `rational_digits`, choose
+      one with a stated reason, regenerate, and reconcile the evidence record.
   primary_bead: think-oyn9
   status: in_progress
   budget:
