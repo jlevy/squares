@@ -177,7 +177,7 @@ agenda:
       A merged branch with a green full gate and PR 48 out of draft, or a recorded
       conflict or regression that names the next owner.
     bead: think-qibu
-    depends_on: [BC-035]
+    depends_on: []
     next_evidence: >-
       Re-run the full gate rather than `--fast` against the merged tree. If the round
       count or any generated aggregate moved in the merge, re-check `devtools/controls.yaml`
@@ -186,6 +186,12 @@ agenda:
     note: >-
       Deliberately not done inside session 029, because merging main rewrites files
       underneath the profile, gate timings, and control anchors that session recorded.
+      Originally sequenced behind BC-035 so the merge would be tested against a guarded
+      tree. That dependency was dropped deliberately in session 031 at the user's
+      direction: the guard repairs are independent improvements rather than merge
+      prerequisites, the full gate was already green before the merge, and leaving a
+      twenty-commit branch unmerged has a real and growing cost that the guard work does
+      not. BC-035 keeps its own value and its own slice.
 ---
 # Agenda-004 — Repair the Guards, Unblock the Instrument, Then Resume Research
 
