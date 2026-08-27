@@ -11,6 +11,7 @@ import pytest
 
 from sqpack.contact_assembly import (
     D4_TRANSFORMS,
+    Axis,
     CanonicalizationLimit,
     CanonicalScaffold,
     ContactEdge,
@@ -49,7 +50,12 @@ def _connected_graphs(size: int) -> Iterator[ContactScaffold]:
 
 def _signed_uniform_scaffolds(size: int) -> Iterator[ContactScaffold]:
     pairs = tuple(combinations(range(size), 2))
-    colors = (("u", 1), ("u", -1), ("v", 1), ("v", -1))
+    colors: tuple[tuple[Axis, int], ...] = (
+        ("u", 1),
+        ("u", -1),
+        ("v", 1),
+        ("v", -1),
+    )
     for encoded in range(5 ** len(pairs)):
         remainder = encoded
         edges = []
