@@ -45,6 +45,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-029](agent-sessions/session-029-finish-agenda-003-cycles.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `insight-iteration` (correctness) | 4 | think-kdil | Under BC-036 and think-oyn9, build exp-045's four missing pre-certificate mutations so the enforced count matches the declared twelve, then re-run the admission check before any target generation. The declared criterion is not to be amended down to the implemented eight. This cell and the rest of the outstanding work are tracked in agenda-004. |
 | [session-030](agent-sessions/session-030-work-model-and-cell-collision.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-qxmo | Under BC-036 and think-oyn9, build exp-045's four missing pre-certificate mutations so the enforced count matches the declared twelve. |
 | [session-031](agent-sessions/session-031-merge-main-and-land-pr48.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-qibu | Under BC-036 and think-oyn9, build exp-045's four missing pre-certificate mutations so the enforced count matches the declared twelve. |
+| [session-032](agent-sessions/session-032-block1-missing-mutations.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 1 | think-oyn9 | Under BC-036 and think-oyn9, build four of the seven candidate controls and raise the enforced count to twelve. |
 
 ### Workflow summary
 
@@ -58,7 +59,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 6 | 4 | 35 | 6 |
 | `efficiency-loop` | 7 | 0 | 17 | 0 |
 | `research-loop` | 1 | 4 | 11 | 7 |
-| `pipeline-improvement` | 5 | 0 | 41 | 0 |
+| `pipeline-improvement` | 6 | 0 | 42 | 0 |
 
 ## Experiment agendas
 
