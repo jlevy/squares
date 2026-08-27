@@ -280,7 +280,7 @@ session:
       Build the smallest admitted exp-045 instrument slice: exact owner-3 scale proof
       data and five-route exhaustion, exercised first on the exp-036 positive control
       without editing the target driver or creating pure -W data.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       Exp-045 is preregistered and independently accepted, but its target is blocked on
@@ -303,12 +303,98 @@ session:
     fallback: >-
       Retain the first typed scale blocker and return BC-029 to W7 without changing the
       target driver or experiment results.
+    outcome: >-
+      Added exact owner-3 scale proof data with one five-route inventory per stratum,
+      formal unsampled beta, source-derived cusp identities, a real handler-exhaustion
+      guard, and a positive-W control that rejects a zero or wrong-sign source vector.
+      Three independent reviews accept this as proof-data plumbing only.
+    evidence:
+    - The marked exact node builds all fifteen records and rejects a zero-W production mutation in 27.45 seconds.
+    - The cheap handler-deletion and marker-boundary loop passes in 0.07 seconds; Ruff and BasedPyright are green.
+    - The center-angle-cross and weighted-curvature predecessor sentinels pass in 9.09 seconds.
+    - No target driver or result JSON changed, and exp-045 still has an empty results array.
+    stop_reason: The bounded scale-only output and three independent acceptance reviews are retained, so W7 closed in thirteen minutes.
+    next_action: >-
+      Implement and test the scale proof-data boundary only, then obtain an independent
+      post-change audit before opening the next instrument slice.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Interpret the accepted scale slice, distinguish retained proof data from its
+      still-unproved route and asymptotic obligations, and select the smallest next
+      instrument slice without opening target measurement.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The scale helper and controls pass, while independent review identifies two
+      explicit obligations that handler presence and stored strings do not discharge.
+    budget_minutes: 10
+    started_at: '2026-08-26T23:15:13-07:00'
+    deadline_at: '2026-08-26T23:25:13-07:00'
+    expected_output: >-
+      One ranked successor that names the exact production derivation or guard it adds,
+      plus a decision to continue BC-029 in W7 or stop with a typed blocker.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop on any proposal to infer an obstruction from handler presence, treat named
+      remainder limits as proof, run pure -W, or widen from the registered poses to a
+      component or connectivity claim.
+    fallback: >-
+      Retain route ownership and asymptotic reduction as explicit target blockers and
+      rotate to the next dependency-ready agenda cell.
+    outcome: >-
+      Selected one more scale-instrument W7 slice before driver work. It must derive
+      tied-row sign ownership from the production projection and turn the three named
+      unbounded reductions into structured implications of explicit asymptotic
+      assumptions. Route handlers remain routing partitions, never contradictions.
+    evidence:
+    - Independent review agrees that the current sign routing is mathematically correct but encoded rather than derived.
+    - The stored remainder strings preserve the obligations but do not prove them.
+    - Completing these two scale-local seams removes ambiguity before the larger driver and mutation integration.
+    stop_reason: The next dependency and its non-claim boundary are explicit, so W3 closed in under one minute.
+    next_action: >-
+      Rank exact route-sign derivation, asymptotic-limit validation, and the remaining
+      production guards by information value and dependency order.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Complete the scale-local proof perimeter by deriving route sign ownership from
+      production geometry and validating the three unbounded remainder reductions from
+      explicit asymptotic orders, without touching the target driver.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      W3 ranked the two scale-local obligations ahead of the broader driver mutations
+      because the latter must consume, not reinterpret, this proof boundary.
+    budget_minutes: 30
+    started_at: '2026-08-26T23:16:01-07:00'
+    deadline_at: '2026-08-26T23:46:01-07:00'
+    expected_output: >-
+      Structured source-derived sign evidence for both tied routes and checked
+      asymptotic-order witnesses for all three normalized zero limits, with focused
+      mutations that fail before any route disposition.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_minus_w_scale.py && uv run --directory explorations/packing --frozen
+      basedpyright cases/n5/minus_w_scale.py tests/test_minus_w_scale.py
+    kill_condition: >-
+      Stop on a copied sign constant, sampled delta or beta, floating-point limit,
+      string-only proof witness, target-driver edit, pure-W data, or the 30-minute
+      boundary.
+    fallback: >-
+      Retain the first exact production or asymptotic modeling blocker and keep target
+      W6 closed.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Implement and test the scale proof-data boundary only, then obtain an independent
-      post-change audit before opening the next instrument slice.
+      Add only the scale-local derivations and mutation checks, then request another
+      independent review before choosing a driver slice.
   primary_bead: think-whwc
   status: in_progress
   budget:
@@ -495,6 +581,68 @@ session:
     elapsed_quality: unavailable
     next_action: Run the scale-only W7 slice and keep results empty.
     phase: 6
+  - task: Audit the completed scale helper against the frozen production boundary.
+    operator: exp045_instrument_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted the production provenance, exact five-handler seam, formal bounded data,
+      source-derived cusp data, and no-disposition boundary for the scale-only slice.
+    evidence:
+    - The scale_records helper consumes the accepted production stress, including both tied rows and their weights.
+    - Handler deletion rejects before stress evaluation; no pure-W target or result path is present.
+    files:
+    - cases/n5/minus_w_scale.py
+    - tests/test_minus_w_scale.py
+    checks:
+    - Read-only source audit; no long gate.
+    uncertainty: The complete driver, eleven other mutations, thirteen refusals, replay, and final instrument review remain open.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Keep target W6 closed and make the future driver consume this helper rather than reconstructing its keys.
+    phase: 7
+  - task: Independently falsify the positive-W and scale-exhaustion controls.
+    operator: exp045_record_review
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Found that the first positive-control path accepted a zero W vector; accepted the
+      slice after the coordinator added a strict production-curvature guard and real
+      zero-vector mutation.
+    evidence:
+    - The pre-fix zero-W mutation returned fifteen records, demonstrating that routing metadata was not a fixture.
+    - The repaired path rebuilds production stress and rejects the zero vector with the named control error.
+    - Missing-handler deletion matches the complete missing/extra failure before evaluation.
+    files:
+    - cases/n5/minus_w_scale.py
+    - tests/test_minus_w_scale.py
+    checks:
+    - Read-only mutation audit plus focused result review.
+    uncertainty: No blocker remains within the scale-only slice.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Retain the accepted helper without opening target measurement.
+    phase: 7
+  - task: Review the mathematical sufficiency and claim boundary of the scale proof data.
+    operator: exp045_independent_criterion
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted the exact bounded and cusp data while classifying handler sign ownership
+      and string-valued remainder limits as obligations for the future target driver.
+    evidence:
+    - Exact e_theta3 gives the required beta section and every G and B coefficient cancels.
+    - Tied projection sign ownership is mathematically correct but encoded rather than derived in production.
+    - The three retained remainder expressions are names, not checked implications of the scale assumptions.
+    files:
+    - cases/n5/minus_w_scale.py
+    checks:
+    - Independent read-only mathematical review; no target run or long gate.
+    uncertainty: Neither route metadata nor a named asymptotic limit may decide a target route until production derivation is added.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Rank route-sign derivation and asymptotic validation before the remaining driver mutations.
+    phase: 7
   outputs:
   - campaign/agent-sessions/session-026-balanced-research-session-a.md
   checks:
@@ -502,8 +650,8 @@ session:
   - Session 025 is terminal and the generated ledger records it as completed.
   stop_reason: null
   next_action: >-
-    Under BC-029, think-whwc, and think-1s0h, build and independently review only the
-    exp-045 scale proof-data boundary; do not run the pure -W target.
+    Under BC-029, think-whwc, and think-1s0h, interpret the accepted scale proof data
+    and select the next exact instrument obligation; do not run the pure -W target.
 ---
 # Session 026 — Balanced Research Program, Session A
 

@@ -39,7 +39,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-023](agent-sessions/session-023-pr45-merge-readiness.md) | completed | contemporaneous | `factual-review` (correctness) | `process-review` (correctness) | 8 | think-eyix | Under BC-019 and think-eyix, publish this draft checkpoint, open a fresh time-sliced continuation while free space remains at least 4 GiB, run strict validation with the measured timeout, watch both GitHub jobs, and disposition every review bead only after those receipts are green. |
 | [session-024](agent-sessions/session-024-pr45-strict-and-ci.md) | stopped | contemporaneous | `process-review` (correctness) | `process-review` (correctness) | 2 | think-eyix | Under BC-019 and think-eyix, review PR 41 for correctness, merge safety, and measured validation-loop speedup. If it lands on main, merge that exact main commit into this branch, rerun the focused gates and one complete strict receipt, then require both final-head GitHub jobs before closing review beads. |
 | [session-025](agent-sessions/session-025-pr45-performance-continuation.md) | completed | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 4 | think-eyix | Under BC-027 and think-whwc, reconcile the merged-main validation failure, the terminal session record, and generated views; then restore a first-failure-safe green pipeline before the next research session. |
-| [session-026](agent-sessions/session-026-balanced-research-session-a.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 7 | think-whwc | Under BC-029, think-whwc, and think-1s0h, build and independently review only the exp-045 scale proof-data boundary; do not run the pure -W target. |
+| [session-026](agent-sessions/session-026-balanced-research-session-a.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 9 | think-whwc | Under BC-029, think-whwc, and think-1s0h, interpret the accepted scale proof data and select the next exact instrument obligation; do not run the pure -W target. |
 
 ### Workflow summary
 
@@ -49,11 +49,11 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 0 | 0 | 1 | 0 |
 | `factual-review` | 1 | 0 | 16 | 2 |
-| `insight-iteration` | 0 | 1 | 6 | 2 |
+| `insight-iteration` | 0 | 1 | 7 | 2 |
 | `process-review` | 4 | 4 | 31 | 6 |
 | `efficiency-loop` | 6 | 0 | 11 | 0 |
 | `research-loop` | 1 | 4 | 10 | 7 |
-| `pipeline-improvement` | 5 | 0 | 28 | 0 |
+| `pipeline-improvement` | 5 | 0 | 29 | 0 |
 
 ## Experiment agendas
 

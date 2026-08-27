@@ -144,6 +144,10 @@ coefficients to be strictly negative.
 Retain nuisance-column cancellation and the three normalized remainder limits
 `t^2/abs(delta) -> 0`, `t*abs(delta)/abs(delta) -> 0`, and `delta^2/abs(delta) -> 0`.
 Stored expected constants are not proof data.
+The scale-only helper may retain those limits as named obligations, but target admission
+requires the driver to derive them from `t -> 0`, `delta = o(t)`, and
+`abs(delta)/t^2 -> infinity`. It must also derive the tied-row sign ownership from the
+production projection; handler labels alone are not a contradiction certificate.
 
 ## Frozen Outcomes
 
