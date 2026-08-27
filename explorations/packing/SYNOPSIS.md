@@ -293,11 +293,19 @@ terminal.
 [Session 026](campaign/agent-sessions/session-026-balanced-research-session-a.md) is the
 terminal first-session midpoint in the two-session
 [balanced ten-hour agenda](campaign/agendas/agenda-003-balanced-ten-hour-research-program.md).
-[Session 027](campaign/agent-sessions/session-027-balanced-research-session-b.md) is the
-active second five-hour session and begins with BC-017 under `think-u97a`. `BC-027` is
-complete. The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and `think-1s0h` is
-retained as a typed instrument blocker: exp-045 is preregistered and its scale, owner-4,
-and execution-scoped row-inventory controls are built, but no pure `-W` target or result
+[Session 027](campaign/agent-sessions/session-027-balanced-research-session-b.md)
+stopped on an external provider usage limit after ten of eleven phases, and
+[session 028](campaign/agent-sessions/session-028-bc032-n29-promotion-inventory.md) is
+the terminal successor that executed its one unexecuted phase.
+The next bounded slice is `BC-032` under `think-75ll`: register Q-BC032-a and measure
+whether the `4.94e-11` relaxation in the verified `n = 29` rational upper bound is a
+property of the pose or an artifact of the promotion route.
+An `n = 29` interval round is not next, and its previously stated prerequisites were
+retired as not describing this repository.
+`BC-027` is complete.
+The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and `think-1s0h` is retained
+as a typed instrument blocker: exp-045 is preregistered and its scale, owner-4, and
+execution-scoped row-inventory controls are built, but no pure `-W` target or result
 exists. CG-010 is structurally complete under `BC-030`; BC-016 is blocked under
 `think-3yv8` on retained poses, an executable glued row, symbolic tie labels, and a
 receipt checker, while BC-017 under `think-u97a` remains the ready constructive W7 lane.

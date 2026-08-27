@@ -202,11 +202,18 @@ agenda:
     bead: think-75ll
     depends_on: []
     next_evidence: >-
-      Before an n = 29 interval round, write its explicit contact equations, isolation
-      boxes, outward-rounded certificate type, and independent checker. The completed
-      n = 11 robust-rational control validates only the already-built exactification
-      path at a relaxed side; it does not certify the source decimals, improve a record,
-      establish rigidity, or prove optimality.
+      Superseded by the session 028 inventory. An n = 29 interval round is not the next
+      step and its stated prerequisites do not describe this repository: the independent
+      exact checker already exists and is gated on both n = 11 and n = 29, the n = 29
+      upper bound is already `verified` and `exact-algebraic` through
+      `E-n029-schadt-rational-upper`, and no n = 29 contact equations or isolation boxes
+      are needed for that route. Interval work is additionally blocked by a declared
+      unbuilt instrument. The smallest open question is instead Q-BC032-a: whether the
+      4.94e-11 side relaxation is a property of the retained pose or an artifact of
+      `promote_rational`'s fixed dilation ladder at the default `rational_digits = 36`.
+      Neither the completed n = 11 robust-rational control nor any answer to Q-BC032-a
+      certifies the source decimals, improves a record, establishes rigidity, or proves
+      optimality.
     artifacts:
     - witnesses/known-best-n011-rational-control.yaml
     - devtools/generate_known_best_n011_rational_control.py

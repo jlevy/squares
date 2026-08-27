@@ -41,6 +41,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-025](agent-sessions/session-025-pr45-performance-continuation.md) | completed | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 4 | think-eyix | Under BC-027 and think-whwc, reconcile the merged-main validation failure, the terminal session record, and generated views; then restore a first-failure-safe green pipeline before the next research session. |
 | [session-026](agent-sessions/session-026-balanced-research-session-a.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 42 | think-whwc | Open BC-017 under think-u97a as Session B's first bounded constructive driver; do not wait on hosted CI. |
 | [session-027](agent-sessions/session-027-balanced-research-session-b.md) | stopped | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (correctness) | 11 | think-whwc | Open session 028 under BC-032 and think-whwc, reclaim the expired exp-045 lease, and execute phase 11's unchanged n=29 inventory contract on a fresh clock. |
+| [session-028](agent-sessions/session-028-bc032-n29-promotion-inventory.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-75ll | Under BC-032 and think-75ll, register Q-BC032-a as a W6 mini-cycle with its `rational_digits` set declared before the first run and the existing independent exact checker as its sole acceptance instrument. |
 
 ### Workflow summary
 
@@ -50,7 +51,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 0 | 0 | 7 | 0 |
 | `factual-review` | 1 | 0 | 21 | 2 |
-| `insight-iteration` | 1 | 1 | 22 | 2 |
+| `insight-iteration` | 2 | 1 | 23 | 2 |
 | `process-review` | 4 | 4 | 33 | 6 |
 | `efficiency-loop` | 6 | 0 | 15 | 0 |
 | `research-loop` | 1 | 4 | 10 | 7 |
@@ -109,7 +110,7 @@ Status: **active**. Use one mutable ten-hour agenda, with a full five-hour midpo
 | BC-029 | research | 5 | ready | 0 | think-1s0h | exp-045 with a frozen criterion, the declared controls and scale routes, retained raw evidence, an independent replay, and a scoped successor disposition |
 | BC-030 | tool_validation | 5, 10, 11 | complete | 1 | think-6mcd | Under think-3yv8, build BC-016's missing retained poses, executable glued row, symbolic tied-axis label, and independent receipt checker before its differential; alternatively take ready BC-017 through one target-free tagged execution-plan control while actual LP semantics remain blocked |
 | BC-031 | measurement_validation | 11, 12 | complete | 1 | think-4o6l | Under think-trkj, the exact two-branch Case 1 repair and source-distinct Figure 4 coordinate prerequisite are accepted. Next specify and falsify one surrounding center, chord, or polygon-incidence prerequisite, or retain its typed blocker and rotate to an independent later proof route. D-344 through D-347 keep the printed replay open; the remaining acquisition queue continues under think-4o6l. |
-| BC-032 | tool_validation | 11, 29 | complete | 2 | think-75ll | Before an n = 29 interval round, write its explicit contact equations, isolation boxes, outward-rounded certificate type, and independent checker. The completed n = 11 robust-rational control validates only the already-built exactification path at a relaxed side; it does not certify the source decimals, improve a record, establish rigidity, or prove optimality. |
+| BC-032 | tool_validation | 11, 29 | complete | 2 | think-75ll | Superseded by the session 028 inventory. An n = 29 interval round is not the next step and its stated prerequisites do not describe this repository: the independent exact checker already exists and is gated on both n = 11 and n = 29, the n = 29 upper bound is already `verified` and `exact-algebraic` through `E-n029-schadt-rational-upper`, and no n = 29 contact equations or isolation boxes are needed for that route. Interval work is additionally blocked by a declared unbuilt instrument. The smallest open question is instead Q-BC032-a: whether the 4.94e-11 side relaxation is a property of the retained pose or an artifact of `promote_rational`'s fixed dilation ladder at the default `rational_digits = 36`. Neither the completed n = 11 robust-rational control nor any answer to Q-BC032-a certifies the source decimals, improves a record, establishes rigidity, or proves optimality. |
 | BC-033 | tool_validation | 5, 10, 11 | blocked | 2 | think-5vsz | an interface decision linked to think-u97a and the equal-budget comparison harness |
 | BC-034 | research | 11, 100 | complete | 2 | think-ykt7 | Audit Bui Section 4.2's Lemma 6 recurrence only after its specialization, induction range, and strict bounds are frozen. The completed Section 3.1 index proof and Lemmas 3-5 packet discharge only exact count and three local inequalities; geometry, boundary overhead, effective constants, finite transfer, Proposition 7, and the exponent remain open. |
 
