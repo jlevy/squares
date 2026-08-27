@@ -627,7 +627,13 @@ def main() -> int:
                 raise ProofInvariantError(
                     "replay.drift", "retained result differs from regeneration"
                 )
-        print(json.dumps({"status": "PASS", "cases": 6, "controls": 8}))
+        summary_cases = require_dict(result["certificate"], "certificate")["case_count"]
+        summary_controls = len(require_dict(result["controls"], "controls"))
+        print(
+            json.dumps(
+                {"status": "PASS", "cases": summary_cases, "controls": summary_controls}
+            )
+        )
     except (OSError, TypeError, ValueError, json.JSONDecodeError) as error:
         print(f"FAIL: {error}", file=sys.stderr)
         return 1

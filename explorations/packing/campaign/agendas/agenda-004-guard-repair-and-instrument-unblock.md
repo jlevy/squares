@@ -113,7 +113,7 @@ agenda:
     purpose: research
     owner_focus: correctness
     instances: [5]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Do the frozen pure minus-W scale routes and controls advance the n = 5
@@ -132,6 +132,9 @@ agenda:
       exp-045 with its frozen criterion, the declared controls and scale routes, retained
       raw evidence, an independent replay, and a scoped successor disposition. No
       whole-component identity or connectivity language is admitted.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md
+    - campaign/agent-sessions/session-033-block2-run-exp045.md
     note: >-
       This continues agenda-003's BC-029 rather than replacing it, the way BC-029 itself
       continued agenda-001's BC-010 under the same bead.
@@ -139,7 +142,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       Does wiring `evaluate_stress` to the existing shared row inventory repay its build
