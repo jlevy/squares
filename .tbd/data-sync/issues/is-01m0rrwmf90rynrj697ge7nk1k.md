@@ -5,14 +5,14 @@ title: quench_bracket's budget is wall-clock, so results depend on machine load
 kind: bug
 status: open
 priority: 2
-version: 5
+version: 6
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md
 labels:
   - engineering-maturity
 dependencies: []
 parent_id: is-01m0rrgqj3esjc4jx1fr3qy1ht
 created_at: 2026-08-24T02:16:45.800Z
-updated_at: 2026-08-25T04:30:00.983Z
+updated_at: 2026-08-27T10:12:54.511Z
 ---
 quench_bracket and _free_sweep take time_budget in seconds and stop on a wall-clock deadline. Host speed, load, pool width, and contention therefore change how many LP solves and angle probes a nominally identical quench performs, making convergence a property of the machine as well as the mathematics.
 
@@ -22,4 +22,4 @@ Express the scientific budget as work (LP solves or bracket iterations), retain 
 
 ## Notes
 
-Observed again on merged main 1244634 during the 2026-08-24 readiness audit: with several other full gates active across worktrees, the 30-step normal gate took 118s and the real n=10 D-168 control did not exercise adjacent-cell closure, so the historical-regression step failed. An immediate isolated PACK_JOBS=1 replay passed all 8 regression groups, including D-168, in 43.7s. No threshold changed. This is direct evidence that wall-clock-bounded quench work and host oversubscription can make the gate verdict load-dependent; scientific runs and performance receipts must use work units and declared host load.
+Observed load dependence remains: under concurrent full gates the merged-main n=10 regression path failed, while an immediate isolated PACK_JOBS=1 replay passed; no threshold or retained map was changed. Session 027 W3 found that existing quench and local-realization paths collapse or omit the seated-wall, contact, and nonedge semantics needed by the new full-cell label. The bounded repair therefore retains only target-free FullCellExecutionPlan/v1: 15 exact tagged structural rows, complete derived work, pair_tests=0, lp_solver_attempts=0, hashless replay, and typed row/count mutations in the generator-owned control. It has no numerical matrix, target read, geometry, side, feasibility, or optimality result. Actual LP compilation remains blocked on full-cell-execution-semantics-unfrozen. BC-017 separately remains open for real n=5/n=10 counted execution and load equality; this bead remains open for stable n=4/n=10 quench outcomes and work across pool widths/load.
