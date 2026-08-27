@@ -190,6 +190,20 @@ controls:
   run: python3 -m sqpack.cli.validate --only 'historical regressions'
   expect: "forced historical regression failure"
 
+- name: gate - multi-command step cannot swallow its first failure
+  file: src/sqpack/cli/validate.py
+  replace:
+    - '    outputs = [_run(context, command, cwd=cwd) for command in commands]'
+    - |2-
+          outputs: list[str] = []
+          for command in commands:
+              try:
+                  outputs.append(_run(context, command, cwd=cwd))
+              except StepFailureError:
+                  continue
+  run: uv run --frozen --quiet pytest -q tests/test_validation_cli.py -k multi_command_step_stops_at_first_failure
+  expect: "assert 0 == 1"
+
 - name: defect log - generated view left stale
   file: defects.yaml
   replace: ["  title: A restart cap made the declared move budget inert",

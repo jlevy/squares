@@ -333,12 +333,12 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 025](../../../../campaign/agent-sessions/session-025-pr45-performance-continuation.md).
-Under `BC-027` and `think-whwc`, reconcile the merged-main validation failure and
-restore a first-failure-safe green pipeline before the next scientific round.
-Then launch the two-session
+[session 026](../../../../campaign/agent-sessions/session-026-balanced-research-session-a.md).
+Under `BC-029` and `think-1s0h`, independently accept and preregister exp-045 before
+scale implementation or target measurement.
+The first-failure pipeline cell is complete, and the active two-session
 [balanced ten-hour agenda](../../../../campaign/agendas/agenda-003-balanced-ten-hour-research-program.md)
-with actual clocks and a full five-hour midpoint review.
+retains its actual clocks and full five-hour midpoint review.
 The completed target-free path retains 11,013 exact size-five signed-contact orbits with
 independent Burnside and differential controls.
 Those records contain no packing geometry or feasibility result, and the retained

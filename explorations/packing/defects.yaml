@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 339
+count: 340
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8722,3 +8722,32 @@ defects:
   recurrence_of: D-155
   bead: think-eyix
   recorded_in: src/sqpack/chunks.py
+- id: D-340
+  title: The Bash gate suppressed errexit inside multi-command steps
+  date: '2026-08-26'
+  layer: tooling
+  class: validity
+  direction: flattering
+  detected_by: review
+  latent_for: from the concurrent shell runner until the Python validator replaced it
+  severity: critical
+  status: fixed
+  what: >-
+    The deleted `test.sh` invoked each step as the condition of `if ( set -euo
+    pipefail; "$fn" )`. Bash disables errexit throughout a function whose status is
+    tested by `if`, so a failed early command could be followed by a successful command
+    that became the function's status.
+  consequence: >-
+    A multi-command validation step could show the real failure in its transcript, run
+    later probes, and still let the full gate print `ALL CHECKS PASSED` with exit zero.
+  fix: >-
+    PR 41 replaced the shell runner with the Python validator. Its subprocess boundary
+    raises on every nonzero exit, `_commands` stops at that exception, and the summary
+    returns nonzero before it can print the all-pass line.
+  regression: >-
+    The validation CLI test drives a two-command step whose first subprocess exits 17
+    and requires the second command not to run. A negative control mutates `_commands`
+    to swallow the exception and requires that regression to fail.
+  recurrence_of: D-163
+  bead: think-c90t
+  recorded_in: src/sqpack/cli/validate.py

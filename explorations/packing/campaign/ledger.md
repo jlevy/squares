@@ -39,6 +39,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-023](agent-sessions/session-023-pr45-merge-readiness.md) | completed | contemporaneous | `factual-review` (correctness) | `process-review` (correctness) | 8 | think-eyix | Under BC-019 and think-eyix, publish this draft checkpoint, open a fresh time-sliced continuation while free space remains at least 4 GiB, run strict validation with the measured timeout, watch both GitHub jobs, and disposition every review bead only after those receipts are green. |
 | [session-024](agent-sessions/session-024-pr45-strict-and-ci.md) | stopped | contemporaneous | `process-review` (correctness) | `process-review` (correctness) | 2 | think-eyix | Under BC-019 and think-eyix, review PR 41 for correctness, merge safety, and measured validation-loop speedup. If it lands on main, merge that exact main commit into this branch, rerun the focused gates and one complete strict receipt, then require both final-head GitHub jobs before closing review beads. |
 | [session-025](agent-sessions/session-025-pr45-performance-continuation.md) | completed | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 4 | think-eyix | Under BC-027 and think-whwc, reconcile the merged-main validation failure, the terminal session record, and generated views; then restore a first-failure-safe green pipeline before the next research session. |
+| [session-026](agent-sessions/session-026-balanced-research-session-a.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `insight-iteration` (insight) | 5 | think-whwc | Under BC-029, think-whwc, and think-1s0h, finish shaping and independently reviewing the exp-045 criterion before preregistration, implementation, or target measurement. |
 
 ### Workflow summary
 
@@ -47,12 +48,12 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 0 | 0 | 1 | 0 |
-| `factual-review` | 1 | 0 | 15 | 2 |
-| `insight-iteration` | 0 | 1 | 5 | 2 |
+| `factual-review` | 1 | 0 | 16 | 2 |
+| `insight-iteration` | 0 | 1 | 6 | 2 |
 | `process-review` | 4 | 4 | 31 | 6 |
-| `efficiency-loop` | 6 | 0 | 10 | 0 |
+| `efficiency-loop` | 6 | 0 | 11 | 0 |
 | `research-loop` | 1 | 4 | 9 | 7 |
-| `pipeline-improvement` | 4 | 0 | 25 | 0 |
+| `pipeline-improvement` | 5 | 0 | 27 | 0 |
 
 ## Experiment agendas
 
@@ -102,7 +103,7 @@ Status: **active**. Use one mutable ten-hour agenda, with a full five-hour midpo
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-027 | tool_validation | 5, 10, 11, 16, 26 | ready | 0 | think-whwc | the retained main-run failure, one mutation that proves first-failure propagation, and a green replacement integration run |
+| BC-027 | tool_validation | 5, 10, 11, 16, 26 | complete | 0 | think-whwc | Completed in session 026: D-340 retains the historical cause, the CLI regression and mutation control prove first-failure propagation, and the four-step replacement integration surface passes. |
 | BC-028 | tool_validation | 5 | tentative | 0 | think-kdil | checkpoint arithmetic for expected time saved in the remaining horizon, plus an exact-output equivalence result if implementation is admitted |
 | BC-029 | research | 5 | ready | 0 | think-1s0h | exp-045 with a frozen criterion, the declared controls and scale routes, retained raw evidence, an independent replay, and a scoped successor disposition |
 | BC-030 | tool_validation | 5, 10, 11 | ready | 1 | think-6mcd | a versioned full-cell label and cost vector with declared walls, non-edge axes, symmetry orbit, typed cap outcome, and independent mutation results |

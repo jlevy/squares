@@ -22,7 +22,7 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [5, 10, 11, 16, 26]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can the merged validation pipeline fail at the first real error, report that error
@@ -43,8 +43,13 @@ agenda:
     bead: think-whwc
     depends_on: []
     next_evidence: >-
-      the retained main-run failure, one mutation that proves first-failure propagation,
-      and a green replacement integration run
+      Completed in session 026: D-340 retains the historical cause, the CLI regression
+      and mutation control prove first-failure propagation, and the four-step
+      replacement integration surface passes.
+    artifacts:
+    - defects.yaml
+    - tests/test_validation_cli.py
+    - devtools/controls.yaml
     note: >-
       Consume the existing main run before dispatching another. The first observed
       failure takes precedence over the older fail-through bug if they are different.
@@ -77,7 +82,11 @@ agenda:
     note: >-
       The known-best atlas already improved from 743.07 to 123.93 seconds and complete
       strict validation from 1,589.65 to 372.24 seconds. Do not reopen the rejected
-      marginal lattice cache or optimize the atlas without a new profile.
+      marginal lattice cache or optimize the atlas without a new profile. Session 026's
+      first checkpoint rejected row-jet implementation: its acceptance and build cost
+      requires about 11 to 16 remaining whole-group invocations to repay, versus the
+      current estimate of two to four. Reconsider only if the frozen BC-029 plan changes
+      that count.
   - id: BC-029
     purpose: research
     owner_focus: insight

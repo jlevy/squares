@@ -289,12 +289,13 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 PR 45 is merged and
 [session 025](campaign/agent-sessions/session-025-pr45-performance-continuation.md) is
-terminal. The current line is `BC-027` under `think-whwc`: reconcile the merged-main
-validation failure and restore a first-failure-safe green pipeline before starting the
-two-session
+terminal.
+[Session 026](campaign/agent-sessions/session-026-balanced-research-session-a.md) is the
+active first five-hour source session in the two-session
 [balanced ten-hour agenda](campaign/agendas/agenda-003-balanced-ten-hour-research-program.md).
-The first scientific mini-cycle is the `n = 5` H-023 successor under `BC-029`; the
-constructive successor is CG-010 under `BC-030` and `think-6mcd`.
+`BC-027` is complete, and its current line is the `n = 5` H-023 successor under
+`BC-029`, `think-whwc`, and `think-1s0h`. The constructive successor is CG-010 under
+`BC-030` and `think-6mcd`.
 
 All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
 house renderings. The source-complete corpus is calibration evidence, not an unseen
@@ -2059,13 +2060,13 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 339 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 340 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 79 | asserted something false about the mathematics |
-| validity | 82 | was correct, but the measurement did not bear on the question |
+| validity | 83 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 131 | recorded something its own evidence contradicts |
 | robustness | 38 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
@@ -2076,7 +2077,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 339, and no soundness defect
+**The automated gate has caught forty-five defects in 340, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
