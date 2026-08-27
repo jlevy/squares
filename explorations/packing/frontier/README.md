@@ -25,17 +25,9 @@ Each manifest entry binds an `n`, evidence tier, view level, alt text, retained 
 matching frontier file, and exact regeneration command.
 That keeps a figure discoverable without making presentation data authoritative over a
 case’s mathematical frontmatter.
-
-![Walter Trump’s exact packing for the smallest open case.](../atlas/rendering/trump11-overview.svg)
-
-*The `n = 11` overview is one of five retained known answers.*
-
-![The high-precision Kingbird packing of twenty-nine unit squares.](../atlas/rendering/kingbird29-overview.svg)
-
-*The larger `n = 29` example exercises deterministic palette reuse while preserving the
-source’s status as a numerically checked construction.
-The other entries exercise an exact moduli map, a certified trajectory, and a numerical
-start/final comparison.*
+The complete `n = 1…100` visual index lives in the
+[`known-best` atlas](../atlas/known-best/README.md); specialized examples and diagnostic
+views live in the [renderer gallery](../atlas/rendering/README.md).
 
 From the exploration root, list or rebuild every discoverable example with:
 

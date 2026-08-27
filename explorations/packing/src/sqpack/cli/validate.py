@@ -533,7 +533,8 @@ def _known_best_atlas(context: Context) -> str:
     )
     _require_text(
         output,
-        "known-best atlas check passed: 100 sources/plans, witnesses, renders, and links",
+        "known-best atlas check passed: 100 sources/plans, witnesses, renders, "
+        "1 composite, and links",
         "chunk census check passed: components, contacts, and bounded lattice partitions "
         "for 100 records",
         "known-best contact overlay check passed: 5 house-rendered calibration strata",
@@ -553,7 +554,7 @@ def _prospective_atlas(context: Context) -> str:
     )
     _require_text(
         output,
-        "prospective source map check passed: 224 cases, availability only",
+        "prospective source map check passed: 224 cases, availability and SVG",
         "prospective atlas seed check passed: 101 witnesses and 101 house renderings",
     )
     return output

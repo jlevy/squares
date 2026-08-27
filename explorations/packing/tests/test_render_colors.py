@@ -116,7 +116,19 @@ def test_n68_near_wall_rotations_are_not_full_side_contacts() -> None:
         ROOT / "witnesses/known-best/n-068.yaml",
         fallback_schema=ROOT / "witness.schema.yaml",
     )
-    colors = assign_square_colors(frame_from_witness(witness), RenderSpec())
+    spec = RenderSpec()
+    colors = assign_square_colors(frame_from_witness(witness), spec)
+
+    quarter_turn = Decimal("1.57079632679489661923132169163975144209858469968755291048747")
+    near_axis_offsets = tuple(
+        min(
+            colors[square_id].orientation_radians,
+            quarter_turn - colors[square_id].orientation_radians,
+        )
+        for square_id in ("square-019", "square-049", "square-050")
+    )
+    assert min(near_axis_offsets) > spec.angle_tolerance_radians * 100
+    assert max(near_axis_offsets) < Decimal("0.002")
 
     assert colors["square-019"].hue_index != colors["square-001"].hue_index
     assert colors["square-049"].hue_index != colors["square-050"].hue_index

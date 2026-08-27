@@ -720,6 +720,8 @@ def run_portability_controls() -> dict[str, bool]:
 def run_gallery_controls() -> dict[str, bool]:
     from xml.etree import ElementTree as ET
 
+    from devtools.build_known_best_atlas import SUMMARY_SVG
+    from devtools.map_prospective_sources import COVERAGE_OUTPUT
     from devtools.packing_render_adapters import frame_from_kingbird29
     from devtools.render_packing_gallery import build_gallery_manifest
     from sqpack.render import RenderSpec
@@ -738,16 +740,17 @@ def run_gallery_controls() -> dict[str, bool]:
         pattern = rf"!\[[^\]]+\]\({re.escape(relative)}\)"
         return re.search(pattern, text) is not None
 
+    def references(document: str, target: str) -> bool:
+        document_path = ROOT / document
+        relative = os.path.relpath(ROOT / target, document_path.parent)
+        text = document_path.read_text(encoding="utf-8")
+        pattern = rf"!?\[[^\]]+\]\({re.escape(relative)}(?:#[^)]+)?\)"
+        return re.search(pattern, text) is not None
+
     by_id = {example["id"]: example for example in examples}
     surface_expectations = {
-        "README.md": (
-            "n10-source-return-comparison",
-            "n11-trump-overview",
-            "n29-kingbird-overview",
-        ),
         "TUTORIAL.md": (
             "n3-optimal-moduli",
-            "n10-source-return-comparison",
             "n11-trump-overview",
             "n29-kingbird-overview",
         ),
@@ -756,12 +759,6 @@ def run_gallery_controls() -> dict[str, bool]:
             "n11-trump-overview",
             "n29-kingbird-overview",
         ),
-        "atlas/README.md": (
-            "n3-optimal-moduli",
-            "n11-trump-overview",
-            "n29-kingbird-overview",
-        ),
-        "frontier/README.md": ("n11-trump-overview", "n29-kingbird-overview"),
     }
 
     inline_svg_targets = []
@@ -795,6 +792,17 @@ def run_gallery_controls() -> dict[str, bool]:
     kingbird_manifest = by_id["n29-kingbird-overview"]
     kingbird_expected = assign_square_colors(frame_from_kingbird29(), RenderSpec())
     gallery_artifacts = {path.resolve() for path in artifacts}
+    document_svg_artifacts = gallery_artifacts | {
+        SUMMARY_SVG.resolve(),
+        COVERAGE_OUTPUT.resolve(),
+    }
+    comparison_artifact = by_id["n10-source-return-comparison"]["artifact"]
+    comparison_embeds = {
+        document_path.relative_to(ROOT).as_posix()
+        for document_path in ROOT.rglob("*.md")
+        if "resources" not in document_path.relative_to(ROOT).parts
+        and embeds(document_path.relative_to(ROOT).as_posix(), comparison_artifact)
+    }
     return {
         "gallery_has_five_known_answers": len(examples) == 5,
         "gallery_ids_are_unique": len(ids) == len(set(ids)),
@@ -840,14 +848,18 @@ def run_gallery_controls() -> dict[str, bool]:
         and kingbird_metadata.get("check-result") == "passed",
         "all_inline_svg_targets_exist": bool(inline_svg_targets)
         and all(path.is_file() for path in inline_svg_targets),
-        "all_inline_svg_targets_are_current_gallery_artifacts": set(inline_svg_targets)
-        <= gallery_artifacts,
-        "frontier_cases_embed_gallery_artifacts": all(
-            embeds(example["frontier_case"], example["artifact"]) for example in examples
+        "all_inline_svg_targets_are_owned_artifacts": set(inline_svg_targets)
+        <= document_svg_artifacts,
+        "frontier_cases_reference_gallery_artifacts_or_guide": all(
+            embeds(example["frontier_case"], example["artifact"])
+            or references(example["frontier_case"], "atlas/rendering/README.md")
+            for example in examples
         ),
         "gallery_readme_embeds_every_artifact": all(
             embeds("atlas/rendering/README.md", example["artifact"]) for example in examples
         ),
+        "comparison_is_embedded_only_in_focused_gallery": comparison_embeds
+        == {"atlas/rendering/README.md"},
         "exposition_surfaces_embed_expected_examples": all(
             embeds(document, by_id[example_id]["artifact"])
             for document, example_ids in surface_expectations.items()

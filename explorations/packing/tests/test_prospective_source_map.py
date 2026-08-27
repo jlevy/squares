@@ -7,7 +7,9 @@ import json
 from collections import Counter
 from copy import deepcopy
 from pathlib import Path
+from xml.etree import ElementTree as ET
 
+from devtools import map_prospective_sources as source_map
 from devtools.map_prospective_sources import (
     OUTPUT,
     availability_errors,
@@ -15,6 +17,7 @@ from devtools.map_prospective_sources import (
 )
 
 ROOT = Path(__file__).resolve().parent.parent
+SVG = {"svg": "http://www.w3.org/2000/svg"}
 
 
 def test_prospective_source_map_is_deterministic_and_complete() -> None:
@@ -46,6 +49,22 @@ def test_prospective_source_map_is_deterministic_and_complete() -> None:
     assert all(len(digest) == 64 for digest in upstream_digests.values())
     assert "source_sha256" not in json.dumps(entries, sort_keys=True)
     assert "evidence_sha256" not in json.dumps(availability["sources"], sort_keys=True)
+
+
+def test_prospective_coverage_svg_distinguishes_local_and_knowledge_gaps() -> None:
+    availability = expected_document()["availability"]
+    rendered = source_map.render_coverage_svg(availability)
+    assert source_map.COVERAGE_OUTPUT.read_text(encoding="utf-8") == rendered
+    root = ET.fromstring(rendered)
+    cells = root.findall(".//svg:g[@data-n]", SVG)
+
+    assert [int(cell.attrib["data-n"]) for cell in cells] == list(range(101, 325))
+    assert Counter(cell.attrib["data-coverage"] for cell in cells) == {
+        "exact-grid-retained": 97,
+        "licensed-svg-retained": 4,
+        "public-svg-license-deferred": 123,
+    }
+    assert root.findall(".//svg:g[@data-n][@data-coverage='no-located-source']", SVG) == []
 
 
 def test_map_keeps_visual_sources_and_annotations_out_of_geometry() -> None:
