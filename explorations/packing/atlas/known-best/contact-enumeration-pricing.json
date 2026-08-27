@@ -1,0 +1,120 @@
+{
+  "pricing": {
+    "caps": {
+      "maximum_canonical_proposals": 100000,
+      "maximum_lp_solves": 100000,
+      "maximum_raw_orbit_images": 10000000,
+      "maximum_topology_colorings": 2000000
+    },
+    "decision_rule": "Execute legacy labeled canonicalization and local LPs only when its exact raw orbit work is within the declared cap. Otherwise enumerate canonical proposals by connected topology and Aut(topology)-by-D4 orbit marking, without running the LP stage in this engineering-price slice.",
+    "entries": [
+      {
+        "canonical_orbit_lower_bound": 1,
+        "canonical_orbits": 1,
+        "d4_relabeling_group_size": 8,
+        "decision": "execute",
+        "duplicate_candidates": 0,
+        "isomorph_free_orbit_actions": 8,
+        "lp_solves": 1,
+        "n": 1,
+        "outcomes": {
+          "locally-feasible": 1,
+          "locally-infeasible": 0,
+          "solver-indeterminate": 0
+        },
+        "proposal_method": "topology-automorphism-orbit-marking",
+        "raw_labeled_candidates": 1,
+        "raw_orbit_image_upper_work": 8,
+        "topology_coloring_candidates": 1,
+        "unlabeled_topologies": 1
+      },
+      {
+        "canonical_orbit_lower_bound": 1,
+        "canonical_orbits": 1,
+        "d4_relabeling_group_size": 16,
+        "decision": "execute",
+        "duplicate_candidates": 3,
+        "isomorph_free_orbit_actions": 16,
+        "lp_solves": 1,
+        "n": 2,
+        "outcomes": {
+          "locally-feasible": 1,
+          "locally-infeasible": 0,
+          "solver-indeterminate": 0
+        },
+        "proposal_method": "topology-automorphism-orbit-marking",
+        "raw_labeled_candidates": 4,
+        "raw_orbit_image_upper_work": 64,
+        "topology_coloring_candidates": 4,
+        "unlabeled_topologies": 1
+      },
+      {
+        "canonical_orbit_lower_bound": 3,
+        "canonical_orbits": 7,
+        "d4_relabeling_group_size": 48,
+        "decision": "execute",
+        "duplicate_candidates": 105,
+        "isomorph_free_orbit_actions": 240,
+        "lp_solves": 7,
+        "n": 3,
+        "outcomes": {
+          "locally-feasible": 4,
+          "locally-infeasible": 3,
+          "solver-indeterminate": 0
+        },
+        "proposal_method": "topology-automorphism-orbit-marking",
+        "raw_labeled_candidates": 112,
+        "raw_orbit_image_upper_work": 5376,
+        "topology_coloring_candidates": 80,
+        "unlabeled_topologies": 2
+      },
+      {
+        "canonical_orbit_lower_bound": 79,
+        "canonical_orbits": 124,
+        "d4_relabeling_group_size": 192,
+        "decision": "execute",
+        "duplicate_candidates": 14980,
+        "isomorph_free_orbit_actions": 9456,
+        "lp_solves": 124,
+        "n": 4,
+        "outcomes": {
+          "locally-feasible": 26,
+          "locally-infeasible": 98,
+          "solver-indeterminate": 0
+        },
+        "proposal_method": "topology-automorphism-orbit-marking",
+        "raw_labeled_candidates": 15104,
+        "raw_orbit_image_upper_work": 2899968,
+        "topology_coloring_candidates": 5760,
+        "unlabeled_topologies": 6
+      },
+      {
+        "canonical_orbit_lower_bound": 10088,
+        "canonical_orbits": 11013,
+        "d4_relabeling_group_size": 960,
+        "decision": "enumerate-isomorph-free",
+        "duplicate_candidates": null,
+        "isomorph_free_orbit_actions": 1705312,
+        "lp_solves": null,
+        "n": 5,
+        "outcomes": null,
+        "proposal_method": "topology-automorphism-orbit-marking",
+        "raw_labeled_candidates": 9684224,
+        "raw_orbit_image_upper_work": 9296855040,
+        "topology_coloring_candidates": 1533696,
+        "unlabeled_topologies": 21
+      }
+    ],
+    "evidence_role": "target-free engineering price; no atlas geometry or verdict",
+    "generated_by": "python -m devtools.price_contact_enumeration",
+    "minimum_overlap": 0.25,
+    "runtime_policy": "Wall time is platform-specific and printed by the generator, not retained in the byte-stable artifact.",
+    "scope": "connected, one semantic angle color, no walls; every vertex pair is absent or carries one of signed u/v normal colors"
+  },
+  "softschema": {
+    "contract": "packing.squares:ContactEnumerationPricing/v1",
+    "envelope": "pricing",
+    "schema": "contact-enumeration-pricing.schema.yaml",
+    "status": "enforced"
+  }
+}

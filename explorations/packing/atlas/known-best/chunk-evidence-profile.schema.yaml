@@ -1,0 +1,230 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:KnownBestChunkEvidenceProfile/v1
+title: Known-best non-grid chunk evidence profile
+type: object
+additionalProperties: false
+required:
+- aggregate
+- cases
+- claim_boundaries
+- claim_status
+- detectors
+- generated_by
+- inputs
+- rendering
+- scope
+properties:
+  aggregate:
+    type: object
+    additionalProperties: false
+    required:
+    - case_count
+    - contact_component_count
+    - coverage_threshold_cases
+    - fully_structured_cases
+    - internal_slide_dof
+    - narrow_partition_status_counts
+    - sensitivity_comparison
+    - source_strata
+    - square_count
+    - structured_fraction
+    - structured_square_count
+    - within_six_components_and_three_free_cases
+    properties:
+      case_count: {const: 36}
+      contact_component_count: {type: integer, minimum: 0}
+      coverage_threshold_cases:
+        type: object
+        additionalProperties: false
+        required: [at_least_50_percent, at_least_75_percent, at_least_90_percent]
+        properties:
+          at_least_50_percent: {type: integer, minimum: 0, maximum: 36}
+          at_least_75_percent: {type: integer, minimum: 0, maximum: 36}
+          at_least_90_percent: {type: integer, minimum: 0, maximum: 36}
+      fully_structured_cases: {type: integer, minimum: 0, maximum: 36}
+      internal_slide_dof: {type: integer, minimum: 0}
+      narrow_partition_status_counts:
+        type: object
+        additionalProperties: false
+        required:
+        - established
+        - not-established
+        - not-established-search-limit
+        - outside-registered-budget
+        properties:
+          established: {type: integer, minimum: 0, maximum: 36}
+          not-established: {type: integer, minimum: 0, maximum: 36}
+          not-established-search-limit: {type: integer, minimum: 0, maximum: 36}
+          outside-registered-budget: {type: integer, minimum: 0, maximum: 36}
+      sensitivity_comparison:
+        type: object
+        additionalProperties: false
+        required:
+        - changed_case_count
+        - changed_ns
+        - primary_structured_square_count
+        - sensitivity_structured_square_count
+        - within_budget_flip_ns
+        properties:
+          changed_case_count: {type: integer, minimum: 0, maximum: 36}
+          changed_ns:
+            type: array
+            uniqueItems: true
+            items: {type: integer, minimum: 1, maximum: 100}
+          primary_structured_square_count: {type: integer, minimum: 0}
+          sensitivity_structured_square_count: {type: integer, minimum: 0}
+          within_budget_flip_ns:
+            type: array
+            uniqueItems: true
+            items: {type: integer, minimum: 1, maximum: 100}
+      source_strata:
+        type: array
+        minItems: 2
+        maxItems: 2
+        items:
+          type: object
+          additionalProperties: false
+          required:
+          - case_count
+          - fully_structured_cases
+          - sensitivity_changed_ns
+          - source_kind
+          - square_count
+          - structured_fraction
+          - structured_square_count
+          - within_six_components_and_three_free_cases
+          properties:
+            case_count: {type: integer, minimum: 1, maximum: 36}
+            fully_structured_cases: {type: integer, minimum: 0, maximum: 36}
+            sensitivity_changed_ns:
+              type: array
+              uniqueItems: true
+              items: {type: integer, minimum: 1, maximum: 100}
+            source_kind: {enum: [kingbird-derived-facts, unitsquare-rendering]}
+            square_count: {type: integer, minimum: 1}
+            structured_fraction: {type: string, pattern: '^(0|1|0\.[0-9]+)$'}
+            structured_square_count: {type: integer, minimum: 0}
+            within_six_components_and_three_free_cases:
+              type: integer
+              minimum: 0
+              maximum: 36
+      square_count: {type: integer, minimum: 1}
+      structured_fraction: {type: string, pattern: '^(0|1|0\.[0-9]+)$'}
+      structured_square_count: {type: integer, minimum: 0}
+      within_six_components_and_three_free_cases:
+        type: integer
+        minimum: 0
+        maximum: 36
+  cases:
+    type: array
+    minItems: 36
+    maxItems: 36
+    items:
+      type: object
+      additionalProperties: false
+      required:
+      - n
+      - narrow_partition
+      - primary
+      - sensitivity_delta
+      - source_kind
+      - square_count
+      properties:
+        n: {type: integer, minimum: 1, maximum: 100}
+        narrow_partition:
+          type: object
+          additionalProperties: false
+          required:
+          - selected_chunk_count
+          - selected_free_square_count
+          - selected_partition_minimality
+          - status
+          properties:
+            selected_chunk_count: {type: [integer, 'null'], minimum: 0}
+            selected_free_square_count: {type: [integer, 'null'], minimum: 0}
+            selected_partition_minimality:
+              enum: [complete, indeterminate-search-limit, not-applicable]
+            status:
+              enum:
+              - established
+              - not-established
+              - not-established-search-limit
+              - outside-registered-budget
+        primary:
+          type: object
+          additionalProperties: false
+          required:
+          - angle_class_count
+          - contact_component_count
+          - contact_edge_count
+          - free_square_count
+          - internal_slide_dof
+          - largest_component_size
+          - structured_fraction
+          - structured_square_count
+          - wall_seated_square_count
+          - within_six_components_and_three_free
+          properties:
+            angle_class_count: {type: integer, minimum: 1}
+            contact_component_count: {type: integer, minimum: 0}
+            contact_edge_count: {type: integer, minimum: 0}
+            free_square_count: {type: integer, minimum: 0}
+            internal_slide_dof: {type: integer, minimum: 0}
+            largest_component_size: {type: integer, minimum: 1, maximum: 100}
+            structured_fraction: {type: string, pattern: '^(0|1|0\.[0-9]+)$'}
+            structured_square_count: {type: integer, minimum: 0}
+            wall_seated_square_count: {type: integer, minimum: 0}
+            within_six_components_and_three_free: {type: boolean}
+        sensitivity_delta:
+          type: object
+          additionalProperties: false
+          required:
+          - contact_component_count
+          - free_square_count
+          - structured_square_count
+          - within_budget_changed
+          properties:
+            contact_component_count: {type: integer}
+            free_square_count: {type: integer}
+            structured_square_count: {type: integer}
+            within_budget_changed: {type: boolean}
+        source_kind: {enum: [kingbird-derived-facts, unitsquare-rendering]}
+        square_count: {type: integer, minimum: 1, maximum: 100}
+  claim_boundaries:
+    type: array
+    minItems: 5
+    maxItems: 5
+    uniqueItems: true
+    items: {type: string, minLength: 1}
+  claim_status: {const: calibration-only-descriptive-no-hypothesis-verdict}
+  detectors:
+    type: object
+    additionalProperties: false
+    required: [primary_sweep, sensitivity_sweep]
+    properties:
+      primary_sweep: {const: registered-angle-contact}
+      sensitivity_sweep: {const: regularized-angle-contact}
+  generated_by: {const: python -m devtools.profile_known_best_chunks}
+  inputs:
+    type: object
+    additionalProperties: false
+    required: [contact_census, corpus, narrow_partitions]
+    properties:
+      contact_census: {const: chunk-components.json}
+      corpus: {const: manifest.json}
+      narrow_partitions: {const: chunk-partitions.json}
+  rendering:
+    type: object
+    additionalProperties: false
+    required: [path, semantics]
+    properties:
+      path: {const: atlas/known-best/evidence/non-grid-chunk-evidence-profile.svg}
+      semantics: {const: descriptive-document-table-no-packing-geometry}
+  scope:
+    type: object
+    additionalProperties: false
+    required: [excluded_exact_grid_cases, non_grid_cases, range]
+    properties:
+      excluded_exact_grid_cases: {const: 64}
+      non_grid_cases: {const: 36}
+      range: {const: n=1..100}

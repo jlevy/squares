@@ -1,0 +1,209 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ChunkPartitionAtlas/v1
+title: Calibration atlas of bounded lattice-chunk partitions
+type: object
+additionalProperties: false
+required: [generated_by, corpus, claim_status, partition_contract, bands]
+properties:
+  generated_by: {type: string, minLength: 1}
+  corpus: {type: string, minLength: 1}
+  claim_status: {const: calibration-no-verdict}
+  partition_contract:
+    type: object
+    additionalProperties: false
+    required:
+      - candidate_universe
+      - selection_order
+      - maximum_free_squares
+      - maximum_chunks
+      - maximum_off_frame_chunks
+      - maximum_search_states_per_free_count
+      - typed_limit
+    properties:
+      candidate_universe: {type: string, minLength: 1}
+      selection_order: {type: string, minLength: 1}
+      maximum_free_squares: {const: 2}
+      maximum_chunks: {const: 6}
+      maximum_off_frame_chunks: {const: 2}
+      maximum_search_states_per_free_count: {type: integer, minimum: 1}
+      typed_limit: {type: string, minLength: 1}
+  bands:
+    type: array
+    minItems: 2
+    maxItems: 2
+    items: {$ref: '#/$defs/band'}
+$defs:
+  totals:
+    type: object
+    additionalProperties: false
+    required:
+      - records
+      - established
+      - outside_registered_budget
+      - not_established
+      - search_limit
+      - candidate_count
+      - selected_chunk_counts
+      - selected_free_square_counts
+    properties:
+      records: {type: integer, minimum: 0}
+      established: {type: integer, minimum: 0}
+      outside_registered_budget: {type: integer, minimum: 0}
+      not_established: {type: integer, minimum: 0}
+      search_limit: {type: integer, minimum: 0}
+      candidate_count: {type: integer, minimum: 0}
+      selected_chunk_counts:
+        type: object
+        additionalProperties: {type: integer, minimum: 1}
+      selected_free_square_counts:
+        type: object
+        additionalProperties: {type: integer, minimum: 1}
+  summary:
+    type: object
+    additionalProperties: false
+    required:
+      - records
+      - established
+      - outside_registered_budget
+      - not_established
+      - search_limit
+      - candidate_count
+      - selected_chunk_counts
+      - selected_free_square_counts
+      - by_source_kind
+      - non_grid
+    properties:
+      records: {type: integer, minimum: 0}
+      established: {type: integer, minimum: 0}
+      outside_registered_budget: {type: integer, minimum: 0}
+      not_established: {type: integer, minimum: 0}
+      search_limit: {type: integer, minimum: 0}
+      candidate_count: {type: integer, minimum: 0}
+      selected_chunk_counts:
+        type: object
+        additionalProperties: {type: integer, minimum: 1}
+      selected_free_square_counts:
+        type: object
+        additionalProperties: {type: integer, minimum: 1}
+      by_source_kind:
+        type: object
+        additionalProperties: {$ref: '#/$defs/totals'}
+      non_grid: {$ref: '#/$defs/totals'}
+  contact:
+    type: object
+    additionalProperties: false
+    required: [squares, residual, band]
+    properties:
+      squares:
+        type: array
+        minItems: 2
+        maxItems: 2
+        items: {type: string, minLength: 1}
+      residual: {type: string, minLength: 1}
+      band: {enum: [exact, near]}
+  chunk:
+    type: object
+    additionalProperties: false
+    required:
+      - id
+      - shape
+      - members
+      - angle_class
+      - angle_degrees
+      - off_frame
+      - maximum_contact_residual
+      - contacts
+    properties:
+      id: {type: string, minLength: 1}
+      shape: {enum: [bar, L, rectangle]}
+      members:
+        type: array
+        minItems: 2
+        items: {type: string, minLength: 1}
+      angle_class: {type: integer, minimum: 1}
+      angle_degrees: {type: string, minLength: 1}
+      off_frame: {type: boolean}
+      maximum_contact_residual: {type: string, minLength: 1}
+      contacts:
+        type: array
+        minItems: 1
+        items: {$ref: '#/$defs/contact'}
+  option:
+    type: object
+    additionalProperties: false
+    required:
+      - free_square_count
+      - search_states
+      - status
+      - chunk_count
+      - off_frame_chunk_count
+      - maximum_contact_residual
+      - free_squares
+      - chunks
+    properties:
+      free_square_count: {type: integer, minimum: 0, maximum: 2}
+      search_states: {type: integer, minimum: 0}
+      status:
+        enum: [partitioned, no-partition, search-limit]
+      chunk_count: {type: [integer, 'null'], minimum: 0}
+      off_frame_chunk_count: {type: [integer, 'null'], minimum: 0}
+      maximum_contact_residual: {type: [string, 'null']}
+      free_squares:
+        type: array
+        items: {type: string, minLength: 1}
+      chunks:
+        type: array
+        items: {$ref: '#/$defs/chunk'}
+  entry:
+    type: object
+    additionalProperties: false
+    required:
+      - n
+      - witness_id
+      - source_kind
+      - adjacency_tolerance
+      - angle_tolerance_radians
+      - candidate_count
+      - angle_fit_valid
+      - status
+      - selected_free_square_count
+      - selected_chunk_count
+      - selected_partition_minimality
+      - options
+      - limitation
+    properties:
+      n: {type: integer, minimum: 1, maximum: 100}
+      witness_id: {type: string, pattern: '^W-known-best-n[0-9]{3}$'}
+      source_kind: {enum: [exact-grid, kingbird-derived-facts, unitsquare-rendering]}
+      adjacency_tolerance: {type: string, minLength: 1}
+      angle_tolerance_radians: {type: string, minLength: 1}
+      candidate_count: {type: integer, minimum: 0}
+      angle_fit_valid: {type: boolean}
+      status:
+        enum:
+          - established
+          - outside-registered-budget
+          - not-established
+          - not-established-search-limit
+      selected_free_square_count: {type: [integer, 'null'], minimum: 0, maximum: 2}
+      selected_chunk_count: {type: [integer, 'null'], minimum: 0}
+      selected_partition_minimality:
+        enum: [complete, indeterminate-search-limit, not-applicable]
+      options:
+        type: array
+        minItems: 3
+        maxItems: 3
+        items: {$ref: '#/$defs/option'}
+      limitation: {type: string, minLength: 1}
+  band:
+    type: object
+    additionalProperties: false
+    required: [name, summary, entries]
+    properties:
+      name: {enum: [exact, near]}
+      summary: {$ref: '#/$defs/summary'}
+      entries:
+        type: array
+        minItems: 100
+        maxItems: 100
+        items: {$ref: '#/$defs/entry'}

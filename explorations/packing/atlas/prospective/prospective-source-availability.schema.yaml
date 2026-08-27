@@ -1,0 +1,190 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ProspectiveSourceAvailability/v1
+title: Prospective square-packing source availability
+type: object
+additionalProperties: false
+required:
+- generated_by
+- claim_status
+- range
+- readiness
+- policy
+- summary
+- sources
+- access_audit
+- visual_only_sources
+- excluded_sources
+- entries
+properties:
+  generated_by: {type: string, minLength: 1}
+  claim_status: {const: source-availability-only-no-annotations}
+  range:
+    type: object
+    additionalProperties: false
+    required: [first_n, last_n, count]
+    properties:
+      first_n: {const: 101}
+      last_n: {const: 324}
+      count: {const: 224}
+  readiness:
+    type: object
+    additionalProperties: false
+    required: [source_selection, acquisition, normalization]
+    properties:
+      source_selection: {const: provisionally-complete}
+      acquisition: {const: incomplete}
+      normalization: {const: incomplete}
+  policy:
+    type: object
+    additionalProperties: false
+    required: [coordinate_sources, selection_order, annotation_boundary, rendering]
+    properties:
+      coordinate_sources: {type: string, minLength: 1}
+      selection_order: {type: string, minLength: 1}
+      annotation_boundary: {type: string, minLength: 1}
+      rendering: {type: string, minLength: 1}
+  summary:
+    type: object
+    additionalProperties: false
+    required:
+    - selected_cases
+    - kingbird_svg_listed_cases
+    - kingbird_svg_groups_in_range
+    - kingbird_selected_cases
+    - unitsquare_selected_cases
+    - exact_generated_grid_cases
+    properties:
+      selected_cases: {const: 224}
+      kingbird_svg_listed_cases: {const: 127}
+      kingbird_svg_groups_in_range: {const: 114}
+      kingbird_selected_cases: {const: 123}
+      unitsquare_selected_cases: {const: 4}
+      exact_generated_grid_cases: {const: 97}
+  sources:
+    type: array
+    minItems: 3
+    maxItems: 3
+    items:
+      type: object
+      additionalProperties: false
+      required:
+      - key
+      - url
+      - format
+      - access
+      - evidence_path
+      - license_status
+      - acquisition_status
+      properties:
+        key:
+          enum:
+          - kingbird-current-catalogue
+          - unitsquare-release-1
+          - catalogue-trivial-grid-rule
+        url: {type: string, format: uri}
+        format: {type: string, minLength: 1}
+        access: {type: string, minLength: 1}
+        evidence_path: {type: string, minLength: 1}
+        license_status: {type: string, minLength: 1}
+        acquisition_status: {type: string, minLength: 1}
+  access_audit:
+    type: object
+    additionalProperties: false
+    required: [checked_at, method, kingbird, unitsquare]
+    properties:
+      checked_at: {type: string, format: date-time}
+      method: {type: string, minLength: 1}
+      kingbird:
+        type: object
+        additionalProperties: false
+        required: [urls_checked, svg_responses, adapter_passed, adapter_gap_sources]
+        properties:
+          urls_checked: {const: 114}
+          svg_responses: {const: 114}
+          adapter_passed: {const: 114}
+          adapter_gap_sources:
+            type: array
+            maxItems: 0
+            items:
+              type: object
+              additionalProperties: false
+              required: [source_path, reason]
+              properties:
+                source_path: {type: string, pattern: '^square-[0-9]+[a-z]?\.svg$'}
+                reason: {type: string, minLength: 1}
+      unitsquare:
+        type: object
+        additionalProperties: false
+        required: [urls_checked, svg_responses, declared_hashes_matched, adapter_passed]
+        properties:
+          urls_checked: {const: 4}
+          svg_responses: {const: 4}
+          declared_hashes_matched: {const: 4}
+          adapter_passed: {const: 4}
+  visual_only_sources:
+    type: array
+    minItems: 3
+    maxItems: 3
+    items:
+      type: object
+      additionalProperties: false
+      required: [video_id, title, channel, url, use, coordinate_use]
+      properties:
+        video_id: {type: string, pattern: '^[A-Za-z0-9_-]{11}$'}
+        title: {type: string, minLength: 1}
+        channel: {type: string, minLength: 1}
+        url: {type: string, format: uri}
+        use: {type: string, pattern: '^visual-'}
+        coordinate_use: {const: prohibited}
+  excluded_sources:
+    type: array
+    minItems: 4
+    maxItems: 4
+    items:
+      type: object
+      additionalProperties: false
+      required: [url, reason]
+      properties:
+        url: {type: string, format: uri}
+        reason: {type: string, minLength: 1}
+  entries:
+    type: array
+    minItems: 224
+    maxItems: 224
+    items:
+      type: object
+      additionalProperties: false
+      required:
+      - n
+      - classification
+      - source_key
+      - source_n
+      - listed_n
+      - source_path
+      - source_url
+      properties:
+        n: {type: integer, minimum: 101, maximum: 324}
+        classification: {enum: [remote-svg-geometry, exact-generated-geometry]}
+        source_key:
+          enum:
+          - kingbird-current-catalogue
+          - unitsquare-release-1
+          - catalogue-trivial-grid-rule
+        source_n: {type: integer, minimum: 101, maximum: 324}
+        listed_n:
+          type: array
+          minItems: 1
+          items: {type: integer, minimum: 101, maximum: 324}
+        source_path: {type: [string, 'null']}
+        source_url: {type: [string, 'null'], format: uri}
+        upstream_declared_sha256: {type: string, pattern: '^[0-9a-f]{64}$'}
+        trivial_grid_side: {type: integer, minimum: 11, maximum: 18}
+      allOf:
+      - if:
+          properties:
+            source_key: {const: unitsquare-release-1}
+        then:
+          required: [upstream_declared_sha256]
+        else:
+          not:
+            required: [upstream_declared_sha256]

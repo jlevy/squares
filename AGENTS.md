@@ -112,6 +112,16 @@ read, run, and moved as one unit.
   Longer sessions record workflow and primary-focus changes as ordered phases;
   [`explorations/packing/SYNOPSIS.md`](explorations/packing/SYNOPSIS.md#workflow-entry-contracts)
   owns the full contracts.
+- **Multi-hour packing work starts with a time-sliced plan.** Follow the
+  [bounded research cycle](explorations/packing/campaign/README.md#the-bounded-research-cycle)
+  and the
+  [portable session guide](explorations/packing/campaign/agent-sessions/README.md#starting-a-portable-four-hour-session).
+  Unless the user sets another cadence, target a coherent integration checkpoint within
+  about four hours and cap each slice at 30 minutes.
+  At every boundary, compare measured command, coordinator, and sub-agent time with the
+  remaining plan and replan only future slices.
+  Use available sub-agents for independent read-only or disjoint-write work; the
+  coordinating agent owns shared records, integration, commits, and external updates.
 - **Archived source material is never edited to look tidy.** Where a transcription
   reconstructs damaged text, it is flagged inline and counted in the archive README.
 

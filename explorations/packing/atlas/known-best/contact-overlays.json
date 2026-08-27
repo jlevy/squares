@@ -1,0 +1,96 @@
+{
+  "gallery": {
+    "angle_tolerance_radians": "1e-06",
+    "annotations": "chunk-components.json",
+    "claim_status": "calibration-no-verdict",
+    "contact_tolerance": "0.001",
+    "corpus": "manifest.json",
+    "entries": [
+      {
+        "component_count": 5,
+        "contact_edge_count": 7,
+        "free_square_count": 3,
+        "internal_slide_dof": 5,
+        "n": 11,
+        "rendering": "contact-overlays/n-011.svg",
+        "selection_rule": "smallest non-grid case mixing chains, patches, and singletons",
+        "source_kind": "kingbird-derived-facts",
+        "topology_counts": {
+          "contact-chain": 1,
+          "contact-patch": 1,
+          "singleton": 3
+        },
+        "wall_seating_edge_count": 11
+      },
+      {
+        "component_count": 5,
+        "contact_edge_count": 32,
+        "free_square_count": 0,
+        "internal_slide_dof": 14,
+        "n": 28,
+        "rendering": "contact-overlays/n-028.svg",
+        "selection_rule": "smallest fully structured non-grid case mixing chains and patches",
+        "source_kind": "kingbird-derived-facts",
+        "topology_counts": {
+          "contact-chain": 4,
+          "contact-patch": 1
+        },
+        "wall_seating_edge_count": 20
+      },
+      {
+        "component_count": 5,
+        "contact_edge_count": 48,
+        "free_square_count": 0,
+        "internal_slide_dof": 22,
+        "n": 40,
+        "rendering": "contact-overlays/n-040.svg",
+        "selection_rule": "smallest fully structured non-grid case containing patches only",
+        "source_kind": "kingbird-derived-facts",
+        "topology_counts": {
+          "contact-patch": 5
+        },
+        "wall_seating_edge_count": 24
+      },
+      {
+        "component_count": 21,
+        "contact_edge_count": 67,
+        "free_square_count": 11,
+        "internal_slide_dof": 33,
+        "n": 68,
+        "rendering": "contact-overlays/n-068.svg",
+        "selection_rule": "first retained UnitSquare rendering-derived geometry",
+        "source_kind": "unitsquare-rendering",
+        "topology_counts": {
+          "contact-chain": 4,
+          "contact-patch": 6,
+          "singleton": 11
+        },
+        "wall_seating_edge_count": 30
+      },
+      {
+        "component_count": 5,
+        "contact_edge_count": 132,
+        "free_square_count": 0,
+        "internal_slide_dof": 36,
+        "n": 89,
+        "rendering": "contact-overlays/n-089.svg",
+        "selection_rule": "non-grid case with the largest registered contact component",
+        "source_kind": "kingbird-derived-facts",
+        "topology_counts": {
+          "contact-patch": 5
+        },
+        "wall_seating_edge_count": 32
+      }
+    ],
+    "generated_by": "python -m devtools.render_known_best_contact_overlays",
+    "selection_policy": "Five deterministic, distinct calibration strata selected from the registered census; changes regenerate a new checked gallery.",
+    "sweep": "registered-angle-contact",
+    "visual_semantics": "Dashed orange centre-to-centre and centre-to-wall lines show tolerance-qualified census graph incidence. They are not exact contact loci, rigidity certificates, or H-044 evidence."
+  },
+  "softschema": {
+    "contract": "packing.squares:ContactOverlayGallery/v1",
+    "envelope": "gallery",
+    "schema": "contact-overlay-gallery.schema.yaml",
+    "status": "enforced"
+  }
+}

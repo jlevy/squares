@@ -19,8 +19,8 @@ hypothesis:
   criterion:
     shape: determination
     metric: >-
-      rank of the standing-best side among enumerated stratum optima, and the n = 16
-      guard value
+      rank of the standing-best side among deterministically returned stratum candidates,
+      with declared tie handling, and the n = 16 guard value
     direction: >-
       rank 1 within 1e-9 at n = 11 and exactly 4 at n = 16, both from a grammar frozen
       before the run
@@ -56,6 +56,10 @@ hypothesis:
     and reported as its own cell, never folded into the n = 11 verdict. A grammar frozen
     after seeing n = 11 would make the criterion vacuous, which is why the freeze
     commit precedes the target run and is named in the round record.
+    Review amendment 2026-08-26: n=1..100 was inspected while building the corpus and
+    detector, so n=11 can now supply only a retrospective replay. It cannot serve as an
+    unseen rediscovery target; a prospective successor must be registered after the
+    grammar and evaluation corpus are frozen.
 ---
 # H-045 — the rediscovery ladder
 
@@ -66,11 +70,14 @@ random-start billiard runs, and the general-purpose solver study reports an incu
 after a fixed compute budget.
 Neither can say what was searched.
 
-An enumerator can. If a frozen grammar enumerates `N` strata and the standing best ranks
-first among their optima, the round establishes a statement of a different kind: the
-record is stratum `k` of `N`, visited deterministically, and no other enumerated stratum
-beats it. The near-miss corpus is the by-product, with identity given by the stratum
-label rather than a floating-point endpoint key.
+An enumerator can report what it actually returned.
+If a frozen grammar enumerates `N` strata and the standing best ranks first among their
+returned candidates under a declared tie rule, the round establishes a statement of a
+different kind: the record is stratum `k` of `N`, visited deterministically, and no
+other returned candidate beats it.
+That is not a claim that a stopped numerical solve found each stratum’s optimum.
+The near-miss corpus is the by-product, with identity given by the stratum label rather
+than a floating-point endpoint key.
 
 ## The freeze, and why it is the whole design
 
@@ -98,6 +105,12 @@ A stopped quench is not a certified local optimum ([D-052](../../defects.md)), a
 aligned strata are maximally degenerate cells, so endpoint reproducibility across
 toolchains ([D-059](../../defects.md)) is a declared risk for this instrument rather
 than an assumed property.
+
+The 2026-08-26 atlas review also changes the evidentiary role of `n = 11`: its geometry
+was inspected during instrument design.
+A future run is useful as retrospective replay and engineering calibration, but not as
+unseen rediscovery evidence.
+A confirmatory successor needs a prospectively frozen target corpus.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

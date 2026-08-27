@@ -1,0 +1,2718 @@
+{
+  "availability": {
+    "access_audit": {
+      "checked_at": "2026-08-26T06:03:34-07:00",
+      "kingbird": {
+        "adapter_gap_sources": [],
+        "adapter_passed": 114,
+        "svg_responses": 114,
+        "urls_checked": 114
+      },
+      "method": "Fetched every distinct active Kingbird SVG concurrently, then parsed each sequentially at its catalogue count. Duplicate IDs use DOM's first element in tree order; one invalid bare local use is ignored only after the remaining geometry matches the declared count. Fetched the four selected UnitSquare SVGs, matched their declared hashes, and parsed their complete square counts.",
+      "unitsquare": {
+        "adapter_passed": 4,
+        "declared_hashes_matched": 4,
+        "svg_responses": 4,
+        "urls_checked": 4
+      }
+    },
+    "claim_status": "source-availability-only-no-annotations",
+    "entries": [
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          101
+        ],
+        "n": 101,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 101,
+        "source_path": "square-101.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-101.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          102
+        ],
+        "n": 102,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 102,
+        "source_path": "square-102.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-102.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          103
+        ],
+        "n": 103,
+        "source_key": "unitsquare-release-1",
+        "source_n": 103,
+        "source_path": "packings/n103.svg",
+        "source_url": "https://www.hmbelvedere.com/packings/n103.svg",
+        "upstream_declared_sha256": "4bb43826fa9e9ef5f904b1a7a5b45fd622bf02d894699a9462d3f026c53e63b2"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          104
+        ],
+        "n": 104,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 104,
+        "source_path": "square-104.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-104.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          105
+        ],
+        "n": 105,
+        "source_key": "unitsquare-release-1",
+        "source_n": 105,
+        "source_path": "packings/n105.svg",
+        "source_url": "https://www.hmbelvedere.com/packings/n105.svg",
+        "upstream_declared_sha256": "c42fcba9c73b7feaa3ea2f892b1293a14da6c7f7d7ddd8b03ae47877e5f4f9e0"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          106
+        ],
+        "n": 106,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 106,
+        "source_path": "square-106.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-106.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          107
+        ],
+        "n": 107,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 107,
+        "source_path": "square-107.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-107.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          108
+        ],
+        "n": 108,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 108,
+        "source_path": "square-108.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-108.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          109
+        ],
+        "n": 109,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 109,
+        "source_path": "square-109.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-109.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          110
+        ],
+        "n": 110,
+        "source_key": "unitsquare-release-1",
+        "source_n": 110,
+        "source_path": "packings/n110.svg",
+        "source_url": "https://www.hmbelvedere.com/packings/n110.svg",
+        "upstream_declared_sha256": "d650681ea297cd5ff972aadfbd0a21908d40a4970181bc8af9e5dedcfdc12fc9"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          111
+        ],
+        "n": 111,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 111,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 11
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          112
+        ],
+        "n": 112,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 112,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 11
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          113
+        ],
+        "n": 113,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 113,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 11
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          114
+        ],
+        "n": 114,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 114,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 11
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          115
+        ],
+        "n": 115,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 115,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 11
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          116
+        ],
+        "n": 116,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 116,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 11
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          117
+        ],
+        "n": 117,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 117,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 11
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          118
+        ],
+        "n": 118,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 118,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 11
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          119,
+          120
+        ],
+        "n": 119,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 120,
+        "source_path": "square-120.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-120.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          119,
+          120
+        ],
+        "n": 120,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 120,
+        "source_path": "square-120.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-120.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          121
+        ],
+        "n": 121,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 121,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 11
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          122
+        ],
+        "n": 122,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 122,
+        "source_path": "square-122.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-122.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          123
+        ],
+        "n": 123,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 123,
+        "source_path": "square-123.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-123.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          124
+        ],
+        "n": 124,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 124,
+        "source_path": "square-124.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-124.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          125
+        ],
+        "n": 125,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 125,
+        "source_path": "square-125.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-125.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          126
+        ],
+        "n": 126,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 126,
+        "source_path": "square-126.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-126.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          127
+        ],
+        "n": 127,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 127,
+        "source_path": "square-127.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-127.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          128
+        ],
+        "n": 128,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 128,
+        "source_path": "square-128.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-128.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          129
+        ],
+        "n": 129,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 129,
+        "source_path": "square-129.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-129.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          130
+        ],
+        "n": 130,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 130,
+        "source_path": "square-130.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-130.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          131
+        ],
+        "n": 131,
+        "source_key": "unitsquare-release-1",
+        "source_n": 131,
+        "source_path": "packings/n131.svg",
+        "source_url": "https://www.hmbelvedere.com/packings/n131.svg",
+        "upstream_declared_sha256": "a92619568eda15cad4d5bb07a7c1c38622609f080dab9d22b8ca4c677b31ae4a"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          132
+        ],
+        "n": 132,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 132,
+        "source_path": "square-132.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-132.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          133
+        ],
+        "n": 133,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 133,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 12
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          134
+        ],
+        "n": 134,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 134,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 12
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          135
+        ],
+        "n": 135,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 135,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 12
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          136
+        ],
+        "n": 136,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 136,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 12
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          137
+        ],
+        "n": 137,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 137,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 12
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          138
+        ],
+        "n": 138,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 138,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 12
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          139
+        ],
+        "n": 139,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 139,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 12
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          140
+        ],
+        "n": 140,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 140,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 12
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          141
+        ],
+        "n": 141,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 141,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 12
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          142,
+          143
+        ],
+        "n": 142,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 143,
+        "source_path": "square-143.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-143.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          142,
+          143
+        ],
+        "n": 143,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 143,
+        "source_path": "square-143.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-143.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          144
+        ],
+        "n": 144,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 144,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 12
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          145
+        ],
+        "n": 145,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 145,
+        "source_path": "square-145.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-145.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          146
+        ],
+        "n": 146,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 146,
+        "source_path": "square-146.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-146.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          147,
+          148
+        ],
+        "n": 147,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 148,
+        "source_path": "square-148.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-148.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          147,
+          148
+        ],
+        "n": 148,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 148,
+        "source_path": "square-148.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-148.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          149
+        ],
+        "n": 149,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 149,
+        "source_path": "square-149.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-149.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          150
+        ],
+        "n": 150,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 150,
+        "source_path": "square-150.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-150.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          151
+        ],
+        "n": 151,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 151,
+        "source_path": "square-151.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-151.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          152
+        ],
+        "n": 152,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 152,
+        "source_path": "square-152.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-152.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          153
+        ],
+        "n": 153,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 153,
+        "source_path": "square-153.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-153.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          154
+        ],
+        "n": 154,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 154,
+        "source_path": "square-154.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-154.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          155
+        ],
+        "n": 155,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 155,
+        "source_path": "square-155.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-155.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          156
+        ],
+        "n": 156,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 156,
+        "source_path": "square-156.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-156.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          157
+        ],
+        "n": 157,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 157,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 13
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          158
+        ],
+        "n": 158,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 158,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 13
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          159
+        ],
+        "n": 159,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 159,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 13
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          160
+        ],
+        "n": 160,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 160,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 13
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          161
+        ],
+        "n": 161,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 161,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 13
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          162
+        ],
+        "n": 162,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 162,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 13
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          163
+        ],
+        "n": 163,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 163,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 13
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          164
+        ],
+        "n": 164,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 164,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 13
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          165
+        ],
+        "n": 165,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 165,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 13
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          166
+        ],
+        "n": 166,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 166,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 13
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          167,
+          168
+        ],
+        "n": 167,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 168,
+        "source_path": "square-168.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-168.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          167,
+          168
+        ],
+        "n": 168,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 168,
+        "source_path": "square-168.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-168.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          169
+        ],
+        "n": 169,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 169,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 13
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          170
+        ],
+        "n": 170,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 170,
+        "source_path": "square-170b.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-170b.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          171
+        ],
+        "n": 171,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 171,
+        "source_path": "square-171.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-171.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          172
+        ],
+        "n": 172,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 172,
+        "source_path": "square-172.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-172.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          173
+        ],
+        "n": 173,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 173,
+        "source_path": "square-173.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-173.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          174
+        ],
+        "n": 174,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 174,
+        "source_path": "square-174.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-174.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          175
+        ],
+        "n": 175,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 175,
+        "source_path": "square-175.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-175.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          176
+        ],
+        "n": 176,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 176,
+        "source_path": "square-176.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-176.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          177
+        ],
+        "n": 177,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 177,
+        "source_path": "square-177.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-177.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          178
+        ],
+        "n": 178,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 178,
+        "source_path": "square-178.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-178.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          179
+        ],
+        "n": 179,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 179,
+        "source_path": "square-179.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-179.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          180
+        ],
+        "n": 180,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 180,
+        "source_path": "square-180.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-180.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          181
+        ],
+        "n": 181,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 181,
+        "source_path": "square-181.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-181.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          182
+        ],
+        "n": 182,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 182,
+        "source_path": "square-182.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-182.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          183
+        ],
+        "n": 183,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 183,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          184
+        ],
+        "n": 184,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 184,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          185
+        ],
+        "n": 185,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 185,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          186
+        ],
+        "n": 186,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 186,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          187
+        ],
+        "n": 187,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 187,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          188
+        ],
+        "n": 188,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 188,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          189
+        ],
+        "n": 189,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 189,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          190
+        ],
+        "n": 190,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 190,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          191
+        ],
+        "n": 191,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 191,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          192
+        ],
+        "n": 192,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 192,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          193
+        ],
+        "n": 193,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 193,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          194,
+          195
+        ],
+        "n": 194,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 195,
+        "source_path": "square-195.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-195.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          194,
+          195
+        ],
+        "n": 195,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 195,
+        "source_path": "square-195.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-195.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          196
+        ],
+        "n": 196,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 196,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 14
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          197
+        ],
+        "n": 197,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 197,
+        "source_path": "square-197.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-197.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          198
+        ],
+        "n": 198,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 198,
+        "source_path": "square-198.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-198.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          199
+        ],
+        "n": 199,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 199,
+        "source_path": "square-199.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-199.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          200
+        ],
+        "n": 200,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 200,
+        "source_path": "square-200.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-200.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          201
+        ],
+        "n": 201,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 201,
+        "source_path": "square-201.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-201.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          202
+        ],
+        "n": 202,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 202,
+        "source_path": "square-202.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-202.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          203
+        ],
+        "n": 203,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 203,
+        "source_path": "square-203a.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-203a.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          204
+        ],
+        "n": 204,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 204,
+        "source_path": "square-204.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-204.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          205
+        ],
+        "n": 205,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 205,
+        "source_path": "square-205.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-205.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          206
+        ],
+        "n": 206,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 206,
+        "source_path": "square-206.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-206.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          207
+        ],
+        "n": 207,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 207,
+        "source_path": "square-207.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-207.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          208
+        ],
+        "n": 208,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 208,
+        "source_path": "square-208.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-208.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          209
+        ],
+        "n": 209,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 209,
+        "source_path": "square-209.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-209.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          210
+        ],
+        "n": 210,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 210,
+        "source_path": "square-210.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-210.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          211
+        ],
+        "n": 211,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 211,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          212
+        ],
+        "n": 212,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 212,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          213
+        ],
+        "n": 213,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 213,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          214
+        ],
+        "n": 214,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 214,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          215
+        ],
+        "n": 215,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 215,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          216
+        ],
+        "n": 216,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 216,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          217
+        ],
+        "n": 217,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 217,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          218
+        ],
+        "n": 218,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 218,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          219
+        ],
+        "n": 219,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 219,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          220
+        ],
+        "n": 220,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 220,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          221
+        ],
+        "n": 221,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 221,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          222
+        ],
+        "n": 222,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 222,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          223,
+          224
+        ],
+        "n": 223,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 224,
+        "source_path": "square-224.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-224.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          223,
+          224
+        ],
+        "n": 224,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 224,
+        "source_path": "square-224.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-224.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          225
+        ],
+        "n": 225,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 225,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 15
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          226
+        ],
+        "n": 226,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 226,
+        "source_path": "square-226.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-226.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          227
+        ],
+        "n": 227,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 227,
+        "source_path": "square-227.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-227.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          228
+        ],
+        "n": 228,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 228,
+        "source_path": "square-228.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-228.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          229
+        ],
+        "n": 229,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 229,
+        "source_path": "square-229.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-229.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          230
+        ],
+        "n": 230,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 230,
+        "source_path": "square-230.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-230.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          231
+        ],
+        "n": 231,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 231,
+        "source_path": "square-231.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-231.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          232,
+          233
+        ],
+        "n": 232,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 233,
+        "source_path": "square-233.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-233.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          232,
+          233
+        ],
+        "n": 233,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 233,
+        "source_path": "square-233.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-233.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          234
+        ],
+        "n": 234,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 234,
+        "source_path": "square-234.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-234.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          235
+        ],
+        "n": 235,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 235,
+        "source_path": "square-235.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-235.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          236
+        ],
+        "n": 236,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 236,
+        "source_path": "square-236.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-236.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          237
+        ],
+        "n": 237,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 237,
+        "source_path": "square-237.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-237.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          238
+        ],
+        "n": 238,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 238,
+        "source_path": "square-238.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-238.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          239
+        ],
+        "n": 239,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 239,
+        "source_path": "square-239.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-239.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          240
+        ],
+        "n": 240,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 240,
+        "source_path": "square-240.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-240.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          241
+        ],
+        "n": 241,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 241,
+        "source_path": "square-241.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-241.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          242
+        ],
+        "n": 242,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 242,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          243
+        ],
+        "n": 243,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 243,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          244
+        ],
+        "n": 244,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 244,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          245
+        ],
+        "n": 245,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 245,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          246
+        ],
+        "n": 246,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 246,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          247
+        ],
+        "n": 247,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 247,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          248
+        ],
+        "n": 248,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 248,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          249
+        ],
+        "n": 249,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 249,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          250
+        ],
+        "n": 250,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 250,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          251
+        ],
+        "n": 251,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 251,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          252
+        ],
+        "n": 252,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 252,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          253
+        ],
+        "n": 253,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 253,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          254,
+          255
+        ],
+        "n": 254,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 255,
+        "source_path": "square-255.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-255.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          254,
+          255
+        ],
+        "n": 255,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 255,
+        "source_path": "square-255.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-255.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          256
+        ],
+        "n": 256,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 256,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 16
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          257
+        ],
+        "n": 257,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 257,
+        "source_path": "square-257a.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-257a.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          258
+        ],
+        "n": 258,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 258,
+        "source_path": "square-258.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-258.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          259
+        ],
+        "n": 259,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 259,
+        "source_path": "square-259.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-259.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          260
+        ],
+        "n": 260,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 260,
+        "source_path": "square-260b.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-260b.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          261
+        ],
+        "n": 261,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 261,
+        "source_path": "square-261.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-261.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          262
+        ],
+        "n": 262,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 262,
+        "source_path": "square-262.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-262.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          263
+        ],
+        "n": 263,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 263,
+        "source_path": "square-263.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-263.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          264,
+          265
+        ],
+        "n": 264,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 265,
+        "source_path": "square-265.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-265.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          264,
+          265
+        ],
+        "n": 265,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 265,
+        "source_path": "square-265.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-265.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          266
+        ],
+        "n": 266,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 266,
+        "source_path": "square-266.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-266.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          267
+        ],
+        "n": 267,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 267,
+        "source_path": "square-267.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-267.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          268
+        ],
+        "n": 268,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 268,
+        "source_path": "square-268.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-268.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          269
+        ],
+        "n": 269,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 269,
+        "source_path": "square-269.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-269.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          270
+        ],
+        "n": 270,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 270,
+        "source_path": "square-270.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-270.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          271
+        ],
+        "n": 271,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 271,
+        "source_path": "square-271.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-271.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          272
+        ],
+        "n": 272,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 272,
+        "source_path": "square-272.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-272.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          273
+        ],
+        "n": 273,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 273,
+        "source_path": "square-273.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-273.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          274
+        ],
+        "n": 274,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 274,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          275
+        ],
+        "n": 275,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 275,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          276
+        ],
+        "n": 276,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 276,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          277
+        ],
+        "n": 277,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 277,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          278
+        ],
+        "n": 278,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 278,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          279
+        ],
+        "n": 279,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 279,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          280
+        ],
+        "n": 280,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 280,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          281
+        ],
+        "n": 281,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 281,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          282
+        ],
+        "n": 282,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 282,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          283
+        ],
+        "n": 283,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 283,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          284
+        ],
+        "n": 284,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 284,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          285
+        ],
+        "n": 285,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 285,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          286
+        ],
+        "n": 286,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 286,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          287,
+          288
+        ],
+        "n": 287,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 288,
+        "source_path": "square-288.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-288.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          287,
+          288
+        ],
+        "n": 288,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 288,
+        "source_path": "square-288.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-288.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          289
+        ],
+        "n": 289,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 289,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 17
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          290,
+          291
+        ],
+        "n": 290,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 291,
+        "source_path": "square-291.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-291.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          290,
+          291
+        ],
+        "n": 291,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 291,
+        "source_path": "square-291.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-291.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          292
+        ],
+        "n": 292,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 292,
+        "source_path": "square-292.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-292.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          293
+        ],
+        "n": 293,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 293,
+        "source_path": "square-293.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-293.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          294
+        ],
+        "n": 294,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 294,
+        "source_path": "square-294.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-294.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          295,
+          296
+        ],
+        "n": 295,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 296,
+        "source_path": "square-296.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-296.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          295,
+          296
+        ],
+        "n": 296,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 296,
+        "source_path": "square-296.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-296.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          297
+        ],
+        "n": 297,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 297,
+        "source_path": "square-297.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-297.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          298
+        ],
+        "n": 298,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 298,
+        "source_path": "square-298.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-298.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          299
+        ],
+        "n": 299,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 299,
+        "source_path": "square-299.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-299.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          300
+        ],
+        "n": 300,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 300,
+        "source_path": "square-300.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-300.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          301
+        ],
+        "n": 301,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 301,
+        "source_path": "square-301.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-301.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          302
+        ],
+        "n": 302,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 302,
+        "source_path": "square-302.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-302.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          303
+        ],
+        "n": 303,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 303,
+        "source_path": "square-303.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-303.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          304
+        ],
+        "n": 304,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 304,
+        "source_path": "square-304.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-304.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          305
+        ],
+        "n": 305,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 305,
+        "source_path": "square-305.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-305.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          306
+        ],
+        "n": 306,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 306,
+        "source_path": "square-306.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-306.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          307
+        ],
+        "n": 307,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 307,
+        "source_path": "square-307.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-307.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          308
+        ],
+        "n": 308,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 308,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          309
+        ],
+        "n": 309,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 309,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          310
+        ],
+        "n": 310,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 310,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          311
+        ],
+        "n": 311,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 311,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          312
+        ],
+        "n": 312,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 312,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          313
+        ],
+        "n": 313,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 313,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          314
+        ],
+        "n": 314,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 314,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          315
+        ],
+        "n": 315,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 315,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          316
+        ],
+        "n": 316,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 316,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          317
+        ],
+        "n": 317,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 317,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          318
+        ],
+        "n": 318,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 318,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          319
+        ],
+        "n": 319,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 319,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          320
+        ],
+        "n": 320,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 320,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          321
+        ],
+        "n": 321,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 321,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          322,
+          323
+        ],
+        "n": 322,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 323,
+        "source_path": "square-323.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-323.svg"
+      },
+      {
+        "classification": "remote-svg-geometry",
+        "listed_n": [
+          322,
+          323
+        ],
+        "n": 323,
+        "source_key": "kingbird-current-catalogue",
+        "source_n": 323,
+        "source_path": "square-323.svg",
+        "source_url": "https://kingbird.myphotos.cc/packing/square-323.svg"
+      },
+      {
+        "classification": "exact-generated-geometry",
+        "listed_n": [
+          324
+        ],
+        "n": 324,
+        "source_key": "catalogue-trivial-grid-rule",
+        "source_n": 324,
+        "source_path": null,
+        "source_url": null,
+        "trivial_grid_side": 18
+      }
+    ],
+    "excluded_sources": [
+      {
+        "reason": "Older records or alternative packings are not the active selection.",
+        "url": "https://kingbird.myphotos.cc/packing/squares_in_squares__compared2.html"
+      },
+      {
+        "reason": "Older records or alternative packings are not the active selection.",
+        "url": "https://kingbird.myphotos.cc/packing/squares_in_squares__compared3.html"
+      },
+      {
+        "reason": "Duplicate table presentation, useful for browsing but not a second geometry authority.",
+        "url": "https://kingbird.myphotos.cc/packing/squares_in_squares__triangular_table.html"
+      },
+      {
+        "reason": "Raster and video frames are visual evidence only; coordinate transcription is prohibited.",
+        "url": "https://www.youtube.com/"
+      }
+    ],
+    "generated_by": "python -m devtools.map_prospective_sources",
+    "policy": {
+      "annotation_boundary": "This map records availability and provenance only. It contains no contact, chunk, rigidity, or grammar annotation and supplies no hypothesis verdict.",
+      "coordinate_sources": "Use full SVG geometry or exact generated grids only. Never transcribe coordinates from raster images or video.",
+      "rendering": "Any acquired geometry must be normalized to Witness/v1 and rendered with the repository's deterministic house renderer.",
+      "selection_order": "Select a newer UnitSquare certified construction when present; otherwise select the current Kingbird catalogue SVG; otherwise apply the catalogue's stated trivial no-tilt grid rule through n=324."
+    },
+    "range": {
+      "count": 224,
+      "first_n": 101,
+      "last_n": 324
+    },
+    "readiness": {
+      "acquisition": "incomplete",
+      "normalization": "incomplete",
+      "source_selection": "provisionally-complete"
+    },
+    "sources": [
+      {
+        "access": "public-http-svg",
+        "acquisition_status": "deferred-pending-license-review",
+        "evidence_path": "resources/web/kingbird-squares-in-squares.html",
+        "format": "html-listing-and-svg-geometry",
+        "key": "kingbird-current-catalogue",
+        "license_status": "not-stated-on-inspected-catalogue-page",
+        "url": "https://kingbird.myphotos.cc/packing/squares_in_squares.html"
+      },
+      {
+        "access": "public-http-svg",
+        "acquisition_status": "eligible-after-retention-control",
+        "evidence_path": "resources/web/unitsquare-release1-2026/results.json",
+        "format": "json-index-and-svg-geometry",
+        "key": "unitsquare-release-1",
+        "license_status": "CC-BY-4.0-in-dataset-page-metadata",
+        "url": "https://www.hmbelvedere.com/"
+      },
+      {
+        "access": "local-deterministic-generation",
+        "acquisition_status": "ready",
+        "evidence_path": "resources/web/kingbird-squares-in-squares.html",
+        "format": "catalogue-rule-and-exact-grid",
+        "key": "catalogue-trivial-grid-rule",
+        "license_status": "generated-locally-from-stated-mathematical-rule",
+        "url": "https://kingbird.myphotos.cc/packing/squares_in_squares.html"
+      }
+    ],
+    "summary": {
+      "exact_generated_grid_cases": 97,
+      "kingbird_selected_cases": 123,
+      "kingbird_svg_groups_in_range": 114,
+      "kingbird_svg_listed_cases": 127,
+      "selected_cases": 224,
+      "unitsquare_selected_cases": 4
+    },
+    "visual_only_sources": [
+      {
+        "channel": "Deckard",
+        "coordinate_use": "prohibited",
+        "title": "Packing Squares Inside The Smallest Square Possible",
+        "url": "https://www.youtube.com/watch?v=uL5wuiy34rs",
+        "use": "visual-index-and-aesthetic-cross-check-only",
+        "video_id": "uL5wuiy34rs"
+      },
+      {
+        "channel": "Andy Math",
+        "coordinate_use": "prohibited",
+        "title": "Square Packing",
+        "url": "https://www.youtube.com/watch?v=jToq8C89r0I",
+        "use": "visual-index-only",
+        "video_id": "jToq8C89r0I"
+      },
+      {
+        "channel": "OneMinuteThings",
+        "coordinate_use": "prohibited",
+        "title": "Square packing is weird.",
+        "url": "https://www.youtube.com/watch?v=81DCjd5DPMs",
+        "use": "visual-index-only",
+        "video_id": "81DCjd5DPMs"
+      }
+    ]
+  },
+  "softschema": {
+    "contract": "packing.squares:ProspectiveSourceAvailability/v1",
+    "envelope": "availability",
+    "schema": "prospective-source-availability.schema.yaml",
+    "status": "enforced"
+  }
+}

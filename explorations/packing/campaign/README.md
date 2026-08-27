@@ -144,6 +144,14 @@ Outcome and evidence are recorded only when it closes.
 | Finalization reserve | 15 minutes | Stop new work before the session deadline; reconcile artifacts, defects, beads, generated views, commits, pushes, and the next action |
 | Research command | Declared per hypothesis | Terminate or return at its own wall-clock bound and retain its stopping reason and resumable state |
 
+For multi-hour work, state the bounded slice plan through the next integration
+checkpoint before acting.
+Unless the user declares another cadence, place that checkpoint within about four hours.
+At every slice boundary, compare measured command, coordinator, and delegation time with
+the estimates, finalization start, and session deadline.
+Shorten, split, reorder, or defer only future slices; never move a declared deadline or
+alter a frozen scientific contract after seeing results.
+
 A durable handoff must leave a coherent checkpoint.
 Commit coherent work; when interruption makes that impossible, preserve the partial
 state with its reproducer, limitation, and next decision in the owning bead or escalated
@@ -159,14 +167,18 @@ even when the answer is negative or invalid.
    Add focus, outer clock, stopping condition, and fallback when the session escalation
    criteria apply.
 3. **Execute.** Take the smallest action that can answer the question.
-   Delegate independent mechanical work with a disjoint scope and the same clock.
+   Use available sub-agents or delegates for independent read-only or disjoint-write
+   work under the same clock.
    The delegation inherits the coordinating phase unless it opens its own independently
-   tracked session.
+   tracked session. One coordinator owns shared records, integration, commits, and
+   external updates.
 4. **Checkpoint.** At the declared evidence checkpoint, preserve concrete evidence.
    A result may be positive, negative, invalid, or blocked; each advances the record if
    its evidence is replayable.
 5. **Stop or renew.** At the declared slice boundary, integrate, preserve, or abandon
-   the slice. Never extend it merely because the answer feels close.
+   the slice. Compare measured elapsed time with the remaining plan and finalization
+   reserve before selecting the next slice.
+   Never extend it merely because the answer feels close.
    A successor slice must state what new fact makes another bounded attempt worthwhile.
 6. **Record once.** Route an idea to the idea board or a new `H-NNN`, a measurement to
    raw data and `exp-NNN`, an implementation task to its bead and owning workflow, and

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:sqpack="https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1" width="960" height="680" viewBox="0 0 960 680" role="img" aria-labelledby="figure-title figure-description" data-static-fallback="final">
+  <title id="figure-title">Known-best packing of 94 unit squares</title>
+  <desc id="figure-description">The retained known-best n=94 construction, normalized to Witness/v1 and rendered with the repository's deterministic house renderer.</desc>
+  <metadata>
+    <sqpack:profile version="5">
+      <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
+      <sqpack:value name="annotations">minimal</sqpack:value>
+      <sqpack:value name="check-detail">Verifies this known-best upper-bound construction, not uniqueness; optimality comes only from the separately cited frontier lower bound.</sqpack:value>
+      <sqpack:value name="check-kind">formal</sqpack:value>
+      <sqpack:value name="check-method">exact-algebraic</sqpack:value>
+      <sqpack:value name="check-result">passed</sqpack:value>
+      <sqpack:value name="evidence">certified-upper-bound</sqpack:value>
+      <sqpack:value name="source-id">W-known-best-n094</sqpack:value>
+      <sqpack:value name="source-url" />
+      <sqpack:value name="view">overview</sqpack:value>
+    </sqpack:profile>
+  </metadata>
+  <rect width="960" height="680" fill="#ffffff" />
+  <g id="panel-0" data-panel="n=94 known best">
+    <g id="panel-0-fills" data-layer="fills">
+      <polygon data-feature="square-fill" data-square="square-001" points="36,572 89.6,572 89.6,518.4 36,518.4" fill="#378c3f" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-002" points="89.6,572 143.2,572 143.2,518.4 89.6,518.4" fill="#00aeee" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-003" points="143.2,572 196.8,572 196.8,518.4 143.2,518.4" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-004" points="196.8,572 250.4,572 250.4,518.4 196.8,518.4" fill="#00b393" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-005" points="250.4,572 304,572 304,518.4 250.4,518.4" fill="#3d63be" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-006" points="304,572 357.6,572 357.6,518.4 304,518.4" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-007" points="357.6,572 411.2,572 411.2,518.4 357.6,518.4" fill="#877deb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-008" points="411.2,572 464.8,572 464.8,518.4 411.2,518.4" fill="#9fce85" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-009" points="464.8,572 518.4,572 518.4,518.4 464.8,518.4" fill="#0096b1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-010" points="518.4,572 572,572 572,518.4 518.4,518.4" fill="#854888" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-011" points="36,518.4 89.6,518.4 89.6,464.8 36,464.8" fill="#83c4ff" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-012" points="89.6,518.4 143.2,518.4 143.2,464.8 89.6,464.8" fill="#3bb360" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-013" points="143.2,518.4 196.8,518.4 196.8,464.8 143.2,464.8" fill="#008376" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-014" points="196.8,518.4 250.4,518.4 250.4,464.8 196.8,464.8" fill="#7acfe9" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-015" points="250.4,518.4 304,518.4 304,464.8 250.4,464.8" fill="#0079bf" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-016" points="304,518.4 357.6,518.4 357.6,464.8 304,464.8" fill="#86a2ff" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-017" points="357.6,518.4 411.2,518.4 411.2,464.8 357.6,464.8" fill="#865eb1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-018" points="411.2,518.4 464.8,518.4 464.8,464.8 411.2,464.8" fill="#7fd6b1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-019" points="464.8,518.4 518.4,518.4 518.4,464.8 464.8,464.8" fill="#00afb9" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-020" points="518.4,518.4 572,518.4 572,464.8 518.4,464.8" fill="#c18dd8" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-021" points="36,464.8 89.6,464.8 89.6,411.2 36,411.2" fill="#378c3f" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-022" points="89.6,464.8 143.2,464.8 143.2,411.2 89.6,411.2" fill="#00aeee" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-023" points="143.2,464.8 196.8,464.8 196.8,411.2 143.2,411.2" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-024" points="196.8,464.8 250.4,464.8 250.4,411.2 196.8,411.2" fill="#00b393" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-025" points="250.4,464.8 304,464.8 304,411.2 250.4,411.2" fill="#3d63be" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-026" points="304,464.8 357.6,464.8 357.6,411.2 304,411.2" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-027" points="357.6,464.8 411.2,464.8 411.2,411.2 357.6,411.2" fill="#877deb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-028" points="411.2,464.8 464.8,464.8 464.8,411.2 411.2,411.2" fill="#9fce85" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-029" points="464.8,464.8 518.4,464.8 518.4,411.2 464.8,411.2" fill="#0096b1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-030" points="518.4,464.8 572,464.8 572,411.2 518.4,411.2" fill="#854888" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-031" points="36,411.2 89.6,411.2 89.6,357.6 36,357.6" fill="#83c4ff" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-032" points="89.6,411.2 143.2,411.2 143.2,357.6 89.6,357.6" fill="#3bb360" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-033" points="143.2,411.2 196.8,411.2 196.8,357.6 143.2,357.6" fill="#008376" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-034" points="196.8,411.2 250.4,411.2 250.4,357.6 196.8,357.6" fill="#7acfe9" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-035" points="250.4,411.2 304,411.2 304,357.6 250.4,357.6" fill="#0079bf" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-036" points="304,411.2 357.6,411.2 357.6,357.6 304,357.6" fill="#86a2ff" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-037" points="357.6,411.2 411.2,411.2 411.2,357.6 357.6,357.6" fill="#865eb1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-038" points="411.2,411.2 464.8,411.2 464.8,357.6 411.2,357.6" fill="#7fd6b1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-039" points="464.8,411.2 518.4,411.2 518.4,357.6 464.8,357.6" fill="#00afb9" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-040" points="518.4,411.2 572,411.2 572,357.6 518.4,357.6" fill="#c18dd8" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-041" points="36,357.6 89.6,357.6 89.6,304 36,304" fill="#378c3f" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-042" points="89.6,357.6 143.2,357.6 143.2,304 89.6,304" fill="#00aeee" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-043" points="143.2,357.6 196.8,357.6 196.8,304 143.2,304" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-044" points="196.8,357.6 250.4,357.6 250.4,304 196.8,304" fill="#00b393" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-045" points="250.4,357.6 304,357.6 304,304 250.4,304" fill="#3d63be" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-046" points="304,357.6 357.6,357.6 357.6,304 304,304" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-047" points="357.6,357.6 411.2,357.6 411.2,304 357.6,304" fill="#877deb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-048" points="411.2,357.6 464.8,357.6 464.8,304 411.2,304" fill="#9fce85" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-049" points="464.8,357.6 518.4,357.6 518.4,304 464.8,304" fill="#0096b1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-050" points="518.4,357.6 572,357.6 572,304 518.4,304" fill="#854888" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-051" points="36,304 89.6,304 89.6,250.4 36,250.4" fill="#83c4ff" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-052" points="89.6,304 143.2,304 143.2,250.4 89.6,250.4" fill="#3bb360" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-053" points="143.2,304 196.8,304 196.8,250.4 143.2,250.4" fill="#008376" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-054" points="196.8,304 250.4,304 250.4,250.4 196.8,250.4" fill="#7acfe9" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-055" points="250.4,304 304,304 304,250.4 250.4,250.4" fill="#0079bf" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-056" points="304,304 357.6,304 357.6,250.4 304,250.4" fill="#86a2ff" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-057" points="357.6,304 411.2,304 411.2,250.4 357.6,250.4" fill="#865eb1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-058" points="411.2,304 464.8,304 464.8,250.4 411.2,250.4" fill="#7fd6b1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-059" points="464.8,304 518.4,304 518.4,250.4 464.8,250.4" fill="#00afb9" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-060" points="518.4,304 572,304 572,250.4 518.4,250.4" fill="#c18dd8" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-061" points="36,250.4 89.6,250.4 89.6,196.8 36,196.8" fill="#378c3f" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-062" points="89.6,250.4 143.2,250.4 143.2,196.8 89.6,196.8" fill="#00aeee" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-063" points="143.2,250.4 196.8,250.4 196.8,196.8 143.2,196.8" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-064" points="196.8,250.4 250.4,250.4 250.4,196.8 196.8,196.8" fill="#00b393" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-065" points="250.4,250.4 304,250.4 304,196.8 250.4,196.8" fill="#3d63be" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-066" points="304,250.4 357.6,250.4 357.6,196.8 304,196.8" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-067" points="357.6,250.4 411.2,250.4 411.2,196.8 357.6,196.8" fill="#877deb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-068" points="411.2,250.4 464.8,250.4 464.8,196.8 411.2,196.8" fill="#9fce85" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-069" points="464.8,250.4 518.4,250.4 518.4,196.8 464.8,196.8" fill="#0096b1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-070" points="518.4,250.4 572,250.4 572,196.8 518.4,196.8" fill="#854888" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-071" points="36,196.8 89.6,196.8 89.6,143.2 36,143.2" fill="#83c4ff" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-072" points="89.6,196.8 143.2,196.8 143.2,143.2 89.6,143.2" fill="#3bb360" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-073" points="143.2,196.8 196.8,196.8 196.8,143.2 143.2,143.2" fill="#008376" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-074" points="196.8,196.8 250.4,196.8 250.4,143.2 196.8,143.2" fill="#7acfe9" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-075" points="250.4,196.8 304,196.8 304,143.2 250.4,143.2" fill="#0079bf" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-076" points="304,196.8 357.6,196.8 357.6,143.2 304,143.2" fill="#86a2ff" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-077" points="357.6,196.8 411.2,196.8 411.2,143.2 357.6,143.2" fill="#865eb1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-078" points="411.2,196.8 464.8,196.8 464.8,143.2 411.2,143.2" fill="#7fd6b1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-079" points="464.8,196.8 518.4,196.8 518.4,143.2 464.8,143.2" fill="#00afb9" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-080" points="518.4,196.8 572,196.8 572,143.2 518.4,143.2" fill="#c18dd8" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-081" points="36,143.2 89.6,143.2 89.6,89.6 36,89.6" fill="#378c3f" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-082" points="89.6,143.2 143.2,143.2 143.2,89.6 89.6,89.6" fill="#00aeee" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-083" points="143.2,143.2 196.8,143.2 196.8,89.6 143.2,89.6" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-084" points="196.8,143.2 250.4,143.2 250.4,89.6 196.8,89.6" fill="#00b393" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-085" points="250.4,143.2 304,143.2 304,89.6 250.4,89.6" fill="#3d63be" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-086" points="304,143.2 357.6,143.2 357.6,89.6 304,89.6" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-087" points="357.6,143.2 411.2,143.2 411.2,89.6 357.6,89.6" fill="#877deb" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-088" points="411.2,143.2 464.8,143.2 464.8,89.6 411.2,89.6" fill="#9fce85" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-089" points="464.8,143.2 518.4,143.2 518.4,89.6 464.8,89.6" fill="#0096b1" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-090" points="518.4,143.2 572,143.2 572,89.6 518.4,89.6" fill="#854888" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-091" points="36,89.6 89.6,89.6 89.6,36 36,36" fill="#83c4ff" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-092" points="89.6,89.6 143.2,89.6 143.2,36 89.6,36" fill="#3bb360" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-093" points="143.2,89.6 196.8,89.6 196.8,36 143.2,36" fill="#008376" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-094" points="196.8,89.6 250.4,89.6 250.4,36 196.8,36" fill="#7acfe9" fill-opacity="1.0" stroke="none" />
+    </g>
+    <g id="panel-0-outlines" data-layer="outlines">
+      <polygon data-feature="square-outline" data-square="square-001" points="36,572 89.6,572 89.6,518.4 36,518.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-002" points="89.6,572 143.2,572 143.2,518.4 89.6,518.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-003" points="143.2,572 196.8,572 196.8,518.4 143.2,518.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-004" points="196.8,572 250.4,572 250.4,518.4 196.8,518.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-005" points="250.4,572 304,572 304,518.4 250.4,518.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-006" points="304,572 357.6,572 357.6,518.4 304,518.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-007" points="357.6,572 411.2,572 411.2,518.4 357.6,518.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-008" points="411.2,572 464.8,572 464.8,518.4 411.2,518.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-009" points="464.8,572 518.4,572 518.4,518.4 464.8,518.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-010" points="518.4,572 572,572 572,518.4 518.4,518.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-011" points="36,518.4 89.6,518.4 89.6,464.8 36,464.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-012" points="89.6,518.4 143.2,518.4 143.2,464.8 89.6,464.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-013" points="143.2,518.4 196.8,518.4 196.8,464.8 143.2,464.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-014" points="196.8,518.4 250.4,518.4 250.4,464.8 196.8,464.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-015" points="250.4,518.4 304,518.4 304,464.8 250.4,464.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-016" points="304,518.4 357.6,518.4 357.6,464.8 304,464.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-017" points="357.6,518.4 411.2,518.4 411.2,464.8 357.6,464.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-018" points="411.2,518.4 464.8,518.4 464.8,464.8 411.2,464.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-019" points="464.8,518.4 518.4,518.4 518.4,464.8 464.8,464.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-020" points="518.4,518.4 572,518.4 572,464.8 518.4,464.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-021" points="36,464.8 89.6,464.8 89.6,411.2 36,411.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-022" points="89.6,464.8 143.2,464.8 143.2,411.2 89.6,411.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-023" points="143.2,464.8 196.8,464.8 196.8,411.2 143.2,411.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-024" points="196.8,464.8 250.4,464.8 250.4,411.2 196.8,411.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-025" points="250.4,464.8 304,464.8 304,411.2 250.4,411.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-026" points="304,464.8 357.6,464.8 357.6,411.2 304,411.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-027" points="357.6,464.8 411.2,464.8 411.2,411.2 357.6,411.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-028" points="411.2,464.8 464.8,464.8 464.8,411.2 411.2,411.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-029" points="464.8,464.8 518.4,464.8 518.4,411.2 464.8,411.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-030" points="518.4,464.8 572,464.8 572,411.2 518.4,411.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-031" points="36,411.2 89.6,411.2 89.6,357.6 36,357.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-032" points="89.6,411.2 143.2,411.2 143.2,357.6 89.6,357.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-033" points="143.2,411.2 196.8,411.2 196.8,357.6 143.2,357.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-034" points="196.8,411.2 250.4,411.2 250.4,357.6 196.8,357.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-035" points="250.4,411.2 304,411.2 304,357.6 250.4,357.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-036" points="304,411.2 357.6,411.2 357.6,357.6 304,357.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-037" points="357.6,411.2 411.2,411.2 411.2,357.6 357.6,357.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-038" points="411.2,411.2 464.8,411.2 464.8,357.6 411.2,357.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-039" points="464.8,411.2 518.4,411.2 518.4,357.6 464.8,357.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-040" points="518.4,411.2 572,411.2 572,357.6 518.4,357.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-041" points="36,357.6 89.6,357.6 89.6,304 36,304" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-042" points="89.6,357.6 143.2,357.6 143.2,304 89.6,304" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-043" points="143.2,357.6 196.8,357.6 196.8,304 143.2,304" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-044" points="196.8,357.6 250.4,357.6 250.4,304 196.8,304" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-045" points="250.4,357.6 304,357.6 304,304 250.4,304" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-046" points="304,357.6 357.6,357.6 357.6,304 304,304" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-047" points="357.6,357.6 411.2,357.6 411.2,304 357.6,304" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-048" points="411.2,357.6 464.8,357.6 464.8,304 411.2,304" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-049" points="464.8,357.6 518.4,357.6 518.4,304 464.8,304" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-050" points="518.4,357.6 572,357.6 572,304 518.4,304" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-051" points="36,304 89.6,304 89.6,250.4 36,250.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-052" points="89.6,304 143.2,304 143.2,250.4 89.6,250.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-053" points="143.2,304 196.8,304 196.8,250.4 143.2,250.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-054" points="196.8,304 250.4,304 250.4,250.4 196.8,250.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-055" points="250.4,304 304,304 304,250.4 250.4,250.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-056" points="304,304 357.6,304 357.6,250.4 304,250.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-057" points="357.6,304 411.2,304 411.2,250.4 357.6,250.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-058" points="411.2,304 464.8,304 464.8,250.4 411.2,250.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-059" points="464.8,304 518.4,304 518.4,250.4 464.8,250.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-060" points="518.4,304 572,304 572,250.4 518.4,250.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-061" points="36,250.4 89.6,250.4 89.6,196.8 36,196.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-062" points="89.6,250.4 143.2,250.4 143.2,196.8 89.6,196.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-063" points="143.2,250.4 196.8,250.4 196.8,196.8 143.2,196.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-064" points="196.8,250.4 250.4,250.4 250.4,196.8 196.8,196.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-065" points="250.4,250.4 304,250.4 304,196.8 250.4,196.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-066" points="304,250.4 357.6,250.4 357.6,196.8 304,196.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-067" points="357.6,250.4 411.2,250.4 411.2,196.8 357.6,196.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-068" points="411.2,250.4 464.8,250.4 464.8,196.8 411.2,196.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-069" points="464.8,250.4 518.4,250.4 518.4,196.8 464.8,196.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-070" points="518.4,250.4 572,250.4 572,196.8 518.4,196.8" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-071" points="36,196.8 89.6,196.8 89.6,143.2 36,143.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-072" points="89.6,196.8 143.2,196.8 143.2,143.2 89.6,143.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-073" points="143.2,196.8 196.8,196.8 196.8,143.2 143.2,143.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-074" points="196.8,196.8 250.4,196.8 250.4,143.2 196.8,143.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-075" points="250.4,196.8 304,196.8 304,143.2 250.4,143.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-076" points="304,196.8 357.6,196.8 357.6,143.2 304,143.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-077" points="357.6,196.8 411.2,196.8 411.2,143.2 357.6,143.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-078" points="411.2,196.8 464.8,196.8 464.8,143.2 411.2,143.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-079" points="464.8,196.8 518.4,196.8 518.4,143.2 464.8,143.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-080" points="518.4,196.8 572,196.8 572,143.2 518.4,143.2" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-081" points="36,143.2 89.6,143.2 89.6,89.6 36,89.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-082" points="89.6,143.2 143.2,143.2 143.2,89.6 89.6,89.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-083" points="143.2,143.2 196.8,143.2 196.8,89.6 143.2,89.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-084" points="196.8,143.2 250.4,143.2 250.4,89.6 196.8,89.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-085" points="250.4,143.2 304,143.2 304,89.6 250.4,89.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-086" points="304,143.2 357.6,143.2 357.6,89.6 304,89.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-087" points="357.6,143.2 411.2,143.2 411.2,89.6 357.6,89.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-088" points="411.2,143.2 464.8,143.2 464.8,89.6 411.2,89.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-089" points="464.8,143.2 518.4,143.2 518.4,89.6 464.8,89.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-090" points="518.4,143.2 572,143.2 572,89.6 518.4,89.6" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-091" points="36,89.6 89.6,89.6 89.6,36 36,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-092" points="89.6,89.6 143.2,89.6 143.2,36 89.6,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-093" points="143.2,89.6 196.8,89.6 196.8,36 143.2,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <polygon data-feature="square-outline" data-square="square-094" points="196.8,89.6 250.4,89.6 250.4,36 196.8,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+      <rect data-feature="container-outline" x="36" y="36" width="536" height="536" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />
+    </g>
+  </g>
+  <text x="36" y="602" font-size="18" font-family="system-ui, sans-serif" fill="#17202a" data-evidence="certified-upper-bound" stroke-dasharray="3 3">U n=94 known best: side ~ 10 (certified upper bound)</text>
+</svg>

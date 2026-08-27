@@ -14,8 +14,9 @@ agenda:
     Sequence the stratified chunk-enumeration program from X-003 so that each cell buys
     either coverage knowledge, a reusable instrument, or a measurement, and so that the
     foundational gaps a constructive proposer would otherwise inherit - degenerate-cell
-    reproducibility, work-unit accounting, and the proposer comparison interface - are
-    closed before they can silently invalidate a result rather than after.
+    reproducibility, work-unit accounting, source/annotation separation, deterministic
+    minimal partitioning, and the proposer comparison interface - are closed before they
+    can silently invalidate a result rather than after.
   items:
   - id: BC-016
     purpose: measurement_validation
@@ -37,7 +38,7 @@ agenda:
       and active cells on aligned strata, or a typed instability report naming the
       affected rows. An instability finding blocks BC-018 rather than being carried into
       it.
-    bead: think-zt29
+    bead: think-3yv8
     depends_on: []
     next_evidence: >-
       retained aligned-stratum differential with per-row active-cell identity, attached
@@ -99,7 +100,7 @@ agenda:
     purpose: research
     owner_focus: insight
     instances: [11, 17, 18, 19, 28, 29]
-    state: blocked
+    state: ready
     priority: 2
     question: >-
       Are standing records at n <= 30 already chunk-structured, and if not, which
@@ -107,25 +108,33 @@ agenda:
     hypotheses: [H-044]
     budget: tier S; one corpus pass over archived geometry, no search
     entry: >-
-      a chunk-decomposition detector over imported Witness/v1 geometry, and the frozen
-      public-geometry corpus
+      the imported Witness/v1 geometry and the bounded lattice-partition calibration;
+      extend the candidate universe to contact graphs before any adjudicating round
     exit: >-
-      A per-record decomposition certificate or typed non-expressible reason for every
-      corpus member, and the measured expressible fraction against the 0.80 criterion.
-    bead: think-im8q
+      A versioned contact-assembly contract with explicit sliding degrees of freedom,
+      complexity cost, canonical ties, and per-record certificates or typed limitations.
+      The inspected n=1..100 corpus receives no H-044 verdict.
+    bead: think-eyix
     depends_on: []
-    next_evidence: retained per-record decomposition table with minimal K per record
+    next_evidence: >-
+      CG-010 full fixed-angle cell controls with declared walls, one frozen separating
+      axis per non-edge, typed caps, and no target-sized execution
     parallel_group: corpus-measurement
     note: >-
-      Independent of the enumerator and runnable in parallel: it reads geometry rather
-      than searching. It is the cheapest way to refute the ansatz, so a coordinator with
-      spare capacity should start it early even though its priority is below the
-      instrument cells.
+      Independent of the enumerator: it reads geometry rather than searching. The first
+      bounded splitter certifies all grids and 3 of 36 non-grid cases inside the narrow
+      budget; two cases are conclusively outside, 23 have no registered-universe
+      partition, and eight are search-capped and therefore indeterminate. Broad contacts
+      cover 1,780 of 1,860 non-grid squares. The versioned grammar, local uniform-angle
+      prefilter, and 11,013-record abstract size-five atlas now represent and price
+      sliding contact scaffolds without claiming geometry or feasibility. CG-010's full
+      cell remains unbuilt. The 1-100 corpus was inspected during instrument repair and
+      is calibration-only.
   - id: BC-023
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 17, 18, 29, 68, 88]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can the standing-record geometry for every n <= 100 with public full coordinates be
@@ -135,26 +144,33 @@ agenda:
     entry: the archived record catalogue captures and the Witness/v1 interchange
     exit: >-
       A per-case imported witness or a typed absent-or-ambiguous reason for every n <=
-      100, each numerically checked at declared precision, with no decimal import
-      promoted past numerically-checked; and `tilt_angles_deg` plus the derived angle-
-      class count populated in every frontier case artifact the import covers, replacing
-      the nulls those artifacts currently carry.
+      100, each checked at declared precision, with no decimal import promoted past
+      numerically-checked; source geometry, normalized witnesses, derived annotations,
+      and house renderings remain separate layers.
     bead: think-osm7
     depends_on: []
     next_evidence: >-
-      per-case import table with retrieval provenance, declared precision, and typed
-      failures
+      complete manifest with retrieval provenance, declared precision, retained-source
+      policy, witness paths, and rendering paths
+    artifacts:
+    - atlas/known-best/manifest.json
+    - witnesses/known-best/n-001.yaml
+    - atlas/known-best/rendering/n-001.svg
     parallel_group: corpus-measurement
     note: >-
       The synopsis records that most public frontier entries carry side values without
-      an imported geometry witness. This closes that gap for its own sake and supplies
-      the corpus BC-019 and BC-024 both read. Source adapters resolve units and
-      coordinate conventions at the interchange boundary rather than guessing.
+      an imported geometry witness. The completed atlas has 100 witnesses and 100 house
+      renderings: 64 exact grids, 34 attributed Kingbird-derived numerical fact records,
+      and two explicitly rendering-derived UnitSquare cases. No raw Kingbird SVG is
+      retained in this source inventory because the review located no express
+      redistribution terms; this is a conservative retention policy, not a legal
+      conclusion. Source adapters resolve units and coordinate conventions at the
+      interchange boundary rather than guessing.
   - id: BC-024
     purpose: research
     owner_focus: insight
     instances: [11, 17, 18, 19, 26, 28, 29, 37, 40, 50, 68, 70, 83, 88]
-    state: blocked
+    state: ready
     priority: 2
     question: >-
       Across the imported n <= 100 corpus, which chunk shapes, chunk sizes, tilted-chunk
@@ -162,21 +178,24 @@ agenda:
       residue have in common?
     hypotheses: [H-044]
     budget: tier S; a descriptive census over imported geometry, no search
-    entry: BC-023 corpus available and the chunk-decomposition detector built
+    entry: BC-023 corpus available; descriptive contact detector built
     exit: >-
-      A taxonomy table over the corpus plus a characterized residue, feeding H-044's
-      criterion and naming the grammar moves the enumerator lacks.
+      A source-stratified taxonomy table over the corpus plus a characterized residue,
+      feeding the partition-instrument design without emitting an H-044 verdict.
     bead: think-kr1d
     depends_on: [BC-023]
     next_evidence: >-
-      recurrence table over chunk shape, size, tilted-chunk count, and seating, with the
-      residue characterized rather than only counted
+      extend the retained broad contact-component census with minimal-partition shapes,
+      wall seating, and representative house-rendered overlays
     parallel_group: corpus-measurement
     note: >-
-      Descriptive rather than adjudicating: this cell reports what the corpus looks like
-      and may not emit a W6 verdict. Exploratory chunk-and-quench play belongs here
-      under W3, and anything it suggests becomes a registered claim before it is
-      measured.
+      Descriptive rather than adjudicating: the first contact census finds 1,780 of 1,860
+      non-grid squares in same-angle positive-edge-contact assemblies, with 25 of 36
+      cases inside a broad six-component/three-free budget. The strict bounded lattice
+      splitter certifies 3 of 36 non-grid records inside its budget, places two outside,
+      finds no registered-universe partition for 23, and leaves eight search-capped and
+      indeterminate. Contact-graph complexity, wall seating, and overlays are retained
+      as descriptive calibration. Exploratory work may not emit a W6 verdict.
   - id: BC-020
     purpose: research
     owner_focus: insight
@@ -213,9 +232,9 @@ agenda:
       BC-023 corpus, the chunk-decomposition detector, and the retained series-000
       non-record endpoints
     exit: >-
-      Retained source and returned sides per pose with the round-trip rate reported
-      separately for record and non-record sources.
-    bead: think-kr1d
+      Retained source and returned poses with objective and D4-and-relabeling
+      pose-equivalence rates reported separately for record and non-record sources.
+    bead: think-r45s
     depends_on: [BC-023, BC-019]
     next_evidence: >-
       per-pose round-trip table with the record and non-record rates apart
@@ -230,16 +249,17 @@ agenda:
     state: blocked
     priority: 3
     question: >-
-      Does the cheap glued screen keep the soft-mode winning stratum in its top decile?
+      Does the cheap glued screen retain the soft-mode winning stratum at its declared
+      solve budget after boundary ties are charged?
     hypotheses: [H-048]
     budget: tier S; two LP solves per stratum on the proved cells
     entry: BC-018 enumerator and glued rows available
     exit: >-
-      Per-cell rank of the soft-mode winner within the glued ranking, with retained
-      solve counts for the screened and exhaustive paths.
-    bead: think-vnm5
+      Per-cell recall of the soft-mode winner at B=max(1,ceil(0.1N)), with boundary ties,
+      actual retention count, and solve counts for screened and exhaustive paths.
+    bead: think-coyu
     depends_on: [BC-018]
-    next_evidence: rank of the soft winner in the glued ranking per proved cell
+    next_evidence: recall and actual cost of the glued budget per proved cell
     note: >-
       An efficiency claim the enumerator's cost model already assumes. Proved cells
       only, so a screen failure cannot be mistaken for a landscape fact.
@@ -281,7 +301,7 @@ agenda:
     exit: >-
       A scoped restricted-class theorem with a replayable certificate, or a recorded
       determination that the enumeration cannot be made rigorous at this scale.
-    bead: think-im8q
+    bead: think-cx85
     depends_on: [BC-021]
     next_evidence: >-
       a decision on whether the exact LP is buildable for the cell shapes the enumerator

@@ -333,15 +333,20 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session-015](../../../../campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md).
-It takes `think-1s0h` through one preregistered BC-010 exact R4/R5 nonlinear-realization
-slice, retaining an exact continuation, exact obstruction, or finite unresolved list.
-Exp-038 completed the branchwise cone inventory, and exp-039 covers R1, R2, R3, and R6
-only; `-W`, mixed-angle realization, the whole stationary component, and unequal-side
-clearance remain later slices.
-New numerical map rounds remain behind BC-010. D-239 is a separate W7 robustness line,
-not a reason to enlarge this W6 slice.
-Do not fill the time with H-017 merely because it is executable.
+[session 023](../../../../campaign/agent-sessions/session-023-pr45-merge-readiness.md).
+Under `BC-019` and `think-eyix`, finish the PR 45 merge-readiness review, strict local
+gate, and cross-platform checkpoint.
+The completed target-free path retains 11,013 exact size-five signed-contact orbits with
+independent Burnside and differential controls.
+Those records contain no packing geometry or feasibility result, and the retained
+`n = 1..100` corpus remains calibration-only.
+
+The next scientific implementation boundary is CG-010: a full fixed-angle cell with
+declared walls and one frozen separating axis per non-edge pair.
+The existing local prefilter accepts only one fitted-angle class and rejects mixed
+classes before solving.
+Do not use target geometry to design that cell, emit an H-044 verdict, or start the
+`n = 11` enumeration run.
 
 ## The numeric runner launch gate
 

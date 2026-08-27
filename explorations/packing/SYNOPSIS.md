@@ -135,6 +135,8 @@ case or experiment separately.
 | [Synopsis: The `s(n)` Program](SYNOPSIS.md) | current technical state and terminology | definitive | maintained | — |
 | [Tutorial: Square Packing from First Principles](TUTORIAL.md) | first-principles tutorial | supporting | maintained | — |
 | [Packing Atlas](atlas/README.md) | component scope and use | supporting | maintained | — |
+| [Enumerated Contact-Scaffold Atlas](atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |
+| [Known-Best Packing Atlas, `n = 1..100`](atlas/known-best/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
 | [Conventions for `explorations/packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
@@ -165,6 +167,7 @@ case or experiment separately.
 | [Review: `TUTORIAL.md`, Read as Its Declared Audience](docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md) | dated review record | record | retained | — |
 | [Review: `TUTORIAL.md` Soundness, Iteration 2, on the Merged Record](docs/project/reviews/review-2026-08-25-tutorial-soundness-iteration-2.md) | dated review record | record | retained | — |
 | [Review: Soundness of the Session-011 Continuation (PR #34)](docs/project/reviews/review-2026-08-25-pr34-soundness-review.md) | dated review record | record | retained | — |
+| [Review: PR #44, Constructive Enumeration, and the Known-Best Atlas](docs/project/reviews/review-2026-08-26-pr44-constructive-enumeration-and-known-best-atlas.md) | dated review record | record | retained | — |
 | [Review: Square Packing Research-Loop Efficiency](docs/project/reviews/review-2026-08-25-research-loop-efficiency.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -278,12 +281,37 @@ controller, not permission to blur contracts.
 
 ### Current Handoff
 
+[Open the house rendering of the retained 100-square witness.](atlas/known-best/rendering/n-100.svg)
+
+The renderer’s standing exact-motion control remains independently replayable:
+
 ![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
 
-*The retained SVG animates endpoint A through the exact midpoint to endpoint B when
-motion is enabled. Its translucent tempered-yellow contact marks describe the certified
-final frame and appear only when the motion reaches that frame.
-Reduced-motion and non-CSS viewers receive endpoint B as a complete static figure.*
+The current line is `BC-019` under `think-eyix`, recorded in
+[session 025](campaign/agent-sessions/session-025-pr45-performance-continuation.md).
+Finish strict validation and the final-head cross-platform checkpoint before closing the
+retained PR review dispositions or returning to `ContactAssemblyGrammar/v1`’s next
+full-cell boundary.
+
+All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
+house renderings. The source-complete corpus is calibration evidence, not an unseen
+holdout and not a new proof of optimality.
+The atlas source inventory retains attributed Kingbird-derived numerical facts but no
+raw Kingbird SVG because the review located no express redistribution terms; that
+conservative repository policy is not a legal conclusion.
+A broad same-angle contact census covers 1,780 of 1,860 non-grid squares, but the
+stricter bar/L/rectangle partition establishes 3 of 36 non-grid cases inside its narrow
+budget. Two cases are conclusively outside that budget, 23 have no partition in the
+registered candidate universe, and eight are search-capped and therefore indeterminate.
+Contact components also retain substantial internal sliding freedom, so component count
+alone is not a defensible chunk cost.
+
+The target-free contact-scaffold layer now retains 11,013 exact size-five signed-contact
+orbits as an abstract, no-geometry atlas.
+Its local realization prefilter rejects mixed angle classes before solving and still
+omits walls, non-edge separation, container fit, whole-packing feasibility, and
+optimality. The next scientific implementation boundary is CG-010’s full fixed-angle
+cell, not an H-044 verdict or an `n = 11` run on the inspected calibration corpus.
 
 The H-023 line shows why the distinction matters.
 Session 004 used W3 to turn an ambiguous terminal-family observation into the
@@ -2028,15 +2056,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 337 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 339 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 79 | asserted something false about the mathematics |
 | validity | 82 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 130 | recorded something its own evidence contradicts |
-| robustness | 37 | did not finish, or finished only by luck |
+| bookkeeping | 131 | recorded something its own evidence contradicts |
+| robustness | 38 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2045,7 +2073,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-three defects in 337, and no soundness defect
+**The automated gate has caught forty-five defects in 339, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2374,7 +2402,7 @@ This closes that specific gate-stall path; the unattended numerical runner still
 separate launch requirements above.
 
 **Validation subprocesses now have finite POSIX deadlines.** The shared captured-command
-path and quiet Git provenance probes use a 600-second production default, configurable
+path and quiet Git provenance probes use a 900-second production default, configurable
 by CLI or environment, and retain smaller call-site caps.
 Timeout and coordinator interruption terminate and reap the registered process groups.
 [D-239](defects.md) remains open because pure-Python worker code, aggregate

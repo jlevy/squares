@@ -1,0 +1,72 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ContactEnumerationPricing/v1
+title: Target-free contact enumeration pricing
+type: object
+additionalProperties: false
+required: [generated_by, scope, evidence_role, minimum_overlap, caps, decision_rule, runtime_policy, entries]
+properties:
+  generated_by: {type: string, minLength: 1}
+  scope: {type: string, minLength: 1}
+  evidence_role: {const: target-free engineering price; no atlas geometry or verdict}
+  minimum_overlap: {type: number, exclusiveMinimum: 0, maximum: 1}
+  caps:
+    type: object
+    additionalProperties: false
+    required:
+    - maximum_raw_orbit_images
+    - maximum_topology_colorings
+    - maximum_canonical_proposals
+    - maximum_lp_solves
+    properties:
+      maximum_raw_orbit_images: {type: integer, minimum: 1}
+      maximum_topology_colorings: {type: integer, minimum: 1}
+      maximum_canonical_proposals: {type: integer, minimum: 1}
+      maximum_lp_solves: {type: integer, minimum: 1}
+  decision_rule: {type: string, minLength: 1}
+  runtime_policy: {type: string, minLength: 1}
+  entries:
+    type: array
+    minItems: 5
+    maxItems: 5
+    items:
+      type: object
+      additionalProperties: false
+      required:
+      - n
+      - raw_labeled_candidates
+      - d4_relabeling_group_size
+      - canonical_orbit_lower_bound
+      - raw_orbit_image_upper_work
+      - unlabeled_topologies
+      - topology_coloring_candidates
+      - isomorph_free_orbit_actions
+      - proposal_method
+      - decision
+      - canonical_orbits
+      - duplicate_candidates
+      - lp_solves
+      - outcomes
+      properties:
+        n: {type: integer, minimum: 1, maximum: 5}
+        raw_labeled_candidates: {type: integer, minimum: 1}
+        d4_relabeling_group_size: {type: integer, minimum: 1}
+        canonical_orbit_lower_bound: {type: integer, minimum: 1}
+        raw_orbit_image_upper_work: {type: integer, minimum: 1}
+        unlabeled_topologies: {type: integer, minimum: 1}
+        topology_coloring_candidates: {type: integer, minimum: 1}
+        isomorph_free_orbit_actions: {type: integer, minimum: 1}
+        proposal_method: {const: topology-automorphism-orbit-marking}
+        decision: {enum: [execute, outside-run-scope, enumerate-isomorph-free]}
+        canonical_orbits: {type: integer, minimum: 1}
+        duplicate_candidates: {type: [integer, 'null'], minimum: 0}
+        lp_solves: {type: [integer, 'null'], minimum: 1}
+        outcomes:
+          oneOf:
+          - type: 'null'
+          - type: object
+            additionalProperties: false
+            required: [locally-feasible, locally-infeasible, solver-indeterminate]
+            properties:
+              locally-feasible: {type: integer, minimum: 0}
+              locally-infeasible: {type: integer, minimum: 0}
+              solver-indeterminate: {type: integer, minimum: 0}

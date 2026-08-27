@@ -9,7 +9,20 @@ from pathlib import Path
 
 import pytest
 
-from devtools.run_negative_controls import resolve_control_target, run_control_command
+from devtools.run_negative_controls import (
+    PRUNE,
+    ROOT,
+    SNAPSHOT_MAX_BYTES,
+    resolve_control_target,
+    run_control_command,
+    snapshot_source_bytes,
+)
+
+
+def test_generator_owned_prospective_outputs_stay_out_of_mutation_snapshots() -> None:
+    assert ROOT / "atlas/prospective/rendering" in PRUNE
+    assert ROOT / "witnesses/prospective" in PRUNE
+    assert snapshot_source_bytes() < SNAPSHOT_MAX_BYTES
 
 
 def test_control_targets_cannot_escape_the_private_snapshot(tmp_path: Path) -> None:

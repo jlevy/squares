@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from decimal import Decimal
 from enum import StrEnum
+from typing import Literal
 
 
 class ScalarKind(StrEnum):
@@ -41,6 +42,7 @@ class AnnotationLevel(StrEnum):
 class Overlay(StrEnum):
     SQUARE_IDS = "square-ids"
     CONTACTS = "contacts"
+    CONTACT_CENSUS = "contact-census"
     ACTIVE_FEATURES = "active-features"
 
 
@@ -109,6 +111,22 @@ class ContactFeature:
 
 
 @dataclass(frozen=True)
+class DetectedContactFeature:
+    """A tolerance-qualified descriptive graph edge, not exact contact geometry."""
+
+    feature_id: str
+    start: Point2
+    end: Point2
+    square_ids: tuple[str, ...]
+    angle_tolerance_radians: Decimal
+    contact_tolerance: Decimal
+    residual: Decimal | None = None
+    normal: Literal["u-normal", "v-normal"] | None = None
+    wall: ContainerWall | None = None
+    label: str = "numerically detected contact"
+
+
+@dataclass(frozen=True)
 class ActiveFeature:
     feature_id: str
     point: Point2
@@ -126,7 +144,7 @@ class PackingFrame:
     logical_time: Decimal = Decimal(0)
     source_id: str = ""
     source_url: str = ""
-    features: tuple[ContactFeature | ActiveFeature, ...] = ()
+    features: tuple[ContactFeature | DetectedContactFeature | ActiveFeature, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -205,6 +223,49 @@ def validate_frame(frame: PackingFrame) -> None:
         if isinstance(feature, ActiveFeature):
             validate_scalar_source(feature.point.x)
             validate_scalar_source(feature.point.y)
+            continue
+        if isinstance(feature, DetectedContactFeature):
+            if not check_passed:
+                raise ValueError("detected contact features require a checked source geometry")
+            for point in (feature.start, feature.end):
+                validate_scalar_source(point.x)
+                validate_scalar_source(point.y)
+            if (feature.start.x.projected, feature.start.y.projected) == (
+                feature.end.x.projected,
+                feature.end.y.projected,
+            ):
+                raise ValueError("detected contact graph edge must be nondegenerate")
+            if (
+                feature.angle_tolerance_radians <= 0
+                or not feature.angle_tolerance_radians.is_finite()
+                or feature.contact_tolerance <= 0
+                or not feature.contact_tolerance.is_finite()
+            ):
+                raise ValueError("detected contact tolerances must be finite and positive")
+            expected_participants = 1 if feature.wall is not None else 2
+            if len(feature.square_ids) != expected_participants:
+                raise ValueError("detected contact participants do not match its kind")
+            if (
+                len(feature.square_ids) != len(set(feature.square_ids))
+                or feature.square_ids != tuple(sorted(feature.square_ids))
+                or any(square_id not in ids for square_id in feature.square_ids)
+            ):
+                raise ValueError(
+                    "detected contact square IDs must be unique, known, and stable"
+                )
+            if feature.wall is None:
+                if feature.normal is None or feature.residual is None:
+                    raise ValueError("detected pair contact requires normal and residual")
+                if feature.normal not in {"u-normal", "v-normal"}:
+                    raise ValueError("detected pair normal must be u-normal or v-normal")
+                if (
+                    feature.residual < 0
+                    or not feature.residual.is_finite()
+                    or feature.residual > feature.contact_tolerance
+                ):
+                    raise ValueError("detected pair residual must lie within tolerance")
+            elif feature.normal is not None or feature.residual is not None:
+                raise ValueError("detected wall seating does not carry pair residual data")
             continue
         contact_points = (
             (feature.start,) if feature.end is None else (feature.start, feature.end)

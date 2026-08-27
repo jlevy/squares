@@ -1,0 +1,151 @@
+softschema:
+  contract: packing.squares:Witness/v1
+  schema: ../witness.schema.yaml
+  envelope: witness
+  status: enforced
+witness:
+  id: W-known-best-n019
+  n: 19
+  side: '4.88561808316412673173558496561'
+  square_size: '1'
+  representation: center-angle
+  scalar:
+    kind: decimal
+  coordinates:
+    origin: lower-left
+    axes: x-right-y-up
+    angle_unit: degrees
+  squares:
+  - id: 1
+    center:
+    - '0.5'
+    - '4.38561808316412673173558496561'
+    angle: '0'
+  - id: 2
+    center:
+    - '1.5'
+    - '4.38561808316412673173558496561'
+    angle: '0'
+  - id: 3
+    center:
+    - '0.5'
+    - '3.38561808316412673173558496561'
+    angle: '0'
+  - id: 4
+    center:
+    - '4.38561808316412673173558496561'
+    - '0.5'
+    angle: '0'
+  - id: 5
+    center:
+    - '3.38561808316412673173558496561'
+    - '0.5'
+    angle: '0'
+  - id: 6
+    center:
+    - '2.38561808316412673173558496561'
+    - '0.5'
+    angle: '0'
+  - id: 7
+    center:
+    - '4.38561808316412673173558496561'
+    - '1.5'
+    angle: '0'
+  - id: 8
+    center:
+    - '3.38561808316412673173558496561'
+    - '1.5'
+    angle: '0'
+  - id: 9
+    center:
+    - '4.38561808316412673173558496561'
+    - '2.5'
+    angle: '0'
+  - id: 10
+    center:
+    - '4.38561808316412673173558496561'
+    - '4.38561808316412673173558496561'
+    angle: '0'
+  - id: 11
+    center:
+    - '3.621320343559642573202533086310150960715164062311525963411660131004633760768946480574806232836179214'
+    - '3.442809041582063365867792482805'
+    angle: '45.0'
+  - id: 12
+    center:
+    - '2.914213562373095048801688724205301921430328124623051926823320262009267521537892961149612465672358427'
+    - '4.149915822768610890268636844909849039284835937688474036588339868995366239231053519425193767163820786'
+    angle: '45.0'
+  - id: 13
+    center:
+    - '2.942809041582063365867792482805'
+    - '2.707106781186547524400844362100452882145492186934577890234980393013901282306839441724418698508537641'
+    angle: '45.0'
+  - id: 14
+    center:
+    - '2.235702260395515841466948120700150960715164062311525963411660131004633760768946480574806232836179214'
+    - '3.414213562373095048801688724205301921430328124623051926823320262009267521537892961149612465672358427'
+    angle: '45.0'
+  - id: 15
+    center:
+    - '0.5'
+    - '0.5'
+    angle: '0'
+  - id: 16
+    center:
+    - '1.442809041582063365867792482805'
+    - '1.264297739604484158533051879299849039284835937688474036588339868995366239231053519425193767163820786'
+    angle: '45.0'
+  - id: 17
+    center:
+    - '0.7357022603955158414669481207001509607151640623115259634116601310046337607689464805748062328361792136'
+    - '1.971404520791031682933896241404698078569671875376948073176679737990732478462107038850387534327641573'
+    angle: '45.0'
+  - id: 18
+    center:
+    - '2.178511301977579207334740603509547117854507813065422109765019606986098717693160558275581301491462359'
+    - '1.942809041582063365867792482805'
+    angle: '45.0'
+  - id: 19
+    center:
+    - '1.471404520791031682933896241404698078569671875376948073176679737990732478462107038850387534327641573'
+    - '2.649915822768610890268636844909849039284835937688474036588339868995366239231053519425193767163820786'
+    angle: '45.0'
+  claim:
+    assurance: numerically-checked
+    method: numerical-multiprecision
+    precision:
+      decimal_digits: 120
+      rounding: nearest
+    tolerance: 1e-8
+    limitations: direct retained numerical center/angle facts. The source metadata supplies attribution
+      and provenance; the upstream SVG is not retained because no express redistribution terms were located.
+      This conservative retention policy is not a legal conclusion. The replayed finite-precision numerical
+      check establishes only tolerance-bounded feasibility of these retained facts, not exact geometry,
+      an exact certificate, or optimality.
+  source:
+    key: Kingbird derived numerical facts
+    path: resources/web/known-best-packings/sources.json
+    url: https://kingbird.myphotos.cc/packing/square-19.svg
+    retrieved: '2026-08-26'
+  certificate:
+    kind: numerical-feasibility-receipt
+    replay: uv run --frozen packing-witness check witnesses/known-best/n-019.yaml --method numerical-multiprecision
+      --precision 120 --tolerance 1e-8
+    result:
+      operation: check
+      id: W-known-best-n019
+      assurance: numerically-checked
+      method: numerical-multiprecision
+      precision:
+        decimal_digits: 120
+        rounding: nearest
+      tolerance: 1e-8
+      check_passed: true
+      n: 19
+      pairs_tested: 171
+      minimum_containment_clearance: '0.0'
+      minimum_best_pair_gap: '0.0'
+      failures: []
+      limitations: Finite-precision evidence only. A small tolerance, including 1e-100, does not establish
+        exact feasibility or optimality.

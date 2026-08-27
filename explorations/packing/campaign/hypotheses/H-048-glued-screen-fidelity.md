@@ -10,22 +10,24 @@ hypothesis:
   kind: hypothesis
   claim: >-
     On the proved cells n = 5 and n = 10, the stratum that is optimal under the soft
-    fixed-angle LP is ranked in the top decile by the glued-chunk LP screen, so screening
-    with glued equality rows and re-solving only the top decile finds the same winner as
-    solving every stratum soft.
+    fixed-angle LP is retained by a glued-chunk screen with nominal budget B = max(1,
+    ceil(0.1 N)) for N enumerated strata. Every candidate tied at the cutoff is retained
+    and charged to the actual budget, and screening returns the same winner as solving
+    every stratum soft.
   lane: search
   derived_from: [X-003]
   strategy_refs: ['search:15', 'search:17']
   criterion:
     shape: paired
     metric: >-
-      rank of the soft-mode winning stratum within the glued-mode ranking, per cell, and
-      the LP-solve cost of screened versus exhaustive soft solving
-    direction: soft-mode winner within the top decile of the glued ranking on every cell
-    threshold: 0.1
+      recall of the soft-mode winning stratum under the declared glued-screen budget,
+      plus nominal and actual retention counts and LP-solve cost, per cell
+    direction: soft-mode winner retained on every calibration cell
+    threshold: 1
   instrument: >-
     The stage-1 enumerator, the glued-chunk equality rows, and the existing soft
-    cell-read LP quench, each stratum solved both ways with retained LP-solve counts.
+    cell-read LP quench, each stratum solved both ways with retained LP-solve counts and
+    deterministic tie handling at the screen boundary.
   instrument_ready: false
   regime: >-
     numerical f64 LP under the measured 1e-11 solver floor; proved cells only, so the
@@ -47,7 +49,10 @@ hypothesis:
     the analytic optimum, so a screen failure cannot be mistaken for a landscape fact.
     Aligned and glued strata are the most degenerate cells the pipeline solves, so this
     round is also where any residual D-059 instability would surface as an unstable
-    ranking rather than as a wrong value.
+    ranking rather than as a wrong value. Review amendment 2026-08-26: raw top-decile
+    rank is ill-defined for small or tied populations. The amended criterion uses recall
+    at an integer budget and charges all boundary ties. The two proved cells calibrate
+    the instrument; they are not broad evidence that the screen will generalize.
 ---
 # H-048 — whether the cheap screen can be trusted
 
@@ -61,7 +66,9 @@ This is a pipeline-efficiency question rather than a claim about packings, but i
 registered rather than left informal because the budget for
 [H-045](H-045-chunk-grammar-rediscovery.md) depends on the answer.
 If the screen is faithful, enumeration costs one cheap solve per stratum plus one
-expensive solve per top-decile stratum.
+expensive solve per retained stratum.
+The nominal budget is `max(1, ceil(0.1 N))`; all candidates tied at its boundary are
+retained, and their actual cost is reported.
 If it is not, every stratum needs the full soft solve and the enumerable `n` shrinks
 accordingly.
 

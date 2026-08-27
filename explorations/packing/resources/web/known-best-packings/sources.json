@@ -1,0 +1,510 @@
+{
+  "contract": "packing.squares:KnownBestSourceInventory/v1",
+  "retrieved": "2026-08-26",
+  "sources": [
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        5
+      ],
+      "n": 5,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 5,
+      "url": "https://kingbird.myphotos.cc/packing/square-5.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        10
+      ],
+      "n": 10,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 10,
+      "url": "https://kingbird.myphotos.cc/packing/square-10.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        11
+      ],
+      "n": 11,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 11,
+      "url": "https://kingbird.myphotos.cc/packing/square-11.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        17
+      ],
+      "n": 17,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 17,
+      "url": "https://kingbird.myphotos.cc/packing/square-17.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        18
+      ],
+      "n": 18,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 18,
+      "url": "https://kingbird.myphotos.cc/packing/square-18.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        19
+      ],
+      "n": 19,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 19,
+      "url": "https://kingbird.myphotos.cc/packing/square-19.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        26
+      ],
+      "n": 26,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 26,
+      "url": "https://kingbird.myphotos.cc/packing/square-26b.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        27
+      ],
+      "n": 27,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 27,
+      "url": "https://kingbird.myphotos.cc/packing/square-27.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        28
+      ],
+      "n": 28,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 28,
+      "url": "https://kingbird.myphotos.cc/packing/square-28.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        29
+      ],
+      "n": 29,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 29,
+      "url": "https://kingbird.myphotos.cc/packing/square-29.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        37
+      ],
+      "n": 37,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 37,
+      "url": "https://kingbird.myphotos.cc/packing/square-37.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        38
+      ],
+      "n": 38,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 38,
+      "url": "https://kingbird.myphotos.cc/packing/square-38.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        39
+      ],
+      "n": 39,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 39,
+      "url": "https://kingbird.myphotos.cc/packing/square-39.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        40
+      ],
+      "n": 40,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 40,
+      "url": "https://kingbird.myphotos.cc/packing/square-40.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        41
+      ],
+      "n": 41,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 41,
+      "url": "https://kingbird.myphotos.cc/packing/square-41.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        50
+      ],
+      "n": 50,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 50,
+      "url": "https://kingbird.myphotos.cc/packing/square-50.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        51
+      ],
+      "n": 51,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 51,
+      "url": "https://kingbird.myphotos.cc/packing/square-51.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        52
+      ],
+      "n": 52,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 52,
+      "url": "https://kingbird.myphotos.cc/packing/square-52.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        53
+      ],
+      "n": 53,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 53,
+      "url": "https://kingbird.myphotos.cc/packing/square-53.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        54
+      ],
+      "n": 54,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 54,
+      "url": "https://kingbird.myphotos.cc/packing/square-54.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        55
+      ],
+      "n": 55,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 55,
+      "url": "https://kingbird.myphotos.cc/packing/square-55.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        65
+      ],
+      "n": 65,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 65,
+      "url": "https://kingbird.myphotos.cc/packing/square-65.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        66
+      ],
+      "n": 66,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 66,
+      "url": "https://kingbird.myphotos.cc/packing/square-66.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        67
+      ],
+      "n": 67,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 67,
+      "url": "https://kingbird.myphotos.cc/packing/square-67.svg"
+    },
+    {
+      "bytes": 18770,
+      "kind": "unitsquare-rendering",
+      "listed_n": [
+        68
+      ],
+      "n": 68,
+      "path": "resources/web/known-best-packings/unitsquare/n068.svg",
+      "raw_asset_retained": true,
+      "retrieved": "2026-08-26",
+      "source_n": 68,
+      "upstream_declared_sha256": "d7385d6ce1b5a959d06893c94f3c0355f17175bd68608db6f012ca309854ed66",
+      "url": "https://hmbelvedere.com/packings/n068.svg"
+    },
+    {
+      "bytes": 19018,
+      "kind": "unitsquare-rendering",
+      "listed_n": [
+        69
+      ],
+      "n": 69,
+      "path": "resources/web/known-best-packings/unitsquare/n069.svg",
+      "raw_asset_retained": true,
+      "retrieved": "2026-08-26",
+      "source_n": 69,
+      "upstream_declared_sha256": "b32aa37d37b07248ac92e683bbfd9be7ca6eb6aafa35a35e46a2484467afee41",
+      "url": "https://hmbelvedere.com/packings/n069.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        70
+      ],
+      "n": 70,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 70,
+      "url": "https://kingbird.myphotos.cc/packing/square-70.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        71
+      ],
+      "n": 71,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 71,
+      "url": "https://kingbird.myphotos.cc/packing/square-71.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        82
+      ],
+      "n": 82,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 82,
+      "url": "https://kingbird.myphotos.cc/packing/square-82.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        83
+      ],
+      "n": 83,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 83,
+      "url": "https://kingbird.myphotos.cc/packing/square-83.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        84
+      ],
+      "n": 84,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 84,
+      "url": "https://kingbird.myphotos.cc/packing/square-84.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        85
+      ],
+      "n": 85,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 85,
+      "url": "https://kingbird.myphotos.cc/packing/square-85b.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        86
+      ],
+      "n": 86,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 86,
+      "url": "https://kingbird.myphotos.cc/packing/square-86.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        87
+      ],
+      "n": 87,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 87,
+      "url": "https://kingbird.myphotos.cc/packing/square-87.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        88
+      ],
+      "n": 88,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 88,
+      "url": "https://kingbird.myphotos.cc/packing/square-88.svg"
+    },
+    {
+      "attribution": "SVG and high-precision updates by David Ellsworth; catalogue based on Erich Friedman's original compilation.",
+      "kind": "kingbird-derived-facts",
+      "license_status": "no-express-reuse-terms-found",
+      "listed_n": [
+        89
+      ],
+      "n": 89,
+      "raw_asset_retained": false,
+      "retention_policy": "metadata-and-derived-numerical-facts-only",
+      "retrieved": "2026-08-26",
+      "source_n": 89,
+      "url": "https://kingbird.myphotos.cc/packing/square-89.svg"
+    }
+  ]
+}

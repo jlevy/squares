@@ -108,7 +108,7 @@ session:
     objective: >-
       Publish the corrected current-main PR 41 tree, reconcile its review record, and
       obtain green final-head pull-request checks before merge.
-    status: in_progress
+    status: stopped
     entered_by: evidence_checkpoint
     switch_reason: >-
       Local focused, fast, and complete validation passed; publication and hosted
@@ -126,14 +126,24 @@ session:
     fallback: >-
       Leave PR 41 open on its pushed review head, record the exact failing check, and do
       not merge or stack the atlas optimization.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Published the current-main review head, retargeted PR 41 to main, obtained green
+      final-head pull-request checks, merged the exact reviewed head, and obtained green
+      complete Linux and macOS checks on the resulting main revision.
+    evidence:
+    - Final-head pull-request validation passed in 50 seconds; the stable aggregate passed in 4 seconds.
+    - PR 41 merged as main revision 45238b0cd339e7862c6f1209dcd405a8918775fb.
+    - >-
+      The post-merge complete workflow passed on Linux in 7 minutes 1 second and on
+      macOS, including the focused deep-golden check, in 6 minutes 25 seconds.
+    stop_reason: >-
+      The exact landed PR 41 revision passed both required integration jobs; the session
+      stops at that branch boundary and hands PR 45 work to session-025.
     next_action: >-
-      Reconcile generated views and the PR description, commit and push, retarget PR 41
-      to main, then watch its final-head checks.
+      Merge exact main revision 45238b0c into PR 45 and implement the byte-preserving
+      candidate-index bitset optimization under think-4vni.
   primary_bead: think-l7hi
-  status: in_progress
+  status: stopped
   budget:
     wall_minutes: 360
     max_cycles: 10
@@ -154,7 +164,10 @@ session:
       feature branch, overrides the documented inner-worker cap, and does not reduce PR
       45's 1,589.65-second strict gate beyond roughly one to two minutes. PR 45's
       known-best atlas step alone used 743.07 seconds.
-    after: null
+    after: >-
+      PR 41 targets main directly, preserves a complementary 118/21 test partition and
+      explicit worker caps, returns its hosted PR signal in 50 seconds, completes local
+      integration in 260.40 seconds, and passes the landed main workflow on Linux and macOS.
   delegations:
   - task: Audit PR 41 workflow and validator correctness.
     operator: pr41_correctness
@@ -250,11 +263,16 @@ session:
   - Local PR 41 fast validation passes 118 tests in 27.29 seconds.
   - Forty-seven focused workflow, CLI, and telemetry tests pass in 9.28 seconds.
   - Local complete validation passes every direct step in 260.40 seconds.
-  stop_reason: null
+  - PR 41 final-head validation passes in 50 seconds and its aggregate passes in 4 seconds.
+  - Main integration passes on Linux in 7 minutes 1 second and macOS in 6 minutes 25 seconds.
+  stop_reason: >-
+    PR 41 reached its clean merge boundary. PR 45 continues in session-025 so the
+    main-owned session record can remain terminal and PR 45's later session IDs stay
+    collision-free.
   next_action: >-
-    Under BC-010, think-1s0h, think-l7hi, and think-4vni, publish and merge the corrected
-    PR 41 tree on main, then stack the byte-preserving atlas bitset optimization on that
-    exact landed revision before resuming PR 45's merge-readiness work.
+    Under BC-019, think-eyix, and think-4vni, continue in session-025: merge exact main
+    revision 45238b0c into PR 45, implement and independently validate the byte-preserving
+    atlas bitset optimization, then resume think-oo1p before the other review dispositions.
 ---
 # Session 021 — PR 41 Performance Integration
 

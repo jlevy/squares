@@ -27,12 +27,18 @@ hypothesis:
     direction: at least 0.80
     threshold: 0.8
   instrument: >-
-    A chunk-decomposition detector over imported Witness/v1 geometry: fit angle classes,
-    test each class for a bar/L/rectangle lattice skeleton under a two-band adjacency
-    rule, classify every internal contact as exact (residual <= 1e-9) or near (residual
-    <= 1e-3), permit ungrouped free squares, and emit the minimal K, the free-square
-    count, the per-contact band, and either a decomposition certificate or a typed
-    non-expressible reason.
+    A deterministic chunk-partition solver over imported Witness/v1 geometry: enumerate
+    admissible bar/L/rectangle subsets whose members fit one angle modulo quarter turns,
+    classify every internal contact as exact (residual <= 1e-9) or near (residual <=
+    1e-3), and solve the resulting exact-cover/set-packing problem. Within the registered
+    F <= 2 slice, evaluate every exact F, prefer a certificate within K <= 6, then
+    minimize F, K, and maximum residual; zero-residual count ties follow a declared
+    deterministic minimum-remaining-values traversal with candidates ordered by size,
+    residual, and member key. Emit a replayable decomposition certificate or a typed
+    no-partition, outside-budget, or search-limit reason. A later in-budget certificate
+    proves existence after an earlier capped F slice, but its F/K minimality remains
+    explicitly indeterminate. For an out-of-budget retained certificate, any capped F
+    slice leaves both budget selection and F/K minimality indeterminate.
   instrument_ready: false
   regime: >-
     frozen public-geometry corpus from the archived record catalogue; the criterion is
@@ -45,25 +51,29 @@ hypothesis:
   cost_estimate: >-
     tier S; one corpus pass over archived geometry with no search, comparable to the
     exp-012 and exp-037 reconstruction rounds
-  prereqs: [imported record geometry corpus, chunk-decomposition detector over imported geometry]
+  prereqs: [imported record geometry corpus, frozen ChunkPartition/v1 contract, deterministic minimal-partition solver]
   replication: true
   registered: '2026-08-26'
   notes: >-
     This is the coverage prior for the whole stratified-enumeration design: a grammar
     that cannot express the records it is meant to rediscover has no budget claim. It is
     deliberately measurable from retained geometry with no search, so it can refute the
-    ansatz before any enumerator is built. Exp-037 already measures six numerical angle
-    classes in the retained n=29 serialization, which is why K is set at six rather than
-    three and why n=29 is a declared sweep point rather than an assumed pass. A failure
-    is informative in a specific way: the identity of the non-expressible records prices
-    exactly which grammar moves are missing. Chunk-expressibility is a statement about
-    serialized geometry under a tolerance, never about formal feasibility or optimality.
+    ansatz before any enumerator is built. Exp-037 measures six numerical angle classes
+    in the retained n=29 serialization. That constrains fitted-angle count A, not chunk
+    count K; n=29 remains a declared stress point, but the measurement does not justify
+    K=6. A failure is informative in a specific way: the identity of the
+    non-expressible records prices exactly which grammar moves are missing.
+    Chunk-expressibility is a statement about serialized geometry under a tolerance,
+    never about formal feasibility or optimality.
     Adjacency is deliberately two-band because records mix both kinds: some chunks are
     exactly flush and some are only clumped close, and a single tolerance would either
     merge genuinely separate groups or shatter real ones. Free squares are permitted for
     the same reason, since a record may seat most of its squares in groups and leave one
     or two loose; their count is reported rather than absorbed into trivial one-square
-    chunks.
+    chunks. Review amendment 2026-08-26: the n=1..100 corpus was inspected while the
+    detector contract was being repaired, so it is calibration-only. This hypothesis
+    remains undisposed; a prospective confirmatory successor must freeze an unseen
+    corpus after the partition instrument and grammar freeze.
 ---
 # H-044 — the coverage prior for chunk enumeration
 
@@ -83,8 +93,8 @@ One record is a known stress.
 [Exp-037](../series/series-000-smoke-and-calibration/experiments/exp-037-h-042-n29-numerical-angle-classes.md)
 measures six numerical angle classes in the retained `n = 29` serialization, with a
 minimum class gap of `0.296067` degrees.
-Six classes is the reason `K` is set at six and the reason a pass at `n = 29` is not
-assumed.
+That measurement constrains angle-class count `A`, not chunk count `K`. It makes
+`n = 29` a necessary stress case but does not justify the six-chunk threshold.
 
 ## Exact Chunks, Near Chunks, and Free Squares
 
@@ -109,6 +119,23 @@ richer intra-chunk shapes; records that fail on class count call for a larger `K
 price the outer search dimension directly.
 Either outcome is a quantitative input to the enumerator’s design, which is why this
 round is registered ahead of the instrument it will judge.
+
+## Instrument status after the PR review
+
+The first 1–100 census is descriptive calibration, not this hypothesis’s round.
+Its maximal-component view can issue sound certificates for the decompositions it
+reports, but a non-certificate cannot establish non-expressibility: a connected
+irregular polyomino may split into several allowed chunks.
+The bounded exact-cover splitter now handles such lattice splits and certifies every
+grid-derived case and 3 of 36 non-grid records within the proposed budget.
+Two non-grid records are conclusively outside that budget, 23 have no partition in the
+implemented candidate universe, and eight are search-capped and therefore indeterminate.
+This argues against rigid lattice chunks as the whole grammar, but it is not a verdict:
+angle-class splits and sliding contact assemblies remain outside the instrument.
+
+Because the corpus was inspected while repairing that contract, no W6 verdict will be
+issued on H-044 from `n = 1..100`. A later confirmatory successor must freeze an unseen
+corpus after the partition contract and grammar are committed.
 
 ## Relation to H-025
 

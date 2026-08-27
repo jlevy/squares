@@ -1,0 +1,141 @@
+softschema:
+  contract: packing.squares:Witness/v1
+  schema: ../witness.schema.yaml
+  envelope: witness
+  status: enforced
+witness:
+  id: W-known-best-n017
+  n: 17
+  side: '4.67553009360455095163411127048315'
+  square_size: '1'
+  representation: center-angle
+  scalar:
+    kind: decimal
+  coordinates:
+    origin: lower-left
+    axes: x-right-y-up
+    angle_unit: degrees
+  squares:
+  - id: 1
+    center:
+    - '0.5'
+    - '0.5'
+    angle: '0'
+  - id: 2
+    center:
+    - '1.5'
+    - '0.5'
+    angle: '0'
+  - id: 3
+    center:
+    - '0.5'
+    - '1.5'
+    angle: '0'
+  - id: 4
+    center:
+    - '0.5'
+    - '4.17553009360455095163411127048315'
+    angle: '0'
+  - id: 5
+    center:
+    - '4.17553009360455095163411127048315'
+    - '0.5'
+    angle: '0'
+  - id: 6
+    center:
+    - '3.17553009360455095163411127048315'
+    - '0.5'
+    angle: '0'
+  - id: 7
+    center:
+    - '4.17553009360455095163411127048315'
+    - '1.5'
+    angle: '0'
+  - id: 8
+    center:
+    - '4.17553009360455095163411127048315'
+    - '4.17553009360455095163411127048315'
+    angle: '0'
+  - id: 9
+    center:
+    - '0.7042021556575175596457466513439978125907002860483019299265907007069825457021094870931313307394521362'
+    - '2.704202155657517559645746651343997694204649836177181973130827283214324116251435207478381747739292179'
+    angle: '39.8049589797677950558662536965423'
+  - id: 10
+    center:
+    - '1.436043493998224813380209437748061334294077293365813938673540518961878200242930440370352971724437991'
+    - '3.388043433263362920859622817779862583898521371134777296278144976183998309373091587177250151582975838'
+    angle: '39.8049589797677950558662536965423'
+  - id: 11
+    center:
+    - '1.556737163170879173817180031492849920705173965167346570355818273428355620179902358018913836851530121'
+    - '2.112935871840351885661604655134144693495127580608656864506541918188308404683076020465416345672264817'
+    angle: '39.8049589797677950558662536965423'
+  - id: 12
+    center:
+    - '2.288578501511586427551642817896913442408550972484858579102768091683251274720723311296135477836515975'
+    - '2.796777149446197246875480821570009583188999115566252187653859611157982597804732400164284749515948476'
+    angle: '39.8049589797677950558662536965423'
+  - id: 13
+    center:
+    - '2.295286446181523357932174209452486586623518097423551302209241880822477137558363517648275334382656466'
+    - '1.426683547666739311837429523059592652712408590241572193271050124562594331260829875676918420736657149'
+    angle: '39.8049589797677950558662536965423'
+  - id: 14
+    center:
+    - '3.02712778452223061166663699585655010832689510474106331095619169907737279209918447092549697536764232'
+    - '2.110524825272584673051305689495457542406280125199167516418367817532268524382486255375786824580340807'
+    angle: '39.8049589797677950558662536965423'
+  - id: 15
+    center:
+    - '2.34732482651028509718122846547049'
+    - '4.17553009360455095163411127048315'
+    angle: '0'
+  - id: 16
+    center:
+    - '3.245073712656966072733781294354266176362451474502452818059475419612319714428177390503560205798763586'
+    - '3.372493861493853527556343964397081540705817157586421125973840725623997186455186364906290553080498509'
+    angle: '53.3762136165534106798140566452702'
+  - id: 17
+    center:
+    - '4.17553009360455095163411127048315'
+    - '2.61346013251256404552110105703834'
+    angle: '0'
+  claim:
+    assurance: numerically-checked
+    method: numerical-multiprecision
+    precision:
+      decimal_digits: 120
+      rounding: nearest
+    tolerance: 1e-8
+    limitations: direct retained numerical center/angle facts. The source metadata supplies attribution
+      and provenance; the upstream SVG is not retained because no express redistribution terms were located.
+      This conservative retention policy is not a legal conclusion. The replayed finite-precision numerical
+      check establishes only tolerance-bounded feasibility of these retained facts, not exact geometry,
+      an exact certificate, or optimality.
+  source:
+    key: Kingbird derived numerical facts
+    path: resources/web/known-best-packings/sources.json
+    url: https://kingbird.myphotos.cc/packing/square-17.svg
+    retrieved: '2026-08-26'
+  certificate:
+    kind: numerical-feasibility-receipt
+    replay: uv run --frozen packing-witness check witnesses/known-best/n-017.yaml --method numerical-multiprecision
+      --precision 120 --tolerance 1e-8
+    result:
+      operation: check
+      id: W-known-best-n017
+      assurance: numerically-checked
+      method: numerical-multiprecision
+      precision:
+        decimal_digits: 120
+        rounding: nearest
+      tolerance: 1e-8
+      check_passed: true
+      n: 17
+      pairs_tested: 136
+      minimum_containment_clearance: '0.0'
+      minimum_best_pair_gap: '0.0'
+      failures: []
+      limitations: Finite-precision evidence only. A small tolerance, including 1e-100, does not establish
+        exact feasibility or optimality.

@@ -9,6 +9,7 @@ from sqpack.render.model import (
     ActiveFeature,
     AnnotationLevel,
     ContactFeature,
+    DetectedContactFeature,
     Overlay,
     PackingFrame,
     PackingTrajectory,
@@ -27,6 +28,10 @@ from sqpack.render.motion import (
 )
 from sqpack.render.numbers import format_points, format_svg_number, format_visible_number
 from sqpack.render.style import (
+    CONTACT_CENSUS_COLOR,
+    CONTACT_CENSUS_DASH,
+    CONTACT_CENSUS_OPACITY,
+    CONTACT_CENSUS_STROKE_WIDTH,
     CONTACT_CLIP_POLICY,
     CONTACT_HIGHLIGHT_OPACITY,
     LAYOUT,
@@ -314,6 +319,72 @@ def _append_feature_overlay(
             ).text = feature.label
 
 
+def _append_contact_census_overlay(
+    group: ET.Element,
+    frame: PackingFrame,
+    *,
+    side: Decimal,
+    x: Decimal,
+    y: Decimal,
+    scale: Decimal,
+    panel_index: int,
+    motion: bool,
+) -> None:
+    features = tuple(
+        feature for feature in frame.features if isinstance(feature, DetectedContactFeature)
+    )
+    if not features:
+        return
+    overlay = sub(
+        group,
+        "g",
+        {
+            "id": f"panel-{panel_index}-contact-census",
+            "data-layer": "contact-census",
+            "data-overlay": "contact-census",
+            "data-semantics": "tolerance-qualified graph edges, not exact contact loci",
+        },
+    )
+    if motion:
+        append_final_overlay_motion(overlay)
+    for feature in features:
+        start = _project_point(feature.start, side=side, x=x, y=y, scale=scale)
+        end = _project_point(feature.end, side=side, x=x, y=y, scale=scale)
+        attributes = {
+            "id": f"panel-{panel_index}-{feature.feature_id}",
+            "data-feature": (
+                "detected-wall-seating"
+                if feature.wall is not None
+                else "detected-contact-graph-edge"
+            ),
+            "data-squares": " ".join(feature.square_ids),
+            "data-angle-tolerance-radians": str(feature.angle_tolerance_radians),
+            "data-contact-tolerance": str(feature.contact_tolerance),
+        }
+        if feature.wall is not None:
+            attributes["data-wall"] = feature.wall.value
+        else:
+            attributes["data-normal"] = str(feature.normal)
+            attributes["data-residual"] = str(feature.residual)
+        sub(
+            overlay,
+            "line",
+            {
+                **attributes,
+                "x1": format_svg_number(start.x),
+                "y1": format_svg_number(start.y),
+                "x2": format_svg_number(end.x),
+                "y2": format_svg_number(end.y),
+                "stroke": CONTACT_CENSUS_COLOR,
+                "stroke-opacity": str(CONTACT_CENSUS_OPACITY),
+                "stroke-width": str(CONTACT_CENSUS_STROKE_WIDTH),
+                "stroke-dasharray": CONTACT_CENSUS_DASH,
+                "stroke-linecap": "round",
+                "vector-effect": "non-scaling-stroke",
+            },
+        )
+
+
 def _append_caption(root: ET.Element, frame: PackingFrame, *, x: int, y: int) -> None:
     label, dash, icon = evidence_style(frame.evidence)
     relation, digits = format_visible_number(frame.container_side, frame.evidence)
@@ -330,6 +401,50 @@ def _append_caption(root: ET.Element, frame: PackingFrame, *, x: int, y: int) ->
             "stroke-dasharray": dash,
         },
     ).text = f"{icon} {frame.label}: side {relation} {digits} ({label})"
+
+
+def _append_contact_census_legend(
+    root: ET.Element, frame: PackingFrame, *, x: int, y: int
+) -> None:
+    features = tuple(
+        feature for feature in frame.features if isinstance(feature, DetectedContactFeature)
+    )
+    if not features:
+        return
+    angles = sorted({feature.angle_tolerance_radians for feature in features})
+    contacts = sorted({feature.contact_tolerance for feature in features})
+    detail = (
+        f"θ≤{angles[0]} rad; contact≤{contacts[0]}"
+        if len(angles) == len(contacts) == 1
+        else "per-edge tolerances retained in SVG metadata"
+    )
+    sub(
+        root,
+        "line",
+        {
+            "x1": str(x),
+            "y1": str(y - 4),
+            "x2": str(x + 42),
+            "y2": str(y - 4),
+            "stroke": CONTACT_CENSUS_COLOR,
+            "stroke-opacity": str(CONTACT_CENSUS_OPACITY),
+            "stroke-width": str(CONTACT_CENSUS_STROKE_WIDTH),
+            "stroke-dasharray": CONTACT_CENSUS_DASH,
+            "data-feature": "contact-census-legend-swatch",
+        },
+    )
+    sub(
+        root,
+        "text",
+        {
+            "x": str(x + 52),
+            "y": str(y),
+            "font-size": "13",
+            "font-family": "system-ui, sans-serif",
+            "fill": PAPER_THEME.muted,
+            "data-feature": "contact-census-legend",
+        },
+    ).text = f"Detected graph ({detail}); not exact contact geometry"
 
 
 def _append_packing_panel(
@@ -410,6 +525,17 @@ def _append_packing_panel(
             },
             motion=motion,
         )
+    if Overlay.CONTACT_CENSUS in spec.overlays:
+        _append_contact_census_overlay(
+            group,
+            frame,
+            side=frame.container_side.projected,
+            x=left,
+            y=top,
+            scale=scale,
+            panel_index=panel_index,
+            motion=motion,
+        )
     outlines = sub(
         group,
         "g",
@@ -442,6 +568,13 @@ def _append_packing_panel(
             group, frame, side=frame.container_side.projected, x=left, y=top, scale=scale
         )
     _append_caption(root, frame, x=int(left), y=panel_height + LAYOUT.margin + 30)
+    if Overlay.CONTACT_CENSUS in spec.overlays:
+        _append_contact_census_legend(
+            root,
+            frame,
+            x=int(left),
+            y=panel_height + LAYOUT.margin + 56,
+        )
     return scale
 
 
@@ -524,10 +657,19 @@ def build_packing_document(
             trajectory,
             scale=scales[0],
             duration_seconds=spec.duration_seconds,
-            reveal_final_overlay=Overlay.CONTACTS in spec.overlays
-            and any(
-                isinstance(feature, ContactFeature)
-                for feature in trajectory.frames[-1].features
+            reveal_final_overlay=(
+                Overlay.CONTACTS in spec.overlays
+                and any(
+                    isinstance(feature, ContactFeature)
+                    for feature in trajectory.frames[-1].features
+                )
+            )
+            or (
+                Overlay.CONTACT_CENSUS in spec.overlays
+                and any(
+                    isinstance(feature, DetectedContactFeature)
+                    for feature in trajectory.frames[-1].features
+                )
             ),
         )
     return root

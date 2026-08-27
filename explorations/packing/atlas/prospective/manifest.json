@@ -1,0 +1,1998 @@
+{
+  "atlas_seed": {
+    "annotation_policy": "No contact, chunk, rigidity, or grammar annotations are computed or retained.",
+    "entries": [
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 103,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-103.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "complete normalization of the retained six-decimal source SVG",
+          "kind": "unitsquare-rendering",
+          "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n103.svg",
+          "source_key": "unitsquare-release-1",
+          "url": "https://www.hmbelvedere.com/packings/n103.svg"
+        },
+        "witness": {
+          "assurance": "numerically-checked",
+          "id": "W-prospective-source-n103",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/prospective/n-103.yaml",
+          "tolerance": "2e-6"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 105,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-105.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "complete normalization of the retained six-decimal source SVG",
+          "kind": "unitsquare-rendering",
+          "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n105.svg",
+          "source_key": "unitsquare-release-1",
+          "url": "https://www.hmbelvedere.com/packings/n105.svg"
+        },
+        "witness": {
+          "assurance": "numerically-checked",
+          "id": "W-prospective-source-n105",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/prospective/n-105.yaml",
+          "tolerance": "2e-6"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 110,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-110.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "complete normalization of the retained six-decimal source SVG",
+          "kind": "unitsquare-rendering",
+          "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n110.svg",
+          "source_key": "unitsquare-release-1",
+          "url": "https://www.hmbelvedere.com/packings/n110.svg"
+        },
+        "witness": {
+          "assurance": "numerically-checked",
+          "id": "W-prospective-source-n110",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/prospective/n-110.yaml",
+          "tolerance": "2e-6"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 111,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-111.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n111",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-111.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 112,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-112.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n112",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-112.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 113,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-113.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n113",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-113.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 114,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-114.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n114",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-114.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 115,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-115.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n115",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-115.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 116,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-116.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n116",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-116.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 117,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-117.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n117",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-117.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 118,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-118.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n118",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-118.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 121,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-121.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n121",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-121.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 131,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-131.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "complete normalization of the retained six-decimal source SVG",
+          "kind": "unitsquare-rendering",
+          "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n131.svg",
+          "source_key": "unitsquare-release-1",
+          "url": "https://www.hmbelvedere.com/packings/n131.svg"
+        },
+        "witness": {
+          "assurance": "numerically-checked",
+          "id": "W-prospective-source-n131",
+          "method": "numerical-multiprecision",
+          "path": "witnesses/prospective/n-131.yaml",
+          "tolerance": "2e-6"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 133,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-133.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n133",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-133.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 134,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-134.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n134",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-134.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 135,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-135.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n135",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-135.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 136,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-136.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n136",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-136.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 137,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-137.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n137",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-137.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 138,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-138.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n138",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-138.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 139,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-139.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n139",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-139.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 140,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-140.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n140",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-140.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 141,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-141.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n141",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-141.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 144,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-144.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n144",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-144.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 157,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-157.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n157",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-157.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 158,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-158.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n158",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-158.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 159,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-159.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n159",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-159.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 160,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-160.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n160",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-160.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 161,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-161.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n161",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-161.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 162,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-162.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n162",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-162.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 163,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-163.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n163",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-163.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 164,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-164.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n164",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-164.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 165,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-165.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n165",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-165.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 166,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-166.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n166",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-166.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 169,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-169.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n169",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-169.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 183,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-183.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n183",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-183.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 184,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-184.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n184",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-184.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 185,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-185.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n185",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-185.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 186,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-186.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n186",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-186.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 187,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-187.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n187",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-187.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 188,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-188.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n188",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-188.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 189,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-189.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n189",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-189.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 190,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-190.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n190",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-190.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 191,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-191.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n191",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-191.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 192,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-192.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n192",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-192.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 193,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-193.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n193",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-193.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 196,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-196.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n196",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-196.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 211,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-211.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n211",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-211.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 212,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-212.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n212",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-212.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 213,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-213.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n213",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-213.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 214,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-214.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n214",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-214.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 215,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-215.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n215",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-215.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 216,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-216.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n216",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-216.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 217,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-217.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n217",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-217.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 218,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-218.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n218",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-218.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 219,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-219.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n219",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-219.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 220,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-220.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n220",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-220.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 221,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-221.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n221",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-221.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 222,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-222.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n222",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-222.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 225,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-225.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n225",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-225.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 242,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-242.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n242",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-242.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 243,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-243.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n243",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-243.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 244,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-244.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n244",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-244.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 245,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-245.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n245",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-245.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 246,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-246.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n246",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-246.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 247,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-247.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n247",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-247.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 248,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-248.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n248",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-248.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 249,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-249.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n249",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-249.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 250,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-250.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n250",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-250.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 251,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-251.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n251",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-251.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 252,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-252.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n252",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-252.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 253,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-253.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n253",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-253.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 256,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-256.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n256",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-256.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 274,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-274.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n274",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-274.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 275,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-275.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n275",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-275.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 276,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-276.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n276",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-276.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 277,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-277.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n277",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-277.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 278,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-278.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n278",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-278.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 279,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-279.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n279",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-279.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 280,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-280.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n280",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-280.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 281,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-281.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n281",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-281.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 282,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-282.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n282",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-282.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 283,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-283.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n283",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-283.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 284,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-284.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n284",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-284.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 285,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-285.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n285",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-285.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 286,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-286.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n286",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-286.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 289,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-289.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n289",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-289.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 308,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-308.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n308",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-308.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 309,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-309.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n309",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-309.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 310,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-310.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n310",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-310.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 311,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-311.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n311",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-311.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 312,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-312.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n312",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-312.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 313,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-313.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n313",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-313.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 314,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-314.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n314",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-314.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 315,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-315.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n315",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-315.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 316,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-316.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n316",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-316.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 317,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-317.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n317",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-317.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 318,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-318.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n318",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-318.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 319,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-319.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n319",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-319.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 320,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-320.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n320",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-320.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 321,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-321.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n321",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-321.yaml"
+        }
+      },
+      {
+        "annotation_status": "prohibited-uncomputed",
+        "n": 324,
+        "rendering": {
+          "path": "atlas/prospective/rendering/n-324.svg",
+          "renderer": "sqpack deterministic house renderer"
+        },
+        "source": {
+          "derivation": "canonical row-major subset of the exact catalogue-rule grid",
+          "kind": "exact-generated-grid",
+          "source_key": "catalogue-trivial-grid-rule"
+        },
+        "witness": {
+          "assurance": "verified",
+          "id": "W-prospective-source-n324",
+          "method": "exact-algebraic",
+          "path": "witnesses/prospective/n-324.yaml"
+        }
+      }
+    ],
+    "excluded": {
+      "count": 123,
+      "reason": "Kingbird acquisition is deferred pending license review.",
+      "source_key": "kingbird-current-catalogue"
+    },
+    "generated_by": "python -m devtools.build_prospective_atlas",
+    "rendering_policy": "repository deterministic house renderer",
+    "retained_sources": [
+      {
+        "bytes": 27445,
+        "creator": "UnitSquare Project",
+        "license": "CC-BY-4.0-in-dataset-page-metadata",
+        "n": 103,
+        "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n103.svg",
+        "retrieved": "2026-08-26",
+        "url": "https://www.hmbelvedere.com/packings/n103.svg"
+      },
+      {
+        "bytes": 27946,
+        "creator": "UnitSquare Project",
+        "license": "CC-BY-4.0-in-dataset-page-metadata",
+        "n": 105,
+        "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n105.svg",
+        "retrieved": "2026-08-26",
+        "url": "https://www.hmbelvedere.com/packings/n105.svg"
+      },
+      {
+        "bytes": 29203,
+        "creator": "UnitSquare Project",
+        "license": "CC-BY-4.0-in-dataset-page-metadata",
+        "n": 110,
+        "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n110.svg",
+        "retrieved": "2026-08-26",
+        "url": "https://www.hmbelvedere.com/packings/n110.svg"
+      },
+      {
+        "bytes": 34560,
+        "creator": "UnitSquare Project",
+        "license": "CC-BY-4.0-in-dataset-page-metadata",
+        "n": 131,
+        "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n131.svg",
+        "retrieved": "2026-08-26",
+        "url": "https://www.hmbelvedere.com/packings/n131.svg"
+      }
+    ],
+    "selection": {
+      "count": 101,
+      "exact_generated_grid_cases": 97,
+      "unitsquare_rendering_cases": 4
+    },
+    "source_map": {
+      "path": "explorations/packing/atlas/prospective/source-availability-101-324.json"
+    },
+    "status": "partial-prospective-corpus-seed-not-hypothesis-evidence"
+  },
+  "softschema": {
+    "contract": "packing.squares:ProspectiveAtlasSeed/v1",
+    "envelope": "atlas_seed",
+    "schema": "prospective-atlas-seed.schema.yaml",
+    "status": "enforced"
+  }
+}

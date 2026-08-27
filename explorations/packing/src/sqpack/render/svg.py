@@ -78,10 +78,15 @@ def append_title_desc(root: ET.Element, title: str, description: str) -> None:
     sub(root, "desc", {"id": "figure-description"}).text = description
 
 
-def append_metadata(root: ET.Element, records: dict[str, str]) -> ET.Element:
+def append_metadata(
+    root: ET.Element,
+    records: dict[str, str],
+    *,
+    coordinates: str = "mathematical-y-up; svg-y-down",
+) -> ET.Element:
     metadata = sub(root, "metadata")
     profile = sub(metadata, "profile", {"version": RENDERER_VERSION})
-    sub(profile, "coordinates").text = "mathematical-y-up; svg-y-down"
+    sub(profile, "coordinates").text = coordinates
     for key, value in sorted(records.items()):
         node = sub(profile, "value", {"name": key})
         node.text = value

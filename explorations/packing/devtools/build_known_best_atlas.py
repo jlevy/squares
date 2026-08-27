@@ -1,0 +1,616 @@
+#!/usr/bin/env python3
+"""Acquire, normalize, validate, and render the known-best ``n = 1..100`` atlas."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import time
+import urllib.error
+import urllib.request
+from dataclasses import dataclass
+from fractions import Fraction
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+import mpmath as mp
+import yaml
+from strif import atomic_output_file
+
+from sqpack.known_best import (
+    KINGBIRD_ATTRIBUTION,
+    KINGBIRD_BASE_URL,
+    KINGBIRD_LICENSE_STATUS,
+    KINGBIRD_RETENTION_POLICY,
+    RETRIEVED_DATE,
+    UNITSQUARE_BASE_URL,
+    catalogue_source_map,
+    exact_grid_witness,
+    kingbird_derived_witness,
+    parse_unitsquare_svg,
+    rational_integer,
+    unitsquare_witness,
+)
+from sqpack.render import render_packing_svg
+from sqpack.render.model import (
+    CheckKind,
+    CheckSummary,
+    EvidenceTier,
+    PackingFrame,
+    Point2,
+    RenderSpec,
+    SquareGeometry,
+)
+from sqpack.render.numbers import scalar_from_decimal, scalar_from_fraction
+from sqpack.witness import (
+    check_witness_semantics,
+    load_witness,
+    materialize_witness,
+    witness_document,
+)
+
+ROOT = Path(__file__).resolve().parent.parent
+REPOSITORY_ROOT = ROOT.parents[1]
+FRONTIER = ROOT / "frontier"
+CATALOGUE = ROOT / "resources/web/kingbird-squares-in-squares.html"
+SOURCE_ROOT = ROOT / "resources/web/known-best-packings"
+UNITSQUARE_ROOT = SOURCE_ROOT / "unitsquare"
+UNITSQUARE_RESULTS = ROOT / "resources/web/unitsquare-release1-2026/results.json"
+SOURCE_MANIFEST = SOURCE_ROOT / "sources.json"
+WITNESS_ROOT = ROOT / "witnesses/known-best"
+KINGBIRD_RAW_ROOT = SOURCE_ROOT / "kingbird"
+WITNESS_SCHEMA = ROOT / "witnesses/witness.schema.yaml"
+ATLAS_ROOT = ROOT / "atlas/known-best"
+RENDER_ROOT = ATLAS_ROOT / "rendering"
+MANIFEST = ATLAS_ROOT / "manifest.json"
+GENERATOR = "python -m devtools.build_known_best_atlas"
+USER_AGENT = "thinking-scratchpad-known-best-atlas/1.0"
+
+
+@dataclass(frozen=True)
+class FrontierCase:
+    n: int
+    side: str
+    path: Path
+    text: str
+
+
+@dataclass(frozen=True)
+class SourcePlan:
+    kind: str
+    path: Path
+    url: str
+    source_n: int
+    listed_n: tuple[int, ...]
+    upstream_declared_sha256: str | None = None
+
+
+@dataclass(frozen=True)
+class BuiltCase:
+    frontier: FrontierCase
+    source: SourcePlan
+    witness: dict
+    witness_text: str
+    rendering_text: str
+
+
+def _json_text(value: object) -> str:
+    return json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+
+
+def _frontier_case(n: int) -> FrontierCase:
+    path = FRONTIER / f"n-{n:03d}.md"
+    text = path.read_text(encoding="utf-8")
+    if not text.startswith("---\n"):
+        raise ValueError(f"{path.name}: missing frontmatter")
+    metadata = yaml.safe_load(text.split("---\n", 2)[1])
+    packing = metadata["packing"]
+    if packing["n"] != n:
+        raise ValueError(f"{path.name}: frontier identity mismatch")
+    return FrontierCase(n, str(packing["reported_upper_bound"]["value"]), path, text)
+
+
+def _source_plan(
+    case: FrontierCase,
+    catalogue: dict[int, tuple[str, int, tuple[int, ...]]],
+    unitsquare_svg_digests: dict[int, str],
+) -> SourcePlan:
+    integer_side = rational_integer(case.side)
+    if integer_side is not None and integer_side * integer_side >= case.n:
+        return SourcePlan("exact-grid", case.path, "", case.n, (case.n,))
+    if case.n in {68, 69}:
+        filename = f"n{case.n:03d}.svg"
+        upstream_digest = unitsquare_svg_digests.get(case.n)
+        if upstream_digest is None:
+            raise ValueError(f"n={case.n}: UnitSquare release omits its SVG digest")
+        return SourcePlan(
+            "unitsquare-rendering",
+            UNITSQUARE_ROOT / filename,
+            f"{UNITSQUARE_BASE_URL}/{filename}",
+            case.n,
+            (case.n,),
+            upstream_digest,
+        )
+    if case.n not in catalogue:
+        raise ValueError(f"n={case.n}: non-grid frontier value has no catalogue geometry")
+    filename, source_n, listed_n = catalogue[case.n]
+    return SourcePlan(
+        "kingbird-derived-facts",
+        WITNESS_ROOT / f"n-{case.n:03d}.yaml",
+        f"{KINGBIRD_BASE_URL}/{filename}",
+        source_n,
+        listed_n,
+    )
+
+
+def source_plans() -> dict[int, SourcePlan]:
+    catalogue = catalogue_source_map(CATALOGUE)
+    release = json.loads(UNITSQUARE_RESULTS.read_text(encoding="utf-8"))
+    unitsquare_svg_digests = {
+        int(record["n"]): str(record["svg_sha256"]) for record in release["results"]
+    }
+    return {
+        n: _source_plan(_frontier_case(n), catalogue, unitsquare_svg_digests)
+        for n in range(1, 101)
+    }
+
+
+def _check_upstream_svg_digest(plan: SourcePlan, content: bytes) -> None:
+    expected = plan.upstream_declared_sha256
+    if plan.kind != "unitsquare-rendering" or expected is None:
+        raise ValueError(f"n={plan.source_n}: UnitSquare SVG digest declaration is missing")
+    if hashlib.sha256(content).hexdigest() != expected:
+        raise ValueError(
+            f"n={plan.source_n}: retained UnitSquare SVG differs from the "
+            "upstream-declared SVG SHA-256"
+        )
+
+
+def _fetch_one(plan: SourcePlan, *, refresh: bool) -> str:
+    if plan.kind == "exact-grid":
+        return "grid"
+    if plan.kind == "kingbird-derived-facts":
+        if not plan.path.is_file():
+            raise FileNotFoundError(
+                f"retained Kingbird derived facts are missing: {_relative(plan.path)}"
+            )
+        return "derived"
+    if plan.path.is_file() and not refresh:
+        _check_upstream_svg_digest(plan, plan.path.read_bytes())
+        return "retained"
+    request = urllib.request.Request(plan.url, headers={"User-Agent": USER_AGENT})
+    last_error: Exception | None = None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                content = response.read()
+        except (OSError, urllib.error.HTTPError, urllib.error.URLError) as error:
+            last_error = error
+            if attempt < 2:
+                time.sleep(2**attempt)
+        else:
+            if b"<svg" not in content[:100_000]:
+                raise ValueError(f"upstream response is not SVG: {plan.url}")
+            _check_upstream_svg_digest(plan, content)
+            plan.path.parent.mkdir(parents=True, exist_ok=True)
+            with atomic_output_file(plan.path) as temporary:
+                temporary.write_bytes(content)
+            return "fetched"
+    raise RuntimeError(f"failed to fetch {plan.url}: {last_error}")
+
+
+def fetch_sources(*, refresh: bool) -> None:
+    plans = source_plans()
+    unique = {plan.path: plan for plan in plans.values() if plan.kind == "unitsquare-rendering"}
+    counts = {"fetched": 0, "retained": 0}
+    for index, plan in enumerate(sorted(unique.values(), key=lambda item: item.url), start=1):
+        result = _fetch_one(plan, refresh=refresh)
+        counts[result] += 1
+        print(f"  [{index:02d}/{len(unique):02d}] {result:8} {plan.path.name}")
+        if result == "fetched":
+            time.sleep(0.15)
+    print(f"sources ready: {counts['fetched']} fetched, {counts['retained']} retained")
+
+
+def _relative(path: Path) -> str:
+    return path.relative_to(ROOT).as_posix()
+
+
+def _source_index(plans: dict[int, SourcePlan]) -> dict:
+    sources = []
+    for n, plan in sorted(plans.items()):
+        if plan.kind == "exact-grid":
+            continue
+        if plan.kind == "kingbird-derived-facts":
+            sources.append(
+                {
+                    "attribution": KINGBIRD_ATTRIBUTION,
+                    "kind": plan.kind,
+                    "license_status": KINGBIRD_LICENSE_STATUS,
+                    "listed_n": list(plan.listed_n),
+                    "n": n,
+                    "raw_asset_retained": False,
+                    "retention_policy": KINGBIRD_RETENTION_POLICY,
+                    "retrieved": RETRIEVED_DATE,
+                    "source_n": plan.source_n,
+                    "url": plan.url,
+                }
+            )
+            continue
+        if not plan.path.is_file():
+            raise FileNotFoundError(f"retained source is missing: {_relative(plan.path)}")
+        content = plan.path.read_bytes()
+        _check_upstream_svg_digest(plan, content)
+        sources.append(
+            {
+                "bytes": len(content),
+                "kind": plan.kind,
+                "listed_n": list(plan.listed_n),
+                "n": n,
+                "path": _relative(plan.path),
+                "raw_asset_retained": True,
+                "retrieved": RETRIEVED_DATE,
+                "source_n": plan.source_n,
+                "upstream_declared_sha256": plan.upstream_declared_sha256,
+                "url": plan.url,
+            }
+        )
+    return {
+        "contract": "packing.squares:KnownBestSourceInventory/v1",
+        "retrieved": RETRIEVED_DATE,
+        "sources": sources,
+    }
+
+
+def _assert_side_matches(case: FrontierCase, actual: str) -> None:
+    with mp.workdps(120):
+        difference = abs(mp.mpf(case.side) - mp.mpf(actual))
+        tolerance = max(mp.mpf("1e-8"), abs(mp.mpf(case.side)) * mp.mpf("1e-12"))
+    if difference > tolerance:
+        raise ValueError(
+            f"n={case.n}: source side {actual} disagrees with frontier {case.side}"
+        )
+
+
+def _build_witness(case: FrontierCase, plan: SourcePlan) -> dict:
+    frontier_path = _relative(case.path)
+    if plan.kind == "exact-grid":
+        side = rational_integer(case.side)
+        if side is None:
+            raise ValueError(f"n={case.n}: grid plan has noninteger side")
+        return exact_grid_witness(case.n, side, frontier_path=frontier_path)
+    try:
+        if plan.kind == "kingbird-derived-facts":
+            retained = load_witness(plan.path, fallback_schema=WITNESS_SCHEMA)
+            _assert_side_matches(case, str(retained["side"]))
+            return kingbird_derived_witness(
+                case.n,
+                retained,
+                source_n=plan.source_n,
+                source_path=_relative(SOURCE_MANIFEST),
+                source_url=plan.url,
+            )
+        source_text = plan.path.read_text(encoding="utf-8")
+        source_path = _relative(plan.path)
+        geometry = parse_unitsquare_svg(source_text, expected_n=case.n)
+        _assert_side_matches(case, geometry.side)
+        return unitsquare_witness(
+            case.n,
+            geometry,
+            source_path=source_path,
+            source_url=plan.url,
+        )
+    except (ValueError, TypeError) as error:
+        raise ValueError(f"n={case.n} from {_relative(plan.path)}: {error}") from error
+
+
+def _projection_text(value: object, digits: int = 70) -> str:
+    return str(
+        mp.nstr(
+            value,
+            digits,
+            strip_zeros=True,
+            min_fixed=-10_000,
+            max_fixed=10_000,
+        )
+    )
+
+
+def _scalar(value: str, *, rational: bool):
+    return scalar_from_fraction(Fraction(value)) if rational else scalar_from_decimal(value)
+
+
+def frame_from_witness(witness: dict) -> PackingFrame:
+    rational = witness["scalar"]["kind"] == "rational"
+    side = _scalar(str(witness["side"]), rational=rational)
+    if witness["representation"] == "corners":
+        source_squares = [
+            [(str(x), str(y)) for x, y in square["corners"]] for square in witness["squares"]
+        ]
+    else:
+        projected, _projected_side = materialize_witness(witness, digits=80)
+        source_squares = [
+            [(_projection_text(x), _projection_text(y)) for x, y in square]
+            for square in projected
+        ]
+        rational = False
+    squares = tuple(
+        SquareGeometry(
+            square_id=f"square-{index:03d}",
+            corners=tuple(
+                Point2(_scalar(x, rational=rational), _scalar(y, rational=rational))
+                for x, y in corners
+            ),
+            label=str(index),
+        )
+        for index, corners in enumerate(source_squares, start=1)
+    )
+    claim = witness["claim"]
+    if claim["assurance"] == "verified":
+        evidence = EvidenceTier.CERTIFIED_UPPER_BOUND
+        check = CheckSummary(
+            passed=True,
+            kind=CheckKind.FORMAL,
+            method=str(claim["method"]),
+            detail=str(claim["limitations"]),
+        )
+    else:
+        result = witness.get("certificate", {}).get("result", {})
+        if not result.get("check_passed"):
+            raise ValueError(f"{witness['id']}: numerical receipt is absent or failed")
+        precision = claim["precision"]
+        evidence = EvidenceTier.NUMERICALLY_CHECKED
+        check = CheckSummary(
+            passed=True,
+            kind=CheckKind.NUMERICAL,
+            method=str(claim["method"]),
+            arithmetic="mpmath arbitrary precision",
+            precision=f"{precision['decimal_digits']} decimal digits",
+            rounding=str(precision["rounding"]),
+            tolerance=str(claim["tolerance"]),
+            detail=str(claim["limitations"]),
+        )
+    source = witness.get("source", {})
+    return PackingFrame(
+        container_side=side,
+        squares=squares,
+        evidence=evidence,
+        check=check,
+        label=f"n={witness['n']} known best",
+        source_id=str(witness["id"]),
+        source_url=str(source.get("url", "")),
+    )
+
+
+def _render(witness: dict) -> str:
+    n = witness["n"]
+    return render_packing_svg(
+        frame_from_witness(witness),
+        spec=RenderSpec(
+            overlays=frozenset(),
+            title=f"Known-best packing of {n} unit squares",
+            description=(
+                f"The retained known-best n={n} construction, normalized to Witness/v1 "
+                "and rendered with the repository's deterministic house renderer."
+            ),
+        ),
+    )
+
+
+def _build_case(n: int, plan: SourcePlan) -> BuiltCase:
+    case = _frontier_case(n)
+    witness = _build_witness(case, plan)
+    problems = check_witness_semantics(witness)
+    if problems:
+        raise ValueError(f"{witness['id']}: {problems[0]}")
+    witness_text = witness_document(witness, schema="../witness.schema.yaml")
+    return BuiltCase(case, plan, witness, witness_text, _render(witness))
+
+
+def _frontier_with_witness(case: FrontierCase, witness_id: str) -> str:
+    prefix, frontmatter, body = case.text.split("---\n", 2)
+    del prefix
+    lines = frontmatter.splitlines()
+    start = next(
+        (index for index, line in enumerate(lines) if line.startswith("    witnesses:")), None
+    )
+    if start is None:
+        raise ValueError(f"{case.path.name}: reported upper bound has no witnesses field")
+    end = start + 1
+    while end < len(lines) and not lines[end].startswith("    evidence:"):
+        end += 1
+    existing = yaml.safe_load("\n".join(lines[start:end]))["witnesses"] or []
+    if not isinstance(existing, list) or not all(isinstance(item, str) for item in existing):
+        raise ValueError(f"{case.path.name}: witnesses must be a list of identifiers")
+    witnesses = [*existing]
+    if witness_id not in witnesses:
+        witnesses.append(witness_id)
+    lines[start:end] = ["    witnesses:", *(f"    - {item}" for item in witnesses)]
+    return "---\n" + "\n".join(lines) + "\n---\n" + body
+
+
+def _manifest_entry(built: BuiltCase) -> dict:
+    n = built.frontier.n
+    plan = built.source
+    if plan.kind == "exact-grid":
+        derivation = "canonical row-major subset of an exact integer grid"
+    elif plan.kind == "kingbird-derived-facts":
+        derivation = "deterministic reuse of retained Witness/v1 numerical center/angle facts"
+    elif n == plan.source_n:
+        derivation = "direct normalization of complete source geometry"
+    else:
+        derivation = (
+            f"documented subpacking of n={plan.source_n}; retained the first {n} "
+            "source-order squares"
+        )
+    claim = built.witness["claim"]
+    source = {
+        "kind": plan.kind,
+        "path": _relative(
+            SOURCE_MANIFEST if plan.kind == "kingbird-derived-facts" else plan.path
+        ),
+        "source_n": plan.source_n,
+        "listed_n": list(plan.listed_n),
+        "derivation": derivation,
+    }
+    if plan.url:
+        source["url"] = plan.url
+    return {
+        "n": n,
+        "frontier_path": _relative(built.frontier.path),
+        "reported_side": built.frontier.side,
+        "source": source,
+        "witness": {
+            "id": built.witness["id"],
+            "path": f"witnesses/known-best/n-{n:03d}.yaml",
+            "assurance": claim["assurance"],
+            "method": claim["method"],
+            **({"tolerance": claim["tolerance"]} if "tolerance" in claim else {}),
+        },
+        "rendering": {
+            "path": f"atlas/known-best/rendering/n-{n:03d}.svg",
+            "renderer": "sqpack deterministic house renderer",
+        },
+        "chunk_annotation": {
+            "status": "calibration",
+            "path": "atlas/known-best/chunk-partitions.json",
+            "note": (
+                "Derived bounded lattice-partition calibration; no H-044 verdict. "
+                "Recompute after the complete grammar and prospective split are frozen."
+            ),
+        },
+    }
+
+
+def expected_outputs() -> tuple[dict[Path, str], dict]:
+    plans = source_plans()
+    source_index = _source_index(plans)
+    built = [_build_case(n, plans[n]) for n in range(1, 101)]
+    outputs: dict[Path, str] = {SOURCE_MANIFEST: _json_text(source_index)}
+    for item in built:
+        n = item.frontier.n
+        outputs[WITNESS_ROOT / f"n-{n:03d}.yaml"] = item.witness_text
+        outputs[RENDER_ROOT / f"n-{n:03d}.svg"] = item.rendering_text
+        outputs[item.frontier.path] = _frontier_with_witness(
+            item.frontier, str(item.witness["id"])
+        )
+    manifest = {
+        "softschema": {
+            "contract": "packing.squares:KnownBestAtlas/v1",
+            "schema": "known-best-atlas.schema.yaml",
+            "envelope": "atlas",
+            "status": "enforced",
+        },
+        "atlas": {
+            "range": {"first_n": 1, "last_n": 100, "count": 100},
+            "generated_by": GENERATOR,
+            "policy": {
+                "source_layer": (
+                    "exact canonical grids, retained Kingbird derived numerical facts, "
+                    "or immutable UnitSquare renderings"
+                ),
+                "witness_layer": "lossless where possible; limitations explicit otherwise",
+                "rendering_layer": "repository deterministic house renderer",
+                "annotation_layer": "derived and excluded from grammar validation until frozen",
+            },
+            "entries": [_manifest_entry(item) for item in built],
+        },
+    }
+    outputs[MANIFEST] = _json_text(manifest)
+    return outputs, manifest
+
+
+def update() -> None:
+    outputs, _manifest = expected_outputs()
+    for path, content in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if path.is_file() and path.read_text(encoding="utf-8") == content:
+            continue
+        with atomic_output_file(path) as temporary:
+            temporary.write_text(content, encoding="utf-8")
+    print("known-best atlas updated: 100 witnesses, 100 house renderings, 100 frontier links")
+
+
+def check() -> None:
+    outputs, manifest = expected_outputs()
+    problems = []
+    for path, expected in sorted(outputs.items(), key=lambda item: item[0].as_posix()):
+        if not path.is_file():
+            problems.append(f"missing {_relative(path)}")
+        elif path.read_text(encoding="utf-8") != expected:
+            problems.append(f"stale {_relative(path)}")
+    expected_witnesses = {f"n-{n:03d}.yaml" for n in range(1, 101)}
+    expected_renderings = {f"n-{n:03d}.svg" for n in range(1, 101)}
+    if WITNESS_ROOT.is_dir():
+        unexpected = {path.name for path in WITNESS_ROOT.glob("*.yaml")} - expected_witnesses
+        problems.extend(
+            f"unexpected witnesses/known-best/{name}" for name in sorted(unexpected)
+        )
+    if RENDER_ROOT.is_dir():
+        unexpected = {path.name for path in RENDER_ROOT.glob("*.svg")} - expected_renderings
+        problems.extend(
+            f"unexpected atlas/known-best/rendering/{name}" for name in sorted(unexpected)
+        )
+    if KINGBIRD_RAW_ROOT.exists():
+        problems.append("raw Kingbird source directory must not be retained")
+    entries = manifest["atlas"]["entries"]
+    if [entry["n"] for entry in entries] != list(range(1, 101)):
+        problems.append("manifest entries are not exactly n=1..100")
+    if problems:
+        raise ValueError("known-best atlas drift:\n  " + "\n  ".join(problems[:20]))
+    print("known-best atlas check passed: 100 sources/plans, witnesses, renders, and links")
+
+
+def smoke_in_temporary_directory() -> None:
+    """Exercise generation without retaining outputs; useful while diagnosing a source."""
+    with TemporaryDirectory() as directory:
+        destination = Path(directory)
+        outputs, _manifest = expected_outputs()
+        for path, content in outputs.items():
+            if path in {MANIFEST, SOURCE_MANIFEST} or path.is_relative_to(WITNESS_ROOT):
+                relative = path.relative_to(ROOT)
+                target = destination / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text(content, encoding="utf-8")
+        print(f"temporary corpus generation passed at {destination}")
+
+
+def parser() -> argparse.ArgumentParser:
+    command = argparse.ArgumentParser(description=__doc__)
+    mode = command.add_mutually_exclusive_group(required=True)
+    mode.add_argument(
+        "--fetch", action="store_true", help="acquire missing retained upstream assets"
+    )
+    mode.add_argument("--update", action="store_true", help="regenerate all retained outputs")
+    mode.add_argument(
+        "--check", action="store_true", help="compare retained outputs to a rebuild"
+    )
+    mode.add_argument(
+        "--smoke", action="store_true", help="build corpus into a temporary directory"
+    )
+    command.add_argument(
+        "--refresh",
+        action="store_true",
+        help="with --fetch, replace already retained assets from their recorded URLs",
+    )
+    return command
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = parser().parse_args(argv)
+    if args.refresh and not args.fetch:
+        raise SystemExit("--refresh requires --fetch")
+    if args.fetch:
+        fetch_sources(refresh=args.refresh)
+    elif args.update:
+        update()
+    elif args.check:
+        check()
+    else:
+        smoke_in_temporary_directory()
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

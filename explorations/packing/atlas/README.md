@@ -1,19 +1,20 @@
 # Packing Atlas
 
-The atlas connects retained packing observations to stable, document-ready views.
-It has two deliberately separate layers:
+The atlas connects retained packing observations and abstract enumeration records to
+stable, document-ready views.
+Its collections have deliberately different claim semantics:
 
-- [`atlas.schema.yaml`](atlas.schema.yaml) is the contract for semantic endpoint
-  observations and provisional summaries.
-- [`rendering/`](rendering/README.md) is the deterministic gallery of explanatory SVGs.
-  Its [`manifest.json`](rendering/manifest.json) maps each rendered artifact to a
-  frontier case, evidence tier, view, motion and contact semantics, accessible copy, and
-  exact generator command.
+| Collection | Contents | Claim boundary |
+| --- | --- | --- |
+| [`atlas.schema.yaml`](atlas.schema.yaml) and [`rendering/`](rendering/README.md) | Typed endpoint observations and explanatory figures indexed by [`manifest.json`](rendering/manifest.json) | A view may expose retained evidence but cannot promote its tier |
+| [`known-best/`](known-best/README.md) | One normalized construction and house SVG for every `n = 1..100`, plus separate calibration annotations | Feasible retained constructions; no new optimality or H-044 verdict |
+| [`prospective/`](prospective/source-availability-101-324.json) | Complete source-availability map for `n = 101..324` and the license-safe normalized seed | Source corpus only; contact and hypothesis annotations are prohibited |
+| [`enumerated/`](enumerated/README.md) | All 11,013 abstract signed-contact orbits at scaffold size five | Incidence labels only; no geometry, realization, feasibility, or packing claim |
 
-The separation matters.
-An atlas row is scientific data; a figure is a presentation of typed source data.
-The renderer may expose evidence already present in its input, but it cannot promote a
-candidate to a certificate or make a conjectured minimum proved by drawing it cleanly.
+Within every collection, data and presentation remain separate.
+An atlas row or abstract identity owns typed content; an SVG is a deterministic view of
+that content. Drawing an object cleanly cannot turn a candidate into a certificate, a
+source listing into geometry, or an abstract contact graph into a packing.
 
 ## Examples
 

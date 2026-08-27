@@ -124,6 +124,9 @@ Three facts from the built record make the division of labor exact:
   `8^C(11,2) ≈ 5e49`; with `k ≈ 5` chunks the free inter-chunk combinatorics is on the
   order of `8^C(5,2) ≈ 1e9` before symmetry reduction and feasibility pruning, times
   polynomial partition and skeleton counts.
+  That reduction is substantial, but `1e9` before partition and skeleton factors is
+  still a feasibility blocker.
+  A finite bound, an orbit count, and an omission control must precede implementation.
 
 Angle constraints, stated once: the LP requires every angle fixed to a number and places
 no restriction on the values; the class count controls only the outer search dimension
@@ -167,9 +170,12 @@ The differentiating deliverable of enumeration is therefore not rediscovery but
 
 ## Coverage Semantics, and the Proof-Shaped Upgrade
 
-Enumerate-then-solve is exhaustive within each stratum: the atlas over strata is
-complete by construction, and a stratum’s identity is its label, not a floating-point
-endpoint key. For the upper-bound lane this sidesteps the terminal-component identity
+Enumerate-then-solve can be exhaustive within each emitted stratum, and a stratum’s
+identity is its label rather than a floating-point endpoint key.
+Completeness of the atlas is conditional: the grammar and every bound must be finite and
+explicit, the label generator must have an omission control, and the symmetry quotient
+must have a coverage certificate.
+With those controls, the upper-bound lane can sidestep the terminal-component identity
 blocker ([D-034](../../defects.md)) rather than waiting on it, and the method prices
 itself in counted LP solves, the machine-independent work unit [D-126](../../defects.md)
 asks for.
@@ -195,7 +201,7 @@ may claim.
 
 ## Hypotheses Codified From This Report
 
-Three claims are registered; all three carry `instrument_ready: false`, so the ledger
+Five claims are registered; all five carry `instrument_ready: false`, so the ledger
 reads them as blocked until the tooling beads land.
 
 - **[H-044](../hypotheses/H-044-chunk-expressibility-of-records.md) — coverage.** Are
@@ -224,13 +230,42 @@ reads them as blocked until the tooling beads land.
 
 ## Risks and Open Edges
 
-Coverage is a reduction: the grammar may exclude records, and `n = 29`’s six classes
-prices the needed `k` at the point where bracketing stops being cheap.
-Chunk fission must be a grammar move or the coverage claim silently shrinks.
+Coverage is a reduction: the grammar may exclude records.
+The six angle classes measured at `n = 29` price the fitted-angle count `A` and the
+outer bracketing dimension; they do not determine the chunk count `C`. Chunk fission
+must be a grammar move or the coverage claim silently shrinks.
 Stage 3 endpoints sit on corners, so nothing gradient-based enters the angle stage.
 No rigidity-style bound on candidate chunk contact graphs exists to prune stage 1 beyond
 feasibility; [H-043](../hypotheses/H-043-trump-incidence-rigidity-cores.md) is the
 nearest registered step toward one.
+
+## Post-Review Calibration Evidence
+
+The 2026-08-26 PR review built the previously missing known-best atlas for every
+`n = 1..100`. At the registered descriptive tolerances, 1,780 of 1,860 squares in the 36
+non-grid records belong to a same-angle positive-edge-contact component; 25 of those 36
+records use at most six such components and three free squares.
+This strongly supports the broad assembly intuition.
+Those non-grid components retain 859 internal slide degrees under their contact-normal
+equalities before overlap intervals and wall seating are applied, so component count is
+not a rigidity or low-dimensionality certificate.
+
+It does not validate the narrower bar/L/rectangle grammar.
+A conservative detector of maximal lattice components certifies only 21 of all 100
+records. A subsequent bounded exact-cover splitter handles irregular components and
+certifies all 64 grid-derived records and 3 of 36 non-grid records inside the proposed
+six-chunk/two-free budget.
+Two non-grid cases are conclusively outside that budget, 23 have no partition in the
+implemented universe, and eight are search-capped and therefore indeterminate under the
+declared limit.
+
+The natural revision is to enumerate same-angle contact graphs with LP-resolved sliding
+offsets, keeping rigid lattice chunks as a strict subgrammar rather than the whole
+grammar.
+The retained 1–100 corpus is now descriptive and calibration evidence because it
+was inspected while the instrument was being designed.
+Any confirmatory coverage claim needs a prospectively frozen corpus after the partition
+contract and revised grammar are committed.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

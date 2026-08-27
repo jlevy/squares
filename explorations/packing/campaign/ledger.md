@@ -34,7 +34,11 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-018](agent-sessions/session-018-efficiency-plan-refinement.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-vcr4 | Preserve BC-010 under think-1s0h as the sole scientific handoff. Implement think-l7hi first: land the fast required lane, stable aggregator, and Linux job matrix; then execute think-rthe and think-kdil from their measured spike contracts. |
 | [session-019](agent-sessions/session-019-native-timing-correction-spike.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-lpum | Preserve BC-010 under think-1s0h as the sole scientific handoff. Implement think-l7hi's one-minute required CI lane first, then think-kdil's exact row-inventory reuse from the measured plan. |
 | [session-020](agent-sessions/session-020-fast-pr-lane-spike.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-b784 | Preserve BC-010 under think-1s0h as the sole scientific handoff. Collect the remaining hosted acceptance samples under think-l7hi and implement exact row-jet reuse under think-kdil; add larger matrices only if measured tails require them. |
-| [session-021](agent-sessions/session-021-pr41-performance-integration.md) | in_progress | contemporaneous | `efficiency-loop` (efficiency) | `process-review` (process) | 3 | think-l7hi | Under BC-010, think-1s0h, think-l7hi, and think-4vni, publish and merge the corrected PR 41 tree on main, then stack the byte-preserving atlas bitset optimization on that exact landed revision before resuming PR 45's merge-readiness work. |
+| [session-021](agent-sessions/session-021-pr41-performance-integration.md) | stopped | contemporaneous | `efficiency-loop` (efficiency) | `process-review` (process) | 3 | think-l7hi | Under BC-019, think-eyix, and think-4vni, continue in session-025: merge exact main revision 45238b0c into PR 45, implement and independently validate the byte-preserving atlas bitset optimization, then resume think-oo1p before the other review dispositions. |
+| [session-022](agent-sessions/session-022-pr44-known-best-atlas.md) | completed | contemporaneous | `pipeline-improvement` (insight) | `process-review` (process) | 32 | think-eyix | Follow session 023 for the PR 45 merge-readiness result and final CI receipt. Keep the atlas calibration-only and preserve the no-geometry/no-feasibility boundary. |
+| [session-023](agent-sessions/session-023-pr45-merge-readiness.md) | completed | contemporaneous | `factual-review` (correctness) | `process-review` (correctness) | 8 | think-eyix | Under BC-019 and think-eyix, publish this draft checkpoint, open a fresh time-sliced continuation while free space remains at least 4 GiB, run strict validation with the measured timeout, watch both GitHub jobs, and disposition every review bead only after those receipts are green. |
+| [session-024](agent-sessions/session-024-pr45-strict-and-ci.md) | stopped | contemporaneous | `process-review` (correctness) | `process-review` (correctness) | 2 | think-eyix | Under BC-019 and think-eyix, review PR 41 for correctness, merge safety, and measured validation-loop speedup. If it lands on main, merge that exact main commit into this branch, rerun the focused gates and one complete strict receipt, then require both final-head GitHub jobs before closing review beads. |
+| [session-025](agent-sessions/session-025-pr45-performance-continuation.md) | in_progress | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 4 | think-eyix | Under BC-019, think-eyix, and think-4vni, commit the independently reviewed performance patches, confirm think-oo1p, think-givb, think-4axm, think-9jny, and think-rov3 on the merged tree, then run one complete strict receipt. |
 
 ### Workflow summary
 
@@ -43,12 +47,12 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 0 | 0 | 1 | 0 |
-| `factual-review` | 0 | 0 | 4 | 2 |
-| `insight-iteration` | 0 | 1 | 3 | 2 |
-| `process-review` | 3 | 4 | 12 | 6 |
+| `factual-review` | 1 | 0 | 15 | 2 |
+| `insight-iteration` | 0 | 1 | 5 | 2 |
+| `process-review` | 4 | 4 | 31 | 6 |
 | `efficiency-loop` | 6 | 0 | 10 | 0 |
 | `research-loop` | 1 | 4 | 9 | 7 |
-| `pipeline-improvement` | 2 | 0 | 11 | 0 |
+| `pipeline-improvement` | 4 | 0 | 25 | 0 |
 
 ## Experiment agendas
 
@@ -76,21 +80,21 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 
 ### [agenda-002](agendas/agenda-002-constructive-enumeration-groundwork.md) — Build the constructive proposer on foundations that can carry its results
 
-Status: **active**. Sequence the stratified chunk-enumeration program from X-003 so that each cell buys either coverage knowledge, a reusable instrument, or a measurement, and so that the foundational gaps a constructive proposer would otherwise inherit - degenerate-cell reproducibility, work-unit accounting, and the proposer comparison interface - are closed before they can silently invalidate a result rather than after.
+Status: **active**. Sequence the stratified chunk-enumeration program from X-003 so that each cell buys either coverage knowledge, a reusable instrument, or a measurement, and so that the foundational gaps a constructive proposer would otherwise inherit - degenerate-cell reproducibility, work-unit accounting, source/annotation separation, deterministic minimal partitioning, and the proposer comparison interface - are closed before they can silently invalidate a result rather than after.
 
 | item | purpose | n | state | priority | bead | next evidence |
 | --- | --- | --- | --- | ---: | --- | --- |
-| BC-016 | measurement_validation | 5, 10, 11, 16 | ready | 0 | think-zt29 | retained aligned-stratum differential with per-row active-cell identity, attached to the D-059 record |
+| BC-016 | measurement_validation | 5, 10, 11, 16 | ready | 0 | think-3yv8 | retained aligned-stratum differential with per-row active-cell identity, attached to the D-059 record |
 | BC-017 | tool_validation | 5, 10 | ready | 1 | think-u97a | identical retained counts across a loaded and unloaded host |
 | BC-018 | tool_validation | 5, 10, 16 | blocked | 1 | think-sfzh | retained per-stratum ranking on the proved cells with the frozen grammar commit named in the record |
-| BC-019 | research | 11, 17, 18, 19, 28, 29 | blocked | 2 | think-im8q | retained per-record decomposition table with minimal K per record |
-| BC-023 | tool_validation | 11, 17, 18, 29, 68, 88 | ready | 1 | think-osm7 | per-case import table with retrieval provenance, declared precision, and typed failures |
-| BC-024 | research | 11, 17, 18, 19, 26, 28, 29, 37, 40, 50, 68, 70, 83, 88 | blocked | 2 | think-kr1d | recurrence table over chunk shape, size, tilted-chunk count, and seating, with the residue characterized rather than only counted |
+| BC-019 | research | 11, 17, 18, 19, 28, 29 | ready | 2 | think-eyix | CG-010 full fixed-angle cell controls with declared walls, one frozen separating axis per non-edge, typed caps, and no target-sized execution |
+| BC-023 | tool_validation | 11, 17, 18, 29, 68, 88 | complete | 1 | think-osm7 | complete manifest with retrieval provenance, declared precision, retained-source policy, witness paths, and rendering paths |
+| BC-024 | research | 11, 17, 18, 19, 26, 28, 29, 37, 40, 50, 68, 70, 83, 88 | ready | 2 | think-kr1d | extend the retained broad contact-component census with minimal-partition shapes, wall seating, and representative house-rendered overlays |
 | BC-020 | research | 11 | blocked | 2 | think-dh4b | retained per-step cell sequence with the cell-change count |
-| BC-025 | research | 5, 10, 11, 17, 18, 28, 29 | blocked | 2 | think-kr1d | per-pose round-trip table with the record and non-record rates apart |
-| BC-026 | tool_validation | 5, 10 | blocked | 3 | think-vnm5 | rank of the soft winner in the glued ranking per proved cell |
+| BC-025 | research | 5, 10, 11, 17, 18, 28, 29 | blocked | 2 | think-r45s | per-pose round-trip table with the record and non-record rates apart |
+| BC-026 | tool_validation | 5, 10 | blocked | 3 | think-coyu | recall and actual cost of the glued budget per proved cell |
 | BC-021 | research | 11, 16, 17 | blocked | 3 | think-sfzh | per-cell stratum ranking with the freeze commit named |
-| BC-022 | research | 11 | blocked | 4 | think-im8q | a decision on whether the exact LP is buildable for the cell shapes the enumerator actually produces |
+| BC-022 | research | 11 | blocked | 4 | think-cx85 | a decision on whether the exact LP is buildable for the cell shapes the enumerator actually produces |
 
 ## Series
 

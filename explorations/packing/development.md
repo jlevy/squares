@@ -163,7 +163,7 @@ Checks run concurrently, but their captured output is replayed in declared order
 workers.
 Strict mode cannot be combined with a partial selection and fails on every skip.
 
-Every validation subprocess has a finite 600-second default deadline.
+Every validation subprocess has a finite 900-second default deadline.
 Override it with `--timeout-seconds SECONDS` or `PACKING_VALIDATE_TIMEOUT_SECONDS`;
 values must be positive and finite, and an explicit smaller per-call timeout still wins.
 Mutation-control commands retain their 120-second default deadline and may declare a
