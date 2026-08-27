@@ -264,7 +264,7 @@ The review above is retained as the factual record for the heads it examined.
 Its `2/8/23/3` partition distribution, first-solution selection description,
 raw-Kingbird retention language, and co-committed hash claims are superseded by the PR
 45 merge-readiness continuation in
-[session 018](../../../campaign/agent-sessions/session-018-pr45-merge-readiness.md).
+[session 023](../../../campaign/agent-sessions/session-023-pr45-merge-readiness.md).
 
 The five review follow-ups were dispositioned as follows:
 
@@ -306,7 +306,7 @@ These corrections do not promote the evidence.
 The `n = 1..100` corpus remains calibration-only, capped partition cases remain
 indeterminate, the 11,013 scaffold records remain abstract and geometry-free, and local
 contact realization establishes neither container fit, whole-packing feasibility, nor
-optimality. Session 018 owns the terminal strict and cross-platform validation receipts.
+optimality. Session 023 owns the terminal strict and cross-platform validation receipts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

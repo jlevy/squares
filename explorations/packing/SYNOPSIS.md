@@ -286,7 +286,7 @@ The renderer’s standing exact-motion control remains independently replayable:
 ![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
 
 The current line is `BC-019` under `think-eyix`, recorded in
-[session 019](campaign/agent-sessions/session-019-pr45-strict-and-ci.md).
+[session 024](campaign/agent-sessions/session-024-pr45-strict-and-ci.md).
 Finish strict validation and the final-head cross-platform checkpoint before closing the
 retained PR review dispositions or returning to `ContactAssemblyGrammar/v1`’s next
 full-cell boundary.
