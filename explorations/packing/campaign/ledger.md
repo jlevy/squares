@@ -42,6 +42,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-026](agent-sessions/session-026-balanced-research-session-a.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `process-review` (process) | 42 | think-whwc | Open BC-017 under think-u97a as Session B's first bounded constructive driver; do not wait on hosted CI. |
 | [session-027](agent-sessions/session-027-balanced-research-session-b.md) | stopped | contemporaneous | `insight-iteration` (insight) | `insight-iteration` (correctness) | 11 | think-whwc | Open session 028 under BC-032 and think-whwc, reclaim the expired exp-045 lease, and execute phase 11's unchanged n=29 inventory contract on a fresh clock. |
 | [session-028](agent-sessions/session-028-bc032-n29-promotion-inventory.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-75ll | Under BC-032 and think-75ll, register Q-BC032-a as a W6 mini-cycle with its `rational_digits` set declared before the first run and the existing independent exact checker as its sole acceptance instrument. |
+| [session-029](agent-sessions/session-029-finish-agenda-003-cycles.md) | in_progress | contemporaneous | `efficiency-loop` (efficiency) | `insight-iteration` (correctness) | 4 | think-kdil | Under BC-028 and think-kdil, measure the row-jet dominance trigger and record a verdict either way. |
 
 ### Workflow summary
 
@@ -51,10 +52,10 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | --- | ---: | ---: | ---: | ---: |
 | `research-pass` | 0 | 0 | 7 | 0 |
 | `factual-review` | 1 | 0 | 21 | 2 |
-| `insight-iteration` | 2 | 1 | 23 | 2 |
+| `insight-iteration` | 2 | 1 | 24 | 2 |
 | `process-review` | 4 | 4 | 33 | 6 |
-| `efficiency-loop` | 6 | 0 | 15 | 0 |
-| `research-loop` | 1 | 4 | 10 | 7 |
+| `efficiency-loop` | 7 | 0 | 17 | 0 |
+| `research-loop` | 1 | 4 | 11 | 7 |
 | `pipeline-improvement` | 5 | 0 | 41 | 0 |
 
 ## Experiment agendas
