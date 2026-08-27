@@ -304,15 +304,20 @@ the remaining agenda-003 commitments on measurement, and
 re-glossed `BC` as *bounded commitment*, retiring a collision with the
 linear-programming sense of `cell`, and made the bead / commitment / phase layering
 explicit in the orientation docs.
-[Session 031](campaign/agent-sessions/session-031-merge-main-and-land-pr48.md) is the
-terminal successor: it merged main and found the merged tree failing two gate steps the
-pre-merge tree passed, because the atlas SVG work pushed the negative-control mutation
-snapshot past its size cap.
+[Session 031](campaign/agent-sessions/session-031-merge-main-and-land-pr48.md) merged
+main and found the merged tree failing two gate steps the pre-merge tree passed, because
+the atlas SVG work pushed the negative-control mutation snapshot past its size cap.
 That is fixed and pinned, and the gate is green on the merged revision.
-Q-BC032-a is answered: the `4.94e-11` relaxation is an artifact of the promotion route,
-not a property of the pose, and six independently verified promotions beat the recorded
-baseline. `BC-028`’s trigger passed, so its inventory-reuse implementation is ready but
-sequenced behind exp-045. The outstanding work is now carried by
+[Session 032](campaign/agent-sessions/session-032-block1-missing-mutations.md) is the
+active successor and opens agenda-004’s first block.
+Its orientation inventory retires BC-036’s declared risk: the proof core raises
+seventeen distinct failure identifiers, only eight are exercised by mutations, and seven
+of the nine uncovered are genuine candidates, so exp-045’s declared twelve was not
+aspirational. Q-BC032-a is answered: the `4.94e-11` relaxation is an artifact of the
+promotion route, not a property of the pose, and six independently verified promotions
+beat the recorded baseline.
+`BC-028`’s trigger passed, so its inventory-reuse implementation is ready but sequenced
+behind exp-045. The outstanding work is now carried by
 [agenda-004](campaign/agendas/agenda-004-guard-repair-and-instrument-unblock.md), which
 gives each remaining item its own workflow entry.
 The next bounded slice is `BC-036` under `think-oyn9`: exp-045 is blocked at execution
