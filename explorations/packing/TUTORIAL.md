@@ -239,12 +239,11 @@ compression must be checked on its own contact structure.
 
 ![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
 
-*The reported `n = 29` record is a useful larger-scale check: six orientation classes,
-29 squares, and deterministic reuse after the fixed 20-color sequence is exhausted.
-The retained roughly 100-digit source is evaluated at 160 decimal digits of working
-precision and passes all 406 pair checks at tolerance `1e-80`; that numerically checks
-the construction without verifying it or turning it into an exact certificate or an
-optimality proof.*
+*The reported `n = 29` record is a useful larger-scale check: six orientation classes
+across 29 squares. The retained roughly 100-digit source is evaluated at 160 decimal
+digits of working precision and passes all 406 pair checks at tolerance `1e-80`; that
+numerically checks the construction without verifying it or turning it into an exact
+certificate or an optimality proof.*
 
 ## 3. Cells, Basins, and Two Traps
 
@@ -327,10 +326,10 @@ finding** when it stalled ([D-029](defects.md)). On one `n = 10` start: the anne
 output and the fixed-angle solve agree to every digit at `+5.6440e-04`, and the full
 quench with its angle half reaches `+4.4409e-16`.
 
-![A perturbed Göbel ten-square source beside its quench endpoint.](atlas/rendering/gobel10-source-return-comparison.svg)
-
-*The shared-scale comparison makes the source-return test visible: the start is close
-but not settled, while the full quench returns to the proved-side geometry.*
+The renderer guide retains the
+[shared-scale Göbel source-return diagnostic](atlas/rendering/README.md#n--10-numerical-comparison):
+the start is close but not settled, while the full quench returns to the proved-side
+geometry.
 
 ### Trap 2—a point-basin need not be a terminal component
 

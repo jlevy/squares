@@ -23,6 +23,31 @@ properties:
       witness_layer: {type: string, minLength: 1}
       rendering_layer: {type: string, minLength: 1}
       annotation_layer: {type: string, minLength: 1}
+  composite:
+    type: object
+    additionalProperties: false
+    required: [layout, renderer, square_count, svg, png_preview]
+    properties:
+      layout: {const: '10 by 10, row-major n=1..100'}
+      renderer: {const: sqpack deterministic composite renderer}
+      square_count: {const: 5050}
+      svg:
+        type: object
+        additionalProperties: false
+        required: [path, width, height]
+        properties:
+          path: {const: atlas/known-best/known-best-1-100.svg}
+          width: {const: 2400}
+          height: {const: 2540}
+      png_preview:
+        type: object
+        additionalProperties: false
+        required: [path, derived_from, width, height]
+        properties:
+          path: {const: atlas/known-best/known-best-1-100.png}
+          derived_from: {const: atlas/known-best/known-best-1-100.svg}
+          width: {const: 2400}
+          height: {const: 2540}
   entries:
     type: array
     minItems: 100

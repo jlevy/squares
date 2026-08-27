@@ -4,6 +4,14 @@ This atlas retains one complete geometry record for every frontier case from `n 
 through `n = 100` and renders every record with the repository’s deterministic house
 renderer. The machine-readable discovery layer is [`manifest.json`](manifest.json).
 
+[![The complete known-best atlas from n equals one through one hundred.](known-best-1-100.svg)](known-best-1-100.svg)
+
+The composite is a native 10-by-10 SVG, not a screenshot montage.
+Its 5,050 square polygons come from the same normalized witnesses as the individual
+figures under [`rendering/`](rendering/). [`known-best-1-100.png`](known-best-1-100.png)
+is the GitHub-facing raster preview; it carries the SHA-256 of its source SVG so the
+atlas check rejects a stale preview.
+
 The pipeline has four separate layers:
 
 1. exact canonical grids, attributed Kingbird-derived numerical facts, or retained
@@ -150,10 +158,13 @@ uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atl
 
 The first command acquires only missing UnitSquare assets unless `--refresh` is
 requested; Kingbird live audits are ephemeral and write no geometry.
-The second rebuilds witnesses, house renderings, the manifest, and frontier witness
-links from retained inputs.
-Git remains the integrity boundary for co-committed outputs; the only retained content
-hashes are values declared independently by an upstream source.
+The second rebuilds witnesses, individual house renderings, the SVG and PNG composite,
+the manifest, and frontier witness links from retained inputs.
+PNG regeneration uses macOS `sips` when available and ImageMagick otherwise; check mode
+reads the embedded source-SVG receipt without invoking either renderer.
+Git remains the integrity boundary for co-committed outputs.
+Upstream asset integrity uses only hashes declared independently by a source; the PNG’s
+local source-SVG receipt tracks derivation and is not source evidence.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

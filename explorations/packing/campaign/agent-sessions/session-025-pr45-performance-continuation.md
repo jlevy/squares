@@ -30,7 +30,7 @@ session:
     started_at: '2026-08-26T17:33:27-07:00'
     deadline_at: '2026-08-26T18:03:27-07:00'
     expected_output: >-
-      A clean PR 45 merge of main, collision-free durable session records, a small
+      A clean PR 45 merge of exact main, collision-free durable session records, a small
       partition bitset patch, and byte-identical census plus focused regression receipts.
     validation_command: >-
       uv run --directory explorations/packing --frozen python -m
@@ -45,7 +45,7 @@ session:
       Keep the exact-main merge and the read-only profile, omit the optimization, and
       record the first differing retained field under think-4vni.
     outcome: >-
-      Merged the landed PR 41 tree locally, reconciled all durable session IDs and
+      Merged the exact landed PR 41 tree locally, reconciled all durable session IDs and
       additive documentation conflicts, and replaced repeated partition candidate-list
       scans with an order-preserving candidate-index bitset traversal.
     evidence:
@@ -148,53 +148,55 @@ session:
       one BasedPyright annotation error in the new legacy-orbit test helper.
     - Ruff and BasedPyright passed after the literal Axis annotation repair.
     - >-
-      All 36 strict steps passed in 372.24 seconds with two outer and two inner workers,
-      down from the earlier 1,589.65-second receipt.
+      Exact head 21da46a passed all 36 strict steps in 372.24 seconds with two outer and
+      two inner workers, down from the earlier 1,589.65-second receipt.
     stop_reason: The merged review tree passed the complete strict assurance surface.
     next_action: >-
-      Publish the final documentation-only receipt, run pull-request checks plus manual
-      Linux and macOS integration, then close the review and performance beads.
+      Publish the final documentation-only receipt, run final-head pull-request checks
+      plus manual Linux and macOS integration, then close the review and performance beads.
   - workflow: process-review
     recording: contemporaneous
     clock_role: work
     focus: process
     objective: >-
-      Publish the strict-validated PR 45 continuation, obtain GitHub checks on both
-      architectures, close the resolved beads, and hand the branch to PR 46.
+      Publish the strict-validated PR 45 continuation, obtain final-head GitHub checks on
+      both architectures, close the resolved beads, and hand the exact base revision to PR 46.
     status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
-      Complete strict validation is green; publication, cross-platform CI, and downstream
-      branch coordination are now the only remaining boundaries.
+      Complete strict validation is green; publication, cross-platform CI, and exact
+      downstream revision coordination are now the only remaining boundaries.
     budget_minutes: 30
     started_at: '2026-08-26T18:16:20-07:00'
     deadline_at: '2026-08-26T18:46:20-07:00'
     expected_output: >-
-      A pushed clean PR 45 branch, green pull-request checks, green manual Linux and macOS
-      integration jobs, closed resolved beads, and a branch handoff to PR 46.
+      A pushed clean PR 45 head, green final-head pull-request checks, green manual Linux
+      and macOS integration jobs, closed resolved beads, and an exact commit handoff to PR 46.
     validation_command: >-
       gh pr checks 45 --watch --interval 10 && gh run watch --exit-status $(gh run list
       --workflow 'Packing validation' --branch codex/packing-atlas-overnight-review
       --event workflow_dispatch --limit 1 --json databaseId --jq '.[0].databaseId')
     kill_condition: >-
-      Stop on a non-fast-forward push, unexpected PR diff, failed check,
+      Stop on a non-fast-forward push, unexpected PR diff, failed final-head check,
       cross-platform artifact drift, or any renderer/color output change.
     fallback: >-
-      Leave PR 45 pushed and draft, retain every unresolved bead with the failed GitHub
-      job, and do not tell PR 46 to stack it.
+      Leave PR 45 pushed and draft, retain every unresolved bead with the exact failed
+      GitHub job, and report the tested head without telling PR 46 to stack it.
     outcome: >-
-      Published the continuation, completed both GitHub validation lanes, closed and
-      synced the review and performance beads, marked PR 45 ready, and handed its branch
-      to PR 46. PR 45 was subsequently merged.
+      Published exact head bc58fdee13bada7ca4ce9798790a42f0e3d8ca5d, obtained clean
+      pull-request and complete cross-platform integration receipts on that revision,
+      closed and synced the PR 45 review beads, and handed the exact base to PR 46.
     evidence:
-    - The pull-request lane passed Linux validation in 2 minutes 26 seconds and its required aggregate in 3 seconds.
-    - The full Linux job passed in 10 minutes 2 seconds.
-    - The macOS job, including the deep golden, passed in 9 minutes 8 seconds.
-    - The worktree was clean, and this continuation changed no renderer, color, or generated SVG output.
-    stop_reason: PR 45 passed every merge gate and was merged.
+    - The pushed branch and origin both resolved to bc58fdee13bada7ca4ce9798790a42f0e3d8ca5d with a clean worktree.
+    - The exact-head pull-request lane passed Linux validation in 2 minutes 26 seconds and aggregation in 3 seconds.
+    - >-
+      Full workflow run 33029773036 passed on the same revision: Linux in 10 minutes 2
+      seconds and macOS with deep golden validation in 9 minutes 8 seconds.
+    - GitHub reported PR 45 mergeable and clean, and every PR 45 review and integration bead was closed and synced.
+    stop_reason: The exact pushed revision passed every declared publication and integration boundary.
     next_action: >-
-      Under BC-027 and think-whwc, reconcile the merged-main validation failure and
-      restore a first-failure-safe green pipeline before the next research session.
+      Under BC-019 and closed bead think-eyix, use
+      bc58fdee13bada7ca4ce9798790a42f0e3d8ca5d as the exact stacked base for PR 46.
   primary_bead: think-eyix
   status: completed
   budget:
@@ -217,8 +219,9 @@ session:
       step alone used 743.07 seconds, including repeated Python candidate-list scans over
       1,823,004 retained partition-search states.
     after: >-
-      The isolated atlas step passes in 123.93 seconds, a 6.00-fold speedup. The complete
-      strict gate passes in 372.24 seconds, and both GitHub architecture lanes pass.
+      The known-best atlas step passed in 123.93 seconds, down 83.3 percent from 743.07
+      seconds, and exact pushed head bc58fdee13bada7ca4ce9798790a42f0e3d8ca5d
+      passed all 36 strict stages plus final-head Linux and macOS integration.
   delegations:
   - task: Identify a sound optimization for the PR 45 atlas census.
     operator: atlas_perf
@@ -337,20 +340,19 @@ session:
   - src/sqpack/chunks.py
   - tests/test_chunk_components.py
   checks:
-  - PR 41 merged to main.
+  - PR 41 merged as exact main revision 45238b0cd339e7862c6f1209dcd405a8918775fb.
   - The landed main workflow passed Linux in 7 minutes 1 second and macOS in 6 minutes 25 seconds.
   - The byte-for-byte census check passes in 97.30 seconds.
   - The isolated known-best atlas step passes in 173.48 seconds, down from 743.07 seconds.
   - Pricing retained-byte validation passes in 8.20 seconds, down from 56.45 seconds.
   - The final isolated atlas step passes in 123.93 seconds, down from 743.07 seconds.
   - One hundred three review-focused tests pass in 70.68 seconds.
-  - All 36 strict steps pass in 372.24 seconds.
-  - The pull-request, full Linux, and full macOS lanes pass.
-  stop_reason: PR 45 passed its merge gates and was merged.
+  - Exact head 21da46a passes all 36 strict steps in 372.24 seconds.
+  - Exact pushed head bc58fdee13bada7ca4ce9798790a42f0e3d8ca5d passes the final-head PR lane and complete Linux/macOS workflow.
+  stop_reason: The exact pushed revision passed every declared performance, review, publication, and integration boundary.
   next_action: >-
-    Under BC-027 and think-whwc, reconcile the merged-main validation failure, the
-    terminal session record, and generated views; then restore a first-failure-safe
-    green pipeline before the next research session.
+    Under BC-019 and closed bead think-eyix, use
+    bc58fdee13bada7ca4ce9798790a42f0e3d8ca5d as the exact stacked base for PR 46.
 ---
 # Session 025 — PR 45 Performance Continuation
 

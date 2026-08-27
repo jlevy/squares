@@ -137,6 +137,7 @@ case or experiment separately.
 | [Packing Atlas](atlas/README.md) | component scope and use | supporting | maintained | — |
 | [Enumerated Contact-Scaffold Atlas](atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |
 | [Known-Best Packing Atlas, `n = 1..100`](atlas/known-best/README.md) | component scope and use | supporting | maintained | — |
+| [Prospective Packing Atlas, `n = 101..324`](atlas/prospective/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
 | [Conventions for `explorations/packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
@@ -1841,8 +1842,7 @@ Neither round certifies the source geometry or optimality.
 
 *The roughly 100-digit retained `n = 29` witness is evaluated at 160 decimal digits of
 working precision and passes all 406 pair checks at tolerance `1e-80`. The figure
-therefore says “numerically checked,” not “verified,” “exact,” or “proved optimum.”
-Its 29 squares also exercise deterministic reuse of the fixed 20-color cool palette.*
+therefore says “numerically checked,” not “verified,” “exact,” or “proved optimum.”*
 
 ### Roll-up
 

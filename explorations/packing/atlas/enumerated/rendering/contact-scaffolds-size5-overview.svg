@@ -3,7 +3,7 @@
   <title id="figure-title">Size-five abstract contact-scaffold atlas</title>
   <desc id="figure-description">Twenty-one connected graph topologies with exact signed-axis color-orbit counts. The diagrams are abstract incidence graphs, not realized square packings.</desc>
   <metadata>
-    <sqpack:profile version="5">
+    <sqpack:profile version="7">
       <sqpack:coordinates>abstract-diagram-layout; svg-y-down; no-packing-coordinates</sqpack:coordinates>
       <sqpack:value name="artifact-kind">abstract-contact-scaffold-topology-overview</sqpack:value>
       <sqpack:value name="claim-status">no-geometry-no-packing-verdict</sqpack:value>

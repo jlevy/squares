@@ -8,16 +8,49 @@ import json
 import math
 from collections import Counter
 from pathlib import Path
+from xml.etree import ElementTree as ET
 
 from strif import atomic_output_file
 
 from sqpack.known_best import KINGBIRD_BASE_URL, catalogue_source_map
+from sqpack.render.svg import append_metadata, append_title_desc, element, serialize_svg, sub
 
 ROOT = Path(__file__).resolve().parent.parent
 CATALOGUE = ROOT / "resources/web/kingbird-squares-in-squares.html"
 UNITSQUARE_RESULTS = ROOT / "resources/web/unitsquare-release1-2026/results.json"
 OUTPUT = ROOT / "atlas/prospective/source-availability-101-324.json"
+COVERAGE_OUTPUT = ROOT / "atlas/prospective/source-coverage-101-324.svg"
 GENERATOR = "python -m devtools.map_prospective_sources"
+
+COVERAGE_WIDTH = 1440
+COVERAGE_HEIGHT = 1030
+COVERAGE_FIRST_N = 101
+COVERAGE_LAST_N = 324
+COVERAGE_COUNT = COVERAGE_LAST_N - COVERAGE_FIRST_N + 1
+COVERAGE_COLUMNS = 16
+COVERAGE_ROWS = 14
+COVERAGE_GRID_LEFT = 60
+COVERAGE_GRID_TOP = 250
+COVERAGE_COLUMN_PITCH = 82
+COVERAGE_ROW_PITCH = 49
+COVERAGE_CELL_WIDTH = 76
+COVERAGE_CELL_HEIGHT = 42
+COVERAGE_FONT = "Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif"
+COVERAGE_STYLES = {
+    "exact-grid-retained": ("#cceee6", "#0f513f", "#0f8f79"),
+    "licensed-svg-retained": ("#dbeafe", "#1e3a8a", "#4361c2"),
+    "public-svg-license-deferred": ("#ffedd5", "#7c2d12", "#d97706"),
+    "no-located-source": ("#e2e8f0", "#475569", "#94a3b8"),
+}
+COVERAGE_STROKES = {
+    "exact-grid-retained": {"stroke-width": "1"},
+    "licensed-svg-retained": {"stroke-width": "2.5"},
+    "public-svg-license-deferred": {
+        "stroke-width": "1.4",
+        "stroke-dasharray": "5 3",
+    },
+    "no-located-source": {"stroke-width": "1", "stroke-dasharray": "2 3"},
+}
 
 
 def _json_text(value: object) -> str:
@@ -29,7 +62,7 @@ def availability_errors(availability: dict) -> list[str]:
     errors: list[str] = []
     entries = availability["entries"]
     numbers = [entry["n"] for entry in entries]
-    if numbers != list(range(101, 325)):
+    if numbers != list(range(COVERAGE_FIRST_N, COVERAGE_LAST_N + 1)):
         errors.append("entries must contain each n=101..324 exactly once and in order")
 
     summary = availability["summary"]
@@ -89,14 +122,18 @@ def availability_errors(availability: dict) -> list[str]:
 
 def expected_document() -> dict:
     """Return the deterministic availability map from retained listing evidence."""
-    catalogue = catalogue_source_map(CATALOGUE, first_n=101, last_n=324)
+    catalogue = catalogue_source_map(
+        CATALOGUE, first_n=COVERAGE_FIRST_N, last_n=COVERAGE_LAST_N
+    )
     release = json.loads(UNITSQUARE_RESULTS.read_text(encoding="utf-8"))
     improvements = {
-        result["n"]: result for result in release["results"] if 101 <= result["n"] <= 324
+        result["n"]: result
+        for result in release["results"]
+        if COVERAGE_FIRST_N <= result["n"] <= COVERAGE_LAST_N
     }
 
     entries = []
-    for n in range(101, 325):
+    for n in range(COVERAGE_FIRST_N, COVERAGE_LAST_N + 1):
         if n in improvements:
             result = improvements[n]
             entries.append(
@@ -150,7 +187,11 @@ def expected_document() -> dict:
         "availability": {
             "claim_status": "source-availability-only-no-annotations",
             "generated_by": GENERATOR,
-            "range": {"count": 224, "first_n": 101, "last_n": 324},
+            "range": {
+                "count": COVERAGE_COUNT,
+                "first_n": COVERAGE_FIRST_N,
+                "last_n": COVERAGE_LAST_N,
+            },
             "readiness": {
                 "acquisition": "incomplete",
                 "normalization": "incomplete",
@@ -300,20 +341,271 @@ def expected_document() -> dict:
     return document
 
 
+def _coverage_status(entry: dict) -> str:
+    return {
+        "catalogue-trivial-grid-rule": "exact-grid-retained",
+        "unitsquare-release-1": "licensed-svg-retained",
+        "kingbird-current-catalogue": "public-svg-license-deferred",
+    }.get(entry["source_key"], "no-located-source")
+
+
+def _append_coverage_stat(
+    root: ET.Element,
+    *,
+    x: int,
+    count: int,
+    label: str,
+    status: str,
+) -> None:
+    background, ink, accent = COVERAGE_STYLES[status]
+    group = sub(root, "g", {"data-feature": "coverage-stat", "data-coverage": status})
+    sub(
+        group,
+        "rect",
+        {
+            "x": str(x),
+            "y": "127",
+            "width": "310",
+            "height": "82",
+            "rx": "12",
+            "fill": background,
+        },
+    )
+    sub(
+        group,
+        "rect",
+        {
+            "x": str(x),
+            "y": "127",
+            "width": "8",
+            "height": "82",
+            "rx": "4",
+            "fill": accent,
+        },
+    )
+    sub(
+        group,
+        "text",
+        {
+            "x": str(x + 26),
+            "y": "166",
+            "font-family": COVERAGE_FONT,
+            "font-size": "28",
+            "font-weight": "700",
+            "fill": ink,
+        },
+    ).text = str(count)
+    sub(
+        group,
+        "text",
+        {
+            "x": str(x + 26),
+            "y": "192",
+            "font-family": COVERAGE_FONT,
+            "font-size": "14",
+            "fill": ink,
+        },
+    ).text = label
+
+
+def render_coverage_svg(availability: dict) -> str:
+    """Render the audited source status for every prospective ``n``."""
+    entries = availability["entries"]
+    if [entry["n"] for entry in entries] != list(range(COVERAGE_FIRST_N, COVERAGE_LAST_N + 1)):
+        raise ValueError("coverage SVG requires exactly n=101..324 in order")
+    status_counts = Counter(_coverage_status(entry) for entry in entries)
+    root = element(
+        "svg",
+        {
+            "width": str(COVERAGE_WIDTH),
+            "height": str(COVERAGE_HEIGHT),
+            "viewBox": f"0 0 {COVERAGE_WIDTH} {COVERAGE_HEIGHT}",
+            "role": "img",
+            "aria-labelledby": "figure-title figure-description",
+        },
+    )
+    append_title_desc(
+        root,
+        "Source coverage for square packings beyond one hundred",
+        (
+            "An audited grid for n equals 101 through 324. Ninety-seven exact grids and "
+            "four licensed SVG constructions are retained locally. Public SVG geometry "
+            "was located and parsed for the other 123 cases, but retention is deferred "
+            "pending license review. No case in the audited range lacks selected geometry."
+        ),
+    )
+    append_metadata(
+        root,
+        {
+            "audit-checked-at": availability["access_audit"]["checked_at"],
+            "claim-status": availability["claim_status"],
+            "columns": str(COVERAGE_COLUMNS),
+            "first-n": str(COVERAGE_FIRST_N),
+            "generated-by": GENERATOR,
+            "last-n": str(COVERAGE_LAST_N),
+            "located-source-gaps": "0",
+            "rows": str(COVERAGE_ROWS),
+            "selected-cases": str(COVERAGE_COUNT),
+        },
+        coordinates="document-grid; row-major n=101..324",
+    )
+    sub(
+        root,
+        "rect",
+        {"width": str(COVERAGE_WIDTH), "height": str(COVERAGE_HEIGHT), "fill": "#ffffff"},
+    )
+    sub(
+        root,
+        "text",
+        {
+            "x": "60",
+            "y": "58",
+            "font-family": COVERAGE_FONT,
+            "font-size": "36",
+            "font-weight": "700",
+            "fill": "#17202a",
+        },
+    ).text = "What is available beyond n = 100?"
+    sub(
+        root,
+        "text",
+        {
+            "x": "60",
+            "y": "95",
+            "font-family": COVERAGE_FONT,
+            "font-size": "18",
+            "fill": "#5c6673",
+        },
+    ).text = "Audited n = 101-324  ·  all 224 cases have selected geometry"
+
+    _append_coverage_stat(
+        root,
+        x=60,
+        count=status_counts["exact-grid-retained"],
+        label="exact grids retained",
+        status="exact-grid-retained",
+    )
+    _append_coverage_stat(
+        root,
+        x=397,
+        count=status_counts["licensed-svg-retained"],
+        label="licensed SVGs retained",
+        status="licensed-svg-retained",
+    )
+    _append_coverage_stat(
+        root,
+        x=734,
+        count=status_counts["public-svg-license-deferred"],
+        label="public SVGs, license deferred",
+        status="public-svg-license-deferred",
+    )
+    _append_coverage_stat(
+        root,
+        x=1071,
+        count=status_counts["no-located-source"],
+        label="no located source",
+        status="no-located-source",
+    )
+
+    for index, entry in enumerate(entries):
+        row, column = divmod(index, COVERAGE_COLUMNS)
+        x = COVERAGE_GRID_LEFT + column * COVERAGE_COLUMN_PITCH
+        y = COVERAGE_GRID_TOP + row * COVERAGE_ROW_PITCH
+        status = _coverage_status(entry)
+        background, ink, accent = COVERAGE_STYLES[status]
+        cell = sub(
+            root,
+            "g",
+            {
+                "data-feature": "coverage-cell",
+                "data-n": str(entry["n"]),
+                "data-coverage": status,
+                "data-source-key": entry["source_key"],
+            },
+        )
+        cell_attributes = {
+            "x": str(x),
+            "y": str(y),
+            "width": str(COVERAGE_CELL_WIDTH),
+            "height": str(COVERAGE_CELL_HEIGHT),
+            "rx": "7",
+            "fill": background,
+            "stroke": accent,
+            **COVERAGE_STROKES[status],
+        }
+        sub(
+            cell,
+            "rect",
+            cell_attributes,
+        )
+        sub(
+            cell,
+            "text",
+            {
+                "x": str(x + COVERAGE_CELL_WIDTH // 2),
+                "y": str(y + 27),
+                "text-anchor": "middle",
+                "font-family": COVERAGE_FONT,
+                "font-size": "14",
+                "font-weight": "600",
+                "fill": ink,
+            },
+        ).text = str(entry["n"])
+
+    sub(
+        root,
+        "text",
+        {
+            "x": "60",
+            "y": "974",
+            "font-family": COVERAGE_FONT,
+            "font-size": "15",
+            "fill": "#475569",
+        },
+    ).text = (
+        "The orange cells are a local retention-policy gap, not a gap in located public "
+        "geometry."
+    )
+    sub(
+        root,
+        "text",
+        {
+            "x": "60",
+            "y": "1002",
+            "font-family": COVERAGE_FONT,
+            "font-size": "13",
+            "fill": "#64748b",
+        },
+    ).text = (
+        "Availability audit 2026-08-26 · Kingbird 114/114 distinct SVG groups parsed "
+        "· UnitSquare 4/4 declared hashes matched"
+    )
+    return serialize_svg(root)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
-    rendered = _json_text(expected_document())
+    document = expected_document()
+    rendered = _json_text(document)
+    coverage = render_coverage_svg(document["availability"])
     if args.check:
         if not OUTPUT.is_file() or OUTPUT.read_text(encoding="utf-8") != rendered:
             raise ValueError("prospective source-availability map is missing or stale")
-        print("prospective source map check passed: 224 cases, availability only")
+        if (
+            not COVERAGE_OUTPUT.is_file()
+            or COVERAGE_OUTPUT.read_text(encoding="utf-8") != coverage
+        ):
+            raise ValueError("prospective source-coverage SVG is missing or stale")
+        print("prospective source map check passed: 224 cases, availability and SVG")
         return 0
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     with atomic_output_file(OUTPUT) as temporary:
         temporary.write_text(rendered, encoding="utf-8")
-    print("prospective source map updated: 224 cases, availability only")
+    with atomic_output_file(COVERAGE_OUTPUT) as temporary:
+        temporary.write_text(coverage, encoding="utf-8")
+    print("prospective source map updated: 224 cases, availability and SVG")
     return 0
 
 

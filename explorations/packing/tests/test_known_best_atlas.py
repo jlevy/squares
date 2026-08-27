@@ -7,8 +7,11 @@ import hashlib
 import json
 from collections import Counter
 from pathlib import Path
+from xml.etree import ElementTree as ET
 
+import jsonschema
 import pytest
+import yaml
 
 from devtools import build_known_best_atlas as known_best_builder
 from sqpack.known_best import (
@@ -25,6 +28,7 @@ SOURCES = ROOT / "resources/web/known-best-packings"
 WITNESSES = ROOT / "witnesses/known-best"
 SCHEMA = ROOT / "witnesses/witness.schema.yaml"
 UNITSQUARE_RESULTS = ROOT / "resources/web/unitsquare-release1-2026/results.json"
+SVG = {"svg": "http://www.w3.org/2000/svg"}
 
 
 def test_catalogue_map_and_retained_unitsquare_geometry() -> None:
@@ -229,6 +233,22 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
     release_by_n = {record["n"]: record for record in release["results"]}
     assert document["softschema"]["contract"] == "packing.squares:KnownBestAtlas/v1"
     entries = document["atlas"]["entries"]
+    assert document["atlas"]["composite"] == {
+        "layout": "10 by 10, row-major n=1..100",
+        "png_preview": {
+            "derived_from": "atlas/known-best/known-best-1-100.svg",
+            "height": 2540,
+            "path": "atlas/known-best/known-best-1-100.png",
+            "width": 2400,
+        },
+        "renderer": "sqpack deterministic composite renderer",
+        "square_count": 5050,
+        "svg": {
+            "height": 2540,
+            "path": "atlas/known-best/known-best-1-100.svg",
+            "width": 2400,
+        },
+    }
     assert [entry["n"] for entry in entries] == list(range(1, 101))
     assert Counter(entry["source"]["kind"] for entry in entries) == {
         "exact-grid": 64,
@@ -258,3 +278,66 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
 
     n29_frontier = (ROOT / "frontier/n-029.md").read_text(encoding="utf-8")
     assert "    - W-n029-kingbird\n" in n29_frontier
+
+
+def test_known_best_v1_schema_accepts_a_manifest_without_the_new_composite() -> None:
+    atlas = json.loads((ATLAS / "manifest.json").read_text(encoding="utf-8"))["atlas"]
+    atlas.pop("composite")
+    schema = yaml.safe_load(
+        (ATLAS / "known-best-atlas.schema.yaml").read_text(encoding="utf-8")
+    )
+
+    jsonschema.validate(atlas, schema)
+
+
+def test_known_best_composite_contains_every_case_and_square() -> None:
+    outputs, _manifest = known_best_builder.expected_outputs()
+    composite_path = ATLAS / "known-best-1-100.svg"
+
+    root = ET.fromstring(outputs[composite_path])
+    cards = root.findall(".//svg:g[@data-n]", SVG)
+    assert [int(card.attrib["data-n"]) for card in cards] == list(range(1, 101))
+    assert len(root.findall(".//svg:polygon[@data-feature='square-fill']", SVG)) == 5050
+    assert [card.attrib["data-row"] for card in cards[:10]] == ["0"] * 10
+    assert [card.attrib["data-column"] for card in cards[:10]] == [
+        str(column) for column in range(10)
+    ]
+
+    labels = [
+        node.text for node in root.findall(".//svg:text[@data-feature='packing-label']", SVG)
+    ]
+    bounds = [
+        node.text for node in root.findall(".//svg:text[@data-feature='side-bound']", SVG)
+    ]
+    assert labels == [f"n = {n}" for n in range(1, 101)]
+    assert len(bounds) == 100
+    assert all(bound and bound.startswith("s ≤ ") for bound in bounds)
+
+
+def test_known_best_composite_png_is_derived_from_current_svg() -> None:
+    outputs, _manifest = known_best_builder.expected_outputs()
+    svg_text = outputs[ATLAS / "known-best-1-100.svg"]
+    png = (ATLAS / "known-best-1-100.png").read_bytes()
+
+    assert known_best_builder.png_summary_receipt(png) == (
+        2400,
+        2540,
+        hashlib.sha256(svg_text.encode("utf-8")).hexdigest(),
+    )
+
+
+def test_known_best_composite_png_reports_renderer_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    summary_svg = tmp_path / "summary.svg"
+    monkeypatch.setattr(known_best_builder, "SUMMARY_SVG", summary_svg)
+    monkeypatch.setattr(known_best_builder, "SUMMARY_PNG", tmp_path / "summary.png")
+    monkeypatch.setattr(
+        known_best_builder,
+        "expected_outputs",
+        lambda: ({summary_svg: "<svg/>\n"}, {}),
+    )
+    monkeypatch.setattr(known_best_builder.shutil, "which", lambda _name: "/usr/bin/false")
+
+    with pytest.raises(RuntimeError, match="PNG preview renderer exited 1"):
+        known_best_builder.update()

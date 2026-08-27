@@ -6,13 +6,20 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import shutil
+import struct
+import subprocess
+import sys
 import time
 import urllib.error
 import urllib.request
+import zlib
 from dataclasses import dataclass
+from decimal import Decimal
 from fractions import Fraction
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from xml.etree import ElementTree as ET
 
 import mpmath as mp
 import yaml
@@ -33,6 +40,7 @@ from sqpack.known_best import (
     unitsquare_witness,
 )
 from sqpack.render import render_packing_svg
+from sqpack.render.color import ANGLE_CLASS_CONTRACT, assign_square_colors
 from sqpack.render.model import (
     CheckKind,
     CheckSummary,
@@ -42,7 +50,19 @@ from sqpack.render.model import (
     RenderSpec,
     SquareGeometry,
 )
-from sqpack.render.numbers import scalar_from_decimal, scalar_from_fraction
+from sqpack.render.numbers import (
+    format_svg_number,
+    scalar_from_decimal,
+    scalar_from_fraction,
+)
+from sqpack.render.style import PAPER_THEME
+from sqpack.render.svg import (
+    append_metadata,
+    append_title_desc,
+    element,
+    serialize_svg,
+    sub,
+)
 from sqpack.witness import (
     check_witness_semantics,
     load_witness,
@@ -64,8 +84,35 @@ WITNESS_SCHEMA = ROOT / "witnesses/witness.schema.yaml"
 ATLAS_ROOT = ROOT / "atlas/known-best"
 RENDER_ROOT = ATLAS_ROOT / "rendering"
 MANIFEST = ATLAS_ROOT / "manifest.json"
+SUMMARY_SVG = ATLAS_ROOT / "known-best-1-100.svg"
+SUMMARY_PNG = ATLAS_ROOT / "known-best-1-100.png"
 GENERATOR = "python -m devtools.build_known_best_atlas"
 USER_AGENT = "thinking-scratchpad-known-best-atlas/1.0"
+
+SUMMARY_WIDTH = 2400
+SUMMARY_HEIGHT = 2540
+SUMMARY_FIRST_N = 1
+SUMMARY_LAST_N = 100
+SUMMARY_COLUMNS = 10
+SUMMARY_ROWS = 10
+SUMMARY_SQUARE_COUNT = sum(range(SUMMARY_FIRST_N, SUMMARY_LAST_N + 1))
+SUMMARY_GRID_LEFT = Decimal(60)
+SUMMARY_GRID_TOP = Decimal(145)
+SUMMARY_COLUMN_PITCH = Decimal(228)
+SUMMARY_ROW_PITCH = Decimal(235)
+SUMMARY_CARD_WIDTH = Decimal(216)
+SUMMARY_CARD_HEIGHT = Decimal(225)
+SUMMARY_PACKING_SIZE = Decimal(168)
+SUMMARY_PACKING_INSET_X = Decimal(24)
+SUMMARY_PACKING_INSET_Y = Decimal(12)
+SUMMARY_LABEL_BASELINE = Decimal(202)
+SUMMARY_BOUND_BASELINE = Decimal(218)
+SUMMARY_FONT = (
+    "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif"
+)
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+PNG_SOURCE_KEY = b"sqpack-source-svg-sha256"
+PNG_RENDER_TIMEOUT_SECONDS = 120
 
 
 @dataclass(frozen=True)
@@ -398,6 +445,361 @@ def _render(witness: dict) -> str:
     )
 
 
+def _summary_side_text(side: str) -> str:
+    value = Decimal(side)
+    text = format(value, ".7g")
+    if "." in text and "e" not in text.lower():
+        text = text.rstrip("0").rstrip(".")
+    return text
+
+
+def _summary_points(
+    square: SquareGeometry,
+    *,
+    container_side: Decimal,
+    x: Decimal,
+    y: Decimal,
+    scale: Decimal,
+) -> str:
+    return " ".join(
+        (
+            f"{format_svg_number(x + point.x.projected * scale)},"
+            f"{format_svg_number(y + (container_side - point.y.projected) * scale)}"
+        )
+        for point in square.corners
+    )
+
+
+def _append_summary_card(root: ET.Element, built: BuiltCase) -> None:
+    n = built.frontier.n
+    row, column = divmod(n - SUMMARY_FIRST_N, SUMMARY_COLUMNS)
+    card_x = SUMMARY_GRID_LEFT + SUMMARY_COLUMN_PITCH * column
+    card_y = SUMMARY_GRID_TOP + SUMMARY_ROW_PITCH * row
+    packing_x = card_x + SUMMARY_PACKING_INSET_X
+    packing_y = card_y + SUMMARY_PACKING_INSET_Y
+    frame = frame_from_witness(built.witness)
+    side = frame.container_side.projected
+    scale = SUMMARY_PACKING_SIZE / side
+    colors = assign_square_colors(frame, RenderSpec(overlays=frozenset()))
+
+    card = sub(
+        root,
+        "g",
+        {
+            "data-feature": "packing-card",
+            "data-n": str(n),
+            "data-row": str(row),
+            "data-column": str(column),
+            "data-source-id": frame.source_id,
+        },
+    )
+    sub(
+        card,
+        "rect",
+        {
+            "x": format_svg_number(card_x),
+            "y": format_svg_number(card_y),
+            "width": format_svg_number(SUMMARY_CARD_WIDTH),
+            "height": format_svg_number(SUMMARY_CARD_HEIGHT),
+            "rx": "10",
+            "fill": PAPER_THEME.panel,
+        },
+    )
+    sub(
+        card,
+        "rect",
+        {
+            "data-feature": "container-outline",
+            "x": format_svg_number(packing_x),
+            "y": format_svg_number(packing_y),
+            "width": format_svg_number(SUMMARY_PACKING_SIZE),
+            "height": format_svg_number(SUMMARY_PACKING_SIZE),
+            "fill": PAPER_THEME.background,
+            "stroke": PAPER_THEME.container,
+            "stroke-width": "1.15",
+            "vector-effect": "non-scaling-stroke",
+        },
+    )
+    for square in frame.squares:
+        color = colors[square.square_id]
+        polygon = sub(
+            card,
+            "polygon",
+            {
+                "data-feature": "square-fill",
+                "data-square": f"n-{n:03d}-{square.square_id}",
+                "data-hue-index": str(color.hue_index),
+                "data-shade-index": str(color.shade_index),
+                "data-contact-sides": str(color.contact_sides),
+                "data-orientation-radians": str(color.orientation_radians),
+                "points": _summary_points(
+                    square,
+                    container_side=side,
+                    x=packing_x,
+                    y=packing_y,
+                    scale=scale,
+                ),
+                "fill": color.fill,
+                "stroke": PAPER_THEME.container,
+                "stroke-width": "0.42",
+                "stroke-linejoin": "round",
+                "vector-effect": "non-scaling-stroke",
+            },
+        )
+        if color.angle_class is not None:
+            polygon.set("data-angle-class", str(color.angle_class))
+
+    center = card_x + SUMMARY_CARD_WIDTH / 2
+    sub(
+        card,
+        "text",
+        {
+            "data-feature": "packing-label",
+            "x": format_svg_number(center),
+            "y": format_svg_number(card_y + SUMMARY_LABEL_BASELINE),
+            "text-anchor": "middle",
+            "font-family": SUMMARY_FONT,
+            "font-size": "17",
+            "font-weight": "650",
+            "fill": PAPER_THEME.ink,
+        },
+    ).text = f"n = {n}"
+    sub(
+        card,
+        "text",
+        {
+            "data-feature": "side-bound",
+            "x": format_svg_number(center),
+            "y": format_svg_number(card_y + SUMMARY_BOUND_BASELINE),
+            "text-anchor": "middle",
+            "font-family": SUMMARY_FONT,
+            "font-size": "11.5",
+            "fill": PAPER_THEME.muted,
+        },
+    ).text = f"s ≤ {_summary_side_text(built.frontier.side)}"
+
+
+def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
+    """Render a complete, zoomable 10 by 10 overview of ``n = 1..100``."""
+    numbers = [item.frontier.n for item in built]
+    if numbers != list(range(SUMMARY_FIRST_N, SUMMARY_LAST_N + 1)):
+        raise ValueError("known-best summary requires exactly n=1..100 in order")
+    root = element(
+        "svg",
+        {
+            "width": str(SUMMARY_WIDTH),
+            "height": str(SUMMARY_HEIGHT),
+            "viewBox": f"0 0 {SUMMARY_WIDTH} {SUMMARY_HEIGHT}",
+            "role": "img",
+            "aria-labelledby": "figure-title figure-description",
+        },
+    )
+    append_title_desc(
+        root,
+        "Known-best packings of one through one hundred unit squares",
+        (
+            "A ten-by-ten atlas of the retained known-best unit-square packings for "
+            "n equals 1 through 100. Each tile is normalized to its own container and "
+            "labeled with n and the retained upper bound on the container side."
+        ),
+    )
+    append_metadata(
+        root,
+        {
+            "angle-class-contract": ANGLE_CLASS_CONTRACT,
+            "color-hue-scheme": "angle",
+            "color-shade-scheme": "contacts",
+            "columns": str(SUMMARY_COLUMNS),
+            "first-n": str(SUMMARY_FIRST_N),
+            "generated-by": GENERATOR,
+            "last-n": str(SUMMARY_LAST_N),
+            "rows": str(SUMMARY_ROWS),
+            "square-count": str(SUMMARY_SQUARE_COUNT),
+        },
+    )
+    sub(
+        root,
+        "rect",
+        {
+            "width": str(SUMMARY_WIDTH),
+            "height": str(SUMMARY_HEIGHT),
+            "fill": PAPER_THEME.background,
+        },
+    )
+    sub(
+        root,
+        "text",
+        {
+            "x": "60",
+            "y": "67",
+            "font-family": SUMMARY_FONT,
+            "font-size": "40",
+            "font-weight": "700",
+            "letter-spacing": "-0.6",
+            "fill": PAPER_THEME.ink,
+        },
+    ).text = "100 known-best square packings"
+    sub(
+        root,
+        "text",
+        {
+            "x": "60",
+            "y": "104",
+            "font-family": SUMMARY_FONT,
+            "font-size": "18",
+            "fill": PAPER_THEME.muted,
+        },
+    ).text = "n = 1-100  ·  each packing normalized to its own container"
+    for item in built:
+        _append_summary_card(root, item)
+    return serialize_svg(root)
+
+
+def _png_chunks(content: bytes) -> list[tuple[bytes, bytes]]:
+    if not content.startswith(PNG_SIGNATURE):
+        raise ValueError("known-best composite preview is not a PNG")
+    chunks: list[tuple[bytes, bytes]] = []
+    offset = len(PNG_SIGNATURE)
+    while offset < len(content):
+        if offset + 12 > len(content):
+            raise ValueError("known-best composite PNG has a truncated chunk")
+        length = int.from_bytes(content[offset : offset + 4], "big")
+        chunk_type = content[offset + 4 : offset + 8]
+        end = offset + 12 + length
+        if end > len(content):
+            raise ValueError("known-best composite PNG has a truncated payload")
+        payload = content[offset + 8 : offset + 8 + length]
+        expected_crc = int.from_bytes(content[offset + 8 + length : end], "big")
+        actual_crc = zlib.crc32(chunk_type + payload) & 0xFFFFFFFF
+        if actual_crc != expected_crc:
+            raise ValueError("known-best composite PNG has a corrupt chunk")
+        chunks.append((chunk_type, payload))
+        offset = end
+        if chunk_type == b"IEND":
+            break
+    if not chunks or chunks[-1][0] != b"IEND" or offset != len(content):
+        raise ValueError("known-best composite PNG has an invalid ending")
+    return chunks
+
+
+def _png_chunk(chunk_type: bytes, payload: bytes) -> bytes:
+    return (
+        struct.pack(">I", len(payload))
+        + chunk_type
+        + payload
+        + struct.pack(">I", zlib.crc32(chunk_type + payload) & 0xFFFFFFFF)
+    )
+
+
+def _png_with_summary_source(content: bytes, svg_sha256: str) -> bytes:
+    chunks = [
+        (chunk_type, payload)
+        for chunk_type, payload in _png_chunks(content)
+        if not (chunk_type == b"tEXt" and payload.partition(b"\0")[0] == PNG_SOURCE_KEY)
+    ]
+    tagged: list[tuple[bytes, bytes]] = []
+    for chunk_type, payload in chunks:
+        tagged.append((chunk_type, payload))
+        if chunk_type == b"IHDR":
+            tagged.append((b"tEXt", PNG_SOURCE_KEY + b"\0" + svg_sha256.encode("ascii")))
+    return PNG_SIGNATURE + b"".join(
+        _png_chunk(chunk_type, payload) for chunk_type, payload in tagged
+    )
+
+
+def png_summary_receipt(content: bytes) -> tuple[int, int, str | None]:
+    chunks = _png_chunks(content)
+    ihdr = next((payload for chunk_type, payload in chunks if chunk_type == b"IHDR"), None)
+    if ihdr is None or len(ihdr) != 13:
+        raise ValueError("known-best composite PNG has no valid IHDR")
+    width, height = struct.unpack(">II", ihdr[:8])
+    source_sha256 = next(
+        (
+            payload.partition(b"\0")[2].decode("ascii")
+            for chunk_type, payload in chunks
+            if chunk_type == b"tEXt" and payload.partition(b"\0")[0] == PNG_SOURCE_KEY
+        ),
+        None,
+    )
+    return width, height, source_sha256
+
+
+def _png_matches_summary(path: Path, svg_text: str) -> bool:
+    if not path.is_file():
+        return False
+    try:
+        width, height, source_sha256 = png_summary_receipt(path.read_bytes())
+    except UnicodeDecodeError, ValueError:
+        return False
+    expected_sha256 = hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
+    return (width, height, source_sha256) == (
+        SUMMARY_WIDTH,
+        SUMMARY_HEIGHT,
+        expected_sha256,
+    )
+
+
+def _update_png_preview(svg_text: str) -> None:
+    if _png_matches_summary(SUMMARY_PNG, svg_text):
+        return
+    sips = shutil.which("sips") if sys.platform == "darwin" else None
+    renderer = sips or shutil.which("magick")
+    if renderer is None:
+        raise RuntimeError("PNG preview generation requires sips or ImageMagick")
+    with TemporaryDirectory() as directory:
+        temporary_png = Path(directory) / SUMMARY_PNG.name
+        if Path(renderer).name == "sips":
+            command = [
+                renderer,
+                "-s",
+                "format",
+                "png",
+                str(SUMMARY_SVG),
+                "--out",
+                str(temporary_png),
+            ]
+        else:
+            command = [
+                renderer,
+                str(SUMMARY_SVG),
+                "-background",
+                "white",
+                "-alpha",
+                "remove",
+                "-alpha",
+                "off",
+                f"PNG24:{temporary_png}",
+            ]
+        try:
+            subprocess.run(
+                command,
+                check=True,
+                capture_output=True,
+                text=True,
+                timeout=PNG_RENDER_TIMEOUT_SECONDS,
+            )
+        except subprocess.TimeoutExpired as error:
+            raise RuntimeError(
+                f"PNG preview renderer timed out after {PNG_RENDER_TIMEOUT_SECONDS} seconds"
+            ) from error
+        except subprocess.CalledProcessError as error:
+            detail = (error.stderr or error.stdout or "no diagnostic output").strip()
+            raise RuntimeError(
+                f"PNG preview renderer exited {error.returncode}: {detail[-2000:]}"
+            ) from error
+        content = _png_with_summary_source(
+            temporary_png.read_bytes(), hashlib.sha256(svg_text.encode("utf-8")).hexdigest()
+        )
+        width, height, _source_sha256 = png_summary_receipt(content)
+        if (width, height) != (SUMMARY_WIDTH, SUMMARY_HEIGHT):
+            raise ValueError(
+                f"PNG preview dimensions are {width}x{height}; expected "
+                f"{SUMMARY_WIDTH}x{SUMMARY_HEIGHT}"
+            )
+        with atomic_output_file(SUMMARY_PNG, make_parents=True) as temporary:
+            temporary.write_bytes(content)
+
+
 def _build_case(n: int, plan: SourcePlan) -> BuiltCase:
     case = _frontier_case(n)
     witness = _build_witness(case, plan)
@@ -495,6 +897,7 @@ def expected_outputs() -> tuple[dict[Path, str], dict]:
         outputs[item.frontier.path] = _frontier_with_witness(
             item.frontier, str(item.witness["id"])
         )
+    outputs[SUMMARY_SVG] = render_known_best_summary_svg(built)
     manifest = {
         "softschema": {
             "contract": "packing.squares:KnownBestAtlas/v1",
@@ -514,6 +917,22 @@ def expected_outputs() -> tuple[dict[Path, str], dict]:
                 "rendering_layer": "repository deterministic house renderer",
                 "annotation_layer": "derived and excluded from grammar validation until frozen",
             },
+            "composite": {
+                "layout": "10 by 10, row-major n=1..100",
+                "png_preview": {
+                    "derived_from": "atlas/known-best/known-best-1-100.svg",
+                    "height": SUMMARY_HEIGHT,
+                    "path": "atlas/known-best/known-best-1-100.png",
+                    "width": SUMMARY_WIDTH,
+                },
+                "renderer": "sqpack deterministic composite renderer",
+                "square_count": SUMMARY_SQUARE_COUNT,
+                "svg": {
+                    "height": SUMMARY_HEIGHT,
+                    "path": "atlas/known-best/known-best-1-100.svg",
+                    "width": SUMMARY_WIDTH,
+                },
+            },
             "entries": [_manifest_entry(item) for item in built],
         },
     }
@@ -529,7 +948,11 @@ def update() -> None:
             continue
         with atomic_output_file(path) as temporary:
             temporary.write_text(content, encoding="utf-8")
-    print("known-best atlas updated: 100 witnesses, 100 house renderings, 100 frontier links")
+    _update_png_preview(outputs[SUMMARY_SVG])
+    print(
+        "known-best atlas updated: 100 witnesses, 100 house renderings, "
+        "1 composite, 100 frontier links"
+    )
 
 
 def check() -> None:
@@ -554,12 +977,19 @@ def check() -> None:
         )
     if KINGBIRD_RAW_ROOT.exists():
         problems.append("raw Kingbird source directory must not be retained")
+    if not _png_matches_summary(SUMMARY_PNG, outputs[SUMMARY_SVG]):
+        problems.append(
+            "missing or stale atlas/known-best/known-best-1-100.png preview receipt"
+        )
     entries = manifest["atlas"]["entries"]
     if [entry["n"] for entry in entries] != list(range(1, 101)):
         problems.append("manifest entries are not exactly n=1..100")
     if problems:
         raise ValueError("known-best atlas drift:\n  " + "\n  ".join(problems[:20]))
-    print("known-best atlas check passed: 100 sources/plans, witnesses, renders, and links")
+    print(
+        "known-best atlas check passed: 100 sources/plans, witnesses, renders, "
+        "1 composite, and links"
+    )
 
 
 def smoke_in_temporary_directory() -> None:

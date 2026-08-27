@@ -3,7 +3,7 @@
   <title id="figure-title">Non-grid known-best contact-assembly evidence profile</title>
   <desc id="figure-description">Thirty-six calibration cases from n equals 1 through 100. Bars show the share of squares in detected same-angle positive-edge contact components. This is a descriptive numerical census, not a rigidity, optimality, or hypothesis verdict.</desc>
   <metadata>
-    <sqpack:profile version="5">
+    <sqpack:profile version="7">
       <sqpack:coordinates>document-table-layout; svg-y-down; no-packing-coordinates</sqpack:coordinates>
       <sqpack:value name="artifact-kind">known-best-non-grid-contact-evidence-profile</sqpack:value>
       <sqpack:value name="case-count">36</sqpack:value>
