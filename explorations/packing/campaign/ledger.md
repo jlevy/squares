@@ -115,6 +115,19 @@ Status: **active**. Use one mutable ten-hour agenda, with a full five-hour midpo
 | BC-033 | tool_validation | 5, 10, 11 | blocked | 2 | think-5vsz | an interface decision linked to think-u97a and the equal-budget comparison harness |
 | BC-034 | research | 11, 100 | complete | 2 | think-ykt7 | Audit Bui Section 4.2's Lemma 6 recurrence only after its specialization, induction range, and strict bounds are frozen. The completed Section 3.1 index proof and Lemmas 3-5 packet discharge only exact count and three local inequalities; geometry, boundary overhead, effective constants, finite transfer, Proposition 7, and the exponent remain open. |
 
+### [agenda-004](agendas/agenda-004-guard-repair-and-instrument-unblock.md) — Repair the guards, unblock the instrument, then resume research
+
+Status: **active**. Close every outstanding item session 029 left, each in its own declared workflow rather than folded into whichever slice happens to be running. Guard repairs land as one pipeline slice, the frozen research instrument is completed before it is used, and no optimization touches a path an experiment has frozen.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-035 | tool_validation | 5, 11, 29 | ready | 1 | think-cja6 | Build the declared-command guard under think-ldy8, fix the terminal-round contract under think-306i, decide whether to pin lefthook the way flowmark is pinned, and decide whether `controls.yaml` anchors that embed generated values should be derived rather than literal. The last item is the actual class defect: a literal anchor on a number the checker itself moves is what silently disabled one of 76 controls. |
+| BC-036 | tool_validation | 5 | ready | 0 | think-oyn9 | `minus_w_obstruction` raises on any set that is not its eight `CONTROL_KEYS`; four further mutations must be defined, named, and given frozen failure identifiers. Under no circumstances amend exp-045's declared twelve down to the implemented eight: the criterion was frozen before implementation, and matching it to the code afterwards is the post-hoc weakening the admission bar exists to prevent. |
+| BC-037 | research | 5 | blocked | 0 | think-1s0h | exp-045 with its frozen criterion, the declared controls and scale routes, retained raw evidence, an independent replay, and a scoped successor disposition. No whole-component identity or connectivity language is admitted. |
+| BC-038 | tool_validation | 5 | blocked | 1 | think-kdil | The trigger is already measured and passed: `active_row_jets` holds 93.0 percent of the `exhaustive_exact` group's cumulative time, the dominant arm is `evaluate_stress` to `owner_row_jets` at 57.6 percent, and the same function costs 0.025 seconds per call inside the shared-inventory test against 11.95 on that arm. What is owed is the exact-output equivalence result, not another profile. |
+| BC-039 | tool_validation | 29 | ready | 2 | think-uzmh | Six verified promotions at `rational_digits` 18 through 60 all beat the recorded 4.9339e-11 relaxation, tracking the ladder rung 10^-(d-5) exactly down to 4.933851e-55. The route has no minimum, so the choice is a policy decision traded against literal artifact size, and it must be argued rather than maximized. |
+| BC-040 | tool_validation | 5, 11, 29 | blocked | 1 | think-qibu | Re-run the full gate rather than `--fast` against the merged tree. If the round count or any generated aggregate moved in the merge, re-check `devtools/controls.yaml` anchors first: that is the exact rot that silently disabled the round-aggregate control. |
+
 ## Series
 
 | id | status | title | rounds | opened because |

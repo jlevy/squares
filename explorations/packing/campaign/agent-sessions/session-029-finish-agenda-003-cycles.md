@@ -276,10 +276,11 @@ session:
     so there is no admitted work left in this agenda that does not first require building
     a missing control.
   next_action: >-
-    Under BC-029 and think-1s0h, build exp-045's four missing pre-certificate mutations so
+    Under BC-036 and think-oyn9, build exp-045's four missing pre-certificate mutations so
     the enforced count matches the declared twelve, then re-run the admission check before
     any target generation. The declared criterion is not to be amended down to the
-    implemented eight.
+    implemented eight. This cell and the rest of the outstanding work are tracked in
+    agenda-004.
 ---
 # Session 029 — Finish the agenda-003 Research Cycles
 

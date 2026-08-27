@@ -302,11 +302,14 @@ terminal successor and closed the remaining agenda-003 cells on measurement.
 Q-BC032-a is answered: the `4.94e-11` relaxation is an artifact of the promotion route,
 not a property of the pose, and six independently verified promotions beat the recorded
 baseline. `BC-028`’s trigger passed, so its inventory-reuse implementation is ready but
-sequenced behind exp-045. The next bounded slice is `BC-029` under `think-1s0h`: exp-045
-is blocked at execution admission because it declares twelve typed pre-certificate
-mutations while the instrument implements and enforces eight, and that gap must be
-closed by building the four missing controls rather than by amending the declared count
-downward. `BC-027` is complete.
+sequenced behind exp-045. The outstanding work is now carried by
+[agenda-004](campaign/agendas/agenda-004-guard-repair-and-instrument-unblock.md), which
+gives each remaining item its own workflow entry.
+The next bounded slice is `BC-036` under `think-oyn9`: exp-045 is blocked at execution
+admission because it declares twelve typed pre-certificate mutations while the
+instrument implements and enforces eight, and that gap must be closed by building the
+four missing controls rather than by amending the declared count downward.
+`BC-027` is complete.
 The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and `think-1s0h` is retained
 as a typed instrument blocker: exp-045 is preregistered and its scale, owner-4, and
 execution-scoped row-inventory controls are built, but no pure `-W` target or result
