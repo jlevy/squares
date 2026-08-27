@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 340
+count: 342
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8751,3 +8751,56 @@ defects:
   recurrence_of: D-163
   bead: think-c90t
   recorded_in: src/sqpack/cli/validate.py
+- id: D-341
+  title: In-progress experiments were forced to invent scientific results
+  date: '2026-08-26'
+  layer: tooling
+  class: validity
+  direction: neutral
+  detected_by: review
+  latent_for: since Experiment/v2 required a nonempty results array
+  severity: high
+  status: fixed
+  what: >-
+    Experiment/v2 required at least one result even when the verdict was in-progress.
+    A preregistered round with no executed target or guard therefore had to record a
+    scientific determination that had not occurred, such as invalid or no_progress.
+  consequence: >-
+    The experiment record could not distinguish a frozen question from a measured
+    result. Downstream readers and generated views could treat placeholder outcomes as
+    evidence even though the round remained leased and no target data existed.
+  fix: >-
+    Permit an empty results array while a round is in-progress and enforce the converse
+    cross-field rule in the ledger: every terminal round must retain at least one real
+    result. Exp-045 now carries no result until execution.
+  regression: >-
+    test_terminal_round_requires_a_real_result exercises the whole-set ledger rule;
+    exp-045 schema and ledger validation exercise the honest empty in-progress form.
+  bead: think-whwc
+  recorded_in: campaign/schemas/experiment.schema.yaml
+- id: D-342
+  title: Offset leases were compared after discarding their UTC offset
+  date: '2026-08-26'
+  layer: tooling
+  class: robustness
+  direction: neutral
+  detected_by: review
+  latent_for: since offset-aware experiment leases were accepted
+  severity: high
+  status: fixed
+  what: >-
+    The ledger parsed an offset-aware lease and removed its tzinfo without converting
+    the instant to UTC before comparing it with a naive UTC clock. A live west-of-UTC
+    lease could therefore appear expired by the size of its offset.
+  consequence: >-
+    A valid active round could fail the campaign gate or be treated as reclaimable
+    several hours before its declared deadline, risking duplicate work and conflicting
+    retained records.
+  fix: >-
+    Convert aware lease timestamps to UTC before dropping tzinfo for the existing naive
+    UTC comparison. Continue to interpret legacy naive lease timestamps as UTC.
+  regression: >-
+    test_live_offset_lease_is_compared_as_the_same_utc_instant keeps a 03:00-07:00 lease
+    live at 09:00 UTC and would fail under the previous tzinfo-removal behavior.
+  bead: think-whwc
+  recorded_in: src/sqpack/campaign/ledger.py

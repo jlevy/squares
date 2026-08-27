@@ -192,7 +192,6 @@ properties:
           dependency - a prerequisite turned out to be missing mid-round.
   results:
     type: array
-    minItems: 1
     items:
       anyOf:
         - $ref: "#/$defs/paired"

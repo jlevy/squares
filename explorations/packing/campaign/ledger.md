@@ -39,7 +39,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-023](agent-sessions/session-023-pr45-merge-readiness.md) | completed | contemporaneous | `factual-review` (correctness) | `process-review` (correctness) | 8 | think-eyix | Under BC-019 and think-eyix, publish this draft checkpoint, open a fresh time-sliced continuation while free space remains at least 4 GiB, run strict validation with the measured timeout, watch both GitHub jobs, and disposition every review bead only after those receipts are green. |
 | [session-024](agent-sessions/session-024-pr45-strict-and-ci.md) | stopped | contemporaneous | `process-review` (correctness) | `process-review` (correctness) | 2 | think-eyix | Under BC-019 and think-eyix, review PR 41 for correctness, merge safety, and measured validation-loop speedup. If it lands on main, merge that exact main commit into this branch, rerun the focused gates and one complete strict receipt, then require both final-head GitHub jobs before closing review beads. |
 | [session-025](agent-sessions/session-025-pr45-performance-continuation.md) | completed | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 4 | think-eyix | Under BC-027 and think-whwc, reconcile the merged-main validation failure, the terminal session record, and generated views; then restore a first-failure-safe green pipeline before the next research session. |
-| [session-026](agent-sessions/session-026-balanced-research-session-a.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `insight-iteration` (insight) | 5 | think-whwc | Under BC-029, think-whwc, and think-1s0h, finish shaping and independently reviewing the exp-045 criterion before preregistration, implementation, or target measurement. |
+| [session-026](agent-sessions/session-026-balanced-research-session-a.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 7 | think-whwc | Under BC-029, think-whwc, and think-1s0h, build and independently review only the exp-045 scale proof-data boundary; do not run the pure -W target. |
 
 ### Workflow summary
 
@@ -52,8 +52,8 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `insight-iteration` | 0 | 1 | 6 | 2 |
 | `process-review` | 4 | 4 | 31 | 6 |
 | `efficiency-loop` | 6 | 0 | 11 | 0 |
-| `research-loop` | 1 | 4 | 9 | 7 |
-| `pipeline-improvement` | 5 | 0 | 27 | 0 |
+| `research-loop` | 1 | 4 | 10 | 7 |
+| `pipeline-improvement` | 5 | 0 | 28 | 0 |
 
 ## Experiment agendas
 
@@ -116,7 +116,7 @@ Status: **active**. Use one mutable ten-hour agenda, with a full five-hour midpo
 
 | id | status | title | rounds | opened because |
 | --- | --- | --- | --- | --- |
-| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 44 | First series. There is no prior instrument, so not |
+| series-000 | open | S0: smoke and calibration — prove the machinery, establish every baseline metric | 45 | First series. There is no prior instrument, so not |
 
 ## Registry
 
@@ -144,7 +144,7 @@ Status: **active**. Use one mutable ten-hour agenda, with a full five-hour midpo
 | H-020 | refuted | search | The stock annealer reaches within 1e-4 of the standing best at n = 17, | n: 17* | 1 | 6.6m wall |
 | H-021 | blocked | search | After a fixed stationarity, isolation, continuation, and ambiguity pol | n: 3* 4* 5* 6* 7* 8* | 14 | 106m agent + 4.0m wall |
 | H-022 | open question | proof | What explicit isolation radius and side-perturbation stability can be  |  | 0 |  |
-| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 11 | 243m agent + 2.5m wall |
+| H-023 | open question | search | Are the two observed n = 5 endpoint candidates at side 2.767766953 con |  | 12 | 243m agent + 2.5m wall |
 | H-024 | unresolved | search | Every formally supported standing-record packing at n <= 30 uses at mo | n: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29* 30 | 1 | 12m agent + 0s wall |
 | H-025 | blocked | search | For at least 80 percent of standing-record poses at n <= 100 with publ |  | 0 |  |
 | H-026 | confirmed | proof | In open real orientation charts, Trump’s exact n = 11 pose has no nonz |  | 1 | 100m agent + 57s wall |
@@ -242,6 +242,12 @@ Status: **active**. Use one mutable ten-hour agenda, with a full five-hour midpo
 | exp-031 | series-000 | 10 | openai-codex | H-002 | All four source perturbations satisfy every declared condition and return to the proved side within floating-point precision. This confirms the narrow known-answer control without reopening H-002's refuted universal claim. |
 | exp-032 | series-000 | 3 | openai-codex | H-021 | The exact connected and isolated controls pass, every declared conflation fails, and all unsupported floating-point observations remain unresolved. |
 
+### in-progress (1)
+
+| id | series | instance | operator | hypotheses | reason |
+| --- | --- | --- | --- | --- | --- |
+| exp-045 | series-000 | 5 | openai-codex | H-023 | The criterion is frozen before scale implementation or target work. The accepted row, stress, and sheet helpers exist, but scale routing, the replacement driver, twelve production mutation paths, thirteen refusal records, and post-change review remain incomplete. |
+
 ## Resumable — stopped on the clock, not on an answer
 
 | id | hypotheses | spent | stopped by | resume from | reopen when |
@@ -252,7 +258,7 @@ Status: **active**. Use one mutable ten-hour agenda, with a full five-hour midpo
 
 ## Effort
 
-44 rounds, 1061 agent-minutes, 30.7 wall-minutes.
+45 rounds, 1061 agent-minutes, 30.7 wall-minutes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

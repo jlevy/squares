@@ -191,7 +191,7 @@ session:
       Re-screen exp-044 and shape exp-045's precise mechanism, falsifier, information
       value, and smallest admissible frozen criterion before any target implementation
       or measurement.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       BC-027 is green and the W5 repayment trigger failed, making the dependency-ready
@@ -211,13 +211,104 @@ session:
     fallback: >-
       Record the first missing instrument contract and return the line to W7 without a
       scientific round or verdict.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      Shaped exp-045 as an exact determination over the six frozen owner models and
+      fifteen owner-3 scale records, with explicit met, missed, validly undecided, and
+      invalid routes. Corrected the proposed scope so implementation key equality does
+      not claim mathematical branch completeness.
+    evidence:
+    - Three independent audits agree that the criterion is coherent for preregistration but the target instrument is not ready.
+    - A validly undecided result maps to determination `no_progress` and verdict `unresolved`; an instrument failure maps to `invalid` and carries no scientific disposition.
+    - The smallest post-registration slice is W7 scale-only proof data exercised first on the exp-036 positive control, not pure -W target measurement.
+    stop_reason: The mechanism, falsifier, finite outcome map, and W7 handoff are explicit, so W3 closed in under six minutes.
     next_action: >-
       Integrate the independent exp-045 readiness audit, inspect the terminal exp-044
       handoff and retained controls, and either shape one W6 preregistration or name the
       exact W7 blocker.
+  - workflow: research-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Preregister exp-045 with the independently accepted criterion, exact scale keys,
+      controls, refusal records, outcome mapping, budget, stop conditions, and W7
+      handoff before changing the instrument or running the target.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The W3 design and independent W2 review agree after narrowing the conclusion from
+      every mathematical branch to the six frozen owner models and their justified
+      scale inventory.
+    budget_minutes: 30
+    started_at: '2026-08-26T22:45:20-07:00'
+    deadline_at: '2026-08-26T23:15:20-07:00'
+    expected_output: >-
+      A schema-valid in-progress exp-045 artifact whose frozen prose and machine fields
+      permit the scale-only W7 slice but forbid target execution until the full
+      instrument and post-change review are green.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen softschema validate
+      campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md
+      && uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop on any sampled beta, copied cusp constant, claim of nonlinear branch
+      completeness, missing scale or refusal key, coupled sign-symmetry verdict,
+      executed target command or result data, or ambiguous invalid-versus-unresolved
+      route.
+    fallback: >-
+      Keep exp-045 unregistered, record the first rejected clause under think-1s0h, and
+      return to W3 or W7 without implementation or target data.
+    outcome: >-
+      Preregistered the six-case and fifteen-scale-route criterion with twelve typed
+      production mutations, thirteen claim refusals, distinct scientific outcomes,
+      and no target data. Independent review also removed two false preregistration
+      states by permitting empty in-progress results and correcting offset-aware lease
+      comparison.
+    evidence:
+    - Exp-045, H-023, BC-029, the generated ledger, and the synopsis agree while H-023 remains an open question with instrument_ready false.
+    - The experiment retains no result before execution; every terminal experiment must retain at least one result.
+    - All 28 campaign-contract tests pass, including the live -07:00 lease and terminal-result regressions.
+    stop_reason: The frozen contract, independent review, schema, ledger, synopsis, and focused pipeline regressions pass, so preregistration closed before its deadline.
+    next_action: >-
+      Write and independently replay the exp-045 contract, then hand the accepted
+      scale-only proof-data slice to W7 without running pure -W.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: correctness
+    objective: >-
+      Build the smallest admitted exp-045 instrument slice: exact owner-3 scale proof
+      data and five-route exhaustion, exercised first on the exp-036 positive control
+      without editing the target driver or creating pure -W data.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Exp-045 is preregistered and independently accepted, but its target is blocked on
+      an exact scale helper and certificate.scale_exhaustion guard.
+    budget_minutes: 30
+    started_at: '2026-08-26T23:02:07-07:00'
+    deadline_at: '2026-08-26T23:32:07-07:00'
+    expected_output: >-
+      `minus_w_scale.py` and focused tests retain the three-by-five route inventory,
+      formal bounded coefficients, source-derived unbounded identities, and a real
+      missing-handler failure before any target disposition exists.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_minus_w_scale.py && uv run --directory explorations/packing --frozen
+      ruff check cases/n5/minus_w_scale.py tests/test_minus_w_scale.py
+    kill_condition: >-
+      Stop on sampled beta, copied cusp constants, fewer or more than five scale keys
+      per stratum, use of the exp-043 hand-formula driver, any pure -W target result,
+      or the 30-minute boundary.
+    fallback: >-
+      Retain the first typed scale blocker and return BC-029 to W7 without changing the
+      target driver or experiment results.
+    outcome: null
+    evidence: []
+    stop_reason: null
+    next_action: >-
+      Implement and test the scale proof-data boundary only, then obtain an independent
+      post-change audit before opening the next instrument slice.
   primary_bead: think-whwc
   status: in_progress
   budget:
@@ -309,6 +400,101 @@ session:
     - git push
     - tbd
     - gh
+  - task: Reconcile stale and overlapping research owners from the startup queue.
+    operator: ownership_reconcile
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Identified one completed H-010 owner, three directional duplicates, and one broad
+      quench bead whose discharged NumberField clause should be removed while its live
+      fixed-angle and stationarity work remains open.
+    evidence:
+    - Exp-016 terminally rejects H-010's printed-set conjunction, while H-041 remains a source-distinct repair.
+    - Durable specs assign the certificate, promotion, and fractional-transversal pairs to think-0md2, think-75ll, and think-28sq respectively.
+    - D-053 and think-rsxe discharge NumberField preconditions; D-052 and coupled-direction semantics remain open.
+    files: []
+    checks:
+    - Read-only comparison of the five bead pairs against their retained experiments, hypotheses, specs, synopsis, code, and tests.
+    uncertainty: The n=17 promotion control must permit a typed failure rather than promise exact recovery from its numerical witness.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Coordinator will apply the directional duplicate closures and narrow think-zcx4 without merging distinct scientific work.
+    phase: 3
+  - task: Audit exp-045 preregistration and instrument readiness.
+    operator: exp045_readiness
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted BC-029 for preregistration and a scale-only W7 slice, while rejecting
+      target measurement until the full driver, controls, refusals, and post-change
+      review exist.
+    evidence:
+    - The accepted row, stress, and sheet helpers exist; the scale helper, target driver replacement, twelve-control driver, and thirteen refusal records do not.
+    - The exact five-key owner-3 inventory yields fifteen records across A, interior, and B.
+    files: []
+    checks:
+    - Read-only comparison of H-023, exp-043, exp-044, session 016, schema, source helpers, and focused tests.
+    uncertainty: H-023 remains an open question with an unready bidirectional-continuation instrument after any local exp-045 result.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Preregister exp-045, then build only scale proof data on the positive control before target work.
+    phase: 5
+  - task: Audit the exp-045 implementation boundary and production mutation seams.
+    operator: exp045_instrument_audit
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Classified exp-045 as W7 instrumentation before W6 target work and mapped the
+      scale helper plus every remaining driver, mutation, refusal, and replay seam.
+    evidence:
+    - The existing 601-line obstruction driver is the inadmissible exp-043 hand-formula path and cannot be incrementally blessed.
+    - The smallest retained implementation is `minus_w_scale.py` plus focused tests, run first on the exp-036 positive control.
+    files: []
+    checks:
+    - Read-only file-level audit of the row-jet, stress, sheet, obstruction, and test surfaces.
+    uncertainty: W6 becomes admissible only after scale and guard instrumentation passes focused controls and independent post-change review.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Keep the target driver and result JSON closed during the scale-only W7 slice.
+    phase: 5
+  - task: Independently review the exp-045 determination criterion and claim boundary.
+    operator: exp045_independent_criterion
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted the criterion after narrowing its conclusion to both frozen owner models
+      and their justified scale inventory rather than claiming mathematical branch
+      completeness.
+    evidence:
+    - Exact key equality establishes implementation coverage, not completeness of the true nonlinear branches.
+    - Met, missed, no-progress unresolved, invalid, and dependency-blocked outcomes remain distinct.
+    files: []
+    checks:
+    - Independent read-only criterion review against H-023, exp-042 through exp-044, session 016, the runbook, and the experiment schema.
+    uncertainty: Even criterion_met remains local to canonical pure -W at the three registered poses under the justified inventory.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Freeze the corrected wording and all twelve mutations and thirteen refusals in exp-045 before implementation.
+    phase: 5
+  - task: Independently audit the written exp-045 record and its pipeline semantics.
+    operator: exp045_record_review
+    status: completed
+    recording: contemporaneous
+    outcome: >-
+      Accepted the scientific scope after requiring honest empty in-progress results,
+      UTC-normalized lease comparison, and explicit owner-4 correction cancellation.
+    evidence:
+    - The first draft falsely recorded invalid and no-progress determinations before any target or guard executed.
+    - A live -07:00 lease reproduced a seven-hour early-expiry defect in the ledger.
+    - The six-case criterion, five-route scale inventory, controls, refusals, and H-023 claim boundary otherwise align.
+    files: []
+    checks:
+    - Read-only review of exp-045, H-023, exp-044, BC-029, session 026, the schema, ledger, and generated synopsis.
+    uncertainty: The target remains blocked until every remaining production guard and post-change review passes.
+    elapsed_seconds: null
+    elapsed_quality: unavailable
+    next_action: Run the scale-only W7 slice and keep results empty.
+    phase: 6
   outputs:
   - campaign/agent-sessions/session-026-balanced-research-session-a.md
   checks:
@@ -316,8 +502,8 @@ session:
   - Session 025 is terminal and the generated ledger records it as completed.
   stop_reason: null
   next_action: >-
-    Under BC-029, think-whwc, and think-1s0h, finish shaping and independently reviewing
-    the exp-045 criterion before preregistration, implementation, or target measurement.
+    Under BC-029, think-whwc, and think-1s0h, build and independently review only the
+    exp-045 scale proof-data boundary; do not run the pure -W target.
 ---
 # Session 026 — Balanced Research Program, Session A
 

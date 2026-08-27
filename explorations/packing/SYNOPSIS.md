@@ -294,8 +294,10 @@ terminal.
 active first five-hour source session in the two-session
 [balanced ten-hour agenda](campaign/agendas/agenda-003-balanced-ten-hour-research-program.md).
 `BC-027` is complete, and its current line is the `n = 5` H-023 successor under
-`BC-029`, `think-whwc`, and `think-1s0h`. The constructive successor is CG-010 under
-`BC-030` and `think-6mcd`.
+`BC-029`, `think-whwc`, and `think-1s0h`. Exp-045 is preregistered, but its pure `-W`
+target remains blocked while the scale helper and remaining production controls are
+built and independently reviewed.
+The constructive successor is CG-010 under `BC-030` and `think-6mcd`.
 
 All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
 house renderings. The source-complete corpus is calibration evidence, not an unseen
@@ -385,10 +387,10 @@ target run or result JSON. The published checkpoints separate helper substrate
 `3629bf4`. Session 016’s terminal handoff owns the branch, read order, validation, exact
 fifteen-record scale inventory, mutation map, and successor artifact paths, so no
 controller memory is required.
-The sole next action is to preregister the named exp-045 successor under `BC-010` before
-implementation or target work.
-The `-W`, mixed-angle, whole-stationary-component, and unequal-side-clearance questions
-remain later slices; D-239 is a separate W7 line.
+The sole next action is the preregistered exp-045 scale-only W7 slice under `BC-029` and
+`think-1s0h`. It runs first on the exp-036 positive control and creates no pure `-W`
+target data. The `-W`, mixed-angle, whole-stationary-component, and
+unequal-side-clearance questions remain later slices; D-239 is a separate W7 line.
 Do not start basin-frequency work or reinterpret exp-035 through exp-040 as a
 connectivity proof.
 
@@ -1645,7 +1647,7 @@ round that names the hypothesis, control roles included.
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
 | [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 14 | 106m agent, 4.0m wall |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 11 | 243m agent, 2.5m wall |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 12 | 243m agent, 2.5m wall |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | unresolved | Formally supported record packings through `n=30` use at most three angle classes; the retained `n=29` SVG has no formal witness | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of reported record configurations are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
@@ -1785,7 +1787,7 @@ Transverse and mixed nonlinear realization remains open.
 
 ## Experiments Conducted
 
-There are 44 terminal rounds registered in `series-000`. They record 1061 agent-minutes
+There are 45 terminal rounds registered in `series-000`. They record 1061 agent-minutes
 and 30.7 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
@@ -1860,6 +1862,7 @@ archive beside it.
 | [exp-042](campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md) | 5 | target | H-023 | endpoint-aware exact rotating paths | 6 paths; 6 stresses; 20 controls pass | **accepted** |
 | [exp-043](campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md) | 5 | target | H-023 | exact pure -W second-order test | five instrument blockers; no retained result | **unresolved** |
 | [exp-044](campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md) | 5 | target | H-023 | exact pure -W row-jet test | reviewed row builder; no retained target | **unresolved** |
+| [exp-045](campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | preregistered; target blocked by incomplete instrument | **in-progress** |
 
 ### Cost and provenance
 
@@ -1909,10 +1912,11 @@ archive beside it.
 | exp-042 | one 30-minute correction, measurement, and review slice | 26.17 s | 28 m | criterion | `2980fdc` |
 | exp-043 | one 30-minute preregistration, implementation, and review slice | 3.071 s | 20 m | guard | — |
 | exp-044 | one 30-minute criterion, integration, and review slice | 100.41 s | 30 m | guard | `a5a4ef0` (row builder only) |
+| exp-045 | one 105-minute W3-W6-W7-W2-W3 ceiling | — | — | dependency | — |
 
-### What the 44 rounds jointly establish
+### What the 45 rounds jointly establish
 
-The 44 rounds use 1061 agent-minutes and 30.7 wall-minutes under the campaign’s retained
+The 45 rounds use 1061 agent-minutes and 30.7 wall-minutes under the campaign’s retained
 effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through
@@ -2060,15 +2064,15 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 340 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 342 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 79 | asserted something false about the mathematics |
-| validity | 83 | was correct, but the measurement did not bear on the question |
+| validity | 84 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 131 | recorded something its own evidence contradicts |
-| robustness | 38 | did not finish, or finished only by luck |
+| robustness | 39 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
@@ -2077,7 +2081,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 340, and no soundness defect
+**The automated gate has caught forty-five defects in 342, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.

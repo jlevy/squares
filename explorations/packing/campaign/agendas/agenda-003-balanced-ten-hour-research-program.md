@@ -113,6 +113,7 @@ agenda:
       raw evidence, an independent replay, and a scoped successor disposition
     artifacts:
     - campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md
+    - campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md
     note: >-
       This remains pathwise, cell-local evidence. It cannot establish a whole terminal
       component, basin identity, connectivity frequency, or an n=11 search claim.

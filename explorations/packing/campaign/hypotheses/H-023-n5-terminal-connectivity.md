@@ -66,6 +66,13 @@ hypothesis:
     Exp-043 stops before retained measurement because its draft evaluator does not
     derive rowwise second-order constants from full jets or check its exp-034
     acceleration witness. It leaves pure -W unresolved with a finite instrument list.
+    Exp-044 accepts the production row-jet, stress, and sheet substrate but also stops
+    unresolved without target data because exact scale routing and case-level controls
+    remain incomplete. Exp-045 is now preregistered around six frozen owner models and
+    fifteen owner-3 scale records. Its target remains blocked until the scale helper,
+    complete production controls, retained replay, and independent post-change review
+    pass. Even a met criterion would remain local to canonical pure -W at the three
+    registered poses and would not answer this whole connectivity question.
 ---
 # H-023 — resolve the first ambiguous census cell
 
@@ -139,9 +146,17 @@ weighted combinations, but deliberately makes no branch-completeness, scale-rout
 obstruction claim. A separately preregistered exp-044 must add those case-level
 obligations before pure `-W` can be measured again.
 
-Exp-044 now freezes that case-level integration: every production row must flow through
-the accepted jet helper, the sheet witness must be checked, and the bounded/unbounded
+Exp-044 freezes that case-level integration: every production row must flow through the
+accepted jet helper, the sheet witness must be checked, and the bounded/unbounded
 owner-3 scale cases must be executable before a retained pure `-W` disposition exists.
+It stops unresolved after accepting the row, stress, and sheet substrate without a
+target run.
+
+Exp-045 now preregisters the successor criterion, exact five-route scale partition per
+stratum, twelve production mutations, thirteen refusal records, and the distinct met,
+missed, validly undecided, and invalid outcomes.
+The first admitted implementation is a scale-only W7 slice exercised on the exp-036
+positive control; pure `-W` measurement is still blocked.
 
 This is the focused control for H-021 and the practical precursor to H-011.
 
