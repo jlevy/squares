@@ -181,19 +181,22 @@ D-239 is resolved.
 On pull requests,
 [`packing-validation.yml`](../../.github/workflows/packing-validation.yml) runs
 `packing-validate --fast` on Linux and reports the stable `packing-required` aggregate.
-The fast behavioral step excludes only the four modules declared with the
-`exhaustive_exact` marker; the workflow contract checks that exact module set.
-The measured local PR command runs 101 tests, deselects 30 exhaustive exact tests, and
-finishes in 27.38–33.85 seconds.
+The fast behavioral step excludes only 21 measured slow nodes declared on nine test
+functions with the `exhaustive_exact` marker; the workflow contract checks that exact
+function set and rejects module-level marking.
+The current combined tree collects 139 tests: the PR command runs 118 and deselects 21
+exhaustive exact cases.
 The first hosted pull-request run finished end to end in 46 seconds, including a
 37-second Linux job and two-second aggregate.
 
 Pushes to `main`, manual dispatches, and the weekly schedule run the complete locked
 command on Linux and macOS. The macOS integration job also runs the focused deep-golden
-step directly. The default validator runs the 101-test core and 30-test exhaustive exact
-branches as separate direct steps and runs all negative controls with their dedicated
-two-worker setting. D-203’s temporary expected-failure classifier was removed after the
-repaired producer passed on both architectures; the workflow test rejects its return.
+step directly. The default validator runs the 118-test core and 21-test exhaustive exact
+branches as separate direct steps.
+Negative controls use at most two workers while honoring the `--inner-jobs` cap;
+integration CI opts into two inner workers explicitly.
+D-203’s temporary expected-failure classifier was removed after the repaired producer
+passed on both architectures; the workflow test rejects its return.
 Never accept a rebuilt golden to make the probe green, and do not add a second CI-only
 implementation of either check.
 

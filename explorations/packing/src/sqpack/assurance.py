@@ -98,6 +98,7 @@ def check_evidence_semantics(evidence: Mapping[str, object]) -> list[str]:
             errors.append(
                 prefix + "formal evidence must not use precision or tolerance as assurance"
             )
+
     elif assurance == "reported":
         if method is not None:
             errors.append(prefix + "reported evidence uses reported_method, not method")
@@ -108,6 +109,15 @@ def check_evidence_semantics(evidence: Mapping[str, object]) -> list[str]:
 
     if assurance == "verified" and method not in FORMAL_METHODS:
         errors.append(prefix + "verified requires a formal method")
+
+    # Each novelty value carries its own documentary burden, so the two that can be
+    # checked are checked here: attributing a result needs the source named, and
+    # claiming one is new needs the dated review the claim was assessed against.
+    novelty = evidence.get("novelty")
+    if novelty == "previously-published" and not evidence.get("source_key"):
+        errors.append(prefix + "previously-published evidence must name its source_key")
+    if novelty == "apparently-novel" and not evidence.get("source_reviewed"):
+        errors.append(prefix + "apparently-novel evidence requires a dated source_reviewed")
     return errors
 
 

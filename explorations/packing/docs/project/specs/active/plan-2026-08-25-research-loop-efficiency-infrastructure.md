@@ -301,7 +301,8 @@ Ranks 3–5 may run as disjoint spikes, but they do not delay the one-minute CI 
 
 3. Make `packing-validate --fast` run `pytest tests -m 'not exhaustive_exact'`.
 
-4. Leave default and full discovery unchanged at all 131 current tests.
+4. Leave default and full discovery equal to the exact union of the fast and exhaustive
+   selections; do not freeze a count that drifts when independent branches add tests.
 
 5. Keep negative-runner unit tests, workflow contracts, selection manifests, schemas,
    lint, and cheap scientific smoke checks required.
@@ -379,11 +380,12 @@ If later hosted samples exceed one minute because of work rather than queueing, 
 smallest action is to split lint and behavioral work into two required jobs before
 adding the larger exact or control matrices.
 
-Go only if full discovery still contains 131 tests, fast exclusion equals the checked-in
-slow-node manifest, every required item appears once, ten warm runs meet the 60/75
-second p50/p95 budget, and full integration surfaces remain direct failures.
-Stop if a test disappears from both surfaces or if the required lane exceeds 90 seconds
-twice on the same revision without queue evidence.
+Go only if full discovery equals the checked-in fast/exhaustive union, fast exclusion
+equals the checked-in slow-node manifest, every required item appears once, ten warm
+runs meet the 60/75 second p50/p95 budget, and full integration surfaces remain direct
+failures.
+Stop if a test disappears from both surfaces or if the required lane exceeds 90
+seconds twice on the same revision without queue evidence.
 
 ## Spike 1: Job-Level GitHub Actions Parallelism
 

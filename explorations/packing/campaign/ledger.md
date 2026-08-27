@@ -2,6 +2,14 @@
 
 # Experiment ledger
 
+## Research loop logbook
+
+Each entry summarizes one user-level research window. Cycle slots are wall-clock units; phases are recorded changes of purpose or focus.
+
+| run | date | status | cycle slots | sessions | phases | workflows | new-round verdicts | prior retained results | next action |
+| --- | --- | --- | ---: | ---: | ---: | --- | --- | ---: | --- |
+| [run-001](research-loop-logbook/run-001-2026-08-25-four-hour-r4-r5.md) | 2026-08-25 | completed | 8 x 30m | 2 | 10 | `process-review` 2, `research-loop` 5, `pipeline-improvement` 3 | accepted 1, rejected 1, unresolved 3 | 6 | Under think-1s0h and BC-010, preregister exactly campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md; obtain independent criterion acceptance before implementing minus_w_scale.py or running any pure minus-W target. |
+
 ## Agent sessions
 
 | id | status | recording | entry | current | count | primary bead | next action |
@@ -26,6 +34,7 @@
 | [session-018](agent-sessions/session-018-efficiency-plan-refinement.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-vcr4 | Preserve BC-010 under think-1s0h as the sole scientific handoff. Implement think-l7hi first: land the fast required lane, stable aggregator, and Linux job matrix; then execute think-rthe and think-kdil from their measured spike contracts. |
 | [session-019](agent-sessions/session-019-native-timing-correction-spike.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-lpum | Preserve BC-010 under think-1s0h as the sole scientific handoff. Implement think-l7hi's one-minute required CI lane first, then think-kdil's exact row-inventory reuse from the measured plan. |
 | [session-020](agent-sessions/session-020-fast-pr-lane-spike.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-b784 | Preserve BC-010 under think-1s0h as the sole scientific handoff. Collect the remaining hosted acceptance samples under think-l7hi and implement exact row-jet reuse under think-kdil; add larger matrices only if measured tails require them. |
+| [session-021](agent-sessions/session-021-pr41-performance-integration.md) | in_progress | contemporaneous | `efficiency-loop` (efficiency) | `process-review` (process) | 3 | think-l7hi | Under BC-010, think-1s0h, think-l7hi, and think-4vni, publish and merge the corrected PR 41 tree on main, then stack the byte-preserving atlas bitset optimization on that exact landed revision before resuming PR 45's merge-readiness work. |
 
 ### Workflow summary
 
@@ -36,8 +45,8 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 1 | 0 |
 | `factual-review` | 0 | 0 | 4 | 2 |
 | `insight-iteration` | 0 | 1 | 3 | 2 |
-| `process-review` | 3 | 4 | 10 | 6 |
-| `efficiency-loop` | 5 | 0 | 9 | 0 |
+| `process-review` | 3 | 4 | 12 | 6 |
+| `efficiency-loop` | 6 | 0 | 10 | 0 |
 | `research-loop` | 1 | 4 | 9 | 7 |
 | `pipeline-improvement` | 2 | 0 | 11 | 0 |
 
@@ -64,6 +73,24 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | BC-013 | measurement_validation | 9, 10 | blocked | 2 | think-xzew | component discoveries per wall-second and per pair-test with profile |
 | BC-014 | research | 11 | blocked | 2 | think-axbi | paired component-level comparison with full poses and independent validity |
 | BC-015 | tool_validation | 12, 16, 17 | complete | 1 | think-ouf0 | focused guard replay on every affected engine revision |
+
+### [agenda-002](agendas/agenda-002-constructive-enumeration-groundwork.md) — Build the constructive proposer on foundations that can carry its results
+
+Status: **active**. Sequence the stratified chunk-enumeration program from X-003 so that each cell buys either coverage knowledge, a reusable instrument, or a measurement, and so that the foundational gaps a constructive proposer would otherwise inherit - degenerate-cell reproducibility, work-unit accounting, and the proposer comparison interface - are closed before they can silently invalidate a result rather than after.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-016 | measurement_validation | 5, 10, 11, 16 | ready | 0 | think-zt29 | retained aligned-stratum differential with per-row active-cell identity, attached to the D-059 record |
+| BC-017 | tool_validation | 5, 10 | ready | 1 | think-u97a | identical retained counts across a loaded and unloaded host |
+| BC-018 | tool_validation | 5, 10, 16 | blocked | 1 | think-sfzh | retained per-stratum ranking on the proved cells with the frozen grammar commit named in the record |
+| BC-019 | research | 11, 17, 18, 19, 28, 29 | blocked | 2 | think-im8q | retained per-record decomposition table with minimal K per record |
+| BC-023 | tool_validation | 11, 17, 18, 29, 68, 88 | ready | 1 | think-osm7 | per-case import table with retrieval provenance, declared precision, and typed failures |
+| BC-024 | research | 11, 17, 18, 19, 26, 28, 29, 37, 40, 50, 68, 70, 83, 88 | blocked | 2 | think-kr1d | recurrence table over chunk shape, size, tilted-chunk count, and seating, with the residue characterized rather than only counted |
+| BC-020 | research | 11 | blocked | 2 | think-dh4b | retained per-step cell sequence with the cell-change count |
+| BC-025 | research | 5, 10, 11, 17, 18, 28, 29 | blocked | 2 | think-kr1d | per-pose round-trip table with the record and non-record rates apart |
+| BC-026 | tool_validation | 5, 10 | blocked | 3 | think-vnm5 | rank of the soft winner in the glued ranking per proved cell |
+| BC-021 | research | 11, 16, 17 | blocked | 3 | think-sfzh | per-cell stratum ranking with the freeze commit named |
+| BC-022 | research | 11 | blocked | 4 | think-im8q | a decision on whether the exact LP is buildable for the cell shapes the enumerator actually produces |
 
 ## Series
 
@@ -118,6 +145,11 @@ Status: **active**. Build confidence from exact and proved controls upward, dist
 | H-041 | confirmed | proof | At s = 2 + 4/sqrt(5), replacing the printed Figure 14 point G = (4/5,  | n: 11* | 1 | 90m agent + 1s wall |
 | H-042 | refuted | search | The retained Kingbird n = 29 SVG serialization has at most three orien | n: 29* | 1 | 15m agent + 0s wall |
 | H-043 | blocked | proof | Every one of the 128 derivative-distinct fixed-side branches at Trump' | derivative_branch: all-128-exp-013-matrices | 0 |  |
+| H-044 | blocked | search | At least 80 percent of standing-record poses at n <= 30 with public fu | n: 5 10 11 17 18 19 26 27 28 29 37 39 40 41 50 51 54 68 69 70 83 87 88 | 0 |  |
+| H-045 | blocked | search | A chunk grammar and enumeration order frozen against the proved cells  | n: 5 10 11 16 17 | 0 |  |
+| H-046 | blocked | search | Starting from the aligned form of Trump's chunk arrangement and increa | n: 11 | 0 |  |
+| H-047 | blocked | search | For at least 70 percent of imported poses at n <= 30, rounding each de | n: 5 10 11 17 18 19 28 29 | 0 |  |
+| H-048 | blocked | search | On the proved cells n = 5 and n = 10, the stratum that is optimal unde | n: 5 10 | 0 |  |
 
 ## Rounds
 

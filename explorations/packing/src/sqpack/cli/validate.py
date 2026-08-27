@@ -511,12 +511,13 @@ def _svg_rendering(context: Context) -> str:
 
 
 def _negative_controls(context: Context) -> str:
+    workers = min(NEGATIVE_CONTROL_WORKERS, context.inner_jobs)
     return _module(
         context,
         "devtools.run_negative_controls",
         "devtools/controls.yaml",
         "-j",
-        str(NEGATIVE_CONTROL_WORKERS),
+        str(workers),
     )
 
 

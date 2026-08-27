@@ -15,8 +15,6 @@ from cases.n5 import (
 )
 from sqpack.research.exact_jets import Taylor2
 
-pytestmark = pytest.mark.exhaustive_exact
-
 
 def test_sheet_path_vectors_and_base_bind_exact_exp034_source() -> None:
     field = equal_side_face.make_field()
@@ -72,6 +70,7 @@ def test_lexicographic_compatibility_does_not_require_positive_quadratic_after_r
     assert not minus_w_sheet.row_is_lexicographically_compatible(Taylor2(q(0), q(-1), q(7)))
 
 
+@pytest.mark.exhaustive_exact
 def test_positive_sheet_path_checks_all_seventeen_rows_for_both_owners() -> None:
     field = equal_side_face.make_field()
     result = minus_w_sheet.evaluate_path(
@@ -96,6 +95,7 @@ def test_positive_sheet_path_checks_all_seventeen_rows_for_both_owners() -> None
         )
 
 
+@pytest.mark.exhaustive_exact
 def test_bad_center_correction_is_rejected_by_same_row_evaluator() -> None:
     field = equal_side_face.make_field()
     q = field.rational

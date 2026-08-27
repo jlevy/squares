@@ -379,8 +379,11 @@ def test_full_exhaustive_behavioral_step_selects_only_exhaustive_exact_tests(
     )
 
 
-def test_full_negative_controls_use_the_measured_dedicated_worker_count(
+@pytest.mark.parametrize((("inner_jobs", "expected_workers")), ((1, "1"), (4, "2")))
+def test_full_negative_controls_respect_the_cap_and_measured_worker_count(
     monkeypatch: pytest.MonkeyPatch,
+    inner_jobs: int,
+    expected_workers: str,
 ) -> None:
     observed: tuple[str, ...] | None = None
 
@@ -394,7 +397,7 @@ def test_full_negative_controls_use_the_measured_dedicated_worker_count(
         deep=False,
         strict=False,
         jobs=1,
-        inner_jobs=1,
+        inner_jobs=inner_jobs,
         environment=os.environ.copy(),
     )
 
@@ -403,7 +406,7 @@ def test_full_negative_controls_use_the_measured_dedicated_worker_count(
         "devtools.run_negative_controls",
         "devtools/controls.yaml",
         "-j",
-        "2",
+        expected_workers,
     )
 
 

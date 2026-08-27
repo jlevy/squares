@@ -88,6 +88,27 @@ $defs:
         enum: [generator, same-implementation, independent-implementation, not-applicable, unknown-historical]
       origin:
         enum: [external, independently-external, replayed-here, audited-here]
+      # Whose result this is, separate from assurance and origin. The values differ
+      # in what they oblige, which is why each is its own value rather than an
+      # absence:
+      #   common-knowledge     elementary or folklore -- the area and grid bounds.
+      #                        Nobody claims it and no citation is owed.
+      #   previously-published a named prior source established it and this entry
+      #                        reports, confirms, or replays it. Must carry
+      #                        source_key; "published" covers any public attributable
+      #                        artifact -- paper, preprint, record table, repository.
+      #   apparently-novel     first established here and, to the best of this
+      #                        project's knowledge from the archived corpus and the
+      #                        sources reviewed by source_reviewed, not previously
+      #                        published. A statement about the search performed,
+      #                        never an assertion of priority. Must carry
+      #                        source_reviewed, which dates the assessment.
+      #   confirmed-novel      priority independently established. Reserved; no entry
+      #                        carries it yet.
+      # Absent means the entry makes no novelty statement -- not yet assessed, or the
+      # record declines one. Absence never means "not novel".
+      novelty:
+        enum: [common-knowledge, previously-published, apparently-novel, confirmed-novel]
       source_key: {type: string, minLength: 1}
       precision: {$ref: '#/$defs/precision'}
       tolerance: {type: string, minLength: 1}

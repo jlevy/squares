@@ -4,12 +4,9 @@ name: Packing validation
   workflow_dispatch: {}
   schedule:
     - cron: "17 8 * * 6"
-  pull_request:
-    paths:
-      - ".agents/skills/experiment-loop/**"
-      - ".claude/skills/experiment-loop/**"
-      - ".github/workflows/packing-validation.yml"
-      - "explorations/packing/**"
+  # Keep the stable packing-required context present for every pull request. Path-level
+  # filtering would leave a configured required check pending forever when no path matched.
+  pull_request: {}
   push:
     branches: [main]
     paths:
@@ -59,7 +56,7 @@ jobs:
         if: "github.event_name != 'pull_request'"
         run: >-
           uv run --frozen --all-extras --group dev
-          packing-validate --jobs 2 --inner-jobs 1
+          packing-validate --jobs 2 --inner-jobs 2
 
   packing-required:
     if: "always() && github.event_name == 'pull_request'"
@@ -98,7 +95,7 @@ jobs:
       - name: Run the complete packing validation surface on a second architecture
         run: >-
           uv run --frozen --all-extras --group dev
-          packing-validate --jobs 2 --inner-jobs 1
+          packing-validate --jobs 2 --inner-jobs 2
 
       - name: Run the focused deep-golden portability check
         run: >-

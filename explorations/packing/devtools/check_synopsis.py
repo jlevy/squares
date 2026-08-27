@@ -11,21 +11,22 @@ It cannot be generated: most of it is judgement, and the judgement is the point.
 So it is *reconciled* instead, the way `campaign/ideas.md` is -- the numbers and
 statuses it asserts must match the artifacts, and every artifact must appear.
 
-Eleven checks:
+Twelve checks:
 
   1. every round's verdict in the roll-up matches its artifact
-  2. every hypothesis's status matches the ledger's derived status
-  3. the round count and effort totals match the ledger
-  4. the defect count and per-class counts match `defects.yaml`
-  5. no round, hypothesis or open defect is silently missing from the synopsis
-  6. the stated hypothesis-artifact count matches the registry directory
-  7. every relative link and heading anchor resolves
-  8. freshness labels name the current round count and do not embed a stale update note
- 9. the readiness dashboard remains attached to its canonical status owners
-10. living reproducibility instructions do not name removed command paths
-11. the cold-start handoff agrees with the latest session and active agenda
+  2. every hypothesis's status and round count match the ledger's derived values
+  3. every round-count and effort-total restatement matches the ledger
+  4. prose does not promote exp-012 past H-024's unresolved formal prerequisite
+  5. the defect count and per-class counts match `defects.yaml`
+  6. no round, hypothesis or open defect is silently missing from the synopsis
+  7. the stated hypothesis-artifact count matches the registry directory
+  8. every relative link and heading anchor resolves
+  9. freshness labels name the current round count and do not embed a stale update note
+ 10. the readiness dashboard remains attached to its canonical status owners
+ 11. living reproducibility instructions do not name removed command paths
+ 12. the cold-start handoff agrees with the latest session and active agenda
 
-Check 7 closes a real gap: `packing-ledger check` walks links under `campaign/`
+Check 8 closes a real gap: `packing-ledger check` walks links under `campaign/`
 only, so the root document's forty-odd references were unchecked.
 
 Usage: uv run --frozen python -m devtools.check_synopsis
@@ -163,12 +164,14 @@ def check_hypotheses(text: str) -> list[str]:
     }
     if not derived:
         return ["campaign/ledger.md: no registry table to check against"]
+    derived_rounds = dict(re.findall(r"^\| (H-\d{3}) \|(?:[^|]*\|){4} (\d+) \|", ledger, re.M))
 
     shown = dict(
         re.findall(
             r"\[(H-\d{3})\]\([^)]+\) \| \*{0,2}([a-z ]+?)\*{0,2}(?: as stated)? \|", text
         )
     )
+    shown_rounds = dict(re.findall(r"\[(H-\d{3})\]\([^)]+\) \|(?:[^|]*\|){2} (\d+) \|", text))
 
     problems = []
     for hid, status in sorted(derived.items()):
@@ -177,6 +180,14 @@ def check_hypotheses(text: str) -> list[str]:
         elif shown[hid].strip() != status:
             problems.append(
                 f"SYNOPSIS.md: {hid} shown as '{shown[hid].strip()}', ledger says '{status}'"
+            )
+        # The registry table repeats the ledger's per-hypothesis totals verbatim, so a
+        # round landed without touching this table is drift, not a counting convention
+        # (H-023 silently lagged exp-039 this way).
+        elif hid in shown_rounds and shown_rounds[hid] != derived_rounds.get(hid):
+            problems.append(
+                f"SYNOPSIS.md: {hid} shows {shown_rounds[hid]} rounds, "
+                f"ledger counts {derived_rounds.get(hid)}"
             )
 
     counts = Counter(derived.values())
@@ -206,7 +217,7 @@ def check_totals(text: str) -> list[str]:
         return ["campaign/ledger.md: no effort total to check against"]
     rounds, agent, wall = line.groups()
 
-    problems = []
+    problems = check_round_effort_claims(text, rounds, agent, wall)
     words = [
         "zero",
         "one",
@@ -235,6 +246,42 @@ def check_totals(text: str) -> list[str]:
         if f"{value} {label}" not in text:
             problems.append(f"SYNOPSIS.md: effort total '{value} {label}' not stated")
     return problems
+
+
+def check_round_effort_claims(
+    text: str, rounds: str, agent_minutes: str, wall_minutes: str
+) -> list[str]:
+    """Require every narrative campaign-total claim to match the generated footer."""
+    claims = re.findall(
+        r"There are (\d+) terminal rounds registered in `series-\d+`\.\s+"
+        r"They record ([\d.]+) agent-minutes\s+and ([\d.]+) wall-minutes\.",
+        text,
+    )
+    expected = (rounds, agent_minutes, wall_minutes)
+    if claims and all(claim == expected for claim in claims):
+        return []
+    return [
+        (
+            "SYNOPSIS.md: terminal-round aggregate is not "
+            f"{rounds} rounds, {agent_minutes} agent-minutes, and "
+            f"{wall_minutes} wall-minutes at every occurrence"
+        )
+    ]
+
+
+def check_experiment_scope_claims(text: str) -> list[str]:
+    """Reject the known promotion of exp-012 past H-024's formal prerequisite."""
+    for paragraph in re.split(r"\n\s*\n", text):
+        if "Exp-012" not in paragraph or "H-024" not in paragraph:
+            continue
+        if re.search(r"\b(?:refutes?|rejected|confirms?|confirmed)\s+H-024\b", paragraph):
+            return [
+                (
+                    "SYNOPSIS.md: exp-012 must leave H-024 unresolved; its formal "
+                    "witness prerequisite is unmet"
+                )
+            ]
+    return []
 
 
 def check_freshness_label(text: str) -> list[str]:
@@ -519,6 +566,7 @@ def main() -> int:
         + check_rounds(text)
         + check_hypotheses(text)
         + check_totals(text)
+        + check_experiment_scope_claims(text)
         + check_freshness_label(text)
         + check_readiness_dashboard(text)
         + check_migrated_commands(text)

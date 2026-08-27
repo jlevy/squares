@@ -204,6 +204,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     triggers = _mapping(_mapping(document)["on"])
     assert "workflow_dispatch" in triggers
     assert "schedule" in triggers
+    assert triggers["pull_request"] == {}
 
     validate_steps = _mapping(jobs["validate"])["steps"]
     assert isinstance(validate_steps, list)
@@ -223,7 +224,9 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         if _mapping(step).get("name") == "Run the complete integration surface"
     )
     assert full_step["if"] == "github.event_name != 'pull_request'"
-    assert "--fast" not in str(full_step["run"])
+    assert " ".join(str(full_step["run"]).split()) == (
+        "uv run --frozen --all-extras --group dev packing-validate --jobs 2 --inner-jobs 2"
+    )
 
     required_job = _mapping(jobs["packing-required"])
     assert required_job["needs"] == "validate"
@@ -240,6 +243,15 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     assert mac_job["if"] == "github.event_name != 'pull_request'"
     assert "continue-on-error" not in mac_job
     assert all("continue-on-error" not in _mapping(step) for step in mac_steps)
+    mac_full_step = next(
+        _mapping(step)
+        for step in mac_steps
+        if _mapping(step).get("name")
+        == "Run the complete packing validation surface on a second architecture"
+    )
+    assert " ".join(str(mac_full_step["run"]).split()) == (
+        "uv run --frozen --all-extras --group dev packing-validate --jobs 2 --inner-jobs 2"
+    )
     deep_probes = [
         _mapping(step)
         for step in mac_steps
@@ -257,21 +269,44 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     )
 
 
-def test_exhaustive_exact_marker_is_declared_only_by_the_measured_slow_modules() -> None:
-    marked_modules = {
-        "test_exact_jets.py",
-        "test_minus_w_row_jets.py",
-        "test_minus_w_sheet.py",
-        "test_minus_w_stress.py",
+def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> None:
+    expected = {
+        "test_exact_jets.py": {
+            "test_n5_wall_and_contact_gradients_match_authoritative_source_rows",
+        },
+        "test_minus_w_row_jets.py": {
+            "test_owner_rows_match_complete_authoritative_inventory",
+            "test_active_rows_expose_both_owner_alternatives",
+            "test_sat_row_retains_exact_center_angle_cross_curvature",
+        },
+        "test_minus_w_sheet.py": {
+            "test_positive_sheet_path_checks_all_seventeen_rows_for_both_owners",
+            "test_bad_center_correction_is_rejected_by_same_row_evaluator",
+        },
+        "test_minus_w_stress.py": {
+            "test_w_curvature_is_even_nonzero_and_quadratically_scaled",
+            "test_real_production_weight_perturbation_breaks_cancellation",
+            "test_uniform_weight_rescaling_fails_exact_normalization",
+        },
     }
-    marker_assignment = "pytestmark = pytest.mark." + "exhaustive_exact"
-    declared = {
-        path.name
-        for path in (PROJECT_ROOT / "tests").glob("test_*.py")
-        if marker_assignment in path.read_text(encoding="utf-8")
-    }
+    declared: dict[str, set[str]] = {}
+    marker = "pytest.mark.exhaustive_exact"
+    for path in (PROJECT_ROOT / "tests").glob("test_*.py"):
+        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+        marked: set[str] = set()
+        for node in tree.body:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and any(
+                ast.unparse(decorator) == marker for decorator in node.decorator_list
+            ):
+                marked.add(node.name)
+            if isinstance(
+                node, (ast.Assign, ast.AnnAssign)
+            ) and "exhaustive_exact" in ast.unparse(node):
+                marked.add("<module-level assignment>")
+        if marked:
+            declared[path.name] = marked
 
-    assert declared == marked_modules
+    assert declared == expected
 
 
 def test_devtools_use_public_package_interfaces() -> None:

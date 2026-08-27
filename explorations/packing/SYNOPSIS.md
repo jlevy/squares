@@ -84,12 +84,11 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and twenty-five blocked
-hypotheses. One additional hypothesis is unresolved because its formal prerequisite is
-missing. Its active confidence ladder has completed the exact and event controls up to
-the first nontrivial identity question; the next scientific transition is from
-specialized `n = 5` local geometry to a defensible component relation, not to a larger
-raw census.
+hypotheses, one open hypothesis, seven open questions, and thirty blocked hypotheses.
+One additional hypothesis is unresolved because its formal prerequisite is missing.
+Its active confidence ladder has completed the exact and event controls up to the first
+nontrivial identity question; the next scientific transition is from specialized `n = 5`
+local geometry to a defensible component relation, not to a larger raw census.
 
 #### Refresh rule
 
@@ -141,6 +140,7 @@ case or experiment separately.
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
 | [Agent Sessions](campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
+| [Research Loop Logbook](campaign/research-loop-logbook/README.md) | reader-facing research-run summaries | definitive | maintained | — |
 | [Idea board — the `s(n)` search campaign](campaign/ideas.md) | hand-maintained registry | definitive | maintained | — |
 | [Experiment ledger](campaign/ledger.md) | generated status view | generated | generated | — |
 | [series-000 (S0) — smoke and calibration](campaign/series/series-000-smoke-and-calibration/README.md) | series scope and comparability | definitive | maintained | — |
@@ -162,6 +162,8 @@ case or experiment separately.
 | [Review: PR #14 and the Executable Square-Packing Research Program](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | dated review record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Review: The Tooling Layout, and What It Would Take to Clean Up](docs/project/reviews/review-2026-08-23-tooling-layout.md) | dated review record | record | superseded | [Packing Development Guide](development.md) |
 | [Review: The Toolkit Docs and the First Experiment Series](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | dated review record | record | superseded | [Experiment ledger](campaign/ledger.md) |
+| [Review: `TUTORIAL.md`, Read as Its Declared Audience](docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md) | dated review record | record | retained | — |
+| [Review: `TUTORIAL.md` Soundness, Iteration 2, on the Merged Record](docs/project/reviews/review-2026-08-25-tutorial-soundness-iteration-2.md) | dated review record | record | retained | — |
 | [Review: Soundness of the Session-011 Continuation (PR #34)](docs/project/reviews/review-2026-08-25-pr34-soundness-review.md) | dated review record | record | retained | — |
 | [Review: Square Packing Research-Loop Efficiency](docs/project/reviews/review-2026-08-25-research-loop-efficiency.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
@@ -171,12 +173,14 @@ case or experiment separately.
 | [Feature: Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | implementation plan | current | transient | — |
 | [Feature: Frontier Assurance and Verification](docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md) | implementation plan | current | transient | — |
 | [Feature: Research-Loop Efficiency Infrastructure](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md) | implementation plan | current | transient | — |
+| [Overnight Run: Constructive Enumeration Groundwork](docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md) | implementation plan | current | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
 | `frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
 | `campaign/agent-sessions/session-*.md` | typed session record | record | retained | — |
+| `campaign/research-loop-logbook/run-*.md` | typed research-run synopsis | record | retained | — |
 | `campaign/agendas/agenda-*.md` | mutable coordination agenda | current | maintained | — |
 | `campaign/explorations/X-*.md` | typed idea provenance | record | retained | — |
 
@@ -321,6 +325,9 @@ estimated delay attribution with native per-turn rollups by model and thinking l
 baseline: the first hosted required surface finishes in 46 seconds, exhaustive exact
 work and complete macOS move to direct integration events, and two-worker controls save
 58.22 seconds on the full branch.
+[Session 021](campaign/agent-sessions/session-021-pr41-performance-integration.md)
+updates that lane onto current main, restores cheap exact guards to required PR
+validation, preserves explicit worker caps, and targets PR 45’s measured census tail.
 These W5 sessions measure and improve the research and validation loops but do not
 supersede session 016’s scientific handoff or authorize exp-045 implementation.
 Session 015’s first bounded W6 slice stopped exp-040 unresolved before retained
@@ -595,6 +602,22 @@ An external certificate and a repository replay remain separate evidence records
 Running the generator’s own checker is not an independent implementation.
 A page that says “interval verified” but publishes no certificate or replayable checker
 stays reported with a `public-certificate-missing` blocker.
+
+Novelty—whose result this is—is a further separate fact.
+Its values differ in what they oblige, which is why each is recorded explicitly rather
+than inferred from an absence:
+
+| Novelty | Meaning | What it obliges |
+| --- | --- | --- |
+| `common-knowledge` | Elementary or folklore, like the area and grid bounds; nobody claims it | No citation is owed |
+| `previously-published` | A named prior source established it; this entry reports, confirms, or replays it | Must name `source_key`; any public attributable artifact counts—paper, preprint, record table, or repository |
+| `apparently-novel` | First established here and, to the best of this project’s knowledge from the archived corpus and the sources reviewed, not previously published | Must carry `source_reviewed`, dating the assessment. A statement about the search performed, never an assertion of priority |
+| `confirmed-novel` | Priority independently established | Reserved; no entry carries it yet |
+
+An entry without the field makes no novelty statement: not yet assessed, or the record
+declines one, as exp-014 does for the quotient refinements.
+Absence never means “not novel”.
+`check_evidence_semantics` enforces the two obligations a machine can check.
 
 Every formal conclusion names its object:
 
@@ -1053,10 +1076,16 @@ oblique records as a class
 ## Theoretical Results
 
 Results state their assurance and basis rather than compressing both into a tier name.
-`verified` below is formal; numerical rows say `numerically checked` and name their
+`verified` below is formal; numerical rows say `numerically-checked` and name their
 method.
 A mathematical proof may be external, locally audited, or replayed here, and that
 origin remains visible in the frontier evidence.
+The results themselves carry the same distinction: T-1 confirms a published
+construction, T-2 is elementary and proved in place, and T-3 and T-4 are **apparently
+novel**—first established here and, to the best of this project’s knowledge, not
+previously published; computer-assisted and not externally peer-reviewed.
+[Assurance, Methods, and Claims](#assurance-methods-and-claims) defines the
+qualification.
 
 ### Results relied on from the literature
 
@@ -1084,10 +1113,10 @@ listed here so the dependencies of this program are explicit.
 
 | Id | Statement | Assurance or basis | Where it lives | Reproduce with |
 | --- | --- | --- | --- | --- |
-| **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **verified** (`exact-algebraic`, replayed here) | `sqpack` | `uv run --frozen python -m cases.trump11.verify_exact` |
+| **T-1** | Trump’s 1979 packing is valid: 11 unit squares in a square of side `s`, the degree-8 algebraic number above, with 14 of 55 pairs touching at exactly zero separation and 20 corner coordinates exactly on the boundary | **verified** (`exact-algebraic`; a published construction, confirmed here) | `sqpack` | `uv run --frozen python -m cases.trump11.verify_exact` |
 | **T-2** | Fixing every angle and every pair’s separating axis reduces the problem to a **linear program** in the centres and the side. All nonconvexity lives in the angles and in the combinatorial choice of cell | **proved**; instantiated numerically | [R-2](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2), built as [`sqpack.research.quench`](src/sqpack/research/quench.py) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
 | **T-3** | On Trump’s fixed contact cell, the one-dimensional LP optimum obtained by varying the five tilted squares’ shared angle has a **corner** at the published tilt—distinct one-sided slopes—so a smooth local model is misspecified on that slice | **numerically checked** (`numerical-f64`) | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md), confirmed by [exp-010](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | `uv run --frozen python -m cases.trump11.independent_lp_cell` |
-| **T-4** | The source-distinct replacement `G=(.8,1.85) → G'=(.79,1.85)` restores the complete Figure 13 localization, A-triple forcing, repaired Figure 14 unavoidability, and `3+9` capacity chain, proving `s(11) ≥ 2 + 4/√5` | **verified** (`exact-algebraic`, replayed here) | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md), confirmed by [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | `uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json` |
+| **T-4** | The source-distinct replacement `G=(.8,1.85) → G'=(.79,1.85)` restores the complete Figure 13 localization, A-triple forcing, repaired Figure 14 unavoidability, and `3+9` capacity chain, proving `s(11) ≥ 2 + 4/√5` | **verified** (`exact-algebraic`; apparently novel here, not externally peer-reviewed) | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md), confirmed by [exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | `uv run --frozen python -m cases.stromquist.repaired_cover --replay campaign/series/series-000-smoke-and-calibration/results/exp-017-h-041-stromquist-repaired-figure14.json` |
 
 **T-1** is also an independent check of the published record: the 33 digits on the
 *Squares in Squares* record page agree with the value computed here from the field.
@@ -1096,6 +1125,19 @@ exact contacts.
 
 **T-2** originated in the standing review as observation R-2 and has now been
 implemented twice, independently—see below for why that matters.
+
+**Apparently novel here**, in the qualified sense above: the falsification of
+Stromquist’s printed Figure 14 argument and the source-distinct repaired certificate for
+`s(11) ≥ 2 + 4/√5` (exp-016, exp-017); the corner at Trump’s cell (T-3, exp-010); the
+local-isolation theorem for Trump’s pose (exp-013); and the exact `n = 5`
+terminal-family chain—shared optimal face, two-parameter sheet, second-order
+obstruction, complete first-order inventory, and connected position polytope (exp-033
+through exp-039); and the verified relaxed rational witness at `n = 29`
+(E-n029-schadt-rational-upper), a new construction proving a slightly weaker bound than
+the reported record.
+The `n = 3` and `n = 4` quotient classifications are established here with no novelty
+claim: the published hard-squares computations cover their labelled and unlabelled
+pieces, and the record declines to call the quotient refinements new.
 **T-3** was found while building the quench, registered as `H-019` *before* the round
 that observed it was recorded, and confirmed as its own round.
 Under the directory’s ownership rule the registry artifact decides both; the `T-` ids
@@ -1544,11 +1586,13 @@ The standing review’s complete H-001 through H-015 block is now in the registr
 ids carry campaign-native claims and explicit open questions.
 The [ledger](campaign/ledger.md) is generated from the artifacts and is the current
 view; this section is the reading of it.
+Rounds and effort below repeat the ledger’s per-hypothesis totals, which count every
+round that names the hypothesis, control roles included.
 
 | Id | Status | Claim, in short | Rounds | Effort |
 | --- | --- | --- | --- | --- |
 | [H-019](campaign/hypotheses/H-019-angle-optimum-is-a-kink.md) | **confirmed** | Trump’s tested shared-tilt slice has a corner at the published optimum | 1 | 10m agent |
-| [H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 4 | 190m agent, 4.9m wall |
+| [H-002](campaign/hypotheses/H-002-lp-in-cell-polish.md) | **refuted** as stated | LP-in-cell polish refines *any* annealer output to the analytic value | 5 | 195m agent, 5.1m wall |
 | [H-016](campaign/hypotheses/H-016-stock-annealer-reaches-standing-best.md) | **refuted** | The stock annealer reaches the standing best on every instance cell | 4 | 10.2m wall |
 | [H-018](campaign/hypotheses/H-018-basin-entry.md) | **refuted** as stated | Perturbed starts return to Trump’s packing at least half the time | 1 | 75m agent, 1.3m wall |
 | [H-020](campaign/hypotheses/H-020-oblique-record-finding-n17.md) | **refuted** | The annealer reaches the standing best at `n = 17`, the nearest oblique record | 1 | 6.6m wall |
@@ -1567,9 +1611,9 @@ view; this section is the reading of it.
 | [H-014](campaign/hypotheses/H-014-superdisk-continuation.md) | blocked | Superdisk continuation imports new square components | 0 | — |
 | [H-015](campaign/hypotheses/H-015-map-elites-illumination.md) | blocked | MAP-Elites improves certified component discovery rate | 0 | — |
 | [H-017](campaign/hypotheses/H-017-budget-scaling.md) | open | 100× the budget reaches Trump’s basin | 0 | — |
-| [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 0 | — |
+| [H-021](campaign/hypotheses/H-021-endpoint-identifiability.md) | blocked | At least 95% of small-`n` endpoint support is classifiable | 14 | 106m agent, 4.0m wall |
 | [H-022](campaign/hypotheses/H-022-trump-local-geometry.md) | open question | What quantitative neighborhood and transferable stress structure follow after exp-013’s local-isolation theorem? | 0 | — |
-| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 6 | 115m agent, 6.11s wall |
+| [H-023](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | open question | How are the observed `n=5` endpoint candidates connected after the complete first-order inventory, one obstructed direction, known sheet lifts, and twelve fixed-angle paths? | 11 | 243m agent, 2.5m wall |
 | [H-024](campaign/hypotheses/H-024-record-angle-class-count.md) | unresolved | Formally supported record packings through `n=30` use at most three angle classes; the retained `n=29` SVG has no formal witness | 1 | 12m agent, 0.158s wall |
 | [H-025](campaign/hypotheses/H-025-record-angle-compressibility.md) | blocked | At least 80% of reported record configurations are approximated by three angle classes within `1e-4` side loss | 0 | — |
 | [H-026](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | **confirmed** | Trump has no nonzero direction in any branchwise fixed-side linearized cone | 1 | 100m agent, 57.308s wall |
@@ -1590,6 +1634,11 @@ view; this section is the reading of it.
 | [H-041](campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **confirmed** | Moving Figure 14 point `G.x` from `.8` to `.79` restores the complete lower-bound mechanism | 1 | 90m agent, 0.70s wall |
 | [H-042](campaign/hypotheses/H-042-n29-numerical-angle-classes.md) | **refuted** | The retained `n=29` SVG serialization has at most three numerical angle classes under the declared 160-digit regime | 1 | 15m agent, 0.165s wall |
 | [H-043](campaign/hypotheses/H-043-trump-incidence-rigidity-cores.md) | blocked | Every one of the 128 derivative-distinct fixed-side branches at Trump’s witness has a proper incidence rigidity core | 0 | — |
+| [H-044](campaign/hypotheses/H-044-chunk-expressibility-of-records.md) | blocked | Standing records are already chunk-structured: at most six one-angle bar/L/rectangle groups plus at most two free squares | 0 | — |
+| [H-045](campaign/hypotheses/H-045-chunk-grammar-rediscovery.md) | blocked | A grammar frozen on the proved cells ranks the standing best first at `n = 11` | 0 | — |
+| [H-046](campaign/hypotheses/H-046-regular-predecessor-continuation.md) | blocked | A class-angle path runs from Trump’s aligned chunk form to the record without chunk fission | 0 | — |
+| [H-047](campaign/hypotheses/H-047-chunk-regular-predecessors.md) | blocked | Rounding a pose to its chunk-regular predecessor and re-quenching returns the pose | 0 | — |
+| [H-048](campaign/hypotheses/H-048-glued-screen-fidelity.md) | blocked | The glued-chunk screen keeps the soft-mode winning stratum in its top decile | 0 | — |
 
 ### Confirmed
 
@@ -1704,8 +1753,8 @@ Transverse and mixed nonlinear realization remains open.
 
 ## Experiments Conducted
 
-There are 39 terminal rounds registered in `series-000`. They record 933 agent-minutes
-and 28.3 wall-minutes.
+There are 44 terminal rounds registered in `series-000`. They record 1061 agent-minutes
+and 30.7 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1715,10 +1764,11 @@ fixed-angle face, angle-sheet, full-angle tangent, and second-order obstruction
 checkers, plus the exact branchwise tangent-inventory checker.
 
 No record-search round has produced verified assurance, so **no result below claims a
-new record**. Exp-012 is an exploratory reconstruction of a published serialization and
-is unresolved against H-024’s formal prerequisite.
-Exp-037 separately rejects H-042’s numerical three-class claim; neither result certifies
-the source geometry or optimality.
+new record**. Exp-012 is an exploratory reconstruction of a published record witness;
+its six-class determination leaves H-024 unresolved because the source has no formal
+feasibility certificate.
+Exp-037 separately rejects H-042’s serialization-scoped three-class claim.
+Neither round certifies the source geometry or optimality.
 
 ![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
 
@@ -1978,24 +2028,24 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 327 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 337 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 76 | asserted something false about the mathematics |
+| soundness | 79 | asserted something false about the mathematics |
 | validity | 82 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 123 | recorded something its own evidence contradicts |
+| bookkeeping | 130 | recorded something its own evidence contradicts |
 | robustness | 37 | did not finish, or finished only by luck |
 | performance | 9 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
-**Sixty-three of the seventy-six soundness defects pointed in the *flattering*
+**Sixty-three of the seventy-nine soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-two defects in 327, and no soundness defect
+**The automated gate has caught forty-three defects in 337, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
