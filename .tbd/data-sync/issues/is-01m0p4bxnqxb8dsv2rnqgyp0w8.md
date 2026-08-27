@@ -3,9 +3,9 @@ type: is
 id: is-01m0p4bxnqxb8dsv2rnqgyp0w8
 title: "H-010: reproduce the Stromquist falsifier triple"
 kind: task
-status: in_progress
+status: closed
 priority: 1
-version: 13
+version: 14
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 labels: []
 dependencies: []
@@ -20,7 +20,11 @@ child_order_hints:
   - is-01m0srsphtekzmgp8vrs05v8n5
   - is-01m0srspsyjecv6bdatrx8r5bx
 created_at: 2026-08-23T01:39:37.782Z
-updated_at: 2026-08-24T11:35:45.111Z
+updated_at: 2026-08-27T05:57:55.753Z
+closed_at: 2026-08-27T05:57:55.750Z
+close_reason: "Completed by terminal refutation: exp-016 found and replayed an explicit escape from the printed Figure 14 P12, so H-010's source-faithful conjunction is false on the printed set. The distinct possible G=.79 repair remains H-041/think-ciwv and is not merged into this result."
+resolution: null
+duplicate_of: null
 ---
 Execute H-010 as a source-faithful known-answer reconstruction of Stromquist Theorem 2. The target is not a standalone 12-point unavoidable set. Acceptance: bind the exact Figure 13 ten-point set to the primary PDF; verify that its complement localizes an avoiding unit square to the top or bottom exceptional rectangle up to symmetry; certify with Lemmas 4 and 6 that that same square contains all three A-points from Figure 14; verify the nine remaining points and region partition make the 12-point set unavoidable; and replay the pigeonhole contradiction that 11 pairwise interior-disjoint squares cannot cover 12 points when three share one square. Every numerical search leg is only a falsifier and cannot pass without a separate exact or interval certificate. Include boundary and source-transcription mutation controls.
 
