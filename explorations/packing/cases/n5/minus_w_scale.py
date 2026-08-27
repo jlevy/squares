@@ -435,12 +435,21 @@ def scale_records(
     correction: Sequence[FieldElement],
     *,
     handlers: Mapping[str, ScaleHandler] = SCALE_HANDLERS,
+    row_inventory: minus_w_row_jets.RowJetInventory | None = None,
 ) -> tuple[ScaleRecord, ...]:
     """Build the exact five-route owner-3 record for one registered stratum."""
     selected_handlers = _validated_handlers(handlers)
     if stratum not in tangent_cones.STRATA:
         raise ValueError(f"unknown source stratum {stratum}")
-    stress = minus_w_stress.evaluate_stress(field, stratum, OWNER3, velocity, correction)
+    active_rows = None if row_inventory is None else row_inventory.active_rows(field, stratum)
+    stress = minus_w_stress.evaluate_stress(
+        field,
+        stratum,
+        OWNER3,
+        velocity,
+        correction,
+        active_rows=active_rows,
+    )
     bounded = _bounded_affine(field, stress)
     unbounded = _unbounded_cusp(field, stress)
     sign_evidence = route_sign_evidence(field, stratum, stress)
@@ -478,6 +487,7 @@ def positive_w_control_records(
     field: NumberField,
     *,
     handlers: Mapping[str, ScaleHandler] = SCALE_HANDLERS,
+    row_inventory: minus_w_row_jets.RowJetInventory | None = None,
 ) -> tuple[ScaleRecord, ...]:
     """Exercise all fifteen scale records on exp-036's accepted positive-W control."""
     selected_handlers = _validated_handlers(handlers)
@@ -490,6 +500,7 @@ def positive_w_control_records(
             tuple(tangent_inventory.geometry_vectors(field, stratum)[0]["W"]),
             correction,
             handlers=selected_handlers,
+            row_inventory=row_inventory,
         )
         if any(record.bounded_affine.constant.sign() >= 0 for record in batch):
             raise ValueError("positive-W control lost its strict production curvature")

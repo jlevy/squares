@@ -68,10 +68,11 @@ experiment:
       undecided; and report invalid with no scientific disposition when a source, row,
       witness, mutation, control, or replay guard fails
     reason: >-
-      The criterion is frozen before scale implementation or target work. The accepted
-      row, stress, and sheet helpers exist, but scale routing, the replacement driver,
-      twelve production mutation paths, thirteen refusal records, and post-change review
-      remain incomplete.
+      The criterion was frozen before scale implementation or target work. The accepted
+      row, stress, sheet, owner-3 scale, and owner-4 proof-data helpers now exist, but
+      actual target-route premise binding, the replacement driver, unified controls,
+      twelve production mutation paths, thirteen refusal records, replay, and final
+      post-change review remain incomplete.
 ---
 # exp-045 — Exact Pure -W Scale and Controls
 
@@ -84,14 +85,17 @@ every mathematical nonlinear branch.
 ## Execution Admission
 
 The experiment is registered, but target execution is blocked.
-The first admitted implementation slice adds only `cases/n5/minus_w_scale.py` and
-`tests/test_minus_w_scale.py`, runs the scale proof data on the exp-036 `+W` control,
-and makes no pure `-W`, sign-symmetry, or H-023 disposition.
+The first two admitted implementation slices add the owner-3 scale perimeter and the
+three-stratum owner-4 proof-data helper.
+Both run only on the exp-036 `+W` control and make no pure `-W`, sign-symmetry, or H-023
+disposition. An accepted execution-scoped active-row inventory now lets those two
+controls share one exact row construction per field identity and stratum while every
+owner view repeats authoritative key and gradient validation.
 
 Target generation and replay remain closed until all of these hold:
 
-- the accepted row-jet, stress, sheet, and scale helpers are used rather than the
-  exp-043 hand-formula path;
+- the accepted row-jet, stress, sheet, scale, and owner-4 helpers are used rather than
+  the exp-043 hand-formula path;
 - the same builder passes the exp-034 sheet control and the exp-036 positive
   obstruction;
 - all twelve mutations enter before certificate construction and match only their frozen
@@ -106,12 +110,15 @@ obstruction.
 ## Frozen Owner and Scale Inventory
 
 The six case keys are the Cartesian product of `A`, `interior`, and `B` with `owner3`
-and `owner4`. Each case regenerates the complete stored `-W` vector, constructs every
-production row through `exact_jets`, requires exact source-key and gradient equality,
-applies the positive production stress, retains all fifteen correction columns, and
-copies no expected exp-036 coefficient.
-For owner 4, all fifteen weighted correction coefficients must vanish exactly before the
-sign of the constant term decides the route.
+and `owner4`. One execution-scoped inventory may construct the full production rows
+through `exact_jets` once per stratum.
+Each owner case must then regenerate the complete stored `-W` vector, derive a fresh
+owner-specific row mapping from that inventory, independently require exact source-key
+and gradient equality, apply the positive production stress, retain all fifteen
+correction columns, and copy no expected exp-036 coefficient.
+No inventory may cross field identities, record/replay processes, or production-input
+mutations. For owner 4, all fifteen weighted correction coefficients must vanish exactly
+before the sign of the constant term decides the route.
 
 For each source stratum, owner 3 has exactly these five scale records:
 

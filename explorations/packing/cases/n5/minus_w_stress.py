@@ -138,9 +138,15 @@ def evaluate_stress(
     correction: Sequence[FieldElement],
     *,
     weight_adjustments: Mapping[str, FieldElement] | None = None,
+    active_rows: Mapping[str, SecondOrderJet] | None = None,
 ) -> StressEvaluation:
     """Evaluate and validate the source-derived positive nine-row stress."""
-    owner_rows = minus_w_row_jets.owner_row_jets(field, stratum, owner)
+    owner_rows = minus_w_row_jets.owner_row_jets(
+        field,
+        stratum,
+        owner,
+        active_rows=active_rows,
+    )
     expected = _expected_labels(owner)
     selected = {label: jet for label, jet in owner_rows.items() if label in expected}
     if set(selected) != expected or len(selected) != 9:

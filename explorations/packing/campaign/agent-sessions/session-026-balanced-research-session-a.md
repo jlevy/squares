@@ -458,7 +458,7 @@ session:
       Build the smallest target-free owner-4 proof-data helper over all three registered
       strata, retaining the exact production stress, all correction coefficients, and
       strict positive-W control sign without deciding pure -W.
-    status: in_progress
+    status: completed
     entered_by: evidence_checkpoint
     switch_reason: >-
       W3 found owner-4 exhaustion to be the missing prerequisite shared by unified
@@ -481,12 +481,239 @@ session:
     fallback: >-
       Retain the first typed owner-4 provenance or cancellation blocker, keep target W6
       closed, and rotate to the target-free BC-030 lane.
+    outcome: >-
+      Added a separate target-free owner-4 helper that retains exact velocity,
+      nonzero correction, full nine-row production stress, all fifteen cancelled
+      correction coefficients, and the production curvature constant only after source
+      tightness and provenance guards pass. The positive-W wrapper exhausts exactly A,
+      interior, and B and rejects a nonnegative constant before fetching another
+      stratum.
+    evidence:
+    - 'The focused exact test passes in 19.40 seconds: 14.64 seconds for the three-stratum baseline and 4.48 seconds for the first-stratum zero-W mutation.'
+    - Mutations reject an owner-3 branch substitution, deletion of an actual owner-4 tied row, an exactly re-substituted non-tight velocity, and a complete zero W source vector.
+    - The zero-W control fails if any later stratum is fetched, preserving the measured fail-fast boundary.
+    - Ruff, BasedPyright, and the exhaustive-marker inventory pass; three independent final audits accept the bounded helper.
+    - No old hand formula, pure-W target, result JSON, obstruction, feasibility, H-023, realization, or component claim was introduced.
+    stop_reason: The three exact owner-4 records, real mutations, focused replay, and three independent audits are complete, so W7 closed in under fourteen minutes.
+    next_action: >-
+      Run an immediate W3 interpretation, including whether the combined exact control
+      cost invalidates the preregistered 30-second driver ceiling.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Interpret the completed owner-4 control, update the exp-045 dependency order, and
+      decide whether unified-control construction or a measured performance checkpoint
+      is now the highest-information next slice.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      Material exact proof data and timing now exist for both owner branches, so the
+      experiment loop requires mechanism and cost interpretation before integration.
+    budget_minutes: 10
+    started_at: '2026-08-26T23:48:00-07:00'
+    deadline_at: '2026-08-26T23:58:00-07:00'
+    expected_output: >-
+      A dependency and timing decision grounded in the two measured branch controls,
+      with target admission left closed.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop on unmeasured cache claims, a target run, timeout relaxation without a cost
+      model, or any inference from positive-W calibration to pure-W obstruction.
+    fallback: >-
+      Keep the two independently accepted helpers and rotate to BC-030 if no bounded
+      integration path fits the remaining session budget.
+    outcome: >-
+      Selected an immediate W5 performance slice before unified controls. The two
+      three-stratum exact baselines already consume essentially the entire 30-second
+      record-command ceiling, so adding sheet controls, target cases, mutations,
+      serialization, and replay without measuring reuse would create a predictably
+      invalid instrument.
+    evidence:
+    - The owner-3 baseline setup measured 15.28 seconds and owner-4 measured 14.64 seconds, totaling 29.92 seconds before any sheet control or target work.
+    - Both branches rebuild the same production pose jets and active rows, so the completed call graph changes the recurrence assumptions behind the earlier no-cache decision.
+    - Target W6 remains closed; performance work may change only shared exact construction and must prove equivalence with focused controls.
+    stop_reason: The timing contradiction and next workflow are explicit, so W3 closed in under one minute.
+    next_action: >-
+      Measure the within-process duplicate exact builders and admit at most one reuse
+      mechanism whose remaining-horizon repayment and equivalence tests are positive.
+  - workflow: efficiency-loop
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    objective: >-
+      Profile the planned exp-045 control call graph, quantify within-process duplicate
+      row and pose construction, and decide whether one bounded exact-data reuse layer
+      can bring the future record command below its 30-second ceiling.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      W3 found that owner-3 and owner-4 control setup alone consumes 29.92 seconds, so
+      integration is not admissible until the changed performance horizon is measured.
+    budget_minutes: 20
+    started_at: '2026-08-26T23:49:00-07:00'
+    deadline_at: '2026-08-27T00:09:00-07:00'
+    expected_output: >-
+      A measured call-count and timing profile, updated repayment arithmetic, and either
+      one bounded implementation contract with equivalence controls or a no-change
+      decision plus a revised driver budget.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_minus_w_scale.py tests/test_minus_w_owner4.py --durations=10
+    kill_condition: >-
+      Stop before code changes unless duplicate construction is measured in one future
+      driver process, equivalence has a focused exact control, expected remaining
+      savings repay this slice, and no dependency sync or full gate is attempted below
+      4 GiB free space.
+    fallback: >-
+      Preserve separate green helpers, increase only the preregistered command ceiling
+      with evidence, and rotate to BC-030 rather than building an unbounded cache.
+    outcome: >-
+      Admitted one explicit execution-scoped active-row inventory and rejected hidden
+      module-global caching. The inventory may share one full row construction per
+      field identity and stratum, while each owner view remains fresh and repeats the
+      authoritative key and gradient validation. Every production-input mutation must
+      build or replace a fresh inventory.
+    evidence:
+    - 'A measured combined control took 32.735 seconds: 16.694 for owner-3 scale and 16.041 for owner-4.'
+    - The process made nine pose builds, six active-row builds, and six owner-view builds; only three active-row keys were unique.
+    - One-stratum profiling measured about 4.80 seconds for each active-row rebuild and about 0.10 seconds for a pose build; owner selection and validation from retained active rows took about 0.006 seconds.
+    - Explicit active-row reuse is projected to save about 15.9 seconds per combined control and repay in its first invocation; separate pose reuse would save only about 0.28 seconds and is rejected from this slice.
+    - Three independent audits reject global caches because mutable dictionaries, field identity, authoritative-source mutations, and warmed baselines could contaminate or mask controls.
+    stop_reason: The duplicate work, repayment, safe lifetime, mutation policy, and bounded implementation contract are measured, so W5 closed in under five minutes.
+    next_action: >-
+      Implement only the explicit field-bound active-row inventory, preserve the cold
+      path, and require exact owner validation, mutation isolation, and a three-build
+      call-count control before retention.
+  - workflow: pipeline-improvement
+    recording: contemporaneous
+    clock_role: work
+    focus: efficiency
+    objective: >-
+      Implement and validate one execution-scoped active-row inventory that reduces the
+      combined owner-3/owner-4 positive control from six active constructions to three
+      without global cache state or mutation masking.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      W5 measured an immediately repaying 15.9-second duplicate active-row cost and
+      accepted an explicit inventory while rejecting lower-value pose caching.
+    budget_minutes: 30
+    started_at: '2026-08-26T23:54:00-07:00'
+    deadline_at: '2026-08-27T00:24:00-07:00'
+    expected_output: >-
+      A field-identity-bound tuple-backed inventory, fresh owner mappings with repeated
+      source validation, opt-in stress/scale/owner-4 consumers, exact cold-versus-shared
+      equality, three active builds for six owner cases, and mutation isolation.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen pytest -q
+      tests/test_minus_w_row_jets.py tests/test_minus_w_row_inventory.py
+      tests/test_minus_w_scale.py tests/test_minus_w_owner4.py
+    kill_condition: >-
+      Stop on module-global caching, cross-field reuse, shared mutable row maps, cached
+      owner validation, a warmed baseline used by a production-input mutation, output
+      drift, less than 20 percent measured combined savings, or the 30-minute boundary.
+    fallback: >-
+      Revert the inventory implementation, retain the two green cold helpers, and
+      revise the driver ceiling from the measured 32.735-second lower bound.
+    outcome: >-
+      Implemented an explicit field-bound, tuple-backed RowJetInventory with no module
+      or process-global state. Both owner control paths opt in, receive fresh row maps,
+      and repeat authoritative owner key and gradient validation. The cold path remains
+      unchanged, and mutations must construct or replace a fresh inventory rather than
+      reuse a warmed baseline.
+    evidence:
+    - The exact control proves three active-row builds serve all fifteen owner-3 scale records and three owner-4 records while six owner validations still run.
+    - Full A-row equality against a cold rebuild covers values, gradients, and Hessians; direct returned-map deletion cannot poison a later view.
+    - A tied-row deletion, authoritative-matrix drift, and distinct NumberField identity all fail at their declared boundaries.
+    - Three paired observations measured cold 28.172 to 32.735 seconds with median 29.140, versus shared 14.041 to 17.631 seconds with median 14.128.
+    - Paired reductions range from 39.5 to 57.1 percent with median 49.9 percent, clearing the declared 20 percent retention threshold.
+    - The final exact equality, call-count, isolation, and mutation control passes in 24.75 seconds; Ruff and BasedPyright pass.
+    - Three independent audits accept the scoped inventory and reject treating it as a global cache; nested exact coefficients remain contractually immutable and mutations replace whole jets.
+    stop_reason: Exact equivalence, three-build exhaustion, mutation isolation, three paired timings, and independent review pass, so W7 closed in under seven minutes.
+    next_action: >-
+      Run W3 before integration to decide whether the next slice should bind sheet
+      controls to the inventory, assemble a target-free unified control gate, or rotate
+      to BC-030.
+  - workflow: insight-iteration
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Interpret the accepted reuse mechanism and owner proof data, rank the remaining
+      exp-045 prerequisites against BC-030 rotation value, and select one next slice
+      without opening pure-W measurement.
+    status: completed
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      The performance blocker is discharged with exact equivalence and non-overlapping
+      timing ranges, so the experiment loop requires a fresh dependency and information
+      inventory before more integration.
+    budget_minutes: 10
+    started_at: '2026-08-27T00:01:00-07:00'
+    deadline_at: '2026-08-27T00:11:00-07:00'
+    expected_output: >-
+      One next workflow and seam with a predeclared control, mutation, cost ceiling, and
+      explicit decision to continue BC-029 or rotate scientific lanes.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop on target execution, cache reuse across a mutation, combined control work
+      above 30 seconds without a new budget, or treating positive-W calibration as a
+      pure-W result.
+    fallback: >-
+      Retain the accepted row inventory and rotate to target-free BC-030 if no remaining
+      exp-045 prerequisite fits one bounded slice.
+    outcome: >-
+      Rotated from BC-029 to the independent target-free BC-030 lane. Exp-045 is now a
+      replayable typed instrument blocker rather than a scientific result: the scale,
+      owner-4, and reuse prerequisites are accepted, but sheet-inventory binding,
+      unified controls, the remaining mutations and refusals, replacement driver,
+      replay, and final audit do not fit the mini-cycle remainder.
+    evidence:
+    - The BC-029 mini-cycle has about 23 minutes left, less than one complete build-review-replay slice for the frozen remaining instrument.
+    - No pure-W target or result was created, so the dependency stop carries no missed, met, unresolved, feasibility, or obstruction disposition.
+    - BC-030 is dependency-ready, target-free, and advances a distinct constructive-enumeration lane rather than extending the n=5 local-geometry rabbit hole.
+    stop_reason: The dependency blocker and resumable next step are explicit, and lane rotation has higher information value, so W3 closed in under two minutes.
+    next_action: >-
+      Under BC-030 and think-6mcd, inspect the CG-010 fixed-angle cell contract and
+      freeze the smallest target-free control without starting n=11 enumeration.
+  - workflow: research-pass
+    recording: contemporaneous
+    clock_role: work
+    focus: insight
+    objective: >-
+      Read and shape BC-030's target-free CG-010 control: one complete fixed-angle cell
+      with declared walls, one frozen separating axis per non-edge, canonical ties,
+      typed caps, and an exact pricing contract before target-sized enumeration.
+    status: in_progress
+    entered_by: evidence_checkpoint
+    switch_reason: >-
+      W3 retained BC-029 as a typed instrument blocker and selected the dependency-ready
+      constructive lane to restore breadth across the ten-hour agenda.
+    budget_minutes: 20
+    started_at: '2026-08-27T00:03:00-07:00'
+    deadline_at: '2026-08-27T00:23:00-07:00'
+    expected_output: >-
+      A source-grounded CG-010 contract naming the complete labels, cap semantics,
+      pricing vector, control instances, falsifying mutations, and smallest W7 handoff.
+    validation_command: >-
+      uv run --directory explorations/packing --frozen packing-ledger check
+    kill_condition: >-
+      Stop on target geometry, n=11 enumeration, treating the 11,013 abstract scaffolds
+      as feasible packings, an unfrozen axis choice, or a control larger than one
+      fixed-angle cell.
+    fallback: >-
+      Record the first missing grammar or pricing definition under think-6mcd and leave
+      BC-030 ready without implementation.
     outcome: null
     evidence: []
     stop_reason: null
     next_action: >-
-      Define the minimal owner-4 record and production-backed positive control, write
-      the real zero-W mutation first, then request independent review.
+      Read agenda 003, the constructive-enumeration spec, CG-010 owners, and current cell
+      enumerator code before proposing any artifact.
   primary_bead: think-whwc
   status: in_progress
   budget:

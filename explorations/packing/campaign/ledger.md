@@ -39,7 +39,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-023](agent-sessions/session-023-pr45-merge-readiness.md) | completed | contemporaneous | `factual-review` (correctness) | `process-review` (correctness) | 8 | think-eyix | Under BC-019 and think-eyix, publish this draft checkpoint, open a fresh time-sliced continuation while free space remains at least 4 GiB, run strict validation with the measured timeout, watch both GitHub jobs, and disposition every review bead only after those receipts are green. |
 | [session-024](agent-sessions/session-024-pr45-strict-and-ci.md) | stopped | contemporaneous | `process-review` (correctness) | `process-review` (correctness) | 2 | think-eyix | Under BC-019 and think-eyix, review PR 41 for correctness, merge safety, and measured validation-loop speedup. If it lands on main, merge that exact main commit into this branch, rerun the focused gates and one complete strict receipt, then require both final-head GitHub jobs before closing review beads. |
 | [session-025](agent-sessions/session-025-pr45-performance-continuation.md) | completed | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 4 | think-eyix | Under BC-027 and think-whwc, reconcile the merged-main validation failure, the terminal session record, and generated views; then restore a first-failure-safe green pipeline before the next research session. |
-| [session-026](agent-sessions/session-026-balanced-research-session-a.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 11 | think-whwc | Under BC-029, think-whwc, and think-1s0h, interpret the accepted scale proof data and select the next exact instrument obligation; do not run the pure -W target. |
+| [session-026](agent-sessions/session-026-balanced-research-session-a.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `research-pass` (insight) | 16 | think-whwc | Under BC-029, think-whwc, and think-1s0h, interpret the accepted scale proof data and select the next exact instrument obligation; do not run the pure -W target. |
 
 ### Workflow summary
 
@@ -47,13 +47,13 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 
 | workflow | declared entries | retrospective entries | declared phases | retrospective phases |
 | --- | ---: | ---: | ---: | ---: |
-| `research-pass` | 0 | 0 | 1 | 0 |
+| `research-pass` | 0 | 0 | 2 | 0 |
 | `factual-review` | 1 | 0 | 16 | 2 |
-| `insight-iteration` | 0 | 1 | 8 | 2 |
+| `insight-iteration` | 0 | 1 | 10 | 2 |
 | `process-review` | 4 | 4 | 31 | 6 |
-| `efficiency-loop` | 6 | 0 | 11 | 0 |
+| `efficiency-loop` | 6 | 0 | 12 | 0 |
 | `research-loop` | 1 | 4 | 10 | 7 |
-| `pipeline-improvement` | 5 | 0 | 30 | 0 |
+| `pipeline-improvement` | 5 | 0 | 31 | 0 |
 
 ## Experiment agendas
 
@@ -246,7 +246,7 @@ Status: **active**. Use one mutable ten-hour agenda, with a full five-hour midpo
 
 | id | series | instance | operator | hypotheses | reason |
 | --- | --- | --- | --- | --- | --- |
-| exp-045 | series-000 | 5 | openai-codex | H-023 | The criterion is frozen before scale implementation or target work. The accepted row, stress, and sheet helpers exist, but scale routing, the replacement driver, twelve production mutation paths, thirteen refusal records, and post-change review remain incomplete. |
+| exp-045 | series-000 | 5 | openai-codex | H-023 | The criterion was frozen before scale implementation or target work. The accepted row, stress, sheet, owner-3 scale, and owner-4 proof-data helpers now exist, but actual target-route premise binding, the replacement driver, unified controls, twelve production mutation paths, thirteen refusal records, replay, and final post-change review remain incomplete. |
 
 ## Resumable — stopped on the clock, not on an answer
 

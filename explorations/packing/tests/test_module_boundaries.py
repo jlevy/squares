@@ -279,8 +279,14 @@ def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> No
             "test_active_rows_expose_both_owner_alternatives",
             "test_sat_row_retains_exact_center_angle_cross_curvature",
         },
+        "test_minus_w_row_inventory.py": {
+            "test_shared_row_inventory_is_exact_isolated_and_builds_once_per_stratum",
+        },
         "test_minus_w_scale.py": {
             "test_positive_w_control_has_exact_three_by_five_inventory",
+        },
+        "test_minus_w_owner4.py": {
+            "test_positive_w_owner4_control_exhausts_three_strata_and_rejects_zero_w",
         },
         "test_minus_w_sheet.py": {
             "test_positive_sheet_path_checks_all_seventeen_rows_for_both_owners",
