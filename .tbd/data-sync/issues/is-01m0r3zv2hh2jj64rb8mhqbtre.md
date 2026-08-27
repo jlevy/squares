@@ -5,7 +5,7 @@ title: Measure terminal flatness and connectivity before defining basin identity
 kind: bug
 status: in_progress
 priority: 0
-version: 36
+version: 37
 spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md
 labels:
   - focus-correctness
@@ -30,10 +30,10 @@ child_order_hints:
   - is-01m0vyhtzd0j8gnfwm5k040ff1
   - is-01m0y16d21crjnn9tqa0120way
 created_at: 2026-08-23T20:11:30.757Z
-updated_at: 2026-08-27T06:03:11.749Z
+updated_at: 2026-08-27T06:35:00.744Z
 ---
 D-034, blocking the census. Exact evidence: the n=3 side-2 sliding family is a connected positive-dimensional terminal set that one contact certificate and many geometric keys split into quantum-dependent rows. The n=5 golden adds an unresolved pair: equal side, short form, contact certificate, angle signature and contact count but different geometry. Those facts do not prove the n=5 rows are connected or establish a five-dimensional family; raw constraint counting is not a rank certificate. Acceptance: archive both n=5 poses and their active cells; compute the fixed-cell optimal-face rank/nullity from the active LP matrix and objective; compute the full pose/angle active-constraint Jacobian; continue every null direction with independent validity checks; test whether the two endpoints are path-connected across cell/contact strata; report certified dimension or unresolved bounds; and feed the evidence to think-0yo9 rather than choosing identity from side/contact hashes.
 
 ## Notes
 
-2026-08-26 session-026 checkpoint: exp-045 is preregistered and independently accepted with six frozen owner models, fifteen owner-3 scale records, twelve typed pre-certificate mutations, thirteen keyed refusals, and distinct met/missed/validly-undecided/invalid routes. Its results array is intentionally empty because no target or guard has run. Target execution remains blocked. The active W7 slice may add only cases/n5/minus_w_scale.py and tests/test_minus_w_scale.py, exercised first on the exp-036 positive control; do not edit the old target driver or create result JSON until the complete instrument and post-change review pass. H-023 remains an open question with instrument_ready false and no whole-component or connectivity inference.
+2026-08-26 session-026 checkpoint: exp-045 remains preregistered with empty results and instrument_ready false. The owner-3 scale helper now derives tied-feature sign ownership from the exact production projection, rejects semantic handler swaps, and retains typed unbounded-route premises with three closed symbolic reductions; bounded routes carry none. Three independent audits accept this proof-data boundary only. The target driver must still establish the actual sequence premises, integrate owner-4, controls, 12 mutations, 13 refusals, replay, and final review. The next target-free W7 slice is exact three-stratum owner-4 proof data on the positive-W control with a real zero-W mutation. No whole-component, connectivity, realization, feasibility, or H-023 disposition follows.
