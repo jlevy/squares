@@ -85,6 +85,30 @@ session:
     That retires BC-036's declared risk. The four required controls exist to be built, so
     exp-045's twelve was not aspirational and no preregistration amendment is warranted.
   - 'The mutation surface is narrow by construction: `ProofInputs` carries exactly eight fields, one per existing control, so each new control needs one new field.'
+  - >-
+    Correction to the first inventory, found by tracing the call graph rather than
+    grepping: only three of the seven candidates are reachable. Mutations run through
+    `proof_core`, and `source.replay`, `baseline.obstruction`, `scope.refusal_set` and
+    `replay.drift` are raised in `source_bindings`, `build_result` and `main`, all outside
+    its call graph. A `ProofInputs` perturbation can never reach them.
+  - >-
+    `evaluate_necessary_inequality:264` is unreachable on the proof path. `selected_rows`
+    filters `tangent_inventory.matrix`, so its rows are a subset of the `all_rows` that
+    `minus_w_cases:338` already tests the direction against; a direction passing 338
+    necessarily passes 264. It is a defensive guard for direct callers, not a reachable
+    proof invariant.
+  - >-
+    That leaves exactly four distinct reachable failure modes and no slack: geometry
+    constant drift at `geometry_constants:246`, a retained correction coordinate at
+    `acceleration_eliminator:206`, positive Farkas identity drift at
+    `acceleration_eliminator:219`, and an active source row left by -W at
+    `minus_w_cases:338`.
+  - >-
+    Two of those four share the identifier `certificate.acceleration_elimination`, so as
+    the code stands two controls could not match only their own frozen failure identifier,
+    which is what exp-045's admission requires. Splitting that identifier in two is a
+    refinement of the failure vocabulary rather than a weakening of any criterion: it
+    changes nothing that is proved and makes each mode separately identifiable.
   stop_reason: null
   next_action: >-
     Under BC-036 and think-oyn9, build four of the seven candidate controls and raise the
