@@ -244,7 +244,7 @@ def build_gallery_manifest() -> GalleryManifest:
                 "title": "Kingbird high-precision packing overview",
                 "alt": (
                     "High-precision reconstruction of the Kingbird packing of twenty-nine "
-                    "unit squares using the deterministic cool palette."
+                    "unit squares."
                 ),
                 "caption": (
                     "The retained roughly 100-digit source is evaluated at 160 decimal "

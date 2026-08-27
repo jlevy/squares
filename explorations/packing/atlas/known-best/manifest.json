@@ -1,5 +1,21 @@
 {
   "atlas": {
+    "composite": {
+      "layout": "10 by 10, row-major n=1..100",
+      "png_preview": {
+        "derived_from": "atlas/known-best/known-best-1-100.svg",
+        "height": 2540,
+        "path": "atlas/known-best/known-best-1-100.png",
+        "width": 2400
+      },
+      "renderer": "sqpack deterministic composite renderer",
+      "square_count": 5050,
+      "svg": {
+        "height": 2540,
+        "path": "atlas/known-best/known-best-1-100.svg",
+        "width": 2400
+      }
+    },
     "entries": [
       {
         "chunk_annotation": {

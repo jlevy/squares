@@ -57,7 +57,7 @@
       "view": "overview"
     },
     {
-      "alt": "High-precision reconstruction of the Kingbird packing of twenty-nine unit squares using the deterministic cool palette.",
+      "alt": "High-precision reconstruction of the Kingbird packing of twenty-nine unit squares.",
       "artifact": "atlas/rendering/kingbird29-overview.svg",
       "caption": "The retained roughly 100-digit source is evaluated at 160 decimal digits of working precision and tolerance 1e-80, and passes all 406 separating-axis pair checks; this is a numerically checked construction, not an exact certificate.",
       "contacts": false,
@@ -72,6 +72,6 @@
     }
   ],
   "gallery_generator": "uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --update",
-  "renderer_version": "5",
+  "renderer_version": "7",
   "schema_version": 2
 }

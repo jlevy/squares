@@ -335,6 +335,7 @@ def run_geometry_controls() -> dict[str, bool]:
         ViewLevel,
         render_packing_svg,
     )
+    from sqpack.render.color import ANGLE_CLASS_CONTRACT, assign_square_colors
     from sqpack.render.model import ActiveFeature
     from sqpack.render.style import (
         CONTACT_CLIP_POLICY,
@@ -346,7 +347,7 @@ def run_geometry_controls() -> dict[str, bool]:
         PACKING_BOUNDARY_COLOR,
         PACKING_BOUNDARY_WIDTH,
         PAPER_THEME,
-        SQUARE_FILL_PALETTE,
+        SQUARE_HUE_PALETTE,
         evidence_style,
     )
 
@@ -372,6 +373,11 @@ def run_geometry_controls() -> dict[str, bool]:
         if "data-panel" in panel.attrib
     ]
     overview_root = ET.fromstring(overview)
+    overview_metadata = {
+        node.attrib["name"]: node.text or ""
+        for node in overview_root.iter()
+        if node.tag.endswith("}value") and "name" in node.attrib
+    }
     overview_panel = next(
         node for node in overview_root.iter() if node.attrib.get("data-panel") == "Trump n=11"
     )
@@ -416,28 +422,7 @@ def run_geometry_controls() -> dict[str, bool]:
         if child.attrib.get("data-feature") == "contact-clip-shape"
     }
     overview_fills_by_id = {square.attrib["data-square"]: square for square in overview_squares}
-    expected_palette = (
-        "#378c3f",
-        "#00aeee",
-        "#c1a0fb",
-        "#00b393",
-        "#3d63be",
-        "#78d7d6",
-        "#877deb",
-        "#9fce85",
-        "#0096b1",
-        "#854888",
-        "#83c4ff",
-        "#3bb360",
-        "#008376",
-        "#7acfe9",
-        "#0079bf",
-        "#86a2ff",
-        "#865eb1",
-        "#7fd6b1",
-        "#00afb9",
-        "#c18dd8",
-    )
+    expected_colors = assign_square_colors(trump, RenderSpec())
 
     def contact_clip_matches_participants(mark) -> bool:
         reference = mark.attrib.get("clip-path", "")
@@ -504,13 +489,37 @@ def run_geometry_controls() -> dict[str, bool]:
             <= viewport_height
             for container in panel_containers
         ),
-        "rendered_square_fill_palette_is_selected_cool_set": expected_palette
-        == SQUARE_FILL_PALETTE
-        and tuple(square.attrib["fill"] for square in overview_squares)
-        == tuple(
-            expected_palette[index % len(expected_palette)]
-            for index in range(len(overview_squares))
+        "rendered_square_fills_match_angle_contact_scheme": all(
+            square.attrib["fill"] == expected_colors[square.attrib["data-square"]].fill
+            and square.attrib["data-hue-index"]
+            == str(expected_colors[square.attrib["data-square"]].hue_index)
+            and square.attrib["data-shade-index"]
+            == str(expected_colors[square.attrib["data-square"]].shade_index)
+            and square.attrib["data-contact-sides"]
+            == str(expected_colors[square.attrib["data-square"]].contact_sides)
+            and square.attrib["data-orientation-radians"]
+            == str(expected_colors[square.attrib["data-square"]].orientation_radians)
+            and square.attrib["data-angle-class-residual-radians"]
+            == str(expected_colors[square.attrib["data-square"]].angle_class_residual_radians)
+            and square.attrib["data-full-side-contacts"]
+            == " ".join(expected_colors[square.attrib["data-square"]].full_side_contacts)
+            and square.attrib.get("data-maximum-contact-residual")
+            == (
+                str(expected_colors[square.attrib["data-square"]].maximum_contact_residual)
+                if expected_colors[square.attrib["data-square"]].maximum_contact_residual
+                is not None
+                else None
+            )
+            for square in overview_squares
         ),
+        "color_measurement_metadata_is_complete": overview_metadata.get(
+            "color-angle-class-contract"
+        )
+        == ANGLE_CLASS_CONTRACT
+        and overview_metadata.get("color-angle-tolerance-radians")
+        == str(RenderSpec().angle_tolerance_radians)
+        and overview_metadata.get("color-full-side-contact-tolerance")
+        == str(RenderSpec().full_side_contact_tolerance),
         "packing_outlines_are_thin_opaque_pure_black": PAPER_THEME.container
         == PACKING_BOUNDARY_COLOR
         == "#000000"
@@ -529,7 +538,7 @@ def run_geometry_controls() -> dict[str, bool]:
         "contact_highlight_is_reserved_tempered_yellow": PAPER_THEME.contact
         == CONTACT_HIGHLIGHT_COLOR
         == "#e3c64a"
-        and PAPER_THEME.contact not in expected_palette
+        and PAPER_THEME.contact not in SQUARE_HUE_PALETTE
         and all(
             mark.attrib.get("fill") == PAPER_THEME.contact
             or mark.attrib.get("stroke") == PAPER_THEME.contact
@@ -711,8 +720,12 @@ def run_portability_controls() -> dict[str, bool]:
 def run_gallery_controls() -> dict[str, bool]:
     from xml.etree import ElementTree as ET
 
+    from devtools.build_known_best_atlas import SUMMARY_SVG
+    from devtools.map_prospective_sources import COVERAGE_OUTPUT
+    from devtools.packing_render_adapters import frame_from_kingbird29
     from devtools.render_packing_gallery import build_gallery_manifest
-    from sqpack.render.style import SQUARE_FILL_PALETTE
+    from sqpack.render import RenderSpec
+    from sqpack.render.color import assign_square_colors
 
     manifest = build_gallery_manifest()
     examples = manifest["examples"]
@@ -727,16 +740,17 @@ def run_gallery_controls() -> dict[str, bool]:
         pattern = rf"!\[[^\]]+\]\({re.escape(relative)}\)"
         return re.search(pattern, text) is not None
 
+    def references(document: str, target: str) -> bool:
+        document_path = ROOT / document
+        relative = os.path.relpath(ROOT / target, document_path.parent)
+        text = document_path.read_text(encoding="utf-8")
+        pattern = rf"!?\[[^\]]+\]\({re.escape(relative)}(?:#[^)]+)?\)"
+        return re.search(pattern, text) is not None
+
     by_id = {example["id"]: example for example in examples}
     surface_expectations = {
-        "README.md": (
-            "n10-source-return-comparison",
-            "n11-trump-overview",
-            "n29-kingbird-overview",
-        ),
         "TUTORIAL.md": (
             "n3-optimal-moduli",
-            "n10-source-return-comparison",
             "n11-trump-overview",
             "n29-kingbird-overview",
         ),
@@ -745,12 +759,6 @@ def run_gallery_controls() -> dict[str, bool]:
             "n11-trump-overview",
             "n29-kingbird-overview",
         ),
-        "atlas/README.md": (
-            "n3-optimal-moduli",
-            "n11-trump-overview",
-            "n29-kingbird-overview",
-        ),
-        "frontier/README.md": ("n11-trump-overview", "n29-kingbird-overview"),
     }
 
     inline_svg_targets = []
@@ -782,7 +790,19 @@ def run_gallery_controls() -> dict[str, bool]:
         if node.tag.endswith("}value") and "name" in node.attrib
     }
     kingbird_manifest = by_id["n29-kingbird-overview"]
+    kingbird_expected = assign_square_colors(frame_from_kingbird29(), RenderSpec())
     gallery_artifacts = {path.resolve() for path in artifacts}
+    document_svg_artifacts = gallery_artifacts | {
+        SUMMARY_SVG.resolve(),
+        COVERAGE_OUTPUT.resolve(),
+    }
+    comparison_artifact = by_id["n10-source-return-comparison"]["artifact"]
+    comparison_embeds = {
+        document_path.relative_to(ROOT).as_posix()
+        for document_path in ROOT.rglob("*.md")
+        if "resources" not in document_path.relative_to(ROOT).parts
+        and embeds(document_path.relative_to(ROOT).as_posix(), comparison_artifact)
+    }
     return {
         "gallery_has_five_known_answers": len(examples) == 5,
         "gallery_ids_are_unique": len(ids) == len(set(ids)),
@@ -807,9 +827,8 @@ def run_gallery_controls() -> dict[str, bool]:
             "n11-trump-overview": True,
             "n29-kingbird-overview": False,
         },
-        "kingbird_uses_palette_in_stable_index_order": len(kingbird_fills) == 29
-        and kingbird_fills
-        == [SQUARE_FILL_PALETTE[index % len(SQUARE_FILL_PALETTE)] for index in range(29)],
+        "kingbird_uses_angle_contact_colors_in_stable_square_order": len(kingbird_fills) == 29
+        and kingbird_fills == [color.fill for color in kingbird_expected.values()],
         "kingbird_is_numerically_checked_not_verified": (
             kingbird_manifest["evidence"] == "numerically-checked"
             and "verified" not in kingbird_manifest["caption"].lower()
@@ -829,14 +848,18 @@ def run_gallery_controls() -> dict[str, bool]:
         and kingbird_metadata.get("check-result") == "passed",
         "all_inline_svg_targets_exist": bool(inline_svg_targets)
         and all(path.is_file() for path in inline_svg_targets),
-        "all_inline_svg_targets_are_current_gallery_artifacts": set(inline_svg_targets)
-        <= gallery_artifacts,
-        "frontier_cases_embed_gallery_artifacts": all(
-            embeds(example["frontier_case"], example["artifact"]) for example in examples
+        "all_inline_svg_targets_are_owned_artifacts": set(inline_svg_targets)
+        <= document_svg_artifacts,
+        "frontier_cases_reference_gallery_artifacts_or_guide": all(
+            embeds(example["frontier_case"], example["artifact"])
+            or references(example["frontier_case"], "atlas/rendering/README.md")
+            for example in examples
         ),
         "gallery_readme_embeds_every_artifact": all(
             embeds("atlas/rendering/README.md", example["artifact"]) for example in examples
         ),
+        "comparison_is_embedded_only_in_focused_gallery": comparison_embeds
+        == {"atlas/rendering/README.md"},
         "exposition_surfaces_embed_expected_examples": all(
             embeds(document, by_id[example_id]["artifact"])
             for document, example_ids in surface_expectations.items()

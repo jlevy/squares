@@ -28,6 +28,28 @@ SQUARE_FILL_PALETTE = (
     "#00afb9",
     "#c18dd8",
 )
+SQUARE_HUE_PALETTE = (
+    "#00b393",
+    "#854888",
+    "#9fce85",
+    "#86a2ff",
+    "#378c3f",
+    "#00aeee",
+    "#c1a0fb",
+    "#877deb",
+    "#c18dd8",
+    "#7fd6b1",
+    "#00afb9",
+    "#3bb360",
+    "#83c4ff",
+    "#865eb1",
+    "#0096b1",
+    "#0079bf",
+    "#008376",
+    "#78d7d6",
+    "#3d63be",
+    "#7acfe9",
+)
 SQUARE_FILL_OPACITY = 1.0
 PACKING_BOUNDARY_COLOR = "#000000"
 PACKING_BOUNDARY_WIDTH = 1.25

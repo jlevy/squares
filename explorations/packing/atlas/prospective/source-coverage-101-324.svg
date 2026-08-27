@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:sqpack="https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1" width="1440" height="1030" viewBox="0 0 1440 1030" role="img" aria-labelledby="figure-title figure-description">
+  <title id="figure-title">Source coverage for square packings beyond one hundred</title>
+  <desc id="figure-description">An audited grid for n equals 101 through 324. Ninety-seven exact grids and four licensed SVG constructions are retained locally. Public SVG geometry was located and parsed for the other 123 cases, but retention is deferred pending license review. No case in the audited range lacks selected geometry.</desc>
+  <metadata>
+    <sqpack:profile version="7">
+      <sqpack:coordinates>document-grid; row-major n=101..324</sqpack:coordinates>
+      <sqpack:value name="audit-checked-at">2026-08-26T06:03:34-07:00</sqpack:value>
+      <sqpack:value name="claim-status">source-availability-only-no-annotations</sqpack:value>
+      <sqpack:value name="columns">16</sqpack:value>
+      <sqpack:value name="first-n">101</sqpack:value>
+      <sqpack:value name="generated-by">python -m devtools.map_prospective_sources</sqpack:value>
+      <sqpack:value name="last-n">324</sqpack:value>
+      <sqpack:value name="located-source-gaps">0</sqpack:value>
+      <sqpack:value name="rows">14</sqpack:value>
+      <sqpack:value name="selected-cases">224</sqpack:value>
+    </sqpack:profile>
+  </metadata>
+  <rect width="1440" height="1030" fill="#ffffff" />
+  <text x="60" y="58" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="36" font-weight="700" fill="#17202a">What is available beyond n = 100?</text>
+  <text x="60" y="95" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="18" fill="#5c6673">Audited n = 101-324  ·  all 224 cases have selected geometry</text>
+  <g data-feature="coverage-stat" data-coverage="exact-grid-retained">
+    <rect x="60" y="127" width="310" height="82" rx="12" fill="#cceee6" />
+    <rect x="60" y="127" width="8" height="82" rx="4" fill="#0f8f79" />
+    <text x="86" y="166" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="28" font-weight="700" fill="#0f513f">97</text>
+    <text x="86" y="192" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" fill="#0f513f">exact grids retained</text>
+  </g>
+  <g data-feature="coverage-stat" data-coverage="licensed-svg-retained">
+    <rect x="397" y="127" width="310" height="82" rx="12" fill="#dbeafe" />
+    <rect x="397" y="127" width="8" height="82" rx="4" fill="#4361c2" />
+    <text x="423" y="166" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="28" font-weight="700" fill="#1e3a8a">4</text>
+    <text x="423" y="192" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" fill="#1e3a8a">licensed SVGs retained</text>
+  </g>
+  <g data-feature="coverage-stat" data-coverage="public-svg-license-deferred">
+    <rect x="734" y="127" width="310" height="82" rx="12" fill="#ffedd5" />
+    <rect x="734" y="127" width="8" height="82" rx="4" fill="#d97706" />
+    <text x="760" y="166" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="28" font-weight="700" fill="#7c2d12">123</text>
+    <text x="760" y="192" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" fill="#7c2d12">public SVGs, license deferred</text>
+  </g>
+  <g data-feature="coverage-stat" data-coverage="no-located-source">
+    <rect x="1071" y="127" width="310" height="82" rx="12" fill="#e2e8f0" />
+    <rect x="1071" y="127" width="8" height="82" rx="4" fill="#94a3b8" />
+    <text x="1097" y="166" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="28" font-weight="700" fill="#475569">0</text>
+    <text x="1097" y="192" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" fill="#475569">no located source</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="101" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="60" y="250" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="98" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">101</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="102" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="142" y="250" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="180" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">102</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="103" data-coverage="licensed-svg-retained" data-source-key="unitsquare-release-1">
+    <rect x="224" y="250" width="76" height="42" rx="7" fill="#dbeafe" stroke="#4361c2" stroke-width="2.5" />
+    <text x="262" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#1e3a8a">103</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="104" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="306" y="250" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="344" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">104</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="105" data-coverage="licensed-svg-retained" data-source-key="unitsquare-release-1">
+    <rect x="388" y="250" width="76" height="42" rx="7" fill="#dbeafe" stroke="#4361c2" stroke-width="2.5" />
+    <text x="426" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#1e3a8a">105</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="106" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="470" y="250" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="508" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">106</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="107" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="552" y="250" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="590" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">107</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="108" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="634" y="250" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="672" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">108</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="109" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="716" y="250" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="754" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">109</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="110" data-coverage="licensed-svg-retained" data-source-key="unitsquare-release-1">
+    <rect x="798" y="250" width="76" height="42" rx="7" fill="#dbeafe" stroke="#4361c2" stroke-width="2.5" />
+    <text x="836" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#1e3a8a">110</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="111" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="880" y="250" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="918" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">111</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="112" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="962" y="250" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1000" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">112</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="113" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1044" y="250" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1082" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">113</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="114" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1126" y="250" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1164" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">114</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="115" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1208" y="250" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1246" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">115</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="116" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1290" y="250" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1328" y="277" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">116</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="117" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="60" y="299" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="98" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">117</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="118" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="142" y="299" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="180" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">118</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="119" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="224" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="262" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">119</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="120" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="306" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="344" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">120</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="121" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="388" y="299" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="426" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">121</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="122" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="470" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="508" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">122</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="123" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="552" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="590" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">123</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="124" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="634" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="672" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">124</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="125" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="716" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="754" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">125</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="126" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="798" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="836" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">126</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="127" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="880" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="918" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">127</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="128" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="962" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1000" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">128</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="129" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1044" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1082" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">129</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="130" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1126" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1164" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">130</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="131" data-coverage="licensed-svg-retained" data-source-key="unitsquare-release-1">
+    <rect x="1208" y="299" width="76" height="42" rx="7" fill="#dbeafe" stroke="#4361c2" stroke-width="2.5" />
+    <text x="1246" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#1e3a8a">131</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="132" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1290" y="299" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1328" y="326" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">132</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="133" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="60" y="348" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="98" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">133</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="134" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="142" y="348" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="180" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">134</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="135" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="224" y="348" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="262" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">135</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="136" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="306" y="348" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="344" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">136</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="137" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="388" y="348" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="426" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">137</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="138" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="470" y="348" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="508" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">138</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="139" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="552" y="348" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="590" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">139</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="140" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="634" y="348" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="672" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">140</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="141" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="716" y="348" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="754" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">141</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="142" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="798" y="348" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="836" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">142</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="143" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="880" y="348" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="918" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">143</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="144" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="962" y="348" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1000" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">144</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="145" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1044" y="348" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1082" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">145</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="146" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1126" y="348" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1164" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">146</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="147" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1208" y="348" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1246" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">147</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="148" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1290" y="348" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1328" y="375" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">148</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="149" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="60" y="397" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="98" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">149</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="150" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="142" y="397" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="180" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">150</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="151" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="224" y="397" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="262" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">151</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="152" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="306" y="397" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="344" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">152</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="153" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="388" y="397" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="426" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">153</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="154" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="470" y="397" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="508" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">154</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="155" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="552" y="397" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="590" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">155</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="156" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="634" y="397" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="672" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">156</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="157" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="716" y="397" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="754" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">157</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="158" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="798" y="397" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="836" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">158</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="159" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="880" y="397" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="918" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">159</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="160" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="962" y="397" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1000" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">160</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="161" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1044" y="397" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1082" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">161</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="162" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1126" y="397" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1164" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">162</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="163" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1208" y="397" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1246" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">163</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="164" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1290" y="397" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1328" y="424" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">164</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="165" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="60" y="446" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="98" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">165</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="166" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="142" y="446" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="180" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">166</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="167" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="224" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="262" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">167</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="168" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="306" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="344" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">168</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="169" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="388" y="446" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="426" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">169</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="170" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="470" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="508" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">170</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="171" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="552" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="590" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">171</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="172" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="634" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="672" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">172</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="173" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="716" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="754" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">173</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="174" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="798" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="836" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">174</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="175" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="880" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="918" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">175</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="176" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="962" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1000" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">176</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="177" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1044" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1082" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">177</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="178" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1126" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1164" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">178</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="179" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1208" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1246" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">179</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="180" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1290" y="446" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1328" y="473" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">180</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="181" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="60" y="495" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="98" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">181</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="182" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="142" y="495" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="180" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">182</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="183" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="224" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="262" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">183</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="184" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="306" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="344" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">184</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="185" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="388" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="426" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">185</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="186" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="470" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="508" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">186</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="187" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="552" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="590" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">187</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="188" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="634" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="672" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">188</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="189" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="716" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="754" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">189</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="190" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="798" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="836" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">190</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="191" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="880" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="918" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">191</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="192" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="962" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1000" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">192</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="193" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1044" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1082" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">193</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="194" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1126" y="495" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1164" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">194</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="195" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1208" y="495" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1246" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">195</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="196" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1290" y="495" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1328" y="522" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">196</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="197" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="60" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="98" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">197</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="198" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="142" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="180" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">198</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="199" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="224" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="262" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">199</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="200" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="306" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="344" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">200</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="201" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="388" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="426" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">201</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="202" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="470" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="508" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">202</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="203" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="552" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="590" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">203</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="204" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="634" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="672" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">204</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="205" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="716" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="754" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">205</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="206" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="798" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="836" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">206</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="207" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="880" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="918" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">207</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="208" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="962" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1000" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">208</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="209" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1044" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1082" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">209</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="210" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1126" y="544" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1164" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">210</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="211" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1208" y="544" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1246" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">211</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="212" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1290" y="544" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1328" y="571" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">212</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="213" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="60" y="593" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="98" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">213</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="214" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="142" y="593" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="180" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">214</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="215" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="224" y="593" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="262" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">215</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="216" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="306" y="593" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="344" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">216</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="217" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="388" y="593" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="426" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">217</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="218" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="470" y="593" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="508" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">218</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="219" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="552" y="593" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="590" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">219</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="220" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="634" y="593" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="672" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">220</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="221" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="716" y="593" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="754" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">221</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="222" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="798" y="593" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="836" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">222</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="223" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="880" y="593" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="918" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">223</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="224" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="962" y="593" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1000" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">224</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="225" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1044" y="593" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1082" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">225</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="226" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1126" y="593" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1164" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">226</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="227" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1208" y="593" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1246" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">227</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="228" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1290" y="593" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1328" y="620" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">228</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="229" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="60" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="98" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">229</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="230" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="142" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="180" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">230</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="231" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="224" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="262" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">231</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="232" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="306" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="344" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">232</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="233" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="388" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="426" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">233</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="234" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="470" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="508" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">234</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="235" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="552" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="590" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">235</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="236" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="634" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="672" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">236</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="237" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="716" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="754" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">237</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="238" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="798" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="836" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">238</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="239" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="880" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="918" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">239</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="240" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="962" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1000" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">240</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="241" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1044" y="642" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1082" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">241</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="242" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1126" y="642" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1164" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">242</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="243" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1208" y="642" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1246" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">243</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="244" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1290" y="642" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1328" y="669" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">244</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="245" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="60" y="691" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="98" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">245</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="246" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="142" y="691" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="180" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">246</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="247" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="224" y="691" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="262" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">247</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="248" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="306" y="691" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="344" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">248</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="249" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="388" y="691" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="426" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">249</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="250" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="470" y="691" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="508" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">250</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="251" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="552" y="691" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="590" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">251</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="252" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="634" y="691" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="672" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">252</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="253" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="716" y="691" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="754" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">253</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="254" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="798" y="691" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="836" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">254</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="255" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="880" y="691" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="918" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">255</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="256" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="962" y="691" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1000" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">256</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="257" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1044" y="691" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1082" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">257</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="258" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1126" y="691" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1164" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">258</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="259" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1208" y="691" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1246" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">259</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="260" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1290" y="691" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1328" y="718" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">260</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="261" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="60" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="98" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">261</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="262" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="142" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="180" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">262</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="263" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="224" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="262" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">263</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="264" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="306" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="344" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">264</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="265" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="388" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="426" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">265</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="266" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="470" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="508" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">266</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="267" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="552" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="590" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">267</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="268" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="634" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="672" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">268</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="269" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="716" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="754" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">269</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="270" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="798" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="836" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">270</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="271" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="880" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="918" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">271</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="272" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="962" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1000" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">272</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="273" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1044" y="740" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1082" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">273</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="274" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1126" y="740" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1164" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">274</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="275" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1208" y="740" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1246" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">275</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="276" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1290" y="740" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1328" y="767" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">276</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="277" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="60" y="789" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="98" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">277</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="278" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="142" y="789" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="180" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">278</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="279" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="224" y="789" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="262" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">279</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="280" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="306" y="789" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="344" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">280</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="281" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="388" y="789" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="426" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">281</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="282" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="470" y="789" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="508" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">282</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="283" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="552" y="789" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="590" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">283</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="284" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="634" y="789" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="672" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">284</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="285" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="716" y="789" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="754" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">285</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="286" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="798" y="789" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="836" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">286</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="287" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="880" y="789" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="918" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">287</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="288" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="962" y="789" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1000" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">288</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="289" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1044" y="789" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1082" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">289</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="290" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1126" y="789" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1164" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">290</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="291" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1208" y="789" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1246" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">291</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="292" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1290" y="789" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1328" y="816" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">292</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="293" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="60" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="98" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">293</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="294" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="142" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="180" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">294</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="295" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="224" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="262" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">295</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="296" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="306" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="344" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">296</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="297" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="388" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="426" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">297</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="298" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="470" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="508" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">298</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="299" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="552" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="590" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">299</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="300" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="634" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="672" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">300</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="301" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="716" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="754" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">301</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="302" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="798" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="836" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">302</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="303" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="880" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="918" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">303</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="304" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="962" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1000" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">304</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="305" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1044" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1082" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">305</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="306" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1126" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1164" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">306</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="307" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1208" y="838" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1246" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">307</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="308" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1290" y="838" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1328" y="865" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">308</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="309" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="60" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="98" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">309</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="310" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="142" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="180" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">310</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="311" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="224" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="262" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">311</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="312" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="306" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="344" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">312</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="313" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="388" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="426" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">313</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="314" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="470" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="508" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">314</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="315" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="552" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="590" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">315</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="316" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="634" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="672" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">316</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="317" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="716" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="754" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">317</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="318" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="798" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="836" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">318</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="319" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="880" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="918" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">319</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="320" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="962" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1000" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">320</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="321" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1044" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1082" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">321</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="322" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1126" y="887" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1164" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">322</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="323" data-coverage="public-svg-license-deferred" data-source-key="kingbird-current-catalogue">
+    <rect x="1208" y="887" width="76" height="42" rx="7" fill="#ffedd5" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5 3" />
+    <text x="1246" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#7c2d12">323</text>
+  </g>
+  <g data-feature="coverage-cell" data-n="324" data-coverage="exact-grid-retained" data-source-key="catalogue-trivial-grid-rule">
+    <rect x="1290" y="887" width="76" height="42" rx="7" fill="#cceee6" stroke="#0f8f79" stroke-width="1" />
+    <text x="1328" y="914" text-anchor="middle" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#0f513f">324</text>
+  </g>
+  <text x="60" y="974" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="15" fill="#475569">The orange cells are a local retention-policy gap, not a gap in located public geometry.</text>
+  <text x="60" y="1002" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-size="13" fill="#64748b">Availability audit 2026-08-26 · Kingbird 114/114 distinct SVG groups parsed · UnitSquare 4/4 declared hashes matched</text>
+</svg>

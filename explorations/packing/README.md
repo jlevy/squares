@@ -14,11 +14,11 @@ finds an exact gap in the printed proof;
 certifies a source-distinct repair of the same inequality.
 Roughly `0.088` in side length remains between that bound and the 1979 construction.
 
-![Walter Trump’s exact eleven-square packing inside its enclosing square.](atlas/rendering/trump11-overview.svg)
+[![One hundred known-best square packings arranged from n equals one through one hundred.](atlas/known-best/known-best-1-100.png)](atlas/known-best/known-best-1-100.svg)
 
-*Walter Trump’s 1979 construction: six axis-aligned squares around a five-square oblique
-block. Translucent tempered-yellow segments and dots mark exact edge and point contacts.
-It is a certified upper bound, not a proof of optimality.*
+*The retained `n = 1…100` atlas, with each packing normalized to its own container and
+its reported side upper bound shown below.
+Select the image for the standalone, zoomable SVG.*
 
 Work is organized at three levels.
 Four **operating principles** define what quality means and which concerns may veto
@@ -305,20 +305,6 @@ Comparison and trajectory views are opt-in; animation is enabled only inside a
 `prefers-reduced-motion: no-preference` media query, so unsupported or reduced-motion
 renderers show the useful final packing.
 
-![A perturbed Göbel ten-square packing beside the endpoint returned by the quench.](atlas/rendering/gobel10-source-return-comparison.svg)
-
-*The comparison view holds both panels to one geometric scale.
-This retained `n = 10` event is a numerical source-return control, so the figure labels
-it as a candidate rather than silently promoting it to an exact proof artifact.*
-
-![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
-
-*The larger `n = 29` example exercises the full 20-color sequence and deterministic
-reuse on 29 squares.
-Its roughly 100-digit source is evaluated at 160 decimal digits of working precision and
-passes all 406 pairwise separating-axis checks at tolerance `1e-80`, so the renderer
-calls it numerically checked—not verified, exact, or a proof of global optimality.*
-
 The renderer preserves the input’s evidence tier.
 Its caption and metadata distinguish candidates, numerically checked constructions,
 certified upper bounds, and proved optima; typography cannot upgrade a numerical check
@@ -329,8 +315,6 @@ Exact annotations retain algebraic or rational source expressions in SVG comment
 namespaced metadata while using stable high-precision decimal projections for geometry.
 The container and every packed square use the same thin pure-black boundary, so a
 contact cannot look like a white gap.
-The deterministic 20-color cool palette gives the first eleven square IDs deliberately
-separated hues and values, then reuses the fixed sequence for larger packings.
 Exact-source adapters attach certified contact geometry: 60%-opaque tempered-yellow
 segments show shared boundary intervals, and dots in the same reserved highlight color
 show point contacts.
@@ -339,8 +323,9 @@ fills and below the black outlines.
 This layer is shown by default, can be removed with `--no-contacts`, and is never
 guessed for numerical candidate poses.
 
-See the [SVG gallery README](atlas/rendering/README.md) for API and CLI examples,
-retained fixtures, byte sizes, portability review, and the raster-golden decision.
+See the [SVG gallery README](atlas/rendering/README.md) for the focused rendering
+contract, the diagnostic start/final comparison, API and CLI examples, retained
+fixtures, and portability review.
 The [gallery manifest](atlas/rendering/manifest.json) joins each artifact to its
 frontier case, evidence tier, view level, motion support, alt text, and exact
 regeneration command.
