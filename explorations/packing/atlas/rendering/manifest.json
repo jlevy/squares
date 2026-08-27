@@ -72,6 +72,6 @@
     }
   ],
   "gallery_generator": "uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --update",
-  "renderer_version": "5",
+  "renderer_version": "6",
   "schema_version": 2
 }

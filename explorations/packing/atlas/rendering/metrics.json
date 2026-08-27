@@ -1,33 +1,33 @@
 {
   "fixtures": {
     "gobel10-source-return-comparison.svg": {
-      "bytes": 18364,
-      "elements": 66,
-      "renderer_version": "5",
+      "bytes": 20459,
+      "elements": 72,
+      "renderer_version": "6",
       "viewBox": "0 0 1280 680"
     },
     "kingbird29-overview.svg": {
-      "bytes": 23320,
-      "elements": 83,
-      "renderer_version": "5",
+      "bytes": 26171,
+      "elements": 89,
+      "renderer_version": "6",
       "viewBox": "0 0 960 680"
     },
     "n-003-optimal-moduli.svg": {
       "bytes": 14186,
       "elements": 111,
-      "renderer_version": "5",
+      "renderer_version": "6",
       "viewBox": "0 0 1200 900"
     },
     "n5-exact-face-trajectory.svg": {
-      "bytes": 15929,
-      "elements": 78,
-      "renderer_version": "5",
+      "bytes": 16764,
+      "elements": 84,
+      "renderer_version": "6",
       "viewBox": "0 0 960 680"
     },
     "trump11-overview.svg": {
-      "bytes": 31024,
-      "elements": 145,
-      "renderer_version": "5",
+      "bytes": 32363,
+      "elements": 151,
+      "renderer_version": "6",
       "viewBox": "0 0 960 680"
     }
   },

@@ -3,13 +3,19 @@
   <title id="figure-title">Known-best packing of 96 unit squares</title>
   <desc id="figure-description">The retained known-best n=96 construction, normalized to Witness/v1 and rendered with the repository's deterministic house renderer.</desc>
   <metadata>
-    <sqpack:profile version="5">
+    <sqpack:profile version="6">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="annotations">minimal</sqpack:value>
       <sqpack:value name="check-detail">Verifies this known-best upper-bound construction, not uniqueness; optimality comes only from the separately cited frontier lower bound.</sqpack:value>
       <sqpack:value name="check-kind">formal</sqpack:value>
       <sqpack:value name="check-method">exact-algebraic</sqpack:value>
       <sqpack:value name="check-result">passed</sqpack:value>
+      <sqpack:value name="color-angle-tolerance-radians">0.000001</sqpack:value>
+      <sqpack:value name="color-hue-count">20</sqpack:value>
+      <sqpack:value name="color-hue-scheme">angle</sqpack:value>
+      <sqpack:value name="color-shade-lightness-span">0.2</sqpack:value>
+      <sqpack:value name="color-shade-scheme">contacts</sqpack:value>
+      <sqpack:value name="color-shades-per-hue">5</sqpack:value>
       <sqpack:value name="evidence">certified-upper-bound</sqpack:value>
       <sqpack:value name="source-id">W-known-best-n096</sqpack:value>
       <sqpack:value name="source-url" />
@@ -19,102 +25,102 @@
   <rect width="960" height="680" fill="#ffffff" />
   <g id="panel-0" data-panel="n=96 known best">
     <g id="panel-0-fills" data-layer="fills">
-      <polygon data-feature="square-fill" data-square="square-001" points="36,572 89.6,572 89.6,518.4 36,518.4" fill="#378c3f" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-002" points="89.6,572 143.2,572 143.2,518.4 89.6,518.4" fill="#00aeee" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-003" points="143.2,572 196.8,572 196.8,518.4 143.2,518.4" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-004" points="196.8,572 250.4,572 250.4,518.4 196.8,518.4" fill="#00b393" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-005" points="250.4,572 304,572 304,518.4 250.4,518.4" fill="#3d63be" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-006" points="304,572 357.6,572 357.6,518.4 304,518.4" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-007" points="357.6,572 411.2,572 411.2,518.4 357.6,518.4" fill="#877deb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-008" points="411.2,572 464.8,572 464.8,518.4 411.2,518.4" fill="#9fce85" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-009" points="464.8,572 518.4,572 518.4,518.4 464.8,518.4" fill="#0096b1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-010" points="518.4,572 572,572 572,518.4 518.4,518.4" fill="#854888" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-011" points="36,518.4 89.6,518.4 89.6,464.8 36,464.8" fill="#83c4ff" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-012" points="89.6,518.4 143.2,518.4 143.2,464.8 89.6,464.8" fill="#3bb360" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-013" points="143.2,518.4 196.8,518.4 196.8,464.8 143.2,464.8" fill="#008376" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-014" points="196.8,518.4 250.4,518.4 250.4,464.8 196.8,464.8" fill="#7acfe9" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-015" points="250.4,518.4 304,518.4 304,464.8 250.4,464.8" fill="#0079bf" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-016" points="304,518.4 357.6,518.4 357.6,464.8 304,464.8" fill="#86a2ff" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-017" points="357.6,518.4 411.2,518.4 411.2,464.8 357.6,464.8" fill="#865eb1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-018" points="411.2,518.4 464.8,518.4 464.8,464.8 411.2,464.8" fill="#7fd6b1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-019" points="464.8,518.4 518.4,518.4 518.4,464.8 464.8,464.8" fill="#00afb9" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-020" points="518.4,518.4 572,518.4 572,464.8 518.4,464.8" fill="#c18dd8" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-021" points="36,464.8 89.6,464.8 89.6,411.2 36,411.2" fill="#378c3f" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-022" points="89.6,464.8 143.2,464.8 143.2,411.2 89.6,411.2" fill="#00aeee" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-023" points="143.2,464.8 196.8,464.8 196.8,411.2 143.2,411.2" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-024" points="196.8,464.8 250.4,464.8 250.4,411.2 196.8,411.2" fill="#00b393" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-025" points="250.4,464.8 304,464.8 304,411.2 250.4,411.2" fill="#3d63be" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-026" points="304,464.8 357.6,464.8 357.6,411.2 304,411.2" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-027" points="357.6,464.8 411.2,464.8 411.2,411.2 357.6,411.2" fill="#877deb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-028" points="411.2,464.8 464.8,464.8 464.8,411.2 411.2,411.2" fill="#9fce85" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-029" points="464.8,464.8 518.4,464.8 518.4,411.2 464.8,411.2" fill="#0096b1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-030" points="518.4,464.8 572,464.8 572,411.2 518.4,411.2" fill="#854888" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-031" points="36,411.2 89.6,411.2 89.6,357.6 36,357.6" fill="#83c4ff" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-032" points="89.6,411.2 143.2,411.2 143.2,357.6 89.6,357.6" fill="#3bb360" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-033" points="143.2,411.2 196.8,411.2 196.8,357.6 143.2,357.6" fill="#008376" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-034" points="196.8,411.2 250.4,411.2 250.4,357.6 196.8,357.6" fill="#7acfe9" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-035" points="250.4,411.2 304,411.2 304,357.6 250.4,357.6" fill="#0079bf" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-036" points="304,411.2 357.6,411.2 357.6,357.6 304,357.6" fill="#86a2ff" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-037" points="357.6,411.2 411.2,411.2 411.2,357.6 357.6,357.6" fill="#865eb1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-038" points="411.2,411.2 464.8,411.2 464.8,357.6 411.2,357.6" fill="#7fd6b1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-039" points="464.8,411.2 518.4,411.2 518.4,357.6 464.8,357.6" fill="#00afb9" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-040" points="518.4,411.2 572,411.2 572,357.6 518.4,357.6" fill="#c18dd8" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-041" points="36,357.6 89.6,357.6 89.6,304 36,304" fill="#378c3f" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-042" points="89.6,357.6 143.2,357.6 143.2,304 89.6,304" fill="#00aeee" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-043" points="143.2,357.6 196.8,357.6 196.8,304 143.2,304" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-044" points="196.8,357.6 250.4,357.6 250.4,304 196.8,304" fill="#00b393" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-045" points="250.4,357.6 304,357.6 304,304 250.4,304" fill="#3d63be" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-046" points="304,357.6 357.6,357.6 357.6,304 304,304" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-047" points="357.6,357.6 411.2,357.6 411.2,304 357.6,304" fill="#877deb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-048" points="411.2,357.6 464.8,357.6 464.8,304 411.2,304" fill="#9fce85" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-049" points="464.8,357.6 518.4,357.6 518.4,304 464.8,304" fill="#0096b1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-050" points="518.4,357.6 572,357.6 572,304 518.4,304" fill="#854888" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-051" points="36,304 89.6,304 89.6,250.4 36,250.4" fill="#83c4ff" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-052" points="89.6,304 143.2,304 143.2,250.4 89.6,250.4" fill="#3bb360" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-053" points="143.2,304 196.8,304 196.8,250.4 143.2,250.4" fill="#008376" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-054" points="196.8,304 250.4,304 250.4,250.4 196.8,250.4" fill="#7acfe9" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-055" points="250.4,304 304,304 304,250.4 250.4,250.4" fill="#0079bf" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-056" points="304,304 357.6,304 357.6,250.4 304,250.4" fill="#86a2ff" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-057" points="357.6,304 411.2,304 411.2,250.4 357.6,250.4" fill="#865eb1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-058" points="411.2,304 464.8,304 464.8,250.4 411.2,250.4" fill="#7fd6b1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-059" points="464.8,304 518.4,304 518.4,250.4 464.8,250.4" fill="#00afb9" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-060" points="518.4,304 572,304 572,250.4 518.4,250.4" fill="#c18dd8" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-061" points="36,250.4 89.6,250.4 89.6,196.8 36,196.8" fill="#378c3f" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-062" points="89.6,250.4 143.2,250.4 143.2,196.8 89.6,196.8" fill="#00aeee" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-063" points="143.2,250.4 196.8,250.4 196.8,196.8 143.2,196.8" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-064" points="196.8,250.4 250.4,250.4 250.4,196.8 196.8,196.8" fill="#00b393" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-065" points="250.4,250.4 304,250.4 304,196.8 250.4,196.8" fill="#3d63be" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-066" points="304,250.4 357.6,250.4 357.6,196.8 304,196.8" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-067" points="357.6,250.4 411.2,250.4 411.2,196.8 357.6,196.8" fill="#877deb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-068" points="411.2,250.4 464.8,250.4 464.8,196.8 411.2,196.8" fill="#9fce85" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-069" points="464.8,250.4 518.4,250.4 518.4,196.8 464.8,196.8" fill="#0096b1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-070" points="518.4,250.4 572,250.4 572,196.8 518.4,196.8" fill="#854888" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-071" points="36,196.8 89.6,196.8 89.6,143.2 36,143.2" fill="#83c4ff" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-072" points="89.6,196.8 143.2,196.8 143.2,143.2 89.6,143.2" fill="#3bb360" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-073" points="143.2,196.8 196.8,196.8 196.8,143.2 143.2,143.2" fill="#008376" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-074" points="196.8,196.8 250.4,196.8 250.4,143.2 196.8,143.2" fill="#7acfe9" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-075" points="250.4,196.8 304,196.8 304,143.2 250.4,143.2" fill="#0079bf" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-076" points="304,196.8 357.6,196.8 357.6,143.2 304,143.2" fill="#86a2ff" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-077" points="357.6,196.8 411.2,196.8 411.2,143.2 357.6,143.2" fill="#865eb1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-078" points="411.2,196.8 464.8,196.8 464.8,143.2 411.2,143.2" fill="#7fd6b1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-079" points="464.8,196.8 518.4,196.8 518.4,143.2 464.8,143.2" fill="#00afb9" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-080" points="518.4,196.8 572,196.8 572,143.2 518.4,143.2" fill="#c18dd8" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-081" points="36,143.2 89.6,143.2 89.6,89.6 36,89.6" fill="#378c3f" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-082" points="89.6,143.2 143.2,143.2 143.2,89.6 89.6,89.6" fill="#00aeee" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-083" points="143.2,143.2 196.8,143.2 196.8,89.6 143.2,89.6" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-084" points="196.8,143.2 250.4,143.2 250.4,89.6 196.8,89.6" fill="#00b393" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-085" points="250.4,143.2 304,143.2 304,89.6 250.4,89.6" fill="#3d63be" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-086" points="304,143.2 357.6,143.2 357.6,89.6 304,89.6" fill="#78d7d6" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-087" points="357.6,143.2 411.2,143.2 411.2,89.6 357.6,89.6" fill="#877deb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-088" points="411.2,143.2 464.8,143.2 464.8,89.6 411.2,89.6" fill="#9fce85" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-089" points="464.8,143.2 518.4,143.2 518.4,89.6 464.8,89.6" fill="#0096b1" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-090" points="518.4,143.2 572,143.2 572,89.6 518.4,89.6" fill="#854888" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-091" points="36,89.6 89.6,89.6 89.6,36 36,36" fill="#83c4ff" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-092" points="89.6,89.6 143.2,89.6 143.2,36 89.6,36" fill="#3bb360" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-093" points="143.2,89.6 196.8,89.6 196.8,36 143.2,36" fill="#008376" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-094" points="196.8,89.6 250.4,89.6 250.4,36 196.8,36" fill="#7acfe9" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-095" points="250.4,89.6 304,89.6 304,36 250.4,36" fill="#0079bf" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-096" points="304,89.6 357.6,89.6 357.6,36 304,36" fill="#86a2ff" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-001" data-hue-index="0" data-shade-index="0" points="36,572 89.6,572 89.6,518.4 36,518.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-002" data-hue-index="0" data-shade-index="0" points="89.6,572 143.2,572 143.2,518.4 89.6,518.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-003" data-hue-index="0" data-shade-index="0" points="143.2,572 196.8,572 196.8,518.4 143.2,518.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-004" data-hue-index="0" data-shade-index="0" points="196.8,572 250.4,572 250.4,518.4 196.8,518.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-005" data-hue-index="0" data-shade-index="0" points="250.4,572 304,572 304,518.4 250.4,518.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-006" data-hue-index="0" data-shade-index="0" points="304,572 357.6,572 357.6,518.4 304,518.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-007" data-hue-index="0" data-shade-index="0" points="357.6,572 411.2,572 411.2,518.4 357.6,518.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-008" data-hue-index="0" data-shade-index="0" points="411.2,572 464.8,572 464.8,518.4 411.2,518.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-009" data-hue-index="0" data-shade-index="0" points="464.8,572 518.4,572 518.4,518.4 464.8,518.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-010" data-hue-index="0" data-shade-index="0" points="518.4,572 572,572 572,518.4 518.4,518.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-011" data-hue-index="0" data-shade-index="0" points="36,518.4 89.6,518.4 89.6,464.8 36,464.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-012" data-hue-index="0" data-shade-index="0" points="89.6,518.4 143.2,518.4 143.2,464.8 89.6,464.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-013" data-hue-index="0" data-shade-index="0" points="143.2,518.4 196.8,518.4 196.8,464.8 143.2,464.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-014" data-hue-index="0" data-shade-index="0" points="196.8,518.4 250.4,518.4 250.4,464.8 196.8,464.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-015" data-hue-index="0" data-shade-index="0" points="250.4,518.4 304,518.4 304,464.8 250.4,464.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-016" data-hue-index="0" data-shade-index="0" points="304,518.4 357.6,518.4 357.6,464.8 304,464.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-017" data-hue-index="0" data-shade-index="0" points="357.6,518.4 411.2,518.4 411.2,464.8 357.6,464.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-018" data-hue-index="0" data-shade-index="0" points="411.2,518.4 464.8,518.4 464.8,464.8 411.2,464.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-019" data-hue-index="0" data-shade-index="0" points="464.8,518.4 518.4,518.4 518.4,464.8 464.8,464.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-020" data-hue-index="0" data-shade-index="0" points="518.4,518.4 572,518.4 572,464.8 518.4,464.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-021" data-hue-index="0" data-shade-index="0" points="36,464.8 89.6,464.8 89.6,411.2 36,411.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-022" data-hue-index="0" data-shade-index="0" points="89.6,464.8 143.2,464.8 143.2,411.2 89.6,411.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-023" data-hue-index="0" data-shade-index="0" points="143.2,464.8 196.8,464.8 196.8,411.2 143.2,411.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-024" data-hue-index="0" data-shade-index="0" points="196.8,464.8 250.4,464.8 250.4,411.2 196.8,411.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-025" data-hue-index="0" data-shade-index="0" points="250.4,464.8 304,464.8 304,411.2 250.4,411.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-026" data-hue-index="0" data-shade-index="0" points="304,464.8 357.6,464.8 357.6,411.2 304,411.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-027" data-hue-index="0" data-shade-index="0" points="357.6,464.8 411.2,464.8 411.2,411.2 357.6,411.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-028" data-hue-index="0" data-shade-index="0" points="411.2,464.8 464.8,464.8 464.8,411.2 411.2,411.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-029" data-hue-index="0" data-shade-index="0" points="464.8,464.8 518.4,464.8 518.4,411.2 464.8,411.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-030" data-hue-index="0" data-shade-index="0" points="518.4,464.8 572,464.8 572,411.2 518.4,411.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-031" data-hue-index="0" data-shade-index="0" points="36,411.2 89.6,411.2 89.6,357.6 36,357.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-032" data-hue-index="0" data-shade-index="0" points="89.6,411.2 143.2,411.2 143.2,357.6 89.6,357.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-033" data-hue-index="0" data-shade-index="0" points="143.2,411.2 196.8,411.2 196.8,357.6 143.2,357.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-034" data-hue-index="0" data-shade-index="0" points="196.8,411.2 250.4,411.2 250.4,357.6 196.8,357.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-035" data-hue-index="0" data-shade-index="0" points="250.4,411.2 304,411.2 304,357.6 250.4,357.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-036" data-hue-index="0" data-shade-index="0" points="304,411.2 357.6,411.2 357.6,357.6 304,357.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-037" data-hue-index="0" data-shade-index="0" points="357.6,411.2 411.2,411.2 411.2,357.6 357.6,357.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-038" data-hue-index="0" data-shade-index="0" points="411.2,411.2 464.8,411.2 464.8,357.6 411.2,357.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-039" data-hue-index="0" data-shade-index="0" points="464.8,411.2 518.4,411.2 518.4,357.6 464.8,357.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-040" data-hue-index="0" data-shade-index="0" points="518.4,411.2 572,411.2 572,357.6 518.4,357.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-041" data-hue-index="0" data-shade-index="0" points="36,357.6 89.6,357.6 89.6,304 36,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-042" data-hue-index="0" data-shade-index="0" points="89.6,357.6 143.2,357.6 143.2,304 89.6,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-043" data-hue-index="0" data-shade-index="0" points="143.2,357.6 196.8,357.6 196.8,304 143.2,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-044" data-hue-index="0" data-shade-index="0" points="196.8,357.6 250.4,357.6 250.4,304 196.8,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-045" data-hue-index="0" data-shade-index="0" points="250.4,357.6 304,357.6 304,304 250.4,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-046" data-hue-index="0" data-shade-index="0" points="304,357.6 357.6,357.6 357.6,304 304,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-047" data-hue-index="0" data-shade-index="0" points="357.6,357.6 411.2,357.6 411.2,304 357.6,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-048" data-hue-index="0" data-shade-index="0" points="411.2,357.6 464.8,357.6 464.8,304 411.2,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-049" data-hue-index="0" data-shade-index="0" points="464.8,357.6 518.4,357.6 518.4,304 464.8,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-050" data-hue-index="0" data-shade-index="0" points="518.4,357.6 572,357.6 572,304 518.4,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-051" data-hue-index="0" data-shade-index="0" points="36,304 89.6,304 89.6,250.4 36,250.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-052" data-hue-index="0" data-shade-index="0" points="89.6,304 143.2,304 143.2,250.4 89.6,250.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-053" data-hue-index="0" data-shade-index="0" points="143.2,304 196.8,304 196.8,250.4 143.2,250.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-054" data-hue-index="0" data-shade-index="0" points="196.8,304 250.4,304 250.4,250.4 196.8,250.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-055" data-hue-index="0" data-shade-index="0" points="250.4,304 304,304 304,250.4 250.4,250.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-056" data-hue-index="0" data-shade-index="0" points="304,304 357.6,304 357.6,250.4 304,250.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-057" data-hue-index="0" data-shade-index="0" points="357.6,304 411.2,304 411.2,250.4 357.6,250.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-058" data-hue-index="0" data-shade-index="0" points="411.2,304 464.8,304 464.8,250.4 411.2,250.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-059" data-hue-index="0" data-shade-index="0" points="464.8,304 518.4,304 518.4,250.4 464.8,250.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-060" data-hue-index="0" data-shade-index="0" points="518.4,304 572,304 572,250.4 518.4,250.4" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-061" data-hue-index="0" data-shade-index="0" points="36,250.4 89.6,250.4 89.6,196.8 36,196.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-062" data-hue-index="0" data-shade-index="0" points="89.6,250.4 143.2,250.4 143.2,196.8 89.6,196.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-063" data-hue-index="0" data-shade-index="0" points="143.2,250.4 196.8,250.4 196.8,196.8 143.2,196.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-064" data-hue-index="0" data-shade-index="0" points="196.8,250.4 250.4,250.4 250.4,196.8 196.8,196.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-065" data-hue-index="0" data-shade-index="0" points="250.4,250.4 304,250.4 304,196.8 250.4,196.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-066" data-hue-index="0" data-shade-index="0" points="304,250.4 357.6,250.4 357.6,196.8 304,196.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-067" data-hue-index="0" data-shade-index="0" points="357.6,250.4 411.2,250.4 411.2,196.8 357.6,196.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-068" data-hue-index="0" data-shade-index="0" points="411.2,250.4 464.8,250.4 464.8,196.8 411.2,196.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-069" data-hue-index="0" data-shade-index="0" points="464.8,250.4 518.4,250.4 518.4,196.8 464.8,196.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-070" data-hue-index="0" data-shade-index="0" points="518.4,250.4 572,250.4 572,196.8 518.4,196.8" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-071" data-hue-index="0" data-shade-index="0" points="36,196.8 89.6,196.8 89.6,143.2 36,143.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-072" data-hue-index="0" data-shade-index="0" points="89.6,196.8 143.2,196.8 143.2,143.2 89.6,143.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-073" data-hue-index="0" data-shade-index="0" points="143.2,196.8 196.8,196.8 196.8,143.2 143.2,143.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-074" data-hue-index="0" data-shade-index="0" points="196.8,196.8 250.4,196.8 250.4,143.2 196.8,143.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-075" data-hue-index="0" data-shade-index="0" points="250.4,196.8 304,196.8 304,143.2 250.4,143.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-076" data-hue-index="0" data-shade-index="0" points="304,196.8 357.6,196.8 357.6,143.2 304,143.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-077" data-hue-index="0" data-shade-index="0" points="357.6,196.8 411.2,196.8 411.2,143.2 357.6,143.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-078" data-hue-index="0" data-shade-index="0" points="411.2,196.8 464.8,196.8 464.8,143.2 411.2,143.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-079" data-hue-index="0" data-shade-index="0" points="464.8,196.8 518.4,196.8 518.4,143.2 464.8,143.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-080" data-hue-index="0" data-shade-index="0" points="518.4,196.8 572,196.8 572,143.2 518.4,143.2" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-081" data-hue-index="0" data-shade-index="0" points="36,143.2 89.6,143.2 89.6,89.6 36,89.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-082" data-hue-index="0" data-shade-index="0" points="89.6,143.2 143.2,143.2 143.2,89.6 89.6,89.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-083" data-hue-index="0" data-shade-index="0" points="143.2,143.2 196.8,143.2 196.8,89.6 143.2,89.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-084" data-hue-index="0" data-shade-index="0" points="196.8,143.2 250.4,143.2 250.4,89.6 196.8,89.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-085" data-hue-index="0" data-shade-index="0" points="250.4,143.2 304,143.2 304,89.6 250.4,89.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-086" data-hue-index="0" data-shade-index="0" points="304,143.2 357.6,143.2 357.6,89.6 304,89.6" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-087" data-hue-index="0" data-shade-index="1" points="357.6,143.2 411.2,143.2 411.2,89.6 357.6,89.6" fill="#009a7e" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="3" />
+      <polygon data-feature="square-fill" data-square="square-088" data-hue-index="0" data-shade-index="1" points="411.2,143.2 464.8,143.2 464.8,89.6 411.2,89.6" fill="#009a7e" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="3" />
+      <polygon data-feature="square-fill" data-square="square-089" data-hue-index="0" data-shade-index="1" points="464.8,143.2 518.4,143.2 518.4,89.6 464.8,89.6" fill="#009a7e" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="3" />
+      <polygon data-feature="square-fill" data-square="square-090" data-hue-index="0" data-shade-index="1" points="518.4,143.2 572,143.2 572,89.6 518.4,89.6" fill="#009a7e" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="3" />
+      <polygon data-feature="square-fill" data-square="square-091" data-hue-index="0" data-shade-index="0" points="36,89.6 89.6,89.6 89.6,36 36,36" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-092" data-hue-index="0" data-shade-index="0" points="89.6,89.6 143.2,89.6 143.2,36 89.6,36" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-093" data-hue-index="0" data-shade-index="0" points="143.2,89.6 196.8,89.6 196.8,36 143.2,36" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-094" data-hue-index="0" data-shade-index="0" points="196.8,89.6 250.4,89.6 250.4,36 196.8,36" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-095" data-hue-index="0" data-shade-index="0" points="250.4,89.6 304,89.6 304,36 250.4,36" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-096" data-hue-index="0" data-shade-index="1" points="304,89.6 357.6,89.6 357.6,36 304,36" fill="#009a7e" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="3" />
     </g>
     <g id="panel-0-outlines" data-layer="outlines">
       <polygon data-feature="square-outline" data-square="square-001" points="36,572 89.6,572 89.6,518.4 36,518.4" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />

@@ -3,7 +3,7 @@
   <title id="figure-title">Known-best packing of 5 unit squares</title>
   <desc id="figure-description">The retained known-best n=5 construction, normalized to Witness/v1 and rendered with the repository's deterministic house renderer.</desc>
   <metadata>
-    <sqpack:profile version="5">
+    <sqpack:profile version="6">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="annotations">minimal</sqpack:value>
       <sqpack:value name="check-arithmetic">mpmath arbitrary precision</sqpack:value>
@@ -14,6 +14,12 @@
       <sqpack:value name="check-result">passed</sqpack:value>
       <sqpack:value name="check-rounding">nearest</sqpack:value>
       <sqpack:value name="check-tolerance">1e-8</sqpack:value>
+      <sqpack:value name="color-angle-tolerance-radians">0.000001</sqpack:value>
+      <sqpack:value name="color-hue-count">20</sqpack:value>
+      <sqpack:value name="color-hue-scheme">angle</sqpack:value>
+      <sqpack:value name="color-shade-lightness-span">0.2</sqpack:value>
+      <sqpack:value name="color-shade-scheme">contacts</sqpack:value>
+      <sqpack:value name="color-shades-per-hue">5</sqpack:value>
       <sqpack:value name="evidence">numerically-checked</sqpack:value>
       <sqpack:value name="source-id">W-known-best-n005</sqpack:value>
       <sqpack:value name="source-url">https://kingbird.myphotos.cc/packing/square-5.svg</sqpack:value>
@@ -23,11 +29,11 @@
   <rect width="960" height="680" fill="#ffffff" />
   <g id="panel-0" data-panel="n=5 known best">
     <g id="panel-0-fills" data-layer="fills">
-      <polygon data-feature="square-fill" data-square="square-001" points="36,233.9973615097172934060421205 233.9973615097172934060421205,233.9973615097172934060421205 233.9973615097172934060421205,36 36,36" fill="#378c3f" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-002" points="374.0026384902827065939578794,233.9973615097172934060421205 571.9999999999999999999999999,233.9973615097172934060421205 571.9999999999999999999999999,36 374.0026384902827065939578794,36" fill="#00aeee" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-003" points="36,571.9999999999999999999999999 233.9973615097172934060421205,571.9999999999999999999999999 233.9973615097172934060421205,374.0026384902827065939578794 36,374.0026384902827065939578794" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-004" points="374.0026384902827065939578794,571.9999999999999999999999999 571.9999999999999999999999999,571.9999999999999999999999999 571.9999999999999999999999999,374.0026384902827065939578794 374.0026384902827065939578794,374.0026384902827065939578794" fill="#00b393" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-005" points="303.9999999999999999999999999,444.0052769805654131879157588 444.0052769805654131879157588,303.9999999999999999999999999 303.9999999999999999999999999,163.9947230194345868120842411 163.9947230194345868120842411,303.9999999999999999999999999" fill="#3d63be" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-001" data-hue-index="0" data-shade-index="2" points="36,233.9973615097172934060421205 233.9973615097172934060421205,233.9973615097172934060421205 233.9973615097172934060421205,36 36,36" fill="#00b393" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="2" />
+      <polygon data-feature="square-fill" data-square="square-002" data-hue-index="0" data-shade-index="2" points="374.0026384902827065939578794,233.9973615097172934060421205 571.9999999999999999999999999,233.9973615097172934060421205 571.9999999999999999999999999,36 374.0026384902827065939578794,36" fill="#00b393" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="2" />
+      <polygon data-feature="square-fill" data-square="square-003" data-hue-index="0" data-shade-index="2" points="36,571.9999999999999999999999999 233.9973615097172934060421205,571.9999999999999999999999999 233.9973615097172934060421205,374.0026384902827065939578794 36,374.0026384902827065939578794" fill="#00b393" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="2" />
+      <polygon data-feature="square-fill" data-square="square-004" data-hue-index="0" data-shade-index="2" points="374.0026384902827065939578794,571.9999999999999999999999999 571.9999999999999999999999999,571.9999999999999999999999999 571.9999999999999999999999999,374.0026384902827065939578794 374.0026384902827065939578794,374.0026384902827065939578794" fill="#00b393" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="2" />
+      <polygon data-feature="square-fill" data-square="square-005" data-hue-index="1" data-shade-index="4" points="303.9999999999999999999999999,444.0052769805654131879157588 444.0052769805654131879157588,303.9999999999999999999999999 303.9999999999999999999999999,163.9947230194345868120842411 163.9947230194345868120842411,303.9999999999999999999999999" fill="#a45ba8" fill-opacity="1.0" stroke="none" data-angle-class="1" data-contact-sides="0" />
     </g>
     <g id="panel-0-outlines" data-layer="outlines">
       <polygon data-feature="square-outline" data-square="square-001" points="36,233.9973615097172934060421205 233.9973615097172934060421205,233.9973615097172934060421205 233.9973615097172934060421205,36 36,36" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />

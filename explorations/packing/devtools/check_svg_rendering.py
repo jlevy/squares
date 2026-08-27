@@ -335,6 +335,7 @@ def run_geometry_controls() -> dict[str, bool]:
         ViewLevel,
         render_packing_svg,
     )
+    from sqpack.render.color import assign_square_colors
     from sqpack.render.model import ActiveFeature
     from sqpack.render.style import (
         CONTACT_CLIP_POLICY,
@@ -346,7 +347,7 @@ def run_geometry_controls() -> dict[str, bool]:
         PACKING_BOUNDARY_COLOR,
         PACKING_BOUNDARY_WIDTH,
         PAPER_THEME,
-        SQUARE_FILL_PALETTE,
+        SQUARE_HUE_PALETTE,
         evidence_style,
     )
 
@@ -416,28 +417,7 @@ def run_geometry_controls() -> dict[str, bool]:
         if child.attrib.get("data-feature") == "contact-clip-shape"
     }
     overview_fills_by_id = {square.attrib["data-square"]: square for square in overview_squares}
-    expected_palette = (
-        "#378c3f",
-        "#00aeee",
-        "#c1a0fb",
-        "#00b393",
-        "#3d63be",
-        "#78d7d6",
-        "#877deb",
-        "#9fce85",
-        "#0096b1",
-        "#854888",
-        "#83c4ff",
-        "#3bb360",
-        "#008376",
-        "#7acfe9",
-        "#0079bf",
-        "#86a2ff",
-        "#865eb1",
-        "#7fd6b1",
-        "#00afb9",
-        "#c18dd8",
-    )
+    expected_colors = assign_square_colors(trump, RenderSpec())
 
     def contact_clip_matches_participants(mark) -> bool:
         reference = mark.attrib.get("clip-path", "")
@@ -504,12 +484,15 @@ def run_geometry_controls() -> dict[str, bool]:
             <= viewport_height
             for container in panel_containers
         ),
-        "rendered_square_fill_palette_is_selected_cool_set": expected_palette
-        == SQUARE_FILL_PALETTE
-        and tuple(square.attrib["fill"] for square in overview_squares)
-        == tuple(
-            expected_palette[index % len(expected_palette)]
-            for index in range(len(overview_squares))
+        "rendered_square_fills_match_angle_contact_scheme": all(
+            square.attrib["fill"] == expected_colors[square.attrib["data-square"]].fill
+            and square.attrib["data-hue-index"]
+            == str(expected_colors[square.attrib["data-square"]].hue_index)
+            and square.attrib["data-shade-index"]
+            == str(expected_colors[square.attrib["data-square"]].shade_index)
+            and square.attrib["data-contact-sides"]
+            == str(expected_colors[square.attrib["data-square"]].contact_sides)
+            for square in overview_squares
         ),
         "packing_outlines_are_thin_opaque_pure_black": PAPER_THEME.container
         == PACKING_BOUNDARY_COLOR
@@ -529,7 +512,7 @@ def run_geometry_controls() -> dict[str, bool]:
         "contact_highlight_is_reserved_tempered_yellow": PAPER_THEME.contact
         == CONTACT_HIGHLIGHT_COLOR
         == "#e3c64a"
-        and PAPER_THEME.contact not in expected_palette
+        and PAPER_THEME.contact not in SQUARE_HUE_PALETTE
         and all(
             mark.attrib.get("fill") == PAPER_THEME.contact
             or mark.attrib.get("stroke") == PAPER_THEME.contact
@@ -711,8 +694,10 @@ def run_portability_controls() -> dict[str, bool]:
 def run_gallery_controls() -> dict[str, bool]:
     from xml.etree import ElementTree as ET
 
+    from devtools.packing_render_adapters import frame_from_kingbird29
     from devtools.render_packing_gallery import build_gallery_manifest
-    from sqpack.render.style import SQUARE_FILL_PALETTE
+    from sqpack.render import RenderSpec
+    from sqpack.render.color import assign_square_colors
 
     manifest = build_gallery_manifest()
     examples = manifest["examples"]
@@ -782,6 +767,7 @@ def run_gallery_controls() -> dict[str, bool]:
         if node.tag.endswith("}value") and "name" in node.attrib
     }
     kingbird_manifest = by_id["n29-kingbird-overview"]
+    kingbird_expected = assign_square_colors(frame_from_kingbird29(), RenderSpec())
     gallery_artifacts = {path.resolve() for path in artifacts}
     return {
         "gallery_has_five_known_answers": len(examples) == 5,
@@ -807,9 +793,8 @@ def run_gallery_controls() -> dict[str, bool]:
             "n11-trump-overview": True,
             "n29-kingbird-overview": False,
         },
-        "kingbird_uses_palette_in_stable_index_order": len(kingbird_fills) == 29
-        and kingbird_fills
-        == [SQUARE_FILL_PALETTE[index % len(SQUARE_FILL_PALETTE)] for index in range(29)],
+        "kingbird_uses_angle_contact_colors_in_stable_square_order": len(kingbird_fills) == 29
+        and kingbird_fills == [color.fill for color in kingbird_expected.values()],
         "kingbird_is_numerically_checked_not_verified": (
             kingbird_manifest["evidence"] == "numerically-checked"
             and "verified" not in kingbird_manifest["caption"].lower()

@@ -39,6 +39,17 @@ class AnnotationLevel(StrEnum):
     EXACT = "exact"
 
 
+class HueScheme(StrEnum):
+    ANGLE = "angle"
+    INDEX = "index"
+
+
+class ShadeScheme(StrEnum):
+    CONTACTS = "contacts"
+    CONTRAST = "contrast"
+    SEQUENCE = "sequence"
+
+
 class Overlay(StrEnum):
     SQUARE_IDS = "square-ids"
     CONTACTS = "contacts"
@@ -164,6 +175,12 @@ class RenderSpec:
     description: str = "A square packing rendered with mathematical y coordinates upward."
     duration_seconds: Decimal = Decimal("4")
     width: int = 960
+    hue_scheme: HueScheme = HueScheme.ANGLE
+    shade_scheme: ShadeScheme = ShadeScheme.CONTACTS
+    hue_count: int = 20
+    shades_per_hue: int = 5
+    shade_lightness_span: Decimal = Decimal("0.2")
+    angle_tolerance_radians: Decimal = Decimal("1e-6")
 
 
 def validate_scalar_source(value: ScalarSource) -> None:
@@ -362,6 +379,16 @@ def validate_render_request(
     validate_frame(final)
     if spec.width <= 0 or not spec.duration_seconds.is_finite() or spec.duration_seconds <= 0:
         raise ValueError("render dimensions and duration must be positive")
+    if spec.hue_count <= 0 or spec.shades_per_hue <= 0:
+        raise ValueError("color hue and shade counts must be positive")
+    if (
+        not spec.shade_lightness_span.is_finite()
+        or spec.shade_lightness_span < 0
+        or spec.shade_lightness_span > Decimal("0.3")
+    ):
+        raise ValueError("color shade lightness span must be between 0 and 0.3")
+    if not spec.angle_tolerance_radians.is_finite() or spec.angle_tolerance_radians <= 0:
+        raise ValueError("color angle tolerance must be finite and positive")
     if spec.view is ViewLevel.COMPARISON:
         if start is None:
             raise ValueError("comparison view requires a start frame")

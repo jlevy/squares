@@ -3,13 +3,19 @@
   <title id="figure-title">Known-best packing of 4 unit squares</title>
   <desc id="figure-description">The retained known-best n=4 construction, normalized to Witness/v1 and rendered with the repository's deterministic house renderer.</desc>
   <metadata>
-    <sqpack:profile version="5">
+    <sqpack:profile version="6">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
       <sqpack:value name="annotations">minimal</sqpack:value>
       <sqpack:value name="check-detail">Verifies this known-best upper-bound construction, not uniqueness; optimality comes only from the separately cited frontier lower bound.</sqpack:value>
       <sqpack:value name="check-kind">formal</sqpack:value>
       <sqpack:value name="check-method">exact-algebraic</sqpack:value>
       <sqpack:value name="check-result">passed</sqpack:value>
+      <sqpack:value name="color-angle-tolerance-radians">0.000001</sqpack:value>
+      <sqpack:value name="color-hue-count">20</sqpack:value>
+      <sqpack:value name="color-hue-scheme">angle</sqpack:value>
+      <sqpack:value name="color-shade-lightness-span">0.2</sqpack:value>
+      <sqpack:value name="color-shade-scheme">contacts</sqpack:value>
+      <sqpack:value name="color-shades-per-hue">5</sqpack:value>
       <sqpack:value name="evidence">certified-upper-bound</sqpack:value>
       <sqpack:value name="source-id">W-known-best-n004</sqpack:value>
       <sqpack:value name="source-url" />
@@ -19,10 +25,10 @@
   <rect width="960" height="680" fill="#ffffff" />
   <g id="panel-0" data-panel="n=4 known best">
     <g id="panel-0-fills" data-layer="fills">
-      <polygon data-feature="square-fill" data-square="square-001" points="36,572 304,572 304,304 36,304" fill="#378c3f" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-002" points="304,572 572,572 572,304 304,304" fill="#00aeee" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-003" points="36,304 304,304 304,36 36,36" fill="#c1a0fb" fill-opacity="1.0" stroke="none" />
-      <polygon data-feature="square-fill" data-square="square-004" points="304,304 572,304 572,36 304,36" fill="#00b393" fill-opacity="1.0" stroke="none" />
+      <polygon data-feature="square-fill" data-square="square-001" data-hue-index="0" data-shade-index="0" points="36,572 304,572 304,304 36,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-002" data-hue-index="0" data-shade-index="0" points="304,572 572,572 572,304 304,304" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-003" data-hue-index="0" data-shade-index="0" points="36,304 304,304 304,36 36,36" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
+      <polygon data-feature="square-fill" data-square="square-004" data-hue-index="0" data-shade-index="0" points="304,304 572,304 572,36 304,36" fill="#008069" fill-opacity="1.0" stroke="none" data-angle-class="0" data-contact-sides="4" />
     </g>
     <g id="panel-0-outlines" data-layer="outlines">
       <polygon data-feature="square-outline" data-square="square-001" points="36,572 304,572 304,304 36,304" stroke-linejoin="round" fill="none" stroke="#000000" stroke-width="1.25" vector-effect="non-scaling-stroke" />

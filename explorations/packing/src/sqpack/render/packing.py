@@ -5,6 +5,7 @@ from __future__ import annotations
 from decimal import Decimal
 from xml.etree import ElementTree as ET
 
+from sqpack.render.color import SquareColor, assign_square_colors
 from sqpack.render.model import (
     ActiveFeature,
     AnnotationLevel,
@@ -37,7 +38,6 @@ from sqpack.render.style import (
     LAYOUT,
     PAPER_THEME,
     SQUARE_FILL_OPACITY,
-    color_for_square,
     evidence_style,
     presentation_attributes,
 )
@@ -134,7 +134,7 @@ def _append_square_id(
 def _append_square_fill(
     group: ET.Element,
     square: SquareGeometry,
-    index: int,
+    color: SquareColor,
     *,
     projected: tuple[Point2, ...],
     motion: bool,
@@ -145,12 +145,18 @@ def _append_square_fill(
         {
             "data-feature": "square-fill",
             "data-square": square.square_id,
+            "data-hue-index": str(color.hue_index),
+            "data-shade-index": str(color.shade_index),
             "points": format_points(projected),
-            "fill": color_for_square(index),
+            "fill": color.fill,
             "fill-opacity": str(SQUARE_FILL_OPACITY),
             "stroke": "none",
         },
     )
+    if color.angle_class is not None:
+        node.set("data-angle-class", str(color.angle_class))
+    if color.contact_sides is not None:
+        node.set("data-contact-sides", str(color.contact_sides))
     if motion:
         append_square_motion(node, square.square_id)
 
@@ -503,11 +509,12 @@ def _append_packing_panel(
         "g",
         {"id": f"panel-{panel_index}-fills", "data-layer": "fills"},
     )
-    for square, index, projected in projected_squares:
+    colors = assign_square_colors(frame, spec)
+    for square, _index, projected in projected_squares:
         _append_square_fill(
             fills,
             square,
-            index,
+            colors[square.square_id],
             projected=projected,
             motion=motion,
         )
@@ -603,6 +610,12 @@ def build_packing_document(
     append_title_desc(root, spec.title, spec.description)
     records = {
         "annotations": spec.annotations.value,
+        "color-angle-tolerance-radians": str(spec.angle_tolerance_radians),
+        "color-hue-count": str(spec.hue_count),
+        "color-hue-scheme": spec.hue_scheme.value,
+        "color-shade-scheme": spec.shade_scheme.value,
+        "color-shade-lightness-span": str(spec.shade_lightness_span),
+        "color-shades-per-hue": str(spec.shades_per_hue),
         "evidence": final.evidence.value,
         "source-id": final.source_id,
         "source-url": final.source_url,
