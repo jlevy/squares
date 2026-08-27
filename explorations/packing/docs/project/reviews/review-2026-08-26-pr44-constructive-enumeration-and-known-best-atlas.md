@@ -306,7 +306,9 @@ These corrections do not promote the evidence.
 The `n = 1..100` corpus remains calibration-only, capped partition cases remain
 indeterminate, the 11,013 scaffold records remain abstract and geometry-free, and local
 contact realization establishes neither container fit, whole-packing feasibility, nor
-optimality. Session 023 owns the terminal strict and cross-platform validation receipts.
+optimality.
+[Session 025](../../../campaign/agent-sessions/session-025-pr45-performance-continuation.md)
+owns the current strict and cross-platform validation receipts.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
