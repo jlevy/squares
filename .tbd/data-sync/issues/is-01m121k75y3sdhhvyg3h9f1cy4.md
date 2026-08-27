@@ -5,12 +5,13 @@ title: Session records can declare a validation_command that does not exist
 kind: bug
 status: open
 priority: 2
-version: 1
+version: 2
 labels:
   - packing
 dependencies: []
+parent_id: is-01m127tej32njy532m2q642418
 created_at: 2026-08-27T16:42:04.348Z
-updated_at: 2026-08-27T16:42:04.348Z
+updated_at: 2026-08-27T18:30:57.859Z
 ---
 Nothing checks that a session phase's declared validation_command is runnable. Two phase records declare 'uv run --directory explorations/packing --frozen packing-validate --list-steps', which exits 2 with 'unrecognized arguments: --list-steps'. The correct flag is --list, used correctly in two other session records.
 
