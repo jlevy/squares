@@ -1,7 +1,7 @@
 # Contract for one human-steered campaign agenda.
 #
-# This is deliberately softer than a runner queue. It records why a bounded cell is
-# next, what kind of confidence it can buy, and what evidence lets another agent take
+# This is deliberately softer than a runner queue. It records why a bounded commitment
+# is next, what kind of confidence it can buy, and what evidence lets another agent take
 # over. Hypotheses still own scientific claims, experiments own measurements, and tbd
 # owns implementation dependencies.
 $schema: https://json-schema.org/draft/2020-12/schema

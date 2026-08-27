@@ -73,7 +73,7 @@ agenda:
       eight: the criterion was frozen before implementation, and matching it to the code
       afterwards is the post-hoc weakening the admission bar exists to prevent.
     note: >-
-      This cell gates both remaining research lanes. exp-045 cannot run without it, and
+      This commitment gates both remaining research lanes. exp-045 cannot run without it, and
       BC-038 must not touch the shared row-jet path while exp-045 is frozen, so BC-036 is
       the single highest-leverage item in this agenda.
   - id: BC-037
@@ -130,7 +130,7 @@ agenda:
       What is owed is the exact-output equivalence result, not another profile.
     note: >-
       Whether `evaluate_stress`'s 35 calls actually share a field identity and stratum is
-      not decidable from a profile. That is this cell's first obligation, before any
+      not decidable from a profile. That is this commitment's first obligation, before any
       timing claim.
   - id: BC-039
     purpose: tool_validation
@@ -191,18 +191,18 @@ agenda:
 
 This agenda exists because
 [session 029](../agent-sessions/session-029-finish-agenda-003-cycles.md) closed
-[agenda-003](agenda-003-balanced-ten-hour-research-program.md)’s remaining cells and
-left six things outstanding, each of a different kind.
+[agenda-003](agenda-003-balanced-ten-hour-research-program.md)’s remaining commitments
+and left six things outstanding, each of a different kind.
 Mixing them into one session is what produced the guard failures in the first place, so
 each has its own declared workflow entry and its own budget.
 
 ## Workflow assignment
 
-| Cell | Workflow | Bead | Why this workflow |
+| Commitment | Workflow | Bead | Why this workflow |
 | --- | --- | --- | --- |
 | BC-035 | W7 `pipeline-improvement` | think-cja6 | Repairs the checking machinery, not a claim about packings. |
 | BC-036 | W7 `pipeline-improvement` | think-oyn9 | Builds a missing research instrument before it is used, which is instrument work rather than a measurement. |
-| BC-037 | W6 `research-loop` | think-1s0h | The only cell here that asks a question about the packing landscape. |
+| BC-037 | W6 `research-loop` | think-1s0h | The only commitment here that asks a question about the packing landscape. |
 | BC-038 | W5 `efficiency-loop` | think-kdil | A measured bottleneck with a declared accept bar. |
 | BC-039 | W7 `pipeline-improvement` | think-uzmh | Regenerates a durable artifact through an existing gated route. |
 | BC-040 | W4 `process-review` | think-qibu | Reconstructability and merge discipline, not new evidence. |
@@ -222,8 +222,8 @@ agenda-004 self-contained, which matters because `depends_on` resolves only with
 single agenda file.
 
 Nothing in this agenda widens a claim.
-Four of its six cells repair or complete instruments, one regenerates an artifact inside
-an unchanged claim boundary, and only BC-037 can produce a scientific result.
+Four of its six commitments repair or complete instruments, one regenerates an artifact
+inside an unchanged claim boundary, and only BC-037 can produce a scientific result.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

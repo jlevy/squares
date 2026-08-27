@@ -297,8 +297,12 @@ terminal first-session midpoint in the two-session
 stopped on an external provider usage limit after ten of eleven phases, and
 [session 028](campaign/agent-sessions/session-028-bc032-n29-promotion-inventory.md) is
 the terminal successor that executed its one unexecuted phase.
-[Session 029](campaign/agent-sessions/session-029-finish-agenda-003-cycles.md) is the
-terminal successor and closed the remaining agenda-003 cells on measurement.
+[Session 029](campaign/agent-sessions/session-029-finish-agenda-003-cycles.md) closed
+the remaining agenda-003 commitments on measurement, and
+[session 030](campaign/agent-sessions/session-030-work-model-and-cell-collision.md) is
+the terminal successor: it re-glossed `BC` as *bounded commitment*, retiring a collision
+with the linear-programming sense of `cell`, and made the bead / commitment / phase
+layering explicit in the orientation docs.
 Q-BC032-a is answered: the `4.94e-11` relaxation is an artifact of the promotion route,
 not a property of the pose, and six independently verified promotions beat the recorded
 baseline. `BC-028`’s trigger passed, so its inventory-reuse implementation is ready but

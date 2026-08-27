@@ -242,8 +242,8 @@ coding agent, or a human changes the driver, not the research contract.
 A hypothesis registry is deliberately broad, while one agent session is deliberately
 narrow.
 A campaign agenda is the small coordination layer between them: an ordered set of
-bounded experiment cells that can be reprioritized at a checkpoint or divided among
-agents without changing a scientific claim.
+bounded commitments that can be reprioritized at a checkpoint or divided among agents
+without changing a scientific claim.
 
 The active [basin-map confidence ladder](agendas/agenda-001-basin-confidence-ladder.md)
 separates three purposes:
@@ -256,7 +256,7 @@ separates three purposes:
   validation dependencies pass.
 
 The agenda frontmatter is a lightweight soft schema, not an executable scheduler.
-It stores stable cell IDs, priorities, budgets, prerequisites, beads, and promised
+It stores stable commitment IDs, priorities, budgets, prerequisites, beads, and promised
 evidence; the body carries the rationale.
 Hypotheses still own criteria, experiment artifacts still own measurements, `tbd` still
 owns work dependencies, and the active session still owns the clock.
@@ -266,7 +266,7 @@ Update an agenda only at a checkpoint.
 A completed item means its bounded question has a retained answer, not that a basin map
 or hypothesis is complete.
 The generated ledger shows agenda states alongside experiments so the next agent does
-not need conversation history to find the next ready cell.
+not need conversation history to find the next ready commitment.
 
 ## Assurance and Method
 

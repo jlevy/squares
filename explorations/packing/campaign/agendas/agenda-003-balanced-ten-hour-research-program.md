@@ -289,7 +289,7 @@ agenda:
 This is the mutable execution layer for one ten-hour user-level research run.
 It does not replace the basin confidence ladder, the constructive-enumeration agenda,
 the hypothesis registry, experiment records, or beads.
-It decides which bounded cell gets the clock next.
+It decides which bounded commitment gets the clock next.
 
 ## Operating decision
 
