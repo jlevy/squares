@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import colorsys
 from decimal import Decimal
+from math import sqrt
 from pathlib import Path
 
 from devtools.build_known_best_atlas import frame_from_witness
@@ -21,10 +23,35 @@ from sqpack.render.style import SQUARE_FILL_PALETTE, SQUARE_HUE_PALETTE
 from sqpack.witness import load_witness
 
 ROOT = Path(__file__).resolve().parents[1]
+MINIMUM_BASE_HUE_SEPARATION_DEGREES = 15
+MINIMUM_BASE_OKLAB_DISTANCE = 0.035
 
 
 def _point(x: Decimal | int | str, y: Decimal | int | str) -> Point2:
     return Point2(scalar_from_decimal(x), scalar_from_decimal(y))
+
+
+def _hue_degrees(fill: str) -> float:
+    red, green, blue = (int(fill[offset : offset + 2], 16) / 255 for offset in (1, 3, 5))
+    hue, _lightness, _saturation = colorsys.rgb_to_hls(red, green, blue)
+    return hue * 360
+
+
+def _oklab(fill: str) -> tuple[float, float, float]:
+    channels = tuple(int(fill[offset : offset + 2], 16) / 255 for offset in (1, 3, 5))
+    red, green, blue = (
+        channel / 12.92 if channel <= 0.04045 else ((channel + 0.055) / 1.055) ** 2.4
+        for channel in channels
+    )
+    light = 0.4122214708 * red + 0.5363325363 * green + 0.0514459929 * blue
+    medium = 0.2119034982 * red + 0.6806995451 * green + 0.1073969566 * blue
+    short = 0.0883024619 * red + 0.2817188376 * green + 0.6299787005 * blue
+    light, medium, short = light ** (1 / 3), medium ** (1 / 3), short ** (1 / 3)
+    return (
+        0.2104542553 * light + 0.793617785 * medium - 0.0040720468 * short,
+        1.9779984951 * light - 2.428592205 * medium + 0.4505937099 * short,
+        0.0259040371 * light + 0.7827717662 * medium - 0.808675766 * short,
+    )
 
 
 def _axis_square(
@@ -242,13 +269,29 @@ def test_requested_palette_dimensions_are_unique_and_configurable() -> None:
     assert len({fill for family in palette for fill in family}) == 100
     assert tuple(family[2] for family in palette) == SQUARE_HUE_PALETTE
     assert set(SQUARE_HUE_PALETTE) == set(SQUARE_FILL_PALETTE)
-    assert SQUARE_HUE_PALETTE[:6] == (
+    assert SQUARE_HUE_PALETTE[:4] == (
         "#00b393",
-        "#854888",
-        "#9fce85",
-        "#86a2ff",
-        "#378c3f",
-        "#00aeee",
+        "#884853",
+        "#a1ce85",
+        "#8986ff",
+    )
+    hues = tuple(_hue_degrees(fill) for fill in SQUARE_HUE_PALETTE)
+    assert (
+        min(
+            min(abs(left - right), 360 - abs(left - right))
+            for index, left in enumerate(hues)
+            for right in hues[index + 1 :]
+        )
+        >= MINIMUM_BASE_HUE_SEPARATION_DEGREES
+    )
+    oklab = tuple(_oklab(fill) for fill in SQUARE_HUE_PALETTE)
+    assert (
+        min(
+            sqrt(sum((left[channel] - right[channel]) ** 2 for channel in range(3)))
+            for index, left in enumerate(oklab)
+            for right in oklab[index + 1 :]
+        )
+        >= MINIMUM_BASE_OKLAB_DISTANCE
     )
     assert square_fill_palette(hue_count=7, shades_per_hue=3) != palette
 

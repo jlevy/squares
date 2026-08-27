@@ -470,7 +470,7 @@ def _summary_points(
     )
 
 
-def _append_summary_card(root: ET.Element, built: BuiltCase) -> None:
+def _append_summary_card(root: ET.Element, built: BuiltCase, *, spec: RenderSpec) -> None:
     n = built.frontier.n
     row, column = divmod(n - SUMMARY_FIRST_N, SUMMARY_COLUMNS)
     card_x = SUMMARY_GRID_LEFT + SUMMARY_COLUMN_PITCH * column
@@ -480,7 +480,7 @@ def _append_summary_card(root: ET.Element, built: BuiltCase) -> None:
     frame = frame_from_witness(built.witness)
     side = frame.container_side.projected
     scale = SUMMARY_PACKING_SIZE / side
-    colors = assign_square_colors(frame, RenderSpec(overlays=frozenset()))
+    colors = assign_square_colors(frame, spec)
 
     card = sub(
         root,
@@ -584,6 +584,7 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
     numbers = [item.frontier.n for item in built]
     if numbers != list(range(SUMMARY_FIRST_N, SUMMARY_LAST_N + 1)):
         raise ValueError("known-best summary requires exactly n=1..100 in order")
+    spec = RenderSpec(overlays=frozenset())
     root = element(
         "svg",
         {
@@ -607,8 +608,13 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
         root,
         {
             "angle-class-contract": ANGLE_CLASS_CONTRACT,
-            "color-hue-scheme": "angle",
-            "color-shade-scheme": "contacts",
+            "color-angle-tolerance-radians": str(spec.angle_tolerance_radians),
+            "color-full-side-contact-tolerance": str(spec.full_side_contact_tolerance),
+            "color-hue-count": str(spec.hue_count),
+            "color-hue-scheme": spec.hue_scheme.value,
+            "color-shade-lightness-span": str(spec.shade_lightness_span),
+            "color-shade-scheme": spec.shade_scheme.value,
+            "color-shades-per-hue": str(spec.shades_per_hue),
             "columns": str(SUMMARY_COLUMNS),
             "first-n": str(SUMMARY_FIRST_N),
             "generated-by": GENERATOR,
@@ -651,7 +657,7 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
         },
     ).text = "n = 1-100  ·  each packing normalized to its own container"
     for item in built:
-        _append_summary_card(root, item)
+        _append_summary_card(root, item, spec=spec)
     return serialize_svg(root)
 
 

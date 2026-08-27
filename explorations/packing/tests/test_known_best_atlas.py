@@ -20,6 +20,8 @@ from sqpack.known_best import (
     parse_kingbird_svg,
     parse_unitsquare_svg,
 )
+from sqpack.render.color import ANGLE_CLASS_CONTRACT
+from sqpack.render.model import RenderSpec
 from sqpack.witness import load_witness
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -295,6 +297,23 @@ def test_known_best_composite_contains_every_case_and_square() -> None:
     composite_path = ATLAS / "known-best-1-100.svg"
 
     root = ET.fromstring(outputs[composite_path])
+    metadata = {
+        node.attrib["name"]: node.text or ""
+        for node in root.iter()
+        if node.tag.endswith("}value") and "name" in node.attrib
+    }
+    spec = RenderSpec()
+    expected_color_metadata = {
+        "angle-class-contract": ANGLE_CLASS_CONTRACT,
+        "color-angle-tolerance-radians": str(spec.angle_tolerance_radians),
+        "color-full-side-contact-tolerance": str(spec.full_side_contact_tolerance),
+        "color-hue-count": str(spec.hue_count),
+        "color-hue-scheme": spec.hue_scheme.value,
+        "color-shade-lightness-span": str(spec.shade_lightness_span),
+        "color-shade-scheme": spec.shade_scheme.value,
+        "color-shades-per-hue": str(spec.shades_per_hue),
+    }
+    assert expected_color_metadata.items() <= metadata.items()
     cards = root.findall(".//svg:g[@data-n]", SVG)
     assert [int(card.attrib["data-n"]) for card in cards] == list(range(1, 101))
     assert len(root.findall(".//svg:polygon[@data-feature='square-fill']", SVG)) == 5050

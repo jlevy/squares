@@ -6,50 +6,31 @@ from dataclasses import dataclass
 
 from sqpack.render.model import EvidenceTier
 
-SQUARE_FILL_PALETTE = (
-    "#378c3f",
-    "#00aeee",
-    "#c1a0fb",
-    "#00b393",
-    "#3d63be",
-    "#78d7d6",
-    "#877deb",
-    "#9fce85",
-    "#0096b1",
-    "#854888",
-    "#83c4ff",
-    "#3bb360",
-    "#008376",
-    "#7acfe9",
-    "#0079bf",
-    "#86a2ff",
-    "#865eb1",
-    "#7fd6b1",
-    "#00afb9",
-    "#c18dd8",
-)
+# The ordered families keep the prior palette's saturation/lightness character while
+# spacing base hues by one twentieth of the color wheel (within RGB rounding).
 SQUARE_HUE_PALETTE = (
     "#00b393",
-    "#854888",
-    "#9fce85",
-    "#86a2ff",
-    "#378c3f",
-    "#00aeee",
-    "#c1a0fb",
-    "#877deb",
-    "#c18dd8",
-    "#7fd6b1",
-    "#00afb9",
-    "#3bb360",
-    "#83c4ff",
-    "#865eb1",
-    "#0096b1",
-    "#0079bf",
-    "#008376",
-    "#78d7d6",
-    "#3d63be",
-    "#7acfe9",
+    "#884853",
+    "#a1ce85",
+    "#8986ff",
+    "#8a8c37",
+    "#008aee",
+    "#a0fbb4",
+    "#c17deb",
+    "#d8ad8d",
+    "#d67fc3",
+    "#7eb900",
+    "#3b5cb3",
+    "#8dff83",
+    "#795eb1",
+    "#b18000",
+    "#00a8bf",
+    "#008344",
+    "#d078d7",
+    "#be4d3d",
+    "#e97aaf",
 )
+SQUARE_FILL_PALETTE = SQUARE_HUE_PALETTE
 SQUARE_FILL_OPACITY = 1.0
 PACKING_BOUNDARY_COLOR = "#000000"
 PACKING_BOUNDARY_WIDTH = 1.25

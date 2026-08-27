@@ -17,230 +17,230 @@
   <text x="48" y="82" fill="#5c6673" font-size="17" font-weight="400" text-anchor="start">11,013 signed-axis color orbits across 21 connected topologies</text>
   <text x="1152" y="52" fill="#d95f02" font-size="14" font-weight="700" text-anchor="end">ABSTRACT · NO GEOMETRY</text>
   <g id="card-t5-01">
-    <rect x="40" y="112" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#378c3f" stroke-width="2" />
+    <rect x="40" y="112" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#00b393" stroke-width="2" />
     <line x1="126" y1="144" x2="170" y2="176" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="144" x2="153" y2="227" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="144" x2="99" y2="227" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="144" x2="82" y2="176" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="126" cy="144" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="170" cy="176" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="153" cy="227" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="99" cy="227" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="82" cy="176" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="126" cy="144" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="170" cy="176" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="153" cy="227" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="99" cy="227" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="82" cy="176" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="198" y="150" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-01</text>
-    <text x="198" y="182" fill="#378c3f" font-size="20" font-weight="700" text-anchor="start">8 color orbits</text>
+    <text x="198" y="182" fill="#00b393" font-size="20" font-weight="700" text-anchor="start">8 color orbits</text>
     <text x="198" y="211" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">4 contact edges</text>
     <text x="198" y="236" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-01/000…</text>
   </g>
   <g id="card-t5-02">
-    <rect x="420" y="112" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#00aeee" stroke-width="2" />
+    <rect x="420" y="112" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#884853" stroke-width="2" />
     <line x1="506" y1="144" x2="550" y2="176" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="144" x2="533" y2="227" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="144" x2="479" y2="227" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="550" y1="176" x2="462" y2="176" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="506" cy="144" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="550" cy="176" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="533" cy="227" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="479" cy="227" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="462" cy="176" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="506" cy="144" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="550" cy="176" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="533" cy="227" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="479" cy="227" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="462" cy="176" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="578" y="150" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-02</text>
-    <text x="578" y="182" fill="#00aeee" font-size="20" font-weight="700" text-anchor="start">24 color orbits</text>
+    <text x="578" y="182" fill="#884853" font-size="20" font-weight="700" text-anchor="start">24 color orbits</text>
     <text x="578" y="211" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">4 contact edges</text>
     <text x="578" y="236" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-02/000…</text>
   </g>
   <g id="card-t5-03">
-    <rect x="800" y="112" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#c1a0fb" stroke-width="2" />
+    <rect x="800" y="112" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#a1ce85" stroke-width="2" />
     <line x1="886" y1="144" x2="930" y2="176" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="144" x2="913" y2="227" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="930" y1="176" x2="859" y2="227" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="913" y1="227" x2="842" y2="176" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="886" cy="144" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="930" cy="176" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="913" cy="227" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="859" cy="227" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="842" cy="176" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="886" cy="144" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="930" cy="176" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="913" cy="227" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="859" cy="227" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="842" cy="176" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="958" y="150" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-03</text>
-    <text x="958" y="182" fill="#c1a0fb" font-size="20" font-weight="700" text-anchor="start">24 color orbits</text>
+    <text x="958" y="182" fill="#a1ce85" font-size="20" font-weight="700" text-anchor="start">24 color orbits</text>
     <text x="958" y="211" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">4 contact edges</text>
     <text x="958" y="236" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-03/000…</text>
   </g>
   <g id="card-t5-04">
-    <rect x="40" y="286" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#00b393" stroke-width="2" />
+    <rect x="40" y="286" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#8986ff" stroke-width="2" />
     <line x1="126" y1="318" x2="170" y2="350" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="318" x2="153" y2="401" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="318" x2="99" y2="401" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="318" x2="82" y2="350" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="170" y1="350" x2="153" y2="401" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="126" cy="318" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="170" cy="350" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="153" cy="401" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="99" cy="401" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="82" cy="350" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="126" cy="318" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="170" cy="350" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="153" cy="401" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="99" cy="401" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="82" cy="350" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="198" y="324" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-04</text>
-    <text x="198" y="356" fill="#00b393" font-size="20" font-weight="700" text-anchor="start">50 color orbits</text>
+    <text x="198" y="356" fill="#8986ff" font-size="20" font-weight="700" text-anchor="start">50 color orbits</text>
     <text x="198" y="385" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">5 contact edges</text>
     <text x="198" y="410" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-04/000…</text>
   </g>
   <g id="card-t5-05">
-    <rect x="420" y="286" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#3d63be" stroke-width="2" />
+    <rect x="420" y="286" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#8a8c37" stroke-width="2" />
     <line x1="506" y1="318" x2="550" y2="350" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="318" x2="533" y2="401" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="318" x2="479" y2="401" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="550" y1="350" x2="533" y2="401" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="550" y1="350" x2="462" y2="350" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="506" cy="318" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="550" cy="350" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="533" cy="401" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="479" cy="401" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="462" cy="350" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="506" cy="318" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="550" cy="350" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="533" cy="401" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="479" cy="401" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="462" cy="350" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="578" y="324" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-05</text>
-    <text x="578" y="356" fill="#3d63be" font-size="20" font-weight="700" text-anchor="start">76 color orbits</text>
+    <text x="578" y="356" fill="#8a8c37" font-size="20" font-weight="700" text-anchor="start">76 color orbits</text>
     <text x="578" y="385" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">5 contact edges</text>
     <text x="578" y="410" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-05/000…</text>
   </g>
   <g id="card-t5-06">
-    <rect x="800" y="286" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#78d7d6" stroke-width="2" />
+    <rect x="800" y="286" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#008aee" stroke-width="2" />
     <line x1="886" y1="318" x2="930" y2="350" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="318" x2="913" y2="401" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="318" x2="859" y2="401" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="930" y1="350" x2="913" y2="401" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="859" y1="401" x2="842" y2="350" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="886" cy="318" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="930" cy="350" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="913" cy="401" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="859" cy="401" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="842" cy="350" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="886" cy="318" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="930" cy="350" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="913" cy="401" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="859" cy="401" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="842" cy="350" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="958" y="324" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-06</text>
-    <text x="958" y="356" fill="#78d7d6" font-size="20" font-weight="700" text-anchor="start">72 color orbits</text>
+    <text x="958" y="356" fill="#008aee" font-size="20" font-weight="700" text-anchor="start">72 color orbits</text>
     <text x="958" y="385" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">5 contact edges</text>
     <text x="958" y="410" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-06/000…</text>
   </g>
   <g id="card-t5-07">
-    <rect x="40" y="460" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#877deb" stroke-width="2" />
+    <rect x="40" y="460" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#a0fbb4" stroke-width="2" />
     <line x1="126" y1="492" x2="170" y2="524" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="492" x2="153" y2="575" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="492" x2="99" y2="575" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="170" y1="524" x2="82" y2="524" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="153" y1="575" x2="82" y2="524" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="126" cy="492" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="170" cy="524" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="153" cy="575" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="99" cy="575" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="82" cy="524" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="126" cy="492" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="170" cy="524" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="153" cy="575" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="99" cy="575" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="82" cy="524" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="198" y="498" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-07</text>
-    <text x="198" y="530" fill="#877deb" font-size="20" font-weight="700" text-anchor="start">76 color orbits</text>
+    <text x="198" y="530" fill="#a0fbb4" font-size="20" font-weight="700" text-anchor="start">76 color orbits</text>
     <text x="198" y="559" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">5 contact edges</text>
     <text x="198" y="584" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-07/000…</text>
   </g>
   <g id="card-t5-08">
-    <rect x="420" y="460" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#9fce85" stroke-width="2" />
+    <rect x="420" y="460" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#c17deb" stroke-width="2" />
     <line x1="506" y1="492" x2="550" y2="524" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="492" x2="533" y2="575" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="550" y1="524" x2="479" y2="575" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="533" y1="575" x2="462" y2="524" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="479" y1="575" x2="462" y2="524" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="506" cy="492" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="550" cy="524" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="533" cy="575" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="479" cy="575" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="462" cy="524" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="506" cy="492" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="550" cy="524" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="533" cy="575" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="479" cy="575" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="462" cy="524" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="578" y="498" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-08</text>
-    <text x="578" y="530" fill="#9fce85" font-size="20" font-weight="700" text-anchor="start">22 color orbits</text>
+    <text x="578" y="530" fill="#c17deb" font-size="20" font-weight="700" text-anchor="start">22 color orbits</text>
     <text x="578" y="559" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">5 contact edges</text>
     <text x="578" y="584" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-08/000…</text>
   </g>
   <g id="card-t5-09">
-    <rect x="800" y="460" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#0096b1" stroke-width="2" />
+    <rect x="800" y="460" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#d8ad8d" stroke-width="2" />
     <line x1="886" y1="492" x2="930" y2="524" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="492" x2="913" y2="575" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="492" x2="859" y2="575" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="492" x2="842" y2="524" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="930" y1="524" x2="913" y2="575" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="930" y1="524" x2="859" y2="575" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="886" cy="492" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="930" cy="524" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="913" cy="575" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="859" cy="575" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="842" cy="524" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="886" cy="492" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="930" cy="524" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="913" cy="575" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="859" cy="575" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="842" cy="524" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="958" y="498" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-09</text>
-    <text x="958" y="530" fill="#0096b1" font-size="20" font-weight="700" text-anchor="start">288 color orbits</text>
+    <text x="958" y="530" fill="#d8ad8d" font-size="20" font-weight="700" text-anchor="start">288 color orbits</text>
     <text x="958" y="559" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">6 contact edges</text>
     <text x="958" y="584" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-09/000…</text>
   </g>
   <g id="card-t5-10">
-    <rect x="40" y="634" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#854888" stroke-width="2" />
+    <rect x="40" y="634" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#d67fc3" stroke-width="2" />
     <line x1="126" y1="666" x2="170" y2="698" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="666" x2="153" y2="749" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="666" x2="99" y2="749" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="666" x2="82" y2="698" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="170" y1="698" x2="153" y2="749" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="99" y1="749" x2="82" y2="698" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="126" cy="666" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="170" cy="698" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="153" cy="749" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="99" cy="749" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="82" cy="698" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="126" cy="666" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="170" cy="698" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="153" cy="749" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="99" cy="749" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="82" cy="698" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="198" y="672" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-10</text>
-    <text x="198" y="704" fill="#854888" font-size="20" font-weight="700" text-anchor="start">89 color orbits</text>
+    <text x="198" y="704" fill="#d67fc3" font-size="20" font-weight="700" text-anchor="start">89 color orbits</text>
     <text x="198" y="733" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">6 contact edges</text>
     <text x="198" y="758" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-10/000…</text>
   </g>
   <g id="card-t5-11">
-    <rect x="420" y="634" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#83c4ff" stroke-width="2" />
+    <rect x="420" y="634" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#7eb900" stroke-width="2" />
     <line x1="506" y1="666" x2="550" y2="698" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="666" x2="533" y2="749" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="666" x2="479" y2="749" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="550" y1="698" x2="533" y2="749" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="550" y1="698" x2="479" y2="749" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="533" y1="749" x2="462" y2="698" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="506" cy="666" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="550" cy="698" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="533" cy="749" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="479" cy="749" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="462" cy="698" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="506" cy="666" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="550" cy="698" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="533" cy="749" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="479" cy="749" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="462" cy="698" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="578" y="672" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-11</text>
-    <text x="578" y="704" fill="#83c4ff" font-size="20" font-weight="700" text-anchor="start">272 color orbits</text>
+    <text x="578" y="704" fill="#7eb900" font-size="20" font-weight="700" text-anchor="start">272 color orbits</text>
     <text x="578" y="733" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">6 contact edges</text>
     <text x="578" y="758" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-11/000…</text>
   </g>
   <g id="card-t5-12">
-    <rect x="800" y="634" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#3bb360" stroke-width="2" />
+    <rect x="800" y="634" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#3b5cb3" stroke-width="2" />
     <line x1="886" y1="666" x2="930" y2="698" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="666" x2="913" y2="749" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="666" x2="859" y2="749" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="930" y1="698" x2="913" y2="749" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="930" y1="698" x2="842" y2="698" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="859" y1="749" x2="842" y2="698" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="886" cy="666" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="930" cy="698" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="913" cy="749" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="859" cy="749" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="842" cy="698" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="886" cy="666" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="930" cy="698" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="913" cy="749" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="859" cy="749" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="842" cy="698" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="958" y="672" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-12</text>
-    <text x="958" y="704" fill="#3bb360" font-size="20" font-weight="700" text-anchor="start">288 color orbits</text>
+    <text x="958" y="704" fill="#3b5cb3" font-size="20" font-weight="700" text-anchor="start">288 color orbits</text>
     <text x="958" y="733" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">6 contact edges</text>
     <text x="958" y="758" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-12/000…</text>
   </g>
   <g id="card-t5-13">
-    <rect x="40" y="808" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#008376" stroke-width="2" />
+    <rect x="40" y="808" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#8dff83" stroke-width="2" />
     <line x1="126" y1="840" x2="170" y2="872" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="840" x2="153" y2="923" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="840" x2="99" y2="923" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="170" y1="872" x2="82" y2="872" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="153" y1="923" x2="82" y2="872" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="99" y1="923" x2="82" y2="872" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="126" cy="840" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="170" cy="872" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="153" cy="923" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="99" cy="923" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="82" cy="872" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="126" cy="840" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="170" cy="872" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="153" cy="923" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="99" cy="923" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="82" cy="872" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="198" y="846" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-13</text>
-    <text x="198" y="878" fill="#008376" font-size="20" font-weight="700" text-anchor="start">73 color orbits</text>
+    <text x="198" y="878" fill="#8dff83" font-size="20" font-weight="700" text-anchor="start">73 color orbits</text>
     <text x="198" y="907" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">6 contact edges</text>
     <text x="198" y="932" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-13/000…</text>
   </g>
   <g id="card-t5-14">
-    <rect x="420" y="808" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#7acfe9" stroke-width="2" />
+    <rect x="420" y="808" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#795eb1" stroke-width="2" />
     <line x1="506" y1="840" x2="550" y2="872" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="840" x2="533" y2="923" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="840" x2="479" y2="923" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
@@ -248,18 +248,18 @@
     <line x1="550" y1="872" x2="533" y2="923" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="550" y1="872" x2="479" y2="923" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="550" y1="872" x2="462" y2="872" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="506" cy="840" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="550" cy="872" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="533" cy="923" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="479" cy="923" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="462" cy="872" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="506" cy="840" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="550" cy="872" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="533" cy="923" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="479" cy="923" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="462" cy="872" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="578" y="846" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-14</text>
-    <text x="578" y="878" fill="#7acfe9" font-size="20" font-weight="700" text-anchor="start">237 color orbits</text>
+    <text x="578" y="878" fill="#795eb1" font-size="20" font-weight="700" text-anchor="start">237 color orbits</text>
     <text x="578" y="907" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">7 contact edges</text>
     <text x="578" y="932" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-14/000…</text>
   </g>
   <g id="card-t5-15">
-    <rect x="800" y="808" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#0079bf" stroke-width="2" />
+    <rect x="800" y="808" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#b18000" stroke-width="2" />
     <line x1="886" y1="840" x2="930" y2="872" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="840" x2="913" y2="923" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="840" x2="859" y2="923" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
@@ -267,18 +267,18 @@
     <line x1="930" y1="872" x2="913" y2="923" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="930" y1="872" x2="859" y2="923" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="913" y1="923" x2="859" y2="923" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="886" cy="840" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="930" cy="872" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="913" cy="923" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="859" cy="923" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="842" cy="872" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="886" cy="840" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="930" cy="872" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="913" cy="923" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="859" cy="923" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="842" cy="872" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="958" y="846" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-15</text>
-    <text x="958" y="878" fill="#0079bf" font-size="20" font-weight="700" text-anchor="start">366 color orbits</text>
+    <text x="958" y="878" fill="#b18000" font-size="20" font-weight="700" text-anchor="start">366 color orbits</text>
     <text x="958" y="907" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">7 contact edges</text>
     <text x="958" y="932" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-15/000…</text>
   </g>
   <g id="card-t5-16">
-    <rect x="40" y="982" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#86a2ff" stroke-width="2" />
+    <rect x="40" y="982" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#00a8bf" stroke-width="2" />
     <line x1="126" y1="1014" x2="170" y2="1046" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="1014" x2="153" y2="1097" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="1014" x2="99" y2="1097" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
@@ -286,18 +286,18 @@
     <line x1="170" y1="1046" x2="153" y2="1097" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="170" y1="1046" x2="99" y2="1097" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="153" y1="1097" x2="82" y2="1046" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="126" cy="1014" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="170" cy="1046" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="153" cy="1097" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="99" cy="1097" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="82" cy="1046" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="126" cy="1014" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="170" cy="1046" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="153" cy="1097" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="99" cy="1097" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="82" cy="1046" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="198" y="1020" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-16</text>
-    <text x="198" y="1052" fill="#86a2ff" font-size="20" font-weight="700" text-anchor="start">1,072 color orbits</text>
+    <text x="198" y="1052" fill="#00a8bf" font-size="20" font-weight="700" text-anchor="start">1,072 color orbits</text>
     <text x="198" y="1081" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">7 contact edges</text>
     <text x="198" y="1106" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-16/000…</text>
   </g>
   <g id="card-t5-17">
-    <rect x="420" y="982" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#865eb1" stroke-width="2" />
+    <rect x="420" y="982" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#008344" stroke-width="2" />
     <line x1="506" y1="1014" x2="550" y2="1046" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="1014" x2="533" y2="1097" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="1014" x2="479" y2="1097" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
@@ -305,18 +305,18 @@
     <line x1="550" y1="1046" x2="479" y2="1097" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="533" y1="1097" x2="462" y2="1046" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="479" y1="1097" x2="462" y2="1046" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="506" cy="1014" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="550" cy="1046" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="533" cy="1097" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="479" cy="1097" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="462" cy="1046" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="506" cy="1014" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="550" cy="1046" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="533" cy="1097" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="479" cy="1097" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="462" cy="1046" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="578" y="1020" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-17</text>
-    <text x="578" y="1052" fill="#865eb1" font-size="20" font-weight="700" text-anchor="start">560 color orbits</text>
+    <text x="578" y="1052" fill="#008344" font-size="20" font-weight="700" text-anchor="start">560 color orbits</text>
     <text x="578" y="1081" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">7 contact edges</text>
     <text x="578" y="1106" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-17/000…</text>
   </g>
   <g id="card-t5-18">
-    <rect x="800" y="982" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#7fd6b1" stroke-width="2" />
+    <rect x="800" y="982" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#d078d7" stroke-width="2" />
     <line x1="886" y1="1014" x2="930" y2="1046" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="1014" x2="913" y2="1097" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="1014" x2="859" y2="1097" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
@@ -325,18 +325,18 @@
     <line x1="930" y1="1046" x2="859" y2="1097" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="930" y1="1046" x2="842" y2="1046" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="913" y1="1097" x2="859" y2="1097" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="886" cy="1014" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="930" cy="1046" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="913" cy="1097" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="859" cy="1097" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="842" cy="1046" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="886" cy="1014" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="930" cy="1046" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="913" cy="1097" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="859" cy="1097" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="842" cy="1046" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="958" y="1020" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-18</text>
-    <text x="958" y="1052" fill="#7fd6b1" font-size="20" font-weight="700" text-anchor="start">2,144 color orbits</text>
+    <text x="958" y="1052" fill="#d078d7" font-size="20" font-weight="700" text-anchor="start">2,144 color orbits</text>
     <text x="958" y="1081" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">8 contact edges</text>
     <text x="958" y="1106" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-18/000…</text>
   </g>
   <g id="card-t5-19">
-    <rect x="40" y="1156" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#00afb9" stroke-width="2" />
+    <rect x="40" y="1156" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#be4d3d" stroke-width="2" />
     <line x1="126" y1="1188" x2="170" y2="1220" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="1188" x2="153" y2="1271" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="126" y1="1188" x2="99" y2="1271" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
@@ -345,18 +345,18 @@
     <line x1="170" y1="1220" x2="99" y2="1271" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="153" y1="1271" x2="82" y2="1220" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="99" y1="1271" x2="82" y2="1220" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="126" cy="1188" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="170" cy="1220" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="153" cy="1271" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="99" cy="1271" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="82" cy="1220" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="126" cy="1188" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="170" cy="1220" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="153" cy="1271" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="99" cy="1271" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="82" cy="1220" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="198" y="1194" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-19</text>
-    <text x="198" y="1226" fill="#00afb9" font-size="20" font-weight="700" text-anchor="start">1,156 color orbits</text>
+    <text x="198" y="1226" fill="#be4d3d" font-size="20" font-weight="700" text-anchor="start">1,156 color orbits</text>
     <text x="198" y="1255" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">8 contact edges</text>
     <text x="198" y="1280" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-19/000…</text>
   </g>
   <g id="card-t5-20">
-    <rect x="420" y="1156" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#c18dd8" stroke-width="2" />
+    <rect x="420" y="1156" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#e97aaf" stroke-width="2" />
     <line x1="506" y1="1188" x2="550" y2="1220" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="1188" x2="533" y2="1271" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="506" y1="1188" x2="479" y2="1271" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
@@ -366,18 +366,18 @@
     <line x1="550" y1="1220" x2="462" y2="1220" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="533" y1="1271" x2="479" y2="1271" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="533" y1="1271" x2="462" y2="1220" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="506" cy="1188" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="550" cy="1220" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="533" cy="1271" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="479" cy="1271" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="462" cy="1220" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="506" cy="1188" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="550" cy="1220" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="533" cy="1271" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="479" cy="1271" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="462" cy="1220" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="578" y="1194" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-20</text>
-    <text x="578" y="1226" fill="#c18dd8" font-size="20" font-weight="700" text-anchor="start">2,893 color orbits</text>
+    <text x="578" y="1226" fill="#e97aaf" font-size="20" font-weight="700" text-anchor="start">2,893 color orbits</text>
     <text x="578" y="1255" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">9 contact edges</text>
     <text x="578" y="1280" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-20/000…</text>
   </g>
   <g id="card-t5-21">
-    <rect x="800" y="1156" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#378c3f" stroke-width="2" />
+    <rect x="800" y="1156" width="350" height="150" rx="14" fill="#f7f8fa" stroke="#00b393" stroke-width="2" />
     <line x1="886" y1="1188" x2="930" y2="1220" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="1188" x2="913" y2="1271" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="886" y1="1188" x2="859" y2="1271" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
@@ -388,13 +388,13 @@
     <line x1="913" y1="1271" x2="859" y2="1271" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="913" y1="1271" x2="842" y2="1220" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
     <line x1="859" y1="1271" x2="842" y2="1220" stroke="#5c6673" stroke-width="2.5" stroke-linecap="round" />
-    <circle cx="886" cy="1188" r="10" fill="#378c3f" stroke="#000000" stroke-width="1.25" />
-    <circle cx="930" cy="1220" r="10" fill="#00aeee" stroke="#000000" stroke-width="1.25" />
-    <circle cx="913" cy="1271" r="10" fill="#c1a0fb" stroke="#000000" stroke-width="1.25" />
-    <circle cx="859" cy="1271" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
-    <circle cx="842" cy="1220" r="10" fill="#3d63be" stroke="#000000" stroke-width="1.25" />
+    <circle cx="886" cy="1188" r="10" fill="#00b393" stroke="#000000" stroke-width="1.25" />
+    <circle cx="930" cy="1220" r="10" fill="#884853" stroke="#000000" stroke-width="1.25" />
+    <circle cx="913" cy="1271" r="10" fill="#a1ce85" stroke="#000000" stroke-width="1.25" />
+    <circle cx="859" cy="1271" r="10" fill="#8986ff" stroke="#000000" stroke-width="1.25" />
+    <circle cx="842" cy="1220" r="10" fill="#8a8c37" stroke="#000000" stroke-width="1.25" />
     <text x="958" y="1194" fill="#17202a" font-size="18" font-weight="700" text-anchor="start">T5-21</text>
-    <text x="958" y="1226" fill="#378c3f" font-size="20" font-weight="700" text-anchor="start">1,223 color orbits</text>
+    <text x="958" y="1226" fill="#00b393" font-size="20" font-weight="700" text-anchor="start">1,223 color orbits</text>
     <text x="958" y="1255" fill="#5c6673" font-size="15" font-weight="400" text-anchor="start">10 contact edges</text>
     <text x="958" y="1280" fill="#5c6673" font-size="13" font-weight="400" text-anchor="start">IDs: T5-21/000…</text>
   </g>

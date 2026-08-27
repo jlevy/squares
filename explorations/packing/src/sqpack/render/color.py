@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from decimal import ROUND_HALF_UP, Decimal, localcontext
 from functools import cache
 
@@ -41,6 +41,42 @@ class SquareColor:
     contact_sides: int | None
     full_side_contacts: tuple[str, ...]
     maximum_contact_residual: Decimal | None
+
+
+@dataclass
+class AngleHueRegistry:
+    """Share angle-class hue identities across panels in one render."""
+
+    hue_count: int
+    angle_tolerance_radians: Decimal
+    _representatives: list[Decimal] = field(default_factory=list)
+
+    def hues_for(self, representatives: tuple[Decimal, ...]) -> tuple[int, ...]:
+        """Return stable hues, preferring the closest earlier class match."""
+        registrations: list[int | None] = [None] * len(representatives)
+        used_registrations: set[int] = set()
+        candidates = sorted(
+            (
+                (_orientation_distance(representative, registered), current, previous)
+                for current, representative in enumerate(representatives)
+                for previous, registered in enumerate(self._representatives)
+                if _orientation_distance(representative, registered)
+                <= self.angle_tolerance_radians
+            )
+        )
+        for _distance, current, previous in candidates:
+            if registrations[current] is None and previous not in used_registrations:
+                registrations[current] = previous
+                used_registrations.add(previous)
+        for current, representative in enumerate(representatives):
+            if registrations[current] is None:
+                registrations[current] = len(self._representatives)
+                self._representatives.append(representative)
+        return tuple(
+            registration % self.hue_count
+            for registration in registrations
+            if registration is not None
+        )
 
 
 def _hue_slots(count: int) -> tuple[int, ...]:
@@ -109,7 +145,9 @@ def _hex_hsl(fill: str) -> tuple[Decimal, Decimal, Decimal]:
         return Decimal(0), Decimal(0), lightness
     saturation = difference / (Decimal(1) - abs(Decimal(2) * lightness - Decimal(1)))
     if maximum == red:
-        hue_sector = ((green - blue) / difference) % Decimal(6)
+        hue_sector = (green - blue) / difference
+        if hue_sector < 0:
+            hue_sector += Decimal(6)
     elif maximum == green:
         hue_sector = (blue - red) / difference + 2
     else:
@@ -539,7 +577,12 @@ def _contact_shade(contact_sides: int, *, shades_per_hue: int) -> int:
     return int(scaled.quantize(Decimal(1), rounding=ROUND_HALF_UP))
 
 
-def assign_square_colors(frame: PackingFrame, spec: RenderSpec) -> dict[str, SquareColor]:
+def assign_square_colors(
+    frame: PackingFrame,
+    spec: RenderSpec,
+    *,
+    angle_hue_registry: AngleHueRegistry | None = None,
+) -> dict[str, SquareColor]:
     """Assign one deterministic color to every square in stable frame order."""
     if spec.hue_count <= 0 or spec.shades_per_hue <= 0:
         raise ValueError("color hue and shade counts must be positive")
@@ -556,6 +599,11 @@ def assign_square_colors(frame: PackingFrame, spec: RenderSpec) -> dict[str, Squ
         or spec.shade_lightness_span > Decimal("0.3")
     ):
         raise ValueError("color shade lightness span must be between 0 and 0.3")
+    if angle_hue_registry is not None and (
+        angle_hue_registry.hue_count != spec.hue_count
+        or angle_hue_registry.angle_tolerance_radians != spec.angle_tolerance_radians
+    ):
+        raise ValueError("angle hue registry must match the render color contract")
 
     orientations = tuple(_square_orientation(square) for square in frame.squares)
     contacts_by_square = _full_side_contacts(
@@ -583,9 +631,13 @@ def assign_square_colors(frame: PackingFrame, spec: RenderSpec) -> dict[str, Squ
             for class_index, members in enumerate(angle_classes)
             for square_index in members
         }
+        class_hues = (
+            angle_hue_registry.hues_for(representatives)
+            if angle_hue_registry is not None
+            else tuple(index % spec.hue_count for index in range(len(angle_classes)))
+        )
         hue_by_square = {
-            index: class_by_square[index] % spec.hue_count
-            for index in range(len(frame.squares))
+            index: class_hues[class_by_square[index]] for index in range(len(frame.squares))
         }
         shade_groups = {index: list(members) for index, members in enumerate(angle_classes)}
     else:
