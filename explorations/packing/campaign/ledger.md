@@ -30,6 +30,11 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-014](agent-sessions/session-014-final-portfolio-rotation.md) | stopped | contemporaneous | `pipeline-improvement` (efficiency) | `process-review` (process) | 2 | think-gszk | From the pushed PR 34 head, open a new bounded session and preregister one BC-010 exact R4/R5 nonlinear-realization slice under think-1s0h; retain D-239 as a separate pipeline slice and do not begin basin-frequency work before component identity. |
 | [session-015](agent-sessions/session-015-four-hour-r4-r5-loop.md) | stopped | contemporaneous | `process-review` (process) | `pipeline-improvement` (correctness) | 8 | think-1s0h | Continue under think-1s0h in session-016: derive and independently review the remaining exact scale-routing and production-mutation contract before the fixed finalization reserve; do not open a target result or basin-frequency work. |
 | [session-016](agent-sessions/session-016-final-hour-continuation.md) | completed | contemporaneous | `pipeline-improvement` (insight) | `process-review` (process) | 2 | think-1s0h | Under think-1s0h and BC-010, preregister exactly campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md; only after independent criterion acceptance implement cases/n5/minus_w_scale.py and tests/test_minus_w_scale.py, then replace the old obstruction draft and add its focused test. Do not run the target first. |
+| [session-017](agent-sessions/session-017-research-loop-efficiency.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-ma71 | Preserve BC-010 under think-1s0h as the sole scientific handoff and preregister its named exp-045 successor before scientific implementation or target work. Separately, begin W5 implementation with think-l7hi timing artifacts and the required Linux fast lane while think-rthe profiles identical-result negative-control concurrency. |
+| [session-018](agent-sessions/session-018-efficiency-plan-refinement.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-vcr4 | Preserve BC-010 under think-1s0h as the sole scientific handoff. Implement think-l7hi first: land the fast required lane, stable aggregator, and Linux job matrix; then execute think-rthe and think-kdil from their measured spike contracts. |
+| [session-019](agent-sessions/session-019-native-timing-correction-spike.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-lpum | Preserve BC-010 under think-1s0h as the sole scientific handoff. Implement think-l7hi's one-minute required CI lane first, then think-kdil's exact row-inventory reuse from the measured plan. |
+| [session-020](agent-sessions/session-020-fast-pr-lane-spike.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `efficiency-loop` (efficiency) | 2 | think-b784 | Preserve BC-010 under think-1s0h as the sole scientific handoff. Collect the remaining hosted acceptance samples under think-l7hi and implement exact row-jet reuse under think-kdil; add larger matrices only if measured tails require them. |
+| [session-021](agent-sessions/session-021-pr41-performance-integration.md) | in_progress | contemporaneous | `efficiency-loop` (efficiency) | `process-review` (process) | 3 | think-l7hi | Under BC-010, think-1s0h, think-l7hi, and think-4vni, publish and merge the corrected PR 41 tree on main, then stack the byte-preserving atlas bitset optimization on that exact landed revision before resuming PR 45's merge-readiness work. |
 
 ### Workflow summary
 
@@ -40,8 +45,8 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 1 | 0 |
 | `factual-review` | 0 | 0 | 4 | 2 |
 | `insight-iteration` | 0 | 1 | 3 | 2 |
-| `process-review` | 3 | 4 | 10 | 6 |
-| `efficiency-loop` | 1 | 0 | 1 | 0 |
+| `process-review` | 3 | 4 | 12 | 6 |
+| `efficiency-loop` | 6 | 0 | 10 | 0 |
 | `research-loop` | 1 | 4 | 9 | 7 |
 | `pipeline-improvement` | 2 | 0 | 11 | 0 |
 

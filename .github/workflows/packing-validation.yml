@@ -2,12 +2,11 @@ name: Packing validation
 
 "on":
   workflow_dispatch: {}
-  pull_request:
-    paths:
-      - ".agents/skills/experiment-loop/**"
-      - ".claude/skills/experiment-loop/**"
-      - ".github/workflows/packing-validation.yml"
-      - "explorations/packing/**"
+  schedule:
+    - cron: "17 8 * * 6"
+  # Keep the stable packing-required context present for every pull request. Path-level
+  # filtering would leave a configured required check pending forever when no path matched.
+  pull_request: {}
   push:
     branches: [main]
     paths:
@@ -47,12 +46,30 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
-      - name: Run the complete packing validation surface
+      - name: Run the required pull-request surface
+        if: "github.event_name == 'pull_request'"
         run: >-
           uv run --frozen --all-extras --group dev
-          packing-validate --jobs 2 --inner-jobs 1
+          packing-validate --fast --jobs 2 --inner-jobs 1
+
+      - name: Run the complete integration surface
+        if: "github.event_name != 'pull_request'"
+        run: >-
+          uv run --frozen --all-extras --group dev
+          packing-validate --jobs 2 --inner-jobs 2
+
+  packing-required:
+    if: "always() && github.event_name == 'pull_request'"
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every pull-request prerequisite
+        env:
+          VALIDATE_RESULT: ${{ needs.validate.result }}
+        run: test "$VALIDATE_RESULT" = "success"
 
   macos-portability:
+    if: "github.event_name != 'pull_request'"
     runs-on: macos-latest
     defaults:
       run:
@@ -78,7 +95,7 @@ jobs:
       - name: Run the complete packing validation surface on a second architecture
         run: >-
           uv run --frozen --all-extras --group dev
-          packing-validate --jobs 2 --inner-jobs 1
+          packing-validate --jobs 2 --inner-jobs 2
 
       - name: Run the focused deep-golden portability check
         run: >-

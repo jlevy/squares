@@ -203,12 +203,55 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
 
     triggers = _mapping(_mapping(document)["on"])
     assert "workflow_dispatch" in triggers
+    assert "schedule" in triggers
+    assert triggers["pull_request"] == {}
+
+    validate_steps = _mapping(jobs["validate"])["steps"]
+    assert isinstance(validate_steps, list)
+    required_step = next(
+        _mapping(step)
+        for step in validate_steps
+        if _mapping(step).get("name") == "Run the required pull-request surface"
+    )
+    assert required_step["if"] == "github.event_name == 'pull_request'"
+    assert " ".join(str(required_step["run"]).split()) == (
+        "uv run --frozen --all-extras --group dev packing-validate --fast "
+        "--jobs 2 --inner-jobs 1"
+    )
+    full_step = next(
+        _mapping(step)
+        for step in validate_steps
+        if _mapping(step).get("name") == "Run the complete integration surface"
+    )
+    assert full_step["if"] == "github.event_name != 'pull_request'"
+    assert " ".join(str(full_step["run"]).split()) == (
+        "uv run --frozen --all-extras --group dev packing-validate --jobs 2 --inner-jobs 2"
+    )
+
+    required_job = _mapping(jobs["packing-required"])
+    assert required_job["needs"] == "validate"
+    assert required_job["if"] == ("always() && github.event_name == 'pull_request'")
+    assert "continue-on-error" not in required_job
+    required_job_steps = required_job["steps"]
+    assert isinstance(required_job_steps, list)
+    required_command = " ".join(str(_mapping(required_job_steps[0])["run"]).split())
+    assert required_command == 'test "$VALIDATE_RESULT" = "success"'
 
     mac_steps = _mapping(jobs["macos-portability"])["steps"]
     assert isinstance(mac_steps, list)
     mac_job = _mapping(jobs["macos-portability"])
+    assert mac_job["if"] == "github.event_name != 'pull_request'"
     assert "continue-on-error" not in mac_job
     assert all("continue-on-error" not in _mapping(step) for step in mac_steps)
+    mac_full_step = next(
+        _mapping(step)
+        for step in mac_steps
+        if _mapping(step).get("name")
+        == "Run the complete packing validation surface on a second architecture"
+    )
+    assert " ".join(str(mac_full_step["run"]).split()) == (
+        "uv run --frozen --all-extras --group dev packing-validate --jobs 2 --inner-jobs 2"
+    )
     deep_probes = [
         _mapping(step)
         for step in mac_steps
@@ -224,6 +267,46 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         "check_known_macos_golden_drift" not in str(_mapping(step).get("run", ""))
         for step in mac_steps
     )
+
+
+def test_exhaustive_exact_marker_is_declared_only_by_measured_slow_nodes() -> None:
+    expected = {
+        "test_exact_jets.py": {
+            "test_n5_wall_and_contact_gradients_match_authoritative_source_rows",
+        },
+        "test_minus_w_row_jets.py": {
+            "test_owner_rows_match_complete_authoritative_inventory",
+            "test_active_rows_expose_both_owner_alternatives",
+            "test_sat_row_retains_exact_center_angle_cross_curvature",
+        },
+        "test_minus_w_sheet.py": {
+            "test_positive_sheet_path_checks_all_seventeen_rows_for_both_owners",
+            "test_bad_center_correction_is_rejected_by_same_row_evaluator",
+        },
+        "test_minus_w_stress.py": {
+            "test_w_curvature_is_even_nonzero_and_quadratically_scaled",
+            "test_real_production_weight_perturbation_breaks_cancellation",
+            "test_uniform_weight_rescaling_fails_exact_normalization",
+        },
+    }
+    declared: dict[str, set[str]] = {}
+    marker = "pytest.mark.exhaustive_exact"
+    for path in (PROJECT_ROOT / "tests").glob("test_*.py"):
+        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+        marked: set[str] = set()
+        for node in tree.body:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and any(
+                ast.unparse(decorator) == marker for decorator in node.decorator_list
+            ):
+                marked.add(node.name)
+            if isinstance(
+                node, (ast.Assign, ast.AnnAssign)
+            ) and "exhaustive_exact" in ast.unparse(node):
+                marked.add("<module-level assignment>")
+        if marked:
+            declared[path.name] = marked
+
+    assert declared == expected
 
 
 def test_devtools_use_public_package_interfaces() -> None:

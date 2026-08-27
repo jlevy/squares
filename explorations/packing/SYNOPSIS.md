@@ -84,11 +84,11 @@ The detailed implementation statuses remain in [What Is Built](#what-is-built).
 | Unattended numerical execution | Run bounded supervised slices and let an agent resume dependency-ready work | The numerical runner remains **NO-GO** until its independent validity, recovery, receipt, and capacity gates pass | [Numeric launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md#the-numeric-runner-launch-gate) |
 
 The generated ledger currently derives three confirmed hypotheses, six refuted
-hypotheses, one open hypothesis, seven open questions, and thirty blocked hypotheses. One additional hypothesis is unresolved because its formal prerequisite is
-missing. Its active confidence ladder has completed the exact and event controls up to
-the first nontrivial identity question; the next scientific transition is from
-specialized `n = 5` local geometry to a defensible component relation, not to a larger
-raw census.
+hypotheses, one open hypothesis, seven open questions, and thirty blocked hypotheses.
+One additional hypothesis is unresolved because its formal prerequisite is missing.
+Its active confidence ladder has completed the exact and event controls up to the first
+nontrivial identity question; the next scientific transition is from specialized `n = 5`
+local geometry to a defensible component relation, not to a larger raw census.
 
 #### Refresh rule
 
@@ -165,12 +165,14 @@ case or experiment separately.
 | [Review: `TUTORIAL.md`, Read as Its Declared Audience](docs/project/reviews/review-2026-08-25-tutorial-pedagogy-and-accuracy.md) | dated review record | record | retained | — |
 | [Review: `TUTORIAL.md` Soundness, Iteration 2, on the Merged Record](docs/project/reviews/review-2026-08-25-tutorial-soundness-iteration-2.md) | dated review record | record | retained | — |
 | [Review: Soundness of the Session-011 Continuation (PR #34)](docs/project/reviews/review-2026-08-25-pr34-soundness-review.md) | dated review record | record | retained | — |
+| [Review: Square Packing Research-Loop Efficiency](docs/project/reviews/review-2026-08-25-research-loop-efficiency.md) | dated review record | record | retained | — |
 | [Handoff: Basin Identity and the Integrated PR Reviews](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Handoff: Where the Square-Packing Loop Stands](docs/project/handoff-2026-08-23-quench-spine.md) | dated handoff record | record | superseded | [Synopsis: The `s(n)` Program](SYNOPSIS.md) |
 | [Postmortem: The Soundness Class, and the Perimeter That Let D-014 Through](docs/project/postmortems/postmortem-2026-08-23-soundness-class.md) | failure analysis and lessons | supporting | maintained | — |
 | [Feature: Minimal Packing Toolkit](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | implementation plan | current | transient | — |
 | [Feature: Unattended Square-Packing Research Readiness](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | implementation plan | current | transient | — |
 | [Feature: Frontier Assurance and Verification](docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md) | implementation plan | current | transient | — |
+| [Feature: Research-Loop Efficiency Infrastructure](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md) | implementation plan | current | transient | — |
 | [Overnight Run: Constructive Enumeration Groundwork](docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md) | implementation plan | current | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
@@ -312,6 +314,22 @@ after reaching its declared eight-phase cap, and
 [session 016](campaign/agent-sessions/session-016-final-hour-continuation.md) is the
 completed final-hour continuation; it preserved the original deadline without extending
 an expired phase or relying on controller memory.
+[Session 017](campaign/agent-sessions/session-017-research-loop-efficiency.md) is the
+initial W5 efficiency record, and
+[session 018](campaign/agent-sessions/session-018-efficiency-plan-refinement.md) is its
+measured planning refinement.
+[Session 019](campaign/agent-sessions/session-019-native-timing-correction-spike.md)
+corrects the Codex timing instrument, freezes both named task trees, and replaces
+estimated delay attribution with native per-turn rollups by model and thinking level.
+[Session 020](campaign/agent-sessions/session-020-fast-pr-lane-spike.md) acts on that
+baseline: the first hosted required surface finishes in 46 seconds, exhaustive exact
+work and complete macOS move to direct integration events, and two-worker controls save
+58.22 seconds on the full branch.
+[Session 021](campaign/agent-sessions/session-021-pr41-performance-integration.md)
+updates that lane onto current main, restores cheap exact guards to required PR
+validation, preserves explicit worker caps, and targets PR 45’s measured census tail.
+These W5 sessions measure and improve the research and validation loops but do not
+supersede session 016’s scientific handoff or authorize exp-045 implementation.
 Session 015’s first bounded W6 slice stopped exp-040 unresolved before retained
 measurement after independent review found five finite proof-perimeter gaps in the draft
 R4/R5 checker. Exp-041 froze the exact five-blocker correction at `e26fae9`, then
