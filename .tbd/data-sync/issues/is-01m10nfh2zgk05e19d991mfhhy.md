@@ -3,9 +3,9 @@ type: is
 id: is-01m10nfh2zgk05e19d991mfhhy
 title: Polish the packing atlas presentation and map source coverage
 kind: epic
-status: open
+status: closed
 priority: 1
-version: 17
+version: 18
 labels: []
 dependencies: []
 child_order_hints:
@@ -19,9 +19,9 @@ child_order_hints:
   - is-01m10y3gyetmjj19hbe1x1e2ac
   - is-01m1112ee2hgxdnzhyn5shm0tf
 created_at: 2026-08-27T03:51:06.077Z
-updated_at: 2026-08-27T07:13:40.289Z
-closed_at: 2026-08-27T07:12:06.845Z
-close_reason: "Completed in PR #47: palette separation and ordering, exact/closest cross-panel angle-hue identity, configurable five-level contact shading at 0.2 span, full composite metadata, complete deterministic regeneration and visual QA, and green required Linux PR checks; every atlas epic child is closed."
+updated_at: 2026-08-27T07:32:22.717Z
+closed_at: 2026-08-27T07:32:22.716Z
+close_reason: "Completed in PR #47: polished n=1..100 SVG/PNG composite, mapped beyond-100 source coverage, consolidated color documentation, applied the exact angle/contact color contract across deterministic outputs, exhaustively cleared residual legacy-color and side-by-side risks, added full-atlas regression coverage, completed visual QA and validation, and passed required exact-head CI."
 resolution: null
 duplicate_of: null
 ---
