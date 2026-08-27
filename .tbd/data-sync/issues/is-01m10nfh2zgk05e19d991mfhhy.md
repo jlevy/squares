@@ -3,9 +3,9 @@ type: is
 id: is-01m10nfh2zgk05e19d991mfhhy
 title: Polish the packing atlas presentation and map source coverage
 kind: epic
-status: closed
+status: open
 priority: 1
-version: 12
+version: 14
 labels: []
 dependencies: []
 child_order_hints:
@@ -16,10 +16,11 @@ child_order_hints:
   - is-01m10nnq9acdmcd87czsrbvbsb
   - is-01m10qcsas8ap87gwndvf4wdpd
   - is-01m10s07vvs1p8d4012xngc3fr
+  - is-01m10y3gyetmjj19hbe1x1e2ac
 created_at: 2026-08-27T03:51:06.077Z
-updated_at: 2026-08-27T05:21:17.234Z
-closed_at: 2026-08-27T05:21:17.233Z
-close_reason: "All atlas presentation, color-documentation, source-coverage, integration, hardening, and merge-checkpoint children landed in merged PR #46."
+updated_at: 2026-08-27T06:21:49.901Z
+closed_at: null
+close_reason: null
 resolution: null
 duplicate_of: null
 ---
