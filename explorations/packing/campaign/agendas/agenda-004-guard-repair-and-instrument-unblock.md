@@ -169,7 +169,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [29]
-    state: ready
+    state: complete
     priority: 2
     question: >-
       At which `rational_digits` should the durable n = 29 certificate be regenerated, and
@@ -189,6 +189,10 @@ agenda:
       4.9339e-11 relaxation, tracking the ladder rung 10^-(d-5) exactly down to
       4.933851e-55. The route has no minimum, so the choice is a policy decision traded
       against literal artifact size, and it must be argued rather than maximized.
+    artifacts:
+    - frontier/evidence.yaml
+    - frontier/n-029.md
+    - witnesses/schadt-n029-2025-rational.yaml
     note: >-
       The claim boundary does not move. This remains an upper bound at a relaxed rational
       side, weaker than the reported record; it certifies no source decimal and proves no

@@ -77,7 +77,7 @@ session:
     objective: >-
       Close BC-039 by regenerating the durable n=29 rational certificate at a deliberately
       chosen `rational_digits`, with the choice argued rather than maximized.
-    status: in_progress
+    status: completed
     entered_by: planned_checkpoint
     switch_reason: >-
       BC-036 is closed, and BC-039 is the independent second half of block one that does
@@ -101,14 +101,37 @@ session:
     fallback: >-
       Leave the recorded witness unchanged and retain the measured tradeoff, rather than
       regenerating on an unargued parameter.
-    outcome: null
-    evidence: []
-    stop_reason: null
+    outcome: >-
+      BC-039 is closed. The durable certificate is regenerated at `rational_digits: 36`,
+      the CLI default, and the argued reason is reproducibility rather than tightness. The
+      claim boundary is unchanged: this remains an upper bound at a relaxed rational side,
+      weaker than the reported record, certifying no source decimal and proving no
+      optimality.
+    evidence:
+    - >-
+      The size tradeoff does not arbitrate the choice. Artifact size grows linearly at
+      about 1.4 kB per digit while the relaxation shrinks exponentially as 10^-(d-5), and
+      with 4.46 MiB of mutation-snapshot headroom even sixty digits costs sixty kB. Size
+      is not a binding constraint, and the relaxation has no minimum on this route, so the
+      choice needed a non-numeric reason.
+    - >-
+      That reason is a reproducibility defect. `frontier/n-029.md` described the artifact
+      as the output of "the generic promotion command", but the recorded witness carried
+      `rational_digits: 16` while the CLI default is 36. Running the documented command
+      did not reproduce the recorded artifact.
+    - Regenerating at the default closes that gap, and the twenty-orders-tighter bound is a side effect of the choice rather than its justification.
+    - 'Measured: 22,890 bytes at d=16 against 50,319 at d=36; relaxation 4.933898e-11 against 4.933884e-31, exactly 1e20 tighter.'
+    - 'Both gated checker paths accept the regenerated witness, the independent exact checker over 29 squares and 406 pairs and the generic verifier, and the certificate metadata now records `rational_digits: 36` with its matching dilation.'
+    - Six coordinated references were reconciled across the case record, the evidence limitations, the synopsis and two generated views; the terminal session records that quote the old figure were left as recorded.
+    stop_reason: >-
+      The regeneration, both checker paths, and every durable reference agree inside the
+      slice budget, and the choice is recorded with a reason that does not appeal to the
+      number itself.
     next_action: >-
-      Measure the artifact-size tradeoff across the candidate `rational_digits`, choose
-      one with a stated reason, regenerate, and reconcile the evidence record.
+      Block one is complete. Block two runs BC-037: exp-045 to a terminal H-023
+      disposition, halting at `needs_review` rather than writing an accepting verdict.
   primary_bead: think-oyn9
-  status: in_progress
+  status: completed
   budget:
     wall_minutes: 300
     slice_minutes: 60
@@ -124,9 +147,21 @@ session:
     before: >-
       Eight mutations are implemented and hard-enforced against a declared twelve, and
       BC-029 is blocked at execution admission because of the gap.
-    after: null
+    after: >-
+      Twelve mutations are enforced on twelve distinct identifiers, so exp-045's admission
+      conditions three and four both hold and BC-037 is unblocked. The n=29 certificate is
+      regenerated at the tool's default precision, closing a reproducibility gap between
+      the documented command and the recorded artifact. Both block-one commitments closed
+      inside their slices, and no scientific claim widened.
   delegations: []
-  outputs: []
+  outputs:
+  - SYNOPSIS.md
+  - cases/n5/minus_w_obstruction.py
+  - campaign/agendas/agenda-004-guard-repair-and-instrument-unblock.md
+  - campaign/agent-sessions/session-032-block1-missing-mutations.md
+  - frontier/evidence.yaml
+  - frontier/n-029.md
+  - witnesses/schadt-n029-2025-rational.yaml
   checks:
   - >-
     Orientation inventory before declaring this slice: the proof core raises 17 distinct
@@ -163,10 +198,12 @@ session:
     which is what exp-045's admission requires. Splitting that identifier in two is a
     refinement of the failure vocabulary rather than a weakening of any criterion: it
     changes nothing that is proved and makes each mode separately identifiable.
-  stop_reason: null
+  stop_reason: >-
+    Both block-one commitments reached terminal state with their declared outputs
+    exercised, and the block's checkpoint question is answered in the affirmative.
   next_action: >-
-    Under BC-036 and think-oyn9, build four of the seven candidate controls and raise the
-    enforced count to twelve.
+    Under BC-037 and think-1s0h, run exp-045 to a terminal H-023 disposition, recording
+    `unresolved` with `needs_review` rather than an accepting verdict.
 ---
 # Session 032 — Agenda-004 Block 1
 

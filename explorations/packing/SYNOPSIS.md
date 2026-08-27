@@ -309,15 +309,19 @@ main and found the merged tree failing two gate steps the pre-merge tree passed,
 the atlas SVG work pushed the negative-control mutation snapshot past its size cap.
 That is fixed and pinned, and the gate is green on the merged revision.
 [Session 032](campaign/agent-sessions/session-032-block1-missing-mutations.md) is the
-active successor and opens agenda-004’s first block.
-Its orientation inventory retires BC-036’s declared risk: the proof core raises
-seventeen distinct failure identifiers, only eight are exercised by mutations, and seven
-of the nine uncovered are genuine candidates, so exp-045’s declared twelve was not
-aspirational. Q-BC032-a is answered: the `4.94e-11` relaxation is an artifact of the
-promotion route, not a property of the pose, and six independently verified promotions
-beat the recorded baseline.
-`BC-028`’s trigger passed, so its inventory-reuse implementation is ready but sequenced
-behind exp-045. The outstanding work is now carried by
+terminal successor and closed agenda-004’s first block.
+Twelve pre-certificate mutations are now enforced on twelve distinct failure
+identifiers, so exp-045’s admission conditions three and four both hold and `BC-037`
+under `think-1s0h` is unblocked.
+Exactly four distinct reachable failure modes existed, with no slack: a first inventory
+counted seven candidates by grepping raise sites, and tracing `proof_core`’s call graph
+cut that to three reachable identifiers across four conditions.
+The n=29 certificate was also regenerated at the tool’s default precision, closing a gap
+between the documented command and the recorded artifact.
+Q-BC032-a is answered: the `4.94e-11` relaxation is an artifact of the promotion route,
+not a property of the pose, and six independently verified promotions beat the recorded
+baseline. `BC-028`’s trigger passed, so its inventory-reuse implementation is ready but
+sequenced behind exp-045. The outstanding work is now carried by
 [agenda-004](campaign/agendas/agenda-004-guard-repair-and-instrument-unblock.md), which
 gives each remaining item its own workflow entry.
 The next bounded slice is `BC-036` under `think-oyn9`: exp-045 is blocked at execution
@@ -551,8 +555,8 @@ The retained Schadt `n = 29` pose is the regression case.
 The source decimal geometry passes its declared 300-digit calculation at tolerance
 `1e-100`, with thirteen slightly negative best pair gaps hidden by that tolerance.
 Robust promotion produces a different, slightly relaxed rational packing at
-`296694289993118242899906513/50000000000000000000000000`, an increase of about
-`4.94e-11` in the container side.
+`2966942899906512939318226046481160904289990651293931822604648091421/500000000000000000000000000000000000000000000000000000000000000000`,
+an increase of about `4.93e-31` in the container side.
 The generic exact verifier and a small independent rational checker both accept all 29
 squares and 406 pairs.
 This formally proves the weaker upper bound; it does not verify the original decimal

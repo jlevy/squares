@@ -336,9 +336,9 @@ For the next supervised exact-research goal, use
 [session 029](../../../../campaign/agent-sessions/session-029-finish-agenda-003-cycles.md).
 Sessions 027 and 028 are terminal, and session 029 closed the remaining agenda-003 cells
 on measurement rather than opinion.
-Open BC-036 under `think-oyn9` as the next bounded driver: exp-045 is blocked at
-execution admission because it declares twelve typed pre-certificate mutations while the
-instrument implements and hard-enforces eight.
+Open BC-037 under `think-1s0h` as the next bounded driver: exp-045’s admission gap is
+closed, twelve mutations are enforced on twelve distinct identifiers, and the experiment
+can now run to a terminal H-023 disposition.
 The remaining outstanding items each have their own workflow entry in agenda-004. Build
 the four missing controls so the enforced count matches the declared one, then re-run
 the admission check before any target generation.
