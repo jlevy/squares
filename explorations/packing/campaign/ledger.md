@@ -44,6 +44,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-028](agent-sessions/session-028-bc032-n29-promotion-inventory.md) | completed | contemporaneous | `insight-iteration` (correctness) | `insight-iteration` (correctness) | 1 | think-75ll | Under BC-032 and think-75ll, register Q-BC032-a as a W6 mini-cycle with its `rational_digits` set declared before the first run and the existing independent exact checker as its sole acceptance instrument. |
 | [session-029](agent-sessions/session-029-finish-agenda-003-cycles.md) | completed | contemporaneous | `efficiency-loop` (efficiency) | `insight-iteration` (correctness) | 4 | think-kdil | Under BC-036 and think-oyn9, build exp-045's four missing pre-certificate mutations so the enforced count matches the declared twelve, then re-run the admission check before any target generation. The declared criterion is not to be amended down to the implemented eight. This cell and the rest of the outstanding work are tracked in agenda-004. |
 | [session-030](agent-sessions/session-030-work-model-and-cell-collision.md) | completed | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-qxmo | Under BC-036 and think-oyn9, build exp-045's four missing pre-certificate mutations so the enforced count matches the declared twelve. |
+| [session-031](agent-sessions/session-031-merge-main-and-land-pr48.md) | in_progress | contemporaneous | `process-review` (process) | `process-review` (process) | 1 | think-qibu | Under BC-040 and think-qibu, verify the merged tree and land PR 48. |
 
 ### Workflow summary
 
@@ -54,7 +55,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `research-pass` | 0 | 0 | 7 | 0 |
 | `factual-review` | 1 | 0 | 21 | 2 |
 | `insight-iteration` | 2 | 1 | 24 | 2 |
-| `process-review` | 5 | 4 | 34 | 6 |
+| `process-review` | 6 | 4 | 35 | 6 |
 | `efficiency-loop` | 7 | 0 | 17 | 0 |
 | `research-loop` | 1 | 4 | 11 | 7 |
 | `pipeline-improvement` | 5 | 0 | 41 | 0 |

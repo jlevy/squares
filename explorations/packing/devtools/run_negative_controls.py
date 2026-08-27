@@ -94,9 +94,19 @@ PRUNE = frozenset(
         # refusal -- so the control would "fire" for the wrong reason and prove nothing.
         ROOT / ".gate-running",
         ROOT / ".venv",
-        # Large, generator-owned prospective outputs are replayed by their dedicated
-        # validation step and are never mutation targets. Copying 101 witnesses and 101
-        # renderings into every private worker would exceed the portable snapshot cap.
+        # Large, generator-owned rendering outputs are replayed by their dedicated
+        # validation steps and are never mutation targets. Copying hundreds of witnesses
+        # and renderings into every private worker would exceed the portable snapshot cap.
+        #
+        # `atlas/known-best/rendering` and `atlas/known-best/contact-overlays` joined this
+        # list on 2026-08-27, when merging the atlas SVG work pushed the snapshot to
+        # 42,441,211 bytes against a 41,943,040 cap. They are the direct analogue of the
+        # prospective renderings already listed here: generated SVG output, checked by the
+        # `deterministic SVG rendering` and `known-best n=1..100 atlas` steps, and named by
+        # no control in `controls.yaml`. The two controls that do target
+        # `atlas/known-best/` reach small JSON files at its top level, which stay.
+        ROOT / "atlas/known-best/contact-overlays",
+        ROOT / "atlas/known-best/rendering",
         ROOT / "atlas/prospective/rendering",
         ROOT / "resources",
         ROOT / "sqsearch/target",
