@@ -292,6 +292,44 @@ The renderer’s standing exact-motion control remains independently replayable:
 
 ![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
 
+**As of 2026-08-28 — start here.** The active plan is
+[agenda-005](campaign/agendas/agenda-005-symbolic-promotion-and-identity.md), replanned
+that day. Its next slice is **block A: `BC-047` under `think-y85e` and `BC-042` under
+`think-zmh8`**, two independent lanes.
+Blocks B and C are `BC-045` under `think-75ll`, built to
+[plan-2026-08-28-interval-certification](docs/project/specs/active/plan-2026-08-28-interval-certification.md).
+The narrative below is historical and its earlier “next bounded slice” pointers are
+superseded by this paragraph.
+
+The replan followed a correction recorded in
+[X-004](campaign/explorations/X-004-n29-exact-promotion.md).
+The retained `n = 29` SVG does not merely serialize a `FindRoot` result: it publishes
+the **complete closed system** — nine slide scalars in closed form and six equations
+`f1 … f6` in `{s, a, b, c, d, i}` — **and the layout map**, whose `<use>` transforms are
+written symbolically in those same names.
+[`cases.kingbird29.verify_svg`](cases/kingbird29/verify_svg.py) had already transcribed
+all of it and used it only to evaluate residuals, never to solve.
+Solving that same transcription reproduces the record to all fifteen published digits
+and reaches a maximum equation residual of `1.11e-1200` in about six seconds.
+So `BC-042` and `BC-043` gate nothing at `n = 29`; they generalize the route to sizes
+with no published system.
+
+That moved the prize onto `BC-045`. Certifying the reported `n = 29` value would move
+`verified_upper_bound` from the Schadt rational to Kingbird’s, closing `5.23e-5`. Two
+routes reach it: `BC-044` recovers a minimal polynomial and discharges it exactly, which
+is stronger but of uncertain feasibility — a completed sweep found no integer relation
+through degree twenty with coefficients below `10^22` — while `BC-045` needs no
+polynomial at all. The robust route was the one with no specification, so that
+specification now exists.
+The witness contract already names `interval-certified` as a method that may carry
+`verified`; only the checker is missing, and `exact_verify` still raises
+`checker-not-built`.
+
+The standing rule is unchanged and applies to every block: an unattended runner may
+apply the accept rule only conservatively.
+A round that certifies `n = 29` is recorded `unresolved` with `needs_review: true`, and
+a human makes the accept decision.
+
 PR 45 is merged and
 [session 025](campaign/agent-sessions/session-025-pr45-performance-continuation.md) is
 terminal.
