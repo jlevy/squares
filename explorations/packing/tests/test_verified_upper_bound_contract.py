@@ -63,6 +63,14 @@ DECLARED_CONSUMERS = {
     "docs/project/specs/active/plan-2026-08-28-interval-certification.md": (
         "specs certification that would tighten the ceiling toward the report"
     ),
+    "devtools/assess_frontier_rigidity.py": (
+        "reads the ceiling only together with the floor, and only to confirm they pin the "
+        "side at exactly k before making the perfect-square tiling argument; a one-sided "
+        "read would not establish a tiling and is never made"
+    ),
+    "tests/test_frontier_rigidity_assessment.py": (
+        "exercises that two-sided pin, including the cases where it must refuse"
+    ),
 }
 
 # Prose, code and hand-written records. Generated artifacts are excluded because they

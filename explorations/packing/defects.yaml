@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 354
+count: 355
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9176,3 +9176,47 @@ defects:
     rather than position. devtools/audit_kingbird_catalogue.py re-reads the four
     annotations from the retained source on every gate run.
   recorded_in: frontier/square-packing-case.schema.yaml
+- id: D-355
+  title: Verification runs the whole gate after every change, so cycle time is set by the slowest step rather than by the change
+  date: '2026-08-28'
+  layer: tooling
+  class: performance
+  direction: neutral
+  detected_by: review
+  latent_for: from the gate's introduction to the first session that measured its own cycle time
+  severity: high
+  status: outstanding
+  bead: think-ej1d
+  recorded_in: campaign/agendas/agenda-005-symbolic-promotion-and-identity.md
+  what: >-
+    `packing-validate` documents the right ladder in its own help -- `--fast` while
+    editing, `--only TEXT` for one named surface, the default before a commit, `--strict`
+    before a merge -- and supplies `--only` to make it possible. Nothing maps a change to
+    the steps that change can affect, so the ladder is applied from memory. In practice
+    it is skipped: the default full gate becomes the reflex after every edit, however
+    small, because choosing a narrower command requires knowing the step-to-source
+    mapping and no such mapping is written down.
+  consequence: >-
+    Measured on 2026-08-28. A two-file edit to the rigidity assessor was verified with a
+    979.79s full gate; the two steps that edit can affect -- `lint floor (python)` and
+    `frontier rigidity assessed here` -- run together in 12.06s. That is an 82x overrun
+    on a single change. Across one session the full gate ran six times to completion and
+    was killed twice mid-flight, spending over an hour of wall time to learn, on the last
+    run, that one behavioural test had broken. The efficiency principle requires
+    iteration "as fast as possible" and the asymmetry allows efficiency to simplify
+    process but never to weaken assurance, so the resolution is not to check less: it is
+    to check exactly what the change can reach, and to be able to prove the selection is
+    not missing anything.
+  fix: >-
+    Unbuilt, and specified under BC-051. A change-scoped selector maps changed paths to
+    affected steps and is conservative by construction: an unrecognized path selects the
+    full gate rather than an empty set, so the failure mode is a slow run and never a
+    silent gap. The mapping is itself negative-controlled -- perturb a source file, and
+    the selector must choose a step that fails on it -- because a selector that cannot be
+    caught under-selecting is worse than no selector. The full gate keeps its existing
+    role at commit and merge boundaries; this changes the edit loop, not the contract.
+  regression: >-
+    None yet. The control that will pin it is the selector's own negative control
+    described above, plus a check that every step name is reachable from at least one
+    declared path pattern, so a new step cannot be added without being wired to the
+    sources that can break it.
