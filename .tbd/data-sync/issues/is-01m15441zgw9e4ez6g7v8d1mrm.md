@@ -3,9 +3,9 @@ type: is
 id: is-01m15441zgw9e4ez6g7v8d1mrm
 title: "Move the tree: docs tier to the root, the rest to packing/"
 kind: task
-status: open
+status: closed
 priority: 0
-version: 6
+version: 7
 labels: []
 dependencies:
   - type: blocks
@@ -20,7 +20,11 @@ dependencies:
     target: is-01m15444eff52e4tcfv8qthya7
 parent_id: is-01m15219m6eh8fww5pm9sc2sqd
 created_at: 2026-08-28T21:23:56.527Z
-updated_at: 2026-08-28T21:24:12.255Z
+updated_at: 2026-08-28T23:27:56.774Z
+closed_at: 2026-08-28T23:27:56.774Z
+close_reason: Landed on refactor/hoist-packing-to-root
+resolution: null
+duplicate_of: null
 ---
 One commit, `git mv` only, no content edits. The tree is knowingly broken at this commit
 and repaired by the ones after it, inside a single PR.

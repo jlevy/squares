@@ -5,7 +5,7 @@ title: Reorganize the repository around the packing project
 kind: epic
 status: open
 priority: 1
-version: 12
+version: 19
 labels: []
 dependencies: []
 child_order_hints:
@@ -20,8 +20,15 @@ child_order_hints:
   - is-01m1544433qhzbbx73s6kjh9gn
   - is-01m15444eff52e4tcfv8qthya7
   - is-01m15444sqtndc8k38h7bd5k6w
+  - is-01m15b677wgahayme0bp99y2fn
+  - is-01m15b67k65dz0mcqmdcwq1812
+  - is-01m15b67y6cz730v40emet4x84
+  - is-01m15b6893dkxa2qncvjhgtdp2
+  - is-01m15b68m8zw92zf42gy1xvjv0
+  - is-01m15b68zcgvpqmyb1gad46xav
+  - is-01m15b69acbnaetfj9f895en85
 created_at: 2026-08-28T20:47:28.901Z
-updated_at: 2026-08-28T21:23:59.414Z
+updated_at: 2026-08-28T23:27:29.611Z
 ---
 Hoist the reader-facing documents of `explorations/packing/` to the repository root and
 collapse the remaining two levels to a single `packing/` container. `explorations/`

@@ -3,16 +3,20 @@ type: is
 id: is-01m1544433qhzbbx73s6kjh9gn
 title: Merge the two READMEs and repair check_readme.py
 kind: task
-status: open
+status: closed
 priority: 1
-version: 2
+version: 3
 labels: []
 dependencies:
   - type: blocks
     target: is-01m15444sqtndc8k38h7bd5k6w
 parent_id: is-01m15219m6eh8fww5pm9sc2sqd
 created_at: 2026-08-28T21:23:58.690Z
-updated_at: 2026-08-28T21:24:13.268Z
+updated_at: 2026-08-28T23:27:56.819Z
+closed_at: 2026-08-28T23:27:56.819Z
+close_reason: Landed on refactor/hoist-packing-to-root
+resolution: null
+duplicate_of: null
 ---
 There are two READMEs and after the move there can be only one.
 

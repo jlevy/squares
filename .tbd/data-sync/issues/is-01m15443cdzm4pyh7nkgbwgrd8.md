@@ -3,9 +3,9 @@ type: is
 id: is-01m15443cdzm4pyh7nkgbwgrd8
 title: Rewrite the 723 cross-boundary Markdown links
 kind: task
-status: open
+status: closed
 priority: 1
-version: 4
+version: 5
 labels: []
 dependencies:
   - type: blocks
@@ -16,7 +16,11 @@ dependencies:
     target: is-01m15444sqtndc8k38h7bd5k6w
 parent_id: is-01m15219m6eh8fww5pm9sc2sqd
 created_at: 2026-08-28T21:23:57.964Z
-updated_at: 2026-08-28T21:24:13.255Z
+updated_at: 2026-08-28T23:27:56.806Z
+closed_at: 2026-08-28T23:27:56.806Z
+close_reason: Landed on refactor/hoist-packing-to-root
+resolution: null
+duplicate_of: null
 ---
 723 relative links cross the new boundary and need rewriting, in both directions.
 

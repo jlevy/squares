@@ -3,9 +3,9 @@ type: is
 id: is-01m15442akdex5khfn7z8hrarb
 title: Repoint the Python path constants
 kind: task
-status: open
+status: closed
 priority: 0
-version: 3
+version: 4
 labels: []
 dependencies:
   - type: blocks
@@ -14,7 +14,11 @@ dependencies:
     target: is-01m15444sqtndc8k38h7bd5k6w
 parent_id: is-01m15219m6eh8fww5pm9sc2sqd
 created_at: 2026-08-28T21:23:56.883Z
-updated_at: 2026-08-28T21:24:13.232Z
+updated_at: 2026-08-28T23:27:56.785Z
+closed_at: 2026-08-28T23:27:56.785Z
+close_reason: Landed on refactor/hoist-packing-to-root
+resolution: null
+duplicate_of: null
 ---
 Two distinct groups, both mechanical once separated.
 

@@ -3,16 +3,20 @@ type: is
 id: is-01m15444eff52e4tcfv8qthya7
 title: Repoint repo-name URLs from thinking-scratchpad to squares
 kind: chore
-status: open
+status: closed
 priority: 2
-version: 2
+version: 3
 labels: []
 dependencies:
   - type: blocks
     target: is-01m15444sqtndc8k38h7bd5k6w
 parent_id: is-01m15219m6eh8fww5pm9sc2sqd
 created_at: 2026-08-28T21:23:59.054Z
-updated_at: 2026-08-28T21:24:13.274Z
+updated_at: 2026-08-28T23:27:56.825Z
+closed_at: 2026-08-28T23:27:56.825Z
+close_reason: Landed on refactor/hoist-packing-to-root
+resolution: null
+duplicate_of: null
 ---
 The repository is now `jlevy/squares`. Four frontier schemas carry `$id:` URLs built on
 the old name, for example:
