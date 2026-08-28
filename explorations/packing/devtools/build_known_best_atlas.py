@@ -236,6 +236,10 @@ SUMMARY_LEGEND_BASELINE = Decimal(2540)
 # figure is the same family everywhere it is opened.
 SUMMARY_FONT = "Helvetica, Arial, sans-serif"
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+# The one failure this catches: the committed PNG was exported from an older SVG.
+# --check rebuilds the SVG and compares it in full, but nothing otherwise ties the
+# export to it, and re-rendering a 25x26in page on every gate run to compare bytes
+# costs far more than reading a tEXt chunk. Not a tamper check; a staleness link.
 PNG_SOURCE_KEY = b"sqpack-source-svg-sha256"
 PNG_RENDER_TIMEOUT_SECONDS = 120
 

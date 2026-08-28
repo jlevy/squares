@@ -484,14 +484,12 @@ def certify_square(
         return None
 
     distance, direction = best
-    angle = mp.atan2(direction[1], direction[0]) * 180 / mp.pi
     return {
         "active_blockers": {
             "container_normals": len(contacts.container_normals),
             "square_indices": contacts.square_indices,
         },
         "direction": {
-            "angle_degrees": mp.nstr(angle + 360 if angle < 0 else angle, 15, strip_zeros=True),
             "x": _decimal(direction[0]),
             "y": _decimal(direction[1]),
         },
@@ -566,23 +564,32 @@ def screen_record(
         if certificate is None:
             raise ValueError(f"n={n}: square {index} classified movable but not certifiable")
         certificate["witness_square_id"] = square_ids[index]
-        certificate["replay_verified"] = _replay(geometry, certificate, primary)
+        # Replayed here and not recorded: a flag that is true on every entry
+        # asserts nothing. A certificate that fails to replay is a bug, so it
+        # stops the build instead of being published with a false beside it.
+        if not _replay(geometry, certificate, primary):
+            raise ValueError(f"n={n}: certificate for square {index} did not replay")
         certificates.append(certificate)
     stable = all(indices == movable[PRIMARY_TOLERANCE] for indices in movable.values()) and all(
         indices == separating[PRIMARY_TOLERANCE] for indices in separating.values()
     )
-    return {
+    case: dict[str, Any] = {
         "min_container_slack": _decimal(worst_slack),
         "min_pair_separation": None if worst_pair is None else _decimal(worst_pair),
         "movable_square_count": len(certificates),
         "movable_squares": certificates,
-        "movable_squares_by_tolerance": movable,
         "n": n,
         "separating_square_count": len(separating[PRIMARY_TOLERANCE]),
-        "separating_squares_by_tolerance": separating,
         "square_count": len(squares),
         "stable_across_tolerances": stable,
     }
+    # The sweeps appear only where a tolerance changes the answer. Everywhere else
+    # they repeat the primary list four times and say nothing that this flag and the
+    # aggregate's tolerance_disagreement_ns do not already say.
+    if not stable:
+        case["movable_squares_by_tolerance"] = movable
+        case["separating_squares_by_tolerance"] = separating
+    return case
 
 
 def manifest_entries() -> list[dict[str, Any]]:
@@ -645,57 +652,33 @@ def schema_errors(screen: dict[str, Any]) -> list[str]:
 
 
 def screen_errors(screen: dict[str, Any]) -> list[str]:
-    """Invariants that make the file readable as evidence rather than as output."""
+    """The few claims a second derivation could actually contradict.
+
+    Deliberately short. Most of what a checker could compare here is one expression
+    against the same expression a few lines up in the same process: the aggregate
+    counts are defined as sums over the cases, so re-summing them can only catch a
+    bug in the re-summing. Only checks with two genuinely separate derivations, or
+    with an assumption about an input this module does not control, earn their place.
+    """
     errors: list[str] = []
-    aggregate = screen["aggregate"]
     cases = screen["cases"]
+    # Case order follows the manifest, which this module does not write.
     if [case["n"] for case in cases] != sorted(case["n"] for case in cases):
         errors.append("cases are not in ascending n order")
-    if aggregate["records_screened"] != len(cases):
-        errors.append("records_screened disagrees with the case list")
     for case in cases:
         certificates = case["movable_squares"]
-        if case["movable_square_count"] != len(certificates):
-            errors.append(f"n={case['n']}: movable_square_count disagrees with the list")
-        if [item["square_index"] for item in certificates] != sorted(
-            item["square_index"] for item in certificates
-        ):
-            errors.append(f"n={case['n']}: certificates are not in square order")
-        for certificate in certificates:
-            if not certificate["replay_verified"]:
-                errors.append(
-                    f"n={case['n']}: certificate for square "
-                    f"{certificate['square_index']} did not replay"
-                )
-            if mp.mpf(certificate["slide_distance"]) <= 0:
-                errors.append(
-                    f"n={case['n']}: certificate for square "
-                    f"{certificate['square_index']} claims no motion"
-                )
+        # Counted from the tolerance sweep, but classified again during certification:
+        # a square screened as separating must still separate once a direction is found.
         if case["separating_square_count"] != sum(
             item["witness_kind"] == SEPARATING for item in certificates
         ):
             errors.append(f"n={case['n']}: separating_square_count disagrees with the list")
-        if case["movable_squares_by_tolerance"][PRIMARY_TOLERANCE] != [
-            item["square_index"] for item in certificates
-        ]:
-            errors.append(f"n={case['n']}: the primary tolerance sweep lost a certificate")
-    if aggregate["movable_squares"] != sum(case["movable_square_count"] for case in cases):
-        errors.append("movable_squares disagrees with the case list")
-    if aggregate["separating_squares"] != sum(
-        case["separating_square_count"] for case in cases
-    ):
-        errors.append("separating_squares disagrees with the case list")
-    for key, counted in (
-        ("records_with_movable_square", "movable_square_count"),
-        ("records_with_separating_square", "separating_square_count"),
-    ):
-        if aggregate[key] != sum(case[counted] > 0 for case in cases):
-            errors.append(f"{key} disagrees with the case list")
-    if aggregate["tolerance_disagreement_ns"] != [
-        case["n"] for case in cases if not case["stable_across_tolerances"]
-    ]:
-        errors.append("tolerance_disagreement_ns disagrees with the case list")
+        errors.extend(
+            f"n={case['n']}: certificate for square "
+            f"{certificate['square_index']} claims no motion"
+            for certificate in certificates
+            if mp.mpf(certificate["slide_distance"]) <= 0
+        )
     return errors
 
 
@@ -728,8 +711,9 @@ def expected_document() -> dict[str, Any]:
                 f"{SLIDING}: it can only move while keeping a contact closed"
             ),
             "certificate_replay": (
-                "each hit is re-verified by translating the square by the recorded "
-                "distance and re-running sqpack.verify.verify_packing"
+                "every hit is replayed at build time by translating the square by the "
+                "recorded distance and re-running sqpack.verify.verify_packing; a "
+                "failure stops the build, so no unreplayed certificate reaches this file"
             ),
             "direction_search": (
                 "one interior direction per arc between critical directions, plus "
