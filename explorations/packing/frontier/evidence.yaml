@@ -417,3 +417,35 @@ evidence:
     replay_status: passed
     limitations: Proves a rational construction at a side about 4.93e-31 larger than the source decimal; it does not certify the source pose exactly or prove optimality.
     source_reviewed: '2026-08-25'
+
+  - id: E-translation-escape-not-rigid
+    claim: derived-structure
+    scope: {n_values: [2, 3, 5, 6, 7, 8, 10, 12, 13, 14, 15, 17, 18, 19, 20, 21, 22, 23, 24, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99]}
+    assurance: numerically-checked
+    method: numerical-multiprecision
+    performed_by: repository
+    novelty: apparently-novel
+    relationship_to_generator: independent-implementation
+    origin: replayed-here
+    certificate: atlas/known-best/translation-escape-screen.json
+    replay: uv run --frozen --all-extras --group dev python -m devtools.screen_translation_escape --check
+    replay_status: passed
+    precision: {decimal_digits: 50, rounding: nearest-even}
+    tolerance: '1e-8'
+    limitations: 'Sound in one direction only. A hit exhibits a square, a direction and a distance, and every constraint is exactly affine in the slide parameter, so it certifies that the retained configuration admits a non-trivial feasible motion: 84 of the 98 screened records are not rigid on this evidence. A miss is weak and never establishes rigidity, because rotation and coordinated multi-square motion are outside the screen. Coordinates are the witness''s own finite-precision transcription, so every finding is about the retained configuration rather than the true optimum; the smallest certified slide is 2.03e-4 against witness coordinates carrying at least 28 digits. n=68 and n=69 are excluded by shape residual. Rigidity and optimality are independent and nothing here bears on the latter.'
+    source_reviewed: '2026-08-28'
+
+  - id: E-perfect-square-tiling-rigid
+    claim: derived-structure
+    scope: {n_values: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]}
+    assurance: verified
+    method: exact-algebraic
+    performed_by: repository
+    novelty: common-knowledge
+    relationship_to_generator: not-applicable
+    origin: replayed-here
+    certificate: devtools/assess_frontier_rigidity.py
+    replay: uv run --frozen --all-extras --group dev python -m devtools.assess_frontier_rigidity --check
+    replay_status: passed
+    limitations: 'Elementary and complete for these ten cases: k*k unit squares of total area k^2 sit in a k by k container of area k^2, so the packing is a tiling with no slack and no square admits any feasible motion. Global rather than local, and about the exact configuration rather than a materialization of it. It establishes rigidity and optimality independently for these n; the optimality half is not claimed here.'
+    source_reviewed: '2026-08-28'

@@ -129,8 +129,26 @@ So the figure derives the badge from two sound sources instead:
 2. The catalogue annotates “Rigid”: `n = 5, 11, 28, 40`, at lines 44, 80, 163 and 224,
    each identified by the side value printed above it.
 
-Absence of `R` means rigidity is **not established**, never that the packing is known
-loose. Repairing the field is tracked under epic `think-ych6`.
+Absence of `R` on the figure means rigidity is **not established by a source or by the
+tiling argument**. It no longer means the corpus is silent about the packing.
+`frontier/n-NNN.md` now carries a first-party `rigidity` block for every `n`, written by
+`devtools/assess_frontier_rigidity.py` from two sound arguments:
+
+- **84 records are positively NOT rigid.** The translation escape screen exhibits a
+  square, a direction and an exact distance, which is a certificate of motion.
+  The smallest certified slide is `2.03e-4` against witness coordinates carrying 28 or
+  more digits, so none of these is numerical noise.
+- **Ten are rigid by exact tiling**, the same ten the figure badges.
+- **Five are `undetermined`**, which is a result rather than an absence: `n = 5, 28, 40`
+  because the screen finds no single-square translation but cannot rule out rotation or
+  coordinated motion, and `n = 68, 69` because their witness geometry is excluded.
+
+The screen’s asymmetry is why the figure still derives its badge separately.
+A hit proves non-rigidity; a miss proves nothing, so the four packings the catalogue
+annotates stay `undetermined` as *our* finding while their `catalogue_rigid`
+transcription is what earns them the badge.
+Restating a source’s word as a first-party claim is the exact conflation the field split
+removed.
 
 ### Checking one claim by hand
 

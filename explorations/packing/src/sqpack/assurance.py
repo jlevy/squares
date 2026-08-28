@@ -255,6 +255,18 @@ def check_case_semantics(
             )
         )
 
+    # rigidity carries evidence refs like every other first-party claim, and until
+    # this check existed they were the one kind nothing resolved: a block could cite
+    # an id that does not exist, or one whose scope does not reach this n, and pass.
+    rigidity = case.get("rigidity")
+    if isinstance(rigidity, Mapping):
+        for ref in _string_list(rigidity.get("evidence")):
+            evidence = evidence_by_id.get(ref)
+            if evidence is None:
+                errors.append(f"n={n_value} rigidity: unknown evidence {ref}")
+            elif not _scope_contains(evidence.get("scope"), n_value):
+                errors.append(f"n={n_value} rigidity: evidence {ref} does not cover this case")
+
     upper = _bound_identity(case.get("verified_upper_bound"))
     lower = _bound_identity(case.get("verified_lower_bound"))
     status = case.get("status")
