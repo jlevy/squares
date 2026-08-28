@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 353
+count: 354
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -9138,3 +9138,41 @@ defects:
     None automated: this is prose about a boundary rather than a computed value. The
     substitution that demonstrates it is one request field and is recorded here.
   recorded_in: devtools/render_general_motion_lab.py
+- id: D-354
+  title: The frontier encoded catalogue silence about rigidity as a false rigid flag
+  date: '2026-08-28'
+  layer: record
+  class: soundness
+  direction: conservative
+  detected_by: review
+  latent_for: from the field's introduction to the composite figure's first badge review
+  severity: high
+  status: fixed
+  what: >-
+    `reported_upper_bound.rigid` was a boolean, non-null exactly where the catalogue
+    pictured the packing. `false` therefore meant "pictured, and the catalogue wrote no
+    Rigid annotation", while reading as "this packing is not rigid". Kingbird annotates
+    four packings at n <= 100 and is silent for the other ninety-six; it never asserts
+    non-rigidity anywhere, so the boolean had no true negative to express. Taken
+    literally the corpus denied the rigidity of n = 1, one unit square exactly filling a
+    1x1 container.
+  consequence: >-
+    A figure deriving an R badge from the flag would have withheld it from every rigid
+    packing the catalogue did not annotate -- the ten perfect-square tilings among them
+    -- and published a false negative claim about each. The upstream catalogue is not at
+    fault; the collapse of silence into false is ours.
+  fix: >-
+    The field is split and the two halves must never merge again. `catalogue_rigid` is
+    an enum over [rigid, semi-rigid, not-stated] carrying what the catalogue says and
+    nothing more, where `not-stated` is the absence of a source claim. A separate
+    first-party `rigidity` block carries this repository's own finding with its
+    property, assurance, scope and replayable evidence, and is null where we have not
+    assessed it. The composite figure derives its badge from perfect-square tiling and
+    the four catalogue annotations rather than from the flag.
+  regression: >-
+    tests/test_frontier_rigidity_contract.py: nine tests, including one that fails if
+    the schema still accepts the boolean, one that fails if a parser seeing nothing
+    would agree with the records, and one that matches annotations by printed decimal
+    rather than position. devtools/audit_kingbird_catalogue.py re-reads the four
+    annotations from the retained source on every gate run.
+  recorded_in: frontier/square-packing-case.schema.yaml
