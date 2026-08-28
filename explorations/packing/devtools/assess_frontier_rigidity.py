@@ -10,9 +10,15 @@ arguments are available and neither needs a source:
   certificate of NOT rigid, and it is the strong direction of that screen -- a
   miss is weak and is never read as rigidity here.
 
-  n a perfect square means k*k unit squares exactly tile a k by k container.
-  Total area equals container area, so no square has slack and no motion of any
-  kind is feasible. That is rigid, and it is elementary.
+  n a perfect square whose side is *verified* to be exactly k means k*k unit
+  squares exactly tile a k by k container. Total area equals container area, so
+  no square has slack and no motion of any kind is feasible. That is rigid, and
+  it is elementary -- but it rests on the side, not on n. The first draft of this
+  tool inferred the tiling from `math.isqrt(n)` alone and never opened the record
+  it wrote into, which would have stamped `verified` rigidity on a perfect-square
+  record whose retained side had regressed above k. The claims were true; nothing
+  checked them. The tiling branch now reads the record's own verified bounds and
+  refuses when they do not pin the side at exactly k.
 
 What the screen cannot do is establish rigidity, because rotation and
 coordinated multi-square motion are outside it. So the four packings the
@@ -29,6 +35,7 @@ import argparse
 import json
 import math
 import sys
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 import yaml
@@ -38,6 +45,11 @@ ROOT = Path(__file__).resolve().parent.parent
 FRONTIER = ROOT / "frontier"
 SCREEN = ROOT / "atlas/known-best/translation-escape-screen.json"
 GENERATOR = "python -m devtools.assess_frontier_rigidity"
+
+
+class RigidityAssessmentError(ValueError):
+    """The corpus did not support a claim this tool was about to write."""
+
 
 ESCAPE_EVIDENCE = "E-translation-escape-not-rigid"
 TILING_EVIDENCE = "E-perfect-square-tiling-rigid"
@@ -64,15 +76,42 @@ def _decimals(value: str, places: int = 6) -> str:
     return text or "0"
 
 
-def rigidity_for(n: int, cases: dict[int, dict], excluded: list[int]) -> dict | None:
+def _exact_side(record: dict, field: str) -> Decimal | None:
+    """The record's bound as an exact decimal, or None when it is absent."""
+    bound = record.get(field)
+    if not isinstance(bound, dict):
+        return None
+    value = bound.get("value")
+    if not isinstance(value, str):
+        return None
+    try:
+        return Decimal(value)
+    except InvalidOperation:
+        return None
+
+
+def rigidity_for(
+    n: int, cases: dict[int, dict], excluded: list[int], record: dict
+) -> dict | None:
     """The block this tool would write for `n`, or None to leave the record alone."""
     root = math.isqrt(n)
     if root * root == n:
+        # The tiling argument rests on the side being exactly k, which is a property of
+        # this record and not of n. Read it rather than assume it.
+        upper = _exact_side(record, "verified_upper_bound")
+        lower = _exact_side(record, "verified_lower_bound")
+        if upper != Decimal(root) or lower != Decimal(root):
+            raise RigidityAssessmentError(
+                f"n={n} is a perfect square but its verified bounds do not pin the side "
+                f"at exactly {root} (upper={upper}, lower={lower}), so the tiling "
+                "argument does not apply and no rigidity claim is written"
+            )
         return {
             "property": "locally-rigid",
             "assurance": "verified",
             "method": "exact-algebraic",
             "scope": (
+                f"This record's side is verified above and below at exactly {root}, so its "
                 f"{n} unit square{'' if n == 1 else 's'} of total area {n} "
                 f"{'sits' if n == 1 else 'sit'} in a {root} by {root} container "
                 f"of area {n}. The packing is a tiling with no slack anywhere, so no "
@@ -160,10 +199,14 @@ def _render(block: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def _existing_evidence(text: str) -> set[str] | None:
+def _record(text: str) -> dict:
+    """The record's parsed `packing` frontmatter."""
+    return yaml.safe_load(text.split("---", 2)[1])["packing"]
+
+
+def _existing_evidence(record: dict) -> set[str] | None:
     """Evidence ids on the record's current rigidity block, or None if it is null."""
-    document = yaml.safe_load(text.split("---", 2)[1])["packing"]
-    current = document.get("rigidity")
+    current = record.get("rigidity")
     return None if current is None else set(current.get("evidence", []))
 
 
@@ -174,10 +217,11 @@ def plan() -> list[tuple[int, Path, str, str]]:
     for n in range(1, 101):
         path = FRONTIER / f"n-{n:03d}.md"
         text = path.read_text(encoding="utf-8")
-        held = _existing_evidence(text)
+        record = _record(text)
+        held = _existing_evidence(record)
         if held is not None and not held <= OWNED_EVIDENCE:
             continue  # A stronger argument owns this record.
-        block = rigidity_for(n, cases, excluded)
+        block = rigidity_for(n, cases, excluded, record)
         if block is None:
             continue
         if held is None:
@@ -229,11 +273,12 @@ def review() -> None:
     skipped: list[int] = []
     for n in range(1, 101):
         text = (FRONTIER / f"n-{n:03d}.md").read_text(encoding="utf-8")
-        held = _existing_evidence(text)
+        record = _record(text)
+        held = _existing_evidence(record)
         if held is not None and not held <= OWNED_EVIDENCE:
             skipped.append(n)
             continue
-        block = rigidity_for(n, cases, excluded)
+        block = rigidity_for(n, cases, excluded, record)
         assert block is not None
         buckets.setdefault(block["property"], []).append(n)
     summary = ", ".join(f"{len(values)} {name}" for name, values in sorted(buckets.items()))

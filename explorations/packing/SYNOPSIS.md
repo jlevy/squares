@@ -310,6 +310,10 @@ arithmetic.
 The next slice is **block B: `BC-045` under `think-75ll`**, phases 1 and 2 of
 [plan-2026-08-28-interval-certification](docs/project/specs/active/plan-2026-08-28-interval-certification.md);
 block C is phases 3 and 4 of the same spec.
+The full ordering for the sessions after it — including which of the two `priority: 0`
+commitments goes first and why — is the
+[session queue](campaign/agendas/agenda-005-symbolic-promotion-and-identity.md#the-session-queue),
+which is the one place that ordering is written down.
 The narrative below is historical and its earlier “next bounded slice” pointers are
 superseded by this paragraph.
 
@@ -2176,7 +2180,7 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 354 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 355 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
@@ -2185,7 +2189,7 @@ and checked in the gate.
 | validity | 84 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 136 | recorded something its own evidence contradicts |
 | robustness | 39 | did not finish, or finished only by luck |
-| performance | 10 | worked, but cost far more than it should |
+| performance | 11 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -2193,7 +2197,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 354, and no soundness defect
+**The automated gate has caught forty-five defects in 355, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2202,6 +2206,19 @@ Gates confirm what you already thought to check; these were found by devices bui
 test-validity failures, found by contiguity, integration, mutation-anchor,
 reconciliation, or known-answer checks.
 The supported distinction is that the gate has never caught the mathematics being wrong.
+
+The gate’s cost is itself a logged defect.
+[D-355](defects.md) records that verification runs the whole gate after every change, so
+cycle time is set by the slowest full-tier step rather than by what the change can
+reach: a two-file edit measured at `979.79s` against the `12.06s` its two affected steps
+need, an 82x overrun.
+The resolution is not to check less.
+The efficiency principle asks for iteration as fast as possible and the standing
+asymmetry lets efficiency simplify process but never weaken assurance, so what is owed
+is a change-scoped selector that is conservative by construction and can be caught
+under-selecting — `think-ej1d`, specified under BC-051. Good coverage and short cycles
+are a design tension, and resolving it is the design’s job rather than the operator’s
+discretion.
 
 108 fixes left no regression check behind.
 [D-300](defects.md) remains open: the yielded session id, output, timeout/final poll,

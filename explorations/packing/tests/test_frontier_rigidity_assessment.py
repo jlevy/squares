@@ -22,6 +22,7 @@ import pytest
 import yaml
 from mpmath import mp
 
+import devtools.assess_frontier_rigidity as assess
 from devtools.assess_frontier_rigidity import (
     ESCAPE_EVIDENCE,
     TILING_EVIDENCE,
@@ -164,3 +165,52 @@ def test_rigidity_evidence_must_resolve_and_cover_its_case() -> None:
 def test_the_assessment_is_reproducible() -> None:
     """--check must fail on a hand edit rather than accepting it."""
     assert not [n for n, _p, text, desired in plan() if text != desired]
+
+
+@pytest.mark.parametrize(
+    ("label", "record"),
+    [
+        (
+            "side above k",
+            {
+                "verified_upper_bound": {"value": "3.0001"},
+                "verified_lower_bound": {"value": "3"},
+            },
+        ),
+        (
+            "side below k",
+            {"verified_upper_bound": {"value": "3"}, "verified_lower_bound": {"value": "2.9"}},
+        ),
+        ("no verified bounds", {}),
+        ("reported but not verified", {"reported_upper_bound": {"value": "3.0"}}),
+    ],
+)
+def test_the_tiling_claim_refuses_when_the_side_is_not_pinned_at_k(label, record) -> None:
+    """The tiling argument rests on the side, not on `n`.
+
+    A perfect square `n` is necessary for the tiling argument and not sufficient: what
+    makes the packing a tiling is that the side is exactly `k`, which is a property of
+    the record. The first version of the assessor read only `math.isqrt(n)` and never
+    opened the record, so a perfect-square case whose retained side had regressed above
+    `k` would still have been stamped `verified` `locally-rigid` with scope text
+    asserting "no slack anywhere". The claims were all true at the time; nothing checked
+    them, and `--check` could not have caught it either, because it regenerates from the
+    same assumption. This is the check that can fail.
+    """
+    cases, excluded = assess.screen_cases()
+    with pytest.raises(assess.RigidityAssessmentError, match="do not pin the side"):
+        assess.rigidity_for(9, cases, excluded, record)
+
+
+def test_the_tiling_claim_is_written_when_the_side_is_pinned() -> None:
+    """The positive half, so the test above is not passing for a trivial reason."""
+    cases, excluded = assess.screen_cases()
+    pinned = {
+        "verified_upper_bound": {"value": "3"},
+        "verified_lower_bound": {"value": "3"},
+    }
+    block = assess.rigidity_for(9, cases, excluded, pinned)
+    assert block is not None
+    assert block["property"] == "locally-rigid"
+    assert block["assurance"] == "verified"
+    assert "verified above and below at exactly 3" in block["scope"]

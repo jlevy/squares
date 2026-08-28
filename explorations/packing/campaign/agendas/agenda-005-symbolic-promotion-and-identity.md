@@ -22,7 +22,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can the already-measured n = 29 contact structure be frozen as a durable artifact,
@@ -36,6 +36,11 @@ agenda:
       A retained contact-structure artifact for n = 29 carrying its 89 incidences and the
       measured separation, plus the same extraction reproducing the n = 11 structure as a
       known answer. Any incidence the extraction cannot decide is a typed refusal.
+    artifacts:
+    - atlas/known-best/contact-structures.json
+    - atlas/known-best/contact-structure.schema.yaml
+    - src/sqpack/promote/contacts.py
+    - tests/test_promote_contacts.py
     bead: think-zmh8
     depends_on: []
     workflows: [pipeline-improvement]
@@ -47,7 +52,8 @@ agenda:
       -4.05e-101 against a smallest strict separation of 3.617e-02, over 406 pairs. The
       work is to freeze what is measured, not to infer what is uncertain.
     note: >-
-      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+      Closed in session-035. The n = 29 structure is frozen at atlas/known-best/contact-structures.json with 52 pair and 37 wall incidences, 89 in total across six orientation classes, an empty ambiguity report, and 97.5013 decades between the worst contact and the smallest strict separation. The same extractor reproduces Trump's n = 11 structure exactly under exact arithmetic, which was the known-answer check on the extractor itself.
+           Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
       phase 1, contact extraction.
       The n = 11 reproduction stays in scope as a known-answer check on the extraction
       itself, not because n = 29 is uncertain. Generic inference from an arbitrary
@@ -56,7 +62,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 29]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       Can the contact equations be assembled from an accepted structure, reduced to
@@ -82,6 +88,7 @@ agenda:
       Lagrange or Fritz-John conditions in determinant form, which is what keeps the
       problem root-finding rather than minimization.
     note: >-
+      Unblocked by block A. BC-042 delivered a contact structure whose ambiguity report is empty, which is exactly this commitment's entry criterion, so the dependency is discharged rather than merely older.
       Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
       phase 2, system assembly and closure. That spec carries the module layout, data shapes, API surfaces and
       per-phase negative controls an implementing agent needs.
@@ -89,7 +96,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 29]
-    state: ready
+    state: complete
     priority: 0
     question: >-
       Can the closed contact system be Newton-refined to a precision at which integer
@@ -104,6 +111,12 @@ agenda:
       A refined solution at a declared precision, 1000 digits or more, with a reported
       residual bound; or a typed statement of which conditioning prevents it. No algebraic
       claim is made at this step, only precision.
+    artifacts:
+    - campaign/series/series-000-smoke-and-calibration/results/bc-047-n29-refinement.json
+    - src/sqpack/promote/refine.py
+    - cases/kingbird29/system.py
+    - cases/kingbird29/refine_system.py
+    - tests/test_promote_refine.py
     bead: think-y85e
     depends_on: []
     workflows: [pipeline-improvement]
@@ -119,7 +132,8 @@ agenda:
       never solved, so this commitment drives an existing transcription rather than
       waiting on BC-042 and BC-043.
     note: >-
-      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+      Closed in session-035. The transcribed system refines to 1000 declared digits with a reported residual bound of 1.09829e-1039, and the residual tracks the working precision across five rungs rather than plateauing. A finding is recorded rather than worked around: displacing one equation of a square consistent system by a constant does not plateau the residual, so residual_falls is an observation and not a control at this size.
+           Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
       phase 3, high-precision refinement.
       This commitment exists because the first draft of this agenda omitted it and went
       straight from assembly to solving. The omission was caught by a two-minute probe
@@ -128,7 +142,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11]
-    state: blocked
+    state: ready
     priority: 1
     question: >-
       Can the closed system be solved exactly, by elimination or by integer relation, and
@@ -154,6 +168,7 @@ agenda:
       input pose, so the comparison must be against the input side and not merely against
       validity.
     note: >-
+      Unblocked by block A. BC-047 delivered a refinement at 1000 declared digits, which is this commitment's entry criterion. The honest prior stays poor: the X-004 sweep found no integer relation through degree twenty with coefficients below 1e22, and elimination in six unknowns may not terminate. Ready does not mean promising.
       Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
       phase 4, exact solve and round trip.
       The reverse direction is already built and sound, which is the reason to attempt the
@@ -338,6 +353,46 @@ agenda:
     note: >-
       Blocked on nothing technical; it is blocked on deciding whether a better source
       exists before spending a slice regenerating one. Scope the source first.
+  - id: BC-051
+    purpose: tool_validation
+    owner_focus: efficiency
+    instances: [5, 11, 29]
+    state: ready
+    priority: 0
+    question: >-
+      Can verification run only the steps a change can reach, without any chance of
+      running fewer than it should?
+    hypotheses: []
+    budget: one W5 efficiency-loop slice of at most 60 minutes, against a measured baseline
+    entry: >-
+      D-355's measurement, and `packing-validate --only`, which already selects steps by
+      name but has nothing mapping a change to the names it should select
+    exit: >-
+      A change-scoped selector that is conservative by construction -- an unrecognized
+      path selects the full gate rather than an empty set -- with a negative control
+      proving it cannot silently under-select, and a check that every step is reachable
+      from at least one declared path pattern. Or a typed statement of which steps cannot
+      be attributed to sources, which is itself the useful answer.
+    bead: think-ej1d
+    depends_on: []
+    workflows: [efficiency-loop]
+    next_evidence: >-
+      Measured on 2026-08-28: a two-file edit to the rigidity assessor was verified with a
+      979.79s full gate, while the two steps that edit can affect run together in 12.06s.
+      That is 82x. Across one session the full gate ran six times to completion and was
+      killed twice, and the last run's only finding was a single broken behavioural test.
+    note: >-
+      The commitment is n-agnostic; the instances name the calibration sizes whose coverage
+      the selector must be shown to preserve.
+      This is the efficiency principle applied to the tooling that enforces the others.
+      Coverage and cycle time are a real tension and the design's job is to deliver both:
+      the standing asymmetry lets efficiency simplify process but never weaken the
+      assurance a claim requires, so selecting fewer steps is only admissible when the
+      unselected ones provably cannot fail on this change. That is why the selector must
+      be catchable under-selecting; a fast checker nobody can catch being wrong is the one
+      outcome worse than a slow one. The full gate keeps its role at commit and merge
+      boundaries. This changes the edit loop, not the contract.
+    artifacts: []
 ---
 # Agenda-005 — Build the Missing Middle, and Decide What the Map Counts
 
@@ -391,11 +446,18 @@ precision had to come from a system this project assembles, so assembly had to c
 first. The source publishes the system, and it publishes the layout map with it, so at
 this size neither assembly step gates anything.
 
-| Block | Commitments | Checkpoint question |
-| --- | --- | --- |
-| A | BC-047, BC-042 | Can precision be manufactured on demand in-repository, and is the contact structure frozen at `n = 11` and `n = 29`? |
-| B | BC-045 phases 1–2 | Does the operator prove *uniqueness* on a known root, and refuse on the two-root and no-root controls? |
-| C | BC-045 phases 3–4 | Does the interval verdict agree with the exact route where both apply, and what does `n = 29` return? |
+| Block | Commitments | Checkpoint question | State |
+| --- | --- | --- | --- |
+| A | BC-047, BC-042 | Can precision be manufactured on demand in-repository, and is the contact structure frozen at `n = 11` and `n = 29`? | **Closed** in [session 035](../agent-sessions/session-035-agenda005-block-a.md). Yes to both. |
+| B | BC-045 phases 1–2 | Does the operator prove *uniqueness* on a known root, and refuse on the two-root and no-root controls? | Next |
+| C | BC-045 phases 3–4 | Does the interval verdict agree with the exact route where both apply, and what does `n = 29` return? | After B |
+
+Block A answered its checkpoint question in the affirmative on both lanes.
+Precision is manufactured rather than inherited — 1000 declared digits at a reported
+residual bound of `1.09829e-1039`, with the residual tracking working precision across
+five rungs — and the `n = 29` contact structure is frozen with 89 incidences at
+`97.5013` decades of separation, calibrated against the known `n = 11` answer.
+Neither result gates block B; they remove the two reasons it might have had to wait.
 
 The ordering is now driven by which route can actually reach the prize.
 Certifying the reported `n = 29` value moves `verified_upper_bound` from the Schadt
@@ -434,6 +496,50 @@ slices re-planned from measured elapsed time at every boundary.
 Each block boundary runs the **full** `packing-validate`, not `--fast`, and commits
 before the next block opens.
 A block that closes zero commitments is reported, not silently extended.
+
+### The session queue
+
+Two commitments carry `priority: 0` and they are not interchangeable, so the order is
+written down here rather than left to whoever reads the numbers first.
+Each row is one session artifact under
+[the portable session guide](../agent-sessions/README.md#starting-a-portable-four-hour-session).
+
+| Next | Session | Commitment | Bead | Size | What it buys |
+| ---: | --- | --- | --- | --- | --- |
+| 1 | session-036 | BC-051 | `think-ej1d` | ~60 min | Change-scoped verification — it pays for itself inside the next session |
+| 2 | session-037 | BC-045 phases 1–2 (block B) | `think-75ll` | ~4h | An operator that proves *uniqueness*, and refuses on the two-root and no-root controls |
+| 3 | session-038 | BC-045 phases 3–4 (block C) | `think-75ll` | ~4h | Calibration at `n = 5, 10, 11`, then the `n = 29` verdict — the prize |
+| 4 | session-039 | BC-049, then BC-046 | `think-xdly`, `think-0yo9` | ~60 min each | The rigidity residue, then what the atlas counts |
+
+**Reserve, in the order to reach for them:** BC-048 (`think-nfsd`, the natural filler
+and the only one that makes the symbolic route work on poses this project generates),
+BC-043 (`think-va53`, generalizes assembly to sizes with no published system), BC-044
+(`think-3lro`, ready but with a poor prior), BC-050 (`think-ecqk`, blocked on a scoping
+decision rather than on anything technical).
+
+Why this order, given the priorities are not a total ordering:
+
+- **BC-051 goes first because it is the only item that makes the others cheaper.** D-355
+  measured a two-file edit verified at `979.79s` against the `12.06s` its affected steps
+  need. A sixty-minute slice that cuts iteration cost pays for itself inside the very
+  next session, and every session after it.
+  Sequencing it behind four hours of interval-certification work would spend that four
+  hours at the old rate for no reason.
+- **BC-045 leads the research line because it is the only route to the `n = 29` prize
+  that needs no minimal polynomial.** Certifying the reported value moves
+  `verified_upper_bound` from the Schadt rational to Kingbird’s, closing `5.23e-5` that
+  no amount of better sourcing can close.
+  BC-044 is the stronger route and may simply not terminate.
+- **BC-046 is also `priority: 0` and still goes fourth**, because it is a different
+  program. A resolved identity relation leaves `n = 29` uncertified, and the census
+  cannot saturate either way until it is resolved — real value, no interaction with the
+  prize.
+- **BC-049 is short and mostly discharged.** The bulk first-party rigidity assessment
+  covers 94 of 100 records; what remains is `n = 5, 28, 40`, where the catalogue says
+  “Rigid.” and this repository deliberately does not restate that as its own finding.
+- **Block C ends in a human decision.** An unattended runner may not accept the `n = 29`
+  verdict: it is recorded `unresolved` with `needs_review: true` and a person decides.
+  Plan for the session to stop there rather than treating it as a failure.
 
 ### Replan triggers
 

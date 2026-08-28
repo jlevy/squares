@@ -174,6 +174,34 @@ the workflow, focus, clock, or transition was declared at the time.
 Missing historical phase timing remains unknown rather than receiving invented
 precision.
 
+### Cycle Time Is Reported, Not Tolerated
+
+Efficiency is one of the four operating principles, and its goal is iteration *as fast
+as possible*. A phase that verifies a change by running materially more than that change
+can reach has violated it, and the violation is a reportable finding rather than a cost
+of doing business.
+
+Each phase already declares a `validation_command`. Two obligations come with it:
+
+- **Choose it against the change, not from habit.** `packing-validate` states the ladder
+  in its own help — `--fast` while editing, `--only TEXT` for one named surface, the
+  default before a commit, `--strict` before an unattended session or a merge.
+  The full gate belongs at block boundaries and before commits, not after every edit.
+- **Record the measured cost, and report an overrun.** When a phase spends materially
+  longer verifying than the affected surface requires, that is logged like any other
+  defect, with the two numbers side by side.
+  [D-355](../../defects.md) is the worked example: `979.79s` spent against `12.06s` of
+  affected steps, an 82x overrun, found only because a session measured its own cycle
+  time instead of accepting it.
+
+The tension between coverage and cycle time is real, and resolving it is the design’s
+job rather than the operator’s discretion.
+The standing asymmetry decides the direction: efficiency may simplify process but never
+weaken the assurance a claim requires, so a narrower command is admissible only when the
+steps it drops provably cannot fail on this change.
+Running less than that is a coverage gap; running more than that, by reflex, is the
+defect above.
+
 ## Switching Phases
 
 Start a new phase whenever the workflow, focus, or bounded slice objective changes.
