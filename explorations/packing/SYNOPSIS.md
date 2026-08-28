@@ -301,6 +301,9 @@ that day. Its next slice is **block A: `BC-047` under `think-y85e` and `BC-042` 
 `think-zmh8`**, two independent lanes.
 Blocks B and C are `BC-045` under `think-75ll`, built to
 [plan-2026-08-28-interval-certification](docs/project/specs/active/plan-2026-08-28-interval-certification.md).
+[Session 035](campaign/agent-sessions/session-035-agenda005-block-a.md) is the live
+block-A session; its frozen active slice is `BC-047` under `think-y85e`, and the
+contact-structure lane opens after it.
 The narrative below is historical and its earlier “next bounded slice” pointers are
 superseded by this paragraph.
 

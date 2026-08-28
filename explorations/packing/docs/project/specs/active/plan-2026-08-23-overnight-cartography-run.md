@@ -333,19 +333,21 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 029](../../../../campaign/agent-sessions/session-029-finish-agenda-003-cycles.md).
-Sessions 027 and 028 are terminal, and session 029 closed the remaining agenda-003 cells
-on measurement rather than opinion.
-Open BC-038 under `think-kdil` as the next bounded driver: exp-045 is terminal, so the
-shared row-jet path it froze is available again, and the measured inventory reuse owes
-only its exact-output equivalence result.
-The remaining outstanding items each have their own workflow entry in agenda-004. Build
-the four missing controls so the enforced count matches the declared one, then re-run
-the admission check before any target generation.
-Do not amend the declared twelve down to the implemented eight; the criterion was frozen
-before implementation.
-The measured W5 inventory remains scheduled after that driver; BC-016 stays blocked on
-its retained-pose, glued-row, tie-label, and receipt-checker prerequisites.
+[session 035](../../../../campaign/agent-sessions/session-035-agenda005-block-a.md).
+Sessions 027 through 034 are terminal, and agenda-004 closed on measurement rather than
+opinion.
+Open BC-047 under `think-y85e` as the next bounded driver: the retained `n = 29`
+provenance SVG publishes the closed contact system and the symbolic layout map together,
+`cases/kingbird29/verify_svg.py` already transcribes both and evaluates residuals
+without ever solving, and the outstanding work is to manufacture precision from that
+system with a reported residual bound rather than to read it off the serialized source.
+The remaining outstanding items each have their own workflow entry in agenda-005, whose
+block A pairs that driver with an independent contact-structure freeze.
+Do not treat a refinement as an algebraic claim; this driver reports precision only, and
+the certification question belongs to the interval-certification blocks that follow it.
+The measured W5 inventory and the row-jet inventory reuse remain scheduled after that
+driver; BC-016 stays blocked on its retained-pose, glued-row, tie-label, and
+receipt-checker prerequisites.
 The first-failure pipeline cell is complete, and the active two-session
 [balanced ten-hour agenda](../../../../campaign/agendas/agenda-003-balanced-ten-hour-research-program.md)
 retains its actual clocks and full five-hour midpoint review.
