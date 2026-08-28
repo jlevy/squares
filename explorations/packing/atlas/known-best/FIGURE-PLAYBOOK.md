@@ -150,8 +150,9 @@ uv run --frozen --all-extras --group dev packing-validate
 ```
 
 The middle step refreshes generated tables that also quote frontier values.
-It currently flattens typographic quotes in the document it rewrites, so read `git diff`
-and keep only the row that actually changed; see `think-93u2`.
+It rewrites only the rows whose content actually changed, so a run over an unchanged
+tree leaves an empty diff and the formatter’s typography survives in the rows it does
+not touch.
 
 ## If you change the palette or the renderer
 
