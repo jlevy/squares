@@ -63,12 +63,19 @@ def _packing_record(n: int) -> dict[str, Any]:
 
 
 def _rigid_flag(n: int) -> bool | None:
-    """The catalogue's rigidity flag, read without assuming how it is wrapped.
+    """Whether the catalogue calls this packing rigid.
 
-    A sibling effort is giving every optional fact a provenance vocabulary, so the flag
-    may become a record with a `value`.  This test is about the mathematics either way.
+    The field was a tri-state boolean (`rigid`) and became a three-valued enum
+    (`catalogue_rigid`: rigid / semi-rigid / not-stated), because `false` had meant
+    "the catalogue did not say" while reading as "not rigid". Only an explicit
+    "rigid" is a positive claim here; "semi-rigid" is not, and neither is silence.
+    Both spellings are read so this cross-check cannot go vacuous across the rename.
     """
-    value = _packing_record(n).get("reported_upper_bound", {}).get("rigid")
+    bound = _packing_record(n).get("reported_upper_bound", {})
+    catalogue = bound.get("catalogue_rigid")
+    if catalogue is not None:
+        return True if catalogue == "rigid" else None
+    value = bound.get("rigid")
     if isinstance(value, dict):
         value = value.get("value")
     return value if isinstance(value, bool) else None
