@@ -5,12 +5,12 @@ title: Algebraic degree is absent for all 84 cases that record an exact form, th
 kind: bug
 status: open
 priority: 1
-version: 3
+version: 4
 labels: []
 dependencies: []
 parent_id: is-01m12zjr144a4kg6rnv1t0pm6n
 created_at: 2026-08-28T01:01:02.299Z
-updated_at: 2026-08-28T01:32:33.439Z
+updated_at: 2026-08-28T04:40:01.662Z
 ---
 exact_form and algebraic_degree have ZERO overlap across the 100 frontier records: 84 carry a radical, 11 carry a degree, none carry both. That mirrors the upstream catalogue's own convention -- Kingbird prints EITHER a radical (s = 4 + 2 sqrt 2) OR a locked degree (s = {}^{8}lock plus the polynomial) -- so the degree is missing from our records not because it is unknown but because the source did not print it and we never derived it.
 
@@ -33,24 +33,34 @@ DONE WHEN: algebraic_degree and minimal_polynomial are populated for all 84, mar
 
 ## Notes
 
-CONVENTION, settle this before populating anything.
+REFRAMED after PR #51 (merged 2026-08-28). My original framing was wrong in a way
+that matters for scoping this.
 
-Rationals have algebraic degree 1, not 0. The minimal polynomial of 2 is s - 2,
-degree 1, and [Q(a):Q] = 1. A degree-0 polynomial is a nonzero constant and has
-no root, so no number has algebraic degree 0. This came up because the integer
-sides (n = 1, 2, 3, 4, 9, 12, ...) look degree-less; they are degree 1.
+I treated every empty exact_form as a fillable transcription gap. It is not. #51
+establishes that "no exact form" has THREE distinct causes, and only the first is
+a defect:
 
-Verified with sympy:
-  s(2)  = 2            -> s - 2          degree 1
-  s(9)  = 3            -> s - 3          degree 1
-  s(40) = 4 + 2sqrt(2) -> s^2 - 8s + 8   degree 2
+  1. NOT TRANSCRIBED - the source states it and we missed it. n=54 was this, and
+     is fixed. This is the only defect class.
+  2. IMPOSSIBLE - the side length is provably not expressible in radicals. n=28
+     has Galois group S6 and n=39 has S5 over Q; neither is solvable. Verified
+     independently with sympy.galois_group from the recorded polynomials. The
+     empty exact_form is a PERMANENT mathematical property, not a gap.
+  3. IMPRACTICAL - solvable but not worth writing. n=70 is degree 4 with Galois
+     group S4, so a radical form exists in principle; #51 records that the
+     expansion "runs to many lines and carries no insight the quartic does not
+     already carry".
 
-Full derived distribution over the 84 records that carry an exact form:
-  degree 1: 65   degree 2: 18   degree 4: 1 (n=54)
+So this bead's remaining scope is narrower than written: derive and record the 84
+missing DEGREES, which is still valid and unaffected, but do NOT treat the empty
+exact_form fields as work to be done. Several of them are answers, not absences.
 
-DISPLAY DECISION still open: the figure currently prints "deg d" only for the 11
-records that carry the field, so 84 cards show nothing. Populating all 100 would
-put "deg 1" on 65 cards, which is noise on an integer side. Suggest recording the
-degree for every case in the data, and printing it in the figure only above some
-threshold (deg >= 2, or only where no closed form is shown). That is a rendering
-choice and should not drive what the records hold.
+Note also the tooling limit: sympy.galois_group handles degree <= 6 only, so
+n=11 (8), n=17 (18), n=41 (42), n=51 (12), n=83 (24), n=87 (44) and n=88 (20)
+cannot be classified this way. #51 was careful not to claim otherwise; it made
+factorization claims over Q(sqrt 2) instead, which I verified for n=37 (deg 8 ->
+two quartics) and n=88 (deg 20 -> two degree-10 factors), each containing the
+reported root.
+
+This distinction belongs in think-18mu's provenance vocabulary: "absent" is too
+coarse. An empty field needs to say WHICH of the three it is.
