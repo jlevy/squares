@@ -134,6 +134,20 @@ Status: **active**. Close every outstanding item session 029 left, each in its o
 | BC-039 | tool_validation | 29 | complete | 2 | think-uzmh | Six verified promotions at `rational_digits` 18 through 60 all beat the recorded 4.9339e-11 relaxation, tracking the ladder rung 10^-(d-5) exactly down to 4.933851e-55. The route has no minimum, so the choice is a policy decision traded against literal artifact size, and it must be argued rather than maximized. |
 | BC-040 | tool_validation | 5, 11, 29 | complete | 1 | think-qibu | Re-run the full gate rather than `--fast` against the merged tree. If the round count or any generated aggregate moved in the merge, re-check `devtools/controls.yaml` anchors first: that is the exact rot that silently disabled the round-aggregate control. |
 
+### [agenda-005](agendas/agenda-005-symbolic-promotion-and-identity.md) — Build the missing middle of the promotion pipeline, and decide what the map counts
+
+Status: **active**. Three programs, run as one agenda because they compete for the same clock and must not be confused with each other. The first builds the unbuilt middle of the symbolic promotion route so an exact entry can be derived rather than inherited. The second removes the numeric floor that keeps that route usable only on someone else's high-precision data. The third resolves what the atlas counts, because a census over endpoint keys cannot saturate. None unblocks another.
+
+| item | purpose | n | state | priority | bead | next evidence |
+| --- | --- | --- | --- | ---: | --- | --- |
+| BC-042 | tool_validation | 11, 29 | ready | 0 | think-zmh8 | Corrected by measurement in X-004. This was first scoped as inference under an ambiguity risk, which misapplied D-021's 1e-11 float-LP floor to a source that is not that solver's output. The retained reconstruction already separates contact from non-contact by about ninety-nine orders of magnitude: the worst touching margin is -4.05e-101 against a smallest strict separation of 3.617e-02, over 406 pairs. The work is to freeze what is measured, not to infer what is uncertain. |
+| BC-043 | tool_validation | 11, 29 | blocked | 1 | think-va53 | The unreduced system still contains the centres. For several published rigid constructions the contact graph lets one eliminate them and leave two unknowns at n = 11 and three at n = 17, but that reduction must be derived from the particular graph and an angle-class count alone does not perform it. Closure uses Lagrange or Fritz-John conditions in determinant form, which is what keeps the problem root-finding rather than minimization. |
+| BC-047 | tool_validation | 11, 29 | ready | 0 | think-y85e | A probe recorded in X-004 shows this step is not optional. Integer relation run directly on the serialized value returns relations at almost every degree from eight to twenty-one, and the degree-eight candidate has a relative residual of order 1e-90 against roughly a hundred available digits, having consumed almost exactly the ninety digits the search was allowed. Ninety-eight digits cannot identify the minimal polynomial, so precision must be manufactured from the system rather than read from the source. At n = 29 that system is published in the provenance SVG and already transcribed in cases/kingbird29/verify_svg.py, where it is evaluated but never solved, so this commitment drives an existing transcription rather than waiting on BC-042 and BC-043. |
+| BC-044 | tool_validation | 11 | blocked | 1 | think-3lro | No Gröbner, resultant, PSLQ or LLL code exists in the tree. Both routes produce guesses, and the round trip discharges them differently. A wrong minimal polynomial is caught by exact back-substitution, because it will not satisfy the system. A wrong contact structure is caught by re-verifying the reconstructed packing, but only partly: verification catches infeasibility and not a structure that yields a valid yet suboptimal packing. That failure appears as a reconstructed side above the input pose, so the comparison must be against the input side and not merely against validity. |
+| BC-045 | tool_validation | 11 | ready | 1 | think-75ll | The `PoseBox` scalar and the interval branch-and-bound hook are recorded as unbuilt on the proof lane, and `packing-witness promote --strategy interval-existence` raises `_interval_not_built()`. This is the missing half of step six, and it is independent of BC-042 through BC-044 because the n = 11 system does not need to be inferred to be certified. |
+| BC-048 | tool_validation | 5, 11 | ready | 1 | think-nfsd | D-021 names this directly: the float LP solver has a noise floor of about 1e-11 in the side, no numerical comparison may claim a difference finer than that floor, and the general fix is an exact LP over certified rational or algebraic coefficients, which is unbuilt. It is purely rational only for rational-coefficient cells. |
+| BC-046 | measurement_validation | 3, 4, 5 | ready | 0 | think-0yo9 | `distinct_basins` counts endpoint keys, not connected terminal components. The exact n = 3 side-2 optimum contains a sliding family of centres, so one connected set produces many keys and the store splits it. Until D-034 is resolved the discovery curve cannot plateau, the census cannot saturate, and the rarity premise is untestable rather than untested. |
+
 ## Series
 
 | id | status | title | rounds | opened because |
@@ -282,6 +296,10 @@ Status: **active**. Close every outstanding item session 029 left, each in its o
 ## Effort
 
 45 rounds, 1106 agent-minutes, 30.8 wall-minutes.
+
+## Exploration reports not yet codified
+
+- X-004 — An exact algebraic characterization of the n = 29 record
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.
