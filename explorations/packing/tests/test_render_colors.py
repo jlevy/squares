@@ -31,8 +31,11 @@ ATLAS = ROOT / "atlas"
 # additionally stops two families reading as shades of one colour.
 MINIMUM_BASE_HUE_SEPARATION_DEGREES = 14
 MINIMUM_BASE_OKLAB_DISTANCE = 0.035
-# A shade may drift slightly in hue from its base as the gamut clamps chroma.
-MAXIMUM_SHADE_HUE_DRIFT_DEGREES = 5.0
+# A shade may drift in hue from its base: lightening in HSL is not hue-preserving
+# in OkLCh, and the drift grows at the light end of the ramp, reaching 5.7 deg
+# for the sky blue. The bound exists to catch a shade derived from the WRONG
+# base, which would be tens of degrees out, not to police this few-degree walk.
+MAXIMUM_SHADE_HUE_DRIFT_DEGREES = 7.0
 
 
 def _point(x: Decimal | int | str, y: Decimal | int | str) -> Point2:

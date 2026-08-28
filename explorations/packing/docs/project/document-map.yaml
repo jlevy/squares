@@ -15,6 +15,7 @@ documents:
   - {path: atlas/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: atlas/enumerated/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: atlas/known-best/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
+  - {path: atlas/known-best/FIGURE-PLAYBOOK.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: atlas/prospective/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: atlas/rendering/README.md, role: component-guide, authority: supporting, lifecycle: maintained}
   - {path: conventions.md, role: conventions, authority: definitive, lifecycle: maintained}

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from collections import Counter
 from pathlib import Path
 from xml.etree import ElementTree as ET
@@ -256,14 +257,14 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
         "layout": "10 by 10, row-major n=1..100",
         "png_preview": {
             "derived_from": "atlas/known-best/known-best-1-100.svg",
-            "height": 2516,
+            "height": 2676,
             "path": "atlas/known-best/known-best-1-100.png",
             "width": 2400,
         },
         "renderer": "sqpack deterministic composite renderer",
         "square_count": 5050,
         "svg": {
-            "height": 2516,
+            "height": 2676,
             "path": "atlas/known-best/known-best-1-100.svg",
             "width": 2400,
         },
@@ -350,7 +351,9 @@ def test_known_best_composite_contains_every_case_and_square() -> None:
     ]
     assert labels == [str(n) for n in range(1, 101)]
     assert len(bounds) == 100
-    assert all(bound.startswith("s ≤ ") for bound in bounds)
+    # A proved optimum is stated as an equality, a best-known bound as <=.
+    assert all(re.fullmatch(r"s\(\d+\) [=≤] .+", bound) for bound in bounds)
+    assert sum(" = " in bound for bound in bounds) == 35
 
 
 def test_known_best_composite_png_is_derived_from_current_svg() -> None:
@@ -360,7 +363,7 @@ def test_known_best_composite_png_is_derived_from_current_svg() -> None:
 
     assert known_best_builder.png_summary_receipt(png) == (
         2400,
-        2516,
+        2676,
         hashlib.sha256(svg_text.encode("utf-8")).hexdigest(),
     )
 

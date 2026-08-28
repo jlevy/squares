@@ -746,7 +746,7 @@ Use the structured form to query or plot; use these tables to read.
 | 51 | 7.70079924 | annealing | 12 | 7.164414 | Nagamochi | 0.5364 |
 | 52 | `7 + (1/2)√2` = 7.70710678 | strip | — | 7.244998 | Nagamochi | 0.4621 |
 | 53 | `(13/2) + (1/2)√7` = 7.82287566 | annealing | — | 7.324555 | Nagamochi | 0.4983 |
-| 54 | 7.84666719 | hand | — | 7.403124 | Nagamochi | 0.4435 |
+| 54 | `7 - (1/2)√2 + sqrt(1 + √2)` = 7.84666719 | hand | — | 7.403124 | Nagamochi | 0.4435 |
 | 55 | 7.94577101 | annealing | — | 7.480741 | Nagamochi | 0.465 |
 | 56 | 8 | grid | — | 7.557439 | Nagamochi | 0.4426 |
 | 57 | 8 | grid | — | 7.63325 | Nagamochi | 0.3668 |

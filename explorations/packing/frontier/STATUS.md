@@ -61,7 +61,7 @@ Follow the `n` link for full provenance, numerical evidence, conflicts, and bloc
 | [`51`](n-051.md) | `7.70079923541701` | `8` | `7.164414002969` | `1 + √38` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`52`](n-052.md) | `7 + (1/2)√2` | `8` | `7.244997998398` | `1 + √39` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`53`](n-053.md) | `(13/2) + (1/2)√7` | `8` | `7.324555320337` | `1 + √40` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
-| [`54`](n-054.md) | `7.84666719284348` | `8` | `7.403124237433` | `1 + √41` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
+| [`54`](n-054.md) | `7 - (1/2)√2 + sqrt(1 + √2)` | `8` | `7.403124237433` | `1 + √41` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`55`](n-055.md) | `7.94577100750391` | `8` | `7.480740698408` | `1 + √42` | open | replayed here, external proof | formal upper trails report | 2026-08-24 |
 | [`56`](n-056.md) | `8` | `8` | `7.557438524302` | `1 + √43` | open | replayed here, external proof | — | 2026-08-24 |
 | [`57`](n-057.md) | `8` | `8` | `7.633249580711` | `1 + √44` | open | replayed here, external proof | — | 2026-08-24 |

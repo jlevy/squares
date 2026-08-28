@@ -42,6 +42,19 @@ SHADE_LIGHTNESS_COMPRESSION = Decimal("0.85")
 SHADE_SATURATION_FLOOR = Decimal("0.50")
 SHADE_SATURATION_CAP = Decimal("0.85")
 SHADE_SATURATION_DROP = Decimal("-0.12")
+# The two darkest shades carry most of the atlas and are already where they want
+# to be, so the ramp is widened only at the light end: shade i above the second
+# is lifted by this much per step. Keeps the dark end fixed while opening a
+# little more air between the lighter three.
+SHADE_LIGHT_SPREAD = Decimal("0.015")
+
+
+def _spread_light_end(lightnesses: tuple[Decimal, ...]) -> tuple[Decimal, ...]:
+    """Push the shades above the second progressively lighter."""
+    return tuple(
+        lightness + SHADE_LIGHT_SPREAD * Decimal(max(0, index - 1))
+        for index, lightness in enumerate(lightnesses)
+    )
 
 
 @dataclass(frozen=True)
@@ -215,13 +228,16 @@ def _perceptual_family(fill: str, ramp: PerceptualRamp, count: int) -> tuple[str
         return (_oklch_hex(float(ramp.light_end), float(ramp.chroma), hue),)
     dark, light = float(ramp.dark_end), float(ramp.light_end)
     step = (light - dark) / (count - 1)
+    lightnesses = _spread_light_end(
+        tuple(Decimal(str(dark + step * index)) for index in range(count))
+    )
     return tuple(
         _oklch_hex(
-            dark + step * index,
-            min(float(ramp.chroma), 0.95 * _maximum_chroma(dark + step * index, hue)),
+            float(lightness),
+            min(float(ramp.chroma), 0.95 * _maximum_chroma(float(lightness), hue)),
             hue,
         )
-        for index in range(count)
+        for lightness in lightnesses
     )
 
 
@@ -236,7 +252,7 @@ def _shade_lightnesses(count: int, *, base: Decimal, span: Decimal) -> tuple[Dec
         return (centered,)
     step = span / Decimal(count - 1)
     minimum = centered - span / 4
-    return tuple(minimum + step * index for index in range(count))
+    return _spread_light_end(tuple(minimum + step * index for index in range(count)))
 
 
 def _shade_saturations(count: int, *, base: Decimal) -> tuple[Decimal, ...]:
