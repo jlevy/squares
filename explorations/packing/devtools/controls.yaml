@@ -218,6 +218,12 @@ controls:
   run: python3 -m sqpack.campaign.ledger check
   expect: "schema violation"
 
+- name: campaign - one bead backs two simultaneously ready commitments
+  file: campaign/agendas/agenda-003-balanced-ten-hour-research-program.md
+  replace: ["  - id: BC-028\n    purpose: tool_validation\n    owner_focus: efficiency\n    instances: [5]\n    state: stopped", "  - id: BC-028\n    purpose: tool_validation\n    owner_focus: efficiency\n    instances: [5]\n    state: ready"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "backs more than one ready commitment"
+
 - name: campaign - enforced contract metadata disagrees with schema id
   file: campaign/agent-sessions/session-001-pr15-review-reset.md
   replace:

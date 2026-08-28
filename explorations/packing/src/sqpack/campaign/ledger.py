@@ -488,6 +488,24 @@ def check(
             if item["state"] == "complete" and not item.get("artifacts"):
                 problems.append(f"{name}: {item_id} is complete without retained artifacts")
 
+    # One bead may back several commitments -- that is how a lane is carried across
+    # agendas, and `think-1s0h` has run from BC-010 to BC-029 to BC-037 that way. Several
+    # COMPLETE ones are the useful part, a record of successive bounded attempts. Two
+    # READY ones are not: they give a runner asking "what do I pick up?" more than one
+    # answer, with nothing to arbitrate. Blocked pairs are left alone because a
+    # dependency chain is a legitimate reason for two live commitments on one bead.
+    ready_by_bead: dict[str, list[str]] = {}
+    for agenda in agendas:
+        for item in agenda["items"]:
+            if item["state"] == "ready":
+                where = f"{item['id']} ({agenda['_path'].name})"
+                ready_by_bead.setdefault(item["bead"], []).append(where)
+    for bead, places in sorted(ready_by_bead.items()):
+        if len(places) > 1:
+            problems.append(
+                f"{bead}: backs more than one ready commitment: {', '.join(sorted(places))}"
+            )
+
     reports = {x["id"] for x in explorations}
     for hypothesis in hypotheses:
         for report_id in hypothesis.get("derived_from") or []:
