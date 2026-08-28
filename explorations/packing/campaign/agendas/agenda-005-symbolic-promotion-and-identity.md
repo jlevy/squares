@@ -47,6 +47,8 @@ agenda:
       -4.05e-101 against a smallest strict separation of 3.617e-02, over 406 pairs. The
       work is to freeze what is measured, not to infer what is uncertain.
     note: >-
+      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+      phase 1, contact extraction.
       The n = 11 reproduction stays in scope as a known-answer check on the extraction
       itself, not because n = 29 is uncertain. Generic inference from an arbitrary
       quench endpoint, where the D-021 floor does apply, is a separate and later question.
@@ -79,6 +81,10 @@ agenda:
       graph and an angle-class count alone does not perform it. Closure uses
       Lagrange or Fritz-John conditions in determinant form, which is what keeps the
       problem root-finding rather than minimization.
+    note: >-
+      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+      phase 2, system assembly and closure. That spec carries the module layout, data shapes, API surfaces and
+      per-phase negative controls an implementing agent needs.
   - id: BC-047
     purpose: tool_validation
     owner_focus: correctness
@@ -107,6 +113,8 @@ agenda:
       minimal polynomial, so precision must be manufactured from the system rather than
       read from the source.
     note: >-
+      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+      phase 3, high-precision refinement.
       This commitment exists because the first draft of this agenda omitted it and went
       straight from assembly to solving. The omission was caught by a two-minute probe
       rather than by review, which is the cheapest possible place to find it.
@@ -140,6 +148,8 @@ agenda:
       input pose, so the comparison must be against the input side and not merely against
       validity.
     note: >-
+      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+      phase 4, exact solve and round trip.
       The reverse direction is already built and sound, which is the reason to attempt the
       forward one. `sqpack.field` proves irreducibility and isolates the real root, and
       `sqpack.verify` checks separating-axis validity with exact predicates. The unbuilt
@@ -208,6 +218,8 @@ agenda:
       the general fix is an exact LP over certified rational or algebraic coefficients,
       which is unbuilt. It is purely rational only for rational-coefficient cells.
     note: >-
+      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+      phase 5, exact LP.
       This does not gate the n = 29 result, which consumes a published pose and needs no LP
       of ours. It gates generality. On a source carrying ninety-nine digits the contact
       structure is unambiguous; on a pose this project quenches, the 1e-11 floor is exactly

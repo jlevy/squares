@@ -109,6 +109,7 @@ documents:
   - {path: docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md, role: plan, authority: current, lifecycle: transient}
   - {path: docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md, role: plan, authority: current, lifecycle: transient}
+  - {path: docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md, role: plan, authority: current, lifecycle: transient}
   - path: docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md
     role: plan
     authority: record
