@@ -15,8 +15,8 @@ exploration:
     Record a 2026-08-28 discussion that measured how far the repository actually is from
     an exact characterization of the best known n = 29 packing, and corrected a claim made
     earlier in the same discussion. The contact structure at n = 29 is already computed
-    and unambiguous, so the blocker is not inference but the reduction and solve at seven
-    unknowns. Mines candidate hypotheses for that program and states what such a result
+    and unambiguous, and the source publishes the closed system outright, so the blocker at
+    this size is neither inference nor assembly but the exact solve at six unknowns. Mines candidate hypotheses for that program and states what such a result
     would and would not be.
   sources:
   - SYNOPSIS.md
@@ -57,7 +57,7 @@ published minimal polynomial” and re-derives `u = tan(a/2)` from it.
 Trump did steps two through five by hand in 1979; this repository picks the work up at
 step six, where it is strong.
 
-## The correction
+## The first correction
 
 Earlier in this discussion the agent asserted that contact-structure inference was “the
 single thing standing between exact at `n = 11` and exact at `n = 29`”, and scoped a
@@ -93,10 +93,10 @@ For this one case, with its contact graph in hand:
 | Step | State at `n = 29` |
 | --- | --- |
 | 2. Contact structure | **done**, 89 unambiguous incidences |
-| 3. Assemble and reduce the equations | real work, mechanical from a known graph |
-| 4. Close by determinant conditions | real work |
+| 3. Assemble and reduce the equations | **published by the source and already transcribed** — see the second correction below |
+| 4. Close by determinant conditions | **published by the source and already transcribed** |
 | 5. Solve exactly | **libraries exist and are unused** — SymPy carries `groebner` and `resultant`, mpmath carries `pslq` |
-| 6. Certify | **built and sound** |
+| 6. Certify | **half built** — irreducibility, root isolation and exact predicates exist; interval-Newton, Krawczyk and the `PoseBox` scalar do not |
 
 “Unbuilt” in the synopsis means no code in this repository, which is not the same as no
 capability. For a single case whose contact graph is known, the distance is considerably
@@ -108,9 +108,13 @@ Fifteen of the twenty-nine squares are axis-aligned, and the reconstruction meas
 orientation classes with a minimum class gap of `0.296` degrees — the count that refuted
 [H-042](../hypotheses/H-042-n29-numerical-angle-classes.md)’s three-class claim.
 
-After eliminating centres the system carries roughly `s` plus six angles, so about seven
-unknowns, against two at `n = 11` and three at `n = 17`. Gröbner basis cost is severe in
-the number of variables, so elimination may not terminate at seven.
+The six orientation classes **include** the axis class, which holds fifteen squares at
+zero degrees, so there are five tilted classes.
+After eliminating centres the system carries `s` plus those five angles: **six
+unknowns**, against two at `n = 11` and three at `n = 17`. The source settles this
+rather than leaving it an estimate — its own solve is a six-by-six system in
+`{s, a, b, c, d, i}`. Gröbner basis cost is severe in the number of variables, so
+elimination may still not terminate at six.
 
 The integer-relation route avoids elimination entirely: it recognises a minimal
 polynomial from digits.
@@ -118,7 +122,54 @@ With roughly ninety-nine digits already serialized, and more obtainable by
 high-precision Newton from the same contact system, that route has unusually good
 material. It is a parallel candidate rather than a fallback.
 
-## A two-minute probe that bounds the shortcut
+## The second correction, and the larger one
+
+A first draft of this exploration closed the section below with the assertion that
+**“there is no route to step five that avoids steps three and four”**, and concluded
+that building the assembly infrastructure was therefore on the critical path for
+`n = 29`.
+
+That is false, and the artifact refuting it was already in this repository and is listed
+in this document’s own `sources`.
+
+The archived provenance SVG does not merely serialize a `FindRoot` result.
+It publishes the **entire closed system**: nine slide scalars
+`r1, r2, r3, r4, r5, r8, rB, rC, rD`, each given in closed form, and six equations
+`f1 … f6` in the six unknowns `{s, a, b, c, d, i}`, followed by the `FindRoot` call over
+them at `WorkingPrecision -> 200`. Its header credits David Ellsworth with an *exact
+analytic solution* on 2025-12-10, and [`frontier/n-029.md`](../../frontier/n-029.md)
+already records that phrase.
+
+Steps three and four at `n = 29` were therefore never unbuilt work.
+They were done by the source and published.
+
+Worse for the original claim,
+[`cases.kingbird29.verify_svg`](../../cases/kingbird29/verify_svg.py) had **already
+transcribed all six equations and all nine slide scalars into this repository**. It uses
+them only to evaluate residuals at the serialized pose, as a consistency check on the
+serialization — it never solves them.
+The distance between what existed and what was said to be missing was the difference
+between evaluating that system and passing it to a root finder.
+
+Re-solving the transcribed system directly confirms this:
+
+| Quantity | Value |
+| --- | --- |
+| `s` at 60 digits | `5.93383346267692918968946061635201913843383418107788697463883` |
+| Agreement with the reported record `5.93383346267692` | all 15 published digits |
+| Max equation residual at 420 digits | `8.85e-421` |
+| Wall-clock for a 420-digit solve | about 2 seconds |
+
+Precision at `n = 29` is not a thing to be manufactured by new infrastructure.
+It is available now, to any depth, from a system this repository transcribed months ago.
+
+The measurement in the next section stands unchanged; only the inference drawn from it
+was wrong.
+Ninety-eight digits genuinely cannot identify the minimal polynomial — but the
+remedy is to run the system that is already here, not to build the machinery that would
+have produced it.
+
+## A two-minute probe, and the inference that was drawn from it wrongly
 
 The obvious shortcut is to skip the system entirely and run integer relation directly on
 the serialized side value.
@@ -129,25 +180,56 @@ it fails informatively.
 twenty-one. That pattern is the signature of an under-determined search rather than of
 structure: the coefficient budget, not the mathematics, decides where relations appear.
 
-The degree-eight candidate was then checked directly.
-Its relative residual is `1.26e-90` against roughly ninety-eight available digits — it
-consumed almost exactly the `(8 + 1) x 10 = 90` digits the search was allowed and
-stopped there.
-A genuine minimal polynomial would vanish to the full input precision, not
-to the precision the search was permitted to spend.
+The degree-eight candidate was then checked directly, and its relative residual came out
+around `1e-90` against roughly ninety-eight available digits — consuming almost exactly
+the `(8 + 1) x 10 = 90` digits the search was allowed and stopping there.
+A genuine minimal polynomial would vanish to the full input precision, not to the
+precision the search was permitted to spend.
 
-**So ninety-eight digits cannot identify the minimal polynomial**, and the serialized
-value alone will not yield one however it is processed.
+**The parameters of that first probe were not recorded, and it is therefore not
+reproducible as originally written.** A reviewer re-running the same shape obtained
+`1.19e-85` at `dps = 100` and `4.54e-84` at `dps = 98` rather than the figure first
+noted, and the “ninety-eight digits” was never derived — the serialized side carries
+exactly one hundred significant digits.
+The order of magnitude and the qualitative reading survive; the specific figure does
+not, and it is recorded here as approximate for that reason.
 
-That is a bound on the shortcut and not on the problem, and it forces the order of work:
+A reproducible replacement is recorded below with full parameters.
+
+### The probe, restated reproducibly
+
+Run against the system solved directly, rather than against the serialized digits:
+
+| Parameter | Value |
+| --- | --- |
+| Source of `s` | the transcribed `f1 … f6` system, solved by `mpmath.findroot` |
+| Ground-truth precision | `mp.dps = 1200`, max equation residual `1.11e-1200` |
+| Search precision | `mp.dps = 700` |
+| Basis | `s^0 … s^d` |
+| `tol` | `1e-675`, that is `10^-(search - 25)` |
+| `maxcoeff` | `10^22` |
+| `maxsteps` | `50000` |
+| Degrees swept | `2 … 15` (sweep continuing) |
+
+At these parameters **no relation is returned at any degree from two through fifteen** —
+against the original probe’s relations at nearly every degree from eight to twenty-one.
+That contrast is the cleanest available confirmation that the original relations were
+artifacts of insufficient precision rather than structure, and it is the measurement the
+margin rule in the implementation spec is written to enforce.
+
+That is a bound on the shortcut and not on the problem, and the first two links of the
+chain it implies are sound:
 
 - more digits require Newton refinement,
-- refinement requires the contact *system*, not merely the contact *structure*,
-- assembling that system is steps three and four.
+- refinement requires the contact *system*, not merely the contact *structure*.
 
-The infrastructure is therefore on the critical path rather than beside it.
-There is no route to step five that avoids steps three and four, which is worth knowing
-before any budget is spent looking for one.
+The third link is where the first draft went wrong.
+It concluded that assembling that system was steps three and four, and so put the
+infrastructure on the critical path.
+At `n = 29` the system does not have to be assembled, because the source published it
+and this repository transcribed it.
+The infrastructure is needed to *generalize* the route to sizes with no published system
+— which is a real and separate reason to build it — but it does not gate this case.
 
 ## Validation runs both directions, and the reverse half is already sound
 
@@ -155,6 +237,11 @@ The reverse direction is what makes the forward one worth attempting.
 `sqpack.field` proves irreducibility and isolates the real root; `sqpack.verify` checks
 separating-axis validity with exact predicates.
 A derivation would be built against a back end that can catch it being wrong.
+That back end is sound for the route this exploration needs — exact substitution into
+the recovered field — and it is the *other* half of step six, interval-Newton and
+Krawczyk, that is absent; see the
+[atlas plan](../../docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
+for the component-by-component reading.
 
 The two guesses are discharged differently, and one of them only partly:
 
@@ -190,10 +277,11 @@ a “not retrievable” verdict is a negative search result and that this archiv
 been wrong about it eight times”.
 
 It would say **nothing about optimality**. The verified lower bound at `n = 29` is
-`5.472135955` from [`E-basic-area-lower`](../../frontier/evidence.yaml), which “uses
-only area and is weaker than the recorded theorem for most cases”.
-Against an upper bound near `5.9339` that leaves a bound gap of about `0.46`. Certifying
-the upper bound does not narrow it.
+`5.472135955` from [`E-nagamochi-lower`](../../frontier/evidence.yaml) — Theorem 2 of
+[Nagamochi 2005], recorded in exact form as `sqrt(29 - 2*floor(sqrt(29)) + 1) + 1`, that
+is `sqrt(20) + 1`. It is a published proof and strictly stronger than the area bound,
+which would give only `sqrt(29)` — about `5.385`. Against an upper bound near `5.9339`
+that leaves a bound gap of about `0.46`. Certifying the upper bound does not narrow it.
 
 ## Candidate hypotheses, unregistered
 
@@ -205,9 +293,8 @@ None is registered, none has a criterion frozen, and none may be run from this d
 2. Integer relation on the serialized side value recovers a minimal polynomial whose
    degree is at most some declared `D`, and that polynomial survives irreducibility,
    root isolation, and exact back-substitution.
-3. The six numerically observed orientation classes correspond to at most some smaller
-   number of exact algebraic angle relations, so the effective unknown count is below
-   seven.
+3. The five tilted orientation classes correspond to at most some smaller number of
+   exact algebraic angle relations, so the effective unknown count is below six.
 4. The reconstructed side from an accepted contact structure equals the input pose’s
    side to within the serialization precision, which is the round-trip criterion that
    distinguishes a correct contact structure from a valid but suboptimal one.

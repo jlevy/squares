@@ -107,11 +107,14 @@ agenda:
     next_evidence: >-
       A probe recorded in X-004 shows this step is not optional. Integer relation run
       directly on the serialized value returns relations at almost every degree from eight
-      to twenty-one, and the degree-eight candidate has a relative residual of 1.26e-90
-      against roughly ninety-eight available digits, having consumed almost exactly the
+      to twenty-one, and the degree-eight candidate has a relative residual of order 1e-90
+      against roughly a hundred available digits, having consumed almost exactly the
       ninety digits the search was allowed. Ninety-eight digits cannot identify the
       minimal polynomial, so precision must be manufactured from the system rather than
-      read from the source.
+      read from the source. At n = 29 that system is published in the provenance SVG and
+      already transcribed in cases/kingbird29/verify_svg.py, where it is evaluated but
+      never solved, so this commitment drives an existing transcription rather than
+      waiting on BC-042 and BC-043.
     note: >-
       Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
       phase 3, high-precision refinement.
@@ -155,9 +158,11 @@ agenda:
       `sqpack.verify` checks separating-axis validity with exact predicates. The unbuilt
       half would be constructed against a back end that can catch it being wrong.
       Elimination is the scaling risk: n = 11 reduces to two unknowns and n = 17 to three,
-      while n = 29 carries six numerically observed orientation classes and so roughly
-      seven. A route that works at two or three unknowns may not terminate at seven, which
-      is why the integer-relation route is not a fallback but a parallel candidate.
+      while n = 29 has six orientation classes of which one is the axis class, leaving five
+      tilted angles and six unknowns. The source's own solve is a six-by-six system, so this
+      is measured rather than estimated. A route that works at two or three unknowns may
+      still not terminate at six, which is why the integer-relation route is a parallel
+      candidate rather than a fallback.
   - id: BC-045
     purpose: tool_validation
     owner_focus: correctness
@@ -329,8 +334,9 @@ Block 5 is independent of everything and may run whenever the symbolic lane stal
 
 ## What this agenda may not claim
 
-- That a promoted pose certifies a reported value, until interval certification
-  discharges it.
+- That a promoted pose certifies a reported value, until the claim is discharged: by
+  exact substitution into the recovered field, or failing that by interval
+  certification.
 - That the `4.93e-31` Schadt relaxation is progress toward the `n = 29` record.
   The distance to that record is about `1e26` times larger.
 - Atlas saturation, census completeness, or any rarity verdict while `distinct_basins`

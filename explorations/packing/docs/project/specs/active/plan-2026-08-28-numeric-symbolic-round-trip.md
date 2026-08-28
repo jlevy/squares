@@ -62,14 +62,25 @@ orders of magnitude — worst touching margin `-4.05e-101` against smallest stri
 separation `3.617e-02`, over 406 pairs — and the structure is already computed: 52 pair
 contacts and 37 container contacts, 89 incidences.
 
-**There is no shortcut to the solve.** Running integer relation directly on the
-serialized side value returns relations at almost every degree from eight to twenty-one,
-which is the signature of an under-determined search.
-The degree-eight candidate has a relative residual of `1.26e-90` against roughly
-ninety-eight available digits, having consumed almost exactly the ninety it was
-permitted. Ninety-eight digits cannot identify the minimal polynomial, so precision has
-to be manufactured from the closed system rather than read from the source.
-Both measurements are recorded in
+**The serialized digits are not enough, but the system is already public.** Running
+integer relation directly on the serialized side value returns relations at almost every
+degree from eight to twenty-one, which is the signature of an under-determined search.
+The degree-eight candidate has a relative residual of order `1e-90` against roughly a
+hundred available digits, having consumed almost exactly the ninety it was permitted.
+That first probe’s parameters were not recorded and it is not reproducible as written;
+X-004 carries a fully parameterized replacement, which finds no relation at all through
+degree sixteen at 700 digits.
+Ninety-eight digits cannot identify the minimal polynomial, so precision has to be
+manufactured from the closed system rather than read from the source.
+
+That system, at `n = 29`, is published rather than pending: the provenance SVG carries
+nine slide scalars and six equations in `{s, a, b, c, d, i}`, and
+[`cases.kingbird29.verify_svg`](../../../../cases/kingbird29/verify_svg.py) already
+transcribes them for a residual check.
+Solving that same transcription reaches 420 digits in about two seconds.
+The assembler below is therefore about generalizing to sizes with no published system,
+not about unblocking this one.
+All three measurements are recorded in
 [X-004](../../../../campaign/explorations/X-004-n29-exact-promotion.md).
 
 That is why the D-021 floor matters even though `n = 29` does not need it.
@@ -180,11 +191,11 @@ unchanged and applies here as it did to exp-045.
 - What is the degree of `s(29)`'s minimal polynomial?
   Unknown, and it decides whether integer relation is viable and at what precision.
   The probe bounds only what ninety-eight digits can reach, not the true degree.
-- Does elimination terminate at roughly seven unknowns?
+- Does elimination terminate at six unknowns?
   `n = 11` reduces to two and `n = 17` to three; Gröbner cost is severe in variable
   count. Integer relation is a parallel candidate rather than a fallback for this reason.
-- Do the six numerically observed orientation classes correspond to fewer exact
-  algebraic relations, lowering the effective unknown count?
+- Do the five tilted orientation classes correspond to fewer exact algebraic relations,
+  lowering the effective unknown count below six?
 - Is the exact LP purely rational for the cells that matter, or does it need algebraic
   coefficients? SYNOPSIS notes it is rational only for rational-coefficient cells.
 

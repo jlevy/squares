@@ -60,7 +60,12 @@ Turning a float vector into a certified algebraic number goes:
 6. **Certify.** Prove the polynomial irreducible, isolate the intended real root, and
    substitute back exactly.
 
-Step 1 and step 6 are built and sound in this repository.
+Step 1 is built. Step 6 is **half built**: irreducibility, root isolation and the exact
+separating-axis predicates exist, and they are sufficient for the exact-substitution
+route this spec takes; interval-Newton, Krawczyk and the `PoseBox` scalar do not exist,
+and they are what a purely numerical enclosure would need.
+Phase 4 therefore discharges its candidate by exact substitution, and the certification
+bridge is out of scope here — it is agenda-005’s BC-045, not a phase of this spec.
 **Steps 2 through 5 are the gap**, and this spec builds them.
 
 Two facts a reviewer should hold onto:
@@ -93,17 +98,32 @@ Running the existing reconstruction:
 Contact and non-contact are separated by about **ninety-nine orders of magnitude**. The
 structure is already computed; the work is to freeze it, not to infer it.
 
-**There is no shortcut to the solve.** Running integer relation directly on the
-serialized side value returns relations at almost every degree from 8 to 21 — the
-signature of an under-determined search.
-The degree-8 candidate has a relative residual of `1.26e-90` against ~98 available
+**The serialized digits are not enough, but the closed system is already public.**
+Running integer relation directly on the serialized side value returns relations at
+almost every degree from 8 to 21 — the signature of an under-determined search.
+The degree-8 candidate has a relative residual of order `1e-90` against ~100 available
 digits, having consumed almost exactly the 90 it was allowed.
+That first probe’s parameters were unrecorded and it is not reproducible as written;
+X-004 carries a parameterized replacement that returns no relation at any degree through
+16 at 700 digits, which is the contrast the margin rule below encodes.
 A genuine minimal polynomial vanishes to full input precision.
 **Ninety-eight digits cannot identify the polynomial**, so precision must be
 *manufactured from the closed system*.
 
-That forces the phase order: solve needs precision, precision needs refinement,
-refinement needs the closed system.
+At `n = 29` that system does not have to be built.
+The archived provenance SVG publishes all nine slide scalars and all six equations
+`f1 … f6` in `{s, a, b, c, d, i}`, and
+[`cases.kingbird29.verify_svg`](../../../../cases/kingbird29/verify_svg.py) already
+transcribes every one of them — using them only to evaluate residuals at the serialized
+pose, never to solve.
+Handing that same transcription to a root finder reproduces the record to all 15
+published digits and reaches a residual of `8.85e-421` in about two seconds.
+
+So the phase order still holds — solve needs precision, precision needs refinement,
+refinement needs the closed system — but phases 1 and 2 are **not** what unblocks
+`n = 29`. They are what makes the route apply to sizes where no system was published.
+`n = 29` can be driven from phase 3 onward today, and this spec’s phase order should be
+read as building generality, not as clearing a blocker.
 
 ## Goals
 
@@ -171,26 +191,61 @@ Frozen, serializable, and soft-schema’d like every other durable artifact here
 Sketch:
 
 ```python
+ContactType = Literal["corner-edge", "edge-edge", "corner-corner"]
+
+
 @dataclass(frozen=True)
 class Incidence:
-    kind: str          # "pair" | "wall"
-    a: int             # square index
-    b: int | None      # square index, or None for a wall
-    wall: str | None   # "x0" | "x1" | "y0" | "y1"
-    margin: str        # exact decimal string of the measured separation
+    kind: str  # "pair" | "wall"
+    contact: ContactType  # decides the equation's form, so it is not optional
+    a: int  # square index
+    a_feature: str  # "corner:0".."corner:3" | "edge:0".."edge:3"
+    b: int | None  # square index, or None for a wall
+    b_feature: str | None  # same vocabulary; None for a wall
+    wall: str | None  # "x0" | "x1" | "y0" | "y1"
+    margin: str  # exact decimal string of the measured separation
+
 
 @dataclass(frozen=True)
 class ContactStructure:
     n: int
     incidences: tuple[Incidence, ...]
-    angle_classes: tuple[tuple[int, ...], ...]   # squares grouped by shared angle
-    separation_floor: str    # smallest strict separation, as a decimal string
-    ambiguous: tuple[Incidence, ...]             # MUST be empty to proceed
+    angle_classes: tuple[tuple[int, ...], ...]  # squares grouped by shared angle
+    separation_floor: str  # smallest strict separation, as a decimal string
+    ambiguous: tuple[Incidence, ...]  # MUST be empty to proceed
 ```
 
 `ambiguous` is the load-bearing field.
 An incidence is ambiguous when its margin is not separated from the strict floor by a
 declared factor. A non-empty `ambiguous` is a refusal, not a warning.
+
+**Why the feature fields are required.** A contact is not fully described by *which two
+squares* touch; the equation depends on *which features* meet.
+A corner-edge contact contributes one scalar equation and one free slide parameter along
+the edge; an edge-edge contact contributes an angle identity plus an overlap-interval
+condition, which is a different equation and not a single scalar; a corner-corner
+contact is a codimension-two coincidence.
+At `n = 29` fifteen of the twenty-nine squares are axis-aligned, so edge-edge contacts
+are common rather than exceptional and cannot be folded into the corner-edge case.
+Extraction must therefore identify the realising feature pair, and must refuse when the
+realising pair is not unique.
+
+```python
+@dataclass(frozen=True)
+class ContactSystem:
+    unknowns: tuple[str, ...]  # surviving symbols, in a declared canonical order
+    slides: tuple[str, ...]  # one scalar per corner-edge contact point
+    centre_map: tuple[tuple[int, str, str], ...]  # square index -> (x, y) in unknowns
+    equations: tuple[str, ...]  # SymPy srepr, one per incidence
+    closure: tuple[str, ...]  # determinant conditions added by close()
+```
+
+`centre_map` is the elimination: every square’s centre is written as an anchor plus a
+chain of rotations, so the unknowns reduce to `s`, the distinct angles, and the slide
+scalars. The archived `n = 29` source is a worked instance of exactly this shape — nine
+slide scalars `r1..rD`, each a closed-form expression in `{s, a, b, c, d, i}`, and six
+closing equations `f1..f6` written as one rotated component of a difference of two
+corner positions. `assemble` and `close` should be checked against it directly.
 
 ### API changes
 
@@ -222,8 +277,17 @@ precision and novelty are recorded rather than asserted in prose.
 - [ ] Reproduce the known `n = 11` system: two unknowns after reduction.
 - [ ] Refuse, with the specific incidence named, when the graph does not admit
   elimination.
-- [ ] Negative control: drop one incidence and require the system to be underdetermined
-  rather than silently solvable.
+- [ ] Negative control, two parts.
+  Dropping an incidence is **not** a valid control: the raw system is redundant — 89
+  incidences plus angle identities against 88 raw unknowns at `n = 29` — so removing one
+  equation leaves it exactly as solvable, and a control that cannot fail is not a
+  control. Instead:
+  1. **Underdetermination.** Withhold `close()` and require the unclosed system to be
+     reported as underdetermined, with the count of surviving unknowns and equations
+     named. Closure is what makes the counts meet, so this control can genuinely fail.
+  2. **Wrong structure.** Replace one true incidence with a nearby false one and require
+     either a typed refusal at assembly or a reported non-convergence at phase 3 — never
+     a silently returned root.
 
 ### Phase 3: High-precision refinement
 
@@ -239,11 +303,22 @@ precision and novelty are recorded rather than asserted in prose.
 
 - [ ] `promote/solve.py` with two independent routes: elimination via SymPy, and integer
   relation via mpmath `pslq`.
-- [ ] **Margin rule.** A degree-`d` relation with coefficients up to `10^k` is accepted
-  only when the residual is far below what `(d+1)*k` digits could manufacture.
-  Record digits used, digits available, and the ratio.
-  This is the rule the planning probe violated, and it is why that probe’s degree-8
-  “relation” was spurious.
+- [ ] **Margin rule**, frozen as a decidable test rather than a caution.
+  Let `C` be the largest absolute integer coefficient the relation *actually* carries —
+  not the search’s `maxcoeff` bound, which overstates it — and let the manufacturable
+  budget be `B = (d + 1) * log10(C)`. A candidate is accepted only when all three hold:
+  1. **Budget.** The relative residual is below `10^-(B + M)`, with the margin fixed at
+     `M = 200` decimal digits for this project.
+  2. **Stability under precision.** Re-evaluated at `2B + 2M` digits, the residual keeps
+     falling to the evaluation floor instead of resting at `10^-B`. A spurious relation
+     is pinned to the budget that produced it; a genuine one is not.
+     This is the cheap decisive test and it is mandatory.
+  3. **Independent digits.** The value is supplied by a phase-3 refinement whose
+     *reported residual bound* is below `10^-(B + M)`. “Digits available” always means
+     that bound — never the number of digits a source happens to print.
+     Record `d`, `C`, `B`, `M`, the residual at `B`, and the residual at `2B + 2M`.
+     Clause 2 is what the planning probe lacked, and it is why that probe’s degree-8
+     “relation” was reported as spurious.
 - [ ] `promote/roundtrip.py`: build a `NumberField` from the candidate, prove
   irreducibility, isolate the root, rebuild the packing, and call `verify_packing` with
   `exact_sign`.
@@ -307,12 +382,13 @@ human. That rule is unchanged and applied to exp-045 already.
 - **What degree is `s(29)`'s minimal polynomial?** Unknown, and it decides whether
   integer relation is viable and at what precision.
   The planning probe bounds only what 98 digits can reach, not the true degree.
-- **Does elimination terminate at ~7 unknowns?** `n = 11` reduces to 2 and `n = 17` to
-  3; `n = 29` has 6 observed angle classes, so roughly 7. Gröbner cost is severe in
-  variable count. This is why phase 4 builds *two* routes rather than a route and a
-  fallback.
-- **Do the 6 observed angle classes collapse to fewer exact relations**, lowering the
-  effective unknown count?
+- **Does elimination terminate at 6 unknowns?** `n = 11` reduces to 2 and `n = 17` to 3.
+  `n = 29` has 6 orientation classes of which one is the axis class, so 5 tilted angles
+  plus `s` gives 6 — settled by the source’s own six-by-six solve rather than estimated.
+  Gröbner cost is severe in variable count.
+  This is why phase 4 builds *two* routes rather than a route and a fallback.
+- **Do the 5 tilted angle classes collapse to fewer exact relations**, lowering the
+  effective unknown count below 6?
 - **Is the exact LP purely rational for the cells that matter**, or does it need
   algebraic coefficients?
   It is rational only for rational-coefficient cells.

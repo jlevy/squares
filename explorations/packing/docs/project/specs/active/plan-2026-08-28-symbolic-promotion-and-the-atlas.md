@@ -91,9 +91,11 @@ The certified bound sits about `5.23e-5` above the actual record, and that recor
 verified here at all.
 
 Session 032 tightened the Schadt relaxation from `4.93e-11` to `4.93e-31`, a factor of
-`1e20`. **The distance to the real record is roughly `1e26` times larger than that
-entire improvement.** The tightening was correct, cheap, and irrelevant to the frontier;
-it moved a quantity that does not bear on closing the gap.
+`1e20`. **The distance to the real record, `5.23e-5`, is about `1e6` times that entire
+improvement** — and about `1e26` times the `4.93e-31` that remains.
+An earlier draft of this line quoted the second ratio against the first quantity.
+Either reading gives the same verdict: the tightening was correct, cheap, and irrelevant
+to the frontier; it moved a quantity that does not bear on closing the gap.
 Recording that here so the next session prices the two kinds of work differently.
 
 ## Two programs, not one
@@ -122,8 +124,12 @@ relation would still leave `n = 29` uncertified.
    from non-contact by about ninety-nine orders of magnitude, and the structure is
    already computed. The real first blocker is that the source carries about ninety-eight
    digits, which a probe in X-004 shows cannot identify a minimal polynomial.
-   More digits require Newton refinement, refinement requires the closed system, and so
-   the chain has no shortcut.
+   More digits require Newton refinement, and refinement requires the closed system —
+   which at `n = 29` is published in the provenance SVG and already transcribed in
+   [`cases.kingbird29.verify_svg`](../../../../cases/kingbird29/verify_svg.py), where it
+   is evaluated but never solved.
+   Precision at this size is available today; gaps 2 and 3 below are what generalize the
+   route to sizes with no published system.
 2. **Contact-equation assembly and closure**, including the determinant conditions that
    keep the problem root-finding rather than minimization.
    Root-finding reaches the precision step five needs; minimization does not.
@@ -149,8 +155,10 @@ exactly the shape of the flattering soundness defects this repository already lo
 
 ## What this plan does not authorize
 
-- No claim that a promoted pose certifies a reported value until interval certification
-  discharges it.
+- No claim that a promoted pose certifies a reported value until the claim is discharged
+  — either by exact substitution into the recovered field, which is the stronger route
+  and the pipeline’s own success path, or by interval certification where only a
+  numerical enclosure is available.
 - No treatment of the `4.93e-31` relaxation as progress toward the `n = 29` record.
 - No atlas saturation, census completeness, or rarity claim while `distinct_basins`
   counts keys.
