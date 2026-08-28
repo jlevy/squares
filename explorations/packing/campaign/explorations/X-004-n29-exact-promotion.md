@@ -163,6 +163,32 @@ Re-solving the transcribed system directly confirms this:
 Precision at `n = 29` is not a thing to be manufactured by new infrastructure.
 It is available now, to any depth, from a system this repository transcribed months ago.
 
+### The two halves of the source agree
+
+The solve can be checked against something it cannot influence.
+`verify_svg` derives the orientation classes from the SVG’s parsed `<use>` transforms —
+the packing’s *geometry* — while `f1 … f6` are the packing’s *equations*. The two are
+independent readings of the same source, and this repository had only ever run the
+first.
+
+| Unknown | Solved from the equations | Measured from the geometry | Class size |
+| --- | --- | --- | ---: |
+| — | (axis class) | `0.0` | 15 |
+| `a` | `25.2586553084` | `25.2586553083514058513567614369` | 1 |
+| `b` | `20.8001267627` | `20.8001267626996105663146232033` | 9 |
+| `c` | `17.5062684757` | `-17.5062684757323675007868691576` | 1 |
+| `d` | `24.9625879894` | `24.9625879894377186810714309248` | 2 |
+| `i` | `24.3083584013` | `24.3083584013469067264676340473` | 1 |
+
+They agree to every digit compared, and the class sizes total
+`15 + 1 + 9 + 1 + 2 + 1 = 29`. The sign on `c` is the layout’s, not a discrepancy: the
+class is recorded in the canonical `[-45, 45)` interval while the equations carry the
+unsigned angle.
+
+This also settles the unknown count by direct observation rather than by argument.
+Six orientation classes, one of them the axis class, leave five tilted angles; with `s`
+that is six unknowns, matching the source’s own six-by-six solve.
+
 The measurement in the next section stands unchanged; only the inference drawn from it
 was wrong.
 Ninety-eight digits genuinely cannot identify the minimal polynomial — but the
