@@ -113,7 +113,7 @@ jobs:
 
       - name: The package builds and imports on arm64 macOS
         run: >-
-          uv run --frozen python -c "import sqpack, sqpack.field, sqpack.verify,
+          uv run --frozen --all-extras --group dev python -c "import sqpack, sqpack.field, sqpack.verify,
           sqpack.witness, sqpack.promote.refine, sqpack.promote.contacts;
           print('sqpack imports on', __import__('platform').machine())"
 

@@ -180,7 +180,22 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         checkout = next(
             step for step in steps if str(step.get("uses", "")).startswith("actions/checkout@")
         )
-        assert _mapping(checkout["with"])["fetch-depth"] == 0
+        depth = _mapping(checkout.get("with") or {}).get("fetch-depth")
+        commands = [str(step["run"]) for step in steps if isinstance(step.get("run"), str)]
+        # Full history is needed by exactly one thing: the provenance step, which
+        # verifies historical engine commits rather than only HEAD. A job that runs the
+        # whole gate reaches it; a job restricted with `--only` does not. Tying the
+        # requirement to the reason rather than to the job name lets a narrow job clone
+        # shallow, and still fails if a full-gate job is made shallow.
+        runs_whole_gate = any(
+            "packing-validate" in command and "--only" not in command for command in commands
+        )
+        if runs_whole_gate:
+            assert depth == 0, f"{job_name} runs the whole gate and needs full history"
+        else:
+            assert not any("provenance" in command for command in commands), (
+                f"{job_name} is shallow but names the provenance surface"
+            )
 
         setup_uv = next(
             step
@@ -237,35 +252,48 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
     required_command = " ".join(str(_mapping(required_job_steps[0])["run"]).split())
     assert required_command == 'test "$VALIDATE_RESULT" = "success"'
 
-    mac_steps = _mapping(jobs["macos-portability"])["steps"]
-    assert isinstance(mac_steps, list)
+    # The macOS job is a second-architecture smoke check, not a second full gate.
+    # It used to run the whole surface, which reached the composite-PDF step, whose
+    # `cairosvg` needs a `libcairo` the runner does not have -- so it failed on every
+    # push to main regardless of content. These assertions pin the narrow shape so it
+    # cannot quietly grow back into a duplicate of `validate`.
     mac_job = _mapping(jobs["macos-portability"])
-    assert mac_job["if"] == "github.event_name != 'pull_request'"
+    raw_mac_steps = mac_job["steps"]
+    assert isinstance(raw_mac_steps, list)
+    mac_steps = [_mapping(step) for step in raw_mac_steps]
+    assert "if" not in mac_job, (
+        "the macOS check is cheap enough to run on pull requests; skipping them is why "
+        "the libcairo breakage was only ever visible after a merge"
+    )
     assert "continue-on-error" not in mac_job
-    assert all("continue-on-error" not in _mapping(step) for step in mac_steps)
-    mac_full_step = next(
-        _mapping(step)
-        for step in mac_steps
-        if _mapping(step).get("name")
-        == "Run the complete packing validation surface on a second architecture"
+    assert all("continue-on-error" not in step for step in mac_steps)
+
+    mac_commands = [str(step["run"]) for step in mac_steps if isinstance(step.get("run"), str)]
+    gate_commands = [command for command in mac_commands if "packing-validate" in command]
+    assert gate_commands, "the macOS job runs no validation at all"
+    assert all("--only" in command for command in gate_commands), (
+        "every macOS gate command must be restricted with --only; an unrestricted run "
+        "reaches the composite-PDF step and its missing libcairo"
     )
-    assert " ".join(str(mac_full_step["run"]).split()) == (
-        "uv run --frozen --all-extras --group dev packing-validate --jobs 2 --inner-jobs 2"
+    assert not any("--deep" in command for command in gate_commands), (
+        "a deep rebuild is not a platform question and belongs on Linux"
     )
-    deep_probes = [
-        _mapping(step)
-        for step in mac_steps
-        if _mapping(step).get("name") == "Run the focused deep-golden portability check"
-    ]
-    assert len(deep_probes) == 1
-    deep_command = " ".join(str(deep_probes[0]["run"]).split())
-    assert deep_command == (
-        "uv run --frozen --all-extras --group dev packing-validate --deep "
-        '--only "golden basin maps" --jobs 1 --inner-jobs 1'
+
+    # The surfaces a second architecture could actually disagree about.
+    selected = " ".join(gate_commands)
+    for surface in (
+        "exact verification",
+        "verifier perturbation limits",
+        "small-n exact models",
+        "golden basin maps",
+    ):
+        assert f'"{surface}"' in selected, f"macOS no longer checks {surface}"
+
+    assert any("import sqpack" in command for command in mac_commands), (
+        "the macOS job must prove the package imports on the second architecture"
     )
     assert all(
-        "check_known_macos_golden_drift" not in str(_mapping(step).get("run", ""))
-        for step in mac_steps
+        "check_known_macos_golden_drift" not in str(step.get("run", "")) for step in mac_steps
     )
 
 
