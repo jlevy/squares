@@ -1285,7 +1285,7 @@ equal squares for `n = 11, 29` and `37`” — and §7 explains what that means 
 
 > The best known packing is due to Trump and apparently to many other people.
 > In [3] we find that `s₁₁ ≤ 3.8772` for a packing given in Fig.
-> 3. We have obtained **this packing** several times with `s₁₁ = 3.87708359…`, a result
+> 3\. We have obtained **this packing** several times with `s₁₁ = 3.87708359…`, a result
 > which is slightly better.
 
 So the improvement is to the **recorded numerical bound** — Friedman’s rounded `3.8772`

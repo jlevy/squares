@@ -78,20 +78,19 @@ Emergency bypass: `git commit --no-verify` (avoid in PRs).
 
 ## Architecture Overview
 
-Two top-level trees hold the content.
+All content lives in one self-contained project directory,
+[`explorations/packing/`](explorations/packing/README.md).
+It owns *everything* for its topic: its own reports under `docs/project/research/`, its
+own literature archive under `resources/`, and its own code and tests.
+That directory is the pattern any future exploration should follow.
 
-- **`docs/project/research/`** — standalone research reports that need nothing but
-  themselves. [Its README](docs/project/research/README.md) is the index.
-- **`explorations/`** — self-contained project directories.
-  Each one owns *everything* for its topic: its own reports under
-  `docs/project/research/`, its own literature archive under `resources/`, and its own
-  code and tests. [`explorations/packing/`](explorations/packing/README.md) is the worked
-  example and the pattern to follow.
-
-The split is by self-containment, not by subject.
-A report that stands alone lives in `docs/`; a report that comes with sources and code
-moves into an `explorations/` directory alongside them, so the whole line of work can be
-read, run, and moved as one unit.
+This repository used to carry standalone research reports at the top level as well,
+under `docs/project/research/`. Those moved to
+[jlevy/thinking](https://github.com/jlevy/thinking), with their history, when this
+repository became dedicated to square packing.
+Do not reintroduce a top-level `docs/` tree for reports; a line of work that needs its
+own sources and code gets its own exploration directory, and one that does not belongs
+in the other repository.
 
 ## Conventions & Patterns
 
