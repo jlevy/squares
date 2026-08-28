@@ -152,11 +152,25 @@ def test_catalogue_rigid_is_a_transcription_and_carries_no_judgement() -> None:
     for n in (1, 4, 9, 16, 25, 36, 49, 64, 81, 100):
         assert _case(n)["reported_upper_bound"]["catalogue_rigid"] == NOT_STATED
 
-    # Silence is not evidence, so a transcription never populates the first-party field.
+    # Silence is not evidence, so a `not-stated` transcription may never appear as a
+    # first-party rigidity claim. The first-party field is now populated for every n by
+    # devtools/assess_frontier_rigidity.py, which is why this asserts what the block may
+    # SAY rather than that it is absent: `not-rigid` and `undetermined` are findings of
+    # ours, and neither borrows the catalogue's word.
     for n in range(1, 101):
-        if n == 11:
-            continue
-        assert _case(n)["rigidity"] is None
+        recorded = _case(n)["reported_upper_bound"]["catalogue_rigid"]
+        rigidity = _case(n)["rigidity"]
+        assert rigidity is not None, f"n={n}: rigidity is unassessed"
+        if recorded == NOT_STATED and rigidity["property"] == "locally-rigid":
+            # Only an argument of our own may claim rigidity where the source is silent.
+            assert rigidity["assurance"] == "verified", (
+                f"n={n}: claims rigidity the catalogue does not state, without a "
+                f"verified first-party argument"
+            )
+    # And a source that DOES say rigid still never supplies the finding.
+    for n in (5, 28, 40):
+        assert _case(n)["reported_upper_bound"]["catalogue_rigid"] == "rigid"
+        assert _case(n)["rigidity"]["property"] == "undetermined"
 
 
 def test_the_first_party_finding_for_n11_is_carried_with_its_assurance() -> None:

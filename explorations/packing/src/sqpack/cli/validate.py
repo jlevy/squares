@@ -569,6 +569,26 @@ def _prospective_atlas(context: Context) -> str:
     return output
 
 
+def _frontier_rigidity(context: Context) -> str:
+    """Every rigidity block still follows from the screen and the tiling argument.
+
+    The counts are pinned because they are the finding: 84 records are NOT rigid on a
+    replayable certificate, ten are rigid by an exact tiling with no slack, and five are
+    assessed and unsettled. `undetermined` is a result and is not the same as the field
+    being null; n=11 is excluded here because a stronger first-party argument owns it.
+    """
+    output = _module(context, "devtools.assess_frontier_rigidity", "--check")
+    _require_text(output, "frontier rigidity check passed")
+    review = _module(context, "devtools.assess_frontier_rigidity", "--review")
+    _require_text(
+        review,
+        "assessed: 10 locally-rigid, 84 not-rigid, 5 undetermined, "
+        "1 left to a stronger argument",
+    )
+    _require_text(review, "left to a stronger argument: n = [11]")
+    return output + review
+
+
 def _translation_escape_screen(context: Context) -> str:
     """The single-square translation screen, rebuilt from the witnesses every run.
 
@@ -1062,6 +1082,7 @@ STEPS: tuple[Step, ...] = (
     Step("exact verification", _exact_verification, fast=True),
     Step("verifier perturbation limits", _verifier_limits, fast=True),
     Step("frontier corpus", _frontier_corpus),
+    Step("frontier rigidity assessed here", _frontier_rigidity, fast=True),
     Step("generated tables in sync with frontier/", _generated_tables, fast=True),
     Step("strategy catalogues", _strategy_catalogues, fast=True),
     Step("defect log", _defect_log, fast=True),
