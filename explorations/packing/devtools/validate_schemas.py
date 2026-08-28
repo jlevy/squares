@@ -35,6 +35,28 @@ from sqpack.yamlio import load_yaml
 FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
 WITNESSES = FRONTIER.parent / "witnesses"
 DOCUMENT_MAP = FRONTIER.parent / "docs" / "project" / "document-map.yaml"
+KNOWN_BEST_MANIFEST = FRONTIER.parent / "atlas" / "known-best" / "manifest.json"
+CHUNK_PARTITION_ATLAS = FRONTIER.parent / "atlas" / "known-best" / "chunk-partitions.json"
+CONTACT_ASSEMBLY_GRAMMAR = (
+    FRONTIER.parent / "atlas" / "known-best" / "contact-assembly-grammar.yaml"
+)
+CONTACT_ENUMERATION_PRICING = (
+    FRONTIER.parent / "atlas" / "known-best" / "contact-enumeration-pricing.json"
+)
+CONTACT_FULL_CELL_CONTROL = (
+    FRONTIER.parent / "atlas" / "known-best" / "contact-full-cell-control.json"
+)
+CONTACT_OVERLAY_GALLERY = FRONTIER.parent / "atlas" / "known-best" / "contact-overlays.json"
+CHUNK_EVIDENCE_PROFILE = (
+    FRONTIER.parent / "atlas" / "known-best" / "chunk-evidence-profile.json"
+)
+PROSPECTIVE_SOURCE_AVAILABILITY = (
+    FRONTIER.parent / "atlas" / "prospective" / "source-availability-101-324.json"
+)
+PROSPECTIVE_ATLAS_SEED = FRONTIER.parent / "atlas" / "prospective" / "manifest.json"
+CONTACT_SCAFFOLD_ATLAS = (
+    FRONTIER.parent / "atlas" / "enumerated" / "contact-scaffolds-size5.json"
+)
 
 
 def load_schema(name: str) -> dict:
@@ -202,9 +224,19 @@ def main() -> int:
     datasets = sorted(p for p in FRONTIER.glob("*.yaml") if not p.name.endswith(".schema.yaml"))
     datasets += [FRONTIER.parent / "defects.yaml"]
     datasets += sorted(
-        path for path in WITNESSES.glob("*.yaml") if not path.name.endswith(".schema.yaml")
+        path for path in WITNESSES.rglob("*.yaml") if not path.name.endswith(".schema.yaml")
     )
     datasets.append(DOCUMENT_MAP)
+    datasets.append(KNOWN_BEST_MANIFEST)
+    datasets.append(CHUNK_PARTITION_ATLAS)
+    datasets.append(CONTACT_ASSEMBLY_GRAMMAR)
+    datasets.append(CONTACT_ENUMERATION_PRICING)
+    datasets.append(CONTACT_FULL_CELL_CONTROL)
+    datasets.append(CONTACT_OVERLAY_GALLERY)
+    datasets.append(CHUNK_EVIDENCE_PROFILE)
+    datasets.append(PROSPECTIVE_SOURCE_AVAILABILITY)
+    datasets.append(PROSPECTIVE_ATLAS_SEED)
+    datasets.append(CONTACT_SCAFFOLD_ATLAS)
     if not md or not datasets:
         print("frontier/ artifacts not found", file=sys.stderr)
         return 2

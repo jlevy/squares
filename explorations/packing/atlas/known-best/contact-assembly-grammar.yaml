@@ -1,0 +1,141 @@
+softschema:
+  contract: packing.squares:ContactAssemblyGrammar/v1
+  schema: contact-assembly-grammar.schema.yaml
+  envelope: grammar
+  status: enforced
+
+grammar:
+  version: contact-assembly-v1-draft
+  status: calibration-draft
+  evidence_role: >-
+    A finite proposer design derived from the inspected n=1..100 corpus. It is an
+    engineering calibration contract, not an H-044 instrument or scientific freeze.
+  primitives:
+  - id: rigid-lattice
+    semantics: >-
+      A contiguous bar, filled rectangle, or corner L with fixed integer offsets in one
+      fitted orientation; the bounded lattice partition atlas is its independent control.
+    continuous_freedom: one shared angle and one component translation before wall seating
+  - id: contact-scaffold
+    semantics: >-
+      A connected graph of mandatory positive-length edge contacts. Every edge records
+      local normal axis, sign, and member IDs; non-edges are unconstrained and additional
+      contacts may appear during the cell solve.
+    continuous_freedom: >-
+      One shared angle plus square centers subject to normal-distance equalities and a
+      declared positive tangential-overlap margin; tangential slides remain LP variables.
+  label_fields:
+  - square partition into assemblies and free squares
+  - primitive kind per assembly
+  - fitted-angle class assignment modulo quarter turns
+  - mandatory contact graph with normal axis and sign
+  - mandatory wall contacts
+  - canonical graph label and symmetry-orbit witness
+  - full-cell square-by-wall Boolean decision inventory
+  - exhaustive full-cell contact/non-edge pair partition
+  - one endpoint-owned local axis and pair order per full-cell pair
+  continuous_semantics:
+  - Every contact normal distance is exactly one unit in the assembly frame.
+  - Every mandatory contact has tangential overlap at least the declared minimum_overlap.
+  - Contact scaffolds do not freeze tangential offsets; the fixed-angle LP solves them.
+  - Non-edges are not separation claims and may become active contacts after realization.
+  - Wall hypotheses are equalities in the container frame and are charged in the label.
+  - FullFixedAngleCellLabel/v1 records total wall state structurally; it does not yet compile or enforce wall-equality rows.
+  - The full-cell layer freezes one oriented axis for each contact and non-edge while retaining the scaffold layer's non-edge-free semantics.
+  - The current local realization prefilter accepts one fitted-angle class only and rejects mixed vertex colors before solving.
+  complexity:
+    ordered_tuple:
+    - free_square_count
+    - assembly_count
+    - internal_slide_dof
+    - fitted_angle_class_count
+    - mandatory_contact_count
+    - largest_assembly_size
+    internal_slide_formula: >-
+      For an m-square contact scaffold, D = 2m - rank(A_normal) - 2, where A_normal is
+      the combined u-normal and v-normal incidence system and two translations are removed.
+    non_vacuity_rule: >-
+      A connected component costs one assembly plus its internal slide count D. One giant
+      connected component therefore cannot masquerade as one rigid, zero-cost chunk.
+    scalar_budget: null
+    required_runtime_caps:
+    - maximum assemblies
+    - maximum internal slide degrees
+    - maximum fitted-angle classes
+    - maximum free squares
+    - maximum assembly size
+    - minimum positive overlap
+    - maximum candidate scaffolds
+    - maximum emitted canonical labels
+    - maximum orbit images
+    - maximum LP solves
+  canonicalization:
+  - Canonicalize under square relabeling and all D4 container symmetries.
+  - Treat quarter-turn-equivalent local axes as the same orientation class.
+  - Preserve edge normal and sign colors, primitive kind, angle-class color, and wall colors.
+  - Require semantic, caller-normalized color tokens; source-local class names are not label inputs.
+  - Emit an orbit witness and reject labels whose replay does not return the canonical form.
+  - Use deterministic tie order over canonical bytes; floating-point endpoint identity is absent.
+  - Transform the partition, fixed angles, every true and false wall decision, contacts, non-edges, and pair axes jointly before minimizing a full-cell label.
+  controls:
+  - id: CG-001
+    expected: A diagonal point contact is not a contact-scaffold edge.
+    status: passing
+  - id: CG-002
+    expected: A tolerance-connected angle chain without one fitted angle is rejected.
+    status: passing
+  - id: CG-003
+    expected: Every square permutation and D4 image has the same canonical label.
+    status: passing
+  - id: CG-004
+    expected: A patch and its one-edge deletion can share a realization while retaining distinct charged labels.
+    status: passing
+  - id: CG-005
+    expected: A giant connected component with positive internal freedom has nonzero slide cost.
+    status: passing
+  - id: CG-006
+    expected: Candidate, emitted-label, and orbit-image caps stop with typed partial coverage rather than silent truncation.
+    status: passing
+  - id: CG-007
+    expected: Source witnesses remain byte-stable when annotations or grammar versions change.
+    status: passing
+  - id: CG-008
+    expected: No n=1..100 calibration output can emit an H-044 verdict.
+    status: passing
+  - id: CG-009
+    expected: The local contact-realization prefilter stops at its LP-solve cap with typed partial coverage.
+    status: passing
+  - id: CG-010
+    expected: A target-free fixed-angle structural cell records every wall decision and pair axis, canonicalizes the full label jointly, and derives its work price without reporting geometry or feasibility.
+    status: passing
+  - id: CG-011
+    expected: Target-free pricing separates raw labels, canonical orbits, duplicates, local LP outcomes, and cap-stopped sizes without consulting atlas geometry.
+    status: passing
+  - id: CG-012
+    expected: The uniform-angle local prefilter rejects mixed fitted-angle classes before spending an LP solve.
+    status: passing
+  completeness_obligations:
+  - Prove finite label generation for every declared runtime-cap tuple.
+  - Count raw labels, canonical orbits, feasibility rejections, and emitted labels separately.
+  - Differentially enumerate small labeled graphs and compare their D4 and permutation orbits.
+  - Retain a rejected-label reason and omission-control receipt for every enumeration run.
+  - Retain exact raw counts and typed execution decisions at n=5 before optimizing the generator.
+  - Re-price canonical generation at n=5 and the declared n=10 control before any target-sized enumeration.
+  evaluation_split:
+    calibration: 'n=1..100'
+    prospective: >-
+      Public full-geometry cases above 100 selected by a source rule frozen before any
+      derived contact annotation is computed.
+    rule: >-
+      Calibration may choose representation and caps. Prospective annotations may only
+      evaluate a committed grammar version; any change creates a new successor claim.
+  next_implementation:
+    bead: think-3yv8
+    slice: >-
+      Run BC-016's bounded deterministic differential over the existing aligned and
+      glued controls before adding a numerical full-cell driver. BC-017's end-to-end
+      work accounting remains ready behind that correctness check.
+    exit: >-
+      The declared controls return stable endpoints and active cells across toolchains
+      and pool widths, or retain one typed instability report. The 11,013-record
+      size-five atlas remains abstract and no target execution or H-044 verdict begins.

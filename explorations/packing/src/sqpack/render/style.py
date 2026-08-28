@@ -28,6 +28,28 @@ SQUARE_FILL_PALETTE = (
     "#00afb9",
     "#c18dd8",
 )
+SQUARE_HUE_PALETTE = (
+    "#00b393",
+    "#854888",
+    "#9fce85",
+    "#86a2ff",
+    "#378c3f",
+    "#00aeee",
+    "#c1a0fb",
+    "#877deb",
+    "#c18dd8",
+    "#7fd6b1",
+    "#00afb9",
+    "#3bb360",
+    "#83c4ff",
+    "#865eb1",
+    "#0096b1",
+    "#0079bf",
+    "#008376",
+    "#78d7d6",
+    "#3d63be",
+    "#7acfe9",
+)
 SQUARE_FILL_OPACITY = 1.0
 PACKING_BOUNDARY_COLOR = "#000000"
 PACKING_BOUNDARY_WIDTH = 1.25
@@ -36,6 +58,10 @@ CONTACT_HIGHLIGHT_OPACITY = 0.6
 CONTACT_HIGHLIGHT_STROKE_WIDTH = 9
 CONTACT_HIGHLIGHT_POINT_RADIUS = 5.5
 CONTACT_CLIP_POLICY = "participating-square-union"
+CONTACT_CENSUS_COLOR = "#d95f02"
+CONTACT_CENSUS_OPACITY = 0.78
+CONTACT_CENSUS_STROKE_WIDTH = 2.5
+CONTACT_CENSUS_DASH = "7 5"
 
 
 @dataclass(frozen=True)

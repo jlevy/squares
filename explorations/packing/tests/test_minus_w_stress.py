@@ -10,6 +10,7 @@ from cases.n5 import minus_w_stress, tangent_cones, tangent_inventory
 
 @pytest.mark.parametrize("stratum", tangent_cones.STRATA)
 @pytest.mark.parametrize("owner", tangent_cones.EXPECTED_CONTACT_BRANCHES)
+@pytest.mark.exhaustive_exact
 def test_w_curvature_is_even_nonzero_and_quadratically_scaled(stratum: str, owner: str) -> None:
     field = face.make_field()
     q = field.rational
@@ -59,6 +60,7 @@ def test_w_curvature_is_even_nonzero_and_quadratically_scaled(stratum: str, owne
     assert doubled == q(4) * positive
 
 
+@pytest.mark.exhaustive_exact
 def test_real_production_weight_perturbation_breaks_cancellation() -> None:
     field = face.make_field()
     q = field.rational
@@ -76,6 +78,7 @@ def test_real_production_weight_perturbation_breaks_cancellation() -> None:
         )
 
 
+@pytest.mark.exhaustive_exact
 def test_uniform_weight_rescaling_fails_exact_normalization() -> None:
     field = face.make_field()
     q = field.rational

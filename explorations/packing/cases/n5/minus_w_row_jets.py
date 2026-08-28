@@ -9,6 +9,8 @@ obstruction.
 from __future__ import annotations
 
 import itertools
+from collections.abc import Mapping
+from dataclasses import dataclass
 
 from cases.n5 import equal_side_face as face
 from cases.n5 import tangent_cones, tangent_inventory
@@ -17,6 +19,41 @@ from sqpack.research.exact_jets import SecondOrderJet, sat_gap, wall_gap
 
 type JetVector = tuple[SecondOrderJet, ...]
 type RowJetMap = dict[str, SecondOrderJet]
+
+
+@dataclass(frozen=True)
+class RowJetInventory:
+    """One field-bound, execution-scoped snapshot of every source stratum's rows.
+
+    The tuple-backed snapshot owns no global cache. Returned dictionaries are fresh
+    shallow copies; callers must replace complete jets rather than mutate nested exact
+    coefficients in place.
+    """
+
+    field: NumberField
+    rows_by_stratum: tuple[tuple[str, tuple[tuple[str, SecondOrderJet], ...]], ...]
+
+    @classmethod
+    def build(cls, field: NumberField) -> RowJetInventory:
+        """Build each registered stratum exactly once for one execution."""
+        return cls(
+            field=field,
+            rows_by_stratum=tuple(
+                (stratum, tuple(active_row_jets(field, stratum).items()))
+                for stratum in tangent_cones.STRATA
+            ),
+        )
+
+    def active_rows(self, field: NumberField, stratum: str) -> RowJetMap:
+        """Return an isolated row mapping after field-identity and stratum checks."""
+        if field is not self.field:
+            raise ValueError("row inventory belongs to a different number field")
+        if stratum not in tangent_cones.STRATA:
+            raise ValueError(f"unknown source stratum {stratum}")
+        for retained_stratum, items in self.rows_by_stratum:
+            if retained_stratum == stratum:
+                return dict(items)
+        raise ValueError(f"row inventory is missing source stratum {stratum}")
 
 
 def _dot(left: JetVector, right: JetVector) -> SecondOrderJet:
@@ -173,11 +210,30 @@ def active_row_jets(field: NumberField, stratum: str) -> RowJetMap:
     return generated
 
 
-def owner_row_jets(field: NumberField, stratum: str, owner: str) -> RowJetMap:
+def owner3_tied_feature_projection(field: NumberField, stratum: str) -> SecondOrderJet:
+    """Return the production projection whose sign selects owner 3's tied feature."""
+    if stratum not in tangent_cones.STRATA:
+        raise ValueError(f"unknown source stratum {stratum}")
+    _centers, frames, frame_names = _pose_jets(field, stratum)
+    owner_axis = frames[3][frame_names[3].index("a+")]
+    tied_generator = frames[4][frame_names[4].index("a-")]
+    projection = _dot(owner_axis, tied_generator)
+    if not projection.value.is_zero():
+        raise ValueError("owner-3 tied feature is not tied at the source pose")
+    return projection
+
+
+def owner_row_jets(
+    field: NumberField,
+    stratum: str,
+    owner: str,
+    *,
+    active_rows: Mapping[str, SecondOrderJet] | None = None,
+) -> RowJetMap:
     """Return one owner's complete rows after exact source-key and gradient validation."""
     if owner not in tangent_cones.EXPECTED_CONTACT_BRANCHES:
         raise ValueError(f"unknown source owner {owner}")
-    generated = active_row_jets(field, stratum)
+    generated = active_row_jets(field, stratum) if active_rows is None else dict(active_rows)
     selected = {
         label: jet for label, jet in generated.items() if not label.startswith("contact:3-4:")
     }

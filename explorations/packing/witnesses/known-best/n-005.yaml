@@ -1,0 +1,81 @@
+softschema:
+  contract: packing.squares:Witness/v1
+  schema: ../witness.schema.yaml
+  envelope: witness
+  status: enforced
+witness:
+  id: W-known-best-n005
+  n: 5
+  side: '2.7071067811865475244008443621'
+  square_size: '1'
+  representation: center-angle
+  scalar:
+    kind: decimal
+  coordinates:
+    origin: lower-left
+    axes: x-right-y-up
+    angle_unit: degrees
+  squares:
+  - id: 1
+    center:
+    - '0.5'
+    - '2.2071067811865475244008443621'
+    angle: '0'
+  - id: 2
+    center:
+    - '2.2071067811865475244008443621'
+    - '2.2071067811865475244008443621'
+    angle: '0'
+  - id: 3
+    center:
+    - '0.5'
+    - '0.5'
+    angle: '0'
+  - id: 4
+    center:
+    - '2.2071067811865475244008443621'
+    - '0.5'
+    angle: '0'
+  - id: 5
+    center:
+    - '1.353553390593273762200422181052424519642417968844237018294169934497683119615526759712596883581910393'
+    - '1.353553390593273762200422181047575480357582031155762981705830065502316880384473240287403116418089607'
+    angle: '45.0'
+  claim:
+    assurance: numerically-checked
+    method: numerical-multiprecision
+    precision:
+      decimal_digits: 120
+      rounding: nearest
+    tolerance: 1e-8
+    limitations: direct retained numerical center/angle facts. The source metadata supplies attribution
+      and provenance; the upstream SVG is not retained because no express redistribution terms were located.
+      This conservative retention policy is not a legal conclusion. The replayed finite-precision numerical
+      check establishes only tolerance-bounded feasibility of these retained facts, not exact geometry,
+      an exact certificate, or optimality.
+  source:
+    key: Kingbird derived numerical facts
+    path: resources/web/known-best-packings/sources.json
+    url: https://kingbird.myphotos.cc/packing/square-5.svg
+    retrieved: '2026-08-26'
+  certificate:
+    kind: numerical-feasibility-receipt
+    replay: uv run --frozen packing-witness check witnesses/known-best/n-005.yaml --method numerical-multiprecision
+      --precision 120 --tolerance 1e-8
+    result:
+      operation: check
+      id: W-known-best-n005
+      assurance: numerically-checked
+      method: numerical-multiprecision
+      precision:
+        decimal_digits: 120
+        rounding: nearest
+      tolerance: 1e-8
+      check_passed: true
+      n: 5
+      pairs_tested: 10
+      minimum_containment_clearance: '0.0'
+      minimum_best_pair_gap: '-2.598666374679421952287667419147907278388e-100'
+      failures: []
+      limitations: Finite-precision evidence only. A small tolerance, including 1e-100, does not establish
+        exact feasibility or optimality.

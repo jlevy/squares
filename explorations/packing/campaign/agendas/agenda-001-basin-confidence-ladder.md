@@ -435,7 +435,7 @@ It is neither a second hypothesis registry nor an executable runner queue.
 The hypotheses say what could be true, experiment artifacts say what was measured, beads
 own unfinished work, and an escalated agent-session artifact owns the active outer clock
 when durable supervision state is needed.
-This agenda says which bounded cell should be attempted next and why.
+This agenda says which bounded commitment should be attempted next and why.
 
 The three purposes prevent calibration from being mistaken for discovery:
 
@@ -456,7 +456,7 @@ The first genuine basin question is the focused `n = 5` connectivity problem.
 Statistical census work begins only after that relation is decidable or its ambiguity is
 bounded.
 
-“Complete” in this file means that the declared bounded cell produced its promised
+“Complete” in this file means that the declared bounded commitment produced its promised
 evidence. It never means that the full basin map is complete.
 A complete basin-map claim requires a validated component relation and a preregistered
 coverage bound in addition to valid terminal events.

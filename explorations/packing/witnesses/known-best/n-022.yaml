@@ -1,0 +1,249 @@
+softschema:
+  contract: packing.squares:Witness/v1
+  schema: ../witness.schema.yaml
+  envelope: witness
+  status: enforced
+witness:
+  id: W-known-best-n022
+  n: 22
+  side: '5'
+  square_size: '1'
+  representation: corners
+  scalar:
+    kind: rational
+  coordinates:
+    origin: lower-left
+    axes: x-right-y-up
+    angle_unit: not-applicable
+  squares:
+  - id: 1
+    corners:
+    - - '0'
+      - '0'
+    - - '1'
+      - '0'
+    - - '1'
+      - '1'
+    - - '0'
+      - '1'
+  - id: 2
+    corners:
+    - - '1'
+      - '0'
+    - - '2'
+      - '0'
+    - - '2'
+      - '1'
+    - - '1'
+      - '1'
+  - id: 3
+    corners:
+    - - '2'
+      - '0'
+    - - '3'
+      - '0'
+    - - '3'
+      - '1'
+    - - '2'
+      - '1'
+  - id: 4
+    corners:
+    - - '3'
+      - '0'
+    - - '4'
+      - '0'
+    - - '4'
+      - '1'
+    - - '3'
+      - '1'
+  - id: 5
+    corners:
+    - - '4'
+      - '0'
+    - - '5'
+      - '0'
+    - - '5'
+      - '1'
+    - - '4'
+      - '1'
+  - id: 6
+    corners:
+    - - '0'
+      - '1'
+    - - '1'
+      - '1'
+    - - '1'
+      - '2'
+    - - '0'
+      - '2'
+  - id: 7
+    corners:
+    - - '1'
+      - '1'
+    - - '2'
+      - '1'
+    - - '2'
+      - '2'
+    - - '1'
+      - '2'
+  - id: 8
+    corners:
+    - - '2'
+      - '1'
+    - - '3'
+      - '1'
+    - - '3'
+      - '2'
+    - - '2'
+      - '2'
+  - id: 9
+    corners:
+    - - '3'
+      - '1'
+    - - '4'
+      - '1'
+    - - '4'
+      - '2'
+    - - '3'
+      - '2'
+  - id: 10
+    corners:
+    - - '4'
+      - '1'
+    - - '5'
+      - '1'
+    - - '5'
+      - '2'
+    - - '4'
+      - '2'
+  - id: 11
+    corners:
+    - - '0'
+      - '2'
+    - - '1'
+      - '2'
+    - - '1'
+      - '3'
+    - - '0'
+      - '3'
+  - id: 12
+    corners:
+    - - '1'
+      - '2'
+    - - '2'
+      - '2'
+    - - '2'
+      - '3'
+    - - '1'
+      - '3'
+  - id: 13
+    corners:
+    - - '2'
+      - '2'
+    - - '3'
+      - '2'
+    - - '3'
+      - '3'
+    - - '2'
+      - '3'
+  - id: 14
+    corners:
+    - - '3'
+      - '2'
+    - - '4'
+      - '2'
+    - - '4'
+      - '3'
+    - - '3'
+      - '3'
+  - id: 15
+    corners:
+    - - '4'
+      - '2'
+    - - '5'
+      - '2'
+    - - '5'
+      - '3'
+    - - '4'
+      - '3'
+  - id: 16
+    corners:
+    - - '0'
+      - '3'
+    - - '1'
+      - '3'
+    - - '1'
+      - '4'
+    - - '0'
+      - '4'
+  - id: 17
+    corners:
+    - - '1'
+      - '3'
+    - - '2'
+      - '3'
+    - - '2'
+      - '4'
+    - - '1'
+      - '4'
+  - id: 18
+    corners:
+    - - '2'
+      - '3'
+    - - '3'
+      - '3'
+    - - '3'
+      - '4'
+    - - '2'
+      - '4'
+  - id: 19
+    corners:
+    - - '3'
+      - '3'
+    - - '4'
+      - '3'
+    - - '4'
+      - '4'
+    - - '3'
+      - '4'
+  - id: 20
+    corners:
+    - - '4'
+      - '3'
+    - - '5'
+      - '3'
+    - - '5'
+      - '4'
+    - - '4'
+      - '4'
+  - id: 21
+    corners:
+    - - '0'
+      - '4'
+    - - '1'
+      - '4'
+    - - '1'
+      - '5'
+    - - '0'
+      - '5'
+  - id: 22
+    corners:
+    - - '1'
+      - '4'
+    - - '2'
+      - '4'
+    - - '2'
+      - '5'
+    - - '1'
+      - '5'
+  claim:
+    assurance: verified
+    method: exact-algebraic
+    limitations: Verifies this known-best upper-bound construction, not uniqueness; optimality comes only
+      from the separately cited frontier lower bound.
+  source:
+    key: E-basic-grid-upper
+    path: frontier/n-022.md
+  certificate:
+    kind: exact-rational-sat
+    replay: uv run --frozen packing-witness verify witnesses/known-best/n-022.yaml

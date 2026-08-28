@@ -5,10 +5,12 @@ from __future__ import annotations
 from decimal import Decimal
 from xml.etree import ElementTree as ET
 
+from sqpack.render.color import ANGLE_CLASS_CONTRACT, SquareColor, assign_square_colors
 from sqpack.render.model import (
     ActiveFeature,
     AnnotationLevel,
     ContactFeature,
+    DetectedContactFeature,
     Overlay,
     PackingFrame,
     PackingTrajectory,
@@ -27,12 +29,15 @@ from sqpack.render.motion import (
 )
 from sqpack.render.numbers import format_points, format_svg_number, format_visible_number
 from sqpack.render.style import (
+    CONTACT_CENSUS_COLOR,
+    CONTACT_CENSUS_DASH,
+    CONTACT_CENSUS_OPACITY,
+    CONTACT_CENSUS_STROKE_WIDTH,
     CONTACT_CLIP_POLICY,
     CONTACT_HIGHLIGHT_OPACITY,
     LAYOUT,
     PAPER_THEME,
     SQUARE_FILL_OPACITY,
-    color_for_square,
     evidence_style,
     presentation_attributes,
 )
@@ -129,7 +134,7 @@ def _append_square_id(
 def _append_square_fill(
     group: ET.Element,
     square: SquareGeometry,
-    index: int,
+    color: SquareColor,
     *,
     projected: tuple[Point2, ...],
     motion: bool,
@@ -140,12 +145,27 @@ def _append_square_fill(
         {
             "data-feature": "square-fill",
             "data-square": square.square_id,
+            "data-hue-index": str(color.hue_index),
+            "data-shade-index": str(color.shade_index),
+            "data-orientation-radians": str(color.orientation_radians),
             "points": format_points(projected),
-            "fill": color_for_square(index),
+            "fill": color.fill,
             "fill-opacity": str(SQUARE_FILL_OPACITY),
             "stroke": "none",
         },
     )
+    if color.angle_class is not None:
+        node.set("data-angle-class", str(color.angle_class))
+    if color.angle_class_residual_radians is not None:
+        node.set(
+            "data-angle-class-residual-radians",
+            str(color.angle_class_residual_radians),
+        )
+    if color.contact_sides is not None:
+        node.set("data-contact-sides", str(color.contact_sides))
+        node.set("data-full-side-contacts", " ".join(color.full_side_contacts))
+    if color.maximum_contact_residual is not None:
+        node.set("data-maximum-contact-residual", str(color.maximum_contact_residual))
     if motion:
         append_square_motion(node, square.square_id)
 
@@ -314,6 +334,72 @@ def _append_feature_overlay(
             ).text = feature.label
 
 
+def _append_contact_census_overlay(
+    group: ET.Element,
+    frame: PackingFrame,
+    *,
+    side: Decimal,
+    x: Decimal,
+    y: Decimal,
+    scale: Decimal,
+    panel_index: int,
+    motion: bool,
+) -> None:
+    features = tuple(
+        feature for feature in frame.features if isinstance(feature, DetectedContactFeature)
+    )
+    if not features:
+        return
+    overlay = sub(
+        group,
+        "g",
+        {
+            "id": f"panel-{panel_index}-contact-census",
+            "data-layer": "contact-census",
+            "data-overlay": "contact-census",
+            "data-semantics": "tolerance-qualified graph edges, not exact contact loci",
+        },
+    )
+    if motion:
+        append_final_overlay_motion(overlay)
+    for feature in features:
+        start = _project_point(feature.start, side=side, x=x, y=y, scale=scale)
+        end = _project_point(feature.end, side=side, x=x, y=y, scale=scale)
+        attributes = {
+            "id": f"panel-{panel_index}-{feature.feature_id}",
+            "data-feature": (
+                "detected-wall-seating"
+                if feature.wall is not None
+                else "detected-contact-graph-edge"
+            ),
+            "data-squares": " ".join(feature.square_ids),
+            "data-angle-tolerance-radians": str(feature.angle_tolerance_radians),
+            "data-contact-tolerance": str(feature.contact_tolerance),
+        }
+        if feature.wall is not None:
+            attributes["data-wall"] = feature.wall.value
+        else:
+            attributes["data-normal"] = str(feature.normal)
+            attributes["data-residual"] = str(feature.residual)
+        sub(
+            overlay,
+            "line",
+            {
+                **attributes,
+                "x1": format_svg_number(start.x),
+                "y1": format_svg_number(start.y),
+                "x2": format_svg_number(end.x),
+                "y2": format_svg_number(end.y),
+                "stroke": CONTACT_CENSUS_COLOR,
+                "stroke-opacity": str(CONTACT_CENSUS_OPACITY),
+                "stroke-width": str(CONTACT_CENSUS_STROKE_WIDTH),
+                "stroke-dasharray": CONTACT_CENSUS_DASH,
+                "stroke-linecap": "round",
+                "vector-effect": "non-scaling-stroke",
+            },
+        )
+
+
 def _append_caption(root: ET.Element, frame: PackingFrame, *, x: int, y: int) -> None:
     label, dash, icon = evidence_style(frame.evidence)
     relation, digits = format_visible_number(frame.container_side, frame.evidence)
@@ -330,6 +416,50 @@ def _append_caption(root: ET.Element, frame: PackingFrame, *, x: int, y: int) ->
             "stroke-dasharray": dash,
         },
     ).text = f"{icon} {frame.label}: side {relation} {digits} ({label})"
+
+
+def _append_contact_census_legend(
+    root: ET.Element, frame: PackingFrame, *, x: int, y: int
+) -> None:
+    features = tuple(
+        feature for feature in frame.features if isinstance(feature, DetectedContactFeature)
+    )
+    if not features:
+        return
+    angles = sorted({feature.angle_tolerance_radians for feature in features})
+    contacts = sorted({feature.contact_tolerance for feature in features})
+    detail = (
+        f"θ≤{angles[0]} rad; contact≤{contacts[0]}"
+        if len(angles) == len(contacts) == 1
+        else "per-edge tolerances retained in SVG metadata"
+    )
+    sub(
+        root,
+        "line",
+        {
+            "x1": str(x),
+            "y1": str(y - 4),
+            "x2": str(x + 42),
+            "y2": str(y - 4),
+            "stroke": CONTACT_CENSUS_COLOR,
+            "stroke-opacity": str(CONTACT_CENSUS_OPACITY),
+            "stroke-width": str(CONTACT_CENSUS_STROKE_WIDTH),
+            "stroke-dasharray": CONTACT_CENSUS_DASH,
+            "data-feature": "contact-census-legend-swatch",
+        },
+    )
+    sub(
+        root,
+        "text",
+        {
+            "x": str(x + 52),
+            "y": str(y),
+            "font-size": "13",
+            "font-family": "system-ui, sans-serif",
+            "fill": PAPER_THEME.muted,
+            "data-feature": "contact-census-legend",
+        },
+    ).text = f"Detected graph ({detail}); not exact contact geometry"
 
 
 def _append_packing_panel(
@@ -388,11 +518,12 @@ def _append_packing_panel(
         "g",
         {"id": f"panel-{panel_index}-fills", "data-layer": "fills"},
     )
-    for square, index, projected in projected_squares:
+    colors = assign_square_colors(frame, spec)
+    for square, _index, projected in projected_squares:
         _append_square_fill(
             fills,
             square,
-            index,
+            colors[square.square_id],
             projected=projected,
             motion=motion,
         )
@@ -408,6 +539,17 @@ def _append_packing_panel(
             projected_squares={
                 square.square_id: projected for square, _index, projected in projected_squares
             },
+            motion=motion,
+        )
+    if Overlay.CONTACT_CENSUS in spec.overlays:
+        _append_contact_census_overlay(
+            group,
+            frame,
+            side=frame.container_side.projected,
+            x=left,
+            y=top,
+            scale=scale,
+            panel_index=panel_index,
             motion=motion,
         )
     outlines = sub(
@@ -442,6 +584,13 @@ def _append_packing_panel(
             group, frame, side=frame.container_side.projected, x=left, y=top, scale=scale
         )
     _append_caption(root, frame, x=int(left), y=panel_height + LAYOUT.margin + 30)
+    if Overlay.CONTACT_CENSUS in spec.overlays:
+        _append_contact_census_legend(
+            root,
+            frame,
+            x=int(left),
+            y=panel_height + LAYOUT.margin + 56,
+        )
     return scale
 
 
@@ -470,6 +619,14 @@ def build_packing_document(
     append_title_desc(root, spec.title, spec.description)
     records = {
         "annotations": spec.annotations.value,
+        "color-angle-class-contract": ANGLE_CLASS_CONTRACT,
+        "color-angle-tolerance-radians": str(spec.angle_tolerance_radians),
+        "color-full-side-contact-tolerance": str(spec.full_side_contact_tolerance),
+        "color-hue-count": str(spec.hue_count),
+        "color-hue-scheme": spec.hue_scheme.value,
+        "color-shade-scheme": spec.shade_scheme.value,
+        "color-shade-lightness-span": str(spec.shade_lightness_span),
+        "color-shades-per-hue": str(spec.shades_per_hue),
         "evidence": final.evidence.value,
         "source-id": final.source_id,
         "source-url": final.source_url,
@@ -524,10 +681,19 @@ def build_packing_document(
             trajectory,
             scale=scales[0],
             duration_seconds=spec.duration_seconds,
-            reveal_final_overlay=Overlay.CONTACTS in spec.overlays
-            and any(
-                isinstance(feature, ContactFeature)
-                for feature in trajectory.frames[-1].features
+            reveal_final_overlay=(
+                Overlay.CONTACTS in spec.overlays
+                and any(
+                    isinstance(feature, ContactFeature)
+                    for feature in trajectory.frames[-1].features
+                )
+            )
+            or (
+                Overlay.CONTACT_CENSUS in spec.overlays
+                and any(
+                    isinstance(feature, DetectedContactFeature)
+                    for feature in trajectory.frames[-1].features
+                )
             ),
         )
     return root

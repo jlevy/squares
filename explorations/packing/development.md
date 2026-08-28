@@ -17,8 +17,10 @@ Python **3.14 is the only supported minor version**. Local development and CI pi
 interpreter to **3.14.7** through `.python-version` and the workflow.
 Package metadata, Ruff, and BasedPyright express the broader `3.14`-only compatibility
 boundary; `uv.lock` pins dependencies, not the interpreter.
-macOS and Linux are supported development hosts, and CI runs the ordinary full gate on
-both. The Rust search engine uses the stable Cargo toolchain.
+macOS and Linux are supported development hosts.
+Pull requests run the bounded Linux fast surface; integration events run the ordinary
+full gate on both hosts.
+The Rust search engine uses the stable Cargo toolchain.
 
 From this directory:
 
@@ -161,7 +163,7 @@ Checks run concurrently, but their captured output is replayed in declared order
 workers.
 Strict mode cannot be combined with a partial selection and fails on every skip.
 
-Every validation subprocess has a finite 600-second default deadline.
+Every validation subprocess has a finite 900-second default deadline.
 Override it with `--timeout-seconds SECONDS` or `PACKING_VALIDATE_TIMEOUT_SECONDS`;
 values must be positive and finite, and an explicit smaller per-call timeout still wins.
 Mutation-control commands retain their 120-second default deadline and may declare a
@@ -176,9 +178,23 @@ multiple commands, or detached daemons; Windows process-tree cleanup is not yet
 implemented. These limits are why a subprocess timeout is not, by itself, evidence that
 D-239 is resolved.
 
-CI executes the same locked full command on Linux and macOS from
-[`packing-validation.yml`](../../.github/workflows/packing-validation.yml).
-The macOS job also runs the focused deep-golden step directly.
+On pull requests,
+[`packing-validation.yml`](../../.github/workflows/packing-validation.yml) runs
+`packing-validate --fast` on Linux and reports the stable `packing-required` aggregate.
+The fast behavioral step excludes only 21 measured slow nodes declared on nine test
+functions with the `exhaustive_exact` marker; the workflow contract checks that exact
+function set and rejects module-level marking.
+The current combined tree collects 139 tests: the PR command runs 118 and deselects 21
+exhaustive exact cases.
+The first hosted pull-request run finished end to end in 46 seconds, including a
+37-second Linux job and two-second aggregate.
+
+Pushes to `main`, manual dispatches, and the weekly schedule run the complete locked
+command on Linux and macOS. The macOS integration job also runs the focused deep-golden
+step directly. The default validator runs the 118-test core and 21-test exhaustive exact
+branches as separate direct steps.
+Negative controls use at most two workers while honoring the `--inner-jobs` cap;
+integration CI opts into two inner workers explicitly.
 D-203’s temporary expected-failure classifier was removed after the repaired producer
 passed on both architectures; the workflow test rejects its return.
 Never accept a rebuilt golden to make the probe green, and do not add a second CI-only
@@ -307,6 +323,45 @@ owns it.
 
 Gate wall time, solver throughput, pair tests, and time-to-retained-result are useful
 metrics. Line count, abstraction count, and test count are not performance measures.
+
+### Codex research-loop rollups
+
+Use the recursive JSONL scanner when a clocked research session is slow, after a
+material validation-surface change, and as an input to a recurring W5 efficiency sample:
+
+```shell
+uv run --frozen python -m devtools.codex_log_rollup \
+  --sessions-root ~/.codex/sessions \
+  --root-id <codex-task-id> \
+  --format markdown
+```
+
+Repeat `--root-id` to compare task trees, use `--format json` for the stable
+`CodexEfficiencyRollup/v1` contract, and add `--include-turns` only when the full turn
+tree is needed. The scanner follows descendant task ids, removes inherited history from
+current and legacy subagent logs, correlates command polling with its originating
+command when the log permits it, and keeps parent active time, recursive agent-time,
+active union, and parallel overlap separate.
+
+Interpret the timing bounds literally.
+The response envelope is active client time after explicit tools and compaction; it is
+an upper bound that still includes API latency, dispatch, suspension, and uninstrumented
+gaps. Explicit `Reasoning` and `AgentMessage` item timing is a lower-bound model stream
+and is unavailable in older logs.
+Do not call either measure provider-side inference latency.
+An incomplete live turn ends at its last event, so its totals are lower bounds.
+
+The scanner excludes prompt, message, and reasoning prose from its output, but the
+result is not automatically safe to publish: JSON includes local log paths, task ids,
+agent paths, token totals, and shortened normalized command excerpts.
+Review and reduce a report before retaining it in the repository.
+Store compact dated findings and comparison receipts, not raw Codex JSONL or complete
+private command histories.
+
+The session schema continues to represent an efficiency session through
+`workflow_phases[].workflow: efficiency-loop` and `focus: efficiency`. Recursive timing
+belongs in a linked review or versioned scanner artifact because its cardinality and
+privacy boundary do not fit the concise session handoff.
 
 ## Governing Guidelines
 

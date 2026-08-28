@@ -1,0 +1,104 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ContactAssemblyGrammar/v1
+title: Draft contact-assembly proposer grammar
+type: object
+additionalProperties: false
+required:
+  - version
+  - status
+  - evidence_role
+  - primitives
+  - label_fields
+  - continuous_semantics
+  - complexity
+  - canonicalization
+  - controls
+  - completeness_obligations
+  - evaluation_split
+  - next_implementation
+properties:
+  version: {const: contact-assembly-v1-draft}
+  status: {const: calibration-draft}
+  evidence_role: {type: string, minLength: 1}
+  primitives:
+    type: array
+    minItems: 2
+    items:
+      type: object
+      additionalProperties: false
+      required: [id, semantics, continuous_freedom]
+      properties:
+        id: {enum: [rigid-lattice, contact-scaffold]}
+        semantics: {type: string, minLength: 1}
+        continuous_freedom: {type: string, minLength: 1}
+  label_fields:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {type: string, minLength: 1}
+  continuous_semantics:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {type: string, minLength: 1}
+  complexity:
+    type: object
+    additionalProperties: false
+    required:
+      - ordered_tuple
+      - internal_slide_formula
+      - non_vacuity_rule
+      - scalar_budget
+      - required_runtime_caps
+    properties:
+      ordered_tuple:
+        type: array
+        minItems: 6
+        maxItems: 6
+        uniqueItems: true
+        items: {type: string, minLength: 1}
+      internal_slide_formula: {type: string, minLength: 1}
+      non_vacuity_rule: {type: string, minLength: 1}
+      scalar_budget: {type: 'null'}
+      required_runtime_caps:
+        type: array
+        minItems: 1
+        uniqueItems: true
+        items: {type: string, minLength: 1}
+  canonicalization:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {type: string, minLength: 1}
+  controls:
+    type: array
+    minItems: 1
+    items:
+      type: object
+      additionalProperties: false
+      required: [id, expected, status]
+      properties:
+        id: {type: string, pattern: '^CG-[0-9]{3}$'}
+        expected: {type: string, minLength: 1}
+        status: {enum: [passing, unbuilt]}
+  completeness_obligations:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items: {type: string, minLength: 1}
+  evaluation_split:
+    type: object
+    additionalProperties: false
+    required: [calibration, prospective, rule]
+    properties:
+      calibration: {const: 'n=1..100'}
+      prospective: {type: string, minLength: 1}
+      rule: {type: string, minLength: 1}
+  next_implementation:
+    type: object
+    additionalProperties: false
+    required: [bead, slice, exit]
+    properties:
+      bead: {type: string, pattern: '^think-[a-z0-9]+$'}
+      slice: {type: string, minLength: 1}
+      exit: {type: string, minLength: 1}

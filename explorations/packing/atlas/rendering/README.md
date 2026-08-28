@@ -139,6 +139,8 @@ has `connect-src 'none'` and does not require the loopback service.
 
 A retained source perturbation and the endpoint returned by the deterministic quench
 share one geometric scale.
+The left panel’s squares carry deliberately distinct, tiny angle perturbations, so its
+angle-coded hues differ; the returned axis-aligned endpoint shares one hue.
 The source event is candidate evidence, not an optimality certificate.
 
 ### `n = 11`: exact construction overview
@@ -158,7 +160,6 @@ solved.
 The retained roughly 100-digit source reconstructs 29 squares.
 It is evaluated at 160 decimal digits of working precision and tolerance `1e-80`, and
 passes all 406 separating-axis pair checks.
-This larger example exercises deterministic reuse of the 20-color sequence.
 It remains a numerically checked construction, not a formal verification, exact
 certificate, or optimality proof.
 
@@ -178,11 +179,24 @@ Annotations are independent of the view.
 `exact` retains source expressions in namespaced metadata and adjacent XML comments.
 A binary64 source remains identified as binary64 even in an exact-annotation export.
 
-The fixed 20-color fill sequence spans green, cyan, blue, indigo, and violet.
-Its first eleven entries are high-separation anchors for the Trump example; later
-entries add deterministic light and dark companions, and assignment repeats by stable
-square index. Every square and the container use the same 1.25px pure-black stroke, so
-touching shapes do not appear separated by white seams.
+The default color contract is `--hue angle --shade contacts`: equal orientations modulo
+a quarter turn share a hue, while the number of full-side contacts selects one of five
+shades. Four flush sides use the darkest shade and no flush sides use the lightest.
+Angle classes use the full retained numeric precision with a `1e-6`-radian seed
+tolerance; strict full-side contacts merge seeds that represent the same physical
+orientation. The defaults use 20 hue families, five shades, and a `0.2` total lightness
+span. `--hues`, `--shades-per-hue`, and `--shade-span` customize those values;
+`--shade contrast` and the legacy `--hue index --shade sequence` remain explicit
+alternatives.
+
+The near-wall outliers in retained `n = 68` are a useful precision check.
+Their orientations are about `0.009°` to `0.080°` off axis, more than 100 times the
+angle tolerance—and their endpoints do not form full-side contacts.
+Their different hues therefore expose real offsets in that numerical witness rather than
+rounding noise.
+
+Every square and the container use the same 1.25px pure-black stroke, so touching shapes
+do not appear separated by white seams.
 Tempered yellow `#e3c64a` is reserved for contact highlights and is not part of the
 square palette. The 9px segments and 5.5px-radius dots use 60% opacity, are clipped to
 the union of their participating square interiors, and sit above the fills and below the
@@ -309,7 +323,7 @@ the sides of the comparison and moduli figures; those thumbnails are conversion 
 tests, not layout evidence.
 A fit-preserving `sips` document conversion rendered the complete declared viewports at
 `1200×900`, `960×680`, `1280×680`, and `960×680`. The complete gallery was inspected at
-document and screen scale; the pure-black boundaries, cool fills, translucent clipped
+document and screen scale; the pure-black boundaries, square fills, translucent clipped
 contact marks, labels, and final-state attributes survive a renderer that ignores CSS
 animation.
 The focused checker also proves that both comparison containers lie inside the

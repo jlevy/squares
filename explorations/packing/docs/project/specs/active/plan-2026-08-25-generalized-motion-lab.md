@@ -464,7 +464,7 @@ Phase 1 passed its merge checkpoint on 2026-08-26:
   `n = 10`, and `n = 11` verification lanes, 67 negative controls, schema checks, defect
   reconciliation, and documentation checks all passed.
 
-Browser inspection exposed D-338: expanding every low-level solver event into a DOM
+Browser inspection exposed D-348: expanding every low-level solver event into a DOM
 control made long traces unwieldy.
 The repaired timeline renders a 41-event moving window and samples autoplay while
 retaining every event for stepping, download, and replay.

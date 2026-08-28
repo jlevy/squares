@@ -1,0 +1,3143 @@
+{
+  "certificate": {
+    "case_count": 6,
+    "cases": [
+      {
+        "all_active_source_rows_first_order_tight": true,
+        "canonical_minus_W": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "-3/4"
+          ],
+          [
+            "-2",
+            "3/2"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ]
+        ],
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "5/4",
+                "-1/2"
+              ],
+              [
+                "-1/4",
+                "1/2"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner3:a+:square4-feature+1",
+              "contact:3-4:owner3:a+:square4-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "lower_coefficient": [
+            "0",
+            "-1/2"
+          ],
+          "necessary_inequality": "upper-lower <= -margin*abs(delta)",
+          "obstruction_coefficient": [
+            "1/4",
+            "0"
+          ],
+          "owner": "owner3:a+",
+          "realized_sheet_direction": false,
+          "relative_angle_cusp_margin": [
+            "-1/4",
+            "1/2"
+          ],
+          "relative_angle_projection": [
+            "-3/4",
+            "1/2"
+          ],
+          "relative_angle_scale": "delta=o(t), with no O(t^2) assumption",
+          "strict_contradiction": true,
+          "two_scale_exhaustion": "the negative t^2 gap handles delta=o(t^2); the negative cusp term handles every larger o(t) relative-angle scale",
+          "upper_coefficient": [
+            "-1/4",
+            "-1/2"
+          ],
+          "upper_minus_lower": [
+            "-1/4",
+            "0"
+          ],
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "complete_vector_negated": true,
+        "owner": "owner3:a+",
+        "stored_W": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "3/4"
+          ],
+          [
+            "2",
+            "-3/2"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "stratum": "A",
+        "zero_owner_axes": [
+          "0-4:owner4:a-",
+          "1-4:owner4:a-",
+          "2-4:owner4:a+",
+          "3-4:owner3:a+",
+          "3-4:owner4:a+"
+        ]
+      },
+      {
+        "all_active_source_rows_first_order_tight": true,
+        "canonical_minus_W": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "-3/4"
+          ],
+          [
+            "-2",
+            "3/2"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ]
+        ],
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner4:a+:square3-feature+1",
+              "contact:3-4:owner4:a+:square3-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "excess_coefficient": [
+            "0",
+            "1/8"
+          ],
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "necessary_inequality": "S >= 1+w3/2+3/(2*w4)",
+          "owner": "owner4:a+",
+          "realized_sheet_direction": false,
+          "strict_contradiction": true,
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "complete_vector_negated": true,
+        "owner": "owner4:a+",
+        "stored_W": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "3/4"
+          ],
+          [
+            "2",
+            "-3/2"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "stratum": "A",
+        "zero_owner_axes": [
+          "0-4:owner4:a-",
+          "1-4:owner4:a-",
+          "2-4:owner4:a+",
+          "3-4:owner3:a+",
+          "3-4:owner4:a+"
+        ]
+      },
+      {
+        "all_active_source_rows_first_order_tight": true,
+        "canonical_minus_W": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "-3/4"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ]
+        ],
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "5/4",
+                "-1/2"
+              ],
+              [
+                "-1/4",
+                "1/2"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner3:a+:square4-feature+1",
+              "contact:3-4:owner3:a+:square4-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "lower_coefficient": [
+            "0",
+            "-1/2"
+          ],
+          "necessary_inequality": "upper-lower <= -margin*abs(delta)",
+          "obstruction_coefficient": [
+            "1/4",
+            "0"
+          ],
+          "owner": "owner3:a+",
+          "realized_sheet_direction": false,
+          "relative_angle_cusp_margin": [
+            "-1/4",
+            "1/2"
+          ],
+          "relative_angle_projection": [
+            "-3/4",
+            "1/2"
+          ],
+          "relative_angle_scale": "delta=o(t), with no O(t^2) assumption",
+          "strict_contradiction": true,
+          "two_scale_exhaustion": "the negative t^2 gap handles delta=o(t^2); the negative cusp term handles every larger o(t) relative-angle scale",
+          "upper_coefficient": [
+            "-1/4",
+            "-1/2"
+          ],
+          "upper_minus_lower": [
+            "-1/4",
+            "0"
+          ],
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "complete_vector_negated": true,
+        "owner": "owner3:a+",
+        "stored_W": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "3/4"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "stratum": "interior",
+        "zero_owner_axes": [
+          "0-4:owner4:a-",
+          "1-4:owner4:a-",
+          "2-4:owner4:a+",
+          "3-4:owner3:a+",
+          "3-4:owner4:a+"
+        ]
+      },
+      {
+        "all_active_source_rows_first_order_tight": true,
+        "canonical_minus_W": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "-3/4"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ]
+        ],
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner4:a+:square3-feature+1",
+              "contact:3-4:owner4:a+:square3-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "excess_coefficient": [
+            "0",
+            "1/8"
+          ],
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "necessary_inequality": "S >= 1+w3/2+3/(2*w4)",
+          "owner": "owner4:a+",
+          "realized_sheet_direction": false,
+          "strict_contradiction": true,
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "complete_vector_negated": true,
+        "owner": "owner4:a+",
+        "stored_W": [
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "3/4"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "stratum": "interior",
+        "zero_owner_axes": [
+          "0-4:owner4:a-",
+          "1-4:owner4:a-",
+          "2-4:owner4:a+",
+          "3-4:owner3:a+",
+          "3-4:owner4:a+"
+        ]
+      },
+      {
+        "all_active_source_rows_first_order_tight": true,
+        "canonical_minus_W": [
+          [
+            "-2",
+            "3/2"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "-3/4"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ]
+        ],
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "5/4",
+                "-1/2"
+              ],
+              [
+                "-1/4",
+                "1/2"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner3:a+:square4-feature+1",
+              "contact:3-4:owner3:a+:square4-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "lower_coefficient": [
+            "0",
+            "-1/2"
+          ],
+          "necessary_inequality": "upper-lower <= -margin*abs(delta)",
+          "obstruction_coefficient": [
+            "1/4",
+            "0"
+          ],
+          "owner": "owner3:a+",
+          "realized_sheet_direction": false,
+          "relative_angle_cusp_margin": [
+            "-1/4",
+            "1/2"
+          ],
+          "relative_angle_projection": [
+            "-3/4",
+            "1/2"
+          ],
+          "relative_angle_scale": "delta=o(t), with no O(t^2) assumption",
+          "strict_contradiction": true,
+          "two_scale_exhaustion": "the negative t^2 gap handles delta=o(t^2); the negative cusp term handles every larger o(t) relative-angle scale",
+          "upper_coefficient": [
+            "-1/4",
+            "-1/2"
+          ],
+          "upper_minus_lower": [
+            "-1/4",
+            "0"
+          ],
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "complete_vector_negated": true,
+        "owner": "owner3:a+",
+        "stored_W": [
+          [
+            "2",
+            "-3/2"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "3/4"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "stratum": "B",
+        "zero_owner_axes": [
+          "0-4:owner4:a-",
+          "1-4:owner4:a-",
+          "2-4:owner4:a+",
+          "3-4:owner3:a+",
+          "3-4:owner4:a+"
+        ]
+      },
+      {
+        "all_active_source_rows_first_order_tight": true,
+        "canonical_minus_W": [
+          [
+            "-2",
+            "3/2"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "-3/4"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ],
+          [
+            "-1",
+            "0"
+          ]
+        ],
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner4:a+:square3-feature+1",
+              "contact:3-4:owner4:a+:square3-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "excess_coefficient": [
+            "0",
+            "1/8"
+          ],
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "necessary_inequality": "S >= 1+w3/2+3/(2*w4)",
+          "owner": "owner4:a+",
+          "realized_sheet_direction": false,
+          "strict_contradiction": true,
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "complete_vector_negated": true,
+        "owner": "owner4:a+",
+        "stored_W": [
+          [
+            "2",
+            "-3/2"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "-1",
+            "3/4"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ],
+          [
+            "1",
+            "0"
+          ]
+        ],
+        "stratum": "B",
+        "zero_owner_axes": [
+          "0-4:owner4:a-",
+          "1-4:owner4:a-",
+          "2-4:owner4:a+",
+          "3-4:owner3:a+",
+          "3-4:owner4:a+"
+        ]
+      }
+    ],
+    "determinations": {
+      "obstruction": {
+        "claim": "canonical pure -W is excluded at A, interior, and B",
+        "outcome": "criterion_met"
+      },
+      "sign_symmetry": {
+        "claim": "the -W coefficients equal the separately derived +W values",
+        "outcome": "criterion_met"
+      }
+    },
+    "positive_W_obstruction_oracle": [
+      {
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "5/4",
+                "-1/2"
+              ],
+              [
+                "-1/4",
+                "1/2"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner3:a+:square4-feature+1",
+              "contact:3-4:owner3:a+:square4-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "lower_coefficient": [
+            "0",
+            "-1/2"
+          ],
+          "necessary_inequality": "upper-lower <= -margin*abs(delta)",
+          "obstruction_coefficient": [
+            "1/4",
+            "0"
+          ],
+          "owner": "owner3:a+",
+          "realized_sheet_direction": false,
+          "relative_angle_cusp_margin": [
+            "-1/4",
+            "1/2"
+          ],
+          "relative_angle_projection": [
+            "-3/4",
+            "1/2"
+          ],
+          "relative_angle_scale": "delta=o(t), with no O(t^2) assumption",
+          "strict_contradiction": true,
+          "two_scale_exhaustion": "the negative t^2 gap handles delta=o(t^2); the negative cusp term handles every larger o(t) relative-angle scale",
+          "upper_coefficient": [
+            "-1/4",
+            "-1/2"
+          ],
+          "upper_minus_lower": [
+            "-1/4",
+            "0"
+          ],
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "owner": "owner3:a+",
+        "stratum": "A"
+      },
+      {
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner4:a+:square3-feature+1",
+              "contact:3-4:owner4:a+:square3-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "excess_coefficient": [
+            "0",
+            "1/8"
+          ],
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "necessary_inequality": "S >= 1+w3/2+3/(2*w4)",
+          "owner": "owner4:a+",
+          "realized_sheet_direction": false,
+          "strict_contradiction": true,
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "owner": "owner4:a+",
+        "stratum": "A"
+      },
+      {
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "5/4",
+                "-1/2"
+              ],
+              [
+                "-1/4",
+                "1/2"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner3:a+:square4-feature+1",
+              "contact:3-4:owner3:a+:square4-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "lower_coefficient": [
+            "0",
+            "-1/2"
+          ],
+          "necessary_inequality": "upper-lower <= -margin*abs(delta)",
+          "obstruction_coefficient": [
+            "1/4",
+            "0"
+          ],
+          "owner": "owner3:a+",
+          "realized_sheet_direction": false,
+          "relative_angle_cusp_margin": [
+            "-1/4",
+            "1/2"
+          ],
+          "relative_angle_projection": [
+            "-3/4",
+            "1/2"
+          ],
+          "relative_angle_scale": "delta=o(t), with no O(t^2) assumption",
+          "strict_contradiction": true,
+          "two_scale_exhaustion": "the negative t^2 gap handles delta=o(t^2); the negative cusp term handles every larger o(t) relative-angle scale",
+          "upper_coefficient": [
+            "-1/4",
+            "-1/2"
+          ],
+          "upper_minus_lower": [
+            "-1/4",
+            "0"
+          ],
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "owner": "owner3:a+",
+        "stratum": "interior"
+      },
+      {
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner4:a+:square3-feature+1",
+              "contact:3-4:owner4:a+:square3-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "excess_coefficient": [
+            "0",
+            "1/8"
+          ],
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "necessary_inequality": "S >= 1+w3/2+3/(2*w4)",
+          "owner": "owner4:a+",
+          "realized_sheet_direction": false,
+          "strict_contradiction": true,
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "owner": "owner4:a+",
+        "stratum": "interior"
+      },
+      {
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "5/4",
+                "-1/2"
+              ],
+              [
+                "-1/4",
+                "1/2"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner3:a+:square4-feature+1",
+              "contact:3-4:owner3:a+:square4-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "lower_coefficient": [
+            "0",
+            "-1/2"
+          ],
+          "necessary_inequality": "upper-lower <= -margin*abs(delta)",
+          "obstruction_coefficient": [
+            "1/4",
+            "0"
+          ],
+          "owner": "owner3:a+",
+          "realized_sheet_direction": false,
+          "relative_angle_cusp_margin": [
+            "-1/4",
+            "1/2"
+          ],
+          "relative_angle_projection": [
+            "-3/4",
+            "1/2"
+          ],
+          "relative_angle_scale": "delta=o(t), with no O(t^2) assumption",
+          "strict_contradiction": true,
+          "two_scale_exhaustion": "the negative t^2 gap handles delta=o(t^2); the negative cusp term handles every larger o(t) relative-angle scale",
+          "upper_coefficient": [
+            "-1/4",
+            "-1/2"
+          ],
+          "upper_minus_lower": [
+            "-1/4",
+            "0"
+          ],
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "owner": "owner3:a+",
+        "stratum": "B"
+      },
+      {
+        "certificate": {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": false,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner4:a+:square3-feature+1",
+              "contact:3-4:owner4:a+:square3-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "excess_coefficient": [
+            "0",
+            "1/8"
+          ],
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "necessary_inequality": "S >= 1+w3/2+3/(2*w4)",
+          "owner": "owner4:a+",
+          "realized_sheet_direction": false,
+          "strict_contradiction": true,
+          "width_second_order": {
+            "square3": [
+              "0",
+              "-1/2"
+            ],
+            "square4": [
+              "0",
+              "-1/2"
+            ]
+          }
+        },
+        "owner": "owner4:a+",
+        "stratum": "B"
+      }
+    ],
+    "realized_sheet_oracle": {
+      "compatible_no_contradiction": true,
+      "curve": "exp-034 positive sheet-angle curve at A",
+      "exact_fixture": {
+        "container_contacts": 11,
+        "cosine": "9999/10001",
+        "endpoint": "left",
+        "pairs_tested": 10,
+        "q_abs": "1/100",
+        "rotation_sign": 1,
+        "sine": "200/10001",
+        "strict_pairs": 7,
+        "touching_pairs": 3,
+        "valid": true
+      },
+      "generic_evaluator_certificates": [
+        {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": true,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "5/4",
+                "-1/2"
+              ],
+              [
+                "-1/4",
+                "1/2"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner3:a+:square4-feature+1",
+              "contact:3-4:owner3:a+:square4-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "lower_coefficient": [
+            "0",
+            "0"
+          ],
+          "necessary_inequality": "upper-lower <= -margin*abs(delta)",
+          "obstruction_coefficient": [
+            "0",
+            "0"
+          ],
+          "owner": "owner3:a+",
+          "realized_sheet_direction": true,
+          "relative_angle_cusp_margin": [
+            "-1/4",
+            "1/2"
+          ],
+          "relative_angle_projection": [
+            "-3/4",
+            "1/2"
+          ],
+          "relative_angle_scale": "delta=o(t), with no O(t^2) assumption",
+          "strict_contradiction": false,
+          "two_scale_exhaustion": "the negative t^2 gap handles delta=o(t^2); the negative cusp term handles every larger o(t) relative-angle scale",
+          "upper_coefficient": [
+            "0",
+            "0"
+          ],
+          "upper_minus_lower": [
+            "0",
+            "0"
+          ],
+          "width_second_order": {
+            "square3": [
+              "0",
+              "0"
+            ],
+            "square4": [
+              "0",
+              "0"
+            ]
+          }
+        },
+        {
+          "arbitrary_little_o_angle_corrections_eliminated": true,
+          "compatible_second_order_correction": true,
+          "eliminator": {
+            "all_arbitrary_second_order_pose_corrections_cancel": true,
+            "pose_correction_coefficients": [
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ],
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "positive_weights": [
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/4"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "0",
+                "1/2"
+              ],
+              [
+                "1",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ],
+              [
+                "1/2",
+                "0"
+              ]
+            ],
+            "row_labels": [
+              "wall:2:x-lower:+",
+              "wall:2:x-lower:-",
+              "wall:2:y-lower:+",
+              "wall:2:y-lower:-",
+              "wall:3:x-upper",
+              "wall:3:y-upper",
+              "contact:2-4:owner4:a+",
+              "contact:3-4:owner4:a+:square3-feature+1",
+              "contact:3-4:owner4:a+:square3-feature-1"
+            ],
+            "side_coefficient": [
+              "0",
+              "1"
+            ]
+          },
+          "excess_coefficient": [
+            "0",
+            "0"
+          ],
+          "feasible_subsequence_owner_branch_exhausted": true,
+          "necessary_inequality": "S >= 1+w3/2+3/(2*w4)",
+          "owner": "owner4:a+",
+          "realized_sheet_direction": true,
+          "strict_contradiction": false,
+          "width_second_order": {
+            "square3": [
+              "0",
+              "0"
+            ],
+            "square4": [
+              "0",
+              "0"
+            ]
+          }
+        }
+      ],
+      "normalized_angle_velocity": {
+        "dtheta0": [
+          "1",
+          "0"
+        ]
+      },
+      "normalized_center_second_order": {
+        "x0": [
+          "-1/4",
+          "0"
+        ],
+        "y0": [
+          "-1/4",
+          "0"
+        ]
+      },
+      "normalized_center_velocity": {
+        "dx0": [
+          "1/2",
+          "0"
+        ],
+        "dy0": [
+          "1/2",
+          "0"
+        ]
+      }
+    }
+  },
+  "contract": "packing.squares:N5MinusWObstruction/v1",
+  "controls": {
+    "angle_only_negation_rejected": {
+      "actual_failure_id": "source.minus_w",
+      "expected_failure_id": "source.minus_w",
+      "passed": true
+    },
+    "geometry_constant_drift_rejected": {
+      "actual_failure_id": "source.geometry",
+      "expected_failure_id": "source.geometry",
+      "passed": true
+    },
+    "missing_interior_rejected": {
+      "actual_failure_id": "source.strata",
+      "expected_failure_id": "source.strata",
+      "passed": true
+    },
+    "missing_owner_rejected": {
+      "actual_failure_id": "source.owner_exhaustion",
+      "expected_failure_id": "source.owner_exhaustion",
+      "passed": true
+    },
+    "missing_tied_row_rejected": {
+      "actual_failure_id": "source.tied_rows",
+      "expected_failure_id": "source.tied_rows",
+      "passed": true
+    },
+    "owner3_upper_term_rejected": {
+      "actual_failure_id": "certificate.owner3_sign",
+      "expected_failure_id": "certificate.owner3_sign",
+      "passed": true
+    },
+    "owner4_width_sign_rejected": {
+      "actual_failure_id": "certificate.owner4_sign",
+      "expected_failure_id": "certificate.owner4_sign",
+      "passed": true
+    },
+    "realized_sheet_overclaim_rejected": {
+      "actual_failure_id": "control.realized_direction",
+      "expected_failure_id": "control.realized_direction",
+      "passed": true
+    },
+    "retained_correction_coordinate_rejected": {
+      "actual_failure_id": "certificate.acceleration_correction",
+      "expected_failure_id": "certificate.acceleration_correction",
+      "passed": true
+    },
+    "scaled_farkas_identity_rejected": {
+      "actual_failure_id": "certificate.acceleration_farkas",
+      "expected_failure_id": "certificate.acceleration_farkas",
+      "passed": true
+    },
+    "scope_overclaim_rejected": {
+      "actual_failure_id": "scope.overclaim",
+      "expected_failure_id": "scope.overclaim",
+      "passed": true
+    },
+    "tilted_minus_w_rejected": {
+      "actual_failure_id": "source.first_order",
+      "expected_failure_id": "source.first_order",
+      "passed": true
+    }
+  },
+  "determinations": {
+    "obstruction": {
+      "claim": "canonical pure -W is excluded at A, interior, and B",
+      "outcome": "criterion_met"
+    },
+    "sign_symmetry": {
+      "claim": "the -W coefficients equal the separately derived +W values",
+      "outcome": "criterion_met"
+    }
+  },
+  "field": "Q(sqrt(2)), sqrt(2) in (1,2)",
+  "positive_obstruction_control": {
+    "exp_036_exact_regeneration_bound": true,
+    "orientation": "+W"
+  },
+  "schema_version": 1,
+  "scope_refusals": {
+    "all_refused": true,
+    "refused_claims": [
+      "Ri_plus_lambda_W_plus_s",
+      "other_mixed_direction",
+      "other_transverse_direction",
+      "whole_polytope_classification",
+      "whole_stationary_component",
+      "A_to_B_stationary_connection",
+      "local_isolation",
+      "terminality",
+      "quench_selection",
+      "basin_mass",
+      "census_completeness",
+      "unequal_side_clearance",
+      "minus_W_obstruction_from_candidate_failure"
+    ]
+  },
+  "sources": {
+    "exact_regeneration_matches": true,
+    "records": {
+      "exp_034": "campaign/series/series-000-smoke-and-calibration/results/exp-034-h-023-n5-angle-sheet.json",
+      "exp_035": "campaign/series/series-000-smoke-and-calibration/results/exp-035-h-023-n5-tangent-cones.json",
+      "exp_036": "campaign/series/series-000-smoke-and-calibration/results/exp-036-h-023-n5-second-order-obstruction.json",
+      "exp_038": "campaign/series/series-000-smoke-and-calibration/results/exp-038-h-023-n5-tangent-inventory.json"
+    }
+  }
+}

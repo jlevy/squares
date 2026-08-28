@@ -1,0 +1,63 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ContactOverlayGallery/v1
+title: Known-best descriptive contact-overlay gallery
+type: object
+additionalProperties: false
+required:
+- generated_by
+- claim_status
+- corpus
+- annotations
+- sweep
+- angle_tolerance_radians
+- contact_tolerance
+- visual_semantics
+- selection_policy
+- entries
+properties:
+  generated_by: {type: string, minLength: 1}
+  claim_status: {const: calibration-no-verdict}
+  corpus: {const: manifest.json}
+  annotations: {const: chunk-components.json}
+  sweep: {const: registered-angle-contact}
+  angle_tolerance_radians: {type: string, pattern: '^[0-9.eE+-]+$'}
+  contact_tolerance: {type: string, pattern: '^[0-9.eE+-]+$'}
+  visual_semantics: {type: string, minLength: 1}
+  selection_policy: {type: string, minLength: 1}
+  entries:
+    type: array
+    minItems: 5
+    maxItems: 5
+    items:
+      type: object
+      additionalProperties: false
+      required:
+      - n
+      - selection_rule
+      - source_kind
+      - rendering
+      - component_count
+      - contact_edge_count
+      - wall_seating_edge_count
+      - free_square_count
+      - internal_slide_dof
+      - topology_counts
+      properties:
+        n: {type: integer, minimum: 1, maximum: 100}
+        selection_rule: {type: string, minLength: 1}
+        source_kind: {enum: [kingbird-derived-facts, unitsquare-rendering]}
+        rendering: {type: string, pattern: '^contact-overlays/n-[0-9]{3}\.svg$'}
+        component_count: {type: integer, minimum: 1}
+        contact_edge_count: {type: integer, minimum: 1}
+        wall_seating_edge_count: {type: integer, minimum: 0}
+        free_square_count: {type: integer, minimum: 0}
+        internal_slide_dof: {type: integer, minimum: 0}
+        topology_counts:
+          type: object
+          additionalProperties: false
+          properties:
+            contact-chain: {type: integer, minimum: 1}
+            contact-patch: {type: integer, minimum: 1}
+            contact-tree: {type: integer, minimum: 1}
+            singleton: {type: integer, minimum: 1}
+          minProperties: 1

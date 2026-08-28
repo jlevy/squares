@@ -18,9 +18,11 @@ from devtools.packing_render_adapters import (
 )
 from sqpack.render import (
     AnnotationLevel,
+    HueScheme,
     Overlay,
     PackingFrame,
     RenderSpec,
+    ShadeScheme,
     ViewLevel,
     render_packing_svg,
 )
@@ -41,6 +43,32 @@ def _add_render_options(parser: argparse.ArgumentParser) -> None:
         action=argparse.BooleanOptionalAction,
         default=True,
         help="show certified exact contacts when the source provides them (default: on)",
+    )
+    parser.add_argument(
+        "--hue",
+        choices=[value.value for value in HueScheme],
+        default=HueScheme.ANGLE.value,
+        help="choose hue families by angle or stable square index (default: angle)",
+    )
+    parser.add_argument(
+        "--shade",
+        choices=[value.value for value in ShadeScheme],
+        default=ShadeScheme.CONTACTS.value,
+        help="shade by fully flush sides, contrast, or stable sequence (default: contacts)",
+    )
+    parser.add_argument("--hues", type=int, default=20)
+    parser.add_argument("--shades-per-hue", type=int, default=5)
+    parser.add_argument(
+        "--shade-span",
+        type=Decimal,
+        default=Decimal("0.2"),
+        help="total HSL lightness span across each hue family (default: 0.2)",
+    )
+    parser.add_argument(
+        "--full-side-tolerance",
+        type=Decimal,
+        default=Decimal("2e-6"),
+        help="maximum endpoint residual for a full-side contact (default: 2e-6)",
     )
     parser.add_argument("--output", type=Path, required=True)
 
@@ -93,6 +121,12 @@ def build_spec(args: argparse.Namespace) -> RenderSpec:
         view=ViewLevel(args.view),
         annotations=AnnotationLevel(args.annotations),
         overlays=overlays,
+        hue_scheme=HueScheme(args.hue),
+        shade_scheme=ShadeScheme(args.shade),
+        hue_count=args.hues,
+        shades_per_hue=args.shades_per_hue,
+        shade_lightness_span=args.shade_span,
+        full_side_contact_tolerance=args.full_side_tolerance,
     )
 
 

@@ -57,6 +57,31 @@ Copyable starting points live in `assets/`: the four schemas, the idea-board tem
 and a starter ledger generator that also runs the whole-set invariant checks.
 Copy them into the campaign directory and cut them down; do not import them.
 
+## Session startup and time slices
+
+Before multi-hour work starts, write a bounded plan through the next coherent
+integration checkpoint.
+Unless the user declares another cadence, target that checkpoint within about four hours
+and divide the path into slices no longer than 30 minutes, including validation and
+finalization.
+
+Identify independent read-only or disjoint-write work that available sub-agents can run
+in parallel. One coordinator owns shared records, integration, scientific judgment,
+commits, and external updates.
+When the queue and runtime capacity permit, keep three to five sub-agents on concrete,
+bounded work rather than serializing independent source, implementation, and audit
+lanes. Do not manufacture duplicate or speculative tasks just to fill a slot.
+
+Treat long CI as asynchronous evidence, not as a work phase.
+After dispatch, record the run and continue with independent local work; check CI only
+at a declared integration or finalization boundary, and never spend an iteration slice
+polling an unchanged run.
+
+At each slice boundary, compare measured command, coordinator, and delegated elapsed
+time with the original estimates and the remaining critical path.
+Shorten, split, reorder, or defer only future slices; never move a declared deadline or
+alter a frozen hypothesis, criterion, regime, or scientific budget after seeing results.
+
 ## What a finished campaign leaves behind
 
 Four things, all checked into the repo:

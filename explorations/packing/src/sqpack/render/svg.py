@@ -11,7 +11,7 @@ from strif import atomic_output_file
 
 SVG_NS = "http://www.w3.org/2000/svg"
 SQPACK_NS = "https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1"
-RENDERER_VERSION = "5"
+RENDERER_VERSION = "7"
 XML_DECLARATION = '<?xml version="1.0" encoding="UTF-8"?>\n'
 MOTION_MARKER = "sqpack-motion-v1"
 MOTION_MEDIA_PREFIX = "@media (prefers-reduced-motion: no-preference){"
@@ -78,10 +78,15 @@ def append_title_desc(root: ET.Element, title: str, description: str) -> None:
     sub(root, "desc", {"id": "figure-description"}).text = description
 
 
-def append_metadata(root: ET.Element, records: dict[str, str]) -> ET.Element:
+def append_metadata(
+    root: ET.Element,
+    records: dict[str, str],
+    *,
+    coordinates: str = "mathematical-y-up; svg-y-down",
+) -> ET.Element:
     metadata = sub(root, "metadata")
     profile = sub(metadata, "profile", {"version": RENDERER_VERSION})
-    sub(profile, "coordinates").text = "mathematical-y-up; svg-y-down"
+    sub(profile, "coordinates").text = coordinates
     for key, value in sorted(records.items()):
         node = sub(profile, "value", {"name": key})
         node.text = value

@@ -1,0 +1,1144 @@
+{
+  "profile": {
+    "aggregate": {
+      "case_count": 36,
+      "contact_component_count": 169,
+      "coverage_threshold_cases": {
+        "at_least_50_percent": 35,
+        "at_least_75_percent": 33,
+        "at_least_90_percent": 27
+      },
+      "fully_structured_cases": 10,
+      "internal_slide_dof": 859,
+      "narrow_partition_status_counts": {
+        "established": 3,
+        "not-established": 23,
+        "not-established-search-limit": 8,
+        "outside-registered-budget": 2
+      },
+      "sensitivity_comparison": {
+        "changed_case_count": 3,
+        "changed_ns": [
+          68,
+          69,
+          71
+        ],
+        "primary_structured_square_count": 1780,
+        "sensitivity_structured_square_count": 1793,
+        "within_budget_flip_ns": [
+          69
+        ]
+      },
+      "source_strata": [
+        {
+          "case_count": 34,
+          "fully_structured_cases": 10,
+          "sensitivity_changed_ns": [
+            71
+          ],
+          "source_kind": "kingbird-derived-facts",
+          "square_count": 1723,
+          "structured_fraction": "0.96691816599",
+          "structured_square_count": 1666,
+          "within_six_components_and_three_free_cases": 25
+        },
+        {
+          "case_count": 2,
+          "fully_structured_cases": 0,
+          "sensitivity_changed_ns": [
+            68,
+            69
+          ],
+          "source_kind": "unitsquare-rendering",
+          "square_count": 137,
+          "structured_fraction": "0.832116788321",
+          "structured_square_count": 114,
+          "within_six_components_and_three_free_cases": 0
+        }
+      ],
+      "square_count": 1860,
+      "structured_fraction": "0.956989247312",
+      "structured_square_count": 1780,
+      "within_six_components_and_three_free_cases": 25
+    },
+    "cases": [
+      {
+        "n": 5,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 0,
+          "contact_edge_count": 0,
+          "free_square_count": 5,
+          "internal_slide_dof": 0,
+          "largest_component_size": 1,
+          "structured_fraction": "0",
+          "structured_square_count": 0,
+          "wall_seated_square_count": 4,
+          "within_six_components_and_three_free": false
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 5
+      },
+      {
+        "n": 10,
+        "narrow_partition": {
+          "selected_chunk_count": 3,
+          "selected_free_square_count": 2,
+          "selected_partition_minimality": "complete",
+          "status": "established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 3,
+          "contact_edge_count": 5,
+          "free_square_count": 2,
+          "internal_slide_dof": 5,
+          "largest_component_size": 3,
+          "structured_fraction": "0.8",
+          "structured_square_count": 8,
+          "wall_seated_square_count": 8,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 10
+      },
+      {
+        "n": 11,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 2,
+          "contact_edge_count": 7,
+          "free_square_count": 3,
+          "internal_slide_dof": 5,
+          "largest_component_size": 5,
+          "structured_fraction": "0.727272727273",
+          "structured_square_count": 8,
+          "wall_seated_square_count": 8,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 11
+      },
+      {
+        "n": 17,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 3,
+          "contact_component_count": 3,
+          "contact_edge_count": 11,
+          "free_square_count": 5,
+          "internal_slide_dof": 7,
+          "largest_component_size": 6,
+          "structured_fraction": "0.705882352941",
+          "structured_square_count": 12,
+          "wall_seated_square_count": 11,
+          "within_six_components_and_three_free": false
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 17
+      },
+      {
+        "n": 18,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 3,
+          "contact_edge_count": 18,
+          "free_square_count": 2,
+          "internal_slide_dof": 8,
+          "largest_component_size": 8,
+          "structured_fraction": "0.888888888889",
+          "structured_square_count": 16,
+          "wall_seated_square_count": 10,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 18
+      },
+      {
+        "n": 19,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 4,
+          "contact_edge_count": 18,
+          "free_square_count": 2,
+          "internal_slide_dof": 8,
+          "largest_component_size": 6,
+          "structured_fraction": "0.894736842105",
+          "structured_square_count": 17,
+          "wall_seated_square_count": 10,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 19
+      },
+      {
+        "n": 26,
+        "narrow_partition": {
+          "selected_chunk_count": 6,
+          "selected_free_square_count": 2,
+          "selected_partition_minimality": "complete",
+          "status": "established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 5,
+          "contact_edge_count": 26,
+          "free_square_count": 1,
+          "internal_slide_dof": 14,
+          "largest_component_size": 9,
+          "structured_fraction": "0.961538461538",
+          "structured_square_count": 25,
+          "wall_seated_square_count": 15,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 26
+      },
+      {
+        "n": 27,
+        "narrow_partition": {
+          "selected_chunk_count": 5,
+          "selected_free_square_count": 2,
+          "selected_partition_minimality": "complete",
+          "status": "established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 3,
+          "contact_edge_count": 28,
+          "free_square_count": 2,
+          "internal_slide_dof": 16,
+          "largest_component_size": 10,
+          "structured_fraction": "0.925925925926",
+          "structured_square_count": 25,
+          "wall_seated_square_count": 16,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 27
+      },
+      {
+        "n": 28,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 5,
+          "contact_edge_count": 32,
+          "free_square_count": 0,
+          "internal_slide_dof": 14,
+          "largest_component_size": 12,
+          "structured_fraction": "1",
+          "structured_square_count": 28,
+          "wall_seated_square_count": 16,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 28
+      },
+      {
+        "n": 29,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 6,
+          "contact_component_count": 6,
+          "contact_edge_count": 28,
+          "free_square_count": 3,
+          "internal_slide_dof": 14,
+          "largest_component_size": 9,
+          "structured_fraction": "0.896551724138",
+          "structured_square_count": 26,
+          "wall_seated_square_count": 15,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 29
+      },
+      {
+        "n": 37,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 4,
+          "contact_component_count": 7,
+          "contact_edge_count": 40,
+          "free_square_count": 0,
+          "internal_slide_dof": 20,
+          "largest_component_size": 10,
+          "structured_fraction": "1",
+          "structured_square_count": 37,
+          "wall_seated_square_count": 18,
+          "within_six_components_and_three_free": false
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 37
+      },
+      {
+        "n": 38,
+        "narrow_partition": {
+          "selected_chunk_count": 7,
+          "selected_free_square_count": 2,
+          "selected_partition_minimality": "complete",
+          "status": "outside-registered-budget"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 3,
+          "contact_edge_count": 45,
+          "free_square_count": 2,
+          "internal_slide_dof": 21,
+          "largest_component_size": 15,
+          "structured_fraction": "0.947368421053",
+          "structured_square_count": 36,
+          "wall_seated_square_count": 20,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 38
+      },
+      {
+        "n": 39,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 3,
+          "contact_component_count": 6,
+          "contact_edge_count": 43,
+          "free_square_count": 1,
+          "internal_slide_dof": 23,
+          "largest_component_size": 11,
+          "structured_fraction": "0.974358974359",
+          "structured_square_count": 38,
+          "wall_seated_square_count": 20,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 39
+      },
+      {
+        "n": 40,
+        "narrow_partition": {
+          "selected_chunk_count": 9,
+          "selected_free_square_count": 0,
+          "selected_partition_minimality": "complete",
+          "status": "outside-registered-budget"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 5,
+          "contact_edge_count": 48,
+          "free_square_count": 0,
+          "internal_slide_dof": 22,
+          "largest_component_size": 16,
+          "structured_fraction": "1",
+          "structured_square_count": 40,
+          "wall_seated_square_count": 20,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 40
+      },
+      {
+        "n": 41,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 3,
+          "contact_component_count": 4,
+          "contact_edge_count": 50,
+          "free_square_count": 2,
+          "internal_slide_dof": 21,
+          "largest_component_size": 17,
+          "structured_fraction": "0.951219512195",
+          "structured_square_count": 39,
+          "wall_seated_square_count": 20,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 41
+      },
+      {
+        "n": 50,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 5,
+          "contact_edge_count": 67,
+          "free_square_count": 0,
+          "internal_slide_dof": 26,
+          "largest_component_size": 16,
+          "structured_fraction": "1",
+          "structured_square_count": 50,
+          "wall_seated_square_count": 24,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 50
+      },
+      {
+        "n": 51,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 4,
+          "contact_component_count": 7,
+          "contact_edge_count": 65,
+          "free_square_count": 0,
+          "internal_slide_dof": 25,
+          "largest_component_size": 14,
+          "structured_fraction": "1",
+          "structured_square_count": 51,
+          "wall_seated_square_count": 24,
+          "within_six_components_and_three_free": false
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 51
+      },
+      {
+        "n": 52,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established-search-limit"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 3,
+          "contact_edge_count": 67,
+          "free_square_count": 2,
+          "internal_slide_dof": 27,
+          "largest_component_size": 21,
+          "structured_fraction": "0.961538461538",
+          "structured_square_count": 50,
+          "wall_seated_square_count": 24,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 52
+      },
+      {
+        "n": 53,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 4,
+          "contact_component_count": 7,
+          "contact_edge_count": 65,
+          "free_square_count": 1,
+          "internal_slide_dof": 25,
+          "largest_component_size": 21,
+          "structured_fraction": "0.981132075472",
+          "structured_square_count": 52,
+          "wall_seated_square_count": 24,
+          "within_six_components_and_three_free": false
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 53
+      },
+      {
+        "n": 54,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 4,
+          "contact_edge_count": 70,
+          "free_square_count": 2,
+          "internal_slide_dof": 26,
+          "largest_component_size": 18,
+          "structured_fraction": "0.962962962963",
+          "structured_square_count": 52,
+          "wall_seated_square_count": 24,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 54
+      },
+      {
+        "n": 55,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 7,
+          "contact_component_count": 6,
+          "contact_edge_count": 68,
+          "free_square_count": 4,
+          "internal_slide_dof": 24,
+          "largest_component_size": 20,
+          "structured_fraction": "0.927272727273",
+          "structured_square_count": 51,
+          "wall_seated_square_count": 23,
+          "within_six_components_and_three_free": false
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 55
+      },
+      {
+        "n": 65,
+        "narrow_partition": {
+          "selected_chunk_count": 9,
+          "selected_free_square_count": 0,
+          "selected_partition_minimality": "indeterminate-search-limit",
+          "status": "not-established-search-limit"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 5,
+          "contact_edge_count": 88,
+          "free_square_count": 0,
+          "internal_slide_dof": 32,
+          "largest_component_size": 25,
+          "structured_fraction": "1",
+          "structured_square_count": 65,
+          "wall_seated_square_count": 28,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 65
+      },
+      {
+        "n": 66,
+        "narrow_partition": {
+          "selected_chunk_count": 9,
+          "selected_free_square_count": 0,
+          "selected_partition_minimality": "indeterminate-search-limit",
+          "status": "not-established-search-limit"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 5,
+          "contact_edge_count": 91,
+          "free_square_count": 0,
+          "internal_slide_dof": 31,
+          "largest_component_size": 24,
+          "structured_fraction": "1",
+          "structured_square_count": 66,
+          "wall_seated_square_count": 26,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 66
+      },
+      {
+        "n": 67,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established-search-limit"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 3,
+          "contact_edge_count": 92,
+          "free_square_count": 2,
+          "internal_slide_dof": 32,
+          "largest_component_size": 28,
+          "structured_fraction": "0.970149253731",
+          "structured_square_count": 65,
+          "wall_seated_square_count": 28,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 67
+      },
+      {
+        "n": 68,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 13,
+          "contact_component_count": 10,
+          "contact_edge_count": 67,
+          "free_square_count": 11,
+          "internal_slide_dof": 33,
+          "largest_component_size": 11,
+          "structured_fraction": "0.838235294118",
+          "structured_square_count": 57,
+          "wall_seated_square_count": 26,
+          "within_six_components_and_three_free": false
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 2,
+          "free_square_count": -3,
+          "structured_square_count": 3,
+          "within_budget_changed": false
+        },
+        "source_kind": "unitsquare-rendering",
+        "square_count": 68
+      },
+      {
+        "n": 69,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 14,
+          "contact_component_count": 5,
+          "contact_edge_count": 78,
+          "free_square_count": 12,
+          "internal_slide_dof": 29,
+          "largest_component_size": 25,
+          "structured_fraction": "0.826086956522",
+          "structured_square_count": 57,
+          "wall_seated_square_count": 27,
+          "within_six_components_and_three_free": false
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": -10,
+          "structured_square_count": 10,
+          "within_budget_changed": true
+        },
+        "source_kind": "unitsquare-rendering",
+        "square_count": 69
+      },
+      {
+        "n": 70,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 5,
+          "contact_edge_count": 94,
+          "free_square_count": 0,
+          "internal_slide_dof": 36,
+          "largest_component_size": 24,
+          "structured_fraction": "1",
+          "structured_square_count": 70,
+          "wall_seated_square_count": 28,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 70
+      },
+      {
+        "n": 71,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 6,
+          "contact_component_count": 5,
+          "contact_edge_count": 96,
+          "free_square_count": 5,
+          "internal_slide_dof": 30,
+          "largest_component_size": 34,
+          "structured_fraction": "0.929577464789",
+          "structured_square_count": 66,
+          "wall_seated_square_count": 28,
+          "within_six_components_and_three_free": false
+        },
+        "sensitivity_delta": {
+          "contact_component_count": -1,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 71
+      },
+      {
+        "n": 82,
+        "narrow_partition": {
+          "selected_chunk_count": 12,
+          "selected_free_square_count": 0,
+          "selected_partition_minimality": "indeterminate-search-limit",
+          "status": "not-established-search-limit"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 5,
+          "contact_edge_count": 118,
+          "free_square_count": 0,
+          "internal_slide_dof": 36,
+          "largest_component_size": 25,
+          "structured_fraction": "1",
+          "structured_square_count": 82,
+          "wall_seated_square_count": 32,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 82
+      },
+      {
+        "n": 83,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 3,
+          "contact_component_count": 4,
+          "contact_edge_count": 119,
+          "free_square_count": 4,
+          "internal_slide_dof": 33,
+          "largest_component_size": 28,
+          "structured_fraction": "0.951807228916",
+          "structured_square_count": 79,
+          "wall_seated_square_count": 31,
+          "within_six_components_and_three_free": false
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 83
+      },
+      {
+        "n": 84,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established-search-limit"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 3,
+          "contact_edge_count": 121,
+          "free_square_count": 2,
+          "internal_slide_dof": 37,
+          "largest_component_size": 36,
+          "structured_fraction": "0.97619047619",
+          "structured_square_count": 82,
+          "wall_seated_square_count": 32,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 84
+      },
+      {
+        "n": 85,
+        "narrow_partition": {
+          "selected_chunk_count": 11,
+          "selected_free_square_count": 1,
+          "selected_partition_minimality": "indeterminate-search-limit",
+          "status": "not-established-search-limit"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 5,
+          "contact_edge_count": 122,
+          "free_square_count": 1,
+          "internal_slide_dof": 36,
+          "largest_component_size": 36,
+          "structured_fraction": "0.988235294118",
+          "structured_square_count": 84,
+          "wall_seated_square_count": 31,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 85
+      },
+      {
+        "n": 86,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 4,
+          "contact_edge_count": 132,
+          "free_square_count": 1,
+          "internal_slide_dof": 35,
+          "largest_component_size": 35,
+          "structured_fraction": "0.988372093023",
+          "structured_square_count": 85,
+          "wall_seated_square_count": 31,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 86
+      },
+      {
+        "n": 87,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 3,
+          "contact_component_count": 5,
+          "contact_edge_count": 129,
+          "free_square_count": 1,
+          "internal_slide_dof": 37,
+          "largest_component_size": 36,
+          "structured_fraction": "0.988505747126",
+          "structured_square_count": 86,
+          "wall_seated_square_count": 32,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 87
+      },
+      {
+        "n": 88,
+        "narrow_partition": {
+          "selected_chunk_count": null,
+          "selected_free_square_count": null,
+          "selected_partition_minimality": "not-applicable",
+          "status": "not-established"
+        },
+        "primary": {
+          "angle_class_count": 6,
+          "contact_component_count": 9,
+          "contact_edge_count": 119,
+          "free_square_count": 2,
+          "internal_slide_dof": 35,
+          "largest_component_size": 36,
+          "structured_fraction": "0.977272727273",
+          "structured_square_count": 86,
+          "wall_seated_square_count": 30,
+          "within_six_components_and_three_free": false
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 88
+      },
+      {
+        "n": 89,
+        "narrow_partition": {
+          "selected_chunk_count": 9,
+          "selected_free_square_count": 0,
+          "selected_partition_minimality": "indeterminate-search-limit",
+          "status": "not-established-search-limit"
+        },
+        "primary": {
+          "angle_class_count": 2,
+          "contact_component_count": 5,
+          "contact_edge_count": 132,
+          "free_square_count": 0,
+          "internal_slide_dof": 36,
+          "largest_component_size": 49,
+          "structured_fraction": "1",
+          "structured_square_count": 89,
+          "wall_seated_square_count": 28,
+          "within_six_components_and_three_free": true
+        },
+        "sensitivity_delta": {
+          "contact_component_count": 0,
+          "free_square_count": 0,
+          "structured_square_count": 0,
+          "within_budget_changed": false
+        },
+        "source_kind": "kingbird-derived-facts",
+        "square_count": 89
+      }
+    ],
+    "claim_boundaries": [
+      "The retained n=1..100 corpus is calibration-only and supplies no H-044 verdict.",
+      "Detected same-angle positive-edge contact establishes descriptive assembly, not rigidity.",
+      "Internal slide degrees are counted before overlap intervals and wall seating.",
+      "Narrow partition non-establishment applies only to bars, filled rectangles, and corner Ls.",
+      "Retained constructions are feasible witnesses, not new global-optimality certificates."
+    ],
+    "claim_status": "calibration-only-descriptive-no-hypothesis-verdict",
+    "detectors": {
+      "primary_sweep": "registered-angle-contact",
+      "sensitivity_sweep": "regularized-angle-contact"
+    },
+    "generated_by": "python -m devtools.profile_known_best_chunks",
+    "inputs": {
+      "contact_census": "chunk-components.json",
+      "corpus": "manifest.json",
+      "narrow_partitions": "chunk-partitions.json"
+    },
+    "rendering": {
+      "path": "atlas/known-best/evidence/non-grid-chunk-evidence-profile.svg",
+      "semantics": "descriptive-document-table-no-packing-geometry"
+    },
+    "scope": {
+      "excluded_exact_grid_cases": 64,
+      "non_grid_cases": 36,
+      "range": "n=1..100"
+    }
+  },
+  "softschema": {
+    "contract": "packing.squares:KnownBestChunkEvidenceProfile/v1",
+    "envelope": "profile",
+    "schema": "chunk-evidence-profile.schema.yaml",
+    "status": "enforced"
+  }
+}

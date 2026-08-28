@@ -1,10 +1,10 @@
 # Feature: Deterministic SVG Rendering Toolkit
 
-**Date:** 2026-08-24 (last updated 2026-08-24)
+**Date:** 2026-08-24 (last updated 2026-08-26)
 
 **Author:** Codex (agent), for the repository owner
 
-**Status:** Implemented, including the contact visualization and compositing extension
+**Status:** Implemented, including contact visualization and angle/contact coloring
 
 ## Overview
 
@@ -32,8 +32,8 @@ not a proof that every pixel is exact.
   to embed in Markdown, HTML, office documents, and reports.
 - Use the same pure-black boundary stroke for the container and every packed square so a
   white separator cannot make an exact contact look like a gap.
-  Use a fixed, deterministic 20-color palette confined to cool green, cyan, blue,
-  indigo, and violet hues.
+  Encode orientation by hue and full-side adjacency by shade, with deterministic,
+  configurable family and shade counts.
 - Support three progressive view levels: final overview, start/final comparison, and
   optional trajectory animation.
 - Preserve numerical provenance without clutter: visible summary labels when requested,
@@ -288,8 +288,8 @@ exact annotations.
 
 Each packing panel uses three explicit geometry passes in document order:
 
-1. **Fills.** Emit each square once with the color selected by stable square index from
-   the fixed 20-color cool palette and no stroke.
+1. **Fills.** Emit each square once with its deterministic angle hue and contact shade,
+   and no stroke.
 2. **Contacts.** Project certified contact points and segments through the same panel
    transform as the squares.
    Emit them in one optional panel-scoped group using the `#e3c64a` tempered-yellow
@@ -308,9 +308,14 @@ Participant-union clipping contains the wide marks inside the squares that estab
 contact. The outline pass contains no fill, and the fill pass contains no stroke, so
 antialiasing cannot create a second gray or white seam.
 
-Yellow is reserved for contact highlights in this profile.
-It is not added to `SQUARE_FILL_PALETTE`. That tuple contains 20 fixed cool colors, and
-`color_for_square()` selects `palette[index % 20]` without hashes or mutable state.
+Yellow is reserved for contact highlights in this profile and never enters a square hue
+family. The default `angle`/`contacts` assignment uses 20 hue families, five shades per
+family, and a `0.2` total lightness span.
+Angles are compared modulo a quarter turn at full retained precision; strict full-side
+contacts merge tolerance-seeded angle classes that represent the same physical
+orientation. Four flush sides select the darkest shade and zero select the lightest.
+Counts and span are `RenderSpec` values, and the index/sequence behavior remains
+available only as an explicit alternative.
 Pure black is reserved for packing geometry boundaries; the softer ink token may still
 be used for text.
 
@@ -319,7 +324,7 @@ be used for text.
 The serializer has one canonical output policy:
 
 - UTF-8, LF line endings, one terminal newline, fixed indentation, and escaped XML text
-- stable element order, attribute order, IDs, definition order, palette assignment, and
+- stable element order, attribute order, IDs, definition order, color assignment, and
   numeric formatting
 - no timestamp, random ID, environment path, implicit font discovery result, or map
   iteration order in retained output
@@ -348,9 +353,9 @@ continues to use the readable serializer.
 The base theme is a fixed paper theme: neutral background, high-contrast boundary and
 text, restrained colorblind-safe square colors, consistent line weights, generous
 padding, and no shadows, filters, gradients, or decorative motion.
-The 20 square colors form a deterministic cool sequence across green, cyan, blue,
-indigo, and violet. The first 11 entries maximize visible separation in the Trump
-overview; the remaining entries broaden the reusable atlas sequence.
+The square colors derive narrow shade families from high-contrast cool base hues.
+The default visual encoding assigns those families to angle classes and shades them by
+full-side adjacency; the legacy index sequence remains opt-in.
 Container and square outlines use the same opaque pure-black 1.25px stroke.
 Certified contact segments and points use 60%-opaque tempered yellow `#e3c64a`, placed
 below the black outline and above the fills and clipped to their participant-square
@@ -520,9 +525,7 @@ node hierarchy would add conversion code without a second semantic contract.
 - Define frozen `Theme` and `LayoutMetrics` dataclasses.
 - Provide fixed `PAPER_THEME` first; add `MONOCHROME_THEME` and `SCREEN_DARK_THEME` only
   after the same contrast and fixture checks exist.
-- `color_for_square()` hashes no data: it assigns the stable palette by validated square
-  order, with labels available as the noncolor identity channel.
-- Keep every approved presentation value explicit in one module: `SQUARE_FILL_PALETTE`,
+- Keep every approved presentation value explicit in the renderer: `SQUARE_HUE_PALETTE`,
   `SQUARE_FILL_OPACITY`, `PACKING_BOUNDARY_COLOR`, `PACKING_BOUNDARY_WIDTH`,
   `CONTACT_HIGHLIGHT_COLOR`, `CONTACT_HIGHLIGHT_OPACITY`,
   `CONTACT_HIGHLIGHT_STROKE_WIDTH`, `CONTACT_HIGHLIGHT_POINT_RADIUS`, and
@@ -530,8 +533,8 @@ node hierarchy would add conversion code without a second semantic contract.
   instead of repeating literals.
 - `PAPER_THEME.container` is the stroke for both the container and every packed square;
   it is pure black rather than the softer text ink.
-  `PAPER_THEME.contact` is the reserved tempered-yellow contact token and never enters
-  the square palette.
+  `PAPER_THEME.contact` is the reserved tempered-yellow contact token and never enters a
+  square hue family.
 - `evidence_style()` maps every evidence tier to one label, stroke pattern, and icon
   token; callers cannot supply arbitrary claim text.
 - `presentation_attributes()` materializes fill, stroke, opacity, font, and line weight
@@ -807,8 +810,7 @@ begin in parallel after the shared typed contract is established.
 ### Phase 3: Boundary and Contact Semantics
 
 - [x] Add failing controls proving that container and square strokes share one
-  pure-black token while deterministic square assignment uses the approved 20-color cool
-  palette and never uses the reserved yellow.
+  pure-black token while deterministic square assignment never uses the reserved yellow.
 - [x] Add exact known-answer controls for a wall-edge segment, wall-point contact,
   square-edge segment, square point-to-edge contact, strict separation, deduplication,
   and rejection of inconsistent contact geometry.
@@ -824,7 +826,7 @@ begin in parallel after the shared typed contract is established.
   for every mark.
 - [x] Regenerate and inspect all retained figures at document scale.
   Confirm that black shared borders show touching geometry without false white gaps and
-  that the clipped contact overlay remains readable across the fixed cool palette.
+  that the clipped contact overlay remains readable across the fill families.
 - [x] Run focused lint, type, determinism, safe-SVG, CLI, and byte-replay checks
   followed by the full repository gate; update the gallery measurements and
   documentation.
@@ -916,8 +918,9 @@ known-answer semantics and all replay checks pass.
 - The current trajectory profile accepts translation-only, fixed-container frames and
   rejects unsupported rotation, shape-offset, or container-size changes.
 - Every packing outline and its container share the same pure-black 1.25px stroke.
-  Square assignment deterministically cycles through the fixed 20-color cool palette,
-  which contains no yellow.
+  Default square assignment uses angle hues and full-side-contact shades, exposes the
+  hue count, shade count, and lightness span through `RenderSpec`, and contains no
+  yellow.
 - Exact Trump and `n = 5` frames retain stable point/segment contact features; numerical
   candidate frames retain none.
   Contact display defaults on, can be disabled explicitly, and never marks a trajectory
@@ -948,7 +951,7 @@ known-answer semantics and all replay checks pass.
   Do not infer contact from decimal projections or pixels.
 - **Resolved:** render fills, contacts, and outlines as separate ordered passes.
   Keep contact marks below pure-black boundaries, reserve yellow for highlights, and use
-  a deterministic 20-color cool palette for square identity.
+  deterministic angle hues with full-side-contact shading by default.
 - **Resolved:** clip wide contact marks to the union of their participating square
   interiors. Define projected square clip shapes once per panel and reuse them through
   stable fragment-only `<use>` references.

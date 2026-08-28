@@ -333,15 +333,35 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session-015](../../../../campaign/agent-sessions/session-015-four-hour-r4-r5-loop.md).
-It takes `think-1s0h` through one preregistered BC-010 exact R4/R5 nonlinear-realization
-slice, retaining an exact continuation, exact obstruction, or finite unresolved list.
-Exp-038 completed the branchwise cone inventory, and exp-039 covers R1, R2, R3, and R6
-only; `-W`, mixed-angle realization, the whole stationary component, and unequal-side
-clearance remain later slices.
-New numerical map rounds remain behind BC-010. D-239 is a separate W7 robustness line,
-not a reason to enlarge this W6 slice.
-Do not fill the time with H-017 merely because it is executable.
+[session 029](../../../../campaign/agent-sessions/session-029-finish-agenda-003-cycles.md).
+Sessions 027 and 028 are terminal, and session 029 closed the remaining agenda-003 cells
+on measurement rather than opinion.
+Open BC-038 under `think-kdil` as the next bounded driver: exp-045 is terminal, so the
+shared row-jet path it froze is available again, and the measured inventory reuse owes
+only its exact-output equivalence result.
+The remaining outstanding items each have their own workflow entry in agenda-004. Build
+the four missing controls so the enforced count matches the declared one, then re-run
+the admission check before any target generation.
+Do not amend the declared twelve down to the implemented eight; the criterion was frozen
+before implementation.
+The measured W5 inventory remains scheduled after that driver; BC-016 stays blocked on
+its retained-pose, glued-row, tie-label, and receipt-checker prerequisites.
+The first-failure pipeline cell is complete, and the active two-session
+[balanced ten-hour agenda](../../../../campaign/agendas/agenda-003-balanced-ten-hour-research-program.md)
+retains its actual clocks and full five-hour midpoint review.
+The completed target-free path retains 11,013 exact size-five signed-contact orbits with
+independent Burnside and differential controls.
+Those records contain no packing geometry or feasibility result, and the retained
+`n = 1..100` corpus remains calibration-only.
+
+CG-010 now retains one literal target-free structural fixed-angle cell with total wall
+decisions, an exhaustive contact/non-edge pair partition, one frozen oriented axis per
+pair, joint canonicalization, typed caps, and a derived work price.
+It executes zero LP solves and makes no geometry or feasibility claim.
+The existing local prefilter still accepts only one fitted-angle class and rejects mixed
+classes before solving; numerical row compilation and full-cell realization remain
+unbuilt. Do not use target geometry, emit an H-044 verdict, or start the `n = 11`
+enumeration run.
 
 ## The numeric runner launch gate
 

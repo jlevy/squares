@@ -1,39 +1,40 @@
 # Packing Atlas
 
-The atlas connects retained packing observations to stable, document-ready views.
-It has two deliberately separate layers:
+The atlas connects retained packing observations and abstract enumeration records to
+stable, document-ready views.
+Its collections have deliberately different claim semantics:
 
-- [`atlas.schema.yaml`](atlas.schema.yaml) is the contract for semantic endpoint
-  observations and provisional summaries.
-- [`rendering/`](rendering/README.md) is the deterministic gallery of explanatory SVGs.
-  Its [`manifest.json`](rendering/manifest.json) maps each rendered artifact to a
-  frontier case, evidence tier, view, motion and contact semantics, accessible copy, and
-  exact generator command.
+| Collection | Contents | Claim boundary |
+| --- | --- | --- |
+| [`atlas.schema.yaml`](atlas.schema.yaml) and [`rendering/`](rendering/README.md) | Typed endpoint observations and explanatory figures indexed by [`manifest.json`](rendering/manifest.json) | A view may expose retained evidence but cannot promote its tier |
+| [`known-best/`](known-best/README.md) | One normalized construction and house SVG for every `n = 1..100`, plus separate calibration annotations | Feasible retained constructions; no new optimality or H-044 verdict |
+| [`prospective/`](prospective/README.md) | Complete source-availability map for `n = 101..324` and the license-safe normalized seed | Source corpus only; contact and hypothesis annotations are prohibited |
+| [`enumerated/`](enumerated/README.md) | All 11,013 abstract signed-contact orbits at scaffold size five | Incidence labels only; no geometry, realization, feasibility, or packing claim |
 
-The separation matters.
-An atlas row is scientific data; a figure is a presentation of typed source data.
-The renderer may expose evidence already present in its input, but it cannot promote a
-candidate to a certificate or make a conjectured minimum proved by drawing it cleanly.
+Within every collection, data and presentation remain separate.
+An atlas row or abstract identity owns typed content; an SVG is a deterministic view of
+that content. Drawing an object cleanly cannot turn a candidate into a certificate, a
+source listing into geometry, or an abstract contact graph into a packing.
 
-## Examples
+## At a Glance
 
-![Walter Trump’s exact packing of eleven unit squares.](rendering/trump11-overview.svg)
+[![The complete known-best atlas from n equals one through one hundred.](known-best/known-best-1-100.svg)](known-best/known-best-1-100.svg)
 
-*A final-state overview for the smallest open case.
-Translucent tempered-yellow marks expose its exact contact structure; exact source
-expressions remain available in SVG metadata without crowding the page.*
+*All 100 retained known-best constructions in row-major order.
+Each tile shows `n` and the reported side upper bound; the linked SVG remains sharp at
+any zoom level.*
 
-![The exact quotient map of optimal configurations for three unit squares.](n-003-optimal-moduli.svg)
+![Audited source coverage from n equals 101 through 324.](prospective/source-coverage-101-324.svg)
 
-*A different atlas object: the complete proved quotient space, with representative
-packings attached to its distinguished strata.*
+*Every case in the audited `n = 101…324` range has selected geometry.
+Green and blue cells are retained here.
+Orange cells have public SVG geometry that passed the access and parser audit, but the
+files are not retained because the inspected catalogue states no express reuse terms.
+This is a local retention-policy gap, not a located-source gap.*
 
-![The high-precision Kingbird packing of twenty-nine unit squares.](rendering/kingbird29-overview.svg)
-
-*A larger construction whose roughly 100-digit source is numerically checked at 160
-decimal digits of working precision and tolerance `1e-80`. It exercises all 20 fixed
-cool colors and their deterministic reuse without overstating the retained source as
-verified or exact.*
+Specialized figures—including certified contacts, trajectories, exact moduli, and the
+diagnostic start/final comparison—remain in the focused
+[renderer gallery](rendering/README.md).
 
 ## Add or Regenerate an Example
 

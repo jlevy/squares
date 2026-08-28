@@ -42,11 +42,12 @@ RESULTS = Path("campaign/series/series-000-smoke-and-calibration/results")
 ACTIVITY_MARKER = PROJECT_ROOT / ".gate-running"
 DEFAULT_CPU_COUNT = 4
 INNER_JOB_DIVISOR = 3
+NEGATIVE_CONTROL_WORKERS = 2
 TOP_TIMING_COUNT = 8
 SUPPORTED_PYTHON = (3, 14)
 BASIN_EVENT_CONTRACT_PREFIX = "packing.squares:BasinEvent/"
 PROCESS_TERMINATION_GRACE_SECONDS = 1.0
-DEFAULT_TIMEOUT_SECONDS = 600.0
+DEFAULT_TIMEOUT_SECONDS = 900.0
 
 
 class _ProcessRegistry:
@@ -326,7 +327,33 @@ def _optional_tool(context: Context, name: str) -> str:
 
 
 def _fast_tests(context: Context) -> str:
-    return _run(context, (sys.executable, "-m", "pytest", "-q", "tests"))
+    return _run(
+        context,
+        (
+            sys.executable,
+            "-m",
+            "pytest",
+            "-q",
+            "tests",
+            "-m",
+            "not exhaustive_exact",
+        ),
+    )
+
+
+def _exhaustive_exact_tests(context: Context) -> str:
+    return _run(
+        context,
+        (
+            sys.executable,
+            "-m",
+            "pytest",
+            "-q",
+            "tests",
+            "-m",
+            "exhaustive_exact",
+        ),
+    )
 
 
 def _soundness_perimeter(context: Context) -> str:
@@ -483,8 +510,81 @@ def _svg_rendering(context: Context) -> str:
     return output
 
 
+def _known_best_atlas(context: Context) -> str:
+    output = _commands(
+        context,
+        (
+            (sys.executable, "-m", "devtools.build_known_best_atlas", "--check"),
+            (sys.executable, "-m", "devtools.census_known_best_chunks", "--check"),
+            (
+                sys.executable,
+                "-m",
+                "devtools.render_known_best_contact_overlays",
+                "--check",
+            ),
+            (
+                sys.executable,
+                "-m",
+                "devtools.profile_known_best_chunks",
+                "--check",
+            ),
+            (sys.executable, "-m", "devtools.price_contact_enumeration", "--check"),
+            (
+                sys.executable,
+                "-m",
+                "devtools.generate_contact_full_cell_control",
+                "--check",
+            ),
+        ),
+    )
+    _require_text(
+        output,
+        "known-best atlas check passed: 100 sources/plans, witnesses, renders, "
+        "1 composite, and links",
+        "chunk census check passed: components, contacts, and bounded lattice partitions "
+        "for 100 records",
+        "known-best contact overlay check passed: 5 house-rendered calibration strata",
+        "known-best chunk evidence profile check passed: 36 non-grid calibration cases",
+        "contact enumeration pricing check passed",
+        "contact full-cell control check passed",
+    )
+    return output
+
+
+def _prospective_atlas(context: Context) -> str:
+    output = _commands(
+        context,
+        (
+            (sys.executable, "-m", "devtools.map_prospective_sources", "--check"),
+            (sys.executable, "-m", "devtools.build_prospective_atlas", "--check"),
+        ),
+    )
+    _require_text(
+        output,
+        "prospective source map check passed: 224 cases, availability and SVG",
+        "prospective atlas seed check passed: 101 witnesses and 101 house renderings",
+    )
+    return output
+
+
+def _contact_scaffold_atlas(context: Context) -> str:
+    output = _module(context, "devtools.build_contact_scaffold_atlas", "--check")
+    _require_text(
+        output,
+        "contact scaffold atlas check passed: 21 topologies, 11013 abstract orbits",
+    )
+    return output
+
+
 def _negative_controls(context: Context) -> str:
-    return _module(context, "devtools.run_negative_controls", "devtools/controls.yaml")
+    workers = min(NEGATIVE_CONTROL_WORKERS, context.inner_jobs)
+    return _module(
+        context,
+        "devtools.run_negative_controls",
+        "devtools/controls.yaml",
+        "-j",
+        str(workers),
+    )
 
 
 def _independent_lp(context: Context) -> str:
@@ -582,9 +682,28 @@ def _exact_verification(context: Context) -> str:
     output = _commands(
         context,
         (
+            (
+                sys.executable,
+                "-m",
+                "devtools.generate_known_best_n011_rational_control",
+                "--check",
+            ),
             (sys.executable, "-m", "cases.trump11.verify_exact"),
             (sys.executable, "-m", "cases.gobel5.verify_exact"),
             (sys.executable, "-m", "cases.gobel10.verify_exact"),
+            (
+                sys.executable,
+                "-m",
+                "sqpack.cli.witness",
+                "verify",
+                "witnesses/known-best-n011-rational-control.yaml",
+            ),
+            (
+                sys.executable,
+                "-m",
+                "devtools.check_rational_witness_independent",
+                "witnesses/known-best-n011-rational-control.yaml",
+            ),
             (
                 sys.executable,
                 "-m",
@@ -602,6 +721,7 @@ def _exact_verification(context: Context) -> str:
     )
     _require_text(
         output,
+        "known-best n=11 rational control check passed",
         "VALID: 11 squares, 55 pairs tested",
         "14 separated with zero gap, 41 strictly",
         "20 corner coordinates exactly on the boundary",
@@ -609,6 +729,8 @@ def _exact_verification(context: Context) -> str:
         "s = 3.87708359002281417730789706010096",
         "VALID: 5 squares, 10 pairs tested",
         "VALID: 10 squares, 45 pairs tested",
+        "VERIFIED\n  id: W-known-best-n011-rational",
+        "VERIFIED: 11 squares, 55 pairs",
         "VERIFIED\n  id: W-schadt-n029-2025-decimal-rational",
         "VERIFIED: 29 squares, 406 pairs",
     )
@@ -878,7 +1000,16 @@ def _provenance(context: Context) -> str:
 
 
 def _campaign_record(context: Context) -> str:
-    return _module(context, "sqpack.campaign.ledger", "check")
+    return _commands(
+        context,
+        (
+            (sys.executable, "-m", "sqpack.campaign.ledger", "check"),
+            # A phase's validation_command is its declared falsifier. Nothing checked
+            # that the command could run, so two phases once carried a flag that exits
+            # 2 (think-ldy8).
+            (sys.executable, "-m", "devtools.check_declared_commands"),
+        ),
+    )
 
 
 STEPS: tuple[Step, ...] = (
@@ -889,9 +1020,13 @@ STEPS: tuple[Step, ...] = (
     Step("historical regressions", _historical_regressions),
     Step("small-n exact models and local geometry", _small_n),
     Step("deterministic SVG rendering", _svg_rendering),
+    Step("known-best n=1..100 atlas", _known_best_atlas),
+    Step("prospective n=101..324 source map and safe seed", _prospective_atlas),
+    Step("abstract size-five contact-scaffold atlas", _contact_scaffold_atlas),
     Step("negative controls", _negative_controls),
     Step("fixed-angle cell is an LP, rebuilt independently", _independent_lp),
     Step("fast behavioral tests", _fast_tests, fast=True),
+    Step("exhaustive exact behavioral tests", _exhaustive_exact_tests),
     Step("bead tree", _bead_tree, fast=True),
     Step("golden basin maps (proved cases, checked against mathematics)", _golden_basins),
     Step("basin identity", _canonical_identity),
@@ -1136,7 +1271,7 @@ def _parser() -> ArgumentParser:
         "--timeout-seconds",
         metavar="SECONDS",
         help=(
-            "maximum time for each validation subprocess (default: 600; also "
+            "maximum time for each validation subprocess (default: 900; also "
             "PACKING_VALIDATE_TIMEOUT_SECONDS)"
         ),
     )
