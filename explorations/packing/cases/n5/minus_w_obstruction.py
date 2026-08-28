@@ -630,9 +630,7 @@ def main() -> int:
         summary_cases = require_dict(result["certificate"], "certificate")["case_count"]
         summary_controls = len(require_dict(result["controls"], "controls"))
         print(
-            json.dumps(
-                {"status": "PASS", "cases": summary_cases, "controls": summary_controls}
-            )
+            json.dumps({"status": "PASS", "cases": summary_cases, "controls": summary_controls})
         )
     except (OSError, TypeError, ValueError, json.JSONDecodeError) as error:
         print(f"FAIL: {error}", file=sys.stderr)
