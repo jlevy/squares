@@ -105,7 +105,14 @@ PRUNE = frozenset(
         # `deterministic SVG rendering` and `known-best n=1..100 atlas` steps, and named by
         # no control in `controls.yaml`. The two controls that do target
         # `atlas/known-best/` reach small JSON files at its top level, which stay.
+        #
+        # The composite PNG and PDF join them on the same grounds, from the other side of
+        # that merge: generated binary exports, each carrying a source receipt that
+        # `build_known_best_atlas --check` and `render_composite_pdf --check` replay, and
+        # together 0.8 MB of every private worker's snapshot.
         ROOT / "atlas/known-best/contact-overlays",
+        ROOT / "atlas/known-best/known-best-1-100.pdf",
+        ROOT / "atlas/known-best/known-best-1-100.png",
         ROOT / "atlas/known-best/rendering",
         ROOT / "atlas/prospective/rendering",
         ROOT / "resources",

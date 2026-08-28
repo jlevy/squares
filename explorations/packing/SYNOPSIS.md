@@ -137,6 +137,7 @@ case or experiment separately.
 | [Packing Atlas](atlas/README.md) | component scope and use | supporting | maintained | — |
 | [Enumerated Contact-Scaffold Atlas](atlas/enumerated/README.md) | component scope and use | supporting | maintained | — |
 | [Known-Best Packing Atlas, `n = 1..100`](atlas/known-best/README.md) | component scope and use | supporting | maintained | — |
+| [Composite figure playbook](atlas/known-best/FIGURE-PLAYBOOK.md) | component scope and use | supporting | maintained | — |
 | [Prospective Packing Atlas, `n = 101..324`](atlas/prospective/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
 | [Conventions for `explorations/packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
@@ -178,6 +179,10 @@ case or experiment separately.
 | [Feature: Frontier Assurance and Verification](docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md) | implementation plan | current | transient | — |
 | [Feature: Research-Loop Efficiency Infrastructure](docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md) | implementation plan | current | transient | — |
 | [Overnight Run: Constructive Enumeration Groundwork](docs/project/specs/active/plan-2026-08-26-overnight-constructive-enumeration.md) | implementation plan | current | transient | — |
+| [Plan: The Symbolic Promotion Gap, and What a Complete Atlas Would Need](docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md) | implementation plan | current | transient | — |
+| [Feature: The Numeric–Symbolic Round Trip](docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md) | implementation plan | current | transient | — |
+| [Feature: Promotion Pipeline Implementation](docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
+| [Feature: The Interval Certification Bridge](docs/project/specs/active/plan-2026-08-28-interval-certification.md) | implementation plan | current | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
 | [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
@@ -289,6 +294,44 @@ controller, not permission to blur contracts.
 The renderer’s standing exact-motion control remains independently replayable:
 
 ![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
+
+**As of 2026-08-28 — start here.** The active plan is
+[agenda-005](campaign/agendas/agenda-005-symbolic-promotion-and-identity.md), replanned
+that day. Its next slice is **block A: `BC-047` under `think-y85e` and `BC-042` under
+`think-zmh8`**, two independent lanes.
+Blocks B and C are `BC-045` under `think-75ll`, built to
+[plan-2026-08-28-interval-certification](docs/project/specs/active/plan-2026-08-28-interval-certification.md).
+The narrative below is historical and its earlier “next bounded slice” pointers are
+superseded by this paragraph.
+
+The replan followed a correction recorded in
+[X-004](campaign/explorations/X-004-n29-exact-promotion.md).
+The retained `n = 29` SVG does not merely serialize a `FindRoot` result: it publishes
+the **complete closed system** — nine slide scalars in closed form and six equations
+`f1 … f6` in `{s, a, b, c, d, i}` — **and the layout map**, whose `<use>` transforms are
+written symbolically in those same names.
+[`cases.kingbird29.verify_svg`](cases/kingbird29/verify_svg.py) had already transcribed
+all of it and used it only to evaluate residuals, never to solve.
+Solving that same transcription reproduces the record to all fifteen published digits
+and reaches a maximum equation residual of `1.11e-1200` in about six seconds.
+So `BC-042` and `BC-043` gate nothing at `n = 29`; they generalize the route to sizes
+with no published system.
+
+That moved the prize onto `BC-045`. Certifying the reported `n = 29` value would move
+`verified_upper_bound` from the Schadt rational to Kingbird’s, closing `5.23e-5`. Two
+routes reach it: `BC-044` recovers a minimal polynomial and discharges it exactly, which
+is stronger but of uncertain feasibility — a completed sweep found no integer relation
+through degree twenty with coefficients below `10^22` — while `BC-045` needs no
+polynomial at all. The robust route was the one with no specification, so that
+specification now exists.
+The witness contract already names `interval-certified` as a method that may carry
+`verified`; only the checker is missing, and `exact_verify` still raises
+`checker-not-built`.
+
+The standing rule is unchanged and applies to every block: an unattended runner may
+apply the accept rule only conservatively.
+A round that certifies `n = 29` is recorded `unresolved` with `needs_review: true`, and
+a human makes the accept decision.
 
 PR 45 is merged and
 [session 025](campaign/agent-sessions/session-025-pr45-performance-continuation.md) is
@@ -1073,8 +1116,7 @@ At `n = 11` the two ends of the interval have barely moved in a generation:
 
 *The upper-bound endpoint of the interval: a certified degree-8 construction, still
 separated from the independently certified lower bound.
-Translucent tempered-yellow segments and dots are exact edge and point contacts, not
-tolerance-based visual guesses.*
+The segment and dot contact marks are exact, not tolerance-based visual guesses.*
 
 The current audit found an explicit strict box avoiding all twelve printed Figure 14
 points, so the paper’s unavoidability subclaim is false as printed

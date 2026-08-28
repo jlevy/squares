@@ -25,6 +25,9 @@ symbolic = ["sympy>=1.13"]
 [dependency-groups]
 dev = [
     "basedpyright>=1.31",
+    # Vector PDF export of the known-best composite. Emits no timestamps, so the
+    # output is byte-reproducible and the staleness check is a byte comparison.
+    "cairosvg>=2.7",
     # The motion-lab contract tests execute the exact JavaScript shipped to browsers.
     "nodejs-wheel-binaries>=24.16.0",
     "pytest>=8.3",

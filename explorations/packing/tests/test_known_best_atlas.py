@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from collections import Counter
 from pathlib import Path
 from xml.etree import ElementTree as ET
@@ -20,6 +21,8 @@ from sqpack.known_best import (
     parse_kingbird_svg,
     parse_unitsquare_svg,
 )
+from sqpack.render.color import ANGLE_CLASS_CONTRACT
+from sqpack.render.model import RenderSpec
 from sqpack.witness import load_witness
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -29,6 +32,21 @@ WITNESSES = ROOT / "witnesses/known-best"
 SCHEMA = ROOT / "witnesses/witness.schema.yaml"
 UNITSQUARE_RESULTS = ROOT / "resources/web/unitsquare-release1-2026/results.json"
 SVG = {"svg": "http://www.w3.org/2000/svg"}
+
+
+@pytest.fixture
+def isolated_atlas_build_cache():
+    """For tests that repoint a source root.
+
+    The builder memoizes the hundred cases so one process builds them once.
+    A test that points UNITSQUARE_ROOT at a corrupted copy must neither read a
+    memo built against the real root nor leave its own behind. Only those tests
+    need this; clearing for every test would rebuild repeatedly and cost more
+    than the memo saves.
+    """
+    known_best_builder.clear_build_caches()
+    yield
+    known_best_builder.clear_build_caches()
 
 
 def test_catalogue_map_and_retained_unitsquare_geometry() -> None:
@@ -135,7 +153,9 @@ def test_kingbird_sources_are_metadata_only_derived_facts() -> None:
 
 
 def test_known_best_rejects_corrupted_retained_unitsquare_svg(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    isolated_atlas_build_cache: None,
 ) -> None:
     source = SOURCES / "unitsquare/n068.svg"
     monkeypatch.setattr(known_best_builder, "UNITSQUARE_ROOT", tmp_path)
@@ -237,14 +257,14 @@ def test_known_best_atlas_covers_every_frontier_case() -> None:
         "layout": "10 by 10, row-major n=1..100",
         "png_preview": {
             "derived_from": "atlas/known-best/known-best-1-100.svg",
-            "height": 2540,
+            "height": 2676,
             "path": "atlas/known-best/known-best-1-100.png",
             "width": 2400,
         },
         "renderer": "sqpack deterministic composite renderer",
         "square_count": 5050,
         "svg": {
-            "height": 2540,
+            "height": 2676,
             "path": "atlas/known-best/known-best-1-100.svg",
             "width": 2400,
         },
@@ -295,6 +315,23 @@ def test_known_best_composite_contains_every_case_and_square() -> None:
     composite_path = ATLAS / "known-best-1-100.svg"
 
     root = ET.fromstring(outputs[composite_path])
+    metadata = {
+        node.attrib["name"]: node.text or ""
+        for node in root.iter()
+        if node.tag.endswith("}value") and "name" in node.attrib
+    }
+    spec = RenderSpec()
+    expected_color_metadata = {
+        "angle-class-contract": ANGLE_CLASS_CONTRACT,
+        "color-angle-tolerance-radians": str(spec.angle_tolerance_radians),
+        "color-full-side-contact-tolerance": str(spec.full_side_contact_tolerance),
+        "color-hue-count": str(spec.hue_count),
+        "color-hue-scheme": spec.hue_scheme.value,
+        "color-shade-lightness-span": str(spec.shade_lightness_span),
+        "color-shade-scheme": spec.shade_scheme.value,
+        "color-shades-per-hue": str(spec.shades_per_hue),
+    }
+    assert expected_color_metadata.items() <= metadata.items()
     cards = root.findall(".//svg:g[@data-n]", SVG)
     assert [int(card.attrib["data-n"]) for card in cards] == list(range(1, 101))
     assert len(root.findall(".//svg:polygon[@data-feature='square-fill']", SVG)) == 5050
@@ -306,12 +343,17 @@ def test_known_best_composite_contains_every_case_and_square() -> None:
     labels = [
         node.text for node in root.findall(".//svg:text[@data-feature='packing-label']", SVG)
     ]
+    # The bound is split into tspans so the variable s can be italic, so join
+    # the runs rather than reading the element's own text.
     bounds = [
-        node.text for node in root.findall(".//svg:text[@data-feature='side-bound']", SVG)
+        "".join(node.itertext())
+        for node in root.findall(".//svg:text[@data-feature='side-bound']", SVG)
     ]
-    assert labels == [f"n = {n}" for n in range(1, 101)]
+    assert labels == [str(n) for n in range(1, 101)]
     assert len(bounds) == 100
-    assert all(bound and bound.startswith("s ≤ ") for bound in bounds)
+    # A proved optimum is stated as an equality, a best-known bound as <=.
+    assert all(re.fullmatch(r"s\(\d+\) [=≤] .+", bound) for bound in bounds)
+    assert sum(" = " in bound for bound in bounds) == 35
 
 
 def test_known_best_composite_png_is_derived_from_current_svg() -> None:
@@ -321,7 +363,7 @@ def test_known_best_composite_png_is_derived_from_current_svg() -> None:
 
     assert known_best_builder.png_summary_receipt(png) == (
         2400,
-        2540,
+        2676,
         hashlib.sha256(svg_text.encode("utf-8")).hexdigest(),
     )
 

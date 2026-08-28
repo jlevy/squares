@@ -194,7 +194,9 @@ has `connect-src 'none'` and does not require the loopback service.
 A retained source perturbation and the endpoint returned by the deterministic quench
 share one geometric scale.
 The left panel’s squares carry deliberately distinct, tiny angle perturbations, so its
-angle-coded hues differ; the returned axis-aligned endpoint shares one hue.
+angle-coded hues differ.
+In the returned endpoint, eight axis-aligned squares share one hue and the two 45°
+squares share another.
 The source event is candidate evidence, not an optimality certificate.
 
 ### `n = 11`: exact construction overview
@@ -202,8 +204,7 @@ The source event is candidate evidence, not an optimality certificate.
 ![Walter Trump’s exact packing of eleven unit squares.](trump11-overview.svg)
 
 Six axis-aligned squares surround a five-square block tilted at an algebraic angle near
-`40.18°`. Translucent tempered-yellow segments show positive-length edge contacts, and
-dots in the same highlight color show point contacts.
+`40.18°`. Segments show positive-length edge contacts, and dots show point contacts.
 The figure carries certified-upper-bound evidence and does not call the open case
 solved.
 

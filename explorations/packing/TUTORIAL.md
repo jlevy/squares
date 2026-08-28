@@ -40,10 +40,8 @@ the next grid side can require tilted structure.
 
 *The best-known `n = 11` construction.
 Six squares are axis-aligned; five form an oblique block tilted by about `40.18°`.
-Translucent tempered-yellow segments mark shared edge intervals and dots in the same
-reserved highlight color mark point contacts, all computed in the construction’s exact
-number field. The marks are clipped to their participating squares, and thin pure-black
-outlines remain visible above them.
+Segments mark shared edge intervals and dots mark point contacts, all computed in the
+construction’s exact number field and clipped to their participating squares.
 The picture certifies a construction, not its global optimality.*
 
 Three features make this different from most optimization problems.

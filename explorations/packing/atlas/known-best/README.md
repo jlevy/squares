@@ -4,6 +4,10 @@ This atlas retains one complete geometry record for every frontier case from `n 
 through `n = 100` and renders every record with the repository’s deterministic house
 renderer. The machine-readable discovery layer is [`manifest.json`](manifest.json).
 
+Everything in this directory is generated.
+[FIGURE-PLAYBOOK.md](FIGURE-PLAYBOOK.md) is the playbook for the composite: how to
+rebuild it, where each fact on it comes from, and how to extend it past `n = 100`.
+
 [![The complete known-best atlas from n equals one through one hundred.](known-best-1-100.svg)](known-best-1-100.svg)
 
 The composite is a native 10-by-10 SVG, not a screenshot montage.
