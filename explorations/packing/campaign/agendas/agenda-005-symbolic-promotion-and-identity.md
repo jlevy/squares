@@ -169,35 +169,45 @@ agenda:
   - id: BC-045
     purpose: tool_validation
     owner_focus: correctness
-    instances: [11]
+    instances: [5, 10, 11, 29]
     state: ready
-    priority: 1
+    priority: 0
     question: >-
       Can an interval checker discharge existence and uniqueness for a root of a declared
-      contact system, calibrated where the answer is already known?
+      contact system, calibrated where the answer is already known, and then certify the
+      reported n = 29 value?
     hypotheses: []
-    budget: one W7 pipeline-improvement slice of at most 90 minutes
+    budget: >-
+      two W7 pipeline-improvement blocks of about four hours each, phased as
+      plan-2026-08-28-interval-certification describes; no individual slot over 30 minutes
     entry: >-
-      the n = 11 contact system is available from the literature, so the checker can be
-      calibrated against a root that is already certified by other means
+      the n = 11 contact system is available from the literature, and the n = 29 system
+      and layout map are published in the retained SVG and already transcribed in
+      cases/kingbird29/verify_svg.py, so both can be certified without an assembler
     exit: >-
-      An outward-rounded interval certificate for the n = 11 root that agrees with the
-      existing exact witness, or a typed statement of which conditioning or singularity
-      prevents it.
+      Outward-rounded interval certificates for n = 5, n = 10 and n = 11 that agree with
+      the existing exact witnesses, controls proving the operator refuses on two-root and
+      no-root boxes, and either an n = 29 certificate recorded unresolved with
+      needs_review or a typed statement of which conditioning prevents it.
     bead: think-75ll
     depends_on: []
     workflows: [pipeline-improvement]
     next_evidence: >-
-      The `PoseBox` scalar and the interval branch-and-bound hook are recorded as unbuilt
-      on the proof lane, and `packing-witness promote --strategy interval-existence`
-      raises `_interval_not_built()`. This is the missing half of step six, and it is
-      independent of BC-042 through BC-044 because the n = 11 system does not need to be
-      inferred to be certified.
+      Built under plan-2026-08-28-interval-certification, all four phases, linked from
+      this commitment's note. The witness contract already names this method:
+      sqpack.assurance
+      lists interval-certified among the methods that may carry verified, and
+      sqpack.witness enforces it, but exact_verify raises checker-not-built. The socket
+      exists and the checker does not. witness.schema.yaml has no scalar kind for an
+      enclosure, which is a deliberate contract change the spec calls out.
     note: >-
-      Deliberately scoped to n = 11 only. Certified numerics discharge a root of a system
-      someone supplies; they do not identify a contact structure or recover a number
-      field. Pointing this at n = 29 before BC-042 and BC-043 exist would be certifying a
-      system nobody has written down.
+      Rescoped on 2026-08-28. The previous note said pointing this at n = 29 would be
+      certifying a system nobody has written down. That is false: the retained SVG
+      publishes the closed system and the symbolic layout map together, and this
+      repository already transcribes both. BC-045 is now the primary route to the
+      n = 29 prize rather than an n = 11 exercise, because it needs no minimal polynomial
+      and BC-044 may not terminate. Built under
+      [plan-2026-08-28-interval-certification](../../docs/project/specs/active/plan-2026-08-28-interval-certification.md).
   - id: BC-048
     purpose: tool_validation
     owner_focus: correctness
@@ -309,19 +319,56 @@ It is not uncertain; see X-004.
 
 ## Bounded blocks
 
+Replanned on 2026-08-28 after the second correction in
+[X-004](../explorations/X-004-n29-exact-promotion.md).
+The previous ordering rested on a chain that does not hold at `n = 29`: it assumed
+precision had to come from a system this project assembles, so assembly had to come
+first. The source publishes the system, and it publishes the layout map with it, so at
+this size neither assembly step gates anything.
+
 | Block | Commitments | Checkpoint question |
 | --- | --- | --- |
-| 1 | BC-042, BC-045 | Is the contact structure frozen, and can a root be certified on a system someone else wrote down? |
-| 2 | BC-043 | Can the system be assembled and closed, reproducing the known `n = 11` form? |
-| 3 | BC-047 | Can precision be manufactured from the system, past what the source carries? |
-| 4 | BC-044 | Does the solve recover `n = 11`’s published polynomial, and does the round trip close? |
-| 5 | BC-048 | Can the numeric floor be removed, so our own poses become promotable? |
-| 6 | BC-046 | What should the map count? |
+| A | BC-047, BC-042 | Can precision be manufactured on demand in-repository, and is the contact structure frozen at `n = 11` and `n = 29`? |
+| B | BC-045 phases 1–2 | Does the operator prove *uniqueness* on a known root, and refuse on the two-root and no-root controls? |
+| C | BC-045 phases 3–4 | Does the interval verdict agree with the exact route where both apply, and what does `n = 29` return? |
 
-Blocks 2, 3 and 4 are a strict chain and the probe in X-004 is why: precision cannot be
-read from the source, so it must come from the system, so the system must exist first.
-Block 1’s two commitments are independent of that chain and of each other.
-Block 5 is independent of everything and may run whenever the symbolic lane stalls.
+The ordering is now driven by which route can actually reach the prize.
+Certifying the reported `n = 29` value moves `verified_upper_bound` from the Schadt
+rational to Kingbird’s, closing `5.23e-5`, and there are two routes to it.
+BC-044 recovers a minimal polynomial and discharges it exactly — strictly stronger, and
+of uncertain feasibility: the completed sweep in X-004 found no integer relation through
+degree twenty with coefficients below `10^22`, so the polynomial is large and
+elimination in six unknowns may not terminate.
+BC-045 needs no polynomial at all.
+**The robust route is therefore the one that had no specification**, which is why
+[plan-2026-08-28-interval-certification](../../docs/project/specs/active/plan-2026-08-28-interval-certification.md)
+was written before this replan and why BC-045 now owns two of the three blocks.
+
+Within a block, BC-047 and BC-042 are independent of each other and of everything else,
+so they are two lanes rather than a sequence.
+
+**Reserve lanes**, for when a block stalls rather than as scheduled work:
+
+| Commitment | Why it is not scheduled |
+| --- | --- |
+| BC-043 | Generalizes the route to sizes with no published system. Real value, but it gates nothing at `n = 29`. |
+| BC-044 | The ambitious route. Its honest prior is poor; run it against a BC-047 refinement if a block closes early. |
+| BC-048 | Independent of the whole symbolic lane; the natural filler. |
+| BC-046 | A different program, and a decision before it is a build. It also unblocks BC-033. |
+
+### Shape of an overnight run
+
+Three blocks of about four hours give a ten-to-twelve hour run with a coherent
+integration checkpoint at each boundary.
+The
+[portable session guide](../agent-sessions/README.md#starting-a-portable-four-hour-session)
+owns the within-block discipline and this agenda does not restate it: one absolute
+deadline per block, no slot over thirty minutes, protected finalization, and later
+slices re-planned from measured elapsed time at every boundary.
+
+Each block boundary runs the **full** `packing-validate`, not `--fast`, and commits
+before the next block opens.
+A block that closes zero commitments is reported, not silently extended.
 
 ### Replan triggers
 

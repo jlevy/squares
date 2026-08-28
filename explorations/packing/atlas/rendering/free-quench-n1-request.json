@@ -1,0 +1,11 @@
+{
+  "contract": "packing.squares:QuenchRequest/v1",
+  "schema_version": 1,
+  "side": 1.6,
+  "x": [0.5],
+  "y": [0.5],
+  "theta": [0.2],
+  "solver": "quench-bracket",
+  "max_sweeps": 1,
+  "time_budget": 10.0
+}

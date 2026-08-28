@@ -182,8 +182,11 @@ case or experiment separately.
 | [Plan: The Symbolic Promotion Gap, and What a Complete Atlas Would Need](docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md) | implementation plan | current | transient | — |
 | [Feature: The Numeric–Symbolic Round Trip](docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md) | implementation plan | current | transient | — |
 | [Feature: Promotion Pipeline Implementation](docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md) | implementation plan | current | transient | — |
+| [Feature: The Interval Certification Bridge](docs/project/specs/active/plan-2026-08-28-interval-certification.md) | implementation plan | current | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
+| [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
+| [Feature: Generalized Square-Packing Motion Lab](docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md) | implementation plan | current | transient | — |
 | `frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
@@ -291,6 +294,44 @@ controller, not permission to blur contracts.
 The renderer’s standing exact-motion control remains independently replayable:
 
 ![The final frame of the certified exact five-square trajectory.](atlas/rendering/n5-exact-face-trajectory.svg)
+
+**As of 2026-08-28 — start here.** The active plan is
+[agenda-005](campaign/agendas/agenda-005-symbolic-promotion-and-identity.md), replanned
+that day. Its next slice is **block A: `BC-047` under `think-y85e` and `BC-042` under
+`think-zmh8`**, two independent lanes.
+Blocks B and C are `BC-045` under `think-75ll`, built to
+[plan-2026-08-28-interval-certification](docs/project/specs/active/plan-2026-08-28-interval-certification.md).
+The narrative below is historical and its earlier “next bounded slice” pointers are
+superseded by this paragraph.
+
+The replan followed a correction recorded in
+[X-004](campaign/explorations/X-004-n29-exact-promotion.md).
+The retained `n = 29` SVG does not merely serialize a `FindRoot` result: it publishes
+the **complete closed system** — nine slide scalars in closed form and six equations
+`f1 … f6` in `{s, a, b, c, d, i}` — **and the layout map**, whose `<use>` transforms are
+written symbolically in those same names.
+[`cases.kingbird29.verify_svg`](cases/kingbird29/verify_svg.py) had already transcribed
+all of it and used it only to evaluate residuals, never to solve.
+Solving that same transcription reproduces the record to all fifteen published digits
+and reaches a maximum equation residual of `1.11e-1200` in about six seconds.
+So `BC-042` and `BC-043` gate nothing at `n = 29`; they generalize the route to sizes
+with no published system.
+
+That moved the prize onto `BC-045`. Certifying the reported `n = 29` value would move
+`verified_upper_bound` from the Schadt rational to Kingbird’s, closing `5.23e-5`. Two
+routes reach it: `BC-044` recovers a minimal polynomial and discharges it exactly, which
+is stronger but of uncertain feasibility — a completed sweep found no integer relation
+through degree twenty with coefficients below `10^22` — while `BC-045` needs no
+polynomial at all. The robust route was the one with no specification, so that
+specification now exists.
+The witness contract already names `interval-certified` as a method that may carry
+`verified`; only the checker is missing, and `exact_verify` still raises
+`checker-not-built`.
+
+The standing rule is unchanged and applies to every block: an unattended runner may
+apply the accept rule only conservatively.
+A round that certifies `n = 29` is recorded `unresolved` with `needs_review: true`, and
+a human makes the accept decision.
 
 PR 45 is merged and
 [session 025](campaign/agent-sessions/session-025-pr45-performance-continuation.md) is
@@ -2126,16 +2167,16 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 347 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 353 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 84 | asserted something false about the mathematics |
 | validity | 84 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 131 | recorded something its own evidence contradicts |
+| bookkeeping | 136 | recorded something its own evidence contradicts |
 | robustness | 39 | did not finish, or finished only by luck |
-| performance | 9 | worked, but cost far more than it should |
+| performance | 10 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -2143,7 +2184,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 347, and no soundness defect
+**The automated gate has caught forty-five defects in 353, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2496,6 +2537,17 @@ scientific work budget is still wall-clock time, so contention changes the numbe
 solves and probes performed.
 Price and compare basin experiments by retained work units; use the wall clock only as a
 recorded outer deadline.
+
+**A second contained defect makes the LP count itself unreliable on aborted runs.**
+[D-349](defects.md): `_free_sweep` accumulates its own LP count and returns it, and
+`quench_bracket` adds that total only on the normal return path, so a sweep that raises
+on its wall budget or on an unsettled cell carries the partial count away with it.
+The reported `lp_solves` therefore understates any run that stopped inside a free sweep.
+The direction is conservative and the fix is deferred because it changes figures already
+reported in past rounds, but a per-solve efficiency number computed from a budget-cut
+run is too favourable until it lands.
+The Motion Lab timeline is what made it visible: it retains one event per solve, so an
+aborted sweep has more retained events than the counter describing them.
 
 ## References
 

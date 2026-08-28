@@ -321,7 +321,7 @@ explorations/packing/
 ├── benchmarks/             Explicit performance probes, outside the runtime package
 ├── tests/                  Fast behavior, command, and architecture contracts
 ├── sqsearch/               Tier-1 screening annealer (Rust)
-├── defects.yaml            the defect logbook: every bug and record defect found here
+├── defects.yaml            the defect log: every bug and record defect found here
 ├── defects.schema.yaml     its contract, enforced in the gate
 ├── defects.md              generated from defects.yaml; never edited by hand
 └── frankensim-probe/       two experiments run against Jeffrey Emanuel's FrankenSim,
@@ -369,6 +369,39 @@ uv run --frozen --all-extras --group dev python -m devtools.render_packing_galle
 uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --check
 ```
 
+The Motion Lab now has two scenarios on one shared visual system.
+The [self-contained exact `n = 5` lab](atlas/rendering/n5-motion-lab.html) reuses the
+exact R4/R5 and `+W` case functions while leaving the publication renderer’s script-free
+SVG contract unchanged.
+The served setup-and-quench scenario accepts arbitrary seeded configurations, supports
+temporary sticky chunks for placement, releases every chunk before numerical
+optimization, and presents fixed-angle LP states separately from angular probes and
+accepted rotations.
+
+**The Motion Lab is a rough draft.** It landed on 2026-08-28 out of a single `n = 5`
+spike, has produced no research result, and its first review found six defects in it —
+all in the new instrument, none in the mathematics it displays.
+Its contracts are versioned because they are expected to change.
+Use it to look at what the quench does; do not cite it.
+The [runbook](atlas/rendering/README.md#general-motion-lab-setup-and-free-quench) states
+the maturity boundary in full and records what that review found.
+
+From this directory, open the served lab in the default browser:
+
+```bash
+uv run --frozen --all-extras --group dev python \
+  -m devtools.serve_packing_motion_lab serve --open
+```
+
+The
+[Motion Lab runbook](atlas/rendering/README.md#general-motion-lab-setup-and-free-quench)
+documents setup controls, phase marks, trace download and replay, the retained known
+answer, service limits, and the explicit absence of persistent optimization constraints.
+The
+[generalized Motion Lab plan](docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md)
+owns the versioned contracts and keeps rigid groups and contact locks behind a separate
+Phase 2 decision.
+
 The focused read-only gate is:
 
 ```bash
@@ -377,9 +410,13 @@ uv run --frozen --all-extras --group dev packing-validate --only "deterministic 
 
 ## What Has Gone Wrong Here
 
-[`defects.md`](defects.md) is the logbook: every bug, inefficiency and record defect
-found in this toolchain, what caught it, and what now stops it recurring.
+[`defects.md`](defects.md) is the generated defect log: every bug, inefficiency, and
+record defect found in this toolchain, what caught it, and what now stops it recurring.
 It is generated from [`defects.yaml`](defects.yaml) and checked in the gate.
+It is separate from the
+[research-loop logbook](campaign/research-loop-logbook/README.md), which summarizes
+bounded runs and links their positive, negative, and unresolved scientific results to
+the experiment records that own them.
 
 It is kept because the aggregate says things no individual bug report can, and two of
 those things shape how this directory works:
