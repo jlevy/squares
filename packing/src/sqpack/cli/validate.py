@@ -36,7 +36,7 @@ from sqpack.project import (
 )
 
 PROJECT_ROOT = configured_project_root()
-REPOSITORY_ROOT = PROJECT_ROOT.parents[1]
+REPOSITORY_ROOT = PROJECT_ROOT.parent
 ENGINE = PROJECT_ROOT / "sqsearch/target/release/sqsearch"
 RESULTS = Path("campaign/series/series-000-smoke-and-calibration/results")
 ACTIVITY_MARKER = PROJECT_ROOT / ".gate-running"

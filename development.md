@@ -1,10 +1,9 @@
 # Packing Development Guide
 
-This is the engineering entry point for `explorations/packing/`. Read
-[`TUTORIAL.md`](TUTORIAL.md) for the mathematics, [`SYNOPSIS.md`](SYNOPSIS.md) for
-research status, and [`campaign/README.md`](campaign/README.md) before operating the
-research loop. This guide owns runtime support, code placement, validation, and
-refactoring practice.
+This is the engineering entry point for `packing/`. Read [`TUTORIAL.md`](TUTORIAL.md)
+for the mathematics, [`SYNOPSIS.md`](SYNOPSIS.md) for research status, and
+[`campaign/README.md`](campaign/README.md) before operating the research loop.
+This guide owns runtime support, code placement, validation, and refactoring practice.
 
 The governing rule is assurance proportional to reuse and consequence.
 Shared code and research-state boundaries are designed, typed, tested, and kept easy to
@@ -80,7 +79,7 @@ A case may consume a maintained API; the maintained API may not grow a Trump-, G
 checkpoint-, or single-`n` exception to accommodate it.
 
 The four installed commands operate on repository-owned state, so they require a valid
-`explorations/packing/` checkout.
+`packing/` checkout.
 Source and editable installs locate that checkout directly; a non-editable installation
 can use the current checkout or set `PACKING_PROJECT_ROOT` explicitly.
 A missing or malformed project root is a hard, actionable error.

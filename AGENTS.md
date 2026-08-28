@@ -30,7 +30,7 @@ make format-check    # report drift without writing
 ```
 
 Packing-specific Python, Rust, and research validation is documented in
-[`explorations/packing/development.md`](explorations/packing/development.md).
+[`development.md`](development.md).
 From that directory, use
 `uv run --frozen --all-extras --group dev packing-validate --fast` while editing and the
 full `packing-validate` command at a research or merge checkpoint.
@@ -53,8 +53,8 @@ Two rules worth knowing before changing any of this:
 
 - **Exclusions are evidence-based, not precautionary.** The policy is to format the
   whole repository and exclude only what we have a tested reason to leave raw.
-  Two exclusions qualify: the literature archive under
-  `explorations/packing/resources/`, and the generated `SKILL.md` files.
+  Two exclusions qualify: the literature archive under `packing/resources/`, and the
+  generated `SKILL.md` files.
   The archive is excluded for a measured reason — flowmark inserts line breaks *inside*
   `$...$` spans when it rewraps, which on 2026-08-22 broke 31 of 339 math spans in one
   transcription and 101 of 1236 in another.
@@ -63,8 +63,8 @@ Two rules worth knowing before changing any of this:
 - **The hook formats the whole repository, not the staged files.** Flowmark reads
   `.flowmarkignore` relative to its target argument, so passing explicit paths silently
   bypasses the exclusion list.
-  That matters here: `.flowmarkignore` protects `explorations/packing/resources/`, where
-  the `.raw.md` extractions are byte-level ground truth used to check the model-assisted
+  That matters here: `.flowmarkignore` protects `packing/resources/`, where the
+  `.raw.md` extractions are byte-level ground truth used to check the model-assisted
   transcriptions against.
   Reflowing them would void that guarantee.
   Do not “optimise” the hook to `{staged_files}`.
@@ -78,8 +78,7 @@ Emergency bypass: `git commit --no-verify` (avoid in PRs).
 
 ## Architecture Overview
 
-All content lives in one self-contained project directory,
-[`explorations/packing/`](explorations/packing/README.md).
+All content lives in one self-contained project directory, [`packing/`](README.md).
 It owns *everything* for its topic: its own reports under `docs/project/research/`, its
 own literature archive under `resources/`, and its own code and tests.
 That directory is the pattern any future exploration should follow.
@@ -103,18 +102,16 @@ in the other repository.
   support.
 - **Independently tracked packing work declares its entry point.** The coordinating
   agent chooses W1–W7 (or `general-improvement` only for genuine repository maintenance
-  outside those workflows) from
-  [`explorations/packing/README.md`](explorations/packing/README.md#workflow-entry-points)
-  before beginning a session or a genuine workflow phase.
+  outside those workflows) from [`README.md`](README.md#workflow-entry-points) before
+  beginning a session or a genuine workflow phase.
   Bounded delegated work such as formatting, lint repair, extraction, or repeated checks
   inherits the parent phase unless it opens its own independently tracked session.
   Longer sessions record workflow and primary-focus changes as ordered phases;
-  [`explorations/packing/SYNOPSIS.md`](explorations/packing/SYNOPSIS.md#workflow-entry-contracts)
-  owns the full contracts.
+  [`SYNOPSIS.md`](SYNOPSIS.md#workflow-entry-contracts) owns the full contracts.
 - **Multi-hour packing work starts with a time-sliced plan.** Follow the
-  [bounded research cycle](explorations/packing/campaign/README.md#the-bounded-research-cycle)
-  and the
-  [portable session guide](explorations/packing/campaign/agent-sessions/README.md#starting-a-portable-four-hour-session).
+  [bounded research cycle](packing/campaign/README.md#the-bounded-research-cycle) and
+  the
+  [portable session guide](packing/campaign/agent-sessions/README.md#starting-a-portable-four-hour-session).
   Unless the user sets another cadence, target a coherent integration checkpoint within
   about four hours and cap each slice at 30 minutes.
   Thirty minutes is a ceiling and review point, not a quota: close a smaller process,

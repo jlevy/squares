@@ -9,7 +9,7 @@ re-fetching, re-extracting, or fighting paywalls and bot-blocks.
 ## Layout
 
 ```
-explorations/packing/resources/
+packing/resources/
 ├── papers/   Academic papers: original .pdf + cleaned .md + faithful .raw.md
 └── web/      Web sources (catalogues, surveys, encyclopedic): original .html + .md
 ```
@@ -105,8 +105,8 @@ Some faithful `pdfminer` output contains spaces on blank lines, so the root
 Hand-written Markdown keeps the normal check; raw extraction bytes are never normalized
 to satisfy a presentation rule.
 
-`explorations/packing/resources/README.md` — this file — is *not* excluded, and is
-formatted normally.
+`packing/resources/README.md` — this file — is *not* excluded, and is formatted
+normally.
 
 ## Searching
 
@@ -114,13 +114,13 @@ Paths below are written from the repository root.
 
 ```bash
 # Find every mention of a bound across the whole archive
-grep -rn "unavoidable" explorations/packing/resources/ --include=*.md
+grep -rn "unavoidable" packing/resources/ --include=*.md
 
 # Search only cleaned papers, not raw extractions or HTML
-grep -rn "3.877" explorations/packing/resources/papers/*.md
+grep -rn "3.877" packing/resources/papers/*.md
 
 # Check a formula in a cleaned paper against the raw extraction
-grep -n "sqrt" explorations/packing/resources/papers/stromquist-2003-*.raw.md
+grep -n "sqrt" packing/resources/papers/stromquist-2003-*.raw.md
 ```
 
 ## Papers

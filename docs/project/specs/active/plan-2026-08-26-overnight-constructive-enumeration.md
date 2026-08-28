@@ -236,7 +236,7 @@ An open grammar is a normal state; a silently adjusted one is a defect.
 Use the repository lock and the supported invocation from `development.md`:
 
 ```bash
-cd explorations/packing
+cd packing
 uv run --frozen --all-extras --group dev packing-validate --fast
 ```
 

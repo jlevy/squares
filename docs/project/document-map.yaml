@@ -5,7 +5,7 @@ softschema:
 
 last_reviewed: '2026-08-26'
 scope: >
-  Durable Markdown owned by explorations/packing. Source-faithful archive content is
+  Durable Markdown owned by packing. Source-faithful archive content is
   excluded because its role and lifecycle come from resources/README.md rather than
   current project documentation rules.
 documents:

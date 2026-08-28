@@ -30,8 +30,10 @@ from strif import atomic_output_file
 from sqpack.assurance import bounds_agree_at_declared_precision
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+# The repository root. The reader-facing documents live there, not under packing/.
+REPO = ROOT.parent
 FRONTIER = ROOT / "frontier"
-MAIN = ROOT / "docs/project/research/research-2026-08-22-packing-11-unit-squares.md"
+MAIN = REPO / "docs/project/research/research-2026-08-22-packing-11-unit-squares.md"
 STATUS = FRONTIER / "STATUS.md"
 
 BEGIN = "<!-- BEGIN GENERATED: %s (devtools.render_research_tables) -->"

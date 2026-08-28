@@ -35,7 +35,7 @@ from typing import Any
 
 import yaml
 
-REPO = Path(__file__).resolve().parents[3]
+REPO = Path(__file__).resolve().parents[2]
 ISSUES = ".tbd/data-sync/issues"
 # `tbd` materializes the sync branch here; using it keeps the check offline.
 WORKTREE = REPO / ".git" / "tbd" / "data-sync-worktree" / ISSUES

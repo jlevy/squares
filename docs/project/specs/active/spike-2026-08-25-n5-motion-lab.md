@@ -133,7 +133,7 @@ The owner selector changes the displayed contradiction for the same geometry:
 
 ## Run and Check
 
-From `explorations/packing/`:
+From `packing/`:
 
 ```shell
 uv run --frozen --all-extras --group dev python \

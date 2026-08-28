@@ -38,9 +38,11 @@ import yaml
 from devtools.check_synopsis import check_links
 
 ROOT = Path(__file__).resolve().parent.parent
-README = ROOT / "README.md"
-SYNOPSIS = ROOT / "SYNOPSIS.md"
-RESEARCH = ROOT / "docs/project/research"
+# The repository root. The reader-facing documents live there, not under packing/.
+REPO = ROOT.parent
+README = REPO / "README.md"
+SYNOPSIS = REPO / "SYNOPSIS.md"
+RESEARCH = REPO / "docs/project/research"
 DEFECTS = ROOT / "defects.yaml"
 SESSION_SCHEMA = ROOT / "campaign/schemas/agent-session.schema.yaml"
 
@@ -82,7 +84,7 @@ _SPELLED = {
 def layout_tree(text: str) -> str | None:
     """The fenced block that draws the directory, if README still has one."""
     for block in re.findall(r"```\n(.*?)```", text, re.S):
-        if block.lstrip().startswith("explorations/packing/"):
+        if block.lstrip().startswith("packing/"):
             return block
     return None
 

@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://github.com/jlevy/thinking-scratchpad/explorations/packing/frontier/source-availability.schema.yaml
+$id: https://github.com/jlevy/squares/packing/frontier/source-availability.schema.yaml
 title: SourceAvailability
 description: >
   Every source the research documents cite that is not in the local archive,

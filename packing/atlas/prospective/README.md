@@ -52,7 +52,7 @@ The next corpus-extension pass should:
 
 ## Rebuild
 
-From `explorations/packing`:
+From `packing`:
 
 ```bash
 uv run --frozen --all-extras --group dev python -m devtools.map_prospective_sources --check

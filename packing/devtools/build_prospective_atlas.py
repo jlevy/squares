@@ -28,7 +28,7 @@ from sqpack.render.model import RenderSpec
 from sqpack.witness import check_witness_semantics, witness_document
 
 ROOT = Path(__file__).resolve().parent.parent
-REPOSITORY_ROOT = ROOT.parents[1]
+REPOSITORY_ROOT = ROOT.parent
 SOURCE_MAP = ROOT / "atlas/prospective/source-availability-101-324.json"
 SOURCE_ROOT = ROOT / "resources/web/prospective-packings/unitsquare"
 WITNESS_ROOT = ROOT / "witnesses/prospective"

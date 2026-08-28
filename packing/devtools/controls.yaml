@@ -527,8 +527,8 @@ controls:
   expect: "apparently-novel evidence requires a dated source_reviewed"
 
 - name: generated view left un-exempt from the Markdown formatter
-  file: ../../.flowmarkignore
-  replace: ["explorations/packing/defects.md\n", ""]
+  file: ../.flowmarkignore
+  replace: ["defects.md\n", ""]
   run: python3 -m devtools.check_generated_markdown
   expect: "generated views not exempt from the Markdown formatter"
 

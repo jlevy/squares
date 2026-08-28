@@ -140,7 +140,7 @@ case or experiment separately.
 | [Composite figure playbook](atlas/known-best/FIGURE-PLAYBOOK.md) | component scope and use | supporting | maintained | — |
 | [Prospective Packing Atlas, `n = 101..324`](atlas/prospective/README.md) | component scope and use | supporting | maintained | — |
 | [Deterministic SVG Gallery](atlas/rendering/README.md) | component scope and use | supporting | maintained | — |
-| [Conventions for `explorations/packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
+| [Conventions for `packing/`](conventions.md) | artifact and naming conventions | definitive | maintained | — |
 | [Packing Development Guide](development.md) | engineering and validation rules | definitive | maintained | — |
 | [The `s(n)` Research Campaign — W6 Runbook](campaign/README.md) | W6 experiment mechanics | definitive | maintained | — |
 | [Agent Sessions](campaign/agent-sessions/README.md) | escalated session and recovery contract | definitive | maintained | — |
@@ -789,8 +789,8 @@ result.
 
 ### Work Units and Records
 
-**Packing exploration.** The complete self-contained project at `explorations/packing/`:
-research documents, sources, code, tests, plans, and campaign record.
+**Packing exploration.** The complete self-contained project at `packing/`: research
+documents, sources, code, tests, plans, and campaign record.
 Write the full phrase when this directory is meant.
 Bare *exploration* retains the mathematical meaning under
 [The Operations](#the-operations).
@@ -1605,7 +1605,7 @@ distinct terminal component.
 ### Reproducing all of it
 
 ```bash
-cd explorations/packing
+cd packing
 uv run --frozen python -m cases.trump11.verify_exact
 uv run --frozen python -m cases.trump11.independent_lp_cell
 uv run --frozen python -m cases.campaign_smoke.quench_experiment

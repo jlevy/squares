@@ -143,7 +143,7 @@ witness into an optimality proof.
 
 ## Rebuild
 
-From `explorations/packing`:
+From `packing`:
 
 ```bash
 uv run --frozen --all-extras --group dev python -m devtools.build_known_best_atlas --check

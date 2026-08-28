@@ -440,7 +440,7 @@ The H-020/exp-011 identifiers below are a historical lifecycle example, not a
 copy-pastable ready round; `status` and the confidence ladder own the live queue.
 
 ```shell
-cd explorations/packing
+cd packing
 uv run --frozen --group dev packing-validate --strict
 uv run --frozen packing-campaign status
 uv run --frozen packing-campaign preflight

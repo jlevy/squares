@@ -15,7 +15,7 @@ from devtools.render_document_map import MAP, ROOT, SYNOPSIS, expected_synopsis,
 
 FOOTER = "This document follows common-doc-guidelines.md."
 IGNORED_PARTS = {".pytest_cache", ".venv", "__pycache__"}
-REPOSITORY_ROOT = ROOT.parents[1]
+REPOSITORY_ROOT = ROOT.parent
 RETIRED_PHRASES = (
     "approximately verified",
     "numerical-arbitrary-precision",

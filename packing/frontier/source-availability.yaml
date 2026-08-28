@@ -19,7 +19,7 @@ softschema:
   status: enforced
 
 last_checked: '2026-08-27'
-archive: explorations/packing/resources/
+archive: packing/resources/
 
 # Cleared since the first pass. Kept so the correction is visible, and as
 # evidence for the re-test rule above.

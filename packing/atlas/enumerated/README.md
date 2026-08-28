@@ -43,8 +43,7 @@ per-topology count.
 
 ## Inspect One Record
 
-From `explorations/packing`, query a retained identity without re-enumerating or writing
-files:
+From `packing`, query a retained identity without re-enumerating or writing files:
 
 ```bash
 uv run --frozen python -m devtools.build_contact_scaffold_atlas --show T5-01/0000

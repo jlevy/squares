@@ -76,11 +76,11 @@ from sqpack.workers import worker_count
 ROOT = Path(__file__).resolve().parent.parent
 # The REPOSITORY root, not this directory: one control targets ../../.flowmarkignore,
 # because "is the generated view exempt from the Markdown formatter?" is a question
-# about a file two levels up (D-027). Cloning only `explorations/packing` would put
+# about a file two levels up (D-027). Cloning only `packing` would put
 # that control's target outside the sandbox and back in the real working tree, which
 # is the one thing this file now exists to prevent. Clone the repo, work in the
 # corresponding subdirectory.
-REPO = ROOT.parent.parent
+REPO = ROOT.parent
 HERE = ROOT.relative_to(REPO)
 
 # Controls need the packing source, not the literature archive, the rest of the

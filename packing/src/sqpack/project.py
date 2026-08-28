@@ -48,6 +48,6 @@ def require_project_root(root: Path | None = None) -> Path:
         joined = ", ".join(missing)
         raise ProjectLayoutError(
             f"packing project checkout not found at {candidate}; missing {joined}. "
-            f"Run from explorations/packing or set {PROJECT_ROOT_ENV} to that directory."
+            f"Run from packing or set {PROJECT_ROOT_ENV} to that directory."
         )
     return candidate

@@ -317,7 +317,7 @@ The Python `sqpack.verify_packing(..., sign=...)` signature stays as-is so
 Every item below is a bead against this spec:
 
 ```bash
-tbd list --spec explorations/packing/docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
+tbd list --spec docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md
 tbd ready    # what is unblocked now
 ```
 
@@ -547,7 +547,7 @@ Floors, from measurements already taken:
 
 ## Rollout Plan
 
-Everything lands in `explorations/packing/`, alongside what is already there.
+Everything lands in `packing/`, alongside what is already there.
 The Python `sqpack` package keeps working throughout — Phase 1 adds a faster path and a
 richer return type without changing the existing signature, so `packing-validate` passes
 at every commit.
@@ -713,10 +713,10 @@ Research documents this spec implements:
 
 Existing code and data this builds on:
 
-- [`explorations/packing/`](../../../../README.md) — the Python verifier, negative
-  controls, and `packing-validate`.
-- [`explorations/packing/frontier/`](../../../../frontier/README.md) — the per-`n`
-  corpus and the datasets the experiments will write back into.
+- [`packing/`](../../../../README.md) — the Python verifier, negative controls, and
+  `packing-validate`.
+- [`packing/frontier/`](../../../../frontier/README.md) — the per-`n` corpus and the
+  datasets the experiments will write back into.
 
 External:
 

@@ -469,7 +469,7 @@ exact title, authors, dates and reported results; and the `LeanCert` and
 
 **Claims grounded in this repository rather than the literature.** The 55-pair /
 14-contact structure of Trump’s packing, the degree-8 field, and the 0.35 s verification
-time are from `explorations/packing/` and were re-verified in earlier sessions.
+time are from `packing/` and were re-verified in earlier sessions.
 The 57 ns and 23.6 s figures used in the slowdown table are from the
 [infrastructure study’s](research-2026-08-22-infrastructure-for-packing-exploration.md)
 measurements and the record page respectively.

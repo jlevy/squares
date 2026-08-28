@@ -21,7 +21,7 @@ properties:
     additionalProperties: false
     required: [path]
     properties:
-      path: {const: explorations/packing/atlas/prospective/source-availability-101-324.json}
+      path: {const: packing/atlas/prospective/source-availability-101-324.json}
   selection:
     type: object
     additionalProperties: false
@@ -50,7 +50,7 @@ properties:
         n: {enum: [103, 105, 110, 131]}
         path:
           type: string
-          pattern: '^explorations/packing/resources/web/prospective-packings/unitsquare/n[0-9]{3}\.svg$'
+          pattern: '^packing/resources/web/prospective-packings/unitsquare/n[0-9]{3}\.svg$'
         url: {type: string, format: uri}
         retrieved: {type: string, format: date}
         bytes: {type: integer, minimum: 1}
@@ -115,5 +115,5 @@ $defs:
       derivation: {type: string, minLength: 1}
       path:
         type: string
-        pattern: '^explorations/packing/resources/web/prospective-packings/unitsquare/n[0-9]{3}\.svg$'
+        pattern: '^packing/resources/web/prospective-packings/unitsquare/n[0-9]{3}\.svg$'
       url: {type: string, format: uri}

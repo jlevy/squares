@@ -17,7 +17,7 @@ from devtools.check_readme import meaningful_top_level_entries
 from sqpack.project import ProjectLayoutError, require_project_root
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-REPOSITORY_ROOT = PROJECT_ROOT.parents[1]
+REPOSITORY_ROOT = PROJECT_ROOT.parent
 SOURCE_ROOT = PROJECT_ROOT / "src" / "sqpack"
 VALIDATION_WORKFLOW = REPOSITORY_ROOT / ".github" / "workflows" / "packing-validation.yml"
 PYTHON_VERSION = PROJECT_ROOT / ".python-version"
@@ -204,7 +204,7 @@ def test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock() -
         )
         setup_options = _mapping(setup_uv["with"])
         assert setup_options["python-version"] == "3.14.7"
-        assert setup_options["working-directory"] == "explorations/packing"
+        assert setup_options["working-directory"] == "packing"
         assert setup_options["cache-dependency-glob"] == "uv.lock"
 
         environment_commands = [

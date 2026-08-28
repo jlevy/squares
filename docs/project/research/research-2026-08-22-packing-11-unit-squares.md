@@ -19,7 +19,7 @@ Claims in this document carry an inline key in bold brackets, e.g.
 So every cited source can be read and grepped locally without re-fetching:
 
 ```bash
-grep -rn "unavoidable" explorations/packing/resources/papers/*.md
+grep -rn "unavoidable" packing/resources/papers/*.md
 ```
 
 Where a claim rests on a source that could **not** be retrieved, it is marked
@@ -195,7 +195,7 @@ The full defining data of Trump’s packing is recoverable.
 It was reconstructed from **[Ellsworth SVG]** and is now replayed by the repository’s
 exact algebraic verifier — the annotated source of the `n = 11` diagram in David
 Ellsworth’s catalogue, archived locally at
-`explorations/packing/resources/papers/kingbird-square-11-provenance.svg`.
+`packing/resources/papers/kingbird-square-11-provenance.svg`.
 
 **Composition.** The eleven squares split as **six axis-aligned and five tilted**. The
 axis-aligned six are: one in a corner, one mirrored against the opposite side, one
@@ -741,9 +741,9 @@ certificate for the last value; D-152 still requires every provenance display to
 that the published Figure 14 proof is false as printed.
 
 This table and the solved-case table below are **generated** from
-[`explorations/packing/frontier/`](../../../frontier/README.md), where the same facts
-live as one schema-validated artifact per `n` with provenance, links into the local
-archive, and an editorial note on each case.
+[`packing/frontier/`](../../../frontier/README.md), where the same facts live as one
+schema-validated artifact per `n` with provenance, links into the local archive, and an
+editorial note on each case.
 The duplication is deliberate — this report should be readable end to end without
 opening the data — and it is safe because the tables are rendered by
 `devtools.render_research_tables`, which `packing-validate` rechecks.
@@ -1751,11 +1751,11 @@ covers two values of `n`. Any program should be weighted accordingly.
 3. **Ship the exact verifier as a real tool.** The layered design, the language boundary
    and the measured budgets are in
    [Infrastructure for Square-Packing Exploration](research-2026-08-22-infrastructure-for-packing-exploration.md).
-   The reference implementation in [`explorations/packing/`](../../../README.md)
-   certifies `s(11)` exactly in 0.35 s of pure Python; the production version is a
-   filtered exact-predicate kernel over `ℚ(α)` on top of FLINT or CGAL. Its value is not
-   the checking — it is that a search program with an exact oracle can *publish claims
-   that mean something*, which no current record-setting program can do.
+   The reference implementation in [`packing/`](../../../README.md) certifies `s(11)`
+   exactly in 0.35 s of pure Python; the production version is a filtered
+   exact-predicate kernel over `ℚ(α)` on top of FLINT or CGAL. Its value is not the
+   checking — it is that a search program with an exact oracle can *publish claims that
+   mean something*, which no current record-setting program can do.
 
 ### Search: an open baseline where none exists
 

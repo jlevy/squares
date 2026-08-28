@@ -80,7 +80,7 @@ from sqpack.witness import (
 )
 
 ROOT = Path(__file__).resolve().parent.parent
-REPOSITORY_ROOT = ROOT.parents[1]
+REPOSITORY_ROOT = ROOT.parent
 FRONTIER = ROOT / "frontier"
 CATALOGUE = ROOT / "resources/web/kingbird-squares-in-squares.html"
 SOURCE_ROOT = ROOT / "resources/web/known-best-packings"

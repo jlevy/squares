@@ -38,7 +38,7 @@ diagnostic start/final comparison—remain in the focused
 
 ## Add or Regenerate an Example
 
-From `explorations/packing`, inspect and rebuild the current set with:
+From `packing`, inspect and rebuild the current set with:
 
 ```bash
 uv run --frozen --all-extras --group dev python -m devtools.render_packing_gallery --list

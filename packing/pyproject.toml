@@ -2,7 +2,9 @@
 name = "sqpack"
 version = "0.2.0"
 description = "Exact verification and LP-in-cell quenching for square packings"
-readme = "README.md"
+# No `readme` field. The project README is the repository root README, which sits
+# outside this build root and so cannot be referenced here; sqpack is never
+# published to an index, so the packaging metadata loses nothing by omitting it.
 requires-python = ">=3.14,<3.15"
 dependencies = [
     "jsonschema>=4.26.0",

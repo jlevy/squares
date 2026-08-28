@@ -279,7 +279,7 @@ already-preregistered numerical rounds, never a second project manager.
 ## Layout
 
 ```
-explorations/packing/
+packing/
 ├── TUTORIAL.md             First-principles orientation for a newcomer: the objects,
 │                           why the approach is shaped this way, what is established
 ├── SYNOPSIS.md             The technical root: results, status, and the experiment

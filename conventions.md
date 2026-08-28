@@ -1,4 +1,4 @@
-# Conventions for `explorations/packing/`
+# Conventions for `packing/`
 
 **The definitive registry of every convention and naming this project uses.** Where
 another document restates an id or naming convention, this one wins.

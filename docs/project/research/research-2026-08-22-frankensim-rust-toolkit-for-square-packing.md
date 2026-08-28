@@ -712,13 +712,13 @@ at the wrong head). `cargo build` and `cargo test` for `fs-math`, `fs-ivl`, `fs-
 passing in 77 s. Both experiments below.
 
 **Two experiments, written for this study.** Sources and a self-cleaning runner are in
-[`explorations/packing/frankensim-probe/`](../../../frankensim-probe/README.md); nothing
-from FrankenSim is vendored there.
+[`packing/frankensim-probe/`](../../../frankensim-probe/README.md); nothing from
+FrankenSim is vendored there.
 
 - `packing_sat.rs` runs the separating-axis test on Trump’s 11-square packing through
   `fs_ivl::Interval` and through `fs_ivl::orient2d`. The f64 coordinates were emitted
-  from our own exact verifier in `explorations/packing/`, so the two implementations
-  share inputs but no code.
+  from our own exact verifier in `packing/`, so the two implementations share inputs but
+  no code.
 - `schedule_invariance.rs` draws 64 tiles × 32 values from `fs_rand` in sequential,
   reversed and worker-interleaved order, sorts them by logical tile, and compares every
   generated word directly.
@@ -795,8 +795,7 @@ Companion documents in this repository:
 - `research-2026-08-22-packing-11-unit-squares.md` — the mathematics of `s(11)`.
 - `research-2026-08-22-square-packing-algorithms-and-tooling.md` — search and
   verification tooling; the exact verifier whose output is cross-checked here.
-- [`explorations/packing/`](../../../README.md) — the exact verifier and the FrankenSim
-  probes.
+- [`packing/`](../../../README.md) — the exact verifier and the FrankenSim probes.
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://github.com/jlevy/thinking-scratchpad/explorations/packing/frontier/strategy-catalogue.schema.yaml
+$id: https://github.com/jlevy/squares/packing/frontier/strategy-catalogue.schema.yaml
 title: StrategyCatalogue
 description: >
   An inventory of the strategies used on the square-packing problem, either for

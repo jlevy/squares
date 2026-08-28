@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://github.com/jlevy/thinking-scratchpad/explorations/packing/frontier/asymptotic-waste-bounds.schema.yaml
+$id: https://github.com/jlevy/squares/packing/frontier/asymptotic-waste-bounds.schema.yaml
 title: AsymptoticWasteBounds
 description: >
   Bounds on W(x), the wasted area when a square of side x is packed with unit

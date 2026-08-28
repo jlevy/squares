@@ -7,13 +7,12 @@ name: Packing validation
   # Keep the stable packing-required context present for every pull request. Path-level
   # filtering would leave a configured required check pending forever when no path matched.
   pull_request: {}
+  # No path filter. The project now spans the repository root (README, SYNOPSIS,
+  # TUTORIAL, conventions, development, defects and docs/, all of which the gate
+  # checks) as well as packing/, so a filter that still named one subtree would
+  # skip the gate on exactly the documents it validates.
   push:
     branches: [main]
-    paths:
-      - ".agents/skills/experiment-loop/**"
-      - ".claude/skills/experiment-loop/**"
-      - ".github/workflows/packing-validation.yml"
-      - "explorations/packing/**"
 
 permissions:
   contents: read
@@ -27,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: explorations/packing
+        working-directory: packing
     steps:
       - name: Check out the repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -39,7 +38,7 @@ jobs:
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
           python-version: "3.14.7"
-          working-directory: explorations/packing
+          working-directory: packing
           enable-cache: true
           cache-dependency-glob: uv.lock
 
@@ -94,7 +93,7 @@ jobs:
     runs-on: macos-latest
     defaults:
       run:
-        working-directory: explorations/packing
+        working-directory: packing
     steps:
       - name: Check out the repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -104,7 +103,7 @@ jobs:
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
           python-version: "3.14.7"
-          working-directory: explorations/packing
+          working-directory: packing
           enable-cache: true
           cache-dependency-glob: uv.lock
 

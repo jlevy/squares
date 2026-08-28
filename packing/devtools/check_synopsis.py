@@ -43,12 +43,14 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
-SYNOPSIS = ROOT / "SYNOPSIS.md"
-README = ROOT / "README.md"
+# The repository root. The reader-facing documents live there, not under packing/.
+REPO = ROOT.parent
+SYNOPSIS = REPO / "SYNOPSIS.md"
+README = REPO / "README.md"
 HYPOTHESES = ROOT / "campaign/hypotheses"
 AGENT_SESSIONS = ROOT / "campaign/agent-sessions"
 AGENDAS = ROOT / "campaign/agendas"
-ACTIVE_PLAN = ROOT / "docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md"
+ACTIVE_PLAN = REPO / "docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md"
 DEFECTS = ROOT / "defects.yaml"
 READINESS_BEGIN = "<!-- BEGIN CURRENT-RESEARCH-READINESS -->"
 READINESS_END = "<!-- END CURRENT-RESEARCH-READINESS -->"

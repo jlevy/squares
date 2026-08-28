@@ -178,7 +178,7 @@ unrecognised exact contact.
 
 The correct procedure is to work in the number field the packing actually lives in.
 A reusable implementation of everything in this section, with the negative controls and
-benchmarks, is in [`explorations/packing/`](../../../README.md).
+benchmarks, is in [`packing/`](../../../README.md).
 
 1. **Recover the field.** The coordinates of a rigid packing are algebraic.
    Put the whole configuration in `Q(α)` for a single primitive element `α`, with a
@@ -977,10 +977,10 @@ All timings are from this container and are indicative of relative cost, not of 
 tuned C would achieve.
 
 **Reproducibility.** The verifier, the reference packing, the field derivation, the
-negative controls, and the benchmarks are packaged in
-[`explorations/packing/`](../../../README.md); `packing-validate` there reruns the full
-validation surface and asserts the results quoted above.
-The verifier is standard library only; only the derivation script needs SymPy.
+negative controls, and the benchmarks are packaged in [`packing/`](../../../README.md);
+`packing-validate` there reruns the full validation surface and asserts the results
+quoted above. The verifier is standard library only; only the derivation script needs
+SymPy.
 
 **Record-page statistics** (184 pictured packings, 47 mentioning simulated annealing, 32
 flagged “Not yet analytically optimized”, attribution counts) were extracted by parsing
