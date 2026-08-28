@@ -89,20 +89,23 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [11, 29]
-    state: blocked
+    state: ready
     priority: 0
     question: >-
       Can the closed contact system be Newton-refined to a precision at which integer
       relation has real margin, with the residual reported rather than assumed?
     hypotheses: []
     budget: one W7 pipeline-improvement slice of at most 60 minutes
-    entry: a closed contact system from BC-043, and the serialized pose as a seed
+    entry: >-
+      At n = 29, the closed system already transcribed in cases/kingbird29/verify_svg.py,
+      with the serialized pose as a seed; no assembly step is required, which is why this
+      commitment is ready rather than blocked. At n = 11, a closed system from BC-043.
     exit: >-
       A refined solution at a declared precision, 1000 digits or more, with a reported
       residual bound; or a typed statement of which conditioning prevents it. No algebraic
       claim is made at this step, only precision.
     bead: think-y85e
-    depends_on: [BC-043]
+    depends_on: []
     workflows: [pipeline-improvement]
     next_evidence: >-
       A probe recorded in X-004 shows this step is not optional. Integer relation run
