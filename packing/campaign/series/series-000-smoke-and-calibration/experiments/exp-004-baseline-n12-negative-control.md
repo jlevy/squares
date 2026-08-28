@@ -108,7 +108,7 @@ That role was invalid because `s(12) = 4` is not proved.
 The measurements remain a reproducible baseline at the standing best; they provide no
 known-answer evidence that a value below `4` must be a bug.
 
-[The standing review of PR #5](../../../../docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md)
+[The standing review of PR #5](../../../../../docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md)
 found that exp-001’s archive kept only summary lines, discarding the configurations, and
 that its recorded commit had been made unreachable by a rebase.
 Its numbers were sound — the review re-derived them — but nothing in it could be

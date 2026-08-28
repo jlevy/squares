@@ -53,7 +53,7 @@ agenda:
       work is to freeze what is measured, not to infer what is uncertain.
     note: >-
       Closed in session-035. The n = 29 structure is frozen at atlas/known-best/contact-structures.json with 52 pair and 37 wall incidences, 89 in total across six orientation classes, an empty ambiguity report, and 97.5013 decades between the worst contact and the smallest strict separation. The same extractor reproduces Trump's n = 11 structure exactly under exact arithmetic, which was the known-answer check on the extractor itself.
-           Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+           Built under [plan-2026-08-28-promotion-pipeline-implementation](../../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
       phase 1, contact extraction.
       The n = 11 reproduction stays in scope as a known-answer check on the extraction
       itself, not because n = 29 is uncertain. Generic inference from an arbitrary
@@ -89,7 +89,7 @@ agenda:
       problem root-finding rather than minimization.
     note: >-
       Unblocked by block A. BC-042 delivered a contact structure whose ambiguity report is empty, which is exactly this commitment's entry criterion, so the dependency is discharged rather than merely older.
-      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
       phase 2, system assembly and closure. That spec carries the module layout, data shapes, API surfaces and
       per-phase negative controls an implementing agent needs.
   - id: BC-047
@@ -133,7 +133,7 @@ agenda:
       waiting on BC-042 and BC-043.
     note: >-
       Closed in session-035. The transcribed system refines to 1000 declared digits with a reported residual bound of 1.09829e-1039, and the residual tracks the working precision across five rungs rather than plateauing. A finding is recorded rather than worked around: displacing one equation of a square consistent system by a constant does not plateau the residual, so residual_falls is an observation and not a control at this size.
-           Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+           Built under [plan-2026-08-28-promotion-pipeline-implementation](../../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
       phase 3, high-precision refinement.
       This commitment exists because the first draft of this agenda omitted it and went
       straight from assembly to solving. The omission was caught by a two-minute probe
@@ -169,7 +169,7 @@ agenda:
       validity.
     note: >-
       Unblocked by block A. BC-047 delivered a refinement at 1000 declared digits, which is this commitment's entry criterion. The honest prior stays poor: the X-004 sweep found no integer relation through degree twenty with coefficients below 1e22, and elimination in six unknowns may not terminate. Ready does not mean promising.
-      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
       phase 4, exact solve and round trip.
       The reverse direction is already built and sound, which is the reason to attempt the
       forward one. `sqpack.field` proves irreducibility and isolates the real root, and
@@ -222,7 +222,7 @@ agenda:
       repository already transcribes both. BC-045 is now the primary route to the
       n = 29 prize rather than an n = 11 exercise, because it needs no minimal polynomial
       and BC-044 may not terminate. Built under
-      [plan-2026-08-28-interval-certification](../../docs/project/specs/active/plan-2026-08-28-interval-certification.md).
+      [plan-2026-08-28-interval-certification](../../../docs/project/specs/active/plan-2026-08-28-interval-certification.md).
   - id: BC-048
     purpose: tool_validation
     owner_focus: correctness
@@ -251,7 +251,7 @@ agenda:
       the general fix is an exact LP over certified rational or algebraic coefficients,
       which is unbuilt. It is purely rational only for rational-coefficient cells.
     note: >-
-      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
+      Built under [plan-2026-08-28-promotion-pipeline-implementation](../../../docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md),
       phase 5, exact LP.
       This does not gate the n = 29 result, which consumes a published pose and needs no LP
       of ours. It gates generality. On a source carrying ninety-nine digits the contact
@@ -397,7 +397,7 @@ agenda:
 # Agenda-005 — Build the Missing Middle, and Decide What the Map Counts
 
 The reading behind this agenda is in
-[plan-2026-08-28](../../docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md).
+[plan-2026-08-28](../../../docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md).
 Its short form: the promotion pipeline has a built front end and a built back end with
 an unbuilt middle, so every exact entry in the atlas today was derived by hand or
 supplied by a publication.
@@ -468,7 +468,7 @@ degree twenty with coefficients below `10^22`, so the polynomial is large and
 elimination in six unknowns may not terminate.
 BC-045 needs no polynomial at all.
 **The robust route is therefore the one that had no specification**, which is why
-[plan-2026-08-28-interval-certification](../../docs/project/specs/active/plan-2026-08-28-interval-certification.md)
+[plan-2026-08-28-interval-certification](../../../docs/project/specs/active/plan-2026-08-28-interval-certification.md)
 was written before this replan and why BC-045 now owns two of the three blocks.
 
 Within a block, BC-047 and BC-042 are independent of each other and of everything else,

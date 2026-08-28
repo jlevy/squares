@@ -795,9 +795,9 @@ Internal:
   — findings F-01–F-41, strategies A-01–A-04, questions Q-01–Q-04, omissions O-01–O-04.
 - [Unattended Square-Packing Research Readiness](../specs/active/plan-2026-08-23-overnight-cartography-run.md)
   — the launch agenda whose sequencing this review amends at the margins.
-- [Campaign idea board](../../../campaign/ideas.md) and the
-  [hypothesis registry](../../../campaign/hypotheses/) — the artifacts recommendations 4
-  and 6 modify.
+- [Campaign idea board](../../../packing/campaign/ideas.md) and the
+  [hypothesis registry](../../../packing/campaign/hypotheses/) — the artifacts
+  recommendations 4 and 6 modify.
 
 External primary sources and adjacent-method precedents:
 

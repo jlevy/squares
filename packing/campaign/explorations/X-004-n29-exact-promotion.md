@@ -80,7 +80,7 @@ magnitude.** There is no ambiguity to resolve, and the contact structure — 89 
 in total — is already computed today.
 
 The error was applying the wrong instrument’s error budget.
-The ambiguity concern came from [D-021](../../defects.md), the roughly `1e-11` noise
+The ambiguity concern came from [D-021](../../../defects.md), the roughly `1e-11` noise
 floor of *this project’s float LP solver*. The Kingbird SVG is not that solver’s output;
 it carries roughly ninety-nine decimal digits per coordinate.
 A floor that governs a quench endpoint says nothing about a published high-precision
@@ -277,7 +277,7 @@ A derivation would be built against a back end that can catch it being wrong.
 That back end is sound for the route this exploration needs — exact substitution into
 the recovered field — and it is the *other* half of step six, interval-Newton and
 Krawczyk, that is absent; see the
-[atlas plan](../../docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
+[atlas plan](../../../docs/project/specs/active/plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
 for the component-by-component reading.
 
 The two guesses are discharged differently, and one of them only partly:

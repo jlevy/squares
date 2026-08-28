@@ -85,7 +85,7 @@ Three things can happen, and all three are results:
 ## Why the per-step cell record is the point
 
 The value curve alone would only re-measure
-[T-3](../../SYNOPSIS.md#the-corner-and-the-method-it-forced), whose corner at `a*` is
+[T-3](../../../SYNOPSIS.md#the-corner-and-the-method-it-forced), whose corner at `a*` is
 already confirmed by
 [exp-010](../series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md).
 What is new is the sequence of active cells along the path.

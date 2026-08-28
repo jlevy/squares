@@ -6,9 +6,9 @@
 
 **Status:** Complete
 
-**Scope:** the six soundness defects in [`defects.yaml`](../../../defects.yaml) — D-009,
-D-011, D-013, D-014, D-020, D-021 — with **D-014** as the primary case, since it is the
-only one that produced a false claim about the mathematics.
+**Scope:** the six soundness defects in [`defects.yaml`](../../../packing/defects.yaml)
+— D-009, D-011, D-013, D-014, D-020, D-021 — with **D-014** as the primary case, since
+it is the only one that produced a false claim about the mathematics.
 
 ## What happened
 
@@ -99,11 +99,11 @@ Five things, all in this branch, all with checks:
 
 | Change | Guards |
 | --- | --- |
-| [`devtools.check_soundness_perimeter`](../../../devtools/check_soundness_perimeter.py) — every component that can emit a packing, checked by `sqpack` through code it does not share | D-014’s whole class |
+| [`devtools.check_soundness_perimeter`](../../../packing/devtools/check_soundness_perimeter.py) — every component that can emit a packing, checked by `sqpack` through code it does not share | D-014’s whole class |
 | Post-check inside the quench: a solution violating its own constraints is rejected, not returned | D-014 |
 | Solver tolerance pinned at its floor (10⁻¹⁰), and the perimeter held to the same bound so they cannot drift | D-014, D-021 |
 | Tolerances scaled to the quantity they govern; the line search capped in iterations | D-019 |
-| [`devtools.run_negative_controls`](../../../devtools/run_negative_controls.py) + [`devtools/controls.yaml`](../../../devtools/controls.yaml) — the negative controls checked in and run, rather than performed once and described | the checking apparatus itself |
+| [`devtools.run_negative_controls`](../../../packing/devtools/run_negative_controls.py) + [`devtools/controls.yaml`](../../../packing/devtools/controls.yaml) — the negative controls checked in and run, rather than performed once and described | the checking apparatus itself |
 
 The perimeter was replayed against the original defect: handed the configuration that
 “beat” the record, it rejects it and names the overlapping pair.

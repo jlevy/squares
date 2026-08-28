@@ -139,7 +139,7 @@ The shared implementation lives in these repository-owned components:
 | Live HTML profile and loopback adapter | `devtools/render_general_motion_lab.py` and `devtools/serve_packing_motion_lab.py` |
 
 The
-[generalized Motion Lab plan](../../docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md)
+[generalized Motion Lab plan](../../../docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md)
 owns the contracts, evidence grammar, Phase 1 acceptance criteria, and explicit Phase 2
 gate.
 
@@ -182,7 +182,7 @@ This file is an interactive research artifact, not a safe publication SVG. Dashe
 geometry is a tangent predictor; in the `+W` view it is explicitly not a feasible path.
 The document SVG renderer and its script-free safety profile remain unchanged.
 See the
-[motion-lab spike record](../../docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md)
+[motion-lab spike record](../../../docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md)
 for its analytic data contract, evidence boundary, tests, and known limits.
 The shared shell retains this artifact as the offline compatibility control; it still
 has `connect-src 'none'` and does not require the loopback service.

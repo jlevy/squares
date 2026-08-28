@@ -12,7 +12,7 @@
         "source": {
           "derivation": "complete normalization of the retained six-decimal source SVG",
           "kind": "unitsquare-rendering",
-          "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n103.svg",
+          "path": "packing/resources/web/prospective-packings/unitsquare/n103.svg",
           "source_key": "unitsquare-release-1",
           "url": "https://www.hmbelvedere.com/packings/n103.svg"
         },
@@ -34,7 +34,7 @@
         "source": {
           "derivation": "complete normalization of the retained six-decimal source SVG",
           "kind": "unitsquare-rendering",
-          "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n105.svg",
+          "path": "packing/resources/web/prospective-packings/unitsquare/n105.svg",
           "source_key": "unitsquare-release-1",
           "url": "https://www.hmbelvedere.com/packings/n105.svg"
         },
@@ -56,7 +56,7 @@
         "source": {
           "derivation": "complete normalization of the retained six-decimal source SVG",
           "kind": "unitsquare-rendering",
-          "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n110.svg",
+          "path": "packing/resources/web/prospective-packings/unitsquare/n110.svg",
           "source_key": "unitsquare-release-1",
           "url": "https://www.hmbelvedere.com/packings/n110.svg"
         },
@@ -249,7 +249,7 @@
         "source": {
           "derivation": "complete normalization of the retained six-decimal source SVG",
           "kind": "unitsquare-rendering",
-          "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n131.svg",
+          "path": "packing/resources/web/prospective-packings/unitsquare/n131.svg",
           "source_key": "unitsquare-release-1",
           "url": "https://www.hmbelvedere.com/packings/n131.svg"
         },
@@ -1947,7 +1947,7 @@
         "creator": "UnitSquare Project",
         "license": "CC-BY-4.0-in-dataset-page-metadata",
         "n": 103,
-        "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n103.svg",
+        "path": "packing/resources/web/prospective-packings/unitsquare/n103.svg",
         "retrieved": "2026-08-26",
         "url": "https://www.hmbelvedere.com/packings/n103.svg"
       },
@@ -1956,7 +1956,7 @@
         "creator": "UnitSquare Project",
         "license": "CC-BY-4.0-in-dataset-page-metadata",
         "n": 105,
-        "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n105.svg",
+        "path": "packing/resources/web/prospective-packings/unitsquare/n105.svg",
         "retrieved": "2026-08-26",
         "url": "https://www.hmbelvedere.com/packings/n105.svg"
       },
@@ -1965,7 +1965,7 @@
         "creator": "UnitSquare Project",
         "license": "CC-BY-4.0-in-dataset-page-metadata",
         "n": 110,
-        "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n110.svg",
+        "path": "packing/resources/web/prospective-packings/unitsquare/n110.svg",
         "retrieved": "2026-08-26",
         "url": "https://www.hmbelvedere.com/packings/n110.svg"
       },
@@ -1974,7 +1974,7 @@
         "creator": "UnitSquare Project",
         "license": "CC-BY-4.0-in-dataset-page-metadata",
         "n": 131,
-        "path": "explorations/packing/resources/web/prospective-packings/unitsquare/n131.svg",
+        "path": "packing/resources/web/prospective-packings/unitsquare/n131.svg",
         "retrieved": "2026-08-26",
         "url": "https://www.hmbelvedere.com/packings/n131.svg"
       }
@@ -1985,7 +1985,7 @@
       "unitsquare_rendering_cases": 4
     },
     "source_map": {
-      "path": "explorations/packing/atlas/prospective/source-availability-101-324.json"
+      "path": "packing/atlas/prospective/source-availability-101-324.json"
     },
     "status": "partial-prospective-corpus-seed-not-hypothesis-evidence"
   },

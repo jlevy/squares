@@ -74,8 +74,8 @@ would need a separately declared approximation contract.
 ## What the First Census Says
 
 Three deliberately different views are retained in
-[`chunk-components.json`](../../../atlas/known-best/chunk-components.json) and
-[`chunk-partitions.json`](../../../atlas/known-best/chunk-partitions.json).
+[`chunk-components.json`](../../../packing/atlas/known-best/chunk-components.json) and
+[`chunk-partitions.json`](../../../packing/atlas/known-best/chunk-partitions.json).
 
 | View | Tolerances | Result | Interpretation |
 | --- | --- | ---: | --- |
@@ -108,9 +108,9 @@ Those three are precisely the kind of small exceptional constructions that shoul
 the next grammar, not be hidden in the aggregate.
 
 The compact
-[`chunk-evidence-profile.json`](../../../atlas/known-best/chunk-evidence-profile.json)
+[`chunk-evidence-profile.json`](../../../packing/atlas/known-best/chunk-evidence-profile.json)
 and its
-[`house overview`](../../../atlas/known-best/evidence/non-grid-chunk-evidence-profile.svg)
+[`house overview`](../../../packing/atlas/known-best/evidence/non-grid-chunk-evidence-profile.svg)
 make every non-grid case inspectable in one table.
 Ten of 36 cases are fully covered by the registered contact census; 27 cover at least 90
 percent, 33 cover at least 75 percent, and 35 cover at least half.
@@ -264,7 +264,7 @@ The review above is retained as the factual record for the heads it examined.
 Its `2/8/23/3` partition distribution, first-solution selection description,
 raw-Kingbird retention language, and co-committed hash claims are superseded by the PR
 45 merge-readiness continuation in
-[session 023](../../../campaign/agent-sessions/session-023-pr45-merge-readiness.md).
+[session 023](../../../packing/campaign/agent-sessions/session-023-pr45-merge-readiness.md).
 
 The five review follow-ups were dispositioned as follows:
 
@@ -307,7 +307,7 @@ The `n = 1..100` corpus remains calibration-only, capped partition cases remain
 indeterminate, the 11,013 scaffold records remain abstract and geometry-free, and local
 contact realization establishes neither container fit, whole-packing feasibility, nor
 optimality.
-[Session 025](../../../campaign/agent-sessions/session-025-pr45-performance-continuation.md)
+[Session 025](../../../packing/campaign/agent-sessions/session-025-pr45-performance-continuation.md)
 owns the current strict and cross-platform validation receipts.
 
 <!-- This document follows common-doc-guidelines.md.

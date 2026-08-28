@@ -273,12 +273,12 @@ That is the correct form of a claim the research document originally overstated.
 ## Cross-References
 
 - The narrative and the mathematics:
-  [`../docs/project/research/research-2026-08-22-packing-11-unit-squares.md`](../docs/project/research/research-2026-08-22-packing-11-unit-squares.md)
+  [`../docs/project/research/research-2026-08-22-packing-11-unit-squares.md`](../../docs/project/research/research-2026-08-22-packing-11-unit-squares.md)
 - Algorithms, verification and tooling:
-  [`../docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md`](../docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md)
+  [`../docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md`](../../docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md)
 - The literature archive these artifacts cite:
   [`../resources/README.md`](../resources/README.md)
-- The generic witness toolkit and exact verifier: [`../README.md`](../README.md)
+- The generic witness toolkit and exact verifier: [`../README.md`](../../README.md)
 
 ## Provenance and Regeneration
 

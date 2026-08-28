@@ -367,14 +367,14 @@ Three of those gaps are load-bearing for *this* design specifically, which is wh
 sit ahead of the instrument rather than beside it.
 
 **Degeneracy comes first because the design maximizes exposure to it.**
-[D-059](../../defects.md) records that endpoint identity depends on floating-point
+[D-059](../../../defects.md) records that endpoint identity depends on floating-point
 behaviour in a degenerate linear program.
 Aligned and glued chunk strata are the most symmetric, tie-rich cells this pipeline will
 ever solve, so an enumeration ranking is exactly the artifact most likely to fail to
 replay. `BC-016` measures that before any ranking is trusted.
 
 **Work-unit accounting comes next because it is nearly free here.**
-[D-126](../../defects.md) makes wall-clock budgets load-dependent.
+[D-126](../../../defects.md) makes wall-clock budgets load-dependent.
 A deterministic enumerator can be priced in counted LP solves by construction, so
 `BC-017` closes for this instrument what remains open in general, and gives `H-045` an
 admissible budget currency before its first round.
@@ -388,11 +388,12 @@ so a coordinator with spare capacity should start it as soon as a detector exist
 
 ## What is deliberately not here
 
-Terminal-component identity ([D-034](../../defects.md)) is not a prerequisite for this
-lane. A stratum’s identity is its discrete label, so the upper-bound program can produce
-a complete, deduplicated atlas over strata while the basin-map lane resolves what a
-component is. That independence is the main structural argument for the design and the
-reason this agenda exists separately.
+Terminal-component identity ([D-034](../../../defects.md)) is not a prerequisite for
+this lane. A stratum’s identity is its discrete label, so the upper-bound program can
+produce a complete, deduplicated atlas over strata while the basin-map lane resolves
+what a component is.
+That independence is the main structural argument for the design and the reason this
+agenda exists separately.
 
 Unattended numerical execution is also not here.
 The launch agenda’s numerical runner remains **NO-GO**, and nothing in this queue needs

@@ -34,7 +34,7 @@ from sqpack.yamlio import load_yaml
 
 FRONTIER = pathlib.Path(__file__).resolve().parent.parent / "frontier"
 WITNESSES = FRONTIER.parent / "witnesses"
-DOCUMENT_MAP = FRONTIER.parent / "docs" / "project" / "document-map.yaml"
+DOCUMENT_MAP = FRONTIER.parent.parent / "docs" / "project" / "document-map.yaml"
 COMPOSITE_FIGURE = FRONTIER.parent / "atlas" / "known-best" / "composite-figure.json"
 TRANSLATION_ESCAPE_SCREEN = (
     FRONTIER.parent / "atlas" / "known-best" / "translation-escape-screen.json"

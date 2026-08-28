@@ -712,7 +712,7 @@ at the wrong head). `cargo build` and `cargo test` for `fs-math`, `fs-ivl`, `fs-
 passing in 77 s. Both experiments below.
 
 **Two experiments, written for this study.** Sources and a self-cleaning runner are in
-[`packing/frankensim-probe/`](../../../frankensim-probe/README.md); nothing from
+[`packing/frankensim-probe/`](../../../packing/frankensim-probe/README.md); nothing from
 FrankenSim is vendored there.
 
 - `packing_sat.rs` runs the separating-axis test on Trump’s 11-square packing through

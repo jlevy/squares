@@ -61,9 +61,9 @@ The corresponding staged design is the
 
 ## Measurement Contract
 
-[`codex_log_rollup.py`](../../../devtools/codex_log_rollup.py) reads Codex JSONL by root
-task id, discovers descendants, removes inherited subagent history, and emits the
-versioned `CodexEfficiencyRollup/v2` JSON contract or a compact Markdown tree.
+[`codex_log_rollup.py`](../../../packing/devtools/codex_log_rollup.py) reads Codex JSONL
+by root task id, discovers descendants, removes inherited subagent history, and emits
+the versioned `CodexEfficiencyRollup/v2` JSON contract or a compact Markdown tree.
 Synthetic fixtures cover native duration and first-token fields, missing and invalid
 telemetry, frozen live cutoffs, current and legacy compaction, compressed legacy replay,
 live and interrupted turns, model/thinking splits, token totals, command polling, and

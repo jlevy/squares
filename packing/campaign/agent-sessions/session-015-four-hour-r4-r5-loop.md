@@ -1139,9 +1139,9 @@ documented push.
 
 An agent joining with only this checkout should read, in order:
 
-1. [`README.md`](../../README.md#workflow-entry-points) for workflow selection and the
-   W6 boundary.
-2. [`SYNOPSIS.md`](../../SYNOPSIS.md#current-handoff) for current mathematical state.
+1. [`README.md`](../../../README.md#workflow-entry-points) for workflow selection and
+   the W6 boundary.
+2. [`SYNOPSIS.md`](../../../SYNOPSIS.md#current-handoff) for current mathematical state.
 3. [`campaign/README.md`](../README.md#the-bounded-research-cycle) for clocks, result
    routing, guards, and refusal rules.
 4. [`agenda-001`](../agendas/agenda-001-basin-confidence-ladder.md) at `BC-010`,

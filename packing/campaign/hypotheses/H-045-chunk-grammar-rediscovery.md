@@ -97,13 +97,13 @@ target is approached:
 ## What this round may not claim
 
 A rank-1 result is a numerical statement under the `1e-11` solver floor
-([D-021](../../defects.md)) about the enumerated population only.
+([D-021](../../../defects.md)) about the enumerated population only.
 It is not a bound, not an optimality proof, and not a coverage claim about strata the
 frozen grammar cannot express, which is what
 [H-044](H-044-chunk-expressibility-of-records.md) measures separately.
-A stopped quench is not a certified local optimum ([D-052](../../defects.md)), and
+A stopped quench is not a certified local optimum ([D-052](../../../defects.md)), and
 aligned strata are maximally degenerate cells, so endpoint reproducibility across
-toolchains ([D-059](../../defects.md)) is a declared risk for this instrument rather
+toolchains ([D-059](../../../defects.md)) is a declared risk for this instrument rather
 than an assumed property.
 
 The 2026-08-26 atlas review also changes the evidentiary role of `n = 11`: its geometry

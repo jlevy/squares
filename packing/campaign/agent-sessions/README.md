@@ -3,8 +3,8 @@
 These are escalation artifacts for the outer autonomous work loop.
 An agent session is one bounded interval of orchestrated work, not a campaign, series,
 experiment, or solver run.
-The [synopsis](../../SYNOPSIS.md#work-units-and-records) owns those definitions; the
-[workflow contracts](../../SYNOPSIS.md#workflow-entry-contracts) own W1–W7.
+The [synopsis](../../../SYNOPSIS.md#work-units-and-records) owns those definitions; the
+[workflow contracts](../../../SYNOPSIS.md#workflow-entry-contracts) own W1–W7.
 
 Session records complement, and do not replace, the scientific record:
 
@@ -63,7 +63,7 @@ A native goal, scheduled wakeup, or chat history may resume the work, but the se
 must remain runnable without any of them.
 
 Before opening the first phase, read the synopsis’s
-[current handoff](../../SYNOPSIS.md#current-handoff), the active campaign agenda, the
+[current handoff](../../../SYNOPSIS.md#current-handoff), the active campaign agenda, the
 owning hypothesis, and its bead.
 From the repository root, establish the baseline:
 
@@ -190,8 +190,8 @@ Each phase already declares a `validation_command`. Two obligations come with it
 - **Record the measured cost, and report an overrun.** When a phase spends materially
   longer verifying than the affected surface requires, that is logged like any other
   defect, with the two numbers side by side.
-  [D-355](../../defects.md) is the worked example: `979.79s` spent against `12.06s` of
-  affected steps, an 82x overrun, found only because a session measured its own cycle
+  [D-355](../../../defects.md) is the worked example: `979.79s` spent against `12.06s`
+  of affected steps, an 82x overrun, found only because a session measured its own cycle
   time instead of accepting it.
 
 The tension between coverage and cycle time is real, and resolving it is the design’s

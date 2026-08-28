@@ -11,11 +11,11 @@ from urllib.parse import unquote
 
 import yaml
 
-from devtools.render_document_map import MAP, ROOT, SYNOPSIS, expected_synopsis, load_map
+from devtools.render_document_map import MAP, REPO, SYNOPSIS, expected_synopsis, load_map
 
 FOOTER = "This document follows common-doc-guidelines.md."
-IGNORED_PARTS = {".pytest_cache", ".venv", "__pycache__"}
-REPOSITORY_ROOT = ROOT.parent
+IGNORED_PARTS = {".pytest_cache", ".venv", "__pycache__", "node_modules", "attic"}
+REPOSITORY_ROOT = REPO
 RETIRED_PHRASES = (
     "approximately verified",
     "numerical-arbitrary-precision",
@@ -25,7 +25,7 @@ RETIRED_PHRASES = (
 
 
 def _matches(pattern: str) -> set[str]:
-    return {path.relative_to(ROOT).as_posix() for path in ROOT.glob(pattern) if path.is_file()}
+    return {path.relative_to(REPO).as_posix() for path in REPO.glob(pattern) if path.is_file()}
 
 
 def _frontmatter(path: Path) -> dict:
@@ -67,7 +67,7 @@ def _link_problems(path: Path) -> list[str]:
             continue
         relative, _, fragment = target.partition("#")
         resolved = path if not relative else (path.parent / unquote(relative)).resolve()
-        label = path.relative_to(ROOT).as_posix()
+        label = path.relative_to(REPO).as_posix()
         if not resolved.exists():
             problems.append(f"{label}: dead link -> {target}")
         elif _is_ephemeral_local_target(resolved):
@@ -91,13 +91,13 @@ def check() -> list[str]:
 
     covered = set(document_paths)
     for document in documents:
-        path = ROOT / document["path"]
+        path = REPO / document["path"]
         if not path.is_file():
             problems.append(f"mapped document does not exist: {document['path']}")
         replacement = document.get("superseded_by")
         if document["lifecycle"] == "superseded" and not replacement:
             problems.append(f"{document['path']}: superseded without superseded_by")
-        if replacement and not (ROOT / replacement).is_file():
+        if replacement and not (REPO / replacement).is_file():
             problems.append(f"{document['path']}: replacement does not exist: {replacement}")
 
     for collection in document_map["collections"]:
@@ -108,12 +108,12 @@ def check() -> list[str]:
         if overlap:
             problems.append(f"document map covers paths more than once: {sorted(overlap)[:3]}")
         covered |= matched
-        schema = ROOT / collection["schema"]
+        schema = REPO / collection["schema"]
         if not schema.is_file():
             problems.append(f"collection schema does not exist: {collection['schema']}")
         for relative in sorted(matched):
             try:
-                metadata = _frontmatter(ROOT / relative)["softschema"]
+                metadata = _frontmatter(REPO / relative)["softschema"]
             except (KeyError, TypeError, ValueError) as error:
                 problems.append(f"{relative}: cannot read softschema metadata: {error}")
                 continue
@@ -131,10 +131,13 @@ def check() -> list[str]:
         excluded |= matched
 
     actual = {
-        path.relative_to(ROOT).as_posix()
-        for path in ROOT.rglob("*.md")
+        path.relative_to(REPO).as_posix()
+        for path in REPO.rglob("*.md")
         if path.is_file()
-        and not any(part in IGNORED_PARTS for part in path.relative_to(ROOT).parts)
+        and not any(
+            part in IGNORED_PARTS or part.startswith(".")
+            for part in path.relative_to(REPO).parts
+        )
     }
     unmapped = actual - covered - excluded
     problems.extend(f"unmapped durable document: {path}" for path in sorted(unmapped))
@@ -143,10 +146,10 @@ def check() -> list[str]:
     )
 
     for relative in sorted(covered & actual):
-        text = (ROOT / relative).read_text(encoding="utf-8")
+        text = (REPO / relative).read_text(encoding="utf-8")
         if FOOTER not in text:
             problems.append(f"{relative}: common-doc footer is missing")
-        problems.extend(_link_problems(ROOT / relative))
+        problems.extend(_link_problems(REPO / relative))
 
     current_paths = {
         item["path"]
@@ -154,7 +157,7 @@ def check() -> list[str]:
         if item["authority"] in {"definitive", "current"} and item["role"] != "plan"
     }
     for relative in sorted(current_paths):
-        lowered = (ROOT / relative).read_text(encoding="utf-8").lower()
+        lowered = (REPO / relative).read_text(encoding="utf-8").lower()
         problems.extend(
             f"{relative}: retired assurance phrase {phrase!r}"
             for phrase in RETIRED_PHRASES
@@ -169,7 +172,7 @@ def check() -> list[str]:
             problems.append("SYNOPSIS.md document map is stale")
     except ValueError as error:
         problems.append(str(error))
-    if MAP.relative_to(ROOT).as_posix() != "docs/project/document-map.yaml":
+    if MAP.relative_to(REPO).as_posix() != "docs/project/document-map.yaml":
         problems.append("document-map location drifted from its public contract")
     return problems
 

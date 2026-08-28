@@ -40,7 +40,7 @@ series:
 ## Current Scope and Safe Reading
 
 This artifact opened as **S0** of the
-[standing review’s series plan](../../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#series-and-priorities):
+[standing review’s series plan](../../../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#series-and-priorities):
 prove all the machinery works end to end and establish every baseline metric, before any
 strategy is tested.
 
@@ -95,7 +95,7 @@ called `n = 12` a negative control because the 4×4 grid is believed optimal.
 That was not a known-answer test: `s(12) = 4` is open, so a valid result below `4` would
 be a discovery. The valid guard is independent geometry verification plus deliberately
 invalid fixtures; `n = 12` remains an open-case calibration
-([D-042](../../../defects.md)).
+([D-042](../../../../defects.md)).
 
 **The declared budget must actually bind.** It did not, at first: a restart cap stopped
 every chain before the move budget did, so `--budget-moves` was inert and two strategies
@@ -106,7 +106,7 @@ The tell was that results got *worse* when the declared budget was raised.
 
 The review’s calibration ladder and this series’ controls both use `n = 5` and `n = 10`.
 The
-[search-philosophy report](../../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md#calibration-must-match-mechanism-not-just-difficulty)
+[search-philosophy report](../../../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md#calibration-must-match-mechanism-not-just-difficulty)
 makes the sharp point that **both proved optima are 45°-tilt mechanisms** — symmetric,
 and sitting in basins blind search reaches without help.
 An engine can pass this ladder and remain structurally blind to what `n = 11` actually

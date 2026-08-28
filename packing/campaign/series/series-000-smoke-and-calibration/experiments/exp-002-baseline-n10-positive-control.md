@@ -103,7 +103,7 @@ engine and archive: five deterministic seeds, eight chains each, 100M moves per 
 
 ## Why this round exists
 
-[The standing review of PR #5](../../../../docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md)
+[The standing review of PR #5](../../../../../docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md)
 found that exp-001’s archive kept only summary lines, discarding the configurations, and
 that its recorded commit had been made unreachable by a rebase.
 Its numbers were sound — the review re-derived them — but nothing in it could be

@@ -510,8 +510,8 @@ Internal:
 - [Algorithms and Tooling for Square Packing](research-2026-08-22-square-packing-algorithms-and-tooling.md)
   — the AI-search landscape (FunSearch/AlphaEvolve context) the constructor-DSL lane
   builds on.
-- [Frontier corpus](../../../frontier/README.md) — the `m² − 3` analysis behind the
-  boundary-layer ladder; per-case editorial.
+- [Frontier corpus](../../../packing/frontier/README.md) — the `m² − 3` analysis behind
+  the boundary-layer ladder; per-case editorial.
 - Record catalogue capture (`resources/web/kingbird-squares-in-squares`) — the
   neighbor-extension annotations read here as a constructor-grammar corpus.
 

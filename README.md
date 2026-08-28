@@ -1,20 +1,11 @@
 # Square Packing
 
-A self-contained project directory: the research reports, the local archive of the
-literature they cite, the exact verifier and search engine, and the experiment record of
-running them.
+This repository aims to be the most comprehensive research resource on square packing
+assembled anywhere: the primary literature readable offline, a per-case record of what
+is actually known for every `n`, code that searches for packings and certifies them
+exactly, and the full experimental history of running it.
 
-`s(n)` is the side of the smallest square holding `n` non-overlapping unit squares.
-The motivating case is `n = 11`, the smallest instance of this problem that is still
-open. Its best-known packing dates from 1979. The familiar lower-bound value was stated
-in 2003, but
-[exp-016](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md)
-finds an exact gap in the printed proof;
-[exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md)
-certifies a source-distinct repair of the same inequality.
-Roughly `0.088` in side length remains between that bound and the 1979 construction.
-
-[![One hundred known-best square packings arranged from n equals one through one hundred.](atlas/known-best/known-best-1-100.png)](atlas/known-best/known-best-1-100.svg)
+[![One hundred known-best square packings arranged from n equals one through one hundred.](packing/atlas/known-best/known-best-1-100.png)](packing/atlas/known-best/known-best-1-100.svg)
 
 *The retained `n = 1…100` atlas, each packing normalized to its own container and
 labeled with its best known side upper bound.
@@ -22,7 +13,40 @@ Badges mark the 35 side lengths proved optimal (`O`), and whether a side length 
 pinned exactly by a radical or a minimal polynomial (`=`) or is so far known only
 numerically (`≈`); `deg` gives the algebraic degree where one is recorded.
 Select the image for the standalone, zoomable SVG, or take the
-[print-ready PDF](atlas/known-best/known-best-1-100.pdf) (vector, 25 × 26.2 in).*
+[print-ready PDF](packing/atlas/known-best/known-best-1-100.pdf) (vector, 25 × 26.2
+in).*
+
+`s(n)` is the side of the smallest square that holds `n` non-overlapping unit squares.
+The question is elementary to state and stubbornly open: at `n = 11` the best known
+packing dates from 1979, and roughly `0.088` in side length still separates it from the
+best proved lower bound.
+Every claim here carries the evidence that earns it and says which kind of evidence that
+is; [Assurance in One Minute](#assurance-in-one-minute) is the whole vocabulary.
+
+## What Is Here
+
+| Where | What |
+| --- | --- |
+| [**The frontier**](packing/frontier/STATUS.md) | One schema-validated record per case for `n = 1…100`, tracking reported and formally verified bounds as separate lanes, plus a generated reader-first status table |
+| [**The atlas**](packing/atlas/README.md) | Deterministic renderings of the known-best packing for every `n ≤ 100`, a source map for the prospective range `n = 101…324`, and an enumeration of size-five contact scaffolds |
+| [**The literature**](packing/resources/README.md) | 27 papers and 13 web sources held locally and greppable: the original PDF or HTML, a cleaned Markdown transcription, and the unedited extraction to check it against |
+| [**The reports**](#reports) | Six research reports: the mathematics of `s(11)`, the algorithms and tooling, a search philosophy, and three on what to build |
+| [**The code**](development.md) | An exact verifier over algebraic number fields, an LP-in-cell quench, and `sqsearch`, a Rust search engine |
+| [**The experiment record**](packing/campaign/README.md) | A registry of falsifiable hypotheses, experiments that freeze their criterion before measuring, the agent-session record, and a generated ledger |
+| [**The defect log**](defects.md) | Every defect found in this project’s own reasoning and code, with what caught each one |
+
+The verifier certifies Walter Trump’s 1979 `n = 11` packing exactly, over a degree-8
+number field, rather than to a tolerance.
+
+## Start Here
+
+[`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the objects are,
+why the approach is shaped the way it is, and what is established versus open.
+Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program.
+To resume work rather than only understand it, continue to the synopsis’s
+[current handoff](SYNOPSIS.md#current-handoff); it names the active session when one
+exists, otherwise the latest terminal session, together with the owning bead and exact
+next bounded slice.
 
 Work is organized at three levels.
 Four **operating principles** define what quality means and which concerns may veto
@@ -32,14 +56,6 @@ Keeping these levels separate lets an agent emphasize one dimension without sile
 changing the kind of work it promised to do.
 The focus is primary, not exclusive: the other three principles continue to constrain
 and contribute to the phase.
-
-**New here?** [`TUTORIAL.md`](TUTORIAL.md) is the first-principles orientation: what the
-objects are, why the approach is shaped the way it is, and what is established versus
-open. Read it once, then [`SYNOPSIS.md`](SYNOPSIS.md) for the state of the program.
-To resume work rather than only understand it, continue to the synopsis’s
-[current handoff](SYNOPSIS.md#current-handoff); it names the active session when one
-exists, otherwise the latest terminal session, together with the owning bead and exact
-next bounded slice.
 
 ## Operating Principles
 
@@ -82,8 +98,8 @@ project’s knowledge, never an assertion of priority.
 
 A verified feasible witness proves an upper bound.
 It does not prove global optimality; that requires a matching verified lower bound.
-The reader-first [frontier status](frontier/STATUS.md) therefore shows reported and
-verified upper and lower bounds side by side.
+The reader-first [frontier status](packing/frontier/STATUS.md) therefore shows reported
+and verified upper and lower bounds side by side.
 The [synopsis](SYNOPSIS.md#assurance-methods-and-claims) owns the full vocabulary,
 logical consequences, and current tool gaps.
 
@@ -127,9 +143,10 @@ question, the intended artifact, and the focused check.
 A bead, working note, or conversation can carry that declaration; do not create a
 session artifact just to restate it.
 
-Escalate to a versioned [agent-session artifact](campaign/agent-sessions/README.md) when
-work will cross multiple workflow or material-focus phases, run autonomously beyond an
-ordinary checkpoint, coordinate independently tracked delegates, supervise an expensive
+Escalate to a versioned
+[agent-session artifact](packing/campaign/agent-sessions/README.md) when work will cross
+multiple workflow or material-focus phases, run autonomously beyond an ordinary
+checkpoint, coordinate independently tracked delegates, supervise an expensive
 experiment or proof search, or need durable recovery and handoff state.
 Only then does each phase carry the full objective, output, validation, clock, stop,
 fallback, outcome, and evidence contract.
@@ -160,9 +177,9 @@ An independent W2 pass is required before a promoted, novel, disputed, or otherw
 high-risk claim moves forward.
 Routine W6 rounds whose preregistered guards and independent replay already decide the
 stated criterion may proceed directly to W3 or another W6 slice.
-The [campaign runbook](campaign/README.md) owns those mechanics; the agenda orders ready
-cells, and the [ledger](campaign/ledger.md) is generated from the artifacts rather than
-typed.
+The [campaign runbook](packing/campaign/README.md) owns those mechanics; the agenda
+orders ready cells, and the [ledger](packing/campaign/ledger.md) is generated from the
+artifacts rather than typed.
 
 ### Work Units at a Glance
 
@@ -246,9 +263,9 @@ The operating documents divide ownership rather than repeat one another:
 | --- | --- |
 | This README | Operating principles, the compact workflow selector, and repository orientation |
 | [Synopsis](SYNOPSIS.md#workflow-entry-contracts) | Full workflow contracts, work-unit vocabulary, transitions, and current technical state |
-| [Campaign runbook](campaign/README.md#the-bounded-research-cycle) | W6 experiment mechanics, portable slice protocol, clocks, result routing, and refusal rules |
-| [Agent sessions](campaign/agent-sessions/README.md) | Versioned objective, entry workflow, phase history, budget, evidence, stop reason, and handoff |
-| [Agendas](campaign/agendas/) | Mutable, ordered queues of bounded commitments, separating tool validation, measurement validation, and genuine research; agenda-001 is the original size-by-size confidence ladder |
+| [Campaign runbook](packing/campaign/README.md#the-bounded-research-cycle) | W6 experiment mechanics, portable slice protocol, clocks, result routing, and refusal rules |
+| [Agent sessions](packing/campaign/agent-sessions/README.md) | Versioned objective, entry workflow, phase history, budget, evidence, stop reason, and handoff |
+| [Agendas](packing/campaign/agendas/) | Mutable, ordered queues of bounded commitments, separating tool validation, measurement validation, and genuine research; agenda-001 is the original size-by-size confidence ladder |
 | [Current launch agenda](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | Broader scientific and operational readiness; the agent loop can work now, while the generic numerical runner remains a no-go |
 | [Program review](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md#the-epic-and-its-bead-map) | Four-focus epic, durable findings, and bead map |
 
@@ -258,75 +275,74 @@ The outer loop is a portable repository protocol, not a feature of one agent pla
 The `tbd` queue owns dependencies and ready work; the active launch agenda freezes an
 explicit portfolio whenever landed-versus-branch-ahead bead state is not yet reconciled.
 Commits and research artifacts own results, and a versioned
-[agent-session artifact](campaign/agent-sessions/README.md) owns phase, clock, and
-recovery state only when the escalation criteria apply.
+[agent-session artifact](packing/campaign/agent-sessions/README.md) owns phase, clock,
+and recovery state only when the escalation criteria apply.
 Changing agents changes the driver, not the work.
 Mechanical delegations inherit the coordinating workflow unless they need independently
 recoverable session state.
 
-Breadth lives in [`campaign/ideas.md`](campaign/ideas.md), the hypothesis registry, and
-the bead queue. Routine entry uses the four-fact declaration above; escalated sessions
-add their full phase and clock contract.
+Breadth lives in [`campaign/ideas.md`](packing/campaign/ideas.md), the hypothesis
+registry, and the bead queue.
+Routine entry uses the four-fact declaration above; escalated sessions add their full
+phase and clock contract.
 At a checkpoint in a versioned session, close the phase before changing purpose or
 material focus so the ledger can summarize what kinds of work actually occurred.
 The slice protocol, clocks, result routing, budgets, and stop rules are the campaign
-runbook’s [bounded research cycle](campaign/README.md#the-bounded-research-cycle); which
+runbook’s
+[bounded research cycle](packing/campaign/README.md#the-bounded-research-cycle); which
 validation loop to run at each step is
 [`conventions.md`](conventions.md#11-what-the-gate-actually-enforces).
-[`packing-campaign`](src/sqpack/campaign/runner.py) stays the smaller tool that executes
-already-preregistered numerical rounds, never a second project manager.
+[`packing-campaign`](packing/src/sqpack/campaign/runner.py) stays the smaller tool that
+executes already-preregistered numerical rounds, never a second project manager.
 
 ## Layout
 
 ```
-packing/
+.
 ├── TUTORIAL.md             First-principles orientation for a newcomer: the objects,
 │                           why the approach is shaped this way, what is established
 ├── SYNOPSIS.md             The technical root: results, status, and the experiment
 │                           roll-up. Read this after the tutorial.
-├── conventions.md          Every rule this directory runs on, and which are checked
+├── conventions.md          Every rule this project runs on, and which are checked
 ├── development.md          Python 3.14 setup, maturity boundaries, validation loops,
 │                           CLI policy, and the refactoring workflow
+├── defects.md              generated from packing/defects.yaml; never edited by hand
 ├── docs/project/           Reports, reviews, specs, postmortems, and historical
 │                           handoffs; active specs and the campaign agenda own priority
 ├── docs/project/research/  The six research reports (see below)
-├── campaign/               The experiment record: hypothesis registry, series, rounds,
-│                           and a generated ledger. See campaign/README.md.
-├── frontier/               What is known about s(n) for every n <= 100: one
-│                           schema-validated reported/formal claim register per case,
-│                           plus the generated reader-first STATUS.md.
-│                           See frontier/README.md.
-├── witnesses/              Generic Witness/v2 interchange, controls, and retained
-│                           decimal and exact rational examples
-├── golden/                 Stored calibration endpoint snapshots for small PROVED
-│                           cases. Mathematical oracle checks are distinct from the
-│                           provisional discovery rows
-├── atlas/                  Endpoint-observation schema and deterministic SVG gallery.
-│                           See atlas/README.md.
-├── resources/              Local archive of the primary literature: papers and web
-│                           sources, each kept as original, cleaned .md, and raw
-│                           extraction. See resources/README.md.
-├── src/sqpack/             Maintained package; dependencies flow downward only
-│   ├── field.py            E3 exact arithmetic and sign certification
-│   ├── verify.py           E3 shared exact and numerical packing predicates
-│   ├── render/             E2 deterministic SVG model, safe serializer, visual
-│   │                       tokens, static views, exact overlays, and CSS motion
-│   ├── research/           E2 quench, canonical identity, atlas, and recognition tools
-│   ├── campaign/           E3 campaign state machine and generated ledger
-│   └── cli/                Stable, self-documenting command entry points
-├── cases/                  E1 retained code scoped to a named n, source, theorem,
-│                           hypothesis, or campaign smoke experiment
-├── devtools/               Developer-only checkers, source adapters, SVG generators,
-│                           and mutation controls
-├── benchmarks/             Explicit performance probes, outside the runtime package
-├── tests/                  Fast behavior, command, and architecture contracts
-├── sqsearch/               Tier-1 screening annealer (Rust)
-├── defects.yaml            the defect log: every bug and record defect found here
-├── defects.schema.yaml     its contract, enforced in the gate
-├── defects.md              generated from defects.yaml; never edited by hand
-└── frankensim-probe/       two experiments run against Jeffrey Emanuel's FrankenSim,
-                            asking whether its certified-arithmetic and RNG layers help
-                            here (see that directory's README)
+├── packing/                Everything that is code, data, or research record, kept one
+│   │                       level down so the root stays readable
+│   ├── campaign/           The experiment record: hypothesis registry, series, rounds,
+│   │                       and a generated ledger. See campaign/README.md.
+│   ├── frontier/           What is known about s(n) for every n <= 100: one
+│   │                       schema-validated reported/formal claim register per case,
+│   │                       plus the generated reader-first STATUS.md.
+│   ├── witnesses/          Generic Witness/v2 interchange, controls, and retained
+│   │                       decimal and exact rational examples
+│   ├── golden/             Stored calibration endpoint snapshots for small PROVED
+│   │                       cases, distinct from provisional discovery rows
+│   ├── atlas/              Endpoint-observation schema and deterministic SVG gallery
+│   ├── resources/          Local archive of the primary literature: papers and web
+│   │                       sources, each kept as original, cleaned .md, and raw
+│   │                       extraction
+│   ├── src/                Maintained sqpack package; dependencies flow downward only
+│   ├── cases/              E1 retained code scoped to a named n, source, theorem,
+│   │                       hypothesis, or campaign smoke experiment
+│   ├── devtools/           Developer-only checkers, source adapters, SVG generators,
+│   │                       and mutation controls
+│   ├── benchmarks/         Explicit performance probes, outside the runtime package
+│   ├── tests/              Fast behavior, command, and architecture contracts
+│   ├── sqsearch/           Tier-1 screening annealer (Rust)
+│   ├── defects.yaml        the defect log: every bug and record defect found here
+│   ├── defects.schema.yaml its contract, enforced in the gate
+│   └── frankensim-probe/   two experiments run against Jeffrey Emanuel's FrankenSim,
+│                           asking whether its certified-arithmetic and RNG layers help
+├── AGENTS.md               Conventions for agents working here; CLAUDE.md points at it
+├── CLAUDE.md               Bridge to AGENTS.md
+├── Makefile                Markdown formatting, git hooks, and skill mirroring
+├── lefthook.yml            The pre-commit hook that formats Markdown
+├── package.json            Tooling-only package for lefthook
+└── package-lock.json       Its lockfile
 ```
 
 ## Rendering Packing Figures
@@ -355,10 +371,10 @@ Each mark is clipped to its participating square interiors.
 The contact layer is shown by default, can be removed with `--no-contacts`, and is never
 guessed for numerical candidate poses.
 
-See the [SVG gallery README](atlas/rendering/README.md) for the focused rendering
-contract, the diagnostic start/final comparison, API and CLI examples, retained
-fixtures, and portability review.
-The [gallery manifest](atlas/rendering/manifest.json) joins each artifact to its
+See the [SVG gallery README](packing/atlas/rendering/README.md) for the focused
+rendering contract, the diagnostic start/final comparison, API and CLI examples,
+retained fixtures, and portability review.
+The [gallery manifest](packing/atlas/rendering/manifest.json) joins each artifact to its
 frontier case, evidence tier, view level, motion support, alt text, and exact
 regeneration command.
 From this directory:
@@ -370,9 +386,9 @@ uv run --frozen --all-extras --group dev python -m devtools.render_packing_galle
 ```
 
 The Motion Lab now has two scenarios on one shared visual system.
-The [self-contained exact `n = 5` lab](atlas/rendering/n5-motion-lab.html) reuses the
-exact R4/R5 and `+W` case functions while leaving the publication renderer’s script-free
-SVG contract unchanged.
+The [self-contained exact `n = 5` lab](packing/atlas/rendering/n5-motion-lab.html)
+reuses the exact R4/R5 and `+W` case functions while leaving the publication renderer’s
+script-free SVG contract unchanged.
 The served setup-and-quench scenario accepts arbitrary seeded configurations, supports
 temporary sticky chunks for placement, releases every chunk before numerical
 optimization, and presents fixed-angle LP states separately from angular probes and
@@ -383,8 +399,9 @@ spike, has produced no research result, and its first review found six defects i
 all in the new instrument, none in the mathematics it displays.
 Its contracts are versioned because they are expected to change.
 Use it to look at what the quench does; do not cite it.
-The [runbook](atlas/rendering/README.md#general-motion-lab-setup-and-free-quench) states
-the maturity boundary in full and records what that review found.
+The
+[runbook](packing/atlas/rendering/README.md#general-motion-lab-setup-and-free-quench)
+states the maturity boundary in full and records what that review found.
 
 From this directory, open the served lab in the default browser:
 
@@ -394,7 +411,7 @@ uv run --frozen --all-extras --group dev python \
 ```
 
 The
-[Motion Lab runbook](atlas/rendering/README.md#general-motion-lab-setup-and-free-quench)
+[Motion Lab runbook](packing/atlas/rendering/README.md#general-motion-lab-setup-and-free-quench)
 documents setup controls, phase marks, trace download and replay, the retained known
 answer, service limits, and the explicit absence of persistent optimization constraints.
 The
@@ -412,11 +429,11 @@ uv run --frozen --all-extras --group dev packing-validate --only "deterministic 
 
 [`defects.md`](defects.md) is the generated defect log: every bug, inefficiency, and
 record defect found in this toolchain, what caught it, and what now stops it recurring.
-It is generated from [`defects.yaml`](defects.yaml) and checked in the gate.
+It is generated from [`defects.yaml`](packing/defects.yaml) and checked in the gate.
 It is separate from the
-[research-loop logbook](campaign/research-loop-logbook/README.md), which summarizes
-bounded runs and links their positive, negative, and unresolved scientific results to
-the experiment records that own them.
+[research-loop logbook](packing/campaign/research-loop-logbook/README.md), which
+summarizes bounded runs and links their positive, negative, and unresolved scientific
+results to the experiment records that own them.
 
 It is kept because the aggregate says things no individual bug report can, and two of
 those things shape how this directory works:
@@ -465,19 +482,20 @@ and what each one owns, see the synopsis’s [document map](SYNOPSIS.md#document
 
 The structured record of the problem’s frontier, meaning the best known packing and best
 proved lower bound for every `n ≤ 100` with provenance and per-case editorial, lives in
-[`frontier/`](frontier/README.md) as soft-schema artifacts rather than as a table inside
-a report, so it can be validated and queried.
+[`frontier/`](packing/frontier/README.md) as soft-schema artifacts rather than as a
+table inside a report, so it can be validated and queried.
 
 Claims in the reports distinguish formal proof or verification, finite numerical checks,
 and source reports. Every citation resolves both to a full reference and to a local copy
-in [`resources/`](resources/README.md).
+in [`resources/`](packing/resources/README.md).
 
 The reports went through a full technical review on 2026-08-22: substantive claims were
 re-checked against the then-current primary-source archive and the central algebra was
 re-derived independently at 50-digit precision.
 The named frontier source set was refreshed again on 2026-08-25; its scope and replay
-dispositions live in [`frontier/source-coverage.yaml`](frontier/source-coverage.yaml),
-so neither date is presented as an exhaustive web claim.
+dispositions live in
+[`frontier/source-coverage.yaml`](packing/frontier/source-coverage.yaml), so neither
+date is presented as an exhaustive web claim.
 Corrections from the technical review are recorded in the `n = 11` report’s
 [Corrections to Common Summaries](docs/project/research/research-2026-08-22-packing-11-unit-squares.md#corrections-to-common-summaries),
 its remaining gaps in
@@ -505,10 +523,10 @@ The current standing review,
 [review-2026-08-23-toolkit-docs-and-first-experiments.md](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md),
 is the historical source of the initial experiment method and `H-001`–`H-015` register.
 Once those claims were codified, their registry artifacts became authoritative; use the
-[idea board](campaign/ideas.md) and [generated ledger](campaign/ledger.md) for current
-status, not the review’s tables.
-The review also contains the proof that fixed angles and a fixed cell reduce the problem
-to a linear program.
+[idea board](packing/campaign/ideas.md) and
+[generated ledger](packing/campaign/ledger.md) for current status, not the review’s
+tables. The review also contains the proof that fixed angles and a fixed cell reduce the
+problem to a linear program.
 The synopsis records that current result as [T-2](SYNOPSIS.md#the-cell-decomposition),
 backed by two independent implementations.
 
@@ -551,7 +569,7 @@ The retained rational witness is a separate, slightly relaxed construction produ
 robust rational promotion and verified exactly by the public tool and an independent
 checker. It proves `s(29) ≤ 5.93388579981302587863645209`, not the tighter reported
 record and not optimality.
-See [`n-029.md`](frontier/n-029.md) for the complete disposition.
+See [`n-029.md`](packing/frontier/n-029.md) for the complete disposition.
 
 `cases.trump11.verify_exact` output:
 
@@ -571,8 +589,8 @@ record page, so this is also an independent check of that record.
 
 ### Verifying Another Packing
 
-Use [`Witness/v2`](witnesses/witness.schema.yaml) for supported rational, algebraic, or
-decimal center/basis, center/angle, and corner data.
+Use [`Witness/v2`](packing/witnesses/witness.schema.yaml) for supported rational,
+algebraic, or decimal center/basis, center/angle, and corner data.
 Source adapters should stop at that interchange boundary; `packing-witness inspect`,
 `check`, and `verify` then provide the shared behavior.
 
@@ -592,7 +610,7 @@ real root. It uses exact finite-field irreducibility when that certificate exist
 complete factor-exclusion check for supported monic integer quartics, and exact Sturm
 root counting. Inputs outside those certified paths fail closed.
 Recovering a correct field and exact geometry from arbitrary decimal input remains the
-hard step; [`cases/trump11/packing.py`](cases/trump11/packing.py) is the worked
+hard step; [`cases/trump11/packing.py`](packing/cases/trump11/packing.py) is the worked
 algebraic example. Robust rational promotion is built for suitable decimal center-angle
 poses and may need an explicit side relaxation.
 Generic interval-existence certification at the reported value is not built and may fail
@@ -601,7 +619,7 @@ ill-conditioned.
 
 The [synopsis](SYNOPSIS.md#verification-capability-ladder) classifies each path as
 built, buildable engineering, or mathematically contingent.
-The module docstrings in [`src/sqpack/`](src/sqpack/) carry the maintained APIs,
+The module docstrings in [`src/sqpack/`](packing/src/sqpack/) carry the maintained APIs,
 including the non-certifying numerical backends.
 
 ### Scope

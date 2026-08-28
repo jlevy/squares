@@ -14,7 +14,7 @@ from strif import atomic_output_file
 ROOT = Path(__file__).resolve().parents[1]
 # The repository root. The reader-facing documents live there, not under packing/.
 REPO = ROOT.parent
-MAP = ROOT / "docs" / "project" / "document-map.yaml"
+MAP = REPO / "docs" / "project" / "document-map.yaml"
 SYNOPSIS = REPO / "SYNOPSIS.md"
 BEGIN = "<!-- BEGIN GENERATED: document-map (devtools.render_document_map) -->"
 END = "<!-- END GENERATED: document-map -->"
@@ -62,7 +62,7 @@ def title(path: Path) -> str:
 
 
 def document_link(relative: str) -> str:
-    return f"[{title(ROOT / relative)}]({relative})"
+    return f"[{title(REPO / relative)}]({relative})"
 
 
 def render_table(document_map: dict) -> str:

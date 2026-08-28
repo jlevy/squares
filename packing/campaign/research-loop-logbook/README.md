@@ -51,7 +51,7 @@ their verdicts.
 Neither group states scientific novelty.
 That is a separate, source-review-dependent axis: `common-knowledge`,
 `previously-published`, `apparently-novel`, or the reserved `confirmed-novel`, as
-defined in the [synopsis](../../SYNOPSIS.md#assurance-methods-and-claims).
+defined in the [synopsis](../../../SYNOPSIS.md#assurance-methods-and-claims).
 A result produced in the current run may have no novelty assessment; a previously
 published result may be rechecked in the current run.
 Never infer one axis from the other.

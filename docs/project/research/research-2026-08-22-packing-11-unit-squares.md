@@ -13,8 +13,9 @@ Claims in this document carry an inline key in bold brackets, e.g.
 
 1. The [References](#references) section below, with full bibliographic detail and a
    URL.
-2. **A local copy** in [`resources/`](../../../resources/README.md) — the original PDF,
-   a cleaned Markdown transcription, and the unedited extraction it was cleaned from.
+2. **A local copy** in [`resources/`](../../../packing/resources/README.md) — the
+   original PDF, a cleaned Markdown transcription, and the unedited extraction it was
+   cleaned from.
 
 So every cited source can be read and grepped locally without re-fetching:
 
@@ -118,7 +119,7 @@ The entire difficulty of the problem lies between them.
 | Quantity | Value | Status | Source |
 | --- | --- | --- | --- |
 | Area lower bound | `√11 ≈ 3.316625` | Trivial | — |
-| **Best certified lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Exact here; published proof has gap D-152** | [exp-017](../../../campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md); value stated in **[Stromquist 2003]**, Thm 2 |
+| **Best certified lower bound** | `2 + 2√(4/5) = 2 + 4/√5 ≈ 3.788854` | **Exact here; published proof has gap D-152** | [exp-017](../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md); value stated in **[Stromquist 2003]**, Thm 2 |
 | **Best known packing (upper bound)** | `≈ 3.877084` | **Construction only** | Trump 1979, via **[Friedman DS7]**, **[Kingbird]** |
 | Lower bound for 0°/45°-only packings | `2 + (4/3)√2 ≈ 3.885618` | **Proved** | **[Stromquist 2003]**, Thm 3 |
 | Grid upper bound | `4` | Trivial | — |
@@ -741,9 +742,9 @@ certificate for the last value; D-152 still requires every provenance display to
 that the published Figure 14 proof is false as printed.
 
 This table and the solved-case table below are **generated** from
-[`packing/frontier/`](../../../frontier/README.md), where the same facts live as one
-schema-validated artifact per `n` with provenance, links into the local archive, and an
-editorial note on each case.
+[`packing/frontier/`](../../../packing/frontier/README.md), where the same facts live as
+one schema-validated artifact per `n` with provenance, links into the local archive, and
+an editorial note on each case.
 The duplication is deliberate — this report should be readable end to end without
 opening the data — and it is safe because the tables are rendered by
 `devtools.render_research_tables`, which `packing-validate` rechecks.
@@ -1735,11 +1736,11 @@ covers two values of `n`. Any program should be weighted accordingly.
    archived with source-faithful notes.
    The remaining priority routes are Chung–Graham (2009 and 2020) and Arslanov–Bui
    (2025), each under the three-format archive discipline in
-   [`resources/`](../../../resources/README.md).
+   [`resources/`](../../../packing/resources/README.md).
 2. **Machine-readable record corpus.** A first version now exists:
-   [`frontier/`](../../../frontier/README.md) carries one schema-validated artifact per
-   `n ≤ 100`, built by parsing the catalogue’s *prose* for upper bounds and computing
-   lower bounds from four sources.
+   [`frontier/`](../../../packing/frontier/README.md) carries one schema-validated
+   artifact per `n ≤ 100`, built by parsing the catalogue’s *prose* for upper bounds and
+   computing lower bounds from four sources.
    What it does not yet carry is geometry — the next step is parsing the catalogue SVGs
    into `(x, y, θ)` triples with their algebraic definitions, which is what would let
    every record be independently audited by the exact verifier.
@@ -1909,10 +1910,10 @@ Every item in the proof lane above exists because of this.
 ## Source Availability
 
 Every source this document cites is either in the local archive under
-[`resources/`](../../../resources/README.md) or listed here.
+[`resources/`](../../../packing/resources/README.md) or listed here.
 The structured form is
-[`frontier/source-availability.yaml`](../../../frontier/source-availability.yaml); the
-tables below are generated from it.
+[`frontier/source-availability.yaml`](../../../packing/frontier/source-availability.yaml);
+the tables below are generated from it.
 
 **Re-test this list rather than inheriting it.** A “not retrievable” verdict is a
 negative search result, and this document has now made that error eight times.
@@ -2113,10 +2114,10 @@ independent exact computer-assisted certificate in this repository.
 ## References
 
 Every key below resolves to a local copy under
-[`resources/`](../../../resources/README.md) unless marked **[not retrieved]**. Local
-stems are given as `papers/<stem>` or `web/<stem>`. Papers normally have a PDF, cleaned
-Markdown, and faithful raw extraction; the image-only Stromquist memoranda instead have
-explicitly bounded reading aids and unedited raw OCR.
+[`resources/`](../../../packing/resources/README.md) unless marked **[not retrieved]**.
+Local stems are given as `papers/<stem>` or `web/<stem>`. Papers normally have a PDF,
+cleaned Markdown, and faithful raw extraction; the image-only Stromquist memoranda
+instead have explicitly bounded reading aids and unedited raw OCR.
 
 ### Core literature on `s(n)`
 

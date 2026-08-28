@@ -23,7 +23,7 @@ source-declared contact graph.
 It starts paused and runs a certified path once per Play action.
 Reduced-motion users retain manual scrubbing.
 
-[Open the retained motion lab](../../../../atlas/rendering/n5-motion-lab.html).
+[Open the retained motion lab](../../../../packing/atlas/rendering/n5-motion-lab.html).
 
 ## Why This Is a Separate Artifact
 

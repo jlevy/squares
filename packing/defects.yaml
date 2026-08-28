@@ -5824,7 +5824,7 @@ defects:
   regression: >-
     test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock parses both
     workflow jobs and requires checkout fetch-depth zero.
-  recorded_in: ../../.github/workflows/packing-validation.yml
+  recorded_in: ../.github/workflows/packing-validation.yml
 - id: D-227
   title: The uv cache key prefixed its working directory twice
   date: '2026-08-24'
@@ -5847,7 +5847,7 @@ defects:
   regression: >-
     test_ci_jobs_fetch_provenance_history_and_key_the_uv_cache_from_the_lock requires
     the relative uv.lock glob in both workflow jobs.
-  recorded_in: ../../.github/workflows/packing-validation.yml
+  recorded_in: ../.github/workflows/packing-validation.yml
 - id: D-228
   title: The workflow regression assumed every YAML key was a string
   date: '2026-08-24'
@@ -6708,7 +6708,7 @@ defects:
     the generated-view exemption check and repository-root commit hook preserve the file
   recurrence_of: D-027
   bead: think-5tc9
-  recorded_in: ../../.flowmarkignore
+  recorded_in: ../.flowmarkignore
 - id: D-260
   title: A solver fixture cross-wired two fixed-point evaluations
   date: '2026-08-25'
@@ -7039,7 +7039,7 @@ defects:
     the workflow contract requires one direct blocking `packing-validate --deep --only
     "golden basin maps"` macOS step, and both PR jobs must pass
   bead: think-8qco
-  recorded_in: ../../.github/workflows/packing-validation.yml
+  recorded_in: ../.github/workflows/packing-validation.yml
 - id: D-273
   title: The direct-blocking workflow test admitted advisory variants
   date: '2026-08-25'

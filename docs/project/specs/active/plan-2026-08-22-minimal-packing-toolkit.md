@@ -234,8 +234,8 @@ The rule this yields, and the reason the phases below are ordered as they are:
 > Accelerate what a profile says is slow, not what looks slow.**
 
 Concretely: the spine is `scipy` and standard library, with no build step and no FFI.
-[`sqsearch`](../../../../sqsearch/) stays a native binary behind a JSONL seam, because
-it already exists and process isolation is worth having overnight.
+[`sqsearch`](../../../../packing/sqsearch/) stays a native binary behind a JSONL seam,
+because it already exists and process isolation is worth having overnight.
 If a strategy later needs the quench *inside* its loop, add a `cdylib` crate-type to the
 same crate and call it with `ctypes` — 0.52 µs makes that viable, and it costs neither
 `maturin` nor wheels.
@@ -276,7 +276,7 @@ the atlas — so a new strategy cannot accidentally change what a basin means, a
 proposers are comparable by construction.
 
 **The experiment-loop harness** (already landed, see
-[`campaign/`](../../../../campaign/README.md)): the hypothesis registry, series,
+[`campaign/`](../../../../packing/campaign/README.md)): the hypothesis registry, series,
 experiment artifacts, generated ledger, and whole-set invariant checks that the review’s
 round protocol calls for.
 Its experiment artifacts *are* the review’s “manifests”.
@@ -367,9 +367,9 @@ Thin by design. The work here is the boundary, not the strategies.
 - [ ] The proposer contract:
   `(n, pair_test_budget, keyed_rng, seeds?) -> configurations`. No quenching, no
   canonicalization, no validity decisions, no atlas writes.
-- [ ] Port the existing [`sqsearch`](../../../../sqsearch/) annealer behind it as
-  proposer #1, and record **every** quenched local optimum rather than only the best —
-  the current engine discards exactly the data the atlas is made of.
+- [ ] Port the existing [`sqsearch`](../../../../packing/sqsearch/) annealer behind it
+  as proposer #1, and record **every** quenched local optimum rather than only the best
+  — the current engine discards exactly the data the atlas is made of.
 - [ ] A uniform multistart proposer, as the null every other proposer is measured
   against.
 - [ ] Equal-budget harness: two proposers, one pipeline, comparable basin sets.
@@ -641,7 +641,7 @@ implementation, and are corrected here rather than left to be discovered again:
 
 And one addition to Phase 1’s definition of done: a new component joins the **soundness
 perimeter**
-([`devtools.check_soundness_perimeter`](../../../../devtools/check_soundness_perimeter.py))
+([`devtools.check_soundness_perimeter`](../../../../packing/devtools/check_soundness_perimeter.py))
 in the same change that introduces it.
 The quench did not, which is why D-014 was possible.
 
@@ -693,10 +693,10 @@ What changed here:
   oblique core `n = 11` demands.
 
 What the parallel branch contributed, now folded in: the experiment-loop harness
-([`campaign/`](../../../../campaign/README.md)) implementing the review’s run protocol
-as validated artifacts rather than prose; a working f64 annealer
-([`sqsearch`](../../../../sqsearch/)), which becomes a proposer behind the Phase 2
-contract; a measured backend decision (Rust and Numba are equivalent, the GPU loses by
+([`campaign/`](../../../../packing/campaign/README.md)) implementing the review’s run
+protocol as validated artifacts rather than prose; a working f64 annealer
+([`sqsearch`](../../../../packing/sqsearch/)), which becomes a proposer behind the Phase
+2 contract; a measured backend decision (Rust and Numba are equivalent, the GPU loses by
 8× at this size); and a baseline round whose controls caught two instrument defects
 before any strategy was tested.
 Its hypotheses were renumbered above this register’s `H-001`–`H-015` block.
@@ -715,8 +715,8 @@ Existing code and data this builds on:
 
 - [`packing/`](../../../../README.md) — the Python verifier, negative controls, and
   `packing-validate`.
-- [`packing/frontier/`](../../../../frontier/README.md) — the per-`n` corpus and the
-  datasets the experiments will write back into.
+- [`packing/frontier/`](../../../../packing/frontier/README.md) — the per-`n` corpus and
+  the datasets the experiments will write back into.
 
 External:
 

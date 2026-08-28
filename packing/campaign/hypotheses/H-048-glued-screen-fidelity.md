@@ -76,7 +76,7 @@ The cells are the proved ones on purpose.
 At `n = 5` and `n = 10` the analytic optimum is known, so a disagreement between the two
 rankings is unambiguously an instrument fact.
 It is also the natural place for any leftover degenerate-cell instability
-([D-059](../../defects.md)) to appear, since a glued aligned stratum is the most
+([D-059](../../../defects.md)) to appear, since a glued aligned stratum is the most
 tie-rich linear program this pipeline will ever hand a solver.
 
 <!-- This document follows common-doc-guidelines.md.

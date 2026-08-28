@@ -2,7 +2,7 @@
 
 This is the engineering entry point for `packing/`. Read [`TUTORIAL.md`](TUTORIAL.md)
 for the mathematics, [`SYNOPSIS.md`](SYNOPSIS.md) for research status, and
-[`campaign/README.md`](campaign/README.md) before operating the research loop.
+[`campaign/README.md`](packing/campaign/README.md) before operating the research loop.
 This guide owns runtime support, code placement, validation, and refactoring practice.
 
 The governing rule is assurance proportional to reuse and consequence.
@@ -177,12 +177,12 @@ multiple commands, or detached daemons; Windows process-tree cleanup is not yet
 implemented. These limits are why a subprocess timeout is not, by itself, evidence that
 D-239 is resolved.
 
-On pull requests,
-[`packing-validation.yml`](../../.github/workflows/packing-validation.yml) runs
-`packing-validate --fast` on Linux and reports the stable `packing-required` aggregate.
-The fast behavioral step excludes only 21 measured slow nodes declared on nine test
-functions with the `exhaustive_exact` marker; the workflow contract checks that exact
-function set and rejects module-level marking.
+On pull requests, [`packing-validation.yml`](.github/workflows/packing-validation.yml)
+runs `packing-validate --fast` on Linux and reports the stable `packing-required`
+aggregate.
+The fast behavioral step excludes only 21 measured slow nodes declared on nine
+test functions with the `exhaustive_exact` marker; the workflow contract checks that
+exact function set and rejects module-level marking.
 The current combined tree collects 139 tests: the PR command runs 118 and deselects 21
 exhaustive exact cases.
 The first hosted pull-request run finished end to end in 46 seconds, including a

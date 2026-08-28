@@ -60,8 +60,8 @@ unequal non-trivial orientations against a grid frame, structurally the same *ki
 object as Trump’s, at a case that is cheap to run.
 The former `±40°` shorthand was not an accurate transcription of the primary SVG.
 
-The [synopsis](../../SYNOPSIS.md#the-lay-of-the-land-by-n) calls it the largest unforced
-gap in the campaign’s coverage, and the
+The [synopsis](../../../SYNOPSIS.md#the-lay-of-the-land-by-n) calls it the largest
+unforced gap in the campaign’s coverage, and the
 [runbook](../README.md#subject-and-the-instance-axis) has carried it in the declared
 instance axis since the campaign opened.
 It has never been run.

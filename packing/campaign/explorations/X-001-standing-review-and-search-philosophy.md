@@ -37,7 +37,7 @@ meaningful; it does not restate them.
 
 ## What they are
 
-**[The standing review](../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md)**
+**[The standing review](../../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md)**
 — ten findings (R-1…R-10) on what the toolkit documents were missing, a fifteen-entry
 hypothesis register with kill criteria and budget tiers, a run protocol, and a series
 plan S0–S6. Its main theoretical contribution is R-2: **for fixed angles, minimising `s`
@@ -45,7 +45,7 @@ is a linear program**, numerically checked by an independent implementation — 
 1,056-constraint LP at Trump’s angles reproduced `s(11)` to solver precision and every
 centre to `9e-16`.
 
-**[A Search Philosophy for Square Packing](../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)**
+**[A Search Philosophy for Square Packing](../../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)**
 — the strategy layer.
 Its registered premise is that record packings are unusually constrained and may have
 low hit probability under named baseline proposers; H-012 must measure that conditional
@@ -55,7 +55,7 @@ The response is cartography: **the map is the deliverable and records are coroll
 **Amended 2026-08-23.** Optima need not be isolated points.
 The exact `n = 3` sliding family proves that a map keyed by terminal coordinates can
 count its own quantizer; `n = 5` supplies an unresolved warning but not a rank or
-connectivity proof. See [D-034](../../defects.md); terminal-component identity is a
+connectivity proof. See [D-034](../../../defects.md); terminal-component identity is a
 precondition on the deliverable, not a detail of its implementation.
 
 ## What has been codified

@@ -52,7 +52,7 @@ lives in that series’ directory.
 `series-000` predates strict application of this boundary and now contains heterogeneous
 calibration and exact-determination work.
 Its
-[series note](campaign/series/series-000-smoke-and-calibration/README.md#current-scope-and-safe-reading)
+[series note](packing/campaign/series/series-000-smoke-and-calibration/README.md#current-scope-and-safe-reading)
 states the safe reading; `think-i08r` owns the all-at-once record migration.
 Do not use that legacy container as the template for opening another series.
 
@@ -358,7 +358,7 @@ The dependency rules and E0–E3 expectations are defined in
 
 **Markdown is formatted by flowmark**, automatically on commit.
 [checked: hook] Exclusions are evidence-based, not precautionary, and each one states
-its measured reason in [`.flowmarkignore`](../../.flowmarkignore).
+its measured reason in [`.flowmarkignore`](.flowmarkignore).
 
 **Relative links must resolve.** [checked] The campaign’s checker walks every relative
 Markdown link. This project has needed that twice.
@@ -441,8 +441,8 @@ When a rule here is broken and nothing catches it, the fix is a check, not a rem
 
 ## Defect Classes
 
-One taxonomy, used by [`defects.yaml`](defects.yaml), by the beads (as a `defect-class:`
-label), and by any review that reports a problem.
+One taxonomy, used by [`defects.yaml`](packing/defects.yaml), by the beads (as a
+`defect-class:` label), and by any review that reports a problem.
 They are separated because they cost completely different things, and treating them
 alike is how a critical bug gets the same attention as a stale link.
 
@@ -467,8 +467,8 @@ whose rules R1–R4 apply to code that does not exist yet.
 
 ## Defects
 
-Every defect found in this toolchain is recorded in [`defects.yaml`](defects.yaml) and
-rendered to [`defects.md`](defects.md).
+Every defect found in this toolchain is recorded in
+[`defects.yaml`](packing/defects.yaml) and rendered to [`defects.md`](defects.md).
 A defect is a bug, an inefficiency, or a record that disagreed with its evidence—not an
 approach tried and rejected on its merits, which belongs in `campaign/ideas.md` under
 Dead ends.

@@ -230,7 +230,7 @@ seconds.
 **L4 · Corpus tooling (Python).** The SVG record parser that turns the catalogue’s
 33-digit decimal entities and Mathematica `Root[…]` comments into `(x, y, θ)` triples
 with their algebraic definitions — the missing geometry noted in the
-[frontier corpus](../../../frontier/README.md) and tracked as its own work item.
+[frontier corpus](../../../packing/frontier/README.md) and tracked as its own work item.
 Agent tier, run once per record, performance irrelevant.
 
 ### Symbolic and exact arithmetic: what to use where

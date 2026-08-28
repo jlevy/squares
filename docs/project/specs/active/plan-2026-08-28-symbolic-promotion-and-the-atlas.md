@@ -7,7 +7,7 @@ now, why `n = 11` is exact and `n = 29` is not, and the ranked gaps between the 
 tooling and a complete atlas.
 
 **Does not own:** The bounded commitments, which live in
-[agenda-005](../../../../campaign/agendas/agenda-005-symbolic-promotion-and-identity.md);
+[agenda-005](../../../../packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md);
 the scientific claims, which live in the hypothesis registry; or the component-status
 vocabulary, which [SYNOPSIS’s What Is Built](../../../../SYNOPSIS.md#what-is-built) owns
 and this plan only reads.
@@ -44,9 +44,9 @@ between them. SymPy appears in three files and none of them is a general promote
 This difference is not about difficulty, and reading it as difficulty would misdirect
 the next several sessions.
 
-[`cases.trump11.derive_field`](../../../../cases/trump11/derive_field.py) states its
-input plainly: it takes **only the published minimal polynomial** of the container side,
-plus the tilted-block contact relation, and re-derives the minimal polynomial of
+[`cases.trump11.derive_field`](../../../../packing/cases/trump11/derive_field.py) states
+its input plainly: it takes **only the published minimal polynomial** of the container
+side, plus the tilted-block contact relation, and re-derives the minimal polynomial of
 `u = tan(a/2)`. `n = 11` is exact because Trump published the degree-eight polynomial in
 1979\. Steps two through five were carried out by a person, decades ago, and this
 repository picks the work up at step six, where it is strong.
@@ -64,9 +64,9 @@ constructive value for it exists in the literature or here**.
 
 The contrast with `n = 5` and `n = 10` is the useful one, because those come from the
 same catalogue yet reach `verified` and `exact-algebraic` in
-[`cases.gobel5`](../../../../cases/gobel5/) and
-[`cases.gobel10`](../../../../cases/gobel10/). The difference is that Göbel’s underlying
-constructions are known in closed form.
+[`cases.gobel5`](../../../../packing/cases/gobel5/) and
+[`cases.gobel10`](../../../../packing/cases/gobel10/). The difference is that Göbel’s
+underlying constructions are known in closed form.
 At `n = 29` the construction *is* the numerical solve.
 
 This changes what the symbolic pipeline would be doing at each size.
@@ -126,8 +126,8 @@ relation would still leave `n = 29` uncertified.
    digits, which a probe in X-004 shows cannot identify a minimal polynomial.
    More digits require Newton refinement, and refinement requires the closed system —
    which at `n = 29` is published in the provenance SVG and already transcribed in
-   [`cases.kingbird29.verify_svg`](../../../../cases/kingbird29/verify_svg.py), where it
-   is evaluated but never solved.
+   [`cases.kingbird29.verify_svg`](../../../../packing/cases/kingbird29/verify_svg.py),
+   where it is evaluated but never solved.
    Precision at this size is available today; gaps 2 and 3 below are what generalize the
    route to sizes with no published system.
 2. **Contact-equation assembly and closure**, including the determinant conditions that

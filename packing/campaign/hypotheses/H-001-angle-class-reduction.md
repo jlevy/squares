@@ -43,7 +43,7 @@ hypothesis:
 # H-001 — the search space is smaller than it looks
 
 The
-[LP-in-cell result](../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2)
+[LP-in-cell result](../../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#r-2)
 says the honest continuous dimension of this problem is `n` — the angles — not `3n + 1`.
 Everything else is the combinatorial choice of cell, and the cell is solved exactly by a
 linear program.

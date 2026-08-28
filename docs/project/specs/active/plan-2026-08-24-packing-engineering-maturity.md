@@ -298,7 +298,7 @@ algorithms or claims.
 - [Packing README](../../../../README.md)
 - [Packing synopsis](../../../../SYNOPSIS.md)
 - [Packing conventions](../../../../conventions.md)
-- [Campaign runbook](../../../../campaign/README.md)
+- [Campaign runbook](../../../../packing/campaign/README.md)
 - [Minimal Packing Toolkit](plan-2026-08-22-minimal-packing-toolkit.md)
 - `think-9a7v` — engineering-maturity epic
 

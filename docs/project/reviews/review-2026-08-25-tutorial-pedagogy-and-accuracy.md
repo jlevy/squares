@@ -346,7 +346,7 @@ A reader also cannot tell whether “the quench map” names a class of determin
 refinements or one particular algorithm.
 It is one particular algorithm.
 
-From [`sqpack.research.quench`](../../../src/sqpack/research/quench.py):
+From [`sqpack.research.quench`](../../../packing/src/sqpack/research/quench.py):
 
 **What type of solve.** A linear program over `2n + 1` variables ordered
 `[s, x₀…x_{n−1}, y₀…y_{n−1}]`. Containment is four inequalities per square against the
@@ -499,10 +499,10 @@ data and why isolating the intended real root is one of the two guesses to disch
 The degree is whatever the active contact system forces after elimination: 8 at
 `n = 11`, and the record table reaches 62, which is also where pure-Python exact
 arithmetic is worst.
-[H-038](../../../campaign/hypotheses/H-038-record-number-fields.md) registers exactly
-this — which fields, degrees, Galois groups and discriminants occur, and how they follow
-from the active cell and angle-class mechanism — and notes that degree is a descriptor
-rather than a ceiling.
+[H-038](../../../packing/campaign/hypotheses/H-038-record-number-fields.md) registers
+exactly this — which fields, degrees, Galois groups and discriminants occur, and how
+they follow from the active cell and angle-class mechanism — and notes that degree is a
+descriptor rather than a ceiling.
 The counterpoint already in the record is worth keeping beside it: at a Pythagorean tilt
 such as `arctan(3/4)` every coordinate is rational and the degree is 1. Degree is a
 property of the mechanism, not of `n`.
@@ -552,7 +552,8 @@ algebraic number fields; certified and interval numerics; symbolic elimination; 
 relation; optimality conditions and why a rank drop supplies the missing equations;
 energy landscapes, where both Stillinger–Weber and the Doye–Miller–Wales 38-atom cluster
 are already cited in the synopsis and invoked here with no pointer; and the problem’s
-own literature, all of it archived under [`resources/`](../../../resources/README.md).
+own literature, all of it archived under
+[`resources/`](../../../packing/resources/README.md).
 
 **And what implements the exact arithmetic here**, which is a fair question for a reader
 deciding whether to trust or reuse it, and which the document never answers:

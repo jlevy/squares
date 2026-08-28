@@ -1,7 +1,7 @@
 # Review: The Toolkit Docs and the First Experiment Series
 
 > **Lifecycle:** Superseded for current results by the
-> [generated campaign ledger](../../../campaign/ledger.md).
+> [generated campaign ledger](../../../packing/campaign/ledger.md).
 > Retained as a dated review record.
 
 **Date:** 2026-08-23
@@ -278,9 +278,9 @@ Kill: no improvement in budget-to-side-4+ε. Tier S.
 **Correction, 2026-08-24.** That test is vacuous: the cold `n = 12` grid already has
 side 4 before search.
 The canonical
-[H-004 artifact](../../../campaign/hypotheses/H-004-neighbor-transfer-seeding.md) now
-tests add-from-10 and remove-from-12 seeds against paired cold starts at `n = 11`, with
-a preregistered median best-side improvement.
+[H-004 artifact](../../../packing/campaign/hypotheses/H-004-neighbor-transfer-seeding.md)
+now tests add-from-10 and remove-from-12 seeds against paired cold starts at `n = 11`,
+with a preregistered median best-side improvement.
 The original wording remains above so the validity error is visible rather than silently
 rewritten ([D-080](../../../defects.md)).
 
@@ -543,7 +543,8 @@ evidence base per that document’s methodology note.
 - [Packing 11 Unit Squares in a Square](../research/research-2026-08-22-packing-11-unit-squares.md)
   — the Stromquist two-stage structure (R-5), the transversal/fractional-certificate
   thread (H-6), the strategy catalogues.
-- [Frontier corpus](../../../frontier/README.md) — the `m² − 3` gaps behind R-8/H-5.
+- [Frontier corpus](../../../packing/frontier/README.md) — the `m² − 3` gaps behind
+  R-8/H-5.
 - Record catalogue capture (`resources/web/kingbird-squares-in-squares`) —
   neighbor-extension annotations behind R-6/H-4; the `s(51)` basin statistics behind
   H-3.

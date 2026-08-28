@@ -20,9 +20,9 @@ The exact route
 ([plan-2026-08-28-promotion-pipeline-implementation](plan-2026-08-28-promotion-pipeline-implementation.md))
 recovers a minimal polynomial and discharges it by exact substitution.
 That is strictly stronger, and it may not terminate: a sweep recorded in
-[X-004](../../../../campaign/explorations/X-004-n29-exact-promotion.md) found no integer
-relation through degree twenty with coefficients below `10^22`, so `s(29)`'s minimal
-polynomial is large, and Gröbner elimination in six unknowns may not finish.
+[X-004](../../../../packing/campaign/explorations/X-004-n29-exact-promotion.md) found no
+integer relation through degree twenty with coefficients below `10^22`, so `s(29)`'s
+minimal polynomial is large, and Gröbner elimination in six unknowns may not finish.
 Interval certification does not need the polynomial at all.
 
 `n = 29` is the target.
@@ -60,11 +60,11 @@ certificate exists.
 ### What already exists, and it is more than it looks
 
 The witness contract **already names this method**.
-[`sqpack.assurance`](../../../../src/sqpack/assurance.py) lists `interval-certified`
-among the methods that may carry `verified`, and
-[`sqpack.witness`](../../../../src/sqpack/witness.py) enforces that `verified` assurance
-requires `exact-algebraic` or `interval-certified`. The only thing missing is the
-checker itself: `exact_verify` raises
+[`sqpack.assurance`](../../../../packing/src/sqpack/assurance.py) lists
+`interval-certified` among the methods that may carry `verified`, and
+[`sqpack.witness`](../../../../packing/src/sqpack/witness.py) enforces that `verified`
+assurance requires `exact-algebraic` or `interval-certified`. The only thing missing is
+the checker itself: `exact_verify` raises
 
 ```
 WitnessError("checker-not-built",
@@ -75,17 +75,17 @@ WitnessError("checker-not-built",
 So this feature fills a socket that was deliberately left open, rather than inventing a
 new contract.
 
-[`sqpack.field`](../../../../src/sqpack/field.py) already does rigorous interval work:
-it isolates a real root by bisecting until the enclosure excludes zero, narrows an
+[`sqpack.field`](../../../../packing/src/sqpack/field.py) already does rigorous interval
+work: it isolates a real root by bisecting until the enclosure excludes zero, narrows an
 isolating interval below a requested precision, and returns rigorous enclosures of a
 polynomial over an interval.
 That is the arithmetic core, applied to one univariate polynomial.
 What is absent is the multivariate operator and everything downstream of it.
 
-[`sqpack.verify`](../../../../src/sqpack/verify.py) checks separating-axis validity with
-an injected `sign` callable, which is the seam this feature needs: an interval `sign`
-that returns a definite sign only when the enclosure excludes zero, and otherwise
-refuses.
+[`sqpack.verify`](../../../../packing/src/sqpack/verify.py) checks separating-axis
+validity with an injected `sign` callable, which is the seam this feature needs: an
+interval `sign` that returns a definite sign only when the enclosure excludes zero, and
+otherwise refuses.
 
 ### What is missing
 
@@ -99,7 +99,7 @@ refuses.
 | `exact_verify` branch for `interval-certified` | raises `checker-not-built` |
 
 The schema gap is real and needs a deliberate decision.
-[`witness.schema.yaml`](../../../../witnesses/witness.schema.yaml) declares
+[`witness.schema.yaml`](../../../../packing/witnesses/witness.schema.yaml) declares
 `kind: {enum: [decimal, rational, algebraic-number-field]}`. An enclosure is none of
 those. Adding a fourth kind is a contract change, and it must be made as one.
 
@@ -110,8 +110,8 @@ The provenance SVG carries nine slide scalars in closed form, six equations `f1 
 `{s, a, b, c, d, i}`, **and the layout map**: its `<use>` transforms are written
 symbolically in those same names, for example
 `translate(2 1) rotate(&a;) translate(0 -&r1;)`.
-[`cases.kingbird29.verify_svg`](../../../../cases/kingbird29/verify_svg.py) transcribes
-the system and parses the transforms.
+[`cases.kingbird29.verify_svg`](../../../../packing/cases/kingbird29/verify_svg.py)
+transcribes the system and parses the transforms.
 
 So the two inputs this feature declares as prerequisites — a contact system and a layout
 map — exist at `n = 29` today, with no assembler required.
@@ -299,10 +299,10 @@ the reported value as certified.
 
 ## References
 
-- [BC-045 in agenda-005](../../../../campaign/agendas/agenda-005-symbolic-promotion-and-identity.md)
+- [BC-045 in agenda-005](../../../../packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md)
 - [plan-2026-08-28 — the promotion pipeline implementation](plan-2026-08-28-promotion-pipeline-implementation.md)
 - [plan-2026-08-28 — the symbolic promotion gap](plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
-- [X-004 — an exact algebraic characterization of the `n = 29` record](../../../../campaign/explorations/X-004-n29-exact-promotion.md)
+- [X-004 — an exact algebraic characterization of the `n = 29` record](../../../../packing/campaign/explorations/X-004-n29-exact-promotion.md)
 - [TUTORIAL §5 — from a numeric solution to an exact one](../../../../TUTORIAL.md#from-a-numeric-solution-to-an-exact-one)
 - [SYNOPSIS — What Is Built](../../../../SYNOPSIS.md#what-is-built)
 

@@ -36,7 +36,7 @@ nothing to say about the side value.
 Some of the most interesting cases lie just above a perfect square, where improving on
 the next grid side can require tilted structure.
 
-![Walter Trump’s exact packing of eleven unit squares.](atlas/rendering/trump11-overview.svg)
+![Walter Trump’s exact packing of eleven unit squares.](packing/atlas/rendering/trump11-overview.svg)
 
 *The best-known `n = 11` construction.
 Six squares are axis-aligned; five form an oblique block tilted by about `40.18°`.
@@ -87,8 +87,8 @@ printed**: an exact open box of side `10001/10000` fits the claimed container an
 strictly avoids all twelve printed Figure 14 points.
 A separately preregistered, source-distinct repair—moving one point from `(.8, 1.85)` to
 `(.79, 1.85)`—restores the whole argument and certifies the same inequality exactly
-([exp-016](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md),
-[exp-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md)).
+([exp-016](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md),
+[exp-017](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md)).
 The inequality stands; the printed derivation of it does not.
 The synopsis records the repair as **T-4** and the falsification as the round that
 terminally refuted the hypothesis it was registered against.
@@ -235,7 +235,7 @@ not a theorem that class count equals the local dimension of the full packing pr
 Other records already use more classes—six, numerically, at `n = 29`—and every proposed
 compression must be checked on its own contact structure.
 
-![The high-precision Kingbird packing of twenty-nine unit squares.](atlas/rendering/kingbird29-overview.svg)
+![The high-precision Kingbird packing of twenty-nine unit squares.](packing/atlas/rendering/kingbird29-overview.svg)
 
 *The reported `n = 29` record is a useful larger-scale check: six orientation classes
 across 29 squares. The retained roughly 100-digit source is evaluated at 160 decimal
@@ -325,7 +325,7 @@ output and the fixed-angle solve agree to every digit at `+5.6440e-04`, and the 
 quench with its angle half reaches `+4.4409e-16`.
 
 The renderer guide retains the
-[shared-scale Göbel source-return diagnostic](atlas/rendering/README.md#n--10-numerical-comparison):
+[shared-scale Göbel source-return diagnostic](packing/atlas/rendering/README.md#n--10-numerical-comparison):
 the start is close but not settled, while the full quench returns to the proved-side
 geometry.
 
@@ -357,7 +357,7 @@ parameter above with the reflection `t ↔ 2 − t` divided out.
 Three strata remain: the corner pose at `λ = 0`, the generic slide, and the centred pose
 at `λ = 1/2`.
 
-![The exact quotient map of optimal configurations for three unit squares.](atlas/n-003-optimal-moduli.svg)
+![The exact quotient map of optimal configurations for three unit squares.](packing/atlas/n-003-optimal-moduli.svg)
 
 *Each quotient stage kills one wrong identity—relabellings and container symmetries are
 not new basins—and the interval kills the rest: four exact sample poses with four
@@ -367,7 +367,7 @@ component.*
 That is why this object is a permanent known-answer control rather than an illustration.
 A frozen component-assignment policy is accepted only if it recovers this interval, and
 the `n = 4` quotient point, exactly while rejecting every shortcut:
-[exp-032](campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md)
+[exp-032](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-032-h-021-terminal-component-controls.md)
 proposed geometric keys, contact signatures, finite samples, labelled states, and
 floating-point matches as component identities, and all seven such mutations were
 refused. Passing that gate is what admitted the bounded `n = 5` connectivity work below,
@@ -839,7 +839,7 @@ bifurcations), and basin-entry tests that separate “search cannot find the reg
 
 The result that most sharpened this: the annealer, pointed at `n = 17`, reported `5.0`—
 the trivial grid—on every one of five binary64 screening seeds
-([exp-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md)),
+([exp-011](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-011-h-020-n17.md)),
 against Bidwell’s 1998 record of `4.6755`. Because that miss is at a second, independent
 cell whose record needs oblique structure, the failure is not specific to `n = 11`;
 whether it covers every oblique target is an inference the registry states as such, not
@@ -873,11 +873,11 @@ definition and the one-place list of apparently novel results.
 | --- | --- | --- |
 | Fixing the angles and every pair’s separating axis makes minimising `s` a linear program | proved | Nothing about *which* cell is best; that choice is the combinatorial hard part |
 | Trump’s 1979 packing is valid, over `ℚ(u)` of degree 8, with 14 pairs at exactly zero separation | verified (`exact-algebraic`); a published construction, confirmed here | Nothing about optimality; it is an upper bound |
-| [`s(11) ≥ 2 + 4/√5`](campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | verified (`exact-algebraic`) | Not attributed to Stromquist, not externally peer-reviewed, and it does not close the gap to Trump |
-| [Stromquist’s *printed* 2003 argument fails](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side `10001/10000` fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies. This project’s finding, like the repair beside it |
-| [Trump’s pose is locally isolated](campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries. Apparently novel here, not externally peer-reviewed |
+| [`s(11) ≥ 2 + 4/√5`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-017-h-041-stromquist-repaired-figure14.md) | verified (`exact-algebraic`) | Not attributed to Stromquist, not externally peer-reviewed, and it does not close the gap to Trump |
+| [Stromquist’s *printed* 2003 argument fails](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md): an exact **open** box of side `10001/10000` fits the claimed container and avoids all twelve printed Figure 14 points | verified (`exact-algebraic`) | It refutes the printed derivation, not the inequality, which the repaired cover independently certifies. This project’s finding, like the repair beside it |
+| [Trump’s pose is locally isolated](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-013-h-026-trump-tangent.md): 128 branchwise linearized systems, each of exact rank 33 with a strictly positive exact stress | verified (`exact-algebraic`) | Not global optimality, and not an explicit isolation radius. It holds in the anchored pose-side chart, modulo finite symmetries. Apparently novel here, not externally peer-reviewed |
 | The one-dimensional class-angle optimum is a corner, with one-sided slopes of `0.1747` and `0.384` per radian | numerically checked (`numerical-f64`) | It is one slice. It is not a rigidity proof, and not a theorem that every derivative-free method fails. This project’s measurement |
-| The exact optimal configuration spaces at [`n = 3`](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | verified (`exact-algebraic`) | Only those two moduli spaces are classified here; the optimal side values at `n = 5` and `n = 6` are proved, but their optimal configuration spaces are not classified here. The labelled and unlabelled `n = 3` pieces agree with published computations; the rotation exclusion and full quotients are established here, with no novelty claim |
+| The exact optimal configuration spaces at [`n = 3`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) and [`n = 4`](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-015-h-032-n4-optimal-moduli.md) | verified (`exact-algebraic`) | Only those two moduli spaces are classified here; the optimal side values at `n = 5` and `n = 6` are proved, but their optimal configuration spaces are not classified here. The labelled and unlabelled `n = 3` pieces agree with published computations; the rotation exclusion and full quotients are established here, with no novelty claim |
 | Refinement is not the current bottleneck: the same floating-point LP refiner takes the tested proved-control starts to the analytic optima (residuals `≈1e-15`) and leaves the tested `n = 11` starts `6e-02` short | numerically checked (`numerical-f64`) | The solver floor is about `1e-11` in the side, so read smaller residuals as “at the floor”; and it does not establish *why* the `n = 11` starts are far away |
 
 ### Open
@@ -1055,8 +1055,8 @@ Doye, Miller and Wales on the 38-atom Lennard-Jones cluster, the double-funnel p
 the rarity premise rests on.
 
 **The problem’s own literature.** Every source below is archived locally under
-[`resources/`](resources/README.md) and is greppable, with two exceptions: the two
-record constructions survive through the archived survey and record-table captures
+[`resources/`](packing/resources/README.md) and is greppable, with two exceptions: the
+two record constructions survive through the archived survey and record-table captures
 rather than papers of their own.
 Trump’s 1979 packing is documented there and by this directory’s exact certificate—his
 2023 writeup was not retrievable, which the archive README records—and Bidwell’s 1998
@@ -1101,12 +1101,12 @@ computer algebra system, and this one does not.
 | the state of the program, and every result with its status | [`SYNOPSIS.md`](SYNOPSIS.md)—**start here after this page** |
 | what is in the directory and how to run it | [`README.md`](README.md) |
 | every rule the directory runs on, and which are machine-checked | [`conventions.md`](conventions.md) |
-| the mutable size-by-size experiment priority queue | [Basin confidence ladder](campaign/agendas/agenda-001-basin-confidence-ladder.md) |
+| the mutable size-by-size experiment priority queue | [Basin confidence ladder](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) |
 | what has gone wrong and what now stops it recurring | [`defects.md`](defects.md) |
 | the mathematics of `s(11)` in depth | [Packing 11 Unit Squares](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) |
 | how packings are found, refined and verified | [Algorithms and Tooling](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) |
 | why pointing should beat scaling | [A Search Philosophy](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) |
-| what is known for every `n ≤ 100` | [`frontier/`](frontier/README.md) |
+| what is known for every `n ≤ 100` | [`frontier/`](packing/frontier/README.md) |
 
 The documents here are unusually willing to say what they have *not* established.
 That is deliberate: most of the soundness failures logged here pointed in the

@@ -2,7 +2,7 @@
 
 Two experiments run against
 [FrankenSim](https://github.com/Dicklesworthstone/frankensim) while researching
-[research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md](../docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md).
+[research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md](../../docs/project/research/research-2026-08-22-frankensim-rust-toolkit-for-square-packing.md).
 Both ask a question our square-packing work actually needs answered.
 
 Nothing from FrankenSim is vendored here — these are our own sources, dropped into a

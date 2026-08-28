@@ -74,18 +74,18 @@ not a proof that every pixel is exact.
 
 The repository already contains three useful SVG patterns.
 
-[`n-003-optimal-moduli.svg`](../../../../atlas/n-003-optimal-moduli.svg) is visually
-clear, self-contained, accessible at the document level, dark-mode aware, and rebuilt
-byte for byte by
-[`cases.small_n.optimal_moduli`](../../../../cases/small_n/optimal_moduli.py).
+[`n-003-optimal-moduli.svg`](../../../../packing/atlas/n-003-optimal-moduli.svg) is
+visually clear, self-contained, accessible at the document level, dark-mode aware, and
+rebuilt byte for byte by
+[`cases.small_n.optimal_moduli`](../../../../packing/cases/small_n/optimal_moduli.py).
 Its renderer is one hard-coded function, however.
 Layout, theme, topology, labels, packing glyphs, and serialization are coupled, and it
 has no reusable packing view, precision policy, start/final comparison, or animation
 contract.
 
 The archived Kingbird
-[`n = 11`](../../../../resources/papers/kingbird-square-11-provenance.svg) and
-[`n = 29`](../../../../resources/papers/kingbird-square-29-provenance.svg) files
+[`n = 11`](../../../../packing/resources/papers/kingbird-square-11-provenance.svg) and
+[`n = 29`](../../../../packing/resources/papers/kingbird-square-29-provenance.svg) files
 preserve the other half of the target: exact construction formulas in comments and
 33–100 digit entity values directly in the geometry.
 They are excellent provenance artifacts, but their DTD entities, deprecated `xlink`
@@ -965,7 +965,7 @@ known-answer semantics and all replay checks pass.
 
 - [Minimal packing toolkit plan](plan-2026-08-22-minimal-packing-toolkit.md)
 - [Mathematical frontier strategy: basin ontology and visualization ladder](../../reviews/review-2026-08-23-mathematical-frontier-strategy.md#basin-ontology-and-visualization-ladder)
-- [`n = 3` exact-moduli experiment](../../../../campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md)
+- [`n = 3` exact-moduli experiment](../../../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md)
 - [SVG 2: document structure, descriptive elements, and metadata](https://www.w3.org/TR/SVG2/struct.html)
 - [SVG 2: real-number precision](https://www.w3.org/TR/SVG2/types.html#Precision)
 - [CSS Animations Level 1](https://www.w3.org/TR/css-animations-1/)

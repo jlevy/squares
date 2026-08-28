@@ -75,13 +75,13 @@ manufactured from the closed system rather than read from the source.
 
 That system, at `n = 29`, is published rather than pending: the provenance SVG carries
 nine slide scalars and six equations in `{s, a, b, c, d, i}`, and
-[`cases.kingbird29.verify_svg`](../../../../cases/kingbird29/verify_svg.py) already
-transcribes them for a residual check.
+[`cases.kingbird29.verify_svg`](../../../../packing/cases/kingbird29/verify_svg.py)
+already transcribes them for a residual check.
 Solving that same transcription reaches 420 digits in about two seconds.
 The assembler below is therefore about generalizing to sizes with no published system,
 not about unblocking this one.
 All three measurements are recorded in
-[X-004](../../../../campaign/explorations/X-004-n29-exact-promotion.md).
+[X-004](../../../../packing/campaign/explorations/X-004-n29-exact-promotion.md).
 
 That is why the D-021 floor matters even though `n = 29` does not need it.
 On a published high-precision pose the contact structure is unambiguous.
@@ -201,9 +201,9 @@ unchanged and applies here as it did to exp-045.
 
 ## References
 
-- [X-004 — an exact algebraic characterization of the `n = 29` record](../../../../campaign/explorations/X-004-n29-exact-promotion.md)
+- [X-004 — an exact algebraic characterization of the `n = 29` record](../../../../packing/campaign/explorations/X-004-n29-exact-promotion.md)
 - [plan-2026-08-28 — the symbolic promotion gap](plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
-- [agenda-005](../../../../campaign/agendas/agenda-005-symbolic-promotion-and-identity.md)
+- [agenda-005](../../../../packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md)
 - [TUTORIAL §5 — from a numeric solution to an exact one](../../../../TUTORIAL.md#from-a-numeric-solution-to-an-exact-one)
 - [SYNOPSIS — What Is Built](../../../../SYNOPSIS.md#what-is-built)
 

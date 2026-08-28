@@ -113,9 +113,9 @@ A genuine minimal polynomial vanishes to full input precision.
 At `n = 29` that system does not have to be built.
 The archived provenance SVG publishes all nine slide scalars and all six equations
 `f1 … f6` in `{s, a, b, c, d, i}`, and
-[`cases.kingbird29.verify_svg`](../../../../cases/kingbird29/verify_svg.py) already
-transcribes every one of them — using them only to evaluate residuals at the serialized
-pose, never to solve.
+[`cases.kingbird29.verify_svg`](../../../../packing/cases/kingbird29/verify_svg.py)
+already transcribes every one of them — using them only to evaluate residuals at the
+serialized pose, never to solve.
 Handing that same transcription to a root finder reproduces the record to all 15
 published digits and reaches a residual of `8.85e-421` in about two seconds.
 
@@ -399,10 +399,10 @@ human. That rule is unchanged and applied to exp-045 already.
 
 ## References
 
-- [X-004 — an exact algebraic characterization of the `n = 29` record](../../../../campaign/explorations/X-004-n29-exact-promotion.md)
+- [X-004 — an exact algebraic characterization of the `n = 29` record](../../../../packing/campaign/explorations/X-004-n29-exact-promotion.md)
 - [plan-2026-08-28 — the numeric–symbolic round trip](plan-2026-08-28-numeric-symbolic-round-trip.md)
 - [plan-2026-08-28 — the symbolic promotion gap](plan-2026-08-28-symbolic-promotion-and-the-atlas.md)
-- [agenda-005](../../../../campaign/agendas/agenda-005-symbolic-promotion-and-identity.md)
+- [agenda-005](../../../../packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md)
 - [TUTORIAL §5 — from a numeric solution to an exact one](../../../../TUTORIAL.md#from-a-numeric-solution-to-an-exact-one)
 - [SYNOPSIS — What Is Built](../../../../SYNOPSIS.md#what-is-built)
 

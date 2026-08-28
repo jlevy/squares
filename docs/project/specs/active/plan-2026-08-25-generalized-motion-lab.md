@@ -89,15 +89,15 @@ generator, so another scenario would currently repeat much of that work.
 
 The numerical backend already has the two operations the new scenario needs:
 
-1. [`solve_to_fixed_point()` and `solve_cell()`](../../../../src/sqpack/research/quench.py)
+1. [`solve_to_fixed_point()` and `solve_cell()`](../../../../packing/src/sqpack/research/quench.py)
    hold every angle and one separating-axis cell fixed while an LP minimizes the
    container side and square centers.
-2. [`quench()` and `quench_bracket()`](../../../../src/sqpack/research/quench.py) change
-   angles outside that LP, re-solve the fixed-angle problem, and return typed counters
-   and stop reasons.
+2. [`quench()` and `quench_bracket()`](../../../../packing/src/sqpack/research/quench.py)
+   change angles outside that LP, re-solve the fixed-angle problem, and return typed
+   counters and stop reasons.
 
-[`deterministic_start()`](../../../../cases/campaign_smoke/basin_events.py) already
-draws seeded centers and angles inside a requested starting side.
+[`deterministic_start()`](../../../../packing/cases/campaign_smoke/basin_events.py)
+already draws seeded centers and angles inside a requested starting side.
 The draw may overlap; that is useful behavior to expose honestly rather than hiding it
 behind a picture of a feasible packing.
 
@@ -283,8 +283,8 @@ to step directly between authoritative states.
 
 #### Packing Geometry
 
-[`src/sqpack/render/style.py`](../../../../src/sqpack/render/style.py) remains the
-source of truth for packing marks.
+[`src/sqpack/render/style.py`](../../../../packing/src/sqpack/render/style.py) remains
+the source of truth for packing marks.
 The lab imports or serializes these tokens; it does not keep a second handwritten
 palette.
 
@@ -588,10 +588,10 @@ and the ordinary campaign record rules.
 ## References
 
 - [Interactive `n = 5` Motion Lab spike](spike-2026-08-25-n5-motion-lab.md)
-- [Retained `n = 5` lab](../../../../atlas/rendering/n5-motion-lab.html)
+- [Retained `n = 5` lab](../../../../packing/atlas/rendering/n5-motion-lab.html)
 - [Deterministic SVG rendering plan](plan-2026-08-24-deterministic-svg-rendering-toolkit.md)
-- [Packing rendering guide](../../../../atlas/rendering/README.md)
-- [Existing quench implementation](../../../../src/sqpack/research/quench.py)
+- [Packing rendering guide](../../../../packing/atlas/rendering/README.md)
+- [Existing quench implementation](../../../../packing/src/sqpack/research/quench.py)
 - [`tbd web` UI source at the inspected commit](https://github.com/jlevy/tbd/blob/bed816dca101de6e646c8573a292884064652b6b/packages/tbd/src/web/styles.css)
 
 <!-- This document follows common-doc-guidelines.md.

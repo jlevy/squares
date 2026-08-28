@@ -208,9 +208,9 @@ declared before the work; delaying the filename did not change the contract.
 
 The authoritative branch is `codex/packing-efficiency-infrastructure`, based on loop 2’s
 terminal checkpoint `a69feea`. Read the
-[dated efficiency review](../../docs/project/reviews/review-2026-08-25-research-loop-efficiency.md),
+[dated efficiency review](../../../docs/project/reviews/review-2026-08-25-research-loop-efficiency.md),
 the
-[active plan](../../docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md),
+[active plan](../../../docs/project/specs/active/plan-2026-08-25-research-loop-efficiency-infrastructure.md),
 and `tbd show think-ma71`.
 
 Before 20:45:05-07:00, perform finalization only:

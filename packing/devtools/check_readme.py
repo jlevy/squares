@@ -83,8 +83,12 @@ _SPELLED = {
 
 def layout_tree(text: str) -> str | None:
     """The fenced block that draws the directory, if README still has one."""
+    # Anchored on the drawing, not on a path prefix. The tree used to be found by the
+    # directory name it opened with, which broke the moment that directory moved; a
+    # branch marker is what actually makes a fenced block a tree, and it survives
+    # renames.
     for block in re.findall(r"```\n(.*?)```", text, re.S):
-        if block.lstrip().startswith("packing/"):
+        if "\u251c\u2500\u2500 " in block:
             return block
     return None
 
@@ -109,6 +113,22 @@ def meaningful_top_level_entries(root: Path) -> set[str]:
     return entries
 
 
+def _exists_somewhere(name: str) -> bool:
+    """Whether a nested tree entry exists anywhere the project keeps content.
+
+    The tree draws nested entries by bare name, so `atlas` under `packing/` has no
+    repo-relative path of its own. Search for it, but only through project content:
+    walking .git and node_modules to answer a documentation question is pure cost.
+    """
+    skip = {"node_modules", "__pycache__", ".venv"}
+    if any((base / name).exists() for base in (REPO, REPO / "packing")):
+        return True
+    return any(
+        not any(part in skip or part.startswith(".") for part in path.relative_to(REPO).parts)
+        for path in REPO.rglob(name)
+    )
+
+
 def check_layout(text: str) -> list[str]:
     """Every top-level entry is drawn, and every drawn path exists."""
     tree = layout_tree(text)
@@ -124,7 +144,7 @@ def check_layout(text: str) -> list[str]:
     drawn_top = {name.strip("/").split("/")[0] for name in top}
     drawn_any = drawn_top | {name.strip("/") for name in top + nested}
 
-    on_disk = meaningful_top_level_entries(ROOT)
+    on_disk = meaningful_top_level_entries(REPO)
 
     problems = [
         f"README.md: {missing} exists but the layout tree does not show it"
@@ -133,7 +153,7 @@ def check_layout(text: str) -> list[str]:
     problems += [
         f"README.md: the layout tree shows {drawn}, which does not exist"
         for drawn in sorted(drawn_any)
-        if not (ROOT / drawn).exists() and not list(ROOT.rglob(drawn.split("/")[-1]))
+        if not (REPO / drawn).exists() and not _exists_somewhere(drawn.split("/")[-1])
     ]
     return problems
 

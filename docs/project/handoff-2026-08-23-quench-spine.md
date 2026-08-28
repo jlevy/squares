@@ -69,8 +69,8 @@ Two are done, four are not:
 **Resolving the bead ids.** The `think-*` ids above are *local* `tbd` ids.
 They are not stored in the repository and not in the synced bead data either, which keys
 every issue by a ULID (`is-01...`) — so `think-eq6l` cannot be looked up from a fresh
-clone. Restore the database from the [`tbd-sync`](../../../../.tbd/config.yml) branch
-first (`tbd sync`), after which `tbd show think-eq6l` and `tbd list --spec <the plan>`
+clone. Restore the database from the [`tbd-sync`](../../.tbd/config.yml) branch first
+(`tbd sync`), after which `tbd show think-eq6l` and `tbd list --spec <the plan>`
 resolve. Until then, the durable handle for each row is the **block name in the first
 column**: every one is a checklist item under *Phase 1: The quench spine* in
 [the plan spec](specs/active/plan-2026-08-22-minimal-packing-toolkit.md), which needs no
@@ -124,7 +124,7 @@ whole cartography programme rests on, deliberately made cheap to kill.
    one-sided slopes `0.175` and `0.384`. That invalidates smooth derivative models on
    the slice. Bracketing worked here; tested Powell and Nelder–Mead runs did worse, which
    is empirical evidence rather than a general impossibility theorem.
-   ([`exp-010`](../../campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md).)
+   ([`exp-010`](../../packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md).)
 4. **Tolerances must be compared to the scale of what they govern.** Two
    unrelated-looking defects — a false record claim and a non-terminating loop — were
    the same mistake, once too loose and once unreachably tight.

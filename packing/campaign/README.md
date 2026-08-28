@@ -1,10 +1,10 @@
 # The `s(n)` Research Campaign — W6 Runbook
 
-An [experiment loop](../../../.agents/skills/experiment-loop/SKILL.md) for the durable
+An [experiment loop](../../.agents/skills/experiment-loop/SKILL.md) for the durable
 square-packing research program.
 This file owns W6, `research-loop`: the contract every experiment round runs under—the
 question, metric vector, accept rule, and budget.
-The [synopsis](../SYNOPSIS.md#workflow-entry-contracts) owns the seven workflow entry
+The [synopsis](../../SYNOPSIS.md#workflow-entry-contracts) owns the seven workflow entry
 points and the distinction among campaign, series, session, experiment, round, and run.
 It is frozen while rounds are running — see
 [what a runner may not do](#what-a-runner-may-not-do).
@@ -25,7 +25,7 @@ record’s, and which proposers reach which — with records as corollaries rath
 objective?**
 
 This is the
-[search-philosophy report’s](../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
+[search-philosophy report’s](../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md)
 framing for the current search lane: **the map is the deliverable.** The campaign itself
 is broader: it also contains exact proof, validation, local-geometry, construction, and
 infrastructure questions under the same registry and evidence contract.
@@ -40,7 +40,7 @@ only success condition is breaking it would record nothing for weeks.
 The answerable question is about the *methods*: which of them recover a known optimum,
 how much budget that costs, and where they land when they fail.
 That question has never been asked of this problem — the
-[research program](../docs/project/research/research-2026-08-22-packing-11-unit-squares.md#a-research-program)
+[research program](../../docs/project/research/research-2026-08-22-packing-11-unit-squares.md#a-research-program)
 notes that the modern evolutionary-search stack has never been aimed at
 squares-in-squares, and that “success would be informative; failure would be more
 informative”.
@@ -80,7 +80,7 @@ a round that moved the frontier would edit one file.
 ## Who owns a hypothesis
 
 A hypothesis can exist in three forms — prose in the
-[standing review’s register](../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register),
+[standing review’s register](../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register),
 a codified artifact under `hypotheses/`, and a bead.
 One rule settles which is true:
 
@@ -103,7 +103,7 @@ but only a preregistered slice may consume the current clock.
 Routine work declares `research-loop`, its objective, expected artifact, and focused
 check where the round is already tracked.
 An escalated session phase also declares one primary focus from the packing program’s
-[four operating focuses](../README.md#operating-principles).
+[four operating focuses](../../README.md#operating-principles).
 A material focus change starts a new phase even when the workflow remains W6; a brief
 change of emphasis does not.
 The other three principles continue to constrain and contribute to the work.
@@ -434,7 +434,7 @@ interface, not evidence that the queue is ready.
 The only operational recipe projects to about 2.8 hours locally, and independent pose
 validity, lifecycle recovery, durable reports, and per-cell queue pricing remain open.
 Use the
-[current readiness agenda](../docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md)
+[current readiness agenda](../../docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md)
 for the exact 8-hour and 24-hour gate.
 The H-020/exp-011 identifiers below are a historical lifecycle example, not a
 copy-pastable ready round; `status` and the confidence ladder own the live queue.
@@ -530,7 +530,7 @@ Both run in the locked uv environment and share the same invariant implementatio
 ## What a runner may not do
 
 The full list is in
-[`unattended.md`](../../../.agents/skills/experiment-loop/references/unattended.md).
+[`unattended.md`](../../.agents/skills/experiment-loop/references/unattended.md).
 The ones specific to this campaign:
 
 - Do not change the accept rule, the tolerances, the metric vector, or the control
@@ -568,11 +568,11 @@ census’s inputs.
 
 The campaign is the *experiment record*; the toolkit that produces the numbers is
 specified in
-[plan-2026-08-22-minimal-packing-toolkit.md](../docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md),
+[plan-2026-08-22-minimal-packing-toolkit.md](../../docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md),
 whose Phase 2 (the quench spine) is what makes basins nameable and this record’s
 numerical refinement record reproducible.
 The hypothesis registry here is the codified form of the
-[standing review’s register](../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register);
+[standing review’s register](../../docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md#the-hypothesis-register);
 `H-001`–`H-015` are its now-codified ids, and this campaign’s own claims start at
 `H-016`.
 

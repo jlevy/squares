@@ -7,10 +7,11 @@ proposer lane: what to do, in what order, under which workflow, and what may not
 claimed.
 
 **Does not own:** The scientific claims, which live in
-[H-044 through H-048](../../../../campaign/ideas.md); the cell order, which lives in
-[agenda-002](../../../../campaign/agendas/agenda-002-constructive-enumeration-groundwork.md);
+[H-044 through H-048](../../../../packing/campaign/ideas.md); the cell order, which
+lives in
+[agenda-002](../../../../packing/campaign/agendas/agenda-002-constructive-enumeration-groundwork.md);
 or the design rationale, which lives in
-[X-003](../../../../campaign/explorations/X-003-stratified-chunk-enumeration.md).
+[X-003](../../../../packing/campaign/explorations/X-003-stratified-chunk-enumeration.md).
 
 ## Objective
 
@@ -28,15 +29,16 @@ controls**, not a scientific verdict and emphatically not a record.
 
 ## Read First, in This Order
 
-1. [X-003](../../../../campaign/explorations/X-003-stratified-chunk-enumeration.md) —
-   the design, its grading against the archive, and its known risks.
-2. [agenda-002](../../../../campaign/agendas/agenda-002-constructive-enumeration-groundwork.md)
+1. [X-003](../../../../packing/campaign/explorations/X-003-stratified-chunk-enumeration.md)
+   — the design, its grading against the archive, and its known risks.
+2. [agenda-002](../../../../packing/campaign/agendas/agenda-002-constructive-enumeration-groundwork.md)
    — the cell order and why it is that order.
-3. [H-044](../../../../campaign/hypotheses/H-044-chunk-expressibility-of-records.md) and
-   [H-047](../../../../campaign/hypotheses/H-047-chunk-regular-predecessors.md) — the
-   two claims whose instruments this session builds.
-4. [The campaign runbook](../../../../campaign/README.md#the-bounded-research-cycle) —
-   slice protocol, clocks, refusal rules.
+3. [H-044](../../../../packing/campaign/hypotheses/H-044-chunk-expressibility-of-records.md)
+   and
+   [H-047](../../../../packing/campaign/hypotheses/H-047-chunk-regular-predecessors.md)
+   — the two claims whose instruments this session builds.
+4. [The campaign runbook](../../../../packing/campaign/README.md#the-bounded-research-cycle)
+   — slice protocol, clocks, refusal rules.
 5. [`development.md`](../../../../development.md) — code placement, validation loops,
    CLI policy.
 
@@ -247,8 +249,8 @@ one host.
 
 ## What the Session Owes at the End
 
-An [agent-session artifact](../../../../campaign/agent-sessions/README.md) with the
-ordered phase history, budget, evidence, stop reason, and a handoff naming the exact
+An [agent-session artifact](../../../../packing/campaign/agent-sessions/README.md) with
+the ordered phase history, budget, evidence, stop reason, and a handoff naming the exact
 next bounded slice; a green gate or a named reason it is not green; regenerated ledger
 and defect views; new defects logged in `defects.yaml` with what caught them; and a
 pushed branch with a draft pull request.

@@ -1,7 +1,7 @@
 # Review: The Experiment Loop, the Campaign, and the Consolidation (PR #5)
 
 > **Lifecycle:** Superseded for current guidance by the
-> [campaign runbook](../../../campaign/README.md).
+> [campaign runbook](../../../packing/campaign/README.md).
 > Retained as a dated review record.
 
 **Date:** 2026-08-23

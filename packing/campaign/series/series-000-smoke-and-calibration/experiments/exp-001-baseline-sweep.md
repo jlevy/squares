@@ -211,7 +211,7 @@ separately.
 ## Annotation, 2026-08-23: this round’s archive is not reproducible
 
 Three defects found by
-[the standing review of PR #5](../../../../docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md),
+[the standing review of PR #5](../../../../../docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md),
 recorded here rather than fixed in place, because the numbers above are what was
 actually measured and they stand.
 
@@ -262,8 +262,8 @@ review’s hypothesis register — which owns `H-001` through `H-015` — the cl
 renumbered to `H-016`, and the references above follow.
 Nothing about the measurement changed; the ids did.
 The registry conflict is exactly the one
-[`traps.md`](../../../../../../.agents/skills/experiment-loop/references/traps.md)
-predicts for parallel campaigns, and it is recorded here rather than erased.
+[`traps.md`](../../../../../.agents/skills/experiment-loop/references/traps.md) predicts
+for parallel campaigns, and it is recorded here rather than erased.
 
 ## Limits
 

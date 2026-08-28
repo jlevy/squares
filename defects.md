@@ -4,7 +4,7 @@
 
 355 defects recorded across the packing toolchain.
 One line each here; the narrative lives in the artifact named by every row.
-Source of truth is [`defects.yaml`](defects.yaml).
+Source of truth is [`defects.yaml`](packing/defects.yaml).
 
 ## The short version
 
@@ -215,34 +215,34 @@ This is the actionable list.
 
 | id | date | layer | class | dir | caught by | severity | status | title |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| [D-001](campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md) | 2026-08-22 | engine | validity | conservative | `control_cell` | high | fixed | Fixed-side search never left the grid basin |
-| [D-002](campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md) | 2026-08-22 | engine | validity | neutral | `anomaly` | high | fixed | A restart cap made the declared move budget inert |
-| [D-003](campaign/ideas.md) | 2026-08-22 | engine | performance |  | `inspection` | medium | fixed | Squared overlap penalty has a vanishing gradient |
-| [D-004](src/sqpack/cli/validate.py) | 2026-08-22 | tooling | validity | flattering | `inspection` | high | fixed | Half the test suite was silently unreachable |
+| [D-001](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md) | 2026-08-22 | engine | validity | conservative | `control_cell` | high | fixed | Fixed-side search never left the grid basin |
+| [D-002](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-001-baseline-sweep.md) | 2026-08-22 | engine | validity | neutral | `anomaly` | high | fixed | A restart cap made the declared move budget inert |
+| [D-003](packing/campaign/ideas.md) | 2026-08-22 | engine | performance |  | `inspection` | medium | fixed | Squared overlap penalty has a vanishing gradient |
+| [D-004](packing/src/sqpack/cli/validate.py) | 2026-08-22 | tooling | validity | flattering | `inspection` | high | fixed | Half the test suite was silently unreachable |
 | [D-005](docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md) | 2026-08-23 | record | bookkeeping |  | `review` | high | fixed | Campaign schemas declared enforced, and nothing enforced them |
 | [D-006](docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md) | 2026-08-23 | record | bookkeeping |  | `review` | high | fixed | The archived run could not regenerate its own configurations |
 | [D-007](docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | The bead tree never reached the shared store |
 | [D-008](docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | Renumbering left dead links and a script writing to a deleted path |
 | [D-009](docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md) | 2026-08-23 | engine | soundness | neutral | `review` | high | fixed | The overlap guard was asserted against a drifting accumulator |
 | [D-010](docs/project/reviews/review-2026-08-23-experiment-loop-and-campaign.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | A three-cell sweep recorded as a one-cell round |
-| [D-011](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 2026-08-23 | engine | soundness | conservative | `control_cell` | high | fixed | The annealer never scored its own starting configuration |
-| [D-012](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 2026-08-23 | engine | robustness |  | `control_cell` | medium | fixed | A zero perturbation made the cooling schedule degenerate |
-| [D-013](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 2026-08-23 | engine | soundness | flattering | `design` | high | avoided | An infeasible chain would have reported a perfect return |
-| [D-014](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 2026-08-23 | quench | soundness | flattering | `pre_registered_rule` | critical | fixed | The LP solver returned a packing that violated its own constraints |
-| [D-015](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 2026-08-23 | quench | validity | neutral | `anomaly` | high | fixed | The angle objective was not a function of the angles |
-| [D-016](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 2026-08-23 | quench | validity | conservative | `inspection` | medium | fixed | One variable served as both the finite-difference probe and the line-search step |
-| [D-017](campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | A three-cell sweep recorded as a one-cell round, again |
-| [D-018](campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 2026-08-23 | record | bookkeeping |  | `drift_check` | high | fixed | One round, two hypotheses, one verdict |
-| [D-019](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 2026-08-23 | quench | robustness | conservative | `anomaly` | medium | fixed | The bracketing quench does not always terminate |
+| [D-011](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 2026-08-23 | engine | soundness | conservative | `control_cell` | high | fixed | The annealer never scored its own starting configuration |
+| [D-012](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 2026-08-23 | engine | robustness |  | `control_cell` | medium | fixed | A zero perturbation made the cooling schedule degenerate |
+| [D-013](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 2026-08-23 | engine | soundness | flattering | `design` | high | avoided | An infeasible chain would have reported a perfect return |
+| [D-014](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 2026-08-23 | quench | soundness | flattering | `pre_registered_rule` | critical | fixed | The LP solver returned a packing that violated its own constraints |
+| [D-015](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 2026-08-23 | quench | validity | neutral | `anomaly` | high | fixed | The angle objective was not a function of the angles |
+| [D-016](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 2026-08-23 | quench | validity | conservative | `inspection` | medium | fixed | One variable served as both the finite-difference probe and the line-search step |
+| [D-017](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-006-lp-quench-n5-n10-n11.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | A three-cell sweep recorded as a one-cell round, again |
+| [D-018](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-010-angle-kink-n11.md) | 2026-08-23 | record | bookkeeping |  | `drift_check` | high | fixed | One round, two hypotheses, one verdict |
+| [D-019](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 2026-08-23 | quench | robustness | conservative | `anomaly` | medium | fixed | The bracketing quench does not always terminate |
 | [D-020](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | quench | soundness | flattering | `inspection` | high | fixed | The quench's answer depends on a tuning parameter, and basin identity would inherit it |
-| [D-021](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | 2026-08-23 | quench | soundness | flattering | `inspection` | medium | contained | Floating LP refinement has a noise floor, and eight rounds sit on it |
-| [D-022](devtools/controls.yaml) | 2026-08-23 | record | bookkeeping |  | `control_cell` | low | fixed | A numeric field and its display duplicate could disagree in silence |
-| [D-023](devtools/run_negative_controls.py) | 2026-08-23 | tooling | bookkeeping |  | `review` | medium | fixed | Verification was done in throwaway snippets and left nothing behind |
-| [D-024](frontier/strategy-catalogue.schema.yaml) | 2026-08-23 | record | bookkeeping |  | `gate` | low | fixed | A strategy's enum and its prose said opposite things |
+| [D-021](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | 2026-08-23 | quench | soundness | flattering | `inspection` | medium | contained | Floating LP refinement has a noise floor, and eight rounds sit on it |
+| [D-022](packing/devtools/controls.yaml) | 2026-08-23 | record | bookkeeping |  | `control_cell` | low | fixed | A numeric field and its display duplicate could disagree in silence |
+| [D-023](packing/devtools/run_negative_controls.py) | 2026-08-23 | tooling | bookkeeping |  | `review` | medium | fixed | Verification was done in throwaway snippets and left nothing behind |
+| [D-024](packing/frontier/strategy-catalogue.schema.yaml) | 2026-08-23 | record | bookkeeping |  | `gate` | low | fixed | A strategy's enum and its prose said opposite things |
 | [D-025](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | Two bead trees claimed the same spec phase after the plan was rebuilt |
 | [D-026](docs/project/specs/active/plan-2026-08-22-minimal-packing-toolkit.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | The plan spec's checklist contradicted the state the spec was cited as authority for |
-| [D-027](devtools/check_generated_markdown.py) | 2026-08-23 | tooling | bookkeeping |  | `review` | medium | fixed | A generated view was left reflowable by the Markdown auto-formatter |
-| [D-028](devtools/render_defects.py) | 2026-08-23 | record | bookkeeping |  | `drift_check` | low | fixed | A defect-log headline stayed asserted after it stopped being true |
+| [D-027](packing/devtools/check_generated_markdown.py) | 2026-08-23 | tooling | bookkeeping |  | `review` | medium | fixed | A generated view was left reflowable by the Markdown auto-formatter |
+| [D-028](packing/devtools/render_defects.py) | 2026-08-23 | record | bookkeeping |  | `drift_check` | low | fixed | A defect-log headline stayed asserted after it stopped being true |
 | [D-029](docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md) | 2026-08-23 | quench | validity | conservative | `review` | medium | fixed | A single fixed-angle LP solve was called "the quench", and retracted a correct finding |
 | [D-030](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | quench | validity | flattering | `control_cell` | high | fixed | The angle window narrowed on a schedule, so a cold quench could never arrive |
 | [D-031](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-23 | tooling | soundness | flattering | `control_cell` | high | fixed | Basin identity split an angle at the pi/2 seam, inflating counts near axis-aligned optima |
@@ -277,13 +277,13 @@ This is the actionable list.
 | [D-060](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | bookkeeping |  | `review` | high | fixed | Strict mode skipped deep regeneration and the atlas negative path was never exercised |
 | [D-061](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | validity | flattering | `review` | high | outstanding | Unrecognised endpoint rows discard the evidence needed to classify them |
 | [D-062](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | soundness | conservative | `inspection` | high | fixed | The D-042 correction left an executable n=12 rejection in the unattended runner |
-| [D-063](campaign/ideas.md) | 2026-08-23 | docs | soundness | neutral | `inspection` | medium | fixed | A non-converse was called the contrapositive of the rigidity premise |
+| [D-063](packing/campaign/ideas.md) | 2026-08-23 | docs | soundness | neutral | `inspection` | medium | fixed | A non-converse was called the contrapositive of the rigidity premise |
 | [D-064](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | robustness |  | `gate` | medium | fixed | Runner preflight was unable to run inside the gate that mutation-tested it |
 | [D-065](README.md) | 2026-08-23 | record | bookkeeping |  | `inspection` | low | fixed | The README repeated a numeric gate claim after declaring those counts removed |
-| [D-066](cases/campaign_smoke/baseline_sweep.py) | 2026-08-23 | docs | soundness | conservative | `inspection` | medium | fixed | The active baseline script still classified open n=12 as a negative control |
+| [D-066](packing/cases/campaign_smoke/baseline_sweep.py) | 2026-08-23 | docs | soundness | conservative | `inspection` | medium | fixed | The active baseline script still classified open n=12 as a negative control |
 | [D-067](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | bookkeeping |  | `review` | medium | fixed | The eleventh terminal round was omitted from campaign wall-time accounting |
 | [D-068](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | validity | neutral | `review` | medium | fixed | The ledger labeled elapsed wall time as CPU time |
-| [D-069](campaign/hypotheses/H-002-lp-in-cell-polish.md) | 2026-08-23 | record | bookkeeping |  | `inspection` | medium | fixed | H-002 still said its measured quench instrument was not built |
+| [D-069](packing/campaign/hypotheses/H-002-lp-in-cell-polish.md) | 2026-08-23 | record | bookkeeping |  | `inspection` | medium | fixed | H-002 still said its measured quench instrument was not built |
 | [D-070](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | bookkeeping |  | `inspection` | high | fixed | Exp-011 execution provenance was rewritten to a later record commit |
 | [D-071](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | record | bookkeeping |  | `inspection` | medium | outstanding | Generated session reports overwrite history and are not durable |
 | [D-072](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-23 | tooling | robustness |  | `review` | high | fixed | Direct execute and release paths bypassed the gate marker |
@@ -294,33 +294,33 @@ This is the actionable list.
 | [D-077](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | record | bookkeeping |  | `review` | high | fixed | The PR 16 handoff presented stale state and priorities as a current dependency queue |
 | [D-078](docs/project/reviews/review-2026-08-23-response-to-pr15-review.md) | 2026-08-23 | docs | soundness | flattering | `review` | medium | fixed | The n=5 rank correction still named equality independence as the sufficient condition |
 | [D-079](docs/project/handoff-2026-08-23-basin-identity-and-two-reviews.md) | 2026-08-23 | docs | soundness | flattering | `review` | medium | fixed | The handoff retained an invalid implication from record rigidity to non-record behavior |
-| [D-080](campaign/hypotheses/H-004-neighbor-transfer-seeding.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The original neighbor-transfer criterion was satisfied by the cold-start grid |
+| [D-080](packing/campaign/hypotheses/H-004-neighbor-transfer-seeding.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The original neighbor-transfer criterion was satisfied by the cold-start grid |
 | [D-081](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | tooling | validity | flattering | `review` | high | outstanding | Runner preflight treats any nonempty queue as enough unattended work |
 | [D-082](SYNOPSIS.md) | 2026-08-24 | docs | validity | conservative | `review` | high | fixed | The synopsis again generalized one n=17 regime to oblique-search blindness |
-| [D-083](campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | A finite-quench residual was called evidence of attraction through epsilon 0.1 |
-| [D-084](frontier/n-011.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The n=11 frontier artifact asserted rigidity and the wrong gap rank |
-| [D-085](campaign/README.md) | 2026-08-24 | tooling | bookkeeping |  | `inspection` | medium | fixed | Living run commands could rewrite the locked dependency state |
+| [D-083](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-005-basin-entry-n11.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | A finite-quench residual was called evidence of attraction through epsilon 0.1 |
+| [D-084](packing/frontier/n-011.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The n=11 frontier artifact asserted rigidity and the wrong gap rank |
+| [D-085](packing/campaign/README.md) | 2026-08-24 | tooling | bookkeeping |  | `inspection` | medium | fixed | Living run commands could rewrite the locked dependency state |
 | [D-086](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | record | bookkeeping |  | `review` | high | fixed | The overnight agenda and current handoff retained obsolete work and effort state |
-| [D-087](campaign/hypotheses/H-001-angle-class-reduction.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Angle-class evidence and an untested kink sweep combined distinct claims |
-| [D-088](frontier/n-068.md) | 2026-08-24 | docs | soundness | conservative | `review` | high | fixed | The finite-n frontier missed newer certified n=68 and n=69 constructions |
-| [D-089](frontier/n-017.md) | 2026-08-24 | docs | soundness | neutral | `review` | high | fixed | The n=17 record was given symmetric plus-or-minus 40-degree orientations |
-| [D-090](campaign/hypotheses/H-024-record-angle-class-count.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | Two low-angle examples were generalized into a universal tiny-angle prior |
-| [D-091](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-010 did not reproduce Stromquist's conditional proof mechanism |
-| [D-092](frontier/asymptotic-waste-bounds.yaml) | 2026-08-24 | docs | soundness | flattering | `review` | medium | fixed | Structured asymptotic data repeated the phantom Roth-Vaughan constant |
+| [D-087](packing/campaign/hypotheses/H-001-angle-class-reduction.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Angle-class evidence and an untested kink sweep combined distinct claims |
+| [D-088](packing/frontier/n-068.md) | 2026-08-24 | docs | soundness | conservative | `review` | high | fixed | The finite-n frontier missed newer certified n=68 and n=69 constructions |
+| [D-089](packing/frontier/n-017.md) | 2026-08-24 | docs | soundness | neutral | `review` | high | fixed | The n=17 record was given symmetric plus-or-minus 40-degree orientations |
+| [D-090](packing/campaign/hypotheses/H-024-record-angle-class-count.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | Two low-angle examples were generalized into a universal tiny-angle prior |
+| [D-091](packing/campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-010 did not reproduce Stromquist's conditional proof mechanism |
+| [D-092](packing/frontier/asymptotic-waste-bounds.yaml) | 2026-08-24 | docs | soundness | flattering | `review` | medium | fixed | Structured asymptotic data repeated the phantom Roth-Vaughan constant |
 | [D-093](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | tooling | soundness | flattering | `review` | critical | fixed | Contact canonicalization discarded every advertised node attribute |
-| [D-094](campaign/ideas.md) | 2026-08-24 | docs | soundness | flattering | `drift_check` | medium | fixed | The idea board repeated the wrong n=11 gap rank |
-| [D-095](campaign/ideas.md) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | The idea board called a refuted hypothesis the best runnable experiment |
-| [D-096](frontier/n-005.md) | 2026-08-24 | docs | soundness | conservative | `review` | high | fixed | Algebraic degree was promoted into a proof-method ceiling and obstruction |
-| [D-097](frontier/README.md) | 2026-08-24 | docs | soundness | flattering | `review` | medium | fixed | Strategy catalogues were described as exhaustive histories of the field |
-| [D-098](sqsearch/src/search.rs) | 2026-08-24 | engine | soundness | flattering | `review` | medium | fixed | Source code still called a finite stochastic return threshold a basin radius |
-| [D-099](campaign/hypotheses/H-023-n5-terminal-connectivity.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-023 placed six non-optimal endpoints in one optimum-side family question |
-| [D-100](campaign/hypotheses/H-013-delta-continuation.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Delta continuation had no preserved parameter and reversed its progress metric |
-| [D-101](campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | 2026-08-24 | record | bookkeeping |  | `review` | high | outstanding | Historical quench round wall times disagree with retained per-call durations |
-| [D-102](campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-006 treated dual pose support as candidate piercing-point loci |
-| [D-103](campaign/hypotheses/H-011-small-n-census.md) | 2026-08-24 | record | validity | flattering | `review` | high | fixed | H-011 omitted its declared component-identifiability prerequisites |
-| [D-104](campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | Living artifacts still promoted local refinement failure into a wrong-basin claim |
-| [D-105](campaign/hypotheses/H-014-superdisk-continuation.md) | 2026-08-24 | docs | validity | flattering | `review` | medium | fixed | Superdisk continuation lacked a shape normalization and branch rules |
-| [D-106](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping |  | `gate` | medium | fixed | A living negative-control anchor still targeted corrected hypothesis prose |
+| [D-094](packing/campaign/ideas.md) | 2026-08-24 | docs | soundness | flattering | `drift_check` | medium | fixed | The idea board repeated the wrong n=11 gap rank |
+| [D-095](packing/campaign/ideas.md) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | The idea board called a refuted hypothesis the best runnable experiment |
+| [D-096](packing/frontier/n-005.md) | 2026-08-24 | docs | soundness | conservative | `review` | high | fixed | Algebraic degree was promoted into a proof-method ceiling and obstruction |
+| [D-097](packing/frontier/README.md) | 2026-08-24 | docs | soundness | flattering | `review` | medium | fixed | Strategy catalogues were described as exhaustive histories of the field |
+| [D-098](packing/sqsearch/src/search.rs) | 2026-08-24 | engine | soundness | flattering | `review` | medium | fixed | Source code still called a finite stochastic return threshold a basin radius |
+| [D-099](packing/campaign/hypotheses/H-023-n5-terminal-connectivity.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-023 placed six non-optimal endpoints in one optimum-side family question |
+| [D-100](packing/campaign/hypotheses/H-013-delta-continuation.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Delta continuation had no preserved parameter and reversed its progress metric |
+| [D-101](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-007-quench-bracket-n5.md) | 2026-08-24 | record | bookkeeping |  | `review` | high | outstanding | Historical quench round wall times disagree with retained per-call durations |
+| [D-102](packing/campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | H-006 treated dual pose support as candidate piercing-point loci |
+| [D-103](packing/campaign/hypotheses/H-011-small-n-census.md) | 2026-08-24 | record | validity | flattering | `review` | high | fixed | H-011 omitted its declared component-identifiability prerequisites |
+| [D-104](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-009-quench-bracket-n11.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | Living artifacts still promoted local refinement failure into a wrong-basin claim |
+| [D-105](packing/campaign/hypotheses/H-014-superdisk-continuation.md) | 2026-08-24 | docs | validity | flattering | `review` | medium | fixed | Superdisk continuation lacked a shape normalization and branch rules |
+| [D-106](packing/devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping |  | `gate` | medium | fixed | A living negative-control anchor still targeted corrected hypothesis prose |
 | [D-107](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping |  | `gate` | high | fixed | Generated campaign views and next-work state lagged their corrected sources |
 | [D-108](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | A direct piercing-number application was missing from the method history |
 | [D-109](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | soundness | flattering | `review` | critical | fixed | Boundary corner coordinates were double-counted as independent wall equations |
@@ -331,61 +331,61 @@ This is the actionable list.
 | [D-114](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Fractional piercing was given an integral and symmetric conclusion |
 | [D-115](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | soundness | flattering | `review` | medium | fixed | Negative novelty claims exceeded the searched literature surface |
 | [D-116](docs/project/reviews/review-2026-08-23-mathematical-frontier-strategy.md) | 2026-08-24 | docs | bookkeeping |  | `review` | medium | fixed | The incoming strategy review mixed stale corpus state with current proposals |
-| [D-117](campaign/ideas.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The idea board again said a basin-width question had been answered |
-| [D-118](campaign/hypotheses/H-012-record-basins-are-rare.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Budget scaling and attraction rarity were treated as the same cheap question |
-| [D-119](campaign/hypotheses/H-028-reference-cell-angle-sheets.md) | 2026-08-24 | record | validity | conservative | `review` | high | fixed | A continuous angle sheet was required to have only one nearby grid point |
+| [D-117](packing/campaign/ideas.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The idea board again said a basin-width question had been answered |
+| [D-118](packing/campaign/hypotheses/H-012-record-basins-are-rare.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Budget scaling and attraction rarity were treated as the same cheap question |
+| [D-119](packing/campaign/hypotheses/H-028-reference-cell-angle-sheets.md) | 2026-08-24 | record | validity | conservative | `review` | high | fixed | A continuous angle sheet was required to have only one nearby grid point |
 | [D-120](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | 2026-08-24 | quench | validity | neutral | `review` | high | fixed | Pair half-extent was recomputed four ways and injected ulp noise into cell selection |
-| [D-121](src/sqpack/cli/validate.py) | 2026-08-24 | tooling | robustness |  | `review` | high | fixed | Invalid gate worker counts were accepted and a negative count could hang the throttle |
-| [D-122](src/sqpack/cli/validate.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | A targeted gate built unrelated Rust code and could hide its build skip |
-| [D-123](src/sqpack/cli/validate.py) | 2026-08-24 | docs | bookkeeping |  | `review` | medium | fixed | A per-step process cap was documented as a shared global worker budget |
-| [D-124](devtools/run_negative_controls.py) | 2026-08-24 | tooling | performance |  | `review` | medium | fixed | The portable negative-control fallback copied a needlessly broad repository surface |
-| [D-125](devtools/run_negative_controls.py) | 2026-08-24 | tooling | robustness |  | `gate` | high | fixed | Parallel negative controls could share one worker tree and erase each other's mutation |
+| [D-121](packing/src/sqpack/cli/validate.py) | 2026-08-24 | tooling | robustness |  | `review` | high | fixed | Invalid gate worker counts were accepted and a negative count could hang the throttle |
+| [D-122](packing/src/sqpack/cli/validate.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | A targeted gate built unrelated Rust code and could hide its build skip |
+| [D-123](packing/src/sqpack/cli/validate.py) | 2026-08-24 | docs | bookkeeping |  | `review` | medium | fixed | A per-step process cap was documented as a shared global worker budget |
+| [D-124](packing/devtools/run_negative_controls.py) | 2026-08-24 | tooling | performance |  | `review` | medium | fixed | The portable negative-control fallback copied a needlessly broad repository surface |
+| [D-125](packing/devtools/run_negative_controls.py) | 2026-08-24 | tooling | robustness |  | `gate` | high | fixed | Parallel negative controls could share one worker tree and erase each other's mutation |
 | [D-126](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | 2026-08-24 | quench | validity | neutral | `review` | high | outstanding | Quench convergence work was budgeted by machine time rather than reproducible work |
 | [D-127](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | 2026-08-24 | docs | bookkeeping |  | `review` | medium | fixed | The engineering review called its branch complete before its delta blockers were resolved |
 | [D-128](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | 2026-08-24 | tooling | performance |  | `review` | high | fixed | The packing gate serialized independent checks and offered no targeted edit loop |
 | [D-129](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | tooling | robustness |  | `review` | medium | fixed | Negative-control checker processes have no bounded timeout or child cleanup |
-| [D-130](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping |  | `gate` | medium | fixed | A defect-link mutation control reused an anchor that became nonunique |
-| [D-131](src/sqpack/cli/validate.py) | 2026-08-24 | tooling | bookkeeping |  | `review` | medium | fixed | The Python lint floor passed while reporting eight type-checker warnings |
+| [D-130](packing/devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping |  | `gate` | medium | fixed | A defect-link mutation control reused an anchor that became nonunique |
+| [D-131](packing/src/sqpack/cli/validate.py) | 2026-08-24 | tooling | bookkeeping |  | `review` | medium | fixed | The Python lint floor passed while reporting eight type-checker warnings |
 | [D-132](docs/project/reviews/review-2026-08-23-engineering-loops-and-efficiency.md) | 2026-08-24 | quench | validity | flattering | `review` | high | fixed | Fixed-cell iteration returns capped states without a settlement result |
-| [D-133](campaign/schemas/experiment.schema.yaml) | 2026-08-24 | record | validity | neutral | `pre_registered_rule` | high | fixed | Determination results could encode only search-specific basin outcomes |
-| [D-134](frontier/n-029.md) | 2026-08-24 | docs | bookkeeping |  | `inspection` | medium | fixed | The n = 29 frontier row omitted its analytic improver and verified angles |
+| [D-133](packing/campaign/schemas/experiment.schema.yaml) | 2026-08-24 | record | validity | neutral | `pre_registered_rule` | high | fixed | Determination results could encode only search-specific basin outcomes |
+| [D-134](packing/frontier/n-029.md) | 2026-08-24 | docs | bookkeeping |  | `inspection` | medium | fixed | The n = 29 frontier row omitted its analytic improver and verified angles |
 | [D-135](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping |  | `inspection` | low | fixed | The experiment roll-up forbade the record-source evidence it displayed |
-| [D-136](campaign/hypotheses/H-026-trump-first-order-rigidity.md) | 2026-08-24 | record | soundness | flattering | `review` | high | fixed | A branch linearization was mislabeled as the true Bouligand tangent |
-| [D-137](cases/trump11/tangent_cones.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | Trump certificate replay did not require one-to-one branch coverage |
-| [D-138](src/sqpack/cli/validate.py) | 2026-08-24 | tooling | validity | flattering | `anomaly` | high | fixed | The provenance gate skipped schema-valid unquoted commit hashes |
-| [D-139](campaign/hypotheses/H-032-small-n-optimal-moduli.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | contained | H-032 omitted directly relevant hard-square configuration-space literature |
-| [D-140](campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) | 2026-08-24 | docs | soundness | flattering | `control_cell` | high | fixed | The closed n = 3 sliding family was said to have one contact certificate |
-| [D-141](resources/README.md) | 2026-08-24 | tooling | robustness |  | `anomaly` | medium | fixed | Byte-exact raw literature failed the generic Git whitespace check |
-| [D-142](cases/small_n/optimal_moduli.py) | 2026-08-24 | tooling | validity | conservative | `review` | high | fixed | The n = 3 source replay compared an unlabelled theorem with labelled homology |
-| [D-143](cases/small_n/optimal_moduli.py) | 2026-08-24 | tooling | soundness | flattering | `review` | high | fixed | The n = 4 source replay attributed an unreported f-vector to Alpert et al. |
-| [D-144](cases/small_n/optimal_moduli.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | The orientation identity check compared two identical hard-coded tuples |
+| [D-136](packing/campaign/hypotheses/H-026-trump-first-order-rigidity.md) | 2026-08-24 | record | soundness | flattering | `review` | high | fixed | A branch linearization was mislabeled as the true Bouligand tangent |
+| [D-137](packing/cases/trump11/tangent_cones.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | Trump certificate replay did not require one-to-one branch coverage |
+| [D-138](packing/src/sqpack/cli/validate.py) | 2026-08-24 | tooling | validity | flattering | `anomaly` | high | fixed | The provenance gate skipped schema-valid unquoted commit hashes |
+| [D-139](packing/campaign/hypotheses/H-032-small-n-optimal-moduli.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | contained | H-032 omitted directly relevant hard-square configuration-space literature |
+| [D-140](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-014-h-032-n3-optimal-moduli.md) | 2026-08-24 | docs | soundness | flattering | `control_cell` | high | fixed | The closed n = 3 sliding family was said to have one contact certificate |
+| [D-141](packing/resources/README.md) | 2026-08-24 | tooling | robustness |  | `anomaly` | medium | fixed | Byte-exact raw literature failed the generic Git whitespace check |
+| [D-142](packing/cases/small_n/optimal_moduli.py) | 2026-08-24 | tooling | validity | conservative | `review` | high | fixed | The n = 3 source replay compared an unlabelled theorem with labelled homology |
+| [D-143](packing/cases/small_n/optimal_moduli.py) | 2026-08-24 | tooling | soundness | flattering | `review` | high | fixed | The n = 4 source replay attributed an unreported f-vector to Alpert et al. |
+| [D-144](packing/cases/small_n/optimal_moduli.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | The orientation identity check compared two identical hard-coded tuples |
 | [D-145](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | bookkeeping |  | `review` | medium | fixed | A broad integration edit fixed the wrong defect record |
-| [D-146](resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md) | 2026-08-24 | docs | validity | flattering | `inspection` | high | fixed | The Stromquist Figure 13 transcription changed its defining point set |
-| [D-147](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | H-010 substituted unit squares for Stromquist's strict open boxes |
-| [D-148](campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The D-091 correction omitted the published Figure 14 unavoidability claim |
+| [D-146](packing/resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md) | 2026-08-24 | docs | validity | flattering | `inspection` | high | fixed | The Stromquist Figure 13 transcription changed its defining point set |
+| [D-147](packing/campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | H-010 substituted unit squares for Stromquist's strict open boxes |
+| [D-148](packing/campaign/hypotheses/H-010-stromquist-triple.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The D-091 correction omitted the published Figure 14 unavoidability claim |
 | [D-149](docs/project/reviews/review-2026-08-23-toolkit-docs-and-first-experiments.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Search saturation was still presented as a Stromquist known-answer test |
 | [D-150](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | Active effort and priority views drifted after four exact research rounds |
-| [D-151](resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | high | fixed | Stromquist's middle Lemma 4 table selected an extraneous cubic root |
-| [D-152](campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | critical | fixed | Stromquist's printed Figure 14 point set admits an escaping box |
-| [D-153](frontier/source-availability.yaml) | 2026-08-24 | docs | bookkeeping |  | `inspection` | high | fixed | The source ledger called three directly hosted 1984 Stromquist memoranda unavailable |
-| [D-154](cases/stromquist/printed_cover.py) | 2026-08-24 | verifier | soundness | flattering | `review` | high | fixed | The first H-010 checker draft treated unchecked polynomials as exact fields |
-| [D-155](cases/stromquist/printed_cover.py) | 2026-08-24 | record | robustness |  | `review` | medium | fixed | The first H-010 record draft retained raw platform floating-point diagnostics |
-| [D-156](cases/stromquist/repaired_cover.py) | 2026-08-24 | verifier | soundness | flattering | `review` | high | fixed | The first H-041 checker draft did not prove that tiling vertices stayed inside the container |
-| [D-157](cases/stromquist/repaired_cover.py) | 2026-08-24 | verifier | soundness | flattering | `review` | high | fixed | The first H-041 Lemma 6 replay squared inequalities without executable sign guards |
-| [D-158](cases/stromquist/repaired_cover.py) | 2026-08-24 | record | validity | flattering | `review` | medium | fixed | The first H-041 record blurred runtime source checks with unattached extraction hashes |
-| [D-159](resources/README.md) | 2026-08-24 | tooling | robustness |  | `drift_check` | medium | fixed | Scanned archive PDFs were misclassified as text by Git |
-| [D-160](defects.yaml) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | A broad H-010 integration patch updated D-002 instead of D-151 |
+| [D-151](packing/resources/papers/stromquist-2003-packing-10-or-11-unit-squares.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | high | fixed | Stromquist's middle Lemma 4 table selected an extraneous cubic root |
+| [D-152](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-016-h-010-stromquist-printed-figure14.md) | 2026-08-24 | docs | soundness | flattering | `inspection` | critical | fixed | Stromquist's printed Figure 14 point set admits an escaping box |
+| [D-153](packing/frontier/source-availability.yaml) | 2026-08-24 | docs | bookkeeping |  | `inspection` | high | fixed | The source ledger called three directly hosted 1984 Stromquist memoranda unavailable |
+| [D-154](packing/cases/stromquist/printed_cover.py) | 2026-08-24 | verifier | soundness | flattering | `review` | high | fixed | The first H-010 checker draft treated unchecked polynomials as exact fields |
+| [D-155](packing/cases/stromquist/printed_cover.py) | 2026-08-24 | record | robustness |  | `review` | medium | fixed | The first H-010 record draft retained raw platform floating-point diagnostics |
+| [D-156](packing/cases/stromquist/repaired_cover.py) | 2026-08-24 | verifier | soundness | flattering | `review` | high | fixed | The first H-041 checker draft did not prove that tiling vertices stayed inside the container |
+| [D-157](packing/cases/stromquist/repaired_cover.py) | 2026-08-24 | verifier | soundness | flattering | `review` | high | fixed | The first H-041 Lemma 6 replay squared inequalities without executable sign guards |
+| [D-158](packing/cases/stromquist/repaired_cover.py) | 2026-08-24 | record | validity | flattering | `review` | medium | fixed | The first H-041 record blurred runtime source checks with unattached extraction hashes |
+| [D-159](packing/resources/README.md) | 2026-08-24 | tooling | robustness |  | `drift_check` | medium | fixed | Scanned archive PDFs were misclassified as text by Git |
+| [D-160](packing/defects.yaml) | 2026-08-24 | record | bookkeeping |  | `drift_check` | medium | fixed | A broad H-010 integration patch updated D-002 instead of D-151 |
 | [D-161](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping | conservative | `drift_check` | medium | fixed | The synopsis did not track the live hypothesis count |
-| [D-162](golden/basin-maps.yaml) | 2026-08-24 | record | validity | flattering | `control_cell` | high | outstanding | The small-n golden convergence labels hid unsettled fixed-cell evaluations |
-| [D-163](src/sqpack/cli/validate.py) | 2026-08-24 | tooling | validity | flattering | `gate` | critical | fixed | The historical-regression gate masked a failing checker |
-| [D-164](golden/basin-maps.yaml) | 2026-08-24 | quench | validity | conservative | `control_cell` | high | fixed | The fixed-cell solver mislabeled a numerical rejection as mathematical infeasibility |
-| [D-165](cases/campaign_smoke/basin_events.py) | 2026-08-24 | quench | validity | flattering | `control_cell` | critical | fixed | Initial cell-solve failures bypassed the fixed-point termination guard |
-| [D-166](cases/campaign_smoke/basin_events.py) | 2026-08-24 | record | soundness | flattering | `drift_check` | critical | fixed | Basin events called producer convergence a fixed-cell certificate |
-| [D-167](cases/campaign_smoke/basin_events.py) | 2026-08-24 | record | bookkeeping |  | `drift_check` | high | fixed | Basin events omitted the wall time needed to price the loop |
-| [D-168](src/sqpack/research/quench.py) | 2026-08-24 | quench | validity | conservative | `control_cell` | high | fixed | A finite equal-objective adjacent-cell closure was labeled an unsettled cycle |
-| [D-169](src/sqpack/research/quench.py) | 2026-08-24 | quench | validity | flattering | `control_cell` | critical | fixed | The cell post-check ignored every containment row |
-| [D-170](defects.yaml) | 2026-08-24 | record | bookkeeping | neutral | `drift_check` | high | fixed | D-165 reused the unrelated D-132 bead |
-| [D-171](campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl) | 2026-08-24 | quench | robustness | conservative | `control_cell` | high | fixed | Argmax-only n=4 repair left one positive-control evaluation unsettled |
+| [D-162](packing/golden/basin-maps.yaml) | 2026-08-24 | record | validity | flattering | `control_cell` | high | outstanding | The small-n golden convergence labels hid unsettled fixed-cell evaluations |
+| [D-163](packing/src/sqpack/cli/validate.py) | 2026-08-24 | tooling | validity | flattering | `gate` | critical | fixed | The historical-regression gate masked a failing checker |
+| [D-164](packing/golden/basin-maps.yaml) | 2026-08-24 | quench | validity | conservative | `control_cell` | high | fixed | The fixed-cell solver mislabeled a numerical rejection as mathematical infeasibility |
+| [D-165](packing/cases/campaign_smoke/basin_events.py) | 2026-08-24 | quench | validity | flattering | `control_cell` | critical | fixed | Initial cell-solve failures bypassed the fixed-point termination guard |
+| [D-166](packing/cases/campaign_smoke/basin_events.py) | 2026-08-24 | record | soundness | flattering | `drift_check` | critical | fixed | Basin events called producer convergence a fixed-cell certificate |
+| [D-167](packing/cases/campaign_smoke/basin_events.py) | 2026-08-24 | record | bookkeeping |  | `drift_check` | high | fixed | Basin events omitted the wall time needed to price the loop |
+| [D-168](packing/src/sqpack/research/quench.py) | 2026-08-24 | quench | validity | conservative | `control_cell` | high | fixed | A finite equal-objective adjacent-cell closure was labeled an unsettled cycle |
+| [D-169](packing/src/sqpack/research/quench.py) | 2026-08-24 | quench | validity | flattering | `control_cell` | critical | fixed | The cell post-check ignored every containment row |
+| [D-170](packing/defects.yaml) | 2026-08-24 | record | bookkeeping | neutral | `drift_check` | high | fixed | D-165 reused the unrelated D-132 bead |
+| [D-171](packing/campaign/series/series-000-smoke-and-calibration/results/exp-024-h-021-n4-basin-event-v3-repair.jsonl) | 2026-08-24 | quench | robustness | conservative | `control_cell` | high | fixed | Argmax-only n=4 repair left one positive-control evaluation unsettled |
 | [D-172](TUTORIAL.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The orientation tutorial said a configuration-space cell fixes the angles |
 | [D-173](TUTORIAL.md) | 2026-08-24 | docs | soundness | conservative | `review` | high | fixed | The orientation docs ruled out equality certification by all interval methods |
 | [D-174](docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The recovery narrative silently eliminated centres and universalized rational LPs |
@@ -397,152 +397,152 @@ This is the actionable list.
 | [D-180](README.md) | 2026-08-24 | docs | bookkeeping | conservative | `review` | high | fixed | Current orientation links sent agents to an explicitly superseded handoff |
 | [D-181](SYNOPSIS.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The basin definition called a deterministic quench endpoint a non-point |
 | [D-182](TUTORIAL.md) | 2026-08-24 | docs | validity | conservative | `review` | medium | fixed | The strategy tutorial excluded safe loss shaping and all repeated endpoint hits |
-| [D-183](cases/campaign_smoke/basin_events.py) | 2026-08-24 | record | robustness | flattering | `control_cell` | high | fixed | The basin-event batch crashed before retaining an independently invalid endpoint |
-| [D-184](devtools/check_synopsis.py) | 2026-08-24 | tooling | validity | conservative | `inspection` | low | fixed | Overlapping synopsis excerpts were mistaken for a duplicate experiment row |
-| [D-185](devtools/check_synopsis.py) | 2026-08-24 | docs | bookkeeping |  | `inspection` | medium | fixed | The synopsis carried stale defect-direction and gate-detector aggregates |
-| [D-186](cases/n5/angle_sheet.py) | 2026-08-24 | tooling | soundness | flattering | `review` | high | fixed | The first angle-sheet bound omitted slide motion from one projection |
-| [D-187](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Two synopsis mutation controls retained the pre-D-186 aggregates |
+| [D-183](packing/cases/campaign_smoke/basin_events.py) | 2026-08-24 | record | robustness | flattering | `control_cell` | high | fixed | The basin-event batch crashed before retaining an independently invalid endpoint |
+| [D-184](packing/devtools/check_synopsis.py) | 2026-08-24 | tooling | validity | conservative | `inspection` | low | fixed | Overlapping synopsis excerpts were mistaken for a duplicate experiment row |
+| [D-185](packing/devtools/check_synopsis.py) | 2026-08-24 | docs | bookkeeping |  | `inspection` | medium | fixed | The synopsis carried stale defect-direction and gate-detector aggregates |
+| [D-186](packing/cases/n5/angle_sheet.py) | 2026-08-24 | tooling | soundness | flattering | `review` | high | fixed | The first angle-sheet bound omitted slide motion from one projection |
+| [D-187](packing/devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Two synopsis mutation controls retained the pre-D-186 aggregates |
 | [D-188](conventions.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The conventions authorized multi-hypothesis rounds after the schema prohibited them |
 | [D-189](README.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | The newcomer glossary omitted the point-basin and component boundary |
 | [D-190](README.md) | 2026-08-24 | docs | bookkeeping | conservative | `review` | medium | fixed | The id glossary said every experiment retains a JSONL archive |
 | [D-191](README.md) | 2026-08-24 | docs | validity | flattering | `review` | high | fixed | Orientation prose overstated both control automation and conventions ownership |
 | [D-192](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | docs | bookkeeping | conservative | `review` | high | fixed | The stacked documentation PR was twelve commits behind the living synopsis |
-| [D-193](defects.yaml) | 2026-08-24 | docs | bookkeeping | flattering | `review` | medium | fixed | The draft PR 21 review misclassified a valid but incomplete definition as soundness |
-| [D-194](cases/n5/tangent_cones.py) | 2026-08-24 | tooling | soundness | flattering | `review` | high | fixed | The n=5 tangent checker reused one contact differential across three slide strata |
-| [D-195](cases/n5/tangent_cones.py) | 2026-08-24 | tooling | soundness | flattering | `review` | high | fixed | The n=5 tangent checker treated tied support inequalities as alternatives |
-| [D-196](defects.yaml) | 2026-08-24 | record | bookkeeping | flattering | `drift_check` | medium | fixed | A broad exp-035 status patch updated D-034 instead of D-194 |
-| [D-197](defects.yaml) | 2026-08-24 | record | bookkeeping | neutral | `anomaly` | medium | fixed | A concurrent checkout moved the exp-036 instrument commit to the wrong branch |
-| [D-198](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Two numeric negative-control anchors lagged the D-197 aggregates |
-| [D-199](src/sqpack/research/quench.py) | 2026-08-24 | quench | robustness | conservative | `gate` | high | fixed | A frozen residual-repair set rejected a valid n=10 cell |
+| [D-193](packing/defects.yaml) | 2026-08-24 | docs | bookkeeping | flattering | `review` | medium | fixed | The draft PR 21 review misclassified a valid but incomplete definition as soundness |
+| [D-194](packing/cases/n5/tangent_cones.py) | 2026-08-24 | tooling | soundness | flattering | `review` | high | fixed | The n=5 tangent checker reused one contact differential across three slide strata |
+| [D-195](packing/cases/n5/tangent_cones.py) | 2026-08-24 | tooling | soundness | flattering | `review` | high | fixed | The n=5 tangent checker treated tied support inequalities as alternatives |
+| [D-196](packing/defects.yaml) | 2026-08-24 | record | bookkeeping | flattering | `drift_check` | medium | fixed | A broad exp-035 status patch updated D-034 instead of D-194 |
+| [D-197](packing/defects.yaml) | 2026-08-24 | record | bookkeeping | neutral | `anomaly` | medium | fixed | A concurrent checkout moved the exp-036 instrument commit to the wrong branch |
+| [D-198](packing/devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Two numeric negative-control anchors lagged the D-197 aggregates |
+| [D-199](packing/src/sqpack/research/quench.py) | 2026-08-24 | quench | robustness | conservative | `gate` | high | fixed | A frozen residual-repair set rejected a valid n=10 cell |
 | [D-200](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping | conservative | `inspection` | medium | fixed | The synopsis gate-defect enumeration omitted D-198 |
-| [D-201](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `review` | medium | fixed | Two mutation controls retained pre-integration expected diagnostics |
-| [D-202](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `anomaly` | medium | contained | A delegated long-running validation lost its final receipt |
-| [D-203](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-24 | quench | robustness | conservative | `gate` | high | fixed | The n=4 seed-0 quench ends on a HiGHS solve error |
-| [D-204](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The gate-aggregate control expected the mutated value |
-| [D-205](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `review` | high | fixed | The stacked workflow PR retained a superseded scientific checkpoint |
-| [D-206](campaign/schemas/agent-session.schema.yaml) | 2026-08-24 | record | robustness | flattering | `review` | high | fixed | The phase schema could not express the resumable contract promised by the docs |
+| [D-201](packing/devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `review` | medium | fixed | Two mutation controls retained pre-integration expected diagnostics |
+| [D-202](packing/campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `anomaly` | medium | contained | A delegated long-running validation lost its final receipt |
+| [D-203](packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-24 | quench | robustness | conservative | `gate` | high | fixed | The n=4 seed-0 quench ends on a HiGHS solve error |
+| [D-204](packing/devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The gate-aggregate control expected the mutated value |
+| [D-205](packing/campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `review` | high | fixed | The stacked workflow PR retained a superseded scientific checkpoint |
+| [D-206](packing/campaign/schemas/agent-session.schema.yaml) | 2026-08-24 | record | robustness | flattering | `review` | high | fixed | The phase schema could not express the resumable contract promised by the docs |
 | [D-207](README.md) | 2026-08-24 | docs | validity | neutral | `review` | medium | fixed | The workflow map handed repairs to an undefined implementation workflow |
 | [D-208](SYNOPSIS.md) | 2026-08-24 | docs | validity | neutral | `review` | medium | fixed | The new campaign definition excluded work already stored in the campaign |
-| [D-209](campaign/series/series-000-smoke-and-calibration/README.md) | 2026-08-24 | docs | bookkeeping | conservative | `review` | medium | fixed | The legacy-series summary stopped at 35 of 36 experiments |
-| [D-210](src/sqpack/campaign/ledger.py) | 2026-08-24 | record | validity | flattering | `review` | high | fixed | Retrospective workflow labels were counted as contemporaneous declarations |
+| [D-209](packing/campaign/series/series-000-smoke-and-calibration/README.md) | 2026-08-24 | docs | bookkeeping | conservative | `review` | medium | fixed | The legacy-series summary stopped at 35 of 36 experiments |
+| [D-210](packing/src/sqpack/campaign/ledger.py) | 2026-08-24 | record | validity | flattering | `review` | high | fixed | Retrospective workflow labels were counted as contemporaneous declarations |
 | [D-211](SYNOPSIS.md) | 2026-08-24 | docs | performance | neutral | `review` | medium | fixed | The workflow cadence mandated review phases after routine guarded rounds |
 | [D-212](README.md) | 2026-08-24 | docs | validity | neutral | `review` | medium | fixed | The workflow prose turned a primary focus into an exclusive focus |
-| [D-213](devtools/check_readme.py) | 2026-08-24 | tooling | bookkeeping | neutral | `review` | medium | fixed | Workflow vocabulary and entry state had several machine authorities |
-| [D-214](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | The v2 loader ignored its declared contract and envelope identity |
-| [D-215](devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | flattering | `review` | medium | fixed | Workflow drift checks accepted unauthorized rows and invalid transitions |
-| [D-216](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | performance | neutral | `review` | low | fixed | Full phase histories made the generated orientation table unboundedly wide |
-| [D-217](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `anomaly` | medium | contained | A parallel validation wrapper discarded a live command receipt |
-| [D-218](campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `inspection` | medium | fixed | Session-009's output inventory stopped before exp-035 and exp-036 |
-| [D-219](campaign/agendas/agenda-001-basin-confidence-ladder.md) | 2026-08-24 | record | bookkeeping | conservative | `review` | medium | fixed | The BC-010 agenda retained a superseded two-size solver diagnosis |
+| [D-213](packing/devtools/check_readme.py) | 2026-08-24 | tooling | bookkeeping | neutral | `review` | medium | fixed | Workflow vocabulary and entry state had several machine authorities |
+| [D-214](packing/src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | validity | flattering | `review` | high | fixed | The v2 loader ignored its declared contract and envelope identity |
+| [D-215](packing/devtools/controls.yaml) | 2026-08-24 | tooling | bookkeeping | flattering | `review` | medium | fixed | Workflow drift checks accepted unauthorized rows and invalid transitions |
+| [D-216](packing/src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | performance | neutral | `review` | low | fixed | Full phase histories made the generated orientation table unboundedly wide |
+| [D-217](packing/campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `anomaly` | medium | contained | A parallel validation wrapper discarded a live command receipt |
+| [D-218](packing/campaign/agent-sessions/session-009-autonomous-basin-map.md) | 2026-08-24 | record | bookkeeping | conservative | `inspection` | medium | fixed | Session-009's output inventory stopped before exp-035 and exp-036 |
+| [D-219](packing/campaign/agendas/agenda-001-basin-confidence-ladder.md) | 2026-08-24 | record | bookkeeping | conservative | `review` | medium | fixed | The BC-010 agenda retained a superseded two-size solver diagnosis |
 | [D-220](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | bookkeeping | flattering | `review` | high | fixed | The durable resume order was not encoded in the ready-work graph |
 | [D-221](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | bookkeeping | neutral | `review` | medium | fixed | The campaign bead retained the superseded eight-hour horizon |
 | [D-222](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | robustness | conservative | `anomaly` | medium | contained | A delegated read-only audit launched an explicitly excluded deep gate |
 | [D-223](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping | neutral | `review` | medium | fixed | The synopsis retained superseded normal-gate timing and control counts |
 | [D-224](docs/project/reviews/review-2026-08-23-square-packing-program-and-pr14.md) | 2026-08-24 | record | validity | conservative | `anomaly` | medium | fixed | A focused negative-control replay omitted the gate-managed Python environment |
 | [D-225](conventions.md) | 2026-08-24 | record | validity | conservative | `review` | high | fixed | Checkpoint merge readiness was conflated with unattended launch readiness |
-| [D-226](../../.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | robustness | conservative | `gate` | medium | fixed | CI discarded the history required by its own provenance gate |
-| [D-227](../../.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | performance | neutral | `inspection` | low | fixed | The uv cache key prefixed its working directory twice |
-| [D-228](tests/test_module_boundaries.py) | 2026-08-24 | tooling | robustness | conservative | `gate` | low | fixed | The workflow regression assumed every YAML key was a string |
+| [D-226](.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | robustness | conservative | `gate` | medium | fixed | CI discarded the history required by its own provenance gate |
+| [D-227](.github/workflows/packing-validation.yml) | 2026-08-24 | tooling | performance | neutral | `inspection` | low | fixed | The uv cache key prefixed its working directory twice |
+| [D-228](packing/tests/test_module_boundaries.py) | 2026-08-24 | tooling | robustness | conservative | `gate` | low | fixed | The workflow regression assumed every YAML key was a string |
 | [D-229](SYNOPSIS.md) | 2026-08-24 | record | bookkeeping | neutral | `review` | medium | fixed | The synopsis hypothesis-status aggregate drifted behind the generated ledger |
 | [D-230](SYNOPSIS.md) | 2026-08-24 | record | validity | flattering | `review` | high | fixed | Top-level synopsis claims exceeded the scope of the detailed lane evidence |
-| [D-231](devtools/check_synopsis.py) | 2026-08-24 | tooling | bookkeeping | neutral | `drift_check` | high | fixed | The synopsis checker omitted hypotheses with multiword statuses |
-| [D-232](defects.yaml) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | An unfrozen lint command rewrote the packing dependency lockfile |
-| [D-233](devtools/check_readme.py) | 2026-08-24 | tooling | robustness | conservative | `gate` | medium | fixed | README layout validation treated ignored migration caches as project content |
+| [D-231](packing/devtools/check_synopsis.py) | 2026-08-24 | tooling | bookkeeping | neutral | `drift_check` | high | fixed | The synopsis checker omitted hypotheses with multiword statuses |
+| [D-232](packing/defects.yaml) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | An unfrozen lint command rewrote the packing dependency lockfile |
+| [D-233](packing/devtools/check_readme.py) | 2026-08-24 | tooling | robustness | conservative | `gate` | medium | fixed | README layout validation treated ignored migration caches as project content |
 | [D-234](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | 2026-08-24 | docs | bookkeeping | neutral | `review` | medium | fixed | The implemented engineering plan carried stale inventory and defect references |
 | [D-235](SYNOPSIS.md) | 2026-08-24 | docs | bookkeeping | neutral | `review` | high | fixed | Current reproducibility instructions still named deleted command paths |
-| [D-236](defects.yaml) | 2026-08-24 | record | bookkeeping | neutral | `review` | high | fixed | A completed timeout fix remained outstanding in the defect and launch records |
-| [D-237](devtools/run_negative_controls.py) | 2026-08-24 | tooling | robustness | neutral | `inspection` | high | fixed | Mutation-control target paths could escape their private snapshot |
+| [D-236](packing/defects.yaml) | 2026-08-24 | record | bookkeeping | neutral | `review` | high | fixed | A completed timeout fix remained outstanding in the defect and launch records |
+| [D-237](packing/devtools/run_negative_controls.py) | 2026-08-24 | tooling | robustness | neutral | `inspection` | high | fixed | Mutation-control target paths could escape their private snapshot |
 | [D-238](SYNOPSIS.md) | 2026-08-24 | docs | soundness | flattering | `review` | high | fixed | The synopsis called quench endpoints discrete basins with a well-defined census |
-| [D-239](src/sqpack/cli/validate.py) | 2026-08-24 | tooling | robustness | neutral | `inspection` | medium | outstanding | Validation steps have no outer deadline or process-group cleanup |
-| [D-240](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | high | fixed | The autonomous-session wall budget could be reset indefinitely |
-| [D-241](src/sqpack/campaign/ledger.py) | 2026-08-24 | record | bookkeeping | conservative | `review` | high | fixed | The session checker rejected a legitimate renewed slice |
-| [D-242](campaign/agent-sessions/README.md) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | A delegated focused check rewrote the dependency lock outside its scope |
+| [D-239](packing/src/sqpack/cli/validate.py) | 2026-08-24 | tooling | robustness | neutral | `inspection` | medium | outstanding | Validation steps have no outer deadline or process-group cleanup |
+| [D-240](packing/src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | high | fixed | The autonomous-session wall budget could be reset indefinitely |
+| [D-241](packing/src/sqpack/campaign/ledger.py) | 2026-08-24 | record | bookkeeping | conservative | `review` | high | fixed | The session checker rejected a legitimate renewed slice |
+| [D-242](packing/campaign/agent-sessions/README.md) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | A delegated focused check rewrote the dependency lock outside its scope |
 | [D-243](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-24 | docs | bookkeeping | flattering | `review` | high | fixed | The autonomous-loop instruction contradicted its upstream launch blocker |
-| [D-244](campaign/schemas/agent-session.schema.yaml) | 2026-08-24 | record | bookkeeping | flattering | `review` | high | fixed | A completed delegation could shed provenance and pass an incomplete receipt |
-| [D-245](campaign/schemas/agent-session.schema.yaml) | 2026-08-24 | record | bookkeeping | neutral | `review` | medium | fixed | A newly opened agent session had to invent completed progress |
-| [D-246](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | medium | fixed | Reserve enforcement crashed on a malformed contemporaneous phase clock |
-| [D-247](uv.lock) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | A delegated follow-up again rewrote the dependency lock outside its scope |
-| [D-248](src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | high | fixed | Active slice deadlines were recorded but not enforced after expiry |
+| [D-244](packing/campaign/schemas/agent-session.schema.yaml) | 2026-08-24 | record | bookkeeping | flattering | `review` | high | fixed | A completed delegation could shed provenance and pass an incomplete receipt |
+| [D-245](packing/campaign/schemas/agent-session.schema.yaml) | 2026-08-24 | record | bookkeeping | neutral | `review` | medium | fixed | A newly opened agent session had to invent completed progress |
+| [D-246](packing/src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | medium | fixed | Reserve enforcement crashed on a malformed contemporaneous phase clock |
+| [D-247](packing/uv.lock) | 2026-08-24 | tooling | bookkeeping | neutral | `inspection` | medium | fixed | A delegated follow-up again rewrote the dependency lock outside its scope |
+| [D-248](packing/src/sqpack/campaign/ledger.py) | 2026-08-24 | tooling | robustness | neutral | `review` | high | fixed | Active slice deadlines were recorded but not enforced after expiry |
 | [D-249](docs/project/specs/active/plan-2026-08-23-overnight-cartography-run.md) | 2026-08-25 | record | bookkeeping | flattering | `inspection` | high | fixed | Branch completion and landed-main state were treated as the same fact |
-| [D-250](cases/n5/tangent_inventory.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | A delegated exact checker asserted proofs and controls it had not executed |
-| [D-251](cases/n5/tangent_inventory.py) | 2026-08-25 | tooling | validity | conservative | `control_cell` | medium | fixed | An omitted R6 coordinate produced a false exact blocker |
-| [D-252](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | medium | fixed | The preregistered refusal accidentally included already proved sheet lifts |
-| [D-253](tests/test_module_boundaries.py) | 2026-08-25 | tooling | robustness | neutral | `gate` | medium | fixed | The exp-038 wrapper was added under a forbidden legacy tools path |
-| [D-254](campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md) | 2026-08-25 | record | soundness | flattering | `review` | high | fixed | The first exp-039 criterion conflated ray normalizations and rank with dimension |
-| [D-255](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Four exact negative-control anchors lagged the current living-document values |
-| [D-256](cases/n5/fixed_angle_polytope.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | Endpoint equality was treated as an affine full-interval axis proof |
-| [D-257](cases/n5/fixed_angle_polytope.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | Three stress samples were promoted without deriving the degree bound |
-| [D-258](defects.yaml) | 2026-08-25 | record | bookkeeping | flattering | `review` | high | fixed | An under-scoped status patch closed the wrong outstanding defect |
-| [D-259](../../.flowmarkignore) | 2026-08-25 | record | bookkeeping | conservative | `drift_check` | medium | fixed | An explicit Flowmark target bypassed the generated-view exclusion |
-| [D-260](tests/test_research_contracts.py) | 2026-08-25 | tooling | validity | flattering | `control_cell` | high | fixed | A solver fixture cross-wired two fixed-point evaluations |
-| [D-261](tests/test_research_contracts.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The replay fixture was allowed to define its own failure receipt |
-| [D-262](tests/test_research_contracts.py) | 2026-08-25 | tooling | bookkeeping | flattering | `gate` | medium | fixed | A delegated fixture stopped after pytest while static checks were red |
-| [D-263](defects.yaml) | 2026-08-25 | record | bookkeeping | flattering | `review` | high | fixed | A second status-only patch closed D-034 instead of the named defect |
-| [D-264](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | medium | fixed | An active session ended its workflow list on a completed phase |
-| [D-265](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | flattering | `gate` | medium | fixed | Two delegation deadlines exceeded their declared budgets |
-| [D-266](src/sqpack/research/quench.py) | 2026-08-25 | quench | soundness | conservative | `review` | high | fixed | A numerical fallback disagreement was promoted to infeasibility |
-| [D-267](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The soundness mutation diagnostic kept the old denominator |
-| [D-268](tests/test_research_contracts.py) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Focused fallback checks omitted the Python format gate |
-| [D-269](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | A session delegation used an undeclared timing-quality value |
-| [D-270](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | low | fixed | Phase 11 retained a next action that its own evidence had completed |
-| [D-271](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | A phase rotation used an undeclared transition label |
-| [D-272](../../.github/workflows/packing-validation.yml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The macOS expected-failure guard rejected a recovered deep golden |
-| [D-273](tests/test_module_boundaries.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The direct-blocking workflow test admitted advisory variants |
-| [D-274](tests/test_module_boundaries.py) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The delegated promotion check named deleted paths and left one long assertion |
-| [D-275](sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | engine | validity | flattering | `review` | high | fixed | The first pair-meter draft omitted basin-entry work from its summary |
-| [D-276](sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The first basin-entry meter probe selected a fixture without angles |
-| [D-277](sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The first pair-meter integration test omitted crate documentation |
-| [D-278](defects.yaml) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The D-277 regression command made the defect source invalid YAML |
-| [D-279](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The finalization phase used an undeclared focus value |
-| [D-280](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | tooling | performance | conservative | `gate` | high | contained | The phase-count cap ended a fast campaign before its wall-clock goal |
-| [D-281](devtools/controls.yaml) | 2026-08-25 | record | bookkeeping | conservative | `gate` | medium | fixed | New defect totals left synopsis controls and the open inventory stale |
-| [D-282](campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The stopped session retained a completed final phase |
-| [D-283](sqsearch/src/search.rs) | 2026-08-25 | engine | robustness | neutral | `review` | high | outstanding | A zero-step sqsearch regime can spin forever without spending its move budget |
-| [D-284](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | record | validity | flattering | `review` | medium | fixed | A delegated float scout ran before the Trump support criterion was frozen |
-| [D-285](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The first H-043 pilot could pass while its exact cone oracle was unresolved |
-| [D-286](cases/trump11/incidence_cores.py) | 2026-08-25 | record | bookkeeping | neutral | `review` | medium | fixed | The first H-043 record conflated conjunctive wall rows with feature aliases |
-| [D-287](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | record | bookkeeping | neutral | `anomaly` | low | fixed | A shell-active bead description executed a backtick-delimited word |
-| [D-288](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | tooling | bookkeeping | neutral | `gate` | low | fixed | The first focused Ruff replay doubled the uv working-directory prefix |
-| [D-289](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | neutral | `review` | high | contained | The H-043 pilot normalized row classes for counting but not for its cone oracle |
-| [D-290](cases/trump11/incidence_cores.py) | 2026-08-25 | record | robustness | conservative | `review` | medium | outstanding | H-043 pilot certificates can be recomputed but not replayed from a retained record |
-| [D-291](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | conservative | `review` | high | contained | The branch-0 H-043 golden would classify a valid future refutation as test failure |
-| [D-292](cases/trump11/incidence_cores.py) | 2026-08-25 | record | validity | neutral | `review` | high | contained | H-043 branch indices are regenerated but not bound to the retained exp-013 universe |
-| [D-293](cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | flattering | `review` | medium | outstanding | Two H-043 provenance selftests claim completeness without checking exact mappings |
-| [D-294](defects.yaml) | 2026-08-25 | record | bookkeeping | neutral | `inspection` | medium | fixed | The canonical defect count lagged eleven committed records |
-| [D-295](src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | The first timeout draft isolated validation calls that remained unbounded |
-| [D-296](tests/test_validation_cli.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The first timeout test could not expose an early-parent descendant leak |
-| [D-297](src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | The first Windows timeout path treated taskkill as a proved tree guarantee |
-| [D-298](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | tooling | validity | neutral | `review` | low | fixed | Overlapping inspection ranges fabricated a duplicate session key |
-| [D-299](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | tooling | bookkeeping | flattering | `review` | medium | fixed | A later successful check masked an earlier gate failure in the shell status |
-| [D-300](campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | record | bookkeeping | conservative | `pre_registered_rule` | medium | outstanding | The receipt rehearsal requested an unsupported gdate precision |
-| [D-301](campaign/agent-sessions/README.md) | 2026-08-25 | docs | bookkeeping | neutral | `review` | low | fixed | The first receipt rule split a compound adjective after its hyphen |
-| [D-302](resources/papers/square-packing-x06-wasted-area-2508.04603.md) | 2026-08-25 | docs | soundness | conservative | `review` | high | fixed | Bui transcription changed the square-reduction divisor into a product |
-| [D-303](resources/papers/square-packing-x06-wasted-area-2508.04603.md) | 2026-08-25 | docs | soundness | flattering | `review` | high | fixed | Bui transcription omitted the quantified width hypothesis |
-| [D-304](campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | 2026-08-25 | docs | soundness | flattering | `review` | high | contained | McClenagan's Section 3 proof uses a contradictory inequality chain |
+| [D-250](packing/cases/n5/tangent_inventory.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | A delegated exact checker asserted proofs and controls it had not executed |
+| [D-251](packing/cases/n5/tangent_inventory.py) | 2026-08-25 | tooling | validity | conservative | `control_cell` | medium | fixed | An omitted R6 coordinate produced a false exact blocker |
+| [D-252](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | medium | fixed | The preregistered refusal accidentally included already proved sheet lifts |
+| [D-253](packing/tests/test_module_boundaries.py) | 2026-08-25 | tooling | robustness | neutral | `gate` | medium | fixed | The exp-038 wrapper was added under a forbidden legacy tools path |
+| [D-254](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-039-h-023-n5-fixed-angle-polytope.md) | 2026-08-25 | record | soundness | flattering | `review` | high | fixed | The first exp-039 criterion conflated ray normalizations and rank with dimension |
+| [D-255](packing/devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Four exact negative-control anchors lagged the current living-document values |
+| [D-256](packing/cases/n5/fixed_angle_polytope.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | Endpoint equality was treated as an affine full-interval axis proof |
+| [D-257](packing/cases/n5/fixed_angle_polytope.py) | 2026-08-25 | tooling | soundness | flattering | `review` | high | fixed | Three stress samples were promoted without deriving the degree bound |
+| [D-258](packing/defects.yaml) | 2026-08-25 | record | bookkeeping | flattering | `review` | high | fixed | An under-scoped status patch closed the wrong outstanding defect |
+| [D-259](.flowmarkignore) | 2026-08-25 | record | bookkeeping | conservative | `drift_check` | medium | fixed | An explicit Flowmark target bypassed the generated-view exclusion |
+| [D-260](packing/tests/test_research_contracts.py) | 2026-08-25 | tooling | validity | flattering | `control_cell` | high | fixed | A solver fixture cross-wired two fixed-point evaluations |
+| [D-261](packing/tests/test_research_contracts.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The replay fixture was allowed to define its own failure receipt |
+| [D-262](packing/tests/test_research_contracts.py) | 2026-08-25 | tooling | bookkeeping | flattering | `gate` | medium | fixed | A delegated fixture stopped after pytest while static checks were red |
+| [D-263](packing/defects.yaml) | 2026-08-25 | record | bookkeeping | flattering | `review` | high | fixed | A second status-only patch closed D-034 instead of the named defect |
+| [D-264](packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | medium | fixed | An active session ended its workflow list on a completed phase |
+| [D-265](packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | flattering | `gate` | medium | fixed | Two delegation deadlines exceeded their declared budgets |
+| [D-266](packing/src/sqpack/research/quench.py) | 2026-08-25 | quench | soundness | conservative | `review` | high | fixed | A numerical fallback disagreement was promoted to infeasibility |
+| [D-267](packing/devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The soundness mutation diagnostic kept the old denominator |
+| [D-268](packing/tests/test_research_contracts.py) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | Focused fallback checks omitted the Python format gate |
+| [D-269](packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | A session delegation used an undeclared timing-quality value |
+| [D-270](packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | low | fixed | Phase 11 retained a next action that its own evidence had completed |
+| [D-271](packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | A phase rotation used an undeclared transition label |
+| [D-272](.github/workflows/packing-validation.yml) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | medium | fixed | The macOS expected-failure guard rejected a recovered deep golden |
+| [D-273](packing/tests/test_module_boundaries.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The direct-blocking workflow test admitted advisory variants |
+| [D-274](packing/tests/test_module_boundaries.py) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The delegated promotion check named deleted paths and left one long assertion |
+| [D-275](packing/sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | engine | validity | flattering | `review` | high | fixed | The first pair-meter draft omitted basin-entry work from its summary |
+| [D-276](packing/sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The first basin-entry meter probe selected a fixture without angles |
+| [D-277](packing/sqsearch/tests/pair_meter_jsonl.rs) | 2026-08-25 | tooling | bookkeeping | conservative | `gate` | low | fixed | The first pair-meter integration test omitted crate documentation |
+| [D-278](packing/defects.yaml) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The D-277 regression command made the defect source invalid YAML |
+| [D-279](packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The finalization phase used an undeclared focus value |
+| [D-280](packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | tooling | performance | conservative | `gate` | high | contained | The phase-count cap ended a fast campaign before its wall-clock goal |
+| [D-281](packing/devtools/controls.yaml) | 2026-08-25 | record | bookkeeping | conservative | `gate` | medium | fixed | New defect totals left synopsis controls and the open inventory stale |
+| [D-282](packing/campaign/agent-sessions/session-010-eight-hour-mixed-research.md) | 2026-08-25 | record | bookkeeping | conservative | `gate` | low | fixed | The stopped session retained a completed final phase |
+| [D-283](packing/sqsearch/src/search.rs) | 2026-08-25 | engine | robustness | neutral | `review` | high | outstanding | A zero-step sqsearch regime can spin forever without spending its move budget |
+| [D-284](packing/campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | record | validity | flattering | `review` | medium | fixed | A delegated float scout ran before the Trump support criterion was frozen |
+| [D-285](packing/cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The first H-043 pilot could pass while its exact cone oracle was unresolved |
+| [D-286](packing/cases/trump11/incidence_cores.py) | 2026-08-25 | record | bookkeeping | neutral | `review` | medium | fixed | The first H-043 record conflated conjunctive wall rows with feature aliases |
+| [D-287](packing/campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | record | bookkeeping | neutral | `anomaly` | low | fixed | A shell-active bead description executed a backtick-delimited word |
+| [D-288](packing/campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | tooling | bookkeeping | neutral | `gate` | low | fixed | The first focused Ruff replay doubled the uv working-directory prefix |
+| [D-289](packing/cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | neutral | `review` | high | contained | The H-043 pilot normalized row classes for counting but not for its cone oracle |
+| [D-290](packing/cases/trump11/incidence_cores.py) | 2026-08-25 | record | robustness | conservative | `review` | medium | outstanding | H-043 pilot certificates can be recomputed but not replayed from a retained record |
+| [D-291](packing/cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | conservative | `review` | high | contained | The branch-0 H-043 golden would classify a valid future refutation as test failure |
+| [D-292](packing/cases/trump11/incidence_cores.py) | 2026-08-25 | record | validity | neutral | `review` | high | contained | H-043 branch indices are regenerated but not bound to the retained exp-013 universe |
+| [D-293](packing/cases/trump11/incidence_cores.py) | 2026-08-25 | tooling | validity | flattering | `review` | medium | outstanding | Two H-043 provenance selftests claim completeness without checking exact mappings |
+| [D-294](packing/defects.yaml) | 2026-08-25 | record | bookkeeping | neutral | `inspection` | medium | fixed | The canonical defect count lagged eleven committed records |
+| [D-295](packing/src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | The first timeout draft isolated validation calls that remained unbounded |
+| [D-296](packing/tests/test_validation_cli.py) | 2026-08-25 | tooling | validity | flattering | `review` | high | fixed | The first timeout test could not expose an early-parent descendant leak |
+| [D-297](packing/src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | The first Windows timeout path treated taskkill as a proved tree guarantee |
+| [D-298](packing/campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | tooling | validity | neutral | `review` | low | fixed | Overlapping inspection ranges fabricated a duplicate session key |
+| [D-299](packing/campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | tooling | bookkeeping | flattering | `review` | medium | fixed | A later successful check masked an earlier gate failure in the shell status |
+| [D-300](packing/campaign/agent-sessions/session-011-eight-hour-continuation.md) | 2026-08-25 | record | bookkeeping | conservative | `pre_registered_rule` | medium | outstanding | The receipt rehearsal requested an unsupported gdate precision |
+| [D-301](packing/campaign/agent-sessions/README.md) | 2026-08-25 | docs | bookkeeping | neutral | `review` | low | fixed | The first receipt rule split a compound adjective after its hyphen |
+| [D-302](packing/resources/papers/square-packing-x06-wasted-area-2508.04603.md) | 2026-08-25 | docs | soundness | conservative | `review` | high | fixed | Bui transcription changed the square-reduction divisor into a product |
+| [D-303](packing/resources/papers/square-packing-x06-wasted-area-2508.04603.md) | 2026-08-25 | docs | soundness | flattering | `review` | high | fixed | Bui transcription omitted the quantified width hypothesis |
+| [D-304](packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | 2026-08-25 | docs | soundness | flattering | `review` | high | contained | McClenagan's Section 3 proof uses a contradictory inequality chain |
 | [D-305](SYNOPSIS.md) | 2026-08-25 | docs | bookkeeping | flattering | `gate` | medium | fixed | The source checkpoint undercounted fixes without regression checks |
-| [D-306](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | neutral | `gate` | medium | fixed | Four aggregate mutation controls retained stale exact anchors |
-| [D-307](defects.yaml) | 2026-08-25 | tooling | validity | conservative | `gate` | medium | fixed | Host Python misdiagnosed valid Python 3.14 exception syntax |
-| [D-308](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | neutral | `control_cell` | medium | fixed | Two synchronized mutation controls expected the canonical rather than mutated count |
-| [D-309](campaign/agent-sessions/session-012-eight-hour-final-continuation.md) | 2026-08-25 | record | bookkeeping | neutral | `gate` | low | fixed | The first session-012 draft violated two clocked-session fields |
-| [D-310](campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | 2026-08-25 | docs | soundness | flattering | `review` | medium | fixed | McClenagan's equation 3.2 calls a periodic tangent solution unique |
-| [D-311](devtools/controls.yaml) | 2026-08-25 | tooling | validity | flattering | `control_cell` | high | fixed | The open-defect bead control still mutated a fixed record |
-| [D-312](campaign/agent-sessions/session-012-eight-hour-final-continuation.md) | 2026-08-25 | record | bookkeeping | neutral | `gate` | low | fixed | An early checkpoint phase claimed the outer finalization clock role |
-| [D-313](campaign/agent-sessions/session-013-generated-view-recurrence-checkpoint.md) | 2026-08-25 | record | bookkeeping | conservative | `drift_check` | medium | fixed | Explicit Flowmark target bypassed the generated-ledger exclusion |
-| [D-314](src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | The production commit-state probe was initially unbounded |
-| [D-315](src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | Detached production defaults could still wait on interrupted workers |
-| [D-316](src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | Quiet provenance probing lacked a Windows fail-closed guard |
-| [D-317](tests/test_validation_cli.py) | 2026-08-25 | tooling | validity | conservative | `gate` | medium | fixed | The SIGINT timeout regression ceiling was too tight for the focused suite |
-| [D-318](devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | conservative | `control_cell` | low | fixed | The unprotected-fix mutation control retained a stale expected count |
+| [D-306](packing/devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | neutral | `gate` | medium | fixed | Four aggregate mutation controls retained stale exact anchors |
+| [D-307](packing/defects.yaml) | 2026-08-25 | tooling | validity | conservative | `gate` | medium | fixed | Host Python misdiagnosed valid Python 3.14 exception syntax |
+| [D-308](packing/devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | neutral | `control_cell` | medium | fixed | Two synchronized mutation controls expected the canonical rather than mutated count |
+| [D-309](packing/campaign/agent-sessions/session-012-eight-hour-final-continuation.md) | 2026-08-25 | record | bookkeeping | neutral | `gate` | low | fixed | The first session-012 draft violated two clocked-session fields |
+| [D-310](packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | 2026-08-25 | docs | soundness | flattering | `review` | medium | fixed | McClenagan's equation 3.2 calls a periodic tangent solution unique |
+| [D-311](packing/devtools/controls.yaml) | 2026-08-25 | tooling | validity | flattering | `control_cell` | high | fixed | The open-defect bead control still mutated a fixed record |
+| [D-312](packing/campaign/agent-sessions/session-012-eight-hour-final-continuation.md) | 2026-08-25 | record | bookkeeping | neutral | `gate` | low | fixed | An early checkpoint phase claimed the outer finalization clock role |
+| [D-313](packing/campaign/agent-sessions/session-013-generated-view-recurrence-checkpoint.md) | 2026-08-25 | record | bookkeeping | conservative | `drift_check` | medium | fixed | Explicit Flowmark target bypassed the generated-ledger exclusion |
+| [D-314](packing/src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | The production commit-state probe was initially unbounded |
+| [D-315](packing/src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | Detached production defaults could still wait on interrupted workers |
+| [D-316](packing/src/sqpack/cli/validate.py) | 2026-08-25 | tooling | robustness | neutral | `review` | high | fixed | Quiet provenance probing lacked a Windows fail-closed guard |
+| [D-317](packing/tests/test_validation_cli.py) | 2026-08-25 | tooling | validity | conservative | `gate` | medium | fixed | The SIGINT timeout regression ceiling was too tight for the focused suite |
+| [D-318](packing/devtools/controls.yaml) | 2026-08-25 | tooling | bookkeeping | conservative | `control_cell` | low | fixed | The unprotected-fix mutation control retained a stale expected count |
 | [D-319](SYNOPSIS.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | high | fixed | The cold-start handoff pointed to a closed BC-010 bead |
-| [D-320](devtools/check_golden_basins.py) | 2026-08-25 | tooling | robustness | conservative | `gate` | medium | fixed | Deep golden validation treated YAML line wrapping as scientific drift |
-| [D-321](tests/test_validation_cli.py) | 2026-08-25 | tooling | validity | conservative | `gate` | medium | fixed | The SIGINT cleanup regression signaled before its child start condition |
+| [D-320](packing/devtools/check_golden_basins.py) | 2026-08-25 | tooling | robustness | conservative | `gate` | medium | fixed | Deep golden validation treated YAML line wrapping as scientific drift |
+| [D-321](packing/tests/test_validation_cli.py) | 2026-08-25 | tooling | validity | conservative | `gate` | medium | fixed | The SIGINT cleanup regression signaled before its child start condition |
 | [D-322](SYNOPSIS.md) | 2026-08-25 | docs | bookkeeping | neutral | `review` | low | fixed | The synopsis overstated which defect classes the gate had caught |
-| [D-323](devtools/render_research_tables.py) | 2026-08-25 | docs | soundness | flattering | `review` | high | fixed | The reader-first frontier view discarded long exact forms |
-| [D-324](devtools/check_golden_basins.py) | 2026-08-25 | tooling | soundness | flattering | `review` | medium | fixed | Semantic golden comparison accepted ambiguous YAML identities |
-| [D-325](devtools/check_synopsis.py) | 2026-08-25 | tooling | robustness | conservative | `review` | low | fixed | The current-handoff validator embedded one live agenda cell |
-| [D-326](devtools/check_synopsis.py) | 2026-08-25 | docs | bookkeeping | flattering | `review` | medium | fixed | A second unprotected-fix aggregate escaped the single-match drift check |
+| [D-323](packing/devtools/render_research_tables.py) | 2026-08-25 | docs | soundness | flattering | `review` | high | fixed | The reader-first frontier view discarded long exact forms |
+| [D-324](packing/devtools/check_golden_basins.py) | 2026-08-25 | tooling | soundness | flattering | `review` | medium | fixed | Semantic golden comparison accepted ambiguous YAML identities |
+| [D-325](packing/devtools/check_synopsis.py) | 2026-08-25 | tooling | robustness | conservative | `review` | low | fixed | The current-handoff validator embedded one live agenda cell |
+| [D-326](packing/devtools/check_synopsis.py) | 2026-08-25 | docs | bookkeeping | flattering | `review` | medium | fixed | A second unprotected-fix aggregate escaped the single-match drift check |
 | [D-327](development.md) | 2026-08-25 | docs | bookkeeping | neutral | `review` | low | fixed | The timeout documentation split another compound adjective after its hyphen |
-| [D-328](campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md) | 2026-08-25 | record | bookkeeping | neutral | `gate` | medium | fixed | Concurrent-branch rounds were authored to a superseded experiment schema |
+| [D-328](packing/campaign/series/series-000-smoke-and-calibration/experiments/exp-038-h-023-n5-tangent-inventory.md) | 2026-08-25 | record | bookkeeping | neutral | `gate` | medium | fixed | Concurrent-branch rounds were authored to a superseded experiment schema |
 | [D-329](TUTORIAL.md) | 2026-08-25 | record | soundness | neutral | `review` | medium | fixed | The tutorial's promotion example asserted an unattested separation value |
 | [D-330](TUTORIAL.md) | 2026-08-25 | record | soundness | neutral | `review` | medium | fixed | The tutorial identified the side floor with the feasibility tolerance |
 | [D-331](TUTORIAL.md) | 2026-08-25 | record | soundness | neutral | `review` | low | fixed | A benchmark ratio was relabeled across implementations |
@@ -550,26 +550,26 @@ This is the actionable list.
 | [D-333](SYNOPSIS.md) | 2026-08-25 | record | bookkeeping | conservative | `review` | medium | fixed | The registry's rounds column drifted from the ledger under no stated rule |
 | [D-334](SYNOPSIS.md) | 2026-08-25 | record | bookkeeping | flattering | `review` | low | fixed | A hand-copied no-regression count drifted beside a sentence promising no drift |
 | [D-335](TUTORIAL.md) | 2026-08-25 | docs | bookkeeping | neutral | `review` | medium | fixed | The tutorial's moduli figure went unexplained and its axis collided with the text |
-| [D-336](frontier/frontier-evidence.schema.yaml) | 2026-08-25 | docs | bookkeeping | flattering | `review` | medium | fixed | Verified claims carried no provenance axis, blurring confirmations and new results |
+| [D-336](packing/frontier/frontier-evidence.schema.yaml) | 2026-08-25 | docs | bookkeeping | flattering | `review` | medium | fixed | Verified claims carried no provenance axis, blurring confirmations and new results |
 | [D-337](SYNOPSIS.md) | 2026-08-25 | docs | bookkeeping | neutral | `review` | medium | fixed | An upstream merge restored stale synopsis totals and an incorrect H-024 disposition |
 | [D-338](SYNOPSIS.md) | 2026-08-26 | docs | bookkeeping | neutral | `gate` | medium | fixed | The atlas handoff bypassed the declared SVG exposition gallery |
-| [D-339](src/sqpack/chunks.py) | 2026-08-26 | tooling | robustness | neutral | `gate` | high | fixed | The retained chunk census depended on platform libm rounding |
-| [D-340](src/sqpack/cli/validate.py) | 2026-08-26 | tooling | validity | flattering | `review` | critical | fixed | The Bash gate suppressed errexit inside multi-command steps |
-| [D-341](campaign/schemas/experiment.schema.yaml) | 2026-08-26 | tooling | validity | neutral | `review` | high | fixed | In-progress experiments were forced to invent scientific results |
-| [D-342](src/sqpack/campaign/ledger.py) | 2026-08-26 | tooling | robustness | neutral | `review` | high | fixed | Offset leases were compared after discarding their UTC offset |
-| [D-343](campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | 2026-08-27 | docs | soundness | neutral | `review` | medium | contained | Bui's replacement instruction omitted its finite upper index bound |
+| [D-339](packing/src/sqpack/chunks.py) | 2026-08-26 | tooling | robustness | neutral | `gate` | high | fixed | The retained chunk census depended on platform libm rounding |
+| [D-340](packing/src/sqpack/cli/validate.py) | 2026-08-26 | tooling | validity | flattering | `review` | critical | fixed | The Bash gate suppressed errexit inside multi-command steps |
+| [D-341](packing/campaign/schemas/experiment.schema.yaml) | 2026-08-26 | tooling | validity | neutral | `review` | high | fixed | In-progress experiments were forced to invent scientific results |
+| [D-342](packing/src/sqpack/campaign/ledger.py) | 2026-08-26 | tooling | robustness | neutral | `review` | high | fixed | Offset leases were compared after discarding their UTC offset |
+| [D-343](packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | 2026-08-27 | docs | soundness | neutral | `review` | medium | contained | Bui's replacement instruction omitted its finite upper index bound |
 | [D-344](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | 2026-08-27 | docs | soundness | flattering | `inspection` | high | contained | El Moumni's n=7 proof prints a negative segment length |
 | [D-345](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | 2026-08-27 | docs | soundness | flattering | `inspection` | high | contained | El Moumni's n=7 theorem drops Proposition 2's minimum branch |
 | [D-346](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | 2026-08-27 | docs | soundness | flattering | `inspection` | high | contained | El Moumni's Figure 4 chord line passes through the wrong square center |
 | [D-347](docs/project/research/research-2026-08-22-packing-11-unit-squares.md) | 2026-08-27 | docs | soundness | flattering | `inspection` | high | contained | El Moumni's Figure 4 diameter argument uses an undefined point i |
-| [D-348](src/sqpack/motion_lab/assets/free-quench.js) | 2026-08-26 | tooling | performance | neutral | `inspection` | medium | fixed | Raw quench traces expanded into thousands of timeline controls |
-| [D-349](src/sqpack/motion_lab/contracts.py) | 2026-08-28 | quench | bookkeeping | conservative | `review` | low | contained | An aborted free sweep drops its LP work from the run counter |
-| [D-350](src/sqpack/motion_lab/assets/free-quench.js) | 2026-08-28 | tooling | bookkeeping | neutral | `review` | medium | fixed | A rejected quench left the previous run's trace reachable from Download |
-| [D-351](devtools/serve_packing_motion_lab.py) | 2026-08-28 | tooling | bookkeeping | flattering | `review` | medium | fixed | The replay command promised byte fidelity and compared only semantics |
-| [D-352](src/sqpack/motion_lab/contracts.py) | 2026-08-28 | tooling | bookkeeping | neutral | `review` | medium | fixed | A timeline counter changed meaning on the last event of every trace |
-| [D-353](devtools/render_general_motion_lab.py) | 2026-08-28 | docs | bookkeeping | flattering | `review` | medium | fixed | The lab told users the optimizer receives a container side it never sees |
-| [D-354](frontier/square-packing-case.schema.yaml) | 2026-08-28 | record | soundness | conservative | `review` | high | fixed | The frontier encoded catalogue silence about rigidity as a false rigid flag |
-| [D-355](campaign/agendas/agenda-005-symbolic-promotion-and-identity.md) | 2026-08-28 | tooling | performance | neutral | `review` | high | outstanding | Verification runs the whole gate after every change, so cycle time is set by the slowest step rather than by the change |
+| [D-348](packing/src/sqpack/motion_lab/assets/free-quench.js) | 2026-08-26 | tooling | performance | neutral | `inspection` | medium | fixed | Raw quench traces expanded into thousands of timeline controls |
+| [D-349](packing/src/sqpack/motion_lab/contracts.py) | 2026-08-28 | quench | bookkeeping | conservative | `review` | low | contained | An aborted free sweep drops its LP work from the run counter |
+| [D-350](packing/src/sqpack/motion_lab/assets/free-quench.js) | 2026-08-28 | tooling | bookkeeping | neutral | `review` | medium | fixed | A rejected quench left the previous run's trace reachable from Download |
+| [D-351](packing/devtools/serve_packing_motion_lab.py) | 2026-08-28 | tooling | bookkeeping | flattering | `review` | medium | fixed | The replay command promised byte fidelity and compared only semantics |
+| [D-352](packing/src/sqpack/motion_lab/contracts.py) | 2026-08-28 | tooling | bookkeeping | neutral | `review` | medium | fixed | A timeline counter changed meaning on the last event of every trace |
+| [D-353](packing/devtools/render_general_motion_lab.py) | 2026-08-28 | docs | bookkeeping | flattering | `review` | medium | fixed | The lab told users the optimizer receives a container side it never sees |
+| [D-354](packing/frontier/square-packing-case.schema.yaml) | 2026-08-28 | record | soundness | conservative | `review` | high | fixed | The frontier encoded catalogue silence about rigidity as a false rigid flag |
+| [D-355](packing/campaign/agendas/agenda-005-symbolic-promotion-and-identity.md) | 2026-08-28 | tooling | performance | neutral | `review` | high | outstanding | Verification runs the whole gate after every change, so cycle time is set by the slowest step rather than by the change |
 
 <!-- This document follows common-doc-guidelines.md.
 See github.com/jlevy/practical-prose and review guidelines before editing.

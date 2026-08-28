@@ -11,7 +11,8 @@
 There is enough organized work for an autonomous **agent** to make useful progress for
 eight or twenty-four hours.
 There is not yet enough admissible, executable numerical work for
-[`packing-campaign`](../../../../src/sqpack/campaign/runner.py) to run unattended.
+[`packing-campaign`](../../../../packing/src/sqpack/campaign/runner.py) to run
+unattended.
 
 The distinction matters:
 
@@ -88,7 +89,7 @@ The campaign ledger owns cumulative round and effort totals.
 | Item | Current fact | Consequence |
 | --- | --- | --- |
 | Scientific registry | 41 artifacts: H-001 through H-041, including seven explicit open questions | The census spine now sits beside local geometry, construction, exact-value, algebraic and asymptotic lanes |
-| Recorded campaign | [Generated ledger](../../../../campaign/ledger.md#effort): 36 terminal rounds, 868 agent-minutes, 28.2 wall-minutes at this checkpoint | The loop remains overwhelmingly agent-bound |
+| Recorded campaign | [Generated ledger](../../../../packing/campaign/ledger.md#effort): 36 terminal rounds, 868 agent-minutes, 28.2 wall-minutes at this checkpoint | The loop remains overwhelmingly agent-bound |
 | Operational runner queue | one H-017 cell, five seeds, recipe timebox 8h | “Queue nonempty” is not an overnight-readiness test |
 | Estimated H-017 runtime | 2.80h at 39.7M moves/s locally; 7.46h at the recorded 14.9M moves/s cloud rate | Target-host calibration is mandatory |
 | Fast checks | status 0.22–0.24s; preflight 0.12s; ledger 0.23s; schemas 1.60s; engine selftest 1.43s | Orientation and focused feedback are already cheap |
@@ -103,7 +104,7 @@ rehearse crash persistence.
 ## Successive-`n` Confidence Ladder
 
 The active, mutable experiment order now lives in the
-[basin-map confidence ladder](../../../../campaign/agendas/agenda-001-basin-confidence-ladder.md).
+[basin-map confidence ladder](../../../../packing/campaign/agendas/agenda-001-basin-confidence-ladder.md).
 That soft-schema artifact is the handoff surface for one series of loops: every item
 states whether it is validating the tools, validating the measurement system, or asking
 a genuine research question; it also names the size, budget, entry condition, exit
@@ -229,11 +230,11 @@ fast-first promotion rules.
 
 | Order | Artifact | Question | Why now | Runnable? |
 | ---: | --- | --- | --- | --- |
-| 1 | [H-023](../../../../campaign/hypotheses/H-023-n5-terminal-connectivity.md) | Are the equal-side `n=5` candidates in one terminal family, and what valid-path bounds connect unequal levels? | Focused ambiguity at the first nontrivial census cell | No; full poses and local geometry study absent |
-| 2 | [H-021](../../../../campaign/hypotheses/H-021-endpoint-identifiability.md) | Can the classifier resolve at least 95% of endpoint support through `n=8`? | Measurement-system gate; failure redirects the program | No; classifier and controls absent |
-| 3 | [H-011](../../../../campaign/hypotheses/H-011-small-n-census.md) | Does unseen terminal-component mass fall below 0.05 by `n=8`? | Builds the atlas and tests whether census is viable | No; waits on identity, events and estimator |
-| 4 | [H-007](../../../../campaign/hypotheses/H-007-saturation-curves.md) | Do preregistered coverage estimates predict held-out discovery? | Makes negative search results quantitative | No; waits on H-011 data |
-| 5 | [H-012](../../../../campaign/hypotheses/H-012-record-basins-are-rare.md) | Is the record-to-modal attraction ratio below 0.1 under named `P/Q/E`? | Kills or supports the cartography premise directly | No; waits on H-011 plus `n=11` sampling |
+| 1 | [H-023](../../../../packing/campaign/hypotheses/H-023-n5-terminal-connectivity.md) | Are the equal-side `n=5` candidates in one terminal family, and what valid-path bounds connect unequal levels? | Focused ambiguity at the first nontrivial census cell | No; full poses and local geometry study absent |
+| 2 | [H-021](../../../../packing/campaign/hypotheses/H-021-endpoint-identifiability.md) | Can the classifier resolve at least 95% of endpoint support through `n=8`? | Measurement-system gate; failure redirects the program | No; classifier and controls absent |
+| 3 | [H-011](../../../../packing/campaign/hypotheses/H-011-small-n-census.md) | Does unseen terminal-component mass fall below 0.05 by `n=8`? | Builds the atlas and tests whether census is viable | No; waits on identity, events and estimator |
+| 4 | [H-007](../../../../packing/campaign/hypotheses/H-007-saturation-curves.md) | Do preregistered coverage estimates predict held-out discovery? | Makes negative search results quantitative | No; waits on H-011 data |
+| 5 | [H-012](../../../../packing/campaign/hypotheses/H-012-record-basins-are-rare.md) | Is the record-to-modal attraction ratio below 0.1 under named `P/Q/E`? | Kills or supports the cartography premise directly | No; waits on H-011 plus `n=11` sampling |
 
 H-009’s raw-to-canonical ratio and H-008’s stronger-verifier rejection rate are
 mandatory companion measurements.
@@ -244,16 +245,16 @@ not component identity or a rigidity certificate.
 
 | Priority | Artifact | Registered comparison | Gate or kill line |
 | ---: | --- | --- | --- |
-| 1 | [H-004](../../../../campaign/hypotheses/H-004-neighbor-transfer-seeding.md) | neighbor transfer versus cold starts at `n=11` | median best-side improvement at least 0.01; the old `n=12` side-4 target was vacuous |
-| 1 | [H-013](../../../../campaign/hypotheses/H-013-delta-continuation.md) | continuation versus direct starts, `n=10` before `n=11` | retire as a discovery method if it cannot win on the proved gate |
-| 1 | [H-001](../../../../campaign/hypotheses/H-001-angle-class-reduction.md) | angle-class proposer versus free-coordinate annealing | pass proved and oblique calibration before interpreting `n=11` |
-| 2 | [H-015](../../../../campaign/hypotheses/H-015-map-elites-illumination.md) | quality diversity versus matched restarts | at least 1.5× certified components per pair-test |
-| 2 | [H-005](../../../../campaign/hypotheses/H-005-m2-minus-3-construction.md) | analytic 3-4-5-tilt construction at `n=97` | analytic geometry first; no numerical rescue of a failed family |
-| 3 | [H-014](../../../../campaign/hypotheses/H-014-superdisk-continuation.md) | circle-to-square continuation versus direct square starts | last because it alone needs a new geometry model |
-| 1 | [H-030](../../../../campaign/hypotheses/H-030-public-parent-surgery.md) | held-out UnitSquare parent-to-child construction surgery | recover a hidden known child before any unseen-record budget |
-| 2 | [H-031](../../../../campaign/hypotheses/H-031-load-guided-block-moves.md) | LP-load-guided block moves versus coordinate-only moves | at least 2× valid target events per pair-test on paired controls |
-| 2 | [H-029](../../../../campaign/hypotheses/H-029-adaptive-splitting.md) | rare-event splitting versus independent restarts | pass exact synthetic coverage and an independent `n=10` reference before a new `n=11` cell |
-| 2 | [H-040](../../../../campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | adjacent-cell pivots versus random-coordinate multistart | at least 2× new verified cells per LP solve; cells are not components |
+| 1 | [H-004](../../../../packing/campaign/hypotheses/H-004-neighbor-transfer-seeding.md) | neighbor transfer versus cold starts at `n=11` | median best-side improvement at least 0.01; the old `n=12` side-4 target was vacuous |
+| 1 | [H-013](../../../../packing/campaign/hypotheses/H-013-delta-continuation.md) | continuation versus direct starts, `n=10` before `n=11` | retire as a discovery method if it cannot win on the proved gate |
+| 1 | [H-001](../../../../packing/campaign/hypotheses/H-001-angle-class-reduction.md) | angle-class proposer versus free-coordinate annealing | pass proved and oblique calibration before interpreting `n=11` |
+| 2 | [H-015](../../../../packing/campaign/hypotheses/H-015-map-elites-illumination.md) | quality diversity versus matched restarts | at least 1.5× certified components per pair-test |
+| 2 | [H-005](../../../../packing/campaign/hypotheses/H-005-m2-minus-3-construction.md) | analytic 3-4-5-tilt construction at `n=97` | analytic geometry first; no numerical rescue of a failed family |
+| 3 | [H-014](../../../../packing/campaign/hypotheses/H-014-superdisk-continuation.md) | circle-to-square continuation versus direct square starts | last because it alone needs a new geometry model |
+| 1 | [H-030](../../../../packing/campaign/hypotheses/H-030-public-parent-surgery.md) | held-out UnitSquare parent-to-child construction surgery | recover a hidden known child before any unseen-record budget |
+| 2 | [H-031](../../../../packing/campaign/hypotheses/H-031-load-guided-block-moves.md) | LP-load-guided block moves versus coordinate-only moves | at least 2× valid target events per pair-test on paired controls |
+| 2 | [H-029](../../../../packing/campaign/hypotheses/H-029-adaptive-splitting.md) | rare-event splitting versus independent restarts | pass exact synthetic coverage and an independent `n=10` reference before a new `n=11` cell |
+| 2 | [H-040](../../../../packing/campaign/hypotheses/H-040-active-cell-neighbor-walk.md) | adjacent-cell pivots versus random-coordinate multistart | at least 2× new verified cells per LP solve; cells are not components |
 
 H-024 separately tests the descriptive claim that verified record packings through
 `n=30` use at most three orientation classes.
@@ -270,15 +271,15 @@ be silently rerun as fresh hypotheses.
 
 | Priority | Artifact | Output | Boundary |
 | ---: | --- | --- | --- |
-| 1 | [H-010](../../../../campaign/hypotheses/H-010-stromquist-triple.md) / [H-041](../../../../campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **exp-016/017 complete:** exact rejection of the printed cover plus exact certification of a source-distinct one-coordinate repair | the published proof remains false as printed; only the repaired set proves the numerical inequality here |
-| 1 | [H-026](../../../../campaign/hypotheses/H-026-trump-first-order-rigidity.md) / [H-022](../../../../campaign/hypotheses/H-022-trump-local-geometry.md) | **exp-013 complete:** 128/128 exact zero-cone certificates and finite-branch local isolation; next quantify a radius | feature counts and a smooth Jacobian decided neither rigidity nor isolation |
-| 2 | [H-006](../../../../campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md) | quantitative, refinement-stable dual support for candidate loci | discretized LP generates proof objects; it proves no bound |
-| 1 | [H-039](../../../../campaign/hypotheses/H-039-s12-proof-frontier.md) | checked improvement to the `s(12)` lower bound | exp-016/017 are the calibrated failure and success gates for the forcing architecture |
-| 1 | [H-033](../../../../campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | extend Bentz’s `m²−3` method to `m=8` or retain its first blocking pose | the direct 2018 piercing bound is weaker than Nagamochi and does not settle `s(61)` |
-| 2 | [H-034](../../../../campaign/hypotheses/H-034-fractional-piercing-ceiling.md) | certified decision whether `τ*(U_s)>10` at Trump’s side | `>10` rules out ten points; `≤10` does not construct an integral set |
-| 2 | [H-036](../../../../campaign/hypotheses/H-036-robust-restricted-orientation.md) | extend Stromquist’s exact `0°/45°` exclusion to a fixed neighborhood | reproduce the exact theorem before interval enlargement |
-| 2 | [H-032](../../../../campaign/hypotheses/H-032-small-n-optimal-moduli.md) / [H-038](../../../../campaign/hypotheses/H-038-record-number-fields.md) | exp-014/015 solve the exact `n=3,4` quotient cells; next classify `n=5`, alongside exact-field taxonomy | keep the sub-second controls permanent; sampling cannot decide the `n=5` component relation |
-| 3 | [H-037](../../../../campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | narrow the `1/2` versus `3/5` exponent gap | separate paper-mathematics lane; finite diagnostics do not decide it |
+| 1 | [H-010](../../../../packing/campaign/hypotheses/H-010-stromquist-triple.md) / [H-041](../../../../packing/campaign/hypotheses/H-041-repaired-stromquist-point-set.md) | **exp-016/017 complete:** exact rejection of the printed cover plus exact certification of a source-distinct one-coordinate repair | the published proof remains false as printed; only the repaired set proves the numerical inequality here |
+| 1 | [H-026](../../../../packing/campaign/hypotheses/H-026-trump-first-order-rigidity.md) / [H-022](../../../../packing/campaign/hypotheses/H-022-trump-local-geometry.md) | **exp-013 complete:** 128/128 exact zero-cone certificates and finite-branch local isolation; next quantify a radius | feature counts and a smooth Jacobian decided neither rigidity nor isolation |
+| 2 | [H-006](../../../../packing/campaign/hypotheses/H-006-lp-dual-unavoidable-sets.md) | quantitative, refinement-stable dual support for candidate loci | discretized LP generates proof objects; it proves no bound |
+| 1 | [H-039](../../../../packing/campaign/hypotheses/H-039-s12-proof-frontier.md) | checked improvement to the `s(12)` lower bound | exp-016/017 are the calibrated failure and success gates for the forcing architecture |
+| 1 | [H-033](../../../../packing/campaign/hypotheses/H-033-m2-minus-3-at-n61.md) | extend Bentz’s `m²−3` method to `m=8` or retain its first blocking pose | the direct 2018 piercing bound is weaker than Nagamochi and does not settle `s(61)` |
+| 2 | [H-034](../../../../packing/campaign/hypotheses/H-034-fractional-piercing-ceiling.md) | certified decision whether `τ*(U_s)>10` at Trump’s side | `>10` rules out ten points; `≤10` does not construct an integral set |
+| 2 | [H-036](../../../../packing/campaign/hypotheses/H-036-robust-restricted-orientation.md) | extend Stromquist’s exact `0°/45°` exclusion to a fixed neighborhood | reproduce the exact theorem before interval enlargement |
+| 2 | [H-032](../../../../packing/campaign/hypotheses/H-032-small-n-optimal-moduli.md) / [H-038](../../../../packing/campaign/hypotheses/H-038-record-number-fields.md) | exp-014/015 solve the exact `n=3,4` quotient cells; next classify `n=5`, alongside exact-field taxonomy | keep the sub-second controls permanent; sampling cannot decide the `n=5` component relation |
+| 3 | [H-037](../../../../packing/campaign/hypotheses/H-037-asymptotic-waste-exponent.md) | narrow the `1/2` versus `3/5` exponent gap | separate paper-mathematics lane; finite diagnostics do not decide it |
 
 H-026 completed in exp-013, exp-014/015 completed H-032’s `n=3,4` controls, and
 exp-016/017 completed the printed-failure/repaired-success Stromquist calibration.
@@ -333,7 +334,7 @@ move forward. A routine W6 result whose preregistered guards and independent rep
 already decide its stated criterion need not open a ceremonial review phase.
 
 For the next supervised exact-research goal, use
-[session 035](../../../../campaign/agent-sessions/session-035-agenda005-block-a.md).
+[session 035](../../../../packing/campaign/agent-sessions/session-035-agenda005-block-a.md).
 Sessions 027 through 034 are terminal, and agenda-004 closed on measurement rather than
 opinion. Open BC-045 under `think-75ll` as the next bounded driver, built to
 [plan-2026-08-28-interval-certification](plan-2026-08-28-interval-certification.md):
@@ -353,7 +354,7 @@ The measured W5 inventory and the row-jet inventory reuse remain scheduled after
 driver; BC-016 stays blocked on its retained-pose, glued-row, tie-label, and
 receipt-checker prerequisites.
 The first-failure pipeline cell is complete, and the active two-session
-[balanced ten-hour agenda](../../../../campaign/agendas/agenda-003-balanced-ten-hour-research-program.md)
+[balanced ten-hour agenda](../../../../packing/campaign/agendas/agenda-003-balanced-ten-hour-research-program.md)
 retains its actual clocks and full five-hour midpoint review.
 The completed target-free path retains 11,013 exact size-five signed-contact orbits with
 independent Burnside and differential controls.

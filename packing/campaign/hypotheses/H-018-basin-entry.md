@@ -68,7 +68,7 @@ frequency across a declared landscape.
 This round attempted a cheaper inside-out diagnostic, but the completed evidence shows
 its finite-quench score did not measure a component radius.
 The
-[search-philosophy report](../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md#calibration-must-match-mechanism-not-just-difficulty)
+[search-philosophy report](../../../docs/project/research/research-2026-08-23-search-philosophy-and-landscape-cartography.md#calibration-must-match-mechanism-not-just-difficulty)
 lists basin-entry tests as one of three mechanism-matched calibration targets, alongside
 `s(17)` and inflated `n = 11` — none of which the current `n = 5` / `n = 10` ladder
 exercises, because both proved cases are 45° mechanisms.

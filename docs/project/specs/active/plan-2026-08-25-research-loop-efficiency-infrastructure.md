@@ -638,7 +638,7 @@ gap.
 
 - [Workflow contracts](../../../../SYNOPSIS.md#workflow-entry-contracts)
 
-- [Agent-session guide](../../../../campaign/agent-sessions/README.md)
+- [Agent-session guide](../../../../packing/campaign/agent-sessions/README.md)
 
 - [Prior engineering efficiency review](../../reviews/review-2026-08-23-engineering-loops-and-efficiency.md)
 

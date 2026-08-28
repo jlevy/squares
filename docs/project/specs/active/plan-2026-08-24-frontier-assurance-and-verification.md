@@ -101,10 +101,12 @@ The project already has the right broad architecture:
 - [`README.md`](../../../../README.md) is the compact operating charter and entry point;
 - [`SYNOPSIS.md`](../../../../SYNOPSIS.md) owns detailed current state, workflow
   contracts, terminology, and capability boundaries;
-- [`frontier/`](../../../../frontier/README.md) holds one structured case per `n`;
-- [`campaign/`](../../../../campaign/README.md) records hypotheses, experiments,
+- [`frontier/`](../../../../packing/frontier/README.md) holds one structured case per
+  `n`;
+- [`campaign/`](../../../../packing/campaign/README.md) records hypotheses, experiments,
   sessions, and generated views; and
-- [`resources/`](../../../../resources/README.md) retains the primary-source archive.
+- [`resources/`](../../../../packing/resources/README.md) retains the primary-source
+  archive.
 
 The current data model nevertheless collapses facts that need to remain separate.
 `SquarePackingCase/v1` has one `upper_bound`, a free-text `verified_here` list, and a
@@ -795,8 +797,8 @@ promotion while it is unresolved.
 - [Packing exploration README](../../../../README.md)
 - [Packing synopsis](../../../../SYNOPSIS.md)
 - [Packing conventions](../../../../conventions.md)
-- [Frontier map](../../../../frontier/README.md)
-- [Campaign runbook](../../../../campaign/README.md)
+- [Frontier map](../../../../packing/frontier/README.md)
+- [Campaign runbook](../../../../packing/campaign/README.md)
 - [Minimal packing toolkit plan](plan-2026-08-22-minimal-packing-toolkit.md)
 - [Unattended research readiness plan](plan-2026-08-23-overnight-cartography-run.md)
 - [Schadt `n = 29` repository](https://github.com/BalthasarStrauss/Squares-packing_S-29-_New-Record)

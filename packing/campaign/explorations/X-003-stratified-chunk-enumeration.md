@@ -52,7 +52,7 @@ The two most celebrated oblique records are instances.
 Trump’s `n = 11` packing decomposes as one corner square, one mirrored against the
 opposite side, one offset along the top, an L-shaped block of three, and a five-square
 group tilted as one rigid unit
-([the exact construction](../../docs/project/research/research-2026-08-22-packing-11-unit-squares.md#trumps-packing-1979-structure-and-exact-characterization)).
+([the exact construction](../../../docs/project/research/research-2026-08-22-packing-11-unit-squares.md#trumps-packing-1979-structure-and-exact-characterization)).
 Bidwell’s `n = 17` record is an aligned frame plus two tilted groups at `+39.80496°` and
 `-36.62379°`.
 
@@ -77,8 +77,8 @@ Bidwell’s `n = 17` record is an aligned frame plus two tilted groups at `+39.8
    Bidwell’s record is annotated as based on Hämäläinen’s 1980 packing.
    But Stromquist’s Theorem 3 proves no `0°/45°` packing reaches Trump’s side, so the
    `n = 11` “perturbation” crosses a proved structural boundary; and
-   [T-3](../../SYNOPSIS.md#the-corner-and-the-method-it-forced) shows the perturbation
-   endpoint is a nonsmooth corner, not a smooth critical point.
+   [T-3](../../../SYNOPSIS.md#the-corner-and-the-method-it-forced) shows the
+   perturbation endpoint is a nonsmooth corner, not a smooth critical point.
 4. **Perturbing a regular packing beats cold search.** Plausible and registered three
    ways ([H-004](../hypotheses/H-004-neighbor-transfer-seeding.md),
    [H-013](../hypotheses/H-013-delta-continuation.md),
@@ -111,7 +111,7 @@ tilt, and a contact hypothesis on the graph of chunks plus the four container wa
 Three facts from the built record make the division of labor exact:
 
 - **Slides are free.** At fixed angles the optimal placement is one LP solve at the
-  measured `1.28 ms` ([T-2](../../SYNOPSIS.md#the-cell-decomposition)); brickwork
+  measured `1.28 ms` ([T-2](../../../SYNOPSIS.md#the-cell-decomposition)); brickwork
   offsets and row compressions are outputs, not search dimensions, so stage 1 enumerates
   lattice skeletons only.
 - **The cell is the pairwise constraint.** A stratum compiles to a cell by realizing a
@@ -154,7 +154,7 @@ shared by the grid and the record cannot separate them.
   Bidwell’s `n = 17` figure, with the text ambiguous about cold versus seeded starts.
 - **Berthold, Kamp, Mexi, Pokutta, Pólik 2026** (SCIP 10 and FICO Xpress 9.8, recorded
   in
-  [the algorithms report](../../docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md#general-purpose-global-optimization)):
+  [the algorithms report](../../../docs/project/research/research-2026-08-22-square-packing-algorithms-and-tooling.md#general-purpose-global-optimization)):
   `3.87709` at `n = 11` from scratch on a 48-core budget; `4.00001` at `n = 16`, missing
   the trivial grid; `4.67682` at `n = 17`, short of Bidwell.
 - **This repository’s negatives**:
@@ -176,16 +176,16 @@ Completeness of the atlas is conditional: the grammar and every bound must be fi
 explicit, the label generator must have an omission control, and the symmetry quotient
 must have a coverage certificate.
 With those controls, the upper-bound lane can sidestep the terminal-component identity
-blocker ([D-034](../../defects.md)) rather than waiting on it, and the method prices
-itself in counted LP solves, the machine-independent work unit [D-126](../../defects.md)
-asks for.
+blocker ([D-034](../../../defects.md)) rather than waiting on it, and the method prices
+itself in counted LP solves, the machine-independent work unit
+[D-126](../../../defects.md) asks for.
 
 The certified upgrade is the interesting endgame: per-stratum optimization made rigorous
 (exact or interval LP over the cell, certified bracketing over the class angles) yields
 restricted-class optimality statements of the form “no packing expressible as `k`
 aligned chunks plus one rotating chunk beats Trump’s.” Stromquist’s Theorem 3 is the
 only existing theorem of that shape at `n = 11`; the prerequisite is the exact LP named
-as the general fix for [D-021](../../defects.md).
+as the general fix for [D-021](../../../defects.md).
 
 ## Registry Relations
 
@@ -195,9 +195,9 @@ the ansatz with no enumeration stage behind it; this design supplies that stage.
 be for the grammar to cover the record corpus, and
 [H-030](../hypotheses/H-030-public-parent-surgery.md) is the registered calibration for
 the insertion and surgery moves.
-[D-052](../../defects.md) (a stopped quench is not a certified optimum) and
-[D-059](../../defects.md) (degeneracy at symmetric angles) bound what stage-5 endpoints
-may claim.
+[D-052](../../../defects.md) (a stopped quench is not a certified optimum) and
+[D-059](../../../defects.md) (degeneracy at symmetric angles) bound what stage-5
+endpoints may claim.
 
 ## Hypotheses Codified From This Report
 

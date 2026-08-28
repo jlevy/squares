@@ -1128,7 +1128,7 @@ witness:
       not replay the source interval claim or prove optimality.
   source:
     key: UnitSquare public SOTA rendering
-    path: explorations/packing/resources/web/prospective-packings/unitsquare/n110.svg
+    path: packing/resources/web/prospective-packings/unitsquare/n110.svg
     url: https://www.hmbelvedere.com/packings/n110.svg
     retrieved: '2026-08-26'
     revision: upstream-declared parent-content SHA-256 a131538110d1b3970681936b339d4e3407ddbc1c35df98a6f034af20c6e10bfb
