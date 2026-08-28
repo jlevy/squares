@@ -218,6 +218,30 @@ controls:
   run: python3 -m sqpack.campaign.ledger check
   expect: "schema violation"
 
+- name: campaign - a phase serves a commitment that does not exist
+  file: campaign/agent-sessions/session-034-block3-guards-and-joins.md
+  replace: ["    commitment: BC-035", "    commitment: BC-999"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "serves unknown commitment BC-999"
+
+- name: campaign - the duplicated workflow enum drifts between schemas
+  file: campaign/schemas/agenda.schema.yaml
+  replace: ["              - general-improvement", "              - general-improvement\n              - invented-workflow"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "duplicated workflow enum has drifted"
+
+- name: campaign - a declared validation command that could never run
+  file: campaign/agent-sessions/session-028-bc032-n29-promotion-inventory.md
+  replace: ["packing-validate --list", "packing-validate --list-steps"]
+  run: python3 -m devtools.check_declared_commands
+  expect: "is not runnable"
+
+- name: campaign - one bead backs two simultaneously ready commitments
+  file: campaign/agendas/agenda-003-balanced-ten-hour-research-program.md
+  replace: ["  - id: BC-028\n    purpose: tool_validation\n    owner_focus: efficiency\n    instances: [5]\n    state: stopped", "  - id: BC-028\n    purpose: tool_validation\n    owner_focus: efficiency\n    instances: [5]\n    state: ready"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "backs more than one ready commitment"
+
 - name: campaign - enforced contract metadata disagrees with schema id
   file: campaign/agent-sessions/session-001-pr15-review-reset.md
   replace:

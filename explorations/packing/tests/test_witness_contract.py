@@ -105,7 +105,7 @@ def main() -> int:
 
     promoted_result, generated = promote_rational(
         decimal,
-        rational_digits=16,
+        rational_digits=36,
         max_side_increase="0.000001",
         source_path="witnesses/schadt-n029-2025-decimal.yaml",
         replay_path="witnesses/schadt-n029-2025-rational.yaml",

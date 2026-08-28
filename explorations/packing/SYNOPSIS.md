@@ -304,28 +304,49 @@ the remaining agenda-003 commitments on measurement, and
 re-glossed `BC` as *bounded commitment*, retiring a collision with the
 linear-programming sense of `cell`, and made the bead / commitment / phase layering
 explicit in the orientation docs.
-[Session 031](campaign/agent-sessions/session-031-merge-main-and-land-pr48.md) is the
-terminal successor: it merged main and found the merged tree failing two gate steps the
-pre-merge tree passed, because the atlas SVG work pushed the negative-control mutation
-snapshot past its size cap.
+[Session 031](campaign/agent-sessions/session-031-merge-main-and-land-pr48.md) merged
+main and found the merged tree failing two gate steps the pre-merge tree passed, because
+the atlas SVG work pushed the negative-control mutation snapshot past its size cap.
 That is fixed and pinned, and the gate is green on the merged revision.
+[Session 032](campaign/agent-sessions/session-032-block1-missing-mutations.md) closed
+agenda-004’s first block: twelve pre-certificate mutations are now enforced on twelve
+distinct failure identifiers, so exp-045’s admission gap is closed.
+[Session 033](campaign/agent-sessions/session-033-block2-run-exp045.md) ran exp-045
+itself, and
+[session 034](campaign/agent-sessions/session-034-block3-guards-and-joins.md) is the
+terminal successor: it closed `BC-035` and `BC-041`, adding four guards that did not
+exist, each verified to fire rather than merely to pass and each pinned by its own
+negative control. Negative controls rise from 76 to 80. The next bounded slice is
+`BC-038` under `think-kdil`, the row-jet inventory reuse, which exp-045’s terminal
+disposition unfroze.
+Both declared determinations report `criterion_met` — canonical pure `-W` is excluded at
+A, the interior, and B, and the `-W` coefficients equal the separately derived `+W`
+values — and record-and-replay agree.
+The round is recorded `unresolved` with `needs_review`, not accepted: an unattended
+runner may apply the accept rule only conservatively, and the sixth admission condition,
+an independent post-change audit, is outstanding.
+The next bounded slice is `BC-035` under `think-cja6`, the pipeline guard consolidation,
+because exp-045’s acceptance waits on a human and the mixed and transverse successor
+directions have no instrument.
+Exactly four distinct reachable failure modes existed, with no slack: a first inventory
+counted seven candidates by grepping raise sites, and tracing `proof_core`’s call graph
+cut that to three reachable identifiers across four conditions.
+The n=29 certificate was also regenerated at the tool’s default precision, closing a gap
+between the documented command and the recorded artifact.
 Q-BC032-a is answered: the `4.94e-11` relaxation is an artifact of the promotion route,
 not a property of the pose, and six independently verified promotions beat the recorded
 baseline. `BC-028`’s trigger passed, so its inventory-reuse implementation is ready but
 sequenced behind exp-045. The outstanding work is now carried by
 [agenda-004](campaign/agendas/agenda-004-guard-repair-and-instrument-unblock.md), which
 gives each remaining item its own workflow entry.
-The next bounded slice is `BC-036` under `think-oyn9`: exp-045 is blocked at execution
-admission because it declares twelve typed pre-certificate mutations while the
-instrument implements and enforces eight, and that gap must be closed by building the
-four missing controls rather than by amending the declared count downward.
 `BC-027` is complete.
-The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and `think-1s0h` is retained
-as a typed instrument blocker: exp-045 is preregistered and its scale, owner-4, and
-execution-scoped row-inventory controls are built, but no pure `-W` target or result
-exists. CG-010 is structurally complete under `BC-030`; BC-016 is blocked under
-`think-3yv8` on retained poses, an executable glued row, symbolic tie labels, and a
-receipt checker, while BC-017 under `think-u97a` remains the ready constructive W7 lane.
+The `n = 5` H-023 successor under `BC-029`, `think-whwc`, and `think-1s0h` is no longer
+an instrument blocker: exp-045 has run and is terminal at `unresolved` with
+`needs_review`, excluding canonical pure `-W` at all three strata while every
+connectivity, component, isolation and terminality claim stays refused.
+CG-010 is structurally complete under `BC-030`; BC-016 is blocked under `think-3yv8` on
+retained poses, an executable glued row, symbolic tie labels, and a receipt checker,
+while BC-017 under `think-u97a` remains the ready constructive W7 lane.
 
 All `n = 1..100` frontier entries now point to normalized witnesses and deterministic
 house renderings. The source-complete corpus is calibration evidence, not an unseen
@@ -546,8 +567,8 @@ The retained Schadt `n = 29` pose is the regression case.
 The source decimal geometry passes its declared 300-digit calculation at tolerance
 `1e-100`, with thirteen slightly negative best pair gaps hidden by that tolerance.
 Robust promotion produces a different, slightly relaxed rational packing at
-`296694289993118242899906513/50000000000000000000000000`, an increase of about
-`4.94e-11` in the container side.
+`2966942899906512939318226046481160904289990651293931822604648091421/500000000000000000000000000000000000000000000000000000000000000000`,
+an increase of about `4.93e-31` in the container side.
 The generic exact verifier and a small independent rational checker both accept all 29
 squares and 406 pairs.
 This formally proves the weaker upper bound; it does not verify the original decimal
@@ -1826,8 +1847,8 @@ Transverse and mixed nonlinear realization remains open.
 
 ## Experiments Conducted
 
-There are 45 terminal rounds registered in `series-000`. They record 1061 agent-minutes
-and 30.7 wall-minutes.
+There are 45 terminal rounds registered in `series-000`. They record 1106 agent-minutes
+and 30.8 wall-minutes.
 Their instruments are `sqsearch` 0.1.0 (the `f64` screening annealer), `sqpack.quench`
 (0.1.0 with angle descent and 0.2.0 with class bracketing), the high-precision Kingbird
 SVG reconstruction, the exact Trump linearized-cone checker, the exact small-moduli
@@ -1900,7 +1921,7 @@ archive beside it.
 | [exp-042](campaign/series/series-000-smoke-and-calibration/experiments/exp-042-h-023-n5-endpoint-aware-rotating-paths.md) | 5 | target | H-023 | endpoint-aware exact rotating paths | 6 paths; 6 stresses; 20 controls pass | **accepted** |
 | [exp-043](campaign/series/series-000-smoke-and-calibration/experiments/exp-043-h-023-n5-minus-w-obstruction.md) | 5 | target | H-023 | exact pure -W second-order test | five instrument blockers; no retained result | **unresolved** |
 | [exp-044](campaign/series/series-000-smoke-and-calibration/experiments/exp-044-h-023-n5-minus-w-row-jets.md) | 5 | target | H-023 | exact pure -W row-jet test | reviewed row builder; no retained target | **unresolved** |
-| [exp-045](campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | preregistered; target blocked by incomplete instrument | **in-progress** |
+| [exp-045](campaign/series/series-000-smoke-and-calibration/experiments/exp-045-h-023-n5-minus-w-scale-and-controls.md) | 5 | target | H-023 | exact pure -W scale and control test | pure -W excluded at A, interior and B; sign symmetry holds; awaiting independent audit and a human accept decision | **unresolved** |
 
 ### Cost and provenance
 
@@ -1950,11 +1971,11 @@ archive beside it.
 | exp-042 | one 30-minute correction, measurement, and review slice | 26.17 s | 28 m | criterion | `2980fdc` |
 | exp-043 | one 30-minute preregistration, implementation, and review slice | 3.071 s | 20 m | guard | — |
 | exp-044 | one 30-minute criterion, integration, and review slice | 100.41 s | 30 m | guard | `a5a4ef0` (row builder only) |
-| exp-045 | one 105-minute W3-W6-W7-W2-W3 ceiling | — | — | dependency | — |
+| exp-045 | one 105-minute W6 mini-cycle inside agenda-004 block two | 6.64 s | 45 m | criterion | `caffcc3` |
 
 ### What the 45 rounds jointly establish
 
-The 45 rounds use 1061 agent-minutes and 30.7 wall-minutes under the campaign’s retained
+The 45 rounds use 1106 agent-minutes and 30.8 wall-minutes under the campaign’s retained
 effort accounting.
 
 **The numerical basin event trust boundary now retains complete declared blocks through

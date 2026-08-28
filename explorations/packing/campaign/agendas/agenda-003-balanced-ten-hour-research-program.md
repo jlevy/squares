@@ -57,7 +57,7 @@ agenda:
     purpose: tool_validation
     owner_focus: efficiency
     instances: [5]
-    state: ready
+    state: stopped
     priority: 0
     question: >-
       Does repeated exact row-jet construction consume enough of the next scientific
@@ -77,6 +77,11 @@ agenda:
     bead: think-kdil
     depends_on: []
     next_evidence: >-
+      Superseded by agenda-004's BC-038, which carries the same bead and the same work on
+      a live agenda. Stopped here in session 034 so that one bead does not back two
+      simultaneously ready commitments, which is the ambiguity the new ready-uniqueness
+      invariant rejects. Nothing measured is retracted; the finding below stands and
+      BC-038 inherits it.
       Trigger measured and passed in session 029. `active_row_jets` holds 93.0 percent of
       the `exhaustive_exact` group's cumulative time; the dominant arm is
       `evaluate_stress` to `owner_row_jets` at 57.6 percent of the group; and the reuse

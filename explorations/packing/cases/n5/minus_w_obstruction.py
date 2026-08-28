@@ -41,6 +41,10 @@ CONTROL_KEYS = frozenset(
         "missing_interior_rejected",
         "realized_sheet_overclaim_rejected",
         "scope_overclaim_rejected",
+        "geometry_constant_drift_rejected",
+        "retained_correction_coordinate_rejected",
+        "scaled_farkas_identity_rejected",
+        "tilted_minus_w_rejected",
     }
 )
 REFUSED_CLAIMS = (
@@ -87,7 +91,7 @@ class ProofInvariantError(ValueError):
 
 @dataclass(frozen=True)
 class ProofInputs:
-    """Production inputs changed by the eight semantic mutations."""
+    """Production inputs changed by the twelve semantic mutations."""
 
     negate_centres: bool = True
     owners: tuple[str, ...] = OWNERS
@@ -97,6 +101,16 @@ class ProofInputs:
     strata: tuple[str, ...] = STRATA
     claim_sheet_obstructed: bool = False
     promoted_claim: str | None = None
+    # Reaches `source.geometry`: drifts one branch geometry constant.
+    geometry_separation_offset: int = 0
+    # Reaches `certificate.acceleration_correction`: scaling one weight leaves a
+    # correction coordinate in the Farkas combination.
+    scale_single_weight: bool = False
+    # Reaches `certificate.acceleration_farkas`: scaling every weight preserves the zero
+    # pose sum by linearity but moves the side coefficient off the exact alpha.
+    weight_scale_offset: int = 0
+    # Reaches `source.first_order`: tilts -W so a source row stays active.
+    tilt_direction: bool = False
 
 
 def require_dict(value: object, label: str) -> dict[str, object]:
@@ -177,6 +191,11 @@ def selected_rows(
         )
         rows.pop(index)
         weights.pop(index)
+    if inputs.scale_single_weight:
+        weights[0] = weights[0] * q(2)
+    if inputs.weight_scale_offset:
+        factor = q(1) + q(inputs.weight_scale_offset)
+        weights = [weight * factor for weight in weights]
     tied_count = sum(row.label.startswith("contact:3-4:") for row in rows)
     if len(rows) != 9 or tied_count != 2:
         raise ProofInvariantError(
@@ -204,7 +223,7 @@ def acceleration_eliminator(
     ]
     if any(not value.is_zero() for value in pose_sum):
         raise ProofInvariantError(
-            "certificate.acceleration_elimination",
+            "certificate.acceleration_correction",
             "the source-row Farkas combination retains a correction coordinate",
         )
     side_coefficient = sum(
@@ -217,7 +236,7 @@ def acceleration_eliminator(
     )
     if side_coefficient != r or any(weight.sign() <= 0 for weight in weights):
         raise ProofInvariantError(
-            "certificate.acceleration_elimination", "the exact positive Farkas identity drifted"
+            "certificate.acceleration_farkas", "the exact positive Farkas identity drifted"
         )
     return {
         "row_labels": [row.label for row in rows],
@@ -229,7 +248,7 @@ def acceleration_eliminator(
 
 
 def geometry_constants(
-    field: NumberField, stratum: str
+    field: NumberField, stratum: str, inputs: ProofInputs
 ) -> tuple[FieldElement, FieldElement, FieldElement]:
     q = field.rational
     r = field.alpha
@@ -241,6 +260,8 @@ def geometry_constants(
     displacement_34 = (p4[0] - p3[0], p4[1] - p3[1])
     transverse = tangent_cones.dot2(displacement_24, perpendicular)
     separation_34 = tangent_cones.dot2(displacement_34, a)
+    if inputs.geometry_separation_offset:
+        separation_34 = separation_34 + q(inputs.geometry_separation_offset)
     cusp = q(1) / 2 - tangent_cones.abs_exact(transverse)
     if separation_34 != -q(1) or cusp.sign() <= 0:
         raise ProofInvariantError("source.geometry", "a branch geometry constant drifted")
@@ -263,7 +284,7 @@ def evaluate_necessary_inequality(
     if any(not tangent_cones.exact_dot(row, direction, field).is_zero() for row in rows):
         raise ProofInvariantError("source.first_order", "the requested direction is not tight")
     eliminator = acceleration_eliminator(field, rows, weights)
-    transverse, _separation_34, cusp = geometry_constants(field, stratum)
+    transverse, _separation_34, cusp = geometry_constants(field, stratum, inputs)
     speed3 = direction[tangent_cones.theta(3)]
     speed4 = direction[tangent_cones.theta(4)]
     width3 = -r * speed3 * speed3 / 2
@@ -330,6 +351,9 @@ def minus_w_cases(field: NumberField, inputs: ProofInputs) -> list[dict[str, obj
     cases: list[dict[str, object]] = []
     for stratum in inputs.strata:
         stored, direction = minus_w_direction(field, stratum, inputs)
+        if inputs.tilt_direction:
+            direction = list(direction)
+            direction[0] = direction[0] + field.rational(1)
         for owner in inputs.owners:
             all_rows = tangent_inventory.matrix(field, stratum, owner)
             if any(
@@ -519,9 +543,22 @@ def controls(field: NumberField) -> dict[str, dict[str, object]]:
             "control.realized_direction",
         ),
         "scope_overclaim_rejected": (replace(base, promoted_claim="mixed"), "scope.overclaim"),
+        "geometry_constant_drift_rejected": (
+            replace(base, geometry_separation_offset=1),
+            "source.geometry",
+        ),
+        "retained_correction_coordinate_rejected": (
+            replace(base, scale_single_weight=True),
+            "certificate.acceleration_correction",
+        ),
+        "scaled_farkas_identity_rejected": (
+            replace(base, weight_scale_offset=1),
+            "certificate.acceleration_farkas",
+        ),
+        "tilted_minus_w_rejected": (replace(base, tilt_direction=True), "source.first_order"),
     }
-    if set(mutations) != CONTROL_KEYS or len(mutations) != 8:
-        raise ProofInvariantError("control.keys", "the exact eight-key control set drifted")
+    if set(mutations) != CONTROL_KEYS or len(mutations) != 12:
+        raise ProofInvariantError("control.keys", "the exact twelve-key control set drifted")
     records = {
         name: mutation_record(field, mutation, expected)
         for name, (mutation, expected) in mutations.items()
@@ -590,7 +627,11 @@ def main() -> int:
                 raise ProofInvariantError(
                     "replay.drift", "retained result differs from regeneration"
                 )
-        print(json.dumps({"status": "PASS", "cases": 6, "controls": 8}))
+        summary_cases = require_dict(result["certificate"], "certificate")["case_count"]
+        summary_controls = len(require_dict(result["controls"], "controls"))
+        print(
+            json.dumps({"status": "PASS", "cases": summary_cases, "controls": summary_controls})
+        )
     except (OSError, TypeError, ValueError, json.JSONDecodeError) as error:
         print(f"FAIL: {error}", file=sys.stderr)
         return 1

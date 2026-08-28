@@ -53,12 +53,27 @@ experiment:
       coverage. Preserve a typed dependency blocker rather than create target data from
       an incomplete instrument.
     record: campaign/series/series-000-smoke-and-calibration/results/exp-045-h-023-n5-minus-w-scale-and-controls.json
-  lease:
-    expires: '2026-08-27T17:39:46-07:00'
-    host: codex/packing-ten-hour-research-agenda
-  results: []
+  effort:
+    timebox: one 105-minute W6 mini-cycle inside agenda-004 block two
+    wall_seconds: 6.64
+    agent_minutes: 45
+    stopped_by: criterion
+  results:
+  - shape: determination
+    question: >-
+      Is canonical pure -W excluded at A, the interior, and B through the accepted
+      production rows and both frozen pair-(3,4) owner models?
+    role: outcome
+    outcome: criterion_met
+  - shape: determination
+    question: >-
+      Do the -W coefficients equal the separately derived +W values, so the sign symmetry
+      holds through the same production builder?
+    role: guard
+    outcome: criterion_met
   verdict:
-    decision: in-progress
+    decision: unresolved
+    needs_review: true
     primary_criterion: >-
       report criterion_met only when every owner-4 case and all fifteen owner-3 scale
       records yield strict exact contradictions after the complete instrument passes;
@@ -68,11 +83,17 @@ experiment:
       undecided; and report invalid with no scientific disposition when a source, row,
       witness, mutation, control, or replay guard fails
     reason: >-
-      The criterion was frozen before scale implementation or target work. The accepted
-      row, stress, sheet, owner-3 scale, and owner-4 proof-data helpers now exist, but
-      actual target-route premise binding, the replacement driver, unified controls,
-      twelve production mutation paths, thirteen refusal records, replay, and final
-      post-change review remain incomplete.
+      The instrument is now complete and the round executed. Twelve production mutation
+      paths, thirteen refusal records, six cases, and deterministic record-and-replay
+      agreement all hold, and both declared determinations report criterion_met: canonical
+      pure -W is excluded at A, the interior, and B, and the -W coefficients equal the
+      separately derived +W values. This is recorded `unresolved` with `needs_review`
+      rather than accepted, because an unattended runner may apply the accept rule only in
+      the conservative direction, and because the sixth admission condition, an
+      independent post-change audit of the complete instrument, has not been performed.
+      Every broader claim remains refused: no whole-component identity, no A-to-B
+      stationary connection, no local isolation, no terminality, and no H-023 disposition
+      beyond the excluded direction.
 ---
 # exp-045 — Exact Pure -W Scale and Controls
 

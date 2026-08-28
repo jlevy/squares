@@ -401,5 +401,5 @@ evidence:
     certificate: witnesses/schadt-n029-2025-rational.yaml
     replay: uv run --frozen python -m devtools.check_rational_witness_independent witnesses/schadt-n029-2025-rational.yaml
     replay_status: passed
-    limitations: Proves a rational construction at a side about 4.94e-11 larger than the source decimal; it does not certify the source pose exactly or prove optimality.
+    limitations: Proves a rational construction at a side about 4.93e-31 larger than the source decimal; it does not certify the source pose exactly or prove optimality.
     source_reviewed: '2026-08-25'
