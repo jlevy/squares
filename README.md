@@ -1,15 +1,9 @@
 # Square Packing
 
-`s(n)` is the side of the smallest square that holds `n` non-overlapping unit squares.
-The question is elementary to state and stubbornly open: at `n = 11` the best known
-packing dates from 1979, and roughly `0.088` in side length still separates it from the
-best proved lower bound.
-
 This repository aims to be the most comprehensive research resource on square packing
 assembled anywhere: the primary literature readable offline, a per-case record of what
 is actually known for every `n`, code that searches for packings and certifies them
 exactly, and the full experimental history of running it.
-Every claim carries the evidence that earns it, and says which kind of evidence that is.
 
 [![One hundred known-best square packings arranged from n equals one through one hundred.](explorations/packing/atlas/known-best/known-best-1-100.png)](explorations/packing/atlas/known-best/known-best-1-100.svg)
 
@@ -19,6 +13,13 @@ Badges mark the 35 side lengths proved optimal, and whether a side length is pin
 exactly by a radical or minimal polynomial or is so far known only numerically.
 Select the image for the zoomable SVG, or take the
 [print-ready PDF](explorations/packing/atlas/known-best/known-best-1-100.pdf).*
+
+`s(n)` is the side of the smallest square that holds `n` non-overlapping unit squares.
+The question is elementary to state and stubbornly open: at `n = 11` the best known
+packing dates from 1979, and roughly `0.088` in side length still separates it from the
+best proved lower bound.
+Every claim here carries the evidence that earns it, and says which kind of evidence
+that is.
 
 ## What Is Here
 
