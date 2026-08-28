@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:sqpack="https://github.com/jlevy/thinking-scratchpad/ns/sqpack/v1" width="2400" height="2676" viewBox="0 0 2400 2676" role="img" aria-labelledby="figure-title figure-description">
-  <title id="figure-title">Known-best packings of one through one hundred unit squares</title>
-  <desc id="figure-description">A ten-by-ten atlas of the retained known-best unit-square packings for n equals 1 through 100. Each tile is normalized to its own container and labeled with n and the best known upper bound on the container side. Badges mark which side lengths are proved optimal, and whether a side length is pinned exactly by a radical or a minimal polynomial rather than only by a decimal.</desc>
+  <title id="figure-title">Best known packings of one through one hundred unit squares</title>
+  <desc id="figure-description">A ten-by-ten atlas of the retained best known unit-square packings for n equals 1 through 100. Each tile is normalized to its own container and labeled with n and the best known upper bound on the container side. Badges mark which side lengths are proved optimal, and whether a side length is pinned exactly by a radical or a minimal polynomial rather than only by a decimal.</desc>
   <metadata>
     <sqpack:profile version="7">
       <sqpack:coordinates>mathematical-y-up; svg-y-down</sqpack:coordinates>
@@ -22,7 +22,7 @@
     </sqpack:profile>
   </metadata>
   <rect width="2400" height="2676" fill="#ffffff" />
-  <text x="1200" y="76" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="48" font-weight="700" letter-spacing="1.5" fill="#17202a">100 KNOWN-BEST SQUARE PACKINGS</text>
+  <text x="1200" y="76" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="48" font-weight="700" letter-spacing="1.5" fill="#17202a">100 BEST KNOWN SQUARE PACKINGS</text>
   <text data-feature="repository" x="1200" y="126" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#5c6673">github.com/jlevy/squares</text>
   <g data-feature="evidence-legend">
     <rect data-feature="evidence-badge" data-evidence="proved optimal" x="680.5815" y="2525" width="19" height="19" rx="4.5" fill="#5c6673" stroke="none" stroke-width="1.2" />

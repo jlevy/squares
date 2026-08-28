@@ -942,9 +942,9 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
     )
     append_title_desc(
         root,
-        "Known-best packings of one through one hundred unit squares",
+        "Best known packings of one through one hundred unit squares",
         (
-            "A ten-by-ten atlas of the retained known-best unit-square packings for "
+            "A ten-by-ten atlas of the retained best known unit-square packings for "
             "n equals 1 through 100. Each tile is normalized to its own container and "
             "labeled with n and the best known upper bound on the container side. Badges "
             "mark which side lengths are proved optimal, and whether a side length is "
@@ -994,7 +994,7 @@ def render_known_best_summary_svg(built: list[BuiltCase]) -> str:
             "letter-spacing": "1.5",
             "fill": PAPER_THEME.ink,
         },
-    ).text = "100 KNOWN-BEST SQUARE PACKINGS"
+    ).text = "100 BEST KNOWN SQUARE PACKINGS"
     sub(
         root,
         "text",
