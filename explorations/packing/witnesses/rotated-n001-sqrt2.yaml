@@ -22,7 +22,7 @@ witness:
       center: [['0', '1/2'], ['0', '1/2']]
       basis: [['0', '1/2'], ['0', '1/2']]
   claim:
-    assurance: verified
+    coordinate_provenance: verified
     method: exact-algebraic
     limitations: Establishes one exact rotated feasible witness, not an optimality result.
   certificate:

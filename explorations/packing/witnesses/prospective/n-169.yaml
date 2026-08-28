@@ -1707,7 +1707,7 @@ witness:
     - - '12'
       - '13'
   claim:
-    assurance: verified
+    coordinate_provenance: verified
     method: exact-algebraic
     limitations: Exactly verifies this canonical no-tilt construction. The source catalogue reports it
       as best known, but this witness does not prove global optimality, uniqueness, or the catalogue claim.

@@ -707,7 +707,7 @@ witness:
     - - '7.827205504157537206380086602030852655086301168412516984'
       - '8.82720541954386557872147416681192957503794551874685169'
   claim:
-    assurance: numerically-checked
+    coordinate_provenance: numerically-checked
     method: numerical-multiprecision
     precision:
       decimal_digits: 120
@@ -729,7 +729,7 @@ witness:
     result:
       operation: check
       id: W-known-best-n069
-      assurance: numerically-checked
+      coordinate_provenance: numerically-checked
       method: numerical-multiprecision
       precision:
         decimal_digits: 120

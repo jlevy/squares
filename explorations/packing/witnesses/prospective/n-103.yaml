@@ -1047,7 +1047,7 @@ witness:
     - - '10.703790208835895013663011'
       - '10.703790208835895013663011'
   claim:
-    assurance: numerically-checked
+    coordinate_provenance: numerically-checked
     method: numerical-multiprecision
     precision:
       decimal_digits: 120
@@ -1069,7 +1069,7 @@ witness:
     result:
       operation: check
       id: W-prospective-source-n103
-      assurance: numerically-checked
+      coordinate_provenance: numerically-checked
       method: numerical-multiprecision
       precision:
         decimal_digits: 120

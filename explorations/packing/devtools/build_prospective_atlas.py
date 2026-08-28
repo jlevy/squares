@@ -283,7 +283,7 @@ def _manifest_entry(entry: dict, witness: dict) -> dict:
         },
         "source": source,
         "witness": {
-            "assurance": claim["assurance"],
+            "coordinate_provenance": claim["coordinate_provenance"],
             "id": witness["id"],
             "method": claim["method"],
             "path": f"witnesses/prospective/n-{n:03d}.yaml",

@@ -17,7 +17,7 @@
           "url": "https://www.hmbelvedere.com/packings/n103.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-prospective-source-n103",
           "method": "numerical-multiprecision",
           "path": "witnesses/prospective/n-103.yaml",
@@ -39,7 +39,7 @@
           "url": "https://www.hmbelvedere.com/packings/n105.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-prospective-source-n105",
           "method": "numerical-multiprecision",
           "path": "witnesses/prospective/n-105.yaml",
@@ -61,7 +61,7 @@
           "url": "https://www.hmbelvedere.com/packings/n110.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-prospective-source-n110",
           "method": "numerical-multiprecision",
           "path": "witnesses/prospective/n-110.yaml",
@@ -81,7 +81,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n111",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-111.yaml"
@@ -100,7 +100,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n112",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-112.yaml"
@@ -119,7 +119,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n113",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-113.yaml"
@@ -138,7 +138,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n114",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-114.yaml"
@@ -157,7 +157,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n115",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-115.yaml"
@@ -176,7 +176,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n116",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-116.yaml"
@@ -195,7 +195,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n117",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-117.yaml"
@@ -214,7 +214,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n118",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-118.yaml"
@@ -233,7 +233,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n121",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-121.yaml"
@@ -254,7 +254,7 @@
           "url": "https://www.hmbelvedere.com/packings/n131.svg"
         },
         "witness": {
-          "assurance": "numerically-checked",
+          "coordinate_provenance": "numerically-checked",
           "id": "W-prospective-source-n131",
           "method": "numerical-multiprecision",
           "path": "witnesses/prospective/n-131.yaml",
@@ -274,7 +274,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n133",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-133.yaml"
@@ -293,7 +293,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n134",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-134.yaml"
@@ -312,7 +312,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n135",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-135.yaml"
@@ -331,7 +331,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n136",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-136.yaml"
@@ -350,7 +350,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n137",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-137.yaml"
@@ -369,7 +369,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n138",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-138.yaml"
@@ -388,7 +388,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n139",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-139.yaml"
@@ -407,7 +407,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n140",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-140.yaml"
@@ -426,7 +426,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n141",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-141.yaml"
@@ -445,7 +445,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n144",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-144.yaml"
@@ -464,7 +464,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n157",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-157.yaml"
@@ -483,7 +483,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n158",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-158.yaml"
@@ -502,7 +502,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n159",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-159.yaml"
@@ -521,7 +521,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n160",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-160.yaml"
@@ -540,7 +540,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n161",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-161.yaml"
@@ -559,7 +559,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n162",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-162.yaml"
@@ -578,7 +578,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n163",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-163.yaml"
@@ -597,7 +597,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n164",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-164.yaml"
@@ -616,7 +616,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n165",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-165.yaml"
@@ -635,7 +635,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n166",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-166.yaml"
@@ -654,7 +654,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n169",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-169.yaml"
@@ -673,7 +673,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n183",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-183.yaml"
@@ -692,7 +692,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n184",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-184.yaml"
@@ -711,7 +711,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n185",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-185.yaml"
@@ -730,7 +730,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n186",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-186.yaml"
@@ -749,7 +749,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n187",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-187.yaml"
@@ -768,7 +768,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n188",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-188.yaml"
@@ -787,7 +787,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n189",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-189.yaml"
@@ -806,7 +806,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n190",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-190.yaml"
@@ -825,7 +825,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n191",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-191.yaml"
@@ -844,7 +844,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n192",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-192.yaml"
@@ -863,7 +863,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n193",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-193.yaml"
@@ -882,7 +882,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n196",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-196.yaml"
@@ -901,7 +901,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n211",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-211.yaml"
@@ -920,7 +920,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n212",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-212.yaml"
@@ -939,7 +939,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n213",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-213.yaml"
@@ -958,7 +958,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n214",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-214.yaml"
@@ -977,7 +977,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n215",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-215.yaml"
@@ -996,7 +996,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n216",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-216.yaml"
@@ -1015,7 +1015,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n217",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-217.yaml"
@@ -1034,7 +1034,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n218",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-218.yaml"
@@ -1053,7 +1053,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n219",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-219.yaml"
@@ -1072,7 +1072,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n220",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-220.yaml"
@@ -1091,7 +1091,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n221",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-221.yaml"
@@ -1110,7 +1110,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n222",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-222.yaml"
@@ -1129,7 +1129,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n225",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-225.yaml"
@@ -1148,7 +1148,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n242",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-242.yaml"
@@ -1167,7 +1167,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n243",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-243.yaml"
@@ -1186,7 +1186,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n244",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-244.yaml"
@@ -1205,7 +1205,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n245",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-245.yaml"
@@ -1224,7 +1224,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n246",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-246.yaml"
@@ -1243,7 +1243,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n247",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-247.yaml"
@@ -1262,7 +1262,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n248",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-248.yaml"
@@ -1281,7 +1281,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n249",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-249.yaml"
@@ -1300,7 +1300,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n250",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-250.yaml"
@@ -1319,7 +1319,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n251",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-251.yaml"
@@ -1338,7 +1338,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n252",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-252.yaml"
@@ -1357,7 +1357,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n253",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-253.yaml"
@@ -1376,7 +1376,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n256",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-256.yaml"
@@ -1395,7 +1395,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n274",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-274.yaml"
@@ -1414,7 +1414,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n275",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-275.yaml"
@@ -1433,7 +1433,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n276",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-276.yaml"
@@ -1452,7 +1452,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n277",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-277.yaml"
@@ -1471,7 +1471,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n278",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-278.yaml"
@@ -1490,7 +1490,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n279",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-279.yaml"
@@ -1509,7 +1509,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n280",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-280.yaml"
@@ -1528,7 +1528,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n281",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-281.yaml"
@@ -1547,7 +1547,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n282",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-282.yaml"
@@ -1566,7 +1566,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n283",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-283.yaml"
@@ -1585,7 +1585,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n284",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-284.yaml"
@@ -1604,7 +1604,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n285",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-285.yaml"
@@ -1623,7 +1623,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n286",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-286.yaml"
@@ -1642,7 +1642,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n289",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-289.yaml"
@@ -1661,7 +1661,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n308",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-308.yaml"
@@ -1680,7 +1680,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n309",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-309.yaml"
@@ -1699,7 +1699,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n310",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-310.yaml"
@@ -1718,7 +1718,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n311",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-311.yaml"
@@ -1737,7 +1737,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n312",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-312.yaml"
@@ -1756,7 +1756,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n313",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-313.yaml"
@@ -1775,7 +1775,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n314",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-314.yaml"
@@ -1794,7 +1794,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n315",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-315.yaml"
@@ -1813,7 +1813,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n316",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-316.yaml"
@@ -1832,7 +1832,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n317",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-317.yaml"
@@ -1851,7 +1851,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n318",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-318.yaml"
@@ -1870,7 +1870,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n319",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-319.yaml"
@@ -1889,7 +1889,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n320",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-320.yaml"
@@ -1908,7 +1908,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n321",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-321.yaml"
@@ -1927,7 +1927,7 @@
           "source_key": "catalogue-trivial-grid-rule"
         },
         "witness": {
-          "assurance": "verified",
+          "coordinate_provenance": "verified",
           "id": "W-prospective-source-n324",
           "method": "exact-algebraic",
           "path": "witnesses/prospective/n-324.yaml"

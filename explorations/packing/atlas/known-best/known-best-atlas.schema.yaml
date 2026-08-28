@@ -78,11 +78,16 @@ properties:
         witness:
           type: object
           additionalProperties: false
-          required: [id, path, assurance, method]
+          required: [id, path, coordinate_provenance, method]
           properties:
             id: {type: string, pattern: '^W-known-best-n[0-9]{3}$'}
             path: {type: string, pattern: '^witnesses/known-best/n-[0-9]{3}\.yaml$'}
-            assurance: {enum: [numerically-checked, verified]}
+            coordinate_provenance:
+              enum: [numerically-checked, verified]
+              description: >-
+                Mirrors the witness claim field of the same name: how this record's
+                coordinates were established, never the standing of s(n). Optimality
+                and exactness live in frontier/n-NNN.md.
             method: {enum: [numerical-multiprecision, exact-algebraic]}
             tolerance: {type: string, minLength: 1}
         rendering:

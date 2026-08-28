@@ -64,11 +64,12 @@ The figure reports **what is known about the packing**, never **how this reposit
 happens to store it**.
 
 That distinction was learned the hard way.
-`claim.assurance` in the witness files names the provenance of one record’s coordinates,
-not the standing of the mathematics.
-An earlier cut of this figure read it as the latter and badged `n = 5` — proved optimal,
-side `2 + √2/2` — as “numerically verified”, because that witness stores decimals.
-Anything sourced from the witness layer is about our records.
+`claim.coordinate_provenance` in the witness files — named `claim.assurance` until this
+defect was fixed — names the provenance of one record’s coordinates, not the standing of
+the mathematics.
+An earlier cut of this figure read it as the latter and badged `n = 5` —
+proved optimal, side `2 + √2/2` — as “numerically verified”, because that witness stores
+decimals. Anything sourced from the witness layer is about our records.
 Facts about the mathematics live in `frontier/n-NNN.md`.
 
 ## Field by field

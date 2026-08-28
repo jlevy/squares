@@ -647,7 +647,7 @@ witness:
     - - '6'
       - '8'
   claim:
-    assurance: verified
+    coordinate_provenance: verified
     method: exact-algebraic
     limitations: Verifies this known-best upper-bound construction, not uniqueness; optimality comes only
       from the separately cited frontier lower bound.

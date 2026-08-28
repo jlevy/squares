@@ -577,7 +577,7 @@ def run_geometry_controls() -> dict[str, bool]:
         "evidence_tokens_are_distinct": len(
             {evidence_style(tier) for tier in type(start.evidence)}
         )
-        == 4,
+        == 3,
         "decimal_source_round_trips": source_x in exact_text,
         "exact_contact_comments_round_trip": "<!--contact-pair-" in exact_contact_text
         and " to (" in exact_contact_text,
