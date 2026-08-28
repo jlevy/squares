@@ -29,11 +29,11 @@ make format          # format all Markdown
 make format-check    # report drift without writing
 ```
 
-Packing-specific Python, Rust, and research validation is documented in
+Python, Rust, and research validation are documented in
 [`development.md`](development.md).
-From that directory, use
-`uv run --frozen --all-extras --group dev packing-validate --fast` while editing and the
-full `packing-validate` command at a research or merge checkpoint.
+Run them from `packing/`, which is where the project’s `pyproject.toml` and lockfile
+live: `uv run --frozen --all-extras --group dev packing-validate --fast` while editing,
+and the full `packing-validate` at a research or merge checkpoint.
 
 ### Markdown formatting
 
@@ -78,25 +78,43 @@ Emergency bypass: `git commit --no-verify` (avoid in PRs).
 
 ## Architecture Overview
 
-All content lives in one self-contained project directory, [`packing/`](README.md).
-It owns *everything* for its topic: its own reports under `docs/project/research/`, its
-own literature archive under `resources/`, and its own code and tests.
-That directory is the pattern any future exploration should follow.
+The repository is split by audience rather than by topic.
 
-This repository used to carry standalone research reports at the top level as well,
-under `docs/project/research/`. Those moved to
-[jlevy/thinking](https://github.com/jlevy/thinking), with their history, when this
-repository became dedicated to square packing.
-Do not reintroduce a top-level `docs/` tree for reports; a line of work that needs its
-own sources and code gets its own exploration directory, and one that does not belongs
-in the other repository.
+**The root holds what a reader wants**, where it is visible on arrival:
+[`README.md`](README.md) as the front door, then [`TUTORIAL.md`](TUTORIAL.md),
+[`SYNOPSIS.md`](SYNOPSIS.md), [`conventions.md`](conventions.md),
+[`development.md`](development.md), the generated [`defects.md`](defects.md), and
+`docs/project/` for reports, reviews, specs and postmortems.
+
+**[`packing/`](packing/) holds everything that is code, data, or research record**: the
+`sqpack` package and its tests, the developer tools, the Rust search engine, the
+literature archive, the frontier register, the atlas, the witnesses, and the campaign.
+Keeping that one level down is what stops the root from becoming unreadable, and it is
+also the build root — `pyproject.toml`, `uv.lock` and `.python-version` live there.
+
+Two rules follow from the split, and both exist because a path now has two plausible
+meanings:
+
+- **Every declared path in the record is repository-relative.** That covers
+  `recorded_in` in `packing/defects.yaml`, the document map, the logbook’s
+  pipeline-change paths, and the verified-upper-bound consumer contract.
+  One root, one meaning, and a path that reads the same wherever it appears.
+  A packing-relative path in any of those places is a bug.
+- **Python path constants name which root they mean.** `ROOT` (also `PROJECT_ROOT`,
+  `PACKING`) is `packing/`; `REPO` is the repository root.
+  A constant pointing at a document that lives at the root resolves from `REPO`.
+  `sqpack` itself finds the project by marker discovery rather than a fixed depth, so it
+  does not care where the checkout sits.
+
+The standalone research reports this repository once carried, on topics unrelated to
+packing, live in [jlevy/thinking](https://github.com/jlevy/thinking).
 
 ## Conventions & Patterns
 
-- **An exploration directory is self-contained.** Its reports, sources, and code live
-  under it and link to each other with relative paths that stay valid if the directory
-  is moved or copied out.
-  Do not scatter one project’s material across top-level trees.
+- **The project is self-contained.** Its documents, sources, and code live in this
+  repository and link to each other with relative paths.
+  Reader-facing prose belongs at the root; code, data, and the research record belong
+  under `packing/`. Do not add a third top-level tree for either.
 - **Reports separate claims by evidential status** — proved, computationally verified,
   best known, or asserted-but-unverified — and cite primary sources near the claims they
   support.
