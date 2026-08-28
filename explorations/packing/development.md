@@ -299,7 +299,18 @@ uv run --frozen packing-ledger check
 uv run --frozen packing-ledger render
 uv run --frozen python -m devtools.render_defects --check
 uv run --frozen python -m devtools.render_research_tables --check
+uv run --frozen python -m devtools.render_document_map
 ```
+
+**Creating any durable Markdown file is a two-step change.** Register it in
+[`docs/project/document-map.yaml`](docs/project/document-map.yaml) with its `role`,
+`authority` and `lifecycle`, then run `devtools.render_document_map`, because SYNOPSIS
+carries a generated copy of that map.
+Skipping either step fails `check_documentation` — first with
+`unmapped durable document`, then with `SYNOPSIS.md document map is stale`. This is
+listed here because the requirement is not discoverable from the Markdown: the registry
+is YAML, so grepping `*.md` for a sibling document finds the *rendered* map and not the
+source, which is exactly how it gets missed.
 
 ## Shell Policy
 
