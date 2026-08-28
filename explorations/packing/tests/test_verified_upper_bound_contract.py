@@ -56,6 +56,13 @@ DECLARED_CONSUMERS = {
     ),
     "tests/test_frontier_assurance_contract.py": "exercises those comparisons",
     "tests/test_verified_upper_bound_contract.py": "this file",
+    "SYNOPSIS.md": "names the field when describing the reported/verified split",
+    "campaign/agendas/agenda-005-symbolic-promotion-and-identity.md": (
+        "plans promotion work that reads the ceiling, never as the value"
+    ),
+    "docs/project/specs/active/plan-2026-08-28-interval-certification.md": (
+        "specs certification that would tighten the ceiling toward the report"
+    ),
 }
 
 # Prose, code and hand-written records. Generated artifacts are excluded because they
