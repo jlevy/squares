@@ -3,9 +3,9 @@ type: is
 id: is-01m134wbw78hcnh0fsgqtej4rk
 title: "Address review: PR #50 — numeric-symbolic promotion program spec"
 kind: task
-status: open
+status: closed
 priority: 1
-version: 12
+version: 13
 labels:
   - packing
 dependencies: []
@@ -22,6 +22,10 @@ child_order_hints:
   - is-01m134xbrqm4hg7jnszjetamym
   - is-01m134xc5mawp4cjv2d6b6tgay
 created_at: 2026-08-28T02:58:44.225Z
-updated_at: 2026-08-28T02:59:17.299Z
+updated_at: 2026-08-28T03:20:06.968Z
+closed_at: 2026-08-28T03:20:06.967Z
+close_reason: "Addressed in a236598; disposition map posted to PR #50"
+resolution: null
+duplicate_of: null
 ---
 Adversarial senior review of PR #50 by a Fable sub-agent. Verdict: request changes. Eleven findings R1-R11, all CONFIRMED by independent verification. Review doc: .review-pr50-fable.md (untracked, repo root). Two findings were independently re-verified by the addressing agent before acting.
