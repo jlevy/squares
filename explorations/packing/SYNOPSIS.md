@@ -185,6 +185,8 @@ case or experiment separately.
 | [Feature: The Interval Certification Bridge](docs/project/specs/active/plan-2026-08-28-interval-certification.md) | implementation plan | current | transient | — |
 | [Feature: Deterministic SVG Rendering Toolkit](docs/project/specs/active/plan-2026-08-24-deterministic-svg-rendering-toolkit.md) | implementation plan | record | superseded | [Packing Atlas](atlas/README.md) |
 | [Packing Engineering Maturity and Research-Loop Scalability](docs/project/specs/active/plan-2026-08-24-packing-engineering-maturity.md) | implementation plan | record | superseded | [Packing Development Guide](development.md) |
+| [Spike: Interactive `n = 5` Motion Lab](docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md) | implementation plan | record | retained | — |
+| [Feature: Generalized Square-Packing Motion Lab](docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md) | implementation plan | current | transient | — |
 | `frontier/n-*.md` | typed case claim register | definitive | maintained | — |
 | `campaign/hypotheses/H-*.md` | typed hypothesis record | definitive | maintained | — |
 | `campaign/series/*/experiments/exp-*.md` | typed experiment record | record | retained | — |
@@ -2165,16 +2167,16 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 347 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 353 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
 | soundness | 84 | asserted something false about the mathematics |
 | validity | 84 | was correct, but the measurement did not bear on the question |
-| bookkeeping | 131 | recorded something its own evidence contradicts |
+| bookkeeping | 136 | recorded something its own evidence contradicts |
 | robustness | 39 | did not finish, or finished only by luck |
-| performance | 9 | worked, but cost far more than it should |
+| performance | 10 | worked, but cost far more than it should |
 
 Two observations the log exists to make.
 
@@ -2182,7 +2184,7 @@ Two observations the log exists to make.
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 347, and no soundness defect
+**The automated gate has caught forty-five defects in 353, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
@@ -2535,6 +2537,17 @@ scientific work budget is still wall-clock time, so contention changes the numbe
 solves and probes performed.
 Price and compare basin experiments by retained work units; use the wall clock only as a
 recorded outer deadline.
+
+**A second contained defect makes the LP count itself unreliable on aborted runs.**
+[D-349](defects.md): `_free_sweep` accumulates its own LP count and returns it, and
+`quench_bracket` adds that total only on the normal return path, so a sweep that raises
+on its wall budget or on an unsettled cell carries the partial count away with it.
+The reported `lp_solves` therefore understates any run that stopped inside a free sweep.
+The direction is conservative and the fix is deferred because it changes figures already
+reported in past rounds, but a per-solve efficiency number computed from a budget-cut
+run is too favourable until it lands.
+The Motion Lab timeline is what made it visible: it retains one event per solve, so an
+aborted sweep has more retained events than the counter describing them.
 
 ## References
 

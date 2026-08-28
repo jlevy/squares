@@ -122,6 +122,14 @@ documents:
     authority: record
     lifecycle: superseded
     superseded_by: development.md
+  - path: docs/project/specs/active/spike-2026-08-25-n5-motion-lab.md
+    role: plan
+    authority: record
+    lifecycle: retained
+  - path: docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md
+    role: plan
+    authority: current
+    lifecycle: transient
 collections:
   - pattern: frontier/n-*.md
     role: frontier-case

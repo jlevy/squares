@@ -1,0 +1,41 @@
+"""Shared contracts, geometry, scenarios, and browser assets for the Motion Lab."""
+
+from sqpack.motion_lab.contracts import (
+    Capability,
+    Evidence,
+    EvidenceStatus,
+    FrameKind,
+    FrameOverlay,
+    OverlayKind,
+    Phase,
+    PoseFrame,
+    QuenchRequest,
+    QuenchResultRecord,
+    QuenchTrace,
+    ScenarioDefinition,
+    ScenarioRunner,
+    SolverKind,
+    SquarePose,
+    TimelineEvent,
+    TimelineEventKind,
+)
+
+__all__ = [
+    "Capability",
+    "Evidence",
+    "EvidenceStatus",
+    "FrameKind",
+    "FrameOverlay",
+    "OverlayKind",
+    "Phase",
+    "PoseFrame",
+    "QuenchRequest",
+    "QuenchResultRecord",
+    "QuenchTrace",
+    "ScenarioDefinition",
+    "ScenarioRunner",
+    "SolverKind",
+    "SquarePose",
+    "TimelineEvent",
+    "TimelineEventKind",
+]
