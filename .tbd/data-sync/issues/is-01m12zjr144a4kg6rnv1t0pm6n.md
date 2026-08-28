@@ -5,7 +5,7 @@ title: "[epic] Make the packing atlas records say what is known, and how we know
 kind: epic
 status: open
 priority: 1
-version: 18
+version: 19
 labels: []
 dependencies: []
 child_order_hints:
@@ -25,8 +25,9 @@ child_order_hints:
   - is-01m135mt2ff4hy2tbrnbpcp039
   - is-01m135mtdeshe5ptxevhkwgczs
   - is-01m13h894wrjjmbbx7cm35e500
+  - is-01m14f6ms6fxbn0s2befykdjrg
 created_at: 2026-08-28T01:26:06.101Z
-updated_at: 2026-08-28T06:35:08.643Z
+updated_at: 2026-08-28T15:18:21.210Z
 ---
 The atlas records are the repository's representation of best-known knowledge about s(n), and downstream work reads them that way. A session spent building the n=1..100 composite figure surfaced a connected set of defects in HOW those records encode knowledge. None of them is an upstream problem: the retained sources are sound. Every defect is in our transcription, our schema, or our tooling.
 
