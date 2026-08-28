@@ -71,10 +71,8 @@ properties:
       - min_pair_separation
       - movable_square_count
       - movable_squares
-      - movable_squares_by_tolerance
       - n
       - separating_square_count
-      - separating_squares_by_tolerance
       - square_count
       - stable_across_tolerances
       properties:
@@ -99,7 +97,6 @@ properties:
             required:
             - active_blockers
             - direction
-            - replay_verified
             - slide_distance
             - square_index
             - witness_kind
@@ -114,34 +111,45 @@ properties:
                   container_normals: {type: integer, minimum: 0, maximum: 4}
                   square_indices: {$ref: '#/$defs/index_list'}
               direction:
-                description: Unit direction of the certified translation.
+                description: >-
+                  Unit direction of the certified translation. The angle is not stored
+                  alongside it: atan2(y, x) is the whole of it, and a second spelling of
+                  one fact is a second thing that can go stale.
                 type: object
                 additionalProperties: false
-                required: [angle_degrees, x, y]
+                required: [x, y]
                 properties:
-                  angle_degrees: {$ref: '#/$defs/decimal'}
                   x: {$ref: '#/$defs/decimal'}
                   y: {$ref: '#/$defs/decimal'}
-              replay_verified:
-                description: >-
-                  The moved packing was re-checked by sqpack.verify.verify_packing at
-                  the primary tolerance. Only true may be published.
-                const: true
               slide_distance:
                 description: >-
                   Largest distance the square can travel along the direction before
                   some constraint binds. Exact, because every constraint is affine in
                   the slide parameter.
                 $ref: '#/$defs/decimal'
-              square_index: {type: integer, minimum: 0}
+              square_index:
+                description: Position in the materialized geometry, which the direction and distance refer to.
+                type: integer
+                minimum: 0
               witness_kind:
                 description: >-
                   strict-separating pushes the square clear of every active blocker at
                   once; contact-preserving slides along a contact that stays closed.
                 enum: [contact-preserving, strict-separating]
-              witness_square_id: {type: integer, minimum: 1}
+              witness_square_id:
+                description: >-
+                  The same square under the witness file's own numbering, so a reader
+                  can look it up there. It equals square_index + 1 for every retained
+                  witness, but the witness schema does not require that, so the
+                  cross-reference is stored rather than assumed.
+                type: integer
+                minimum: 1
         movable_squares_by_tolerance:
-          description: Squares that can translate at all, at each tolerance.
+          description: >-
+            Per-tolerance sweep, present only where the tolerances disagree, which
+            is no case in the corpus today. Publishing it always would repeat the
+            primary list four times and say nothing that stable_across_tolerances
+            does not already say.
           type: object
           additionalProperties: false
           minProperties: 2
@@ -150,7 +158,8 @@ properties:
         n: {type: integer, minimum: 1}
         separating_square_count: {type: integer, minimum: 0}
         separating_squares_by_tolerance:
-          description: Squares that can be pushed clear, at each tolerance.
+          description: >-
+            As movable_squares_by_tolerance, for squares that can be pushed clear.
           type: object
           additionalProperties: false
           minProperties: 2

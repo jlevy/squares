@@ -112,8 +112,16 @@ def test_certified_slides_equal_their_closed_forms() -> None:
         ]
         assert case["separating_square_count"] == 2
         assert len(separating) == 2
-        angles = sorted(item["direction"]["angle_degrees"] for item in separating)
-        assert angles == ["225.0", "45.0"], f"n={n} does not slide along a 45 degree diagonal"
+        diagonal = mp.sqrt(2) / 2
+        for item in separating:
+            x, y = mp.mpf(item["direction"]["x"]), mp.mpf(item["direction"]["y"])
+            assert abs(abs(x) - diagonal) < mp.mpf("1e-20") and abs(x) == abs(y), (
+                f"n={n} does not slide along a 45 degree diagonal"
+            )
+        assert {
+            (mp.sign(mp.mpf(item["direction"]["x"])), mp.sign(mp.mpf(item["direction"]["y"])))
+            for item in separating
+        } == {(1, 1), (-1, -1)}
         for item in separating:
             # The file rounds to 21 significant digits; agreement to 1e-21 is agreement
             # to every digit it publishes.
@@ -154,8 +162,8 @@ def test_replay_rejects_an_overstated_slide() -> None:
     """The mutation control: the replay must fail on a distance the geometry forbids.
 
     Doubling a certified slide drives the square into whatever stopped it.  If the
-    replay still accepted the packing, every `replay_verified` flag in the artifact
-    would be decoration.
+    replay still accepted the packing, the build-time replay that gates every published
+    certificate would be decoration.
     """
     certificate = _cases()[27]["movable_squares"][0]
     squares, side, _ = load_record(27)

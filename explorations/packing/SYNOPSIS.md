@@ -2176,12 +2176,12 @@ table above.
 
 Kept with the same discipline as the experiment record, because the aggregate says
 things no individual bug report can.
-The log contains 353 defects, [one line each](defects.md), generated from `defects.yaml`
+The log contains 354 defects, [one line each](defects.md), generated from `defects.yaml`
 and checked in the gate.
 
 | Class | Count | The system … |
 | --- | ---: | --- |
-| soundness | 84 | asserted something false about the mathematics |
+| soundness | 85 | asserted something false about the mathematics |
 | validity | 84 | was correct, but the measurement did not bear on the question |
 | bookkeeping | 136 | recorded something its own evidence contradicts |
 | robustness | 39 | did not finish, or finished only by luck |
@@ -2189,11 +2189,11 @@ and checked in the gate.
 
 Two observations the log exists to make.
 
-**Sixty-seven of the eighty-four soundness defects pointed in the *flattering*
+**Sixty-seven of the eighty-five soundness defects pointed in the *flattering*
 direction**, where the error looks like a success.
 That is the dangerous class, and it is the majority of it.
 
-**The automated gate has caught forty-five defects in 353, and no soundness defect
+**The automated gate has caught forty-five defects in 354, and no soundness defect
 ever.** Every soundness failure was found by a control cell whose answer was known in
 advance, a rule written down before the measurement, a generated view contradicting its
 source, or someone reading carefully.
