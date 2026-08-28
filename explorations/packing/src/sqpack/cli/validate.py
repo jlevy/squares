@@ -569,6 +569,25 @@ def _prospective_atlas(context: Context) -> str:
     return output
 
 
+def _translation_escape_screen(context: Context) -> str:
+    """The single-square translation screen, rebuilt from the witnesses every run.
+
+    The counts are pinned here because they are the finding: 25 records hold a square
+    that can be pushed clear of everything it touches, and the two records whose witness
+    geometry is too coarse to read contacts from are excluded rather than reported on.
+    A miss is not rigidity, so nothing here may be restated as one.
+    """
+    output = _module(context, "devtools.screen_translation_escape", "--check")
+    _require_text(
+        output,
+        "translation escape screen check passed: 98 records screened, "
+        "25 with a square that separates (76 squares), "
+        "84 with a square that translates at all (496 squares), "
+        "excluded: n=68, n=69",
+    )
+    return output
+
+
 def _contact_scaffold_atlas(context: Context) -> str:
     output = _module(context, "devtools.build_contact_scaffold_atlas", "--check")
     _require_text(
@@ -1024,6 +1043,7 @@ STEPS: tuple[Step, ...] = (
     Step("deterministic SVG rendering", _svg_rendering),
     Step("known-best n=1..100 atlas", _known_best_atlas),
     Step("prospective n=101..324 source map and safe seed", _prospective_atlas),
+    Step("single-square translation escape screen", _translation_escape_screen),
     Step("abstract size-five contact-scaffold atlas", _contact_scaffold_atlas),
     Step("negative controls", _negative_controls),
     Step("fixed-angle cell is an LP, rebuilt independently", _independent_lp),
