@@ -23,7 +23,7 @@ from __future__ import annotations
 
 import math
 import re
-from decimal import Decimal
+from decimal import Decimal, localcontext
 from pathlib import Path
 
 import yaml
@@ -129,7 +129,17 @@ def test_every_trailing_case_says_so_in_the_record_a_reader_opens() -> None:
         flat = " ".join(section.split())
         assert str(verified) in flat, n
         assert str(reported) in flat, n
-        assert str(verified - reported) in flat, n
+        # Pin the precision. The gap is rendered into the record at Python's
+        # default 28 digits, but decimal's context is process-global and
+        # sqpack.field raises it to digits + 20 while refining an enclosure, so
+        # a test running after one of those would otherwise compute a longer
+        # rendering of the same number and call the record stale. The record is
+        # not stale; the ambient precision moved. See the bead on that global
+        # mutation.
+        with localcontext() as context:
+            context.prec = 28
+            gap = str(verified - reported)
+        assert gap in flat, n
         assert f"not the value of `s({n})`" in flat, n
         assert "`reported_upper_bound`" in flat, n
 
