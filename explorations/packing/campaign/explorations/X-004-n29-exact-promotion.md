@@ -235,13 +235,24 @@ Run against the system solved directly, rather than against the serialized digit
 | `tol` | `1e-675`, that is `10^-(search - 25)` |
 | `maxcoeff` | `10^22` |
 | `maxsteps` | `50000` |
-| Degrees swept | `2 … 15` (sweep continuing) |
+| Degrees swept | `2 … 20`, sweep complete |
 
-At these parameters **no relation is returned at any degree from two through fifteen** —
+At these parameters **no relation is returned at any degree from two through twenty** —
 against the original probe’s relations at nearly every degree from eight to twenty-one.
 That contrast is the cleanest available confirmation that the original relations were
 artifacts of insufficient precision rather than structure, and it is the measurement the
 margin rule in the implementation spec is written to enforce.
+
+What this negative result bounds, stated exactly: there is **no integer relation among
+`s^0 … s^d` for `d ≤ 20` whose coefficients are smaller than `10^22`**, given a value
+carrying 700 reliable digits.
+It does not bound the degree on its own, because degree and coefficient size trade off —
+a degree-20 minimal polynomial with coefficients near `10^30` would need roughly
+`21 x 30 = 630` digits and would sit inside this budget, but one with coefficients near
+`10^40` would not. Pushing further is cheap in principle and expensive in practice: cost
+grew from `0.3s` at degree four to `339s` at degree twenty, roughly a factor of `1.4`
+per degree, so degree thirty at these settings is hours rather than minutes.
+The useful conclusion is negative and bounded, and it is recorded that way.
 
 That is a bound on the shortcut and not on the problem, and the first two links of the
 chain it implies are sound:

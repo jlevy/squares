@@ -512,7 +512,7 @@ The Schadt source pose passes its declared 300-digit check at tolerance `1e-100`
 is numerical evidence, not a verified record.
 The retained rational witness is a separate, slightly relaxed construction produced by
 robust rational promotion and verified exactly by the public tool and an independent
-checker. It proves `s(29) ≤ 5.93388579986236485799813026`, not the tighter reported
+checker. It proves `s(29) ≤ 5.93388579981302587863645209`, not the tighter reported
 record and not optimality.
 See [`n-029.md`](frontier/n-029.md) for the complete disposition.
 
