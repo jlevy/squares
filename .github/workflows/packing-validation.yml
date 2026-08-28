@@ -69,7 +69,28 @@ jobs:
         run: test "$VALIDATE_RESULT" = "success"
 
   macos-portability:
-    if: "github.event_name != 'pull_request'"
+    # A second-architecture smoke check, deliberately minimal.
+    #
+    # This job used to run the complete validation surface plus a deep golden rebuild,
+    # which duplicated the Linux `validate` job in full. That was both slow and wrong in
+    # kind: the record, schema, lint, docs and provenance surfaces are platform
+    # independent, so running them twice buys nothing. It also made the job depend on
+    # `cairosvg`, whose `libcairo` is absent from the macOS runner, so the job failed on
+    # every push to main regardless of the change -- and a check that can never pass
+    # teaches everyone to ignore CI, which is worse than not having it.
+    #
+    # What belongs here is only what a second architecture could actually disagree
+    # about: that the package builds and imports on arm64, that the exact predicates
+    # decide the same way, and that the golden basin maps computed here match the ones
+    # committed from Linux. That last one is the float-determinism canary and costs
+    # under a second.
+    #
+    # Everything algorithmic, and everything about the research record, stays on Linux.
+    #
+    # It now runs on pull requests too. It was previously skipped on them, which is why
+    # the libcairo breakage was only ever visible after a merge, on a branch nobody was
+    # about to fix. At roughly thirty seconds that exclusion no longer buys anything: a
+    # check this cheap belongs before the merge, where it can still change the outcome.
     runs-on: macos-latest
     defaults:
       run:
@@ -77,9 +98,7 @@ jobs:
     steps:
       - name: Check out the repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          # The provenance step verifies historical engine commits, not just HEAD.
-          fetch-depth: 0
+        # Shallow is enough: the provenance step that needed full history runs on Linux.
 
       - name: Install uv and Python 3.14
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -92,13 +111,20 @@ jobs:
       - name: Synchronize the locked development environment
         run: uv sync --frozen --all-extras --group dev
 
-      - name: Run the complete packing validation surface on a second architecture
+      - name: The package builds and imports on arm64 macOS
         run: >-
-          uv run --frozen --all-extras --group dev
-          packing-validate --jobs 2 --inner-jobs 2
+          uv run --frozen python -c "import sqpack, sqpack.field, sqpack.verify,
+          sqpack.witness, sqpack.promote.refine, sqpack.promote.contacts;
+          print('sqpack imports on', __import__('platform').machine())"
 
-      - name: Run the focused deep-golden portability check
+      - name: Results a second architecture could disagree about
+        # Exact predicates, the small-n exact models, and the golden basin maps
+        # committed from Linux. Roughly twenty seconds; if it grows, something
+        # platform-independent has been added and belongs on Linux instead.
         run: >-
-          uv run --frozen --all-extras --group dev
-          packing-validate --deep --only "golden basin maps"
-          --jobs 1 --inner-jobs 1
+          uv run --frozen --all-extras --group dev packing-validate
+          --only "exact verification"
+          --only "verifier perturbation limits"
+          --only "small-n exact models"
+          --only "golden basin maps"
+          --jobs 4 --inner-jobs 1
