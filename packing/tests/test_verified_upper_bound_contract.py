@@ -43,16 +43,26 @@ CEILING_HEADING = "## The verified upper bound is a ceiling"
 # wants the best known side length wants `reported_upper_bound` instead, and a consumer
 # that wants a proved side length has to check `status` first.
 DECLARED_CONSUMERS = {
-    "packing/devtools/check_basic_bounds.py": "checks the ceiling really is the certifiable grid bound",
-    "packing/devtools/check_golden_basins.py": "reads the ceiling as an upper limit on a basin side",
-    "packing/devtools/controls.yaml": "corrupts the field on purpose, to prove the checkers fire",
+    "packing/devtools/check_basic_bounds.py": (
+        "checks the ceiling really is the certifiable grid bound"
+    ),
+    "packing/devtools/check_golden_basins.py": (
+        "reads the ceiling as an upper limit on a basin side"
+    ),
+    "packing/devtools/controls.yaml": (
+        "corrupts the field on purpose, to prove the checkers fire"
+    ),
     "packing/devtools/migrate_frontier_v2.py": "builds the field from the v1 records",
-    "packing/devtools/render_research_tables.py": "renders it beside the report, never instead of it",
+    "packing/devtools/render_research_tables.py": (
+        "renders it beside the report, never instead of it"
+    ),
     "docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md": (
         "the plan that introduced the reported/verified split"
     ),
     "packing/frontier/README.md": "documents the field for a reader of the corpus",
-    "packing/frontier/evidence.yaml": "names the fields as the certificate the grid bound lives in",
+    "packing/frontier/evidence.yaml": (
+        "names the fields as the certificate the grid bound lives in"
+    ),
     "packing/frontier/square-packing-case.schema.yaml": "defines it",
     "packing/src/sqpack/assurance.py": (
         "compares report against ceiling and demands a blocker for any gap"

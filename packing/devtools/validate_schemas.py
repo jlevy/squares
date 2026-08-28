@@ -220,7 +220,8 @@ def defect_checks() -> list[str]:
         if path.name in skip or "resources" in path.parts or ".venv" in path.parts:
             continue
         # Dot-directories hold vendored agent skills and tooling caches, not our prose.
-        if any(part.startswith(".") or part == "node_modules" for part in path.relative_to(root).parts):
+        parts = path.relative_to(root).parts
+        if any(part.startswith(".") or part == "node_modules" for part in parts):
             continue
         cited = set(re.findall(r"\bD-[0-9]{3}\b", path.read_text(encoding="utf-8")))
         errs.extend(
