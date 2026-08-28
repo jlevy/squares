@@ -84,3 +84,61 @@ def test_trace_adapter_labels_setup_lp_rotation_and_stop_without_editor_groups()
         event.event_kind is TimelineEventKind.FIXED_POINT for event in trace.events
     )
     assert "groups" not in trace.request.to_record()
+
+
+def test_free_pass_observation_preserves_the_result_and_its_counters() -> None:
+    """The free sweep is the one path where the observer replaces an existing callback.
+
+    Every other emission site appends a receipt after work already done, so it cannot
+    change a result. `_free_sweep` instead receives a wrapped `solve_fixed`, which is
+    the substitution most able to perturb the run, and the sweep-limited case above
+    disables it. This is the same equivalence assertion with `free_pass` left on.
+    """
+    poses = (
+        [0.5, 1.6, 0.5, 1.6, 1.05],
+        [0.5, 0.5, 1.6, 1.6, 1.05],
+        [0.0, 0.0, 0.0, 0.0, 0.3],
+    )
+    arguments = {
+        "max_sweeps": 2,
+        "span": TEST_SPAN,
+        "span_min": TEST_SPAN,
+        "time_budget": TEST_TIME_BUDGET_SECONDS,
+        "free_pass": True,
+    }
+    baseline = quench_bracket(*poses, **arguments)
+    observations: list[QuenchObservation] = []
+    observed = quench_bracket(*poses, **arguments, observer=observations.append)
+
+    assert observed == baseline
+    assert observed.lp_solves == baseline.lp_solves
+    assert observed.cell_changes == baseline.cell_changes
+    assert observations[-1].kind is QuenchObservationKind.STOP
+
+
+def test_event_counters_are_per_call_and_the_stop_carries_only_the_result_total() -> None:
+    """`fixed-point` events are the ones in bijection with LP calls.
+
+    Probes re-report the solve they asked for, so summing across kinds double-counts;
+    the stop used to add the run total on top of that, making the column unsummable in
+    three different ways at once.
+    """
+    request = QuenchRequest(
+        side=1.6,
+        x=(0.5,),
+        y=(0.5,),
+        theta=(0.0,),
+        max_sweeps=4,
+        time_budget=TEST_TIME_BUDGET_SECONDS,
+    )
+    trace = trace_quench_bracket(request)
+
+    fixed_point_solves = sum(
+        event.call_lp_solves or 0
+        for event in trace.events
+        if event.event_kind is TimelineEventKind.FIXED_POINT
+    )
+    assert fixed_point_solves == trace.result.lp_solves
+    assert trace.events[-1].call_lp_solves == 0
+    assert trace.events[-1].call_cell_changes == 0
+    assert trace.events[-1].outcome is not None

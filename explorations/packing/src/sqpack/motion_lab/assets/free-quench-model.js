@@ -285,6 +285,13 @@
     return {state: output, result: selected};
   }
 
+  function setSnapping(state, enabled) {
+    if (typeof enabled !== "boolean") throw new Error("snapping toggle must be boolean");
+    const output = copyState(state);
+    output.snapping_enabled = enabled;
+    return output;
+  }
+
   function releaseQuenchRequest(state, maxSweeps, timeBudget) {
     const foldedAngles = state.squares.map((square) => (
       (square.theta % QUARTER_TURN + QUARTER_TURN) % QUARTER_TURN
@@ -370,6 +377,7 @@
     releaseQuenchRequest,
     rotateGroup,
     selectPlaybackIndices,
+    setSnapping,
     stateFromScenario,
     timelineWindow,
     translateGroup,

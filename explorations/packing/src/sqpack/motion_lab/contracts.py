@@ -263,7 +263,13 @@ class ScenarioDefinition(_ContractRecord):
 
 @dataclass(frozen=True)
 class QuenchRequest(_ContractRecord):
-    """Strict Phase 1 numerical payload; editor groups cannot cross this boundary."""
+    """Strict Phase 1 numerical payload; editor groups cannot cross this boundary.
+
+    `side` is the *editor's* container, carried so the released setup frame can be drawn
+    at the scale the user placed squares in. It is not a solver input and not a bound:
+    `quench_bracket` takes only centers and angles and re-minimizes the side itself, so
+    two requests differing only in `side` produce identical numerical results.
+    """
 
     CONTRACT: ClassVar[str] = "packing.squares:QuenchRequest/v1"
     SCHEMA_VERSION: ClassVar[int] = MOTION_LAB_SCHEMA_VERSION
@@ -343,7 +349,18 @@ class QuenchResultRecord(_ContractRecord):
 
 @dataclass(frozen=True)
 class TimelineEvent(_ContractRecord):
-    """One retained solver decision or analytic state."""
+    """One retained solver decision or analytic state.
+
+    The counters are scoped to the single solver call this event reports, never to the
+    run: `call_lp_solves` on a `fixed-point` event is the LP work of that fixed-point
+    solve alone. Run totals live in `QuenchResultRecord` and must be read from there.
+    Summing counters across event kinds double-counts, because one LP call is reported
+    both as the `fixed-point` state it produced and as the `angle-probe` that asked for
+    it. `fixed-point` events are the ones in bijection with LP calls, and the gate pins
+    their sum to `QuenchResultRecord.lp_solves` for runs that stop normally. The two
+    disagree when a free sweep aborts on its budget or on an unsettled cell (D-349):
+    the events retain LP work that `quench_bracket`'s own counter drops.
+    """
 
     sequence: int
     event_kind: TimelineEventKind
@@ -351,14 +368,14 @@ class TimelineEvent(_ContractRecord):
     frame: PoseFrame
     detail: str
     outcome: ProbeOutcome | None = None
-    lp_solves: int | None = None
-    cell_changes: int | None = None
+    call_lp_solves: int | None = None
+    call_cell_changes: int | None = None
 
     def __post_init__(self) -> None:
         if self.sequence < 0:
             raise ValueError("event sequence must be non-negative")
         _require_text(self.detail, "timeline-event detail")
-        for value in (self.lp_solves, self.cell_changes):
+        for value in (self.call_lp_solves, self.call_cell_changes):
             if value is not None and value < 0:
                 raise ValueError("timeline-event counters must be non-negative")
 

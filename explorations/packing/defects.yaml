@@ -11,7 +11,7 @@ softschema:
   schema: defects.schema.yaml
   envelope: null
   status: enforced
-count: 348
+count: 353
 defects:
 - id: D-001
   title: Fixed-side search never left the grid basin
@@ -8983,3 +8983,154 @@ defects:
     42 list nodes while every event remains reachable.
   bead: think-0l1y
   recorded_in: src/sqpack/motion_lab/assets/free-quench.js
+- id: D-349
+  title: An aborted free sweep drops its LP work from the run counter
+  date: '2026-08-28'
+  layer: quench
+  class: bookkeeping
+  direction: conservative
+  detected_by: review
+  latent_for: since quench_bracket gained its free pass
+  severity: low
+  status: contained
+  what: >-
+    `_free_sweep` accumulates its own LP count and returns it, and `quench_bracket` adds
+    that total to `lp_solves` only on the normal return path. When the sweep raises on
+    its wall budget or on an unsettled cell, the exception carries the partial count
+    away with it, so LP calls that were made and paid for are absent from the reported
+    total. The Motion Lab timeline made this visible: it retains one event per solve, so
+    on an aborted sweep the events outnumber the counter that claims to describe them.
+  consequence: >-
+    Cost accounting understates aborted runs, which is the conservative direction but
+    still wrong. Any per-solve efficiency figure computed from `lp_solves` on a
+    budget-cut run is too favourable.
+  fix: >-
+    None yet. The counter belongs to `quench_bracket` and every research round that has
+    ever reported an `lp_solves` figure, so correcting it is a change to the engine's
+    reported numbers rather than to the Motion Lab, and it needs its own round. The
+    Motion Lab contract documents the divergence instead of hiding it.
+  regression: >-
+    None. `TimelineEvent` documents that the fixed-point sum and the result total agree
+    only for runs that stop normally, and
+    test_event_counters_are_per_call_and_the_stop_carries_only_the_result_total pins the
+    agreement on the normal path so a future engine change cannot break that half
+    silently.
+  bead: think-7dwo
+  recorded_in: src/sqpack/motion_lab/contracts.py
+- id: D-350
+  title: A rejected quench left the previous run's trace reachable from Download
+  date: '2026-08-28'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: from the first interactive lab commit to its first review
+  severity: medium
+  status: fixed
+  what: >-
+    The browser assigned the response body to its retained trace text before testing
+    whether the response was an error, and the failure path cleared neither that text
+    nor the enabled Download control. After one successful run and one rejected run, the
+    timeline still showed the successful run while Download wrote the error record to a
+    file named `quench-trace-n<N>-seed<S>.json`.
+  consequence: >-
+    A file that is not a trace leaves the tool under a trace name, in a project whose
+    downloaded artifacts are meant to be evidence. The visible timeline and the
+    downloaded bytes described different runs.
+  fix: >-
+    The response body is parsed into a local and retained only after the status check,
+    and the failure path clears the whole trace view before reporting, so a rejected run
+    leaves nothing for Download to save.
+  regression: >-
+    None automated: this is a browser control-flow path with no headless-browser lane in
+    the gate. The retained-trace and typed-error service controls cover the two halves
+    separately, and the manual browser pass covers the sequence.
+  recorded_in: src/sqpack/motion_lab/assets/free-quench.js
+- id: D-351
+  title: The replay command promised byte fidelity and compared only semantics
+  date: '2026-08-28'
+  layer: tooling
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: from the loopback service commit to its first review
+  severity: medium
+  status: fixed
+  what: >-
+    `replay_trace` re-serialized the parsed file and compared that against the
+    regenerated trace, so it accepted any file whose values matched however it was
+    formatted. The runbook told readers the command replays a trace "byte for byte" and
+    the docstring claimed it rejected byte-level drift. Reformatting the retained
+    fixture from 88,914 to 171,335 bytes still reported PASS.
+  consequence: >-
+    A retained trace could lose canonical form and keep passing the command documented as
+    the check on it, while the byte assertion readers were relying on lived only in a
+    test they were not pointed at.
+  fix: >-
+    The command now compares the raw file text with the canonical regeneration as well,
+    and reports the two failures separately: semantic drift means the numerics moved,
+    byte drift with identical semantics means only that the file lost canonical form.
+  regression: >-
+    test_replay_rejects_a_reformatted_trace_that_still_parses reformats the retained
+    fixture and requires the refusal.
+  recorded_in: devtools/serve_packing_motion_lab.py
+- id: D-352
+  title: A timeline counter changed meaning on the last event of every trace
+  date: '2026-08-28'
+  layer: tooling
+  class: bookkeeping
+  direction: neutral
+  detected_by: review
+  latent_for: from the trace-adapter commit to its first review
+  severity: medium
+  status: fixed
+  what: >-
+    Every observation carried the LP work of the single call it reported, except the
+    stop, which carried the run total under the same field name. The readout rendered
+    both with the same label. On the retained 144-event fixture the run made 71 LP
+    calls, the stop event displayed 71, every other event displayed 1, and the column
+    summed to 213 -- the stop total plus each probe solve counted twice, once as the
+    fixed-angle state it produced and once as the probe that asked for it.
+  consequence: >-
+    A reader adding the visible column got three times the true LP count, and a reader
+    comparing the last event with the one before it saw two quantities in different
+    units presented identically.
+  fix: >-
+    The counters are named `call_lp_solves` and `call_cell_changes` and are per call
+    everywhere, the stop reports none of its own, and the readout shows the run totals
+    from the result record on the stop event and labels every other value as belonging
+    to that call.
+  regression: >-
+    test_event_counters_are_per_call_and_the_stop_carries_only_the_result_total pins the
+    fixed-point sum to the result total and requires the stop event to carry no call
+    counters.
+  recorded_in: src/sqpack/motion_lab/contracts.py
+- id: D-353
+  title: The lab told users the optimizer receives a container side it never sees
+  date: '2026-08-28'
+  layer: docs
+  class: bookkeeping
+  direction: flattering
+  detected_by: review
+  latent_for: from the served-scenario commit to its first review
+  severity: medium
+  status: fixed
+  what: >-
+    The release note under the run controls read "the optimizer receives only side,
+    centers, and angles". `quench_bracket` has no side parameter: it takes centers and
+    angles and re-minimizes the side itself. Substituting 19.0 for 1.6 in the retained
+    request returns a bit-identical result record; only the setup frame's container side
+    changes.
+  consequence: >-
+    A control labelled "Starting side" read as a bound the run would respect, in a tool
+    whose entire purpose is to keep claims and evidence aligned. A user could have read a
+    returned side as a result about their declared container.
+  fix: >-
+    The release note says the optimizer receives only centers and angles and that the
+    side is re-minimized rather than held, the control is labelled "Starting side (setup
+    only)", the runbook says the same, and `QuenchRequest` documents the field as the
+    editor's container rather than a solver input.
+  regression: >-
+    None automated: this is prose about a boundary rather than a computed value. The
+    substitution that demonstrates it is one request field and is recorded here.
+  recorded_in: devtools/render_general_motion_lab.py

@@ -376,6 +376,14 @@ temporary sticky chunks for placement, releases every chunk before numerical
 optimization, and presents fixed-angle LP states separately from angular probes and
 accepted rotations.
 
+**The Motion Lab is a rough draft.** It landed on 2026-08-28 out of a single `n = 5`
+spike, has produced no research result, and its first review found six defects in it —
+all in the new instrument, none in the mathematics it displays.
+Its contracts are versioned because they are expected to change.
+Use it to look at what the quench does; do not cite it.
+The [runbook](atlas/rendering/README.md#general-motion-lab-setup-and-free-quench) states
+the maturity boundary in full and records what that review found.
+
 From this directory, open the served lab in the default browser:
 
 ```bash

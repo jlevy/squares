@@ -98,14 +98,24 @@ def save_trace(path: Path, trace: QuenchTrace) -> None:
 
 
 def replay_trace(path: Path) -> QuenchTrace:
-    """Rerun a retained request and reject any semantic or byte-level trace drift."""
-    record = _load_json_bytes(path.read_bytes())
+    """Rerun a retained request and reject semantic or byte-level trace drift.
+
+    Both comparisons are made, and they are reported separately because they mean
+    different things: a semantic difference is the numerics moving, while a byte
+    difference with identical semantics is only the file having lost canonical form.
+    Checking the canonicalized record alone would silently accept a reformatted trace.
+    """
+    raw = path.read_text(encoding="utf-8")
+    record = _load_json_bytes(raw.encode("utf-8"))
     if not isinstance(record, dict) or record.get("contract") != QuenchTrace.CONTRACT:
         raise ValueError("retained Motion Lab trace has the wrong contract")
     request = record.get("request")
     regenerated = build_quench_trace(request)
-    if _canonical_record_json(record) != canonical_json(regenerated):
+    canonical = canonical_json(regenerated)
+    if _canonical_record_json(record) != canonical:
         raise ValueError("retained Motion Lab trace differs from deterministic replay")
+    if raw != canonical:
+        raise ValueError("retained Motion Lab trace replays but is not in canonical byte form")
     return regenerated
 
 
@@ -140,6 +150,38 @@ class MotionLabRequestHandler(BaseHTTPRequestHandler):
     """Same-origin HTTP adapter around the typed request and trace operations."""
 
     protocol_version = "HTTP/1.1"
+    # A stalled or under-delivering client must not hold a worker thread forever: the
+    # body read below trusts the declared Content-Length, and keep-alive means an idle
+    # connection otherwise blocks in readline until the process exits.
+    timeout = 30
+
+    def _loopback_host(self) -> bool:
+        """Reject a request whose Host is not this loopback service.
+
+        Binding to 127.0.0.1 stops direct remote connections, and a cross-origin JSON
+        POST is stopped by the preflight this handler does not answer. Neither survives
+        DNS rebinding, where a hostile page's own origin re-resolves to loopback and its
+        requests become same-origin. Only the Host header still names the impostor.
+        """
+        host = self.headers.get("Host", "")
+        name = host.rsplit(":", 1)[0] if host.count(":") == 1 else host
+        return name in {LOOPBACK_HOST, "localhost"}
+
+    def _reject_foreign_host(self) -> bool:
+        if self._loopback_host():
+            return False
+        # Refuse before reading any body, which leaves the declared bytes unread in the
+        # socket. On a keep-alive connection the next request would then be parsed out
+        # of that leftover body, so the connection cannot be reused after a refusal.
+        self.close_connection = True
+        self._send_json(
+            HTTPStatus.MISDIRECTED_REQUEST,
+            _error_record(
+                "foreign-host",
+                "Motion Lab serves only 127.0.0.1 and localhost Host headers",
+            ),
+        )
+        return True
 
     def _send_bytes(
         self,
@@ -202,6 +244,8 @@ class MotionLabRequestHandler(BaseHTTPRequestHandler):
         return _load_json_bytes(self.rfile.read(length))
 
     def do_GET(self) -> None:
+        if self._reject_foreign_host():
+            return
         target = urlsplit(self.path)
         if target.path == "/api/status" and not target.query:
             self._send_json(
@@ -253,6 +297,8 @@ class MotionLabRequestHandler(BaseHTTPRequestHandler):
         )
 
     def do_POST(self) -> None:
+        if self._reject_foreign_host():
+            return
         if self.path != "/api/quench":
             self._send_json(
                 HTTPStatus.NOT_FOUND,

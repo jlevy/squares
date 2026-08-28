@@ -8,6 +8,7 @@ import json
 
 from sqpack.motion_lab.assets import asset_text, motion_lab_css
 from sqpack.motion_lab.scenarios.free_quench import free_quench_scenario
+from sqpack.render.style import SQUARE_FILL_PALETTE
 
 DEFAULT_SQUARE_COUNT = 5
 DEFAULT_SEED = 7
@@ -24,7 +25,8 @@ def render_general_motion_lab(*, n: int, seed: int, side: float) -> str:
     javascript = asset_text("free-quench-model.js") + asset_text("free-quench.js")
     return f"""<!doctype html>
 <html lang="en" data-contract="packing.squares:GeneralMotionLab/v1"
-  data-shell-contract="packing.squares:MotionLabShell/v1">
+  data-shell-contract="packing.squares:MotionLabShell/v1"
+  data-palette-size="{len(SQUARE_FILL_PALETTE)}">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -58,7 +60,7 @@ def render_general_motion_lab(*, n: int, seed: int, side: float) -> str:
         <input id="n-input" type="number" min="1" max="20" step="1" value="{n}" />
       </div>
       <div class="control compact-control">
-        <label for="side-input">Starting side</label>
+        <label for="side-input">Starting side (setup only)</label>
         <input id="side-input" type="number" min="1.01" max="20" step="0.05"
           value="{side:.12g}" />
       </div>
@@ -88,7 +90,8 @@ def render_general_motion_lab(*, n: int, seed: int, side: float) -> str:
       <button id="run-button" class="primary" type="button">Release + run quench</button>
       <button id="download-button" type="button" disabled>Download trace</button>
       <span class="control-note release-note">Setup snapping is released before every numerical run;
-        the optimizer receives only side, centers, and angles.</span>
+        the optimizer receives only centers and angles. The starting side frames the
+        setup — it is re-minimized by the quench, never held as a bound.</span>
     </section>
 
     <div class="lab-grid general-lab-grid">

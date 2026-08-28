@@ -74,6 +74,20 @@ _PROBE_OUTCOMES = {
     QuenchObservationOutcome.BUDGET_CUTOFF: ProbeOutcome.BUDGET_CUTOFF,
 }
 
+# Probes and stops are the two events whose disposition is a decision rather than a
+# state: a probe was accepted or rejected, and a run stopped on its budget, on
+# convergence, or unconverged. Every other kind reports geometry and carries no verdict.
+_OUTCOME_KINDS = frozenset({QuenchObservationKind.ANGLE_PROBE, QuenchObservationKind.STOP})
+
+
+def _event_outcome(observation: QuenchObservation) -> ProbeOutcome | None:
+    if observation.kind not in _OUTCOME_KINDS:
+        return None
+    outcome = _PROBE_OUTCOMES.get(observation.outcome)
+    if outcome is None:
+        raise ValueError(f"unmapped quench observation outcome: {observation.outcome}")
+    return outcome
+
 
 def _pose_frame(
     *,
@@ -161,13 +175,9 @@ def _project_trace(
                     evidence=_NUMERICAL_EVIDENCE,
                 ),
                 detail=observation.detail,
-                outcome=(
-                    _PROBE_OUTCOMES.get(observation.outcome)
-                    if observation.kind is QuenchObservationKind.ANGLE_PROBE
-                    else None
-                ),
-                lp_solves=observation.lp_solves,
-                cell_changes=observation.cell_changes,
+                outcome=_event_outcome(observation),
+                call_lp_solves=observation.call_lp_solves,
+                call_cell_changes=observation.call_cell_changes,
             )
         )
     return QuenchTrace(

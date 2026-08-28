@@ -25,7 +25,7 @@ from __future__ import annotations
 
 import math
 import time
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field
 from enum import StrEnum
 from itertools import product
@@ -75,11 +75,17 @@ class QuenchObservation:
     theta: tuple[float, ...]
     detail: str
     outcome: QuenchObservationOutcome
-    lp_solves: int = 0
-    cell_changes: int = 0
+    # Scoped to the single solver call this receipt reports, never to the run.
+    call_lp_solves: int = 0
+    call_cell_changes: int = 0
 
 
 QuenchObserver = Callable[[QuenchObservation], None]
+
+# Every wall-budget stop reason starts with this, and the observer classifies a stop as
+# a budget cutoff by testing the prefix. Build the reasons from the constant so a reword
+# cannot silently reclassify a cutoff as an ordinary rejection.
+BUDGET_STOP_REASON_PREFIX = "time budget"
 
 
 def _emit_observation(
@@ -87,13 +93,13 @@ def _emit_observation(
     *,
     kind: QuenchObservationKind,
     side: float,
-    x,
-    y,
-    theta,
+    x: Sequence[float],
+    y: Sequence[float],
+    theta: Sequence[float],
     detail: str,
     outcome: QuenchObservationOutcome,
-    lp_solves: int = 0,
-    cell_changes: int = 0,
+    call_lp_solves: int = 0,
+    call_cell_changes: int = 0,
 ) -> None:
     """Notify an observer without evaluating geometry or invoking the solver."""
     if observer is None:
@@ -107,8 +113,8 @@ def _emit_observation(
             theta=tuple(float(value) for value in theta),
             detail=detail,
             outcome=outcome,
-            lp_solves=lp_solves,
-            cell_changes=cell_changes,
+            call_lp_solves=call_lp_solves,
+            call_cell_changes=call_cell_changes,
         )
     )
 
@@ -1119,8 +1125,8 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                 if result.settled
                 else QuenchObservationOutcome.UNSETTLED
             ),
-            lp_solves=result.solves,
-            cell_changes=result.changes,
+            call_lp_solves=result.solves,
+            call_cell_changes=result.changes,
         )
         if result.changes:
             _emit_observation(
@@ -1132,8 +1138,8 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                 theta=eval_theta,
                 detail=f"fixed-point solve crossed {result.changes} cell boundaries",
                 outcome=QuenchObservationOutcome.EVALUATED,
-                lp_solves=result.solves,
-                cell_changes=result.changes,
+                call_lp_solves=result.solves,
+                call_cell_changes=result.changes,
             )
         return result
 
@@ -1154,15 +1160,18 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
             detail=result.reason,
             outcome=(
                 QuenchObservationOutcome.BUDGET_CUTOFF
-                if "budget" in result.reason
+                if result.reason.startswith(BUDGET_STOP_REASON_PREFIX)
                 else (
                     QuenchObservationOutcome.ACCEPTED
                     if result.converged
                     else QuenchObservationOutcome.REJECTED
                 )
             ),
-            lp_solves=result.lp_solves,
-            cell_changes=result.cell_changes,
+            # Every other observation reports one call's work. The stop reports none of
+            # its own: the run totals are already on the returned QuenchResult, and
+            # repeating them here made per-event counters unsummable (D-348 successor).
+            call_lp_solves=0,
+            call_cell_changes=0,
         )
         return result
 
@@ -1214,7 +1223,7 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                     angle_steps=angle_steps,
                     converged=False,
                     cell_changes=changes,
-                    reason="time budget",
+                    reason=BUDGET_STOP_REASON_PREFIX,
                 )
             ref_x, ref_y = list(x), list(y)
             base = theta[group[0]]
@@ -1241,8 +1250,8 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                         if got.settled
                         else QuenchObservationOutcome.UNSETTLED
                     ),
-                    lp_solves=got.solves,
-                    cell_changes=got.changes,
+                    call_lp_solves=got.solves,
+                    call_cell_changes=got.changes,
                 )
                 if not got.settled:
                     raise _FixedCellUnsettledError(got.reason)
@@ -1260,7 +1269,7 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                     angle_steps=angle_steps,
                     converged=False,
                     cell_changes=changes,
-                    reason="time budget",
+                    reason=BUDGET_STOP_REASON_PREFIX,
                 )
             except _FixedCellUnsettledError as exc:
                 return audited_result(
@@ -1297,8 +1306,8 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                         else QuenchObservationOutcome.REJECTED
                     )
                 ),
-                lp_solves=got.solves,
-                cell_changes=got.changes,
+                call_lp_solves=got.solves,
+                call_cell_changes=got.changes,
             )
             if not got.settled:
                 return audited_result(
@@ -1326,8 +1335,8 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                     theta=theta,
                     detail=f"accepted angle class {tuple(group)}",
                     outcome=QuenchObservationOutcome.ACCEPTED,
-                    lp_solves=got.solves,
-                    cell_changes=got.changes,
+                    call_lp_solves=got.solves,
+                    call_cell_changes=got.changes,
                 )
         if improved:
             # The window is still paying for itself, so keep it. Narrowing it here --
@@ -1400,8 +1409,8 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                     if got.settled
                     else QuenchObservationOutcome.UNSETTLED
                 ),
-                lp_solves=got.solves,
-                cell_changes=got.changes,
+                call_lp_solves=got.solves,
+                call_cell_changes=got.changes,
             )
             return got
 
@@ -1416,7 +1425,7 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                 solve_fixed=evaluate_free_fixed_point,
             )
         except _OutOfTimeError:
-            stop_reason = "time budget during free sweep"
+            stop_reason = f"{BUDGET_STOP_REASON_PREFIX} during free sweep"
             break
         except _FixedCellUnsettledError as exc:
             stop_reason = f"fixed cell unsettled during free sweep: {exc}"
@@ -1440,7 +1449,7 @@ def quench_bracket(  # noqa: PLR0911 - each scientific stop condition returns it
                 theta=theta,
                 detail="accepted improvement from the free-angle sweep",
                 outcome=QuenchObservationOutcome.ACCEPTED,
-                lp_solves=used,
+                call_lp_solves=used,
             )
             continue
         return audited_result(

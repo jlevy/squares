@@ -5,6 +5,7 @@ from __future__ import annotations
 import http.client
 import json
 import math
+import random
 import threading
 from typing import cast
 
@@ -14,6 +15,14 @@ from nodejs_wheel import node
 from devtools.render_general_motion_lab import render_general_motion_lab
 from devtools.serve_packing_motion_lab import LOOPBACK_HOST, create_server
 from sqpack.motion_lab.assets import asset_text
+from sqpack.motion_lab.contracts import MAX_INTERACTIVE_SQUARES
+from sqpack.motion_lab.snap import (
+    EditorSquare,
+    EditorState,
+    apply_best_snap,
+    set_snapping,
+)
+from sqpack.render.style import SQUARE_FILL_PALETTE
 
 
 def test_free_quench_browser_model_uses_one_reducer_for_snap_rotate_and_release() -> None:
@@ -173,3 +182,148 @@ def test_service_serves_live_and_exact_profiles_with_scenario_refresh() -> None:
         server.shutdown()
         server.server_close()
         thread.join(timeout=5)
+
+
+def test_browser_reducer_matches_its_python_reference_on_generated_states() -> None:
+    """Two implementations of one reducer, and the browser runs the one users touch.
+
+    `snap.py` is the reference the Python tests pin, but every drag in the lab is
+    resolved by `free-quench-model.js`. Nothing tied the two together, so they could
+    drift silently in either direction. Lattice coordinates and repeated angles are
+    used deliberately: equal distances make the rank tie-break decide the answer, which
+    is where a `min` and a comparator sort are most likely to disagree.
+    """
+    generator = random.Random(2026)
+    cases: list[dict[str, object]] = []
+    for _ in range(120):
+        count = generator.randint(2, 6)
+        squares = [
+            EditorSquare(
+                square_id=index,
+                x=0.5 + generator.randrange(0, 9) * 0.5,
+                y=0.5 + generator.randrange(0, 9) * 0.5,
+                theta=generator.choice(
+                    [0.0, 0.0, math.pi / 4, generator.uniform(0, math.pi / 2)]
+                ),
+            )
+            for index in range(count)
+        ]
+        identifiers = list(range(count))
+        generator.shuffle(identifiers)
+        cut = generator.randint(1, count)
+        singletons = [(value,) for value in sorted(identifiers[cut:])]
+        groups = tuple(
+            sorted(
+                [tuple(sorted(identifiers[:cut])), *singletons],
+                key=lambda group: group[0],
+            )
+        )
+        state = EditorState(side=5.0, squares=tuple(squares), groups=groups)
+        threshold = generator.choice([0.05, 0.2, 0.51])
+        moving = generator.randrange(count)
+        snapped, result = apply_best_snap(state, moving_square_id=moving, threshold=threshold)
+        cases.append(
+            {
+                "state": {
+                    "side": 5.0,
+                    "squares": [
+                        {"square_id": s.square_id, "x": s.x, "y": s.y, "theta": s.theta}
+                        for s in squares
+                    ],
+                    "groups": [list(group) for group in groups],
+                    "snapping_enabled": True,
+                },
+                "moving": moving,
+                "threshold": threshold,
+                "expected": {
+                    "groups": [list(group) for group in snapped.groups],
+                    "x": [s.x for s in snapped.squares],
+                    "y": [s.y for s in snapped.squares],
+                    "target": None
+                    if result is None
+                    else [result.target_kind.value, result.target_id],
+                },
+            }
+        )
+
+    probe = (
+        asset_text("free-quench-model.js")
+        + r"""
+const editor = globalThis.MotionLabEditor;
+process.stdout.write(JSON.stringify(JSON.parse(process.argv[1]).map((entry) => {
+  const got = editor.applyBestSnap(entry.state, entry.moving, entry.threshold);
+  return {
+    groups: got.state.groups,
+    x: got.state.squares.map((square) => square.x),
+    y: got.state.squares.map((square) => square.y),
+    target: got.result ? [got.result.target_kind, got.result.target_id] : null,
+  };
+})));
+"""
+    )
+    completed = node(
+        ["-e", probe, "--", json.dumps(cases)],
+        return_completed_process=True,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    observed = cast(list[dict[str, object]], json.loads(completed.stdout))
+
+    assert len(observed) == len(cases)
+    for case, got in zip(cases, observed, strict=True):
+        expected = cast(dict[str, object], case["expected"])
+        assert got["target"] == expected["target"]
+        assert got["groups"] == expected["groups"]
+        assert cast(list[float], got["x"]) == pytest.approx(
+            cast(list[float], expected["x"]), abs=1e-12
+        )
+        assert cast(list[float], got["y"]) == pytest.approx(
+            cast(list[float], expected["y"]), abs=1e-12
+        )
+
+
+def test_browser_reducer_mirrors_the_python_snapping_toggle() -> None:
+    probe = (
+        asset_text("free-quench-model.js")
+        + r"""
+const editor = globalThis.MotionLabEditor;
+const base = {
+  side: 3,
+  squares: [{square_id: 0, x: 0.5, y: 0.5, theta: 0}],
+  groups: [[0]],
+  snapping_enabled: true,
+};
+const off = editor.setSnapping(base, false);
+process.stdout.write(JSON.stringify({
+  off: off.snapping_enabled,
+  sourceUntouched: base.snapping_enabled,
+  back: editor.setSnapping(off, true).snapping_enabled,
+}));
+"""
+    )
+    completed = node(
+        ["-e", probe], return_completed_process=True, capture_output=True, text=True
+    )
+    assert completed.returncode == 0, completed.stderr
+    result = cast(dict[str, bool], json.loads(completed.stdout))
+
+    reference = EditorState.with_singletons(
+        side=3.0, squares=(EditorSquare(square_id=0, x=0.5, y=0.5, theta=0.0),)
+    )
+    assert result["off"] is set_snapping(reference, enabled=False).snapping_enabled
+    assert result["back"] is True
+    assert result["sourceUntouched"] is True
+
+
+def test_live_profile_declares_the_palette_size_the_browser_indexes_into() -> None:
+    """The browser wraps square colours modulo a count it cannot otherwise know.
+
+    A hard-coded modulus silently produces an undefined CSS variable, and a square with
+    no fill, the moment the palette or the square cap changes.
+    """
+    html = render_general_motion_lab(n=5, seed=7, side=3.2)
+
+    assert f'data-palette-size="{len(SQUARE_FILL_PALETTE)}"' in html
+    assert "% 20" not in asset_text("free-quench.js")
+    assert len(SQUARE_FILL_PALETTE) >= MAX_INTERACTIVE_SQUARES

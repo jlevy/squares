@@ -126,3 +126,78 @@ def test_http_service_binds_loopback_and_returns_typed_success_and_failure() -> 
         server.shutdown()
         server.server_close()
         thread.join(timeout=5)
+
+
+def test_replay_rejects_a_reformatted_trace_that_still_parses(tmp_path: Path) -> None:
+    """A retained trace is evidence, so its bytes are part of what is retained.
+
+    Comparing only the reparsed record accepted any file that happened to carry the
+    same values, which is not what the runbook promises the command checks.
+    """
+    reformatted = tmp_path / "reformatted.json"
+    reformatted.write_text(
+        json.dumps(json.loads(KNOWN_TRACE.read_text(encoding="utf-8")), indent=4),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ValueError, match="not in canonical byte form"):
+        replay_trace(reformatted)
+
+
+def test_service_refuses_a_host_header_it_does_not_serve() -> None:
+    """Binding to loopback does not survive DNS rebinding; the Host header does.
+
+    A hostile page whose own name re-resolves to 127.0.0.1 reaches this service as a
+    same-origin caller, and no CORS preflight stands in the way. The Host header is the
+    one part of such a request that still names the origin the browser thinks it has.
+    """
+    server = create_server(port=0)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    port = cast(tuple[str, int], server.server_address)[1]
+
+    def refuse(method: str, body: str | None, headers: dict[str, str]) -> object:
+        # A refused request is answered with the connection closed, because its body was
+        # never read; each probe therefore opens its own connection.
+        connection = http.client.HTTPConnection(LOOPBACK_HOST, port, timeout=15)
+        try:
+            connection.request(
+                method,
+                "/api/status" if body is None else "/api/quench",
+                body=body,
+                headers=headers,
+            )
+            response = connection.getresponse()
+            return response.status, json.loads(response.read())
+        finally:
+            connection.close()
+
+    try:
+        status, refusal = cast(
+            tuple[int, dict[str, dict[str, str]]],
+            refuse("GET", None, {"Host": "rebind.example"}),
+        )
+        assert status == 421
+        assert refusal["error"]["code"] == "foreign-host"
+
+        status, refusal = cast(
+            tuple[int, dict[str, dict[str, str]]],
+            refuse(
+                "POST",
+                json.dumps(_request().to_record()),
+                {"Host": "rebind.example", "Content-Type": "application/json"},
+            ),
+        )
+        assert status == 421
+        assert refusal["error"]["code"] == "foreign-host"
+
+        status, ready = cast(
+            tuple[int, dict[str, str]],
+            refuse("GET", None, {"Host": f"localhost:{port}"}),
+        )
+        assert status == 200
+        assert ready["status"] == "ready"
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=5)

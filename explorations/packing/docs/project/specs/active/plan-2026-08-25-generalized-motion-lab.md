@@ -469,6 +469,25 @@ control made long traces unwieldy.
 The repaired timeline renders a 41-event moving window and samples autoplay while
 retaining every event for stepping, download, and replay.
 
+A senior engineering review before merge found six further defects, all of them in the
+new instrument and none in the quench, the verifier, or the exact scenario: D-350 (a
+rejected run left the previous trace downloadable), D-351 (replay promised byte fidelity
+and checked semantics), D-352 (a timeline counter changed meaning on the stop event),
+D-353 (the release note named a solver input the solver never receives), an unguarded
+second implementation of the snap reducer in the browser, and a loopback service that
+trusted its own bind against DNS rebinding.
+All six are fixed, each with a control that fails without the fix, except where the
+defect is prose about a boundary rather than a computed value.
+The review also surfaced D-349 in `quench_bracket` itself, which is deferred to its own
+round under `think-7dwo` because correcting it changes numbers the engine has already
+reported.
+
+Phase 1 therefore lands as a working but very new instrument.
+It has produced no research result, its contracts are versioned in the expectation that
+they will change, and the defect distribution above is the honest statement of its
+maturity: the parts with years of controls behind them held, and everything written in
+the last few days needed a review pass to be trusted at all.
+
 ### Phase 2: Explicit Persistent Constraints
 
 - [ ] Specify separate `contact-lock` and `rigid-group` contracts; a setup snap does not

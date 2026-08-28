@@ -26,6 +26,18 @@ Reduced-motion and non-CSS viewers show endpoint B directly.
 
 ### General Motion Lab: setup and free quench
 
+> **Maturity: rough draft, first landed 2026-08-28.** This is a days-old Phase 1 tool
+> that grew out of a single `n = 5` spike, and it should be read as an instrument under
+> construction rather than a settled part of the toolchain.
+> It has never been used to produce a research result.
+> Its interfaces are expected to change: the scenario, frame, request, event, and trace
+> contracts are versioned precisely so they can be, and Phase 2 is already known to need
+> a schema amendment. It has been exercised by its own tests, by one senior engineering
+> review whose findings are addressed below, and by manual browser passes — not by
+> sustained use. Treat surprising behaviour as a likely defect in the lab, not as a
+> finding about packings, and check anything it shows you against the exact and verifier
+> paths that own those claims.
+
 The served Motion Lab turns the numerical quench into an inspectable local experiment.
 Choose a square count, starting container side, and seed; drag the resulting unit
 squares; use setup-only snapping to assemble temporary chunks; and then release those
@@ -40,7 +52,11 @@ uv run --frozen --all-extras --group dev python \
 ```
 
 The service prints its URL, normally `http://127.0.0.1:8765/`. It binds only to IPv4
-loopback and makes no remote request.
+loopback, makes no remote request, and answers only requests whose `Host` header is
+`127.0.0.1` or `localhost`. That last check is what a loopback bind alone does not give:
+a page whose own hostname re-resolves to loopback reaches the service as a same-origin
+caller, and the `Host` header is the only part of such a request that still names it.
+Reach the lab by one of those two names, not through a hostname that points at loopback.
 The exact `n = 5` scenario is also available from the Scenario control and at
 `http://127.0.0.1:8765/exact-n5`.
 
@@ -58,10 +74,15 @@ The exact `n = 5` scenario is also available from the Scenario control and at
    reports these states instead of silently repairing them.
 4. Choose **Release + run quench**. This discards every temporary group and sends only
    the container side, square centers, angles, solver choice, and numerical budgets.
+   Of those, the optimizer consumes only the centers and angles.
+   **Starting side** frames the setup and draws the released pose at the scale you
+   placed it; the quench re-minimizes the side and never treats the declared value as a
+   bound, so two runs differing only in that field return identical numbers.
    Setup snapping is a placement aid, not an optimizer constraint.
 5. Step, scrub, or play the returned trace.
    Download saves the exact canonical response bytes, including the request needed for
-   replay.
+   replay. A run that the service rejects clears the timeline and disables the download,
+   so nothing named a trace can be saved from a failed run.
 
 The timeline uses one visual grammar across numerical runs:
 
@@ -77,6 +98,14 @@ The timeline uses one visual grammar across numerical runs:
 
 Smooth motion between retained endpoints is illustrative.
 The numbered endpoints and downloaded trace are the numerical record.
+
+The per-event counters are scoped to the single solver call each event reports, and are
+labelled that way. They do not add up to the run, and they are not meant to: one LP call
+is reported twice, once as the fixed-angle state it produced and once as the angular
+probe that asked for it.
+The `fixed-point` events are the ones in bijection with LP calls, and the gate pins
+their sum to the run total.
+Read run totals from the result record, which the stop event displays directly.
 A large run may retain thousands of low-level events, so the visible timeline is a
 41-event moving window and autoplay targets a 160-event sample while preserving setup,
 accepted rotations, cell changes, and stop events.
@@ -113,6 +142,31 @@ The
 [generalized Motion Lab plan](../../docs/project/specs/active/plan-2026-08-25-generalized-motion-lab.md)
 owns the contracts, evidence grammar, Phase 1 acceptance criteria, and explicit Phase 2
 gate.
+
+#### What the first review found
+
+Phase 1 was reviewed before it landed, and the findings are worth keeping visible rather
+than folding silently into the history, because they say what kind of tool this is.
+None were mathematical: the quench, the verifier, and the exact scenario were untouched.
+All six were in the new instrument — a failed run that left the previous trace
+downloadable, a replay command that promised byte fidelity and checked only semantics, a
+timeline counter that changed meaning on its last event, a control labelled as a solver
+input that the solver never receives, an unguarded second implementation of the snap
+reducer in the browser, and a loopback service that trusted its own bind.
+All six are fixed; the four that were defects in a computed value or a retained artifact
+are D-350 through D-353, and each has a control that fails without its fix.
+The other two were a missing guard and a missing check rather than a wrong answer, so
+they carry no defect ID.
+
+The review also found D-349, which is not in this tool at all: `quench_bracket` drops
+the LP work of a free sweep that aborts on its budget.
+That one is deferred, because correcting it changes numbers the engine has already
+reported.
+
+That distribution is the honest summary of this tool’s maturity.
+The parts with years of controls behind them held; everything written in the last few
+days had defects in it, and a single review pass found six.
+Expect more.
 
 ### `n = 5`: exact interactive scenario
 

@@ -40,6 +40,7 @@
   let drag = null;
   let trace = null;
   let traceText = "";
+  let traceName = "";
   let eventIndex = 0;
   let displayedFrame = null;
   let playbackTimer = null;
@@ -55,8 +56,13 @@
     return document.createElementNS(svgNamespace, name);
   }
 
+  const paletteSize = Number(document.documentElement.dataset.paletteSize);
+  if (!Number.isInteger(paletteSize) || paletteSize < 1) {
+    throw new Error("Motion Lab palette size is missing from the document");
+  }
+
   function palette(index) {
-    return `var(--square-${String(index % 20).padStart(2, "0")})`;
+    return `var(--square-${String(index % paletteSize).padStart(2, "0")})`;
   }
 
   function scaleFor(side) {
@@ -364,7 +370,7 @@
   rotateRightButton.addEventListener("click", () => rotateSelected(rotationStep));
 
   snappingToggle.addEventListener("change", () => {
-    state.snapping_enabled = snappingToggle.checked;
+    state = editor.setSnapping(state, snappingToggle.checked);
     announce(snappingToggle.checked ? "Sticky setup enabled." : "Sticky setup disabled.");
   });
 
@@ -380,6 +386,7 @@
     stopPlayback();
     trace = null;
     traceText = "";
+    traceName = "";
     eventIndex = 0;
     playbackIndices = [];
     timelinePanel.hidden = true;
@@ -387,11 +394,11 @@
   }
 
   function adoptScenario(nextScenario) {
+    const keepSnapping = snappingToggle.checked;
     scenario = nextScenario;
-    baseline = editor.stateFromScenario(scenario);
+    baseline = editor.setSnapping(editor.stateFromScenario(scenario), keepSnapping);
     state = editor.copyState(baseline);
     selectedId = null;
-    snappingToggle.checked = true;
     clearTraceView();
     renderSetup();
   }
@@ -470,10 +477,12 @@
     byId("run-readout-title").textContent = `Event ${index + 1} of ${trace.events.length}`;
     byId("mode-value").textContent = presentation.label;
     byId("event-value").textContent = event.detail;
-    byId("counters-value").textContent = [
-      event.lp_solves === undefined ? null : `${event.lp_solves} LP solves`,
-      event.cell_changes === undefined ? null : `${event.cell_changes} cell changes`,
-    ].filter(Boolean).join("; ") || "No counters on this event";
+    byId("counters-value").textContent = event.phase === "stop"
+      ? `run total ${trace.result.lp_solves} LP solves; ${trace.result.cell_changes} cell changes`
+      : [
+        event.call_lp_solves === undefined ? null : `${event.call_lp_solves} LP solves in this call`,
+        event.call_cell_changes === undefined ? null : `${event.call_cell_changes} cell changes in this call`,
+      ].filter(Boolean).join("; ") || "No counters on this event";
     byId("groups-value").textContent = "Released; no optimizer constraints";
     byId("diagnostics-value").textContent = `${event.frame.squares.length} retained square poses`;
     byId("evidence-value").textContent = event.frame.evidence.claim;
@@ -650,10 +659,12 @@
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(request),
       });
-      traceText = await response.text();
-      const body = JSON.parse(traceText);
+      const text = await response.text();
+      const body = JSON.parse(text);
       if (!response.ok) throw new Error(body.error?.message || "numerical request failed");
       trace = body;
+      traceText = text;
+      traceName = `quench-trace-n${trace.request.x.length}-seed${seedInput.value}.json`;
       eventIndex = 0;
       timelinePanel.hidden = false;
       downloadButton.disabled = false;
@@ -661,6 +672,9 @@
       renderEvent(0);
       announce(`Quench returned ${trace.events.length} retained events; playback is paused.`);
     } catch (error) {
+      // Clear before reporting. The download button names its file a quench trace, so
+      // a rejected run must leave nothing behind for it to save.
+      clearTraceView();
       announce(`Quench failed: ${error.message}`);
       renderSetup();
     } finally {
@@ -675,9 +689,10 @@
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `quench-trace-n${state.squares.length}-seed${seedInput.value}.json`;
+    link.download = traceName;
     link.click();
-    URL.revokeObjectURL(url);
+    // Revoking in the same task can cancel the download in some browsers.
+    window.setTimeout(() => URL.revokeObjectURL(url), 0);
     announce("Canonical quench trace downloaded.");
   });
 
