@@ -636,3 +636,43 @@ controls:
   - "    \"coordinates\": [[0, 0]],\n    \"scope\": \"one literal axis-aligned three-square structural cell\""
   run: python3 -m devtools.validate_schemas
   expect: "Additional properties are not allowed"
+
+# --- the promotion refiner's typed refusals (BC-047) ---
+- name: promotion refiner - trust region not enforced
+  file: src/sqpack/promote/refine.py
+  replace: ["        if movement > radius:", "        if False:"]
+  run: uv run --frozen --quiet pytest -q tests/test_promote_refine.py
+  expect: "seed coarser than the trust radius: expected a left-trust-region refusal"
+
+- name: promotion refiner - non-square system accepted
+  file: src/sqpack/promote/refine.py
+  replace: ["        if len(residuals) != len(start):", "        if False:"]
+  run: uv run --frozen --quiet pytest -q tests/test_promote_refine.py
+  expect: "over-determined: expected not-square, got non-convergent"
+
+- name: promotion refiner - plateau detector always agrees
+  file: src/sqpack/promote/refine.py
+  replace:
+    - "        if previous > 0 and current > previous * mp.mpf(10) ** (-minimum_decades):\n            return False"
+    - "        if False:\n            return False"
+  run: uv run --frozen --quiet pytest -q tests/test_promote_refine.py
+  expect: "residual_falls accepted a plateau"
+
+# --- contact extraction's known answer and refusals (BC-042) ---
+- name: contact extraction - ambiguous band not populated
+  file: src/sqpack/promote/contacts.py
+  replace: ["        if floor_value > 0 and magnitude <= ceiling:", "        if False:"]
+  run: uv run --frozen --quiet pytest -q tests/test_promote_contacts.py
+  expect: "displacing a square into the band produced no ambiguity"
+
+- name: contact extraction - decided structure does not refuse
+  file: src/sqpack/promote/contacts.py
+  replace: ["    if structure.ambiguous:", "    if False:"]
+  run: uv run --frozen --quiet pytest -q tests/test_promote_contacts.py
+  expect: "perturbed margin: expected a undecidable-incidence refusal"
+
+- name: contact extraction - orientation classes collapse
+  file: src/sqpack/promote/contacts.py
+  replace: ["    return sign(cross) == 0 or sign(dot) == 0", "    return True"]
+  run: uv run --frozen --quiet pytest -q tests/test_promote_contacts.py
+  expect: "expected a 6 + 5 orientation split"

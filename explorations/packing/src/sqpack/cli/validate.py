@@ -537,6 +537,12 @@ def _known_best_atlas(context: Context) -> str:
                 "devtools.generate_contact_full_cell_control",
                 "--check",
             ),
+            (
+                sys.executable,
+                "-m",
+                "devtools.generate_contact_structures",
+                "--check",
+            ),
         ),
     )
     _require_text(
@@ -549,6 +555,7 @@ def _known_best_atlas(context: Context) -> str:
         "known-best chunk evidence profile check passed: 36 non-grid calibration cases",
         "contact enumeration pricing check passed",
         "contact full-cell control check passed",
+        "contact structures check passed",
     )
     return output
 

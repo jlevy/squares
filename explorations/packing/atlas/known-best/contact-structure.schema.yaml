@@ -1,0 +1,118 @@
+# Frozen contact structures, as measured from a retained pose.
+#
+# This schema deliberately records margins and separations rather than only the
+# incidence lists. An incidence list on its own cannot be audited: it looks identical
+# whether the contact was certified by exact arithmetic, measured across ninety-seven
+# orders of magnitude, or guessed at a tolerance somebody chose to make the answer come
+# out. The margins are what let a reader tell those apart.
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: packing.squares:ContactStructureAtlas/v1
+title: Measured contact structures
+type: object
+additionalProperties: false
+required: [generated_by, evidence_role, structures, controls]
+properties:
+  generated_by: {const: python -m devtools.generate_contact_structures}
+  evidence_role:
+    const: >-
+      contact structures measured from retained poses; no feasibility, optimality, or
+      exactness claim beyond the arithmetic each entry declares
+  structures:
+    type: array
+    minItems: 2
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - n
+        - source
+        - arithmetic
+        - side
+        - floor
+        - ambiguity_ceiling
+        - pairs_tested
+        - wall_relations_tested
+        - pair_contact_count
+        - wall_contact_count
+        - incidence_count
+        - ambiguous_count
+        - angle_class_count
+        - angle_classes
+        - worst_contact_margin
+        - smallest_strict_separation
+        - separation_decades
+        - pair_contacts
+        - wall_contacts
+        - known_answer
+      properties:
+        n: {type: integer, minimum: 2}
+        source: {type: string, minLength: 1}
+        arithmetic:
+          enum: [exact-algebraic, numerical-multiprecision]
+          description: >-
+            Which kind of sign decision produced these incidences. `exact-algebraic`
+            certifies each contact; `numerical-multiprecision` measures it against the
+            declared floor and can only refuse, never certify.
+        side: {type: string, minLength: 1}
+        floor: {type: string, minLength: 1}
+        ambiguity_ceiling: {type: string, minLength: 1}
+        pairs_tested: {type: integer, minimum: 1}
+        wall_relations_tested: {type: integer, minimum: 1}
+        pair_contact_count: {type: integer, minimum: 0}
+        wall_contact_count: {type: integer, minimum: 0}
+        incidence_count: {type: integer, minimum: 0}
+        ambiguous_count: {const: 0}
+        angle_class_count: {type: integer, minimum: 1}
+        angle_classes:
+          type: array
+          minItems: 1
+          items:
+            type: object
+            additionalProperties: false
+            required: [label, members, degrees]
+            properties:
+              label: {type: string, minLength: 1}
+              members: {type: array, minItems: 1, items: {type: integer, minimum: 0}}
+              degrees: {type: [string, "null"]}
+        worst_contact_margin: {type: string, minLength: 1}
+        smallest_strict_separation: {type: string, minLength: 1}
+        separation_decades:
+          type: [string, "null"]
+          description: >-
+            log10 of the smallest strict separation over the worst contact margin. Null
+            under exact arithmetic, where a contact is zero and the ratio is undefined --
+            which is the point, not a gap in the record.
+        pair_contacts: {type: array, items: {$ref: "#/$defs/incidence"}}
+        wall_contacts: {type: array, items: {$ref: "#/$defs/incidence"}}
+        known_answer:
+          type: object
+          additionalProperties: false
+          required: [checked_against, agrees, detail]
+          properties:
+            checked_against: {type: string, minLength: 1}
+            agrees: {type: boolean}
+            detail: {type: string, minLength: 1}
+  controls:
+    type: object
+    additionalProperties: false
+    required: [perturbed_margin_refused]
+    properties:
+      perturbed_margin_refused:
+        type: object
+        additionalProperties: false
+        required: [fired, kind, detail, displacement]
+        properties:
+          fired: {type: boolean}
+          kind: {type: [string, "null"]}
+          detail: {type: string, minLength: 1}
+          displacement: {type: string, minLength: 1}
+$defs:
+  incidence:
+    type: object
+    additionalProperties: false
+    required: [kind, left, right, margin]
+    properties:
+      kind: {enum: [pair, wall]}
+      left: {type: integer, minimum: 0}
+      right: {type: string, minLength: 1}
+      margin: {type: string, minLength: 1}

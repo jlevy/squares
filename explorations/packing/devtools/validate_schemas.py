@@ -61,6 +61,7 @@ PROSPECTIVE_ATLAS_SEED = FRONTIER.parent / "atlas" / "prospective" / "manifest.j
 CONTACT_SCAFFOLD_ATLAS = (
     FRONTIER.parent / "atlas" / "enumerated" / "contact-scaffolds-size5.json"
 )
+CONTACT_STRUCTURES = FRONTIER.parent / "atlas" / "known-best" / "contact-structures.json"
 
 
 def load_schema(name: str) -> dict:
@@ -243,6 +244,7 @@ def main() -> int:
     datasets.append(PROSPECTIVE_SOURCE_AVAILABILITY)
     datasets.append(PROSPECTIVE_ATLAS_SEED)
     datasets.append(CONTACT_SCAFFOLD_ATLAS)
+    datasets.append(CONTACT_STRUCTURES)
     if not md or not datasets:
         print("frontier/ artifacts not found", file=sys.stderr)
         return 2

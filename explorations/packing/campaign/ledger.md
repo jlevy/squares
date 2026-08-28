@@ -48,7 +48,7 @@ Each entry summarizes one user-level research window. Cycle slots are wall-clock
 | [session-032](agent-sessions/session-032-block1-missing-mutations.md) | completed | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 2 | think-oyn9 | Under BC-037 and think-1s0h, run exp-045 to a terminal H-023 disposition, recording `unresolved` with `needs_review` rather than an accepting verdict. |
 | [session-033](agent-sessions/session-033-block2-run-exp045.md) | completed | contemporaneous | `research-loop` (correctness) | `insight-iteration` (insight) | 2 | think-1s0h | Under BC-035 and think-cja6, run block three's pipeline guard consolidation while exp-045's acceptance waits on an independent audit and a human accept decision. |
 | [session-034](agent-sessions/session-034-block3-guards-and-joins.md) | completed | contemporaneous | `pipeline-improvement` (process) | `pipeline-improvement` (process) | 1 | think-cja6 | Under BC-038 and think-kdil, run block four: wire `evaluate_stress` to the shared row inventory now that exp-045 is terminal and the path is no longer frozen. |
-| [session-035](agent-sessions/session-035-agenda005-block-a.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (correctness) | 1 | think-y85e | Continue the active slice: BC-047 under `think-y85e`, driving the transcribed n = 29 system to a declared precision with a reported residual bound. The block's second lane, the contact-structure freeze, opens after it and is independent of its outcome. At the block boundary run the full packing-validate, not --fast, then finalize, commit and push before the 04:05 deadline. |
+| [session-035](agent-sessions/session-035-agenda005-block-a.md) | in_progress | contemporaneous | `pipeline-improvement` (correctness) | `pipeline-improvement` (process) | 3 | think-y85e | Continue the active slice: BC-047 under `think-y85e`, driving the transcribed n = 29 system to a declared precision with a reported residual bound. The block's second lane, the contact-structure freeze, opens after it and is independent of its outcome. At the block boundary run the full packing-validate, not --fast, then finalize, commit and push before the 04:05 deadline. |
 
 ### Workflow summary
 
@@ -62,7 +62,7 @@ Declared counts are contemporaneous contracts; retrospective counts are reconstr
 | `process-review` | 6 | 4 | 35 | 6 |
 | `efficiency-loop` | 7 | 0 | 17 | 0 |
 | `research-loop` | 2 | 4 | 12 | 7 |
-| `pipeline-improvement` | 8 | 0 | 45 | 0 |
+| `pipeline-improvement` | 8 | 0 | 47 | 0 |
 
 ## Experiment agendas
 
