@@ -20,7 +20,7 @@ agenda:
     purpose: tool_validation
     owner_focus: correctness
     instances: [5, 11, 29]
-    state: ready
+    state: complete
     priority: 1
     question: >-
       Can the guards that stopped guarding be repaired, and the class of failure closed
@@ -34,6 +34,7 @@ agenda:
       `packing-validate` green, and the full-tier cadence decision written down rather
       than left as folklore.
     bead: think-cja6
+    workflows: [pipeline-improvement]
     depends_on: []
     next_evidence: >-
       Build the declared-command guard under think-ldy8, fix the terminal-round contract
@@ -42,6 +43,12 @@ agenda:
       rather than literal. The last item is the actual class defect: a literal anchor on a
       number the checker itself moves is what silently disabled one of 76 controls. The
       record-model joins moved to BC-041 so neither commitment carries six children.
+    artifacts:
+    - Makefile
+    - devtools/check_declared_commands.py
+    - devtools/controls.yaml
+    - src/sqpack/campaign/ledger.py
+    - src/sqpack/cli/validate.py
     note: >-
       Three of the four bugs found on 2026-08-27 were guards that had stopped guarding,
       and none was visible to the `--fast` edit loop that broke them. Repairing them
@@ -51,7 +58,7 @@ agenda:
     purpose: tool_validation
     owner_focus: process
     instances: [5, 11, 29]
-    state: ready
+    state: complete
     priority: 2
     question: >-
       Can the record model's two unchecked joins be made machine-checkable, so that a
@@ -66,6 +73,7 @@ agenda:
       structured join from a workflow phase to the commitment it serves, or a typed reason
       why either cannot be added without rewriting terminal records.
     bead: think-hpf7
+    workflows: [pipeline-improvement]
     depends_on: []
     next_evidence: >-
       Three beads back more than one live commitment today, and `think-1s0h` is
@@ -73,6 +81,10 @@ agenda:
       carry no bead or commitment field, only 39 percent of phases name a commitment at
       all, and the session-to-commitment link is recovered by regex over `next_action`
       prose. Both fields must be optional so no terminal session record needs rewriting.
+    artifacts:
+    - campaign/schemas/agenda.schema.yaml
+    - campaign/schemas/agent-session.schema.yaml
+    - src/sqpack/campaign/ledger.py
     note: >-
       Split out of BC-035 before work started, because six children under one commitment is
       how `think-cja6` grew from two to four items in a single day.
@@ -157,6 +169,7 @@ agenda:
       three cold and five warm comparisons show at least a five-fold improvement, warm
       median at most 45 seconds, warm p95 at most 55 seconds, and exact semantic equality.
     bead: think-kdil
+    workflows: [efficiency-loop]
     depends_on: [BC-037]
     next_evidence: >-
       The trigger is already measured and passed: `active_row_jets` holds 93.0 percent of
@@ -186,6 +199,7 @@ agenda:
       `E-n029-schadt-rational-upper` limitations text, and both gated checker paths agree,
       with the chosen `rational_digits` and its reason recorded.
     bead: think-uzmh
+    workflows: [pipeline-improvement]
     depends_on: []
     next_evidence: >-
       Six verified promotions at `rational_digits` 18 through 60 all beat the recorded

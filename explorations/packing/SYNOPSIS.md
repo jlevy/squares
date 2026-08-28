@@ -311,8 +311,14 @@ That is fixed and pinned, and the gate is green on the merged revision.
 [Session 032](campaign/agent-sessions/session-032-block1-missing-mutations.md) closed
 agenda-004’s first block: twelve pre-certificate mutations are now enforced on twelve
 distinct failure identifiers, so exp-045’s admission gap is closed.
-[Session 033](campaign/agent-sessions/session-033-block2-run-exp045.md) is the terminal
-successor and ran exp-045 itself.
+[Session 033](campaign/agent-sessions/session-033-block2-run-exp045.md) ran exp-045
+itself, and
+[session 034](campaign/agent-sessions/session-034-block3-guards-and-joins.md) is the
+terminal successor: it closed `BC-035` and `BC-041`, adding four guards that did not
+exist, each verified to fire rather than merely to pass and each pinned by its own
+negative control. Negative controls rise from 76 to 80. The next bounded slice is
+`BC-038` under `think-kdil`, the row-jet inventory reuse, which exp-045’s terminal
+disposition unfroze.
 Both declared determinations report `criterion_met` — canonical pure `-W` is excluded at
 A, the interior, and B, and the `-W` coefficients equal the separately derived `+W`
 values — and record-and-replay agree.

@@ -218,6 +218,18 @@ controls:
   run: python3 -m sqpack.campaign.ledger check
   expect: "schema violation"
 
+- name: campaign - a phase serves a commitment that does not exist
+  file: campaign/agent-sessions/session-034-block3-guards-and-joins.md
+  replace: ["    commitment: BC-035", "    commitment: BC-999"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "serves unknown commitment BC-999"
+
+- name: campaign - the duplicated workflow enum drifts between schemas
+  file: campaign/schemas/agenda.schema.yaml
+  replace: ["              - general-improvement", "              - general-improvement\n              - invented-workflow"]
+  run: python3 -m sqpack.campaign.ledger check
+  expect: "duplicated workflow enum has drifted"
+
 - name: campaign - a declared validation command that could never run
   file: campaign/agent-sessions/session-028-bc032-n29-promotion-inventory.md
   replace: ["packing-validate --list", "packing-validate --list-steps"]

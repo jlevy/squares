@@ -336,12 +336,12 @@ For the next supervised exact-research goal, use
 [session 029](../../../../campaign/agent-sessions/session-029-finish-agenda-003-cycles.md).
 Sessions 027 and 028 are terminal, and session 029 closed the remaining agenda-003 cells
 on measurement rather than opinion.
-Open BC-035 under `think-cja6` as the next bounded driver: exp-045 has run and sits
-`unresolved` with `needs_review`, awaiting an independent post-change audit and a human
-accept decision, so the pipeline guard consolidation is the next slice a runner may
-take. The remaining outstanding items each have their own workflow entry in agenda-004.
-Build the four missing controls so the enforced count matches the declared one, then
-re-run the admission check before any target generation.
+Open BC-038 under `think-kdil` as the next bounded driver: exp-045 is terminal, so the
+shared row-jet path it froze is available again, and the measured inventory reuse owes
+only its exact-output equivalence result.
+The remaining outstanding items each have their own workflow entry in agenda-004. Build
+the four missing controls so the enforced count matches the declared one, then re-run
+the admission check before any target generation.
 Do not amend the declared twelve down to the implemented eight; the criterion was frozen
 before implementation.
 The measured W5 inventory remains scheduled after that driver; BC-016 stays blocked on

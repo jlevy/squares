@@ -71,10 +71,8 @@ def _declared_commands() -> list[tuple[str, int, str]]:
     """Every (session, phase number, command) declared across the session records."""
     declared: list[tuple[str, int, str]] = []
     for path in sorted(SESSIONS.glob("session-[0-9][0-9][0-9]-*.md")):
-        # Deliberately one exception type per clause. Negative controls invoke ambient
-        # `python3`, which is 3.13 here, while the project targets 3.14 -- and ruff
-        # formats multi-type `except` clauses to the unparenthesized 3.14-only form that
-        # 3.13 cannot parse. See think-y4nk.
+        # A missing frontmatter fence is checked rather than caught, so the only thing
+        # left to catch is a malformed one.
         parts = path.read_text(encoding="utf-8").split("---\n", 2)
         if len(parts) < 2:
             continue

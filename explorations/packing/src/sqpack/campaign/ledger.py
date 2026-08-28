@@ -44,6 +44,7 @@ LEDGER = ROOT / "ledger.md"
 IDEAS = ROOT / "ideas.md"
 DEFECTS = PROJECT_ROOT / "defects.yaml"
 SESSION_SCHEMA = ROOT / "schemas/agent-session.schema.yaml"
+AGENDA_SCHEMA = ROOT / "schemas/agenda.schema.yaml"
 REQUIRED_LOGBOOK_SECTIONS = (
     "Context",
     "Outcome",
@@ -505,6 +506,38 @@ def check(
             problems.append(
                 f"{bead}: backs more than one ready commitment: {', '.join(sorted(places))}"
             )
+
+    # The agenda schema duplicates the session schema's workflow list rather than
+    # referencing it, because a cross-file `$ref` does not resolve for these loaders.
+    # A duplicated enum that nothing compares is how a list quietly grows two versions.
+    session_workflows = set(
+        yaml.safe_load(SESSION_SCHEMA.read_text(encoding="utf-8"))["$defs"]["workflow"]["enum"]
+    )
+    agenda_workflows_node = (
+        yaml.safe_load(AGENDA_SCHEMA.read_text(encoding="utf-8"))["properties"]["items"][
+            "items"
+        ]["properties"]
+        .get("workflows", {})
+        .get("items", {})
+    )
+    agenda_workflows = set(agenda_workflows_node.get("enum") or ())
+    if agenda_workflows and agenda_workflows != session_workflows:
+        problems.append(
+            "agenda.schema.yaml: its duplicated workflow enum has drifted from "
+            f"agent-session.schema.yaml: {sorted(agenda_workflows ^ session_workflows)}"
+        )
+
+    # A phase may now name the commitment it serves. Where it does, the link is checked
+    # rather than left as prose a regex has to recover.
+    known_commitments = {item["id"] for agenda in agendas for item in agenda["items"]}
+    for session in sessions:
+        name = session["_path"].name
+        for number, phase in enumerate(session.get("workflow_phases") or [], start=1):
+            commitment = phase.get("commitment")
+            if commitment and commitment not in known_commitments:
+                problems.append(
+                    f"{name}: phase {number} serves unknown commitment {commitment}"
+                )
 
     reports = {x["id"] for x in explorations}
     for hypothesis in hypotheses:
