@@ -16,10 +16,23 @@ class ScalarKind(StrEnum):
 
 
 class EvidenceTier(StrEnum):
+    """What the drawn configuration itself establishes, and nothing more.
+
+    Every tier is a statement about the geometry in the frame: it is a candidate,
+    its feasibility was checked numerically, or it is an exactly certified feasible
+    packing and therefore an upper bound on s(n). None of that can reach optimality,
+    which is a lower-bound statement about the mathematics rather than a property
+    of any one packing. A PROVED_OPTIMUM member used to sit here; nothing in the
+    render pipeline could ever produce it, because the pipeline is fed from witness
+    records whose claim.coordinate_provenance describes how coordinates were
+    encoded. It was removed so a renderer cannot reach for it: optimality lives in
+    frontier/n-NNN.md as packing.status, and a figure that wants to say "proved"
+    must read it from there.
+    """
+
     CANDIDATE = "candidate"
     NUMERICALLY_CHECKED = "numerically-checked"
     CERTIFIED_UPPER_BOUND = "certified-upper-bound"
-    PROVED_OPTIMUM = "proved-optimum"
 
 
 class CheckKind(StrEnum):
@@ -321,10 +334,7 @@ def validate_frame(frame: PackingFrame) -> None:
         ]
         if missing:
             raise ValueError("numerically checked evidence requires " + ", ".join(missing))
-    if frame.evidence in {
-        EvidenceTier.CERTIFIED_UPPER_BOUND,
-        EvidenceTier.PROVED_OPTIMUM,
-    }:
+    if frame.evidence is EvidenceTier.CERTIFIED_UPPER_BOUND:
         if not formally_checked:
             raise ValueError("formal evidence requires a successful formal check")
         if check is not None and any(

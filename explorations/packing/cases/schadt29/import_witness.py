@@ -51,7 +51,7 @@ def parse_source(path: Path) -> dict:
         },
         "squares": squares,
         "claim": {
-            "assurance": "reported",
+            "coordinate_provenance": "reported",
             "method": "numerical-multiprecision",
             "precision": {"decimal_digits": 300, "rounding": "decimal-context"},
             "tolerance": "1e-100",

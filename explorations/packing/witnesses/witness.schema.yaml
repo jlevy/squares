@@ -82,29 +82,31 @@ properties:
   claim:
     type: object
     additionalProperties: false
-    required: [assurance, method, limitations]
+    required: [coordinate_provenance, method, limitations]
     properties:
-      assurance:
+      coordinate_provenance:
         enum: [reported, numerically-checked, verified]
         description: >-
-          Strength of the evidence FOR THE GEOMETRY IN THIS RECORD, and nothing
-          else. It answers how the coordinates below were established: "verified"
-          means they are exact algebraic values this repository can re-derive,
-          "numerically-checked" means they are multiprecision decimals that pass
-          the recorded feasibility check at the stated tolerance, and "reported"
-          means they are carried from a source without an independent check.
+          How THE COORDINATES IN THIS RECORD were established, and nothing else.
+          "verified" means they are exact algebraic values this repository can
+          re-derive, "numerically-checked" means they are multiprecision decimals
+          that pass the recorded feasibility check at the stated tolerance, and
+          "reported" means they are carried from a source without an independent
+          check. Each value describes this file's encoding of one construction.
 
           It is NOT a statement about what is known mathematically for this n.
           Optimality and the exactness of s(n) live in frontier/n-NNN.md as
           packing.status and packing.reported_upper_bound.exact_form or
           .minimal_polynomial. A case can be proved optimal with a closed-form
-          side and still carry assurance "numerically-checked" here, because the
-          construction was retained as decimals: n=5 and n=10 are exactly that.
-          Read this field for provenance of the coordinates, never for the
-          standing of the mathematics.
+          side and still carry "numerically-checked" here, because the
+          construction was retained as decimals: n=5 and n=10 are exactly that,
+          and 20 of the 100 known-best records pair a closed-form frontier side
+          with numerically-checked coordinates. Read this field for provenance of
+          the coordinates, never for the standing of the mathematics.
 
-          The name is misleading and is scheduled to be renamed; see bead
-          think-d1qd.
+          Formerly named claim.assurance, which invited exactly that misreading:
+          a renderer once badged n=5, proved optimal with side 2 + sqrt(2)/2, as
+          "numerically verified" because this witness stores decimals.
       method:
         enum:
           - numerical-f64

@@ -114,7 +114,7 @@ def check(path: Path) -> dict[str, Any]:
         failures.append(f"{len(overlaps)} overlapping pairs; worst exact gap {min(overlaps)}")
     return {
         "verification_passed": not failures,
-        "assurance": "verified" if not failures else "not-established",
+        "coordinate_provenance": "verified" if not failures else "not-established",
         "method": "exact-algebraic",
         "field": "Q",
         "n": len(squares),

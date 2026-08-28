@@ -25,7 +25,7 @@ witness:
     - id: 4
       corners: [['1', '1'], ['2', '1'], ['2', '2'], ['1', '2']]
   claim:
-    assurance: verified
+    coordinate_provenance: verified
     method: exact-algebraic
     limitations: Establishes this feasible upper-bound witness, not uniqueness.
   certificate:

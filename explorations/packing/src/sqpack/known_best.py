@@ -673,7 +673,7 @@ def exact_grid_witness(
         },
         "squares": squares,
         "claim": {
-            "assurance": "verified",
+            "coordinate_provenance": "verified",
             "method": "exact-algebraic",
             "limitations": limitations,
         },
@@ -702,7 +702,7 @@ def _checked_witness(
         raise SourceGeometryError(
             "numerical-check-failed", f"{witness['id']} failed normalization check: {first}"
         )
-    witness["claim"]["assurance"] = "numerically-checked"
+    witness["claim"]["coordinate_provenance"] = "numerically-checked"
     witness["certificate"] = {
         "kind": "numerical-feasibility-receipt",
         "replay": (
@@ -749,7 +749,7 @@ def kingbird_derived_witness(
     )
     witness = deepcopy(dict(retained_witness))
     witness["claim"] = {
-        "assurance": "reported",
+        "coordinate_provenance": "reported",
         "method": "numerical-multiprecision",
         "precision": {"decimal_digits": CHECK_DIGITS, "rounding": "nearest"},
         "tolerance": KINGBIRD_TOLERANCE,
@@ -811,7 +811,7 @@ def unitsquare_witness(
             for index, corners in enumerate(geometry.squares, start=1)
         ],
         "claim": {
-            "assurance": "reported",
+            "coordinate_provenance": "reported",
             "method": "numerical-multiprecision",
             "precision": {"decimal_digits": CHECK_DIGITS, "rounding": "nearest"},
             "tolerance": UNITSQUARE_TOLERANCE,

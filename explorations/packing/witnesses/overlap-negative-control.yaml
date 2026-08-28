@@ -21,6 +21,6 @@ witness:
     - id: 2
       corners: [['1/2', '0'], ['3/2', '0'], ['3/2', '1'], ['1/2', '1']]
   claim:
-    assurance: reported
+    coordinate_provenance: reported
     method: exact-algebraic
     limitations: Deliberately invalid mutation control; never frontier evidence.

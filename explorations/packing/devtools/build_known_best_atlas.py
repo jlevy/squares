@@ -534,7 +534,12 @@ def frame_from_witness(witness: dict) -> PackingFrame:
         for index, corners in enumerate(source_squares, start=1)
     )
     claim = witness["claim"]
-    if claim["assurance"] == "verified":
+    # The tier states what this drawn packing establishes, which is exactly what
+    # coordinate_provenance answers: exact coordinates make the frame a certified
+    # upper bound, checked decimals make it numerically checked. Optimality is not
+    # on this ladder and is not readable from a witness; a figure that wants to say
+    # "proved" reads packing.status from frontier/n-NNN.md instead.
+    if claim["coordinate_provenance"] == "verified":
         evidence = EvidenceTier.CERTIFIED_UPPER_BOUND
         check = CheckSummary(
             passed=True,
@@ -1255,7 +1260,7 @@ def _manifest_entry(built: BuiltCase) -> dict:
         "witness": {
             "id": built.witness["id"],
             "path": f"witnesses/known-best/n-{n:03d}.yaml",
-            "assurance": claim["assurance"],
+            "coordinate_provenance": claim["coordinate_provenance"],
             "method": claim["method"],
             **({"tolerance": claim["tolerance"]} if "tolerance" in claim else {}),
         },

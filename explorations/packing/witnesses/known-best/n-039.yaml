@@ -212,7 +212,7 @@ witness:
     - '1.636863543581138493666690182602927410475842700245392469744917143186766874951667026148017710976160766'
     angle: '37.425248552603373021422459112338754590283042719557'
   claim:
-    assurance: numerically-checked
+    coordinate_provenance: numerically-checked
     method: numerical-multiprecision
     precision:
       decimal_digits: 120
@@ -235,7 +235,7 @@ witness:
     result:
       operation: check
       id: W-known-best-n039
-      assurance: numerically-checked
+      coordinate_provenance: numerically-checked
       method: numerical-multiprecision
       precision:
         decimal_digits: 120
