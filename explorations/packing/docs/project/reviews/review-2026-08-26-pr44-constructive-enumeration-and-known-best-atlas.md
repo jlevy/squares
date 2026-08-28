@@ -46,7 +46,7 @@ No H-044 through H-048 verdict is licensed by this review.
 
 ## What the Review Built
 
-The branch now retains one normalized `Witness/v1` construction and one deterministic
+The branch now retains one normalized `Witness/v2` construction and one deterministic
 house-rendered SVG for every `n = 1..100`, linked from the frontier records.
 The atlas is regenerable and checks its own source hashes, witness semantics, numerical
 receipts, renderings, manifest, and frontier links.
@@ -280,7 +280,7 @@ The five review follow-ups were dispositioned as follows:
    catalogue SVGs were located.
    The candidate working tree removes the 34 raw SVGs added for this atlas acquisition.
    The source inventory retains attribution, URLs, retrieval metadata, and normalized
-   numerical center/angle facts in Witness/v1; deterministic house renderings and
+   numerical center/angle facts in Witness/v2; deterministic house renderings and
    numerical receipts are regenerated from those facts.
    This conservative repository policy is not a legal conclusion, and raw retention
    still requires an applicable license or express permission.

@@ -10,8 +10,8 @@ No express license or permission covering redistribution of the Kingbird catalog
 was located during the 2026-08-26 review.
 The repository therefore retains no raw Kingbird SVG in this source inventory.
 It retains attributed source metadata, normalized numerical center and angle facts in
-the Witness/v1 corpus, and deterministic house renderings derived from those facts.
-The retained Witness/v1 coordinate fields are the deterministic regeneration input.
+the Witness/v2 corpus, and deterministic house renderings derived from those facts.
+The retained Witness/v2 coordinate fields are the deterministic regeneration input.
 
 This is a conservative repository-retention policy, not a legal conclusion.
 The source metadata is not itself a geometry or feasibility claim.

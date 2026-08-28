@@ -1,4 +1,4 @@
-"""Public command behavior for Witness/v1 artifacts."""
+"""Public command behavior for Witness/v2 artifacts."""
 
 from __future__ import annotations
 

@@ -188,7 +188,7 @@ uv run --frozen python -m devtools.check_source_coverage
 1. Retain the first-party source and add or update its dated coverage entry.
 2. Put the literal public claim in the reported lane and give it typed evidence.
 3. If geometry is available, adapt it once to
-   [`Witness/v1`](../witnesses/witness.schema.yaml), then use `packing-witness inspect`
+   [`Witness/v2`](../witnesses/witness.schema.yaml), then use `packing-witness inspect`
    or `check` with explicit arithmetic, precision, and tolerance.
 4. Put a value in the verified lane only after an exact proof, exact witness replay, or
    rigorous interval certificate discharges its assumptions.

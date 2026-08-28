@@ -48,7 +48,7 @@ def expected_witness() -> dict[str, Any]:
 
 
 def expected_text() -> str:
-    """Return the byte-stable Witness/v1 control document."""
+    """Return the byte-stable Witness/v2 control document."""
     return witness_document(expected_witness())
 
 
@@ -76,7 +76,7 @@ def check() -> None:
     retained = yaml.safe_load(text)
     validate_document(retained)
     if load_witness(OUTPUT) != retained["witness"]:
-        raise ValueError("known-best n=11 rational control failed Witness/v1 validation")
+        raise ValueError("known-best n=11 rational control failed Witness/v2 validation")
     print("known-best n=11 rational control check passed")
 
 

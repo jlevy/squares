@@ -1,5 +1,5 @@
 softschema:
-  contract: packing.squares:Witness/v1
+  contract: packing.squares:Witness/v2
   schema: witness.schema.yaml
   envelope: witness
   status: enforced

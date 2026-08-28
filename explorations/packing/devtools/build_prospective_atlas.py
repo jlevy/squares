@@ -242,7 +242,7 @@ def _render(witness: dict) -> str:
             overlays=frozenset(),
             title=f"Prospective source construction for {n} unit squares",
             description=(
-                f"The source-selected n={n} construction, normalized to Witness/v1 and "
+                f"The source-selected n={n} construction, normalized to Witness/v2 and "
                 "drawn with the repository deterministic house renderer. This is a "
                 "feasible construction, not an optimality or chunk-structure claim."
             ),

@@ -45,7 +45,7 @@ The next corpus-extension pass should:
 
 1. resolve whether the 123 Kingbird SVGs can be retained, or obtain equivalent geometry
    from a source with explicit reuse terms;
-2. normalize any newly eligible geometry to `Witness/v1`, validate feasibility at the
+2. normalize any newly eligible geometry to `Witness/v2`, validate feasibility at the
    assurance supported by the source, and render it with the house renderer; and
 3. start a separate availability audit for any range beyond `n = 324` rather than
    treating it as covered by this map.

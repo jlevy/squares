@@ -583,7 +583,7 @@ def _render(witness: dict) -> str:
             overlays=frozenset(),
             title=f"Known-best packing of {n} unit squares",
             description=(
-                f"The retained known-best n={n} construction, normalized to Witness/v1 "
+                f"The retained known-best n={n} construction, normalized to Witness/v2 "
                 "and rendered with the repository's deterministic house renderer."
             ),
         ),
@@ -1232,7 +1232,7 @@ def _manifest_entry(built: BuiltCase) -> dict:
     if plan.kind == "exact-grid":
         derivation = "canonical row-major subset of an exact integer grid"
     elif plan.kind == "kingbird-derived-facts":
-        derivation = "deterministic reuse of retained Witness/v1 numerical center/angle facts"
+        derivation = "deterministic reuse of retained Witness/v2 numerical center/angle facts"
     elif n == plan.source_n:
         derivation = "direct normalization of complete source geometry"
     else:

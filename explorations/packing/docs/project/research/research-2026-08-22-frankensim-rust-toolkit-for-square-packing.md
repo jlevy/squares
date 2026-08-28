@@ -24,7 +24,7 @@ The second of those found no purpose-built exact verifier in the surveyed ecosys
 argued for a filtered exact-predicate kernel over a real algebraic number field.
 FrankenSim turns out to contain most of the pieces of exactly that architecture, built
 for a different purpose.
-As of 2026-08-25, this repository implements an initial purpose-built `Witness/v1`
+As of 2026-08-25, this repository implements an initial purpose-built `Witness/v2`
 checker for rational and real-algebraic packings; the filtered kernel and general
 interval-certification path discussed here remain prospective.
 

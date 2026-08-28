@@ -833,7 +833,7 @@ The state of proofs, stated completely (which the commonly cited summaries are n
    exist for most packings but are embedded as Mathematica expressions in XML comments
    inside SVGs, with no schema, no coordinate list, and no machine-readable link between
    a packing and its minimal polynomial.
-   This repository’s `Witness/v1` supplies a clean interchange and exact checker once a
+   This repository’s `Witness/v2` supplies a clean interchange and exact checker once a
    packing has been normalized, but importing much of the SVG corpus still requires
    case-specific source interpretation.
 
@@ -851,7 +851,7 @@ Tooling by task, with the honest verdict for this specific problem.
 | Task | Best open-source option | Best option overall | Gap |
 | --- | --- | --- | --- |
 | Approximate validity check | SAT written directly, or `jagua-rs` | same | none; microseconds per pair, and linear in `n` once bucketed |
-| Exact validity check | this repository’s `Witness/v1` checker for rational and supported real-algebraic witnesses | CGAL exact kernels + `msolve`/FLINT for broader systems | automatic corpus import and general interval-to-existence certification remain open |
+| Exact validity check | this repository’s `Witness/v2` checker for rational and supported real-algebraic witnesses | CGAL exact kernels + `msolve`/FLINT for broader systems | automatic corpus import and general interval-to-existence certification remain open |
 | Record search | none | Schadt/Ellsworth GPU annealer (closed) | **no open equivalent** |
 | General search | SCIP 10 + Farkas non-overlap | FICO Xpress, Gurobi | competitive only to `n ≈ 16` |
 | Nesting-style search | `jagua-rs` + `sparrow`, `packingsolver` | same | wrong objective and tolerance regime |
@@ -871,7 +871,7 @@ For anyone wanting to work on this computationally, in rough order of value per 
 effort:
 
 1. **Complete the exact corpus pipeline.** Normalize the remaining SVG layouts into
-   `Witness/v1` with their algebraic definitions and minimal polynomials, then extend
+   `Witness/v2` with their algebraic definitions and minimal polynomials, then extend
    the checker with a filtered kernel and interval-existence certificates where direct
    exact reconstruction is unavailable.
    The current repository covers rational and supported single-generator real-algebraic

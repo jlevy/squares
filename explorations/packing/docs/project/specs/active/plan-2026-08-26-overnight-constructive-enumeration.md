@@ -17,7 +17,7 @@ or the design rationale, which lives in
 Build the reusable evidence and annotation layers that a constructive proposer needs,
 then price the next layer before implementing it.
 The first checkpoint is now complete: all known-best constructions for `n = 1..100` have
-retained provenance, normalized `Witness/v1` geometry, numerical or exact receipts, and
+retained provenance, normalized `Witness/v2` geometry, numerical or exact receipts, and
 deterministic house renderings.
 
 The remaining overnight objective is a deterministic chunk-partition contract and its

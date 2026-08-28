@@ -147,7 +147,7 @@
         },
         "reported_side": "2.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             5
@@ -294,7 +294,7 @@
         },
         "reported_side": "3.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             10
@@ -325,7 +325,7 @@
         },
         "reported_side": "3.87708359002281",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             11
@@ -501,7 +501,7 @@
         },
         "reported_side": "4.67553009360455",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             17
@@ -532,7 +532,7 @@
         },
         "reported_side": "4.82287565553229",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             18
@@ -563,7 +563,7 @@
         },
         "reported_side": "4.88561808316412",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             19
@@ -768,7 +768,7 @@
         },
         "reported_side": "5.62132034355964",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             26
@@ -799,7 +799,7 @@
         },
         "reported_side": "5.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             27
@@ -830,7 +830,7 @@
         },
         "reported_side": "5.82444461667405",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             28
@@ -861,7 +861,7 @@
         },
         "reported_side": "5.93383346267692",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             29
@@ -1095,7 +1095,7 @@
         },
         "reported_side": "6.59861960924436",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             37
@@ -1126,7 +1126,7 @@
         },
         "reported_side": "6.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             38
@@ -1157,7 +1157,7 @@
         },
         "reported_side": "6.81072208306864",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             39
@@ -1188,7 +1188,7 @@
         },
         "reported_side": "6.82842712474619",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             40
@@ -1219,7 +1219,7 @@
         },
         "reported_side": "6.92669309446880",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             41
@@ -1482,7 +1482,7 @@
         },
         "reported_side": "7.57142857142857",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             50
@@ -1513,7 +1513,7 @@
         },
         "reported_side": "7.70079923541701",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             51
@@ -1544,7 +1544,7 @@
         },
         "reported_side": "7.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             52
@@ -1575,7 +1575,7 @@
         },
         "reported_side": "7.82287565553229",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             53
@@ -1606,7 +1606,7 @@
         },
         "reported_side": "7.84666719284348",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             54
@@ -1637,7 +1637,7 @@
         },
         "reported_side": "7.94577100750391",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             55
@@ -1929,7 +1929,7 @@
         },
         "reported_side": "8.53553390593273",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             65
@@ -1960,7 +1960,7 @@
         },
         "reported_side": "8.65685424949238",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             66
@@ -1991,7 +1991,7 @@
         },
         "reported_side": "8.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             67
@@ -2084,7 +2084,7 @@
         },
         "reported_side": "8.88166675700900",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             70
@@ -2115,7 +2115,7 @@
         },
         "reported_side": "8.94407155757031",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             71
@@ -2436,7 +2436,7 @@
         },
         "reported_side": "9.53553390593273",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             82
@@ -2467,7 +2467,7 @@
         },
         "reported_side": "9.63482562092335",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             83
@@ -2498,7 +2498,7 @@
         },
         "reported_side": "9.70710678118654",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             84
@@ -2529,7 +2529,7 @@
         },
         "reported_side": "9.74264068711928",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             85
@@ -2560,7 +2560,7 @@
         },
         "reported_side": "9.82287565553229",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             86
@@ -2591,7 +2591,7 @@
         },
         "reported_side": "9.83881743996618",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             87
@@ -2622,7 +2622,7 @@
         },
         "reported_side": "9.88815305375857",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             88
@@ -2653,7 +2653,7 @@
         },
         "reported_side": "9.94974746830583",
         "source": {
-          "derivation": "deterministic reuse of retained Witness/v1 numerical center/angle facts",
+          "derivation": "deterministic reuse of retained Witness/v2 numerical center/angle facts",
           "kind": "kingbird-derived-facts",
           "listed_n": [
             89

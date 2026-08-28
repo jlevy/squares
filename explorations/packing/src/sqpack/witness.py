@@ -35,7 +35,7 @@ class WitnessError(ValueError):
 
 
 def load_witness(path: Path, *, fallback_schema: Path | None = None) -> dict[str, Any]:
-    """Load and structurally validate one Witness/v1 YAML artifact."""
+    """Load and structurally validate one Witness/v2 YAML artifact."""
     try:
         document = load_yaml(path.read_text(encoding="utf-8"))
     except yaml.YAMLError as error:
@@ -46,8 +46,8 @@ def load_witness(path: Path, *, fallback_schema: Path | None = None) -> dict[str
     witness = document.get("witness")
     if not isinstance(metadata, dict) or not isinstance(witness, dict):
         raise WitnessError("malformed-input", "expected softschema and witness objects")
-    if metadata.get("contract") != "packing.squares:Witness/v1":
-        raise WitnessError("unsupported-contract", "expected packing.squares:Witness/v1")
+    if metadata.get("contract") != "packing.squares:Witness/v2":
+        raise WitnessError("unsupported-contract", "expected packing.squares:Witness/v2")
     schema_path = path.parent / str(metadata.get("schema", "witness.schema.yaml"))
     if not schema_path.is_file() and fallback_schema is not None:
         schema_path = fallback_schema
@@ -477,7 +477,7 @@ def exact_verify(witness: Mapping[str, Any]) -> tuple[dict[str, Any], Report]:
     if witness["claim"]["method"] == "interval-certified":
         raise WitnessError(
             "checker-not-built",
-            "Witness/v1 can describe interval evidence, but the generic interval "
+            "Witness/v2 can describe interval evidence, but the generic interval "
             "certificate checker is not built",
         )
     squares, side, field = _exact_materialize(witness)
@@ -708,7 +708,7 @@ def witness_document(witness: Mapping[str, Any], *, schema: str = "witness.schem
         raise WitnessError("malformed-option", "schema path must be non-empty")
     document = {
         "softschema": {
-            "contract": "packing.squares:Witness/v1",
+            "contract": "packing.squares:Witness/v2",
             "schema": schema,
             "envelope": "witness",
             "status": "enforced",

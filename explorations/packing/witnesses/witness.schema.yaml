@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: packing.squares:Witness/v1
+$id: packing.squares:Witness/v2
 title: Square-packing witness
 description: >-
   Interchange for complete square geometry. Decimal depth is recorded but never

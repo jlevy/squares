@@ -2632,7 +2632,7 @@
     "policy": {
       "annotation_boundary": "This map records availability and provenance only. It contains no contact, chunk, rigidity, or grammar annotation and supplies no hypothesis verdict.",
       "coordinate_sources": "Use full SVG geometry or exact generated grids only. Never transcribe coordinates from raster images or video.",
-      "rendering": "Any acquired geometry must be normalized to Witness/v1 and rendered with the repository's deterministic house renderer.",
+      "rendering": "Any acquired geometry must be normalized to Witness/v2 and rendered with the repository's deterministic house renderer.",
       "selection_order": "Select a newer UnitSquare certified construction when present; otherwise select the current Kingbird catalogue SVG; otherwise apply the catalogue's stated trivial no-tilt grid rule through n=324."
     },
     "range": {

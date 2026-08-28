@@ -540,7 +540,7 @@ The implementation introduces or revises these contracts:
 - `packing.squares:SquarePackingCase/v2` for reported and verified upper and lower
   bounds;
 - `packing.squares:FrontierEvidence/v1` for typed evidence and replay status;
-- `packing.squares:Witness/v1` for center/rotation or corner geometry with explicit
+- `packing.squares:Witness/v2` for center/rotation or corner geometry with explicit
   units, coordinate convention, literal values, and source references;
 - `packing.squares:Experiment/v2` for assurance, method, actual precision, and
   tolerance;

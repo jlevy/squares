@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Convert the Schadt n=29 text format into the generic Witness/v1 boundary."""
+"""Convert the Schadt n=29 text format into the generic Witness/v2 boundary."""
 
 from __future__ import annotations
 

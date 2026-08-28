@@ -27,7 +27,7 @@ for most `n` are constructions nobody has proved optimal.
 A *packing* here is `n` unit squares placed by centre and angle inside `[0, s]^2` with
 pairwise-disjoint interiors.
 A *witness* is a serialized packing.
-This repository stores witnesses under a soft schema called `Witness/v1` and verifies
+This repository stores witnesses under a soft schema called `Witness/v2` and verifies
 them at three assurance levels: `reported` (someone said so), `numerically-checked` (we
 recomputed in floating or multiprecision arithmetic), and `verified` (exact predicates
 over rational or algebraic numbers, which is a proof).
@@ -158,7 +158,7 @@ The existing back end is the oracle:
 | `sqpack.field.NumberField` | `.element(coeffs)`, `.rational(v)`, `.alpha()`, `.sign(e)`, `.refine_to(digits)`, `.root_bounds()`, `.decimal(e, digits)`, `.precondition_certificate()` |
 | `sqpack.verify.verify_packing(squares, side, sign=exact_sign)` | Returns a `Report`; a proof when `sign` is exact |
 | `sqpack.verify.corners_from_poses(x, y, theta)` | Pose to corner polygon |
-| `sqpack.witness.load_witness(path)` | `Witness/v1` loading with schema checks |
+| `sqpack.witness.load_witness(path)` | `Witness/v2` loading with schema checks |
 | `cases.n5.tangent_cones.LinearRow(label, coefficients)` | The existing linear-row shape, reused rather than reinvented |
 | `cases.kingbird29.verify_svg` | The `n = 29` reconstruction that already computes contacts |
 
@@ -249,7 +249,7 @@ corner positions. `assemble` and `close` should be checked against it directly.
 
 ### API changes
 
-No change to `Witness/v1` or the verification API. A promoted certificate enters the
+No change to `Witness/v2` or the verification API. A promoted certificate enters the
 record through the existing witness and evidence contracts, so assurance, method,
 precision and novelty are recorded rather than asserted in prose.
 

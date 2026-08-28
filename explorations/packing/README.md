@@ -296,7 +296,7 @@ explorations/packing/
 │                           schema-validated reported/formal claim register per case,
 │                           plus the generated reader-first STATUS.md.
 │                           See frontier/README.md.
-├── witnesses/              Generic Witness/v1 interchange, controls, and retained
+├── witnesses/              Generic Witness/v2 interchange, controls, and retained
 │                           decimal and exact rational examples
 ├── golden/                 Stored calibration endpoint snapshots for small PROVED
 │                           cases. Mathematical oracle checks are distinct from the
@@ -534,7 +534,7 @@ record page, so this is also an independent check of that record.
 
 ### Verifying Another Packing
 
-Use [`Witness/v1`](witnesses/witness.schema.yaml) for supported rational, algebraic, or
+Use [`Witness/v2`](witnesses/witness.schema.yaml) for supported rational, algebraic, or
 decimal center/basis, center/angle, and corner data.
 Source adapters should stop at that interchange boundary; `packing-witness inspect`,
 `check`, and `verify` then provide the shared behavior.

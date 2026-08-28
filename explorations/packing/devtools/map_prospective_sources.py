@@ -214,7 +214,7 @@ def expected_document() -> dict:
                     "chunk, rigidity, or grammar annotation and supplies no hypothesis verdict."
                 ),
                 "rendering": (
-                    "Any acquired geometry must be normalized to Witness/v1 and rendered with "
+                    "Any acquired geometry must be normalized to Witness/v2 and rendered with "
                     "the repository's deterministic house renderer."
                 ),
             },

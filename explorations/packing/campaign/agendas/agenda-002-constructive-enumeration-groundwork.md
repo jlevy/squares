@@ -142,7 +142,7 @@ agenda:
     hypotheses: [H-044]
     budget: tier S; one corpus pass over archived geometry, no search
     entry: >-
-      the imported Witness/v1 geometry and the bounded lattice-partition calibration;
+      the imported Witness/v2 geometry and the bounded lattice-partition calibration;
       extend the candidate universe to contact graphs before any adjudicating round
     exit: >-
       A versioned contact-assembly contract with explicit sliding degrees of freedom,
@@ -173,10 +173,10 @@ agenda:
     priority: 1
     question: >-
       Can the standing-record geometry for every n <= 100 with public full coordinates be
-      imported into Witness/v1 with retained provenance and a numerical check?
+      imported into Witness/v2 with retained provenance and a numerical check?
     hypotheses: []
     budget: one to two bounded W7 slices; import and numerical check only, no search
-    entry: the archived record catalogue captures and the Witness/v1 interchange
+    entry: the archived record catalogue captures and the Witness/v2 interchange
     exit: >-
       A per-case imported witness or a typed absent-or-ambiguous reason for every n <=
       100, each checked at declared precision, with no decimal import promoted past

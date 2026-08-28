@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Behavior and regression checks for the generic Witness/v1 command boundary."""
+"""Behavior and regression checks for the generic Witness/v2 command boundary."""
 
 from __future__ import annotations
 
