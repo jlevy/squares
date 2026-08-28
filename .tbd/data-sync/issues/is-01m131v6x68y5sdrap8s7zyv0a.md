@@ -5,14 +5,14 @@ title: Solve the closed contact system exactly, by elimination or integer relati
 kind: feature
 status: open
 priority: 1
-version: 2
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md
+version: 3
+spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-28-promotion-pipeline-implementation.md
 labels:
   - packing
 dependencies: []
 parent_id: is-01m0tyy5k7e4ags20c1fxqth7f
 created_at: 2026-08-28T02:05:40.645Z
-updated_at: 2026-08-28T02:26:38.756Z
+updated_at: 2026-08-28T02:31:29.902Z
 ---
 Step 5 of the symbolic promotion route, unbuilt. No Groebner, resultant, PSLQ or LLL code exists in the tree; SymPy appears in three files and none is a general solver.
 
