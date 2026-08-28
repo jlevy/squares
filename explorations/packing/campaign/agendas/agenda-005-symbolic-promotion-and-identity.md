@@ -274,6 +274,70 @@ agenda:
       This is the map program and it shares nothing with BC-042 through BC-045 except the
       clock. A resolved identity relation still leaves n = 29 uncertified, and a working
       promoter still leaves the map counting keys.
+  - id: BC-049
+    purpose: research
+    owner_focus: correctness
+    instances: [5, 28, 40]
+    state: ready
+    priority: 1
+    question: >-
+      Are the three packings the catalogue annotates "Rigid." actually rigid, on evidence
+      of our own rather than on the catalogue's word?
+    hypotheses: []
+    budget: one W1 research-pass slice of at most 60 minutes on n = 5 alone, then a replan
+    entry: >-
+      the n = 11 tangent-cone machinery in cases/trump11/tangent_cones.py as a worked
+      example, and the retained witnesses for n = 5, 28 and 40
+    exit: >-
+      Each record's rigidity block moves from undetermined to locally-rigid on a
+      first-party certificate with a stated scope, or a feasible motion is exhibited and
+      the record becomes not-rigid, which is a finding about the catalogue. A typed
+      refusal naming what the machinery could not decide also closes the slice.
+    bead: think-xdly
+    depends_on: []
+    workflows: [research-pass, research-loop]
+    next_evidence: >-
+      The translation escape screen finds no movable square for exactly n = 5, 11, 28, 40
+      and the ten perfect squares -- an independent partition that agrees with the
+      catalogue's own four annotations. But the screen is sound in one direction only: a
+      hit exhibits a motion and proves not-rigid, while a miss rules out single-square
+      translation and nothing else. Rotation and coordinated multi-square motion are
+      outside it, so these three records now read undetermined, which is a result rather
+      than an absence.
+    note: >-
+      n = 5 first: it is proved optimal, its side is 2 + sqrt(2)/2, and its structure is
+      the smallest of the three. Promoting reported_upper_bound.catalogue_rigid into the
+      rigidity block is not a shortcut to this result, it is D-354, and
+      tests/test_frontier_rigidity_assessment.py fails on it.
+  - id: BC-050
+    purpose: measurement_validation
+    owner_focus: correctness
+    instances: [68, 69]
+    state: blocked
+    priority: 2
+    question: >-
+      Can n = 68 and n = 69 be given witnesses precise enough to carry a contact claim, so
+      the two records excluded from every contact-based screen rejoin the corpus?
+    hypotheses: []
+    budget: one W7 pipeline-improvement slice of at most 45 minutes to scope the source, before any run
+    entry: >-
+      the current witnesses and their measured shape residuals, and whichever upstream
+      construction the records cite
+    exit: >-
+      Witnesses whose squares are unit squares to the residual the screens require, or a
+      typed statement that the available source cannot supply one, recorded against the
+      exclusion rather than left as a silent gap.
+    bead: think-ecqk
+    depends_on: []
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      Shape residuals of 1.9e-8 and 1.5e-8 against 5.1e-50 or better everywhere else. Both
+      records are excluded from the translation escape screen by measurement, so their
+      rigidity blocks read undetermined for a reason that is about our witness rather than
+      about the packing. Every future contact-based screen inherits the same exclusion.
+    note: >-
+      Blocked on nothing technical; it is blocked on deciding whether a better source
+      exists before spending a slice regenerating one. Scope the source first.
 ---
 # Agenda-005 — Build the Missing Middle, and Decide What the Map Counts
 
@@ -283,7 +347,7 @@ Its short form: the promotion pipeline has a built front end and a built back en
 an unbuilt middle, so every exact entry in the atlas today was derived by hand or
 supplied by a publication.
 
-## Two programs, and why they are in one agenda
+## Four programs, and why they are in one agenda
 
 They are independent and must not be confused, but they compete for the same clock, so
 putting them in one queue makes the trade visible rather than accidental.
@@ -293,6 +357,7 @@ putting them in one queue makes the trade visible rather than accidental.
 | Symbolic promotion | BC-042, BC-043, BC-047, BC-044, BC-045 | An exact entry that can be *derived*, not inherited |
 | Numeric floor | BC-048 | The same route, usable on poses this project generates |
 | Map identity | BC-046 | A census that can saturate, and a testable rarity premise |
+| Rigidity closure | BC-049, BC-050 | The last five records that say `undetermined` saying something |
 
 None unblocks another.
 The numeric lane is the one that decides whether the symbolic lane generalizes past
