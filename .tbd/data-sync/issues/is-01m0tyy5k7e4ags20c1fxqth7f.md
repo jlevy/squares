@@ -5,18 +5,22 @@ title: Bridge numerical witnesses to exact or interval-certified certificates
 kind: task
 status: in_progress
 priority: 1
-version: 10
-spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-24-frontier-assurance-and-verification.md
+version: 15
+spec_path: explorations/packing/docs/project/specs/active/plan-2026-08-28-numeric-symbolic-round-trip.md
 delegate: codex@spud10.local
 labels: []
 dependencies: []
 parent_id: is-01m0typjn7s866m042zsemybj6
 child_order_hints:
   - is-01m0vjynw583941h5xyg5d3n1s
+  - is-01m131tt5pc69dm47zxy5n3s58
+  - is-01m131v6jfzt21ggvn3ngskjgr
+  - is-01m131v6x68y5sdrap8s7zyv0a
+  - is-01m132naa53qc03r9k0gjv135x
 hold: paused
 hold_until: null
 created_at: 2026-08-24T22:40:56.422Z
-updated_at: 2026-08-27T08:07:19.080Z
+updated_at: 2026-08-28T02:26:39.338Z
 started_at: 2026-08-27T07:58:10.864Z
 ---
 Build honest promotion paths from decimal or SVG witnesses to formal evidence: robust exactification to rational or algebraic data, possibly at an explicit relaxed side, and outward-rounded interval existence certificates for suitable contact systems. Higher decimal precision plus tolerance is not promotion. Return a certificate or a typed source, importer, checker, field-precondition, or mathematical blocker. Demonstrate on a high-value witness such as n=29 when possible, without promising that arbitrary poses or the reported value can always be certified.
