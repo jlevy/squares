@@ -11,11 +11,12 @@ agenda:
   updated: '2026-08-28'
   status: active
   objective: >-
-    Two independent programs, run as one agenda because they compete for the same clock
-    and must not be confused with each other. The first builds the unbuilt middle of the
-    symbolic promotion route so an exact entry can be derived rather than inherited from
-    a publication. The second resolves what the atlas counts, because a census over
-    endpoint keys cannot saturate. Neither unblocks the other.
+    Three programs, run as one agenda because they compete for the same clock and must not
+    be confused with each other. The first builds the unbuilt middle of the symbolic
+    promotion route so an exact entry can be derived rather than inherited. The second
+    removes the numeric floor that keeps that route usable only on someone else's
+    high-precision data. The third resolves what the atlas counts, because a census over
+    endpoint keys cannot saturate. None unblocks another.
   items:
   - id: BC-042
     purpose: tool_validation
@@ -179,6 +180,39 @@ agenda:
       someone supplies; they do not identify a contact structure or recover a number
       field. Pointing this at n = 29 before BC-042 and BC-043 exist would be certifying a
       system nobody has written down.
+  - id: BC-048
+    purpose: tool_validation
+    owner_focus: correctness
+    instances: [5, 11]
+    state: ready
+    priority: 1
+    question: >-
+      Can an exact LP over certified rational or algebraic coefficients replace the float
+      solver where a certified answer is required, removing the 1e-11 floor?
+    hypotheses: []
+    budget: two W7 pipeline-improvement slices of at most 60 minutes each
+    entry: >-
+      the existing float LP and its independent second formulation are available as a
+      known-answer pair, agreeing to 4.4e-16 on Trump's cell
+    exit: >-
+      An exact LP agreeing with the float path on the cells where both are valid, and a
+      demonstration that a pose quenched through the exact path carries an unambiguous
+      contact structure; or a typed statement of which cells need algebraic rather than
+      rational coefficients.
+    bead: think-nfsd
+    depends_on: []
+    workflows: [pipeline-improvement]
+    next_evidence: >-
+      D-021 names this directly: the float LP solver has a noise floor of about 1e-11 in
+      the side, no numerical comparison may claim a difference finer than that floor, and
+      the general fix is an exact LP over certified rational or algebraic coefficients,
+      which is unbuilt. It is purely rational only for rational-coefficient cells.
+    note: >-
+      This does not gate the n = 29 result, which consumes a published pose and needs no LP
+      of ours. It gates generality. On a source carrying ninety-nine digits the contact
+      structure is unambiguous; on a pose this project quenches, the 1e-11 floor is exactly
+      the ambiguity that makes step two a guess. Without this the symbolic chain only ever
+      consumes someone else's data.
   - id: BC-046
     purpose: measurement_validation
     owner_focus: correctness
@@ -227,9 +261,12 @@ putting them in one queue makes the trade visible rather than accidental.
 | Program | Commitments | Buys |
 | --- | --- | --- |
 | Symbolic promotion | BC-042, BC-043, BC-047, BC-044, BC-045 | An exact entry that can be *derived*, not inherited |
+| Numeric floor | BC-048 | The same route, usable on poses this project generates |
 | Map identity | BC-046 | A census that can saturate, and a testable rarity premise |
 
-Neither unblocks the other.
+None unblocks another.
+The numeric lane is the one that decides whether the symbolic lane generalizes past
+published sources, which is why it is in this agenda rather than a later one.
 
 ## Two targets, used differently
 
@@ -258,7 +295,8 @@ It is not uncertain; see X-004.
 | 2 | BC-043 | Can the system be assembled and closed, reproducing the known `n = 11` form? |
 | 3 | BC-047 | Can precision be manufactured from the system, past what the source carries? |
 | 4 | BC-044 | Does the solve recover `n = 11`’s published polynomial, and does the round trip close? |
-| 5 | BC-046 | What should the map count? |
+| 5 | BC-048 | Can the numeric floor be removed, so our own poses become promotable? |
+| 6 | BC-046 | What should the map count? |
 
 Blocks 2, 3 and 4 are a strict chain and the probe in X-004 is why: precision cannot be
 read from the source, so it must come from the system, so the system must exist first.
