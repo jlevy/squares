@@ -349,7 +349,11 @@ def migrate_case(legacy: Mapping[str, object]) -> dict[str, object]:
         "algebraic_degree": upper.get("algebraic_degree"),
         "minimal_polynomial": upper.get("minimal_polynomial"),
         "analytically_optimized": upper.get("analytically_optimized"),
-        "rigid": upper.get("rigid"),
+        # v1 carried a boolean `rigid` whose false and null both meant "the catalogue
+        # did not annotate this packing"; only true was a transcribed statement. v2
+        # says that in the source's own three-valued vocabulary, and keeps the
+        # repository's own finding in the separate case-level `rigidity` field.
+        "catalogue_rigid": "rigid" if upper.get("rigid") is True else "not-stated",
         "construction_method": METHODS[method],
         "tilt_angles_deg": upper.get("tilt_angles_deg"),
         "found_by": upper.get("found_by", []),
@@ -408,6 +412,9 @@ def migrate_case(legacy: Mapping[str, object]) -> dict[str, object]:
         "verified_upper_bound": verified_upper,
         "reported_lower_bound": reported_lower,
         "verified_lower_bound": verified_lower,
+        # v1 had no first-party rigidity finding to carry forward, and null here means
+        # exactly that: not assessed. It never means the packing can move.
+        "rigidity": None,
         "conjectured_optimum": legacy.get("conjectured_optimum"),
         "priority_notes": legacy.get("priority_notes", []),
         "evidence": evidence,

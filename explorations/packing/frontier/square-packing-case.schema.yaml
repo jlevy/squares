@@ -15,6 +15,7 @@ required:
   - verified_upper_bound
   - reported_lower_bound
   - verified_lower_bound
+  - rigidity
   - evidence
   - conflicts
   - blockers
@@ -29,9 +30,10 @@ properties:
     description: Proved only when verified upper and lower bounds match exactly.
   source_reviewed: {type: string, pattern: '^\d{4}-\d{2}-\d{2}$'}
   reported_upper_bound: {$ref: '#/$defs/reportedUpper'}
-  verified_upper_bound: {$ref: '#/$defs/verifiedBound'}
+  verified_upper_bound: {$ref: '#/$defs/verifiedUpper'}
   reported_lower_bound: {$ref: '#/$defs/reportedLower'}
-  verified_lower_bound: {$ref: '#/$defs/verifiedBound'}
+  verified_lower_bound: {$ref: '#/$defs/verifiedLower'}
+  rigidity: {$ref: '#/$defs/rigidity'}
   conjectured_optimum: {type: [string, 'null']}
   priority_notes:
     type: array
@@ -93,28 +95,133 @@ $defs:
     minItems: 1
     uniqueItems: true
     items: {type: string, pattern: '^E-[a-z0-9-]+$'}
-  verifiedBound:
+  verifiedLower:
     type: object
     additionalProperties: false
+    description: >-
+      The largest lower bound this repository can certify on its own evidence: read it
+      as "s(n) is at least this". It is a floor, not the value of s(n), and it may be
+      weaker than reported_lower_bound.
     required: [value, exact_form, evidence]
     properties:
       value:
         type: string
         minLength: 1
         description: Reader display literal; exact_form is authoritative when present.
-      exact_form: {type: [string, 'null']}
+      exact_form:
+        type: [string, 'null']
+        description: Exact identity of the certified floor, not of s(n).
+      evidence: {$ref: '#/$defs/evidenceRefs'}
+  verifiedUpper:
+    type: object
+    additionalProperties: false
+    # Named for what it is rather than for the property a reader wants it to have.
+    # An agent once read "verified_upper_bound has an exact_form for all 100 cases" as
+    # "all 100 side lengths are known exactly" and told a user so. The field is a
+    # CEILING; the description below is the correction, and tests/test_verified_upper_
+    # bound_contract.py holds it in place.
+    description: >-
+      An upper bound this repository can certify from its own evidence, and nothing
+      more: read it as "s(n) is at most this". It is NOT the value of s(n), and it is
+      NOT a copy of reported_upper_bound two fields above.
+      Where no formal certificate reaches the best known construction, this falls back
+      to whatever weaker bound is certifiable -- usually the trivial grid ceiling
+      ceil(sqrt(n)) -- so for a third of n <= 100 it is LARGER than the reported best
+      known side, by up to 0.47. Every such case also carries a mathematics blocker
+      naming that gap, and its status stays open.
+      A consumer that wants the best known side length must read
+      reported_upper_bound. A consumer that wants a proved side length must first
+      check that status is proved.
+    required: [value, exact_form, evidence]
+    properties:
+      value:
+        type: string
+        minLength: 1
+        description: >-
+          Reader display literal for the certified ceiling; exact_form is authoritative
+          when present.
+      exact_form:
+        type: [string, 'null']
+        description: >-
+          Exact identity OF THE CEILING, never of s(n). A present exact_form says the
+          ceiling is an exact algebraic number -- for most open cases it is the integer
+          ceil(sqrt(n)), and for n = 29 a truncated decimal written as a rational. It
+          is evidence about s(n) only when status is proved, which requires this
+          identity and verified_lower_bound.exact_form to coincide.
+      evidence: {$ref: '#/$defs/evidenceRefs'}
+  rigidity:
+    type: [object, 'null']
+    additionalProperties: false
+    # The first-party half of the split in think-de1s. The transcription half is
+    # reported_upper_bound.catalogue_rigid; the two must never be merged again.
+    description: >-
+      This repository's own finding on whether the recorded packing admits a
+      non-trivial feasible motion, carried the way every other first-party claim in
+      this schema is carried: a stated property, an assurance level, a stated scope,
+      and replayable evidence.
+      `null` means this repository has not assessed rigidity for this n. It never means
+      the packing can move. What a source says about rigidity belongs in
+      reported_upper_bound.catalogue_rigid and must not be restated here.
+    required: [property, assurance, scope, evidence]
+    properties:
+      property:
+        enum: [locally-rigid, semi-rigid, not-rigid, undetermined]
+        description: >-
+          locally-rigid -- no non-trivial feasible motion in some neighborhood, under
+          the quotient named by scope. semi-rigid -- motion exists but is confined, in
+          the sense scope defines. not-rigid -- an explicit feasible motion is
+          exhibited. undetermined -- assessed and not settled, which is a result and
+          differs from the field being null.
+      assurance: {enum: [reported, numerically-checked, verified]}
+      method:
+        enum: [numerical-f64, numerical-multiprecision, interval-certified, exact-algebraic, published-proof, proof-audited, proof-assistant-checked]
+      scope:
+        type: string
+        minLength: 1
+        description: >-
+          Exactly what was established and what was not: the neighborhood, the
+          quotient, and the order of the argument. Rigidity claims are local and this
+          field is where that stays visible.
+      certificate: {type: [string, 'null']}
+      replay: {type: [string, 'null']}
       evidence: {$ref: '#/$defs/evidenceRefs'}
   reportedUpper:
     type: object
     additionalProperties: false
-    required: [value, exact_form, construction_method, source_key, evidence]
+    description: >-
+      The strongest upper bound the named source set literally claims, transcribed and
+      not endorsed. This is the best known side length; verified_upper_bound is the
+      weaker thing this repository can certify.
+    required:
+      - value
+      - exact_form
+      - catalogue_rigid
+      - construction_method
+      - source_key
+      - evidence
     properties:
       value: {type: string, minLength: 1}
       exact_form: {type: [string, 'null']}
       algebraic_degree: {type: [integer, 'null'], minimum: 1}
       minimal_polynomial: {type: [string, 'null']}
       analytically_optimized: {type: [boolean, 'null']}
-      rigid: {type: [boolean, 'null']}
+      catalogue_rigid:
+        enum: [rigid, semi-rigid, not-stated]
+        # Was a boolean named `rigid`. It was non-null exactly where the catalogue
+        # pictured the packing, so `false` meant "pictured, no Rigid annotation" while
+        # reading as "this packing is not rigid" -- taken literally the corpus denied
+        # the rigidity of n = 1, one unit square exactly filling a 1x1 container. The
+        # catalogue never asserts non-rigidity anywhere, so the boolean had no true
+        # negative to express. See think-de1s.
+        description: >-
+          What the catalogue named by source_key says about this packing's rigidity,
+          transcribed and nothing more. `rigid` and `semi-rigid` are the catalogue's
+          own two words. `not-stated` means the catalogue is silent -- which it is for
+          all but four packings at n <= 100 -- and is the absence of a source
+          statement, never a claim that the packing can move.
+          Rigidity as a mathematical property of the packing belongs in the
+          case-level `rigidity` field, which carries assurance and evidence. A
+          catalogue's silence is not evidence and does not go there.
       construction_method:
         enum:
           - trivial-grid
